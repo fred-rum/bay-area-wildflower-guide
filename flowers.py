@@ -129,6 +129,12 @@ def repl_calphotos(matchobj):
 
     return img + spacer
 
+def end_file(w):
+    w.write('''
+&mdash;<br/>
+<a href="index.html">BAFG</a> <span style="color:gray">Copyright 2019 Chris Nelson</span>
+</body>
+''')
 
 def parse(base, s=None):
     global context
@@ -201,7 +207,7 @@ def parse(base, s=None):
 
         # TODO: list all containers of the flower, including the top level.
 
-        w.write('</body>\n')
+        end_file(w)
 
 
 file_list = os.listdir(root)
@@ -282,10 +288,9 @@ def emit_color(primary, clist):
 
             if match_list:
                 w.write('<h1>%s flowers</h1>\n' % c.capitalize())
-
                 list_flower_matches(w, match_list, 0, c)
 
-        w.write('</body>\n')
+        end_file(w)
 
 emit_color('yellow', ['yellow', 'orange'])
 
@@ -297,8 +302,4 @@ with open(root + "/html/index.html", "w") as w:
     top_list = [x for x in base_list if x not in parent]
     list_flower_matches(w, top_list, 0, None)
 
-    w.write('</body>\n')
-
-
-# TODO: put a footer on each page with copyright information
-# and a link to an "About" page.
+    end_file(w)
