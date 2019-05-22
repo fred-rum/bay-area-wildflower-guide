@@ -1,0 +1,7 @@
+{sci}
+{tufted poppy-1.jpg} {tufted poppy-2.jpg} {tufted poppy-3.jpg}
+
+The {tufted poppy} has no more than an indistinct disc below the corolla.  Its recepticle slants smoothly down to the width of the stem.  This poppy can be found at Pinnacles NP, but is extremely rare in the bay area.
+
+{obs}
+{color:yellow}
