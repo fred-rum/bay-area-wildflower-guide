@@ -92,8 +92,9 @@ def repl_type(matchobj):
 def repl_jpg(matchobj):
     name = matchobj.group(1)
     filename = "../photos/%s.jpg" % name
-    if os.path.exists("%s/photos/%s.jpg" % (root, name)):
+    if name in jpg_list:
         img = '<a href="%s"><img src="%s" height="%d"></a>' % (filename, filename, jpg_height)
+        jpg_used.add(name)
         if context not in first_img:
             first_img[context] = name
     else:
@@ -129,6 +130,17 @@ def repl_calphotos(matchobj):
 
     return img + spacer
 
+def repl_sci_name(matchobj):
+    name = matchobj.group(1)
+    sci[context] = name
+    return '<b><i>%s</i></b><p/>' % name
+
+def repl_sci(matchobj):
+    if context in sci:
+        return '<b><i>%s</i></b><p/>' % sci[context]
+    else:
+        return '<b><i><span style="color:red">Scientific name not found.</span></i></b><p/>'
+
 def end_file(w):
     w.write('''
 &mdash;<br/>
@@ -148,9 +160,8 @@ def parse(base, s=None):
     # Replace {default} with all the default fields.
     s = re.sub(r'{default}', '{sci}\n{jpgs}\n\n{obs}', s)
 
-    s = re.sub(r'{sci:\s*(.*\S)\s*}', r'<b><i>\1</i></b><p/>', s)
-    if base in sci:
-        s = re.sub(r'{sci}', r'<b><i>%s</i></b><p/>' % sci[base], s)
+    s = re.sub(r'{sci:\s*(.*\S)\s*}', repl_sci_name, s)
+    s = re.sub(r'{sci}', repl_sci, s)
 
     if base in obs:
         n = obs[base]
@@ -222,6 +233,7 @@ for filename in file_list:
 
 file_list = os.listdir(root + '/photos')
 jpg_list = []
+jpg_used = set()
 for filename in file_list:
     pos = filename.rfind(os.extsep)
     if pos > 0:
@@ -255,7 +267,11 @@ def list_flower(w, name, indent):
         w.write('<img src="../photos/%s.jpg" height="100">' % first_img[name])
     else:
         w.write('<div style="display:flex;border:1px solid black;height=98;min-width:98"></div>')
-    w.write('</a>%s<a href="%s.html">%s</div></a><p></p>\n' % (spacer, name, name))
+    if name in sci:
+        name_str = "%s (<i>%s</i>)" % (name, sci[name])
+    else:
+        name_str = name
+    w.write('</a>%s<a href="%s.html">%s</a></div><p></p>\n' % (spacer, name, name_str))
 
 def find_matches(name_list, c):
     match_list = []
@@ -309,4 +325,6 @@ with open(root + "/html/all.html", "w") as w:
 #   - make a page that has links only to new or changed pages.
 # handle all colors, including "other" colors.
 # list scientific names in flower lists.
+# make the error explicit if {sci} can't resolve.
 # list all photos without an associated flower page.
+# improve all variable names.
