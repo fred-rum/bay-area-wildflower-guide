@@ -294,7 +294,7 @@ def emit_color(primary, clist):
 
 emit_color('yellow', ['yellow', 'orange'])
 
-with open(root + "/html/index.html", "w") as w:
+with open(root + "/html/all.html", "w") as w:
     w.write('<head><title>Chris Nelson&rsquo;s Bay Area Flowers</title></head>\n')
     w.write('<body>\n')
     w.write('<h1>All flowers</h1>\n')
