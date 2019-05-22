@@ -248,6 +248,15 @@ for name in base_list:
     parse(name)
 
 f = cStringIO.StringIO()
+for name in sorted([name for name in jpg_list if name not in jpg_used]):
+    f.write('{%s.jpg} %s\n\n' % (name, name))
+s = f.getvalue()
+f.close()
+if s:
+    jpg_height = 100
+    parse("unused jpgs", s)
+
+f = cStringIO.StringIO()
 for name in sorted(obs):
     if name not in described:
         context = name
