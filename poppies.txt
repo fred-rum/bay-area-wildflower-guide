@@ -1,4 +1,4 @@
-{sci:Eschscholzia spp.}
+<h2>Eschscholzia spp.</h2>
 {california poppy-2.jpg}
 The {child:california poppy} has a distinct pink disc below the corolla.  It is by far the most common poppy in the bay area.
 
@@ -10,6 +10,6 @@ The {child:diamond-petaled california poppy} also has no more than an indistinct
 
 No other poppies are known to grow wild in the bay area in modern times.
 <h2>Other poppies</h2>
-{wind poppy-1.jpg} The {child:wind poppy} is in a different genus in the poppy family. Its corolla and leaves look different from the above poppies.
+{wind poppy-1.jpg} The {child:wind poppy} is in a different genus in the poppy family. Its corolla and leaves look different from Eschscholzia.
 
-{bush poppy-1.jpg} The {child:bush poppy} is in a different genus in the poppy family.  It grows on a large bush, so it cannot be mistaken for a real poppy.
+{bush poppy-1.jpg} The {child:bush poppy} is in a different genus in the poppy family.  It grows on a large bush, so it cannot be mistaken for Eschscholzia.

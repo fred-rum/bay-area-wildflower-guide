@@ -295,7 +295,7 @@ def emit_color(primary, clist):
 emit_color('yellow', ['yellow', 'orange'])
 
 with open(root + "/html/all.html", "w") as w:
-    w.write('<head><title>Chris Nelson&rsquo;s Bay Area Flowers</title></head>\n')
+    w.write('<head><title>All Flowers</title></head>\n')
     w.write('<body>\n')
     w.write('<h1>All flowers</h1>\n')
 
@@ -303,3 +303,10 @@ with open(root + "/html/all.html", "w") as w:
     list_flower_matches(w, top_list, 0, None)
 
     end_file(w)
+
+# TODO:
+# clear old html pages before generating new ones.
+#   - make a page that has links only to new or changed pages.
+# handle all colors, including "other" colors.
+# list scientific names in flower lists.
+# list all photos without an associated flower page.
