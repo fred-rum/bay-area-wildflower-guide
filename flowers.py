@@ -251,23 +251,41 @@ def list_flower(w, name, indent):
         w.write('<div style="display:flex;border:1px solid black;height=98;min-width:98"></div>')
     w.write('</a>%s<a href="%s.html">%s</div></a><p></p>\n' % (spacer, name, name))
 
-    if name in child:
-        for c in child[name]:
-            if c in base_list:
-                list_flower(w, c, indent+1)
+def find_matches(name_list, c):
+    match_list = []
+    for name in name_list:
+        if name in child:
+            sub_list = find_matches(child[name], c)
+            if len(sub_list) == 1:
+                match_list.extend(sub_list)
+            elif len(sub_list) > 1:
+                match_list.append(name)
+        elif name in base_list and (c == None or
+                                    (name in color and c in color[name])):
+            match_list.append(name)
+    return match_list
+
+def list_flower_matches(w, match_list, indent, c):
+    for name in sorted(match_list):
+        list_flower(w, name, indent)
+
+        if name in child:
+            list_flower_matches(w, find_matches(child[name], c), indent+1, c)
 
 def emit_color(primary, clist):
     with open(root + "/html/%s.html" % primary, "w") as w:
         w.write('<head><title>%s Flowers</title></head>\n' % primary.capitalize())
         w.write('<body>\n')
         for c in clist:
-            w.write('<h1>%s flowers</h1>\n' % c.capitalize())
+            top_list = [x for x in base_list if x not in parent]
+            match_list = find_matches(top_list, c)
 
-            for name in sorted(base_list):
-                if name in color and c in color[name]:
-                    list_flower(w, name, 0)
+            if match_list:
+                w.write('<h1>%s flowers</h1>\n' % c.capitalize())
 
-            w.write('</body>\n')
+                list_flower_matches(w, match_list, 0, c)
+
+        w.write('</body>\n')
 
 emit_color('yellow', ['yellow', 'orange'])
 
@@ -276,22 +294,8 @@ with open(root + "/html/index.html", "w") as w:
     w.write('<body>\n')
     w.write('<h1>All flowers</h1>\n')
 
-    # TODO: 
-    # make a list of names without parents.
-    # For each name without children, add it to the color list if it has a
-    # matching color.
-    # For each name with children, repeat the search on its children.
-    # (This is a different search, limited, and ignoring parentage.)
-    # The subsearch digs deeper for any children with children.
-    # Each search returns matching names.  If it returns more than one name,
-    # the parent name is substituted instead.  If it returns just one name,
-    # that name is passed back up.
-    # The final color list is resorted and listed.
-    # While listing, a name with children repeats the process for child names.
-
-    for name in sorted(base_list):
-        if name not in parent:
-            list_flower(w, name, 0)
+    top_list = [x for x in base_list if x not in parent]
+    list_flower_matches(w, top_list, 0, None)
 
     w.write('</body>\n')
 
