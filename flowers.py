@@ -343,19 +343,27 @@ with open(root + "/html/all.html", "w") as w:
 # improve all variable names.
 
 file_list = sorted(os.listdir(root + '/html'))
+new_list = []
 mod_list = []
 for name in file_list:
-    if (name.endswith('.html') and
-        (not os.path.isfile(root + '/prev/' + name) or
-         not filecmp.cmp(root + '/prev/' + name,
-                         root + '/html/' + name))):
-        mod_list.append(name)
+    if name.endswith('.html'):
+        if not os.path.isfile(root + '/prev/' + name):
+            new_list.append(name)
+        elif not filecmp.cmp(root + '/prev/' + name,
+                             root + '/html/' + name):
+            mod_list.append(name)
 shutil.rmtree(root + '/prev', ignore_errors=True)
 
-if mod_list:
+if mod_list or new_list:
     mod_file = root + "/html/_mod.html"
     with open(mod_file, "w") as w:
-        for name in mod_list:
-            w.write('<a href="%s">%s</a><p/>' % (name, name))
+        if new_list:
+            w.write('<h1>New files</h1>\n')
+            for name in new_list:
+                w.write('<a href="%s">%s</a><p/>\n' % (name, name))
+        if mod_list:
+            w.write('<h1>Modified files</h1>\n')
+            for name in mod_list:
+                w.write('<a href="%s">%s</a><p/>\n' % (name, name))
 else:
     print "No files modified."
