@@ -1,0 +1,12 @@
+<h2>Carpobrotus spp.</h2>
+
+Flower diameter is the most obvious distinguishing feature.
+
+{chilean sea fig-1.jpg}
+The {child:chilean sea fig}'s flower diameter is 3&ndash;5 cm.  It primarily grows on coastal dunes and bluffs.  Jepson says that its petals are rose to magenta, but CalPhotos also shows flowers with yellow petals.  Its center contains very many yellow/cream stamens.
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=6205+3041+0701+0065}
+The {child:iceplant}'s flower diameter is 8&ndash;10 cm.  It has been planted on dunes and freeway embankments.  (Wikipedia has more about its <a href="https://en.wikipedia.org/wiki/Carpobrotus_edulis#California">use in California</a>.)  Its petals start yellow or white, but fade to pink with age, which matches the color range of the chilean sea fig above.
+
+<h2>Other ice plants</h2>
+{slender iceplant-1.jpg} {child:slender iceplant}

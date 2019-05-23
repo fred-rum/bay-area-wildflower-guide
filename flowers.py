@@ -336,12 +336,6 @@ with open(root + "/html/all.html", "w") as w:
 
     end_file(w)
 
-# TODO:
-# clear old html pages before generating new ones.
-#   - make a page that has links only to new or changed pages.
-# handle all colors, including "other" colors.
-# improve all variable names.
-
 file_list = sorted(os.listdir(root + '/html'))
 new_list = []
 mod_list = []
@@ -367,3 +361,9 @@ if mod_list or new_list:
                 w.write('<a href="%s">%s</a><p/>\n' % (name, name))
 else:
     print "No files modified."
+
+# TODO:
+# handle all colors, including "other" colors.
+# improve all variable names.
+# link to CalPhotos in the form
+#   https://calphotos.berkeley.edu/cgi/img_query?where-taxon=Carpobrotus+edulis
