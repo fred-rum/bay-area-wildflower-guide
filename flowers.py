@@ -4,11 +4,18 @@
 # /cygdrive/c/Users/Chris/Documents/GitHub/bay-area-flowers/flowers.py
 
 import os
+import shutil
+import filecmp
+import subprocess
 import re
 import csv
 import cStringIO
 
 root = '/cygdrive/c/Users/Chris/Documents/GitHub/bay-area-flowers'
+
+shutil.rmtree(root + '/prev', ignore_errors=True)
+os.rename(root + '/html', root + '/prev')
+os.mkdir(root + '/html')
 
 parent = {}
 child = {}
@@ -333,7 +340,22 @@ with open(root + "/html/all.html", "w") as w:
 # clear old html pages before generating new ones.
 #   - make a page that has links only to new or changed pages.
 # handle all colors, including "other" colors.
-# list scientific names in flower lists.
-# make the error explicit if {sci} can't resolve.
-# list all photos without an associated flower page.
 # improve all variable names.
+
+file_list = sorted(os.listdir(root + '/html'))
+mod_list = []
+for name in file_list:
+    if (name.endswith('.html') and
+        (not os.path.isfile(root + '/prev/' + name) or
+         not filecmp.cmp(root + '/prev/' + name,
+                         root + '/html/' + name))):
+        mod_list.append(name)
+shutil.rmtree(root + '/prev', ignore_errors=True)
+
+if mod_list:
+    mod_file = root + "/html/_mod.html"
+    with open(mod_file, "w") as w:
+        for name in mod_list:
+            w.write('<a href="%s">%s</a><p/>' % (name, name))
+else:
+    print "No files modified."
