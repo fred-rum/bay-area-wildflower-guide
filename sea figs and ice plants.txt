@@ -9,4 +9,4 @@ The {child:chilean sea fig}'s flower diameter is 3&ndash;5 cm.  It primarily gro
 The {child:iceplant}'s flower diameter is 8&ndash;10 cm.  It has been planted on dunes and freeway embankments.  (Wikipedia has more about its <a href="https://en.wikipedia.org/wiki/Carpobrotus_edulis#California">use in California</a>.)  Its petals start yellow or white, but fade to pink with age, which matches the color range of the chilean sea fig above.
 
 <h2>Other ice plants</h2>
-{slender iceplant-1.jpg} {child:slender iceplant}
+{slender iceplant-1.jpg} In the bay area, the {child:slender iceplant} is found mostly on the levees around the salt ponds at the south end of the bay.

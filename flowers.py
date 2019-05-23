@@ -365,5 +365,9 @@ else:
 # TODO:
 # handle all colors, including "other" colors.
 # improve all variable names.
+# link to CalFlora in the form
+#   https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup=Mesembryanthemum+nodiflorum
 # link to CalPhotos in the form
 #   https://calphotos.berkeley.edu/cgi/img_query?where-taxon=Carpobrotus+edulis
+# link to Jepson eFlora in the form
+#   http://ucjeps.berkeley.edu/eflora/search_eflora.php?name=Carpobrotus+edulis
