@@ -23,6 +23,7 @@ first_img = {}
 
 sci = {}
 obs = {}
+taxon = {}
 rg = {}
 color = {}
 type = {}
@@ -33,6 +34,7 @@ with open(root + '/observations.csv', 'r') as f:
     sci_idx = header.index('scientific_name')
     com_idx = header.index('common_name')
     rg_idx = header.index('quality_grade')
+    taxon_idx = header.index('taxon_id')
     for row in reader:
         sci_name = row[sci_idx]
         com_name = row[com_idx].lower()
@@ -45,6 +47,7 @@ with open(root + '/observations.csv', 'r') as f:
             obs[com_name] += 1
             if row[rg_idx] == 'research':
                 rg[com_name] += 1
+            taxon[com_name] = row[taxon_idx]
 
 # The string replacement functions need context to operate,
 # and I don't feel like messing around with lambda functions.
@@ -148,6 +151,25 @@ def repl_sci(matchobj):
     else:
         return '<b><i><span style="color:red">Scientific name not found.</span></i></b><p/>'
 
+def repl_obs(matchobj):
+    if context in obs:
+        n = obs[context]
+        rc = rg[context]
+        obs_str = '<a href="https://www.inaturalist.org/observations/chris_nelson?taxon_id=%s">Chris&rsquo;s observations</a>: ' % taxon[context]
+        if rc == 0:
+            obs_str += '%d (none research grade)' % n
+        elif rc == n:
+            if n == 1:
+                obs_str += '1 (research grade)'
+            else:
+                obs_str += '%d (all research grade)' % n
+        else:
+            obs_str += '%d (%d research grade)' % (n, rc)
+    else:
+        obs_str = 'Chris&rsquo;s observations: none'
+
+    return obs_str + '<p/>'
+
 def end_file(w):
     w.write('''
 &mdash;<br/>
@@ -170,23 +192,7 @@ def parse(base, s=None):
     s = re.sub(r'{sci:\s*(.*\S)\s*}', repl_sci_name, s)
     s = re.sub(r'{sci}', repl_sci, s)
 
-    if base in obs:
-        n = obs[base]
-        rc = rg[base]
-    else:
-        n = 0
-    if n == 0:
-        obs_str = 'Chris&rsquo;s observations: none'
-    elif rc == 0:
-        obs_str = 'Chris&rsquo;s observations: %d (none research grade)' % n
-    elif rc == n:
-        if n == 1:
-            obs_str = 'Chris&rsquo;s observations: 1 (research grade)'
-        else:
-            obs_str = 'Chris&rsquo;s observations: %d (all research grade)' % n
-    else:
-        obs_str = 'Chris&rsquo;s observations: %d (%d research grade)' % (n, rc)
-    s = re.sub(r'{obs}', obs_str + '<p/>', s)
+    s = re.sub(r'{obs}', repl_obs, s)
 
     # Replace {jpgs} with all jpgs that exist for the flower.
     s = re.sub(r'{jpgs}', repl_jpgs, s)
