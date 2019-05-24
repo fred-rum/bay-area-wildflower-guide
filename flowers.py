@@ -365,9 +365,12 @@ else:
 # TODO:
 # handle all colors, including "other" colors.
 # improve all variable names.
+# link to iNaturalist's search results: all of my observations of the flower
+#   get taxon ID from observation database
 # link to CalFlora in the form
 #   https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup=Mesembryanthemum+nodiflorum
 # link to CalPhotos in the form
 #   https://calphotos.berkeley.edu/cgi/img_query?where-taxon=Carpobrotus+edulis
 # link to Jepson eFlora in the form
 #   http://ucjeps.berkeley.edu/eflora/search_eflora.php?name=Carpobrotus+edulis
+# sort lists by number of observations
