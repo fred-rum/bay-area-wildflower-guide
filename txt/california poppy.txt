@@ -5,4 +5,3 @@ The california poppy has a distinct pink disc below the corolla.
 Some sources divide the species into two subspecies.  The main subspecies is found throughout California.  The "mexicana" subspecies is found only in the Sonoran Desert in southern California.
 
 {obs}
-{color:yellow,orange}

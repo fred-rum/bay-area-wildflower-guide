@@ -1,3 +1,0 @@
-{default}
-{color:yellow}
-{tree}

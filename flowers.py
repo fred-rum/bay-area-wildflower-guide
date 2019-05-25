@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/cygdrive/c/Python27/python.exe c:/Users/Chris/Documents/GitHub/bay-area-flowers/flowers.py
 
 # Run as:
 # /cygdrive/c/Users/Chris/Documents/GitHub/bay-area-flowers/flowers.py
@@ -10,8 +10,9 @@ import subprocess
 import re
 import csv
 import cStringIO
+import yaml
 
-root = '/cygdrive/c/Users/Chris/Documents/GitHub/bay-area-flowers'
+root = 'c:/Users/Chris/Documents/GitHub/bay-area-flowers'
 
 shutil.rmtree(root + '/prev', ignore_errors=True)
 os.rename(root + '/html', root + '/prev')
@@ -28,6 +29,7 @@ rg = {}
 color = {}
 type = {}
 described = set()
+txt_str = {}
 with open(root + '/observations.csv', 'r') as f:
     reader = csv.reader(f)
     header = reader.next()
@@ -49,6 +51,12 @@ with open(root + '/observations.csv', 'r') as f:
                 rg[com_name] += 1
             taxon[com_name] = row[taxon_idx]
 
+with open(root + '/data.yaml') as f:
+    data = yaml.safe_load(f)
+for name in data:
+    if 'color' in data[name]:
+        color[name] = data[name]['color']
+
 # The string replacement functions need context to operate,
 # and I don't feel like messing around with lambda functions.
 # So I'll use a global variable instead.
@@ -65,22 +73,24 @@ def is_ancestor(node, name):
 
     return False
 
-def repl_link(matchobj):
+def repl_child(matchobj):
     name = matchobj.group(1)
 
-    if name.startswith('child:'):
-        name = name[6:]
+    if is_ancestor(context, name):
+        print "circular loop when creating link from %s to %s" % (context, name)
+    else:
+        if name not in parent:
+            parent[name] = set()
+        parent[name].add(context)
 
-        if is_ancestor(context, name):
-            print "circular loop when creating link from %s to %s" % (context, name)
-        else:
-            if name not in parent:
-                parent[name] = set()
-            parent[name].add(context)
+        if context not in child:
+            child[context] = []
+        child[context].append(name)
 
-            if context not in child:
-                child[context] = []
-            child[context].append(name)
+    return '{' + name + '}'
+
+def repl_link(matchobj):
+    name = matchobj.group(1)
 
     if name in base_list:
         link_style = ''
@@ -177,14 +187,11 @@ def end_file(w):
 </body>
 ''')
 
-def parse(base, s=None):
+def parse(base, s):
     global context
     context = base
 
-    if not s:
-        with open(root + "/" + base + ".txt", "r") as r:
-            # reading in text mode doesn't convert EOLs correctly?
-            s = r.read().replace('\015\012', '\012')
+    described.add(base)
 
     # Replace {default} with all the default fields.
     s = re.sub(r'{default}', '{sci}\n{jpgs}\n\n{obs}', s)
@@ -234,7 +241,7 @@ def parse(base, s=None):
         end_file(w)
 
 
-file_list = os.listdir(root)
+file_list = os.listdir(root + "/txt")
 base_list = []
 for filename in file_list:
     pos = filename.rfind(os.extsep)
@@ -257,17 +264,21 @@ for filename in file_list:
 
 jpg_height = 200
 for name in base_list:
-    described.add(name)
-    parse(name)
+    with open(root + "/txt/" + name + ".txt", "r") as r:
+        s = r.read()
 
-f = cStringIO.StringIO()
-for name in sorted([name for name in jpg_list if name not in jpg_used]):
-    f.write('{%s.jpg} %s\n\n' % (name, name))
-s = f.getvalue()
-f.close()
-if s:
-    jpg_height = 100
-    parse("unused jpgs", s)
+    context = name
+    s = re.sub(r'{child:([^}]+)}', repl_child, s)
+    txt_str[name] = s
+
+for name in sorted(jpg_list):
+    base = re.sub(r'[-0-9]+$', r'', name)
+    if base not in base_list:
+        base_list.append(base)
+        txt_str[base] = '{default}'
+
+for name in base_list:
+    parse(name, txt_str[name])
 
 f = cStringIO.StringIO()
 for name in sorted(obs):
@@ -338,7 +349,7 @@ with open(root + "/html/all.html", "w") as w:
     w.write('<h1>All flowers</h1>\n')
 
     top_list = [x for x in base_list if x not in parent]
-    list_flower_matches(w, top_list, 0, None)
+    list_flower_matches(w, base_list, 0, None)
 
     end_file(w)
 
@@ -365,6 +376,7 @@ if mod_list or new_list:
             w.write('<h1>Modified files</h1>\n')
             for name in mod_list:
                 w.write('<a href="%s">%s</a><p/>\n' % (name, name))
+    os.startfile(mod_file)
 else:
     print "No files modified."
 
