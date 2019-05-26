@@ -58,6 +58,13 @@ flower_color = {} # a set of color names
 # first jpg associated with the flower page (used for flower lists)
 flower_primary_jpg = {}
 
+# Define a list of subcolors for each primary color.
+color_subs = {'yellow': ['yellow', 'orange'],
+              'red': ['red', 'salmon'],
+              'white': ['white', 'cream'],
+              'purple': ['purple', 'purple fading to white', 'pink', 'blue'],
+              'other': ['other']}
+
 # A few functions need a small horizontal spacer,
 # so we define a common one here.
 horiz_spacer = '<div style="min-width:10;"></div>'
@@ -342,16 +349,17 @@ def list_page(w, name, indent):
 def find_matches(page_subset, color):
     match_set = set()
     for page in page_subset:
-        if page in page_child:
-            child_subset = find_matches(page_child[page], color)
-            if len(child_subset) == 1:
-                match_set.update(child_subset)
-            elif len(child_subset) > 1:
+        if page in page_list:
+            if page in page_child:
+                child_subset = find_matches(page_child[page], color)
+                if len(child_subset) == 1:
+                    match_set.update(child_subset)
+                elif len(child_subset) > 1:
+                    match_set.add(page)
+            elif (color == None or
+                  (page in flower_color and color in flower_color[page]) or
+                  (page not in flower_color and color == 'other')):
                 match_set.add(page)
-        elif page in page_list and (color == None or
-                                    (page in flower_color and
-                                     color in flower_color[page])):
-            match_set.add(page)
     return match_set
 
 def list_matches(w, match_set, indent, color):
@@ -362,27 +370,25 @@ def list_matches(w, match_set, indent, color):
             list_matches(w, find_matches(page_child[name], color),
                          indent+1, color)
 
-def emit_color(primary_color, color_list):
+def emit_color(primary_color):
     with open(root + "/html/%s.html" % primary_color, "w") as w:
         w.write('<head><title>%s Flowers</title></head>\n' % primary_color.capitalize())
         w.write('<body>\n')
-        for color in color_list:
+        for color in color_subs[primary_color]:
             match_set = find_matches(top_list, color)
             if match_set:
                 w.write('<h1>%s flowers</h1>\n' % color.capitalize())
                 list_matches(w, match_set, 0, color)
-
         write_footer(w)
 
-emit_color('yellow', ['yellow', 'orange'])
+for primary_color in color_subs:
+    emit_color(primary_color)
 
 with open(root + "/html/all.html", "w") as w:
     w.write('<head><title>All Flowers</title></head>\n')
     w.write('<body>\n')
     w.write('<h1>All flowers</h1>\n')
-
     list_matches(w, top_list, 0, None)
-
     write_footer(w)
 
 ###############################################################################
