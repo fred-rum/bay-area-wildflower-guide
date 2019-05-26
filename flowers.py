@@ -58,6 +58,10 @@ flower_color = {} # a set of color names
 # first jpg associated with the flower page (used for flower lists)
 flower_primary_jpg = {}
 
+# A few functions need a small horizontal spacer,
+# so we define a common one here.
+horiz_spacer = '<div style="min-width:10;"></div>'
+
 # Read my observations file (exported iNaturalist) and use it as follows:
 #   Associate common names with scientific names
 #   Get a count of observations (total and research grade) of each flower.
@@ -152,14 +156,16 @@ def read_txt(page):
     s = re.sub(r'{child:([^}]+)}', repl_child, s)
     page_txt[page] = s
 
-def emit_footer(w):
+def write_footer(w):
     w.write('''
 &mdash;<br/>
 <a href="index.html">BAFG</a> <span style="color:gray">Copyright 2019 Chris Nelson</span>
 </body>
 ''')
 
-horiz_spacer = '<div style="min-width:10;"></div>'
+###############################################################################
+# The giant 'parse' function, which turns txt into html
+# and writes the resulting file.
 
 def parse(page, s):
     # Replace {default} with all the default fields.
@@ -241,22 +247,22 @@ def parse(page, s):
     # The entire box is a link to CalPhotos.
     # The ":text" part is optional.
     def repl_calphotos(matchobj):
-        target = matchobj.group(1)
-        pos = target.find(':') # find the colon in "http:"
-        pos = target.find(':', pos+1) # find the next colon, if any
+        href = matchobj.group(1)
+        pos = href.find(':') # find the colon in "http:"
+        pos = href.find(':', pos+1) # find the next colon, if any
         if pos > 0:
-            text = ': ' + target[pos+1:]
-            target = target[:pos]
+            text = ': ' + href[pos+1:]
+            href = href[:pos]
         else:
             text = ''
 
-        img = '<a href="%s" style="text-decoration:none"><div style="display:flex;border:1px solid black;padding:10;height:178;min-width:178;align-items:center;justify-content:center"><span><span style="text-decoration:underline;">CalPhotos</span>%s</span></div></a>' % (target, text)
+        img = '<a href="%s" style="text-decoration:none"><div style="display:flex;border:1px solid black;padding:10;height:178;min-width:178;align-items:center;justify-content:center"><span><span style="text-decoration:underline;">CalPhotos</span>%s</span></div></a>' % (href, text)
 
         return img + horiz_spacer
 
     s = re.sub(r'\{(https://calphotos.berkeley.edu/[^\}]+)\}', repl_calphotos, s)
 
-    # Any remaining {reference} should refer to another flower page.
+    # Any remaining {reference} should refer to another page.
     # Replace it with a link, colored depending on whether the link is valid.
     def repl_link(matchobj):
         link = matchobj.group(1)
@@ -276,27 +282,41 @@ def parse(page, s):
 
         # TODO: list all containers of the flower, including the top level.
 
-        emit_footer(w)
+        write_footer(w)
 
-jpg_height = 200
+###############################################################################
+
+# Read the txt files and record parent->child relationships.
 for page in page_list:
     read_txt(page)
 
+# Create txt for all unassociated jpgs.
 for name in sorted(jpg_list):
     page = re.sub(r'[-0-9]+$', r'', name)
     if page not in page_list:
         page_list.append(page)
         page_txt[page] = '{default}'
 
+# Turn txt into html for all normal and default pages.
+jpg_height = 200
 for page in page_list:
     parse(page, page_txt[page])
 
+# Create a txt listing all flowers without pages, then parse it into html.
 jpg_height = 50
 unlisted_flowers = sorted([f for f in flower_obs if f not in page_list])
 s = '<br/>\n'.join(unlisted_flowers) + '<p/>\n'
 parse("other observations", s)
 
-def list_flower(w, name, indent):
+###############################################################################
+# The remaining code is for creating useful lists of pages:
+# all pages, and pages sorted by flower color.
+
+# Get a list of pages without parents (top-level pages).
+top_list = [x for x in page_list if x not in page_parent]
+
+# List a single page, indented by some amount if it is under a parent.
+def list_page(w, name, indent):
     w.write('<div style="display:flex;align-items:center;">')
     if indent:
         w.write('<div style="min-width:%d;"></div>' % (indent * 80))
@@ -311,40 +331,48 @@ def list_flower(w, name, indent):
         name_str = name
     w.write('</a>%s<a href="%s.html">%s</a></div><p></p>\n' % (horiz_spacer, name, name_str))
 
-def find_matches(name_set, c):
-    match_list = []
-    for name in name_set:
+# Find all flowers that match the specified color.
+# Also find all pages that include *multiple* child pages that match.
+# If a parent includes multiple matching child pages, those child pages are
+# listed only under the parent and not individually.
+# If a parent includes only one matching child page, that child page is
+# listed individually, and the parent is not listed.
+#
+# If color == None, every page matches.
+def find_matches(page_subset, color):
+    match_set = set()
+    for page in page_subset:
+        if page in page_child:
+            child_subset = find_matches(page_child[page], color)
+            if len(child_subset) == 1:
+                match_set.update(child_subset)
+            elif len(child_subset) > 1:
+                match_set.add(page)
+        elif page in page_list and (color == None or
+                                    (page in flower_color and
+                                     color in flower_color[page])):
+            match_set.add(page)
+    return match_set
+
+def list_matches(w, match_set, indent, color):
+    for name in sorted(match_set):
+        list_page(w, name, indent)
+
         if name in page_child:
-            sub_list = find_matches(page_child[name], c)
-            if len(sub_list) == 1:
-                match_list.extend(sub_list)
-            elif len(sub_list) > 1:
-                match_list.append(name)
-        elif name in page_list and (c == None or
-                                    (name in flower_color and c in flower_color[name])):
-            match_list.append(name)
-    return match_list
+            list_matches(w, find_matches(page_child[name], color),
+                         indent+1, color)
 
-def list_flower_matches(w, match_list, indent, c):
-    for name in sorted(match_list):
-        list_flower(w, name, indent)
-
-        if name in page_child:
-            list_flower_matches(w, find_matches(page_child[name], c), indent+1, c)
-
-def emit_color(primary, clist):
-    with open(root + "/html/%s.html" % primary, "w") as w:
-        w.write('<head><title>%s Flowers</title></head>\n' % primary.capitalize())
+def emit_color(primary_color, color_list):
+    with open(root + "/html/%s.html" % primary_color, "w") as w:
+        w.write('<head><title>%s Flowers</title></head>\n' % primary_color.capitalize())
         w.write('<body>\n')
-        for c in clist:
-            top_list = [x for x in page_list if x not in page_parent]
-            match_list = find_matches(top_list, c)
+        for color in color_list:
+            match_set = find_matches(top_list, color)
+            if match_set:
+                w.write('<h1>%s flowers</h1>\n' % color.capitalize())
+                list_matches(w, match_set, 0, color)
 
-            if match_list:
-                w.write('<h1>%s flowers</h1>\n' % c.capitalize())
-                list_flower_matches(w, match_list, 0, c)
-
-        emit_footer(w)
+        write_footer(w)
 
 emit_color('yellow', ['yellow', 'orange'])
 
@@ -353,10 +381,14 @@ with open(root + "/html/all.html", "w") as w:
     w.write('<body>\n')
     w.write('<h1>All flowers</h1>\n')
 
-    top_list = [x for x in page_list if x not in page_parent]
-    list_flower_matches(w, top_list, 0, None)
+    list_matches(w, top_list, 0, None)
 
-    emit_footer(w)
+    write_footer(w)
+
+###############################################################################
+# Compare the new html files with the prev files.
+# Create an HTML file with links to all new files and all modified files.
+# (Ignore deleted files.)
 
 file_list = sorted(os.listdir(root + '/html'))
 new_list = []
@@ -380,13 +412,14 @@ if mod_list or new_list:
             w.write('<h1>Modified files</h1>\n')
             for name in mod_list:
                 w.write('<a href="%s">%s</a><p/>\n' % (name, name))
+
+    # open the default browser with the created HTML file
     os.startfile(mod_file)
 else:
     print "No files modified."
 
 # TODO:
 # handle all colors, including "other" colors.
-# improve all variable names.
 # link to CalFlora in the form
 #   https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup=Mesembryanthemum+nodiflorum
 # link to CalPhotos in the form
