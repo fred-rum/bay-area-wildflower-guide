@@ -58,67 +58,86 @@ flower_color = {} # a set of color names
 # first jpg associated with the flower page (used for flower lists)
 flower_primary_jpg = {}
 
-# Read my observations file (exported iNaturalist).
-# Use the data to associate common names with scientific names
-# Also get a count of observations (total and research grade) of each flower.
+# Read my observations file (exported iNaturalist) and use it as follows:
+#   Associate common names with scientific names
+#   Get a count of observations (total and research grade) of each flower.
+#   Get an iNaturalist taxon ID for each flower.
 with open(root + '/observations.csv', 'r') as f:
     csv_reader = csv.reader(f)
     header_row = csv_reader.next()
+
     sci_idx = header_row.index('scientific_name')
     com_idx = header_row.index('common_name')
     rg_idx = header_row.index('quality_grade')
     taxon_idx = header_row.index('taxon_id')
+
     for row in csv_reader:
         sci_name = row[sci_idx]
         com_name = row[com_idx].lower()
-        if com_name and sci_name:
-            flower_sci[com_name] = sci_name
         if com_name:
+            if sci_name:
+                flower_sci[com_name] = sci_name
+
             if com_name not in flower_obs:
                 flower_obs[com_name] = 0
                 flower_obs_rg[com_name] = 0
             flower_obs[com_name] += 1
             if row[rg_idx] == 'research':
                 flower_obs_rg[com_name] += 1
+
             flower_taxon_id[com_name] = row[taxon_idx]
 
+# Read miscellaneous flower info from the YAML file.
 with open(root + '/data.yaml') as f:
-    data = yaml.safe_load(f)
-for name in data:
-    if 'color' in data[name]:
-        flower_color[name] = set(data[name]['color'].split(','))
+    yaml_data = yaml.safe_load(f)
+for name in yaml_data:
+    if 'color' in yaml_data[name]:
+        flower_color[name] = set(yaml_data[name]['color'].split(','))
 
 # The string replacement functions need context to operate,
 # and I don't feel like messing around with lambda functions.
 # So I'll use a global variable instead.
 context = None
 
-def is_ancestor(node, name):
-    if node == name:
+# Check if check_page is an ancestor of cur_page (for loop checking).
+def is_ancestor(cur_page, check_page):
+    if cur_page == check_page:
         return True
 
-    if node in page_parent:
-        for p in page_parent[node]:
-            if is_ancestor(p, name):
+    if cur_page in page_parent:
+        for parent in page_parent[cur_page]:
+            if is_ancestor(parent, check_page):
                 return True
 
     return False
 
-def repl_child(matchobj):
-    name = matchobj.group(1)
-
-    if is_ancestor(context, name):
-        print "circular loop when creating link from %s to %s" % (context, name)
+def assign_child(parent, child):
+    if is_ancestor(parent, child):
+        print "circular loop when creating link from %s to %s" % (parent, child)
     else:
-        if name not in page_parent:
-            page_parent[name] = set()
-        page_parent[name].add(context)
+        if child not in page_parent:
+            page_parent[child] = set()
+        page_parent[child].add(parent)
 
-        if context not in page_child:
-            page_child[context] = set()
-        page_child[context].add(name)
+        if parent not in page_child:
+            page_child[parent] = set()
+        page_child[parent].add(child)
 
-    return '{' + name + '}'
+def read_txt(name):
+    with open(root + "/txt/" + name + ".txt", "r") as r:
+        s = r.read()
+
+    # Replace a {child:[name]} link with just {[name]} and record the
+    # parent->child relationship.
+    # Define the re.sub replacement function inside the calling function
+    # so that it has access to the calling context.
+    def repl_child(matchobj):
+        child = matchobj.group(1)
+        assign_child(name, child)
+        return '{' + child + '}'
+
+    s = re.sub(r'{child:([^}]+)}', repl_child, s)
+    page_txt[name] = s
 
 def repl_link(matchobj):
     name = matchobj.group(1)
@@ -282,12 +301,7 @@ for filename in file_list:
 
 jpg_height = 200
 for name in base_list:
-    with open(root + "/txt/" + name + ".txt", "r") as r:
-        s = r.read()
-
-    context = name
-    s = re.sub(r'{child:([^}]+)}', repl_child, s)
-    page_txt[name] = s
+    read_txt(name)
 
 for name in sorted(jpg_list):
     base = re.sub(r'[-0-9]+$', r'', name)
@@ -367,7 +381,7 @@ with open(root + "/html/all.html", "w") as w:
     w.write('<h1>All flowers</h1>\n')
 
     top_list = [x for x in base_list if x not in page_parent]
-    list_flower_matches(w, base_list, 0, None)
+    list_flower_matches(w, top_list, 0, None)
 
     end_file(w)
 
