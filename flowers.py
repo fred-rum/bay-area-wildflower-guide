@@ -172,7 +172,7 @@ def read_txt(page):
 def write_footer(w):
     w.write('''
 &mdash;<br/>
-<a href="index.html">BAFG</a> <span style="color:gray">Copyright 2019 Chris Nelson</span>
+<a href="../index.html">BAFG</a> <span style="color:gray">Copyright 2019 Chris Nelson</span>
 </body>
 ''')
 
@@ -292,9 +292,6 @@ def parse(page, s):
         w.write('<body>\n')
         w.write('<h1>{page}</h1>'.format(page=page))
         w.write(s)
-
-        # TODO: list all containers of the flower, including the top level.
-
         write_footer(w)
 
 ###############################################################################
@@ -431,7 +428,8 @@ else:
     print "No files modified."
 
 # TODO:
-# handle all colors, including "other" colors.
+# list all containers of the flower, including colors and "all flowers".
+#
 # link to CalFlora in the form
 #   https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup=Mesembryanthemum+nodiflorum
 # link to CalPhotos in the form
