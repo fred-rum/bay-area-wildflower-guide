@@ -3,6 +3,29 @@
 # Run as:
 # /cygdrive/c/Users/Chris/Documents/GitHub/bay-area-flowers/flowers.py
 
+# terminology (e.g. for variable names):
+# page - a flower or container HTML page, and the info associated with it
+# txt - the text that defines the contents of a page, often from a .txt file
+# jpg - a photo; a page can include multiple photos (or none)
+#
+# flower - a flower.
+#          Some flowers don't have an associated page,
+#          and container pages don't have a (specific) associated flower.
+#
+# name - the name of a page and/or flower, or of an associated txt file
+#        and/or jpg files
+#        (i.e. ignorning the filename extension and the "-#" jpg number).
+#        a flower uses its common name (not scientific name).
+#
+# The variable name for a dictionary is constructed as
+# {what it's for}_{what it holds}.
+# E.g. page_parent holds the parent info for a page.
+#
+# In many cases, a dictionary does not necessarily contain data for every key.
+# So when it is accessed, we must first check whether the key exists in the
+# dictionary before getting its contents.
+
+
 import os
 import shutil
 import filecmp
@@ -14,48 +37,56 @@ import yaml
 
 root = 'c:/Users/Chris/Documents/GitHub/bay-area-flowers'
 
+# Keep a copy of the previous html files so that we can
+# compare differences after creating the new html files.
 shutil.rmtree(root + '/prev', ignore_errors=True)
 os.rename(root + '/html', root + '/prev')
 os.mkdir(root + '/html')
 
-parent = {}
-child = {}
-first_img = {}
 
-sci = {}
-obs = {}
-taxon = {}
-rg = {}
-color = {}
-type = {}
-described = set()
-txt_str = {}
+# key: page name
+page_parent = {} # a set of names of the page's parent pages
+page_child = {} # a set of names of the page's child pages
+page_txt = {} # txt (string) (potentially with some parsing done to it)
+
+# key: flower page name
+flower_sci = {} # scientific name
+flower_obs = {} # number of observations
+flower_obs_rg = {} # number of observations that are research grade
+flower_taxon_id = {} # iNaturalist taxon ID
+flower_color = {} # a set of color names
+# first jpg associated with the flower page (used for flower lists)
+flower_primary_jpg = {}
+
+# Read my observations file (exported iNaturalist).
+# Use the data to associate common names with scientific names
+# Also get a count of observations (total and research grade) of each flower.
 with open(root + '/observations.csv', 'r') as f:
-    reader = csv.reader(f)
-    header = reader.next()
-    sci_idx = header.index('scientific_name')
-    com_idx = header.index('common_name')
-    rg_idx = header.index('quality_grade')
-    taxon_idx = header.index('taxon_id')
-    for row in reader:
+    csv_reader = csv.reader(f)
+    header_row = csv_reader.next()
+    sci_idx = header_row.index('scientific_name')
+    com_idx = header_row.index('common_name')
+    rg_idx = header_row.index('quality_grade')
+    taxon_idx = header_row.index('taxon_id')
+    for row in csv_reader:
         sci_name = row[sci_idx]
         com_name = row[com_idx].lower()
         if com_name and sci_name:
-            sci[com_name] = sci_name
+            flower_sci[com_name] = sci_name
         if com_name:
-            if com_name not in obs:
-                obs[com_name] = 0
-                rg[com_name] = 0
-            obs[com_name] += 1
+            if com_name not in flower_obs:
+                flower_obs[com_name] = 0
+                flower_obs_rg[com_name] = 0
+            flower_obs[com_name] += 1
             if row[rg_idx] == 'research':
-                rg[com_name] += 1
-            taxon[com_name] = row[taxon_idx]
+                flower_obs_rg[com_name] += 1
+            flower_taxon_id[com_name] = row[taxon_idx]
 
 with open(root + '/data.yaml') as f:
     data = yaml.safe_load(f)
 for name in data:
     if 'color' in data[name]:
-        color[name] = data[name]['color']
+        flower_color[name] = set(data[name]['color'].split(','))
 
 # The string replacement functions need context to operate,
 # and I don't feel like messing around with lambda functions.
@@ -66,8 +97,8 @@ def is_ancestor(node, name):
     if node == name:
         return True
 
-    if node in parent:
-        for p in parent[node]:
+    if node in page_parent:
+        for p in page_parent[node]:
             if is_ancestor(p, name):
                 return True
 
@@ -79,13 +110,13 @@ def repl_child(matchobj):
     if is_ancestor(context, name):
         print "circular loop when creating link from %s to %s" % (context, name)
     else:
-        if name not in parent:
-            parent[name] = set()
-        parent[name].add(context)
+        if name not in page_parent:
+            page_parent[name] = set()
+        page_parent[name].add(context)
 
-        if context not in child:
-            child[context] = []
-        child[context].append(name)
+        if context not in page_child:
+            page_child[context] = set()
+        page_child[context].add(name)
 
     return '{' + name + '}'
 
@@ -101,22 +132,14 @@ def repl_link(matchobj):
 
 spacer = '<div style="min-width:10;"></div>'
 
-def repl_color(matchobj):
-    color[context] = matchobj.group(1).split(',')
-    return ''        
-
-def repl_type(matchobj):
-    type[context] = matchobj.group(1)
-    return ''        
-
 def repl_jpg(matchobj):
     name = matchobj.group(1)
     filename = "../photos/%s.jpg" % name
     if name in jpg_list:
         img = '<a href="%s"><img src="%s" height="%d"></a>' % (filename, filename, jpg_height)
         jpg_used.add(name)
-        if context not in first_img:
-            first_img[context] = name
+        if context not in flower_primary_jpg:
+            flower_primary_jpg[context] = name
     else:
         img = '<a href="%s" style="color:red;"><div style="display:flex;border:1px solid black;padding:10;height:%d;min-width:%d;align-items:center;justify-content:center"><span style="color:red;">%s</span></div></a>' % (filename, jpg_height-22, jpg_height-22, name)
 
@@ -152,20 +175,20 @@ def repl_calphotos(matchobj):
 
 def repl_sci_name(matchobj):
     name = matchobj.group(1)
-    sci[context] = name
+    flower_sci[context] = name
     return '<b><i>%s</i></b><p/>' % name
 
 def repl_sci(matchobj):
-    if context in sci:
-        return '<b><i>%s</i></b><p/>' % sci[context]
+    if context in flower_sci:
+        return '<b><i>%s</i></b><p/>' % flower_sci[context]
     else:
         return '<b><i><span style="color:red">Scientific name not found.</span></i></b><p/>'
 
 def repl_obs(matchobj):
-    if context in obs:
-        n = obs[context]
-        rc = rg[context]
-        obs_str = '<a href="https://www.inaturalist.org/observations/chris_nelson?taxon_id=%s">Chris&rsquo;s observations</a>: ' % taxon[context]
+    if context in flower_obs:
+        n = flower_obs[context]
+        rc = flower_obs_rg[context]
+        obs_str = '<a href="https://www.inaturalist.org/observations/chris_nelson?taxon_id=%s">Chris&rsquo;s observations</a>: ' % flower_taxon_id[context]
         if rc == 0:
             obs_str += '%d (none research grade)' % n
         elif rc == n:
@@ -191,8 +214,6 @@ def parse(base, s):
     global context
     context = base
 
-    described.add(base)
-
     # Replace {default} with all the default fields.
     s = re.sub(r'{default}', '{sci}\n{jpgs}\n\n{obs}', s)
 
@@ -212,9 +233,6 @@ def parse(base, s):
 
     # Replace a pair of newlines with a paragraph separator.
     s = s.replace('\n\n', '\n<p/>\n')
-
-    s = re.sub(r'{color:([^\}]+)}', repl_color, s)
-    s = re.sub(r'{(tree|bush)}', repl_type, s)
 
     # Replace {*.jpg} with a 200px image and a link to the full-sized image.
     s = re.sub(r'{([^}]+).jpg}', repl_jpg, s)
@@ -269,20 +287,20 @@ for name in base_list:
 
     context = name
     s = re.sub(r'{child:([^}]+)}', repl_child, s)
-    txt_str[name] = s
+    page_txt[name] = s
 
 for name in sorted(jpg_list):
     base = re.sub(r'[-0-9]+$', r'', name)
     if base not in base_list:
         base_list.append(base)
-        txt_str[base] = '{default}'
+        page_txt[base] = '{default}'
 
 for name in base_list:
-    parse(name, txt_str[name])
+    parse(name, page_txt[name])
 
 f = cStringIO.StringIO()
-for name in sorted(obs):
-    if name not in described:
+for name in sorted(flower_obs):
+    if name not in base_list:
         context = name
         f.write(repl_jpgs(None))
         f.write(" %s\n\n" % name)
@@ -296,27 +314,27 @@ def list_flower(w, name, indent):
     if indent:
         w.write('<div style="min-width:%d;"></div>' % (indent * 80))
     w.write('<a href="%s.html">' % name)
-    if name in first_img:
-        w.write('<img src="../photos/%s.jpg" height="100">' % first_img[name])
+    if name in flower_primary_jpg:
+        w.write('<img src="../photos/%s.jpg" height="100">' % flower_primary_jpg[name])
     else:
         w.write('<div style="display:flex;border:1px solid black;height=98;min-width:98"></div>')
-    if name in sci:
-        name_str = "%s (<i>%s</i>)" % (name, sci[name])
+    if name in flower_sci:
+        name_str = "%s (<i>%s</i>)" % (name, flower_sci[name])
     else:
         name_str = name
     w.write('</a>%s<a href="%s.html">%s</a></div><p></p>\n' % (spacer, name, name_str))
 
-def find_matches(name_list, c):
+def find_matches(name_set, c):
     match_list = []
-    for name in name_list:
-        if name in child:
-            sub_list = find_matches(child[name], c)
+    for name in name_set:
+        if name in page_child:
+            sub_list = find_matches(page_child[name], c)
             if len(sub_list) == 1:
                 match_list.extend(sub_list)
             elif len(sub_list) > 1:
                 match_list.append(name)
         elif name in base_list and (c == None or
-                                    (name in color and c in color[name])):
+                                    (name in flower_color and c in flower_color[name])):
             match_list.append(name)
     return match_list
 
@@ -324,15 +342,15 @@ def list_flower_matches(w, match_list, indent, c):
     for name in sorted(match_list):
         list_flower(w, name, indent)
 
-        if name in child:
-            list_flower_matches(w, find_matches(child[name], c), indent+1, c)
+        if name in page_child:
+            list_flower_matches(w, find_matches(page_child[name], c), indent+1, c)
 
 def emit_color(primary, clist):
     with open(root + "/html/%s.html" % primary, "w") as w:
         w.write('<head><title>%s Flowers</title></head>\n' % primary.capitalize())
         w.write('<body>\n')
         for c in clist:
-            top_list = [x for x in base_list if x not in parent]
+            top_list = [x for x in base_list if x not in page_parent]
             match_list = find_matches(top_list, c)
 
             if match_list:
@@ -348,7 +366,7 @@ with open(root + "/html/all.html", "w") as w:
     w.write('<body>\n')
     w.write('<h1>All flowers</h1>\n')
 
-    top_list = [x for x in base_list if x not in parent]
+    top_list = [x for x in base_list if x not in page_parent]
     list_flower_matches(w, base_list, 0, None)
 
     end_file(w)
@@ -363,7 +381,6 @@ for name in file_list:
         elif not filecmp.cmp(root + '/prev/' + name,
                              root + '/html/' + name):
             mod_list.append(name)
-shutil.rmtree(root + '/prev', ignore_errors=True)
 
 if mod_list or new_list:
     mod_file = root + "/html/_mod.html"
@@ -383,8 +400,6 @@ else:
 # TODO:
 # handle all colors, including "other" colors.
 # improve all variable names.
-# link to iNaturalist's search results: all of my observations of the flower
-#   get taxon ID from observation database
 # link to CalFlora in the form
 #   https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup=Mesembryanthemum+nodiflorum
 # link to CalPhotos in the form
