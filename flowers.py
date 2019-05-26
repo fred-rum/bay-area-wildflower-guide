@@ -94,10 +94,21 @@ for name in yaml_data:
     if 'color' in yaml_data[name]:
         flower_color[name] = set(yaml_data[name]['color'].split(','))
 
-# The string replacement functions need context to operate,
-# and I don't feel like messing around with lambda functions.
-# So I'll use a global variable instead.
-context = None
+# Get a list of files with the expected suffix in the designated directory.
+def get_file_list(subdir, ext):
+    file_list = os.listdir(root + '/' + subdir)
+    base_list = []
+    for filename in file_list:
+        pos = filename.rfind(os.extsep)
+        if pos > 0:
+            file_ext = filename[pos+len(os.extsep):].lower()
+            if file_ext == ext:
+                base = filename[:pos]
+                base_list.append(base)
+    return base_list
+
+page_list = get_file_list('txt', 'txt')
+jpg_list = get_file_list('photos', 'jpg')
 
 # Check if check_page is an ancestor of cur_page (for loop checking).
 def is_ancestor(cur_page, check_page):
@@ -123,6 +134,8 @@ def assign_child(parent, child):
             page_child[parent] = set()
         page_child[parent].add(child)
 
+# Read txt files, but perform limited substitutions for now.
+# More will be done once we have a complete set of parent->child relationships.
 def read_txt(name):
     with open(root + "/txt/" + name + ".txt", "r") as r:
         s = r.read()
@@ -139,109 +152,62 @@ def read_txt(name):
     s = re.sub(r'{child:([^}]+)}', repl_child, s)
     page_txt[name] = s
 
-def repl_link(matchobj):
-    name = matchobj.group(1)
-
-    if name in base_list:
-        link_style = ''
-    else:
-        link_style = ' style="color:red;"'
-
-    return '<a href="%s.html"%s>%s</a>' % (name, link_style, name)
-
-spacer = '<div style="min-width:10;"></div>'
-
-def repl_jpg(matchobj):
-    name = matchobj.group(1)
-    filename = "../photos/%s.jpg" % name
-    if name in jpg_list:
-        img = '<a href="%s"><img src="%s" height="%d"></a>' % (filename, filename, jpg_height)
-        jpg_used.add(name)
-        if context not in flower_primary_jpg:
-            flower_primary_jpg[context] = name
-    else:
-        img = '<a href="%s" style="color:red;"><div style="display:flex;border:1px solid black;padding:10;height:%d;min-width:%d;align-items:center;justify-content:center"><span style="color:red;">%s</span></div></a>' % (filename, jpg_height-22, jpg_height-22, name)
-
-    return img + spacer
-
-def repl_jpgs(matchobj):
-    jpg_sublist = []
-    ext_pos = len(context)
-    for jpg in sorted(jpg_list):
-        if jpg.startswith(context) and re.match(r'[-0-9]+$', jpg[ext_pos:]):
-            jpg_sublist.append('{%s.jpg}' % jpg)
-
-    if jpg_sublist:
-        return ' '.join(jpg_sublist)
-    else:
-        return '{no photos.jpg}'
-
-def repl_calphotos(matchobj):
-    #r'<a href="\1" style="text-decoration:none"><div style="display:flex;border:1px solid black;padding:10;height:178;min-width:178;align-items:center;justify-content:center"><span><span style="text-decoration:underline;">CalPhotos</span>: \2</span></div></a>'
-
-    target = matchobj.group(1)
-    pos = target.find(':') # find the colon in "http:"
-    pos = target.find(':', pos+1) # find the next colon, if any
-    if pos > 0:
-        text = ': ' + target[pos+1:]
-        target = target[:pos]
-    else:
-        text = ''
-
-    img = '<a href="%s" style="text-decoration:none"><div style="display:flex;border:1px solid black;padding:10;height:178;min-width:178;align-items:center;justify-content:center"><span><span style="text-decoration:underline;">CalPhotos</span>%s</span></div></a>' % (target, text)
-
-    return img + spacer
-
-def repl_sci_name(matchobj):
-    name = matchobj.group(1)
-    flower_sci[context] = name
-    return '<b><i>%s</i></b><p/>' % name
-
-def repl_sci(matchobj):
-    if context in flower_sci:
-        return '<b><i>%s</i></b><p/>' % flower_sci[context]
-    else:
-        return '<b><i><span style="color:red">Scientific name not found.</span></i></b><p/>'
-
-def repl_obs(matchobj):
-    if context in flower_obs:
-        n = flower_obs[context]
-        rc = flower_obs_rg[context]
-        obs_str = '<a href="https://www.inaturalist.org/observations/chris_nelson?taxon_id=%s">Chris&rsquo;s observations</a>: ' % flower_taxon_id[context]
-        if rc == 0:
-            obs_str += '%d (none research grade)' % n
-        elif rc == n:
-            if n == 1:
-                obs_str += '1 (research grade)'
-            else:
-                obs_str += '%d (all research grade)' % n
-        else:
-            obs_str += '%d (%d research grade)' % (n, rc)
-    else:
-        obs_str = 'Chris&rsquo;s observations: none'
-
-    return obs_str + '<p/>'
-
-def end_file(w):
+def emit_footer(w):
     w.write('''
 &mdash;<br/>
 <a href="index.html">BAFG</a> <span style="color:gray">Copyright 2019 Chris Nelson</span>
 </body>
 ''')
 
-def parse(base, s):
-    global context
-    context = base
+horiz_spacer = '<div style="min-width:10;"></div>'
 
+def parse(base, s):
     # Replace {default} with all the default fields.
     s = re.sub(r'{default}', '{sci}\n{jpgs}\n\n{obs}', s)
 
-    s = re.sub(r'{sci:\s*(.*\S)\s*}', repl_sci_name, s)
+    # Replace {sci} with the flower's scientific name.
+    def repl_sci(matchobj):
+        if name in flower_sci:
+            return '<b><i>%s</i></b><p/>' % flower_sci[name]
+        else:
+            return '<b><i><span style="color:red">Scientific name not found.</span></i></b><p/>'
+
     s = re.sub(r'{sci}', repl_sci, s)
+
+    # Replace {obs} with iNaturalist observation count.
+    def repl_obs(matchobj):
+        if name in flower_obs:
+            n = flower_obs[name]
+            rc = flower_obs_rg[name]
+            obs_str = '<a href="https://www.inaturalist.org/observations/chris_nelson?taxon_id=%s">Chris&rsquo;s observations</a>: ' % flower_taxon_id[name]
+            if rc == 0:
+                obs_str += '%d (none research grade)' % n
+            elif rc == n:
+                if n == 1:
+                    obs_str += '1 (research grade)'
+                else:
+                    obs_str += '%d (all research grade)' % n
+            else:
+                obs_str += '%d (%d research grade)' % (n, rc)
+        else:
+            obs_str = 'Chris&rsquo;s observations: none'
+
+        return obs_str + '<p/>'
 
     s = re.sub(r'{obs}', repl_obs, s)
 
     # Replace {jpgs} with all jpgs that exist for the flower.
+    def repl_jpgs(matchobj):
+        jpg_sublist = []
+        ext_pos = len(name)
+        for jpg in sorted(jpg_list):
+            if jpg.startswith(name) and re.match(r'[-0-9]+$', jpg[ext_pos:]):
+                jpg_sublist.append('{%s.jpg}' % jpg)
+        if jpg_sublist:
+            return ' '.join(jpg_sublist)
+        else:
+            return '{no photos.jpg}'
+
     s = re.sub(r'{jpgs}', repl_jpgs, s)
 
     # Look for any number of {photos} followed by all text up to the
@@ -251,20 +217,55 @@ def parse(base, s):
     s = re.sub(r'((?:\{(?:jpgs|[^\}]+.jpg|https://calphotos.berkeley.edu/[^\}]+)\} *)+)(((?!\n\n).)*)(?=\n(\n|\Z))', r'<div style="display:flex;align-items:center;">\1<span>\2</span></div>', s, flags=re.DOTALL)
 
     # Replace a pair of newlines with a paragraph separator.
+    # (Do this after making specific replacements based on paragraphs,
+    # but before replacements that might create empty lines.)
     s = s.replace('\n\n', '\n<p/>\n')
 
     # Replace {*.jpg} with a 200px image and a link to the full-sized image.
+    def repl_jpg(matchobj):
+        jpg = matchobj.group(1)
+        filename = "../photos/%s.jpg" % jpg
+        if jpg in jpg_list:
+            img = '<a href="%s"><img src="%s" height="%d"></a>' % (filename, filename, jpg_height)
+            if name not in flower_primary_jpg:
+                flower_primary_jpg[name] = jpg
+        else:
+            img = '<a href="%s" style="color:red;"><div style="display:flex;border:1px solid black;padding:10;height:%d;min-width:%d;align-items:center;justify-content:center"><span style="color:red;">%s</span></div></a>' % (filename, jpg_height-22, jpg_height-22, jpg)
+
+        return img + horiz_spacer
+
     s = re.sub(r'{([^}]+).jpg}', repl_jpg, s)
 
     # Replace a {CalPhotos:text} reference with a 200px box with
     # "CalPhotos: text" in it.
     # The entire box is a link to CalPhotos.
-    # The ":text" part is optional.  The second line below handles the case
-    # where it is not present.
+    # The ":text" part is optional.
+    def repl_calphotos(matchobj):
+        target = matchobj.group(1)
+        pos = target.find(':') # find the colon in "http:"
+        pos = target.find(':', pos+1) # find the next colon, if any
+        if pos > 0:
+            text = ': ' + target[pos+1:]
+            target = target[:pos]
+        else:
+            text = ''
+
+        img = '<a href="%s" style="text-decoration:none"><div style="display:flex;border:1px solid black;padding:10;height:178;min-width:178;align-items:center;justify-content:center"><span><span style="text-decoration:underline;">CalPhotos</span>%s</span></div></a>' % (target, text)
+
+        return img + horiz_spacer
+
     s = re.sub(r'\{(https://calphotos.berkeley.edu/[^\}]+)\}', repl_calphotos, s)
 
     # Any remaining {reference} should refer to another flower page.
     # Replace it with a link, colored depending on whether the link is valid.
+    def repl_link(matchobj):
+        name = matchobj.group(1)
+        if name in page_list:
+            link_style = ''
+        else:
+            link_style = ' style="color:red;"'
+        return '<a href="%s.html"%s>%s</a>' % (name, link_style, name)
+
     s = re.sub(r'{([^}]+)}', repl_link, s)
 
     with open(root + "/html/" + base + ".html", "w") as w:
@@ -275,49 +276,25 @@ def parse(base, s):
 
         # TODO: list all containers of the flower, including the top level.
 
-        end_file(w)
-
-
-file_list = os.listdir(root + "/txt")
-base_list = []
-for filename in file_list:
-    pos = filename.rfind(os.extsep)
-    if pos > 0:
-        ext = filename[pos+len(os.extsep):].lower()
-        if ext == 'txt':
-            base = filename[:pos]
-            base_list.append(base)
-
-file_list = os.listdir(root + '/photos')
-jpg_list = []
-jpg_used = set()
-for filename in file_list:
-    pos = filename.rfind(os.extsep)
-    if pos > 0:
-        ext = filename[pos+len(os.extsep):].lower()
-        if ext == 'jpg':
-            base = filename[:pos]
-            jpg_list.append(base)
+        emit_footer(w)
 
 jpg_height = 200
-for name in base_list:
+for name in page_list:
     read_txt(name)
 
 for name in sorted(jpg_list):
     base = re.sub(r'[-0-9]+$', r'', name)
-    if base not in base_list:
-        base_list.append(base)
+    if base not in page_list:
+        page_list.append(base)
         page_txt[base] = '{default}'
 
-for name in base_list:
+for name in page_list:
     parse(name, page_txt[name])
 
 f = cStringIO.StringIO()
 for name in sorted(flower_obs):
-    if name not in base_list:
-        context = name
-        f.write(repl_jpgs(None))
-        f.write(" %s\n\n" % name)
+    if name not in page_list:
+        f.write("%s<br/>\n" % name)
 s = f.getvalue()
 f.close()
 jpg_height = 50
@@ -336,7 +313,7 @@ def list_flower(w, name, indent):
         name_str = "%s (<i>%s</i>)" % (name, flower_sci[name])
     else:
         name_str = name
-    w.write('</a>%s<a href="%s.html">%s</a></div><p></p>\n' % (spacer, name, name_str))
+    w.write('</a>%s<a href="%s.html">%s</a></div><p></p>\n' % (horiz_spacer, name, name_str))
 
 def find_matches(name_set, c):
     match_list = []
@@ -347,7 +324,7 @@ def find_matches(name_set, c):
                 match_list.extend(sub_list)
             elif len(sub_list) > 1:
                 match_list.append(name)
-        elif name in base_list and (c == None or
+        elif name in page_list and (c == None or
                                     (name in flower_color and c in flower_color[name])):
             match_list.append(name)
     return match_list
@@ -364,14 +341,14 @@ def emit_color(primary, clist):
         w.write('<head><title>%s Flowers</title></head>\n' % primary.capitalize())
         w.write('<body>\n')
         for c in clist:
-            top_list = [x for x in base_list if x not in page_parent]
+            top_list = [x for x in page_list if x not in page_parent]
             match_list = find_matches(top_list, c)
 
             if match_list:
                 w.write('<h1>%s flowers</h1>\n' % c.capitalize())
                 list_flower_matches(w, match_list, 0, c)
 
-        end_file(w)
+        emit_footer(w)
 
 emit_color('yellow', ['yellow', 'orange'])
 
@@ -380,10 +357,10 @@ with open(root + "/html/all.html", "w") as w:
     w.write('<body>\n')
     w.write('<h1>All flowers</h1>\n')
 
-    top_list = [x for x in base_list if x not in page_parent]
+    top_list = [x for x in page_list if x not in page_parent]
     list_flower_matches(w, top_list, 0, None)
 
-    end_file(w)
+    emit_footer(w)
 
 file_list = sorted(os.listdir(root + '/html'))
 new_list = []
