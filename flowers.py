@@ -291,13 +291,9 @@ for name in sorted(jpg_list):
 for page in page_list:
     parse(page, page_txt[page])
 
-f = cStringIO.StringIO()
-for name in sorted(flower_obs):
-    if name not in page_list:
-        f.write("%s<br/>\n" % name)
-s = f.getvalue()
-f.close()
 jpg_height = 50
+unlisted_flowers = sorted([f for f in flower_obs if f not in page_list])
+s = '<br/>\n'.join(unlisted_flowers) + '<p/>\n'
 parse("other observations", s)
 
 def list_flower(w, name, indent):
