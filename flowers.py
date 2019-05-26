@@ -136,21 +136,21 @@ def assign_child(parent, child):
 
 # Read txt files, but perform limited substitutions for now.
 # More will be done once we have a complete set of parent->child relationships.
-def read_txt(name):
-    with open(root + "/txt/" + name + ".txt", "r") as r:
+def read_txt(page):
+    with open(root + "/txt/" + page + ".txt", "r") as r:
         s = r.read()
 
-    # Replace a {child:[name]} link with just {[name]} and record the
+    # Replace a {child:[page]} link with just {[page]} and record the
     # parent->child relationship.
     # Define the re.sub replacement function inside the calling function
     # so that it has access to the calling context.
     def repl_child(matchobj):
         child = matchobj.group(1)
-        assign_child(name, child)
+        assign_child(page, child)
         return '{' + child + '}'
 
     s = re.sub(r'{child:([^}]+)}', repl_child, s)
-    page_txt[name] = s
+    page_txt[page] = s
 
 def emit_footer(w):
     w.write('''
@@ -161,14 +161,14 @@ def emit_footer(w):
 
 horiz_spacer = '<div style="min-width:10;"></div>'
 
-def parse(base, s):
+def parse(page, s):
     # Replace {default} with all the default fields.
     s = re.sub(r'{default}', '{sci}\n{jpgs}\n\n{obs}', s)
 
     # Replace {sci} with the flower's scientific name.
     def repl_sci(matchobj):
-        if name in flower_sci:
-            return '<b><i>%s</i></b><p/>' % flower_sci[name]
+        if page in flower_sci:
+            return '<b><i>%s</i></b><p/>' % flower_sci[page]
         else:
             return '<b><i><span style="color:red">Scientific name not found.</span></i></b><p/>'
 
@@ -176,10 +176,10 @@ def parse(base, s):
 
     # Replace {obs} with iNaturalist observation count.
     def repl_obs(matchobj):
-        if name in flower_obs:
-            n = flower_obs[name]
-            rc = flower_obs_rg[name]
-            obs_str = '<a href="https://www.inaturalist.org/observations/chris_nelson?taxon_id=%s">Chris&rsquo;s observations</a>: ' % flower_taxon_id[name]
+        if page in flower_obs:
+            n = flower_obs[page]
+            rc = flower_obs_rg[page]
+            obs_str = '<a href="https://www.inaturalist.org/observations/chris_nelson?taxon_id=%s">Chris&rsquo;s observations</a>: ' % flower_taxon_id[page]
             if rc == 0:
                 obs_str += '%d (none research grade)' % n
             elif rc == n:
@@ -199,9 +199,9 @@ def parse(base, s):
     # Replace {jpgs} with all jpgs that exist for the flower.
     def repl_jpgs(matchobj):
         jpg_sublist = []
-        ext_pos = len(name)
+        ext_pos = len(page)
         for jpg in sorted(jpg_list):
-            if jpg.startswith(name) and re.match(r'[-0-9]+$', jpg[ext_pos:]):
+            if jpg.startswith(page) and re.match(r'[-0-9]+$', jpg[ext_pos:]):
                 jpg_sublist.append('{%s.jpg}' % jpg)
         if jpg_sublist:
             return ' '.join(jpg_sublist)
@@ -227,8 +227,8 @@ def parse(base, s):
         filename = "../photos/%s.jpg" % jpg
         if jpg in jpg_list:
             img = '<a href="%s"><img src="%s" height="%d"></a>' % (filename, filename, jpg_height)
-            if name not in flower_primary_jpg:
-                flower_primary_jpg[name] = jpg
+            if page not in flower_primary_jpg:
+                flower_primary_jpg[page] = jpg
         else:
             img = '<a href="%s" style="color:red;"><div style="display:flex;border:1px solid black;padding:10;height:%d;min-width:%d;align-items:center;justify-content:center"><span style="color:red;">%s</span></div></a>' % (filename, jpg_height-22, jpg_height-22, jpg)
 
@@ -259,19 +259,19 @@ def parse(base, s):
     # Any remaining {reference} should refer to another flower page.
     # Replace it with a link, colored depending on whether the link is valid.
     def repl_link(matchobj):
-        name = matchobj.group(1)
-        if name in page_list:
+        link = matchobj.group(1)
+        if link in page_list:
             link_style = ''
         else:
             link_style = ' style="color:red;"'
-        return '<a href="%s.html"%s>%s</a>' % (name, link_style, name)
+        return '<a href="%s.html"%s>%s</a>' % (link, link_style, link)
 
     s = re.sub(r'{([^}]+)}', repl_link, s)
 
-    with open(root + "/html/" + base + ".html", "w") as w:
-        w.write('<head><title>%s</title></head>\n' % base)
+    with open(root + "/html/" + page + ".html", "w") as w:
+        w.write('<head><title>%s</title></head>\n' % page)
         w.write('<body>\n')
-        w.write('<h1>%s</h1>' % base)
+        w.write('<h1>%s</h1>' % page)
         w.write(s)
 
         # TODO: list all containers of the flower, including the top level.
@@ -279,17 +279,17 @@ def parse(base, s):
         emit_footer(w)
 
 jpg_height = 200
-for name in page_list:
-    read_txt(name)
+for page in page_list:
+    read_txt(page)
 
 for name in sorted(jpg_list):
-    base = re.sub(r'[-0-9]+$', r'', name)
-    if base not in page_list:
-        page_list.append(base)
-        page_txt[base] = '{default}'
+    page = re.sub(r'[-0-9]+$', r'', name)
+    if page not in page_list:
+        page_list.append(page)
+        page_txt[page] = '{default}'
 
-for name in page_list:
-    parse(name, page_txt[name])
+for page in page_list:
+    parse(page, page_txt[page])
 
 f = cStringIO.StringIO()
 for name in sorted(flower_obs):
