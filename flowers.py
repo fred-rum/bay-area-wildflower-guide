@@ -17,6 +17,9 @@
 #        (i.e. ignorning the filename extension and the "-#" jpg number).
 #        a flower uses its common name (not scientific name).
 #
+# primary - a top-level color.
+# color - a color under a primary.
+#
 # The variable name for a dictionary is constructed as
 # {what it's for}_{what it holds}.
 # E.g. page_parent holds the parent info for a page.
@@ -56,14 +59,17 @@ flower_obs_rg = {} # number of observations that are research grade
 flower_taxon_id = {} # iNaturalist taxon ID
 flower_color = {} # a set of color names
 # first jpg associated with the flower page (used for flower lists)
-flower_primary_jpg = {}
+flower_first_jpg = {}
 
 # Define a list of subcolors for each primary color.
-color_subs = {'yellow': ['yellow', 'orange'],
-              'red': ['red', 'salmon'],
-              'white': ['white', 'cream'],
-              'purple': ['purple', 'purple fading to white', 'pink', 'blue'],
-              'other': ['other']}
+# key: primary name
+# value: list of color names
+primary_color_list = {'yellow': ['yellow', 'orange'],
+                      'red': ['red', 'salmon'],
+                      'white': ['white', 'cream'],
+                      'purple': ['purple', 'purple fading to white',
+                                 'pink', 'blue'],
+                      'other': ['other']}
 
 # A few functions need a small horizontal spacer,
 # so we define a common one here.
@@ -240,8 +246,8 @@ def parse(page, s):
         filename = "../photos/{jpg}.jpg".format(jpg=jpg)
         if jpg in jpg_list:
             img = '<a href="{filename}"><img src="{filename}" height="{jpg_height}"></a>'.format(filename=filename, jpg_height=jpg_height)
-            if page not in flower_primary_jpg:
-                flower_primary_jpg[page] = jpg
+            if page not in flower_first_jpg:
+                flower_first_jpg[page] = jpg
         else:
             img = '<a href="{filename}" style="color:red;"><div style="display:flex;border:1px solid black;padding:10;height:{jpg_height};min-width:{jpg_height};align-items:center;justify-content:center"><span style="color:red;">{jpg}</span></div></a>'.format(filename=filename, jpg_height=jpg_height-22, jpg=jpg)
 
@@ -328,8 +334,8 @@ def list_page(w, page, indent):
     if indent:
         w.write('<div style="min-width:{indent};"></div>'.format(indent=indent*80))
     w.write('<a href="{page}.html">'.format(page=page))
-    if page in flower_primary_jpg:
-        w.write('<img src="../photos/{jpg}.jpg" height="100">'.format(jpg=flower_primary_jpg[page]))
+    if page in flower_first_jpg:
+        w.write('<img src="../photos/{jpg}.jpg" height="100">'.format(jpg=flower_first_jpg[page]))
     else:
         w.write('<div style="display:flex;border:1px solid black;height=98;min-width:98"></div>')
     if page in flower_sci:
@@ -370,19 +376,19 @@ def list_matches(w, match_set, indent, color):
             list_matches(w, find_matches(page_child[name], color),
                          indent+1, color)
 
-def emit_color(primary_color):
-    with open(root + "/html/{primary}.html".format(primary=primary_color), "w") as w:
-        w.write('<head><title>{primary} Flowers</title></head>\n'.format(primary=primary_color.capitalize()))
+def emit_color(primary):
+    with open(root + "/html/{primary}.html".format(primary=primary), "w") as w:
+        w.write('<head><title>{primary} Flowers</title></head>\n'.format(primary=primary.capitalize()))
         w.write('<body>\n')
-        for color in color_subs[primary_color]:
+        for color in primary_color_list[primary]:
             match_set = find_matches(top_list, color)
             if match_set:
                 w.write('<h1>{color} flowers</h1>\n'.format(color=color.capitalize()))
                 list_matches(w, match_set, 0, color)
         write_footer(w)
 
-for primary_color in color_subs:
-    emit_color(primary_color)
+for primary in primary_color_list:
+    emit_color(primary)
 
 with open(root + "/html/all.html", "w") as w:
     w.write('<head><title>All Flowers</title></head>\n')
