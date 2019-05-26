@@ -135,7 +135,7 @@ def is_ancestor(cur_page, check_page):
 
 def assign_child(parent, child):
     if is_ancestor(parent, child):
-        print "circular loop when creating link from %s to %s" % (parent, child)
+        print "circular loop when creating link from {parent} to {child}".format(parent=parent, child=child)
     else:
         if child not in page_parent:
             page_parent[child] = set()
@@ -181,7 +181,7 @@ def parse(page, s):
     # Replace {sci} with the flower's scientific name.
     def repl_sci(matchobj):
         if page in flower_sci:
-            return '<b><i>%s</i></b><p/>' % flower_sci[page]
+            return '<b><i>{sci}</i></b><p/>'.format(sci=flower_sci[page])
         else:
             return '<b><i><span style="color:red">Scientific name not found.</span></i></b><p/>'
 
@@ -191,17 +191,17 @@ def parse(page, s):
     def repl_obs(matchobj):
         if page in flower_obs:
             n = flower_obs[page]
-            rc = flower_obs_rg[page]
-            obs_str = '<a href="https://www.inaturalist.org/observations/chris_nelson?taxon_id=%s">Chris&rsquo;s observations</a>: ' % flower_taxon_id[page]
-            if rc == 0:
-                obs_str += '%d (none research grade)' % n
-            elif rc == n:
+            rg = flower_obs_rg[page]
+            obs_str = '<a href="https://www.inaturalist.org/observations/chris_nelson?taxon_id={taxon_id}">Chris&rsquo;s observations</a>: '.format(taxon_id=flower_taxon_id[page])
+            if rg == 0:
+                obs_str += '{n} (none research grade)'.format(n=n)
+            elif rg == n:
                 if n == 1:
                     obs_str += '1 (research grade)'
                 else:
-                    obs_str += '%d (all research grade)' % n
+                    obs_str += '{n} (all research grade)'.format(n=n)
             else:
-                obs_str += '%d (%d research grade)' % (n, rc)
+                obs_str += '{n} ({rg} research grade)'.format(n=n, rg=rg)
         else:
             obs_str = 'Chris&rsquo;s observations: none'
 
@@ -215,7 +215,7 @@ def parse(page, s):
         ext_pos = len(page)
         for jpg in sorted(jpg_list):
             if jpg.startswith(page) and re.match(r'[-0-9]+$', jpg[ext_pos:]):
-                jpg_sublist.append('{%s.jpg}' % jpg)
+                jpg_sublist.append('{{{jpg}.jpg}}'.format(jpg=jpg))
         if jpg_sublist:
             return ' '.join(jpg_sublist)
         else:
@@ -237,13 +237,13 @@ def parse(page, s):
     # Replace {*.jpg} with a 200px image and a link to the full-sized image.
     def repl_jpg(matchobj):
         jpg = matchobj.group(1)
-        filename = "../photos/%s.jpg" % jpg
+        filename = "../photos/{jpg}.jpg".format(jpg=jpg)
         if jpg in jpg_list:
-            img = '<a href="%s"><img src="%s" height="%d"></a>' % (filename, filename, jpg_height)
+            img = '<a href="{filename}"><img src="{filename}" height="{jpg_height}"></a>'.format(filename=filename, jpg_height=jpg_height)
             if page not in flower_primary_jpg:
                 flower_primary_jpg[page] = jpg
         else:
-            img = '<a href="%s" style="color:red;"><div style="display:flex;border:1px solid black;padding:10;height:%d;min-width:%d;align-items:center;justify-content:center"><span style="color:red;">%s</span></div></a>' % (filename, jpg_height-22, jpg_height-22, jpg)
+            img = '<a href="{filename}" style="color:red;"><div style="display:flex;border:1px solid black;padding:10;height:{jpg_height};min-width:{jpg_height};align-items:center;justify-content:center"><span style="color:red;">{jpg}</span></div></a>'.format(filename=filename, jpg_height=jpg_height-22, jpg=jpg)
 
         return img + horiz_spacer
 
@@ -263,7 +263,7 @@ def parse(page, s):
         else:
             text = ''
 
-        img = '<a href="%s" style="text-decoration:none"><div style="display:flex;border:1px solid black;padding:10;height:178;min-width:178;align-items:center;justify-content:center"><span><span style="text-decoration:underline;">CalPhotos</span>%s</span></div></a>' % (href, text)
+        img = '<a href="{href}" style="text-decoration:none"><div style="display:flex;border:1px solid black;padding:10;height:178;min-width:178;align-items:center;justify-content:center"><span><span style="text-decoration:underline;">CalPhotos</span>{text}</span></div></a>'.format(href=href, text=text)
 
         return img + horiz_spacer
 
@@ -277,14 +277,14 @@ def parse(page, s):
             link_style = ''
         else:
             link_style = ' style="color:red;"'
-        return '<a href="%s.html"%s>%s</a>' % (link, link_style, link)
+        return '<a href="{link}.html"{link_style}>{link}</a>'.format(link=link, link_style=link_style)
 
     s = re.sub(r'{([^}]+)}', repl_link, s)
 
     with open(root + "/html/" + page + ".html", "w") as w:
-        w.write('<head><title>%s</title></head>\n' % page)
+        w.write('<head><title>{page}</title></head>\n'.format(page=page))
         w.write('<body>\n')
-        w.write('<h1>%s</h1>' % page)
+        w.write('<h1>{page}</h1>'.format(page=page))
         w.write(s)
 
         # TODO: list all containers of the flower, including the top level.
@@ -323,20 +323,20 @@ parse("other observations", s)
 top_list = [x for x in page_list if x not in page_parent]
 
 # List a single page, indented by some amount if it is under a parent.
-def list_page(w, name, indent):
+def list_page(w, page, indent):
     w.write('<div style="display:flex;align-items:center;">')
     if indent:
-        w.write('<div style="min-width:%d;"></div>' % (indent * 80))
-    w.write('<a href="%s.html">' % name)
-    if name in flower_primary_jpg:
-        w.write('<img src="../photos/%s.jpg" height="100">' % flower_primary_jpg[name])
+        w.write('<div style="min-width:{indent};"></div>'.format(indent=indent*80))
+    w.write('<a href="{page}.html">'.format(page=page))
+    if page in flower_primary_jpg:
+        w.write('<img src="../photos/{jpg}.jpg" height="100">'.format(jpg=flower_primary_jpg[page]))
     else:
         w.write('<div style="display:flex;border:1px solid black;height=98;min-width:98"></div>')
-    if name in flower_sci:
-        name_str = "%s (<i>%s</i>)" % (name, flower_sci[name])
+    if page in flower_sci:
+        name_str = "{page} (<i>{sci}</i>)".format(page=page, sci=flower_sci[page])
     else:
-        name_str = name
-    w.write('</a>%s<a href="%s.html">%s</a></div><p></p>\n' % (horiz_spacer, name, name_str))
+        name_str = page
+    w.write('</a>{spacer}<a href="{page}.html">{name_str}</a></div><p></p>\n'.format(spacer=horiz_spacer, page=page, name_str=name_str))
 
 # Find all flowers that match the specified color.
 # Also find all pages that include *multiple* child pages that match.
@@ -371,13 +371,13 @@ def list_matches(w, match_set, indent, color):
                          indent+1, color)
 
 def emit_color(primary_color):
-    with open(root + "/html/%s.html" % primary_color, "w") as w:
-        w.write('<head><title>%s Flowers</title></head>\n' % primary_color.capitalize())
+    with open(root + "/html/{primary}.html".format(primary=primary_color), "w") as w:
+        w.write('<head><title>{primary} Flowers</title></head>\n'.format(primary=primary_color.capitalize()))
         w.write('<body>\n')
         for color in color_subs[primary_color]:
             match_set = find_matches(top_list, color)
             if match_set:
-                w.write('<h1>%s flowers</h1>\n' % color.capitalize())
+                w.write('<h1>{color} flowers</h1>\n'.format(color=color.capitalize()))
                 list_matches(w, match_set, 0, color)
         write_footer(w)
 
@@ -413,11 +413,11 @@ if mod_list or new_list:
         if new_list:
             w.write('<h1>New files</h1>\n')
             for name in new_list:
-                w.write('<a href="%s">%s</a><p/>\n' % (name, name))
+                w.write('<a href="{name}">{name}</a><p/>\n'.format(name=name))
         if mod_list:
             w.write('<h1>Modified files</h1>\n')
             for name in mod_list:
-                w.write('<a href="%s">%s</a><p/>\n' % (name, name))
+                w.write('<a href="{name}">{name}</a><p/>\n'.format(name=name))
 
     # open the default browser with the created HTML file
     os.startfile(mod_file)
