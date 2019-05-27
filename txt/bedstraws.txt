@@ -1,0 +1,6 @@
+<h2>Galium spp.</h2>
+{catchweed bedstraw-1.jpg} {child:catchweed bedstraw}, an annual
+
+{graceful bedstraw-.jpg} {child:graceful bedstraw}, a small bushy perennial
+
+<a href="https://keybase.rbg.vic.gov.au/keys/show/3804?filter_id=55b17b6f8c990">Jepson eFlora</a> lists many other bedstraws potentially found in the bay area.

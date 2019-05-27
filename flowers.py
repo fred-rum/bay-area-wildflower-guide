@@ -100,7 +100,7 @@ with open(root + '/observations.csv', 'r') as f:
         sci_name = row[sci_idx]
         com_name = row[com_idx].lower()
         if com_name:
-            if sci_name:
+            if sci_name and ' ' in sci_name: # at least to species level
                 flower_sci[com_name] = sci_name
 
             if com_name not in flower_obs:
