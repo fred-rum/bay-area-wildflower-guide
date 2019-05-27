@@ -52,24 +52,32 @@ page_parent = {} # a set of names of the page's parent pages
 page_child = {} # a set of names of the page's child pages
 page_txt = {} # txt (string) (potentially with some parsing done to it)
 
+# A set of color names that the page is linked from.
+# (Initially this is just the flower colors,
+# but container pages get added later.)
+page_color = {}
+
 # key: flower page name
 flower_sci = {} # scientific name
 flower_obs = {} # number of observations
 flower_obs_rg = {} # number of observations that are research grade
 flower_taxon_id = {} # iNaturalist taxon ID
-flower_color = {} # a set of color names
 # first jpg associated with the flower page (used for flower lists)
 flower_first_jpg = {}
 
 # Define a list of subcolors for each primary color.
 # key: primary name
 # value: list of color names
-primary_color_list = {'yellow': ['yellow', 'orange'],
+primary_color_list = {'purple': ['purple', 'purple fading to white',
+                                 'pink', 'blue'],
                       'red': ['red', 'salmon'],
                       'white': ['white', 'cream'],
-                      'purple': ['purple', 'purple fading to white',
-                                 'pink', 'blue'],
+                      'yellow': ['yellow', 'orange'],
                       'other': ['other']}
+
+# key: color
+# value: page list
+color_page_list = {}
 
 # A few functions need a small horizontal spacer,
 # so we define a common one here.
@@ -109,7 +117,7 @@ with open(root + '/data.yaml') as f:
     yaml_data = yaml.safe_load(f)
 for name in yaml_data:
     if 'color' in yaml_data[name]:
-        flower_color[name] = set(yaml_data[name]['color'].split(','))
+        page_color[name] = set(yaml_data[name]['color'].split(','))
 
 # Get a list of files with the expected suffix in the designated directory.
 def get_file_list(subdir, ext):
@@ -169,9 +177,20 @@ def read_txt(page):
     s = re.sub(r'{child:([^}]+)}', repl_child, s)
     page_txt[page] = s
 
+def write_parents(w, page):
+    w.write('<hr/>\n')
+    w.write('Pages that link to this one:<p/>\n<ul>')
+    if page in page_color:
+        for primary in primary_color_list:
+            for color in primary_color_list[primary]:
+                if color in page_color[page]:
+                    w.write('<li><a href="{primary}.html#{color}">{color}</a></li>\n'.format(primary=primary, color=color))
+    w.write('</ul>\n')
+                    
+
 def write_footer(w):
     w.write('''
-&mdash;<br/>
+<hr/>
 <a href="../index.html">BAFG</a> <span style="color:gray">Copyright 2019 Chris Nelson</span>
 </body>
 ''')
@@ -292,6 +311,7 @@ def parse(page, s):
         w.write('<body>\n')
         w.write('<h1>{page}</h1>'.format(page=page))
         w.write(s)
+        write_parents(w, page)
         write_footer(w)
 
 ###############################################################################
@@ -307,39 +327,8 @@ for name in sorted(jpg_list):
         page_list.append(page)
         page_txt[page] = '{default}'
 
-# Turn txt into html for all normal and default pages.
-jpg_height = 200
-for page in page_list:
-    parse(page, page_txt[page])
-
-# Create a txt listing all flowers without pages, then parse it into html.
-jpg_height = 50
-unlisted_flowers = sorted([f for f in flower_obs if f not in page_list])
-s = '<br/>\n'.join(unlisted_flowers) + '<p/>\n'
-parse("other observations", s)
-
-###############################################################################
-# The remaining code is for creating useful lists of pages:
-# all pages, and pages sorted by flower color.
-
 # Get a list of pages without parents (top-level pages).
 top_list = [x for x in page_list if x not in page_parent]
-
-# List a single page, indented by some amount if it is under a parent.
-def list_page(w, page, indent):
-    w.write('<div style="display:flex;align-items:center;">')
-    if indent:
-        w.write('<div style="min-width:{indent};"></div>'.format(indent=indent*80))
-    w.write('<a href="{page}.html">'.format(page=page))
-    if page in flower_first_jpg:
-        w.write('<img src="../photos/{jpg}.jpg" height="100">'.format(jpg=flower_first_jpg[page]))
-    else:
-        w.write('<div style="display:flex;border:1px solid black;height=98;min-width:98"></div>')
-    if page in flower_sci:
-        name_str = "{page} (<i>{sci}</i>)".format(page=page, sci=flower_sci[page])
-    else:
-        name_str = page
-    w.write('</a>{spacer}<a href="{page}.html">{name_str}</a></div><p></p>\n'.format(spacer=horiz_spacer, page=page, name_str=name_str))
 
 # Find all flowers that match the specified color.
 # Also find all pages that include *multiple* child pages that match.
@@ -359,11 +348,50 @@ def find_matches(page_subset, color):
                     match_set.update(child_subset)
                 elif len(child_subset) > 1:
                     match_set.add(page)
+                    # Record this container page's color.
+                    if page not in page_color:
+                        page_color[page] = set()
+                    page_color[page].add(color)
             elif (color == None or
-                  (page in flower_color and color in flower_color[page]) or
-                  (page not in flower_color and color == 'other')):
+                  (page in page_color and color in page_color[page]) or
+                  (page not in page_color and color == 'other')):
                 match_set.add(page)
     return match_set
+
+for primary in primary_color_list:
+    for color in primary_color_list[primary]:
+        color_page_list[color] = sorted(find_matches(top_list, color))
+
+# Turn txt into html for all normal and default pages.
+jpg_height = 200
+for page in page_list:
+    parse(page, page_txt[page])
+
+# Create a txt listing all flowers without pages, then parse it into html.
+jpg_height = 50
+unlisted_flowers = sorted([f for f in flower_obs if f not in page_list])
+s = '<br/>\n'.join(unlisted_flowers) + '<p/>\n'
+parse("other observations", s)
+
+###############################################################################
+# The remaining code is for creating useful lists of pages:
+# all pages, and pages sorted by flower color.
+
+# List a single page, indented by some amount if it is under a parent.
+def list_page(w, page, indent):
+    w.write('<div style="display:flex;align-items:center;">')
+    if indent:
+        w.write('<div style="min-width:{indent};"></div>'.format(indent=indent*80))
+    w.write('<a href="{page}.html">'.format(page=page))
+    if page in flower_first_jpg:
+        w.write('<img src="../photos/{jpg}.jpg" height="100">'.format(jpg=flower_first_jpg[page]))
+    else:
+        w.write('<div style="display:flex;border:1px solid black;height=98;min-width:98"></div>')
+    if page in flower_sci:
+        name_str = "{page} (<i>{sci}</i>)".format(page=page, sci=flower_sci[page])
+    else:
+        name_str = page
+    w.write('</a>{spacer}<a href="{page}.html">{name_str}</a></div><p></p>\n'.format(spacer=horiz_spacer, page=page, name_str=name_str))
 
 def list_matches(w, match_set, indent, color):
     for name in sorted(match_set):
@@ -373,19 +401,15 @@ def list_matches(w, match_set, indent, color):
             list_matches(w, find_matches(page_child[name], color),
                          indent+1, color)
 
-def emit_color(primary):
+for primary in primary_color_list:
     with open(root + "/html/{primary}.html".format(primary=primary), "w") as w:
-        w.write('<head><title>{primary} Flowers</title></head>\n'.format(primary=primary.capitalize()))
+        w.write('<head><title>{uprimary} Flowers</title></head>\n'.format(uprimary=primary.capitalize()))
         w.write('<body>\n')
         for color in primary_color_list[primary]:
-            match_set = find_matches(top_list, color)
-            if match_set:
-                w.write('<h1>{color} flowers</h1>\n'.format(color=color.capitalize()))
-                list_matches(w, match_set, 0, color)
+            if color_page_list[color]:
+                w.write('<h1 id="{color}">{ucolor} flowers</h1>\n'.format(color=color, ucolor=color.capitalize()))
+                list_matches(w, color_page_list[color], 0, color)
         write_footer(w)
-
-for primary in primary_color_list:
-    emit_color(primary)
 
 with open(root + "/html/all.html", "w") as w:
     w.write('<head><title>All Flowers</title></head>\n')
