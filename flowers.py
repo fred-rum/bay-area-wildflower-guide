@@ -180,9 +180,9 @@ def read_txt(page):
 def write_external_links(w, page):
     if page in flower_sci:
         sci = flower_sci[page]
-        w.write('<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={sci}">CalFlora</a> &ndash;\n'.format(sci=sci));
-        w.write('<a href="https://calphotos.berkeley.edu/cgi/img_query?where-taxon={sci}">CalPhotos</a> &ndash;\n'.format(sci=sci));
-        w.write('<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}">Jepson eFlora</a><p/>\n'.format(sci=sci));
+        w.write('<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={sci}" target="_blank">CalFlora</a> &ndash;\n'.format(sci=sci));
+        w.write('<a href="https://calphotos.berkeley.edu/cgi/img_query?where-taxon={sci}" target="_blank">CalPhotos</a> &ndash;\n'.format(sci=sci));
+        w.write('<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson eFlora</a><p/>\n'.format(sci=sci));
 
 def write_parents(w, page):
     w.write('<hr/>\n')
@@ -232,7 +232,7 @@ def parse(page, s):
         if page in flower_obs:
             n = flower_obs[page]
             rg = flower_obs_rg[page]
-            obs_str = '<a href="https://www.inaturalist.org/observations/chris_nelson?taxon_id={taxon_id}">Chris&rsquo;s observations</a>: '.format(taxon_id=flower_taxon_id[page])
+            obs_str = '<a href="https://www.inaturalist.org/observations/chris_nelson?taxon_id={taxon_id}" target="_blank">Chris&rsquo;s observations</a>: '.format(taxon_id=flower_taxon_id[page])
             if rg == 0:
                 obs_str += '{n} (none research grade)'.format(n=n)
             elif rg == n:
