@@ -177,6 +177,13 @@ def read_txt(page):
     s = re.sub(r'{child:([^}]+)}', repl_child, s)
     page_txt[page] = s
 
+def write_external_links(w, page):
+    if page in flower_sci:
+        sci = flower_sci[page]
+        w.write('<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={sci}">CalFlora</a> &ndash;\n'.format(sci=sci));
+        w.write('<a href="https://calphotos.berkeley.edu/cgi/img_query?where-taxon={sci}">CalPhotos</a> &ndash;\n'.format(sci=sci));
+        w.write('<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}">Jepson eFlora</a><p/>\n'.format(sci=sci));
+
 def write_parents(w, page):
     w.write('<hr/>\n')
     w.write('Pages that link to this one:<p/>\n')
@@ -319,6 +326,7 @@ def parse(page, s):
         w.write('<body>\n')
         w.write('<h1>{page}</h1>'.format(page=page))
         w.write(s)
+        write_external_links(w, page)
         write_parents(w, page)
         write_footer(w)
 
@@ -460,12 +468,4 @@ else:
     print "No files modified."
 
 # TODO:
-# list all containers of the flower, including colors and "all flowers".
-#
-# link to CalFlora in the form
-#   https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup=Mesembryanthemum+nodiflorum
-# link to CalPhotos in the form
-#   https://calphotos.berkeley.edu/cgi/img_query?where-taxon=Carpobrotus+edulis
-# link to Jepson eFlora in the form
-#   http://ucjeps.berkeley.edu/eflora/search_eflora.php?name=Carpobrotus+edulis
 # sort lists by number of observations
