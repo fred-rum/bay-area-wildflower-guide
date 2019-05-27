@@ -179,12 +179,20 @@ def read_txt(page):
 
 def write_parents(w, page):
     w.write('<hr/>\n')
-    w.write('Pages that link to this one:<p/>\n<ul>')
+    w.write('Pages that link to this one:<p/>\n')
+    w.write('<ul/>\n')
+
+    if page in page_parent:
+        for parent in sorted(page_parent[page]):
+            w.write('<li><a href="{parent}.html">{parent}</a></li>\n'.format(parent=parent))
+
     if page in page_color:
         for primary in primary_color_list:
             for color in primary_color_list[primary]:
                 if color in page_color[page]:
-                    w.write('<li><a href="{primary}.html#{color}">{color}</a></li>\n'.format(primary=primary, color=color))
+                    w.write('<li><a href="{primary}.html#{color}">{ucolor} flowers</a></li>\n'.format(primary=primary, color=color, ucolor=color.capitalize()))
+
+    w.write('<li><a href="all.html">All flowers</a></li>\n')
     w.write('</ul>\n')
                     
 
