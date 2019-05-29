@@ -344,6 +344,11 @@ for name in sorted(jpg_list):
 # Get a list of pages without parents (top-level pages).
 top_list = [x for x in page_list if x not in page_parent]
 
+def page_matches_color(page, color):
+    return (color == None or
+            (page in page_color and color in page_color[page]) or
+            (page not in page_color and color == 'other'))
+
 # Find all flowers that match the specified color.
 # Also find all pages that include *multiple* child pages that match.
 # If a parent includes multiple matching child pages, those child pages are
@@ -366,9 +371,7 @@ def find_matches(page_subset, color):
                     if page not in page_color:
                         page_color[page] = set()
                     page_color[page].add(color)
-            elif (color == None or
-                  (page in page_color and color in page_color[page]) or
-                  (page not in page_color and color == 'other')):
+            elif page_matches_color(page, color):
                 match_set.add(page)
     return match_set
 
@@ -409,12 +412,41 @@ def list_page(w, page, indent):
         name_str = page
     w.write('</a>{spacer}<a href="{page}.html">{name_str}</a></div><p></p>\n'.format(spacer=horiz_spacer, page=page, name_str=name_str))
 
-def list_matches(w, match_set, indent, color):
-    for name in sorted(match_set):
-        list_page(w, name, indent)
+# For containers, sum the observation counts of all children,
+# *but* if a flower is found via multiple paths, count it only once.
+def count_matching_obs(page, color, match_flowers):
+    if page in match_flowers: return 0
 
-        if name in page_child:
-            list_matches(w, find_matches(page_child[name], color),
+    count = 0
+
+    # If a container page contains exactly one descendant with a matching
+    # color, the container isn't listed on the color page, and the color
+    # isn't listed in page_color for the page.  Therefore, we follow all
+    # child links blindly and only compare the color when we reach a flower
+    # with an observation count.
+    if page in flower_obs and page_matches_color(page, color):
+        count += flower_obs[page]
+        match_flowers.add(page)
+
+    if page in page_child:
+        for child in page_child[page]:
+            count += count_matching_obs(child, color, match_flowers)
+
+    return count
+
+def list_matches(w, match_set, indent, color):
+    # Sort by observation count.
+    def count_flowers(page):
+        return count_matching_obs(page, color, set())
+
+    # Sort in reverse order of observation count.
+    # We initialize the sort with match_set sorted alphabetically.
+    # This order is retained for subsets with equal observation counts.
+    for page in sorted(sorted(match_set), key=count_flowers, reverse=True):
+        list_page(w, page, indent)
+
+        if page in page_child:
+            list_matches(w, find_matches(page_child[page], color),
                          indent+1, color)
 
 for primary in primary_color_list:
