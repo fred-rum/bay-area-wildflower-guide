@@ -116,8 +116,7 @@ with open(root + '/observations.csv', 'r') as f:
 with open(root + '/data.yaml') as f:
     yaml_data = yaml.safe_load(f)
 for name in yaml_data:
-    if 'color' in yaml_data[name]:
-        page_color[name] = set(yaml_data[name]['color'].split(','))
+    page_color[name] = set(yaml_data[name].split(','))
 
 # Get a list of files with the expected suffix in the designated directory.
 def get_file_list(subdir, ext):
@@ -201,7 +200,6 @@ def write_parents(w, page):
 
     w.write('<li><a href="all.html">All flowers</a></li>\n')
     w.write('</ul>\n')
-                    
 
 def write_footer(w):
     w.write('''
@@ -374,6 +372,8 @@ def find_matches(page_subset, color):
                 match_set.add(page)
     return match_set
 
+# We don't need color_page_list yet, but we go through the creation process
+# now in order to populate page_color for all container pages.
 for primary in primary_color_list:
     for color in primary_color_list[primary]:
         color_page_list[color] = sorted(find_matches(top_list, color))

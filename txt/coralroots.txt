@@ -1,0 +1,6 @@
+<h2>Corallorhiza spp.</h2>
+{striped coralroot-.jpg} {child:striped coralroot} has 3-5 stripes
+
+{spotted coralroot-.jpg} {child:spotted coralroot} has 0 stripes.  Spotted coralroot has <a href="https://keybase.rbg.vic.gov.au/keys/show/3985?filter_id=55b17b6f8c990">two varieties:</a> <a href="https://www.calflora.org/cgi-bin/species_query.cgi?where-taxon=Corallorhiza+maculata+var.+maculata">var. maculata</a> and <a href="https://www.calflora.org/cgi-bin/species_query.cgi?where-taxon=Corallorhiza+maculata+var.+occidentalis">var. occidentalis</a>.
+
+There are no other coralroot species in the bay area.
