@@ -42,15 +42,6 @@ ragged or entire (not notched once).
 
 Ordered roughly by scale length.
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0511+1485}
-Microseris douglasii ssp. tenella
-<ul>
-<li>Seeds 3&ndash;6.5 mm.</li>
-<li>&le; 5 scales, each &le; 1 mm.</li>
-<li>Bristles 3&ndash;8.5 mm.</li>
-<li>Clustered around Fremont, eastern San Mateo County, and a few further places.</li>
-</ul>
-
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0411+2148}
 Microseris elegans
 <ul>
@@ -83,12 +74,12 @@ Microseris campestris
 </ul>
 
 {douglas' silverpuffs-.jpg}
-{child:douglas' silverpuffs} (Microseris douglasii ssp. douglasii)
+{child:douglas' silverpuffs} (Microseris douglasii)
 <ul>
-<li>Seeds 4&ndash;10 mm, widest at tip.</li>
-<li>&le; 5 scales, each 1&ndash;6.5 mm, becoming curved throughout and strongly inrolled.</li>
+<li>Seeds 3&ndash;10 mm.</li>
+<li>&le; 5 scales, each tiny&ndash;6.5 mm; if &ge; 1 mm, becoming curved throughout and strongly inrolled.</li>
 <li>Scale midrib evenly tapered from thick base.</li>
-<li>Bristles 3&ndash;8 mm.</li>
+<li>Bristles 3&ndash;8.5 mm.</li>
 <li>Found everywhere east of Skyline Blvd.</li>
 </ul>
 
