@@ -99,6 +99,15 @@ with open(root + '/observations.csv', 'r') as f:
     for row in csv_reader:
         sci_name = row[sci_idx]
         com_name = row[com_idx].lower()
+        taxon_id = row[taxon_idx]
+
+        # Record observation data under both the common name and
+        # the scientific name, so I can use either one for page names
+        # and photo keywords.
+        #
+        # The common name is forced to all lower case to match my convention.
+        # The scientific name is left in its standard case.
+
         if com_name:
             if sci_name and ' ' in sci_name: # at least to species level
                 flower_sci[com_name] = sci_name
@@ -110,7 +119,19 @@ with open(root + '/observations.csv', 'r') as f:
             if row[rg_idx] == 'research':
                 flower_obs_rg[com_name] += 1
 
-            flower_taxon_id[com_name] = row[taxon_idx]
+            flower_taxon_id[com_name] = taxon_id
+
+        if sci_name and ' ' in sci_name: # at least to species level
+            flower_sci[sci_name] = sci_name
+
+            if sci_name not in flower_obs:
+                flower_obs[sci_name] = 0
+                flower_obs_rg[sci_name] = 0
+            flower_obs[sci_name] += 1
+            if row[rg_idx] == 'research':
+                flower_obs_rg[sci_name] += 1
+
+            flower_taxon_id[sci_name] = taxon_id
 
 # Read miscellaneous flower info from the YAML file.
 with open(root + '/data.yaml') as f:
@@ -213,6 +234,9 @@ def write_footer(w):
 # and writes the resulting file.
 
 def parse(page, s):
+    # Replace HTTP links in the text with ones that open a new tab.
+    s = re.sub(r'<a href=', '<a target="_blank" href=', s)
+
     # Replace {default} with all the default fields.
     s = re.sub(r'{default}', '{sci}\n{jpgs}\n\n{obs}', s)
 
@@ -500,4 +524,4 @@ else:
     print "No files modified."
 
 # TODO:
-# sort lists by number of observations
+# remove photos from containers in page lists

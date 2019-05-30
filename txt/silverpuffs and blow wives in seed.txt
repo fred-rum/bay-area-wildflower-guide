@@ -1,0 +1,125 @@
+Distinguishing features:
+<ul>
+<li>presence of bristles</li>
+<li>length of all features</li>
+<li>number of scales per seed</li>
+<li>seed color (and sometimes shape)</li>
+<li>scale color and tip shape (and sometimes fuzziness)</li>
+<li>bristle fuzziness</li>
+</ul>
+
+Blow wives and silverpuffs form a ball of seeds.  Each seed (fruit) has a
+parachute of wings to catch the wind.
+<ul>
+<li>Each wing of blow wives consists only of a flat scale.</li>
+<li>Each wing of silverpuffs (Uropappus and Microseris) consists of a flat scale with a hair-like bristle extending past the scale tip.</li>
+</ul>
+
+<h2>blow wives</h2>
+
+{blow wives-.jpg} {child:blow wives} 
+
+<h2>silverpuffs</h2>
+
+<h3>Uropappus</h3>
+
+{Uropappus lindleyi-.jpg}
+There is only one species of Uropappus, {child:Uropappus lindleyi}.
+<ul>
+<li>Seeds are very dark or black.</li>
+<li>Each scale is notched once at the tip where the bristle emerges.</li>
+<li>The bristle is shorter than the scale.</li>
+</ul>
+
+<h3>Microseris</h3>
+
+Microseris has lighter colored seeds and the scale tips are either
+ragged or entire (not notched once).
+
+<a href="https://keybase.rbg.vic.gov.au/keys/show/3498?filter_id=55b17b6f8c990">Jepson KeyBase</a>
+
+<h4>&le; 5 scales; simple stem</h4>
+
+Ordered roughly by scale length.
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0511+1485}
+Microseris douglasii ssp. tenella
+<ul>
+<li>Seeds 3&ndash;6.5 mm.</li>
+<li>&le; 5 scales, each &le; 1 mm.</li>
+<li>Bristles 3&ndash;8.5 mm.</li>
+<li>Clustered around Fremont, eastern San Mateo County, and a few further places.</li>
+</ul>
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0411+2148}
+Microseris elegans
+<ul>
+<li>Seeds 1.5&ndash;3 mm, widest at the tip, tapering (slightly) to the base.</li>
+<li>Outermost seeds are sometimes hairy, while inner seeds are glabrous.</li>
+<li>5 scales, each 0.2&ndash;2.5 mm.</li>
+<li>Bristles 3&ndash;5 mm.</li>
+<li>Found at Coe and Mt. Diablo.</li>
+</ul>
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0511+0184}
+Microseris bigelovii
+<ul>
+<li>Seeds 2.5&ndash;5.5mm, widest near middle and tapering to base.</li>
+<li>Outermost seeds are generally very hairy, while inner seeds are glabrous.</li>
+<li>5 scales, each 1&ndash;4 mm, curved only at base.</li>
+<li>Scale midrib linear, thicker at base.</li>
+<li>Bristles 3&ndash;8 mm.</li>
+<li>Found near the coast and at Edgewood.</li>
+</ul>
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1207+1291}
+Microseris campestris
+<ul>
+<li>Seeds 3&ndash;5+ mm, widest at tip.</li>
+<li>5 scales, each 1&ndash;4.5 mm, becoming +- curved throughout, barely inrolled, barely or not pigmented.</li>
+<li>Scale midrib evenly tapered from thick base.</li>
+<li>Bristles 3&ndash;5.5 mm.</li>
+<li>Rare near Redwood Park and Mt. Diablo.</li>
+</ul>
+
+{douglas' silverpuffs-.jpg}
+{child:douglas' silverpuffs} (Microseris douglasii ssp. douglasii)
+<ul>
+<li>Seeds 4&ndash;10 mm, widest at tip.</li>
+<li>&le; 5 scales, each 1&ndash;6.5 mm, becoming curved throughout and strongly inrolled.</li>
+<li>Scale midrib evenly tapered from thick base.</li>
+<li>Bristles 3&ndash;8 mm.</li>
+<li>Found everywhere east of Skyline Blvd.</li>
+</ul>
+
+{Microseris acuminata-.jpg}
+{Microseris acuminata}
+<ul>
+<li>Seeds 4.5&ndash;7 mm, flared at tip.</li>
+<li>5 scales, each 3.5&ndash;11 mm, barely inrolled, midrib > 1/5 scale width.</li>
+<li>Bristles 4&ndash;7 mm.</li>
+<li>Rare in the East Bay.</li>
+<li>Supposedly not present on the peninsula, but found in the upper part of Foothills Park.</li>
+</ul>
+
+<h4>5&ndash;10 scales; stem may be branched and/or have leaves</h4>
+
+Ordered roughly by scale length.
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0118+0635}
+Microseris paludosa
+<ul>
+<li>Seeds 4&ndash;7 mm</li>
+<li>5&ndash;10 scales, each 2&ndash;4 mm.</li>
+<li>Bristles 6&ndash;9 mm.</li>
+<li>Found at Mt. Diablo.</li>
+</ul>
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0114+0026}
+Microseris sylvatica
+<ul>
+<li>Seeds 5&ndash;12 mm</li>
+<li>5&ndash;10 scales, each 4&ndash;10 mm.</li>
+<li>Bristles 6&ndash;9 mm.</li>
+</li>Found near the coast and on Mt. Tamalpais.</li>
+</ul>
