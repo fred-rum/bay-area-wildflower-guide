@@ -109,7 +109,7 @@ with open(root + '/observations.csv', 'r') as f:
         # The scientific name is left in its standard case.
 
         if com_name:
-            if sci_name and ' ' in sci_name: # at least to species level
+            if sci_name:
                 flower_sci[com_name] = sci_name
 
             if com_name not in flower_obs:
@@ -134,7 +134,7 @@ with open(root + '/observations.csv', 'r') as f:
             flower_taxon_id[sci_name] = taxon_id
 
 # Read miscellaneous flower info from the YAML file.
-with open(root + '/data.yaml') as f:
+with open(root + '/color.yaml') as f:
     yaml_data = yaml.safe_load(f)
 for name in yaml_data:
     page_color[name] = set(yaml_data[name].split(','))
@@ -200,6 +200,7 @@ def read_txt(page):
 def write_external_links(w, page):
     if page in flower_sci:
         sci = flower_sci[page]
+        w.write('<p/>')
         w.write('<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={sci}" target="_blank">CalFlora</a> &ndash;\n'.format(sci=sci));
         w.write('<a href="https://calphotos.berkeley.edu/cgi/img_query?where-taxon={sci}" target="_blank">CalPhotos</a> &ndash;\n'.format(sci=sci));
         w.write('<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson eFlora</a><p/>\n'.format(sci=sci));
