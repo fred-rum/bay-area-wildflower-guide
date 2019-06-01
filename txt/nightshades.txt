@@ -1,0 +1,20 @@
+<h2>Solanum spp.</h2>
+
+<h3>Purple nightshades</h3>
+
+Distinguishing features:
+<ul>
+<li>hairs are branched or 0/simple on upper stem (not flower pedicel).  The hairs are so tiny that maximum camera close-up doesn't always show them branching, but does show them matted rather than straight.</li>
+</ul>
+
+{bluewitch nightshade-.jpg} {child:bluewitch nightshade} 
+<ul>
+<li>stem hairs generally dense, branched</li>
+<li>leaf ovate, obovate, or elliptic, generally entire</li>
+</ul>
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0110+1545} purple nightshade ({Solanum xanti})
+<ul>
+<li>stem &plusmn;hairy, hairs are unbranched, glandular or not</li>
+<li>leaf lanceolate to ovate, &plusmn;entire to 1&ndash;2-lobed at base; base obtuse to &plusmn;cordate</li>
+</ul>
