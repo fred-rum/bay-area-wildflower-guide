@@ -43,7 +43,7 @@ ragged or entire (not notched once).
 Ordered roughly by scale length.
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0411+2148}
-Microseris elegans
+{Microseris elegans}
 <ul>
 <li>Seeds 1.5&ndash;3 mm, widest at the tip, tapering (slightly) to the base.</li>
 <li>Outermost seeds are sometimes hairy, while inner seeds are glabrous.</li>
@@ -53,7 +53,7 @@ Microseris elegans
 </ul>
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0511+0184}
-Microseris bigelovii
+{Microseris bigelovii}
 <ul>
 <li>Seeds 2.5&ndash;5.5mm, widest near middle and tapering to base.</li>
 <li>Outermost seeds are generally very hairy, while inner seeds are glabrous.</li>
@@ -64,7 +64,7 @@ Microseris bigelovii
 </ul>
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1207+1291}
-Microseris campestris
+{Microseris campestris}
 <ul>
 <li>Seeds 3&ndash;5+ mm, widest at tip.</li>
 <li>5 scales, each 1&ndash;4.5 mm, becoming +- curved throughout, barely inrolled, barely or not pigmented.</li>
@@ -98,7 +98,7 @@ Microseris campestris
 Ordered roughly by scale length.
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0118+0635}
-Microseris paludosa
+{Microseris paludosa}
 <ul>
 <li>Seeds 4&ndash;7 mm</li>
 <li>5&ndash;10 scales, each 2&ndash;4 mm.</li>
@@ -107,7 +107,7 @@ Microseris paludosa
 </ul>
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0114+0026}
-Microseris sylvatica
+{Microseris sylvatica}
 <ul>
 <li>Seeds 5&ndash;12 mm</li>
 <li>5&ndash;10 scales, each 4&ndash;10 mm.</li>

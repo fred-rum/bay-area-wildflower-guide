@@ -68,8 +68,7 @@ flower_first_jpg = {}
 # Define a list of subcolors for each primary color.
 # key: primary name
 # value: list of color names
-primary_color_list = {'purple': ['purple', 'purple fading to white',
-                                 'pink', 'blue'],
+primary_color_list = {'purple': ['purple', 'pink', 'blue'],
                       'red': ['red', 'salmon'],
                       'white': ['white', 'cream'],
                       'yellow': ['yellow', 'orange'],
@@ -333,14 +332,17 @@ def parse(page, s):
     s = re.sub(r'\{(https://calphotos.berkeley.edu/[^\}]+)\}', repl_calphotos, s)
 
     # Any remaining {reference} should refer to another page.
-    # Replace it with a link, colored depending on whether the link is valid.
+    # Replace it with a link to one of my pages if I can,
+    # or otherwise to CalFlora if it is a scientific species name,
+    # or otherwise leave it unchanged.
     def repl_link(matchobj):
         link = matchobj.group(1)
         if link in page_list:
-            link_style = ''
+            return '<a href="{link}.html">{link}</a>'.format(link=link)
+        elif re.match(r'[A-Z][^\s]* [a-z][^\s]*$', link):
+            return '<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={link}" target="_blank" style="color:darkgreen">{link}</a>'.format(link=link)
         else:
-            link_style = ' style="color:red;"'
-        return '<a href="{link}.html"{link_style}>{link}</a>'.format(link=link, link_style=link_style)
+            return link
 
     s = re.sub(r'{([^}]+)}', repl_link, s)
 
@@ -526,3 +528,5 @@ else:
 
 # TODO:
 # remove photos from containers in page lists
+# it would be nice to attach colors to individual jpgs of a flower,
+#   e.g. for baby blue eyes (N. menziesii).
