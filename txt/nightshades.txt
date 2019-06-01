@@ -4,7 +4,8 @@
 
 Distinguishing features:
 <ul>
-<li>hairs are branched or 0/simple on upper stem (not flower pedicel).  The hairs are so tiny that maximum camera close-up doesn't always show them branching, but does show them matted rather than straight.</li>
+<li>Hairs are branched or 0/simple on upper stem (not flower pedicel).  The hairs are so tiny that maximum camera close-up doesn't always show them branching, but does show them matted rather than straight.</li>
+<li>Leaf shape.  There is some overlap, but the shapes are often distinct.</li>
 </ul>
 
 {bluewitch nightshade-.jpg} {child:bluewitch nightshade} 
