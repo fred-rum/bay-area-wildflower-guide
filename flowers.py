@@ -222,6 +222,31 @@ def write_parents(w, page):
     w.write('<li><a href="all.html">All flowers</a></li>\n')
     w.write('</ul>\n')
 
+def write_header(w, title):
+    w.write('''<head>
+<title>{title}</title>
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" sizes="16x16 32x32 64x64" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="196x196" href="/favicon-192.png">
+<link rel="icon" type="image/png" sizes="160x160" href="/favicon-160.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon-57.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicon-114.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicon-72.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicon-144.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicon-60.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicon-120.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicon-76.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicon-152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png">
+<meta name="msapplication-TileColor" content="#FFFFFF">
+<meta name="msapplication-TileImage" content="/favicon-144.png">
+<meta name="msapplication-config" content="/browserconfig.xml">
+</head>\n'''.format(title=title))
+
 def write_footer(w):
     w.write('''
 <hr/>
@@ -347,7 +372,7 @@ def parse(page, s):
     s = re.sub(r'{([^}]+)}', repl_link, s)
 
     with open(root + "/html/" + page + ".html", "w") as w:
-        w.write('<head><title>{page}</title></head>\n'.format(page=page))
+        write_header(w, page)
         w.write('<body>\n')
         w.write('<h1>{page}</h1>'.format(page=page))
         w.write(s)
@@ -478,7 +503,7 @@ def list_matches(w, match_set, indent, color):
 
 for primary in primary_color_list:
     with open(root + "/html/{primary}.html".format(primary=primary), "w") as w:
-        w.write('<head><title>{uprimary} Flowers</title></head>\n'.format(uprimary=primary.capitalize()))
+        write_header(w, primary.capitalize())
         w.write('<body>\n')
         for color in primary_color_list[primary]:
             if color_page_list[color]:
@@ -487,7 +512,7 @@ for primary in primary_color_list:
         write_footer(w)
 
 with open(root + "/html/all.html", "w") as w:
-    w.write('<head><title>All Flowers</title></head>\n')
+    write_header(w, 'All Flowers')
     w.write('<body>\n')
     w.write('<h1>All flowers</h1>\n')
     list_matches(w, top_list, 0, None)
