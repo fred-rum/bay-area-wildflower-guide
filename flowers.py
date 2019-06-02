@@ -345,12 +345,12 @@ def parse(page, s):
         pos = href.find(':') # find the colon in "http:"
         pos = href.find(':', pos+1) # find the next colon, if any
         if pos > 0:
-            text = ': ' + href[pos+1:]
+            text = '<br/>' + href[pos+1:]
             href = href[:pos]
         else:
             text = ''
 
-        img = '<a href="{href}" style="text-decoration:none"><div style="display:flex;border:1px solid black;padding:10;height:178;min-width:178;align-items:center;justify-content:center"><span><span style="text-decoration:underline;">CalPhotos</span>{text}</span></div></a>'.format(href=href, text=text)
+        img = '<a href="{href}" target="_blank" style="text-decoration:none"><div style="display:flex;border:1px solid black;padding:10;height:178;width:178;align-items:center;justify-content:center"><span><span style="text-decoration:underline;">CalPhotos</span>{text}</span></div></a>'.format(href=href, text=text)
 
         return img + horiz_spacer
 
