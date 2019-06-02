@@ -42,8 +42,18 @@ root = 'c:/Users/Chris/Documents/GitHub/bay-area-flowers'
 
 # Keep a copy of the previous html files so that we can
 # compare differences after creating the new html files.
-shutil.rmtree(root + '/prev', ignore_errors=True)
-os.rename(root + '/html', root + '/prev')
+try:
+    shutil.rmtree(root + '/prev', ignore_errors=True)
+except Exception as error:
+    print type(error)
+    print error
+    raise
+try:
+    os.rename(root + '/html', root + '/prev')
+except Exception as error:
+    print type(error)
+    print error
+    raise
 os.mkdir(root + '/html')
 
 
@@ -153,6 +163,40 @@ def get_file_list(subdir, ext):
 
 page_list = get_file_list('txt', 'txt')
 jpg_list = get_file_list('photos', 'jpg')
+thumb_list = get_file_list('thumbs', 'jpg')
+
+# Compare the photos directory with the thumbs directory.
+# If a file exists in photos and not thumbs, create it.
+# If a file is newer in photos than in thumbs, re-create it.
+# If a file exists in thumbs and not photos, delete it.
+# If a file is newer in thumbs than in photos, leave it unchanged.
+for name in thumb_list:
+    if name not in jpg_list:
+        thumb_file = root + '/thumbs/' + name + '.jpg'
+        os.remove(thumb_file)
+
+mod_list = []
+for name in jpg_list:
+    photo_file = root + '/photos/' + name + '.jpg'
+    thumb_file = root + '/thumbs/' + name + '.jpg'
+    if (name not in thumb_list or
+        os.path.getmtime(photo_file) > os.path.getmtime(thumb_file)):
+        mod_list.append(photo_file)
+
+if mod_list:
+    with open(root + "/convert.txt", "w") as w:
+        for filename in mod_list:
+            filename = re.sub(r'/', r'\\', filename)
+            w.write(filename + '\n')
+    root_mod = re.sub(r'/', r'\\', root)
+    cmd = ['C:/Program Files (x86)/IrfanView/i_view32.exe',
+           '/filelist={root}\\convert.txt'.format(root=root_mod),
+           '/aspectratio',
+           '/resize_long=200',
+           '/resample',
+           '/jpgq=80',
+           '/convert={root}\\thumbs\\*.jpg'.format(root=root_mod)]
+    subprocess.Popen(cmd).wait()
 
 # Check if check_page is an ancestor of cur_page (for loop checking).
 def is_ancestor(cur_page, check_page):
@@ -324,13 +368,14 @@ def parse(page, s):
     # Replace {*.jpg} with a 200px image and a link to the full-sized image.
     def repl_jpg(matchobj):
         jpg = matchobj.group(1)
-        filename = "../photos/{jpg}.jpg".format(jpg=jpg)
+        photofile = "../photos/{jpg}.jpg".format(jpg=jpg)
+        thumbfile = "../thumbs/{jpg}.jpg".format(jpg=jpg)
         if jpg in jpg_list:
-            img = '<a href="{filename}"><img src="{filename}" height="{jpg_height}"></a>'.format(filename=filename, jpg_height=jpg_height)
+            img = '<a href="{photofile}"><img src="{thumbfile}" height="{jpg_height}"></a>'.format(photofile=photofile, thumbfile=thumbfile, jpg_height=jpg_height)
             if page not in flower_first_jpg:
                 flower_first_jpg[page] = jpg
         else:
-            img = '<a href="{filename}" style="color:red;"><div style="display:flex;border:1px solid black;padding:10;height:{jpg_height};min-width:{jpg_height};align-items:center;justify-content:center"><span style="color:red;">{jpg}</span></div></a>'.format(filename=filename, jpg_height=jpg_height-22, jpg=jpg)
+            img = '<a href="{photofile}" style="color:red;"><div style="display:flex;border:1px solid black;padding:10;height:{jpg_height};min-width:{jpg_height};align-items:center;justify-content:center"><span style="color:red;">{jpg}</span></div></a>'.format(photofile=photofile, jpg_height=jpg_height-22, jpg=jpg)
 
         return img + horiz_spacer
 
@@ -556,14 +601,10 @@ else:
 # it would be nice to attach colors to individual jpgs of a flower,
 #   e.g. for baby blue eyes (N. menziesii).
 #
-# Resize photos for use as icons to save bandwidth
-#   (especially for mobile users, and especially on a page like all.html)
-#   i_view.exe photos\*.jpg /resize_long=200 /resample /convert=icons\*.jpg
-#
 # Copy all appropriate files to personal Android device.
 #   Access in Firefox with file:///sdcard/...
-#   If favicon points correctly, can save bookmark as widget.
-#   An easy method to search would be nice.
-#     I.e. a search bar on the home page (or every page) would be easier than
-#     opening all.html, hitting the hamburger, and using find in page.
-#   Responsive image and text sizes would also be nice.
+#
+# An easy method to search would be nice.
+#   I.e. a search bar on the home page (or every page) would be easier than
+#   opening all.html, hitting the hamburger, and using find in page.
+# Responsive image and text sizes would also be nice.
