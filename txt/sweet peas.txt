@@ -1,0 +1,7 @@
+<h2>Lathyrus spp.</h2>
+
+{pacific pea-1.jpg} {child:pacific pea}
+
+{broad-leaved sweet pea-.jpg} {child:broad-leaved sweet pea}
+
+See also {vetches} and {vetchlings}.
