@@ -401,7 +401,7 @@ def parse(page, s):
         else:
             text = ''
 
-        img = '<a href="{href}" target="_blank" style="text-decoration:none"><div class="page-thumb-text"><span><span style="text-decoration:underline;">CalPhotos</span>{text}</span></div></a>'.format(href=href, text=text)
+        img = '<a href="{href}" target="_blank" class="enclosed"><div class="page-thumb-text"><span><span style="text-decoration:underline;">CalPhotos</span>{text}</span></div></a>'.format(href=href, text=text)
 
         return img + horiz_spacer
 

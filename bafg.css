@@ -9,6 +9,38 @@
 .horiz-space {
     min-width: 10px;
 }
+div.shrink-box {
+    display: inline-block;
+}
+div.box-color {
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+div.border-all-colors {
+    background: repeating-linear-gradient(-30deg, rgba(192,192,0,0.33), rgba(255,0,0,0.33), rgba(128,0,128,0.33), rgba(255,0,0,0.33), rgba(192,192,0,0.33) 20%);
+    padding: 5px;
+}
+div.bg-white {
+    padding: 5px;
+    background: rgba(255,255,255,0.7);
+}
+div.white {
+    border: 5px solid #F8F8F8;
+}
+div.yellow {
+    border: 5px solid gold;
+}
+div.red {
+    border: 5px solid red;
+}
+div.purple {
+    border: 5px solid purple;
+}
+div.black {
+    border: 5px solid black;
+    margin-bottom: 0px;
+}
 div.photo-box {
     display: flex;
     align-items: center;
@@ -67,6 +99,9 @@ div.list-thumb-missing {
     height: @calc(15vw - 2px);
     max-width: 98px;
     max-height: 98px;
+}
+a.enclosed {
+    text-decoration: none;
 }
 a.external {
     color: DarkGreen;
