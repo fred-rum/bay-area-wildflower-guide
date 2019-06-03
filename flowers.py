@@ -42,20 +42,21 @@ root = 'c:/Users/Chris/Documents/GitHub/bay-area-flowers'
 
 # Keep a copy of the previous html files so that we can
 # compare differences after creating the new html files.
-try:
-    shutil.rmtree(root + '/prev', ignore_errors=True)
-except Exception as error:
-    print type(error)
-    print error
-    raise
-try:
-    os.rename(root + '/html', root + '/prev')
-except Exception as error:
-    print type(error)
-    print error
-    raise
-os.mkdir(root + '/html')
+shutil.rmtree(root + '/prev', ignore_errors=True)
 
+# Apparently Windows sometimes lets the process complete when the
+# remove is not actually done yet, and then the rename fails.
+# In that case, keep retrying the rename until it succeeds.
+done = False
+while not done:
+    try:
+        os.rename(root + '/html', root + '/prev')
+        done = True
+    except WindowsError as error:
+        print type(error)
+        print error
+
+os.mkdir(root + '/html')
 
 # key: page name
 page_parent = {} # a set of names of the page's parent pages
