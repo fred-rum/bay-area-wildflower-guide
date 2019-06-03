@@ -90,7 +90,7 @@ color_page_list = {}
 
 # A few functions need a small horizontal spacer,
 # so we define a common one here.
-horiz_spacer = '<div style="min-width:10;"></div>'
+horiz_spacer = '<div class="horiz-space"></div>'
 
 # Read my observations file (exported iNaturalist) and use it as follows:
 #   Associate common names with scientific names
@@ -267,11 +267,16 @@ def write_parents(w, page):
     w.write('</ul>\n')
 
 def write_header(w, title):
-    w.write('''<head>
+    w.write('''<!-- Copyright 2019 Chris Nelson - All rights reserved. -->
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
 <title>{title}</title>
 <link rel="shortcut icon" href="../favicon/favicon.ico">
 <link rel="icon" sizes="16x16 32x32 64x64" href="../favicon/favicon.ico">
-<link rel="icon" type="image/png" sizes="196x196" href="../favicon/favicon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../favicon/favicon-192.png">
 <link rel="icon" type="image/png" sizes="160x160" href="../favicon/favicon-160.png">
 <link rel="icon" type="image/png" sizes="96x96" href="../favicon/favicon-96.png">
 <link rel="icon" type="image/png" sizes="64x64" href="../favicon/favicon-64.png">
@@ -289,12 +294,13 @@ def write_header(w, title):
 <meta name="msapplication-TileColor" content="#FFFFFF">
 <meta name="msapplication-TileImage" content="../favicon/favicon-144.png">
 <meta name="msapplication-config" content="../favicon/browserconfig.xml">
+<link rel="stylesheet" href="../bafg.css">
 </head>\n'''.format(title=title))
 
 def write_footer(w):
     w.write('''
 <hr/>
-<a href="../index.html">BAFG</a> <span style="color:gray">Copyright 2019 Chris Nelson</span>
+<a href="../index.html">BAFG</a> <span class="copyright">&ndash; Copyright 2019 Chris Nelson</span>
 </body>
 ''')
 
@@ -358,24 +364,24 @@ def parse(page, s):
     # first \n\n or \n+EOF.  Photos can be my own or CalPhotos.
     # The photos and text are grouped together and vertically centered.
     # The text is also put in a <span> for correct whitespacing.
-    s = re.sub(r'((?:\{(?:jpgs|[^\}]+.jpg|https://calphotos.berkeley.edu/[^\}]+)\} *)+)(((?!\n\n).)*)(?=\n(\n|\Z))', r'<div style="display:flex;align-items:center;">\1<span>\2</span></div>', s, flags=re.DOTALL)
+    s = re.sub(r'((?:\{(?:jpgs|[^\}]+.jpg|https://calphotos.berkeley.edu/[^\}]+)\} *)+)(((?!\n\n).)*)(?=\n(\n|\Z))', r'<div class="photo-box">\1<span>\2</span></div>', s, flags=re.DOTALL)
 
     # Replace a pair of newlines with a paragraph separator.
     # (Do this after making specific replacements based on paragraphs,
     # but before replacements that might create empty lines.)
     s = s.replace('\n\n', '\n<p/>\n')
 
-    # Replace {*.jpg} with a 200px image and a link to the full-sized image.
+    # Replace {*.jpg} with a thumbnail image and a link to the full-sized image.
     def repl_jpg(matchobj):
         jpg = matchobj.group(1)
         photofile = "../photos/{jpg}.jpg".format(jpg=jpg)
         thumbfile = "../thumbs/{jpg}.jpg".format(jpg=jpg)
         if jpg in jpg_list:
-            img = '<a href="{photofile}"><img src="{thumbfile}" height="{jpg_height}"></a>'.format(photofile=photofile, thumbfile=thumbfile, jpg_height=jpg_height)
+            img = '<a href="{photofile}"><img src="{thumbfile}" width="200" height="200" class="page-thumb"></a>'.format(photofile=photofile, thumbfile=thumbfile)
             if page not in flower_first_jpg:
                 flower_first_jpg[page] = jpg
         else:
-            img = '<a href="{photofile}" style="color:red;"><div style="display:flex;border:1px solid black;padding:10;height:{jpg_height};min-width:{jpg_height};align-items:center;justify-content:center"><span style="color:red;">{jpg}</span></div></a>'.format(photofile=photofile, jpg_height=jpg_height-22, jpg=jpg)
+            img = '<a href="{photofile}" class="missing"><div class="page-thumb-text"><span>{jpg}</span></div></a>'.format(photofile=photofile, jpg_height=jpg_height-22, jpg=jpg)
 
         return img + horiz_spacer
 
@@ -395,7 +401,7 @@ def parse(page, s):
         else:
             text = ''
 
-        img = '<a href="{href}" target="_blank" style="text-decoration:none"><div style="display:flex;border:1px solid black;padding:10;height:178;width:178;align-items:center;justify-content:center"><span><span style="text-decoration:underline;">CalPhotos</span>{text}</span></div></a>'.format(href=href, text=text)
+        img = '<a href="{href}" target="_blank" style="text-decoration:none"><div class="page-thumb-text"><span><span style="text-decoration:underline;">CalPhotos</span>{text}</span></div></a>'.format(href=href, text=text)
 
         return img + horiz_spacer
 
@@ -410,7 +416,7 @@ def parse(page, s):
         if link in page_list:
             return '<a href="{link}.html">{link}</a>'.format(link=link)
         elif re.match(r'[A-Z][^\s]* [a-z][^\s]*$', link):
-            return '<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={link}" target="_blank" style="color:darkgreen">{link}</a>'.format(link=link)
+            return '<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={link}" target="_blank" class="external">{link}</a>'.format(link=link)
         else:
             return link
 
@@ -495,16 +501,18 @@ parse("other observations", s)
 
 # List a single page, indented by some amount if it is under a parent.
 def list_page(w, page, indent):
-    w.write('<div style="display:flex;align-items:center;">')
     if indent:
-        w.write('<div style="min-width:{indent};"></div>'.format(indent=indent*80))
+        indent_class = ' indent{indent}'.format(indent=indent)
+    else:
+        indent_class = ''
+    w.write('<div class="photo-box {indent_class}">'.format(indent_class=indent_class))
     w.write('<a href="{page}.html">'.format(page=page))
     if page in flower_first_jpg:
-        w.write('<img src="../photos/{jpg}.jpg" height="100">'.format(jpg=flower_first_jpg[page]))
+        w.write('<img src="../photos/{jpg}.jpg" width="200" height="200" class="list-thumb">'.format(jpg=flower_first_jpg[page]))
     else:
-        w.write('<div style="display:flex;border:1px solid black;height=98;min-width:98"></div>')
+        w.write('<div class="list-thumb-missing"></div>')
     if page in flower_sci:
-        name_str = "{page} (<i>{sci}</i>)".format(page=page, sci=flower_sci[page])
+        name_str = "{page}<br/><i>{sci}</i>".format(page=page, sci=flower_sci[page])
     else:
         name_str = page
     w.write('</a>{spacer}<a href="{page}.html">{name_str}</a></div><p></p>\n'.format(spacer=horiz_spacer, page=page, name_str=name_str))
@@ -600,9 +608,6 @@ else:
 # remove photos from containers in page lists
 # it would be nice to attach colors to individual jpgs of a flower,
 #   e.g. for baby blue eyes (N. menziesii).
-#
-# Copy all appropriate files to personal Android device.
-#   Access in Firefox with file:///sdcard/...
 #
 # An easy method to search would be nice.
 #   I.e. a search bar on the home page (or every page) would be easier than
