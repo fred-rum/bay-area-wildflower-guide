@@ -18,7 +18,7 @@ div.box-color {
     margin-bottom: 5px;
 }
 div.border-all-colors {
-    background: repeating-linear-gradient(-30deg, rgba(192,192,0,0.33), rgba(255,0,0,0.33), rgba(128,0,128,0.33), rgba(255,0,0,0.33), rgba(192,192,0,0.33) 20%);
+    background: repeating-linear-gradient(150deg, rgba(192,192,0,0.33), rgba(255,0,0,0.33), rgba(128,0,128,0.33), rgba(0,100,0,0.33), rgba(192,192,0,0.33) 20%);
     padding: 5px;
 }
 div.bg-white {
@@ -37,8 +37,8 @@ div.red {
 div.purple {
     border: 5px solid purple;
 }
-div.black {
-    border: 5px solid black;
+div.other {
+    border: 5px solid darkgreen;
     margin-bottom: 0px;
 }
 div.photo-box {
