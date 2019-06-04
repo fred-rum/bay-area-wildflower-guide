@@ -45,6 +45,11 @@ div.photo-box {
     display: flex;
     align-items: center;
 }
+img.leaf-thumb {
+    height: 40vw;
+    max-height: 200px;
+    width: auto;
+}
 img.page-thumb {
     height: 20vw;
     max-height: 200px;

@@ -378,7 +378,11 @@ def parse(page, s):
         photofile = "../photos/{jpg}.jpg".format(jpg=jpg)
         thumbfile = "../thumbs/{jpg}.jpg".format(jpg=jpg)
         if jpg in jpg_list:
-            img = '<a href="{photofile}"><img src="{thumbfile}" width="200" height="200" class="page-thumb"></a>'.format(photofile=photofile, thumbfile=thumbfile)
+            if page in page_child:
+                img_class = 'page-thumb'
+            else:
+                img_class = 'leaf-thumb'
+            img = '<a href="{photofile}"><img src="{thumbfile}" width="200" height="200" class="{img_class}"></a>'.format(photofile=photofile, thumbfile=thumbfile, img_class=img_class)
             if page not in flower_first_jpg:
                 flower_first_jpg[page] = jpg
         else:
