@@ -613,8 +613,3 @@ else:
 # remove photos from containers in page lists
 # it would be nice to attach colors to individual jpgs of a flower,
 #   e.g. for baby blue eyes (N. menziesii).
-#
-# An easy method to search would be nice.
-#   I.e. a search bar on the home page (or every page) would be easier than
-#   opening all.html, hitting the hamburger, and using find in page.
-# Responsive image and text sizes would also be nice.

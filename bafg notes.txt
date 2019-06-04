@@ -1,0 +1,25 @@
+# An easy method to search would be nice.
+#   I.e. a search bar on every page would be easier than
+#   opening all.html, hitting the hamburger, and using find in page.
+
+https://medium.com/outsystems-experts/javascript-events-unmasked-how-to-create-an-input-mask-for-mobile-fc0df165e8b2
+
+var input = document.getElementById('credit-card-mask'),
+    oldValue,
+    keydownHandler= function(e) {
+      oldValue = e.target.value;
+    },
+    inputHandler= function(e) {
+      var el = e.target,
+          newValue = el.value
+      ;
+    }
+;
+
+input.addEventListener('keydown', keydownHandler);
+input.addEventListener('input', inputHandler);
+
+###############################################################################
+
+Make separate pages (and links) for flower lists (by color and "all")
+with names only (for bandwidth saving) and photos only (for fast skimming).
