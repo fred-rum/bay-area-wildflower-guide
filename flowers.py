@@ -44,7 +44,7 @@ root = 'c:/Users/Chris/Documents/GitHub/bay-area-flowers'
 # compare differences after creating the new html files.
 shutil.rmtree(root + '/prev', ignore_errors=True)
 
-# Apparently Windows sometimes lets the process complete when the
+# Apparently Windows sometimes lets the call complete when the
 # remove is not actually done yet, and then the rename fails.
 # In that case, keep retrying the rename until it succeeds.
 done = False
@@ -53,8 +53,7 @@ while not done:
         os.rename(root + '/html', root + '/prev')
         done = True
     except WindowsError as error:
-        print type(error)
-        print error
+        pass
 
 os.mkdir(root + '/html')
 
