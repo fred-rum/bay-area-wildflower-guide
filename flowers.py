@@ -72,8 +72,6 @@ flower_sci = {} # scientific name
 flower_obs = {} # number of observations
 flower_obs_rg = {} # number of observations that are research grade
 flower_taxon_id = {} # iNaturalist taxon ID
-# first jpg associated with the flower page (used for flower lists)
-flower_first_jpg = {}
 
 # Define a list of subcolors for each primary color.
 # key: primary name
@@ -164,6 +162,17 @@ def get_file_list(subdir, ext):
 page_list = get_file_list('txt', 'txt')
 jpg_list = get_file_list('photos', 'jpg')
 thumb_list = get_file_list('thumbs', 'jpg')
+
+flower_jpg_list = {}
+for jpg in sorted(jpg_list):
+    matchobj = re.match(r'(.*[a-z])[-0-9]+$', jpg)
+    if matchobj:
+        flower = matchobj.group(1)
+        if flower not in flower_jpg_list:
+            flower_jpg_list[flower] = []
+        flower_jpg_list[flower].append(jpg)
+    else:
+        print 'Unrecognized jpg file: {jpg}'.format(jpg=jpg)
 
 # Compare the photos directory with the thumbs directory.
 # If a file exists in photos and not thumbs, create it.
@@ -348,13 +357,9 @@ def parse(page, s):
 
     # Replace {jpgs} with all jpgs that exist for the flower.
     def repl_jpgs(matchobj):
-        jpg_sublist = []
-        ext_pos = len(page)
-        for jpg in sorted(jpg_list):
-            if jpg.startswith(page) and re.match(r'[-0-9]+$', jpg[ext_pos:]):
-                jpg_sublist.append('{{{jpg}.jpg}}'.format(jpg=jpg))
-        if jpg_sublist:
-            return ' '.join(jpg_sublist)
+        if page in flower_jpg_list:
+            jpgs = ['{{{jpg}.jpg}}'.format(jpg=jpg) for jpg in flower_jpg_list[page]]
+            return ' '.join(jpgs)
         else:
             return '{no photos.jpg}'
 
@@ -382,8 +387,6 @@ def parse(page, s):
             else:
                 img_class = 'leaf-thumb'
             img = '<a href="{photofile}"><img src="{thumbfile}" width="200" height="200" class="{img_class}"></a>'.format(photofile=photofile, thumbfile=thumbfile, img_class=img_class)
-            if page not in flower_first_jpg:
-                flower_first_jpg[page] = jpg
         else:
             img = '<a href="{photofile}" class="missing"><div class="page-thumb-text"><span>{jpg}</span></div></a>'.format(photofile=photofile, jpg_height=jpg_height-22, jpg=jpg)
 
@@ -510,16 +513,15 @@ def list_page(w, page, indent):
     else:
         indent_class = ''
     w.write('<div class="photo-box {indent_class}">'.format(indent_class=indent_class))
-    w.write('<a href="{page}.html">'.format(page=page))
-    if page in flower_first_jpg:
-        w.write('<img src="../photos/{jpg}.jpg" width="200" height="200" class="list-thumb">'.format(jpg=flower_first_jpg[page]))
-    else:
-        w.write('<div class="list-thumb-missing"></div>')
+
+    if page in flower_jpg_list:
+        w.write('<a href="{page}.html"><img src="../photos/{jpg}.jpg" width="200" height="200" class="list-thumb"></a>{spacer}'.format(page=page, jpg=flower_jpg_list[page][0], spacer=horiz_spacer))
+
     if page in flower_sci:
         name_str = "{page}<br/><i>{sci}</i>".format(page=page, sci=flower_sci[page])
     else:
         name_str = page
-    w.write('</a>{spacer}<a href="{page}.html">{name_str}</a></div><p></p>\n'.format(spacer=horiz_spacer, page=page, name_str=name_str))
+    w.write('<a href="{page}.html">{name_str}</a></div><p></p>\n'.format(page=page, name_str=name_str))
 
 # For containers, sum the observation counts of all children,
 # *but* if a flower is found via multiple paths, count it only once.

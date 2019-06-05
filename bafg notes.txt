@@ -55,13 +55,16 @@ Probably the latter.  Which means that existing child images and links
 must be updated.
 
 Proposed:
-  {childimg:...} invokes only the selected image, linked to the child.
-  {childname:...} invokes only the name, linked to the child.
-  {child:...} invokes both the primary image and the name, linked to the child.
+  {+img:...} invokes only the selected image, linked to the child.
+  {+name:...} invokes only the name, linked to the child.
+  {+...} invokes both the primary image and the name, linked to the child.
 
 It'd be nice to split the img and text onto separate lines on small
 screens only, e.g. for ceanothus.
   e.g. create photo-box-split with @media condition:
     for small screens change "display: flex;" to "display: block;"
+
+Proposed:
+  {-...}
 
 ###############################################################################
