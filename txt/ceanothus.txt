@@ -1,0 +1,88 @@
+<h2>Ceanothus spp.</h2>
+
+Distinguishing features:
+<ul>
+<li>twig color, whether twigs are ridged</li>
+<li>leaves opposite or alternate</li>
+<li>leaf top warty or hairy or not</li>
+<li>leaf bottom hairy or not</li>
+<li>number of ribs from base of leaf</li>
+<li>inflorescence shape</li>
+</ul>
+
+Flower color is not a good diagnostic.
+
+All leaves are dark green or dull green adaxially (on the upper surface) and paler abaxially (on the lower surface).
+
+{buckbrush-1.jpg} {child:buckbrush}
+<ul>
+<li>Twigs: generally brown to gray-brown, no more than slightly fuzzy</li>
+<li>Leaves:</li>
+<ul>
+<li><b>opposite</b>, occasionally clustered</li>
+<li>6&ndash;30 mm, 3&ndash;18 mm wide</li>
+<li>adaxially glabrous</li>
+<li>abaxially glabrous or with short stiff adpressed hairs, <b>1-ribbed from base</b></li>
+<li>margin entire or teeth &plusmn; sharp <b>(not glandular)</b></li>
+</ul>
+<li>Inflorescence: <b>umbel-like</b> (flowers from a single point)</li>
+<li>Flower: white, pale blue, blue, or lavender</li>
+</ul>
+
+{wartleaf ceanothus-.jpg} {child:wartleaf ceanothus}
+<ul>
+<li>Twigs: <b>green</b> to gray-brown</li>
+<li>Leaves:</li>
+<ul>
+<li>alternate</li>
+<li>11&ndash;50 mm, 6&ndash;15 mm wide</li>
+<li>adaxially <b>glandular-papillate (warty)</b></li>
+<li>abaxially generally <b>densely hairy</b>, 1-ribbed from base</li>
+<li><b>margin rolled under</b>, minutely gland-toothed, teeth 17&ndash;31</li>
+</ul>
+<li>Inflorescence: raceme-like (flowers from pedicels along axis)</li>
+<li>Flower: deep blue</li>
+</ul>
+
+{blueblossom-1.jpg} {child:blueblossom}
+<ul>
+<li>Twigs: <b>green, ridged</b>, angled distally, glabrous</li>
+<li>Leaves:</li>
+<ul>
+<li>alternate</li>
+<li>10&ndash;39 mm, 5&ndash;20 mm wide</li>
+<li>adaxially glabrous</li>
+<li>abaxially glabrous to puberulent between veins or not, 3-ribbed from base, veins &plusmn; raised, sparsely puberulent</li>
+<li>margin may be gland-toothed</li>
+</ul>
+<li>Inflorescence: generally raceme-like (flowers from pedicels along axis) or <b>panicle-like</b> (branched raceme)</li>
+<li>Flower: usually light to deep blue, but may be white</li>
+</ul>
+
+{hairy ceanothus-.jpg} {child:hairy ceanothus}
+<ul>
+<li>Twigs: green to <b>reddish</b>, <b>not ridged</b> or angled, <b>may be hairy</b></li>
+<li>Leaves:</li>
+<ul>
+<li>alternate</li>
+<li>11&ndash;30 mm, 5&ndash;25 mm wide</li>
+<li>adaxially &plusmn; glabrous to <b>short-hairy</b></li>
+<li>abaxially sparsely to <b>densely short-hairy, especially veins</b>, 3-ribbed from base</li>
+<li>margin minutely gland-toothed, teeth 20&ndash;70</li>
+</ul>
+<li>Inflorescence: generally raceme-like (flowers from pedicels along axis)</li>
+<li>Flower: blue to purple-blue (or pale blue or white)</li>
+</ul>
+
+<h3>Other ceanothus</h3>
+<ul>
+<li>sandscrub ceanothus ({Ceanothus dentatus}) - very rare</li>
+<li>coyote ceanothus ({Ceanothus ferrisiae}) - near Anderson Lake</li>
+<li>wavyleaf ceanothus ({Ceanothus foliosus}) - mostly historical except at Mt. Madonna and Mt. Tamalpais</li>
+<li>point reyes ceanothus ({Ceanothus gloriosus}) - only near Mt. Tamalpais</li>
+<li><b>deerbrush ceanothus</b> ({Ceanothus integerrimus}) - mostly Sierra Azul, Big Basin, and Soquel</li>
+<li>chaparral whitethorn ({Ceanothus leucodermis}) - Henry Coe</li>
+<li>mason's ceanothus ({Ceanothus masonii}) - rare near Mt. Tamalpais</li>
+<li>holly-leaved ceanothus ({Ceanothus purpureus}) - not nearby</li>
+<li>tobacco brush ({Ceanothus velutinus}) - Mt. Tamalpais</li>
+<ul>

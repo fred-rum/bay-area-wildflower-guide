@@ -604,7 +604,11 @@ if mod_list or new_list:
                 w.write('<a href="{name}">{name}</a><p/>\n'.format(name=name))
 
     # open the default browser with the created HTML file
-    os.startfile(mod_file)
+    total_list = mod_list + new_list
+    if len(total_list) == 1:
+        os.startfile(root + '/html/' + total_list[0])
+    else:
+        os.startfile(mod_file)
 else:
     print "No files modified."
 
