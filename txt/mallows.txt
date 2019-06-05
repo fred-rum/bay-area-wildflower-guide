@@ -26,3 +26,5 @@ common mallow ({Malva sylvestris})
 <li>petal veins dark</li>
 <li>bractlets 3&ndash;7 mm long, 2&ndash;4 mm wide, free</li>
 </ul>
+
+See also {checkerblooms and checkermallows}.
