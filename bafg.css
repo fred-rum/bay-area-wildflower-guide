@@ -41,9 +41,15 @@ div.other {
     border: 5px solid darkgreen;
     margin-bottom: 0px;
 }
+div.box {
+    border: 1px solid #c8c8c8;
+    padding: 0px 10px;
+    margin: 10px 0px;
+}
 div.photo-box {
     display: flex;
     align-items: center;
+    margin: 10px 0px;
 }
 img.leaf-thumb {
     height: 40vw;

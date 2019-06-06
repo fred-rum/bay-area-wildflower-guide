@@ -521,7 +521,7 @@ def list_page(w, page, indent):
         name_str = "{page}<br/><i>{sci}</i>".format(page=page, sci=flower_sci[page])
     else:
         name_str = page
-    w.write('<a href="{page}.html">{name_str}</a></div><p></p>\n'.format(page=page, name_str=name_str))
+    w.write('<a href="{page}.html">{name_str}</a></div>\n'.format(page=page, name_str=name_str))
 
 # For containers, sum the observation counts of all children,
 # *but* if a flower is found via multiple paths, count it only once.
@@ -554,11 +554,15 @@ def list_matches(w, match_set, indent, color):
     # We initialize the sort with match_set sorted alphabetically.
     # This order is retained for subsets with equal observation counts.
     for page in sorted(sorted(match_set), key=count_flowers, reverse=True):
-        list_page(w, page, indent)
-
         if page in page_child:
+            w.write('<div class="box">\n')
+            list_page(w, page, indent)
             list_matches(w, find_matches(page_child[page], color),
                          indent+1, color)
+            w.write('</div>\n')
+        else:
+            list_page(w, page, indent)
+
 
 for primary in primary_color_list:
     with open(root + "/html/{primary}.html".format(primary=primary), "w") as w:

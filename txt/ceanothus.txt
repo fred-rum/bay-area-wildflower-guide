@@ -85,4 +85,4 @@ All leaves are dark green or dull green adaxially (on the upper surface) and pal
 <li>mason's ceanothus ({Ceanothus masonii}) - rare near Mt. Tamalpais</li>
 <li>holly-leaved ceanothus ({Ceanothus purpureus}) - not nearby</li>
 <li>tobacco brush ({Ceanothus velutinus}) - Mt. Tamalpais</li>
-<ul>
+</ul>
