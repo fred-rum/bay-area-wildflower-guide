@@ -42,8 +42,6 @@ Allow genus names to be attached to container pages.
     external links at the bottom of the page.
   (and fix baby blue eyes container page)
 
-Make backlinks to color pages and "all flowers" lowercase.
-
 if a grandparent links to a parent, and the parent doesn't have its own jpg,
    use its first child's jpg.  (I.e. when determining parent-child
    relationships, also update flower_jpg_list.)

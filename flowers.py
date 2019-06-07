@@ -284,9 +284,9 @@ def write_parents(w, page):
         for primary in primary_color_list:
             for color in primary_color_list[primary]:
                 if color in page_color[page]:
-                    w.write('<li><a href="{primary}.html#{color}">{ucolor} flowers</a></li>\n'.format(primary=primary, color=color, ucolor=color.capitalize()))
+                    w.write('<li><a href="{primary}.html#{color}">{color} flowers</a></li>\n'.format(primary=primary, color=color))
 
-    w.write('<li><a href="all.html">All flowers</a></li>\n')
+    w.write('<li><a href="all.html">all flowers</a></li>\n')
     w.write('</ul>\n')
 
 def write_header(w, title):
