@@ -249,7 +249,7 @@ def read_txt(page):
     s = re.sub(r'{child:([^}]+)}', repl_child, s)
     page_txt[page] = s
 
-def sci_to_elab(sci):
+def get_elab(sci):
     matchobj = re.match(r'([^ ]+ [^ ]+) ([^ ]+)$', sci)
     if matchobj:
         # three words in the scientific name implies a subspecies
@@ -262,7 +262,7 @@ def sci_to_elab(sci):
 def write_external_links(w, page):
     if page in flower_sci:
         sci = flower_sci[page]
-        elab = sci_to_elab(sci)
+        elab = get_elab(sci)
         w.write('<p/>')
         w.write('<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank">CalFlora</a> &ndash;\n'.format(elab=elab));
         w.write('<a href="https://calphotos.berkeley.edu/cgi/img_query?where-taxon={elab}" target="_blank">CalPhotos</a> &ndash;\n'.format(elab=elab));
@@ -341,7 +341,7 @@ def parse(page, s):
     # Replace {sci} with the flower's scientific name.
     def repl_sci(matchobj):
         if page in flower_sci:
-            return '<b><i>{elab}</i></b><p/>'.format(elab=sci_to_elab(flower_sci[page]))
+            return '<b><i>{elab}</i></b><p/>'.format(elab=get_elab(flower_sci[page]))
         else:
             return '<b><i><span style="color:red">Scientific name not found.</span></i></b><p/>'
 
@@ -533,7 +533,7 @@ def list_page(w, page, indent):
         w.write('<a href="{page}.html"><img src="../photos/{jpg}.jpg" width="200" height="200" class="list-thumb"></a>{spacer}'.format(page=page, jpg=flower_jpg_list[page][0], spacer=horiz_spacer))
 
     if page in flower_sci:
-        name_str = "{page}<br/><i>{sci}</i>".format(page=page, sci=flower_sci[page])
+        name_str = "{page}<br/><i>{sci}</i>".format(page=page, sci=get_elab(flower_sci[page]))
     else:
         name_str = page
     w.write('<a href="{page}.html">{name_str}</a></div>\n'.format(page=page, name_str=name_str))
