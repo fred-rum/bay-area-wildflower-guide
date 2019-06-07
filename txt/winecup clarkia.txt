@@ -1,0 +1,31 @@
+<h2>Clarkia purpurea</h2>
+
+Distinguishing features:
+<ul>
+<li>petal length</li>
+<li>leaf length and shape</li>
+</ul>
+
+Style vs. stamen length seems less useful than stated in Jepson.  Dense vs. open inflorescence is also hard to distinguish.
+
+{four-spot-.jpg} {child:four-spot}
+<ul>
+<li>petals 5&ndash;15 mm (generally &plusmn; 10 mm)</li>
+<li>petals lavender to purple or dark wine-red, often with a purple spot near middle or distally</li>
+</ul>
+
+{Clarkia purpurea ssp. purpurea}
+<ul>
+<li>petals 15&ndash;25 mm</li>
+<li>leaf 1.5&ndash;4.5 cm, broadly lanceolate to elliptic or ovate</li>
+<li>inflorescence dense</li>
+<li>petals lavender to purple or purple-red, often lighter proximally, often with a darker spot distally</li>
+</ul>
+
+{Clarkia purpurea ssp. viminea}
+<ul>
+<li>petals 15&ndash;25 mm</li>
+<li>leaf 3&ndash;7 cm, linear to narrowly lanceolate</li>
+<li>inflorescence open</li>
+<li>petals lavender to purple, with darker distal spot, darker proximally or not</li>
+</ul>

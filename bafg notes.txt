@@ -40,8 +40,24 @@ Allow genus names to be attached to container pages.
   if the scientific name is not specified, then
     disable the current behavior of including observation counts and
     external links at the bottom of the page.
+  (and fix baby blue eyes container page)
 
 Make backlinks to color pages and "all flowers" lowercase.
+
+Handle subspecies better.
+  iNaturalist needs them without the "ssp."/"var."/etc. qualifier
+  CalFlora and CalPhotos need them with the qualifier
+  Jepson does not need the qualifier (and would spell it "subsp." if it did)
+  Might be easiest to just strip off the subspecies and search for the species.
+    (While printing the subspecies on the page for the user to refine with.)
+  Or have a way to specify the qualifier.
+
+More on subspecies:
+  If there's no photo for a species, pick one from a random subspecies to use.
+  Better: if a parent doesn't have a jpg, use its first child's jpg.
+
+it would be nice to attach colors to individual jpgs of a flower,
+  e.g. for baby blue eyes (N. menziesii).
 
 ###############################################################################
 
@@ -63,6 +79,9 @@ It'd be nice to split the img and text onto separate lines on small
 screens only, e.g. for ceanothus.
   e.g. create photo-box-split with @media condition:
     for small screens change "display: flex;" to "display: block;"
+I'm not sure it's possible to leave the child name on the img line and
+  drop out the remaining lines.  They're currently all in one span.
+  Making it two spans puts them in separate columns.
 
 Proposed:
   {-...}

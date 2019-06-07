@@ -617,8 +617,3 @@ if mod_list or new_list:
         os.startfile(mod_file)
 else:
     print "No files modified."
-
-# TODO:
-# remove photos from containers in page lists
-# it would be nice to attach colors to individual jpgs of a flower,
-#   e.g. for baby blue eyes (N. menziesii).

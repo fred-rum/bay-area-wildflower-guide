@@ -1,0 +1,81 @@
+<h2>Clarkia spp.</h2>
+
+Distinguishing features:
+<ul>
+<li>corolla shape and color distribution</li>
+<li>buds pendant or not</li>
+<li>all 4 sepals staying fused or not</li>
+<li>ovary 4-grooved or 8-grooved</li>
+</ul>
+
+<h3>Unique corolla shapes</h3>
+
+{elegant clarkia-1.jpg} {child:elegant clarkia}
+<ul>
+<li>found everywhere</li>
+</ul>
+
+{red ribbons-.jpg} {child:red ribbons}
+<ul>
+<li>scattered throughout the bay area</li>
+</ul>
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1210+0994}
+fairy fans ({Clarkia breweri})
+<ul>
+<li>Henry Coe, Sierra Azul and vicinity</li>
+<ul>
+
+<h3>Standard corolla shapes, buds erect or reflexed</h3>
+
+{four-spot-.jpg} {child:winecup clarkia}
+<ul>
+<li>sepals all coming free or staying fused in pairs</li>
+<li>found everywhere</li>
+</ul>
+
+{ruby chalice clarkia-.jpg} {child:ruby chalice clarkia}
+<ul>
+<li>all 4 sepals staying fused</li>
+<li>ovary and immature fruit 4-grooved</li>
+<li>petals with +- red spot or zone at base</li>
+<li>petals 10--30 mm; stigma exserted beyond anthers</li>
+<li>found everywhere</li>
+</ul>
+
+{Clarkia franciscana}
+<ul>
+<li>all 4 sepals staying fused</li>
+<li>ovary and immature fruit 4-grooved</li>
+<li>petals with +- red spot or zone at base</li>
+<li>petals 5--13 mm; stigma not exserted beyond anthers</li>
+<li>Redwood Regional Park</li>
+</ul>
+
+{Clarkia amoena huntiana}
+<ul>
+<li>all 4 sepals staying fused</li>
+<li>ovary and immature fruit 4-grooved</li>
+<li>petals with red spot or marks near middle</li>
+<li>Marin</li>
+</ul>
+
+{Clarkia affinis}
+<li>all 4 sepals staying fused</li>
+<li>ovary and immature fruit 8-grooved</li>
+<li>Sunol, Pleaston Ridge, only historically on the peninsula</li>
+</ul>
+
+<h3>Standard corolla shapes, buds pendent</h3>
+
+(I haven't sorted these by distinguishing features because I've never needed to distinguish them.)
+
+{Clarkia biloba biloba} - Mt. Diablo
+
+{Clarkia epilobioides} - Henry Coe, Sierra Azul, and maybe Rancho San Antonio
+
+{Clarkia gracilis} - scattered in Diablo range
+
+{Clarkia modesta} - scattered in Diablo range
+
+{Clarkia rhomboidea} - Sierra Azul
