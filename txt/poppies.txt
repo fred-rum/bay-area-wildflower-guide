@@ -1,15 +1,31 @@
 <h2>Eschscholzia spp.</h2>
-{california poppy-2.jpg}
-The {child:california poppy} has a distinct pink disc below the corolla.  It is by far the most common poppy in the bay area.
+{california poppy:california poppy-2.jpg} {child:california poppy}
+<ul>
+<li>has a distinct pink disc below the corolla</li>
+<li>by far the most common poppy in the bay area</li>
+</ul>
 
-{tufted poppy-2.jpg}
-The {child:tufted poppy} has no more than an indistinct disc below the corolla.  Its recepticle slants smoothly down to the width of the stem.  This poppy can be found at Pinnacles NP, but is extremely rare in the bay area.
+{tufted poppy:tufted poppy-2.jpg} {child:tufted poppy}
+<ul>
+<li>has no more than an indistinct disc below the corolla</li>
+<li>its recepticle slants smoothly down to the width of the stem</li>
+<li>can be found at Pinnacles NP, but is extremely rare in the bay area</li>
+</ul>
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0317+2239: recepticle}
 The diamond-petaled california poppy ({Eschscholzia rhombipetala}) also has no more than an indistinct disc below the corolla.  Its recepticle looks comparatively bloated, as it is wide at the top before slanting down to the width of the stem.  This poppy can be found east of Mt. Diablo, but is unknown in the rest of the bay area.
 
 No other poppies are known to grow wild in the bay area in modern times.
 <h2>Other poppies</h2>
-{wind poppy-1.jpg} The {child:wind poppy} is in a different genus in the poppy family. Its corolla and leaves look different from Eschscholzia.
 
-{bush poppy-1.jpg} The {child:bush poppy} is in a different genus in the poppy family.  It grows on a large bush, so it cannot be mistaken for Eschscholzia.
+These "poppies" are not in the Eschscholzia genus.
+
+{+wind poppy}
+<ul>
+<li>corolla and leaves look different from Eschscholzia</li>
+</ul>
+
+{+bush poppy}
+<ul>
+<li>grows on a large bush, so it cannot be mistaken for Eschscholzia</li>
+</ul>

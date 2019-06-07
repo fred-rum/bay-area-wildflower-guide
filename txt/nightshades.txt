@@ -8,7 +8,7 @@ Distinguishing features:
 <li>Leaf shape.  There is some overlap, but the shapes are often distinct.</li>
 </ul>
 
-{bluewitch nightshade-.jpg} {child:bluewitch nightshade} 
+{+bluewitch nightshade} 
 <ul>
 <li>stem hairs generally dense, branched</li>
 <li>leaf ovate, obovate, or elliptic, generally entire</li>
@@ -37,7 +37,7 @@ Flower distinguishing features:
 
 Some features are variable within a species, but if a <b>bold feature</b> is seen, it is diagnostic.
 
-{black nightshade-1.jpg} {black nightshade}
+{+black nightshade}
 <ul>
 <li>corolla: corolla 10 mm wide, white</li>
 <li>leaf: 4&ndash;7 cm, entire to coarsely wavy-toothed</li>
@@ -45,7 +45,7 @@ Some features are variable within a species, but if a <b>bold feature</b> is see
 <li>fruit: <b>dull</b></li>
 </ul>
 
-{american black nightshade--2.jpg} {american black nightshade}
+{american black nightshade:american black nightshade--2.jpg} {child:american black nightshade}
 <ul>
 <li>corolla: corolla <b>3&ndash;6 mm wide</b>, white</li>
 <li>leaf: 2&ndash;15 cm, entire to coarsely wavy-toothed</li>
@@ -53,7 +53,7 @@ Some features are variable within a species, but if a <b>bold feature</b> is see
 <li>fruit: <b>glossy</b> w/ <b>sepals reflexed</b></li>
 </ul>
 
-{greenspot nightshade-.jpg} {greenspot nightshade}
+{+greenspot nightshade}
 <ul>
 <li>corolla: corolla &plusmn;10 mm wide, <b>white-lavender</b>, puberulent below</li>
 <li>leaf: 1&ndash;9 cm, entire to coarsely irregularly <b>toothed</b></li>

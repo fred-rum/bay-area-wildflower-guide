@@ -1,4 +1,4 @@
-{red vetchling-.jpg} {child:red vetchling}
+{+red vetchling}
 <ul>
 <li>inflorescence axis not extended beyond flower.</li>
 <li>calyx bowl much shorter than calyx lobes.</li>

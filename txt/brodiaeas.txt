@@ -9,7 +9,7 @@ Distinguishing characteristics:
 
 <a href="https://www2.palomar.edu/users/warmstrong/brosr1.htm">Labeled photos of brodiaea staminodes.</a>
 
-{harvest brodiaea-.jpg} {child:harvest brodiaea}
+{+harvest brodiaea}
 <ul>
 <li>peduncle (flower stem) 10&ndash;50 cm.</li>
 <li>perianth (flower) 29&ndash;47 mm (long? wide?)</li>
@@ -17,7 +17,7 @@ Distinguishing characteristics:
 <li>elevation < 8000 ft.</li>
 </ul>
 
-{dwarf brodiaea-.jpg} {child:dwarf brodiaea}
+{+dwarf brodiaea}
 <ul>
 <li>peduncle (flower stem) 0.5&ndash;7 cm.</li>
 <li>perianth (flower) 15&ndash;40 mm (long? wide?)</li>

@@ -1,6 +1,54 @@
-# An easy method to search would be nice.
-#   I.e. a search bar on every page would be easier than
-#   opening all.html, hitting the hamburger, and using find in page.
+###############################################################################
+
+Format of .txt files
+
+Two newlines in a row (i.e. a blank line) is a paragraph division: <p/>
+
+Image links:
+
+{[img].jpg} is replaced with a thumbnail of the image and a link to the
+full-size image.
+
+{jpgs} is replaced with all images that start with the page's name.
+
+{[page]:[img].jpg} is replaced with a thumbnail of the image and a link
+to the page.
+
+{https://calphotos.berkeley.edu/[...]} is replaced with a blank
+thumbnail-sized box that links to the named page.  If the page is
+followed by '|[text]', the text is put inside the box.
+
+If a jpg or calphotos link starts a paragraph that has additional
+elements in it, all such elements (including free text) is put in a
+flexbox and centered vertically with respect to each other.
+
+Page links:
+
+{[page]} is replaced with a link to the page.  This does not create a
+parent-child page relationship.  If I don't have a corresponding page,
+and the page name looks like a scientific name, link to CalFlora instead.
+
+{child:[page]} is replaced with a link to the page.  This also records
+a relationship between the parent (the current page) and the child (the
+linked page).
+
+{+[page]} is replaced with two links to the page.  The first link is
+from a thumbnail of the first flower associated with the page.  The
+second link is from the name of the page (common name + scientific name).
+A parent-child relationship is also recorded.
+
+Other:
+
+{sci} is replaced with the flower's scientific name.
+
+{obs} is replaced with the iNaturalist observation count and linked to
+the matching observations on iNaturalist.
+
+###############################################################################
+
+An easy method to search would be nice.
+  I.e. a search bar on every page would be easier than
+  opening all.html, hitting the hamburger, and using find in page.
 
 https://medium.com/outsystems-experts/javascript-events-unmasked-how-to-create-an-input-mask-for-mobile-fc0df165e8b2
 
@@ -48,6 +96,10 @@ if a grandparent links to a parent, and the parent doesn't have its own jpg,
 
 it would be nice to attach colors to individual jpgs of a flower,
   e.g. for baby blue eyes (N. menziesii).
+
+it'd be nice to have a shorthand for bulleted lists.  E.g. {-[...]-}
+surrounds the contents with <ul>...</ul> and surrounds each line with
+<li>...</li>.
 
 ###############################################################################
 

@@ -1,8 +1,14 @@
 <h2>Nemophila spp.</h2>
 
-{baby blue eyes-1.jpg} {child:baby blue eyes} (Nemophila menziesii) - common throughout the bay area.
+{baby blue eyes-1.jpg} {child:baby blue eyes}
+<ul>
+<li>common throughout the bay area</li>
+</ul>
 
-{white nemophila-.jpg} {white nemophila} (Nemophila heterophylla) - scattered throughout the bay area.
+{white nemophila-.jpg} {white nemophila}
+<ul>
+<li>scattered throughout the bay area</li>
+</ul>
 
 {child:small flowered nemophila} ({Nemophila parviflora}) - scattered throughout the bay area.
 

@@ -17,14 +17,15 @@ parachute of wings to catch the wind.
 
 <h2>blow wives</h2>
 
-{blow wives-.jpg} {child:blow wives} 
+{+blow wives} 
 
 <h2>silverpuffs</h2>
 
 <h3>Uropappus</h3>
 
-{Uropappus lindleyi-.jpg}
-There is only one species of Uropappus, {child:Uropappus lindleyi}.
+There is only one species of Uropappus.
+
+{+Uropappus lindleyi}
 <ul>
 <li>Seeds are very dark or black.</li>
 <li>Each scale is notched once at the tip where the bristle emerges.</li>
@@ -73,8 +74,7 @@ Ordered roughly by scale length.
 <li>Rare near Redwood Park and Mt. Diablo.</li>
 </ul>
 
-{douglas' silverpuffs-.jpg}
-{child:douglas' silverpuffs} (Microseris douglasii)
+{+douglas' silverpuffs}
 <ul>
 <li>Seeds 3&ndash;10 mm.</li>
 <li>&le; 5 scales, each tiny&ndash;6.5 mm; if &ge; 1 mm, becoming curved throughout and strongly inrolled.</li>
@@ -83,8 +83,7 @@ Ordered roughly by scale length.
 <li>Found everywhere east of Skyline Blvd.</li>
 </ul>
 
-{Microseris acuminata-.jpg}
-{Microseris acuminata}
+{+Microseris acuminata}
 <ul>
 <li>Seeds 4.5&ndash;7 mm, flared at tip.</li>
 <li>5 scales, each 3.5&ndash;11 mm, barely inrolled, midrib > 1/5 scale width.</li>

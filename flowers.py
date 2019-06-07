@@ -163,6 +163,28 @@ page_list = get_file_list('txt', 'txt')
 jpg_list = get_file_list('photos', 'jpg')
 thumb_list = get_file_list('thumbs', 'jpg')
 
+def get_page_from_jpg(jpg):
+    return re.sub(r'[-0-9]+$', r'', jpg)
+
+def get_elab(sci):
+    matchobj = re.match(r'([^ ]+ [^ ]+) ([^ ]+)$', sci)
+    if matchobj:
+        # three words in the scientific name implies a subspecies
+        # (or variant, or whatever).  Default to "ssp."
+        return '{species} ssp. {ssp}'.format(species=matchobj.group(1),
+                                             ssp=matchobj.group(2))
+    else:
+        return sci
+
+def get_full(page):
+    if page in flower_sci:
+        if flower_sci[page] == page:
+            return "<i>{page}</i>".format(page=page)
+        else:
+            return "{page}<br/><i>{sci}</i>".format(page=page, sci=get_elab(flower_sci[page]))
+    else:
+        return page
+
 flower_jpg_list = {}
 for jpg in sorted(jpg_list):
     matchobj = re.match(r'(.*[a-z])[-0-9]+$', jpg)
@@ -242,22 +264,16 @@ def read_txt(page):
     # Define the re.sub replacement function inside the calling function
     # so that it has access to the calling context.
     def repl_child(matchobj):
-        child = matchobj.group(1)
+        x = matchobj.group(1)
+        child = matchobj.group(2)
         assign_child(page, child)
-        return '{' + child + '}'
+        if x == '+':
+            return '{' + child + ':' + child + '.jpg} {' + child + '}'
+        else:
+            return '{' + child + '}'
 
-    s = re.sub(r'{child:([^}]+)}', repl_child, s)
+    s = re.sub(r'{(child:|\+)([^}]+)}', repl_child, s)
     page_txt[page] = s
-
-def get_elab(sci):
-    matchobj = re.match(r'([^ ]+ [^ ]+) ([^ ]+)$', sci)
-    if matchobj:
-        # three words in the scientific name implies a subspecies
-        # (or variant, or whatever).  Default to "ssp."
-        return '{species} ssp. {ssp}'.format(species=matchobj.group(1),
-                                             ssp=matchobj.group(2))
-    else:
-        return sci
 
 def write_external_links(w, page):
     if page in flower_sci:
@@ -393,16 +409,36 @@ def parse(page, s):
     # Replace {*.jpg} with a thumbnail image and a link to the full-sized image.
     def repl_jpg(matchobj):
         jpg = matchobj.group(1)
-        photofile = "../photos/{jpg}.jpg".format(jpg=jpg)
-        thumbfile = "../thumbs/{jpg}.jpg".format(jpg=jpg)
+
+        # Decompose a jpg reference of the form {[page]:[img].jpg}
+        pos = jpg.find(':')
+        if pos > 0:
+            link = jpg[:pos]
+            jpg = jpg[pos+1:]
+            link_to_jpg = False
+        else:
+            link_to_jpg = True
+
+        # If the "jpg" name is actually a flower name,
+        # use the first jpg of that flower.
+        if jpg not in jpg_list and jpg in flower_jpg_list:
+            jpg = flower_jpg_list[jpg][0]
+
+        thumb = '../thumbs/{jpg}.jpg'.format(jpg=jpg)
+
+        if link_to_jpg:
+            href = '../photos/{jpg}.jpg'.format(jpg=jpg)
+        else:
+            href = '{link}.html'.format(link=link)
+
         if jpg in jpg_list:
             if page in page_child:
                 img_class = 'page-thumb'
             else:
                 img_class = 'leaf-thumb'
-            img = '<a href="{photofile}"><img src="{thumbfile}" width="200" height="200" class="{img_class}"></a>'.format(photofile=photofile, thumbfile=thumbfile, img_class=img_class)
+            img = '<a href="{href}"><img src="{thumb}" width="200" height="200" class="{img_class}"></a>'.format(href=href, thumb=thumb, img_class=img_class)
         else:
-            img = '<a href="{photofile}" class="missing"><div class="page-thumb-text"><span>{jpg}</span></div></a>'.format(photofile=photofile, jpg_height=jpg_height-22, jpg=jpg)
+            img = '<a href="{href}" class="missing"><div class="page-thumb-text"><span>{jpg}</span></div></a>'.format(href=href, jpg_height=jpg_height-22, jpg=jpg)
 
         return img + horiz_spacer
 
@@ -435,7 +471,7 @@ def parse(page, s):
     def repl_link(matchobj):
         link = matchobj.group(1)
         if link in page_list:
-            return '<a href="{link}.html">{link}</a>'.format(link=link)
+            return '<a href="{link}.html">{full}</a>'.format(link=link, full=get_full(link))
         elif link[0].isupper():
             # Starts with a capital letter: must be a scientific name.
             return '<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={link}" target="_blank" class="external">{link}</a>'.format(link=link)
@@ -461,7 +497,7 @@ for page in page_list:
 
 # Create txt for all unassociated jpgs.
 for name in sorted(jpg_list):
-    page = re.sub(r'[-0-9]+$', r'', name)
+    page = get_page_from_jpg(name)
     if page not in page_list:
         page_list.append(page)
         page_txt[page] = '{default}'
@@ -532,11 +568,7 @@ def list_page(w, page, indent):
     if page in flower_jpg_list:
         w.write('<a href="{page}.html"><img src="../photos/{jpg}.jpg" width="200" height="200" class="list-thumb"></a>{spacer}'.format(page=page, jpg=flower_jpg_list[page][0], spacer=horiz_spacer))
 
-    if page in flower_sci:
-        name_str = "{page}<br/><i>{sci}</i>".format(page=page, sci=get_elab(flower_sci[page]))
-    else:
-        name_str = page
-    w.write('<a href="{page}.html">{name_str}</a></div>\n'.format(page=page, name_str=name_str))
+    w.write('<a href="{page}.html">{full}</a></div>\n'.format(page=page, full=get_full(page)))
 
 # For containers, sum the observation counts of all children,
 # *but* if a flower is found via multiple paths, count it only once.

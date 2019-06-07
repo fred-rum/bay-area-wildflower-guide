@@ -10,12 +10,12 @@ Distinguishing features:
 
 <h3>Unique corolla shapes</h3>
 
-{elegant clarkia-1.jpg} {child:elegant clarkia}
+{+elegant clarkia}
 <ul>
 <li>found everywhere</li>
 </ul>
 
-{red ribbons-.jpg} {child:red ribbons}
+{+red ribbons}
 <ul>
 <li>scattered throughout the bay area</li>
 </ul>
@@ -28,13 +28,13 @@ fairy fans ({Clarkia breweri})
 
 <h3>Standard corolla shapes, buds erect or reflexed</h3>
 
-{four-spot-.jpg} {child:winecup clarkia}
+{winecup clarkia:four-spot-.jpg} {child:winecup clarkia}
 <ul>
 <li>sepals all coming free or staying fused in pairs</li>
 <li>found everywhere</li>
 </ul>
 
-{ruby chalice clarkia-.jpg} {child:ruby chalice clarkia}
+{+ruby chalice clarkia}
 <ul>
 <li>all 4 sepals staying fused</li>
 <li>ovary and immature fruit 4-grooved</li>

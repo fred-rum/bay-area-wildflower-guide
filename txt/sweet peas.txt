@@ -6,12 +6,12 @@ Distinguishing features:
 <li>wings or angles on stem</li>
 </ul>
 
-{broad-leaved sweet pea-.jpg} {child:broad-leaved sweet pea}
+{+broad-leaved sweet pea}
 <ul>
 <li><b>2 leaflets</b> per leaf</li>
 </ul>
 
-{pacific pea-1.jpg} {child:pacific pea}
+{+pacific pea}
 <ul>
 <li>2&ndash;16 leaflets per leaf, > 2 at least on some leaves</li>
 <li>stem often sharply angled or flanged (angles or flanges < 1 mm wide)</li>

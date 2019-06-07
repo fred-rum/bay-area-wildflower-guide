@@ -8,7 +8,7 @@ Distinguishing features:
 
 Style vs. stamen length seems less useful than stated in Jepson.  Dense vs. open inflorescence is also hard to distinguish.
 
-{four-spot-.jpg} {child:four-spot}
+{+four-spot}
 <ul>
 <li>petals 5&ndash;15 mm (generally &plusmn; 10 mm)</li>
 <li>leaf 1.5&ndash;5 cm, generally linear to lanceolate</li>

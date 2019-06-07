@@ -9,7 +9,7 @@ Distinguishing features:
 
 Although the leaves have general difference, there is enough variety within a species to make them difficult to use as diagnostic tools.  In addition, some of the characteristics described by Jepson cannot be seen in CalPhotos.
 
-{california blackberry-2.jpg} {child:california blackberry}
+{california blackberry:california blackberry-2.jpg} {child:california blackberry}
 <ul>
 <li>Plant: prostrate to decumbent</li>
 <li>Prickles: <b>weak, slender</b>, straight</li>
@@ -18,7 +18,7 @@ Although the leaves have general difference, there is enough variety within a sp
 <li>Fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b></li>
 </ul>
 
-{himalayan blackberry-2.jpg} {child:himalayan blackberry}
+{himalayan blackberry:himalayan blackberry-2.jpg} {child:himalayan blackberry}
 <ul>
 <li>Plant: to 3 m, arched to mounded</li>
 <li>Prickles: <b>stout, wide-based</b>, straight or curved</li>
@@ -27,7 +27,7 @@ Although the leaves have general difference, there is enough variety within a sp
 <li>Fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b></li>
 </ul>
 
-{thimbleberry-2.jpg} {child:thimbleberry}
+{thimbleberry:thimbleberry-2.jpg} {child:thimbleberry}
 <ul>
 <li>Plant 0.5&ndash;2.5 m, erect</li>
 <li><b>No prickles</b></li>

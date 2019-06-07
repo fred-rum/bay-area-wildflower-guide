@@ -12,6 +12,6 @@ Distinguishing features:
 
 I've made very few currant/gooseberry observations, and my identifications are not firm.
 
-{chaparral currant-.jpg} {child:chaparral currant}
+{+chaparral currant}
 
-{canyon gooseberry-.jpg} {child:canyon gooseberry}
+{+canyon gooseberry}

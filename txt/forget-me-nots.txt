@@ -1,6 +1,6 @@
 <h2>Myosotis spp.</h2>
 
-{broadleaf forget-me-not-1.jpg} {child:broadleaf forget-me-not}
+{+broadleaf forget-me-not}
 <ul>
 <li>corolla 5&ndash;10 mm wide, blue (but pink when young), prominent yellow ring in center.</li>
 <li>inflorescence alternating below; flowers denser at the tip, possibly resembling a fiddleneck-like spiral.</li>

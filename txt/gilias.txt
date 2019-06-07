@@ -2,7 +2,7 @@
 
 <h3>Single-color gilias</h3>
 
-{california gilia-1.jpg} {child:california gilia}
+{+california gilia}
 <ul>
 <li>flower head <b>hemispheric or 1&ndash;8 flowers</b></li>
 <li>corolla 5&ndash;21 mm, purple to white</li>
@@ -16,7 +16,7 @@
 
 <h3>Multi-color gilias</h3>
 
-{bird's-eye gilia-.jpg} {child:bird's-eye gilia}
+{+bird's-eye gilia}
 <ul>
 <li>many branches from base, spreading</li>
 <li>open clusters with 2&ndash;5 flowers</li>

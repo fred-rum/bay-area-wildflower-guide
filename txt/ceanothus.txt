@@ -14,7 +14,7 @@ Flower color is not a good diagnostic.
 
 All leaves are dark green or dull green adaxially (on the upper surface) and paler abaxially (on the lower surface).
 
-{buckbrush-1.jpg} {child:buckbrush}
+{+buckbrush}
 <ul>
 <li>Twigs: generally brown to gray-brown, no more than slightly fuzzy</li>
 <li>Leaves:</li>
@@ -29,7 +29,7 @@ All leaves are dark green or dull green adaxially (on the upper surface) and pal
 <li>Flower: white, pale blue, blue, or lavender</li>
 </ul>
 
-{wartleaf ceanothus-.jpg} {child:wartleaf ceanothus}
+{+wartleaf ceanothus}
 <ul>
 <li>Twigs: <b>green</b> to gray-brown</li>
 <li>Leaves:</li>
@@ -44,7 +44,7 @@ All leaves are dark green or dull green adaxially (on the upper surface) and pal
 <li>Flower: deep blue</li>
 </ul>
 
-{blueblossom-1.jpg} {child:blueblossom}
+{+blueblossom}
 <ul>
 <li>Twigs: <b>green, ridged</b>, angled distally, glabrous</li>
 <li>Leaves:</li>
@@ -59,7 +59,7 @@ All leaves are dark green or dull green adaxially (on the upper surface) and pal
 <li>Flower: usually light to deep blue, but may be white</li>
 </ul>
 
-{hairy ceanothus-.jpg} {child:hairy ceanothus}
+{+hairy ceanothus}
 <ul>
 <li>Twigs: green to <b>reddish</b>, <b>not ridged</b> or angled, <b>may be hairy</b></li>
 <li>Leaves:</li>
