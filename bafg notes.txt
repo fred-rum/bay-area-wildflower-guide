@@ -44,17 +44,9 @@ Allow genus names to be attached to container pages.
 
 Make backlinks to color pages and "all flowers" lowercase.
 
-Handle subspecies better.
-  iNaturalist needs them without the "ssp."/"var."/etc. qualifier
-  CalFlora and CalPhotos need them with the qualifier
-  Jepson does not need the qualifier (and would spell it "subsp." if it did)
-  Might be easiest to just strip off the subspecies and search for the species.
-    (While printing the subspecies on the page for the user to refine with.)
-  Or have a way to specify the qualifier.
-
-More on subspecies:
-  If there's no photo for a species, pick one from a random subspecies to use.
-  Better: if a parent doesn't have a jpg, use its first child's jpg.
+if a grandparent links to a parent, and the parent doesn't have its own jpg,
+   use its first child's jpg.  (I.e. when determining parent-child
+   relationships, also update flower_jpg_list.)
 
 it would be nice to attach colors to individual jpgs of a flower,
   e.g. for baby blue eyes (N. menziesii).
@@ -87,3 +79,5 @@ Proposed:
   {-...}
 
 ###############################################################################
+
+Note differences between mallows and checkermallows.

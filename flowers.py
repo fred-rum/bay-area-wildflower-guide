@@ -249,12 +249,26 @@ def read_txt(page):
     s = re.sub(r'{child:([^}]+)}', repl_child, s)
     page_txt[page] = s
 
+def sci_to_elab(sci):
+    matchobj = re.match(r'([^ ]+ [^ ]+) ([^ ]+)$', sci)
+    if matchobj:
+        # three words in the scientific name implies a subspecies
+        # (or variant, or whatever).  Default to "ssp."
+        return '{species} ssp. {ssp}'.format(species=matchobj.group(1),
+                                             ssp=matchobj.group(2))
+    else:
+        return sci
+
 def write_external_links(w, page):
     if page in flower_sci:
         sci = flower_sci[page]
+        elab = sci_to_elab(sci)
         w.write('<p/>')
-        w.write('<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={sci}" target="_blank">CalFlora</a> &ndash;\n'.format(sci=sci));
-        w.write('<a href="https://calphotos.berkeley.edu/cgi/img_query?where-taxon={sci}" target="_blank">CalPhotos</a> &ndash;\n'.format(sci=sci));
+        w.write('<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank">CalFlora</a> &ndash;\n'.format(elab=elab));
+        w.write('<a href="https://calphotos.berkeley.edu/cgi/img_query?where-taxon={elab}" target="_blank">CalPhotos</a> &ndash;\n'.format(elab=elab));
+
+        # Jepson uses "subsp." instead of "ssp.", but it also allows us to
+        # search with that qualifier left out entirely.
         w.write('<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson eFlora</a><p/>\n'.format(sci=sci));
 
 def write_parents(w, page):
@@ -327,7 +341,7 @@ def parse(page, s):
     # Replace {sci} with the flower's scientific name.
     def repl_sci(matchobj):
         if page in flower_sci:
-            return '<b><i>{sci}</i></b><p/>'.format(sci=flower_sci[page])
+            return '<b><i>{elab}</i></b><p/>'.format(elab=sci_to_elab(flower_sci[page]))
         else:
             return '<b><i><span style="color:red">Scientific name not found.</span></i></b><p/>'
 
@@ -422,7 +436,8 @@ def parse(page, s):
         link = matchobj.group(1)
         if link in page_list:
             return '<a href="{link}.html">{link}</a>'.format(link=link)
-        elif re.match(r'[A-Z][^\s]* [a-z][^\s]*$', link):
+        elif link[0].isupper():
+            # Starts with a capital letter: must be a scientific name.
             return '<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={link}" target="_blank" class="external">{link}</a>'.format(link=link)
         else:
             return link

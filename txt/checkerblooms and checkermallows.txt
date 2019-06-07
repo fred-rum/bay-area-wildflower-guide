@@ -19,12 +19,12 @@ Distinguishing features:
 <li>scattered around the bay area</li>
 </ul>
 
-{Sidalcea calycosa calycosa}
+{Sidalcea calycosa ssp. calycosa}
 <ul>
 <li>Calero & Mt. Tam</li>
 </ul>
 
-{Sidalcea hickmanii viridis}
+{Sidalcea hickmanii ssp. viridis}
 <ul>
 <li>Marin</li>
 </ul>

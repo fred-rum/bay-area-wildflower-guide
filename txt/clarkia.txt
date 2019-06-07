@@ -52,7 +52,7 @@ fairy fans ({Clarkia breweri})
 <li>Redwood Regional Park</li>
 </ul>
 
-{Clarkia amoena huntiana}
+{Clarkia amoena ssp. huntiana}
 <ul>
 <li>all 4 sepals staying fused</li>
 <li>ovary and immature fruit 4-grooved</li>
@@ -70,7 +70,7 @@ fairy fans ({Clarkia breweri})
 
 (I haven't sorted these by distinguishing features because I've never needed to distinguish them.)
 
-{Clarkia biloba biloba} - Mt. Diablo
+{Clarkia biloba ssp. biloba} - Mt. Diablo
 
 {Clarkia epilobioides} - Henry Coe, Sierra Azul, and maybe Rancho San Antonio
 
