@@ -21,7 +21,7 @@ scattered throughout the bay area
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1210+0994}
-fairy fans ({Clarkia breweri})
+{fairy fans:Clarkia breweri}
 {-
 Henry Coe, Sierra Azul and vicinity
 -}

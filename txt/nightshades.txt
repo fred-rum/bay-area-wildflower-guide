@@ -14,7 +14,7 @@ stem hairs generally dense, branched
 leaf ovate, obovate, or elliptic, generally entire
 -}
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0110+1545} purple nightshade ({Solanum xanti})
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0110+1545} {purple nightshade:Solanum xanti}
 {-
 stem &plusmn;hairy, hairs are unbranched, glandular or not
 leaf lanceolate to ovate, &plusmn;entire to 1&ndash;2-lobed at base; base obtuse to &plusmn;cordate
@@ -63,7 +63,7 @@ fruit: <b>glossy</b> w/ <b>sepals not reflexed</b>
 
 See also:
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0613+0431:forked inflorescence} forked nightshade ({Solanum furcatum})
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0613+0431:forked inflorescence} {forked nightshade:Solanum furcatum}
 {-
 The inflorescence is forked into two distinct sections.
 -}

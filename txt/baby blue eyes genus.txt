@@ -10,8 +10,8 @@ common throughout the bay area
 scattered throughout the bay area
 -}
 
-{child:small flowered nemophila} ({Nemophila parviflora}) - scattered throughout the bay area.
+{small flowered nemophila:Nemophila parviflora} - scattered throughout the bay area.
 
-{child:meadow nemophila} ({Nemophila pedunculata}) - rare in the bay area.
+{meadow nemophila:Nemophila pedunculata} - rare in the bay area.
 
-{child:eastwood's nemophila} ({Nemophila pulchella}) - extremely rare in the bay area.
+{eastwood's nemophila:Nemophila pulchella} - extremely rare in the bay area.

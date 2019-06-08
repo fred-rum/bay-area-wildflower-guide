@@ -75,14 +75,21 @@ Flower: blue to purple-blue (or pale blue or white)
 -}
 
 <h3>Other ceanothus</h3>
-{-
-sandscrub ceanothus ({Ceanothus dentatus}) - very rare
-coyote ceanothus ({Ceanothus ferrisiae}) - near Anderson Lake
-wavyleaf ceanothus ({Ceanothus foliosus}) - mostly historical except at Mt. Madonna and Mt. Tamalpais
-point reyes ceanothus ({Ceanothus gloriosus}) - only near Mt. Tamalpais
-<b>deerbrush ceanothus</b> ({Ceanothus integerrimus}) - mostly Sierra Azul, Big Basin, and Soquel
-chaparral whitethorn ({Ceanothus leucodermis}) - Henry Coe
-mason's ceanothus ({Ceanothus masonii}) - rare near Mt. Tamalpais
-holly-leaved ceanothus ({Ceanothus purpureus}) - not nearby
-tobacco brush ({Ceanothus velutinus}) - Mt. Tamalpais
--}
+
+{sandscrub ceanothus:Ceanothus dentatus} - very rare
+
+{coyote ceanothus:Ceanothus ferrisiae} - near Anderson Lake
+
+{wavyleaf ceanothus:Ceanothus foliosus} - mostly historical except at Mt. Madonna and Mt. Tamalpais
+
+{point reyes ceanothus:Ceanothus gloriosus} - only near Mt. Tamalpais
+
+{deerbrush ceanothus:Ceanothus integerrimus} - mostly Sierra Azul, Big Basin, and Soquel
+
+{chaparral whitethorn:Ceanothus leucodermis} - Henry Coe
+
+{mason's ceanothus:Ceanothus masonii} - rare near Mt. Tamalpais
+
+{holly-leaved ceanothus:Ceanothus purpureus} - not nearby
+
+{tobacco brush:Ceanothus velutinus} - Mt. Tamalpais

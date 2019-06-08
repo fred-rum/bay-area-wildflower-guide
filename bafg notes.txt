@@ -28,6 +28,8 @@ Page links:
 parent-child page relationship.  If I don't have a corresponding page,
 and the page name looks like a scientific name, link to CalFlora instead.
 
+{[common name]:[scientific name]} links to CalFlora with both names.
+
 {child:[page]} is replaced with a link to the page.  This also records
 a relationship between the parent (the current page) and the child (the
 linked page).

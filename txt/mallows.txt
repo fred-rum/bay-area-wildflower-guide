@@ -7,20 +7,20 @@ petal veins generally dark
 bractlets wider than linear, bases fused to each other or to sepals
 -}
 
-dwarf mallow ({Malva neglecta})
+{dwarf mallow:Malva neglecta}
 {-
 petals generally twice as long as sepals; sepals 4&ndash;6 mm
 petal veins not dark
 bractlets widely linear to narrowly lanceolate, bases free from each other and from sepals
 -}
 
-cheeseweed mallow ({Malva parviflora})
+{cheeseweed mallow:Malva parviflora}
 {-
 petals 3&ndash;5 mm; sepals ~3 mm
 bractlets 1&ndash;2 mm long, linear to thread-like
 -}
 
-common mallow ({Malva sylvestris})
+{common mallow:Malva sylvestris}
 {-
 petals generally 15&ndash;30 mm; sepals 6&ndash;8 mm
 petal veins dark

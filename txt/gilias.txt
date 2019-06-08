@@ -8,7 +8,7 @@ flower head <b>hemispheric or 1&ndash;8 flowers</b>
 corolla 5&ndash;21 mm, purple to white
 -}
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0413+1293} bluehead gilia ({Gilia capitata})
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0413+1293} {bluehead gilia:Gilia capitata}
 {-
 flower head <b>spheric with 25&ndash;100</b> flowers
 corolla 6&ndash;13 mm, pale blue-violet
@@ -24,7 +24,7 @@ corolla <b>10&ndash;19 mm</b>, blue-violet at tip, paler below
 corolla throat yellow or orange with large purple spots, possibly merging into a ring
 -}
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0408+1204} purplespot gilia ({Gilia clivorum})
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0408+1204} {purplespot gilia:Gilia clivorum}
 {-
 generally many branches, spreading or <b>erect</b>
 open clusters with 2&ndash;5 flowers

@@ -7,7 +7,7 @@ inflorescence alternating below; flowers denser at the tip, possibly resembling 
 leaves roughly 2&ndash;3x wider than corollas, roughly 2&ndash;3x longer than wide.
 -}
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1115+3393} changing forget-me-not ({Myosotis discolor})
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1115+3393} {changing forget-me-not:Myosotis discolor}
 {-
 smaller corolla, often with different colors for each flower.
 fiddleneck-like inflorescence.
@@ -17,12 +17,12 @@ Santa Cruz range.
 The forget-me-nots above are the only ones that Jepson thinks grow in
 the bay area.  However, CalFlora has a few others observed here:
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0208+1294} bay forget-me-not ({Myosotis laxa})
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0208+1294} {bay forget-me-not:Myosotis laxa}
 {-
 smaller corolla, but the inflorescence otherwise looks much like broadleaf forget-me-not.
 small, narrow leaves.
 -}
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0311+1015} wood forget-me-not ({Myosotis sylvatica})
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0311+1015} {wood forget-me-not:Myosotis sylvatica}
 <p/>
 Appears in Calflora, but Jepson says that <a href="http://ucjeps.berkeley.edu/cgi-bin/get_cpn.pl?34218">all identifications in California are mistaken</a>.

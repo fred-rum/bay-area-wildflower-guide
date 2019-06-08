@@ -29,7 +29,7 @@ flowers from May&ndash;June (theoretically)
 scattered throughout the bay area
 -}
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0208+0434} wild hyacinth ({Dichelostemma multiflorum})
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0208+0434} {wild hyacinth:Dichelostemma multiflorum}
 {-
 spreading corolla lobes (although blue dicks can sometimes be more or less spreading)
 the three <a href="http://www.virtualherbarium.org/glossary/glossary.php?searchfor=crown&searchin=def&B1=Search">crown</a> pieces are each entire/truncate, not notched

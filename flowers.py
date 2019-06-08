@@ -477,6 +477,11 @@ def parse(page, s):
 
     s = re.sub(r'\{(https://calphotos.berkeley.edu/[^\}]+)\}', repl_calphotos, s)
 
+    # Rplace a {[common]:[scientific]} reference with a link to CalFlora.
+    s = re.sub(r'{([^\}]+):([^\}]+)}',
+               r'<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup=\2" target="_blank" class="external">\1<br/><i>\2</i></a>',
+               s)
+
     # Any remaining {reference} should refer to another page.
     # Replace it with a link to one of my pages if I can,
     # or otherwise to CalFlora if it is a scientific species name,
@@ -487,7 +492,7 @@ def parse(page, s):
             return '<a href="{link}.html">{full}</a>'.format(link=link, full=get_full(link))
         elif link[0].isupper():
             # Starts with a capital letter: must be a scientific name.
-            return '<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={link}" target="_blank" class="external">{link}</a>'.format(link=link)
+            return '<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={link}" target="_blank" class="external"><i>{link}</i></a>'.format(link=link)
         else:
             return link
 
