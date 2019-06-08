@@ -24,11 +24,11 @@ flexbox and centered vertically with respect to each other.
 
 Page links:
 
+{[common name]:[scientific name]} links to CalFlora with both names.
+
 {[page]} is replaced with a link to the page.  This does not create a
 parent-child page relationship.  If I don't have a corresponding page,
 and the page name looks like a scientific name, link to CalFlora instead.
-
-{[common name]:[scientific name]} links to CalFlora with both names.
 
 {child:[page]} is replaced with a link to the page.  This also records
 a relationship between the parent (the current page) and the child (the
@@ -84,9 +84,6 @@ with names only (for bandwidth saving) and photos only (for fast skimming).
 
 Add links at the top of primary color pages to secondary color anchors.
 
-Consistently display both the common name and scientific name on
-container pages.
-
 Allow genus names to be attached to container pages.
   e.g. sci.yaml associates common name to genus name.
   list scientific name as "{Genus} spp."
@@ -108,20 +105,6 @@ it would be nice to attach colors to individual jpgs of a flower,
   e.g. for baby blue eyes (N. menziesii).
 
 ###############################################################################
-
-Enhance {child:...} links to automatically include the primary child
-image when desired.  This either requires processing pages child pages
-first or determining the primary image automatically from the filename
-(e.g. by sorting).
-
-Should child image links load the full-size photo or the child's page?
-Probably the latter.  Which means that existing child images and links
-must be updated.
-
-Proposed:
-  {+img:...} invokes only the selected image, linked to the child.
-  {+name:...} invokes only the name, linked to the child.
-  {+...} invokes both the primary image and the name, linked to the child.
 
 It'd be nice to split the img and text onto separate lines on small
 screens only, e.g. for ceanothus.
