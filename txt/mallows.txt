@@ -1,30 +1,30 @@
 <h2>Malva spp.</h2>
 
 {+bull mallow}
-<ul>
-<li>petals 5&ndash;12 mm; sepals 4&ndash;6 mm; petals &plusmn; > or >> sepals</li>
-<li>petal veins generally dark</li>
-<li>bractlets wider than linear, bases fused to each other or to sepals</li>
-</ul>
+{-
+petals 5&ndash;12 mm; sepals 4&ndash;6 mm; petals &plusmn; > or >> sepals
+petal veins generally dark
+bractlets wider than linear, bases fused to each other or to sepals
+-}
 
 dwarf mallow ({Malva neglecta})
-<ul>
-<li>petals generally twice as long as sepals; sepals 4&ndash;6 mm</li>
-<li>petal veins not dark</li>
-<li>bractlets widely linear to narrowly lanceolate, bases free from each other and from sepals</li>
-</ul>
+{-
+petals generally twice as long as sepals; sepals 4&ndash;6 mm
+petal veins not dark
+bractlets widely linear to narrowly lanceolate, bases free from each other and from sepals
+-}
 
 cheeseweed mallow ({Malva parviflora})
-<ul>
-<li>petals 3&ndash;5 mm; sepals ~3 mm</li>
-<li>bractlets 1&ndash;2 mm long, linear to thread-like</li>
-</ul>
+{-
+petals 3&ndash;5 mm; sepals ~3 mm
+bractlets 1&ndash;2 mm long, linear to thread-like
+-}
 
 common mallow ({Malva sylvestris})
-<ul>
-<li>petals generally 15&ndash;30 mm; sepals 6&ndash;8 mm</li>
-<li>petal veins dark</li>
-<li>bractlets 3&ndash;7 mm long, 2&ndash;4 mm wide, free</li>
-</ul>
+{-
+petals generally 15&ndash;30 mm; sepals 6&ndash;8 mm
+petal veins dark
+bractlets 3&ndash;7 mm long, 2&ndash;4 mm wide, free
+-}
 
 See also {checkerblooms and checkermallows}.

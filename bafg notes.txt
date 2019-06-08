@@ -44,6 +44,14 @@ Other:
 {obs} is replaced with the iNaturalist observation count and linked to
 the matching observations on iNaturalist.
 
+{-
+[list items
+-}
+is replaced with proper HTML list syntax, i.e. surrounded by <ul>...</ul>,
+with each line also surrounded by <li>...</li>.
+A sublist can be included, but must use <ul> and </ul>, each on a line
+by itself.
+
 ###############################################################################
 
 An easy method to search would be nice.
@@ -96,10 +104,6 @@ if a grandparent links to a parent, and the parent doesn't have its own jpg,
 
 it would be nice to attach colors to individual jpgs of a flower,
   e.g. for baby blue eyes (N. menziesii).
-
-it'd be nice to have a shorthand for bulleted lists.  E.g. {-[...]-}
-surrounds the contents with <ul>...</ul> and surrounds each line with
-<li>...</li>.
 
 ###############################################################################
 

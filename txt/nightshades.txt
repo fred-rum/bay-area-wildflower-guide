@@ -3,69 +3,69 @@
 <h3>Purple nightshades</h3>
 
 Distinguishing features:
-<ul>
-<li>Hairs are branched or 0/simple on upper stem (not flower pedicel).  The hairs are so tiny that maximum camera close-up doesn't always show them branching, but it does show them matted rather than straight.</li>
-<li>Leaf shape.  There is some overlap, but the shapes are often distinct.</li>
-</ul>
+{-
+Hairs are branched or 0/simple on upper stem (not flower pedicel).  The hairs are so tiny that maximum camera close-up doesn't always show them branching, but it does show them matted rather than straight.
+Leaf shape.  There is some overlap, but the shapes are often distinct.
+-}
 
 {+bluewitch nightshade} 
-<ul>
-<li>stem hairs generally dense, branched</li>
-<li>leaf ovate, obovate, or elliptic, generally entire</li>
-</ul>
+{-
+stem hairs generally dense, branched
+leaf ovate, obovate, or elliptic, generally entire
+-}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0110+1545} purple nightshade ({Solanum xanti})
-<ul>
-<li>stem &plusmn;hairy, hairs are unbranched, glandular or not</li>
-<li>leaf lanceolate to ovate, &plusmn;entire to 1&ndash;2-lobed at base; base obtuse to &plusmn;cordate</li>
-</ul>
+{-
+stem &plusmn;hairy, hairs are unbranched, glandular or not
+leaf lanceolate to ovate, &plusmn;entire to 1&ndash;2-lobed at base; base obtuse to &plusmn;cordate
+-}
 
 <h3>White nightshades</h3>
 
 Fruit distinguishing features:
-<ul>
-<li>glossy or dull</li>
-<li>sepals reflexed or not</li>
-</ul>
+{-
+glossy or dull
+sepals reflexed or not
+-}
 
 Flower distinguishing features:
-<ul>
-<li>corolla diameter (warning: Jepson's corolla widths seem a little undersized)</li>
-<li>leaf toothed or not</li>
-<li>hairs gladular or not</li>
-</ul>
+{-
+corolla diameter (warning: Jepson's corolla widths seem a little undersized)
+leaf toothed or not
+hairs gladular or not
+-}
 
 Some features are variable within a species, but if a <b>bold feature</b> is seen, it is diagnostic.
 
 {+black nightshade}
-<ul>
-<li>corolla: corolla 10 mm wide, white</li>
-<li>leaf: 4&ndash;7 cm, entire to coarsely wavy-toothed</li>
-<li>hairs: &plusmn;spreading or curved, <b>glandular</b> and not</li>
-<li>fruit: <b>dull</b></li>
-</ul>
+{-
+corolla: corolla 10 mm wide, white
+leaf: 4&ndash;7 cm, entire to coarsely wavy-toothed
+hairs: &plusmn;spreading or curved, <b>glandular</b> and not
+fruit: <b>dull</b>
+-}
 
 {american black nightshade:american black nightshade--2.jpg} {child:american black nightshade}
-<ul>
-<li>corolla: corolla <b>3&ndash;6 mm wide</b>, white</li>
-<li>leaf: 2&ndash;15 cm, entire to coarsely wavy-toothed</li>
-<li>hairs: &plusmn;0 or short, &plusmn;appressed or curved, nonglandular</li>
-<li>fruit: <b>glossy</b> w/ <b>sepals reflexed</b></li>
-</ul>
+{-
+corolla: corolla <b>3&ndash;6 mm wide</b>, white
+leaf: 2&ndash;15 cm, entire to coarsely wavy-toothed
+hairs: &plusmn;0 or short, &plusmn;appressed or curved, nonglandular
+fruit: <b>glossy</b> w/ <b>sepals reflexed</b>
+-}
 
 {+greenspot nightshade}
-<ul>
-<li>corolla: corolla &plusmn;10 mm wide, <b>white-lavender</b>, puberulent below</li>
-<li>leaf: 1&ndash;9 cm, entire to coarsely irregularly <b>toothed</b></li>
-<li>hairs: generally simple, < 1mm, &plusmn;curved, white</li>
-<li>fruit: <b>glossy</b> w/ <b>sepals not reflexed</b></li>
-</ul>
+{-
+corolla: corolla &plusmn;10 mm wide, <b>white-lavender</b>, puberulent below
+leaf: 1&ndash;9 cm, entire to coarsely irregularly <b>toothed</b>
+hairs: generally simple, < 1mm, &plusmn;curved, white
+fruit: <b>glossy</b> w/ <b>sepals not reflexed</b>
+-}
 
 See also:
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0613+0431:forked inflorescence} forked nightshade ({Solanum furcatum})
-<ul>
-<li>The inflorescence is forked into two distinct sections.</li>
-</ul>
+{-
+The inflorescence is forked into two distinct sections.
+-}
 
 There are a few other species that are very rare in the bay area.

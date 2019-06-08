@@ -3,31 +3,31 @@
 <h3>Single-color gilias</h3>
 
 {+california gilia}
-<ul>
-<li>flower head <b>hemispheric or 1&ndash;8 flowers</b></li>
-<li>corolla 5&ndash;21 mm, purple to white</li>
-</ul>
+{-
+flower head <b>hemispheric or 1&ndash;8 flowers</b>
+corolla 5&ndash;21 mm, purple to white
+-}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0413+1293} bluehead gilia ({Gilia capitata})
-<ul>
-<li>flower head <b>spheric with 25&ndash;100</b> flowers</li>
-<li>corolla 6&ndash;13 mm, pale blue-violet</li>
-</ul>
+{-
+flower head <b>spheric with 25&ndash;100</b> flowers
+corolla 6&ndash;13 mm, pale blue-violet
+-}
 
 <h3>Multi-color gilias</h3>
 
 {+bird's-eye gilia}
-<ul>
-<li>many branches from base, spreading</li>
-<li>open clusters with 2&ndash;5 flowers</li>
-<li>corolla <b>10&ndash;19 mm</b>, blue-violet at tip, paler below</li>
-<li>corolla throat yellow or orange with large purple spots, possibly merging into a ring</li>
-</ul>
+{-
+many branches from base, spreading
+open clusters with 2&ndash;5 flowers
+corolla <b>10&ndash;19 mm</b>, blue-violet at tip, paler below
+corolla throat yellow or orange with large purple spots, possibly merging into a ring
+-}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0408+1204} purplespot gilia ({Gilia clivorum})
-<ul>
-<li>generally many branches, spreading or <b>erect</b></li>
-<li>open clusters with 2&ndash;5 flowers</li>
-<li>corolla <b>6&ndash;8 mm</b>, purple to white (may fade to white near throat)</li>
-<li>corolla throat yellow with large purple spots</li>
-</ul>
+{-
+generally many branches, spreading or <b>erect</b>
+open clusters with 2&ndash;5 flowers
+corolla <b>6&ndash;8 mm</b>, purple to white (may fade to white near throat)
+corolla throat yellow with large purple spots
+-}

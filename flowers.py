@@ -349,6 +349,7 @@ def write_footer(w):
 
 def parse(page, s):
     # Replace HTTP links in the text with ones that open a new tab.
+    # (Presumably they're external links or they'd be in {...} format.)
     s = re.sub(r'<a href=', '<a target="_blank" href=', s)
 
     # Replace {default} with all the default fields.
@@ -385,6 +386,18 @@ def parse(page, s):
 
     s = re.sub(r'{obs}', repl_obs, s)
 
+    def repl_list(matchobj):
+        c = matchobj.group(1)
+        c = re.sub(r'\n', r'</li>\n<li>', c)
+
+        # If there's a sublist, it's <ul> and </ul> must be on their own lines,
+        # in which case we remove the accidental surrounding <li>...</li>.
+        c = re.sub(r'<li>(<(/?)ul>)</li>', r'\1', c)
+
+        return '\n<ul>\n<li>{c}</li>\n</ul>\n'.format(c=c)
+
+    s = re.sub(r'\n{-\n(.*?)\n-}\n', repl_list, s, flags=re.DOTALL)
+
     # Replace {jpgs} with all jpgs that exist for the flower.
     def repl_jpgs(matchobj):
         if page in flower_jpg_list:
@@ -399,7 +412,7 @@ def parse(page, s):
     # first \n\n or \n+EOF.  Photos can be my own or CalPhotos.
     # The photos and text are grouped together and vertically centered.
     # The text is also put in a <span> for correct whitespacing.
-    s = re.sub(r'((?:\{(?:jpgs|[^\}]+.jpg|https://calphotos.berkeley.edu/[^\}]+)\} *)+)(((?!\n\n).)*)(?=\n(\n|\Z))', r'<div class="photo-box">\1<span>\2</span></div>', s, flags=re.DOTALL)
+    s = re.sub(r'((?:\{(?:jpgs|[^\}]+.jpg|https://calphotos.berkeley.edu/[^\}]+)\} *)+)(.*?)(?=\n(\n|\Z))', r'<div class="photo-box">\1<span>\2</span></div>', s, flags=re.DOTALL)
 
     # Replace a pair of newlines with a paragraph separator.
     # (Do this after making specific replacements based on paragraphs,

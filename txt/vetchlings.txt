@@ -1,13 +1,13 @@
 {+red vetchling}
-<ul>
-<li>inflorescence axis not extended beyond flower.</li>
-<li>calyx bowl much shorter than calyx lobes.</li>
-</ul>
+{-
+inflorescence axis not extended beyond flower.
+calyx bowl much shorter than calyx lobes.
+-}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1108+1963} grass pea ({Lathyrus sphaericus})
-<ul>
-<li>inflorescence axis extended as bristle beyond flower.</li>
-<li>calyx bowl &plusmn; &le; calyx lobes.</li>
-</ul>
+{-
+inflorescence axis extended as bristle beyond flower.
+calyx bowl &plusmn; &le; calyx lobes.
+-}
 
 See also {vetches} and {sweet peas}.

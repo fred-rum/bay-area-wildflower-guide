@@ -1,28 +1,28 @@
 <h2>Lathyrus spp.</h2>
 
 Distinguishing features:
-<ul>
-<li>number of leaflets per leaf</li>
-<li>wings or angles on stem</li>
-</ul>
+{-
+number of leaflets per leaf
+wings or angles on stem
+-}
 
 {+broad-leaved sweet pea}
-<ul>
-<li><b>2 leaflets</b> per leaf</li>
-</ul>
+{-
+<b>2 leaflets</b> per leaf
+-}
 
 {+pacific pea}
-<ul>
-<li>2&ndash;16 leaflets per leaf, > 2 at least on some leaves</li>
-<li>stem often sharply angled or flanged (angles or flanges < 1 mm wide)</li>
-</ul>
+{-
+2&ndash;16 leaflets per leaf, > 2 at least on some leaves
+stem often sharply angled or flanged (angles or flanges < 1 mm wide)
+-}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1107+1066} delta tule pea ({Lathyrus jepsonii})
-<ul>
-<li>2&ndash;16 leaflets per leaf, > 2 at least on some leaves</li>
-<li>stem climbing, <b>winged</b> (wings &plusmn; &ge; 1 mm wide)</li>
-<li>L. j. var. californicus is a smaller plant which is sometimes hairy.</li>
-<li>L. j. var. jepsonii this rare variety can exceed two meters in height and is hairless, a rare variety which grows in the estuary habitat of the Sacramento-San Joaquin River Delta, the origin of the common name delta tule pea.</li>
-</ul>
+{-
+2&ndash;16 leaflets per leaf, > 2 at least on some leaves
+stem climbing, <b>winged</b> (wings &plusmn; &ge; 1 mm wide)
+L. j. var. californicus is a smaller plant which is sometimes hairy.
+L. j. var. jepsonii this rare variety can exceed two meters in height and is hairless, a rare variety which grows in the estuary habitat of the Sacramento-San Joaquin River Delta, the origin of the common name delta tule pea.
+-}
 
 See also {vetches} and {vetchlings}.

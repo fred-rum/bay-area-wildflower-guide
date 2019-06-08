@@ -1,26 +1,26 @@
 <h2>Brodiaea spp.</h2>
 
 Distinguishing characteristics:
-<ul>
-<li>Length of peduncle (flower stem).</li>
-<li>Size of corolla.</li>
-<li>Angle and shape of staminodes.</li>
-</ul>
+{-
+Length of peduncle (flower stem).
+Size of corolla.
+Angle and shape of staminodes.
+-}
 
 <a href="https://www2.palomar.edu/users/warmstrong/brosr1.htm">Labeled photos of brodiaea staminodes.</a>
 
 {+harvest brodiaea}
-<ul>
-<li>peduncle (flower stem) 10&ndash;50 cm.</li>
-<li>perianth (flower) 29&ndash;47 mm (long? wide?)</li>
-<li>staminodes (crown surrounding stamens) held away from stamens, flat</li>
-<li>elevation < 8000 ft.</li>
-</ul>
+{-
+peduncle (flower stem) 10&ndash;50 cm.
+perianth (flower) 29&ndash;47 mm (long? wide?)
+staminodes (crown surrounding stamens) held away from stamens, flat
+elevation < 8000 ft.
+-}
 
 {+dwarf brodiaea}
-<ul>
-<li>peduncle (flower stem) 0.5&ndash;7 cm.</li>
-<li>perianth (flower) 15&ndash;40 mm (long? wide?)</li>
-<li>staminodes (crown surrounding stamens) leaning toward or parallel to stamens, tips generally reflexed, margins 1/4 incurved below tip.</li>
-<li>elevation < 1500 ft.</li>
-</ul>
+{-
+peduncle (flower stem) 0.5&ndash;7 cm.
+perianth (flower) 15&ndash;40 mm (long? wide?)
+staminodes (crown surrounding stamens) leaning toward or parallel to stamens, tips generally reflexed, margins 1/4 incurved below tip.
+elevation < 1500 ft.
+-}

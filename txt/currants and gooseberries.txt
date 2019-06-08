@@ -1,14 +1,14 @@
 <h2>Ribes spp.</h2>
 
 Distinguishing features:
-<ul>
-<li>spines on twig nodes or not</li>
-<li>sepal color, spread angle, and number</li>
-<li>styles hairy at base or glabrous</li>
-<li>stamen length</li>
-<li>leaf glandular on underside or not</li>
-<li>bristles between nodes on twigs or not</li>
-</ul>
+{-
+spines on twig nodes or not
+sepal color, spread angle, and number
+styles hairy at base or glabrous
+stamen length
+leaf glandular on underside or not
+bristles between nodes on twigs or not
+-}
 
 I've made very few currant/gooseberry observations, and my identifications are not firm.
 
