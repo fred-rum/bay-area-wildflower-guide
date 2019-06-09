@@ -400,7 +400,7 @@ def parse(page, s):
     s = re.sub(r'<a href=', '<a target="_blank" href=', s)
 
     # Replace {default} with all the default fields.
-    s = re.sub(r'{default}', '{jpgs}', s)
+    s = re.sub(r'{default}', '{jpgs}\n', s)
 
     def repl_list(matchobj):
         c = matchobj.group(1)
