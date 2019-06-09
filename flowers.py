@@ -673,13 +673,23 @@ parse("other observations", s)
 # The remaining code is for creating useful lists of pages:
 # all pages, and pages sorted by flower color.
 
-# List a single page, indented by some amount if it is under a parent.
+# List a single page, indented if it is under a parent.
+# (But don't indent it if it is itself a parent, in which case it has is
+# already put itself in an indented box.)
 def list_page(w, page, indent):
     if indent:
-        indent_class = ' indent{indent}'.format(indent=indent)
+        indent_class = ' indent'
     else:
         indent_class = ''
-    w.write('<div class="photo-box {indent_class}">'.format(indent_class=indent_class))
+
+    if page in page_child:
+        # A parent puts itself in a box.
+        # The box may be indented, in which case, the remainder of the listing
+        # is not indented.
+        w.write('<div class="box{indent_class}">\n'.format(indent_class=indent_class))
+        indent_class = ''
+
+    w.write('<div class="photo-box{indent_class}">'.format(indent_class=indent_class))
 
     if page in flower_jpg_list:
         w.write('<a href="{page}.html"><img src="../photos/{jpg}.jpg" width="200" height="200" class="list-thumb"></a>{spacer}'.format(page=page, jpg=flower_jpg_list[page][0], spacer=horiz_spacer))
@@ -696,14 +706,12 @@ def list_matches(w, match_set, indent, color):
     # This order is retained for subsets with equal observation counts.
     for page in sorted(sorted(match_set), key=count_flowers, reverse=True):
         if page in page_child:
-            w.write('<div class="box">\n')
             list_page(w, page, indent)
             list_matches(w, find_matches(page_child[page], color),
-                         indent+1, color)
+                         True, color)
             w.write('</div>\n')
         else:
             list_page(w, page, indent)
-
 
 for primary in primary_color_list:
     with open(root + "/html/{primary}.html".format(primary=primary), "w") as w:
@@ -712,14 +720,14 @@ for primary in primary_color_list:
         for color in primary_color_list[primary]:
             if color_page_list[color]:
                 w.write('<h1 id="{color}">{ucolor} flowers</h1>\n'.format(color=color, ucolor=color.capitalize()))
-                list_matches(w, color_page_list[color], 0, color)
+                list_matches(w, color_page_list[color], False, color)
         write_footer(w)
 
 with open(root + "/html/all.html", "w") as w:
     write_header(w, 'All Flowers')
     w.write('<body>\n')
     w.write('<h1>All flowers</h1>\n')
-    list_matches(w, top_list, 0, None)
+    list_matches(w, top_list, False, None)
     write_footer(w)
 
 ###############################################################################

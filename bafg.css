@@ -72,30 +72,15 @@ div.page-thumb-text {
     max-width: 178px;
     max-height: 178px;
 }
-.indent1 {
-    position: relative;
-    left: 10vw;
-}
-.indent2 {
-    position: relative;
-    left: 20vw;
-}
-.indent3 {
-    position: relative;
-    left: 30vw;
+div.box.indent {
+    margin-left: 10vw;
 }
 /* There's no "max-left" property that would let us limit the indent to
    half the 200px max-width.  But we can get what we want by checking
    whether 20vw is effectively greater than 100px. */
 @media (min-width: 500px) {
-    .indent1 {
-	left: 50px;
-    }
-    .indent2 {
-	left: 100px;
-    }
-    .indent3 {
-	left: 150px;
+    div.box.indent {
+	margin-left: 50px;
     }
 }
 img.list-thumb {

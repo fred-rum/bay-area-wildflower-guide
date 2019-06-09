@@ -29,7 +29,7 @@ Henry Coe, Sierra Azul and vicinity
 
 {winecup clarkia:four-spot-.jpg} {child:winecup clarkia}
 {-
-sepals all coming free or staying fused in pairs
+<b>sepals all coming free or staying fused in pairs</b>
 found everywhere
 -}
 
@@ -37,8 +37,8 @@ found everywhere
 {-
 all 4 sepals staying fused
 ovary and immature fruit 4-grooved
-petals with +- red spot or zone at base
-petals 10--30 mm; stigma exserted beyond anthers
+petals with &plusmn; red spot or zone at base
+petals <b>10&ndash;30 mm</b>; stigma exserted beyond anthers
 found everywhere
 -}
 
@@ -46,8 +46,8 @@ found everywhere
 {-
 all 4 sepals staying fused
 ovary and immature fruit 4-grooved
-petals with +- red spot or zone at base
-petals 5--13 mm; stigma not exserted beyond anthers
+petals with &plusmn; red spot or zone at base
+petals <b>5&ndash;13 mm</b>; stigma not exserted beyond anthers
 Redwood Regional Park
 -}
 
@@ -59,11 +59,11 @@ petals with red spot or marks near middle
 Marin
 -}
 
-{Clarkia affinis}
+{+chaparral clarkia}
 {-
 all 4 sepals staying fused
-ovary and immature fruit 8-grooved
-Sunol, Pleaston Ridge, only historically on the peninsula
+ovary and immature fruit <b>8-grooved</b>
+scattered around the east bay; only historically on the peninsula
 -}
 
 <h3>Standard corolla shapes, buds pendent</h3>
