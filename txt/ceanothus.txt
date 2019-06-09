@@ -1,5 +1,4 @@
-<h2>Ceanothus spp.</h2>
-
+{sci:Ceanothus}
 Distinguishing features:
 {-
 twig color, whether twigs are ridged

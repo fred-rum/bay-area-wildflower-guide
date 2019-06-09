@@ -1,5 +1,4 @@
-<h2>Malva spp.</h2>
-
+{sci:Malva}
 {+bull mallow}
 {-
 petals 5&ndash;12 mm; sepals 4&ndash;6 mm; petals &plusmn; > or >> sepals

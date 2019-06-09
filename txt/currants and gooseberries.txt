@@ -1,5 +1,4 @@
-<h2>Ribes spp.</h2>
-
+{sci:Ribes}
 Distinguishing features:
 {-
 spines on twig nodes or not

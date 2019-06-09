@@ -1,4 +1,4 @@
-<h2>Corallorhiza spp.</h2>
+{sci:Corallorhiza}
 {+striped coralroot}
 {-
 3-5 stripes

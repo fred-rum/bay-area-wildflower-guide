@@ -1,5 +1,4 @@
-<h2>Veronica spp.</h2>
-
+{sci:Veronica}
 {+bird's-eye speedwell}
 <p/>
 This is the only speedwell I've found.  Its lower petal is generally smaller, and the white spot bleeds strongly onto it and somewhat onto the two adjacent petals.  The upper petal may have a purple margin between the white eye and the blue primary color.

@@ -1,5 +1,4 @@
-<h2>Myosotis spp.</h2>
-
+{sci:Myosotis}
 {+broadleaf forget-me-not}
 {-
 corolla 5&ndash;10 mm wide, blue (but pink when young), prominent yellow ring in center.

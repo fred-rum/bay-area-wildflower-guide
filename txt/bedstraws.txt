@@ -1,4 +1,4 @@
-<h2>Galium spp.</h2>
+{sci:Galium}
 {+catchweed bedstraw}, an annual
 
 {+graceful bedstraw}, a small bushy perennial

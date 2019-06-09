@@ -1,5 +1,4 @@
-<h2>Solanum spp.</h2>
-
+{sci:Solanum}
 <h3>Purple nightshades</h3>
 
 Distinguishing features:

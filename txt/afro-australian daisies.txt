@@ -1,5 +1,3 @@
-{sci}
-
 {jpgs} This is most likely D. fruticosa or D. ecklonis. The flower heads evidently are identical. Jepson distinguishes them mostly by stem:<ul>
 <li>D. ecklonis: stem <= 1 m, erect or ascending, branched distally or throughout</li>
 <li>D. fruticosa: stem sometimes >> 1 m, trailing to ascending, sparingly branched, rooting at ground contact</li>

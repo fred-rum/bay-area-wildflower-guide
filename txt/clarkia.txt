@@ -1,5 +1,4 @@
-<h2>Clarkia spp.</h2>
-
+{sci:Clarkia}
 Distinguishing features:
 {-
 corolla shape and color distribution

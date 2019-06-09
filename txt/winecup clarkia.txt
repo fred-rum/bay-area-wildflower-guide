@@ -1,5 +1,4 @@
-<h2>Clarkia purpurea</h2>
-
+{sci:Clarkia purpurea}
 Distinguishing features:
 {-
 petal length

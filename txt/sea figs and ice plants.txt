@@ -1,5 +1,4 @@
-<h2>Carpobrotus spp.</h2>
-
+{sci:Carpobrotus}
 Flower diameter is the most obvious distinguishing feature.
 
 {+chilean sea fig}<p/>

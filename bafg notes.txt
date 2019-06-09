@@ -4,6 +4,16 @@ Format of .txt files
 
 Two newlines in a row (i.e. a blank line) is a paragraph division: <p/>
 
+Info:
+
+{com:[name]} gives the common name for the flower(s) on the page.  If
+not specified, it defaults to the page name.
+
+{sci:[name]} gives the scientific name for the flower(s) on the page.
+It should always be specified if the common name is different than the
+page name.  If not specified, the iNaturalist observation csv file is
+searched for the page name (common name) to find the scientific name.
+
 Image links:
 
 {[img].jpg} is replaced with a thumbnail of the image and a link to the
@@ -84,18 +94,9 @@ with names only (for bandwidth saving) and photos only (for fast skimming).
 
 Add links at the top of primary color pages to secondary color anchors.
 
-Allow genus names to be attached to container pages.
-  e.g. sci.yaml associates common name to genus name.
-  list scientific name as "{Genus} spp."
-  include scientific name on list pages (or maybe it does already)
-  link to iNaturalist using ?search_on=names&q={genus}
-  link to CalFlora & Jepson eFlora the usual way
-  don't link to CalPhotos because it doesn't work and wouldn't be useful
-  include scientific name on backlink from children?
-  if the scientific name is not specified, then
-    disable the current behavior of including observation counts and
-    external links at the bottom of the page.
-  (and fix baby blue eyes container page)
+if a page has a scientific name, but it was not found in observations.csv
+  (e.g. it is a genus):
+    link to iNaturalist using ?search_on=names&q={genus}
 
 if a grandparent links to a parent, and the parent doesn't have its own jpg,
    use its first child's jpg.  (I.e. when determining parent-child
@@ -103,6 +104,11 @@ if a grandparent links to a parent, and the parent doesn't have its own jpg,
 
 it would be nice to attach colors to individual jpgs of a flower,
   e.g. for baby blue eyes (N. menziesii).
+
+when a flower (or parent) doesn't have a common name (i.e. it's the same
+  as its scientific name), then only one name should be printed, and it
+  should be italicized.  The <h1> at the top of the page should also be
+  italicized (but I suppose not the title in the title bar).
 
 ###############################################################################
 

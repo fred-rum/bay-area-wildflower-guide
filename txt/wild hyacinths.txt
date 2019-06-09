@@ -1,5 +1,4 @@
-<h2>Dichelostemma spp.</h2>
-
+{sci:Dichelostemma}
 Distinguishing features:
 {-
 <a href="http://www.virtualherbarium.org/glossary/glossary.php?searchfor=crown&searchin=def&B1=Search">crown</a> color, leaning in or out

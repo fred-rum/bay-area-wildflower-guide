@@ -1,5 +1,4 @@
-<h2>Brodiaea spp.</h2>
-
+{sci:Brodiaea}
 Distinguishing characteristics:
 {-
 Length of peduncle (flower stem).

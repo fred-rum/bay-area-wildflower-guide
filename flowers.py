@@ -67,11 +67,13 @@ page_txt = {} # txt (string) (potentially with some parsing done to it)
 # but container pages get added later.)
 page_color = {}
 
-# key: flower page name
-flower_sci = {} # scientific name
-flower_obs = {} # number of observations
-flower_obs_rg = {} # number of observations that are research grade
-flower_taxon_id = {} # iNaturalist taxon ID
+page_com = {} # common name
+page_sci = {} # scientific name
+page_obs = {} # number of observations
+page_obs_rg = {} # number of observations that are research grade
+page_taxon_id = {} # iNaturalist taxon ID
+
+sci_page = {} # scientific name -> page name
 
 # Define a list of subcolors for each primary color.
 # key: primary name
@@ -89,56 +91,6 @@ color_page_list = {}
 # A few functions need a small horizontal spacer,
 # so we define a common one here.
 horiz_spacer = '<div class="horiz-space"></div>'
-
-# Read my observations file (exported iNaturalist) and use it as follows:
-#   Associate common names with scientific names
-#   Get a count of observations (total and research grade) of each flower.
-#   Get an iNaturalist taxon ID for each flower.
-with open(root + '/observations.csv', 'r') as f:
-    csv_reader = csv.reader(f)
-    header_row = csv_reader.next()
-
-    sci_idx = header_row.index('scientific_name')
-    com_idx = header_row.index('common_name')
-    rg_idx = header_row.index('quality_grade')
-    taxon_idx = header_row.index('taxon_id')
-
-    for row in csv_reader:
-        sci_name = row[sci_idx]
-        com_name = row[com_idx].lower()
-        taxon_id = row[taxon_idx]
-
-        # Record observation data under both the common name and
-        # the scientific name, so I can use either one for page names
-        # and photo keywords.
-        #
-        # The common name is forced to all lower case to match my convention.
-        # The scientific name is left in its standard case.
-
-        if com_name:
-            if sci_name:
-                flower_sci[com_name] = sci_name
-
-            if com_name not in flower_obs:
-                flower_obs[com_name] = 0
-                flower_obs_rg[com_name] = 0
-            flower_obs[com_name] += 1
-            if row[rg_idx] == 'research':
-                flower_obs_rg[com_name] += 1
-
-            flower_taxon_id[com_name] = taxon_id
-
-        if sci_name and ' ' in sci_name: # at least to species level
-            flower_sci[sci_name] = sci_name
-
-            if sci_name not in flower_obs:
-                flower_obs[sci_name] = 0
-                flower_obs_rg[sci_name] = 0
-            flower_obs[sci_name] += 1
-            if row[rg_idx] == 'research':
-                flower_obs_rg[sci_name] += 1
-
-            flower_taxon_id[sci_name] = taxon_id
 
 # Read miscellaneous flower info from the YAML file.
 with open(root + '/color.yaml') as f:
@@ -166,9 +118,18 @@ thumb_list = get_file_list('thumbs', 'jpg')
 def get_page_from_jpg(jpg):
     return re.sub(r'[-0-9]+$', r'', jpg)
 
+def get_com(page):
+    if page in page_com:
+        return page_com[page]
+    else:
+        return page
+
 def get_elab(sci):
     matchobj = re.match(r'([^ ]+ [^ ]+) ([^ ]+)$', sci)
-    if matchobj:
+    if ' ' not in sci:
+        # one word in the scientific name implies a genus.
+        return '{genus} spp.'.format(genus=sci)
+    elif matchobj:
         # three words in the scientific name implies a subspecies
         # (or variant, or whatever).  Default to "ssp."
         return '{species} ssp. {ssp}'.format(species=matchobj.group(1),
@@ -176,14 +137,19 @@ def get_elab(sci):
     else:
         return sci
 
-def get_full(page):
-    if page in flower_sci:
-        if flower_sci[page] == page:
-            return "<i>{page}</i>".format(page=page)
-        else:
-            return "{page}<br/><i>{sci}</i>".format(page=page, sci=get_elab(flower_sci[page]))
+def get_full(page, lines=2):
+    com = get_com(page)
+    if page in page_sci:
+        sci = page_sci[page]
+        elab = get_elab(sci)
+        if com == sci:
+            return "<i>{elab}</i>".format(elab=elab)
+        elif lines == 2:
+            return "{com}<br/><i>{elab}</i>".format(com=com, elab=elab)
+        else: # lines == 1
+            return "{com} (<i>{elab}</i>)".format(com=com, elab=elab)
     else:
-        return page
+        return com
 
 flower_jpg_list = {}
 for jpg in sorted(jpg_list):
@@ -272,16 +238,36 @@ def read_txt(page):
         else:
             return '{' + child + '}'
 
+    def repl_sci(matchobj):
+        sci = matchobj.group(1)
+        page_sci[page] = sci
+        sci_page[sci] = page
+        return ''
+
+    def repl_com(matchobj):
+        page_com[page] = matchobj.group(1)
+        return ''
+
     s = re.sub(r'{(child:|\+)([^}]+)}', repl_child, s)
+    s = re.sub(r'{sci:(.*)}\n', repl_sci, s)
+    s = re.sub(r'{com:(.*)}\n', repl_com, s)
     page_txt[page] = s
 
 def write_external_links(w, page):
-    if page in flower_sci:
-        sci = flower_sci[page]
-        elab = get_elab(sci)
+    if page in page_sci:
+        sci = page_sci[page]
+        if ' ' in sci:
+            elab = get_elab(sci)
+        else:
+            # A one-word genus should be sent as is, not as '[genus] spp.'
+            elab = sci
+
         w.write('<p/>')
         w.write('<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank">CalFlora</a> &ndash;\n'.format(elab=elab));
-        w.write('<a href="https://calphotos.berkeley.edu/cgi/img_query?where-taxon={elab}" target="_blank">CalPhotos</a> &ndash;\n'.format(elab=elab));
+
+        if ' ' in sci:
+            # CalPhotos cannot be searched by genus only.
+            w.write('<a href="https://calphotos.berkeley.edu/cgi/img_query?where-taxon={elab}" target="_blank">CalPhotos</a> &ndash;\n'.format(elab=elab));
 
         # Jepson uses "subsp." instead of "ssp.", but it also allows us to
         # search with that qualifier left out entirely.
@@ -294,7 +280,7 @@ def write_parents(w, page):
 
     if page in page_parent:
         for parent in sorted(page_parent[page]):
-            w.write('<li><a href="{parent}.html">{parent}</a></li>\n'.format(parent=parent))
+            w.write('<li><a href="{parent}.html">{full}</a></li>\n'.format(parent=parent, full=get_full(parent, lines=1)))
 
     if page in page_color:
         for primary in primary_color_list:
@@ -353,23 +339,14 @@ def parse(page, s):
     s = re.sub(r'<a href=', '<a target="_blank" href=', s)
 
     # Replace {default} with all the default fields.
-    s = re.sub(r'{default}', '{sci}\n{jpgs}\n\n{obs}', s)
-
-    # Replace {sci} with the flower's scientific name.
-    def repl_sci(matchobj):
-        if page in flower_sci:
-            return '<b><i>{elab}</i></b><p/>'.format(elab=get_elab(flower_sci[page]))
-        else:
-            return '<b><i><span style="color:red">Scientific name not found.</span></i></b><p/>'
-
-    s = re.sub(r'{sci}', repl_sci, s)
+    s = re.sub(r'{default}', '{jpgs}\n\n{obs}', s)
 
     # Replace {obs} with iNaturalist observation count.
     def repl_obs(matchobj):
-        if page in flower_obs:
-            n = flower_obs[page]
-            rg = flower_obs_rg[page]
-            obs_str = '<a href="https://www.inaturalist.org/observations/chris_nelson?taxon_id={taxon_id}" target="_blank">Chris&rsquo;s observations</a>: '.format(taxon_id=flower_taxon_id[page])
+        if page in page_obs:
+            n = page_obs[page]
+            rg = page_obs_rg[page]
+            obs_str = '<a href="https://www.inaturalist.org/observations/chris_nelson?taxon_id={taxon_id}" target="_blank">Chris&rsquo;s observations</a>: '.format(taxon_id=page_taxon_id[page])
             if rg == 0:
                 obs_str += '{n} (none research grade)'.format(n=n)
             elif rg == n:
@@ -499,9 +476,24 @@ def parse(page, s):
     s = re.sub(r'{([^}]+)}', repl_link, s)
 
     with open(root + "/html/" + page + ".html", "w") as w:
-        write_header(w, page)
+        com = get_com(page)
+
+        # If the page's common name is the same as its scientific name,
+        # then the h1 header should be italicized and elaborated.
+        if page in page_sci and page_sci[page] == com:
+            h1 = '<i>{elab}</i>'.format(elab=get_elab(com))
+        else:
+            h1 = com
+
+        write_header(w, com)
         w.write('<body>\n')
-        w.write('<h1>{page}</h1>'.format(page=page))
+        w.write('<h1>{h1}</h1>\n'.format(h1=h1))
+
+        if h1 == com and page in page_sci:
+            # We printed the common name (not the italicized scientific name)
+            # in the h1 header, and we have a scientific name.
+            w.write('<b><i>{elab}</i></b><p/>\n'.format(elab=get_elab(page_sci[page])))
+
         w.write(s)
         write_external_links(w, page)
         write_parents(w, page)
@@ -509,7 +501,7 @@ def parse(page, s):
 
 ###############################################################################
 
-# Read the txt files and record parent->child relationships.
+# Read the txt files and record names and parent->child relationships.
 for page in page_list:
     read_txt(page)
 
@@ -519,6 +511,54 @@ for name in sorted(jpg_list):
     if page not in page_list:
         page_list.append(page)
         page_txt[page] = '{default}'
+
+# Read my observations file (exported from iNaturalist) and use it as follows:
+#   Associate common names with scientific names
+#   Get a count of observations (total and research grade) of each flower.
+#   Get an iNaturalist taxon ID for each flower.
+with open(root + '/observations.csv', 'r') as f:
+    csv_reader = csv.reader(f)
+    header_row = csv_reader.next()
+
+    com_idx = header_row.index('common_name')
+    sci_idx = header_row.index('scientific_name')
+    rg_idx = header_row.index('quality_grade')
+    taxon_idx = header_row.index('taxon_id')
+
+    for row in csv_reader:
+        sci = row[sci_idx]
+
+        # In the highly unusual case of no scientific name for an observation,
+        # just throw it out.
+        if not sci: continue
+
+        # The common name is forced to all lower case to match my convention.
+        # The scientific name is left in its standard case.
+        com = row[com_idx].lower()
+        taxon_id = row[taxon_idx]
+        rg = row[rg_idx]
+
+        if sci in sci_page:
+            page = sci_page[sci]
+        else:
+            # We record observations even if we don't have a page for them
+            # so that we can identify missing pages at the end.
+            # If there is a page for the scientific name, use it.
+            # Otherwise, prefer the common name if we have it.
+            if sci in page_txt or not com:
+                page = sci
+            else:
+                page = com
+            page_sci[page] = sci
+            sci_page[sci] = page
+
+        if page not in page_obs:
+            page_obs[page] = 0
+            page_obs_rg[page] = 0
+        page_obs[page] += 1
+        if rg == 'research':
+            page_obs_rg[page] += 1
+        page_taxon_id[page] = taxon_id
 
 # Get a list of pages without parents (top-level pages).
 top_list = [x for x in page_list if x not in page_parent]
@@ -567,7 +607,7 @@ for page in page_list:
 
 # Create a txt listing all flowers without pages, then parse it into html.
 jpg_height = 50
-unlisted_flowers = sorted([f for f in flower_obs if f not in page_list])
+unlisted_flowers = sorted([f for f in page_obs if f not in page_list])
 s = '<br/>\n'.join(unlisted_flowers) + '<p/>\n'
 parse("other observations", s)
 
@@ -600,8 +640,8 @@ def count_matching_obs(page, color, match_flowers):
     # isn't listed in page_color for the page.  Therefore, we follow all
     # child links blindly and only compare the color when we reach a flower
     # with an observation count.
-    if page in flower_obs and page_matches_color(page, color):
-        count += flower_obs[page]
+    if page in page_obs and page_matches_color(page, color):
+        count += page_obs[page]
         match_flowers.add(page)
 
     if page in page_child:

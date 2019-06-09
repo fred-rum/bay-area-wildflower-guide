@@ -1,5 +1,4 @@
-<h2>Rubus spp.</h2>
-
+{sci:Rubus}
 Distinguishing features:
 {-
 Prickle presence and shape.

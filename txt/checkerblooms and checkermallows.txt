@@ -1,5 +1,4 @@
-<h2>Sidalcea spp.</h2>
-
+{sci:Sidalcea}
 Distinguishing features:
 {-
 thin linear leaves cupping the involucre or not

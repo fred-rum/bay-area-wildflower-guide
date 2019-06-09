@@ -1,5 +1,4 @@
-<h2>Gilia spp.</h2>
-
+{sci:Gilia}
 <h3>Single-color gilias</h3>
 
 {+california gilia}

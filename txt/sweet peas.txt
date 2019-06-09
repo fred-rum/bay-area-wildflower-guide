@@ -1,5 +1,4 @@
-<h2>Lathyrus spp.</h2>
-
+{sci:Lathyrus}
 Distinguishing features:
 {-
 number of leaflets per leaf
