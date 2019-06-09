@@ -59,7 +59,7 @@ os.mkdir(root + '/html')
 
 # key: page name
 page_parent = {} # a set of names of the page's parent pages
-page_child = {} # a set of names of the page's child pages
+page_child = {} # a list of names of the page's child pages
 page_txt = {} # txt (string) (potentially with some parsing done to it)
 
 # A set of color names that the page is linked from.
@@ -116,7 +116,13 @@ jpg_list = get_file_list('photos', 'jpg')
 thumb_list = get_file_list('thumbs', 'jpg')
 
 def get_page_from_jpg(jpg):
-    return re.sub(r'[-0-9]+$', r'', jpg)
+    page = re.sub(r'[-0-9]+$', r'', jpg)
+
+    # Remove ssp. and other elaborations that I use in my keywords
+    # but not in my page names.
+    page = re.sub(r' ssp. | spp. ', ' ', page)
+
+    return page
 
 def get_com(page):
     if page in page_com:
@@ -153,14 +159,10 @@ def get_full(page, lines=2):
 
 flower_jpg_list = {}
 for jpg in sorted(jpg_list):
-    matchobj = re.match(r'(.*[a-z])[-0-9]+$', jpg)
-    if matchobj:
-        flower = matchobj.group(1)
-        if flower not in flower_jpg_list:
-            flower_jpg_list[flower] = []
-        flower_jpg_list[flower].append(jpg)
-    else:
-        print 'Unrecognized jpg file: {jpg}'.format(jpg=jpg)
+    flower = get_page_from_jpg(jpg)
+    if flower not in flower_jpg_list:
+        flower_jpg_list[flower] = []
+    flower_jpg_list[flower].append(jpg)
 
 # Compare the photos directory with the thumbs directory.
 # If a file exists in photos and not thumbs, create it.
@@ -216,8 +218,8 @@ def assign_child(parent, child):
         page_parent[child].add(parent)
 
         if parent not in page_child:
-            page_child[parent] = set()
-        page_child[parent].add(child)
+            page_child[parent] = []
+        page_child[parent].append(child)
 
 # Read txt files, but perform limited substitutions for now.
 # More will be done once we have a complete set of parent->child relationships.
@@ -300,17 +302,22 @@ def write_obs(w, page):
     else:
         w.write('Chris&rsquo;s observations: ')
 
+    if page in page_sci and page_sci[page].count(' ') == 1:
+        rg_txt = 'research grade'
+    else:
+        rg_txt = 'research grade to species level'
+
     if n == 0:
         w.write('none')
     elif rg == 0:
-        w.write('{n} (none research grade)'.format(n=n))
+        w.write('{n} (none are {rg_txt})'.format(n=n, rg_txt=rg_txt))
     elif rg == n:
         if n == 1:
-            w.write('1 (research grade)')
+            w.write('1 ({rg_txt})'.format(rg_txt=rg_txt))
         else:
-            w.write('{n} (all research grade)'.format(n=n))
+            w.write('{n} (all are {rg_txt})'.format(n=n, rg_txt=rg_txt))
     else:
-        w.write('{n} ({rg} research grade)'.format(n=n, rg=rg))
+        w.write('{n} ({rg} are {rg_txt})'.format(n=n, rg=rg, rg_txt=rg_txt))
 
     w.write('<p/>\n')
 
@@ -448,10 +455,21 @@ def parse(page, s):
         else:
             link_to_jpg = True
 
-        # If the "jpg" name is actually a flower name,
-        # use the first jpg of that flower.
-        if jpg not in jpg_list and jpg in flower_jpg_list:
-            jpg = flower_jpg_list[jpg][0]
+        jpg_page = page
+        while jpg not in jpg_list:
+            # If the "jpg" name is actually a flower name,
+            # use the first jpg of that flower.
+            if jpg in flower_jpg_list:
+                jpg = flower_jpg_list[jpg][0]
+                break
+
+            # If the "jpg" name is actually a parent page name,
+            # drill into its first child and try again.
+            if jpg in page_child:
+                jpg = page_child[jpg][0]
+                continue
+            else:
+                break
 
         thumb = '../thumbs/{jpg}.jpg'.format(jpg=jpg)
 

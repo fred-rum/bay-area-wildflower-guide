@@ -1,3 +1,4 @@
+{com:red ribbons}
 {sci:clarkia concinna}
 
 Distinguishing features:
@@ -17,7 +18,7 @@ sepals staying fused only near tip
 <a href="https://www.calflora.org/entry/dgrid.html?crn=2176">range</a> centered on Santa Clara
 -}
 
-{+Clarkia concinna concinna}
+{+red ribbons}
 {-
 petals <b>15&ndash;30 mm</b> long
 stigma exserted beyond anthers (maybe)
@@ -26,7 +27,7 @@ sepals staying fused only near tip
 <a href="https://www.calflora.org/entry/dgrid.html?crn=2177">range</a> includes the east bay and areas north of the bay
 -}
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0918+1532} {raiche's red ribbons:Clarkia concinna ssp. raichei}
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0918+1532} {raiche's red ribbons}Clarkia concinna raichei}
 {-
 petals <b>10&ndash;20 mm</b> long
 stigma not exserted beyond anthers (maybe)
