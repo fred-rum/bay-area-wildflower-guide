@@ -105,11 +105,6 @@ if a grandparent links to a parent, and the parent doesn't have its own jpg,
 it would be nice to attach colors to individual jpgs of a flower,
   e.g. for baby blue eyes (N. menziesii).
 
-when a flower (or parent) doesn't have a common name (i.e. it's the same
-  as its scientific name), then only one name should be printed, and it
-  should be italicized.  The <h1> at the top of the page should also be
-  italicized (but I suppose not the title in the title bar).
-
 ###############################################################################
 
 It'd be nice to split the img and text onto separate lines on small

@@ -253,6 +253,67 @@ def read_txt(page):
     s = re.sub(r'{com:(.*)}\n', repl_com, s)
     page_txt[page] = s
 
+# For containers, sum the observation counts of all children,
+# *but* if a flower is found via multiple paths, count it only once.
+# Two values are returned: (n, rg)
+#   n is the observation count
+#   rg is the research-grade observation count (0 <= rg <= n)
+def count_matching_obs(page, color, match_flowers):
+    if page in match_flowers: return (0, 0)
+
+    n = 0
+    rg = 0
+
+    # If a container page contains exactly one descendant with a matching
+    # color, the container isn't listed on the color page, and the color
+    # isn't listed in page_color for the page.  Therefore, we follow all
+    # child links blindly and only compare the color when we reach a flower
+    # with an observation count.
+    if page in page_obs and page_matches_color(page, color):
+        n += page_obs[page]
+        rg += page_obs_rg[page]
+        match_flowers.add(page)
+
+    if page in page_child:
+        for child in page_child[page]:
+            (ch_n, ch_rg) = count_matching_obs(child, color, match_flowers)
+            n += ch_n
+            rg += ch_rg
+
+    return (n, rg)
+
+# Write the iNaturalist observation count (including all children).
+def write_obs(w, page):
+    (n, rg) = count_matching_obs(page, None, set())
+
+    if page in page_taxon_id:
+        link = 'https://www.inaturalist.org/observations/chris_nelson?taxon_id={taxon_id}'.format(taxon_id=page_taxon_id[page])
+    elif page in page_sci:
+        link = 'https://www.inaturalist.org/observations/chris_nelson?search_on=names&q={sci}'.format(sci=page_sci[page])
+    else:
+        link = None
+
+    w.write('<p/>\n')
+
+    if link:
+        w.write('<a href="{link}" target="_blank">Chris&rsquo;s observations</a>: '.format(link=link))
+    else:
+        w.write('Chris&rsquo;s observations: ')
+
+    if n == 0:
+        w.write('none')
+    elif rg == 0:
+        w.write('{n} (none research grade)'.format(n=n))
+    elif rg == n:
+        if n == 1:
+            w.write('1 (research grade)')
+        else:
+            w.write('{n} (all research grade)'.format(n=n))
+    else:
+        w.write('{n} ({rg} research grade)'.format(n=n, rg=rg))
+
+    w.write('<p/>\n')
+
 def write_external_links(w, page):
     if page in page_sci:
         sci = page_sci[page]
@@ -339,29 +400,7 @@ def parse(page, s):
     s = re.sub(r'<a href=', '<a target="_blank" href=', s)
 
     # Replace {default} with all the default fields.
-    s = re.sub(r'{default}', '{jpgs}\n\n{obs}', s)
-
-    # Replace {obs} with iNaturalist observation count.
-    def repl_obs(matchobj):
-        if page in page_obs:
-            n = page_obs[page]
-            rg = page_obs_rg[page]
-            obs_str = '<a href="https://www.inaturalist.org/observations/chris_nelson?taxon_id={taxon_id}" target="_blank">Chris&rsquo;s observations</a>: '.format(taxon_id=page_taxon_id[page])
-            if rg == 0:
-                obs_str += '{n} (none research grade)'.format(n=n)
-            elif rg == n:
-                if n == 1:
-                    obs_str += '1 (research grade)'
-                else:
-                    obs_str += '{n} (all research grade)'.format(n=n)
-            else:
-                obs_str += '{n} ({rg} research grade)'.format(n=n, rg=rg)
-        else:
-            obs_str = 'Chris&rsquo;s observations: none'
-
-        return obs_str + '<p/>'
-
-    s = re.sub(r'{obs}', repl_obs, s)
+    s = re.sub(r'{default}', '{jpgs}', s)
 
     def repl_list(matchobj):
         c = matchobj.group(1)
@@ -495,6 +534,7 @@ def parse(page, s):
             w.write('<b><i>{elab}</i></b><p/>\n'.format(elab=get_elab(page_sci[page])))
 
         w.write(s)
+        write_obs(w, page)
         write_external_links(w, page)
         write_parents(w, page)
         write_footer(w)
@@ -628,32 +668,10 @@ def list_page(w, page, indent):
 
     w.write('<a href="{page}.html">{full}</a></div>\n'.format(page=page, full=get_full(page)))
 
-# For containers, sum the observation counts of all children,
-# *but* if a flower is found via multiple paths, count it only once.
-def count_matching_obs(page, color, match_flowers):
-    if page in match_flowers: return 0
-
-    count = 0
-
-    # If a container page contains exactly one descendant with a matching
-    # color, the container isn't listed on the color page, and the color
-    # isn't listed in page_color for the page.  Therefore, we follow all
-    # child links blindly and only compare the color when we reach a flower
-    # with an observation count.
-    if page in page_obs and page_matches_color(page, color):
-        count += page_obs[page]
-        match_flowers.add(page)
-
-    if page in page_child:
-        for child in page_child[page]:
-            count += count_matching_obs(child, color, match_flowers)
-
-    return count
-
 def list_matches(w, match_set, indent, color):
     # Sort by observation count.
     def count_flowers(page):
-        return count_matching_obs(page, color, set())
+        return count_matching_obs(page, color, set())[0]
 
     # Sort in reverse order of observation count.
     # We initialize the sort with match_set sorted alphabetically.
