@@ -94,16 +94,17 @@ with names only (for bandwidth saving) and photos only (for fast skimming).
 
 Add links at the top of primary color pages to secondary color anchors.
 
-if a page has a scientific name, but it was not found in observations.csv
-  (e.g. it is a genus):
-    link to iNaturalist using ?search_on=names&q={genus}
-
-if a grandparent links to a parent, and the parent doesn't have its own jpg,
-   use its first child's jpg.  (I.e. when determining parent-child
-   relationships, also update flower_jpg_list.)
-
 it would be nice to attach colors to individual jpgs of a flower,
   e.g. for baby blue eyes (N. menziesii).
+
+it would be nice to have a glossary with popup links automatically created
+  where glossary words are used.
+
+Jepson example:
+<u class="dotted" title="Group of bracts more or less held together as a unit, subtending a flower, fruit (acorn cup), or inflorescence." >Involucre</u>
+
+replace +-, --, >=, <=, <<, >>, <, > with HTML codes
+  &plusmn; &ndash; &ge; &le; &#8810; &#8811; &lt; &gt;
 
 ###############################################################################
 
@@ -114,10 +115,18 @@ screens only, e.g. for ceanothus.
 I'm not sure it's possible to leave the child name on the img line and
   drop out the remaining lines.  They're currently all in one span.
   Making it two spans puts them in separate columns.
+Maybe put a box around it for clarity.
 
 Proposed:
-  {-...}
+  {++...} instead of {+...}
+  support {++[page]:[jpg]} for image & text linked to child page & split
 
 ###############################################################################
 
 Note differences between mallows and checkermallows.
+
+verify sea-kangaroo's rancheria clover:
+https://www.inaturalist.org/observations/24690860
+
+Double check
+https://www.inaturalist.org/observations/23087250
