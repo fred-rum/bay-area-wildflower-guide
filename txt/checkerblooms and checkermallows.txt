@@ -32,5 +32,3 @@ Marin
 {-
 Nisene Marks
 -}
-
-See also {mallows}.

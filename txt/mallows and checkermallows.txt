@@ -1,0 +1,11 @@
+{+mallows}
+{-
+Jepson method: bractlets subtending calyx 3--11, generally forming involucel (ansecondary involucre inside the first)
+my method: petals have 3-5 prominent darker veins that may branch and/or fade out toward the petal tip
+-}
+
+{+checkerblooms and checkermallows}
+{-
+Jepson method: bractlets subtending calyx 0(1--3), generally not forming involucel (secondary involucre)
+my method: petals have numerous lighter veins that branch or network along their length and may fade out toward the petal tip
+-}

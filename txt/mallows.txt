@@ -25,5 +25,3 @@ petals generally 15--30 mm; sepals 6--8 mm
 petal veins dark
 bractlets 3--7 mm long, 2--4 mm wide, free
 -}
-
-See also {checkerblooms and checkermallows}.

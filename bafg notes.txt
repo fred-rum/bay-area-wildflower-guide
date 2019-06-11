@@ -123,8 +123,6 @@ Proposed:
 
 ###############################################################################
 
-Note differences between mallows and checkermallows.
-
 fix Clarkia concinna concinna page name to be recognized as a scientific name.
 
 fix indenting of images in all.html
