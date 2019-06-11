@@ -39,77 +39,77 @@ ragged or entire (not notched once).
 
 <a href="https://keybase.rbg.vic.gov.au/keys/show/3498?filter_id=55b17b6f8c990">Jepson KeyBase</a>
 
-<h4>&le; 5 scales; simple stem</h4>
+<h4><= 5 scales; simple stem</h4>
 
 Ordered roughly by scale length.
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0411+2148}
 {Microseris elegans}
 {-
-Seeds 1.5&ndash;3 mm, widest at the tip, tapering (slightly) to the base.
+Seeds 1.5--3 mm, widest at the tip, tapering (slightly) to the base.
 Outermost seeds are sometimes hairy, while inner seeds are glabrous.
-5 scales, each 0.2&ndash;2.5 mm.
-Bristles 3&ndash;5 mm.
+5 scales, each 0.2--2.5 mm.
+Bristles 3--5 mm.
 Found at Coe and Mt. Diablo.
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0511+0184}
 {Microseris bigelovii}
 {-
-Seeds 2.5&ndash;5.5mm, widest near middle and tapering to base.
+Seeds 2.5--5.5mm, widest near middle and tapering to base.
 Outermost seeds are generally very hairy, while inner seeds are glabrous.
-5 scales, each 1&ndash;4 mm, curved only at base.
+5 scales, each 1--4 mm, curved only at base.
 Scale midrib linear, thicker at base.
-Bristles 3&ndash;8 mm.
+Bristles 3--8 mm.
 Found near the coast and at Edgewood.
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1207+1291}
 {Microseris campestris}
 {-
-Seeds 3&ndash;5+ mm, widest at tip.
-5 scales, each 1&ndash;4.5 mm, becoming +- curved throughout, barely inrolled, barely or not pigmented.
+Seeds 3--5+ mm, widest at tip.
+5 scales, each 1--4.5 mm, becoming +- curved throughout, barely inrolled, barely or not pigmented.
 Scale midrib evenly tapered from thick base.
-Bristles 3&ndash;5.5 mm.
+Bristles 3--5.5 mm.
 Rare near Redwood Park and Mt. Diablo.
 -}
 
 {+douglas' silverpuffs}
 {-
-Seeds 3&ndash;10 mm.
-&le; 5 scales, each tiny&ndash;6.5 mm; if &ge; 1 mm, becoming curved throughout and strongly inrolled.
+Seeds 3--10 mm.
+<= 5 scales, each tiny--6.5 mm; if >= 1 mm, becoming curved throughout and strongly inrolled.
 Scale midrib evenly tapered from thick base.
-Bristles 3&ndash;8.5 mm.
+Bristles 3--8.5 mm.
 Found everywhere east of Skyline Blvd.
 -}
 
 {+Microseris acuminata}
 {-
-Seeds 4.5&ndash;7 mm, flared at tip.
-5 scales, each 3.5&ndash;11 mm, barely inrolled, midrib > 1/5 scale width.
-Bristles 4&ndash;7 mm.
+Seeds 4.5--7 mm, flared at tip.
+5 scales, each 3.5--11 mm, barely inrolled, midrib > 1/5 scale width.
+Bristles 4--7 mm.
 Rare in the East Bay.
 Supposedly not present on the peninsula, but found in the upper part of Foothills Park.
 -}
 
-<h4>5&ndash;10 scales; stem may be branched and/or have leaves</h4>
+<h4>5--10 scales; stem may be branched and/or have leaves</h4>
 
 Ordered roughly by scale length.
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0118+0635}
 {Microseris paludosa}
 {-
-Seeds 4&ndash;7 mm
-5&ndash;10 scales, each 2&ndash;4 mm.
-Bristles 6&ndash;9 mm.
+Seeds 4--7 mm
+5--10 scales, each 2--4 mm.
+Bristles 6--9 mm.
 Found at Mt. Diablo.
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0114+0026}
 {Microseris sylvatica}
 {-
-Seeds 5&ndash;12 mm
-5&ndash;10 scales, each 4&ndash;10 mm.
-Bristles 6&ndash;9 mm.
+Seeds 5--12 mm
+5--10 scales, each 4--10 mm.
+Bristles 6--9 mm.
 Found near the coast and on Mt. Tamalpais.
 -}

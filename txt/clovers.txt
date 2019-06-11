@@ -22,100 +22,100 @@ various parts hairy or glabrous
 {+tomcat clover}
 {-
 glabrous all over
-Leaflets: 1&ndash;5 cm, linear to obovate, serrate, teeth < 1 mm
+Leaflets: 1--5 cm, linear to obovate, serrate, teeth < 1 mm
 Bracts: <b>fused together; wheel-shaped, sharply lobed</b> or dissected
-Inflorescence: <b>head-like, 1.5&ndash;3 cm wide</b>, generally lobed, many-flowered except on small plants
-Calyx: 6&ndash;10 mm, shiny
-Corolla: 8&ndash;15 mm, <b>lavender to purple, tip generally white</b>
+Inflorescence: <b>head-like, 1.5--3 cm wide</b>, generally lobed, many-flowered except on small plants
+Calyx: 6--10 mm, shiny
+Corolla: 8--15 mm, <b>lavender to purple, tip generally white</b>
 -}
 
 {+rose clover}
 {-
 hairy on stem, leaflet margins and stipules
-Leaflets: 3, palmate, 1&ndash;2.5 cm, obovate
+Leaflets: 3, palmate, 1--2.5 cm, obovate
 Bracts: none, but <b>leaf stipules look like pale bracts with dark red veins</b>
-Inflorescence: <b>spheric, ~15&ndash;20 mm</b>, many-flowered; sessile above 1&ndash;2 &plusmn; reduced leaves (with 3 leaflets each) with involucre-like stipules
-Calyx: 7&ndash;9 mm, bristle-like, densely plumose
-Corolla: 11&ndash;15 mm, generally <b>pink</b> (not purple with white tips)
+Inflorescence: <b>spheric, ~15--20 mm</b>, many-flowered; sessile above 1--2 +- reduced leaves (with 3 leaflets each) with involucre-like stipules
+Calyx: 7--9 mm, bristle-like, densely plumose
+Corolla: 11--15 mm, generally <b>pink</b> (not purple with white tips)
 -}
 
 {+narrow-leaved clover}
 {-
 slightly hairy stem, long-hairy leaf stipules
-Leaflets: 3, palmate, 2&ndash;4.5 cm, linear to narrowly lanceolate
+Leaflets: 3, palmate, 2--4.5 cm, linear to narrowly lanceolate
 Bracts: none
-Inflorescence: <b>peduncled; spike</b>, 1&ndash;5 cm, cylindric
-Calyx: 10&ndash;12 mm, lobes spreading, needle-like, plumose
-Corolla: 10&ndash;12 mm, &plusmn; = calyx, <b>pale pink</b>
+Inflorescence: <b>peduncled; spike</b>, 1--5 cm, cylindric
+Calyx: 10--12 mm, lobes spreading, needle-like, plumose
+Corolla: 10--12 mm, +- = calyx, <b>pale pink</b>
 -}
 
 {+crimson clover}
 {-
 short hairy
-Leaflets: 3, palmate, 1&ndash;2.5 cm, obovate to obcordate
+Leaflets: 3, palmate, 1--2.5 cm, obovate to obcordate
 Bracts: none
-Inflorescence: <b>spike, 2&ndash;6 cm</b>, &plusmn; cylindric or &plusmn; conic
-Calyx: 7&ndash;10 mm, lobes bristle-like
-Corolla: 10&ndash;14 mm, <b>crimson</b> or white
+Inflorescence: <b>spike, 2--6 cm</b>, +- cylindric or +- conic
+Calyx: 7--10 mm, lobes bristle-like
+Corolla: 10--14 mm, <b>crimson</b> or white
 -}
 
 {+tree clover}
 {-
-&plusmn; glabrous
-Leaflets: 3, palmate, 1&ndash;3 cm, oblanceolate to obovate, serrate
++- glabrous
+Leaflets: 3, palmate, 1--3 cm, oblanceolate to obovate, serrate
 Bracts: inconspicuous, often in a ring at base
-Inflorescence: <b>head-like, 7&ndash;20 mm wide</b>, ovate or spheric; axis occasionally exserted; pedicels in age 3&ndash;6 mm; flowers soon reflexed
-Calyx: 5&ndash;6 mm, tube glabrous, lobes unequal, <b>ciliate with short, flat bristles</b> (or, through breakage, bristle bases)
-Corolla: &plusmn; &ge; calyx, <b>pink to purple</b>
+Inflorescence: <b>head-like, 7--20 mm wide</b>, ovate or spheric; axis occasionally exserted; pedicels in age 3--6 mm; flowers soon reflexed
+Calyx: 5--6 mm, tube glabrous, lobes unequal, <b>ciliate with short, flat bristles</b> (or, through breakage, bristle bases)
+Corolla: +- >= calyx, <b>pink to purple</b>
 -}
 
 {+clustered clover}
 {-
-&plusmn; glabrous
-Leaflets: 3, palmate, 5&ndash;12 mm, obovate
++- glabrous
+Leaflets: 3, palmate, 5--12 mm, obovate
 Bracts: none or occasionally < 1 mm or forming a vestigial ring
-Inflorescence: <b>sessile at end of stems or in succession of leaf axils, head-like, 7&ndash;10 mm wide</b>, many-flowered; pedicels < 1 mm
-Calyx: 3&ndash;5 mm, lobes triangular
-Corolla: &plusmn; > calyx, <b>pink</b>
+Inflorescence: <b>sessile at end of stems or in succession of leaf axils, head-like, 7--10 mm wide</b>, many-flowered; pedicels < 1 mm
+Calyx: 3--5 mm, lobes triangular
+Corolla: +- > calyx, <b>pink</b>
 -}
 
 {+cowbag clover}
 {-
 glabrous
-Leaflets: 3, palmate, 0.5&ndash;2 cm, narrowly oblong to obovate, entire or toothed, occasionally lobed, tip generally truncate
-Bracts: fused, vestigial, ring-like in ssp. depauperatum; &plusmn; free in variants
-Inflorescence: <b>head-like, 0.5&ndash;1 cm wide</b>, 3&ndash;many-flowered
-Corolla: 4.5&ndash;9 mm, <b>pink-purple</b> (but CalPhotos also shows cream w/ purple above), <b>white-tipped</b>, <b>banner inflated in fruit</b>
+Leaflets: 3, palmate, 0.5--2 cm, narrowly oblong to obovate, entire or toothed, occasionally lobed, tip generally truncate
+Bracts: fused, vestigial, ring-like in ssp. depauperatum; +- free in variants
+Inflorescence: <b>head-like, 0.5--1 cm wide</b>, 3--many-flowered
+Corolla: 4.5--9 mm, <b>pink-purple</b> (but CalPhotos also shows cream w/ purple above), <b>white-tipped</b>, <b>banner inflated in fruit</b>
 -}
 
 {+bull clover}
 {-
 glabrous
-Leaflets: 3, palmate, 1&ndash;2.5 cm, elliptic to &plusmn; round, &plusmn; entire to toothed
-Bracts: &plusmn; free to 1/2 fused
+Leaflets: 3, palmate, 1--2.5 cm, elliptic to +- round, +- entire to toothed
+Bracts: +- free to 1/2 fused
 Inflorescence: head-like, 5ndash;many-flowered; flowers quickly spreading or reflexed
-Calyx: 4&ndash;7 mm, glabrous, longer lobes bristle-like, generally branched
-Corolla: <b>10&ndash;20 mm, dull white or &plusmn; yellow, purple-tipped (or not?), banner inflated in fruit</b>
+Calyx: 4--7 mm, glabrous, longer lobes bristle-like, generally branched
+Corolla: <b>10--20 mm, dull white or +- yellow, purple-tipped (or not?), banner inflated in fruit</b>
 -}
 
 {+hop trefoil}
 {-
 puberulent, although it may be hard to see
 <b>petioles of mid-leaves > leaflets</b>
-Leaflets: 3, pinnate, 0.6&ndash;1.5 cm, obovate
+Leaflets: 3, pinnate, 0.6--1.5 cm, obovate
 Bracts: none or occasionally < 1 mm or forming a vestigial ring
-Inflorescence: head-like, <b>8&ndash;13 mm wide</b>, ovate to spheric, generally > 20-flowered; flowers quickly reflexed
-Calyx: 1.5&ndash;2 mm
-Corolla: 4&ndash;5.5 mm, <b>bright yellow</b>, brown in age, <b>striate</b>
+Inflorescence: head-like, <b>8--13 mm wide</b>, ovate to spheric, generally > 20-flowered; flowers quickly reflexed
+Calyx: 1.5--2 mm
+Corolla: 4--5.5 mm, <b>bright yellow</b>, brown in age, <b>striate</b>
 -}
 
 {+lesser hop trefoil}
 {-
 sparsely puberulent
 <b>petioles of mid-leaves generally < leaflets</b>
-Leaflets: 3, pinnate, 0.6&ndash;1.2 cm, obovate
+Leaflets: 3, pinnate, 0.6--1.2 cm, obovate
 Bracts: none or occasionally < 1 mm or forming a vestigial ring
-Inflorescence: head- to &plusmn; spike-like, <b>4&ndash;8 mm wide</b>, 5&ndash;10(20)-flowered; flowers quickly reflexed
-Calyx: 1.5&ndash;2 mm
-Corolla: 3.5&ndash;4 mm, <b>bright yellow</b>, brown in age, <b>weak-striate</b>
+Inflorescence: head- to +- spike-like, <b>4--8 mm wide</b>, 5--10(20)-flowered; flowers quickly reflexed
+Calyx: 1.5--2 mm
+Corolla: 3.5--4 mm, <b>bright yellow</b>, brown in age, <b>weak-striate</b>
 -}

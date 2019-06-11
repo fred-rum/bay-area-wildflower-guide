@@ -19,10 +19,10 @@ Twigs: generally brown to gray-brown, no more than slightly fuzzy
 Leaves:
 <ul>
 <b>opposite</b>, occasionally clustered
-6&ndash;30 mm, 3&ndash;18 mm wide
+6--30 mm, 3--18 mm wide
 adaxially glabrous
 abaxially glabrous or with short stiff adpressed hairs, <b>1-ribbed from base</b>
-margin entire or teeth &plusmn; sharp <b>(not glandular)</b>
+margin entire or teeth +- sharp <b>(not glandular)</b>
 </ul>
 Inflorescence: <b>umbel-like</b> (flowers from a single point)
 Flower: white, pale blue, blue, or lavender
@@ -34,10 +34,10 @@ Twigs: <b>green</b> to gray-brown
 Leaves:
 <ul>
 alternate
-11&ndash;50 mm, 6&ndash;15 mm wide
+11--50 mm, 6--15 mm wide
 adaxially <b>glandular-papillate (warty)</b>
 abaxially generally <b>densely hairy</b>, 1-ribbed from base
-<b>margin rolled under</b>, minutely gland-toothed, teeth 17&ndash;31
+<b>margin rolled under</b>, minutely gland-toothed, teeth 17--31
 </ul>
 Inflorescence: raceme-like (flowers from pedicels along axis)
 Flower: deep blue
@@ -49,9 +49,9 @@ Twigs: <b>green, ridged</b>, angled distally, glabrous
 Leaves:
 <ul>
 alternate
-10&ndash;39 mm, 5&ndash;20 mm wide
+10--39 mm, 5--20 mm wide
 adaxially glabrous
-abaxially glabrous to puberulent between veins or not, 3-ribbed from base, veins &plusmn; raised, sparsely puberulent
+abaxially glabrous to puberulent between veins or not, 3-ribbed from base, veins +- raised, sparsely puberulent
 margin may be gland-toothed
 </ul>
 Inflorescence: generally raceme-like (flowers from pedicels along axis) or <b>panicle-like</b> (branched raceme)
@@ -64,10 +64,10 @@ Twigs: green to <b>reddish</b>, <b>not ridged</b> or angled, <b>may be hairy</b>
 Leaves:
 <ul>
 alternate
-11&ndash;30 mm, 5&ndash;25 mm wide
-adaxially &plusmn; glabrous to <b>short-hairy</b>
+11--30 mm, 5--25 mm wide
+adaxially +- glabrous to <b>short-hairy</b>
 abaxially sparsely to <b>densely short-hairy, especially veins</b>, 3-ribbed from base
-margin minutely gland-toothed, teeth 20&ndash;70
+margin minutely gland-toothed, teeth 20--70
 </ul>
 Inflorescence: generally raceme-like (flowers from pedicels along axis)
 Flower: blue to purple-blue (or pale blue or white)

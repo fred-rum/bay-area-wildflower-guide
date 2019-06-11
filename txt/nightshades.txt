@@ -15,8 +15,8 @@ leaf ovate, obovate, or elliptic, generally entire
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0110+1545} {purple nightshade:Solanum xanti}
 {-
-stem &plusmn;hairy, hairs are unbranched, glandular or not
-leaf lanceolate to ovate, &plusmn;entire to 1&ndash;2-lobed at base; base obtuse to &plusmn;cordate
+stem +-hairy, hairs are unbranched, glandular or not
+leaf lanceolate to ovate, +-entire to 1--2-lobed at base; base obtuse to +-cordate
 -}
 
 <h3>White nightshades</h3>
@@ -39,24 +39,24 @@ Some features are variable within a species, but if a <b>bold feature</b> is see
 {+black nightshade}
 {-
 corolla: corolla 10 mm wide, white
-leaf: 4&ndash;7 cm, entire to coarsely wavy-toothed
-hairs: &plusmn;spreading or curved, <b>glandular</b> and not
+leaf: 4--7 cm, entire to coarsely wavy-toothed
+hairs: +-spreading or curved, <b>glandular</b> and not
 fruit: <b>dull</b>
 -}
 
 {american black nightshade:american black nightshade,-2.jpg} {child:american black nightshade}
 {-
-corolla: corolla <b>3&ndash;6 mm wide</b>, white
-leaf: 2&ndash;15 cm, entire to coarsely wavy-toothed
-hairs: &plusmn;0 or short, &plusmn;appressed or curved, nonglandular
+corolla: corolla <b>3--6 mm wide</b>, white
+leaf: 2--15 cm, entire to coarsely wavy-toothed
+hairs: +-0 or short, +-appressed or curved, nonglandular
 fruit: <b>glossy</b> w/ <b>sepals reflexed</b>
 -}
 
 {+greenspot nightshade}
 {-
-corolla: corolla &plusmn;10 mm wide, <b>white-lavender</b>, puberulent below
-leaf: 1&ndash;9 cm, entire to coarsely irregularly <b>toothed</b>
-hairs: generally simple, < 1mm, &plusmn;curved, white
+corolla: corolla +-10 mm wide, <b>white-lavender</b>, puberulent below
+leaf: 1--9 cm, entire to coarsely irregularly <b>toothed</b>
+hairs: generally simple, < 1mm, +-curved, white
 fruit: <b>glossy</b> w/ <b>sepals not reflexed</b>
 -}
 

@@ -7,7 +7,7 @@ calyx bowl much shorter than calyx lobes.
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1108+1963} {grass pea:Lathyrus sphaericus}
 {-
 inflorescence axis extended as bristle beyond flower.
-calyx bowl &plusmn; &le; calyx lobes.
+calyx bowl +- <= calyx lobes.
 -}
 
 See also {vetches} and {sweet peas}.

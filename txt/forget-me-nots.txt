@@ -1,9 +1,9 @@
 {sci:Myosotis}
 {+broadleaf forget-me-not}
 {-
-corolla 5&ndash;10 mm wide, blue (but pink when young), prominent yellow ring in center.
+corolla 5--10 mm wide, blue (but pink when young), prominent yellow ring in center.
 inflorescence alternating below; flowers denser at the tip, possibly resembling a fiddleneck-like spiral.
-leaves roughly 2&ndash;3x wider than corollas, roughly 2&ndash;3x longer than wide.
+leaves roughly 2--3x wider than corollas, roughly 2--3x longer than wide.
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1115+3393} {changing forget-me-not:Myosotis discolor}

@@ -14,17 +14,17 @@ perianth blue, blue-purple, pink-purple, or white
 <a href="http://www.virtualherbarium.org/glossary/glossary.php?searchfor=crown&searchin=def&B1=Search">crown</a> erect, <b>leaning toward anthers, outward at tip</b>, white
 perianth tube <b>not narrowed</b> above ovary
 bracts generally dark purple (paler, striped dark purple
-flowers from February&ndash;April (theoretically)
+flowers from February--April (theoretically)
 common throughout the bay area
 -}
 
 {+ookow}
 {-
 perianth blue-purple
-<a href="http://www.virtualherbarium.org/glossary/glossary.php?searchfor=crown&searchin=def&B1=Search">crown</a> erect, <b>leaning away from anthers</b>, &plusmn;purple
-perianth tube <b>narrowed</b> above ovary or &plusmn;so
+<a href="http://www.virtualherbarium.org/glossary/glossary.php?searchfor=crown&searchin=def&B1=Search">crown</a> erect, <b>leaning away from anthers</b>, +-purple
+perianth tube <b>narrowed</b> above ovary or +-so
 bracts pale purple to green
-flowers from May&ndash;June (theoretically)
+flowers from May--June (theoretically)
 scattered throughout the bay area
 -}
 

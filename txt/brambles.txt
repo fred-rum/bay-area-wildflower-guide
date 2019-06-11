@@ -12,8 +12,8 @@ Although the leaves have general difference, there is enough variety within a sp
 {-
 Plant: prostrate to decumbent
 Prickles: <b>weak, slender</b>, straight
-Stem: 2&ndash;10 mm diam, <b>not angled</b>, &plusmn;glabrous to hairy, &plusmn;with stalked glands, glaucous
-Sepals: hairy, <b>prickly</b>, &plusmn;with stalked glands
+Stem: 2--10 mm diam, <b>not angled</b>, +-glabrous to hairy, +-with stalked glands, glaucous
+Sepals: hairy, <b>prickly</b>, +-with stalked glands
 Fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
 -}
 
@@ -28,7 +28,7 @@ Fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
 
 {thimbleberry:thimbleberry-2.jpg} {child:thimbleberry}
 {-
-Plant 0.5&ndash;2.5 m, erect
+Plant 0.5--2.5 m, erect
 <b>No prickles</b>
 Stem: to 6 mm diam, <b>not angled</b>, glabrous to finely hairy with stalked glands, not glaucous
 Sepals hairy, stalked-glandular

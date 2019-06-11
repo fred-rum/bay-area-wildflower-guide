@@ -14,7 +14,7 @@ nectary (yellow/orange spot amidst hair) is crescent-shaped or oblong
 
 {+butterfly mariposa lily}
 {-
-nectary (yellow/orange spot amidst hair) generally &plusmn; square (discounting the curve of the petal), not in red spot
+nectary (yellow/orange spot amidst hair) generally +- square (discounting the curve of the petal), not in red spot
 each petal has a central dark blotch, generally a 2nd paler blotch above
 stem generally branched
 -}
@@ -34,7 +34,7 @@ petal conspicuously hairy adaxially (on top)
 
 {+white globe lily}
 {-
-flower nodding, perianth &plusmn; closed, globe shaped
+flower nodding, perianth +- closed, globe shaped
 petals not yellow
 -}
 

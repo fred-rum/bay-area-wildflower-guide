@@ -10,7 +10,7 @@ range
 
 {+santa clara red ribbons}
 {-
-petals <b>10&ndash;20 mm</b> long
+petals <b>10--20 mm</b> long
 stigma not exserted beyond anthers (maybe)
 petal lobes prominent, separated by deep sinuses
 sepals staying fused only near tip
@@ -19,7 +19,7 @@ sepals staying fused only near tip
 
 {+Clarkia concinna concinna}
 {-
-petals <b>15&ndash;30 mm</b> long
+petals <b>15--30 mm</b> long
 stigma exserted beyond anthers (maybe)
 petal lobes prominent, separated by deep sinuses
 sepals staying fused only near tip
@@ -28,7 +28,7 @@ sepals staying fused only near tip
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0918+1532} {raiche's red ribbons:Clarkia concinna ssp. raichei}
 {-
-petals <b>10&ndash;20 mm</b> long
+petals <b>10--20 mm</b> long
 stigma not exserted beyond anthers (maybe)
 petal lobes short, not separated by deep sinuses
 sepals staying fused in distal 2/3
