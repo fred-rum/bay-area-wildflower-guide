@@ -75,11 +75,17 @@ div.page-thumb-text {
 div.box.indent {
     margin-left: 10vw;
 }
+div.photo-box.indent {
+    margin-left: 10vw;
+}
 /* There's no "max-left" property that would let us limit the indent to
    half the 200px max-width.  But we can get what we want by checking
    whether 20vw is effectively greater than 100px. */
 @media (min-width: 500px) {
     div.box.indent {
+	margin-left: 50px;
+    }
+    div.photo-box.indent {
 	margin-left: 50px;
     }
 }
