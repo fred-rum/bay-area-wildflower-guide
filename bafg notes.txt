@@ -125,8 +125,9 @@ Proposed:
 
 Note differences between mallows and checkermallows.
 
-verify sea-kangaroo's rancheria clover:
-https://www.inaturalist.org/observations/24690860
+fix Clarkia concinna concinna page name to be recognized as a scientific name.
 
-Double check
-https://www.inaturalist.org/observations/23087250
+fix indenting of images in all.html
+
+how to mass rename files:
+for f in *.jpg; do git mv "$f" "$(echo $f | sed 's/-\([-0-9]*\)\.jpg$/,\1.jpg/')"; done

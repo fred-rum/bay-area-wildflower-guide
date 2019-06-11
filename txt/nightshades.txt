@@ -44,7 +44,7 @@ hairs: &plusmn;spreading or curved, <b>glandular</b> and not
 fruit: <b>dull</b>
 -}
 
-{american black nightshade:american black nightshade--2.jpg} {child:american black nightshade}
+{american black nightshade:american black nightshade,-2.jpg} {child:american black nightshade}
 {-
 corolla: corolla <b>3&ndash;6 mm wide</b>, white
 leaf: 2&ndash;15 cm, entire to coarsely wavy-toothed

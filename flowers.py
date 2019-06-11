@@ -116,7 +116,7 @@ jpg_list = get_file_list('photos', 'jpg')
 thumb_list = get_file_list('thumbs', 'jpg')
 
 def get_page_from_jpg(jpg):
-    page = re.sub(r'[-0-9]+$', r'', jpg)
+    page = re.sub(r',([-0-9]*)$', r'', jpg)
 
     # Remove ssp. and other elaborations that I use in my keywords
     # but not in my page names.
