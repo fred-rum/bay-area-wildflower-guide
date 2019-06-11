@@ -4,14 +4,14 @@ Distinguishing features:
 thin linear leaves cupping the involucre or not
 -}
 
-{dwarf checkermallow:dwarf checkermallow-.jpg} {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1202+0238:involucre}
+{dwarf checkermallow:dwarf checkermallow,.jpg} {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1202+0238:involucre}
 {child:dwarf checkermallow}
 {-
 lacks thin linear leaves cupping the involucre; has reduced upper leaves instead
 common throughout the bay area
 -}
 
-{fringed checkerbloom:fringed checkerbloom-.jpg} {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1209+0035:involucre}
+{fringed checkerbloom:fringed checkerbloom,.jpg} {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1209+0035:involucre}
 {child:fringed checkerbloom}
 {-
 has thin linear leaves cupping the involucre

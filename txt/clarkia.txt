@@ -27,7 +27,7 @@ Henry Coe, Sierra Azul and vicinity
 
 <h3>Standard corolla shapes, buds erect or reflexed</h3>
 
-{winecup clarkia:four-spot-.jpg} {child:winecup clarkia}
+{+winecup clarkia}
 {-
 <b>sepals all coming free or staying fused in pairs</b>
 found everywhere

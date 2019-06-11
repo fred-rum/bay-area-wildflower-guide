@@ -1,12 +1,12 @@
 {com:baby blue eyes}
 {sci:Nemophila}
 
-{baby blue eyes-1.jpg} {child:baby blue eyes}
+{+baby blue eyes}
 {-
 common throughout the bay area
 -}
 
-{white nemophila-.jpg} {child:white nemophila}
+{+white nemophila}
 {-
 scattered throughout the bay area
 -}
