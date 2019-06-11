@@ -640,6 +640,13 @@ with open(root + '/observations.csv', 'r') as f:
             page_obs_rg[page] += 1
         page_taxon_id[page] = taxon_id
 
+for page in page_list:
+    if page not in page_sci and page[0].isupper():
+        # The page name looks like a scientific name, which the page doesn't
+        # have yet, so make it happen.
+        page_sci[page] = page
+        sci_page[page] = page
+
 # Get a list of pages without parents (top-level pages).
 top_list = [x for x in page_list if x not in page_parent]
 
