@@ -1,7 +1,7 @@
 {sci:Solanum}
 <h3>Purple nightshades</h3>
 
-Distinguishing features:
+Key features:
 {-
 Hairs are branched or 0/simple on upper stem (not flower pedicel).  The hairs are so tiny that maximum camera close-up doesn't always show them branching, but it does show them matted rather than straight.
 Leaf shape.  There is some overlap, but the shapes are often distinct.
@@ -21,13 +21,13 @@ leaf lanceolate to ovate, +-entire to 1--2-lobed at base; base obtuse to +-corda
 
 <h3>White nightshades</h3>
 
-Fruit distinguishing features:
+Fruit key features:
 {-
 glossy or dull
 sepals reflexed or not
 -}
 
-Flower distinguishing features:
+Flower key features:
 {-
 corolla diameter (warning: Jepson's corolla widths seem a little undersized)
 leaf toothed or not

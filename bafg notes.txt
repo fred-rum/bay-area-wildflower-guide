@@ -103,9 +103,6 @@ it would be nice to have a glossary with popup links automatically created
 Jepson example:
 <u class="dotted" title="Group of bracts more or less held together as a unit, subtending a flower, fruit (acorn cup), or inflorescence." >Involucre</u>
 
-replace +-, --, >=, <=, <<, >>, <, > with HTML codes
-  &plusmn; &ndash; &ge; &le; &#8810; &#8811; &lt; &gt;
-
 ###############################################################################
 
 It'd be nice to split the img and text onto separate lines on small

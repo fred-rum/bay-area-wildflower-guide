@@ -1,5 +1,5 @@
 {sci:Clarkia}
-Distinguishing features:
+Key features:
 {-
 corolla shape and color distribution
 buds pendant or not
@@ -68,7 +68,7 @@ scattered around the east bay; only historically on the peninsula
 
 <h3>Standard corolla shapes, buds pendent</h3>
 
-(I haven't sorted these by distinguishing features because I've never needed to distinguish them.)
+(I haven't sorted these by key features because I've never needed to distinguish them.)
 
 {Clarkia biloba ssp. biloba} - Mt. Diablo
 

@@ -1,5 +1,5 @@
 {sci:Calochortus}
-Distinguishing features for butterfly vs. clay:
+Key features for butterfly vs. clay:
 {-
 stem is branched or not
 pale second spot is above central dark spot or not

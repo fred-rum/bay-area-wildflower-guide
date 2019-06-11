@@ -1,5 +1,5 @@
 {sci:Carpobrotus}
-Flower diameter is the most obvious distinguishing feature.
+Flower diameter is the most obvious key feature.
 
 {+chilean sea fig}<p/>
 Its flower diameter is 3--5 cm.  It primarily grows on coastal dunes and bluffs.  Jepson says that its petals are rose to magenta, but CalPhotos also shows flowers with yellow petals.  Its center contains very many yellow/cream stamens.

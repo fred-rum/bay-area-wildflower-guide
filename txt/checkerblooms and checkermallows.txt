@@ -1,5 +1,5 @@
 {sci:Sidalcea}
-Distinguishing features:
+Key features:
 {-
 thin linear leaves cupping the involucre or not
 -}

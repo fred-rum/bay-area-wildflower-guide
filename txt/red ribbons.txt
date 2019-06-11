@@ -1,6 +1,6 @@
 {sci:clarkia concinna}
 
-Distinguishing features:
+Key features:
 {-
 petal length
 stigma exserted beyond anthers or not (but CalFlora is not consistent here)

@@ -1,5 +1,5 @@
 {sci:Dichelostemma}
-Distinguishing features:
+Key features:
 {-
 <a href="http://www.virtualherbarium.org/glossary/glossary.php?searchfor=crown&searchin=def&B1=Search">crown</a> color, leaning in or out
 perianth tube narrowed above ovary or not

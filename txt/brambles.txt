@@ -1,5 +1,5 @@
 {sci:Rubus}
-Distinguishing features:
+Key features:
 {-
 Prickle presence and shape.
 Round or 5-angled stem (pentagonal in cross section).

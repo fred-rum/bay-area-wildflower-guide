@@ -1,5 +1,5 @@
 {sci:Clarkia purpurea}
-Distinguishing features:
+Key features:
 {-
 petal length
 leaf length and shape

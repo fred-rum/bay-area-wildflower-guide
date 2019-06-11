@@ -1,4 +1,4 @@
-Distinguishing features:
+Key features:
 {-
 presence of bristles
 length of all features

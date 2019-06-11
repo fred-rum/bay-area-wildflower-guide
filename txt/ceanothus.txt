@@ -1,5 +1,5 @@
 {sci:Ceanothus}
-Distinguishing features:
+Key features:
 {-
 twig color, whether twigs are ridged
 leaves opposite or alternate

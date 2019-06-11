@@ -1,5 +1,5 @@
 {sci:Ribes}
-Distinguishing features:
+Key features:
 {-
 spines on twig nodes or not
 sepal color, spread angle, and number

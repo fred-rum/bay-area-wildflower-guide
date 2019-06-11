@@ -1,4 +1,4 @@
-There are very many clover species in the bay area.  This page lists some key distinguishing features, but I don't attempt to replicate the whole Jepson decision tree.  Instead, each flower description includes only enough information to (hopefully) confirm an ID hypothesis.
+There are very many clover species in the bay area.  This page lists some key features, but I don't attempt to replicate the whole Jepson decision tree.  Instead, each flower description includes only enough information to (hopefully) confirm an ID hypothesis.
 
 Camera angles:
 {-
@@ -8,7 +8,7 @@ leaflets with scale (not the reduced leaflets directly below the inflorescence)
 peduncle with scale
 -}
 
-Distinguishing features:
+Key features:
 {-
 bracts shape (especially if fused) under inflorescence
 calyx lobes plumose or not
