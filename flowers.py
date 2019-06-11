@@ -401,13 +401,35 @@ def write_footer(w):
 # The giant 'parse' function, which turns txt into html
 # and writes the resulting file.
 
-def parse(page, s):
+repl_easy_dict = {
     # Replace HTTP links in the text with ones that open a new tab.
     # (Presumably they're external links or they'd be in {...} format.)
-    s = re.sub(r'<a href=', '<a target="_blank" href=', s)
+    '<a href=' : '<a target="_blank" href=',
 
     # Replace {default} with all the default fields.
-    s = re.sub(r'{default}', '{jpgs}\n', s)
+    '{default}' : '{jpgs}\n',
+
+    # Replace common Jepson codes.
+    '+-' : '&plusmn;',
+    '--' : '&ndash;',
+    '<=' : '&le;',
+    '>=' : '&ge;',
+    '<<' : '&#8810',
+    '>>' : '&#8811',
+
+    # '<' and '>' should be escaped, but for now I'll leave them alone
+    # because the browser seems to figure them out correctly, and it's
+    # probably smarter about it than I would be.
+}
+
+repl_easy_regex = re.compile('({ex})'.format(ex='|'.join(map(re.escape, repl_easy_dict.keys()))))
+
+def parse(page, s):
+    def repl_easy(matchobj):
+        return repl_easy_dict[matchobj.group(1)]
+
+    # replace the easy (fixed-value) stuff.
+    s = repl_easy_regex.sub(repl_easy, s)
 
     def repl_list(matchobj):
         c = matchobj.group(1)
