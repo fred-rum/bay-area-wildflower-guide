@@ -126,6 +126,17 @@ Allow observations and CalFlora links to be inserted manually
 
 Retain child order within parent on list pages.  (Only sort top level.)
 
+Make sure that subspecies distinguishing pages are recognizable, either
+  by making a link to a container page a different color or by writing
+  it explicitly in the text.
+  Idea: CalFlora links are orange, container links are dark green
+
+Style colored links so that clicked links are recognized
+  (similar to the default blue vs. purple)
+
+Should other external links also be colored differently?
+  e.g. CalPhotos, Jepson?
+
 ###############################################################################
 
 It'd be nice to split the img and text onto separate lines on small
@@ -146,4 +157,20 @@ Proposed:
 how to mass rename files:
 for f in *.jpg; do git mv "$f" "$(echo $f | sed 's/-\([-0-9]*\)\.jpg$/,\1.jpg/')"; done
 
-The related species Triteleia lugens, which grows around Pinnacles National Park and north of San Francisco Bay, has rounded ends to the stamen filaments, not forked appendages.
+###############################################################################
+
+Improved color section:
+
+pale blue	blue
+		blue purple
+light purple	dark purple
+pink
+		reddish purple (magenta)
+		red
+salmon
+		orange
+cream		yellow
+		white
+
+Explicitly list all potentially descriptive colors for a flower, then
+only list flowers with that exact color on color list pages.
