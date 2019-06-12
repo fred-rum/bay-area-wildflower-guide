@@ -116,6 +116,13 @@ have 0 observations.
 Require CalFlora links to be in {[com]:[sci]} format
 (although [com] can be blank) so that broken internal links can be detected.
 
+combine sweet peas and vetchlings (both are Lathyrus spp.)
+
+https://www.inaturalist.org/observations/13217699#activity_identification_58579616
+
+Allow observations and CalFlora links to be inserted manually
+  in the middle of a page, potentially multiple times, e.g. with {obs:[sci]}
+
 ###############################################################################
 
 It'd be nice to split the img and text onto separate lines on small

@@ -322,24 +322,23 @@ def write_obs(w, page):
     w.write('<p/>\n')
 
 def write_external_links(w, page):
-    if page in page_sci:
-        sci = page_sci[page]
-        if ' ' in sci:
-            elab = get_elab(sci)
-        else:
-            # A one-word genus should be sent as is, not as '[genus] spp.'
-            elab = sci
+    sci = page_sci[page]
+    if ' ' in sci:
+        elab = get_elab(sci)
+    else:
+        # A one-word genus should be sent as is, not as '[genus] spp.'
+        elab = sci
 
-        w.write('<p/>')
-        w.write('<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank">CalFlora</a> &ndash;\n'.format(elab=elab));
+    w.write('<p/>')
+    w.write('<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank">CalFlora</a> &ndash;\n'.format(elab=elab));
 
-        if ' ' in sci:
-            # CalPhotos cannot be searched by genus only.
-            w.write('<a href="https://calphotos.berkeley.edu/cgi/img_query?where-taxon={elab}" target="_blank">CalPhotos</a> &ndash;\n'.format(elab=elab));
+    if ' ' in sci:
+        # CalPhotos cannot be searched by genus only.
+        w.write('<a href="https://calphotos.berkeley.edu/cgi/img_query?where-taxon={elab}" target="_blank">CalPhotos</a> &ndash;\n'.format(elab=elab));
 
-        # Jepson uses "subsp." instead of "ssp.", but it also allows us to
-        # search with that qualifier left out entirely.
-        w.write('<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson eFlora</a><p/>\n'.format(sci=sci));
+    # Jepson uses "subsp." instead of "ssp.", but it also allows us to
+    # search with that qualifier left out entirely.
+    w.write('<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson eFlora</a><p/>\n'.format(sci=sci));
 
 def write_parents(w, page):
     w.write('<hr/>\n')
@@ -574,8 +573,9 @@ def parse(page, s):
             w.write('<b><i>{elab}</i></b><p/>\n'.format(elab=get_elab(page_sci[page])))
 
         w.write(s)
-        write_obs(w, page)
-        write_external_links(w, page)
+        if page in page_sci:
+            write_obs(w, page)
+            write_external_links(w, page)
         write_parents(w, page)
         write_footer(w)
 
