@@ -97,7 +97,7 @@ Add links at the top of primary color pages to secondary color anchors.
 it would be nice to attach colors to individual jpgs of a flower,
   e.g. for baby blue eyes (N. menziesii).
 
-it would be nice to have a glossary with popup links automatically created
+It would be nice to have a glossary with popup links automatically created
   where glossary words are used.
 Jepson example:
 <u class="dotted" title="Group of bracts more or less held together as a unit, subtending a flower, fruit (acorn cup), or inflorescence." >Involucre</u>
@@ -107,6 +107,14 @@ Print errors:
   broken link
   broken photo
   no scientific name for leaf page
+
+Identify genuses with multiple species but without a container page.
+
+Reject iNaturalist community ID as necessary, especially where I otherwise
+have 0 observations.
+
+Require CalFlora links to be in {[com]:[sci]} format
+(although [com] can be blank) so that broken internal links can be detected.
 
 ###############################################################################
 

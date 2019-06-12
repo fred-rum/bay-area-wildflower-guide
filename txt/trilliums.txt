@@ -1,0 +1,27 @@
+{sci:Trillium}
+Key features:
+{-
+flower stalked or not
+color of the 6 stamens (which are quite large and linear)
+-}
+
+{+pacific trillium}
+{-
+<b>flower is stalked</b>
+the local subspecies is ssp. ovatum
+stamens are yellow or +- white
+-}
+
+{+giant wakerobin}
+{-
+flower is sessile
+<b>stamens are dark purple</b>
+other parts are highly variable in color
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0307+1188} {giant white wakerobin:Trillium albidum}
+{-
+flower is sessile
+<b>stamens are +- green</b>
+other parts are highly variable in color
+-}
