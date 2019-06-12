@@ -1,0 +1,58 @@
+{sci:Triteleia}
+Key features:
+{-
+perianth color (sepals and petals)
+stamens attached to perianth at 1 level or alternately at 2 levels
+stamens equal in length or unequal
+length of perianth tube compared to lobes (for yellow ones)
+exact pedicel and perianth lengths (for white ones)
+-}
+
+{+ithuriel's spear}
+{-
+purple perianth
+stamens attached alternately at 2 levels, +- equal
+-}
+
+{+golden brodiaea}
+{-
+yellow perianth
+stamens attached at 1 level, unequal
+tips of longer filaments with forked, pointed appendages
+perianth tube < lobes
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0301+0111} {cook's triteleia:Triteleia ixioides ssp. cookii}
+{-
+yellow perianth
+stamens attached at 1 level, unequal
+tips of longer filaments with forked, pointed appendages
+perianth tube +- = lobes
+range is <b>south of Big Sur</b>
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0109+1638} {coast range triteleia:Triteleia lugens}
+{-
+yellow perianth
+stamens attached at 1 level, unequal
+tips of longer filaments rounded, without appendages
+range is outside the bay area, includes <b>Pinnacles NP</b>
+-}
+
+{+white brodiaea}
+{-
+white perianth
+stamens attached at 1 level, +- equal
+<b>pedicels 0.5--5 cm
+perianth 9--16 mm, tube 2--4 mm, shallowly bowl-shaped</b>, lobes 7--12 mm, ascending to spreading, midvein green [or blue?]
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0509+0498} {long-rayed brodiaea:Triteleia peduncularis}
+{-
+white perianth
+stamens attached alternately at 2 levels, unequal
+<b>pedicels 2--18 cm
+perianth 15--28 mm, tube 7--11 mm, acute at base</b>, lobes 10--16 mm [midvein color not mentioned, but CalPhotos shows some with blue, green, or white]
+-}
+
+See also {brodiaeas}

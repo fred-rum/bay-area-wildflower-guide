@@ -116,12 +116,18 @@ have 0 observations.
 Require CalFlora links to be in {[com]:[sci]} format
 (although [com] can be blank) so that broken internal links can be detected.
 
+Allow page links to be created on 1 line, e.g. "[com] ([elab])".
+  E.g. with {-[page]}
+  Fix up brodiaeas.txt and triplet lilies.txt accordingly.
+
 combine sweet peas and vetchlings (both are Lathyrus spp.)
 
 https://www.inaturalist.org/observations/13217699#activity_identification_58579616
 
 Allow observations and CalFlora links to be inserted manually
   in the middle of a page, potentially multiple times, e.g. with {obs:[sci]}
+
+Retain child order within parent on list pages.  (Only sort top level.)
 
 ###############################################################################
 
@@ -142,3 +148,5 @@ Proposed:
 
 how to mass rename files:
 for f in *.jpg; do git mv "$f" "$(echo $f | sed 's/-\([-0-9]*\)\.jpg$/,\1.jpg/')"; done
+
+The related species Triteleia lugens, which grows around Pinnacles National Park and north of San Francisco Bay, has rounded ends to the stamen filaments, not forked appendages.
