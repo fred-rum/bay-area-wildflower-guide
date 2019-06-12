@@ -55,4 +55,4 @@ stamens attached alternately at 2 levels, unequal
 perianth 15--28 mm, tube 7--11 mm, acute at base</b>, lobes 10--16 mm [midvein color not mentioned, but CalPhotos shows some with blue, green, or white]
 -}
 
-See also {brodiaeas}
+Triplet lilies all have 6 stamens, as opposed to the 3 stamens on the similar-looking {-brodiaeas}.

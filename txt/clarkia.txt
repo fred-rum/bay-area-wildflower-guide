@@ -42,7 +42,7 @@ petals <b>10--30 mm</b>; stigma exserted beyond anthers
 found everywhere
 -}
 
-{Clarkia franciscana}
+{presidio clarkia:Clarkia franciscana}
 {-
 all 4 sepals staying fused
 ovary and immature fruit 4-grooved
@@ -51,7 +51,7 @@ petals <b>5--13 mm</b>; stigma not exserted beyond anthers
 Redwood Regional Park
 -}
 
-{Clarkia amoena ssp. huntiana}
+{farewell to spring:Clarkia amoena ssp. huntiana}
 {-
 all 4 sepals staying fused
 ovary and immature fruit 4-grooved
@@ -70,12 +70,13 @@ scattered around the east bay; only historically on the peninsula
 
 (I haven't sorted these by key features because I've never needed to distinguish them.)
 
-{Clarkia biloba ssp. biloba} - Mt. Diablo
+{-twolobe clarkia:Clarkia biloba ssp. biloba} - Mt. Diablo
 
-{Clarkia epilobioides} - Henry Coe, Sierra Azul, and maybe Rancho San Antonio
+{-canyon clarkia:Clarkia epilobioides} - Henry Coe, Sierra Azul, and maybe Rancho San Antonio
 
-{Clarkia gracilis} - scattered in Diablo range
+{-slender clarkia:Clarkia gracilis} - scattered in Diablo range
 
-{Clarkia modesta} - scattered in Diablo range
+{-waltham creek clarkia:Clarkia modesta} - scattered in Diablo range
 
-{Clarkia rhomboidea} - Sierra Azul
+{-diamond clarkia:Clarkia rhomboidea} - Sierra Azul
+<hr/>

@@ -44,7 +44,7 @@ ragged or entire (not notched once).
 Ordered roughly by scale length.
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0411+2148}
-{Microseris elegans}
+{:Microseris elegans}
 {-
 Seeds 1.5--3 mm, widest at the tip, tapering (slightly) to the base.
 Outermost seeds are sometimes hairy, while inner seeds are glabrous.
@@ -54,7 +54,7 @@ Found at Coe and Mt. Diablo.
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0511+0184}
-{Microseris bigelovii}
+{coastal silverpuffs:Microseris bigelovii}
 {-
 Seeds 2.5--5.5mm, widest near middle and tapering to base.
 Outermost seeds are generally very hairy, while inner seeds are glabrous.
@@ -65,7 +65,7 @@ Found near the coast and at Edgewood.
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1207+1291}
-{Microseris campestris}
+{san joaquin silverpuffs:Microseris campestris}
 {-
 Seeds 3--5+ mm, widest at tip.
 5 scales, each 1--4.5 mm, becoming +- curved throughout, barely inrolled, barely or not pigmented.
@@ -97,7 +97,7 @@ Supposedly not present on the peninsula, but found in the upper part of Foothill
 Ordered roughly by scale length.
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0118+0635}
-{Microseris paludosa}
+{marsh microseris:Microseris paludosa}
 {-
 Seeds 4--7 mm
 5--10 scales, each 2--4 mm.
@@ -106,7 +106,7 @@ Found at Mt. Diablo.
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0114+0026}
-{Microseris sylvatica}
+{sylvan microseris:Microseris sylvatica}
 {-
 Seeds 5--12 mm
 5--10 scales, each 4--10 mm.

@@ -341,7 +341,6 @@ def write_external_links(w, page):
     w.write('<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson eFlora</a><p/>\n'.format(sci=sci));
 
 def write_parents(w, page):
-    w.write('<hr/>\n')
     w.write('Pages that link to this one:<p/>\n')
     w.write('<ul/>\n')
 
@@ -532,10 +531,25 @@ def parse(page, s):
 
     s = re.sub(r'\{(https://calphotos.berkeley.edu/[^\}]+)\}', repl_calphotos, s)
 
-    # Rplace a {[common]:[scientific]} reference with a link to CalFlora.
-    s = re.sub(r'{([^\}]+):([^\}]+)}',
-               r'<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup=\2" target="_blank" class="external">\1<br/><i>\2</i></a>',
-               s)
+    # Replace a {[common]:[scientific]} reference with a link to CalFlora.
+    def repl_calflora(matchobj):
+        com = matchobj.group(1)
+        elab = matchobj.group(2)
+        if com and com[0] == '-':
+            com = com[1:]
+            lines = 1
+        else:
+            lines = 2
+        if com:
+            if lines == 1:
+                text = '{com} (<i>{elab}</i>)'.format(com=com, elab=elab)
+            else:
+                text = '{com}<br/><i>{elab}</i>'.format(com=com, elab=elab)
+        else:
+            text = '<i>{elab}</i>'.format(elab=elab)
+        return '<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank" class="external">{text}</a>'.format(elab=elab, text=text)
+
+    s = re.sub(r'{([^\}]*):([^\}]+)}', repl_calflora, s)
 
     # Any remaining {reference} should refer to another page.
     # Replace it with a link to one of my pages if I can,
@@ -543,12 +557,15 @@ def parse(page, s):
     # or otherwise leave it unchanged.
     def repl_link(matchobj):
         link = matchobj.group(1)
-        if link in page_list:
-            return '<a href="{link}.html">{full}</a>'.format(link=link, full=get_full(link))
-        elif link[0].isupper():
-            # Starts with a capital letter: must be a scientific name.
-            return '<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={link}" target="_blank" class="external"><i>{link}</i></a>'.format(link=link)
+        if link[0] == '-':
+            link = link[1:]
+            lines = 1
         else:
+            lines = 2
+        if link in page_list:
+            return '<a href="{link}.html">{full}</a>'.format(link=link, full=get_full(link, lines))
+        else:
+            print 'Broken link {link} on page {page}'.format(link=link, page=page)
             return link
 
     s = re.sub(r'{([^}]+)}', repl_link, s)
@@ -576,6 +593,7 @@ def parse(page, s):
         if page in page_sci:
             write_obs(w, page)
             write_external_links(w, page)
+        w.write('<hr/>\n')
         write_parents(w, page)
         write_footer(w)
 
