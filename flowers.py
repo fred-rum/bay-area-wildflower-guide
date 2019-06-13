@@ -515,7 +515,7 @@ def parse(page, s):
                 img_class = 'leaf-thumb'
             img = '<a href="{href}"><img src="{thumb}" width="200" height="200" class="{img_class}"></a>'.format(href=href, thumb=thumb, img_class=img_class)
         else:
-            img = '<a href="{href}" class="missing"><div class="page-thumb-text"><span>{jpg}</span></div></a>'.format(href=href, jpg_height=jpg_height-22, jpg=jpg)
+            img = '<a href="{href}" class="missing"><div class="page-thumb-text"><span>{jpg}</span></div></a>'.format(href=href)
 
         return img + horiz_spacer
 
@@ -606,6 +606,9 @@ def parse(page, s):
         w.write('<hr/>\n')
         write_parents(w, page)
         write_footer(w)
+
+    if page not in page_child and page not in page_color:
+        print 'No color for {page}'.format(page=page)
 
 ###############################################################################
 
@@ -722,10 +725,11 @@ for page in page_list:
     parse(page, page_txt[page])
 
 # Create a txt listing all flowers without pages, then parse it into html.
-jpg_height = 50
-unlisted_flowers = sorted([f for f in page_obs if f not in page_list])
-s = '<br/>\n'.join(unlisted_flowers) + '<p/>\n'
-parse("other observations", s)
+if False:
+    jpg_height = 50
+    unlisted_flowers = sorted([f for f in page_obs if f not in page_list])
+    s = '<br/>\n'.join(unlisted_flowers) + '<p/>\n'
+    parse("other observations", s)
 
 ###############################################################################
 # The remaining code is for creating useful lists of pages:

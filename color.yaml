@@ -6,6 +6,7 @@ california bay: yellow
 california poppy: yellow,orange
 checker lily: green
 chilean sea fig: purple,pink,yellow
+sea fig: yellow,pink
 slender iceplant: white
 tufted poppy: yellow
 wind poppy: orange
@@ -102,7 +103,7 @@ muehlenberg's centaury: pink
 false babystars: purple
 large-flowered leptosiphon: pink
 serpentine leptosiphon: purple
-variable linanthus: purple, blue, white
+variable linanthus: purple,blue,white
 field madder: white
 fiesta flower: purple
 gambel's milkvetch: purple
@@ -110,10 +111,17 @@ pacific trillium: white,pink
 giant wakerobin: purple,red,cream
 giant white wakerobin: white,pink,red
 ithuriel's spear: purple
-prettyface: yellow
+golden brodiaea: yellow
 white brodiaea: white
 common vetch: purple
 narrow-leaved vetch: purple
 hairy vetch: purple
 american vetch: pink,purple
 reddish tufted vetch: purple
+Microseris acuminata: other
+Uropappus lindleyi: other
+douglas' silverpuffs: other
+blow wives: other
+california sagebrush: other
+pussy-ears: white,purple
+red vetchling: red
