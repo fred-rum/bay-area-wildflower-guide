@@ -123,20 +123,9 @@ https://www.inaturalist.org/observations/13217699#activity_identification_585796
 
 Allow observations and CalFlora links to be inserted manually
   in the middle of a page, potentially multiple times, e.g. with {obs:[sci]}
+  (It's non-trivial to figure out which children should be counted, though.)
 
 Retain child order within parent on list pages.  (Only sort top level.)
-
-Make sure that subspecies distinguishing pages are recognizable, either
-  by making a link to a container page a different color or by writing
-  it explicitly in the text.
-  Idea: CalFlora links are orange, container links are dark green
-  or an icon to mark a container, a leaf with text, or a leaf with only images
-
-Style colored links so that clicked links are recognized
-  (similar to the default blue vs. purple)
-
-Should other external links also be colored differently?
-  e.g. CalPhotos, Jepson?
 
 ###############################################################################
 

@@ -106,7 +106,18 @@ a.enclosed {
     text-decoration: none;
 }
 a.external {
+}
+a.parent:link {
+    color: SaddleBrown;
+}
+a.parent:visited {
+    color: #8b1313;
+}
+a.leaf:link {
     color: DarkGreen;
+}
+a.leaf:visited {
+    color: #4d6600;
 }
 a.missing {
     color: red;

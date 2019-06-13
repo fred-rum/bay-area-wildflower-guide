@@ -20,6 +20,7 @@ yellow perianth
 stamens attached at 1 level, unequal
 tips of longer filaments with forked, pointed appendages
 perianth tube < lobes
+perianth lobes <b>ascending to spreading</b>
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0301+0111} {cook's triteleia:Triteleia ixioides ssp. cookii}
@@ -28,6 +29,7 @@ yellow perianth
 stamens attached at 1 level, unequal
 tips of longer filaments with forked, pointed appendages
 perianth tube +- = lobes
+perianth lobes <b>reflexed</b>
 range is <b>south of Big Sur</b>
 -}
 

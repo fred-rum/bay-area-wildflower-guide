@@ -67,6 +67,8 @@ page_txt = {} # txt (string) (potentially with some parsing done to it)
 # but container pages get added later.)
 page_color = {}
 
+page_default = set() # indicates whether a page is "default" (no added text)
+
 page_com = {} # common name
 page_sci = {} # scientific name
 page_obs = {} # number of observations
@@ -255,6 +257,14 @@ def read_txt(page):
     s = re.sub(r'{com:(.*)}\n', repl_com, s)
     page_txt[page] = s
 
+def create_link(page, lines):
+    if page in page_default:
+        style = ' class="leaf"'
+    else:
+        style = ' class="parent"'
+    return '<a href="{page}.html"{style}>{full}</a>'.format(page=page, style=style, full=get_full(page, lines))
+
+
 # For containers, sum the observation counts of all children,
 # *but* if a flower is found via multiple paths, count it only once.
 # Two values are returned: (n, rg)
@@ -346,7 +356,7 @@ def write_parents(w, page):
 
     if page in page_parent:
         for parent in sorted(page_parent[page]):
-            w.write('<li><a href="{parent}.html">{full}</a></li>\n'.format(parent=parent, full=get_full(parent, lines=1)))
+            w.write('<li>{link}</li>\n'.format(link=create_link(parent, 1)))
 
     if page in page_color:
         for primary in primary_color_list:
@@ -563,10 +573,10 @@ def parse(page, s):
         else:
             lines = 2
         if link in page_list:
-            return '<a href="{link}.html">{full}</a>'.format(link=link, full=get_full(link, lines))
+            return create_link(link, lines)
         else:
             print 'Broken link {link} on page {page}'.format(link=link, page=page)
-            return link
+            return '{' + link + '}'
 
     s = re.sub(r'{([^}]+)}', repl_link, s)
 
@@ -609,6 +619,7 @@ for name in sorted(jpg_list):
     if page not in page_list:
         page_list.append(page)
         page_txt[page] = '{default}'
+        page_default.add(page)
 
 # Read my observations file (exported from iNaturalist) and use it as follows:
 #   Associate common names with scientific names
@@ -741,7 +752,7 @@ def list_page(w, page, indent):
     if page in flower_jpg_list:
         w.write('<a href="{page}.html"><img src="../photos/{jpg}.jpg" width="200" height="200" class="list-thumb"></a>{spacer}'.format(page=page, jpg=flower_jpg_list[page][0], spacer=horiz_spacer))
 
-    w.write('<a href="{page}.html">{full}</a></div>\n'.format(page=page, full=get_full(page)))
+    w.write('{link}</div>\n'.format(link=create_link(page, 2)))
 
 def list_matches(w, match_set, indent, color):
     # Sort by observation count.
