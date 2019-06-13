@@ -32,15 +32,15 @@ toyon: other
 western burning bush: other
 afro-australian daisies: white, pale purple, pink
 alkali heath: pink
-alkali heliotrope: white, dark purple
+alkali heliotrope: white, purple
 baby blue eyes: pale blue, pale purple, white
 white nemophila: white
 belladonna lily: pale purple
 bird's-eye gilia: pale purple
 bird's-eye speedwell: pale blue
-blue dicks: dark purple
-ookow: dark purple
-bluewitch nightshade: dark purple
+blue dicks: purple
+ookow: purple
+bluewitch nightshade: purple
 black nightshade: white
 american black nightshade: white
 greenspot nightshade: white
@@ -50,24 +50,24 @@ thimbleberry: white
 broadleaf forget-me-not: pale blue
 pacific pea: pale purple
 broad-leaved sweet pea: pink, red purple
-harvest brodiaea: dark purple
-dwarf brodiaea: dark purple
-bunchleaf penstemon: dark purple
-california gilia: dark purple
-california harebell: pale blue, dark blue
+harvest brodiaea: purple
+dwarf brodiaea: purple
+bunchleaf penstemon: purple
+california gilia: purple
+california harebell: pale blue, blue
 california milkwort: pink, pale purple
-blueblossom: dark blue, pale blue, white
+blueblossom: blue, pale blue, white
 buckbrush: white, pale blue
-hairy ceanothus: white, pale blue, dark blue, pale purple
-wartleaf ceanothus: dark blue, dark purple
+hairy ceanothus: white, pale blue, blue, pale purple
+wartleaf ceanothus: blue, purple
 chaparral currant: pink
 canyon gooseberry: red
 bull mallow: pale purple
 dwarf checkermallow: pink, red purple
 fringed checkerbloom: pink
-chia: dark purple
+chia: purple
 chicory: pale purple
-four-spot: pale purple, dark purple
+four-spot: pale purple, purple
 ruby chalice clarkia: red purple
 santa clara red ribbons: red purple
 Clarkia concinna concinna: red purple
@@ -76,23 +76,23 @@ chaparral clarkia: red purple
 clay mariposa lily: white, pink, pale purple, purple
 butterfly mariposa lily: white, cream, yellow, pale purple, purple, red purple, pink, red, salmon
 yellow mariposa lily: yellow
-pussy-ears: white, pink, dark purple
+pussy-ears: white, pink, purple
 white globe lily: white, cream
-tomcat clover: pale purple, dark purple
+tomcat clover: pale purple, purple
 rose clover: pink, pale purple, other
 narrow-leaved clover: pink, pale purple, other
 crimson clover: red
-tree clover: pale purple, dark purple
+tree clover: pale purple, purple
 clustered clover: white
 cowbag clover: red purple
 bull clover: cream
 hop trefoil: yellow
 lesser hop trefoil: yellow
-white blue-eyed mary: white, pale purple, dark purple
-purple chinese houses: dark purple
-san francisco collinsia: dark purple
+white blue-eyed mary: white, pale purple, purple
+purple chinese houses: purple
+san francisco collinsia: purple
 california aster: pink, pale purple
-common selfheal: dark purple
+common selfheal: purple
 common snowberry: pale purple, red purple
 creeping snowberry: pale purple, red purple
 congdon's monkeyflower: red purple
@@ -102,19 +102,19 @@ muehlenberg's centaury: pink, pale purple
 false babystars: pale purple
 large-flowered leptosiphon: pale purple
 serpentine leptosiphon: pale purple
-variable linanthus: dark purple, pale purple, pink, yellow, white
+variable linanthus: purple, pale purple, pink, yellow, white
 field madder: white
-fiesta flower: dark purple
+fiesta flower: purple
 gambel's milkvetch: pale purple
 pacific trillium: white, pale purple
 giant wakerobin: red purple, red, cream
 giant white wakerobin: white, pink, red
-ithuriel's spear: dark purple
+ithuriel's spear: purple
 golden brodiaea: yellow
 white brodiaea: white
-common vetch: dark purple
-narrow-leaved vetch: dark purple
-hairy vetch: dark purple
+common vetch: purple
+narrow-leaved vetch: purple
+hairy vetch: purple
 american vetch: pink, pale purple
 reddish tufted vetch: red purple
 Microseris acuminata: other
@@ -123,3 +123,4 @@ douglas' silverpuffs: other
 blow wives: other
 california sagebrush: other
 red vetchling: red, red purple
+greater periwinkle: purple

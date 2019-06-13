@@ -157,6 +157,3 @@ salmon
 cream		yellow
 		white
 		other
-
-Explicitly list all potentially descriptive colors for a flower, then
-only list flowers with that exact color on color list pages.

@@ -17,8 +17,7 @@
 #        (i.e. ignorning the filename extension and the "-#" jpg number).
 #        a flower uses its common name (not scientific name).
 #
-# primary - a top-level color.
-# color - a color under a primary.
+# color - a flower color.
 #
 # The variable name for a dictionary is constructed as
 # {what it's for}_{what it holds}.
@@ -37,6 +36,7 @@ import re
 import csv
 import cStringIO
 import yaml
+
 
 root = 'c:/Users/Chris/Documents/GitHub/bay-area-flowers'
 
@@ -77,18 +77,10 @@ page_taxon_id = {} # iNaturalist taxon ID
 
 sci_page = {} # scientific name -> page name
 
-# Define a list of subcolors for each primary color.
-# key: primary name
-# value: list of color names
-primary_color_list = {'purple': ['purple', 'pink', 'blue'],
-                      'red': ['red', 'salmon'],
-                      'white': ['white', 'cream'],
-                      'yellow': ['yellow', 'orange'],
-                      'other': ['other']}
-
-color_list = ['dark blue',
+# Define a list of supported colors.
+color_list = ['blue',
               #'blue purple',
-              'dark purple',
+              'purple',
               'red purple',
               'red',
               'orange',
@@ -112,8 +104,11 @@ horiz_spacer = '<div class="horiz-space"></div>'
 # Read miscellaneous flower info from the YAML file.
 with open(root + '/color.yaml') as f:
     yaml_data = yaml.safe_load(f)
-for name in yaml_data:
-    page_color[name] = set([x.strip() for x in yaml_data[name].split(',')])
+for page in yaml_data:
+    page_color[page] = set([x.strip() for x in yaml_data[page].split(',')])
+    for color in page_color[page]:
+        if color not in color_list:
+            print 'page {page} uses undefined color {color}'.format(page=page, color=color)
 
 # Get a list of files with the expected suffix in the designated directory.
 def get_file_list(subdir, ext):
