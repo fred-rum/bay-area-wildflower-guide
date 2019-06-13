@@ -117,10 +117,6 @@ Identify genuses with multiple species but without a container page.
 Reject iNaturalist community ID as necessary, especially where I otherwise
 have 0 observations.
 
-combine sweet peas and vetchlings (both are Lathyrus spp.)
-
-https://www.inaturalist.org/observations/13217699#activity_identification_58579616
-
 Allow observations and CalFlora links to be inserted manually
   in the middle of a page, potentially multiple times, e.g. with {obs:[sci]}
   (It's non-trivial to figure out which children should be counted, though.)

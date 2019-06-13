@@ -1,0 +1,52 @@
+{sci:Lathyrus}
+Distinguishing features:
+{-
+number of leaflets per leaf
+number of flowers in inflorescence
+wings or angles on stem (for peas)
+bristle extending on axis beyond flower (for vetchlings)
+-}
+
+{+pacific pea}
+{-
+generally <b>8--12 leaflets</b> per leaf
+<b>8--15 flowers</b> in inflorescence
+stem often sharply angled or flanged (angles or flanges < 1 mm wide)
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1107+1066} {delta tule pea:Lathyrus jepsonii}
+{-
+<b>10--16 leaflets</b> per leaf
+<b>6--15 flowers</b> in inflorescence
+stem climbing, <b>winged</b> (wings &plusmn; &ge; 1 mm wide)
+L. j. var. californicus is a smaller plant which is sometimes hairy.
+L. j. var. jepsonii can exceed two meters in height and is hairless, a rare variety which grows in the estuary habitat of the Sacramento-San Joaquin River Delta, the origin of the common name delta tule pea.
+-}
+
+{+broad-leaved sweet pea}
+{-
+<b>2 leaflets</b> per leaf
+<b>4--15 flowers</b> in inflorescence
+stem with wings often >= 2 mm wide
+corolla 20--25 mm
+-}
+
+{+red vetchling}
+{-
+<b>2 leaflets</b> per leaf
+<b>1 flower</b> in inflorescence
+corolla 10--15 mm
+inflorescence axis <b>not extended beyond flower</b>
+calyx bowl much shorter than calyx lobes
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1108+1963} {grass pea:Lathyrus sphaericus}
+{-
+<b>2 leaflets</b> per leaf
+<b>1 flower</b> in inflorescence
+corolla 8--14 mm
+inflorescence axis <b>extended as bristle beyond flower</b>
+calyx bowl &plusmn; &le; calyx lobes
+-}
+
+See also {-vetches}.

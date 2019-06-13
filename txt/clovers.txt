@@ -93,7 +93,7 @@ Corolla: 4.5--9 mm, <b>pink-purple</b> (but CalPhotos also shows cream w/ purple
 glabrous
 Leaflets: 3, palmate, 1--2.5 cm, elliptic to +- round, +- entire to toothed
 Bracts: +- free to 1/2 fused
-Inflorescence: head-like, 5ndash;many-flowered; flowers quickly spreading or reflexed
+Inflorescence: head-like, 5--many-flowered; flowers quickly spreading or reflexed
 Calyx: 4--7 mm, glabrous, longer lobes bristle-like, generally branched
 Corolla: <b>10--20 mm, dull white or +- yellow, purple-tipped (or not?), banner inflated in fruit</b>
 -}
