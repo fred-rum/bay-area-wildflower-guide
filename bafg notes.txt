@@ -130,6 +130,7 @@ Make sure that subspecies distinguishing pages are recognizable, either
   by making a link to a container page a different color or by writing
   it explicitly in the text.
   Idea: CalFlora links are orange, container links are dark green
+  or an icon to mark a container, a leaf with text, or a leaf with only images
 
 Style colored links so that clicked links are recognized
   (similar to the default blue vs. purple)
