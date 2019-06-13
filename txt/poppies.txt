@@ -1,4 +1,4 @@
-<h2>Eschscholzia spp.</h2>
+{sci:Eschscholzia}
 {california poppy:california poppy,2.jpg} {child:california poppy}
 {-
 has a distinct pink disc below the corolla

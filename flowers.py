@@ -86,6 +86,21 @@ primary_color_list = {'purple': ['purple', 'pink', 'blue'],
                       'yellow': ['yellow', 'orange'],
                       'other': ['other']}
 
+color_list = ['dark blue',
+              #'blue purple',
+              'dark purple',
+              'red purple',
+              'red',
+              'orange',
+              'yellow',
+              'white',
+              'pale blue',
+              'pale purple',
+              'pink',
+              'salmon',
+              'cream',
+              'other']
+
 # key: color
 # value: page list
 color_page_list = {}
@@ -98,7 +113,7 @@ horiz_spacer = '<div class="horiz-space"></div>'
 with open(root + '/color.yaml') as f:
     yaml_data = yaml.safe_load(f)
 for name in yaml_data:
-    page_color[name] = set(yaml_data[name].split(','))
+    page_color[name] = set([x.strip() for x in yaml_data[name].split(',')])
 
 # Get a list of files with the expected suffix in the designated directory.
 def get_file_list(subdir, ext):
@@ -359,10 +374,9 @@ def write_parents(w, page):
             w.write('<li>{link}</li>\n'.format(link=create_link(parent, 1)))
 
     if page in page_color:
-        for primary in primary_color_list:
-            for color in primary_color_list[primary]:
-                if color in page_color[page]:
-                    w.write('<li><a href="{primary}.html#{color}">{color} flowers</a></li>\n'.format(primary=primary, color=color))
+        for color in color_list:
+            if color in page_color[page]:
+                w.write('<li><a href="{color}.html">{color} flowers</a></li>\n'.format(color=color))
 
     w.write('<li><a href="all.html">all flowers</a></li>\n')
     w.write('</ul>\n')
@@ -715,9 +729,8 @@ def find_matches(page_subset, color):
 
 # We don't need color_page_list yet, but we go through the creation process
 # now in order to populate page_color for all container pages.
-for primary in primary_color_list:
-    for color in primary_color_list[primary]:
-        color_page_list[color] = sorted(find_matches(top_list, color))
+for color in color_list:
+    color_page_list[color] = sorted(find_matches(top_list, color))
 
 # Turn txt into html for all normal and default pages.
 jpg_height = 200
@@ -775,14 +788,12 @@ def list_matches(w, match_set, indent, color):
         else:
             list_page(w, page, indent)
 
-for primary in primary_color_list:
-    with open(root + "/html/{primary}.html".format(primary=primary), "w") as w:
-        write_header(w, primary.capitalize())
+for color in color_list:
+    with open(root + "/html/{color}.html".format(color=color), "w") as w:
+        write_header(w, color.capitalize())
         w.write('<body>\n')
-        for color in primary_color_list[primary]:
-            if color_page_list[color]:
-                w.write('<h1 id="{color}">{ucolor} flowers</h1>\n'.format(color=color, ucolor=color.capitalize()))
-                list_matches(w, color_page_list[color], False, color)
+        w.write('<h1 id="{color}">{ucolor} flowers</h1>\n'.format(color=color, ucolor=color.capitalize()))
+        list_matches(w, color_page_list[color], False, color)
         write_footer(w)
 
 with open(root + "/html/all.html", "w") as w:

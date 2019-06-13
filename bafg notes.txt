@@ -147,16 +147,16 @@ for f in *.jpg; do git mv "$f" "$(echo $f | sed 's/-\([-0-9]*\)\.jpg$/,\1.jpg/')
 
 Improved color section:
 
-pale blue	blue
-		blue purple
-light purple	dark purple
-pink
-		reddish purple (magenta)
-		red
+pale blue	dark blue
+		blue purple (is it needed?
+pale purple	dark purple
+		red purple
+pink		red
 salmon
 		orange
 cream		yellow
 		white
+		other
 
 Explicitly list all potentially descriptive colors for a flower, then
 only list flowers with that exact color on color list pages.

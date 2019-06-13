@@ -9,7 +9,7 @@ Leaf shape.  There is some overlap, but the shapes are often distinct.
 
 {+bluewitch nightshade} 
 {-
-stem hairs generally dense, branched
+upper stem hairs generally dense, branched
 leaf ovate, obovate, or elliptic, generally entire
 -}
 

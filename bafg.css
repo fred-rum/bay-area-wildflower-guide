@@ -31,11 +31,38 @@ div.white {
 div.yellow {
     border: 5px solid gold;
 }
+div.orange {
+    border: 5px solid orange;
+}
 div.red {
     border: 5px solid red;
 }
-div.purple {
-    border: 5px solid purple;
+div.red {
+    border: 5px solid red;
+}
+div.red-purple {
+    border: 5px solid mediumvioletred;
+}
+div.dark-purple {
+    border: 5px solid darkviolet;
+}
+div.dark-blue {
+    border: 5px solid blue;
+}
+div.cream {
+    border: 5px solid oldlace;
+}
+div.salmon {
+    border: 5px solid salmon;
+}
+div.pink {
+    border: 5px solid pink;
+}
+div.pale-purple {
+    border: 5px solid violet;
+}
+div.pale-blue {
+    border: 5px solid lightskyblue;
 }
 div.other {
     border: 5px solid darkgreen;
