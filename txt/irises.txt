@@ -1,0 +1,7 @@
+{sci:Iris}
+
+<b>Caution: IDs unsure.  Key features not identified.</b>
+
+{+douglas iris}
+
+{+fernald's iris}
