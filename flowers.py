@@ -77,6 +77,7 @@ page_taxon_id = {} # iNaturalist taxon ID
 
 sci_page = {} # scientific name -> page name
 genus_page_list = {} # genus -> list of page names
+genus_set = set() # set of genuses with a container page
 
 # Define a list of supported colors.
 color_list = ['blue',
@@ -247,9 +248,12 @@ def read_txt(page):
     def repl_child(matchobj):
         x = matchobj.group(1)
         child = matchobj.group(2)
+        suffix = matchobj.group(3)
+        if not suffix:
+            suffix = ''
         assign_child(page, child)
         if x == '+':
-            return '{' + child + ':' + child + '.jpg} {' + child + '}'
+            return '{' + child + ':' + child + suffix + '.jpg} {' + child + '}'
         else:
             return '{' + child + '}'
 
@@ -263,7 +267,7 @@ def read_txt(page):
         page_com[page] = matchobj.group(1)
         return ''
 
-    s = re.sub(r'{(child:|\+)([^}]+)}', repl_child, s)
+    s = re.sub(r'{(child:|\+)([^},]+)(,[-0-9]*)?}', repl_child, s)
     s = re.sub(r'{sci:(.*)}\n', repl_sci, s)
     s = re.sub(r'{com:(.*)}\n', repl_com, s)
     page_txt[page] = s
@@ -624,11 +628,13 @@ def parse(page, s):
     if page in page_sci:
         sci = page_sci[page]
         pos = sci.find(' ')
-        if pos:
+        if pos > -1:
             genus = sci[:pos]
             if genus not in genus_page_list:
                 genus_page_list[genus] = []
             genus_page_list[genus].append(page)
+        else:
+            genus_set.add(sci)
 
 ###############################################################################
 
@@ -817,7 +823,7 @@ with open(root + "/html/all.html", "w") as w:
     write_footer(w)
 
 for genus in genus_page_list:
-    if len(genus_page_list[genus]) > 1 and genus not in sci_page:
+    if len(genus_page_list[genus]) > 1 and genus not in genus_set:
         print 'No parent page exists for the following pages in {genus} spp.:'.format(genus=genus)
         for page in genus_page_list[genus]:
             print '  ' + get_full(page, 1)

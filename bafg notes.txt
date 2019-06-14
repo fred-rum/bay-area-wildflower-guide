@@ -55,7 +55,8 @@ linked page).
 {+[page]} is replaced with two links to the page.  The first link is
 from a thumbnail of the first flower associated with the page.  The
 second link is from the name of the page (common name + scientific name).
-A parent-child relationship is also recorded.
+A parent-child relationship is also recorded.  If the page is suffixed
+with ",[suffix]", that suffix is used for the thumbnail image.
 
 Other:
 

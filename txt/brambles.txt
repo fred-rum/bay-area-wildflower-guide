@@ -8,7 +8,7 @@ Fruit type and color.
 
 Although the leaves have general difference, there is enough variety within a species to make them difficult to use as diagnostic tools.  In addition, some of the characteristics described by Jepson cannot be seen in CalPhotos.
 
-{california blackberry:california blackberry,2.jpg} {child:california blackberry}
+{+california blackberry,2}
 {-
 Plant: prostrate to decumbent
 Prickles: <b>weak, slender</b>, straight
@@ -17,7 +17,7 @@ Sepals: hairy, <b>prickly</b>, +-with stalked glands
 Fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
 -}
 
-{himalayan blackberry:himalayan blackberry,2.jpg} {child:himalayan blackberry}
+{+himalayan blackberry,2}
 {-
 Plant: to 3 m, arched to mounded
 Prickles: <b>stout, wide-based</b>, straight or curved
@@ -26,7 +26,7 @@ Sepals: hairy, nonglandular
 Fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
 -}
 
-{thimbleberry:thimbleberry,2.jpg} {child:thimbleberry}
+{+thimbleberry,2}
 {-
 Plant 0.5--2.5 m, erect
 <b>No prickles</b>

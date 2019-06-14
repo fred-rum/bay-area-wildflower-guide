@@ -1,11 +1,11 @@
 {sci:Eschscholzia}
-{california poppy:california poppy,2.jpg} {child:california poppy}
+{+california poppy,2}
 {-
 has a distinct pink disc below the corolla
 by far the most common poppy in the bay area
 -}
 
-{tufted poppy:tufted poppy,2.jpg} {child:tufted poppy}
+{+tufted poppy,2}
 {-
 has no more than an indistinct disc below the corolla
 its recepticle slants smoothly down to the width of the stem

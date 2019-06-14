@@ -1,0 +1,40 @@
+{sci:Stachys}
+Key features:
+{-
+pouch at base of corolla or not
+inflorescence elongated or compact
+leaf hairs long & silky or not
+-}
+
+{+california hedge nettle,3}
+{-
+<b>no pouch at base of corolla</b>
+inflorescence elongated
+leaf blade 3--18 cm, +- ovate, base +- cordate, tip obtuse; soft- and stiff-hairy, glandular
+corolla pink to +- purple
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0311+0492} {short-spiked hedge nettle:Stachys pycnantha}
+{-
+pouch at base of corolla
+<b>inflorescence compact</b>
+leaf blade 5--12 cm, ovate or lanceolate to oblong, crenate to serrate, base rounded to cordate, tip obtuse; soft- to stiff-hairy, glandular
+corolla +- white to +- pink
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1207+0830} {bugle hedgenettle:Stachys ajugoides}
+{-
+pouch at base of corolla
+inflorescence elongated
+leaf blade 1.5--7 cm, generally oblong, base wedge-shaped, tip rounded; <b>hairs long & silky</b>
+corolla pink or white
+-}
+
+{+rough hedgenettle,3}
+{-
+pouch at base of corolla
+inflorescence elongated
+leaf blade 5--9 cm, ovate to lanceolate, base rounded to cordate, tip acute to obtuse; <b>glabrous to soft-hairy (not silky)</b>, occasionally glandular
+stem, herbage +- glandular, not resinous; lower corolla lip 4--6 mm wide
+corolla pink, bracts rapidly reduced distally on stem
+-}
