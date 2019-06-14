@@ -97,11 +97,6 @@ input.addEventListener('input', inputHandler);
 Make separate pages (and links) for flower lists (by color and "all")
 with names only (for bandwidth saving) and photos only (for fast skimming).
 
-Add links at the top of primary color pages to secondary color anchors.
-
-it would be nice to attach colors to individual jpgs of a flower,
-  e.g. for baby blue eyes (N. menziesii).
-
 It would be nice to have a glossary with popup links automatically created
   where glossary words are used.
 Jepson example:

@@ -716,21 +716,21 @@ def page_matches_color(page, color):
 #
 # If color == None, every page matches.
 def find_matches(page_subset, color):
-    match_set = set()
+    match_set = []
     for page in page_subset:
         if page in page_list:
             if page in page_child:
                 child_subset = find_matches(page_child[page], color)
                 if len(child_subset) == 1:
-                    match_set.update(child_subset)
+                    match_set.extend(child_subset)
                 elif len(child_subset) > 1:
-                    match_set.add(page)
+                    match_set.append(page)
                     # Record this container page's color.
                     if page not in page_color:
                         page_color[page] = set()
                     page_color[page].add(color)
             elif page_matches_color(page, color):
-                match_set.add(page)
+                match_set.append(page)
     return match_set
 
 # We don't need color_page_list yet, but we go through the creation process
@@ -782,10 +782,17 @@ def list_matches(w, match_set, indent, color):
     def count_flowers(page):
         return count_matching_obs(page, color, set())[0]
 
-    # Sort in reverse order of observation count.
-    # We initialize the sort with match_set sorted alphabetically.
-    # This order is retained for subsets with equal observation counts.
-    for page in sorted(sorted(match_set), key=count_flowers, reverse=True):
+    if indent:
+        # We're under a parent with an ordered child list.  Retain its order.
+        pass
+    else:
+        # Sort in reverse order of observation count.
+        # We initialize the sort with match_set sorted alphabetically.
+        # This order is retained for subsets with equal observation counts.
+        match_set.sort()
+        match_set.sort(key=count_flowers, reverse=True)
+
+    for page in match_set:
         if page in page_child:
             list_page(w, page, indent)
             list_matches(w, find_matches(page_child[page], color),
