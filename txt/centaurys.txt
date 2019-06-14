@@ -1,4 +1,4 @@
-{sci:Zeltnera spp.}
+{sci:Zeltnera}
 
 Key feature:
 {-

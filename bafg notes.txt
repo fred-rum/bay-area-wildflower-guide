@@ -112,8 +112,6 @@ Print errors:
   broken photo
   no scientific name for leaf page
 
-Identify genuses with multiple species but without a container page.
-
 Reject iNaturalist community ID as necessary, especially where I otherwise
 have 0 observations.
 

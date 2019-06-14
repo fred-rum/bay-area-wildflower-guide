@@ -76,6 +76,7 @@ page_obs_rg = {} # number of observations that are research grade
 page_taxon_id = {} # iNaturalist taxon ID
 
 sci_page = {} # scientific name -> page name
+genus_page_list = {} # genus -> list of page names
 
 # Define a list of supported colors.
 color_list = ['blue',
@@ -619,6 +620,16 @@ def parse(page, s):
     if page not in page_child and page not in page_color:
         print 'No color for {page}'.format(page=page)
 
+    # record all pages that are within each genus
+    if page in page_sci:
+        sci = page_sci[page]
+        pos = sci.find(' ')
+        if pos:
+            genus = sci[:pos]
+            if genus not in genus_page_list:
+                genus_page_list[genus] = []
+            genus_page_list[genus].append(page)
+
 ###############################################################################
 
 # Read the txt files and record names and parent->child relationships.
@@ -797,6 +808,12 @@ with open(root + "/html/all.html", "w") as w:
     w.write('<h1>All flowers</h1>\n')
     list_matches(w, top_list, False, None)
     write_footer(w)
+
+for genus in genus_page_list:
+    if len(genus_page_list[genus]) > 1 and genus not in sci_page:
+        print 'No parent page exists for the following pages in {genus} spp.:'.format(genus=genus)
+        for page in genus_page_list[genus]:
+            print '  ' + get_full(page, 1)
 
 ###############################################################################
 # Compare the new html files with the prev files.
