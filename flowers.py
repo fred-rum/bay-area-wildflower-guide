@@ -779,7 +779,7 @@ def list_page(w, page, indent):
     w.write('<div class="photo-box{indent_class}">'.format(indent_class=indent_class))
 
     if page in flower_jpg_list:
-        w.write('<a href="{page}.html"><img src="../photos/{jpg}.jpg" width="200" height="200" class="list-thumb"></a>{spacer}'.format(page=page, jpg=flower_jpg_list[page][0], spacer=horiz_spacer))
+        w.write('<a href="{page}.html"><img src="../thumbs/{jpg}.jpg" width="200" height="200" class="list-thumb"></a>{spacer}'.format(page=page, jpg=flower_jpg_list[page][0], spacer=horiz_spacer))
 
     w.write('{link}</div>\n'.format(link=create_link(page, 2)))
 
