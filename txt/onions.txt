@@ -1,0 +1,14 @@
+{sci:Allium}
+<b>Caution: There are many other bay area onions besides these.</b>
+
+{+jeweled onion}
+{-
+pedicels 7--15 mm
+-}
+
+{+mexicali onion}
+{-
+pedicels 8--40 mm
+-}
+
+{+three-cornered garlic}

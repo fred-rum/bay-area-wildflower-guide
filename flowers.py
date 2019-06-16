@@ -314,9 +314,9 @@ def write_obs(w, page):
     (n, rg) = count_matching_obs(page, None, set())
 
     if page in page_taxon_id:
-        link = 'https://www.inaturalist.org/observations/chris_nelson?taxon_id={taxon_id}'.format(taxon_id=page_taxon_id[page])
+        link = 'https://www.inaturalist.org/observations/chris_nelson?taxon_id={taxon_id}&order_by=observed_on'.format(taxon_id=page_taxon_id[page])
     elif page in page_sci:
-        link = 'https://www.inaturalist.org/observations/chris_nelson?search_on=names&q={sci}'.format(sci=page_sci[page])
+        link = 'https://www.inaturalist.org/observations/chris_nelson?search_on=names&q={sci}&order_by=observed_on'.format(sci=page_sci[page])
     else:
         link = None
 
