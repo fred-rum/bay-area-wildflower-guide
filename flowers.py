@@ -529,7 +529,8 @@ def parse(page, s):
                 img_class = 'leaf-thumb'
             img = '<a href="{href}"><img src="{thumb}" width="200" height="200" class="{img_class}"></a>'.format(href=href, thumb=thumb, img_class=img_class)
         else:
-            img = '<a href="{href}" class="missing"><div class="page-thumb-text"><span>{jpg}</span></div></a>'.format(href=href)
+            img = '<a href="{href}" class="missing"><div class="page-thumb-text"><span>{jpg}</span></div></a>'.format(jpg=jpg, href=href)
+            print '{jpg}.jpg missing'.format(jpg=jpg)
 
         return img + horiz_spacer
 
