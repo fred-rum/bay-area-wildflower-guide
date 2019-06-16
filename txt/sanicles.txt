@@ -1,0 +1,11 @@
+{sci:Sanicula}
+The leaves are apparently diagnostic but highly variable.  Given the number of local species (~10) and relative rarity of my observations, it's probably best to work through Jepson on a case-by-case basis.
+
+{+purple sanicle}
+{-
+can also be yellow
+-}
+
+{+pacific sanicle}
+
+{+poison sanicle}
