@@ -431,6 +431,10 @@ repl_easy_dict = {
     # Replace {default} with all the default fields.
     '{default}' : '{jpgs}\n',
 
+    # Handle boxes on key pages.
+    '{[' : '<div class="box">',
+    ']}' : '</div>',
+
     # Replace common Jepson codes.
     '+-' : '&plusmn;',
     '--' : '&ndash;',

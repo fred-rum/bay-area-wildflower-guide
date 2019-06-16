@@ -1,5 +1,5 @@
 {sci:Oxalis}
-<div class="box">
+{[
 <h3>purple or pale flowers</h3>
 
 {+redwood sorrel}
@@ -37,8 +37,8 @@ petals < 2.5 cm, purple to red, pink, or white [yellow]
 Nisene Marks, Montara Mtn.
 -}
 
-</div>
-<div class="box">
+]}
+{[
 <h3>yellow flowers</h3>
 
 {+bermuda buttercup}
@@ -72,4 +72,4 @@ sepals 3.5--6 mm, lanceolate, tips ciliate
 <b>petals generally 8--12 mm</b>, yellow
 -}
 
-</div>
+]}
