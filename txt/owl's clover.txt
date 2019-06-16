@@ -1,0 +1,10 @@
+{sci:Castilleja}
+{+purple owl's-clover,3}
+{-
+corolla beak tip hooked, densely shaggy-hairy
+-}
+
+{+denseflower indian paintbrush,3}
+{-
+corolla beak straight, puberulent
+-}
