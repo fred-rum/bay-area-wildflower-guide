@@ -70,6 +70,11 @@ with each line also surrounded by <li>...</li>.
 A sublist can be included, but must use <ul> and </ul>, each on a line
 by itself.
 
+{[
+[...]
+]}
+surrounds the given text with a light-bordered box.
+
 ###############################################################################
 
 An easy method to search would be nice.
@@ -139,15 +144,8 @@ for f in *.jpg; do git mv "$f" "$(echo $f | sed 's/-\([-0-9]*\)\.jpg$/,\1.jpg/')
 
 ###############################################################################
 
-Improved color section:
-
-pale blue	dark blue
-		blue purple (is it needed?
-pale purple	dark purple
-		red purple
-pink		red
-salmon
-		orange
-cream		yellow
-		white
-		other
+create a key for daisies:
+pacific aster
+california aster
+seaside daisy
+afro-australian daisies

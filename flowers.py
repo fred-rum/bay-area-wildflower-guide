@@ -793,6 +793,9 @@ def list_matches(w, match_set, indent, color):
     def count_flowers(page):
         return count_matching_obs(page, color, set())[0]
 
+    flower_count = 0
+    key_count = 0
+
     if indent:
         # We're under a parent with an ordered child list.  Retain its order.
         pass
@@ -806,26 +809,33 @@ def list_matches(w, match_set, indent, color):
     for page in match_set:
         if page in page_child:
             list_page(w, page, indent)
-            list_matches(w, find_matches(page_child[page], color),
-                         True, color)
+            (k, f) = list_matches(w, find_matches(page_child[page], color),
+                                  True, color)
+            key_count += 1 + k
+            flower_count += f
             w.write('</div>\n')
         else:
+            flower_count += 1
             list_page(w, page, indent)
 
-for color in color_list:
+    return (key_count, flower_count)
+
+def write_page_list(page_list, color, color_match):
+    s = cStringIO.StringIO()
+    (k, f) = list_matches(s, page_list, False, color_match)
+
     with open(root + "/html/{color}.html".format(color=color), "w") as w:
         write_header(w, color.capitalize())
         w.write('<body>\n')
-        w.write('<h1 id="{color}">{ucolor} flowers</h1>\n'.format(color=color, ucolor=color.capitalize()))
-        list_matches(w, color_page_list[color], False, color)
+        w.write('<h1>{ucolor} flowers</h1>\n'.format(ucolor=color.capitalize()))
+        w.write('{f} flowers and {k} keys'.format(f=f, k=k))
+        w.write(s.getvalue())
         write_footer(w)
 
-with open(root + "/html/all.html", "w") as w:
-    write_header(w, 'All Flowers')
-    w.write('<body>\n')
-    w.write('<h1>All flowers</h1>\n')
-    list_matches(w, top_list, False, None)
-    write_footer(w)
+for color in color_list:
+    write_page_list(color_page_list[color], color, color)
+
+write_page_list(top_list, 'all', None)
 
 for genus in genus_page_list:
     if len(genus_page_list[genus]) > 1 and genus not in genus_set:
