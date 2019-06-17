@@ -1,4 +1,3 @@
-{sci:Castilleja}
 {+purple owl's-clover,3}
 {-
 corolla beak tip hooked, densely shaggy-hairy

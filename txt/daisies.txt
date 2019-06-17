@@ -1,5 +1,14 @@
 Many genuses look like daisies.  Here are the most daisy-like ones I've found in the bay area.
 
+Possible key features:
+{-
+stem erect, decumbent, or prostrate
+shape and scale of leaves
+scale of flower parts
+shape and scale of phyllaries (bracts)
+hair anywhere? (e.g. stem base, upper stem, leaf top or bottom, phyllaries)
+-}
+
 {+common daisy}
 {-
 Stem: 1--several from base, decumbent or prostrate
@@ -60,15 +69,32 @@ Leaf: 3--8 cm, slightly fleshy; proximal wing-petioled, distal +- sessile; blade
 Inflorescence: heads 1 or in leafy cyme-like clusters (D. ecklonis only), 4--7 cm diam; involucre +- bell-shaped; phyllaries 12--15 mm, lance-linear, acuminate, narrowly scarious-margined
 Disk Flower: corolla 5--6 mm, blue-purple
 Ray Flower: ray 2.5--3.5 cm, adaxially white and abaxially blue-purple, sometimes deep violet at base or adaxially pink-purple to rose-purple and abaxially purple or deep rose-purple
-Ecology: Uncommon. Disturbed places, beaches, coastal areas (D. fruiticosa) orescape from cultivation (D. ecklonis)
+Ecology: Uncommon. Disturbed places, beaches, coastal areas (D. fruiticosa) or escaped from cultivation (D. ecklonis)
 -}
 
 {+pacific aster}
 {-
-
+Stem: generally erect, 4--10 dm, hairy distally
+Leaf: (basal 0 at flower) cauline, alternate, +- equal or mid-cauline largest, +- sessile, +- oblanceolate, acute, entire to finely serrate, +- hairy
+Inflorescence: inflorescence generally open, lateral branches generally 10+ cm; heads in cyme-like cluster; involucre cylindric to hemispheric, not glandular
+phyllaries graduated or +- equal in 2--6 series, oblong to ovate
+outer phyllaries green +- to base, obtuse, pale-margined < 1/2 length, length generally < 3 &times; width, <= inner ones, green throughout or +- pale-margined at base with green area at tip generally > 2.5 &times; longer than wide
+inner phyllaries pale-margined, +- acute, green zone oblanceolate to linear
+receptacle +- flat, pitted, epaleate
+Disk Flower: 4--60+; corolla, anthers generally yellow, tube generally < throat
+Ray Flower: 15--40, corolla 8--12 mm, violet
+Ecology: Grassland, salt marshes, disturbed places
 -}
 
 {+california aster}
 {-
-
+Habit: subshrub, generally 10--100 cm
+Stem: 1--many from base, decumbent to ascending or erect, simple or distally branched, generally densely white-tomentose, sometimes +- glabrous and/or glandular, especially distally
+Leaf: cauline at flower, often crowded proximally, alternate; sessile or wing-petioled; blade 10--70+ &times; 3--19 mm, linear to oblanceolate, spoon-shaped, or ovate, entire or toothed, hairy, sometimes with sunken glands and/or with sessile bead-like and/or stalked glands; distal smaller, sessile, bract-like
+Inflorescence: heads radiate, 1 or in cyme-like cluster
+involucre hemispheric to bell-shaped, top-shaped, or cylindric, 6--14 &times; 3--10 mm
+phyllaries 30--90+, graduated in 3--9 series, often spreading or with spreading tips, reflexed in age, linear to narrowly lanceolate, stiff-papery to scarious, flat, tips leaf-like in texture, variously hairy and/or glandular
+receptacle +- flat or rounded, pitted, with small scale-like projections, glabrous
+Disk Flower: 12--120+; corolla 4--8 mm, yellow, tube 0.6--1.4 mm, < narrowly cylindric throat, lobes erect, equal, narrowly lanceolate
+Ecology: Coastal scrub, chaparral, grassland, foothill woodland, forest
 -}
