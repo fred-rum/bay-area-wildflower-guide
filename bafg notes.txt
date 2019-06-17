@@ -144,8 +144,4 @@ for f in *.jpg; do git mv "$f" "$(echo $f | sed 's/-\([-0-9]*\)\.jpg$/,\1.jpg/')
 
 ###############################################################################
 
-create a key for daisies:
-pacific aster
-california aster
-seaside daisy
-afro-australian daisies
+Finish daisies.txt

@@ -1,0 +1,74 @@
+Many genuses look like daisies.  Here are the most daisy-like ones I've found in the bay area.
+
+{+common daisy}
+{-
+Stem: 1--several from base, decumbent or prostrate
+Leaf: basal and proximal cauline, 2--10 cm; blade oblanceolate or obovate, tapered to winged petiole, tip obtuse, margin entire, crenate or serrate, faces loosely soft-hairy
+Inflorescence: 1 heads on each +- naked peduncle; peduncle 2--25 cm, strigose or hairs soft, spreading; involucre hemispheric; phyllaries in 2 equal series, 3--6 mm, ovate, obtuse, hairs soft, spreading; receptacle conic
+Ray Flower: many; ray 7--10 mm, narrow,  white to pink or purple
+Disk Flower: many; corolla +- 2 mm, yellow, tube very short, throat +- cylindric
+Ecology: Damp, grassy areas
+-}
+
+{+oxeye daisy}
+{-
+Habit: Plants 10--30(100+) cm
+Stem: erect, simple or distally branched, glabrous or hairy
+basal leaf petiole 10--30(120) mm, blade 12--35(50+) mm, 8--20(30) mm wide, obovate to spoon-shaped, pinnately 3--7+ lobed or irregularly toothed
+cauline leaf alternate, petioled or sessile, blade 30--80+ mm, 2--15+ mm wide, mid-stem leaves generally irregularly toothed throughout
+Inflorescence: heads generally radiate (discoid), 1 or in 2--3s; involucre hemispheric or broader, 12--20+ cm diam
+phyllaries 35--60+ in 3--4+ series, free, +- ovate to oblanceolate, unequal, glabrous or sparsely hairy, margins scarious, colorless to +- brown, larger phyllaries 2--3 mm wide
+receptacle convex, epaleate, glabrous
+Ray Flower: (0)13--34+; ray 12--20(35+) mm
+Disk Flower: 120--200+; corolla yellow, tube +- cylindric, throat bell-shaped, lobes deltate
+Ecology: Common. Disturbed areas, meadows, seeps
+-}
+
+{+shasta daisy}
+{-
+Habit: Plant 20--60(80+) cm
+Stem: erect, simple or distally branched, glabrous or hairy
+basal leaf petiole 50--80(200+) mm, blade 50--80(120+) mm, 15--25(35+) mm wide, obovate to spoon-shaped, not lobed, generally toothed (entire), glabrous or sparsely hairy
+cauline leaf alternate, petioled or sessile, blade 50--120+ mm, 8--22+ mm wide, oblanceolate to lanceolate or linear, mid-stem leaves generally proximally entire, distally regularly serrate, glabrous or sparsely hairy
+Inflorescence: heads generally radiate (discoid), 1 or in 2--3s
+involucre hemispheric or broader, 18--28+ mm diam; phyllaries 35--60+ in 3--4+ series, free, +- ovate to oblanceolate, unequal, glabrous or sparsely hairy, margins scarious, colorless to +- brown, larger phyllaries 2--3 mm wide
+receptacle convex, epaleate, glabrous
+Ray Flower: 21--34+; corolla white, drying +- pink, ray linear to ovate, 20--30(40+) mm
+Disk Flower: 120--200+; corolla yellow, tube +- cylindric, throat bell-shaped, lobes deltate
+Ecology: Uncommon. Disturbed areas, forest, streambanks
+-}
+
+{+seaside daisy}
+{-
+Habit: subshrub, 5--30 cm
+Stem: +- decumbent, generally branched near mid-stem, glabrous or glandular to densely spreading-hairy
+Leaf: alternate, generally sessile, thick, +- fleshy, 2--13 cm, spoon-shaped to widely obovate, entire or distally shallowly toothed; proximal wing-petioled, cauline reduced or not, sometimes +- clasping, spreading-hairy, minutely glandular
+Inflorescence: heads generally radiate (discoid, disciform), 1--15, peduncled; inflorescence generally +- flat-topped (raceme- to panicle-like)
+involucre urn- to bell-shaped or generally hemispheric, 7--15 mm, 15--35 mm diam
+phyllaries linear to narrowly lanceolate, in 2--several series, +- equal to strongly graduated, +- densely long-soft-hairy, minutely glandular, generally ascending or erect in flower, generally green, spreading when pressed, reflexed when dry
+receptacle flat to steeply conic, smooth to shallowly pitted
+Disk Flower: generally many; corolla generally narrowly funnel-shaped, yellow
+Ray Flower: 80--300+; ray 8--15 mm, generally narrow, white to pink or purple
+Ecology: Coastal bluffs, dunes, beaches
+-}
+
+{+afro-australian daisies}
+{-
+Habit: Subshrub, +- puberulent and minutely stalked-glandular
+Stem: depends greatly on the species; see linked sub-page
+Leaf: 3--8 cm, slightly fleshy; proximal wing-petioled, distal +- sessile; blade linear-oblong to obovate, entire or sparingly dentate
+Inflorescence: heads 1 or in leafy cyme-like clusters (D. ecklonis only), 4--7 cm diam; involucre +- bell-shaped; phyllaries 12--15 mm, lance-linear, acuminate, narrowly scarious-margined
+Disk Flower: corolla 5--6 mm, blue-purple
+Ray Flower: ray 2.5--3.5 cm, adaxially white and abaxially blue-purple, sometimes deep violet at base or adaxially pink-purple to rose-purple and abaxially purple or deep rose-purple
+Ecology: Uncommon. Disturbed places, beaches, coastal areas (D. fruiticosa) orescape from cultivation (D. ecklonis)
+-}
+
+{+pacific aster}
+{-
+
+-}
+
+{+california aster}
+{-
+
+-}

@@ -1,6 +1,13 @@
-{jpgs} This is most likely D. fruticosa or D. ecklonis. The flower heads evidently are identical. Jepson distinguishes them mostly by stem:<ul>
-<li>D. ecklonis: stem <= 1 m, erect or ascending, branched distally or throughout</li>
-<li>D. fruticosa: stem sometimes >> 1 m, trailing to ascending, sparingly branched, rooting at ground contact</li>
-</ul>
+{+trailing african daisy,2}
+{-
+stem sometimes >> 1 m, trailing to ascending, sparingly branched, rooting at ground contact
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0412+0932}
+{blue-and-white daisybush:Dimorphotheca ecklonis}
+{-
+stem <= 1 m, erect or ascending, branched distally or throughout
+-}
+
 Jepson further notes:
 "Many cultivated forms are hybrids [between the two species] and combine species features; these may escape or persist from cultivation."

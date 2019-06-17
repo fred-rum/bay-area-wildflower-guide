@@ -838,10 +838,14 @@ for color in color_list:
 write_page_list(top_list, 'all', None)
 
 for genus in genus_page_list:
-    if len(genus_page_list[genus]) > 1 and genus not in genus_set:
-        print 'No parent page exists for the following pages in {genus} spp.:'.format(genus=genus)
+    if len(genus_page_list[genus]) > 1:
+        did_intro = False
         for page in genus_page_list[genus]:
-            print '  ' + get_full(page, 1)
+            if page not in page_parent:
+                if not did_intro:
+                    print 'No key page exists for the following pages in {genus} spp.:'.format(genus=genus)
+                    intro = True
+                print '  ' + get_full(page, 1)
 
 ###############################################################################
 # Compare the new html files with the prev files.
