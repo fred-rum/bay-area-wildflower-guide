@@ -12,7 +12,7 @@ ovary 4-grooved or 8-grooved
 {+elegant clarkia}
 {-
 axis in bud straight; buds reflexed [i.e. <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=5207+1611+0748+0049"> drooping</a>]
-all 4 sepals staying fused
+all 4 sepals staying fused [theoretically, but this varies]
 petals 10--25 mm [unspotted]; petal claw slender [unlobed]
 found everywhere
 -}
@@ -21,7 +21,7 @@ found everywhere
 {-
 looks much like elegant clarkia
 axis in bud <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=5207+1611+0748+0092">recurved at tip</a>; buds pendent
-sepals all coming free
+sepals all coming free [sometimes reflexed, sometimes spreading]
 petals 6--12 mm, generally spotted; petal claw broad, 2-lobed
 found at Sierra Azul
 -}

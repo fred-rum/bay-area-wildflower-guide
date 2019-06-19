@@ -1,0 +1,33 @@
+{sci:Asclepias}
+The petals and sepals are reflexed, revealing the gynostegium, which is a blunt plug composed of fused stamens and styles.  The gymnostegium is surrounded by five hoods, each (at least partially) hiding a horn.
+
+A labeled photo of the <a href="http://orbisec.com/wp-content/uploads/2014/10/Milkweed-2.jpg">milkweed flower parts</a>.
+
+There are more milkweeds in the bay area than just these.
+
+Key features for all local milkweeds:
+{-
+visible hood and horn characteristics
+inflorescence sessile or with peduncle
+-}
+
+{+california milkweed}
+{-
+hoods closed at top
+horns hidden
+leaves opposite; petiole short to 0; blade ovate
+-}
+
+{+woollypod milkweed}
+{-
+hoods closed at top
+horns barely peeking out to +- height of hood and gymnostegium
+leaves opposite or whorled in 3s or 4s; petiole short to 0; blade elliptic, lanceolate, or ovate, base tapered to obtuse (to cordate), tip obtuse to short-acuminate, margins generally not wavy, generally entire
+-}
+
+{+narrowleaf milkweed}
+{-
+hoods open at top
+horns sticking out above hood and gymnostegium
+leaves opposite or whorled generally in 3s to 5s, often with clusters of smaller leaves in axils; petiole short; blade narrow-lanceolate, base tapered
+-}

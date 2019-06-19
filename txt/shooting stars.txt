@@ -1,0 +1,11 @@
+{henderson's shooting star,.jpg} {+henderson's shooting star,-3}
+{-
+peduncle purple (or mix of purple/green)
+leaf blade length generally < 2 &times; width
+-}
+
+{padre's shooting star,.jpg} {+padre's shooting star,-2}
+{-
+peduncle bright green
+leaf blade length generally > 2 &times; width
+-}
