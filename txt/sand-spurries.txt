@@ -1,0 +1,15 @@
+{sci:Spergularia}
+There are other sand spurries in the bay area, but I'm hesitant to include them when the differences are so inconspicuous.
+
+{+red sand spurrey}
+{-
+annual, delicate
+lower main stem 0.3--0.5 mm diam.
+-}
+
+{+sticky sand-spurrey}
+{-
+strongly perennial herb, stout
+lower main stem 0.8--3 mm diam.
+variants can be distinguished by flower color and style length (measure precisely!)
+-}
