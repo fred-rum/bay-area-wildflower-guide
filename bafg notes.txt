@@ -122,6 +122,9 @@ Allow observations and CalFlora links to be inserted manually
 
 Make parent page link more prominent on child's page so that it isn't missed.
 
+sync files to laptop and use robocopy to copy them to phone
+robocopy 
+
 ###############################################################################
 
 It'd be nice to split the img and text onto separate lines on small
@@ -143,5 +146,3 @@ how to mass rename files:
 for f in *.jpg; do git mv "$f" "$(echo $f | sed 's/-\([-0-9]*\)\.jpg$/,\1.jpg/')"; done
 
 ###############################################################################
-
-Finish daisies.txt

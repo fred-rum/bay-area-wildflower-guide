@@ -28,7 +28,7 @@ inflorescence in a raceme, peduncled
 Flowers not spaced, generally on 1 side of axis
 Inflorescence generally +- = subtending leaf, 3--12-flowered; corolla dark or red-purple
 leaflets 10--16, 1.5--3 cm, elliptic to oblong
-corolla (12)15--18 mm, dark or red-purple
+corolla (12)15--18 mm, dark or red-purple, <b>plumose</b>
 -}
 
 {+american vetch}

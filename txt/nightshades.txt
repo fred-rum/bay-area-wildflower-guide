@@ -10,13 +10,13 @@ Leaf shape.  There is some overlap, but the shapes are often distinct.
 {+bluewitch nightshade} 
 {-
 upper stem hairs generally dense, branched
-leaf ovate, obovate, or elliptic, generally entire
+leaf 1--4 cm, ovate, obovate, or elliptic, generally entire
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0110+1545} {purple nightshade:Solanum xanti}
 {-
 stem +-hairy, hairs are unbranched, glandular or not
-leaf lanceolate to ovate, +-entire to 1--2-lobed at base; base obtuse to +-cordate
+leaf 2--7 cm, lanceolate to ovate, +-entire to 1--2-lobed at base; base obtuse to +-cordate
 -}
 
 <h3>White nightshades</h3>

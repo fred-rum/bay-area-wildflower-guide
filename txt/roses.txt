@@ -47,14 +47,28 @@ sepals glandular or not, entire
 very common in the bay area
 -}
 
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0507+0191} {dog-rose:Rosa canina}
+{-
+
+Nisene Marks, Marin, and Mt. Tam.
+shrub or thicket-forming, generally 8--40 dm
+<b>prickles +- few, 3--10 mm, thick-based and compressed, curved</b>
+leaf axis glabrous or with hairs to 1 mm, glandless
+leaflets generally 5--7, (+-) glabrous
+<b>sepals +- glandless, with toothed lateral lobes</b>
+-}
+
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1214+2870} {:Rosa rubiginosa}
 {-
 shrub or thicket-forming, 8--30 dm
 <b>prickles +- 5--15 mm, thick-based and compressed, curved</b>
 leaf axis +- hairy, hairs 0.2--1 mm, glandular
 leaflets generally 5--7, +- hairy, glandular
-<b>sepals with toothed lateral lobes</b>
+<b>sepals glandular, with toothed lateral lobes</b>
 La Honda Creek OSP
 -}
 
 ]}
+
+iNaturalist may suggest woods' rose (Rosa woodsii), but it's not really in the bay area.
+<hr/>
