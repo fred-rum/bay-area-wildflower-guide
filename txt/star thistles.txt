@@ -1,0 +1,4 @@
+{sci:Centaurea}
+{+yellow starthistle}
+
+{+purple star-thistle}
