@@ -1,0 +1,22 @@
+{sci:Geranium}
+{+cut-leaved crane's-bill}
+{-
+stem hairs hairs rough, spreading to reflexed
+leaf blade 2.5--5.4 cm wide, divided 0.75--0.95 to base, segments 5--7, rhombic
+petals 2.9--5.8 mm, +- notched, rose-purple
+-}
+
+{+dove's-foot crane's-bill}
+{-
+stem hairs +- sparse, soft
+leaf blade 0.9--5.2 cm wide, divided 0.5--0.75 to base, segments 7--9, obtriangular
+petals 3--10.5 mm, notched, red-purple
+-}
+
+{+herb robert}
+{-
+stem hairs +- sparse
+leaf blade 3.5--10 cm wide; divided > 0.9 to base or midrib, segments 5, +- sessile to short-stalked, pinnately lobed to dissected
+petals 10--14 mm, rounded, pink to red-purple [often shorter]
+anthers +- purple [yellow for G. purpureum]
+-}
