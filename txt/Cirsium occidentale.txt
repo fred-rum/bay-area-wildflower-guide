@@ -1,0 +1,13 @@
+{com:cobwebby thistle}
+{+venus thistle}
+{-
+less cobwebby
+common
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0209+0801}
+{cobwebby thistle:Cirsium occidentale occidentale}
+{-
+very cobwebby
+scattered in the Santa Cruz range
+-}

@@ -1,4 +1,43 @@
 {sci:Centaurea}
+Key features:
+{-
+corolla color
+-}
+
+{[
+<h3>Yellow</h3>
+
 {+yellow starthistle}
 
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0105+2739}
+{tocalote:Centaurea melitensis}
+{-
+common
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0175+3301+2288+0062}
+{sicilian star-thistle:Centaurea sulphurea}
+{-
+Castle Rock
+-}
+
+]}
+{[
+<h3>Purple</h3>
+
+
 {+purple star-thistle}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0311+0802}
+{bachelor's-button:Cyanus segetum}
+{-
+Edgewood, Long Ridge, Mt. Diablo
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1213+0624}
+{spotted knapweed:Centaurea stoebe micranthos}
+{-
+Sierra Azul & Mt. Umunhum
+-}
+
+]}

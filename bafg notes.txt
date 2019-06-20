@@ -123,6 +123,30 @@ Allow observations and CalFlora links to be inserted manually
 
 Make parent page link more prominent on child's page so that it isn't missed.
 
+Add link to iNaturalist taxon page:
+https://www.inaturalist.org/taxa/{taxon_id}
+
+Read and write back a db.yaml file with various discovered information
+about pages that can then be hand edited.  E.g.
+  the scientific name used by various sources
+  replacement type for 'ssp.' (e.g. 'var.')
+  which photo is first for a page
+  the common name and scientific name for a page
+  alternative common names (e.g. as used in iNaturalist)
+Should color also go here or separately?
+  it might work to generate the db with a new flower, then add the color by hand
+
+The db would obviously override certain discovered info.
+  e.g. scientific name from observations.csv
+But it should also be overridden by other info
+  e.g. scientific name listed on the page.
+But when that happens, how should derived info be handled?
+  e.g. Jepson scientific name.
+Perhaps use an interactive process to initially populate the database,
+  and never specify values in other places.
+  e.g. if no scientific name is found in observations.csv, ask for it.
+  always ask for the color of a new flower
+
 sync files to laptop and use robocopy to copy them to phone
 
 ###############################################################################
