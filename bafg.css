@@ -151,3 +151,9 @@ a.leaf:visited {
 a.missing {
     color: red;
 }
+
+/* search field */
+#search {
+    width: 100%;
+    font-size: 1.5em;
+}

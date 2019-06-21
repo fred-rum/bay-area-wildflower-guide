@@ -848,6 +848,30 @@ for genus in genus_page_list:
                 print '  ' + get_full(page, 1)
 
 ###############################################################################
+# Create pages.js
+
+def count_flowers(page):
+    return count_matching_obs(page, None, set())[0]
+
+search_file = root + "/pages.js"
+with open(search_file, "w") as w:
+    w.write('var page=[\n')
+    for page in sorted(page_list, key=count_flowers, reverse=True):
+        w.write('["{page}"'.format(page=page))
+        com = get_com(page)
+        if com != page:
+            w.write(',"{com}"'.format(com=com))
+        if page in page_sci:
+            sci = page_sci[page]
+            elab = get_elab(sci)
+            if sci != com:
+                w.write(',"{sci}"'.format(sci=sci))
+            if elab != sci:
+                w.write(',"{elab}"'.format(elab=elab))
+        w.write('],\n')
+    w.write('];\n')
+
+###############################################################################
 # Compare the new html files with the prev files.
 # Create an HTML file with links to all new files and all modified files.
 # (Ignore deleted files.)
