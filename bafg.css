@@ -156,4 +156,9 @@ a.missing {
 #search {
     width: 100%;
     font-size: 1.5em;
+    border-radius: 0.4em;
+    padding-left: 1.5em;
+    background-position: .2em 50%; 
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1.5em' height='1.5em' viewBox='0 0 100 100'><g><circle cx='37' cy='37' r='20' stroke='%23888' stroke-width='7' fill='none'/><path d='M52,52L83,83' stroke='%23888' stroke-width='7' stroke-linecap='round' fill='none'/></g></svg>");
+    background-repeat: no-repeat;
 }
