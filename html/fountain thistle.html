@@ -28,7 +28,11 @@
 <link rel="stylesheet" href="../bafg.css">
 </head>
 <body>
-<h1>fountain thistle</h1>
+<div id="search-container">
+<input type="text" id="search" spellcheck="false" placeholder="search for a flower..." onkeyup="search_fn(this,'')">
+<div id="autocomplete-box">No matches found.</div>
+</div>
+<h1 id="title">fountain thistle</h1>
 <b><i>Cirsium fontinale</i></b><p/>
 <div class="photo-box"><a href="mount hamilton fountain thistle.html"><img src="../thumbs/mount hamilton fountain thistle,1.jpg" width="200" height="200" class="page-thumb"></a><div class="horiz-space"></div> <span><a href="mount hamilton fountain thistle.html" class="leaf">mount hamilton fountain thistle<br/><i>Cirsium fontinale ssp. campylon</i></a>
 <ul>
@@ -54,4 +58,6 @@ Pages that link to this one:<p/>
 
 <hr/>
 <a href="../index.html">BAFG</a> <span class="copyright">&ndash; Copyright 2019 Chris Nelson</span>
+<script src="../pages.js"></script>
+<script src="../search.js"></script>
 </body>

@@ -381,7 +381,7 @@ def write_parents(w, page):
     w.write('<li><a href="all.html">all flowers</a></li>\n')
     w.write('</ul>\n')
 
-def write_header(w, title):
+def write_header(w, title, h1):
     w.write('''<!-- Copyright 2019 Chris Nelson - All rights reserved. -->
 <html lang="en">
 <head>
@@ -410,12 +410,21 @@ def write_header(w, title):
 <meta name="msapplication-TileImage" content="../favicon/favicon-144.png">
 <meta name="msapplication-config" content="../favicon/browserconfig.xml">
 <link rel="stylesheet" href="../bafg.css">
-</head>\n'''.format(title=title))
+</head>
+<body>
+<div id="search-container">
+<input type="text" id="search" spellcheck="false" placeholder="search for a flower..." onkeyup="search_fn(this,'')">
+<div id="autocomplete-box">No matches found.</div>
+</div>
+<h1 id="title">{h1}</h1>
+'''.format(title=title, h1=h1))
 
 def write_footer(w):
     w.write('''
 <hr/>
 <a href="../index.html">BAFG</a> <span class="copyright">&ndash; Copyright 2019 Chris Nelson</span>
+<script src="../pages.js"></script>
+<script src="../search.js"></script>
 </body>
 ''')
 
@@ -609,9 +618,7 @@ def parse(page, s):
         else:
             h1 = com
 
-        write_header(w, com)
-        w.write('<body>\n')
-        w.write('<h1>{h1}</h1>\n'.format(h1=h1))
+        write_header(w, com, h1)
 
         if h1 == com and page in page_sci:
             # We printed the common name (not the italicized scientific name)
@@ -825,9 +832,8 @@ def write_page_list(page_list, color, color_match):
     (k, f) = list_matches(s, page_list, False, color_match)
 
     with open(root + "/html/{color}.html".format(color=color), "w") as w:
-        write_header(w, color.capitalize())
-        w.write('<body>\n')
-        w.write('<h1>{ucolor} flowers</h1>\n'.format(ucolor=color.capitalize()))
+        title = color.capitalize() + ' flowers'
+        write_header(w, title, title)
         w.write('{f} flowers and {k} keys'.format(f=f, k=k))
         w.write(s.getvalue())
         write_footer(w)

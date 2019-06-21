@@ -28,7 +28,11 @@
 <link rel="stylesheet" href="../bafg.css">
 </head>
 <body>
-<h1>clovers</h1>
+<div id="search-container">
+<input type="text" id="search" spellcheck="false" placeholder="search for a flower..." onkeyup="search_fn(this,'')">
+<div id="autocomplete-box">No matches found.</div>
+</div>
+<h1 id="title">clovers</h1>
 <b><i>Trifolium spp.</i></b><p/>
 There are very many clover species in the bay area.  This page lists some key features, but I don't attempt to replicate the whole Jepson decision tree.  Instead, each flower description includes only enough information to (hopefully) confirm an ID hypothesis.
 <p/>
@@ -168,4 +172,6 @@ Pages that link to this one:<p/>
 
 <hr/>
 <a href="../index.html">BAFG</a> <span class="copyright">&ndash; Copyright 2019 Chris Nelson</span>
+<script src="../pages.js"></script>
+<script src="../search.js"></script>
 </body>

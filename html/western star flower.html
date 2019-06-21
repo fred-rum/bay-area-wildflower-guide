@@ -28,7 +28,11 @@
 <link rel="stylesheet" href="../bafg.css">
 </head>
 <body>
-<h1>western star flower</h1>
+<div id="search-container">
+<input type="text" id="search" spellcheck="false" placeholder="search for a flower..." onkeyup="search_fn(this,'')">
+<div id="autocomplete-box">No matches found.</div>
+</div>
+<h1 id="title">western star flower</h1>
 <b><i>Lysimachia latifolia</i></b><p/>
 <div class="photo-box"><a href="../photos/western star flower,.jpg"><img src="../thumbs/western star flower,.jpg" width="200" height="200" class="leaf-thumb"></a><div class="horiz-space"></div> <a href="../photos/western star flower,-2.jpg"><img src="../thumbs/western star flower,-2.jpg" width="200" height="200" class="leaf-thumb"></a><div class="horiz-space"></div> <a href="../photos/western star flower,-3.jpg"><img src="../thumbs/western star flower,-3.jpg" width="200" height="200" class="leaf-thumb"></a><div class="horiz-space"></div><span></span></div>
 <p/>
@@ -45,4 +49,6 @@ Pages that link to this one:<p/>
 
 <hr/>
 <a href="../index.html">BAFG</a> <span class="copyright">&ndash; Copyright 2019 Chris Nelson</span>
+<script src="../pages.js"></script>
+<script src="../search.js"></script>
 </body>

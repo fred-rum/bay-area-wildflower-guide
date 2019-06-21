@@ -28,7 +28,11 @@
 <link rel="stylesheet" href="../bafg.css">
 </head>
 <body>
-<h1>owl's clover</h1>
+<div id="search-container">
+<input type="text" id="search" spellcheck="false" placeholder="search for a flower..." onkeyup="search_fn(this,'')">
+<div id="autocomplete-box">No matches found.</div>
+</div>
+<h1 id="title">owl's clover</h1>
 The corolla's upper lip lobes are fused into a "beak" with an open tip.  The stigma is exserted from the tip of the beak.  The corolla's lower lip is reduced and may be 3-toothed to -pouched.
 <p/>
 <div class="photo-box"><a href="purple owl's-clover.html"><img src="../thumbs/purple owl's-clover,3.jpg" width="200" height="200" class="page-thumb"></a><div class="horiz-space"></div> <span><a href="purple owl's-clover.html" class="leaf">purple owl's-clover<br/><i>Castilleja exserta</i></a>
@@ -53,4 +57,6 @@ Pages that link to this one:<p/>
 
 <hr/>
 <a href="../index.html">BAFG</a> <span class="copyright">&ndash; Copyright 2019 Chris Nelson</span>
+<script src="../pages.js"></script>
+<script src="../search.js"></script>
 </body>

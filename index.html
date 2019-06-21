@@ -28,8 +28,11 @@
 <link rel="stylesheet" href="bafg.css">
 </head>
 <body>
-<input type="text" id="search" placeholder="search for a flower..." onkeyup="search_fn(this)">
-<h1>Chris Nelson&rsquo;s Bay Area Flower Guide</h1>
+<div id="search-container">
+<input type="text" id="search" spellcheck="false" placeholder="search for a flower..." onkeyup="search_fn(this,'html/')">
+<div id="autocomplete-box">No matches found.</div>
+</div>
+<h1 id="title">Chris&nbsp;Nelson&rsquo;s Bay&nbsp;Area&nbsp;Flower&nbsp;Guide</h1>
 <p/>
 Flowers by color:
 <div class="shrink-box">
@@ -53,7 +56,7 @@ Flowers by color:
 Flowers are categorized only under their primary color, e.g. the rays of Asteraceae.  If white is mixed with another color, the other color is considered the primary color.  If an individual flower can have different primary colors (e.g. depending on age), then it is listed under each of those colors.  Flowers that are green or are so small as to have indefinite color are grouped under "Other colors".
 <h2>Usage Guide</h2>
 The Bay Area Flower Guide (BAFG) is a collection of my own photos and notes.
-It is designed to be my own reference as well as something I can point people to when I make flower identifications. <b>Warning</b>: I am not a biologist, just an interested amateur.  All flower identifications should be taken as my opinion and not authoritative.
+It is designed to be my own reference as well as something I can point people to when I make flower identifications. <b>Warning</b>: I am not a botanist, just an interested amateur.  All flower identifications should be taken as my opinion and not authoritative.
 <p/>
 The BAFG is not designed to be <b>your</b> reference.  You can use it as a reference if you like, but its quirks might frustrate you.
 <p/>
@@ -65,7 +68,6 @@ Primary refences include <a target="_blank" href="https://www.inaturalist.org/">
 <p/>
 &mdash;<br/>
 <a href="index.html">BAFG</a> <span class="copyright">&ndash; Copyright 2019 Chris Nelson</span>
-
 <script src="pages.js"></script>
 <script src="search.js"></script>
 </body>

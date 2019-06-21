@@ -4,7 +4,7 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>Blue</title>
+<title>Blue flowers</title>
 <link rel="shortcut icon" href="../favicon/favicon.ico">
 <link rel="icon" sizes="16x16 32x32 64x64" href="../favicon/favicon.ico">
 <link rel="icon" type="image/png" sizes="192x192" href="../favicon/favicon-192.png">
@@ -28,7 +28,11 @@
 <link rel="stylesheet" href="../bafg.css">
 </head>
 <body>
-<h1>Blue flowers</h1>
+<div id="search-container">
+<input type="text" id="search" spellcheck="false" placeholder="search for a flower..." onkeyup="search_fn(this,'')">
+<div id="autocomplete-box">No matches found.</div>
+</div>
+<h1 id="title">Blue flowers</h1>
 6 flowers and 1 keys<div class="photo-box"><a href="pacific hound's tongue.html"><img src="../thumbs/pacific hound's tongue,1.jpg" width="200" height="200" class="list-thumb"></a><div class="horiz-space"></div><a href="pacific hound's tongue.html" class="leaf">pacific hound's tongue<br/><i>Adelinia grande</i></a></div>
 <div class="box">
 <div class="photo-box"><a href="ceanothus.html" class="parent">ceanothus<br/><i>Ceanothus spp.</i></a></div>
@@ -41,4 +45,6 @@
 
 <hr/>
 <a href="../index.html">BAFG</a> <span class="copyright">&ndash; Copyright 2019 Chris Nelson</span>
+<script src="../pages.js"></script>
+<script src="../search.js"></script>
 </body>

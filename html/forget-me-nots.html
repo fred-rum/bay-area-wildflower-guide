@@ -28,7 +28,11 @@
 <link rel="stylesheet" href="../bafg.css">
 </head>
 <body>
-<h1>forget-me-nots</h1>
+<div id="search-container">
+<input type="text" id="search" spellcheck="false" placeholder="search for a flower..." onkeyup="search_fn(this,'')">
+<div id="autocomplete-box">No matches found.</div>
+</div>
+<h1 id="title">forget-me-nots</h1>
 <b><i>Myosotis spp.</i></b><p/>
 <div class="photo-box"><a href="broadleaf forget-me-not.html"><img src="../thumbs/broadleaf forget-me-not,1.jpg" width="200" height="200" class="page-thumb"></a><div class="horiz-space"></div> <span><a href="broadleaf forget-me-not.html" class="leaf">broadleaf forget-me-not<br/><i>Myosotis latifolia</i></a>
 <ul>
@@ -68,4 +72,6 @@ Pages that link to this one:<p/>
 
 <hr/>
 <a href="../index.html">BAFG</a> <span class="copyright">&ndash; Copyright 2019 Chris Nelson</span>
+<script src="../pages.js"></script>
+<script src="../search.js"></script>
 </body>

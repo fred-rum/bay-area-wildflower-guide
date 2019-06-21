@@ -28,7 +28,11 @@
 <link rel="stylesheet" href="../bafg.css">
 </head>
 <body>
-<h1>thistles</h1>
+<div id="search-container">
+<input type="text" id="search" spellcheck="false" placeholder="search for a flower..." onkeyup="search_fn(this,'')">
+<div id="autocomplete-box">No matches found.</div>
+</div>
+<h1 id="title">thistles</h1>
 <div class="photo-box"><a href="milk thistle.html"><img src="../thumbs/milk thistle,1.jpg" width="200" height="200" class="page-thumb"></a><div class="horiz-space"></div> <span><a href="milk thistle.html" class="leaf">milk thistle<br/><i>Silybum marianum</i></a></span></div>
 <p/>
 <div class="photo-box"><a href="plumeless thistles.html"><img src="../thumbs/italian thistle,.jpg" width="200" height="200" class="page-thumb"></a><div class="horiz-space"></div> <span><a href="plumeless thistles.html" class="parent">plumeless thistles<br/><i>Carduus spp.</i></a></span></div>
@@ -45,4 +49,6 @@ Pages that link to this one:<p/>
 
 <hr/>
 <a href="../index.html">BAFG</a> <span class="copyright">&ndash; Copyright 2019 Chris Nelson</span>
+<script src="../pages.js"></script>
+<script src="../search.js"></script>
 </body>

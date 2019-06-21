@@ -28,7 +28,11 @@
 <link rel="stylesheet" href="../bafg.css">
 </head>
 <body>
-<h1>red sand spurrey</h1>
+<div id="search-container">
+<input type="text" id="search" spellcheck="false" placeholder="search for a flower..." onkeyup="search_fn(this,'')">
+<div id="autocomplete-box">No matches found.</div>
+</div>
+<h1 id="title">red sand spurrey</h1>
 <b><i>Spergularia rubra</i></b><p/>
 <div class="photo-box"><a href="../photos/red sand spurrey,1.jpg"><img src="../thumbs/red sand spurrey,1.jpg" width="200" height="200" class="leaf-thumb"></a><div class="horiz-space"></div> <a href="../photos/red sand spurrey,2.jpg"><img src="../thumbs/red sand spurrey,2.jpg" width="200" height="200" class="leaf-thumb"></a><div class="horiz-space"></div> <a href="../photos/red sand spurrey,3.jpg"><img src="../thumbs/red sand spurrey,3.jpg" width="200" height="200" class="leaf-thumb"></a><div class="horiz-space"></div> <a href="../photos/red sand spurrey,4.jpg"><img src="../thumbs/red sand spurrey,4.jpg" width="200" height="200" class="leaf-thumb"></a><div class="horiz-space"></div><span></span></div>
 <p/>
@@ -46,4 +50,6 @@ Pages that link to this one:<p/>
 
 <hr/>
 <a href="../index.html">BAFG</a> <span class="copyright">&ndash; Copyright 2019 Chris Nelson</span>
+<script src="../pages.js"></script>
+<script src="../search.js"></script>
 </body>

@@ -28,7 +28,11 @@
 <link rel="stylesheet" href="../bafg.css">
 </head>
 <body>
-<h1>sanicles</h1>
+<div id="search-container">
+<input type="text" id="search" spellcheck="false" placeholder="search for a flower..." onkeyup="search_fn(this,'')">
+<div id="autocomplete-box">No matches found.</div>
+</div>
+<h1 id="title">sanicles</h1>
 <b><i>Sanicula spp.</i></b><p/>
 The leaves are apparently diagnostic but highly variable.  Given the number of local species (~10) and relative rarity of my observations, it's probably best to work through Jepson on a case-by-case basis.
 <p/>
@@ -53,4 +57,6 @@ Pages that link to this one:<p/>
 
 <hr/>
 <a href="../index.html">BAFG</a> <span class="copyright">&ndash; Copyright 2019 Chris Nelson</span>
+<script src="../pages.js"></script>
+<script src="../search.js"></script>
 </body>

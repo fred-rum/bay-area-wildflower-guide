@@ -1,4 +1,4 @@
-function search_fn(ele) {
+function search_fn(ele, path) {
   if (event.keyCode == 13) {
     v = ele.value;
     p = 0;
@@ -23,7 +23,7 @@ function search_fn(ele) {
       }
     }
     if (p) {
-      window.location.href = 'html/' + m + '.html';
+      window.location.href = path + m + '.html';
     }
   }
 }

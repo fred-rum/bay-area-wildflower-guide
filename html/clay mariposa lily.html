@@ -28,7 +28,11 @@
 <link rel="stylesheet" href="../bafg.css">
 </head>
 <body>
-<h1>clay mariposa lily</h1>
+<div id="search-container">
+<input type="text" id="search" spellcheck="false" placeholder="search for a flower..." onkeyup="search_fn(this,'')">
+<div id="autocomplete-box">No matches found.</div>
+</div>
+<h1 id="title">clay mariposa lily</h1>
 <b><i>Calochortus argillosus</i></b><p/>
 <div class="photo-box"><a href="../photos/clay mariposa lily,.jpg"><img src="../thumbs/clay mariposa lily,.jpg" width="200" height="200" class="leaf-thumb"></a><div class="horiz-space"></div> <a href="../photos/clay mariposa lily,-2.jpg"><img src="../thumbs/clay mariposa lily,-2.jpg" width="200" height="200" class="leaf-thumb"></a><div class="horiz-space"></div><span></span></div>
 <p/>
@@ -49,4 +53,6 @@ Pages that link to this one:<p/>
 
 <hr/>
 <a href="../index.html">BAFG</a> <span class="copyright">&ndash; Copyright 2019 Chris Nelson</span>
+<script src="../pages.js"></script>
+<script src="../search.js"></script>
 </body>
