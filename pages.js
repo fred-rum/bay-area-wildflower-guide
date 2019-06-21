@@ -56,6 +56,7 @@ var page=[
 ["Leptosiphon","baby stars, linanthus, and leptosiphons","Leptosiphon","Leptosiphon spp."],
 ["nemophila","baby blue eyes","Nemophila","Nemophila spp."],
 ["winecup clarkia","Clarkia purpurea"],
+["california yerba santa","Eriodictyon californicum"],
 ["red maids","Calandrinia menziesii"],
 ["bedstraws","Galium","Galium spp."],
 ["sanicles","Sanicula","Sanicula spp."],

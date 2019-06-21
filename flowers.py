@@ -844,7 +844,7 @@ for genus in genus_page_list:
             if page not in page_parent:
                 if not did_intro:
                     print 'No key page exists for the following pages in {genus} spp.:'.format(genus=genus)
-                    intro = True
+                    did_intro = True
                 print '  ' + get_full(page, 1)
 
 ###############################################################################
