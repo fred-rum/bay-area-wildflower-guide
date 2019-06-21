@@ -1,4 +1,9 @@
 is_hidden = true;
+function expose_ac() {
+  e_autocomplete_box.style.visibility = 'visible';
+  is_hidden = false;
+}
+
 function hide_ac() {
   e_autocomplete_box.style.visibility = 'hidden';
   is_hidden = true;
@@ -51,11 +56,10 @@ function fn_search(enter) {
   }
   if (p) {
     e_autocomplete_box.innerHTML = '<a href="' + path + m + '.html"><div>' + m + '</div></a>';
-    e_autocomplete_box.style.visibility = 'visible';
-    is_hidden = false;
   } else {
-    hide_ac();
+    e_autocomplete_box.innerHTML = 'No matches found.';
   }
+  expose_ac();
   if (enter && p) {
     window.location.href = path + m + '.html';
   }
