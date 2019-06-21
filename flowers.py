@@ -413,9 +413,10 @@ def write_header(w, title, h1):
 </head>
 <body>
 <div id="search-container">
-<input type="text" id="search" spellcheck="false" placeholder="search for a flower..." onkeyup="search_fn(this,'')">
-<div id="autocomplete-box">No matches found.</div>
+<input type="text" id="search" spellcheck="false" placeholder="search for a flower...">
+<div id="autocomplete-box"></div>
 </div>
+<div id="body">
 <h1 id="title">{h1}</h1>
 '''.format(title=title, h1=h1))
 
@@ -423,6 +424,7 @@ def write_footer(w):
     w.write('''
 <hr/>
 <a href="../index.html">BAFG</a> <span class="copyright">&ndash; Copyright 2019 Chris Nelson</span>
+</div>
 <script src="../pages.js"></script>
 <script src="../search.js"></script>
 </body>

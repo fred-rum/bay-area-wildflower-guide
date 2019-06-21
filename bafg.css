@@ -169,9 +169,13 @@ input#search {
     background-repeat: no-repeat;
 }
 div#autocomplete-box {
-    padding-left: 2.3em;
+    border: 1px solid gray;
+    margin-left: 1.7em;
+    padding: 2px;
     color: #666;
-    display: none;
+    background-color: white;
+    font-size: 1.25em;
+    visibility: hidden;
 }
 h1#title {
     position: static;
