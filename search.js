@@ -26,6 +26,22 @@ function fn_focusout() {
   }
 }
 
+function check(vx, name, d, best) {
+  cx = name.toUpperCase().replace(/[^A-Z]/g, '')
+  if ((best.pri < 4) && (cx == vx)) {
+    best.pri = 4;
+    best.d = d;
+  }
+  if ((best.pri < 3) && (cx.startsWith(vx))) {
+    best.pri = 3;
+    best.d = d;
+  }
+  if ((best.pri < 2) && (cx.includes(vx))) {
+    best.pri = 2;
+    best.d = d;
+  }
+}
+
 function fn_search(enter) {
   v = e_search_input.value;
 
@@ -33,29 +49,46 @@ function fn_search(enter) {
     hide_ac();
     return;
   }
-  p = 0;
+  best = {
+    pri: 0
+  }
   vx = v.toUpperCase().replace(/[^A-Z]/g, '')
-  for (i = 0; i < page.length; i++) {
-    l = page[i]
-    for (j = 0; j < l.length; j++) {
-      c = l[j];
-      cx = c.toUpperCase().replace(/[^A-Z]/g, '')
-      if ((p < 4) && (cx == vx)) {
-        p = 4;
-        m = l[0]
-      }
-      if ((p < 3) && (cx.startsWith(vx))) {
-        p = 3;
-        m = l[0];
-      }
-      if ((p < 2) && (cx.includes(vx))) {
-        p = 2;
-        m = l[0];
-      }
+  for (i = 0; i < pages.length; i++) {
+    d = pages[i]
+    check(vx, d.page, d, best)
+    if ('com' in d) {
+      check(vx, d.com, d, best)
+    }
+    if ('sci' in d) {
+      check(vx, d.sci, d, best)
+    }
+    if ('elab' in d) {
+      check(vx, d.elab, d, best)
     }
   }
-  if (p) {
-    e_autocomplete_box.innerHTML = '<a href="' + path + m + '.html"><div>' + m + '</div></a>';
+  if (best.pri) {
+    d = best.d;
+    if ('key' in d) {
+      c = 'parent';
+    } else {
+      c = 'leaf';
+    }
+    if ('com' in d) {
+      com = d.com;
+    } else {
+      com = d.page;
+    }
+    if ('sci' in d) {
+      if ('elab' in d) {
+        elab = d.elab;
+      } else {
+        elab = d.sci;
+      }
+      name = com + ' (<i>' + elab + '</i>)';
+    } else {
+      name = com
+    }
+    e_autocomplete_box.innerHTML = '<a class="enclosed ' + c + '" href="' + path + d.page + '.html"><div>' + name + '</div></a>';
   } else {
     e_autocomplete_box.innerHTML = 'No matches found.';
   }

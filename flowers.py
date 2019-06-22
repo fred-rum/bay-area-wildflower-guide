@@ -870,20 +870,22 @@ def count_flowers(page):
 
 search_file = root + "/pages.js"
 with open(search_file, "w") as w:
-    w.write('var page=[\n')
+    w.write('var pages=[\n')
     for page in sorted(page_list, key=count_flowers, reverse=True):
-        w.write('["{page}"'.format(page=page))
+        w.write('{{page:"{page}"'.format(page=page))
         com = get_com(page)
         if com != page:
-            w.write(',"{com}"'.format(com=com))
+            w.write(',com:"{com}"'.format(com=com))
         if page in page_sci:
             sci = page_sci[page]
             elab = get_elab(sci)
             if sci != com:
-                w.write(',"{sci}"'.format(sci=sci))
+                w.write(',sci:"{sci}"'.format(sci=sci))
             if elab != sci:
-                w.write(',"{elab}"'.format(elab=elab))
-        w.write('],\n')
+                w.write(',elab:"{elab}"'.format(elab=elab))
+        if page in page_child:
+            w.write(',key:true')
+        w.write('},\n')
     w.write('];\n')
 
 ###############################################################################
