@@ -46,13 +46,17 @@ function check(vx, name, d, best) {
   }
 }
 
+function startsUpper(name) {
+  return (name.search(/^[A-Z]/) >= 0);
+}
+
 function bold(vx, name) {
   has_ssp = false;
   test_name = name;
 
   nx = compress(name);
   start = nx.indexOf(vx);
-  if ((start == -1) && (name.search(/^[A-Z]/) >= 0)) {
+  if ((start == -1) && startsUpper(name)) {
     /* There wasn't a match, but since it's a scientific name, maybe there
        will be a match when we take the subtype specifier out. */
     name_split = name.split(' ');
@@ -132,11 +136,13 @@ function fn_search(enter) {
     } else {
       com = d.page;
     }
-    if (('sci' in d) || ('elab' in d)) {
+    if (('sci' in d) || ('elab' in d) || startsUpper(d.page)) {
       if ('elab' in d) {
         elab = d.elab;
-      } else {
+      } else if ('sci' in d) {
         elab = d.sci;
+      } else {
+        elab = d.page;
       }
       if (('sci' in d) && (d.sci != com)) {
         name = bold(vx, com) + ' (<i>' + bold(vx, elab) + '</i>)';
