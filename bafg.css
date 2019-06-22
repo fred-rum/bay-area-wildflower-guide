@@ -177,6 +177,9 @@ div#autocomplete-box {
     font-size: 1.25em;
     visibility: hidden;
 }
+span.match {
+    background-color: #eee;
+}
 h1#title {
     position: static;
     padding-top: 1em;

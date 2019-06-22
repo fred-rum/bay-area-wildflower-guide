@@ -42,6 +42,31 @@ function check(vx, name, d, best) {
   }
 }
 
+function bold(vx, name) {
+  nx = name.toUpperCase().replace(/[^A-Z]/g, '');
+  start = nx.indexOf(vx);
+
+  if (start == -1) {
+    return name;
+  }
+
+  regex = RegExp('[a-zA-Z][^a-zA-Z]*', 'y');
+  for (i = 0; i < start; i++) {
+    regex.test(name);
+  }
+  b = regex.lastIndex;
+
+  for (i = 0; i < vx.length; i++) {
+    regex.test(name);
+  }
+
+  s = name.substring(0, b);
+  s += '<span class="match">' + name.substring(b, regex.lastIndex) + '</span>';
+  s += name.substring(regex.lastIndex);
+
+  return s;
+}
+
 function fn_search(enter) {
   v = e_search_input.value;
 
@@ -78,15 +103,19 @@ function fn_search(enter) {
     } else {
       com = d.page;
     }
-    if ('sci' in d) {
+    if (('sci' in d) || ('elab' in d)) {
       if ('elab' in d) {
         elab = d.elab;
       } else {
         elab = d.sci;
       }
-      name = com + ' (<i>' + elab + '</i>)';
+      if (('sci' in d) && (d.sci != com)) {
+        name = bold(vx, com) + ' (<i>' + bold(vx, elab) + '</i>)';
+      } else {
+        name = '<i>' + bold(vx, elab) + '</i>';
+      }
     } else {
-      name = com
+      name = bold(vx, com)
     }
     e_autocomplete_box.innerHTML = '<a class="enclosed ' + c + '" href="' + path + d.page + '.html"><div>' + name + '</div></a>';
   } else {
