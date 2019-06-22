@@ -313,6 +313,9 @@ def count_matching_obs(page, color, match_flowers):
 def write_obs(w, page):
     (n, rg) = count_matching_obs(page, None, set())
 
+    if n == 0 and page not in page_sci:
+        return
+
     if page in page_taxon_id:
         link = 'https://www.inaturalist.org/observations/chris_nelson?taxon_id={taxon_id}&order_by=observed_on'.format(taxon_id=page_taxon_id[page])
     elif page in page_sci:
@@ -355,6 +358,10 @@ def write_external_links(w, page):
         elab = sci
 
     w.write('<p/>')
+
+    if page in page_taxon_id:
+        w.write('<a href="https://www.inaturalist.org/taxa/{taxon_id}">iNaturalist</a> &ndash;\n'.format(taxon_id=page_taxon_id[page]))
+
     w.write('<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank">CalFlora</a> &ndash;\n'.format(elab=elab));
 
     if ' ' in sci:
@@ -628,8 +635,8 @@ def parse(page, s):
             w.write('<b><i>{elab}</i></b><p/>\n'.format(elab=get_elab(page_sci[page])))
 
         w.write(s)
+        write_obs(w, page)
         if page in page_sci:
-            write_obs(w, page)
             write_external_links(w, page)
         w.write('<hr/>\n')
         write_parents(w, page)
