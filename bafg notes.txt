@@ -77,32 +77,6 @@ surrounds the given text with a light-bordered box.
 
 ###############################################################################
 
-An easy method to search would be nice.
-  I.e. a search bar on every page would be easier than
-  opening all.html, hitting the hamburger, and using find in page.
-
-https://www.w3schools.com/howto/howto_js_filter_lists.asp
-https://stackoverflow.com/questions/12400382/autocomplete-gray-text
-
-https://medium.com/outsystems-experts/javascript-events-unmasked-how-to-create-an-input-mask-for-mobile-fc0df165e8b2
-
-var input = document.getElementById('credit-card-mask'),
-    oldValue,
-    keydownHandler= function(e) {
-      oldValue = e.target.value;
-    },
-    inputHandler= function(e) {
-      var el = e.target,
-          newValue = el.value
-      ;
-    }
-;
-
-input.addEventListener('keydown', keydownHandler);
-input.addEventListener('input', inputHandler);
-
-###############################################################################
-
 Make separate pages (and links) for flower lists (by color and "all")
 with names only (for bandwidth saving) and photos only (for fast skimming).
 
@@ -151,6 +125,16 @@ Perhaps use an interactive process to initially populate the database,
   always ask for the color of a new flower
 
 sync files to laptop and use robocopy to copy them to phone
+
+End the autocomplete highlight *before* non-letter characters.
+
+Select the entire search value when the search field gets new focus
+and nothing is selected elsewhere.  (This allows easy value deletion.)
+
+Check behavior when page name is matched which is not the common or
+scientific name.
+
+Add 'var' throughout.
 
 ###############################################################################
 

@@ -74,12 +74,12 @@ function bold(vx, name) {
   }
 
   regex = RegExp('[a-zA-Z][^a-zA-Z]*', 'y');
-  for (i = 0; i < start; i++) {
+  for (var i = 0; i < start; i++) {
     regex.test(test_name);
   }
   b = regex.lastIndex;
 
-  for (i = 0; i < vx.length; i++) {
+  for (var i = 0; i < vx.length; i++) {
     regex.test(test_name);
   }
   e = regex.lastIndex;
@@ -107,12 +107,16 @@ function fn_search(enter) {
     hide_ac();
     return;
   }
-  best = {
-    pri: 0
-  }
+
   vx = compress(v);
-  for (i = 0; i < pages.length; i++) {
-    d = pages[i]
+  best_list = [];
+
+  for (var i = 0; i < pages.length; i++) {
+    var d = pages[i];
+    var best = {
+      pri: 0
+    }
+
     check(vx, d.page, d, best)
     if ('com' in d) {
       check(vx, d.com, d, best)
@@ -123,42 +127,65 @@ function fn_search(enter) {
     if ('elab' in d) {
       check(vx, d.elab, d, best)
     }
+
+    if (best.pri &&
+        ((best_list.length < 10) || (best.pri > best_list[9].pri))) {
+      /* We found the best match for the page.
+         Insert its information into the best_list. */
+      for (var j = 0; j < best_list.length; j++) {
+        if (best.pri > best_list[j].pri) break;
+      }
+      best_list.splice(j, 0, best);
+      if (best_list.length > 10) {
+        best_list.splice(-1, 1);
+      }
+    }
   }
-  if (best.pri) {
-    d = best.d;
-    if ('key' in d) {
-      c = 'parent';
-    } else {
-      c = 'leaf';
-    }
-    if ('com' in d) {
-      com = d.com;
-    } else {
-      com = d.page;
-    }
-    if (('sci' in d) || ('elab' in d) || startsUpper(d.page)) {
-      if ('elab' in d) {
-        elab = d.elab;
-      } else if ('sci' in d) {
-        elab = d.sci;
+
+  if (best_list) {
+    ac_list = [];
+    for (var i = 0; i < best_list.length; i++) {
+      best = best_list[i];
+      d = best.d;
+      if ('key' in d) {
+        c = 'parent';
       } else {
-        elab = d.page;
+        c = 'leaf';
       }
-      if (('sci' in d) && (d.sci != com)) {
-        name = bold(vx, com) + ' (<i>' + bold(vx, elab) + '</i>)';
+      if ('com' in d) {
+        com = d.com;
       } else {
-        name = '<i>' + bold(vx, elab) + '</i>';
+        com = d.page;
       }
-    } else {
-      name = bold(vx, com)
+      if (('sci' in d) || ('elab' in d) || startsUpper(d.page)) {
+        if ('elab' in d) {
+          elab = d.elab;
+        } else if ('sci' in d) {
+          elab = d.sci;
+        } else {
+          elab = d.page;
+        }
+        if (('sci' in d) && (d.sci != com)) {
+          name = bold(vx, com) + ' (<i>' + bold(vx, elab) + '</i>)';
+        } else {
+          name = '<i>' + bold(vx, elab) + '</i>';
+        }
+      } else {
+        name = bold(vx, com)
+      }
+      var entry = '<a class="enclosed ' + c + '" href="' + path + d.page + '.html"><div>' + name + '</div></a>';
+      if (i == 0) {
+        entry = '<b>' + entry + '</b>';
+      }
+      ac_list.push(entry);
     }
-    e_autocomplete_box.innerHTML = '<a class="enclosed ' + c + '" href="' + path + d.page + '.html"><div>' + name + '</div></a>';
+    e_autocomplete_box.innerHTML = ac_list.join('');
   } else {
     e_autocomplete_box.innerHTML = 'No matches found.';
   }
   expose_ac();
-  if (enter && p) {
-    window.location.href = path + m + '.html';
+  if (enter && best_list) {
+    window.location.href = path + best_list[0].d.page + '.html';
   }
 }
 
