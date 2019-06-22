@@ -26,8 +26,12 @@ function fn_focusout() {
   }
 }
 
+function compress(name) {
+  return name.toUpperCase().replace(/[^A-Z]/g, '');
+}
+
 function check(vx, name, d, best) {
-  cx = name.toUpperCase().replace(/[^A-Z]/g, '')
+  cx = compress(name);
   if ((best.pri < 4) && (cx == vx)) {
     best.pri = 4;
     best.d = d;
@@ -43,26 +47,51 @@ function check(vx, name, d, best) {
 }
 
 function bold(vx, name) {
-  nx = name.toUpperCase().replace(/[^A-Z]/g, '');
-  start = nx.indexOf(vx);
+  has_ssp = false;
+  test_name = name;
 
+  nx = compress(name);
+  start = nx.indexOf(vx);
+  if ((start == -1) && (name.search(/^[A-Z]/) >= 0)) {
+    /* There wasn't a match, but since it's a scientific name, maybe there
+       will be a match when we take the subtype specifier out. */
+    name_split = name.split(' ');
+    if (name_split.length == 4) {
+      has_ssp = true;
+      ssp = name_split[2];
+      ssp_pos = name_split[0].length + 1 + name_split[1].length;
+      test_name = name_split[0] + ' ' + name_split[1] + ' ' + name_split[3]
+      nx = compress(test_name);
+      start = nx.indexOf(vx);
+    }
+  }
   if (start == -1) {
     return name;
   }
 
   regex = RegExp('[a-zA-Z][^a-zA-Z]*', 'y');
   for (i = 0; i < start; i++) {
-    regex.test(name);
+    regex.test(test_name);
   }
   b = regex.lastIndex;
 
   for (i = 0; i < vx.length; i++) {
-    regex.test(name);
+    regex.test(test_name);
+  }
+  e = regex.lastIndex;
+
+  if (has_ssp) {
+    if (b > ssp_pos) {
+      b += ssp.length + 1;
+    }
+    if (e > ssp_pos) {
+      e += ssp.length + 1;
+    }
   }
 
   s = name.substring(0, b);
-  s += '<span class="match">' + name.substring(b, regex.lastIndex) + '</span>';
-  s += name.substring(regex.lastIndex);
+  s += '<span class="match">' + name.substring(b, e) + '</span>';
+  s += name.substring(e);
 
   return s;
 }
@@ -77,7 +106,7 @@ function fn_search(enter) {
   best = {
     pri: 0
   }
-  vx = v.toUpperCase().replace(/[^A-Z]/g, '')
+  vx = compress(v);
   for (i = 0; i < pages.length; i++) {
     d = pages[i]
     check(vx, d.page, d, best)
