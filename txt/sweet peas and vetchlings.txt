@@ -1,5 +1,5 @@
 {sci:Lathyrus}
-Distinguishing features:
+Key features:
 {-
 number of leaflets per leaf
 number of flowers in inflorescence

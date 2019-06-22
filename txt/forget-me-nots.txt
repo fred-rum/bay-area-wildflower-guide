@@ -1,4 +1,10 @@
 {sci:Myosotis}
+Key features:
+{-
+corolla size
+leaf length vs. width
+-}
+
 {+broadleaf forget-me-not}
 {-
 corolla 5--10 mm wide, blue (but pink when young), prominent yellow ring in center.

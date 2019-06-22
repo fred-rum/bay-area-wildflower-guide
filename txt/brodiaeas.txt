@@ -1,9 +1,9 @@
 {sci:Brodiaea}
-Distinguishing characteristics:
+Key features:
 {-
-Length of peduncle (flower stem).
-Size of corolla.
-Angle and shape of staminodes.
+length of peduncle (flower stem)
+size of corolla
+angle and shape of staminodes
 -}
 
 <a href="https://www2.palomar.edu/users/warmstrong/brosr1.htm">Labeled photos of brodiaea staminodes.</a>

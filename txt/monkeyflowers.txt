@@ -1,0 +1,33 @@
+<b><i>Phrymaceae family</i></b>
+
+Jepson lists quite a few more monkeyflowers in the bay area under their old genus name, Mimulus.  However, none of them can be easily confused with orange bush monkeyflower or seep monkeyflower.
+
+Key features:
+{-
+corolla color
+plant size
+leaf shape
+-}
+
+{[
+<h3>Diplacus spp.</h3>
+
+{+orange bush monkeyflower}
+{-
+leaf narrowly elliptic to linear, entire to serrate, edges generally rolled under; abaxial surface pale, puberulent to densely hairy, at least some hairs branched to stellate
+-}
+
+{+congdon's monkeyflower}
+
+]}
+{[
+<h3>Erythranthe spp.</h3>
+
+{+seep monkeyflower}
+{-
+leaf abruptly reduced on distal stem; petiole 0--95 mm; blade 4--125 mm, ovate to round, generally crenate, base generally irregularly small-lobed or dissected
+-}
+
+{+scarlet monkeyflower}
+
+]}
