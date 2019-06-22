@@ -1,9 +1,46 @@
-{+coast indian paintbrush}
+Key features:
+{-
+hairs woolly and much-branched vs. glabrous/puberulent/bristly and unbranched vs. glandular proximal to inflorescence
+leaf shape (linear, lanceolate, or oblong/rounded), wavy-margined or not
+corolla drooping out through calyx sinus or not
+-}
 
 {+woolly indian paintbrush}
+{-
+<b>hairs woolly, felt-like, much-branched, +- white to +- gray</b>
+leaves 10--50 mm, <b>+- linear</b>; lobes 0--3, tips obtuse; generally puberulent or glabrous (bristly)
+-}
+
+{+coast indian paintbrush}
+{-
++- glabrous to bristly-puberulent, generally nonglandular
+herbage not both with branched hairs and gray-green to white-woolly
+calyx long-nonglandular- and short-glandular-hairy
+corolla not curved out through abaxial side of calyx sinus
+leaves 20--80 mm, <b>+- lanceolate, generally not fleshy</b>; lobes 0--5, tips +- rounded; <b>generally puberulent or glabrous</b> (bristly)
+-}
 
 {+monterey indian paintbrush}
+{-
+herbage not both with branched hairs and gray-green to white-woolly
+corolla not curved out through abaxial side of calyx sinus
+leaves <b>+- fleshy, oblong to rounded</b>, lobes 0--3, truncate-rounded; <b>hairs generally bristly or shaggy</b>
+common on the peninsula + Alum Rock
+-}
 
 {+wavyleaf paintbrush}
+{-
+herbage not both with branched hairs and gray-green to white-woolly
+corolla not curved out through abaxial side of calyx sinus
+leaves 20--70 mm, <b>+- lanceolate, generally wavy-margined</b>
+<b>plant glandular-puberulent to -sticky-hairy proximal to inflorescence</b>
+Marin, Mt. Diablo, Sierra Azul, and scattered outside the bay area
+-}
 
 {+franciscan paintbrush}
+{-
+herbage not both with branched hairs and gray-green to white-woolly
+<b>corolla (including lower lip) generally curved out through abaxial calyx sinus</b> [e.g. the yellow-green corolla droops out of the red calyx]
+leaves 30--80 mm, <b>lanceolate</b>; lobes 0--3
+peninsula from Thornewood north and east bay from Chabot north
+-}
