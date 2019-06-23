@@ -1,0 +1,19 @@
+{sci:Pseudognaphalium}
+I need to re-evaluate all of my observations now that I have some idea what to look for.
+
+Key features:
+{-
+leaf width, glandular or not, clasping or not, decurrent or not
+-}
+
+{+california cudweed}
+{-
+Inflorescence: +- flat-topped or rounded; involucre 5.5--7 mm, bell-shaped to round when pressed
+Leaf: generally not crowded, <b>4--10 cm, 5--10(20) mm wide</b>, reduced distally on stem or not, oblanceolate to lanceolate, <b>base +- clasping or not, decurrent 0--15 mm</b>, flat or margin slightly curled under, sometimes wavy, faces generally green, <b>stalked-glandular, sticky</b>, sometimes +- tomentose
+-}
+
+{+cottonbatting plant}
+{-
+Inflorescence: dense, 1--2 cm diam or +- cyme-like; involucre 4--6 mm +- spheric
+Leaf: +- crowded, <b>2--8(9.5) cm, 2--5(10) mm wide</b>, reduced distally on stem, oblong to narrowly oblanceolate or weakly spoon-shaped, <b>+- clasping, generally not decurrent</b> (decurrent 1--2 mm), flat or margin slightly curled under, faces loosely persistently gray-tomentose, <b>not glandular</b>
+-}
