@@ -156,6 +156,8 @@ var pages=[
 {page:"american vetch",sci:"Vicia americana"},
 {page:"andrews' clintonia",sci:"Clintonia andrewsiana"},
 {page:"bird's-eye gilia",sci:"Gilia tricolor"},
+{page:"california spikenard",sci:"Aralia californica"},
+{page:"calla lily",sci:"Zantedeschia aethiopica"},
 {page:"chilean sea fig",sci:"Carpobrotus chilensis"},
 {page:"common selfheal",sci:"Prunella vulgaris"},
 {page:"cowbag clover",sci:"Trifolium depauperatum"},

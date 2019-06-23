@@ -117,6 +117,10 @@ div.photo-box.indent {
     div.photo-box.indent {
 	margin-left: 50px;
     }
+    div#autocomplete-box {
+	margin-left: 1.7em;
+	font-size: 1.25em;
+    }
 }
 img.list-thumb {
     height: 15vw;
@@ -170,11 +174,11 @@ input#search {
 }
 div#autocomplete-box {
     border: 1px solid gray;
-    margin-left: 1.7em;
     padding: 2px;
+    padding-left: 20px;
+    text-indent: -18px;
     color: #666;
     background-color: white;
-    font-size: 1.25em;
     visibility: hidden;
 }
 span.match {
