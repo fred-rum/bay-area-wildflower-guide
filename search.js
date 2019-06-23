@@ -142,7 +142,7 @@ function fn_search(enter) {
     }
   }
 
-  if (best_list) {
+  if (best_list.length) {
     ac_list = [];
     for (var i = 0; i < best_list.length; i++) {
       best = best_list[i];
