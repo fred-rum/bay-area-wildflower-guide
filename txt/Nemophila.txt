@@ -1,5 +1,4 @@
 {com:baby blue eyes}
-{sci:Nemophila}
 
 {+baby blue eyes}
 {-

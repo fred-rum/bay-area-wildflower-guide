@@ -128,11 +128,10 @@ sync files to laptop and use robocopy to copy them to phone
 
 End the autocomplete highlight *before* non-letter characters.
 
-Select the entire search value when the search field gets new focus
-and nothing is selected elsewhere.  (This allows easy value deletion.)
-
 Check behavior when page name is matched which is not the common or
 scientific name.
+
+It'd be nice if the up/down arrow keys changed which autocomplete entry was currently selected.
 
 Add 'var' throughout.
 

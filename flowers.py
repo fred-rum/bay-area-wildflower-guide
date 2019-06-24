@@ -36,6 +36,7 @@ import re
 import csv
 import cStringIO
 import yaml
+import codecs
 
 
 root = 'c:/Users/Chris/Documents/GitHub/bay-area-flowers'
@@ -111,6 +112,17 @@ for page in yaml_data:
     for color in page_color[page]:
         if color not in color_list:
             print 'page {page} uses undefined color {color}'.format(page=page, color=color)
+
+# Read the mapping of iNaturalist observation locations to short park names.
+park_map = {}
+with codecs.open(root + '/parks.yaml', mode='r', encoding="utf-8") as f:
+    yaml_data = yaml.safe_load(f)
+for x in yaml_data:
+    if isinstance(x, basestring):
+        park_map[x] = x;
+    else:
+        for y in x:
+            park_map[x[y]] = y
 
 # Get a list of files with the expected suffix in the designated directory.
 def get_file_list(subdir, ext):
@@ -671,18 +683,34 @@ for name in sorted(jpg_list):
         page_txt[page] = '{default}'
         page_default.add(page)
 
+def unicode_csv_reader(unicode_csv_data, dialect=csv.excel, **kwargs):
+    # csv.py doesn't do Unicode; encode temporarily as UTF-8:
+    csv_reader = csv.reader(utf_8_encoder(unicode_csv_data),
+                            dialect=dialect, **kwargs)
+    for row in csv_reader:
+        # decode UTF-8 back to Unicode, cell by cell:
+        yield [unicode(cell, 'utf-8') for cell in row]
+
+def utf_8_encoder(unicode_csv_data):
+    for line in unicode_csv_data:
+        yield line.encode('utf-8')
+
 # Read my observations file (exported from iNaturalist) and use it as follows:
 #   Associate common names with scientific names
 #   Get a count of observations (total and research grade) of each flower.
 #   Get an iNaturalist taxon ID for each flower.
-with open(root + '/observations.csv', 'r') as f:
-    csv_reader = csv.reader(f)
+with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
+    csv_reader = unicode_csv_reader(f)
     header_row = csv_reader.next()
 
     com_idx = header_row.index('common_name')
     sci_idx = header_row.index('scientific_name')
     rg_idx = header_row.index('quality_grade')
     taxon_idx = header_row.index('taxon_id')
+    place_idx = header_row.index('place_guess')
+    private_place_idx = header_row.index('private_place_guess')
+
+    park_nf_list = set()
 
     for row in csv_reader:
         sci = row[sci_idx]
@@ -696,6 +724,18 @@ with open(root + '/observations.csv', 'r') as f:
         com = row[com_idx].lower()
         taxon_id = row[taxon_idx]
         rg = row[rg_idx]
+
+        park = row[private_place_idx]
+        if not park:
+            park = row[place_idx]
+
+        for x in park_map:
+            if x in park:
+                short_park = park_map[x]
+                break;
+        else:
+            park_nf_list.add(park)
+            short_park = park
 
         if sci in sci_page:
             page = sci_page[sci]
@@ -718,6 +758,11 @@ with open(root + '/observations.csv', 'r') as f:
         if rg == 'research':
             page_obs_rg[page] += 1
         page_taxon_id[page] = taxon_id
+
+if park_nf_list:
+    print "Parks not found:"
+    for x in park_nf_list:
+        print "  " + repr(x)
 
 for page in page_list:
     if page not in page_sci and page[0].isupper():

@@ -16,6 +16,7 @@ function is_focused() {
 
 function fn_focusin() {
   if (is_hidden) {
+    /* e_search_input.select(); */ /* Not as smooth on Android as desired. */
     fn_search();
   }
 }

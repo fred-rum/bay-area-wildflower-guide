@@ -1,2 +1,2 @@
 {sci:Nemophila menziesii}
-{jpgs}
+{default}
