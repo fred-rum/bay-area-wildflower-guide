@@ -360,10 +360,14 @@ def write_obs(w, page):
     else:
         w.write('{n} ({rg} are {rg_txt})'.format(n=n, rg=rg, rg_txt=rg_txt))
 
-    w.write('<p/>\n')
 
     if page not in page_child and page in page_parks:
-        w.write('<ul>\n')
+        w.write('''
+<span class="toggle-details" onclick="fn_details(this)">[show details]</span><p/>
+<div id="details">
+Locations:
+<ul>
+''')
         for park in sorted(page_parks[page], key = lambda x: page_parks[page][x], reverse=True):
             html_park = park.encode('ascii', 'xmlcharrefreplace')
             count = page_parks[page][park]
@@ -371,7 +375,9 @@ def write_obs(w, page):
                 w.write('<li>{park}</li>\n'.format(park=html_park))
             else:
                 w.write('<li>{park}: {count}</li>\n'.format(park=html_park, count=count))
-        w.write('</ul>\n')            
+        w.write('</ul></div>\n')
+    else:
+        w.write('<p/>\n')
 
 def write_external_links(w, page):
     sci = page_sci[page]

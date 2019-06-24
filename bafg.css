@@ -188,3 +188,12 @@ h1#title {
     position: static;
     padding-top: 1em;
 }
+
+/* observation details */
+span.toggle-details {
+    color: #888;
+    text-decoration: underline;
+}
+div#details {
+    display: none;
+}

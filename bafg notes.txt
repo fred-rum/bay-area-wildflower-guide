@@ -124,20 +124,11 @@ Perhaps use an interactive process to initially populate the database,
   e.g. if no scientific name is found in observations.csv, ask for it.
   always ask for the color of a new flower
 
-sync files to laptop and use robocopy to copy them to phone
-
 End the autocomplete highlight *before* non-letter characters.
-
-Check behavior when page name is matched which is not the common or
-scientific name.
 
 It'd be nice if the up/down arrow keys changed which autocomplete entry was currently selected.
 
 Add 'var' throughout.
-
-Use recent photos that improve on the existing ones.
-Add "white clover".
-Add other bay area clovers, even unobserved ones?
 
 ###############################################################################
 

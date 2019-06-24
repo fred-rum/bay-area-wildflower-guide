@@ -203,10 +203,10 @@ function fn_keyup() {
   }
 }
 
-if (window.location.href.endsWith('/index.html')) {
-  path = 'html/';
-} else {
+if (window.location.pathname.includes('/html/')) {
   path = '';
+} else {
+  path = 'html/';
 }
 
 e_search_input = document.getElementById('search');
@@ -223,3 +223,15 @@ e_body = document.getElementById('body');
 e_body.addEventListener('mousedown', fn_focusout);
 
 e_autocomplete_box = document.getElementById('autocomplete-box');
+
+/*****************************************************************************/
+
+function fn_details(e) {
+  if (e.textContent == '[show details]') {
+    e.textContent = '[hide details]';
+    document.getElementById('details').style.display = 'block';
+  } else {
+    e.textContent = '[show details]';
+    document.getElementById('details').style.display = 'none';
+  }
+}

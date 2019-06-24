@@ -257,6 +257,7 @@ var pages=[
 {page:"hooker's fairybells",sci:"Prosartes hookeri"},
 {page:"kashmir balsam",sci:"Impatiens balfourii"},
 {page:"large-flowered leptosiphon",sci:"Leptosiphon grandiflorus"},
+{page:"leafless wintergreen",sci:"Pyrola aphylla"},
 {page:"mexicali onion",sci:"Allium peninsulare"},
 {page:"monterey indian paintbrush",sci:"Castilleja latifolia"},
 {page:"mount hamilton fountain thistle",sci:"Cirsium fontinale campylon",elab:"Cirsium fontinale ssp. campylon"},
@@ -299,4 +300,5 @@ var pages=[
 {page:"wind poppy",sci:"Papaver heterophyllum"},
 {page:"woollypod milkweed",sci:"Asclepias eriocarpa"},
 {page:"yellow salsify",sci:"Tragopogon dubius"},
+{page:"white clover"},
 ];
