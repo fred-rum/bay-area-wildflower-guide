@@ -135,6 +135,10 @@ It'd be nice if the up/down arrow keys changed which autocomplete entry was curr
 
 Add 'var' throughout.
 
+Use recent photos that improve on the existing ones.
+Add "white clover".
+Add other bay area clovers, even unobserved ones?
+
 ###############################################################################
 
 It'd be nice to split the img and text onto separate lines on small

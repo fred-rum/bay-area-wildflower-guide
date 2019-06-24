@@ -75,6 +75,7 @@ page_sci = {} # scientific name
 page_obs = {} # number of observations
 page_obs_rg = {} # number of observations that are research grade
 page_taxon_id = {} # iNaturalist taxon ID
+page_parks = {} # for each page, stores a dictionary of park_name : count
 
 sci_page = {} # scientific name -> page name
 genus_page_list = {} # genus -> list of page names
@@ -119,7 +120,7 @@ with codecs.open(root + '/parks.yaml', mode='r', encoding="utf-8") as f:
     yaml_data = yaml.safe_load(f)
 for x in yaml_data:
     if isinstance(x, basestring):
-        park_map[x] = x;
+        park_map[x] = x
     else:
         for y in x:
             park_map[x[y]] = y
@@ -360,6 +361,17 @@ def write_obs(w, page):
         w.write('{n} ({rg} are {rg_txt})'.format(n=n, rg=rg, rg_txt=rg_txt))
 
     w.write('<p/>\n')
+
+    if page not in page_child and page in page_parks:
+        w.write('<ul>\n')
+        for park in sorted(page_parks[page], key = lambda x: page_parks[page][x], reverse=True):
+            html_park = park.encode('ascii', 'xmlcharrefreplace')
+            count = page_parks[page][park]
+            if count == 1:
+                w.write('<li>{park}</li>\n'.format(park=html_park))
+            else:
+                w.write('<li>{park}: {count}</li>\n'.format(park=html_park, count=count))
+        w.write('</ul>\n')            
 
 def write_external_links(w, page):
     sci = page_sci[page]
@@ -732,7 +744,7 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
         for x in park_map:
             if x in park:
                 short_park = park_map[x]
-                break;
+                break
         else:
             park_nf_list.add(park)
             short_park = park
@@ -754,10 +766,15 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
         if page not in page_obs:
             page_obs[page] = 0
             page_obs_rg[page] = 0
+            page_parks[page] = {}
         page_obs[page] += 1
         if rg == 'research':
             page_obs_rg[page] += 1
         page_taxon_id[page] = taxon_id
+        if short_park not in page_parks[page]:
+            page_parks[page][short_park] = 1
+        else:
+            page_parks[page][short_park] += 1
 
 if park_nf_list:
     print "Parks not found:"
