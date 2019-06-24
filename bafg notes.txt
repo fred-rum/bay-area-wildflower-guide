@@ -128,7 +128,7 @@ End the autocomplete highlight *before* non-letter characters.
 
 It'd be nice if the up/down arrow keys changed which autocomplete entry was currently selected.
 
-Add 'var' throughout.
+Improve JavaScript variable names.
 
 ###############################################################################
 
