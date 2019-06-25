@@ -1,4 +1,6 @@
 {sci:Brodiaea}
+Brodiaeas all have 3 stamens, as opposed to the 6 stamens on the similar looking {-triplet lilies}.
+
 Key features:
 {-
 length of peduncle (flower stem)
@@ -32,5 +34,3 @@ perianth [flower] 15--40 mm long
 staminodes [crown surrounding stamens] leaning toward or parallel to stamens, tips generally reflexed, margins 1/4 incurved below tip.
 elevation < 1500 ft.
 -}
-
-Brodiaeas all have 3 stamens, as opposed to the 6 stames on the similar looking  {-triplet lilies}.

@@ -1,0 +1,142 @@
+{sci:Rumex}
+6 perianth lobes 6, but in fruit outer 3 +- inconspicuous, inner 3 enlarged, hardened, +- veiny, midrib of 1--3 often expanded into tubercle [round lump on flower]
+
+Key features:
+{-
+arrangement of stems (from base or middle and/or stems among inflorescences)
+shape and length of leaf
+length/width of inner perianth lobe, dentate or not
+-}
+
+{+sheep's sorrel}
+{-
+leaf blade hastate (spearhead-shaped) or sagittate (arrowhead-shaped) or base tapered<ul>
+(other Rumex species are not hastate or sagittate (but may have a tapered base)</ul>
+several stems from base
+no perianth tubercles
+very common
+-}
+
+{[
+{-
+stem generally +- erect
+generally unbranched below inflorescence (inflorescence may be branched, however) (<a href="http://ucjeps.berkeley.edu/eflora/eflora_display.php?tid=42386">example</a>)
+-}
+
+{[
+Inner perianth lobe margin generally entire (if toothed or notched, teeth or notches < 0.3 mm)
+
+{+curly dock}
+{-
+inner perianth lobe margin generally entire (if toothed or notched, teeth or notches < 0.3 mm)
+inflorescence generally dense
+<b>pedicels (3)4--8 mm</b>
+<b>inner perianth lobes 3.5--6 mm, 3--5 mm wide</b>
+<b>tubercles generally 3</b>, at least 1 larger, > 1 mm wide, but all <b>generally << 1/3 inner perianth lobe width</b> [<a href="http://ucjeps.berkeley.edu/eflora/eflora_display.php?tid=42386">illustration</a>]
+<b>leaf margin strongly wavy, especially near base</b>
+very common
+-}
+
+{+clustered dock}
+{-
+inner perianth lobe margin generally entire (if toothed or notched, teeth or notches < 0.3 mm)
+inflorescence +- open (between whorls)
+<b>pedicels 1--4(5) mm, generally +- >= inner perianth</b>
+<b>inner perianth lobes 2--3 mm, 1--1.6(2) mm wide</b>
+<b>tubercles 3, +- equal, almost as wide as lobe</b> [<a href="http://ucjeps.berkeley.edu/eflora/eflora_display.php?tid=42386">illustration</a>]
+<b>leaf margin +- flat</b>
+common
+-}
+
+]}
+{[
+Inner perianth lobe margin variously dentate, at least some teeth >= 0.3 mm [<a href="http://ucjeps.berkeley.edu/eflora/eflora_display.php?tid=42419">illustration</a>]
+
+{+fiddle dock}
+{-
+perennial
+stem: erect to arching at tip, 2--6(7) dm, branched, slender
+leaf: blade 4--10(15) cm, (2)3--5 cm wide
+inflorescence: branches spreading
+pedicels: 2--5(6) mm, thick
+inner perianth lobes 3--6 mm, 2--3 mm wide except teeth, margin generally dentate (+- entire) with 2--5(9) teeth, 0.3--2.5 mm, generally on both sides [<a href="http://ucjeps.berkeley.edu/eflora/eflora_display.php?tid=42419">illustration</a>]
+3(1) tubercles, generally warty
+common
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1112+0675}
+{broad-leaved dock:Rumex obtusifolius}
+{-
+perennial
+stem: 6--12(15) dm, generally branched
+leaf: blade 20--40 cm, 10--15 cm wide, base generally cordate, margin generally entire, flat
+inflorescence: branches generally ascending
+pedicels: 2.5--8.5(10) mm, thin
+inner perianth lobe 3--6 mm, 2--3.5 mm wide except teeth, margin generally dentate with 2--5 teeth, 0.5--1.8 mm
+3 tubercles, 1 larger (2 may be inconspicuous/absent), smooth
+scattered
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0914+1119}
+{golden dock:Rumex fueginus}
+{-
+annual (biennial)
+scattered mostly along the pacific coast
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1015+3808}
+{golden dock:Rumex persicarioides}
+{-
+annual (biennial)
+scattered near the coast, only records > 10 years old
+-}
+
+]}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0912+1068}
+{western dock:Rumex occidentalis}
+{-
+<b>no perianth tubercles</b>
+common mostly directly on the pacific coast
+-}
+
+]}
+{[
+{-
+stems decumbent to erect
+generally with leafy axillary shoots below terminal inflorescence (<a href="http://ucjeps.berkeley.edu/eflora/eflora_display.php?tid=42421">example</a>)
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0805+1322}
+{california dock:Rumex californicus}
+{-
+generally with leafy axillary shoots below terminal inflorescence
+no perianth tubercles
+scattered in east bay
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0612+0768}
+{willow dock:Rumex salicifolius}
+{-
+generally with leafy axillary shoots below terminal inflorescence
+1--3 conspicuous perianth tubercles
+common
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=1351+3163+4289+0065}
+{willow dock:Rumex crassus}
+{-
+generally with leafy axillary shoots below terminal inflorescence
+1--3 conspicuous perianth tubercles
+common mostly directly on the pacific coast
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+1376}
+{pacific willow dock:Rumex transitorius}
+{-
+generally with leafy axillary shoots below terminal inflorescence
+1--3 conspicuous perianth tubercles
+scattered mostly near the coast + Monte Bello, Del Valle, Sierra Azul, Nisene Marks
+-}
+
+]}

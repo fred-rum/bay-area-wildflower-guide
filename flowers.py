@@ -551,7 +551,7 @@ def parse(page, s):
         else:
             return '<div class="photo-box">{imgs}<span>{text}</span></div>'.format(imgs=imgs, text=text)
 
-    s = re.sub(r'((?:\{(?:jpgs|[^\}]+.jpg|https://calphotos.berkeley.edu/[^\}]+)\} *(?=\s)?)+)(.*?)(?=\n(\n|\Z))', repl_photo_box, s, flags=re.DOTALL)
+    s = re.sub(r'((?:\{(?:jpgs|[^\}]+.jpg|https://calphotos.berkeley.edu/[^\}]+)\} *(?:\n(?!\n))?)+)(.*?)(?=\n(\n|\Z))', repl_photo_box, s, flags=re.DOTALL)
 
     # Replace a pair of newlines with a paragraph separator.
     # (Do this after making specific replacements based on paragraphs,
