@@ -255,6 +255,7 @@ var pages=[
 {page:"cottonbatting plant",sci:"Pseudognaphalium stramineum"},
 {page:"cream sacs",sci:"Castilleja rubicundula lithospermoides",elab:"Castilleja rubicundula ssp. lithospermoides"},
 {page:"creeping snowberry",sci:"Symphoricarpos mollis"},
+{page:"crevice alumroot",sci:"Heuchera micrantha"},
 {page:"crimson clover",sci:"Trifolium incarnatum"},
 {page:"franciscan paintbrush",sci:"Castilleja subinclusa franciscana",elab:"Castilleja subinclusa ssp. franciscana"},
 {page:"gambel's milkvetch",sci:"Astragalus gambelianus"},

@@ -1,51 +1,50 @@
 "use strict";
 
-var is_hidden = true;
+var ac_is_hidden = true;
 function expose_ac() {
   e_autocomplete_box.style.visibility = 'visible';
-  is_hidden = false;
+  ac_is_hidden = false;
 }
 
 function hide_ac() {
   e_autocomplete_box.style.visibility = 'hidden';
-  is_hidden = true;
-}
-
-function is_focused() {
-  var e_active = document.activeElement;
-  return e_search_box.contains(e_active);
+  ac_is_hidden = true;
 }
 
 function fn_focusin() {
-  if (is_hidden) {
+  if (ac_is_hidden) {
     /* e_search_input.select(); */ /* Not as smooth on Android as desired. */
     fn_search();
   }
 }
 
 function fn_focusout() {
-  if (!is_hidden) {
+  if (!ac_is_hidden) {
     hide_ac();
   }
 }
 
+/* When comparing names, ignore all non-letter characters and ignore case. */
 function compress(name) {
   return name.toUpperCase().replace(/[^A-Z]/g, '');
 }
 
-function check(vx, name, d, best) {
-  var cx = compress(name);
-  if ((best.pri < 4) && (cx == vx)) {
-    best.pri = 4;
-    best.d = d;
+/* check() is called multiple times, once for each name associated with a page.
+   Throughout this process, it accumulates the best fit in the best_fit_info
+   structure. */
+function check(search_str_cmp, match_str, page_info, best_fit_info) {
+  var cx = compress(match_str);
+  if ((best_fit_info.pri < 4) && (cx == search_str_cmp)) {
+    best_fit_info.pri = 4;
+    best_fit_info.page_info = page_info;
   }
-  if ((best.pri < 3) && (cx.startsWith(vx))) {
-    best.pri = 3;
-    best.d = d;
+  if ((best_fit_info.pri < 3) && (cx.startsWith(search_str_cmp))) {
+    best_fit_info.pri = 3;
+    best_fit_info.page_info = page_info;
   }
-  if ((best.pri < 2) && (cx.includes(vx))) {
-    best.pri = 2;
-    best.d = d;
+  if ((best_fit_info.pri < 2) && (cx.includes(search_str_cmp))) {
+    best_fit_info.pri = 2;
+    best_fit_info.page_info = page_info;
   }
 }
 
@@ -53,12 +52,12 @@ function startsUpper(name) {
   return (name.search(/^[A-Z]/) >= 0);
 }
 
-function bold(vx, name) {
+function bold(search_str_cmp, name) {
   var has_ssp = false;
   var test_name = name;
 
   var nx = compress(name);
-  var start = nx.indexOf(vx);
+  var start = nx.indexOf(search_str_cmp);
   if ((start == -1) && startsUpper(name)) {
     /* There wasn't a match, but since it's a scientific name, maybe there
        will be a match when we take the subtype specifier out. */
@@ -69,7 +68,7 @@ function bold(vx, name) {
       var ssp_pos = name_split[0].length + 1 + name_split[1].length;
       test_name = name_split[0] + ' ' + name_split[1] + ' ' + name_split[3]
       nx = compress(test_name);
-      start = nx.indexOf(vx);
+      start = nx.indexOf(search_str_cmp);
     }
   }
   if (start == -1) {
@@ -82,7 +81,7 @@ function bold(vx, name) {
   }
   var b = regex.lastIndex;
 
-  for (var i = 0; i < vx.length; i++) {
+  for (var i = 0; i < search_str_cmp.length; i++) {
     regex.test(test_name);
   }
   var e = regex.lastIndex;
@@ -105,40 +104,40 @@ function bold(vx, name) {
 
 function fn_search(enter) {
   var v = e_search_input.value;
+  var search_str_cmp = compress(v);
 
-  if (v == '') {
+  if (search_str_cmp == '') {
     hide_ac();
     return;
   }
 
-  var vx = compress(v);
   var best_list = [];
 
   for (var i = 0; i < pages.length; i++) {
-    var d = pages[i];
-    var best = {
+    var page_info = pages[i];
+    var best_fit_info = {
       pri: 0
     }
 
-    check(vx, d.page, d, best)
-    if ('com' in d) {
-      check(vx, d.com, d, best)
+    check(search_str_cmp, page_info.page, page_info, best_fit_info)
+    if ('com' in page_info) {
+      check(search_str_cmp, page_info.com, page_info, best_fit_info)
     }
-    if ('sci' in d) {
-      check(vx, d.sci, d, best)
+    if ('sci' in page_info) {
+      check(search_str_cmp, page_info.sci, page_info, best_fit_info)
     }
-    if ('elab' in d) {
-      check(vx, d.elab, d, best)
+    if ('elab' in page_info) {
+      check(search_str_cmp, page_info.elab, page_info, best_fit_info)
     }
 
-    if (best.pri &&
-        ((best_list.length < 10) || (best.pri > best_list[9].pri))) {
+    if (best_fit_info.pri &&
+        ((best_list.length < 10) || (best_fit_info.pri > best_list[9].pri))) {
       /* We found the best match for the page.
          Insert its information into the best_list. */
       for (var j = 0; j < best_list.length; j++) {
-        if (best.pri > best_list[j].pri) break;
+        if (best_fit_info.pri > best_list[j].pri) break;
       }
-      best_list.splice(j, 0, best);
+      best_list.splice(j, 0, best_fit_info);
       if (best_list.length > 10) {
         best_list.splice(-1, 1);
       }
@@ -148,35 +147,34 @@ function fn_search(enter) {
   if (best_list.length) {
     var ac_list = [];
     for (var i = 0; i < best_list.length; i++) {
-      var best = best_list[i];
-      var d = best.d;
-      if ('key' in d) {
+      var page_info = best_list[i].page_info;
+      if ('key' in page_info) {
         var c = 'parent';
       } else {
         var c = 'leaf';
       }
-      if ('com' in d) {
-        var com = d.com;
+      if ('com' in page_info) {
+        var com = page_info.com;
       } else {
-        var com = d.page;
+        var com = page_info.page;
       }
-      if (('sci' in d) || ('elab' in d) || startsUpper(d.page)) {
-        if ('elab' in d) {
-          var elab = d.elab;
-        } else if ('sci' in d) {
-          var elab = d.sci;
+      if (('sci' in page_info) || ('elab' in page_info) || startsUpper(page_info.page)) {
+        if ('elab' in page_info) {
+          var elab = page_info.elab;
+        } else if ('sci' in page_info) {
+          var elab = page_info.sci;
         } else {
-          var elab = d.page;
+          var elab = page_info.page;
         }
-        if (('sci' in d) && (d.sci != com)) {
-          var name = bold(vx, com) + ' (<i>' + bold(vx, elab) + '</i>)';
+        if (('sci' in page_info) && (page_info.sci != com)) {
+          var full = bold(search_str_cmp, com) + ' (<i>' + bold(search_str_cmp, elab) + '</i>)';
         } else {
-          var name = '<i>' + bold(vx, elab) + '</i>';
+          var full = '<i>' + bold(search_str_cmp, elab) + '</i>';
         }
       } else {
-        name = bold(vx, com)
+        var full = bold(search_str_cmp, com)
       }
-      var entry = '<a class="enclosed ' + c + '" href="' + path + d.page + '.html"><div>' + name + '</div></a>';
+      var entry = '<a class="enclosed ' + c + '" href="' + path + page_info.page + '.html"><div>' + full + '</div></a>';
       if (i == 0) {
         entry = '<b>' + entry + '</b>';
       }
@@ -188,7 +186,7 @@ function fn_search(enter) {
   }
   expose_ac();
   if (enter && best_list) {
-    window.location.href = path + best_list[0].d.page + '.html';
+    window.location.href = path + best_list[0].page_info.page + '.html';
   }
 }
 
