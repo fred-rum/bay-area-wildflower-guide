@@ -124,8 +124,6 @@ Perhaps use an interactive process to initially populate the database,
   e.g. if no scientific name is found in observations.csv, ask for it.
   always ask for the color of a new flower
 
-End the autocomplete highlight *before* non-letter characters.
-
 It'd be nice if the up/down arrow keys changed which autocomplete entry was currently selected.
 
 ###############################################################################

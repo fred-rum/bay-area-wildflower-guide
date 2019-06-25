@@ -80,13 +80,13 @@ function bold(search_str_cmp, name) {
   /* Based on the number of letters in the compressed name prior to the match,
      skip the same number of letters in the uncompressed name (also skipping
      any number of non-letters). */
-  var regex = RegExp('[a-zA-Z][^a-zA-Z]*', 'y');
-  for (var i = 0; i < cmp_match_pos; i++) {
+  var regex = RegExp('[a-zA-Z]', 'g');
+  for (var i = 0; i <= cmp_match_pos; i++) {
     regex.test(test_name);
   }
-  var uncmp_match_begin = regex.lastIndex;
+  var uncmp_match_begin = regex.lastIndex - 1;
 
-  for (var i = 0; i < search_str_cmp.length; i++) {
+  for (var i = 1; i < search_str_cmp.length; i++) {
     regex.test(test_name);
   }
   var uncmp_match_end = regex.lastIndex;
