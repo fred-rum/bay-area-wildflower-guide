@@ -31,7 +31,9 @@ function compress(name) {
 
 /* check() is called multiple times, once for each name associated with a page.
    Throughout this process, it accumulates the best fit in the best_fit_info
-   structure. */
+   structure.  An exact match is given highest priority.  A match at the start
+   of the name has medium priority, and a match somewhere later in the name
+   has the lowest priority. */
 function check(search_str_cmp, match_str, page_info, best_fit_info) {
   var cx = compress(match_str);
   if ((best_fit_info.pri < 4) && (cx == search_str_cmp)) {
@@ -56,9 +58,9 @@ function bold(search_str_cmp, name) {
   var has_ssp = false;
   var test_name = name;
 
-  var nx = compress(name);
-  var start = nx.indexOf(search_str_cmp);
-  if ((start == -1) && startsUpper(name)) {
+  var name_cmp = compress(name);
+  var cmp_match_pos = name_cmp.indexOf(search_str_cmp);
+  if ((cmp_match_pos == -1) && startsUpper(name)) {
     /* There wasn't a match, but since it's a scientific name, maybe there
        will be a match when we take the subtype specifier out. */
     var name_split = name.split(' ');
@@ -67,56 +69,63 @@ function bold(search_str_cmp, name) {
       var ssp = name_split[2];
       var ssp_pos = name_split[0].length + 1 + name_split[1].length;
       test_name = name_split[0] + ' ' + name_split[1] + ' ' + name_split[3]
-      nx = compress(test_name);
-      start = nx.indexOf(search_str_cmp);
+      name_cmp = compress(test_name);
+      cmp_match_pos = name_cmp.indexOf(search_str_cmp);
     }
   }
-  if (start == -1) {
+  if (cmp_match_pos == -1) {
     return name;
   }
 
+  /* Based on the number of letters in the compressed name prior to the match,
+     skip the same number of letters in the uncompressed name (also skipping
+     any number of non-letters). */
   var regex = RegExp('[a-zA-Z][^a-zA-Z]*', 'y');
-  for (var i = 0; i < start; i++) {
+  for (var i = 0; i < cmp_match_pos; i++) {
     regex.test(test_name);
   }
-  var b = regex.lastIndex;
+  var uncmp_match_begin = regex.lastIndex;
 
   for (var i = 0; i < search_str_cmp.length; i++) {
     regex.test(test_name);
   }
-  var e = regex.lastIndex;
+  var uncmp_match_end = regex.lastIndex;
 
   if (has_ssp) {
-    if (b > ssp_pos) {
-      b += ssp.length + 1;
+    if (uncmp_match_begin > ssp_pos) {
+      uncmp_match_begin += ssp.length + 1;
     }
-    if (e > ssp_pos) {
-      e += ssp.length + 1;
+    if (uncmp_match_end > ssp_pos) {
+      uncmp_match_end += ssp.length + 1;
     }
   }
 
-  var s = name.substring(0, b);
-  s += '<span class="match">' + name.substring(b, e) + '</span>';
-  s += name.substring(e);
+  var highlighted_name = name.substring(0, uncmp_match_begin);
+  highlighted_name += ('<span class="match">' +
+                       name.substring(uncmp_match_begin, uncmp_match_end) +
+                       '</span>');
+  highlighted_name += name.substring(uncmp_match_end);
 
-  return s;
+  return highlighted_name;
 }
 
+/* Update the autocomplete list.
+   If 'enter' is true, then navigate to the top autocompletion's page. */
 function fn_search(enter) {
-  var v = e_search_input.value;
-  var search_str_cmp = compress(v);
+  var search_str_cmp = compress(e_search_input.value);
 
   if (search_str_cmp == '') {
     hide_ac();
     return;
   }
 
+  /* Iterate over all pages and accumulate a list of the best matches
+     against the search value. */
   var best_list = [];
-
   for (var i = 0; i < pages.length; i++) {
     var page_info = pages[i];
     var best_fit_info = {
-      pri: 0
+      pri: 0 /* 0 means no match */
     }
 
     check(search_str_cmp, page_info.page, page_info, best_fit_info)
@@ -130,14 +139,20 @@ function fn_search(enter) {
       check(search_str_cmp, page_info.elab, page_info, best_fit_info)
     }
 
+    /* If there's a match, and
+       - we don't already have 10 matches or
+       - the new match is better than the last match on the list
+       then remember the new match. */
     if (best_fit_info.pri &&
         ((best_list.length < 10) || (best_fit_info.pri > best_list[9].pri))) {
-      /* We found the best match for the page.
-         Insert its information into the best_list. */
+      /* Insert the new match into the list in priority order.  In case of
+         a tie, the new match goes lower on the list. */
       for (var j = 0; j < best_list.length; j++) {
         if (best_fit_info.pri > best_list[j].pri) break;
       }
       best_list.splice(j, 0, best_fit_info);
+      /* If the list was already the maximum length, it is now longer than the
+         maximum length.  Cut off the last entry. */
       if (best_list.length > 10) {
         best_list.splice(-1, 1);
       }
@@ -158,7 +173,9 @@ function fn_search(enter) {
       } else {
         var com = page_info.page;
       }
-      if (('sci' in page_info) || ('elab' in page_info) || startsUpper(page_info.page)) {
+      if (('sci' in page_info) ||
+          ('elab' in page_info) ||
+          startsUpper(page_info.page)) {
         if ('elab' in page_info) {
           var elab = page_info.elab;
         } else if ('sci' in page_info) {
@@ -167,14 +184,20 @@ function fn_search(enter) {
           var elab = page_info.page;
         }
         if (('sci' in page_info) && (page_info.sci != com)) {
-          var full = bold(search_str_cmp, com) + ' (<i>' + bold(search_str_cmp, elab) + '</i>)';
+          var full = (bold(search_str_cmp, com) +
+                      ' (<i>' + bold(search_str_cmp, elab) + '</i>)');
         } else {
           var full = '<i>' + bold(search_str_cmp, elab) + '</i>';
         }
       } else {
         var full = bold(search_str_cmp, com)
       }
-      var entry = '<a class="enclosed ' + c + '" href="' + path + page_info.page + '.html"><div>' + full + '</div></a>';
+      var entry = ('<a class="enclosed ' + c + '" href="' +
+                   path + page_info.page + '.html"><div>' +
+                   full + '</div></a>');
+
+      /* Highlight the first entry in bold.  This entry is selected if the
+         user presses 'enter'. */
       if (i == 0) {
         entry = '<b>' + entry + '</b>';
       }
@@ -203,6 +226,7 @@ function fn_keyup() {
   }
 }
 
+/* Determine whether to add 'html/' to the URL when navigating to a page. */
 if (window.location.pathname.includes('/html/')) {
   var path = '';
 } else {

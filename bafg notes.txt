@@ -128,8 +128,6 @@ End the autocomplete highlight *before* non-letter characters.
 
 It'd be nice if the up/down arrow keys changed which autocomplete entry was currently selected.
 
-Improve JavaScript variable names.
-
 ###############################################################################
 
 It'd be nice to split the img and text onto separate lines on small
