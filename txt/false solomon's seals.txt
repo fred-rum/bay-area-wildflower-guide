@@ -1,0 +1,36 @@
+{sci:Maianthemum}
+Key features:
+{-
+4 or 6 perianth parts
+perianth > stamens or << stamens
+leaves with or without petioles
+-}
+
+{+false solomon's seal}
+{-
+Perianth parts 6
+Inflorescence is a panicle
+> 20 flowers per inflorescence
+<b>perianth 1--2 mm, << stamens</b>
+<b>&gt; 5 leaves</b>, 7--20 cm, ovate to oblong-elliptic; <b>petioles +- 0</b>
+common
+-}
+
+{+star-flowered lily-of-the-valley}
+{-
+Perianth parts 6
+Inflorescence is a raceme (or few-branched near base)
+5--15 flowers per inflorescence
+<b>perianth 4--7 mm, &gt; stamens</b>
+<b>&gt; 5 leaves</b>, 5--17 cm, (ob)lanceolate to elliptic; <b>petioles 0</b>
+common
+-}
+
+{western lily of the valley:Maianthemum dilatatum}
+{-
+<b>Perianth parts 4</b>
+Inflorescence is a raceme
+10--50 flowers per inflorescence
+<b>2--3 leaves</b>, 5--20 cm, cordate to sagittate; <b>petioles 5--15 cm</b>
+San Bruno, Marin, Mt. Tam
+-}

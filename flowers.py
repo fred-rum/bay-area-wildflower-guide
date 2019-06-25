@@ -286,10 +286,10 @@ def read_txt(page):
     page_txt[page] = s
 
 def create_link(page, lines):
-    if page in page_default:
-        style = ' class="leaf"'
-    else:
+    if page in page_child:
         style = ' class="parent"'
+    else:
+        style = ' class="leaf"'
     return '<a href="{page}.html"{style}>{full}</a>'.format(page=page, style=style, full=get_full(page, lines))
 
 
