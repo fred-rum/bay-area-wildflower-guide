@@ -80,6 +80,27 @@ div.photo-box {
     align-items: center;
     margin: 10px 0px;
 }
+div.flex-width {
+    margin: 10px 0px;
+}
+span.show-narrow {
+    display: inline;
+}
+span.show-wide {
+    display: none;
+}
+@media (min-width: 750px) {
+    div.flex-width {
+	display: flex;
+	align-items: center;
+    }
+    span.show-narrow {
+	display: none;
+    }
+    span.show-wide {
+	display: inline;
+    }
+}
 img.leaf-thumb {
     height: 40vw;
     max-height: 200px;

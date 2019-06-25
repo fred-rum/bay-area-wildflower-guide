@@ -91,17 +91,11 @@ Print errors:
   broken photo
   no scientific name for leaf page
 
-Reject iNaturalist community ID as necessary, especially where I otherwise
-have 0 observations.
-
 Allow observations and CalFlora links to be inserted manually
   in the middle of a page, potentially multiple times, e.g. with {obs:[sci]}
   (It's non-trivial to figure out which children should be counted, though.)
 
 Make parent page link more prominent on child's page so that it isn't missed.
-
-Add link to iNaturalist taxon page:
-https://www.inaturalist.org/taxa/{taxon_id}
 
 Read and write back a db.yaml file with various discovered information
 about pages that can then be hand edited.  E.g.
@@ -125,21 +119,6 @@ Perhaps use an interactive process to initially populate the database,
   always ask for the color of a new flower
 
 It'd be nice if the up/down arrow keys changed which autocomplete entry was currently selected.
-
-###############################################################################
-
-It'd be nice to split the img and text onto separate lines on small
-screens only, e.g. for ceanothus.
-  e.g. create photo-box-split with @media condition:
-    for small screens change "display: flex;" to "display: block;"
-I'm not sure it's possible to leave the child name on the img line and
-  drop out the remaining lines.  They're currently all in one span.
-  Making it two spans puts them in separate columns.
-Maybe put a box around it for clarity.
-
-Proposed:
-  {++...} instead of {+...}
-  support {++[page]:[jpg]} for image & text linked to child page & split
 
 ###############################################################################
 

@@ -33,13 +33,13 @@ Marin
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0611+2130}
-{swamp thistle:Cirsium douglasii douglasii}
+{swamp thistle:Cirsium douglasii var. douglasii}
 {-
 Mt. Diablo
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=8311+3292+1958+0033}
-{mount tamalpais thistle:Cirsium hydrophilum vaseyi}
+{mount tamalpais thistle:Cirsium hydrophilum var. vaseyi}
 {-
 Mt. Tam
 -}
@@ -64,7 +64,7 @@ scattered
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+3077}
-{peregrine thistle:Cirsium cymosum cymosum}
+{peregrine thistle:Cirsium cymosum var. cymosum}
 {-
 Henry Coe, Sunol
 -}
@@ -76,7 +76,7 @@ scattered very near the pacific coast
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0218+0325}
-{pacific fringed thistle:Cirsium remotifolium odontolepis}
+{pacific fringed thistle:Cirsium remotifolium var. odontolepis}
 {-
 Mt. Tam, Briones
 -}

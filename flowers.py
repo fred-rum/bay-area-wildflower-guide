@@ -531,7 +531,27 @@ def parse(page, s):
     # first \n\n or \n+EOF.  Photos can be my own or CalPhotos.
     # The photos and text are grouped together and vertically centered.
     # The text is also put in a <span> for correct whitespacing.
-    s = re.sub(r'((?:\{(?:jpgs|[^\}]+.jpg|https://calphotos.berkeley.edu/[^\}]+)\} *)+)(.*?)(?=\n(\n|\Z))', r'<div class="photo-box">\1<span>\2</span></div>', s, flags=re.DOTALL)
+    def repl_photo_box(matchobj):
+        imgs = matchobj.group(1)
+        text = matchobj.group(2)
+
+        # If the text after the images appears to be a species link followed
+        # by more text, then duplicate and contain the species link so that
+        # the following text can either be in the same column or on a different
+        # row, depending on the width of the viewport.
+        matchobj2 = re.match(r'({.*}\s*)\n(.*)', text, flags=re.DOTALL)
+        if matchobj2:
+            species = matchobj2.group(1)
+            text = matchobj2.group(2)
+            # [div-flex-horiz-or-vert
+            #  [div-horiz photos, (narrow-only) species]
+            #  [span-vert (wide-only) species, text]
+            # ]
+            return '<div class="flex-width"><div class="photo-box">{imgs}<span class="show-narrow">{species}</span></div><span><span class="show-wide">{species}</span>{text}</span></div>'.format(imgs=imgs, species=species, text=text)
+        else:
+            return '<div class="photo-box">{imgs}<span>{text}</span></div>'.format(imgs=imgs, text=text)
+
+    s = re.sub(r'((?:\{(?:jpgs|[^\}]+.jpg|https://calphotos.berkeley.edu/[^\}]+)\} *(?=\s)?)+)(.*?)(?=\n(\n|\Z))', repl_photo_box, s, flags=re.DOTALL)
 
     # Replace a pair of newlines with a paragraph separator.
     # (Do this after making specific replacements based on paragraphs,

@@ -6,7 +6,7 @@ common
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0209+0801}
-{cobwebby thistle:Cirsium occidentale occidentale}
+{cobwebby thistle:Cirsium occidentale var. occidentale}
 {-
 very cobwebby
 scattered in the Santa Cruz range
