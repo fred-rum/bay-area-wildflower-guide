@@ -8,19 +8,24 @@ leaf shape, tomentose or not especially around sinus
 
 {[
 <h3>Bracts > 1 mm below calyx, not hiding it, <= 5 mm wide or variously toothed or lobed like leaves</h3>
-[<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1209+2734">example of bracts</a>]
+[<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1209+2734">example of small bracts</a>]
 
 {+pacific false bindweed}
 {-
 plant glabrous
-Stem trailing to strongly climbing, +- not intertwined; leaf triangular to reniform, lobes wider than linear, 2(3)-tipped, sinus V-shaped or +- closed
+stem trailing to strongly climbing, +- not intertwined
+leaf triangular to reniform, lobes wider than linear, 2(3)-tipped, sinus V-shaped or +- closed
+peduncle generally >> subtending leaf
 very common
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+0610}
 {western morning glory:Calystegia occidentalis ssp. occidentalis}
 {-
-plant puberulent to tomentose at least around leaf sinus or at peduncle tip
+plant puberulent to finely tomentose
+stem decumbent to strongly climbing, generally > 1 m
+leaf lobes generally indistinct, generally 2-tipped; sinus rounded to +- square or tapered
+peduncle < to +- > subtending leaf
 common
 -}
 
@@ -28,34 +33,36 @@ common
 {[
 <h3>Bracts < 1 mm below calyx, +- hiding it, > 4 mm wide, not lobed like leaves</h3>
 
-[<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0512+0313">example of bracts</a>]
+[<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0512+0313">example of large bracts</a>]
 
 {+hillside false bindweed}
 {-
-Stem poorly developed, not or only weakly climbing, < 30 cm, <= basal rosette of leaves
-Plant hairs sparse to +- dense, short, spreading to reflexed; leaf margin not or +- wavy
+plant hairs sparse to +- dense, short, spreading to reflexed
+stem poorly +- 2 cm
+leaf +- triangular-hastate, with small backward-directed lobes or not; margin +- wavy or not
 common
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=5207+1611+1114+0010}
 {coast range false bindweed:Calystegia collina ssp. collina}
 {-
-Stem poorly developed, not or only weakly climbing, < 30 cm, <= basal rosette of leaves
-Plant +- tomentose; leaf margin wavy
+plant +- tomentose
+stem decumbent, not or only weakly climbing, 8--15 cm, <= basal rosette of leaves
+leaf reniform (basal lobes indistinct) to distinctly lobed; margin generally wavy
 Mt. Tam, Russian Ridge, Sierra Azul, Calero
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1011+2084}
 {sierra false bindweed:Calystegia malacophylla ssp. pedicellata}
 {-
-Stem well developed, not or only weakly climbing, < 100 cm, without basal rosette of leaves
+stem well developed, not or only weakly climbing, < 100 cm, without basal rosette of leaves
 Henry Coe, Sunol, Mt. Tam
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1009+0161}
 {marsh morning glory:Calystegia sepium ssp. limnophila}
 {-
-Stem trailing or weakly to strongly climbing, >= 1 m
+stem trailing or weakly to strongly climbing, >= 1 m
 Palo Alto baylands
 -}
 
