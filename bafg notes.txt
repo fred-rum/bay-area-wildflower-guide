@@ -104,6 +104,7 @@ about pages that can then be hand edited.  E.g.
   which photo is first for a page
   the common name and scientific name for a page
   alternative common names (e.g. as used in iNaturalist)
+  the iNaturalist taxon (if not found in the observations, e.g. for a key)
 Should color also go here or separately?
   it might work to generate the db with a new flower, then add the color by hand
 

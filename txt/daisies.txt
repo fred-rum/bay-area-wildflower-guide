@@ -61,6 +61,19 @@ Ray Flower: 80--300+; ray 8--15 mm, generally narrow, white to pink or purple
 Ecology: Coastal bluffs, dunes, beaches
 -}
 
+{+stinking chamomile}
+{-
+Habit: Annual; <= 6(9) dm, strongly scented
+Stem: generally erect, +- glabrous, puberulent, or +- minutely strigose, resin-gland-dotted
+Leaf: most cauline, alternate, 10--55 mm, 15--30 mm wide, 1--3-pinnately divided into thread-like lobes
+Inflorescence: 1 or in rounded to flat-topped clusters
+involucres obconic to hemispheric or wider, 5--11 mm diam
+phyllaries persistent, generally 21--35+, +- graduated in 3--5 series, free, generally lanceolate, oblong, or elliptic
+Disk Flower: generally 100--300+, corolla 2--3 mm, generally yellow
+Ray Flower: (0)10--15, corolla white
+Ecology: Common. Disturbed areas, fields, coastal dunes, chaparral, oak woodland
+-}
+
 {+afro-australian daisies}
 {-
 Habit: Subshrub, +- puberulent and minutely stalked-glandular
