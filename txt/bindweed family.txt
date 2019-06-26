@@ -1,5 +1,4 @@
-<b><i>Convolvulaceae</i></b>
-
+{sci:family Convolvulaceae}
 {+field bindweed}
 
 {+false bindweeds}

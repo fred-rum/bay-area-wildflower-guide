@@ -183,11 +183,30 @@ function fn_search(enter) {
         } else {
           var elab = page_info.page;
         }
-        if (('sci' in page_info) && (page_info.sci != com)) {
-          var full = (bold(search_str_cmp, com) +
-                      ' (<i>' + bold(search_str_cmp, elab) + '</i>)');
+        var elab_bold = bold(search_str_cmp, elab);
+        if (startsUpper(elab)) {
+          var elab_bold_ital = '<i>' + elab_bold + '</i>';
         } else {
-          var full = '<i>' + bold(search_str_cmp, elab) + '</i>';
+          /* Don't italicize the group type (e.g. "family"). */
+          /* elab_bold might include a <span ...> tag for highlighting, and
+             we don't want to accidentially trigger on that space.  So we
+             have to carefully check whether the highlighted span starts
+             before or after the space. */
+          var space_pos = elab.indexOf(' ');
+          if (!elab_bold.startsWith(elab.substring(0, space_pos+1))) {
+            /* The highlighted span starts before the space, so search
+               backward to find the space instead.  (If the highlighed span
+               spans the space, we'll end up with <i> inside the span and
+               </i> outside the span, but that's OK. */
+            var space_pos = elab_bold.lastIndexOf(' ');
+          }
+          var elab_bold_ital = (elab_bold.substring(0, space_pos) + ' <i>' +
+                                elab_bold.substring(space_pos+1) + '</i>');
+        }
+        if (('sci' in page_info) && (page_info.sci != com)) {
+          var full = bold(search_str_cmp, com) + ' (' + elab_bold_ital + ')';
+        } else {
+          var full = elab_bold_ital;
         }
       } else {
         var full = bold(search_str_cmp, com)

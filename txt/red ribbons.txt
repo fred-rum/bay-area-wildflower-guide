@@ -1,4 +1,4 @@
-{sci:clarkia concinna}
+{sci:Clarkia concinna}
 
 Key features:
 {-

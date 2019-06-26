@@ -174,13 +174,18 @@ def get_full(page, lines=2):
     com = get_com(page)
     if page in page_sci:
         sci = page_sci[page]
-        elab = get_elab(sci)
+        if sci[0].isupper():
+            elab = '<i>{elab}</i>'.format(elab=get_elab(sci))
+        else:
+            space_pos = sci.find(' ')
+            elab = '{group} <i>{name}</i>'.format(group=sci[:space_pos],
+                                                  name=sci[space_pos+1:])
         if com == sci:
-            return "<i>{elab}</i>".format(elab=elab)
+            return '{elab}'.format(elab=elab)
         elif lines == 2:
-            return "{com}<br/><i>{elab}</i>".format(com=com, elab=elab)
+            return '{com}<br/>{elab}'.format(com=com, elab=elab)
         else: # lines == 1
-            return "{com} (<i>{elab}</i>)".format(com=com, elab=elab)
+            return '{com} ({elab})'.format(com=com, elab=elab)
     else:
         return com
 
@@ -786,8 +791,10 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
                 page = sci
             else:
                 page = com
-            page_sci[page] = sci
-            sci_page[sci] = page
+
+            if page not in page_sci: # don't override {sci:[name]}
+                page_sci[page] = sci
+                sci_page[sci] = page
 
         if page not in page_obs:
             page_obs[page] = 0
