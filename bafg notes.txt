@@ -88,8 +88,10 @@ Remember that mobile doesn't support hovering.
 
 Print errors:
   no color listed
+  listed color not supported
   broken photo
   no scientific name for leaf page
+  multiple scientific names from observations.csv
 
 Allow observations and CalFlora links to be inserted manually
   in the middle of a page, potentially multiple times, e.g. with {obs:[sci]}
