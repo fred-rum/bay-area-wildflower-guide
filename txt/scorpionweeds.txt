@@ -1,0 +1,19 @@
+{sci:Phacelia}
+<b>Caution: IDs are uncertain</b>
+
+Man, there are so many bay area scorpionweeds.  Everything is potentially a key feature.
+
+Key features:
+{-
+woody taproot or branched caudex (perennial) or slender taproot (annual)
+cauline leaves or only basal
+leaflets toothed, lobed, entire, or 0 (basal, cauline, or distal)
+number of leaflet lobes, shape of lobes
+calyx lobe length, hairy or not
+corolla color, size, shape
+number and shape of seed
+-}
+
+{+mountain phacelia}
+
+{+distant phacelia}

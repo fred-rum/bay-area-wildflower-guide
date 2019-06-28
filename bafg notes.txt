@@ -126,6 +126,9 @@ It'd be nice if the up/down arrow keys changed which autocomplete entry was curr
 Clean up horizontal spacers to use margin/padding instead.
   E.g. in div photo-box
 
+Show iNaturalist details on key pages.
+  (Requires accumulating data from children.)
+
 ###############################################################################
 
 how to mass rename files:

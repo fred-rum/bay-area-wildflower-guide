@@ -1,0 +1,18 @@
+{sci:Arctostaphylos}
+There are a crazy number of manzanita species in the bay area.  I will not try to differentiate them here until I have more identified observations.
+
+Key features:
+{-
+burl at base of trunk (rare) or not
+leaf surfaces same adaxially and abaxially or (rarely) different in color and/or hairiness
+leaf shape
+leaf sticky or not
+shape of nascent inflorescence bracts
+inflorescence shape
+flower parts in 4s or 5s
+size and shape of fruit (spheric or depressed)
+-}
+
+{+big berry manzanita}
+
+{+pallid manzanita}
