@@ -77,6 +77,7 @@ page_obs_rg = {} # number of observations that are research grade
 page_taxon_id = {} # iNaturalist taxon ID
 page_parks = {} # for each page, stores a dictionary of park_name : count
 
+com_page = {} # common name -> page name
 sci_page = {} # scientific name -> page name
 genus_page_list = {} # genus -> list of page names
 genus_set = set() # set of genuses with a container page
@@ -282,7 +283,9 @@ def read_txt(page):
         return ''
 
     def repl_com(matchobj):
-        page_com[page] = matchobj.group(1)
+        com = matchobj.group(1)
+        page_com[page] = com
+        com_page[com] = page
         return ''
 
     s = re.sub(r'{(child:|\+)([^},]+)(,[-0-9]*)?}', repl_child, s)
@@ -789,6 +792,8 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
             # Otherwise, prefer the common name if we have it.
             if sci in page_txt or not com:
                 page = sci
+            elif com in com_page:
+                page = com_page[com]
             else:
                 page = com
 
