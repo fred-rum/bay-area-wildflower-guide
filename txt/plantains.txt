@@ -1,0 +1,63 @@
+{sci:Plantago}
+The key features in Jepson tend to be unobservable things like seed characteristics, annual vs. perennial, etc.  Other features include tiny features of the tiny flowers, so very close focus and perhaps plucking a flower may be necessary.  Due to the difficulty in identifying useful distinguishing features, I've punted for now.  Check Jepson for anything new.
+
+Key features:
+{-
+cauline leaves, basal leaves
+peduncle ribbed/grooved?
+flower characteristics
+-}
+
+{+ribwort plantain}
+{-
+corolla tube glabrous
+very common
+-}
+
+{+california plantain}
+{-
+corolla tube glabrous
+common
+-}
+
+{coastal plantain:Plantago elongata}
+{-
+corolla tube glabrous
+scattered along the coast and in the east bay, although mostly only historical records
+-}
+
+{greater plantain:Plantago major}
+{-
+corolla tube glabrous
+scattered
+-}
+
+{desert plantain:Plantago ovata}
+{-
+corolla tube glabrous
+Monte Bello and Russian Ridge
+-}
+
+{tall coastal plantain:Plantago subnuda}
+{-
+corolla tube glabrous
+scattered along the pacific coast
+-}
+
+{chilean plantain:Plantago truncata ssp. firma}
+{-
+corolla tube glabrous
+Mt. Tamalpais
+-}
+
+{buck's-horn plantain:Plantago coronopus}
+{-
+corolla tube hairy
+common, particularly along the coast, but some also inland
+-}
+
+{sea plantain:Plantago maritima}
+{-
+corolla tube hairy
+common along the pacific coast
+-}

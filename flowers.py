@@ -395,7 +395,7 @@ def write_external_links(w, page):
     w.write('<p/>')
 
     if page in page_taxon_id:
-        w.write('<a href="https://www.inaturalist.org/taxa/{taxon_id}">iNaturalist</a> &ndash;\n'.format(taxon_id=page_taxon_id[page]))
+        w.write('<a href="https://www.inaturalist.org/taxa/{taxon_id}" target="_blank">iNaturalist</a> &ndash;\n'.format(taxon_id=page_taxon_id[page]))
 
     w.write('<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank">CalFlora</a> &ndash;\n'.format(elab=elab));
 
