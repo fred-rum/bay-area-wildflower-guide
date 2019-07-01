@@ -1,20 +1,22 @@
 {sci:Zeltnera}
 
+<b>Caution: IDs uncertain.</b>
+
 Key feature:
 {-
-calyx keeled or not
+pedicel length of proximal, central flowers as well as distal flowers
 -}
 
 {+davy's centaury}
 {-
 Leaf: cauline, generally 8--25 mm, elliptic-oblong to ovate
-Inflorescence: open; pedicels 2--25(55) mm
-Flower: <b>calyx lobes keeled</b>; corolla 12--17 mm, lobes 3--7 mm, ovate-oblong to elliptic, tip rounded
+Inflorescence: open; pedicels 2--<b>25</b>(55) mm
+Flower: corolla 12--17 mm, lobes 3--7 mm, <b>ovate-oblong to elliptic</b>, tip rounded
 -}
 
 {+muehlenberg's centaury}
 {-
 Leaf: cauline, 15--25 mm, lower obovate to oblong, upper lance-elliptic
-Inflorescence: open; pedicels 0--10 mm
-Flower: <b>calyx lobes not keeled</b>; corolla 12--19 mm, lobes 2--7 mm, lance-oblong, tip rounded
+Inflorescence: open; pedicels of proximal, central flowers 0--10 mm, of other flowers generally 0--5 mm, of distal often 0
+Flower: corolla 12--19 mm, lobes 2--7 mm, <b>lance-oblong</b>, tip rounded
 -}
