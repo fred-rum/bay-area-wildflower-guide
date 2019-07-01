@@ -366,7 +366,10 @@ def write_obs(w, page):
         else:
             w.write('{n} (all are {rg_txt})'.format(n=n, rg_txt=rg_txt))
     else:
-        w.write('{n} ({rg} are {rg_txt})'.format(n=n, rg=rg, rg_txt=rg_txt))
+        if rg == 1:
+            w.write('{n} ({rg} is {rg_txt})'.format(n=n, rg=rg, rg_txt=rg_txt))
+        else:
+            w.write('{n} ({rg} are {rg_txt})'.format(n=n, rg=rg, rg_txt=rg_txt))
 
 
     if page not in page_child and page in page_parks:
