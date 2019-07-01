@@ -1,0 +1,10 @@
+{sci:Lithophragma}
+{+hillside woodland star}
+{-
+hypanthium (calyx base) truncate
+-}
+
+{+san francisco woodland-star,2}
+{-
+hypanthium (calyx base) tapered to pedicel
+-}

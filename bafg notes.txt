@@ -137,3 +137,16 @@ for f in *.jpg; do git mv "$f" "$(echo $f | sed 's/-\([-0-9]*\)\.jpg$/,\1.jpg/')
 ###############################################################################
 
 Add notes to thistles.
+
+Create a script to help copy new and changed files to a portable device.
+  Copy new and modified files to a new (and git-ignored) folder,
+    ready for the user to copy them over using Windows Explorer.
+  Record the timestamp of all files to a (git-ignored) database
+    to be used next time for identifying new and modified files.
+  Deleted files won't be deleted, but they won't cause any harm.
+  Include top-level files that should be copied if they are modified,
+    e.g. index.html, bafg.css, search.js, pages.js
+  Perhaps allow an argument with a date so that all files modified
+    after that date are copied in case the database gets screwed up.
+  (Explorer displays the photo creation date, but the file modification
+    data is still correct internally.)
