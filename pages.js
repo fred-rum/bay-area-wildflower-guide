@@ -373,6 +373,8 @@ var pages=[
 {page:"late cotoneaster"},
 {page:"longspur seablush"},
 {page:"naked buckwheat"},
+{page:"round-leaved crane's-bill"},
 {page:"toothed owl's clover"},
+{page:"wavy leafed soap plant"},
 {page:"white clover"},
 ];

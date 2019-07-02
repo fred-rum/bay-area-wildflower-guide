@@ -2,15 +2,22 @@
 {+cut-leaved crane's-bill}
 {-
 stem hairs hairs rough, spreading to reflexed
-leaf blade 2.5--5.4 cm wide, divided 0.75--0.95 to base, segments 5--7, rhombic
+leaf blade 2.5--5.4 cm wide, <b>divided 75--95% to base</b>, segments 5--7, rhombic
 petals 2.9--5.8 mm, +- notched, rose-purple
 -}
 
 {+dove's-foot crane's-bill}
 {-
 stem hairs +- sparse, soft
-leaf blade 0.9--5.2 cm wide, divided 0.5--0.75 to base, segments 7--9, obtriangular
-petals 3--10.5 mm, notched, red-purple
+leaf blade 0.9--5.2 cm wide, divided 50--75% to base, segments 7--9, obtriangular
+petals 3--10.5 mm, <b>notched</b>, red-purple
+-}
+
+{+round-leaved crane's-bill}
+{-
+stem hairs rough, spreading
+leaf blade 1.9--4.4 cm wide; divided 55--65% to base, segments 5--7, obtriangular
+petals 6--7 mm, <b>rounded</b>, rose-purple
 -}
 
 {+herb robert}
