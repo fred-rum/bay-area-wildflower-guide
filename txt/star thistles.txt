@@ -1,23 +1,35 @@
 {sci:Centaurea}
 Key features:
 {-
-corolla color
+corolla color, length
 -}
 
 {[
 <h3>Yellow</h3>
 
 {+yellow starthistle}
+{-
+disk flower corolla <b>13--20 mm</b>
+spines <b>straw colored</b>, 10--25 mm
+stem branched distally or throughout, winged
+common
+-}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0105+2739}
 {tocalote:Centaurea melitensis}
 {-
+disk flower corolla <b>10--12 mm</b>
+spines proximally <b>+- purple or red</b>, 5--10 mm
+generally 1 stem, distally +- branched, winged
 common
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0175+3301+2288+0062}
 {sicilian star-thistle:Centaurea sulphurea}
 {-
+disk flower corolla <b>25--30 mm</b>
+spines straw-colored or proximally purple-black, 10--25 mm
+stem simple or openly branched, winged
 Castle Rock
 -}
 

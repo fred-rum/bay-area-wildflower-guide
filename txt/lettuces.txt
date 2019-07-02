@@ -1,0 +1,30 @@
+{sci:Lactuca}
+
+Key features:
+{-
+basal leaves present or not
+distal cauline leaf shape, widely or narrowly clasping, margin toothed or bristly
+-}
+
+{+bitter lettuce}
+{-
+basal rosette leaves toothed or shallowly lobed
+distal cauline leaves sessile, widely clasping
+proximal cauline leaves wing-petioled
+-}
+
+{prickly lettuce:Lactuca serriola}
+{-
+basal leaves generally 0 at flower
+cauline leaves with narrow, acute, basal lobes clasping stem
+leaves oblanceolate to oblong-elliptic or obovate in outline, margins prickly-toothed, sometimes also coarsely lobed
+inflorescence branches often widely spreading
+-}
+
+{willowleaf lettuce:Lactuca saligna}
+{-
+basal leaves generally 0 at flower
+cauline leaves with narrow, acute, basal lobes clasping stem
+leaves lance-linear, entire or few-lobed, lobes linear
+peduncles and inflorescence branches often appressed to axis
+-}

@@ -1,3 +1,11 @@
 {+stork's-bills}
+{-
+generally 5 fertile stamens alternating with 5 staminodes
+leaf simple or palmately divided; leaf veins pinnate
+-}
 
 {+geraniums and cranesbills}
+{-
+generally 10 fertile stamens
+leaf palmately lobed or divided
+-}

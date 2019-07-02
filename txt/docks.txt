@@ -10,7 +10,7 @@ length/width of inner perianth lobe, dentate or not
 
 {+sheep's sorrel}
 {-
-leaf blade hastate (spearhead-shaped) or sagittate (arrowhead-shaped) or base tapered<ul>
+<b>leaf blade hastate (spearhead-shaped) or sagittate (arrowhead-shaped) or base tapered</b><ul>
 (other Rumex species are not hastate or sagittate (but may have a tapered base)</ul>
 several stems from base
 no perianth tubercles
@@ -20,7 +20,7 @@ very common
 {[
 {-
 stem generally +- erect
-generally unbranched below inflorescence (inflorescence may be branched, however) (<a href="http://ucjeps.berkeley.edu/eflora/eflora_display.php?tid=42386">example</a>)
+generally unbranched below inflorescence (inflorescence may be branched, however) (<a href="http://ucjeps.berkeley.edu/eflora/eflora_display.php?tid=42386">example illustration</a>)
 -}
 
 {[

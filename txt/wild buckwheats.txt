@@ -1,0 +1,12 @@
+{sci:Eriogonum}
+There are 47 billion kinds of buckwheat in the bay area.  Here are a subset.
+
+{+california buckwheat}
+{-
+shrub, 60--150 cm tall, 100--250 cm wide.
+-}
+
+{+naked buckwheat}
+{-
+herb, 1--15 cm tall, 5--30 cm diameter
+-}

@@ -51,7 +51,7 @@ found everywhere
 {-
 all 4 sepals staying fused
 ovary and immature fruit 4-grooved
-petals with +- red spot or zone at base
+petals with +- red spot or zone at <b>base</b>
 petals <b>10--30 mm</b>; stigma exserted beyond anthers
 found everywhere
 -}
@@ -60,7 +60,7 @@ found everywhere
 {-
 all 4 sepals staying fused
 ovary and immature fruit 4-grooved
-petals with +- red spot or zone at base
+petals with +- red spot or zone at <b>base</b>
 petals <b>5--13 mm</b>; stigma not exserted beyond anthers
 Redwood Regional Park
 -}
@@ -69,8 +69,8 @@ Redwood Regional Park
 {-
 all 4 sepals staying fused
 ovary and immature fruit 4-grooved
-petals with red spot or marks near middle
-Marin
+petals with red spot or marks near <b>middle</b>
+Sunol, scattered in the Santa Cruz range, Marin
 -}
 
 {+chaparral clarkia}
