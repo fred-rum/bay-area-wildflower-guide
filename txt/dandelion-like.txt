@@ -1,0 +1,33 @@
+Key features
+{-
+stem forked or not, hollow or not
+shape of basal leaves
+size of cauline leaves, clasping or not
+phyllaries in 2 series or many
+shape of outer phyllaries
+color of inner phyllaries
+corolla +- red abasially or not
+-}
+
+{+common dandelion}
+{-
+unforked, hollow stem [breaks easily]
+no cauline leaves
+corolla yellow
+-}
+
+{+cat's ears}
+{-
+forked, solid stem
+cauline leaves scale-like [very reduced]
+phyllaries graduated in 4--5 series, reflexed when dry
+corolla yellow, often +- red abaxially
+-}
+
+{+hawksbeard}
+{-
+simple or much forked stem
+cauline leaves clasping [per CalPhotos, maybe present only very low on the plant]
+phyllaries in 2 series, outer reduced, inner +- equal
+corolla yellow, +- red abaxially for some species
+-}

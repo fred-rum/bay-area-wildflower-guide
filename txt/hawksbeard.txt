@@ -1,0 +1,31 @@
+{sci:Crepis}
+Below are all species in the bay area.
+
+{+beaked hawksbeard}
+{-
+basal and cauline leaves pinnately lobed to dentate, terminal lobe large, toothed
+involucre 8--12 mm, cylindric to bell-shaped or +- obconic
+outer phyllaries 3--4 mm, ovate to lance-linear (thick based), glabrous
+inner phyllaries lanceolate, reflexed at maturity, often stalked-glandular
+corolla yellow, <b>+- red abaxially</b>
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0808+1261}
+{smooth hawksbeard:Crepis capillaris}
+{-
+basal and cauline leaves pinnately divided or sharply toothed, lobes lanceolate
+involucre 5--8 mm, cylindric
+outer phyllaries 2--4 mm, linear (thin based), minutely tomentose or stalked-glandular
+inner phyllaries lanceolate, with prominent double row of black glandular bristles along midrib
+corolla hairy[?], yellow [<b>not +- red abaxially</b> in CalPhotos, only in a few scattered photos on the wider internet]
+scattered along the peninsula and Henry Coe
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0611+0485}
+{:Crepis bursifolia}
+{-
+stem arched or decumbent, cymosely branched distally
+mid and distal cauline leaves generally few, +- reduced, +- linear
+<b>inner phyllaries +- yellow-bristly</b>
+Monte Bello, Sierra Azul
+-}
