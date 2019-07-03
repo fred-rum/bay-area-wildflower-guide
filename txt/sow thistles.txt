@@ -1,0 +1,18 @@
+{sci:Sonchus}
+{+prickly sowthistle}
+{-
+stem may be distally branched, but usually not close to the inflorescence
+proximal clasping lobes of cauline leaves rounded, <b>strongly curved to coiled</b>
+leaf blades dentate, sometimes +- lobed, <b>teeth and lobes soft-spine-tipped</b>
+ligule [petal] < corolla tube
+fruit 3-ribbed per side, otherwise smooth
+-}
+
+{common sow-thistle:Sonchus oleraceus}
+{-
+stem distally branched, often proximally branched
+proximal clasping lobes of cauline leaves acute, <b>not curled or coiled</b>
+leaf blades nearly all lobed [possibly with <b>small teeth</b>], lobes variable in width [narrow lobes may look like sharp teeth], terminal lobe often widely arrowhead-shaped
+ligule [petal] +- = corolla tube
+fruit 2--4-ribbed [per side?] and cross-wrinkled
+-}
