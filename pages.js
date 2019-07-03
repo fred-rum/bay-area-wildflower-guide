@@ -1,5 +1,6 @@
 var pages=[
 {page:"geranium family",key:true},
+{page:"brodiaea-like flowers",sci:"subfamily Brodiaeoideae",key:true},
 {page:"lupines",sci:"Lupinus",elab:"Lupinus spp.",key:true},
 {page:"poppies",sci:"Eschscholzia",elab:"Eschscholzia spp.",key:true},
 {page:"clovers",sci:"Trifolium",elab:"Trifolium spp.",key:true},
@@ -15,7 +16,7 @@ var pages=[
 {page:"brambles",sci:"Rubus",elab:"Rubus spp.",key:true},
 {page:"mariposa lilies",sci:"Calochortus",elab:"Calochortus spp.",key:true},
 {page:"western blue-eyed grass",sci:"Sisyrinchium bellum"},
-{page:"dandelion-like",key:true},
+{page:"dandelion-like flowers",key:true},
 {page:"nightshades",sci:"Solanum",elab:"Solanum spp.",key:true},
 {page:"bindweed family",sci:"family Convolvulaceae",key:true},
 {page:"mallows and checkermallows",key:true},

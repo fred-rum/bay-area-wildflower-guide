@@ -339,7 +339,7 @@ def write_obs(w, page):
 
     if page in page_taxon_id:
         link = 'https://www.inaturalist.org/observations/chris_nelson?taxon_id={taxon_id}&order_by=observed_on'.format(taxon_id=page_taxon_id[page])
-    elif page in page_sci:
+    elif page in page_sci and page_sci[page][0].isupper():
         link = 'https://www.inaturalist.org/observations/chris_nelson?search_on=names&q={sci}&order_by=observed_on'.format(sci=page_sci[page])
     else:
         link = None
@@ -392,26 +392,37 @@ Locations:
 
 def write_external_links(w, page):
     sci = page_sci[page]
-    if ' ' in sci:
-        elab = get_elab(sci)
+    if not sci[0].isupper():
+        # A higher-level classification should be sent with the group type
+        # removed.
+        space_pos = sci.find(' ')
+        stripped = sci[space_pos+1:]
+        elab = stripped
     else:
-        # A one-word genus should be sent as is, not as '[genus] spp.'
-        elab = sci
+        stripped = sci
+        if ' ' not in sci:
+            # A one-word genus should be sent as is, not as '[genus] spp.'
+            elab = sci
+        else:
+            # A species or subspecies should be elaborated as necessary.
+            elab = get_elab(sci)
 
     w.write('<p/>')
 
     if page in page_taxon_id:
         w.write('<a href="https://www.inaturalist.org/taxa/{taxon_id}" target="_blank">iNaturalist</a> &ndash;\n'.format(taxon_id=page_taxon_id[page]))
+    else:
+        w.write('<a href="https://www.inaturalist.org/search?q={stripped}" target="_blank">iNaturalist</a> &ndash;\n'.format(stripped=stripped))
 
     w.write('<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank">CalFlora</a> &ndash;\n'.format(elab=elab));
 
-    if ' ' in sci:
-        # CalPhotos cannot be searched by genus only.
+    if sci[0].isupper() and ' ' in sci:
+        # CalPhotos cannot be searched by genus or higher classification.
         w.write('<a href="https://calphotos.berkeley.edu/cgi/img_query?where-taxon={elab}" target="_blank">CalPhotos</a> &ndash;\n'.format(elab=elab));
 
     # Jepson uses "subsp." instead of "ssp.", but it also allows us to
     # search with that qualifier left out entirely.
-    w.write('<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson eFlora</a><p/>\n'.format(sci=sci));
+    w.write('<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson eFlora</a><p/>\n'.format(sci=stripped));
 
 def write_parents(w, page):
     w.write('Pages that link to this one:<p/>\n')
