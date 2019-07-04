@@ -1,9 +1,0 @@
-{+tarweeds}
-{-
-
--}
-
-{+woodland madia}
-{-
-I don't know how to distinguish it from real tarweeds.
--}

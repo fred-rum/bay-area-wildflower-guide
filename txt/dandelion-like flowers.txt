@@ -42,4 +42,7 @@ phyllaries generally in 3 series
 corolla yellow, +- tan abaxially
 -}
 
-{+tarweed-like flowers}
+{+tarweeds and allies}
+{-
+shrubby
+-}

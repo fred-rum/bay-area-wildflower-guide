@@ -2,6 +2,7 @@
 
 import os
 import shutil
+import hashlib
 import pickle
 import time
 
@@ -17,10 +18,17 @@ subdir_list = ['html',
                'thumbs',
                'favicon']
 
+excluded_list = ['_mod.html']
+
+print 'get filelist'
+
 for subdir in subdir_list:
     sub_list = os.listdir(root + '/' + subdir)
     for filename in sub_list:
-        file_list.append(subdir + '/' + filename)
+        if filename not in excluded_list:
+            file_list.append(subdir + '/' + filename)
+
+print 'read pickle'
 
 try:
     with open(root + '/new.pickle', 'r') as f:
@@ -28,12 +36,17 @@ try:
 except:
     mod_db = {}
 
+print 'hash files'
+
 mod_list = []
 for filename in file_list:
-    mtime = os.path.getmtime(root + '/' + filename)
-    if filename not in mod_db or mtime != mod_db[filename]:
-        mod_db[filename] = mtime
+    with open(root + '/' + filename, 'r') as f:
+        f_hash = hashlib.sha224(f.read()).hexdigest()
+    if filename not in mod_db or f_hash != mod_db[filename]:
+        mod_db[filename] = f_hash
         mod_list.append(filename)
+
+print 'delete old directory'
 
 shutil.rmtree(root + '/new', ignore_errors=True)
 
@@ -46,6 +59,8 @@ shutil.rmtree(root + '/new', ignore_errors=True)
 # So I hate to do this, but ...
 time.sleep(1)
 
+print 'create new directory'
+
 done = False
 while not done:
     try:
@@ -56,13 +71,19 @@ while not done:
         time.sleep(1)
         pass
 
+print 'make subdirs'
+
 for subdir in subdir_list:
     os.mkdir(root + '/new/' + subdir)
+
+print 'copy files'
 
 for filename in mod_list:
     print filename
     shutil.copyfile(root + '/' + filename,
                     root + '/new/' + filename)
+
+print 'dump pickle'
 
 with open(root + '/new.pickle', 'w') as f:
     pickle.dump(mod_db, f)
