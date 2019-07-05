@@ -268,9 +268,14 @@ def read_txt(page):
         x = matchobj.group(1)
         child = matchobj.group(2)
         suffix = matchobj.group(3)
+        sci = matchobj.group(4)
         if not suffix:
             suffix = ''
         assign_child(page, child)
+        if sci:
+            sci = sci[1:] # discard colon
+            page_sci[child] = sci
+            sci_page[sci] = child
         if x == '+':
             return '{' + child + ':' + child + suffix + '.jpg} {' + child + '}'
         else:
@@ -288,7 +293,7 @@ def read_txt(page):
         com_page[com] = page
         return ''
 
-    s = re.sub(r'{(child:|\+)([^},]+)(,[-0-9]*)?}', repl_child, s)
+    s = re.sub(r'{(child:|\+)([^\}:,]+)(,[-0-9]*)?(:[^\}]+)?}', repl_child, s)
     s = re.sub(r'{sci:(.*)}\n', repl_sci, s)
     s = re.sub(r'{com:(.*)}\n', repl_com, s)
     page_txt[page] = s
