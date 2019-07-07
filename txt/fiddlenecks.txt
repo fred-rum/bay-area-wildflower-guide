@@ -1,0 +1,61 @@
+{sci:Amsinckia}
+Key features:
+{-
+corolla diameter
+corolla with 0 or 5 radial dark spots or 2 bilateral dark spots
+corolla throat partially closed by 5 hairy appendages/wrinkles or not
+5 equal calyx lobes, or < 5 lobes unequal in width
+-}
+
+{+rancher's fiddleneck:Amsinckia menziesii intermedia}
+{-
+corolla radial, tube straight, limb with 0 or 5 dark spots
+stamens generally attached above middle of corolla tube, if below then style exserted
+stem ascending to erect
+corolla 7--11 mm, <b>limb 4--10 mm diam</b>, +- orange, tube exserted
+
+very common
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1007+0353}
+{small-flowered fiddleneck:Amsinckia menziesii var. menziesii}
+{-
+corolla throat open, glabrous, appendages 0, tube not constricted
+stamens generally attached above middle of corolla tube, if below then style exserted
+corolla radial, tube straight, limb with 0 or 5 dark spots
+stem decumbent to +- ascending
+corolla 4--7 mm, <b>limb 1--3 mm diam</b>, yellow to orange-yellow, tube +- exserted
+scattered
+also called A. retrorsa
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0211+1039}
+{tarweed fiddleneck:Amsinckia lycopsoides}
+{-
+corolla radial, tube straight, limb with 0 or 5 dark spots
+<b>corolla throat +- closed by 5 hairy appendages</b> [really just wrinkles in the corolla limb?], tube constricted in lower 1/2
+stamens attached below middle of corolla tube
+style included
+Mt. Diablo
+-}
+
+{+bent-flowered fiddleneck:Amsinckia lunaris}
+{-
+corolla bilateral, tube bent [?], <b>limb generally with 2 dark spots</b> [easiest indication of bilateralness; corolla limb is also angled as per bilateral, not radial]
+scattered, but with very few modern observations
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1203+0800}
+{bristly fiddleneck:Amsinckia tessellata}
+{-
+<b>calyx lobes unequal in width, 2--4 from fusion below middle, notched at tip</b>
+Mt. Diablo, Sunol, Pinnacles
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=1342+3162+2247+0098}
+{woolly fiddleneck:Amsinckia spectabilis}
+{-
+<b>leaf +- succulent, fine-toothed</b>
+5 calyx lobes +- equal in width not fused above base, or 2--3 unequal in width, +- 1/2 fused
+scattered near the pacific coast
+-}
