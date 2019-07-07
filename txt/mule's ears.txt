@@ -1,0 +1,28 @@
+{sci:Wyethia}
+
+Key features:
+{-
+phyllary shape, hairy or not
+-}
+
+{+smooth mule-ears:Wyethia glabra}
+{-
+plant shiny green, glabrous or sparsely short-hairy, glandular
+outer spreading phyllaries 4--7 cm, wide, leaf-like, generally >> inner erect phyllaries
+<b>phyllaries glabrous or glandular</b>
+heads generally 1, large
+-}
+
+{+gray mule-ears,4:Wyethia helenioides}
+{-
+plant densely tomentose, often becoming +- glabrous
+outer spreading phyllaries 4--7+ cm, wide, leaf-like, generally >> inner erect phyllaries
+<b>phyllaries persistently tomentose</b>
+head generally 1, large
+-}
+
+{+narrowleaf mule-ears:Wyethia angustifolia}
+{-
+<b>phyllaries 1.5--3 cm, narrow</b>, generally not leaf-like, outer +- same as inner
+heads 1--<b>few</b>
+-}

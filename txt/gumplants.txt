@@ -6,7 +6,7 @@ leaves fleshy or not
 coastal dunes or not
 -}
 
-{+hairy gumweed:Grindelia hirsutula}
+{+hairy gumweed,2:Grindelia hirsutula}
 {-
 [Jepson says that the phyllaries are flattened throughout [?], gradually tapered to tips, tips erect, but that's all bullshit]
 leaves not fleshy
@@ -14,7 +14,7 @@ leaves not fleshy
 Ecology: sandy, clay, or serpentine slopes or roadsides
 -}
 
-{+great valley gumweed:Grindelia camporum}
+{+great valley gumweed,2:Grindelia camporum}
 {-
 phyllaries flattened only at bases, rounded in cross-section distally, abruptly narrowed to tips
 phyllary tips spreading, reflexed, or coiled [not erect]
