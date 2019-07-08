@@ -178,6 +178,13 @@ a.missing {
 }
 
 /* search field */
+div#search-bg {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    background-color: white;
+    height: 38px;
+}
 div#search-container {
     position: fixed;
     top: 0px;
@@ -195,7 +202,7 @@ input#search {
 }
 div#autocomplete-box {
     border: 1px solid gray;
-    padding: 2px;
+    padding-top: -5px;
     padding-left: 20px;
     text-indent: -18px;
     color: #666;
