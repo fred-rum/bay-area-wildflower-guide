@@ -33,6 +33,14 @@ phyllaries in 2 series, outer reduced, inner +- equal
 corolla yellow, +- red abaxially for some species
 -}
 
+{+bristly oxtongue}
+{-
+coarse, stout, branched stem
+basal and cauline leaves <b>warty</b>; proximal tapered to winged petioles; distal sessile, sometimes clasping
+phyllaries in 2--3 overlapping series; outer phyllaries spreading to ascending
+corolla yellow, may be +- red abaxially
+-}
+
 {+sow thistles}
 {-
 stem may have a few branches

@@ -44,6 +44,14 @@ hairs: +-spreading or curved, <b>glandular</b> and not
 fruit: <b>dull</b>
 -}
 
+{+greenspot nightshade}
+{-
+corolla: corolla +-10 mm wide, <b>white-lavender</b>
+leaf: 1--9 cm, entire to coarsely irregularly <b>toothed</b>
+hairs: generally simple, < 1mm, +-curved, white
+fruit: <b>glossy</b> w/ <b>sepals not reflexed</b>
+-}
+
 {american black nightshade:american black nightshade,-2.jpg} {child:american black nightshade}
 {-
 corolla: corolla <b>3--6 mm wide</b>, white
@@ -52,17 +60,8 @@ hairs: +-0 or short, +-appressed or curved, nonglandular
 fruit: <b>glossy</b> w/ <b>sepals reflexed</b>
 -}
 
-{+greenspot nightshade}
-{-
-corolla: corolla +-10 mm wide, <b>white-lavender</b>, puberulent below
-leaf: 1--9 cm, entire to coarsely irregularly <b>toothed</b>
-hairs: generally simple, < 1mm, +-curved, white
-fruit: <b>glossy</b> w/ <b>sepals not reflexed</b>
--}
-
-See also:
-
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0613+0431:forked inflorescence} {forked nightshade:Solanum furcatum}
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0613+0431:forked inflorescence}
+{forked nightshade:Solanum furcatum}
 {-
 The inflorescence is forked into two distinct sections.
 -}

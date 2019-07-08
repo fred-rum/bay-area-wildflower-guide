@@ -938,6 +938,9 @@ def list_matches(w, match_set, indent, color):
         # Sort in reverse order of observation count.
         # We initialize the sort with match_set sorted alphabetically.
         # This order is retained for subsets with equal observation counts.
+        # This order tie-breaker isn't particularly useful to the user, but
+        # it helps prevent pages.js from getting random changes just because
+        # the dictionary hashes differently.
         match_set.sort()
         match_set.sort(key=count_flowers, reverse=True)
 
@@ -990,7 +993,10 @@ def count_flowers(page):
 search_file = root + "/pages.js"
 with open(search_file, "w") as w:
     w.write('var pages=[\n')
-    for page in sorted(page_list, key=count_flowers, reverse=True):
+    # Sort in reverse order of observation count.
+    # We initialize the sort by sorting alphabetically.
+    # This order is retained for subsets with equal observation counts.
+    for page in sorted(sorted(page_list), key=count_flowers, reverse=True):
         w.write('{{page:"{page}"'.format(page=page))
         com = get_com(page)
         if com != page:

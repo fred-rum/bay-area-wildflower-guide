@@ -154,8 +154,13 @@ Create a script to help copy new and changed files to a portable device.
 Surround search bar with a bit of white space to avoid ugly collisions
 with scrolled text & photos.
 
+turn off autocorrect in search field
+
 Add Calochortus superbus.  Any others?
 
 Add Centaurium tenuiflorum to Zeltnera pages.
 
 What does "wavy toothed" mean for Solanum nigrum?
+
+sort pages.js by observation count, then *alphabetically*.
+  at the very least, this should reduce the number of spurious reorderings

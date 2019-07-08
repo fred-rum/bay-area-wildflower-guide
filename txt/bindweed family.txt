@@ -1,4 +1,11 @@
 {sci:family Convolvulaceae}
 {+bindweeds}
+{-
+Stigma lobes linear to narrowly spoon-shaped, tips acute; <b>calyx 3--10 mm</b>; corolla <= 40 mm
+-}
 
 {+false bindweeds}
+{-
+Stigma lobes oblong, tips obtuse; <b>calyx 7--25 mm</b>; corolla 20--75 mm
+-}
+
