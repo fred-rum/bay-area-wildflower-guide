@@ -2,12 +2,12 @@
 
 var ac_is_hidden = true;
 function expose_ac() {
-  e_autocomplete_box.style.visibility = 'visible';
+  e_autocomplete_box.style.display = 'block';
   ac_is_hidden = false;
 }
 
 function hide_ac() {
-  e_autocomplete_box.style.visibility = 'hidden';
+  e_autocomplete_box.style.display = 'none';
   ac_is_hidden = true;
 }
 
@@ -21,6 +21,12 @@ function fn_focusin() {
 function fn_focusout() {
   if (!ac_is_hidden) {
     hide_ac();
+  }
+}
+
+function fn_search_box_focusout(event) {
+  if (event.target == this) {
+    fn_focusout()
   }
 }
 
@@ -211,9 +217,9 @@ function fn_search(enter) {
       } else {
         var full = bold(search_str_cmp, com)
       }
-      var entry = ('<a class="enclosed ' + c + '" href="' +
-                   path + page_info.page + '.html"><div>' +
-                   full + '</div></a>');
+      var entry = ('<p class="nogap"><a class="enclosed ' + c + '" href="' +
+                   path + page_info.page + '.html">' +
+                   full + '</a></p>');
 
       /* Highlight the first entry in bold.  This entry is selected if the
          user presses 'enter'. */
@@ -258,6 +264,7 @@ e_search_input.addEventListener('keyup', fn_keyup);
 e_search_input.addEventListener('focusin', fn_focusin);
 
 var e_search_box = document.getElementById('search-container');
+e_search_box.addEventListener('mousedown', fn_search_box_focusout, true);
 
 /* The 'body' div is everything on the page not associated with the search bar.
    Thus, clicking somewhere other than the search bar or autocomplete box

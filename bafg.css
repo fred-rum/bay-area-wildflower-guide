@@ -207,7 +207,10 @@ div#autocomplete-box {
     text-indent: -18px;
     color: #666;
     background-color: white;
-    visibility: hidden;
+    display: none;
+}
+p.nogap {
+    margin: 0px;
 }
 span.match {
     background-color: #eee;
