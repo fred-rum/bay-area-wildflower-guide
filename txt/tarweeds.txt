@@ -46,7 +46,7 @@ very common
 
 {+grassy tarweed}
 {-
-stem 6--100 cm, proximally soft- to coarse-hairy, distally glandular-hairy
+stem 6--100 cm, <b>proximally soft- to coarse-hairy</b>, distally glandular-hairy
 leaf 1--10 cm, 1--8 mm wide, oblong to linear
 <b>heads in +- open</b>, panicle- or raceme-like clusters
 involucre 5--10 mm, finely or coarsely <b>glandular-hairy</b>

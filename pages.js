@@ -160,6 +160,7 @@ var pages=[
 {page:"wartleaf ceanothus",sci:"Ceanothus papillosus"},
 {page:"western vervain",sci:"Verbena lasiostachys"},
 {page:"wild radish",sci:"Raphanus sativus"},
+{page:"Bellardia",elab:"Bellardia spp.",key:true},
 {page:"arroyo lupine",sci:"Lupinus succulentus"},
 {page:"blueblossom",sci:"Ceanothus thyrsiflorus"},
 {page:"california gilia",sci:"Gilia achilleifolia"},
@@ -424,6 +425,8 @@ var pages=[
 {page:"naked buckwheat"},
 {page:"pit-gland tarweed"},
 {page:"round-leaved crane's-bill"},
+{page:"smooth tare",sci:"Vicia tetrasperma"},
 {page:"wavy leafed soap plant"},
 {page:"white clover"},
+{page:"yellow glandweed"},
 ];

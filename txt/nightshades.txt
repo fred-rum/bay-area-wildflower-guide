@@ -39,6 +39,7 @@ Some features are variable within a species, but if a <b>bold feature</b> is see
 {+black nightshade}
 {-
 corolla: corolla 10 mm wide, white
+inflorescence: <b>raceme-like</b> (pedicels spaced along a sprout)
 leaf: 4--7 cm, entire to coarsely wavy-toothed
 hairs: +-spreading or curved, <b>glandular</b> and not
 fruit: <b>dull</b>
@@ -47,6 +48,7 @@ fruit: <b>dull</b>
 {+greenspot nightshade}
 {-
 corolla: corolla +-10 mm wide, <b>white-lavender</b>
+inflorescence: generally <b>umbel-like</b> (all pedicels from a common point)
 leaf: 1--9 cm, entire to coarsely irregularly <b>toothed</b>
 hairs: generally simple, < 1mm, +-curved, white
 fruit: <b>glossy</b> w/ <b>sepals not reflexed</b>

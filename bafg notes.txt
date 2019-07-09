@@ -78,7 +78,7 @@ surrounds the given text with a light-bordered box.
 ###############################################################################
 
 Make separate pages (and links) for flower lists (by color and "all")
-with names only (for bandwidth saving) and photos only (for fast skimming).
+with names only (for bandwidth saving) and photos only (for showing off).
 
 It would be nice to have a glossary with popup links automatically created
   where glossary words are used.
@@ -92,12 +92,6 @@ Print errors:
   broken photo
   no scientific name for leaf page
   multiple scientific names from observations.csv
-
-Allow observations and CalFlora links to be inserted manually
-  in the middle of a page, potentially multiple times, e.g. with {obs:[sci]}
-  (It's non-trivial to figure out which children should be counted, though.)
-
-Make parent page link more prominent on child's page so that it isn't missed.
 
 Read and write back a db.yaml file with various discovered information
 about pages that can then be hand edited.  E.g.
