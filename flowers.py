@@ -429,6 +429,7 @@ def write_parents(w, page):
     if page in page_parent:
         for parent in sorted(page_parent[page]):
             w.write('Key to {link}</br>'.format(link=create_link(parent, 1)))
+        w.write('<p/>')
 
 def write_lists(w, page):
     w.write('Flower lists that include this page:<p/>\n')
@@ -725,14 +726,15 @@ def parse(page, s):
     # record all pages that are within each genus
     if page in page_sci:
         sci = page_sci[page]
-        pos = sci.find(' ')
-        if pos > -1:
-            genus = sci[:pos]
-            if genus not in genus_page_list:
-                genus_page_list[genus] = []
-            genus_page_list[genus].append(page)
-        else:
-            genus_set.add(sci)
+        if sci[0].isupper():
+            pos = sci.find(' ')
+            if pos > -1:
+                genus = sci[:pos]
+                if genus not in genus_page_list:
+                    genus_page_list[genus] = []
+                    genus_page_list[genus].append(page)
+            else:
+                genus_set.add(sci)
 
 ###############################################################################
 

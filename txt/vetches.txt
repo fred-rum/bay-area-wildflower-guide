@@ -46,7 +46,7 @@ flowers generally 1--3, at tip
 peduncle 1--3 cm
 plant is +- glabrous
 leaflets 4--10, 0.6--2 cm, linear to elliptic
-corolla <b>4--6 mm</b>, pale lavender to light purple
+<b>corolla 4--6 mm</b>, pale lavender to light purple
 -}
 
 See also {-sweet peas and vetchlings}.
