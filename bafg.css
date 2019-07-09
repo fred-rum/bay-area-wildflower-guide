@@ -105,11 +105,13 @@ img.leaf-thumb {
     height: 40vw;
     max-height: 200px;
     width: auto;
+    margin-right: 10px;
 }
 img.page-thumb {
     height: 20vw;
     max-height: 200px;
     width: auto;
+    margin-right: 10px;
 }
 div.page-thumb-text {
     display: flex;
@@ -121,6 +123,7 @@ div.page-thumb-text {
     height: calc(20vw - 22px);
     max-width: 178px;
     max-height: 178px;
+    margin-right: 10px;
 }
 div.box.indent {
     margin-left: 10vw;
@@ -147,6 +150,7 @@ img.list-thumb {
     height: 15vw;
     max-height: 100px;
     width: auto;
+    margin-right: 10px;
 }
 div.list-thumb-missing {
     display: flex;

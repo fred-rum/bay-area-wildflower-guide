@@ -123,9 +123,6 @@ Perhaps use an interactive process to initially populate the database,
 
 It'd be nice if the up/down arrow keys changed which autocomplete entry was currently selected.
 
-Clean up horizontal spacers to use margin/padding instead.
-  E.g. in div photo-box
-
 Show iNaturalist details on key pages.
   (Requires accumulating data from children.)
 

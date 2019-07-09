@@ -102,10 +102,6 @@ color_list = ['blue',
 # value: page list
 color_page_list = {}
 
-# A few functions need a small horizontal spacer,
-# so we define a common one here.
-horiz_spacer = '<div class="horiz-space"></div>'
-
 # Read miscellaneous flower info from the YAML file.
 with open(root + '/color.yaml') as f:
     yaml_data = yaml.safe_load(f)
@@ -632,7 +628,7 @@ def parse(page, s):
             img = '<a href="{href}" class="missing"><div class="page-thumb-text"><span>{jpg}</span></div></a>'.format(jpg=jpg, href=href)
             print '{jpg}.jpg missing'.format(jpg=jpg)
 
-        return img + horiz_spacer
+        return img
 
     s = re.sub(r'{([^}]+).jpg}', repl_jpg, s)
 
@@ -652,7 +648,7 @@ def parse(page, s):
 
         img = '<a href="{href}" target="_blank" class="enclosed"><div class="page-thumb-text"><span><span style="text-decoration:underline;">CalPhotos</span>{text}</span></div></a>'.format(href=href, text=text)
 
-        return img + horiz_spacer
+        return img
 
     s = re.sub(r'\{(https://calphotos.berkeley.edu/[^\}]+)\}', repl_calphotos, s)
 
@@ -920,7 +916,7 @@ def list_page(w, page, indent):
     w.write('<div class="photo-box{indent_class}">'.format(indent_class=indent_class))
 
     if page in flower_jpg_list:
-        w.write('<a href="{page}.html"><img src="../thumbs/{jpg}.jpg" width="200" height="200" class="list-thumb"></a>{spacer}'.format(page=page, jpg=flower_jpg_list[page][0], spacer=horiz_spacer))
+        w.write('<a href="{page}.html"><img src="../thumbs/{jpg}.jpg" width="200" height="200" class="list-thumb"></a>'.format(page=page, jpg=flower_jpg_list[page][0]))
 
     w.write('{link}</div>\n'.format(link=create_link(page, 2)))
 
