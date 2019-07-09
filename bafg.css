@@ -80,9 +80,6 @@ div.photo-box {
     align-items: center;
     margin: 10px 0px;
 }
-div.flex-width {
-    margin: 10px 0px;
-}
 span.show-narrow {
     display: inline;
 }
@@ -222,6 +219,7 @@ span.match {
 h1#title {
     position: static;
     padding-top: 1em;
+    margin-bottom: 0px;
 }
 
 /* observation details */

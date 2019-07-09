@@ -410,6 +410,7 @@ var pages=[
 {page:"white brodiaea",sci:"Triteleia hyacinthina"},
 {page:"wild buckwheats",sci:"Eriogonum",elab:"Eriogonum spp.",key:true},
 {page:"wind poppy",sci:"Papaver heterophyllum"},
+{page:"wirelettuce",sci:"Stephanumeria",elab:"Stephanumeria spp.",key:true},
 {page:"woollypod milkweed",sci:"Asclepias eriocarpa"},
 {page:"yellow salsify",sci:"Tragopogon dubius"},
 {page:"Holocarpha",elab:"Holocarpha spp.",key:true},

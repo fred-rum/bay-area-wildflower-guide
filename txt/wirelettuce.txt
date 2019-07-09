@@ -1,0 +1,13 @@
+{sci:Stephanumeria}
+{+rod wirelettuce:Stephanomeria virgata}
+{-
+seed without long groove on each face
+ssp. pleurocarpa: outer phyllaries appressed
+ssp. virgata: outer phyllaries strongly reflexed
+-}
+
+{santa barbara wirelettuce:Stephanomeria elata}
+{-
+seed with long groove on each face
+outer phyllaries generally [barely] reflexed (rarely appressed)
+-}

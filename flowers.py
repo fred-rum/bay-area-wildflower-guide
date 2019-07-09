@@ -426,12 +426,13 @@ def write_external_links(w, page):
     w.write('<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson eFlora</a><p/>\n'.format(sci=stripped));
 
 def write_parents(w, page):
-    w.write('Pages that link to this one:<p/>\n')
-    w.write('<ul/>\n')
-
     if page in page_parent:
         for parent in sorted(page_parent[page]):
-            w.write('<li>{link}</li>\n'.format(link=create_link(parent, 1)))
+            w.write('Key to {link}</br>'.format(link=create_link(parent, 1)))
+
+def write_lists(w, page):
+    w.write('Flower lists that include this page:<p/>\n')
+    w.write('<ul/>\n')
 
     if page in page_color:
         for color in color_list:
@@ -708,12 +709,14 @@ def parse(page, s):
             # in the h1 header, and we have a scientific name.
             w.write('<b><i>{elab}</i></b><p/>\n'.format(elab=get_elab(page_sci[page])))
 
+        write_parents(w, page)
+
         w.write(s)
         write_obs(w, page)
         if page in page_sci:
             write_external_links(w, page)
         w.write('<hr/>\n')
-        write_parents(w, page)
+        write_lists(w, page)
         write_footer(w)
 
     if page not in page_child and page not in page_color:
