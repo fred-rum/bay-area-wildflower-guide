@@ -292,6 +292,7 @@ var pages=[
 {page:"pacific aster",sci:"Symphyotrichum chilense"},
 {page:"pacific sanicle",sci:"Sanicula crassicaulis"},
 {page:"panicled willowherb",sci:"Epilobium brachycarpum"},
+{page:"peak rushrose",sci:"Helianthemum scoparium"},
 {page:"peruvian peppertree",sci:"Schinus molle"},
 {page:"purple viper's-bugloss",sci:"Echium plantagineum"},
 {page:"q-tips",com:"Q tips",sci:"Micropus californicus"},

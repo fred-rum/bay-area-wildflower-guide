@@ -233,7 +233,7 @@ function fn_search(enter) {
     e_autocomplete_box.innerHTML = 'No matches found.';
   }
   expose_ac();
-  if (enter && best_list) {
+  if (enter && best_list.length) {
     window.location.href = path + best_list[0].page_info.page + '.html';
   }
 }

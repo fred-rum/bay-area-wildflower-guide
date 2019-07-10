@@ -1,11 +1,112 @@
 {sci:Sanicula}
-The leaves are apparently diagnostic but highly variable.  Given the number of local species (~10) and relative rarity of my observations, it's probably best to work through Jepson on a case-by-case basis.
-
-{+purple sanicle}
+Key features:
 {-
-can also be yellow
+plant height (roughly)
+<b>leaf/leaflet shape</b>
+<b>number of bracts; bracts fused or not</b>
+corolla color
 -}
 
-{+pacific sanicle}
+{[
+<h2>compound leaves</h2>
 
-{+poison sanicle}
+{+poison sanicle:Sanicula bipinnata}
+{-
+plant 12--60 cm; stem leafy
+leaf green, compound, ternate then 1--2-pinnate; blade 3--10 cm, +- ovate, leaflets well separated, stalked, margins entire to lobed, distal segment of main axis 1--5 mm wide
+peduncle 1.5--9 cm
+bracts 6--8, 1--2 mm, < heads, linear to lanceolate, entire
+corolla yellow
+scattered
+-}
+
+{turkey pea:Sanicula tuberosa}
+{-
+plant 5--80 cm, slender
+leaf green, compound, ternate then 1--2-pinnate, glaucous, or +- purple; blade 2--13 cm, triangular to ovate, leaflets entire to deeply pinnately lobed, distal segment of main axis 1--5 mm wide
+peduncles 0.5--8.5 cm
+<b>bracts fused</b>, 6--10, 1--3 mm, < heads, oblong to lanceolate
+corolla yellow
+scattered
+-}
+
+{rock sanicle:Sanicula saxatilis}
+{-
+plant 10--25 cm, stout
+leaf <b>+- purple or glaucous</b> [or green], compound, ternate then 1--2-pinnate; blade 3--9 cm, triangular, leaflets stalked, <b>margins finely serrate</b>, distal segment of main axis 1--5 mm wide
+peduncle 0.5--4 cm
+<b>bracts fused at base</b>, 3--5, < heads, widely lanceolate, entire or 3-lobed
+corolla <b>pale red-orange or +- yellow</b>
+Sierra Azul, Henry Coe, Mt. Diablo
+-}
+
+{hoffmann's sanicle:Sanicula hoffmannii}
+{-
+plant 30--90 cm, stout
+leaf +- blue-green [or green], generally compound, palmate; blade 4.5--13.5 cm, triangular, leaflets or deepest lobes 3, obovate, +- cut, margins irregularly serrate, central leaflet generally 4--7 cm, 4--30 mm wide, narrowed to a petiole-like base
+peduncle 1.5--12 cm
+bracts 5--7, 3--5 mm, < heads, lanceolate
+corolla +- green-yellow [CalPhotos shows something like purple-green]
+Butano, Big Basin
+-}
+
+]}
+{[
+<h2>non-compound lobed leaves</h2>
+
+{[
+<h3>leaf palmate or palmate-ternate</h3>
+
+{+pacific sanicle:Sanicula crassicaulis}
+{-
+plant stout, 24--120 cm, generally branched well distal to base
+leaf green, generally palmate or palmate-ternate; blade 3--12 cm, generally +- rounded-cordate, lobes 3--5, obovate, generally +- deeply cut, margins finely sharp-serrate, teeth generally +- 1 mm, central lobe generally >= 10 mm wide at base, distal segment 4--20 mm wide
+peduncle 0.7--8 cm
+bracts +- 5, 1--2 mm, < heads, narrowly lanceolate
+corolla yellow
+very common
+-}
+
+{laceleaf sanicle:Sanicula laciniata}
+{-
+plant 5--30 cm, slender, generally branched near base
+leaf green, simple, palmately or +- ternately lobed, main divisions 3--5, generally not deeply cut, leaf margins sharpy toothed, axis of main division with at least a narrow, toothed wing throughout; blade 1.5--4 cm, ovate to round, lobes 0--5, margins sharply angled, teeth generally +- 2 mm, central lobe generally > 10 mm wide at base
+peduncle 1.5--8 cm
+bracts +- 10, < heads, lanceolate to ovate
+corolla yellow
+scattered in Santa Cruz range from Monte Bello north; Chabot and Redwood Regional
+-}
+
+{footsteps of spring:Sanicula arctopoides}
+{-
+plant prostrate, 10--30 cm wide
+leaf simple, +- palmately or ternately dissected, bright +- yellow-green at flower; blade 2--6.5 cm, triangular-ovate to round, lobes coarsely toothed to lobed
+peduncle 3--21 cm
+bracts yellow [yellow-green], fused at base, 8--17, 5--18 mm, >> heads, oblanceolate, entire or 3-lobed
+corolla yellow
+scattered on pacific coast, Oakland hills, Pleasanton Ridge
+-}
+
+]}
+
+{+purple sanicle:Sanicula bipinnatifida}
+{-
+plant 12--60 cm
+leaf green, simple, 1--2-pinnately dissected, axis of main division with at least a narrow, toothed wing throughout, glaucous, or +- purple; blade 4--19 cm, oblong-ovate to +- round, main divisions generally >= 7, generally narrow, sharply toothed
+peduncle 0.5--16 cm
+<b>bracts +- fused at base</b>, 6--8, 2.5 mm, < heads, lanceolate
+corolla <b>purple or yellow</b>
+common
+-}
+
+{salt marsh sanicle:Sanicula maritima}
+{-
+plant 8--40 cm
+leaf green at flower, simple, entire to +- pinnately lobed or dissected, axis of main division with at least a narrow, toothed wing throughout; some basal leaves entire; blade 3--8 cm, ovate-cordate to obovate, lobes or segments 0, 3, or 5, obtuse, entire to +- toothed
+peduncle 1.5--12 cm
+bracts +- 10, 1--4 mm, < heads, lanceolate, acute
+corolla yellow
+possibly Oakland hills
+-}
+
+]}
