@@ -117,6 +117,8 @@ Perhaps use an interactive process to initially populate the database,
 
 It'd be nice if the up/down arrow keys changed which autocomplete entry was currently selected.
 
+It'd be nice the escape key removed autocomplete until more was typed.
+
 Show iNaturalist details on key pages.
   (Requires accumulating data from children.)
 
@@ -147,3 +149,5 @@ Add Calochortus superbus.  Any others?
 Add Centaurium tenuiflorum to Zeltnera pages.
 
 What does "wavy toothed" mean for Solanum nigrum?
+
+Support "var.", e.g. for Sambucus racemosa.

@@ -44,3 +44,10 @@ herbage not both with branched hairs and gray-green to white-woolly
 leaves 30--80 mm, <b>lanceolate</b>; lobes 0--3
 peninsula from Thornewood north and east bay from Chabot north
 -}
+
+{+wight's paint brush:Castilleja wightii}
+{-
+herbage not both with branched hairs and gray-green to white-woolly
+corolla not curved out through abaxial side of calyx sinus
+<b>plant glandular-puberulent to -sticky-hairy close to inflorescence</b>
+-}

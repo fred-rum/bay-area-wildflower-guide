@@ -1,0 +1,14 @@
+{sci:Sambucus}
+{+blue elder,2}
+{-
+inflorescence +- flat-topped, central axis generally not dominant
+petals +- spreading
+-}
+
+{+american red elder:Sambucus racemosa racemosa}
+{-
+inflorescence +- dome-shaped, central axis generally dominant
+petals often reflexed
+-}
+
+{-rocky mountain elder:Sambucus racemosa var. melanocarpa} has purple-black berries and in California is only found in the Sierras.

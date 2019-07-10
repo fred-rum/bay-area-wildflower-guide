@@ -8,7 +8,7 @@ ligule [petal] < corolla tube
 fruit 3-ribbed per side, otherwise smooth
 -}
 
-{common sow-thistle:Sonchus oleraceus}
+{+common sow-thistle:Sonchus oleraceus}
 {-
 stem distally branched, often proximally branched
 proximal clasping lobes of cauline leaves acute, <b>not curled or coiled</b>
