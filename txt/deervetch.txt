@@ -83,7 +83,7 @@ prostrate or ascending, 5--50 cm
 leaflets obovate to +- round, terminal generally largest
 peduncle generally > 1 cm, generally bracted
 generally 2--4-flowered per leaf axil (1st-formed often 1--2-flowered)
-wings +- = keel
+corolla 6--10 mm, bright yellow, wings +- = keel
 Mt. Madonna
 -}
 
@@ -93,13 +93,13 @@ mat-forming to ascending, 5--40 cm
 <b>peduncle << 1 cm, bracts 0</b>
 <b>calyx lobes 1--2 &times; tube</b>
 flowers generally 1 per leaf axil
-wings +- = keel
+corolla 5--9 mm, yellow, reddening in age, wings +- = keel
 scattered
 -}
 
 {+chile trefoil:Acmispon wrangelianus}
 {-
-zgenerally prostrate, branched at base, 5--30 cm
+generally prostrate, branched at base, 5--30 cm
 <b>peduncle << 1 cm, bracts 0</b>
 <b>calyx lobes +- 0.8--1.2 &times; tube</b>
 flowers generally 1 per leaf axil

@@ -151,3 +151,8 @@ Add Centaurium tenuiflorum to Zeltnera pages.
 What does "wavy toothed" mean for Solanum nigrum?
 
 Support "var.", e.g. for Sambucus racemosa.
+
+Fix the spacing of a Key line after the <h1> common name if there is
+no scientific name.
+
+Document biscuitroots.
