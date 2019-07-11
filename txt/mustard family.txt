@@ -1,24 +1,25 @@
 {sci:family Brassicaceae}
 {+cabbages and mustards}
 {-
+distal cauline leaves sessile
 Follow link for key details.
 -}
 
 {+shortpod mustard:Hirschfeldia incana}
 {-
-[only one species of this genus anywhere]
 stem 40--150 (40--200) cm, hairs reflexed
 basal leaves in a rosette, pinnately lobed, 5--25 (3--40) cm, 1--6(9) pairs of lateral lobes on each
 cauline leaves dentate to pinnately lobed, petioled or sessile, base not lobed
 inflorescence much elongated [perhaps refers to long peduncle that flowers have fallen from?]
 petals obovate, clawed, yellow
+[only one species of this genus anywhere]
 -}
 
 {+wild mustard:Sinapis arvensis}
 {-
-[only one species of this genus in the bay area]
 stem 20--100 (5--210) cm, simple or branched, hairs spreading to reflexed or occasionally glabrous
 basal leaves not rosetted; blade 4--18 cm, 1.5-5 cm wide, pinnately lobed
 cauline leaves short-petioled, dentate
 petals 9--12 (8--17) mm, yellow
+[only one species of this genus in the bay area]
 -}

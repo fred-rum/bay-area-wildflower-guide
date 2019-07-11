@@ -737,7 +737,7 @@ def parse(page, s):
                 genus = sci[:pos]
                 if genus not in genus_page_list:
                     genus_page_list[genus] = []
-                    genus_page_list[genus].append(page)
+                genus_page_list[genus].append(page)
             else:
                 genus_set.add(sci)
 

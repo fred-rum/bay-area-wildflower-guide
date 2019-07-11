@@ -1,0 +1,87 @@
+{sci:Viola}
+Key features:
+{-
+corolla color
+leaves simple or compound
+basal leaves or not; cauline leaves or not
+stem +- erect, stolon-like [prostrate, root-forming], or not present
+cleistogamous flower [non-opening, self-polinating] present or not
+-}
+
+{[
+<h2>white violets</h2>
+
+{+western heart's ease:Viola ocellata}
+{-
+common in Santa Cruz range
+-}
+
+]}
+{[
+<h2>yellow violets</h2>
+
+{+california golden violet:Viola pedunculata}
+{-
+Leaves simple, cauline only
+stems decumbent to erect, branched, with leaves, peduncles
+no cleistogamous flower present
+common
+-}
+
+{:Viola purpurea}
+{-
+Leaves simple, basal and cauline
+1--6 basal leaves per caudex [subterranean woody base]
+stems prostrate to erect, with leaves, peduncles
+cleistogamous flower present [non-opening, self-polinating]
+scattered
+-}
+
+{+redwood violet:Viola sempervirens}
+{-
+Leaves simple
+Lower stem stolon-like [prostrate, root-forming], with evergreen leaves, peduncles
+common in the Santa Cruz range and Oakland
+-}
+
+{+stream violet:Viola glabella}
+{-
+Leaves simple
+Lower stem erect, without leaves, peduncles
+Santa Cruz range and Oakland
+-}
+
+{:Viola douglasii}
+{-
+<b>Leaves 2-pinnate-compound</b>
+Leaf blades longer than wide; leaf segments 3--5, 1--2.5(5) mm wide
+lateral 2 petals bearded with cylindric hairs
+Coe, Ohlone
+-}
+
+{:Viola sheltonii}
+{-
+<b>Leaves ternate-compound</b>
+Leaf blades wider than long; leaf segments 3, 2--10 mm wide
+lateral 2 petals +- bearded or not with club-shaped hairs
+Mt. Diablo, Ohlone
+-}
+
+]}
+
+{[
+<h2>violet violets</h2>
+
+{:Viola adunca ssp. adunca}
+{-
+stems prostrate to erect, with leaves, peduncles
+scattered near pacific coast and Oakland
+-}
+
+{:Viola odorata}
+{-
+no stem [just a peduncle]
+Bonny Doon, possibly Long Ridge
+-}
+
+]}
