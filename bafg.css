@@ -219,6 +219,8 @@ span.match {
 h1#title {
     position: static;
     padding-top: 1em;
+}
+h1.nospace {
     margin-bottom: 0px;
 }
 

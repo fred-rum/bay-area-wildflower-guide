@@ -443,7 +443,11 @@ def write_lists(w, page):
     w.write('<li><a href="all.html">all flowers</a></li>\n')
     w.write('</ul>\n')
 
-def write_header(w, title, h1):
+def write_header(w, title, h1, nospace=False):
+    if nospace:
+        space_class = ' class="nospace"'
+    else:
+        space_class = ''
     w.write('''<!-- Copyright 2019 Chris Nelson - All rights reserved. -->
 <html lang="en">
 <head>
@@ -480,8 +484,9 @@ def write_header(w, title, h1):
 <div id="autocomplete-box"></div>
 </div>
 <div id="body">
-<h1 id="title">{h1}</h1>
-'''.format(title=title, h1=h1))
+<h1 id="title"{space_class}>{h1}</h1>
+'''.format(title=title, space_class=space_class, h1=h1))
+
 
 def write_footer(w):
     w.write('''
@@ -703,9 +708,9 @@ def parse(page, s):
         else:
             h1 = com
 
-        write_header(w, com, h1)
-
-        if h1 == com and page in page_sci:
+        has_sci = (h1 == com and page in page_sci)
+        write_header(w, com, h1, has_sci)
+        if has_sci:
             # We printed the common name (not the italicized scientific name)
             # in the h1 header, and we have a scientific name.
             w.write('<b><i>{elab}</i></b><p/>\n'.format(elab=get_elab(page_sci[page])))
