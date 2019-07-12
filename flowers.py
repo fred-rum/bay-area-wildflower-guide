@@ -68,8 +68,6 @@ page_txt = {} # txt (string) (potentially with some parsing done to it)
 # but container pages get added later.)
 page_color = {}
 
-page_default = set() # indicates whether a page is "default" (no added text)
-
 page_com = {} # common name
 page_sci = {} # scientific name
 page_elab = {} # elaborated scientific name
@@ -777,7 +775,6 @@ for name in sorted(jpg_list):
     if page not in page_list:
         page_list.append(page)
         page_txt[page] = '{default}'
-        page_default.add(page)
 
 def unicode_csv_reader(unicode_csv_data, dialect=csv.excel, **kwargs):
     # csv.py doesn't do Unicode; encode temporarily as UTF-8:
