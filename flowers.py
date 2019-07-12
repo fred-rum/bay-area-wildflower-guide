@@ -896,7 +896,7 @@ jpg_height = 200
 for page in page_list:
     parse(page, page_txt[page])
 
-# Create a txt listing all flowers without pages, then parse it into html.
+# Create a txt listing of all flowers without pages, then parse it into html.
 if False:
     jpg_height = 50
     unlisted_flowers = sorted([f for f in page_obs if f not in page_list])
