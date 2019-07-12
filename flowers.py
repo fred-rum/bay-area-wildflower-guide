@@ -193,15 +193,12 @@ def get_com(page):
     else:
         return page
 
-def get_elab(sci):
-    return page_elab[sci_page[sci]]
-
 def get_full(page, lines=2):
     com = get_com(page)
     if page in page_sci:
         sci = page_sci[page]
         if sci[0].isupper():
-            elab = '<i>{elab}</i>'.format(elab=get_elab(sci))
+            elab = '<i>{elab}</i>'.format(elab=page_elab[page])
         else:
             space_pos = sci.find(' ')
             elab = '{group} <i>{name}</i>'.format(group=sci[:space_pos],
@@ -433,7 +430,7 @@ def write_external_links(w, page):
             elab = sci
         else:
             # A species or subspecies should be elaborated as necessary.
-            elab = get_elab(sci)
+            elab = page_elab[page]
 
     w.write('<p/>')
 
@@ -731,7 +728,7 @@ def parse(page, s):
         # If the page's common name is the same as its scientific name,
         # then the h1 header should be italicized and elaborated.
         if page in page_sci and page_sci[page] == com:
-            h1 = '<i>{elab}</i>'.format(elab=get_elab(com))
+            h1 = '<i>{elab}</i>'.format(elab=page_elab[page])
         else:
             h1 = com
 
@@ -740,7 +737,7 @@ def parse(page, s):
         if has_sci:
             # We printed the common name (not the italicized scientific name)
             # in the h1 header, and we have a scientific name.
-            w.write('<b><i>{elab}</i></b><p/>\n'.format(elab=get_elab(page_sci[page])))
+            w.write('<b><i>{elab}</i></b><p/>\n'.format(elab=page_elab[page]))
 
         write_parents(w, page)
 
@@ -1034,8 +1031,7 @@ with open(search_file, "w") as w:
         if com != page:
             w.write(',com:"{com}"'.format(com=com))
         if page in page_sci:
-            sci = page_sci[page]
-            elab = get_elab(sci)
+            elab = page_elab[page]
             if elab != com:
                 w.write(',sci:"{elab}"'.format(elab=elab))
         if page in page_child:
