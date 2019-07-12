@@ -139,6 +139,10 @@ page_list = get_file_list('txt', 'txt')
 jpg_list = get_file_list('photos', 'jpg')
 thumb_list = get_file_list('thumbs', 'jpg')
 
+def set_sci(page, sci):
+    page_sci[page] = sci
+    sci_page[sci] = page
+
 def get_page_from_jpg(jpg):
     page = re.sub(r',([-0-9]*)$', r'', jpg)
 
@@ -270,8 +274,7 @@ def read_txt(page):
         assign_child(page, child)
         if sci:
             sci = sci[1:] # discard colon
-            page_sci[child] = sci
-            sci_page[sci] = child
+            set_sci(child, sci)
         if x == '+':
             return '{' + child + ':' + child + suffix + '.jpg} {' + child + '}'
         else:
@@ -279,8 +282,7 @@ def read_txt(page):
 
     def repl_sci(matchobj):
         sci = matchobj.group(1)
-        page_sci[page] = sci
-        sci_page[sci] = page
+        set_sci(page, sci)
         return ''
 
     def repl_com(matchobj):
@@ -824,8 +826,7 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
                 page = com
 
             if page not in page_sci: # don't override {sci:[name]}
-                page_sci[page] = sci
-                sci_page[sci] = page
+                set_sci(page, sci)
 
         if page not in page_obs:
             page_obs[page] = 0
@@ -849,8 +850,7 @@ for page in page_list:
     if page not in page_sci and page[0].isupper():
         # The page name looks like a scientific name, which the page doesn't
         # have yet, so make it happen.
-        page_sci[page] = page
-        sci_page[page] = page
+        set_sci(page, page)
 
 # Get a list of pages without parents (top-level pages).
 top_list = [x for x in page_list if x not in page_parent]
