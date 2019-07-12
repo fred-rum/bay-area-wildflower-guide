@@ -79,7 +79,6 @@ page_parks = {} # for each page, stores a dictionary of park_name : count
 com_page = {} # common name -> page name
 sci_page = {} # scientific name -> page name
 genus_page_list = {} # genus -> list of page names
-genus_set = set() # set of genuses with a container page
 
 # Define a list of supported colors.
 color_list = ['blue',
@@ -760,8 +759,6 @@ def parse(page, s):
                 if genus not in genus_page_list:
                     genus_page_list[genus] = []
                 genus_page_list[genus].append(page)
-            else:
-                genus_set.add(sci)
 
 ###############################################################################
 
