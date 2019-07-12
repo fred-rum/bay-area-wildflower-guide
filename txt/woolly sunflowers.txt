@@ -1,0 +1,16 @@
+{sci:Eriophyllum}
+There are more bay area species than this.
+
+{+seaside woolly sunflower:eriophyllum staechadifolium}
+{-
+Subshrub or shrub
+peduncle 0--10(14) cm
+ray 2--10 mm
+-}
+
+{+common woolly sunflower:Eriophyllum lanatum}
+{-
+Annual to subshrub, woody at base only
+peduncle (1)3--30 cm
+ray 6--20 mm
+-}
