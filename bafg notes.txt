@@ -153,8 +153,6 @@ Add Centaurium tenuiflorum to Zeltnera pages.
 
 What does "wavy toothed" mean for Solanum nigrum?
 
-Support "var.", e.g. for Sambucus racemosa.
-
 Count all observations within a taxon even if they aren't explicitly
 matched with a page.  E.g. this is useful for observations that have a
 subspecies if I haven't bothered to distinguish subspecies in the

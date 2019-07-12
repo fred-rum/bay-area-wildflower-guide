@@ -85,7 +85,6 @@ genus_set = set() # set of genuses with a container page
 
 # Define a list of supported colors.
 color_list = ['blue',
-              #'blue purple',
               'purple',
               'red purple',
               'red',
@@ -173,9 +172,18 @@ def set_sci(page, sci):
 def get_page_from_jpg(jpg):
     page = re.sub(r',([-0-9]*)$', r'', jpg)
 
-    # Remove ssp. and other elaborations that I use in my keywords
-    # but not in my page names.
-    page = re.sub(r' ssp. | spp. ', ' ', page)
+    if page[0].isupper():
+        # If the jpg uses an elaborated name, remove the elaborations to
+        # form the final page name.
+        sci_words = page.split(' ')
+        if len(sci_words) == 4:
+            # Four words in the scientific name implies a subset of a species
+            # with an elaborated subtype specifier.  The specifier is stripped.
+            page = ' '.join((sci_words[0], sci_words[1], sci_words[3]))
+        elif len(sci_words) == 2 and sci_words[1] == 'spp.':
+            # It is a genus name in elaborated format.  The 'spp.' suffix is
+            # stripped.
+            page = sci_words[0]
 
     return page
 
