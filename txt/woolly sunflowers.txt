@@ -1,16 +1,35 @@
 {sci:Eriophyllum}
 There are more bay area species than this.
 
+Key features:
+{-
+how far up is the plant woody
+overall plant height
+number of phyllaries, strongly overlapping or barely
+number and length of rays
+ecology
+-}
+
+{+golden yarrow:Eriophyllum confertiflorum}
+{-
+subshrub or shrub, generally 20--70 cm
+4--7 phyllaries, strongly overlapping
+4--6 (0--8) rays, 2--5 mm
+Ecology: Many dry habitats
+-}
+
 {+seaside woolly sunflower:eriophyllum staechadifolium}
 {-
-Subshrub or shrub
-peduncle 0--10(14) cm
-ray 2--10 mm
+subshrub, much branched, 30--150 cm
+8--11 phyllaries, barely overlapping
+6--9 rays, 3--5 mm
+Ecology: coastal dunes, bluffs, coastal scrub
 -}
 
 {+common woolly sunflower:Eriophyllum lanatum}
 {-
-Annual to subshrub, woody at base only
-peduncle (1)3--30 cm
-ray 6--20 mm
+annual to subshrub, woody at base only
+5--15 phyllaries
+5--13 rays, <b>6--20 mm</b>
+scattered
 -}
