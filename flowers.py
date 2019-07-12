@@ -72,6 +72,7 @@ page_default = set() # indicates whether a page is "default" (no added text)
 
 page_com = {} # common name
 page_sci = {} # scientific name
+page_elab = {} # elaborated scientific name
 page_obs = {} # number of observations
 page_obs_rg = {} # number of observations that are research grade
 page_taxon_id = {} # iNaturalist taxon ID
@@ -140,7 +141,33 @@ jpg_list = get_file_list('photos', 'jpg')
 thumb_list = get_file_list('thumbs', 'jpg')
 
 def set_sci(page, sci):
+    sci_words = sci.split(' ')
+    if len(sci_words) == 1:
+        # One word in the scientific name implies a genus.
+        elab = ' '.join((sci, 'spp.'))
+    elif len(sci_words) == 3:
+        # Three words in the scientific name implies a subset of a species.
+        # We probably got this name from an iNaturalist observation, and it
+        # doesn't have an explicit override, so we can only assume "ssp."
+        elab = ' '.join((sci_words[0], sci_words[1], 'ssp.', sci_words[2]))
+    elif len(sci_words) == 4:
+        # Four words in the scientific name implies a subset of a species
+        # with an elaborated subtype specifier.  The specifier is stripped
+        # from the 'sci' name.
+        elab = sci
+        sci = ' '.join((sci_words[0], sci_words[1], sci_words[3]))
+    elif sci_words[1] == 'spp.':
+        # It is a genus name in elaborated format.  The 'spp.' suffix is
+        # stripped from the 'sci' name.
+        elab = sci
+        sci = sci_words[0]
+    else:
+        # The name is in the regular "genus species" format, which is the
+        # same for both sci and elab
+        elab = sci
+
     page_sci[page] = sci
+    page_elab[page] = elab
     sci_page[sci] = page
 
 def get_page_from_jpg(jpg):
@@ -159,17 +186,7 @@ def get_com(page):
         return page
 
 def get_elab(sci):
-    matchobj = re.match(r'([^ ]+ [^ ]+) ([^ ]+)$', sci)
-    if ' ' not in sci:
-        # one word in the scientific name implies a genus.
-        return '{genus} spp.'.format(genus=sci)
-    elif matchobj:
-        # three words in the scientific name implies a subspecies
-        # (or variant, or whatever).  Default to "ssp."
-        return '{species} ssp. {ssp}'.format(species=matchobj.group(1),
-                                             ssp=matchobj.group(2))
-    else:
-        return sci
+    return page_elab[sci_page[sci]]
 
 def get_full(page, lines=2):
     com = get_com(page)

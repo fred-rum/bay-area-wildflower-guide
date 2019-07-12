@@ -1,5 +1,5 @@
 {sci:Cirsium fontinale}
-{+mount hamilton fountain thistle}
+{+mount hamilton fountain thistle:Cirsium fontinale var. campylon}
 {-
 scattered south of the bay
 -}

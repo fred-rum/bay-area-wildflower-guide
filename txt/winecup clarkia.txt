@@ -7,7 +7,7 @@ leaf length and shape
 
 Style vs. stamen length seems less useful than stated in Jepson.  Dense vs. open inflorescence is also hard to distinguish.
 
-{+four-spot}
+{+four-spot:Clarkia purpurea ssp. quadrivulnera}
 {-
 petals 5--15 mm (generally +- 10 mm)
 leaf 1.5--5 cm, generally linear to lanceolate

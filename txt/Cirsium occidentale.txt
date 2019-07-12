@@ -1,5 +1,5 @@
 {com:cobwebby thistle}
-{+venus thistle}
+{+venus thistle:Cirsium occidentale var. venustum}
 {-
 less cobwebby
 common

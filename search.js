@@ -151,7 +151,7 @@ function fn_search(enter) {
       check(search_str_cmp, page_info.com, page_info, best_fit_info)
     }
     if ('sci' in page_info) {
-      check_elab(search_str_cmp, page_info.elab, page_info, best_fit_info)
+      check_elab(search_str_cmp, page_info.sci, page_info, best_fit_info)
     }
 
     /* If there's a match, and
@@ -191,7 +191,7 @@ function fn_search(enter) {
       if (('sci' in page_info) ||
           startsUpper(page_info.page)) {
         if ('sci' in page_info) {
-          var elab = page_info.elab;
+          var elab = page_info.sci;
         } else {
           var elab = page_info.page;
         }
@@ -216,7 +216,7 @@ function fn_search(enter) {
                                 elab_bold.substring(space_pos+1) + '</i>');
         }
         if (('sci' in page_info) &&
-            (page_info.elab != com) &&
+            (page_info.sci != com) &&
             !startsUpper(com)) {
           var full = bold(search_str_cmp, com) + ' (' + elab_bold_ital + ')';
         } else {
