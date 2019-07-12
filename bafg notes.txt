@@ -114,6 +114,9 @@ Perhaps use an interactive process to initially populate the database,
   and never specify values in other places.
   e.g. if no scientific name is found in observations.csv, ask for it.
   always ask for the color of a new flower
+Or mark derived info explicitly in the database,
+  e.g. by recording it as "default".
+  This allows it to be easily changed or reverted.
 
 It'd be nice if the up/down arrow keys changed which autocomplete entry was currently selected.
 
