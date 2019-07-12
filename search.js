@@ -56,6 +56,18 @@ function check(search_str_cmp, match_str, page_info, best_fit_info) {
   }
 }
 
+function check_elab(search_str_cmp, elab, page_info, best_fit_info) {
+  check(search_str_cmp, elab, page_info, best_fit_info)
+
+  /* If the scientific name includes a subtype specifier, also check for
+     a match with the specifier removed. */
+  var elab_split = elab.split(' ');
+  if (elab_split.length == 4) {
+    var sci = elab_split[0] + ' ' + elab_split[1] + ' ' + elab_split[3]
+    check(search_str_cmp, sci, page_info, best_fit_info)
+  }
+}
+
 function startsUpper(name) {
   return (name.search(/^[A-Z]/) >= 0);
 }
@@ -139,10 +151,7 @@ function fn_search(enter) {
       check(search_str_cmp, page_info.com, page_info, best_fit_info)
     }
     if ('sci' in page_info) {
-      check(search_str_cmp, page_info.sci, page_info, best_fit_info)
-    }
-    if ('elab' in page_info) {
-      check(search_str_cmp, page_info.elab, page_info, best_fit_info)
+      check_elab(search_str_cmp, page_info.elab, page_info, best_fit_info)
     }
 
     /* If there's a match, and
@@ -180,12 +189,9 @@ function fn_search(enter) {
         var com = page_info.page;
       }
       if (('sci' in page_info) ||
-          ('elab' in page_info) ||
           startsUpper(page_info.page)) {
-        if ('elab' in page_info) {
+        if ('sci' in page_info) {
           var elab = page_info.elab;
-        } else if ('sci' in page_info) {
-          var elab = page_info.sci;
         } else {
           var elab = page_info.page;
         }
@@ -209,7 +215,9 @@ function fn_search(enter) {
           var elab_bold_ital = (elab_bold.substring(0, space_pos) + ' <i>' +
                                 elab_bold.substring(space_pos+1) + '</i>');
         }
-        if (('sci' in page_info) && (page_info.sci != com)) {
+        if (('sci' in page_info) &&
+            (page_info.elab != com) &&
+            !startsUpper(com)) {
           var full = bold(search_str_cmp, com) + ' (' + elab_bold_ital + ')';
         } else {
           var full = elab_bold_ital;

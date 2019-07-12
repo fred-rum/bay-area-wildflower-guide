@@ -1011,10 +1011,8 @@ with open(search_file, "w") as w:
         if page in page_sci:
             sci = page_sci[page]
             elab = get_elab(sci)
-            if sci != com:
-                w.write(',sci:"{sci}"'.format(sci=sci))
-            if elab != sci:
-                w.write(',elab:"{elab}"'.format(elab=elab))
+            if elab != com:
+                w.write(',sci:"{elab}"'.format(elab=elab))
         if page in page_child:
             w.write(',key:true')
         w.write('},\n')
