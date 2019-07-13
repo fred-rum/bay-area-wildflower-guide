@@ -1,0 +1,22 @@
+{sci:Epipactis}
+3 petals and 3 sepals look similar to each other<br/>
+1 sepal is "upper" and 2 are "lateral"
+
+{+broad-leaved helleborine:Epipactis helleborine}
+{-
+sepals +- green, often purple-tinged or -striped
+lateral petals 8--11 mm; lateral sepals <b>10--13 mm</b>
++- dry places
+very common in the Santa Cruz range and Oakland hills
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1005+0689}
+{stream orchid:Epipactis gigantea}
+{-
+sepals +- green to +- red, +- purple-veined
+lateral petals 13--15 mm; lateral sepals <b>16--24 mm</b>
++- wet places
+scattered
+-}
+
+These are the only species in California.

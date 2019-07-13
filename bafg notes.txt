@@ -87,9 +87,9 @@ Jepson example:
 Remember that mobile doesn't support hovering.
 
 Print errors:
-  no color listed
-  listed color not supported
-  broken photo
+  *no color listed
+  *listed color not supported
+  *broken photo
   no scientific name for leaf page
   multiple scientific names from observations.csv
 
@@ -158,4 +158,4 @@ matched with a page.  E.g. this is useful for observations that have a
 subspecies if I haven't bothered to distinguish subspecies in the
 BAFG.
 
-Don't italicize "var.", "ssp.", etc.?
+Create pages automatically for families if they aren't created explicitly.

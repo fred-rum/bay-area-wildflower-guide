@@ -1,0 +1,15 @@
+{sci:Daucus}
+{+american wild carrot}
+{-
+bract segments <b>short</b>, linear to lanceolate
+common
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1208+0424}
+{queen anne's lace:Daucus carota}
+{-
+bract segments <b>elongate</b>, narrowly linear to +- thread-like
+scattered
+-}
+
+These are the only species in California.

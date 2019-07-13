@@ -1,0 +1,35 @@
+{sci:Artemisia}
+{+california sagebrush:Artemisia californica}
+{-
+axillary leaf clusters present
+very common
+-}
+
+{[
+<h2>generally no axillary leaf clusters</h2>
+
+These look fairly distinct from california sagebrush and from each other.  I'll add more notes here as I discover them.
+
+{biennial wormwood:Artemisia biennis}
+{-
+rare
+-}
+
+{california mugwort:Artemisia douglasiana}
+{-
+very common
+-}
+
+{tarragon:Artemisia dracunculus}
+{-
+Coe, Sunol
+-}
+
+{beach wormwood:Artemisia pycnocephala}
+{-
+directly on the coast
+-}
+
+]}
+
+These are the only species in the bay area.
