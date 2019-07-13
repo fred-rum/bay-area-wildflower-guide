@@ -217,7 +217,7 @@ function fn_search(enter) {
         }
         if (('sci' in page_info) &&
             (page_info.sci != com) &&
-            !startsUpper(com)) {
+            (!startsUpper(com) || ('com' in page_info))) {
           var full = bold(search_str_cmp, com) + ' (' + elab_bold_ital + ')';
         } else {
           var full = elab_bold_ital;
