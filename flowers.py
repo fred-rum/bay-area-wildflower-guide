@@ -203,7 +203,7 @@ class Page:
                 # Replace the {+...} field with two new fields:
                 # - a photo that links to the child
                 # - a text link to the child
-                return ('{' + child + ':' + child + suffix + '.jpg} ' # ***
+                return ('{' + child + ':' + child + suffix + '.jpg}\n'
                         '{' + child + '}')
             else:
                 # Replaced the {child:...} field with a new field:
@@ -221,7 +221,7 @@ class Page:
 
     def write_parents(self, w):
         for parent in sorted(self.parent):
-            w.write('Key to {link}</br>'.format(link=parent.create_link(1))) # ***
+            w.write('Key to {link}<br/>'.format(link=parent.create_link(1)))
         if self.parent:
             w.write('<p/>')
 
