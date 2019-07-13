@@ -38,6 +38,582 @@ import cStringIO
 import yaml
 import codecs
 
+class Page:
+    pass
+
+    def __init__(self, name):
+        if name in name_page:
+            print 'Multiple pages created with name "{name}"'.format(name=name)
+        self.name = name
+        name_page[name] = self
+
+        self.com = None # a common name
+        self.sci = None # a scientific name stripped of elaborations
+        self.elab = None # an elaborated scientific name
+
+        # Give the page a default common or scientific name as appropriate.
+        # Either or both names may be modified later.
+        if name.islower():
+            # If there isn't an uppercase letter anywhere, it's a common name.
+            self.set_com(name)
+        else:
+            # If there is an uppercase letter somewhere, it's a scientific name.
+            self.set_sci(name)
+
+        # self.txt is always initialized elsewhere.
+
+        self.jpg_list = [] # an ordered list of jpg names
+
+        self.parent = set() # an unordered set of parent pages
+        self.child = [] # an ordered list of child pages
+
+        # A set of color names that the page is linked from.
+        # (Initially this is just the flower colors,
+        # but container pages get added later.)
+        self.color = set()
+
+        self.taxon_id = None # iNaturalist taxon ID
+        self.obs = 0 # number of observations
+        self.obs_rg = 0 # number of observations that are research grade
+        self.parks = {} # a dictionary of park_name : count
+
+    def set_com(self, com):
+        self.com = com
+        com_page[com] = self
+
+    # set_sci() can be called with a stripped or elaborated name.
+    # Either way, both a stripped and elaborated name are recorded.
+    def set_sci(self, sci):
+        sci_words = sci.split(' ')
+        if len(sci_words) == 1:
+            # One word in the scientific name implies a genus.
+            elab = ' '.join((sci, 'spp.'))
+        elif len(sci_words) == 3:
+            # Three words in the scientific name implies a subset of a species.
+            # We probably got this name from an iNaturalist observation, and it
+            # doesn't have an explicit override, so we can only assume "ssp."
+            elab = ' '.join((sci_words[0], sci_words[1], 'ssp.', sci_words[2]))
+        elif len(sci_words) == 4:
+            # Four words in the scientific name implies a subset of a species
+            # with an elaborated subtype specifier.  The specifier is stripped
+            # from the 'sci' name.
+            elab = sci
+            sci = ' '.join((sci_words[0], sci_words[1], sci_words[3]))
+        elif sci_words[1] == 'spp.':
+            # It is a genus name in elaborated format.  The 'spp.' suffix is
+            # stripped from the 'sci' name.
+            elab = sci
+            sci = sci_words[0]
+        else:
+            # The name is in the regular "genus species" format, which is the
+            # same for both sci and elab
+            elab = sci
+
+        self.sci = sci
+        self.elab = elab
+        sci_page[sci] = self
+
+    def get_com(self):
+        if self.com:
+            return self.com
+        else:
+            return self.name
+
+    def format_elab(self):
+        elab = self.elab
+        if not elab:
+            return None
+        elif elab[0].isupper():
+            return '<i>{elab}</i>'.format(elab=elab)
+        else: # it must be in {group_type} {name} format
+            elab_words = elab.split(' ')
+            return '{type} <i>{name}</i>'.format(type=elab_words[0],
+                                                 name=elab_words[1])
+
+    def format_full(self, lines=2):
+        com = self.com
+        elab = self.format_elab()
+        if not com:
+            return elab
+        elif not elab:
+            return com
+        elif lines == 1:
+            return '{com} ({elab})'.format(com=com, elab=elab)
+        else:
+            return '{com}<br/>{elab}'.format(com=com, elab=elab)
+
+    def add_jpg(self, jpg):
+        self.jpg_list.append(jpg)
+
+    def parse_names(self):
+        def repl_com(matchobj):
+            com = matchobj.group(1)
+            self.set_com(com)
+            return ''
+
+        def repl_sci(matchobj):
+            sci = matchobj.group(1)
+            self.set_sci(sci)
+            return ''
+
+        self.txt = re.sub(r'{com:(.*)}\n', repl_com, self.txt)
+        self.txt = re.sub(r'{sci:(.*)}\n', repl_sci, self.txt)
+
+    # Check if check_page is an ancestor of this page (for loop checking).
+    def is_ancestor(self, check_page):
+        if self == check_page:
+            return True
+
+        for parent in self.parent:
+            if parent.is_ancestor(check_page):
+                return True
+
+        return False
+
+    def assign_child(self, child):
+        if self.is_ancestor(child):
+            print "circular loop when creating link from {parent} to {child}".format(parent=self.name, child=child.name)
+        else:
+            self.child.append(child)
+            child.parent.add(self)
+
+    def parse_children(self):
+        # Replace a {child:[page]} link with just {[page]} and record the
+        # parent->child relationship.
+        def repl_child(matchobj):
+            x = matchobj.group(1)
+            child = matchobj.group(2)
+            suffix = matchobj.group(3)
+            sci = matchobj.group(4)
+            if not suffix:
+                suffix = ''
+            # If the child does not exist, don't record the relationship.
+            # We don't need to flag an error here, though.  We'll just
+            # create the links to the non-existant child, and those links
+            # will flag an error when they get parsed.
+            if child in name_page:
+                child_page = name_page[child]
+                self.assign_child(child_page)
+                # In addition to linking to the child,
+                # also give a scientific name to it.
+                if sci:
+                    sci = sci[1:] # discard colon
+                    child_page.set_sci(sci)
+            if x == '+':
+                # Replace the {+...} field with two new fields:
+                # - a photo that links to the child
+                # - a text link to the child
+                return ('{' + child + ':' + child + suffix + '.jpg} ' # ***
+                        '{' + child + '}')
+            else:
+                # Replaced the {child:...} field with a new field:
+                # - a text link to the child
+                return '{' + child + '}'
+
+        self.txt = re.sub(r'{(child:|\+)([^\}:,]+)(,[-0-9]*)?(:[^\}]+)?}', repl_child, self.txt)
+
+    def create_link(self, lines):
+        if self.child:
+            style = ' class="parent"'
+        else:
+            style = ' class="leaf"'
+        return '<a href="{name}.html"{style}>{full}</a>'.format(name=self.name, style=style, full=self.format_full(lines))
+
+    def write_parents(self, w):
+        for parent in sorted(self.parent):
+            w.write('Key to {link}</br>'.format(link=parent.create_link(1))) # ***
+        if self.parent:
+            w.write('<p/>')
+
+    def page_matches_color(self, color):
+        return (color == None or color in self.color)
+
+    # For containers, sum the observation counts of all children,
+    # *but* if a flower is found via multiple paths, count it only once.
+    # Two values are returned: (n, rg)
+    #   n is the observation count
+    #   rg is the research-grade observation count (0 <= rg <= n)
+    def count_matching_obs(self, color, match_flowers):
+        if self in match_flowers: return (0, 0)
+
+        n = 0
+        rg = 0
+
+        # If a container page contains exactly one descendant with a matching
+        # color, the container isn't listed on the color page, and the color
+        # isn't listed in page_color for the page.  Therefore, we follow all
+        # child links blindly and only compare the color when we reach a flower
+        # with an observation count.
+        if self.obs and self.page_matches_color(color):
+            n += self.obs
+            rg += self.obs_rg
+            match_flowers.add(page)
+
+        for child in self.child:
+            (ch_n, ch_rg) = child.count_matching_obs(color, match_flowers)
+            n += ch_n
+            rg += ch_rg
+
+        return (n, rg)
+
+    # Write the iNaturalist observation data.
+    def write_obs(self, w):
+        (n, rg) = self.count_matching_obs(None, set())
+
+        sci = self.sci
+        if n == 0 and not sci:
+            return
+
+        if self.taxon_id:
+            link = 'https://www.inaturalist.org/observations/chris_nelson?taxon_id={taxon_id}&order_by=observed_on'.format(taxon_id=self.taxon_id)
+        elif sci and sci[0].isupper():
+            # iNaturalist can't search by name on a higher level taxon,
+            # only a genus or lower.
+            link = 'https://www.inaturalist.org/observations/chris_nelson?search_on=names&q={sci}&order_by=observed_on'.format(sci=sci)
+        else:
+            link = None
+
+        w.write('<p/>\n')
+
+        if link:
+            w.write('<a href="{link}" target="_blank">Chris&rsquo;s observations</a>: '.format(link=link))
+        else:
+            w.write('Chris&rsquo;s observations: ')
+
+        if sci and sci[0].isupper() and sci.count(' ') == 1:
+            rg_txt = 'research grade'
+        else:
+            rg_txt = 'research grade to species level'
+
+        if n == 0:
+            w.write('none')
+        elif rg == 0:
+            w.write('{n} (none are {rg_txt})'.format(n=n, rg_txt=rg_txt))
+        elif rg == n:
+            if n == 1:
+                w.write('1 ({rg_txt})'.format(rg_txt=rg_txt))
+            else:
+                w.write('{n} (all are {rg_txt})'.format(n=n, rg_txt=rg_txt))
+        else:
+            if rg == 1:
+                w.write('{n} ({rg} is {rg_txt})'.format(n=n, rg=rg, rg_txt=rg_txt))
+            else:
+                w.write('{n} ({rg} are {rg_txt})'.format(n=n, rg=rg, rg_txt=rg_txt))
+
+        if not self.child and self.parks:
+            w.write('''
+<span class="toggle-details" onclick="fn_details(this)">[show details]</span><p/>
+<div id="details">
+Locations:
+<ul>
+''')
+            for park in sorted(self.parks,
+                               key = lambda x: self.parks[x],
+                               reverse=True):
+                html_park = park.encode('ascii', 'xmlcharrefreplace')
+                count = self.parks[park]
+                if count == 1:
+                    w.write('<li>{park}</li>\n'.format(park=html_park))
+                else:
+                    w.write('<li>{park}: {count}</li>\n'.format(park=html_park, count=count))
+            w.write('</ul></div>\n')
+        else:
+            w.write('<p/>\n')
+
+    def write_external_links(self, w):
+        sci = self.sci
+        if not sci[0].isupper():
+            # A higher-level classification should be sent with the group type
+            # removed.
+            space_pos = sci.find(' ')
+            stripped = sci[space_pos+1:]
+            elab = stripped
+        else:
+            stripped = sci
+            if ' ' not in sci:
+                # A one-word genus should be sent as is, not as '[genus] spp.'
+                elab = sci
+            else:
+                # A species or subspecies should be elaborated as necessary.
+                elab = self.elab
+
+        w.write('<p/>')
+
+        if self.taxon_id:
+            w.write('<a href="https://www.inaturalist.org/taxa/{taxon_id}" target="_blank">iNaturalist</a> &ndash;\n'.format(taxon_id=self.taxon_id))
+        else:
+            w.write('<a href="https://www.inaturalist.org/search?q={stripped}&source=taxa" target="_blank">iNaturalist</a> &ndash;\n'.format(stripped=stripped))
+
+        w.write('<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank">CalFlora</a> &ndash;\n'.format(elab=elab));
+
+        if sci[0].isupper() and ' ' in sci:
+            # CalPhotos cannot be searched by genus or higher classification.
+            w.write('<a href="https://calphotos.berkeley.edu/cgi/img_query?where-taxon={elab}" target="_blank">CalPhotos</a> &ndash;\n'.format(elab=elab));
+
+        # Jepson uses "subsp." instead of "ssp.", but it also allows us to
+        # search with that qualifier left out entirely.
+        w.write('<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson eFlora</a><p/>\n'.format(sci=stripped));
+
+    def write_lists(self, w):
+        w.write('Flower lists that include this page:<p/>\n')
+        w.write('<ul/>\n')
+
+        for color in color_list:
+            if color in self.color:
+                w.write('<li><a href="{color}.html">{color} flowers</a></li>\n'.format(color=color))
+
+        w.write('<li><a href="all.html">all flowers</a></li>\n')
+        w.write('</ul>\n')
+
+    # List a single page, indented if it is under a parent.
+    # (But don't indent it if it is itself a parent, in which case it has
+    # already put itself in an indented box.)
+    def list_page(self, w, indent):
+        if indent:
+            indent_class = ' indent'
+        else:
+            indent_class = ''
+
+        if self.child:
+            # A parent puts itself in a box.
+            # The box may be indented, in which case, the remainder
+            # of the listing is not indented.
+            w.write('<div class="box{indent_class}">\n'.format(indent_class=indent_class))
+            indent_class = ''
+
+        w.write('<div class="photo-box{indent_class}">'.format(indent_class=indent_class))
+
+        if self.jpg_list:
+            w.write('<a href="{name}.html"><img src="../thumbs/{jpg}.jpg" width="200" height="200" class="list-thumb"></a>'.format(name=self.name, jpg=self.jpg_list[0]))
+
+        w.write('{link}</div>\n'.format(link=self.create_link(2)))
+
+
+    # The giant 'parse' function, which turns txt into html
+    # and writes the resulting file.
+    def parse(self):
+        s = self.txt
+
+        def repl_easy(matchobj):
+            return repl_easy_dict[matchobj.group(1)]
+
+        # replace the easy (fixed-value) stuff.
+        s = repl_easy_regex.sub(repl_easy, s)
+
+        def repl_list(matchobj):
+            c = matchobj.group(1)
+            c = re.sub(r'\n', r'</li>\n<li>', c)
+
+            # If there's a sublist, its <ul> & </ul> must be on their own lines,
+            # in which case we remove the accidental surrounding <li>...</li>.
+            c = re.sub(r'<li>(<(/?)ul>)</li>', r'\1', c)
+
+            return '\n<ul>\n<li>{c}</li>\n</ul>\n'.format(c=c)
+
+        s = re.sub(r'\n{-\n(.*?)\n-}\n', repl_list, s, flags=re.DOTALL)
+
+        # Replace {jpgs} with all jpgs that exist for the flower.
+        def repl_jpgs(matchobj):
+            if self.jpg_list:
+                jpgs = ['{{{jpg}.jpg}}'.format(jpg=jpg) for jpg in self.jpg_list]
+                return ' '.join(jpgs)
+            else:
+                return '{no photos.jpg}'
+
+        s = re.sub(r'{jpgs}', repl_jpgs, s)
+
+        # Look for any number of {photos} followed by all text up to the
+        # first \n\n or \n+EOF.  Photos can be my own or CalPhotos.
+        # The photos and text are grouped together and vertically centered.
+        # The text is also put in a <span> for correct whitespacing.
+        def repl_photo_box(matchobj):
+            imgs = matchobj.group(1)
+            text = matchobj.group(2)
+
+            # If the text after the images appears to be a species link
+            # followed by more text, then duplicate and contain the
+            # species link so that the following text can either be in
+            # the same column or on a different row, depending on the
+            # width of the viewport.
+            matchobj2 = re.match(r'({.*}\s*)\n(.*)', text, flags=re.DOTALL)
+            if matchobj2:
+                species = matchobj2.group(1)
+                text = matchobj2.group(2)
+                # [div-flex-horiz-or-vert
+                #  [div-horiz photos, (narrow-only) species]
+                #  [span-vert (wide-only) species, text]
+                # ]
+                return '<div class="flex-width"><div class="photo-box">{imgs}<span class="show-narrow">{species}</span></div><span><span class="show-wide">{species}</span>{text}</span></div>'.format(imgs=imgs, species=species, text=text)
+            else:
+                return '<div class="photo-box">{imgs}<span>{text}</span></div>'.format(imgs=imgs, text=text)
+
+        s = re.sub(r'((?:\{(?:jpgs|[^\}]+.jpg|https://calphotos.berkeley.edu/[^\}]+)\} *(?:\n(?!\n))?)+)(.*?)(?=\n(\n|\Z))', repl_photo_box, s, flags=re.DOTALL)
+
+        # Replace a pair of newlines with a paragraph separator.
+        # (Do this after making specific replacements based on paragraphs,
+        # but before replacements that might create empty lines.)
+        s = s.replace('\n\n', '\n<p/>\n')
+
+        # Replace {*.jpg} with a thumbnail image and either
+        # - a link to the full-sized image, or
+        # - a link to a child page.
+        def repl_jpg(matchobj):
+            jpg = matchobj.group(1)
+
+            # Decompose a jpg reference of the form {[page]:[img].jpg}
+            pos = jpg.find(':')
+            if pos > 0:
+                link = jpg[:pos]
+                jpg = jpg[pos+1:]
+                link_to_jpg = False
+            else:
+                link_to_jpg = True
+
+            # Keep trying stuff until we find something in the global jpg_list
+            # or until we explicitly give up.
+            while jpg not in jpg_list:
+                # If the "jpg" name is actually a page name,
+                # use the first jpg of that page (if there is one),
+                # or drill into its first child (if there is one).
+                if jpg in name_page:
+                    jpg_page = name_page[jpg]
+                    if jpg_page.jpg_list:
+                        jpg = jpg_page.jpg_list[0]
+                        break
+
+                    if jpg_page.child:
+                        jpg = jpg_page.child[0].name
+                        continue
+
+                break # give up
+
+            thumb = '../thumbs/{jpg}.jpg'.format(jpg=jpg)
+
+            if link_to_jpg:
+                href = '../photos/{jpg}.jpg'.format(jpg=jpg)
+            else:
+                href = '{link}.html'.format(link=link)
+
+            if jpg in jpg_list:
+                # Different formatting for a photo on a key page vs.
+                # a leaf page.
+                if self.child:
+                    img_class = 'page-thumb'
+                else:
+                    img_class = 'leaf-thumb'
+                img = '<a href="{href}"><img src="{thumb}" width="200" height="200" class="{img_class}"></a>'.format(href=href, thumb=thumb, img_class=img_class)
+            else:
+                img = '<a href="{href}" class="missing"><div class="page-thumb-text"><span>{jpg}</span></div></a>'.format(jpg=jpg, href=href)
+                print '{jpg}.jpg missing'.format(jpg=jpg)
+
+            return img
+
+        s = re.sub(r'{([^}]+).jpg}', repl_jpg, s)
+
+        # Replace a {CalPhotos:text} reference with a 200px box with
+        # "CalPhotos: text" in it.
+        # The entire box is a link to CalPhotos.
+        # The ":text" part is optional.
+        def repl_calphotos(matchobj):
+            href = matchobj.group(1)
+            pos = href.find(':') # find the colon in "http:"
+            pos = href.find(':', pos+1) # find the next colon, if any
+            if pos > 0:
+                text = '<br/>' + href[pos+1:]
+                href = href[:pos]
+            else:
+                text = ''
+
+            img = '<a href="{href}" target="_blank" class="enclosed"><div class="page-thumb-text"><span><span style="text-decoration:underline;">CalPhotos</span>{text}</span></div></a>'.format(href=href, text=text)
+
+            return img
+
+        s = re.sub(r'\{(https://calphotos.berkeley.edu/[^\}]+)\}', repl_calphotos, s)
+
+        # Replace a {[common]:[scientific]} reference with a link to CalFlora.
+        # [common] is optional, but the colon must always be present.
+        def repl_calflora(matchobj):
+            com = matchobj.group(1)
+            elab = matchobj.group(2)
+            if com and com[0] == '-':
+                com = com[1:]
+                lines = 1
+            else:
+                lines = 2
+            if com:
+                if lines == 1:
+                    text = '{com} (<i>{elab}</i>)'.format(com=com, elab=elab)
+                else:
+                    text = '{com}<br/><i>{elab}</i>'.format(com=com, elab=elab)
+            else:
+                text = '<i>{elab}</i>'.format(elab=elab)
+            return '<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank" class="external">{text}</a>'.format(elab=elab, text=text)
+
+        s = re.sub(r'{([^\}]*):([^\}]+)}', repl_calflora, s)
+
+        # Any remaining {reference} should refer to another page.
+        # Replace it with a link to one of my pages (if I can).
+        def repl_link(matchobj):
+            link = matchobj.group(1)
+            if link[0] == '-':
+                link = link[1:]
+                lines = 1
+            else:
+                lines = 2
+            if link in name_page:
+                return name_page[link].create_link(lines)
+            else:
+                print 'Broken link {{{link}}} on page {page}'.format(link=link, page=this.name)
+                return '{' + link + '}'
+
+        s = re.sub(r'{([^}]+)}', repl_link, s)
+
+        with open(root + "/html/" + self.name + ".html", "w") as w:
+            com = self.com
+            elab = self.elab
+
+            if com:
+                title = com
+                h1 = com
+            else:
+                # If the page has no common name (only a scientific name),
+                # then the h1 header should be italicized and elaborated.
+                title = elab
+                h1 = self.format_elab()
+
+            # True if an extra line is needed for the scientific name.
+            has_sci = (com and elab)
+            write_header(w, title, h1, has_sci)
+            if has_sci:
+                w.write('<b>{elab}</b><p/>\n'.format(elab=self.format_elab()))
+
+            self.write_parents(w)
+
+            w.write(s)
+            self.write_obs(w)
+            if self.sci:
+                self.write_external_links(w)
+            w.write('<hr/>\n')
+            self.write_lists(w)
+            write_footer(w)
+
+        if not self.child and not self.color:
+            print 'No color for {name}'.format(name=self.name)
+
+        # record all pages that are within each genus
+        sci = self.sci
+        if sci and sci[0].isupper():
+            pos = sci.find(' ')
+            if pos > -1:
+                genus = sci[:pos]
+                if genus not in genus_page_list:
+                    genus_page_list[genus] = []
+                genus_page_list[genus].append(self)
+
+###############################################################################
+# end of Page class
+###############################################################################
+
 
 root = 'c:/Users/Chris/Documents/GitHub/bay-area-flowers'
 
@@ -58,27 +634,10 @@ while not done:
 
 os.mkdir(root + '/html')
 
-# key: page name
-page_parent = {} # a set of names of the page's parent pages
-page_child = {} # a list of names of the page's child pages
-page_txt = {} # txt (string) (potentially with some parsing done to it)
-
-# A set of color names that the page is linked from.
-# (Initially this is just the flower colors,
-# but container pages get added later.)
-page_color = {}
-
-page_com = {} # common name
-page_sci = {} # scientific name
-page_elab = {} # elaborated scientific name
-page_obs = {} # number of observations
-page_obs_rg = {} # number of observations that are research grade
-page_taxon_id = {} # iNaturalist taxon ID
-page_parks = {} # for each page, stores a dictionary of park_name : count
-
-com_page = {} # common name -> page name
-sci_page = {} # scientific name -> page name
-genus_page_list = {} # genus -> list of page names
+name_page = {} # page (base file) name -> page
+com_page = {} # common name -> page
+sci_page = {} # scientific name -> page
+genus_page_list = {} # genus name -> list of pages in that genus
 
 # Define a list of supported colors.
 color_list = ['blue',
@@ -98,15 +657,6 @@ color_list = ['blue',
 # key: color
 # value: page list
 color_page_list = {}
-
-# Read miscellaneous flower info from the YAML file.
-with open(root + '/color.yaml') as f:
-    yaml_data = yaml.safe_load(f)
-for page in yaml_data:
-    page_color[page] = set([x.strip() for x in yaml_data[page].split(',')])
-    for color in page_color[page]:
-        if color not in color_list:
-            print 'page {page} uses undefined color {color}'.format(page=page, color=color)
 
 # Read the mapping of iNaturalist observation locations to short park names.
 park_map = {}
@@ -136,85 +686,23 @@ page_list = get_file_list('txt', 'txt')
 jpg_list = get_file_list('photos', 'jpg')
 thumb_list = get_file_list('thumbs', 'jpg')
 
-def set_sci(page, sci):
-    sci_words = sci.split(' ')
-    if len(sci_words) == 1:
-        # One word in the scientific name implies a genus.
-        elab = ' '.join((sci, 'spp.'))
-    elif len(sci_words) == 3:
-        # Three words in the scientific name implies a subset of a species.
-        # We probably got this name from an iNaturalist observation, and it
-        # doesn't have an explicit override, so we can only assume "ssp."
-        elab = ' '.join((sci_words[0], sci_words[1], 'ssp.', sci_words[2]))
-    elif len(sci_words) == 4:
-        # Four words in the scientific name implies a subset of a species
-        # with an elaborated subtype specifier.  The specifier is stripped
-        # from the 'sci' name.
-        elab = sci
-        sci = ' '.join((sci_words[0], sci_words[1], sci_words[3]))
-    elif sci_words[1] == 'spp.':
-        # It is a genus name in elaborated format.  The 'spp.' suffix is
-        # stripped from the 'sci' name.
-        elab = sci
-        sci = sci_words[0]
-    else:
-        # The name is in the regular "genus species" format, which is the
-        # same for both sci and elab
-        elab = sci
+def get_name_from_jpg(jpg):
+    name = re.sub(r',([-0-9]*)$', r'', jpg)
 
-    page_sci[page] = sci
-    page_elab[page] = elab
-    sci_page[sci] = page
-
-def get_page_from_jpg(jpg):
-    page = re.sub(r',([-0-9]*)$', r'', jpg)
-
-    if page[0].isupper():
+    if name[0].isupper():
         # If the jpg uses an elaborated name, remove the elaborations to
         # form the final page name.
-        sci_words = page.split(' ')
+        sci_words = name.split(' ')
         if len(sci_words) == 4:
             # Four words in the scientific name implies a subset of a species
             # with an elaborated subtype specifier.  The specifier is stripped.
-            page = ' '.join((sci_words[0], sci_words[1], sci_words[3]))
+            name = ' '.join((sci_words[0], sci_words[1], sci_words[3]))
         elif len(sci_words) == 2 and sci_words[1] == 'spp.':
             # It is a genus name in elaborated format.  The 'spp.' suffix is
             # stripped.
-            page = sci_words[0]
+            name = sci_words[0]
 
-    return page
-
-def get_com(page):
-    if page in page_com:
-        return page_com[page]
-    else:
-        return page
-
-def get_full(page, lines=2):
-    com = get_com(page)
-    if page in page_sci:
-        sci = page_sci[page]
-        if sci[0].isupper():
-            elab = '<i>{elab}</i>'.format(elab=page_elab[page])
-        else:
-            space_pos = sci.find(' ')
-            elab = '{group} <i>{name}</i>'.format(group=sci[:space_pos],
-                                                  name=sci[space_pos+1:])
-        if com == sci:
-            return '{elab}'.format(elab=elab)
-        elif lines == 2:
-            return '{com}<br/>{elab}'.format(com=com, elab=elab)
-        else: # lines == 1
-            return '{com} ({elab})'.format(com=com, elab=elab)
-    else:
-        return com
-
-flower_jpg_list = {}
-for jpg in sorted(jpg_list):
-    flower = get_page_from_jpg(jpg)
-    if flower not in flower_jpg_list:
-        flower_jpg_list[flower] = []
-    flower_jpg_list[flower].append(jpg)
+    return name
 
 # Compare the photos directory with the thumbs directory.
 # If a file exists in photos and not thumbs, create it.
@@ -248,221 +736,6 @@ if mod_list:
            '/jpgq=80',
            '/convert={root}\\thumbs\\*.jpg'.format(root=root_mod)]
     subprocess.Popen(cmd).wait()
-
-# Check if check_page is an ancestor of cur_page (for loop checking).
-def is_ancestor(cur_page, check_page):
-    if cur_page == check_page:
-        return True
-
-    if cur_page in page_parent:
-        for parent in page_parent[cur_page]:
-            if is_ancestor(parent, check_page):
-                return True
-
-    return False
-
-def assign_child(parent, child):
-    if is_ancestor(parent, child):
-        print "circular loop when creating link from {parent} to {child}".format(parent=parent, child=child)
-    else:
-        if child not in page_parent:
-            page_parent[child] = set()
-        page_parent[child].add(parent)
-
-        if parent not in page_child:
-            page_child[parent] = []
-        page_child[parent].append(child)
-
-# Read txt files, but perform limited substitutions for now.
-# More will be done once we have a complete set of parent->child relationships.
-def read_txt(page):
-    with open(root + "/txt/" + page + ".txt", "r") as r:
-        s = r.read()
-
-    # Replace a {child:[page]} link with just {[page]} and record the
-    # parent->child relationship.
-    # Define the re.sub replacement function inside the calling function
-    # so that it has access to the calling context.
-    def repl_child(matchobj):
-        x = matchobj.group(1)
-        child = matchobj.group(2)
-        suffix = matchobj.group(3)
-        sci = matchobj.group(4)
-        if not suffix:
-            suffix = ''
-        assign_child(page, child)
-        if sci:
-            sci = sci[1:] # discard colon
-            set_sci(child, sci)
-        if x == '+':
-            return '{' + child + ':' + child + suffix + '.jpg} {' + child + '}'
-        else:
-            return '{' + child + '}'
-
-    def repl_sci(matchobj):
-        sci = matchobj.group(1)
-        set_sci(page, sci)
-        return ''
-
-    def repl_com(matchobj):
-        com = matchobj.group(1)
-        page_com[page] = com
-        com_page[com] = page
-        return ''
-
-    s = re.sub(r'{(child:|\+)([^\}:,]+)(,[-0-9]*)?(:[^\}]+)?}', repl_child, s)
-    s = re.sub(r'{sci:(.*)}\n', repl_sci, s)
-    s = re.sub(r'{com:(.*)}\n', repl_com, s)
-    page_txt[page] = s
-
-def create_link(page, lines):
-    if page in page_child:
-        style = ' class="parent"'
-    else:
-        style = ' class="leaf"'
-    return '<a href="{page}.html"{style}>{full}</a>'.format(page=page, style=style, full=get_full(page, lines))
-
-
-# For containers, sum the observation counts of all children,
-# *but* if a flower is found via multiple paths, count it only once.
-# Two values are returned: (n, rg)
-#   n is the observation count
-#   rg is the research-grade observation count (0 <= rg <= n)
-def count_matching_obs(page, color, match_flowers):
-    if page in match_flowers: return (0, 0)
-
-    n = 0
-    rg = 0
-
-    # If a container page contains exactly one descendant with a matching
-    # color, the container isn't listed on the color page, and the color
-    # isn't listed in page_color for the page.  Therefore, we follow all
-    # child links blindly and only compare the color when we reach a flower
-    # with an observation count.
-    if page in page_obs and page_matches_color(page, color):
-        n += page_obs[page]
-        rg += page_obs_rg[page]
-        match_flowers.add(page)
-
-    if page in page_child:
-        for child in page_child[page]:
-            (ch_n, ch_rg) = count_matching_obs(child, color, match_flowers)
-            n += ch_n
-            rg += ch_rg
-
-    return (n, rg)
-
-# Write the iNaturalist observation count (including all children).
-def write_obs(w, page):
-    (n, rg) = count_matching_obs(page, None, set())
-
-    if n == 0 and page not in page_sci:
-        return
-
-    if page in page_taxon_id:
-        link = 'https://www.inaturalist.org/observations/chris_nelson?taxon_id={taxon_id}&order_by=observed_on'.format(taxon_id=page_taxon_id[page])
-    elif page in page_sci and page_sci[page][0].isupper():
-        link = 'https://www.inaturalist.org/observations/chris_nelson?search_on=names&q={sci}&order_by=observed_on'.format(sci=page_sci[page])
-    else:
-        link = None
-
-    w.write('<p/>\n')
-
-    if link:
-        w.write('<a href="{link}" target="_blank">Chris&rsquo;s observations</a>: '.format(link=link))
-    else:
-        w.write('Chris&rsquo;s observations: ')
-
-    if page in page_sci and page_sci[page].count(' ') == 1:
-        rg_txt = 'research grade'
-    else:
-        rg_txt = 'research grade to species level'
-
-    if n == 0:
-        w.write('none')
-    elif rg == 0:
-        w.write('{n} (none are {rg_txt})'.format(n=n, rg_txt=rg_txt))
-    elif rg == n:
-        if n == 1:
-            w.write('1 ({rg_txt})'.format(rg_txt=rg_txt))
-        else:
-            w.write('{n} (all are {rg_txt})'.format(n=n, rg_txt=rg_txt))
-    else:
-        if rg == 1:
-            w.write('{n} ({rg} is {rg_txt})'.format(n=n, rg=rg, rg_txt=rg_txt))
-        else:
-            w.write('{n} ({rg} are {rg_txt})'.format(n=n, rg=rg, rg_txt=rg_txt))
-
-
-    if page not in page_child and page in page_parks:
-        w.write('''
-<span class="toggle-details" onclick="fn_details(this)">[show details]</span><p/>
-<div id="details">
-Locations:
-<ul>
-''')
-        for park in sorted(page_parks[page], key = lambda x: page_parks[page][x], reverse=True):
-            html_park = park.encode('ascii', 'xmlcharrefreplace')
-            count = page_parks[page][park]
-            if count == 1:
-                w.write('<li>{park}</li>\n'.format(park=html_park))
-            else:
-                w.write('<li>{park}: {count}</li>\n'.format(park=html_park, count=count))
-        w.write('</ul></div>\n')
-    else:
-        w.write('<p/>\n')
-
-def write_external_links(w, page):
-    sci = page_sci[page]
-    if not sci[0].isupper():
-        # A higher-level classification should be sent with the group type
-        # removed.
-        space_pos = sci.find(' ')
-        stripped = sci[space_pos+1:]
-        elab = stripped
-    else:
-        stripped = sci
-        if ' ' not in sci:
-            # A one-word genus should be sent as is, not as '[genus] spp.'
-            elab = sci
-        else:
-            # A species or subspecies should be elaborated as necessary.
-            elab = page_elab[page]
-
-    w.write('<p/>')
-
-    if page in page_taxon_id:
-        w.write('<a href="https://www.inaturalist.org/taxa/{taxon_id}" target="_blank">iNaturalist</a> &ndash;\n'.format(taxon_id=page_taxon_id[page]))
-    else:
-        w.write('<a href="https://www.inaturalist.org/search?q={stripped}&source=taxa" target="_blank">iNaturalist</a> &ndash;\n'.format(stripped=stripped))
-
-    w.write('<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank">CalFlora</a> &ndash;\n'.format(elab=elab));
-
-    if sci[0].isupper() and ' ' in sci:
-        # CalPhotos cannot be searched by genus or higher classification.
-        w.write('<a href="https://calphotos.berkeley.edu/cgi/img_query?where-taxon={elab}" target="_blank">CalPhotos</a> &ndash;\n'.format(elab=elab));
-
-    # Jepson uses "subsp." instead of "ssp.", but it also allows us to
-    # search with that qualifier left out entirely.
-    w.write('<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson eFlora</a><p/>\n'.format(sci=stripped));
-
-def write_parents(w, page):
-    if page in page_parent:
-        for parent in sorted(page_parent[page]):
-            w.write('Key to {link}</br>'.format(link=create_link(parent, 1)))
-        w.write('<p/>')
-
-def write_lists(w, page):
-    w.write('Flower lists that include this page:<p/>\n')
-    w.write('<ul/>\n')
-
-    if page in page_color:
-        for color in color_list:
-            if color in page_color[page]:
-                w.write('<li><a href="{color}.html">{color} flowers</a></li>\n'.format(color=color))
-
-    w.write('<li><a href="all.html">all flowers</a></li>\n')
-    w.write('</ul>\n')
 
 def write_header(w, title, h1, nospace=False):
     if nospace:
@@ -520,8 +793,6 @@ def write_footer(w):
 ''')
 
 ###############################################################################
-# The giant 'parse' function, which turns txt into html
-# and writes the resulting file.
 
 repl_easy_dict = {
     # Replace HTTP links in the text with ones that open a new tab.
@@ -550,228 +821,44 @@ repl_easy_dict = {
 
 repl_easy_regex = re.compile('({ex})'.format(ex='|'.join(map(re.escape, repl_easy_dict.keys()))))
 
-def parse(page, s):
-    def repl_easy(matchobj):
-        return repl_easy_dict[matchobj.group(1)]
 
-    # replace the easy (fixed-value) stuff.
-    s = repl_easy_regex.sub(repl_easy, s)
+# Read the txt for all explicit page files.
+for name in page_list:
+    page = Page(name)
+    with open(root + "/txt/" + name + ".txt", "r") as r:
+        page.txt = r.read()
 
-    def repl_list(matchobj):
-        c = matchobj.group(1)
-        c = re.sub(r'\n', r'</li>\n<li>', c)
+# Create implicit txt for all unassociated jpgs.
+# Record jpg names for the jpgs' associated pages
+# (whether those pages are old or new).
+for jpg in sorted(jpg_list):
+    name = get_name_from_jpg(jpg)
+    if name in name_page:
+        page = name_page[name]
+    else:
+        page = Page(name)
+        page.txt = '{default}'
+    page.add_jpg(jpg)
 
-        # If there's a sublist, it's <ul> and </ul> must be on their own lines,
-        # in which case we remove the accidental surrounding <li>...</li>.
-        c = re.sub(r'<li>(<(/?)ul>)</li>', r'\1', c)
+# Read color info from the YAML file.
+with open(root + '/color.yaml') as f:
+    yaml_data = yaml.safe_load(f)
+for name in yaml_data:
+    if name in name_page:
+        page = name_page[name]
+        page.color = set([x.strip() for x in yaml_data[name].split(',')])
+        for color in page.color:
+            if color not in color_list:
+                print 'page {name} uses undefined color {color}'.format(name=name, color=color)
+    else:
+        print 'colors specified for non-existant page {name}'.format(name=name)
 
-        return '\n<ul>\n<li>{c}</li>\n</ul>\n'.format(c=c)
-
-    s = re.sub(r'\n{-\n(.*?)\n-}\n', repl_list, s, flags=re.DOTALL)
-
-    # Replace {jpgs} with all jpgs that exist for the flower.
-    def repl_jpgs(matchobj):
-        if page in flower_jpg_list:
-            jpgs = ['{{{jpg}.jpg}}'.format(jpg=jpg) for jpg in flower_jpg_list[page]]
-            return ' '.join(jpgs)
-        else:
-            return '{no photos.jpg}'
-
-    s = re.sub(r'{jpgs}', repl_jpgs, s)
-
-    # Look for any number of {photos} followed by all text up to the
-    # first \n\n or \n+EOF.  Photos can be my own or CalPhotos.
-    # The photos and text are grouped together and vertically centered.
-    # The text is also put in a <span> for correct whitespacing.
-    def repl_photo_box(matchobj):
-        imgs = matchobj.group(1)
-        text = matchobj.group(2)
-
-        # If the text after the images appears to be a species link followed
-        # by more text, then duplicate and contain the species link so that
-        # the following text can either be in the same column or on a different
-        # row, depending on the width of the viewport.
-        matchobj2 = re.match(r'({.*}\s*)\n(.*)', text, flags=re.DOTALL)
-        if matchobj2:
-            species = matchobj2.group(1)
-            text = matchobj2.group(2)
-            # [div-flex-horiz-or-vert
-            #  [div-horiz photos, (narrow-only) species]
-            #  [span-vert (wide-only) species, text]
-            # ]
-            return '<div class="flex-width"><div class="photo-box">{imgs}<span class="show-narrow">{species}</span></div><span><span class="show-wide">{species}</span>{text}</span></div>'.format(imgs=imgs, species=species, text=text)
-        else:
-            return '<div class="photo-box">{imgs}<span>{text}</span></div>'.format(imgs=imgs, text=text)
-
-    s = re.sub(r'((?:\{(?:jpgs|[^\}]+.jpg|https://calphotos.berkeley.edu/[^\}]+)\} *(?:\n(?!\n))?)+)(.*?)(?=\n(\n|\Z))', repl_photo_box, s, flags=re.DOTALL)
-
-    # Replace a pair of newlines with a paragraph separator.
-    # (Do this after making specific replacements based on paragraphs,
-    # but before replacements that might create empty lines.)
-    s = s.replace('\n\n', '\n<p/>\n')
-
-    # Replace {*.jpg} with a thumbnail image and a link to the full-sized image.
-    def repl_jpg(matchobj):
-        jpg = matchobj.group(1)
-
-        # Decompose a jpg reference of the form {[page]:[img].jpg}
-        pos = jpg.find(':')
-        if pos > 0:
-            link = jpg[:pos]
-            jpg = jpg[pos+1:]
-            link_to_jpg = False
-        else:
-            link_to_jpg = True
-
-        jpg_page = page
-        while jpg not in jpg_list:
-            # If the "jpg" name is actually a flower name,
-            # use the first jpg of that flower.
-            if jpg in flower_jpg_list:
-                jpg = flower_jpg_list[jpg][0]
-                break
-
-            # If the "jpg" name is actually a parent page name,
-            # drill into its first child and try again.
-            if jpg in page_child:
-                jpg = page_child[jpg][0]
-                continue
-            else:
-                break
-
-        thumb = '../thumbs/{jpg}.jpg'.format(jpg=jpg)
-
-        if link_to_jpg:
-            href = '../photos/{jpg}.jpg'.format(jpg=jpg)
-        else:
-            href = '{link}.html'.format(link=link)
-
-        if jpg in jpg_list:
-            if page in page_child:
-                img_class = 'page-thumb'
-            else:
-                img_class = 'leaf-thumb'
-            img = '<a href="{href}"><img src="{thumb}" width="200" height="200" class="{img_class}"></a>'.format(href=href, thumb=thumb, img_class=img_class)
-        else:
-            img = '<a href="{href}" class="missing"><div class="page-thumb-text"><span>{jpg}</span></div></a>'.format(jpg=jpg, href=href)
-            print '{jpg}.jpg missing'.format(jpg=jpg)
-
-        return img
-
-    s = re.sub(r'{([^}]+).jpg}', repl_jpg, s)
-
-    # Replace a {CalPhotos:text} reference with a 200px box with
-    # "CalPhotos: text" in it.
-    # The entire box is a link to CalPhotos.
-    # The ":text" part is optional.
-    def repl_calphotos(matchobj):
-        href = matchobj.group(1)
-        pos = href.find(':') # find the colon in "http:"
-        pos = href.find(':', pos+1) # find the next colon, if any
-        if pos > 0:
-            text = '<br/>' + href[pos+1:]
-            href = href[:pos]
-        else:
-            text = ''
-
-        img = '<a href="{href}" target="_blank" class="enclosed"><div class="page-thumb-text"><span><span style="text-decoration:underline;">CalPhotos</span>{text}</span></div></a>'.format(href=href, text=text)
-
-        return img
-
-    s = re.sub(r'\{(https://calphotos.berkeley.edu/[^\}]+)\}', repl_calphotos, s)
-
-    # Replace a {[common]:[scientific]} reference with a link to CalFlora.
-    def repl_calflora(matchobj):
-        com = matchobj.group(1)
-        elab = matchobj.group(2)
-        if com and com[0] == '-':
-            com = com[1:]
-            lines = 1
-        else:
-            lines = 2
-        if com:
-            if lines == 1:
-                text = '{com} (<i>{elab}</i>)'.format(com=com, elab=elab)
-            else:
-                text = '{com}<br/><i>{elab}</i>'.format(com=com, elab=elab)
-        else:
-            text = '<i>{elab}</i>'.format(elab=elab)
-        return '<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank" class="external">{text}</a>'.format(elab=elab, text=text)
-
-    s = re.sub(r'{([^\}]*):([^\}]+)}', repl_calflora, s)
-
-    # Any remaining {reference} should refer to another page.
-    # Replace it with a link to one of my pages if I can,
-    # or otherwise to CalFlora if it is a scientific species name,
-    # or otherwise leave it unchanged.
-    def repl_link(matchobj):
-        link = matchobj.group(1)
-        if link[0] == '-':
-            link = link[1:]
-            lines = 1
-        else:
-            lines = 2
-        if link in page_list:
-            return create_link(link, lines)
-        else:
-            print 'Broken link {link} on page {page}'.format(link=link, page=page)
-            return '{' + link + '}'
-
-    s = re.sub(r'{([^}]+)}', repl_link, s)
-
-    with open(root + "/html/" + page + ".html", "w") as w:
-        com = get_com(page)
-
-        # If the page's common name is the same as its scientific name,
-        # then the h1 header should be italicized and elaborated.
-        if page in page_sci and page_sci[page] == com:
-            h1 = '<i>{elab}</i>'.format(elab=page_elab[page])
-        else:
-            h1 = com
-
-        has_sci = (h1 == com and page in page_sci)
-        write_header(w, com, h1, has_sci)
-        if has_sci:
-            # We printed the common name (not the italicized scientific name)
-            # in the h1 header, and we have a scientific name.
-            w.write('<b><i>{elab}</i></b><p/>\n'.format(elab=page_elab[page]))
-
-        write_parents(w, page)
-
-        w.write(s)
-        write_obs(w, page)
-        if page in page_sci:
-            write_external_links(w, page)
-        w.write('<hr/>\n')
-        write_lists(w, page)
-        write_footer(w)
-
-    if page not in page_child and page not in page_color:
-        print 'No color for {page}'.format(page=page)
-
-    # record all pages that are within each genus
-    if page in page_sci:
-        sci = page_sci[page]
-        if sci[0].isupper():
-            pos = sci.find(' ')
-            if pos > -1:
-                genus = sci[:pos]
-                if genus not in genus_page_list:
-                    genus_page_list[genus] = []
-                genus_page_list[genus].append(page)
-
-###############################################################################
-
-# Read the txt files and record names and parent->child relationships.
-for page in page_list:
-    read_txt(page)
-
-# Create txt for all unassociated jpgs.
-for name in sorted(jpg_list):
-    page = get_page_from_jpg(name)
-    if page not in page_list:
-        page_list.append(page)
-        page_txt[page] = '{default}'
+# Perform a first pass on all pages to
+# - initialize common and scientific names as specified,
+# - detect parent->child relationships among pages.
+for page in name_page.itervalues():
+    page.parse_names()
+    page.parse_children()
 
 def unicode_csv_reader(unicode_csv_data, dialect=csv.excel, **kwargs):
     # csv.py doesn't do Unicode; encode temporarily as UTF-8:
@@ -829,52 +916,29 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
 
         if sci in sci_page:
             page = sci_page[sci]
+        elif com in com_page:
+            page = com_page[com]
+            if not page.sci: # don't override previous info
+                page.set_sci(sci)
         else:
-            # We record observations even if we don't have a page for them
-            # so that we can identify missing pages at the end.
-            # If there is a page for the scientific name, use it.
-            # Otherwise, prefer the common name if we have it.
-            if sci in page_txt or not com:
-                page = sci
-            elif com in com_page:
-                page = com_page[com]
-            else:
-                page = com
+            page = None
 
-            if page not in page_sci: # don't override {sci:[name]}
-                set_sci(page, sci)
-
-        if page not in page_obs:
-            page_obs[page] = 0
-            page_obs_rg[page] = 0
-            page_parks[page] = {}
-        page_obs[page] += 1
-        if rg == 'research':
-            page_obs_rg[page] += 1
-        page_taxon_id[page] = taxon_id
-        if short_park not in page_parks[page]:
-            page_parks[page][short_park] = 1
-        else:
-            page_parks[page][short_park] += 1
+        if page:
+            page.taxon_id = taxon_id
+            page.obs += 1
+            if rg == 'research':
+                page.obs_rg += 1
+            if short_park not in page.parks:
+                page.parks[short_park] = 0
+            page.parks[short_park] += 1
 
 if park_nf_list:
     print "Parks not found:"
     for x in park_nf_list:
         print "  " + repr(x)
 
-for page in page_list:
-    if page not in page_sci and page[0].isupper():
-        # The page name looks like a scientific name, which the page doesn't
-        # have yet, so make it happen.
-        set_sci(page, page)
-
 # Get a list of pages without parents (top-level pages).
-top_list = [x for x in page_list if x not in page_parent]
-
-def page_matches_color(page, color):
-    return (color == None or
-            (page in page_color and color in page_color[page]) or
-            (page not in page_color and color == 'other'))
+top_list = [x for x in name_page.itervalues() if not x.parent]
 
 # Find all flowers that match the specified color.
 # Also find all pages that include *multiple* child pages that match.
@@ -887,101 +951,77 @@ def page_matches_color(page, color):
 def find_matches(page_subset, color):
     match_set = []
     for page in page_subset:
-        if page in page_list:
-            if page in page_child:
-                child_subset = find_matches(page_child[page], color)
-                if len(child_subset) == 1:
-                    match_set.extend(child_subset)
-                elif len(child_subset) > 1:
-                    match_set.append(page)
-                    # Record this container page's color.
-                    if page not in page_color:
-                        page_color[page] = set()
-                    page_color[page].add(color)
-            elif page_matches_color(page, color):
+        if page.child:
+            child_subset = find_matches(page.child, color)
+            if len(child_subset) == 1:
+                match_set.extend(child_subset)
+            elif len(child_subset) > 1:
                 match_set.append(page)
+                # Record this container page's newly discovered color.
+                page.color.add(color)
+        elif page.page_matches_color(color):
+            match_set.append(page)
     return match_set
 
 # We don't need color_page_list yet, but we go through the creation process
 # now in order to populate page_color for all container pages.
 for color in color_list:
-    color_page_list[color] = sorted(find_matches(top_list, color))
+    color_page_list[color] = find_matches(top_list, color)
 
 # Turn txt into html for all normal and default pages.
-jpg_height = 200
-for page in page_list:
-    parse(page, page_txt[page])
-
-# Create a txt listing of all flowers without pages, then parse it into html.
-if False:
-    jpg_height = 50
-    unlisted_flowers = sorted([f for f in page_obs if f not in page_list])
-    s = '<br/>\n'.join(unlisted_flowers) + '<p/>\n'
-    parse("other observations", s)
+for page in name_page.itervalues():
+    page.parse()
 
 ###############################################################################
 # The remaining code is for creating useful lists of pages:
 # all pages, and pages sorted by flower color.
 
-# List a single page, indented if it is under a parent.
-# (But don't indent it if it is itself a parent, in which case it has is
-# already put itself in an indented box.)
-def list_page(w, page, indent):
-    if indent:
-        indent_class = ' indent'
+# helper function for sorting by name
+def by_name(page):
+    if page.com:
+        return page.com.lower()
     else:
-        indent_class = ''
+        return page.sci.lower()
 
-    if page in page_child:
-        # A parent puts itself in a box.
-        # The box may be indented, in which case, the remainder of the listing
-        # is not indented.
-        w.write('<div class="box{indent_class}">\n'.format(indent_class=indent_class))
-        indent_class = ''
-
-    w.write('<div class="photo-box{indent_class}">'.format(indent_class=indent_class))
-
-    if page in flower_jpg_list:
-        w.write('<a href="{page}.html"><img src="../thumbs/{jpg}.jpg" width="200" height="200" class="list-thumb"></a>'.format(page=page, jpg=flower_jpg_list[page][0]))
-
-    w.write('{link}</div>\n'.format(link=create_link(page, 2)))
-
+# match_set can be either a set or list of pages.
+# If indent is False, we'll sort them into a list by reverse order of
+# observation counts.  If indent is True, match_set must be a list, and
+# its order is retained.
 def list_matches(w, match_set, indent, color):
     # Sort by observation count.
     def count_flowers(page):
-        return count_matching_obs(page, color, set())[0]
+        return page.count_matching_obs(color, set())[0]
 
     flower_count = 0
     key_count = 0
 
     if indent:
         # We're under a parent with an ordered child list.  Retain its order.
-        pass
+        match_list = match_set
     else:
         # Sort in reverse order of observation count.
         # We initialize the sort with match_set sorted alphabetically.
         # This order is retained for subsets with equal observation counts.
-        # This order tie-breaker isn't particularly useful to the user, but
-        # it helps prevent pages.js from getting random changes just because
-        # the dictionary hashes differently.
-        match_set.sort()
-        match_set.sort(key=count_flowers, reverse=True)
+        match_list = sorted(match_set, key=by_name)
+        match_list.sort(key=count_flowers, reverse=True)
 
-    for page in match_set:
-        if page in page_child:
-            list_page(w, page, indent)
-            (k, f) = list_matches(w, find_matches(page_child[page], color),
+    for page in match_list:
+        if page.child:
+            page.list_page(w, indent)
+            (k, f) = list_matches(w, find_matches(page.child, color),
                                   True, color)
             key_count += 1 + k
             flower_count += f
             w.write('</div>\n')
         else:
             flower_count += 1
-            list_page(w, page, indent)
+            page.list_page(w, indent)
 
     return (key_count, flower_count)
 
 def write_page_list(page_list, color, color_match):
+    # We write out the matches to a string first so that we can get
+    # the total number of keys and flowers in the list (including children).
     s = cStringIO.StringIO()
     (k, f) = list_matches(s, page_list, False, color_match)
 
@@ -1001,17 +1041,17 @@ for genus in genus_page_list:
     if len(genus_page_list[genus]) > 1:
         did_intro = False
         for page in genus_page_list[genus]:
-            if page not in page_parent:
+            if not page.parent:
                 if not did_intro:
                     print 'No key page exists for the following pages in {genus} spp.:'.format(genus=genus)
                     did_intro = True
-                print '  ' + get_full(page, 1)
+                print '  ' + page.format_full(11)
 
 ###############################################################################
 # Create pages.js
 
 def count_flowers(page):
-    return count_matching_obs(page, None, set())[0]
+    return page.count_matching_obs(None, set())[0]
 
 search_file = root + "/pages.js"
 with open(search_file, "w") as w:
@@ -1019,16 +1059,19 @@ with open(search_file, "w") as w:
     # Sort in reverse order of observation count.
     # We initialize the sort by sorting alphabetically.
     # This order is retained for subsets with equal observation counts.
-    for page in sorted(sorted(page_list), key=count_flowers, reverse=True):
-        w.write('{{page:"{page}"'.format(page=page))
-        com = get_com(page)
-        if com != page:
-            w.write(',com:"{com}"'.format(com=com))
-        if page in page_sci:
-            elab = page_elab[page]
-            if elab != com:
-                w.write(',sci:"{elab}"'.format(elab=elab))
-        if page in page_child:
+    # This order tie-breaker isn't particularly useful to the user, but
+    # it helps prevent pages.js from getting random changes just because
+    # the dictionary hashes differently.
+    page_list = [x for x in name_page.itervalues()]
+    page_list.sort(key=by_name)
+    page_list.sort(key=count_flowers, reverse=True)
+    for page in page_list:
+        w.write('{{page:"{name}"'.format(name=page.name))
+        if page.com and page.com != page.name:
+            w.write(',com:"{com}"'.format(com=page.com))
+        if page.elab and page.elab != page:
+            w.write(',sci:"{elab}"'.format(elab=page.elab))
+        if page.child:
             w.write(',key:true')
         w.write('},\n')
     w.write('];\n')

@@ -18,7 +18,7 @@ subshrub or shrub, generally 20--70 cm
 Ecology: Many dry habitats
 -}
 
-{+seaside woolly sunflower:eriophyllum staechadifolium}
+{+seaside woolly sunflower:Eriophyllum staechadifolium}
 {-
 subshrub, much branched, 30--150 cm
 8--11 phyllaries, barely overlapping
