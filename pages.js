@@ -338,6 +338,7 @@ var pages=[
 {page:"sea muilla",sci:"Muilla maritima"},
 {page:"seaside daisy",sci:"Erigeron glaucus"},
 {page:"short-flower deervetch",sci:"Acmispon parviflorus"},
+{page:"silk tassel",sci:"Garrya spp.",key:true},
 {page:"silver wattle",sci:"Acacia dealbata"},
 {page:"slender iceplant",sci:"Mesembryanthemum nodiflorum"},
 {page:"sticky cinquefoil",sci:"Drymocallis glandulosa"},

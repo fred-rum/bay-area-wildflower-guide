@@ -563,7 +563,7 @@ Locations:
             if link in name_page:
                 return name_page[link].create_link(lines)
             else:
-                print 'Broken link {{{link}}} on page {page}'.format(link=link, page=this.name)
+                print 'Broken link {{{link}}} on page {page}'.format(link=link, page=self.name)
                 return '{' + link + '}'
 
         s = re.sub(r'{([^}]+)}', repl_link, s)
