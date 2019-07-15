@@ -20,17 +20,4 @@ its recepticle looks comparatively bloated, as it is wide at the top before slan
 found east of Mt. Diablo, but is unknown in the rest of the bay area
 -}
 
-No other poppies are known to grow wild in the bay area in modern times.
-<h2>Other poppies</h2>
-
-These "poppies" are not in the Eschscholzia genus.
-
-{+wind poppy}
-{-
-corolla and leaves look different from Eschscholzia
--}
-
-{+bush poppy}
-{-
-grows on a large bush, so it cannot be mistaken for Eschscholzia
--}
+No other species are known to grow wild in the bay area in modern times.
