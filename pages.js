@@ -132,6 +132,7 @@ var pages=[
 {page:"western columbine",sci:"Aquilegia formosa"},
 {page:"western heart's ease",sci:"Viola ocellata"},
 {page:"yellow starthistle",sci:"Centaurea solstitialis"},
+{page:"Baccharis",sci:"Baccharis spp.",key:true},
 {page:"baldhip rose",sci:"Rosa gymnocarpa"},
 {page:"Bellardia",sci:"Bellardia spp.",key:true},
 {page:"bird's-foot trefoil",sci:"Lotus corniculatus"},

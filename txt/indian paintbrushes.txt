@@ -5,6 +5,11 @@ leaf shape (linear, lanceolate, or oblong/rounded), wavy-margined or not
 corolla drooping out through calyx sinus or not
 -}
 
+{[
+<h2>Perennial herb to subshrub<br/>
+stems generally branched<br/>
+generally drier places</h2
+
 {+woolly indian paintbrush}
 {-
 <b>hairs woolly, felt-like, much-branched, +- white to +- gray</b>
@@ -50,4 +55,15 @@ peninsula from Thornewood north and east bay from Chabot north
 herbage not both with branched hairs and gray-green to white-woolly
 corolla not curved out through abaxial side of calyx sinus
 <b>plant glandular-puberulent to -sticky-hairy close to inflorescence</b>
+-}
+
+]}
+
+{small-flower indian-paintbrush:Castilleja minor}
+{-
+annual
+stem +- simple
+wet places
+leaves and bracts entire, lance-linear
+Sierra Azul, Mt. Tam
 -}

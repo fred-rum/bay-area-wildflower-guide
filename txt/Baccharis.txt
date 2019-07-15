@@ -1,0 +1,25 @@
+{+coyote brush:Baccharis pilularis}
+{-
+leaf blade 5--40 mm long, 2--15 mm wide, <b>obovate or oblanceolate</b>, gland-dotted [but unknown stickiness]
+very common
+-}
+
+{marsh baccharis:Baccharis glutinosa}
+{-
+leaf blades linear, lanceolate, elliptic, oblong to narrowly oblanceolate
+leaf blade < 130 mm long, 8--30 mm wide, lanceolate, lance-elliptic or oblong to narrowly oblanceolate, faces generally sticky
+perennial herb, forming large colonies
+heads in dense, compact, terminal rounded to +- flat-topped clusters
+common
+-}
+
+{mule fat:Baccharis salicifolia ssp. salicifolia}
+{-
+leaf blades linear, lanceolate, elliptic, oblong to narrowly oblanceolate
+leaf blade < 150 mm, 3--20 mm wide, lanceolate, lance-elliptic or oblong to narrowly oblanceolate, faces generally sticky
+shrub, not forming colonies
+heads in terminal flat-topped or pyramidal panicle-like clusters in summer--fall-flowering plants, in smaller lateral clusters in spring-flowering plants
+scattered
+-}
+
+There are no other species of this genus in the bay area.

@@ -44,6 +44,7 @@ Henry Coe, Sierra Azul and vicinity
 {+winecup clarkia}
 {-
 <b>sepals all coming free or staying fused in pairs</b>
+ovary 8-grooved
 found everywhere
 -}
 
