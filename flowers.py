@@ -402,6 +402,11 @@ Locations:
             ancestor_set.update(parent.get_ancestor_set())
         return ancestor_set
 
+    def cross_out_children(self, page_list):
+        if self in page_list:
+            page_list.remove(self)
+        for child in self.child:
+            child.cross_out_children(page_list)
 
     # The giant 'parse' function, which turns txt into html
     # and writes the resulting file.
@@ -1057,14 +1062,21 @@ write_page_list(top_list, 'all', None)
 for genus in genus_page_list:
     page_list = genus_page_list[genus]
     if len(page_list) > 1:
-        ancestor_set = page_list[0].get_ancestor_set()
-        for page in page_list[1:]:
-            set2 = page.get_ancestor_set()
-            ancestor_set.intersection_update(set2)
-        if not ancestor_set:
-            print 'The following pages in {genus} spp. are not under a common ancestor:'.format(genus=genus)
-            for page in genus_page_list[genus]:
-                print '  ' + page.format_full(1)
+        if genus in sci_page:
+            sci_page[genus].cross_out_children(page_list)
+            if page_list:
+                print 'The following species are not included under the {genus} spp. key'.format(genus=genus)
+                for page in page_list:
+                    print '  ' + page.format_full(1)
+        else:
+            ancestor_set = page_list[0].get_ancestor_set()
+            for page in page_list[1:]:
+                set2 = page.get_ancestor_set()
+                ancestor_set.intersection_update(set2)
+            if not ancestor_set:
+                print 'The following pages in {genus} spp. are not under a common ancestor:'.format(genus=genus)
+                for page in page_list:
+                    print '  ' + page.format_full(1)
 
 did_intro = False
 for page in name_page.itervalues():
