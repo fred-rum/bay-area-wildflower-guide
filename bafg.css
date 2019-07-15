@@ -162,6 +162,12 @@ a.enclosed {
 }
 a.external {
 }
+a.family:link {
+    color: black;
+}
+a.family:visited {
+    color: black;
+}
 a.parent:link {
     color: SaddleBrown;
 }

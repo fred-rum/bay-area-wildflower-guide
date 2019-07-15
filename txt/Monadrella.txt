@@ -1,6 +1,0 @@
-{+coyote mint}
-
-{mountain coyote mint:Monardella odoratissima}
-{-
-found only in Big Basin
--}
