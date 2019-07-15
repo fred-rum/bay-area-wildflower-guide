@@ -1,4 +1,4 @@
-{sci:n/a}
+{sci:Trifolium}
 There are very many clover species in the bay area.  This page lists some key features, but I don't attempt to replicate the whole Jepson decision tree.  Instead, each flower description includes only enough information to (hopefully) confirm an ID hypothesis.
 
 Camera angles:

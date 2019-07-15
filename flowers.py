@@ -111,6 +111,9 @@ class Page:
             # same for both sci and elab
             elab = sci
 
+        if sci in sci_page:
+            print 'Same scientific name ({sci}) set for {name1} and {name2}'.format(sci=sci, name1=sci_page[sci].name, name2=self.name)
+
         self.sci = sci
         self.elab = elab
         sci_page[sci] = self
@@ -392,6 +395,12 @@ Locations:
             w.write('<a href="{name}.html"><img src="../thumbs/{jpg}.jpg" width="200" height="200" class="list-thumb"></a>'.format(name=self.name, jpg=self.jpg_list[0]))
 
         w.write('{link}</div>\n'.format(link=self.create_link(2)))
+
+    def get_ancestor_set(self):
+        ancestor_set = self.parent.copy()
+        for parent in self.parent:
+            ancestor_set.update(parent.get_ancestor_set())
+        return ancestor_set
 
 
     # The giant 'parse' function, which turns txt into html
@@ -1042,15 +1051,20 @@ for color in color_list:
 
 write_page_list(top_list, 'all', None)
 
+# Find any genus with multiple species.
+# Check whether all of those species share an ancestor key page in common.
+# If not, print a warning.
 for genus in genus_page_list:
-    if len(genus_page_list[genus]) > 1:
-        did_intro = False
-        for page in genus_page_list[genus]:
-            if not page.parent:
-                if not did_intro:
-                    print 'No key page exists for the following pages in {genus} spp.:'.format(genus=genus)
-                    did_intro = True
-                print '  ' + page.format_full(11)
+    page_list = genus_page_list[genus]
+    if len(page_list) > 1:
+        ancestor_set = page_list[0].get_ancestor_set()
+        for page in page_list[1:]:
+            set2 = page.get_ancestor_set()
+            ancestor_set.intersection_update(set2)
+        if not ancestor_set:
+            print 'The following pages in {genus} spp. are not under a common ancestor:'.format(genus=genus)
+            for page in genus_page_list[genus]:
+                print '  ' + page.format_full(1)
 
 did_intro = False
 for page in name_page.itervalues():
