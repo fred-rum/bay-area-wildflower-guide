@@ -1,3 +1,4 @@
+{sci:Trifolium}
 {+hop trefoil}
 {-
 puberulent, although it may be hard to see

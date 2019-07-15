@@ -1,3 +1,4 @@
+{sci:Dimorphotheca}
 {+trailing african daisy,2}
 {-
 stem sometimes >> 1 m, trailing to ascending, sparingly branched, rooting at ground contact

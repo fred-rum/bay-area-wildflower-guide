@@ -1,3 +1,4 @@
+{sci:Primula}
 {henderson's shooting star,.jpg} {+henderson's shooting star,-3}
 {-
 peduncle purple (or mix of purple/green)

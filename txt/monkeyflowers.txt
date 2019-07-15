@@ -1,5 +1,4 @@
-<b><i>Phrymaceae family</i></b>
-
+{sci:family Phrymaceae}
 Jepson lists quite a few more monkeyflowers in the bay area under their old genus name, Mimulus.  However, none of them can be easily confused with orange bush monkeyflower or seep monkeyflower.
 
 Key features:

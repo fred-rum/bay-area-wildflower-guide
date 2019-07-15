@@ -51,6 +51,8 @@ class Page:
         self.sci = None # a scientific name stripped of elaborations
         self.elab = None # an elaborated scientific name
 
+        self.no_sci = False # true if it's a key page for unrelated species
+
         # Give the page a default common or scientific name as appropriate.
         # Either or both names may be modified later.
         if name.islower():
@@ -153,7 +155,10 @@ class Page:
 
         def repl_sci(matchobj):
             sci = matchobj.group(1)
-            self.set_sci(sci)
+            if sci == 'n/a':
+                self.no_sci = True
+            else:
+                self.set_sci(sci)
             return ''
 
         self.txt = re.sub(r'{com:(.*)}\n', repl_com, self.txt)
@@ -1046,6 +1051,14 @@ for genus in genus_page_list:
                     print 'No key page exists for the following pages in {genus} spp.:'.format(genus=genus)
                     did_intro = True
                 print '  ' + page.format_full(11)
+
+did_intro = False
+for page in name_page.itervalues():
+    if not (page.sci or page.no_sci):
+        if not did_intro:
+            print 'No scientific name given for the following pages:'
+            did_intro = True
+        print '  ' + page.name
 
 ###############################################################################
 # Create pages.js
