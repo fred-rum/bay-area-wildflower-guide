@@ -300,7 +300,7 @@ class Page:
         if self.obs and self.page_matches_color(color):
             n += self.obs
             rg += self.obs_rg
-            match_flowers.add(page)
+            match_flowers.add(self)
 
         for child in self.child:
             (ch_n, ch_rg) = child.count_matching_obs(color, match_flowers)
@@ -1104,15 +1104,15 @@ for page in name_page.itervalues():
 for page in top_list:
     page.set_family()
 
-# helper function for sorting by name
-def by_name(page):
-    if page.com:
-        return page.com.lower()
-    else:
-        return page.sci.lower()
-
 def sort_pages(page_set, color):
-    # Sort by observation count.
+    # helper function to sort by name
+    def by_name(page):
+        if page.com:
+            return page.com.lower()
+        else:
+            return page.sci.lower()
+
+    # helper function to sort by observation count
     def count_flowers(page):
         return page.count_matching_obs(color, set())[0]
 
@@ -1163,11 +1163,7 @@ for page in name_page.itervalues():
 # If indent is False, we'll sort them into a list by reverse order of
 # observation counts.  If indent is True, match_set must be a list, and
 # its order is retained.
-def list_matches(w, match_set, indent, color):
-    # Sort by observation count.
-    def count_flowers(page):
-        return page.count_matching_obs(color, set())[0]
-
+def list_matches(w, match_set, indent, color, seen_set):
     flower_count = 0
     key_count = 0
 
@@ -1182,13 +1178,17 @@ def list_matches(w, match_set, indent, color):
         if page.child:
             page.list_page(w, indent)
             (k, f) = list_matches(w, find_matches(page.child, color),
-                                  True, color)
-            key_count += 1 + k
-            flower_count += f
+                                  True, color, seen_set)
             w.write('</div>\n')
+            if page not in seen_set:
+                key_count += 1 + k
+                flower_count += f
         else:
-            flower_count += 1
             page.list_page(w, indent)
+            if page not in seen_set:
+                flower_count += 1
+
+    seen_set.add(page)
 
     return (key_count, flower_count)
 
@@ -1196,7 +1196,7 @@ def write_page_list(page_list, color, color_match):
     # We write out the matches to a string first so that we can get
     # the total number of keys and flowers in the list (including children).
     s = cStringIO.StringIO()
-    (k, f) = list_matches(s, page_list, False, color_match)
+    (k, f) = list_matches(s, page_list, False, color_match, set())
 
     with open(root + "/html/{color}.html".format(color=color), "w") as w:
         title = color.capitalize() + ' flowers'
@@ -1213,9 +1213,6 @@ write_page_list(top_list, 'all', None)
 ###############################################################################
 # Create pages.js
 
-def count_flowers(page):
-    return page.count_matching_obs(None, set())[0]
-
 search_file = root + "/pages.js"
 with open(search_file, "w") as w:
     w.write('var pages=[\n')
@@ -1225,9 +1222,7 @@ with open(search_file, "w") as w:
     # This order tie-breaker isn't particularly useful to the user, but
     # it helps prevent pages.js from getting random changes just because
     # the dictionary hashes differently.
-    page_list = [x for x in name_page.itervalues()]
-    page_list.sort(key=by_name)
-    page_list.sort(key=count_flowers, reverse=True)
+    page_list = sort_pages([x for x in name_page.itervalues()], None)
     for page in page_list:
         w.write('{{page:"{name}"'.format(name=page.name))
         if page.com and page.com != page.name:

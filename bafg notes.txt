@@ -157,19 +157,3 @@ Count all observations within a taxon even if they aren't explicitly
 matched with a page.  E.g. this is useful for observations that have a
 subspecies if I haven't bothered to distinguish subspecies in the
 BAFG.
-
---
-Create pages automatically for families if they aren't created explicitly.
-
-If a page in the family has a parent, and all of that parent's children
-are in the family, then the parent is made a child of the family, and its
-children are not.
-
-But this has difficulties for any flower without an observation.  I
-might throw an error if a scientific name isn't specified for it
-somehow, but it still leaves the question of what family it's in.
-Perhaps I could infer that if it's in the same genus as another
-flower, then it's also in the same family.
-
-And what about links to Jepson; these are often in the same genus, but
-not always.  Just assume they're in the same family?

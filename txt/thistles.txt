@@ -7,5 +7,4 @@
 
 {+star thistles}
 
-See also {-sow thistles}, which aren't included here because they don't look like thistles.
-<hr/>
+{+sow thistles}
