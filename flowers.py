@@ -869,7 +869,7 @@ def write_header(w, title, h1, nospace=False):
 <body>
 <div id="search-bg"></div>
 <div id="search-container">
-<input type="text" id="search" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="search for a flower...">
+<input type="search" id="search" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="search for a flower..." autofocus>
 <div id="autocomplete-box"></div>
 </div>
 <div id="body">

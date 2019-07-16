@@ -9,7 +9,7 @@ leaf details
 {[
 <h3>Purple</h3>
 
-{+bull thistle}
+{+bull thistle:Cirsium vulgare}
 {-
 common
 -}
@@ -17,7 +17,7 @@ common
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1007+1563}
 {short-styled thistle:Cirsium brevistylum}
 {-
-common
+scattered
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1208+0592}
