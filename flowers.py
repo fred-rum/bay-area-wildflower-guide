@@ -250,6 +250,17 @@ class Page:
                 # also give a scientific name to it.
                 if sci:
                     sci = sci[1:] # discard colon
+
+                    # If the child's genus is abbreviated, expand it using
+                    # the genus of the current page.
+                    if (self.cur_genus and len(sci) >= 3 and
+                        sci[0:3] == self.cur_genus[0] + '. '):
+                        sci = self.cur_genus + sci[2:]
+                    elif ' ' in sci:
+                        # If the child's genus is explicitly specified,
+                        # make it the default for future abbreviations.
+                        self.cur_genus = sci.split(' ')[0]
+
                     child_page.set_sci(sci)
             if x == '+':
                 # Replace the {+...} field with two new fields:
@@ -261,6 +272,11 @@ class Page:
                 # Replaced the {child:...} field with a new field:
                 # - a text link to the child
                 return '{' + child + '}'
+
+        if self.sci and ' ' not in self.sci:
+            self.cur_genus = self.sci
+        else:
+            self.cur_genus = None
 
         self.txt = re.sub(r'{(child:|\+)([^\}:,]+)(,[-0-9]*)?(:[^\}]+)?}', repl_child, self.txt)
 
@@ -607,6 +623,16 @@ Locations:
                 lines = 1
             else:
                 lines = 2
+            # If the child's genus is abbreviated, expand it using
+            # the genus of the current page.
+            if (self.cur_genus and len(elab) >= 3 and
+                elab[0:3] == self.cur_genus[0] + '. '):
+                elab = self.cur_genus + elab[2:]
+            elif ' ' in elab:
+                # If the child's genus is explicitly specified,
+                # make it the default for future abbreviations.
+                self.cur_genus = elab.split(' ')[0]
+
             if com:
                 if lines == 1:
                     text = '{com} (<i>{elab}</i>)'.format(com=com, elab=elab)
