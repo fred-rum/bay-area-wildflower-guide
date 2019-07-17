@@ -17,6 +17,7 @@ Key features:
 total height
 shrub, decumbent, or "regular"
 stem hair character (if any)
+stem hollow or firm
 leaflet number, length, and width
 leaf adaxial and abaxial hair character (if any)
 inflorescence length; whorled, spiraled, or not
@@ -33,10 +34,9 @@ Lupine parts <a href="http://tchester.org/plants/analysis/lupinus/identification
 <li>keel is two fused petals often hiding between/below the wings</li>
 </ul>
 
-Fantastic series of <a href="http://www.microscopy-uk.org.uk/mag//artapr12/bj-lupin2.html
-">close-up photos with explanations</a>.
+Fantastic series of <a href="http://www.microscopy-uk.org.uk/mag//artapr12/bj-lupin2.html">close-up photos with explanations</a>.
 
-I'm still unclear where the bracts are supposed to be.  Possibly at the bottom of the peduncle of the entire inflorescence?
+The bracts are thin/linear sprouts immediately subtending each sepal of the calyx.
 
 {[
 <h3>cotyledons persistent</h3>
@@ -52,7 +52,7 @@ Flower: 10--16 mm; calyx upper lip 3--5 mm, lower 6--10 mm, appendages generally
 Jasper, Alum Rock, Grant, Mt. Diablo foothills
 -}
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=6121+1611+3980+0012} {chick lupine:Lupinus microcarpus}
+{+chick lupine:Lupinus microcarpus}
 {-
 Habit: Annual 1--8 dm, sparsely to densely hairy; <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+0754"><b>cotyledons disk-like, persistent</b></a> at plant base, or leaving circular scar
 Stem: <b>clearly hollow, at least below</b>

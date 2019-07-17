@@ -3,7 +3,7 @@
 common
 -}
 
-{mountain coyote mint:Monardella odoratissima}
+{+mountain coyote mint:Monardella odoratissima}
 {-
 Big Basin
 -}

@@ -15,4 +15,6 @@ size and shape of fruit (spheric or depressed)
 
 {+big berry manzanita}
 
+{+common manzanita}
+
 {+pallid manzanita}

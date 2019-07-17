@@ -14,8 +14,6 @@ spathes opposite or alternate (the spathes are the lowest bracts when there is m
 Parts of an iris labeled: <a href="https://www.pacificcoastiris.org/wildiris_three_main_groups.html">one</a>, <a href="https://leonineiris.com/l9ie_partsoftheirisflower.php">two</a>.<br/>
 <a href="http://www.pacificcoastiris.org/spcni_downloads/spcni.v09.1.fall1981.pdf">How to measure</a> iris parts (starting on page 11).
 
-
-
 {+fernald's iris}
 {-
 perianth yellow, veined darker
@@ -30,8 +28,9 @@ style branches 30--50 mm, crests 13--17 mm, stigmas triangular
 Santa Cruz mtns, Windy Hill to Mt. Madonna, plus the East Bay from Chabot north; shady places
 -}
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=1335+3153+0216+0027} {bowltube iris:Iris macrosiphon}
+{+bowltube iris:Iris macrosiphon}
 {-
+ID uncertain
 perianth cream to gold-yellow or lavender to deep blue-purple, generally veined darker
 <b>perianth tube 34--65 mm, abruptly inflated, bowl-like at top</b>
 stem unbranched, 0--15 cm
@@ -98,4 +97,10 @@ sepals widely oblanceolate, 5--8 cm, 35--50 mm wide
 petals obovate, clawed, 2--3 cm, 4--8 mm wide
 style branches < 25 mm, crests 7--10 mm, <b>stigmas rounded</b>
 Jasper, Marin, Mt. Tam; pond margins, estuaries
+-}
+
+{+purdy's iris:Iris purdyi}
+{-
+ID uncertain
+Monte Bello
 -}

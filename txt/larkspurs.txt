@@ -26,7 +26,7 @@ stem 15--50 cm (--125), generally glabrous
 common in bay area
 -}
 
-{+zigzag larkspur}
+{+zigzag larkspur,-2}
 {-
 number of flowers and pedicel length indeterminate
 <b>generally < 6 flowers on main axis?</b> [how many axes are there?]; if more, oldest open-flowered pedicels generally > 25 mm and > 2 &times; youngest
@@ -37,7 +37,7 @@ stem 10--90 cm, <b>+- glabrous</b>
 common in bay area
 -}
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0211+1183} {coastal larkspur:Delphinium decorum}
+{+coastal larkspur:Delphinium decorum}
 {-
 <b>2--20 flowers</b>
 pedicels 10--63 mm, 10--25 mm apart
@@ -83,15 +83,15 @@ leaf hairy, especially abaxially; petioles hairy; lobes 3--18
 Mt. Diablo
 -}
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0408+0380} {foothill larkspur:Delphinium hesperium}
+{+foothill larkspur:Delphinium hesperium}
 {-
-<b>flowers >= 5, generally < 30</b>
+<b>flowers 5--100</b> [CalPhotos shows them all with similar pedicel lengths, not longer at the bottom]
 <b>stem 40--80 cm</b> (10--120), <b>base generally ridged</b>
 proximal petiole hairs are unknowable
 blades of lower petals hairier adaxially (inner lobe) than abaxially (outer lobe)
 lateral sepals 7--16 mm
 sepals spreading, not reflexed, dark blue-purple or pale depending on subspecies
-pedicels ascending at < 45&deg; angle [from vertical or horizontal? angle at base or tip?], puberulent
+pedicels ascending at < 45&deg; angle [from vertical? angle at tip?], puberulent
 leaf adaxially +- glabrous, abaxially puberulent, prominently veined; lobes 3--14
 common in bay area
 -}

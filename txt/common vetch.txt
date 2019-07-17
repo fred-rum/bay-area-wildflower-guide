@@ -1,6 +1,4 @@
 {sci:Vicia sativa}
-{jpgs}
-
 Key features:
 {-
 length of calyx lobes (supposedly no overlap, but measure carefully!)
@@ -8,7 +6,7 @@ length of corolla (supposedly no overlap, but measure carefully!)
 length vs. width of leaflets (there is substantial overlap here)
 -}
 
-{spring vetch:Vicia sativa ssp. sativa}
+{+spring vetch:Vicia sativa ssp. sativa}
 {-
 calyx tube 6--7 mm, lobes <b>5--11 mm</b>
 corolla <b>18--30 mm</b>

@@ -37,7 +37,7 @@ corolla yellow, strongly tinged orange or red
 common near the coast and in the east bay from Chabot north
 -}
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+1111+1234+2935} {japanese honeysuckle:Lonicera japonica}
+{+japanese honeysuckle:Lonicera japonica}
 {-
 <b>flowers paired on axillary peduncles</b>
 <b>corolla > 25 mm</b>

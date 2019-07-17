@@ -3,12 +3,12 @@
 {-
 inflorescence +- flat-topped, central axis generally not dominant
 petals +- spreading
+glaucus blue berries
 -}
 
-{+american red elder:Sambucus racemosa racemosa}
+{+red-berried elder:Sambucus racemosa}
 {-
 inflorescence +- dome-shaped, central axis generally dominant
 petals often reflexed
+red berries
 -}
-
-{-rocky mountain elder:Sambucus racemosa var. melanocarpa} has purple-black berries and in California is only found in the Sierras.
