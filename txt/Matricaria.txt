@@ -1,0 +1,19 @@
+{+pineapple-weed:Matricaria discoidea}
+{-
+tip of fruit entire, pappus 0 or crown +- entire
+plant (1)10--30(50) cm
+peduncle <= 1.5(2.5) cm
+disturbed places
+very common
+-}
+
+{valley mayweed:Matricaria occidentalis}
+{-
+tip of fruit and pappus crown 2-lobed
+plant 15--45(70) cm
+peduncle <= 6.5 cm
+undisturbed wet places
+<b>only in historical records</b>
+-}
+
+There are no other species of this genus in the bay area.

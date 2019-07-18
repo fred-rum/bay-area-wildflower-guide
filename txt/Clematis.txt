@@ -1,0 +1,21 @@
+{+pipestem clematis:C. lasiantha}
+{-
+leaflets generally 3--5
+inflorescence generally 1-flowered
+sepals 10--21 mm
+flower Jan--Jun
+Ecology: Hillsides, chaparral, open woodland
+common
+-}
+
+{western virgin's bower:C. ligusticifolia}
+{-
+leaflets 5--15 [but CalPhotos shows many with 3]
+inflorescence several- to many-flowered
+sepals 6--10 mm
+flower Jun--Sep
+Ecology: Along streams, wet places
+scattered
+-}
+
+There are no other species of this genus in the bay area.

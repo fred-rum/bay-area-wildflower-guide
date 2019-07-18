@@ -1,5 +1,4 @@
 {com:silverpuffs}
-
 See also {-Uropappus lindleyi}.
 
 Key features:
@@ -85,3 +84,5 @@ Seeds 4--7 mm
 Bristles 6--9 mm.
 Found at Mt. Diablo.
 -}
+
+There are no other species of this genus in my hiking area.

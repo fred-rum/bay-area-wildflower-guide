@@ -8,6 +8,8 @@ spike with 2--5(7) fertile internodes, pistillate 6--15(20)-flowered
 leaf <= 3 cm, width <= 2 cm
 leaf gray-green, dull
 common
+Jepson has this as Phoradendron leucarpum ssp. tomentosum.
+(POWO has Phoradendron leucarpum as not occurring in California.)
 -}
 
 {sycamore mistletoe:P. macrophyllum}
@@ -19,6 +21,7 @@ spike with 2--5(7) fertile internodes, pistillate 6--15(20)-flowered
 leaf <= 6 cm, width <= 5 cm
 leaf yellow-green, generally shiny
 rare
+Jepson has this as Phoradendron leucarpum ssp. macrophyllum.
 -}
 
 {bollean mistletoe:P. bolleanum}
@@ -29,3 +32,5 @@ spike with generally 1 fertile internode, pistillate 2-flowered
 <b>on conifers</b>
 Nisene Marks, Mt. Tam
 -}
+
+There are no other species of this genus in the bay area.
