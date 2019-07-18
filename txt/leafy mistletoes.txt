@@ -1,0 +1,18 @@
+{sci:Phoradendron}
+{+oak mistletoe:P. leucarpum}
+{-
+leaf length generally < 1.5 &times; width, 15--60 mm, generally > 20 mm
+stem generally short-hairy, at least at tip
+spike with 2--5(7) fertile internodes, pistillate 6--15(20)-flowered
+<b>on woody plants except conifers</b>
+common
+-}
+
+{:P. bolleanum}
+{-
+leaf length generally > 3 &times; width, (5)10--25 mm, generally < 20 mm
+stem glabrous
+spike with generally 1 fertile internode, pistillate 2-flowered
+<b>on conifers</b>
+Nisene Marks, Mt. Tam
+-}

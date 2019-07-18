@@ -1,0 +1,16 @@
+{sci:Phoradendron leucarpum}
+{+pacific mistletoe:P. leucarpum ssp. tomentosum}
+{-
+leaf <= 3 cm, width <= 2 cm
+leaf gray-green, dull
+common
+called P. villosum by POWO
+-}
+
+{:Phoradendron leucarpum ssp. macrophyllum}
+{-
+leaf <= 6 cm, width <= 5 cm
+leaf yellow-green, generally shiny
+rare
+called P. macrophyllum by POWO
+-}
