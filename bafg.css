@@ -6,8 +6,10 @@
 .copyright {
     color: gray;
 }
-.horiz-space {
-    min-width: 10px;
+a.glossary {
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px black dotted;
 }
 div.shrink-box {
     display: inline-block;
