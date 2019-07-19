@@ -1,2 +1,3 @@
 {dioecious} A plant that has only either male or female flowers on it.
+{ligule,ligules} The petal of a flower in the sunflower family comprised only of ray-like flowers (i.e. not disk and ray).
 {waif,waifs} A plant that has spread with human assistance but cannot reproduce or spread further on its own; will eventually die out assuming no further assistance.

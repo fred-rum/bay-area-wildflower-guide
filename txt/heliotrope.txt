@@ -1,0 +1,18 @@
+{sci:Heliotropium}
+{+alkali heliotrope:H. curassavicum}
+{-
+stem prostrate to +- ascending, glabrous
+calyx lobes glabrous
+corolla <b>white</b>
+scattered everywhere
+-}
+
+{:H. europaeum}
+{-
+stem ascending to erect, <b>puberulent to short-soft-hairy</b>
+calyx lobes bristly
+corolla white, throat generally blue-purple, upper tube +- yellow
+rare along the Pacific coast
+-}
+
+There are no other species of this genus in the bay area.

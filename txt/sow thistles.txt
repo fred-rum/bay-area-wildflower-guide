@@ -1,18 +1,40 @@
 {sci:Sonchus}
+"Stem distally branched" is a genus characteristic.
+
 {+prickly sowthistle}
 {-
-stem may be distally branched, but usually not close to the inflorescence
+annual
+stem may be distally branched, but usually not close to the inflorescence[?]
 proximal clasping lobes of cauline leaves rounded, <b>strongly curved to coiled</b>
 leaf blades dentate, sometimes +- lobed, <b>teeth and lobes soft-spine-tipped</b>
-ligule [petal] < corolla tube
-fruit 3-ribbed per side, otherwise smooth
+involucre 10--13 mm
+petal < corolla tube
+fruit flat, 3-ribbed per side, otherwise smooth
 -}
 
 {+common sow-thistle:Sonchus oleraceus}
 {-
-stem distally branched, often proximally branched
+annual
+stem distally branched [?], often proximally branched [this part is clear]
 proximal clasping lobes of cauline leaves acute, <b>not curled or coiled</b>
 leaf blades nearly all lobed [possibly with <b>small teeth</b>], lobes variable in width [narrow lobes may look like sharp teeth], terminal lobe often widely arrowhead-shaped
-ligule [petal] +- = corolla tube
-fruit 2--4-ribbed [per side?] and cross-wrinkled
+involucre 10--13 mm
+petal +- = corolla tube
+fruit flat, 2--4-ribbed [per side?] and cross-wrinkled
 -}
+
+{perennial sow thistle:Sonchus arvensis}
+{-
+perennial
+stem distally branched
+basal leaves 5--15 cm, entire to deeply lobed, short-petioled
+cauline leaves coarsely lobed and toothed
+proximal clasping lobes of cauline leaves <b>curled</b>
+peduncles and phyllaries generally sessile-glandular, rarely tomentose
+involucre 14--18 mm
+petal +- = corolla tube
+fruit +- compressed , 3--4-angled, 2-ribbed between angles
+very rare
+-}
+
+There are no other species of this genus in the bay area.

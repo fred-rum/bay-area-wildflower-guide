@@ -479,6 +479,7 @@ var pages=[
 {page:"great valley gumweed",sci:"Grindelia camporum"},
 {page:"ground rose",sci:"Rosa spithamea"},
 {page:"hairy bittercress",sci:"Cardamine hirsuta"},
+{page:"heliotrope",sci:"Heliotropium spp.",key:true},
 {page:"henderson's angelica",sci:"Angelica hendersonii"},
 {page:"Holocarpha",sci:"Holocarpha spp.",key:true},
 {page:"hooker's fairybells",sci:"Prosartes hookeri"},
