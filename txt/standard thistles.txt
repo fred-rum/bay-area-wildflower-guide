@@ -1,8 +1,11 @@
 {sci:Cirsium}
+My notes are not very good for these.
+
 Potential key features:
 {-
 corolla color
 head shape
+phyllary details, e.g. length, abaxial features, spine tipped or not
 leaf details
 -}
 
@@ -19,6 +22,13 @@ common
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1007+1563}
 {short-styled thistle:Cirsium brevistylum}
 {-
+abaxial face of outer and middle phyllaries without sticky-resinous ridge
+margins of outer phyllaries may be irregularly toothed to spiny-ciliate or +- entire
+heads generally closely subtended by +- well-developed distal leaves or clustered bract-like leaves
+phyllary tips needle-like, ascending to radially spreading, connected side-to-side by long, cobwebby, or stouter, multicellular hairs
+outer and middle phyllaries with short-appressed bases and lanceolate to linear or needle-like, ascending to stiffly spreading tips; tip-spines generally 1--35 mm
+phyllary tips conspicuously connected side-to-side by network of cobwebby or multicellular hairs
+corolla lobes thread-like, tips knob-like; style included or exserted 1--2 mm; stem +- hairy, hairs coarse, jointed, generally also cobwebby to densely tomentose with long, fine hairs
 scattered
 -}
 
@@ -26,25 +36,36 @@ scattered
 {creeping thistle:Cirsium arvense}
 {-
 <b>dioecious</b>
-[all other species have both stamens and pistils in each flower]
+[all other species have both bisexual flowers]
 scattered
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0611+1174}
 {franciscan thistle:Cirsium andrewsii}
 {-
+abaxial face of outer and middle phyllaries without sticky-resinous ridge
+margins of outer phyllaries irregularly toothed to spiny-ciliate
+corolla lobes linear, tips not knob-like; style conspicuously exserted; stem cobwebby, +- glabrous in age, coarser, multicellular hairs 0
 Marin
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0611+2130}
 {swamp thistle:Cirsium douglasii var. douglasii}
 {-
+abaxial face of outer and middle phyllaries with long, sticky-resinous ridge (milky when fresh, dark when dry, occasionally very narrow)
+margins of phyllaries entire
+stem with few or 0 coarse, multicellular hairs, thinly to densely cobwebby or tomentose with long fine hairs
+cauline leaves generally not clasping with expanded basal lobes
+leaf veins generally not prominently raised abaxially
 Mt. Diablo
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=8311+3292+1958+0033}
 {mount tamalpais thistle:Cirsium hydrophilum var. vaseyi}
 {-
+abaxial face of outer and middle phyllaries with long, sticky-resinous ridge (milky when fresh, dark when dry, occasionally very narrow)
+margins of phyllaries minutely spiny-fringed
+
 Mt. Tam
 -}
 
@@ -54,6 +75,9 @@ Mt. Tam
 
 {+Cirsium occidentale}
 {-
+abaxial face of outer and middle phyllaries without sticky-resinous ridge
+margins of outer phyllaries +- entire
+corolla lobes linear, tips not knob-like; style conspicuously exserted; stem cobwebby to densely tomentose, hairs long, fine
 common
 -}
 
@@ -70,18 +94,32 @@ scattered
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+3077}
 {peregrine thistle:Cirsium cymosum var. cymosum}
 {-
+abaxial face of outer and middle phyllaries may have long, sticky-resinous ridge (milky when fresh, dark when dry, occasionally very narrow) or not
+margins of phyllaries entire
+outer and middle phyllaries with short-appressed bases and lanceolate to linear or needle-like, ascending to stiffly spreading tips; tip-spines generally 1--35 mm
+phyllary tips glabrous or hairy to densely tomentose but generally not conspicuously connected side-to-side by network of cobwebby or multicellular hairs
+stem evidently coarse-hairy with multicellular hairs, also cobwebby to densely tomentose with long, fine hairs
+cauline leaves generally +- clasping, with expanded basal lobes
+leaf veins generally prominently raised abaxially
 Henry Coe, Sunol
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0713+0932}
 {alameda thistle:Cirsium quercetorum}
 {-
+abaxial face of outer and middle phyllaries without sticky-resinous ridge
+margins of outer phyllaries +- entire
+outer and middle phyllaries lance-linear to ovate, appressed; tip-spines 1--12 mm, generally ascending to erect
 scattered very near the pacific coast
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0218+0325}
 {pacific fringed thistle:Cirsium remotifolium var. odontolepis}
 {-
+abaxial face of outer and middle phyllaries without sticky-resinous ridge
+margins of outer phyllaries irregularly toothed to spiny-ciliate
+heads generally not closely subtended by well-developed distal leaves or clustered leafy bracts
+phyllary tips flattened, generally ascending, connected side-to-side by cobwebby hairs or not
 Mt. Tam, Briones
 -}
 

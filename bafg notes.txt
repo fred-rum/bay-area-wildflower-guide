@@ -132,8 +132,6 @@ for f in *.jpg; do git mv "$f" "$(echo $f | sed 's/-\([-0-9]*\)\.jpg$/,\1.jpg/')
 
 ###############################################################################
 
-Add notes to standard thistles.
-
 Create a script to help copy new and changed files to a portable device.
   Copy new and modified files to a new (and git-ignored) folder,
     ready for the user to copy them over using Windows Explorer.
