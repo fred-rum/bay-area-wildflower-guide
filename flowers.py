@@ -788,7 +788,7 @@ color_list = ['blue',
 # value: page list
 color_page_list = {}
 
-def write_header(w, title, h1, nospace=False):
+def write_header(w, title, h1, nospace=False, nosearch=False):
     if nospace:
         space_class = ' class="nospace"'
     else:
@@ -823,12 +823,15 @@ def write_header(w, title, h1, nospace=False):
 <link rel="stylesheet" href="../bafg.css">
 </head>
 <body>
-<div id="search-bg"></div>
+'''.format(title=title))
+    if not nosearch:
+        w.write('''<div id="search-bg"></div>
 <div id="search-container">
 <input type="search" id="search" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="search for a flower..." autofocus>
 <div id="autocomplete-box"></div>
 </div>
-<div id="body">
+''')
+    w.write('''<div id="body">
 <h1 id="title"{space_class}>{h1}</h1>
 '''.format(title=title, space_class=space_class, h1=h1))
 
@@ -857,14 +860,14 @@ def repl_glossary(matchobj):
     primary_word = word_list[0]
     for word in word_list:
         glossary_dict[word] = primary_word
-    return '<dt id="{word}">{word}</dt><dd>{defn}</dd>'.format(word=primary_word, defn=defn)
+    return '<div class="defn" id="{word}"><dt>{word}</dt><dd>{defn}</dd></div>'.format(word=primary_word, defn=defn)
 
 glossary_txt = re.sub(r'{([^\}]+)}\s+(.*)', repl_glossary, glossary_txt)
 
 glossary_regex = re.compile(r'\b({ex})\b'.format(ex='|'.join(map(re.escape, glossary_dict.keys()))))
 
 with (open(root + '/html/glossary.html', mode='w')) as w:
-      write_header(w, 'BAFG Glossary', 'Glossary')
+      write_header(w, 'BAFG Glossary', 'Glossary', nosearch=False)
       w.write(glossary_txt)
       write_footer(w)
 

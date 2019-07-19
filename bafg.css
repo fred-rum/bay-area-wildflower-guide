@@ -6,11 +6,23 @@
 .copyright {
     color: gray;
 }
+
 a.glossary {
     text-decoration: none;
     color: inherit;
     border-bottom: 1px black dotted;
 }
+div.defn {
+    border-top: 38px solid transparent;
+    margin-top: -38px;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+}
+div.defn:target {
+    background-color: #ffc;
+}
+
 div.shrink-box {
     display: inline-block;
     padding-right: 5px;

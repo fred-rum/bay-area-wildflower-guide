@@ -11,7 +11,7 @@ leaf details
 
 {+bull thistle:Cirsium vulgare}
 {-
-adaxial [upper] leaf face with slender appressed bristle-like prickles
+<b>adaxial leaf face with slender appressed bristle-like prickles</b>
 [all other species have no prickles on the adaxial leaf face]
 common
 -}
@@ -25,7 +25,7 @@ scattered
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1208+0592}
 {creeping thistle:Cirsium arvense}
 {-
-separate male and female flowers
+<b>dioecious</b>
 [all other species have both stamens and pistils in each flower]
 scattered
 -}
