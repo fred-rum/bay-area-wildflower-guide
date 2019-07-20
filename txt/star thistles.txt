@@ -37,19 +37,54 @@ Castle Rock
 {[
 <h3>Purple</h3>
 
+These look distinct enough from each other to not need notes.
 
 {+purple star-thistle}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0311+0802}
-{bachelor's-button:Cyanus segetum}
+{bachelor's-button:C. cyanus}
 {-
 Edgewood, Long Ridge, Mt. Diablo
+currently called Cyanus segetum on iNaturalist, but POWO says it should be Centaurea cyanus.
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1213+0624}
-{spotted knapweed:Centaurea stoebe micranthos}
+{spotted knapweed:Centaurea stoebe ssp. micranthos}
 {-
 Sierra Azul & Mt. Umunhum
 -}
 
 ]}
+{[
+<h3>Unlikely</h3>
+
+These thistles are listed in Jepson for the bay area, but I am unlikely to encounter them.
+
+{:Centaurea benedicta}
+{-
+rare, historical records only
+-}
+
+{:C. cineraria}
+{-
+rare, historical record only
+-}
+
+{:C. diffusa}
+{-
+no confirmed records in the bay area
+-}
+
+{:C. diluta}
+{-
+rare, historical record only
+-}
+
+{:C.iberica}
+{-
+some relatively recent records from around the Calaveras Reservoir, which I never visit
+-}
+
+]}
+
+There are no other species of this genus in the bay area.

@@ -6,7 +6,7 @@ Possible key features:
 stem erect, decumbent, or prostrate
 shape and scale of leaves
 scale of flower parts
-shape and scale of phyllaries (bracts)
+shape and scale of phyllaries
 hair anywhere? (e.g. stem base, upper stem, leaf top or bottom, phyllaries)
 -}
 
@@ -14,8 +14,8 @@ hair anywhere? (e.g. stem base, upper stem, leaf top or bottom, phyllaries)
 {-
 Stem: 1--several from base, decumbent or prostrate
 Leaf: basal and proximal cauline, 2--10 cm; blade oblanceolate or obovate, tapered to winged petiole, tip obtuse, margin entire, crenate or serrate, faces loosely soft-hairy
-Inflorescence: 1 heads on each +- naked peduncle; peduncle 2--25 cm, strigose or hairs soft, spreading; involucre hemispheric; phyllaries in 2 equal series, 3--6 mm, ovate, obtuse, hairs soft, spreading; receptacle conic
-Ray Flower: many; ray 7--10 mm, narrow,  white to pink or purple
+Inflorescence: 1 heads on each +- naked peduncle; peduncle 2--25 cm, strigose or hairs soft, spreading; involucre hemispheric; phyllaries in 2 equal series, 3--6 mm, ovate, obtuse, hairs soft, spreading; receptacle conic; <b>wide phyllaries</b>
+Ray Flower: many; <b>ray 7--10 mm</b>, narrow,  white to pink or purple
 Disk Flower: many; corolla +- 2 mm, yellow, tube very short, throat +- cylindric
 Ecology: Damp, grassy areas
 -}
@@ -29,7 +29,7 @@ cauline leaf alternate, petioled or sessile, blade 30--80+ mm, 2--15+ mm wide, m
 Inflorescence: heads generally radiate (discoid), 1 or in 2--3s; involucre hemispheric or broader, 12--20+ cm diam
 phyllaries 35--60+ in 3--4+ series, free, +- ovate to oblanceolate, unequal, glabrous or sparsely hairy, margins scarious, colorless to +- brown, larger phyllaries 2--3 mm wide
 receptacle convex, epaleate, glabrous
-Ray Flower: (0)13--34+; ray 12--20(35+) mm
+Ray Flower: (0)13--34+; <b>ray 12--20(35+) mm</b>
 Disk Flower: 120--200+; corolla yellow, tube +- cylindric, throat bell-shaped, lobes deltate
 Ecology: Common. Disturbed areas, meadows, seeps
 -}
@@ -41,38 +41,32 @@ Stem: erect, simple or distally branched, glabrous or hairy
 basal leaf petiole 50--80(200+) mm, blade 50--80(120+) mm, 15--25(35+) mm wide, obovate to spoon-shaped, not lobed, generally toothed (entire), glabrous or sparsely hairy
 cauline leaf alternate, petioled or sessile, blade 50--120+ mm, 8--22+ mm wide, oblanceolate to lanceolate or linear, mid-stem leaves generally proximally entire, distally regularly serrate, glabrous or sparsely hairy
 Inflorescence: heads generally radiate (discoid), 1 or in 2--3s
-involucre hemispheric or broader, 18--28+ mm diam; phyllaries 35--60+ in 3--4+ series, free, +- ovate to oblanceolate, unequal, glabrous or sparsely hairy, margins scarious, colorless to +- brown, larger phyllaries 2--3 mm wide
+<b>involucre flattened hemispheric</b>, 18--28+ mm diam; phyllaries 35--60+ in 3--4+ series, free, +- ovate to oblanceolate, unequal, glabrous or sparsely hairy, margins scarious, colorless to +- brown, larger phyllaries 2--3 mm wide
 receptacle convex, epaleate, glabrous
-Ray Flower: 21--34+; corolla white, drying +- pink, ray linear to ovate, 20--30(40+) mm
+Ray Flower: 21--34+; corolla white, drying +- pink, ray linear to ovate, <b>20--30(40+) mm</b>
 Disk Flower: 120--200+; corolla yellow, tube +- cylindric, throat bell-shaped, lobes deltate
 Ecology: Uncommon. Disturbed areas, forest, streambanks
--}
-
-{+seaside daisy}
-{-
-Habit: subshrub, 5--30 cm
-Stem: +- decumbent, generally branched near mid-stem, glabrous or glandular to densely spreading-hairy
-Leaf: alternate, generally sessile, thick, +- fleshy, 2--13 cm, spoon-shaped to widely obovate, entire or distally shallowly toothed; proximal wing-petioled, cauline reduced or not, sometimes +- clasping, spreading-hairy, minutely glandular
-Inflorescence: heads generally radiate (discoid, disciform), 1--15, peduncled; inflorescence generally +- flat-topped (raceme- to panicle-like)
-involucre urn- to bell-shaped or generally hemispheric, 7--15 mm, 15--35 mm diam
-phyllaries linear to narrowly lanceolate, in 2--several series, +- equal to strongly graduated, +- densely long-soft-hairy, minutely glandular, generally ascending or erect in flower, generally green, spreading when pressed, reflexed when dry
-receptacle flat to steeply conic, smooth to shallowly pitted
-Disk Flower: generally many; corolla generally narrowly funnel-shaped, yellow
-Ray Flower: 80--300+; ray 8--15 mm, generally narrow, white to pink or purple
-Ecology: Coastal bluffs, dunes, beaches
+[This and L. vulgare above are the only species of this genus in the bay area.]
 -}
 
 {+stinking chamomile}
 {-
 Habit: Annual; <= 6(9) dm, strongly scented
 Stem: generally erect, +- glabrous, puberulent, or +- minutely strigose, resin-gland-dotted
-Leaf: most cauline, alternate, 10--55 mm, 15--30 mm wide, 1--3-pinnately divided into thread-like lobes
+Leaf: most cauline, alternate, 10--55 mm, 15--30 mm wide, <b>1--3-pinnately divided into thread-like lobes</b>
 Inflorescence: 1 or in rounded to flat-topped clusters
 involucres obconic to hemispheric or wider, 5--11 mm diam
 phyllaries persistent, generally 21--35+, +- graduated in 3--5 series, free, generally lanceolate, oblong, or elliptic
 Disk Flower: generally 100--300+, corolla 2--3 mm, generally yellow
-Ray Flower: (0)10--15, corolla white
+Ray Flower: (0)10--15, corolla white [apparently ~5 mm long]
 Ecology: Common. Disturbed areas, fields, coastal dunes, chaparral, oak woodland
+-}
+
+{+fleabanes and horseweeds}
+{-
+<b>involucre urn- to bell-shaped or generally hemispheric</b>
+Disk Flower: generally many; corolla generally narrowly funnel-shaped, yellow
+Ray Flower: 80--300+; ray 8--15 mm, generally narrow, white to pink or purple
 -}
 
 {+afro-australian daisies}
@@ -81,7 +75,7 @@ Habit: Subshrub, +- puberulent and minutely stalked-glandular
 Stem: depends greatly on the species; see linked sub-page
 Leaf: 3--8 cm, slightly fleshy; proximal wing-petioled, distal +- sessile; blade linear-oblong to obovate, entire or sparingly dentate
 Inflorescence: heads 1 or in leafy cyme-like clusters (D. ecklonis only), 4--7 cm diam; involucre +- bell-shaped; phyllaries 12--15 mm, lance-linear, acuminate, narrowly scarious-margined
-Disk Flower: corolla 5--6 mm, blue-purple
+Disk Flower: corolla 5--6 mm, <b>blue-purple</b>
 Ray Flower: ray 2.5--3.5 cm, adaxially white and abaxially blue-purple, sometimes deep violet at base or adaxially pink-purple to rose-purple and abaxially purple or deep rose-purple
 Ecology: Uncommon. Disturbed places, beaches, coastal areas (D. fruiticosa) or escaped from cultivation (D. ecklonis)
 -}
@@ -95,7 +89,7 @@ phyllaries graduated or +- equal in 2--6 series, oblong to ovate
 outer phyllaries green +- to base, obtuse, pale-margined < 1/2 length, length generally < 3 &times; width, <= inner ones, green throughout or +- pale-margined at base with green area at tip generally > 2.5 &times; longer than wide
 inner phyllaries pale-margined, +- acute, green zone oblanceolate to linear
 receptacle +- flat, pitted, epaleate
-Disk Flower: 4--60+; corolla, anthers generally yellow, tube generally < throat
+Disk Flower: 4--60+; corolla, anthers generally yellow, <b>highly exserted, giving the disk head a ragged appearance</b>
 Ray Flower: 15--40, corolla 8--12 mm, violet
 Ecology: Grassland, salt marshes, disturbed places
 -}
@@ -109,6 +103,7 @@ Inflorescence: heads radiate, 1 or in cyme-like cluster
 involucre hemispheric to bell-shaped, top-shaped, or cylindric, 6--14 &times; 3--10 mm
 phyllaries 30--90+, graduated in 3--9 series, often spreading or with spreading tips, reflexed in age, linear to narrowly lanceolate, stiff-papery to scarious, flat, tips leaf-like in texture, variously hairy and/or glandular
 receptacle +- flat or rounded, pitted, with small scale-like projections, glabrous
-Disk Flower: 12--120+; corolla 4--8 mm, yellow, tube 0.6--1.4 mm, < narrowly cylindric throat, lobes erect, equal, narrowly lanceolate
+Disk Flower: 12--120+; corolla 4--8 mm, yellow, tube 0.6--1.4 mm, < narrowly cylindric throat, lobes erect, equal, narrowly lanceolate; <b>erect flowers stand clearly proud of the rays, are equal length throughout the disk</b>
+Ray Flower: 10--43, sterile; ray white or pink to purple, <b>conspicuously striate</b>; style 0
 Ecology: Coastal scrub, chaparral, grassland, foothill woodland, forest
 -}

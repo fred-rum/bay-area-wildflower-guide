@@ -155,3 +155,15 @@ Count all observations within a taxon even if they aren't explicitly
 matched with a page.  E.g. this is useful for observations that have a
 subspecies if I haven't bothered to distinguish subspecies in the
 BAFG.
+
+Automatically create pages for Calflora listings.
+- Allows search.
+- Allows extra details and links to be added.
+- Observation page with unobserved children gets promoted to "key" status.
+Count "unobserved" flowers also in the listings.
+
+If a page with photos has N children with photos, it should be counted as
+one key and N observed flowers.
+
+If a page with photos has N children without photos, it should be
+counted as one key, 1 observed flower, and N-1 unobserved flowers.
