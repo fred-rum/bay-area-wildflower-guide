@@ -1,0 +1,17 @@
+{+oxeye daisy:L. vulgare}
+{-
+basal leaves generally pinnately 3--7+ lobed or irregularly toothed, petiole 30--60+ mm
+mid-stem leaves generally irregularly toothed throughout
+ray flowers: 13--34+, 12--20(35+) mm
+-}
+
+{+shasta daisy:L. maximum}
+{-
+basal leaves not lobed, generally toothed (entire), petiole 10--30(120) mm
+mid-stem leaves generally proximally entire, distally regularly serrate
+
+disk flowers: yellow
+ray flowers: 21--34+, 20--25(35) mm
+-}
+
+Except for very old historical records, there are no other species of this genus in the bay area.

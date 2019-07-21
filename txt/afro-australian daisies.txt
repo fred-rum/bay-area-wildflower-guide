@@ -12,3 +12,12 @@ stem <= 1 m, erect or ascending, branched distally or throughout
 
 Jepson further notes:
 "Many cultivated forms are hybrids [between the two species] and combine species features; these may escape or persist from cultivation."
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0901+0006}
+{cape marigold:D. sinuata}
+{-
+adaxial face of ray yellow or orange, sometimes violet at base or tip
+rare
+-}
+
+There are no other species of this genus in the bay area.

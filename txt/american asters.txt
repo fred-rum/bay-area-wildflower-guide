@@ -1,0 +1,28 @@
+{sci:Symphyotrichum}
+{+pacific aster:S. chilense}
+{-
+stem hairy distally
+outer phyllaries obtuse
+disk flowers: yellow
+ray flowers: 8--12 mm, violet
+very common, especially in the Santa Cruz range
+-}
+
+{douglas's aster:S. subspicatum}
+{-
+stem +- hairy distally
+outer phyllaries +- acute
+disk flowers: yellow
+ray flowers: 8--16 mm, violet
+very rare
+-}
+
+{annual saltmarsh aster:S. subulatum}
+{-
+stem +- glabrous
+disk flowers: yellow
+ray flowers: <b>1.5--3 mm</b>, +- white to pink
+rare
+-}
+
+Except for very old historical records, there are no other species of this genus in the bay area.

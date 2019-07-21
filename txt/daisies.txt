@@ -18,21 +18,12 @@ disk flowers: yellow
 ray flowers: <b>7--10 mm</b>, narrow, white to pink or purple
 -}
 
-{+oxeye daisy}
+{+Leucanthemum}
 {-
 stem erect, simple or distally branched
 <b>involucre flattened hemispheric</b>
 disk flowers: yellow
 ray flowers: 13--34+; <b>12--30 mm</b>
--}
-
-{+shasta daisy}
-{-
-stem erect, simple or distally branched
-<b>involucre flattened hemispheric</b>
-disk flowers: yellow
-ray flowers: 13--34+; <b>12--30 mm</b>
-[This and L. vulgare above are the only species of this genus in the bay area.]
 -}
 
 {+stinking chamomile}
@@ -58,11 +49,11 @@ disk flowers: <b>blue-purple</b>
 ray flowers: 25--35 mm, adaxially white and abaxially blue-purple, sometimes deep violet at base or adaxially pink-purple to rose-purple and abaxially purple or deep rose-purple
 -}
 
-{+pacific aster}
+{+american asters}
 {-
-stem generally erect, 4--10 dm, hairy distally
-disk flowers: 4--60+, generally yellow; <b>anthers are highly exserted, giving the disk head a ragged appearance</b>
-ray flowers: 15--40, 8--12 mm, pale violet
+stem generally erect
+disk flowers: generally yellow; <b>anthers are highly exserted, giving the disk head a ragged appearance</b>
+ray flowers: 8--12 mm, pale violet
 -}
 
 {+california aster}
