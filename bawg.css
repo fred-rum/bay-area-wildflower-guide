@@ -10,7 +10,7 @@
 a.glossary {
     text-decoration: none;
     color: inherit;
-    border-bottom: 1px black dotted;
+    border-bottom: 1px gray dotted;
 }
 div.defn {
     border-top: 38px solid transparent;
@@ -21,6 +21,12 @@ div.defn {
 }
 div.defn:target {
     background-color: #ffc;
+}
+dt {
+    font-weight: bold;
+}
+dd {
+    margin-bottom: 0.5em;
 }
 
 div.shrink-box {

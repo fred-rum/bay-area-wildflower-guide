@@ -283,7 +283,7 @@ class Page:
     def parse_glossary(self):
         def repl_glossary(matchobj):
             word = matchobj.group(1)
-            primary_word = glossary_dict[word]
+            primary_word = glossary_dict[word.lower()]
             return '<a class="glossary" href="glossary.html#{primary_word}">{word}</a>'.format(word=word, primary_word=primary_word)
 
         out_list = []
@@ -850,7 +850,8 @@ def write_footer(w):
 with open(root + '/glossary.txt', mode='r') as f:
     glossary_txt = f.read()
 
-glossary_dict = {}
+glossary_dict = {} # for fast access
+glossary_list = [] # to retain order for proper matching priority
 def repl_glossary(matchobj):
     global glossary_dict
     words = matchobj.group(1)
@@ -860,11 +861,11 @@ def repl_glossary(matchobj):
     primary_word = word_list[0]
     for word in word_list:
         glossary_dict[word] = primary_word
+    glossary_list.extend(word_list)
     return '<div class="defn" id="{word}"><dt>{word}</dt><dd>{defn}</dd></div>'.format(word=primary_word, defn=defn)
 
 glossary_txt = re.sub(r'{([^\}]+)}\s+(.*)', repl_glossary, glossary_txt)
-
-glossary_regex = re.compile(r'\b({ex})\b'.format(ex='|'.join(map(re.escape, glossary_dict.keys()))))
+glossary_regex = re.compile(r'\b({ex})\b'.format(ex='|'.join(map(re.escape, glossary_list))), re.IGNORECASE)
 
 with (open(root + '/html/glossary.html', mode='w')) as w:
       write_header(w, 'BAWG Glossary', 'Glossary', nosearch=False)
