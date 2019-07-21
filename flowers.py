@@ -820,7 +820,7 @@ def write_header(w, title, h1, nospace=False, nosearch=False):
 <meta name="msapplication-TileColor" content="#FFFFFF">
 <meta name="msapplication-TileImage" content="../favicon/favicon-144.png">
 <meta name="msapplication-config" content="../favicon/browserconfig.xml">
-<link rel="stylesheet" href="../bafg.css">
+<link rel="stylesheet" href="../bawg.css">
 </head>
 <body>
 '''.format(title=title))
@@ -839,7 +839,7 @@ def write_header(w, title, h1, nospace=False, nosearch=False):
 def write_footer(w):
     w.write('''
 <hr/>
-<a href="../index.html">BAFG</a> <span class="copyright">&ndash; Copyright 2019 Chris Nelson</span>
+<a href="../index.html">BAWG</a> <span class="copyright">&ndash; Copyright 2019 Chris Nelson</span>
 </div>
 <script src="../pages.js"></script>
 <script src="../search.js"></script>
@@ -867,7 +867,7 @@ glossary_txt = re.sub(r'{([^\}]+)}\s+(.*)', repl_glossary, glossary_txt)
 glossary_regex = re.compile(r'\b({ex})\b'.format(ex='|'.join(map(re.escape, glossary_dict.keys()))))
 
 with (open(root + '/html/glossary.html', mode='w')) as w:
-      write_header(w, 'BAFG Glossary', 'Glossary', nosearch=False)
+      write_header(w, 'BAWG Glossary', 'Glossary', nosearch=False)
       w.write(glossary_txt)
       write_footer(w)
 
