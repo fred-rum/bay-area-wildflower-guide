@@ -6,6 +6,7 @@ basal and lower cauline leaves pinnately lobed, serrate-dentate
 <b>distal cauline leaves</b> smaller, sessile, <b>base tapered, not lobed</b>
 flowers much like B. rapa
 petals 7--11(13) mm
+very common
 -}
 
 {+field mustard:Brassica rapa}
@@ -15,6 +16,7 @@ basal leaves pinnately lobed, lateral lobes 2--4(6) pairs, terminal lobe obovate
 middle and <b>distal cauline leaves</b> sessile, <b>base lobed, generally clasping</b>
 flowers much like B. nigra
 petals 6--11(13) mm
+very common
 -}
 
 {cabbage:Brassica oleracea}

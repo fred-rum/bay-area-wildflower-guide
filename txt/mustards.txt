@@ -1,25 +1,26 @@
 {sci:n/a}
 {+cabbages and mustards}
 {-
+<b>sepals generally erect to ascending</b>
+basal leaves in a rosette
 distal cauline leaves sessile
-Follow link for key details.
+very common
 -}
 
 {+shortpod mustard:Hirschfeldia incana}
 {-
-stem 40--150 (40--200) cm, hairs reflexed
-basal leaves in a rosette, pinnately lobed, 5--25 (3--40) cm, 1--6(9) pairs of lateral lobes on each
-cauline leaves dentate to pinnately lobed, petioled or sessile, base not lobed
-inflorescence much elongated [perhaps refers to long peduncle that flowers have fallen from?]
-petals obovate, clawed, yellow
-[only one species of this genus anywhere]
+<b>sepals spreading to reflexed</b>
+stigma entire
+<b>basal leaves in a rosette</b>
+cauline leaves dentate to pinnately lobed, petioled or sessile
+very common
 -}
 
 {+wild mustard:Sinapis arvensis}
 {-
-stem 20--100 (5--210) cm, simple or branched, hairs spreading to reflexed or occasionally glabrous
-basal leaves not rosetted; blade 4--18 cm, 1.5-5 cm wide, pinnately lobed
+<b>sepals spreading</b>
+stigma 2-lobed [?]
+<b>basal leaves not in a rosette</b>
 cauline leaves short-petioled, dentate
-petals 9--12 (8--17) mm, yellow
-[only one species of this genus in the bay area]
+uncommon
 -}

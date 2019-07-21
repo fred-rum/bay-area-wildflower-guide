@@ -1094,7 +1094,7 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
             page = sci_page[sci]
         elif com in com_page:
             page = com_page[com]
-            if not page.sci: # don't override previous info
+            if not page.sci and not page.no_sci: # don't override previous info
                 page.set_sci(sci)
         else:
             page = None
