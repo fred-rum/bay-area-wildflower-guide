@@ -3,7 +3,7 @@
 {-
 stem prostrate to +- ascending, glabrous
 calyx lobes glabrous
-corolla <b>white</b>
+corolla white, <b>throat generally purple or yellow</b>
 scattered everywhere
 -}
 
@@ -11,7 +11,7 @@ scattered everywhere
 {-
 stem ascending to erect, <b>puberulent to short-soft-hairy</b>
 calyx lobes bristly
-corolla white, throat generally blue-purple, upper tube +- yellow
+corolla <b>white</b>
 rare along the Pacific coast
 -}
 

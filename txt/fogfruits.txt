@@ -1,0 +1,12 @@
+{sci:Phyla}
+{+turkey tangle frogfruit,3:P. nodiflora}
+{-
+leaf blade generally widest at or distal to middle, 5--30 mm long, margin +- entore or 5--11 teeth from mid-blade to tip
+-}
+
+{lanceleaf frogfruit:P. lanceolata}
+{-
+leaf blade widest proximal to middle, 25--60 mm long, 11-21 teeth from proximal to mid-blade to tip
+-}
+
+There are no other species of this genus in California.

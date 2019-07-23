@@ -38,7 +38,7 @@ common
 {+hillside false bindweed}
 {-
 plant hairs sparse to +- dense, short, spreading to reflexed
-stem poorly +- 2 cm
+stem poorly developed, generally +- 2 cm
 leaf +- triangular-hastate, with small backward-directed lobes or not; margin +- wavy or not
 common
 -}

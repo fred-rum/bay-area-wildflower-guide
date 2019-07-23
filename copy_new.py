@@ -9,7 +9,7 @@ import time
 root = 'c:/Users/Chris/Documents/GitHub/bay-area-flowers'
 
 file_list = ['index.html',
-             'bafg.css',
+             'bawg.css',
              'search.js',
              'pages.js']
 

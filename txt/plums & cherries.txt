@@ -1,4 +1,6 @@
 {sci:Prunus}
+{jpgs}
+
 Key features:
 {-
 inflorescence shape, leafy or leafless at base
@@ -6,5 +8,3 @@ leaf size, shape
 fruit hair or glabours
 twigs with true or false terminal bud
 -}
-
-{jpgs}

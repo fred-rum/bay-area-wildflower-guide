@@ -57,7 +57,7 @@ Inner perianth lobe margin variously dentate, at least some teeth >= 0.3 mm [<a 
 perennial
 stem: erect to arching at tip, 2--6(7) dm, branched, slender
 leaf: blade 4--10(15) cm, (2)3--5 cm wide
-inflorescence: branches spreading
+inflorescence: <b>branches spreading</b>
 pedicels: 2--5(6) mm, thick
 inner perianth lobes 3--6 mm, 2--3 mm wide except teeth, margin generally dentate (+- entire) with 2--5(9) teeth, 0.3--2.5 mm, generally on both sides [<a href="http://ucjeps.berkeley.edu/eflora/eflora_display.php?tid=42419">illustration</a>]
 3(1) tubercles, generally warty
