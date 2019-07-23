@@ -1,10 +1,10 @@
 {sci:Eriophyllum}
-There are more bay area species than this.
-
 Key features:
 {-
 how far up is the plant woody
 overall plant height
+length of peduncle
+diameter of involucre
 number of phyllaries, strongly overlapping or barely
 number and length of rays
 ecology
@@ -14,22 +14,45 @@ ecology
 {-
 subshrub or shrub, generally 20--70 cm
 4--7 phyllaries, strongly overlapping
+peduncle 0--2.5(9) cm
 4--6 (0--8) rays, 2--5 mm
 Ecology: Many dry habitats
+-}
+
+{Jepson's woolly sunflower:E. jepsonii}
+{-
+subshrub, 50--80 cm
+5--8 phyllaries, strongly overlapping
+<b>peduncle 4--14 cm</b>
+5--8 rays, 6--10 mm
+heads 1--5; peduncle 5--10(14) cm; ray flowers 5--8, ray 6--10 mm --- SnFrB, SCoRI
+scattered in the Diablo range
 -}
 
 {+seaside woolly sunflower:Eriophyllum staechadifolium}
 {-
 subshrub, much branched, 30--150 cm
-8--11 phyllaries, barely overlapping
+peduncle < 1 cm
+8--11 phyllaries, <b>barely overlapping</b>
 6--9 rays, 3--5 mm
 Ecology: coastal dunes, bluffs, coastal scrub
 -}
 
+{san mateo woolly sunflower:E. latilobum}
+{-
+subshrub, <b>woody at base only</b>
+<b>involucre 5--6(7) mm diam</b>
+6--13 rays, generally 6--10 mm
+scattered in San Mateo County
+-}
+
 {+common woolly sunflower:Eriophyllum lanatum}
 {-
-annual to subshrub, woody at base only
+herb
+<b>involucre 6--15 mm diam</b>
 5--15 phyllaries
 5--13 rays, <b>6--20 mm</b>
 scattered
 -}
+
+There are no other species of this genus in the bay area.
