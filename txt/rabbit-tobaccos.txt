@@ -3,17 +3,94 @@ I need to re-evaluate all of my observations now that I have some idea what to l
 
 Key features:
 {-
-leaf width, glandular or not, clasping or not, decurrent or not
+stem stalked-glandular or not, glabrous or proximally glabrous or +- tomentose
+leaf clasping or not, decurrent or not, tomentose or glandular or not on each leaf face, flat or wavy
+inflorescence shape
+head shape and colors
 -}
 
-{+california cudweed}
+{+california cudweed:P. californicum}
 {-
-Inflorescence: +- flat-topped or rounded; involucre 5.5--7 mm, bell-shaped to round when pressed
-Leaf: generally not crowded, <b>4--10 cm, 5--10(20) mm wide</b>, reduced distally on stem or not, oblanceolate to lanceolate, <b>base +- clasping or not, decurrent 0--15 mm</b>, flat or margin slightly curled under, sometimes wavy, faces generally green, <b>stalked-glandular, sticky</b>, sometimes +- tomentose
+<b>Stem stalked-glandular, sometimes glabrous</b>
+Leaves generally not crowded
+Leaf base +- clasping or not, decurrent 0--15 mm
+Leaf faces generally green, stalked-glandular, sometimes +- tomentose
+Leaf flat or margin slightly curled under, sometimes wavy
+inflorescence flat-topped or rounded
+phyllaries in 7--10 series, white to pink
+very common
 -}
 
-{+cottonbatting plant}
+{pink everlasting:P. ramosissimum}
 {-
-Inflorescence: dense, 1--2 cm diam or +- cyme-like; involucre 4--6 mm +- spheric
-Leaf: +- crowded, <b>2--8(9.5) cm, 2--5(10) mm wide</b>, reduced distally on stem, oblong to narrowly oblanceolate or weakly spoon-shaped, <b>+- clasping, generally not decurrent</b> (decurrent 1--2 mm), flat or margin slightly curled under, faces loosely persistently gray-tomentose, <b>not glandular</b>
+<b>Stem stalked-glandular</b>, +- tomentose
+Leaves crowded proximally or not
+Leaf base not clasping, decurrent 2--10 mm
+Leaf faces +- green or thinly gray-tomentose, stalked-glandular
+Leaf margin curled under and closely wavy
+Inflorescence in panicle-like cluster
+<b>phyllaries generally +- pink</b>
+common
 -}
+
+{fragrant everlasting:P. beneolens}
+{-
+<b>Stem obscurely glandular beneath long hairs</b>, tomentose
+Leaves crowded or not [unknown]
+Leaf base not clasping, decurrent 5--15 mm
+Leaf faces loosely gray-tomentose, obscurely glandular beneath long hairs
+Leaf flat
+common
+-}
+
+{+cottonbatting plant:P. stramineum}
+{-
+Stem not glandular, loosely to densely tomentose
+Leaves +- crowded
+Leaf base +- clasping, generally not decurrent
+Leaf faces loosely persistently gray-tomentose, not glandular
+Leaf flat or margin slightly curled under
+Inflorescence dense, 1--2 cm diam or +- cyme-like
+pistillate corolla evenly yellow [?]
+common
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0216+0803}
+{two-color rabbit tobacco:P. bioletti}
+{-
+Stem not glandular, <b>sometimes +- woody near base, proximally tomentose to glabrous</b>, but always tomentose near heads
+Leaves not crowded
+Leaf base clasping, not decurrent
+adaxial leaf face +- bright green, tomentose or not, <b>densely stalked-glandular</b>
+abaxial leaf face generally white-tomentose
+Leaf flat or margin slightly curled under, often wavy
+Inflorescence +- flat-topped
+rare
+-}
+
+{jersey cudweed:P. luteoalbum}
+{-
+Stem not glandular, loosely tomentose
+Leaves proximally +- crowded, distally +- widely spaced
+Leaf +- clasping, generally decurrent 1--2 mm
+Leaf faces generally +- gray-tomentose or adaxial +- glabrous
+Leaf margin generally curled under
+Involucre 3--4 mm
+<b>pistillate corolla usually red tipped</b>
+common
+-}
+
+{feltleaf everlasting:P. microcephalum}
+{-
+Stem not glandular, tomentose
+Leaves crowded or not
+Leaf base clasping or not, decurrent 3--10 mm or not
+Leaf opposing faces weakly contrasting in color, tomentose, adaxial less densely so, not glandular
+Leaf flat
+Inflorescence loose, flat-topped to panicle-like cluster
+<b>narrow heads</b>
+"Characterized by stems commonly stiffly erect and slightly zigzag distally, relatively thick (3--5 mm diam near base), and closely gray-tomentose, leaves oblanceolate, sessile, sometimes clasping, not decurrent, and weakly 2-colored."
+rare
+-}
+
+There are no other species of this genus in the bay area.

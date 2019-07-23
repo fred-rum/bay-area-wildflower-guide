@@ -3,6 +3,7 @@
 {annual,annuals} Lives for one year or less, generally without forming any woody parts.
 {basal} Positioned at the base.  Most commonly refers to leaves growing at the base of the stem.  Contrast cauline leaves.
 {cauline} Growing along a plant's stem.  Most commonly refers to leaves.  Contrast basal leaves.
+{decurrent} The leaf blade extends onto the stem as a short wing.
 {dioecious} A plant that has only either male or female flowers on it, never both on the same plant.
 {distal} Growing farther away from the base and closer to the tip of a structure.  The structure is often implied; e.g. a proximal leaf grows close to the base of the whole plant.  Contrast proximal.
 {glabrous} Without hair.
