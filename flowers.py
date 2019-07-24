@@ -193,6 +193,17 @@ class Page:
     def add_jpg(self, jpg):
         self.jpg_list.append(jpg)
 
+    def get_jpg(self):
+        if self.jpg_list:
+            return self.jpg_list[0]
+        else:
+            # Search this key page's children for a jpg to use.
+            for child in self.child:
+                jpg = child.get_jpg()
+                if jpg:
+                    return jpg
+            return None
+
     def parse_names(self):
         def repl_com(matchobj):
             com = matchobj.group(1)
@@ -239,29 +250,62 @@ class Page:
             sci = matchobj.group(4)
             if not suffix:
                 suffix = ''
-            # If the child does not exist, don't record the relationship.
-            # We don't need to flag an error here, though.  We'll just
-            # create the links to the non-existant child, and those links
-            # will flag an error when they get parsed.
-            if child in name_page:
+            if not sci:
+                sci = ''
+            repl_string = x + child + suffix + sci
+            # I changed the order of replacements in order to handle
+            # unobserved links here, but now the regex for unobserved links
+            # catches too much.  The regex excludes newlines (to avoid stuff
+            # like '{[' or '{-', but here I specifically exclude other stuff,
+            # including anything in a bare {name} format without a scientific
+            # name.  Excluded stuff is simply returned reformatted as its
+            # original string so that (effectively) no substitution is
+            # performed.
+            if (repl_string.startswith('https:') or
+                repl_string.endswith('.jpg') or
+                not (x or sci)):
+                # perform no substitution
+                return '{' + repl_string + '}'
+            # +name[,suffix][:sci] -> creates a child relationship with [name]
+            #   and creates two links to it: an image link and a text link.
+            #   If a suffix is specified, the jpg with that suffix is used for
+            #   the image link.
+            #   If a scientific name is specified, the child's scientific name
+            #   is set to that value.  The name can be in elaborated or
+            #   stripped format.
+            # child:name[:sci] -> creates a child relationship with [name]
+            #   and creates a text link to it.
+            #   If a scientific name is specified, the child's scientific name
+            #   is set to that value.
+            # name:sci -> creates a photo-less page for [name] and gives it
+            #   the specified scientific name.  The child page will be
+            #   populated with the standard page information, particularly
+            #   links to iNaturalist, CalFlora, CalPhotos, and Jepson.
+            if not child in name_page:
+                # If the child does not exist, create it.
+                child_page = Page(child)
+                child_page.txt = ''
+                # We don't expect a '+' or 'child:' link to a missing page;
+                # only a {name:sci} link should create a fresh page.
+                if x:
+                    print 'Broken link to {{{child}}} on page {page}'.format(child=child, page=self.name)
+            else:
                 child_page = name_page[child]
-                self.assign_child(child_page)
-                # In addition to linking to the child,
-                # also give a scientific name to it.
-                if sci:
-                    sci = sci[1:] # discard colon
-
-                    # If the child's genus is abbreviated, expand it using
-                    # the genus of the current page.
-                    if (self.cur_genus and len(sci) >= 3 and
-                        sci[0:3] == self.cur_genus[0] + '. '):
-                        sci = self.cur_genus + sci[2:]
-                    elif ' ' in sci:
-                        # If the child's genus is explicitly specified,
-                        # make it the default for future abbreviations.
-                        self.cur_genus = sci.split(' ')[0]
-
-                    child_page.set_sci(sci)
+            self.assign_child(child_page)
+            # In addition to linking to the child,
+            # also give a scientific name to it.
+            if sci:
+                sci = sci[1:] # discard colon
+                # If the child's genus is abbreviated, expand it using
+                # the genus of the current page.
+                if (self.cur_genus and len(sci) >= 3 and
+                    sci[0:3] == self.cur_genus[0] + '. '):
+                    sci = self.cur_genus + sci[2:]
+                elif ' ' in sci:
+                    # If the child's genus is explicitly specified,
+                    # make it the default for future abbreviations.
+                    self.cur_genus = sci.split(' ')[0]
+                child_page.set_sci(sci)
             if x == '+':
                 # Replace the {+...} field with two new fields:
                 # - a photo that links to the child
@@ -269,7 +313,7 @@ class Page:
                 return ('{' + child + ':' + child + suffix + '.jpg}\n'
                         '{' + child + '}')
             else:
-                # Replaced the {child:...} field with a new field:
+                # Replace the {child:name} or {name:sci} field with a new field:
                 # - a text link to the child
                 return '{' + child + '}'
 
@@ -278,7 +322,7 @@ class Page:
         else:
             self.cur_genus = None
 
-        self.txt = re.sub(r'{(child:|\+)([^\}:,]+)(,[-0-9]*)?(:[^\}]+)?}', repl_child, self.txt)
+        self.txt = re.sub(r'{(child:|\+|)([^-\}:,\n][^\}:,\n]*)(,[-0-9]*)?(:[^\}\n]+)?}', repl_child, self.txt)
 
     def parse_glossary(self):
         def repl_glossary(matchobj):
@@ -298,8 +342,10 @@ class Page:
             style = ' class="family"'
         elif self.key:
             style = ' class="parent"'
-        else:
+        elif self.jpg_list:
             style = ' class="leaf"'
+        else:
+            style = ' class="unobs"'
         return '<a href="{name}.html"{style}>{full}</a>'.format(name=self.name, style=style, full=self.format_full(lines))
 
     def write_parents(self, w):
@@ -310,7 +356,8 @@ class Page:
             w.write('<p/>\n')
 
     def page_matches_color(self, color):
-        return (color == None or color in self.color)
+        return ((self.child or self.jpg_list) and # key or observed flower
+                (color == None or color in self.color)) # color matches
 
     # For containers, sum the observation counts of all children,
     # *but* if a flower is found via multiple paths, count it only once.
@@ -439,6 +486,10 @@ Locations:
         w.write('<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson eFlora</a><p/>\n'.format(sci=stripped));
 
     def write_lists(self, w):
+        if not self.child and not self.jpg_list:
+            return
+
+        w.write('<hr/>\n')
         w.write('Flower lists that include this page:<p/>\n')
         w.write('<ul/>\n')
 
@@ -452,14 +503,14 @@ Locations:
     # List a single page, indented if it is under a parent.
     # (But don't indent it if it is itself a parent, in which case it has
     # already put itself in an indented box.)
-    def list_page(self, w, indent):
+    def list_page(self, w, indent, has_children):
         if indent:
             indent_class = ' indent'
         else:
             indent_class = ''
 
-        if self.child:
-            # A parent puts itself in a box.
+        if has_children:
+            # A parent with listed children puts itself in a box.
             # The box may be indented, in which case, the remainder
             # of the listing is not indented.
             w.write('<div class="box{indent_class}">\n'.format(indent_class=indent_class))
@@ -566,40 +617,31 @@ Locations:
 
             # Keep trying stuff until we find something in the global jpg_list
             # or until we explicitly give up.
-            while jpg not in jpg_list:
-                # If the "jpg" name is actually a page name,
-                # use the first jpg of that page (if there is one),
-                # or drill into its first child (if there is one).
-                if jpg in name_page:
-                    jpg_page = name_page[jpg]
-                    if jpg_page.jpg_list:
-                        jpg = jpg_page.jpg_list[0]
-                        break
+            orig_jpg = jpg
+            if jpg not in jpg_list and jpg in name_page:
+                # If the "jpg" name is actually a page name, get a jpg
+                # from that page.
+                jpg_page = name_page[jpg]
+                jpg = jpg_page.get_jpg()
 
-                    if jpg_page.child:
-                        jpg = jpg_page.child[0].name
-                        continue
-
-                break # give up
+            found = (jpg in jpg_list)
+            if not found:
+                jpg = orig_jpg
 
             thumb = '../thumbs/{jpg}.jpg'.format(jpg=jpg)
 
             if link_to_jpg:
                 href = '../photos/{jpg}.jpg'.format(jpg=jpg)
+                img_class = 'leaf-thumb'
             else:
                 href = '{link}.html'.format(link=link)
+                img_class = 'page-thumb'
 
-            if jpg in jpg_list:
-                # Different formatting for a photo on a key page vs.
-                # a leaf page.
-                if self.child:
-                    img_class = 'page-thumb'
-                else:
-                    img_class = 'leaf-thumb'
+            if found:
                 img = '<a href="{href}"><img src="{thumb}" width="200" height="200" class="{img_class}"></a>'.format(href=href, thumb=thumb, img_class=img_class)
             else:
                 img = '<a href="{href}" class="missing"><div class="page-thumb-text"><span>{jpg}</span></div></a>'.format(jpg=jpg, href=href)
-                print '{jpg}.jpg missing'.format(jpg=jpg)
+                print '{jpg}.jpg missing on page {name}'.format(jpg=jpg, name=self.name)
 
             return img
 
@@ -721,11 +763,10 @@ Locations:
             self.write_obs(w)
             if self.sci:
                 self.write_external_links(w)
-            w.write('<hr/>\n')
             self.write_lists(w)
             write_footer(w)
 
-        if not self.child and not self.color:
+        if self.jpg_list and not self.color:
             print 'No color for {name}'.format(name=self.name)
 
         # record all pages that are within each genus
@@ -1019,7 +1060,10 @@ with open(root + '/family names.yaml') as f:
 # - initialize common and scientific names as specified
 # - detect parent->child relationships among pages
 # - add links to glossary words
-for page in name_page.itervalues():
+
+# parse_children() can add new pages, so we make a copy of the list to
+# iterate through.
+for page in [x for x in name_page.itervalues()]:
     page.parse_names()
     page.parse_children()
     page.parse_glossary()
@@ -1127,7 +1171,7 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
 if surprise_obs:
     print "The following observed species don't have a page even though a parent (genus or below) does:"
     for sci in sorted(surprise_obs):
-        print '  ' + sci
+        print '  ' + repr(sci)
 
 if park_nf_list:
     print "Parks not found:"
@@ -1280,8 +1324,9 @@ def list_matches(w, match_set, indent, color, seen_set):
 
     for page in match_list:
         if page.child:
-            page.list_page(w, indent)
-            (k, f) = list_matches(w, find_matches(page.child, color),
+            child_matches = find_matches(page.child, color)
+            page.list_page(w, indent, child_matches)
+            (k, f) = list_matches(w, child_matches,
                                   True, color, seen_set)
             w.write('</div>\n')
             if page not in seen_set:
@@ -1290,11 +1335,11 @@ def list_matches(w, match_set, indent, color, seen_set):
                 key_count += k
                 flower_count += f
         else:
-            page.list_page(w, indent)
+            page.list_page(w, indent, None)
             if page not in seen_set:
                 flower_count += 1
 
-    seen_set.add(page)
+        seen_set.add(page)
 
     return (key_count, flower_count)
 

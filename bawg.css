@@ -188,6 +188,12 @@ a.family:link {
 a.family:visited {
     color: black;
 }
+a.unobs:link {
+    color: black;
+}
+a.unobs:visited {
+    color: black;
+}
 a.parent:link {
     color: SaddleBrown;
 }

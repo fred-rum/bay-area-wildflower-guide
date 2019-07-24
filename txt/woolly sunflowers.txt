@@ -19,7 +19,7 @@ peduncle 0--2.5(9) cm
 Ecology: Many dry habitats
 -}
 
-{Jepson's woolly sunflower:E. jepsonii}
+{jepson's woolly sunflower:E. jepsonii}
 {-
 subshrub, 50--80 cm
 5--8 phyllaries, strongly overlapping
