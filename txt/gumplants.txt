@@ -27,3 +27,5 @@ Ecology: sandy or saline bottomland, roadsides
 <b>leaves +- fleshy</b>
 Ecology: <b>coastal bluffs, dunes, tidal wetlands</b>
 -}
+
+There are no other species of this genus in the bay area.

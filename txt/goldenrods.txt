@@ -1,0 +1,33 @@
+{sci:Solidago}
+{+california goldenrod:Solidago velutina ssp. californica}
+{-
+proximal cauline or basal leaves largest
+leaves and heads not strongly resinous
+herbage sparsely to densely short-hairy
+distal nodes without axillary leaf-clusters
+very common
+-}
+
+{southern goldenrod:S. confinis}
+{-
+proximal cauline or basal leaves largest
+leaves and heads not strongly resinous
+herbage +- glabrous
+distal nodes often with axillary leaf-clusters
+Presidio
+-}
+
+{coast goldenrod:S. spathulata}
+{-
+leaves and heads strongly resinous
+proximal cauline or basal leaves largest
+rare on the Pacific coast
+-}
+
+{west coast canada goldenrod:S. elongata}
+{-
+mid-cauline leaves largest
+scattered mostly near the Pacific coast
+-}
+
+There are no other species of this genus in the bay area.

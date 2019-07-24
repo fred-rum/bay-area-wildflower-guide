@@ -328,6 +328,7 @@ var pages=[
 {page:"dwarf brodiaea",sci:"Brodiaea terrestris"},
 {page:"fiddle dock",sci:"Rumex pulcher"},
 {page:"goldenbushes",sci:"Ericameria spp.",key:true},
+{page:"goldenrods",sci:"Solidago spp.",key:true},
 {page:"hairy gumweed",sci:"Grindelia hirsutula"},
 {page:"herb robert",sci:"Geranium robertianum"},
 {page:"johnnytuck",sci:"Triphysaria eriantha"},
