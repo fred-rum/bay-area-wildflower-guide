@@ -1,7 +1,17 @@
 {sci:Lasthenia}
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0514+0357}
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0511+0368}
-Distinguishing california goldfields from common goldfields requires looking at the pappus.  The pappus takes the place of the calyx (sepals) in the disk flowers.  If the flower is in bloom, the pappus is typically shorter than the disk corolla, so to see it you'll need to pull the flower head apart.  (Pulling one disk flower out may be sufficient.  It may bring the pappus with it or leave it attached to the ovary.  I need to test that idea.)  Once the flower goes to seed and the corollas fall off, the pappus is much easier to see and often looks like a dandelion's seed pod.
+Key features:
+{-
+phyllaries free or partially fused (and what percent is fused)
+number of phyllaries
+leaf shape
+ray length
+pappus present or not, color, opacity
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0514+0357:pappus in flower}
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0511+0368:pappus in seed}
+
+Distinguishing goldfields often requires examining the pappus.  The pappus takes the place of the calyx/sepals in the disk flowers.  If the flower is in bloom, the pappus is typically shorter than the disk corolla, so to see it you'll need to pull the flower head apart.  (Pulling one disk flower out may be sufficient.  It may bring the pappus with it or leave it attached to the ovary.  I need to test that idea.)  Once the flower goes to seed and the corollas fall off, the pappus is much easier to see and often looks like a dandelion's seed pod.
 
 {[
 <h2>phyllaries free</h2>
@@ -63,7 +73,7 @@ scattered in low-lying areas of the East Bay
 {-
 phyllaries +- fused, fused portion > 2/3 length
 leaves entire
-Pappus present
+pappus present
 rare
 -}
 
@@ -71,7 +81,7 @@ rare
 {-
 phyllaries +- fused, fused portion > 2/3 length
 leaves entire
-Pappus 0
+pappus 0
 rare
 -}
 
