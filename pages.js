@@ -255,6 +255,7 @@ var pages=[
 {page:"foothill desert-parsley",sci:"Lomatium utriculatum"},
 {page:"fritillaries",sci:"Fritillaria spp.",key:true},
 {page:"giant wakerobin",sci:"Trillium chloropetalum"},
+{page:"goldfields",sci:"Lasthenia spp.",key:true},
 {page:"gumplants",sci:"Grindelia spp.",key:true},
 {page:"himalayan blackberry",sci:"Rubus armeniacus"},
 {page:"medicks",sci:"Medicago spp.",key:true},
