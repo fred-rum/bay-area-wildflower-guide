@@ -1150,9 +1150,9 @@ def find_matches(page_subset, color):
     for page in page_subset:
         if page.child:
             child_subset = find_matches(page.child, color)
-            if len(child_subset) == 1:
+            if len(child_subset) == 1 and color != None:
                 match_set.extend(child_subset)
-            elif len(child_subset) > 1:
+            elif child_subset:
                 match_set.append(page)
                 # Record this container page's newly discovered color.
                 page.color.add(color)
