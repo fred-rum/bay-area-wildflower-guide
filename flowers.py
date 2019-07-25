@@ -54,7 +54,20 @@ def strip_sci(sci):
             # The name is in {type} {name} format (e.g. "family Phrymaceae").
             # Strip the type from the 'sci' name.
             return sci_words[1]
-    # The name is already in a legal stripped format.
+    # The name is already in a fine stripped format.
+    return sci
+
+def elaborate_sci(sci):
+    sci_words = sci.split(' ')
+    if len(sci_words) == 1:
+        # One word in the scientific name implies a genus.
+        return ' '.join((sci, 'spp.'))
+    elif len(sci_words) == 3:
+        # Three words in the scientific name implies a subset of a species.
+        # We probably got this name from an iNaturalist observation, and it
+        # doesn't have an explicit override, so we can only assume "ssp."
+        return ' '.join((sci_words[0], sci_words[1], 'ssp.', sci_words[2]))
+    # The name is already in a fine elaborated format.
     return sci
 
 class Page:
@@ -110,35 +123,8 @@ class Page:
     # set_sci() can be called with a stripped or elaborated name.
     # Either way, both a stripped and elaborated name are recorded.
     def set_sci(self, sci):
-        sci_words = sci.split(' ')
-        if len(sci_words) == 1:
-            # One word in the scientific name implies a genus.
-            elab = ' '.join((sci, 'spp.'))
-        elif len(sci_words) == 3:
-            # Three words in the scientific name implies a subset of a species.
-            # We probably got this name from an iNaturalist observation, and it
-            # doesn't have an explicit override, so we can only assume "ssp."
-            elab = ' '.join((sci_words[0], sci_words[1], 'ssp.', sci_words[2]))
-        elif len(sci_words) == 4:
-            # Four words in the scientific name implies a subset of a species
-            # with an elaborated subtype specifier.  The specifier is stripped
-            # from the 'sci' name.
-            elab = sci
-            sci = ' '.join((sci_words[0], sci_words[1], sci_words[3]))
-        elif sci_words[1] == 'spp.':
-            # It is a genus name in elaborated format.  The 'spp.' suffix is
-            # stripped from the 'sci' name.
-            elab = sci
-            sci = sci_words[0]
-        elif sci[0].islower():
-            # The name is in {type} {name} format (e.g. "family Phrymaceae").
-            # Strip the type from the 'sci' name.
-            elab = sci
-            sci = sci_words[1]
-        else:
-            # The name is in the regular "genus species" format, which is the
-            # same for both sci and elab
-            elab = sci
+        elab = elaborate_sci(sci)
+        sci = strip_sci(sci)
 
         if sci in sci_page and sci_page[sci] != self:
             print 'Same scientific name ({sci}) set for {name1} and {name2}'.format(sci=sci, name1=sci_page[sci].name, name2=self.name)
