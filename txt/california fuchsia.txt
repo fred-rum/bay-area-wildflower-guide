@@ -1,3 +1,2 @@
-{default}
 See also {-red larkspur}.
 <hr/>

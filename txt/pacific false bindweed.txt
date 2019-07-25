@@ -1,6 +1,4 @@
 {sci:Calystegia purpurata}
-{jpgs}
-
 {:Calystegia purpurata ssp. purpurata}
 {-
 stem strongly climbing, > 1 m

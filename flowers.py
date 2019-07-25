@@ -98,8 +98,7 @@ class Page:
             # If there is an uppercase letter somewhere, it's a scientific name.
             self.set_sci(name)
 
-        # self.txt is always initialized elsewhere.
-
+        self.txt = ''
         self.jpg_list = [] # an ordered list of jpg names
 
         self.parent = set() # an unordered set of parent pages
@@ -303,7 +302,6 @@ class Page:
                     child = strip_sci(sci)
                 # If the child does not exist, create it.
                 child_page = Page(child)
-                child_page.txt = ''
                 # We don't expect a '+' or 'child:' link to a missing page;
                 # only a {name:sci} link should create a fresh page.
                 if x:
@@ -566,15 +564,15 @@ Locations:
 
         s = re.sub(r'\n{-\n(.*?)\n-}\n', repl_list, s, flags=re.DOTALL)
 
-        # Replace {jpgs} with all jpgs that exist for the flower.
-        def repl_jpgs(matchobj):
-            if self.jpg_list:
-                jpgs = ['{{{jpg}.jpg}}'.format(jpg=jpg) for jpg in self.jpg_list]
-                return ' '.join(jpgs)
+        # Prepend the txt with all jpgs for the page.
+        if self.jpg_list:
+            jpgs = ['{{{jpg}.jpg}}'.format(jpg=jpg) for jpg in self.jpg_list]
+            if s:
+                s = ' '.join(jpgs) + '\n\n' + s
             else:
-                return '{no photos.jpg}'
-
-        s = re.sub(r'{jpgs}', repl_jpgs, s)
+                # This doesn't have to be a separate case, but it prevents
+                # unnecessary HTML changes from the previous version.
+                s = ' '.join(jpgs) + '\n'
 
         # Look for any number of {photos} followed by all text up to the
         # first \n\n or \n+EOF.  Photos can be my own or CalPhotos.
@@ -978,9 +976,6 @@ repl_easy_dict = {
     # (Presumably they're external links or they'd be in {...} format.)
     '<a href=' : '<a target="_blank" href=',
 
-    # Replace {default} with all the default fields.
-    '{default}' : '{jpgs}\n',
-
     # Handle boxes on key pages.
     '{[' : '<div class="box">',
     ']}' : '</div>',
@@ -1016,7 +1011,6 @@ for jpg in sorted(jpg_list):
         page = name_page[name]
     else:
         page = Page(name)
-        page.txt = '{default}'
     page.add_jpg(jpg)
 
 # Read color info from the YAML file.
@@ -1239,7 +1233,6 @@ for family in family_child_set:
         page.set_sci('family ' + family)
         if com != 'n/a':
             page.set_com(com)
-        page.txt = ''
         for child in sort_pages(family_child_set[family]):
             page.txt += '{{+{name}}}\n\n'.format(name=child.name)
         page.parse_children()

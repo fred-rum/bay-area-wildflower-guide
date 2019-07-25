@@ -1,6 +1,4 @@
 {sci:Prunus}
-{jpgs}
-
 Key features:
 {-
 inflorescence shape, leafy or leafless at base

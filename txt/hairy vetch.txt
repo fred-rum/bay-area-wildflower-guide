@@ -1,6 +1,4 @@
 {sci:Vicia villosa}
-{jpgs}
-
 Key features:
 {-
 <b>short hairs on upper stems and leaves conspicuous or none/sparse/appressed</b>

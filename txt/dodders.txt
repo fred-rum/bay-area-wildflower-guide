@@ -1,6 +1,4 @@
 {sci:Cuscuta}
-{jpgs}
-
 {california dodder:C. californica}
 {-
 corolla scales 0

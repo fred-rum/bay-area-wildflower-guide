@@ -1,3 +1,2 @@
-{default}
 See also {-creamcups}.
 <hr/>
