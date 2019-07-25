@@ -38,6 +38,25 @@ import cStringIO
 import yaml
 import codecs
 
+def strip_sci(sci):
+    sci_words = sci.split(' ')
+    if len(sci_words) == 4:
+        # Four words in the scientific name implies a subset of a species
+        # with an elaborated subtype specifier.  The specifier is stripped
+        # from the 'sci' name.
+        return ' '.join((sci_words[0], sci_words[1], sci_words[3]))
+    elif len(sci_words) == 2:
+        if sci_words[1] == 'spp.':
+            # It is a genus name in elaborated format.  The 'spp.' suffix is
+            # stripped from the 'sci' name.
+            return sci_words[0]
+        elif sci[0].islower():
+            # The name is in {type} {name} format (e.g. "family Phrymaceae").
+            # Strip the type from the 'sci' name.
+            return sci_words[1]
+    # The name is already in a legal stripped format.
+    return sci
+
 class Page:
     pass
 
@@ -263,7 +282,8 @@ class Page:
             # performed.
             if (repl_string.startswith('https:') or
                 repl_string.endswith('.jpg') or
-                not (x or sci)):
+                not (x or sci) or
+                not (child or sci)):
                 # perform no substitution
                 return '{' + repl_string + '}'
             # +name[,suffix][:sci] -> creates a child relationship with [name]
@@ -281,7 +301,20 @@ class Page:
             #   the specified scientific name.  The child page will be
             #   populated with the standard page information, particularly
             #   links to iNaturalist, CalFlora, CalPhotos, and Jepson.
+            if sci:
+                sci = sci[1:] # discard colon
+                # If the child's genus is abbreviated, expand it using
+                # the genus of the current page.
+                if (self.cur_genus and len(sci) >= 3 and
+                    sci[0:3] == self.cur_genus[0] + '. '):
+                    sci = self.cur_genus + sci[2:]
+                elif ' ' in sci:
+                    # If the child's genus is explicitly specified,
+                    # make it the default for future abbreviations.
+                    self.cur_genus = sci.split(' ')[0]
             if not child in name_page:
+                if not child:
+                    child = strip_sci(sci)
                 # If the child does not exist, create it.
                 child_page = Page(child)
                 child_page.txt = ''
@@ -295,16 +328,6 @@ class Page:
             # In addition to linking to the child,
             # also give a scientific name to it.
             if sci:
-                sci = sci[1:] # discard colon
-                # If the child's genus is abbreviated, expand it using
-                # the genus of the current page.
-                if (self.cur_genus and len(sci) >= 3 and
-                    sci[0:3] == self.cur_genus[0] + '. '):
-                    sci = self.cur_genus + sci[2:]
-                elif ' ' in sci:
-                    # If the child's genus is explicitly specified,
-                    # make it the default for future abbreviations.
-                    self.cur_genus = sci.split(' ')[0]
                 child_page.set_sci(sci)
             if x == '+':
                 # Replace the {+...} field with two new fields:
@@ -322,7 +345,7 @@ class Page:
         else:
             self.cur_genus = None
 
-        self.txt = re.sub(r'{(child:|\+|)([^-\}:,\n][^\}:,\n]*)(,[-0-9]*)?(:[^\}\n]+)?}', repl_child, self.txt)
+        self.txt = re.sub(r'{(child:|\+|)([^\}:,\n]*)(,[-0-9]*)?(:[^\}\n]+)?}', repl_child, self.txt)
 
     def parse_glossary(self):
         def repl_glossary(matchobj):
@@ -356,8 +379,7 @@ class Page:
             w.write('<p/>\n')
 
     def page_matches_color(self, color):
-        return ((self.child or self.jpg_list) and # key or observed flower
-                (color == None or color in self.color)) # color matches
+        return (color == None or color in self.color)
 
     # For containers, sum the observation counts of all children,
     # *but* if a flower is found via multiple paths, count it only once.
@@ -666,38 +688,6 @@ Locations:
             return img
 
         s = re.sub(r'\{(https://calphotos.berkeley.edu/[^\}]+)\}', repl_calphotos, s)
-
-        # Replace a {[common]:[scientific]} reference with a link to CalFlora.
-        # [common] is optional, but the colon must always be present.
-        def repl_calflora(matchobj):
-            self.key = True
-            com = matchobj.group(1)
-            elab = matchobj.group(2)
-            if com and com[0] == '-':
-                com = com[1:]
-                lines = 1
-            else:
-                lines = 2
-            # If the child's genus is abbreviated, expand it using
-            # the genus of the current page.
-            if (self.cur_genus and len(elab) >= 3 and
-                elab[0:3] == self.cur_genus[0] + '. '):
-                elab = self.cur_genus + elab[2:]
-            elif ' ' in elab:
-                # If the child's genus is explicitly specified,
-                # make it the default for future abbreviations.
-                self.cur_genus = elab.split(' ')[0]
-
-            if com:
-                if lines == 1:
-                    text = '{com} (<i>{elab}</i>)'.format(com=com, elab=elab)
-                else:
-                    text = '{com}<br/><i>{elab}</i>'.format(com=com, elab=elab)
-            else:
-                text = '<i>{elab}</i>'.format(elab=elab)
-            return '<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank" class="external">{text}</a>'.format(elab=elab, text=text)
-
-        s = re.sub(r'{([^\}]*):([^\}]+)}', repl_calflora, s)
 
         # Any remaining {reference} should refer to another page.
         # Replace it with a link to one of my pages (if I can).
@@ -1190,19 +1180,21 @@ top_list = [x for x in name_page.itervalues() if not x.parent]
 #
 # If color == None, every page matches.
 def find_matches(page_subset, color):
-    match_set = []
+    match_list = []
     for page in page_subset:
-        if page.child:
-            child_subset = find_matches(page.child, color)
-            if len(child_subset) == 1 and color != None:
-                match_set.extend(child_subset)
-            elif child_subset:
-                match_set.append(page)
+        child_subset = find_matches(page.child, color)
+        if len(child_subset) == 1 and color != None:
+            match_list.extend(child_subset)
+        elif child_subset:
+            match_list.append(page)
+            if color != None:
                 # Record this container page's newly discovered color.
                 page.color.add(color)
-        elif page.page_matches_color(color):
-            match_set.append(page)
-    return match_set
+        elif page.jpg_list and page.page_matches_color(color):
+            # only include the page on the list if it is a key or observed
+            # flower (not an unobserved flower).
+            match_list.append(page)
+    return match_list
 
 # We don't need color_page_list yet, but we go through the creation process
 # now in order to populate page_color for all container pages.
@@ -1323,8 +1315,8 @@ def list_matches(w, match_set, indent, color, seen_set):
         match_list = sort_pages(match_set, color=color)
 
     for page in match_list:
-        if page.child:
-            child_matches = find_matches(page.child, color)
+        child_matches = find_matches(page.child, color)
+        if child_matches:
             page.list_page(w, indent, child_matches)
             (k, f) = list_matches(w, child_matches,
                                   True, color, seen_set)

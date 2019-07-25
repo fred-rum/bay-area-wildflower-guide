@@ -18,9 +18,17 @@ has thin linear leaves cupping the involucre
 scattered around the bay area
 -}
 
-{-vernal pool checkerbloom:Sidalcea calycosa ssp. calycosa} - Calero & Mt. Tam
+{vernal pool checkerbloom:Sidalcea calycosa ssp. calycosa}
+{-
+Calero & Mt. Tam
+-}
 
-{-marin checkerbloom:Sidalcea hickmanii ssp. viridis} Marin
+{marin checkerbloom:Sidalcea hickmanii ssp. viridis}
+{-
+Marin
+-}
 
-{-maple-leaved checkerbloom:Sidalcea malachroides} - Nisene Marks
-<hr/>
+{maple-leaved checkerbloom:Sidalcea malachroides}
+{-
+Nisene Marks
+-}

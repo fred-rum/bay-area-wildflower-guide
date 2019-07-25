@@ -80,7 +80,7 @@ no confirmed records in the bay area
 rare, historical record only
 -}
 
-{:C.iberica}
+{:C. iberica}
 {-
 some relatively recent records from around the Calaveras Reservoir, which I never visit
 -}
