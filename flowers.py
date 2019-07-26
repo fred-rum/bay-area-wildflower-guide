@@ -70,20 +70,6 @@ def elaborate_sci(sci):
     # The name is already in a fine elaborated format.
     return sci
 
-def find_page(name):
-    if name in name_page:
-        return name_page[name]
-
-    if name.islower():
-        if name in com_page and com_page[name] != 'multiple':
-            return com_page[name]
-    else:
-        sci = strip_sci(name)
-        if sci in sci_page:
-            return sci_page[name]
-
-    return None
-
 def find_page2(com, sci):
     if com and com in name_page:
         return name_page[com]
@@ -103,6 +89,12 @@ def find_page2(com, sci):
             return com_page[com]
 
     return None
+
+def find_page1(name):
+    if name.islower():
+        return find_page2(name, None)
+    else:
+        return find_page2(None, name)
 
 class Page:
     pass
@@ -728,7 +720,7 @@ Locations:
                 lines = 1
             else:
                 lines = 2
-            page = find_page(name)
+            page = find_page1(name)
             if page:
                 return page.create_link(lines)
             else:
