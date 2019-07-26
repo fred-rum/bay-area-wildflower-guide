@@ -1,13 +1,35 @@
 {sci:Stephanumeria}
+Key features:
+{-
+seed with or without long groove on each face
+pappus bristles plumose all the way to the base or only 60--85%
+outer phyllaries appressed or reflexed [whether strongly or barely so]
+-}
+
+See <a href="https://www.inaturalist.org/observations/9062292#identification-61948150">my observation comment</a> about a couple of key features and how indistinct they are.
+
 {+rod wirelettuce:Stephanomeria virgata}
 {-
 seed without long groove on each face
 ssp. pleurocarpa: outer phyllaries appressed
 ssp. virgata: outer phyllaries strongly reflexed
+common
 -}
 
 {santa barbara wirelettuce:Stephanomeria elata}
 {-
 seed with long groove on each face
 outer phyllaries generally [barely] reflexed (rarely appressed)
+pappus bristles wholly plumose or at least to widened bases
+uncommon
 -}
+
+{:S. exigua ssp. coronaria}
+{-
+seed with long groove on each face
+outer phyllaries reflexed or appressed
+pappus bristles plumose on distal 60--85%, widened at base or not
+rare, Marin
+-}
+
+There are no other species of this genus in the bay area.
