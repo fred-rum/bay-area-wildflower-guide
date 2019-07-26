@@ -5,7 +5,7 @@ flower stalked or not
 color of the 6 stamens (which are quite large and linear)
 -}
 
-{+pacific trillium}
+{+pacific trillium:T. ovatum}
 {-
 <b>flower is stalked</b>
 the local subspecies is ssp. ovatum

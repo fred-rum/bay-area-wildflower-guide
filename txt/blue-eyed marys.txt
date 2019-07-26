@@ -44,8 +44,8 @@ Flowers 1 to loosely whorled; proximal pedicels > calyx
 Leaves generally +- lance-deltate, generally coarsely toothed; proximal-most pedicels >> calyx, distal pedicels +- = calyx
 -}
 
-{+fewflower blue-eyed mary:collinsia sparsiflora} (two variants)
+{+fewflower blue-eyed mary:Collinsia sparsiflora} (two variants)
 
-{maiden blue-eyed mary:collinsia parviflora}
+{maiden blue-eyed mary:Collinsia parviflora}
 
-{sticky chinese houses:collinsia tinctoria}
+{sticky chinese houses:Collinsia tinctoria}

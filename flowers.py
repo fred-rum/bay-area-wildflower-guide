@@ -84,6 +84,26 @@ def find_page(name):
 
     return None
 
+def find_page2(com, sci):
+    if com and com in name_page:
+        return name_page[com]
+
+    if sci:
+        sci = strip_sci(sci)
+        if sci in sci_page:
+            return sci_page[sci]
+
+    if com and com in com_page and com_page[com] != 'multiple':
+        page = com_page[com]
+        if sci and page.sci and page.sci != sci:
+            # If the common name matches a page with a different scientific
+            # name, it's treated as not a match.
+            return None
+        else:
+            return com_page[com]
+
+    return None
+
 class Page:
     pass
 
@@ -267,14 +287,14 @@ class Page:
         # parent->child relationship.
         def repl_child(matchobj):
             x = matchobj.group(1)
-            child = matchobj.group(2)
+            name = matchobj.group(2)
             suffix = matchobj.group(3)
             sci = matchobj.group(4)
             if not suffix:
                 suffix = ''
             if not sci:
                 sci = ''
-            repl_string = x + child + suffix + sci
+            repl_string = x + name + suffix + sci
             # I changed the order of replacements in order to handle
             # unobserved links here, but now the regex for unobserved links
             # catches too much.  The regex excludes newlines (to avoid stuff
@@ -286,7 +306,7 @@ class Page:
             if (repl_string.startswith('https:') or
                 repl_string.endswith('.jpg') or
                 not (x or sci) or
-                not (child or sci)):
+                not (name or sci)):
                 # perform no substitution
                 return '{' + repl_string + '}'
             # +name[,suffix][:sci] -> creates a child relationship with [name]
@@ -315,17 +335,17 @@ class Page:
                     # If the child's genus is explicitly specified,
                     # make it the default for future abbreviations.
                     self.cur_genus = sci.split(' ')[0]
-            if not child in name_page:
-                if not child:
-                    child = strip_sci(sci)
+            child_page = find_page2(name, sci)
+            if not child_page:
+                if not name:
+                    name = strip_sci(sci)
                 # If the child does not exist, create it.
-                child_page = Page(child)
+                child_page = Page(name)
                 # We don't expect a '+' or 'child:' link to a missing page;
                 # only a {name:sci} link should create a fresh page.
                 if x:
-                    print 'Broken link to {{{child}}} on page {page}'.format(child=child, page=self.name)
-            else:
-                child_page = name_page[child]
+                    print 'Broken link to {{{name}}} on page {page}'.format(name=name, page=self.name)
+            name = child_page.name
             self.assign_child(child_page)
             # In addition to linking to the child,
             # also give a scientific name to it.
@@ -335,15 +355,20 @@ class Page:
                 # Replace the {+...} field with two new fields:
                 # - a photo that links to the child
                 # - a text link to the child
-                return ('{' + child + ':' + child + suffix + '.jpg}\n'
-                        '{' + child + '}')
+                return ('{' + name + ':' + name + suffix + '.jpg}\n'
+                        '{' + name + '}')
             else:
                 # Replace the {child:name} or {name:sci} field with a new field:
                 # - a text link to the child
-                return '{' + child + '}'
+                return '{' + name + '}'
 
-        if self.sci and ' ' not in self.sci:
-            self.cur_genus = self.sci
+        # If the page's genus is explicitly specified,
+        # make it the default for child abbreviations.
+        if self.sci and self.sci[0].isupper():
+            if ' ' in self.sci:
+                self.cur_genus = self.sci.split(' ')[0]
+            else:
+                self.cur_genus = self.sci
         else:
             self.cur_genus = None
 
@@ -1129,10 +1154,16 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
 
         if sci in sci_page:
             page = sci_page[sci]
-        elif com in com_page and com_page[com] != 'multiple':
-            page = com_page[com]
-            if not page.sci and not page.no_sci: # don't override previous info
-                page.set_sci(sci)
+        elif com in com_page:
+            if com_page[com] == 'multiple':
+                print 'observation {com} ({sci}) matches multiple common names but no scientific name'.format(com=com, sci=sci)
+            else:
+                page = com_page[com]
+                if page.sci:
+                    if sci != page.sci:
+                        print 'observation {com} ({sci}) matches the common name for a page, but not its scientific name ({sci_page})'.format(com=com, sci=sci, sci_page=page.sci)
+                elif not page.no_sci:
+                    page.set_sci(sci)
         else:
             page = None
 

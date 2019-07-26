@@ -7,7 +7,7 @@ basal/proximal leaf width, measured exactly
 petal color
 -}
 
-{+san francisco wallflower:Erysimum franciscan}
+{+san francisco wallflower:Erysimum franciscanum}
 {-
 <b>stem base woody</b>; plant subshrub
 scattered on Pacific coast
