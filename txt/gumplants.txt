@@ -18,6 +18,7 @@ Ecology: sandy, clay, or serpentine slopes or roadsides
 {-
 phyllaries flattened only at bases, rounded in cross-section distally, abruptly narrowed to tips
 phyllary tips spreading, reflexed, or coiled [not erect]
+leaves not fleshy
 <b>plants generally glabrous</b>
 Ecology: sandy or saline bottomland, roadsides
 -}
