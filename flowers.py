@@ -70,6 +70,20 @@ def elaborate_sci(sci):
     # The name is already in a fine elaborated format.
     return sci
 
+def find_page(name):
+    if name in name_page:
+        return name_page[name]
+
+    if name.islower():
+        if name in com_page:
+            return com_page[name]
+    else:
+        sci = strip_sci(name)
+        if sci in sci_page:
+            return sci_page[name]
+
+    return None
+
 class Page:
     pass
 
@@ -679,17 +693,18 @@ Locations:
         # Any remaining {reference} should refer to another page.
         # Replace it with a link to one of my pages (if I can).
         def repl_link(matchobj):
-            link = matchobj.group(1)
-            if link[0] == '-':
-                link = link[1:]
+            name = matchobj.group(1)
+            if name[0] == '-':
+                name = name[1:]
                 lines = 1
             else:
                 lines = 2
-            if link in name_page:
-                return name_page[link].create_link(lines)
+            page = find_page(name)
+            if page:
+                return page.create_link(lines)
             else:
-                print 'Broken link {{{link}}} on page {page}'.format(link=link, page=self.name)
-                return '{' + link + '}'
+                print 'Broken link {{{name}}} on page {page}'.format(name=name, page=self.name)
+                return '{' + name + '}'
 
         s = re.sub(r'{([^}]+)}', repl_link, s)
 

@@ -7,8 +7,9 @@
 
 {+woodland madia}
 {-
+rays 4--10 mm
 I don't know how to distinguish it from real tarweeds.
-Perhaps the disk diameter is smaller relative to the ray petals when compared to the similar-sized madia (4--10 mm ray length).
+Perhaps the disk diameter is smaller relative to the ray petals when compared to a similar-sized common madia.
 -}
 
 {+Holocarpha}
