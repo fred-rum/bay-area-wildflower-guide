@@ -17,9 +17,16 @@ corolla +- red abasially or not
 
 {+common dandelion}
 {-
-unforked, hollow stem [breaks easily]
+unforked, hollow stem (the peduncle, really) (breaks easily), always glabrous
 no cauline leaves
 corolla yellow
+-}
+
+{+mountain dandelions}
+{-
+unforked stem (peduncle), often hairy
+most species without cauline leaves
+corolla yellow, often tan abaxially
 -}
 
 {+cat's ears}

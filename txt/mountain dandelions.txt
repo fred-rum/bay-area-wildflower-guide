@@ -1,0 +1,59 @@
+{sci:Agoseris}
+Key features:
+{-
+stem leafy above base or with no more than tiny leaves
+petal length (absolute or compared to phyllaries)
+leaf petiole color
+growing in sand or not
+-}
+
+{[
+<h2>short petals</h2>
+
+{annual false dandelion:A. heterophylla var. heterophyla}
+{-
+<b>stem often leafy above base</b>
+ligules 2--6 mm, +- equaling involucre [the phyllaries reach almost to the petal tips]
+leaf petiole not purple
+common
+-}
+
+{bigflower agoseris:A. grandiflora var. grandiflora}
+{-
+<b>stem generally not leafy or obscurely leafy above base</b>
+ligule 3--7 mm, +- equaling involucre
+petiole generally purple
+very common
+[I assume it's named for its height, not its flower head]
+-}
+
+]}
+{[
+<h2>medium-length petals</h2>
+
+{+coast range agoseris:A. hirsuta}
+{-
+stem generally not leafy or obscurely leafy above base
+ligule 6--16 mm, much exceeding involucre
+<b>leaf petiole rarely purple</b>
+uncommon
+-}
+
+{spearleaf agoseris:A. retrorsa}
+{-
+stem generally not leafy or obscurely leafy above base
+ligule 6--15 mm, exceeding (equaling) involucre
+<b>petiole +- purple</b>
+rare
+-}
+
+{seaside agoseris:A. apargioides}
+{-
+stem generally not leafy or obscurely leafy above base
+ligules 8--16 mm, much exceeding involucre
+petiole +- purple
+<b>coastal dunes and sand hills</b> [all others avoid sand]
+uncommon
+-}
+
+]}
