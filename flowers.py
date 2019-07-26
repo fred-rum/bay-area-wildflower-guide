@@ -75,7 +75,7 @@ def find_page(name):
         return name_page[name]
 
     if name.islower():
-        if name in com_page:
+        if name in com_page and com_page[name] != 'multiple':
             return com_page[name]
     else:
         sci = strip_sci(name)
@@ -131,7 +131,11 @@ class Page:
 
     def set_com(self, com):
         self.com = com
-        com_page[com] = self
+        if com in com_page:
+            if com != com_page[com]:
+                com_page[com] = 'multiple'
+        else:
+            com_page[com] = self
 
     # set_sci() can be called with a stripped or elaborated name.
     # Either way, both a stripped and elaborated name are recorded.
@@ -796,7 +800,7 @@ while not done:
 os.mkdir(root + '/html')
 
 name_page = {} # page (base file) name -> page
-com_page = {} # common name -> page
+com_page = {} # common name -> page (or 'multiple' if there are name conflicts)
 sci_page = {} # scientific name -> page
 genus_page_list = {} # genus name -> list of pages in that genus
 genus_family = {} # genus name -> family name
@@ -1125,7 +1129,7 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
 
         if sci in sci_page:
             page = sci_page[sci]
-        elif com in com_page:
+        elif com in com_page and com_page[com] != 'multiple':
             page = com_page[com]
             if not page.sci and not page.no_sci: # don't override previous info
                 page.set_sci(sci)
