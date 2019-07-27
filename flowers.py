@@ -46,6 +46,7 @@ class Obs:
         self.color = color
         self.n = 0
         self.rg = 0
+        self.parks = {}
 
 def strip_sci(sci):
     sci_words = sci.split(' ')
@@ -421,9 +422,14 @@ class Page:
         # child links blindly and only compare the color when we reach a flower
         # with an observation count.
         if self.obs_n and self.page_matches_color(obs.color):
+            obs.match_set.add(self)
             obs.n += self.obs_n
             obs.rg += self.obs_rg
-            obs.match_set.add(self)
+            for park in self.parks:
+                if park not in obs.parks:
+                    obs.parks[park] = 1
+                else:
+                    obs.parks[park] += 1
 
         for child in self.child:
             child.count_matching_obs(obs)
@@ -475,18 +481,18 @@ class Page:
             else:
                 w.write('{n} ({rg} are {rg_txt})'.format(n=n, rg=rg, rg_txt=rg_txt))
 
-        if not self.child and self.parks:
+        if obs.parks:
             w.write('''
 <span class="toggle-details" onclick="fn_details(this)">[show details]</span><p/>
 <div id="details">
 Locations:
 <ul>
 ''')
-            for park in sorted(self.parks,
-                               key = lambda x: self.parks[x],
+            for park in sorted(obs.parks,
+                               key = lambda x: obs.parks[x],
                                reverse=True):
                 html_park = park.encode('ascii', 'xmlcharrefreplace')
-                count = self.parks[park]
+                count = obs.parks[park]
                 if count == 1:
                     w.write('<li>{park}</li>\n'.format(park=html_park))
                 else:
