@@ -47,6 +47,7 @@ class Obs:
         self.n = 0
         self.rg = 0
         self.parks = {}
+        self.month = [0] * 12
 
     def write_obs(self, page, w):
         n = self.n
@@ -96,7 +97,7 @@ class Obs:
             else:
                 w.write('{n} ({rg} are {rg_txt})'.format(n=n, rg=rg, rg_txt=rg_txt))
 
-        if self.parks:
+        if n:
             w.write('''
 <span class="toggle-details" onclick="fn_details(this)">[show details]</span><p/>
 <div id="details">
@@ -112,6 +113,50 @@ Locations:
                     w.write('<li>{park}</li>\n'.format(park=html_park))
                 else:
                     w.write('<li>{park}: {count}</li>\n'.format(park=html_park, count=count))
+
+            w.write('</ul>\nMonths:\n<ul>\n')
+
+            # break_month = None
+            # for i in range(12):
+            #     weight = 0
+            #     for j in range(12):
+            #         factor = abs((i+5.5-j) % 12 - 6)
+            #         weight += self.month[j] / factor
+            #     if i == 0: # bias toward January unless there's a clear winner
+            #         weight /= 1
+            #     if break_month == None or weight < break_weight:
+            #         break_month = i
+            #         break_weight = weight
+
+            # first = None
+            # for i in range(12):
+            #     m = (i + break_month) % 12
+            #     if self.month[m]:
+            #         if first == None:
+            #             first = i
+            #         last = i
+
+            # Search for the longest run of zeros in the month data.
+            z_first = 0
+            z_length = 0
+            for i in range(12):
+                for j in range(12):
+                    if self.month[(i+j) % 12]:
+                        # break ties around January
+                        if (j > z_length or
+                            (j == z_length and (i == 0 or i+j >= 12))):
+                            z_first = i
+                            z_length = j
+                        break
+
+            month_name = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'Jun.',
+                          'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.']
+
+            # Iterate through all months that are *not* part of the longest
+            # run of zeros (even if some of those months are themselves zero).
+            for i in range(12 - z_length):
+                m = (i + z_first + z_length) % 12
+                w.write('<li>{m}: {n}</li>'.format(m=month_name[m], n=self.month[m]))
             w.write('</ul></div>\n')
         else:
             w.write('<p/>\n')
@@ -218,6 +263,7 @@ class Page:
         self.obs_n = 0 # number of observations
         self.obs_rg = 0 # number of observations that are research grade
         self.parks = {} # a dictionary of park_name : count
+        self.month = [0] * 12
 
     def set_com(self, com):
         self.com = com
@@ -497,6 +543,8 @@ class Page:
                 if park not in obs.parks:
                     obs.parks[park] = 0
                 obs.parks[park] += self.parks[park]
+            for i in range(12):
+                obs.month[i] += self.month[i]
 
         for child in self.child:
             child.count_matching_obs(obs)
@@ -1127,6 +1175,7 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
     family_idx = header_row.index('taxon_family_name')
     place_idx = header_row.index('place_guess')
     private_place_idx = header_row.index('private_place_guess')
+    date_idx = header_row.index('observed_on')
 
     park_nf_list = set()
 
@@ -1158,6 +1207,9 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
         else:
             park_nf_list.add(park)
             short_park = park
+
+        date = row[date_idx]
+        month = int(date.split('-')[1], 10) - 1 # January = month 0
 
         if sci in sci_page:
             page = sci_page[sci]
@@ -1197,6 +1249,7 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
             if short_park not in page.parks:
                 page.parks[short_park] = 0
             page.parks[short_park] += 1
+            page.month[month] += 1
 
 if surprise_obs:
     print "The following observed species don't have a page even though a parent (genus or below) does:"
