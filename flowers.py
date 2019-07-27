@@ -48,6 +48,74 @@ class Obs:
         self.rg = 0
         self.parks = {}
 
+    def write_obs(self, page, w):
+        n = self.n
+        rg = self.rg
+
+        if page:
+            sci = page.sci
+            if n == 0 and not sci:
+                return
+
+            if page.taxon_id:
+                link = 'https://www.inaturalist.org/observations/chris_nelson?taxon_id={taxon_id}&order_by=observed_on'.format(taxon_id=page.taxon_id)
+            elif sci and sci[0].isupper():
+                # iNaturalist can't search by name on a higher level taxon,
+                # only a genus or lower.
+                link = 'https://www.inaturalist.org/observations/chris_nelson?search_on=names&q={sci}&order_by=observed_on'.format(sci=sci)
+            else:
+                link = None
+
+            if sci and sci[0].isupper() and sci.count(' ') == 1:
+                rg_txt = 'research grade'
+            else:
+                rg_txt = 'research grade to species level'
+        else:
+            link = None
+            rg_txt = 'research grade to species level'
+
+        w.write('<p/>\n')
+
+        if link:
+            w.write('<a href="{link}" target="_blank">Chris&rsquo;s observations</a>: '.format(link=link))
+        else:
+            w.write('Chris&rsquo;s observations: ')
+
+        if n == 0:
+            w.write('none')
+        elif rg == 0:
+            w.write('{n} (none are {rg_txt})'.format(n=n, rg_txt=rg_txt))
+        elif rg == n:
+            if n == 1:
+                w.write('1 ({rg_txt})'.format(rg_txt=rg_txt))
+            else:
+                w.write('{n} (all are {rg_txt})'.format(n=n, rg_txt=rg_txt))
+        else:
+            if rg == 1:
+                w.write('{n} ({rg} is {rg_txt})'.format(n=n, rg=rg, rg_txt=rg_txt))
+            else:
+                w.write('{n} ({rg} are {rg_txt})'.format(n=n, rg=rg, rg_txt=rg_txt))
+
+        if self.parks:
+            w.write('''
+<span class="toggle-details" onclick="fn_details(this)">[show details]</span><p/>
+<div id="details">
+Locations:
+<ul>
+''')
+            for park in sorted(self.parks,
+                               key = lambda x: self.parks[x],
+                               reverse=True):
+                html_park = park.encode('ascii', 'xmlcharrefreplace')
+                count = self.parks[park]
+                if count == 1:
+                    w.write('<li>{park}</li>\n'.format(park=html_park))
+                else:
+                    w.write('<li>{park}: {count}</li>\n'.format(park=html_park, count=count))
+            w.write('</ul></div>\n')
+        else:
+            w.write('<p/>\n')
+
 def strip_sci(sci):
     sci_words = sci.split(' ')
     if len(sci_words) == 4:
@@ -427,9 +495,8 @@ class Page:
             obs.rg += self.obs_rg
             for park in self.parks:
                 if park not in obs.parks:
-                    obs.parks[park] = 1
-                else:
-                    obs.parks[park] += 1
+                    obs.parks[park] = 0
+                obs.parks[park] += self.parks[park]
 
         for child in self.child:
             child.count_matching_obs(obs)
@@ -438,68 +505,7 @@ class Page:
     def write_obs(self, w):
         obs = Obs(None)
         self.count_matching_obs(obs)
-        n = obs.n
-        rg = obs.rg
-
-        sci = self.sci
-        if n == 0 and not sci:
-            return
-
-        if self.taxon_id:
-            link = 'https://www.inaturalist.org/observations/chris_nelson?taxon_id={taxon_id}&order_by=observed_on'.format(taxon_id=self.taxon_id)
-        elif sci and sci[0].isupper():
-            # iNaturalist can't search by name on a higher level taxon,
-            # only a genus or lower.
-            link = 'https://www.inaturalist.org/observations/chris_nelson?search_on=names&q={sci}&order_by=observed_on'.format(sci=sci)
-        else:
-            link = None
-
-        w.write('<p/>\n')
-
-        if link:
-            w.write('<a href="{link}" target="_blank">Chris&rsquo;s observations</a>: '.format(link=link))
-        else:
-            w.write('Chris&rsquo;s observations: ')
-
-        if sci and sci[0].isupper() and sci.count(' ') == 1:
-            rg_txt = 'research grade'
-        else:
-            rg_txt = 'research grade to species level'
-
-        if n == 0:
-            w.write('none')
-        elif rg == 0:
-            w.write('{n} (none are {rg_txt})'.format(n=n, rg_txt=rg_txt))
-        elif rg == n:
-            if n == 1:
-                w.write('1 ({rg_txt})'.format(rg_txt=rg_txt))
-            else:
-                w.write('{n} (all are {rg_txt})'.format(n=n, rg_txt=rg_txt))
-        else:
-            if rg == 1:
-                w.write('{n} ({rg} is {rg_txt})'.format(n=n, rg=rg, rg_txt=rg_txt))
-            else:
-                w.write('{n} ({rg} are {rg_txt})'.format(n=n, rg=rg, rg_txt=rg_txt))
-
-        if obs.parks:
-            w.write('''
-<span class="toggle-details" onclick="fn_details(this)">[show details]</span><p/>
-<div id="details">
-Locations:
-<ul>
-''')
-            for park in sorted(obs.parks,
-                               key = lambda x: obs.parks[x],
-                               reverse=True):
-                html_park = park.encode('ascii', 'xmlcharrefreplace')
-                count = obs.parks[park]
-                if count == 1:
-                    w.write('<li>{park}</li>\n'.format(park=html_park))
-                else:
-                    w.write('<li>{park}: {count}</li>\n'.format(park=html_park, count=count))
-            w.write('</ul></div>\n')
-        else:
-            w.write('<p/>\n')
+        obs.write_obs(self, w)
 
     def write_external_links(self, w):
         sci = self.sci
@@ -1381,6 +1387,10 @@ def write_page_list(page_list, color, color_match):
         write_header(w, title, title)
         w.write('{f} flowers and {k} keys'.format(f=f, k=k))
         w.write(s.getvalue())
+        obs = Obs(color_match)
+        for page in top_list:
+            page.count_matching_obs(obs)
+        obs.write_obs(None, w)
         write_footer(w)
 
 for color in color_list:
