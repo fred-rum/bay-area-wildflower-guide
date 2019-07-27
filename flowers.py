@@ -38,6 +38,15 @@ import cStringIO
 import yaml
 import codecs
 
+class Obs:
+    pass
+
+    def __init__(self, color):
+        self.match_set = set()
+        self.color = color
+        self.n = 0
+        self.rg = 0
+
 def strip_sci(sci):
     sci_words = sci.split(' ')
     if len(sci_words) == 4:
@@ -137,7 +146,7 @@ class Page:
         self.color = set()
 
         self.taxon_id = None # iNaturalist taxon ID
-        self.obs = 0 # number of observations
+        self.obs_n = 0 # number of observations
         self.obs_rg = 0 # number of observations that are research grade
         self.parks = {} # a dictionary of park_name : count
 
@@ -400,37 +409,31 @@ class Page:
     def page_matches_color(self, color):
         return (color == None or color in self.color)
 
-    # For containers, sum the observation counts of all children,
-    # *but* if a flower is found via multiple paths, count it only once.
-    # Two values are returned: (n, rg)
-    #   n is the observation count
-    #   rg is the research-grade observation count (0 <= rg <= n)
-    def count_matching_obs(self, color, match_flowers):
-        if self in match_flowers: return (0, 0)
-
-        n = 0
-        rg = 0
+    # Accumulate the observation for the page and all its children
+    # into the obs object.  Page must match the color declared in obs
+    # in order to count.
+    def count_matching_obs(self, obs):
+        if self in obs.match_set: return
 
         # If a container page contains exactly one descendant with a matching
         # color, the container isn't listed on the color page, and the color
         # isn't listed in page_color for the page.  Therefore, we follow all
         # child links blindly and only compare the color when we reach a flower
         # with an observation count.
-        if self.obs and self.page_matches_color(color):
-            n += self.obs
-            rg += self.obs_rg
-            match_flowers.add(self)
+        if self.obs_n and self.page_matches_color(obs.color):
+            obs.n += self.obs_n
+            obs.rg += self.obs_rg
+            obs.match_set.add(self)
 
         for child in self.child:
-            (ch_n, ch_rg) = child.count_matching_obs(color, match_flowers)
-            n += ch_n
-            rg += ch_rg
-
-        return (n, rg)
+            child.count_matching_obs(obs)
 
     # Write the iNaturalist observation data.
     def write_obs(self, w):
-        (n, rg) = self.count_matching_obs(None, set())
+        obs = Obs(None)
+        self.count_matching_obs(obs)
+        n = obs.n
+        rg = obs.rg
 
         sci = self.sci
         if n == 0 and not sci:
@@ -1176,7 +1179,7 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
 
         if (page and (orig_sci not in sci_ignore or
                       sci_ignore[orig_sci][0] == '+')):
-            page.obs += 1
+            page.obs_n += 1
             if rg == 'research':
                 page.obs_rg += 1
             if short_park not in page.parks:
@@ -1247,7 +1250,9 @@ def sort_pages(page_set, color=None):
 
     # helper function to sort by observation count
     def count_flowers(page):
-        return page.count_matching_obs(color, set())[0]
+        obs = Obs(color)
+        page.count_matching_obs(obs)
+        return obs.n
 
     # Sort in reverse order of observation count.
     # We initialize the sort with match_set sorted alphabetically.
