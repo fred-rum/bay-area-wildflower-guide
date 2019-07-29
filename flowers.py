@@ -587,7 +587,13 @@ class Page:
 
         # Jepson uses "subsp." instead of "ssp.", but it also allows us to
         # search with that qualifier left out entirely.
-        w.write('<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson eFlora</a><p/>\n'.format(sci=stripped));
+        w.write('<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson eFlora</a>\n'.format(sci=stripped));
+
+        if self.elab[0].isupper():
+            genus = sci.split(' ')[0]
+            w.write('&ndash; <a href="https://www.calflora.org/entry/wgh.html#srch=t&taxon={genus}&fmt=photo&inma=t&y=37.4612&x=-122.0547&z=9&wkt=-122.87589+38.00026,-121.88163+38.03488,-121.05766+37.01548,-122.44743+36.85301,-122.87589+38.00026" target="_blank">Bay Area species\n'.format(genus=genus))
+
+        w.write('<p/>\n');
 
     def write_lists(self, w):
         if not self.child and not self.jpg_list:

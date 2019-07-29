@@ -22,7 +22,7 @@ scattered along the peninsula and Henry Coe
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0611+0485}
-{:Crepis bursifolia}
+{italian hawksbeard:Crepis bursifolia}
 {-
 stem arched or decumbent, cymosely branched distally
 mid and distal cauline leaves generally few, +- reduced, +- linear

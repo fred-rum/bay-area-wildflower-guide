@@ -5,6 +5,7 @@
 {-
 annual
 stem may be distally branched, but usually not close to the inflorescence[?]
+stem stout
 proximal clasping lobes of cauline leaves rounded, <b>strongly curved to coiled</b>
 leaf blades dentate, sometimes +- lobed, <b>teeth and lobes soft-spine-tipped</b>
 involucre 10--13 mm
@@ -16,11 +17,24 @@ fruit flat, 3-ribbed per side, otherwise smooth
 {-
 annual
 stem distally branched [?], often proximally branched [this part is clear]
+stem stout
 proximal clasping lobes of cauline leaves acute, <b>not curled or coiled</b>
 leaf blades nearly all lobed [possibly with <b>small teeth</b>], lobes variable in width [narrow lobes may look like sharp teeth], terminal lobe often widely arrowhead-shaped
 involucre 10--13 mm
 petal +- = corolla tube
 fruit flat, 2--4-ribbed [per side?] and cross-wrinkled
+-}
+
+{slender sowthistle:Sonchus tenerrimus}
+{-
+annual
+stem generally much-branched
+stem slender
+leaves deeply lobed, lobes toothed and often with smaller 2nd-order lobes
+involucre 10--12 mm
+petal +- 1/3 > corolla tube
+fruit only slightly flattened, 1--3 ribbed per face, ribs roughened
+Alum Rock [only one ID]
 -}
 
 {perennial sow thistle:Sonchus arvensis}

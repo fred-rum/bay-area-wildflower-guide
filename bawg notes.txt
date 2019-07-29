@@ -167,3 +167,6 @@ Use Calflora's "what grows here" with a genus search?
 
 searching iNaturalist observations using a text name
 higher than genus level fails.
+
+Put month info in table format with bar chart.
+Put month info side by side with park info (depending on display width?)

@@ -1,7 +1,7 @@
 {sci:Phyla}
 {+turkey tangle frogfruit,3:P. nodiflora}
 {-
-leaf blade generally widest at or distal to middle, 5--30 mm long, margin +- entore or 5--11 teeth from mid-blade to tip
+leaf blade generally widest at or distal to middle, 5--30 mm long, margin +- entire or 5--11 teeth from mid-blade to tip
 -}
 
 {lanceleaf frogfruit:P. lanceolata}
