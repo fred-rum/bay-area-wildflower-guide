@@ -1,4 +1,4 @@
-{sci:Stephanumeria}
+{sci:Stephanomeria}
 Key features:
 {-
 seed with or without long groove on each face

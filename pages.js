@@ -570,7 +570,7 @@ var pages=[
 {page:"wight's paint brush",sci:"Castilleja wightii"},
 {page:"wild mustard",sci:"Sinapis arvensis"},
 {page:"wind poppy",sci:"Papaver heterophyllum"},
-{page:"wirelettuce",sci:"Stephanumeria spp.",key:true},
+{page:"wirelettuce",sci:"Stephanomeria spp.",key:true},
 {page:"woollypod milkweed",sci:"Asclepias eriocarpa"},
 {page:"yellow glandweed",sci:"Bellardia viscosa"},
 {page:"yellow salsify",sci:"Tragopogon dubius"},

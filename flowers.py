@@ -331,12 +331,12 @@ class Page:
         elab = self.elab
         if not elab:
             return None
-        elif elab[0].isupper():
-            return '<i>{elab}</i>'.format(elab=elab)
-        else: # it must be in {group_type} {name} format
+        elif self.level == 'above':
             elab_words = elab.split(' ')
             return '{type} <i>{name}</i>'.format(type=elab_words[0],
                                                  name=elab_words[1])
+        else:
+            return '<i>{elab}</i>'.format(elab=elab)
 
     def format_full(self, lines=2):
         com = self.com
@@ -449,7 +449,7 @@ class Page:
                 if (self.cur_genus and len(sci) >= 3 and
                     sci[0:3] == self.cur_genus[0] + '. '):
                     sci = self.cur_genus + sci[2:]
-                elif ' ' in sci:
+                elif sci[0].isupper():
                     # If the child's genus is explicitly specified,
                     # make it the default for future abbreviations.
                     self.cur_genus = sci.split(' ')[0]
@@ -574,7 +574,7 @@ class Page:
 
         w.write('<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank">CalFlora</a> &ndash;\n'.format(elab=elab));
 
-        if sci[0].isupper() and ' ' in sci:
+        if self.level in ('species', 'below'):
             # CalPhotos cannot be searched by genus or higher classification.
             w.write('<a href="https://calphotos.berkeley.edu/cgi/img_query?where-taxon={elab}" target="_blank">CalPhotos</a> &ndash;\n'.format(elab=elab));
 
@@ -582,7 +582,7 @@ class Page:
         # search with that qualifier left out entirely.
         w.write('<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson eFlora</a>\n'.format(sci=sci));
 
-        if self.elab[0].isupper():
+        if self.level in ('genus', 'species', 'below'):
             genus = sci.split(' ')[0]
             w.write('&ndash; <a href="https://www.calflora.org/entry/wgh.html#srch=t&taxon={genus}&fmt=photo&y=37.4&x=-122&z=8&wkt=-123.1+38,-121.95+38,-121.05+36.95,-122.2+36.95,-123.1+38" target="_blank">Bay Area species\n'.format(genus=genus))
 
@@ -847,13 +847,11 @@ class Page:
 
         # record all pages that are within each genus
         sci = self.sci
-        if sci and sci[0].isupper():
-            pos = sci.find(' ')
-            if pos > -1:
-                genus = sci[:pos]
-                if genus not in genus_page_list:
-                    genus_page_list[genus] = []
-                genus_page_list[genus].append(self)
+        if self.level in ('species', 'below'):
+            genus = sci.split(' ')[0]
+            if genus not in genus_page_list:
+                genus_page_list[genus] = []
+            genus_page_list[genus].append(self)
 
 ###############################################################################
 # end of Page class
@@ -1027,18 +1025,10 @@ thumb_list = get_file_list('thumbs', 'jpg')
 def get_name_from_jpg(jpg):
     name = re.sub(r',([-0-9]*)$', r'', jpg)
 
-    if name[0].isupper():
+    if not name.islower():
         # If the jpg uses an elaborated name, remove the elaborations to
         # form the final page name.
-        sci_words = name.split(' ')
-        if len(sci_words) == 4:
-            # Four words in the scientific name implies a subset of a species
-            # with an elaborated subtype specifier.  The specifier is stripped.
-            name = ' '.join((sci_words[0], sci_words[1], sci_words[3]))
-        elif len(sci_words) == 2 and sci_words[1] == 'spp.':
-            # It is a genus name in elaborated format.  The 'spp.' suffix is
-            # stripped.
-            name = sci_words[0]
+        name = strip_sci(name)
 
     return name
 
