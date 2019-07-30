@@ -60,20 +60,10 @@ class Obs:
 
             if page.taxon_id:
                 link = 'https://www.inaturalist.org/observations/chris_nelson?taxon_id={taxon_id}&order_by=observed_on'.format(taxon_id=page.taxon_id)
-            elif sci and sci[0].isupper():
-                # iNaturalist can't search by name on a higher level taxon,
-                # only a genus or lower.
-                link = 'https://www.inaturalist.org/observations/chris_nelson?search_on=names&q={sci}&order_by=observed_on'.format(sci=sci)
             else:
-                link = None
-
-            if sci and sci[0].isupper() and sci.count(' ') == 1:
-                rg_txt = 'research grade'
-            else:
-                rg_txt = 'research grade to species level'
+                link = 'https://www.inaturalist.org/observations/chris_nelson?taxon_name={sci}&order_by=observed_on'.format(sci=sci)
         else:
             link = None
-            rg_txt = 'research grade to species level'
 
         w.write('<p/>\n')
 
@@ -85,17 +75,17 @@ class Obs:
         if n == 0:
             w.write('none')
         elif rg == 0:
-            w.write('{n} (none are {rg_txt})'.format(n=n, rg_txt=rg_txt))
+            w.write('{n} (none are research grade)'.format(n=n))
         elif rg == n:
             if n == 1:
-                w.write('1 ({rg_txt})'.format(rg_txt=rg_txt))
+                w.write('1 (research grade)')
             else:
-                w.write('{n} (all are {rg_txt})'.format(n=n, rg_txt=rg_txt))
+                w.write('{n} (all are research grade)'.format(n=n))
         else:
             if rg == 1:
-                w.write('{n} ({rg} is {rg_txt})'.format(n=n, rg=rg, rg_txt=rg_txt))
+                w.write('{n} ({rg} is research grade)'.format(n=n, rg=rg))
             else:
-                w.write('{n} ({rg} are {rg_txt})'.format(n=n, rg=rg, rg_txt=rg_txt))
+                w.write('{n} ({rg} are research grade)'.format(n=n, rg=rg))
 
         if n:
             w.write('''
@@ -232,6 +222,7 @@ class Page:
         self.sci = None # a scientific name stripped of elaborations
         self.elab = None # an elaborated scientific name
         self.family = None # the scientific family
+        self.level = None # taxonomic level: above, genus, species, or below
 
         self.no_sci = False # true if it's a key page for unrelated species
         self.no_family = False # true if it's a key page for unrelated genuses
@@ -285,6 +276,17 @@ class Page:
         self.sci = sci
         self.elab = elab
         sci_page[sci] = self
+
+        if elab[0].islower():
+            self.level = 'above'
+        else:
+            sci_words = sci.split(' ')
+            if len(sci_words) == 1:
+                self.level = 'genus'
+            elif len(sci_words) == 2:
+                self.level = 'species'
+            else:
+                self.level = 'below'
 
     def set_family(self):
         if self.family or self.no_family: # it's already been set
@@ -480,11 +482,8 @@ class Page:
 
         # If the page's genus is explicitly specified,
         # make it the default for child abbreviations.
-        if self.sci and self.sci[0].isupper():
-            if ' ' in self.sci:
-                self.cur_genus = self.sci.split(' ')[0]
-            else:
-                self.cur_genus = self.sci
+        if self.level in ('genus', 'species', 'below'):
+            self.cur_genus = self.sci.split(' ')[0]
         else:
             self.cur_genus = None
 
@@ -557,27 +556,21 @@ class Page:
 
     def write_external_links(self, w):
         sci = self.sci
-        if not sci[0].isupper():
+        if self.level == 'below':
+            # Anything below species level should be elaborated as necessary.
+            elab = self.elab
+        else:
+            # A one-word genus should be sent as is, not as '[genus] spp.'
             # A higher-level classification should be sent with the group type
             # removed.
-            space_pos = sci.find(' ')
-            stripped = sci[space_pos+1:]
-            elab = stripped
-        else:
-            stripped = sci
-            if ' ' not in sci:
-                # A one-word genus should be sent as is, not as '[genus] spp.'
-                elab = sci
-            else:
-                # A species or subspecies should be elaborated as necessary.
-                elab = self.elab
+            elab = sci
 
         w.write('<p/>')
 
         if self.taxon_id:
             w.write('<a href="https://www.inaturalist.org/taxa/{taxon_id}" target="_blank">iNaturalist</a> &ndash;\n'.format(taxon_id=self.taxon_id))
         else:
-            w.write('<a href="https://www.inaturalist.org/search?q={stripped}&source=taxa" target="_blank">iNaturalist</a> &ndash;\n'.format(stripped=stripped))
+            w.write('<a href="https://www.inaturalist.org/search?q={sci}&source=taxa" target="_blank">iNaturalist</a> &ndash;\n'.format(sci=sci))
 
         w.write('<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank">CalFlora</a> &ndash;\n'.format(elab=elab));
 
@@ -587,7 +580,7 @@ class Page:
 
         # Jepson uses "subsp." instead of "ssp.", but it also allows us to
         # search with that qualifier left out entirely.
-        w.write('<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson eFlora</a>\n'.format(sci=stripped));
+        w.write('<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson eFlora</a>\n'.format(sci=sci));
 
         if self.elab[0].isupper():
             genus = sci.split(' ')[0]
@@ -842,6 +835,7 @@ class Page:
             self.write_parents(w)
 
             w.write(s)
+
             self.write_obs(w)
             if self.sci:
                 self.write_external_links(w)
@@ -868,20 +862,27 @@ class Page:
 
 root = 'c:/Users/Chris/Documents/GitHub/bay-area-flowers'
 
-# Keep a copy of the previous html files so that we can
-# compare differences after creating the new html files.
-shutil.rmtree(root + '/prev', ignore_errors=True)
+if os.path.isfile(root + '/html/_mod.html'):
+    # Keep a copy of the previous html files so that we can
+    # compare differences after creating the new html files.
+    shutil.rmtree(root + '/prev', ignore_errors=True)
 
-# Apparently Windows sometimes lets the call complete when the
-# remove is not actually done yet, and then the rename fails.
-# In that case, keep retrying the rename until it succeeds.
-done = False
-while not done:
-    try:
-        os.rename(root + '/html', root + '/prev')
-        done = True
-    except WindowsError as error:
-        pass
+    # Apparently Windows sometimes lets the call complete when the
+    # remove is not actually done yet, and then the rename fails.
+    # In that case, keep retrying the rename until it succeeds.
+    done = False
+    while not done:
+        try:
+            os.rename(root + '/html', root + '/prev')
+            done = True
+        except WindowsError as error:
+            pass
+else:
+    # _mod.html doesn't exist, which implies that the most recent run
+    # crashed before creating it.  There's no point in comparing the changes
+    # with the crashed run, so we discard it and keep the previous run to
+    # compare against instead.
+    shutil.rmtree(root + '/html', ignore_errors=True)
 
 os.mkdir(root + '/html')
 
