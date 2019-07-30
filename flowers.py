@@ -591,7 +591,7 @@ class Page:
 
         if self.elab[0].isupper():
             genus = sci.split(' ')[0]
-            w.write('&ndash; <a href="https://www.calflora.org/entry/wgh.html#srch=t&taxon={genus}&fmt=photo&inma=t&y=37.4612&x=-122.0547&z=9&wkt=-122.87589+38.00026,-121.88163+38.03488,-121.05766+37.01548,-122.44743+36.85301,-122.87589+38.00026" target="_blank">Bay Area species\n'.format(genus=genus))
+            w.write('&ndash; <a href="https://www.calflora.org/entry/wgh.html#srch=t&taxon={genus}&fmt=photo&y=37.4&x=-122&z=8&wkt=-123.1+38,-121.95+38,-121.05+36.95,-122.2+36.95,-123.1+38" target="_blank">Bay Area species\n'.format(genus=genus))
 
         w.write('<p/>\n');
 

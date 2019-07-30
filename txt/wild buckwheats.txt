@@ -1,12 +1,310 @@
 {sci:Eriogonum}
-There are 47 billion kinds of buckwheat in the bay area.  Here are a subset.
-
-{+california buckwheat}
+Key features:
 {-
+herb vs. shrub (or subshrub)
+flowers [involucres?] are clustered or individual
+flowers grow only at branch tips or also at forks
+perianth lobes alike, or inner narrower than outer
+involucres glandular or not
+cauline leaves clustered or not
+basal and cauline leaf shapes
+-}
+
+{[
+<h2>perennial<br/>
+no flower stipe<br/>
+inflorescence bracts generally 3</h2>
+
+inflorescence branched
+<br/>
+flowers are clustered or individual
+<br/>
+multiple individual flowers may grow from the same node, but not in a cluster
+
+{+california buckwheat:E. fasciculatum}
+{-
+group 4
+60
+flowers are clustered
+shrub
+leaf blades narrowly linear to oblanceolate, <= 2 cm, generally strongly clustered
+
 shrub, 60--150 cm tall, 100--250 cm wide.
+uncommon
 -}
 
-{+naked buckwheat}
+{seacliff wild buckwheat:E. parvifolium}
 {-
-herb, 1--15 cm tall, 5--30 cm diameter
+group 4
+64
+flowers are clustered
+shrub
+leaf blades narrow to round, not clustered
+
+very rare
 -}
+
+{santa cruz island wild buckwheat:E. arborescens}
+{-
+group 4
+65
+flowers are clustered
+shrub
+leaf blades linear to narrowly oblong, not clustered
+
+rare
+-}
+
+{coastal wild buckwheat:E. cinereum}
+{-
+group 4
+66
+flowers are clustered
+shrub
+leaf blades ovate, 1.5--3 cm
+inflorescence (all branches collectively) generally head-like
+
+very rare
+-}
+
+{st. catherine's-lace:E. giganteum var. giganteum}
+{-
+group 4
+66'
+flowers are clustered
+shrub
+leaf blades oblong-ovate to ovate or lanceolate to narrowly oblong
+inflorescence (all branches collectively) open, cyme-like
+
+very rare
+-}
+
+{seaside buckwheat:E. latifolium}
+{-
+group 4
+41
+flowers are clustered
+flowers only at inflorescence branch tips
+herb
+
+very common along the coast
+-}
+
+{+naked buckwheat:E. nudum}
+{-
+group 4
+41',82
+<b>flowers are clustered or individual</b>
+flowers at inflorescence branch tips <b>and forks of branches</b>
+herb
+
+herb, 1--15 cm tall, 5--30 cm diameter
+very common
+-}
+
+{colorado desert wild buckwheat:E. deserticola}
+{-
+group 4
+85
+<b>flowers are individual</b>
+flowers at inflorescence branch tips <b>and forks of branches</b>
+shrub
+
+very rare
+-}
+
+{long-stemmed buckwheat:E. elongatum var. elongatum}
+{-
+group 4
+70
+herb
+<b>flowers are individual</b>
+flowers only at inflorescence branch tips
+
+very rare
+-}
+
+{wright's buckwheat:E. wrightii}
+{-
+group 4
+73'
+shrub or subshrub
+<b>flowers are individual</b>
+flowers only at inflorescence branch tips
+
+rare
+-}
+
+]}
+{[
+<h2>perennial<br/>
+flower stipe present<br/>
+inflorescence bracts 2--13+</h2>
+
+{sulfur buckwheat:E. umbellatum}
+{-
+group 3x
+herb to shrub
+flower stipe present, not winged
+rare
+-}
+
+{hoary wild buckwheat:E. saxatile}
+{-
+group x
+mat
+flower stipe present, winged
+rare
+-}
+
+]}
+{[
+<h2>annual<br/>
+involucres angled to strongly ribbed, sessile and strongly appressed or at tips of short bracted branchlets (or peduncled)
+</h2>
+
+{tiburon buckwheat:E. luteolum var. caninum}
+{-
+group 1
+5
+flowers at branchlet tips
+stem glabrous
+involucres sessile, 3--4 mm, 5-toothed
+basal leaf blades oblong-ovate
+scattered
+-}
+
+{coville's buckwheat:E. covilleanum}
+{-
+group 1
+6
+flowers at branchlet tips
+stem glabrous
+involucres sessile, 2--4 mm, 5--8-toothed
+basal leaf blades generally round to reniform
+rare
+-}
+
+{clay buckwheat:E. argillosum}
+{-
+group 1
+7
+flowers at branchlet tips
+stem generally glabrous, involucres peduncled at lower nodes [how can involucre be distinguished from branchlet?]
+very rare
+-}
+
+{mount diablo buckwheat:E. truncatum}
+{-
+group 1
+9
+flowers at branchlet tips
+stem tomentose
+extremely rare, almost extinct
+-}
+
+{elegant wild buckwheat:E. elegans}
+{-
+group 1
+15
+flowers not at branchlet tips, generally appressed with no peduncles
+involucres 1--1.5 mm
+very rare
+-}
+
+{wand buckwheat:E. roseum}
+{-
+group 1
+21
+flowers not at branchlet tips, generally appressed with no peduncles
+involucres 4--5 mm
+outer perianth lobes not fan-shaped or hastate
+leaf blades oblong-obovate to oblanceolate or oblong
+uncommon
+-}
+
+{slender buckwheat:E. gracile}
+{-
+group 1
+22'
+flowers not at branchlet tips, generally appressed with no peduncles
+involucres 2--3 mm
+outer perianth lobes not fan-shaped or hastate
+leaf blades oblong-obovate to oblanceolate or oblong
+scattered
+-}
+
+{wickerstem buckwheat:E. vimineum}
+{-
+group 1
+25
+flowers not at branchlet tips, generally appressed with no peduncles
+involucres 2--5 mm
+outer perianth lobes not fan-shaped or hastate
+basal leaf blades +- round
+no cauline leaves
+rare
+-}
+
+{golden-carpet wild buckwheat:E. luteolum var. luteolum}
+{-
+group 1
+27'
+flowers not at branchlet tips, generally appressed with no peduncles
+involucres 2--5 mm
+outer perianth lobes not fan-shaped or hastate
+basal and cauline leaf blades +- round
+scattered
+-}
+
+]}
+{[
+<h2>annual<br/>
+involucres smooth, not ribbed or angled, generally peduncled, if sessile then not appressed
+</h2>
+
+all have both basal and cauline leaves
+
+{rose and white buckwheat:E. gracillimum}
+{-
+group 2
+involucres glandular-hairy
+perianth lobes alike, oblong to elliptic, not inflated
+very rare
+-}
+
+{anglestem buckwheat:E. angulosum}
+{-
+group 2
+involucres glandular-hairy or hairy [Jepson disagrees with itself in different places]
+perianth lobes not alike, outer elliptic to obovate, outer occasionally inflated basally, inner narrower
+rare
+-}
+
+{twotooth buckwheat:E. viridescens}
+{-
+group 2
+involucres glandular
+perianth lobes not alike, outer obovate to spoon-shaped, obviously inflated above middle, inner narrowly spoon-shaped
+very rare
+-}
+
+{hairy-flower wild buckwheat:E. hirtiflorum}
+{-
+group 2
+involucres sparsely hairy
+flowers 2, 0.8--1.1 mm
+very rare
+-}
+
+{unarmed buckwheat:E. inerme}
+{-
+group 2
+involucres glabrous or hairy
+flowers 4--6, 1.2--1.8 mm
+rare
+-}
+
+]}
+
+There are no other species of this genus in the bay area.

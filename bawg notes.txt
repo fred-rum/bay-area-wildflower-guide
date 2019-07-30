@@ -170,3 +170,14 @@ higher than genus level fails.
 
 Put month info in table format with bar chart.
 Put month info side by side with park info (depending on display width?)
+
+Automate genus completion info:
+- No other species in the bay area / California / anywhere.
+- No other species in the bay area except for historical records (include year?)
+- No other species in the bay area except for extremely rare observations that I have chosen to ignore.
+- As above, but key is incomplete.
+
+Mark incomplete genuses or incomplete keys with text near the top of
+the genus page.  (If no genus page, mark all species pages.  [Or mark all pages that don't have a parent at the genus level or below.])
+
+https://www.calflora.org/entry/wgh.html#srch=t&taxon=Eriogonum&fmt=photo&y=37.4&x=-122&z=8&wkt=-123.1+38,-121.95+38,-121.05+36.95,-122.2+36.95,-123.1+38
