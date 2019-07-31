@@ -1,4 +1,5 @@
 {sci:Solidago}
+{hist}
 {+california goldenrod:Solidago velutina ssp. californica}
 {-
 proximal cauline or basal leaves largest
@@ -29,5 +30,3 @@ rare on the Pacific coast
 mid-cauline leaves largest
 scattered mostly near the Pacific coast
 -}
-
-There are no other species of this genus in the bay area.

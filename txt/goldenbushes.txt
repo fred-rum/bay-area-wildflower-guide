@@ -1,4 +1,5 @@
 {sci:Ericameria}
+{hist/rare}
 {+golden-fleece:E. arborescens}
 {-
 phyllaries unequal in a graduated series
@@ -7,7 +8,7 @@ leaves and often young stem dotted with round, +- evenly spaced, resin-filled pi
 scattered
 -}
 
-{mojave goldenbush:E. nauseosa var. mohavensis}
+{rubber rabbitbrush:E. nauseosa}
 {-
 phyllaries unequal in a graduated series
 no rays
@@ -29,5 +30,3 @@ phyllaries +- equal length
 12--18 rays, 9--20 mm
 rare
 -}
-
-There are no other species of this genus in the bay area.

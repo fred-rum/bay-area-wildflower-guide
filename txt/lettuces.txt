@@ -1,5 +1,5 @@
 {sci:Lactuca}
-
+{hist}
 Key features:
 {-
 basal leaves present or not
@@ -37,5 +37,3 @@ proximal leaves wing-petioled; distal sessile, clasping
 inflorescence heads many in large, panicle-like cluster
 rare
 -}
-
-There are no other species of this genus in the bay area.

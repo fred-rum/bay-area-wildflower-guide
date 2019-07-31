@@ -1,4 +1,5 @@
 {sci:Stephanomeria}
+{hist}
 Key features:
 {-
 seed with or without long groove on each face
@@ -31,5 +32,3 @@ outer phyllaries reflexed or appressed
 pappus bristles plumose on distal 60--85%, widened at base or not
 rare, Marin
 -}
-
-There are no other species of this genus in the bay area.

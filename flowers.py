@@ -876,7 +876,7 @@ class Page:
                 else:
                     prolog = 'There are no other'
                     if self.complete == 'hist':
-                        prolog = "Except for old historical records that I'm ignoring, there are no other"
+                        prolog = "Except for historical records that I'm ignoring, there are no other"
                     elif self.complete == 'rare':
                         prolog = "Except for extremely rare plants that I don't expect to encounter, there are no other"
                     elif self.complete == 'hist/rare':

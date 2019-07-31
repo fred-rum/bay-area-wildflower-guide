@@ -1,4 +1,5 @@
 {sci:Pseudognaphalium}
+{ba}
 I need to re-evaluate all of my observations now that I have some idea what to look for.
 
 Key features:
@@ -89,8 +90,23 @@ Leaf opposing faces weakly contrasting in color, tomentose, adaxial less densely
 Leaf flat
 Inflorescence loose, flat-topped to panicle-like cluster
 <b>narrow heads</b>
+phyllaries in 4--6 series
+disk flowers 5--9
+stem 3--5 mm diam near base
 "Characterized by stems commonly stiffly erect and slightly zigzag distally, relatively thick (3--5 mm diam near base), and closely gray-tomentose, leaves oblanceolate, sessile, sometimes clasping, not decurrent, and weakly 2-colored."
 rare
 -}
 
-There are no other species of this genus in the bay area.
+{wright's cudweed:P. canescens}
+{-
+Stem not glandular, persistently tomentose
+Leaves not crowded?
+Leaf base not clasping, not decurrent
+Leaf opposing faces weakly contrasting in color, tomentose, adaxial less densely so, occasionally also sessile-glandular
+Leaf flat
+Inflorescence generally loose, rounded to +- flat-topped
+phyllaries in 3--4 series
+disk flowers 2--5
+stem 2--3 mm diam near base
+rare
+-}

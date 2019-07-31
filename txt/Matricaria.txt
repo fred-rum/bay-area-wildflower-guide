@@ -1,3 +1,4 @@
+{ca}
 {+pineapple-weed:Matricaria discoidea}
 {-
 plant (1)10--30(50) cm
@@ -14,4 +15,9 @@ undisturbed wet places
 <b>only in historical records</b>
 -}
 
-There are no other species of this genus in the bay area.
+{german chamomile:M. chamomilla}
+{-
+daisy like, looks much like {-chamomiles}
+leaf lobes longer than for "real" chamomiles
+very rare
+-}

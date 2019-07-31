@@ -36,6 +36,15 @@ disk flowers: generally yellow
 ray flowers: 10--15, apparently ~5 mm, white
 -}
 
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0616+0158}
+{german chamomile}
+{-
+stem erect or decumbent
+<b>leaf 2--3-pinnately lobed; segments linear (longer than "real" chamomiles)</b>
+disk flowers: yellow
+ray flowers: 10--25, 7--9 mm, white
+-}
+
 {+fleabanes and horseweeds}
 {-
 stem generally erect
