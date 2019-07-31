@@ -586,11 +586,15 @@ class Page:
         else:
             w.write('<a href="https://www.inaturalist.org/search?q={sci}&source=taxa" target="_blank">iNaturalist</a> &ndash;\n'.format(sci=sci))
 
-        w.write('<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank">CalFlora</a> &ndash;\n'.format(elab=elab));
+        if self.level != 'above' or self.elab.startswith('family '):
+            # CalFlora can be searched by family,
+            # but not by other high-level classifications.
+            w.write('<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank">CalFlora</a> &ndash;\n'.format(elab=elab));
 
-        if self.level in ('species', 'below'):
-            # CalPhotos cannot be searched by genus or higher classification.
-            w.write('<a href="https://calphotos.berkeley.edu/cgi/img_query?where-taxon={elab}" target="_blank">CalPhotos</a> &ndash;\n'.format(elab=elab));
+        if self.level in ('genus', 'species', 'below'):
+            # CalPhotos cannot be searched by high-level classifications.
+            # rel-taxon=begins+with -> allows matches with lower-level detail
+            w.write('<a href="https://calphotos.berkeley.edu/cgi/img_query?rel-taxon=begins+with&where-taxon={elab}" target="_blank">CalPhotos</a> &ndash;\n'.format(elab=elab));
 
         # Jepson uses "subsp." instead of "ssp.", but it also allows us to
         # search with that qualifier left out entirely.
