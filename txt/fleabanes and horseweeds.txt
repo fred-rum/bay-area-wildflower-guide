@@ -1,4 +1,5 @@
 {sci:Erigeron}
+{hist/rare}
 Key features:
 {-
 ray length (or not present)
@@ -100,5 +101,3 @@ rare
 -}
 
 ]}
-
-There are no other species of this genus in my hiking area.

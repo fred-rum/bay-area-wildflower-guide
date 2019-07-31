@@ -1,4 +1,3 @@
 {com:silverpuffs}
-There are no other species of this genus anywhere.
-
+{any}
 See also {-Microseris}.

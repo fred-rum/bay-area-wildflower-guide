@@ -1,4 +1,5 @@
 {sci:Symphyotrichum}
+{!hist/rare}
 {+pacific aster:S. chilense}
 {-
 stem hairy distally
@@ -25,4 +26,12 @@ ray flowers: <b>1.5--3 mm</b>, +- white to pink
 rare
 -}
 
-Except for very old historical records, there are no other species of this genus in the bay area.
+{:S. lanceolatum var. hesperium}
+{-
+rare
+-}
+
+{:S. lentum}
+{-
+rare
+-}

@@ -1,4 +1,5 @@
 {sci:Tragopogon}
+{ba}
 {+salsify}
 {-
 rays purple
@@ -12,5 +13,3 @@ rays pale lemon-yellow
 8--13 phyllaries, much exceeding flowers when fully bloomed [but not seed ball]
 pappus [seed parachute] +- white
 -}
-
-There are no other species of this genus in the bay area.

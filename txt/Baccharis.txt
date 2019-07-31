@@ -1,3 +1,4 @@
+{ba}
 {+coyote brush:Baccharis pilularis}
 {-
 leaf blade 5--40 mm long, 2--15 mm wide, <b>obovate or oblanceolate</b>, gland-dotted [but unknown stickiness]
@@ -21,5 +22,3 @@ shrub, not forming colonies
 heads in terminal flat-topped or pyramidal panicle-like clusters in summer--fall-flowering plants, in smaller lateral clusters in spring-flowering plants
 scattered
 -}
-
-There are no other species of this genus in the bay area.

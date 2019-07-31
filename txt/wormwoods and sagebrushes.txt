@@ -1,4 +1,5 @@
 {sci:Artemisia}
+{!ba}
 {+california sagebrush:Artemisia californica}
 {-
 axillary leaf clusters present
@@ -30,6 +31,9 @@ Coe, Sunol
 directly on the coast
 -}
 
-]}
+{common mugwort:A. vulgaris}
+{-
+very rare
+-}
 
-There are no other species of this genus in the bay area.
+]}

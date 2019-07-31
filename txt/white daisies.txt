@@ -28,10 +28,10 @@ disk flowers: yellow
 ray flowers: 13--34+; <b>12--30 mm</b>
 -}
 
-{+stinking chamomile}
+{+chamomiles}
 {-
-stem generally erect
-<b>leaf 1--3-pinnately divided into thread-like lobes</b>
+stem generally erect (or decumbent/ascending at Quicksilver)
+<b>leaf 1--3-pinnately divided into thread-like lobes</b> (or wider lobes at Quicksilver)
 disk flowers: generally yellow
 ray flowers: 10--15, apparently ~5 mm, white
 -}

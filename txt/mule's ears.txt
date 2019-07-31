@@ -1,9 +1,12 @@
 {sci:Wyethia}
-
+{ba}
 Key features:
 {-
-phyllary shape, hairy or not
+phyllary shape; hairy, tomentose, glandular, or glabrous
 -}
+
+{[
+<h2>phyllaries long and wide</h2>
 
 {+smooth mule-ears:Wyethia glabra}
 {-
@@ -21,10 +24,25 @@ outer spreading phyllaries 4--7+ cm, wide, leaf-like, generally >> inner erect p
 head generally 1, large
 -}
 
+]}
+{[
+<h2>phyllaries short and narrow</h2>
+
 {+narrowleaf mule-ears:Wyethia angustifolia}
 {-
-<b>phyllaries 1.5--3 cm, narrow</b>, generally not leaf-like, outer +- same as inner
-heads 1--<b>few</b>
+phyllaries 1.5--3 cm, narrow, generally not leaf-like, outer +- same as inner
+phyllaries generally many
+<b>phyllaries +- soft-hairy, ciliate</b>
+heads generally 1
 -}
 
-There are no other species of this genus in the bay area.
+{:W. mollis}
+{-
+phyllaries 1.5--3 cm, narrow, generally not leaf-like, outer +- same as inner
+phyllaries generally few
+<b>plant +- tomentose, often becoming glabrous</b>
+heads 1--3
+very rare
+-}
+
+]}
