@@ -1,6 +1,4 @@
 {sci:Lysimachia}
-There are more species than this in the bay area.
-
 {+scarlet pimpernel}
 
 {+western star flower}

@@ -1,4 +1,5 @@
 {sci:Prosartes}
+{ba}
 perianth parts 6, in 2 whorls, petal-like
 
 {+hooker's fairybells:P. hookeri}
@@ -14,5 +15,3 @@ leaf margin hairs 0 or long, spreading, generally falling in age, blade abaxiall
 <b>perianth parts 15--28 mm, spreading at tip</b>
 <b>anthers included</b>
 -}
-
-There are no other species of this genus in the bay area.

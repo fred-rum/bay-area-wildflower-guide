@@ -1,4 +1,5 @@
 {sci:Garrya}
+{hist/rare}
 Key features:
 {-
 abaxial leaf hairs
@@ -27,5 +28,3 @@ Coe, Diablo
 abaxial leaf hairs 0 (or sparse on young leaves)
 Coe, Sierra Azul, El Sereno, Mt. Tam, Mt. Diablo
 -}
-
-There are no other species of this genus in the bay area.

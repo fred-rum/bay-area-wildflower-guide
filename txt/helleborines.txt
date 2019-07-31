@@ -1,4 +1,5 @@
 {sci:Epipactis}
+{ca}
 3 petals and 3 sepals look similar to each other<br/>
 1 sepal is "upper" and 2 are "lateral"
 
@@ -18,5 +19,3 @@ lateral petals 13--15 mm; lateral sepals <b>16--24 mm</b>
 +- wet places
 scattered
 -}
-
-There are no other species of this genus in the bay area.

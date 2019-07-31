@@ -1,4 +1,5 @@
 {sci:Heliotropium}
+{hist}
 {+alkali heliotrope:H. curassavicum}
 {-
 stem prostrate to +- ascending, glabrous
@@ -14,5 +15,3 @@ calyx lobes bristly
 corolla <b>white</b>
 rare along the Pacific coast
 -}
-
-There are no other species of this genus in the bay area.

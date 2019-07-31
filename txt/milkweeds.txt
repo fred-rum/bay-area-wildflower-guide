@@ -1,4 +1,5 @@
 {sci:Asclepias}
+{hist/rare}
 The petals and sepals are reflexed, revealing the gynostegium, which is a blunt plug composed of fused stamens and styles.  The gymnostegium is surrounded by five hoods, each (at least partially) hiding a horn.
 
 A labeled photo of the <a href="http://orbisec.com/wp-content/uploads/2014/10/Milkweed-2.jpg">milkweed flower parts</a>.
@@ -49,5 +50,3 @@ hoods open at top, very long (exceeding anther head by at least 1/2 their length
 horn exserted from hood
 Mt. Tam, Briones, Los Trampas
 -}
-
-There are no other species of this genus in my hiking area.

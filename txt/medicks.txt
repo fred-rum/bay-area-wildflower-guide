@@ -1,6 +1,4 @@
 {sci:Medicago}
-There are more species than this in the bay area.
-
 {+bur clover}
 
 {+spotted medick}

@@ -1,4 +1,5 @@
 {sci:Daucus}
+{ca}
 {+american wild carrot}
 {-
 bract segments <b>short</b>, linear to lanceolate
@@ -11,5 +12,3 @@ common
 bract segments <b>elongate</b>, narrowly linear to +- thread-like
 scattered
 -}
-
-There are no other species of this genus in the bay area.

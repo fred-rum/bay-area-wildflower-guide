@@ -1,4 +1,5 @@
 {sci:Trillium ovatum}
+{ba}
 {:T. ovatum ssp. ovatum}
 {-
 this is the only local subspecies

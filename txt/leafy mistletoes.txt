@@ -1,4 +1,5 @@
 {sci:Phoradendron}
+{ba}
 {+oak mistletoe:P. villosum}
 {-
 leaf length generally < 1.5 &times; width, 15--60 mm, generally > 20 mm
@@ -30,7 +31,11 @@ leaf length generally > 3 &times; width, (5)10--25 mm, generally < 20 mm
 stem glabrous
 spike with generally 1 fertile internode, pistillate 2-flowered
 <b>on conifers</b>
-Nisene Marks, Mt. Tam
+rare at Nisene Marks, Mt. Tam
 -}
 
-There are no other species of this genus in the bay area.
+{juniper mistletoe:P. juniperinum}
+{-
+leaf scale-like, < 1 mm
+very rare at Nisene Marks
+-}

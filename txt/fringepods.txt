@@ -1,4 +1,5 @@
 {sci:Thysanocarpus}
+{ba}
 Key features:
 {-
 shape and length of pedicels in fruit
@@ -35,5 +36,3 @@ basal leaves present
 fertile anthers yellow
 rare
 -}
-
-There are no other species of this genus in the bay area.

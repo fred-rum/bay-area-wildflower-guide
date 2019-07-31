@@ -1,4 +1,5 @@
 {sci:Typha}
+{ca}
 Cattails typically have two sections of flowers toward the stem.  The top section is staminate (male), and the section below is pistillate (female).
 
 {+broad-leaved cattail:Typha latifolia}
@@ -26,5 +27,3 @@ widest leaf blades 6--18 mm wide (fresh), 5--15 mm (dry)
 pistillate spike cinnamon to medium brown
 pistillate bractlet tip straw-colored (to light brown), generally paler than stigma, acute to acuminate
 -}
-
-There are no other species of this genus in the bay area.

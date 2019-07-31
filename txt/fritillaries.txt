@@ -1,4 +1,5 @@
 {sci:Fritillaria}
+{hist}
 {+checker lily:F. affinis}
 {-
 leaves < 10 or in whorls of 2--8 on lower stem, not sickle-shaped
@@ -28,5 +29,3 @@ perianth dark brown, green-purple or yellow-green
 flower ill-scented or not
 rare in San Mateo County
 -}
-
-There are no other species of this genus in my hiking area.

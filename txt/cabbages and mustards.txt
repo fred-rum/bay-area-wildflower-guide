@@ -1,22 +1,34 @@
 {sci:Brassica}
-{+black mustard:Brassica nigra}
-{-
-stem 30--200 cm, generally branched distally
-basal and lower cauline leaves pinnately lobed, serrate-dentate
-<b>distal cauline leaves</b> smaller, sessile, <b>base tapered, not lobed</b>
-flowers much like B. rapa
-petals 7--11(13) mm
-very common
--}
-
+{hist/rare}
 {+field mustard:Brassica rapa}
 {-
 stem 30--100 cm, simple or branched
 basal leaves pinnately lobed, lateral lobes 2--4(6) pairs, terminal lobe obovate, wavy-dentate
 middle and <b>distal cauline leaves</b> sessile, <b>base lobed, generally clasping</b>
-flowers much like B. nigra
+pedicel erect
 petals 6--11(13) mm
+flowers much like B. nigra
 very common
+-}
+
+{+black mustard:Brassica nigra}
+{-
+stem 30--200 cm, generally branched distally
+basal and lower cauline leaves pinnately lobed, serrate-dentate
+<b>distal cauline leaves</b> smaller, sessile, <b>base tapered, not lobed</b>
+petals 7--11(13) mm
+flowers much like B. rapa
+very common
+-}
+
+{brown mustard:B. juncea}
+{-
+stem 20--100 cm, branched distally
+basal leaves early-diciduous, 5--100 cm, lateral lobes in 1--3 pairs
+<b>distal cauline leaves</b> smaller, <b>base tapered, not lobed</b>
+<b>pedicel spreading to ascending</b>
+petals 9--13 mm
+rare
 -}
 
 {cabbage:Brassica oleracea}
@@ -28,5 +40,3 @@ middle and distal cauline leaves sessile, based lobed or generally clasping
 petals <b>18--25 mm</b>
 scattered near the coast, e.g. Wilder Ranch
 -}
-
-There are no other species of this genus in the bay area.
