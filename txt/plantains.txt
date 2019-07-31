@@ -1,4 +1,5 @@
 {sci:Plantago}
+{!hist}
 The key features in Jepson tend to be unobservable things like seed characteristics, annual vs. perennial, etc.  Other features include tiny features of the tiny flowers, so very close focus and perhaps plucking a flower may be necessary.  Due to the difficulty in identifying useful distinguishing features, I've punted for now.  Check Jepson for anything new.
 
 Key features:

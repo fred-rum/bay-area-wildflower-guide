@@ -890,7 +890,7 @@ class Page:
 
                     w.write('{prolog} {members} of this {top} {epilog}.'.format(prolog=prolog, members=members, top=top, epilog=epilog))
                     if not self.key_complete:
-                        w.write('<br/><b>Caution: the key to distinguish these {members} is not yet complete.</b>'.format(members=members))
+                        w.write('<br/><b>Caution: the key to distinguish these {members} is not complete.</b>'.format(members=members))
                     w.write('<p/>')
 
             w.write(s)

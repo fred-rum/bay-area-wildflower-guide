@@ -1,5 +1,5 @@
 {sci:Artemisia}
-{!ba}
+{!hist}
 {+california sagebrush:Artemisia californica}
 {-
 axillary leaf clusters present

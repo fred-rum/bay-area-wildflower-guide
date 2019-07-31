@@ -172,3 +172,6 @@ Put month info in table format with bar chart.
 Put month info side by side with park info (depending on display width?)
 
 /cygdrive/c/Python27/python -m cProfile -s cumtime flowers.py  | less
+
+Put <hr/> before all footer data and remove manual <hr/> from txt files.
+Put <hr/> after all header data?  (But don't do two hr's in a row.)
