@@ -1,6 +1,5 @@
 {sci:Cirsium}
-My notes are not very good for these.
-
+{hist/rare}
 Potential key features:
 {-
 corolla color
@@ -65,7 +64,6 @@ Mt. Diablo
 {-
 abaxial face of outer and middle phyllaries with long, sticky-resinous ridge (milky when fresh, dark when dry, occasionally very narrow)
 margins of phyllaries minutely spiny-fringed
-
 Mt. Tam
 -}
 
@@ -124,5 +122,3 @@ Mt. Tam, Briones
 -}
 
 ]}
-
-There are no other species of this genus in my hiking area, although there is one more exceedingly rare native thistle in the Palo Alto area.

@@ -1,4 +1,5 @@
 {sci:Sonchus}
+{ba}
 "Stem distally branched" is a genus characteristic.
 
 {+prickly sowthistle}
@@ -50,5 +51,3 @@ petal +- = corolla tube
 fruit +- compressed , 3--4-angled, 2-ribbed between angles
 very rare
 -}
-
-There are no other species of this genus in the bay area.

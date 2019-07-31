@@ -9,6 +9,6 @@ See also {-white daisies} for daisies with white rays and {-sunflowers} for simi
 
 {+common woolly sunflower}
 
-{+field marigold}
+{+marigolds}
 
 {bigelow's sneezeweed:Helenium bigelovii}

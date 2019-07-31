@@ -1,4 +1,5 @@
 {sci:Eriophyllum}
+{ba}
 Key features:
 {-
 how far up is the plant woody
@@ -54,5 +55,3 @@ herb
 5--13 rays, <b>6--20 mm</b>
 scattered
 -}
-
-There are no other species of this genus in the bay area.

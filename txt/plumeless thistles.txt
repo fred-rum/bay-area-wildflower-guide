@@ -1,4 +1,5 @@
 {sci:Carduus}
+{!ba}
 Key features:
 {-
 number of heads per cluster
@@ -19,5 +20,7 @@ phyllary bases glabrous to sparsely tomentose
 common throughout the bay area
 -}
 
-There are no other species of this genus in my hiking area, although
-there is one more near the Bay Area near Point Reyes.
+{musk thistle:C. nutans}
+{-
+
+-}

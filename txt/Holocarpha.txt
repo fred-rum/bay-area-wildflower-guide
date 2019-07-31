@@ -1,3 +1,4 @@
+{ba}
 {+pit-gland tarweed:H. virgata}
 {-
 anthers +- red to dark purple
@@ -30,5 +31,3 @@ phyllaries each with (0)5--15(20) pit-gland-tipped outgrowths and generally glab
 heads in flat-topped or panicle-like clusters
 rare at Grant, Del Valle, Mt. Diablo
 -}
-
-There are no other species of this genus in the bay area.

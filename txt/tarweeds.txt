@@ -1,5 +1,5 @@
 {sci:Madia}
-
+{ba}
 {[
 <h3>relatively large diameter flower head</h3>
 
@@ -94,5 +94,3 @@ scattered
 -}
 
 ]}
-
-There are no other species of this genus in the bay area.

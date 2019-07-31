@@ -1,4 +1,5 @@
 {sci:Centaurea}
+{ba}
 Key features:
 {-
 corolla color, length
@@ -54,6 +55,13 @@ currently called Cyanus segetum on iNaturalist, but POWO says it should be Centa
 Sierra Azul & Mt. Umunhum
 -}
 
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0175+3301+2288+0037}
+{iberian star-thistle:C. iberica}
+{-
+white to pale purple with purple tips
+rare
+-}
+
 ]}
 {[
 <h3>Unlikely</h3>
@@ -72,7 +80,7 @@ rare, historical record only
 
 {:C. diffusa}
 {-
-no confirmed records in the bay area
+rare, historical record only
 -}
 
 {:C. diluta}
@@ -80,11 +88,9 @@ no confirmed records in the bay area
 rare, historical record only
 -}
 
-{:C. iberica}
+{:C. jacea}
 {-
-some relatively recent records from around the Calaveras Reservoir, which I never visit
+rare, historical record only
 -}
 
 ]}
-
-There are no other species of this genus in the bay area.

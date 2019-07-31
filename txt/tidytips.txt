@@ -1,4 +1,5 @@
 {sci:Layia}
+{ba}
 Key features:
 {-
 color(s) of ray petals
@@ -49,6 +50,12 @@ glandular
 Chabot
 -}
 
+{beach tidytips:L. carnosa}
+{-
+only white ray petals
+San Francisco, Pt. Reyes
+-}
+
 {tall tidytips:Layia hieracioides}
 {-
 ray petals are short, only yellow
@@ -56,5 +63,3 @@ scattered, but Windy Hill is the only place I visit regularly
 -}
 
 ]}
-
-There are no other species of this genus in my hiking area, although L. carnosa can be found near the golden gate or Point Reyes.

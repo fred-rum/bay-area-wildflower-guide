@@ -1,6 +1,5 @@
 {sci:Hypochaeris}
-Below are all species in the bay area.
-
+{ca}
 {+common cat's-ear}
 {-
 rough-hairy
@@ -12,5 +11,3 @@ ligules [petals] 10--15 mm, much exceeding involucre, yellow, often +- red abaxi
 +- glabrous
 ligues [petals] 5--8 mm, barely exceeding involucre, yellow, often +- red abaxially
 -}
-
-There are no other species of this genus in the bay area.

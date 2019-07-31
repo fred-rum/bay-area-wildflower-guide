@@ -21,7 +21,7 @@ spur slender, pointed, <b>generally >= 1/2 corolla tube length</b>
 -}
 
 {https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0315+1129}
-{shortspur seablush:Plectritis congesta ssp. brachystemon}
+{pink plectritis:Plectritis congesta ssp. brachystemon}
 {-
 corolla +- radial to +- 2-lipped, uniformly white to pink [no spots]
 spur a minute swelling or slender and < 1/2 corolla tube length, tip generally enlarged
