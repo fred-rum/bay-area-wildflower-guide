@@ -1,4 +1,5 @@
 {sci:Lotus}
+{hist}
 {+bird's-foot trefoil:Lotus corniculatus}
 {-
 leaflet length of longest upper leaves 1.6--3(4) &times; width
@@ -12,6 +13,3 @@ leaflet length of longest upper leaves (2.5)3.2--5 &times; width
 corolla (6)7--10(12) mm
 Chabot; historically rare elsewhere
 -}
-
-No other species are in my hiking area.
-<hr/>
