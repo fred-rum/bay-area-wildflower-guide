@@ -876,7 +876,7 @@ class Page:
                 if self.complete == None:
                     w.write('<b>Caution: There may be other {members} of this {top} not yet included in this guide.</b><p/>\n'.format(members=members, top=top))
                 elif self.complete == 'more':
-                    w.write('<b>Caution: There are other {members} of this {top} not yet included in this guide.</b>\n'.format(members=members, top=top))
+                    w.write('<b>Caution: There are other {members} of this {top} not yet included in this guide.</b><p/>\n'.format(members=members, top=top))
                 else:
                     prolog = 'There are no other'
                     if self.complete == 'hist':

@@ -1,4 +1,7 @@
 {sci:Cuscuta}
+{!hist/rare}
+"Inside the corolla at the base of the stamens, there are fringed floral scales (requires at least a 10x hand lens to see)."
+
 {:C. californica}
 {-
 corolla scales 0
@@ -20,6 +23,7 @@ rare inland
 {-
 corolla scales present
 flower 3.5--6 mm
+calyx and corolla lobes acute
 calyx generally +- = corolla tube, lobe bases generally not overlapped
 corolla lobes generally +- = tube
 anthers 0.3--0.7 mm
@@ -32,6 +36,7 @@ Don Edwards and rare in other coastal locations
 {-
 corolla scales present
 flower 2.5--4.5 mm
+calyx and corolla lobes acute
 calyx generally +- = corolla tube, lobe bases generally not overlapped
 corolla lobes generally +- = tube
 anthers 0.3--0.7 mm
@@ -44,8 +49,24 @@ scattered on coast
 {-
 corolla scales present
 flower 5--7(9) mm
+calyx and corolla lobes acute
 calyx generally 1/2 corolla tube, lobe bases overlapped
 corolla lobes 1/4--1/3 tube
 anthers 0.8--2 mm
 scattered inland
+-}
+
+{field dodder:C. campestris}
+{-
+corolla scales present
+calyx lobe tips obtuse to rounded; corolla lobe tips acute
+calyx generally +- = corolla tube
+Henry Coe
+-}
+
+{five angled dodder:C. pentagona}
+{-
+Jepson doesn't have any info for this
+Wikipedia says it's closely related to C. campestris
+Henry Coe
 -}

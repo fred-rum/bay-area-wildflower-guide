@@ -1,4 +1,5 @@
 {sci:Trifolium}
+{more}
 There are very many clover species in the bay area.  This page lists some key features, but I don't attempt to replicate the whole Jepson decision tree.  Instead, each flower description includes only enough information to (hopefully) confirm an ID hypothesis.
 
 Camera angles:
@@ -38,6 +39,31 @@ Bracts: none, but <b>leaf stipules look like pale bracts with dark red veins</b>
 Inflorescence: <b>spheric, ~15--20 mm</b>, many-flowered; sessile above 1--2 +- reduced leaves (with 3 leaflets each) with involucre-like stipules
 Calyx: 7--9 mm, bristle-like, densely plumose
 Corolla: 11--15 mm, generally <b>pink</b> (not purple with white tips)
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0411+2007}
+{rancheria clover:T. albopurpureum}
+{-
+resembles tomcat clover and rose clover
+hairy
+Leaflets: 3, palmate, 1--3 cm, oblanceolate to obovate
+<b>Bracts: none</b>
+Inflorescence: spike, 5--20 mm wide, ovate to short-cylindric
+Calyx: 4--8 mm, lobes 3--6.5 mm, > tube, tapered or bristle-like, plumose
+Corolla: 5--8 mm, <= calyx, <b>purple and white</b>
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0102+0011}
+{two-fork clover:T. amoenum}
+{-
+resembles tomcat clover, but the head is much denser with flowers
+hairy
+Leaflets: 3, palmate, widely obovate
+Bracts: unknown
+Inflorescence: head, ovate to spheric; sessile [CalPhotos does not consistently show this] above 1--2 +- reduced leaves (with 3 leaflets each)
+Calyx: 10--12 mm, slender, plumose
+Corolla: 12--16 mm, <b>purple, tips white</b>
+rare
 -}
 
 {+narrow-leaved clover}
