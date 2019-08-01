@@ -1,4 +1,5 @@
 {sci:Eschscholzia}
+{hist/rare}
 {+california poppy,2}
 {-
 has a distinct pink disc below the corolla
@@ -19,5 +20,3 @@ has no more than an indistinct disc below the corolla
 its recepticle looks comparatively bloated, as it is wide at the top before slanting down to the width of the stem
 found east of Mt. Diablo, but is unknown in the rest of the bay area
 -}
-
-No other species are known to grow wild in the bay area in modern times.

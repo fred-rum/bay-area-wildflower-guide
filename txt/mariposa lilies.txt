@@ -1,4 +1,20 @@
 {sci:Calochortus}
+{!hist/rare}
+Key features:
+{-
+petal color and pattern
+stem branching or not
+bulblets present or not
+-}
+
+{+yellow mariposa lily:C. luteus}
+{-
+corolla is deep yellow, with small red spots plus perhaps one central red blotch
+nectary (yellow/orange spot amidst hair) is crescent-shaped or oblong
+-}
+
+{[
+
 Key features for butterfly vs. clay:
 {-
 stem is branched or not
@@ -6,25 +22,27 @@ pale second spot is above central dark spot or not
 nectary is square or crescent shaped
 -}
 
-{+yellow mariposa lily}
-{-
-corolla is deep yellow, with small red spots plus perhaps one central red blotch
-nectary (yellow/orange spot amidst hair) is crescent-shaped or oblong
--}
-
-{+butterfly mariposa lily}
+{+butterfly mariposa lily:C. venustus}
 {-
 nectary (yellow/orange spot amidst hair) generally +- square (discounting the curve of the petal), not in red spot
 each petal has a central dark blotch, generally a 2nd paler blotch above
 stem generally branched
+<b>tremendous potential variation in color</b>; <a href="https://www.calflora.org/cgi-bin/noccdetail.cgi?seq_num=oe3122">examples</a>
 -}
 
-{+clay mariposa lily}
+{+clay mariposa lily:C. argillosus}
 {-
 nectary (yellow/orange spot amidst hair) is crescent shaped
 each petal has a central dark blotch, but without a 2nd blotch above
 stem simple
 -}
+
+{superb mariposa lily:C. superbus}
+{-
+difficult to distinguish from C. argillosus (above) except by fruit shape
+-}
+
+]}
 
 {+pussy-ears}
 {-
@@ -32,10 +50,63 @@ petal not spotted or striped (but hairs on petal may be)
 petal conspicuously hairy adaxially (on top)
 -}
 
-{+white globe lily}
+{[
+<h2>petals pale purple</h2>
+
+{splendid mariposa lily:C. splendens}
+{-
+petals uniformly pale purple
+sparsely white-hairy near base of petal [upper surface]
+-}
+
+{oakland mariposa lily:C. umbellatus}
+{-
+petals uniformly pale purple to white
+stem 8--25 cm, branched, bulblets 0
+-}
+
+{monterey mariposa lily:C. uniflorus}
+{-
+petals uniformly pale purple to white
+stem generally < 5 cm, generally simple, bulblets present
+-}
+
+{alkali mariposa lily:C. striatus}
+{-
+petals pale purple with dark purple radial stripes
+-}
+
+]}
+
+{tiburon mariposa lily:C. tiburonensis}
+{-
+petals light yellow-green with significant amounts of purple-brown
+Marin area
+-}
+
+{[
+<h2>globe lilies</h2>
+
+{+white globe lily:C. albus}
 {-
 flower nodding, perianth +- closed, globe shaped
 petals not yellow
 -}
 
-There are at least 9 other species in the bay area to worry about.
+{diogenes' lantern:C. amabilis}
+{-
+flower nodding, perianth +- closed, globe shaped
+petals deep yellow
+plant +- glaucous
+Mt. Tam area
+-}
+
+{mount diablo fairy-lantern:C. pulchellus}
+{-
+flower nodding, perianth +- closed, globe shaped
+petals light yellow
+plant green
+Mt. Diablo area
+-}
+
+]}
