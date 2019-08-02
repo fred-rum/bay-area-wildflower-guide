@@ -1,29 +1,144 @@
 {sci:Geranium}
-{+cut-leaved crane's-bill}
+{hist/rare}
+Leaves are palmately lobed to divided.
+When counting segments, it may be easiest to count the mid-rib veins radiating from a common point.
+Unless specified otherwise, each segment is further palmately lobed and/or toothed in outline, although the veins are pinnate.
+
+Except where specified otherwise, geraniums have 2 flowers per inflorescence.  In many cases, one flower is open while the other one is closed.
+
+All species may be +- glandular anywhere.  This is never a distinguishing feature.
+
+Key features:
+{-
+root thickness
+petal length
+anther color [consider brushing off pollen to reveal]
+leaf shape and width (across all segments)
+stem hair pattern
+if fruit is present, tip and base shapes can be diagnostic
+-}
+
+{[
+<h2>short, +- slender roots</h2>
+<h2>notched petal tips</h2>
+
+{+cut-leaved crane's-bill:G. dissectum}
 {-
 stem hairs hairs rough, spreading to reflexed
-leaf blade 2.5--5.4 cm wide, <b>divided 75--95% to base</b>, segments 5--7, rhombic
+leaf blade 2.5--5.4 cm wide, <b>divided 75--95% to base</b>
+5--7 leaf segments, diamond-shaped
 petals 2.9--5.8 mm, +- notched, rose-purple
 -}
 
-{+dove's-foot crane's-bill}
+{northern cranesbill:G. bicknellii}
+{-
+stem hairs short, stiff
+leaf blade 2--7 cm wide, divided 85--95% to base
+5(7) segments, wedge-shaped
+petals 4--6 mm, +- notched, pale purple
+-}
+
+{carolina crane's-bill:G. carolinianum}
+{-
+stem hairs dense, short, spreading or reflexed
+leaf blade 2.5--8.5 cm wide, divided 70--90% to base
+5(7) segments, oblong to wedge-shaped
+petals 5.5--6 mm, +- notched, white to rose-pink
+-}
+
+{small-flowered crane's-bill:G. pusillum}
+{-
+stem hairs soft
+leaf blade 1.5--4.8 cm wide, divided 30--75% to base
+7 leaf segments, wedge-shaped
+<b>petals 2--3 mm</b>, +- notched, pink to violet
+<b>5 fertile stamens (outer 5 stamens lacking anthers)</b> [all others have 10 fertile anthers]
+-}
+
+{+dove's-foot crane's-bill:G. molle}
 {-
 stem hairs +- sparse, soft
-leaf blade 0.9--5.2 cm wide, divided 50--75% to base, segments 7--9, obtriangular
-petals 3--10.5 mm, <b>notched</b>, red-purple
+leaf blade 0.9--5.2 cm wide, divided 50--75% to base
+7--9 leaf segments, obtriangular
+petals 3--10.5 mm, notched, red-purple [usually pale purple with purple veins]
 -}
 
-{+round-leaved crane's-bill}
-{-
-stem hairs rough, spreading
-leaf blade 1.9--4.4 cm wide; divided 55--65% to base, segments 5--7, obtriangular
-petals 6--7 mm, <b>rounded</b>, rose-purple
--}
+]}
+{[
+<h2>rounded petal tips</h2>
 
-{+herb robert}
+{+herb robert:G. robertianum}
 {-
 stem hairs +- sparse
-leaf blade 3.5--10 cm wide; divided > 0.9 to base or midrib, segments 5, +- sessile to short-stalked, pinnately lobed to dissected
+leaf blade 3.5--10 cm wide, <b>divided > 90% to base or midrib</b>
+5 leaf segments, +- sessile to short-stalked, pinnately lobed to dissected
+pedicel 5--20 mm
 petals 10--14 mm, rounded, pink to red-purple [often shorter]
-anthers +- purple [yellow for G. purpureum]
+<b>anthers +- purple</b>
+-}
+
+{+little-robin:G. purpureum}
+{-
+also called "small herb robert", which is accurate
+stem hairs soft
+leaf blade 3--8.7 cm wide, <b>divided > 90% to base</b>
+5 leaf segments, +- sessile to short-stalked, pinnately lobed to dissected
+pedicel 5--10 mm
+petals 5--9.5 mm, rounded, pink to red-purple
+<b>anthers +- yellow</b>
+-}
+
+{+round-leaved crane's-bill:G. rotundifolium}
+{-
+stem hairs rough, spreading
+leaf blade 1.9--4.4 cm wide, <b>divided 55--65% to base</b>
+5--7 segments, obtriangular
+petals 6--7 mm, rounded, rose-purple
+-}
+
+]}
+{[
+<h2>thick underground caudex</h2>
+
+{cinquefoil geranium:G. potentilloides}
+{-
+<b>inflorescence 1-flowered</b> [all others are 2-flowered]
+stem hairs short, stiff, spreading to reflexed
+leaf blade 1--4 cm wide, divided 70--75% to base
+5--7 leaf segments, wedge shaped
+petals 6--9 mm, rounded or +- notched, white to +- pink
+-}
+
+{canary island geranium:G. palmatum}
+{-
+stem hairs 0 to sparse
+<b>leaf blade 11--42 cm wide</b>, divided > 90% to base or midrib
+generally 5 segments, pinnately lobed to dissected
+<b>petals 19--21 mm</b>, rounded, pink to red-purple
+-}
+
+{alderney crane's-bill:G. core-core}
+{-
+stem hairs sparse, stiff, reflexed, appressed
+leaf blade 1.5--5.6 cm wide, divided 55--80% to base
+5--7 leaf segments, broadly wedge-shaped
+petals 3.1--7.1 mm, rounded or +- notched, purple
+pedicel 11--31 mm, hairs reflexed, appressed, 0.2--0.6 mm
+-}
+
+{solander's geranium:G. solanderi}
+{-
+stem hairs spreading to reflexed, not appressed, non-glandular
+leaf blade 1.4--5.7 cm wide, divided 45--85% to base
+5--7 leaf segments, obtriangular
+petals 3--8.1 mm, rounded, +- purple
+pedicel 8--34 mm, hairs spreading or reflexed, not appressed, 0.2--2 mm
+-}
+
+]}
+
+{new zealand geranium:G. retrorsum}
+{-
+undescribed by Jepson
+SF Presidio, Twin Peaks, and urban Berkeley
 -}

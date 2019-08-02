@@ -1280,7 +1280,7 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
             else:
                 page = com_page[com]
                 if page.sci:
-                    if sci != page.sci:
+                    if sci != page.sci and sci not in sci_ignore:
                         print 'observation {com} ({sci}) matches the common name for a page, but not its scientific name ({sci_page})'.format(com=com, sci=sci, sci_page=page.sci)
                 elif not page.no_sci:
                     page.set_sci(sci)

@@ -1,12 +1,14 @@
 {sci:family Geraniaceae}
 {+stork's-bills}
 {-
+[typically?] 3 or more flowers per inflorescence (some may be unopened)
 generally 5 fertile stamens alternating with 5 staminodes
 leaf simple or palmately divided; leaf veins pinnate
 -}
 
 {+geraniums and cranesbills}
 {-
-generally 10 fertile stamens
+2 (rarely 1) flowers per inflorescence (often 1 is unopened)
+generally 10 fertile stamens (5 outer and 5 inner)
 leaf palmately lobed or divided
 -}

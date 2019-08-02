@@ -1,4 +1,5 @@
 {sci:Acmispon}
+{!rare}
 Key features:
 {-
 stem erect, ascending, decumbent, or prostrate; woody (but green) or not
@@ -11,7 +12,7 @@ wings > keel or +- =
 -}
 
 {[
-<h2>shrub?</h2>
+<h2>perennial?</h2>
 
 {+deerweed}
 {-
@@ -39,17 +40,17 @@ corolla yellow
 scattered in the Santa Cruz range
 -}
 
-{round leaved heermann's lotus:Acmispon heermannii var. orbicularis}
+{heermann's lotus:Acmispon heermannii}
 {-
 prostrate, often mat-forming, 30-100 cm
 <b>leaflets hairy</b>; may be green, gray, or silver
-corolla generally 5--6 mm, yellow to +- red, dark-tipped, wings >= other petals [wings < banner in other species?]
+corolla generally 4--6 mm, yellow to +- red, dark-tipped, wings >= other petals [wings < banner in other species?]
 scattered in the Santa Cruz range
 -}
 
 ]}
 {[
-<h2>herb?</h2>
+<h2>annual?</h2>
 
 {[
 <h3>wings generally +- <= keel</h3>
@@ -133,3 +134,24 @@ scattered
 
 ]}
 ]}
+
+Rare species that I need to key:
+
+{:A. argophyllus}
+{-
+prostrate to erect, 10--60 cm
+leaflets with hairs generally obscuring surface
+calyx 4--8 mm, lobes +- <= tube, densely shaggy-hairy
+corolla 6--12 mm, wings +- = keel
+rare
+-}
+
+{:A. argyraeus}
+{-
+rare
+-}
+
+{:A. micranthus}
+{-
+rare
+-}
