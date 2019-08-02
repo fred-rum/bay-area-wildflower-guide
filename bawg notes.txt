@@ -175,3 +175,10 @@ Put month info side by side with park info (depending on display width?)
 
 Put <hr/> before all footer data and remove manual <hr/> from txt files.
 Put <hr/> after all header data?  (But don't do two hr's in a row.)
+
+Add (optional) color info for unobserved flowers?
+How would that be presented?  (border on CalPhoto placeholder?)
+
+Review:
+https://www.inaturalist.org/observations/25047262
+https://www.inaturalist.org/observations/28034271

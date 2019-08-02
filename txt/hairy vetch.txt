@@ -6,7 +6,7 @@ lower calyx lobe length
 corolla length
 -}
 
-shaggy vetch (<i>Vicia villosa ssp. villosa</i>)
+{shaggy vetch:Vicia villosa ssp. villosa}
 {-
 hairs on upper stems and leaves conspicuous, spreading, 1--2 mm
 lower calyx lobes 2--4 mm, linear, often curved
@@ -14,7 +14,7 @@ corolla 14--18 mm
 less common in the bay area (Sierra Azul, Mission Peak, Sunol, and elsewhere north in the East Bay)
 -}
 
-winter vetch (<i>Vicia villosa ssp. varia</i>)
+{winter vetch:Vicia villosa ssp. varia}
 {-
 no hairs on stems or leaves or hair is sparse, appressed, +- 1 mm
 lower calyx lobes generally 1--2.5 mm, narrowly lanceolate, straight

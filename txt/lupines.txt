@@ -1,5 +1,5 @@
 {sci:Lupinus}
-
+{hist/rare}
 Camera angles:
 {-
 overall (with scale)

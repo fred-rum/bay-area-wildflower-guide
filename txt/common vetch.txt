@@ -1,4 +1,5 @@
 {sci:Vicia sativa}
+{ca}
 Key features:
 {-
 length of calyx lobes (supposedly no overlap, but measure carefully!)
