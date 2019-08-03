@@ -135,9 +135,16 @@ Calyx: 4--7 mm, glabrous, longer lobes bristle-like, generally branched
 Corolla: <b>10--20 mm, dull white or +- yellow, purple-tipped (or not?), banner inflated in fruit</b>
 -}
 
-{+hop trefoils}
+{+hop trefoil}
 {-
-inflorescence <b>head-like or +- spike-like</b>
-compound leaf of 3 leaflets
-corolla <b>bright yellow</b>, brown in age
+Leaflets: 3, <b>petioles of mid-leaves > leaflets</b>
+Inflorescence: <b>head-like, 8--13 mm wide</b>, ovate to spheric, generally > 20-flowered; flowers quickly reflexed
+Corolla: 4--5.5 mm, bright yellow, brown in age, <b>striate</b>
+-}
+
+{+lesser hop trefoil}
+{-
+Leaflets: 3, <b>petioles of mid-leaves generally < leaflets</b>
+Inflorescence: <b>head- to +- spike-like, 4--8 mm wide</b>, 5--10(20)-flowered; flowers quickly reflexed
+Corolla: 3.5--4 mm, bright yellow, brown in age, <b>weak-striate</b>
 -}
