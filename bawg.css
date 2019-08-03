@@ -188,17 +188,26 @@ a.family:link {
 a.family:visited {
     color: black;
 }
+span.unobs {
+    color: black;
+}
 a.unobs:link {
     color: black;
 }
 a.unobs:visited {
     color: black;
 }
+span.parent {
+    color: SaddleBrown;
+}
 a.parent:link {
     color: SaddleBrown;
 }
 a.parent:visited {
     color: #8b1313;
+}
+span.leaf {
+    color: DarkGreen;
 }
 a.leaf:link {
     color: DarkGreen;
