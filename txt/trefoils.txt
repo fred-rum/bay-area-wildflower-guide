@@ -1,5 +1,5 @@
 {sci:n/a}
-These are all called "trefoil", but they're not related and don't always look particularly similar.
+These are all called "trefoil", but they're not closely related and don't always look particularly similar.  For flowers that look similar to each other, see {-small yellow peas}.
 
 {+bird's-foot-trefoils}
 {-
@@ -10,7 +10,7 @@ whorl or partial whorl of 1--7 flowers
 {+chile trefoil}
 {-
 1 flower per leaf axil
-generally 4 leaflets per leaf, irregularly arranged
+3--9 leaflets, generally irregularly arranged
 See also the other short, yellow {-deervetch} species.
 -}
 

@@ -1,0 +1,20 @@
+{sci:n/a}
+The flowers of these genuses look similar, so they are grouped here as an aid to distinguishing them.
+
+{+bird's-foot-trefoils}
+{-
+5 leaflets per leaf in odd-pinnate arrangement
+1--many flowers in a whorl (visualize whorled peas), peduncled from a leaf axil
+-}
+
+{+deervetch}
+{-
+3--9 leaflets, generally odd-1-pinnate but irregularly arranged
+1--many flowers in an umbel, generally peduncled from a leaf axil
+({-chile trefoil} has 1 +- sessile flower per axil, 4 leaflets)
+-}
+
+{+medicks}
+{-
+3 leaflets per leaf, palmate or odd-1-pinnate
+-}

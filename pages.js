@@ -41,6 +41,7 @@ var pages=[
 {page:"mariposa lilies",sci:"Calochortus spp.",key:true},
 {page:"Solanaceae",com:"nightshade family",sci:"family Solanaceae",key:true},
 {page:"nightshades",sci:"Solanum spp.",key:true},
+{page:"small yellow peas",key:true},
 {page:"Polemoniaceae",com:"phlox family",sci:"family Polemoniaceae",key:true},
 {page:"hedgenettles",sci:"Stachys spp.",key:true},
 {page:"owl's clover",key:true},

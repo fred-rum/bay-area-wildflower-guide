@@ -44,7 +44,7 @@ scattered in the Santa Cruz range
 {-
 prostrate, often mat-forming, 30-100 cm
 <b>leaflets hairy</b>; may be green, gray, or silver
-corolla generally 4--6 mm, yellow to +- red, dark-tipped, wings >= other petals [wings < banner in other species?]
+corolla generally 4--6 mm, yellow to +- red, <b>dark-tipped</b>, wings >= other petals [wings < banner in other species?]
 scattered in the Santa Cruz range
 -}
 
