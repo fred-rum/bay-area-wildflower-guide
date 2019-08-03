@@ -13,6 +13,8 @@ Key features:
 root thickness
 petal length
 anther color [consider brushing off pollen to reveal]
+stigma lobe color
+[most that most anther/stigma colors documented here are sampled from CalPhotos and may not be accurate or reflect the full color range]
 leaf shape and width (across all segments)
 stem hair pattern
 if fruit is present, tip and base shapes can be diagnostic
@@ -28,6 +30,8 @@ stem hairs hairs rough, spreading to reflexed
 leaf blade 2.5--5.4 cm wide, <b>divided 75--95% to base</b>
 5--7 leaf segments, diamond-shaped
 petals 2.9--5.8 mm, +- notched, rose-purple
+anthers dark or pale purple
+stigma lobes red-purple
 -}
 
 {northern cranesbill:G. bicknellii}
@@ -35,7 +39,9 @@ petals 2.9--5.8 mm, +- notched, rose-purple
 stem hairs short, stiff
 leaf blade 2--7 cm wide, divided 85--95% to base
 5(7) segments, wedge-shaped
-petals 4--6 mm, +- notched, pale purple
+petals 4--6 mm, +- notched, very pale purple with dark purple veins
+anthers pink and/or purple
+stigma lobes salmon or beige
 -}
 
 {carolina crane's-bill:G. carolinianum}
@@ -44,6 +50,8 @@ stem hairs dense, short, spreading or reflexed
 leaf blade 2.5--8.5 cm wide, divided 70--90% to base
 5(7) segments, oblong to wedge-shaped
 petals 5.5--6 mm, +- notched, white to rose-pink
+anthers dark purple
+stigma lobes red-purple
 -}
 
 {small-flowered crane's-bill:G. pusillum}
@@ -53,6 +61,8 @@ leaf blade 1.5--4.8 cm wide, divided 30--75% to base
 7 leaf segments, wedge-shaped
 <b>petals 2--3 mm</b>, +- notched, pink to violet
 <b>5 fertile stamens (outer 5 stamens lacking anthers)</b> [all others have 10 fertile anthers]
+anthers dark purple
+stigma lobes beige
 -}
 
 {+dove's-foot crane's-bill:G. molle}
@@ -61,6 +71,8 @@ stem hairs +- sparse, soft
 leaf blade 0.9--5.2 cm wide, divided 50--75% to base
 7--9 leaf segments, obtriangular
 petals 3--10.5 mm, notched, red-purple [usually pale purple with purple veins]
+anthers dark purple
+stigma lobes red-purple
 -}
 
 ]}
@@ -75,6 +87,7 @@ leaf blade 3.5--10 cm wide, <b>divided > 90% to base or midrib</b>
 pedicel 5--20 mm
 petals 10--14 mm, rounded, pink to red-purple [often shorter]
 <b>anthers +- purple</b>
+stigma lobes rose to purple
 -}
 
 {+little-robin:G. purpureum}
@@ -86,14 +99,18 @@ leaf blade 3--8.7 cm wide, <b>divided > 90% to base</b>
 pedicel 5--10 mm
 petals 5--9.5 mm, rounded, pink to red-purple
 <b>anthers +- yellow</b>
+stigma lobes pink to medium purple
 -}
 
-{+round-leaved crane's-bill:G. rotundifolium}
+{round-leaved crane's-bill:G. rotundifolium}
 {-
 stem hairs rough, spreading
 leaf blade 1.9--4.4 cm wide, <b>divided 55--65% to base</b>
 5--7 segments, obtriangular
+prominent red stipules at internodes
 petals 6--7 mm, rounded, rose-purple
+anthers dark purple
+stigma lobes pink
 -}
 
 ]}
@@ -107,6 +124,8 @@ stem hairs short, stiff, spreading to reflexed
 leaf blade 1--4 cm wide, divided 70--75% to base
 5--7 leaf segments, wedge shaped
 petals 6--9 mm, rounded or +- notched, white to +- pink
+anther color matching petals?
+stigma lobes +- white
 -}
 
 {canary island geranium:G. palmatum}
@@ -115,15 +134,19 @@ stem hairs 0 to sparse
 <b>leaf blade 11--42 cm wide</b>, divided > 90% to base or midrib
 generally 5 segments, pinnately lobed to dissected
 <b>petals 19--21 mm</b>, rounded, pink to red-purple
+anthers dark purple
+stigma lobes dark
 -}
 
-{alderney crane's-bill:G. core-core}
+{+alderney crane's-bill:G. core-core}
 {-
 stem hairs sparse, stiff, reflexed, appressed
 leaf blade 1.5--5.6 cm wide, divided 55--80% to base
 5--7 leaf segments, broadly wedge-shaped
 petals 3.1--7.1 mm, rounded or +- notched, purple
 pedicel 11--31 mm, hairs reflexed, appressed, 0.2--0.6 mm
+anthers cream colored
+stigma lobes cream colored
 -}
 
 {solander's geranium:G. solanderi}
@@ -133,6 +156,8 @@ leaf blade 1.4--5.7 cm wide, divided 45--85% to base
 5--7 leaf segments, obtriangular
 petals 3--8.1 mm, rounded, +- purple
 pedicel 8--34 mm, hairs spreading or reflexed, not appressed, 0.2--2 mm
+anthers cream colored
+stigma lobes cream colored
 -}
 
 ]}
