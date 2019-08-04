@@ -4,6 +4,7 @@
 # Use + before the comment to include the observation in the count at the
 # higher level.
 # Use - to exclude it.
+Acacia koa: -Hawaii
 Arctostaphylos viscida: -Yosemite
 Castilleja arvensis: -Hawaii
 Castilleja densiflora densiflora: +distinguishing subspecies is ambiguous, so I won't try
