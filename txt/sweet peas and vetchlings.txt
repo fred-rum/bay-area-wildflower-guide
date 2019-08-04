@@ -1,52 +1,143 @@
 {sci:Lathyrus}
+{hist}
 Key features:
 {-
-number of leaflets per leaf
 number of flowers in inflorescence
-wings or angles on stem (for peas)
-bristle extending on axis beyond flower (for vetchlings)
+number of leaflets per leaf
+shape of tendril extending from leaf axis
+width of wings or angles on stem
+bristle extending on axis beyond flower
+length of calyx tube vs. lobes
 -}
 
-{+pacific pea}
+{[
+<h2>many flowers, many leaflets</h2>
+
+{+pacific pea:L. vestitus}
 {-
-generally <b>8--12 leaflets</b> per leaf
-<b>8--15 flowers</b> in inflorescence
-stem often sharply angled or flanged (angles or flanges < 1 mm wide)
+8--15 flowers in inflorescence
+generally 8--12 leaflets per leaf
+leaf axis ends in branched, coiled tendril
+stem often sharply <b>angled or flanged, not winged</b> (angles or flanges < 1 mm wide)
+corolla 14--20 mm, pale lavendar to dark purple or wine red or white, depending on variety
 -}
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1107+1066} {delta tule pea:Lathyrus jepsonii}
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1107+1066}
+{delta tule pea:L. jepsonii}
 {-
-<b>10--16 leaflets</b> per leaf
-<b>6--15 flowers</b> in inflorescence
-stem climbing, <b>winged</b> (wings &plusmn; &ge; 1 mm wide)
+6--15 flowers in inflorescence
+10--16 leaflets per leaf
+leaf axis ends in branched, coiled tendril
+stem <b>winged</b> (wings +- >= 1 mm wide)
+corolla 15--20 mm, generally pink to pink-purple
 L. j. var. californicus is a smaller plant which is sometimes hairy.
 L. j. var. jepsonii can exceed two meters in height and is hairless, a rare variety which grows in the estuary habitat of the Sacramento-San Joaquin River Delta, the origin of the common name delta tule pea.
 -}
 
-{+broad-leaved sweet pea}
+{silky beach pea:L. littoralis}
 {-
-<b>2 leaflets</b> per leaf
+1--many flowers in inflorescence
+0--16 leaflets per leaf
+<b>leaf axis ends in short bristle</b> (not coiled or branched tendril)
+stem angled or flanged, not winged
+corolla 8--30 mm, pink-purple or pale, occasionally white or yellow
+<b>Ecology: open coastal dunes</b>
+-}
+
+]}
+{[
+<h2>many flowers, two leaflets</h2>
+
+{+broad-leaved sweet pea:L. latifolius}
+{-
 <b>4--15 flowers</b> in inflorescence
-stem with wings often >= 2 mm wide
+2 leaflets per leaf
+<b>stem with wings often >= 2 mm wide</b>
 corolla 20--25 mm
+calyx tube > lobes
 -}
 
-{+red vetchling}
+{sweet pea:L. odoratus}
 {-
-<b>2 leaflets</b> per leaf
-<b>1 flower</b> in inflorescence
-corolla 10--15 mm
+<b>2--4 flowers</b> in inflorescence
+stem with wings < 2 mm wide
+2 leaflets, 3--6 cm, <b>ovate to narrowly elliptic</b>
+corolla 20--30 mm, white or pale pink to purple
+calyx tube +- = lobes
+-}
+
+{tangier pea:L. tingitanus}
+{-
+<b>2--3 flowers</b> in inflorescence
+stem with wings < 2 mm wide
+2 leaflets, 2--6 cm, <b>lanceolate to widely ovate</b>
+corolla 25--30 mm, salmon to red-purple
+calyx tube > lobes
+-}
+
+]}
+{[
+<h2>one or two flowers</h2>
+
+{torrey's pea:L. torreyi}
+{-
+1--2 flowers in inflorescence
+<b>10--15 leaflets per leaf</b>
+leaf axis ends in bristle or not (not coiled or branched tendril)
+corolla 8--10 mm, <b>lilac to pale purple-blue</b>
+-}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+1111+1234+4121}
+{hairy vetchling:L. hirsutus}
+{-
+<b>1--2 flowers in inflorescence</b>
+<b>2 leaflets per leaf</b>
+inflorescence axis not extended beyond flower
+corolla 9--14 mm, <b>pink to blue-purple or 2-colored</b>
+calyx tube +- = lobes
+-}
+
+]}
+{[
+<h2>one flower, two leaflets</h2>
+
+{+red vetchling:L. cicera}
+{-
+1 flower in inflorescence
+2 leaflets per leaf
+corolla 10--15 mm, red
 inflorescence axis <b>not extended beyond flower</b>
-calyx bowl much shorter than calyx lobes
+calyx tube << lobes
 -}
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1108+1963} {grass pea:Lathyrus sphaericus}
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1108+1963} {grass pea:L. sphaericus}
 {-
-<b>2 leaflets</b> per leaf
-<b>1 flower</b> in inflorescence
-corolla 8--14 mm
+1 flower in inflorescence
+2 leaflets per leaf
+corolla 8--14 mm, red
 inflorescence axis <b>extended as bristle beyond flower</b>
-calyx bowl &plusmn; &le; calyx lobes
+calyx tube &plusmn; &le; lobes
 -}
+
+{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0615+0781}
+{angled pea:L. angulatus}
+{-
+1 flower in inflorescence
+2 leaflets per leaf
+corolla 9--12 mm, <b>lavender or purple</b>
+inflorescence axis extended as bristle beyond flower
+calyx tube +- <= lobes
+-}
+
+{grasspea:L. sativus}
+{-
+not described by Jepson
+1 flower in inflorescence
+2 leaflets per leaf
+stem winged[?]
+<b>corolla [usually?] blue</b>, but possibly red-purple, red, pink, or white
+-}
+
+]}
 
 See also {-vetches}.
