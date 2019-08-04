@@ -184,3 +184,8 @@ Color the placeholder border based on color info.
 
 Allow multiple (labeled) CalPhotos for unobserved flowers.
 Also allow CalPhotos for observed flowers; list them after my images.
+
+Create pages using their scientific name whenever possible.
+Rename a page when a new scientific name is given.
+Links to pages can be by common name or scientific name.
+{+...} link is treated the same as {...} link except for jpg check.

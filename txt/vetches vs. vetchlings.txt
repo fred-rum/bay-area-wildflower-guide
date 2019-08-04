@@ -1,0 +1,10 @@
+{sci:n/a}
+{+vetches}
+{-
+leaves folded lengthwise (because they were folded in bud)
+-}
+
+{+sweet peas and vetchlings}
+{-
+leaves not folded lengthwise (because they were rolled in bud)
+-}
