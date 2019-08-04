@@ -263,6 +263,7 @@ var pages=[
 {page:"gumplants",sci:"Grindelia spp.",key:true},
 {page:"himalayan blackberry",sci:"Rubus armeniacus"},
 {page:"medicks",sci:"Medicago spp.",key:true},
+{page:"melilots and sweetclovers",sci:"Melilotus spp.",key:true},
 {page:"pacific trillium",sci:"Trillium ovatum",key:true},
 {page:"rancher's fiddleneck",sci:"Amsinckia menziesii var. intermedia"},
 {page:"red sand spurrey",sci:"Spergularia rubra"},
@@ -923,6 +924,7 @@ var pages=[
 {page:"western lily of the valley",sci:"Maianthemum dilatatum"},
 {page:"western morning glory",sci:"Calystegia occidentalis ssp. occidentalis"},
 {page:"western virgin's bower",sci:"Clematis ligusticifolia"},
+{page:"white sweetclover",sci:"Melilotus albus"},
 {page:"whitedaisy tidytips",sci:"Layia glandulosa"},
 {page:"wickerstem buckwheat",sci:"Eriogonum vimineum"},
 {page:"wild hyacinth",sci:"Dichelostemma multiflorum"},
@@ -937,6 +939,7 @@ var pages=[
 {page:"wright's cudweed",sci:"Pseudognaphalium canescens"},
 {page:"Wyethia mollis",sci:"Wyethia mollis"},
 {page:"yellow iris",sci:"Iris pseudacorus"},
+{page:"yellow sweetclover",sci:"Melilotus officinalis"},
 {page:"yellow vetch",sci:"Vicia lutea"},
 {page:"yellowray goldfields",sci:"Lasthenia glabrata"},
 ];

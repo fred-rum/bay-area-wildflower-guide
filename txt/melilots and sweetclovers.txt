@@ -1,0 +1,31 @@
+{sci:Melilotus}
+{ca}
+{+small melilot:M. indicus}
+{-
+corolla <b>2.5--3 mm</b>, yellow
+<b>inflorescence axis generally 1--2 cm when flowers open</b>
+stem 10--60 cm
+leaflets 1--2.5 cm, oblanceolate to wedge-shaped-obovate, +- toothed
+fruit 2--3 mm, bumpy or with faint lines
+common
+-}
+
+{yellow sweetclover:M. officinalis}
+{-
+corolla 4.5--7 mm, <b>yellow</b>
+inflorescence axis generally 3--8 cm when flowers open
+stem 50--200 cm
+leaflets 1--2.5 cm, elliptic-oblong to obovate, +- toothed
+fruit 3--5 mm, plump, irregularly cross-ridged
+uncommon
+-}
+
+{white sweetclover:M. albus}
+{-
+corolla 3.5--5 mm, <b>white</b>
+inflorescence axis generally 3--8 cm when flowers open
+stem 50--200 cm
+leaflets 1--2.5 cm, elliptic-oblong to obovate, +- toothed
+fruit 3--5 mm, with network of lines
+uncommon
+-}
