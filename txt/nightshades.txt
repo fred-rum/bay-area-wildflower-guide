@@ -43,7 +43,7 @@ sepals reflexed or not
 
 Flower key features:
 {-
-corolla diameter (warning: Jepson's corolla widths seem a little undersized)
+corolla diameter
 leaf toothed or not
 hairs gladular or not
 -}
@@ -52,7 +52,7 @@ Some features are variable within a species, but if a <b>bold feature</b> is see
 
 {+black nightshade}
 {-
-corolla: 10 mm wide, white
+corolla: 20 mm diameter [corrected], white
 inflorescence: <b>raceme-like</b> (pedicels spaced along a sprout)
 leaf: 4--7 cm, entire to coarsely wavy-toothed
 hairs: +-spreading or curved, <b>glandular</b> and not
@@ -61,16 +61,16 @@ fruit: <b>dull</b>
 
 {+greenspot nightshade}
 {-
-corolla: +-10 mm wide, <b>white-lavender</b>
+corolla: +-20 mm diameter [corrected], <b>white-lavender</b>
 inflorescence: generally <b>umbel-like</b> (all pedicels from a common point)
 leaf: 1--9 cm, entire to coarsely irregularly <b>toothed</b>
 hairs: generally simple, < 1mm, +-curved, white
 fruit: <b>glossy</b> w/ <b>sepals not reflexed</b>
 -}
 
-{american black nightshade:american black nightshade,-2.jpg} {child:american black nightshade}
+{american black nightshade:american black nightshade,2.jpg} {child:american black nightshade}
 {-
-corolla: <b>3--6 mm wide</b>, white
+corolla: <b>6--12 mm diameter</b> [corrected], white
 leaf: 2--15 cm, entire to coarsely wavy-toothed
 hairs: +-0 or short, +-appressed or curved, nonglandular
 fruit: <b>glossy</b> w/ <b>sepals reflexed</b>

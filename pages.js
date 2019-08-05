@@ -902,7 +902,7 @@ var pages=[
 {page:"torrey's pea",sci:"Lathyrus torreyi"},
 {page:"tropical horseweed",sci:"Erigeron sumatrensis"},
 {page:"turkey pea",sci:"Sanicula tuberosa"},
-{page:"twinberry honeysuckle",sci:"Lonicera involucrata var. ledebourii"},
+{page:"twinberry honeysuckle",sci:"Lonicera involucrata"},
 {page:"two-color rabbit tobacco",sci:"Pseudognaphalium bioletti"},
 {page:"two-fork clover",sci:"Trifolium amoenum"},
 {page:"twolobe clarkia",sci:"Clarkia biloba ssp. biloba"},

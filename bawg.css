@@ -143,21 +143,23 @@ div.page-thumb-text {
     margin-right: 10px;
 }
 div.box.indent {
-    margin-left: 10vw;
+    margin-left: 5vw;
 }
 div.photo-box.indent {
-    margin-left: 10vw;
+    margin-left: 5vw;
 }
 /* There's no "max-left" property that would let us limit the indent to
    half the 200px max-width.  But we can get what we want by checking
-   whether 20vw is effectively greater than 100px. */
-@media (min-width: 500px) {
+   whether 5vw is effectively greater than 50px. */
+@media (min-width: 1000px) {
     div.box.indent {
 	margin-left: 50px;
     }
     div.photo-box.indent {
 	margin-left: 50px;
     }
+}
+@media (min-width: 600px) {
     div#autocomplete-box {
 	margin-left: 1.7em;
 	font-size: 1.25em;

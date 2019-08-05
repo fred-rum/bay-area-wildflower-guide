@@ -28,7 +28,7 @@ pale yellow flowers
 scattered around bay area
 -}
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1107+1192} {twinberry honeysuckle:Lonicera involucrata var. ledebourii}
+{+twinberry honeysuckle:Lonicera involucrata}
 {-
 <b>flowers paired on axillary peduncles</b>
 <b>corolla < 20 mm</b>

@@ -1,4 +1,5 @@
 {sci:Maianthemum}
+{ca}
 Key features:
 {-
 4 or 6 perianth parts
@@ -12,6 +13,7 @@ Perianth parts 6
 Inflorescence is a panicle
 > 20 flowers per inflorescence
 <b>perianth 1--2 mm, << stamens</b>
+<b>fruit tan with red speckles</b>
 <b>&gt; 5 leaves</b>, 7--20 cm, ovate to oblong-elliptic; <b>petioles +- 0</b>
 common
 -}
@@ -22,6 +24,7 @@ Perianth parts 6
 Inflorescence is a raceme (or few-branched near base)
 5--15 flowers per inflorescence
 <b>perianth 4--7 mm, &gt; stamens</b>
+<b>fruit tan with red speckles and <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0210+1472">bold dark purple stripes</a></b>
 <b>&gt; 5 leaves</b>, 5--17 cm, (ob)lanceolate to elliptic; <b>petioles 0</b>
 common
 -}
