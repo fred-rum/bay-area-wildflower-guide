@@ -396,6 +396,18 @@ class Page:
 
         self.txt = re.sub(r'{(!?)(ba|ca|any|hist|rare|hist/rare|more)}\n', repl_complete, self.txt)
 
+    def parse_child_calphotos(self):
+        def repl_child_calphotos(matchobj):
+            calphotos = (matchobj.group(2), matchobj.group(1))
+            name = matchobj.group(3)
+            if name in name_page:
+                name_page[name].calphotos.append(calphotos)
+            else:
+                print 'calphotos could not be attached to child {child} in key {key}'.format(child=name, key=self.name)
+            return '{' + name + '}'
+
+        self.txt = re.sub(r'{(https://calphotos.berkeley.edu/[^\}: ]+)(?::([^\}]+))?}\s*{([^\}]+)}', repl_child_calphotos, self.txt)
+
     def parse_calphotos(self):
         def repl_calphotos(matchobj):
             self.calphotos.append((matchobj.group(1), matchobj.group(2)))
@@ -805,6 +817,7 @@ class Page:
         # The entire box is a link to CalPhotos.
         # The ":text" part is optional.
         def repl_calphotos(matchobj):
+            print 'lost calphotos reference in page ' + self.name
             href = matchobj.group(1)
             pos = href.find(':') # find the colon in "http:"
             pos = href.find(':', pos+1) # find the next colon, if any
@@ -925,7 +938,7 @@ class Page:
                     w.write('<a href="../photos/{jpg}.jpg"><img src="../thumbs/{jpg}.jpg" width="200" height="200" class="leaf-thumb"></a>\n'.format(jpg=jpg))
 
                 for tuple in self.calphotos:
-                    w.write('<a href="{link}" target="_blank" class="enclosed"><div class="page-thumb-text">'.format(link=tuple[1]))
+                    w.write('<a href="{link}" target="_blank" class="enclosed"><div class="leaf-thumb-text">'.format(link=tuple[1]))
                     if tuple[0]:
                         w.write('<span>')
                     w.write('<span style="text-decoration:underline;">CalPhotos</span>'.format(link=tuple[1]))
@@ -1236,8 +1249,9 @@ with open(root + '/family names.yaml') as f:
 for page in [x for x in name_page.itervalues()]:
     page.parse_names()
     page.parse_complete()
-    page.parse_calphotos()
     page.parse_children()
+    page.parse_child_calphotos()
+    page.parse_calphotos()
     page.parse_glossary()
 
 with open(root + '/ignore species.yaml') as f:

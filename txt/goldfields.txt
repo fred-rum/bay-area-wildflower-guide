@@ -6,11 +6,8 @@ phyllaries free or partially fused (and what percent is fused)
 number of phyllaries
 leaf shape
 ray length
-pappus present or not, color, opacity
+pappus present or not, color, opacity (pappus <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0514+0357">in flower</a>, <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0511+0368">in seed</a>)
 -}
-
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0514+0357:pappus in flower}
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0511+0368:pappus in seed}
 
 Distinguishing goldfields often requires examining the pappus.  The pappus takes the place of the calyx/sepals in the disk flowers.  If the flower is in bloom, the pappus is typically shorter than the disk corolla, so to see it you'll need to pull the flower head apart.  (Pulling one disk flower out may be sufficient.  It may bring the pappus with it or leave it attached to the ovary.  I need to test that idea.)  Once the flower goes to seed and the corollas fall off, the pappus is much easier to see and often looks like a dandelion's seed pod.
 

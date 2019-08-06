@@ -126,6 +126,19 @@ img.leaf-thumb {
     margin-right: 10px;
     margin-bottom: 10px;
 }
+div.leaf-thumb-text {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    padding: 10px;
+    width: calc(40vw - 22px);
+    height: calc(40vw - 22px);
+    max-width: 178px;
+    max-height: 178px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
 img.page-thumb {
     height: 20vw;
     max-height: 200px;

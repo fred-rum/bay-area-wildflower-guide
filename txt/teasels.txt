@@ -17,8 +17,6 @@ leaf pairs fused to widely fused around stem
 flowers are white, sometimes tinged pink or pale purple
 -}
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0106+1209:spines}
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1208+0232:fused leaves}
 {fuller's teasel:Dipsacus fullonum}
 {-
 receptacle bract ending in a straight, +- flexible spine

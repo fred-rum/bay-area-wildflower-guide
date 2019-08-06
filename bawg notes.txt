@@ -201,6 +201,8 @@ small screen.
 Give autocomplete preference to a complete word (second only to a
 complete name).
 
+Use non-breaking spaces in footer links (Jepson eFlora) and (Bay Area species).
+
 Update txt format to be line based and require fewer braces.
   manually remove uses of '{child:[page]}' and '{[page]:[photo].jpg}'
     done
@@ -211,10 +213,10 @@ Update txt format to be line based and require fewer braces.
     include the image when writing the header images for the page
     restore secondary CalPhotos links for checkerblooms
   write jpg_list automatically without going through self.txt
-  -- done --
   detect CalPhotos link followed by child link ({+...}):
     do this after detecting children so that the page is present
     add the CalPhotos link to the child page's txt prior to parsing it
+  -- done --
   create photobox when linking:
     remove the CalPhotos link when it is recorded
     in repl_child, return only the link (no photo)
