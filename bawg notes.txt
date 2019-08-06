@@ -60,8 +60,6 @@ with ",[suffix]", that suffix is used for the thumbnail image.
 
 Other:
 
-{sci} is replaced with the flower's scientific name.
-
 {-
 [list items]
 -}
@@ -202,3 +200,57 @@ small screen.
 
 Give autocomplete preference to a complete word (second only to a
 complete name).
+
+Update txt format to be line based and require fewer braces.
+  manually remove uses of '{child:[page]}' and '{[page]:[photo].jpg}'
+    done
+  detect any cases of more than one image in repl_photo_box()
+    (multiple sets of braces in the imgs variable)
+    manually remove those cases
+  read bare CalPhotos links from txt file:
+    include the image when writing the header images for the page
+    restore secondary CalPhotos links for checkerblooms
+  write jpg_list automatically without going through self.txt
+  -- done --
+  detect CalPhotos link followed by child link ({+...}):
+    do this after detecting children so that the page is present
+    add the CalPhotos link to the child page's txt prior to parsing it
+  create photobox when linking:
+    remove the CalPhotos link when it is recorded
+    in repl_child, return only the link (no photo)
+    create nested photobox and image link for a child link
+      include the following text in the outer box
+    use the child's CalPhotos photo when linking
+  modify text prior to *all* parsing, then parse it accordingly:
+    {sci:...} -> sci:... (put space after colon or not?)
+    {com:...} -> com:...
+    {ba|ca|...} -> x:...
+    {[ -> [
+    ]} -> ]
+    {+link} or {link:link} -> +link or +link:link
+    {-...-} -> start each line with a period
+    add color:... to txt, then parse it from the txt
+  ignore blank lines at the start of the file after parsing info
+  write out modified txt files:
+    write only files that match at least one:
+      page was created from txt file (even if txt string is empty after parsing)
+      has CalPhotos
+      has a color
+        (not sure that this is useful for unobserved flowers, but just in case)
+        forces output for all observed flowers
+          transfers scientific name from observations.csv to txt file
+          but do I really want to manually write the family for everything, too?
+            nah, but it's only necessary for genuses (at most),
+              and I'm willing to rely on observations.csv for it.
+    write to txt file:
+      com and/or elab if not same as page name (or easily derived)
+      color
+      completion status
+      CalPhotos
+      blank line
+      modified txt string:
+        call parse_names(), _complete(), and _children(), but not _glossary()
+        output prior to calling self.parse()
+        in repl_child, return the original text
+          (e.g. so it includes the scientific name)
+          or add the scientific name to the link if it wasn't there before

@@ -97,8 +97,9 @@ div.box {
 }
 div.photo-box {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    margin: 10px 0px;
+    margin: 0px 0px;
 }
 span.show-narrow {
     display: inline;
@@ -123,15 +124,17 @@ img.leaf-thumb {
     max-height: 200px;
     width: auto;
     margin-right: 10px;
+    margin-bottom: 10px;
 }
 img.page-thumb {
     height: 20vw;
     max-height: 200px;
     width: auto;
     margin-right: 10px;
+    margin-bottom: 10px;
 }
 div.page-thumb-text {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     border: 1px solid black;
@@ -141,6 +144,7 @@ div.page-thumb-text {
     max-width: 178px;
     max-height: 178px;
     margin-right: 10px;
+    margin-bottom: 10px;
 }
 div.box.indent {
     margin-left: 5vw;

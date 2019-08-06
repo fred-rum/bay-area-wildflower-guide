@@ -68,7 +68,7 @@ hairs: generally simple, < 1mm, +-curved, white
 fruit: <b>glossy</b> w/ <b>sepals not reflexed</b>
 -}
 
-{american black nightshade:american black nightshade,2.jpg} {child:american black nightshade}
+{+american black nightshade,2}
 {-
 corolla: <b>6--12 mm diameter</b> [corrected], white
 leaf: 2--15 cm, entire to coarsely wavy-toothed
