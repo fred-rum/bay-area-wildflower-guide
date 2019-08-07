@@ -259,3 +259,5 @@ Update txt format to be line based and require fewer braces.
         in repl_child, return the original text
           (e.g. so it includes the scientific name)
           or add the scientific name to the link if it wasn't there before
+    use new txt files in place of old txt files
+    remove rewrite() and parse_child_calphotos()

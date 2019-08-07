@@ -407,8 +407,10 @@ class Page:
                 self.set_sci(sci)
             return ''
 
-        self.txt = re.sub(r'^com:(.*)\n', repl_com, self.txt, flags=re.MULTILINE)
-        self.txt = re.sub(r'^sci:(.*)\n', repl_sci, self.txt, flags=re.MULTILINE)
+        self.txt = re.sub(r'^com:(.*)\n',
+                          repl_com, self.txt, flags=re.MULTILINE)
+        self.txt = re.sub(r'^sci:(.*)\n',
+                          repl_sci, self.txt, flags=re.MULTILINE)
 
     def parse_complete(self):
         def repl_complete(matchobj):
@@ -417,7 +419,16 @@ class Page:
                 self.key_incomplete = True
             return ''
 
-        self.txt = re.sub(r'^x:(!?)(ba|ca|any|hist|rare|hist/rare|more)\n', repl_complete, self.txt, flags=re.MULTILINE)
+        self.txt = re.sub(r'^x:(!?)(ba|ca|any|hist|rare|hist/rare|more)\n',
+                          repl_complete, self.txt, flags=re.MULTILINE)
+
+    def parse_color(self):
+        def repl_color(matchobj):
+            self.color = set([x.strip() for x in matchobj.group(1).split(',')])
+            return ''
+
+        self.txt = re.sub(r'^color:(.*)\n',
+                          repl_color, self.txt, flags=re.MULTILINE)
 
     def parse_child_calphotos(self):
         def repl_child_calphotos(matchobj):
@@ -1204,7 +1215,7 @@ with open(root + '/color.yaml') as f:
 for name in yaml_data:
     if name in name_page:
         page = name_page[name]
-        page.color = set([x.strip() for x in yaml_data[name].split(',')])
+        page.txt = 'color: ' + yaml_data[name] + '\n' + page.txt
         for color in page.color:
             if color not in color_list:
                 print 'page {name} uses undefined color {color}'.format(name=name, color=color)
@@ -1224,6 +1235,7 @@ with open(root + '/family names.yaml') as f:
 for page in [x for x in name_page.itervalues()]:
     page.rewrite()
     page.parse_names()
+    page.parse_color()
     page.parse_complete()
     page.parse_children()
     page.parse_child_calphotos()
