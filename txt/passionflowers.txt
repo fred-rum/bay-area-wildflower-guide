@@ -1,2 +1,36 @@
 sci:Passiflora spp.
 color: red
+
+All of the below flowers can be found near the coast around Santa Cruz.
+
+A passionflower bloom has the following parts:
+. 10 perianth lobes (5 sepals and 5 petals, very similar to each other)
+. typically many filaments spreading from the corolla throat
+. 5 stamens
+. 3 stigmas, taller than the stamens
+
+==banana passionfruit:P. tarminiana
+. perianth lobes pink
+. no filaments
+. stamens yellowish
+. stigmas greenish
+. round stem?
+. stipules 4--7 mm, soon decisuous
+
+==northern banana passionfruit:P. mixta
+. similar to P. tarminiana but with
+.. angular stems (sub 5-angular, whatever that means)
+.. persistent stipules, 6--20 mm
+. waif
+
+==bluecrown passionflower:P. caerulea
+. perianth lobes white or cream
+. filaments striped white and purple/blue
+. stamens greenish-yellow
+. stigmas purple
+
+==red passionflower:P. manicata
+. perianth lobes red
+. filaments purple, short, erect
+. stamens yellowish
+. stigmas greenish

@@ -1,2 +1,8 @@
 sci:Triphysaria eriantha
-color: yellow, cream
+x:ba
+
+==butter-and-eggs:T. eriantha ssp. eriantha
+. corolla yellow/cream
+
+==T. eriantha ssp. rosea
+. corolla white, fading rose-pink
