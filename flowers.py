@@ -800,10 +800,8 @@ class Page:
         #  optionally a jpg suffix, then
         #  ignored spaces, then
         #  a carriage return, then
-        #  optionally arbitrary text as long as the text doesn't start with
-        #    a second carriage return.  The text ends at EOF or before
-        #    two carriage returns in a row.
-        s = re.sub(r'^\+([^,\n]*)(,[-0-9]*)? *\n((?!\n)(?:(?:\n(?!\n))|.)+)?', repl_child_link, s, flags=re.MULTILINE)
+        #  any amount of arbitrary text that does not include a blank line.
+        s = re.sub(r'^\+([^,\n]*)(,[-0-9]*)? *\n((?:.+[\n|\Z])*)', repl_child_link, s, flags=re.MULTILINE)
 
         # Replace a pair of newlines with a paragraph separator.
         # (Do this after making specific replacements based on paragraphs,
