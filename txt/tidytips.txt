@@ -1,65 +1,52 @@
-{sci:Layia}
-{ba}
-Key features:
-{-
-color(s) of ray petals
-phyllary length?
-glandular or not
-stem purple streaked or not [not sure what this means]
-proximal leaf shape
--}
+sci:Layia spp.
+x:ba
 
-{[
+Key features:
+. color(s) of ray petals
+. phyllary length?
+. glandular or not
+. stem purple streaked or not [not sure what this means]
+. proximal leaf shape
+
+[
 <h3>ray petals may be yellow with white at the tips</h3>
 
-{+tidy tips:Layia platyglossa}
-{-
-ray petals are mostly yellow, but usually with white at the tips
-<b>glandular</b> (e.g. on involucre, or as spots on peduncle)
-stem generally not purple-streaked
-proximal leaves lobed +- 1/2 to midvein
-scattered all around the bay
--}
+==tidy tips:L. platyglossa
+. ray petals are mostly yellow, but usually with white at the tips
+. <b>glandular</b> (e.g. on involucre, or as spots on peduncle)
+. stem generally not purple-streaked
+. proximal leaves lobed +- 1/2 to midvein
+. scattered all around the bay
 
-{woodland tidytips:Layia gaillardioides}
-{-
-most have only yellow; only some have white or pale yellow tips
-<b>glandular</b>
-stem purple-streaked, ascending, not strictly erect [dunno what this means; they look erect enough on CalPhotos]
-proximal leaves serrate or lobed "< or > 1/2 to midvein"
-scattered
--}
+==woodland tidytips:L. gaillardioides
+. most have only yellow; only some have white or pale yellow tips
+. <b>glandular</b>
+. stem purple-streaked, ascending, not strictly erect [dunno what this means; they look erect enough on CalPhotos]
+. proximal leaves serrate or lobed "< or > 1/2 to midvein"
+. scattered
 
-{smooth tidytips:Layia chrysanthemoides}
-{-
-ray petals are mostly yellow, but with white or pale yellow at the tips
-<b>glandless</b> (e.g. on involucre)
-stem not purple-streaked
-proximal leaves often lobed +- to midvein
-Sunol; otherwise mostly historical records
--}
+==smooth tidytips:L. chrysanthemoides
+. ray petals are mostly yellow, but with white or pale yellow at the tips
+. <b>glandless</b> (e.g. on involucre)
+. stem not purple-streaked
+. proximal leaves often lobed +- to midvein
+. Sunol; otherwise mostly historical records
 
-]}
-{[
+]
+[
 <h3>ray petals are always a single color</h3>
 
-{whitedaisy tidytips:Layia glandulosa}
-{-
-only white ray petals
-glandular
-Chabot
--}
+==whitedaisy tidytips:L. glandulosa
+. only white ray petals
+. glandular
+. Chabot
 
-{beach tidytips:L. carnosa}
-{-
-only white ray petals
-San Francisco, Pt. Reyes
--}
+==beach tidytips:L. carnosa
+. only white ray petals
+. San Francisco, Pt. Reyes
 
-{tall tidytips:Layia hieracioides}
-{-
-ray petals are short, only yellow
-scattered, but Windy Hill is the only place I visit regularly
--}
+==tall tidytips:L. hieracioides
+. ray petals are short, only yellow
+. scattered, but Windy Hill is the only place I visit regularly
 
-]}
+]

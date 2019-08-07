@@ -1,16 +1,15 @@
-{sci:Ribes}
+sci:Ribes spp.
+
 Key features:
-{-
-spines on twig nodes or not
-sepal color, spread angle, and number
-styles hairy at base or glabrous
-stamen length
-leaf glandular on underside or not
-bristles between nodes on twigs or not
--}
+. spines on twig nodes or not
+. sepal color, spread angle, and number
+. styles hairy at base or glabrous
+. stamen length
+. leaf glandular on underside or not
+. bristles between nodes on twigs or not
 
 I've made very few currant/gooseberry observations, and my identifications are not firm.
 
-{+chaparral currant}
+==chaparral currant:R. malvaceum
 
-{+canyon gooseberry}
+==canyon gooseberry:R. menziesii

@@ -1,111 +1,88 @@
-{sci:Vicia}
-{hist/rare}
-Key features:
-{-
-inflorescence in small cluster or peduncled raceme
-flowers on one side of raceme, or both sides
-total inflorescence length compared to total leaf length (with all leaflets)
--}
+sci:Vicia spp.
+x:hist/rare
 
-{[
+Key features:
+. inflorescence in small cluster or peduncled raceme
+. flowers on one side of raceme, or both sides
+. total inflorescence length compared to total leaf length (with all leaflets)
+
+[
 <h2>flower cluster at base of leaf</h2>
 
 Key features:
-{-
-exact leaflet length
--}
+. exact leaflet length
 
-{+common vetch}
-{-
-inflorescence in a cluster of 1--3 flowers, sessile or peduncled
-8--14 leaflets, 1.5--3.5 cm, tip acute, truncate, or notched, often with 1 slender tooth
-corolla 10--30 mm, pink-purple [red purple] to white
-stem decumbent to ascending
--}
+==common vetch:V. sativa
+. inflorescence in a cluster of 1--3 flowers, sessile or peduncled
+. 8--14 leaflets, 1.5--3.5 cm, tip acute, truncate, or notched, often with 1 slender tooth
+. corolla 10--30 mm, pink-purple [red purple] to white
+. stem decumbent to ascending
 
-{yellow vetch:V. lutea}
-{-
-inflorescence in a cluster of 1--3 flowers at base of leaf, crowded
-8--16 leaflets, 1--2 cm, oblong to linear, tip rounded or truncate, 1-toothed
-corolla 20--30 mm, yellow, often purple-tinged
-stem ascending or climbing
-rare
--}
+==yellow vetch:V. lutea
+. inflorescence in a cluster of 1--3 flowers at base of leaf, crowded
+. 8--16 leaflets, 1--2 cm, oblong to linear, tip rounded or truncate, 1-toothed
+. corolla 20--30 mm, yellow, often purple-tinged
+. stem ascending or climbing
+. rare
 
-]}
-{[
+]
+[
 <h2>peduncled raceme with large flowers</h2>
 
-{+hairy vetch}
-{-
-flowers not spaced, generally on 1 side of axis
-inflorescence generally > subtending leaf, generally 10--25-flowered
-leaflets 12--18, 1--2.5 cm, narrowly oblong to elliptic, tip rounded, 1-toothed
-corolla blue-purple or lavender to white
--}
+==hairy vetch:V. villosa
+. flowers not spaced, generally on 1 side of axis
+. inflorescence generally > subtending leaf, generally 10--25-flowered
+. leaflets 12--18, 1--2.5 cm, narrowly oblong to elliptic, tip rounded, 1-toothed
+. corolla blue-purple or lavender to white
 
-{+reddish tufted vetch}
-{-
-flowers not spaced, generally on 1 side of axis
-inflorescence generally +- = subtending leaf, 3--12-flowered; corolla dark or red-purple
-leaflets 10--16, 1.5--3 cm, elliptic to oblong
-corolla (12)15--18 mm, dark or red-purple, <b>plumose</b>
--}
+==reddish tufted vetch:V. benghalensis
+. flowers not spaced, generally on 1 side of axis
+. inflorescence generally +- = subtending leaf, 3--12-flowered; corolla dark or red-purple
+. leaflets 10--16, 1.5--3 cm, elliptic to oblong
+. corolla (12)15--18 mm, dark or red-purple, <b>plumose</b>
 
-{+american vetch}
-{-
-flowers 3--9, generally spaced, on > 1 side of axis
-plant is hairy or glabrous
-leaflets 8--16, 1--3.5 cm, widely elliptic, wedge-shaped, to narrowly oblong, tip acute, truncate, notched, or 1--5-toothed
-corolla 15--25 mm, generally blue-purple to lavender
--}
+==american vetch:V. americana
+. flowers 3--9, generally spaced, on > 1 side of axis
+. plant is hairy or glabrous
+. leaflets 8--16, 1--3.5 cm, widely elliptic, wedge-shaped, to narrowly oblong, tip acute, truncate, notched, or 1--5-toothed
+. corolla 15--25 mm, generally blue-purple to lavender
 
-{giant vetch:V. gigantea}
-{-
-corolla 12--14 mm, usually red-purple, not plumose
-leaf (all leaflets) 10--15 cm long
-16--24 leaflets, 1.5--4 cm each
-scattered
--}
+==giant vetch:V. gigantea
+. corolla 12--14 mm, usually red-purple, not plumose
+. leaf (all leaflets) 10--15 cm long
+. 16--24 leaflets, 1.5--4 cm each
+. scattered
 
-]}
-{[
+]
+[
 <h2>peduncled raceme with small flowers</h2>
 
-{+smooth tare:Vicia tetrasperma}
-{-
-generally 1--3 flowers, at tip
-peduncle 1--3 cm
-4--10 leaflets, 6--20 mm, linear to elliptic
-corolla 4--6 mm, pale lavender to light purple
-stem slender, decumbent or climbing, 10--50 cm
--}
+==smooth tare:V. tetrasperma
+. generally 1--3 flowers, at tip
+. peduncle 1--3 cm
+. 4--10 leaflets, 6--20 mm, linear to elliptic
+. corolla 4--6 mm, pale lavender to light purple
+. stem slender, decumbent or climbing, 10--50 cm
 
-{hasse vetch:V. hassei}
-{-
-1--3 flowers, <b>separated from each other</b>
-4--10 leaflets, 5--25 mm, narrowly oblong to elliptic
-<b>leaflet tip generally truncate, notched, or 1--5-toothed</b> [CalPhotos indicates that this may be tough to see]
-corolla 3--9 mm, lavender to white
-stem decumbent to erect, branched at base, 20--70 cm
--}
+==hasse vetch:V. hassei
+. 1--3 flowers, <b>separated from each other</b>
+. 4--10 leaflets, 5--25 mm, narrowly oblong to elliptic
+. <b>leaflet tip generally truncate, notched, or 1--5-toothed</b> [CalPhotos indicates that this may be tough to see]
+. corolla 3--9 mm, lavender to white
+. stem decumbent to erect, branched at base, 20--70 cm
 
-{deerpea vetch:V. ludoviciana ssp. ludoviciana}
-{-
-1--3 flowers, near tip, <b>generally crowded</b>
-4--10 leaflets, 10--25 mm, narrowly oblong to elliptic
-<b>leaflet tip acute, 1-toothed, or occasionally truncate</b>
-corolla 4.5--7 mm, <b>pale blue</b> [or deep blue] [or purple?]
-stem sprawling or low-climbing, 30--100 cm
--}
+==deerpea vetch:V. ludoviciana ssp. ludoviciana
+. 1--3 flowers, near tip, <b>generally crowded</b>
+. 4--10 leaflets, 10--25 mm, narrowly oblong to elliptic
+. <b>leaflet tip acute, 1-toothed, or occasionally truncate</b>
+. corolla 4.5--7 mm, <b>pale blue</b> [or deep blue] [or purple?]
+. stem sprawling or low-climbing, 30--100 cm
 
-]}
+]
 
 The following species are reported in the bay area, but are considered waifs by Jepson:
-{-
-V. cracca
-V. disperma
-V. faba
--}
+. V. cracca
+. V. disperma
+. V. faba
 
 See also {-sweet peas and vetchlings}.

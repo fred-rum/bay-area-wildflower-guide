@@ -1,1 +1,4 @@
+sci:Eschscholzia californica
+color: yellow, orange
+
 Some sources divide the species into two subspecies.  The main subspecies is found throughout California.  The "mexicana" subspecies is found only in the Sonoran Desert in southern California.

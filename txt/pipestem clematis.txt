@@ -1,2 +1,5 @@
+sci:Clematis lasiantha
+color: other
+
 See also {-creamcups}.
 <hr/>

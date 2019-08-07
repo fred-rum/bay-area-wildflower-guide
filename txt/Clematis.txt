@@ -1,30 +1,25 @@
-{ca}
-{+pipestem clematis:C. lasiantha}
-{-
-leaflets generally 3--5
-inflorescence generally 1-flowered
-<b>sepals 10--21 mm, >> stamens</b>, hairy both abaxially and adaxially
-<b>flower Jan--Jun</b>
-Ecology: Hillsides, chaparral, open woodland
-common
--}
+sci:Clematis spp.
+x:ca
+==pipestem clematis:C. lasiantha
+. leaflets generally 3--5
+. inflorescence generally 1-flowered
+. <b>sepals 10--21 mm, >> stamens</b>, hairy both abaxially and adaxially
+. <b>flower Jan--Jun</b>
+. Ecology: Hillsides, chaparral, open woodland
+. common
 
-{western virgin's bower:C. ligusticifolia}
-{-
-leaflets 5--15 [but CalPhotos shows many with 3]
-inflorescence several- to many-flowered
-sepals 6--10 mm, +- = stamens
-<b>flower Jun--Sep</b>
-Ecology: Along streams, wet places
-scattered
--}
+==western virgin's bower:C. ligusticifolia
+. leaflets 5--15 [but CalPhotos shows many with 3]
+. inflorescence several- to many-flowered
+. sepals 6--10 mm, +- = stamens
+. <b>flower Jun--Sep</b>
+. Ecology: Along streams, wet places
+. scattered
 
-{:C. pauciflora}
-{-
-leaflets generally 3--5
-inflorescence 1--3(12)-flowered
-sepals 7--12 mm, +- = stamens, hairy abaxially, but glabrous adaxially
-<b>flower Jan--Jun</b>
-Ecology: Dry chaparral
-rare, mostly in and near Muir Woods
--}
+==C. pauciflora
+. leaflets generally 3--5
+. inflorescence 1--3(12)-flowered
+. sepals 7--12 mm, +- = stamens, hairy abaxially, but glabrous adaxially
+. <b>flower Jan--Jun</b>
+. Ecology: Dry chaparral
+. rare, mostly in and near Muir Woods

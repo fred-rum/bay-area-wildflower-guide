@@ -1,0 +1,2 @@
+sci:Delphinium hesperium
+color: purple

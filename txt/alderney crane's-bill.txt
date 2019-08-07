@@ -1,0 +1,2 @@
+sci:Geranium core-core
+color: purple

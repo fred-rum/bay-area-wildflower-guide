@@ -1,6 +1,7 @@
-{sci:Castilleja}
-{+indian paintbrushes}
+sci:Castilleja spp.
 
-{+owl's clover}
+==indian paintbrushes
 
-{+cream sacs}
+==owl's clover
+
+==cream sacs:C. rubicundula ssp. lithospermoides

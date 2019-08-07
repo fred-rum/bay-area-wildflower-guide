@@ -1,52 +1,41 @@
-{sci:Asclepias}
-{hist/rare}
+sci:Asclepias spp.
+x:hist/rare
+
 The petals and sepals are reflexed, revealing the gynostegium, which is a blunt plug composed of fused stamens and styles.  The gymnostegium is surrounded by five hoods, each (at least partially) hiding a horn.
 
 A labeled photo of the <a href="http://orbisec.com/wp-content/uploads/2014/10/Milkweed-2.jpg">milkweed flower parts</a>.
 
 Key features for all local milkweeds:
-{-
-visible hood and horn characteristics
-inflorescence sessile or with peduncle
--}
+. visible hood and horn characteristics
+. inflorescence sessile or with peduncle
 
-{+california milkweed:A. californica}
-{-
-hoods closed at top
-horns hidden
-leaves opposite; petiole short to 0; blade ovate
-rare in east bay and south bay
--}
+==california milkweed:A. californica
+. hoods closed at top
+. horns hidden
+. leaves opposite; petiole short to 0; blade ovate
+. rare in east bay and south bay
 
-{+woollypod milkweed:A. eriocarpa}
-{-
-hoods closed at top
-horns barely peeking out to +- height of hood and gymnostegium
-hoods not exceeding anther head by at least 1/2 their lengths
-inflorescences at nodes peduncled
-leaves opposite or whorled in 3s or 4s; petiole short to 0; blade elliptic, lanceolate, or ovate, base tapered to obtuse (to cordate), tip obtuse to short-acuminate, margins generally not wavy, generally entire
-not confirmed in the bay area?
--}
+==woollypod milkweed:A. eriocarpa
+. hoods closed at top
+. horns barely peeking out to +- height of hood and gymnostegium
+. hoods not exceeding anther head by at least 1/2 their lengths
+. inflorescences at nodes peduncled
+. leaves opposite or whorled in 3s or 4s; petiole short to 0; blade elliptic, lanceolate, or ovate, base tapered to obtuse (to cordate), tip obtuse to short-acuminate, margins generally not wavy, generally entire
+. not confirmed in the bay area?
 
-{+narrowleaf milkweed:A. fascicularis}
-{-
-hoods open at top
-horns sticking out above hood and gymnostegium
-leaves opposite or whorled generally in 3s to 5s, often with clusters of smaller leaves in axils; petiole short; blade narrow-lanceolate, base tapered
-common, but not west of Skyline Blvd.
--}
+==narrowleaf milkweed:A. fascicularis
+. hoods open at top
+. horns sticking out above hood and gymnostegium
+. leaves opposite or whorled generally in 3s to 5s, often with clusters of smaller leaves in axils; petiole short; blade narrow-lanceolate, base tapered
+. common, but not west of Skyline Blvd.
 
-{:A. vestita}
-{-
-hoods open at top, short (not exceeding anther head by at least 1/2 their lengths)
-horn exserted from hood, at +- same level as to much exceeded by hood
-inflorescences at nodes sessile or nearly so
-Pinnacles
--}
+==A. vestita
+. hoods open at top, short (not exceeding anther head by at least 1/2 their lengths)
+. horn exserted from hood, at +- same level as to much exceeded by hood
+. inflorescences at nodes sessile or nearly so
+. Pinnacles
 
-{:A. speciosa}
-{-
-hoods open at top, very long (exceeding anther head by at least 1/2 their lengths)
-horn exserted from hood
-Mt. Tam, Briones, Los Trampas
--}
+==A. speciosa
+. hoods open at top, very long (exceeding anther head by at least 1/2 their lengths)
+. horn exserted from hood
+. Mt. Tam, Briones, Los Trampas

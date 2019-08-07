@@ -1,0 +1,2 @@
+sci:Sambucus cerulea
+color: white, cream, yellow

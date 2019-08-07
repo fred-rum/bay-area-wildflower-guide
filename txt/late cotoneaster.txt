@@ -1,0 +1,2 @@
+sci:Cotoneaster coriaceus
+color: white

@@ -1,10 +1,11 @@
-{sci:n/a}
-{+milk thistle}
+sci:n/a
 
-{+plumeless thistles}
+==milk thistle:Silybum marianum
 
-{+standard thistles}
+==plumeless thistles:Carduus spp.
 
-{+star thistles}
+==standard thistles:Cirsium spp.
 
-{+sow thistles}
+==star thistles:Centaurea spp.
+
+==sow thistles:Sonchus spp.

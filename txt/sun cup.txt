@@ -1,0 +1,2 @@
+sci:Taraxia ovata
+color: yellow

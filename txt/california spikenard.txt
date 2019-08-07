@@ -1,0 +1,2 @@
+sci:Aralia californica
+color: white, other

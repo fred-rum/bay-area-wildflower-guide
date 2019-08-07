@@ -1,1 +1,3 @@
-{ca}
+sci:Helminthotheca echioides
+color: yellow
+x:ca

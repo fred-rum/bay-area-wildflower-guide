@@ -1,1 +1,3 @@
-{ca}
+sci:Bellis perennis
+color: white
+x:ca

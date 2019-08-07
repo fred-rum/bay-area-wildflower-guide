@@ -1,0 +1,2 @@
+sci:Plantago erecta
+color: white

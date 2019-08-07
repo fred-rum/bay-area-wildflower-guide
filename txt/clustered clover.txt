@@ -1,0 +1,2 @@
+sci:Trifolium glomeratum
+color: white

@@ -1,13 +1,12 @@
-{sci:n/a}
+sci:n/a
+
 Key features:
-{-
-presence of bristles
-length of all features
-number of scales per seed
-seed color (and sometimes shape)
-scale color and tip shape (and sometimes fuzziness)
-bristle fuzziness
--}
+. presence of bristles
+. length of all features
+. number of scales per seed
+. seed color (and sometimes shape)
+. scale color and tip shape (and sometimes fuzziness)
+. bristle fuzziness
 
 Blow wives and silverpuffs form a ball of seeds.  Each seed (fruit) has a
 parachute of wings to catch the wind.
@@ -16,10 +15,8 @@ parachute of wings to catch the wind.
 
 There is only one species of blow wives in the bay area.
 
-{+blow wives}
-{-
-each wing has only a flat scale with no bristle
--}
+==blow wives:Achyrachaena mollis
+. each wing has only a flat scale with no bristle
 
 <h2>silverpuffs</h2>
 
@@ -27,21 +24,17 @@ each wing has only a flat scale with no bristle
 
 There is only one species of Uropappus anywhere.
 
-{+Uropappus lindleyi}
-{-
-each wing consists of a flat scale with a hair-like bristle extending past the scale tip
-scale is notched once at the tip where the bristle emerges
-bristle is shorter than the scale
-seeds are very dark or black
--}
+==Uropappus lindleyi
+. each wing consists of a flat scale with a hair-like bristle extending past the scale tip
+. scale is notched once at the tip where the bristle emerges
+. bristle is shorter than the scale
+. seeds are very dark or black
 
 <h3>Microseris</h3>
 
 There are many species of Microseris in the bay area.
 
-{+Microseris}
-{-
-each wing consists of a flat scale with a hair-like bristle extending past the scale tip
-scale tips are either ragged or entire (not notched once).
-seeds are tan or lighter colored (not very dark)
--}
+==Microseris spp.
+. each wing consists of a flat scale with a hair-like bristle extending past the scale tip
+. scale tips are either ragged or entire (not notched once).
+. seeds are tan or lighter colored (not very dark)

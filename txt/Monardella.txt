@@ -1,9 +1,6 @@
-{+coyote mint}
-{-
-common
--}
+sci:Monardella spp.
+==coyote mint:M. villosa
+. common
 
-{+mountain coyote mint:Monardella odoratissima}
-{-
-Big Basin
--}
+==mountain coyote mint:M. odoratissima
+. Big Basin

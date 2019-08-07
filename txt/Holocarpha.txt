@@ -1,33 +1,25 @@
-{ba}
-{+pit-gland tarweed:H. virgata}
-{-
-anthers +- red to dark purple
-ray flowers 3--8; disk flowers 9--25+
-uncommon in the east bay
--}
+sci:Holocarpha spp.
+x:ba
+==pit-gland tarweed:H. virgata
+. anthers +- red to dark purple
+. ray flowers 3--8; disk flowers 9--25+
+. uncommon in the east bay
 
-{:H. macradenia}
-{-
-anthers +- red to dark purple
-ray flowers 8--16; disk flowers 40--90
-rare near Santa Cruz, Mt. Tam
--}
+==H. macradenia
+. anthers +- red to dark purple
+. ray flowers 8--16; disk flowers 40--90
+. rare near Santa Cruz, Mt. Tam
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1107+0985}
-{heermann's tarweed:H. heermannii}
-{-
-anthers yellow to +- brown [usually yellow?]
-stem notably stalked-glandular
-phyllaries each with 25--50 pit-gland-tipped outgrowths and minutely sessile- or stalked-glandular and puberulent or minutely bristly
-heads 1 or in panicle- or raceme-like clusters
-uncommon in the east bay
--}
+==heermann's tarweed:H. heermannii
+. anthers yellow to +- brown [usually yellow?]
+. stem notably stalked-glandular
+. phyllaries each with 25--50 pit-gland-tipped outgrowths and minutely sessile- or stalked-glandular and puberulent or minutely bristly
+. heads 1 or in panicle- or raceme-like clusters
+. uncommon in the east bay
 
-{:H. obconica}
-{-
-anthers yellow to +- brown
-stem resinous distally, not notably stalked-glandular
-phyllaries each with (0)5--15(20) pit-gland-tipped outgrowths and generally glabrous or minutely sessile- or stalked-glandular (bristly)
-heads in flat-topped or panicle-like clusters
-rare at Grant, Del Valle, Mt. Diablo
--}
+==H. obconica
+. anthers yellow to +- brown
+. stem resinous distally, not notably stalked-glandular
+. phyllaries each with (0)5--15(20) pit-gland-tipped outgrowths and generally glabrous or minutely sessile- or stalked-glandular (bristly)
+. heads in flat-topped or panicle-like clusters
+. rare at Grant, Del Valle, Mt. Diablo

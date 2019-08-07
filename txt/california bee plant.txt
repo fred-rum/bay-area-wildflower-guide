@@ -1,0 +1,2 @@
+sci:Scrophularia californica
+color: red, red purple

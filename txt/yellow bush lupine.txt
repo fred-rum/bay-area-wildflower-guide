@@ -1,0 +1,2 @@
+sci:Lupinus arboreus
+color: yellow, cream

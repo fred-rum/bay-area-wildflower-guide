@@ -1,0 +1,2 @@
+sci:Silene laciniata ssp. californica
+color: red

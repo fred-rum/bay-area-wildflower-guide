@@ -1,1 +1,2 @@
-{ca}
+sci:Vicia ludoviciana ssp. ludoviciana
+x:ca

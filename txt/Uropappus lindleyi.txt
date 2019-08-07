@@ -1,3 +1,5 @@
-{com:silverpuffs}
-{any}
+com:silverpuffs
+color: other
+x:any
+
 See also {-Microseris}.

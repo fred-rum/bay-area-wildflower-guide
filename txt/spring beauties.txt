@@ -1,13 +1,10 @@
-{sci:Claytonia}
+sci:Claytonia spp.
+
 There are few spring beauties in the bay area.  For now, this section only describes how to distinguish the ones that look similar to miner's lettuce.  A few rare ones can be easily distinguished as something different, so I'll ignore those until I can get some observations.
 
 Key features:
-{-
-shape of basal leaves
-shape of cordate leaf disk (short pointed or no points)
--}
+. shape of basal leaves
+. shape of cordate leaf disk (short pointed or no points)
 
-{+miner's lettuce}
-{-
-My IDs are uncertain until I can get a good photo of basal leaves.
--}
+==miner's lettuce:C. perfoliata
+. My IDs are uncertain until I can get a good photo of basal leaves.

@@ -1,38 +1,31 @@
-{sci:Thysanocarpus}
-{ba}
+sci:Thysanocarpus spp.
+x:ba
+
 Key features:
-{-
-shape and length of pedicels in fruit
-shape of cauline leaves
-color of fertile anthers in flower
--}
+. shape and length of pedicels in fruit
+. shape of cauline leaves
+. color of fertile anthers in flower
 
-{+sand fringepod:T. curvipes}
-{-
-proximal pedicels in fruit recurved in a continuous arc, 3--7(12) mm
-fruit 3--6(9) mm wide
-<b>cauline leaves lanceolate</b>, bases lobed, clasping
-basal leaves present
-fertile anthers purple
-common
--}
+==sand fringepod:T. curvipes
+. proximal pedicels in fruit recurved in a continuous arc, 3--7(12) mm
+. fruit 3--6(9) mm wide
+. <b>cauline leaves lanceolate</b>, bases lobed, clasping
+. basal leaves present
+. fertile anthers purple
+. common
 
-{mountain fringepod:T. laciniatus}
-{-
-proximal pedicels in fruit recurved in a continuous arc, 2.5--6(8) mm
-fruit 3--5 mm wide
-<b>cauline leaves linear to narrowly elliptic</b>, bases wedge-shaped, +- lobed or not, +- not clasping
-basal leaves present
-fertile anthers purple
-scattered
--}
+==mountain fringepod:T. laciniatus
+. proximal pedicels in fruit recurved in a continuous arc, 2.5--6(8) mm
+. fruit 3--5 mm wide
+. <b>cauline leaves linear to narrowly elliptic</b>, bases wedge-shaped, +- lobed or not, +- not clasping
+. basal leaves present
+. fertile anthers purple
+. scattered
 
-{ribbed fringepod:T. radians}
-{-
-<b>proximal pedicels in fruit +- straight except sharply reflexed near tips, 7--18 mm</b>
-fruit 7--10 mm wide
-cauline leaves lanceolate to ovate-lanceolate, bases lobed, clasping
-basal leaves present
-fertile anthers yellow
-rare
--}
+==ribbed fringepod:T. radians
+. <b>proximal pedicels in fruit +- straight except sharply reflexed near tips, 7--18 mm</b>
+. fruit 7--10 mm wide
+. cauline leaves lanceolate to ovate-lanceolate, bases lobed, clasping
+. basal leaves present
+. fertile anthers yellow
+. rare

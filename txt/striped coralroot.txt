@@ -1,0 +1,2 @@
+sci:Corallorhiza striata
+color: other, cream, red

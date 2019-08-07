@@ -1,4 +1,5 @@
-{sci:Cardamine}
-{+milkmaids}
+sci:Cardamine spp.
 
-{+hairy bittercress}
+==milkmaids:C. californica
+
+==hairy bittercress:C. hirsuta

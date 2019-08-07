@@ -1,4 +1,5 @@
-{sci:Lysimachia}
-{+scarlet pimpernel}
+sci:Lysimachia spp.
 
-{+western star flower}
+==scarlet pimpernel:L. arvensis
+
+==western star flower:L. latifolia

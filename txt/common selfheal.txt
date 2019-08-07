@@ -1,0 +1,2 @@
+sci:Prunella vulgaris
+color: purple

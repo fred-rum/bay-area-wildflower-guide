@@ -1,0 +1,2 @@
+sci:Collinsia multicolor
+color: purple

@@ -1,1 +1,3 @@
+sci:Sidalcea malviflora
+color: pink, red purple
 involucre:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1202+0238

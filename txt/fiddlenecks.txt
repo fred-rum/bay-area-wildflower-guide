@@ -1,47 +1,33 @@
-{sci:Amsinckia}
+sci:Amsinckia spp.
+
 Key features:
-{-
-corolla diameter
-corolla with 0 or 5 radial dark spots or 2 bilateral dark spots
-corolla throat partially closed by 5 hairy appendages/wrinkles or not
-5 equal calyx lobes, or < 5 lobes unequal in width
-leaf succulent and fine-toothed or not
--}
+. corolla diameter
+. corolla with 0 or 5 radial dark spots or 2 bilateral dark spots
+. corolla throat partially closed by 5 hairy appendages/wrinkles or not
+. 5 equal calyx lobes, or < 5 lobes unequal in width
+. leaf succulent and fine-toothed or not
 
-{+common fiddleneck:Amsinckia menziesii}
-{-
-corolla radial, tube straight, limb with 0 or 5 dark spots
-stamens generally attached above middle of corolla tube, if below then style exserted
-very common
--}
+==common fiddleneck:A. menziesii
+. corolla radial, tube straight, limb with 0 or 5 dark spots
+. stamens generally attached above middle of corolla tube, if below then style exserted
+. very common
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0211+1039}
-{tarweed fiddleneck:Amsinckia lycopsoides}
-{-
-corolla radial, tube straight, limb with 0 or 5 dark spots
-<b>corolla throat +- closed by 5 hairy appendages</b> [really just wrinkles in the corolla limb?], tube constricted in lower 1/2
-stamens attached below middle of corolla tube
-style included
-Mt. Diablo
--}
+==tarweed fiddleneck:A. lycopsoides
+. corolla radial, tube straight, limb with 0 or 5 dark spots
+. <b>corolla throat +- closed by 5 hairy appendages</b> [really just wrinkles in the corolla limb?], tube constricted in lower 1/2
+. stamens attached below middle of corolla tube
+. style included
+. Mt. Diablo
 
-{+bent-flowered fiddleneck:Amsinckia lunaris}
-{-
-corolla bilateral, tube bent [?], <b>limb generally with 2 dark spots</b> [easiest indication of bilateralness; corolla limb is also angled as per bilateral, not radial]
-scattered, but with very few modern observations
--}
+==bent-flowered fiddleneck:A. lunaris
+. corolla bilateral, tube bent [?], <b>limb generally with 2 dark spots</b> [easiest indication of bilateralness; corolla limb is also angled as per bilateral, not radial]
+. scattered, but with very few modern observations
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1203+0800}
-{bristly fiddleneck:Amsinckia tessellata}
-{-
-<b>calyx lobes unequal in width, 2--4 from fusion below middle, notched at tip</b>
-Mt. Diablo, Sunol, Pinnacles
--}
+==bristly fiddleneck:A. tessellata
+. <b>calyx lobes unequal in width, 2--4 from fusion below middle, notched at tip</b>
+. Mt. Diablo, Sunol, Pinnacles
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=1342+3162+2247+0098}
-{woolly fiddleneck:Amsinckia spectabilis}
-{-
-<b>leaf +- succulent, fine-toothed</b>
-5 calyx lobes +- equal in width not fused above base, or 2--3 unequal in width, +- 1/2 fused
-scattered near the pacific coast
--}
+==woolly fiddleneck:A. spectabilis
+. <b>leaf +- succulent, fine-toothed</b>
+. 5 calyx lobes +- equal in width not fused above base, or 2--3 unequal in width, +- 1/2 fused
+. scattered near the pacific coast

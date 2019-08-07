@@ -1,0 +1,2 @@
+sci:Erigeron glaucus
+color: pale purple

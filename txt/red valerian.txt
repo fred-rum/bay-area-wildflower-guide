@@ -1,0 +1,2 @@
+sci:Centranthus ruber
+color: pink, red purple

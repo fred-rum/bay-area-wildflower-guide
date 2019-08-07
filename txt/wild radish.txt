@@ -1,0 +1,2 @@
+sci:Raphanus sativus
+color: purple, pale purple

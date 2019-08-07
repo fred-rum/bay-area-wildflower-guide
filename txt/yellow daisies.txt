@@ -1,14 +1,15 @@
-{sci:n/a}
+sci:n/a
+
 For the purposes of this page, "daisies" are defined as a plant in the {-sunflower family} in which the medium-sized head is composed of disk flowers surrounded by a ring of ray flowers.  This page collects in one place the daisies with yellow disk and ray flowers rays for easier comparison.
 
 See also {-white daisies} for daisies with white rays and {-sunflowers} for similar flowers with large heads.  Compare with {-dandelion-like flowers}.
 
-{+tarweeds and allies}
+==tarweeds and allies:tribe Madieae
 
-{+goldfields}
+==goldfields:Lasthenia spp.
 
-{+common woolly sunflower}
+==common woolly sunflower:Eriophyllum lanatum
 
-{+marigolds}
+==marigolds:Calendula spp.
 
-{bigelow's sneezeweed:Helenium bigelovii}
+==bigelow's sneezeweed:Helenium bigelovii

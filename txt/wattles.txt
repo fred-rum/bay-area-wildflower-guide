@@ -1,47 +1,40 @@
-{sci:Acacia}
-{!more}
+sci:Acacia spp.
+x:!more
+
 We have just about all (~14) California species in the bay area.  The Jepson key is fairly straightforward, so I won't bother to replicate the key here.
 
 Key features:
-{-
-simple leaves:
-<ul>
-longer or shorter than 40 mm
-stipular spines present or not
-tip spine-like or not
-with one prominent midvein or 2+
-leaf shape
-flowers in spikes or heads
-leaves, stems resinous or not
-shrub (spreading from base) or tree (generally with 1 trunk)
-</ul>
-or 2-pinnate leaves:
-<ul>
-2--5 pairs of 1st-order leaflets or 6+
-twigs wingled or angled
-2nd-order leaflets < 7 mm or >= 10 mm
-leaf main axis with raised glands at each pair of 1st-order leaflets or also in between
-<ul>
-glands are only on the adaxial (upper) surface of the axis
-"in between" might just be a raised ridge between glands</ul></ul>
--}
+. simple leaves:
+.. longer or shorter than 40 mm
+.. stipular spines present or not
+.. tip spine-like or not
+.. with one prominent midvein or 2+
+.. leaf shape
+.. flowers in spikes or heads
+.. leaves, stems resinous or not
+.. shrub (spreading from base) or tree (generally with 1 trunk)
+. or 2-pinnate leaves:
+. <ul>
+. 2--5 pairs of 1st-order leaflets or 6+
+. twigs wingled or angled
+. 2nd-order leaflets < 7 mm or >= 10 mm
+. leaf main axis with raised glands at each pair of 1st-order leaflets or also in between
+. <ul>
+. glands are only on the adaxial (upper) surface of the axis
+. "in between" might just be a raised ridge between glands</ul></ul>
 
-{+silver wattle:A. dealbata}
-{-
-2-pinnate leaves
-6--30 pairs of 1st-order leaflets, 15--55 mm
-15--70 pairs of 2nd-order leaflets, 2--5 mm
-<b>leaf main axis with raised glands at each pair of 1st-order leaflets</b>
-twig angled (not winged)
-common
--}
+==silver wattle:A. dealbata
+. 2-pinnate leaves
+. 6--30 pairs of 1st-order leaflets, 15--55 mm
+. 15--70 pairs of 2nd-order leaflets, 2--5 mm
+. <b>leaf main axis with raised glands at each pair of 1st-order leaflets</b>
+. twig angled (not winged)
+. common
 
-{+black wattle:A. mearnsii}
-{-
-2-pinnate leaves
-7--31 pairs of 1st-order leaflets, 15--70 mm
-20--70 pairs of 2nd-order leaflets, 1.5--3.5 mm
-<b>leaf main axis with raised glands at most pairs of 1st-order leaflets and generally between</b>
-twig angled (not winged)
-waif
--}
+==black wattle:A. mearnsii
+. 2-pinnate leaves
+. 7--31 pairs of 1st-order leaflets, 15--70 mm
+. 20--70 pairs of 2nd-order leaflets, 1.5--3.5 mm
+. <b>leaf main axis with raised glands at most pairs of 1st-order leaflets and generally between</b>
+. twig angled (not winged)
+. waif

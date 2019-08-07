@@ -1,1 +1,3 @@
-{rare}
+sci:Achillea millefolium
+color: white
+x:rare

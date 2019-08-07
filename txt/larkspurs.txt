@@ -1,4 +1,5 @@
-{sci:Delphinium}
+sci:Delphinium spp.
+
 In most species each flower consists of five petal-like sepals which
 grow together to form a hollow pocket with a spur/claw at the end.
 Within the sepals are four true petals, small, inconspicuous, and
@@ -6,104 +7,86 @@ commonly colored similarly to the sepals.  The long spur of the upper
 sepal encloses the nectar-containing spurs of the two upper petals.
 
 Key features:
-{-
-number of flowers and whether the oldest (lowest) open-flowered pedicels are > 25 mm and > 2 &times; youngest
-color of sepals, reflexed or not (especially lower sepals)
-multiple stems or just one
-stem length, hairy or +- glabrous and ridged or not (especially at base)
-length of lower petal blades, and width of petal lobes
-proximal petiole (leaf stem) hairs > 0.5 mm & straight, spreading, white, or [maybe] not
-leaf hairy adaxially or not, abaxially or not
--}
+. number of flowers and whether the oldest (lowest) open-flowered pedicels are > 25 mm and > 2 &times; youngest
+. color of sepals, reflexed or not (especially lower sepals)
+. multiple stems or just one
+. stem length, hairy or +- glabrous and ridged or not (especially at base)
+. length of lower petal blades, and width of petal lobes
+. proximal petiole (leaf stem) hairs > 0.5 mm & straight, spreading, white, or [maybe] not
+. leaf hairy adaxially or not, abaxially or not
 
 There may be additional useful features that I haven't pulled from Jepson eFlora.
 
-{+red larkspur}
-{-
-sepals forward-pointing, <b>scarlet to orange-red (dull yellow)</b>, lateral 8--16 mm, spur 12--34 mm
-petals +- glabrous to naked eye
-stem 15--50 cm (--125), generally glabrous
-common in bay area
--}
+==red larkspur:D. nudicaule
+. sepals forward-pointing, <b>scarlet to orange-red (dull yellow)</b>, lateral 8--16 mm, spur 12--34 mm
+. petals +- glabrous to naked eye
+. stem 15--50 cm (--125), generally glabrous
+. common in bay area
 
-{+zigzag larkspur,-2}
-{-
-number of flowers and pedicel length indeterminate
-<b>generally < 6 flowers on main axis?</b> [how many axes are there?]; if more, oldest open-flowered pedicels generally > 25 mm and > 2 &times; youngest
-sepals bright or dark blue [or purple, derp], <b>reflexed</b>, generally glabrous
-leaf generally on lower 1/3 of stem, +- glabrous; basal, lower cauline divided > 80% to petiole; lobes 3--5, generally < 15 mm wide; terminal lobe widest near middle
-<b>lower petal blades 4--6 mm</b>
-stem 10--90 cm, <b>+- glabrous</b>
-common in bay area
--}
+==zigzag larkspur,-2:D. patens
+. number of flowers and pedicel length indeterminate
+. <b>generally < 6 flowers on main axis?</b> [how many axes are there?]; if more, oldest open-flowered pedicels generally > 25 mm and > 2 &times; youngest
+. sepals bright or dark blue [or purple, derp], <b>reflexed</b>, generally glabrous
+. leaf generally on lower 1/3 of stem, +- glabrous; basal, lower cauline divided > 80% to petiole; lobes 3--5, generally < 15 mm wide; terminal lobe widest near middle
+. <b>lower petal blades 4--6 mm</b>
+. stem 10--90 cm, <b>+- glabrous</b>
+. common in bay area
 
-{+coastal larkspur:Delphinium decorum}
-{-
-<b>2--20 flowers</b>
-pedicels 10--63 mm, 10--25 mm apart
-if >= 6 flowers, oldest open-flowered pedicels generally > 25 mm and > 2 &times; youngest
-sepals dark blue-purple, puberulent abaxially, <b>generally not reflexed</b>
-leaf generally basal, +- glabrous adaxially, generally +- puberulent abaxially and on margins; generally 5 lobes > 50% to petiole; lobes occasionally > 6 mm wide
-<b>lower petal blades 6-11 mm</b>
-stem 8--35 cm, +- erect, <b>hairy</b>
-scattered around bay area
--}
+==coastal larkspur:D. decorum
+. <b>2--20 flowers</b>
+. pedicels 10--63 mm, 10--25 mm apart
+. if >= 6 flowers, oldest open-flowered pedicels generally > 25 mm and > 2 &times; youngest
+. sepals dark blue-purple, puberulent abaxially, <b>generally not reflexed</b>
+. leaf generally basal, +- glabrous adaxially, generally +- puberulent abaxially and on margins; generally 5 lobes > 50% to petiole; lobes occasionally > 6 mm wide
+. <b>lower petal blades 6-11 mm</b>
+. stem 8--35 cm, +- erect, <b>hairy</b>
+. scattered around bay area
 
-{+california larkspur}
-{-
-<b>generally > 50 flowers</b>
-<b>generally >= 2 stems, 100--160 cm</b> (60--220), generally puberulent
-sepals forward-pointing, +- lavender or +- green-white depending on subspecies [maybe]
-leaf lobes 3--15, 5--<b>60</b> mm wide, tips +- sharply cut
-common in bay area
--}
+==california larkspur:D. californicum
+. <b>generally > 50 flowers</b>
+. <b>generally >= 2 stems, 100--160 cm</b> (60--220), generally puberulent
+. sepals forward-pointing, +- lavender or +- green-white depending on subspecies [maybe]
+. leaf lobes 3--15, 5--<b>60</b> mm wide, tips +- sharply cut
+. common in bay area
 
-{+royal larkspur}
-{-
-<b>flowers on main axis generally < 10</b>
-pedicels +- ascending, 6--74 mm, 10--25 mm apart, generally puberulent
-if <= 6 flowers on main axis, oldest open-flowered pedicel generally < 25 mm or < 2 &times; youngest
-<b>stem generally < 50 cm, base hairy</b>
-<b>proximal petiole hairs > 0.5 mm, straight, spreading, white, and some not</b>
-flower spur 10--19 mm, straight or down-curved < 3 mm at tip
-sepals generally dark royal-blue (white or lavendar)
-lateral sepals 10--25 mm
-leaf generally on proximal 1/3 of stem; lobes 3--15, generally overlapping
-scattered around bay area
--}
+==royal larkspur:D. variegatum
+. <b>flowers on main axis generally < 10</b>
+. pedicels +- ascending, 6--74 mm, 10--25 mm apart, generally puberulent
+. if <= 6 flowers on main axis, oldest open-flowered pedicel generally < 25 mm or < 2 &times; youngest
+. <b>stem generally < 50 cm, base hairy</b>
+. <b>proximal petiole hairs > 0.5 mm, straight, spreading, white, and some not</b>
+. flower spur 10--19 mm, straight or down-curved < 3 mm at tip
+. sepals generally dark royal-blue (white or lavendar)
+. lateral sepals 10--25 mm
+. leaf generally on proximal 1/3 of stem; lobes 3--15, generally overlapping
+. scattered around bay area
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1209+2030} {eldorado larkspur:Delphinium hansenii}
-{-
-<b>flowers generally > 12</b>
-<b>stem 25--180 cm; base puberulent to hairy</b>
-<b>proximal petiole hairs > 0.5 mm, straight, spreading, white, and some not</b>
-sepals can be many possible colors
-lateral sepals 7--13 mm
-leaf hairy, especially abaxially; petioles hairy; lobes 3--18
-Mt. Diablo
--}
+==eldorado larkspur:D. hansenii
+. <b>flowers generally > 12</b>
+. <b>stem 25--180 cm; base puberulent to hairy</b>
+. <b>proximal petiole hairs > 0.5 mm, straight, spreading, white, and some not</b>
+. sepals can be many possible colors
+. lateral sepals 7--13 mm
+. leaf hairy, especially abaxially; petioles hairy; lobes 3--18
+. Mt. Diablo
 
-{+foothill larkspur:Delphinium hesperium}
-{-
-<b>flowers 5--100</b> [CalPhotos shows them all with similar pedicel lengths, not longer at the bottom]
-<b>stem 40--80 cm</b> (10--120), <b>base generally ridged</b>
-proximal petiole hairs are unknowable
-blades of lower petals hairier adaxially (inner lobe) than abaxially (outer lobe)
-lateral sepals 7--16 mm
-sepals spreading, not reflexed, dark blue-purple or pale depending on subspecies
-pedicels ascending at < 45&deg; angle [from vertical? angle at tip?], puberulent
-leaf adaxially +- glabrous, abaxially puberulent, prominently veined; lobes 3--14
-common in bay area
--}
+==foothill larkspur:D. hesperium
+. <b>flowers 5--100</b> [CalPhotos shows them all with similar pedicel lengths, not longer at the bottom]
+. <b>stem 40--80 cm</b> (10--120), <b>base generally ridged</b>
+. proximal petiole hairs are unknowable
+. blades of lower petals hairier adaxially (inner lobe) than abaxially (outer lobe)
+. lateral sepals 7--16 mm
+. sepals spreading, not reflexed, dark blue-purple or pale depending on subspecies
+. pedicels ascending at < 45&deg; angle [from vertical? angle at tip?], puberulent
+. leaf adaxially +- glabrous, abaxially puberulent, prominently veined; lobes 3--14
+. common in bay area
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1204+0757} {san bernardino larkspur:Delphinium parryi}
-{-
-<b>flowers 3--60</b>
-<b>pedicels +- ascending, 5--68 mm, 8--50 mm apart, generally puberulent</b>
-if <= 6 flowers, oldest open-flowered pedicel generally < 25 mm or < 2 &times; youngest
-<b>stem 15--80 cm</b> (--110), base generally curly-puberulent, <b>base not ridged</b>
-proximal petiole hairs are unknowable
-blades of lower petals equally hairy adaxially, abaxially
-leaf generally curly-puberulent; lobes 5--27, generally < 6 mm wide
-Coe, near Cowell, and lots in Pinnacles
--}
+==san bernardino larkspur:D. parryi
+. <b>flowers 3--60</b>
+. <b>pedicels +- ascending, 5--68 mm, 8--50 mm apart, generally puberulent</b>
+. if <= 6 flowers, oldest open-flowered pedicel generally < 25 mm or < 2 &times; youngest
+. <b>stem 15--80 cm</b> (--110), base generally curly-puberulent, <b>base not ridged</b>
+. proximal petiole hairs are unknowable
+. blades of lower petals equally hairy adaxially, abaxially
+. leaf generally curly-puberulent; lobes 5--27, generally < 6 mm wide
+. Coe, near Cowell, and lots in Pinnacles

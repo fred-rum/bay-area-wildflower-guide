@@ -1,0 +1,2 @@
+sci:Garrya elliptica
+color: other

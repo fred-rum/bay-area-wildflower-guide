@@ -1,35 +1,28 @@
-{sci:Dichelostemma}
+sci:Dichelostemma spp.
+
 Key features:
-{-
-<a href="http://www.virtualherbarium.org/glossary/glossary.php?searchfor=crown&searchin=def&B1=Search">crown</a> color, leaning in or out
-perianth tube narrowed above ovary or not
--}
+. <a href="http://www.virtualherbarium.org/glossary/glossary.php?searchfor=crown&searchin=def&B1=Search">crown</a> color, leaning in or out
+. perianth tube narrowed above ovary or not
 
 The defining difference is the number of stamens, but I can't count them without taking apart the flower.
 There is supposed to be a difference in bracts color, but I can't consistently see it on CalPhotos.
 
-{+blue dicks}
-{-
-perianth blue, blue-purple, pink-purple, or white
-<a href="http://www.virtualherbarium.org/glossary/glossary.php?searchfor=crown&searchin=def&B1=Search">crown</a> erect, <b>leaning toward anthers, outward at tip</b>, white
-perianth tube <b>not narrowed</b> above ovary
-bracts generally dark purple (paler, striped dark purple
-flowers from February--April (theoretically)
-common throughout the bay area
--}
+==blue dicks:D. capitatum
+. perianth blue, blue-purple, pink-purple, or white
+. <a href="http://www.virtualherbarium.org/glossary/glossary.php?searchfor=crown&searchin=def&B1=Search">crown</a> erect, <b>leaning toward anthers, outward at tip</b>, white
+. perianth tube <b>not narrowed</b> above ovary
+. bracts generally dark purple (paler, striped dark purple
+. flowers from February--April (theoretically)
+. common throughout the bay area
 
-{+ookow}
-{-
-perianth blue-purple
-<a href="http://www.virtualherbarium.org/glossary/glossary.php?searchfor=crown&searchin=def&B1=Search">crown</a> erect, <b>leaning away from anthers</b>, +-purple
-perianth tube <b>narrowed</b> above ovary or +-so
-bracts pale purple to green
-flowers from May--June (theoretically)
-scattered throughout the bay area
--}
+==ookow:D. congestum
+. perianth blue-purple
+. <a href="http://www.virtualherbarium.org/glossary/glossary.php?searchfor=crown&searchin=def&B1=Search">crown</a> erect, <b>leaning away from anthers</b>, +-purple
+. perianth tube <b>narrowed</b> above ovary or +-so
+. bracts pale purple to green
+. flowers from May--June (theoretically)
+. scattered throughout the bay area
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0208+0434} {wild hyacinth:Dichelostemma multiflorum}
-{-
-spreading corolla lobes (although blue dicks can sometimes be more or less spreading)
-the three <a href="http://www.virtualherbarium.org/glossary/glossary.php?searchfor=crown&searchin=def&B1=Search">crown</a> pieces are each entire/truncate, not notched
--}
+==wild hyacinth:D. multiflorum
+. spreading corolla lobes (although blue dicks can sometimes be more or less spreading)
+. the three <a href="http://www.virtualherbarium.org/glossary/glossary.php?searchfor=crown&searchin=def&B1=Search">crown</a> pieces are each entire/truncate, not notched

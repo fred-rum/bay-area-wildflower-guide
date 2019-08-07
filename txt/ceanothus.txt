@@ -1,121 +1,86 @@
-{sci:Ceanothus}
+sci:Ceanothus spp.
+
 Key features:
-{-
-twig color, whether twigs are ridged
-leaves opposite or alternate
-leaf top warty or hairy or not
-leaf bottom hairy or not
-number of ribs from base of leaf
-inflorescence shape
--}
+. twig color, whether twigs are ridged
+. leaves opposite or alternate
+. leaf top warty or hairy or not
+. leaf bottom hairy or not
+. number of ribs from base of leaf
+. inflorescence shape
 
 Flower color is not a good diagnostic.
 
 All leaves are dark green or dull green adaxially (on the upper surface) and paler abaxially (on the lower surface).
 
-{+buckbrush}
-{-
-Twigs: generally brown to gray-brown, no more than slightly fuzzy
-Leaves:
-<ul>
-<b>opposite</b>, occasionally clustered
-6--30 mm, 3--18 mm wide
-adaxially glabrous
-abaxially glabrous or with short stiff adpressed hairs, <b>1-ribbed from base</b>
-margin entire or teeth +- sharp <b>(not glandular)</b>
-</ul>
-Inflorescence: <b>umbel-like</b> (flowers from a single point)
-Flower: white, pale blue, blue, or lavender
--}
+==buckbrush:C. cuneatus
+. Twigs: generally brown to gray-brown, no more than slightly fuzzy
+. Leaves:
+.. <b>opposite</b>, occasionally clustered
+.. 6--30 mm, 3--18 mm wide
+.. adaxially glabrous
+.. abaxially glabrous or with short stiff adpressed hairs, <b>1-ribbed from base</b>
+.. margin entire or teeth +- sharp <b>(not glandular)</b>
+. Inflorescence: <b>umbel-like</b> (flowers from a single point)
+. Flower: white, pale blue, blue, or lavender
 
-{+wartleaf ceanothus}
-{-
-Twigs: <b>green</b> to gray-brown
-Leaves:
-<ul>
-alternate
-11--50 mm, 6--15 mm wide
-adaxially <b>glandular-papillate (warty)</b>
-abaxially generally <b>densely hairy</b>, 1-ribbed from base
-<b>margin rolled under</b>, minutely gland-toothed, teeth 17--31
-</ul>
-Inflorescence: raceme-like (flowers from pedicels along axis)
-Flower: deep blue
--}
+==wartleaf ceanothus:C. papillosus
+. Twigs: <b>green</b> to gray-brown
+. Leaves:
+.. alternate
+.. 11--50 mm, 6--15 mm wide
+.. adaxially <b>glandular-papillate (warty)</b>
+.. abaxially generally <b>densely hairy</b>, 1-ribbed from base
+.. <b>margin rolled under</b>, minutely gland-toothed, teeth 17--31
+. Inflorescence: raceme-like (flowers from pedicels along axis)
+. Flower: deep blue
 
-{+blueblossom}
-{-
-Twigs: <b>green, ridged</b>, angled distally, glabrous
-Leaves:
-<ul>
-alternate
-10--39 mm, 5--20 mm wide
-adaxially glabrous
-abaxially glabrous to puberulent between veins or not, 3-ribbed from base, veins +- raised, sparsely puberulent
-margin may be gland-toothed
-</ul>
-Inflorescence: generally raceme-like (flowers from pedicels along axis) or <b>panicle-like</b> (branched raceme)
-Flower: usually light to deep blue, but may be white
--}
+==blueblossom:C. thyrsiflorus
+. Twigs: <b>green, ridged</b>, angled distally, glabrous
+. Leaves:
+.. alternate
+.. 10--39 mm, 5--20 mm wide
+.. adaxially glabrous
+.. abaxially glabrous to puberulent between veins or not, 3-ribbed from base, veins +- raised, sparsely puberulent
+.. margin may be gland-toothed
+. Inflorescence: generally raceme-like (flowers from pedicels along axis) or <b>panicle-like</b> (branched raceme)
+. Flower: usually light to deep blue, but may be white
 
-{+hairy ceanothus}
-{-
-Twigs: green to <b>reddish</b>, <b>not ridged</b> or angled, <b>may be hairy</b>
-Leaves:
-<ul>
-alternate
-11--30 mm, 5--25 mm wide
-adaxially +- glabrous to <b>short-hairy</b>
-abaxially sparsely to <b>densely short-hairy, especially veins</b>, 3-ribbed from base
-margin minutely gland-toothed, teeth 20--70
-</ul>
-Inflorescence: generally raceme-like (flowers from pedicels along axis)
-Flower: blue to purple-blue (or pale blue or white)
--}
+==hairy ceanothus:C. oliganthus
+. Twigs: green to <b>reddish</b>, <b>not ridged</b> or angled, <b>may be hairy</b>
+. Leaves:
+.. alternate
+.. 11--30 mm, 5--25 mm wide
+.. adaxially +- glabrous to <b>short-hairy</b>
+.. abaxially sparsely to <b>densely short-hairy, especially veins</b>, 3-ribbed from base
+.. margin minutely gland-toothed, teeth 20--70
+. Inflorescence: generally raceme-like (flowers from pedicels along axis)
+. Flower: blue to purple-blue (or pale blue or white)
 
 <h3>Other ceanothus</h3>
 
-{sandscrub ceanothus:Ceanothus dentatus}
-{-
-very rare
--}
+==sandscrub ceanothus:C. dentatus
+. very rare
 
-{coyote ceanothus:Ceanothus ferrisiae}
-{-
-near Anderson Lake
--}
+==coyote ceanothus:C. ferrisiae
+. near Anderson Lake
 
-{wavyleaf ceanothus:Ceanothus foliosus}
-{-
-mostly historical except at Mt. Madonna and Mt. Tamalpais
--}
+==wavyleaf ceanothus:C. foliosus
+. mostly historical except at Mt. Madonna and Mt. Tamalpais
 
-{point reyes ceanothus:Ceanothus gloriosus}
-{-
-only near Mt. Tamalpais
--}
+==point reyes ceanothus:C. gloriosus
+. only near Mt. Tamalpais
 
-{deerbrush ceanothus:Ceanothus integerrimus}
-{-
-mostly Sierra Azul, Big Basin, and Soquel
--}
+==deerbrush ceanothus:C. integerrimus
+. mostly Sierra Azul, Big Basin, and Soquel
 
-{chaparral whitethorn:Ceanothus leucodermis}
-{-
-Henry Coe
--}
+==chaparral whitethorn:C. leucodermis
+. Henry Coe
 
-{mason's ceanothus:Ceanothus masonii}
-{-
-rare near Mt. Tamalpais
--}
+==mason's ceanothus:C. masonii
+. rare near Mt. Tamalpais
 
 {holl
-{-
-eaved ceanothus:Ceanothus purpureus} - not nearby
--}
+. eaved ceanothus:Ceanothus purpureus} - not nearby
 
-{tobacco brush:Ceanothus velutinus}
-{-
-Mt. Tamalpais
--}
+==tobacco brush:C. velutinus
+. Mt. Tamalpais

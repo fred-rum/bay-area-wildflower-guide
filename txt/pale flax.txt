@@ -1,0 +1,2 @@
+sci:Linum bienne
+color: pale purple, white

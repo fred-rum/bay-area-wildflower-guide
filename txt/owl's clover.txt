@@ -1,42 +1,35 @@
-{sci:n/a}
+sci:n/a
+
 The corolla's upper lip lobes are fused into a "beak" with an open tip.  The stigma is exserted from the tip of the beak (or included).  The corolla's lower lip is reduced and may be 3-toothed to -pouched.
 
-{+purple owl's-clover,3:Castilleja exserta}
-{-
-corolla beak tip hooked, densely shaggy-hairy
-the stigma's round tip is exserted on the side of the (hooked) corolla beak
-common
--}
+==purple owl's-clover,3:Castilleja exserta
+. corolla beak tip hooked, densely shaggy-hairy
+. the stigma's round tip is exserted on the side of the (hooked) corolla beak
+. common
 
-{+denseflower indian paintbrush,3:Castilleja densiflora}
-{-
-corolla beak straight, puberulent
-the stigma's round tip is exserted on the top of the (erect) corolla beak
-inflorescence 20--40 mm wide
-corolla wider distally, pouches generally 3--7 mm wide
-stigma generally +- exserted
-branches 0 or few from mid-stem
-leaf lance-linear, < 3 mm wide
-common, particularly in the Santa Cruz range
--}
+==denseflower indian paintbrush,3:Castilleja densiflora
+. corolla beak straight, puberulent
+. the stigma's round tip is exserted on the top of the (erect) corolla beak
+. inflorescence 20--40 mm wide
+. corolla wider distally, pouches generally 3--7 mm wide
+. stigma generally +- exserted
+. branches 0 or few from mid-stem
+. leaf lance-linear, < 3 mm wide
+. common, particularly in the Santa Cruz range
 
-{salt-marsh owl-clover:Castilleja ambigua}
-{-
-corolla beak straight, puberulent
-inflorescence 20--40 mm wide
-corolla wider distally, pouches generally 3--7 mm wide
-stigma generally +- exserted
-<b>branches generally many</b>
-leaf lanceolate to oblong, > 3 mm wide
-scattered along Pacific coast, Oakland
--}
+==salt-marsh owl-clover:Castilleja ambigua
+. corolla beak straight, puberulent
+. inflorescence 20--40 mm wide
+. corolla wider distally, pouches generally 3--7 mm wide
+. stigma generally +- exserted
+. <b>branches generally many</b>
+. leaf lanceolate to oblong, > 3 mm wide
+. scattered along Pacific coast, Oakland
 
-{valley tassels:Castilleja attenuata}
-{-
-corolla beak straight, puberulent
-<b>inflorescence 10--20 mm wide</b>
-corolla linear, pouches +- 2 mm wide
-<b>stigma included</b>
-corolla white, purple-dotted
-scattered
--}
+==valley tassels:Castilleja attenuata
+. corolla beak straight, puberulent
+. <b>inflorescence 10--20 mm wide</b>
+. corolla linear, pouches +- 2 mm wide
+. <b>stigma included</b>
+. corolla white, purple-dotted
+. scattered

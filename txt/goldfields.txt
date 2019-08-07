@@ -1,86 +1,69 @@
-{sci:Lasthenia}
-{rare}
+sci:Lasthenia spp.
+x:rare
+
 Key features:
-{-
-phyllaries free or partially fused (and what percent is fused)
-number of phyllaries
-leaf shape
-ray length
-pappus present or not, color, opacity (pappus <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0514+0357">in flower</a>, <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0511+0368">in seed</a>)
--}
+. phyllaries free or partially fused (and what percent is fused)
+. number of phyllaries
+. leaf shape
+. ray length
+. pappus present or not, color, opacity (pappus <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0514+0357">in flower</a>, <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0511+0368">in seed</a>)
 
 Distinguishing goldfields often requires examining the pappus.  The pappus takes the place of the calyx/sepals in the disk flowers.  If the flower is in bloom, the pappus is typically shorter than the disk corolla, so to see it you'll need to pull the flower head apart.  (Pulling one disk flower out may be sufficient.  It may bring the pappus with it or leave it attached to the ovary.  I need to test that idea.)  Once the flower goes to seed and the corollas fall off, the pappus is much easier to see and often looks like a dandelion's seed pod.
 
-{[
+[
 <h2>phyllaries free</h2>
 
-{+california goldfields:L. californica}
-{-
-phyllaries free, generally > 6
-leaves +- entire or with 3--5+ teeth
-pappus of 1--7 clear, brown, linear to awl-like scales, or 0
-common
--}
+==california goldfields:L. californica
+. phyllaries free, generally > 6
+. leaves +- entire or with 3--5+ teeth
+. pappus of 1--7 clear, brown, linear to awl-like scales, or 0
+. common
 
-{common goldfields:L. gracilis}
-{-
-phyllaries free, generally > 6
-leaves +- entire
-pappus of (2)4(6) opaque, white, lance-ovate scales, or 0
-rare
--}
+==common goldfields:L. gracilis
+. phyllaries free, generally > 6
+. leaves +- entire
+. pappus of (2)4(6) opaque, white, lance-ovate scales, or 0
+. rare
 
-{maritime goldfields:L. maritima}
-{-
-phyllaries free, generally > 6
-mid-cauline leaves generally pinnately lobed
-ray 1--3 mm
-pappus awns >= 4, rarely 0
-very rare
--}
+==maritime goldfields:L. maritima
+. phyllaries free, generally > 6
+. mid-cauline leaves generally pinnately lobed
+. ray 1--3 mm
+. pappus awns >= 4, rarely 0
+. very rare
 
-{coastal goldfields:L. minor}
-{-
-phyllaries free, generally > 6
-mid-cauline leaves generally pinnately lobed
-ray 4--8 mm
-pappus awns 2--3(4) or 0
-rare
--}
+==coastal goldfields:L. minor
+. phyllaries free, generally > 6
+. mid-cauline leaves generally pinnately lobed
+. ray 4--8 mm
+. pappus awns 2--3(4) or 0
+. rare
 
-{small-ray goldfields:L. microglossa}
-{-
-phyllaries free
-<b>phyllaries generally +- 4</b>
-<b>the whole flower head is narrow and has extremely short ray flowers</b>
-Mt. Diablo
--}
+==small-ray goldfields:L. microglossa
+. phyllaries free
+. <b>phyllaries generally +- 4</b>
+. <b>the whole flower head is narrow and has extremely short ray flowers</b>
+. Mt. Diablo
 
-]}
-{[
+]
+[
 <h2>phyllaries +- fused</h2>
 
-{contra costa goldfields:L. conjugens}
-{-
-phyllaries +- fused, fused portion < 1/2 length
-leaves entire to pinnately lobed
-scattered in low-lying areas of the East Bay
--}
+==contra costa goldfields:L. conjugens
+. phyllaries +- fused, fused portion < 1/2 length
+. leaves entire to pinnately lobed
+. scattered in low-lying areas of the East Bay
 
-{smooth goldfields:L. glaberrima}
-{-
-phyllaries +- fused, fused portion > 2/3 length
-leaves entire
-pappus present
-rare
--}
+==smooth goldfields:L. glaberrima
+. phyllaries +- fused, fused portion > 2/3 length
+. leaves entire
+. pappus present
+. rare
 
-{yellowray goldfields:L. glabrata}
-{-
-phyllaries +- fused, fused portion > 2/3 length
-leaves entire
-pappus 0
-rare
--}
+==yellowray goldfields:L. glabrata
+. phyllaries +- fused, fused portion > 2/3 length
+. leaves entire
+. pappus 0
+. rare
 
-]}
+]

@@ -1,0 +1,2 @@
+sci:Clintonia andrewsiana
+color: red, red purple, purple

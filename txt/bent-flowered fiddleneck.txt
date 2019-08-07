@@ -1,0 +1,2 @@
+sci:Amsinckia lunaris
+color: yellow, orange

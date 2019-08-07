@@ -1,37 +1,28 @@
-{sci:Symphyotrichum}
-{!hist/rare}
-{+pacific aster:S. chilense}
-{-
-stem hairy distally
-outer phyllaries obtuse
-disk flowers: yellow
-ray flowers: 8--12 mm, violet
-very common, especially in the Santa Cruz range
--}
+sci:Symphyotrichum spp.
+x:!hist/rare
 
-{douglas's aster:S. subspicatum}
-{-
-stem +- hairy distally
-outer phyllaries +- acute
-disk flowers: yellow
-ray flowers: 8--16 mm, violet
-very rare
--}
+==pacific aster:S. chilense
+. stem hairy distally
+. outer phyllaries obtuse
+. disk flowers: yellow
+. ray flowers: 8--12 mm, violet
+. very common, especially in the Santa Cruz range
 
-{annual saltmarsh aster:S. subulatum}
-{-
-stem +- glabrous
-disk flowers: yellow
-ray flowers: <b>1.5--3 mm</b>, +- white to pink
-rare
--}
+==douglas's aster:S. subspicatum
+. stem +- hairy distally
+. outer phyllaries +- acute
+. disk flowers: yellow
+. ray flowers: 8--16 mm, violet
+. very rare
 
-{:S. lanceolatum var. hesperium}
-{-
-rare
--}
+==annual saltmarsh aster:S. subulatum
+. stem +- glabrous
+. disk flowers: yellow
+. ray flowers: <b>1.5--3 mm</b>, +- white to pink
+. rare
 
-{:S. lentum}
-{-
-rare
--}
+==S. lanceolatum var. hesperium
+. rare
+
+==S. lentum
+. rare

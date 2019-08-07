@@ -1,1 +1,4 @@
+sci:Brodiaea elegans
+color: purple
+
 The local variety is <i>Brodiaea elegans ssp. elegans</i>.

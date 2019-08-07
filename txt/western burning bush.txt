@@ -1,2 +1,5 @@
-{ca}
+sci:Euonymus occidentalis
+color: other
+x:ca
+
 There are two varieties in California, but only var. occidentalis is in the bay area.

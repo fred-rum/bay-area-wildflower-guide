@@ -1,1 +1,3 @@
-{ba}
+sci:Ageratina adenophora
+color: white
+x:ba

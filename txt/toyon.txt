@@ -1,2 +1,5 @@
-{ca}
+sci:Heteromeles arbutifolia
+color: other
+x:ca
+
 See also {-cotoneaster}.

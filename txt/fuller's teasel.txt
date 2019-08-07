@@ -1,2 +1,3 @@
+sci:Dipsacus fullonum
 spines:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0106+1209
 fused leaves:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1208+0232

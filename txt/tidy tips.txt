@@ -1,0 +1,2 @@
+sci:Layia platyglossa
+color: yellow

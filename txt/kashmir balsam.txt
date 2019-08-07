@@ -1,0 +1,2 @@
+sci:Impatiens balfourii
+color: pink, purple

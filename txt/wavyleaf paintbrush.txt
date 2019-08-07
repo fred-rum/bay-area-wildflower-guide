@@ -1,0 +1,2 @@
+sci:Castilleja applegatei
+color: red, salmon

@@ -1,1 +1,4 @@
+sci:Brodiaea terrestris
+color: purple
+
 The local variety is <i>Brodiaea terrestris ssp. terrestris</i>.

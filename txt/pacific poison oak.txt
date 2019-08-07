@@ -1,1 +1,3 @@
-{ca}
+sci:Toxicodendron diversilobum
+color: other, cream
+x:ca

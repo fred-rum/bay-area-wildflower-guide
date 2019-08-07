@@ -1,0 +1,2 @@
+sci:Delphinium variegatum
+color: purple

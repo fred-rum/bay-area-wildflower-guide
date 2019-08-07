@@ -1,47 +1,38 @@
-{sci:Lonicera}
-{+pink honeysuckle}
-{-
-<b>flowers in +- interrupted spikes</b> on axillary peduncles or at ends of branches
-<b>upper leaf pairs fused around stem</b>
-<b>corolla glandular-hairy or hairy</b> [may be short and sparse]
-stipules +- conspicuous, at least near inflorescence
-pink flowers
-common in bay area
--}
+sci:Lonicera spp.
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=6121+1611+3983+0002} {chaparral honeysuckle:Lonicera interrupta}
-{-
-<b>flowers in +- interrupted spikes</b> on axillary peduncles or at ends of branches
-<b>upper leaf pairs fused around stem</b>
-<b>corolla glabrous</b>
-stipules 0
-cream-yellow flowers
-scattered around bay area
--}
+==pink honeysuckle:L. hispidula
+. <b>flowers in +- interrupted spikes</b> on axillary peduncles or at ends of branches
+. <b>upper leaf pairs fused around stem</b>
+. <b>corolla glandular-hairy or hairy</b> [may be short and sparse]
+. stipules +- conspicuous, at least near inflorescence
+. pink flowers
+. common in bay area
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0503+0325} {johnston's honeysuckle:Lonicera subspicata var. denudata}
-{-
-<b>flowers in +- interrupted spikes</b> on axillary peduncles or at ends of branches
-upper leaf pairs not fused around stem
-corolla often hairy
-pale yellow flowers
-scattered around bay area
--}
+==chaparral honeysuckle:L. interrupta
+. <b>flowers in +- interrupted spikes</b> on axillary peduncles or at ends of branches
+. <b>upper leaf pairs fused around stem</b>
+. <b>corolla glabrous</b>
+. stipules 0
+. cream-yellow flowers
+. scattered around bay area
 
-{+twinberry honeysuckle:Lonicera involucrata}
-{-
-<b>flowers paired on axillary peduncles</b>
-<b>corolla < 20 mm</b>
-plant erect
-corolla yellow, strongly tinged orange or red
-common near the coast and in the east bay from Chabot north
--}
+==johnston's honeysuckle:L. subspicata var. denudata
+. <b>flowers in +- interrupted spikes</b> on axillary peduncles or at ends of branches
+. upper leaf pairs not fused around stem
+. corolla often hairy
+. pale yellow flowers
+. scattered around bay area
 
-{+japanese honeysuckle:Lonicera japonica}
-{-
-<b>flowers paired on axillary peduncles</b>
-<b>corolla > 25 mm</b>
-plant twining
-corolla white turning yellow, often tinged +- purple
-scattered at the periphery of the bay area
--}
+==twinberry honeysuckle:L. involucrata
+. <b>flowers paired on axillary peduncles</b>
+. <b>corolla < 20 mm</b>
+. plant erect
+. corolla yellow, strongly tinged orange or red
+. common near the coast and in the east bay from Chabot north
+
+==japanese honeysuckle:L. japonica
+. <b>flowers paired on axillary peduncles</b>
+. <b>corolla > 25 mm</b>
+. plant twining
+. corolla white turning yellow, often tinged +- purple
+. scattered at the periphery of the bay area

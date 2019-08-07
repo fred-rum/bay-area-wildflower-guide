@@ -1,0 +1,2 @@
+sci:Cistus creticus
+color: pink

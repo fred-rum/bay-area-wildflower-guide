@@ -1,12 +1,10 @@
-{sci:Calystegia subacaulis}
-{:C. subacaulis ssp. subacaulis}
-{-
-stem generally +- 2 cm
-common
--}
+sci:Calystegia subacaulis
+color: white, pale purple
 
-{cambria morning-glory:C. subacaulis ssp. episcopalis}
-{-
-stem decumbent to ascending, +- 20 cm
-very rare or perhaps incorrectly identified as being in this area
--}
+==C. subacaulis ssp. subacaulis
+. stem generally +- 2 cm
+. common
+
+==cambria morning-glory:C. subacaulis ssp. episcopalis
+. stem decumbent to ascending, +- 20 cm
+. very rare or perhaps incorrectly identified as being in this area

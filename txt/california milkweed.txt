@@ -1,0 +1,2 @@
+sci:Asclepias californica
+color: other, red purple

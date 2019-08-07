@@ -1,0 +1,2 @@
+sci:Centaurea solstitialis
+color: yellow

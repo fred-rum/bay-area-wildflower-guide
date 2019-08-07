@@ -1,77 +1,61 @@
-{sci:Lomatium}
+sci:Lomatium spp.
+
 <b>Caution: IDs uncertain.</b>  I don't really have these figured out.  More field observation may be useful.  I should probably look into fruit characteristics as well as necessary.
 
 Key features:
-{-
-leaf segments few and large or many and small
-stem present beneath compound umbel structure or not
-peduncle distally swollen/inflated or not
-corolla color
--}
+. leaf segments few and large or many and small
+. stem present beneath compound umbel structure or not
+. peduncle distally swollen/inflated or not
+. corolla color
 
-{[
+[
 <h3>Leaf dissected, segments generally many, small, occasionally long but then narrow</h3>
 
-{+woollyfruit desertparsley:Lomatium dasycarpum}
-{-
-Plant generally with a definite stem; cauline leaves 0 or like basal
-[possibly little or no sheathing on cauline leaf petioles, but CalPhotos doesn't show them one way or another]
-leaf segments 2--6 mm, generally linear
-pedicels 5--20 mm
-corolla +- green-white or +- purple [or yellow??], tomentose
-common in the Santa Cruz range, uncommon elsewhere
--}
+==woollyfruit desertparsley:L. dasycarpum
+. Plant generally with a definite stem; cauline leaves 0 or like basal
+. [possibly little or no sheathing on cauline leaf petioles, but CalPhotos doesn't show them one way or another]
+. leaf segments 2--6 mm, generally linear
+. pedicels 5--20 mm
+. corolla +- green-white or +- purple [or yellow??], tomentose
+. common in the Santa Cruz range, uncommon elsewhere
 
-{+foothill desert-parsley:Lomatium utriculatum}
-{-
-Plant generally with a definite stem, stem leaves generally >= 2
-cauline leaf petioles conspicuously sheathing throughout (<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=6121+1611+3984+0073">example</a>)
-leaf segments 2--25 mm, generally linear
-cauline leaf petioles conspicuously sheathing throughout
-pedicels 2--9 mm
-Corolla yellow, occasionally white in age
-common
--}
+==foothill desert-parsley:L. utriculatum
+. Plant generally with a definite stem, stem leaves generally >= 2
+. cauline leaf petioles conspicuously sheathing throughout (<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=6121+1611+3984+0073">example</a>)
+. leaf segments 2--25 mm, generally linear
+. cauline leaf petioles conspicuously sheathing throughout
+. pedicels 2--9 mm
+. Corolla yellow, occasionally white in age
+. common
 
-{bigseed biscuitfruit:Lomatium macrocarpum}
-{-
-Plant generally with a definite stem, stem leaves generally >= 2
-leaf segments 1--7 mm, linear to oblong
-Corolla white, cream or +- purple
-pedicels 1--14 mm
-bractlets several, >= flowers, +- fused, reflexing
-scattered
--}
+==bigseed biscuitfruit:L. macrocarpum
+. Plant generally with a definite stem, stem leaves generally >= 2
+. leaf segments 1--7 mm, linear to oblong
+. Corolla white, cream or +- purple
+. pedicels 1--14 mm
+. bractlets several, >= flowers, +- fused, reflexing
+. scattered
 
-{alkali desertparsley:Lomatium caruifolium var. caruifolium}
-{-
-Plant stem +- 0, cauline leaves 0, occasionally 1 or more at base of short stem
-Leaf segments thread-like to linear, long, not crowded; herbage green, generally shiny
-uncommon, scattered
--}
+==alkali desertparsley:L. caruifolium var. caruifolium
+. Plant stem +- 0, cauline leaves 0, occasionally 1 or more at base of short stem
+. Leaf segments thread-like to linear, long, not crowded; herbage green, generally shiny
+. uncommon, scattered
 
-{mount hamilton lomatium:Lomatium observatorium}
-{-
-Plant stem +- 0, cauline leaves 0, occasionally 1 or more at base of short stem
-Leaf segments lanceolate or oblong to ovate (linear to thread-like), short, generally crowded; herbage generally glaucous or +- gray
-possibly Grant
--}
+==mount hamilton lomatium:L. observatorium
+. Plant stem +- 0, cauline leaves 0, occasionally 1 or more at base of short stem
+. Leaf segments lanceolate or oblong to ovate (linear to thread-like), short, generally crowded; herbage generally glaucous or +- gray
+. possibly Grant
 
-]}
-{[
+]
+[
 <h3>Leaf dissected or compound, segments or leaflets generally few, generally large, generally wide</h3>
 
-{california lomatium:Lomatium californicum}
-{-
-Peduncle distally not swollen, not inflated --- rays occasionally webbed at base into prominent disk
-uncommon, scattered
--}
+==california lomatium:L. californicum
+. Peduncle distally not swollen, not inflated --- rays occasionally webbed at base into prominent disk
+. uncommon, scattered
 
-{barestem biscuitroot:Lomatium nudicaule}
-{-
-Peduncle distally swollen, inflated
-Grant, Coe
--}
+==barestem biscuitroot:L. nudicaule
+. Peduncle distally swollen, inflated
+. Grant, Coe
 
-]}
-
+]

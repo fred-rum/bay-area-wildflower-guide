@@ -206,6 +206,12 @@ Use non-breaking spaces in footer links (Jepson eFlora) and (Bay Area species).
 Sort the glossary word list in reverse alphabetical order so that longer
 entries are before shorter entries that start the same.
 
+The current child name regexs will fail for any child with a comma in its name.
+Need to allow comma in the name, but make it non-greedy so that a
+comma-separated jpg suffix is handled properly.
+
+Sort parks alphabetically before resorting by observations.
+
 Update txt format to be line based and require fewer braces.
   manually remove uses of '{child:[page]}' and '{[page]:[photo].jpg}'
     done
@@ -234,7 +240,6 @@ Update txt format to be line based and require fewer braces.
     {+link} or {link:link} -> +link or +link:link
     add color:... to txt, then parse it from the txt
     {-...-} -> start each line with a period
-  -- done --
   ignore blank lines at the start of the file after parsing info
   write out modified txt files:
     write only files that match at least one:
@@ -260,5 +265,5 @@ Update txt format to be line based and require fewer braces.
           (e.g. so it includes the scientific name)
           or add the scientific name to the link if it wasn't there before
     use new txt files in place of old txt files
-    manually fix explict use of <ul> for sub-lists
+  -- done --
     remove rewrite() and parse_child_calphotos()

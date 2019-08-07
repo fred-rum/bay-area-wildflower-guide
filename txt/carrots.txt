@@ -1,14 +1,10 @@
-{sci:Daucus}
-{ca}
-{+american wild carrot}
-{-
-bract segments <b>short</b>, linear to lanceolate
-common
--}
+sci:Daucus spp.
+x:ca
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1208+0424}
-{queen anne's lace:Daucus carota}
-{-
-bract segments <b>elongate</b>, narrowly linear to +- thread-like
-scattered
--}
+==american wild carrot:D. pusillus
+. bract segments <b>short</b>, linear to lanceolate
+. common
+
+==queen anne's lace:D. carota
+. bract segments <b>elongate</b>, narrowly linear to +- thread-like
+. scattered

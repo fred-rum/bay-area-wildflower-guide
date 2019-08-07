@@ -1,0 +1,2 @@
+sci:Rumex acetosella
+color: other, red

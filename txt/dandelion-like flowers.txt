@@ -1,63 +1,50 @@
-{sci:n/a}
+sci:n/a
+
 For the purposes of this page, "dandelion-like" is defined as a plant in the {-sunflower family} in which the head is liguliflorous.  This means that it is composed of only a single kind of ray-like corolla in a 3-D arrangement.  This page collects in one place the dandelion-like plants with yellow inflorescences for easier comparison.
 
 Compare with {-yellow daisies}.
 
 Key features
-{-
-stem forked or not, hollow or not
-shape of basal leaves
-size of cauline leaves, sharp toothed or not, clasping or not, clasping lobes curled or not
-involucre swollen at base or not
-phyllaries in 2 series or many
-shape of outer phyllaries
-color of inner phyllaries
-corolla +- red abasially or not
--}
+. stem forked or not, hollow or not
+. shape of basal leaves
+. size of cauline leaves, sharp toothed or not, clasping or not, clasping lobes curled or not
+. involucre swollen at base or not
+. phyllaries in 2 series or many
+. shape of outer phyllaries
+. color of inner phyllaries
+. corolla +- red abasially or not
 
-{+common dandelion}
-{-
-unforked, hollow stem (the peduncle, really) (breaks easily), always glabrous
-no cauline leaves
-corolla yellow
--}
+==common dandelion:Taraxacum officinale
+. unforked, hollow stem (the peduncle, really) (breaks easily), always glabrous
+. no cauline leaves
+. corolla yellow
 
-{+mountain dandelions}
-{-
-unforked stem (peduncle), often hairy
-most species without cauline leaves
-corolla yellow, often tan abaxially
--}
+==mountain dandelions:Agoseris spp.
+. unforked stem (peduncle), often hairy
+. most species without cauline leaves
+. corolla yellow, often tan abaxially
 
-{+cat's ears}
-{-
-forked, solid stem
-cauline leaves scale-like [very reduced]
-phyllaries graduated in 4--5 series, reflexed when dry
-corolla yellow, often +- red abaxially
--}
+==cat's ears:Hypochaeris spp.
+. forked, solid stem
+. cauline leaves scale-like [very reduced]
+. phyllaries graduated in 4--5 series, reflexed when dry
+. corolla yellow, often +- red abaxially
 
-{+hawksbeard}
-{-
-simple or much forked stem
-cauline leaves clasping [per CalPhotos, maybe present only very low on the plant]
-phyllaries in 2 series, outer reduced, inner +- equal
-corolla yellow, +- red abaxially for some species
--}
+==hawksbeard:Crepis spp.
+. simple or much forked stem
+. cauline leaves clasping [per CalPhotos, maybe present only very low on the plant]
+. phyllaries in 2 series, outer reduced, inner +- equal
+. corolla yellow, +- red abaxially for some species
 
-{+bristly oxtongue}
-{-
-coarse, stout, branched stem
-basal and cauline leaves <b>warty</b>; proximal tapered to winged petioles; distal sessile, sometimes clasping
-phyllaries in 2--3 overlapping series; outer phyllaries spreading to ascending
-corolla yellow, may be +- red abaxially
--}
+==bristly oxtongue:Helminthotheca echioides
+. coarse, stout, branched stem
+. basal and cauline leaves <b>warty</b>; proximal tapered to winged petioles; distal sessile, sometimes clasping
+. phyllaries in 2--3 overlapping series; outer phyllaries spreading to ascending
+. corolla yellow, may be +- red abaxially
 
-{+sow thistles}
-{-
-stem may have a few branches
-cauline leaves clasping, lobed, often sharp
-<b>involucre swollen at base</b>
-phyllaries generally in 3 series
-corolla yellow, +- tan abaxially
--}
+==sow thistles:Sonchus spp.
+. stem may have a few branches
+. cauline leaves clasping, lobed, often sharp
+. <b>involucre swollen at base</b>
+. phyllaries generally in 3 series
+. corolla yellow, +- tan abaxially

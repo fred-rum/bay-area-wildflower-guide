@@ -1,0 +1,2 @@
+sci:Trichostema lanceolatum
+color: purple

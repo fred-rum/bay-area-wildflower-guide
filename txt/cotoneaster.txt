@@ -1,40 +1,30 @@
-{sci:Cotoneaster}
+sci:Cotoneaster spp.
+
 Key features:
-{-
-plant height
-leaf length and width, thick or thin, veins sunken or not, color
-flower or fruit color (either works)
--}
+. plant height
+. leaf length and width, thick or thin, veins sunken or not, color
+. flower or fruit color (either works)
 
 See also {-toyon}.
 
-{+late cotoneaster}
-{-
-plant arching, 1--9 m
-Petals white, spreading; fruit bright red
-Leaf blade 35--95 mm, 17--45 mm wide, thick, adaxially dark green, lateral veins often sunken
-scattered
--}
+==late cotoneaster:C. coriaceus
+. plant arching, 1--9 m
+. Petals white, spreading; fruit bright red
+. Leaf blade 35--95 mm, 17--45 mm wide, thick, adaxially dark green, lateral veins often sunken
+. scattered
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0219+0707}
-{silverleaf cotoneaster:Cotoneaster pannosus}
-{-
-plant arching, 1--9 m
-Petals white, spreading; fruit bright red
-Leaf blade 15--32 mm, 8--15 mm wide, thin, adaxially +- blue-green, lateral veins not sunken
-scattered
--}
+==silverleaf cotoneaster:C. pannosus
+. plant arching, 1--9 m
+. Petals white, spreading; fruit bright red
+. Leaf blade 15--32 mm, 8--15 mm wide, thin, adaxially +- blue-green, lateral veins not sunken
+. scattered
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0406+0239} {franchet's cotoneaster:Cotoneaster franchetii}
-{-
-plant arching, 1--9 m
-Petals pink or rose, erect; fruit orange to red-orange
-scattered in the outer coastal range + Berkeley
--}
+==franchet's cotoneaster:C. franchetii
+. plant arching, 1--9 m
+. Petals pink or rose, erect; fruit orange to red-orange
+. scattered in the outer coastal range + Berkeley
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0406+0347} {entire-leaved cotoneaster:Cotoneaster integrifolius}
-{-
-plant sprawling, <= 1 m
-Leaf blade 5--15 mm, < 8 mm wide
-Nisene Marks, Santa Cruz, San Francisco, Marin
--}
+==entire-leaved cotoneaster:C. integrifolius
+. plant sprawling, <= 1 m
+. Leaf blade 5--15 mm, < 8 mm wide
+. Nisene Marks, Santa Cruz, San Francisco, Marin

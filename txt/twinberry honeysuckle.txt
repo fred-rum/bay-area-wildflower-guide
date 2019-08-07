@@ -1,1 +1,4 @@
+sci:Lonicera involucrata
+color: salmon, yellow, red
+
 The local variety is var. ledebourii.

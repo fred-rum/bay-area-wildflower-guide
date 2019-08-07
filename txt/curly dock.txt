@@ -1,0 +1,2 @@
+sci:Rumex crispus
+color: other, red

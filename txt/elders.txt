@@ -1,14 +1,11 @@
-{sci:Sambucus}
-{+blue elder,2}
-{-
-inflorescence +- flat-topped, central axis generally not dominant
-petals +- spreading
-glaucus blue berries
--}
+sci:Sambucus spp.
 
-{+red-berried elder:Sambucus racemosa}
-{-
-inflorescence +- dome-shaped, central axis generally dominant
-petals often reflexed
-red berries
--}
+==blue elder,2:S. cerulea
+. inflorescence +- flat-topped, central axis generally not dominant
+. petals +- spreading
+. glaucus blue berries
+
+==red-berried elder:S. racemosa
+. inflorescence +- dome-shaped, central axis generally dominant
+. petals often reflexed
+. red berries

@@ -1,0 +1,2 @@
+sci:Trifolium angustifolium
+color: pink, pale purple, other

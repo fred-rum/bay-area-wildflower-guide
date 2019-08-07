@@ -1,15 +1,12 @@
-{sci:Vinca}
-{+greater periwinkle}
-{-
-corolla 3--5 cm wide
-leaf blade +- 7 cm
-common throughout the bay area
--}
+sci:Vinca spp.
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0105+2539} {lesser periwinkle:Vinca minor}
-{-
-corolla 2--3 cm wide
-leaf 2--4.5 cm long
-scattered sparsely throughout the bay area, generally near civilization
-not listed in Jepson; data from Wikipedia
--}
+==greater periwinkle:V. major
+. corolla 3--5 cm wide
+. leaf blade +- 7 cm
+. common throughout the bay area
+
+==lesser periwinkle:V. minor
+. corolla 2--3 cm wide
+. leaf 2--4.5 cm long
+. scattered sparsely throughout the bay area, generally near civilization
+. not listed in Jepson; data from Wikipedia

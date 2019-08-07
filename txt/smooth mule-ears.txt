@@ -1,0 +1,2 @@
+sci:Wyethia glabra
+color: yellow

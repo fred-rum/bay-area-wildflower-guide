@@ -1,26 +1,19 @@
-{sci:Carduus}
-{!ba}
+sci:Carduus spp.
+x:!ba
+
 Key features:
-{-
-number of heads per cluster
-hairiness of phyllary bases
--}
+. number of heads per cluster
+. hairiness of phyllary bases
 
-{+italian thistle}
-{-
-generally 2--5 heads per cluster
-phyllary bases +- persistently loosely tomentose
-very common throughout the bay area
--}
+==italian thistle:C. pycnocephalus
+. generally 2--5 heads per cluster
+. phyllary bases +- persistently loosely tomentose
+. very common throughout the bay area
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0514+1852} {slender thistle:Carduus tenuiflorus}
-{-
-5--20 heads per cluster
-phyllary bases glabrous to sparsely tomentose
-common throughout the bay area
--}
+==slender thistle:C. tenuiflorus
+. 5--20 heads per cluster
+. phyllary bases glabrous to sparsely tomentose
+. common throughout the bay area
 
-{musk thistle:C. nutans}
-{-
-
--}
+==musk thistle:C. nutans
+. 

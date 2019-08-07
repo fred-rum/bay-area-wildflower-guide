@@ -1,96 +1,82 @@
-{sci:Madia}
-{ba}
-{[
+sci:Madia spp.
+x:ba
+
+[
 <h3>relatively large diameter flower head</h3>
 
-{+common madia}
-{-
-stem 6--250 cm, proximally soft- to coarse-hairy, distally glandular-hairy
-leaf 3--20 cm, 2--10 mm wide, lanceolate to linear
-<b>heads in open</b>, flat-topped clusters
-involucre 4.5--12 mm, +- coarse- or soft-hairy, generally also glandular-hairy
-phyllary tips erect or reflexed, flat
-<b>25--80 disk flowers</b>, staminate (no pistil)
-5--22 ray flowers, 4--20 mm, <b>relatively narrow petals</b>, bright yellow, <b>often maroon at base</b>
-scattered, especially south of the bay
--}
+==common madia:M. elegans
+. stem 6--250 cm, proximally soft- to coarse-hairy, distally glandular-hairy
+. leaf 3--20 cm, 2--10 mm wide, lanceolate to linear
+. <b>heads in open</b>, flat-topped clusters
+. involucre 4.5--12 mm, +- coarse- or soft-hairy, generally also glandular-hairy
+. phyllary tips erect or reflexed, flat
+. <b>25--80 disk flowers</b>, staminate (no pistil)
+. 5--22 ray flowers, 4--20 mm, <b>relatively narrow petals</b>, bright yellow, <b>often maroon at base</b>
+. scattered, especially south of the bay
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0810+1019}
-{showy golden madia:Madia radiata}
-{-
-stem 10--90 cm, glandular-hairy
-leaf 2--10 cm, 4--15 mm wide, lanceolate to linear
-<b>heads in open</b>, +- flat-topped clusters
-involucre 4--7 mm, soft-hairy to bristly, hairs hooked at tip, and glandular-hairy
-phyllary tips +- erect or reflexed, flat
-<b>18--65 disk flowers</b>, <b>anthers yellow to +- brown</b>
-8--16 ray flowers, 6--19 mm, <b>relatively wide petals</b>, golden yellow
-La Honda Creek
--}
+==showy golden madia:M. radiata
+. stem 10--90 cm, glandular-hairy
+. leaf 2--10 cm, 4--15 mm wide, lanceolate to linear
+. <b>heads in open</b>, +- flat-topped clusters
+. involucre 4--7 mm, soft-hairy to bristly, hairs hooked at tip, and glandular-hairy
+. phyllary tips +- erect or reflexed, flat
+. <b>18--65 disk flowers</b>, <b>anthers yellow to +- brown</b>
+. 8--16 ray flowers, 6--19 mm, <b>relatively wide petals</b>, golden yellow
+. La Honda Creek
 
-]}
-{[
+]
+[
 <h3>relatively small diameter flower head</h3>
 
-{:M. citriodora}
-{-
-stem 10--70 cm, proximally hairy, distally gladular-hairy, glands purple
-leaf 2--9 cm, 1--10 mm wide, linear
-heads in open, flat-topped clusters
-involucre 6--8 mm, glandular-hairy, often sparsely so
-phyllary tips generally +- erect, flat
-8--50+ disk flower, anthers +- dark purple
-5--12 ray flowers, 4--11 mm, green-yellow
-out of its normal range at Henry Coe
--}
+==M. citriodora
+. stem 10--70 cm, proximally hairy, distally gladular-hairy, glands purple
+. leaf 2--9 cm, 1--10 mm wide, linear
+. heads in open, flat-topped clusters
+. involucre 6--8 mm, glandular-hairy, often sparsely so
+. phyllary tips generally +- erect, flat
+. 8--50+ disk flower, anthers +- dark purple
+. 5--12 ray flowers, 4--11 mm, green-yellow
+. out of its normal range at Henry Coe
 
-{+grassy tarweed}
-{-
-stem 6--100 cm, <b>proximally soft- to coarse-hairy</b>, distally glandular-hairy
-leaf 1--10 cm, 1--8 mm wide, oblong to linear
-<b>heads in +- open</b>, panicle- or raceme-like clusters
-involucre 5--10 mm, finely or coarsely <b>glandular-hairy</b>
-phyllary tips erect or +- reflexed, flat
-2--16+ disk flowers, anthers +- dark purple
-3--10 ray flowers, 1.5--8 mm, lemon-yellow or green-yellow
-very common
--}
+==grassy tarweed:M. gracilis
+. stem 6--100 cm, <b>proximally soft- to coarse-hairy</b>, distally glandular-hairy
+. leaf 1--10 cm, 1--8 mm wide, oblong to linear
+. <b>heads in +- open</b>, panicle- or raceme-like clusters
+. involucre 5--10 mm, finely or coarsely <b>glandular-hairy</b>
+. phyllary tips erect or +- reflexed, flat
+. 2--16+ disk flowers, anthers +- dark purple
+. 3--10 ray flowers, 1.5--8 mm, lemon-yellow or green-yellow
+. very common
 
-{+coast tarweed}
-{-
-stem 35--100 cm, coarse- and glandular-hairy throughout
-leaf 2--18 cm, 3--<b>18 mm wide</b>, broadly lanceolate to linear-oblong or linear
-<b>heads in generally crowded</b>, panicle-, raceme-, or spike-like clusters
-involucre 6--16 mm, coarse- and <b>glandular-hairy</b>
-phyllary tips erect or +- reflexed, flat
-<b>11--45+ disk flowers</b>, anthers +- dark purple
-(5)8--13 ray flowers, 1.5--4 mm, green-yellow or occasionally purple-red abaxially or throughout
-very common
--}
+==coast tarweed:M. sativa
+. stem 35--100 cm, coarse- and glandular-hairy throughout
+. leaf 2--18 cm, 3--<b>18 mm wide</b>, broadly lanceolate to linear-oblong or linear
+. <b>heads in generally crowded</b>, panicle-, raceme-, or spike-like clusters
+. involucre 6--16 mm, coarse- and <b>glandular-hairy</b>
+. phyllary tips erect or +- reflexed, flat
+. <b>11--45+ disk flowers</b>, anthers +- dark purple
+. (5)8--13 ray flowers, 1.5--4 mm, green-yellow or occasionally purple-red abaxially or throughout
+. very common
 
-{plump seeded madia:Madia anomala}
-{-
-stem 20--55 cm, coarse-hairy, distally glandular-hairy
-heads in flat-topped, raceme-, or panicle-like clusters; involucre 5--10 mm; mostly away from immediate coast
-leaf 2--10 cm, 2--7 mm wide, linear
-<b>heads in open</b>,  raceme- or panicle-like clusters
-involucre 6--10 mm, <b>coarse-hairy and glandular-hairy</b>
-phyllary tips erect or +- reflexed, flat
-3--8 disk flowers, anthers +- dark purple
-3--8 ray flowers, 3--4.5 mm, green-yellow
-Sunol, Mt. Tam
--}
+==plump seeded madia:M. anomala
+. stem 20--55 cm, coarse-hairy, distally glandular-hairy
+. heads in flat-topped, raceme-, or panicle-like clusters; involucre 5--10 mm; mostly away from immediate coast
+. leaf 2--10 cm, 2--7 mm wide, linear
+. <b>heads in open</b>,  raceme- or panicle-like clusters
+. involucre 6--10 mm, <b>coarse-hairy and glandular-hairy</b>
+. phyllary tips erect or +- reflexed, flat
+. 3--8 disk flowers, anthers +- dark purple
+. 3--8 ray flowers, 3--4.5 mm, green-yellow
+. Sunol, Mt. Tam
 
-{small tarweed:Madia exigua}
-{-
-stem 1--30 cm, coarse- and glandular-hairy
-leaf 0.2--4 cm, 0.5--2 mm wide, linear
-<b>heads in open</b>, flat-topped or raceme- or panicle-like clusters
-involucre 2.5--5 mm, <b>+- coarse- and glandular-hairy</b>
-phyllary tips +- erect, <b>grooved along midvein</b>
-<b>1(2) disk flower</b>, <b>anthers yellow to +- brown</b>
-1--8 ray flowers, 0.7--1 mm, pale yellow
-scattered
--}
+==small tarweed:M. exigua
+. stem 1--30 cm, coarse- and glandular-hairy
+. leaf 0.2--4 cm, 0.5--2 mm wide, linear
+. <b>heads in open</b>, flat-topped or raceme- or panicle-like clusters
+. involucre 2.5--5 mm, <b>+- coarse- and glandular-hairy</b>
+. phyllary tips +- erect, <b>grooved along midvein</b>
+. <b>1(2) disk flower</b>, <b>anthers yellow to +- brown</b>
+. 1--8 ray flowers, 0.7--1 mm, pale yellow
+. scattered
 
-]}
+]

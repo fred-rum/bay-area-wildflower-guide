@@ -1,30 +1,21 @@
-{sci:Garrya}
-{hist/rare}
+sci:Garrya spp.
+x:hist/rare
+
 Key features:
-{-
-abaxial leaf hairs
-fruit hairs are also useful, but perhaps cannot fully distinguish species on their own
--}
+. abaxial leaf hairs
+. fruit hairs are also useful, but perhaps cannot fully distinguish species on their own
 
-{+coast silk tassel:Garrya elliptica}
-{-
-abaxial leaf hairs dense, curly-wavy, interwoven, felt-like, not appressed toward leaf tip
--}
+==coast silk tassel:G. elliptica
+. abaxial leaf hairs dense, curly-wavy, interwoven, felt-like, not appressed toward leaf tip
 
-{chaparral silktassel:Garrya congdonii}
-{-
-Abaxial leaf hairs dense, fine, wavy, not felt-like, appressed toward leaf tip
-Del Valle
--}
+==chaparral silktassel:G. congdonii
+. Abaxial leaf hairs dense, fine, wavy, not felt-like, appressed toward leaf tip
+. Del Valle
 
-{ashy silktassel:Garrya flavescens}
-{-
-abaxial leaf hairs sparse to dense, +- coarse, straight to +- curved, not felt-like appressed toward leaf tip
-Coe, Diablo
--}
+==ashy silktassel:G. flavescens
+. abaxial leaf hairs sparse to dense, +- coarse, straight to +- curved, not felt-like appressed toward leaf tip
+. Coe, Diablo
 
-{frémont's silktassel:Garrya fremontii}
-{-
-abaxial leaf hairs 0 (or sparse on young leaves)
-Coe, Sierra Azul, El Sereno, Mt. Tam, Mt. Diablo
--}
+==frémont's silktassel:G. fremontii
+. abaxial leaf hairs 0 (or sparse on young leaves)
+. Coe, Sierra Azul, El Sereno, Mt. Tam, Mt. Diablo

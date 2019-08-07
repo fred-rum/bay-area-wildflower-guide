@@ -1,10 +1,7 @@
-{sci:n/a}
-{+vetches}
-{-
-leaves folded lengthwise (because they were folded in bud)
--}
+sci:n/a
 
-{+sweet peas and vetchlings}
-{-
-leaves not folded lengthwise (because they were rolled in bud)
--}
+==vetches:Vicia spp.
+. leaves folded lengthwise (because they were folded in bud)
+
+==sweet peas and vetchlings:Lathyrus spp.
+. leaves not folded lengthwise (because they were rolled in bud)

@@ -1,0 +1,2 @@
+sci:Rhinotropis californica
+color: pink, pale purple

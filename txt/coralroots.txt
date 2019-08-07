@@ -1,22 +1,17 @@
-{sci:Corallorhiza}
-{ba}
-{+striped coralroot}
-{-
-3-5 stripes
-lip entire
--}
+sci:Corallorhiza spp.
+x:ba
 
-{+spotted coralroot}
-{-
-no stripes
-lip with 2 lobes laterally; lobes are rounded, prominent
--}
+==striped coralroot:C. striata
+. 3-5 stripes
+. lip entire
+
+==spotted coralroot:C. maculata
+. no stripes
+. lip with 2 lobes laterally; lobes are rounded, prominent
 <p/>
 Spotted coralroot has <a href="https://keybase.rbg.vic.gov.au/keys/show/3985?filter_id=55b17b6f8c990">two varieties:</a> <a href="https://www.calflora.org/cgi-bin/species_query.cgi?where-taxon=Corallorhiza+maculata+var.+maculata">var. maculata</a> and <a href="https://www.calflora.org/cgi-bin/species_query.cgi?where-taxon=Corallorhiza+maculata+var.+occidentalis">var. occidentalis</a>.
 
-{pacific coralroot:C. mertensiana}
-{-
-no stripes
-lip with 2 lobes laterally; lobes are acute, prominent or not
-very rare
--}
+==pacific coralroot:C. mertensiana
+. no stripes
+. lip with 2 lobes laterally; lobes are acute, prominent or not
+. very rare

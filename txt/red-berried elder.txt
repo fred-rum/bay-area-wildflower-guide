@@ -1,12 +1,10 @@
-{ca}
-{+american red elder:Sambucus racemosa ssp. racemosa}
-{-
-red berries
-only subspecies found in the bay area
--}
+sci:Sambucus racemosa
+x:ca
 
-{rocky mountain elder:Sambucus racemosa var. melanocarpa}
-{-
-purple-black berries
-in California is only found in the Sierras
--}
+==american red elder:S. racemosa ssp. racemosa
+. red berries
+. only subspecies found in the bay area
+
+==rocky mountain elder:S. racemosa var. melanocarpa
+. purple-black berries
+. in California is only found in the Sierras

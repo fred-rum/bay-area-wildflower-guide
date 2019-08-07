@@ -1,0 +1,2 @@
+sci:Leptosiphon ambiguus
+color: pale purple

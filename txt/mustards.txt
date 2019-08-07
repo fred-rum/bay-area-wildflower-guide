@@ -1,26 +1,21 @@
-{sci:n/a}
-{+cabbages and mustards}
-{-
-<b>sepals generally erect to ascending</b>
-basal leaves in a rosette
-distal cauline leaves sessile
-very common
--}
+sci:n/a
 
-{+shortpod mustard:Hirschfeldia incana}
-{-
-<b>sepals spreading to reflexed</b>
-stigma entire
-<b>basal leaves in a rosette</b>
-cauline leaves dentate to pinnately lobed, petioled or sessile
-very common
--}
+==cabbages and mustards:Brassica spp.
+. <b>sepals generally erect to ascending</b>
+. basal leaves in a rosette
+. distal cauline leaves sessile
+. very common
 
-{+wild mustard:Sinapis arvensis}
-{-
-<b>sepals spreading</b>
-stigma 2-lobed [?]
-<b>basal leaves not in a rosette</b>
-cauline leaves short-petioled, dentate
-uncommon
--}
+==shortpod mustard:Hirschfeldia incana
+. <b>sepals spreading to reflexed</b>
+. stigma entire
+. <b>basal leaves in a rosette</b>
+. cauline leaves dentate to pinnately lobed, petioled or sessile
+. very common
+
+==wild mustard:Sinapis arvensis
+. <b>sepals spreading</b>
+. stigma 2-lobed [?]
+. <b>basal leaves not in a rosette</b>
+. cauline leaves short-petioled, dentate
+. uncommon

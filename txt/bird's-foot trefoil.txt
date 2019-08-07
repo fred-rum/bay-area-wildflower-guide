@@ -1,0 +1,2 @@
+sci:Lotus corniculatus
+color: yellow

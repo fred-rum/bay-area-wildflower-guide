@@ -1,0 +1,2 @@
+sci:Romulea rosea
+color: pale purple

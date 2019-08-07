@@ -1,15 +1,12 @@
-{sci:Calendula}
-{ca}
-{+field marigold:C. arvensis}
-{-
-head, including rays, generally 1--4 cm diam
-5--20 ray flowers, 5--8 mm
-leaf +- lanceolate 
--}
+sci:Calendula spp.
+x:ca
 
-{pot marigold:C. officinalis}
-{-
-head, including rays, generally > 5 cm diam
-30--50+ ray flowers, generally 12--20 mm
-leaf oblong  to obovate
--}
+==field marigold:C. arvensis
+. head, including rays, generally 1--4 cm diam
+. 5--20 ray flowers, 5--8 mm
+. leaf +- lanceolate 
+
+==pot marigold:C. officinalis
+. head, including rays, generally > 5 cm diam
+. 30--50+ ray flowers, generally 12--20 mm
+. leaf oblong  to obovate

@@ -1,51 +1,42 @@
-{sci:Medicago}
-{ba}
-{[
+sci:Medicago spp.
+x:ba
+
+[
 <h2>similar-sized yellow flower</h2>
-{+bur clover:M. polymorpha}
-{-
-generally glabrous
-stem prostrate, mat-forming, or ascending
-leaflet without dark central spot, length 1--2 &times; width
-stipules generally cut +- >= &frac12; width
-corolla 3.5--6 mm, yellow
-very common
--}
+==bur clover:M. polymorpha
+. generally glabrous
+. stem prostrate, mat-forming, or ascending
+. leaflet without dark central spot, length 1--2 &times; width
+. stipules generally cut +- >= &frac12; width
+. corolla 3.5--6 mm, yellow
+. very common
 
-{+spotted medick:M. arabica}
-{-
-hair 0 to sparse
-stem generally sprawling
-<b>leaflets with dark central spot</b>, length +- = width
-stipules generally cut &frac14;--&frac12; width
-corolla 4--5 mm, yellow
-uncommon
--}
+==spotted medick:M. arabica
+. hair 0 to sparse
+. stem generally sprawling
+. <b>leaflets with dark central spot</b>, length +- = width
+. stipules generally cut &frac14;--&frac12; width
+. corolla 4--5 mm, yellow
+. uncommon
 
-{button medick:M. orbicularis}
-{-
-+- glabrous
-stem spreading, mat-forming
-<b>stipules generally divided +- to base into a cluster of bristles</b>
-corolla 3--6 mm, <b>yellow with +- dark purple spot on back of banner</b>
-Jepson says it's a waif, but its been recorded around Quicksilver for 50 years now
--}
+==button medick:M. orbicularis
+. +- glabrous
+. stem spreading, mat-forming
+. <b>stipules generally divided +- to base into a cluster of bristles</b>
+. corolla 3--6 mm, <b>yellow with +- dark purple spot on back of banner</b>
+. Jepson says it's a waif, but its been recorded around Quicksilver for 50 years now
 
-]}
+]
 
-{black medick:M. lupulina}
-{-
-hairy or glandular-hairy
-stem prostrate to ascending, angled
-stipules entire or toothed
-<b>corolla 2--3 mm, yellow</b>
-uncommon
--}
+==black medick:M. lupulina
+. hairy or glandular-hairy
+. stem prostrate to ascending, angled
+. stipules entire or toothed
+. <b>corolla 2--3 mm, yellow</b>
+. uncommon
 
-{alfalfa:M. sativa}
-{-
-glabrous or puberulent
-stem generally erect
-stipules entire to sharply toothed
-corolla 6--11 mm, <b>violet or violet- to yellow-green (yellow)</b>
--}
+==alfalfa:M. sativa
+. glabrous or puberulent
+. stem generally erect
+. stipules entire to sharply toothed
+. corolla 6--11 mm, <b>violet or violet- to yellow-green (yellow)</b>

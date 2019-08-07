@@ -1,0 +1,2 @@
+sci:Astragalus gambelianus
+color: pale purple

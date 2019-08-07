@@ -1,3 +1,4 @@
-{+mediterranean lineseed}
+sci:Bellardia spp.
+==mediterranean lineseed:B. trixago
 
-{+yellow glandweed}
+==yellow glandweed:B. viscosa

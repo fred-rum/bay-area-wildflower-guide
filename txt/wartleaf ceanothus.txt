@@ -1,0 +1,2 @@
+sci:Ceanothus papillosus
+color: blue, purple

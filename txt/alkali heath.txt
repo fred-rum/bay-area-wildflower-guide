@@ -1,1 +1,3 @@
-{hist/rare}
+sci:Frankenia salina
+color: pink
+x:hist/rare

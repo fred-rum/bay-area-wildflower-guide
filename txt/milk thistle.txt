@@ -1,1 +1,3 @@
-{ba}
+sci:Silybum marianum
+color: purple
+x:ba

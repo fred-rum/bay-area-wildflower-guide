@@ -1,31 +1,24 @@
-{sci:Fritillaria}
-{hist}
-{+checker lily:F. affinis}
-{-
-leaves < 10 or in whorls of 2--8 on lower stem, not sickle-shaped
-[all others are have leaves <= 10 <b>or</b> alternate (crowded), occasionally sickle-shaped]
-very common
--}
+sci:Fritillaria spp.
+x:hist
 
-{+fragrant fritillary:F. liliacea}
-{-
-nectary an obscure narow band 1/2--2/3 perianth
-perianth white, striped green
-uncommon
--}
+==checker lily:F. affinis
+. leaves < 10 or in whorls of 2--8 on lower stem, not sickle-shaped
+. [all others are have leaves <= 10 <b>or</b> alternate (crowded), occasionally sickle-shaped]
+. very common
 
-{stinkbells:F. agrestis}
-{-
-nectary a prominent narrow band 2/3 to = perianth
-perianth green-white or yellow abaxially, purple-brown adaxially
-flower ill-scented
-Ano Nuevo, very rare in other bay area locations
--}
+==fragrant fritillary:F. liliacea
+. nectary an obscure narow band 1/2--2/3 perianth
+. perianth white, striped green
+. uncommon
 
-{chocolate lily:F. biflora}
-{-
-nectary a prominent narrow band 2/3 to = perianth
-perianth dark brown, green-purple or yellow-green
-flower ill-scented or not
-rare in San Mateo County
--}
+==stinkbells:F. agrestis
+. nectary a prominent narrow band 2/3 to = perianth
+. perianth green-white or yellow abaxially, purple-brown adaxially
+. flower ill-scented
+. Ano Nuevo, very rare in other bay area locations
+
+==chocolate lily:F. biflora
+. nectary a prominent narrow band 2/3 to = perianth
+. perianth dark brown, green-purple or yellow-green
+. flower ill-scented or not
+. rare in San Mateo County

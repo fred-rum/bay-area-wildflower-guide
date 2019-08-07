@@ -1,106 +1,78 @@
-{sci:Clarkia}
+sci:Clarkia spp.
+
 Key features:
-{-
-corolla shape and color distribution
-buds pendant or not
-all 4 sepals staying fused or not
-ovary 4-grooved or 8-grooved
--}
+. corolla shape and color distribution
+. buds pendant or not
+. all 4 sepals staying fused or not
+. ovary 4-grooved or 8-grooved
 
 <h3>Unique corolla shapes</h3>
-{[
-{+elegant clarkia}
-{-
-axis in bud straight; buds reflexed [i.e. <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=5207+1611+0748+0049"> drooping</a>]
-all 4 sepals staying fused [theoretically, but this varies]
-petals 10--25 mm [unspotted]; petal claw slender [unlobed]
-found everywhere
--}
+[
+==elegant clarkia:C. unguiculata
+. axis in bud straight; buds reflexed [i.e. <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=5207+1611+0748+0049"> drooping</a>]
+. all 4 sepals staying fused [theoretically, but this varies]
+. petals 10--25 mm [unspotted]; petal claw slender [unlobed]
+. found everywhere
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=8076+3101+0669+0058} {diamond clarkia:Clarkia rhomboidea}
-{-
-looks much like elegant clarkia
-axis in bud <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=5207+1611+0748+0092">recurved at tip</a>; buds pendent
-sepals all coming free [sometimes reflexed, sometimes spreading]
-petals 6--12 mm, generally spotted; petal claw broad, 2-lobed
-found at Sierra Azul
--}
+==diamond clarkia:C. rhomboidea
+. looks much like elegant clarkia
+. axis in bud <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=5207+1611+0748+0092">recurved at tip</a>; buds pendent
+. sepals all coming free [sometimes reflexed, sometimes spreading]
+. petals 6--12 mm, generally spotted; petal claw broad, 2-lobed
+. found at Sierra Azul
 
-]}
+]
 
-{+red ribbons}
-{-
-scattered throughout the bay area
--}
+==red ribbons:C. concinna
+. scattered throughout the bay area
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1210+0994}
-{fairy fans:Clarkia breweri}
-{-
-Henry Coe, Sierra Azul and vicinity
--}
+==fairy fans:C. breweri
+. Henry Coe, Sierra Azul and vicinity
 
 <h3>Standard corolla shapes, buds erect or reflexed</h3>
 
-{+winecup clarkia}
-{-
-<b>sepals all coming free or staying fused in pairs</b>
-ovary 8-grooved
-found everywhere
--}
+==winecup clarkia:C. purpurea
+. <b>sepals all coming free or staying fused in pairs</b>
+. ovary 8-grooved
+. found everywhere
 
-{+ruby chalice clarkia}
-{-
-all 4 sepals staying fused
-ovary and immature fruit 4-grooved
-petals with +- red spot or zone at <b>base</b>
-petals <b>10--30 mm</b>; stigma exserted beyond anthers
-found everywhere
--}
+==ruby chalice clarkia:C. rubicunda
+. all 4 sepals staying fused
+. ovary and immature fruit 4-grooved
+. petals with +- red spot or zone at <b>base</b>
+. petals <b>10--30 mm</b>; stigma exserted beyond anthers
+. found everywhere
 
-{presidio clarkia:Clarkia franciscana}
-{-
-all 4 sepals staying fused
-ovary and immature fruit 4-grooved
-petals with +- red spot or zone at <b>base</b>
-petals <b>5--13 mm</b>; stigma not exserted beyond anthers
-Redwood Regional Park
--}
+==presidio clarkia:C. franciscana
+. all 4 sepals staying fused
+. ovary and immature fruit 4-grooved
+. petals with +- red spot or zone at <b>base</b>
+. petals <b>5--13 mm</b>; stigma not exserted beyond anthers
+. Redwood Regional Park
 
-{farewell to spring:Clarkia amoena ssp. huntiana}
-{-
-all 4 sepals staying fused
-ovary and immature fruit 4-grooved
-petals with red spot or marks near <b>middle</b>
-Sunol, scattered in the Santa Cruz range, Marin
--}
+==farewell to spring:C. amoena ssp. huntiana
+. all 4 sepals staying fused
+. ovary and immature fruit 4-grooved
+. petals with red spot or marks near <b>middle</b>
+. Sunol, scattered in the Santa Cruz range, Marin
 
-{+chaparral clarkia}
-{-
-all 4 sepals staying fused
-ovary and immature fruit <b>8-grooved</b>
-scattered around the east bay; only historically on the peninsula
--}
+==chaparral clarkia:C. affinis
+. all 4 sepals staying fused
+. ovary and immature fruit <b>8-grooved</b>
+. scattered around the east bay; only historically on the peninsula
 
 <h3>Standard corolla shapes, buds pendent</h3>
 
 (I haven't sorted these by key features because I've never needed to distinguish them.)
 
-{twolobe clarkia:Clarkia biloba ssp. biloba}
-{-
-Mt. Diablo
--}
+==twolobe clarkia:C. biloba ssp. biloba
+. Mt. Diablo
 
-{canyon clarkia:Clarkia epilobioides}
-{-
-Henry Coe, Sierra Azul, and maybe Rancho San Antonio
--}
+==canyon clarkia:C. epilobioides
+. Henry Coe, Sierra Azul, and maybe Rancho San Antonio
 
-{slender clarkia:Clarkia gracilis}
-{-
-scattered in Diablo range
--}
+==slender clarkia:C. gracilis
+. scattered in Diablo range
 
-{waltham creek clarkia:Clarkia modesta}
-{-
-scattered in Diablo range
--}
+==waltham creek clarkia:C. modesta
+. scattered in Diablo range

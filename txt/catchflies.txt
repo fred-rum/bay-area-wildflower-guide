@@ -1,4 +1,5 @@
-{sci:Silene}
-{+small-flowered catchfly}
+sci:Silene spp.
 
-{+north californian indian pink}
+==small-flowered catchfly:S. gallica
+
+==north californian indian pink:S. laciniata ssp. californica

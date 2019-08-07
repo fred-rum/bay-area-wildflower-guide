@@ -1,0 +1,2 @@
+sci:Rumex pulcher
+color: other, red

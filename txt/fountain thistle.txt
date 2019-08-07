@@ -1,11 +1,7 @@
-{sci:Cirsium fontinale}
-{+mount hamilton fountain thistle:Cirsium fontinale var. campylon}
-{-
-scattered south of the bay
--}
+sci:Cirsium fontinale
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0611+1149}
-{crystal springs fountain thistle:Cirsium fontinale var. fontinale}
-{-
-scattered along 280 from Edgewood to San Andreas Lake
--}
+==mount hamilton fountain thistle:C. fontinale var. campylon
+. scattered south of the bay
+
+==crystal springs fountain thistle:C. fontinale var. fontinale
+. scattered along 280 from Edgewood to San Andreas Lake

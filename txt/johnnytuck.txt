@@ -1,0 +1,2 @@
+sci:Triphysaria eriantha
+color: yellow, cream

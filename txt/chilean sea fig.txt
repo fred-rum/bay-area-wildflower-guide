@@ -1,0 +1,2 @@
+sci:Carpobrotus chilensis
+color: red purple, pink, yellow

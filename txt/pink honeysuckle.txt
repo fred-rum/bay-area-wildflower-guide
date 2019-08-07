@@ -1,0 +1,2 @@
+sci:Lonicera hispidula
+color: pink, red purple

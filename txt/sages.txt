@@ -1,4 +1,5 @@
-{sci:Salvia}
-{+black sage}
+sci:Salvia spp.
 
-{+chia}
+==black sage:S. mellifera
+
+==chia:S. columbariae

@@ -1,10 +1,7 @@
-{sci:Lithophragma}
-{+hillside woodland star}
-{-
-hypanthium (calyx base) truncate
--}
+sci:Lithophragma spp.
 
-{+san francisco woodland-star,2}
-{-
-hypanthium (calyx base) tapered to pedicel
--}
+==hillside woodland star:L. heterophyllum
+. hypanthium (calyx base) truncate
+
+==san francisco woodland-star,2:L. affine
+. hypanthium (calyx base) tapered to pedicel

@@ -1,26 +1,21 @@
-{sci:Dipsacus}
+sci:Dipsacus spp.
+
 <b>Warning</b>: "fuller's teasel" is used for either or both teasels depending on the source.
 
 Key features:
-{-
-receptacle bract shape, flexible or not [these are the long spines sprouting from the base]
-involucre bract shape [these are the short spines throughout the teasel head]
-leaves widely or narrowly fused around stem
-flower color
--}
+. receptacle bract shape, flexible or not [these are the long spines sprouting from the base]
+. involucre bract shape [these are the short spines throughout the teasel head]
+. leaves widely or narrowly fused around stem
+. flower color
 
-{+indian teasel}
-{-
-receptacle bract ending in a recurved, stiff spine
-involucre bract generally +- spreading or reflexed
-leaf pairs fused to widely fused around stem
-flowers are white, sometimes tinged pink or pale purple
--}
+==indian teasel:D. sativus
+. receptacle bract ending in a recurved, stiff spine
+. involucre bract generally +- spreading or reflexed
+. leaf pairs fused to widely fused around stem
+. flowers are white, sometimes tinged pink or pale purple
 
-{fuller's teasel:Dipsacus fullonum}
-{-
-receptacle bract ending in a straight, +- flexible spine
-involucre bract generally spreading or upcurved
-leaf pairs generally narrowly fused around stem
-flowers are +- purple
--}
+==fuller's teasel:D. fullonum
+. receptacle bract ending in a straight, +- flexible spine
+. involucre bract generally spreading or upcurved
+. leaf pairs generally narrowly fused around stem
+. flowers are +- purple

@@ -1,94 +1,70 @@
-{sci:Solanum}
-{hist/rare}
-{[
+sci:Solanum spp.
+x:hist/rare
+
+[
 <h3>Purple nightshades</h3>
 
 Key features:
-{-
-Hairs are branched or 0/simple on upper stem (not flower pedicel).  The hairs are so tiny that maximum camera close-up doesn't always show them branching, but it does show them matted rather than straight.
-Leaf shape.  There is some overlap, but the shapes are often distinct.
--}
+. Hairs are branched or 0/simple on upper stem (not flower pedicel).  The hairs are so tiny that maximum camera close-up doesn't always show them branching, but it does show them matted rather than straight.
+. Leaf shape.  There is some overlap, but the shapes are often distinct.
 
-{+bluewitch nightshade}
-{-
-upper stem hairs generally dense, branched
-leaf 1--4 cm, ovate, obovate, or elliptic, generally entire
--}
+==bluewitch nightshade:S. umbelliferum
+. upper stem hairs generally dense, branched
+. leaf 1--4 cm, ovate, obovate, or elliptic, generally entire
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0110+1545} {purple nightshade:Solanum xanti}
-{-
-stem +-hairy, hairs are unbranched, glandular or not
-leaf 2--7 cm, lanceolate to ovate, +-entire to 1--2-lobed at base; base obtuse to +-cordate
--}
+==purple nightshade:S. xanti
+. stem +-hairy, hairs are unbranched, glandular or not
+. leaf 2--7 cm, lanceolate to ovate, +-entire to 1--2-lobed at base; base obtuse to +-cordate
 
-{new zealand nightshade:S. aviculare}
-{-
-leaf 10--30 cm, +- entire to deeply 1--2-lobed below middle
--}
+==new zealand nightshade:S. aviculare
+. leaf 10--30 cm, +- entire to deeply 1--2-lobed below middle
 
-{silverleaf nightshade:S. elaeagnifolium}
-{-
-plant often prickly
--}
+==silverleaf nightshade:S. elaeagnifolium
+. plant often prickly
 
-]}
-{[
+]
+[
 <h3>White nightshades</h3>
 
 Fruit key features:
-{-
-glossy or dull
-sepals reflexed or not
--}
+. glossy or dull
+. sepals reflexed or not
 
 Flower key features:
-{-
-corolla diameter
-leaf toothed or not
-hairs gladular or not
--}
+. corolla diameter
+. leaf toothed or not
+. hairs gladular or not
 
 Some features are variable within a species, but if a <b>bold feature</b> is seen, it is diagnostic.
 
-{+black nightshade}
-{-
-corolla: 20 mm diameter [corrected], white
-inflorescence: <b>raceme-like</b> (pedicels spaced along a sprout)
-leaf: 4--7 cm, entire to coarsely wavy-toothed
-hairs: +-spreading or curved, <b>glandular</b> and not
-fruit: <b>dull</b>
--}
+==black nightshade:S. nigrum
+. corolla: 20 mm diameter [corrected], white
+. inflorescence: <b>raceme-like</b> (pedicels spaced along a sprout)
+. leaf: 4--7 cm, entire to coarsely wavy-toothed
+. hairs: +-spreading or curved, <b>glandular</b> and not
+. fruit: <b>dull</b>
 
-{+greenspot nightshade}
-{-
-corolla: +-20 mm diameter [corrected], <b>white-lavender</b>
-inflorescence: generally <b>umbel-like</b> (all pedicels from a common point)
-leaf: 1--9 cm, entire to coarsely irregularly <b>toothed</b>
-hairs: generally simple, < 1mm, +-curved, white
-fruit: <b>glossy</b> w/ <b>sepals not reflexed</b>
--}
+==greenspot nightshade:S. douglasii
+. corolla: +-20 mm diameter [corrected], <b>white-lavender</b>
+. inflorescence: generally <b>umbel-like</b> (all pedicels from a common point)
+. leaf: 1--9 cm, entire to coarsely irregularly <b>toothed</b>
+. hairs: generally simple, < 1mm, +-curved, white
+. fruit: <b>glossy</b> w/ <b>sepals not reflexed</b>
 
-{+american black nightshade,2}
-{-
-corolla: <b>6--12 mm diameter</b> [corrected], white
-leaf: 2--15 cm, entire to coarsely wavy-toothed
-hairs: +-0 or short, +-appressed or curved, nonglandular
-fruit: <b>glossy</b> w/ <b>sepals reflexed</b>
--}
+==american black nightshade,2:S. americanum
+. corolla: <b>6--12 mm diameter</b> [corrected], white
+. leaf: 2--15 cm, entire to coarsely wavy-toothed
+. hairs: +-0 or short, +-appressed or curved, nonglandular
+. fruit: <b>glossy</b> w/ <b>sepals reflexed</b>
 
-{hairy nightshade:S. physalifolium var. nitidibaccatum}
-{-
-corolla: <b>3--5 mm wide</b>, white
-leaf: 2--6 cm, ovate, entire to irregular-toothed or shallowly lobed
-hairs: spreading, some glandular
-fruit: +- yellow or green
-rare
--}
+==hairy nightshade:S. physalifolium var. nitidibaccatum
+. corolla: <b>3--5 mm wide</b>, white
+. leaf: 2--6 cm, ovate, entire to irregular-toothed or shallowly lobed
+. hairs: spreading, some glandular
+. fruit: +- yellow or green
+. rare
 
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0613+0431:forked inflorescence}
-{forked nightshade:Solanum furcatum}
-{-
-The inflorescence is forked into two distinct sections.
--}
-]}
+==forked nightshade:S. furcatum
+. The inflorescence is forked into two distinct sections.
+]

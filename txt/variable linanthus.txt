@@ -1,0 +1,2 @@
+sci:Leptosiphon parviflorus
+color: purple, pale purple, pink, yellow, white

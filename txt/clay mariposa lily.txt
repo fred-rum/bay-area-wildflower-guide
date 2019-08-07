@@ -1,0 +1,2 @@
+sci:Calochortus argillosus
+color: white, pink, pale purple, purple

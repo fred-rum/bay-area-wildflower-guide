@@ -1,103 +1,84 @@
-{sci:Erigeron}
-{hist/rare}
-Key features:
-{-
-ray length (or not present)
-disk corolla 4-lobed or 5-lobed
-phyllarys graduated or +- equal
-peduncle length
-cauline leaf shape, clasping or not
-basal leaves or not
-leaf hair pattern (if any)
-stem hairy or glabrous
--}
+sci:Erigeron spp.
+x:hist/rare
 
-{[
+Key features:
+. ray length (or not present)
+. disk corolla 4-lobed or 5-lobed
+. phyllarys graduated or +- equal
+. peduncle length
+. cauline leaf shape, clasping or not
+. basal leaves or not
+. leaf hair pattern (if any)
+. stem hairy or glabrous
+
+[
 <h2>heads with conspicuous rays</h2>
 
-{+seaside daisy:E. glaucus}
-{-
-rays 8--15 mm
-leaves thick, +- fleshy, entire or toothed
-all along Pacific coast (coastal bluffs, dunes, beaches)
--}
+==seaside daisy:E. glaucus
+. rays 8--15 mm
+. leaves thick, +- fleshy, entire or toothed
+. all along Pacific coast (coastal bluffs, dunes, beaches)
 
-{leafy flebane:E. foliosus}
-{-
-rays 6--15 mm
-phyllaries strongly graduated
-no basal leaves
-cauline leaves thread-like to widely oblanceolate, entire, not clasping, evenly sized and spaced
-scattered
-two variants distinguished by phyllary glands
--}
+==leafy flebane:E. foliosus
+. rays 6--15 mm
+. phyllaries strongly graduated
+. no basal leaves
+. cauline leaves thread-like to widely oblanceolate, entire, not clasping, evenly sized and spaced
+. scattered
+. two variants distinguished by phyllary glands
 
-{+santa barbara daisy:E. karvinskianus}
-{-
-ray 5--8 mm
-phyllaries generally +- equal
-no basal leaves at flower
-cauline leaves elliptic to obovate, not at all clasping, entire or with 1--2 pairs of acute teeth or shallow lobes near tip
-rare
--}
+==santa barbara daisy:E. karvinskianus
+. ray 5--8 mm
+. phyllaries generally +- equal
+. no basal leaves at flower
+. cauline leaves elliptic to obovate, not at all clasping, entire or with 1--2 pairs of acute teeth or shallow lobes near tip
+. rare
 
-{philadelphia fleabane:E. philadelphicus var. philadelphicus}
-{-
-rays 6--9 mm
-phyllaries generally +- equal
-basal leaves present
-cauline leaves clasping
-uncommon
--}
+==philadelphia fleabane:E. philadelphicus var. philadelphicus
+. rays 6--9 mm
+. phyllaries generally +- equal
+. basal leaves present
+. cauline leaves clasping
+. uncommon
 
-]}
-{[
+]
+[
 <h2>rays barely exceeding involucre</h2>
 
-{horseweed:E. canadensis}
-{-
-rays 0.3--1 mm
-central stem generally exceeding distal branches
-heads +- short-peduncled in panicle-like clusters
-leaf +- long-bristly-ciliate
-central colored part of middle phyllaries narrower than light-colored margin, resin-filled, +- red-brown when dry
-disk corolla generally 4-lobed
-common
--}
+==horseweed:E. canadensis
+. rays 0.3--1 mm
+. central stem generally exceeding distal branches
+. heads +- short-peduncled in panicle-like clusters
+. leaf +- long-bristly-ciliate
+. central colored part of middle phyllaries narrower than light-colored margin, resin-filled, +- red-brown when dry
+. disk corolla generally 4-lobed
+. common
 
-{tropical horseweed:E. sumatrensis}
-{-
-rays 0--0.3 mm
-central stem generally exceeding branches
-heads +- short-peduncled in panicle-like clusters
-leaf margin +- fine-strigose
-central part of middle phyllaries generally wider than lighter margin, not red-brown or resin-filled when dry
-disk corolla generally 5-lobed
-scattered mainly near Pacific coast
--}
+==tropical horseweed:E. sumatrensis
+. rays 0--0.3 mm
+. central stem generally exceeding branches
+. heads +- short-peduncled in panicle-like clusters
+. leaf margin +- fine-strigose
+. central part of middle phyllaries generally wider than lighter margin, not red-brown or resin-filled when dry
+. disk corolla generally 5-lobed
+. scattered mainly near Pacific coast
 
-{flax-leaved horseweed:E. bonariensis}
-{-
-rays 0--0.3 mm
-central stem often overtopped by distal branches in age
-heads +- long-peduncled, generally in raceme-like clusters
-scattered
--}
+==flax-leaved horseweed:E. bonariensis
+. rays 0--0.3 mm
+. central stem often overtopped by distal branches in age
+. heads +- long-peduncled, generally in raceme-like clusters
+. scattered
 
-]}
-{[
+]
+[
 <h2>no rays</h2>
 
-{rock-loving fleabane:E. petrophilus var. petrophilus}
-{-
-stem +- long-loose-spreading-hairy, densely glandular near heads or not
-rare
--}
+==rock-loving fleabane:E. petrophilus var. petrophilus
+. stem +- long-loose-spreading-hairy, densely glandular near heads or not
+. rare
 
-{narrow leaved rayless fleabane:E. reductus var. angustatus}
-{-
-stem glabrous
-rare
--}
+==narrow leaved rayless fleabane:E. reductus var. angustatus
+. stem glabrous
+. rare
 
-]}
+]

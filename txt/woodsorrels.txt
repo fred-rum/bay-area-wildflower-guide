@@ -1,75 +1,64 @@
-{sci:Oxalis}
-{[
+sci:Oxalis spp.
+
+[
 <h3>purple or pale flowers</h3>
 
-{+redwood sorrel}
-{-
-stem +- 0
-Leaf: < 10, <b>clustered at rhizome tips</b>
-petiole < 20 cm, hairy
-leaflets < 4 cm, often +- purple abaxially, midribs pale
-Inflorescence: peduncle < 15 cm; <b>bracts 2, near tip</b>
-sepals < 1 cm, lanceolate
-petals < 2.5 cm, white to deep pink
-+- undisturbed forests
--}
+==redwood sorrel:O. oregana
+. stem +- 0
+. Leaf: < 10, <b>clustered at rhizome tips</b>
+. petiole < 20 cm, hairy
+. leaflets < 4 cm, often +- purple abaxially, midribs pale
+. Inflorescence: peduncle < 15 cm; <b>bracts 2, near tip</b>
+. sepals < 1 cm, lanceolate
+. petals < 2.5 cm, white to deep pink
+. +- undisturbed forests
 
-{+pale pink-sorrel}
-{-
-Stem: <b>erect, branched, < 30 cm</b>, glabrous; <b>axils often with bulblets</b>
-Leaf: cauline, in whorl-like clusters of < 10, lower opposite or not
-petiole 2--7 cm
-leaflets < 1.5 cm
-inflorescence: peduncle < 7 cm; <b>bracts 2, near middle</b>
-sepals < 6 mm, oblong, acute, tips with 2 orange tubercles
-petals < 2 cm, white to pale pink
-Edgewood, near Santa Cruz, near Oakland/Berkeley 
--}
+==pale pink-sorrel:O. incarnata
+. Stem: <b>erect, branched, < 30 cm</b>, glabrous; <b>axils often with bulblets</b>
+. Leaf: cauline, in whorl-like clusters of < 10, lower opposite or not
+. petiole 2--7 cm
+. leaflets < 1.5 cm
+. inflorescence: peduncle < 7 cm; <b>bracts 2, near middle</b>
+. sepals < 6 mm, oblong, acute, tips with 2 orange tubercles
+. petals < 2 cm, white to pale pink
+. Edgewood, near Santa Cruz, near Oakland/Berkeley 
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0312+1507} {purple woodsorrel:Oxalis purpurea}
-{-
-stem +- 0
-leaf: < 8, <b>in basal rosette</b>; petiole < 5 cm
-leaflets < 4 cm, sparsely hairy or more densely hairy abaxially and on margins
-inflorescence: peduncle 1--11 cm; <b>bracts 2, at or below middle</b>
-sepals < 1 cm, +- lanceolate, <b>hairy</b>
-petals < 2.5 cm, purple to red, pink, or white [yellow]
-Nisene Marks, Montara Mtn.
--}
+==purple woodsorrel:O. purpurea
+. stem +- 0
+. leaf: < 8, <b>in basal rosette</b>; petiole < 5 cm
+. leaflets < 4 cm, sparsely hairy or more densely hairy abaxially and on margins
+. inflorescence: peduncle 1--11 cm; <b>bracts 2, at or below middle</b>
+. sepals < 1 cm, +- lanceolate, <b>hairy</b>
+. petals < 2.5 cm, purple to red, pink, or white [yellow]
+. Nisene Marks, Montara Mtn.
 
-]}
-{[
+]
+[
 <h3>yellow flowers</h3>
 
-{+bermuda buttercup}
-{-
-<b>stem generally underground</b>
-<b>leaves in loose, +- basal rosette</b>; petiole < 12 cm
-leaflets < 3.5 cm, often purple-spotted, abaxially hairy
-inflorescence: umbel-like, < 20-flowered; peduncle < 30 cm
-sepals < 7 mm, lanceolate to oblong, tips often with 2 orange tubercles
-petals < 2.5 cm, yellow
--}
+==bermuda buttercup:O. pes-caprae
+. <b>stem generally underground</b>
+. <b>leaves in loose, +- basal rosette</b>; petiole < 12 cm
+. leaflets < 3.5 cm, often purple-spotted, abaxially hairy
+. inflorescence: umbel-like, < 20-flowered; peduncle < 30 cm
+. sepals < 7 mm, lanceolate to oblong, tips often with 2 orange tubercles
+. petals < 2.5 cm, yellow
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0307+1366} {creeping woodsorrel:Oxalis corniculata}
-{-
-stem rooting at nodes, < 50 cm, hairs appressed to spreading
-leaf cauline; petiole < 7 cm
-leaflets < 2 cm, ciliate, hairs generally 0 adaxially, sparse, appressed abaxially
-inflorescence: cyme, +- umbel-like or not, 2--7-flowered; pedicel < 1 cm, hairs appressed
-sepals < 4.5 mm, linear to narrowly ovate
-<b>petals generally < 8 mm</b>, oblong to spoon-shaped, yellow, often with red spots below middle
-stem rooting at nodes
--}
+==creeping woodsorrel:O. corniculata
+. stem rooting at nodes, < 50 cm, hairs appressed to spreading
+. leaf cauline; petiole < 7 cm
+. leaflets < 2 cm, ciliate, hairs generally 0 adaxially, sparse, appressed abaxially
+. inflorescence: cyme, +- umbel-like or not, 2--7-flowered; pedicel < 1 cm, hairs appressed
+. sepals < 4.5 mm, linear to narrowly ovate
+. <b>petals generally < 8 mm</b>, oblong to spoon-shaped, yellow, often with red spots below middle
+. stem rooting at nodes
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0515+1169} {hairy woodsorrel:Oxalis pilosa}
-{-
-stem erect to decumbent, < 40 cm, rooting at nodes or not, hairs 0.7--1.2 mm, dense, generally spreading
-<b>leaves cauline</b>
-leaflets < 1.5 cm, appressed-hairy
-inflorescence: 1--3-flowered; pedicel < 2 cm, hairs dense, generally spreading, occasionally appressed
-sepals 3.5--6 mm, lanceolate, tips ciliate
-<b>petals generally 8--12 mm</b>, yellow
--}
+==hairy woodsorrel:O. pilosa
+. stem erect to decumbent, < 40 cm, rooting at nodes or not, hairs 0.7--1.2 mm, dense, generally spreading
+. <b>leaves cauline</b>
+. leaflets < 1.5 cm, appressed-hairy
+. inflorescence: 1--3-flowered; pedicel < 2 cm, hairs dense, generally spreading, occasionally appressed
+. sepals 3.5--6 mm, lanceolate, tips ciliate
+. <b>petals generally 8--12 mm</b>, yellow
 
-]}
+]

@@ -1,40 +1,31 @@
-{sci:Erysimum}
+sci:Erysimum spp.
+
 Key features:
-{-
-stem base woody or not
-leaves linear or wider, or narrowly linear or narrower
-basal/proximal leaf width, measured exactly
-petal color
--}
+. stem base woody or not
+. leaves linear or wider, or narrowly linear or narrower
+. basal/proximal leaf width, measured exactly
+. petal color
 
-{+san francisco wallflower:Erysimum franciscanum}
-{-
-<b>stem base woody</b>; plant subshrub
-scattered on Pacific coast
--}
+==san francisco wallflower:E. franciscanum
+. <b>stem base woody</b>; plant subshrub
+. scattered on Pacific coast
 
-{+western wallflower:Erysimum capitatum}
-{-
-stem base not woody
-leaves linear or wider, 3--<b>15</b>(30) cm wide
-flower petals <b>orange to yellow</b> (lavender to +- purple)
-Ecology: open areas, alpine, deserts, woodland, <b>sandy areas[?]</b>, chaparral
-scattered
--}
+==western wallflower:E. capitatum
+. stem base not woody
+. leaves linear or wider, 3--<b>15</b>(30) cm wide
+. flower petals <b>orange to yellow</b> (lavender to +- purple)
+. Ecology: open areas, alpine, deserts, woodland, <b>sandy areas[?]</b>, chaparral
+. scattered
 
-{sand-loving wallflower:Erysimum ammophilum}
-{-
-stem base not woody
-stem 0.4--9(13) dm
-leaves linear-oblanceolate, 2--9 mm wide
-flower petals yellow
-Ecology: <b>coastal dunes</b>
-rare on Pacific coast near Butano and Big Basin
--}
+==sand-loving wallflower:E. ammophilum
+. stem base not woody
+. stem 0.4--9(13) dm
+. leaves linear-oblanceolate, 2--9 mm wide
+. flower petals yellow
+. Ecology: <b>coastal dunes</b>
+. rare on Pacific coast near Butano and Big Basin
 
-{santa cruz wallflower:Erysimum teretifolium}
-{-
-stem base not woody
-leaves 0.3--3 mm wide, <b>thread-like to narrowly linear</b>, margin +- rolled under, appearing cylindric, finely toothed
-Santa Cruz area
--}
+==santa cruz wallflower:E. teretifolium
+. stem base not woody
+. leaves 0.3--3 mm wide, <b>thread-like to narrowly linear</b>, margin +- rolled under, appearing cylindric, finely toothed
+. Santa Cruz area

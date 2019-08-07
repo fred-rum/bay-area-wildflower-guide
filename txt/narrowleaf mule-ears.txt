@@ -1,0 +1,2 @@
+sci:Wyethia angustifolia
+color: yellow

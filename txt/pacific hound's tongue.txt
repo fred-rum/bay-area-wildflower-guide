@@ -1,0 +1,2 @@
+sci:Adelinia grande
+color: blue

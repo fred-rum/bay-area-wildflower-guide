@@ -1,20 +1,14 @@
-{sci:Symphoricarpos}
+sci:Symphoricarpos spp.
 
 Key feature:
-{-
-plant height
--}
+. plant height
 
-{+common snowberry}
-{-
-plant 60--180 cm, erect
-corolla swollen on 1 side, with 5 nectary glands within swelling
-inflorescence generally 8--16-flowered
--}
+==common snowberry:S. albus
+. plant 60--180 cm, erect
+. corolla swollen on 1 side, with 5 nectary glands within swelling
+. inflorescence generally 8--16-flowered
 
-{+creeping snowberry}
-{-
-Plant 15--60 cm, sprawling
-corolla scarcely or not swollen, 5 nectary glands, 1 below each corolla lobe
-inflorescence generally 2--8-flowered
--}
+==creeping snowberry:S. mollis
+. Plant 15--60 cm, sprawling
+. corolla scarcely or not swollen, 5 nectary glands, 1 below each corolla lobe
+. inflorescence generally 2--8-flowered

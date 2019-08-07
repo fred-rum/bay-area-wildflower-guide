@@ -1,24 +1,20 @@
-{sci:Vicia villosa}
+sci:Vicia villosa
+color: purple, red purple
+
 Key features:
-{-
-<b>short hairs on upper stems and leaves conspicuous or none/sparse/appressed</b>
-lower calyx lobe length
-corolla length
--}
+. <b>short hairs on upper stems and leaves conspicuous or none/sparse/appressed</b>
+. lower calyx lobe length
+. corolla length
 
-{shaggy vetch:Vicia villosa ssp. villosa}
-{-
-hairs on upper stems and leaves conspicuous, spreading, 1--2 mm
-lower calyx lobes 2--4 mm, linear, often curved
-corolla 14--18 mm
-less common in the bay area (Sierra Azul, Mission Peak, Sunol, and elsewhere north in the East Bay)
--}
+==shaggy vetch:V. villosa ssp. villosa
+. hairs on upper stems and leaves conspicuous, spreading, 1--2 mm
+. lower calyx lobes 2--4 mm, linear, often curved
+. corolla 14--18 mm
+. less common in the bay area (Sierra Azul, Mission Peak, Sunol, and elsewhere north in the East Bay)
 
-{winter vetch:Vicia villosa ssp. varia}
-{-
-no hairs on stems or leaves or hair is sparse, appressed, +- 1 mm
-lower calyx lobes generally 1--2.5 mm, narrowly lanceolate, straight
-corolla 10--14(16) mm
-blooms much later into summer
-found everywhere
--}
+==winter vetch:V. villosa ssp. varia
+. no hairs on stems or leaves or hair is sparse, appressed, +- 1 mm
+. lower calyx lobes generally 1--2.5 mm, narrowly lanceolate, straight
+. corolla 10--14(16) mm
+. blooms much later into summer
+. found everywhere

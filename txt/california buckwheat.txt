@@ -1,0 +1,2 @@
+sci:Eriogonum fasciculatum
+color: white, pink, salmon, red, red purple, other

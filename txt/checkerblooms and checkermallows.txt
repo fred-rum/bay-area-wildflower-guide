@@ -1,32 +1,21 @@
-{sci:Sidalcea}
+sci:Sidalcea spp.
+
 Key features:
-{-
-thin linear leaves cupping the involucre or not
--}
+. thin linear leaves cupping the involucre or not
 
-{+dwarf checkermallow}
-{-
-lacks thin linear leaves cupping the involucre; has reduced upper leaves instead
-common throughout the bay area
--}
+==dwarf checkermallow:S. malviflora
+. lacks thin linear leaves cupping the involucre; has reduced upper leaves instead
+. common throughout the bay area
 
-{+fringed checkerbloom}
-{-
-has thin linear leaves cupping the involucre
-scattered around the bay area
--}
+==fringed checkerbloom:S. diploscypha
+. has thin linear leaves cupping the involucre
+. scattered around the bay area
 
-{vernal pool checkerbloom:Sidalcea calycosa ssp. calycosa}
-{-
-Calero & Mt. Tam
--}
+==vernal pool checkerbloom:S. calycosa ssp. calycosa
+. Calero & Mt. Tam
 
-{marin checkerbloom:Sidalcea hickmanii ssp. viridis}
-{-
-Marin
--}
+==marin checkerbloom:S. hickmanii ssp. viridis
+. Marin
 
-{maple-leaved checkerbloom:Sidalcea malachroides}
-{-
-Nisene Marks
--}
+==maple-leaved checkerbloom:S. malachroides
+. Nisene Marks

@@ -1,15 +1,12 @@
-{sci:Lotus}
-{hist}
-{+bird's-foot trefoil:Lotus corniculatus}
-{-
-leaflet length of longest upper leaves 1.6--3(4) &times; width
-corolla 10--14(16) mm
-very common
--}
+sci:Lotus spp.
+x:hist
 
-{narrow-leaf bird's-foot trefoil:Lotus tenuis}
-{-
-leaflet length of longest upper leaves (2.5)3.2--5 &times; width
-corolla (6)7--10(12) mm
-Chabot; historically rare elsewhere
--}
+==bird's-foot trefoil:L. corniculatus
+. leaflet length of longest upper leaves 1.6--3(4) &times; width
+. corolla 10--14(16) mm
+. very common
+
+==narrow-leaf bird's-foot trefoil:L. tenuis
+. leaflet length of longest upper leaves (2.5)3.2--5 &times; width
+. corolla (6)7--10(12) mm
+. Chabot; historically rare elsewhere

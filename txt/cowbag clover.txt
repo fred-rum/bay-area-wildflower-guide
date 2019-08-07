@@ -1,0 +1,2 @@
+sci:Trifolium depauperatum
+color: red purple

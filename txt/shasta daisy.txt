@@ -1,0 +1,2 @@
+sci:Leucanthemum maximum
+color: white

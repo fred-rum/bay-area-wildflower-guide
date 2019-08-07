@@ -1,35 +1,28 @@
-{sci:Myosotis}
+sci:Myosotis spp.
+
 Forget-me-nots generally develop in raceme-like cymes, coiled, then +- open in age.  Thus, individuals of the same species can look very different from each other.
 
 Key features:
-{-
-corolla size
-leaf length vs. width
--}
+. corolla size
+. leaf length vs. width
 
-{+broadleaf forget-me-not}
-{-
-corolla 5--10 mm wide, blue (but pink when young), prominent yellow ring in center.
-inflorescence alternating below; flowers denser at the tip, possibly resembling a fiddleneck-like spiral.
-leaves roughly 2--3x wider than corollas, roughly 2--3x longer than wide.
--}
+==broadleaf forget-me-not:M. latifolia
+. corolla 5--10 mm wide, blue (but pink when young), prominent yellow ring in center.
+. inflorescence alternating below; flowers denser at the tip, possibly resembling a fiddleneck-like spiral.
+. leaves roughly 2--3x wider than corollas, roughly 2--3x longer than wide.
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1115+3393} {changing forget-me-not:Myosotis discolor}
-{-
-smaller corolla, often with different colors for each flower.
-fiddleneck-like inflorescence.
-Santa Cruz range.
--}
+==changing forget-me-not:M. discolor
+. smaller corolla, often with different colors for each flower.
+. fiddleneck-like inflorescence.
+. Santa Cruz range.
 
 The forget-me-nots above are the only ones that Jepson thinks grow in
 the bay area.  However, CalFlora has a few others observed here:
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0208+1294} {bay forget-me-not:Myosotis laxa}
-{-
-smaller corolla, but the inflorescence otherwise looks much like broadleaf forget-me-not.
-small, narrow leaves.
--}
+==bay forget-me-not:M. laxa
+. smaller corolla, but the inflorescence otherwise looks much like broadleaf forget-me-not.
+. small, narrow leaves.
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0311+1015} {wood forget-me-not:Myosotis sylvatica}
+==wood forget-me-not:M. sylvatica
 <p/>
 Appears in Calflora, but Jepson says that <a href="http://ucjeps.berkeley.edu/cgi-bin/get_cpn.pl?34218">all identifications in California are mistaken</a>.

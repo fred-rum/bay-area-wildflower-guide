@@ -1,0 +1,2 @@
+sci:Sanicula bipinnatifida
+color: red purple, yellow

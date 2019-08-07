@@ -1,36 +1,29 @@
-{sci:Rubus}
+sci:Rubus spp.
+
 Key features:
-{-
-Prickle presence and shape.
-Round or 5-angled stem (pentagonal in cross section).
-Fruit type and color.
--}
+. Prickle presence and shape.
+. Round or 5-angled stem (pentagonal in cross section).
+. Fruit type and color.
 
 Although the leaves have general difference, there is enough variety within a species to make them difficult to use as diagnostic tools.  In addition, some of the characteristics described by Jepson cannot be seen in CalPhotos.
 
-{+california blackberry,2}
-{-
-Plant: prostrate to decumbent
-Prickles: <b>weak, slender</b>, straight
-Stem: 2--10 mm diam, <b>not angled</b>, +-glabrous to hairy, +-with stalked glands, glaucous
-Sepals: hairy, <b>prickly</b>, +-with stalked glands
-Fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
--}
+==california blackberry,2:R. ursinus
+. Plant: prostrate to decumbent
+. Prickles: <b>weak, slender</b>, straight
+. Stem: 2--10 mm diam, <b>not angled</b>, +-glabrous to hairy, +-with stalked glands, glaucous
+. Sepals: hairy, <b>prickly</b>, +-with stalked glands
+. Fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
 
-{+himalayan blackberry,2}
-{-
-Plant: to 3 m, arched to mounded
-Prickles: <b>stout, wide-based</b>, straight or curved
-Stem: to 20(25) mm diam, <b>5-angled</b>, finely hairy or generally glabrous, not glaucous
-Sepals: hairy, nonglandular
-Fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
--}
+==himalayan blackberry,2:R. armeniacus
+. Plant: to 3 m, arched to mounded
+. Prickles: <b>stout, wide-based</b>, straight or curved
+. Stem: to 20(25) mm diam, <b>5-angled</b>, finely hairy or generally glabrous, not glaucous
+. Sepals: hairy, nonglandular
+. Fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
 
-{+thimbleberry,2}
-{-
-Plant 0.5--2.5 m, erect
-<b>No prickles</b>
-Stem: to 6 mm diam, <b>not angled</b>, glabrous to finely hairy with stalked glands, not glaucous
-Sepals hairy, stalked-glandular
-Fruit: <b>raspberry-type</b> (hollow when picked), <b>red</b>
--}
+==thimbleberry,2:R. parviflorus
+. Plant 0.5--2.5 m, erect
+. <b>No prickles</b>
+. Stem: to 6 mm diam, <b>not angled</b>, glabrous to finely hairy with stalked glands, not glaucous
+. Sepals hairy, stalked-glandular
+. Fruit: <b>raspberry-type</b> (hollow when picked), <b>red</b>

@@ -1,20 +1,16 @@
-{sci:Amsinckia menziesii}
-{+rancher's fiddleneck:Amsinckia menziesii var. intermedia}
-{-
-corolla radial, tube straight, limb with 0 or 5 dark spots
-stamens generally attached above middle of corolla tube, if below then style exserted
-stem ascending to erect
-corolla 7--11 mm, <b>limb 4--10 mm diam</b>, +- orange, tube exserted
-very common
--}
+sci:Amsinckia menziesii
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1007+0353}
-{small-flowered fiddleneck:Amsinckia menziesii var. menziesii}
-{-
-corolla radial, tube straight, limb with 0 or 5 dark spots
-stamens generally attached above middle of corolla tube, if below then style exserted
-stem decumbent to +- ascending
-corolla 4--7 mm, <b>limb 1--3 mm diam</b>, yellow to orange-yellow, tube +- exserted
-scattered
-also called A. retrorsa
--}
+==rancher's fiddleneck:A. menziesii var. intermedia
+. corolla radial, tube straight, limb with 0 or 5 dark spots
+. stamens generally attached above middle of corolla tube, if below then style exserted
+. stem ascending to erect
+. corolla 7--11 mm, <b>limb 4--10 mm diam</b>, +- orange, tube exserted
+. very common
+
+==small-flowered fiddleneck:A. menziesii var. menziesii
+. corolla radial, tube straight, limb with 0 or 5 dark spots
+. stamens generally attached above middle of corolla tube, if below then style exserted
+. stem decumbent to +- ascending
+. corolla 4--7 mm, <b>limb 1--3 mm diam</b>, yellow to orange-yellow, tube +- exserted
+. scattered
+. also called A. retrorsa

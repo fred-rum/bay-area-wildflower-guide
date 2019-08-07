@@ -1,0 +1,2 @@
+sci:Dichelostemma capitatum
+color: purple

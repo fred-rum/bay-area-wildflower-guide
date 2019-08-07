@@ -1,22 +1,15 @@
-{sci:Eschscholzia}
-{hist/rare}
-{+california poppy,2}
-{-
-has a distinct pink disc below the corolla
-by far the most common poppy in the bay area
--}
+sci:Eschscholzia spp.
+x:hist/rare
+==california poppy,2:E. californica
+. has a distinct pink disc below the corolla
+. by far the most common poppy in the bay area
 
-{+tufted poppy,2}
-{-
-has no more than an indistinct disc below the corolla
-its recepticle slants smoothly down to the width of the stem
-can be found at Pinnacles NP, but is extremely rare in the bay area
--}
+==tufted poppy,2:E. caespitosa
+. has no more than an indistinct disc below the corolla
+. its recepticle slants smoothly down to the width of the stem
+. can be found at Pinnacles NP, but is extremely rare in the bay area
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0317+2239: recepticle}
-{diamond-petaled california poppy:Eschscholzia rhombipetala}
-{-
-has no more than an indistinct disc below the corolla
-its recepticle looks comparatively bloated, as it is wide at the top before slanting down to the width of the stem
-found east of Mt. Diablo, but is unknown in the rest of the bay area
--}
+==diamond-petaled california poppy:E. rhombipetala
+. has no more than an indistinct disc below the corolla
+. its recepticle looks comparatively bloated, as it is wide at the top before slanting down to the width of the stem
+. found east of Mt. Diablo, but is unknown in the rest of the bay area

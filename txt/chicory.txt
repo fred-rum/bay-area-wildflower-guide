@@ -1,1 +1,3 @@
-{ca}
+sci:Cichorium intybus
+color: pale purple
+x:ca

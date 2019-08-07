@@ -1,15 +1,12 @@
-{com:madder family}
-{sci:family Rubiaceae}
-{+bedstraws:Galium}
-{-
-flowers pedicelled (except Galium murale), in panicles, clusters of 2--many, occasionally 1
-involucre 0
-calyx 0 
--}
+com:madder family
+sci:family Rubiaceae
 
-{+field madder:Sherardia arvensis}
-{-
-flowers sessile, in few-flowered heads
-involucre bracts +- free, +- = leaves
-calyx 6-lobed
--}
+==bedstraws:Galium spp.
+. flowers pedicelled (except Galium murale), in panicles, clusters of 2--many, occasionally 1
+. involucre 0
+. calyx 0 
+
+==field madder:Sherardia arvensis
+. flowers sessile, in few-flowered heads
+. involucre bracts +- free, +- = leaves
+. calyx 6-lobed

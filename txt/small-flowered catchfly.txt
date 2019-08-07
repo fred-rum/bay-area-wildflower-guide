@@ -1,0 +1,2 @@
+sci:Silene gallica
+color: white, pale purple

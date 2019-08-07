@@ -1,19 +1,14 @@
-{sci:subfamily Brodiaeoideae}
-{+wild hyacinths}
-{-
-dense inflorescence with short pedicels
--}
+sci:subfamily Brodiaeoideae
 
-{+triplet lilies}
-{-
-open inflorescence with pedicel length +- >= corolla length
-6 stamens
-perianth is colored throughout (including the tube/throat)
--}
+==wild hyacinths:Dichelostemma spp.
+. dense inflorescence with short pedicels
 
-{+brodiaeas}
-{-
-open inflorescence with pedicel length +- >= corolla length
-3 stamens and 3 staminodes
-perianth is colored only on the lobes (not including the tube/throat)
--}
+==triplet lilies:Triteleia spp.
+. open inflorescence with pedicel length +- >= corolla length
+. 6 stamens
+. perianth is colored throughout (including the tube/throat)
+
+==brodiaeas:Brodiaea spp.
+. open inflorescence with pedicel length +- >= corolla length
+. 3 stamens and 3 staminodes
+. perianth is colored only on the lobes (not including the tube/throat)

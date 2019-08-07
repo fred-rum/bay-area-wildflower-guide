@@ -1,0 +1,2 @@
+sci:Oxalis incarnata
+color: white, pale purple

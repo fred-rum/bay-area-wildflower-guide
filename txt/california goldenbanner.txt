@@ -1,0 +1,2 @@
+sci:Thermopsis californica
+color: yellow

@@ -1,0 +1,2 @@
+sci:Pholistoma auritum
+color: purple

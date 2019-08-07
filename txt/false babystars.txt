@@ -1,0 +1,2 @@
+sci:Leptosiphon androsaceus
+color: pale purple

@@ -1,0 +1,2 @@
+sci:Zantedeschia aethiopica
+color: white

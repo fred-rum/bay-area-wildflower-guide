@@ -1,0 +1,2 @@
+sci:Erodium botrys
+color: purple

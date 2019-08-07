@@ -1,23 +1,18 @@
-{ca}
-{+pineapple-weed:Matricaria discoidea}
-{-
-plant (1)10--30(50) cm
-peduncle <= 1.5(2.5) cm
-disturbed places
-very common
--}
+sci:Matricaria spp.
+x:ca
+==pineapple-weed:M. discoidea
+. plant (1)10--30(50) cm
+. peduncle <= 1.5(2.5) cm
+. disturbed places
+. very common
 
-{valley mayweed:Matricaria occidentalis}
-{-
-plant 15--45(70) cm
-<b>peduncle <= 6.5 cm</b>
-undisturbed wet places
-<b>only in historical records</b>
--}
+==valley mayweed:M. occidentalis
+. plant 15--45(70) cm
+. <b>peduncle <= 6.5 cm</b>
+. undisturbed wet places
+. <b>only in historical records</b>
 
-{german chamomile:M. chamomilla}
-{-
-daisy like, looks much like {-chamomiles}
-leaf lobes longer than for "real" chamomiles
-very rare
--}
+==german chamomile:M. chamomilla
+. daisy like, looks much like {-chamomiles}
+. leaf lobes longer than for "real" chamomiles
+. very rare

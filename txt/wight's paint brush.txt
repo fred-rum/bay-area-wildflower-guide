@@ -1,0 +1,2 @@
+sci:Castilleja wightii
+color: red, salmon

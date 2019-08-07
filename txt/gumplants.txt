@@ -1,31 +1,24 @@
-{sci:Grindelia}
-{ba}
+sci:Grindelia spp.
+x:ba
+
 Key features:
-{-
-plant (e.g. involucre) hairy or not
-leaves fleshy or not
-coastal dunes or not
--}
+. plant (e.g. involucre) hairy or not
+. leaves fleshy or not
+. coastal dunes or not
 
-{+hairy gumweed,2:Grindelia hirsutula}
-{-
-[Jepson says that the phyllaries are flattened throughout [?], gradually tapered to tips, tips erect, but that's all bullshit]
-leaves not fleshy
-<b>plants generally +- hairy</b>
-Ecology: sandy, clay, or serpentine slopes or roadsides
--}
+==hairy gumweed,2:G. hirsutula
+. [Jepson says that the phyllaries are flattened throughout [?], gradually tapered to tips, tips erect, but that's all bullshit]
+. leaves not fleshy
+. <b>plants generally +- hairy</b>
+. Ecology: sandy, clay, or serpentine slopes or roadsides
 
-{+great valley gumweed,2:Grindelia camporum}
-{-
-phyllaries flattened only at bases, rounded in cross-section distally, abruptly narrowed to tips
-phyllary tips spreading, reflexed, or coiled [not erect]
-leaves not fleshy
-<b>plants generally glabrous</b>
-Ecology: sandy or saline bottomland, roadsides
--}
+==great valley gumweed,2:G. camporum
+. phyllaries flattened only at bases, rounded in cross-section distally, abruptly narrowed to tips
+. phyllary tips spreading, reflexed, or coiled [not erect]
+. leaves not fleshy
+. <b>plants generally glabrous</b>
+. Ecology: sandy or saline bottomland, roadsides
 
-{+oregon gumplant:Grindelia stricta}
-{-
-<b>leaves +- fleshy</b>
-Ecology: <b>coastal bluffs, dunes, tidal wetlands</b>
--}
+==oregon gumplant:G. stricta
+. <b>leaves +- fleshy</b>
+. Ecology: <b>coastal bluffs, dunes, tidal wetlands</b>

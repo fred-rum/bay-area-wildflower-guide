@@ -1,4 +1,4 @@
-{sci:Collinsia}
+sci:Collinsia spp.
 
 <b>Caution: IDs unsure</b>
 
@@ -7,48 +7,38 @@ Blue-eyed marys have 5 corolla lobes: 2 forming the upper lip, 3 forming the low
 This page is not particularly complete because I don't know which so-called key features are actually visible and diagnostic.
 
 (Potential) key features:
-{-
-whorls dense or loose
-proximal (lowest) pedicels > or < calyx
-corolla throat as wide as long or longer than wide
-upper filaments have a basal spur (1--2 mm) curved into a pouch or the spur is shorter or missing.  Requires taking apart a flower.
-corolla length
-upper corolla lip short compared to lower lip or +- equal
-leaf abaxially (bottom) glabrous or hairy
-leaf shape
-calyx shape
--}
+. whorls dense or loose
+. proximal (lowest) pedicels > or < calyx
+. corolla throat as wide as long or longer than wide
+. upper filaments have a basal spur (1--2 mm) curved into a pouch or the spur is shorter or missing.  Requires taking apart a flower.
+. corolla length
+. upper corolla lip short compared to lower lip or +- equal
+. leaf abaxially (bottom) glabrous or hairy
+. leaf shape
+. calyx shape
 
-{+purple chinese houses}
-{-
-flower whorls dense; proximal pedicels < calyx
-corolla throat as wide as long
-Leaf: lance-deltate, toothed
-calyx lobe tips generally acute, glabrous to shaggy-hairy
-corolla throat hairy inside, strongly angled to tube, as wide as long, pouch prominent, +- square
-upper lip white to lavender or tipped dark violet, wine-spotted and generally +- red lined near base
-lower lip +- white to rose-purple, lowest lobe generally with darker red tip
--}
+==purple chinese houses:C. heterophylla
+. flower whorls dense; proximal pedicels < calyx
+. corolla throat as wide as long
+. Leaf: lance-deltate, toothed
+. calyx lobe tips generally acute, glabrous to shaggy-hairy
+. corolla throat hairy inside, strongly angled to tube, as wide as long, pouch prominent, +- square
+. upper lip white to lavender or tipped dark violet, wine-spotted and generally +- red lined near base
+. lower lip +- white to rose-purple, lowest lobe generally with darker red tip
 
-{+white blue-eyed mary}
-{-
-flower whorls dense; proximal pedicels < calyx
-corolla throat longer than wide
-Corolla lips +- = in fully open flowers
-Corolla generally white to +- purple, upper lobes +- toothed (backs often touching or parallel); leaves +- thick, crenate
--}
+==white blue-eyed mary:C. bartsiifolia
+. flower whorls dense; proximal pedicels < calyx
+. corolla throat longer than wide
+. Corolla lips +- = in fully open flowers
+. Corolla generally white to +- purple, upper lobes +- toothed (backs often touching or parallel); leaves +- thick, crenate
 
-{+san francisco collinsia}
-{-
-Flowers 1 to loosely whorled; proximal pedicels > calyx
-Leaves generally +- lance-deltate, generally coarsely toothed; proximal-most pedicels >> calyx, distal pedicels +- = calyx
--}
+==san francisco collinsia:C. multicolor
+. Flowers 1 to loosely whorled; proximal pedicels > calyx
+. Leaves generally +- lance-deltate, generally coarsely toothed; proximal-most pedicels >> calyx, distal pedicels +- = calyx
 
-{+fewflower blue-eyed mary:Collinsia sparsiflora}
-{-
-(two variants)
--}
+==fewflower blue-eyed mary:C. sparsiflora
+. (two variants)
 
-{maiden blue-eyed mary:Collinsia parviflora}
+==maiden blue-eyed mary:C. parviflora
 
-{sticky chinese houses:Collinsia tinctoria}
+==sticky chinese houses:C. tinctoria

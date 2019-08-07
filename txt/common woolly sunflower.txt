@@ -1,0 +1,2 @@
+sci:Eriophyllum lanatum
+color: yellow

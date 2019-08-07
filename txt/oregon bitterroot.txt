@@ -1,0 +1,2 @@
+sci:Lewisia rediviva
+color: pink

@@ -1,20 +1,14 @@
-{sci:tribe Madieae}
+sci:tribe Madieae
 
-{+tarweeds}
-{-
+==tarweeds:Madia spp.
+. 
 
--}
+==woodland madia:Anisocarpus madioides
+. rays 4--10 mm
+. I don't know how to distinguish it from real tarweeds.
+. Perhaps the disk diameter is smaller relative to the ray petals when compared to a similar-sized common madia.
 
-{+woodland madia}
-{-
-rays 4--10 mm
-I don't know how to distinguish it from real tarweeds.
-Perhaps the disk diameter is smaller relative to the ray petals when compared to a similar-sized common madia.
--}
+==Holocarpha spp.
+. shrubby
 
-{+Holocarpha}
-{-
-shrubby
--}
-
-{+tidytips}
+==tidytips:Layia spp.

@@ -1,0 +1,2 @@
+sci:Solanum douglasii
+color: white

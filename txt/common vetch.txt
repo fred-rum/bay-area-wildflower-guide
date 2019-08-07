@@ -1,22 +1,17 @@
-{sci:Vicia sativa}
-{ca}
+sci:Vicia sativa
+x:ca
+
 Key features:
-{-
-length of calyx lobes (supposedly no overlap, but measure carefully!)
-length of corolla (supposedly no overlap, but measure carefully!)
-length vs. width of leaflets (there is substantial overlap here)
--}
+. length of calyx lobes (supposedly no overlap, but measure carefully!)
+. length of corolla (supposedly no overlap, but measure carefully!)
+. length vs. width of leaflets (there is substantial overlap here)
 
-{+spring vetch:Vicia sativa ssp. sativa}
-{-
-calyx tube 6--7 mm, lobes <b>5--11 mm</b>
-corolla <b>18--30 mm</b>
-leaflets 4--10 mm wide, wedge-shaped to oblong, <b>length 2--6 &times; width</b>
--}
+==spring vetch:V. sativa ssp. sativa
+. calyx tube 6--7 mm, lobes <b>5--11 mm</b>
+. corolla <b>18--30 mm</b>
+. leaflets 4--10 mm wide, wedge-shaped to oblong, <b>length 2--6 &times; width</b>
 
-{narrow-leaved vetch:Vicia sativa ssp. nigra}
-{-
-calyx tube 4.5--5.5 mm, lobes <b>3--4.5 mm</b>
-corolla <b>10--18 mm</b>
-leaflets 5--7 mm wide, linear to generally lance-oblong, <b>length 4--10 &times; width</b>
--}
+==narrow-leaved vetch:V. sativa ssp. nigra
+. calyx tube 4.5--5.5 mm, lobes <b>3--4.5 mm</b>
+. corolla <b>10--18 mm</b>
+. leaflets 5--7 mm wide, linear to generally lance-oblong, <b>length 4--10 &times; width</b>

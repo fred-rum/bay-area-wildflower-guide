@@ -1,1 +1,3 @@
-{hist}
+sci:Frangula californica
+color: other
+x:hist

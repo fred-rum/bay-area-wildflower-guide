@@ -1,0 +1,2 @@
+sci:Calochortus albus
+color: white, cream

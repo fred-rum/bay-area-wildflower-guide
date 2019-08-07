@@ -1,0 +1,2 @@
+sci:Digitalis purpurea
+color: pale purple, pink

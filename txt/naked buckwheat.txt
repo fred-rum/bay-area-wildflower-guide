@@ -1,0 +1,2 @@
+sci:Eriogonum nudum
+color: white, pink, salmon

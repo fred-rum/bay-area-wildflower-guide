@@ -435,6 +435,7 @@ class Page:
     def parse_color(self):
         def repl_color(matchobj):
             self.color = set([x.strip() for x in matchobj.group(1).split(',')])
+            self.color_txt = matchobj.group(1)
             return ''
 
         self.txt = re.sub(r'^color:(.*)\n',
@@ -490,7 +491,11 @@ class Page:
             if not suffix:
                 suffix = ''
             if not sci:
-                sci = ''
+                if name.islower():
+                    sci = ''
+                else:
+                    sci = ':' + name
+                    name = ''
             # +name[,suffix][:sci] -> creates a child relationship with [name]
             #   and creates two links to it: an image link and a text link.
             #   If a suffix is specified, the jpg with that suffix is used for
@@ -540,7 +545,66 @@ class Page:
         else:
             self.cur_genus = None
 
-        self.txt = re.sub(r'^==([^\}:,\n]*)(,[-0-9]*)?(:[^\}\n]+)?$', repl_child, self.txt, flags=re.MULTILINE)
+        self.txt = re.sub(r'^==([^\}:,\n]*)(,[-0-9]*)?(:[^\}\n]+)?$',
+                          repl_child, self.txt, flags=re.MULTILINE)
+
+    def write_txt(self):
+        def expand_child(matchobj):
+            name = matchobj.group(1)
+            suffix = matchobj.group(2)
+            if not suffix:
+                suffix = ''
+            child_page = find_page1(name)
+            if not child_page:
+                print name
+            com = child_page.com
+            elab = child_page.elab
+            if not elab:
+                return '==' + com + suffix
+            elab_words = elab.split(' ')
+            if self.cur_genus and elab_words[0] == self.cur_genus:
+                elab = elab_words[0][0] + '. ' + ' '.join(elab_words[1:])
+            if com and com_page[com] == 'multiple':
+                com = None
+            if not com:
+                return '==' + elab + suffix
+            return '==' + com + suffix + ':' + elab
+
+        if self.sci and self.level in ('genus', 'species', 'below'):
+            self.cur_genus = self.sci.split(' ')[0]
+        else:
+            self.cur_genus = None
+
+        with open(root + "/txt2/{name}.txt".format(name=self.name), "w") as w:
+            if self.com and self.com != self.name:
+                w.write('com:{com}\n'.format(com=self.com))
+            if self.elab and self.elab != self.name:
+                w.write('sci:{elab}\n'.format(elab=self.elab))
+            if self.no_sci:
+                w.write('sci:n/a\n')
+            if self.color:
+                w.write('color:{color}\n'.format(color=self.color_txt))
+            if self.complete:
+                if self.key_incomplete:
+                    w.write('x:!{complete}\n'.format(complete=self.complete))
+                else:
+                    w.write('x:{complete}\n'.format(complete=self.complete))
+            for tuple in self.calphotos:
+                if tuple[0]:
+                    w.write(tuple[0] + ':' + tuple[1] + '\n')
+                else:
+                    w.write(tuple[1] + '\n')
+            s = self.txt
+            s = re.sub(r'^==([^,\n]+)(,[-0-9]*)?$',
+                       expand_child, s, flags=re.MULTILINE)
+            s = re.sub('^\n+', '', s)
+            s = re.sub('\n*$', '\n', s)
+            if s and s != '\n':
+                if ((self.com and (self.sci or self.no_sci)) or
+                    self.color or
+                    self.calphotos):
+                    w.write('\n')
+                w.write(s)
 
     def parse_glossary(self):
         def repl_glossary(matchobj):
@@ -731,6 +795,7 @@ class Page:
     # and writes the resulting file.
     def parse(self):
         s = self.txt
+        s = re.sub('^\n+', '', s)
 
         def repl_easy(matchobj):
             return repl_easy_dict[matchobj.group(1)]
@@ -1141,6 +1206,7 @@ def get_file_list(subdir, ext):
     return base_list
 
 page_list = get_file_list('txt', 'txt')
+txt_list = page_list[:]
 jpg_list = get_file_list('photos', 'jpg')
 thumb_list = get_file_list('thumbs', 'jpg')
 
@@ -1248,17 +1314,20 @@ with open(root + '/family names.yaml') as f:
 # - detect parent->child relationships among pages
 # - add links to glossary words
 
-# parse_children() can add new pages, so we make a copy of the list to
-# iterate through.
-for page in [x for x in name_page.itervalues()]:
+for page in name_page.itervalues():
     page.rewrite()
     page.parse_names()
     page.parse_color()
     page.parse_complete()
+
+# parse_children() can add new pages, so we make a copy of the list to
+# iterate through.
+for page in [x for x in name_page.itervalues()]:
     page.parse_children()
+
+for page in name_page.itervalues():
     page.parse_child_calphotos()
     page.parse_calphotos()
-    page.parse_glossary()
 
 with open(root + '/ignore species.yaml') as f:
     sci_ignore = yaml.safe_load(f)
@@ -1381,6 +1450,15 @@ if park_nf_list:
     for x in park_nf_list:
         print "  " + repr(x)
 
+try:
+    os.mkdir(root + '/txt2')
+except:
+    pass
+
+for page in name_page.itervalues():
+    if page.name in txt_list or page.calphotos or page.jpg_list:
+        page.write_txt()        
+
 # Get a list of pages without parents (top-level pages).
 top_list = [x for x in name_page.itervalues() if not x.parent]
 
@@ -1485,6 +1563,7 @@ top_list = [x for x in name_page.itervalues() if not x.parent]
 
 # Turn txt into html for all normal and default pages.
 for page in name_page.itervalues():
+    page.parse_glossary()
     page.parse()
 
 # Find any genus with multiple species.

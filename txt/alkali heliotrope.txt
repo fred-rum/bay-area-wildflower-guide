@@ -1,0 +1,2 @@
+sci:Heliotropium curassavicum
+color: white, purple

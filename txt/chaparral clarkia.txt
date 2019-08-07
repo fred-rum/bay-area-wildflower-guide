@@ -1,0 +1,2 @@
+sci:Clarkia affinis
+color: red purple

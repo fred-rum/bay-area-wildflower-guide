@@ -1,39 +1,32 @@
-{sci:Maianthemum}
-{ca}
+sci:Maianthemum spp.
+x:ca
+
 Key features:
-{-
-4 or 6 perianth parts
-perianth > stamens or << stamens
-leaves with or without petioles
--}
+. 4 or 6 perianth parts
+. perianth > stamens or << stamens
+. leaves with or without petioles
 
-{+false solomon's seal}
-{-
-Perianth parts 6
-Inflorescence is a panicle
-> 20 flowers per inflorescence
-<b>perianth 1--2 mm, << stamens</b>
-<b>fruit tan with red speckles</b>
-<b>&gt; 5 leaves</b>, 7--20 cm, ovate to oblong-elliptic; <b>petioles +- 0</b>
-common
--}
+==false solomon's seal:M. racemosum
+. Perianth parts 6
+. Inflorescence is a panicle
+. > 20 flowers per inflorescence
+. <b>perianth 1--2 mm, << stamens</b>
+. <b>fruit tan with red speckles</b>
+. <b>&gt; 5 leaves</b>, 7--20 cm, ovate to oblong-elliptic; <b>petioles +- 0</b>
+. common
 
-{+star-flowered lily-of-the-valley}
-{-
-Perianth parts 6
-Inflorescence is a raceme (or few-branched near base)
-5--15 flowers per inflorescence
-<b>perianth 4--7 mm, &gt; stamens</b>
-<b>fruit tan with red speckles and <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0210+1472">bold dark purple stripes</a></b>
-<b>&gt; 5 leaves</b>, 5--17 cm, (ob)lanceolate to elliptic; <b>petioles 0</b>
-common
--}
+==star-flowered lily-of-the-valley:M. stellatum
+. Perianth parts 6
+. Inflorescence is a raceme (or few-branched near base)
+. 5--15 flowers per inflorescence
+. <b>perianth 4--7 mm, &gt; stamens</b>
+. <b>fruit tan with red speckles and <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0210+1472">bold dark purple stripes</a></b>
+. <b>&gt; 5 leaves</b>, 5--17 cm, (ob)lanceolate to elliptic; <b>petioles 0</b>
+. common
 
-{western lily of the valley:Maianthemum dilatatum}
-{-
-<b>Perianth parts 4</b>
-Inflorescence is a raceme
-10--50 flowers per inflorescence
-<b>2--3 leaves</b>, 5--20 cm, cordate to sagittate; <b>petioles 5--15 cm</b>
-San Bruno, Marin, Mt. Tam
--}
+==western lily of the valley:M. dilatatum
+. <b>Perianth parts 4</b>
+. Inflorescence is a raceme
+. 10--50 flowers per inflorescence
+. <b>2--3 leaves</b>, 5--20 cm, cordate to sagittate; <b>petioles 5--15 cm</b>
+. San Bruno, Marin, Mt. Tam

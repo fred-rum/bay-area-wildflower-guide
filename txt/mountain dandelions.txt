@@ -1,74 +1,61 @@
-{sci:Agoseris}
-{ba}
-Key features:
-{-
-stem leafy above base or with no more than tiny leaves
-petal length (absolute or compared to phyllaries)
-leaf petiole color
-growing in sand or not
--}
+sci:Agoseris spp.
+x:ba
 
-{[
+Key features:
+. stem leafy above base or with no more than tiny leaves
+. petal length (absolute or compared to phyllaries)
+. leaf petiole color
+. growing in sand or not
+
+[
 <h2>medium-length petals</h2>
 
-{+coast range agoseris:A. hirsuta}
-{-
-stem generally not leafy or obscurely leafy above base
-ligule 6--16 mm, much exceeding involucre
-<b>leaf petiole rarely purple</b>
-generally 5--7 pairs of leaf lobes
-uncommon
--}
+==coast range agoseris:A. hirsuta
+. stem generally not leafy or obscurely leafy above base
+. ligule 6--16 mm, much exceeding involucre
+. <b>leaf petiole rarely purple</b>
+. generally 5--7 pairs of leaf lobes
+. uncommon
 
-{seaside agoseris:A. apargioides}
-{-
-stem generally not leafy or obscurely leafy above base
-ligules 8--16 mm, much exceeding involucre
-petiole +- purple
-leaf is either entire or includes generally 3--5 pairs of leaf lobes
-<b>coastal dunes and sand hills</b> [all others avoid sand]
-uncommon
--}
+==seaside agoseris:A. apargioides
+. stem generally not leafy or obscurely leafy above base
+. ligules 8--16 mm, much exceeding involucre
+. petiole +- purple
+. leaf is either entire or includes generally 3--5 pairs of leaf lobes
+. <b>coastal dunes and sand hills</b> [all others avoid sand]
+. uncommon
 
-{spearleaf agoseris:A. retrorsa}
-{-
-stem generally not leafy or obscurely leafy above base
-ligule 6--15 mm, exceeding (equaling) involucre
-<b>petiole +- purple</b>
-generally 7--9 pairs of leaf lobes
-rare
--}
+==spearleaf agoseris:A. retrorsa
+. stem generally not leafy or obscurely leafy above base
+. ligule 6--15 mm, exceeding (equaling) involucre
+. <b>petiole +- purple</b>
+. generally 7--9 pairs of leaf lobes
+. rare
 
-{pale goat-chicory:A. glauca var. glauca}
-{-
-stem generally not leafy or obscurely leafy above base
-ligules 10--18 mm, much exceeding involucre
-petiole not purple
-<b>leaves have no lobes</b> (but may have a few weak tooths)
-very rare and out of range
--}
+==pale goat-chicory:A. glauca var. glauca
+. stem generally not leafy or obscurely leafy above base
+. ligules 10--18 mm, much exceeding involucre
+. petiole not purple
+. <b>leaves have no lobes</b> (but may have a few weak tooths)
+. very rare and out of range
 
-]}
-{[
+]
+[
 <h2>short petals</h2>
 
-{bigflower agoseris:A. grandiflora var. grandiflora}
-{-
-<b>stem generally not leafy or obscurely leafy above base</b>
-ligule 3--7 mm, +- equaling involucre
-petiole generally purple
-generally 3--5 pairs of leaf lobes
-very common
-[I assume it's named for its height, not its flower head]
--}
+==bigflower agoseris:A. grandiflora var. grandiflora
+. <b>stem generally not leafy or obscurely leafy above base</b>
+. ligule 3--7 mm, +- equaling involucre
+. petiole generally purple
+. generally 3--5 pairs of leaf lobes
+. very common
+. [I assume it's named for its height, not its flower head]
 
-{annual false dandelion:A. heterophylla var. heterophylla}
-{-
-<b>stem often leafy above base</b>
-ligules 2--6 mm, +- equaling involucre [the phyllaries reach almost to the petal tips]
-leaf petiole not purple
-generally 2--3 pairs of leaf lobes
-common
--}
+==annual false dandelion:A. heterophylla var. heterophylla
+. <b>stem often leafy above base</b>
+. ligules 2--6 mm, +- equaling involucre [the phyllaries reach almost to the petal tips]
+. leaf petiole not purple
+. generally 2--3 pairs of leaf lobes
+. common
 
-]}
+]

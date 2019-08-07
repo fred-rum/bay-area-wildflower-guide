@@ -1,1 +1,3 @@
-{ba}
+sci:Eriodictyon californicum
+color: pale purple
+x:ba

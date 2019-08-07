@@ -1,0 +1,2 @@
+sci:Bellardia trixago
+color: white, pale purple

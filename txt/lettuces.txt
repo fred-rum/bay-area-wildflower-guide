@@ -1,39 +1,30 @@
-{sci:Lactuca}
-{hist}
+sci:Lactuca spp.
+x:hist
+
 Key features:
-{-
-basal leaves present or not
-distal cauline leaf shape, widely or narrowly clasping, margin toothed or bristly
--}
+. basal leaves present or not
+. distal cauline leaf shape, widely or narrowly clasping, margin toothed or bristly
 
-{+bitter lettuce}
-{-
-basal rosette leaves toothed or shallowly lobed
-distal cauline leaves sessile, widely clasping
-proximal cauline leaves wing-petioled
--}
+==bitter lettuce:L. virosa
+. basal rosette leaves toothed or shallowly lobed
+. distal cauline leaves sessile, widely clasping
+. proximal cauline leaves wing-petioled
 
-{prickly lettuce:Lactuca serriola}
-{-
-basal leaves generally 0 at flower
-cauline leaves with narrow, acute, basal lobes clasping stem
-leaves oblanceolate to oblong-elliptic or obovate in outline, margins prickly-toothed, sometimes also coarsely lobed
-inflorescence branches often widely spreading
--}
+==prickly lettuce:L. serriola
+. basal leaves generally 0 at flower
+. cauline leaves with narrow, acute, basal lobes clasping stem
+. leaves oblanceolate to oblong-elliptic or obovate in outline, margins prickly-toothed, sometimes also coarsely lobed
+. inflorescence branches often widely spreading
 
-{willowleaf lettuce:Lactuca saligna}
-{-
-basal leaves generally 0 at flower
-cauline leaves with narrow, acute, basal lobes clasping stem
-leaves lance-linear, entire or few-lobed, lobes linear
-peduncles and inflorescence branches often appressed to axis
--}
+==willowleaf lettuce:L. saligna
+. basal leaves generally 0 at flower
+. cauline leaves with narrow, acute, basal lobes clasping stem
+. leaves lance-linear, entire or few-lobed, lobes linear
+. peduncles and inflorescence branches often appressed to axis
 
-{tall blue lettuce:L. biennis}
-{-
-basal leaves generally 0 at flower
-cauline leaves lanceolate to ovate or elliptic in outline, entire to deeply lobed and coarsely toothed
-proximal leaves wing-petioled; distal sessile, clasping
-inflorescence heads many in large, panicle-like cluster
-rare
--}
+==tall blue lettuce:L. biennis
+. basal leaves generally 0 at flower
+. cauline leaves lanceolate to ovate or elliptic in outline, entire to deeply lobed and coarsely toothed
+. proximal leaves wing-petioled; distal sessile, clasping
+. inflorescence heads many in large, panicle-like cluster
+. rare

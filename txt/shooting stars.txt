@@ -1,12 +1,9 @@
-{sci:Primula}
-{+henderson's shooting star}
-{-
-peduncle purple (or mix of purple/green)
-leaf blade length generally < 2 &times; width
--}
+sci:Primula spp.
 
-{+padre's shooting star}
-{-
-peduncle bright green
-leaf blade length generally > 2 &times; width
--}
+==henderson's shooting star:P. hendersonii
+. peduncle purple (or mix of purple/green)
+. leaf blade length generally < 2 &times; width
+
+==padre's shooting star:P. clevelandii
+. peduncle bright green
+. leaf blade length generally > 2 &times; width

@@ -1,39 +1,28 @@
-{sci:Artemisia}
-{!hist}
-{+california sagebrush:Artemisia californica}
-{-
-axillary leaf clusters present
-very common
--}
+sci:Artemisia spp.
+x:!hist
 
-{[
+==california sagebrush:A. californica
+. axillary leaf clusters present
+. very common
+
+[
 <h2>generally no axillary leaf clusters</h2>
 
 These look fairly distinct from california sagebrush and from each other.  I'll add more notes here as I discover them.
 
-{biennial wormwood:Artemisia biennis}
-{-
-rare
--}
+==biennial wormwood:A. biennis
+. rare
 
-{california mugwort:Artemisia douglasiana}
-{-
-very common
--}
+==california mugwort:A. douglasiana
+. very common
 
-{tarragon:Artemisia dracunculus}
-{-
-Coe, Sunol
--}
+==tarragon:A. dracunculus
+. Coe, Sunol
 
-{beach wormwood:Artemisia pycnocephala}
-{-
-directly on the coast
--}
+==beach wormwood:A. pycnocephala
+. directly on the coast
 
-{common mugwort:A. vulgaris}
-{-
-very rare
--}
+==common mugwort:A. vulgaris
+. very rare
 
-]}
+]

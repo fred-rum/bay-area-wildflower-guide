@@ -1,1 +1,2 @@
-{sci:Nemophila menziesii}
+sci:Nemophila menziesii
+color: pale blue, pale purple, white

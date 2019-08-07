@@ -1,1 +1,2 @@
-{sci:Crepis vesicaria taraxacifolia}
+sci:Crepis vesicaria ssp. taraxacifolia
+color: yellow

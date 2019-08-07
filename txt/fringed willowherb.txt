@@ -1,0 +1,2 @@
+sci:Epilobium ciliatum
+color: pale purple

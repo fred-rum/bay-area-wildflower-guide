@@ -1,0 +1,2 @@
+sci:Malva nicaeensis
+color: pale purple

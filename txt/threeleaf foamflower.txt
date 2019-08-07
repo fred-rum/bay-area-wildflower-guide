@@ -1,0 +1,2 @@
+sci:Tiarella trifoliata
+color: white

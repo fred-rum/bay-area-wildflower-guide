@@ -1,0 +1,2 @@
+sci:Aquilegia formosa
+color: red, salmon

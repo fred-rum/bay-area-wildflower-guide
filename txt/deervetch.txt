@@ -1,157 +1,128 @@
-{sci:Acmispon}
-{!rare}
-Key features:
-{-
-stem erect, ascending, decumbent, or prostrate; woody (but green) or not
-number of leaflets per leaf, <b>leaflets hairy or not</b>
-number of flowers per leaf axil
-peduncle << 1 cm or > 1 cm
-calyx lobe length relative to tube
-corolla color
-wings > keel or +- =
--}
+sci:Acmispon spp.
+x:!rare
 
-{[
+Key features:
+. stem erect, ascending, decumbent, or prostrate; woody (but green) or not
+. number of leaflets per leaf, <b>leaflets hairy or not</b>
+. number of flowers per leaf axil
+. peduncle << 1 cm or > 1 cm
+. calyx lobe length relative to tube
+. corolla color
+. wings > keel or +- =
+
+[
 <h2>perennial?</h2>
 
-{+deerweed}
-{-
-<b>erect or ascending, woody (but green)</b>, bushy branched, <b>50-200 cm</b>
-leaflets glabrous or finely strigose
-corolla yellow
-very common
--}
+==deerweed:A. glaber
+. <b>erect or ascending, woody (but green)</b>, bushy branched, <b>50-200 cm</b>
+. leaflets glabrous or finely strigose
+. corolla yellow
+. very common
 
-{bentham's broom:Acmispon cytisoides}
-{-
-mat-forming or low-ascending, not woody, 10--80 cm
-leaflets glabrous or finely strigose
-calyx lobes narrow, some or all curved outward or hooked
-corolla 8--10 mm, generally <b>white to +- pink</b> (to brick-red when dry, wings cream), often dark-striate
-Butano, Mt. Montara vicinity
--}
+==bentham's broom:A. cytisoides
+. mat-forming or low-ascending, not woody, 10--80 cm
+. leaflets glabrous or finely strigose
+. calyx lobes narrow, some or all curved outward or hooked
+. corolla 8--10 mm, generally <b>white to +- pink</b> (to brick-red when dry, wings cream), often dark-striate
+. Butano, Mt. Montara vicinity
 
-{rush broom:Acmispon junceus}
-{-
-prostrate or low-ascending, not woody, 8--40 cm
-leaflets glabrous or finely strigose
-calyx lobes wide, straight, not hooked
-corolla yellow
-scattered in the Santa Cruz range
--}
+==rush broom:A. junceus
+. prostrate or low-ascending, not woody, 8--40 cm
+. leaflets glabrous or finely strigose
+. calyx lobes wide, straight, not hooked
+. corolla yellow
+. scattered in the Santa Cruz range
 
-{heermann's lotus:Acmispon heermannii}
-{-
-prostrate, often mat-forming, 30-100 cm
-<b>leaflets hairy</b>; may be green, gray, or silver
-corolla generally 4--6 mm, yellow to +- red, <b>dark-tipped</b>, wings >= other petals [wings < banner in other species?]
-scattered in the Santa Cruz range
--}
+==heermann's lotus:A. heermannii
+. prostrate, often mat-forming, 30-100 cm
+. <b>leaflets hairy</b>; may be green, gray, or silver
+. corolla generally 4--6 mm, yellow to +- red, <b>dark-tipped</b>, wings >= other petals [wings < banner in other species?]
+. scattered in the Santa Cruz range
 
-]}
-{[
+]
+[
 <h2>annual?</h2>
 
-{[
+[
 <h3>wings generally +- <= keel</h3>
 
-{+short-flower deervetch}
-{-
-<b>stem ascending to erect, 5--40 cm</b>
-3--9 leaflets, lanceolate to obovate, +- equal
-peduncle generally > 1 cm, generally bracted
-1-flowered per leaf axil
-calyx lobes +- <= tube
-corolla 4--6 mm, pink or salmon, quickly fading, wings +- = keel
-common
--}
+==short-flower deervetch:A. parviflorus
+. <b>stem ascending to erect, 5--40 cm</b>
+. 3--9 leaflets, lanceolate to obovate, +- equal
+. peduncle generally > 1 cm, generally bracted
+. 1-flowered per leaf axil
+. calyx lobes +- <= tube
+. corolla 4--6 mm, pink or salmon, quickly fading, wings +- = keel
+. common
 
-{spanish clover:Acmispon americanus var. americanus}
-{-
-prostrate to erect, 5--60 cm
-<b>leaflets generally 3</b> (upper leaves often simple)
-leaflets lanceolate to obovate, +- equal
-peduncle generally > 1 cm, generally bracted
-flowers 1-flowered per leaf axil
-<b>calyx lobes >> tube</b>
-corolla 5--9 mm, +- white or yellow to pink, wings +- = keel
-common
--}
+==spanish clover:A. americanus var. americanus
+. prostrate to erect, 5--60 cm
+. <b>leaflets generally 3</b> (upper leaves often simple)
+. leaflets lanceolate to obovate, +- equal
+. peduncle generally > 1 cm, generally bracted
+. flowers 1-flowered per leaf axil
+. <b>calyx lobes >> tube</b>
+. corolla 5--9 mm, +- white or yellow to pink, wings +- = keel
+. common
 
-{coastal bird's-foot trefoil:Acmispon maritimus var. maritimus}
-{-
-prostrate or ascending, 5--50 cm
-leaflets obovate to +- round, terminal generally largest
-peduncle generally > 1 cm, generally bracted
-generally 2--4-flowered per leaf axil (1st-formed often 1--2-flowered)
-corolla 6--10 mm, bright yellow, wings +- = keel
-Mt. Madonna
--}
+==coastal bird's-foot trefoil:A. maritimus var. maritimus
+. prostrate or ascending, 5--50 cm
+. leaflets obovate to +- round, terminal generally largest
+. peduncle generally > 1 cm, generally bracted
+. generally 2--4-flowered per leaf axil (1st-formed often 1--2-flowered)
+. corolla 6--10 mm, bright yellow, wings +- = keel
+. Mt. Madonna
 
-{foothill deervetch:Acmispon brachycarpus}
-{-
-mat-forming to ascending, 5--40 cm
-<b>peduncle << 1 cm, bracts 0</b>
-<b>calyx lobes 1--2 &times; tube</b>
-flowers generally 1 per leaf axil
-corolla 5--9 mm, yellow, reddening in age, wings +- = keel
-scattered
--}
+==foothill deervetch:A. brachycarpus
+. mat-forming to ascending, 5--40 cm
+. <b>peduncle << 1 cm, bracts 0</b>
+. <b>calyx lobes 1--2 &times; tube</b>
+. flowers generally 1 per leaf axil
+. corolla 5--9 mm, yellow, reddening in age, wings +- = keel
+. scattered
 
-{+chile trefoil:Acmispon wrangelianus}
-{-
-generally prostrate, branched at base, 5--30 cm
-<b>peduncle << 1 cm, bracts 0</b>
-<b>calyx lobes +- 0.8--1.2 &times; tube</b>
-flowers generally 1 per leaf axil
-corolla 5--9 mm, yellow, reddening in age, wings +- <= keel
-very common
--}
+==chile trefoil:A. wrangelianus
+. generally prostrate, branched at base, 5--30 cm
+. <b>peduncle << 1 cm, bracts 0</b>
+. <b>calyx lobes +- 0.8--1.2 &times; tube</b>
+. flowers generally 1 per leaf axil
+. corolla 5--9 mm, yellow, reddening in age, wings +- <= keel
+. very common
 
-]}
-{[
+]
+[
 <h3>wings +- >= keel</h3>
 
-{chaparral bird's-foot trefoil:Acmispon grandiflorus var. grandiflorus}
-{-
-decumbent to erect, 10-40(150) cm
-leaf (including petiole) 10--35 mm, axis not flat; 7--9 leaflets, generally 1--1.5 cm
-inflorescence 3--9-flowered
-<b>corolla 15--25 mm</b>, green-white or yellow, wings +- >= keel
-leaf axis not flat or blade-like
-Mt. Tam
--}
+==chaparral bird's-foot trefoil:A. grandiflorus var. grandiflorus
+. decumbent to erect, 10-40(150) cm
+. leaf (including petiole) 10--35 mm, axis not flat; 7--9 leaflets, generally 1--1.5 cm
+. inflorescence 3--9-flowered
+. <b>corolla 15--25 mm</b>, green-white or yellow, wings +- >= keel
+. leaf axis not flat or blade-like
+. Mt. Tam
 
-{strigose lotus:Acmispon strigosus}
-{-
-prostrate, often mat-forming, generally branched from base, 3--50 cm
-leaf axis flat, +- blade-like
-3--9 leaflets, lanceolate to obovate, +- equal
-inflorescence generally 1--2-flowered
-<b>corolla 5--10 mm</b>, yellow, orange or +- red in age, wings generally > keel
-scattered
--}
+==strigose lotus:A. strigosus
+. prostrate, often mat-forming, generally branched from base, 3--50 cm
+. leaf axis flat, +- blade-like
+. 3--9 leaflets, lanceolate to obovate, +- equal
+. inflorescence generally 1--2-flowered
+. <b>corolla 5--10 mm</b>, yellow, orange or +- red in age, wings generally > keel
+. scattered
 
-]}
-]}
+]
+]
 
 Rare species that I need to key:
 
-{:A. argophyllus}
-{-
-prostrate to erect, 10--60 cm
-leaflets with hairs generally obscuring surface
-calyx 4--8 mm, lobes +- <= tube, densely shaggy-hairy
-corolla 6--12 mm, wings +- = keel
-rare
--}
+==A. argophyllus
+. prostrate to erect, 10--60 cm
+. leaflets with hairs generally obscuring surface
+. calyx 4--8 mm, lobes +- <= tube, densely shaggy-hairy
+. corolla 6--12 mm, wings +- = keel
+. rare
 
-{:A. argyraeus}
-{-
-rare
--}
+==A. argyraeus
+. rare
 
-{:A. micranthus}
-{-
-rare
--}
+==A. micranthus
+. rare

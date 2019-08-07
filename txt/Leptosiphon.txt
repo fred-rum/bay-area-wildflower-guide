@@ -1,59 +1,51 @@
-{com:baby stars, linanthus, and leptosiphons}
-{more}
+com:baby stars, linanthus, and leptosiphons
+sci:Leptosiphon spp.
+x:more
+
 <b>Caution: IDs unsure</b>
 
 There are quite a few Leptosiphon species in the bay area and my IDs thus far have not been good quality.  This page lists some key features, but I don't attempt to replicate the whole Jepson decision tree.  Instead, each flower description includes enough information to (hopefully) confirm an ID hypothesis (with help from CalPhoto).
 
 Key features:
-{-
-stem length and branching
-leaf lobe length and shape
-densely bracted head or not
-corolla salverform or not
-calyx & calyx membrane (in many cases this is embedded among the dense bracts at the base of the corolla tube)
-corolla tube, throat, and lobe colors
-stamens exserted or not
--}
+. stem length and branching
+. leaf lobe length and shape
+. densely bracted head or not
+. corolla salverform or not
+. calyx & calyx membrane (in many cases this is embedded among the dense bracts at the base of the corolla tube)
+. corolla tube, throat, and lobe colors
+. stamens exserted or not
 
 Photos showing the calyx of a Leptosiphon species with an <a href="http://science.halleyhosting.com/nature/gorge/5petal/phlox/linanthus/bolanderi.html
 ">exserted calyx</a>.
 
-{+variable linanthus}
-{-
-Stem: 4--40 cm, may be be branched at base or above
-Leaf: lobes 2--18 mm, narrowly obovate to linear, tip of middle lobe acute
-Inflorescence: densely bracted head
-Calyx: 4--10 mm, <b>densely hairy, glandular</b>, membrane obscure
-Corolla: salverform, tube 11--46 mm, thread-like, maroon, pink, or yellow, throat yellow, purple, or orange, <b>lobes 4--8 mm</b>, elliptic to oblanceolate, pink, white, yellow, or purple, often with red marks at lobe bases
-stamens exserted; stigmas 1--7 mm
--}
+==variable linanthus:L. parviflorus
+. Stem: 4--40 cm, may be be branched at base or above
+. Leaf: lobes 2--18 mm, narrowly obovate to linear, tip of middle lobe acute
+. Inflorescence: densely bracted head
+. Calyx: 4--10 mm, <b>densely hairy, glandular</b>, membrane obscure
+. Corolla: salverform, tube 11--46 mm, thread-like, maroon, pink, or yellow, throat yellow, purple, or orange, <b>lobes 4--8 mm</b>, elliptic to oblanceolate, pink, white, yellow, or purple, often with red marks at lobe bases
+. stamens exserted; stigmas 1--7 mm
 
-{+false babystars}
-{-
-Stem: 5--45 cm (unknown branching)
-Leaf: lobes 6--30 mm, narrowly oblanceolate to linear
-Inflorescence: densely bracted head
-Calyx: 6--13 mm, [hairs sparse or 0 except on margins], <b>ciliate, nonglandular</b>, abaxially generally glabrous [huh?  is this the outside?], membrane much narrower than lobes
-Corolla: salverform, tube 10--33 mm, thread-like, pink or lavender, throat generally violet at base, yellow above, <b>lobes generally > 8 mm</b>, oblanceolate to linear, often abruptly soft-pointed, lavender, white, or pink, bases yellow, occasionally with white distal to yellow
-stamens exserted; stigma 2--6 mm
--}
+==false babystars:L. androsaceus
+. Stem: 5--45 cm (unknown branching)
+. Leaf: lobes 6--30 mm, narrowly oblanceolate to linear
+. Inflorescence: densely bracted head
+. Calyx: 6--13 mm, [hairs sparse or 0 except on margins], <b>ciliate, nonglandular</b>, abaxially generally glabrous [huh?  is this the outside?], membrane much narrower than lobes
+. Corolla: salverform, tube 10--33 mm, thread-like, pink or lavender, throat generally violet at base, yellow above, <b>lobes generally > 8 mm</b>, oblanceolate to linear, often abruptly soft-pointed, lavender, white, or pink, bases yellow, occasionally with white distal to yellow
+. stamens exserted; stigma 2--6 mm
 
-{+serpentine leptosiphon}
-{-
-Stem: 10--20 mm, thread-like (unknown branching)
-Leaf: lobes 3--5 mm, narrowly lanceolate
-Inflorescence: not a densely bracted head; few-flowered cyme or flower 1; pedicel 5--25 mm, thread-like
-Calyx: 3--6 mm, generally hairy, membrane generally = calyx
-Corolla: funnel-shaped, tube 3--6 mm, purple, with wide hairy ring inside near throat, throat 3 mm, generally maroon, lobes 4--6 mm, lanceolate, pink, bases yellow, occasionally with white distal to yellow
-stamens attached above hairy ring, exserted; stigmas 1--2 mm
--}
+==serpentine leptosiphon:L. ambiguus
+. Stem: 10--20 mm, thread-like (unknown branching)
+. Leaf: lobes 3--5 mm, narrowly lanceolate
+. Inflorescence: not a densely bracted head; few-flowered cyme or flower 1; pedicel 5--25 mm, thread-like
+. Calyx: 3--6 mm, generally hairy, membrane generally = calyx
+. Corolla: funnel-shaped, tube 3--6 mm, purple, with wide hairy ring inside near throat, throat 3 mm, generally maroon, lobes 4--6 mm, lanceolate, pink, bases yellow, occasionally with white distal to yellow
+. stamens attached above hairy ring, exserted; stigmas 1--2 mm
 
-{+large-flowered leptosiphon}
-{-
-Stem: branched above, hairy
-Leaf: ascending, lobes 10--30 mm, linear, hairy or glabrous
-Inflorescence: sessile above a densely-bracted head
-Calyx: 10--14 mm, hairy, membrane 2/3 calyx, wider than lobes
-Corolla: funnel-shaped, 15--30 mm, with hairy ring inside, throat yellow, lobes white or pink
-stamens included
--}
+==large-flowered leptosiphon:L. grandiflorus
+. Stem: branched above, hairy
+. Leaf: ascending, lobes 10--30 mm, linear, hairy or glabrous
+. Inflorescence: sessile above a densely-bracted head
+. Calyx: 10--14 mm, hairy, membrane 2/3 calyx, wider than lobes
+. Corolla: funnel-shaped, 15--30 mm, with hairy ring inside, throat yellow, lobes white or pink
+. stamens included

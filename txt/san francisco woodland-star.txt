@@ -1,0 +1,2 @@
+sci:Lithophragma affine
+color: white

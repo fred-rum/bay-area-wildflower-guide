@@ -1,87 +1,68 @@
-{com:silverpuffs}
-{ba}
+com:silverpuffs
+sci:Microseris spp.
+x:ba
+
 See also {-Uropappus lindleyi}.
 
 Key features:
-{-
-length of all features
-number of scales per seed
-seed color (and sometimes shape)
-scale color and tip shape (and sometimes fuzziness)
-bristle fuzziness
--}
+. length of all features
+. number of scales per seed
+. seed color (and sometimes shape)
+. scale color and tip shape (and sometimes fuzziness)
+. bristle fuzziness
 
 <h2><= 5 scales; simple stem</h4>
 
 Ordered roughly by scale length (long to short).
 
-{+Microseris acuminata}
-{-
-Seeds 4.5--7 mm, flared at tip.
-5 scales, each 3.5--11 mm, barely inrolled, midrib > 1/5 scale width.
-Bristles 4--7 mm.
-Rare in the East Bay.
-Supposedly not present on the peninsula, but found in the upper part of Foothills Park.
--}
+==M. acuminata
+. Seeds 4.5--7 mm, flared at tip.
+. 5 scales, each 3.5--11 mm, barely inrolled, midrib > 1/5 scale width.
+. Bristles 4--7 mm.
+. Rare in the East Bay.
+. Supposedly not present on the peninsula, but found in the upper part of Foothills Park.
 
-{+douglas' silverpuffs}
-{-
-Seeds 3--10 mm.
-<= 5 scales, each tiny--6.5 mm; if >= 1 mm, becoming curved throughout and strongly inrolled.
-Scale midrib evenly tapered from thick base.
-Bristles 3--8.5 mm.
-Found everywhere east of Skyline Blvd.
--}
+==douglas' silverpuffs:M. douglasii
+. Seeds 3--10 mm.
+. <= 5 scales, each tiny--6.5 mm; if >= 1 mm, becoming curved throughout and strongly inrolled.
+. Scale midrib evenly tapered from thick base.
+. Bristles 3--8.5 mm.
+. Found everywhere east of Skyline Blvd.
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1207+1291}
-{san joaquin silverpuffs:Microseris campestris}
-{-
-Seeds 3--5+ mm, widest at tip.
-5 scales, each 1--4.5 mm, becoming +- curved throughout, barely inrolled, barely or not pigmented.
-Scale midrib evenly tapered from thick base.
-Bristles 3--5.5 mm.
-Rare near Redwood Park and Mt. Diablo.
--}
+==san joaquin silverpuffs:M. campestris
+. Seeds 3--5+ mm, widest at tip.
+. 5 scales, each 1--4.5 mm, becoming +- curved throughout, barely inrolled, barely or not pigmented.
+. Scale midrib evenly tapered from thick base.
+. Bristles 3--5.5 mm.
+. Rare near Redwood Park and Mt. Diablo.
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0511+0184}
-{coastal silverpuffs:Microseris bigelovii}
-{-
-Seeds 2.5--5.5mm, widest near middle and tapering to base.
-Outermost seeds are generally very hairy, while inner seeds are glabrous.
-5 scales, each 1--4 mm, curved only at base.
-Scale midrib linear, thicker at base.
-Bristles 3--8 mm.
-Found near the coast and at Edgewood.
--}
+==coastal silverpuffs:M. bigelovii
+. Seeds 2.5--5.5mm, widest near middle and tapering to base.
+. Outermost seeds are generally very hairy, while inner seeds are glabrous.
+. 5 scales, each 1--4 mm, curved only at base.
+. Scale midrib linear, thicker at base.
+. Bristles 3--8 mm.
+. Found near the coast and at Edgewood.
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0411+2148}
-{:Microseris elegans}
-{-
-Seeds 1.5--3 mm, widest at the tip, tapering (slightly) to the base.
-Outermost seeds are sometimes hairy, while inner seeds are glabrous.
-5 scales, each 0.2--2.5 mm.
-Bristles 3--5 mm.
-Found at Coe and Mt. Diablo.
--}
+==M. elegans
+. Seeds 1.5--3 mm, widest at the tip, tapering (slightly) to the base.
+. Outermost seeds are sometimes hairy, while inner seeds are glabrous.
+. 5 scales, each 0.2--2.5 mm.
+. Bristles 3--5 mm.
+. Found at Coe and Mt. Diablo.
 
 <h2>5--10 scales; stem may be branched and/or have leaves</h4>
 
 Ordered roughly by scale length (long to short).
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0114+0026}
-{sylvan microseris:Microseris sylvatica}
-{-
-Seeds 5--12 mm
-5--10 scales, each 4--10 mm.
-Bristles 6--9 mm.
-Found near the coast and on Mt. Tamalpais.
--}
+==sylvan microseris:M. sylvatica
+. Seeds 5--12 mm
+. 5--10 scales, each 4--10 mm.
+. Bristles 6--9 mm.
+. Found near the coast and on Mt. Tamalpais.
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0118+0635}
-{marsh microseris:Microseris paludosa}
-{-
-Seeds 4--7 mm
-5--10 scales, each 2--4 mm.
-Bristles 6--9 mm.
-Found at Mt. Diablo.
--}
+==marsh microseris:M. paludosa
+. Seeds 4--7 mm
+. 5--10 scales, each 2--4 mm.
+. Bristles 6--9 mm.
+. Found at Mt. Diablo.

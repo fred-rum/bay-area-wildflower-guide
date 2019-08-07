@@ -1,0 +1,2 @@
+sci:Trifolium hirtum
+color: pink, pale purple, other

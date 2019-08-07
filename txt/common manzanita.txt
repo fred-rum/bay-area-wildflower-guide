@@ -1,0 +1,2 @@
+sci:Arctostaphylos manzanita
+color: white

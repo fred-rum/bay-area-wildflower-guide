@@ -1,0 +1,2 @@
+sci:Diplacus congdonii
+color: red purple

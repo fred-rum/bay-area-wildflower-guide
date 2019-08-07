@@ -1,1 +1,3 @@
-{ca}
+sci:Gazania linearis
+color: orange
+x:ca

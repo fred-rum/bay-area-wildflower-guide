@@ -1,26 +1,17 @@
-{com:baby blue eyes}
+com:baby blue eyes
+sci:Nemophila spp.
 
-{+baby blue eyes}
-{-
-common throughout the bay area
--}
+==N. menziesii
+. common throughout the bay area
 
-{+white nemophila}
-{-
-scattered throughout the bay area
--}
+==white nemophila:N. heterophylla
+. scattered throughout the bay area
 
-{small flowered nemophila:Nemophila parviflora}
-{-
-scattered throughout the bay area.
--}
+==small flowered nemophila:N. parviflora
+. scattered throughout the bay area.
 
-{meadow nemophila:Nemophila pedunculata}
-{-
-rare in the bay area.
--}
+==meadow nemophila:N. pedunculata
+. rare in the bay area.
 
-{eastwood's nemophila:Nemophila pulchella}
-{-
-extremely rare in the bay area.
--}
+==eastwood's nemophila:N. pulchella
+. extremely rare in the bay area.

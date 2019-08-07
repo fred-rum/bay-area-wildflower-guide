@@ -1,0 +1,2 @@
+sci:Lathyrus latifolius
+color: pink, red purple

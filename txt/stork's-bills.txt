@@ -1,57 +1,48 @@
-{sci:Erodium}
-{[
+sci:Erodium spp.
+
+[
 <h3>narrower petals</h3>
 
 Key feature: bristles on sepal tips, sepal length
 
-{+common stork's-bill}
-{-
-stem +- glandular-hairy?
-<b>sepals 3--5 mm, tip with one or more bristles</b>
-petals +- = sepals
-leaf compound
-peduncle is often a deep red purple, but not always
--}
+==common stork's-bill:E. cicutarium
+. stem +- glandular-hairy?
+. <b>sepals 3--5 mm, tip with one or more bristles</b>
+. petals +- = sepals
+. leaf compound
+. peduncle is often a deep red purple, but not always
 
-{+musk stork's-bill}
-{-
-stem short hairy
-<b>sepals 6--9 mm, tip glabrous</b> [with knob, but no bristles]
-petals 10--15 mm [often shorter]
-leaf compound
-peduncle is often a green purple, but is often short and hidden by the flower
--}
+==musk stork's-bill:E. moschatum
+. stem short hairy
+. <b>sepals 6--9 mm, tip glabrous</b> [with knob, but no bristles]
+. petals 10--15 mm [often shorter]
+. leaf compound
+. peduncle is often a green purple, but is often short and hidden by the flower
 
-]}
-{[
+]
+[
 <h3>rounder petals</h3>
 
 Key feature: stem glandular or not, precise sepal length
 
-{+mediterranean stork's-bill}
-{-
-petals are rounder and with more prominent veins than in common/musk
-<b>stem short-hairy</b>
-<b>sepals 10--13 mm</b>, tip with one or more bristles
-petals +- > sepals (usually hiding the sepals)
-leaf lobed to dissected
--}
+==mediterranean stork's-bill:E. botrys
+. petals are rounder and with more prominent veins than in common/musk
+. <b>stem short-hairy</b>
+. <b>sepals 10--13 mm</b>, tip with one or more bristles
+. petals +- > sepals (usually hiding the sepals)
+. leaf lobed to dissected
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0818+2297} {hairy-pitted stork's-bill:Erodium brachycarpum}
-{-
-petals are rounder and with more prominent veins than in common/musk
-<b>stem glandular-hairy</b>
-<b>sepals 7--10 mm</b>, tip with one or more bristles
-petals +- > sepals (usually hiding the sepals)
-leaf lobed
--}
+==hairy-pitted stork's-bill:E. brachycarpum
+. petals are rounder and with more prominent veins than in common/musk
+. <b>stem glandular-hairy</b>
+. <b>sepals 7--10 mm</b>, tip with one or more bristles
+. petals +- > sepals (usually hiding the sepals)
+. leaf lobed
 
-]}
+]
 
-{https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1105+0694} {soft stork's-bill:Erodium malacoides}
-{-
-<b>leaf simple</b>, crenate to shallowly lobed, blade generally < petiole
-sepals 4--6 mm, tip with one or more bristles
-petals +- = sepals
-Monte Bello, Mt. Diablo
--}
+==soft stork's-bill:E. malacoides
+. <b>leaf simple</b>, crenate to shallowly lobed, blade generally < petiole
+. sepals 4--6 mm, tip with one or more bristles
+. petals +- = sepals
+. Monte Bello, Mt. Diablo

@@ -1,0 +1,2 @@
+sci:Vicia americana
+color: pink, pale purple

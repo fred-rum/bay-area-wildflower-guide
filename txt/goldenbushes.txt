@@ -1,32 +1,25 @@
-{sci:Ericameria}
-{hist/rare}
-{+golden-fleece:E. arborescens}
-{-
-phyllaries unequal in a graduated series
-no rays
-leaves and often young stem dotted with round, +- evenly spaced, resin-filled pits
-scattered
--}
+sci:Ericameria spp.
+x:hist/rare
 
-{rubber rabbitbrush:E. nauseosa}
-{-
-phyllaries unequal in a graduated series
-no rays
-leaves and young stem lacking round resin pits
-rare
--}
+==golden-fleece:E. arborescens
+. phyllaries unequal in a graduated series
+. no rays
+. leaves and often young stem dotted with round, +- evenly spaced, resin-filled pits
+. scattered
 
-{+california goldenbush:E. ericoides}
-{-
-phyllaries unequal in a graduated series
-tips of outermost phyllaries generally abruptly pointed, leaf-like
-3--6 rays, 6--8 mm
-rare
--}
+==rubber rabbitbrush:E. nauseosa
+. phyllaries unequal in a graduated series
+. no rays
+. leaves and young stem lacking round resin pits
+. rare
 
-{narrowleaf goldenbush:E. linearifolia}
-{-
-phyllaries +- equal length
-12--18 rays, 9--20 mm
-rare
--}
+==california goldenbush:E. ericoides
+. phyllaries unequal in a graduated series
+. tips of outermost phyllaries generally abruptly pointed, leaf-like
+. 3--6 rays, 6--8 mm
+. rare
+
+==narrowleaf goldenbush:E. linearifolia
+. phyllaries +- equal length
+. 12--18 rays, 9--20 mm
+. rare

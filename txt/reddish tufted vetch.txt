@@ -1,0 +1,2 @@
+sci:Vicia benghalensis
+color: red purple

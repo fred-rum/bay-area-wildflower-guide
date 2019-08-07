@@ -1,0 +1,2 @@
+sci:Lythrum californicum
+color: purple
