@@ -203,8 +203,6 @@ complete name).
 
 Use non-breaking spaces in footer links (Jepson eFlora) and (Bay Area species).
 
-Adjust glossary to not fire between braces.
-
 Sort the glossary word list in reverse alphabetical order so that longer
 entries are before shorter entries that start the same.
 

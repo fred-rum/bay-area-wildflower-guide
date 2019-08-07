@@ -539,10 +539,21 @@ class Page:
             primary_word = glossary_dict[word.lower()]
             return '<a class="glossary" href="glossary.html#{primary_word}">{word}</a>'.format(word=word, primary_word=primary_word)
 
+        def repl_sub_glossary(matchobj):
+            allowed = matchobj.group(1)
+            disallowed = matchobj.group(2)
+            allowed = re.sub(glossary_regex, repl_glossary, allowed)
+            if disallowed:
+                return allowed + disallowed
+            else:
+                return allowed
+
         out_list = []
         for s in self.txt.split('\n'):
             if s and s[0] != '+':
-                s = re.sub(glossary_regex, repl_glossary, s)
+                # find non-links followed (optionally) by links and
+                # perform substitutions only on the non-link parts.
+                s = re.sub('([^\{]*)(\{[^\}]*\})?', repl_sub_glossary, s)
             out_list.append(s)
         self.txt = '\n'.join(out_list)
 
