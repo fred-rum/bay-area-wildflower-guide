@@ -99,7 +99,7 @@ div.photo-box {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin: 0px 0px;
+    margin: 10px 0px;
 }
 span.show-narrow {
     display: inline;

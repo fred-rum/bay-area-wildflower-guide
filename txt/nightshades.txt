@@ -9,7 +9,7 @@ Hairs are branched or 0/simple on upper stem (not flower pedicel).  The hairs ar
 Leaf shape.  There is some overlap, but the shapes are often distinct.
 -}
 
-{+bluewitch nightshade} 
+{+bluewitch nightshade}
 {-
 upper stem hairs generally dense, branched
 leaf 1--4 cm, ovate, obovate, or elliptic, generally entire

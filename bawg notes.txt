@@ -203,6 +203,11 @@ complete name).
 
 Use non-breaking spaces in footer links (Jepson eFlora) and (Bay Area species).
 
+Adjust glossary to not fire between braces.
+
+Sort the glossary word list in reverse alphabetical order so that longer
+entries are before shorter entries that start the same.
+
 Update txt format to be line based and require fewer braces.
   manually remove uses of '{child:[page]}' and '{[page]:[photo].jpg}'
     done
@@ -216,13 +221,13 @@ Update txt format to be line based and require fewer braces.
   detect CalPhotos link followed by child link ({+...}):
     do this after detecting children so that the page is present
     add the CalPhotos link to the child page's txt prior to parsing it
-  -- done --
   create photobox when linking:
     remove the CalPhotos link when it is recorded
     in repl_child, return only the link (no photo)
     create nested photobox and image link for a child link
       include the following text in the outer box
     use the child's CalPhotos photo when linking
+  -- done --
   modify text prior to *all* parsing, then parse it accordingly:
     {sci:...} -> sci:... (put space after colon or not?)
     {com:...} -> com:...

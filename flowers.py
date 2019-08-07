@@ -370,6 +370,17 @@ class Page:
                     return jpg
             return None
 
+    def get_calphotos(self):
+        if self.calphotos:
+            return self.calphotos[0]
+        else:
+            # Search this key page's children for a calphotos to use.
+            for child in self.child:
+                calphotos = child.get_calphotos()
+                if calphotos:
+                    return calphotos
+            return None
+
     def parse_names(self):
         def repl_com(matchobj):
             com = matchobj.group(1)
@@ -404,16 +415,16 @@ class Page:
                 name_page[name].calphotos.append(calphotos)
             else:
                 print 'calphotos could not be attached to child {child} in key {key}'.format(child=name, key=self.name)
-            return '{' + name + '}'
+            return '+' + name
 
-        self.txt = re.sub(r'{(https://calphotos.berkeley.edu/[^\}: ]+)(?::([^\}]+))?}\s*{([^\}]+)}', repl_child_calphotos, self.txt)
+        self.txt = re.sub(r'{(https://calphotos.berkeley.edu/[^\}: ]+)(?::([^\}]+))?}\s*\+([^\n]+)', repl_child_calphotos, self.txt)
 
     def parse_calphotos(self):
         def repl_calphotos(matchobj):
             self.calphotos.append((matchobj.group(1), matchobj.group(2)))
             return ''
 
-        self.txt = re.sub(r'^\s*(?:([^:\}]*):)?(https://calphotos.berkeley.edu/[^\} ]+)\s*\n', repl_calphotos, self.txt, flags=re.MULTILINE)
+        self.txt = re.sub(r'^(?:([^:\}]*):)?(https://calphotos.berkeley.edu/[^\} ]+) *\n', repl_calphotos, self.txt, flags=re.MULTILINE)
 
     # Check if check_page is an ancestor of this page (for loop checking).
     def is_ancestor(self, check_page):
@@ -495,7 +506,7 @@ class Page:
                     name = strip_sci(sci)
                 # If the child does not exist, create it.
                 child_page = Page(name)
-                # We don't expect a '+' or 'child:' link to a missing page;
+                # We don't expect a '+' link to a missing page;
                 # only a {name:sci} link should create a fresh page.
                 if x:
                     print 'Broken link to {{{name}}} on page {page}'.format(name=name, page=self.name)
@@ -505,18 +516,9 @@ class Page:
             # also give a scientific name to it.
             if sci:
                 child_page.set_sci(sci)
-            if x == 'child:':
-                print 'child: used on page {name}'.format(self.name)
-            if x == '+':
-                # Replace the {+...} field with two new fields:
-                # - a photo that links to the child
-                # - a text link to the child
-                return ('{' + name + ':' + name + suffix + '.jpg}\n'
-                        '{' + name + '}')
-            else:
-                # Replace the {child:name} or {name:sci} field with a new field:
-                # - a text link to the child
-                return '{' + name + '}'
+            # Replace the {+...} or {...} field with a bare +... line.
+            # This will create the appropriate link later in the parsing.
+            return '+' + name + suffix
 
         # If the page's genus is explicitly specified,
         # make it the default for child abbreviations.
@@ -525,10 +527,11 @@ class Page:
         else:
             self.cur_genus = None
 
-        if re.search(r'{([^}]+):([^}]+).jpg}', self.txt):
-            print '{[page]:[jpg].jpg} used on page ' + self.name
+#        if self.name == 'clovers':
+#            print self.txt
+#            exit(1)
 
-        self.txt = re.sub(r'{(child:|\+|)([^\}:,\n]*)(,[-0-9]*)?(:[^\}\n]+)?}', repl_child, self.txt)
+        self.txt = re.sub(r'{(\+|)([^\}:,\n]*)(,[-0-9]*)?(:[^\}\n]+)?}', repl_child, self.txt, flags=re.MULTILINE)
 
     def parse_glossary(self):
         def repl_glossary(matchobj):
@@ -538,7 +541,7 @@ class Page:
 
         out_list = []
         for s in self.txt.split('\n'):
-            if s and s[0] != '{':
+            if s and s[0] != '+':
                 s = re.sub(glossary_regex, repl_glossary, s)
             out_list.append(s)
         self.txt = '\n'.join(out_list)
@@ -727,129 +730,97 @@ class Page:
 
         s = re.sub(r'\n{-\n(.*?)\n-}\n', repl_list, s, flags=re.DOTALL)
 
-        # Look for any number of {photos} followed by all text up to the
-        # first \n\n or \n+EOF.  Photos can be my own or CalPhotos.
-        # The photos and text are grouped together and vertically centered.
-        # The text is also put in a <span> for correct whitespacing.
-        def repl_photo_box(matchobj):
-            imgs = matchobj.group(1)
-            text = matchobj.group(2)
+        # Look for a link to a child followed by all text up to the
+        # first \n\n or EOF.  Create the HTML link along with a photo
+        # (if available).  Group the photo and text together and
+        # vertically centered, except on a narrow screen, in which case
+        # the link text is centered next to the photo, but the remaining
+        # text is dropped below.
+        def repl_child_link(matchobj):
+            name = matchobj.group(1)
+            suffix = matchobj.group(2)
+            text = matchobj.group(3)
+            if not suffix:
+                suffix = ''
+            if not text:
+                text = ''
 
-            if re.search(r'{.*{', imgs) and text:
-                print 'multiple images used on page ' + self.name
+            child = find_page1(name)
+            if not child:
+                print 'Broken link to +{name} on page {key}'.format(name=name, key=self.name)
+                return '+{name}\n'.format(name=name)
 
-            # If the text after the images appears to be a species link
-            # followed by more text, then duplicate and contain the
-            # species link so that the following text can either be in
-            # the same column or on a different row, depending on the
-            # width of the viewport.
-            matchobj2 = re.match(r'({.*}\s*)\n(.*)', text, flags=re.DOTALL)
-            if matchobj2:
-                species = matchobj2.group(1)
-                text = matchobj2.group(2)
-                # [div-flex-horiz-or-vert
-                #  [div-horiz photos, (narrow-only) species]
-                #  [span-vert (wide-only) species, text]
-                # ]
-                return '<div class="flex-width"><div class="photo-box">{imgs}<span class="show-narrow">{species}</span></div><span><span class="show-wide">{species}</span>{text}</span></div>'.format(imgs=imgs, species=species, text=text)
+            link = child.create_link(2)
+
+            jpg = None
+            if suffix:
+                if name + suffix in jpg_list:
+                    jpg = name + suffix
+                else:
+                    print name + suffix + '.jpg not found on page ' + self.name
+
+            if not jpg:
+                jpg = child.get_jpg()
+
+            if not jpg:
+                calphotos = child.get_calphotos()
+
+            if jpg:
+                if self.autogenerated:
+                    img_class = 'list-thumb'
+                else:
+                    img_class = 'page-thumb'
+                img = '<a href="{name}.html"><img src="../thumbs/{jpg}.jpg" width="200" height="200" class="{img_class}"></a>'.format(name=name, jpg=jpg, img_class=img_class)
+            elif calphotos:
+                img = '<a href="{name}.html" class="enclosed"><div class="page-thumb-text">'.format(name=name)
+                if calphotos[0]:
+                    img += '<span>'
+                img += '<span style="text-decoration:underline;">CalPhotos</span>'
+                if calphotos[0]:
+                    img += '<br/>{text}</span>'.format(text=calphotos[0])
+                img += '</div></a>'
             else:
-                return '<div class="photo-box">{imgs}<span>{text}</span></div>'.format(imgs=imgs, text=text)
+                img = None
 
-        s = re.sub(r'((?:\{(?:jpgs|[^\}]+.jpg|https://calphotos.berkeley.edu/[^\}]+)\} *(?:\n(?!\n))?)+)(.*?)(?=\n(\n|\Z))', repl_photo_box, s, flags=re.DOTALL)
+            if not img:
+                return link + '\n' + text
+
+            if text:
+                # Duplicate and contain the text link so that the following text
+                # can either be below the text link and next to the image or
+                # below both the image and text link, depending on the width of
+                # the viewport.
+                return '<div class="flex-width"><div class="photo-box">{img}\n<span class="show-narrow">{link}</span></div><span><span class="show-wide">{link}</span>{text}</span></div>'.format(img=img, link=link, text=text)
+            else:
+                return '<div class="photo-box">{img}\n<span>{link}</span></div>'.format(img=img, link=link)
+
+        # Search for:
+        #  + at the start of a line, then
+        #  a name, then
+        #  optionally a jpg suffix, then
+        #  ignored spaces, then
+        #  a carriage return, then
+        #  optionally arbitrary text as long as the text doesn't start with
+        #    a second carriage return.  The text ends at EOF or before
+        #    two carriage returns in a row.
+        s = re.sub(r'^\+([^,\n]*)(,[-0-9]*)? *\n((?!\n)(?:(?:\n(?!\n))|.)+)?', repl_child_link, s, flags=re.MULTILINE)
 
         # Replace a pair of newlines with a paragraph separator.
         # (Do this after making specific replacements based on paragraphs,
         # but before replacements that might create empty lines.)
         s = s.replace('\n\n', '\n<p/>\n')
 
-        # Replace {*.jpg} with a thumbnail image and either
-        # - a link to the full-sized image, or
-        # - a link to a child page.
-        def repl_jpg(matchobj):
-            jpg = matchobj.group(1)
-
-            # Decompose a jpg reference of the form {[page]:[img].jpg}
-            pos = jpg.find(':')
-            if pos > 0:
-                link = jpg[:pos]
-                jpg = jpg[pos+1:]
-                link_to_jpg = False
-            else:
-                link_to_jpg = True
-
-            # Keep trying stuff until we find something in the global jpg_list
-            # or until we explicitly give up.
-            orig_jpg = jpg
-            if jpg not in jpg_list and jpg in name_page:
-                # If the "jpg" name is actually a page name, get a jpg
-                # from that page.
-                jpg_page = name_page[jpg]
-                jpg = jpg_page.get_jpg()
-
-            found = (jpg in jpg_list)
-            if not found:
-                jpg = orig_jpg
-
-            thumb = '../thumbs/{jpg}.jpg'.format(jpg=jpg)
-
-            if link_to_jpg:
-                href = '../photos/{jpg}.jpg'.format(jpg=jpg)
-                img_class = 'leaf-thumb'
-            else:
-                href = '{link}.html'.format(link=link)
-                if page.autogenerated:
-                    img_class = 'list-thumb'
-                else:
-                    img_class = 'page-thumb'
-
-            if found:
-                img = '<a href="{href}"><img src="{thumb}" width="200" height="200" class="{img_class}"></a>'.format(href=href, thumb=thumb, img_class=img_class)
-            else:
-                img = '<a href="{href}" class="missing"><div class="page-thumb-text"><span>{jpg}</span></div></a>'.format(jpg=jpg, href=href)
-                print '{jpg}.jpg missing on page {name}'.format(jpg=jpg, name=self.name)
-
-            return img
-
-        s = re.sub(r'{([^}]+).jpg}', repl_jpg, s)
-
-        # Replace a {CalPhotos:text} reference with a 200px box with
-        # "CalPhotos: text" in it.
-        # The entire box is a link to CalPhotos.
-        # The ":text" part is optional.
-        def repl_calphotos(matchobj):
-            print 'lost calphotos reference in page ' + self.name
-            href = matchobj.group(1)
-            pos = href.find(':') # find the colon in "http:"
-            pos = href.find(':', pos+1) # find the next colon, if any
-            if pos > 0:
-                text = '<br/>' + href[pos+1:]
-                href = href[:pos]
-            else:
-                text = ''
-
-            img = '<a href="{href}" target="_blank" class="enclosed"><div class="page-thumb-text"><span><span style="text-decoration:underline;">CalPhotos</span>{text}</span></div></a>'.format(href=href, text=text)
-
-            return img
-
-        s = re.sub(r'\{(https://calphotos.berkeley.edu/[^\}]+)\}', repl_calphotos, s)
-
-        # Any remaining {reference} should refer to another page.
-        # Replace it with a link to one of my pages (if I can).
+        # Replace {-[name]} with an inline link to the page.
         def repl_link(matchobj):
             name = matchobj.group(1)
-            if name[0] == '-':
-                name = name[1:]
-                lines = 1
-            else:
-                lines = 2
             page = find_page1(name)
             if page:
-                return page.create_link(lines)
+                return page.create_link(1)
             else:
-                print 'Broken link {{{name}}} on page {page}'.format(name=name, page=self.name)
-                return '{' + name + '}'
+                print 'Broken link {{-{name}}} on page {page}'.format(name=name, page=self.name)
+                return '{-' + name + '}'
 
-        s = re.sub(r'{([^}]+)}', repl_link, s)
+        s = re.sub(r'{-([^}]+)}', repl_link, s)
 
         with open(root + "/html/" + self.name + ".html", "w") as w:
             com = self.com
@@ -941,9 +912,9 @@ class Page:
                     w.write('<a href="{link}" target="_blank" class="enclosed"><div class="leaf-thumb-text">'.format(link=tuple[1]))
                     if tuple[0]:
                         w.write('<span>')
-                    w.write('<span style="text-decoration:underline;">CalPhotos</span>'.format(link=tuple[1]))
+                    w.write('<span style="text-decoration:underline;">CalPhotos</span>')
                     if tuple[0]:
-                        w.write('<br/>{text}</span>'.format(text=tuple[0], link=tuple[1]))
+                        w.write('<br/>{text}</span>'.format(text=tuple[0]))
                     w.write('</div></a>\n')
 
                 w.write('</div>\n')
@@ -1097,7 +1068,16 @@ def repl_glossary(matchobj):
     primary_word = word_list[0]
     for word in word_list:
         glossary_dict[word] = primary_word
+
+    # extend the glossary list by the word list *in the listed order*
+    # so that the search is in the same order.  You might think that the
+    # search is greedy and so finds the longest match, but no, it finds
+    # the first listed match.  This makes a difference when one entry is
+    # starts the same as another but includes an extra word.  (Extra letters
+    # aren't an issue since the glossary only allows matches at word
+    # boundaries.)
     glossary_list.extend(word_list)
+
     return '<div class="defn" id="{word}"><dt>{word}</dt><dd>{defn}</dd></div>'.format(word=primary_word, defn=defn)
 
 glossary_txt = re.sub(r'{([^\}]+)}\s+(.*)', repl_glossary, glossary_txt)

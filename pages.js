@@ -740,7 +740,6 @@ var pages=[
 {page:"Heliotropium europaeum",sci:"Heliotropium europaeum"},
 {page:"hoary wild buckwheat",sci:"Eriogonum saxatile"},
 {page:"hoffmann's sanicle",sci:"Sanicula hoffmannii"},
-{page:"holly-leaved ceanothus",sci:"Ceanothus purpureus"},
 {page:"Holocarpha macradenia",sci:"Holocarpha macradenia"},
 {page:"Holocarpha obconica",sci:"Holocarpha obconica"},
 {page:"horseweed",sci:"Erigeron canadensis"},
