@@ -15,6 +15,7 @@
 {ligule,ligules} The petal of a flower in the sunflower family comprised only of ray-like flowers (i.e. not disk and ray).
 {pedicel,pedicels} The stalk of an individual flower.
 {peduncle,peduncles} The stalk of an inflorescence (or of a head in the sunflower family) or of an individual flower that is not part of an inflorescence.
+{perianth,perianths} The collective term for the calyx and corolla.
 {petal,petals} A free or fused member of the corolla.
 {petiole,petioles} The stalk of a leaf.
 {phyllary,phyllaries} A bract of the flower head in the sunflower family.
