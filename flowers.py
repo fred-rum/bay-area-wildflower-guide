@@ -381,28 +381,6 @@ class Page:
                     return calphotos
             return None
 
-    def rewrite(self):
-        def rewrite_list(matchobj):
-            s = matchobj.group(1)
-            s = re.sub(r'^<ul>(\n.*?)\n</ul>\n',
-                       rewrite_list, s, flags=re.DOTALL|re.MULTILINE)
-            s = re.sub(r'\n', r'\n.', s, flags=re.MULTILINE)
-            return s[1:] + '\n'
-
-        s = self.txt
-        s = re.sub(r'{com:(.*)}', r'com:\1', s)
-        s = re.sub(r'{sci:(.*)}', r'sci:\1', s)
-        s = re.sub(r'{(!?)(ba|ca|any|hist|rare|hist/rare|more)}',
-                   r'x:\1\2', s)
-        s = re.sub(r'\{\[', r'[', s)
-        s = re.sub(r'\]\}', r']', s)
-        s = re.sub(r'(\n|){(\+|)(?!https|-)([^\}:,\n]*)(,[-0-9]*|)(:[^\}\n]+|)}',
-                   r'\n==\3\4\5', s)
-        s = re.sub(r'^{-(\n.*?)\n-}\n',
-                   rewrite_list, s, flags=re.DOTALL|re.MULTILINE)
-        s = re.sub(r'^(\.+)', r'\1 ', s, flags=re.MULTILINE)
-        self.txt = s
-
     def parse_names(self):
         def repl_com(matchobj):
             com = matchobj.group(1)
@@ -435,23 +413,20 @@ class Page:
     def parse_color(self):
         def repl_color(matchobj):
             self.color = set([x.strip() for x in matchobj.group(1).split(',')])
+
+            # record the original order of colors in case we want to write
+            # it out.
             self.color_txt = matchobj.group(1)
+
+            # check for bad colors.
+            for color in page.color:
+                if color not in color_list:
+                    print 'page {name} uses undefined color {color}'.format(name=name, color=color)
+
             return ''
 
         self.txt = re.sub(r'^color:(.*)\n',
                           repl_color, self.txt, flags=re.MULTILINE)
-
-    def parse_child_calphotos(self):
-        def repl_child_calphotos(matchobj):
-            calphotos = (matchobj.group(2), matchobj.group(1))
-            name = matchobj.group(3)
-            if name in name_page:
-                name_page[name].calphotos.append(calphotos)
-            else:
-                print 'calphotos could not be attached to child {child} in key {key}'.format(child=name, key=self.name)
-            return '==' + name
-
-        self.txt = re.sub(r'{(https://calphotos.berkeley.edu/[^\}: ]+)(?::([^\}]+))?}\s*==([^\n]+)', repl_child_calphotos, self.txt)
 
     def parse_calphotos(self):
         def repl_calphotos(matchobj):
@@ -545,7 +520,7 @@ class Page:
         else:
             self.cur_genus = None
 
-        self.txt = re.sub(r'^==([^\}:,\n]*)(,[-0-9]*)?(:[^\}\n]+)?$',
+        self.txt = re.sub(r'^==([^:,\n]*)(,[-0-9]*)?(:[^\n]+)?$',
                           repl_child, self.txt, flags=re.MULTILINE)
 
     def write_txt(self):
@@ -1293,19 +1268,6 @@ for jpg in sorted(jpg_list):
         page = Page(name)
     page.add_jpg(jpg)
 
-# Read color info from the YAML file.
-with open(root + '/color.yaml') as f:
-    yaml_data = yaml.safe_load(f)
-for name in yaml_data:
-    if name in name_page:
-        page = name_page[name]
-        page.txt = 'color: ' + yaml_data[name] + '\n' + page.txt
-        for color in page.color:
-            if color not in color_list:
-                print 'page {name} uses undefined color {color}'.format(name=name, color=color)
-    else:
-        print 'colors specified for non-existant page {name}'.format(name=name)
-
 with open(root + '/family names.yaml') as f:
     family_com = yaml.safe_load(f)
 
@@ -1315,19 +1277,16 @@ with open(root + '/family names.yaml') as f:
 # - add links to glossary words
 
 for page in name_page.itervalues():
-    page.rewrite()
     page.parse_names()
     page.parse_color()
     page.parse_complete()
+    page.parse_calphotos()
 
 # parse_children() can add new pages, so we make a copy of the list to
-# iterate through.
+# iterate through.  Note that this waits until all names are read for
+# all pages so that any name can be used to link a child.
 for page in [x for x in name_page.itervalues()]:
     page.parse_children()
-
-for page in name_page.itervalues():
-    page.parse_child_calphotos()
-    page.parse_calphotos()
 
 with open(root + '/ignore species.yaml') as f:
     sci_ignore = yaml.safe_load(f)
@@ -1450,14 +1409,14 @@ if park_nf_list:
     for x in park_nf_list:
         print "  " + repr(x)
 
-try:
-    os.mkdir(root + '/txt2')
-except:
-    pass
-
-for page in name_page.itervalues():
-    if page.name in txt_list or page.calphotos or page.jpg_list:
-        page.write_txt()        
+# try:
+#     os.mkdir(root + '/txt2')
+# except:
+#     pass
+#
+#for page in name_page.itervalues():
+#    if page.name in txt_list or page.calphotos or page.jpg_list:
+#        page.write_txt()        
 
 # Get a list of pages without parents (top-level pages).
 top_list = [x for x in name_page.itervalues() if not x.parent]
