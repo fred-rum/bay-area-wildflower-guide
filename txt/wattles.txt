@@ -4,7 +4,8 @@ We have just about all (~14) California species in the bay area.  The Jepson key
 
 Key features:
 {-
-simple leaves:<ul>
+simple leaves:
+<ul>
 longer or shorter than 40 mm
 stipular spines present or not
 tip spine-like or not

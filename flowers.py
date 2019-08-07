@@ -382,6 +382,13 @@ class Page:
             return None
 
     def rewrite(self):
+        def rewrite_list(matchobj):
+            s = matchobj.group(1)
+            s = re.sub(r'^<ul>(\n.*?)\n</ul>\n',
+                       rewrite_list, s, flags=re.DOTALL|re.MULTILINE)
+            s = re.sub(r'\n', r'\n.', s, flags=re.MULTILINE)
+            return s[1:] + '\n'
+
         s = self.txt
         s = re.sub(r'{com:(.*)}', r'com:\1', s)
         s = re.sub(r'{sci:(.*)}', r'sci:\1', s)
@@ -391,6 +398,9 @@ class Page:
         s = re.sub(r'\]\}', r']', s)
         s = re.sub(r'(\n|){(\+|)(?!https|-)([^\}:,\n]*)(,[-0-9]*|)(:[^\}\n]+|)}',
                    r'\n==\3\4\5', s)
+        s = re.sub(r'^{-(\n.*?)\n-}\n',
+                   rewrite_list, s, flags=re.DOTALL|re.MULTILINE)
+        s = re.sub(r'^(\.+)', r'\1 ', s, flags=re.MULTILINE)
         self.txt = s
 
     def parse_names(self):
@@ -730,17 +740,25 @@ class Page:
         s = re.sub(r'^\[$', r'<div class="box">', s, flags=re.MULTILINE)
         s = re.sub(r'^\]$', r'</div>', s, flags=re.MULTILINE)
 
-        def repl_list(matchobj):
-            c = matchobj.group(1)
-            c = re.sub(r'\n', r'</li>\n<li>', c)
-
-            # If there's a sublist, its <ul> & </ul> must be on their own lines,
-            # in which case we remove the accidental surrounding <li>...</li>.
-            c = re.sub(r'<li>(<(/?)ul>)</li>', r'\1', c)
-
-            return '\n<ul>\n<li>{c}</li>\n</ul>\n'.format(c=c)
-
-        s = re.sub(r'\n{-\n(.*?)\n-}\n', repl_list, s, flags=re.DOTALL)
+        list_depth = 0
+        c_list = []
+        for c in s.split('\n'):
+            matchobj = re.match(r'\.*', c)
+            new_list_depth = matchobj.end()
+            if new_list_depth > list_depth+1:
+                print 'Jump in list depth on page ' + self.name
+            while list_depth < new_list_depth:
+                c_list.append('<ul>')
+                list_depth += 1
+            while list_depth > new_list_depth:
+                c_list.append('</ul>')
+                list_depth -= 1
+            c = c[list_depth:].strip()
+            if list_depth:
+                c_list.append('<li>{c}</li>'.format(c=c))
+            else:
+                c_list.append(c)
+        s = '\n'.join(c_list)
 
         # Look for a link to a child followed by all text up to the
         # first \n\n or EOF.  Create the HTML link along with a photo
