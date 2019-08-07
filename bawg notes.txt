@@ -225,7 +225,6 @@ Update txt format to be line based and require fewer braces.
     create nested photobox and image link for a child link
       include the following text in the outer box
     use the child's CalPhotos photo when linking
-  -- done --
   modify text prior to *all* parsing, then parse it accordingly:
     {sci:...} -> sci:... (put space after colon or not?)
     {com:...} -> com:...
@@ -233,6 +232,7 @@ Update txt format to be line based and require fewer braces.
     {[ -> [
     ]} -> ]
     {+link} or {link:link} -> +link or +link:link
+  -- done --
     {-...-} -> start each line with a period
     add color:... to txt, then parse it from the txt
   ignore blank lines at the start of the file after parsing info

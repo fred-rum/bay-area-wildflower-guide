@@ -381,6 +381,18 @@ class Page:
                     return calphotos
             return None
 
+    def rewrite(self):
+        s = self.txt
+        s = re.sub(r'{com:(.*)}', r'com:\1', s)
+        s = re.sub(r'{sci:(.*)}', r'sci:\1', s)
+        s = re.sub(r'{(!?)(ba|ca|any|hist|rare|hist/rare|more)}',
+                   r'x:\1\2', s)
+        s = re.sub(r'\{\[', r'[', s)
+        s = re.sub(r'\]\}', r']', s)
+        s = re.sub(r'(\n|){(\+|)(?!https|-)([^\}:,\n]*)(,[-0-9]*|)(:[^\}\n]+|)}',
+                   r'\n==\3\4\5', s)
+        self.txt = s
+
     def parse_names(self):
         def repl_com(matchobj):
             com = matchobj.group(1)
@@ -395,8 +407,8 @@ class Page:
                 self.set_sci(sci)
             return ''
 
-        self.txt = re.sub(r'{com:(.*)}\n', repl_com, self.txt)
-        self.txt = re.sub(r'{sci:(.*)}\n', repl_sci, self.txt)
+        self.txt = re.sub(r'^com:(.*)\n', repl_com, self.txt, flags=re.MULTILINE)
+        self.txt = re.sub(r'^sci:(.*)\n', repl_sci, self.txt, flags=re.MULTILINE)
 
     def parse_complete(self):
         def repl_complete(matchobj):
@@ -405,7 +417,7 @@ class Page:
                 self.key_incomplete = True
             return ''
 
-        self.txt = re.sub(r'{(!?)(ba|ca|any|hist|rare|hist/rare|more)}\n', repl_complete, self.txt)
+        self.txt = re.sub(r'^x:(!?)(ba|ca|any|hist|rare|hist/rare|more)\n', repl_complete, self.txt, flags=re.MULTILINE)
 
     def parse_child_calphotos(self):
         def repl_child_calphotos(matchobj):
@@ -415,9 +427,9 @@ class Page:
                 name_page[name].calphotos.append(calphotos)
             else:
                 print 'calphotos could not be attached to child {child} in key {key}'.format(child=name, key=self.name)
-            return '+' + name
+            return '==' + name
 
-        self.txt = re.sub(r'{(https://calphotos.berkeley.edu/[^\}: ]+)(?::([^\}]+))?}\s*\+([^\n]+)', repl_child_calphotos, self.txt)
+        self.txt = re.sub(r'{(https://calphotos.berkeley.edu/[^\}: ]+)(?::([^\}]+))?}\s*==([^\n]+)', repl_child_calphotos, self.txt)
 
     def parse_calphotos(self):
         def repl_calphotos(matchobj):
@@ -451,29 +463,13 @@ class Page:
         # Replace a {child:[page]} link with just {[page]} and record the
         # parent->child relationship.
         def repl_child(matchobj):
-            x = matchobj.group(1)
-            name = matchobj.group(2)
-            suffix = matchobj.group(3)
-            sci = matchobj.group(4)
+            name = matchobj.group(1)
+            suffix = matchobj.group(2)
+            sci = matchobj.group(3)
             if not suffix:
                 suffix = ''
             if not sci:
                 sci = ''
-            repl_string = x + name + suffix + sci
-            # I changed the order of replacements in order to handle
-            # unobserved links here, but now the regex for unobserved links
-            # catches too much.  The regex excludes newlines (to avoid stuff
-            # like '{[' or '{-', but here I specifically exclude other stuff,
-            # including anything in a bare {name} format without a scientific
-            # name.  Excluded stuff is simply returned reformatted as its
-            # original string so that (effectively) no substitution is
-            # performed.
-            if (repl_string.startswith('https:') or
-                repl_string.endswith('.jpg') or
-                not (x or sci) or
-                not (name or sci)):
-                # perform no substitution
-                return '{' + repl_string + '}'
             # +name[,suffix][:sci] -> creates a child relationship with [name]
             #   and creates two links to it: an image link and a text link.
             #   If a suffix is specified, the jpg with that suffix is used for
@@ -506,10 +502,6 @@ class Page:
                     name = strip_sci(sci)
                 # If the child does not exist, create it.
                 child_page = Page(name)
-                # We don't expect a '+' link to a missing page;
-                # only a {name:sci} link should create a fresh page.
-                if x:
-                    print 'Broken link to {{{name}}} on page {page}'.format(name=name, page=self.name)
             name = child_page.name
             self.assign_child(child_page)
             # In addition to linking to the child,
@@ -518,7 +510,7 @@ class Page:
                 child_page.set_sci(sci)
             # Replace the {+...} or {...} field with a bare +... line.
             # This will create the appropriate link later in the parsing.
-            return '+' + name + suffix
+            return '==' + name + suffix
 
         # If the page's genus is explicitly specified,
         # make it the default for child abbreviations.
@@ -527,11 +519,7 @@ class Page:
         else:
             self.cur_genus = None
 
-#        if self.name == 'clovers':
-#            print self.txt
-#            exit(1)
-
-        self.txt = re.sub(r'{(\+|)([^\}:,\n]*)(,[-0-9]*)?(:[^\}\n]+)?}', repl_child, self.txt, flags=re.MULTILINE)
+        self.txt = re.sub(r'^==([^\}:,\n]*)(,[-0-9]*)?(:[^\}\n]+)?$', repl_child, self.txt, flags=re.MULTILINE)
 
     def parse_glossary(self):
         def repl_glossary(matchobj):
@@ -550,7 +538,7 @@ class Page:
 
         out_list = []
         for s in self.txt.split('\n'):
-            if s and s[0] != '+':
+            if s and not s.startswith('=='):
                 # find non-links followed (optionally) by links and
                 # perform substitutions only on the non-link parts.
                 s = re.sub('([^\{]*)(\{[^\}]*\})?', repl_sub_glossary, s)
@@ -728,6 +716,8 @@ class Page:
 
         # replace the easy (fixed-value) stuff.
         s = repl_easy_regex.sub(repl_easy, s)
+        s = re.sub(r'^\[$', r'<div class="box">', s, flags=re.MULTILINE)
+        s = re.sub(r'^\]$', r'</div>', s, flags=re.MULTILINE)
 
         def repl_list(matchobj):
             c = matchobj.group(1)
@@ -759,7 +749,7 @@ class Page:
             child = find_page1(name)
             if not child:
                 print 'Broken link to +{name} on page {key}'.format(name=name, key=self.name)
-                return '+{name}\n'.format(name=name)
+                return '=={name}\n'.format(name=name)
 
             link = child.create_link(2)
 
@@ -812,7 +802,7 @@ class Page:
         #  ignored spaces, then
         #  a carriage return, then
         #  any amount of arbitrary text that does not include a blank line.
-        s = re.sub(r'^\+([^,\n]*)(,[-0-9]*)? *\n((?:.+[\n|\Z])*)', repl_child_link, s, flags=re.MULTILINE)
+        s = re.sub(r'^==([^,\n]*)(,[-0-9]*)? *\n((?:.+[\n|\Z])*)', repl_child_link, s, flags=re.MULTILINE)
 
         # Replace a pair of newlines with a paragraph separator.
         # (Do this after making specific replacements based on paragraphs,
@@ -1175,10 +1165,6 @@ repl_easy_dict = {
     # (Presumably they're external links or they'd be in {...} format.)
     '<a href=' : '<a target="_blank" href=',
 
-    # Handle boxes on key pages.
-    '{[' : '<div class="box">',
-    ']}' : '</div>',
-
     # Replace common Jepson codes.
     '+-' : '&plusmn;',
     '--' : '&ndash;',
@@ -1236,6 +1222,7 @@ with open(root + '/family names.yaml') as f:
 # parse_children() can add new pages, so we make a copy of the list to
 # iterate through.
 for page in [x for x in name_page.itervalues()]:
+    page.rewrite()
     page.parse_names()
     page.parse_complete()
     page.parse_children()
@@ -1449,7 +1436,7 @@ for family in family_child_set:
         if com != 'n/a':
             page.set_com(com)
         for child in sort_pages(family_child_set[family]):
-            page.txt += '{{+{name}}}\n\n'.format(name=child.name)
+            page.txt += '=={name}\n\n'.format(name=child.name)
         page.parse_children()
 
 # Regenerate the list of top-level pages
