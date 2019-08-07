@@ -96,9 +96,11 @@ class Obs:
 Locations:
 <ul>
 ''')
-            for park in sorted(self.parks,
+            park_list = sorted(self.parks)
+            park_list = sorted(park_list,
                                key = lambda x: self.parks[x],
-                               reverse=True):
+                               reverse=True)
+            for park in park_list:
                 html_park = park.encode('ascii', 'xmlcharrefreplace')
                 count = self.parks[park]
                 if count == 1:
@@ -679,7 +681,7 @@ class Page:
 
         # Jepson uses "subsp." instead of "ssp.", but it also allows us to
         # search with that qualifier left out entirely.
-        w.write('<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson eFlora</a>\n'.format(sci=sci));
+        w.write('<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson&nbsp;eFlora</a>\n'.format(sci=sci));
 
         if self.level in ('genus', 'species', 'below'):
             genus = sci.split(' ')[0]
@@ -691,7 +693,7 @@ class Page:
             # fmt=photo -> list results with info + sample photos
             # y={},x={},z={} -> longitude, latitude, zoom
             # wkt={...} -> search polygon with last point matching the first
-            w.write('&ndash; <a href="https://www.calflora.org/entry/wgh.html#srch=t&taxon={genus}&group=none&fmt=photo&y=37.5&x=-122&z=8&wkt=-123.1+38,-121.95+38,-121.05+36.95,-122.2+36.95,-123.1+38" target="_blank">Bay Area species\n'.format(genus=genus))
+            w.write('&ndash; <a href="https://www.calflora.org/entry/wgh.html#srch=t&taxon={genus}&group=none&fmt=photo&y=37.5&x=-122&z=8&wkt=-123.1+38,-121.95+38,-121.05+36.95,-122.2+36.95,-123.1+38" target="_blank">Bay&nbsp;Area&nbsp;species\n'.format(genus=genus))
 
         w.write('<p/>\n');
 
