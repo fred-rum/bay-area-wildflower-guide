@@ -11,6 +11,8 @@
 {glabrous} Without hair.
 {glaucous} Covered with the appearance of a whitish powder.
 {herb,herbs} Plant without any woody parts.
+{inflorescence,inflorescences} A cluster of flowers from a common point or sharing a stalk that has only flowers on it.  A head in the sunflower family.
+{bract,bracts} Small leaf-like structures (or analogue) at the base of an inflorescence.  May be fused together or not.
 {involucre,involucres} Collective term for a cluster of bracts.  Typically refers to the green base of a flower head in the sunflower family.
 {ligule,ligules} The petal of a flower in the sunflower family comprised only of ray-like flowers (i.e. not disk and ray).
 {pedicel,pedicels} The stalk of an individual flower.

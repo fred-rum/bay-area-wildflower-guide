@@ -1,0 +1,26 @@
+sci:Vaccinium
+x:ba
+
+==california huckleberry:V. ovatum
+. leaves evergreen, leathery, veins not prominent abaxially
+. <b>inflorescence (and fruit) dense, axillary</b>
+. pedicel jointed to flower
+. filaments +- hairy
+. twigs not angled, +- gray [often reddish distally]
+. fruit black [or red or ?blue?], glaucous or not
+
+==dwarf bilberry:V. cespitosum
+. leaves deciduous, thin or +- thick, veins generally prominent abaxially
+. individual flowers (and fruits) in axils
+. pedicel not jointed to flower
+. filaments glabrous
+. twigs not or weakly angled, +- green or yellow-green but not green
+. fruit generally blue-glaucous
+
+==red huckleberry:V. parvifolium
+. leaves deciduous (rarely evergreen), thin or +- thick, veins generally prominent abaxially
+. individual flowers (and fruits) in axils
+. pedicel not jointed to flower
+. filaments glabrous
+. twigs strongly angled, green
+. fruit bright red
