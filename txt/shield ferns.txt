@@ -1,0 +1,24 @@
+sci:Polystichum spp.
+x:hist
+
+==western sword fern:P. munitum
+. frond 1-pinnate
+. stipe base scales ovate, +- 3(6) mm wide
+.. those above proximal pinnae generally > 1 mm wide, persistent
+. very common
+
+==narrowleaf sword fern:P. imbricans
+. frond 1-pinnate
+. stipe base scales lanceolate, +- 2--3 mm wide
+.. those above proximal pinnae generally < 1 mm wide, falling early
+. rare
+
+==california shield fern:P. californicum
+. frond generally 2-pinnate, but pinnules range from 0% to 100% divided
+. pinnules gradually tapered to attachment < 3 mm wide [or not fully divided]
+. common
+
+==dudley's shield fern:P. dudleyi
+. frond 2-pinnate
+. pinnules abruptly narrowed to attachment < 0.5 mm wide
+. common

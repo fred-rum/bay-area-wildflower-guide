@@ -1,0 +1,17 @@
+sci:Dryopteris
+x:ca
+
+==coastal woodfern:D. arguta
+. frond 1--2-pinnate
+. stipe generally > &frac13; frond length
+. longest pinnae generally near the base of the frond
+. veins extend into segment teeth
+
+==male fern:D. filix-mas
+. frond 1--2-pinnate
+. stipe generally <= &frac13; frond length
+. longest pinnae generally near the middle of the frond
+. veins generally don't extend into segment teeth
+
+==spreading wood fern:D. expansa
+. frond +- 3-pinnate [final division is lobes, not teeth]

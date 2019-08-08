@@ -1,0 +1,57 @@
+sci:Equisetum
+x:hist
+
+Leaves are extremely small, in a whorl from stem nodes, and fused into an appressed sheath.  The number of sheath teeth equals the number of leaves.
+
+Branches are much longer, also in a whorl from stem nodes.  Photosynthesis generally takes place in the stem and branches.
+
+Some species make separate sterile and fertile stems.  Sterile stems are green, but fertile stems may not be.
+
+Key features:
+. basal internode of branch < or > subtending nodal sheath
+. number of teeth per sheath
+. branch hollow or solid
+
+[
+<h2>Separate sterile and fertile stems</h2>
+==giant horsetail:E. telmateia ssp. braunii
+. sterile stem 30--100 cm tall, light green, regularly branched
+.. basal internode of branch < subtending nodal sheath [significantly?]
+.. <b>branch is solid, has 4--5 grooved ridges lengthwise</b>
+.. sheath teeth 14--28
+. fertile stem 17--45 cm tall, brown, unbranched, fleshy
+.. sheath teeth 20--30
+. very common
+
+==field horsetail:E. arvense
+. sterile stem 10--60 cm tall, green, regularly branched
+.. basal internode of branch > subtending sheath [but maybe not by a lot]
+.. <b>branch is solid, has 3--4 rounded ridges lengthwise</b>
+.. sheath teeth 6--14
+. fertile stem 11--32 cm tall, brown, unbranched, fleshy
+.. sheath teeth 6--10
+. common
+
+]
+[
+<h2>Single type of stem</h2>
+==marsh horsetail:E. palustre
+. stem 20--80 cm tall, green
+. basal internode of branch < subtending nodal sheath [significantly?]
+. <b>branch is hollow, has 4--6 rounded ridges lengthwise</b>
+. sheath teeth 5--10
+. very rare
+
+==western scouringrush:E. hyemale ssp. affine
+. stem 60--210 cm, green, no branches
+. sheath generally with 2 dark bands: 1 at base and 1 at tip
+. sheath teeth 22--50
+. common
+
+==smooth horsetail:E. laevigatum
+. stem 30--180 cm, green, no branches
+. sheath generally with 1 dark band at tip
+. sheath teeth 10--26
+. uncommon
+
+]

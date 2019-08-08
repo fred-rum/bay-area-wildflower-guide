@@ -1,0 +1,21 @@
+sci:n/a
+
+==shield ferns
+. 1--2-pinnate
+
+==wood ferns
+. 1--2-pinnate, plus lobes possibly on the pinnules
+
+==giant chain fern
+. 2-pinnate
+. <b>giant</b>
+
+==western ladyfern
+. 2--3-pinnate (lobes at 3rd level may not be completely divided)
+
+==maidenhair ferns
+. 2--3-pinnate with <b>terminal leaflets palmate</b>, or
+. <b>palmate-pinnate</b>
+
+==goldback fern
+. 3--4 pinnate (blobby lobes at 4th level, if present)

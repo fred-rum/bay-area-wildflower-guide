@@ -1358,7 +1358,7 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
             park = row[place_idx]
 
         for x in park_map:
-            if x in park:
+            if re.search(x, park):
                 short_park = park_map[x]
                 break
         else:

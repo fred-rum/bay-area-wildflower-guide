@@ -23,11 +23,13 @@
 {petal,petals} A free or fused member of the corolla.
 {petiole,petioles} The stalk of a leaf.
 {phyllary,phyllaries} A bract of the flower head in the sunflower family.
+{pinna,pinnae} The 1st-order division of a frond blade.
 {pinnate} Refers to a two-dimensional branched structure.  Typically refers to lobes or leaflets in a leaf.  1-pinnate means that the structure has 1 level of branches arising from a central axis.  2-pinnate means that the branches also have branches, etc.
+{pinnule,pinnules} The 2nd-order division of a frond blade.  (The 1st-order division of a pinna.)
 {proximal} Growing closer to the base and farther from the tip of a structure.  The structure is often implied; e.g. a proximal leaf grows close to the base of the whole plant.  Contrast distal.
 {sepal,sepals} A free or fused member of the calyx.  Usually green, or often the same color as the petals, or sometimes different.
 {shrub,shrubs} Woody plant, shorter than a tree, generally with many branches from the base.
-{stipe,stipes} In the knotweed family, a distal extension of the pedicel separated by a line, bulge, or difference in thickness.
+{stipe,stipes} In the knotweed family, a distal extension of the pedicel separated by a line, bulge, or difference in thickness.  In ferns, the frond stalk; equivalent to petiole.
 {stipule,stipules} Extension at the base of the petiole.
 {subshrub,subshrubs} Similar to a shrub, but with the distal stems less woody.
 {waif,waifs} A plant that has spread with human assistance but cannot reproduce or spread further on its own; will eventually die out assuming no further assistance.

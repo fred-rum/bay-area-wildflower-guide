@@ -10,4 +10,4 @@ x:ba
 . terminal leaflets are cut/lobed often > &frac14; to &frac23; way to base, margins converging at 45--90&deg; angle
 
 ==five-finger fern:A. aleuticum
-. frond is palmate-pinnate
+. frond is palmate-pinnate [can have more than 5 "fingers"]

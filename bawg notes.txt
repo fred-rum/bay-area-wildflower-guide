@@ -199,3 +199,5 @@ complete name).
 The current child name regexs will fail for any child with a comma in its name.
 Need to allow comma in the name, but make it non-greedy so that a
 comma-separated jpg suffix is handled properly.
+
+Print warning if "ignore species.yaml" includes a documented species.
