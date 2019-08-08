@@ -15,6 +15,8 @@
 {bract,bracts} Small leaf-like structures (or analogue) at the base of an inflorescence.  May be fused together or not.
 {involucre,involucres} Collective term for a cluster of bracts.  Typically refers to the green base of a flower head in the sunflower family.
 {ligule,ligules} The petal of a flower in the sunflower family comprised only of ray-like flowers (i.e. not disk and ray).
+{palmate} With lobes spreading from a common point.
+{palmate-pinnate} 1st-order palmate and 2nd-order pinnate.
 {pedicel,pedicels} The stalk of an individual flower.
 {peduncle,peduncles} The stalk of an inflorescence (or of a head in the sunflower family) or of an individual flower that is not part of an inflorescence.
 {perianth,perianths} The collective term for the calyx and corolla.

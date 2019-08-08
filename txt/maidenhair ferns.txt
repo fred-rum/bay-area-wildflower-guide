@@ -1,0 +1,13 @@
+sci:Adiantum
+x:ba
+
+==california maidenhair ferm:A. jordanii
+. frond is 2--3-pinnate [terminal leaflets are palmate]
+. terminal leaflets are cut/lobed often < &frac14; way to base, margins converging at 90--180&deg; angle
+
+==black maidenhair fern:A. capillus-veneris
+. frond is 2--3-pinnate [final division is palmate]
+. terminal leaflets are cut/lobed often > &frac14; to &frac23; way to base, margins converging at 45--90&deg; angle
+
+==five-finger fern:A. aleuticum
+. frond is palmate-pinnate

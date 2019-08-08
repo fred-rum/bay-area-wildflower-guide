@@ -422,8 +422,8 @@ class Page:
 
             # check for bad colors.
             for color in page.color:
-                if color not in color_list:
-                    print 'page {name} uses undefined color {color}'.format(name=name, color=color)
+                if color not in color_list and color != 'n/a':
+                    print 'page {name} uses undefined color {color}'.format(name=page.name, color=color)
 
             return ''
 
@@ -1123,29 +1123,25 @@ def link_glossary_words(txt):
         if s and not s.startswith('=='):
             # find non-links followed (optionally) by links and
             # perform substitutions only on the non-link parts.
-            s = re.sub('([^\{]*)(\{[^\}]*\})?', repl_sub_glossary, s)
+            s = re.sub('([^\{\}]*)(\{[^\{\}]*\})?', repl_sub_glossary, s)
         out_list.append(s)
     return '\n'.join(out_list)
 
 with open(root + '/glossary.txt', mode='r') as f:
     glossary_txt = f.read()
 
-glossary_dict = {} # for fast access
-glossary_list = [] # to retain order for proper matching priority
-
-for (words, defn) in re.findall(r'{([^\}]+)}\s+(.*)', glossary_txt):
+glossary_dict = {}
+for (words, defn) in re.findall(r'^{([^\}]+)}\s+(.*)$',
+                                glossary_txt, flags=re.MULTILINE):
     word_list = [x.strip() for x in words.split(',')]
     primary_word = word_list[0]
     for word in word_list:
         glossary_dict[word] = primary_word
-    # extend the glossary list by the word list *in the listed order*
-    # so that the search is in the same order.  You might think that the
-    # search is greedy and so finds the longest match, but no, it finds
-    # the first listed match.  This makes a difference when one entry is
-    # starts the same as another but includes an extra word.  (Extra letters
-    # aren't an issue since the glossary only allows matches at word
-    # boundaries.)
-    glossary_list.extend(word_list)
+
+# sort the glossary list in reverse order so that for cases where two
+# phrases start the same and one is a subset of the other, the longer phrase
+# is checked first.
+glossary_list = sorted(glossary_dict.iterkeys(), reverse=True)
 
 glossary_regex = re.compile(r'\b({ex})\b'.format(ex='|'.join(map(re.escape, glossary_list))), re.IGNORECASE)
 
@@ -1161,7 +1157,8 @@ def repl_glossary(matchobj):
 
     return '<div class="defn" id="{word}"><dt>{word}</dt><dd>{defn}</dd></div>'.format(word=primary_word, defn=defn)
 
-glossary_txt = re.sub(r'{([^\}]+)}\s+(.*)', repl_glossary, glossary_txt)
+glossary_txt = re.sub(r'^{([^\}]+)}\s+(.*)$',
+                      repl_glossary, glossary_txt, flags=re.MULTILINE)
 
 with (open(root + '/html/glossary.html', mode='w')) as w:
       write_header(w, 'BAWG Glossary', 'Glossary', nosearch=False)
