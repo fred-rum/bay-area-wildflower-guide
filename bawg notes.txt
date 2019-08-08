@@ -193,11 +193,6 @@ javascript autocomplete restults.
 
 add California "non-flowering" plants from my photos, e.g. stinging nettle
 
-When multiple self-linked photos (for an observed flower) appear on a
-line, allow them to wrap across multiple lines instead of extending
-off the screen.  Adjust their "vw" size to be comfortably fit on a
-small screen.
-
 Give autocomplete preference to a complete word (second only to a
 complete name).
 

@@ -9,6 +9,12 @@ A passionflower bloom has the following parts:
 . 5 stamens
 . 3 stigmas, taller than the stamens
 
+==red passionflower:P. manicata
+. perianth lobes red
+. filaments purple, short, erect
+. stamens yellowish
+. stigmas greenish
+
 ==banana passionfruit:P. tarminiana
 . perianth lobes pink
 . no filaments
@@ -28,9 +34,3 @@ A passionflower bloom has the following parts:
 . filaments striped white and purple/blue
 . stamens greenish-yellow
 . stigmas purple
-
-==red passionflower:P. manicata
-. perianth lobes red
-. filaments purple, short, erect
-. stamens yellowish
-. stigmas greenish

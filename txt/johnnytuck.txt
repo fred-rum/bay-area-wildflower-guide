@@ -1,5 +1,4 @@
 sci:Triphysaria eriantha
-x:ba
 
 ==butter-and-eggs:T. eriantha ssp. eriantha
 . corolla yellow/cream

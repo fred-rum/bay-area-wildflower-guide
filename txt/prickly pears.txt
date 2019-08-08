@@ -1,0 +1,18 @@
+sci:Opuntia
+x:ba
+color: yellow, orange
+
+<b>Caution: ID unsure.</b>  CalFlora lists only one kind in the area, but I'm not entirely sure that this is it.
+
+Key features to verify O. ficus-indica:
+. "stem" velvety or minutely hairy or not, with bristles > 2 mm or inconspicuous
+. terminal stem segment length
+. fruit or flower color
+. fruit spiny or not, juicy or not
+. 1 erect trunk or several basal branches +- decumbent to ascending
+. overall height
+. number of areoles per ovary
+.. ovary is the fist-sized protrusion that sprounts a flower
+.. areoles are the spots where spines potentially sprout
+
+==mission prickly-pear:O. ficus-indica
