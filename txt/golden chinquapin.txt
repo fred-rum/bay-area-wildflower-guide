@@ -1,2 +1,11 @@
 sci:Chrysolepis chrysophylla
 color: other
+x:any
+
+==:C. chrysophylla var. chrysophylla
+. tree, 15--30 m
+. leaf blade +- flat
+
+==:C. chrysophylla var. minor
+. shrub or small tree, < 5 m
+. leaf blade +- folded lengthwise (axis lowermost, margins upturned)

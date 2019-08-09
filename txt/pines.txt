@@ -1,0 +1,52 @@
+sci:Pinus
+x:rare
+
+Key features:
+. number of leaves [needles] per bundle
+. leaf rigid or flexible and drooping
+. seed cone color
+. proximal seed cone scale tips recurved and elongated or not
+. seed cone scale tips with knob angled or rounded, < or > 2 cm
+. seed cones persistent on stems for many years or deciduous
+
+All local pines are "hard pines" (subgenus Pinus).  For these, the
+(brown) sheath for the leaf bundle is retained, not deciduous.
+
+CalFlora lists many pines in the bay area, but for now I will confine
+this list to the less rare ones (> 25 CalFlora records).
+
+[
+<h2>3 leaves per bundle</h2>
+
+==monterey pine:P. radiata
+. proximal seed cone scale tips not recurved, or if recurved are elongated < 3 cm
+. seed cones on stems many years
+. seed cone scale tips, except distal, with knob rounded, < 2 cm
+. very common
+
+==knobcone pine:P. attenuata
+. proximal seed cone scale tips not recurved, or if recurved are elongated < 3 cm
+. seed cones on stems many years
+. seed cone scale tips, except distal, with knob angled, > 2 cm
+
+==ponderosa pine:P. ponderosa
+. proximal seed cone scale tips not recurved, or if recurved are elongated < 3 cm
+. seed cones deciduous
+
+==coulter pine:P. coulteri
+. proximal seed cone scale tips recurved, elongated 3--5 cm
+. seed cone +- yellow; seed < wing
+. leaf rigid, not drooping
+
+==gray pine:P. sabiniana
+. proximal seed cone scale tips recurved, elongated 3--7 cm
+. seed cone +- brown; seed > wing
+. leaf flexible, generally drooping
+
+]
+
+==torrey pine:P. torreyana
+. 5 leaves per bundle (although often 3 in young trees)
+
+==stone pine:P. pinea
+. 2 leaves per bundle

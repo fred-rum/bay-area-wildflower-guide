@@ -509,10 +509,23 @@ class Page:
                 if not name:
                     strip = strip_sci(sci)
                     child_page = Page(strip)
-                elif name in name_page:
-                    # The common name is already taken by a flower with a
-                    # different scientific name.  (This implies that the
-                    # new child also has a scientific name.)
+                elif name in com_page:
+                    # The common name is shared by a flower with a
+                    # different scientific name.
+                    if not sci:
+                        print 'page {parent} has ambiguous child {child}'.format(parent=self.name, child=name)
+                        return '==' + name + suffix
+
+                    if (name in name_page and
+                        name not in txt_list and
+                        name not in jpg_list):
+                        # The user didn't explicitly say that the previous
+                        # user of the common name should name its page that
+                        # way.  Since we now know that there are two with
+                        # the same name, *neither* of them should use the
+                        # common name as the page name.  So change the other
+                        # page's page name to its scientific name.
+                        name_page[name].name = name_page[name].sci
                     strip = strip_sci(sci)
                     child_page = Page(strip)
                     child_page.set_com(name)

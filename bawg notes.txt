@@ -209,3 +209,6 @@ L. nitidum.
 
 Observation month list should include newlines between list entries
 and when closing </ul> and </div>
+
+Use xx to denote species completion.  Thus it can be on the same page
+as x for genus completion.

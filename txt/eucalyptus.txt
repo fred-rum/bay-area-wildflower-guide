@@ -1,0 +1,56 @@
+sci:Eucalyptus
+color:white
+x:hist/rare
+
+Key features:
+. bark smooth, shedding, and light colored; or deeply furrowed and dark colored
+. leaf shape
+. inflorescence shape
+. flowers/fruit fused at base or free
+. hypanthium shape
+
+==tasmanian blue gum:E. globulus
+. individual flowers in leaf axils, sessile
+.. [the leaf may be not present]
+. fruit glaucous, > 1.5 cm wide
+.. all others have fruit not glaucous, < 1 cm wide
+. <b>very common</b>
+
+==silver dollar gum:E. polyanthemos
+. inflorescence a panicle of umbles
+. rare
+
+[
+<h2>umbel inflorescence</h2>
+
+==red ironbark:E. sideroxylon
+. <b>bark deeply furrowed, dark brown to +- black</b>
+.. all below plants have smooth, shedding bark (sometimes rough near base), lighter colored
+. inflorescence a 5--7-flowered umbel
+. rare
+
+==manna gum:E. viminalis
+. inflorescence a <b>3-flowered umbel</b>
+. uncommon
+
+==white peppermint:E. pulchella
+. <b>leaves linear, generally < 0.5 cm wide</b>
+. inflorescence a 9--15-flowered umbel
+. <b>fruit valves not exserted</b>
+. very rare
+
+==river redbum:E. camaldulensis
+. leaves lanceolate, generally > 1 cm wide
+. inflorescence a 7--11-flowered umbel
+. fruit valves exserted
+. <b>bud cap hemispheric, beaked, +- = hypanthium</b> (<a href="http://ucjeps.berkeley.edu/eflora/eflora_display.php?tid=25257">figure of bud with cap</a>)
+. rare
+
+==forest red gum:E. tereticornis
+. leaves lanceolate, generally > 1 cm wide
+. inflorescence a 7--11-flowered umbel
+. fruit valves exserted
+. <b>bud cap horn-shaped to conic, not beaked, +- 2 &times; hypanthium</b>
+. very rare
+
+]
