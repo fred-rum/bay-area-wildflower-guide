@@ -1,0 +1,180 @@
+sci:Lepidium
+x:rare/hist
+
+Key features:
+. woody caudex or stem base or not
+. basal leaf shape
+. middle and distal cauline leaf shapes
+. inflorescence shape
+. pedicel length, flattened or not
+. sepals persistent or not
+. petal length, abaxially hairy or glabrous
+. number of stamens
+. fruit length and shape
+.. valve [fruit capsule] tubercled or not, net-veined or not
+
+Petals and fruit can co-exist, even on the same plant, so look around for both.
+
+==veiny pepperweed:L. oblongum
+. annual
+. basal leaves not in a rosette, 1--2-pinnately lobed
+. mid-cauline leaf bases pinnately lobed, base lobed or not
+. inflorescence elongated
+. petals < 1 mm, white, stamens 2
+. fruit 2.2--3.5 mm, roundish, flat, tip winged, notch 0.2--0.3 mm
+.. valve not veined
+. very rare
+
+==field peppergrass:L. campestre
+. annual
+. basal leaves in a rosette, entire to pinnately lobed
+. mid-cauline leaf bases lobed or sagittate
+. inflorescence much elongated
+. petals 1.5--2.5 mm, white, stamens 6
+. fruit 5--6 mm, roundish, broadly winged at tip, notch 0.4-0.6 mm
+.. valve not veined
+. very rare
+
+==heart-podded hoary cress:L. draba
+. perennial herb, rhizomed
+. basal leaves not in a rosette, dentate to entire
+. mid-cauline leaf bases clasping or lobed, dentate or entire
+. inflorescence in a panicle, elongated or not
+. petals 3--4 mm, white, stamens 6
+. fruit 2.5--3.7 mm, cordate to +- reniform, flat; tip wingless, obtuse to tapered, no notch
+.. valve net-veined
+. <b>uncommon</b>
+
+==lens-podded hoary cress:L. chalepense
+. perennial herb, rhizomed
+. basal leaves not in a rosette, entire
+. mid-cauline leaf bases clasping or lobed, +- dentate or entire
+. inflorescence in a panicle, elongated
+. petals 3--5 mm, white, stamens 6
+. fruit 3.5--5.8 mm, roundish, inflated, tip wingless, no notch
+.. valve not veined
+. rare
+
+==lesser swine-cress:L. didymum
+. annual
+. basal leaves not in a rosette, 1--2-pinnately divided, lobes entire to lobed
+. mid-cauline leaves gradually reduced and less divided distally, lobes entire to serrate
+.. no cauline leaf bases lobed or sagittate
+. inflorescence elongated
+. petals 0.4--0.5 mm, white, stamens 2
+. fruit 1.3--1.7 mm, spectacle-shaped, flat, wingless, notch 0.2--0.4 mm
+.. valve tubercled, strongly veined
+.. all others are not tubercled or ridged
+. <b>uncommon</b>
+
+==broadleaved pepperweed:L. latifolium
+. perennial herb, rhizomed, <b>woody caudex or base</b>
+.. all flowers *below* are not woody anywhere
+. basal leaves not in a rosette, entire or serrate
+. mid-cauline leaves entire or serrate
+.. no cauline leaf bases lobed or sagittate
+. inflorescence in a panicle, +- elongated or not
+. petals 1.8--2.5 mm, white, stamens 6
+. fruit 1.8--2.4 mm, roundish, flat, wingless, no notch
+.. valves not veined
+. <b>very common</b>
+
+==upright pepperweed:L. strictum
+. annual
+. basal leaves not in a rosette, 2-pinnately lobed
+. mid-cauline leaves pinnately lobed, lobes entire; base tapered
+.. no cauline leaf bases lobed or sagittate
+. inflorescence crowded
+. sepals 0.7--1 mm, persistent
+. petals 0.2--0.5 mm, white, stamens 2
+. fruit 2.5--3.3 mm, roundish, flat, tip winged, notch 0.3--0.6 mm
+.. valves prominently net-veined
+. <b>uncommon</b>
+
+==virginia pepperweed:L. virginicum
+. annual
+. basal leaves not in a rosette, pinnately lobed to dentate
+. mid-cauline leaves entire to serrate, lobed, or divided; base tapered
+.. no cauline leaf bases lobed or sagittate
+. inflorescence much elongated
+. sepals 0.7--1 mm, deciduous
+. petals 1--2.5 mm, white, stamens 2
+. fruit 2.5--3.5 mm, roundish, tip winged, notch 0.2--0.5 mm
+.. valves not veined
+. very rare
+
+==sharp-pod pepper-grass:L. oxycarpum
+. annual
+. basal leaves not in a rosette, entire or pinnately lobed, early-deciduous
+. mid-cauline lines 1--3 mm, base tapered
+.. no cauline leaf bases lobed or sagittate
+. inflorescence elongated
+. pedicel cylindric or +- flattened
+. petals 0, stamens 4
+. fruit 2.4--3.6 mm, roundish, flat, tip winged, notch 0.3--0.8 mm, V-shaped
+.. valves net-veined
+. rare
+
+==wayside pepper grass:L. pinnatifidum
+. annual
+. basal leaves not in a rosette, dentate or pinnately lobed, early-deciduous
+. mid-cauline lines 1--3.3 mm, base tapered
+.. no cauline leaf bases lobed or sagittate
+. inflorescence in a panicle, elongated
+. pedicel cylindric
+. petals 0.4--0.6 mm, white, stamens 4
+. fruit 1.8--2 mm, roundish, flat, tip wingless, notch to 0.1 mm
+.. valves not veined
+. very rare
+
+==san diego pepperweed:L. latipes
+. annual
+. basal leaves not in a rosette, entire, dentate, or pinnately divided, early-deciduous
+. mid-cauline leaves similar, smaller, base tapered
+.. no cauline leaf bases lobed or sagittate
+. inflorescence compact, cylindric to head-like, elongated or not
+. pedicel strongly flattened
+. sepals 1.1--1.4 mm, persistent
+. petals 1.9--3 mm, +- green, hairy abaxially, margin fringed, stamens 4
+. fruit 5--7 mm, roundish, tip winged, notch 1.4--2.8 mm
+.. valve strongly net-veined
+. rare
+
+==shining pepperweed:L. nitidum
+. annual
+. basal leaves not in a rosette, pinnately divided, early-deciduous
+. mid-cauline leaves similar, smaller, occasionally undivided
+.. no cauline leaf bases lobed or sagittate
+. inflorescence much elongated
+. pedicel strongly flattened, not appressed
+. sepals 0.9--1.3 mm, not persistent
+. petals 0 or 1.2--2 mm, white, glabrous abaxially, stamens 4
+. fruit 3--5.5 mm, roundish, flat, tip winged, notch 0.3--0.7 mm
+.. valve not or obscurely veined
+. <b>uncommon</b>
+
+==net pepper grass:L. acutidens
+. annual
+. basal leaves not in a rosette, linear or pinnately divided, early-deciduous
+. mid-cauline leaves linear, base tapered
+.. no cauline leaf bases lobed or sagittate
+. inflorescence unknown [not elongated?]
+. pedicel strongly flattened, appressed, 3--4.2 mm
+. sepals 0.7--1.1 mm, not persistent
+. petals 0, stamens 4
+. fruit 4--6 mm, roundish, flat, tip winged, notch 1--2 mm, V-shaped
+.. valve strongly net-veined
+. rare
+
+==alkali pepperweed:L. dictyotum
+. annual
+. basal leaves not in a rosette, pinnately lobed or divided, early-deciduous
+. mid-cauline leaves linear, base tapered
+.. no cauline leaf bases lobed or sagittate
+. inflorescence elongated
+. pedicel strongly flattened, appressed, 1.9--2.5 mm
+. sepals 0.7--1.1 mm, not persistent
+. petals 0, stamens 4
+. fruit 2.5--3.5 mm, roundish, flat, tip winged, notch 0.5--0.7 mm, U-shaped
+.. valve strongly net-veined
+. rare

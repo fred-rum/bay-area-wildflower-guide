@@ -201,3 +201,11 @@ Need to allow comma in the name, but make it non-greedy so that a
 comma-separated jpg suffix is handled properly.
 
 Print warning if "ignore species.yaml" includes a documented species.
+
+The script should complain if I have an observation in an existing
+genus even if the genus page hasn't been created (e.g. only one
+species has been documented).  E.g. Lepidium latifolium and
+L. nitidum.
+
+Observation month list should include newlines between list entries
+and when closing </ul> and </div>
