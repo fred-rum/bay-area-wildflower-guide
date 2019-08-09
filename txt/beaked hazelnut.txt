@@ -1,0 +1,11 @@
+sci:Corylus cornuta
+color: other, red
+x:ca
+
+==california hazelnut:C. cornuta ssp. californica
+. beak < 3 cm
+. common
+
+==eastern beaked hazel:C. cornuta ssp. cornuta
+. beak >= 3 cm
+. not found in California

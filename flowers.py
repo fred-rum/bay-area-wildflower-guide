@@ -188,22 +188,24 @@ def elaborate_sci(sci):
     return sci
 
 def find_page2(com, sci):
-    if com and com in name_page:
-        return name_page[com]
-
     if sci:
         sci = strip_sci(sci)
         if sci in sci_page:
             return sci_page[sci]
 
-    if com and com in com_page and com_page[com] != 'multiple':
-        page = com_page[com]
-        if sci and page.sci and page.sci != sci:
+    if com:
+        page = None
+        if com in name_page:
+            page = name_page[com]
+        elif com in com_page and com_page[com] != 'multiple':
+            page = com_page[com]
+
+        if page and sci and page.sci and page.sci != sci:
             # If the common name matches a page with a different scientific
             # name, it's treated as not a match.
             return None
         else:
-            return com_page[com]
+            return page
 
     return None
 
@@ -501,10 +503,22 @@ class Page:
                     self.cur_genus = sci.split(' ')[0]
             child_page = find_page2(name, sci)
             if not child_page:
-                if not name:
-                    name = strip_sci(sci)
                 # If the child does not exist, create it.
-                child_page = Page(name)
+                # The name for the page depends on what names were provided
+                # and whether any collide with existing names.
+                if not name:
+                    strip = strip_sci(sci)
+                    child_page = Page(strip)
+                elif name in name_page:
+                    # The common name is already taken by a flower with a
+                    # different scientific name.  (This implies that the
+                    # new child also has a scientific name.)
+                    strip = strip_sci(sci)
+                    child_page = Page(strip)
+                    child_page.set_com(name)
+                else:
+                    # Prefer the common name in most cases.
+                    child_page = Page(name)
             name = child_page.name
             self.assign_child(child_page)
             # In addition to linking to the child,

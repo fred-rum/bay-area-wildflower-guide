@@ -1,0 +1,3 @@
+sci:Corylus cornuta ssp. californica
+color: other, red
+x:ca

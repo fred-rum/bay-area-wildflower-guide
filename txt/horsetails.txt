@@ -14,7 +14,7 @@ Key features:
 
 [
 <h2>Separate sterile and fertile stems</h2>
-==giant horsetail:E. telmateia ssp. braunii
+==great horsetail:E. telmateia
 . sterile stem 30--100 cm tall, light green, regularly branched
 .. basal internode of branch < subtending nodal sheath [significantly?]
 .. <b>branch is solid, has 4--5 grooved ridges lengthwise</b>

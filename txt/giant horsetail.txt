@@ -1,6 +1,2 @@
 color:n/a
 x:ca
-
-The local subspecies is ssp. braunii.  Per <a href="https://en.wikipedia.org/wiki/Equisetum_telmateia">Wikipedia</a>, its main stem is green between branch whorls.
-
-Subspecies telmateia is not officially recorded in California.  Its main stem is pale greenish white between branch whorls.

@@ -18,7 +18,7 @@ Petals and fruit can co-exist, even on the same plant, so look around for both.
 ==veiny pepperweed:L. oblongum
 . annual
 . basal leaves not in a rosette, 1--2-pinnately lobed
-. mid-cauline leaf bases pinnately lobed, base lobed or not
+. mid-cauline leaves pinnately lobed, base lobed or not
 . inflorescence elongated
 . petals < 1 mm, white, stamens 2
 . fruit 2.2--3.5 mm, roundish, flat, tip winged, notch 0.2--0.3 mm

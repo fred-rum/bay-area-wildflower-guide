@@ -1,0 +1,11 @@
+sci:Equisetum telmateia
+color:n/a
+x:ca
+
+==giant horsetail:E. telmateia ssp. braunii
+. main stem between nodes is green
+. common
+
+==great horsetail:E. telmateia ssp. telmateia
+. main stem between nodes is pale greenish white
+. not found in California
