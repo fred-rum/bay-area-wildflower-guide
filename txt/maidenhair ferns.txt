@@ -1,7 +1,7 @@
 sci:Adiantum
 x:ba
 
-==california maidenhair ferm:A. jordanii
+==california maidenhair fern:A. jordanii
 . frond is 2--3-pinnate [terminal leaflets are palmate]
 . terminal leaflets are cut/lobed often < &frac14; way to base, margins converging at 90--180&deg; angle
 

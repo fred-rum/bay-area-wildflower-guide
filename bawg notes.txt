@@ -215,5 +215,3 @@ as x for genus completion.
 
 Complain if a species is on observations.csv but doesn't have photos.
 (It already complains if it doesn't have a page.)
-
-Be friendlier about spaces in keywords.

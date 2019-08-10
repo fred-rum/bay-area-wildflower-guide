@@ -399,9 +399,9 @@ class Page:
                 self.set_sci(sci)
             return ''
 
-        self.txt = re.sub(r'^com:(.*)\n',
+        self.txt = re.sub(r'^com:\s*(.*?)\s*?\n',
                           repl_com, self.txt, flags=re.MULTILINE)
-        self.txt = re.sub(r'^sci:(.*)\n',
+        self.txt = re.sub(r'^sci:\s*(.*?)\s*?\n',
                           repl_sci, self.txt, flags=re.MULTILINE)
 
     def parse_complete(self):
@@ -411,7 +411,7 @@ class Page:
                 self.key_incomplete = True
             return ''
 
-        self.txt = re.sub(r'^x:(!?)(ba|ca|any|hist|rare|hist/rare|more)\n',
+        self.txt = re.sub(r'^x:\s*(!?)(ba|ca|any|hist|rare|hist/rare|more)\s*?\n',
                           repl_complete, self.txt, flags=re.MULTILINE)
 
     def parse_color(self):
@@ -437,7 +437,7 @@ class Page:
             self.calphotos.append((matchobj.group(1), matchobj.group(2)))
             return ''
 
-        self.txt = re.sub(r'^(?:([^:\}]*):)?(https://calphotos.berkeley.edu/[^\} ]+) *\n', repl_calphotos, self.txt, flags=re.MULTILINE)
+        self.txt = re.sub(r'^(?:\s*([^:\n]*?)\s*:\s*)?(https://calphotos.berkeley.edu/[^\s]+)\s*?\n', repl_calphotos, self.txt, flags=re.MULTILINE)
 
     # Check if check_page is an ancestor of this page (for loop checking).
     def is_ancestor(self, check_page):
@@ -464,34 +464,30 @@ class Page:
         # Replace a {child:[page]} link with just {[page]} and record the
         # parent->child relationship.
         def repl_child(matchobj):
-            name = matchobj.group(1)
+            com = matchobj.group(1)
             suffix = matchobj.group(2)
             sci = matchobj.group(3)
             if not suffix:
                 suffix = ''
             if not sci:
-                if name.islower():
+                if com.islower():
                     sci = ''
                 else:
-                    sci = ':' + name
-                    name = ''
-            # +name[,suffix][:sci] -> creates a child relationship with [name]
-            #   and creates two links to it: an image link and a text link.
-            #   If a suffix is specified, the jpg with that suffix is used for
-            #   the image link.
-            #   If a scientific name is specified, the child's scientific name
-            #   is set to that value.  The name can be in elaborated or
-            #   stripped format.
-            # child:name[:sci] -> creates a child relationship with [name]
-            #   and creates a text link to it.
-            #   If a scientific name is specified, the child's scientific name
-            #   is set to that value.
-            # [name]:sci -> creates a photo-less page for [name] and
-            #   gives it the specified scientific name.  The child page will
-            #   be populated with the standard page information, particularly
-            #   links to iNaturalist, CalFlora, CalPhotos, and Jepson.
+                    sci = com
+                    com = ''
+            # +com[,suffix][:sci] -> creates a child relationship with the
+            #   page named by [com] or [sci] and creates two links to it:
+            #   an image link and a text link.
+            #   If a suffix is specified, the jpg with that suffix is used
+            #   for the image link.
+            #   If [:sci] isn't specified, a scientific name can be used
+            #   in place of [com].
+            #   If the child page doesn't exist, it is created.  If the
+            #   child page is missing a common or scientific name that
+            #   is supplied by the child link, that name is added to the child.
+            #   The scientific name can be in elaborated or stripped format.
+            #   The genus can also be abbreviated as '[cap.letter]. '
             if sci:
-                sci = sci[1:] # discard colon
                 # If the child's genus is abbreviated, expand it using
                 # the genus of the current page.
                 if (self.cur_genus and len(sci) >= 3 and
@@ -501,41 +497,44 @@ class Page:
                     # If the child's genus is explicitly specified,
                     # make it the default for future abbreviations.
                     self.cur_genus = sci.split(' ')[0]
-            child_page = find_page2(name, sci)
+            child_page = find_page2(com, sci)
             if not child_page:
                 # If the child does not exist, create it.
                 # The name for the page depends on what names were provided
                 # and whether any collide with existing names.
-                if not name:
+                if not com:
                     strip = strip_sci(sci)
                     child_page = Page(strip)
-                elif name in com_page:
+                elif com in com_page:
                     # The common name is shared by a flower with a
                     # different scientific name.
                     if not sci:
-                        print 'page {parent} has ambiguous child {child}'.format(parent=self.name, child=name)
-                        return '==' + name + suffix
+                        print 'page {parent} has ambiguous child {child}'.format(parent=self.name, child=com)
+                        return '==' + com + suffix
 
-                    if (name in name_page and
-                        name not in txt_list and
-                        name not in jpg_list):
+                    if (com in name_page and
+                        com not in txt_list and
+                        com not in jpg_list):
                         # The user didn't explicitly say that the previous
                         # user of the common name should name its page that
                         # way.  Since we now know that there are two with
                         # the same name, *neither* of them should use the
                         # common name as the page name.  So change the other
                         # page's page name to its scientific name.
-                        name_page[name].name = name_page[name].sci
+                        name_page[com].name = name_page[com].sci
                     strip = strip_sci(sci)
                     child_page = Page(strip)
-                    child_page.set_com(name)
                 else:
                     # Prefer the common name in most cases.
-                    child_page = Page(name)
+                    child_page = Page(com)
             name = child_page.name
             self.assign_child(child_page)
-            # In addition to linking to the child,
-            # also give a scientific name to it.
+            if com:
+                if child_page.com:
+                    if com != child_page.com:
+                        print "page {parent} refers to child {com}:{sci}, but the common name doesn't match".format(parent=self.name, com=com, sci=sci)
+                else:
+                    child_page.set_com(com)
             if sci:
                 child_page.set_sci(sci)
             # Replace the {+...} or {...} field with a bare +... line.
@@ -549,7 +548,7 @@ class Page:
         else:
             self.cur_genus = None
 
-        self.txt = re.sub(r'^==([^:,\n]*)(,[-0-9]*)?(:[^\n]+)?$',
+        self.txt = re.sub(r'^==\s*([^:,\n]*?)\s*?(,[-0-9]*)?\s*?(?::\s*([^\n]+?))?\s*?$',
                           repl_child, self.txt, flags=re.MULTILINE)
 
     def write_txt(self):
@@ -1395,16 +1394,21 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
         date = row[date_idx]
         month = int(date.split('-')[1], 10) - 1 # January = month 0
 
-        if sci in sci_page:
+        if sci in sci_ignore:
+            page = find_page2(com, sci)
+            if page:
+                print '{sci} is ignored, but there is a page for it ({name})'.format(sci=sci, name=page.name)
+        elif sci in sci_page:
             page = sci_page[sci]
         elif com in com_page:
             if com_page[com] == 'multiple':
                 print 'observation {com} ({sci}) matches multiple common names but no scientific name'.format(com=com, sci=sci)
+                page = None
             else:
                 page = com_page[com]
-                if page.sci:
-                    if sci != page.sci and sci not in sci_ignore:
-                        print 'observation {com} ({sci}) matches the common name for a page, but not its scientific name ({sci_page})'.format(com=com, sci=sci, sci_page=page.sci)
+                if page.sci and sci != page.sci:
+                    print 'observation {com} ({sci}) matches the common name for a page, but not its scientific name ({sci_page})'.format(com=com, sci=sci, sci_page=page.sci)
+                    page = None
                 elif not page.no_sci:
                     page.set_sci(sci)
         else:
