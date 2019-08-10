@@ -1,0 +1,119 @@
+sci:Quercus
+x:rare
+
+Key features:
+. bark color
+. acorn cup scales thin or thick
+. nut shell hairy, woolly, or not inside
+. leaf shape, colors on top and bottom
+
+CalFlora lists many pines in the bay area, but for now I will confine
+this list to the less rare ones (> 50 CalFlora records).
+
+"Acorn cup scales thin" means that the cap conforms closely to the
+shape of the underlying nut, rather than being distinctly puffed out.
+
+"Adaxially convex" means that the leaf is correspondingly abaxially concave.
+
+Be careful when checking the leaf shape because the tip is considered
+separately.  E.g. a leaf that is "roundish" may actually be lanceolate.
+
+[
+<h2>acorn cup scales thin, shell hairy to woolly inside, at least at tip<br/>
+bark dark gray or gray-brown to black</h2>
+
+==california black oak:Q. kelloggii
+. leaf:
+.. 9--20 cm
+.. adaxially glabrous, bright green
+.. abaxially finely tomentose, +- glabrous in age, pale green
+.. <b>moderately to deeply lobed</b>, lobes 1--4-toothed, teeth generally bristle-tipped
+. common
+
+==coast live oak:Q. agrifolia
+. leaf:
+.. 2.5--6 cm, roundish
+.. <b>generally adaxially convex</b>, +- dull green
+.. abaxially glabrous to densely tomentose, dull, pale green
+.. tip rounded to spine-toothed
+.. margin rolled under or not, weakly spine-toothed
+. common
+
+==interior live oak:Q. wislizeni
+. leaf:
+.. 2--5 cm, roundish or lanceolate
+.. adaxially +- flat
+.. abaxially generally +- shiny, yellow-green
+.. tip generally abruptly pointed
+.. margin entire to spine-toothed
+. nut distally acute to +- obtuse
+. common
+
+==coast oak:Q. parvula
+. leaf:
+.. 3--9 cm, roundish or lanceolate
+.. adaxially +- flat
+.. abaxially glabrous, generally +- dull
+.. tip obtuse to acute or acuminate
+.. margin entire to spine-toothed
+. nut distally +- rounded to obtuse
+. uncommon
+
+]
+[
+<h2>acorn cup scales generally thick, glabrous to woolly inside<br/>
+bark light gray to +- white</h2>
+
+==canyon live oak:Q. chrysolepis
+. <b>acorn nut shell +- woolly inside</b>
+.. all others below are glabrous inside
+. leaf:
+.. 3--6 cm, leathery, roundish
+.. adaxially dark green
+.. abaxially golden-puberulent, glabrous in age, dull, +- gray
+.. tip acute to abruptly pointed
+.. margin entire or spine-toothed
+. common
+
+==valley oak:Q. lobata
+. leaf:
+.. margins deeply lobed (sinuses > 50% to midrib), without spines
+.. adaxially often +- shiny, dark green
+.. abaxially fine-tomentose, dull to pale green
+. common
+
+==oregon oak:Q. garryana
+. leaf
+.. margins deeply lobed (sinuses > 50% to midrib), without spines
+.. adaxially shiny, dark green
+.. abaxially short-hairy, dull, light green
+. uncommon
+
+==blue oak:Q. douglasii
+. leaf:
+.. adaxially dull, blue-green
+.. abaxially puberulent, pale blue-green
+.. tip generally rounded
+.. margin +- entire, wavy, or +- shallowly lobed (sinuses < 50% to midrib), without spines
+. common
+
+==leather oak:Q. durata
+. leaf:
+.. adaxially convex, dull green
+.. margin wavy, often rolled under, toothed
+. common
+
+==nuttall's scrub oak:Q. dumosa
+. leaf:
+.. adaxially [maybe convex?], +- shiny, green
+.. margin +- wavy or not, +- spine-toothed
+. uncommon
+
+==california scrub oak:Q. berberidifolia
+. leaf:
+.. adaxially +- flat to wavy, +- shiny, green
+.. abaxially with minute appressed stellate hairs, dull, pale green
+.. margin mucro- [sharp rib] or spine-toothed
+. uncommon
+
+]
