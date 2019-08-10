@@ -1,6 +1,1 @@
-sci:Trillium ovatum
 color: white, pale purple
-x:ba
-
-==T. ovatum ssp. ovatum
-. this is the only local subspecies

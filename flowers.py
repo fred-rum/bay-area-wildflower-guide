@@ -1002,6 +1002,9 @@ class Page:
             self.write_lists(w)
             write_footer(w)
 
+        if self.taxon_id and not (self.jpg_list or self.child):
+            print "{name} is observed, but has no photos".format(name=page.name)
+
         if self.jpg_list and not self.color:
             print 'No color for {name}'.format(name=self.name)
 
@@ -1292,9 +1295,8 @@ for name in page_list:
     with open(root + "/txt/" + name + ".txt", "r") as r:
         page.txt = r.read()
 
-# Create implicit txt for all unassociated jpgs.
-# Record jpg names for the jpgs' associated pages
-# (whether those pages are old or new).
+# Record jpg names for associated pages.
+# Create a blank page for all unassociated jpgs.
 for jpg in sorted(jpg_list):
     name = get_name_from_jpg(jpg)
     if name in name_page:

@@ -194,7 +194,8 @@ javascript autocomplete restults.
 add California "non-flowering" plants from my photos, e.g. stinging nettle
 
 Give autocomplete preference to a complete word (second only to a
-complete name).
+complete name).  Reduce preference on the page name.  (com and sci
+should be treated equally.)
 
 The current child name regexs will fail for any child with a comma in its name.
 Need to allow comma in the name, but make it non-greedy so that a
@@ -212,6 +213,3 @@ and when closing </ul> and </div>
 
 Use xx to denote species completion.  Thus it can be on the same page
 as x for genus completion.
-
-Complain if a species is on observations.csv but doesn't have photos.
-(It already complains if it doesn't have a page.)

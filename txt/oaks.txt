@@ -80,6 +80,8 @@ bark light gray to +- white</h2>
 .. margins deeply lobed (sinuses > 50% to midrib), without spines
 .. adaxially often +- shiny, dark green
 .. abaxially fine-tomentose, dull to pale green
+. acorn cup 10--30 mm deep, all scales tubercled
+. nut 30--50 mm, generally long-conic, distally acute to +- obtuse
 . common
 
 ==oregon oak:Q. garryana
@@ -87,6 +89,8 @@ bark light gray to +- white</h2>
 .. margins deeply lobed (sinuses > 50% to midrib), without spines
 .. adaxially shiny, dark green
 .. abaxially short-hairy, dull, light green
+. acorn cup 4--9 mm deep, proximal scales +- tubercled, distal +- not
+. nut 20--30 mm, ovoid to +- spheric, distally rounded
 . uncommon
 
 ==blue oak:Q. douglasii
