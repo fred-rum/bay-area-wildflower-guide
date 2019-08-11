@@ -150,8 +150,8 @@ Locations:
             # run of zeros (even if some of those months are themselves zero).
             for i in range(12 - z_length):
                 m = (i + z_first + z_length) % 12
-                w.write('<li>{m}: {n}</li>'.format(m=month_name[m], n=self.month[m]))
-            w.write('</ul></div>\n')
+                w.write('<li>{m}: {n}</li>\n'.format(m=month_name[m], n=self.month[m]))
+            w.write('</ul>\n</div>\n')
         else:
             w.write('<p/>\n')
 
