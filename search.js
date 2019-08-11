@@ -178,10 +178,14 @@ function fn_search(enter) {
     var ac_list = [];
     for (var i = 0; i < best_list.length; i++) {
       var page_info = best_list[i].page_info;
-      if ('key' in page_info) {
+      if (page_info.x == 'f') {
+        var c = 'family';
+      } else if (page_info.x == 'k') {
         var c = 'parent';
-      } else {
+      } else if (page_info.x == 'o') {
         var c = 'leaf';
+      } else {
+        var c = 'unobs';
       }
       if ('com' in page_info) {
         var com = page_info.com;
