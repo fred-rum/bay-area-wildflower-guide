@@ -1,0 +1,11 @@
+sci:Urtica dioica
+x:rare
+color:other
+
+==slender stinging nettle:Urtica dioica ssp. gracilis
+. non-stinging hairs on abaxial leaf veins appressed
+. stem green
+
+==hoary nettle:U. dioica ssp. holosericea
+. non-stinging hairs on abaxial leaf veins erect
+. stem gray-green[?]
