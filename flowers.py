@@ -739,7 +739,6 @@ class Page:
         if not self.child and not self.jpg_list:
             return
 
-        w.write('<hr/>\n')
         w.write('Flower lists that include this page:<p/>\n')
         w.write('<ul/>\n')
 
@@ -790,6 +789,7 @@ class Page:
     def parse(self):
         s = self.txt
         s = re.sub('^\n+', '', s)
+        s = re.sub('\n*$', '\n', s)
 
         def repl_easy(matchobj):
             return repl_easy_dict[matchobj.group(1)]
@@ -1004,6 +1004,8 @@ class Page:
                            self.species_complete, self.species_key_incomplete,
                            is_top_of_species, 'species', 'members')
 
+            w.write('<hr/>\n')
+
             if len(self.jpg_list) or len(self.calphotos):
                 w.write('<div class="photo-box">\n')
 
@@ -1022,6 +1024,9 @@ class Page:
                 w.write('</div>\n')
 
             w.write(s)
+
+            if self.jpg_list or self.calphotos or s != '\n':
+                w.write('<hr/>\n')
 
             self.write_obs(w)
             if self.sci:

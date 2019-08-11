@@ -2,4 +2,3 @@ sci:Delphinium nudicaule
 color: red
 
 See also {-california fuchsia}.
-<hr/>

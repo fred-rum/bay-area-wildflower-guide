@@ -2,4 +2,3 @@ sci:Platystemon californicus
 color: white, cream
 
 See also {-pipestem clematis}.
-<hr/>

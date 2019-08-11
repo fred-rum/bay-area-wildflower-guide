@@ -2,4 +2,3 @@ sci:Epilobium canum
 color: red
 
 See also {-red larkspur}.
-<hr/>

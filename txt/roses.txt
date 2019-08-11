@@ -60,4 +60,3 @@ Key features:
 ]
 
 iNaturalist may suggest woods' rose (Rosa woodsii), but it's not really in the bay area.
-<hr/>
