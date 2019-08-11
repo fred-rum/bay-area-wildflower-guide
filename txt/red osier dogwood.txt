@@ -1,2 +1,13 @@
 sci:Cornus sericea
 color: cream
+x:any
+
+==american dogwood:C. sericea ssp. sericea
+. leaf generally dense-rough-hairy abaxially
+. petals 3--4.5 mm
+. stone generally 3-ridged on faces
+
+==western dogwood:C. sericea ssp. occidentalis
+. leaf generally +- glabrous to strigose abaxially
+. petals 2--3 mm
+. stone generally smooth on faces

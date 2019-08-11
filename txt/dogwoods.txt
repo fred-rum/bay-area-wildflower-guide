@@ -1,0 +1,14 @@
+sci:Cornus
+x:ba
+
+==red osier dogwood:C. sericea
+. inflorescence open, generally appearing with or after leaves, not subtended by bracts
+. leaf blade generally 5--10 cm with 4--7 pairs of veins
+
+==brown dogwood:C. glabrata
+. inflorescence open, generally appearing with or after leaves, not subtended by bracts
+. leaf blade generally 2--5 cm with 3--4 pairs of veins
+
+==pacific dogwood:C. nuttallii
+. inflorescence head- or umbel-like, generally appearing before leaves, subtended by 4--7 showy bracts
+. leaf blade 6--12 cm

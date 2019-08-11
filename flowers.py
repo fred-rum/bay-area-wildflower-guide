@@ -548,7 +548,7 @@ class Page:
         else:
             self.cur_genus = None
 
-        self.txt = re.sub(r'^==\s*([^:,\n]*?)\s*?(,[-0-9]*)?\s*?(?::\s*([^\n]+?))?\s*?$',
+        self.txt = re.sub(r'^==\s*([^:,\n]*?)\s*?(,[-0-9]\S*|,)?\s*?(?::\s*([^\n]+?))?\s*?$',
                           repl_child, self.txt, flags=re.MULTILINE)
 
     def write_txt(self):
@@ -598,7 +598,7 @@ class Page:
                 else:
                     w.write(tuple[1] + '\n')
             s = self.txt
-            s = re.sub(r'^==([^,\n]+)(,[-0-9]*)?$',
+            s = re.sub(r'^==([^,\n]+)(,[-0-9]\S*|,)?$',
                        expand_child, s, flags=re.MULTILINE)
             s = re.sub('^\n+', '', s)
             s = re.sub('\n*$', '\n', s)
@@ -878,7 +878,7 @@ class Page:
         #  ignored spaces, then
         #  a carriage return, then
         #  any amount of arbitrary text that does not include a blank line.
-        s = re.sub(r'^==([^,\n]*)(,[-0-9]*)? *\n((?:.+[\n|\Z])*)', repl_child_link, s, flags=re.MULTILINE)
+        s = re.sub(r'^==([^,\n]*)(,[-0-9]\S*|,)? *\n((?:.+[\n|\Z])*)', repl_child_link, s, flags=re.MULTILINE)
 
         # Replace a pair of newlines with a paragraph separator.
         # (Do this after making specific replacements based on paragraphs,
@@ -1224,7 +1224,7 @@ jpg_list = get_file_list('photos', 'jpg')
 thumb_list = get_file_list('thumbs', 'jpg')
 
 def get_name_from_jpg(jpg):
-    name = re.sub(r',([-0-9]*)$', r'', jpg)
+    name = re.sub(r',([-0-9]\S*|)$', r'', jpg)
 
     if not name.islower():
         # If the jpg uses an elaborated name, remove the elaborations to
