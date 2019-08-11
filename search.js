@@ -42,16 +42,18 @@ function compress(name) {
    has the lowest priority. */
 function check(search_str_cmp, match_str, page_info, best_fit_info, pri_adj) {
   var cx = compress(match_str);
-  if ((best_fit_info.pri < 4 + pri_adj) && (cx == search_str_cmp)) {
-    best_fit_info.pri = 4 + pri_adj;
-    best_fit_info.page_info = page_info;
+  var pri = 0;
+  if (cx.includes(search_str_cmp)) {
+    pri = 2;
+    if (cx.startsWith(search_str_cmp)) {
+      pri = 3;
+      if (cx == search_str_cmp) {
+        pri = 4;
+      }
+    }
   }
-  if ((best_fit_info.pri < 3 + pri_adj) && (cx.startsWith(search_str_cmp))) {
-    best_fit_info.pri = 3 + pri_adj;
-    best_fit_info.page_info = page_info;
-  }
-  if ((best_fit_info.pri < 2 + pri_adj) && (cx.includes(search_str_cmp))) {
-    best_fit_info.pri = 2 + pri_adj;
+  if (pri && ((best_fit_info.pri < pri + pri_adj))) {
+    best_fit_info.pri = pri + pri_adj;
     best_fit_info.page_info = page_info;
   }
 }
