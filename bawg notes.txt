@@ -191,9 +191,7 @@ Links to pages can be by common name or scientific name.
 add California "non-flowering" plants from my photos, e.g. stinging nettle
 
 Give autocomplete preference to a complete word (second only to a
-complete name).  Reduce preference on the page name.  (com and sci
-should be treated equally.  *but* when two sci names have the same
-common name, prefer the one with that page name.)
+complete name).  Reduce preference for auto-generated pages.
 
 The current child name regexs will fail for any child with a comma in its name.
 Need to allow comma in the name, but make it non-greedy so that a

@@ -40,31 +40,31 @@ function compress(name) {
    structure.  An exact match is given highest priority.  A match at the start
    of the name has medium priority, and a match somewhere later in the name
    has the lowest priority. */
-function check(search_str_cmp, match_str, page_info, best_fit_info) {
+function check(search_str_cmp, match_str, page_info, best_fit_info, pri_adj) {
   var cx = compress(match_str);
-  if ((best_fit_info.pri < 4) && (cx == search_str_cmp)) {
-    best_fit_info.pri = 4;
+  if ((best_fit_info.pri < 4 + pri_adj) && (cx == search_str_cmp)) {
+    best_fit_info.pri = 4 + pri_adj;
     best_fit_info.page_info = page_info;
   }
-  if ((best_fit_info.pri < 3) && (cx.startsWith(search_str_cmp))) {
-    best_fit_info.pri = 3;
+  if ((best_fit_info.pri < 3 + pri_adj) && (cx.startsWith(search_str_cmp))) {
+    best_fit_info.pri = 3 + pri_adj;
     best_fit_info.page_info = page_info;
   }
-  if ((best_fit_info.pri < 2) && (cx.includes(search_str_cmp))) {
-    best_fit_info.pri = 2;
+  if ((best_fit_info.pri < 2 + pri_adj) && (cx.includes(search_str_cmp))) {
+    best_fit_info.pri = 2 + pri_adj;
     best_fit_info.page_info = page_info;
   }
 }
 
 function check_elab(search_str_cmp, elab, page_info, best_fit_info) {
-  check(search_str_cmp, elab, page_info, best_fit_info)
+  check(search_str_cmp, elab, page_info, best_fit_info, 0.0)
 
   /* If the scientific name includes a subtype specifier, also check for
      a match with the specifier removed. */
   var elab_split = elab.split(' ');
   if (elab_split.length == 4) {
     var sci = elab_split[0] + ' ' + elab_split[1] + ' ' + elab_split[3]
-    check(search_str_cmp, sci, page_info, best_fit_info)
+    check(search_str_cmp, sci, page_info, best_fit_info, 0.0)
   }
 }
 
@@ -146,9 +146,9 @@ function fn_search(enter) {
       pri: 0 /* 0 means no match */
     }
 
-    check(search_str_cmp, page_info.page, page_info, best_fit_info)
+    check(search_str_cmp, page_info.page, page_info, best_fit_info, 0.5)
     if ('com' in page_info) {
-      check(search_str_cmp, page_info.com, page_info, best_fit_info)
+      check(search_str_cmp, page_info.com, page_info, best_fit_info, 0.0)
     }
     if ('sci' in page_info) {
       check_elab(search_str_cmp, page_info.sci, page_info, best_fit_info)
