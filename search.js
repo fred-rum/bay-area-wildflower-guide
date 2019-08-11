@@ -57,7 +57,7 @@ function check(search_str_cmp, match_str, page_info, best_fit_info, pri_adj) {
   if (cx.includes(search_str_cmp)) {
     pri = 2;
     if (cx.startsWith(search_str_cmp)) {
-      pri = 3;
+      pri = 2.1;
       if (cx == search_str_cmp) {
         pri = 4;
       }
@@ -67,7 +67,7 @@ function check(search_str_cmp, match_str, page_info, best_fit_info, pri_adj) {
     /* Bump the priority by 0.5 if we're matching the page name. */
     pri += pri_adj;
 
-    /* Bump the priority by 0.25 if the match begins and ends
+    /* Bump the priority by 0.2 if the match begins and ends
        at word boundaries. */
     var cmp_pos = cx.indexOf(search_str_cmp);
     var uncmp_start = index_of_letter(match_str, cmp_pos);
@@ -76,7 +76,7 @@ function check(search_str_cmp, match_str, page_info, best_fit_info, pri_adj) {
          (match_str.substring(uncmp_start).search(/^[a-zA-Z]/) == -1)) &&
         ((uncmp_end == match_str.length) ||
          (match_str.substring(uncmp_end).search(/^[a-zA-Z]/) == -1))){
-      pri += 0.25;
+      pri += 0.2;
     }
 
     if (best_fit_info.pri < pri + pri_adj) {
