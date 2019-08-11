@@ -35,6 +35,17 @@ function compress(name) {
   return name.toUpperCase().replace(/[^A-Z]/g, '');
 }
 
+function index_of_letter(str, letter_num) {
+  var letter_cnt = 0;
+  for (var i = 0; letter_cnt < letter_num; i++) {
+    if (str.substring(i).search(/^[a-zA-Z]/) >= 0) {
+      letter_cnt++;
+    }
+  }
+
+  return i;
+}
+
 /* check() is called multiple times, once for each name associated with a page.
    Throughout this process, it accumulates the best fit in the best_fit_info
    structure.  An exact match is given highest priority.  A match at the start
@@ -52,9 +63,26 @@ function check(search_str_cmp, match_str, page_info, best_fit_info, pri_adj) {
       }
     }
   }
-  if (pri && ((best_fit_info.pri < pri + pri_adj))) {
-    best_fit_info.pri = pri + pri_adj;
-    best_fit_info.page_info = page_info;
+  if (pri) {
+    /* Bump the priority by 0.5 if we're matching the page name. */
+    pri += pri_adj;
+
+    /* Bump the priority by 0.25 if the match begins and ends
+       at word boundaries. */
+    var cmp_pos = cx.indexOf(search_str_cmp);
+    var uncmp_start = index_of_letter(match_str, cmp_pos);
+    var uncmp_end = index_of_letter(match_str, cmp_pos + search_str_cmp.length);
+    if (((uncmp_start == 0) ||
+         (match_str.substring(uncmp_start).search(/^[a-zA-Z]/) == -1)) &&
+        ((uncmp_end == match_str.length) ||
+         (match_str.substring(uncmp_end).search(/^[a-zA-Z]/) == -1))){
+      pri += 0.25;
+    }
+
+    if (best_fit_info.pri < pri + pri_adj) {
+      best_fit_info.pri = pri + pri_adj;
+      best_fit_info.page_info = page_info;
+    }
   }
 }
 
