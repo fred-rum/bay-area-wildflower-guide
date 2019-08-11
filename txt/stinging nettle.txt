@@ -1,5 +1,5 @@
 sci:Urtica dioica
-x:rare
+xx:rare
 color:other
 
 ==slender stinging nettle:Urtica dioica ssp. gracilis

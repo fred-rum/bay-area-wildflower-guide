@@ -1,6 +1,6 @@
 sci:Chrysolepis chrysophylla
 color: other
-x:any
+xx:any
 
 ==:C. chrysophylla var. chrysophylla
 . tree, 15--30 m

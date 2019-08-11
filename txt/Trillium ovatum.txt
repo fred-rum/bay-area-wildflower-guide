@@ -1,5 +1,5 @@
 com:pacific trillium
-x:ba
+xx:ba
 
 ==pacific trillium:T. ovatum ssp. ovatum
 . petals 1.5--7 cm, 5--45 mm wide

@@ -1,6 +1,6 @@
 sci:Equisetum telmateia
 color:n/a
-x:ca
+xx:ca
 
 ==giant horsetail:E. telmateia ssp. braunii
 . main stem between nodes is green

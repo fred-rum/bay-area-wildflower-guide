@@ -1,5 +1,5 @@
 sci:Sambucus racemosa
-x:ca
+xx:ca
 
 ==american red elder:S. racemosa ssp. racemosa
 . red berries

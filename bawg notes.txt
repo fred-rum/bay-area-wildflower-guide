@@ -198,6 +198,3 @@ The script should complain if I have an observation in an existing
 genus even if the genus page hasn't been created (e.g. only one
 species has been documented).  E.g. Lepidium latifolium and
 L. nitidum.
-
-Use xx to denote species completion.  Thus it can be on the same page
-as x for genus completion.

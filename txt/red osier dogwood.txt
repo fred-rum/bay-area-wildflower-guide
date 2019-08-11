@@ -1,6 +1,6 @@
 sci:Cornus sericea
 color: cream
-x:any
+xx:any
 
 ==american dogwood:C. sericea ssp. sericea
 . leaf generally dense-rough-hairy abaxially

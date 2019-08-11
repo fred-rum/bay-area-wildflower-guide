@@ -1,5 +1,5 @@
 com:cobwebby thistle
-x:more
+xx:more
 
 ==venus thistle:C. occidentale var. venustum
 . less cobwebby
