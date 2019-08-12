@@ -1,0 +1,4 @@
+sci: Pteridium aquilinum var. pubescens
+color:n/a
+x:ca
+xx:ca

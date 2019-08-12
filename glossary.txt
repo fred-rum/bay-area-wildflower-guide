@@ -1,10 +1,11 @@
 {abaxial} The surface further from the stem when upright.  E.g. the lower surface of a leaf or the outer surface of a petal.
 {adaxial} The surface closer to the stem when upright.  E.g. the upper surface of a leaf or the inner surface of a petal.
 {annual,annuals} Lives for one year or less, generally without forming any woody parts.
-{basal} Positioned at the base.  Most commonly refers to leaves growing at the base of the stem.  Contrast cauline leaves.
+{basal} Positioned at the base.  Most commonly refers to leaves growing at the base of the stem.  Contrast cauline.
 {calyx,calyces,calyxes} Collective term for sepals.
-{cauline} Growing along a plant's stem.  Most commonly refers to leaves.  Contrast basal leaves.
+{cauline} Growing along a plant's stem.  Most commonly refers to leaves.  Contrast basal.
 {corolla,corollas} Collective term for petals.
+{cylindric} Significantly longer than wide with parallel sides.
 {decurrent} The leaf blade extends onto the stem as a short wing.
 {dioecious} A plant that has only either male or female flowers on it, never both on the same plant.
 {distal} Growing farther away from the base and closer to the tip of a structure.  The structure is often implied; e.g. a proximal leaf grows close to the base of the whole plant.  Contrast proximal.
@@ -12,9 +13,8 @@
 {glaucous} Covered with the appearance of a whitish powder.
 {herb,herbs} Plant without any woody parts.
 {inflorescence,inflorescences} A cluster of flowers from a common point or sharing a stalk that has only flowers on it.  A head in the sunflower family.
-{bract,bracts} Small leaf-like structures (or analogue) at the base of an inflorescence.  May be fused together or not.
 {involucre,involucres} Collective term for a cluster of bracts.  Typically refers to the green base of a flower head in the sunflower family.
-{ligule,ligules} The petal of a flower in the sunflower family comprised only of ray-like flowers (i.e. not disk and ray).
+{bract,bracts} Small leaf-like structures (or analogue) at the base of an inflorescence.  May be fused together or not.
 {palmate} With lobes spreading from a common point.
 {palmate-pinnate} 1st-order palmate and 2nd-order pinnate.
 {pedicel,pedicels} The stalk of an individual flower.
@@ -22,7 +22,6 @@
 {perianth,perianths} The collective term for the calyx and corolla.
 {petal,petals} A free or fused member of the corolla.
 {petiole,petioles} The stalk of a leaf.
-{phyllary,phyllaries} A bract of the flower head in the sunflower family.
 {pinna,pinnae} The 1st-order division of a frond blade.
 {pinnate} Refers to a two-dimensional branched structure.  Typically refers to lobes or leaflets in a leaf.  1-pinnate means that the structure has 1 level of branches arising from a central axis.  2-pinnate means that the branches also have branches, etc.
 {pinnule,pinnules} The 2nd-order division of a frond blade.  (The 1st-order division of a pinna.)
@@ -34,3 +33,17 @@
 {stipule,stipules} Extension at the base of the petiole.
 {subshrub,subshrubs} Similar to a shrub, but with the distal stems less woody.
 {waif,waifs} A plant that has spread with human assistance but cannot reproduce or spread further on its own; will eventually die out assuming no further assistance.
+
+<h2>Words used for the sunflower family</h2>
+
+<p>See also the sunflower-related uses of inflorescence and involucre.</p>
+
+{ligule,ligules} The petal of a flower in the sunflower family comprised only of ray-like flowers (i.e. not disk and ray).
+{phyllary,phyllaries} A bract of the flower head in the sunflower family.
+
+<h3>Involucre shapes</h2>
+
+<p>All involucre shapes may be flared at the tip or not.  See also cylindric.</p>
+
+{bell-shaped,bell} Rapidly widening at the base, then slowly expanding toward the tip.
+{urn-shaped,urn} Rapidly widening at the base, then narrowed toward the tip.

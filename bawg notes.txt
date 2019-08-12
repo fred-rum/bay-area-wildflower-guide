@@ -198,3 +198,7 @@ The script should complain if I have an observation in an existing
 genus even if the genus page hasn't been created (e.g. only one
 species has been documented).  E.g. Lepidium latifolium and
 L. nitidum.
+
+Remove autofocus on the search field.  On Android Firefox, it doesn't
+pop up the keyboard when the page loads, but it tends to pop up when
+the app is brought forward from the background.

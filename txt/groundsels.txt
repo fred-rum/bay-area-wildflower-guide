@@ -1,0 +1,80 @@
+sci:Senecio
+x:hist/rare
+
+Inner phyllaries are the length of the involucre.  Outer phyllaries are much reduced.
+
+==common groundsel:S. vulgaris
+. 55--65 disk flowers
+. no ray flowers
+. involucre +- widely cylindric or urn-shaped
+. inner phyllaries generally black-tipped
+. outer phyllaries +- inconspicuous, black-tipped
+. common
+
+==coastal burnweed:S. minimus
+. 3--5 disk flowers
+. 9--20+ ray flowers, stigma only with no ray petal
+. involucre cylindric
+. inner phyllaries generally minutely black-tipped
+. outer phyllaries inconspicuous
+. leaves entire, margin sharply and evenly fine-dentate
+. common
+
+==cutleaf burnweed:S. glomeratus
+. 8--10 disk flowers
+. 25--35 ray flowers, stigma only with no ray petal
+. involucre cylindric
+. phyllaries hairy at base
+. outer phyllaries inconspicuous
+. leaves pinnately lobed
+. common
+
+==california groundsel:S. aphanactis
+. 8--20 disk flowers
+. +- 5 ray flowers, 0.5--1+ mm
+. involucre narrowly urn-shaped
+. inner phyllaries green-tipped [I think Jepson means brown-tipped]
+. outer phyllaries inconspicuous
+. herbage glabrous or sparsely hairy
+. leaves 1-pinnately lobed or dentate
+. rare
+
+==heath groundsel:S. sylvaticus
+. 40--50 disk flowers
+. 1--8 ray flowers, 0--2+ mm
+. involucre cylindric
+. herbage densely curly-hairy
+. inner phyllaries often black-tipped
+. outer phyllaries inconspicuous
+. leaves 1-2 pinnately lobed or divided
+. uncommon
+
+==rayless ragwort:S. aronicoides
+. 14,31'
+. 40--75 disk flowers
+. involucre bell-shaped
+. inner phyllaries green- or black-tipped
+. outer phyllaries 0--few, inconspicuous to > &frac12; inner
+. 0--2 ray flowers, 4--7 mm
+. common
+
+==threadleaf groundsel:S. flaccidus
+. unknown number of disk flowers
+. 8, 13, or 21 ray flowers, 10--15 mm
+. involucre bell-shaped
+. inner phyllaries occasionally black tipped
+. outer phyllaries +- prominent, often some > &frac12; inner
+. shrub or subshrub with shrub-like branching
+. leaves narrowly linear to thread-like
+. uncommon
+
+==red-purple ragwort:S. elegans
+. 100+ disk flowers
+. 13--21 ray flowers, 10--15 mm, deep red-purple or pink-purple
+.. (all others are yellow)
+. involucre bell-shaped
+. inner phyllaries black-tipped
+. outer phyllaries conspicuous, many, graduated, <= +- &frac12; inner, black-tipped
+. herb
+. leaves obovate, abruptly narrowed or tapered to petiole, 1--2-pinnately lobed, ultimate margin crenate to dentate
+. uncommon
