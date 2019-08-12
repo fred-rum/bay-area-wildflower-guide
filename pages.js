@@ -777,7 +777,7 @@ var pages=[
 {page:"field horsetail",sci:"Equisetum arvense",x:"u"},
 {page:"field peppergrass",sci:"Lepidium campestre",x:"u"},
 {page:"five angled dodder",sci:"Cuscuta pentagona",x:"u"},
-{page:"five-finger fern",sci:"Adiantum aleuticum",x:"u"},
+{page:"five-finger fern",sci:"Adiantum aleuticum",x:"o"},
 {page:"flax-leaved horseweed",sci:"Erigeron bonariensis",x:"u"},
 {page:"fleshy lupine",sci:"Lupinus affinis",x:"u"},
 {page:"foothill deervetch",sci:"Acmispon brachycarpus",x:"u"},

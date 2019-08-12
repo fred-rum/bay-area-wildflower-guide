@@ -31,28 +31,29 @@ Fruit key features:
 . sepals reflexed or not
 
 Flower key features:
-. corolla diameter
+. corolla diameter [Jepson's sizes are a bit low; they are corrected here]
 . leaf toothed or not
 . hairs gladular or not
+
+Jepson lists some inflorescences as being raceme-like and others as
+umbel-like, but they all look the same to me.
 
 Some features are variable within a species, but if a <b>bold feature</b> is seen, it is diagnostic.
 
 ==black nightshade:S. nigrum
-. corolla: 20 mm diameter [corrected], white
-. inflorescence: <b>raceme-like</b> (pedicels spaced along a sprout)
+. corolla: 10--17 mm diameter [corrected], white
 . leaf: 4--7 cm, entire to coarsely wavy-toothed
 . hairs: +-spreading or curved, <b>glandular</b> and not
 . fruit: <b>dull</b>
 
 ==greenspot nightshade:S. douglasii
-. corolla: +-20 mm diameter [corrected], <b>white-lavender</b>
-. inflorescence: generally <b>umbel-like</b> (all pedicels from a common point)
+. corolla: 10--14 mm diameter [corrected], <b>white-lavender</b>
 . leaf: 1--9 cm, entire to coarsely irregularly <b>toothed</b>
 . hairs: generally simple, < 1mm, +-curved, white
 . fruit: <b>glossy</b> w/ <b>sepals not reflexed</b>
 
 ==american black nightshade,2:S. americanum
-. corolla: <b>6--12 mm diameter</b> [corrected], white
+. corolla: <b>5--8 mm diameter</b> [or more?] [corrected], white
 . leaf: 2--15 cm, entire to coarsely wavy-toothed
 . hairs: +-0 or short, +-appressed or curved, nonglandular
 . fruit: <b>glossy</b> w/ <b>sepals reflexed</b>
