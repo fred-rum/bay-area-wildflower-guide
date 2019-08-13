@@ -306,3 +306,6 @@ div#details {
 ul {
     margin-top: 6px;
 }
+p.list-head {
+    margin-bottom: 0px;
+}

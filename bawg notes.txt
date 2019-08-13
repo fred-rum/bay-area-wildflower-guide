@@ -168,8 +168,3 @@ L. nitidum.
 
 Allow families to auto-list their members after some introductory
 text.  E.g. most sedges have triangular stems and grasses have round stems.
-
-Support extra scientific names for Jepson, CalPhotos, CalFlora, etc.
-Group together in the footer those links using the same scientific
-name (and specify what name is used).  "Bay Area species" uses the
-CalFlora genus, but it only gets moved from the iNaturalist group to the CalFlora group if it uses a different genus.
