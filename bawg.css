@@ -99,7 +99,15 @@ div.photo-box {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin: 10px 0px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+div.list-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 span.show-narrow {
     display: inline;
@@ -144,7 +152,7 @@ img.page-thumb {
     max-height: 200px;
     width: auto;
     margin-right: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
 div.page-thumb-text {
     display: inline-flex;
@@ -291,4 +299,7 @@ span.toggle-details {
 }
 div#details {
     display: none;
+}
+ul {
+    margin-top: 6px;
 }

@@ -556,7 +556,7 @@ class Page:
         else:
             self.cur_genus = None
 
-        self.txt = re.sub(r'^==\s*([^:,\n]*?)\s*?(,[-0-9]\S*|,)?\s*?(?::\s*([^\n]+?))?\s*?$',
+        self.txt = re.sub(r'^==\s*([^:\n]*?)\s*?(,[-0-9]\S*|,)?\s*?(?::\s*([^\n]+?))?\s*?$',
                           repl_child, self.txt, flags=re.MULTILINE)
 
     def write_txt(self):
@@ -766,7 +766,7 @@ class Page:
             w.write('<div class="box{indent_class}">\n'.format(indent_class=indent_class))
             indent_class = ''
 
-        w.write('<div class="photo-box{indent_class}">'.format(indent_class=indent_class))
+        w.write('<div class="list-box{indent_class}">'.format(indent_class=indent_class))
 
         if self.jpg_list:
             w.write('<a href="{name}.html"><img src="../thumbs/{jpg}.jpg" width="200" height="200" class="list-thumb"></a>'.format(name=self.name, jpg=self.jpg_list[0]))
@@ -908,7 +908,7 @@ class Page:
         #  ignored spaces, then
         #  a carriage return, then
         #  any amount of arbitrary text that does not include a blank line.
-        s = re.sub(r'^==([^,\n]*)(,[-0-9]\S*|,)? *\n((?:.+[\n|\Z])*)', repl_child_link, s, flags=re.MULTILINE)
+        s = re.sub(r'^==([^\n]*?)(,[-0-9]\S*|,)? *\n((?:.+[\n|\Z])*)', repl_child_link, s, flags=re.MULTILINE)
 
         # Replace a pair of newlines with a paragraph separator.
         s = s.replace('\n\n', '\n<p/>\n')
