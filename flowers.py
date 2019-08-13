@@ -251,6 +251,7 @@ class Page:
             self.set_sci(name)
 
         self.txt = ''
+        self.key_txt = ''
         self.jpg_list = [] # an ordered list of jpg names
 
         self.parent = set() # an unordered set of parent pages
@@ -468,7 +469,7 @@ class Page:
             self.key = True
 
     def parse_children(self):
-        # Replace a {child:[page]} link with just {[page]} and record the
+        # Replace a ==[name] link with ==[page] and record the
         # parent->child relationship.
         def repl_child(matchobj):
             com = matchobj.group(1)
@@ -784,8 +785,6 @@ class Page:
         for child in self.child:
             child.cross_out_children(page_list)
 
-    # The giant 'parse' function, which turns txt into html
-    # and writes the resulting file.
     def parse(self):
         s = self.txt
         s = re.sub('^\n+', '', s)
@@ -874,6 +873,13 @@ class Page:
             if not img:
                 return link + '\n' + text
 
+            # Give the child a copy of the text from the parent's key.
+            # The child can use this (pre-parsed) text if it has no text
+            # of its own.
+            if ((self.level == 'genus' and child.level == 'species') or
+                (self.level == 'species' and child.level == 'below')):
+                child.key_txt = text
+
             if text:
                 # Duplicate and contain the text link so that the following text
                 # can either be below the text link and next to the image or
@@ -882,20 +888,6 @@ class Page:
                 return '<div class="flex-width"><div class="photo-box">{img}\n<span class="show-narrow">{link}</span></div><span><span class="show-wide">{link}</span>{text}</span></div>'.format(img=img, link=link, text=text)
             else:
                 return '<div class="photo-box">{img}\n<span>{link}</span></div>'.format(img=img, link=link)
-
-        # Search for:
-        #  + at the start of a line, then
-        #  a name, then
-        #  optionally a jpg suffix, then
-        #  ignored spaces, then
-        #  a carriage return, then
-        #  any amount of arbitrary text that does not include a blank line.
-        s = re.sub(r'^==([^,\n]*)(,[-0-9]\S*|,)? *\n((?:.+[\n|\Z])*)', repl_child_link, s, flags=re.MULTILINE)
-
-        # Replace a pair of newlines with a paragraph separator.
-        # (Do this after making specific replacements based on paragraphs,
-        # but before replacements that might create empty lines.)
-        s = s.replace('\n\n', '\n<p/>\n')
 
         # Replace {-[name]} with an inline link to the page.
         def repl_link(matchobj):
@@ -909,6 +901,21 @@ class Page:
 
         s = re.sub(r'{-([^}]+)}', repl_link, s)
 
+        # Search for:
+        #  + at the start of a line, then
+        #  a name, then
+        #  optionally a jpg suffix, then
+        #  ignored spaces, then
+        #  a carriage return, then
+        #  any amount of arbitrary text that does not include a blank line.
+        s = re.sub(r'^==([^,\n]*)(,[-0-9]\S*|,)? *\n((?:.+[\n|\Z])*)', repl_child_link, s, flags=re.MULTILINE)
+
+        # Replace a pair of newlines with a paragraph separator.
+        s = s.replace('\n\n', '\n<p/>\n')
+
+        self.txt = s
+
+    def write_html(self):
         def write_complete(w, complete, key_incomplete, is_top, top, members):
             if is_top:
                 if complete == None:
@@ -1023,9 +1030,13 @@ class Page:
 
                 w.write('</div>\n')
 
+            if re.search('\S', self.txt):
+                s = self.txt
+            else:
+                s = self.key_txt
             w.write(s)
 
-            if self.jpg_list or self.calphotos or s != '\n':
+            if self.jpg_list or self.calphotos or s:
                 w.write('<hr/>\n')
 
             self.write_obs(w)
@@ -1144,7 +1155,7 @@ def write_header(w, title, h1, nospace=False, nosearch=False):
     if not nosearch:
         w.write('''<div id="search-bg"></div>
 <div id="search-container">
-<input type="search" id="search" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="search for a flower..." autofocus>
+<input type="search" id="search" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="search for a flower...">
 <div id="autocomplete-box"></div>
 </div>
 ''')
@@ -1598,6 +1609,9 @@ top_list = [x for x in name_page.itervalues() if not x.parent]
 for page in name_page.itervalues():
     page.parse_glossary()
     page.parse()
+
+for page in name_page.itervalues():
+    page.write_html()
 
 # Find any genus with multiple species.
 # Check whether all of those species share an ancestor key page in common.

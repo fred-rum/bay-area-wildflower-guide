@@ -199,16 +199,8 @@ genus even if the genus page hasn't been created (e.g. only one
 species has been documented).  E.g. Lepidium latifolium and
 L. nitidum.
 
-Remove autofocus on the search field.  On Android Firefox, it doesn't
-pop up the keyboard when the page loads, but it tends to pop up when
-the app is brought forward from the background.
-
 Remove CalPhotos from genus-level pages.  It's just not worthwhile at
 that level.
-
-Copy child notes to child page (if the child's text is otherwise
-blank?)  E.g. copy everything from the child link to the end of its
-boxed division.
 
 Allow families to auto-list their members after some introductory
 text.  E.g. most sedges have triangular stems and grasses have round stems.
