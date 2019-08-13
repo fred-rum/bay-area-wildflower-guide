@@ -209,3 +209,6 @@ that level.
 Copy child notes to child page (if the child's text is otherwise
 blank?)  E.g. copy everything from the child link to the end of its
 boxed division.
+
+Allow families to auto-list their members after some introductory
+text.  E.g. most sedges have triangular stems and grasses have round stems.

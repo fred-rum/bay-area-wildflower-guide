@@ -29,6 +29,7 @@
 {sagittate} Shaped like an arrowhead, with basal lobes near parallel to the axis.
 {sepal,sepals} A free or fused member of the calyx.  Usually green, or often the same color as the petals, or sometimes different.
 {shrub,shrubs} Woody plant, shorter than a tree, generally with many branches from the base.
+{stellate} With 3+ branches radiating from a common point.  (Usually used to describe hair.)
 {stipe,stipes} In the knotweed family, a distal extension of the pedicel separated by a line, bulge, or difference in thickness.  In ferns, the frond stalk; equivalent to petiole.
 {stipule,stipules} Extension at the base of the petiole.
 {subshrub,subshrubs} Similar to a shrub, but with the distal stems less woody.

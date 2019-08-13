@@ -1,0 +1,39 @@
+sci:Bromus
+x:!hist/rare
+
+Key features:
+. spike (inflorescence) and lemma (lower, larger bract of a single flower) features
+. leaf, sheath hairy or glabrous
+. number of stem nodes
+
+==australian brome:B. arenarius
+
+==chilean chess:B. berteroanus
+
+==california brome:B. carinatus
+
+==rescue brome:B. catharticus
+
+==fringed brome:B. ciliatus
+
+==ripgut brome:B. diandrus
+
+==common soft-brome:B. hordeaceus
+
+==thunberg's brome:B. japonicus
+
+==chinook brome:B. laevipes
+
+==compact brome:B. madritensis
+
+==red brome:B. rubens
+
+==seaside brome:B. maritimus
+
+==bald brome:B. racemosus
+
+==barren brome:B. sterilis
+
+==cheatgrass:B. tectorum
+
+==columbia brome:B. vulgaris

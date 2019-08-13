@@ -1,0 +1,12 @@
+sci:Hedera
+x:ca
+
+Juvenile stems are slender, flexible, and climbing with the aid of small aerial roots, and their leaves are often lobed.  Adult leaves are thicker, self-supporting, without roots, and non-climbing (instead lying or twining at whatever level the juvenile stems reached), and their leaves are +- entire.
+
+==common ivy:H. helix
+. leaves on juvenile stems: <= 35 cm, palmately 3--5-lobed, lobes +- acute
+. hair stellate, white, hair rays spreading
+
+==canary islands ivy:H. canariensis
+. leaves on juvenile stems: <= 25 cm, unlobed to shallowly 3-lobed, lobes rounded to acute
+. hair stellate, red-orange, hair rays appressed

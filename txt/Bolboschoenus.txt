@@ -1,0 +1,19 @@
+x:ba
+color:cream, other
+
+Plant is tipped with a cluster of spikelets, subtended by long leaves.  Each spikelet has multiple interweaved flowers, the structure of which is unclear to me.  Each flower has 3 stamens and 1 style with 2 or 3 stigmas.
+
+==saltmarsh clubrush:B. maritimus ssp. paludosus
+. 2 stigmas per flower
+. fruit 2-sided
+. anthers yellow
+
+==seacoast bulrush:B. robustus
+. 3 stigmas per flower
+. fruit flat-3-sided or 2-sided
+. anthers orange
+
+==river bulrush:B. fluviatilis
+. 3 stigmas per flower
+. fruit strongly 3-sided
+. anthers yellow
