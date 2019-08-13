@@ -713,8 +713,9 @@ class Page:
             # but not by other high-level classifications.
             w.write('<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank">CalFlora</a> &ndash;\n'.format(elab=elab));
 
-        if self.level in ('genus', 'species', 'below'):
+        if self.level in ('species', 'below'):
             # CalPhotos cannot be searched by high-level classifications.
+            # It can be searched by genus, but I don't find that at all useful.
             # rel-taxon=begins+with -> allows matches with lower-level detail
             w.write('<a href="https://calphotos.berkeley.edu/cgi/img_query?rel-taxon=begins+with&where-taxon={elab}" target="_blank">CalPhotos</a> &ndash;\n'.format(elab=elab));
 
