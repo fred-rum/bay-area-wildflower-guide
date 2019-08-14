@@ -446,6 +446,8 @@ var pages=[
 {page:"mountain phacelia",sci:"Phacelia imbricata",x:"o"},
 {page:"narrowleaf milkweed",sci:"Asclepias fascicularis",x:"o"},
 {page:"oak mistletoe",sci:"Phoradendron villosum",x:"o"},
+{page:"olive",sci:"Olea europaea",x:"o"},
+{page:"Oleaceae",com:"olive family",sci:"family Oleaceae",x:"f"},
 {page:"oregon bitterroot",sci:"Lewisia rediviva",x:"o"},
 {page:"oxeye daisy",sci:"Leucanthemum vulgare",x:"o"},
 {page:"pacific aster",sci:"Symphyotrichum chilense",x:"o"},

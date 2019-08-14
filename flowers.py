@@ -436,7 +436,7 @@ class Page:
                     self.species_key_incomplete = True
             return ''
 
-        self.txt = re.sub(r'^(x|xx):\s*(!?)(ba|ca|any|hist|rare|hist/rare|more)\s*?\n',
+        self.txt = re.sub(r'^(x|xx):\s*(!?)(none|ba|ca|any|hist|rare|hist/rare|more)\s*?\n',
                           repl_complete, self.txt, flags=re.MULTILINE)
 
     def parse_color(self):
@@ -982,6 +982,11 @@ class Page:
                         w.write('<b>Caution: There may be other {members} of this {top} not yet included in this guide.</b>'.format(members=members, top=top))
                     else:
                         return # Don't write the <p/> at the end
+                elif complete == 'none':
+                    if top == 'genus':
+                        print "x:none used for " + self.name
+                    else:
+                        w.write('This species has no subspecies or variants.')
                 elif complete == 'more':
                     w.write('<b>Caution: There are other {members} of this {top} not yet included in this guide.</b>'.format(members=members, top=top))
                 else:
