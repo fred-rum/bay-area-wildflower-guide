@@ -630,8 +630,8 @@ class Page:
             s = self.txt
             s = re.sub(r'^==([^,\n]+)(,[-0-9]\S*|,)?$',
                        expand_child, s, flags=re.MULTILINE)
-            s = re.sub('^\n+', '', s)
-            s = re.sub('\n*$', '\n', s)
+            s = re.sub(r'^\n+', '', s)
+            s = re.sub(r'\n*$', '\n', s)
             if s and s != '\n':
                 if ((self.com and (self.sci or self.no_sci)) or
                     self.color or
@@ -723,14 +723,17 @@ class Page:
         elab_list = []
         link_list = {}
 
-        def add_link(elab, link):
+        def add_link(elab, elab_alt, link):
+            if elab_alt == 'n/a':
+                elab = 'not listed'
+                link = re.sub(r'<a ', '<a class="missing" ', link)
             if elab not in link_list:
                 elab_list.append(elab)
                 link_list[elab] = []
             link_list[elab].append(link)
 
         def choose_elab(elab_base, elab_alt):
-            if elab_alt:
+            if elab_alt and elab_alt != 'n/a':
                 elab = elab_alt
             else:
                 elab = elab_base
@@ -743,22 +746,26 @@ class Page:
         if self.taxon_id:
             elab = choose_elab(self.elab, None)
             sci = strip_sci(elab) # Should equal self.sci
-            add_link(elab, '<a href="https://www.inaturalist.org/taxa/{taxon_id}" target="_blank">iNaturalist</a>'.format(taxon_id=self.taxon_id))
+            add_link(elab, None,
+                     '<a href="https://www.inaturalist.org/taxa/{taxon_id}" target="_blank">iNaturalist</a>'.format(taxon_id=self.taxon_id))
         else:
-            add_link(elab, '<a href="https://www.inaturalist.org/search?q={sci}&source=taxa" target="_blank">iNaturalist</a>'.format(sci=sci))
+            add_link(elab, None,
+                     '<a href="https://www.inaturalist.org/search?q={sci}&source=taxa" target="_blank">iNaturalist</a>'.format(sci=sci))
 
         if self.level != 'above' or self.elab.startswith('family '):
             # CalFlora can be searched by family,
             # but not by other high-level classifications.
             elab = choose_elab(self.elab, self.elab_calflora)
-            add_link(elab, '<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank">CalFlora</a>'.format(elab=elab));
+            add_link(elab, self.elab_calflora,
+                     '<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank">CalFlora</a>'.format(elab=elab));
 
         if self.level in ('species', 'below'):
             # CalPhotos cannot be searched by high-level classifications.
             # It can be searched by genus, but I don't find that at all useful.
             elab = choose_elab(self.elab, self.elab_calphotos)
             # rel-taxon=begins+with -> allows matches with lower-level detail
-            add_link(elab, '<a href="https://calphotos.berkeley.edu/cgi/img_query?rel-taxon=begins+with&where-taxon={elab}" target="_blank">CalPhotos</a>\n'.format(elab=elab));
+            add_link(elab, self.elab_calphotos,
+                     '<a href="https://calphotos.berkeley.edu/cgi/img_query?rel-taxon=begins+with&where-taxon={elab}" target="_blank">CalPhotos</a>\n'.format(elab=elab));
 
         if self.level != 'above' or self.elab.startswith('family '):
             # Jepson can be searched by family,
@@ -767,7 +774,8 @@ class Page:
             # Jepson uses "subsp." instead of "ssp.", but it also allows us to
             # search with that qualifier left out entirely.
             sci = strip_sci(elab)
-            add_link(elab, '<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson&nbsp;eFlora</a>'.format(sci=sci));
+            add_link(elab, self.elab_jepson,
+                     '<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson&nbsp;eFlora</a>'.format(sci=sci));
 
         if self.level in ('genus', 'species', 'below'):
             elab = choose_elab(self.elab, self.elab_calflora)
@@ -780,7 +788,8 @@ class Page:
             # fmt=photo -> list results with info + sample photos
             # y={},x={},z={} -> longitude, latitude, zoom
             # wkt={...} -> search polygon with last point matching the first
-            add_link(elab, '<a href="https://www.calflora.org/entry/wgh.html#srch=t&taxon={genus}&group=none&fmt=photo&y=37.5&x=-122&z=8&wkt=-123.1+38,-121.95+38,-121.05+36.95,-122.2+36.95,-123.1+38" target="_blank">Bay&nbsp;Area&nbsp;species</a>'.format(genus=genus))
+            add_link(elab, self.elab_calflora,
+                     '<a href="https://www.calflora.org/entry/wgh.html#srch=t&taxon={genus}&group=none&fmt=photo&y=37.5&x=-122&z=8&wkt=-123.1+38,-121.95+38,-121.05+36.95,-122.2+36.95,-123.1+38" target="_blank">Bay&nbsp;Area&nbsp;species</a>'.format(genus=genus))
 
         link_list_txt = []
         for elab in elab_list:
@@ -846,8 +855,8 @@ class Page:
 
     def parse(self):
         s = self.txt
-        s = re.sub('^\n+', '', s)
-        s = re.sub('\n*$', '\n', s)
+        s = re.sub(r'^\n+', '', s)
+        s = re.sub(r'\n*$', '\n', s)
 
         def repl_easy(matchobj):
             return repl_easy_dict[matchobj.group(1)]
