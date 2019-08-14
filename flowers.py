@@ -27,6 +27,7 @@
 # So when it is accessed, we must first check whether the key exists in the
 # dictionary before getting its contents.
 
+import sys
 import os
 import shutil
 import filecmp
@@ -1701,8 +1702,31 @@ for page in name_page.itervalues():
     page.parse_glossary()
     page.parse()
 
+def by_incomplete_obs(page):
+    def count_flowers(page):
+        obs = Obs(None)
+        page.count_matching_obs(obs)
+        return obs.n
+
+    is_top_of_genus = True
+    if page.level in (None, 'above'):
+        is_top_of_genus = False
+    for parent in page.parent:
+        if parent.level in ('genus', 'species', 'below'):
+            is_top_of_genus = False
+    if is_top_of_genus and page.genus_complete in (None, 'more'):
+        return count_flowers(page)
+    else:
+        return 0
+
 for page in name_page.itervalues():
     page.write_html()
+
+if len(sys.argv) >1:
+    page_list = [x for x in name_page.itervalues()]
+    page_list.sort(key=by_incomplete_obs, reverse=True)
+    for page in page_list[:5]:
+        print page.name
 
 # Find any genus with multiple species.
 # Check whether all of those species share an ancestor key page in common.
