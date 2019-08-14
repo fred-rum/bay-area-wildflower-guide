@@ -3,20 +3,8 @@
 # from the observations.csv data.
 # Use + before the comment to include the observation in the count at the
 # higher level.
-# Use - to exclude it.
-Acacia koa: -Hawaii
-Arctostaphylos viscida: -Yosemite
-Castilleja arvensis: -Hawaii
+# Use - to exclude it from any counts.
 Castilleja densiflora densiflora: +distinguishing subspecies is ambiguous, so I won't try
-Cirsium andersonii: -Sierras
 Delphinium patens patens: +IDing species is already hard enough
-Geranium homeanum: -Hawaii
 Eschscholzia californica californica: +They're all ssp. californica, but since it doesn't have a common name and it confuses people on iNaturalist, I generally just leave it at the species level
 Lupinus albifrons albifrons: +IDing species is already hard enough
-Passiflora laurifolia: -Hawaii
-Ribes montigenum: -Sierras
-Rubus argutus: -Hawaii
-Rubus rosifolius: -Hawaii
-Sambucus canadensis: -Hawaii
-Symphyotrichum foliaceum: -Yosemite
-Geranium homeanum: -Hawaii

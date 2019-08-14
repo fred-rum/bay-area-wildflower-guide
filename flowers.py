@@ -1110,6 +1110,7 @@ class Page:
         if self.jpg_list and not self.color:
             print 'No color for {name}'.format(name=self.name)
 
+    def record_genus(self):
         # record all pages that are within each genus
         sci = self.sci
         if self.level in ('species', 'below'):
@@ -1298,14 +1299,18 @@ with (open(root + '/html/glossary.html', mode='w')) as w:
 
 # Read the mapping of iNaturalist observation locations to short park names.
 park_map = {}
+park_loc = {}
 with codecs.open(root + '/parks.yaml', mode='r', encoding="utf-8") as f:
     yaml_data = yaml.safe_load(f)
-for x in yaml_data:
-    if isinstance(x, basestring):
-        park_map[x] = x
-    else:
-        for y in x:
-            park_map[x[y]] = y
+for loc in yaml_data:
+    for x in yaml_data[loc]:
+        if isinstance(x, basestring):
+            park_map[x] = x
+            park_loc[x] = loc
+        else:
+            for y in x:
+                park_map[x[y]] = y
+                park_loc[x[y]] = loc
 
 # Get a list of files with the expected suffix in the designated directory.
 def get_file_list(subdir, ext):
@@ -1427,6 +1432,9 @@ for page in name_page.itervalues():
 for page in [x for x in name_page.itervalues()]:
     page.parse_children()
 
+for page in name_page.itervalues():
+    page.record_genus()
+
 with open(root + '/ignore species.yaml') as f:
     sci_ignore = yaml.safe_load(f)
 
@@ -1490,10 +1498,16 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
         for x in park_map:
             if re.search(x, park):
                 short_park = park_map[x]
+                loc = park_loc[x]
                 break
         else:
             park_nf_list.add(park)
             short_park = park
+            loc = 'bay area'
+
+        if loc != 'bay area':
+            # Ignore the observation entirely
+            continue
 
         date = row[date_idx]
         month = int(date.split('-')[1], 10) - 1 # January = month 0
@@ -1521,6 +1535,12 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
         if page:
             page.taxon_id = taxon_id
 
+        # If a page isn't found for the observation, but a page exists for
+        # a different member of the genus, print a warning.
+        genus = sci.split(' ')[0]
+        if not page and genus in genus_page_list and sci not in sci_ignore:
+            surprise_obs.add(sci)
+
         # If we haven't matched the observation to a page, try stripping
         # components off the scientific name until we find a higher-level
         # page to attach the observation to.
@@ -1530,8 +1550,6 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
             sci = ' '.join(sci_words[:-1])
             if sci in sci_page:
                 page = sci_page[sci]
-                if orig_sci not in sci_ignore:
-                    surprise_obs.add(orig_sci)
 
         if (page and (orig_sci not in sci_ignore or
                       sci_ignore[orig_sci][0] == '+')):
@@ -1544,7 +1562,7 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
             page.month[month] += 1
 
 if surprise_obs:
-    print "The following observed species don't have a page even though a parent (genus or below) does:"
+    print "The following observations don't have a page even though a page exists in the same genus:"
     for sci in sorted(surprise_obs):
         print '  ' + repr(sci)
 

@@ -161,10 +161,5 @@ Put month info side by side with park info (depending on display width?)
 Add (optional) color info for unobserved flowers?
 How would that be presented?  (border on CalPhoto placeholder?)
 
-The script should complain if I have an observation in an existing
-genus even if the genus page hasn't been created (e.g. only one
-species has been documented).  E.g. Lepidium latifolium and
-L. nitidum.
-
 Allow families to auto-list their members after some introductory
 text.  E.g. most sedges have triangular stems and grasses have round stems.
