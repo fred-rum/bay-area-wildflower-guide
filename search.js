@@ -32,7 +32,7 @@ function fn_search_box_focusout(event) {
 
 /* When comparing names, ignore all non-letter characters and ignore case. */
 function compress(name) {
-  return name.replace(/\W/g, '');
+  return name.toUpperCase().replace(/\W/g, '');
 }
 
 function index_of_letter(str, letter_num) {
@@ -257,9 +257,10 @@ function fn_search(enter) {
           var elab_bold_ital = (elab_bold.substring(0, space_pos) + ' <i>' +
                                 elab_bold.substring(space_pos+1) + '</i>');
         }
-        if (('sci' in page_info) &&
-            (page_info.sci != com) &&
-            (!startsUpper(com) || ('com' in page_info))) {
+        if ('com' in page_info ||
+            (('sci' in page_info) &&
+             (page_info.sci != com) &&
+             !startsUpper(com))) {
           var full = bold(search_str_cmp, com) + ' (' + elab_bold_ital + ')';
         } else {
           var full = elab_bold_ital;
