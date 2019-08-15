@@ -462,12 +462,18 @@ class Page:
         self.txt = re.sub(r'^color:(.*)\n',
                           repl_color, self.txt, flags=re.MULTILINE)
 
-    def parse_calphotos(self):
+    # parse_calphotos() gets a parse_calphotos_str() helper function
+    # so that it can be called on a different piece of text (e.g. from
+    # its parent page).
+    def parse_calphotos_str(self, s):
         def repl_calphotos(matchobj):
             self.calphotos.append((matchobj.group(1), matchobj.group(2)))
             return ''
 
-        self.txt = re.sub(r'^(?:\s*([^:\n]*?)\s*:\s*)?(https://calphotos.berkeley.edu/[^\s]+)\s*?\n', repl_calphotos, self.txt, flags=re.MULTILINE)
+        return re.sub(r'^(?:\s*([^:\n]*?)\s*:\s*)?(https://(?:calphotos.berkeley.edu/|www.calflora.org/cgi-bin/noccdetail.cgi)[^\s]+)\s*?\n', repl_calphotos, s, flags=re.MULTILINE)
+
+    def parse_calphotos(self):
+        self.txt = self.parse_calphotos_str(self.txt)
 
     # Check if check_page is an ancestor of this page (for loop checking).
     def is_ancestor(self, check_page):
@@ -497,8 +503,11 @@ class Page:
             com = matchobj.group(1)
             suffix = matchobj.group(2)
             sci = matchobj.group(3)
+            text = matchobj.group(4)
             if not suffix:
                 suffix = ''
+            if not text:
+                text = ''
             if not sci:
                 if com.islower():
                     sci = ''
@@ -540,7 +549,7 @@ class Page:
                     # different scientific name.
                     if not sci:
                         print('page {parent} has ambiguous child {child}'.format(parent=self.name, child=com))
-                        return '==' + com + suffix
+                        return '==' + com + suffix + '\n' + text
 
                     if (com in name_page and
                         com not in txt_list and
@@ -567,9 +576,14 @@ class Page:
                     child_page.set_com(com)
             if sci:
                 child_page.set_sci(sci)
+
+            # If the child's key text includes calphotos, let the child
+            # parse those.
+            text = child_page.parse_calphotos_str(text)
+
             # Replace the {+...} or {...} field with a bare +... line.
             # This will create the appropriate link later in the parsing.
-            return '==' + name + suffix
+            return '==' + name + suffix + '\n' + text
 
         # If the page's genus is explicitly specified,
         # make it the default for child abbreviations.
@@ -578,7 +592,7 @@ class Page:
         else:
             self.cur_genus = None
 
-        self.txt = re.sub(r'^==\s*([^:\n]*?)\s*?(,[-0-9]\S*|,)?\s*?(?::\s*([^\n]+?))?\s*?$',
+        self.txt = re.sub(r'^==\s*([^:\n]*?)\s*?(,[-0-9]\S*|,)?\s*?(?::\s*([^\n]+?))? *\n((?:.+\n)*)',
                           repl_child, self.txt, flags=re.MULTILINE)
 
     def write_txt(self):
@@ -891,6 +905,18 @@ class Page:
                 c_list.append(c)
         s = '\n'.join(c_list)
 
+        # Replace {-[name]} with an inline link to the page.
+        def repl_link(matchobj):
+            name = matchobj.group(1)
+            page = find_page1(name)
+            if page:
+                return page.create_link(1)
+            else:
+                print('Broken link {{-{name}}} on page {page}'.format(name=name, page=self.name))
+                return '{-' + name + '}'
+
+        s = re.sub(r'{-([^}]+)}', repl_link, s)
+
         # Look for a link to a child followed by all text up to the
         # first \n\n or EOF.  Create the HTML link along with a photo
         # (if available).  Group the photo and text together and
@@ -910,6 +936,13 @@ class Page:
             if not child:
                 print('Broken link to +{name} on page {key}'.format(name=name, key=self.name))
                 return '=={name}\n'.format(name=name)
+
+            # Give the child a copy of the text from the parent's key.
+            # The child can use this (pre-parsed) text if it has no text
+            # of its own.
+            if ((self.level == 'genus' and child.level == 'species') or
+                (self.level == 'species' and child.level == 'below')):
+                child.key_txt = text
 
             link = child.create_link(2)
 
@@ -946,13 +979,6 @@ class Page:
             if not img:
                 return '<p>' + link + '</p>\n' + text
 
-            # Give the child a copy of the text from the parent's key.
-            # The child can use this (pre-parsed) text if it has no text
-            # of its own.
-            if ((self.level == 'genus' and child.level == 'species') or
-                (self.level == 'species' and child.level == 'below')):
-                child.key_txt = text
-
             if text:
                 # Duplicate and contain the text link so that the following text
                 # can either be below the text link and next to the image or
@@ -962,26 +988,16 @@ class Page:
             else:
                 return '<div class="photo-box">{img}\n<span>{link}</span></div>'.format(img=img, link=link)
 
-        # Replace {-[name]} with an inline link to the page.
-        def repl_link(matchobj):
-            name = matchobj.group(1)
-            page = find_page1(name)
-            if page:
-                return page.create_link(1)
-            else:
-                print('Broken link {{-{name}}} on page {page}'.format(name=name, page=self.name))
-                return '{-' + name + '}'
-
-        s = re.sub(r'{-([^}]+)}', repl_link, s)
-
         # Search for:
-        #  + at the start of a line, then
+        #  == at the start of a line, then
         #  a name, then
         #  optionally a jpg suffix, then
         #  ignored spaces, then
         #  a carriage return, then
         #  any amount of arbitrary text that does not include a blank line.
         s = re.sub(r'^==([^\n]*?)(,[-0-9]\S*|,)? *\n((?:.+\n)*)', repl_child_link, s, flags=re.MULTILINE)
+
+        s = self.parse_calphotos_str(s)
 
         # Replace a pair of newlines with a paragraph separator.
         s = s.replace('\n\n', '\n<p/>\n')
@@ -1444,7 +1460,6 @@ for page in name_page.values():
     page.parse_names()
     page.parse_color()
     page.parse_complete()
-    page.parse_calphotos()
 
 # parse_children() can add new pages, so we make a copy of the list to
 # iterate through.  Note that this waits until all names are read for
@@ -1453,6 +1468,7 @@ for page in [x for x in name_page.values()]:
     page.parse_children()
 
 for page in name_page.values():
+    page.parse_calphotos()
     page.record_genus()
 
 with open(root + '/ignore species.yaml', encoding='utf-8') as f:

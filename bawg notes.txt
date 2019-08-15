@@ -163,3 +163,16 @@ How would that be presented?  (border on CalPhoto placeholder?)
 
 Allow families to auto-list their members after some introductory
 text.  E.g. most sedges have triangular stems and grasses have round stems.
+
+There are two places in search.js that map the compressed match
+location to the uncompressed text.  Those should use a function in
+common.
+
+Since calphotos and calflora are now both allowed for external photos,
+the blank photo box should probably be labeled something generic like
+"Photo".  The internal variables should also be changed to something
+clearer, like ext_photo.
+
+When a calphoto is linked from a key to a child's page, the text in
+the photo box should be colored like the child (black), not the
+default blue.
