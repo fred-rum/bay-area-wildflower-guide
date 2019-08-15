@@ -1,4 +1,5 @@
-#!/cygdrive/c/Python27/python.exe c:/Users/Chris/Documents/GitHub/bay-area-flowers/flowers.py
+#!/cygdrive/c/Python37/python.exe c:/Users/Chris/Documents/GitHub/bay-area-flowers/flowers.py
+#!/usr/bin/env python
 
 # Run as:
 # /cygdrive/c/Users/Chris/Documents/GitHub/bay-area-flowers/flowers.py
@@ -34,7 +35,7 @@ import filecmp
 import subprocess
 import re
 import csv
-import cStringIO
+import io
 import yaml
 import codecs
 
@@ -102,7 +103,7 @@ Locations:
                                key = lambda x: self.parks[x],
                                reverse=True)
             for park in park_list:
-                html_park = park.encode('ascii', 'xmlcharrefreplace')
+                html_park = park.encode('ascii', 'xmlcharrefreplace').decode()
                 count = self.parks[park]
                 if count == 1:
                     w.write('<li>{park}</li>\n'.format(park=html_park))
@@ -221,7 +222,7 @@ class Page:
 
     def __init__(self, name):
         if name in name_page:
-            print 'Multiple pages created with name "{name}"'.format(name=name)
+            print('Multiple pages created with name "{name}"'.format(name=name))
         self.name = name
         name_page[name] = self
 
@@ -289,7 +290,7 @@ class Page:
         sci = strip_sci(sci)
 
         if sci in sci_page and sci_page[sci] != self:
-            print 'Same scientific name ({sci}) set for {name1} and {name2}'.format(sci=sci, name1=sci_page[sci].name, name2=self.name)
+            print('Same scientific name ({sci}) set for {name1} and {name2}'.format(sci=sci, name1=sci_page[sci].name, name2=self.name))
 
         self.sci = sci
         self.elab = elab
@@ -451,7 +452,7 @@ class Page:
             # check for bad colors.
             for color in page.color:
                 if color not in color_list and color != 'n/a':
-                    print 'page {name} uses undefined color {color}'.format(name=page.name, color=color)
+                    print('page {name} uses undefined color {color}'.format(name=page.name, color=color))
 
             return ''
 
@@ -478,9 +479,9 @@ class Page:
 
     def assign_child(self, child):
         if self.is_ancestor(child):
-            print "circular loop when creating link from {parent} to {child}".format(parent=self.name, child=child.name)
+            print("circular loop when creating link from {parent} to {child}".format(parent=self.name, child=child.name))
         elif self in child.parent:
-            print "{child} added as child of {parent} twice".format(parent=self.name, child=child.name)
+            print("{child} added as child of {parent} twice".format(parent=self.name, child=child.name))
         else:
             self.child.append(child)
             child.parent.add(self)
@@ -535,7 +536,7 @@ class Page:
                     # The common name is shared by a flower with a
                     # different scientific name.
                     if not sci:
-                        print 'page {parent} has ambiguous child {child}'.format(parent=self.name, child=com)
+                        print('page {parent} has ambiguous child {child}'.format(parent=self.name, child=com))
                         return '==' + com + suffix
 
                     if (com in name_page and
@@ -558,7 +559,7 @@ class Page:
             if com:
                 if child_page.com:
                     if com != child_page.com:
-                        print "page {parent} refers to child {com}:{sci}, but the common name doesn't match".format(parent=self.name, com=com, sci=sci)
+                        print("page {parent} refers to child {com}:{sci}, but the common name doesn't match".format(parent=self.name, com=com, sci=sci))
                 else:
                     child_page.set_com(com)
             if sci:
@@ -585,7 +586,7 @@ class Page:
                 suffix = ''
             child_page = find_page1(name)
             if not child_page:
-                print name
+                print(name)
             com = child_page.com
             elab = child_page.elab
             if not elab:
@@ -632,7 +633,7 @@ class Page:
             s = re.sub(r'^==([^,\n]+)(,[-0-9]\S*|,)?$',
                        expand_child, s, flags=re.MULTILINE)
             s = re.sub(r'^\n+', '', s)
-            s = re.sub(r'\n*$', '\n', s)
+            s = re.sub(r'\n*$', '\n', s, count=1)
             if s and s != '\n':
                 if ((self.com and (self.sci or self.no_sci)) or
                     self.color or
@@ -857,7 +858,7 @@ class Page:
     def parse(self):
         s = self.txt
         s = re.sub(r'^\n+', '', s)
-        s = re.sub(r'\n*$', '\n', s)
+        s = re.sub(r'\n*$', '\n', s, count=1)
 
         def repl_easy(matchobj):
             return repl_easy_dict[matchobj.group(1)]
@@ -873,7 +874,7 @@ class Page:
             matchobj = re.match(r'\.*', c)
             new_list_depth = matchobj.end()
             if new_list_depth > list_depth+1:
-                print 'Jump in list depth on page ' + self.name
+                print('Jump in list depth on page ' + self.name)
             while list_depth < new_list_depth:
                 c_list.append('<ul>')
                 list_depth += 1
@@ -904,7 +905,7 @@ class Page:
 
             child = find_page1(name)
             if not child:
-                print 'Broken link to +{name} on page {key}'.format(name=name, key=self.name)
+                print('Broken link to +{name} on page {key}'.format(name=name, key=self.name))
                 return '=={name}\n'.format(name=name)
 
             link = child.create_link(2)
@@ -914,7 +915,7 @@ class Page:
                 if name + suffix in jpg_list:
                     jpg = name + suffix
                 else:
-                    print name + suffix + '.jpg not found on page ' + self.name
+                    print(name + suffix + '.jpg not found on page ' + self.name)
 
             if not jpg:
                 jpg = child.get_jpg()
@@ -965,7 +966,7 @@ class Page:
             if page:
                 return page.create_link(1)
             else:
-                print 'Broken link {{-{name}}} on page {page}'.format(name=name, page=self.name)
+                print('Broken link {{-{name}}} on page {page}'.format(name=name, page=self.name))
                 return '{-' + name + '}'
 
         s = re.sub(r'{-([^}]+)}', repl_link, s)
@@ -977,7 +978,7 @@ class Page:
         #  ignored spaces, then
         #  a carriage return, then
         #  any amount of arbitrary text that does not include a blank line.
-        s = re.sub(r'^==([^\n]*?)(,[-0-9]\S*|,)? *\n((?:.+[\n|\Z])*)', repl_child_link, s, flags=re.MULTILINE)
+        s = re.sub(r'^==([^\n]*?)(,[-0-9]\S*|,)? *\n((?:.+\n)*)', repl_child_link, s, flags=re.MULTILINE)
 
         # Replace a pair of newlines with a paragraph separator.
         s = s.replace('\n\n', '\n<p/>\n')
@@ -994,7 +995,7 @@ class Page:
                         return # Don't write the <p/> at the end
                 elif complete == 'none':
                     if top == 'genus':
-                        print "x:none used for " + self.name
+                        print("x:none used for " + self.name)
                     else:
                         w.write('This species has no subspecies or variants.')
                 elif complete == 'more':
@@ -1020,9 +1021,9 @@ class Page:
                 w.write('<p/>\n')
             elif complete:
                 if top == 'genus':
-                    print '{name} uses the x: keyword but is not the top of genus'.format(name=self.name)
+                    print('{name} uses the x: keyword but is not the top of genus'.format(name=self.name))
                 else:
-                    print '{name} uses the xx: keyword but is not the top of species'.format(name=self.name)
+                    print('{name} uses the xx: keyword but is not the top of species'.format(name=self.name))
 
         with open(root + "/html/" + self.name + ".html", "w") as w:
             com = self.com
@@ -1120,10 +1121,10 @@ class Page:
             write_footer(w)
 
         if self.taxon_id and not (self.jpg_list or self.child):
-            print "{name} is observed, but has no photos".format(name=page.name)
+            print("{name} is observed, but has no photos".format(name=page.name))
 
         if self.jpg_list and not self.color:
-            print 'No color for {name}'.format(name=self.name)
+            print('No color for {name}'.format(name=self.name))
 
     def record_genus(self):
         # record all pages that are within each genus
@@ -1288,7 +1289,7 @@ for (words, defn) in re.findall(r'^{([^\}]+)}\s+(.*)$',
 # sort the glossary list in reverse order so that for cases where two
 # phrases start the same and one is a subset of the other, the longer phrase
 # is checked first.
-glossary_list = sorted(glossary_dict.iterkeys(), reverse=True)
+glossary_list = sorted(iter(glossary_dict.keys()), reverse=True)
 
 glossary_regex = re.compile(r'\b({ex})\b'.format(ex='|'.join(map(re.escape, glossary_list))), re.IGNORECASE)
 
@@ -1307,7 +1308,7 @@ def repl_glossary(matchobj):
 glossary_txt = re.sub(r'^{([^\}]+)}\s+(.*)$',
                       repl_glossary, glossary_txt, flags=re.MULTILINE)
 
-with (open(root + '/html/glossary.html', mode='w')) as w:
+with open(root + '/html/glossary.html', mode='w') as w:
       write_header(w, 'BAWG Glossary', 'Glossary', nosearch=False)
       w.write(glossary_txt)
       write_footer(w)
@@ -1315,11 +1316,11 @@ with (open(root + '/html/glossary.html', mode='w')) as w:
 # Read the mapping of iNaturalist observation locations to short park names.
 park_map = {}
 park_loc = {}
-with codecs.open(root + '/parks.yaml', mode='r', encoding="utf-8") as f:
+with open(root + '/parks.yaml', mode='r', encoding='utf-8') as f:
     yaml_data = yaml.safe_load(f)
 for loc in yaml_data:
     for x in yaml_data[loc]:
-        if isinstance(x, basestring):
+        if isinstance(x, str):
             park_map[x] = x
             park_loc[x] = loc
         else:
@@ -1408,13 +1409,13 @@ repl_easy_dict = {
     # probably smarter about it than I would be.
 }
 
-repl_easy_regex = re.compile('({ex})'.format(ex='|'.join(map(re.escape, repl_easy_dict.keys()))))
+repl_easy_regex = re.compile('({ex})'.format(ex='|'.join(map(re.escape, list(repl_easy_dict.keys())))))
 
 
 # Read the txt for all explicit page files.
 for name in page_list:
     page = Page(name)
-    with open(root + "/txt/" + name + ".txt", "r") as r:
+    with open(root + "/txt/" + name + ".txt", "r", encoding="utf-8") as r:
         page.txt = r.read()
 
 # Record jpg names for associated pages.
@@ -1427,7 +1428,7 @@ for jpg in sorted(jpg_list):
         page = Page(name)
     page.add_jpg(jpg)
 
-with open(root + '/family names.yaml') as f:
+with open(root + '/family names.yaml', encoding='utf-8') as f:
     family_com = yaml.safe_load(f)
 
 # Perform a first pass on all pages to
@@ -1435,7 +1436,7 @@ with open(root + '/family names.yaml') as f:
 # - detect parent->child relationships among pages
 # - add links to glossary words
 
-for page in name_page.itervalues():
+for page in name_page.values():
     page.parse_names()
     page.parse_color()
     page.parse_complete()
@@ -1444,13 +1445,13 @@ for page in name_page.itervalues():
 # parse_children() can add new pages, so we make a copy of the list to
 # iterate through.  Note that this waits until all names are read for
 # all pages so that any name can be used to link a child.
-for page in [x for x in name_page.itervalues()]:
+for page in [x for x in name_page.values()]:
     page.parse_children()
 
-for page in name_page.itervalues():
+for page in name_page.values():
     page.record_genus()
 
-with open(root + '/ignore species.yaml') as f:
+with open(root + '/ignore species.yaml', encoding='utf-8') as f:
     sci_ignore = yaml.safe_load(f)
 
 def unicode_csv_reader(unicode_csv_data, dialect=csv.excel, **kwargs):
@@ -1459,7 +1460,7 @@ def unicode_csv_reader(unicode_csv_data, dialect=csv.excel, **kwargs):
                             dialect=dialect, **kwargs)
     for row in csv_reader:
         # decode UTF-8 back to Unicode, cell by cell:
-        yield [unicode(cell, 'utf-8') for cell in row]
+        yield [str(cell, 'utf-8') for cell in row]
 
 def utf_8_encoder(unicode_csv_data):
     for line in unicode_csv_data:
@@ -1474,9 +1475,9 @@ surprise_obs = set()
 #   Associate common names with scientific names
 #   Get a count of observations (total and research grade) of each flower.
 #   Get an iNaturalist taxon ID for each flower.
-with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
-    csv_reader = unicode_csv_reader(f)
-    header_row = csv_reader.next()
+with open(root + '/observations.csv', mode='r', newline='', encoding='utf-8') as f:
+    csv_reader = csv.reader(f)
+    header_row = next(csv_reader)
 
     com_idx = header_row.index('common_name')
     sci_idx = header_row.index('scientific_name')
@@ -1530,17 +1531,17 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
         if sci in sci_ignore:
             page = find_page2(com, sci)
             if page:
-                print '{sci} is ignored, but there is a page for it ({name})'.format(sci=sci, name=page.name)
+                print('{sci} is ignored, but there is a page for it ({name})'.format(sci=sci, name=page.name))
         elif sci in sci_page:
             page = sci_page[sci]
         elif com in com_page:
             if com_page[com] == 'multiple':
-                print 'observation {com} ({sci}) matches multiple common names but no scientific name'.format(com=com, sci=sci)
+                print('observation {com} ({sci}) matches multiple common names but no scientific name'.format(com=com, sci=sci))
                 page = None
             else:
                 page = com_page[com]
                 if page.sci and sci != page.sci:
-                    print 'observation {com} ({sci}) matches the common name for a page, but not its scientific name ({sci_page})'.format(com=com, sci=sci, sci_page=page.sci)
+                    print('observation {com} ({sci}) matches the common name for a page, but not its scientific name ({sci_page})'.format(com=com, sci=sci, sci_page=page.sci))
                     page = None
                 elif not page.no_sci:
                     page.set_sci(sci)
@@ -1577,14 +1578,14 @@ with codecs.open(root + '/observations.csv', mode='r', encoding="utf-8") as f:
             page.month[month] += 1
 
 if surprise_obs:
-    print "The following observations don't have a page even though a page exists in the same genus:"
+    print("The following observations don't have a page even though a page exists in the same genus:")
     for sci in sorted(surprise_obs):
-        print '  ' + repr(sci)
+        print('  ' + repr(sci))
 
 if park_nf_list:
-    print "Parks not found:"
+    print("Parks not found:")
     for x in park_nf_list:
-        print "  " + repr(x)
+        print("  " + repr(x))
 
 # try:
 #     os.mkdir(root + '/txt2')
@@ -1596,7 +1597,7 @@ if park_nf_list:
 #        page.write_txt()        
 
 # Get a list of pages without parents (top-level pages).
-top_list = [x for x in name_page.itervalues() if not x.parent]
+top_list = [x for x in name_page.values() if not x.parent]
 
 # Find all flowers that match the specified color.
 # Also find all pages that include *multiple* child pages that match.
@@ -1629,12 +1630,12 @@ for color in color_list:
     color_page_list[color] = find_matches(top_list, color)
 
 did_intro = False
-for page in name_page.itervalues():
+for page in name_page.values():
     if not (page.sci or page.no_sci):
         if not did_intro:
-            print 'No scientific name given for the following pages:'
+            print('No scientific name given for the following pages:')
             did_intro = True
-        print '  ' + page.name
+        print('  ' + page.name)
 
 for page in top_list:
     page.set_family()
@@ -1664,15 +1665,15 @@ for family in family_child_set:
     if family in family_com:
         com = family_com[family]
     else:
-        print 'No common name for family {family}'.format(family=family)
+        print('No common name for family {family}'.format(family=family))
         com = 'n/a'
     child_set = family_child_set[family]
     if family in sci_page:
         sci_page[family].cross_out_children(child_set)
         if child_set:
-            print 'The following pages are not included by the page for family {family}'.format(family=family)
+            print('The following pages are not included by the page for family {family}'.format(family=family))
             for child in child_set:
-                print '  ' + child.format_full(1)
+                print('  ' + child.format_full(1))
     else:
         page = Page(family)
         page.autogenerated = True
@@ -1685,7 +1686,7 @@ for family in family_child_set:
 
 # Regenerate the list of top-level pages
 # now that we've added pages for families.
-top_list = [x for x in name_page.itervalues() if not x.parent]
+top_list = [x for x in name_page.values() if not x.parent]
 # top_list = []
 # for page in name_page.itervalues():
 #     if not page.parent:
@@ -1698,7 +1699,7 @@ top_list = [x for x in name_page.itervalues() if not x.parent]
 #             top_list.append(page)
 
 # Turn txt into html for all normal and default pages.
-for page in name_page.itervalues():
+for page in name_page.values():
     page.parse_glossary()
     page.parse()
 
@@ -1719,14 +1720,14 @@ def by_incomplete_obs(page):
     else:
         return 0
 
-for page in name_page.itervalues():
+for page in name_page.values():
     page.write_html()
 
-if len(sys.argv) >1:
-    page_list = [x for x in name_page.itervalues()]
+if len(sys.argv) > 2 and sys.argv[2] == 'x':
+    page_list = [x for x in name_page.values()]
     page_list.sort(key=by_incomplete_obs, reverse=True)
     for page in page_list[:5]:
-        print page.name
+        print(page.name)
 
 # Find any genus with multiple species.
 # Check whether all of those species share an ancestor key page in common.
@@ -1737,18 +1738,18 @@ for genus in genus_page_list:
         if genus in sci_page:
             sci_page[genus].cross_out_children(page_list)
             if page_list:
-                print 'The following species are not included under the {genus} spp. key'.format(genus=genus)
+                print('The following species are not included under the {genus} spp. key'.format(genus=genus))
                 for page in page_list:
-                    print '  ' + page.format_full(1)
+                    print('  ' + page.format_full(1))
         else:
             ancestor_set = page_list[0].get_ancestor_set()
             for page in page_list[1:]:
                 set2 = page.get_ancestor_set()
                 ancestor_set.intersection_update(set2)
             if not ancestor_set:
-                print 'The following pages in {genus} spp. are not under a common ancestor:'.format(genus=genus)
+                print('The following pages in {genus} spp. are not under a common ancestor:'.format(genus=genus))
                 for page in page_list:
-                    print '  ' + page.format_full(1)
+                    print('  ' + page.format_full(1))
 
 ###############################################################################
 # The remaining code is for creating useful lists of pages:
@@ -1780,7 +1781,7 @@ def list_matches(w, match_set, indent, color, seen_set):
 def write_page_list(page_list, color, color_match):
     # We write out the matches to a string first so that we can get
     # the total number of keys and flowers in the list (including children).
-    s = cStringIO.StringIO()
+    s = io.StringIO()
     list_matches(s, page_list, False, color_match, set())
 
     with open(root + "/html/{color}.html".format(color=color), "w") as w:
@@ -1809,7 +1810,7 @@ write_page_list(top_list, 'all', None)
 # Create pages.js
 
 search_file = root + "/pages.js"
-with open(search_file, "w") as w:
+with open(search_file, "w", encoding="utf-8") as w:
     w.write('var pages=[\n')
     # Sort in reverse order of observation count, but with auto-generated
     # family lists and unobserved flowers pushed to the bottom.
@@ -1818,9 +1819,10 @@ with open(search_file, "w") as w:
     # This order tie-breaker isn't particularly useful to the user, but
     # it helps prevent pages.js from getting random changes just because
     # the dictionary hashes differently.
-    page_list = sort_pages([x for x in name_page.itervalues()])
+    page_list = sort_pages([x for x in name_page.values()])
     for page in page_list:
-        w.write('{{page:"{name}"'.format(name=page.name))
+        name = page.name.encode('ascii', 'xmlcharrefreplace').decode()
+        w.write('{{page:"{name}"'.format(name=name))
         if page.com and page.com != page.name:
             w.write(',com:"{com}"'.format(com=page.com))
         if page.elab and page.elab != page:
@@ -1873,4 +1875,4 @@ if mod_list or new_list:
     else:
         os.startfile(mod_file)
 else:
-    print "No files modified."
+    print("No files modified.")

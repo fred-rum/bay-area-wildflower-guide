@@ -1,5 +1,5 @@
 sci:Trifolium spp.
-x:more
+x:!hist
 
 There are very many clover species in the bay area.  This page lists some key features, but I don't attempt to replicate the whole Jepson decision tree.  Instead, each flower description includes only enough information to (hopefully) confirm an ID hypothesis.
 
@@ -117,3 +117,71 @@ Key features:
 . Leaflets: 3, <b>petioles of mid-leaves generally < leaflets</b>
 . Inflorescence: <b>head- to +- spike-like, 4--8 mm wide</b>, 5--10(20)-flowered; flowers quickly reflexed
 . Corolla: 3.5--4 mm, bright yellow, brown in age, <b>weak-striate</b>
+
+==rabbitfoot clover:T. arvense
+. very rare
+
+==bearded clover:T. barbigerum
+
+==notchleaf clover:T. bifidum
+
+==santa cruz clover:T. buckwestiorum
+. rare
+
+==nodding clover:T. cernuum
+. very rare
+
+==branching indian clover:T. dichotomum
+
+==strawberry clover:T. fragiferum
+
+==pinpoint clover:T. gracilentum
+
+==gray's clover:T. grayi
+
+==alsike clover:T. hybridum
+. rare
+
+==saline clover:T. hydrophilum
+
+==double-head clover:T. macraei
+
+==large-head clover:T. macrocephalum
+. very rare; Mt. Diablo
+
+==small-headed clover:T. microcephalum
+
+==thimble clover:T. microdon
+
+==clammy clover:T. obtusiflorum
+
+==few-flowered clover:T. oliganthum
+
+==olive clover:T. olivaceum
+
+==pacific grove clover:T. polyodon
+. rare
+
+==red clover:T. pratense
+. rare
+
+==reversed clover:T. resupinatum
+. very rare
+
+==knotted clover:T. striatum
+. very rare
+
+==subterranean clover:T. subterraneum
+
+==suffocated clover:T. suffocatum
+. very rare
+
+==woolly clover:T. tomentosum
+. rare
+
+==white-tipped clover:T. variegatum
+
+==arrowleaf clover:T. vesiculosum
+. very rare
+
+==springbank clover:T. wormskioldii
