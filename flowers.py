@@ -103,12 +103,11 @@ Locations:
                                key = lambda x: self.parks[x],
                                reverse=True)
             for park in park_list:
-                html_park = park.encode('ascii', 'xmlcharrefreplace').decode()
                 count = self.parks[park]
                 if count == 1:
-                    w.write('<li>{park}</li>\n'.format(park=html_park))
+                    w.write('<li>{park}</li>\n'.format(park=park))
                 else:
-                    w.write('<li>{park}: {count}</li>\n'.format(park=html_park, count=count))
+                    w.write('<li>{park}: {count}</li>\n'.format(park=park, count=count))
 
             w.write('</ul>\nMonths:\n<ul>\n')
 
@@ -1025,7 +1024,7 @@ class Page:
                 else:
                     print('{name} uses the xx: keyword but is not the top of species'.format(name=self.name))
 
-        with open(root + "/html/" + self.name + ".html", "w") as w:
+        with open(root + "/html/" + self.name + ".html", "w", encoding="utf-8") as w:
             com = self.com
             elab = self.elab
 
@@ -1454,18 +1453,6 @@ for page in name_page.values():
 with open(root + '/ignore species.yaml', encoding='utf-8') as f:
     sci_ignore = yaml.safe_load(f)
 
-def unicode_csv_reader(unicode_csv_data, dialect=csv.excel, **kwargs):
-    # csv.py doesn't do Unicode; encode temporarily as UTF-8:
-    csv_reader = csv.reader(utf_8_encoder(unicode_csv_data),
-                            dialect=dialect, **kwargs)
-    for row in csv_reader:
-        # decode UTF-8 back to Unicode, cell by cell:
-        yield [str(cell, 'utf-8') for cell in row]
-
-def utf_8_encoder(unicode_csv_data):
-    for line in unicode_csv_data:
-        yield line.encode('utf-8')
-
 # Track species or subspecies observations that don't have a page even though
 # there is a genus or species page that they could fit under.  We'll emit an
 # error message for these once all the observations are read.
@@ -1784,7 +1771,7 @@ def write_page_list(page_list, color, color_match):
     s = io.StringIO()
     list_matches(s, page_list, False, color_match, set())
 
-    with open(root + "/html/{color}.html".format(color=color), "w") as w:
+    with open(root + "/html/{color}.html".format(color=color), "w", encoding="utf-8") as w:
         title = color.capitalize() + ' flowers'
         write_header(w, title, title)
         obs = Obs(color_match)
@@ -1821,8 +1808,7 @@ with open(search_file, "w", encoding="utf-8") as w:
     # the dictionary hashes differently.
     page_list = sort_pages([x for x in name_page.values()])
     for page in page_list:
-        name = page.name.encode('ascii', 'xmlcharrefreplace').decode()
-        w.write('{{page:"{name}"'.format(name=name))
+        w.write('{{page:"{name}"'.format(name=page.name))
         if page.com and page.com != page.name:
             w.write(',com:"{com}"'.format(com=page.com))
         if page.elab and page.elab != page:
@@ -1858,7 +1844,7 @@ for name in file_list:
 
 if mod_list or new_list:
     mod_file = root + "/html/_mod.html"
-    with open(mod_file, "w") as w:
+    with open(mod_file, "w", encoding="utf-8") as w:
         if new_list:
             w.write('<h1>New files</h1>\n')
             for name in new_list:

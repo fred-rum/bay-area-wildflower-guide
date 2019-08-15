@@ -32,13 +32,13 @@ function fn_search_box_focusout(event) {
 
 /* When comparing names, ignore all non-letter characters and ignore case. */
 function compress(name) {
-  return name.toUpperCase().replace(/[^A-Z]/g, '');
+  return name.replace(/\W/g, '');
 }
 
 function index_of_letter(str, letter_num) {
   var letter_cnt = 0;
   for (var i = 0; letter_cnt < letter_num; i++) {
-    if (str.substring(i).search(/^[a-zA-Z]/) >= 0) {
+    if (str.substring(i).search(/^\w/) >= 0) {
       letter_cnt++;
     }
   }
@@ -81,9 +81,9 @@ function check(search_str_cmp, match_str, page_info, best_fit_info, pri_adj) {
     var uncmp_start = index_of_letter(match_str, cmp_pos);
     var uncmp_end = index_of_letter(match_str, cmp_pos + search_str_cmp.length);
     if (((uncmp_start == 0) ||
-         (match_str.substring(uncmp_start).search(/^[a-zA-Z]/) == -1)) &&
+         (match_str.substring(uncmp_start).search(/^\w/) == -1)) &&
         ((uncmp_end == match_str.length) ||
-         (match_str.substring(uncmp_end).search(/^[a-zA-Z]/) == -1))){
+         (match_str.substring(uncmp_end).search(/^\w/) == -1))){
       pri += 0.4;
     }
 
@@ -136,7 +136,7 @@ function bold(search_str_cmp, name) {
   /* Based on the number of letters in the compressed name prior to the match,
      skip the same number of letters in the uncompressed name (also skipping
      any number of non-letters). */
-  var regex = RegExp('[a-zA-Z]', 'g');
+  var regex = RegExp('\\w', 'g');
   for (var i = 0; i <= cmp_match_pos; i++) {
     regex.test(test_name);
   }
