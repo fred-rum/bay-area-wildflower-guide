@@ -1,4 +1,5 @@
 sci:Castilleja spp.
+x:hist/rare
 
 ==indian paintbrushes
 

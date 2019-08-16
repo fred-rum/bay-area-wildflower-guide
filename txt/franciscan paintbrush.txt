@@ -1,2 +1,3 @@
 sci:Castilleja subinclusa ssp. franciscana
 color: red, salmon
+xx:rare

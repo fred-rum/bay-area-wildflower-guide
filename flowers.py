@@ -1004,6 +1004,25 @@ class Page:
 
         self.txt = s
 
+    def any_parent_within_level(self, within_level_list):
+        for parent in self.parent:
+            if parent.level == None:
+                if parent.any_parent_within_level(within_level_list):
+                    return True
+            elif parent.level in within_level_list:
+                return True
+        return False
+
+    def is_top_of(self, level):
+        if level == 'genus':
+            within_level_list = ('genus', 'species', 'below')
+        else:
+            within_level_list = ('species', 'below')
+        is_top_of_level = (self.level in within_level_list)
+        if self.any_parent_within_level(within_level_list):
+            is_top_of_level = False
+        return is_top_of_level
+
     def write_html(self):
         def write_complete(w, complete, key_incomplete, is_top, top, members):
             if is_top:
@@ -1088,17 +1107,8 @@ class Page:
 
             self.write_parents(w)
 
-            is_top_of_genus = True
-            is_top_of_species = True
-            if self.level in (None, 'above'):
-                is_top_of_genus = False
-            if self.level in (None, 'above', 'genus'):
-                is_top_of_species = False
-            for parent in self.parent:
-                if parent.level in ('genus', 'species', 'below'):
-                    is_top_of_genus = False
-                if parent.level in ('species', 'below'):
-                    is_top_of_species = False
+            is_top_of_genus = self.is_top_of('genus')
+            is_top_of_species = self.is_top_of('species')
             write_complete(w,
                            self.genus_complete, self.genus_key_incomplete,
                            is_top_of_genus, 'genus', 'species')
@@ -1717,12 +1727,7 @@ def by_incomplete_obs(page):
         page.count_matching_obs(obs)
         return obs.n
 
-    is_top_of_genus = True
-    if page.level in (None, 'above'):
-        is_top_of_genus = False
-    for parent in page.parent:
-        if parent.level in ('genus', 'species', 'below'):
-            is_top_of_genus = False
+    is_top_of_genus = page.is_top_of('genus')
     if is_top_of_genus and page.genus_complete in (None, 'more'):
         return count_flowers(page)
     else:
