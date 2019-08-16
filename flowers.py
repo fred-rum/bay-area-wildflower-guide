@@ -771,7 +771,7 @@ class Page:
                      '<a href="https://www.inaturalist.org/taxa/{taxon_id}" target="_blank">iNaturalist</a>'.format(taxon_id=self.taxon_id))
         else:
             add_link(elab, None,
-                     '<a href="https://www.inaturalist.org/search?q={sci}&source=taxa" target="_blank">iNaturalist</a>'.format(sci=sci))
+                     '<a href="https://www.inaturalist.org/taxa/search?q={sci}&view=list" target="_blank">iNaturalist</a>'.format(sci=sci))
 
         if self.level != 'above' or self.elab.startswith('family '):
             # CalFlora can be searched by family,

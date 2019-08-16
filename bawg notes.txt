@@ -180,8 +180,3 @@ default blue.
 If a page has multiple external photos, its parent key should list
 something like "Photos &times; 2" so that I know to click through.
 Otherwise it can use the auxiliary text with the single photo.
-
-iNaturalist taxon search is broken.
-
-"Chris's observations" link should not be a link when there's no
-scientific name.
