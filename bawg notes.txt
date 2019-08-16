@@ -176,3 +176,7 @@ clearer, like ext_photo.
 When a calphoto is linked from a key to a child's page, the text in
 the photo box should be colored like the child (black), not the
 default blue.
+
+If a page has multiple external photos, its parent key should list
+something like "Photos &times; 2" so that I know to click through.
+Otherwise it can use the auxiliary text with the single photo.

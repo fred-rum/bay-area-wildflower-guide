@@ -1,13 +1,13 @@
 sci:Trifolium spp.
-x:!hist
+x:hist
 
-There are generally 5 sepals, generally fused.  There are also generally 5 petals, which may be free, fused, or only the lower 2 +- fused into a keel.
+Much depends on the bracts (involucre), so always photograph the clover head from beneath, and measure the length of the bracts.  The involucre is always snuggled up against the inflorescence, and depending on its size it may or may not hide the pedicels at the base of the inflorescence.
 
-There are very many clover species in the bay area.  This page lists some key features, but I don't attempt to replicate the whole Jepson decision tree.  Instead, each flower description includes only enough information to (hopefully) confirm an ID hypothesis.
+There are generally 5 sepals, generally fused into a calyx for each flower.  There are also generally 5 petals, which may be free, fused, or only the lower 2 +- fused into a keel.  It may be useful to pluck a calyx/corolla combination to get a closer look at the calyx.
 
 Camera angles:
-. top/side of inflorescence with scale
-. bottom of inflorescence with scale
+. close look at top/side of inflorescence with scale
+. close look at bottom of inflorescence with scale
 . leaflets with scale (not the reduced leaflets directly below the inflorescence)
 . peduncle with scale
 
@@ -22,8 +22,7 @@ Key features:
 
 ==strawberry clover:T. fragiferum
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0703+0576
-. 1-2/2-8
-. involucre bracts supposedly +- 2 mm, +- free, green
+. involucre bracts +- 2 mm, +- free, green
 . inflorescence not sessile
 . calyx hairy, inflated in fruit
 . banner not inflated in fruit
@@ -33,7 +32,6 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0703+0576
 Inflorescence not sessile above 1--2 leaves<br/>
 Banner soon inflated in fruit</h2>
 ==bull clover:T. fucatum
-. 1-3
 . glabrous
 . Leaflets: 3, palmate, 1--2.5 cm, elliptic to +- round, +- entire to toothed
 . Bracts: +- free to 1/2 fused
@@ -43,14 +41,12 @@ Banner soon inflated in fruit</h2>
 
 ==saline clover:T. hydrophilum
 involucre:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0505+0145
-. 1-4
 . corolla 4--9 mm
 . <b>involucre bracts 2--2.5 mm</b>, +- free to &frac12; fused
 . inflorescence generally 1--1.5 cm wide
 . uncommon, generally found in the east bay
 
 ==cowbag clover:T. depauperatum
-. 1-4'/2-31
 . glabrous
 . Leaflets: 3, palmate, 0.5--2 cm, narrowly oblong to obovate, entire or toothed, occasionally lobed, tip generally truncate
 . Bracts: fused, vestigial, ring-like in ssp. depauperatum; +- free in variants
@@ -67,68 +63,84 @@ Calyx and corolla not inflated in fruit</h2>
 <h3>Involucre cup- or bowl-shaped, when pressed generally partly hiding flowers</h3>
 ==thimble clover:T. microdon
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1207+1139
-. 1-7
 . calyx lobes < 1/2 tube, not bristle-tipped
 
 ==small-headed clover:T. microcephalum
 https://www.calflora.org/cgi-bin/noccdetail.cgi?seq_num=gp15975
-. 1-8
 . calyx lobes > 1/2 tube, bristle-tipped
 . calyx lobes, involucre lobes +- entire
 . plant hairs generally finely wavy
 
 ==santa cruz clover:T. buckwestiorum
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1018+1821
-. 2-10
 . calyx lobes > 1/2 tube, bristle-tipped
 . calyx lobes, involucre lobes, or both toothed, cut, or branched
 . plant hairs 0 or finely wavy or not
-. calyx lobes finely toothed, bristle at tip 1–1.5 mm, glabrous
+. calyx lobes finely toothed, bristle at tip 1--1.5 mm, glabrous
 . involucre generally glabrous
 . banner not inflated
 . rare
 
 ==bearded clover:T. barbigerum
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0611+0476
-. 1-12
 . calyx lobes > 1/2 tube, bristle-tipped
 . calyx lobes, involucre lobes, or both toothed, cut, or branched
 . plant hairs 0 or finely wavy or not
-. calyx lobes entire, bristle at tip 3–4 mm, plumose (or lower lobes divided to near base into 2–3 bristles, each 3–4 mm, generally plumose)
+. calyx lobes entire, bristle at tip 3--4 mm, plumose (or lower lobes divided to near base into 2--3 bristles, each 3--4 mm, generally plumose)
 . involucre generally puberulent
 . banner inflated below, persistent as twisted beak above
-. corolla 5–10 mm, <= (rarely +- >) calyx
+. corolla 5--10 mm, <= (rarely +- >) calyx
 . stalk-like fruit base < 1 mm
 . inflorescence generally bristly from calyx lobes
 
 ==gray's clover:T. grayi
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0513+1284
-. 1-12'
 . calyx lobes > 1/2 tube, bristle-tipped
 . calyx lobes, involucre lobes, or both toothed, cut, or branched
 . plant hairs 0 or finely wavy or not
-. calyx lobes entire, bristle at tip 3–4 mm, plumose (or lower lobes divided to near base into 2–3 bristles, each 3–4 mm, generally plumose)
+. calyx lobes entire, bristle at tip 3--4 mm, plumose (or lower lobes divided to near base into 2--3 bristles, each 3--4 mm, generally plumose)
 . involucre generally puberulent
 . banner inflated below, persistent as twisted beak above
-. corolla 8–16 mm, > calyx
-. stalk-like fruit base 1–3 mm
+. corolla 8--16 mm, > calyx
+. stalk-like fruit base 1--3 mm
 . inflorescence not bristly
 
 ]
 [
-<h3>Involucre wheel-shaped or bracts +- free, when pressed hiding only bases of flowers</h3>
+<h3>Involucre wheel-shaped, when pressed hiding only bases of flowers</h3>
 ==springbank clover:T. wormskioldii
-. 1-18'
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0708+1153
+. involucre generally 2--3 cm wide [bract tips about as wide as the head]
+.. for all others in this box, involucre < 2 cm wide
 
 ==few-flowered clover:T. oliganthum
-. 1-20
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1207+1240
+. calyx lobes +- <= tube, often toothed or shouldered below tapered tip
+. calyx tube splitting between upper lobes
+. flower 5--8 mm
+. involucre 2--3 mm, generally cut > 1/2 to base
+. inflorescence 6--10 mm wide, 5--15-flowered
 
 ==clammy clover:T. obtusiflorum
-. 1-21
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1114+3922
+. calyx lobes +- <= tube, often toothed or shouldered below tapered tip
+. calyx tube splitting between upper lobes
+. flower 9--18 mm
+. involucre > 3 mm, cut < 1/2 to base
+. inflorescence generally 12--30 mm wide, often > 15-flowered
+. calyx glandular-hairy or bumpy (occasionally in age glabrous), lobes generally entire
+. <b>leaflets sharply serrate, longer teeth +- 1 mm</b>
+. <b>stem glandular-hairy</b>, generally sticky
 
 ==tomcat clover:T. willdenovii
-. 1-21'
-. glabrous all over
+. calyx lobes +- <= tube, often toothed or shouldered below tapered tip
+. calyx tube splitting between upper lobes
+. flower 9--18 mm
+. involucre > 3 mm, cut < 1/2 to base
+. inflorescence generally 12--30 mm wide, often > 15-flowered
+. calyx glabrous, not bumpy, lobes entire or 3-toothed
+. <b>leaflets serrate, teeth < 1 mm</b>
+. <b>glabrous all over</b>
 . Leaflets: 1--5 cm, linear to obovate, serrate, teeth < 1 mm
 . Bracts: <b>fused together; wheel-shaped, sharply lobed</b> or dissected
 . Inflorescence: <b>head-like, 1.5--3 cm wide</b>, generally lobed, many-flowered except on small plants
@@ -136,11 +148,17 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0513+1284
 . Corolla: 8--15 mm, <b>lavender to purple, tip generally white</b>
 
 ==pacific grove clover:T. polyodon
-. 1-23
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1218+3899
+. calyx lobes generally > tube, generally entire, not shouldered below tapered tip
+. calyx tube not splitting between upper lobes
+. calyx tubular, lobes +- 3-parted [I don't know what this means]
 . rare
 
 ==white-tipped clover:T. variegatum
-. 1-23'
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0717+1130
+. calyx lobes generally > tube, generally entire, not shouldered below tapered tip
+. calyx tube not splitting between upper lobes
+. calyx bell-shaped, lobes entire or toothed
 
 ]
 ]
@@ -148,43 +166,58 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0513+1284
 <h2>Involucre bracts 0 or occasionally < 1 mm or forming a vestigial ring<br/>
 Inflorescence occasionally +- sessile above 1--2 +- reduced leaves (stipules of which occasionally involucre-like)</h2>
 ==large-head clover:T. macrocephalum
-. 2-2
+leaflets:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1101+0387
+. <b>leaflets generally 7--9</b>
+.. for all others in this box, leaflets 3
+. inflorescence 3--5 cm wide
 . very rare; Mt. Diablo
 
 ==subterranean clover:T. subterraneum
-. 2-6
+banded calyx tube:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0408+0991
+grounded:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0208+2080
+. outer 2--8 flowers fertile, calyx tube often with purple band at top
+. inner flowers with calyx stalk-like, without petals, forming bur
+. peduncle in fruit curving, growing into ground
 
 ==reversed clover:T. resupinatum
-. 2-9
+calyx inflated:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0709+0267
+. calyx inflated in fruit
 . very rare & waif
 
 ==woolly clover:T. tomentosum
-. 2-9'
+calyx inflated:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0708+2124
+. calyx inflated in fruit
+.. for all others below, calyx rarely inflated in fruit
 . rare
 
 ==hop trefoil:T. campestre
-. 2-11
-. Leaflets: 3, <b>petioles of mid-leaves > leaflets</b>
+. Leaflets: 3, <b>pinnate, petioles of mid-leaves > leaflets</b>
 . Inflorescence: <b>head-like, 8--13 mm wide</b>, ovate to spheric, generally > 20-flowered; flowers quickly reflexed
-. Corolla: 4--5.5 mm, bright yellow, brown in age, <b>striate</b>
+. Corolla: 4--5.5 mm, <b>bright yellow</b>, brown in age, <b>striate</b>
 
 ==lesser hop trefoil:T. dubium
-. 2-11'
-. Leaflets: 3, <b>petioles of mid-leaves generally < leaflets</b>
+. Leaflets: 3, <b>pinnate, petioles of mid-leaves generally < leaflets</b>
 . Inflorescence: <b>head- to +- spike-like, 4--8 mm wide</b>, 5--10(20)-flowered; flowers quickly reflexed
-. Corolla: 3.5--4 mm, bright yellow, brown in age, <b>weak-striate</b>
+. Corolla: 3.5--4 mm, <b>bright yellow</b>, brown in age, <b>weak-striate</b>
 
+[
+<h3>pedicels 1--6 mm, +- equal<br/>
+flowers generally becoming reflexed</h3>
 ==white clover:T. repens
-. 2-17
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0407+0137
+. stem creeping, rooting, turf-forming
+. <b>pedicels growing from ground level</b> [CalPhotos disagrees with this]
 . generally +- glabrous
-. Leaflets: 3, palmate, 0.5--2.5 cm, obovate; <b>petioles from ground level</b>, +- equal
+. Leaflets: 3, palmate, 0.5--2.5 cm, obovate
 . Bracts: generally inconspicuous
-. Infloresence: 1--2.5 cm wide; pedicels 1--3 mm; <b>flowers becoming reflexed</b>
+. Infloresence: 1--2.5 cm wide
 . Calyx: 3--6 mm, lobes tapered, all or lower > tube
 . Corolla: 7--11 mm, <b>white</b>
 
 ==tree clover:T. ciliolatum
-. 2-22
+bracts inconspicuous, often in a ring at base of inflorescence
+calyx tube glabrous
+calyx lobes ciliate with short, flat bristles (or, through breakage, bristle bases)
 . +- glabrous
 . Leaflets: 3, palmate, 1--3 cm, oblanceolate to obovate, serrate
 . Bracts: inconspicuous, often in a ring at base
@@ -193,34 +226,54 @@ Inflorescence occasionally +- sessile above 1--2 +- reduced leaves (stipules of 
 . Corolla: +- >= calyx, <b>pink to purple</b>
 
 ==alsike clover:T. hybridum
-. 2-24
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0817+2051
+. bracts subtending individual flowers < 1 mm, conspicuous but soon falling
+. calyx tube glabrous
+. calyx lobes sharply tapered but not bristle-tipped
+. inflorescence 1.5--3 cm wide
 . rare
 
-==notchleaf clover:T. bifidum
-. 2-25'
-
 ==pinpoint clover:T. gracilentum
-. 2-26
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0416+1240
+. no bracts
+. calyx tube 1.5--2.5 mm, glabrous
+. calyx lobes +- 0.5 mm wide at base, glabrous, bristle-tipped
 
+==notchleaf clover:T. bifidum
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0208+2075
+. no bracts
+. calyx tube 0.8--1.4 mm, glabrous
+. calyx lobes +- 0.2 mm wide at base, with generally few hairs, bristle-tipped
+
+]
+[
+<h3>pedicels < 2 mm<br/>
+flowers becoming reflexed or not</h3>
 ==clustered clover:T. glomeratum
-. 2-29
 . +- glabrous
 . Leaflets: 3, palmate, 5--12 mm, obovate
 . Bracts: none or occasionally < 1 mm or forming a vestigial ring
 . Inflorescence: <b>sessile at end of stems or in succession of leaf axils, head-like, 7--10 mm wide</b>, many-flowered; pedicels < 1 mm
 . Calyx: 3--5 mm, lobes triangular
-. Corolla: +- > calyx, <b>pink</b>
+.. for all others below, corolla generally > 5 mm
+. Corolla: 4--6 mm, +- > calyx, <b>pink</b>
 
 ==nodding clover:T. cernuum
-. 2-30
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0516+1333
+. inflorescence axillary only
+. peduncles short at least on lower inflorescences, may be 0 above
 . very rare
 
+<h4>inflorescence +- sessile above a pair of reduced leaves, stipules, or both</h4>
+
 ==double-head clover:T. macraei
-. 2-37
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0613+0785
+. inflorescence generally paired, +- sessile or occasionally 1 short-peduncled above (1)2 leaves
+.. [the inflorescences may be unequal in development]
+.. for all others in this section, the inflorescence is single above subtending leaves
 
 ==two-fork clover:T. amoenum
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0102+0011
-. 2-38/51
 . resembles tomcat clover, but the head is much denser with flowers
 . hairy
 . Leaflets: 3, palmate, widely obovate
@@ -228,32 +281,48 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0102+0011
 . Inflorescence: head, ovate to spheric; sessile [CalPhotos does not consistently show this] above 1--2 +- reduced leaves (with 3 leaflets each)
 . Calyx: 10--12 mm, slender, plumose
 . Corolla: 12--16 mm, <b>purple, tips white</b>
+.. for all others in this section below, the corolla is one-colored, red-purple or pink
 . rare
 
 ==rose clover:T. hirtum
-. 2-40
+. calyx lobes densely to sparsely plumose, >> tube, lower one +- 1--1.5 &times; others
 . hairy on stem, leaflet margins and stipules
 . Leaflets: 3, palmate, 1--2.5 cm, obovate
 . Bracts: none, but <b>leaf stipules look like pale bracts with dark red veins</b>
 . Inflorescence: <b>spheric, ~15--20 mm</b>, many-flowered; sessile above 1--2 +- reduced leaves (with 3 leaflets each) with involucre-like stipules
 . Calyx: 7--9 mm, bristle-like, densely plumose
-. Corolla: 11--15 mm, generally <b>pink</b> (not purple with white tips)
+. Corolla: 11--15 mm, generally <b>pink</b>
 
 ==knotted clover:T. striatum
-. 2-40'
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0110+1626
+. calyx lobes sparsely plumose, <= tube except lower one, lower one +- 1--1.5 &times; others
+. inflorescence +- short-cylindric, 0.5--1.5 cm
 . very rare
 
 ==red clover:T. pratense
-. 2-41
+head & leaves:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1101+0063
+. calyx hairy, lobes sparsely plumose, straight, lower one +- 2 &times; others
+. corolla generally red-purple
+. leaflets entire
 . rare
 
 ==arrowleaf clover:T. vesiculosum
-. 2-41'
+head:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0108+1376
+leaves:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0108+1377
+. calyx glabrous, lobes lobes straight to curved, +- equal
+. corolla pink to purple
+. leaflets with bristle-like teeth
 . very rare
+
+<h4>inflorescence peduncled, peduncle generally > 10 mm, generally > leaves</h4>
 
 ==rancheria clover:T. albopurpureum
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0411+2007
-. 2-44
+. corolla <= calyx
+. calyx lobes > tube, plumose
+. leaflets oblanceolate to obovate, length 1.2--3 &times; width
+. corolla purple with white tips
+. calyx 4--8 mm, lobes 3--6.5 mm
 . resembles tomcat clover and rose clover
 . hairy
 . Leaflets: 3, palmate, 1--3 cm, oblanceolate to obovate
@@ -263,10 +332,19 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0411+2007
 . Corolla: 5--8 mm, <= calyx, <b>purple and white</b>
 
 ==olive clover:T. olivaceum
-. 2-44'
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1215+3193
+. corolla <= calyx
+. calyx lobes > tube, plumose
+. leaflets oblanceolate to obovate, length 1.2--3 &times; width
+. corolla purple with white tips
+. calyx 8--14 mm, lobes 6.5--12 mm
 
 ==narrow-leaved clover:T. angustifolium
-. 2-45
+. corolla <= calyx
+. calyx lobes > tube, plumose
+. leaflets linear to narrow, length 3--8 &times; width
+. corolla pale pink
+. corolla 10--12 mm, +- = calyx
 . slightly hairy stem, long-hairy leaf stipules
 . Leaflets: 3, palmate, 2--4.5 cm, <b>linear to narrowly lanceolate</b>
 . Bracts: none
@@ -275,14 +353,23 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0411+2007
 . Corolla: 10--12 mm, +- = calyx, <b>pale pink</b>
 
 ==rabbitfoot clover:T. arvense
-. 2-45'
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1209+1520
+. corolla <= calyx
+. calyx lobes > tube, plumose
+. leaflets linear to narrow, length 3--8 &times; width
+. corolla pale pink to white
+. corolla 3--4 mm, < or << calyx
 . very rare
 
+
 ==branching indian clover:T. dichotomum
-. 2-51'
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1207+1118
+. corolla > calyx
+. corolla purple with white tips
 
 ==crimson clover:T. incarnatum
-. 2-52'
+. corolla > calyx
+. corolla crimson or white
 . short hairy
 . Leaflets: 3, palmate, 1--2.5 cm, obovate to obcordate
 . Bracts: none
@@ -291,6 +378,8 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0411+2007
 . Corolla: 10--14 mm, <b>crimson</b> or white
 
 ]
+]
 ==suffocated clover:T. suffocatum
-. ?
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0215+0500
+. not in Jepson
 . very rare
