@@ -65,8 +65,10 @@ class Obs:
 
             if page.taxon_id:
                 link = 'https://www.inaturalist.org/observations/chris_nelson?taxon_id={taxon_id}&order_by=observed_on'.format(taxon_id=page.taxon_id)
-            else:
+            elif sci:
                 link = 'https://www.inaturalist.org/observations/chris_nelson?taxon_name={sci}&order_by=observed_on'.format(sci=sci)
+            else:
+                link = None
         else:
             link = None
 
