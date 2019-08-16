@@ -268,6 +268,7 @@ function fn_search(enter) {
       } else {
         var full = bold(search_str_cmp, com)
       }
+      full = full.replace(/'/g, '&rsquo;')
       var entry = ('<p class="nogap"><a class="enclosed ' + c + '" href="' +
                    path + page_info.page + '.html">' +
                    full + '</a></p>');

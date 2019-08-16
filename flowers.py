@@ -351,6 +351,12 @@ class Page:
         else:
             return self.name
 
+    def format_com(self):
+        com = self.com
+        if not com:
+            return None
+        return repl_easy_regex.sub(repl_easy, com)
+
     def format_elab(self):
         elab = self.elab
         if not elab:
@@ -363,7 +369,7 @@ class Page:
             return '<i>{elab}</i>'.format(elab=elab)
 
     def format_full(self, lines=2):
-        com = self.com
+        com = self.format_com()
         elab = self.format_elab()
         if not com:
             return elab
@@ -879,17 +885,17 @@ class Page:
         s = re.sub(r'^\n+', '', s)
         s = re.sub(r'\n*$', '\n', s, count=1)
 
-        def repl_easy(matchobj):
-            return repl_easy_dict[matchobj.group(1)]
-
         # replace the easy (fixed-value) stuff.
-        s = repl_easy_regex.sub(repl_easy, s)
         s = re.sub(r'^\[$', r'<div class="box">', s, flags=re.MULTILINE)
         s = re.sub(r'^\]$', r'</div>', s, flags=re.MULTILINE)
 
+        # Break the text into lines, then perform easy substitutions on
+        # non-keyword lines and decorate bullet lists.
         list_depth = 0
         c_list = []
         for c in s.split('\n'):
+            if not c.startswith(('==', 'html')) and not '{' in c:
+                c = repl_easy_regex.sub(repl_easy, c)
             matchobj = re.match(r'\.*', c)
             new_list_depth = matchobj.end()
             if new_list_depth > list_depth+1:
@@ -1071,8 +1077,8 @@ class Page:
             elab = self.elab
 
             if com:
-                title = com
-                h1 = com
+                title = self.format_com()
+                h1 = title
             else:
                 # If the page has no common name (only a scientific name),
                 # then the h1 header should be italicized and elaborated.
@@ -1436,12 +1442,18 @@ repl_easy_dict = {
     '<<' : '&#8810',
     '>>' : '&#8811',
 
+    "'" : '&rsquo;',
+
     # '<' and '>' should be escaped, but for now I'll leave them alone
     # because the browser seems to figure them out correctly, and it's
     # probably smarter about it than I would be.
 }
 
 repl_easy_regex = re.compile('({ex})'.format(ex='|'.join(map(re.escape, list(repl_easy_dict.keys())))))
+
+def repl_easy(matchobj):
+    return repl_easy_dict[matchobj.group(1)]
+
 
 
 # Read the txt for all explicit page files.
