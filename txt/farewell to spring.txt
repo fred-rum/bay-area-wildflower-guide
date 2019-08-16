@@ -1,0 +1,18 @@
+sci:Clarkia amoena
+xx:ba
+
+==C. amoena ssp. huntiana
+. stem erect
+. inflorescence open
+. internode generally > subtending flower
+. very rare: Mt. Tam and Milagra Ridge
+
+==C. amoena ssp. amoena
+. stem decumbent
+. inflorescence dense
+. internode generally < subtending flower
+. rare: but modern records are extremely rare
+
+==whitney's farewell-to-spring:C. amoena ssp. whitneyi
+. not in Jepson
+. extremely rare: in Half Moon Bay, possibly cultivated
