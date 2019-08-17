@@ -1,0 +1,27 @@
+x:hist/rare
+
+==orange bush monkeyflower:D. aurantiacus
+. subshrub or shrub
+. corolla orange
+
+[
+<h2>corolla purple</h2>
+==congdon's monkeyflower:D. congdonii
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0110+0798
+. herb
+. 5 corolla limbs, +- equal, each 3--11 mm wide
+. calyx 5--14 mm, ribs hairy
+
+==brownies:D. douglasii
+https://www.calflora.org/cgi-bin/noccdetail.cgi?seq_num=io1310
+. herb
+. 2 corolla limbs, bilateral, each 10--18 mm wide (3 more corolla limbs are stumpy)
+. calyx 8--14 mm, hairy
+
+==rattan's monkeyflower:D. rattanii
+https://www.calflora.org/cgi-bin/noccdetail.cgi?seq_num=gp16646
+. herb
+. 5 corolla limbs, equal or 2 larger, each 4--7 mm wide
+. calyx 5--9 mm, widely ribbed, swollen, hairy
+
+]

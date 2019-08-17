@@ -1,2 +1,3 @@
 sci:Diplacus aurantiacus
+scip:Mimulus aurantiacus
 color: orange

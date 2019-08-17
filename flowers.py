@@ -790,6 +790,10 @@ class Page:
             # CalPhotos cannot be searched by high-level classifications.
             # It can be searched by genus, but I don't find that at all useful.
             elab = choose_elab(self.elab, self.elab_calphotos)
+            if elab != self.elab:
+                # CalPhotos can search for multiple names, and for cases such
+                # as Erythranthe, it may have photos under both names.
+                elab = self.elab + '|' + elab
             # rel-taxon=begins+with -> allows matches with lower-level detail
             add_link(elab, self.elab_calphotos,
                      '<a href="https://calphotos.berkeley.edu/cgi/img_query?rel-taxon=begins+with&where-taxon={elab}" target="_blank">CalPhotos</a>\n'.format(elab=elab));

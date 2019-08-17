@@ -1,2 +1,3 @@
 sci:Erythranthe guttata
+scip:Mimulus guttatus
 color: yellow, orange

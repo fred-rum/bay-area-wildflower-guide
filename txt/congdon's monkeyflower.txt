@@ -1,2 +1,3 @@
 sci:Diplacus congdonii
+scip:Mimulus congdonii
 color: red purple
