@@ -24,6 +24,7 @@ div.defn:target {
 }
 dt {
     font-weight: bold;
+    margin-bottom: 0px;
 }
 dd {
     margin-bottom: 0.5em;

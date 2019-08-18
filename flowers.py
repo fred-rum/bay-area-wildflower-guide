@@ -1240,6 +1240,7 @@ def write_header(w, title, h1, nospace=False, nosearch=False):
     else:
         space_class = ''
     w.write('''<!-- Copyright 2019 Chris Nelson - All rights reserved. -->
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">

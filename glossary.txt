@@ -1,3 +1,4 @@
+<dl>
 {abaxial} The surface further from the stem when upright.  E.g. the lower surface of a leaf or the outer surface of a petal.
 {adaxial} The surface closer to the stem when upright.  E.g. the upper surface of a leaf or the inner surface of a petal.
 {annual,annuals} Lives for one year or less, generally without forming any woody parts.
@@ -36,17 +37,22 @@
 {stipule,stipules} Extension at the base of the petiole.
 {subshrub,subshrubs} Similar to a shrub, but with the distal stems less woody.
 {waif,waifs} A plant that has spread with human assistance but cannot reproduce or spread further on its own; will eventually die out assuming no further assistance.
+</dl>
 
 <h2>Words used for the sunflower family</h2>
 
 <p>See also the sunflower-related uses of inflorescence and involucre.</p>
 
+<dl>
 {ligule,ligules} The petal of a flower in the sunflower family comprised only of ray-like flowers (i.e. not disk and ray).
 {phyllary,phyllaries} A bract of the flower head in the sunflower family.
+</dl>
 
 <h3>Involucre shapes</h2>
 
 <p>All involucre shapes may be flared at the tip or not.  See also cylindric.</p>
 
+<dl>
 {bell-shaped,bell} Rapidly widening at the base, then slowly expanding toward the tip.
 {urn-shaped,urn} Rapidly widening at the base, then narrowed toward the tip.
+</dl>
