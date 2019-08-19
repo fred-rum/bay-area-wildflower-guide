@@ -168,11 +168,4 @@ There are two places in search.js that map the compressed match
 location to the uncompressed text.  Those should use a function in
 common.
 
-The internal variables for calphotos should also be changed to
-something clearer, like ext_photo.
-
-When a calphoto is linked from a key to a child's page, the text in
-the photo box should be colored like the child (black), not the
-default blue.
-
 Remove margin-top from <ul> in sub-lists.  (Only use it for outer list.)
