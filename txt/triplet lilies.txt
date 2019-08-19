@@ -1,4 +1,5 @@
 sci:Triteleia spp.
+x:hist
 
 Key features:
 . perianth color (sepals and petals)
@@ -11,20 +12,11 @@ Key features:
 . purple perianth
 . stamens attached alternately at 2 levels, +- equal
 
-==golden brodiaea:T. ixioides ssp. ixioides
+==prettyface:T. ixioides
 . yellow perianth
 . stamens attached at 1 level, unequal
 . tips of longer filaments with forked, pointed appendages
-. perianth tube < lobes
-. perianth lobes <b>ascending to spreading</b>
-
-==cook's triteleia:T. ixioides ssp. cookii
-. yellow perianth
-. stamens attached at 1 level, unequal
-. tips of longer filaments with forked, pointed appendages
-. perianth tube +- = lobes
-. perianth lobes <b>reflexed</b>
-. range is <b>south of Big Sur</b>
+. the bay area only has {-golden brodiaea}
 
 ==coast range triteleia:T. lugens
 . yellow perianth

@@ -461,6 +461,7 @@ var pages=[
 {page:"panicled willowherb",sci:"Epilobium brachycarpum",x:"o"},
 {page:"peak rushrose",sci:"Helianthemum scoparium",x:"o"},
 {page:"peruvian peppertree",sci:"Schinus molle",x:"o"},
+{page:"prettyface",sci:"Triteleia ixioides",x:"k"},
 {page:"prickly pears",sci:"Opuntia spp.",x:"k"},
 {page:"purple viper's-bugloss",sci:"Echium plantagineum",x:"o"},
 {page:"q-tips",com:"Q tips",sci:"Micropus californicus",x:"o"},
