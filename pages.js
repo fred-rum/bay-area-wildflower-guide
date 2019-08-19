@@ -760,6 +760,7 @@ var pages=[
 {page:"coastal bird's-foot trefoil",sci:"Acmispon maritimus var. maritimus",x:"u"},
 {page:"coastal bluff morning-glory",sci:"Calystegia purpurata ssp. saxicola",x:"u"},
 {page:"coastal goldfields",sci:"Lasthenia minor",x:"u"},
+{page:"coastal hedge-nettle",sci:"Stachys chamissonis",x:"u"},
 {page:"coastal monkeyflower",sci:"Erythranthe dentata",x:"u"},
 {page:"coastal plantain",sci:"Plantago elongata",x:"u"},
 {page:"coastal silverpuffs",sci:"Microseris bigelovii",x:"u"},

@@ -1,4 +1,5 @@
 sci:Stachys spp.
+x:rare
 
 Key features:
 . pouch at base of corolla or not
@@ -19,13 +20,23 @@ Key features:
 . corolla pink, bracts rapidly reduced distally on stem
 
 ==bugle hedgenettle:S. ajugoides
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1207+0830
 . pouch at base of corolla
 . inflorescence elongated
 . leaf blade 1.5--7 cm, generally oblong, base wedge-shaped, tip rounded; <b>hairs long & silky</b>
 . corolla pink or white
 
 ==short-spiked hedge nettle:S. pycnantha
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0311+0492
 . pouch at base of corolla
 . <b>inflorescence compact</b>
 . leaf blade 5--12 cm, ovate or lanceolate to oblong, crenate to serrate, base rounded to cordate, tip obtuse; soft- to stiff-hairy, glandular
 . corolla +- white to +- pink
+
+==coastal hedge-nettle:S. chamissonis
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0606+1039
+. corolla tube 18--24 mm
+.. all others are < 15 mm
+. leaf blade 6--18 cm, deltoid to ovate, soft-hairy, densely glandular abaxially
+. corolla deep magent to purple
+
