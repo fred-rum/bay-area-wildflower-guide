@@ -1,0 +1,10 @@
+sci:Sisyrinchium
+x:ba
+
+==western blue-eyed grass:S. bellum
+. purple with yellow center
+. very common
+
+==golden-eyed grass:S. californicum
+. yellow
+. rare
