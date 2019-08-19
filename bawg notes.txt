@@ -164,8 +164,4 @@ How would that be presented?  (border on CalPhoto placeholder?)
 Allow families to auto-list their members after some introductory
 text.  E.g. most sedges have triangular stems and grasses have round stems.
 
-There are two places in search.js that map the compressed match
-location to the uncompressed text.  Those should use a function in
-common.
-
 Remove margin-top from <ul> in sub-lists.  (Only use it for outer list.)

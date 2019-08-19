@@ -35,6 +35,25 @@ function compress(name) {
   return name.toUpperCase().replace(/\W/g, '');
 }
 
+/* Find the position of the Nth letter in string 'str',
+where N = cmp_match_pos + len, with adjustments as follows:
+- If len is 0, we're looking for the position just before the (N+1)th letter.
+- Otherwise, we're looking for the position just after the Nth letter. */
+function find_letter_pos(str, cmp_match_pos, len) {
+  var regex = /\w/g;
+  var n = cmp_match_pos + len;
+  if (len == 0) n++
+
+  for (var i = 0; i < n; i++) {
+    regex.test(str);
+  }
+  if (len == 0) {
+    return regex.lastIndex - 1;
+  } else {
+    return regex.lastIndex;
+  }
+}
+
 function index_of_letter(str, letter_num) {
   var letter_cnt = 0;
   for (var i = 0; letter_cnt < letter_num; i++) {
@@ -78,12 +97,12 @@ function check(search_str_cmp, match_str, page_info, best_fit_info, pri_adj) {
     /* Bump the priority by 0.4 if the match begins and ends
        at word boundaries. */
     var cmp_pos = cx.indexOf(search_str_cmp);
-    var uncmp_start = index_of_letter(match_str, cmp_pos);
-    var uncmp_end = index_of_letter(match_str, cmp_pos + search_str_cmp.length);
+    var uncmp_start = find_letter_pos(match_str, cmp_pos, 0);
+    var uncmp_end = find_letter_pos(match_str, cmp_pos, search_str_cmp.length);
     if (((uncmp_start == 0) ||
-         (match_str.substring(uncmp_start).search(/^\w/) == -1)) &&
+         (/^\W/.test(match_str.substring(uncmp_start-1)))) &&
         ((uncmp_end == match_str.length) ||
-         (match_str.substring(uncmp_end).search(/^\w/) == -1))){
+         (/^\W/.test(match_str.substring(uncmp_end))))){
       pri += 0.4;
     }
 
@@ -133,19 +152,12 @@ function bold(search_str_cmp, name) {
     return name;
   }
 
-  /* Based on the number of letters in the compressed name prior to the match,
-     skip the same number of letters in the uncompressed name (also skipping
-     any number of non-letters). */
-  var regex = RegExp('\\w', 'g');
-  for (var i = 0; i <= cmp_match_pos; i++) {
-    regex.test(test_name);
-  }
-  var uncmp_match_begin = regex.lastIndex - 1;
-
-  for (var i = 1; i < search_str_cmp.length; i++) {
-    regex.test(test_name);
-  }
-  var uncmp_match_end = regex.lastIndex;
+  var uncmp_match_begin = find_letter_pos(test_name,
+                                          cmp_match_pos,
+                                          0);
+  var uncmp_match_end = find_letter_pos(test_name,
+                                        cmp_match_pos,
+                                        search_str_cmp.length);
 
   if (has_ssp) {
     if (uncmp_match_begin > ssp_pos) {
