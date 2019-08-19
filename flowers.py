@@ -754,6 +754,7 @@ class Page:
             if elab_alt == 'n/a':
                 elab = 'not listed'
                 link = re.sub(r'<a ', '<a class="missing" ', link)
+            elab = re.sub(r'\|', ' / ', elab)
             if elab not in link_list:
                 elab_list.append(elab)
                 link_list[elab] = []
@@ -765,7 +766,7 @@ class Page:
             else:
                 elab = elab_base
             elab_words = elab.split(' ')
-            if len(elab_words) == 2:
+            if len(elab_words) == 2 and '|' not in elab:
                 # Always strip the "spp." suffix or [lowercase type] prefix.
                 elab = strip_sci(elab)
             return elab
