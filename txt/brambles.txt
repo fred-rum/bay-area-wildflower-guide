@@ -1,29 +1,63 @@
 sci:Rubus spp.
+x:rare
 
 Key features:
-. Prickle presence and shape.
-. Round or 5-angled stem (pentagonal in cross section).
-. Fruit type and color.
+. prickle presence and shape
+. round or 5-angled stem (pentagonal in cross section)
+. sipules shape
+. fruit type and color
 
 Although the leaves have general difference, there is enough variety within a species to make them difficult to use as diagnostic tools.  In addition, some of the characteristics described by Jepson cannot be seen in CalPhotos.
+
+==himalayan blackberry,2:R. armeniacus
+. Plant: to 3 m, arched to mounded
+. Prickles: many, <b>stout, wide-based</b>, straight or curved
+. Stem: to 20(25) mm diam, <b>5-angled</b>, finely hairy or generally glabrous, not glaucous
+. Leaf: simple or compound, leaflets 3(5)
+. Sepals: hairy, <b>nonglandular</b>
+. Fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
+
+==whitebark raspberry:R. leucodermis
+. Plant: arched to mounded
+. Prickles: many, <b>stout, wide-based</b>, straight or generally curved
+. Stem: 4--10 mm diam, <b>not angled</b>, glabrous, <b>strongly glaucous in youth</b>
+. Leaf: simple or compound, leaflets 3 when older or 5 and shallow-3-lobed when younger
+. Sepals: sepals hairy, <b>prickly, +- with stalked glands</b>
+. Fruit: <b>raspberry-type</b> (hollow when picked), <b>red-purple to +- black</b>
+
+==salmonberry:R. spectabilis
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0315+2744
+. Plant 2--4 m, erect
+. Prickles few, +- stout, slender, straight [CalPhotos shows some thick-based]
+. Stem: 3--15 mm diameter, <b>not angled</b>, glabrous, not glaucous
+. Leaf: simple to generally compound, leaflets 3, <b>+- lobed, course-double-toothed</b>
+. Sepals: hairy, +- stalked-glandular<
+. <b>Petals: magenta</b>
+.. all others are white
+. Fruit: raspberry-type, +- yellow to orange to red
 
 ==california blackberry,2:R. ursinus
 . Plant: prostrate to decumbent
 . Prickles: <b>weak, slender</b>, straight
 . Stem: 2--10 mm diam, <b>not angled</b>, +-glabrous to hairy, +-with stalked glands, glaucous
+. Leaf: simple or compound, leaflets 3(5), gray-hairy abaxially
 . Sepals: hairy, <b>prickly</b>, +-with stalked glands
-. Fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
-
-==himalayan blackberry,2:R. armeniacus
-. Plant: to 3 m, arched to mounded
-. Prickles: <b>stout, wide-based</b>, straight or curved
-. Stem: to 20(25) mm diam, <b>5-angled</b>, finely hairy or generally glabrous, not glaucous
-. Sepals: hairy, nonglandular
 . Fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
 
 ==thimbleberry,2:R. parviflorus
 . Plant 0.5--2.5 m, erect
 . <b>No prickles</b>
 . Stem: to 6 mm diam, <b>not angled</b>, glabrous to finely hairy with stalked glands, not glaucous
+. <b>Leaf: simple, palmately (3)5-lobed</b>
+. Stipules: <b>triangular-lanceolate to narrow-ovate, 1.5--3 mm wide</b>
+.. all others are thread-like to linear, <= 1 mm wide
 . Sepals hairy, stalked-glandular
 . Fruit: <b>raspberry-type</b> (hollow when picked), <b>red</b>
+
+==thornless elmleaf blackberry:R. ulmifolius var. anoplothyrsus
+. Plant to 3 m, erect to arched
+. <b>No prickles</b>
+. Stem: 5--10 mm diameter, <b>5-angled</b>, densely short-hairy, may be glaucous
+. Leaf: simple or generally compound, <b>leaflets 3--5</b>
+. Sepals: short-hairy, nonglandular
+. Fruit: blackberry-type, black

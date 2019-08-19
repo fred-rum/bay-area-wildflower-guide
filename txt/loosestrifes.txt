@@ -1,5 +1,12 @@
 sci:Lysimachia spp.
+x:rare
+
+They all look pretty different from each, so no key is necessary.
 
 ==scarlet pimpernel:L. arvensis
 
 ==western star flower:L. latifolia
+
+==sea milkwort:L. maritima
+
+==chaffweed:L. minima
