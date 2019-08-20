@@ -1,0 +1,7 @@
+com:centauries
+x:rare
+
+There are more centauries in the {-Gentianaceae}.
+
+==slender centaury:C. tenuiflorum
+. uncommon

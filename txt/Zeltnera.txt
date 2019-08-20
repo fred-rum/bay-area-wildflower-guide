@@ -1,0 +1,44 @@
+com:centauries
+x:ba
+
+There are more centauries in the {-Gentianaceae}.
+
+<b>Caution: IDs uncertain.</b>
+
+Key features:
+. maximum pedicel length
+. calyx lobes keeled or not
+. corolla lobe length
+. stigma number and shape
+
+==muehlenberg's centaury:Z. muehlenbergii
+. [much branched, many flowered]
+. pedicels 0--10 mm
+. corolla lobes 2--7 mm, tips rounded
+
+==alkali centaury:Z. trichantha
+. [many flowered]
+. pedicels 0--3 mm
+. corolla lobes 5--10 mm, tips acute to acuminate
+. rare
+
+==davy's centaury:Z. davyi
+. [seemingly never more than few flowers]
+. pedicels 2--25(55) mm
+. <b>calyx lobes keeled</b>
+.. no others have keeled calyx lobes
+. corolla lobes 3--7 mm
+
+==california centaury:Z. venusta
+. [much branched, many flowered]
+. pedicels generally 4--25 mm
+. <b>corolla lobes 5--20 mm</b>
+. rare
+
+==tall centaury:Z. exaltata
+. [few to many flowered]
+. <b>pedicels generally 10--70 mm, generally > closed corollas</b>
+.. all others are 0--40 mm, generally < closed corollas
+. <b>flower parts generally in 4s</b>
+.. all others in 5s
+. rare
