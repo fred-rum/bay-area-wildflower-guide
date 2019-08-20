@@ -892,68 +892,39 @@ class Page:
         s = re.sub(r'^\n+', '', s)
         s = re.sub(r'\n*$', '\n', s, count=1)
 
-        # replace the easy (fixed-value) stuff.
-        s = re.sub(r'^\[$', r'<div class="box">', s, flags=re.MULTILINE)
-        s = re.sub(r'^\]$', r'</div>', s, flags=re.MULTILINE)
+        def end_paragraph(start_list=False):
+            nonlocal p_start
+            if p_start == None:
+                return
 
-        # Break the text into lines, then perform easy substitutions on
-        # non-keyword lines and decorate bullet lists.
-        c_list = []
-        list_depth = 0
-        for c in s.split('\n'):
-            if not c.startswith(('==', 'html')) and not '{' in c:
-                c = repl_easy_regex.sub(repl_easy, c)
-            matchobj = re.match(r'\.*', c)
-            new_list_depth = matchobj.end()
-            if new_list_depth > list_depth+1:
-                print('Jump in list depth on page ' + self.name)
-            while list_depth < new_list_depth:
-                if list_depth == 0:
-                    c_list.append('<ul>')
-                else:
-                    c_list.append('<ul class="list-sub">')
-                list_depth += 1
-            while list_depth > new_list_depth:
-                c_list.append('</ul>')
-                list_depth -= 1
-            c = c[list_depth:].strip()
-            if list_depth:
-                c_list.append('<li>{c}</li>'.format(c=c))
+            if start_list:
+                p_tag = '<p class="list-head">'
             else:
-                c_list.append(c)
-        s = '\n'.join(c_list)
+                p_tag = '<p>'
+            c_list[p_start] = p_tag + c_list[p_start]
+            c_list[-1] += '</p>'
+            p_start = None
 
-        # Replace {-[name]} with an inline link to the page.
-        def repl_link(matchobj):
-            name = matchobj.group(1)
-            page = find_page1(name)
-            if page:
-                return page.create_link(1)
-            else:
-                print('Broken link {{-{name}}} on page {page}'.format(name=name, page=self.name))
-                return '{-' + name + '}'
+        def end_child_text():
+            nonlocal child_start, c_list
+            if child_start == None:
+                return
 
-        s = re.sub(r'{-([^}]+)}', repl_link, s)
-
-        # Look for a link to a child followed by all text up to the
-        # first \n\n or EOF.  Create the HTML link along with a photo
-        # (if available).  Group the photo and text together and
-        # vertically centered, except on a narrow screen, in which case
-        # the link text is centered next to the photo, but the remaining
-        # text is dropped below.
-        def repl_child_link(matchobj):
-            name = matchobj.group(1)
-            suffix = matchobj.group(2)
-            text = matchobj.group(3)
+            name = child_matchobj.group(1)
+            suffix = child_matchobj.group(2)
             if not suffix:
                 suffix = ''
-            if not text:
-                text = ''
+
+            text = '\n'.join(c_list[child_start:])
+            c_list = c_list[:child_start]
+            child_start = None
 
             child = find_page1(name)
             if not child:
                 print('Broken link to +{name} on page {key}'.format(name=name, key=self.name))
-                return '=={name}\n'.format(name=name)
+                c_list.append('=={name}{suffix}\n'.format(name=name, suffix=suffix))
+                c_list.append(text)
+                return
 
             # Give the child a copy of the text from the parent's key.
             # The child can use this (pre-parsed) text if it has no text
@@ -1005,21 +976,84 @@ class Page:
                 # can either be below the text link and next to the image or
                 # below both the image and text link, depending on the width of
                 # the viewport.
-                return '<div class="flex-width"><div class="photo-box">{img}\n<span class="show-narrow">{link}</span></div><span><span class="show-wide">{link}</span>{text}</span></div>'.format(img=img, link=link, text=text)
+                c_list.append('<div class="flex-width"><div class="photo-box">{img}\n<span class="show-narrow">{link}</span></div><span><span class="show-wide">{link}</span>{text}</span></div>'.format(img=img, link=link, text=text))
             else:
-                return '<div class="photo-box">{img}\n<span>{link}</span></div>'.format(img=img, link=link)
+                c_list.append('<div class="photo-box">{img}\n<span>{link}</span></div>'.format(img=img, link=link))
 
-        # Search for:
-        #  == at the start of a line, then
-        #  a name, then
-        #  optionally a jpg suffix, then
-        #  ignored spaces, then
-        #  a carriage return, then
-        #  any amount of arbitrary text that does not include a blank line.
-        s = re.sub(r'^==([^\n]*?)(,[-0-9]\S*|,)? *\n((?:.+\n)*)', repl_child_link, s, flags=re.MULTILINE)
+        # replace the easy (fixed-value) stuff.
+        # Break the text into lines, then perform easy substitutions on
+        # non-keyword lines and decorate bullet lists.
+        c_list = []
+        p_start = None
+        child_start = None
+        list_depth = 0
+        for c in s.split('\n'):
+            matchobj = re.match(r'\.*', c)
+            new_list_depth = matchobj.end()
+            if new_list_depth:
+                end_paragraph(True)
+            if new_list_depth > list_depth+1:
+                print('Jump in list depth on page ' + self.name)
+            while list_depth < new_list_depth:
+                if list_depth == 0:
+                    c_list.append('<ul>')
+                else:
+                    c_list.append('<ul class="list-sub">')
+                list_depth += 1
+            while list_depth > new_list_depth:
+                c_list.append('</ul>')
+                list_depth -= 1
+            c = c[list_depth:].strip()
+            if list_depth:
+                c_list.append('<li>{c}</li>'.format(c=c))
+                continue
 
-        # Replace a pair of newlines with a paragraph separator.
-        s = s.replace('\n\n', '\n<p/>\n')
+            matchobj = re.match(r'==([^\n]*?)(,[-0-9]\S*|,)?\s*$', c)
+            if matchobj:
+                end_paragraph()
+                end_child_text()
+                child_matchobj = matchobj
+                child_start = len(c_list)
+                continue
+
+            if c == '[':
+                end_paragraph()
+                end_child_text()
+                c_list.append('<div class="box">')
+                continue
+
+            if c == ']':
+                end_paragraph()
+                end_child_text()
+                c_list.append('</div>')
+                continue
+
+            if '{' not in c:
+                c = repl_easy_regex.sub(repl_easy, c)
+
+            if c == '':
+                end_paragraph()
+                end_child_text()
+                continue
+
+            if p_start == None:
+                p_start = len(c_list)
+            c_list.append(c)
+        end_paragraph()
+        end_child_text()
+        s = '\n'.join(c_list)
+
+        # Replace {-[name]} with an inline link to the page.
+        def repl_link(matchobj):
+            name = matchobj.group(1)
+            page = find_page1(name)
+            if page:
+                return page.create_link(1)
+            else:
+                print('Broken link {{-{name}}} on page {page}'.format(name=name, page=self.name))
+                return '{-' + name + '}'
+
+        s = re.sub(r'{-([^}]+)}', repl_link, s)
 
         self.txt = s
 

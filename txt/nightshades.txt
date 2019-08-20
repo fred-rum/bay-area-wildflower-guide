@@ -65,7 +65,7 @@ Some features are variable within a species, but if a <b>bold feature</b> is see
 . fruit: +- yellow or green
 . rare
 
-
 ==forked nightshade:S. furcatum
 . The inflorescence is forked into two distinct sections.
+
 ]
