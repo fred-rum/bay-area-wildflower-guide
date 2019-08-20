@@ -843,7 +843,7 @@ class Page:
             return
 
         w.write('<p class="list-head">Flower lists that include this page:</p>\n')
-        w.write('<ul/>\n')
+        w.write('<ul>\n')
 
         for color in color_list:
             if color in self.color:
@@ -898,8 +898,8 @@ class Page:
 
         # Break the text into lines, then perform easy substitutions on
         # non-keyword lines and decorate bullet lists.
-        list_depth = 0
         c_list = []
+        list_depth = 0
         for c in s.split('\n'):
             if not c.startswith(('==', 'html')) and not '{' in c:
                 c = repl_easy_regex.sub(repl_easy, c)
@@ -908,7 +908,10 @@ class Page:
             if new_list_depth > list_depth+1:
                 print('Jump in list depth on page ' + self.name)
             while list_depth < new_list_depth:
-                c_list.append('<ul>')
+                if list_depth == 0:
+                    c_list.append('<ul>')
+                else:
+                    c_list.append('<ul class="list-sub">')
                 list_depth += 1
             while list_depth > new_list_depth:
                 c_list.append('</ul>')

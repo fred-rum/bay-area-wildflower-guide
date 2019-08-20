@@ -307,6 +307,9 @@ div#details {
 ul {
     margin-top: 6px;
 }
+ul.list-sub {
+    margin-top: 0px;
+}
 p.list-head {
-    margin-bottom: 0px;
+    margin-bottom: 6px;
 }
