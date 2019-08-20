@@ -470,18 +470,8 @@ class Page:
         self.txt = re.sub(r'^color:(.*)\n',
                           repl_color, self.txt, flags=re.MULTILINE)
 
-    # parse_ext_photo() gets a parse_ext_photo_str() helper function
-    # so that it can be called on a different piece of text (e.g. from
-    # its parent page).
-    def parse_ext_photo_str(self, s):
-        def repl_ext_photo(matchobj):
-            self.ext_photo_list.append((matchobj.group(1), matchobj.group(2)))
-            return ''
-
-        return re.sub(r'^(?:\s*([^:\n]*?)\s*:\s*)?(https://(?:calphotos.berkeley.edu/|www.calflora.org/cgi-bin/noccdetail.cgi)[^\s]+)\s*?\n', repl_ext_photo, s, flags=re.MULTILINE)
-
-    def parse_ext_photo(self):
-        self.txt = self.parse_ext_photo_str(self.txt)
+    def record_ext_photo(self, matchobj):
+        self.ext_photo_list.append((matchobj.group(1), matchobj.group(2)))
 
     # Check if check_page is an ancestor of this page (for loop checking).
     def is_ancestor(self, check_page):
@@ -511,11 +501,8 @@ class Page:
             com = matchobj.group(1)
             suffix = matchobj.group(2)
             sci = matchobj.group(3)
-            text = matchobj.group(4)
             if not suffix:
                 suffix = ''
-            if not text:
-                text = ''
             if not sci:
                 if com.islower():
                     sci = ''
@@ -557,7 +544,7 @@ class Page:
                     # different scientific name.
                     if not sci:
                         print('page {parent} has ambiguous child {child}'.format(parent=self.name, child=com))
-                        return '==' + com + suffix + '\n' + text
+                        return '==' + com + suffix
 
                     if (com in name_page and
                         com not in txt_list and
@@ -585,13 +572,9 @@ class Page:
             if sci:
                 child_page.set_sci(sci)
 
-            # If the child's key text includes an external photo, let the child
-            # parse those.
-            text = child_page.parse_ext_photo_str(text)
-
             # Replace the {+...} or {...} field with a bare +... line.
             # This will create the appropriate link later in the parsing.
-            return '==' + name + suffix + '\n' + text
+            return '==' + name + suffix
 
         # If the page's genus is explicitly specified,
         # make it the default for child abbreviations.
@@ -600,8 +583,25 @@ class Page:
         else:
             self.cur_genus = None
 
-        self.txt = re.sub(r'^==\s*([^:\n]*?)\s*?(,[-0-9]\S*|,)?\s*?(?::\s*([^\n]+?))? *\n((?:.+\n)*)',
-                          repl_child, self.txt, flags=re.MULTILINE)
+        c_list = []
+        for c in self.txt.split('\n'):
+            matchobj = re.match(r'==\s*([^:]*?)\s*?(,[-0-9]\S*|,)?\s*?(?::\s*(.+?))?\s*$', c)
+            if matchobj:
+                c_list.append(repl_child(matchobj))
+                continue
+
+            matchobj = re.match(r'\s*(?:([^:\n]*?)\s*:\s*)?(https://(?:calphotos.berkeley.edu/|www.calflora.org/cgi-bin/noccdetail.cgi)[^\s]+)\s*?$', c)
+            if matchobj:
+                if self.child:
+                    # Attach the external photo to the last (most recent) child.
+                    self.child[-1].record_ext_photo(matchobj)
+                else:
+                    # Attach the external photo to self.
+                    self.record_ext_photo(matchobj)
+                continue
+
+            c_list.append(c)
+        self.txt = '\n'.join(c_list) + '\n'
 
     def write_txt(self):
         def expand_child(matchobj):
@@ -1017,8 +1017,6 @@ class Page:
         #  a carriage return, then
         #  any amount of arbitrary text that does not include a blank line.
         s = re.sub(r'^==([^\n]*?)(,[-0-9]\S*|,)? *\n((?:.+\n)*)', repl_child_link, s, flags=re.MULTILINE)
-
-        s = self.parse_ext_photo_str(s)
 
         # Replace a pair of newlines with a paragraph separator.
         s = s.replace('\n\n', '\n<p/>\n')
@@ -1512,7 +1510,6 @@ for page in [x for x in name_page.values()]:
     page.parse_children()
 
 for page in name_page.values():
-    page.parse_ext_photo()
     page.record_genus()
 
 with open(root + '/ignore species.yaml', encoding='utf-8') as f:
