@@ -1,0 +1,12 @@
+sci:Calystegia collina
+xx:rare
+
+==coast range false bindweed:C. collina ssp. collina
+leaves:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0218+1800
+. leaf tip obtuse, lobes generally indistinct, blade triangular to reniform
+. rare: Mt. Tam and south bay
+
+==mount saint helena morning-glory:C. collina ssp. oxyphylla
+leaves:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0514+0630
+. leaf tip acute, lobes distinct, blade triangular
+. very rare: Mt. Tam

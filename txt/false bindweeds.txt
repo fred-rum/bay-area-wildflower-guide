@@ -1,4 +1,5 @@
 sci:Calystegia spp.
+x:rare
 
 Key features:
 . small and narrow bracts up to an inch below the calyx, or snuggled up and wide and +- hiding the calyx
@@ -35,7 +36,7 @@ Key features:
 . leaf +- triangular-hastate, with small backward-directed lobes or not; margin +- wavy or not
 . common
 
-==coast range false bindweed:C. collina ssp. collina
+==coast range false bindweed:C. collina
 . plant +- tomentose
 . stem decumbent, not or only weakly climbing, 8--15 cm, <= basal rosette of leaves
 . leaf reniform (basal lobes indistinct) to distinctly lobed; margin generally wavy

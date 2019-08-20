@@ -1,11 +1,15 @@
 {com:pacific false bindweed}
+xx:ca
+
 ==pacific false bindweed:Calystegia purpurata ssp. purpurata
 . stem strongly climbing, > 1 m
 . leaf triangular, tip acute, sinus V-shaped
 . bracts rarely lobed
+. common
 
 ==coastal bluff morning-glory:Calystegia purpurata ssp. saxicola
 . stem trailing to weakly climbing, generally < 1 m
 . leaf ovate-triangular to reniform, tip generally rounded to notched, sinus generally +- closed
 . bracts generally with small lobes
 . Ecology: Rocky coastal scrub
+. very rare

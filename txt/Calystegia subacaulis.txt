@@ -1,4 +1,5 @@
 com:hillside false bindweed
+xx:any
 
 ==hillside false bindweed:C. subacaulis ssp. subacaulis
 . stem generally +- 2 cm

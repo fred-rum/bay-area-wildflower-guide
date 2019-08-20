@@ -1003,9 +1003,6 @@ class Page:
                 c_list.append('</ul>')
                 list_depth -= 1
             c = c[list_depth:].strip()
-            if list_depth:
-                c_list.append('<li>{c}</li>'.format(c=c))
-                continue
 
             matchobj = re.match(r'==([^\n]*?)(,[-0-9]\S*|,)?\s*$', c)
             if matchobj:
@@ -1029,6 +1026,10 @@ class Page:
 
             if '{' not in c:
                 c = repl_easy_regex.sub(repl_easy, c)
+
+            if list_depth:
+                c_list.append('<li>{c}</li>'.format(c=c))
+                continue
 
             if c == '':
                 end_paragraph()
