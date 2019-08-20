@@ -969,9 +969,8 @@ class Page:
                 img = None
 
             if not img:
-                return '<p>' + link + '</p>\n' + text
-
-            if text:
+                c_list.append('<p>' + link + '</p>\n' + text)
+            elif text:
                 # Duplicate and contain the text link so that the following text
                 # can either be below the text link and next to the image or
                 # below both the image and text link, depending on the width of

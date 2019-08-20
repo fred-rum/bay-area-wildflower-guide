@@ -1,0 +1,48 @@
+sci:Hypericum
+x:hist
+
+Key features:
+. herb, subshrub, or shrub
+. petal length
+. leaf shape
+
+==bog st. john's-wort:H. anagalloides
+. herb
+. <b>petals 2--4 mm</b>
+.. all others are > 5 mm
+
+==goldwire:H. concinnum
+. herb
+. leaf linear to lanceolate, <b>generally folded, tip acute</b>
+. petals 10--15 mm
+
+==common st. john's-wort:H. perforatum
+. herb
+. leaf narrowly oblong, not folded, tip obtuse
+. sterile axillary branches generally 2--10 cm
+. petals 8--12 mm
+. the only local member is ssp. perforatum
+
+==scouler's st. john's wort:H. scouleri
+. herb
+. leaf ovate to elliptic, not folded, tip obtuse
+. sterile axillary branches generally < 2 cm
+. petals 7--12 mm
+
+==rose-of-sharon:H. calycinum
+. <b>shrub</b>
+. stem 1 or few-branched
+. flowers generally 1 per stem
+. <b>petals 25--40 mm</b>
+
+==canary island st. john's wort:H. canariense
+. <b>shrub</b>
+. stem many-branched
+. flowers generally > 1 per branch
+. <b>petals 12--17 mm</b>
+
+==H. grandifolium
+. shrub
+. large, leathery leaves
+. petals up to ~22 mm
+. not in Jepson's eFlora
