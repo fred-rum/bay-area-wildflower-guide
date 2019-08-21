@@ -1,86 +1,148 @@
 sci:Ceanothus spp.
+x:hist/rare
 
 Key features:
-. twig color, whether twigs are ridged
+. twig color, whether twigs are rigid or flexible, ridged or not, angled near tip or not
 . leaves opposite or alternate
-. leaf top warty or hairy or not
-. leaf bottom hairy or not
 . number of ribs from base of leaf
-. inflorescence shape
+. leaf adaxial, abaxial, and margin characteristics
 
 Flower color is not a good diagnostic.
 
-All leaves are dark green or dull green adaxially (on the upper surface) and paler abaxially (on the lower surface).
+All leaves are dark green or dull green adaxially and paler abaxially.
+
+[
+<h2>leaves opposite, 1-ribbed from base</h2>
+
+==C. jepsonii
+. twig: generally brown
+. leaf:
+.. blade 10--20 mm long, 5--13 mm wide, <b>+- folded lengthwise</b>
+... no other leaves are folded lengthwise
+.. adaxially yellow-green, glabrous
+.. abaxially +- short-strigose between veins
+.. margin thick to +- rolled-under, wavy, <b>toothed with 7--11 spines</b>
+... others may be toothed, but do not have spines
+. Mt. Tam
 
 ==buckbrush:C. cuneatus
-. Twigs: generally brown to gray-brown, no more than slightly fuzzy
-. Leaves:
-.. <b>opposite</b>, occasionally clustered
-.. 6--30 mm, 3--18 mm wide
-.. adaxially glabrous
-.. abaxially glabrous or with short stiff adpressed hairs, <b>1-ribbed from base</b>
-.. margin entire or teeth +- sharp <b>(not glandular)</b>
-. Inflorescence: <b>umbel-like</b> (flowers from a single point)
-. Flower: white, pale blue, blue, or lavender
-
-==wartleaf ceanothus:C. papillosus
-. Twigs: <b>green</b> to gray-brown
-. Leaves:
-.. alternate
-.. 11--50 mm, 6--15 mm wide
-.. adaxially <b>glandular-papillate (warty)</b>
-.. abaxially generally <b>densely hairy</b>, 1-ribbed from base
-.. <b>margin rolled under</b>, minutely gland-toothed, teeth 17--31
-. Inflorescence: raceme-like (flowers from pedicels along axis)
-. Flower: deep blue
-
-==blueblossom:C. thyrsiflorus
-. Twigs: <b>green, ridged</b>, angled distally, glabrous
-. Leaves:
-.. alternate
-.. 10--39 mm, 5--20 mm wide
-.. adaxially glabrous
-.. abaxially glabrous to puberulent between veins or not, 3-ribbed from base, veins +- raised, sparsely puberulent
-.. margin may be gland-toothed
-. Inflorescence: generally raceme-like (flowers from pedicels along axis) or <b>panicle-like</b> (branched raceme)
-. Flower: usually light to deep blue, but may be white
-
-==hairy ceanothus:C. oliganthus
-. Twigs: green to <b>reddish</b>, <b>not ridged</b> or angled, <b>may be hairy</b>
-. Leaves:
-.. alternate
-.. 11--30 mm, 5--25 mm wide
-.. adaxially +- glabrous to <b>short-hairy</b>
-.. abaxially sparsely to <b>densely short-hairy, especially veins</b>, 3-ribbed from base
-.. margin minutely gland-toothed, teeth 20--70
-. Inflorescence: generally raceme-like (flowers from pedicels along axis)
-. Flower: blue to purple-blue (or pale blue or white)
-
-<h3>Other ceanothus</h3>
-
-==sandscrub ceanothus:C. dentatus
-. very rare
+. twig: generally brown to gray-brown, glabrous to sparsely puberulent
+. leaf:
+.. occasionally clustered
+... others never clustered?
+.. blade 6--30 mm long, 3--18 mm wide
+.. adaxially dull green, glabrous
+.. abaxially paler, glabrous to +- strigose
+.. <b>margin entire or < 5 teeth near tip [not glandular]</b>
 
 ==coyote ceanothus:C. ferrisiae
-. near Anderson Lake
-
-==wavyleaf ceanothus:C. foliosus
-. mostly historical except at Mt. Madonna and Mt. Tamalpais
+. twig: brown to gray-brown, generally +- short-hairy, <b>not angled</b>
+. leaf:
+.. blade 12--25 mm long, 7--18 mm wide
+.. adaxially dark green, glabrous
+.. abaxially paler, short-strigose between evident veins
+.. <b>margin entire or with 5--35 +- sharp teeth</b> +- evenly distributed
+. possibly only historical; near Anderson Lake
 
 ==point reyes ceanothus:C. gloriosus
-. only near Mt. Tamalpais
-
-==deerbrush ceanothus:C. integerrimus
-. mostly Sierra Azul, Big Basin, and Soquel
-
-==chaparral whitethorn:C. leucodermis
-. Henry Coe
+. twig: green, red-brown, or brown, <b>generally angled near tips</b>
+. leaf:
+.. blade 13--45 mm long, 5--24 mm wide
+.. adaxially dark green, glabrous
+.. abaxially glabrous to puberulent
+.. <b>margin 13--35 toothed</b>, +- evenly distributed
+. rare:Mt. Tamalpais
 
 ==mason's ceanothus:C. masonii
-. rare near Mt. Tamalpais
+. twig: red-brown to dark brown or gray-brown, <b>generally angled near tips</b>
+.. leaf:
+.. blade 7--21 mm long, 4--13 mm wide
+.. adaxially dark green, glabrous
+.. abaxially short-strigose
+.. <b>margin 9--17 toothed</b>, +- evenly distributed
+. may be same species as {-point reyes ceanothus}
+. rare: Mt. Tamalpais
 
-{holl
-. eaved ceanothus:Ceanothus purpureus} - not nearby
+]
+[
+<h2>leaves alternate, 1-ribbed from base</h2>
+
+==wartleaf ceanothus:C. papillosus
+. twig: <b>green</b> to gray-brown
+. leaf:
+.. blade 11--50 mm long, 6--15 mm wide
+.. adaxially dark green, <b>glandular-papillate (warty)</b>
+.. abaxially paler, generally <b>densely hairy</b>
+.. <b>margin rolled under, minutely gland-toothed</b>, teeth 17--31
+. Flower: deep blue
+
+==wavyleaf ceanothus:C. foliosus
+. twig: green to red-green
+. leaf:
+.. blade 5--20 mm long, 3--13 mm wide, <b>+- folded lengthwise</b>
+.. 1-ribbed or faintly 3-ribbed from base
+.. adaxially dark green
+.. abaxially paler, glabrous to puberulent
+.. <b>margin not rolled under</b>, local varieties are <b>gland-toothed</b>, teeth 31--42
+. mostly historical except at Mt. Madonna and Mt. Tamalpais
+
+==deerbrush ceanothus:C. integerrimus var. integerrimus
+. twig: generally green
+. leaf:
+.. blade 15--53 mm long, 10--45 mm wide
+.. adaxially dull green, glabrous to puberulent
+.. abaxially pale green, glabrous to sparsely short-hairy
+.. <b>margin generally entire</b>, not rolled under
+. mostly Sierra Azul, Big Basin, and Soquel
+
+]
+[
+<h2>leaves alternate, 3-ribbed from base</h2>
 
 ==tobacco brush:C. velutinus
+. twig: green to red-brown, <b>flexible</b>
+. leaf:
+.. <b>blade 33--75 mm long, 13--55 mm wide</b>, leathery
+.. adaxially shiny green, glabrous, +- sticky
+.. abaxially glabrous to +- puberulent
+.. margin minutely gland-toothed, teeth 90--150+
 . Mt. Tamalpais
+
+==blueblossom:C. thyrsiflorus
+. twig: <b>green, flexible, ridged</b>, angled distally, [glabrous]
+. leaf:
+.. <b>blade 10--39 mm long, 5--20 mm wide</b>
+.. adaxially dark green, glabrous
+.. abaxially paler, glabrous to puberulent, veins +- raised
+.. margin +- gland-toothed
+
+==hairy ceanothus:C. oliganthus
+. twig: green to <b>reddish, flexible, not ridged</b> or angled, <b>[may be hairy]</b>
+. leaf:
+.. <b>blade 11--30 mm long, 5--25 mm wide</b>
+.. adaxially dark green, +- glabrous to short-hairy
+.. abaxially paler, sparsely to <b>densely short-hairy, especially veins</b>
+.. margin minutely gland-toothed, teeth 20--70
+
+==coast whitethorn:C. incanus
+. twig: pale gray to gray-green, <b>rigid</b>, thorn-like or not
+. leaf:
+.. blade 20--50+ mm long, 10--45 mm wide, <b>generally larger than {-chaparral whitethorn}</b>
+.. 3-ribbed from base
+.. adaxially dull green, glabrous to sparsely puberulent
+.. abaxially gray-green, strigose
+.. margin generally entire
+. uncommon: Santa Cruz Range
+
+==chaparral whitethorn:C. leucodermis
+. twig: pale gray to gray-green, <b>rigid, thorn-like</b>
+.. except where stated, all other twigs are flexible, not thorn-like
+. leaf:
+.. blade 12--30 mm long, 3--15 mm wide. <b>generally smaller than {-coast whitethorn}</b>
+. 3-ribbed from base
+.. adaxially dull green, glabrous to sparsely puberulent
+.. abaxially +- strigose, especially veins
+.. margin entire to +- glandular-serrate
+. rare
+
+]

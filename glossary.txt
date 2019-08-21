@@ -35,7 +35,9 @@
 {stellate} With 3+ branches radiating from a common point.  (Usually used to describe hair.)
 {stipe,stipes} In the knotweed family, a distal extension of the pedicel separated by a line, bulge, or difference in thickness.  In ferns, the frond stalk; equivalent to petiole.
 {stipule,stipules} Extension at the base of the petiole.
+{strigose} Having stiff, straight, appressed hairs.
 {subshrub,subshrubs} Similar to a shrub, but with the distal stems less woody.
+{twig,twigs} Final branch segment.
 {waif,waifs} A plant that has spread with human assistance but cannot reproduce or spread further on its own; will eventually die out assuming no further assistance.
 </dl>
 
