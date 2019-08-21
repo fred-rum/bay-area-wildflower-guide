@@ -1,5 +1,4 @@
 sci:Convolvulus spp.
+x:ba
 
 ==field bindweed:C. arvensis
-
-There is only one other bindweed realistically found in CA, and its range is not quite in my area.

@@ -1,28 +1,29 @@
 sci:Myosotis spp.
+x:rare
 
 Forget-me-nots generally develop in raceme-like cymes, coiled, then +- open in age.  Thus, individuals of the same species can look very different from each other.
 
 Key features:
+. calyx tube hairs
 . corolla size
-. leaf length vs. width
+. leaf length, width
 
 ==broadleaf forget-me-not:M. latifolia
-. corolla 5--10 mm wide, blue (but pink when young), prominent yellow ring in center.
-. inflorescence alternating below; flowers denser at the tip, possibly resembling a fiddleneck-like spiral.
-. leaves roughly 2--3x wider than corollas, roughly 2--3x longer than wide.
+. calyx tube hairs at least some spreading, some or all hooked
+. corolla 5--10 mm diameter, blue (but pink when young)
+. leaves roughly 2--3x wider than corollas, roughly 2--3x longer than wide
 
 ==changing forget-me-not:M. discolor
-. smaller corolla, often with different colors for each flower.
-. fiddleneck-like inflorescence.
+. calyx tube hairs at least some spreading, some or all hooked
+. corolla 1--3 mm diameter, often with different colors for each flower.
+. leaves sparse, generally 1--4 cm long, 2--8 mm wide
 . Santa Cruz range.
 
-The forget-me-nots above are the only ones that Jepson thinks grow in
-the bay area.  However, CalFlora has a few others observed here:
-
 ==bay forget-me-not:M. laxa
-. smaller corolla, but the inflorescence otherwise looks much like broadleaf forget-me-not.
+. calyx tube hairs appressed, not hooked at tip
+. corolla 2--5 mm diameter, blue (but yellow/cream when young)
+. leaves 1.5--8 cm long, 3--15 mm wide
 . small, narrow leaves.
 
 ==wood forget-me-not:M. sylvatica
-<p/>
-Appears in Calflora, but Jepson says that <a href="http://ucjeps.berkeley.edu/cgi-bin/get_cpn.pl?34218">all identifications in California are mistaken</a>.
+. appears in Calflora, but Jepson says that <a href="http://ucjeps.berkeley.edu/cgi-bin/get_cpn.pl?34218">all identifications in California are mistaken</a>.
