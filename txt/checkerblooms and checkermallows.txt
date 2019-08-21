@@ -1,21 +1,39 @@
 sci:Sidalcea spp.
+x:hist
+
+Jepson is fairly useless and doesn't describe what I see in CalPhotos.
+Key is based mostly on CalPhotos.
 
 Key features:
-. thin linear leaves cupping the involucre or not
+. thin linear or narrowish triangular bracts cupping the calyx or not
+. cauline leaf shape, regularity
 
 ==dwarf checkermallow:S. malviflora
-. lacks thin linear leaves cupping the involucre; has reduced upper leaves instead
+calyx:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1202+0238
+. no bracts cupping the calyx
+. leaf generally dentate or lobed, upper leaves generally much reduced
 . common throughout the bay area
 
 ==fringed checkerbloom:S. diploscypha
-. has thin linear leaves cupping the involucre
+calyx:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1209+0035
+. <b>thin bracts cup the calyx</b>
+. upper leaves have narrow lobes
 . scattered around the bay area
 
-==vernal pool checkerbloom:S. calycosa ssp. calycosa
+==annual checkerbloom:S. calycosa
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0619+1108
+. no bracts cupping the calyx
+. <b>cauline leaves deeply divided into 5--11 narrow lobes</b> [no secondary lobes]
 . Calero & Mt. Tam
 
 ==marin checkerbloom:S. hickmanii ssp. viridis
-. Marin
+. bracts cupping the calyx are narrowish triangular, not linear
+. leaves generally all along stem, generally alike in size, shape
+. <b>leaf blade coarsely crenate or shallowly lobed</b>
+. Mt. Tam
 
 ==maple-leaved checkerbloom:S. malachroides
+. <b>inflorescence in dense spike</b>
+. leaves generally all along stem, alike in size, shape
+. <b>leaf blade generally shallowly 5--7-lobed</b>
 . Nisene Marks

@@ -19,7 +19,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # =========================
-# Operating System Files
+# My files
 # =========================
 html/other observations.html
 html/_mod.html
@@ -29,3 +29,4 @@ prev/
 \#*#
 new/
 new.pickle
+debug.log

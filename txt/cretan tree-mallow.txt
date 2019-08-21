@@ -1,0 +1,3 @@
+sci:Malva multiflora
+sci_fj:Malva pseudolavatera
+sci_p:Malva pseudolavatera|Lavatera cretica

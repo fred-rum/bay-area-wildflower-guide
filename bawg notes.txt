@@ -167,3 +167,5 @@ text.  E.g. most sedges have triangular stems and grasses have round stems.
 Make links up to the key (or any other parent) use an anchor position
 that highlights the child's section of the key, similar to the
 glossary.  (May require similar positioning tricks.)
+
+peak rushrose is now Crocanthemum scoparium on iNaturalist
