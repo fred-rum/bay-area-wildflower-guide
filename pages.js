@@ -682,6 +682,7 @@ var pages=[
 {page:"beach tidytips",sci:"Layia carnosa",x:"u"},
 {page:"beach wormwood",sci:"Artemisia pycnocephala",x:"u"},
 {page:"bearded clover",sci:"Trifolium barbigerum",x:"u"},
+{page:"bearded iris",sci:"Iris germanica",x:"u"},
 {page:"bentham's broom",sci:"Acmispon cytisoides",x:"u"},
 {page:"biennial wormwood",sci:"Artemisia biennis",x:"u"},
 {page:"big pod lupine",sci:"Lupinus pachylobus",x:"u"},

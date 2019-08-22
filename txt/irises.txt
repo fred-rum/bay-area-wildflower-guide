@@ -1,4 +1,5 @@
 sci:Iris spp.
+x:hist/rare
 
 <b>Caution: IDs unsure.</b>
 
@@ -22,7 +23,7 @@ Parts of an iris labeled: <a href="https://www.pacificcoastiris.org/wildiris_thr
 . petals 4--6 cm, 6--12 mm wide, elliptic
 . ovary triangular
 . style branches 30--50 mm, crests 13--17 mm, stigmas triangular
-. Santa Cruz mtns, Windy Hill to Mt. Madonna, plus the East Bay from Chabot north; shady places
+. rare; Santa Cruz range, south from Foothills
 
 ==bowltube iris:I. macrosiphon
 . ID uncertain
@@ -35,7 +36,7 @@ Parts of an iris labeled: <a href="https://www.pacificcoastiris.org/wildiris_thr
 . petals 4--7 cm, 6--11 mm wide, elliptic
 . ovary triangular
 . style branches 19--33 mm, crests 8--18 mm, stigmas triangular
-. south bay (Mtn. View, Milpitas, and south); open to partly shaded slopes in oak or pine woodland
+. uncommon; open to partly shaded slopes in oak or pine woodland
 
 ==douglas iris:I. douglasiana
 . perianth light to dark lavender, deep red-purple, or pale cream, veined purple
@@ -72,7 +73,7 @@ Parts of an iris labeled: <a href="https://www.pacificcoastiris.org/wildiris_thr
 . petals 3--4 cm, 11--18 mm wide, narrowly obovate
 . ovary triangular
 . style branches 22--30 mm, crests 5--8 mm, <b>stigmas 2-lobed</b>
-. Santa Cruz mtns, Windy Hill to Mt. Madonna, plus the East Bay from Chabot north; damp areas in light shade
+. rare; damp areas in light shade
 
 ==yellow iris:I. pseudacorus
 . perianth generally <b>bright yellow or cream</b> with prominent brown veins, marks on sepals
@@ -84,6 +85,11 @@ Parts of an iris labeled: <a href="https://www.pacificcoastiris.org/wildiris_thr
 . petals obovate, clawed, 2--3 cm, 4--8 mm wide
 . style branches < 25 mm, crests 7--10 mm, <b>stigmas rounded</b>
 . Jasper, Marin, Mt. Tam; pond margins, estuaries
+
+==bearded iris:I. Xgermanica
+. <b>sepal obviously bearded</b>
+.. for all other irises, sepals are not obviously bearded
+. very rare
 
 ==purdy's iris:I. purdyi
 . ID uncertain

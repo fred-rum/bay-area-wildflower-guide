@@ -1,4 +1,3 @@
-{com:pacific false bindweed}
 xx:ca
 
 ==pacific false bindweed:Calystegia purpurata ssp. purpurata

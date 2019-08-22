@@ -161,6 +161,11 @@ Locations:
 
 def strip_sci(sci):
     sci_words = sci.split(' ')
+    if (len(sci_words) >= 2 and
+        sci_words[0][0].isupper() and
+        sci_words[1][0] == 'X'):
+        sci_words[1] = sci_words[1][1:]
+        sci = ' '.join(sci_words)
     if len(sci_words) == 4:
         # Four words in the scientific name implies a subset of a species
         # with an elaborated subtype specifier.  The specifier is stripped
@@ -291,15 +296,21 @@ class Page:
     # set_sci() can be called with a stripped or elaborated name.
     # Either way, both a stripped and elaborated name are recorded.
     def set_sci(self, sci):
+        sci_words = sci.split(' ')
+        if (len(sci_words) >= 2 and
+            sci_words[0][0].isupper() and
+            sci_words[1][0] == 'X'):
+            sci_words[1] = sci_words[1][1:]
+            sci = ' '.join(sci_words)
+            self.is_hybrid = True
+        else:
+            self.is_hybrid = False
+
         elab = elaborate_sci(sci)
         sci = strip_sci(sci)
 
         if sci in sci_page and sci_page[sci] != self:
             print('Same scientific name ({sci}) set for {name1} and {name2}'.format(sci=sci, name1=sci_page[sci].name, name2=self.name))
-
-        self.sci = sci
-        self.elab = elab
-        sci_page[sci] = self
 
         if elab[0].islower():
             self.level = 'above'
@@ -311,6 +322,11 @@ class Page:
                 self.level = 'species'
             else:
                 self.level = 'below'
+
+        self.sci = sci
+        self.elab = elab
+        sci_page[sci] = self
+                    
 
     def set_family(self):
         if self.family or self.no_family: # it's already been set
@@ -366,6 +382,8 @@ class Page:
             return '{type} <i>{name}</i>'.format(type=elab_words[0],
                                                  name=elab_words[1])
         else:
+            if self.is_hybrid:
+                elab = re.sub(r' ', ' &times; ', elab)
             return '<i>{elab}</i>'.format(elab=elab)
 
     def format_full(self, lines=2):
@@ -779,8 +797,11 @@ class Page:
             add_link(elab, None,
                      '<a href="https://www.inaturalist.org/taxa/{taxon_id}" target="_blank">iNaturalist</a>'.format(taxon_id=self.taxon_id))
         else:
+            i_sci = sci
+            if self.is_hybrid:
+                i_sci = re.sub(r' ', ' \xD7 ', i_sci)
             add_link(elab, None,
-                     '<a href="https://www.inaturalist.org/taxa/search?q={sci}&view=list" target="_blank">iNaturalist</a>'.format(sci=sci))
+                     '<a href="https://www.inaturalist.org/taxa/search?q={sci}&view=list" target="_blank">iNaturalist</a>'.format(sci=i_sci))
 
         if self.level != 'above' or self.elab.startswith('family '):
             # CalFlora can be searched by family,
