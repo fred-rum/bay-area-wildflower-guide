@@ -11,14 +11,18 @@ Key features:
 . spathes opposite or alternate (the spathes are the lowest bracts when there is more than one flower per inflorescence)
 
 Parts of an iris labeled: <a href="https://www.pacificcoastiris.org/wildiris_three_main_groups.html">one</a>, <a href="https://leonineiris.com/l9ie_partsoftheirisflower.php">two</a>.<br/>
-<a href="http://www.pacificcoastiris.org/spcni_downloads/spcni.v09.1.fall1981.pdf">How to measure</a> iris parts (starting on page 11).
+
+The perianth tube is measured from the base of the stamens to the top of the ovary.  (<a href="http://www.pacificcoastiris.org/spcni_downloads/spcni.v09.1.fall1981.pdf">How to measure</a> iris parts starting on page 11.)
+
+[
+<h2>Perianth tube > 30 mm</h2>
 
 ==fernald's iris:I. fernaldii
 . perianth yellow, veined darker
 . <b>perianth tube 35-60 mm</b>, narrow, gradually <b>funnel-shaped distally</b>
 . stem unbranched, 20--40 cm
 . <b>basal leaves 6--8 mm wide</b>
-. 1--3 cauline leaves, <b>similar to basal</b>
+. 1--3 cauline leaves, similar to basal</b>
 . sepals 5--7 cm, 7--21 mm wide, elliptic, clawed
 . petals 4--6 cm, 6--12 mm wide, elliptic
 . ovary triangular
@@ -38,24 +42,50 @@ Parts of an iris labeled: <a href="https://www.pacificcoastiris.org/wildiris_thr
 . style branches 19--33 mm, crests 8--18 mm, stigmas triangular
 . uncommon; open to partly shaded slopes in oak or pine woodland
 
+]
+[
+<h2>Perianth tube < 30 mm</h2>
+
+<h3>Stigmas triangular</h3>
 ==douglas iris:I. douglasiana
 . perianth light to dark lavender, deep red-purple, or pale cream, veined purple
 . <b>perianth tube 10--24 mm</b>, funnel-shaped
 . stem generally branched, 15--50 cm
 . <b>basal leaves 10--22 mm wide</b>
-. 1--3 cauline leaves, <b>similar to basal</b>
+. 1--3 cauline leaves, similar to basal
 . sepals 5--8 cm, 14--30 mm wide, obovate
 . petals 5--7 cm, 10--18 mm wide, obovate
 . ovary triangular, with nipple-like projection at tip
 . style branches 30--50 mm, crests 9--20 mm, <b>stigmas triangular</b>
+
+==yellow iris:I. pseudacorus
+. perianth generally <b>bright yellow or cream</b> with prominent brown veins, marks on sepals
+. <b>perianth tube 12--13 mm</b>, barrel-shaped
+. stem branched, 50--150 cm
+. <b>basal leaves 20--35 mm wide</b>, stiff, <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1115+4084">midvein conspicuous</a>
+. 3--6 cauline leaves, similar to basal
+. sepals widely oblanceolate, 5--8 cm, 35--50 mm wide
+. petals obovate, clawed, 2--3 cm, 4--8 mm wide
+. style branches < 25 mm, crests 7--10 mm, <b>stigmas rounded</b>
+. Jasper, Marin, Mt. Tam; pond margins, estuaries
+
+==bearded iris:I. Xgermanica
+beard:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0606+1819
+. <b>sepal obviously bearded</b>
+.. the beard is a dense line of hairs extending along the petal midline through the throat, but not much beyond
+.. for all other irises, sepals are not obviously bearded
+. stigmas rounded-triangular
+. very rare
+
+<h3>Stigmas 2-lobed</h3>
 
 ==central coast iris:I. longipetala
 . perianth <b>lilac-purple</b>, veined darker
 . <b>perianth tube 5--13 mm</b>, funnel-shaped
 . stem rarely branched, 30--60 cm
 . basal leaf 5--11 mm wide
-. 1--2 cauline leaves, <b>bract-like for at least 2/3 stem length</b>
-. <b>lowest bracts alternate (opposite)</b>, 0.5--10 cm apart
+. 1--2 cauline leaves, bract-like for at least 2/3 stem length
+. <b>lowest bracts alternate</b> (rarely opposite), 0.5--10 cm apart
 . sepals 6--10 cm, 30--50 mm wide, obovate
 . petals 5--9 cm, 15--21 mm wide, elliptic
 . ovary rounded
@@ -67,7 +97,7 @@ Parts of an iris labeled: <a href="https://www.pacificcoastiris.org/wildiris_thr
 . <b>perianth tube 11--14 mm</b>, constricted near ovary
 . stem generally branched, 25--40 cm
 . basal leaf 25--35 mm wide
-. 2--4 cauline leaves, <b>bract-like for at least 2/3 length</b>, similar to basal especially near tip [huh?]
+. 2--4 cauline leaves, bract-like for at least 2/3 length, but also similar to basal especially near tip [huh?]
 . <b>lowest 2 bracts opposite</b>
 . sepals 3--5 cm, 18--20 mm wide, obovate
 . petals 3--4 cm, 11--18 mm wide, narrowly obovate
@@ -75,22 +105,4 @@ Parts of an iris labeled: <a href="https://www.pacificcoastiris.org/wildiris_thr
 . style branches 22--30 mm, crests 5--8 mm, <b>stigmas 2-lobed</b>
 . rare; damp areas in light shade
 
-==yellow iris:I. pseudacorus
-. perianth generally <b>bright yellow or cream</b> with prominent brown veins, marks on sepals
-. <b>perianth tube 12--13 mm</b>, barrel-shaped
-. stem branched, 50--150 cm
-. <b>basal leaves 20--35 mm wide</b>, stiff, <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1115+4084">midvein conspicuous</a>
-. 3--6 cauline leaves, <b>similar to basal</b>
-. sepals widely oblanceolate, 5--8 cm, 35--50 mm wide
-. petals obovate, clawed, 2--3 cm, 4--8 mm wide
-. style branches < 25 mm, crests 7--10 mm, <b>stigmas rounded</b>
-. Jasper, Marin, Mt. Tam; pond margins, estuaries
-
-==bearded iris:I. Xgermanica
-. <b>sepal obviously bearded</b>
-.. for all other irises, sepals are not obviously bearded
-. very rare
-
-==purdy's iris:I. purdyi
-. ID uncertain
-. Monte Bello
+]
