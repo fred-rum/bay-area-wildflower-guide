@@ -1,4 +1,0 @@
-sci:Iris purdyi
-color: cream
-
-<b>Warning: ID uncertain.</b>

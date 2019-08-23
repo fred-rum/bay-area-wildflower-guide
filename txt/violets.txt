@@ -1,4 +1,5 @@
 sci:Viola spp.
+x:hist/rare
 
 Key features:
 . corolla color
@@ -23,9 +24,9 @@ Key features:
 . no cleistogamous flower present
 . common
 
-==V. purpurea
+==goosefoot violet:V. purpurea
 . Leaves simple, basal and cauline
-. 1--6 basal leaves per caudex [subterranean woody base]
+. 1--6 basal leaves per caudex [subterranean woody base], <b>petioles winged</b>
 . stems prostrate to erect, with leaves, peduncles
 . cleistogamous flower present [non-opening, self-polinating]
 . scattered
@@ -40,13 +41,13 @@ Key features:
 . Lower stem erect, without leaves, peduncles
 . Santa Cruz range and Oakland
 
-==V. douglasii
+==douglas' violet:V. douglasii
 . <b>Leaves 2-pinnate-compound</b>
 . Leaf blades longer than wide; leaf segments 3--5, 1--2.5(5) mm wide
 . lateral 2 petals bearded with cylindric hairs
 . Coe, Ohlone
 
-==V. sheltonii
+==shelton's violet:V. sheltonii
 . <b>Leaves ternate-compound</b>
 . Leaf blades wider than long; leaf segments 3, 2--10 mm wide
 . lateral 2 petals +- bearded or not with club-shaped hairs
@@ -57,11 +58,11 @@ Key features:
 [
 <h2>violet violets</h2>
 
-==V. adunca ssp. adunca
+==western dog violet:V. adunca ssp. adunca
 . stems prostrate to erect, with leaves, peduncles
 . scattered near pacific coast and Oakland
 
-==V. odorata
+==eurasian sweet violet:V. odorata
 . no stem [just a peduncle]
 . Bonny Doon, possibly Long Ridge
 
