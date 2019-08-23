@@ -952,7 +952,7 @@ class Page:
             # of its own.
             if ((self.level == 'genus' and child.level == 'species') or
                 (self.level == 'species' and child.level == 'below')):
-                child.key_txt = link_glossary_words(text)
+                child.key_txt = text
 
             link = child.create_link(2)
 
@@ -1064,6 +1064,9 @@ class Page:
         end_child_text()
         s = '\n'.join(c_list)
 
+        self.txt = s
+
+    def parse2(self):
         # Replace {-[name]} with an inline link to the page.
         def repl_link(matchobj):
             name = matchobj.group(1)
@@ -1074,6 +1077,10 @@ class Page:
                 print('Broken link {{-{name}}} on page {page}'.format(name=name, page=self.name))
                 return '{-' + name + '}'
 
+        if re.search('\S', self.txt):
+            s = self.txt
+        else:
+            s = self.key_txt
         s = link_glossary_words(s)
         s = re.sub(r'{-([^}]+)}', repl_link, s)
         self.txt = s
@@ -1220,10 +1227,7 @@ class Page:
 
                 w.write('</div>\n')
 
-            if re.search('\S', self.txt):
-                s = self.txt
-            else:
-                s = self.key_txt
+            s = self.txt
             w.write(s)
 
             if self.jpg_list or self.ext_photo_list or s:
@@ -1808,6 +1812,9 @@ top_list = [x for x in name_page.values() if not x.parent]
 # Turn txt into html for all normal and default pages.
 for page in name_page.values():
     page.parse()
+
+for page in name_page.values():
+    page.parse2()
 
 def by_incomplete_obs(page):
     def count_flowers(page):
