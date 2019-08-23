@@ -1,4 +1,5 @@
 sci:Primula spp.
+x:ba
 
 ==henderson's shooting star:P. hendersonii
 . peduncle purple (or mix of purple/green)

@@ -1,7 +1,13 @@
 sci:Oxalis spp.
+x:rare
 
 [
 <h3>purple or pale flowers</h3>
+
+Key features:
+. bract location on peduncle
+. leaf arrangement
+. stem branched or none
 
 ==redwood sorrel:O. oregana
 . stem +- 0
@@ -36,6 +42,10 @@ sci:Oxalis spp.
 [
 <h3>yellow flowers</h3>
 
+Key features:
+. petal length
+. adaxial leaf hairs (dense appressed, sparse spreading, or none)
+
 ==bermuda buttercup:O. pes-caprae
 . <b>stem generally underground</b>
 . <b>leaves in loose, +- basal rosette</b>; petiole < 12 cm
@@ -45,20 +55,31 @@ sci:Oxalis spp.
 . petals < 2.5 cm, yellow
 
 ==creeping woodsorrel:O. corniculata
+leaf:https://calphotos.berkeley.edu/cgi/img_query?enlarge=4444+4444+0510+1222
+red spots:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1107+1653
 . stem rooting at nodes, < 50 cm, hairs appressed to spreading
 . leaf cauline; petiole < 7 cm
-. leaflets < 2 cm, ciliate, hairs generally 0 adaxially, sparse, appressed abaxially
+. leaflets < 2 cm, ciliate, <b>hairs generally 0 adaxially</b>, sparse, appressed abaxially
 . inflorescence: cyme, +- umbel-like or not, 2--7-flowered; pedicel < 1 cm, hairs appressed
 . sepals < 4.5 mm, linear to narrowly ovate
-. <b>petals generally < 8 mm</b>, oblong to spoon-shaped, yellow, often with red spots below middle
-. stem rooting at nodes
+. <b>petals generally < 8 mm</b>, oblong to spoon-shaped, yellow, <b>sometimes with red spots below middle</b>
 
 ==hairy woodsorrel:O. pilosa
+leaf:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1011+1447
 . stem erect to decumbent, < 40 cm, rooting at nodes or not, hairs 0.7--1.2 mm, dense, generally spreading
 . <b>leaves cauline</b>
-. leaflets < 1.5 cm, appressed-hairy
+. leaflets < 1.5 cm, <b>appressed-hairy</b>
 . inflorescence: 1--3-flowered; pedicel < 2 cm, hairs dense, generally spreading, occasionally appressed
 . sepals 3.5--6 mm, lanceolate, tips ciliate
 . <b>petals generally 8--12 mm</b>, yellow
+
+==dwarf woodsorrel:O. micrantha
+leaf:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0405+1277
+. stem erect, < 20 cm, hairy
+. leaf cauline; petiole < 5 cm
+. leaflets < 13 mm, <b>hairs sparse, spreading</b>
+. inflorescence raceme-like, 6--14-flowered
+. sepals < 4 mm mm
+. <b>petals < 12 mm</b>, yellow
 
 ]
