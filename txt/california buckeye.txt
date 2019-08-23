@@ -1,2 +1,4 @@
 sci:Aesculus californica
 color: white
+x:ca
+xx:none
