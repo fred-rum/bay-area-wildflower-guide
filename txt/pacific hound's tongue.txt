@@ -1,2 +1,5 @@
 sci:Adelinia grande
+sci_fpj:Cynoglossum grande
 color: blue
+x:ba
+CalFlora has Cynoglossum occidentale in a few state parks in 2006, which may or may not be a misidentification.  In any case, Cynoglossum is now split into other genuses, so C. occidentale is no longer grouped with C. grande.
