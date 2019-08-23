@@ -952,7 +952,7 @@ class Page:
             # of its own.
             if ((self.level == 'genus' and child.level == 'species') or
                 (self.level == 'species' and child.level == 'below')):
-                child.key_txt = text
+                child.key_txt = link_glossary_words(text)
 
             link = child.create_link(2)
 
@@ -1074,8 +1074,8 @@ class Page:
                 print('Broken link {{-{name}}} on page {page}'.format(name=name, page=self.name))
                 return '{-' + name + '}'
 
+        s = link_glossary_words(s)
         s = re.sub(r'{-([^}]+)}', repl_link, s)
-
         self.txt = s
 
     def any_parent_within_level(self, within_level_list):
@@ -1377,19 +1377,17 @@ def link_glossary_words(txt):
         allowed = matchobj.group(1)
         disallowed = matchobj.group(2)
         allowed = re.sub(glossary_regex, repl_glossary, allowed)
-        if disallowed:
-            return allowed + disallowed
-        else:
-            return allowed
+        return allowed + disallowed
 
-    out_list = []
-    for s in txt.split('\n'):
-        if s and not s.startswith('=='):
-            # find non-links followed (optionally) by links and
-            # perform substitutions only on the non-link parts.
-            s = re.sub('([^\{\}]*)(\{[^\{\}]*\})?', repl_sub_glossary, s)
-        out_list.append(s)
-    return '\n'.join(out_list)
+    # find non-links followed (optionally) by links and
+    # perform substitutions only on the non-link parts.
+    # The first group is non-greedy, but still starts as soon as possible
+    # (i.e. at the beginning of the string or just after the previous match).
+    # The second part is also non-greedy, looking for the shortest amount
+    # of text to close the link.
+    txt = re.sub(r'(.*?)(\Z|<a\s.*?</a>|{.*?})', repl_sub_glossary, txt,
+                 flags=re.DOTALL)
+    return txt
 
 with open(root + '/glossary.txt', mode='r') as f:
     glossary_txt = f.read()
@@ -1809,7 +1807,6 @@ top_list = [x for x in name_page.values() if not x.parent]
 
 # Turn txt into html for all normal and default pages.
 for page in name_page.values():
-    page.parse_glossary()
     page.parse()
 
 def by_incomplete_obs(page):

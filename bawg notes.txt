@@ -167,11 +167,3 @@ text.  E.g. most sedges have triangular stems and grasses have round stems.
 Make links up to the key (or any other parent) use an anchor position
 that highlights the child's section of the key, similar to the
 glossary.  (May require similar positioning tricks.)
-
-Substitute {page links}, then make glossary substitutions while
-excluding text from <a> to </a>.  This can perhaps be done on the
-multi-line text since with links excluded, there isn't really anything
-to screw up.  It also has the advantage of properly excluding
-multi-line links, if there are any of those.  It should also be
-faster, which may be useful if it's slow to break up links from
-non-link text.
