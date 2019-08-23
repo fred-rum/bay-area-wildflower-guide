@@ -1,9 +1,10 @@
 sci:Delphinium spp.
+x:hist/rare
 
 In most species each flower consists of five petal-like sepals which
 grow together to form a hollow pocket with a spur/claw at the end.
 Within the sepals are four true petals, small, inconspicuous, and
-commonly colored similarly to the sepals.  The long spur of the upper
+usually colored similarly to the sepals.  The long spur of the upper
 sepal encloses the nectar-containing spurs of the two upper petals.
 
 Key features:
