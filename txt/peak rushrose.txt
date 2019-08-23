@@ -1,2 +1,4 @@
-sci:Helianthemum scoparium
+sci:Crocanthemum scoparium
 color: yellow
+x:ba
+xx:uncat

@@ -459,7 +459,7 @@ var pages=[
 {page:"pacific sanicle",sci:"Sanicula crassicaulis",x:"o"},
 {page:"pacific trillium",sci:"Trillium ovatum ssp. ovatum",x:"o"},
 {page:"panicled willowherb",sci:"Epilobium brachycarpum",x:"o"},
-{page:"peak rushrose",sci:"Helianthemum scoparium",x:"o"},
+{page:"peak rushrose",sci:"Crocanthemum scoparium",x:"o"},
 {page:"peruvian peppertree",sci:"Schinus molle",x:"o"},
 {page:"prettyface",sci:"Triteleia ixioides",x:"k"},
 {page:"prickly pears",sci:"Opuntia spp.",x:"k"},

@@ -467,7 +467,7 @@ class Page:
                     self.species_key_incomplete = True
             return ''
 
-        self.txt = re.sub(r'^(x|xx):\s*(!?)(none|ba|ca|any|hist|rare|hist/rare|more)\s*?\n',
+        self.txt = re.sub(r'^(x|xx):\s*(!?)(none|ba|ca|any|hist|rare|hist/rare|more|uncat)\s*?\n',
                           repl_complete, self.txt, flags=re.MULTILINE)
 
     def parse_color(self):
@@ -1110,6 +1110,11 @@ class Page:
                         print("x:none used for " + self.name)
                     else:
                         w.write('This species has no subspecies or variants.')
+                elif complete == 'uncat':
+                    if top == 'genus':
+                        print("x:uncat used for " + self.name)
+                    else:
+                        w.write("This species has subspecies or variants which I haven't yet categorized.")
                 elif complete == 'more':
                     w.write('<b>Caution: There are other {members} of this {top} not yet included in this guide.</b>'.format(members=members, top=top))
                 else:
