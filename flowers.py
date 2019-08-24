@@ -1248,7 +1248,7 @@ class Page:
     def record_genus(self):
         # record all pages that are within each genus
         sci = self.sci
-        if self.level in ('species', 'below'):
+        if self.level in ('genus', 'species', 'below'):
             genus = sci.split(' ')[0]
             if genus not in genus_page_list:
                 genus_page_list[genus] = []
@@ -1571,9 +1571,6 @@ for page in name_page.values():
 for page in [x for x in name_page.values()]:
     page.parse_children()
 
-for page in name_page.values():
-    page.record_genus()
-
 with open(root + '/ignore species.yaml', encoding='utf-8') as f:
     sci_ignore = yaml.safe_load(f)
 
@@ -1840,6 +1837,9 @@ if len(sys.argv) > 2 and sys.argv[2] == 'x':
 # Find any genus with multiple species.
 # Check whether all of those species share an ancestor key page in common.
 # If not, print a warning.
+for page in name_page.values():
+    page.record_genus()
+
 for genus in genus_page_list:
     page_list = genus_page_list[genus]
     if len(page_list) > 1:

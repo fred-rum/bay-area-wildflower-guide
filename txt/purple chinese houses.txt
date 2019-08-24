@@ -1,2 +1,0 @@
-sci:Collinsia heterophylla
-color: purple

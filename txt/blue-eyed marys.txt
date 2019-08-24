@@ -1,44 +1,71 @@
 sci:Collinsia spp.
+x:rare
 
 <b>Caution: IDs unsure</b>
 
 Blue-eyed marys have 5 corolla lobes: 2 forming the upper lip, 3 forming the lower lip with the center of those forming a keel beneath enclosing the stamens and style.
 
-This page is not particularly complete because I don't know which so-called key features are actually visible and diagnostic.
-
-(Potential) key features:
-. whorls dense or loose
+Key features:
+. number of flowers per whorl in lowermost and uppermost whorls
 . proximal (lowest) pedicels > or < calyx
-. corolla throat as wide as long or longer than wide
-. upper filaments have a basal spur (1--2 mm) curved into a pouch or the spur is shorter or missing.  Requires taking apart a flower.
-. corolla length
 . upper corolla lip short compared to lower lip or +- equal
-. leaf abaxially (bottom) glabrous or hairy
+. corolla throat as wide as long or longer than wide
 . leaf shape
-. calyx shape
+. leaf abaxially glabrous or hairy
 
-==purple chinese houses:C. heterophylla
-. flower whorls dense; proximal pedicels < calyx
-. corolla throat as wide as long
-. Leaf: lance-deltate, toothed
-. calyx lobe tips generally acute, glabrous to shaggy-hairy
-. corolla throat hairy inside, strongly angled to tube, as wide as long, pouch prominent, +- square
+[
+<h2>flower whorls dense<br/>
+proximal pedicels < calyx</h2>
+
+==chinese-houses:C. heterophylla var. heterophylla
+. <b>corolla lips +- =</b>
+. <b>corolla throat as wide as long</b>
 . upper lip white to lavender or tipped dark violet, wine-spotted and generally +- red lined near base
 . lower lip +- white to rose-purple, lowest lobe generally with darker red tip
+. leaf lance-deltate, toothed, glabrous abaxially (at most ciliate on midvein)
 
 ==white blue-eyed mary:C. bartsiifolia
-. flower whorls dense; proximal pedicels < calyx
-. corolla throat longer than wide
-. Corolla lips +- = in fully open flowers
-. Corolla generally white to +- purple, upper lobes +- toothed (backs often touching or parallel); leaves +- thick, crenate
+. <b>corolla lips +- = in fully open flowers</b>, upper lobes +- toothed, lateral lobes notched
+. <b>corolla throat longer than wide</b>
+. corolla generally white to pale lavender to pink-purple
+. leaf +- thick, +- oblong, crenate, rolled under, generally finely hairy
 
-==san francisco collinsia:C. multicolor
-. Flowers 1 to loosely whorled; proximal pedicels > calyx
-. Leaves generally +- lance-deltate, generally coarsely toothed; proximal-most pedicels >> calyx, distal pedicels +- = calyx
-
-==fewflower blue-eyed mary:C. sparsiflora
-. (two variants)
-
-==maiden blue-eyed mary:C. parviflora
+==round-headed chinese houses:C. corymbosa
+flowers:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0507+2000
+. inflorescence +- head-like
+. <b>corolla upper lobes +- 1 mm</b>
+. corolla generally +- white, upper lobes +- brown, throat pale lavender, generally undotted
+. <b>leaf glabrous abaxially</b>
+. very rare
 
 ==sticky chinese houses:C. tinctoria
+flowers:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1205+1493
+. inflorescence generally of several whorls
+. <b>corolla upper lobes >> 1 mm but less than &frac12; of lower lip</b>
+. corolla generally white to +- yellow or pale lavender(purple), upper lobes red-banded, lateral lobes generally red-dotted
+. <b>leaf hairy abaxially</b>
+. rare: Mt. Diablo
+
+]
+[
+<h2>flowers loosely whorled or not whorled<br/>
+proximal pedicels > calyx</h2>
+
+==san francisco collinsia:C. multicolor
+. lower whorls with 1--2 flowers; upper whorls with 3+ flowers, +- crowded
+. lower pedicels >> calyx; upper pedicels +- = calyx
+. leaf margin generally coarsely toothed
+
+==maiden blue-eyed mary:C. parviflora
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0209+0778
+. lower whorls with generally 1 flower; upper whorls with 3--5 flowers, often reflexed [angled down from the stem, then back up for the flower]
+. all pedicels +- equal, > calyx
+. leaf margin entire, generally rolled under [but not by much]
+
+==fewflower blue-eyed mary:C. sparsiflora
+. 1--2 flowers per node
+. all pedicels +- equal, generally >> calyx
+. leaf margin entire
+. (two variants)
+
+]
