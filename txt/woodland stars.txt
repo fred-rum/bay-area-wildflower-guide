@@ -1,7 +1,23 @@
 sci:Lithophragma spp.
+x:ba
 
 ==hillside woodland star:L. heterophyllum
-. hypanthium (calyx base) truncate
+. hypanthium (fused calyx) base truncate
+. petals with 3 lobes
+
+==bolander's woodland star:L. heterophyllum var. bolanderi
+. hypanthium base obtusely tapered or hemispheric
+. petals entire or with > 3 lobes
+. very rare: east bay
 
 ==san francisco woodland-star,2:L. affine
-. hypanthium (calyx base) tapered to pedicel
+. hypanthium tapered to pedicel
+. basal leaves lobed +- <= 50% to base
+. most proximal cauline leaf 3-lobed
+. petals white
+
+==pink woodland star:L. parviflorum var. parviflorum
+. basal leaves lobed > &frac34; to base to 3-parted
+. most proximal cauline leaf 3-parted
+. petals white or pink
+. very rare
