@@ -1,38 +1,82 @@
 sci:Ranunculus spp.
+x:rare
 
-There are quite a few buttercups in the bay area, but I've only bothered to look up ID info for those that look like california buttercup.
+Key features:
+. stem angle, rooting at nodes or not, growing from water/mud or not
+. petal number, length
+. leaf shape, especially submerged leaves
+. receptacle bristly or glabrous
+
+==creeping buttercup:R. repens
+. <b>stems decumbent or creeping, rooting at nodes</b>
+. 5 petals, yellow
+. leaf ternate
+. Foothills, Wilder
+
+==lobb's aquatic buttercup:R. lobbii
+. stem low from water or mud
+. 5 petals, 4--6 mm long, 2--5 mm wide, <b>white</b>
+. floating leaves deeply 3-parted
+. <b>submerged leaves generally 2--3-dissected</b>
+
+==common water-crowfoot:R. aquatilis
+. stem low from water or mud
+. 5 petals, 4--7 mm long, 1--5 mm wide, <b>white</b>
+. floating leaves not described
+. <b>submerged leaves generally 3--6-dissected</b>
+
+==cursed crowfoot:R. sceleratus
+. <b>stem erect from water or mud</b>
+. 3--5 petals, 2--5 mm long, 1--3 mm wide, yellow
+. very rare: Mt. Diablo
+
+See also {-rough-fruited buttercup} below for another potentially aquatic buttercup.
 
 ==california buttercup:R. californicus
 . stems erect to ascending or decumbent (prostrate), generally not rooting at nodes
-. <b>9--17 petals</b>
+. <b>9--17 petals</b>, 7--14 mm long, 2--6 mm wide, yellow
 . very common
 
 [
-Jepson distinguishes these only by details of fruit shape.  I'll have to look for other key features if I find any erect/ascending buttercups with 5--7 petals.
+<h2>Difficult buttercups</h2>
 
-==rough-fruited buttercup:R. muricatus
-. stem erect to decumbent
-. 5 petals
-. common
+These buttercups all have <= 7 petals and potentially grow erect from land.  Jepson distinguishes these buttercups by fruit.  If you find any with fruit, consult Jepson.  Here I've tried to distinguish them by flower and leaf characteristics.  They are sorted here by petal length.
 
-==R. canus
+==straightbeak buttercup:R. orthorhynchus
 . stem erect to decumbent
-. 5--7 petals
-. Mission Peak, Sunol, Mt. Diablo
-
-==R. occidentalis
-. stem erect to decumbent
-. 5--6 petals
-. Sierra Azul, Del Valle, Mt. Diablo
-
-==R. orthorhynchus
-. stem erect to decumbent
-. 5--6 petals
+. 5--6 petals, <b>8--18 mm long</b>, yellow adaxially, yellow or red abaxially depending on subspecies
+. <b>receptacle bristly</b>
 . Pleasanton Ridge, Chabot
 
-]
+==sacramento valley buttercup:R. canus var. canus
+. stem erect to decumbent
+. 5--7 petals, <b>6--12 mm long</b>, 3--6 mm wide, yellow
+. receptacle glabrous
+. basal and proximal cauline leaves 3-parted, segments 1--3-lobed
+. Mission Peak, Sunol, Mt. Diablo
 
-==R. repens
-. <b>stems decumbent or creeping</b>, rooting at nodes
-. 5 petals (rarely 150?!)
-. Foothills, Wilder
+==western buttercup:R. occidentalis var. occidentalis
+. stem erect to decumbent
+. 5--6 petals, <b>5--10 mm long</b>, 3--6 mm wide, yellow
+. receptacle glabrous
+. basal and proximal cauline leaves 3-parted or 1-ternate, ultimate segments entire or dentate
+. Sierra Azul, Del Valle, Mt. Diablo
+
+==rough-fruited buttercup:R. muricatus
+. stem erect to prostrate, from ground or water
+. 5 petals, <b>4--8 mm long</b>, 2--4.5 mm [wide], yellow
+. <b>receptacle bristly</b>
+. common
+
+==woodland buttercup:R. uncinatus
+. stem erect
+. 5 petals, <b>2--4 mm long</b>, 1--2 mm wide, yellow
+. receptacle glabrous
+. rare
+
+==pubescent-fruited buttercup:R. hebecarpus
+. stem erect
+. 0--5 petals, <b>1.3--2 mm long</b>, 0.3--0.7 mm wide, yellow
+. receptacle glabrous
+
+]

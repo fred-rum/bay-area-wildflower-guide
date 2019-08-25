@@ -167,3 +167,12 @@ text.  E.g. most sedges have triangular stems and grasses have round stems.
 Make links up to the key (or any other parent) use an anchor position
 that highlights the child's section of the key, similar to the
 glossary.  (May require similar positioning tricks.)
+
+If all modified pages are under a single modified parent (excluding
+"all" and color lists), bring up that parent page automatically.  (Or
+simply list it first, or list the modified pages hierarchically.
+Might be able to reuse the html generation for color lists.)
+
+Have a way to link from txt to the key to a flower (e.g. for
+rough-fruited buttercup in buttercups).
+E.g. {-buttercups#rough-fruited buttercup}

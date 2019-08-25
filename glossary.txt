@@ -29,6 +29,7 @@
 {pinnate,pinnately} Refers to a two-dimensional branched structure.  Typically refers to lobes or leaflets in a leaf.  1-pinnate means that the structure has 1 level of branches arising from a central axis.  2-pinnate means that the branches also have branches, etc.
 {pinnule,pinnules} The 2nd-order division of a frond blade.  (The 1st-order division of a pinna.)
 {proximal,proximally} Growing closer to the base and farther from the tip of a structure.  The structure is often implied; e.g. a proximal leaf grows close to the base of the whole plant.  Contrast distal.
+{receptacle,receptacles} The end of the pedicel (or sometimes the peduncle), where the flower (or head) is attached.
 {sagittate} Shaped like an arrowhead, with basal lobes near parallel to the axis.
 {sepal,sepals} A free or fused member of the calyx.  Usually green, or often the same color as the petals, or sometimes different.
 {shrub,shrubs} Woody plant, shorter than a tree, generally with many branches from the base.
