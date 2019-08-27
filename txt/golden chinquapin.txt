@@ -1,5 +1,4 @@
 sci:Chrysolepis chrysophylla
-color: other
 xx:any
 
 ==:C. chrysophylla var. chrysophylla
