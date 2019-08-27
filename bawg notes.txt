@@ -176,3 +176,5 @@ Might be able to reuse the html generation for color lists.)
 Have a way to link from txt to the key to a flower (e.g. for
 rough-fruited buttercup in buttercups).
 E.g. {-buttercups#rough-fruited buttercup}
+
+Add warning if [ and ] are unbalanced.

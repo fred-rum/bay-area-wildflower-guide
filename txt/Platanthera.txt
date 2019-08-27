@@ -1,0 +1,66 @@
+x:hist
+
+As in other orchids, there are 3 sepals (1 upper and 2 lateral) and 3
+petals (1 lower and 2 lateral).
+
+All California species have a spur sticking out behind the lower petal
+which is key to identification.  This spur may be difficult to spot
+since it is likely to be greenish and snuggled up against the flower
+stalk.
+
+Key features:
+. leaves parallel to stem and folded lengthwise or ascending and not folded
+. perianth color
+. sepals spreading or reflexed
+. spur length, held horizontally or curved along the stalk.
+
+[
+CalFlora and Jepson have this species under Platanthera.
+
+==sierra bog orchid:P. dilatata var. leucostachys
+. <b>2 leaves, alternate, along stem, with 1 lengthwise fold</b>
+. perianth white to cream
+
+]
+[
+CalFlora and Jepson have these species under their old genus, Piperia.
+
+These flowers have 2--5 +- basal leaves which Jepson does not describe
+in detail.  Possibly they are ascending, but not completely parallel
+to the stem nor folded lengthwise.
+
+[
+<h3>perianth white</h3>
+
+==flat spurred piperia:P. transversa
+. spur 6--12 mm, <b>+- straight and horizontal</b>
+. perianth white
+
+==coast piperia:P. elegans ssp. elegans
+. spur 7--14 mm, <b>curved down along flower stalk</b>
+. perianth white
+
+==whiteflower rein orchid:P. ephemerantha
+. <b>spur 1.5--3.5 mm</b>, pointed down or curved +- forward
+. perianth white
+
+]
+[
+<h3>perianth greenish</h3>
+
+==michael's rein orchid:P. michaelii
+. spur 8--12 mm, curved down along flower stalk
+. perianth green to yellow-green
+. <b>lower sepals spreading</b>
+
+==denseflower rein orchid:P. elongata
+. spur 6.5--18 mm, slender, curved down along flower stalk
+. perianth green
+. <b>lower sepals +- reflexed</b>
+
+==alaska piperia:P. unalascensis
+. <b>spur 2--5.5 mm</b>, pointed back or down
+. perianth green
+
+]
+]

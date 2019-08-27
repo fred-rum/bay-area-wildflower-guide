@@ -1,0 +1,4 @@
+sci:Platanthera elegans ssp. elegans
+sci_fjp:Piperia elegans ssp. elegans
+color: white
+xx:ba
