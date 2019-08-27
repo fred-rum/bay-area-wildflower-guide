@@ -950,7 +950,7 @@ class Page:
             # Give the child a copy of the text from the parent's key.
             # The child can use this (pre-parsed) text if it has no text
             # of its own.
-            if ((self.level == 'genus' and child.level == 'species') or
+            if ((self.level == 'genus' and child.level in ('species', 'below')) or
                 (self.level == 'species' and child.level == 'below')):
                 child.key_txt = text
 

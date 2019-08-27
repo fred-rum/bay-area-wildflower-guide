@@ -1,6 +1,40 @@
 sci:Monardella spp.
+x:hist/rare
+
+There is a great deal of intergrading in this genus.
+
+==veiny monardella:M. douglasii
+veiny bracts:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1107+1685
+. <b>annual with 1 main stem, branched or not</b>
+. <b>bracts with stout veins</b>, translucent between veins
+. leaf margin not wavy
+. 12
+
+==curlyleaf monardella:M. undulata
+wavy leaf margin:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0209+0895
+. subshrub to shrub with few--many main stems, branched middle to distal, sparsely hairy to densely white-tomentose
+. leaves clustered at nodes, sparsely hairy to densely tomentose, <b>leaf margin wavy</b>
+
 ==coyote mint:M. villosa
+. subshrub to shrub with 1--many main stems, branched or not
+. 1--6 flowers clusters per main stem
+. <b>stem hairs > 0.3 mm</b>, +- dense or +- 0
+. leaf margin serrate, crenate, or entire, not wavy
 . common
 
-==mountain coyote mint:M. odoratissima
+==mountain monardella:M. odoratissima ssp. pallida
+white corolla<br/>short stem hairs:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1109+2256
+. subshrub with 1--many main stems
+. 1 flower cluster per main stem
+. stem sparsely hairy, hairs < 0.3 mm
+. leaf margin not wavy
+. <b>corolla generally white</b> (occasionally purple tinged)
 . Big Basin
+
+==serpentine monardella:M. purpurea
+glabrous stem:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0616+2198
+. subshrub with 1--many main stems
+. 1+ flower cluster per main stem
+. <b>stem +- glabrous</b>, no hairs > 0.3 mm
+. leaf margin serrate (entire), slightly or not wavy
+. bay area flowers have > 1 flower cluster per main stem and may be assignable to M. villosa ssp. neglecta
