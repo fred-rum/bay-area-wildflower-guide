@@ -1,0 +1,4 @@
+x:ca
+color: white
+
+Each head is composed of only disc flowers surrounded by +- white phyllaries.  <b>The involucre is +- spheric.</b>  Compare to {-rabbit-tobaccos}.

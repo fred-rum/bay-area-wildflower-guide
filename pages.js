@@ -384,6 +384,7 @@ var pages=[
 {page:"muehlenberg's centaury",sci:"Zeltnera muehlenbergii",x:"o"},
 {page:"Urticaceae",com:"nettle family",sci:"family Urticaceae",x:"f"},
 {page:"nettles",sci:"Urtica spp.",x:"k"},
+{page:"pearly everlasting",sci:"Anaphalis margaritacea",x:"o"},
 {page:"plums & cherries",sci:"Prunus spp.",x:"o"},
 {page:"red ribbons",sci:"Clarkia concinna",x:"k"},
 {page:"rosilla",sci:"Helenium puberulum",x:"o"},
