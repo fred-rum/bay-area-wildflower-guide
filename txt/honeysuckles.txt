@@ -1,4 +1,11 @@
 sci:Lonicera spp.
+x:hist
+
+Key features:
+. flowers in +- interrupted spikes or paired on axillary peduncles
+. upper leaf pairs fused around stem or not
+. corolla glandulary-hairy, hairy, or not
+. corolla color
 
 ==pink honeysuckle:L. hispidula
 . <b>flowers in +- interrupted spikes</b> on axillary peduncles or at ends of branches

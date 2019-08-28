@@ -3,6 +3,14 @@ x:hist/rare
 
 There is a great deal of intergrading in this genus.
 
+Key features:
+. stem hair length (> 0.3 mm, < 0.3 mm, or none)
+. annual, subshrub, or shrub
+. 1 main stem or multiple
+. bracts with stout veins or not
+. leaf margin wavy or not
+
+
 ==veiny monardella:M. douglasii
 veiny bracts:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1107+1685
 . <b>annual with 1 main stem, branched or not</b>
