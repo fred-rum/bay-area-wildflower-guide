@@ -1,15 +1,16 @@
 sci:Marah spp.
+x:ba
 
 Key features:
 . corolla cup shaped or not, especially when viewed from the side/underneath
 
 ==california manroot:M. fabacea
 . corolla <b>rotate</b>, yellow-green to cream or (especially inland) white
-.. <b>[the corolla may have some bowl shape, but it won't show a deep cup when seen from underneath]</b>
+.. <b>[When viewed from beneath, the white part of the corolla is entirely spreading.  Only the green part is cupped.]</b>
 . fruit 4--5 cm, +- spheric; prickles sparse to +- dense, < 12 mm, +- stiff, unhooked
 . Ecology: Streamsides, washes, shrubby open areas
 
 ==coastal manroot:M. oregana
 . corolla generally > 8 mm wide, <b>deeply cup-shaped</b>, white
-.. <b>[the corolla has a deep cup when seen from underneath]</b>
+.. <b>[When viewed from beneath, the cup continues from the green part into the corolla.]</b>
 . fruit 4--8 cm, +- spheric, <b>tapered to beak, generally striped dark green</b>; prickles generally dense, stiff or flexible, generally 0 at tip, unhooked

@@ -1,4 +1,5 @@
 sci:Brodiaea spp.
+x:hist/rare
 
 Key features:
 . length of peduncle (flower stem)
@@ -25,3 +26,10 @@ Key features:
 . perianth [flower] 15--40 mm long
 . staminodes [crown surrounding stamens] leaning toward or parallel to stamens, tips generally reflexed, margins 1/4 incurved below tip.
 . elevation < 1500 ft.
+
+==starflower brodiaea:B. stellaris
+. perianth <= 25 mm
+.. [all others are >= 21.5 mm]
+. staminodes about as wide as the perianth lobes
+.. [all others have narrower staminodes]
+. extremely rare: restricted area of Windy Hill

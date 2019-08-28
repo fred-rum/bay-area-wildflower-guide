@@ -1099,6 +1099,7 @@ var pages=[
 {page:"spreading wood fern",sci:"Dryopteris expansa",x:"u"},
 {page:"springbank clover",sci:"Trifolium wormskioldii",x:"u"},
 {page:"st. catherine's-lace",sci:"Eriogonum giganteum var. giganteum",x:"u"},
+{page:"starflower brodiaea",sci:"Brodiaea stellaris",x:"u"},
 {page:"Stephanomeria exigua coronaria",sci:"Stephanomeria exigua ssp. coronaria",x:"u"},
 {page:"sticky chinese houses",sci:"Collinsia tinctoria",x:"u"},
 {page:"stinkbells",sci:"Fritillaria agrestis",x:"u"},
