@@ -1157,6 +1157,7 @@ var pages=[
 {page:"viper's-bugloss",sci:"Echium vulgare",x:"o"},
 {page:"virginia pepperweed",sci:"Lepidium virginicum",x:"u"},
 {page:"wall bedstraw",sci:"Galium parisiense",x:"u"},
+{page:"wall cotoneaster",sci:"Cotoneaster horizontalis",x:"u"},
 {page:"waltham creek clarkia",sci:"Clarkia modesta",x:"u"},
 {page:"wand buckwheat",sci:"Eriogonum roseum",x:"u"},
 {page:"wavyleaf ceanothus",sci:"Ceanothus foliosus",x:"u"},

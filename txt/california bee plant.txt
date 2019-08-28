@@ -1,2 +1,3 @@
 sci:Scrophularia californica
+x:ba
 color: red, red purple

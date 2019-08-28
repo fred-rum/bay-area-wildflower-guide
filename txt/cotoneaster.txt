@@ -1,4 +1,5 @@
 sci:Cotoneaster spp.
+x:rare
 
 Key features:
 . plant height
@@ -9,22 +10,27 @@ See also {-toyon}.
 
 ==late cotoneaster:C. coriaceus
 . plant arching, 1--9 m
-. Petals white, spreading; fruit bright red
-. Leaf blade 35--95 mm, 17--45 mm wide, thick, adaxially dark green, lateral veins often sunken
-. scattered
+. petals white, spreading; fruit bright red
+. leaf blade 35--95 mm, 17--45 mm wide, thick, adaxially dark green, lateral veins often sunken
+. common
 
 ==silverleaf cotoneaster:C. pannosus
 . plant arching, 1--9 m
-. Petals white, spreading; fruit bright red
-. Leaf blade 15--32 mm, 8--15 mm wide, thin, adaxially +- blue-green, lateral veins not sunken
-. scattered
+. petals white, spreading; fruit bright red
+. leaf blade 15--32 mm, 8--15 mm wide, thin, adaxially +- blue-green, lateral veins not sunken
+. common
 
 ==franchet's cotoneaster:C. franchetii
 . plant arching, 1--9 m
-. Petals pink or rose, erect; fruit orange to red-orange
+. petals pink or rose, erect; fruit orange to red-orange
 . scattered in the outer coastal range + Berkeley
 
 ==entire-leaved cotoneaster:C. integrifolius
 . plant sprawling, <= 1 m
-. Leaf blade 5--15 mm, < 8 mm wide
+. leaf blade 5--15 mm, < 8 mm wide, narrowly oblanceolate, adaxially shiny, abaxially sparsely hairy, margins inrolled, tip blunt (notched)
 . Nisene Marks, Santa Cruz, San Francisco, Marin
+
+==wall cotoneaster:C. horizontalis
+. shrub 0.5--1 m
+. leaf blade blade 4--14 mm, widely elliptic; adaxially +- glabrous, shiny; abaxially sparsely appressed hairy, tip acute
+. very rare: Mt. Tam
