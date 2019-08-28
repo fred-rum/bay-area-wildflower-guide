@@ -1,10 +1,48 @@
 sci:Claytonia spp.
 
-There are few spring beauties in the bay area.  For now, this section only describes how to distinguish the ones that look similar to miner's lettuce.  A few rare ones can be easily distinguished as something different, so I'll ignore those until I can get some observations.
+All bay area species are in <a href="https://www.inaturalist.org/taxa/779781-Limnia">section Limnia</a>.
+
+<b>Caution: IDs uncertain</b>
+
+Plants have a rosette of basal leaves which may be green to red, prostrate to erect.  The leaf blades may be inconspicuous, making the basal leaves look thoroughly unleaflike.  They may instead look very stem-like.  <b>Be sure to isolate and highlight the basal leaves for photography.</b>
+
+Plants have exactly 2 opposite cauline leaves per stem, often fused or partially fused into a disc.
 
 Key features:
 . shape of basal leaves
-. shape of cordate leaf disk (short pointed or no points)
+. shape of cordate leaves
+. number of bracts per inflorescence
+. flower petal length
+
+==candy flower:C. sibirica
+. cauline leaves are substantial but not fused
+. <b>bracts throughout inflorescence</b>, 1 for every 1--2 flowers
+.. all others have only a single bract, below the lowest flower
+. corolla pink
+
+==gypsum springbeauty:C. gypsophiloides
+. cauline leaves are quite small and +- linear [info from CalPhotos; Jepson is much less descriptive]
+. <b>petals 5--8 mm</b>
+. corolla pink
+
+==serpentine springbeauty:C. exigua
+. cauline leaves are quite small and +- linear [info from CalPhotos; Jepson is much less descriptive]
+. <b>petals 2--5 mm</b>
+. corolla white or pink
+
+==streambank springbeauty:C. parviflora
+. cauline leaves substantial, fully fused (a common subspecies) or free, linear, and long (a rare subspecies)
+. basal leaf 1--18 cm long including petiole, blade > 3&times; longer than wide, base tapered gradually to petiole
+. corolla white or pink
+
+==redstem springbeauty:C. rubra
+. cauline leaves substantial, +- fused
+. basal leaf 1--8 cm long including petiole, blade < 2 cm, < 3&times; longer than wide, base truncate to wedge-shaped
+. many basal leaves, prostrate to spreading, smaller inward
+. corolla white or pale pink
 
 ==miner's lettuce:C. perfoliata
-. My IDs are uncertain until I can get a good photo of basal leaves.
+. cauline leaves substantial, fully fused
+. basal leaf 1--25 cm long including petiole, blade < 4 cm, < 3&times; longer than wide, elliptic to reniform
+. few to many basal leaves, spreading to erect, +- equal
+. corolla white or pink
