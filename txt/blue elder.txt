@@ -1,2 +1,4 @@
 sci:Sambucus cerulea
+sci_fpj:Sambucus nigra ssp. caerulea
 color: white, cream, yellow
+xx:ca

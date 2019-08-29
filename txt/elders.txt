@@ -1,4 +1,5 @@
 sci:Sambucus spp.
+x:ca
 
 ==blue elder,2:S. cerulea
 . inflorescence +- flat-topped, central axis generally not dominant
