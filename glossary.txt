@@ -20,7 +20,7 @@
 {bract,bracts} Small leaf-like structures (or analogue) at the base of an inflorescence.  May be fused together or not.
 {palmate,palmately} With lobes spreading from a common point.
 {palmate-pinnate} 1st-order palmate and 2nd-order pinnate.
-{pedicel,pedicels} The stalk of an individual flower.
+{pedicel,pedicels,pediceled} The stalk of an individual flower.
 {peduncle,peduncles} The stalk of an inflorescence (or of a head in the sunflower family) or of an individual flower that is not part of an inflorescence.
 {perianth,perianths} The collective term for the calyx and corolla.
 {petal,petals} A free or fused member of the corolla.
@@ -31,6 +31,7 @@
 {proximal,proximally} Growing closer to the base and farther from the tip of a structure.  The structure is often implied; e.g. a proximal leaf grows close to the base of the whole plant.  Contrast distal.
 {receptacle,receptacles} The end of the pedicel (or sometimes the peduncle), where the flower (or head) is attached.
 {sagittate} Shaped like an arrowhead, with basal lobes near parallel to the axis.
+{salverform} With a slender tube and abruptly spreading limbs (e.g. "T" shaped).
 {sepal,sepals} A free or fused member of the calyx.  Usually green, or often the same color as the petals, or sometimes different.
 {shrub,shrubs} Woody plant, shorter than a tree, generally with many branches from the base.
 {simple} Generally, composed of a single part; undivided; unbranched.  Opposite of compound.<ul><li>Leaf: composed of a single part (which may be lobed or dissected), not divided into distinct leaflets separated from each other.</li></ul>

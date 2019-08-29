@@ -1,51 +1,149 @@
 com:baby stars, linanthus, and leptosiphons
 sci:Leptosiphon spp.
-x:more
+x:hist
 
 <b>Caution: IDs unsure</b>
 
 There are quite a few Leptosiphon species in the bay area and my IDs thus far have not been good quality.  This page lists some key features, but I don't attempt to replicate the whole Jepson decision tree.  Instead, each flower description includes enough information to (hopefully) confirm an ID hypothesis (with help from CalPhoto).
 
 Key features:
-. stem length and branching
-. leaf lobe length and shape
 . densely bracted head or not
-. corolla salverform or not
-. calyx & calyx membrane (in many cases this is embedded among the dense bracts at the base of the corolla tube)
+. calyx position (among bracts or just under corolla)
+. calyx & calyx membrane [may be difficult to isolate, so not used in key, but useful for Jepson comparison]
 . corolla tube, throat, and lobe colors
-. stamens exserted or not
+. <b>exact corolla lobe length</b>
+. leaf lobe length and shape
 
-Photos showing the calyx of a Leptosiphon species with an <a href="http://science.halleyhosting.com/nature/gorge/5petal/phlox/linanthus/bolanderi.html
-">exserted calyx</a>.
+[
+<h2>corolla pediceled above sparse bracts</h2>
 
-==variable linanthus:L. parviflorus
-. Stem: 4--40 cm, may be be branched at base or above
-. Leaf: lobes 2--18 mm, narrowly obovate to linear, tip of middle lobe acute
-. Inflorescence: densely bracted head
-. Calyx: 4--10 mm, <b>densely hairy, glandular</b>, membrane obscure
-. Corolla: salverform, tube 11--46 mm, thread-like, maroon, pink, or yellow, throat yellow, purple, or orange, <b>lobes 4--8 mm</b>, elliptic to oblanceolate, pink, white, yellow, or purple, often with red marks at lobe bases
-. stamens exserted; stigmas 1--7 mm
-
-==false babystars:L. androsaceus
-. Stem: 5--45 cm (unknown branching)
-. Leaf: lobes 6--30 mm, narrowly oblanceolate to linear
-. Inflorescence: densely bracted head
-. Calyx: 6--13 mm, [hairs sparse or 0 except on margins], <b>ciliate, nonglandular</b>, abaxially generally glabrous [huh?  is this the outside?], membrane much narrower than lobes
-. Corolla: salverform, tube 10--33 mm, thread-like, pink or lavender, throat generally violet at base, yellow above, <b>lobes generally > 8 mm</b>, oblanceolate to linear, often abruptly soft-pointed, lavender, white, or pink, bases yellow, occasionally with white distal to yellow
-. stamens exserted; stigma 2--6 mm
+I.e. the calyx is at the top of the pedicel and +- cupping the corolla throat.
 
 ==serpentine leptosiphon:L. ambiguus
-. Stem: 10--20 mm, thread-like (unknown branching)
-. Leaf: lobes 3--5 mm, narrowly lanceolate
-. Inflorescence: not a densely bracted head; few-flowered cyme or flower 1; pedicel 5--25 mm, thread-like
-. Calyx: 3--6 mm, generally hairy, membrane generally = calyx
-. Corolla: funnel-shaped, tube 3--6 mm, purple, with wide hairy ring inside near throat, throat 3 mm, generally maroon, lobes 4--6 mm, lanceolate, pink, bases yellow, occasionally with white distal to yellow
-. stamens attached above hairy ring, exserted; stigmas 1--2 mm
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0411+0196
+. calyx clearly shorter than corolla tube & throat
+. corolla:
+.. <b>throat maroon</b>
+.. lobes yellow | white blending to pink/pale purple
+.. lobes 4--6 mm
+. common
+
+==flax-flowered linanthus:L. liniflorus
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0413+1873
+. calyx slightly shorter than corolla tube & throat
+. corolla:
+.. throat yellow
+.. lobes white, usually with <b>distinct colored veins</b>
+.. <b>lobes 8--10 mm</b>
+. uncommon
+
+==pygmy linanthus:L. pygmaeus
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1116+1484
+. calyx slightly longer than corolla tube & throat, so <b>calyx lobes tend to poke between petals</b>
+. corolla:
+.. throat yellow
+.. lobes pale purple/white
+.. lobes 1--2 mm
+. rare
+
+==bolander's linanthus:L. bolanderi
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0513+1130
+. calyx slightly shorter than corolla tube & throat
+. corolla:
+.. throat generally yellow
+.. lobes pink/pale purple/white
+.. <b>lobes 2--3 mm</b>
+. rare
+
+]
 
 ==large-flowered leptosiphon:L. grandiflorus
-. Stem: branched above, hairy
-. Leaf: ascending, lobes 10--30 mm, linear, hairy or glabrous
-. Inflorescence: sessile above a densely-bracted head
-. Calyx: 10--14 mm, hairy, membrane 2/3 calyx, wider than lobes
-. Corolla: funnel-shaped, 15--30 mm, with hairy ring inside, throat yellow, lobes white or pink
-. stamens included
+. <b>corolla +- sessile above densely bracted head</b> (corolla starts spreading within bracts or not much above)
+. <b>corolla 15--30 mm</b>:
+.. throat yellow
+.. lobes white blending to pink/pale purple/white
+. uncommon
+
+[
+<h2>corolla salverform above densely bracted heads</h2>
+
+I.e. the calyx is among the bracts, but the corolla has a long tube.
+
+[
+<h3>corolla lobes > 4 mm</h3>
+
+==coast yellow leptosiphon:L. croceus
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0709+0824
+. corolla:
+.. tube yellow/reddish
+.. throat yellow-orange
+.. <b>lobes bright yellow, generally with 2 red spots at base</b>
+.. lobes 6--8 mm
+. leaf lobes 4--7 mm, middle lobe rounded
+. very rare
+
+==rose leptosiphon:L. rosaceus
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0413+2490
+. corolla:
+.. tube pink/yellow
+.. throat yellow
+.. lobes white, blending to pale purple for a rare subspecies
+.. lobes generally 6--9 mm, <b>tip rounded</b>
+. leaf lobes 5--12 mm, narrow to linear, rounded
+. calyx +- glabrous, nonglandular
+. rare
+
+==false babystars:L. androsaceus
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0407+2020
+. corolla:
+.. tube reddish
+.. throat violet | yellow | often white
+.. lobes pink/pale purple/white
+.. lobes generally > 8 mm, <b>often abruptly soft-pointed</b>
+. leaf lobes 6--30 mm, tips pointed
+. calyx ciliate, nonglandular, abaxially [outer surface] generally glabrous
+. common
+
+==variable linanthus:L. parviflorus
+. corolla:
+.. tube maroon/pink/yellow
+.. throat yellow/orange/purple
+.. lobes pink/yellow/purple/white, sometimes with a red/purple spot at the base [Jepson says "often", CalPhotos says "almost never"]
+.. lobes 4--8 mm
+. leaf lobes 2--18 mm, middle lobe tip acute
+. <b>calyx densely hairy, glandular</b>
+. common
+
+]
+[
+<h3>corolla lobes < 4 mm</h3>
+
+==whiskerbrush:L. ciliatus
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0209+1956
+. corolla:
+.. tube pink/white
+.. throat yellow
+.. lobes pink, <b>base generally with darker pink or red spot</b>
+.. lobes 2--4 mm
+. uncommon
+
+==true babystars:L. bicolor
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0407+2819
+. corolla:
+.. tube +- red
+.. throat yellow
+.. lobes pink/pale yellow/white
+.. lobes generally < 4 mm
+. uncommon
+
+==bristly leptosiphon:L. acicularis
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0507+1711
+. corolla:
+.. tube yellow/reddish
+.. throat yellow
+.. <b>lobes bright yellow</b>
+.. lobes 3 mm
+. uncommon
+
+]
+]

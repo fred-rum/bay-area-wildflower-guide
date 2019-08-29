@@ -1,2 +1,3 @@
 sci:Leptosiphon grandiflorus
+sci_p:Linanthus grandiflorus
 color: pale purple

@@ -1,2 +1,3 @@
 sci:Leptosiphon parviflorus
+sci_p:Linanthus parviflorus
 color: purple, pale purple, pink, yellow, white
