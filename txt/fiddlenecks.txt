@@ -1,4 +1,5 @@
 sci:Amsinckia spp.
+x:rare
 
 Key features:
 . corolla diameter
@@ -8,26 +9,32 @@ Key features:
 . leaf succulent and fine-toothed or not
 
 ==common fiddleneck:A. menziesii
-. corolla radial, tube straight, limb with 0 or 5 dark spots
+. corolla radial, tube straight, limb 1--3 mm diameter, with 0 or 5 dark spots
 . stamens generally attached above middle of corolla tube, if below then style exserted
 . very common
 
 ==tarweed fiddleneck:A. lycopsoides
-. corolla radial, tube straight, limb with 0 or 5 dark spots
+. corolla radial, tube straight, limb 4--10 mm diameter, with 0 or 5 dark spots
 . <b>corolla throat +- closed by 5 hairy appendages</b> [really just wrinkles in the corolla limb?], tube constricted in lower 1/2
 . stamens attached below middle of corolla tube
 . style included
 . Mt. Diablo
 
+==large-flowered fiddleneck:A. grandiflora
+. <b>corolla 14--20 mm, limb 10--15 mm diameter</b>, red-orange
+. very rare: Mt. Diablo
+
 ==bent-flowered fiddleneck:A. lunaris
-. corolla bilateral, tube bent [?], <b>limb generally with 2 dark spots</b> [easiest indication of bilateralness; corolla limb is also angled as per bilateral, not radial]
+. corolla bilateral, tube bent [?], limb 4--7 mm diameter, <b>generally with 2 dark spots</b> [easiest indication of bilateralness; corolla limb is also angled as per bilateral, not radial]
 . scattered, but with very few modern observations
 
 ==bristly fiddleneck:A. tessellata
 . <b>calyx lobes unequal in width, 2--4 from fusion below middle, notched at tip</b>
+. corolla limb 2--10 mm diameter
 . Mt. Diablo, Sunol, Pinnacles
 
 ==woolly fiddleneck:A. spectabilis
 . <b>leaf +- succulent, fine-toothed</b>
 . 5 calyx lobes +- equal in width not fused above base, or 2--3 unequal in width, +- 1/2 fused
+. corolla limb 5--14 mm diameter
 . scattered near the pacific coast

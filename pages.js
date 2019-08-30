@@ -923,6 +923,7 @@ var pages=[
 {page:"laceleaf sanicle",sci:"Sanicula laciniata",x:"u"},
 {page:"lamarck's bedstraw",sci:"Galium divaricatum",x:"u"},
 {page:"lanceleaf frogfruit",sci:"Phyla lanceolata",x:"u"},
+{page:"large-flowered fiddleneck",sci:"Amsinckia grandiflora",x:"u"},
 {page:"large-head clover",sci:"Trifolium macrocephalum",x:"u"},
 {page:"large-leaved lupine",sci:"Lupinus polyphyllus var. polyphyllus",x:"u"},
 {page:"largeflower fairybells",sci:"Prosartes smithii",x:"u"},
