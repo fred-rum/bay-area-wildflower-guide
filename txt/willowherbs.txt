@@ -1,4 +1,5 @@
 sci:Epilobium spp.
+x:ba
 
 Key features:
 . overall plant height
@@ -7,25 +8,23 @@ Key features:
 . leaf veins conspicuous or obscure
 
 [
+<h3>leaves generally opposite up to inflorescence<br/>
+proximal stem not peeling</h3>
+
 ==california fuchsia:E. canum
 . common
 
 ==fringed willowherb:E. ciliatum
-. leaves generally opposite up to inflorescence, generally (narrowly) lanceolate to ovate
-. proximal stem not peeling
 . <b>leaf veins conspicuous</b>
 . common
 
-==E. hallanum
-. leaves generally opposite up to inflorescence, generally (narrowly) lanceolate to ovate
-. proximal stem not peeling
+==hall's willowherb:E. hallianum
 . <b>leaf veins +- obscure</b>
 . common
 
 ]
 [
-
-<h3>leaves opposite only near base, alternate or clustered distally, +- narrowly lanceolate<br/>
+<h3>leaves opposite only near base, alternate or clustered distally<br/>
 proximal stem generally peeling</h3>
 
 These are generally distinguished in Jepson by seed characteristics.  I've sorted them by maximum height (which roughly corresponds to maximum petal length).  Good luck!
@@ -38,7 +37,7 @@ These are generally distinguished in Jepson by seed characteristics.  I've sorte
 . petals 2--15(20) mm, white to rose-purple
 . common
 
-==E. densiflorum
+==denseflower willowherb:E. densiflorum
 . 5--150 cm tall, simple or branched distally
 . leaf 14--85 mm, lanceolate to sublinear, +- sessile; distal leaves hairy
 . inflorescence leafy, +- dense spike
@@ -46,7 +45,7 @@ These are generally distinguished in Jepson by seed characteristics.  I've sorte
 . petals 3--10 mm, rose-purple to white
 . common
 
-==E. torreyi
+==torrey's willowherb:E. torreyi
 . 4--65 cm tall
 . leaf 5--45 mm, +- lance-linear, hairy, +- sessile
 . bracts leaf-like
@@ -54,7 +53,7 @@ These are generally distinguished in Jepson by seed characteristics.  I've sorte
 . petals 1--3.2 mm, pink or white
 . Jasper Ridge, Nisene Marks, Sunol, Mt. Diablo, Mt. Tam
 
-==E. campestre
+==pygmy willowherb:E. campestre
 . 10--55 cm tall
 . leaf 8--35 mm, lanceolate, generally hairy, +- sessile
 . inflorescence crowded
@@ -62,7 +61,7 @@ These are generally distinguished in Jepson by seed characteristics.  I've sorte
 . petals 1--3.2 mm, pink
 . Los Trancos, Don Edwards, Sunol, Pleasanton Ridge, Mt. Diablo, Briones
 
-==E. foliosum
+==california willowherb:E. foliosum
 . < 45 cm tall
 . leaf 5--30 mm, sublinear to lanceolate, generally folded along midrib, distal clustered; petiole 1--12 mm
 . inflorescence crowded
@@ -70,12 +69,20 @@ These are generally distinguished in Jepson by seed characteristics.  I've sorte
 . petals 1.8--3 mm, white
 . Mt. Tam
 
-==E. minutum
+==little willowherb:E. minutum
 . < 40 cm tall
 . leaf 9--25 mm, generally lanceolate to narrowly elliptic, +- glabrous; petiole 0--2 mm
 . inflorescence open
 . hypanthium 1.1--1.5 mm
 . petals 2--5 mm, white or pink
 . scattered
+
+==selfing willowherb:E. cleistogamum
+. 15--32 cm tall
+. leaf 15--55 mm, linear to narrowly elliptic; distal leaves hairy, often folded along midrib
+. infloescence leafy, spreading and glandular hairy
+. hypanthium 0.5--1 mm
+. petals 2--5.5 mm, white to pale pink
+. very rare: Henry Coe
 
 ]
