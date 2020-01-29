@@ -1,0 +1,141 @@
+The filename defines a default common name (if all lowercase) or
+default scientific name (if any letter is uppercase).  My preference
+for the filename is to use the common name if there is one and it is
+unique in the bay area.  The filename also determines the filename
+used for the corresponding HTML page.
+
+The text in the file is standard HTML.  The program creates a standard
+header and footer for each page and includes the HTML text between
+them.  The standard header includes any photos associated (by name)
+with the page, plus links to CalPhotos as specified in the text.
+
+In addition to the standard HTML, the following text cases are handled
+specially.  Each case must be on a line by itself unless otherwise
+specified.
+
+Info:
+
+com:[name] specifies the common name for the flower.  My preference is
+to use the common name as given by iNaturalist for my area, although
+I'll sometimes alter it or (especially for an intermediate level of
+hierarchy) make one up.
+
+sci:[name] specifies the scientific name for the flower.  The name can
+be elaborated or stripped, although elaborated is recommended.  For a
+genus, the elaborated name is "(Genus) spp.".  For a subspecies or
+variety, the elaborated name "(Genus) (species) ssp. (subspecies)" or
+"(...) var. (...)".  If the scientific name is stripped of its
+elaborations, "spp." is assumed for a single-word name and "ssp." is
+assumed for a three-word name.
+
+If the common name or scientific name is not explicitly specified, the
+program will attempt to find one by searching through observations.csv
+for the given name.
+
+The canonical scientific name is the one used by iNaturalist, but
+other sites may be out of date or have made a different choice.  In
+that case, different scientic names can be specified for the various
+sites where it differs from the iNaturalist name:
+
+sci_j:[name] specifies the scientific name as listed in Jepson.
+sci_f:[name] specifies the scientific name as listed in CalFlora.
+sci_p:[name] specifies the scientific name as listed in CalPhotos.
+
+Multiple names can be specified for CalPhotos, separated by |.  The
+iNaturalist name is also automatically included in the CalPhotos
+search.
+
+color:[names] specifies the colors of the flower, separated by commas.
+Supported colors are in the color_list variable.  Colors are expected
+for all taxons with associated photos, and not for taxons without
+photos.
+
+https://calphotos.berkeley.edu/[...] associates a CalPhotos link with
+the page.  A placeholder image is added to the list of images, along
+with a link to the CalPhotos page.  If ':[text]' is appended to the
+link, the corresponding text is added to the placeholder.
+
+Page links:
+
+==[name] creates a child relationship to the named page.  The specified
+name can be the scientific name (elaborated or stripped) or the common
+name (if there is exactly one match) of the child.  If the name is in
+[com]:[sci] format, both names are used to find the corresponding
+page, and the page is updated if it only has one of the names.  A link
+to the child page is also created.  The link displays the first image
+for the page (a jpg or a CalPhotos placeholder) or a blank
+placeholder.  It also displays the common name and scientific name of
+the page.  If there is additional text in the same paragraph (on
+following lines, not separated by a blank line), the link and the
+additional text are formatted as a unit.  On a wide page, the
+additional text appears next to the image and below the name; on a
+narrow page, the additional text appears below the image and name.
+
+{-[page]} creates a link to the page without creating a child
+relationship.  The link is just the common and scientific names of the
+child on one line, without any image.
+
+Other formatting:
+
+'[' and ']' (each on a line by itself) creates a light-bordered box
+surrounding all text between the brackets.
+
+Any number of periods starting a line creates an unnumbered list.  The
+depth of the list is equal to the number of periods.
+
+The following are replaced with better-looking unicode characters:
++-
+--
+<=
+>=
+<<
+>>
+'
+
+Manual html links (<a href=...>) are updated to include
+target="_blank" so that they open in a new tab/window.
+
+My photos can be supplemented with links to calphotos, e.g.
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0911+0197
+If a link to calphotos occurs within a key, it is removed from the key
+and instead added to the keyed taxon.
+
+A calphotos link can also be of the form
+[label]:https://calphotos.berkeley.edu/cgi/img_query?enlarge=[...]
+in order for the link to be given a descriptive text label.
+The label may include spaces.
+
+--
+
+The completeness of the guide is indicated with x:[txt] or xx:[txt].
+x: specifies the completeness of a genus, and xx: is for a species.
+Each can also be used at a lower taxon level when there are no other
+members of the genus/species.  For this reason, both x and xx can
+potentially be used on the same page.
+
+The following [txt] values can be usd for x: or xx:
+none - taxon has no subspecies or variants
+any - there are no other taxon members anywhere
+ba - there are no other taxon members in California
+ca - there are no other taxon members in California
+hist - taxon members only in the historical record are ignored
+rare - extremely rare taxon members are ignored
+hist/rare - historical and extremely rare taxon members are ignored
+more - there are additional taxon members that need to be documented
+![txt] - the key to distinguish the taxon members is not complete
+
+xx:uncat - species has subspecies or variants not yet categorized
+
+If the completeness is left unspecified for a genus, it acts as
+x:more.  If the completeness is left unspecified for a species, then
+no completeness information is put on the species page.  (Completeness
+of the members of a species is not a priority.)
+
+--
+Strategy:
+
+It's often good to simply create a stub page for the genus, using its
+common name from iNaturalist as the filename and also giving its
+scientific name with sci:[name].  The created HTML page then has
+convenient links for finding all bay area species known by CalFlora,
+finding the key in Jepson, etc.

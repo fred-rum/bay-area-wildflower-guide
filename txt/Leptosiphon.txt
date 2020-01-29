@@ -13,6 +13,7 @@ Key features:
 . corolla tube, throat, and lobe colors
 . <b>exact corolla lobe length</b>
 . leaf lobe length and shape
+. stigmas linear or not (Leptosiphons generally have 3 stigmas on 1 style, 5 stamens)
 
 [
 <h2>corolla pediceled above sparse bracts</h2>
@@ -96,20 +97,22 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0413+2490
 ==false babystars:L. androsaceus
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0407+2020
 . corolla:
-.. tube reddish
+.. tube reddish, <b>glabrous or sparsely hairy, non-glandular</b>
 .. throat violet | yellow | often white
 .. lobes pink/pale purple/white
 .. lobes generally > 8 mm, <b>often abruptly soft-pointed</b>
+.. stigmas stigma 2--6 mm and well exserted from corolla tube
 . leaf lobes 6--30 mm, tips pointed
 . calyx ciliate, nonglandular, abaxially [outer surface] generally glabrous
 . common
 
 ==variable linanthus:L. parviflorus
 . corolla:
-.. tube maroon/pink/yellow
+.. tube maroon/pink/yellow, <b>hairy, glandular</b>
 .. throat yellow/orange/purple
 .. lobes pink/yellow/purple/white, sometimes with a red/purple spot at the base [Jepson says "often", CalPhotos says "almost never"]
 .. lobes 4--8 mm
+.. stigmas 1--7 mm and strongly exserted from corolla tube
 . leaf lobes 2--18 mm, middle lobe tip acute
 . <b>calyx densely hairy, glandular</b>
 . common
@@ -118,15 +121,6 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0407+2020
 [
 <h3>corolla lobes < 4 mm</h3>
 
-==whiskerbrush:L. ciliatus
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0209+1956
-. corolla:
-.. tube pink/white
-.. throat yellow
-.. lobes pink, <b>base generally with darker pink or red spot</b>
-.. lobes 2--4 mm
-. uncommon
-
 ==true babystars:L. bicolor
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0407+2819
 . corolla:
@@ -134,6 +128,17 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0407+2819
 .. throat yellow
 .. lobes pink/pale yellow/white
 .. lobes generally < 4 mm
+.. stigmas <= 1 mm, weakly exserted from corolla tube
+... often, but not always, shorter than the stamens
+. uncommon
+
+==whiskerbrush:L. ciliatus
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0209+1956
+. corolla:
+.. tube pink/white
+.. throat yellow
+.. lobes pink, <b>base generally with darker pink or red spot</b>
+.. lobes 2--4 mm
 . uncommon
 
 ==bristly leptosiphon:L. acicularis

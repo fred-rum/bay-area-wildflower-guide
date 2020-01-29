@@ -1,0 +1,22 @@
+sci:n/a
+[
+<h2>Leafy stems</h2>
+
+==Cytisus spp.
+. leaf with 1--3 leaflets
+. stems leafy
+. style generally abruptly curved at +- middle or gently curved +- throughout
+
+==Genista spp.
+. leaf with 1--3 leaflets
+. stems leafy
+. style +- abruptly bent at tip
+]
+
+[
+<h2>Leafless stems</h2>
+
+==spanish broom:Spartium junceum
+. leaves simple
+. stems generally +- leafless
+]

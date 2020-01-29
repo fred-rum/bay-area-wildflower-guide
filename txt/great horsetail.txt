@@ -1,5 +1,4 @@
 sci:Equisetum telmateia
-color:n/a
 xx:ca
 
 ==giant horsetail:E. telmateia ssp. braunii

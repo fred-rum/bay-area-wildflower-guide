@@ -1570,6 +1570,8 @@ for page in name_page.values():
 # all pages so that any name can be used to link a child.
 for page in [x for x in name_page.values()]:
     page.parse_children()
+    if page.color and not page.jpg_list:
+        print('page {name} has a color assigned but has no photos'.format(name=page.name))
 
 with open(root + '/ignore species.yaml', encoding='utf-8') as f:
     sci_ignore = yaml.safe_load(f)

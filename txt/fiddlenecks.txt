@@ -25,7 +25,8 @@ Key features:
 . very rare: Mt. Diablo
 
 ==bent-flowered fiddleneck:A. lunaris
-. corolla bilateral, tube bent [?], limb 4--7 mm diameter, <b>generally with 2 dark spots</b> [easiest indication of bilateralness; corolla limb is also angled as per bilateral, not radial]
+. corolla bilateral, tube bent so that the limb is not perpendicular to the lower prt of the tube
+. corolla limb 4--7 mm diameter, <b>generally with 2 dark spots</b>
 . scattered, but with very few modern observations
 
 ==bristly fiddleneck:A. tessellata

@@ -1,0 +1,39 @@
+sci:Euphorbia
+x:!rare
+color:other
+
+==eggleaf spurge:E. oblongata
+. very common, especially north of the bay bridge
+
+==petty spurge:E. peblus
+. common
+
+==gopher plant:E. lathyris
+. uncommon
+
+==reticulate seeded spurge:E. spathulata
+. uncommon
+
+==chinesecaps:E. crenulata
+. uncommon
+
+==albanian spurge:E. characias
+. rare
+
+==cypress spurge:E. cyparissias
+. rare
+
+==wartweed:E. helioscopia
+. rare
+
+==spotted spurge:E. maculata
+. rare
+
+==contura creek spurge:E. ocellata
+. rare
+
+==matted sandmat:E. serpens
+. very rare
+
+==thyme-leafed spurge:E. serpillifolia
+. rare

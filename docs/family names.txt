@@ -1,0 +1,4 @@
+The family names.yaml file maps each scientific family name to a
+corresponding common family name.  The format for each line is
+"(sci name): (com name)".  "n/a" can be used in place of the common
+name to indicate that it has no common name.
