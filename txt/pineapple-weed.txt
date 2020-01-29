@@ -1,2 +1,0 @@
-sci:Matricaria discoidea
-color: yellow, other

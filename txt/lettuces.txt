@@ -6,6 +6,7 @@ Key features:
 . distal cauline leaf shape, widely or narrowly clasping, margin toothed or bristly
 
 ==bitter lettuce:L. virosa
+color: yellow
 . basal rosette leaves toothed or shallowly lobed
 . distal cauline leaves sessile, widely clasping
 . proximal cauline leaves wing-petioled

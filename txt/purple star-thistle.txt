@@ -1,2 +1,0 @@
-sci:Centaurea calcitrapa
-color: purple, red purple

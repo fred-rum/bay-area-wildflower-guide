@@ -12,6 +12,7 @@ Inner phyllaries are the length of the involucre.  Outer phyllaries are much red
 . common
 
 ==coastal burnweed:S. minimus
+color: yellow
 . 3--5 disk flowers
 . 9--20+ ray flowers, stigma only with no ray petal
 . involucre cylindric

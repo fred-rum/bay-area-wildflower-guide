@@ -12,6 +12,7 @@ Key features:
 . head shape and colors
 
 ==california cudweed:P. californicum
+color: white
 . <b>Stem stalked-glandular, sometimes glabrous</b>
 . Leaves generally not crowded
 . Leaf base +- clasping or not, decurrent 0--15 mm
@@ -40,6 +41,7 @@ Key features:
 . common
 
 ==cottonbatting plant:P. stramineum
+color: white
 . Stem not glandular, loosely to densely tomentose
 . Leaves +- crowded
 . Leaf base +- clasping, generally not decurrent
@@ -50,6 +52,7 @@ Key features:
 . common
 
 ==two-color rabbit tobacco:P. biolettii
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0216+0803
 . Stem not glandular, <b>sometimes +- woody near base, proximally tomentose to glabrous</b>, but always tomentose near heads
 . Leaves not crowded
 . Leaf base clasping, not decurrent

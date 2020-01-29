@@ -4,6 +4,8 @@ sci:tribe Madieae
 . 
 
 ==woodland madia:Anisocarpus madioides
+color: yellow
+x:ba
 . rays 4--10 mm
 . anthers yellow [brush off the pollen to see]
 . I don't know how to distinguish it from real tarweeds.

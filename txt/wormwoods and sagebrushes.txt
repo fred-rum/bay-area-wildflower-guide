@@ -2,6 +2,7 @@ sci:Artemisia spp.
 x:!hist
 
 ==california sagebrush:A. californica
+color: other
 . axillary leaf clusters present
 . very common
 

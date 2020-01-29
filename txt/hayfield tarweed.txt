@@ -1,3 +1,0 @@
-sci:Hemizonia congesta
-color: white, pale purple
-x:any

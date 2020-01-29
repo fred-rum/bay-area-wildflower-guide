@@ -455,41 +455,37 @@ class Page:
         self.txt = re.sub(r'^sci([_fpj]+):\s*(.*?)\s*?\n',
                           repl_sci_fpj, self.txt, flags=re.MULTILINE)
 
-    def parse_complete(self):
-        def repl_complete(matchobj):
-            if matchobj.group(1) == 'x':
-                self.genus_complete = matchobj.group(3)
-                if matchobj.group(2):
-                    self.genus_key_incomplete = True
-            else:
-                self.species_complete = matchobj.group(3)
-                if matchobj.group(2):
-                    self.species_key_incomplete = True
-            return ''
+    def set_complete(self, matchobj):
+        if matchobj.group(1) == 'x':
+            self.genus_complete = matchobj.group(3)
+            if matchobj.group(2):
+                self.genus_key_incomplete = True
+        else:
+            self.species_complete = matchobj.group(3)
+            if matchobj.group(2):
+                self.species_key_incomplete = True
+        return ''
 
-        self.txt = re.sub(r'^(x|xx):\s*(!?)(none|ba|ca|any|hist|rare|hist/rare|more|uncat)\s*?\n',
-                          repl_complete, self.txt, flags=re.MULTILINE)
+    def set_colors(self, color_str):
+        if self.color:
+            print('color is defined more than once for page {name}'.format(name=self.name))
 
-    def parse_color(self):
-        def repl_color(matchobj):
-            self.color = set([x.strip() for x in matchobj.group(1).split(',')])
+        self.color = set([x.strip() for x in color_str.split(',')])
 
-            # record the original order of colors in case we want to write
-            # it out.
-            self.color_txt = matchobj.group(1)
+        # record the original order of colors in case we want to write
+        # it out.
+        self.color_txt = color_str
 
-            # check for bad colors.
-            for color in page.color:
-                if color not in color_list and color != 'n/a':
-                    print('page {name} uses undefined color {color}'.format(name=page.name, color=color))
+        # check for bad colors.
+        for color in self.color:
+            if color not in color_list and color != 'n/a':
+                print('page {name} uses undefined color {color}'.format(name=self.name, color=color))
 
-            return ''
-
-        self.txt = re.sub(r'^color:(.*)\n',
-                          repl_color, self.txt, flags=re.MULTILINE)
-
-    def record_ext_photo(self, matchobj):
-        self.ext_photo_list.append((matchobj.group(1), matchobj.group(2)))
+    def record_ext_photo(self, label, link):
+        if (label, link) in self.ext_photo_list:
+            print('{link} is specified more than once for page {name}'.format(link=link, name=self.name))
+        else:
+            self.ext_photo_list.append((label, link))
 
     # Check if check_page is an ancestor of this page (for loop checking).
     def is_ancestor(self, check_page):
@@ -602,21 +598,33 @@ class Page:
             self.cur_genus = None
 
         c_list = []
+        data_object = self
         for c in self.txt.split('\n'):
             matchobj = re.match(r'==\s*([^:]*?)\s*?(,[-0-9]\S*|,)?\s*?(?::\s*(.+?))?\s*$', c)
             if matchobj:
                 c_list.append(repl_child(matchobj))
+                data_object = self.child[-1]
                 continue
 
             matchobj = re.match(r'\s*(?:([^:\n]*?)\s*:\s*)?(https://(?:calphotos.berkeley.edu/|www.calflora.org/cgi-bin/noccdetail.cgi)[^\s]+)\s*?$', c)
             if matchobj:
-                if self.child:
-                    # Attach the external photo to the last (most recent) child.
-                    self.child[-1].record_ext_photo(matchobj)
-                else:
-                    # Attach the external photo to self.
-                    self.record_ext_photo(matchobj)
+                # Attach the external photo to the current child, else to self.
+                data_object.record_ext_photo(matchobj.group(1),
+                                             matchobj.group(2))
                 continue
+
+            matchobj = re.match(r'color:(.*)$', c)
+            if matchobj:
+                data_object.set_colors(matchobj.group(1))
+                continue
+
+            matchobj = re.match(r'(x|xx):\s*(!?)(none|ba|ca|any|hist|rare|hist/rare|more|uncat)$', c)
+            if matchobj:
+                data_object.set_complete(matchobj)
+                continue
+
+            if c in ('', '[', ']'):
+                data_object = self
 
             c_list.append(c)
         self.txt = '\n'.join(c_list) + '\n'
@@ -1555,19 +1563,17 @@ for jpg in sorted(jpg_list):
 with open(root + '/family names.yaml', encoding='utf-8') as f:
     family_com = yaml.safe_load(f)
 
-# Perform a first pass on all pages to
-# - initialize common and scientific names as specified
-# - detect parent->child relationships among pages
-# - add links to glossary words
-
+# Perform a first pass on all pages to initialize common and scientific names.
+# This ensures that when we parse children (next), any name can be used and
+# linked correctly.
 for page in name_page.values():
     page.parse_names()
-    page.parse_color()
-    page.parse_complete()
 
 # parse_children() can add new pages, so we make a copy of the list to
-# iterate through.  Note that this waits until all names are read for
-# all pages so that any name can be used to link a child.
+# iterate through.  parse_children() also checks for external photos,
+# color, and completeness information.  If this info is within a child
+# key, it is assigned to the child.  Otherwise it is assigned to the
+# parent.
 for page in [x for x in name_page.values()]:
     page.parse_children()
     if page.color and not page.jpg_list:

@@ -1,2 +1,0 @@
-sci:Eriophyllum staechadifolium
-color: yellow, orange

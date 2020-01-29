@@ -2,9 +2,10 @@ com:cobwebby thistle
 xx:more
 
 ==venus thistle:C. occidentale var. venustum
+color: red
 . less cobwebby
 . common
 
-==C. occidentale var. occidentale
+==cobwebby thistle:C. occidentale var. occidentale
 . very cobwebby
 . scattered in the Santa Cruz range

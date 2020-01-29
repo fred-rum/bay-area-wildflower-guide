@@ -15,6 +15,7 @@ Key features:
 <h2>heads with conspicuous rays</h2>
 
 ==seaside daisy:E. glaucus
+color: pale purple
 . rays 8--15 mm
 . leaves thick, +- fleshy, entire or toothed
 . all along Pacific coast (coastal bluffs, dunes, beaches)
@@ -28,6 +29,7 @@ Key features:
 . two variants distinguished by phyllary glands
 
 ==santa barbara daisy:E. karvinskianus
+color: white, pale purple
 . ray 5--8 mm
 . phyllaries generally +- equal
 . no basal leaves at flower

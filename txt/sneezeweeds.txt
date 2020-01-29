@@ -6,6 +6,7 @@ Key features:
 . length of rays
 
 ==rosilla:H. puberulum
+color: yellow
 . stem winged by decurrent leaf bases
 . 300--500 disk flowers, 1.9--2.7 mm
 . 13--15 rays (ocassionally 0), <b>3.8--10 mm</b>

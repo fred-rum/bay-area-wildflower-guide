@@ -1,2 +1,0 @@
-sci:Anthemis cotula
-color: white

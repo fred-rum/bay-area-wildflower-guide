@@ -2,6 +2,7 @@ sci:Crepis spp.
 x:hist
 
 ==beaked hawksbeard:C. vesicaria ssp. taraxacifolia
+color: yellow
 . basal and cauline leaves pinnately lobed to dentate, terminal lobe large, toothed
 . involucre 8--12 mm, cylindric to bell-shaped or +- obconic
 . outer phyllaries 3--4 mm, ovate to lance-linear (thick based), glabrous
@@ -9,6 +10,7 @@ x:hist
 . corolla yellow, <b>+- red abaxially</b>
 
 ==smooth hawksbeard:C. capillaris
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0808+1261
 . basal and cauline leaves pinnately divided or sharply toothed, lobes lanceolate
 . involucre 5--8 mm, cylindric
 . outer phyllaries 2--4 mm, linear (thin based), minutely tomentose or stalked-glandular
@@ -17,6 +19,7 @@ x:hist
 . scattered along the peninsula and Henry Coe
 
 ==italian hawksbeard:C. bursifolia
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0611+0485
 . stem arched or decumbent, cymosely branched distally
 . mid and distal cauline leaves generally few, +- reduced, +- linear
 . <b>inner phyllaries +- yellow-bristly</b>

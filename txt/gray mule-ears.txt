@@ -1,2 +1,0 @@
-sci:Wyethia helenioides
-color: yellow

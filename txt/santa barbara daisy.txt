@@ -1,2 +1,0 @@
-sci:Erigeron karvinskianus
-color: white, pale purple

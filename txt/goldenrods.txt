@@ -2,6 +2,7 @@ sci:Solidago spp.
 x:hist
 
 ==california goldenrod:S. velutina ssp. californica
+color: yellow
 . proximal cauline or basal leaves largest
 . leaves and heads not strongly resinous
 . herbage sparsely to densely short-hairy

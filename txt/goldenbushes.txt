@@ -2,6 +2,7 @@ sci:Ericameria spp.
 x:hist/rare
 
 ==golden-fleece:E. arborescens
+color: yellow
 . phyllaries unequal in a graduated series
 . no rays
 . leaves and often young stem dotted with round, +- evenly spaced, resin-filled pits
@@ -14,6 +15,7 @@ x:hist/rare
 . rare
 
 ==california goldenbush:E. ericoides
+color: yellow
 . phyllaries unequal in a graduated series
 . tips of outermost phyllaries generally abruptly pointed, leaf-like
 . 3--6 rays, 6--8 mm

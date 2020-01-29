@@ -1,2 +1,0 @@
-sci:Lasthenia californica
-color: yellow

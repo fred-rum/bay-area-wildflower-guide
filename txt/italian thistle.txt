@@ -1,2 +1,0 @@
-sci:Carduus pycnocephalus
-color: purple, pink

@@ -11,6 +11,7 @@ Potential key features:
 <h3>Purple</h3>
 
 ==bull thistle:C. vulgare
+color: purple
 . <b>adaxial leaf face with slender appressed bristle-like prickles</b>
 . [all other species have no prickles on the adaxial leaf face]
 . common
@@ -68,6 +69,7 @@ Potential key features:
 . scattered
 
 ==peregrine thistle:C. cymosum var. cymosum
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+3077
 . abaxial face of outer and middle phyllaries may have long, sticky-resinous ridge (milky when fresh, dark when dry, occasionally very narrow) or not
 . margins of phyllaries entire
 . outer and middle phyllaries with short-appressed bases and lanceolate to linear or needle-like, ascending to stiffly spreading tips; tip-spines generally 1--35 mm
@@ -78,12 +80,14 @@ Potential key features:
 . Henry Coe, Sunol
 
 ==alameda thistle:C. quercetorum
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0713+0932
 . abaxial face of outer and middle phyllaries without sticky-resinous ridge
 . margins of outer phyllaries +- entire
 . outer and middle phyllaries lance-linear to ovate, appressed; tip-spines 1--12 mm, generally ascending to erect
 . scattered very near the pacific coast
 
 ==pacific fringed thistle:C. remotifolium var. odontolepis
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0218+0325
 . abaxial face of outer and middle phyllaries without sticky-resinous ridge
 . margins of outer phyllaries irregularly toothed to spiny-ciliate
 . heads generally not closely subtended by well-developed distal leaves or clustered leafy bracts

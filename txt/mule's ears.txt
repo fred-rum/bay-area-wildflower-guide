@@ -8,12 +8,14 @@ Key features:
 <h2>phyllaries long and wide</h2>
 
 ==smooth mule-ears:W. glabra
+color: yellow
 . plant shiny green, glabrous or sparsely short-hairy, glandular
 . outer spreading phyllaries 4--7 cm, wide, leaf-like, generally >> inner erect phyllaries
 . <b>phyllaries glabrous or glandular</b>
 . heads generally 1, large
 
 ==gray mule-ears,4:W. helenioides
+color: yellow
 . plant densely tomentose, often becoming +- glabrous
 . outer spreading phyllaries 4--7+ cm, wide, leaf-like, generally >> inner erect phyllaries
 . <b>phyllaries persistently tomentose</b>
@@ -24,6 +26,7 @@ Key features:
 <h2>phyllaries short and narrow</h2>
 
 ==narrowleaf mule-ears:W. angustifolia
+color: yellow
 . phyllaries 1.5--3 cm, narrow, generally not leaf-like, outer +- same as inner
 . phyllaries generally many
 . <b>phyllaries +- soft-hairy, ciliate</b>

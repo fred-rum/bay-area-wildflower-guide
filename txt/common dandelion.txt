@@ -1,3 +1,0 @@
-sci:Taraxacum officinale
-color: yellow
-x:more

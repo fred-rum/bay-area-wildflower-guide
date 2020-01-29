@@ -11,6 +11,7 @@ Key features:
 <h2>medium-length petals</h2>
 
 ==coast range agoseris:A. hirsuta
+color: yellow
 . stem generally not leafy or obscurely leafy above base
 . ligule 6--16 mm, much exceeding involucre
 . <b>leaf petiole rarely purple</b>

@@ -1,6 +1,7 @@
 sci:Holocarpha spp.
 x:ba
 ==pit-gland tarweed:H. virgata
+color: yellow
 . anthers +- red to dark purple
 . ray flowers 3--8; disk flowers 9--25+
 . uncommon in the east bay
@@ -11,6 +12,7 @@ x:ba
 . rare near Santa Cruz, Mt. Tam
 
 ==heermann's tarweed:H. heermannii
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1107+0985
 . anthers yellow to +- brown [usually yellow?]
 . stem notably stalked-glandular
 . phyllaries each with 25--50 pit-gland-tipped outgrowths and minutely sessile- or stalked-glandular and puberulent or minutely bristly

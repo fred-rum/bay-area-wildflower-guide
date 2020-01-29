@@ -12,6 +12,7 @@ Key features:
 <h3>ray petals may be yellow with white at the tips</h3>
 
 ==tidy tips:L. platyglossa
+color: yellow
 . ray petals are mostly yellow, but usually with white at the tips
 . <b>glandular</b> (e.g. on involucre, or as spots on peduncle)
 . stem generally not purple-streaked

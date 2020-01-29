@@ -1,6 +1,7 @@
 sci:Baccharis spp.
 x:ba
 ==coyote brush:B. pilularis
+color: other
 . leaf blade 5--40 mm long, 2--15 mm wide, <b>obovate or oblanceolate</b>, gland-dotted [but unknown stickiness]
 . very common
 

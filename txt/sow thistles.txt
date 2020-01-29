@@ -4,6 +4,7 @@ x:ba
 "Stem distally branched" is a genus characteristic.
 
 ==prickly sowthistle:S. asper
+color: yellow
 . annual
 . stem may be distally branched, but usually not close to the inflorescence[?]
 . stem stout
@@ -14,6 +15,7 @@ x:ba
 . fruit flat, 3-ribbed per side, otherwise smooth
 
 ==common sow-thistle:S. oleraceus
+color: yellow
 . annual
 . stem distally branched [?], often proximally branched [this part is clear]
 . stem stout

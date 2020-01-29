@@ -1,2 +1,0 @@
-sci:Cirsium vulgare
-color: purple

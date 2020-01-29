@@ -9,6 +9,7 @@ Key features:
 See <a href="https://www.inaturalist.org/observations/9062292#identification-61948150">my observation comment</a> about a couple of key features and how indistinct they are.
 
 ==rod wirelettuce:S. virgata
+color: pale purple, pink
 . seed without long groove on each face
 . ssp. pleurocarpa: outer phyllaries appressed
 . ssp. virgata: outer phyllaries strongly reflexed

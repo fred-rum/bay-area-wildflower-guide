@@ -2,6 +2,7 @@ sci:Symphyotrichum spp.
 x:!hist/rare
 
 ==pacific aster:S. chilense
+color: pale purple
 . stem hairy distally
 . outer phyllaries obtuse
 . disk flowers: yellow

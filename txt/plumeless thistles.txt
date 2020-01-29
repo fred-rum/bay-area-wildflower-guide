@@ -6,6 +6,7 @@ Key features:
 . hairiness of phyllary bases
 
 ==italian thistle:C. pycnocephalus
+color: purple, pink
 . generally 2--5 heads per cluster
 . phyllary bases +- persistently loosely tomentose
 . very common throughout the bay area

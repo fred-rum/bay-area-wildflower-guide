@@ -1,2 +1,0 @@
-sci:Madia elegans
-color: yellow

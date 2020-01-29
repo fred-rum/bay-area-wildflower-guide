@@ -11,6 +11,7 @@ Key features:
 . ecology
 
 ==golden yarrow:E. confertiflorum
+color: yellow, orange
 . subshrub or shrub, generally 20--70 cm
 . 4--7 phyllaries, strongly overlapping
 . peduncle 0--2.5(9) cm
@@ -26,6 +27,7 @@ Key features:
 . scattered in the Diablo range
 
 ==seaside woolly sunflower:E. staechadifolium
+color: yellow, orange
 . subshrub, much branched, 30--150 cm
 . peduncle < 1 cm
 . 8--11 phyllaries, <b>barely overlapping</b>

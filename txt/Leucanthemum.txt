@@ -1,11 +1,13 @@
 sci:Leucanthemum spp.
 x:hist
 ==oxeye daisy:L. vulgare
+color: white
 . basal leaves generally pinnately 3--7+ lobed or irregularly toothed, petiole 30--60+ mm
 . mid-stem leaves generally irregularly toothed throughout
 . ray flowers: 13--34+, 12--20(35+) mm
 
 ==shasta daisy:L. maximum
+color: white
 . basal leaves not lobed, generally toothed (entire), petiole 10--30(120) mm
 . mid-stem leaves generally proximally entire, distally regularly serrate
 . ray flowers: 21--34+, 20--25(35) mm

@@ -1,2 +1,0 @@
-sci:Calendula arvensis
-color: orange

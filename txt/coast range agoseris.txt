@@ -1,2 +1,0 @@
-sci:Agoseris hirsuta
-color: yellow

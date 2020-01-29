@@ -1,2 +1,0 @@
-sci:Eriophyllum confertiflorum
-color: yellow, orange

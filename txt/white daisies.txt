@@ -12,6 +12,8 @@ Possible key features:
 . hair anywhere? (e.g. stem base, upper stem, leaf top or bottom, phyllaries)
 
 ==common daisy:Bellis perennis
+color: white
+x:ca
 . 1--several stems from base, decumbent or prostrate
 . <b>wide phyllaries</b>
 . disk flowers: yellow
@@ -30,6 +32,7 @@ Possible key features:
 . ray flowers: 10--15, apparently ~5 mm, white
 
 ==german chamomile:Matricaria chamomilla
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0616+0158
 . stem erect or decumbent
 . <b>leaf 2--3-pinnately lobed; segments linear (longer than "real" chamomiles)</b>
 . disk flowers: yellow
@@ -42,6 +45,8 @@ Possible key features:
 . ray flowers: 0--many, 0--15 mm, generally white to pink or purple
 
 ==hayfield tarweed:Hemizonia congesta
+color: white, pale purple
+x:any
 
 ==afro-australian daisies:Dimorphotheca spp.
 . stem depends greatly on the species; see sub-key

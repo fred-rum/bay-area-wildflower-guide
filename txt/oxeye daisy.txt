@@ -1,2 +1,0 @@
-sci:Leucanthemum vulgare
-color: white

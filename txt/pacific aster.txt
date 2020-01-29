@@ -1,2 +1,0 @@
-sci:Symphyotrichum chilense
-color: pale purple

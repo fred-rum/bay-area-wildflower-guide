@@ -1,3 +1,0 @@
-sci:Anisocarpus madioides
-color: yellow
-x:ba

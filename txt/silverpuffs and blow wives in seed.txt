@@ -16,6 +16,8 @@ parachute of wings to catch the wind.
 There is only one species of blow wives in the bay area.
 
 ==blow wives:Achyrachaena mollis
+color: other
+x:any
 . each wing has only a flat scale with no bristle
 
 <h2>silverpuffs</h2>

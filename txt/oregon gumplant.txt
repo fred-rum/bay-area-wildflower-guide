@@ -1,2 +1,0 @@
-sci:Grindelia stricta
-color: yellow

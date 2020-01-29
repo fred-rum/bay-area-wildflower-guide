@@ -9,7 +9,9 @@ See also {-white daisies} for daisies with white rays and {-sunflowers} for simi
 ==goldfields:Lasthenia spp.
 
 ==common woolly sunflower:Eriophyllum lanatum
+color: yellow
 
 ==marigolds:Calendula spp.
 
 ==bigelow's sneezeweed:Helenium bigelovii
+color: yellow

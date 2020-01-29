@@ -1,6 +1,7 @@
 sci:Matricaria spp.
 x:ca
 ==pineapple-weed:M. discoidea
+color: yellow, other
 . plant (1)10--30(50) cm
 . peduncle <= 1.5(2.5) cm
 . disturbed places

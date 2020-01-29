@@ -1,7 +1,9 @@
 sci:Cirsium fontinale
 
 ==mount hamilton fountain thistle:C. fontinale var. campylon
+color: white, other
 . scattered south of the bay
 
 ==crystal springs fountain thistle:C. fontinale var. fontinale
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0611+1149
 . scattered along 280 from Edgewood to San Andreas Lake

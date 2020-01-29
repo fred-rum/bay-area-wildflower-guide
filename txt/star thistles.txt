@@ -8,18 +8,21 @@ Key features:
 <h3>Yellow</h3>
 
 ==yellow starthistle:C. solstitialis
+color: yellow
 . disk flower corolla <b>13--20 mm</b>
 . spines <b>straw colored</b>, 10--25 mm
 . stem branched distally or throughout, winged
 . common
 
 ==tocalote:C. melitensis
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0105+2739
 . disk flower corolla <b>10--12 mm</b>
 . spines proximally <b>+- purple or red</b>, 5--10 mm
 . generally 1 stem, distally +- branched, winged
 . common
 
 ==sicilian star-thistle:C. sulphurea
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0175+3301+2288+0062
 . disk flower corolla <b>25--30 mm</b>
 . spines straw-colored or proximally purple-black, 10--25 mm
 . stem simple or openly branched, winged
@@ -32,15 +35,19 @@ Key features:
 These look distinct enough from each other to not need notes.
 
 ==purple star-thistle:C. calcitrapa
+color: purple, red purple
 
 ==bachelor's-button:C. cyanus
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0311+0802
 . Edgewood, Long Ridge, Mt. Diablo
 . currently called Cyanus segetum on iNaturalist, but POWO says it should be Centaurea cyanus.
 
 ==spotted knapweed:C. stoebe ssp. micranthos
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1213+0624
 . Sierra Azul & Mt. Umunhum
 
 ==iberian star-thistle:C. iberica
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0175+3301+2288+0037
 . white to pale purple with purple tips
 . rare
 

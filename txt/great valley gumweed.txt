@@ -1,2 +1,0 @@
-sci:Grindelia camporum
-color: yellow

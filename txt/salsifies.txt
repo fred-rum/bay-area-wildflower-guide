@@ -2,11 +2,13 @@ sci:Tragopogon spp.
 x:ba
 
 ==salsify:T. porrifolius
+color: purple
 . rays purple
 . 5--11 phyllaries, >= flowers when fully bloomed
 . pappus [seed parachute] +- brown
 
 ==yellow salsify:T. dubius
+color: yellow
 . rays pale lemon-yellow
 . 8--13 phyllaries, much exceeding flowers when fully bloomed [but not seed ball]
 . pappus [seed parachute] +- white

@@ -16,7 +16,9 @@ not be necessary if the differences are obvious.  The program will
 print a warning if the genus page is missing, or if any described
 species are missing from a genus page.
 
-The result is a number of independent trees of pages.
+The result is a number of (mostly) independent trees of pages.  Some
+trees may share a portion of hierarchy (e.g. when some trees don't use
+the strict scientific hierarchy).
 
 If the root of any tree is below the family level and the family is
 known, the program automatically creates a page for the family that

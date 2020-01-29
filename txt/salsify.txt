@@ -1,2 +1,0 @@
-sci:Tragopogon porrifolius
-color: purple

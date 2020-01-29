@@ -15,6 +15,8 @@ Key features
 . corolla +- red abasially or not
 
 ==common dandelion:Taraxacum officinale
+color: yellow
+x:more
 . unforked, hollow stem (the peduncle, really) (breaks easily), always glabrous
 . no cauline leaves
 . corolla yellow
@@ -37,6 +39,8 @@ Key features
 . corolla yellow, +- red abaxially for some species
 
 ==bristly oxtongue:Helminthotheca echioides
+color: yellow
+x:ca
 . coarse, stout, branched stem
 . basal and cauline leaves <b>warty</b>; proximal tapered to winged petioles; distal sessile, sometimes clasping
 . phyllaries in 2--3 overlapping series; outer phyllaries spreading to ascending

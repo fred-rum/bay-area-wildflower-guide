@@ -2,6 +2,7 @@ sci:Calendula spp.
 x:ca
 
 ==field marigold:C. arvensis
+color: orange
 . head, including rays, generally 1--4 cm diam
 . 5--20 ray flowers, 5--8 mm
 . leaf +- lanceolate 
