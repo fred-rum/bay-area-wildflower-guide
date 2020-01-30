@@ -24,6 +24,7 @@ Key features:
 <h2>notched petal tips</h2>
 
 ==cut-leaved crane's-bill:G. dissectum
+color: purple
 . stem hairs hairs rough, spreading to reflexed
 . leaf blade 2.5--5.4 cm wide, <b>divided 75--95% to base</b>
 . 5--7 leaf segments, diamond-shaped
@@ -57,6 +58,7 @@ Key features:
 . stigma lobes beige
 
 ==dove's-foot crane's-bill:G. molle
+color: purple
 . stem hairs +- sparse, soft
 . leaf blade 0.9--5.2 cm wide, divided 50--75% to base
 . 7--9 leaf segments, obtriangular
@@ -69,6 +71,7 @@ Key features:
 <h2>rounded petal tips</h2>
 
 ==herb robert:G. robertianum
+color: purple
 . stem hairs +- sparse
 . leaf blade 3.5--10 cm wide, <b>divided > 90% to base or midrib</b>
 . 5 leaf segments, +- sessile to short-stalked, pinnately lobed to dissected
@@ -78,6 +81,7 @@ Key features:
 . stigma lobes rose to purple
 
 ==little-robin:G. purpureum
+color: purple
 . also called "small herb robert", which is accurate
 . stem hairs soft
 . leaf blade 3--8.7 cm wide, <b>divided > 90% to base</b>
@@ -118,6 +122,7 @@ Key features:
 . stigma lobes dark
 
 ==alderney crane's-bill:G. core-core
+color: purple
 . stem hairs sparse, stiff, reflexed, appressed
 . leaf blade 1.5--5.6 cm wide, divided 55--80% to base
 . 5--7 leaf segments, broadly wedge-shaped

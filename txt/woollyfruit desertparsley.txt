@@ -1,2 +1,0 @@
-sci:Lomatium dasycarpum
-color: yellow

@@ -1,2 +1,0 @@
-sci:Castilleja densiflora
-color: pink, red purple

@@ -1,2 +1,0 @@
-sci:Thysanocarpus curvipes
-color: other

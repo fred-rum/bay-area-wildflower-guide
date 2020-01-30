@@ -1,3 +1,0 @@
-sci:Sinapis arvensis
-color: yellow
-x:hist

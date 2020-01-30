@@ -33,6 +33,7 @@ Key features:
 See also {-rough-fruited buttercup} below for another potentially aquatic buttercup.
 
 ==california buttercup:R. californicus
+color: yellow
 . stems erect to ascending or decumbent (prostrate), generally not rooting at nodes
 . <b>9--17 petals</b>, 7--14 mm long, 2--6 mm wide, yellow
 . very common
@@ -63,6 +64,7 @@ These buttercups all have <= 7 petals and potentially grow erect from land.  Jep
 . Sierra Azul, Del Valle, Mt. Diablo
 
 ==rough-fruited buttercup:R. muricatus
+color: yellow
 . stem erect to prostrate, from ground or water
 . 5 petals, <b>4--8 mm long</b>, 2--4.5 mm [wide], yellow
 . <b>receptacle bristly</b>

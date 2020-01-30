@@ -1,6 +1,7 @@
 x:ca
 
 ==wild radish:R. sativus
+color: purple, pale purple
 . petals pink to purple (or rarely white; check for pale purple veins?)
 . basal leaf blade 2--60 cm long, 1--20 cm wide, entire or pinnately lobed or divided
 .. 1--12 lateral lobes, dentate

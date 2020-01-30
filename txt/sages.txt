@@ -1,5 +1,7 @@
 sci:Salvia spp.
 
 ==black sage:S. mellifera
+color: white
 
 ==chia:S. columbariae
+color: purple

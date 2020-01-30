@@ -1,2 +1,0 @@
-sci:Geranium molle
-color: purple

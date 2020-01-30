@@ -1,2 +1,0 @@
-sci:Cardamine californica
-color: white

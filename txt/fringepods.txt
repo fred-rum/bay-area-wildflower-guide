@@ -7,6 +7,7 @@ Key features:
 . color of fertile anthers in flower
 
 ==sand fringepod:T. curvipes
+color: other
 . proximal pedicels in fruit recurved in a continuous arc, 3--7(12) mm
 . fruit 3--6(9) mm wide
 . <b>cauline leaves lanceolate</b>, bases lobed, clasping

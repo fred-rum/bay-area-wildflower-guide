@@ -2,7 +2,9 @@ sci:Triphysaria eriantha
 x:more
 
 ==butter-and-eggs:T. eriantha ssp. eriantha
+color: yellow, cream
 . corolla yellow/cream
 
 ==T. eriantha ssp. rosea
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0405+0806
 . corolla white, fading rose-pink

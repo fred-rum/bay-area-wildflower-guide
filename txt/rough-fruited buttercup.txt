@@ -1,2 +1,0 @@
-sci:Ranunculus muricatus
-color: yellow

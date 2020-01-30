@@ -7,6 +7,8 @@ sci:n/a
 . very common
 
 ==shortpod mustard:Hirschfeldia incana
+color: yellow
+x:any
 . <b>sepals spreading to reflexed</b>
 . stigma entire
 . <b>basal leaves in a rosette</b>
@@ -14,6 +16,8 @@ sci:n/a
 . very common
 
 ==wild mustard:Sinapis arvensis
+color: yellow
+x:hist
 . <b>sepals spreading</b>
 . stigma 2-lobed [?]
 . <b>basal leaves not in a rosette</b>

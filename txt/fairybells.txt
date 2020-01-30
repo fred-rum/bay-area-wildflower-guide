@@ -4,6 +4,7 @@ x:ba
 perianth parts 6, in 2 whorls, petal-like
 
 ==hooker's fairybells:P. hookeri
+color: other
 . leaf margin hairs many, short, sharp, ascending, blade abaxially minute-scabrous, especially on veins [very hard to see]
 . <b>perianth parts 8--18 mm, +- spreading at middle</b>
 . <b>anthers generally exserted</b>

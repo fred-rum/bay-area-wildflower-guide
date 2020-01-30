@@ -7,6 +7,7 @@ x:ba
 Key feature: bristles on sepal tips, sepal length
 
 ==common stork's-bill:E. cicutarium
+color: purple
 . stem +- glandular-hairy?
 . <b>sepals 3--5 mm, tip with one or more bristles</b>
 . petals +- = sepals
@@ -14,6 +15,7 @@ Key feature: bristles on sepal tips, sepal length
 . peduncle is often a deep red purple, but not always
 
 ==musk stork's-bill:E. moschatum
+color: purple
 . stem short hairy
 . <b>sepals 6--9 mm, tip glabrous</b> [with knob, but no bristles]
 . petals 10--15 mm [often shorter]
@@ -27,6 +29,7 @@ Key feature: bristles on sepal tips, sepal length
 Key feature: stem glandular or not, precise sepal length
 
 ==mediterranean stork's-bill:E. botrys
+color: purple
 . petals are rounder and with more prominent veins than in common/musk
 . <b>stem short-hairy</b>
 . <b>sepals 10--13 mm</b>, tip with one or more bristles
@@ -34,6 +37,7 @@ Key feature: stem glandular or not, precise sepal length
 . leaf lobed to dissected
 
 ==hairy-pitted stork's-bill:E. brachycarpum
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0818+2297
 . petals are rounder and with more prominent veins than in common/musk
 . <b>stem glandular-hairy</b>
 . <b>sepals 7--10 mm</b>, tip with one or more bristles
@@ -43,6 +47,7 @@ Key feature: stem glandular or not, precise sepal length
 ]
 
 ==soft stork's-bill:E. malacoides
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1105+0694
 . <b>leaf simple</b>, crenate to shallowly lobed, blade generally < petiole
 . sepals 4--6 mm, tip with one or more bristles
 . petals +- = sepals

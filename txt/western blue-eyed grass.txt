@@ -1,2 +1,0 @@
-sci:Sisyrinchium bellum
-color: purple

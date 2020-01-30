@@ -1,4 +1,6 @@
 sci:Bellardia spp.
 ==mediterranean lineseed:B. trixago
+color: white, pale purple
 
 ==yellow glandweed:B. viscosa
+color: yellow, cream

@@ -7,10 +7,12 @@ Key features:
 . petal color
 
 ==san francisco wallflower:E. franciscanum
+color: yellow
 . <b>stem base woody</b>; plant subshrub
 . scattered on Pacific coast
 
 ==western wallflower:E. capitatum
+color: orange, yellow
 . stem base not woody
 . leaves linear or wider, 3--<b>15</b>(30) cm wide
 . flower petals <b>orange to yellow</b> (lavender to +- purple)

@@ -2,9 +2,11 @@ sci:Cardamine spp.
 x:hist/rare
 
 ==milkmaids:C. californica
+color: white
 . petals 8--13 mm
 
 ==hairy bittercress:C. hirsuta
+color: white
 . petals 2.5--4.5 mm
 . stamens 4 (rarely 6)
 . pedicels erect to ascending

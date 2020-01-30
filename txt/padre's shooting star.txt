@@ -1,2 +1,0 @@
-sci:Primula clevelandii
-color: purple, red purple, pale purple, pink

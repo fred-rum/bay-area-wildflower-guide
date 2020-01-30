@@ -1,2 +1,0 @@
-sci:Clarkia rubicunda
-color: red purple

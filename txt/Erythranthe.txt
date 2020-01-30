@@ -7,6 +7,8 @@ x:rare
 corolla lower lip base generally swollen, +- closing mouth</h3>
 
 ==seep monkeyflower:E. guttata
+scip:Mimulus guttatus
+color: yellow, orange
 . 12'
 . plant glabrous to hairy distally
 . corolla tube exserted 3--5 mm beyond calyx
@@ -61,6 +63,8 @@ corolla lower lip base not swollen, not closing mouth</h2>
 ]
 
 ==scarlet monkeyflower:E. cardinalis
+scip:Mimulus cardinalis
+color: red
 . corolla red or orange-red
 
 ==rockjasmine monkeyflower:E. androsacea

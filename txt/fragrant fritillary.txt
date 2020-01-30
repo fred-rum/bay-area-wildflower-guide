@@ -1,2 +1,0 @@
-sci:Fritillaria liliacea
-color: other, purple, cream

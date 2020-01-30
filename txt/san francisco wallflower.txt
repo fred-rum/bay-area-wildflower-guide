@@ -1,2 +1,0 @@
-sci:Erysimum franciscanum
-color: yellow

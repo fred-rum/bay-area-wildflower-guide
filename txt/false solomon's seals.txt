@@ -7,6 +7,7 @@ Key features:
 . leaves with or without petioles
 
 ==false solomon's seal:M. racemosum
+color: white
 . Perianth parts 6
 . Inflorescence is a panicle
 . > 20 flowers per inflorescence
@@ -16,6 +17,7 @@ Key features:
 . common
 
 ==star-flowered lily-of-the-valley:M. stellatum
+color: white
 . Perianth parts 6
 . Inflorescence is a raceme (or few-branched near base)
 . 5--15 flowers per inflorescence

@@ -24,6 +24,7 @@ wavy leaf margin:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+
 . leaves clustered at nodes, sparsely hairy to densely tomentose, <b>leaf margin wavy</b>
 
 ==coyote mint:M. villosa
+color: pale purple, purple
 . subshrub to shrub with 1--many main stems, branched or not
 . 1--6 flowers clusters per main stem
 . <b>stem hairs > 0.3 mm</b>, +- dense or +- 0

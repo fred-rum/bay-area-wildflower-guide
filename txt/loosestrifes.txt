@@ -4,8 +4,10 @@ x:rare
 They all look pretty different from each other, so no key is necessary.
 
 ==scarlet pimpernel:L. arvensis
+color: orange, salmon
 
 ==western star flower:L. latifolia
+color: pale purple
 
 ==sea milkwort:L. maritima
 

@@ -11,10 +11,12 @@ stems generally branched<br/>
 generally drier places</h2>
 
 ==woolly indian paintbrush:Castilleja foliolosa
+color: red, salmon
 . <b>hairs woolly, felt-like, much-branched, +- white to +- gray</b>
 . leaves 10--50 mm, <b>+- linear</b>; lobes 0--3, tips obtuse; generally puberulent or glabrous (bristly)
 
 ==coast indian paintbrush:Castilleja affinis
+color: red, salmon
 . +- glabrous to bristly-puberulent, generally nonglandular
 . herbage not both with branched hairs and gray-green to white-woolly
 . calyx long-nonglandular- and short-glandular-hairy
@@ -22,12 +24,14 @@ generally drier places</h2>
 . leaves 20--80 mm, <b>+- lanceolate, generally not fleshy</b>; lobes 0--5, tips +- rounded; <b>generally puberulent or glabrous</b> (bristly)
 
 ==monterey indian paintbrush:Castilleja latifolia
+color: red, salmon
 . herbage not both with branched hairs and gray-green to white-woolly
 . corolla not curved out through abaxial side of calyx sinus
 . leaves <b>+- fleshy, oblong to rounded</b>, lobes 0--3, truncate-rounded; <b>hairs generally bristly or shaggy</b>
 . common on the peninsula + Alum Rock
 
 ==wavyleaf paintbrush:Castilleja applegatei
+color: red, salmon
 . herbage not both with branched hairs and gray-green to white-woolly
 . corolla not curved out through abaxial side of calyx sinus
 . leaves 20--70 mm, <b>+- lanceolate, generally wavy-margined</b>
@@ -35,12 +39,15 @@ generally drier places</h2>
 . Marin, Mt. Diablo, Sierra Azul, and scattered outside the bay area
 
 ==franciscan paintbrush:Castilleja subinclusa ssp. franciscana
+color: red, salmon
+xx:rare
 . herbage not both with branched hairs and gray-green to white-woolly
 . <b>corolla (including lower lip) generally curved out through abaxial calyx sinus</b> [e.g. the yellow-green corolla droops out of the red calyx]
 . leaves 30--80 mm, <b>lanceolate</b>; lobes 0--3
 . peninsula from Thornewood north and east bay from Chabot north
 
 ==wight's paint brush:Castilleja wightii
+color: red, salmon
 . herbage not both with branched hairs and gray-green to white-woolly
 . corolla not curved out through abaxial side of calyx sinus
 . <b>plant glandular-puberulent to -sticky-hairy close to inflorescence</b>

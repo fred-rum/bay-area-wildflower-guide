@@ -1,2 +1,0 @@
-sci:Castilleja latifolia
-color: red, salmon

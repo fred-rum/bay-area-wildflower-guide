@@ -1,2 +1,0 @@
-sci:Brassica rapa
-color: yellow

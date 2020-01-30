@@ -1,2 +1,0 @@
-sci:Castilleja affinis
-color: red, salmon

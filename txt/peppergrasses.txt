@@ -68,6 +68,7 @@ Petals and fruit can co-exist, even on the same plant, so look around for both.
 . <b>uncommon</b>
 
 ==broadleaved pepperweed:L. latifolium
+color: white
 . perennial herb, rhizomed, <b>woody caudex or base</b>
 .. all flowers *below* are not woody anywhere
 . basal leaves not in a rosette, entire or serrate
@@ -141,6 +142,7 @@ Petals and fruit can co-exist, even on the same plant, so look around for both.
 . rare
 
 ==shining pepperweed:L. nitidum
+color: white, red, other
 . annual
 . basal leaves not in a rosette, pinnately divided, early-deciduous
 . mid-cauline leaves similar, smaller, occasionally undivided

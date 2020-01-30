@@ -2,6 +2,7 @@ sci:Sisyrinchium
 x:ba
 
 ==western blue-eyed grass:S. bellum
+color: purple
 . purple with yellow center
 . very common
 

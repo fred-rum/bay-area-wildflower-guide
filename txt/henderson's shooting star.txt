@@ -1,2 +1,0 @@
-sci:Primula hendersonii
-color: purple, red purple, pale purple, pink

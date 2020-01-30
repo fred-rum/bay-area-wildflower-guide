@@ -26,7 +26,9 @@ genus, the elaborated name is "(Genus) spp.".  For a subspecies or
 variety, the elaborated name "(Genus) (species) ssp. (subspecies)" or
 "(...) var. (...)".  If the scientific name is stripped of its
 elaborations, "spp." is assumed for a single-word name and "ssp." is
-assumed for a three-word name.
+assumed for a three-word name.  If the species name starts with an
+'X', e.g. "Iris Xgermanica", the 'X' is stripped off and a cross is
+displayed to mark it as a hybrid.
 
 If the common name or scientific name is not explicitly specified, the
 program will attempt to find one by searching through observations.csv

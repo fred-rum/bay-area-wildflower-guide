@@ -1,12 +1,14 @@
 sci:Clematis spp.
 x:ca
 ==pipestem clematis:C. lasiantha
+color: other
 . leaflets generally 3--5
 . inflorescence generally 1-flowered
 . <b>sepals 10--21 mm, >> stamens</b>, hairy both abaxially and adaxially
 . <b>flower Jan--Jun</b>
 . Ecology: Hillsides, chaparral, open woodland
 . common
+See also {-creamcups}.
 
 ==western virgin's bower:C. ligusticifolia
 . leaflets 5--15 [but CalPhotos shows many with 3]

@@ -1,2 +1,0 @@
-sci:Iris douglasiana
-color: purple, pale purple

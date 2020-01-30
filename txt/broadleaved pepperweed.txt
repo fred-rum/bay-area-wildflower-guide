@@ -1,2 +1,0 @@
-sci:Lepidium latifolium
-color: white

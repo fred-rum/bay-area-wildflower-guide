@@ -18,6 +18,7 @@ The perianth tube is measured from the base of the stamens to the top of the ova
 <h2>Perianth tube > 30 mm</h2>
 
 ==fernald's iris:I. fernaldii
+color: cream, yellow
 . perianth yellow, veined darker
 . <b>perianth tube 35-60 mm</b>, narrow, gradually <b>funnel-shaped distally</b>
 . stem unbranched, 20--40 cm
@@ -30,7 +31,8 @@ The perianth tube is measured from the base of the stamens to the top of the ova
 . rare; Santa Cruz range, south from Foothills
 
 ==bowltube iris:I. macrosiphon
-. ID uncertain
+color: purple
+<b>Warning: ID uncertain.</b>
 . perianth cream to gold-yellow or lavender to deep blue-purple, generally veined darker
 . <b>perianth tube 34--65 mm, abruptly inflated, bowl-like at top</b>
 . stem unbranched, 0--15 cm
@@ -48,6 +50,7 @@ The perianth tube is measured from the base of the stamens to the top of the ova
 
 <h3>Stigmas triangular</h3>
 ==douglas iris:I. douglasiana
+color: purple, pale purple
 . perianth light to dark lavender, deep red-purple, or pale cream, veined purple
 . <b>perianth tube 10--24 mm</b>, funnel-shaped
 . stem generally branched, 15--50 cm
@@ -59,6 +62,7 @@ The perianth tube is measured from the base of the stamens to the top of the ova
 . style branches 30--50 mm, crests 9--20 mm, <b>stigmas triangular</b>
 
 ==yellow iris:I. pseudacorus
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1202+1176
 . perianth generally <b>bright yellow or cream</b> with prominent brown veins, marks on sepals
 . <b>perianth tube 12--13 mm</b>, barrel-shaped
 . stem branched, 50--150 cm
@@ -70,6 +74,7 @@ The perianth tube is measured from the base of the stamens to the top of the ova
 . Jasper, Marin, Mt. Tam; pond margins, estuaries
 
 ==bearded iris:I. Xgermanica
+sci_fpj:Iris germanica
 beard:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0606+1819
 . <b>sepal obviously bearded</b>
 .. the beard is a dense line of hairs extending along the petal midline through the throat, but not much beyond
@@ -80,6 +85,7 @@ beard:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0606+1819
 <h3>Stigmas 2-lobed</h3>
 
 ==central coast iris:I. longipetala
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0711+1100
 . perianth <b>lilac-purple</b>, veined darker
 . <b>perianth tube 5--13 mm</b>, funnel-shaped
 . stem rarely branched, 30--60 cm
@@ -93,6 +99,7 @@ beard:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0606+1819
 . scattered; moist, coastal prairie or open coastal forest
 
 ==stinking iris:I. foetidissima
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0515+0674
 . perianth <b>pale yellow to brown, red-brown, or green</b>, veined green or red-brown
 . <b>perianth tube 11--14 mm</b>, constricted near ovary
 . stem generally branched, 25--40 cm

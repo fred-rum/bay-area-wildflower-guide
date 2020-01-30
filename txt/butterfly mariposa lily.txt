@@ -1,2 +1,0 @@
-sci:Calochortus venustus
-color: white, cream, pale purple, pink, salmon

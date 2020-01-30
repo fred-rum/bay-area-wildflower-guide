@@ -1,2 +1,0 @@
-sci:Lysimachia latifolia
-color: pale purple

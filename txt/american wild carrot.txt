@@ -1,2 +1,0 @@
-sci:Daucus pusillus
-color: other

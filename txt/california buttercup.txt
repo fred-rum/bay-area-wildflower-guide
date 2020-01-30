@@ -1,2 +1,0 @@
-sci:Ranunculus californicus
-color: yellow

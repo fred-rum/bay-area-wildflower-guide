@@ -1,2 +1,0 @@
-sci:Stachys bullata
-color: pale purple

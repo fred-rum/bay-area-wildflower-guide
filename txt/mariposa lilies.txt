@@ -7,6 +7,7 @@ Key features:
 . bulblets present or not
 
 ==yellow mariposa lily:C. luteus
+color: yellow
 . corolla is deep yellow, with small red spots plus perhaps one central red blotch
 . nectary (yellow/orange spot amidst hair) is crescent-shaped or oblong
 
@@ -18,12 +19,14 @@ Key features for butterfly vs. clay:
 . nectary is square or crescent shaped
 
 ==butterfly mariposa lily:C. venustus
+color: white, cream, pale purple, pink, salmon
 . nectary (yellow/orange spot amidst hair) generally +- square (discounting the curve of the petal), not in red spot
 . each petal has a central dark blotch, generally a 2nd paler blotch above
 . stem generally branched
 . <b>tremendous potential variation in color</b>; <a href="https://www.calflora.org/cgi-bin/noccdetail.cgi?seq_num=oe3122">examples</a>
 
 ==clay mariposa lily:C. argillosus
+color: white, pink, pale purple, purple
 . nectary (yellow/orange spot amidst hair) is crescent shaped
 . each petal has a central dark blotch, but without a 2nd blotch above
 . stem simple
@@ -34,6 +37,7 @@ Key features for butterfly vs. clay:
 ]
 
 ==pussy-ears:C. tolmiei
+color: white, pink, purple
 . petal not spotted or striped (but hairs on petal may be)
 . petal conspicuously hairy adaxially (on top)
 
@@ -65,6 +69,7 @@ Key features for butterfly vs. clay:
 <h2>globe lilies</h2>
 
 ==white globe lily:C. albus
+color: white, cream
 . flower nodding, perianth +- closed, globe shaped
 . petals not yellow
 

@@ -2,6 +2,7 @@ sci:Brassica spp.
 x:hist/rare
 
 ==field mustard:B. rapa
+color: yellow
 . stem 30--100 cm, simple or branched
 . basal leaves pinnately lobed, lateral lobes 2--4(6) pairs, terminal lobe obovate, wavy-dentate
 . middle and <b>distal cauline leaves</b> sessile, <b>base lobed, generally clasping</b>
@@ -11,6 +12,7 @@ x:hist/rare
 . very common
 
 ==black mustard:B. nigra
+color: yellow
 . stem 30--200 cm, generally branched distally
 . basal and lower cauline leaves pinnately lobed, serrate-dentate
 . <b>distal cauline leaves</b> smaller, sessile, <b>base tapered, not lobed</b>

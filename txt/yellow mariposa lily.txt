@@ -1,2 +1,0 @@
-sci:Calochortus luteus
-color: yellow

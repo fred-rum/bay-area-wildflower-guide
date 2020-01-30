@@ -1,2 +1,0 @@
-sci:Sanicula crassicaulis
-color: yellow

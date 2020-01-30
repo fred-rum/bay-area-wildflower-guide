@@ -1,2 +1,0 @@
-sci:Salvia columbariae
-color: purple

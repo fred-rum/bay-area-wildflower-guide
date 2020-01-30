@@ -1,2 +1,0 @@
-sci:Iris Xgermanica
-sci_fpj:Iris germanica

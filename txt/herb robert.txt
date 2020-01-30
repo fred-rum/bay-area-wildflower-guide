@@ -1,2 +1,0 @@
-sci:Geranium robertianum
-color: purple

@@ -8,6 +8,7 @@ Key features:
 . range
 
 ==santa clara red ribbons:C. concinna ssp. automixa
+color: red purple
 . petals <b>10--20 mm</b> long
 . stigma not exserted beyond anthers (maybe)
 . petal lobes prominent, separated by deep sinuses
@@ -15,6 +16,7 @@ Key features:
 . <a href="https://www.calflora.org/entry/dgrid.html?crn=2176">range</a> centered on Santa Clara
 
 ==C. concinna ssp. concinna
+color: red purple
 . petals <b>15--30 mm</b> long
 . stigma exserted beyond anthers (maybe)
 . petal lobes prominent, separated by deep sinuses
@@ -22,6 +24,7 @@ Key features:
 . <a href="https://www.calflora.org/entry/dgrid.html?crn=2177">range</a> includes the east bay and areas north of the bay
 
 ==raiche's red ribbons:C. concinna ssp. raichei
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0918+1532
 . petals <b>10--20 mm</b> long
 . stigma not exserted beyond anthers (maybe)
 . petal lobes short, not separated by deep sinuses

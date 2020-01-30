@@ -2,9 +2,11 @@ sci:Primula spp.
 x:ba
 
 ==henderson's shooting star:P. hendersonii
+color: purple, red purple, pale purple, pink
 . peduncle purple (or mix of purple/green)
 . leaf blade length generally < 2 &times; width
 
 ==padre's shooting star:P. clevelandii
+color: purple, red purple, pale purple, pink
 . peduncle bright green
 . leaf blade length generally > 2 &times; width

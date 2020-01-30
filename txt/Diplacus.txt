@@ -1,12 +1,16 @@
 x:hist/rare
 
 ==orange bush monkeyflower:D. aurantiacus
+scip:Mimulus aurantiacus
+color: orange
 . subshrub or shrub
 . corolla orange
 
 [
 <h2>corolla purple</h2>
 ==congdon's monkeyflower:D. congdonii
+scip:Mimulus congdonii
+color: red purple
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0110+0798
 . herb
 . 5 corolla limbs, +- equal, each 3--11 mm wide

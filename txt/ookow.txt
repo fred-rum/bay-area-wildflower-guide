@@ -1,2 +1,0 @@
-sci:Dichelostemma congestum
-color: purple

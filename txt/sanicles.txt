@@ -10,6 +10,7 @@ Key features:
 <h2>compound leaves</h2>
 
 ==poison sanicle:S. bipinnata
+color: yellow
 . plant 12--60 cm; stem leafy
 . leaf green, compound, ternate then 1--2-pinnate; blade 3--10 cm, +- ovate, leaflets well separated, stalked, margins entire to lobed, distal segment of main axis 1--5 mm wide
 . peduncle 1.5--9 cm
@@ -49,6 +50,7 @@ Key features:
 <h3>leaf palmate or palmate-ternate</h3>
 
 ==pacific sanicle:S. crassicaulis
+color: yellow
 . plant stout, 24--120 cm, generally branched well distal to base
 . leaf green, generally palmate or palmate-ternate; blade 3--12 cm, generally +- rounded-cordate, lobes 3--5, obovate, generally +- deeply cut, margins finely sharp-serrate, teeth generally +- 1 mm, central lobe generally >= 10 mm wide at base, distal segment 4--20 mm wide
 . peduncle 0.7--8 cm
@@ -75,6 +77,7 @@ Key features:
 ]
 
 ==purple sanicle:S. bipinnatifida
+color: red purple, yellow
 . plant 12--60 cm
 . leaf green, simple, 1--2-pinnately dissected, axis of main division with at least a narrow, toothed wing throughout, glaucous, or +- purple; blade 4--19 cm, oblong-ovate to +- round, main divisions generally >= 7, generally narrow, sharply toothed
 . peduncle 0.5--16 cm

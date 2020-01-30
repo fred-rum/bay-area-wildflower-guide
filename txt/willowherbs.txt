@@ -12,9 +12,12 @@ Key features:
 proximal stem not peeling</h3>
 
 ==california fuchsia:E. canum
+color: red
 . common
+See also {-red larkspur}.
 
 ==fringed willowherb:E. ciliatum
+color: pale purple
 . <b>leaf veins conspicuous</b>
 . common
 
@@ -30,6 +33,7 @@ proximal stem generally peeling</h3>
 These are generally distinguished in Jepson by seed characteristics.  I've sorted them by maximum height (which roughly corresponds to maximum petal length).  Good luck!
 
 ==panicled willowherb:E. brachycarpum
+color: pale purple
 . 20--200 cm tall
 . leaf 10--55 mm, linear to narrowly elliptic, generally folded along midrib, +- glabrous; petiole 0--4 mm
 . panicle or raceme inflorescence

@@ -2,10 +2,12 @@ sci:Triteleia ixioides
 xx:ba
 
 ==golden brodiaea:T. ixioides ssp. ixioides
+color: yellow
 . perianth tube < lobes
 . perianth lobes <b>ascending to spreading</b>
 
 ==cook's triteleia:T. ixioides ssp. cookii
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0301+0111
 . perianth tube +- = lobes
 . perianth lobes <b>reflexed</b>
 . range is <b>south of Big Sur</b>

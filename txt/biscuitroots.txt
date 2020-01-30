@@ -13,6 +13,7 @@ Key features:
 <h3>Leaf dissected, segments generally many, small, occasionally long but then narrow</h3>
 
 ==woollyfruit desertparsley:L. dasycarpum
+color: yellow
 . plant generally with a definite stem; cauline leaves 0 or like basal
 . [possibly little or no sheathing on cauline leaf petioles, but CalPhotos doesn't show them one way or another]
 . leaf segments 2--6 mm, generally linear
@@ -21,6 +22,7 @@ Key features:
 . common in the Santa Cruz range, uncommon elsewhere
 
 ==foothill desert-parsley:L. utriculatum
+color: yellow
 . plant generally with a definite stem, stem leaves generally >= 2
 . cauline leaf petioles conspicuously sheathing throughout (<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=6121+1611+3984+0073">example</a>)
 . leaf segments 2--25 mm, generally linear

@@ -10,12 +10,14 @@ Key features:
 <h3>Unique corolla shapes</h3>
 [
 ==elegant clarkia:C. unguiculata
+color: pale purple
 . axis in bud straight; buds reflexed [i.e. <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=5207+1611+0748+0049"> drooping</a>]
 . all 4 sepals staying fused [theoretically, but this varies]
 . <b>petals 10--25 mm [unspotted]; petal claw slender [unlobed]</b>
 . found everywhere
 
 ==diamond clarkia:C. rhomboidea
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=8076+3101+0669+0058
 . looks much like elegant clarkia
 . axis in bud <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=5207+1611+0748+0092">recurved at tip</a>; buds pendent
 . sepals all coming free [sometimes reflexed, sometimes spreading]
@@ -28,6 +30,7 @@ Key features:
 . scattered throughout the bay area
 
 ==fairy fans:C. breweri
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1210+0994
 . Henry Coe, Sierra Azul and vicinity
 
 <h3>Standard corolla shapes, buds erect or reflexed</h3>
@@ -47,6 +50,7 @@ Key features:
 . rare: coastal
 
 ==ruby chalice clarkia:C. rubicunda
+color: red purple
 . all 4 sepals staying fused
 . ovary and immature fruit 4-grooved
 . petals with +- red spot or zone at <b>base of petal</b>
@@ -67,6 +71,7 @@ Key features:
 . Sunol, scattered in the Santa Cruz range, Marin
 
 ==chaparral clarkia:C. affinis
+color: red purple
 . all 4 sepals staying fused
 . ovary and immature fruit <b>8-grooved</b>
 . scattered around the east bay; only historically on the peninsula

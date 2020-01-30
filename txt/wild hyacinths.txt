@@ -9,6 +9,7 @@ The defining difference is the number of stamens, but I can't count them without
 There is supposed to be a difference in bracts color, but I can't consistently see it on CalPhotos.
 
 ==blue dicks:D. capitatum
+color: purple
 . perianth blue, blue-purple, pink-purple, or white
 . staminodes erect, <b>leaning toward anthers, outward at tip</b>, white
 . perianth tube <b>not narrowed</b> above ovary
@@ -17,6 +18,7 @@ There is supposed to be a difference in bracts color, but I can't consistently s
 . common throughout the bay area
 
 ==ookow:D. congestum
+color: purple
 . perianth blue-purple
 . staminodes erect, <b>leaning away from anthers</b>, +-purple
 . perianth tube <b>narrowed</b> above ovary or +-so
@@ -25,6 +27,7 @@ There is supposed to be a difference in bracts color, but I can't consistently s
 . scattered throughout the bay area
 
 ==wild hyacinth:D. multiflorum
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0208+0434
 . spreading corolla lobes (although blue dicks can sometimes be more or less spreading)
 . staminodes are each entire/truncate, not notched
 . perianth pink- to blue-purple

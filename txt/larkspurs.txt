@@ -19,12 +19,15 @@ Key features:
 There may be additional useful features that I haven't pulled from Jepson eFlora.
 
 ==red larkspur:D. nudicaule
+color: red
 . sepals forward-pointing, <b>scarlet to orange-red (dull yellow)</b>, lateral 8--16 mm, spur 12--34 mm
 . petals +- glabrous to naked eye
 . stem 15--50 cm (--125), generally glabrous
 . common in bay area
+See also {-california fuchsia}.
 
 ==zigzag larkspur,-2:D. patens
+color: purple
 . number of flowers and pedicel length indeterminate
 . <b>generally < 6 flowers on main axis?</b> [how many axes are there?]; if more, oldest open-flowered pedicels generally > 25 mm and > 2 &times; youngest
 . sepals bright or dark blue [or purple, derp], <b>reflexed</b>, generally glabrous
@@ -34,6 +37,7 @@ There may be additional useful features that I haven't pulled from Jepson eFlora
 . common in bay area
 
 ==coastal larkspur:D. decorum
+color: purple
 . <b>2--20 flowers</b>
 . pedicels 10--63 mm, 10--25 mm apart
 . if >= 6 flowers, oldest open-flowered pedicels generally > 25 mm and > 2 &times; youngest
@@ -44,6 +48,7 @@ There may be additional useful features that I haven't pulled from Jepson eFlora
 . scattered around bay area
 
 ==california larkspur:D. californicum
+color: pale purple, other
 . <b>generally > 50 flowers</b>
 . <b>generally >= 2 stems, 100--160 cm</b> (60--220), generally puberulent
 . sepals forward-pointing, +- lavender or +- green-white depending on subspecies [maybe]
@@ -51,6 +56,7 @@ There may be additional useful features that I haven't pulled from Jepson eFlora
 . common in bay area
 
 ==royal larkspur:D. variegatum
+color: purple
 . <b>flowers on main axis generally < 10</b>
 . pedicels +- ascending, 6--74 mm, 10--25 mm apart, generally puberulent
 . if <= 6 flowers on main axis, oldest open-flowered pedicel generally < 25 mm or < 2 &times; youngest
@@ -63,6 +69,7 @@ There may be additional useful features that I haven't pulled from Jepson eFlora
 . scattered around bay area
 
 ==eldorado larkspur:D. hansenii
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1209+2030
 . <b>flowers generally > 12</b>
 . <b>stem 25--180 cm; base puberulent to hairy</b>
 . <b>proximal petiole hairs > 0.5 mm, straight, spreading, white, and some not</b>
@@ -72,6 +79,7 @@ There may be additional useful features that I haven't pulled from Jepson eFlora
 . Mt. Diablo
 
 ==foothill larkspur:D. hesperium
+color: purple
 . <b>flowers 5--100</b> [CalPhotos shows them all with similar pedicel lengths, not longer at the bottom]
 . <b>stem 40--80 cm</b> (10--120), <b>base generally ridged</b>
 . proximal petiole hairs are unknowable
@@ -83,6 +91,7 @@ There may be additional useful features that I haven't pulled from Jepson eFlora
 . common in bay area
 
 ==san bernardino larkspur:D. parryi
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1204+0757
 . <b>flowers 3--60</b>
 . <b>pedicels +- ascending, 5--68 mm, 8--50 mm apart, generally puberulent</b>
 . if <= 6 flowers, oldest open-flowered pedicel generally < 25 mm or < 2 &times; youngest

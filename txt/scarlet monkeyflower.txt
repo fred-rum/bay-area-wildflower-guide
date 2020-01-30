@@ -1,3 +1,0 @@
-sci:Erythranthe cardinalis
-scip:Mimulus cardinalis
-color: red

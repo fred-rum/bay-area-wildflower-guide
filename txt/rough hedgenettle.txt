@@ -1,2 +1,0 @@
-sci:Stachys rigida
-color: pale purple

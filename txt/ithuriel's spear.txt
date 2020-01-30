@@ -1,2 +1,0 @@
-sci:Triteleia laxa
-color: purple
