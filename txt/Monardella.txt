@@ -32,6 +32,7 @@ color: pale purple, purple
 . common
 
 ==mountain monardella:M. odoratissima ssp. pallida
+xx:ba
 white corolla<br/>short stem hairs:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1109+2256
 . subshrub with 1--many main stems
 . 1 flower cluster per main stem

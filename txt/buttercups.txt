@@ -50,6 +50,7 @@ These buttercups all have <= 7 petals and potentially grow erect from land.  Jep
 . Pleasanton Ridge, Chabot
 
 ==sacramento valley buttercup:R. canus var. canus
+xx:ba
 . stem erect to decumbent
 . 5--7 petals, <b>6--12 mm long</b>, 3--6 mm wide, yellow
 . receptacle glabrous
@@ -57,6 +58,7 @@ These buttercups all have <= 7 petals and potentially grow erect from land.  Jep
 . Mission Peak, Sunol, Mt. Diablo
 
 ==western buttercup:R. occidentalis var. occidentalis
+xx:ba
 . stem erect to decumbent
 . 5--6 petals, <b>5--10 mm long</b>, 3--6 mm wide, yellow
 . receptacle glabrous

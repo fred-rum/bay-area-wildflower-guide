@@ -75,6 +75,7 @@ color: pale purple
 . stem decumbent to erect, branched at base, 20--70 cm
 
 ==deerpea vetch:V. ludoviciana ssp. ludoviciana
+xx:ca
 . 1--3 flowers, near tip, <b>generally crowded</b>
 . 4--10 leaflets, 10--25 mm, narrowly oblong to elliptic
 . <b>leaflet tip acute, 1-toothed, or occasionally truncate</b>

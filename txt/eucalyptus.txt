@@ -10,6 +10,7 @@ Key features:
 . hypanthium shape
 
 ==tasmanian blue gum:E. globulus
+color: white, cream
 . individual flowers in leaf axils, sessile
 .. [the leaf may be not present]
 . fruit glaucous, > 1.5 cm wide

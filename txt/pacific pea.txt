@@ -1,2 +1,0 @@
-sci:Lathyrus vestitus
-color: pale purple

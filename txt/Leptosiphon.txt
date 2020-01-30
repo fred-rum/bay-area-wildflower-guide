@@ -143,6 +143,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0407+2819
 . uncommon
 
 ==whiskerbrush:L. ciliatus
+sci_p:Linanthus ciliatus
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0209+1956
 . corolla:
 .. tube pink/white

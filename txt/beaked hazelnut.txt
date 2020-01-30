@@ -3,6 +3,7 @@ x:ca
 xx:any
 
 ==california hazelnut:C. cornuta ssp. californica
+color: other, red
 . beak < 3 cm
 . common
 

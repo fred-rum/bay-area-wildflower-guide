@@ -17,12 +17,14 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0110+0798
 . calyx 5--14 mm, ribs hairy
 
 ==brownies:D. douglasii
+scip:Mimulus douglasii
 https://www.calflora.org/cgi-bin/noccdetail.cgi?seq_num=io1310
 . herb
 . 2 corolla limbs, bilateral, each 10--18 mm wide (3 more corolla limbs are stumpy)
 . calyx 8--14 mm, hairy
 
 ==rattan's monkeyflower:D. rattanii
+scip:Mimulus rattanii
 https://www.calflora.org/cgi-bin/noccdetail.cgi?seq_num=gp16646
 . herb
 . 5 corolla limbs, equal or 2 larger, each 4--7 mm wide

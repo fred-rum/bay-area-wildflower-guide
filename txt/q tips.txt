@@ -1,3 +1,2 @@
 com:Q tips
 sci:Micropus californicus
-color: white

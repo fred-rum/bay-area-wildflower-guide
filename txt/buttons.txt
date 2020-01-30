@@ -2,6 +2,7 @@ sci:Cotula spp.
 x:hist
 
 ==brass buttons:C. coronopifolia
+color: yellow
 . glabrous, +- fleshy
 . leaf blade entire or irregularly toothed or lobed
 . corolla bright yellow, 1--1.5 mm

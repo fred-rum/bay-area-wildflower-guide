@@ -6,6 +6,7 @@ color:white
 . fruit < 12 mm, papillate (like the surface of your tongue)
 
 ==strawberry tree:A. unedo
+scij:n/a
 . leaves serrated
 . fruit 1--2 cm, papillate (like the surface of your tongue)
 . rare; at Arastradero

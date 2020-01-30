@@ -9,13 +9,12 @@ corolla lower lip base generally swollen, +- closing mouth</h3>
 ==seep monkeyflower:E. guttata
 scip:Mimulus guttatus
 color: yellow, orange
-. 12'
 . plant glabrous to hairy distally
 . corolla tube exserted 3--5 mm beyond calyx
 . stems 15--65+ cm
 
 ==E. grandis
-. 12
+scip:Mimulus grandis
 . calyx uppermost lobe longest, lowest 2 generally upcurved
 . corolla lower lip base generally swollen, +- closing mouth
 . stems 50--120+ cm
@@ -29,34 +28,34 @@ color: yellow, orange
 corolla lower lip base not swollen, not closing mouth</h2>
 
 ==coastal monkeyflower:E. dentata
+scip:Mimulus dentatus
 . stolons or rhizomes present
 . <b>leaf blade 15--70 mm</b>
 . <b>herbage non-glandular</b>
 . <b>corolla tube generally > 4 mm wide</b>
 . calyx hairy
-. 24
 . very rare
 
 ==muskflower:E. moschata
+scip:Erythranthe inodora|Mimulus moschatus
 . stolons or rhizomes present
 . <b>leaf blade 20--50 mm</b>
 . <b>herbage glandular</b>
 . <b>corolla tube 2--4 mm wide except wider at mouth</b>
 . calyx glabrous to slimy-hairy
-. 25
 
 ==purple-stemmed monkeyflower:E. floribunda
+scip:Mimulus floribundus
 . neither stolons nor rhizomes present
 . <b>leaf blade 8--25 mm</b>
 . herbage hairy, generally +- slimy
 . <b>calyx +- hairy</b>
-. 29
 
 ==broadtooth monkeyflower:E. latidens
+scip:Mimulus latidens
 . neither stolons nor rhizomes present
 . <b>leaf 4--25 mm</b>, proximal-most +- petioled, <b>in basal rosette</b>
 . <b>calyx tube glabrous to puberulent</b>
-. 36
 . very rare
 
 ]
@@ -68,6 +67,7 @@ color: red
 . corolla red or orange-red
 
 ==rockjasmine monkeyflower:E. androsacea
+scip:Mimulus androsaceus
 . corolla pink to purple
 . also check the purple flowers in {-Diplacus}
 .. leaf bases clasping

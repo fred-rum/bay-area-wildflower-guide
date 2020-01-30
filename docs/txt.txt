@@ -39,24 +39,6 @@ other sites may be out of date or have made a different choice.  In
 that case, different scientic names can be specified for the various
 sites where it differs from the iNaturalist name:
 
-sci_j:[name] specifies the scientific name as listed in Jepson.
-sci_f:[name] specifies the scientific name as listed in CalFlora.
-sci_p:[name] specifies the scientific name as listed in CalPhotos.
-
-Multiple names can be specified for CalPhotos, separated by |.  The
-iNaturalist name is also automatically included in the CalPhotos
-search.
-
-color:[names] specifies the colors of the flower, separated by commas.
-Supported colors are in the color_list variable.  Colors are expected
-for all taxons with associated photos, and not for taxons without
-photos.
-
-https://calphotos.berkeley.edu/[...] associates a CalPhotos link with
-the page.  A placeholder image is added to the list of images, along
-with a link to the CalPhotos page.  If '[label]:' appears before the
-link, the corresponding label is added to the placeholder.
-
 Page links:
 
 ==[name] creates a child relationship to the named page.  The
@@ -76,6 +58,37 @@ the child declaration, not separated by a blank line), the link and
 the additional text are formatted as a unit.  On a wide page, the
 additional text appears next to the image and below the name; on a
 narrow page, the additional text appears below the image and name.
+
+The following info can be included as part of the key for a child.  If
+it appears elsewhere in the txt file (not in the paragraph following a
+child link), the info is applied to the page itself.
+
+sci_j:[name] specifies the scientific name as listed in Jepson.
+sci_f:[name] specifies the scientific name as listed in CalFlora.
+sci_p:[name] specifies the scientific name as listed in CalPhotos.
+
+Multiple names can be specified for CalPhotos, separated by |.  The
+iNaturalist name is also automatically included in the CalPhotos
+search.
+
+If multiple sites use the same scientific name, they can be combined
+into one declaration, e.g. "sci_jfp:[name]".
+
+If the name is "n/a", it indicates that the taxon is not listed under
+any name at a site.
+
+color:[names] specifies the colors of the flower, separated by commas.
+Supported colors are in the color_list variable.  Colors are expected
+for all taxons with associated photos, and not for taxons without
+photos.
+
+https://calphotos.berkeley.edu/[...]
+https://www.calflora.org/cgi-bin/noccdetail.cgi[...]
+These links associate an external photo with the page.  A placeholder
+image is added to the list of images, along with a link to the
+CalPhotos/CalFlora page.  If '[label]:' appears before the link, the
+corresponding label is added to the placeholder.
+
 
 {-[page]} creates a link to the page without creating a child
 relationship.  The link is just the common and scientific names of the

@@ -1,6 +1,8 @@
 sci:n/a
 
 ==milk thistle:Silybum marianum
+color: purple
+x:ba
 
 ==plumeless thistles:Carduus spp.
 

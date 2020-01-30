@@ -1,2 +1,0 @@
-sci:Cotula coronopifolia
-color: yellow

@@ -13,6 +13,7 @@ Key features:
 <h2>many flowers, many leaflets</h2>
 
 ==pacific pea:L. vestitus
+color: pale purple
 . 8--15 flowers in inflorescence
 . generally 8--12 leaflets per leaf
 . leaf axis ends in branched, coiled tendril
@@ -20,6 +21,7 @@ Key features:
 . corolla 14--20 mm, pale lavendar to dark purple or wine red or white, depending on variety
 
 ==delta tule pea:L. jepsonii
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1107+1066
 . 6--15 flowers in inflorescence
 . 10--16 leaflets per leaf
 . leaf axis ends in branched, coiled tendril
@@ -41,6 +43,7 @@ Key features:
 <h2>many flowers, two leaflets</h2>
 
 ==broad-leaved sweet pea:L. latifolius
+color: pink, red purple
 . <b>4--15 flowers</b> in inflorescence
 . 2 leaflets per leaf
 . <b>stem with wings often >= 2 mm wide</b>
@@ -72,6 +75,7 @@ Key features:
 . corolla 8--10 mm, <b>lilac to pale purple-blue</b>
 
 ==hairy vetchling:L. hirsutus
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+1111+1234+4121
 . <b>1--2 flowers in inflorescence</b>
 . <b>2 leaflets per leaf</b>
 . inflorescence axis not extended beyond flower
@@ -83,6 +87,7 @@ Key features:
 <h2>one flower, two leaflets</h2>
 
 ==red vetchling:L. cicera
+color: red, red purple
 . 1 flower in inflorescence
 . 2 leaflets per leaf
 . corolla 10--15 mm, red
@@ -90,6 +95,7 @@ Key features:
 . calyx tube << lobes
 
 ==grass pea:L. sphaericus
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1108+1963
 . 1 flower in inflorescence
 . 2 leaflets per leaf
 . corolla 8--14 mm, red
@@ -97,6 +103,7 @@ Key features:
 . calyx tube &plusmn; &le; lobes
 
 ==angled pea:L. angulatus
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0615+0781
 . 1 flower in inflorescence
 . 2 leaflets per leaf
 . corolla 9--12 mm, <b>lavender or purple</b>

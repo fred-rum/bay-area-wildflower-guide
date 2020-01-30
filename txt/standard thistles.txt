@@ -17,6 +17,7 @@ color: purple
 . common
 
 ==short-styled thistle:C. brevistylum
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1007+1563
 . abaxial face of outer and middle phyllaries without sticky-resinous ridge
 . margins of outer phyllaries may be irregularly toothed to spiny-ciliate or +- entire
 . heads generally closely subtended by +- well-developed distal leaves or clustered bract-like leaves
@@ -33,12 +34,14 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1208+0592
 . scattered
 
 ==franciscan thistle:C. andrewsii
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0611+1174
 . abaxial face of outer and middle phyllaries without sticky-resinous ridge
 . margins of outer phyllaries irregularly toothed to spiny-ciliate
 . corolla lobes linear, tips not knob-like; style conspicuously exserted; stem cobwebby, +- glabrous in age, coarser, multicellular hairs 0
 . Marin
 
 ==swamp thistle:C. douglasii var. douglasii
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0611+2130
 . abaxial face of outer and middle phyllaries with long, sticky-resinous ridge (milky when fresh, dark when dry, occasionally very narrow)
 . margins of phyllaries entire
 . stem with few or 0 coarse, multicellular hairs, thinly to densely cobwebby or tomentose with long fine hairs
@@ -47,6 +50,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1208+0592
 . Mt. Diablo
 
 ==mount tamalpais thistle:C. hydrophilum var. vaseyi
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=8311+3292+1958+0033
 . abaxial face of outer and middle phyllaries with long, sticky-resinous ridge (milky when fresh, dark when dry, occasionally very narrow)
 . margins of phyllaries minutely spiny-fringed
 . Mt. Tam

@@ -476,7 +476,7 @@ var pages=[
 {page:"prettyface",sci:"Triteleia ixioides",x:"k"},
 {page:"prickly pears",sci:"Opuntia spp.",x:"k"},
 {page:"purple viper's-bugloss",sci:"Echium plantagineum",x:"o"},
-{page:"q-tips",com:"Q tips",sci:"Micropus californicus",x:"o"},
+{page:"q tips",com:"Q tips",sci:"Micropus californicus",x:"o"},
 {page:"red osier dogwood",sci:"Cornus sericea",x:"k"},
 {page:"red vetchling",sci:"Lathyrus cicera",x:"o"},
 {page:"sand fringepod",sci:"Thysanocarpus curvipes",x:"o"},

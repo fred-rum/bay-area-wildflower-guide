@@ -34,6 +34,7 @@ color: yellow
 . rare
 
 ==pale goat-chicory:A. glauca var. glauca
+xx:ca
 . stem generally not leafy or obscurely leafy above base
 . ligules 10--18 mm, much exceeding involucre
 . petiole not purple

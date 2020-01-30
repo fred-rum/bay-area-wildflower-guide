@@ -44,6 +44,7 @@ color:yellow
 . <b>petals 12--17 mm</b>
 
 ==H. grandifolium
+sci_j: n/a
 . shrub
 . large, leathery leaves
 . petals up to ~22 mm
