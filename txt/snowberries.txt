@@ -4,11 +4,13 @@ Key feature:
 . plant height
 
 ==common snowberry:S. albus
+color: pale purple, red purple
 . plant 60--180 cm, erect
 . corolla swollen on 1 side, with 5 nectary glands within swelling
 . inflorescence generally 8--16-flowered
 
 ==creeping snowberry:S. mollis
+color: pale purple, red purple
 . Plant 15--60 cm, sprawling
 . corolla scarcely or not swollen, 5 nectary glands, 1 below each corolla lobe
 . inflorescence generally 2--8-flowered

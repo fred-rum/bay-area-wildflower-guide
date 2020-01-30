@@ -1,6 +1,7 @@
 sci:Arbutus
 
 ==pacific madrone:A. menziesii
+color:white
 . leaves entire to minutely serrate
 . fruit < 12 mm, papillate (like the surface of your tongue)
 

@@ -1,2 +1,0 @@
-sci:Dipsacus sativus
-color: white, pink, pale purple

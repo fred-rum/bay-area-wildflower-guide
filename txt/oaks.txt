@@ -23,6 +23,7 @@ separately.  E.g. a leaf that is "roundish" may actually be lanceolate.
 bark dark gray or gray-brown to black</h2>
 
 ==california black oak:Q. kelloggii
+color:other
 . leaf:
 .. 9--20 cm
 .. adaxially glabrous, bright green
@@ -31,6 +32,7 @@ bark dark gray or gray-brown to black</h2>
 . common
 
 ==coast live oak:Q. agrifolia
+color:other
 . leaf:
 .. 2.5--6 cm, roundish
 .. <b>generally adaxially convex</b>, +- dull green
@@ -76,6 +78,7 @@ bark light gray to +- white</h2>
 . common
 
 ==valley oak:Q. lobata
+color: other
 . leaf:
 .. margins deeply lobed (sinuses > 50% to midrib), without spines
 .. adaxially often +- shiny, dark green
@@ -94,6 +97,7 @@ bark light gray to +- white</h2>
 . uncommon
 
 ==blue oak:Q. douglasii
+color:other
 . leaf:
 .. adaxially dull, blue-green
 .. abaxially puberulent, pale blue-green
@@ -114,6 +118,7 @@ bark light gray to +- white</h2>
 . uncommon
 
 ==california scrub oak:Q. berberidifolia
+color:other
 . leaf:
 .. adaxially +- flat to wavy, +- shiny, green
 .. abaxially with minute appressed stellate hairs, dull, pale green

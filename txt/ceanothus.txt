@@ -26,6 +26,7 @@ All leaves are dark green or dull green adaxially and paler abaxially.
 . Mt. Tam
 
 ==buckbrush:C. cuneatus
+color: white, pale blue
 . twig: generally brown to gray-brown, glabrous to sparsely puberulent
 . leaf:
 .. occasionally clustered
@@ -68,6 +69,7 @@ All leaves are dark green or dull green adaxially and paler abaxially.
 <h2>leaves alternate, 1-ribbed from base</h2>
 
 ==wartleaf ceanothus:C. papillosus
+color: blue, purple
 . twig: <b>green</b> to gray-brown
 . leaf:
 .. blade 11--50 mm long, 6--15 mm wide
@@ -109,6 +111,7 @@ All leaves are dark green or dull green adaxially and paler abaxially.
 . Mt. Tamalpais
 
 ==blueblossom:C. thyrsiflorus
+color: blue, pale blue, white
 . twig: <b>green, flexible, ridged</b>, angled distally, [glabrous]
 . leaf:
 .. <b>blade 10--39 mm long, 5--20 mm wide</b>
@@ -117,6 +120,7 @@ All leaves are dark green or dull green adaxially and paler abaxially.
 .. margin +- gland-toothed
 
 ==hairy ceanothus:C. oliganthus
+color: white, pale blue, blue, pale purple
 . twig: green to <b>reddish, flexible, not ridged</b> or angled, <b>[may be hairy]</b>
 . leaf:
 .. <b>blade 11--30 mm long, 5--25 mm wide</b>

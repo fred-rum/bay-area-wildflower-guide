@@ -1,2 +1,0 @@
-sci:Sidalcea malviflora
-color: pink, red purple

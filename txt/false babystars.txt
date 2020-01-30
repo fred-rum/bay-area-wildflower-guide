@@ -1,3 +1,0 @@
-sci:Leptosiphon androsaceus
-sci_p:Linanthus androsaceus
-color: pale purple

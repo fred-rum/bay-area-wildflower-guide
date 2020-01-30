@@ -1,2 +1,0 @@
-sci:Sidalcea diploscypha
-color: pink

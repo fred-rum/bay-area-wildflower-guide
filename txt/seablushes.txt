@@ -8,17 +8,21 @@ Kea features:
 . 2 red spots on lower lip or not
 
 ==longhorn seablush:P. macrocera
+color: white, pink
 . <b>corolla +- radial</b> [with emphasis on +-], <b>corolla lobes +- equal, uniformly white to pale pink, no red spots</b>
 . spur thick, blunt, <b>generally >= 1/2 corolla tube length</b>
 
 ==longspur seablush:P. ciliosa
+color: pink
 . <b>corolla 2-lipped, pink to dark pink, lower corolla lobes > upper, when fresh lower lip with 2 red spots</b>
 . spur slender, pointed, <b>generally >= 1/2 corolla tube length</b>
 
 ==pink plectritis:P. congesta ssp. brachystemon
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0315+1129
 . corolla +- radial to +- 2-lipped, uniformly white to pink [no spots]
 . spur a minute swelling or slender and < 1/2 corolla tube length, tip generally enlarged
 
 ==shortspur seablush:P. congesta ssp. congesta
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1115+3386
 . corolla 2-lipped, pale to dark pink, lower lip uniformly colored [no spots?]
 . spur slender and < 1/2 corolla tube length, tip generally enlarged

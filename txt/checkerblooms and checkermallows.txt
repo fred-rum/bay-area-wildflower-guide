@@ -9,12 +9,14 @@ Key features:
 . cauline leaf shape, regularity
 
 ==dwarf checkermallow:S. malviflora
+color: pink, red purple
 calyx:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1202+0238
 . no bracts cupping the calyx
 . leaf generally dentate or lobed, upper leaves generally much reduced
 . common throughout the bay area
 
 ==fringed checkerbloom:S. diploscypha
+color: pink
 calyx:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1209+0035
 . <b>thin bracts cup the calyx</b>
 . upper leaves have narrow lobes

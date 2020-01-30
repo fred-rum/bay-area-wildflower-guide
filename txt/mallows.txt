@@ -23,6 +23,7 @@ x:ca
 . <b>bractlets widely linear to narrowly lanceolate, bases free from each other and from calyx</b>
 
 ==bull mallow:M. nicaeensis
+color: pale purple
 . petals 5--12 mm, veins generally dark
 . sepals 4--6 mm
 . <b>bractlets widely lanceolate to ovate, bases fused to calyx</b>

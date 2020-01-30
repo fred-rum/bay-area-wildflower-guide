@@ -11,11 +11,13 @@ Key features:
 . the local subspecies is ssp. ovatum
 
 ==giant wakerobin:T. chloropetalum
+color: red purple, red, cream
 . flower is sessile
 . <b>stamens are dark purple</b>
 . other parts are highly variable in color
 
 ==giant white wakerobin:T. albidum
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0307+1188
 . flower is sessile
 . <b>stamens are +- green</b>
 . other parts are highly variable in color

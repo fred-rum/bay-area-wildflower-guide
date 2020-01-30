@@ -14,7 +14,10 @@ Key features:
 . size and shape of fruit (spheric or depressed)
 
 ==big berry manzanita:A. glauca
+color: white
 
 ==common manzanita:A. manzanita
+color: white
 
 ==pallid manzanita:A. pallida
+color: white

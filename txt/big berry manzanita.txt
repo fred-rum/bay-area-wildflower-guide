@@ -1,2 +1,0 @@
-sci:Arctostaphylos glauca
-color: white

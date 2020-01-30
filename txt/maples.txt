@@ -2,6 +2,8 @@ sci:Acer
 x:rare
 
 ==bigleaf maple:A. macrophyllum
+color: other
+xx:none
 . leaf simple, palmately lobed, or compound with leaflets sessile
 
 ==boxelder maple:A. negundo

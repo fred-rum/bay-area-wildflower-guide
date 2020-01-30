@@ -1,2 +1,0 @@
-color: other
-xx:none

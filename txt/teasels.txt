@@ -9,12 +9,15 @@ Key features:
 . flower color
 
 ==indian teasel:D. sativus
+color: white, pink, pale purple
 . receptacle bract ending in a recurved, stiff spine
 . involucre bract generally +- spreading or reflexed
 . leaf pairs fused to widely fused around stem
 . flowers are white, sometimes tinged pink or pale purple
 
 ==fuller's teasel:D. fullonum
+spines:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0106+1209
+fused leaves:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1208+0232
 . receptacle bract ending in a straight, +- flexible spine
 . involucre bract generally spreading or upcurved
 . leaf pairs generally narrowly fused around stem

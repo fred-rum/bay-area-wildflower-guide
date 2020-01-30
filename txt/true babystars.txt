@@ -1,2 +1,0 @@
-sci_p:Linanthus bicolor
-color:pale purple

@@ -1,2 +1,0 @@
-sci:Gilia tricolor
-color: pale purple

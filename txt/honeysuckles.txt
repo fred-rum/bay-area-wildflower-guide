@@ -8,6 +8,7 @@ Key features:
 . corolla color
 
 ==pink honeysuckle:L. hispidula
+color: pink, red purple
 . <b>flowers in +- interrupted spikes</b> on axillary peduncles or at ends of branches
 . <b>upper leaf pairs fused around stem</b>
 . <b>corolla glandular-hairy or hairy</b> [may be short and sparse]
@@ -16,6 +17,7 @@ Key features:
 . common in bay area
 
 ==chaparral honeysuckle:L. interrupta
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=6121+1611+3983+0002
 . <b>flowers in +- interrupted spikes</b> on axillary peduncles or at ends of branches
 . <b>upper leaf pairs fused around stem</b>
 . <b>corolla glabrous</b>
@@ -24,6 +26,7 @@ Key features:
 . scattered around bay area
 
 ==johnston's honeysuckle:L. subspicata var. denudata
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0503+0325
 . <b>flowers in +- interrupted spikes</b> on axillary peduncles or at ends of branches
 . upper leaf pairs not fused around stem
 . corolla often hairy
@@ -38,6 +41,7 @@ Key features:
 . common near the coast and in the east bay from Chabot north
 
 ==japanese honeysuckle:L. japonica
+color: white, cream, yellow
 . <b>flowers paired on axillary peduncles</b>
 . <b>corolla > 25 mm</b>
 . plant twining

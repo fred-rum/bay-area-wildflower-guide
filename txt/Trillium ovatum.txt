@@ -2,6 +2,7 @@ com:pacific trillium
 xx:ba
 
 ==pacific trillium:T. ovatum ssp. ovatum
+color: white, pale purple
 . petals 1.5--7 cm, 5--45 mm wide
 . flower generally +- erect
 . common

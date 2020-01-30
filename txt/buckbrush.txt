@@ -1,2 +1,0 @@
-sci:Ceanothus cuneatus
-color: white, pale blue

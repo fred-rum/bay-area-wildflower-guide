@@ -1,2 +1,0 @@
-sci:Lonicera japonica
-color: white, cream, yellow

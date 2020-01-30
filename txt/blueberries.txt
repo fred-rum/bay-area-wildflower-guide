@@ -2,6 +2,8 @@ sci:Vaccinium
 x:ba
 
 ==california huckleberry:V. ovatum
+color: white, cream, salmon
+xx:more
 . leaves evergreen, leathery, veins not prominent abaxially
 . <b>inflorescence (and fruit) dense, axillary</b>
 . pedicel jointed to flower

@@ -21,6 +21,7 @@ Key features:
 I.e. the calyx is at the top of the pedicel and +- cupping the corolla throat.
 
 ==serpentine leptosiphon:L. ambiguus
+color: pale purple
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0411+0196
 . calyx clearly shorter than corolla tube & throat
 . corolla:
@@ -59,6 +60,8 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0513+1130
 ]
 
 ==large-flowered leptosiphon:L. grandiflorus
+sci_p:Linanthus grandiflorus
+color: pale purple
 . <b>corolla +- sessile above densely bracted head</b> (corolla starts spreading within bracts or not much above)
 . <b>corolla 15--30 mm</b>:
 .. throat yellow
@@ -95,6 +98,8 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0413+2490
 . rare
 
 ==false babystars:L. androsaceus
+sci_p:Linanthus androsaceus
+color: pale purple
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0407+2020
 . corolla:
 .. tube reddish, <b>glabrous or sparsely hairy, non-glandular</b>
@@ -107,6 +112,8 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0407+2020
 . common
 
 ==variable linanthus:L. parviflorus
+sci_p:Linanthus parviflorus
+color: purple, pale purple, pink, yellow, white
 . corolla:
 .. tube maroon/pink/yellow, <b>hairy, glandular</b>
 .. throat yellow/orange/purple
@@ -122,6 +129,8 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0407+2020
 <h3>corolla lobes < 4 mm</h3>
 
 ==true babystars:L. bicolor
+sci_p:Linanthus bicolor
+color:pale purple
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0407+2819
 . corolla:
 .. tube +- red
