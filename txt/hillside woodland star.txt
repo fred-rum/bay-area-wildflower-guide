@@ -1,2 +1,0 @@
-sci:Lithophragma heterophyllum
-color: white

@@ -1,2 +1,0 @@
-sci:Rumex conglomeratus
-color: other, red

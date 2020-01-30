@@ -3,11 +3,13 @@ sci:Spergularia spp.
 There are other sand spurries in the bay area, but I'm hesitant to include them when the differences are so inconspicuous.
 
 ==red sand spurrey:S. rubra
+color: pale purple
 . annual, delicate
 . lower main stem 0.3--0.5 mm diam.
 . 2--4+ leaves per axillary cluster
 
 ==sticky sand-spurrey:S. macrotheca
+color: pale purple, white
 . strongly perennial herb, stout
 . lower main stem 0.8--3 mm diam.
 . 0--2+ leaves per axillary cluster

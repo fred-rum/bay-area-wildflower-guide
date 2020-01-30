@@ -2,6 +2,7 @@ sci:Lithophragma spp.
 x:ba
 
 ==hillside woodland star:L. heterophyllum
+color: white
 . hypanthium (fused calyx) base truncate
 . petals with 3 lobes
 
@@ -11,6 +12,7 @@ x:ba
 . very rare: east bay
 
 ==san francisco woodland-star,2:L. affine
+color: white
 . hypanthium tapered to pedicel
 . basal leaves lobed +- <= 50% to base
 . most proximal cauline leaf 3-lobed

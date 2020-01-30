@@ -12,6 +12,7 @@ Key features:
 <h2>white violets</h2>
 
 ==western heart's ease:V. ocellata
+color: white
 . common in Santa Cruz range
 
 ]
@@ -19,6 +20,7 @@ Key features:
 <h2>yellow violets</h2>
 
 ==california golden violet:V. pedunculata
+color: yellow, orange
 . Leaves simple, cauline only
 . stems decumbent to erect, branched, with leaves, peduncles
 . no cleistogamous flower present
@@ -32,11 +34,13 @@ Key features:
 . scattered
 
 ==redwood violet:V. sempervirens
+color: yellow
 . Leaves simple
 . Lower stem stolon-like [prostrate, root-forming], with evergreen leaves, peduncles
 . common in the Santa Cruz range and Oakland
 
 ==stream violet:V. glabella
+color: yellow
 . Leaves simple
 . Lower stem erect, without leaves, peduncles
 . Santa Cruz range and Oakland

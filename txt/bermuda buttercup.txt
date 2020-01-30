@@ -1,2 +1,0 @@
-sci:Oxalis pes-caprae
-color: yellow

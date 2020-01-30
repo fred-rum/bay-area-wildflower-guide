@@ -16,6 +16,11 @@ not be necessary if the differences are obvious.  The program will
 print a warning if the genus page is missing, or if any described
 species are missing from a genus page.
 
+Since the genus page should list all necessary distinguish features of
+its species, little extra information is needed for the species page.
+In many cases, all information can be included directly on the genus
+page so that a separate txt file is not needed for the species.
+
 The result is a number of (mostly) independent trees of pages.  Some
 trees may share a portion of hierarchy (e.g. when some trees don't use
 the strict scientific hierarchy).

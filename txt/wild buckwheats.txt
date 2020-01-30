@@ -24,6 +24,7 @@ flowers are clustered or individual
 multiple individual flowers may grow from the same node, but not in a cluster
 
 ==california buckwheat:E. fasciculatum
+color: white, pink, salmon, red, red purple, other
 . flowers are clustered
 . shrub
 . leaf blades narrowly linear to oblanceolate, <= 2 cm, generally strongly clustered
@@ -57,6 +58,7 @@ multiple individual flowers may grow from the same node, but not in a cluster
 . very rare
 
 ==seaside buckwheat:E. latifolium
+color: white, pink, salmon
 . flowers are clustered
 . flowers only at inflorescence branch tips
 . herb
@@ -64,6 +66,7 @@ multiple individual flowers may grow from the same node, but not in a cluster
 . very common along the coast
 
 ==naked buckwheat:E. nudum
+color: white, pink, salmon
 . <b>flowers are clustered or individual</b>
 . flowers at inflorescence branch tips <b>and forks of branches</b>
 . herb

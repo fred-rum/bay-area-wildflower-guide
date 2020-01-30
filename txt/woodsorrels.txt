@@ -10,6 +10,7 @@ Key features:
 . stem branched or none
 
 ==redwood sorrel:O. oregana
+color: pale purple, pink
 . stem +- 0
 . Leaf: < 10, <b>clustered at rhizome tips</b>
 . petiole < 20 cm, hairy
@@ -20,6 +21,7 @@ Key features:
 . +- undisturbed forests
 
 ==pale pink-sorrel:O. incarnata
+color: white, pale purple
 . Stem: <b>erect, branched, < 30 cm</b>, glabrous; <b>axils often with bulblets</b>
 . Leaf: cauline, in whorl-like clusters of < 10, lower opposite or not
 . petiole 2--7 cm
@@ -30,6 +32,7 @@ Key features:
 . Edgewood, near Santa Cruz, near Oakland/Berkeley 
 
 ==purple woodsorrel:O. purpurea
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0312+1507
 . stem +- 0
 . leaf: < 8, <b>in basal rosette</b>; petiole < 5 cm
 . leaflets < 4 cm, sparsely hairy or more densely hairy abaxially and on margins
@@ -47,6 +50,7 @@ Key features:
 . adaxial leaf hairs (dense appressed, sparse spreading, or none)
 
 ==bermuda buttercup:O. pes-caprae
+color: yellow
 . <b>stem generally underground</b>
 . <b>leaves in loose, +- basal rosette</b>; petiole < 12 cm
 . leaflets < 3.5 cm, often purple-spotted, abaxially hairy

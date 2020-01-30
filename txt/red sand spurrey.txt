@@ -1,2 +1,0 @@
-sci:Spergularia rubra
-color: pale purple

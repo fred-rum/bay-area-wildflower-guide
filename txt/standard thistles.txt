@@ -27,6 +27,7 @@ color: purple
 . scattered
 
 ==creeping thistle:C. arvense
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1208+0592
 . <b>dioecious</b>
 . [all other species have both bisexual flowers]
 . scattered

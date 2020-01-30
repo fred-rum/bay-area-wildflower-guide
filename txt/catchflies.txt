@@ -1,5 +1,7 @@
 sci:Silene spp.
 
 ==small-flowered catchfly:S. gallica
+color: white, pale purple
 
 ==north californian indian pink:S. laciniata ssp. californica
+color: red
