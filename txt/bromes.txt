@@ -27,6 +27,8 @@ Key features:
 ==compact brome:B. madritensis
 
 ==red brome:B. rubens
+color: n/a
+sci_fpj:Bromus madritensis ssp. rubens
 
 ==seaside brome:B. maritimus
 

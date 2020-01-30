@@ -12,6 +12,7 @@ Key features:
 . stigma number and shape
 
 ==muehlenberg's centaury:Z. muehlenbergii
+color: pink, pale purple
 . [much branched, many flowered]
 . pedicels 0--10 mm
 . corolla lobes 2--7 mm, tips rounded
@@ -23,6 +24,7 @@ Key features:
 . rare
 
 ==davy's centaury:Z. davyi
+color: pink, pale purple
 . [seemingly never more than few flowers]
 . pedicels 2--25(55) mm
 . <b>calyx lobes keeled</b>

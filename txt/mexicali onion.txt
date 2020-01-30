@@ -1,2 +1,0 @@
-sci:Allium peninsulare
-color: purple

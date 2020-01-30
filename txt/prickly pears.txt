@@ -13,3 +13,5 @@ Key features to verify O. ficus-indica:
 .. areoles are the spots where spines potentially sprout
 
 ==mission prickly-pear:O. ficus-indica
+color: yellow, orange
+<b>Caution: ID unsure.</b>

@@ -1,2 +1,0 @@
-sci:Carpobrotus edulis
-color: yellow, pink

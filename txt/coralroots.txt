@@ -2,10 +2,12 @@ sci:Corallorhiza spp.
 x:ba
 
 ==striped coralroot:C. striata
+color: other, cream, red
 . 3-5 stripes
 . lip entire
 
 ==spotted coralroot:C. maculata
+color: other, cream, red
 . no stripes
 . lip with 2 lobes laterally; lobes are rounded, prominent
 <p/>

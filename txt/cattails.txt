@@ -4,10 +4,12 @@ x:ca
 Cattails typically have two sections of flowers toward the stem.  The top section is staminate (male), and the section below is pistillate (female).
 
 ==broad-leaved cattail:T. latifolia
+color: other
 . naked stem between staminate, pistillate flowers generally <b>0</b> cm
 . widest leaf blades 10--29 mm wide (fresh), 5--20 mm (dry)
 
 ==narrow-leaved cattail:T. angustifolia
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1215+1576
 . naked stem between staminate, pistillate flowers <b>1--12 cm</b>
 . widest leaf blades 4--15 mm wide (fresh), 3--8 mm (dry)
 . <b>leaf blade glands 0</b>
@@ -15,6 +17,7 @@ Cattails typically have two sections of flowers toward the stem.  The top sectio
 . pistillate bractlet tip dark brown, generally darker than stigma, blunt
 
 ==southern cattail:T. domingensis
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1215+0962
 . naked stem between staminate, pistillate flowers <b>1--8 cm</b>
 . widest leaf blades 6--18 mm wide (fresh), 5--15 mm (dry)
 . <b>leaf blade gland-dotted adaxially [inner surface] near base</b>

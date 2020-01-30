@@ -1,2 +1,0 @@
-sci:Typha latifolia
-color: other

@@ -18,6 +18,7 @@ Sorted by number of leaves in a whorl (high to low).
 . Monte Bello and Palo Alto Baylands
 
 ==catchweed bedstraw:G. aparine
+color: white
 . Habit: Annual, climbing or prostrate, occasionally short, erect; clings by small, hooked prickles
 . Stem: 30--90 cm, weak, brittle
 . Leaf: <b>in whorls of 6--8</b>, 13--31 mm, proximal-most petioled, +- round, distal sessile, +- narrowly oblanceolate
@@ -76,6 +77,7 @@ Sorted by number of leaves in a whorl (high to low).
 . rare near Pacific coast
 
 ==graceful bedstraw:G. porrigens
+color: other, cream
 . Habit: Perennial herb, climbing, woody, scabrous, clinging by recurved hairs; dioecious
 . Stem: 10--150 cm, slender
 . Leaf: <b>in whorls of 4</b>, 2--18 mm; tip acute to obtuse or round, terminal hair weak, generally not persistent

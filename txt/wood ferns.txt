@@ -2,6 +2,7 @@ sci:Dryopteris
 x:ca
 
 ==coastal woodfern:D. arguta
+color: n/a
 . frond 1--2-pinnate
 . stipe generally > &frac13; frond length
 . longest pinnae generally near the base of the frond

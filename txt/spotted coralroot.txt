@@ -1,2 +1,0 @@
-sci:Corallorhiza maculata
-color: other, cream, red

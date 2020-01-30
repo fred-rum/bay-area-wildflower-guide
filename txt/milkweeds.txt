@@ -10,12 +10,14 @@ Key features for all local milkweeds:
 . inflorescence sessile or with peduncle
 
 ==california milkweed:A. californica
+color: other, red purple
 . hoods closed at top
 . horns hidden
 . leaves opposite; petiole short to 0; blade ovate
 . rare in east bay and south bay
 
 ==woollypod milkweed:A. eriocarpa
+color: other
 . hoods closed at top
 . horns barely peeking out to +- height of hood and gymnostegium
 . hoods not exceeding anther head by at least 1/2 their lengths
@@ -24,6 +26,7 @@ Key features for all local milkweeds:
 . not confirmed in the bay area?
 
 ==narrowleaf milkweed:A. fascicularis
+color: other
 . hoods open at top
 . horns sticking out above hood and gymnostegium
 . leaves opposite or whorled generally in 3s to 5s, often with clusters of smaller leaves in axils; petiole short; blade narrow-lanceolate, base tapered

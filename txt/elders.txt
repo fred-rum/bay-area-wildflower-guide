@@ -2,6 +2,9 @@ sci:Sambucus spp.
 x:ca
 
 ==blue elder,2:S. cerulea
+sci_fpj:Sambucus nigra ssp. caerulea
+color: white, cream, yellow
+xx:ca
 . inflorescence +- flat-topped, central axis generally not dominant
 . petals +- spreading
 . glaucus blue berries

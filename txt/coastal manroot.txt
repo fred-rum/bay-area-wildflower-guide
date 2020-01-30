@@ -1,2 +1,0 @@
-sci:Marah oregana
-color: white

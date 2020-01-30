@@ -2,6 +2,7 @@ sci:Sambucus racemosa
 xx:ca
 
 ==american red elder:S. racemosa ssp. racemosa
+color: white, cream, yellow
 . red berries
 . only subspecies found in the bay area
 

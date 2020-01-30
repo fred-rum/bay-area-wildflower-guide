@@ -1,2 +1,0 @@
-sci:Mesembryanthemum nodiflorum
-color: cream

@@ -18,6 +18,8 @@ Key features:
 CalFlora and Jepson have this species under Platanthera.
 
 ==sierra bog orchid:P. dilatata var. leucostachys
+sci_fpj:Platanthera dilatata var. leucostachys
+xx:ca
 . <b>2 leaves, alternate, along stem, with 1 lengthwise fold</b>
 . perianth white to cream
 
@@ -33,14 +35,19 @@ to the stem nor folded lengthwise.
 <h3>perianth white</h3>
 
 ==flat spurred piperia:P. transversa
+sci_fjp:Piperia transversa
 . spur 6--12 mm, <b>+- straight and horizontal</b>
 . perianth white
 
 ==coast piperia:P. elegans ssp. elegans
+sci_fjp:Piperia elegans ssp. elegans
+color: white
+xx:ba
 . spur 7--14 mm, <b>curved down along flower stalk</b>
 . perianth white
 
 ==whiteflower rein orchid:P. ephemerantha
+sci_fpj:Piperia candida
 . <b>spur 1.5--3.5 mm</b>, pointed down or curved +- forward
 . perianth white
 
@@ -49,16 +56,19 @@ to the stem nor folded lengthwise.
 <h3>perianth greenish</h3>
 
 ==michael's rein orchid:P. michaelii
+sci_fjp:Piperia michaelii
 . spur 8--12 mm, curved down along flower stalk
 . perianth green to yellow-green
 . <b>lower sepals spreading</b>
 
 ==denseflower rein orchid:P. elongata
+sci_fjp:Piperia elongata
 . spur 6.5--18 mm, slender, curved down along flower stalk
 . perianth green
 . <b>lower sepals +- reflexed</b>
 
 ==alaska piperia:P. unalascensis
+sci_fjp:Piperia unalascensis
 . <b>spur 2--5.5 mm</b>, pointed back or down
 . perianth green
 

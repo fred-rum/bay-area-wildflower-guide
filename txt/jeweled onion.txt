@@ -1,2 +1,0 @@
-sci:Allium serra
-color: red purple, purple

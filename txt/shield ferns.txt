@@ -2,6 +2,7 @@ sci:Polystichum spp.
 x:hist
 
 ==western sword fern:P. munitum
+color:n/a
 . frond 1-pinnate
 . stipe base scales ovate, +- 3(6) mm wide
 .. those above proximal pinnae generally > 1 mm wide, persistent

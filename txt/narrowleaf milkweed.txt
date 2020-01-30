@@ -1,2 +1,0 @@
-sci:Asclepias fascicularis
-color: other

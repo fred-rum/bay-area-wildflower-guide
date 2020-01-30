@@ -5,12 +5,14 @@ x:ca
 1 sepal is "upper" and 2 are "lateral"
 
 ==broad-leaved helleborine:E. helleborine
+color: pale purple, other
 . sepals +- green, often purple-tinged or -striped
 . lateral petals 8--11 mm; lateral sepals <b>10--13 mm</b>
 . +- dry places
 . very common in the Santa Cruz range and Oakland hills
 
 ==stream orchid:E. gigantea
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1005+0689
 . sepals +- green to +- red, +- purple-veined
 . lateral petals 13--15 mm; lateral sepals <b>16--24 mm</b>
 . +- wet places
