@@ -1,2 +1,0 @@
-sci:Phacelia imbricata
-color: white, other

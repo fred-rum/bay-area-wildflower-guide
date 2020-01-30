@@ -10,6 +10,7 @@ Key features:
 Although the leaves have general difference, there is enough variety within a species to make them difficult to use as diagnostic tools.  In addition, some of the characteristics described by Jepson cannot be seen in CalPhotos.
 
 ==himalayan blackberry,2:R. armeniacus
+color: white
 . Plant: to 3 m, arched to mounded
 . Prickles: many, <b>stout, wide-based</b>, straight or curved
 . Stem: to 20(25) mm diam, <b>5-angled</b>, finely hairy or generally glabrous, not glaucous
@@ -37,6 +38,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0315+2744
 . Fruit: raspberry-type, +- yellow to orange to red
 
 ==california blackberry,2:R. ursinus
+color: white
 . Plant: prostrate to decumbent
 . Prickles: <b>weak, slender</b>, straight
 . Stem: 2--10 mm diam, <b>not angled</b>, +-glabrous to hairy, +-with stalked glands, glaucous
@@ -45,6 +47,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0315+2744
 . Fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
 
 ==thimbleberry,2:R. parviflorus
+color: white
 . Plant 0.5--2.5 m, erect
 . <b>No prickles</b>
 . Stem: to 6 mm diam, <b>not angled</b>, glabrous to finely hairy with stalked glands, not glaucous

@@ -1,2 +1,0 @@
-sci:Nemophila heterophylla
-color: white

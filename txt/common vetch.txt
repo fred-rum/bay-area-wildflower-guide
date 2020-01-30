@@ -7,6 +7,7 @@ Key features:
 . length vs. width of leaflets (there is substantial overlap here)
 
 ==spring vetch:V. sativa ssp. sativa
+color: purple, pale purple
 . calyx tube 6--7 mm, lobes <b>5--11 mm</b>
 . corolla <b>18--30 mm</b>
 . leaflets 4--10 mm wide, wedge-shaped to oblong, <b>length 2--6 &times; width</b>

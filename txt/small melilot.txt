@@ -1,2 +1,0 @@
-sci:Melilotus indicus
-color: yellow

@@ -14,6 +14,7 @@ Key features:
 . very common
 
 ==tarweed fiddleneck:A. lycopsoides
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0211+1039
 . corolla radial, tube straight, limb 4--10 mm diameter, with 0 or 5 dark spots
 . <b>corolla throat +- closed by 5 hairy appendages</b> [really just wrinkles in the corolla limb?], tube constricted in lower 1/2
 . stamens attached below middle of corolla tube
@@ -25,16 +26,19 @@ Key features:
 . very rare: Mt. Diablo
 
 ==bent-flowered fiddleneck:A. lunaris
+color: yellow, orange
 . corolla bilateral, tube bent so that the limb is not perpendicular to the lower prt of the tube
 . corolla limb 4--7 mm diameter, <b>generally with 2 dark spots</b>
 . scattered, but with very few modern observations
 
 ==bristly fiddleneck:A. tessellata
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1203+0800
 . <b>calyx lobes unequal in width, 2--4 from fusion below middle, notched at tip</b>
 . corolla limb 2--10 mm diameter
 . Mt. Diablo, Sunol, Pinnacles
 
 ==woolly fiddleneck:A. spectabilis
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=1342+3162+2247+0098
 . <b>leaf +- succulent, fine-toothed</b>
 . 5 calyx lobes +- equal in width not fused above base, or 2--3 unequal in width, +- 1/2 fused
 . corolla limb 5--14 mm diameter

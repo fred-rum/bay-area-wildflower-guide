@@ -4,6 +4,7 @@ x:ba
 [
 <h2>similar-sized yellow flower</h2>
 ==bur clover:M. polymorpha
+color: yellow
 . generally glabrous
 . stem prostrate, mat-forming, or ascending
 . leaflet without dark central spot, length 1--2 &times; width
@@ -12,6 +13,7 @@ x:ba
 . very common
 
 ==spotted medick:M. arabica
+color: yellow
 . hair 0 to sparse
 . stem generally sprawling
 . <b>leaflets with dark central spot</b>, length +- = width

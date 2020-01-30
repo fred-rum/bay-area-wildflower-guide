@@ -14,6 +14,7 @@ Key features:
 <h2>perennial?</h2>
 
 ==deerweed:A. glaber
+color: yellow
 . <b>erect or ascending, woody (but green)</b>, bushy branched, <b>50-200 cm</b>
 . leaflets glabrous or finely strigose
 . corolla yellow
@@ -47,6 +48,7 @@ Key features:
 <h3>wings generally +- <= keel</h3>
 
 ==short-flower deervetch:A. parviflorus
+color: cream, pink
 . <b>stem ascending to erect, 5--40 cm</b>
 . 3--9 leaflets, lanceolate to obovate, +- equal
 . peduncle generally > 1 cm, generally bracted
@@ -82,6 +84,8 @@ Key features:
 . scattered
 
 ==chile trefoil:A. wrangelianus
+color: yellow
+<b>Caution: ID uncertain</b>
 . generally prostrate, branched at base, 5--30 cm
 . <b>peduncle << 1 cm, bracts 0</b>
 . <b>calyx lobes +- 0.8--1.2 &times; tube</b>

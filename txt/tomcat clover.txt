@@ -1,2 +1,0 @@
-sci:Trifolium willdenovii
-color: pale purple, purple

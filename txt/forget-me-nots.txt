@@ -9,21 +9,25 @@ Key features:
 . leaf length, width
 
 ==broadleaf forget-me-not:M. latifolia
+color: pale blue
 . calyx tube hairs at least some spreading, some or all hooked
 . corolla 5--10 mm diameter, blue (but pink when young)
 . leaves roughly 2--3x wider than corollas, roughly 2--3x longer than wide
 
 ==changing forget-me-not:M. discolor
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1115+3393
 . calyx tube hairs at least some spreading, some or all hooked
 . corolla 1--3 mm diameter, often with different colors for each flower.
 . leaves sparse, generally 1--4 cm long, 2--8 mm wide
 . Santa Cruz range.
 
 ==bay forget-me-not:M. laxa
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0208+1294
 . calyx tube hairs appressed, not hooked at tip
 . corolla 2--5 mm diameter, blue (but yellow/cream when young)
 . leaves 1.5--8 cm long, 3--15 mm wide
 . small, narrow leaves.
 
 ==wood forget-me-not:M. sylvatica
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0311+1015
 . appears in Calflora, but Jepson says that <a href="http://ucjeps.berkeley.edu/cgi-bin/get_cpn.pl?34218">all identifications in California are mistaken</a>.

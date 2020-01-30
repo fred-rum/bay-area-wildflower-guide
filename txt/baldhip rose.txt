@@ -1,2 +1,0 @@
-sci:Rosa gymnocarpa
-color: pink, red purple

@@ -39,6 +39,7 @@ The bracts are thin/linear sprouts immediately subtending each sepal of the caly
 <h3>cotyledons persistent</h3>
 
 ==butter lupine:L. luteolus
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1214+2820
 . Habit: Annual 3--7.5 dm, sparsely hairy or in age glabrous, appearing glaucous; <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+0754"><b>cotyledons disk-like, persistent</b></a> at plant base, or leaving circular scar
 . Stem: <b>hard, rigid</b>
 . Leaf: petiole 2--5 cm; leaflets 7--9, 10--30 mm, 4--9 mm wide, adaxially generally hairy
@@ -48,6 +49,7 @@ The bracts are thin/linear sprouts immediately subtending each sepal of the caly
 . Jasper, Alum Rock, Grant, Mt. Diablo foothills
 
 ==chick lupine:L. microcarpus
+color: cream, pale purple, purple
 . Habit: Annual 1--8 dm, sparsely to densely hairy; <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+0754"><b>cotyledons disk-like, persistent</b></a> at plant base, or leaving circular scar
 . Stem: <b>clearly hollow, at least below</b>
 . Leaf: petiole 3--15 cm; leaflets 5--11, generally 9, 10--50 mm, 2--12 mm wide, occasionally linear, adaxially glabrous
@@ -64,6 +66,7 @@ The bracts are thin/linear sprouts immediately subtending each sepal of the caly
 <h4>flowers spiralled</h4>
 
 ==stinging lupine:L. hirsutissimus
+color: pink, red purple
 . Habit: Annual 2--10 dm (often > 10 dm after fire), short-appressed- and <b>stiff-spreading-stinging-hairy</b>
 . Leaf: petiole 4--9 cm; leaflets 5--8, 20--50 mm, <b>10--20 mm wide</b>
 . Inflorescence: 10--30 cm, <b>flowers spiralled</b>; peduncle 5--8 cm; pedicels 2--5 mm; bracts 4--5 mm, generally persistent
@@ -72,6 +75,7 @@ The bracts are thin/linear sprouts immediately subtending each sepal of the caly
 . Fremont Older, Castle Rock, Nisene Marks
 
 ==collared annual lupine:L. truncatus
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0806+0442
 . Habit: Annual 2--3(5) dm, <b>finely hairy, generally appearing glabrous</b>
 . Leaf: petiole 3--10 cm, flat, leaflet-like; leaflets 5--8, 20--40 mm, <b>2--5 mm wide, linear</b>, adaxially glabrous, <b>tip generally truncate</b>
 . Inflorescence: 3--25 cm, <b>flowers sparse, spiralled</b>; peduncle 3--10 cm; pedicels 2--4 mm; bracts 2--5 mm, persistent
@@ -85,6 +89,7 @@ The bracts are thin/linear sprouts immediately subtending each sepal of the caly
 <br/>plant fleshy</h4>
 
 ==arroyo lupine:L. succulentus
+color: purple
 . Habit: Annual, often appearing perennial herb, 2--10 dm, sparsely hairy, <b>fleshy</b>
 . Leaf: petiole 6--15 cm; leaflets 7--9, 20--60 mm, 7--20 mm wide, adaxially glabrous
 . Inflorescence: 9--15 cm, <b>flowers whorled</b>; peduncle 5--9 cm; pedicels 3--7 mm; bract 3--5 
@@ -104,6 +109,7 @@ The bracts are thin/linear sprouts immediately subtending each sepal of the caly
 <br/>pedicels 1--3.5 mm</h4>
 
 ==miniature lupine:L. bicolor
+color: purple
 . Habit: Annual (may live 2 seasons in NCo), 1--4 dm, hairy
 . Leaf: petiole 1--7 cm; leaflets 5--7, 10--40 mm, 1--5 mm wide, occasionally linear, adaxially generally +- glabrous
 . Inflorescence: 1--8 cm, <b>flowers in (0)5 whorls</b>; peduncle 3--10 cm; <b>pedicels 1--3.5 mm</b>; bract 4--6 mm
@@ -113,6 +119,7 @@ The bracts are thin/linear sprouts immediately subtending each sepal of the caly
 . very common
 
 ==big pod lupine:L. pachylobus
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0113+1990
 . Habit: Annual 1.5--4 dm, hairy
 . Leaf: petiole 4--8 cm; leaflets generally 7, 20--25 mm, 2--5 mm wide
 . Inflorescence: 1--4 cm, <b>flowers generally whorled</b>; peduncle 3--12 cm; <b>pedicels 1--2.5 mm</b>; bract +- 6 mm
@@ -126,6 +133,7 @@ The bracts are thin/linear sprouts immediately subtending each sepal of the caly
 <br/>pedicels 3--7 mm</h4>
 
 ==fleshy lupine:L. affinis
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0518+0859
 . Habit: Annual 2--5(6) dm, hairy
 . Leaf: petiole 3--10 cm; leaflets 5--8, 20--50 mm, 4--11 mm wide
 . Inflorescence: 4--20 cm, <b>flowers whorled</b>; peduncle 5--18 cm; <b>pedicels 3--6 mm</b>; bract 5--7.5 mm
@@ -134,6 +142,7 @@ The bracts are thin/linear sprouts immediately subtending each sepal of the caly
 . common
 
 ==sky lupine:L. nanus
+color: blue
 . Habit: Annual 1--6 dm, hairy
 . Leaf: petiole 2--8.5 cm; leaflets 5--9, generally 7, 10--40 mm, 1--12 mm wide, occasionally linear
 . Inflorescence: 2--20 cm, <b>flowers generally whorled</b>; peduncle 2--15 cm; <b>pedicels 2.5--7 mm</b>; bract 4--12 mm
@@ -148,6 +157,7 @@ The bracts are thin/linear sprouts immediately subtending each sepal of the caly
 <h3>shrub</h3>
 
 ==chamisso bush lupine:L. chamissonis
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0210+2322
 . Habit: <b>Shrub 5--20 dm</b>, silvery, densely appressed-hairy
 . Stem: erect
 . Leaf: cauline; stipules 8--10 mm; petiole 1--3.5 cm; leaflets 5--9, 10--25 mm
@@ -157,6 +167,7 @@ The bracts are thin/linear sprouts immediately subtending each sepal of the caly
 . common in SF, also found near Cowell
 
 ==silver lupine:L. albifrons
+color: purple, pale purple
 . Habit: <b>Subshrub, shrub, < 50 dm, hairy</b>, generally silver (+- green)
 . Stem: decumbent to erect
 . Leaf: cauline, clustered near base or not, hairy; stipules 6--20 mm; petiole 1--8 cm; leaflets 6--10, 10--45 mm
@@ -166,6 +177,7 @@ The bracts are thin/linear sprouts immediately subtending each sepal of the caly
 . very common
 
 ==yellow bush lupine:L. arboreus
+color: yellow, cream
 . Habit: <b>Shrub 5--20 dm</b>, green-glabrous to silver-hairy
 . Stem: woody, erect
 . Leaf: cauline; stipules 8--12 mm; petiole 2--3(6) cm; leaflets 5--12, 20--60 mm
@@ -179,6 +191,7 @@ The bracts are thin/linear sprouts immediately subtending each sepal of the caly
 <h3>other perennials</h3>
 
 ==broadleaf lupine:L. latifolius
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0909+0896
 . Habit: Perennial herb 3--24 dm, green, glabrous to hairy, <b>not fleshy</b>
 . Stem: erect
 . Leaf: cauline; stipules 5--10 mm; petiole 4--20 cm; leaflets 5--11, <b>40--100 mm</b>, abaxially +- hairy, adaxially glabrous to hairy
@@ -188,6 +201,7 @@ The bracts are thin/linear sprouts immediately subtending each sepal of the caly
 . common
 
 ==large-leaved lupine:L. polyphyllus var. polyphyllus
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1107+1443
 . Habit: Perennial herb 2--15 dm, green, glabrous or sparsely hairy
 . Stem: <b>erect, stout, generally hollow</b>
 . Leaf: basal and cauline; stipules 5--30 mm; petioles 3--45 cm, upper shorter; leaflets 9--17, <b>40--150 mm</b>, abaxially +- strigose, <b>adaxially glabrous</b>
@@ -197,6 +211,7 @@ The bracts are thin/linear sprouts immediately subtending each sepal of the caly
 . rare, in cooler areas
 
 ==summer lupine:L. formosus var. formosus
+color:purple, pale purple, pale blue
 . Habit: Perennial herb 2--8 dm, densely hairy to tomentose, gray to silver; rhizomes 3--7 mm diam
 . Stem: spreading to erect, 3--4 mm diam
 . Leaf: cauline; stipules 4--15 mm; petiole 2--7 cm; leaflets 7--9, 25--70 mm; <b>adaxially hairy, green-gray to silver</b>
@@ -206,6 +221,7 @@ The bracts are thin/linear sprouts immediately subtending each sepal of the caly
 . common
 
 ==varied lupine:L. variicolor
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0306+0265
 . Habit: Perennial herb, subshrub, 2--5 dm, generally dense-appressed or -spreading-silver-hairy
 . Stem: <b>prostrate to decumbent</b>, not weak
 . Leaf: cauline, often appearing clustered near base 1st year; stipules 7--8 mm; petiole generally 4--10 cm; leaflets 6--9, 20--35 mm

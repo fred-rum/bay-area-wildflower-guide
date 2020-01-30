@@ -1,2 +1,0 @@
-sci:Plagiobothrys nothofulvus
-color: white

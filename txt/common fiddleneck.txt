@@ -1,6 +1,7 @@
 sci:Amsinckia menziesii
 
 ==rancher's fiddleneck:A. menziesii var. intermedia
+color: yellow, orange
 . corolla radial, tube straight, limb with 0 or 5 dark spots
 . stamens generally attached above middle of corolla tube, if below then style exserted
 . stem ascending to erect
@@ -8,6 +9,7 @@ sci:Amsinckia menziesii
 . very common
 
 ==small-flowered fiddleneck:A. menziesii var. menziesii
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1007+0353
 . corolla radial, tube straight, limb with 0 or 5 dark spots
 . stamens generally attached above middle of corolla tube, if below then style exserted
 . stem decumbent to +- ascending

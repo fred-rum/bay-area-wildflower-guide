@@ -1,2 +1,0 @@
-sci:Vicia tetrasperma
-color: pale purple

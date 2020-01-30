@@ -1,2 +1,0 @@
-sci:Lupinus albifrons
-color: purple, pale purple

@@ -437,23 +437,18 @@ class Page:
                 self.set_sci(sci)
             return ''
 
-        def repl_sci_fpj(matchobj):
-            sites = matchobj.group(1)
-            elab = matchobj.group(2)
-            if 'f' in sites:
-                self.elab_calflora = elab
-            if 'p' in sites:
-                self.elab_calphotos = elab
-            if 'j' in sites:
-                self.elab_jepson = elab
-            return ''
-
         self.txt = re.sub(r'^com:\s*(.*?)\s*?\n',
                           repl_com, self.txt, flags=re.MULTILINE)
         self.txt = re.sub(r'^sci:\s*(.*?)\s*?\n',
                           repl_sci, self.txt, flags=re.MULTILINE)
-        self.txt = re.sub(r'^sci([_fpj]+):\s*(.*?)\s*?\n',
-                          repl_sci_fpj, self.txt, flags=re.MULTILINE)
+
+    def set_sci_fpj(self, sites, elab):
+        if 'f' in sites:
+            self.elab_calflora = elab
+        if 'p' in sites:
+            self.elab_calphotos = elab
+        if 'j' in sites:
+            self.elab_jepson = elab
 
     def set_complete(self, matchobj):
         if matchobj.group(1) == 'x':
@@ -604,6 +599,11 @@ class Page:
             if matchobj:
                 c_list.append(repl_child(matchobj))
                 data_object = self.child[-1]
+                continue
+
+            matchobj = re.match(r'sci([_fpj]+):\s*(.*?)$', c)
+            if matchobj:
+                data_object.set_sci_fpj(matchobj.group(1), matchobj.group(2))
                 continue
 
             matchobj = re.match(r'\s*(?:([^:\n]*?)\s*:\s*)?(https://(?:calphotos.berkeley.edu/|www.calflora.org/cgi-bin/noccdetail.cgi)[^\s]+)\s*?$', c)

@@ -1,2 +1,0 @@
-sci:Medicago polymorpha
-color: yellow

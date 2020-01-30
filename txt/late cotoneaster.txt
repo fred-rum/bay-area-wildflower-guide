@@ -1,3 +1,0 @@
-sci:Cotoneaster coriaceus
-sci_fpj:Cotoneaster lacteus
-color: white

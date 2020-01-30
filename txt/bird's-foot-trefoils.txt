@@ -2,6 +2,7 @@ sci:Lotus spp.
 x:hist
 
 ==bird's-foot trefoil:L. corniculatus
+color: yellow
 . leaflet length of longest upper leaves 1.6--3(4) &times; width
 . corolla 10--14(16) mm
 . very common

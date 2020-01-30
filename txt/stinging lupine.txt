@@ -1,2 +1,0 @@
-sci:Lupinus hirsutissimus
-color: pink, red purple

@@ -14,5 +14,7 @@ Key features:
 . number and shape of seed
 
 ==mountain phacelia:P. imbricata
+color: white, other
 
 ==distant phacelia:P. distans
+color: other

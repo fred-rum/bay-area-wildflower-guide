@@ -1,6 +1,7 @@
 x:ba
 
 ==french broom:Genista monspessulana
+color:yellow
 . corolla yellow
 . leaflet not narrow (length < 5 &times; width), margins flat
 . leaflet generally 10--15 mm

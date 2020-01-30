@@ -1,2 +1,0 @@
-sci:Rosa californica
-color: pink

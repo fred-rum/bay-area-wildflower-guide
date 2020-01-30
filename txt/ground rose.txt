@@ -1,2 +1,0 @@
-sci:Rosa spithamea
-color: red purple

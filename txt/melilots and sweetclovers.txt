@@ -2,6 +2,7 @@ sci:Melilotus spp.
 x:ca
 
 ==small melilot:M. indicus
+color: yellow
 . corolla <b>2.5--3 mm</b>, yellow
 . <b>inflorescence axis generally 1--2 cm when flowers open</b>
 . stem 10--60 cm

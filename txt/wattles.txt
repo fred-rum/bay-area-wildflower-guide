@@ -14,16 +14,15 @@ Key features:
 .. leaves, stems resinous or not
 .. shrub (spreading from base) or tree (generally with 1 trunk)
 . or 2-pinnate leaves:
-. <ul>
-. 2--5 pairs of 1st-order leaflets or 6+
-. twigs wingled or angled
-. 2nd-order leaflets < 7 mm or >= 10 mm
-. leaf main axis with raised glands at each pair of 1st-order leaflets or also in between
-. <ul>
-. glands are only on the adaxial (upper) surface of the axis
-. "in between" might just be a raised ridge between glands</ul></ul>
+.. 2--5 pairs of 1st-order leaflets or 6+
+.. twigs wingled or angled
+.. 2nd-order leaflets < 7 mm or >= 10 mm
+.. leaf main axis with raised glands at each pair of 1st-order leaflets or also in between
+... glands are only on the adaxial (upper) surface of the axis
+... "in between" might just be a raised ridge between glands
 
 ==silver wattle:A. dealbata
+color: cream, other
 . 2-pinnate leaves
 . 6--30 pairs of 1st-order leaflets, 15--55 mm
 . 15--70 pairs of 2nd-order leaflets, 2--5 mm
@@ -32,6 +31,7 @@ Key features:
 . common
 
 ==black wattle:A. mearnsii
+color: cream, other
 . 2-pinnate leaves
 . 7--31 pairs of 1st-order leaflets, 15--70 mm
 . 20--70 pairs of 2nd-order leaflets, 1.5--3.5 mm

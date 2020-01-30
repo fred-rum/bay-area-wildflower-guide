@@ -1,4 +1,0 @@
-sci:Acmispon wrangelianus
-color: yellow
-
-<b>Caution: ID uncertain</b>

@@ -17,7 +17,7 @@
 . branches generally 8--10-angled
 . common at low elevations
 
-==spanish broom:Cytisus multiflorus
+==white spanish broom:Cytisus multiflorus
 . <b>white corolla, possibly with dark or purple lines or spots</b>
 . banner < 10 mm
 . leaflets < 10 mm

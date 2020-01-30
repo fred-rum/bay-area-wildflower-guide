@@ -1,2 +1,0 @@
-sci:Trifolium incarnatum
-color: red

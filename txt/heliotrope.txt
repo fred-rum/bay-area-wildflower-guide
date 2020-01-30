@@ -2,6 +2,7 @@ sci:Heliotropium spp.
 x:hist
 
 ==alkali heliotrope:H. curassavicum
+color: white, purple
 . stem prostrate to +- ascending, glabrous
 . calyx lobes glabrous
 . corolla white, <b>throat generally purple or yellow</b>

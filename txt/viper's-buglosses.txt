@@ -1,8 +1,10 @@
 sci:Echium
 
 ==purple viper's-bugloss:E. plantagineum
+color: purple
 . commonly spotted near the top of Foothills Park.
 
 ==viper's-bugloss:E. vulgare
+color: purple
 . NRDB thinks that this can also be found at Foothills, but they are wrong.
 . This species has been introduced to very few US states, and California is not one of them.

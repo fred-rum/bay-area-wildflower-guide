@@ -9,23 +9,28 @@ Key features:
 See also {-toyon}.
 
 ==late cotoneaster:C. coriaceus
+sci_fpj:Cotoneaster lacteus
+color: white
 . plant arching, 1--9 m
 . petals white, spreading; fruit bright red
 . leaf blade 35--95 mm, 17--45 mm wide, thick, adaxially dark green, lateral veins often sunken
 . common
 
 ==silverleaf cotoneaster:C. pannosus
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0219+0707
 . plant arching, 1--9 m
 . petals white, spreading; fruit bright red
 . leaf blade 15--32 mm, 8--15 mm wide, thin, adaxially +- blue-green, lateral veins not sunken
 . common
 
 ==franchet's cotoneaster:C. franchetii
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0406+0239
 . plant arching, 1--9 m
 . petals pink or rose, erect; fruit orange to red-orange
 . scattered in the outer coastal range + Berkeley
 
 ==entire-leaved cotoneaster:C. integrifolius
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0406+0347
 . plant sprawling, <= 1 m
 . leaf blade 5--15 mm, < 8 mm wide, narrowly oblanceolate, adaxially shiny, abaxially sparsely hairy, margins inrolled, tip blunt (notched)
 . Nisene Marks, Santa Cruz, San Francisco, Marin

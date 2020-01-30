@@ -1,2 +1,0 @@
-sci:Rubus ursinus
-color: white

@@ -1,2 +1,0 @@
-sci:Acmispon glaber
-color: yellow

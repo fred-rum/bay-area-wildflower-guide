@@ -36,12 +36,14 @@ Key features:
 . corolla blue-purple or lavender to white
 
 ==reddish tufted vetch:V. benghalensis
+color: red purple
 . flowers not spaced, generally on 1 side of axis
 . inflorescence generally +- = subtending leaf, 3--12-flowered; corolla dark or red-purple
 . leaflets 10--16, 1.5--3 cm, elliptic to oblong
 . corolla (12)15--18 mm, dark or red-purple, <b>plumose</b>
 
 ==american vetch:V. americana
+color: pink, pale purple
 . flowers 3--9, generally spaced, on > 1 side of axis
 . plant is hairy or glabrous
 . leaflets 8--16, 1--3.5 cm, widely elliptic, wedge-shaped, to narrowly oblong, tip acute, truncate, notched, or 1--5-toothed
@@ -58,6 +60,7 @@ Key features:
 <h2>peduncled raceme with small flowers</h2>
 
 ==smooth tare:V. tetrasperma
+color: pale purple
 . generally 1--3 flowers, at tip
 . peduncle 1--3 cm
 . 4--10 leaflets, 6--20 mm, linear to elliptic

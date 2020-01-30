@@ -52,22 +52,26 @@ photos.
 
 https://calphotos.berkeley.edu/[...] associates a CalPhotos link with
 the page.  A placeholder image is added to the list of images, along
-with a link to the CalPhotos page.  If ':[text]' is appended to the
-link, the corresponding text is added to the placeholder.
+with a link to the CalPhotos page.  If '[label]:' appears before the
+link, the corresponding label is added to the placeholder.
 
 Page links:
 
-==[name] creates a child relationship to the named page.  The specified
-name can be the scientific name (elaborated or stripped) or the common
-name (if there is exactly one match) of the child.  If the name is in
-[com]:[sci] format, both names are used to find the corresponding
-page, and the page is updated if it only has one of the names.  A link
-to the child page is also created.  The link displays the first image
-for the page (a jpg or a CalPhotos placeholder) or a blank
-placeholder.  It also displays the common name and scientific name of
-the page.  If there is additional text in the same paragraph (on
-following lines, not separated by a blank line), the link and the
-additional text are formatted as a unit.  On a wide page, the
+==[name] creates a child relationship to the named page.  The
+specified name can be the scientific name (elaborated or stripped) or
+the common name (if there is exactly one match) of the child.  If the
+name is in [com]:[sci] format, both names are used to find the
+corresponding page, and the page is updated if it only has one of the
+names.  A link to the child page is also created.  The link displays
+the common name and scientific name of the page.  It also displays the
+first image for the page (a jpg or a CalPhotos placeholder) or a blank
+placeholder.  If the common name ends with ',[jpg_suffix]', this is
+stripped from the link, but the specified jpg is used as the link
+image instead of the default first image.
+
+If there is additional text in the same paragraph (on lines following
+the child declaration, not separated by a blank line), the link and
+the additional text are formatted as a unit.  On a wide page, the
 additional text appears next to the image and below the name; on a
 narrow page, the additional text appears below the image and name.
 

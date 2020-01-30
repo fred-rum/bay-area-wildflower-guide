@@ -1,2 +1,0 @@
-sci:Myosotis latifolia
-color: pale blue

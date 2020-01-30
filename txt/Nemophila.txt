@@ -1,10 +1,12 @@
 com:baby blue eyes
 sci:Nemophila spp.
 
-==N. menziesii
+==baby blue eyes:N. menziesii
+color: pale blue, pale purple, white
 . common throughout the bay area
 
 ==white nemophila:N. heterophylla
+color: white
 . scattered throughout the bay area
 
 ==small flowered nemophila:N. parviflora
