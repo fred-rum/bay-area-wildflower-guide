@@ -1,2 +1,0 @@
-sci:Collinsia sparsiflora
-color: purple

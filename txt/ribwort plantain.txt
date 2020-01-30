@@ -1,2 +1,0 @@
-sci:Plantago lanceolata
-color: white, other

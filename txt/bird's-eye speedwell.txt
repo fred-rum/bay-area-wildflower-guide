@@ -1,2 +1,0 @@
-sci:Veronica persica
-color: pale blue

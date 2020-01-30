@@ -9,10 +9,12 @@ Key features:
 . flower characteristics
 
 ==ribwort plantain:P. lanceolata
+color: white, other
 . corolla tube glabrous
 . very common
 
 ==california plantain:P. erecta
+color: white
 . corolla tube glabrous
 . common
 

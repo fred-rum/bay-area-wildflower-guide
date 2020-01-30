@@ -18,6 +18,8 @@ Key features:
 proximal pedicels < calyx</h2>
 
 ==chinese-houses:C. heterophylla var. heterophylla
+color: purple
+xx:ba
 . <b>corolla lips +- =</b>
 . <b>corolla throat as wide as long</b>
 . upper lip white to lavender or tipped dark violet, wine-spotted and generally +- red lined near base
@@ -25,6 +27,7 @@ proximal pedicels < calyx</h2>
 . leaf lance-deltate, toothed, glabrous abaxially (at most ciliate on midvein)
 
 ==white blue-eyed mary:C. bartsiifolia
+color: white, pale purple, purple
 . <b>corolla lips +- = in fully open flowers</b>, upper lobes +- toothed, lateral lobes notched
 . <b>corolla throat longer than wide</b>
 . corolla generally white to pale lavender to pink-purple
@@ -52,6 +55,7 @@ flowers:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1205+1493
 proximal pedicels > calyx</h2>
 
 ==san francisco collinsia:C. multicolor
+color: purple
 . lower whorls with 1--2 flowers; upper whorls with 3+ flowers, +- crowded
 . lower pedicels >> calyx; upper pedicels +- = calyx
 . leaf margin generally coarsely toothed
@@ -63,6 +67,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0209+0778
 . leaf margin entire, generally rolled under [but not by much]
 
 ==fewflower blue-eyed mary:C. sparsiflora
+color: purple
 . 1--2 flowers per node
 . all pedicels +- equal, generally >> calyx
 . leaf margin entire

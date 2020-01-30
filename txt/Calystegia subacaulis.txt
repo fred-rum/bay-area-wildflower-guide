@@ -2,6 +2,7 @@ com:hillside false bindweed
 xx:any
 
 ==hillside false bindweed:C. subacaulis ssp. subacaulis
+color: white, pale purple
 . stem generally +- 2 cm
 . common
 

@@ -1,6 +1,7 @@
 xx:ca
 
 ==pacific false bindweed:Calystegia purpurata ssp. purpurata
+color: white, pale purple
 . stem strongly climbing, > 1 m
 . leaf triangular, tip acute, sinus V-shaped
 . bracts rarely lobed

@@ -2,3 +2,5 @@ sci:Convolvulus spp.
 x:ba
 
 ==field bindweed:C. arvensis
+color: white, pale purple
+xx:none

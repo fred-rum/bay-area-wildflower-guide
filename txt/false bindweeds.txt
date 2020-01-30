@@ -18,6 +18,7 @@ Key features:
 . very common
 
 ==western morning glory:C. occidentalis ssp. occidentalis
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+0610
 . plant puberulent to finely tomentose
 . stem decumbent to strongly climbing, generally > 1 m
 . leaf lobes generally indistinct, generally 2-tipped; sinus rounded to +- square or tapered
@@ -47,10 +48,13 @@ Key features:
 . Henry Coe, Sunol, Mt. Tam
 
 ==marsh morning glory:C. sepium ssp. limnophila
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1009+0161
+xx:hist
 . stem trailing or weakly to strongly climbing, >= 1 m
 . Palo Alto baylands
 
 ==sea bindweed:C. soldanella
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=1342+3162+2660+0067
 . stem decumbent, < 60 cm
 . leaf blade 1--3 cm long, 1.5--2 &times; wider than long, reniform, +- fleshy
 . corolla deep pink or +- purple
