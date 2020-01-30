@@ -1,2 +1,0 @@
-sci:Ribes malvaceum
-color: pink

@@ -2,6 +2,7 @@ sci:Phoradendron spp.
 x:ba
 
 ==oak mistletoe:P. villosum
+color: other
 . leaf length generally < 1.5 &times; width, 15--60 mm, generally > 20 mm
 . stem generally short-hairy, at least at tip
 . spike with 2--5(7) fertile internodes, pistillate 6--15(20)-flowered

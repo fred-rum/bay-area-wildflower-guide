@@ -17,6 +17,7 @@ Key features:
 . petals 10--15 mm
 
 ==common st. john's-wort:H. perforatum
+color: yellow
 . herb
 . leaf narrowly oblong, not folded, tip obtuse
 . sterile axillary branches generally 2--10 cm
@@ -30,6 +31,7 @@ Key features:
 . petals 7--12 mm
 
 ==rose-of-sharon:H. calycinum
+color:yellow
 . <b>shrub</b>
 . stem 1 or few-branched
 . flowers generally 1 per stem

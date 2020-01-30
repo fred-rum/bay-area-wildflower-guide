@@ -9,12 +9,14 @@ A passionflower bloom has the following parts:
 . 3 stigmas, taller than the stamens
 
 ==red passionflower:P. manicata
+color: red
 . perianth lobes red
 . filaments purple, short, erect
 . stamens yellowish
 . stigmas greenish
 
 ==banana passionfruit:P. tarminiana
+color: pink
 . perianth lobes pink
 . no filaments
 . stamens yellowish
@@ -29,6 +31,7 @@ A passionflower bloom has the following parts:
 . waif
 
 ==bluecrown passionflower:P. caerulea
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1115+3513
 . perianth lobes white or cream
 . filaments striped white and purple/blue
 . stamens greenish-yellow

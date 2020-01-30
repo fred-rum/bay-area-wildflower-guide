@@ -49,6 +49,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1116+1484
 . rare
 
 ==bolander's linanthus:L. bolanderi
+sci_p:Linanthus bolanderi
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0513+1130
 . calyx slightly shorter than corolla tube & throat
 . corolla:

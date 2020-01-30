@@ -1,2 +1,0 @@
-sci:Hypericum calycinum
-color:yellow

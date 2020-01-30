@@ -11,5 +11,7 @@ Key features:
 I've made very few currant/gooseberry observations, and my identifications are not firm.
 
 ==chaparral currant:R. malvaceum
+color: pink
 
 ==canyon gooseberry:R. menziesii
+color: red

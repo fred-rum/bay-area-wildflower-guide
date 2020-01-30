@@ -4,13 +4,13 @@ x:!hist/rare
 
 "Inside the corolla at the base of the stamens, there are fringed floral scales (requires at least a 10x hand lens to see)."
 
-==C. californica
+==california dodder:C. californica
 . corolla scales 0
 . styles 1.2--3 mm
 . anthers 0.7--1.1 mm, oblong to linear
 . rare on coast and scattered inland
 
-==C. occidentalis
+==california dodder:C. occidentalis
 . [Yes, two dodders have the same common name.]
 . corolla scales 0
 . styles 0.5--1(1.5) mm
