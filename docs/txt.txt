@@ -1,9 +1,3 @@
-The filename defines a default common name (if all lowercase) or
-default scientific name (if any letter is uppercase).  My preference
-for the filename is to use the common name if there is one and it is
-unique in the bay area.  The filename also determines the filename
-used for the corresponding HTML page.
-
 The text in the file is standard HTML.  The program creates a standard
 header and footer for each page and includes the HTML text between
 them.  The standard header includes any photos associated (by name)
@@ -13,7 +7,14 @@ In addition to the standard HTML, the following text cases are handled
 specially.  Each case must be on a line by itself unless otherwise
 specified.
 
-Info:
+--
+Names:
+
+The filename defines a default common name (if all lowercase) or
+default scientific name (if any letter is uppercase).  My preference
+for the filename is to use the common name if there is one and it is
+unique in the bay area.  The filename also determines the filename
+used for the corresponding HTML page.
 
 com:[name] specifies the common name for the flower.  My preference is
 to use the common name as given by iNaturalist for my area, although
@@ -39,29 +40,43 @@ other sites may be out of date or have made a different choice.  In
 that case, different scientic names can be specified for the various
 sites where it differs from the iNaturalist name:
 
-Page links:
+More information can be applied to the page or to a child page as
+described below.
+
+--
+Child links and key info:
 
 ==[name] creates a child relationship to the named page.  The
 specified name can be the scientific name (elaborated or stripped) or
 the common name (if there is exactly one match) of the child.  If the
 name is in [com]:[sci] format, both names are used to find the
-corresponding page, and the page is updated if it only has one of the
-names.  A link to the child page is also created.  The link displays
-the common name and scientific name of the page.  It also displays the
+corresponding page, and the page is updated if it has only one of the
+names.  A link to the child page is also created.  Regardless of how
+many names were used to create the link, the link displays the common
+name and scientific name of the child page.  It also displays the
 first image for the page (a jpg or a CalPhotos placeholder) or a blank
-placeholder.  If the common name ends with ',[jpg_suffix]', this is
-stripped from the link, but the specified jpg is used as the link
-image instead of the default first image.
+placeholder.  If the child declaration specifies the common name
+ending with ',[jpg_suffix]', this is stripped from the link, but the
+specified jpg is used as the link image instead of the default first
+image.
 
 If there is additional text in the same paragraph (on lines following
 the child declaration, not separated by a blank line), the link and
-the additional text are formatted as a unit.  On a wide page, the
-additional text appears next to the image and below the name; on a
-narrow page, the additional text appears below the image and name.
+the additional text are formatted as a unit.  The additional text is
+called "key text", and is typically a bullet-point list of
+distinguishing features for the child compared to other children on
+the same page.  On a wide page, the key text appears next to the image
+and below the name; on a narrow page, the key text appears below the
+image and name.
 
 The following info can be included as part of the key for a child.  If
 it appears elsewhere in the txt file (not in the paragraph following a
-child link), the info is applied to the page itself.
+child link; typically at the top of the file), the info is applied to
+the page itself.
+
+
+If different sites disagree on the scientific name for a species, the
+name for each site can be specified as follows:
 
 sci_j:[name] specifies the scientific name as listed in Jepson.
 sci_f:[name] specifies the scientific name as listed in CalFlora.
@@ -77,54 +92,12 @@ into one declaration, e.g. "sci_jfp:[name]".
 If the name is "n/a", it indicates that the taxon is not listed under
 any name at a site.
 
-color:[names] specifies the colors of the flower, separated by commas.
+
+color:[names] specifies the colors of the taxon, separated by commas.
 Supported colors are in the color_list variable.  Colors are expected
-for all taxons with associated photos, and not for taxons without
-photos.
+for all taxons with associated photos (and usually at the lowest level
+of taxon hierarchy), and not for taxons without photos.
 
-https://calphotos.berkeley.edu/[...]
-https://www.calflora.org/cgi-bin/noccdetail.cgi[...]
-These links associate an external photo with the page.  A placeholder
-image is added to the list of images, along with a link to the
-CalPhotos/CalFlora page.  If '[label]:' appears before the link, the
-corresponding label is added to the placeholder.
-
-
-{-[page]} creates a link to the page without creating a child
-relationship.  The link is just the common and scientific names of the
-child on one line, without any image.
-
-Other formatting:
-
-'[' and ']' (each on a line by itself) creates a light-bordered box
-surrounding all text between the brackets.
-
-Any number of periods starting a line creates an unnumbered list.  The
-depth of the list is equal to the number of periods.
-
-The following are replaced with better-looking unicode characters:
-+-
---
-<=
->=
-<<
->>
-'
-
-Manual html links (<a href=...>) are updated to include
-target="_blank" so that they open in a new tab/window.
-
-My photos can be supplemented with links to calphotos, e.g.
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0911+0197
-If a link to calphotos occurs within a key, it is removed from the key
-and instead added to the keyed taxon.
-
-A calphotos link can also be of the form
-[label]:https://calphotos.berkeley.edu/cgi/img_query?enlarge=[...]
-in order for the link to be given a descriptive text label.
-The label may include spaces.
-
---
 
 The completeness of the guide is indicated with x:[txt] or xx:[txt].
 x: specifies the completeness of a genus, and xx: is for a species.
@@ -150,11 +123,47 @@ x:more.  If the completeness is left unspecified for a species, then
 no completeness information is put on the species page.  (Completeness
 of the members of a species is not a priority.)
 
+
+https://calphotos.berkeley.edu/[...]
+https://www.calflora.org/cgi-bin/noccdetail.cgi[...]
+These links associate an external photo with the page.  A placeholder
+image is added to the list of images, along with a link to the
+CalPhotos/CalFlora page.  If '[label]:' appears before the link, the
+corresponding label is added to the placeholder.  The label may
+include spaces.
+
+--
+Other formatting:
+
+{-[page]} creates a link to a page without creating a child
+relationship.  The link is just the common and scientific names of the
+child inline with the rest of the text, without any image or special
+formatting.
+
+'[' and ']' (each on a line by itself) creates a light-bordered box
+surrounding all text between the brackets.  Useful for organizing
+subsets of children on a page.
+
+Any number of periods starting a line creates an unnumbered list.  The
+depth of the list is equal to the number of periods.
+
+The following are replaced with better-looking unicode characters:
++-
+--
+<=
+>=
+<<
+>>
+'
+
+Manual html links (<a href=...>) are updated to include
+target="_blank" so that they open in a new tab/window.
+
 --
 Strategy:
 
-It's often good to simply create a stub page for the genus, using its
-common name from iNaturalist as the filename and also giving its
-scientific name with sci:[name].  The created HTML page then has
-convenient links for finding all bay area species known by CalFlora,
-finding the key in Jepson, etc.
+It's often good to simply create a stub page for a genus or species,
+using its common name from iNaturalist as the filename and also giving
+its scientific name with sci:[name].  The created HTML page then has
+convenient links for finding all bay area species within the same
+genus that are known by CalFlora, finding the key in Jepson, etc.

@@ -1543,12 +1543,23 @@ def repl_easy(matchobj):
     return repl_easy_dict[matchobj.group(1)]
 
 
-
-# Read the txt for all explicit page files.
+# Read the txt for all explicit page files.  Also perform a first pass
+# on all pages to initialize common and scientific names.  This
+# ensures that when we parse children (next), any name can be used and
+# linked correctly.
 for name in page_list:
     page = Page(name)
     with open(root + "/txt/" + name + ".txt", "r", encoding="utf-8") as r:
         page.txt = r.read()
+    page.parse_names()
+
+# parse_children() can add new pages, so we make a copy of the list to
+# iterate through.  parse_children() also checks for external photos,
+# color, and completeness information.  If this info is within a child
+# key, it is assigned to the child.  Otherwise it is assigned to the
+# parent.
+for page in [x for x in name_page.values()]:
+    page.parse_children()
 
 # Record jpg names for associated pages.
 # Create a blank page for all unassociated jpgs.
@@ -1560,22 +1571,7 @@ for jpg in sorted(jpg_list):
         page = Page(name)
     page.add_jpg(jpg)
 
-with open(root + '/family names.yaml', encoding='utf-8') as f:
-    family_com = yaml.safe_load(f)
-
-# Perform a first pass on all pages to initialize common and scientific names.
-# This ensures that when we parse children (next), any name can be used and
-# linked correctly.
 for page in name_page.values():
-    page.parse_names()
-
-# parse_children() can add new pages, so we make a copy of the list to
-# iterate through.  parse_children() also checks for external photos,
-# color, and completeness information.  If this info is within a child
-# key, it is assigned to the child.  Otherwise it is assigned to the
-# parent.
-for page in [x for x in name_page.values()]:
-    page.parse_children()
     if page.color and not page.jpg_list:
         print('page {name} has a color assigned but has no photos'.format(name=page.name))
 
@@ -1777,6 +1773,9 @@ def sort_pages(page_set, color=None):
     page_list.sort(key=count_flowers, reverse=True)
     return page_list
 
+with open(root + '/family names.yaml', encoding='utf-8') as f:
+    family_com = yaml.safe_load(f)
+
 for family in family_child_set:
     if family in family_com:
         com = family_com[family]
@@ -1947,7 +1946,7 @@ with open(search_file, "w", encoding="utf-8") as w:
         else:
             elab = None
         w.write('{{page:"{name}"'.format(name=name))
-        if com and com != name:
+        if com and (com != name or not com.islower()):
             w.write(',com:"{com}"'.format(com=com))
         if elab and elab != name:
             w.write(',sci:"{elab}"'.format(elab=elab))
