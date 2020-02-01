@@ -64,9 +64,9 @@ class Obs:
                 return
 
             if page.taxon_id:
-                link = 'https://www.inaturalist.org/observations/chris_nelson?taxon_id={taxon_id}&order_by=observed_on'.format(taxon_id=page.taxon_id)
+                link = f'https://www.inaturalist.org/observations/chris_nelson?taxon_id={page.taxon_id}&order_by=observed_on'
             elif sci:
-                link = 'https://www.inaturalist.org/observations/chris_nelson?taxon_name={sci}&order_by=observed_on'.format(sci=sci)
+                link = f'https://www.inaturalist.org/observations/chris_nelson?taxon_name={sci}&order_by=observed_on'
             else:
                 link = None
         else:
@@ -75,24 +75,24 @@ class Obs:
         w.write('<p/>\n')
 
         if link:
-            w.write('<a href="{link}" target="_blank">Chris&rsquo;s observations</a>: '.format(link=link))
+            w.write(f'<a href="{link}" target="_blank">Chris&rsquo;s observations</a>: ')
         else:
             w.write('Chris&rsquo;s observations: ')
 
         if n == 0:
             w.write('none')
         elif rg == 0:
-            w.write('{n} (none are research grade)'.format(n=n))
+            w.write(f'{n} (none are research grade)')
         elif rg == n:
             if n == 1:
                 w.write('1 (research grade)')
             else:
-                w.write('{n} (all are research grade)'.format(n=n))
+                w.write(f'{n} (all are research grade)')
         else:
             if rg == 1:
-                w.write('{n} ({rg} is research grade)'.format(n=n, rg=rg))
+                w.write(f'{n} ({rg} is research grade)')
             else:
-                w.write('{n} ({rg} are research grade)'.format(n=n, rg=rg))
+                w.write(f'{n} ({rg} are research grade)')
 
         if n:
             w.write('''
@@ -108,9 +108,9 @@ Locations:
             for park in park_list:
                 count = self.parks[park]
                 if count == 1:
-                    w.write('<li>{park}</li>\n'.format(park=park))
+                    w.write(f'<li>{park}</li>\n')
                 else:
-                    w.write('<li>{park}: {count}</li>\n'.format(park=park, count=count))
+                    w.write(f'<li>{park}: {count}</li>\n')
 
             w.write('</ul>\nMonths:\n<ul>\n')
 
@@ -154,7 +154,7 @@ Locations:
             # run of zeros (even if some of those months are themselves zero).
             for i in range(12 - z_length):
                 m = (i + z_first + z_length) % 12
-                w.write('<li>{m}: {n}</li>\n'.format(m=month_name[m], n=self.month[m]))
+                w.write(f'<li>{month_name[m]}: {self.month[m]}</li>\n')
             w.write('</ul>\n</div>\n')
         else:
             w.write('<p/>\n')
@@ -229,7 +229,7 @@ class Page:
 
     def __init__(self, name):
         if name in name_page:
-            print('Multiple pages created with name "{name}"'.format(name=name))
+            print(f'Multiple pages created with name "{name}"')
         self.name = name
         name_page[name] = self
 
@@ -310,7 +310,7 @@ class Page:
         sci = strip_sci(sci)
 
         if sci in sci_page and sci_page[sci] != self:
-            print('Same scientific name ({sci}) set for {name1} and {name2}'.format(sci=sci, name1=sci_page[sci].name, name2=self.name))
+            print(f'Same scientific name ({sci}) set for {sci_page[sci].name} and {self.name}')
 
         if elab[0].islower():
             self.level = 'above'
@@ -378,13 +378,12 @@ class Page:
         if not elab:
             return None
         elif self.level == 'above':
-            elab_words = elab.split(' ')
-            return '{type} <i>{name}</i>'.format(type=elab_words[0],
-                                                 name=elab_words[1])
+            (gtype, name) = elab.split(' ')
+            return f'{gtype} <i>{name}</i>'
         else:
             if self.is_hybrid:
                 elab = re.sub(r' ', ' &times; ', elab)
-            return '<i>{elab}</i>'.format(elab=elab)
+            return f'<i>{elab}</i>'
 
     def format_full(self, lines=2):
         com = self.format_com()
@@ -394,9 +393,9 @@ class Page:
         elif not elab:
             return com
         elif lines == 1:
-            return '{com} ({elab})'.format(com=com, elab=elab)
+            return f'{com} ({elab})'
         else:
-            return '{com}<br/>{elab}'.format(com=com, elab=elab)
+            return f'{com}<br/>{elab}'
 
     def add_jpg(self, jpg):
         self.jpg_list.append(jpg)
@@ -463,7 +462,7 @@ class Page:
 
     def set_colors(self, color_str):
         if self.color:
-            print('color is defined more than once for page {name}'.format(name=self.name))
+            print(f'color is defined more than once for page {self.name}')
 
         self.color = set([x.strip() for x in color_str.split(',')])
 
@@ -474,11 +473,11 @@ class Page:
         # check for bad colors.
         for color in self.color:
             if color not in color_list and color != 'n/a':
-                print('page {name} uses undefined color {color}'.format(name=self.name, color=color))
+                print(f'page {self.name} uses undefined color {color}')
 
     def record_ext_photo(self, label, link):
         if (label, link) in self.ext_photo_list:
-            print('{link} is specified more than once for page {name}'.format(link=link, name=self.name))
+            print(f'{link} is specified more than once for page {self.name}')
         else:
             self.ext_photo_list.append((label, link))
 
@@ -495,9 +494,9 @@ class Page:
 
     def assign_child(self, child):
         if self.is_ancestor(child):
-            print("circular loop when creating link from {parent} to {child}".format(parent=self.name, child=child.name))
+            print(f'circular loop when creating link from {self.name} to {child.name}')
         elif self in child.parent:
-            print("{child} added as child of {parent} twice".format(parent=self.name, child=child.name))
+            print(f'{child.name} added as child of {self.name} twice')
         else:
             self.child.append(child)
             child.parent.add(self)
@@ -552,7 +551,7 @@ class Page:
                     # The common name is shared by a flower with a
                     # different scientific name.
                     if not sci:
-                        print('page {parent} has ambiguous child {child}'.format(parent=self.name, child=com))
+                        print(f'page {self.name} has ambiguous child {com}')
                         return '==' + com + suffix
 
                     if (com in name_page and
@@ -575,7 +574,7 @@ class Page:
             if com:
                 if child_page.com:
                     if com != child_page.com:
-                        print("page {parent} refers to child {com}:{sci}, but the common name doesn't match".format(parent=self.name, com=com, sci=sci))
+                        print(f"page {self.name} refers to child {com}:{sci}, but the common name doesn't match")
                 else:
                     child_page.set_com(com)
             if sci:
@@ -656,25 +655,25 @@ class Page:
         else:
             self.cur_genus = None
 
-        with open(root + "/txt2/{name}.txt".format(name=self.name), "w") as w:
+        with open(root + f'/txt2/{self.name}.txt', 'w') as w:
             if self.com and self.com != self.name:
-                w.write('com:{com}\n'.format(com=self.com))
+                w.write(f'com:{self.com}\n')
             if self.elab and self.elab != self.name:
-                w.write('sci:{elab}\n'.format(elab=self.elab))
+                w.write(f'sci:{self.elab}\n')
             if self.no_sci:
                 w.write('sci:n/a\n')
             if self.color:
-                w.write('color:{color}\n'.format(color=self.color_txt))
+                w.write(f'color:{self.color_txt}\n')
             if self.genus_complete:
                 if self.genus_key_incomplete:
-                    w.write('x:!{complete}\n'.format(complete=self.genus_complete))
+                    w.write(f'x:!{self.genus_complete}\n')
                 else:
-                    w.write('x:{complete}\n'.format(complete=self.genus_complete))
+                    w.write(f'x:{self.genus_complete}\n')
             if self.species_complete:
                 if self.species_key_incomplete:
-                    w.write('xx:!{complete}\n'.format(complete=self.species_complete))
+                    w.write(f'xx:!{self.species_complete}\n')
                 else:
-                    w.write('xx:{complete}\n'.format(complete=self.species_complete))
+                    w.write(f'xx:{self.species_complete}\n')
             for tuple in self.ext_photo_list:
                 if tuple[0]:
                     w.write(tuple[0] + ':' + tuple[1] + '\n')
@@ -706,12 +705,12 @@ class Page:
             return 'unobs'
 
     def create_link(self, lines):
-        return '<a href="{name}.html" class="{style}">{full}</a>'.format(name=self.url(), style=self.link_style(), full=self.format_full(lines))
+        return f'<a href="{self.url()}.html" class="{self.link_style()}">{self.format_full(lines)}</a>'
 
     def write_parents(self, w):
         for parent in sort_pages(self.parent):
             if not parent.autogenerated:
-                w.write('Key to {link}<br/>\n'.format(link=parent.create_link(1)))
+                w.write(f'Key to {parent.create_link(1)}<br/>\n')
         if self.parent:
             w.write('<p/>\n')
 
@@ -802,21 +801,18 @@ class Page:
         if self.taxon_id:
             elab = choose_elab(self.elab, None)
             sci = strip_sci(elab) # Should equal self.sci
-            add_link(elab, None,
-                     '<a href="https://www.inaturalist.org/taxa/{taxon_id}" target="_blank">iNaturalist</a>'.format(taxon_id=self.taxon_id))
+            add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/{self.taxon_id}" target="_blank">iNaturalist</a>')
         else:
             i_sci = sci
             if self.is_hybrid:
                 i_sci = re.sub(r' ', ' \xD7 ', i_sci)
-            add_link(elab, None,
-                     '<a href="https://www.inaturalist.org/taxa/search?q={sci}&view=list" target="_blank">iNaturalist</a>'.format(sci=i_sci))
+            add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/search?q={i_sci}&view=list" target="_blank">iNaturalist</a>')
 
         if self.level != 'above' or self.elab.startswith('family '):
             # CalFlora can be searched by family,
             # but not by other high-level classifications.
             elab = choose_elab(self.elab, self.elab_calflora)
-            add_link(elab, self.elab_calflora,
-                     '<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank">CalFlora</a>'.format(elab=elab));
+            add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank">CalFlora</a>');
 
         if self.level in ('species', 'below'):
             # CalPhotos cannot be searched by high-level classifications.
@@ -827,8 +823,7 @@ class Page:
                 # as Erythranthe, it may have photos under both names.
                 elab = self.elab + '|' + elab
             # rel-taxon=begins+with -> allows matches with lower-level detail
-            add_link(elab, self.elab_calphotos,
-                     '<a href="https://calphotos.berkeley.edu/cgi/img_query?rel-taxon=begins+with&where-taxon={elab}" target="_blank">CalPhotos</a>\n'.format(elab=elab));
+            add_link(elab, self.elab_calphotos, f'<a href="https://calphotos.berkeley.edu/cgi/img_query?rel-taxon=begins+with&where-taxon={elab}" target="_blank">CalPhotos</a>\n');
 
         if self.level != 'above' or self.elab.startswith('family '):
             # Jepson can be searched by family,
@@ -837,8 +832,7 @@ class Page:
             # Jepson uses "subsp." instead of "ssp.", but it also allows us to
             # search with that qualifier left out entirely.
             sci = strip_sci(elab)
-            add_link(elab, self.elab_jepson,
-                     '<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson&nbsp;eFlora</a>'.format(sci=sci));
+            add_link(elab, self.elab_jepson, f'<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson&nbsp;eFlora</a>');
 
         if self.level in ('genus', 'species', 'below'):
             elab = choose_elab(self.elab, self.elab_calflora)
@@ -851,21 +845,20 @@ class Page:
             # fmt=photo -> list results with info + sample photos
             # y={},x={},z={} -> longitude, latitude, zoom
             # wkt={...} -> search polygon with last point matching the first
-            add_link(elab, self.elab_calflora,
-                     '<a href="https://www.calflora.org/entry/wgh.html#srch=t&taxon={genus}&group=none&fmt=photo&y=37.5&x=-122&z=8&wkt=-123.1+38,-121.95+38,-121.05+36.95,-122.2+36.95,-123.1+38" target="_blank">Bay&nbsp;Area&nbsp;species</a>'.format(genus=genus))
+            add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/entry/wgh.html#srch=t&taxon={genus}&group=none&fmt=photo&y=37.5&x=-122&z=8&wkt=-123.1+38,-121.95+38,-121.05+36.95,-122.2+36.95,-123.1+38" target="_blank">Bay&nbsp;Area&nbsp;species</a>')
 
         link_list_txt = []
         for elab in elab_list:
             txt = ' &ndash;\n'.join(link_list[elab])
             if len(elab_list) > 1:
-                txt = '{elab}: {txt}'.format(elab=elab, txt=txt)
+                txt = f'{elab}: {txt}'
             link_list_txt.append(txt)
         txt = '</li>\n<li>'.join(link_list_txt)
 
         if len(elab_list) > 1:
-            w.write('<p class="list-head">Not all sites agree about the scientific name:</p>\n<ul>\n<li>{txt}</li>\n</ul>\n'.format(txt=txt))
+            w.write(f'<p class="list-head">Not all sites agree about the scientific name:</p>\n<ul>\n<li>{txt}</li>\n</ul>\n')
         else:
-            w.write('{txt}<p/>\n'.format(txt=txt))
+            w.write(f'{txt}<p/>\n')
 
     def write_lists(self, w):
         if not self.child and not self.jpg_list:
@@ -876,7 +869,7 @@ class Page:
 
         for color in color_list:
             if color in self.color:
-                w.write('<li><a href="{color}.html">{color} flowers</a></li>\n'.format(color=color))
+                w.write(f'<li><a href="{color}.html">{color} flowers</a></li>\n')
 
         w.write('<li><a href="all.html">all flowers</a></li>\n')
         w.write('</ul>\n')
@@ -894,15 +887,15 @@ class Page:
             # A parent with listed children puts itself in a box.
             # The box may be indented, in which case, the remainder
             # of the listing is not indented.
-            w.write('<div class="box{indent_class}">\n'.format(indent_class=indent_class))
+            w.write(f'<div class="box{indent_class}">\n')
             indent_class = ''
 
-        w.write('<div class="list-box{indent_class}">'.format(indent_class=indent_class))
+        w.write(f'<div class="list-box{indent_class}">')
 
         if self.jpg_list:
-            w.write('<a href="{name}.html"><img src="../thumbs/{jpg}.jpg" width="200" height="200" class="list-thumb"></a>'.format(name=self.url(), jpg=self.jpg_list[0]))
+            w.write(f'<a href="{self.url()}.html"><img src="../thumbs/{self.jpg_list[0]}.jpg" width="200" height="200" class="list-thumb"></a>')
 
-        w.write('{link}</div>\n'.format(link=self.create_link(2)))
+        w.write(f'{self.create_link(2)}</div>\n')
 
     def get_ancestor_set(self):
         ancestor_set = self.parent.copy()
@@ -950,8 +943,8 @@ class Page:
 
             child = find_page1(name)
             if not child:
-                print('Broken link to +{name} on page {key}'.format(name=name, key=self.name))
-                c_list.append('=={name}{suffix}\n'.format(name=name, suffix=suffix))
+                print(f'Broken link to +{name} on page {self.name}')
+                c_list.append(f'=={name}{suffix}\n')
                 c_list.append(text)
                 return
 
@@ -982,17 +975,17 @@ class Page:
                     img_class = 'list-thumb'
                 else:
                     img_class = 'page-thumb'
-                img = '<a href="{name}.html"><img src="../thumbs/{jpg}.jpg" width="200" height="200" class="{img_class}"></a>'.format(name=child.url(), jpg=jpg, img_class=img_class)
+                img = f'<a href="{child.url()}.html"><img src="../thumbs/{jpg}.jpg" width="200" height="200" class="{img_class}"></a>'
             elif ext_photo:
-                img = '<a href="{name}.html" class="enclosed {style}"><div class="page-thumb-text">'.format(name=child.url(), style=child.link_style())
+                img = f'<a href="{child.url()}.html" class="enclosed {child.link_style()}"><div class="page-thumb-text">'
                 n_photos = len(child.ext_photo_list)
                 if n_photos > 1:
-                    photo_text = 'photos &times; {n}'.format(n=n_photos)
+                    photo_text = f'photos &times; {n_photos}'
                 elif ext_photo[0]:
                     photo_text = ext_photo[0]
                 else:
                     photo_text = 'photo'
-                img += '<span>{text}</span>'.format(text=photo_text)
+                img += f'<span>{photo_text}</span>'
                 img += '</div></a>'
             else:
                 img = None
@@ -1004,9 +997,9 @@ class Page:
                 # can either be below the text link and next to the image or
                 # below both the image and text link, depending on the width of
                 # the viewport.
-                c_list.append('<div class="flex-width"><div class="photo-box">{img}\n<span class="show-narrow">{link}</span></div><span><span class="show-wide">{link}</span>{text}</span></div>'.format(img=img, link=link, text=text))
+                c_list.append(f'<div class="flex-width"><div class="photo-box">{img}\n<span class="show-narrow">{link}</span></div><span><span class="show-wide">{link}</span>{text}</span></div>')
             else:
-                c_list.append('<div class="photo-box">{img}\n<span>{link}</span></div>'.format(img=img, link=link))
+                c_list.append(f'<div class="photo-box">{img}\n<span>{link}</span></div>')
 
         # replace the easy (fixed-value) stuff.
         # Break the text into lines, then perform easy substitutions on
@@ -1015,6 +1008,7 @@ class Page:
         p_start = None
         child_start = None
         list_depth = 0
+        bracket_depth = 0
         for c in s.split('\n'):
             matchobj = re.match(r'\.*', c)
             new_list_depth = matchobj.end()
@@ -1045,19 +1039,21 @@ class Page:
                 end_paragraph()
                 end_child_text()
                 c_list.append('<div class="box">')
+                bracket_depth += 1
                 continue
 
             if c == ']':
                 end_paragraph()
                 end_child_text()
                 c_list.append('</div>')
+                bracket_depth -= 1
                 continue
 
             if '{' not in c:
                 c = repl_easy_regex.sub(repl_easy, c)
 
             if list_depth:
-                c_list.append('<li>{c}</li>'.format(c=c))
+                c_list.append(f'<li>{c}</li>')
                 continue
 
             if c == '':
@@ -1070,8 +1066,11 @@ class Page:
             c_list.append(c)
         end_paragraph()
         end_child_text()
-        s = '\n'.join(c_list)
 
+        if bracket_depth != 0:
+            print(f'"[" and "]" bracket depth is {bracket_depth} on page {self.name}')
+
+        s = '\n'.join(c_list)
         self.txt = s
 
     def parse2(self):
@@ -1082,7 +1081,7 @@ class Page:
             if page:
                 return page.create_link(1)
             else:
-                print('Broken link {{-{name}}} on page {page}'.format(name=name, page=self.name))
+                print(f'Broken link {{-{name}}} on page {self.name}')
                 return '{-' + name + '}'
 
         if re.search('\S', self.txt):
@@ -1117,7 +1116,7 @@ class Page:
             if is_top:
                 if complete == None:
                     if top == 'genus':
-                        w.write('<b>Caution: There may be other {members} of this {top} not yet included in this guide.</b>'.format(members=members, top=top))
+                        w.write(f'<b>Caution: There may be other {members} of this {top} not yet included in this guide.</b>')
                     else:
                         return # Don't write the <p/> at the end
                 elif complete == 'none':
@@ -1131,7 +1130,7 @@ class Page:
                     else:
                         w.write("This species has subspecies or variants which I haven't yet categorized.")
                 elif complete == 'more':
-                    w.write('<b>Caution: There are other {members} of this {top} not yet included in this guide.</b>'.format(members=members, top=top))
+                    w.write(f'<b>Caution: There are other {members} of this {top} not yet included in this guide.</b>')
                 else:
                     prolog = 'There are no other'
                     if complete == 'hist':
@@ -1147,15 +1146,15 @@ class Page:
                     elif complete == 'any':
                         epilog = 'anywhere'
 
-                    w.write('{prolog} {members} of this {top} {epilog}.'.format(prolog=prolog, members=members, top=top, epilog=epilog))
+                    w.write(f'{prolog} {members} of this {top} {epilog}.')
                 if key_incomplete:
-                    w.write('<br/>\n<b>Caution: The key to distinguish these {members} is not complete.</b>'.format(members=members))
+                    w.write(f'<br/>\n<b>Caution: The key to distinguish these {members} is not complete.</b>')
                 w.write('<p/>\n')
             elif complete:
                 if top == 'genus':
-                    print('{name} uses the x: keyword but is not the top of genus'.format(name=self.name))
+                    print(f'{self.name} uses the x: keyword but is not the top of genus')
                 else:
-                    print('{name} uses the xx: keyword but is not the top of species'.format(name=self.name))
+                    print(f'{self.name} uses the xx: keyword but is not the top of species')
 
         with open(root + "/html/" + self.url() + ".html",
                   "w", encoding="utf-8") as w:
@@ -1190,14 +1189,14 @@ class Page:
             write_header(w, title, h1, has_sci or has_family)
 
             if has_sci:
-                w.write('<b>{elab}</b>'.format(elab=self.format_elab()))
+                w.write(f'<b>{self.format_elab()}</b>')
                 if has_family:
                     w.write('<br/>\n')
                 else:
                     w.write('<p/>\n')
             if has_family:
                 family_link = family_page.create_link(1)
-                w.write('{link}<p/>\n'.format(link=family_link))
+                w.write(f'{family_link}<p/>\n')
 
             self.write_parents(w)
 
@@ -1216,21 +1215,21 @@ class Page:
                 w.write('<div class="photo-box">\n')
 
                 for jpg in self.jpg_list:
-                    w.write('<a href="../photos/{jpg}.jpg"><img src="../thumbs/{jpg}.jpg" width="200" height="200" class="leaf-thumb"></a>\n'.format(jpg=jpg))
+                    w.write(f'<a href="../photos/{jpg}.jpg"><img src="../thumbs/{jpg}.jpg" width="200" height="200" class="leaf-thumb"></a>\n')
 
-                for tuple in self.ext_photo_list:
-                    w.write('<a href="{link}" target="_blank" class="enclosed"><div class="leaf-thumb-text">'.format(link=tuple[1]))
-                    if tuple[0]:
+                for (label, link) in self.ext_photo_list:
+                    w.write(f'<a href="{link}" target="_blank" class="enclosed"><div class="leaf-thumb-text">')
+                    if label:
                         w.write('<span>')
-                    if 'calphotos' in tuple[1]:
+                    if 'calphotos' in link:
                         text = 'CalPhotos'
-                    elif 'calflora' in tuple[1]:
+                    elif 'calflora' in link:
                         text = 'CalFlora'
                     else:
                         text = 'external photo'
-                    w.write('<span style="text-decoration:underline;">{text}</span>'.format(text=text))
-                    if tuple[0]:
-                        w.write('<br/>{text}</span>'.format(text=tuple[0]))
+                    w.write(f'<span style="text-decoration:underline;">{text}</span>')
+                    if label:
+                        w.write(f'<br/>{label}</span>')
                     w.write('</div></a>\n')
 
                 w.write('</div>\n')
@@ -1248,10 +1247,10 @@ class Page:
             write_footer(w)
 
         if self.taxon_id and not (self.jpg_list or self.child):
-            print("{name} is observed, but has no photos".format(name=page.name))
+            print(f'{self.name} is observed, but has no photos')
 
         if self.jpg_list and not self.color:
-            print('No color for {name}'.format(name=self.name))
+            print(f'No color for {self.name}')
 
     def record_genus(self):
         # record all pages that are within each genus
@@ -1324,7 +1323,7 @@ def write_header(w, title, h1, nospace=False, nosearch=False):
         space_class = ' class="nospace"'
     else:
         space_class = ''
-    w.write('''<!-- Copyright 2019 Chris Nelson - All rights reserved. -->
+    w.write(f'''<!-- Copyright 2019 Chris Nelson - All rights reserved. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1355,7 +1354,7 @@ def write_header(w, title, h1, nospace=False, nosearch=False):
 <link rel="stylesheet" href="../bawg.css">
 </head>
 <body>
-'''.format(title=title))
+''')
     if not nosearch:
         w.write('''<div id="search-bg"></div>
 <div id="search-container">
@@ -1363,9 +1362,9 @@ def write_header(w, title, h1, nospace=False, nosearch=False):
 <div id="autocomplete-box"></div>
 </div>
 ''')
-    w.write('''<div id="body">
+    w.write(f'''<div id="body">
 <h1 id="title"{space_class}>{h1}</h1>
-'''.format(title=title, space_class=space_class, h1=h1))
+''')
 
 
 def write_footer(w):
@@ -1383,7 +1382,7 @@ def link_glossary_words(txt):
     def repl_glossary(matchobj):
         word = matchobj.group(1)
         primary_word = glossary_dict[word.lower()]
-        return '<a class="glossary" href="glossary.html#{primary_word}">{word}</a>'.format(word=word, primary_word=primary_word)
+        return f'<a class="glossary" href="glossary.html#{primary_word}">{word}</a>'
 
     def repl_sub_glossary(matchobj):
         allowed = matchobj.group(1)
@@ -1417,7 +1416,8 @@ for (words, defn) in re.findall(r'^{([^\}]+)}\s+(.*)$',
 # is checked first.
 glossary_list = sorted(iter(glossary_dict.keys()), reverse=True)
 
-glossary_regex = re.compile(r'\b({ex})\b'.format(ex='|'.join(map(re.escape, glossary_list))), re.IGNORECASE)
+ex='|'.join(map(re.escape, glossary_list))
+glossary_regex = re.compile(rf'\b({ex})\b', re.IGNORECASE)
 
 glossary_txt = link_glossary_words(glossary_txt)
 
@@ -1429,7 +1429,7 @@ def repl_glossary(matchobj):
     word_list = [x.strip() for x in words.split(',')]
     primary_word = word_list[0]
 
-    return '<div class="defn" id="{word}"><dt>{word}</dt><dd>{defn}</dd></div>'.format(word=primary_word, defn=defn)
+    return f'<div class="defn" id="{primary_word}"><dt>{primary_word}</dt><dd>{defn}</dd></div>'
 
 glossary_txt = re.sub(r'^{([^\}]+)}\s+(.*)$',
                       repl_glossary, glossary_txt, flags=re.MULTILINE)
@@ -1507,12 +1507,12 @@ if mod_list:
             w.write(filename + '\n')
     root_mod = re.sub(r'/', r'\\', root)
     cmd = ['C:/Program Files (x86)/IrfanView/i_view32.exe',
-           '/filelist={root}\\convert.txt'.format(root=root_mod),
+           f'/filelist={root_mod}\\convert.txt',
            '/aspectratio',
            '/resize_long=200',
            '/resample',
            '/jpgq=80',
-           '/convert={root}\\thumbs\\*.jpg'.format(root=root_mod)]
+           f'/convert={root_mod}\\thumbs\\*.jpg']
     subprocess.Popen(cmd).wait()
 
 ###############################################################################
@@ -1537,7 +1537,8 @@ repl_easy_dict = {
     # probably smarter about it than I would be.
 }
 
-repl_easy_regex = re.compile('({ex})'.format(ex='|'.join(map(re.escape, list(repl_easy_dict.keys())))))
+ex='|'.join(map(re.escape, list(repl_easy_dict.keys())))
+repl_easy_regex = re.compile(f'({ex})')
 
 def repl_easy(matchobj):
     return repl_easy_dict[matchobj.group(1)]
@@ -1573,7 +1574,7 @@ for jpg in sorted(jpg_list):
 
 for page in name_page.values():
     if page.color and not page.jpg_list:
-        print('page {name} has a color assigned but has no photos'.format(name=page.name))
+        print(f'page {page.name} has a color assigned but has no photos')
 
 with open(root + '/ignore species.yaml', encoding='utf-8') as f:
     sci_ignore = yaml.safe_load(f)
@@ -1643,17 +1644,17 @@ with open(root + '/observations.csv', mode='r', newline='', encoding='utf-8') as
         if sci in sci_ignore:
             page = find_page2(com, sci)
             if page:
-                print('{sci} is ignored, but there is a page for it ({name})'.format(sci=sci, name=page.name))
+                print(f'{sci} is ignored, but there is a page for it ({page.name})')
         elif sci in sci_page:
             page = sci_page[sci]
         elif com in com_page:
             if com_page[com] == 'multiple':
-                print('observation {com} ({sci}) matches multiple common names but no scientific name'.format(com=com, sci=sci))
+                print(f'observation {com} ({sci}) matches multiple common names but no scientific name')
                 page = None
             else:
                 page = com_page[com]
                 if page.sci and sci != page.sci:
-                    print('observation {com} ({sci}) matches the common name for a page, but not its scientific name ({sci_page})'.format(com=com, sci=sci, sci_page=page.sci))
+                    print(f'observation {com} ({sci}) matches the common name for a page, but not its scientific name ({page.sci})')
                     page = None
                 elif not page.no_sci:
                     page.set_sci(sci)
@@ -1780,13 +1781,13 @@ for family in family_child_set:
     if family in family_com:
         com = family_com[family]
     else:
-        print('No common name for family {family}'.format(family=family))
+        print(f'No common name for family {family}')
         com = 'n/a'
     child_set = family_child_set[family]
     if family in sci_page:
         sci_page[family].cross_out_children(child_set)
         if child_set:
-            print('The following pages are not included by the page for family {family}'.format(family=family))
+            print(f'The following pages are not included by the page for family {family}')
             for child in child_set:
                 print('  ' + child.format_full(1))
     else:
@@ -1796,7 +1797,7 @@ for family in family_child_set:
         if com != 'n/a':
             page.set_com(com)
         for child in sort_pages(family_child_set[family]):
-            page.txt += '=={name}\n\n'.format(name=child.name)
+            page.txt += f'=={child.name}\n\n'
         page.parse_children()
 
 # Regenerate the list of top-level pages
@@ -1853,7 +1854,7 @@ for genus in genus_page_list:
         if genus in sci_page:
             sci_page[genus].cross_out_children(page_list)
             if page_list:
-                print('The following species are not included under the {genus} spp. key'.format(genus=genus))
+                print(f'The following species are not included under the {genus} spp. key')
                 for page in page_list:
                     print('  ' + page.format_full(1))
         else:
@@ -1862,7 +1863,7 @@ for genus in genus_page_list:
                 set2 = page.get_ancestor_set()
                 ancestor_set.intersection_update(set2)
             if not ancestor_set:
-                print('The following pages in {genus} spp. are not under a common ancestor:'.format(genus=genus))
+                print(f'The following pages in {genus} spp. are not under a common ancestor:')
                 for page in page_list:
                     print('  ' + page.format_full(1))
 
@@ -1899,18 +1900,18 @@ def write_page_list(page_list, color, color_match):
     s = io.StringIO()
     list_matches(s, page_list, False, color_match, set())
 
-    with open(root + "/html/{color}.html".format(color=color), "w", encoding="utf-8") as w:
+    with open(root + f"/html/{color}.html", "w", encoding="utf-8") as w:
         title = color.capitalize() + ' flowers'
         write_header(w, title, title)
         obs = Obs(color_match)
         for page in top_list:
             page.count_matching_obs(obs)
-        w.write('<span class="parent">{k} keys</span>'.format(k=obs.key))
-        w.write(' / <span class="leaf">{f} observed flowers</span>'.format(f=obs.leaf_obs))
+        w.write(f'<span class="parent">{obs.key} keys</span>')
+        w.write(f' / <span class="leaf">{obs.leaf_obs} observed flowers</span>')
         if color_match == None:
             # Unobserved colors don't have a color, so it doesn't make sense
             # to try to print out how many match the current color.
-            w.write(' / <span class="unobs">{u} unobserved flowers</span>'.format(u=obs.leaf_unobs))
+            w.write(f' / <span class="unobs">{obs.leaf_unobs} unobserved flowers</span>')
         w.write('\n')
         w.write(s.getvalue())
         obs.write_obs(None, w)
@@ -1945,11 +1946,11 @@ with open(search_file, "w", encoding="utf-8") as w:
             elab = unidecode(page.elab)
         else:
             elab = None
-        w.write('{{page:"{name}"'.format(name=name))
+        w.write(f'{{page:"{name}"')
         if com and (com != name or not com.islower()):
-            w.write(',com:"{com}"'.format(com=com))
+            w.write(f',com:"{com}"')
         if elab and elab != name:
-            w.write(',sci:"{elab}"'.format(elab=elab))
+            w.write(f',sci:"{elab}"')
         if page.child:
             if page.autogenerated:
                 w.write(',x:"f"')
@@ -1985,11 +1986,11 @@ if mod_list or new_list:
         if new_list:
             w.write('<h1>New files</h1>\n')
             for name in new_list:
-                w.write('<a href="{name}">{name}</a><p/>\n'.format(name=name))
+                w.write(f'<a href="{name}">{name}</a><p/>\n')
         if mod_list:
             w.write('<h1>Modified files</h1>\n')
             for name in mod_list:
-                w.write('<a href="{name}">{name}</a><p/>\n'.format(name=name))
+                w.write(f'<a href="{name}">{name}</a><p/>\n')
 
     # open the default browser with the created HTML file
     total_list = mod_list + new_list
