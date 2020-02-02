@@ -1,80 +1,3 @@
-###############################################################################
-
-Format of .txt files
-
-Two newlines in a row (i.e. a blank line) is a paragraph division: <p/>
-
-Info:
-
-{com:[name]} gives the common name for the flower(s) on the page.  If
-not specified, it defaults to the page name.
-
-{sci:[name]} gives the scientific name for the flower(s) on the page.
-It should always be specified if the common name is different than the
-page name.  If not specified, the iNaturalist observation csv file is
-searched for the page name (common name) to find the scientific name.
-
-Image links:
-
-{[img].jpg} is replaced with a thumbnail of the image and a link to the
-full-size image.
-
-{jpgs} is replaced with all images that start with the page's name.
-
-{[page]:[img].jpg} is replaced with a thumbnail of the image and a link
-to the page.
-
-{https://calphotos.berkeley.edu/[...]} is replaced with a blank
-thumbnail-sized box that links to the named page.  If the page is
-followed by '|[text]', the text is put inside the box.
-
-If a jpg or calphotos link starts a paragraph that has additional
-elements in it, all such elements (including free text) is put in a
-flexbox and centered vertically with respect to each other.
-
-Page links:
-
-{[com]:[elab]} links to CalFlora with both names.  [com] is optional.
-If there is a hyphen prior to [com], the common name and scientific
-name are printed on one line.  Otherwise they are printed on two
-lines.
-
-{[page]} is replaced with a link to the page.  This does not create a
-parent-child page relationship.  If both the common name and
-scientific name are known and there is a hyphen prior to the page
-name, they are printed on the same line.  Otherwise they are printed
-on two lines.
-
-{-[page]} is replaced with a link to the page.  If both the common
-name and scientific name are known, they are printed on just one line.
-
-{child:[page]} is replaced with a link to the page.  This also records
-a relationship between the parent (the current page) and the child (the
-linked page).
-
-{+[page]} is replaced with two links to the page.  The first link is
-from a thumbnail of the first flower associated with the page.  The
-second link is from the name of the page (common name + scientific name).
-A parent-child relationship is also recorded.  If the page is suffixed
-with ",[suffix]", that suffix is used for the thumbnail image.
-
-Other:
-
-{-
-[list items]
--}
-is replaced with proper HTML list syntax, i.e. surrounded by <ul>...</ul>,
-with each line also surrounded by <li>...</li>.
-A sublist can be included, but must use <ul> and </ul>, each on a line
-by itself.
-
-{[
-[...]
-]}
-surrounds the given text with a light-bordered box.
-
-###############################################################################
-
 Make separate pages (and links) for flower lists (by color and "all")
 with names only (for bandwidth saving) and photos only (for showing off).
 
@@ -118,7 +41,7 @@ Or mark derived info explicitly in the database,
 
 It'd be nice if the up/down arrow keys changed which autocomplete entry was currently selected.
 
-It'd be nice the escape key removed autocomplete until more was typed.
+It'd be nice if the escape key removed autocomplete until more was typed.
 
 Show iNaturalist details on key pages.
   (Requires accumulating data from children.)
@@ -168,13 +91,26 @@ Make links up to the key (or any other parent) use an anchor position
 that highlights the child's section of the key, similar to the
 glossary.  (May require similar positioning tricks.)
 
+Have a way to link from txt to the key to a flower (e.g. for
+rough-fruited buttercup in buttercups).
+E.g. {-buttercups#rough-fruited buttercup}
+
 If all modified pages are under a single modified parent (excluding
 "all" and color lists), bring up that parent page automatically.  (Or
 simply list it first, or list the modified pages hierarchically.
 Might be able to reuse the html generation for color lists.)
 
-Have a way to link from txt to the key to a flower (e.g. for
-rough-fruited buttercup in buttercups).
-E.g. {-buttercups#rough-fruited buttercup}
+Support color:none for non-flowering plants.  Allow it to be used at
+an upper level of hierarchy, from where it automatically propagates
+downward through the tree.  (Should I also allow propagation for other
+colors?  It could come in handy, e.g. for a genus that is always the
+same color.  But it would also make it easy to be sloppy and not
+verify the correct color of everything.)
 
-Add warning if [ and ] are unbalanced.
+Provide better support for things that aren't flowering plants,
+e.g. non-flowering plants, animals, fungi, etc.  The color lists
+should only be for flowering plants.  Besides the "all flowers" list,
+there should be additional "all ..." lists for each hierarchical top.
+Pages would default to behave as flowering plants unless their
+hierarchical top is one of the other types, which would be listed and
+link from index.html.

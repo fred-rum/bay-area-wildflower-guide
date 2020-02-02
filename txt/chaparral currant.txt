@@ -1,0 +1,8 @@
+xx:ba
+
+==Ribes malvaceum var. malvaceum
+. found in the bay area
+
+==Ribes malvaceum ssp. viridifolium
+sci_fpj:Ribes malvaceum var. viridifolium
+. found at Pinnacles
