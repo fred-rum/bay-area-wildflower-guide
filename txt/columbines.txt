@@ -1,0 +1,15 @@
+sci:Aquilegia
+x:ba
+
+==western columbine:A. formosa
+color: red, salmon
+. each petal opening is +-round
+. <b>inner petal edge <= 90&deg; to exposed filaments</b>
+. outer petal edge extended 1--8 mm to somewhat cup the filaments
+. common
+
+==van houtte's columbine:A. eximia
+. each petal opening is +-elongated
+. <b>inner petal edge > 90&deg; to exposed filaments</b>
+. outer petal edge not extended, so filaments are fully visible from the side
+. uncommon

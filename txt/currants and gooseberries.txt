@@ -63,7 +63,6 @@ bristles:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0903+072
 
 ==canyon gooseberry:R. menziesii
 color: red purple
-bristles:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0814+0025
 . purple-red sepals
 . white petals
 . white to tan anthers

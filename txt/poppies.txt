@@ -1,0 +1,11 @@
+sci:Papaver
+x:hist/rare
+
+==wind poppy:P. heterophyllum
+color: orange
+. petals orange-red, base purple to black
+. common
+
+==fire poppy:P. californicum
+. petals generally brick-red, base green
+. uncommon

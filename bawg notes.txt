@@ -114,3 +114,20 @@ there should be additional "all ..." lists for each hierarchical top.
 Pages would default to behave as flowering plants unless their
 hierarchical top is one of the other types, which would be listed and
 link from index.html.
+
+Support alternative common names for a taxon.  Alternative names are
+listed only on the taxon page, not in links.  When searching, if an
+alternative name matches and the primary name does not, the
+alternative name appears in the autocomplete list instead of the
+primary name.
+
+For HTML files, use the scientific name instead of the common name if
+possible?  This reduces churn when common names change, but it makes
+it harder to find the corresponding txt file.  In any case, common
+names don't change often, and scientific names can change, too.  This
+potentially requires a separate HTML name because updating the page
+name could confuse child linking (and jpg image attachment).
+
+Allow jpg images to match the common name or scientific name, rather
+than necessarily the page name.  Use of the page name may still be
+preferred in case there are multiple matches on the common name.

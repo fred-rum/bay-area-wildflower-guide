@@ -1,0 +1,24 @@
+sci:Verbena
+x:hist
+
+==western vervain:V. lasiostachys
+color: purple
+xx:more
+. flower bract 1--4.5 mm, generally <= calyx
+. stem generally ascending to erect 
+. most cauline <b>leaf blades deeply 1--2-lobed near base</b>, coarsely toothed
+. leaf 4--10 cm, petiole < 2 cm
+. common
+
+==purpletop vervain:V. bonariensis
+. flower bract 1--4.5 mm, generally <= calyx
+. stem generally ascending to erect 
+. most cauline <b>leaf blades generally unlobed</b>, coarsely serrate
+. leaf 7--15 cm, generally clasping
+. rare
+
+==prostrate vervain:V. bracteata
+. <b>flower bract 4--8 mm, 2--4 mm > calyx [longer than the flower, even]</b>
+. stem prostrate to decumbent
+. leaf 1--3 cm, base tapered to +- flat petiole
+. very rare
