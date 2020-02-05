@@ -1,0 +1,11 @@
+sci:Tiarella trifoliata
+x:ca
+xx:ca
+
+==threeleaf foamflower:T. trifoliata var. unifoliata
+. simple leaf with 3--5 lobes
+. fond in the bay area
+
+==laceflower:T. trifoliata var. trifoliata
+. compound leaf with 3 leaflets
+. <b>not identified in the bay area</b>

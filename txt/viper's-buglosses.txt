@@ -1,10 +1,40 @@
 sci:Echium
+x:rare
+
+[
+<h3>similar species</h3>
+
+Distinguishing features are listed <a href="https://keyserver.lucidcentral.org/weeds/data/media/Html/echium_vulgare.htm">here</a>.
 
 ==purple viper's-bugloss:E. plantagineum
 color: purple
 . commonly spotted near the top of Foothills Park.
+. much-branched stems
+. basal leaves are elliptic or oblong
+. corolla is 18--30 mm long, purple or bluish
+. two protruding stamens (short-exserted) and three shorter stamens
 
 ==viper's-bugloss:E. vulgare
 color: purple
 . NRDB thinks that this can also be found at Foothills, but they are wrong.
 . This species has been introduced to very few US states, and California is not one of them.
+. mostly unbranched stems
+. basal leaves are oblanceolate or linear
+. corolla is 15--20 mm long, blue
+. four protuding stamens and one shorter stamen
+]
+[
+<h3>All stamens long-exserted</h3>
+
+==pride of madeira:E. candicans
+. plant many-branched
+. no basal rosette
+. flower +- radial
+. corolla tube +- = calyx
+
+==giant viper's-bugloss:E. pininana
+. plant generally unbranched
+. basal rosette present
+. flower +- bilateral
+. corolla tube 2+ &times; calyx
+]

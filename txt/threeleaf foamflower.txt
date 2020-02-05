@@ -1,2 +1,2 @@
-sci:Tiarella trifoliata
+sci:Tiarella trifoliata var. unifoliata
 color: white

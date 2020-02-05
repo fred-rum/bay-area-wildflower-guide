@@ -1,4 +1,5 @@
 sci:Dipsacus spp.
+x:ca
 
 <b>Warning</b>: "fuller's teasel" is used for either or both teasels depending on the source.
 
@@ -15,7 +16,7 @@ color: white, pink, pale purple
 . leaf pairs fused to widely fused around stem
 . flowers are white, sometimes tinged pink or pale purple
 
-==fuller's teasel:D. fullonum
+==common teasel:D. fullonum
 spines:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0106+1209
 fused leaves:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1208+0232
 . receptacle bract ending in a straight, +- flexible spine

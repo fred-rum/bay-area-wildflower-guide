@@ -3,6 +3,7 @@
 {adaxial,adaxially} The surface closer to the stem when upright.  E.g. the upper surface of a leaf or the inner surface of a petal.
 {annual,annuals} Lives for one year or less, generally without forming any woody parts.
 {basal} Positioned at the base.  Most commonly refers to leaves growing at the base of the stem.  Contrast cauline.
+{bract,bracts} Small leaf-like structures (or analogue) at the base of an inflorescence.  May be fused together or not.
 {calyx,calyces,calyxes} Collective term for sepals.
 {cauline} Growing along a plant's stem.  Most commonly refers to leaves.  Contrast basal.
 {compound} Generally, composed of multiple parts.  Opposite of simple.<ul><li>Leaf: divided into distinct leaflets connected by an axis but no blade material.</li><li>Umbel: an umbel of umbels</li></ul>
@@ -10,6 +11,7 @@
 {crenate,crenately,scalloped} With shallow, rounded teeth and usually with acute sinuses.  Could also be called "scalloped".
 {cylindric} Significantly longer than wide with parallel sides.
 {decurrent} The leaf blade extends onto the stem as a short wing.
+{deltate} Shaped like the Greek letter &Delta;; an equilateral triangle with corners rounded or not; attached at base.
 {dioecious} A plant that has only either male or female flowers on it, never both on the same plant.
 {distal,distally} Growing farther away from the base and closer to the tip of a structure.  The structure is often implied; e.g. a proximal leaf grows close to the base of the whole plant.  Contrast proximal.
 {glabrous} Without hair.
@@ -17,7 +19,9 @@
 {herb,herbs} Plant without any woody parts.
 {inflorescence,inflorescences} A cluster of flowers from a common point or sharing a stalk that has only flowers on it.  A head in the sunflower family.
 {involucre,involucres} Collective term for a cluster of bracts.  Typically refers to the green base of a flower head in the sunflower family.
-{bract,bracts} Small leaf-like structures (or analogue) at the base of an inflorescence.  May be fused together or not.
+{lanceolate} Long and somewhat narrow; widest between the middle and the base.
+{obovate} Egg shaped; widest between the middle and the tip.
+{ovate} Egg shaped; widest between the middle and the base.
 {palmate,palmately} With lobes spreading from a common point.
 {palmate-pinnate} 1st-order palmate and 2nd-order pinnate.
 {pedicel,pedicels,pediceled} The stalk of an individual flower.

@@ -1,2 +1,7 @@
 sci:Drymocallis glandulosa
+x:ba
 color: cream, white
+
+There are variants of this species, but they have overlapping
+characteristics, and without common names they're just not very
+interesting.

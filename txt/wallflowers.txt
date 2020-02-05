@@ -1,4 +1,5 @@
 sci:Erysimum spp.
+x:rare
 
 Key features:
 . stem base woody or not
