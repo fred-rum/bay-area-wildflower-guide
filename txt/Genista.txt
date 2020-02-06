@@ -1,19 +1,28 @@
 x:ba
 
+[
+<h3>ternately 1-compound leaves on older stems<br/>
+yellow corolla</h3>
 ==french broom:Genista monspessulana
 color:yellow
-. corolla yellow
 . leaflet not narrow (length < 5 &times; width), margins flat
 . leaflet generally 10--15 mm
 . stipules < 2 mm, deciduous
 . racemes axillary
 . very common
 
-==bridal veil broom:Genista monosperma
-. very rare
-
 ==madeira broom:Genista maderensis
-. very rare
+. leaflet 10--15 mm
+. stipules 3--6 mm, persistent
+. racemes terminal
+. extremely rare
 
 ==canary island broom:Genista canariensis
-. very rare
+. leaflet 5-10(12) mm
+. extremely rare
+
+==bridal veil broom:Genista monosperma
+. simple leaves
+. white corolla
+. extremely rare
+]

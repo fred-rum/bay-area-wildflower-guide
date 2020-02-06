@@ -1,10 +1,12 @@
+x:hist
+
 ==common broom:Cytisus scoparius
 5-angled branch:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0616+0889
 . yellow corolla
 . banner generally > 10--25 mm
-. calyx glabrous
+. <b>calyx glabrous</b>
 . <b>fruit flat, glabrous except margin</b>
-. branches generally 5-angled
+. <b>branches generally 5-angled</b>
 . also called scotch broom
 . common everywhere except the southeast bay
 
@@ -12,9 +14,9 @@
 8--10-angled branch:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0911+0197
 . yellow corolla
 . banner generally > 10--25 mm
-. calyx appressed-hairy
+. <b>calyx appressed-hairy</b>
 . <b>fruit +- inflated, densely white-hairy</b>
-. branches generally 8--10-angled
+. <b>branches generally 8--10-angled</b>
 . common at low elevations
 
 ==white spanish broom:Cytisus multiflorus

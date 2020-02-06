@@ -1,0 +1,52 @@
+sci:Salix
+x:!hist/rare
+
+All willows are dioecious.  I've included a key to staminate plants
+here because it's easiest.  Jepson also includes keys to pistillate
+and vegetative plants that are more complex.
+
+==pacific willow:S. lasiandra
+. 3--5 stamens
+. uncommon
+
+==goodding's willow:S. gooddingii
+. 4--6 stamens
+. rare
+
+==red willow:S. laevigata
+. 5 stamens
+. uncommon
+
+==sitka willow:S. sitchensis
+. 1 stamen
+. uncommon
+
+[
+<h3>2 stamens</h3>
+
+==chinese weeping willow:S. babylonica
+. nectaries adaxial and abaxial
+. tree; twigs flexible or +- brittle at base
+. very rare
+
+==hinds' willow:S. exigua var. hindsiana
+. shrub; twigs flexible at base
+. nectaries adaxial and abaxial
+. rare
+
+==coastal willow:S. hookeriana
+. nectaries adaxial
+. anthers yellow
+. extremely rare
+
+==scouler's willow:S. scouleriana
+. nectaries adaxial
+. anthers >= 0.6 mm, purple, aging to yellow
+. uncommon
+
+==arroyo willow:S. lasiolepis
+. nectaries adaxial
+. anthers <= 0.6 mm, purple, aging to yellow
+. common
+</h3>
+]

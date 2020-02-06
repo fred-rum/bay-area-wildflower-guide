@@ -12,14 +12,12 @@ Key features:
 <h3>axillary racemes</h3>
 ==american brooklime:V. americana
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0716+1028
-. 2
 . 10--25 flowers in each axillary raceme
 . corolla 7--10 mm, purplish blue with dark blue lines; white spot restricted to the inner bowl
 . petioled leaves
 . common
 
 ==blue water-speedwell:V. anagallis-aquatica
-. 4
 . generally > 30 flowers in each axillary raceme
 . corolla 5--10 mm, pale purple with purple lines
 . sessile leaves (rarely short-petioled proximally)
@@ -27,7 +25,6 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0716+1028
 . rare
 
 ==chain speedwell:V. catenata
-. 4'
 . 15--25 flowers in each axillary raceme
 . corolla 3--5 mm, pink with pale purple lines
 . sessile leaves
@@ -40,28 +37,24 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0716+1028
 
 ==bright blue speedwell:V. serpyllifolia ssp. humifusa
 xx:ba
-. 8
 . 1+ flowers in each terminal raceme
 . corolla 6--7 mm, white, pale blue, or pale purple, with blue or purple lines
 . pedicels 2.5--7 mm
 . rare
 
 ==corn speedwell:V. arvensis
-. 10
 . 1+ flowers in each terminal raceme
 . corolla 2--3 mm, blue to purple
 . rare
 
 ==V. peregrina ssp. xalapensis
 xx:ba
-. 10'
 . 1+ flowers in each terminal raceme
 . corolla 2--3 mm, white with no lines
 . uncommon
 
 ==bird's-eye speedwell:V. persica
 color: pale blue
-. 11
 . 1+ flowers in each terminal raceme
 . corolla 8--12 mm, blue to pale purple, with dark blue or purple lines
 . its lower petal is generally smaller, and the white spot bleeds strongly onto it and somewhat onto the two adjacent petals.

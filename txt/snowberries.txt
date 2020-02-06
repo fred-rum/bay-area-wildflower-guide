@@ -1,7 +1,9 @@
 sci:Symphoricarpos spp.
+x:ba
 
-Key feature:
+Key features:
 . plant height
+. number of berries in each cluster
 
 ==common snowberry:S. albus
 color: pale purple, red purple

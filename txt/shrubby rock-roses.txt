@@ -1,4 +1,19 @@
 sci:Cistus
+x:rare
 
 ==hoary rock-rose:C. creticus
+sci_jfp:Cistus incanus
 color: pink
+. 5 sepals
+. petals rose to purple
+. uncommon
+
+==C. salviifolius
+. 5 sepals
+. petals white (drying +- yellow)
+. extremely rare
+
+==C. ladanifer
+. 3 sepals
+. petals white, generally with red or yellow near base
+. very rare

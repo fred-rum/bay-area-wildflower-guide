@@ -131,3 +131,9 @@ name could confuse child linking (and jpg image attachment).
 Allow jpg images to match the common name or scientific name, rather
 than necessarily the page name.  Use of the page name may still be
 preferred in case there are multiple matches on the common name.
+
+For a line that begins with '[', include an automatic h3 or lower
+format on the remainder of the text line.  Use increasing header
+numbers based on the bracket depth.  Line breaks remain <br/>.
+Recognize this and continue the header, or require that the line be
+run together with <br/> in the middle?
