@@ -1,0 +1,73 @@
+sci:Navarretia
+x:hist/rare
+
+In general, each corolla can have 4--5 lobes.
+
+[
+<h3>7+ lobes/spiky teeth on bract tips (<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1113+2845">example</a>)</h3>
+
+==lime ridge navarretia:N. gowenii
+. corolla white to cream with purple spot at lobe bases [extending into throat]
+. Mt. Diablo area
+
+==tehama navarretia:N. heterandra
+. corolla white, throat with purple spots [entirely] below lobes, lobe tips occasionally blue
+. Mt. Diablo area
+
+==downy pincushionplant:N. pubescens
+. corolla throat red-purple, lobes bright blue-purple
+]
+[
+<h3>zero or few lobes/spinky teeth on bract tips</h3>
+
+==needleleaf navarretia:N. intertexta
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0404+1095
+. corolla lobes ovate (not linear or narrowly ovate)
+. corolla white, lobes white to light blue
+. anthers exceeding corolla lobes
+
+==bright navarretia:N. paradoxiclara
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0416+2425
+. corolla lobes ovate (not linear or narrowly ovate)
+. corolla pale blue to white
+. anthers exceeded by to equaling corolla lobes (when lobes are pulled straight along axis)
+. Coyote Hills
+
+==hollyleaf pincushionplant:N. atractyloides
+. 3 bract tip lobes (including the tip itself in the count) (not 0)
+. upper leaf and bract lobes ascending
+. corolla +- included, 8--9 mm, generally purple (white), tube red-veined, lobes < 2 mm
+
+==hooked pincushionplant:N. hamata
+xx:more
+. 3 bract tip lobes (including the tip itself in the count) (not 0)
+. upper leaf and bract lobes spreading
+. corolla generally purple or +- pink
+
+==honey-scented pincushion plant:N. mellita
+. anthers included; stigma below anthers
+. corolla 5--7 mm, = calyx, throat white, lobes light blue
+
+==skunkweed:N. squarrosa
+. anthers included; stigma below anthers
+. corolla 9--12 mm, > calyx, dark blue, lobes 2 mm
+. common
+
+==sticky pincushionplant:N. viscidula
+. anthers at mouth of throat or exserted, stigma at level of anthers
+. bract axis much longer than wide
+. corolla 9--16 mm, 2 &times; calyx, purple or red-purple
+. Mt. Tam
+
+==calistoga pincushionplant:N. heterodoxa
+. anthers at mouth of throat or exserted, stigma at level of anthers
+. bract axis not much longer than wide
+. stamens, style exserted
+
+==marin county navarretia:N. rosulata
+. anthers at mouth of throat or exserted, stigma at level of anthers
+. bract axis not much longer than wide
+. stamens, style +- at mouth
+. corolla = calyx, lavender to white, throat narrow, lobes +- 1 mm, narrowly oblong
+. Mt. Tam
+]
