@@ -1,4 +1,3 @@
-com:madder family
 sci:family Rubiaceae
 
 ==bedstraws:Galium spp.

@@ -1,0 +1,16 @@
+sci:Mesembryanthemum spp.
+x:ca
+
+==slender iceplant:M. nodiflorum
+color: cream
+. <b>0.4--1.2 cm flower diameter</b>
+. leaf +- cylindric
+. white petals, aging to yellow
+. found mostly on the levees around the salt ponds at the south end of the bay
+. common
+
+==crystalline ice plant:M. crystallinum
+. <b>1--3 cm flower diameter</b>
+. leaf flat
+. white petals, aging to pink
+. rare

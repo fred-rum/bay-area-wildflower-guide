@@ -1,4 +1,5 @@
 sci:Sanicula spp.
+x:rare
 
 Key features:
 . plant height (roughly)

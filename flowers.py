@@ -1113,10 +1113,16 @@ class Page:
 
     def write_html(self):
         def write_complete(w, complete, key_incomplete, is_top, top, members):
+            if (self.child or
+                (top == 'genus' and self.level != 'genus') or
+                (top == 'species' and self.level != 'species')):
+                other = ' other'
+            else:
+                other = ''
             if is_top:
                 if complete == None:
                     if top == 'genus':
-                        w.write(f'<b>Caution: There may be other {members} of this {top} not yet included in this guide.</b>')
+                        w.write(f'<b>Caution: There may be{other} {members} of this {top} not yet included in this guide.</b>')
                     else:
                         return # Don't write the <p/> at the end
                 elif complete == 'none':
@@ -1128,17 +1134,17 @@ class Page:
                     if top == 'genus':
                         print("x:uncat used for " + self.name)
                     else:
-                        w.write("This species has subspecies or variants which I haven't yet categorized.")
+                        w.write("This species has subspecies or variants which don't seem worth distinguishing.")
                 elif complete == 'more':
-                    w.write(f'<b>Caution: There are other {members} of this {top} not yet included in this guide.</b>')
+                    w.write(f'<b>Caution: There are{other} {members} of this {top} not yet included in this guide.</b>')
                 else:
-                    prolog = 'There are no other'
+                    prolog = f'There are no{other}'
                     if complete == 'hist':
-                        prolog = "Except for historical records that I'm ignoring, there are no other"
+                        prolog = f"Except for historical records that I'm ignoring, there are no{other}"
                     elif complete == 'rare':
-                        prolog = "Except for extremely rare plants that I don't expect to encounter, there are no other"
+                        prolog = f"Except for extremely rare plants that I don't expect to encounter, there are no{other}"
                     elif complete == 'hist/rare':
-                        prolog = "Except for old historical records and extremely rare plants that I don't expect to encounter, there are no other"
+                        prolog = f"Except for old historical records and extremely rare plants that I don't expect to encounter, there are no{other}"
 
                     epilog = 'in the bay area'
                     if complete == 'ca':

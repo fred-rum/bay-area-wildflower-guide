@@ -1,18 +1,20 @@
 sci:tribe Madieae
 
 ==tarweeds:Madia spp.
-. 
+. seeds never have plumes
 
 ==woodland madia:Anisocarpus madioides
 color: yellow
 x:ba
 . rays 4--10 mm
 . anthers yellow [brush off the pollen to see]
-. I don't know how to distinguish it from real tarweeds.
+. seeds often have plumes
 . Perhaps the disk diameter is smaller relative to the ray petals when compared to a similar-sized common madia.
 See also {-tarweeds} for more flowers called "madia".
 
 ==Holocarpha spp.
 . shrubby
+. seeds never have plumes
 
 ==tidytips:Layia spp.
+. seeds often have plumes

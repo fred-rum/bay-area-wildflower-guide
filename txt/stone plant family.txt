@@ -1,0 +1,7 @@
+sci:family Aizoaceae
+
+==sea figs
+. flower diameter >= 3 cm
+
+==ice plants
+. flower diameter <= 3 cm

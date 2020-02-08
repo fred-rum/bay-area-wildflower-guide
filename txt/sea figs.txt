@@ -1,0 +1,15 @@
+sci:Carpobrotus spp.
+x:ca
+
+Key features: flower diameter
+
+==chilean sea fig:C. chilensis
+color: red purple, pink, yellow
+. <b>3--5 cm flower diameter</b>
+. rose to magenta petals [but CalPhotos also shows yellow]
+
+==sea fig:C. edulis
+color: yellow, pink
+. <b>8--10 cm flower diameter</b>
+. yellow or white petals, aging to pink
+. planted on dunes and freeway embankments.  (Wikipedia has more about its <a href="https://en.wikipedia.org/wiki/Carpobrotus_edulis#California">use in California</a>.)
