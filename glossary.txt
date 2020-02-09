@@ -65,3 +65,12 @@
 {bell-shaped,bell} Rapidly widening at the base, then slowly expanding toward the tip.
 {urn-shaped,urn} Rapidly widening at the base, then narrowed toward the tip.
 </dl>
+
+
+<h2>Geographic locations</h2>
+
+{Diablo range} The east bay mountains and foothills from Mt. Diablo through Mt. Hamilton and beyond.  This is a portion of the inner coast range which extends further through California.
+
+{Santa Cruz mountains} The mountains and hills of the SF peninsula, continuing to the central coast.  This is a portion of the outer coast range which extends further through California.
+
+{Mt. Tam} Mt. Tamalpais.  A mountain in Marin County.  Part of the inner coast range, but separate from the Santa Cruz mountains.

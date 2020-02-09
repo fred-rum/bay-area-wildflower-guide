@@ -1,7 +1,36 @@
 sci:Salvia spp.
+x:rare
+
+Many sages seem to be in developed areas as if garden planted.  I've
+included only those that have at least one observation in a wild area
+that I frequent.
 
 ==black sage:S. mellifera
+. shrub, 1--2 m
+. corolla tube 5.5--9 mm, white to pale blue or lavender (rarely, pale rose)
 color: white
 
+==sonoma sage:S. sonomensis
+. subshrub, prostrate, mat-forming
+. corolla tube 5--15 mm, light blue to lilac or purple
+. upper lip 1--3 mm; lower lip 3--7 mm
+. very rare
+
 ==chia:S. columbariae
+. annual, 10--50 cm
+. corolla tube 6--8 mm, blue to pale blue or puple to pale purple
+. lower corolla lip +- 2 &times; upper
 color: purple
+
+==purple sage:S. leucophylla
+. shrub, < 1.5 m
+. corolla tube 6--13 mm, rose to lavender, sometimes verging on purple
+. upper lip 6--8 mm, +- < lower lip
+. very rare
+
+==hummingbird sage:S. spathacea
+. perennial herb, mat-like
+. corolla tube 25--35 mm, red purple to salmon
+. upper lip 7--8 mm; lower lip 10--12 mm
+. common in urban areas, but very rare in wild areas
+

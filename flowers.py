@@ -1415,7 +1415,7 @@ for (words, defn) in re.findall(r'^{([^\}]+)}\s+(.*)$',
     word_list = [x.strip() for x in words.split(',')]
     primary_word = word_list[0]
     for word in word_list:
-        glossary_dict[word] = primary_word
+        glossary_dict[word.lower()] = primary_word
 
 # sort the glossary list in reverse order so that for cases where two
 # phrases start the same and one is a subset of the other, the longer phrase
