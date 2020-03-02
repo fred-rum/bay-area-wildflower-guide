@@ -1,0 +1,4 @@
+sci:Scoliopus bigelovii
+color:other
+x:ca
+See also {-pacific trillium}.

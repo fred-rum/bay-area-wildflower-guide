@@ -116,7 +116,8 @@ hist/rare - historical and extremely rare taxon members are ignored
 more - there are additional taxon members that need to be documented
 ![txt] - the key to distinguish the taxon members is not complete
 
-xx:uncat - species has subspecies or variants not yet categorized
+xx:uncat - species has subspecies or variants not worth categorizing
+  (e.g. because the common ones don't have common names)
 
 If the completeness is left unspecified for a genus, it acts as
 x:more.  If the completeness is left unspecified for a species, then

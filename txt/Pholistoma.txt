@@ -1,0 +1,15 @@
+sci:Pholistoma spp.
+x:ca
+
+==fiesta flower:P. auritum
+color: purple
+xx:uncat
+. corolla 7--15 mm, 10--30 mm wide, blue to purple with darker marks in throat
+. leaf petiole wide-winged, clasping
+. leaf blade tip acuminate
+
+==white fiesta flower:P. membranaceum
+color: white
+. corolla 3--6 mm, < 10 mm wide, white, lobe generally with purple spot
+. leaf petiole narrow-winged, not clasping
+. leaf blade oblong to ovate [i.e. lobes don't consistently taper toward the tip]

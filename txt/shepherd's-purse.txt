@@ -1,0 +1,3 @@
+sci:Capsella bursa-pastoris
+color:white
+x:ca

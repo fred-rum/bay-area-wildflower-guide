@@ -13,6 +13,9 @@ Distinguishing goldfields often requires examining the pappus.  The pappus takes
 [
 <h2>phyllaries free</h2>
 
+[
+Pull apart the flower head to look at the scales/awns as per <a href="https://www.inaturalist.org/observations/39131188">catchang's notes</a>.
+
 ==california goldfields:L. californica
 color: yellow
 . phyllaries free, generally > 6
@@ -25,6 +28,7 @@ color: yellow
 . leaves +- entire
 . pappus of (2)4(6) opaque, white, lance-ovate scales, or 0
 . rare
+]
 
 ==maritime goldfields:L. maritima
 . phyllaries free, generally > 6

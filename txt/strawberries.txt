@@ -1,0 +1,11 @@
+sci:Fragaria
+
+==wild strawberry:F. vesca
+color:white
+. leaf thin, not leathery; central leaflet stalk 1--3 mm
+. petals 4--9 mm
+
+==beach strawberry:F. chiloensis
+. leaf thick, leathery; central leaflet stalk 1--10 mm
+. petals 10--18 mm
+. mostly near the Pacific coast, with a few scattered around the edges of the bay

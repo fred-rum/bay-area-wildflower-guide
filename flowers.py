@@ -502,6 +502,13 @@ class Page:
             child.parent.add(self)
             self.key = True
 
+    def expand_genus(self, sci):
+        if (self.cur_genus and len(sci) >= 3 and
+            sci[0:3] == self.cur_genus[0] + '. '):
+            return self.cur_genus + sci[2:]
+        else:
+            return sci
+
     def parse_children(self):
         # Replace a ==[name] link with ==[page] and record the
         # parent->child relationship.
@@ -532,13 +539,7 @@ class Page:
             if sci:
                 # If the child's genus is abbreviated, expand it using
                 # the genus of the current page.
-                if (self.cur_genus and len(sci) >= 3 and
-                    sci[0:3] == self.cur_genus[0] + '. '):
-                    sci = self.cur_genus + sci[2:]
-                elif sci[0].isupper():
-                    # If the child's genus is explicitly specified,
-                    # make it the default for future abbreviations.
-                    self.cur_genus = sci.split(' ')[0]
+                sci = self.expand_genus(sci)
             child_page = find_page2(com, sci)
             if not child_page:
                 # If the child does not exist, create it.
@@ -602,7 +603,8 @@ class Page:
 
             matchobj = re.match(r'sci([_fpj]+):\s*(.*?)$', c)
             if matchobj:
-                data_object.set_sci_fpj(matchobj.group(1), matchobj.group(2))
+                data_object.set_sci_fpj(matchobj.group(1),
+                                        self.expand_genus(matchobj.group(2)))
                 continue
 
             matchobj = re.match(r'\s*(?:([^:\n]*?)\s*:\s*)?(https://(?:calphotos.berkeley.edu/|www.calflora.org/cgi-bin/noccdetail.cgi)[^\s]+)\s*?$', c)

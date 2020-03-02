@@ -7,7 +7,7 @@ Key features:
 . color of fertile anthers in flower
 
 ==sand fringepod:T. curvipes
-color: other
+color: white
 . proximal pedicels in fruit recurved in a continuous arc, 3--7(12) mm
 . fruit 3--6(9) mm wide
 . <b>cauline leaves lanceolate</b>, bases lobed, clasping
@@ -16,6 +16,7 @@ color: other
 . common
 
 ==mountain fringepod:T. laciniatus
+color: white
 . proximal pedicels in fruit recurved in a continuous arc, 2.5--6(8) mm
 . fruit 3--5 mm wide
 . <b>cauline leaves linear to narrowly elliptic</b>, bases wedge-shaped, +- lobed or not, +- not clasping

@@ -89,6 +89,7 @@ xx:ba
 . yellow petals, aging red
 
 ==red-flowering currant:R. sanguineum
+color:pink, pale purple
 . pink to white sepals
 . styles glabrous at base
 . leaf blade abaxially sparsely hairy, with short glands on veins or not

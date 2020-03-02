@@ -1,11 +1,11 @@
 sci:Eucalyptus
-color:white
 x:hist/rare
 
 Key features:
 . bark smooth, shedding, and light colored; or deeply furrowed and dark colored
 . leaf shape
 . inflorescence shape
+. number of flowers per umbel
 . flowers/fruit fused at base or free
 . hypanthium shape
 
@@ -18,13 +18,15 @@ color: white, cream
 . <b>very common</b>
 
 ==silver dollar gum:E. polyanthemos
-. inflorescence a panicle of umbles
+color: white
+. inflorescence a panicle of umbels
 . rare
 
 [
 <h2>umbel inflorescence</h2>
 
 ==red ironbark:E. sideroxylon
+color: red, pink, cream
 . <b>bark deeply furrowed, dark brown to +- black</b>
 .. all below plants have smooth, shedding bark (sometimes rough near base), lighter colored
 . inflorescence a 5--7-flowered umbel

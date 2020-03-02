@@ -24,8 +24,8 @@
 {ovate} Egg shaped; widest between the middle and the base.
 {palmate,palmately} With lobes spreading from a common point.
 {palmate-pinnate} 1st-order palmate and 2nd-order pinnate.
-{pedicel,pedicels,pediceled} The stalk of an individual flower.
-{peduncle,peduncles} The stalk of an inflorescence (or of a head in the sunflower family) or of an individual flower that is not part of an inflorescence.
+{pedicel,pedicels,pediceled} The stalk of an individual flower.  See also peduncle.
+{peduncle,peduncles} The stalk of an inflorescence (or of a head in the sunflower family) or of an individual flower that is not part of an inflorescence.  See also pedicel.
 {perianth,perianths} The collective term for the calyx and corolla.
 {petal,petals} A free or fused member of the corolla.
 {petiole,petioles} The stalk of a leaf.
@@ -45,6 +45,7 @@
 {strigose} Having stiff, straight, appressed hairs.
 {subshrub,subshrubs} Similar to a shrub, but with the distal stems less woody.
 {twig,twigs} Final branch segment.
+{umbel,umbels} An inflorescence in which 3+ flower pedicels branch from a common point.
 {waif,waifs} A plant that has spread with human assistance but cannot reproduce or spread further on its own; will eventually die out assuming no further assistance.
 </dl>
 

@@ -22,18 +22,19 @@ Key features:
 . corolla pink
 
 ==gypsum springbeauty:C. gypsophiloides
+color: white, pink
 . cauline leaves are quite small and +- linear [info from CalPhotos; Jepson is much less descriptive]
 . <b>petals 5--8 mm</b>
 . corolla pink
 
-==serpentine springbeauty:C. exigua
-. cauline leaves are quite small and +- linear [info from CalPhotos; Jepson is much less descriptive]
+==crabclaw serpentine springbeauty:C. exigua ssp. exigua
+. <b>cauline leaves free and opposite in shape of "crab claws"</b>
 . <b>petals 2--5 mm</b>
 . corolla white or pink
 
-==streambank springbeauty:C. parviflora
-. cauline leaves substantial, fully fused (a common subspecies) or free, linear, and long (a rare subspecies)
-. basal leaf 1--18 cm long including petiole, blade > 3&times; longer than wide, base tapered gradually to petiole
+==serpentine springbeauty:C. exigua ssp. glauca
+. cauline leaves fused into +- disk
+. <b>petals +- 2 mm</b>
 . corolla white or pink
 
 ==redstem springbeauty:C. rubra
@@ -41,6 +42,11 @@ Key features:
 . basal leaf 1--8 cm long including petiole, blade < 2 cm, < 3&times; longer than wide, base truncate to wedge-shaped
 . many basal leaves, prostrate to spreading, smaller inward
 . corolla white or pale pink
+
+==streambank springbeauty:C. parviflora
+. cauline leaves substantial, fully fused (a common subspecies) or free, linear, and long (a rare subspecies)
+. basal leaf 1--18 cm long including petiole, blade > 3&times; longer than wide, base tapered gradually to petiole
+. corolla white or pink
 
 ==miner's lettuce:C. perfoliata
 color: white

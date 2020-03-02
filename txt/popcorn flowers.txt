@@ -1,4 +1,5 @@
 sci:Plagiobothrys spp.
+x:!more
 
 There are dozens of popcorn flowers in the bay area, and Jepson's key often uses nutlet characters to distinguish them.  I'll definitely need the NRDB's help for identification, plus as many features as I can observe.
 

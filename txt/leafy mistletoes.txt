@@ -1,8 +1,12 @@
 sci:Phoradendron spp.
 x:ba
 
+[
+P. leucarpum is used in Jepson/CalFlora/NRDB, but POWO says that it's not found in California.  Instead, the following names are used.
+
 ==oak mistletoe:P. villosum
 color: other
+sci_fpj:P. leucarpum ssp. tomentosum
 . leaf length generally < 1.5 &times; width, 15--60 mm, generally > 20 mm
 . stem generally short-hairy, at least at tip
 . spike with 2--5(7) fertile internodes, pistillate 6--15(20)-flowered
@@ -10,10 +14,9 @@ color: other
 . leaf <= 3 cm, width <= 2 cm
 . leaf gray-green, dull
 . common
-. Jepson has this as Phoradendron leucarpum ssp. tomentosum.
-. (POWO has Phoradendron leucarpum as not occurring in California.)
 
 ==sycamore mistletoe:P. macrophyllum
+sci_fpj:P. leucarpum ssp. macrophyllum
 . leaf length generally < 1.5 &times; width, 15--60 mm, generally > 20 mm
 . stem generally short-hairy, at least at tip
 . spike with 2--5(7) fertile internodes, pistillate 6--15(20)-flowered
@@ -21,7 +24,7 @@ color: other
 . leaf <= 6 cm, width <= 5 cm
 . leaf yellow-green, generally shiny
 . rare
-. Jepson has this as Phoradendron leucarpum ssp. macrophyllum.
+]
 
 ==bollean mistletoe:P. bolleanum
 . leaf length generally > 3 &times; width, (5)10--25 mm, generally < 20 mm

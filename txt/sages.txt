@@ -34,3 +34,8 @@ color: purple
 . upper lip 7--8 mm; lower lip 10--12 mm
 . common in urban areas, but very rare in wild areas
 
+==rosemary:S. rosmarinus
+sci_jf:n/a
+sci_p:Rosmarinus officinalis
+color:pale purple
+. waif

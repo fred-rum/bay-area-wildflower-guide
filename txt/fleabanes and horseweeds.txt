@@ -48,6 +48,7 @@ color: white, pale purple
 <h2>rays barely exceeding involucre</h2>
 
 ==horseweed:E. canadensis
+color:white
 . rays 0.3--1 mm
 . central stem generally exceeding distal branches
 . heads +- short-peduncled in panicle-like clusters

@@ -1,0 +1,3 @@
+sci:Nerium oleander
+color:white, cream, red purple
+x:ca

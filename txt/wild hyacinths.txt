@@ -14,7 +14,7 @@ color: purple
 . staminodes erect, <b>leaning toward anthers, outward at tip</b>, white
 . perianth tube <b>not narrowed</b> above ovary
 . bracts generally dark purple (paler, striped dark purple
-. flowers from February--April (theoretically)
+. <b>flowers from February--April</b> (theoretically)
 . common throughout the bay area
 
 ==ookow:D. congestum
@@ -23,7 +23,7 @@ color: purple
 . staminodes erect, <b>leaning away from anthers</b>, +-purple
 . perianth tube <b>narrowed</b> above ovary or +-so
 . bracts pale purple to green
-. flowers from May--June (theoretically)
+. <b>flowers from May--June</b> (theoretically)
 . scattered throughout the bay area
 
 ==wild hyacinth:D. multiflorum

@@ -10,7 +10,7 @@ color: white,cream,other
 . abaxial leaf hairs dense, curly-wavy, interwoven, felt-like, not appressed toward leaf tip
 
 ==chaparral silktassel:G. congdonii
-. Abaxial leaf hairs dense, fine, wavy, not felt-like, appressed toward leaf tip
+. abaxial leaf hairs dense, fine, wavy, not felt-like, appressed toward leaf tip
 . Del Valle
 
 ==ashy silktassel:G. flavescens
