@@ -7,7 +7,10 @@ User: chris_nelson
 Basic: id, observed_on, quality_grade
 Geo: place_guess, private_place_guess
 Taxon: scientific_name, common_name, taxon_id
-Taxon Extras: taxon_family_name
+Taxon Extras:
+  taxon_kingdom_name (for the top-level classification)
+  taxon_subphylum_name (to recognize flowering plants)
+  taxon_family_name (to group flowers by family)
 Observation Fields: none
 
 If the private_place_guess is supplied, it is more precise and so is

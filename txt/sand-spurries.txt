@@ -9,8 +9,6 @@ There are other sand spurries in the bay area, but I'm hesitant to include them 
 .. all others have 6+
 
 ==sticky sand-spurrey:S. macrotheca
-xx:more
-color: pale purple, white
 . strongly perennial herb, stout
 . lower main stem 0.8--3 mm diam.
 . 0--2+ leaves per axillary cluster

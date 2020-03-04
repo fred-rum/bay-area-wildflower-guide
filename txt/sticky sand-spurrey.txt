@@ -1,0 +1,21 @@
+sci:Spergularia macrotheca
+xx:any
+
+Key features:
+. petal color
+. exact style length
+
+<b>There are three yellow styles clustered on top of what I believe is the wider, 3-lobed yellow ovary.</b>  The styles separate near the top, where the stigma for each is.  It is unclear how much of the separated portion is style vs. stigma.
+
+==beach sandspurry:S. macrotherca var. macrotheca
+color: pale purple
+. petals pink to rosy or blue
+. styles 0.5--1.2 mm
+
+==white sticky sand spurry:S. macrotheca var. leucantha
+. petals white
+. styles 1.2--1.9 mm
+
+==long styled sand spurrey:S. macrotheca var. longstyla
+. petals white
+. styles 2--3 mm

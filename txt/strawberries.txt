@@ -1,4 +1,5 @@
 sci:Fragaria
+x:ba
 
 ==wild strawberry:F. vesca
 color:white

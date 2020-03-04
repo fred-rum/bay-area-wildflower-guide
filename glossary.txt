@@ -12,6 +12,7 @@
 {cylindric} Significantly longer than wide with parallel sides.
 {decurrent} The leaf blade extends onto the stem as a short wing.
 {deltate} Shaped like the Greek letter &Delta;; an equilateral triangle with corners rounded or not; attached at base.
+{dentate} With teeth pointing outward.  Contrast serrate.
 {dioecious} A plant that has only either male or female flowers on it, never both on the same plant.
 {distal,distally} Growing farther away from the base and closer to the tip of a structure.  The structure is often implied; e.g. a proximal leaf grows close to the base of the whole plant.  Contrast proximal.
 {glabrous} Without hair.
@@ -37,6 +38,7 @@
 {sagittate} Shaped like an arrowhead, with basal lobes near parallel to the axis.
 {salverform} With a slender tube and abruptly spreading limbs (e.g. "T" shaped).
 {sepal,sepals} A free or fused member of the calyx.  Usually green, or often the same color as the petals, or sometimes different.
+{serrate} With teeth pointing tipward.  Contrast dentate.
 {shrub,shrubs} Woody plant, shorter than a tree, generally with many branches from the base.
 {simple} Generally, composed of a single part; undivided; unbranched.  Opposite of compound.<ul><li>Leaf: composed of a single part (which may be lobed or dissected), not divided into distinct leaflets separated from each other.</li></ul>
 {stellate,stellately} With 3+ branches radiating from a common point.  (Usually used to describe hair.)
