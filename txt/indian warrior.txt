@@ -1,2 +1,0 @@
-sci:Pedicularis densiflora
-color: red, red purple

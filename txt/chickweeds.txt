@@ -1,0 +1,24 @@
+sci:Stellaria spp.
+x:rare
+
+==common chickweed:S. media
+. leaves +- evenly spaced
+. internode hairs in a line
+. <b>petals generally present</b>, > 70% sepal length
+. sepals 3--4.5 mm
+. common
+
+==lesser chickweed:S. pallida
+. leaves +- evenly spaced
+. internode hairs in a line
+. <b>no petals</b>
+. sepals 2--3 mm
+. very rare
+
+==shining chickweed:S. nitens
+. <b>leaves crowded near base</b>
+. no internode hairs or scattered
+. petals < &frac12; sepal length
+. rare
+
+Rare species outside of my hiking areas are perennial herbs or have sepals > 5 mm.
