@@ -1574,11 +1574,14 @@ for page in [x for x in name_page.values()]:
 # Create a blank page for all unassociated jpgs.
 for jpg in sorted(jpg_list):
     name = get_name_from_jpg(jpg)
-    if name in name_page:
-        page = name_page[name]
+    if name == '':
+        print(f'No name for {jpg}')
     else:
-        page = Page(name)
-    page.add_jpg(jpg)
+        if name in name_page:
+            page = name_page[name]
+        else:
+            page = Page(name)
+        page.add_jpg(jpg)
 
 for page in name_page.values():
     if page.color and not page.jpg_list:

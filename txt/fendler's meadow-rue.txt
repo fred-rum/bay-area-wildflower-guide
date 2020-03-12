@@ -1,0 +1,4 @@
+sci:Thalictrum fendleri
+x:ba
+xx:uncat
+color:other

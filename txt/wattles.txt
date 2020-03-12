@@ -30,6 +30,12 @@ color: cream, other
 . twig angled (not winged)
 . common
 
+==sydney golden wattle:A. longifolia
+color:yellow
+. simple leaves, 5--15 cm long, with 2--4 longitudinal veins
+. flowers in 2--5 cm spikes (not round heads)
+. common
+
 ==black wattle:A. mearnsii
 color: cream, other
 . 2-pinnate leaves

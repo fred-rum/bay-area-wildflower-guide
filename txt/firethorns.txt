@@ -1,0 +1,24 @@
+sci:Pyracantha spp.
+x:rare
+
+==narrowleaf firethorn:P. angustifolia
+. leaves generally entire, 25--50 mm, no teeth
+. leaves generally narrowly oblong to +- oblanceolate
+. sepals in fruit, young leaves densely gray-hairy abaxially
+. fruit 4--6 mm wide, red
+. common
+
+==taiwan firethorn:P. koidzumii
+. leaves generally entire or with a few well-separated teeth toward tip
+. leaves narrowly oblanceolate, tips generally truncate or +- notched
+. sepals in fruit, young leaves +- glabrous or +- rusty- or yellow-brown-hairy abaxially
+. fruit 4--7 mm wide, orange-red
+. very rare
+
+==firethorn:P. coccinea
+. leaf generally elliptic, ovate, or lanceolate, +- hairy abaxially, glabrous with age
+. leaf serrate over much of margin; teeth small, many [not visible in photos?]
+. leaf generally serrate to crenate over much of margin
+. leaf tip generally acute
+. fruit 5--8 mm wide, bright red
+. very rare/waif

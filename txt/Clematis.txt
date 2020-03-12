@@ -1,5 +1,8 @@
 sci:Clematis spp.
-x:ca
+x:rare
+
+All Clematis are +- woody vines.  Flowers have sepals only, no petals.
+
 ==pipestem clematis:C. lasiantha
 color: other
 . leaflets generally 3--5
@@ -18,10 +21,9 @@ See also {-creamcups}.
 . Ecology: Along streams, wet places
 . scattered
 
-==C. pauciflora
-. leaflets generally 3--5
-. inflorescence 1--3(12)-flowered
-. sepals 7--12 mm, +- = stamens, hairy abaxially, but glabrous adaxially
-. <b>flower Jan--Jun</b>
-. Ecology: Dry chaparral
+==old man's beard:C. vitalba
+sci_j:n/a
+. leaflets usually 5
+. flowers in a terminal axillary panicle, i.e. in stalked clusters from the upper leaf axils
+. not in Jepson; info from <a href="http://issg.org/database/species/ecology.asp?si=157&fr=1&sts=&lang=EN">here</a>
 . rare, mostly in and near Muir Woods

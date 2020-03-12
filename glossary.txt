@@ -7,6 +7,7 @@
 {calyx,calyces,calyxes} Collective term for sepals.
 {cauline} Growing along a plant's stem.  Most commonly refers to leaves.  Contrast basal.
 {compound} Generally, composed of multiple parts.  Opposite of simple.<ul><li>Leaf: divided into distinct leaflets connected by an axis but no blade material.</li><li>Umbel: an umbel of umbels</li></ul>
+{cordate} Shaped like a heart (with tip outward, lobes at the base).
 {corolla,corollas} Collective term for petals.
 {crenate,crenately,scalloped} With shallow, rounded teeth and usually with acute sinuses.  Could also be called "scalloped".
 {cylindric} Significantly longer than wide with parallel sides.
@@ -21,6 +22,8 @@
 {inflorescence,inflorescences} A cluster of flowers from a common point or sharing a stalk that has only flowers on it.  A head in the sunflower family.
 {involucre,involucres} Collective term for a cluster of bracts.  Typically refers to the green base of a flower head in the sunflower family.
 {lanceolate} Long and somewhat narrow; widest between the middle and the base.
+{leaflet,leaflets} A division of a compound leaf (which may itself be further compound).
+{mucro,mucros} An abrupt, short, narrow tip/projection.
 {obovate} Egg shaped; widest between the middle and the tip.
 {ovate} Egg shaped; widest between the middle and the base.
 {palmate,palmately} With lobes spreading from a common point.
@@ -35,6 +38,7 @@
 {pinnule,pinnules} The 2nd-order division of a frond blade.  (The 1st-order division of a pinna.)
 {proximal,proximally} Growing closer to the base and farther from the tip of a structure.  The structure is often implied; e.g. a proximal leaf grows close to the base of the whole plant.  Contrast distal.
 {receptacle,receptacles} The end of the pedicel (or sometimes the peduncle), where the flower (or head) is attached.
+{reniform} Like cordate, but distally rounded instead of pointed, and typically less acute at the base.
 {sagittate} Shaped like an arrowhead, with basal lobes near parallel to the axis.
 {salverform} With a slender tube and abruptly spreading limbs (e.g. "T" shaped).
 {sepal,sepals} A free or fused member of the calyx.  Usually green, or often the same color as the petals, or sometimes different.

@@ -1,0 +1,27 @@
+sci:Barbarea spp.
+x:ca
+
+==american yellowrocket:B. orthoceras
+color: yellow
+. petals 5--7 mm (including claw), bright yellow
+. sepals 2.5--3.5 mm
+. stigma barely above anthers
+. cauline leaves pinnately lobed, strongly at the base
+. basal lobes of distal leaves generally with 1--many hairs [but not visible in CalPhotos]
+. common
+
+==land cress:B. verna
+. petals 6--7 mm (including claw), yellow
+. sepals 3--5 mm
+. cauline leaves pinnately lobed, strongly at the base
+. unclear how to distinguish from {-Barbarea orthoceras} without fruit
+. rare
+
+==garden yellowrocket:B. vulgaris
+. petals 6--9 mm (including claw), yellow
+. sepals 3--5 mm
+. stigma significantly above anthers
+. distal cauline leaves coursely dentate or entire
+. basal lobes of distal leaves glabrous
+. rare
+

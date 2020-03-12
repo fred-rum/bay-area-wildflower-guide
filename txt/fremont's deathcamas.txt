@@ -1,2 +1,0 @@
-sci:Toxicoscordion fremontii
-color: white

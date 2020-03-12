@@ -1,0 +1,45 @@
+sci:Toxicoscordion spp.
+x:ba
+
+[
+<h3>larger flowers</h3>
+
+==fremont's deathcamas:T. fremontii
+sci_p:Zigadenus fremontii
+color: white
+. petals 5--15 mm
+. stamens +- &frac12; perianth
+. <b>leaf 20--50 cm (e.g. &frac12; length of stem), curved</b>
+. inflorescence wide
+. common
+
+==smallflower deathcamas:T. fontanum
+sci_p:Zigadenus micranthus var. fontanus
+. petals 4--15 mm
+. stamens +- = perianth
+. <b>leaf erect, often > stem</b>
+. inflorescence narrow, often pyramid-shaped in youth (<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=8253+3202+4146+0097">example</a>)
+. rare
+
+]
+[
+<h3>smaller flowers</h3>
+
+==meadow deathcamas:T. venenosum
+sci_p:Zigadenus venenosus
+xx:uncat
+. petals 4--6 mm
+. stamens usually = perianth, occasionally >
+. pedicels in fruit 3--25 mm, <b>generally ascending (10--60&deg; from axis)</b>
+. plant glabrous
+. rare
+
+==smallflower deathcamas:T. micranthum
+sci_p:Zigadenus micranthus
+. petals 3--8 mm
+. stamens +- = perianth
+. pedicels in fruit 12--40 mm, <b>generally spreading (60--90&deg; from axis)</b>, with tips upturned or not
+. plant scabrous below
+. extremely rare
+
+]

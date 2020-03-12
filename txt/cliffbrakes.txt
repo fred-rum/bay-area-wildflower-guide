@@ -1,0 +1,10 @@
+sci:Pellaea spp.
+x:ba
+
+==coffee fern:P. andromedifolia
+color:n/a
+. ultimate leaflet without mucro
+
+==bird's foot cliffbrake:P. mucronata
+xx:uncat
+. ultimate leaflet with mucro
