@@ -27,6 +27,7 @@ color: purple
 <h3>All stamens long-exserted</h3>
 
 ==pride of madeira:E. candicans
+color:purple, blue
 . plant many-branched
 . no basal rosette
 . flower +- radial

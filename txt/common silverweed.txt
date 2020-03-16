@@ -1,2 +1,6 @@
-sci:Potentilla anserina
+sci:Argentina anserina
+sci_jfp:Potentilla anserina
+x:ba
 color: yellow
+
+. common along Pacific coast
