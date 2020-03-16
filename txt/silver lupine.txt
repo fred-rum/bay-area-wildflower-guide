@@ -1,0 +1,15 @@
+sci:Lupinus albifrons
+xx:ba
+
+==silver bush lupine:L. albifrons var. albifrons
+color:purple
+. shrub 50 cm--5 m; woody +- throughout; <b>trunk is generally distinct</b>
+. bract 4--8 mm
+
+==douglas' silver lupine:L. albifrons var. douglasii
+. shrub 1--2 m; woody +- throughout
+. <b>bract 10--24 mm</b>
+
+==silver lupine:L. albifrons var. collinus
+. <b>subshrub, 20--40 cm; only base and some lower branches are woody</b>
+. bract 7--9 mm

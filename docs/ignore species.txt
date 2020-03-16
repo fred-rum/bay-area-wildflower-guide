@@ -1,0 +1,8 @@
+format:
+scientific name: [+/-]comment explaining why it should be permanently ignored
+from the observations.csv data.
+
+Use + before the comment to include the observation in the count at the
+higher level.
+
+Use - to exclude it from any counts.
