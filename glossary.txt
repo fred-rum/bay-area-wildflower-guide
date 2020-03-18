@@ -1,6 +1,6 @@
 <h2>Parts of a flower</h2>
 
-The major parts of a flower are the pedicel, perianth, stamens, and pistils.  Any of these parts may be missing or vanishingly small for a particular species or individual flower.
+<p>The major parts of a flower are the pedicel, perianth, stamens, and pistils.  Any of these parts may be missing or vanishingly small for a particular species or individual flower.</p>
 
 {pedicel,pedicels,pediceled} The stalk of an individual flower.  See also peduncle.
 {perianth,perianths} The collective term for the calyx and corolla.

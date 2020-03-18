@@ -1386,7 +1386,7 @@ def write_footer(w):
 ''')
 
 # Read the glossary.txt file and write the glossary.html file.
-def link_glossary_words(txt):
+def link_glossary_words(txt, is_glossary=False):
     def repl_glossary(matchobj):
         word = matchobj.group(1)
         primary_word = glossary_dict[word.lower()]
@@ -1398,13 +1398,19 @@ def link_glossary_words(txt):
         allowed = re.sub(glossary_regex, repl_glossary, allowed)
         return allowed + disallowed
 
-    # find non-links followed (optionally) by links and
-    # perform substitutions only on the non-link parts.
+    if is_glossary:
+        sub_re = r'(.*?)(\Z|<(?:a\s|h\d).*?</(?:a|h\d)>|{.*?})'
+    else:
+        sub_re = r'(.*?)(\Z|<a\s.*?</a>|{.*?})'
+
+    # find non-tagged text followed (optionally) by tagged text and
+    # perform substitutions only on the non-tagged parts.
+    # Tags for this purpose includes <a> and <h#>.
     # The first group is non-greedy, but still starts as soon as possible
     # (i.e. at the beginning of the string or just after the previous match).
     # The second part is also non-greedy, looking for the shortest amount
     # of text to close the link.
-    txt = re.sub(r'(.*?)(\Z|<a\s.*?</a>|{.*?})', repl_sub_glossary, txt,
+    txt = re.sub(sub_re, repl_sub_glossary, txt,
                  flags=re.DOTALL)
     return txt
 
@@ -1427,7 +1433,7 @@ glossary_list = sorted(iter(glossary_dict.keys()), reverse=True)
 ex='|'.join(map(re.escape, glossary_list))
 glossary_regex = re.compile(rf'\b({ex})\b', re.IGNORECASE)
 
-glossary_txt = link_glossary_words(glossary_txt)
+glossary_txt = link_glossary_words(glossary_txt, is_glossary=True)
 
 def repl_glossary(matchobj):
     global glossary_dict
