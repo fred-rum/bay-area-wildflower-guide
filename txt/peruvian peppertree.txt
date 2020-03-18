@@ -1,2 +1,0 @@
-sci:Schinus molle
-color: cream

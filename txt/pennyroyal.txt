@@ -1,2 +1,0 @@
-sci:Mentha pulegium
-color: pale purple

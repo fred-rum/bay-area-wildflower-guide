@@ -1,0 +1,31 @@
+sci:Mentha spp.
+x:hist
+
+==pennyroyal:M. pulegium
+color: pale purple
+. flowering stems are upright, but vegetative stems are decumbent
+.. all others have upright vegetative stems
+. common; all others are rare
+
+==marsh mint:M. arvensis
+. inflorescence generally axillary
+.. all others are terminal
+
+[
+<h3>Inflorescence generally head-like, clustered at distal 3--5 nodes</h3>
+
+==watermint:M. aquatica
+. leaf blade generally ovate, lavender/citrus-scented
+
+==peppermint:M. Xpiperita
+. leaf blade ovate to lanceolate, peppermint/spearmint-scented
+]
+[
+<h3>Inflorescence spike-like</h3>
+
+==spearmint:M. spicata
+. leaf blade lance-oblong, glabrous, spearmint-scented
+
+==apple mint:M. suaveolens
+. leaf blade ovate, with scattered branched hairs abaxially, fruit-scented
+]

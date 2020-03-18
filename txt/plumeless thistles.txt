@@ -1,21 +1,30 @@
 sci:Carduus spp.
-x:!ba
+x:ba
 
 Key features:
-. number of heads per cluster
-. hairiness of phyllary bases
+. <b>number of heads per cluster</b>
+. width of involucre
+. width and hairiness of phyllary bases
 
 ==italian thistle:C. pycnocephalus
 color: purple, pink
-. generally 2--5 heads per cluster
+. <b>generally 2--5 heads per cluster</b>
+. involucre 1--2 cm diameter
+. phyllaries generally <= 2 mm wide
 . phyllary bases +- persistently loosely tomentose
 . very common throughout the bay area
 
 ==slender thistle:C. tenuiflorus
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0514+1852
-. 5--20 heads per cluster
+xx:uncat
+. <b>5--20 heads per cluster</b>
+. involucre 1--2 cm diameter
+. phyllaries generally <= 2 mm wide
 . phyllary bases glabrous to sparsely tomentose
 . common throughout the bay area
 
 ==musk thistle:C. nutans
-. 
+. <b>heads generally solitary, conspicuously peduncled</b>
+. involucre 2--7 cm diameter
+. phyllaries generally > 2 mm wide
+. La Honda Creek

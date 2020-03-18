@@ -1,4 +1,5 @@
 sci:Passiflora spp.
+x:ba
 
 All of the below flowers can be found near the coast around Santa Cruz.
 
@@ -22,7 +23,7 @@ color: pink
 . stamens yellowish
 . stigmas greenish
 . round stem?
-. stipules 4--7 mm, soon decisuous
+. stipules 4--7 mm, soon deciduous
 
 ==northern banana passionfruit:P. mixta
 . similar to P. tarminiana but with

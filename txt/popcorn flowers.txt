@@ -1,5 +1,5 @@
 sci:Plagiobothrys spp.
-x:!more
+x:!hist/rare
 
 There are dozens of popcorn flowers in the bay area, and Jepson's key often uses nutlet characters to distinguish them.  I'll definitely need the NRDB's help for identification, plus as many features as I can observe.
 
@@ -18,6 +18,42 @@ Key features:
 
 ==rusty popcornflower:P. nothofulvus
 color: white
+. common
 
 ==dwarf popcornflower:P. humistratus
 color: white
+. very rare
+
+==bracted popcornflower:P. bracteatus
+. very rare
+
+==valley popcornflower:P. canescens
+. rare
+
+==artist's popcornflower:P. chorisianus
+. uncommon
+
+==cooper's popcornflower:P. collinus
+. extremely rare; Big Basin
+
+==white forget-me-not:P. scouleri
+sci_fj:P. diffusus
+. very rare
+
+==fulvous popcornflower:P. fulvus
+. very rare
+
+==hairless popcornflower:P. glaber
+. rare
+
+==stalked popcornflower:P. stipitatus
+. very rare
+
+==pacific popcornflower:P. tenellus
+. uncommon
+
+==rough-nutlet popcornflower:P. trachycarpus
+. very rare
+
+==wavy-stemmed popcornflower:P. undulatus
+. rare

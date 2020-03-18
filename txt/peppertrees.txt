@@ -1,0 +1,13 @@
+sci:Schinus spp.
+x:ba
+
+==peruvian peppertree:S. molle
+color: cream
+. distal branches & twigs flexible, drooping
+. leaflets generally > 15, generally < 1 cm wide
+. rare; mostly in developed areas
+
+==brazilian pepper:S. terebinthifolius
+. distal branches & twigs stiff, spreading to erect
+. leaflets 7 (rarely 13), generally > 1 cm wide
+. very rare; generally in developed areas

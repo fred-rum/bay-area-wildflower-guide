@@ -3,6 +3,14 @@ x:!hist
 
 The key features in Jepson tend to be unobservable things like seed characteristics, annual vs. perennial, etc.  Other features include tiny features of the tiny flowers, so very close focus and perhaps plucking a flower may be necessary.  Due to the difficulty in identifying useful distinguishing features, I've punted for now.  Check Jepson for anything new.
 
+Within an inflorescence, each flower has:
+. 4 sepals, may be partially scarious
+. 4 petals, scarious
+
+
+
+Flowers mature from bottom to top within an inflorescence.  The younger flowers above have green sepals and a feathery stigma, but no stamens.  Flowers in the middle have dry, brown sepals and each have four stamens with anthers.  The oldest flowers below have dry, crinkled sepals and no stigma or stamens.
+
 Key features:
 . cauline leaves, basal leaves
 . peduncle ribbed/grooved?
@@ -11,11 +19,13 @@ Key features:
 ==ribwort plantain:P. lanceolata
 color: white, other
 . corolla tube glabrous
+. peduncle grooved
 . very common
 
 ==california plantain:P. erecta
 color: white
-. corolla tube glabrous
+. corolla tube glabrous [but generally obscured by sepals]
+. peduncle not grooved
 . common
 
 ==coastal plantain:P. elongata

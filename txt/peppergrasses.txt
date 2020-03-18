@@ -1,5 +1,5 @@
 sci:Lepidium
-x:rare/hist
+x:hist/rare
 
 Key features:
 . woody caudex or stem base or not

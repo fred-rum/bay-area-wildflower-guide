@@ -1,4 +1,5 @@
 sci:Vinca spp.
+x:ca
 
 ==greater periwinkle:V. major
 color: purple
@@ -8,7 +9,8 @@ color: purple
 
 ==lesser periwinkle:V. minor
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0105+2539
+sci_j:n/a
 . corolla 2--3 cm wide
 . leaf 2--4.5 cm long
 . scattered sparsely throughout the bay area, generally near civilization
-. not listed in Jepson; data from Wikipedia
+
