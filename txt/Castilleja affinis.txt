@@ -1,0 +1,14 @@
+com:coast indian paintbrush
+xx:any
+
+==coast indian paintbrush:C. affinis var. affinis
+color: red, salmon
+. inflorescence generally bright red to orange-red, 30--50 mm wide
+
+==tiburon paintbrush:C. affinis var. neglecta
+. inflorescence generally yellow, 15--25 mm wide
+
+==C. affinis var. contentiosa
+sci_jfp:n/a
+. description from <a href="https://www.inaturalist.org/observations/28210027#activity_comment_3131235">Mark Egger</a>
+. found only in Southern California

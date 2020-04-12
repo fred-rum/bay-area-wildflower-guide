@@ -9,7 +9,7 @@ sci:n/a
 ==shortpod mustard:Hirschfeldia incana
 color: yellow
 x:any
-. <b>sepals spreading to reflexed</b>
+. <b>sepals spreading to reflexed</b> [but the few existing photos disagree]
 . stigma entire
 . <b>basal leaves in a rosette</b>
 . cauline leaves dentate to pinnately lobed, petioled or sessile

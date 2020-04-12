@@ -1,14 +1,129 @@
 sci:Allium spp.
+x:!hist/rare
 
-<b>Caution: There are many other bay area onions besides these.</b>
+A major distinguishing feature is the outer bulb coat cell structure.  So an ID may be impossible without digging up a plant.
 
-==jeweled onion:A. serra
-color: red purple, purple
-. pedicels 7--15 mm
 
-==mexicali onion:A. peninsulare
-color: purple
-. pedicels 8--40 mm
+Other key features:
+. number of leaves per stem (1, 2, or more)
+. leaf sickle-shaped or not
+. leaf flat, channeled (curved), or cylindric (curled)
+. stem winged (above) or not
+. number of ovary crests [not visible in photos]
+. pedicel length
+. flower length, shape
+. inner perianth parts dentate, serrate, or not
+
+All onions can be pink/purple to white, so color is not a strong ID feature.
+
+[
+<h3>bulblets replace some or all flowers</h3>
+
+Not true for any others.
+
+==wild garlic:A. vineale
+. bulblets replace some or all flowers
+. leaf 2--4, sheathing lower stem
+. rare
+]
+[
+<h3>1--2 leaves per stem, flat or channeled, sickle-shaped</h3>
+
+==cascade onion:A. cratericola
+. leaf 1--2, +- flat to widely channeled, +- sickle-shaped
+. stem +- flat or cylindric, <b>not winged</b>
+. Henry Coe
+
+==scytheleaf onion:A. falcifolium
+. leaf 2, flat, sickle-shaped
+. stem +- flat, <b>generally winged above</b>
+. common
+
+]
+[
+<h3>1 cylindric leaf per stem</h3>
+
+==fringed onion:A. fimbriatum
+. flowers 8--12 mm
+. dark red-purple to white perianth parts
+. Henry Coe
+
+==serpentine onion:A. diabolense
+. flowers 6--10 mm
+. white perianth parts with pink midveins or tips
+. very rare
+
+]
+[
+<h3>2+ leaves per stem, not sickle-shaped</h3>
+
+The Jepson key for these uses bulb characteristics.  TBD.
+
+==naples onion:A. neapolitanum
+. leaf 2--3, <= stem, flat
+. infloresence not +- 1-sided
+. pedicels 15--35 mm
+. flowers 7--12 mm, erect
+. perianth parts +- spreading, entire
+. ovary crest 0
+. in developed areas
 
 ==three-cornered garlic:A. triquetrum
 color: white
+. leaf 2--3, +- = stem, flat
+. infloresence generally +- 1-sided
+. pedicels 15--25 mm
+. flowers 10--18 mm, pendent, bell-shaped
+. perianth parts lanceolate, entire
+. ovary crest 0
+. more common
+
+==oneleaf onion:A. unifolium
+. leaf 2--3, < stem, widely channeled or +- flat, <b>keeled</b>
+. pedicels 15--40 mm
+. flowers 11-15 mm
+. perianth parts ascending, ovate to obovate, entire
+. ovary crests 6 longitudinal ridges [<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0215+0787">not visible?</a>] [listed as crestless <a href="http://www.davidbogler.com/MonocotsUS/Alliaceae.html">here</a>]
+. common
+
+==bolander's onion:A. bolanderi
+. leaf 2--3, +- = stem, +- cylindric
+. pedicels 10--20 mm
+. perianth parts erect with spreading tips, +- lanceolate
+. all perianth parts distally serrate [not visible in photos] with inrolled margins
+. ovary crests 3, minute
+. very rare
+
+==hooker's onion:A. acuminatum
+. leaf 2--3, +- cylindric
+. perianth parts 9--15 mm, spreading [but usually not in photos]
+. inner perianth parts dentate [not visible in photos]
+. Mt. Diablo
+
+==narrowleaf onion:A. amplectens
+. leaf 2--4, +- cylindric
+. perianth parts 4--9 mm, erect or spreading
+. inner perianth parts entire
+. uncommon
+
+==jeweled onion:A. serra
+color: red purple, purple
+. leaf 2--3, +- cylindric
+. pedicels 7--15 mm
+. common
+
+==coastal onion:A. dichlamydeum
+. leaf 3--6, channeled to +- cylindric
+. inflorescence dense
+. pedicels erect, 0.7--2 &times; flower length
+. on or near sea cliffs ["near" appears to have a very loose definition]
+. common on peninsula
+
+==mexicali onion:A. peninsulare
+color: purple
+. leaf 2--3, channeled to +- cylindric
+. pedicels 8--40 mm
+. inner perianth parts entire to dentate
+. common on peninsula, present in Henry Coe
+
+]

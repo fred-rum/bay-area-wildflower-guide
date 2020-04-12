@@ -1,6 +1,8 @@
 x:ca
 
 ==red maids:C. menziesii
+color: red purple, purple
+sci_p:Calandrinia ciliata
 . petals 4--15 mm, bright pink-purple (rarely white)
 . 3--15 stamens
 . common

@@ -1,0 +1,15 @@
+sci:Linum spp.
+x:hist/rare
+
+==pale flax:L. bienne
+color: pale purple, white
+. petals pale purple, 6--10 mm
+. common
+
+==common flax:L. usitatissimum
+. petals lavender, 10--15 mm
+. very rare
+
+==scarlet flax:L. grandiflorum
+. petals bright red, 15--30 mm
+. rare

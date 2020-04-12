@@ -3,7 +3,8 @@
 <p>The major parts of a flower are the pedicel, perianth, stamens, and pistils.  Any of these parts may be missing or vanishingly small for a particular species or individual flower.</p>
 
 {pedicel,pedicels,pediceled} The stalk of an individual flower.  See also peduncle.
-{perianth,perianths} The collective term for the calyx and corolla.
+{perianth,perianths} The collective term for the calyx and corolla.  The term is usually used where they are difficult to distinguish except by position.
+{perianth part,perianth parts} A sepal or petal.  The term is usually used where they are difficult to distinguish.
 {hypanthium,hypanthia} The structure formed by the fused lower portions of the perianth.
 
 <h3>Calyx</h3>
@@ -42,6 +43,7 @@
 
 {bell-shaped,bell} Rapidly widening at the base, then slowly expanding toward the tip.
 {cylindric} Significantly longer than wide with parallel sides.
+{rotate} Saucer-shaped.  For a corolla, generally means a fused base with little or no tube and spreading limbs.
 {urn-shaped,urn} Rapidly widening at the base, then narrowed toward the tip.
 
 <h2>Geographic locations</h2>
@@ -59,6 +61,7 @@
 {annual,annuals} Lives for one year or less, generally without forming any woody parts.
 {basal} Positioned at the base.  Most commonly refers to leaves growing at the base of the stem.  Contrast cauline.
 {bract,bracts} Small leaf-like structures (or analogue) at the base of an inflorescence.  May be fused together or not.
+{canescent} Densely covered with fine silvery white hairs.
 {cauline} Growing along a plant's stem.  Most commonly refers to leaves.  Contrast basal.
 {compound} Generally, composed of multiple parts.  Opposite of simple.<ul><li>Leaf: divided into distinct leaflets connected by an axis but no blade material.</li><li>Umbel: an umbel of umbels</li></ul>
 {cordate} Shaped like a heart (with tip outward, lobes at the base).
@@ -81,6 +84,7 @@
 {ovate} Egg shaped; widest between the middle and the base.
 {palmate,palmately} With lobes spreading from a common point.
 {palmate-pinnate} 1st-order palmate and 2nd-order pinnate.
+{papillate,papillated} Has a surface with small protuberances, e.g. like the surface of your tongue.
 {peduncle,peduncles} The stalk of an inflorescence (or of a head in the sunflower family) or of an individual flower that is not part of an inflorescence.  See also pedicel.
 {petiole,petioles} The stalk of a leaf.
 {pinna,pinnae} The 1st-order division of a frond blade.
@@ -92,7 +96,7 @@
 {sagittate} Shaped like an arrowhead, with basal lobes near parallel to the axis.
 {salverform} With a slender tube and abruptly spreading limbs (e.g. "T" shaped).
 {scarious} Membranous.
-{serrate} With teeth pointing tipward.  Contrast dentate.
+{serrate,serrated} With teeth pointing tipward.  Contrast dentate.
 {shrub,shrubs} Woody plant, shorter than a tree, generally with many branches from the base.
 {simple} Generally, composed of a single part; undivided; unbranched.  Opposite of compound.<ul><li>Leaf: composed of a single part (which may be lobed or dissected), not divided into distinct leaflets separated from each other.</li></ul>
 {stellate,stellately} With 3+ branches radiating from a common point.  (Usually used to describe hair.)

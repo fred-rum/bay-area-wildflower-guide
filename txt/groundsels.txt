@@ -4,6 +4,7 @@ x:hist/rare
 Inner phyllaries are the length of the involucre.  Outer phyllaries are much reduced.
 
 ==common groundsel:S. vulgaris
+color:yellow
 . 55--65 disk flowers
 . no ray flowers
 . involucre +- widely cylindric or urn-shaped
@@ -51,12 +52,11 @@ color: yellow
 . uncommon
 
 ==rayless ragwort:S. aronicoides
-. 14,31'
 . 40--75 disk flowers
+. 0--2 ray flowers, 4--7 mm
 . involucre bell-shaped
 . inner phyllaries green- or black-tipped
 . outer phyllaries 0--few, inconspicuous to > &frac12; inner
-. 0--2 ray flowers, 4--7 mm
 . common
 
 ==threadleaf groundsel:S. flaccidus

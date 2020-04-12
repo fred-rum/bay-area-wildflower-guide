@@ -1,19 +1,51 @@
 com:baby blue eyes
 sci:Nemophila spp.
+x:ba
+
+[
+<h3>corolla >= 10 mm wide</h3>
 
 ==baby blue eyes:N. menziesii
 color: pale blue, pale purple, white
+xx:more
+. corolla 6--40 mm wide [generally at least 15 mm wide]
+. bright blue to white, white center, blue-veined, black-dotted, <b>not purple-spotted at lobe tips</b>
 . common throughout the bay area
+. may be worth cataloging subspecies, but their distinction is not yet obvious
+.. possible distinction: does the blue/purple margin stem from the background color or just from the dark veins
+
+==fivespot:N. maculata
+. corolla 10--50 mm wide
+. white with dark veins, dots, <b>purple-spotted at lobe tips</b>
+. very rare in the bay area
+
+]
+[
+<h3>corolla < 10 mm wide</h3>
+
+==eastwood's nemophila:N. pulchella
+. <b>corolla rotate</b>, 5--12 mm wide
+. white or blue
+. extremely rare in the bay area
+
+==meadow nemophila:N. pedunculata
+. corolla bowl- or bell-shaped, 2--8 mm wide
+. white or blue, <b>generally dark-veined or with dark dots</b>, may be purple-spotted at lobe tips
+. less common in the bay area
 
 ==white nemophila:N. heterophylla
 color: white
+. corolla bowl-shaped, 4--12 mm wide
+. white or +- blue, without dark veins or dots
+. style 2--4 mm
+. <b>lower leaves deep-lobed with similar lobes</b>, generally well separated, stalked
 . scattered throughout the bay area
 
 ==small flowered nemophila:N. parviflora
-. scattered throughout the bay area.
+. corolla bell-shaped, 1--5 mm wide
+. white or blue, without dark veins or dots
+. style < 2 mm
+. <b>lower leaves cut or shallow-lobed with dissimilar lobes</b>, merging or not stalked
+. scattered throughout the bay area
 
-==meadow nemophila:N. pedunculata
-. rare in the bay area.
-
-==eastwood's nemophila:N. pulchella
-. extremely rare in the bay area.
+]

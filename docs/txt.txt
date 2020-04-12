@@ -7,6 +7,8 @@ In addition to the standard HTML, the following text cases are handled
 specially.  Each case must be on a line by itself unless otherwise
 specified.
 
+Comment lines start with a # and are ignored.
+
 --
 Names:
 

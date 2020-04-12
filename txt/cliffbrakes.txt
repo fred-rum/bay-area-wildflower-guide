@@ -7,4 +7,5 @@ color:n/a
 
 ==bird's foot cliffbrake:P. mucronata
 xx:uncat
+mucro:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1208+1285
 . ultimate leaflet with mucro

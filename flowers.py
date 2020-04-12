@@ -422,6 +422,9 @@ class Page:
                     return ext_photo
             return None
 
+    def remove_comments(self):
+        self.txt = re.sub(r'^#.*\n', '', self.txt, flags=re.MULTILINE)
+
     def parse_names(self):
         def repl_com(matchobj):
             com = matchobj.group(1)
@@ -1566,6 +1569,7 @@ for name in page_list:
     page = Page(name)
     with open(root + "/txt/" + name + ".txt", "r", encoding="utf-8") as r:
         page.txt = r.read()
+    page.remove_comments()
     page.parse_names()
 
 # parse_children() can add new pages, so we make a copy of the list to

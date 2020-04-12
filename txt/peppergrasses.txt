@@ -36,6 +36,7 @@ Petals and fruit can co-exist, even on the same plant, so look around for both.
 . very rare
 
 ==heart-podded hoary cress:L. draba
+color:white
 . perennial herb, rhizomed
 . basal leaves not in a rosette, dentate to entire
 . mid-cauline leaf bases clasping or lobed, dentate or entire

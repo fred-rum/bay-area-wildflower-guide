@@ -8,7 +8,7 @@ color: yellow
 . middle and <b>distal cauline leaves</b> sessile, <b>base lobed, generally clasping</b>
 . pedicel erect
 . petals 6--11(13) mm
-. flowers much like B. nigra
+. flowers much like {-Brassica nigra}
 . very common
 
 ==black mustard:B. nigra
@@ -17,7 +17,7 @@ color: yellow
 . basal and lower cauline leaves pinnately lobed, serrate-dentate
 . <b>distal cauline leaves</b> smaller, sessile, <b>base tapered, not lobed</b>
 . petals 7--11(13) mm
-. flowers much like B. rapa
+. flowers much like {-Brassica rapa}
 . very common
 
 ==brown mustard:B. juncea

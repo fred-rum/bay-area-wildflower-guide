@@ -14,21 +14,32 @@ Key features:
 . calyx length, hair color, base fleshy, lobe shape, lobes bent or straight [generally upward], lobe midvein stout or slender
 . pedicel length, thick & hollow or slender and solid
 
-(*) "Limb diameter" means the diameter of the roundish, spreading portion of an individual petal beyond the corolla throat.
+(*) "Corolla limb diameter" means the diameter of the roundish, spreading portion of an individual petal beyond the corolla throat.
+
+Jepson mentions "appendages yellow" for some flowers, but hidden away in an unabridged note says "Yellow corolla appendages and [...] yellow corolla centers change to white after successful pollination."
 
 ==rusty popcornflower:P. nothofulvus
 color: white
+. petal diameter 4--9 mm
+. hairs rough, sharp [may be hard to distinguish from canescent]
+. mature calyx usually brown tinged (rusty)
 . common
+
+==valley popcornflower:P. canescens
+color: white
+. petal diameter 2--3 mm
+. <b>stem canescent</b>
+. mature calyx may be brown tinged
+. rare
 
 ==dwarf popcornflower:P. humistratus
 color: white
+. petal diameter 1--2 mm
+. hairs sparse, stiff
 . very rare
 
 ==bracted popcornflower:P. bracteatus
 . very rare
-
-==valley popcornflower:P. canescens
-. rare
 
 ==artist's popcornflower:P. chorisianus
 . uncommon

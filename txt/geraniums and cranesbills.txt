@@ -28,7 +28,7 @@ color: purple
 . stem hairs hairs rough, spreading to reflexed
 . leaf blade 2.5--5.4 cm wide, <b>divided 75--95% to base</b>
 . 5--7 leaf segments, diamond-shaped
-. petals 2.9--5.8 mm, +- notched, rose-purple
+. petals 2.9--5.8 mm, +- notched, <b>rose-purple</b>
 . anthers dark or pale purple
 . stigma lobes red-purple
 
@@ -36,7 +36,7 @@ color: purple
 . stem hairs short, stiff
 . leaf blade 2--7 cm wide, divided 85--95% to base
 . 5(7) segments, wedge-shaped
-. petals 4--6 mm, +- notched, very pale purple with dark purple veins
+. petals 4--6 mm, +- notched, <b>very pale purple with dark purple veins</b>
 . anthers pink and/or purple
 . stigma lobes salmon or beige
 
@@ -44,7 +44,7 @@ color: purple
 . stem hairs dense, short, spreading or reflexed
 . leaf blade 2.5--8.5 cm wide, divided 70--90% to base
 . 5(7) segments, oblong to wedge-shaped
-. petals 5.5--6 mm, +- notched, white to rose-pink
+. petals 5.5--6 mm, +- notched, <b>white to rose-pink</b>
 . anthers dark purple
 . stigma lobes red-purple
 
@@ -79,6 +79,7 @@ color: purple
 . petals 10--14 mm, rounded, pink to red-purple [often shorter]
 . <b>anthers +- purple</b>
 . stigma lobes rose to purple
+. according to <a href="https://www.inaturalist.org/observations/25047262#activity_comment_3245494">James Bailey</a>, the calyx hairs are non-glandular [CalPhotos agrees]
 
 ==little-robin:G. purpureum
 color: purple
@@ -90,6 +91,7 @@ color: purple
 . petals 5--9.5 mm, rounded, pink to red-purple
 . <b>anthers +- yellow</b>
 . stigma lobes pink to medium purple
+. per CalPhotos, calyx hairs may be glandular when observed in the right light
 
 ==round-leaved crane's-bill:G. rotundifolium
 . stem hairs rough, spreading

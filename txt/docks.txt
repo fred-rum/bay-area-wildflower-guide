@@ -102,7 +102,8 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0805+1322
 . scattered in east bay
 
 ==willow dock:R. salicifolius
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0612+0768
+color: other
+# https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0612+0768
 . generally with leafy axillary shoots below terminal inflorescence
 . 1--3 conspicuous perianth tubercles
 . common

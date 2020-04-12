@@ -3,10 +3,10 @@ sci:Arbutus
 ==pacific madrone:A. menziesii
 color:white
 . leaves entire to minutely serrate
-. fruit < 12 mm, papillate (like the surface of your tongue)
+. <b>fruit < 12 mm</b>, papillate
 
 ==strawberry tree:A. unedo
 scij:n/a
-. leaves serrated
-. fruit 1--2 cm, papillate (like the surface of your tongue)
+. leaves serrate
+. <b>fruit 1--2 cm</b>, papillate
 . rare; at Arastradero

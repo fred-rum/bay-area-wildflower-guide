@@ -8,8 +8,8 @@ Key features:
 
 ==false solomon's seal:M. racemosum
 color: white
-. Perianth parts 6
-. Inflorescence is a panicle
+. perianth parts 6
+. inflorescence is a panicle
 . > 20 flowers per inflorescence
 . <b>perianth 1--2 mm, << stamens</b>
 . <b>fruit tan with red speckles</b>
@@ -18,8 +18,8 @@ color: white
 
 ==star-flowered lily-of-the-valley:M. stellatum
 color: white
-. Perianth parts 6
-. Inflorescence is a raceme (or few-branched near base)
+. perianth parts 6
+. inflorescence is a raceme (or few-branched near base)
 . 5--15 flowers per inflorescence
 . <b>perianth 4--7 mm, &gt; stamens</b>
 . <b>fruit tan with red speckles and <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0210+1472">bold dark purple stripes</a></b>
@@ -27,8 +27,8 @@ color: white
 . common
 
 ==western lily of the valley:M. dilatatum
-. <b>Perianth parts 4</b>
-. Inflorescence is a raceme
+. <b>perianth parts 4</b>
+. inflorescence is a raceme
 . 10--50 flowers per inflorescence
 . <b>2--3 leaves</b>, 5--20 cm, cordate to sagittate; <b>petioles 5--15 cm</b>
 . San Bruno, Marin, Mt. Tam

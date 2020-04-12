@@ -12,49 +12,60 @@ generally drier places</h2>
 
 ==woolly indian paintbrush:Castilleja foliolosa
 color: red, salmon
+xx:none
 . <b>hairs woolly, felt-like, much-branched, +- white to +- gray</b>
 . leaves 10--50 mm, <b>+- linear</b>; lobes 0--3, tips obtuse; generally puberulent or glabrous (bristly)
 
 ==coast indian paintbrush:Castilleja affinis
-color: red, salmon
-. +- glabrous to bristly-puberulent, generally nonglandular
-. herbage not both with branched hairs and gray-green to white-woolly
-. calyx long-nonglandular- and short-glandular-hairy
+. generally bristly-puberulent, nonglandular
+. calyx long-nonglandular-hairy and short-glandular-hairy
 . corolla not curved out through abaxial side of calyx sinus
-. leaves 20--80 mm, <b>+- lanceolate, generally not fleshy</b>; lobes 0--5, tips +- rounded; <b>generally puberulent or glabrous</b> (bristly)
+. leaves 20--80 mm, <b>+- lanceolate, generally not fleshy</b>; <b>lobes 0--5</b>, tips +- rounded
+
+==coast indian paintbrush:Castilleja litoralis
+xx:none
+sci_fpj:Castilleja affinis var. litoralis
+. +- glabrous to sparsely puberulent
+. calyx long-nonglandular-hairy and short-glandular-hairy
+. corolla not curved out through abaxial side of calyx sinus
+. leaves 30--80 mm, +- oblong, <b>generally entire</b>
+. generally dry sea bluffs
 
 ==monterey indian paintbrush:Castilleja latifolia
 color: red, salmon
-. herbage not both with branched hairs and gray-green to white-woolly
+xx:none
+. +- bristly, generally nonglandular
 . corolla not curved out through abaxial side of calyx sinus
 . leaves <b>+- fleshy, oblong to rounded</b>, lobes 0--3, truncate-rounded; <b>hairs generally bristly or shaggy</b>
 . common on the peninsula + Alum Rock
 
-==wavyleaf paintbrush:Castilleja applegatei
-color: red, salmon
-. herbage not both with branched hairs and gray-green to white-woolly
+==Castilleja martini
+xx:uncat
+sci_fpj:Castilleja applegatei ssp. martinii
+. <b>plant glandular-puberulent to glandular-sticky-hairy proximal to inflorescence</b>
 . corolla not curved out through abaxial side of calyx sinus
 . leaves 20--70 mm, <b>+- lanceolate, generally wavy-margined</b>
-. <b>plant glandular-puberulent to -sticky-hairy proximal to inflorescence</b>
 . Marin, Mt. Diablo, Sierra Azul, and scattered outside the bay area
 
 ==franciscan paintbrush:Castilleja subinclusa ssp. franciscana
 color: red, salmon
 xx:rare
-. herbage not both with branched hairs and gray-green to white-woolly
+. +- puberulent to hairs long- and short-glandular
 . <b>corolla (including lower lip) generally curved out through abaxial calyx sinus</b> [e.g. the yellow-green corolla droops out of the red calyx]
 . leaves 30--80 mm, <b>lanceolate</b>; lobes 0--3
 . peninsula from Thornewood north and east bay from Chabot north
 
 ==wight's paint brush:Castilleja wightii
 color: red, salmon
-. herbage not both with branched hairs and gray-green to white-woolly
+xx:none
+. densely long-bristly and glandular-sticky
 . corolla not curved out through abaxial side of calyx sinus
 . <b>plant glandular-puberulent to -sticky-hairy close to inflorescence</b>
 
 ]
 
-==small-flower indian-paintbrush:Castilleja minor
+==lesser paintbrush:Castilleja minor var. spiralis
+xx:ba
 . annual
 . stem +- simple
 . wet places

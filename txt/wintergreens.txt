@@ -1,0 +1,17 @@
+sci:Pyrola spp.
+x:ba
+
+==leafless wintergreen:P. aphylla
+color: pink, red purple, other
+. leaf blades absent or <= +- 1 cm, +- not green
+. rare
+
+==white-veined wintergreen:P. picta
+. flower bract <= pedicel
+. leaf blades generally present, 2.5--7 cm, dark green with white mottling on veins adaxially
+. rare
+
+==bog wintergreen:P. asarifolia
+. flower bract >> pedicel
+. leaf blades well developed, adaxially +- shiny
+. extremely rare; Big Basin

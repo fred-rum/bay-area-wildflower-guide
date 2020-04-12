@@ -1,0 +1,7 @@
+sci:Blitum spp.
+sci_fjp:Chenopodium spp.
+x:!more
+
+==california goosefoot:Blitum californicum
+color:other
+sci_fpj:Chenopodium californicum

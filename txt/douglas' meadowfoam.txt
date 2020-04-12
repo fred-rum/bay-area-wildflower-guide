@@ -1,2 +1,6 @@
 sci:Limnanthes douglasii
+x:rare
+xx:more
+
+==table mountain meadowfoam:L. douglasii ssp. nivea
 color: white

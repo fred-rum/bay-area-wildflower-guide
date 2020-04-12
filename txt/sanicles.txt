@@ -63,7 +63,7 @@ color: yellow
 
 ==laceleaf sanicle:S. laciniata
 . plant 5--30 cm, slender, generally branched near base
-. leaf green, simple, palmately or +- ternately lobed, main divisions 3--5, generally not deeply cut, leaf margins sharpy toothed, axis of main division with at least a narrow, toothed wing throughout; blade 1.5--4 cm, ovate to round, lobes 0--5, margins sharply angled, teeth generally +- 2 mm, central lobe generally > 10 mm wide at base
+. leaf green, simple, palmately or +- ternately lobed, main divisions 3--5, generally not deeply cut, leaf margins sharply toothed, axis of main division with at least a narrow, toothed wing throughout; blade 1.5--4 cm, ovate to round, lobes 0--5, margins sharply angled, teeth generally +- 2 mm, central lobe generally > 10 mm wide at base
 . peduncle 1.5--8 cm
 . bracts +- 10, < heads, lanceolate to ovate
 . corolla yellow
