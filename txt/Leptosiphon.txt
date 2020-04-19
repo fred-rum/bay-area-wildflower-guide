@@ -118,7 +118,7 @@ color: purple, pale purple, pink, yellow, white
 . corolla:
 .. tube maroon/pink/yellow, <b>hairy, glandular</b>
 .. throat yellow/orange/purple
-.. lobes pink/yellow/purple/white, sometimes with a red/purple spot at the base [Jepson says "often", CalPhotos says "almost never"]
+.. lobes pink/yellow/purple/white, sometimes with red/purple spots at the base [Jepson says "often", CalPhotos says "almost never"]
 .. lobes 4--8 mm
 .. stigmas 1--7 mm and strongly exserted from corolla tube
 . leaf lobes 2--18 mm, middle lobe tip acute

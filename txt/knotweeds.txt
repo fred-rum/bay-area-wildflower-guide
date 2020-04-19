@@ -1,0 +1,11 @@
+sci:Polygonum
+x:!hist/rare
+
+==prostrate knotweed:P. aviculare
+. stem 8--16 ribbed
+
+==oval leaf knotweed:P. arenastrum
+sci_jfp:P. aviculare
+
+==beach knotweed:P. paronychia
+. stem +- angled, ribs 0 or obscure

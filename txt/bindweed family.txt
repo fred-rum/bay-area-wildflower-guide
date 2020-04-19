@@ -1,9 +1,9 @@
 sci:family Convolvulaceae
 
 ==bindweeds:Convolvulus spp.
-. <b>Stigma lobes linear to narrowly spoon-shaped</b>, tips acute; <b>calyx +- 5 mm</b>; corolla <= 40 mm
+. <b>Stigma lobes linear to narrowly spoon-shaped</b>, tips acute [<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0110+0338">example</a>]; <b>calyx +- 5 mm</b>; corolla <= 40 mm
 
 ==false bindweeds:Calystegia spp.
-. <b>Stigma lobes oblong</b>, tips obtuse; <b>calyx 7--25 mm</b>; corolla 20--75 mm
+. <b>Stigma lobes oblong</b>, tips obtuse [<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1215+4276">example</a>]; <b>calyx 7--25 mm</b>; corolla 20--75 mm
 
 ==dodders:Cuscuta spp.

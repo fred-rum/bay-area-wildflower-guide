@@ -3,9 +3,10 @@ x:hist
 
 ==beaked hawksbeard:C. vesicaria ssp. taraxacifolia
 color: yellow
+xx:ca
 . basal and cauline leaves pinnately lobed to dentate, terminal lobe large, toothed
 . involucre 8--12 mm, cylindric to bell-shaped or +- obconic
-. outer phyllaries 3--4 mm, ovate to lance-linear (thick based), glabrous
+. outer phyllaries 3--4 mm, ovate to lance-linear <b>(thick based), glabrous</b>
 . inner phyllaries lanceolate, reflexed at maturity, often stalked-glandular
 . corolla yellow, <b>+- red abaxially</b>
 
@@ -13,7 +14,7 @@ color: yellow
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0808+1261
 . basal and cauline leaves pinnately divided or sharply toothed, lobes lanceolate
 . involucre 5--8 mm, cylindric
-. outer phyllaries 2--4 mm, linear (thin based), minutely tomentose or stalked-glandular
+. outer phyllaries 2--4 mm, linear <b>(thin based), minutely tomentose or stalked-glandular</b>
 . inner phyllaries lanceolate, with prominent double row of black glandular bristles along midrib
 . corolla hairy[?], yellow [<b>not +- red abaxially</b> in CalPhotos, only in a few scattered photos on the wider internet]
 . scattered along the peninsula and Henry Coe

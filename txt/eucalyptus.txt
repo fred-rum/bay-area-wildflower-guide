@@ -32,6 +32,12 @@ color: red, pink, cream
 . inflorescence a 5--7-flowered umbel
 . rare
 
+==spider gum:E. conferruminata
+color: other
+. bark smooth, shed in strips, light gray or tan
+. 7--19 flowers/fruit in a stalked umbel, <b>fused at base into cluster 3--6 cm wide</b>
+. super rare
+
 ==manna gum:E. viminalis
 . inflorescence a <b>3-flowered umbel</b>
 . uncommon

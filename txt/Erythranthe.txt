@@ -13,10 +13,8 @@ color: yellow, orange
 . corolla tube exserted 3--5 mm beyond calyx
 . stems 15--65+ cm
 
-==E. grandis
+==magnificent seep monkeyflower:E. grandis
 scip:Mimulus grandis
-. calyx uppermost lobe longest, lowest 2 generally upcurved
-. corolla lower lip base generally swollen, +- closing mouth
 . stems 50--120+ cm
 . plant densely glandular-puberulent to coarse-hairy distally
 . corolla tube exserted 10--15 mm 
