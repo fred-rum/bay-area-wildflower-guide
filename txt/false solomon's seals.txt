@@ -1,6 +1,8 @@
 sci:Maianthemum spp.
 x:ca
 
+There are no "true" solomon's seals (Polygonatum spp.) in California.
+
 Key features:
 . 4 or 6 perianth parts
 . perianth > stamens or << stamens

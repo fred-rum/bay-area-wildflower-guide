@@ -21,6 +21,5 @@ sci:n/a
 ==spanish broom:Spartium junceum
 x:any
 color:yellow
-. leaves simple
-. stems generally +- leafless
+. stems generally +- leafless or with small, simple leaves
 ]

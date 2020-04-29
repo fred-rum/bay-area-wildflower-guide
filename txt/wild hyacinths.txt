@@ -10,8 +10,9 @@ There is supposed to be a difference in bracts color, but I can't consistently s
 
 ==blue dicks:D. capitatum
 color: purple
+sci_j:Dipterostemon capitatus
 . perianth blue, blue-purple, pink-purple, or white
-. staminodes erect, <b>leaning toward anthers, outward at tip</b>, white
+. staminodes erect, <b>leaning toward anthers, outward at tip, +- white</b>
 . perianth tube <b>not narrowed</b> above ovary
 . bracts generally dark purple (paler, striped dark purple
 . <b>flowers from February--April</b> (theoretically)
@@ -20,7 +21,7 @@ color: purple
 ==ookow:D. congestum
 color: purple
 . perianth blue-purple
-. staminodes erect, <b>leaning away from anthers</b>, +-purple
+. staminodes erect, <b>leaning away from anthers, +-purple</b>
 . perianth tube <b>narrowed</b> above ovary or +-so
 . bracts pale purple to green
 . <b>flowers from May--June</b> (from April, really)

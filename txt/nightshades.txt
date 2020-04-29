@@ -15,7 +15,7 @@ color: purple
 
 ==purple nightshade:S. xanti
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0110+1545
-. stem +-hairy, hairs are unbranched, glandular or not
+. stem +-hairy, hairs are unbranched, glandular or not [<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0119+2997">example</a>]
 . leaf 2--7 cm, lanceolate to ovate, +-entire to 1--2-lobed at base; base obtuse to +-cordate
 
 ==new zealand nightshade:S. aviculare

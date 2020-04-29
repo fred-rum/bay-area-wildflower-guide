@@ -1,0 +1,13 @@
+sci:Balsamorhiza spp.
+x:ba
+
+==california balsamroot:B. macrolepis
+color:yellow
+. basal leaf pinnately divided into linear to ovate segments
+. a few cauline leaves are present, but not described
+. scattered in the Diablo range, but not in the Mt. Diablo area
+
+==deltoid balsamroot:B. deltoidea
+. basal entire to coarsely dentate
+. cauline leaves entire
+. rare in the Mt. Diablo area

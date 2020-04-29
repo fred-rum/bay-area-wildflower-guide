@@ -1,3 +1,2 @@
-sci:Castilleja rubicundula ssp. lithospermoides
-color: yellow, cream, pink
-xx:rare
+com:cream sacs
+sci:Castilleja rubicundula var. lithospermoides

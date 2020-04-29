@@ -22,12 +22,14 @@ x:any
 
 <h2>silverpuffs</h2>
 
+All of these have +-10 ribs on the fruit, so that is not a distinguishing characteristic.
+
 <h3>Uropappus</h3>
 
 There is only one species of Uropappus anywhere.
 
 ==Uropappus lindleyi
-. each wing consists of a flat scale with a hair-like bristle extending past the scale tip
+. 5 wings; each consists of a flat scale with a hair-like bristle extending past the scale tip
 . scale is notched once at the tip where the bristle emerges
 . bristle is shorter than the scale
 . seeds are very dark or black

@@ -5,4 +5,4 @@ x:hist/rare
 
 ==owl's clover
 
-==cream sacs:C. rubicundula ssp. lithospermoides
+==cream sacs:C. rubicundula

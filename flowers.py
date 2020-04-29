@@ -527,7 +527,7 @@ class Page:
                 else:
                     sci = com
                     com = ''
-            # +com[,suffix][:sci] -> creates a child relationship with the
+            # ==com[,suffix][:sci] -> creates a child relationship with the
             #   page named by [com] or [sci] and creates two links to it:
             #   an image link and a text link.
             #   If a suffix is specified, the jpg with that suffix is used

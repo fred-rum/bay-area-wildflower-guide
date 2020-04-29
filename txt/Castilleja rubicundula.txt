@@ -1,0 +1,15 @@
+com:cream sacs
+sci:Castilleja rubicundula
+xx:any
+
+==cream sacs:C. rubicundula var. lithospermoides
+color: yellow, cream, pink
+sci_jfp:C. rubicundula ssp. lithospermoides
+. according to Jepson, the corolla is only yellow
+. CalPhotos also shows yellow and cream/white
+. Mark Egger <a href="https://www.inaturalist.org/observations/9041542#activity_comment_1216459">says</a> we have a local variant with all three colors: yellow, cream, and pink
+
+==pink creamsacs:C. rubicundula var. rubicundula
+sci_jfp:C. rubicundula ssp. rubicundula
+. corolla white, turning pink
+. very rare in the bay area

@@ -42,7 +42,7 @@ color:white
 . mid-cauline leaf bases clasping or lobed, dentate or entire
 . inflorescence in a panicle, elongated or not
 . petals 3--4 mm, white, stamens 6
-. fruit 2.5--3.7 mm, cordate to +- reniform, flat; tip wingless, obtuse to tapered, no notch
+. fruit 2.5--3.7 mm, cordate to +- reniform, flat; tip wingless, obtuse to tapered, no notch [<a href="https://www.inaturalist.org/observations/44110020">photo</a>]
 .. valve net-veined
 . <b>uncommon</b>
 

@@ -20,7 +20,7 @@ xx:none
 . generally bristly-puberulent, nonglandular
 . calyx long-nonglandular-hairy and short-glandular-hairy
 . corolla not curved out through abaxial side of calyx sinus
-. leaves 20--80 mm, <b>+- lanceolate, generally not fleshy</b>; <b>lobes 0--5</b>, tips +- rounded
+. leaves 20--80 mm, <b>+- lanceolate, generally not fleshy</b>; <b>lobes 0--5</b>, tips +- rounded [not true?]
 
 ==coast indian paintbrush:Castilleja litoralis
 xx:none
@@ -52,7 +52,7 @@ color: red, salmon
 xx:rare
 . +- puberulent to hairs long- and short-glandular
 . <b>corolla (including lower lip) generally curved out through abaxial calyx sinus</b> [e.g. the yellow-green corolla droops out of the red calyx]
-. leaves 30--80 mm, <b>lanceolate</b>; lobes 0--3
+. leaves 30--80 mm, <b>lanceolate</b>; lobes 0--3 [lobes are rare?]
 . peninsula from Thornewood north and east bay from Chabot north
 
 ==wight's paint brush:Castilleja wightii

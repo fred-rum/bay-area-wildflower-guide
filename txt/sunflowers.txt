@@ -8,6 +8,8 @@ See also {-yellow daisies} and {-white daisies} for similar plants with smaller 
 
 ==gumplants:Grindelia spp.
 
+==balsamroot
+
 ==striped treasureflower:Gazania linearis
 color: orange
 x:ca

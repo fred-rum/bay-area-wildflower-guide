@@ -6,7 +6,7 @@ Key features:
 . leaves simple or compound
 . basal leaves or not; cauline leaves or not
 . stem +- erect, stolon-like [prostrate, root-forming], or not present
-. cleistogamous flower [non-opening, self-polinating] present or not
+. cleistogamous flower present or not
 
 [
 <h2>white violets</h2>
@@ -30,7 +30,7 @@ color: yellow, orange
 . leaves simple, basal and cauline
 . 1--6 basal leaves per caudex [subterranean woody base], <b>petioles winged</b>
 . stems prostrate to erect, with leaves, peduncles
-. cleistogamous flower present [non-opening, self-polinating]
+. cleistogamous flower present
 . scattered
 
 ==redwood violet:V. sempervirens

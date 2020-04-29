@@ -63,6 +63,7 @@
 {bract,bracts} Small leaf-like structures (or analogue) at the base of an inflorescence.  May be fused together or not.
 {canescent} Densely covered with fine silvery white hairs.
 {cauline} Growing along a plant's stem.  Most commonly refers to leaves.  Contrast basal.
+{cleistogamous} Self-pollinating without opening.  Generally looks bud-like.
 {compound} Generally, composed of multiple parts.  Opposite of simple.<ul><li>Leaf: divided into distinct leaflets connected by an axis but no blade material.</li><li>Umbel: an umbel of umbels</li></ul>
 {cordate} Shaped like a heart (with tip outward, lobes at the base).
 {crenate,crenately,scalloped} With shallow, rounded teeth and usually with acute sinuses.  Could also be called "scalloped".
@@ -71,6 +72,7 @@
 {dentate} With teeth pointing outward.  Contrast serrate.
 {dioecious} A plant that has only either male or female flowers on it, never both on the same plant.
 {distal,distally} Growing farther away from the base and closer to the tip of a structure.  The structure is often implied; e.g. a proximal leaf grows close to the base of the whole plant.  Contrast proximal.
+{entire} In one smooth shape; i.e. not toothed, lobed, or compound.
 {glabrous} Without hair.
 {glaucous} Covered with the appearance of a whitish powder.
 {herb,herbs} Plant without any woody parts.

@@ -2,10 +2,12 @@ com:coast indian paintbrush
 xx:any
 
 ==coast indian paintbrush:C. affinis var. affinis
+sci_jfp:C. affinis ssp. affinis
 color: red, salmon
 . inflorescence generally bright red to orange-red, 30--50 mm wide
 
 ==tiburon paintbrush:C. affinis var. neglecta
+sci_jp:C. affinis ssp. neglecta
 . inflorescence generally yellow, 15--25 mm wide
 
 ==C. affinis var. contentiosa
