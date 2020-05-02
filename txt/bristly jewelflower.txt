@@ -1,0 +1,32 @@
+sci:Streptanthus glandulosus
+xx:ba
+
+==most beautiful jewelflower:S. glandulosus ssp. glandulosus
+color: purple, pale purple, red purple
+. raceme not 1-sided
+. sepals +- red-purple to dark maroon or lilac-lavender
+
+==metcalf canyon jewelflower:S. glandulosus ssp. albidus
+. raceme not 1-sided
+. sepals white to +- green-white or pale yellow
+
+==mount tamalpais bristly jewelflower:S. glandulosus ssp. pulchellus
+. raceme 1-sided
+. sepals lavender to rose or purple
+. Marin
+
+==one-sided jewelflower:S. glandulosus ssp. secundus
+. raceme 1-sided
+. sepals +- green-white, base lavender to +- purple
+. Marin
+
+==tiburon jewelflower:S. glandulosus ssp. niger
+. pedicel 1--3.2 cm
+.. all others 0.2--1.5 cm
+. <b>sepals dark purple-black</b>
+.. all others not dark purple-black, although ssp. glandulosus can be pretty close
+. raceme axis wavy [subtle]
+.. all others straight [not true?]
+. proximal cauline leaves glabrous
+.. all others sparsely to densely stiff-hairy (rarely glabrous)
+. Tiburon
