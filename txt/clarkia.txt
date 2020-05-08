@@ -36,7 +36,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1210+0994
 <h3>Standard corolla shapes, buds erect or reflexed</h3>
 
 ==winecup clarkia:C. purpurea
-. <b>sepals all coming free or staying fused in pairs</b>
+. <b>sepals all coming free or staying fused in pairs</b> [occasionally all 4 fused]
 . ovary 8-grooved
 . often has a dark spot on each petal (location depending on subspecies)
 . found everywhere
@@ -60,7 +60,7 @@ color: red purple
 ==presidio clarkia:C. franciscana
 . all 4 sepals staying fused
 . ovary and immature fruit 4-grooved
-. petals with +- red spot or zone at <b>base< of petal</b>
+. petals with +- red spot or zone at <b>base of petal</b>
 . petals <b>5--13 mm</b>; stigma not exserted beyond anthers
 . Redwood Regional Park
 
@@ -86,7 +86,7 @@ color: red purple
 . scattered in Diablo range
 
 ==canyon clarkia:C. epilobioides
-. all 4 petals fused or fused in pairs
+. all 4 sepals fused or fused in pairs
 . ovary cylindric, not obviously grooved
 . petals entire, <b>white, not flecked, fading pink</b>
 . anthers in 2 unlike series, inner smaller, paler

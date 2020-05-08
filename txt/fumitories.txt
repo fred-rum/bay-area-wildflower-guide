@@ -1,0 +1,34 @@
+sci:Fumaria spp.
+x:ca
+
+(Actually, there are more species found in CA that are not yet recognized by Jepson or CalFlora.)
+
+<a href="https://www.inaturalist.org/projects/fumaria-species-in-the-usa?tab=about">Identification tips and resources</a>
+. corolla color, shape and length
+. upper petal shape
+. sepal shape and size (length and width)
+. dry fruit shape and size (length and width)
+. pedicel shape (straight, spreading or reflexed) and length at frutification
+. bract length and bract/pedicel ratio
+. number of flowers in each inflorescence
+. peduncle/inflorescence ratio
+. leaflets shape
+
+==white ramping-fumitory:F. capreolata
+. petals 9--14 mm, white to purple-tinged, tipped with purple or black-red
+
+==common ramping-fumitory:F. muralis
+sci_j:n/a
+. petals 9--12 mm, pink to pale pink, tipped with dark red or purple
+. found in the developed parts of San Jose
+. <a href="https://en.wikipedia.org/wiki/Fumaria_muralis">Wikipedia article and photos</a>
+
+==common fumitory:F. officinalis
+. petals 5--9 mm, purple, tipped with dark purple
+. sepals 1.5--3.5 mm
+
+==fineleaf fumitory:F. parviflora
+color: purple, red purple, pink
+. petals 3--6 mm, white to pink, tipped with purple
+. sepals 0.5--1 mm
+. <a href="https://commons.wikimedia.org/wiki/File:Fumaria_parviflora_kz2.jpg">Wikimedia photo</a>

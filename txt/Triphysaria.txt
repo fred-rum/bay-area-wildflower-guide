@@ -1,0 +1,32 @@
+sci:Triphysaria spp.
+x:ca
+
+==johnnytuck:T. eriantha
+. <b>plant +- purple</b>
+. <b>corolla 10--25 mm, > bract</b>, yellow or white fading to pale purple
+. beak dark purple
+. <b>pouches 3--4 mm deep</b>
+
+==purplebeak owl's-clover:T. micrantha
+. <b>plant +- purple</b>
+. <b>corolla 8--15 mm, +- = bract</b>, yellow
+. beak dark purple
+. <b>pouches 1--2 mm deep</b>
+
+==yellow-beak false owl's-clover:T. versicolor
+. <b>plant green-brown to yellow-brown [i.e. greenish]</b>
+. corolla 12--22 mm, yellow or white fading to pale purple
+. beak +- yellow
+. pouches 2--4 mm deep
+xx:more
+
+==san francisco owl's-clover:T. floribunda
+. plant yellow-brown [green]
+. corolla 10--14 mm, cream, <b>stamens exserted</b>
+.. all other stamens are included
+. north peninsula
+
+==dwarf orthocarpus:Triphysaria pusilla
+. plant yellow-brown or +- purple
+. <b>corolla 4--7 mm</b>, +- purple
+.. all other corollas are >= 8 mm

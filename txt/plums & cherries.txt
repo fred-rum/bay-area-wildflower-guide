@@ -1,8 +1,73 @@
 sci:Prunus spp.
-color: white, pale purple, pink
+x:ba
 
 Key features:
-. inflorescence shape, leafy or leafless at base
+. <b>number of flowers per inflorescence</b> (counted separately for each branch attachment, although attachments can be clustered)
+. leafy or leafless at base
 . leaf size, shape
-. fruit hair or glabours
+. fruit hairy or glabrous
 . twigs with true or false terminal bud
+
+==almond:Prunus dulcis
+color:pale purple, pink
+. 1--2 flowers per cluster
+. ovary/fruit velvety
+. petals pink to nearly white
+. leaf blade 25--100 mm
+. petiole 10--25 mm
+. rare
+
+==peach:P. persica
+. 1 flower per inflorescence (rarely 2)
+. ovary/fruit velvety
+. petals dark pink
+. leaf blade 70--150 mm
+. petiole 5--10 mm
+. rare
+. 8'
+
+==cherry-plum:P. cerasifera
+color:white
+. 1 flower per inflorescence (rarely 2)
+. ovary, fruit glabrous
+. flowers appear before leaves
+. leaf crenate-serrate
+. common
+
+==pacific plum:P. subcordata
+. 2--5 flowers per inflorescence
+. ovary, fruit glabrous
+. flowers appear with leaves
+. leaf finely serrate
+. less common
+
+==bitter cherry:P. emarginata
+. 6--12 flowers per inflorescence
+. ovary, fruit glabrous
+. less common
+
+==hollyleaf cherry:Prunus ilicifolia
+. 15--many flowers per inflorescence
+. inflorescence leafless at base
+. leaves evergreen, entire or spiny-serrate
+. common
+
+==western chokecherry:P. virginiana var. demissa
+. 18--many flowers per inflorescence
+. inflorescence leafy at base
+. leaves deciduous, finely serrate
+. common
+
+The remaining bay area species are single-digit rare and are not listed in Jepson.
+
+==apricot:P. armeniaca
+
+==wild cherry:P. avium
+
+==carolina laurelcherry:P. caroliniana
+
+==plum:P. domestica
+
+==cherry laurel:P. laurocerasus
+
+==portuguese laurel:P. lusitanica

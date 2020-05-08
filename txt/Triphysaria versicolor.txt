@@ -1,0 +1,7 @@
+xx:any
+
+==yellow owl's clover:T. versicolor ssp. laucibarbala
+. corolla yellow
+
+==yellow-beak false owl's-clover:T. versicolor ssp. versicolor
+. corolla white fading to pale purple

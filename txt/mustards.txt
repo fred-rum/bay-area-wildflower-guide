@@ -9,7 +9,7 @@ sci:n/a
 ==shortpod mustard:Hirschfeldia incana
 color: yellow
 x:any
-. <b>sepals spreading to reflexed</b> [but the few existing photos disagree]
+. <b>sepals spreading to reflexed</b> [but the few existing photos indicate erect or ascending, rarely spreading, never reflexed]
 . stigma entire
 . <b>basal leaves in a rosette</b>
 . cauline leaves dentate to pinnately lobed, petioled or sessile
@@ -23,3 +23,6 @@ x:hist
 . <b>basal leaves not in a rosette</b>
 . cauline leaves short-petioled, dentate
 . uncommon
+
+==Sisymbrium spp.
+. 4 long stamens and 2 short stamens

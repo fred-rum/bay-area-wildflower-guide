@@ -1,2 +1,14 @@
 sci:Thermopsis californica
-color: yellow
+xx:ba
+
+==california goldenbanner:T. californica var. californica
+. stipules ovate to widely ovate
+. inflorescence bracts < 15 mm wide
+. leaflet hairs soft, not appressed
+. uncommon
+
+==silvery false-lupine:T. californica var. argentata
+. stipules lanceolate to ovate
+. inflorescence bracts < 6 mm wide
+. leaflet silver; hairs long, soft, straight, appressed
+. extremely rare

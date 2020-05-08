@@ -17,9 +17,8 @@ Key features:
 <h2>flower whorls dense<br/>
 proximal pedicels < calyx</h2>
 
-==chinese-houses:C. heterophylla var. heterophylla
+==purple chinese houses:C. heterophylla
 color: purple
-xx:ba
 . <b>corolla lips +- =</b>
 . <b>corolla throat as wide as long</b>
 . upper lip white to lavender or tipped dark violet, wine-spotted and generally +- red lined near base

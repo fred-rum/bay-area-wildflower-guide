@@ -77,6 +77,7 @@
 {glaucous} Covered with the appearance of a whitish powder.
 {herb,herbs} Plant without any woody parts.
 {inflorescence,inflorescences} A cluster of flowers from a common point or sharing a stalk that has only flowers on it.  A head in the sunflower family.
+{involucel,involucels} Secondary involucre within an inflorescence.
 {involucre,involucres} Collective term for a cluster of bracts.  Typically refers to the green base of a flower head in the sunflower family.
 {lanceolate} Long and somewhat narrow; widest between the middle and the base.
 {leaflet,leaflets} A division of a compound leaf (which may itself be further compound).
@@ -106,6 +107,8 @@
 {stipule,stipules} Extension at the base of the petiole.
 {strigose} Having stiff, straight, appressed hairs.
 {subshrub,subshrubs} Similar to a shrub, but with the distal stems less woody.
-{twig,twigs} Final branch segment.
+{terminal} The segment at the end, e.g. the most distal segment of a compound or lobed leaf.
+{twig,twigs} The ultimate branch segment of a woody plant.
+{ultimate} The smallest divisions of a compound/dissected leaf or the final segments of a branching stem.
 {umbel,umbels} An inflorescence in which 3+ flower pedicels branch from a common point.
 {waif,waifs} A plant that has spread with human assistance but cannot reproduce or spread further on its own; will eventually die out assuming no further assistance.

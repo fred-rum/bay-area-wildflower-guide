@@ -1,5 +1,5 @@
 sci:Triphysaria eriantha
-x:more
+xx:any
 
 ==butter-and-eggs:T. eriantha ssp. eriantha
 color: yellow, cream

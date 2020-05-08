@@ -1,0 +1,9 @@
+sci:Prunus ilicifolia
+xx:any
+
+==holly-leaved cherry:Prunus ilicifolia ssp. ilicifolia
+color:cream, other
+. leaf margin spiny-serrate, +- wavy
+
+==catalina cherry:Prunus ilicifolia ssp. lyonii
+. leaf margin generally entire, flat

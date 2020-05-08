@@ -22,9 +22,9 @@ color:yellow
 ==canary island broom:Genista canariensis
 . leaflet 5-10(12) mm
 . extremely rare
+]
 
 ==bridal veil broom:Genista monosperma
 . simple leaves
 . white corolla
 . extremely rare
-]

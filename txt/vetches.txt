@@ -40,7 +40,7 @@ color: red purple
 . flowers not spaced, generally on 1 side of axis
 . inflorescence generally +- = subtending leaf, 3--12-flowered; corolla dark or red-purple
 . leaflets 10--16, 1.5--3 cm, elliptic to oblong
-. corolla (12)15--18 mm, dark or red-purple, <b>plumose</b>
+. corolla (12)15--18 mm, dark or red-purple, <b>calyx plumose</b>
 
 ==american vetch:V. americana
 color: pink, pale purple

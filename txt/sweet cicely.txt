@@ -1,0 +1,11 @@
+sci:Osmorhiza spp.
+x:hist
+
+==mountain sweet cicely:O. berteroi
+color:white
+. no involucel or vestigial
+. corolla white or purple (or rarely green-white)
+
+==california sweet cicely:O. brachypoda
+. involucel conspicuous
+. corolla +- green-yellow

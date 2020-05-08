@@ -1,0 +1,23 @@
+sci:Sisymbrium spp.
+x:ba
+
+==hedge mustard:S. officinale
+color:yellow
+. petals 2.5--4 mm long, 1--2 mm wide
+. sepals 2--2.5 mm
+. reflexed-hairy
+. uncommon
+
+==london rocket:S. irio
+. petals 2.5--3.5 mm (claw 1--1.5 mm), 1--1.5 mm wide
+. sepals 2--2.5 mm, not horned
+. glabrous or sparsely hairy [only] at base
+. rare
+
+==tumble mustard:S. altissimum
+. petals 6--8 mm (claw 3.5--6 mm), 2.5--4 mm wide
+. very rare
+
+==eastern rocket:S. orientale
+. petals 7--9 mm long (claw 3--5.5 mm), 2.5--4 mm wide
+. rare, mostly around SF
