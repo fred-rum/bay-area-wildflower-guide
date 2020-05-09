@@ -1,4 +1,3 @@
 sci:Amaryllis belladonna
 color: pale purple
-
-It's not always this wilted.
+x:ca

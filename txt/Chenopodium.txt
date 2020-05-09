@@ -1,0 +1,31 @@
+com:goosefoots
+sci:Chenopodium spp.
+
+==nettle-leaved goosefoot:Chenopodiastrum murale
+sci_fpj:Chenopodium murale
+. <b>primary leaves not fleshy</b>
+. all leaves toothed
+. leaves glaucous in youth, especially abaxially, becoming glabrous and shiny with age
+. <b>inflorescence a panicle</b> or single flower
+
+==common lamb's-quarters:Chenopodium album
+. <b>primary leaves not fleshy</b>
+. proximal leaves irregularly toothed
+. leaves glabrous adaxially
+. leaves glaucous abaxially
+. <b>inflorescence a branched spike</b> or single flower
+
+==pitseed goosefoot:Chenopodium berlandieri
+. <b>primary leaves not fleshy</b>
+. all leaves irregularly toothed or entire
+. all leaves glaucous
+. <b>inflorescence a branched spike</b>
+
+==desert goosefoot:Chenopodium pratericola
+. <b>primary leaves fleshy</b>
+. leaf blade >= 3&times; longer than wide
+
+==stinking goosefoot:Chenopodium vulvaria
+. <b>primary leaves fleshy</b>
+. leaf blade < 2&times; longer than wide
+. plant ill-smelling

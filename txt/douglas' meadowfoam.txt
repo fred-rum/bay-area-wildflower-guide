@@ -1,6 +1,29 @@
 sci:Limnanthes douglasii
 x:rare
-xx:more
+xx:any
 
 ==table mountain meadowfoam:L. douglasii ssp. nivea
 color: white
+. petals white, veined white, green, or +- purple [sometimes with yellow strongly bleeding from veins]
+. anthers cream to yellow or green
+
+==L. douglasii ssp. rosea
+. petals white, veined purple or green
+. anthers cream, dark pink, orange-red, or +- black
+
+==L. douglasii ssp. douglasii
+. petals yellow with white tips
+. anthers yellow, cream, or red-brown
+
+==point reyes meadowfoam:L. douglasii ssp. sulphurea
+. petals yellow throughout
+. anthers yellow
+
+==ornduff's meadowfoam:L. douglasii ssp. ornduffii
+sci_j: n/a
+. 4 petals
+.. all others have 5
+. found only at Moss Beach (Half Moon Bay)
+
+==foothill meadowfoam:L. douglasii ssp. striata
+. only found the in the Klamath range and Sierra Nevada

@@ -1,6 +1,10 @@
 sci:Bellardia spp.
+x:ca
+
 ==mediterranean lineseed:B. trixago
 color: white, pale purple
 
 ==yellow glandweed:B. viscosa
 color: yellow, cream
+sci_jfp: n/a
+. newly invasive in California

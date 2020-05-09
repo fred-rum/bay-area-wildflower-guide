@@ -1,19 +1,21 @@
 sci:n/a
 
-The corolla's upper lip lobes are fused into a "beak" with an open tip.  The stigma is exserted from the tip of the beak (or included).  The corolla's lower lip is reduced and may be 3-toothed to -pouched.
+The corolla's upper lip lobes are fused into a "beak" with an open tip.  The stigma is exserted from the tip of the beak (or included).  The angle of the beak (hooked or straight) determines the position of the stigma (next to the beak or above it)
+
+The corolla's lower lip is reduced and may be 3-toothed to -pouched.
 
 ==purple owl's-clover,3:Castilleja exserta
 color: pink, red purple
 xx:more
 . corolla beak tip hooked, densely shaggy-hairy
-. the stigma's round tip is exserted on the side of the (hooked) corolla beak
+. the spherical stigma is exserted on the side of the (hooked) corolla beak
 . common
 
 ==denseflower indian paintbrush,3:Castilleja densiflora
 color: pink, red purple
 xx:more
 . corolla beak straight, puberulent
-. the stigma's round tip is exserted on the top of the (erect) corolla beak
+. the spherical stigma is exserted on the top of the (erect) corolla beak
 . inflorescence 20--40 mm wide
 . corolla wider distally, pouches generally 3--7 mm wide
 . stigma generally +- exserted

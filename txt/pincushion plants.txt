@@ -39,7 +39,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0416+2425
 . corolla +- included, 8--9 mm, generally purple (white), tube red-veined, lobes < 2 mm
 
 ==hooked pincushionplant:N. hamata
-xx:more
+xx:uncat
 . 3 bract tip lobes (including the tip itself in the count) (not 0)
 . upper leaf and bract lobes spreading
 . corolla generally purple or +- pink
