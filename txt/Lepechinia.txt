@@ -1,0 +1,13 @@
+sci:Lepechinia spp.
+x:ba
+
+==california pitcher sage:L. calycina
+color: white, pale purple, purple
+. pedicel <= 1 cm
+. calyx lobes < tube
+. fruit hairy
+
+==fragrant pitcher sage:L. fragrans
+. pedicel 1--4 cm
+. calyx lobes usually > tube
+. fruit glabrous

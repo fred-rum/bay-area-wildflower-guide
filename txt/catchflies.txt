@@ -1,7 +1,53 @@
 sci:Silene spp.
+x:hist
+
+[
+<h3>annual with generally slender taproot</h3>
 
 ==small-flowered catchfly:S. gallica
 color: white, pale purple
+. corolla white to pale purple
+. calyx tube clearly with 10 veins
+. <b>pedicel and calyx hairy</b>
+. common
+
+==sleepy catchfly:S. antirrhina
+. corolla white in the center, pale purple at the adaxial tips, dark red purple abaxially
+. calyx tube clearly with 10 veins
+. <b>pedicel and calyx glabrous</b>
+. rare
+
+==multinerved catchfly:S. coniflora
+. corolla white to pale purple
+. <b>calyx tube clearly with 16--30 veins</b>
+. very rare
+
+]
+[
+<h3>perennial herb with woody caudex</h3>
 
 ==north californian indian pink:S. laciniata ssp. californica
+xx:ba
 color: red
+. <b>corolla bright red</b>
+. calyx tube with 10 faint veins
+. common
+
+==scouler's catchfly:S. scouleri ssp. scouleri
+xx:ca
+. corolla pale purple to red purple
+. calyx tube clearly with 10 veins
+. <b>lower leaves 12--20 mm wide</b>
+. <b>upper leaves 3--15 mm wide</b>
+. Jepson claims the styles are about as long as the petal claws, but CalPhotos shows them often exserted
+. uncommon
+
+==san francisco campion:S. verecunda
+. corolla (very) pale purple to reddish purple
+. calyx tube clearly with 10 veins
+. <b>lower leaves 2--9 mm wide</b>
+. <b>upper leaves 2--6 mm wide</b>
+. styles exserted
+. common
+
+]

@@ -1,2 +1,0 @@
-sci:Lepechinia calycina
-color: white, pale purple, purple

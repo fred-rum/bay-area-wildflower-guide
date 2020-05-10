@@ -62,6 +62,7 @@
 {basal} Positioned at the base.  Most commonly refers to leaves growing at the base of the stem.  Contrast cauline.
 {bract,bracts} Small leaf-like structures (or analogue) at the base of an inflorescence.  May be fused together or not.
 {canescent} Densely covered with fine silvery white hairs.
+{caudex,caudexes,caudices} Short stem below ground level.
 {cauline} Growing along a plant's stem.  Most commonly refers to leaves.  Contrast basal.
 {cleistogamous} Self-pollinating without opening.  Generally looks bud-like.
 {compound} Generally, composed of multiple parts.  Opposite of simple.<ul><li>Leaf: divided into distinct leaflets connected by an axis but no blade material.</li><li>Umbel: an umbel of umbels</li></ul>
@@ -112,6 +113,7 @@
 {stipule,stipules} Extension at the base of the petiole.
 {strigose} Having stiff, straight, appressed hairs.
 {subshrub,subshrubs} Similar to a shrub, but with the distal stems less woody.
+{taproot} Primary root growing straight down, tapering at the end, with smaller lateral branches.
 {terminal} The segment at the end, e.g. the most distal segment of a compound or lobed leaf.
 {twig,twigs} The ultimate branch segment of a woody plant.
 {ultimate} The smallest divisions of a compound/dissected leaf or the final segments of a branching stem.
