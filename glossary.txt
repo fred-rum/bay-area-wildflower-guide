@@ -69,6 +69,7 @@
 {crenate,crenately,scalloped} With shallow, rounded teeth and usually with acute sinuses.  Could also be called "scalloped".
 {decurrent} The leaf blade extends onto the stem as a short wing.
 {deltate} Shaped like the Greek letter &Delta;; an equilateral triangle with corners rounded or not; attached at base.
+{dehisce,dehisced,dehiscing,dehiscent} Splitting.
 {dentate} With teeth pointing outward.  Contrast serrate.
 {dioecious} A plant that has only either male or female flowers on it, never both on the same plant.
 {distal,distally} Growing farther away from the base and closer to the tip of a structure.  The structure is often implied; e.g. a proximal leaf grows close to the base of the whole plant.  Contrast proximal.

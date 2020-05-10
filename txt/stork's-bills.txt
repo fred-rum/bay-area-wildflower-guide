@@ -12,7 +12,7 @@ color: purple
 . <b>sepals 3--5 mm, tip with one or more bristles</b>
 . petals +- = sepals
 . leaf compound; leaflets deeply dissected
-. peduncle is often a deep red purple, but not always
+. pedicel is often a deep red purple, but not always
 . flowers in a cluster
 
 ==musk stork's-bill:E. moschatum
@@ -21,7 +21,7 @@ color: purple
 . <b>sepals 6--9 mm, tip glabrous</b> [with knob, but no bristles]
 . petals 10--15 mm [often shorter]
 . leaf compound; leaflets lobed to shallowly divided
-. peduncle is often a green purple, but is often short and hidden by the flower
+. pedicel is often a green purple, but is often short and hidden by the flower
 . flowers in an umbel
 
 ]

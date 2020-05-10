@@ -7,5 +7,5 @@ color:n/a
 . common
 
 ==great horsetail:E. telmateia ssp. telmateia
-. main stem between nodes is pale greenish white
-. not found in California
+. main stem between nodes is pale greenish white (<a href="https://www.inaturalist.org/observations/2504016">example</a>)
+. <b>not found in California</b>

@@ -1,0 +1,46 @@
+sci:Penstemon spp.
+x:rare
+
+==bunchleaf penstemon:P. heterophyllus
+color: purple
+. <b>anther sacs 2.2--3 mm, dehiscing at proximal end to 1/2--2/3 their length, inner margins long-hairy</b>
+.. for all others, anther sacs dehiscing full length, generally spreading widely apart; anthers glabrous
+. inflorescence +- glabrous
+. corolla 23--40 mm
+. staminode glabrous
+. common
+
+==scarlet bugler:P. centranthifolius
+. inflorescence glabrous
+. <b>flower red</b>
+.. all others purple-shaded
+. staminode glabrous
+. leaf thick, entire
+. uncommon
+
+[
+<h3>inflorescence (excluding corolla) glandular<br/>
+staminode hairy</h3>
+
+==sierra beardtongue:P. heterodoxus var. heterodoxus
+. inflorescence glandular
+. <b>corolla 10--16 mm</b>
+. staminode moderately yellow-hairy
+. leaf entire, sometimes folded lengthwise
+. extremely rare on Mt. Diablo
+
+==rattan's beardtongue:P. rattanii
+. inflorescence glandular
+. corolla 20--30 mm
+. staminode yellow-hairy
+. <b>leaf thin, shallowly toothed</b>
+. uncommon in the Santa Cruz range
+
+==grinnell's beardtongue:P. grinnellii var. scrophularioides
+. inflorescence glandular-hairy
+. corolla 26--35 mm
+. staminode exserted, densely yellow- or golden-hairy
+. <b>leaf thick, generally folded lengthwise and arching</b>, at least partially dentate
+. very rare
+
+]

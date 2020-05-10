@@ -1,11 +1,27 @@
 com:cobwebby thistle
-xx:more
+xx:!hist
+
+This species is complex, variable, and not well described.  Assigning a variety may not always be possible.
 
 ==venus thistle:C. occidentale var. venustum
 color: red
-. less cobwebby
-. common
+. generally less cobwebby
+. corolla bright red-pink to red (or occasionally other random colors)
+. phyllary ascending, spreading, or reflexed
+. middle phyllary tips 5--20+ mm
+. common everywhere
 
 ==cobwebby thistle:C. occidentale var. occidentale
 . very cobwebby
-. scattered in the Santa Cruz range
+. corolla lavender to bright purple
+. phyllary ascending to spreading
+. common, mostly from the north peninsula to Marin
+
+==california thistle:C. occidentale var. californicum
+. phyllaries generally appressed only at the base, ascending or spreading above
+.. all others tightly appressed, spreading only at the tip/spines
+. corolla pink, pale purple, salmon, or occasionally white/cream
+. uncommon, mostly around Mt. Diablo
+
+==compact cobwebby thistle:C. occidentale var. compactum
+. very rare near San Bruno Mountain

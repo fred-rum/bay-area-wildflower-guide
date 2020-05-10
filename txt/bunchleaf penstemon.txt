@@ -1,2 +1,0 @@
-sci:Penstemon heterophyllus
-color: purple
