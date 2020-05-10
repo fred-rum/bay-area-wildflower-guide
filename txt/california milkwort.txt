@@ -1,2 +1,4 @@
 sci:Rhinotropis californica
 color: pink, pale purple
+sci_fpj:Polygala californica
+x:hist

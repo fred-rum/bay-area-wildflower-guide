@@ -1,0 +1,43 @@
+sci:Campanula spp.
+x:ba
+
+==california harebell:C. prenanthoides
+sci_fpj:Asyneuma prenanthoides
+. 2+ flowers per node
+. corolla cut >= &frac34; to base with linear lobes
+. uncommon in the Santa Cruz range
+
+[
+<h3>1 flower per node<br/>
+corolla cut <= &frac23; to base with at least narrowly triangular lobes</h3>
+
+==eastwood's bellflower:C. angustiflora
+. annual
+. leaf oblong-ovate
+. corolla 2--6 mm
+
+==griffin's bellflower:C. griffinii
+. annual
+. leaf +- linear, leathery, serrate
+. corolla 2--4 mm
+. Jasper Ridge, Mines Rd.
+
+==chaparral harebell:C. exigua
+. annual
+. leaf +- linear, leathery, few-toothed
+. corolla 7--18 mm
+. uncommon in the Diablo range
+
+==sharsmith's harebell:C. sharsmithiae
+. annual
+. leaf widely lanceolate, fleshy, serrate
+. corolla 7--16 mm
+. very rare
+
+==swamp harebell:C. californica
+. perennial
+. leaf ovate, thin, crenate
+. corolla 8--15 mm
+. extremely rare
+
+]

@@ -5,7 +5,7 @@
 {pedicel,pedicels,pediceled} The stalk of an individual flower.  See also peduncle.
 {perianth,perianths} The collective term for the calyx and corolla.  The term is usually used where they are difficult to distinguish except by position.
 {perianth part,perianth parts} A sepal or petal.  The term is usually used where they are difficult to distinguish.
-{hypanthium,hypanthia} The structure formed by the fused lower portions of the perianth.
+{hypanthium,hypanthia,hypanthiums} The structure formed by the fused lower portions of the perianth.
 
 <h3>Calyx</h3>
 
@@ -74,6 +74,7 @@
 {dioecious} A plant that has only either male or female flowers on it, never both on the same plant.
 {distal,distally} Growing farther away from the base and closer to the tip of a structure.  The structure is often implied; e.g. a proximal leaf grows close to the base of the whole plant.  Contrast proximal.
 {entire} In one smooth shape; i.e. not toothed, lobed, or compound.
+{epicalyx,epicalyces,epicalyxes} A whorl of bracts forming an extra calyx-like structure.
 {glabrous} Without hair.
 {glaucous} Covered with the appearance of a whitish powder.
 {herb,herbs} Plant without any woody parts.

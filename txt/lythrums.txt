@@ -1,0 +1,36 @@
+sci:Lythrum spp.
+x:ba
+
+==purple loosestrife:L. salicaria
+. > 2 flowers per axil
+. rare
+
+[
+<h3>1--2 flowers per axil</h3>
+
+==california loosestrife:L. californicum
+. stem erect, many branches distal to the base
+. petals purple
+. rare
+
+==false grass-poly:L. junceum
+sci_jfp: n/a
+color: purple
+. sprawling, many branches distal to the base
+. petals purple with white at the base
+. hypanthia purple-spotted
+. newly identified in the bay area (<a href="https://bioone.org/journals/madro%C3%B1o/volume-66/issue-3/0024-9637-66.3.97/NOTES-ON-LYTHRUM-LYTHRACEAE-IN-CALIFORNIA--LYTHRUM-JUNCEUM-AS/10.3120/0024-9637-66.3.97.short">abstract</a>)
+
+==hyssop loosestrife:L. hyssopifolia
+. braches mostly at base, with no more than a few distal to the base
+. hypanthium 4--5 &times; longer than wide
+. epicalyx lobes +- 2 &times; longer than sepals
+. common
+
+==three-bracted loosestrife:L. tribracteatum
+. braches mostly at base, with no more than a few distal to the base
+. hypanthium 8--10 &times; longer than wide
+. epicalyx lobes +- = sepals
+. very rare
+
+]
