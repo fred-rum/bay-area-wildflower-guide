@@ -75,7 +75,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1202+1176
 
 ==bearded iris:I. Xgermanica
 sci_fpj:Iris germanica
-beard:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0606+1819
+color:purple
 . <b>sepal obviously bearded</b>
 .. the beard is a dense line of hairs extending along the petal midline through the throat, but not much beyond
 .. for all other irises, sepals are not obviously bearded

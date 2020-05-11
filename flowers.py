@@ -1632,8 +1632,10 @@ with open(root + '/observations.csv', mode='r', newline='', encoding='utf-8') as
         if not sci: continue
 
         # The common name is forced to all lower case to match my convention.
-        # The scientific name is left in its standard case.
+        # The scientific name is left in its standard case, but a hybrid
+        # indicator is removed.
         com = row[com_idx].lower()
+        sci = re.sub(r'× ', r'', sci)
         taxon_id = row[taxon_idx]
         rg = row[rg_idx]
 

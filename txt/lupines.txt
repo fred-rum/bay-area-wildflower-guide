@@ -192,7 +192,7 @@ color: yellow, cream
 <h3>other perennials</h3>
 
 ==broadleaf lupine:L. latifolius
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0909+0896
+color:purple
 . Habit: Perennial herb 3--24 dm, green, glabrous to hairy, <b>not fleshy</b>
 . Stem: erect
 . Leaf: cauline; stipules 5--10 mm; petiole 4--20 cm; leaflets 5--11, <b>40--100 mm</b>, abaxially +- hairy, adaxially glabrous to hairy

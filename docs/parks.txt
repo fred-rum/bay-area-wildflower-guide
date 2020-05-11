@@ -3,7 +3,7 @@ parks.yaml names the parks and describes their location.
 Its format is:
 (area):
 - (park name), or
-- {(canonical park name), (match pattern)}
+- {(canonical park name): (match pattern)}
 
 For observations from iNaturalist, the location of the observation is
 mapped to a park name.  If the location *starts* with a known park
