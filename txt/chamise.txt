@@ -1,2 +1,11 @@
 sci:Adenostoma fasciculatum
 color: white
+x:ba
+xx:uncat
+
+The only bay-area subspecies is ssp. fasciculatum:
+. plant tall with erect/ascending branches
+. twigs glabrous
+. leaves 5--13 mm long
+
+All other California species and subspecies are restricted to Southern California.

@@ -1139,7 +1139,7 @@ class Page:
                     if top == 'genus':
                         print("x:uncat used for " + self.name)
                     else:
-                        w.write("This species has subspecies or variants which don't seem worth distinguishing.")
+                        w.write("This species has subspecies or variants that don't seem worth distinguishing.")
                 elif complete == 'more':
                     w.write(f'<b>Caution: There are{other} {members} of this {top} not yet included in this guide.</b>')
                 else:

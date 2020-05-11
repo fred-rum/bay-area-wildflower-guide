@@ -1,2 +1,6 @@
 sci:Castanea spp.
+sci_jfp: n/a
 color: other
+x:ca
+
+There are no wild-growing chestnuts in California, only cultivated hybrids.
