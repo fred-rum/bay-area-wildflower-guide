@@ -1,0 +1,22 @@
+sci:Torilis spp.
+x:ca
+
+Note that references to "umbel" below refer to one umbel in the compound umbel inflorescence.
+
+==common hedge parsley:T. arvensis
+color: white
+. plant erect
+. umbel open, not head-like
+. umbel subtended by +- 0--1 bracts
+. common
+
+==knotted hedgeparsley:T. nodosa
+. plant spreading
+. umbel dense, head-like
+
+==upright hedge-parsley:T. japonica
+. plant erect
+. umbel open, not head-like
+. umbel subtended by +- 5--6 bracts (<a href="https://bioone.org/journalArticle/Download?fullDOI=10.1614%2FIPSM-D-14-00028.1">info source</a>)
+. only in/around Tilden
+sci_j: n/a

@@ -1,2 +1,0 @@
-sci:Torilis arvensis
-color: white

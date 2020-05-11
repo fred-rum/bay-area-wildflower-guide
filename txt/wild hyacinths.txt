@@ -15,16 +15,16 @@ sci_j:Dipterostemon capitatus
 . staminodes erect, <b>leaning toward anthers, outward at tip, +- white</b>
 . perianth tube <b>not narrowed</b> above ovary
 . bracts generally dark purple (paler, striped dark purple
-. <b>flowers from February--April</b> (theoretically)
+. <b>flowers from February--May</b>
 . common throughout the bay area
 
 ==ookow:D. congestum
 color: purple
 . perianth blue-purple
-. staminodes erect, <b>leaning away from anthers, +-purple</b>
-. perianth tube <b>narrowed</b> above ovary or +-so
+. staminodes erect, <b>leaning away from anthers, +- purple</b>
+. perianth tube <b>narrowed</b> above ovary or +- so
 . bracts pale purple to green
-. <b>flowers from May--June</b> (from April, really)
+. <b>flowers from May--June</b> [from April, really]
 . scattered throughout the bay area
 
 ==wild hyacinth:D. multiflorum

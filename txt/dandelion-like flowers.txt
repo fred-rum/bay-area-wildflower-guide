@@ -16,10 +16,8 @@ Key features
 . color of inner phyllaries
 . corolla +- red abasially or not
 
-==common dandelion:Taraxacum officinale
-color: yellow
-x:more
-. unforked, hollow stem (the peduncle, really) (breaks easily), always glabrous
+==dandelions:Taraxacum spp.
+. unforked, hollow stem (the peduncle, really) (breaks easily), always glabrous[?]
 . no cauline leaves
 . corolla yellow
 

@@ -1,2 +1,4 @@
 sci:Boykinia occidentalis
 color: white
+x:ba
+. scattered in the Santa Cruz range

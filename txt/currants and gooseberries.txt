@@ -2,8 +2,8 @@ sci:Ribes spp.
 x:rare
 
 Key features:
-. spines on twig nodes or not
-. bristles between nodes on twigs or not
+. spines on branch nodes or not
+. bristles between branch nodes or not (particularly on distal twigs)
 . sepal color, spread angle, and number
 . anther color
 . styles hairy at base or glabrous
@@ -41,6 +41,7 @@ xx:ba
 . white petals
 . green to cream anthers
 . internodes bristly or not
+. fruit glabrous (not bristly)
 
 ==bitter gooseberry:R. amarum
 . purple-red sepals

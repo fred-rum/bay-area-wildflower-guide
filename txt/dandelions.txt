@@ -1,0 +1,23 @@
+sci:Taraxacum spp.
+x:ba
+
+==common dandelion:T. officinale
+color: yellow
+. leaves +- widely lobed, toothed or sharply recurved-lobed; lobes dentate or sharply cut
+. <b>petioles +- narrowly winged</b>
+. outer phyllaries reflexed
+. fruit olive-brown, straw-=colored, or +- gray
+. common
+
+==red-seeded dandelion:T. erythrospermum
+. leaves sharply cut, lobes often +- toothed or with additional lobes
+. <b>petioles slightly winged distally</b>
+. outer phyllaries reflexed
+. fruit +- red-brown or purple
+. extremely rare
+
+==california dandelion:T. californicum
+. leaves toothed or shallowly lobed
+. <b>leaves sessile or petioles widely winged</b>
+. <b>outer phyllaries erect</b>
+. very rare
