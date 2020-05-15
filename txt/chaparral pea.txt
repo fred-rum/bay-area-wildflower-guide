@@ -1,0 +1,5 @@
+sci:Pickeringia montana
+x:any
+color: pink, pale purple
+
+Leaves folded lengthwise, unlike {-Lathyrus}.

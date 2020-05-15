@@ -4,8 +4,8 @@ x:ca
 <b>Warning</b>: "fuller's teasel" is used for either or both teasels depending on the source.
 
 Key features:
-. receptacle bract shape, flexible or not [these are the long spines sprouting from the base]
-. involucre bract shape [these are the short spines throughout the teasel head]
+. receptacle bract shape, flexible or not [these are the short spines throughout the teasel head (<a href="https://www.inaturalist.org/observations/28004394#identification-102852328">info source</a>)]
+. involucre bract shape [these are the long spines sprouting from the base]
 . leaves widely or narrowly fused around stem
 . flower color
 

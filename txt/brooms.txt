@@ -16,7 +16,7 @@ sci:n/a
 ]
 
 [
-<h2>Leafless stems</h2>
+<h2>Mostly leafless stems</h2>
 
 ==spanish broom:Spartium junceum
 x:any

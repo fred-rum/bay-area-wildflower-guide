@@ -315,6 +315,7 @@ var pages=[
 {page:"broad-leaved sweet pea",sci:"Lathyrus latifolius",x:"o"},
 {page:"california pitcher sage",sci:"Lepechinia calycina",x:"o"},
 {page:"Zeltnera",com:"centauries",sci:"Zeltnera spp.",x:"k"},
+{page:"chaparral pea",sci:"Pickeringia montana",x:"o"},
 {page:"Chrysolepis",sci:"Chrysolepis spp.",x:"k"},
 {page:"Clematis",sci:"Clematis spp.",x:"k"},
 {page:"common dandelion",sci:"Taraxacum officinale",x:"o"},

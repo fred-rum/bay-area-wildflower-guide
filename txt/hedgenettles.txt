@@ -40,5 +40,4 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0606+1039
 . corolla tube 18--24 mm
 .. all others are < 15 mm
 . leaf blade 6--18 cm, deltoid to ovate, soft-hairy, densely glandular abaxially
-. corolla deep magent to purple
-
+. <b>corolla deep magenta to purple</b>

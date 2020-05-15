@@ -1,2 +1,4 @@
 sci:Prunella vulgaris
+x:ca
+xx:uncat
 color: purple
