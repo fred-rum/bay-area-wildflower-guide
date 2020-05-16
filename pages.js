@@ -1018,7 +1018,7 @@ var pages=[
 {page:"five angled dodder",sci:"Cuscuta pentagona",x:"u"},
 {page:"fivespot",sci:"Nemophila maculata",x:"u"},
 {page:"flat spurred piperia",sci:"Platanthera transversa",x:"u"},
-{page:"flax-flowered linanthus",sci:"Leptosiphon liniflorus",x:"u"},
+{page:"flax-flowered linanthus",sci:"Leptosiphon liniflorus",x:"o"},
 {page:"flax-leaved horseweed",sci:"Erigeron bonariensis",x:"u"},
 {page:"fleshy lupine",sci:"Lupinus affinis",x:"u"},
 {page:"floating primrose-willow",sci:"Ludwigia peploides",x:"u"},

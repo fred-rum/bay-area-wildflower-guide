@@ -31,7 +31,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0411+0196
 . common
 
 ==flax-flowered linanthus:L. liniflorus
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0413+1873
+color: white, pale purple
 . calyx slightly shorter than corolla tube & throat
 . corolla:
 .. throat yellow
