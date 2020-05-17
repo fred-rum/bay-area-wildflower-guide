@@ -1,0 +1,11 @@
+sci:Logfia spp.
+x:ba
+
+==california cottonrose:L. filaginoides
+. leaf generally awl-shaped, stiff
+. phyllaries generally 5, equal, unlike paleae
+
+==narrowleaf cottonrose:L. gallica
+color: other
+. leaf generally elliptic to obovate or +- linear, flexible
+. phyllaries 0 or 1--4

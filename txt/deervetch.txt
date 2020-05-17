@@ -78,19 +78,20 @@ color: cream, pink
 ==foothill deervetch:A. brachycarpus
 . mat-forming to ascending, 5--40 cm
 . <b>peduncle << 1 cm, bracts 0</b>
+. <b>calyx hairy</b>
 . <b>calyx lobes 1--2 &times; tube</b>
 . flowers generally 1 per leaf axil
-. corolla 5--9 mm, yellow, reddening in age, wings +- = keel
+. corolla 5--9 mm, yellow, reddening in age, wings +- = keel [not distinctive in CalPhotos]
 . scattered
 
 ==chile trefoil:A. wrangelianus
 color: yellow
-<b>Caution: ID uncertain</b>
 . generally prostrate, branched at base, 5--30 cm
 . <b>peduncle << 1 cm, bracts 0</b>
+. <b>calyx strigose</b> [often looks glabrous]
 . <b>calyx lobes +- 0.8--1.2 &times; tube</b>
 . flowers generally 1 per leaf axil
-. corolla 5--9 mm, yellow, reddening in age, wings +- <= keel
+. corolla 5--9 mm, yellow, reddening in age, wings +- <= keel [not distinctive in CalPhotos]
 . very common
 
 ]

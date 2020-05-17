@@ -59,6 +59,7 @@ xx:ba
 
 ==western buttercup:R. occidentalis var. occidentalis
 xx:ba
+color:yellow
 . stem erect to decumbent
 . 5--6 petals, <b>5--10 mm long</b>, 3--6 mm wide, yellow
 . receptacle glabrous
