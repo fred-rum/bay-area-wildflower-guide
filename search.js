@@ -94,15 +94,14 @@ function check(search_str_cmp, match_str, page_info, best_fit_info, pri_adj) {
       pri += 0.1;
     }
 
-    /* Bump the priority by 0.4 if the match begins and ends
-       at word boundaries. */
+    /* Bump the priority by 0.4 if the match begins at a word boundary. */
+    /* I no longer bump the priority if the match ends at a word boundary
+       because that can cause priority to shift when typing the next letter
+       of what the user thinks is the highest priority match. */
     var cmp_pos = cx.indexOf(search_str_cmp);
     var uncmp_start = find_letter_pos(match_str, cmp_pos, 0);
-    var uncmp_end = find_letter_pos(match_str, cmp_pos, search_str_cmp.length);
-    if (((uncmp_start == 0) ||
-         (/^\W/.test(match_str.substring(uncmp_start-1)))) &&
-        ((uncmp_end == match_str.length) ||
-         (/^\W/.test(match_str.substring(uncmp_end))))){
+    if ((uncmp_start == 0) ||
+        (/^\W/.test(match_str.substring(uncmp_start-1)))){
       pri += 0.4;
     }
 
