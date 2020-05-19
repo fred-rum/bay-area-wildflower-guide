@@ -39,6 +39,9 @@ import io
 import yaml
 import codecs
 from unidecode import unidecode
+import datetime
+
+year = datetime.datetime.today().year
 
 class Obs:
     pass
@@ -1338,7 +1341,7 @@ def write_header(w, title, h1, nospace=False, nosearch=False):
         space_class = ' class="nospace"'
     else:
         space_class = ''
-    w.write(f'''<!-- Copyright 2019 Chris Nelson - All rights reserved. -->
+    w.write(f'''<!-- Copyright Chris Nelson - All rights reserved. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1383,9 +1386,12 @@ def write_header(w, title, h1, nospace=False, nosearch=False):
 
 
 def write_footer(w):
-    w.write('''
+    # I don't put the year in the copyright because it's a pain to determine
+    # given the different creation/modification dates of the pages *plus*
+    # the photos on them.  The Berne Convention applies in any case.
+    w.write(f'''
 <hr/>
-<a href="../index.html">BAWG</a> <span class="copyright">&ndash; Copyright 2019 Chris Nelson</span>
+<a href="../index.html">BAWG</a> <span class="copyright">&ndash; &copy; Chris Nelson</span>
 </div>
 <script src="../pages.js"></script>
 <script src="../search.js"></script>
@@ -1591,9 +1597,8 @@ for jpg in sorted(jpg_list):
     if name == '':
         print(f'No name for {jpg}')
     else:
-        if name in name_page:
-            page = name_page[name]
-        else:
+        page = find_page1(name)
+        if not page:
             page = Page(name)
         page.add_jpg(jpg)
 
