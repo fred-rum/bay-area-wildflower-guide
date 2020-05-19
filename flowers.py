@@ -567,6 +567,10 @@ class Page:
                         # the same name, *neither* of them should use the
                         # common name as the page name.  So change the other
                         # page's page name to its scientific name.
+                        #
+                        # Note that we still leave its original name in
+                        # the name_page dictionary so that references to it
+                        # in the text still point correctly.
                         name_page[com].name = name_page[com].sci
                     strip = strip_sci(sci)
                     child_page = Page(strip)
@@ -1303,7 +1307,7 @@ else:
 
 os.mkdir(root + '/html')
 
-name_page = {} # page (base file) name -> page
+name_page = {} # original page name -> page [final file name may vary]
 com_page = {} # common name -> page (or 'multiple' if there are name conflicts)
 sci_page = {} # scientific name -> page
 genus_page_list = {} # genus name -> list of pages in that genus
@@ -1635,7 +1639,11 @@ with open(root + '/observations.csv', mode='r', newline='', encoding='utf-8') as
         # The scientific name is left in its standard case, but a hybrid
         # indicator is removed.
         com = row[com_idx].lower()
-        sci = re.sub(r'× ', r'', sci)
+        # Remove the {multiplication sign} used by hybrids since I can't
+        # (yet) support it cleanly.  Note that I *don't* use the r'' string
+        # format here because I want the \N to be parsed during string parsing,
+        # not during RE parsing.
+        sci = re.sub('\N{MULTIPLICATION SIGN} ', r'', sci)
         taxon_id = row[taxon_idx]
         rg = row[rg_idx]
 
