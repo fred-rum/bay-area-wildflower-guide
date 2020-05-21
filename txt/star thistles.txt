@@ -40,7 +40,6 @@ color: purple, red purple
 ==bachelor's-button:C. cyanus
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0311+0802
 . Edgewood, Long Ridge, Mt. Diablo
-. currently called Cyanus segetum on iNaturalist, but POWO says it should be Centaurea cyanus.
 
 ==spotted knapweed:C. stoebe ssp. micranthos
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1213+0624

@@ -562,8 +562,7 @@ class Page:
                         return '==' + com + suffix
 
                     if (com in name_page and
-                        com not in txt_list and
-                        com not in jpg_list):
+                        com not in txt_list):
                         # The user didn't explicitly say that the previous
                         # user of the common name should name its page that
                         # way.  Since we now know that there are two with

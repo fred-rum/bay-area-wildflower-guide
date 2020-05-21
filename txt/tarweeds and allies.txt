@@ -8,6 +8,7 @@ color: yellow
 x:ba
 . rays 4--10 mm
 . anthers yellow [brush off the pollen to see]
+. phyllaries do not extend partway up petal <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0115+2837">example</a>
 . seeds often have plumes
 . Perhaps the disk diameter is smaller relative to the ray petals when compared to a similar-sized common madia.
 See also {-tarweeds} for more flowers called "madia".
