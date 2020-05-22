@@ -91,7 +91,7 @@ color: red, red purple
 . 1 flower in inflorescence
 . 2 leaflets per leaf
 . corolla 10--15 mm, red
-. inflorescence axis <b>not extended beyond flower</b>
+. inflorescence axis <b>terminates at flower pedicel</b>
 . calyx tube << lobes
 
 ==grass pea:L. sphaericus
@@ -99,7 +99,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1108+1963
 . 1 flower in inflorescence
 . 2 leaflets per leaf
 . corolla 8--14 mm, red
-. inflorescence axis <b>extended as bristle beyond flower</b>
+. inflorescence axis <b>continues as bristle beyond flower pedicel branch point</b>
 . calyx tube &plusmn; &le; lobes
 
 ==angled pea:L. angulatus

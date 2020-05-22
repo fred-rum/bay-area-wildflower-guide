@@ -582,10 +582,6 @@ class Page:
                         # the same name, *neither* of them should use the
                         # common name as the page name.  So change the other
                         # page's page name to its scientific name.
-                        #
-                        # Note that we still leave its original name in
-                        # the name_page dictionary so that references to it
-                        # in the text still point correctly.
                         name_page[com].change_name_to_sci()
                     strip = strip_sci(sci)
                     child_page = Page(strip)
@@ -1683,28 +1679,26 @@ with open(root + '/observations.csv', mode='r', newline='', encoding='utf-8') as
         date = row[date_idx]
         month = int(date.split('-')[1], 10) - 1 # January = month 0
 
+        page = find_page2(com, sci)
+
         if sci in sci_ignore:
-            page = find_page2(com, sci)
             if page:
                 print(f'{sci} is ignored, but there is a page for it ({page.name})')
-        elif sci in sci_page:
-            page = sci_page[sci]
-        elif com in com_page:
-            if com_page[com] == 'multiple':
-                print(f'observation {com} ({sci}) matches multiple common names but no scientific name')
-                page = None
-            else:
-                page = com_page[com]
-                if page.sci and sci != page.sci:
-                    print(f'observation {com} ({sci}) matches the common name for a page, but not its scientific name ({page.sci})')
-                    page = None
-                elif not page.no_sci:
-                    page.set_sci(sci)
-        else:
-            page = None
+
+            # For sci_ignore == '+...', the expectation is that we'll fail
+            # to find a page for, but we'll find a page at a higher level.
+            # But if sci_ignore == '-...', we do nothing with the observation.
+            if sci_ignore[sci][0] != '+':
+                continue
+
+        if not page and com in com_page:
+            print(f'observation {com} ({sci}) matches the common name for a page, but not its scientific name ({page.sci})')
+            continue
 
         if page:
             page.taxon_id = taxon_id
+            if not page.sci:
+                page.set_sci(sci)
 
         # If a page isn't found for the observation, but a page exists for
         # a different member of the genus, print a warning.

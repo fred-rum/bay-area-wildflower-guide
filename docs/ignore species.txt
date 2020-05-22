@@ -5,4 +5,6 @@ from the observations.csv data.
 Use + before the comment to include the observation in the count at the
 higher level.
 
-Use - to exclude it from any counts.
+Use - to exclude it from any counts.  This feature is less useful now that
+I can exclude by area, but it still might be handy, e.g. for cultivated
+flowers.
