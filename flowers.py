@@ -162,6 +162,12 @@ Locations:
         else:
             w.write('<p/>\n')
 
+def is_sci(name):
+    # If there isn't an uppercase letter anywhere, it's a common name.
+    # If there is an uppercase letter somewhere, it's a scientific name.
+    # E.g. "Taraxacum officinale" or "family Asteraceae".
+    return not name.islower()
+
 def strip_sci(sci):
     sci_words = sci.split(' ')
     if (len(sci_words) >= 2 and
@@ -222,10 +228,12 @@ def find_page2(com, sci):
     return None
 
 def find_page1(name):
-    if name.islower():
-        return find_page2(name, None)
-    else:
+    if name in name_page:
+        return name_page[name]
+    elif is_sci(name):
         return find_page2(None, name)
+    else:
+        return find_page2(name, None)
 
 class Page:
     pass
@@ -259,12 +267,10 @@ class Page:
 
         # Give the page a default common or scientific name as appropriate.
         # Either or both names may be modified later.
-        if name.islower():
-            # If there isn't an uppercase letter anywhere, it's a common name.
-            self.set_com(name)
-        else:
-            # If there is an uppercase letter somewhere, it's a scientific name.
+        if is_sci(name):
             self.set_sci(name)
+        else:
+            self.set_com(name)
 
         self.txt = ''
         self.key_txt = ''
@@ -291,7 +297,7 @@ class Page:
     def set_com(self, com):
         self.com = com
         if com in com_page:
-            if com != com_page[com]:
+            if com_page[com] != self:
                 com_page[com] = 'multiple'
         else:
             com_page[com] = self
@@ -525,11 +531,11 @@ class Page:
             if not suffix:
                 suffix = ''
             if not sci:
-                if com.islower():
-                    sci = ''
-                else:
+                if is_sci(com):
                     sci = com
                     com = ''
+                else:
+                    sci = ''
             # ==com[,suffix][:sci] -> creates a child relationship with the
             #   page named by [com] or [sci] and creates two links to it:
             #   an image link and a text link.
@@ -590,7 +596,7 @@ class Page:
             if sci:
                 child_page.set_sci(sci)
 
-            # Replace the {+...} or {...} field with a bare +... line.
+            # Replace the =={...} field with a simplified =={name,suffix} line.
             # This will create the appropriate link later in the parsing.
             return '==' + name + suffix
 
@@ -954,7 +960,7 @@ class Page:
 
             child = find_page1(name)
             if not child:
-                print(f'Broken link to +{name} on page {self.name}')
+                print(f'Broken link to =={name} on page {self.name}')
                 c_list.append(f'=={name}{suffix}\n')
                 c_list.append(text)
                 return
@@ -1501,7 +1507,7 @@ thumb_list = get_file_list('thumbs', 'jpg')
 def get_name_from_jpg(jpg):
     name = re.sub(r',([-0-9]\S*|)$', r'', jpg)
 
-    if not name.islower():
+    if is_sci(name):
         # If the jpg uses an elaborated name, remove the elaborations to
         # form the final page name.
         name = strip_sci(name)
