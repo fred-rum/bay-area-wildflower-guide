@@ -237,10 +237,7 @@ class Page:
     pass
 
     def __init__(self, name):
-        if name in name_page:
-            print(f'Multiple pages created with name "{name}"')
-        self.name = name
-        name_page[name] = self
+        self.set_name(name)
 
         self.index = len(page_array)
         page_array.append(self)
@@ -295,6 +292,16 @@ class Page:
     def url(self):
         return unidecode(self.name)
 
+    def change_name_to_sci(self):
+        del name_page[self.name]
+        self.set_name(self.sci)
+
+    def set_name(self, name):
+        if name in name_page:
+            print(f'Multiple pages created with name "{name}"')
+        self.name = name
+        name_page[name] = self
+
     def set_com(self, com):
         self.com = com
         if com in com_page:
@@ -336,7 +343,6 @@ class Page:
         self.sci = sci
         self.elab = elab
         sci_page[sci] = self
-                    
 
     def set_family(self):
         if self.family or self.no_family: # it's already been set
@@ -580,7 +586,7 @@ class Page:
                         # Note that we still leave its original name in
                         # the name_page dictionary so that references to it
                         # in the text still point correctly.
-                        name_page[com].name = name_page[com].sci
+                        name_page[com].change_name_to_sci()
                     strip = strip_sci(sci)
                     child_page = Page(strip)
                 else:
