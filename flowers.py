@@ -244,6 +244,9 @@ class Page:
         self.name = name
         name_page[name] = self
 
+        self.index = len(page_list)
+        page_list.append(self)
+
         self.com = None # a common name
         self.sci = None # a scientific name stripped of elaborations
         self.elab = None # an elaborated scientific name
@@ -598,7 +601,7 @@ class Page:
 
             # Replace the =={...} field with a simplified =={name,suffix} line.
             # This will create the appropriate link later in the parsing.
-            return '==' + name + suffix
+            return '==' + str(child_page.index) + suffix
 
         # If the page's genus is explicitly specified,
         # make it the default for child abbreviations.
@@ -949,7 +952,7 @@ class Page:
             if child_start == None:
                 return
 
-            name = child_matchobj.group(1)
+            child = page_list[int(child_matchobj.group(1))]
             suffix = child_matchobj.group(2)
             if not suffix:
                 suffix = ''
@@ -957,13 +960,6 @@ class Page:
             text = '\n'.join(c_list[child_start:])
             c_list = c_list[:child_start]
             child_start = None
-
-            child = find_page1(name)
-            if not child:
-                print(f'Broken link to =={name} on page {self.name}')
-                c_list.append(f'=={name}{suffix}\n')
-                c_list.append(text)
-                return
 
             # Give the child a copy of the text from the parent's key.
             # The child can use this (pre-parsed) text if it has no text
@@ -974,6 +970,7 @@ class Page:
 
             link = child.create_link(2)
 
+            name = child.name
             jpg = None
             if suffix:
                 if name + suffix in jpg_list:
@@ -1044,7 +1041,7 @@ class Page:
                 list_depth -= 1
             c = c[list_depth:].strip()
 
-            matchobj = re.match(r'==([^\n]*?)(,[-0-9]\S*|,)?\s*$', c)
+            matchobj = re.match(r'==(\d+)(,[-0-9]\S*|,)?\s*$', c)
             if matchobj:
                 end_paragraph()
                 end_child_text()
@@ -1499,8 +1496,8 @@ def get_file_list(subdir, ext):
                 base_list.append(base)
     return base_list
 
-page_list = get_file_list('txt', 'txt')
-txt_list = page_list[:]
+page_list = [] # array of pages; only appended to; never otherwise altered
+txt_list = get_file_list('txt', 'txt')
 jpg_list = get_file_list('photos', 'jpg')
 thumb_list = get_file_list('thumbs', 'jpg')
 
@@ -1576,11 +1573,11 @@ def repl_easy(matchobj):
     return repl_easy_dict[matchobj.group(1)]
 
 
-# Read the txt for all explicit page files.  Also perform a first pass
-# on all pages to initialize common and scientific names.  This
+# Read the txt for all txt files.  Also perform a first pass on
+# the txt pages to initialize common and scientific names.  This
 # ensures that when we parse children (next), any name can be used and
 # linked correctly.
-for name in page_list:
+for name in txt_list:
     page = Page(name)
     with open(root + "/txt/" + name + ".txt", "r", encoding="utf-8") as r:
         page.txt = r.read()
