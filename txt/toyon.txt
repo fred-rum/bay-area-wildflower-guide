@@ -2,4 +2,4 @@ sci:Heteromeles arbutifolia
 color: other
 x:ca
 
-See also {-cotoneaster}.
+See also {-cotoneasters}.

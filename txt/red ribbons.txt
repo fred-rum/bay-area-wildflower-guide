@@ -15,7 +15,7 @@ color: red purple
 . sepals staying fused only near tip
 . <a href="https://www.calflora.org/entry/dgrid.html?crn=2176">range</a> centered on Santa Clara
 
-==C. concinna ssp. concinna
+==red ribbons:C. concinna ssp. concinna
 color: red purple
 . petals <b>15--30 mm</b> long
 . stigma exserted beyond anthers (maybe)
