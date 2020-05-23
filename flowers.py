@@ -1996,7 +1996,9 @@ with open(search_file, "w", encoding="utf-8") as w:
         name = page.url()
         w.write(f'{{page:"{name}"')
         coms = []
-        if page.com and (page.com != page.name or not page.com.islower()):
+        if page.com and (page.com != page.name or
+                         not page.com.islower() or
+                         page.icom):
             coms.append(unidecode(page.com))
         if page.icom:
             coms.append(page.icom)
