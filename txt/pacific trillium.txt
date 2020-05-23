@@ -1,1 +1,15 @@
-sci:Trillium ovatum ssp. ovatum
+sci:Trillium ovatum
+xx:ca
+color: white, pale purple
+
+See also {-california fetid adderstongue}.
+
+==western trillium:T. ovatum ssp. ovatum
+. petals 1.5--7 cm, 5--45 mm wide
+. flower generally +- erect
+. common
+
+==salmon mountains wakerobin:T. ovatum ssp. oettingeri
+. petals 5--23 mm, 1.8--5.5 mm wide
+. flower +- nodding
+. not present in the bay area

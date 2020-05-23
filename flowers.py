@@ -1682,7 +1682,9 @@ with open(root + '/observations.csv', mode='r', newline='', encoding='utf-8') as
         page = find_page2(com, sci)
 
         if sci in sci_ignore:
-            if page:
+            if sci_ignore[sci][0] == '+':
+                page = None
+            elif page:
                 print(f'{sci} is ignored, but there is a page for it ({page.name})')
 
             # For sci_ignore == '+...', the expectation is that we'll fail
@@ -1690,15 +1692,19 @@ with open(root + '/observations.csv', mode='r', newline='', encoding='utf-8') as
             # But if sci_ignore == '-...', we do nothing with the observation.
             if sci_ignore[sci][0] != '+':
                 continue
-
-        if not page and com in com_page:
-            print(f'observation {com} ({sci}) matches the common name for a page, but not its scientific name ({page.sci})')
+        elif not page and com in com_page:
+            print(f'observation {com} ({sci}) matches the common name for a page, but not its scientific name')
             continue
 
         if page:
             page.taxon_id = taxon_id
             if not page.sci:
                 page.set_sci(sci)
+            if com and page.com:
+                i_com_shrink = re.sub(r'\W', '', com)
+                p_com_shrink = re.sub(r'\W', '', page.com.lower())
+                if i_com_shrink != p_com_shrink:
+                    print(f"iNaturalist's common name {com} differs from mine: {page.com} ({page.sci})")
 
         # If a page isn't found for the observation, but a page exists for
         # a different member of the genus, print a warning.
