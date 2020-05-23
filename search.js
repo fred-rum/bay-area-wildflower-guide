@@ -105,8 +105,9 @@ function check(search_str_cmp, match_str, page_info, best_fit_info, pri_adj) {
       pri += 0.4;
     }
 
-    if (best_fit_info.pri < pri + pri_adj) {
-      best_fit_info.pri = pri + pri_adj;
+    pri += pri_adj
+    if (best_fit_info.pri < pri) {
+      best_fit_info.pri = pri;
       best_fit_info.page_info = page_info;
     }
   }
@@ -176,6 +177,18 @@ function bold(search_str_cmp, name) {
   return highlighted_name;
 }
 
+function bolda(search_str_cmp, name_list) {
+  for (var i = 0; i < name_list.length; i++) {
+    var b = bold(search_str_cmp, name_list[i])
+    if (b != name_list[i]) {
+      /* bolding has happened */
+      return b
+    }
+  }
+
+  return name_list[0]
+}
+
 /* Update the autocomplete list.
    If 'enter' is true, then navigate to the top autocompletion's page. */
 function fn_search(enter) {
@@ -197,7 +210,9 @@ function fn_search(enter) {
 
     check(search_str_cmp, page_info.page, page_info, best_fit_info, 0.5)
     if ('com' in page_info) {
-      check(search_str_cmp, page_info.com, page_info, best_fit_info, 0.0)
+      for (var j = 0; j < page_info.com.length; j++) {
+        check(search_str_cmp, page_info.com[j], page_info, best_fit_info, 0.0)
+      }
     }
     if ('sci' in page_info) {
       check_elab(search_str_cmp, page_info.sci, page_info, best_fit_info)
@@ -239,7 +254,7 @@ function fn_search(enter) {
       if ('com' in page_info) {
         var com = page_info.com;
       } else {
-        var com = page_info.page;
+        var com = [page_info.page];
       }
       if (('sci' in page_info) ||
           startsUpper(page_info.page)) {
@@ -270,14 +285,14 @@ function fn_search(enter) {
         }
         if ('com' in page_info ||
             (('sci' in page_info) &&
-             (page_info.sci != com) &&
-             !startsUpper(com))) {
-          var full = bold(search_str_cmp, com) + ' (' + elab_bold_ital + ')';
+             (page_info.sci != com[0]) &&
+             !startsUpper(com[0]))) {
+          var full = bolda(search_str_cmp, com) + ' (' + elab_bold_ital + ')';
         } else {
           var full = elab_bold_ital;
         }
       } else {
-        var full = bold(search_str_cmp, com)
+        var full = bolda(search_str_cmp, com)
       }
       full = full.replace(/'/g, '&rsquo;')
       var entry = ('<p class="nogap"><a class="enclosed ' + c + '" href="' +
