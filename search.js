@@ -129,6 +129,10 @@ function startsUpper(name) {
   return (name.search(/^[A-Z]/) >= 0);
 }
 
+function hasUpper(name) {
+  return (name.search(/[A-Z]/) >= 0);
+}
+
 function bold(search_str_cmp, name) {
   var has_ssp = false;
   var test_name = name;
@@ -329,6 +333,23 @@ function fn_keyup() {
   }
 }
 
+/* normalize the data in the pages array. */
+for (var i = 0; i < pages.length; i++) {
+  var page_info = pages[i]
+  if (!'com' in page_info) {
+    if (!hasUpper(page_info)) {
+      page_info.com = [page_info.name]
+    } else {
+      page_info.com = []
+    }
+  }
+  if (!'sci' in page_info) {
+    if (hasUpper(page_info)) {
+      page_info.sci = page_info.name
+    }
+  }
+}
+
 /* Determine whether to add 'html/' to the URL when navigating to a page. */
 if (window.location.pathname.includes('/html/')) {
   var path = '';
@@ -353,6 +374,7 @@ e_body.addEventListener('mousedown', fn_focusout);
 var e_autocomplete_box = document.getElementById('autocomplete-box');
 
 /*****************************************************************************/
+/* non-search functions also used by the BAWG HTML */
 
 function fn_details(e) {
   if (e.textContent == '[show details]') {
