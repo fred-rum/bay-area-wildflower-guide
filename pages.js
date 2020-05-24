@@ -181,7 +181,7 @@ var pages=[
 {page:"plumeless thistles",sci:"Carduus spp.",x:"k"},
 {page:"poison hemlock",sci:"Conium maculatum",x:"o"},
 {page:"purple chinese houses",sci:"Collinsia heterophylla",x:"k"},
-{page:"salsify",sci:"Tragopogon porrifolius",x:"o"},
+{page:"purple salsify",com:["purple salsify","salsify"],sci:"Tragopogon porrifolius",x:"o"},
 {page:"yellow starthistle",sci:"Centaurea solstitialis",x:"o"},
 {page:"arroyo lupine",sci:"Lupinus succulentus",x:"o"},
 {page:"false solomon's seals",sci:"Maianthemum spp.",x:"k"},

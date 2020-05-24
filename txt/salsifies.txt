@@ -1,7 +1,7 @@
 sci:Tragopogon spp.
 x:ba
 
-==salsify:T. porrifolius
+==purple salsify:T. porrifolius
 color: purple
 . rays purple
 . 5--11 phyllaries, >= flowers when fully bloomed
