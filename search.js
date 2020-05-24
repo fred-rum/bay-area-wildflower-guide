@@ -255,18 +255,8 @@ function fn_search(enter) {
       } else {
         var c = 'unobs';
       }
-      if ('com' in page_info) {
-        var com = page_info.com;
-      } else {
-        var com = [page_info.page];
-      }
-      if (('sci' in page_info) ||
-          startsUpper(page_info.page)) {
-        if ('sci' in page_info) {
-          var elab = page_info.sci;
-        } else {
-          var elab = page_info.page;
-        }
+      if ('sci' in page_info) {
+        var elab = page_info.sci;
         var elab_bold = bold(search_str_cmp, elab);
         if (startsUpper(elab)) {
           var elab_bold_ital = '<i>' + elab_bold + '</i>';
@@ -287,15 +277,14 @@ function fn_search(enter) {
           var elab_bold_ital = (elab_bold.substring(0, space_pos) + ' <i>' +
                                 elab_bold.substring(space_pos+1) + '</i>');
         }
-        if ('com' in page_info ||
-            (('sci' in page_info) &&
-             (page_info.sci != com[0]) &&
-             !startsUpper(com[0]))) {
+        if ('com' in page_info) {
+          var com = page_info.com
           var full = bolda(search_str_cmp, com) + ' (' + elab_bold_ital + ')';
         } else {
           var full = elab_bold_ital;
         }
       } else {
+        var com = page_info.com
         var full = bolda(search_str_cmp, com)
       }
       full = full.replace(/'/g, '&rsquo;')
@@ -336,16 +325,14 @@ function fn_keyup() {
 /* normalize the data in the pages array. */
 for (var i = 0; i < pages.length; i++) {
   var page_info = pages[i]
-  if (!'com' in page_info) {
-    if (!hasUpper(page_info)) {
-      page_info.com = [page_info.name]
-    } else {
-      page_info.com = []
+  if (!('com' in page_info)) {
+    if (!hasUpper(page_info.page)) {
+      page_info.com = [page_info.page]
     }
   }
-  if (!'sci' in page_info) {
-    if (hasUpper(page_info)) {
-      page_info.sci = page_info.name
+  if (!('sci' in page_info)) {
+    if (hasUpper(page_info.page)) {
+      page_info.sci = page_info.page
     }
   }
 }
