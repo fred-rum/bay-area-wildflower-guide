@@ -1628,6 +1628,18 @@ with open(root + '/ignore species.yaml', encoding='utf-8') as f:
 # error message for these once all the observations are read.
 surprise_obs = set()
 
+# Remove characters that are allowed to be different between names
+# while the names are still considered identical.
+# This is mostly non-alphabetic characters, but also plural endings.
+def shrink(name):
+    name = name.lower()
+    name = re.sub(r'\W', '', name)
+    name = re.sub(r's$', '', name)
+    name = re.sub(r'(s|x|ch|sh)es$', r'$1', name)
+    name = re.sub(r'zzes$', 'z', name)
+    name = re.sub(r'ies$', 'y', name)
+    return name
+
 # Read my observations file (exported from iNaturalist) and use it as follows:
 #   Associate common names with scientific names
 #   Get a count of observations (total and research grade) of each flower.
@@ -1713,8 +1725,8 @@ with open(root + '/observations.csv', mode='r', newline='', encoding='utf-8') as
             if not page.sci:
                 page.set_sci(sci)
             if com and page.com:
-                i_com_shrink = re.sub(r'\W', '', com)
-                p_com_shrink = re.sub(r'\W', '', page.com.lower())
+                i_com_shrink = shrink(com)
+                p_com_shrink = shrink(page.com)
                 if i_com_shrink != p_com_shrink and com != page.icom:
                     page.icom = com
                     #print(f"iNaturalist's common name {com} differs from mine: {page.com} ({page.elab})")

@@ -130,7 +130,7 @@ var pages=[
 {page:"ferns",x:"k"},
 {page:"manzanitas",com:["manzanitas","bearberries and manzanitas"],sci:"Arctostaphylos spp.",x:"k"},
 {page:"pink honeysuckle",sci:"Lonicera hispidula",x:"o"},
-{page:"sanicles",com:["sanicles","sanicle"],sci:"Sanicula spp.",x:"k"},
+{page:"sanicles",sci:"Sanicula spp.",x:"k"},
 {page:"tomcat clover",sci:"Trifolium willdenovii",x:"o"},
 {page:"woolly sunflowers",sci:"Eriophyllum spp.",x:"k"},
 {page:"Leptosiphon",com:["baby stars, linanthus, and leptosiphons"],sci:"Leptosiphon spp.",x:"k"},
