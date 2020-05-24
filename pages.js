@@ -29,7 +29,7 @@ var pages=[
 {page:"Montiaceae",com:["pussypaw family"],sci:"family Montiaceae",x:"f"},
 {page:"wild hyacinths",sci:"Dichelostemma spp.",x:"k"},
 {page:"Diplacus",sci:"Diplacus spp.",x:"k"},
-{page:"orange bush monkeyflower",sci:"Diplacus aurantiacus",x:"o"},
+{page:"sticky monkeyflower",com:["sticky monkeyflower","orange bush monkeyflower"],sci:"Diplacus aurantiacus",x:"o"},
 {page:"loosestrifes",sci:"Lysimachia spp.",x:"k"},
 {page:"clarkia",sci:"Clarkia spp.",x:"k"},
 {page:"Caprifoliaceae",com:["honeysuckle family"],sci:"family Caprifoliaceae",x:"f"},
