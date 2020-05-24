@@ -1634,10 +1634,10 @@ surprise_obs = set()
 def shrink(name):
     name = name.lower()
     name = re.sub(r'\W', '', name)
-    name = re.sub(r's$', '', name)
     name = re.sub(r'(s|x|ch|sh)es$', r'$1', name)
     name = re.sub(r'zzes$', 'z', name)
     name = re.sub(r'ies$', 'y', name)
+    name = re.sub(r's$', '', name)
     return name
 
 # Read my observations file (exported from iNaturalist) and use it as follows:
