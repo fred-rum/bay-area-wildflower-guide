@@ -52,6 +52,7 @@ color: yellow
 . uncommon
 
 ==rayless ragwort:S. aronicoides
+color:yellow
 . 40--75 disk flowers
 . 0--2 ray flowers, 4--7 mm
 . involucre bell-shaped

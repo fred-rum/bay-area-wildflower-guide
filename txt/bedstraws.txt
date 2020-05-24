@@ -1,6 +1,8 @@
 sci:Galium spp.
 x:hist/rare
 
+See also {-field madder}.
+
 Key features:
 . number of petals per flower
 . number of leafs per whorl, leaf length
