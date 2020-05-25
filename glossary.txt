@@ -122,3 +122,4 @@
 {ultimate} The smallest divisions of a compound/dissected leaf or the final segments of a branching stem.
 {umbel,umbels} An inflorescence in which 3+ flower pedicels branch from a common point.
 {waif,waifs} A plant that has spread with human assistance but cannot reproduce or spread further on its own; will eventually die out assuming no further assistance.
+{whorl,whorls,whorled} A cluster of 3 or more (e.g. flowers) with each whorl generally surrounding an axis and multiple whorls interspersed along the axis.

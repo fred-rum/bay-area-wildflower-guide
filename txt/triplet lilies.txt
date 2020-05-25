@@ -13,6 +13,9 @@ color: purple
 . purple perianth
 . stamens attached alternately at 2 levels, +- equal
 
+[
+<h3>yellow</h3>
+
 ==prettyface:T. ixioides
 . yellow perianth
 . stamens attached at 1 level, unequal
@@ -25,6 +28,10 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0109+1638
 . stamens attached at 1 level, unequal
 . tips of longer filaments rounded, without appendages
 . range is outside the bay area, includes <b>Pinnacles NP</b>
+
+]
+[
+<h3>white</h3>
 
 ==white brodiaea:T. hyacinthina
 color: white
@@ -39,3 +46,5 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0509+0498
 . stamens attached alternately at 2 levels, unequal
 . <b>pedicels 2--18 cm
 . perianth 15--28 mm, tube 7--11 mm, acute at base</b>, lobes 10--16 mm [midvein color not mentioned, but CalPhotos shows some with blue, green, or white]
+
+]

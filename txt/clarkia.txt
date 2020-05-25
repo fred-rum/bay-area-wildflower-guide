@@ -7,6 +7,7 @@ Key features:
 . all 4 sepals staying fused or not
 . ovary 4-grooved or 8-grooved
 
+[
 <h3>Unique corolla shapes</h3>
 [
 ==elegant clarkia:C. unguiculata
@@ -23,7 +24,6 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=8076+3101+0669+0058
 . sepals all coming free [sometimes reflexed, sometimes spreading]
 . <b>petals 6--12 mm, generally spotted; petal claw broad, 2-lobed</b>
 . found at Sierra Azul
-
 ]
 
 ==red ribbons:C. concinna
@@ -32,7 +32,8 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=8076+3101+0669+0058
 ==fairy fans:C. breweri
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1210+0994
 . Henry Coe, Sierra Azul and vicinity
-
+]
+[
 <h3>Standard corolla shapes, buds erect or reflexed</h3>
 
 ==winecup clarkia:C. purpurea
@@ -75,7 +76,8 @@ color: red purple
 . all 4 sepals staying fused
 . ovary and immature fruit <b>8-grooved</b>
 . scattered around the east bay; only historically on the peninsula
-
+]
+[
 <h3>Standard corolla shapes, buds pendent</h3>
 
 ==slender clarkia:C. gracilis
@@ -105,3 +107,4 @@ color: red purple
 . petals 2-lobed, lavender to bright pink or magenta, often red-flecked
 . anthers in 2 unlike series, inner smaller, paler
 . Mt. Diablo
+]
