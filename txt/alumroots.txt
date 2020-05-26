@@ -1,0 +1,13 @@
+sci:Heuchera spp.
+x:hist
+
+==crevice alumroot:H. micrantha
+color: white, other
+. hypanthium + calyx 1.5--3 mm
+. leaf blade 2--10 cm wide
+. common
+
+==island alumroot:H. maxima
+. hypanthium + calyx 3.5--4.5 mm
+. leaf blade 6--18 cm wide
+. extremely rare at Coal Creek

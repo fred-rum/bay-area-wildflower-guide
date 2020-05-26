@@ -107,3 +107,14 @@ format on the remainder of the text line.  Use increasing header
 numbers based on the bracket depth.  Line breaks remain <br/>.
 Recognize this and continue the header, or require that the line be
 run together with <br/> in the middle?
+
+Convert single & double quotation marks to curly quotes.
+Including in titles, etc.
+But not in URLs (or otherwise inside tags).
+Can this borrow logic from the glossary?
+
+Parts of a pea flower:
+https://en.wikipedia.org/wiki/Papilionaceous_flower#/media/File:Sesbanea_bispinosa,_crop.jpg
+
+The banner is a single petal, but a crease along its midline may give
+the appearance of two petals fused at the edge.
