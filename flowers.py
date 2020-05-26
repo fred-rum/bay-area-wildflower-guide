@@ -1425,18 +1425,40 @@ def link_glossary_words(txt, is_glossary=False):
         allowed = re.sub(glossary_regex, repl_glossary, allowed)
         return allowed + disallowed
 
+    # Find non-tagged text followed (optionally) by tagged text.
+    # We'll perform glossary link insertion only on the non-tagged text.
+    #
+    # The first group (for non-tagged text) is non-greedy, but still starts
+    # as soon as possible (i.e. at the beginning of the string or just after
+    # the previous match).
+    #
+    # The second group (for tagged text) is also non-greedy, looking for the
+    # shortest amount of text to close the link.  The second group either
+    # starts with an opening tag and ends with a closing tag, or it matches
+    # the end of the string (after matching the final non-tagged text).
+    #
+    # Tagged text is anything between link tags, <a>...</a>.
+    # It also includes the URL in <a href="...">.  Anything between braces
+    # {...} is also captured here.
+    #
+    # Within the glossary, tagged text also includes anything between
+    # header tags, <h#>...</h#>.  Linking a header tag to the glossary is
+    # fine in regular pages where the word may be unknown, but it looks
+    # weird in the glossary where the word is defined right there.
     if is_glossary:
+        # Don't replace any text between link tags <a>...</a>
+        # (including the URL in <a href="...">) or between header tags
+        # <h#>...</h#>.  Linking a header tag to the glossary is fine
+        # in regular pages where the word may be unknown, but it looks
+        # weird in the glossary where the word is defined right there.
         sub_re = r'(.*?)(\Z|<(?:a\s|h\d).*?</(?:a|h\d)>|{.*?})'
     else:
+        # Don't replace any text between link tags <a>...</a>
+        # (including the URL in <a href="...">).
         sub_re = r'(.*?)(\Z|<a\s.*?</a>|{.*?})'
 
-    # find non-tagged text followed (optionally) by tagged text and
-    # perform substitutions only on the non-tagged parts.
-    # Tags for this purpose includes <a> and <h#>.
-    # The first group is non-greedy, but still starts as soon as possible
-    # (i.e. at the beginning of the string or just after the previous match).
-    # The second part is also non-greedy, looking for the shortest amount
-    # of text to close the link.
+    # Perform on the glossary link substitution for each non-tag/tag
+    # pair throughout the entire text.
     txt = re.sub(sub_re, repl_sub_glossary, txt,
                  flags=re.DOTALL)
     return txt
