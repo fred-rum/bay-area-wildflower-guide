@@ -61,7 +61,7 @@
 {annual,annuals} Lives for one year or less, generally without forming any woody parts.
 {basal} Positioned at the base.  Most commonly refers to leaves growing at the base of the stem.  Contrast cauline.
 {biennial,biennials} Lives for only two years, generally flowering only in the second year.  Non-woody.
-{bract,bracts} Small leaf-like structures (or analogue) at the base of an inflorescence.  May be fused together or not.
+{bract,bracts,bracted} Small leaf-like structures (or analogue) at the base of an inflorescence.  May be fused together or not.
 {canescent} Densely covered with fine silvery white hairs.
 {caudex,caudexes,caudices} Short stem below ground level.
 {cauline} Growing along a plant's stem.  Most commonly refers to leaves.  Contrast basal.
