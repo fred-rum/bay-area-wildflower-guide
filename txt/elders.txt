@@ -1,6 +1,8 @@
 sci:Sambucus spp.
 x:ca
 
+There is a general difference between the leaves (blue elder is bowed), but it is not consistent enough to be used for identification.
+
 ==blue elder,2:S. cerulea
 sci_fpj:Sambucus nigra ssp. caerulea
 color: white, cream, yellow
