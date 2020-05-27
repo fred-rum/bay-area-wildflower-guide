@@ -1103,12 +1103,18 @@ class Page:
                 print(f'Broken link {{-{name}}} on page {self.name}')
                 return '{-' + name + '}'
 
+        # Use the text supplied in the text file if present.
+        # Otherwise use the key text from its parent.
+        # If the page's text file contains only metadata (e.g.
+        # scientific name or color) so that the remaining text is
+        # blank, then use the key text from its parent in that case, too.
         if re.search('\S', self.txt):
             s = self.txt
         else:
             s = self.key_txt
-        s = link_glossary_words(s)
+
         s = re.sub(r'{-([^}]+)}', repl_link, s)
+        s = link_glossary_words(s)
         self.txt = s
 
     def any_parent_within_level(self, within_level_list):
