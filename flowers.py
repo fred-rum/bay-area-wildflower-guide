@@ -299,7 +299,7 @@ class Page:
         self.parks = {} # a dictionary of park_name : count
         self.month = [0] * 12
 
-        self.glossary_list = None
+        self.glossary = None
 
     def url(self):
         return unidecode(self.name)
@@ -938,29 +938,32 @@ class Page:
         for child in self.child:
             child.cross_out_children(page_list)
 
-    def set_glossary_list(self, glossary_list):
-        if self.glossary_list:
-            # We seem to be setting the glossary list via two different
-            # tree paths.  Make sure that the immediate parent glossary is
-            # the same in both (which implies that the rest of the list
-            # is the same as well).
-            if glossary_list[0] != self.glossary_list[0]:
-                print(f'{self.name} has two different glossaries')
+    def set_glossary(self, glossary):
+        if self.glossary:
+            # We seem to be setting the glossary via two different
+            # tree paths.  Make sure that the parent taxon's glossary
+            # is the same on both paths.
+            if self.name in glossary_taxon_dict:
+                if glossary != self.glossary.glossary_parent:
+                    print(f'{self.name} has two different parent glossaries')
+            else:
+                if glossary != self.glossary:
+                    print(f'{self.name} gets two different glossaries')
 
             # No need to continue the tree traversal through this node
-            # since it and its children have already set the glossary list.
+            # since it and its children have already set the glossary.
             return
 
-        if self.name in glossary_dict:
+        if self.name in glossary_taxon_dict:
             # Append the parent glossary list to the taxon's assigned
             # glossary list.
-            glossary = glossary_dict[self.name]
-            self.glossary_list = [glossary] + glossary_list
+            self.glossary = glossary_taxon_dict[self.name]
+            self.glossary.parent_glossary = glossary
         else:
-            self.glossary_list = glossary_list
+            self.glossary = glossary
 
         for child in self.child:
-            child.set_glossary_list(self.glossary_list)
+            child.set_glossary(self.glossary)
 
     def parse(self):
         s = self.txt
@@ -1142,8 +1145,7 @@ class Page:
             s = self.key_txt
 
         s = re.sub(r'{-([^}]+)}', repl_link, s)
-        for glossary in self.glossary_list:
-            s = glossary.link_glossary_words(s)
+        s = self.glossary.link_glossary_words(s)
         self.txt = s
 
     def any_parent_within_level(self, within_level_list):
@@ -1459,6 +1461,7 @@ class Glossary:
         self.name = name
         self.title = None
         self.taxon = None
+        self.parent_glossary = None
 
     def link_glossary_words(self, txt, is_glossary=False):
         # This function is called for a glossary word match.
@@ -1512,18 +1515,15 @@ class Glossary:
         # pair throughout the entire multi-line txt string.
         txt = re.sub(sub_re, repl_sub_glossary, txt,
                      flags=re.DOTALL)
+
+        # Also perform link substitution for the parent glossary (and
+        # its parent, etc.)
+        if self.parent_glossary:
+            txt = self.parent_glossary.link_glossary_words(txt, is_glossary)
+
         return txt
 
     def read_terms(self):
-        def repl_defns(matchobj):
-            words = matchobj.group(1)
-            defn = matchobj.group(2)
-
-            word_list = [x.strip() for x in words.split(',')]
-            primary_word = word_list[0]
-
-            return f'<div class="defn" id="{primary_word}"><dt>{primary_word}</dt><dd>{defn}</dd></div>'
-
         def repl_title(matchobj):
             self.title = matchobj.group(1)
             return ''
@@ -1543,7 +1543,7 @@ class Glossary:
 
         # self.taxon is now either a name or (if unset) None.
         # Either value is appropriate for the glossary_dict key.
-        glossary_dict[self.taxon] = self
+        glossary_taxon_dict[self.taxon] = self
 
         if not self.title:
             print(f'title not defind for glossary "{self.name}"')
@@ -1565,12 +1565,21 @@ class Glossary:
         ex='|'.join(map(re.escape, glossary_list))
         self.glossary_regex = re.compile(rf'\b({ex})\b', re.IGNORECASE)
 
+    def write_html(self):
+        def repl_defns(matchobj):
+            words = matchobj.group(1)
+            defn = matchobj.group(2)
+
+            word_list = [x.strip() for x in words.split(',')]
+            primary_word = word_list[0]
+
+            return f'<div class="defn" id="{primary_word}"><dt>{primary_word}</dt><dd>{defn}</dd></div>'
+
         self.txt = self.link_glossary_words(self.txt, is_glossary=True)
 
         self.txt = re.sub(r'^{([^\}]+)}\s+(.*)$',
                           repl_defns, self.txt, flags=re.MULTILINE)
 
-    def write_html(self):
         with open(f'{root}/html/{self.name}.html', mode='w') as w:
               write_header(w, self.title, self.title, nosearch=False)
               w.write(self.txt)
@@ -1976,14 +1985,20 @@ for family in family_child_set:
 # now that we've added pages for families.
 top_list = [x for x in page_array if not x.parent]
 
-glossary_dict = {}
+glossary_taxon_dict = {}
 for glossary_file in glossary_list:
     glossary = Glossary(glossary_file)
     glossary.read_terms()
-    glossary.write_html()
 
+# Determine the primary glossary to use for each page *and*
+# determine the hierarchy among glossaries.
 for page in top_list:
-    page.set_glossary_list([glossary_dict[None]])
+    page.set_glossary(glossary_taxon_dict[None])
+
+# Now that we know the glossary hierarchy, we can apply glossary links
+# within each glossary and finally write out the HTML.
+for glossary in glossary_taxon_dict.values():
+    glossary.write_html()
 
 # Turn txt into html for all normal and default pages.
 for page in page_array:
