@@ -1,3 +1,5 @@
+title:master glossary
+
 <h2>Parts of a flower</h2>
 
 <p>The major parts of a flower are the pedicel, perianth, stamens, and pistils.  Any of these parts may be missing or vanishingly small for a particular species or individual flower.</p>

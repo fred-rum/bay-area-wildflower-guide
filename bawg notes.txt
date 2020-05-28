@@ -123,32 +123,17 @@ Allow multiple glossaries to be built with a hierarchy that mirrors
 the flower hieararchy.  E.g. lupines could have a glossary which is
 under the legumes glossary which is under the master glossary.
 
-The concept is made complicated because a page can have more than one
-parent.  For a reasonable glossary hierarchy this should never matter,
-so for now just throw an error if a page finds different glossaries in
-its parent chains.
-
-All glossaries are placed in the "glossaries" directory.  Each can
-have any *.txt name.  The associated taxon is declared in the glossary
-with "taxon:..." (common name or scientific name).  Note that the
-taxon page does not itself declare the glossary, although it can
-include a manual link to the glossary if desired.
-
-The top-level glossary doesn't have a "taxon:..." declaration.  Any
-collisions of glossaries should be an error.
-
-When linking glossary words on a taxon page, it links preferentially
-to the nearest ancestor glossary that includes the word.  However, it
-can link to a higher-level glossary if the nearest glossary doesn't
-include the term.  This is also true when linking within a glossary.
-
-Is there any need to link shared terms from one glossary to a
-higher-level glossary?  Possibly not.  However, terms that are not
-defined within a glossary should link to a higher-level glossary as
-appropriate.
-
 The main glossary should include manual links to lower-level
 glossaries, and vice versa.
 
-Each glossary should be an object in order to keep track of its
-associated data, including its parent.
+A glossary should have links to a higher-level glossary where they are
+defined if they aren't defined in the current glossary.
+
+I need a doc for glossary.txt
+
+When setting glossaries for the taxon hierarchy, only set the local
+glossary in each taxon's page, but set the glossary's parent in the
+glossary class.  When calling link_glossary_words() for a glossary, it
+also calls link_glossary_words() on its parent glossary, etc.
+Obviously, a glossary should call link_glossary_words() on itself
+after the glossary hierarchy is determined.
