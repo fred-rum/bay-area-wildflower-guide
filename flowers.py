@@ -1476,6 +1476,18 @@ class Glossary:
         def repl_sub_glossary(matchobj):
             allowed = matchobj.group(1)
             disallowed = matchobj.group(2)
+            if not self.parent_glossary:
+                # If we're at the last step of glossary substitution,
+                # also substitute in smart quotes.
+                # Note that glossary substitution introduces more tags
+                # that we don't want to screw up, so we do substitute
+                # smart quotes in the allowed section *before* substituting
+                # glossary links.  (If a glossary term every includes a
+                # quotation mark, I'll have to rethink this.)
+                allowed = re.sub(r"(\W)'", '\g<1>&lsquo;', allowed)
+                allowed = re.sub(r'(\W)"', '\g<1>&ldquo;', allowed)
+                allowed = re.sub(r"'", '&rsquo;', allowed)
+                allowed = re.sub(r'"', '&rdquo;', allowed)
             allowed = re.sub(self.glossary_regex, repl_glossary, allowed)
             return allowed + disallowed
 
@@ -1502,14 +1514,16 @@ class Glossary:
         if is_glossary:
             # Don't replace any text between link tags <a>...</a>
             # (including the URL in <a href="...">) or between header tags
-            # <h#>...</h#>.  Linking a header tag to the glossary is fine
-            # in regular pages where the word may be unknown, but it looks
-            # weird in the glossary where the word is defined right there.
-            sub_re = r'(.*?)(\Z|<(?:a\s|h\d).*?</(?:a|h\d)>|{.*?})'
+            # <h#>...</h#> or within a tag <...> or special syntax {...}. 
+            # Linking a header tag to the glossary is fine in regular pages
+            # where the word may be unknown, but it looks weird in the
+            # glossary where the word is defined right there.
+            sub_re = r'(.*?)(\Z|<(?:a\s|h\d).*?</(?:a|h\d)>|<\w.*?>|{.*?})'
         else:
             # Don't replace any text between link tags <a>...</a>
-            # (including the URL in <a href="...">).
-            sub_re = r'(.*?)(\Z|<a\s.*?</a>|{.*?})'
+            # (including the URL in <a href="...">) or within a tag <...>
+            # or special syntax {...}.
+            sub_re = r'(.*?)(\Z|<a\s.*?</a>|<\w.*?>|{.*?})'
 
         # Perform on the glossary link substitution for each non-tag/tag
         # pair throughout the entire multi-line txt string.

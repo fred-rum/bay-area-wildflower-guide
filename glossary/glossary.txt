@@ -69,7 +69,7 @@ title:master glossary
 {cauline} Growing along a plant's stem.  Most commonly refers to leaves.  Contrast basal.
 {cleistogamous} Self-pollinating without opening.  Generally looks bud-like.
 {compound} Generally, composed of multiple parts.  Opposite of simple.<ul><li>Leaf: divided into distinct leaflets connected by an axis but no blade material.</li><li>Umbel: an umbel of umbels</li></ul>
-{cordate} Shaped like a heart (with tip outward, lobes at the base).
+{cordate} Shaped like a heart in a deck of cards (with tip outward, lobes at the base).
 {crenate,crenately,scalloped} With shallow, rounded teeth and usually with acute sinuses.  Could also be called "scalloped".
 {decurrent} The leaf blade extends onto the stem as a short wing.
 {deltate} Shaped like the Greek letter &Delta;; an equilateral triangle with corners rounded or not; attached at base.
