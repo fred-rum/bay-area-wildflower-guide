@@ -1,0 +1,40 @@
+Glossary files are named *.txt in the glossary directory.
+
+Like the other txt files, a glossary file is standard HTML with some
+extra syntax for easy programming.  As usual, the program creates a
+standard header and footer for each page and includes the HTML text
+between them.
+
+In addition to the standard HTML, the following text cases are handled
+specially.  Each case must be on a line by itself.
+
+--
+Meta-data:
+
+title:[name] specifies the HTML title and <h1> header for the glossary
+page.
+
+taxon:[name] specifies the taxon for which the glossary is applied
+(and all of that taxon's descendents).  If the taxon isn't specified,
+the glossary is applied to all pages.
+
+When linking to a glossary word, the link is preferentially created to
+the lowest-level glossary that applies, but all glossaries in the
+taxonomic hierarchy are considered.
+
+--
+Word definitions:
+
+{[primary],[additional],[...]} [definition]
+
+This defines the primary word.  The primary word is the one that is
+presented in the HTML, but all additional words also trigger links to
+the primary word in the glossary.  Additional words typically include
+plural or adjective forms of the primary word.  Links are only created
+for whole-word matches, but phrases can also be used for a multi-word
+match and link.  If multiple matches are possible (e.g. "bell-shaped"
+or just "bell"), the longest match is made.
+
+It's an abuse of HTML's dictionary capability, but word definitions
+can be interleaved with other HTML features such as headings and
+normal paragraph text.

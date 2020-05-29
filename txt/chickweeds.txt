@@ -18,7 +18,7 @@ x:rare
 ==shining chickweed:S. nitens
 . <b>leaves crowded near base</b>
 . no internode hairs or scattered
-. petals < &frac12; sepal length
+. petals < 50% sepal length
 . rare
 
 Rare species outside of my hiking areas are perennial herbs or have sepals > 5 mm.
