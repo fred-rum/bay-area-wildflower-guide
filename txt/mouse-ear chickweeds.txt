@@ -1,0 +1,22 @@
+sci:Cerastium spp.
+x:hist
+
+Petals are generally lobed <= 50% of their length.  If the petals are fully divided, see {-chickweeds}.
+
+==big chickweed:C. fontanum ssp. vulgare
+. stems both non-flowering/mat-forming and flowering/+-erect
+. petals 4--5 mm, 1.5 mm < to 0.5 mm > sepals
+. calyx 4.5--7 mm, hairy, ascending
+. <b>scarious margin of most outer sepals 0.2--0.6 mm wide</b>
+
+==field mouse-ear chickweed:C. arvense ssp. strictum
+. stems both non-flowering/mat-forming and flowering/+-erect
+. <b>petals 7.5--9 mm, 3--6 mm > sepals</b>
+. calyx 4.2--6 mm, glandular-hairy, rarely with hairs exceeding tip
+. scarious margin of outer sepals < 0.2 mm wide
+
+==sticky mouse-ear chickweed:C. glomeratum
+. stems generally all flowering, ascending to erect
+. petals 3--5 mm, 1.5 mm < to 1 mm > sepals, often 0 on lateral branches
+. calyx 3.5--5 mm, glandular-hairy, with some hairs exceeding tip by 0.2--0.8 mm
+. scarious margin of most outer sepals < 0.1 mm wide

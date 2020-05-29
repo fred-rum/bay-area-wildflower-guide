@@ -1,6 +1,9 @@
 sci:Stellaria spp.
 x:rare
 
+Petals are generally entirely divided.  If the petals are lobed <= 50% of their length, see {-mouse-ear chickweeds}.
+
+
 ==common chickweed:S. media
 . leaves +- evenly spaced
 . internode hairs in a line
