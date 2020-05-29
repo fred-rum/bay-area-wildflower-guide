@@ -19,16 +19,18 @@ color: purple
 . sprawling, many branches distal to the base
 . petals purple with white at the base
 . hypanthia purple-spotted
-. newly identified in the bay area (<a href="https://bioone.org/journals/madro%C3%B1o/volume-66/issue-3/0024-9637-66.3.97/NOTES-ON-LYTHRUM-LYTHRACEAE-IN-CALIFORNIA--LYTHRUM-JUNCEUM-AS/10.3120/0024-9637-66.3.97.short">abstract</a>)
+. newly identified in the bay area (<a href="https://bioone.org/journals/madro%C3%B1o/volume-66/issue-3/0024-9637-66.3.97/NOTES-ON-LYTHRUM-LYTHRACEAE-IN-CALIFORNIA--LYTHRUM-JUNCEUM-AS/10.3120/0024-9637-66.3.97.short">abstract</a>) "Previous collections, dating to at least 1905, were misidentified as L. californicum, but differ in their sprawling habit, white-based petals, and purple-spotted hypanthia."
 
 ==hyssop loosestrife:L. hyssopifolia
 . braches mostly at base, with no more than a few distal to the base
+. petals +- pale purple
 . hypanthium 4--5 &times; longer than wide
 . epicalyx lobes +- 2 &times; longer than sepals
 . common
 
 ==three-bracted loosestrife:L. tribracteatum
 . braches mostly at base, with no more than a few distal to the base
+. petals pale purple
 . hypanthium 8--10 &times; longer than wide
 . epicalyx lobes +- = sepals
 . very rare

@@ -19,7 +19,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0616+2164
 . the height of harvest brodiaea, but with staminodes similar to dwarf brodiaea
 . scape [flower stem] 5--25 cm; pedicel <= 7 cm
 . perianth [flower] 23--37.5 mm
-. staminodes [crown surrounding stamens] leaning toward but or parallel to stamens
+. staminodes [crown surrounding stamens] leaning toward or parallel to stamens
 . Quicksilver, Edgewood, Mt. Tam, and various off-park locations
 
 ==dwarf brodiaea:B. terrestris
