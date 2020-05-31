@@ -1,9 +1,9 @@
 sci:Geranium spp.
 x:hist/rare
 
-Leaves are palmately lobed to divided.
-When counting segments, it may be easiest to count the mid-rib veins radiating from a common point.
-Unless specified otherwise, each segment is further palmately lobed and/or toothed in outline, although the veins are pinnate.
+Leaves are palmately lobed to divided, except for {-herb robert}, {-little-robin}, and {-canary island geranium}.
+
+When counting segments, it may be easiest to count the mid-rib veins radiating from a common point.  Unless specified otherwise, each segment is further palmately lobed and/or toothed in outline, although the veins are pinnate.
 
 Except where specified otherwise, geraniums have 2 flowers per inflorescence.  In many cases, one flower is open while the other one is closed.
 
@@ -111,7 +111,7 @@ color: purple
 . stem hairs short, stiff, spreading to reflexed
 . leaf blade 1--4 cm wide, divided 70--75% to base
 . 5--7 leaf segments, wedge shaped
-. petals 6--9 mm, rounded or +- notched, white to +- pink
+. petals 6--9 mm, rounded or +- notched, white to +- pale pink [?]
 . anther color matching petals?
 . stigma lobes +- white
 
@@ -146,4 +146,5 @@ color: purple
 
 ==new zealand geranium:G. retrorsum
 . undescribed by Jepson
+. may be misidentified {-Geranium core-core} (<a href="https://montereywildflowers.com/geraniaceae-geranium/">source</a>)
 . SF Presidio, Twin Peaks, and urban Berkeley

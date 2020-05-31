@@ -3,9 +3,12 @@ sci:family Geraniaceae
 ==stork's-bills:Erodium spp.
 . [typically?] 3 or more flowers per inflorescence (some may be unopened)
 . generally 5 fertile stamens alternating with 5 staminodes
-. leaf simple or palmately divided; leaf veins pinnate
+. leaf simple or palmately divided)
+.. leaf veins pinnate
+. carpels spiral when dry (<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0518+1339">example</a>, <a href="https://gobotany.nativeplanttrust.org/genus/erodium/">example</a>)
 
 ==geraniums and cranesbills:Geranium spp.
-. 2 (rarely 1) flowers per inflorescence (often 1 is unopened)
+. 2 flowers per inflorescence (often 1 is unopened) (some have just 1 flower)
 . generally 10 fertile stamens (5 outer and 5 inner)
-. leaf palmately lobed or divided
+. leaf palmately lobed or divided (except some are pinnately lobed or divided)
+. carpels curl up (not spiral) when dry (<a href="https://www.ipmimages.org/browse/detail.cfm?imgnum=5386791">example</a>)

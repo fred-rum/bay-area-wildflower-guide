@@ -122,4 +122,31 @@ include the iNaturalist name in the search URL, though.)
 The main glossary should include manual links to lower-level
 glossaries, and vice versa.
 
-I need a doc for glossary.txt
+
+sea muilla:
+perianth parts (no obvious corolla/calyx separation)
+sepals (in bud, but opening) (no calyx tube)
+filaments, anthers, pollen
+ovary, style, stigma
+pedicels
+bracts
+peduncle
+
+milk maids:
+petals
+sepals
+
+buttercup:
+petals
+sepals
+pedicels
+bracts
+peduncle
+anthers
+pistil hard to see
+
+
+make flower diagrams for
+normal radial flowers
+sunflower family
+orchid family (e.g. notes in Platanthera spp.)

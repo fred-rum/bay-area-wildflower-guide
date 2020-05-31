@@ -22,7 +22,7 @@ title:master glossary
 <h3>Pistil</h3>
 
 {pistil,pistils} A pollen-accepting ("female") sexual part of a flower, each composed of an ovary, style, and stigma.
-{ovary,ovaries} The usually wider base of the pistil that forms the seed or fruit when germinated.
+{ovary,ovaries} The usually wider base of the pistil that forms the seed or fruit when germinated.  The perianth and stamens may be attached to the top, the bottom, or somewhere along the sides of the ovary.
 {style,styles} The tube that carries pollen from the stigma to the ovary.
 {stigma,stigmas} The distal end of the pistil that captures pollen for germination.  May be lobed.
 
@@ -61,6 +61,7 @@ title:master glossary
 {abaxial,abaxially} The surface further from the stem when upright.  E.g. the lower surface of a leaf or the outer surface of a petal.
 {adaxial,adaxially} The surface closer to the stem when upright.  E.g. the upper surface of a leaf or the inner surface of a petal.
 {annual,annuals} Lives for one year or less, generally without forming any woody parts.
+{ascending} Angled up (but less than erect) or angled in the direction of the main axis (but not nearly parallel to the main axis).
 {basal} Positioned at the base.  Most commonly refers to leaves growing at the base of the stem.  Contrast cauline.
 {biennial,biennials} Lives for only two years, generally flowering only in the second year.  Non-woody.
 {bract,bracts,bracted} Small leaf-like structures (or analogue) at the base of an inflorescence.  May be fused together or not.
@@ -76,9 +77,12 @@ title:master glossary
 {dehisce,dehisced,dehiscing,dehiscent} Splitting.
 {dentate} With teeth pointing outward.  Contrast serrate.
 {dioecious} A plant that has only either male or female flowers on it, never both on the same plant.
+{dissect,dissects,dissecting,dissected} Cut deeply, but not fully divided.
 {distal,distally} Growing farther away from the base and closer to the tip of a structure.  The structure is often implied; e.g. a proximal leaf grows close to the base of the whole plant.  Contrast proximal.
+{divide,divides,dividing,divided} Divided into distinct parts, e.g. a compound leaf.
 {entire} In one smooth shape; i.e. not toothed, lobed, or compound.
 {epicalyx,epicalyces,epicalyxes} A whorl of bracts forming an extra calyx-like structure.
+{erect} Pointing more or less straight up or parallel to the main axis.
 {glabrous} Without hair.
 {glaucous} Covered with the appearance of a whitish powder.
 {herb,herbs} Plant without any woody parts.
@@ -87,7 +91,7 @@ title:master glossary
 {involucre,involucres} Collective term for a cluster of bracts.  Typically refers to the green base of a flower head in the sunflower family.
 {lanceolate} Long and somewhat narrow; widest between the middle and the base.
 {leaflet,leaflets} A division of a compound leaf (which may itself be further compound).
-{lobe,lobes} An protrusion from a larger body, otherwise undifferentiated from the main body.  E.g. a corolla lobe is the free part of a petal.
+{lobe,lobes,lobed} An protrusion from a larger body, otherwise undifferentiated from the main body.  E.g. a corolla lobe is the free part of a petal.
 {mucro,mucros} An abrupt, short, narrow tip/projection.
 {obovate} Egg shaped; widest between the middle and the tip.
 {ovate} Egg shaped; widest between the middle and the base.
@@ -105,6 +109,7 @@ title:master glossary
 {primary leaf,primary leaves} The first one or two leaves of a sprouting monocot or dicot.  These are the most proximal leaves.  For dicots, the two leaves are opposite.
 {proximal,proximally} Growing closer to the base and farther from the tip of a structure.  The structure is often implied; e.g. a proximal leaf grows close to the base of the whole plant.  Contrast distal.
 {receptacle,receptacles} The distal end of the pedicel (or sometimes the peduncle), where the flower parts (or head) are attached.  See hypanthium.
+{reflexed} Bent somewhat or entirely backward.  Opposite of erect or ascending.
 {reniform} Like cordate, but distally rounded instead of pointed, and typically less acute at the base.
 {sagittate} Shaped like an arrowhead, with basal lobes near parallel to the axis.
 {salverform} With a slender tube and abruptly spreading limbs (e.g. "T" shaped).
@@ -113,6 +118,7 @@ title:master glossary
 {shrub,shrubs} Woody plant, shorter than a tree, generally with many branches from the base.
 {simple} Generally, composed of a single part; undivided; unbranched.  Opposite of compound.<ul><li>Leaf: composed of a single part (which may be lobed or dissected), not divided into distinct leaflets separated from each other.</li></ul>
 {spike,spikes,spiked} Inflorescence with all flowers sessile on the main axis, generally flowering from the proximal end.  See panicle.
+{spreading} Nearly horizontal or perpendicular to the main axis.
 {stellate,stellately} With 3+ branches radiating from a common point.  (Usually used to describe hair.)
 {stipe,stipes} In the knotweed family, a distal extension of the pedicel separated by a line, bulge, or difference in thickness.  In ferns, the frond stalk; equivalent to petiole.
 {stipule,stipules} Extension at the base of the petiole.
@@ -120,6 +126,7 @@ title:master glossary
 {subshrub,subshrubs} Similar to a shrub, but with the distal stems less woody.
 {taproot} Primary root growing straight down, tapering at the end, with smaller lateral branches.
 {terminal} The segment at the end, e.g. the most distal segment of a compound or lobed leaf.
+{tooth,teeth,toothed} A small, roughly triangular projection.  See serrate and dentate.  Compare lobe.
 {twig,twigs} The ultimate branch segment of a woody plant.
 {ultimate} The smallest divisions of a compound/dissected leaf or the final segments of a branching stem.
 {umbel,umbels} An inflorescence in which 3+ flower pedicels branch from a common point.

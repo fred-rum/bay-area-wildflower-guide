@@ -15,7 +15,7 @@ Key features:
 . spur length, held horizontally or curved along the stalk.
 
 [
-CalFlora and Jepson have this species under Platanthera.
+CalFlora and Jepson have this species correctly in Platanthera.
 
 ==sierra bog orchid:P. dilatata var. leucostachys
 sci_fpj:Platanthera dilatata var. leucostachys
@@ -25,7 +25,7 @@ xx:ca
 
 ]
 [
-CalFlora and Jepson have these species under their old genus, Piperia.
+CalFlora and Jepson have these species in their old genus, Piperia.
 
 These flowers have 2--5 +- basal leaves which Jepson does not describe
 in detail.  Possibly they are ascending, but not completely parallel
