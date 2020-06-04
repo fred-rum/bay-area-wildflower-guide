@@ -55,14 +55,16 @@ color: red purple
 . all 4 sepals staying fused
 . ovary and immature fruit 4-grooved
 . petals with +- red spot or zone at <b>base of petal</b>
-. petals <b>10--30 mm</b>; stigma exserted beyond anthers
+. <b>petals 10--30 mm</b>
+. <b>stigma exserted beyond anthers</b>
 . found everywhere
 
 ==presidio clarkia:C. franciscana
 . all 4 sepals staying fused
 . ovary and immature fruit 4-grooved
 . petals with +- red spot or zone at <b>base of petal</b>
-. petals <b>5--13 mm</b>; stigma not exserted beyond anthers
+. <b>petals 5--13 mm</b>
+. <b>stigma not exserted beyond anthers</b>
 . Redwood Regional Park
 
 ==farewell to spring:C. amoena

@@ -7,6 +7,7 @@ title:master glossary
 {pedicel,pedicels,pediceled} The stalk of an individual flower.  See also peduncle.
 {perianth,perianths} The collective term for the calyx and corolla.  The term is usually used where they are difficult to distinguish except by position.
 {perianth part,perianth parts} A sepal or petal.  The term is usually used where they are difficult to distinguish.
+{tepal,tepals} A perianth part, especially where the perianth parts are +- entirely free.
 {hypanthium,hypanthia,hypanthiums} The structure formed by the fused lower portions of the perianth.
 
 <h3>Calyx</h3>
@@ -83,6 +84,9 @@ title:master glossary
 {entire} In one smooth shape; i.e. not toothed, lobed, or compound.
 {epicalyx,epicalyces,epicalyxes} A whorl of bracts forming an extra calyx-like structure.
 {erect} Pointing more or less straight up or parallel to the main axis.
+{exsert,exserting,exserted} Protruding more than surrounding structures.
+{free,freed} Growing separately from equivalent structures at the same level, e.g. sepals in the calyx.  Compare fused.
+{fuse,fused} Equivalent structures at the same level that have grown together (more than just touching).  Compare free.
 {glabrous} Without hair.
 {glaucous} Covered with the appearance of a whitish powder.
 {herb,herbs} Plant without any woody parts.
@@ -123,10 +127,12 @@ title:master glossary
 {stipe,stipes} In the knotweed family, a distal extension of the pedicel separated by a line, bulge, or difference in thickness.  In ferns, the frond stalk; equivalent to petiole.
 {stipule,stipules} Extension at the base of the petiole.
 {strigose} Having stiff, straight, appressed hairs.
-{subshrub,subshrubs} Similar to a shrub, but with the distal stems less woody.
+{subshrub,subshrubs} Similar to a shrub, but with only the proximal stems woody.  The distal stems are non-woody (or are at least significantly less woody).
+{subtend,subtending,subtended} Growing immediately proximal to the compared structure.
 {taproot} Primary root growing straight down, tapering at the end, with smaller lateral branches.
 {terminal} The segment at the end, e.g. the most distal segment of a compound or lobed leaf.
 {tooth,teeth,toothed} A small, roughly triangular projection.  See serrate and dentate.  Compare lobe.
+{truncate,truncating,truncated} Ending (or beginning) abruptly, e.g. with no tapering.
 {twig,twigs} The ultimate branch segment of a woody plant.
 {ultimate} The smallest divisions of a compound/dissected leaf or the final segments of a branching stem.
 {umbel,umbels} An inflorescence in which 3+ flower pedicels branch from a common point.

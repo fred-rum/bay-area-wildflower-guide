@@ -2,11 +2,10 @@ sci:Dichelostemma spp.
 x:rare
 
 Key features:
-. staminode color, leaning in or out
+. staminode color, leaning in or out [technically, it's a filament appendage, but it looks like a staminode]
 . perianth tube narrowed above ovary or not
 
 The defining difference is the number of stamens, but I can't count them without taking apart the flower.
-There is supposed to be a difference in bracts color, but I can't consistently see it on CalPhotos.
 
 ==blue dicks:D. capitatum
 color: purple
@@ -14,7 +13,9 @@ sci_j:Dipterostemon capitatus
 . perianth blue, blue-purple, pink-purple, or white
 . staminodes erect, <b>leaning toward anthers, outward at tip, +- white</b>
 . perianth tube <b>not narrowed</b> above ovary
-. bracts generally dark purple (paler, striped dark purple
+. perianth parts generally wider than ookow
+. bracts generally dark purple (paler, striped dark purple)
+. inflorescence has few--many flowers, but I've seen no clusters greater than hemispheric.
 . <b>flowers from February--May</b>
 . common throughout the bay area
 
@@ -23,7 +24,9 @@ color: purple
 . perianth blue-purple
 . staminodes erect, <b>leaning away from anthers, +- purple</b>
 . perianth tube <b>narrowed</b> above ovary or +- so
-. bracts pale purple to green
+. perianth parts generally narrower than ookow
+. bracts pale purple to green [not consistently distinct in CalPhotos]
+. inflorescence has few--many flowers, possibly so many that the cluster is near spherical, but that's rare
 . <b>flowers from May--June</b> [from April, really]
 . scattered throughout the bay area
 

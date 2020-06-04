@@ -2,7 +2,7 @@ sci:Erodium spp.
 x:ba
 
 [
-<h3>narrower petals</h3>
+<h3>narrower, uniformly colored petals</h3>
 
 Key feature: bristles on sepal tips, sepal length
 
@@ -24,9 +24,17 @@ color: purple
 . pedicel is often a green purple, but is often short and hidden by the flower
 . flowers in an umbel
 
+==soft stork's-bill:E. malacoides
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1105+0694
+. <b>leaf simple</b>, crenate to shallowly lobed, blade generally < petiole
+. sepals 4--6 mm, tip with one or more bristles
+. petals +- = sepals
+. petals tinged toward red-purple rather than the above flowers' pale purple
+. Monte Bello, Mt. Diablo
+
 ]
 [
-<h3>rounder petals</h3>
+<h3>rounder, purple-veined petals</h3>
 
 Key feature: stem glandular or not, precise sepal length
 
@@ -47,10 +55,3 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0818+2297
 . leaf lobed
 
 ]
-
-==soft stork's-bill:E. malacoides
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1105+0694
-. <b>leaf simple</b>, crenate to shallowly lobed, blade generally < petiole
-. sepals 4--6 mm, tip with one or more bristles
-. petals +- = sepals
-. Monte Bello, Mt. Diablo

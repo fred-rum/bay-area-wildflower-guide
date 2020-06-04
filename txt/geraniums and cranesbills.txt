@@ -145,6 +145,7 @@ color: purple
 ]
 
 ==new zealand geranium:G. retrorsum
-. undescribed by Jepson
-. may be misidentified {-Geranium core-core} (<a href="https://montereywildflowers.com/geraniaceae-geranium/">source</a>)
+sci_j:n/a
+. appears in CalFlora, but not described by Jepson
+. likely to be misidentified {-Geranium core-core} (<a href="https://ucjeps.berkeley.edu/eflora/eflora_display.php?tid=81114">source1</a>, <a href="https://montereywildflowers.com/geraniaceae-geranium/">source2</a>)
 . SF Presidio, Twin Peaks, and urban Berkeley

@@ -29,11 +29,12 @@ color: white, cream, pale purple, pink, salmon
 color: white, pink, pale purple, purple
 . nectary (yellow/orange spot amidst hair) is crescent shaped
 . each petal has a central dark blotch, but without a 2nd blotch above
+. anthers purple, pink to yellow-white
 . stem simple
 
 ==superb mariposa lily:C. superbus
-. difficult to distinguish from C. argillosus (above) except by fruit shape
-
+. may be difficult to distinguish from C. argillosus (above) except by fruit shape
+. anthers white to light yellow
 ]
 
 ==pussy-ears:C. tolmiei
