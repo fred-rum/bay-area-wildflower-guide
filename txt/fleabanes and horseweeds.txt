@@ -37,7 +37,8 @@ color: white, pale purple
 . rare
 
 ==philadelphia fleabane:E. philadelphicus var. philadelphicus
-. rays 6--9 mm
+color: white
+. rays 6--9 mm, very thin and extremely numerous
 . phyllaries generally +- equal
 . basal leaves present
 . cauline leaves clasping

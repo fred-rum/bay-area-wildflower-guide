@@ -1,27 +1,34 @@
 com:cobwebby thistle
 xx:!hist
 
-This species is complex, variable, and not well described.  Assigning a variety may not always be possible.
+This species is complex, variable, and not well described.  Assigning a variety may not always be possible.  My notes are based on a combination of Jepson and Montery County Wildflowers.  I've mostly ignored CalPhotos because their identifications are all over the place.
 
 ==venus thistle:C. occidentale var. venustum
 color: red
-. generally less cobwebby
-. corolla bright red-pink to red (or occasionally other random colors)
-. phyllary ascending, spreading, or reflexed
-. middle phyllary tips 5--20+ mm
+. heads generally long-peduncled, occasionally in tight clusters at peduncle ends, well elevated above proximal leaves
+. phyllaries are tomentose, but aren't significantly interconnected by cobwebby hairs
+. phyllaries ascending, spreading, or reflexed (the angle of the phyllary's curve, not the angle that it sticks out of the head)
+. corolla bright red-pink to red (or rarely other random colors, but <b>generally on the redder side of red-purple</b>)
 . common everywhere
 
 ==cobwebby thistle:C. occidentale var. occidentale
-. very cobwebby
-. corolla lavender to bright purple
-. phyllary ascending to spreading
+. heads generally long-peduncled, occasionally in tight clusters at peduncle ends, well elevated above proximal leaves
+. phyllaries are significantly interconnected by cobwebby hairs
+. phyllaries ascending to spreading (not reflexed) (the angle of the phyllary's curve, not the angle that it sticks out of the head)
+. corolla lavender to bright purple (or rarely white, but <b>generally on the more purple side of red-purple</b>)
 . common, mostly from the north peninsula to Marin
 
 ==california thistle:C. occidentale var. californicum
-. phyllaries generally appressed only at the base, ascending or spreading above
-.. all others tightly appressed, spreading only at the tip/spines
-. corolla pink, pale purple, salmon, or occasionally white/cream
+. heads short- to long-peduncled in +- open cluster, well elevated above proximal leaves
+. phyllaries are tomentose, but aren't significantly interconnected by cobwebby hairs
+. phyllaries ascending, spreading, or reflexed (the angle of the phyllary's curve, not the angle that it sticks out of the head)
+. phyllaries occasionally with sticky-resinous ridge
+.. never sticky on other varieties
+. <b>corolla pink, pale purple, salmon, or occasionally white/cream</b>
 . uncommon, mostly around Mt. Diablo
 
 ==compact cobwebby thistle:C. occidentale var. compactum
+. heads short-peduncled, closely subtended by basal and large cauline leaves
+. phyllaries are significantly interconnected by cobwebby hairs
+. <b>corolla dark rose-purple</b>
 . very rare near San Bruno Mountain

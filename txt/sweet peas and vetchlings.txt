@@ -103,7 +103,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1108+1963
 . calyx tube &plusmn; &le; lobes
 
 ==angled pea:L. angulatus
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0615+0781
+color: purple
 . 1 flower in inflorescence
 . 2 leaflets per leaf
 . corolla 9--12 mm, <b>lavender or purple</b>

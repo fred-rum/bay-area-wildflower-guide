@@ -2,6 +2,8 @@ sci:family Convolvulaceae
 
 Monterey County Wildflowers has photos of the various <a href="https://montereywildflowers.com/convolvulaceae-calystegia/">identifying features</a> for distinguishing the various bindweeds and morning glories.
 
+See also {-devil's trumpets}, which have a generally longer calyx which is ribbed or angled toward the base.
+
 ==bindweeds:Convolvulus spp.
 . <b>Stigma lobes linear to narrowly spoon-shaped, distinctly separated</b>, tips acute [<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0110+0338">example</a>]; <b>calyx +- 5 mm</b>; corolla <= 40 mm
 . anthers are often lined with pale-purple

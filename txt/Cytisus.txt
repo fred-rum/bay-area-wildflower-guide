@@ -1,6 +1,6 @@
 x:hist
 
-==common broom:Cytisus scoparius
+==scotch broom:Cytisus scoparius
 5-angled branch:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0616+0889
 . yellow corolla
 . banner generally > 10--25 mm

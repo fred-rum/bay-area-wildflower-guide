@@ -1,0 +1,22 @@
+sci:Datura spp.
+x:rare
+
+See also {-bindweed family}, which have a generally shorter calyx which is not ribbed or angled toward the base.
+
+==sacred thorn-apple:D. wrightii
+. corolla white, 15--20 cm, lobes 1.0--2.0 cm
+.. style 15--18 cm
+. calyx 8--12 cm, ribbed at least toward base, lobes +- 2 cm
+. fruit with 0.5--1.2 cm prickles and tan seeds
+
+==jimsonweed:D. stramonium
+. corolla white or pale purple, 6--9 cm, lobes 0.8--1.0 cm
+.. style 4--6 cm
+. calyx 3.5--4.5 cm, angled toward base, lobes 0.5--0.7 cm
+. fruit with 0.3--1.0 cm prickles and black seeds
+
+==long-spined thorn-apple:D. ferox
+. corolla white or pale purple, 4.5--5 cm
+.. style 2.5 cm
+. calyx 2--2.5 cm, angled toward base, lobes 0.2--0.4 cm
+. fruit with 0.8--2.2 cm prickles, black seeds

@@ -91,7 +91,8 @@ color: purple
 . common in bay area
 
 ==san bernardino larkspur:D. parryi
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1204+0757
+color: purple
+<b>Caution: ID unsure.</b>
 . <b>flowers 3--60</b>
 . <b>pedicels +- ascending, 5--68 mm, 8--50 mm apart, generally puberulent</b>
 . if <= 6 flowers, oldest open-flowered pedicel generally < 25 mm or < 2 &times; youngest
