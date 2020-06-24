@@ -1,6 +1,13 @@
 sci:Silene spp.
 x:hist
 
+==rose campion:S. coronaria
+color: purple
+sci_jfp:n/a
+. corolla pink-purple
+. taproot slender to stout; caudex slightly woody
+. waif at Sanborn
+
 [
 <h3>annual with generally slender taproot</h3>
 

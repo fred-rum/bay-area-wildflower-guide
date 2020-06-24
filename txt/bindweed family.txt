@@ -4,12 +4,20 @@ Monterey County Wildflowers has photos of the various <a href="https://montereyw
 
 See also {-devil's trumpets}, which have a generally longer calyx which is ribbed or angled toward the base.
 
-==bindweeds:Convolvulus spp.
-. <b>Stigma lobes linear to narrowly spoon-shaped, distinctly separated</b>, tips acute [<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0110+0338">example</a>]; <b>calyx +- 5 mm</b>; corolla <= 40 mm
+==field bindweed:Convolvulus arvensis
+color: white, pale purple
+x:ba
+xx:none
+. <b>stigma lobes linear to narrowly spoon-shaped, distinctly separated</b>, tips acute [<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0110+0338">example</a>]
+. <b>calyx +- 5 mm</b>
+. corolla <= 40 mm
 . anthers are often lined with pale-purple
+. bracts > 1 mm below calyx, not hiding it
 
 ==false bindweeds:Calystegia spp.
-. <b>Stigma lobes oblong</b>, tips obtuse [<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1215+4276">example</a>]; <b>calyx 7--25 mm</b>; corolla 20--75 mm
+. <b>stigma lobes oblong</b>, tips obtuse [<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1215+4276">example</a>]
+. <b>calyx 7--25 mm</b>
+. corolla 20--75 mm
 . anthers seem to always be white, at least for the common species
 
 ==dodders:Cuscuta spp.

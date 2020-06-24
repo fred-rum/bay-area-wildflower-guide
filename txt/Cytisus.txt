@@ -1,7 +1,7 @@
 x:hist
 
-==scotch broom:Cytisus scoparius
-5-angled branch:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0616+0889
+==scots broom,6:Cytisus scoparius
+color:yellow
 . yellow corolla
 . banner generally > 10--25 mm
 . <b>calyx glabrous</b>
