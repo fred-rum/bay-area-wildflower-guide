@@ -11,3 +11,5 @@ x:ca
 ==star thistles:Centaurea spp.
 
 ==sow thistles:Sonchus spp.
+
+==Carthamus spp.

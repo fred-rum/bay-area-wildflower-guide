@@ -6,9 +6,18 @@ included only those that have at least one observation in a wild area
 that I frequent.
 
 ==black sage:S. mellifera
-. shrub, 1--2 m
-. corolla tube 5.5--9 mm, white to pale blue or lavender (rarely, pale rose)
 color: white
+. shrub, 1--2 m
+. corolla tube 5.5--9 mm, white to pale blue or lavender (rarely, pale rose), upper lip 2-lobed
+. stamens, style +- exserted
+. common
+
+==white sage:S. apiana
+color:white
+. subshrub, 1--2 m
+. corolla tube 12--22 mm, white and lavender, upper lip < 2 mm, lower lip 4--5 mm, upcurved
+. stamens, style exserted
+. extremely rare
 
 ==sonoma sage:S. sonomensis
 . subshrub, prostrate, mat-forming
@@ -17,10 +26,11 @@ color: white
 . very rare
 
 ==chia:S. columbariae
+color: purple
 . annual, 10--50 cm
 . corolla tube 6--8 mm, blue to pale blue or puple to pale purple
 . lower corolla lip +- 2 &times; upper
-color: purple
+. common
 
 ==purple sage:S. leucophylla
 . shrub, < 1.5 m
@@ -29,6 +39,7 @@ color: purple
 . very rare
 
 ==hummingbird sage:S. spathacea
+color: red purple, red, salmon
 . perennial herb, mat-like
 . corolla tube 25--35 mm, red purple to salmon
 . upper lip 7--8 mm; lower lip 10--12 mm

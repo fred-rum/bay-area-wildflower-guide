@@ -34,7 +34,7 @@ color: red purple
 [
 <h3>thick-based prickles</h3>
 
-==california wild rose,-3:R. californica
+==california wild rose,5:R. californica
 color: pink
 . shrub or thicket-forming, 80 cm -- 2.5 m
 . <b>prickles 3--15 mm, thick-based and compressed, generally curved</b>

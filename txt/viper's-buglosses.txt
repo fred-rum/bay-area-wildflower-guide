@@ -28,7 +28,6 @@ color: purple
 
 ==pride of madeira:E. candicans
 color:purple, blue
-<b>Caution: ID uncertain</b>
 . plant many-branched
 . no basal rosette
 . flower +- radial

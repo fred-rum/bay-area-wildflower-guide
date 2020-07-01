@@ -52,10 +52,9 @@ title:master glossary
 <h2>Geographic locations</h2>
 
 {Diablo range} The east bay mountains and foothills from Mt. Diablo through Mt. Hamilton and beyond.  This is a portion of the inner coast range which extends further through California.
-
-{Santa Cruz mountains} The mountains and hills of the SF peninsula, continuing to the central coast.  This is a portion of the outer coast range which extends further through California.
-
-{Mt. Tam} Mt. Tamalpais.  A mountain in Marin County.  Part of the inner coast range, but separate from the Santa Cruz mountains.
+{Santa Cruz mountains,Santa Cruz range} The mountains and hills of the SF peninsula, continuing to the central coast.  This is a portion of the outer coast range which extends further through California.
+{Mt. Tam,Mt. Tamalpais,Mount Tam,Mount Tamalpais} Mt. Tamalpais.  A mountain in Marin County.  Part of the outer coast range, but separate from the Santa Cruz mountains.
+{outer coastal range} In the bay area, this is the Santa Cruz mountains and the Mt. Tam area.
 
 <h2>Miscellaneous terms</h2>
 
@@ -89,7 +88,7 @@ title:master glossary
 {fuse,fused} Equivalent structures at the same level that have grown together (more than just touching).  Compare free.
 {glabrous} Without hair.
 {glaucous} Covered with the appearance of a whitish powder.
-{herb,herbs} Plant without any woody parts.
+{herb,herbs,herbaceous} Plant without any woody parts.
 {inflorescence,inflorescences} A cluster of flowers from a common point or sharing a stalk that has only flowers on it.  A head in the sunflower family.
 {involucel,involucels} Secondary involucre within an inflorescence.
 {involucre,involucres} Collective term for a cluster of bracts.  Typically refers to the green base of a flower head in the sunflower family.

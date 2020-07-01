@@ -5,6 +5,7 @@ I've done the best with this key that I have the patience for, but it still depe
 
 Key features:
 . herb vs. shrub (or subshrub)
+. number of bracts per involucre [per head or at the base of the branched inflorescence?]
 . flowers [involucres?] are clustered or individual
 . flowers grow only at branch tips or also at forks
 . perianth lobes alike, or inner narrower than outer
@@ -46,23 +47,26 @@ color: white, pink, salmon, red, red purple, other
 ==coastal wild buckwheat:E. cinereum
 . flowers are clustered, long-soft-hairy
 . shrub
-. leaf blades 1.5--3 cm, ovate, margins flat
+. leaf blades 1.5--3 cm, ovate, margins flat [sort of]
 . inflorescence (all branches collectively) generally head-like
 . very rare
 
-==st. catherine's-lace:E. giganteum var. giganteum
+==santa catalina island buckwheat:E. giganteum var. giganteum
+xx:ba
+color: white, pink, salmon
 . flowers are clustered, long-soft-hairy
 . shrub
 . leaf blades 2--7 cm, oblong-ovate to ovate or lanceolate to narrowly oblong, margins flat
 . inflorescence (all branches collectively) open, cyme-like
 . very rare
+. despite its name, it is the only variety of E. giganteum that is widely naturalized
 
 ==seaside buckwheat:E. latifolium
 color: white, pink, salmon
 . flowers are clustered
 . flowers only at inflorescence branch tips
 . herb
-. Ecology: sand
+. ecology: sand
 . very common along the coast
 
 ==naked buckwheat:E. nudum

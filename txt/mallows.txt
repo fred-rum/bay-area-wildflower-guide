@@ -2,6 +2,7 @@ sci:Malva spp.
 x:ca
 
 ==island mallow:M. assurgentiflora
+color:purple
 . <b>shrub</b>
 .. all others are herbs
 . petals 25--45 mm

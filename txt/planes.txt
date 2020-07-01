@@ -1,0 +1,20 @@
+sci:Platanus spp.
+x:ca
+
+Jepson doesn't include {-american sycamore}, so I'm using <a href="https://homeguides.sfgate.com/difference-between-california-sycamore-american-sycamore-71047.html">another reference</a> for distinguishing it.
+
+==western sycamore:P. racemosa
+color:other
+. leaf lobes >= &frac13; blade
+.. terminal lobe much longer than wide
+. 3--7 fruits in a crooked arrangement along a stalk
+
+==london plane:P. Xhispanica
+. leaf lobes < &frac13; blade
+.. terminal lobe generally as long as wide
+
+==american sycamore:P. occidentalis
+sci_j:n/a
+. leaf lobes generally shallower than for {-western sycamore}, but it can vary among leaves on a tree and depending on condition
+. usually only a single fruit per stalk
+. extremely rare in the bay area according to CalFlora

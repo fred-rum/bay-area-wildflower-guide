@@ -1,0 +1,50 @@
+sci:Atriplex spp.
+x:hist/rare
+
+There are quite a few species which I've neglected here because they don't seem to be in or near park areas where I hike.  But they may still be found in other places around the bay area.
+
+==big saltbush:A. lentiformis
+xx:more
+color:other
+. shrub with clearly woody main stem
+. twigs densely fine-scaly,  occasionally spine-like and glabrous in age
+
+==cattle saltbush:A. polycarpa
+. shrub with clearly woody main stem
+. branches densely gray-scaly, branch tips spine-like in age [not glabrous?]
+
+==berry saltbush:A. semibaccata
+. perennial herb/subshrub, < 35 cm [tall?], generally mat-like with stems up to 100 cm long
+. leaf +- sessile to <b>short-petioled</b> with tapered base, entire to <b>wavy-dentate</b>
+. very common around the edges of the bay
+
+==beach saltbush:A. leucophylla
+. perennial herb/subshrub, prostrate to decumbent, < 30 cm [tall?], up to 100 cm long
+. leaf sessile, entire, elliptic to wide-ovate
+. one of the more common of the saltbushes
+
+==garden orache:A. hortensis
+. annual, erect, 50--180 cm tall
+. leaf green, glabrous to sparsely scaly
+. pistillate flowers of 2 kinds: with no bracts and 5 calyx lobes, or 2 bracts and no calyx lobes
+. seeds of two kinds: horizontal, black with no bracts; or vertical, brown with 2 bracts
+
+==fat-hen:A. prostrata
+. annual, 10--120 cm tall
+. leaf green, glabrous to sparsely fine-scaly
+. pistillate flowers with +- no calyx
+. seed generally erect/vertical between 2 bracts
+. one of the more common of the saltbushes
+
+==tumbling oracle:A. rosea
+. annual, 40--150 cm tall
+. leaf +- green adaxially, densely fine-scaly abaxially, coarsely wavy-dentate
+
+==brittlescale:A. depressa
+. annual, < 30 cm tall
+. leaf generally densely white-scaly, entire
+
+==ballscale:A. fruticulosa
+. <b>wildcard with a variety of forms</b>
+. +- annual, perennial herb, or subshrub, < 30 cm [tall?]
+. leaf densely gray-scaly, generally sessile, entire

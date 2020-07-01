@@ -1,0 +1,11 @@
+sci:Cortaderia spp.
+
+==pampas grass:C. selloana
+color: other
+. panicle at most only slightly elevated above foliage
+. inflorescence stalk 2--3 &times; inflorescence length
+
+==purple pampas grass:C. jubata
+color: other
+. panicle well-elevated above foliage
+. inflorescence stalk 4--5 &times; inflorescence length

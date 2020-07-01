@@ -9,6 +9,8 @@ Key features:
 . bristle extending on axis beyond flower
 . length of calyx tube vs. lobes
 
+See also {-vetches} and {-chaparral pea}.
+
 [
 <h2>many flowers, many leaflets</h2>
 
@@ -118,5 +120,3 @@ color: purple
 . <b>corolla [usually?] blue</b>, but possibly red-purple, red, pink, or white
 
 ]
-
-See also {-vetches}.

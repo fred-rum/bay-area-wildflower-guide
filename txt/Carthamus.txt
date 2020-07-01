@@ -1,0 +1,24 @@
+sci:Carthamus spp.
+x:ba
+
+==woolly distaff thistle:C. lanatus
+color:yellow
+. corolla yellow
+. cauline leaves +- deeply lobed, very spiny
+. outer phyllaries generally 1.5 &times; inner
+. herbage loosely cobwebby to +- woolly
+. stem straw-colored
+. uncommon
+
+==smooth distaff thistle:C. creticus
+. corolla yellow
+. cauline leaves +- deeply lobed, very spiny
+. outer phyllaries generally 2 &times; inner
+. herbage +- sparsely hairy
+. stem white
+. uncommon
+
+==safflower:C. tinctorius
+. corolla yellow to red
+. <b>cauline leaves dentate, weakly spiny</b>
+. extremely rare in Morgan Hill
