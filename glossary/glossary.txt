@@ -96,6 +96,7 @@ title:master glossary
 {leaflet,leaflets} A division of a compound leaf (which may itself be further compound).
 {lobe,lobes,lobed} An protrusion from a larger body, otherwise undifferentiated from the main body.  E.g. a corolla lobe is the free part of a petal.
 {mucro,mucros} An abrupt, short, narrow tip/projection.
+{nodding} Partially drooping, between pendent and spreading.
 {obovate} Egg shaped; widest between the middle and the tip.
 {ovate} Egg shaped; widest between the middle and the base.
 {palmate,palmately} With lobes spreading from a common point.
@@ -103,6 +104,7 @@ title:master glossary
 {panicle,panicles,panicled} Branched infloresence with flowers that grow from the proximal end.
 {papillate,papillated} Has a surface with small protuberances, e.g. like the surface of your tongue.
 {peduncle,peduncles} The stalk of an inflorescence (or of a head in the sunflower family) or of an individual flower that is not part of an inflorescence.  See also pedicel.
+{pendent} Drooping or hanging +- straight down.
 {perennial,perennials} Lives for more than two years.  Maybe be woody or non-woody.
 {perennial herb,perennial herbss} Non-woody plant that lives for more than two years.
 {petiole,petioles} The stalk of a leaf.
@@ -112,7 +114,8 @@ title:master glossary
 {primary leaf,primary leaves} The first one or two leaves of a sprouting monocot or dicot.  These are the most proximal leaves.  For dicots, the two leaves are opposite.
 {proximal,proximally} Growing closer to the base and farther from the tip of a structure.  The structure is often implied; e.g. a proximal leaf grows close to the base of the whole plant.  Contrast distal.
 {receptacle,receptacles} The distal end of the pedicel (or sometimes the peduncle), where the flower parts (or head) are attached.  See hypanthium.
-{reflexed} Bent somewhat or entirely backward.  Opposite of erect or ascending.
+{recurved,recurve,recurving} Gradually curved backward.  Contrast reflexed.
+{reflexed,reflex,reflexing} Abruptly bent somewhat or entirely backward.  Opposite of erect or ascending.  Contrast recurved.
 {reniform} Like cordate, but distally rounded instead of pointed, and typically less acute at the base.
 {sagittate} Shaped like an arrowhead, with basal lobes near parallel to the axis.
 {salverform} With a slender tube and abruptly spreading limbs (e.g. "T" shaped).

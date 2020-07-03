@@ -1,0 +1,18 @@
+sci:Rhododendron spp.
+x:ba
+
+==western azalea:R. occidentale
+color:white
+. thin, deciduous leaves
+. <b>5 stamens</b>
+. upper petal with yellow to orange blotch at base
+
+==western labrador tea:R. columbianum
+. leathery, evergreen leaves
+. 10 stamens
+. +- flat glandular scales abaxially on leaf
+
+==pacific rhododendron:R. macrophyllum
+. leathery, evergreen leaves
+. 10 stamens
+. no +- flat glandular scales abaxially on leaf

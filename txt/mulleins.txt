@@ -1,0 +1,19 @@
+sci:Verbascum spp.
+x:hist
+
+==great mullein:V. thapsus
+color:yellow
+. <b>leaf densely tomentose</b>
+. <b>upper 3 filaments white- or yellow-hairy</b>
+. lower 2 filaments glabrous to +- hairy
+. uncommon
+
+==moth mullein:V. blattaria
+. <b>leaf glabrous</b>
+. <b>all filaments densely purple-hairy</b>
+. rare
+
+==wand mullein:V. virgatum
+. <b>leaf +- hairy</b>
+. <b>all filaments densely purple-hairy</b>
+. very rare

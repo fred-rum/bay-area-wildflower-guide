@@ -1,0 +1,27 @@
+sci:Lilium spp.
+x:ba
+
+==leopard lily:L. pardalinum
+color:orange
+. flower pendent
+. perianth yellow to +- orange
+. grows in +- moist places
+. uncommon
+
+==humboldt's lily:L. humboldtii
+. flower pendent
+. perianth yellow or orange
+. grows in +- dry places
+. extremely rare
+
+==redwood lily:L. rubescens
+. flower nodding
+. perianth +- white, aging pink or pale purple
+. perianth parts recurved but not reflexed
+. extremely rare
+
+==coast lily:L. maritimum
+. flower nodding
+. perianth red or red-orange
+. perianth tips reflexed or rolled
+. extremely rare
