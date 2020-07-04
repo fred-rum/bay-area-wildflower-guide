@@ -57,7 +57,7 @@ xx:ba
 . basal and proximal cauline leaves 3-parted, segments 1--3-lobed
 . Mission Peak, Sunol, Mt. Diablo
 
-==western buttercup:R. occidentalis var. occidentalis
+==western buttercup:R. occidentalis
 xx:ba
 color:yellow
 . stem erect to decumbent

@@ -41,7 +41,8 @@ color: white
 . <b>lower leaves deep-lobed with similar lobes</b>, generally well separated, stalked
 . scattered throughout the bay area
 
-==small flowered nemophila:N. parviflora
+==small-flowered nemophila:N. parviflora
+color:white
 . corolla bell-shaped, 1--5 mm wide
 . white or blue, without dark veins or dots
 . style < 2 mm
