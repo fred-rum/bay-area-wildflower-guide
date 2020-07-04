@@ -1,0 +1,27 @@
+sci:Lolium spp.
+x:ba
+
+==perennial ryegrass:L. perenne
+sci_fpj:Festuca perennis
+color:other
+. 1 glume per spikelet (2 glumes for the uppermost spikelet)
+.. spikelet sits between a hollow in the stem and the glume
+. glume < rest of spikelet
+. despite the name, is an annual or at best a perennial herb
+
+==darnel:L. temulentum
+sci_fpj:Festuca temulenta
+. 1 glume per spikelet except 2 for uppermost spikelet
+. glume >= rest of spikelet
+
+==tall fescue:L. arundinaceum
+sci_fpj:Festuca arundinacea
+. 2 glumes per spikelet
+. leaf blade with prominent clasping basal auricles
+. auricles hairy
+
+==meadow fescue:L. pratense
+sci_fpj:Festuca pratensis
+. 2 glumes per spikelet
+. leaf blade with prominent clasping basal auricles
+. auricles glabrous

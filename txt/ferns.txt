@@ -1,4 +1,4 @@
-sci:n/a
+sci:class Polypodiopsida
 
 ==shield ferns
 . 1--2-pinnate
@@ -26,3 +26,5 @@ sci:n/a
 
 ==cliffbrakes
 . leaf segments stalked
+
+==great horsetail

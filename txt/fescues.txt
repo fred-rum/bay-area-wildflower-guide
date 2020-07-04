@@ -1,0 +1,28 @@
+sci:Festuca spp.
+x:!hist/rare
+
+Some species that CalFlora/Jepson have in Festuca have been moved to {-Lolium spp.}.
+
+==brome fescue:F. bromoides
+. iNaturalist has this as Vulpia bromoides
+
+==california fescue:F. californica
+
+==coast fescue:F. elmeri
+
+==idaho fescue:F. idahoensis
+
+==small six-weeks grass:F. microstachys
+. iNaturalist has this as Vulpia microstachys
+
+==fat's-tail fescue:F. myuros
+. iNaturalist has this as Vulpia myuros
+
+==western fescue:F. occidentalis
+
+==pullout grass:F. octoflora
+. iNaturalist has this as Vulpia octoflora
+
+==red fescue:F. rubra
+
+==crinkle-awn fescue:F. subuliflora
