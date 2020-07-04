@@ -18,4 +18,11 @@ sci:n/a
 . <b>palmate-pinnate</b>
 
 ==goldback fern
-. 3--4 pinnate (blobby lobes at 4th level, if present)
+. 3--4-pinnate (blobby lobes at 4th level, if present)
+
+==hairy brackenfern
+. 2--4-pinnate
+. entire blade is +- an equilateral triangle in outline
+
+==cliffbrakes
+. leaf segments stalked
