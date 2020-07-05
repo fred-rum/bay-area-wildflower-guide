@@ -1,0 +1,30 @@
+sci:Avena spp.
+x:rare
+
+A stiff awn is springs from near the middle of the lemma.
+
+==wild oat:A. fatua
+color:other
+. glumes 18--32 mm, 9--11-veined
+. 2--3 florets
+. callus bearded
+. lemma soft-hairy in lower &frac13;
+. lemma tip ragged or 2-forked with teeth <= 1.5 mm
+. awn of lowest floret 25--40 mm, bent, twisted below bend
+
+==slender wild oat:A. barbata
+. glumes 15--30 mm, 5--9-veined
+. 2--3 florets
+. callus bearded
+. lemma generally densely soft-hairy below awn
+. lemma bristle-tipped with teeth 2--6 mm
+. awns 20--45 mm, bent, twisted below bend
+
+==oat:A. sativa
+. glumes 15--50 mm, 7--9-veined
+. 1--2 florets
+. callus glabrous
+. lemma glabrous or nearly so
+. lemma tip acute to minutely 2-forked
+. awn of upper floret 15--30 mm (or none), straight, slightly twisted
+. awn of lower floret < 15 mm (or none)

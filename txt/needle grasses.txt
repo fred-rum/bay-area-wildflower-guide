@@ -1,0 +1,71 @@
+sci:Nassella spp.
+x:hist/rare
+sci_fj:Stipa spp.
+
+All have 1 floret per spikelet.
+
+Key features:
+. palea grooved or flat
+. lemma features
+. awn length
+. stem diameter
+
+[
+<h3>palea grooved lengthwise</h3>
+
+==bristly needle grass:Piptochaetium fuscum
+sci_fpj:Stipa purpurata
+. blade 0.8--1.5 mm wide
+. awn 10--16 mm long
+
+==stipoid ricegrass:Piptochaetium stipoides
+sci_fpji:Stipa chaetophora
+. blade 0.2--0.4 mm wide
+. awn 15--25 mm long
+
+]
+[
+<h3>palea flat</h3>
+
+[
+<h4>lemma generally bumpy throughout, tip with crown</h4>
+
+==andean tussockgrass:N. manicata
+sci_fpji:Stipa manicata
+. lemma crown generally sharply constricted proximally, distinct from rest of lemma
+
+==foothill needle grass:N. lepida
+sci_fpj:Stipa lepida
+. lemma crown gradually expanded proximally, no more than +- distinct from lemma
+. lemma crown hairs 0.3--0.6 mm
+. awn 12--55 mm, +- 0.1 mm diameter
+. stem 0.8--1.2 mm diameter
+
+==nodding needle grass:N. cernua
+sci_fpj:Stipa cernua
+. lemma crown gradually expanded proximally, no more than +- distinct from lemma
+. lemma crown hairs 0.8--1.1 mm
+. awn 38--110 mm, 0.2--0.4 mm diameter
+. stem 1.0--3.1 mm diameter
+. lemma body in age glabrous in distal &frac34; except on veins
+
+==purple needlegrass:N. pulchra
+sci_fpj:Stipa pulchra
+color:other
+. lemma crown gradually expanded proximally, no more than +- distinct from lemma
+. lemma crown hairs 0.8--1.1 mm
+. awn 38--110 mm, 0.2--0.4 mm diameter
+. stem 1.0--3.1 mm diameter
+. lemma body in age hairy throughout
+
+]
+
+==smilo grass:Oloptum miliaceum
+sci_fpj:Stipa miliacea
+sci_i:Achnatherum miliaceum
+. lemma body smooth throughout
+]
+
+==mexican feathergrass:N. tenuissima
+sci_fp:Stipa pulchra
+sci_j:n/a

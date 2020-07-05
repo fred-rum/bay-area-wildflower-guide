@@ -4,7 +4,7 @@ x:!hist/rare
 Some species that CalFlora/Jepson have in Festuca have been moved to {-Lolium spp.}.
 
 ==brome fescue:F. bromoides
-. iNaturalist has this as Vulpia bromoides
+sci_i:Vulpia bromoides
 
 ==california fescue:F. californica
 
@@ -13,15 +13,15 @@ Some species that CalFlora/Jepson have in Festuca have been moved to {-Lolium sp
 ==idaho fescue:F. idahoensis
 
 ==small six-weeks grass:F. microstachys
-. iNaturalist has this as Vulpia microstachys
+sci_i:Vulpia microstachys
 
 ==fat's-tail fescue:F. myuros
-. iNaturalist has this as Vulpia myuros
+sci_i:Vulpia myuros
 
 ==western fescue:F. occidentalis
 
 ==pullout grass:F. octoflora
-. iNaturalist has this as Vulpia octoflora
+sci_i:Vulpia octoflora
 
 ==red fescue:F. rubra
 

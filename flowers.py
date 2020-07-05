@@ -62,13 +62,14 @@ class Obs:
         rg = self.rg
 
         if page:
-            sci = page.sci
-            if n == 0 and not sci:
+            if n == 0 and not page.sci:
                 return
 
             if page.taxon_id:
                 link = f'https://www.inaturalist.org/observations/chris_nelson?taxon_id={page.taxon_id}&order_by=observed_on'
-            elif sci:
+            elif page.sci:
+                elab = page.choose_elab(page.elab_inaturalist)
+                sci = strip_sci(elab)
                 link = f'https://www.inaturalist.org/observations/chris_nelson?taxon_name={sci}&order_by=observed_on'
             else:
                 link = None
@@ -259,6 +260,7 @@ class Page:
         self.elab_calflora = None
         self.elab_calphotos = None
         self.elab_jepson = None
+        self.elab_inaturalist = None
 
         # the iNaturalist common name.
         # must be None if the common name isn't set.
@@ -489,13 +491,15 @@ class Page:
         self.txt = re.sub(r'^sci:\s*(.*?)\s*?\n',
                           repl_sci, self.txt, flags=re.MULTILINE)
 
-    def set_sci_fpj(self, sites, elab):
+    def set_sci_alt(self, sites, elab):
         if 'f' in sites:
             self.elab_calflora = elab
         if 'p' in sites:
             self.elab_calphotos = elab
         if 'j' in sites:
             self.elab_jepson = elab
+        if 'i' in sites:
+            self.elab_inaturalist = elab
 
     def set_complete(self, matchobj):
         if matchobj.group(1) == 'x':
@@ -648,9 +652,9 @@ class Page:
                 data_object = self.child[-1]
                 continue
 
-            matchobj = re.match(r'sci([_fpj]+):\s*(.*?)$', c)
+            matchobj = re.match(r'sci([_fpji]+):\s*(.*?)$', c)
             if matchobj:
-                data_object.set_sci_fpj(matchobj.group(1),
+                data_object.set_sci_alt(matchobj.group(1),
                                         self.expand_genus(matchobj.group(2)))
                 continue
 
@@ -807,6 +811,17 @@ class Page:
         self.count_matching_obs(obs)
         obs.write_obs(self, w)
 
+    def choose_elab(self, elab_alt):
+        if elab_alt and elab_alt != 'n/a':
+            elab = elab_alt
+        else:
+            elab = self.elab
+        elab_words = elab.split(' ')
+        if len(elab_words) == 2 and '|' not in elab:
+            # Always strip the "spp." suffix or [lowercase type] prefix.
+            elab = strip_sci(elab)
+        return elab
+
     def write_external_links(self, w):
         sci = self.sci
         if self.level == 'below':
@@ -833,37 +848,27 @@ class Page:
                 link_list[elab] = []
             link_list[elab].append(link)
 
-        def choose_elab(elab_base, elab_alt):
-            if elab_alt and elab_alt != 'n/a':
-                elab = elab_alt
-            else:
-                elab = elab_base
-            elab_words = elab.split(' ')
-            if len(elab_words) == 2 and '|' not in elab:
-                # Always strip the "spp." suffix or [lowercase type] prefix.
-                elab = strip_sci(elab)
-            return elab
-
         if self.taxon_id:
-            elab = choose_elab(self.elab, None)
-            sci = strip_sci(elab) # Should equal self.sci
+            elab = self.choose_elab(self.elab_inaturalist)
+            sci = strip_sci(elab)
             add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/{self.taxon_id}" target="_blank">iNaturalist</a>')
         else:
-            i_sci = sci
+            elab = self.choose_elab(self.elab_inaturalist)
+            sci = strip_sci(elab)
             if self.is_hybrid:
-                i_sci = re.sub(r' ', ' \xD7 ', i_sci)
-            add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/search?q={i_sci}&view=list" target="_blank">iNaturalist</a>')
+                sci = re.sub(r' ', ' \xD7 ', sci)
+            add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/search?q={sci}&view=list" target="_blank">iNaturalist</a>')
 
         if self.level != 'above' or self.elab.startswith('family '):
             # CalFlora can be searched by family,
             # but not by other high-level classifications.
-            elab = choose_elab(self.elab, self.elab_calflora)
+            elab = self.choose_elab(self.elab_calflora)
             add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank">CalFlora</a>');
 
         if self.level in ('species', 'below'):
             # CalPhotos cannot be searched by high-level classifications.
             # It can be searched by genus, but I don't find that at all useful.
-            elab = choose_elab(self.elab, self.elab_calphotos)
+            elab = self.choose_elab(self.elab_calphotos)
             if elab != self.elab:
                 # CalPhotos can search for multiple names, and for cases such
                 # as Erythranthe, it may have photos under both names.
@@ -874,14 +879,14 @@ class Page:
         if self.level != 'above' or self.elab.startswith('family '):
             # Jepson can be searched by family,
             # but not by other high-level classifications.
-            elab = choose_elab(self.elab, self.elab_jepson)
+            elab = self.choose_elab(self.elab_jepson)
             # Jepson uses "subsp." instead of "ssp.", but it also allows us to
             # search with that qualifier left out entirely.
             sci = strip_sci(elab)
             add_link(elab, self.elab_jepson, f'<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson&nbsp;eFlora</a>');
 
         if self.level in ('genus', 'species', 'below'):
-            elab = choose_elab(self.elab, self.elab_calflora)
+            elab = self.choose_elab(self.elab_calflora)
             genus = elab.split(' ')[0]
             # srch=t -> search
             # taxon={name} -> scientific name to filter for
