@@ -1023,7 +1023,8 @@ class Page:
             # The child can use this (pre-parsed) text if it has no text
             # of its own.
             if ((self.level == 'genus' and child.level in ('species', 'below')) or
-                (self.level == 'species' and child.level == 'below')):
+                (self.level == 'species' and child.level == 'below') or
+                not child.key_txt):
                 child.key_txt = text
 
             link = child.create_link(2)
