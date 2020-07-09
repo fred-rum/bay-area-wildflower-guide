@@ -1,0 +1,42 @@
+sci:Hordeum spp.
+x:hist
+
+3 spikelets per node: 1 central and 2 lateral.
+
+[
+<h3>auricles of upper leaves well developed, 1--4 mm</h3>
+
+==barley:H. vulgare
+. inflorescence axis generally remaining intact at maturity
+. lateral spikelets sessile
+. glume margins not ciliate
+
+==wall barley:H. murinum
+color:other
+. inflorescence axis breaking apart at maturity
+. lateral spikelets stalked
+. glume margins ciliate
+
+]
+[
+<h3>no auricles on upper leaves</h3>
+
+Lower leaves may have vestigial auricle rudiments.
+
+==squirreltail:H. jubatum
+. glumes strongly divergent at maturity
+
+==meadow barley:H. brachyantherum
+. glumes generally straight or slightly spreading with age
+. inflorescence fully exserted at maturity
+
+==salt barley grass:H. marinum
+. glumes generally straight with age
+. awn of lateral spikelet lemma 3--8 mm
+
+==dwarf barley:H. depressum
+. glumes generally straight with age
+. inflorescence generally +- enclosed in upper sheath at maturity
+. awn of lateral spikelet lemma < 1 mm
+
+]

@@ -1,0 +1,41 @@
+sci:Elymus spp.
+x:!hist/rare
+
+==california bottle-brush grass:E. californicus
+
+==medusa head:Taeniatherum caput-medusae
+sci_fpj:Elymus caput-medusae
+
+==giant wild rye:Leymus condensatus
+sci_fpj:Elymus condensatus
+
+==squirreltail:E. elymoides
+
+==blue wild rye:E. glaucus
+
+==intermediate wheatgrass:E. hispidus
+
+==american dune grass:Leymus mollis
+sci_fpj:Elymus mollis
+
+==big squirreltail:E. multisetus
+color:other
+
+==pacific wild rye:Leymus pacificus
+sci_fpj:Elymus pacificus
+
+==tall wheat grass:E. ponticus
+
+==quack grass:E. repens
+
+==stebbins' wheat grass:E. stebbinsii
+
+==slender wheat grass:E. trachycaulus
+
+==creeping wild rye:Leymus triticoides
+sci_fpj:Elymus triticoides
+
+==Leymus Xmultiflorus
+sci_fpj:Elymus Xgouldii
+
+==E. Xhansenii

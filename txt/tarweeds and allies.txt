@@ -13,6 +13,14 @@ x:ba
 . Perhaps the disk diameter is smaller relative to the ray petals when compared to a similar-sized common madia.
 See also {-tarweeds} for more flowers called "madia".
 
+==common hareleaf:Lagophylla ramosissima
+color: yellow
+x:ba
+. similar to {-grassy tarweed}, but...
+. <b>glandless stem</b>
+. 2-5 calyx-like bracts subtending involucre
+. consistently 6 disk flowers (5 surrounding 1) and 5 ray flowers
+
 ==Holocarpha spp.
 . shrubby
 . seeds never have plumes

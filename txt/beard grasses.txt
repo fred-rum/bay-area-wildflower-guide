@@ -1,0 +1,22 @@
+sci:Polypogon spp.
+
+==water beard grass:P. viridis
+. no awn on glumes
+.. all others have a 1--12 mm awn on each glume
+. no awn on lemma
+
+==mediterranean beard grass:P. maritimus
+. no awn on lemma
+.. all others below have an awn on the lemma
+
+==rabbitfoot grass:P. monspeliensis
+color:other
+. glume lobed
+
+==chilean beard grass:P. australis
+. glume not lobed
+. glume awn 4--7 mm
+
+==ditch beard grass:P. interruptus
+. glume not lobed
+. glume awn 1.5--4.5 mm

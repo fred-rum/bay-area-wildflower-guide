@@ -1,6 +1,8 @@
 sci:Madia spp.
 x:ba
 
+See also {-woodland madia}.
+
 [
 <h3>relatively large diameter flower head</h3>
 
@@ -43,7 +45,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0810+1019
 
 ==grassy tarweed:M. gracilis
 color: yellow
-. stem 6--100 cm, <b>proximally soft- to coarse-hairy</b>, distally glandular-hairy
+. stem 6--100 cm, <b>proximally soft- to coarse-hairy, distally glandular-hairy</b>
 . leaf 1--10 cm, 1--8 mm wide, oblong to linear
 . <b>heads in +- open</b>, panicle- or raceme-like clusters
 . involucre 5--10 mm, finely or coarsely <b>glandular-hairy</b>
@@ -51,6 +53,7 @@ color: yellow
 . 2--16+ disk flowers, anthers +- dark purple
 . 3--10 ray flowers, 1.5--8 mm, lemon-yellow or green-yellow
 . very common
+. see also the similar {-common hareleaf}.
 
 ==coast tarweed:M. sativa
 color: yellow

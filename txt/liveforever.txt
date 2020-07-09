@@ -1,0 +1,34 @@
+sci:Dudleya spp.
+x:hist/rare
+
+==bluff lettuce:D. farinosa
+. petals pale yellow [not full yellow]
+. stem often > 8 cm long, 10--30 mm wide
+. peduncle 10--35 cm
+. leaf 2.5--6 cm
+
+==santa clara valley dudleya:D. abramsii ssp. setchellii
+xx:ba
+color:yellow, cream
+. petals pale yellow [not full yellow]
+. stem < 8 cm long, 10--20 mm wide
+. peduncle 5--20 cm
+. leaf 3--8 cm
+
+==canyon live-forever:D. cymosa
+color:yellow, orange, red, salmon
+. petals bright yellow, orange, or red
+. plant generally < 10 cm wide
+. leaves 0.8--3 &times; longer than wide
+
+==coast dudleya:D. caespitosa
+. petals bright yellow
+. plant 8--32 cm wide
+. leaves 3--10 &times; longer than wide
+. stem of older plants often exposed between dried leaves
+
+==lanceleaf liveforever:D. lanceolata
+. petals yellow to generally red
+. plant 3--35 cm wide
+. leaves 3--10 &times; longer than wide
+. stem of older plants covered by dried leaves
