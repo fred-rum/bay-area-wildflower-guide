@@ -88,12 +88,6 @@ function check(search_str_cmp, match_str, page_info, best_fit_info, pri_adj) {
       pri -= 2.0;
     }
 
-    /* Bump the priority by 0.1 if we're matching the page name
-       (rather than some other name used by the page). */
-    if (pri_adj) {
-      pri += 0.1;
-    }
-
     /* Bump the priority by 0.4 if the match begins at a word boundary. */
     /* I no longer bump the priority if the match ends at a word boundary
        because that can cause priority to shift when typing the next letter
@@ -113,15 +107,15 @@ function check(search_str_cmp, match_str, page_info, best_fit_info, pri_adj) {
   }
 }
 
-function check_elab(search_str_cmp, elab, page_info, best_fit_info) {
-  check(search_str_cmp, elab, page_info, best_fit_info, 0.0)
+function check_elab(search_str_cmp, elab, page_info, best_fit_info, pri_adj) {
+  check(search_str_cmp, elab, page_info, best_fit_info, pri_adj)
 
   /* If the scientific name includes a subtype specifier, also check for
      a match with the specifier removed. */
   var elab_split = elab.split(' ');
   if (elab_split.length == 4) {
     var sci = elab_split[0] + ' ' + elab_split[1] + ' ' + elab_split[3]
-    check(search_str_cmp, sci, page_info, best_fit_info, 0.0)
+    check(search_str_cmp, sci, page_info, best_fit_info, pri_adj)
   }
 }
 
@@ -181,18 +175,6 @@ function bold(search_str_cmp, name) {
   return highlighted_name;
 }
 
-function bolda(search_str_cmp, name_list) {
-  for (var i = 0; i < name_list.length; i++) {
-    var b = bold(search_str_cmp, name_list[i])
-    if (b != name_list[i]) {
-      /* bolding has happened */
-      return b
-    }
-  }
-
-  return name_list[0]
-}
-
 /* Update the autocomplete list.
    If 'enter' is true, then navigate to the top autocompletion's page. */
 function fn_search(enter) {
@@ -212,14 +194,29 @@ function fn_search(enter) {
       pri: 0 /* 0 means no match */
     }
 
-    check(search_str_cmp, page_info.page, page_info, best_fit_info, 0.5)
     if ('com' in page_info) {
       for (var j = 0; j < page_info.com.length; j++) {
-        check(search_str_cmp, page_info.com[j], page_info, best_fit_info, 0.0)
+        var pri_adj = 0.0
+        if (j > 0) {
+          /* Secondary names have slightly reduced priority.  E.g. a species
+             that used to share a name with another species can be found with
+             that old name, but the species that currently uses the name
+             is always the better match. */
+          pri_adj = -0.1
+        }
+        check(search_str_cmp, page_info.com[j], page_info, best_fit_info,
+              pri_adj)
       }
     }
     if ('sci' in page_info) {
-      check_elab(search_str_cmp, page_info.sci, page_info, best_fit_info)
+      for (var j = 0; j < page_info.sci.length; j++) {
+        var pri_adj = 0.0
+        if (j > 0) {
+          pri_adj = -0.1
+        }
+        check_elab(search_str_cmp, page_info.sci[j], page_info, best_fit_info,
+                   pri_adj)
+      }
     }
 
     /* If there's a match, and
@@ -255,9 +252,36 @@ function fn_search(enter) {
       } else {
         var c = 'unobs';
       }
+
+      if ('com' in page_info) {
+        for (var j = 0; j < page_info.com.length; j++) {
+          var com_bold = bold(search_str_cmp, page_info.com[j])
+          if (com_bold != page_info.com[j]) {
+            /* bolding has happened */
+            break
+          } else {
+            /* default value (only used if no entry gets bolded) */
+            com_bold = page_info.com[0]
+          }
+        }
+      } else {
+        com_bold = null
+      }
+
       if ('sci' in page_info) {
-        var elab = page_info.sci;
-        var elab_bold = bold(search_str_cmp, elab);
+        for (var j = 0; j < page_info.sci.length; j++) {
+          var elab = page_info.sci[j]
+          var elab_bold = bold(search_str_cmp, elab)
+          if (elab_bold != elab) {
+            /* bolding has happened */
+            break
+          } else {
+            /* default value (only used if no entry gets bolded) */
+            elab = page_info.sci[0]
+            elab_bold = elab
+          }
+        }
+
         if (startsUpper(elab)) {
           var elab_bold_ital = '<i>' + elab_bold + '</i>';
         } else {
@@ -277,15 +301,13 @@ function fn_search(enter) {
           var elab_bold_ital = (elab_bold.substring(0, space_pos) + ' <i>' +
                                 elab_bold.substring(space_pos+1) + '</i>');
         }
-        if ('com' in page_info) {
-          var com = page_info.com
-          var full = bolda(search_str_cmp, com) + ' (' + elab_bold_ital + ')';
+        if (com_bold) {
+          var full = com_bold + ' (' + elab_bold_ital + ')';
         } else {
           var full = elab_bold_ital;
         }
       } else {
-        var com = page_info.com
-        var full = bolda(search_str_cmp, com)
+        var full = com_bold
       }
       full = full.replace(/'/g, '&rsquo;')
       var entry = ('<p class="nogap"><a class="enclosed ' + c + '" href="' +
@@ -332,7 +354,7 @@ for (var i = 0; i < pages.length; i++) {
   }
   if (!('sci' in page_info)) {
     if (hasUpper(page_info.page)) {
-      page_info.sci = page_info.page
+      page_info.sci = [page_info.page]
     }
   }
 }
