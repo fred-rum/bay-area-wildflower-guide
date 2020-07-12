@@ -290,6 +290,8 @@ function fn_search(enter) {
              we don't want to accidentially trigger on that space.  So we
              have to carefully check whether the highlighted span starts
              before or after the space. */
+          /* Note that this fails if there isn't a space.  We expect any
+             elab that doesn't start with uppercase has at least two words. */
           var space_pos = elab.indexOf(' ');
           if (!elab_bold.startsWith(elab.substring(0, space_pos+1))) {
             /* The highlighted span starts before the space, so search
