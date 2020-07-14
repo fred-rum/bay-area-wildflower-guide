@@ -1207,7 +1207,7 @@ var pages=[
 {page:"large-seed goosefoot",sci:["Oxybasis macrospermum","Chenopodium macrospermum"],x:"u"},
 {page:"largeflower fairybells",sci:["Prosartes smithii"],x:"u"},
 {page:"leafy flebane",sci:["Erigeron foliosus"],x:"u"},
-{page:"leather oak",sci:["Quercus durata"],x:"u"},
+{page:"leather oak",sci:["Quercus durata"],x:"o"},
 {page:"lemon scented tarweed",sci:["Madia citriodora"],x:"u"},
 {page:"lens-podded hoary cress",sci:["Lepidium chalepense"],x:"u"},
 {page:"lesser chickweed",sci:["Stellaria pallida"],x:"u"},

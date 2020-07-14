@@ -50,7 +50,7 @@ color: other, red
 [
 Inner perianth lobe margin variously dentate, at least some teeth >= 0.3 mm [<a href="http://ucjeps.berkeley.edu/eflora/eflora_display.php?tid=42419">illustration</a>]
 
-==fiddle dock:R. pulcher
+==fiddle dock,7:R. pulcher
 color: other, red
 . perennial
 . stem: erect to arching at tip, 2--6(7) dm, branched, slender

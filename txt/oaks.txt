@@ -106,6 +106,7 @@ color:other
 . common
 
 ==leather oak:Q. durata
+color: other
 . leaf:
 .. adaxially convex, dull green
 .. margin wavy, often rolled under, toothed

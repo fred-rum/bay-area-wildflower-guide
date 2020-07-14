@@ -64,7 +64,7 @@ color: white, pink, salmon
 ==seaside buckwheat:E. latifolium
 color: white, pink, salmon
 . flowers are clustered
-. flowers only at inflorescence branch tips
+. flowers <b>only at inflorescence branch tips</b>
 . herb
 . ecology: sand
 . very common along the coast
