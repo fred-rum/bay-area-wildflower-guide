@@ -4,28 +4,28 @@ x:hist/rare
 Key features:
 . length of peduncle (flower stem)
 . size of corolla
-. angle and shape of staminodes
+. angle and shape of staminodes [the crown surrounding the stamens]
 
 <a href="https://www2.palomar.edu/users/warmstrong/brosr1.htm">Labeled photos of brodiaea staminodes.</a>
 
 ==harvest brodiaea:B. elegans
-. scape [flower stem] 10--50 cm.
-. perianth [flower] 29--47 mm long
-. staminodes [crown surrounding stamens] held away from stamens, flat
+. scape 10--50 cm.
+. perianth 29--47 mm long
+. staminodes held away from stamens, flat
 . elevation < 8000 ft.
 
 ==crown brodiaea:B. coronaria
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0616+2164
 . the height of harvest brodiaea, but with staminodes similar to dwarf brodiaea
-. scape [flower stem] 5--25 cm; pedicel <= 7 cm
-. perianth [flower] 23--37.5 mm
-. staminodes [crown surrounding stamens] leaning toward or parallel to stamens
+. scape 5--25 cm; pedicel <= 7 cm
+. perianth 23--37.5 mm
+. staminodes leaning toward or parallel to stamens
 . Quicksilver, Edgewood, Mt. Tam, and various off-park locations
 
 ==dwarf brodiaea:B. terrestris
-. scape [flower stem] 0.5--7 cm (for local ssp.)
-. perianth [flower] 15--40 mm long
-. staminodes [crown surrounding stamens] leaning toward or parallel to stamens, tips generally reflexed, margins 1/4 incurved below tip.
+. scape 0.5--7 cm (for local ssp.)
+. perianth 15--40 mm long
+. staminodes leaning toward or parallel to stamens, tips generally reflexed, margins 1/4 incurved below tip.
 . elevation < 1500 ft.
 
 ==starflower brodiaea:B. stellaris

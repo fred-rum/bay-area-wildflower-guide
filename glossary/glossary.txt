@@ -119,6 +119,7 @@ title:master glossary
 {reniform} Like cordate, but distally rounded instead of pointed, and typically less acute at the base.
 {sagittate} Shaped like an arrowhead, with basal lobes near parallel to the axis.
 {salverform} With a slender tube and abruptly spreading limbs (e.g. "T" shaped).
+{scape,scapes} A peduncle, particularly one that arises directly from ground level with no cauline leaves.
 {scarious} Membranous.
 {segment,segments} The smallest division of a compound/dissected leaf.
 {serrate,serrated} With teeth pointing tipward.  Contrast dentate.
@@ -126,6 +127,7 @@ title:master glossary
 {simple} Generally, composed of a single part; undivided; unbranched.  Opposite of compound.<ul><li>Leaf: composed of a single part (which may be lobed or dissected), not divided into distinct leaflets separated from each other.</li></ul>
 {spike,spikes,spiked} Inflorescence with all flowers sessile on the main axis, generally flowering from the proximal end.  See panicle.
 {spreading} Nearly horizontal or perpendicular to the main axis.
+{staminode,staminodes} A sterile stamen with a modified appearance.
 {stellate,stellately} With 3+ branches radiating from a common point.  (Usually used to describe hair.)
 {stipe,stipes} In the knotweed family, a distal extension of the pedicel separated by a line, bulge, or difference in thickness.  In ferns, the frond stalk; equivalent to petiole.
 {stipule,stipules} Extension at the base of the petiole.

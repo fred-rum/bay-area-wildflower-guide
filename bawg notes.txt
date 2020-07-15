@@ -185,6 +185,3 @@ instead of throwing away observations that aren't made in the bay area,
 throw away observations of *taxons* that aren't found in the bay area.
 i.e. observations of bay-area plants outside the bay area are OK.
 throw these in the location bucket of "outside the bay area".
-
-Add definitions for scape and staminodes, and remove bracketed
-definitions in brodiaeas.txt
