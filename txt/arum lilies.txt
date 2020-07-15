@@ -1,0 +1,13 @@
+sci:Arum spp.
+x:ca
+
+==italian arum:A. italicum
+color: cream
+. inflorescence bract adaxially +- white to pale yellow-green
+. leaves emerging in fall or early winter
+. scattered and naturalized
+
+==palestine arum:A. palaestinum
+. infloresence bract adaxially dark purple
+. leaves emerging in spring
+. extremely rare waif

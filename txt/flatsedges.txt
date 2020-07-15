@@ -1,0 +1,64 @@
+sci:Cyperus spp.
+x:hist/rare
+
+[
+<h3>1 stem</h3>
+
+==purple nutsedge:C. rotundus
+. flower bracts purple to red-brown
+. extremely rare at new near-coast addition to Purisima Creek
+
+==yellow nutsedge:C. esculentus
+. flower bracts yellow-brown to dark-brown
+. rare
+]
+[
+<h3>Generally > 1 stem</h3>
+
+==black flatsedge:C. niger
+. 2 stigmas
+.. all others below have 3 stigmas
+. 2-sided fruit
+.. all others below have 3-sided fruit
+. rare
+
+==bearded flatsedge:C. squarrosus
+. at least some flower bract tips distinctly outcurved, narrow-acute or bristle-like
+.. all others below have flower bract tips that are neither distinctly outcurved nor bristle-like
+. extremely rare
+
+==umbrella papyrus:C. involucratus
+. no basal leaf blades
+.. all others below have basal leaf blades
+. 14--22 inflorescence bracts
+.. all others below have 1--12 inflorescence bracts
+. rare
+
+==tall flatsedge:C. eragrostis
+color:other
+. fruit body +- as long as wide
+. common
+
+==redroot flatsedge:C. erythrorhizos
+. fruit body 1.5--3 &times; longer than wide
+. flower bract 1.3--1.5 mm
+. fruit 0.7--1 mm
+. rare
+
+==fragrant flatsedge:C. odoratus
+. fruit body 1.5--3 &times; longer than wide
+. flower bract 2--4 mm
+. fruit 1.5--2.4 mm
+. stem base not thickened
+. spikelet axis jointed at each bract
+. very rare
+
+==straw-colored flatsedge:C. strigosus
+. fruit body 1.5--3 &times; longer than wide
+. flower bract 2--4 mm
+. fruit 1.5--2.4 mm
+. stem base thickened
+. spikelet axis continuous
+. extremely rare at Wilder Ranch near ocean
+
+]
