@@ -188,6 +188,3 @@ throw these in the location bucket of "outside the bay area".
 
 Add definitions for scape and staminodes, and remove bracketed
 definitions in brodiaeas.txt
-
-The top-level pages should indent individual flowers the same as key
-boxes.

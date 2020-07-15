@@ -944,8 +944,8 @@ class Page:
 
         if has_children:
             # A parent with listed children puts itself in a box.
-            # The box may be indented, in which case, the remainder
-            # of the listing is not indented.
+            # The box may be indented depending on the indent parameter.
+            # The page is then not indented within the box.
             w.write(f'<div class="box{indent_class}">\n')
             indent_class = ''
 
