@@ -189,5 +189,5 @@ throw these in the location bucket of "outside the bay area".
 Add definitions for scape and staminodes, and remove bracketed
 definitions in brodiaeas.txt
 
-Make sure that the count of "observed flowers" on the top-level pages
-doesn't overcount if both children and parents are observed.
+The top-level pages should indent individual flowers the same as key
+boxes.
