@@ -1852,10 +1852,6 @@ with open(root + '/observations.csv', mode='r', newline='', encoding='utf-8') as
             short_park = park
             loc = 'bay area'
 
-        if loc != 'bay area':
-            # Ignore the observation entirely
-            continue
-
         date = row[date_idx]
         month = int(date.split('-')[1], 10) - 1 # January = month 0
 
@@ -1868,7 +1864,7 @@ with open(root + '/observations.csv', mode='r', newline='', encoding='utf-8') as
                 print(f'{sci} is ignored, but there is a page for it ({page.name})')
 
             # For sci_ignore == '+...', the expectation is that we'll fail
-            # to find a page for, but we'll find a page at a higher level.
+            # to find a page for it, but we'll find a page at a higher level.
             # But if sci_ignore == '-...', we do nothing with the observation.
             if sci_ignore[sci][0] != '+':
                 continue
@@ -1888,6 +1884,18 @@ with open(root + '/observations.csv', mode='r', newline='', encoding='utf-8') as
                     #print(f"iNaturalist's common name {com} differs from mine: {page.com} ({page.elab})")
             if com and not page.com:
                 print(f"iNaturalist supplies a missing common name for {com} ({page.elab})")
+
+        if loc != 'bay area':
+            if page:
+                # If the location is outside the bay area, we'll still count
+                # it as long as it's a bay area taxon; i.e. if a page exists
+                # for it.  In this case, list the outside observations by
+                # general location, rather than the specific park.
+                short_park = loc
+            else:
+                # But if there isn't an exact page for it, throw the
+                # observation away; i.e. don't look for a higher-level match.
+                continue
 
         # If a page isn't found for the observation, but a page exists for
         # a different member of the genus, print a warning.

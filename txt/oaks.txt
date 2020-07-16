@@ -67,6 +67,7 @@ color:other
 bark light gray to +- white</h2>
 
 ==canyon live oak:Q. chrysolepis
+color: other
 . <b>acorn nut shell +- woolly inside</b>
 .. all others below are glabrous inside
 . leaf:

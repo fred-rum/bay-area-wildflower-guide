@@ -129,7 +129,7 @@ bay area:
 - {"Fremont, CA": "Fremont Blvd., Fremont, CA"}
 - {"San Jose, CA": "Rd., San Jose, CA"}
 
-elsewhere:
+Hawaii:
 - Honopu Trail
 - Kilauea Lighthouse
 - Puu Olai
@@ -171,16 +171,25 @@ elsewhere:
 - Eleele, Kauai
 - Nonou Mountain
 
+Switzerland:
 - Lauterbrunnen, Switzerland
 - Törbel, Switzerland
+
+Utah:
 - Coral Pink Sand Dunes
-- Pennsylvania
-- {Pennsylvania: ", PA"}
 - Bryce Canyon
-- Yellowstone
-- Jackson Hole
 - Arches National Park
 - Zion NP
+
+Pennsylvania:
+- Pennsylvania
+- {Pennsylvania: ", PA"}
+
+Yellowstone:
+- Yellowstone
+- Jackson Hole
+
+Sierras:
 - Yosemite
 - Hetch Hetchy
 - Ansel Adams Wilderness

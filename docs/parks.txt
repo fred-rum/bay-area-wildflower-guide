@@ -6,10 +6,8 @@ Its format is:
 - {(canonical park name): (match pattern)}
 
 For observations from iNaturalist, the location of the observation is
-mapped to a park name.  If the location *starts* with a known park
-name, the location is mapped to that park.  If the any part of the
-location matches a match pattern, the location is mapped to the
-corresponding park.
+mapped to a park name.  If the location matches any part of a park's
+match pattern, the location is mapped to that park.
 
 Only observations that map to a park in area "bay area" are counted.
 Observations that map to other areas are discarded.  If an observation
