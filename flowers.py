@@ -880,9 +880,13 @@ class Page:
             if elab != self.elab:
                 # CalPhotos can search for multiple names, and for cases such
                 # as Erythranthe, it may have photos under both names.
-                elab = self.elab + '|' + elab
+                # Use both names when linking to CalPhotos, but for simplicity
+                # list only the txt-specified name in the HTML listing.
+                expanded_elab = self.elab + '|' + elab
+            else:
+                expanded_elab = elab
             # rel-taxon=begins+with -> allows matches with lower-level detail
-            add_link(elab, self.elab_calphotos, f'<a href="https://calphotos.berkeley.edu/cgi/img_query?rel-taxon=begins+with&where-taxon={elab}" target="_blank">CalPhotos</a>\n');
+            add_link(elab, self.elab_calphotos, f'<a href="https://calphotos.berkeley.edu/cgi/img_query?rel-taxon=begins+with&where-taxon={expanded_elab}" target="_blank">CalPhotos</a>');
 
         if self.level != 'above' or self.elab.startswith('family '):
             # Jepson can be searched by family,

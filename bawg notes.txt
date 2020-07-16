@@ -114,10 +114,6 @@ https://en.wikipedia.org/wiki/Papilionaceous_flower#/media/File:Sesbanea_bispino
 The banner is a single petal, but a crease along its midline may give
 the appearance of two petals fused at the edge.
 
-When displaying the scientific name(s) used for CalPhotos, don't
-include the iNaturalist/POWO name if another was specified.  (Do
-include the iNaturalist name in the search URL, though.)
-
 
 The main glossary should include manual links to lower-level
 glossaries, and vice versa.
