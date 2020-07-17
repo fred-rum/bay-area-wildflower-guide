@@ -1,5 +1,4 @@
 sci:Pentagramma triangularis
-color:n/a
 x:ba
 
 The underside is significantly gold/brown.

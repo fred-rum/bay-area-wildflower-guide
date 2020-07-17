@@ -5,7 +5,7 @@ These are typically planted as ornamentals, but some may have become naturalized
 ==chinese pistache:P. chinensis
 . trunk brown and shedding (<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0416+1022">example</a>
 scij:n/a
-color:n/a
+color:other
 
 ==mount atlas mastic tree:Pistacia atlantica
 . trunk gray ridged and furrowed

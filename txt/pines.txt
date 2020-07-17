@@ -19,7 +19,6 @@ this list to the less rare ones (> 25 CalFlora records).
 <h2>3 leaves per bundle</h2>
 
 ==monterey pine:P. radiata
-color:n/a
 . proximal seed cone scale tips not recurved, or if recurved are elongated < 3 cm
 . seed cones on stems many years
 . seed cone scale tips, except distal, with knob rounded, < 2 cm

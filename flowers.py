@@ -41,6 +41,8 @@ import codecs
 from unidecode import unidecode
 import datetime
 
+non_flower_top_pages = ('conifers', 'ferns')
+
 year = datetime.datetime.today().year
 
 class Obs:
@@ -540,7 +542,7 @@ class Page:
 
         # check for bad colors.
         for color in self.color:
-            if color not in color_list and color != 'n/a':
+            if color not in color_list:
                 print(f'page {self.name} uses undefined color {color}')
 
     def record_ext_photo(self, label, link):
@@ -1022,9 +1024,6 @@ class Page:
             sub_glossary = glossary_taxon_dict[self.name]
             glossary = link_sub_glossary(glossary, sub_glossary)
 
-        if self.name == 'wild buckwheats':
-            print(glossary.name)
-
         self.glossary = glossary
 
         for child in self.child:
@@ -1384,8 +1383,11 @@ class Page:
         if self.taxon_id and not (self.jpg_list or self.child):
             print(f'{self.name} is observed, but has no photos')
 
-        if self.jpg_list and not self.color:
-            print(f'No color for {self.name}')
+        if self.top_level == 'flowering plants':
+            if self.jpg_list and not self.color:
+                print(f'No color for flower: {self.name}')
+        elif self.color:
+            print(f'Color specified for non-flower: {self.name}')
 
     def record_genus(self):
         # record all pages that are within each genus
@@ -1830,6 +1832,8 @@ for jpg in sorted(jpg_list):
             page = Page(name)
         page.add_jpg(jpg)
 
+# Although other color checks are done later, we check for excess colors
+# here before propagating color to parent pages that might not have photos.
 for page in page_array:
     if page.color and not page.jpg_list:
         print(f'page {page.name} has a color assigned but has no photos')
@@ -2041,7 +2045,7 @@ for page in page_array:
             did_intro = True
         print('  ' + page.name)
 
-for name in ['ferns']:
+for name in non_flower_top_pages:
     name_page[name].set_top_level(name, name)
 
 for page in top_list:

@@ -72,14 +72,6 @@ colors?  It could come in handy, e.g. for a genus that is always the
 same color.  But it would also make it easy to be sloppy and not
 verify the correct color of everything.)
 
-Provide better support for things that aren't flowering plants,
-e.g. non-flowering plants, animals, fungi, etc.  The color lists
-should only be for flowering plants.  Besides the "all flowers" list,
-there should be additional "all ..." lists for each hierarchical top.
-Pages would default to behave as flowering plants unless their
-hierarchical top is one of the other types, which would be listed and
-linked from index.html.
-
 For HTML files, use the scientific name instead of the common name if
 possible?  This reduces churn when common names change, but it makes
 it harder to find the corresponding txt file.  In any case, common
@@ -158,4 +150,7 @@ top view shows all the parts, but is too crowded to label
 
 link individual definitions to labeled photos showing variations in character
 
-separate "stipe" definitions into knotweed/fern glossaries
+Auto-generate a table of contents for the glossary hierarchy to be
+placed on every glossary page.  The current level is highlighted
+(e.g. bold).
+

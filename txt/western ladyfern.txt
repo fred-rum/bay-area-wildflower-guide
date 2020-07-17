@@ -1,5 +1,4 @@
 sci:Athyrium filix-femina ssp. cyclosorum
-color:n/a
 x:ba
 
 . frond blade elliptic to lanceolate
