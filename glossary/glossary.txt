@@ -33,13 +33,6 @@ title:master glossary
 {filament,filaments} The stalk that holds up an anther.
 {anther,anthers} The distal end of the stamen where pollen is produced.  Usually has two lobes.
 
-<h2>Words used for the sunflower family</h2>
-
-<p>See also the sunflower-related uses of inflorescence and involucre.</p>
-
-{ligule,ligules} The petal of a flower in the sunflower family comprised only of ray-like flowers (i.e. not disk and ray).
-{phyllary,phyllaries} A bract of the flower head in the sunflower family.  A member of the involucre.
-
 <h2>3-D shapes (e.g. for the involucre)</h2>
 
 <p>All involucre shapes may be flared at the tip or not.</p>
@@ -89,9 +82,9 @@ title:master glossary
 {glabrous} Without hair.
 {glaucous} Covered with the appearance of a whitish powder.
 {herb,herbs,herbaceous} Plant without any woody parts.
-{inflorescence,inflorescences} A cluster of flowers from a common point or sharing a stalk that has only flowers on it.  A head in the sunflower family.
+{inflorescence,inflorescences} A cluster of flowers from a common point or sharing a stalk that has only flowers on it.
 {involucel,involucels} Secondary involucre within an inflorescence.
-{involucre,involucres} Collective term for a cluster of bracts.  Typically refers to the green base of a flower head in the sunflower family.
+{involucre,involucres} Collective term for a cluster of bracts.
 {lanceolate} Long and somewhat narrow; widest between the middle and the base.
 {leaflet,leaflets} A division of a compound leaf (which may itself be further compound).
 {lobe,lobes,lobed} An protrusion from a larger body, otherwise undifferentiated from the main body.  E.g. a corolla lobe is the free part of a petal.

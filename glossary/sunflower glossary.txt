@@ -1,0 +1,11 @@
+title:sunflower glossary
+taxon:sunflower family
+
+<p>See also the <a href="glossary.html">master glossary</a>.</p>
+
+<p>What many people consider to be a single flower head in the sunflower family is actually a tight inflorescence of many flowers, often with separate shapes for the center disk flowers and outer ray flowers.</p>
+
+{head,heads,flower head,flower heads} A tight inflorescence in the sunflower family which appears from a distance to be a single flower.
+{involucre,involucres} The green base of a flower head in the sunflower family.  See also the general definition of involucre.
+{ligule,ligules} The petal of a flower in the sunflower family comprised only of ray-like flowers (i.e. not disk and ray flowers).
+{phyllary,phyllaries} A bract of the flower head in the sunflower family.  A member of the involucre.

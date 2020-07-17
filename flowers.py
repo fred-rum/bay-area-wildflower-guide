@@ -1575,10 +1575,15 @@ class Glossary:
             # or special syntax {...}.
             sub_re = r'(.*?)(\Z|<a\s.*?</a>|<\w.*?>|{.*?})'
 
-        # Perform on the glossary link substitution for each non-tag/tag
+        # Perform the glossary link substitution for each non-tag/tag
         # pair throughout the entire multi-line txt string.
         txt = re.sub(sub_re, repl_sub_glossary, txt,
                      flags=re.DOTALL)
+
+        if is_glossary:
+            # Remove the inserted 'glossaryX' text to allow a definition
+            # to link to a related term in a higher-level glossary.
+            txt = re.sub(r'glossaryX', '', txt)
 
         # Also perform link substitution for the parent glossary (and
         # its parent, etc.)
@@ -1597,6 +1602,23 @@ class Glossary:
             self.taxon = find_page1(name).name
             return ''
 
+        def repl_defn(matchobj):
+            words = matchobj.group(1)
+            defn = matchobj.group(2)
+            word_list = [x.strip() for x in words.split(',')]
+            primary_word = word_list[0]
+            for word in word_list:
+                self.glossary_dict[word.lower()] = primary_word
+                # Prevent a glossary definition from linking to its own entry
+                # by prepending 'glossaryX' to any occurance of the defined
+                # terms in the definition.  We'll remove this after performing
+                # the first level of glossary linking, allowing the definition
+                # to link to a higher-level glossary if there is a definition
+                # there.
+                defn = re.sub(r'\b' + word + r'\b', 'glossaryX' + word, defn,
+                              re.IGNORECASE)
+            return '{' + words + '} ' + defn
+
         with open(f'{root}/glossary/{self.name}.txt', mode='r') as f:
             self.txt = f.read()
 
@@ -1613,13 +1635,10 @@ class Glossary:
             print(f'title not defind for glossary "{self.name}"')
             self.title = 'unknown glossary'
 
+        # Read definitions and modify them to avoid self-linking.
         self.glossary_dict = {}
-        for (words, defn) in re.findall(r'^{([^\}]+)}\s+(.*)$',
-                                        self.txt, flags=re.MULTILINE):
-            word_list = [x.strip() for x in words.split(',')]
-            primary_word = word_list[0]
-            for word in word_list:
-                self.glossary_dict[word.lower()] = primary_word
+        self.txt = re.sub(r'^{([^\}]+)}\s+(.*)$',
+                          repl_defn, self.txt, flags=re.MULTILINE)
 
         # sort the glossary list in reverse order so that for cases where two
         # phrases start the same and one is a subset of the other, the longer
