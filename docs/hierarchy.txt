@@ -16,22 +16,29 @@ not be necessary if the differences are obvious.  The program will
 print a warning if the genus page is missing, or if any described
 species are missing from a genus page.
 
-Since the genus page should list all necessary distinguish features of
-its species, little extra information is needed for the species page.
-In many cases, all information can be included directly on the genus
-page so that a separate txt file is not needed for the species.
+Since the genus page should list all necessary distinguishing features
+of its species, little extra information is needed for the species
+page.  In many cases, all information can be included directly on the
+genus page so that a separate txt file is not needed for the species.
 
-The result is a number of (mostly) independent trees of pages.  Some
+The result is a number of (mostly) independent trees of pages.
+("Trees" as in a data hierarchy, not as in a kind of plant.)  Some
 trees may share a portion of hierarchy (e.g. when some trees don't use
 the strict scientific hierarchy).
 
-If the root of any tree is below the family level and the family is
-known, the program automatically creates a page for the family that
-links to all appropriate subtrees.  Pages within each family are
-ordered by number of observations (among all pages in that tree), from
-most to least.
+There are a few designated top-level trees (e.g. ferns) in which the
+entire hierarchy is explicit.  The remaining top-level trees are
+assumed to be flowering plants (trees of flowers), for which some
+hierarchy is auto-generated, as described below.
 
-The page with "All flowers" lists all top-level trees (typically
-families, whether manually or automatically generated), ordered again
-by observation counts.  The hierarchy within each tree is also listed
-in the order in which the children are listed on each page.
+If the root of a tree of flowers is below the family level and the
+family is known, the program automatically creates a page for the
+family that links to all appropriate subtrees.  Pages within each
+family are ordered by number of observations (among all pages in that
+tree), from most to least.
+
+The page with "All flowers" lists all top-level trees of flowers
+(typically families, whether manually or automatically generated),
+ordered again by observation counts.  The hierarchy within each tree
+is also listed in the order in which the children are listed on each
+page.

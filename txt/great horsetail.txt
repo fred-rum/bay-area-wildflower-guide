@@ -1,6 +1,8 @@
 sci:Equisetum telmateia
 xx:ca
 
+Only one "living fossil" genus remains in the horsetail family.  All other genuses are extinct.
+
 ==giant horsetail:E. telmateia ssp. braunii
 color:n/a
 . main stem between nodes is green

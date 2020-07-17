@@ -27,4 +27,4 @@ sci:class Polypodiopsida
 ==cliffbrakes
 . leaf segments stalked
 
-==great horsetail
+==horsetails
