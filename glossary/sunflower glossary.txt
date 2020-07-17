@@ -3,9 +3,12 @@ taxon:sunflower family
 
 <p>See also the <a href="glossary.html">master glossary</a>.</p>
 
-<p>What many people consider to be a single flower head in the sunflower family is actually a tight inflorescence of many flowers, often with separate shapes for the center disk flowers and outer ray flowers.</p>
+<p>A single flower head in the sunflower family is actually a tight inflorescence of many flowers, often with separate shapes for the center disk flowers and outer ray flowers.</p>
 
+{disk,disks} The collective term for all disk flowers in a head.
+{disk flower,disk flowers} A flower in the central portion of a head in the sunflower family.  Usually radial and 5-lobed.  Often surrounded by ray flowers.
 {head,heads,flower head,flower heads} A tight inflorescence in the sunflower family which appears from a distance to be a single flower.
 {involucre,involucres} The green base of a flower head in the sunflower family.  See also the general definition of involucre.
-{ligule,ligules} The petal of a flower in the sunflower family comprised only of ray-like flowers (i.e. not disk and ray flowers).
+{ligule,ligules,ligulate flower,ligulate flowers} A ray-like flower that is clustered only with other ligules to form a head in the sunflower family (i.e. one without disk flowers).
 {phyllary,phyllaries} A bract of the flower head in the sunflower family.  A member of the involucre.
+{ray,rays,ray flower,ray flowers} A flower in the outer portion of a head in the sunflower family.  Flat and uni-directional, not radial.  May be distally lobed.  The rays form a ring around the central disk.
