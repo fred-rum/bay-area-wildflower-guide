@@ -2,7 +2,7 @@ title:master glossary
 
 <h2>3-D shapes (e.g. for the involucre)</h2>
 
-<p>All involucre shapes may be flared at the tip or not.</p>
+<p>All involucre shapes may be flared at the tip or not, which is independent of the shape listed below.</p>
 
 {bell-shaped,bell} Rapidly widening at the base, then slowly expanding toward the tip.
 {cylindric} Significantly longer than wide with parallel sides.
@@ -66,7 +66,6 @@ title:master glossary
 {reflexed,reflex,reflexing} Abruptly bent somewhat or entirely backward.  Opposite of erect or ascending.  Contrast recurved.
 {reniform} Like cordate, but distally rounded instead of pointed, and typically less acute at the base.
 {sagittate} Shaped like an arrowhead, with basal lobes near parallel to the axis.
-{salverform} With a slender tube and abruptly spreading limbs (e.g. "T" shaped).
 {scarious} Membranous.
 {segment,segments} The smallest division of a compound/dissected leaf.
 {serrate,serrated} With teeth pointing tipward.  Contrast dentate.

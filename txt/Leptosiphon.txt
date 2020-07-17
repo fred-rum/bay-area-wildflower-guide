@@ -13,7 +13,7 @@ Key features:
 . corolla tube, throat, and lobe colors
 . <b>exact corolla lobe length</b>
 . leaf lobe length and shape
-. stigmas linear or not (Leptosiphons generally have 3 stigmas on 1 style, 5 stamens)
+. stigmas linear or not (Leptosiphons generally have 3 stigmas on 1 style and 5 stamens)
 
 [
 <h2>corolla pediceled above sparse bracts</h2>

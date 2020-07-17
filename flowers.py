@@ -990,13 +990,6 @@ class Page:
             child.cross_out_children(page_list)
 
     def set_glossary(self, glossary):
-        def link_sub_glossary(glossary, sub_glossary):
-            if glossary == sub_glossary:
-                return glossary
-            else:
-                sub_glossary.parent_glossary = glossary
-                return sub_glossary
-
         if self.glossary:
             # We seem to be setting the glossary via two different
             # tree paths.  Make sure that the parent taxon's glossary
@@ -1012,17 +1005,12 @@ class Page:
             # since it and its children have already set the glossary.
             return
 
-        if (not self.parent and
-            self.top_level in glossary_taxon_dict and
-            self.top_level != self.name):
-            sub_glossary = glossary_taxon_dict[self.top_level]
-            glossary = link_sub_glossary(glossary, sub_glossary)
-
         if self.name in glossary_taxon_dict:
             # Append the parent glossary list to the taxon's assigned
             # glossary list.
             sub_glossary = glossary_taxon_dict[self.name]
-            glossary = link_sub_glossary(glossary, sub_glossary)
+            sub_glossary.parent_glossary = glossary
+            glossary = sub_glossary
 
         self.glossary = glossary
 
@@ -2112,10 +2100,17 @@ for glossary_file in glossary_list:
     glossary = Glossary(glossary_file)
     glossary.read_terms()
 
+master_glossary = glossary_taxon_dict[None]
+flower_glossary = glossary_taxon_dict['flowering plants']
+flower_glossary.parent_glossary = master_glossary
+
 # Determine the primary glossary to use for each page *and*
 # determine the hierarchy among glossaries.
 for page in top_list:
-    page.set_glossary(glossary_taxon_dict[None])
+    if page.top_level == 'flowering plants':
+        page.set_glossary(flower_glossary)
+    else:
+        page.set_glossary(master_glossary)
 
 # Now that we know the glossary hierarchy, we can apply glossary links
 # within each glossary and finally write out the HTML.

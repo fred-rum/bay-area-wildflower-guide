@@ -54,5 +54,6 @@ taxon:flowering plants
 {involucel,involucels} Secondary involucre within an inflorescence.
 {involucre,involucres} Collective term for a cluster of bracts.
 {panicle,panicles,panicled} Branched infloresence with flowers that grow from the proximal end.
+{salverform} With a slender tube and abruptly spreading limbs (e.g. "T" shaped).
 {spike,spikes,spiked} Inflorescence with all flowers sessile on the main axis, generally flowering from the proximal end.  See panicle.
 {umbel,umbels} An inflorescence in which 3+ flower pedicels branch from a common point.
