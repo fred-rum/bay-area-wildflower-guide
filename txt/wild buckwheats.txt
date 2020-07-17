@@ -80,21 +80,18 @@ color: white, pink, salmon
 . <b>flowers are individual</b>
 . flowers at inflorescence branch tips <b>and forks of branches</b>
 . shrub
-. 
 . very rare
 
 ==long-stemmed buckwheat:E. elongatum var. elongatum
 . herb
 . <b>flowers are individual</b>
 . flowers only at inflorescence branch tips
-. 
 . very rare
 
 ==wright's buckwheat:E. wrightii
 . shrub or subshrub
 . <b>flowers are individual</b>
 . flowers only at inflorescence branch tips
-. 
 . rare
 
 ]

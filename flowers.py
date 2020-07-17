@@ -1010,7 +1010,8 @@ class Page:
             # since it and its children have already set the glossary.
             return
 
-        if (self.top_level in glossary_taxon_dict and
+        if (not self.parent and
+            self.top_level in glossary_taxon_dict and
             self.top_level != self.name):
             sub_glossary = glossary_taxon_dict[self.top_level]
             glossary = link_sub_glossary(glossary, sub_glossary)
@@ -1021,10 +1022,13 @@ class Page:
             sub_glossary = glossary_taxon_dict[self.name]
             glossary = link_sub_glossary(glossary, sub_glossary)
 
+        if self.name == 'wild buckwheats':
+            print(glossary.name)
+
         self.glossary = glossary
 
         for child in self.child:
-            child.set_glossary(self.glossary)
+            child.set_glossary(glossary)
 
     def parse(self):
         s = self.txt
