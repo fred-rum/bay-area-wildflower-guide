@@ -1,0 +1,7 @@
+title:fern glossary
+taxon:ferns
+
+<p>See also the <a href="glossary.html">master glossary</a>.</p>
+
+{pinna,pinnae} The 1st-order division of a frond blade.
+{pinnule,pinnules} The 2nd-order division of a frond blade.  (The 1st-order division of a pinna.)

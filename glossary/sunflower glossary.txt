@@ -1,7 +1,7 @@
 title:sunflower glossary
 taxon:sunflower family
 
-<p>See also the <a href="glossary.html">master glossary</a>.</p>
+<p>See also the <a href="flower glossary.html">flower glossary</a> for all flower types.</p>
 
 <p>A single flower head in the sunflower family is actually a tight inflorescence of many flowers, often with separate shapes for the center disk flowers and outer ray flowers.</p>
 

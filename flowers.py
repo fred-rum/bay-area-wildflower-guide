@@ -988,6 +988,13 @@ class Page:
             child.cross_out_children(page_list)
 
     def set_glossary(self, glossary):
+        def link_sub_glossary(glossary, sub_glossary):
+            if glossary == sub_glossary:
+                return glossary
+            else:
+                sub_glossary.parent_glossary = glossary
+                return sub_glossary
+
         if self.glossary:
             # We seem to be setting the glossary via two different
             # tree paths.  Make sure that the parent taxon's glossary
@@ -1003,13 +1010,18 @@ class Page:
             # since it and its children have already set the glossary.
             return
 
+        if (self.top_level in glossary_taxon_dict and
+            self.top_level != self.name):
+            sub_glossary = glossary_taxon_dict[self.top_level]
+            glossary = link_sub_glossary(glossary, sub_glossary)
+
         if self.name in glossary_taxon_dict:
             # Append the parent glossary list to the taxon's assigned
             # glossary list.
-            self.glossary = glossary_taxon_dict[self.name]
-            self.glossary.parent_glossary = glossary
-        else:
-            self.glossary = glossary
+            sub_glossary = glossary_taxon_dict[self.name]
+            glossary = link_sub_glossary(glossary, sub_glossary)
+
+        self.glossary = glossary
 
         for child in self.child:
             child.set_glossary(self.glossary)
@@ -1599,7 +1611,11 @@ class Glossary:
 
         def repl_taxon(matchobj):
             name = matchobj.group(1)
-            self.taxon = find_page1(name).name
+            if name == 'flowering plants':
+                # Special case since there is no page for flowering plants.
+                self.taxon = name
+            else:
+                self.taxon = find_page1(name).name
             return ''
 
         def repl_defn(matchobj):
