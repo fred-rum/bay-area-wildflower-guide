@@ -1197,6 +1197,7 @@ class Page:
         else:
             s = self.key_txt
 
+        s = link_figures(s)
         s = re.sub(r'{-([^}]+)}', repl_link, s)
         s = self.glossary.link_glossary_words(s)
         self.txt = s
@@ -1505,6 +1506,16 @@ def write_footer(w):
 </body>
 ''')
 
+def link_figures(txt):
+    def repl_figure(matchobj):
+        file = matchobj.group(1)
+        if not os.path.isfile(f'{root}/figures/{file}.svg'):
+            print(f'Broken link to {file}')
+        return f'<div class="photo-box"><a href="../figures/{file}.svg"><img src="../figures/{file}.svg" height="200" class="leaf-thumb"></a></div>'
+
+    return re.sub(r'^figure:(.*)(:\.svg|)$', repl_figure,
+                  txt, flags=re.MULTILINE)
+
 
 ###############################################################################
 # start of Glossary class
@@ -1686,6 +1697,8 @@ class Glossary:
             primary_word = word_list[0]
 
             return f'<div class="defn" id="{primary_word}"><dt>{primary_word}</dt><dd>{defn}</dd></div>'
+
+        self.txt = link_figures(self.txt)
 
         self.txt = self.link_glossary_words(self.txt, is_glossary=True)
 

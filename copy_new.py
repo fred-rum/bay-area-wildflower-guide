@@ -16,6 +16,7 @@ file_list = ['index.html',
 subdir_list = ['html',
                'photos',
                'thumbs',
+               'figures',
                'favicon']
 
 excluded_list = ['_mod.html']

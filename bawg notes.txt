@@ -148,9 +148,10 @@ pale flax
 good side view down to bracts
 top view shows all the parts, but is too crowded to label
 
-link individual definitions to labeled photos showing variations in character
+link individual definitions to labeled photos showing variations in
+character; e.g. by following the definition with "[figure]" with a
+link.  Auto-fill '[figure:relative_path]' in the txt or glossary with
+a link to the figure.
 
-Auto-generate a table of contents for the glossary hierarchy to be
-placed on every glossary page.  The current level is highlighted
-(e.g. bold).
-
+Auto-fill 'figure:relative_path' on a line by itself in the txt or
+glossary with a thumbnail and a link to the figure.

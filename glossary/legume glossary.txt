@@ -3,9 +3,7 @@ taxon:legume family
 
 <h2>Parts of a pea flower (any flower in the legume family)</h2>
 
-<div class="photo-box">
-<a href="../figures/pea flower.svg"><img src="../figures/pea flower.svg" height="200" class="leaf-thumb"></a>
-</div>
+figure:pea flower
 
 <p>A pea flower has five petals in a bilateral arrangement (not radial).</p>
 
