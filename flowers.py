@@ -1665,12 +1665,12 @@ class Glossary:
 
     def write_toc(self, w, current):
         def by_name(glossary):
-            return glossary.name
+            return glossary.title
 
         if self == current:
-            w.write(f'<b>{self.name}</b></br>')
+            w.write(f'<b>{self.title}</b></br>')
         else:
-            w.write(f'<a href="{self.name}.html">{self.name}</a></br>')
+            w.write(f'<a href="{self.name}.html">{self.title}</a></br>')
         if self.child:
             w.write('<div class="toc-indent">\n')
             for child in sorted(self.child, key=by_name):
@@ -1697,7 +1697,7 @@ class Glossary:
                            nosearch=False)
               w.write('<h4 class="title">Glossary table of contents</h4>\n')
               master_glossary.write_toc(w, self)
-              w.write(f'<h1>{self.name}</h1>\n')
+              w.write(f'<h1>{self.title}</h1>\n')
               w.write(self.txt)
               write_footer(w)
 
