@@ -316,3 +316,11 @@ ul.list-sub {
 p.list-head {
     margin-bottom: 6px;
 }
+h4.title {
+    position: static;
+    padding-top: 1.5em;
+}
+div.toc-indent {
+    display: block;
+    margin-left: 25px;
+}

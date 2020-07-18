@@ -1009,7 +1009,7 @@ class Page:
             # Append the parent glossary list to the taxon's assigned
             # glossary list.
             sub_glossary = glossary_taxon_dict[self.name]
-            sub_glossary.parent_glossary = glossary
+            sub_glossary.set_parent(glossary)
             glossary = sub_glossary
 
         self.glossary = glossary
@@ -1309,7 +1309,7 @@ class Page:
                                    family_page in self.parent))
             else:
                 has_family = False
-            write_header(w, title, h1, has_sci or has_family)
+            write_header(w, title, h1, nospace=has_sci or has_family)
 
             if self.icom:
                 w.write(f'(<b>{self.icom}</b>){format_br(elab)}')
@@ -1487,9 +1487,9 @@ def write_header(w, title, h1, nospace=False, nosearch=False):
 <div id="autocomplete-box"></div>
 </div>
 ''')
-    w.write(f'''<div id="body">
-<h1 id="title"{space_class}>{h1}</h1>
-''')
+    w.write('<div id="body">\n')
+    if h1:
+        w.write(f'<h1 id="title"{space_class}>{h1}</h1>\n')
 
 
 def write_footer(w):
@@ -1517,7 +1517,12 @@ class Glossary:
         self.name = name
         self.title = None
         self.taxon = None
-        self.parent_glossary = None
+        self.parent = None # a single parent glossary (or None)
+        self.child = set() # an unordered set of child glossaries
+
+    def set_parent(self, parent):
+        self.parent = parent
+        parent.child.add(self)
 
     def link_glossary_words(self, txt, is_glossary=False):
         # This function is called for a glossary word match.
@@ -1532,7 +1537,7 @@ class Glossary:
         def repl_sub_glossary(matchobj):
             allowed = matchobj.group(1)
             disallowed = matchobj.group(2)
-            if not self.parent_glossary:
+            if not self.parent:
                 # If we're at the last step of glossary substitution,
                 # also substitute in smart quotes.
                 # Note that glossary substitution introduces more tags
@@ -1593,8 +1598,8 @@ class Glossary:
 
         # Also perform link substitution for the parent glossary (and
         # its parent, etc.)
-        if self.parent_glossary:
-            txt = self.parent_glossary.link_glossary_words(txt, is_glossary)
+        if self.parent:
+            txt = self.parent.link_glossary_words(txt, is_glossary)
 
         return txt
 
@@ -1658,6 +1663,20 @@ class Glossary:
         ex='|'.join(map(re.escape, glossary_list))
         self.glossary_regex = re.compile(rf'\b({ex})\b', re.IGNORECASE)
 
+    def write_toc(self, w, current):
+        def by_name(glossary):
+            return glossary.name
+
+        if self == current:
+            w.write(f'<b>{self.name}</b></br>')
+        else:
+            w.write(f'<a href="{self.name}.html">{self.name}</a></br>')
+        if self.child:
+            w.write('<div class="toc-indent">\n')
+            for child in sorted(self.child, key=by_name):
+                child.write_toc(w, current)
+            w.write('</div>\n')
+
     def write_html(self):
         def repl_defns(matchobj):
             words = matchobj.group(1)
@@ -1674,7 +1693,11 @@ class Glossary:
                           repl_defns, self.txt, flags=re.MULTILINE)
 
         with open(f'{root}/html/{self.name}.html', mode='w') as w:
-              write_header(w, self.title, self.title, nosearch=False)
+              write_header(w, self.title, None, nospace=True,
+                           nosearch=False)
+              w.write('<h4 class="title">Glossary table of contents</h4>\n')
+              master_glossary.write_toc(w, self)
+              w.write(f'<h1>{self.name}</h1>\n')
               w.write(self.txt)
               write_footer(w)
 
@@ -2102,7 +2125,7 @@ for glossary_file in glossary_list:
 
 master_glossary = glossary_taxon_dict[None]
 flower_glossary = glossary_taxon_dict['flowering plants']
-flower_glossary.parent_glossary = master_glossary
+flower_glossary.set_parent(master_glossary)
 
 # Determine the primary glossary to use for each page *and*
 # determine the hierarchy among glossaries.

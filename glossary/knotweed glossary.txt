@@ -1,6 +1,4 @@
 title:knotweed glossary
 taxon:knotweed family
 
-<p>See also the <a href="flower glossary.html">flower glossary</a> for all flower types.</p>
-
 {stipe,stipes} In the knotweed family, a distal extension of the pedicel separated by a line, bulge, or difference in thickness.  Compare to stipule.
