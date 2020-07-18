@@ -143,6 +143,14 @@ relationship.  The link is just the common and scientific names of the
 child inline with the rest of the text, without any image or special
 formatting.
 
+figure:filename on a line by itself creates a thumbnail and a link to
+the corresponding SVG file in the figures directory.  The '.svg'
+suffix is optional in the txt.
+
+[figure:filename] anywhere in the txt is replaced with the text
+'[figure]' with a link to the corresponding SVG file in the figures
+directory.  The '.svg' suffix is optional in the txt.
+
 '[' and ']' (each on a line by itself) creates a light-bordered box
 surrounding all text between the brackets.  Useful for organizing
 subsets of children on a page.

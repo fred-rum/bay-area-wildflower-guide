@@ -1507,14 +1507,23 @@ def write_footer(w):
 ''')
 
 def link_figures(txt):
-    def repl_figure(matchobj):
+    def repl_figure_thumb(matchobj):
         file = matchobj.group(1)
         if not os.path.isfile(f'{root}/figures/{file}.svg'):
-            print(f'Broken link to {file}')
+            print(f'Broken figure link to {file}.svg')
         return f'<div class="photo-box"><a href="../figures/{file}.svg"><img src="../figures/{file}.svg" height="200" class="leaf-thumb"></a></div>'
 
-    return re.sub(r'^figure:(.*)(:\.svg|)$', repl_figure,
-                  txt, flags=re.MULTILINE)
+    def repl_figure_text(matchobj):
+        file = matchobj.group(1)
+        if not os.path.isfile(f'{root}/figures/{file}.svg'):
+            print(f'Broken figure link to {file}.svg')
+        return f'<a href="../figures/{file}.svg">[figure]</a>'
+
+    txt = re.sub(r'^figure:(.*)(:\.svg|)$', repl_figure_thumb,
+                 txt, flags=re.MULTILINE)
+    txt = re.sub(r'\[figure:(.*)(:\.svg|)\]', repl_figure_text,
+                 txt, flags=re.MULTILINE)
+    return txt
 
 
 ###############################################################################
@@ -1648,6 +1657,10 @@ class Glossary:
         with open(f'{root}/glossary/{self.name}.txt', mode='r') as f:
             self.txt = f.read()
 
+        # Link figures prior to parsing glossary terms so that they're
+        # properly recognized as not to be touched.
+        self.txt = link_figures(self.txt)
+
         self.txt = re.sub(r'^title:\s*(.*?)\s*$',
                           repl_title, self.txt, flags=re.MULTILINE)
         self.txt = re.sub(r'^taxon:\s*(.*?)\s*$',
@@ -1697,8 +1710,6 @@ class Glossary:
             primary_word = word_list[0]
 
             return f'<div class="defn" id="{primary_word}"><dt>{primary_word}</dt><dd>{defn}</dd></div>'
-
-        self.txt = link_figures(self.txt)
 
         self.txt = self.link_glossary_words(self.txt, is_glossary=True)
 
