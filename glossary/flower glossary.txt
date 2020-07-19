@@ -4,13 +4,14 @@ taxon:flowering plants
 <h2>Parts of a flower</h2>
 
 figure:hypanthium
+figure:receptacle
 figure:flower
 
 <p>The major parts of a flower are the pedicel, perianth, stamens, and pistils.  Any of these parts may be missing or vanishingly small for a particular species or individual flower.</p>
 
 {pedicel,pedicels,pediceled} The stalk of an individual flower.  Compare to peduncle. [figure:hypanthium]
-{receptacle,receptacles} The distal end of the pedicel (or sometimes the peduncle), where the flower parts (or head) are attached.  See hypanthium.
-{perianth,perianths} The collective term for the calyx and corolla.  The term is usually used where the calyx and corolla are difficult to distinguish (except by position). [figure:hypanthium]
+{receptacle,receptacles} The distal end of the pedicel (or sometimes the peduncle), where the flower parts (or head) are attached.  See hypanthium. [figure:receptacle]
+{perianth,perianths} The collective term for the calyx and corolla (with the calyx subtending the corolla).  The term is usually used where the calyx and corolla are difficult to distinguish (except by position). [figure:hypanthium]
 {perianth part,perianth parts} A sepal or petal.  The term is usually used where sepals and petals are difficult to distinguish.
 {tepal,tepals} A perianth part, especially where the perianth parts are +- entirely free.
 {hypanthium,hypanthia,hypanthiums} The structure formed by the fused lower portions of the perianth. [figure:hypanthium]
