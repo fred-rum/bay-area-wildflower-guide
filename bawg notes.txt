@@ -147,3 +147,6 @@ orchid family (e.g. notes in Platanthera spp.)
 pale flax
 good side view down to bracts
 top view shows all the parts, but is too crowded to label
+
+
+allow glossary entries to be searched in the same search box as flowers
