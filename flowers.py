@@ -2104,13 +2104,13 @@ def sort_pages(page_set, color=None, with_depth=False):
 
     # helper function to sort by hierarchical depth (parents before children)
     def by_depth(page):
-        depth = 0
-        curr_page = page
-        while curr_page.parent:
-            for curr_page in curr_page.parent:
-                break # get any parent; we don't care which one
-            depth += 1
-        return depth
+        if not page.parent:
+            return 0
+
+        parent_depth = 0
+        for parent in page.parent:
+            parent_depth = max(parent_depth, by_depth(parent))
+        return parent_depth + 1
 
     # helper function to sort by observation count
     def count_flowers(page):
