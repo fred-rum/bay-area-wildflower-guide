@@ -149,14 +149,6 @@ good side view down to bracts
 top view shows all the parts, but is too crowded to label
 
 
-Allow glossary entries to be searched in the same search box as flowers.
-
-Where a glossary term appears in multiple glossaries, list which
-glossary each is from (or many always do that to make clear it's a
-glossary entry).  Prioritize a lower- or higher-level glossary?
-
-Prioritize glossary entries below taxon pages.
-
-Handle the multiple terms in one defition similar to alternative
-common names.  Only one is listed in the results, with preference to
-the first one.
+Hide the search window until pages.js populates it.  The only real
+advantage of this is to prevent a change on every HTML change when I
+change the look of the search window.

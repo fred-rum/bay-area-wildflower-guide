@@ -1484,7 +1484,7 @@ def write_header(w, title, h1, nospace=False, nosearch=False):
     if not nosearch:
         w.write('''<div id="search-bg"></div>
 <div id="search-container">
-<input type="search" id="search" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="search for a flower...">
+<input type="search" id="search" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="search for a flower or glossary term...">
 <div id="autocomplete-box"></div>
 </div>
 ''')
@@ -1545,6 +1545,7 @@ class Glossary:
         self.taxon = None
         self.parent = None # a single parent glossary (or None)
         self.child = set() # an unordered set of child glossaries
+        self.term = [] # an ordered list of term lists
 
     def set_parent(self, parent):
         self.parent = parent
@@ -1648,6 +1649,7 @@ class Glossary:
             defn = matchobj.group(2)
             word_list = [x.strip() for x in words.split(',')]
             primary_word = word_list[0]
+            self.term.append(word_list)
             for word in word_list:
                 self.glossary_dict[word.lower()] = primary_word
                 # Prevent a glossary definition from linking to its own entry
@@ -1701,6 +1703,7 @@ class Glossary:
             w.write(f'<b>{self.title}</b></br>')
         else:
             w.write(f'<a href="{self.name}.html">{self.title}</a></br>')
+
         if self.child:
             w.write('<div class="toc-indent">\n')
             for child in sorted(self.child, key=by_name):
@@ -1730,6 +1733,19 @@ class Glossary:
               w.write(f'<h1>{self.title}</h1>\n')
               w.write(self.txt)
               write_footer(w)
+
+    # Write search terms to pages.js
+    def write_search_terms(self, w):
+        def by_name(glossary):
+            return glossary.title
+
+        for term in self.term:
+            terms_str = '","'.join(term)
+            w.write(f'{{page:"{self.name}",com:["{terms_str}"],x:"g"}},\n')
+
+        for child in sorted(self.child, key=by_name):
+            child.write_search_terms(w)
+
 
 ###############################################################################
 # end of Glossary class
@@ -2302,6 +2318,7 @@ def add_elab(elabs, elab):
 search_file = root + "/pages.js"
 with open(search_file, "w", encoding="utf-8") as w:
     w.write('var pages=[\n')
+
     # Sort in reverse order of observation count.
     # In case of ties, pages are sorted alphabetically.
     # This order tie-breaker isn't particularly useful to the user, but
@@ -2345,6 +2362,9 @@ with open(search_file, "w", encoding="utf-8") as w:
             else:
                 w.write(',x:"u"')
         w.write('},\n')
+
+    master_glossary.write_search_terms(w)
+
     w.write('];\n')
 
 ###############################################################################

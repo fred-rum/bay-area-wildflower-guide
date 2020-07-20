@@ -231,6 +231,15 @@ a.unobs:link {
 a.unobs:visited {
     color: black;
 }
+span.glossary {
+    color: black;
+}
+a.glossary:link {
+    color: black;
+}
+a.glossary:visited {
+    color: black;
+}
 span.parent {
     color: SaddleBrown;
 }
