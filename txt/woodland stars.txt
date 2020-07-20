@@ -3,7 +3,7 @@ x:ba
 
 ==hillside woodland star:L. heterophyllum
 color: white
-. hypanthium (fused calyx) base truncate
+. hypanthium base truncate
 . petals with 3 lobes
 
 ==bolander's woodland star:L. heterophyllum var. bolanderi

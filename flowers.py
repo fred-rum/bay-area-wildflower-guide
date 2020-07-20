@@ -1515,7 +1515,7 @@ def link_figures(txt):
 
     def repl_figure_thumbs(matchobj):
         inner = matchobj.group(1)
-        inner = re.sub(r'^figure:(.*)(:\.svg|)$',
+        inner = re.sub(r'^figure:(.*?)(?:\.svg|)$',
                        repl_figure_thumb, inner, flags=re.MULTILINE)
         return f'<div class="photo-box">\n{inner}\n</div>'
 
@@ -1525,9 +1525,9 @@ def link_figures(txt):
             print(f'Broken figure link to {file}.svg')
         return f'<a href="../figures/{file}.svg">[figure]</a>'
 
-    txt = re.sub(r'^(figure:.*(:\.svg|)(?:\nfigure:.*(:\.svg|))*)$',
+    txt = re.sub(r'^(figure:.*?(?:\.svg|)(?:\nfigure:.*?(?:\.svg|))*)$',
                  repl_figure_thumbs, txt, flags=re.MULTILINE)
-    txt = re.sub(r'\[figure:(.*)(:\.svg|)\]',
+    txt = re.sub(r'\[figure:(.*?)(?:\.svg|)\]',
                  repl_figure_text, txt, flags=re.MULTILINE)
     return txt
 

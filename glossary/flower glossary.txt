@@ -18,7 +18,9 @@ figure:flower
 
 <h3>Calyx</h3>
 
-{calyx,calyces,calyxes} The collective term for all sepals of a flower.  Protects the flower in bud.  Usually green, but may be brightly colored, including matching the color of the corolla.
+figure:calyx.svg
+
+{calyx,calyces,calyxes} The collective term for all sepals of a flower.  Protects the flower in bud.  Usually green, but may be brightly colored, including matching the color of the corolla. [figure:calyx]
 {sepal,sepals} A free or fused member of the calyx.  If partially fused, reference is usually made to a calyx lobe rather than a sepal as a whole. [figure:flower]
 
 <h3>Corolla</h3>
@@ -29,7 +31,7 @@ figure:flower
 <h3>Pistil</h3>
 
 {pistil,pistils} A pollen-accepting ("female") sexual part of a flower, each composed of an ovary, style, and stigma. [figure:flower]
-{ovary,ovaries} The usually wider base of the pistil that forms the seed or fruit when germinated.  The perianth and stamens may be attached to the top, the bottom, or somewhere along the sides of the ovary.
+{ovary,ovaries} The usually wider base of the pistil that forms the seed or fruit when germinated.  The hypanthium (perianth and stamens) may be attached to the top, the bottom, or somewhere along the sides of the ovary.
 {style,styles} The tube that carries pollen from the stigma to the ovary.
 {stigma,stigmas} The distal end of the pistil that captures pollen for germination.  May be lobed.
 
