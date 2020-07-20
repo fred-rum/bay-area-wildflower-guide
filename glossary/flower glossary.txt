@@ -12,7 +12,7 @@ figure:flower
 {pedicel,pedicels,pediceled} The stalk of an individual flower.  Compare to peduncle. [figure:hypanthium]
 {receptacle,receptacles} The distal end of the pedicel (or sometimes the peduncle), where the flower parts (or head) are attached.  See hypanthium. [figure:receptacle]
 {perianth,perianths} The collective term for the calyx and corolla (with the calyx subtending the corolla).  The term is usually used where the calyx and corolla are difficult to distinguish (except by position). [figure:hypanthium]
-{perianth part,perianth parts} A sepal or petal.  The term is usually used where sepals and petals are difficult to distinguish.
+{perianth part,perianth parts} A sepal or petal.  The term is usually used where sepals and petals are difficult to distinguish. [figure:staminode]
 {tepal,tepals} A perianth part, especially where the perianth parts are +- entirely free.
 {hypanthium,hypanthia,hypanthiums} The structure formed by the fused lower portions of the perianth. [figure:hypanthium]
 
@@ -44,10 +44,11 @@ figure:ovary
 {stamen,stamens} A pollen-producing ("male") sexual part of a flower, each composed of a filament and an anther. [figure:flower]
 {filament,filaments} The stalk that holds up an anther.
 {anther,anthers} The distal end of the stamen where pollen is produced.  Usually has two lobes.
-{staminode,staminodes} A sterile stamen with a modified appearance.
+{staminode,staminodes} A sterile stamen with a modified appearance. [figure:staminode]
 
 <h2>Parts of an inflorescence</h2>
 
+{inflorescence,inflorescences} A cluster of flowers from a common point or sharing a stalk that has only flowers on it.
 {bract,bracts,bracted} Small leaf-like structures (or analogue) at the base of an inflorescence.  May be fused together or not.
 {epicalyx,epicalyces,epicalyxes} A whorl of bracts forming an extra calyx-like structure.
 {peduncle,peduncles} The stalk of an inflorescence (or of a head in the sunflower family) or of an individual flower that is not part of an inflorescence.  See also pedicel.
@@ -58,7 +59,6 @@ figure:ovary
 
 {cleistogamous} Self-pollinating without opening.  Generally looks bud-like.
 {dioecious} A plant that has only either male or female flowers on it, never both on the same plant.
-{inflorescence,inflorescences} A cluster of flowers from a common point or sharing a stalk that has only flowers on it.
 {involucel,involucels} Secondary involucre within an inflorescence.
 {involucre,involucres} Collective term for a cluster of bracts.
 {panicle,panicles,panicled} Branched infloresence with flowers that grow from the proximal end.
