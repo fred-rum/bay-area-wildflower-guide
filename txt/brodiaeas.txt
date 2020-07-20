@@ -3,7 +3,7 @@ x:hist/rare
 
 Key features:
 . length of peduncle (flower stem)
-. size of corolla
+. size of perianth
 . angle and shape of staminodes [the crown surrounding the stamens]
 
 <a href="https://www2.palomar.edu/users/warmstrong/brosr1.htm">Labeled photos of brodiaea staminodes.</a>

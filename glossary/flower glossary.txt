@@ -20,12 +20,14 @@ figure:flower
 
 figure:calyx.svg
 
-{calyx,calyces,calyxes} The collective term for all sepals of a flower.  Protects the flower in bud.  Usually green, but may be brightly colored, including matching the color of the corolla. [figure:calyx]
+{calyx,calyces,calyxes} The collective term for all sepals of a flower.  Protects the flower in bud.  Usually green, but may match the color of the corolla or have some other color. [figure:calyx]
 {sepal,sepals} A free or fused member of the calyx.  If partially fused, reference is usually made to a calyx lobe rather than a sepal as a whole. [figure:flower]
 
 <h3>Corolla</h3>
 
-{corolla,corollas} The collective term for all petals of a flower.  Surrounds the flowers sexual parts.  Usually bright colored.
+figure:corolla.svg
+
+{corolla,corollas} The collective term for all petals of a flower.  Surrounds the flowers sexual parts.  Usually bright colored. [figure:corolla]
 {petal,petals} A free or fused member of the corolla.  If partially fused, reference is usually made to a free corolla lobe rather than a petal as a whole. [figure:flower]
 
 <h3>Pistil</h3>
@@ -37,8 +39,8 @@ figure:calyx.svg
 
 <h3>Stamen</h3>
 
-{stamen,stamens} A pollen-producing ("male") sexual part of a flower, each composed of a filament and an anther.
-{filament,filaments} The stalk that holds up an anther. [figure:flower]
+{stamen,stamens} A pollen-producing ("male") sexual part of a flower, each composed of a filament and an anther. [figure:flower]
+{filament,filaments} The stalk that holds up an anther.
 {anther,anthers} The distal end of the stamen where pollen is produced.  Usually has two lobes.
 {staminode,staminodes} A sterile stamen with a modified appearance.
 
