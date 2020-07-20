@@ -296,7 +296,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="132.03258"
+     inkscape:cx="175.42469"
      inkscape:cy="163.38889"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -404,13 +404,13 @@
          x="372.83963"
          y="1682.931">Perianth</tspan></text>
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:3.77952766;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Mend-2-4-8)"
+       style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:3.78;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Mend-2-4-8)"
        d="m 158.36972,1390.5996 66.59828,87.8063"
        id="path1594-6-8-8"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:3.78;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Mend-2-4-1)"
+       style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:3.78;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Mend-2-4-1)"
        d="m 135.13622,1686.1115 61.14292,-140.924"
        id="path1594-6-8-2"
        inkscape:connector-curvature="0"
@@ -426,7 +426,7 @@
            x="-30.304577"
            y="136.22325" /></flowRegion><flowPara
          id="flowPara4681" /></flowRoot>    <path
-       style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:3.78;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none;marker-end:url(#Arrow1Mend-2);marker-start:url(#Arrow1Mstart)"
+       style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:3.78;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none;marker-end:url(#Arrow1Mend-2);marker-start:url(#Arrow1Mstart)"
        d="m 281.83256,1599.0825 v 41.4162 h 186.87822 v -39.3959"
        id="path6646"
        inkscape:connector-curvature="0" />
