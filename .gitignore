@@ -23,6 +23,7 @@ $RECYCLE.BIN/
 # =========================
 html/other observations.html
 html/_mod.html
+figures/*.jpg
 observations.csv
 convert.txt
 prev/
