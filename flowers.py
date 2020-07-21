@@ -1444,7 +1444,7 @@ color_list = ['blue',
 # value: page list
 color_page_list = {}
 
-def write_header(w, title, h1, nospace=False, nosearch=False):
+def write_header(w, title, h1, nospace=False):
     if nospace:
         space_class = ' class="nospace"'
     else:
@@ -1480,13 +1480,6 @@ def write_header(w, title, h1, nospace=False, nosearch=False):
 <link rel="stylesheet" href="../bawg.css">
 </head>
 <body>
-''')
-    if not nosearch:
-        w.write('''<div id="search-bg"></div>
-<div id="search-container">
-<input type="search" id="search" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="search for a flower or glossary term...">
-<div id="autocomplete-box"></div>
-</div>
 ''')
     w.write('<div id="body">\n')
     if h1:
@@ -1726,8 +1719,7 @@ class Glossary:
                           repl_defns, self.txt, flags=re.MULTILINE)
 
         with open(f'{root}/html/{self.name}.html', mode='w') as w:
-              write_header(w, self.title, None, nospace=True,
-                           nosearch=False)
+              write_header(w, self.title, None, nospace=True)
               w.write('<h4 class="title">Glossary table of contents</h4>\n')
               master_glossary.write_toc(w, self)
               w.write(f'<h1>{self.title}</h1>\n')

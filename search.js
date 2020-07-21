@@ -393,6 +393,19 @@ if (window.location.pathname.includes('/html/')) {
   var path = 'html/';
 }
 
+/* The 'body' div is everything on the page not associated with the search bar.
+   Thus, clicking somewhere other than the search bar or autocomplete box
+   causes the autocomplete box to be hidden. */
+var e_body = document.getElementById('body');
+
+e_body.insertAdjacentHTML('beforebegin', `
+<div id="search-bg"></div>
+<div id="search-container">
+<input type="text" id="search" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="search for a flower or glossary term...">
+<div id="autocomplete-box"></div>
+</div>
+`);
+
 var e_search_input = document.getElementById('search');
 e_search_input.addEventListener('input', fn_change);
 e_search_input.addEventListener('keyup', fn_keyup);
@@ -401,10 +414,6 @@ e_search_input.addEventListener('focusin', fn_focusin);
 var e_search_box = document.getElementById('search-container');
 e_search_box.addEventListener('mousedown', fn_search_box_focusout, true);
 
-/* The 'body' div is everything on the page not associated with the search bar.
-   Thus, clicking somewhere other than the search bar or autocomplete box
-   causes the autocomplete box to be hidden. */
-var e_body = document.getElementById('body');
 e_body.addEventListener('mousedown', fn_focusout);
 
 var e_autocomplete_box = document.getElementById('autocomplete-box');

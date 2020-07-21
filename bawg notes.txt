@@ -149,6 +149,4 @@ good side view down to bracts
 top view shows all the parts, but is too crowded to label
 
 
-Hide the search window until pages.js populates it.  The only real
-advantage of this is to prevent a change on every HTML change when I
-change the look of the search window.
+Allow a search for a glossary with no term (no anchor).
