@@ -1731,6 +1731,11 @@ class Glossary:
         def by_name(glossary):
             return glossary.title
 
+        # The glossary page without a named term can be treated just like
+        # an unobserved (low-priority) page.  It's simply a link to an
+        # HTML page with its name being the search term.
+        w.write(f'{{page:"{self.name}",x:"u"}},\n')
+
         for term in self.term:
             terms_str = '","'.join(term)
             w.write(f'{{page:"{self.name}",com:["{terms_str}"],x:"g"}},\n')
