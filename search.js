@@ -418,6 +418,12 @@ e_body.addEventListener('mousedown', fn_focusout);
 
 var e_autocomplete_box = document.getElementById('autocomplete-box');
 
+/* On Android Firefox, if the user clicks an autocomplete link to navigate
+   away, then hits the back button to return to the page, the search field
+   is cleared (good), but the autocomplete box remains visible and populated
+   (bad).  This code fixes that. */
+window.onbeforeunload = fn_focusout;
+
 /*****************************************************************************/
 /* non-search functions also used by the BAWG HTML */
 

@@ -150,3 +150,6 @@ top view shows all the parts, but is too crowded to label
 
 
 Allow a search for a glossary with no term (no anchor).
+
+Clear autocomplete window after clicking an entry to follow a link.
+Otherwise Android leaves the autocomplete window populated.
