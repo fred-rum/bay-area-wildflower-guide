@@ -1,9 +1,6 @@
 sci:Epipactis spp.
 x:ca
 
-3 petals and 3 sepals look similar to each other<br/>
-1 sepal is "upper" and 2 are "lateral"
-
 ==broad-leaved helleborine:E. helleborine
 color: pale purple, other
 . sepals +- green, often purple-tinged or -striped

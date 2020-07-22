@@ -1,0 +1,17 @@
+title:orchid glossary
+taxon:orchid family
+
+<h2>Parts of an orchid flower</h2>
+
+figure:orchid flower
+
+<p>An orchid flower has three sepals and three petals in a bilateral arrangement (not radial).  As usual, the petals are positioned inside the ring of sepals.</p>
+
+{lower petal,lower petals} The single petal in the lower (proximal) position on the flower. [figure:orchid flower]
+{lip,lips} The lower petal.
+{upper petals,upper petal} The two petals on either side of the flower and slightly above the midline. [figure:orchid flower]
+{lateral petals,lateral petal} The upper petals.
+{upper sepal,upper sepals} The single sepal in the upper (distal) position on the flower. [figure:orchid flower]
+{lower sepals,lower sepal} The two sepals on either side of the flower and slightly below the midline. [figure:orchid flower]
+{lateral sepals,lateral sepal} The lower sepals.
+{column,columns} A fusion of the stamens, style, and stigma.

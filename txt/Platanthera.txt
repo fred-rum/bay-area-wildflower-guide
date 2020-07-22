@@ -1,8 +1,5 @@
 x:hist
 
-As in other orchids, there are 3 sepals (1 upper and 2 lateral) and 3
-petals (1 lower and 2 lateral).
-
 All California species have a spur sticking out behind the lower petal
 which is key to identification.  This spur may be difficult to spot
 since it is likely to be greenish and snuggled up against the flower
