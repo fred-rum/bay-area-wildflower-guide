@@ -2308,6 +2308,27 @@ write_page_list(top_flower_list, 'all', None)
 ###############################################################################
 # Create pages.js
 
+def write_eflora_glossary_terms(w):
+    with open(f'{root}/eflora_glossary.txt', mode='r') as f:
+        txt = f.read()
+    for c in txt.split('\n'):
+        # Jepson's anchor is usually the whole text.  I've manually put the
+        # exceptions in brackets, in which case the bracketed terms are not
+        # included in the anchor.
+        anchor = re.sub(r'\s*\[.*\]', r'', c)
+
+        # Jepson sometimes separates extra terms with commas, and sometimes
+        # with parentheses (and I also use brackets as above).  Normalize
+        # them all to commas.
+        c = re.sub(r'\s*(?:\(|\[)(.*)(?:\)|\])', r', \1', c)
+        terms = [x.strip() for x in c.split(',')]
+        coms_str = '","'.join(terms)
+        if terms[0] == anchor:
+            anchor_str = ''
+        else:
+            anchor_str = f',anchor:"{anchor}"'
+        w.write(f'{{page:"Jepson eFlora glossary",com:["{coms_str}"]{anchor_str},x:"j"}},\n')
+
 def add_elab(elabs, elab):
     if elab and elab != 'n/a' and elab not in elabs:
         elabs.append(unidecode(elab))
@@ -2361,6 +2382,8 @@ with open(search_file, "w", encoding="utf-8") as w:
         w.write('},\n')
 
     master_glossary.write_search_terms(w)
+
+    write_eflora_glossary_terms(w)
 
     w.write('];\n')
 
