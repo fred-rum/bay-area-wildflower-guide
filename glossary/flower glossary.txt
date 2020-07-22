@@ -42,8 +42,8 @@ figure:ovary
 <h3>Stamen</h3>
 
 {stamen,stamens} A pollen-producing ("male") sexual part of a flower, each composed of a filament and an anther. [figure:flower]
-{filament,filaments} The stalk that holds up an anther.
-{anther,anthers} The distal end of the stamen where pollen is produced.  Usually has two lobes.
+{filament,filaments} The stalk that holds up an anther. [figure:ovary]
+{anther,anthers} The distal end of the stamen where pollen is produced.  Usually has two lobes. [figure:ovary]
 {staminode,staminodes} A sterile stamen with a modified appearance. [figure:staminode]
 
 <h2>Parts of an inflorescence</h2>
