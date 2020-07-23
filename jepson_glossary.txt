@@ -92,7 +92,7 @@ coastal scrub
 coastal strand
 collar; collars
 column; columns
-#common
+-common
 compound
 compound leaf; compound leaves
 compressed
@@ -135,12 +135,12 @@ drupe; drupes
 dune; dunes
 #e-
 ellipsoid
-elliptic
+elliptic; elliptical
 emergent
 endemic
 entire
 ephemeral
-epidermis
+epidermis; epidermal
 epipetalous
 erect
 estuarine
@@ -157,7 +157,7 @@ fibrous
 filament; filaments
 fleshy
 floret; florets
-flower; flowers
+flower; flowers, flowered
 follicle; follicles
 foothill; foothills
 foothill woodland
@@ -182,11 +182,11 @@ grassland
 gymnosperm; gymnosperms
 habit; habits
 habitat; habitats
-hair; hairs
+-hair; hairs
 haploid
 hastate
 head; heads
-hemispheric
+-hemispheric
 herb; herbs
 herbaceous
 herbage
@@ -207,7 +207,7 @@ intertidal
 involucel; involucels
 involucre; involucres
 keel; keels
-lanceolate
+lanceolate; lance
 lateral
 leaf; leafs, leaves
 leaflet; leaflets
@@ -224,7 +224,7 @@ lip; lips
 lobe; lobes
 loculicidal
 longitudinal
-margin; margins
+-margin; margins
 marsh; marshes
 meadow; meadows
 membranous
@@ -305,7 +305,7 @@ radial
 radiant head; radiant heads
 radiate head; radiate heads
 rank; ranks
-#rare
+-rare
 ray; rays
 ray flower; ray flowers
 receptacle; receptacles
@@ -347,7 +347,7 @@ shrub; shrubs
 simple
 sinus; sinuses
 sorus; sori
-spheric
+-spheric
 spike; spikes
 spikelet; spikelets
 spine; spines
@@ -402,7 +402,7 @@ twig; twigs
 twining
 ultimate
 umbel; umbels
-#uncommon
+-uncommon
 understory
 unisexual
 urn-shaped

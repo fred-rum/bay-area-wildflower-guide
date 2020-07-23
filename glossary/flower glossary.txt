@@ -3,11 +3,11 @@ taxon:flowering plants
 
 <h2>Parts of a flower</h2>
 
+{flower,flowers,flowered} The major parts of a flower are the pedicel, perianth, stamens, and pistils.  Any of these parts may be missing or vanishingly small for a particular species or individual flower. [figure:pedicel] [figure:flower]
+
 figure:hypanthium
 figure:receptacle
 figure:flower
-
-<p>The major parts of a flower are the pedicel, perianth, stamens, and pistils.  Any of these parts may be missing or vanishingly small for a particular species or individual flower.</p>
 
 {pedicel,pedicels,pediceled} The stalk of an individual flower.  Compare to peduncle. [figure:hypanthium]
 {receptacle,receptacles} The distal end of the pedicel (or sometimes the peduncle), where the flower parts (or head) are attached.  See hypanthium. [figure:receptacle]
@@ -61,7 +61,10 @@ figure:ovary
 {dioecious} A plant that has only either male or female flowers on it, never both on the same plant.
 {involucel,involucels} Secondary involucre within an inflorescence.
 {involucre,involucres} Collective term for a cluster of bracts.
+{limb,limbs} In a fused calyx or corolla, the spreading portion distal to the throat (or at least more widely expanded than the throat). [figure:babystar]
 {panicle,panicles,panicled} Branched infloresence with flowers that grow from the proximal end.
 {salverform} With a slender tube and abruptly spreading limbs (e.g. "T" shaped).
 {spike,spikes,spiked} Inflorescence with all flowers sessile on the main axis, generally flowering from the proximal end.  See panicle.
+{throat,throats} In a fused calyx or corolla, the expanded portion between the tube and the limb. [figure:babystar]
+{tube,tubes} In a fused calyx or corolla, the +- cylindric portion proximal to the throat. [figure:babystar]
 {umbel,umbels} An inflorescence in which 3+ flower pedicels branch from a common point.

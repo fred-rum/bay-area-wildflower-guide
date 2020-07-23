@@ -1554,6 +1554,10 @@ class Glossary:
             word = matchobj.group(1)
             anchor = self.glossary_dict[word.lower()]
             if self.is_jepson:
+                if anchor in self.used_dict:
+                    self.used_dict[anchor] += 1
+                else:
+                    self.used_dict[anchor] = 1
                 return f'<a class="glossary-jepson" href="https://ucjeps.berkeley.edu/eflora/glossary.html#{anchor}">{word}</a>'
             else:
                 return f'<a class="glossary" href="{self.name}.html#{anchor}">{word}</a>'
@@ -1697,6 +1701,7 @@ class Glossary:
 
     def read_jepson_terms(self):
         self.is_jepson = True
+        self.used_dict = {}
 
         with open(f'{root}/jepson_glossary.txt', mode='r') as f:
             txt = f.read()
@@ -1705,6 +1710,11 @@ class Glossary:
             c = re.sub(r'\s*#.*$', '', c)
 
             if not c: # ignore blank lines (and comment-only lines)
+                continue
+
+            if c.startswith('-'):
+                # I eventually want lines that start with '-' to be handled
+                # in a special way, but for now I just ignore them.
                 continue
 
             # Jepson's anchor is usually the whole text, including commas
@@ -1788,6 +1798,12 @@ class Glossary:
             else:
                 anchor_str = f',anchor:"{anchor}"'
             w.write(f'{{page:"Jepson eFlora glossary",com:["{coms_str}"]{anchor_str},x:"j"}},\n')
+
+        def by_usage(anchor):
+            return self.used_dict[anchor]
+
+        for anchor in sorted(self.used_dict, key=by_usage):
+            print(f'{anchor}: {self.used_dict[anchor]}')
 
 
 ###############################################################################
