@@ -142,3 +142,8 @@ no bracts
 pale flax
 good side view down to bracts
 top view shows all the parts, but is too crowded to label
+
+
+Formalize the Jepson eFlora glossary as a source of glossary terms
+that my pages can link to (with links opening a new tab).  Should it
+use a different underline style?

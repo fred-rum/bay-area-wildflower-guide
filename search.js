@@ -184,8 +184,36 @@ function fn_url(page_info) {
   } else if (page_info.x == 'g') {
     return path + page_info.page + '.html#' + page_info.anchor;
   } else {
-    return path + page_info.page + '.html'
+    return path + page_info.page + '.html';
   }
+}
+
+/* Construct all the contents of a link to a page. */
+function fn_link(page_info) {
+  if (page_info.x == 'f') {
+    var c = 'family';
+  } else if (page_info.x == 'k') {
+    var c = 'parent';
+  } else if (page_info.x == 'o') {
+    var c = 'leaf';
+  } else if (page_info.x == 'g') {
+    var c = 'glossary';
+  } else if (page_info.x == 'j') {
+    var c = 'jepson';
+  } else {
+    var c = 'unobs';
+  }
+
+  var target = '';
+  var url = fn_url(page_info);
+
+  /* I tried this and didn't like it.  If I ever choose to use it, I also
+     have to change the behavior of the return key (where fn_url is used). */
+  /*if (page_info.x == 'j') {
+    target = ' target="_blank"';
+  }*/
+
+  return 'class="enclosed ' + c + '"' + target + ' href="' + url + '"'
 }
 
 /* Update the autocomplete list.
@@ -256,17 +284,6 @@ function fn_search(enter) {
     var ac_list = [];
     for (var i = 0; i < best_list.length; i++) {
       var page_info = best_list[i].page_info;
-      if (page_info.x == 'f') {
-        var c = 'family';
-      } else if (page_info.x == 'k') {
-        var c = 'parent';
-      } else if (page_info.x == 'o') {
-        var c = 'leaf';
-      } else if ((page_info.x == 'g') || (page_info.x == 'j')) {
-        var c = 'glossary';
-      } else {
-        var c = 'unobs';
-      }
 
       if ('com' in page_info) {
         for (var j = 0; j < page_info.com.length; j++) {
@@ -327,8 +344,8 @@ function fn_search(enter) {
         var full = com_bold
       }
       full = full.replace(/'/g, '&rsquo;')
-      var entry = ('<p class="nogap"><a class="enclosed ' + c + '" href="' +
-                   fn_url(page_info) + '">' + full + '</a></p>');
+      var entry = ('<p class="nogap"><a ' + fn_link(page_info) + '>' +
+                   full + '</a></p>');
 
       /* Highlight the first entry in bold.  This entry is selected if the
          user presses 'enter'. */
