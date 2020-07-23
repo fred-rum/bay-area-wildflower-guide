@@ -1,12 +1,12 @@
 sci:Eschscholzia spp.
 x:hist/rare
 ==california poppy,2:E. californica
-. has a distinct pink disc below the corolla (receptical rim >= 0.5 mm)
+. has a distinct pink disc below the corolla (receptacle rim >= 0.5 mm)
 . by far the most common poppy in the bay area
 
 ==tufted poppy,2:E. caespitosa
 color: yellow
-. has no more than an indistinct disc below the corolla (receptical rim <= 0.3 mm)
+. has no more than an indistinct disc below the corolla (receptacle rim <= 0.3 mm)
 . its recepticle slants smoothly down to the width of the stem
 . can be found at Pinnacles NP, but is extremely rare in the bay area
 
