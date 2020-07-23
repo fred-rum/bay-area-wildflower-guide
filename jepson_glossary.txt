@@ -1,0 +1,423 @@
+# words in parentheses are additional terms that also appear in the
+# link anchor in parentheses.
+#
+# words after a comma are additional terms that also appear in the
+# link anchor after a comma.
+#
+# words after a semicolon are additional terms that do *not* appear
+# in the link anchor.  I've either copied them from Jepson's glossary
+# text or added them myself (especially for plurals).
+#
+abaxial
+abundant
+achene; achenes
+acid (acidic)
+acroscopic
+acuminate
+acute
+adaxial
+adherent
+adventitious
+aggressive
+alien; aliens
+alkali, alkaline
+alkali sink
+alluvial
+alluvial fan; alluvial fans
+alpine
+alternate
+angiosperm; angiosperms
+annual; annuals
+anther; anthers
+apogamous
+appressed
+aquatic
+areole; areoles
+aril; arils
+armed
+ascending
+asymmetric
+attenuate; attenuated
+auricle; auricles
+awl-like
+awn; awns
+axil; axils
+axile
+axillary
+axis (axes)
+banner; banners
+bar; bars
+barbed
+bark; barks
+barren
+basal
+basiscopic
+beak; beaks
+bell-shaped
+berry; berries
+biennial; biennials
+bilateral
+biradial
+bisexual
+blade; blades
+brackish
+bract; bracts
+bractlet; bractlets
+bristle; bristles
+bud; buds
+bulb; bulbs
+bulblet; bulblets
+bur; burs
+callus; calluses
+calyx (calyces)
+canescent
+capsule; capsules
+carpel; carpels
+cartilaginous
+catkin; catkins
+caudex; caudices
+cauline
+#centimeter; centimeters
+cespitose
+chamber; chambers
+chaparral
+ciliate
+circumboreal
+circumscissile
+claw; claws
+cleistogamous
+clone; clones
+closed-cone conifer forest or woodland
+coastal scrub
+coastal strand
+collar; collars
+column; columns
+#common
+compound
+compound leaf; compound leaves
+compressed
+concave
+cone; cones
+conic
+conifer forest
+continuous
+convex
+cordate
+corm; corms
+corolla; corollas
+costa; costae
+cotyledon; cotyledons
+crenate
+cylindric
+cyme; cymes
+cypsela; cypselas
+deciduous
+#decimeter
+decumbent
+decurrent
+dehiscent
+deltate
+dense
+dentate
+depressed
+desert
+desert woodland
+digitate
+dioecious
+diploid
+disciform head; disciform heads
+discoid head; discoid heads
+disk; disks
+disk flower; disk flowers
+dissected
+distal
+drupe; drupes
+dune; dunes
+#e-
+ellipsoid
+elliptic
+emergent
+endemic
+entire
+ephemeral
+epidermis
+epipetalous
+erect
+estuarine
+evergreen
+exceeding
+exserted
+extant
+extinct
+extirpated
+exudate
+false indusium (false indusia)
+fertile
+fibrous
+filament; filaments
+fleshy
+floret; florets
+flower; flowers
+follicle; follicles
+foothill; foothills
+foothill woodland
+forest
+forked
+free
+free-central
+fringed
+fruit; fruits
+funnel-shaped
+fused
+fusiform
+glabrous
+gland; glandular, glands
+glaucous
+glochid; glochids
+glume; glumes
+graduated
+grain; grains
+granular
+grassland
+gymnosperm; gymnosperms
+habit; habits
+habitat; habitats
+hair; hairs
+haploid
+hastate
+head; heads
+hemispheric
+herb; herbs
+herbaceous
+herbage
+heterostylous
+homostylous
+hypanthium; hypanthia, hypanthiums
+included
+indehiscent
+indusium; indusia
+inferior ovary; inferior ovaries
+inflorescence; inflorescences
+infraspecific
+intergrade
+intermediate
+internode; internodes
+interrupted
+intertidal
+involucel; involucels
+involucre; involucres
+keel; keels
+lanceolate
+lateral
+leaf; leafs, leaves
+leaflet; leaflets
+legume; legumes
+lemma; lemmas
+lenticel; lenticels
+lenticular
+ligulate flower; ligulate flowers
+ligule; ligules
+liguliflorous head; liguliflorous heads
+limb; limbs
+linear
+lip; lips
+lobe; lobes
+loculicidal
+longitudinal
+margin; margins
+marsh; marshes
+meadow; meadows
+membranous
+mericarp; mericarps
+#meter
+#millimeter
+mixed-evergreen forest
+monoecious
+montane
+mucro (mucronate); mucros
+#n
+native; natives
+naturalized
+nectar
+nectary
+needle; needles
+nodding
+node; nodes
+nut; nuts
+nutlet; nutlets
+#ob-
+oblique
+oblong
+obtuse
+ocrea, ochrea (ocreae, ochreae)
+open
+opposite
+ovary; ovaries
+ovary stalk (fruit stalk); ovary stalks, fruit stalks
+ovate
+ovoid
+ovule; ovules
+palea; paleae, paleate
+palmate
+panicle; panicles
+papillate
+pappus; pappuses
+parasite; parasites
+parietal
+peat
+peatland
+pedicel; pedicels
+peduncle; peduncles
+peltate
+pendent
+perennial; perennials
+perianth; perianths
+perianth part; perianth parts
+perigynium; perigyniums
+persistent
+petal; petals
+petiole; petioles
+phyllary; phyllaries
+pinna; pinnae
+pinnate
+pinnule
+pistil; pistils
+pistillate
+placenta; placentas
+planoconvex
+pleated
+plumose
+pollen; pollen grain, pollen grains
+pollen sac; pollen sacs
+pollination
+pollinium; pollinia
+polyploid
+pome; pomes
+prickle; prickles
+prostrate
+protandrous
+protogynous
+proximal
+puberulent
+raceme; racemes
+rachis
+radial
+radiant head; radiant heads
+radiate head; radiate heads
+rank; ranks
+#rare
+ray; rays
+ray flower; ray flowers
+receptacle; receptacles
+recurved
+reduced
+redwood forest
+reflexed
+reniform
+rhizome; rhizomes
+rib; ribs
+riparian
+root; roots
+rosette; rosettes
+rotate
+ruderal; ruderals
+sagittate
+salverform
+savanna
+scabrous
+scale; scales
+scapose
+scar; scars
+scarious
+scree
+scrub
+sculpture; sculptures
+seed; seeds
+segment; segments
+sepal; sepals
+septicidal
+septum; septa, septate, septums
+series
+serpentine
+serrate
+sessile
+sheath; sheaths
+shoot; shoots
+shrub; shrubs
+simple
+sinus; sinuses
+sorus; sori
+spheric
+spike; spikes
+spikelet; spikelets
+spine; spines
+sporangium (sporangia)
+spore; spores
+spreading
+spur; spurs
+stamen; stamens
+staminate
+staminode; staminodes
+stellate
+stem; stems
+sterile
+stigma; stigmas
+stipe; stipes
+stipule; stipules
+stolon; stolons
+stomate; stoma, stomata
+stone; stones
+stout
+striate
+strigose
+style; styles
+#sub-
+subalpine
+submersed
+subshrub
+subtend
+subtidal
+superior ovary; superior ovaries
+suture; sutures
+swamp; swamps
+talus
+tapered
+taproot; taproots
+taxon; taxa, taxons
+tendril; tendrils
+terminal
+ternate
+thorn; thorns
+throat; throats
+timberline
+tomentose
+tooth; teeth
+transverse
+tree; trees
+truncate
+tube; tubes
+tuber; tubers
+tubercle; tubercles
+twig; twigs
+twining
+ultimate
+umbel; umbels
+#uncommon
+understory
+unisexual
+urn-shaped
+utricle; utricles
+valve; valves
+vascular
+vein; veins
+vernal
+vernal pool; vernal pools
+vestigial
+vine; vines
+waif; waifs
+wash
+whorled; whorl, whorls
+wing; wings
+wiry
+wood; woods
+woodland

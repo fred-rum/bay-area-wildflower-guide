@@ -12,6 +12,11 @@ a.glossary {
     color: inherit;
     border-bottom: 1px gray dotted;
 }
+a.glossary-jepson {
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px #cc6600 dotted;
+}
 div.defn {
     border-top: 38px solid transparent;
     margin-top: -38px;

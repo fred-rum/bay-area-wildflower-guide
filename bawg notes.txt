@@ -144,6 +144,12 @@ good side view down to bracts
 top view shows all the parts, but is too crowded to label
 
 
-Formalize the Jepson eFlora glossary as a source of glossary terms
-that my pages can link to (with links opening a new tab).  Should it
-use a different underline style?
+Add search terms for 'Jepson eFlora glossary' and 'Jepson glossary'.
+Note that these will need special handling to get the right link color
+while not adding an anchor.  I.e. recognize a glossary without a coms
+list while normalizing pages.js.
+
+Add glossary entries for as many Jepson terms as I can.
+
+Automatically add a link (e.g. [Jepson]) from my definition to the
+Jepson entry where they overlap.

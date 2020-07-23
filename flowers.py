@@ -1539,6 +1539,8 @@ class Glossary:
         self.parent = None # a single parent glossary (or None)
         self.child = set() # an unordered set of child glossaries
         self.term = [] # an ordered list of term lists
+        self.glossary_dict = {} # mapping of term to anchor
+        self.is_jepson = False
 
     def set_parent(self, parent):
         self.parent = parent
@@ -1550,8 +1552,11 @@ class Glossary:
         # in the glossary.
         def repl_glossary(matchobj):
             word = matchobj.group(1)
-            primary_word = self.glossary_dict[word.lower()]
-            return f'<a class="glossary" href="{self.name}.html#{primary_word}">{word}</a>'
+            anchor = self.glossary_dict[word.lower()]
+            if self.is_jepson:
+                return f'<a class="glossary-jepson" href="https://ucjeps.berkeley.edu/eflora/glossary.html#{anchor}">{word}</a>'
+            else:
+                return f'<a class="glossary" href="{self.name}.html#{anchor}">{word}</a>'
 
         # Add glossary links in group 1, but leave group 2 unchanged.
         def repl_sub_glossary(matchobj):
@@ -1623,6 +1628,15 @@ class Glossary:
 
         return txt
 
+    def create_regex(self):
+        # sort the glossary list in reverse order so that for cases where two
+        # phrases start the same and one is a subset of the other, the longer
+        # phrase is checked first.
+        glossary_list = sorted(iter(self.glossary_dict.keys()), reverse=True)
+
+        ex='|'.join(map(re.escape, glossary_list))
+        self.glossary_regex = re.compile(rf'\b({ex})\b', re.IGNORECASE)
+
     def read_terms(self):
         def repl_title(matchobj):
             self.title = matchobj.group(1)
@@ -1641,10 +1655,10 @@ class Glossary:
             words = matchobj.group(1)
             defn = matchobj.group(2)
             word_list = [x.strip() for x in words.split(',')]
-            primary_word = word_list[0]
+            anchor = word_list[0]
             self.term.append(word_list)
             for word in word_list:
-                self.glossary_dict[word.lower()] = primary_word
+                self.glossary_dict[word.lower()] = anchor
                 # Prevent a glossary definition from linking to its own entry
                 # by prepending 'glossaryX' to any occurance of the defined
                 # terms in the definition.  We'll remove this after performing
@@ -1676,17 +1690,38 @@ class Glossary:
             self.title = 'unknown glossary'
 
         # Read definitions and modify them to avoid self-linking.
-        self.glossary_dict = {}
         self.txt = re.sub(r'^{([^\}]+)}\s+(.*)$',
                           repl_defn, self.txt, flags=re.MULTILINE)
 
-        # sort the glossary list in reverse order so that for cases where two
-        # phrases start the same and one is a subset of the other, the longer
-        # phrase is checked first.
-        glossary_list = sorted(iter(self.glossary_dict.keys()), reverse=True)
+        self.create_regex()
 
-        ex='|'.join(map(re.escape, glossary_list))
-        self.glossary_regex = re.compile(rf'\b({ex})\b', re.IGNORECASE)
+    def read_jepson_terms(self):
+        self.is_jepson = True
+
+        with open(f'{root}/jepson_glossary.txt', mode='r') as f:
+            txt = f.read()
+        for c in txt.split('\n'):
+            # remove comments
+            c = re.sub(r'\s*#.*$', '', c)
+
+            if not c: # ignore blank lines (and comment-only lines)
+                continue
+
+            # Jepson's anchor is usually the whole text, including commas
+            # and parentheses.  If there are additional terms I'd like to
+            # associate with the entry, I've added them after a semicolon.
+            anchor = re.sub(r'\s*;.*$', r'', c)
+
+            # Normalize the separator between all terms to a comma.
+            c = re.sub(r'\((.*)\)', r', \1', c)
+            c = re.sub(r';', r',', c)
+            word_list = [x.strip() for x in c.split(',')]
+
+            self.term.append(word_list)
+            for word in word_list:
+                self.glossary_dict[word.lower()] = anchor
+
+        self.create_regex()
 
     def write_toc(self, w, current):
         def by_name(glossary):
@@ -1709,9 +1744,9 @@ class Glossary:
             defn = matchobj.group(2)
 
             word_list = [x.strip() for x in words.split(',')]
-            primary_word = word_list[0]
+            anchor = word_list[0]
 
-            return f'<div class="defn" id="{primary_word}"><dt>{primary_word}</dt><dd>{defn}</dd></div>'
+            return f'<div class="defn" id="{anchor}"><dt>{anchor}</dt><dd>{defn}</dd></div>'
 
         self.txt = self.link_glossary_words(self.txt, is_glossary=True)
 
@@ -1726,7 +1761,7 @@ class Glossary:
               w.write(self.txt)
               write_footer(w)
 
-    # Write search terms to pages.js
+    # Write search terms for my glossaries to pages.js
     def write_search_terms(self, w):
         def by_name(glossary):
             return glossary.title
@@ -1742,6 +1777,17 @@ class Glossary:
 
         for child in sorted(self.child, key=by_name):
             child.write_search_terms(w)
+
+    # Write search terms for Jepson's glossary to pages.js
+    def write_jepson_search_terms(self, w):
+        for term in self.term:
+            coms_str = '","'.join(term)
+            anchor = self.glossary_dict[term[0]]
+            if term[0] == anchor:
+                anchor_str = ''
+            else:
+                anchor_str = f',anchor:"{anchor}"'
+            w.write(f'{{page:"Jepson eFlora glossary",com:["{coms_str}"]{anchor_str},x:"j"}},\n')
 
 
 ###############################################################################
@@ -2184,6 +2230,10 @@ master_glossary = glossary_taxon_dict[None]
 flower_glossary = glossary_taxon_dict['flowering plants']
 flower_glossary.set_parent(master_glossary)
 
+jepson_glossary = Glossary('Jepson eFlora glossary')
+jepson_glossary.read_jepson_terms()
+master_glossary.set_parent(jepson_glossary)
+
 # Determine the primary glossary to use for each page *and*
 # determine the hierarchy among glossaries.
 for page in top_list:
@@ -2308,27 +2358,6 @@ write_page_list(top_flower_list, 'all', None)
 ###############################################################################
 # Create pages.js
 
-def write_eflora_glossary_terms(w):
-    with open(f'{root}/eflora_glossary.txt', mode='r') as f:
-        txt = f.read()
-    for c in txt.split('\n'):
-        # Jepson's anchor is usually the whole text.  I've manually put the
-        # exceptions in brackets, in which case the bracketed terms are not
-        # included in the anchor.
-        anchor = re.sub(r'\s*\[.*\]', r'', c)
-
-        # Jepson sometimes separates extra terms with commas, and sometimes
-        # with parentheses (and I also use brackets as above).  Normalize
-        # them all to commas.
-        c = re.sub(r'\s*(?:\(|\[)(.*)(?:\)|\])', r', \1', c)
-        terms = [x.strip() for x in c.split(',')]
-        coms_str = '","'.join(terms)
-        if terms[0] == anchor:
-            anchor_str = ''
-        else:
-            anchor_str = f',anchor:"{anchor}"'
-        w.write(f'{{page:"Jepson eFlora glossary",com:["{coms_str}"]{anchor_str},x:"j"}},\n')
-
 def add_elab(elabs, elab):
     if elab and elab != 'n/a' and elab not in elabs:
         elabs.append(unidecode(elab))
@@ -2383,7 +2412,7 @@ with open(search_file, "w", encoding="utf-8") as w:
 
     master_glossary.write_search_terms(w)
 
-    write_eflora_glossary_terms(w)
+    jepson_glossary.write_jepson_search_terms(w)
 
     w.write('];\n')
 
