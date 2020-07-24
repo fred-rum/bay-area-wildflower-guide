@@ -3,7 +3,7 @@ taxon:flowering plants
 
 <h2>Parts of a flower</h2>
 
-{flower,flowers,flowered} The major parts of a flower are the pedicel, perianth, stamens, and pistils.  Any of these parts may be missing or vanishingly small for a particular species or individual flower. [figure:pedicel] [figure:flower]
+{flower,flowers,flowered} The major parts of a flower are the pedicel, perianth, stamens, and pistils. [figure:hypanthium] [figure:flower]  Any of these parts may be missing or vanishingly small for a particular species or individual flower.
 
 figure:hypanthium
 figure:receptacle

@@ -1197,7 +1197,7 @@ class Page:
         else:
             s = self.key_txt
 
-        s = link_figures(s)
+        s = link_figures(self.name, s)
         s = re.sub(r'{-([^}]+)}', repl_link, s)
         s = self.glossary.link_glossary_words(s)
         self.txt = s
@@ -1499,11 +1499,11 @@ def write_footer(w):
 </body>
 ''')
 
-def link_figures(txt):
+def link_figures(name, txt):
     def repl_figure_thumb(matchobj):
         file = matchobj.group(1)
         if not os.path.isfile(f'{root}/figures/{file}.svg'):
-            print(f'Broken figure link to {file}.svg')
+            print(f'Broken figure link to {file}.svg in {name}')
         return f'<a href="../figures/{file}.svg"><img src="../figures/{file}.svg" height="200" class="leaf-thumb"></a>'
 
     def repl_figure_thumbs(matchobj):
@@ -1515,7 +1515,7 @@ def link_figures(txt):
     def repl_figure_text(matchobj):
         file = matchobj.group(1)
         if not os.path.isfile(f'{root}/figures/{file}.svg'):
-            print(f'Broken figure link to {file}.svg')
+            print(f'Broken figure link to {file}.svg in {name}')
         return f'<a href="../figures/{file}.svg">[figure]</a>'
 
     txt = re.sub(r'^(figure:.*?(?:\.svg|)(?:\nfigure:.*?(?:\.svg|))*)$',
@@ -1546,6 +1546,22 @@ class Glossary:
         self.parent = parent
         parent.child.add(self)
 
+    def glossary_link(self, anchor, term):
+        if self.is_jepson:
+            return f'<a class="glossary-jepson" href="https://ucjeps.berkeley.edu/eflora/glossary.html#{anchor}">{term}</a>'
+        else:
+            return f'<a class="glossary" href="{self.name}.html#{anchor}">{term}</a>'
+
+    def link_related(self, term):
+        if term in self.glossary_dict:
+            related_str = ' ' + self.glossary_link(self.glossary_dict[term],
+                                                   '[' + self.title + ']')
+        else:
+            related_str = ''
+        if self.parent:
+            related_str += self.parent.link_related(term)
+        return related_str
+
     def link_glossary_words(self, txt, is_glossary=False):
         # This function is called for a glossary word match.
         # Replace the matched word with a link to the primary term
@@ -1558,9 +1574,7 @@ class Glossary:
                     self.used_dict[anchor] += 1
                 else:
                     self.used_dict[anchor] = 1
-                return f'<a class="glossary-jepson" href="https://ucjeps.berkeley.edu/eflora/glossary.html#{anchor}">{word}</a>'
-            else:
-                return f'<a class="glossary" href="{self.name}.html#{anchor}">{word}</a>'
+            return self.glossary_link(anchor, word)
 
         # Add glossary links in group 1, but leave group 2 unchanged.
         def repl_sub_glossary(matchobj):
@@ -1620,11 +1634,6 @@ class Glossary:
         txt = re.sub(sub_re, repl_sub_glossary, txt,
                      flags=re.DOTALL)
 
-        if is_glossary:
-            # Remove the inserted 'glossaryX' text to allow a definition
-            # to link to a related term in a higher-level glossary.
-            txt = re.sub(r'glossaryX', '', txt)
-
         # Also perform link substitution for the parent glossary (and
         # its parent, etc.)
         if self.parent:
@@ -1663,12 +1672,13 @@ class Glossary:
             self.term.append(word_list)
             for word in word_list:
                 self.glossary_dict[word.lower()] = anchor
-                # Prevent a glossary definition from linking to its own entry
-                # by prepending 'glossaryX' to any occurance of the defined
-                # terms in the definition.  We'll remove this after performing
-                # the first level of glossary linking, allowing the definition
-                # to link to a higher-level glossary if there is a definition
-                # there.
+                # Prevent a glossary definition from linking the terms
+                # it is currently defining, either to its own
+                # definition or to a higher-level glossary.
+                # (Higher-level glossary links will be added later.)
+                # We do this by prepending 'glossaryX' to any
+                # occurance of the defined terms in the definition.
+                # We'll remove this after glossary links are created.
                 defn = re.sub(r'\b' + word + r'\b', 'glossaryX' + word, defn,
                               re.IGNORECASE)
             return '{' + words + '} ' + defn
@@ -1678,7 +1688,7 @@ class Glossary:
 
         # Link figures prior to parsing glossary terms so that they're
         # properly recognized as not to be touched.
-        self.txt = link_figures(self.txt)
+        self.txt = link_figures(self.name, self.txt)
 
         self.txt = re.sub(r'^title:\s*(.*?)\s*$',
                           repl_title, self.txt, flags=re.MULTILINE)
@@ -1700,6 +1710,7 @@ class Glossary:
         self.create_regex()
 
     def read_jepson_terms(self):
+        self.title = 'Jepson' # used only self links from a glossary definition
         self.is_jepson = True
         self.used_dict = {}
 
@@ -1756,9 +1767,19 @@ class Glossary:
             word_list = [x.strip() for x in words.split(',')]
             anchor = word_list[0]
 
-            return f'<div class="defn" id="{anchor}"><dt>{anchor}</dt><dd>{defn}</dd></div>'
+            # Add links to other glossaries where they define the same words.
+            if self.parent:
+                related_str = self.parent.link_related(anchor)
+            else:
+                related_str = ''
+
+            return f'<div class="defn" id="{anchor}"><dt>{anchor}</dt><dd>{defn}{related_str}</dd></div>'
 
         self.txt = self.link_glossary_words(self.txt, is_glossary=True)
+
+        # Remove the inserted 'glossaryX' text to return the (unlinked)
+        # glossary terms to their normal text.
+        self.txt = re.sub(r'glossaryX', '', self.txt)
 
         self.txt = re.sub(r'^{([^\}]+)}\s+(.*)$',
                           repl_defns, self.txt, flags=re.MULTILINE)
