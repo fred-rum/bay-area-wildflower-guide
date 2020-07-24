@@ -59,9 +59,11 @@ figure:ovary
 
 {cleistogamous} Self-pollinating without opening.  Generally looks bud-like.
 {dioecious} A plant that has only either male or female flowers on it, never both on the same plant.
+{head,heads} A dense inflorescence of +- sessile flowers.
 {involucel,involucels} Secondary involucre within an inflorescence.
 {involucre,involucres} Collective term for a cluster of bracts.
 {limb,limbs} In a fused calyx or corolla, the spreading portion distal to the throat (or at least more widely expanded than the throat). [figure:babystar]
+{lip,lips} The upper (adaxial) or lower (abaxial) lobe of a bilateral calyx or corolla that is divided into two lobes.
 {panicle,panicles,panicled} Branched infloresence with flowers that grow from the proximal end.
 {salverform} With a slender tube and abruptly spreading limbs (e.g. "T" shaped).
 {spike,spikes,spiked} Inflorescence with all flowers sessile on the main axis, generally flowering from the proximal end.  See panicle.

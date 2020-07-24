@@ -153,11 +153,6 @@ Add glossary entries to replace as many Jepson terms as I can.  If I
 can get all of them, then perhaps I can make use of a Jepson term an
 error.
 
-Automatically add a link from a definition to any ancestor
-(e.g. [Jepson]) or descendent entry where they overlap.  Suppress
-links to these words within a definition.  May require a smarter
-second pass when adding glossary links within a glossary.
-
 Change glossary.txt to master glossary.txt so that every glossary
 filename matches its title (and perhaps remove the title altogether).
 This makes the displayed glossary search results more consistent with
@@ -172,3 +167,7 @@ Clear the search and auto-completion box when clicking on a glossary
 search result while in the same glossary page.  This may require
 changing the link to a Javascript call if there is no easier way to
 catch a click through an anchored link.
+
+
+Apply standard page substitutions on glossary pages, e.g. +-, perhaps
+blank lines to <p/>.

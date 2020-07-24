@@ -1,0 +1,4 @@
+title:conifer glossary
+taxon:conifers
+
+{scale,scales} A woody, seed-bearing structure connected to the cone axis.

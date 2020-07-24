@@ -64,8 +64,10 @@ title:master glossary
 {annual,annuals} Lives for one year or less, generally without forming any woody parts.
 {ascending} Angled up (but less than erect) or angled in the direction of the main axis (but not nearly parallel to the main axis).
 {axil,axils,axillary} The distal, adaxial angle between a main axis (e.g. a stem) and an appendage (e.g. a branch or leaf).
+{axis,axes} The direction of growth, or the structure that grows along the axis (e.g. a stem).
 {basal} Positioned at the base.  Most commonly refers to leaves growing at the base of the stem.  Contrast cauline.
 {biennial,biennials} Lives for only two years, generally flowering only in the second year.  Non-woody.
+{bristle,bristles,bristly} A stiff, straight hair.
 {canescent} Densely covered with fine silvery white hairs.
 {caudex,caudexes,caudices} Short stem below ground level.
 {cauline} Growing along a plant's stem.  Most commonly refers to leaves.  Contrast basal.
@@ -96,9 +98,12 @@ title:master glossary
 {proximal,proximally} Growing closer to the base and farther from the tip of a structure.  The structure is often implied; e.g. a proximal leaf grows close to the base of the whole plant.  Contrast distal.
 {recurved,recurve,recurving} Gradually curved backward.  Contrast reflexed.
 {reflexed,reflex,reflexing} Abruptly bent somewhat or entirely backward.  Opposite of erect or ascending.  Contrast recurved.
+{rib,ribs,midrib,midribs} A raised band of material, e.g. covering a vein.
+{scale,scales} Flat, membranous structure.
 {scarious} Membranous.
 {seed,seeds} A fertilized ovule capable of sprouting a new plant. Often encapsulated in a fruit which provides energy, protection, and/or a means to dispersal for the seed.
 {segment,segments} The smallest division of a compound/dissected leaf.
+{sessile} Unstalked.  E.g. no petiole, peduncle, or pedicel.
 {shrub,shrubs} Woody plant, shorter than a tree, generally with many branches from the base.
 {simple} Generally, composed of a single part; undivided; unbranched.  Opposite of compound.<ul><li>Leaf: composed of a single part (which may be lobed or dissected), not divided into distinct leaflets separated from each other.</li></ul>
 {spreading} Nearly horizontal or perpendicular to the main axis.
@@ -112,5 +117,6 @@ title:master glossary
 {truncate,truncating,truncated} Ending (or beginning) abruptly, e.g. with no tapering.
 {twig,twigs} The ultimate branch segment of a woody plant.
 {ultimate} The smallest division of a compound/dissected leaf or the final segments of a branching stem.
+{vein,veins} A visible vascular bundle used for transport of material through the plant.  Appears as a line of a different color shade or as a raised rib.
 {waif,waifs} A plant that has spread with human assistance but cannot reproduce or spread further on its own; will eventually die out assuming no further assistance.
 {whorl,whorls,whorled} A cluster of 3 or more (e.g. flowers) with each whorl generally surrounding an axis and multiple whorls interspersed along the axis.
