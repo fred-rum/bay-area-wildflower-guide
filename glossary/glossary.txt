@@ -6,7 +6,7 @@ title:master glossary
 
 {blade,blades} The expanded portion of a leaf where photosynthesis primarily occurs.  May be simple or compound with multiple leaflets.
 {petiole,petioles} The stalk of a leaf.
-{stipule,stipules} Extension at the base of the petiole. [figure:stipule]
+{stipule,stipules} Extension at the base of the petiole. [figure:narrow-leaved clover]
 
 {leaflet,leaflets} A division of a compound leaf (which may itself be further compound).  Can be distinguished from a leaf by the lack of any structures in its axil other than more leaflets or occasionally stipules.
 

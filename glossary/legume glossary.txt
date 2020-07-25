@@ -3,10 +3,10 @@ taxon:legume family
 
 <h2>Parts of a pea flower (any flower in the legume family)</h2>
 
-figure:pea flower
+figure:chaparral pea
 
 <p>A pea flower has five petals in a bilateral arrangement (not radial).</p>
 
-{banner,banners} The topmost petal.  It may have a crease down the middle that makes it looks like two petals stuck together, or it may be curled around the other petals.  Also called the "standard petal".
-{wing,wings} Each of the two lateral petals below the banner, often fused at their top edge and enfolding the keel.
-{keel,keels} The two bottom petals collectively, often fused at their bottom edge.  May be partially or fully hidden by the wings.
+{banner,banners} The topmost petal.  It may have a crease down the middle that makes it looks like two petals stuck together, or it may be curled around the other petals.  Also called the "standard petal". [figure:figure:chaparral pea]
+{wing,wings} Each of the two lateral petals below the banner, often fused at their top edge and enfolding the keel. [figure:figure:chaparral pea]
+{keel,keels} The two bottom petals collectively, often fused at their bottom edge.  May be partially or fully hidden by the wings. [figure:figure:chaparral pea]

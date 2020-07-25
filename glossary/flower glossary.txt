@@ -3,48 +3,48 @@ taxon:flowering plants
 
 <h2>Parts of a flower</h2>
 
-{flower,flowers,flowered} The major parts of a flower are the pedicel, perianth, stamens, and pistils. [figure:hypanthium] [figure:flower]  Any of these parts may be missing or vanishingly small for a particular species or individual flower.
+{flower,flowers,flowered} The major parts of a flower are the pedicel, perianth, stamens, and pistils. [figure:san francisco woodland star] [figure:yellow mariposa lily]  Any of these parts may be missing or vanishingly small for a particular species or individual flower.
 
-figure:hypanthium
-figure:receptacle
-figure:flower
+figure:san francisco woodland star
+figure:california poppy
+figure:yellow mariposa lily
 
-{pedicel,pedicels,pediceled} The stalk of an individual flower.  Compare to peduncle. [figure:hypanthium]
-{receptacle,receptacles} The distal end of the pedicel (or sometimes the peduncle), where the flower parts (or head) are attached.  See hypanthium. [figure:receptacle]
-{perianth,perianths} The collective term for the calyx and corolla (with the calyx subtending the corolla).  The term is usually used where the calyx and corolla are difficult to distinguish (except by position). [figure:hypanthium]
-{perianth part,perianth parts} A sepal or petal.  The term is usually used where sepals and petals are difficult to distinguish. [figure:staminode]
+{pedicel,pedicels,pediceled} The stalk of an individual flower.  Compare to peduncle. [figure:san francisco woodland star]
+{receptacle,receptacles} The distal end of the pedicel (or sometimes the peduncle), where the flower parts (or head) are attached.  See hypanthium. [figure:california poppy]
+{perianth,perianths} The collective term for the calyx and corolla (with the calyx subtending the corolla).  The term is usually used where the calyx and corolla are difficult to distinguish (except by position). [figure:san francisco woodland star]
+{perianth part,perianth parts} A sepal or petal.  The term is usually used where sepals and petals are difficult to distinguish. [figure:harvest brodiaea]
 {tepal,tepals} A perianth part, especially where the perianth parts are +- entirely free.
-{hypanthium,hypanthia,hypanthiums} The structure formed by the fused lower portions of the perianth. [figure:hypanthium]
+{hypanthium,hypanthia,hypanthiums} The structure formed by the fused lower portions of the perianth. [figure:san francisco woodland star]
 
 <h3>Calyx</h3>
 
-figure:calyx.svg
+figure:seep monkeyflower
 
-{calyx,calyces,calyxes} The collective term for all sepals of a flower.  Protects the flower in bud.  Usually green, but may match the color of the corolla or have some other color. [figure:calyx]
-{sepal,sepals} A free or fused member of the calyx.  If partially fused, reference is usually made to a calyx lobe rather than a sepal as a whole. [figure:flower]
+{calyx,calyces,calyxes} The collective term for all sepals of a flower.  Protects the flower in bud.  Usually green, but may match the color of the corolla or have some other color. [figure:seep monkeyflower]
+{sepal,sepals} A free or fused member of the calyx.  If partially fused, reference is usually made to a calyx lobe rather than a sepal as a whole. [figure:yellow mariposa lily]
 
 <h3>Corolla</h3>
 
-figure:corolla.svg
+figure:california manroot
 
-{corolla,corollas} The collective term for all petals of a flower.  Surrounds the flowers sexual parts.  Usually bright colored. [figure:corolla]
-{petal,petals} A free or fused member of the corolla.  If partially fused, reference is usually made to a free corolla lobe rather than a petal as a whole. [figure:flower]
+{corolla,corollas} The collective term for all petals of a flower.  Surrounds the flowers sexual parts.  Usually bright colored. [figure:california manroot]
+{petal,petals} A free or fused member of the corolla.  If partially fused, reference is usually made to a free corolla lobe rather than a petal as a whole. [figure:yellow mariposa lily]
 
 <h3>Pistil</h3>
 
-figure:ovary
+figure:sea muilla
 
-{pistil,pistils} A pollen-accepting ("female") sexual part of a flower, each composed of an ovary, style, and stigma. [figure:ovary]
-{ovary,ovaries} The usually wider base of the pistil that forms the seed or fruit when germinated.  The hypanthium (perianth and stamens) may be attached to the top, the bottom, or somewhere along the sides of the ovary. [figure:ovary]
-{style,styles} The tube that carries pollen from the stigma to the ovary. [figure:ovary]
-{stigma,stigmas} The distal end of the pistil that captures pollen for germination.  May be lobed. [figure:ovary]
+{pistil,pistils} A pollen-accepting ("female") sexual part of a flower, each composed of an ovary, style, and stigma. [figure:sea muilla]
+{ovary,ovaries} The usually wider base of the pistil that forms the seed or fruit when germinated.  The hypanthium (perianth and stamens) may be attached to the top, the bottom, or somewhere along the sides of the ovary. [figure:sea muilla]
+{style,styles} The tube that carries pollen from the stigma to the ovary. [figure:sea muilla]
+{stigma,stigmas} The distal end of the pistil that captures pollen for germination.  May be lobed. [figure:sea muilla]
 
 <h3>Stamen</h3>
 
-{stamen,stamens} A pollen-producing ("male") sexual part of a flower, each composed of a filament and an anther. [figure:flower]
-{filament,filaments} The stalk that holds up an anther. [figure:ovary]
-{anther,anthers} The distal end of the stamen where pollen is produced.  Usually has two lobes. [figure:ovary]
-{staminode,staminodes} A sterile stamen with a modified appearance. [figure:staminode]
+{stamen,stamens} A pollen-producing ("male") sexual part of a flower, each composed of a filament and an anther. [figure:yellow mariposa lily]
+{filament,filaments} The stalk that holds up an anther. [figure:sea muilla]
+{anther,anthers} The distal end of the stamen where pollen is produced.  Usually has two lobes. [figure:sea muilla]
+{staminode,staminodes} A sterile stamen with a modified appearance. [figure:harvest brodiaea]
 
 <h2>Parts of an inflorescence</h2>
 
@@ -62,11 +62,11 @@ figure:ovary
 {head,heads} A dense inflorescence of +- sessile flowers.
 {involucel,involucels} Secondary involucre within an inflorescence.
 {involucre,involucres} Collective term for a cluster of bracts.
-{limb,limbs} In a fused calyx or corolla, the spreading portion distal to the throat (or at least more widely expanded than the throat). [figure:babystar]
+{limb,limbs} In a fused calyx or corolla, the spreading portion distal to the throat (or at least more widely expanded than the throat). [figure:false babystars]
 {lip,lips} The upper (adaxial) or lower (abaxial) lobe of a bilateral calyx or corolla that is divided into two lobes.
 {panicle,panicles,panicled} Branched infloresence with flowers that grow from the proximal end.
 {salverform} With a slender tube and abruptly spreading limbs (e.g. "T" shaped).
 {spike,spikes,spiked} Inflorescence with all flowers sessile on the main axis, generally flowering from the proximal end.  See panicle.
-{throat,throats} In a fused calyx or corolla, the expanded portion between the tube and the limb. [figure:babystar]
-{tube,tubes} In a fused calyx or corolla, the +- cylindric portion proximal to the throat. [figure:babystar]
+{throat,throats} In a fused calyx or corolla, the expanded portion between the tube and the limb. [figure:false babystars]
+{tube,tubes} In a fused calyx or corolla, the +- cylindric portion proximal to the throat. [figure:false babystars]
 {umbel,umbels} An inflorescence in which 3+ flower pedicels branch from a common point.
