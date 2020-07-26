@@ -13,3 +13,12 @@ taxon:grasses
 {lemma,lemmas} The outer bractlet enclosing the floret.
 {rachis} The part of a grass stem along which flower stalks are spaced at short intervals.
 {spikelet,spikelets} The rough equivalent of an inflorescence for grasses.  A spikelet is one or more florets growing alternately along a rachilla.  Multiple spikelets may be borne along the rachis.  Note that a spikelet is not necessarily related to a spike.
+
+<h2>Inflorescence shapes</h2>
+
+<p>Within the grasses, these terms describe the organization of multiple epikelets in a larger inflorescence.  The order of development among spikelets is not defined.</p>
+
+{panicle,panicles} An inflorescence in which at least some spikelets are attached to inflorescence branches rather than the central axis.  The order in which heads develop is not defined.
+{raceme,racemes} An inflorescence with stalked spikelets attached directly to the inflorescence axis (not to branches).
+{spike,spikes} An inflorescence with sessile spikelets attached directly to the inflorescence axis (not to branches).
+{umbel,umbels} An inflorescence in which 3+ stalked spikelets radiate from a common point with no continuation of the central axis.

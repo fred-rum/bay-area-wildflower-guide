@@ -12,3 +12,13 @@ taxon:sunflower family
 {phyllary,phyllaries} A bract of the flower head in the sunflower family.  A member of the involucre.
 {ray,rays,ray flower,ray flowers} A flower in the outer portion of a head in the sunflower family.  Flat and uni-directional, not radial.  May be distally lobed.  The rays form a ring around the central disk.
 {scale,scales} Flat, membranous element of a pappus.
+
+<h2>Inflorescence shapes</h2>
+
+<p>Within the sunflower family, these terms describe the organization of multiple heads in a larger inflorescence.  For most of these terms, the order of development among heads is not defined.</p>
+
+{cyme,cymes} A branched inflorescence in which a head at an axil develops before heads on the subtending branches.
+{panicle,panicles} An inflorescence in which at least some heads are attached to inflorescence branches rather than the central axis.
+{raceme,racemes} An inflorescence with stalked heads attached directly to the inflorescence axis (not to branches).
+{spike,spikes} An inflorescence with sessile heads attached directly to the inflorescence axis (not to branches).
+{umbel,umbels} An inflorescence in which 3+ stalked heads radiate from a common point with no continuation of the central axis.

@@ -16,7 +16,8 @@ Print errors:
 
 It'd be nice if the up/down arrow keys changed which autocomplete entry was currently selected.
 
-It'd be nice if the escape key removed autocomplete until more was typed.
+It'd be nice if the escape key removed autocomplete (or the entire
+search text) until more was typed.
 
 ###############################################################################
 
@@ -162,6 +163,9 @@ Allow Jepson terms to appear in the searchable dictionary and perhaps
 in glossaries, but not linking them in page text to avoid clutter.
 E.g. hair.
 
+Rather than only searching for duplicate glossary definitions in
+parent glossaries, find duplicates in *all* glossaries.  Present the duplicates as e.g. "[Jepson, sunflower glossary, grass glossary]".
+
 
 Clear the search and auto-completion box when clicking on a glossary
 search result while in the same glossary page.  This may require
@@ -171,3 +175,5 @@ catch a click through an anchored link.
 
 Apply standard page substitutions on glossary pages, e.g. +-, perhaps
 blank lines to <p/>.
+
+Add inflorescence shape definitions for grasses, sedges, and buckwheats.

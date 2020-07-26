@@ -25,7 +25,6 @@ title:master glossary
 
 {cordate} Shaped like a heart in a deck of cards (with tip outward, lobes at the base). <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
 {elliptic,elliptical} In the shape of an elongated circle, widest near the middle.  Wider than linear. <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
-{entire} In one smooth shape; i.e. not toothed, lobed, or compound.
 {lanceolate,lance} Long, somewhat narrow, and tapering to a point at the tip; widest between the middle and the base. <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
 {linear} Long and very narrow with +- parallel sides. <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
 {oblanceolate} Long, somewhat narrow, and tapering to a point at the tip; widest between the middle and the tip. <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
@@ -41,7 +40,20 @@ title:master glossary
 {palmate-pinnate} 1st-order palmate and 2nd-order pinnate.
 {pinnate,pinnately} Refers to a two-dimensional branched structure.  Typically refers to lobes or leaflets in a leaf.  1-pinnate means that the structure has 1 level of branches arising from a central axis.  2-pinnate means that the branches also have branches, etc.
 
+<h3>Tip shapes</h2>
+
+<a target="_blank" href="http://sweetgum.nybg.org/science/glossary/glossary-details/?irn=3020">[figure]</a>
+
+{acuminate} A long tip with concave sides meeting at a sharp angle.
+{acute} A short tip with convex or straight sides meeting at an angle sharper than 90&deg;.
+{mucronate} A short tip with concave sides meeting at a sharp angle.
+{obtuse} A short tip with convex or straight sides meeting at an angle blunter than 90&deg;.
+{tapered} Narrowing gradually to the tip.
+{truncate,truncated} Abruptly narrowed at the tip, as if cut flat.
+
 <h3>Border shapes</h3>
+
+{entire} In one smooth shape; i.e. not toothed, lobed, or compound.
 
 {crenate,crenately,scalloped} With shallow, rounded teeth and usually with acute sinuses.  Could also be called "scalloped".
 {reniform} Like cordate, but distally rounded instead of pointed, and typically less acute at the base.
@@ -62,6 +74,7 @@ title:master glossary
 {abaxial,abaxially} The surface further from the stem when upright.  E.g. the lower surface of a leaf or the outer surface of a petal.
 {adaxial,adaxially} The surface closer to the stem when upright.  E.g. the upper surface of a leaf or the inner surface of a petal.
 {annual,annuals} Lives for one year or less, generally without forming any woody parts.
+{appressed,appress} Leaning closely against the originating structure, e.g. a leaf appressed to a stem or a hair appressed to a leaf.
 {ascending} Angled up (but less than erect) or angled in the direction of the main axis (but not nearly parallel to the main axis).
 {axil,axils,axillary} The distal, adaxial angle between a main axis (e.g. a stem) and an appendage (e.g. a branch or leaf).
 {axis,axes} The direction of growth, or the structure that grows along the axis (e.g. a stem).
@@ -81,7 +94,7 @@ title:master glossary
 {erect} Pointing more or less straight up or parallel to the main axis.
 {exserted,exserting,exsert} Protruding more than surrounding structures.
 {free,freed} Growing separately from equivalent structures at the same level, e.g. sepals in the calyx.  Compare fused.
-{fruit,fruits,fruiting} A seed-bearing body (or a joined aggregation of multiple bodies), developing from one or more ovaries and possibly other associated structures.
+{fruit,fruits,fruiting} A seed-bearing body (or a joined aggregation of multiple bodies), developing from one or more ovaries and possibly other associated structures. [figure:california poppy fruit]
 {fuse,fused} Equivalent structures at the same level that have grown together (more than just touching).  Compare free.
 {glabrous} Without hair.
 {gland,glands,glandular} A small sphere on the surface of a plant or at the tip of a hair that excretes a generally sticky material.
@@ -90,18 +103,20 @@ title:master glossary
 {lobe,lobes,lobed} An protrusion from a larger body, otherwise undifferentiated from the main body.  E.g. a corolla lobe is the free part of a petal.
 {mucro,mucros} An abrupt, short, narrow tip/projection.
 {nodding} Partially drooping, between pendent and spreading.
+{open} Not dense.
 {papillate,papillated} Has a surface with small protuberances, e.g. like the surface of your tongue.
 {pendent} Drooping or hanging +- straight down.
 {perennial,perennials} Lives for more than two years.  May be woody or non-woody.
 {perennial herb,perennial herbs} Non-woody plant that lives for more than two years.  Is generally more robust than an annual, but there is no general way to distinguish a perennial herb from an annual unless you're already familiar with the ranges of variation in the plants in question.
 {primary leaf,primary leaves} The first one or two leaves of a sprouting monocot or dicot.  These are the most proximal leaves.  For dicots, the two leaves are opposite.
 {proximal,proximally} Growing closer to the base and farther from the tip of a structure.  The structure is often implied; e.g. a proximal leaf grows close to the base of the whole plant.  Contrast distal.
+{puberulent} Covered in very short, soft hairs.
 {recurved,recurve,recurving} Gradually curved backward.  Contrast reflexed.
 {reflexed,reflex,reflexing} Abruptly bent somewhat or entirely backward.  Opposite of erect or ascending.  Contrast recurved.
 {rib,ribs,midrib,midribs} A raised band of material, e.g. covering a vein.
 {scale,scales} Flat, membranous structure.
 {scarious} Membranous.
-{seed,seeds} A fertilized ovule capable of sprouting a new plant. Often encapsulated in a fruit which provides energy, protection, and/or a means to dispersal for the seed.
+{seed,seeds} A fertilized ovule capable of sprouting a new plant. Often encapsulated in a fruit which provides energy, protection, and/or a means to dispersal for the seed. [figure:california poppy fruit]
 {segment,segments} The smallest division of a compound/dissected leaf.
 {sessile} Unstalked.  E.g. no petiole, peduncle, or pedicel.
 {shrub,shrubs} Woody plant, shorter than a tree, generally with many branches from the base.
@@ -112,8 +127,10 @@ title:master glossary
 {strigose} Having stiff, straight, appressed hairs.
 {subshrub,subshrubs} Similar to a shrub, but with only the proximal stems woody.  The distal stems are non-woody (or are at least significantly less woody).
 {subtend,subtending,subtended} Growing immediately proximal to the compared structure.
+{succulent,succulents} Composed of fleshy tissue that conserves water.
 {taproot} Primary root growing straight down, tapering at the end, with smaller lateral branches.
 {terminal} The segment at the end, e.g. the most distal segment of a compound or lobed leaf.
+{tomentose} Covered with matted, felt-like hairs.
 {truncate,truncating,truncated} Ending (or beginning) abruptly, e.g. with no tapering.
 {twig,twigs} The ultimate branch segment of a woody plant.
 {ultimate} The smallest division of a compound/dissected leaf or the final segments of a branching stem.
