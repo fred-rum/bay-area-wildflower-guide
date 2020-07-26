@@ -1552,15 +1552,19 @@ class Glossary:
         else:
             return f'<a class="glossary" href="{self.name}.html#{anchor}">{term}</a>'
 
-    def link_related(self, term):
-        if term in self.glossary_dict:
-            related_str = ' ' + self.glossary_link(self.glossary_dict[term],
-                                                   '[' + self.title + ']')
-        else:
-            related_str = ''
-        if self.parent:
-            related_str += self.parent.link_related(term)
-        return related_str
+    def find_dups(self, skip_glossary, term):
+        def by_name(glossary):
+            return glossary.title
+
+        dup_list = []
+        if self != skip_glossary and term in self.glossary_dict:
+            dup_list.append(self.glossary_link(self.glossary_dict[term],
+                                               self.title))
+
+        for child in sorted(self.child, key=by_name):
+            dup_list.extend(child.find_dups(skip_glossary, term))
+
+        return dup_list
 
     def link_glossary_words(self, txt, is_glossary=False):
         # This function is called for a glossary word match.
@@ -1768,8 +1772,10 @@ class Glossary:
             anchor = word_list[0]
 
             # Add links to other glossaries where they define the same words.
-            if self.parent:
-                related_str = self.parent.link_related(anchor)
+            related_str = ''
+            dup_list = jepson_glossary.find_dups(self, anchor)
+            if dup_list:
+                related_str = ' [' + ', '.join(dup_list) + ']'
             else:
                 related_str = ''
 
