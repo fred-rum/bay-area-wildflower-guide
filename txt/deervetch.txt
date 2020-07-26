@@ -38,6 +38,7 @@ color: cream, pink
 . common
 
 ==spanish clover:A. americanus var. americanus
+color:pink
 . prostrate to erect, 5--60 cm
 . <b>generally 3 leaflets, often with simple upper leaves</b>, 10--20 mm, lanceolate to elliptic
 . leaflets lanceolate to obovate, +- equal
@@ -81,7 +82,6 @@ color: yellow
 . inflorescence generally 1--2-flowered
 . <b>corolla 5--10 mm</b>, yellow with +- salmon veins or wash (most visible on the back of the banner), or +- red in age, wings generally > keel
 . <b>1--2 flowers per leaf axil, peduncle 3--25 mm, generally bracted</b> (<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1208+2672">example</a>)
-.. all others below have > 1 flower per leaf axil
 . scattered
 
 ]
