@@ -10,6 +10,14 @@ title:master glossary
 
 {leaflet,leaflets} A division of a compound leaf (which may itself be further compound).  Can be distinguished from a leaf by the lack of any structures in its axil other than more leaflets or occasionally stipules.
 
+<h2>Armament</h2>
+
+All of these terms may occasionally be used loosely rather than following the strict definition.
+
+{prickle,prickles,prickled} Sharp-pointed projection not arising from a node.  Often stiff.
+{spine,spines,spined} Sharp-pointed projection derived from a leaf, leaf part, or stipule.  Usually stiff.
+{thorn,thorns,thorned} Sharp-pointed projection derived from a stem.  Usually stiff.
+
 <h2>3-D shapes (e.g. for the involucre)</h2>
 
 <p>All involucre shapes may be flared at the tip or not, which is independent of the shape listed below.</p>
