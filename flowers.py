@@ -1646,6 +1646,10 @@ class Glossary:
         ex = '|'.join(map(re.escape, glossary_list))
         self.glossary_regex = re.compile(rf'\b({ex})\b', re.IGNORECASE)
 
+    def record_in_glossary_dict(self, anchor, word):
+        word = sub_easy_safe(word.lower())
+        self.glossary_dict[word] = anchor
+
     def read_terms(self):
         def repl_title(matchobj):
             self.title = matchobj.group(1)
@@ -1667,7 +1671,7 @@ class Glossary:
             anchor = word_list[0]
             self.term.append(word_list)
             for word in word_list:
-                self.glossary_dict[word.lower()] = anchor
+                self.record_in_glossary_dict(anchor, word)
                 # Prevent a glossary definition from linking the terms
                 # it is currently defining, either to its own
                 # definition or to a higher-level glossary.
@@ -1736,7 +1740,7 @@ class Glossary:
 
             self.term.append(word_list)
             for word in word_list:
-                self.glossary_dict[word.lower()] = anchor
+                self.record_in_glossary_dict(anchor, word)
 
         self.create_regex()
 
