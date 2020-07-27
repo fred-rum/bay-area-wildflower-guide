@@ -1199,7 +1199,7 @@ class Page:
 
         s = link_figures(self.name, s)
         s = re.sub(r'{-([^}]+)}', repl_link, s)
-        s = self.glossary.link_glossary_words(s)
+        s = self.glossary.link_glossary_words(s, is_glossary=False)
         self.txt = s
 
     def any_parent_within_level(self, within_level_list):
@@ -1566,7 +1566,7 @@ class Glossary:
 
         return dup_list
 
-    def link_glossary_words(self, txt, is_glossary=False):
+    def link_glossary_words(self, txt, first_sub=True, is_glossary=False):
         # This function is called for a glossary word match.
         # Replace the matched word with a link to the primary term
         # in the glossary.
@@ -1584,18 +1584,18 @@ class Glossary:
         def repl_sub_glossary(matchobj):
             allowed = matchobj.group(1)
             disallowed = matchobj.group(2)
-            if not self.parent:
-                # If we're at the last step of glossary substitution,
+            if first_sub:
+                # If we're at the first step of glossary substitution,
                 # also substitute in smart quotes.
                 # Note that glossary substitution introduces more tags
                 # that we don't want to screw up, so we substitute smart
                 # quotes in the allowed section *before* substituting
                 # glossary links.  (If a glossary term ever includes a
                 # quotation mark, I'll have to rethink this.)
-                allowed = re.sub(r"(\W)'", '\g<1>&lsquo;', allowed)
-                allowed = re.sub(r'(\W)"', '\g<1>&ldquo;', allowed)
-#                allowed = re.sub(r"(?<=\s)'", r'&lsquo;', allowed)
-#                allowed = re.sub(r'(?<=\s)"', r'&ldquo;', allowed)
+                allowed = re.sub(r"(?<![\w.,])'", r'&lsquo;', allowed)
+                allowed = re.sub(r'(?<![\w.,])"', r'&ldquo;', allowed)
+                allowed = re.sub(r"\A'", r'&lsquo;', allowed)
+                allowed = re.sub(r'\A"', r'&ldquo;', allowed)
                 allowed = re.sub(r"'", r'&rsquo;', allowed)
                 allowed = re.sub(r'"', r'&rdquo;', allowed)
             allowed = re.sub(self.glossary_regex, repl_glossary, allowed)
@@ -1645,7 +1645,9 @@ class Glossary:
         # into non-tag/tag pairs including the most recent glossary tag
         # substitutions.
         if self.parent:
-            txt = self.parent.link_glossary_words(txt, is_glossary)
+            txt = self.parent.link_glossary_words(txt,
+                                                  first_sub=False,
+                                                  is_glossary=is_glossary)
 
         return txt
 
