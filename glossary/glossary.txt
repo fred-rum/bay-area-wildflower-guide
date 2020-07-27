@@ -56,7 +56,10 @@ title:master glossary
 
 {palmate,palmately} With lobes spreading in a plane from a common point.
 {palmate-pinnate} 1st-order palmate and 2nd-order pinnate.
-{pinnate,pinnately} Refers to a two-dimensional branched structure.  Typically refers to lobes or leaflets in a leaf.  1-pinnate means that the structure has 1 level of branches arising from a central axis.  2-pinnate means that the branches also have branches, etc.
+{pinnate,pinnately} Refers to a two-dimensional branched structure.  Typically refers to lobes or leaflets in a leaf.
+{odd-pinnate,odd-pinnately} Pinnate with pairs of lateral branches and one terminal branch.
+{even-pinnate,even-pinnately} Pinnate with pairs of lateral branches but no terminal branch.
+{N-pinnate,1-pinnate,2-pinnate,3-pinnate,4-pinnate,1--2-pinnate,1--3-pinnate,1--4-pinnate,2--3-pinnate,2--4-pinnate,3--4-pinnate} 1-pinnate means that the structure has 1 level of branches arising from a central axis.  2-pinnate means that the branches also have branches, etc.
 
 <h3>Tip shapes</h2>
 
@@ -140,6 +143,7 @@ title:master glossary
 {papillate,papillated} Has a surface with small protuberances, e.g. like the surface of your tongue.
 {perennial,perennials} Lives for more than two years.  May be woody or non-woody.
 {perennial herb,perennial herbs} Non-woody plant that lives for more than two years.  Is generally more robust than an annual, but there is no general way to distinguish a perennial herb from an annual unless you're already familiar with the ranges of variation in the plants in question.
+{plumose} Having many feathery tufts in a 3-D arrangement around an axis.
 {primary leaf,primary leaves} The first one or two leaves of a sprouting monocot or dicot.  These are the most proximal leaves.  For dicots, the two leaves are opposite.
 {recurved,recurve,recurving} Gradually curved backward.  Contrast reflexed.
 {reflexed,reflex,reflexing} Abruptly bent somewhat or entirely backward.  Opposite of erect or ascending.  Contrast recurved.

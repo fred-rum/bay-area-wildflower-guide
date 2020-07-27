@@ -1594,8 +1594,10 @@ class Glossary:
                 # quotation mark, I'll have to rethink this.)
                 allowed = re.sub(r"(\W)'", '\g<1>&lsquo;', allowed)
                 allowed = re.sub(r'(\W)"', '\g<1>&ldquo;', allowed)
-                allowed = re.sub(r"'", '&rsquo;', allowed)
-                allowed = re.sub(r'"', '&rdquo;', allowed)
+#                allowed = re.sub(r"(?<=\s)'", r'&lsquo;', allowed)
+#                allowed = re.sub(r'(?<=\s)"', r'&ldquo;', allowed)
+                allowed = re.sub(r"'", r'&rsquo;', allowed)
+                allowed = re.sub(r'"', r'&rdquo;', allowed)
             allowed = re.sub(self.glossary_regex, repl_glossary, allowed)
             return allowed + disallowed
 
@@ -1639,7 +1641,9 @@ class Glossary:
                      flags=re.DOTALL)
 
         # Also perform link substitution for the parent glossary (and
-        # its parent, etc.)
+        # its parent, etc.)  Note that each glossary re-divides the text
+        # into non-tag/tag pairs including the most recent glossary tag
+        # substitutions.
         if self.parent:
             txt = self.parent.link_glossary_words(txt, is_glossary)
 
