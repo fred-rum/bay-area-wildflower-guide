@@ -2,8 +2,6 @@ com:baby stars, linanthus, and leptosiphons
 sci:Leptosiphon spp.
 x:hist
 
-<b>Caution: IDs unsure</b>
-
 There are quite a few Leptosiphon species in the bay area and my IDs thus far have not been good quality.  This page lists some key features, but I don't attempt to replicate the whole Jepson decision tree.  Instead, each flower description includes enough information to (hopefully) confirm an ID hypothesis (with help from CalPhoto).
 
 Key features:
@@ -101,7 +99,6 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0413+2490
 ==false babystars:L. androsaceus
 sci_p:Linanthus androsaceus
 color: pale purple
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0407+2020
 . corolla:
 .. tube reddish, <b>glabrous or sparsely hairy, non-glandular</b>
 .. throat violet | yellow | often white
