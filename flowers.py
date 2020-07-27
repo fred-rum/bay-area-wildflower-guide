@@ -549,6 +549,8 @@ class Page:
         if (label, link) in self.ext_photo_list:
             print(f'{link} is specified more than once for page {self.name}')
         else:
+            if label:
+                label = sub_easy_safe(label)
             self.ext_photo_list.append((label, link))
 
     # Check if check_page is an ancestor of this page (for loop checking).
