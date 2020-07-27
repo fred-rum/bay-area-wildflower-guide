@@ -1200,6 +1200,7 @@ class Page:
 
         s = link_figures(self.name, s)
         s = re.sub(r'{-([^}]+)}', repl_link, s)
+        s = sub_easy(s)
         s = self.glossary.link_glossary_words(s, is_glossary=False)
         self.txt = s
 
@@ -1567,7 +1568,7 @@ class Glossary:
 
         return dup_list
 
-    def link_glossary_words(self, txt, first_sub=True, is_glossary=False):
+    def link_glossary_words(self, txt, is_glossary=False):
         # This function is called for a glossary word match.
         # Replace the matched word with a link to the primary term
         # in the glossary.
@@ -1582,24 +1583,9 @@ class Glossary:
             return self.glossary_link(anchor, word)
 
         # Add glossary links in group 1, but leave group 2 unchanged.
-        def repl_sub_glossary(matchobj):
+        def repl_glossary_pair(matchobj):
             allowed = matchobj.group(1)
             disallowed = matchobj.group(2)
-            if first_sub:
-                # If we're at the first step of glossary substitution,
-                # also substitute in smart quotes and other "easy"
-                # substitutions.
-                # Note that glossary substitution introduces more tags
-                # that could confuse word boundaryies, so we make
-                # substitutions in the allowed section *before* substituting
-                # glossary links.  (If a glossary term ever includes a
-                # quotation mark, I'll have to rethink this.)
-                # I assume that I only use double-quotes to quote a passage
-                # of text.  If I try to do something similar for single-quotes,
-                # I could use the wrong smart quote for something like the '80s.
-                allowed = re.sub(r'(?<![\w.,])"', r'&ldquo;', allowed)
-                allowed = re.sub(r'\A"', r'&ldquo;', allowed)
-                allowed = repl_easy_regex.sub(repl_easy, allowed)
             allowed = re.sub(self.glossary_regex, repl_glossary, allowed)
             return allowed + disallowed
 
@@ -1639,7 +1625,7 @@ class Glossary:
 
         # Perform the glossary link substitution for each non-tag/tag
         # pair throughout the entire multi-line txt string.
-        txt = re.sub(sub_re, repl_sub_glossary, txt,
+        txt = re.sub(sub_re, repl_glossary_pair, txt,
                      flags=re.DOTALL)
 
         # Also perform link substitution for the parent glossary (and
@@ -1647,9 +1633,7 @@ class Glossary:
         # into non-tag/tag pairs including the most recent glossary tag
         # substitutions.
         if self.parent:
-            txt = self.parent.link_glossary_words(txt,
-                                                  first_sub=False,
-                                                  is_glossary=is_glossary)
+            txt = self.parent.link_glossary_words(txt, is_glossary=is_glossary)
 
         return txt
 
@@ -1659,7 +1643,7 @@ class Glossary:
         # phrase is checked first.
         glossary_list = sorted(iter(self.glossary_dict.keys()), reverse=True)
 
-        ex='|'.join(map(re.escape, glossary_list))
+        ex = '|'.join(map(re.escape, glossary_list))
         self.glossary_regex = re.compile(rf'\b({ex})\b', re.IGNORECASE)
 
     def read_terms(self):
@@ -1788,6 +1772,8 @@ class Glossary:
                 related_str = ''
 
             return f'<div class="defn" id="{anchor}"><dt>{anchor}</dt><dd>{defn}{related_str}</dd></div>'
+
+        self.txt = sub_easy(self.txt)
 
         self.txt = self.link_glossary_words(self.txt, is_glossary=True)
 
@@ -1942,11 +1928,37 @@ repl_easy_dict = {
     # probably smarter about it than I would be.
 }
 
-ex='|'.join(map(re.escape, list(repl_easy_dict.keys())))
+ex = '|'.join(map(re.escape, list(repl_easy_dict.keys())))
 repl_easy_regex = re.compile(f'({ex})')
 
 def repl_easy(matchobj):
     return repl_easy_dict[matchobj.group(1)]
+
+def sub_easy_safe(txt):
+    # I assume that I only use double-quotes to quote a passage
+    # of text.  If I try to do something similar for single-quotes,
+    # I could use the wrong smart quote for something like the '80s.
+    txt = re.sub(r'(?<![\w.,])"|\A"', r'&ldquo;', txt)
+    txt = repl_easy_regex.sub(repl_easy, txt)
+    return txt
+
+# Perform easy substitutions in group 1, but leave group 2 unchanged.
+def repl_easy_pair(matchobj):
+    allowed = matchobj.group(1)
+    disallowed = matchobj.group(2)
+    return sub_easy_safe(allowed) + disallowed
+
+def sub_easy(txt):
+    # Don't replace any text within a tag <...> or special syntax {...}.
+    # Note that a tag is assumed to start with a word character, e.g. "<a".
+    # Thus, we won't get thrown off by a non-tag angle bracket such as "< "
+    # or "<=".
+    sub_re = r'(.*?)(\Z|<\w.*?>|{.*?})'
+
+    # Perform the easy substitution for each non-tag/tag
+    # pair throughout the entire multi-line txt string.
+    return re.sub(sub_re, repl_easy_pair, txt,
+                  flags=re.DOTALL)
 
 
 # Read the txt for all txt files.  Also perform a first pass on

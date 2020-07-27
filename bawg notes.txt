@@ -175,3 +175,10 @@ blank lines to <p/>.
 
 Add inflorescence shape definitions for sedges.  (Possibly share the
 glossary with grasses, but probably not.)
+
+
+Perform easy_dict substitution on the recorded glossary terms so that
+they can be recognized after the text gets the same substitution.
+
+Perform easy_dict substitution on other text snippets, such as the
+label on external photos.  E.g. portuguese broom.

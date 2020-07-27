@@ -52,7 +52,7 @@ title:master glossary
 {reniform} In the shape of a dented oval, with the petiole connection in the dent.  Depending on your source, the distinction from cordate is that the tip of the blade is rounded (instead of pointed) or that the blade base is concave around the petiole attachment (instead of sharply notched). <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
 {sagittate} Shaped like an arrowhead, with basal lobes near parallel to the axis.
 
-<h3>Lobe organization</h3>
+<h3>2-D branching organization</h3>
 
 {palmate,palmately} With lobes spreading in a plane from a common point.
 {palmate-pinnate} 1st-order palmate and 2nd-order pinnate.
