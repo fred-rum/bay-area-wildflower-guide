@@ -1587,19 +1587,19 @@ class Glossary:
             disallowed = matchobj.group(2)
             if first_sub:
                 # If we're at the first step of glossary substitution,
-                # also substitute in smart quotes.
+                # also substitute in smart quotes and other "easy"
+                # substitutions.
                 # Note that glossary substitution introduces more tags
-                # that we don't want to screw up, so we substitute smart
-                # quotes in the allowed section *before* substituting
+                # that could confuse word boundaryies, so we make
+                # substitutions in the allowed section *before* substituting
                 # glossary links.  (If a glossary term ever includes a
                 # quotation mark, I'll have to rethink this.)
-                allowed = repl_easy_regex.sub(repl_easy, allowed)
-                allowed = re.sub(r"(?<![\w.,])'", r'&lsquo;', allowed)
+                # I assume that I only use double-quotes to quote a passage
+                # of text.  If I try to do something similar for single-quotes,
+                # I could use the wrong smart quote for something like the '80s.
                 allowed = re.sub(r'(?<![\w.,])"', r'&ldquo;', allowed)
-                allowed = re.sub(r"\A'", r'&lsquo;', allowed)
                 allowed = re.sub(r'\A"', r'&ldquo;', allowed)
-                allowed = re.sub(r"'", r'&rsquo;', allowed)
-                allowed = re.sub(r'"', r'&rdquo;', allowed)
+                allowed = repl_easy_regex.sub(repl_easy, allowed)
             allowed = re.sub(self.glossary_regex, repl_glossary, allowed)
             return allowed + disallowed
 
@@ -1934,7 +1934,8 @@ repl_easy_dict = {
     '<<' : '&#8810',
     '>>' : '&#8811',
 
-    "'" : '&rsquo;',
+    "'"  : '&rsquo;',
+    '"'  : '&rdquo;',
 
     # '<' and '>' should be escaped, but for now I'll leave them alone
     # because the browser seems to figure them out correctly, and it's
