@@ -1152,8 +1152,9 @@ class Page:
                 bracket_depth -= 1
                 continue
 
-            if '{' not in c:
-                c = repl_easy_regex.sub(repl_easy, c)
+            # Replace HTTP links in the text with ones that open a new tab.
+            # (Presumably they're external links or they'd be in {...} format.)
+            c = re.sub(r'<a href=', '<a target="_blank" href=', c)
 
             if list_depth:
                 c_list.append(f'<li>{c}</li>')
@@ -1592,6 +1593,7 @@ class Glossary:
                 # quotes in the allowed section *before* substituting
                 # glossary links.  (If a glossary term ever includes a
                 # quotation mark, I'll have to rethink this.)
+                allowed = repl_easy_regex.sub(repl_easy, allowed)
                 allowed = re.sub(r"(?<![\w.,])'", r'&lsquo;', allowed)
                 allowed = re.sub(r'(?<![\w.,])"', r'&ldquo;', allowed)
                 allowed = re.sub(r"\A'", r'&lsquo;', allowed)
@@ -1924,10 +1926,6 @@ if mod_list:
 ###############################################################################
 
 repl_easy_dict = {
-    # Replace HTTP links in the text with ones that open a new tab.
-    # (Presumably they're external links or they'd be in {...} format.)
-    '<a href=' : '<a target="_blank" href=',
-
     # Replace common Jepson codes.
     '+-' : '&plusmn;',
     '--' : '&ndash;',
