@@ -1544,6 +1544,7 @@ class Glossary:
         self.child = set() # an unordered set of child glossaries
         self.term = [] # an ordered list of term lists
         self.glossary_dict = {} # mapping of term to anchor
+        self.glossary_set = set() # all terms in this glossary and ancestors
         self.is_jepson = False
 
     def set_parent(self, parent):
@@ -1570,19 +1571,26 @@ class Glossary:
 
         return dup_list
 
-    def link_glossary_words(self, txt, is_glossary=False):
-        # This function is called for a glossary word match.
-        # Replace the matched word with a link to the primary term
-        # in the glossary.
-        def repl_glossary(matchobj):
-            word = matchobj.group(1)
-            anchor = self.glossary_dict[word.lower()]
+    def get_link(self, term):
+        lower = term.lower()
+        if lower in self.glossary_dict:
+            anchor = self.glossary_dict[lower]
             if self.is_jepson:
                 if anchor in self.used_dict:
                     self.used_dict[anchor] += 1
                 else:
                     self.used_dict[anchor] = 1
-            return self.glossary_link(anchor, word)
+            return self.glossary_link(anchor, term)
+        else:
+            return self.parent.get_link(term)
+
+    def link_glossary_words(self, txt, is_glossary=False):
+        # This function is called for a glossary word match.
+        # Replace the matched word with a link to the primary term
+        # in the glossary.
+        def repl_glossary(matchobj):
+            term = matchobj.group(1)
+            return self.get_link(term)
 
         # Add glossary links in group 1, but leave group 2 unchanged.
         def repl_glossary_pair(matchobj):
@@ -1630,20 +1638,19 @@ class Glossary:
         txt = re.sub(sub_re, repl_glossary_pair, txt,
                      flags=re.DOTALL)
 
-        # Also perform link substitution for the parent glossary (and
-        # its parent, etc.)  Note that each glossary re-divides the text
-        # into non-tag/tag pairs including the most recent glossary tag
-        # substitutions.
-        if self.parent:
-            txt = self.parent.link_glossary_words(txt, is_glossary=is_glossary)
-
         return txt
 
     def create_regex(self):
+        if not self.glossary_set:
+            self.glossary_set = set(iter(self.glossary_dict.keys()))
+            if self.parent:
+                self.parent.create_regex()
+                self.glossary_set = self.glossary_set.union(self.parent.glossary_set)
+
         # sort the glossary list in reverse order so that for cases where two
         # phrases start the same and one is a subset of the other, the longer
         # phrase is checked first.
-        glossary_list = sorted(iter(self.glossary_dict.keys()), reverse=True)
+        glossary_list = sorted(iter(self.glossary_set), reverse=True)
 
         ex = '|'.join(map(re.escape, glossary_list))
         self.glossary_regex = re.compile(rf'\b({ex})\b', re.IGNORECASE)
@@ -1709,8 +1716,6 @@ class Glossary:
         self.txt = re.sub(r'^{([^\}]+)}\s+(.*)$',
                           repl_defn, self.txt, flags=re.MULTILINE)
 
-        self.create_regex()
-
     def read_jepson_terms(self):
         self.title = 'Jepson' # used only self links from a glossary definition
         self.is_jepson = True
@@ -1743,8 +1748,6 @@ class Glossary:
             self.term.append(word_list)
             for word in word_list:
                 self.record_in_glossary_dict(anchor, word)
-
-        self.create_regex()
 
     def write_toc(self, w, current):
         def by_name(glossary):
@@ -2311,6 +2314,7 @@ for page in top_list:
 # Now that we know the glossary hierarchy, we can apply glossary links
 # within each glossary and finally write out the HTML.
 for glossary in glossary_taxon_dict.values():
+    glossary.create_regex()
     glossary.write_html()
 
 # Turn txt into html for all normal and default pages.
