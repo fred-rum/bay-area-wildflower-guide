@@ -100,8 +100,10 @@ title:master glossary
 {basal} Positioned at the base.  Most commonly refers to leaves growing at the base of the stem.  Contrast cauline as well as lateral and terminal.
 {cauline} Growing along a plant's stem.  Most commonly refers to leaves.  Contrast basal.
 {distal,distally} Closer to the tip and farther away from the base of a structure.  The structure is often implied; e.g. a distal leaf grows at the end of the plant furthest from the base.  Contrast proximal.
+{exceeds,exceed,exceeding} Reaches further distally (than the compared structure), either because it is longer or is positioned further distally.
 {lateral,laterally} Relative to the sides of a structure (neither distal nor proximal).  May refer to the sides of the described structure or of an implied structure, e.g. lateral lobes.  Contrast basal, terminal.
 {proximal,proximally} Closer to the base and farther from the tip of a structure.  The structure is often implied; e.g. a proximal leaf grows close to the base of the whole plant.  Contrast distal.
+{subtend,subtended,subtending} Growing immediately proximal to the compared structure.
 {terminal,terminally} Relative to the tip of a structure.  Contrast lateral, basal.
 
 
@@ -122,6 +124,7 @@ title:master glossary
 {biennial,biennials} Lives for only two years, generally flowering only in the second year.  Non-woody.
 {caudex,caudexes,caudices} Short stem below ground level.
 {compound} Generally, composed of multiple parts.  Opposite of simple.<ul><li>Leaf: divided into distinct leaflets connected by an axis but no blade material.</li><li>Umbel: an umbel of umbels</li></ul>
+{deciduous} Having leaves that fall off seasonally.  If another deciduous part is named, that part falls off naturally before other parts or is easily knocked off.
 {decurrent} The leaf blade extends onto the stem as a short wing.
 {dehiscent,dehisce,dehisced,dehiscing} Splitting along a seam.
 {dissected,dissects,dissecting,dissect} Cut deeply, but not fully divided.
@@ -143,6 +146,7 @@ title:master glossary
 {papillate,papillated} Has a surface with small protuberances, e.g. like the surface of your tongue.
 {perennial,perennials} Lives for more than two years.  May be woody or non-woody.
 {perennial herb,perennial herbs} Non-woody plant that lives for more than two years.  Is generally more robust than an annual, but there is no general way to distinguish a perennial herb from an annual unless you're already familiar with the ranges of variation in the plants in question.
+{persistent} Not deciduous.
 {plumose} Having many feathery tufts in a 3-D arrangement around an axis.
 {primary leaf,primary leaves} The first one or two leaves of a sprouting monocot or dicot.  These are the most proximal leaves.  For dicots, the two leaves are opposite.
 {recurved,recurve,recurving} Gradually curved backward.  Contrast reflexed.
@@ -159,13 +163,13 @@ title:master glossary
 {stellate,stellately} With 3+ branches radiating from a common point.  (Usually used to describe hair.)
 {stem,stems} The generally above-ground structure of a plant supporting leaves, flowers, etc.  Depending on context, "stem" may include branches or only the primary axis.
 {subshrub,subshrubs} Similar to a shrub, but with only the proximal stems woody.  The distal stems are non-woody (or are at least significantly less woody).
-{subtend,subtending,subtended} Growing immediately proximal to the compared structure.
 {succulent,succulents} Composed of fleshy tissue that conserves water.
 {taproot} Primary root growing straight down, tapering at the end, with smaller lateral branches.
 {terminal} The segment at the end, e.g. the most distal segment of a compound or lobed leaf.
 {truncate,truncating,truncated} Ending (or beginning) abruptly, e.g. with no tapering.
 {twig,twigs} The ultimate branch segment of a woody plant.
 {ultimate} The smallest division of a compound/dissected leaf or the final segments of a branching stem.
+{vegetative,vegetatively} Without reproductive structures (flowers, fruit, cones, etc.)
 {vein,veins} A visible vascular bundle used for transport of material through the plant.  Appears as a line of a different color shade or as a raised rib.
 {waif,waifs} A plant that has spread with human assistance but cannot reproduce or spread further on its own.  Will eventually die out with no further assistance.
 {whorl,whorls,whorled} A cluster of 3 or more (e.g. flowers) with each whorl generally surrounding an axis and multiple whorls interspersed along the axis.

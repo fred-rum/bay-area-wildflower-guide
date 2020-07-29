@@ -1,13 +1,24 @@
-# words in parentheses are additional terms that also appear in the
-# link anchor in parentheses.
+# This file lists terms that can be linked to the Jepson glossary.
 #
-# words after a comma are additional terms that also appear in the
-# link anchor after a comma.
+# The anchor tag is listed first on each line.  The anchor tag may
+# include multiple terms, but the anchor tag continues until a semicolon
+# (or the end the line).
 #
-# words after a semicolon are additional terms that do *not* appear
-# in the link anchor.  I've either copied them from Jepson's glossary
-# text or added them myself (especially for plurals).
+# The anchor may include multiple terms, separated by commas or
+# parentheses.  Each term links to Jepson's glossary using the verbatim
+# anchor as a whole.
 #
+# Additional terms following a semicolon link to the same anchor
+# but are not included in the anchor.  These additional terms are
+# separated from each other by commas.
+#
+# A line that begins with a hyphen is fairly obvious in definition, so
+# I don't want to clutter up my pages with a link to it.  It would be
+# OK to allow a search for it (by listing it in pages.js) and perhaps a
+# link from a glossary, but I don't do this yet.
+#
+# Blank lines and comment text after a # sign are ignored.
+
 abaxial
 abundant
 achene; achenes
@@ -127,7 +138,7 @@ dioecious
 diploid
 disciform head; disciform heads
 discoid head; discoid heads
-disk; disks
+-disk; disks # if not in the sunflower glossary, is just a disk
 disk flower; disk flowers
 dissected
 distal
@@ -367,7 +378,7 @@ stipule; stipules
 stolon; stolons
 stomate; stoma, stomata
 stone; stones
-stout
+-stout
 striate
 strigose
 style; styles

@@ -170,8 +170,8 @@ changing the link to a Javascript call if there is no easier way to
 catch a click through an anchored link.
 
 
-Apply standard page substitutions on glossary pages, e.g. +-, perhaps
-blank lines to <p/>.
+Apply standard page substitutions on glossary pages, e.g. blank lines
+to <p/>.
 
 Add inflorescence shape definitions for sedges.  (Possibly share the
 glossary with grasses, but probably not.)

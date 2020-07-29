@@ -1,8 +1,8 @@
 sci:Salix
 x:!hist/rare
 
-All willows are dioecious.  I've included a key to staminate plants
-here because it's easiest.  Jepson also includes keys to pistillate
+All willows are dioecious.  The key presented here is for staminate
+plants because it's easiest.  Jepson also includes keys to pistillate
 and vegetative plants that are more complex.
 
 ==pacific willow:S. lasiandra
