@@ -428,7 +428,7 @@ vine; vines
 waif; waifs
 wash
 whorled; whorl, whorls
-wing; wings
+wing; wings, winged
 wiry
 wood; woods
 woodland

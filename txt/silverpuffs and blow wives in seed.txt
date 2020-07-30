@@ -9,7 +9,7 @@ Key features:
 . bristle fuzziness
 
 Blow wives and silverpuffs form a ball of seeds.  Each seed (fruit) has a
-parachute of wings to catch the wind.
+parachute-like pappus to catch the wind.
 
 <h2>blow wives</h2>
 
@@ -18,7 +18,7 @@ There is only one species of blow wives in the bay area.
 ==blow wives:Achyrachaena mollis
 color: other
 x:any
-. each wing has only a flat scale with no bristle
+. each pappus element has only a flat scale with no bristle
 
 <h2>silverpuffs</h2>
 
