@@ -1797,6 +1797,7 @@ class Glossary:
               write_header(w, self.title, None, nospace=True)
               w.write('<h4 class="title">Glossary table of contents</h4>\n')
               master_glossary.write_toc(w, self)
+              w.write(f'<a href="http://ucjeps.berkeley.edu/IJM_glossary.html">Jepson eFlora glossary</a>')
               w.write(f'<h1>{self.title}</h1>\n')
               w.write(self.txt)
               write_footer(w)
