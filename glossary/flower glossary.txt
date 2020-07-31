@@ -69,6 +69,7 @@ figure:sea muilla
 
 <h2>Other flower terms</h2>
 
+{bud,buds} An unopened flower, usually surrounded and protected by the sepals which are joined at the tip.
 {claw,claws} A very narrow basal portion of a free petal or sepal.  See limb. [figure:elegant clarkia]
 {cleistogamous} Self-pollinating without opening.  Generally looks bud-like.
 {dioecious} A plant that has only either male or female flowers on it, never both on the same plant.
@@ -77,12 +78,13 @@ figure:sea muilla
 {involucre,involucres} Collective term for a cluster of bracts.
 {limb,limbs} In a fused calyx or corolla, the spreading portion distal to the throat (or at least more widely expanded than the throat). [figure:false babystars]  In a free calyx or corolla, the expanded portion distal to the claw. [figure:elegant clarkia]
 {lip,lips} The upper (adaxial) or lower (abaxial) lobe of a bilateral calyx or corolla that is divided into two lobes.
+{open,opens,opening} Not densely clustered, i.e. with parts that are spread out from each other.  E.g. referring to a flower perianth that is maximally spread, e.g. not a bud.  (For some flowers, this is not very spread at all.)
 {panicle,panicles,panicled} Branched infloresence with flowers that grow from the proximal end.
 {pericarp,pericarps} The outer, non-seed portion of a fruit.
-{pistillate} With fertile pistils but without stamens or without fertile stamens.  See stamenate.
+{pistillate} With fertile pistils but without stamens or without fertile stamens.  See staminate.
 {salverform} With a slender tube and abruptly spreading limbs (e.g. "T" shaped).
 {spike,spikes,spiked} Inflorescence with all flowers sessile on the main axis, generally flowering from the proximal end.  See panicle.
-{stamenate} With fertile stamens but without pistils or without fertile pistils.  See pistillate.
+{staminate} With fertile stamens but without pistils or without fertile pistils.  See pistillate.
 {throat,throats} In a fused calyx or corolla, the expanded portion between the tube and the limb. [figure:false babystars]
 {tube,tubes} In a fused calyx or corolla, the +- cylindric portion proximal to the throat. [figure:false babystars]
 {umbel,umbels} An inflorescence in which 3+ flower pedicels branch from a common point.

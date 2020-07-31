@@ -1957,6 +1957,9 @@ def repl_easy_pair(matchobj):
     disallowed = matchobj.group(2)
     return sub_easy_safe(allowed) + disallowed
 
+# Make easy substitutions in the text, such as "+-" and smart quotes.
+# We do this before glossary substitutions because the HTML added for
+# glossary links confuses the heuristic for smart-quote direction.
 def sub_easy(txt):
     # Don't replace any text within a tag <...> or special syntax {...}.
     # Note that a tag is assumed to start with a word character, e.g. "<a".

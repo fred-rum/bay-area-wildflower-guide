@@ -143,7 +143,7 @@ title:plant glossary
 {lobe,lobes,lobed} An protrusion from a larger body, otherwise undifferentiated from the main body.  E.g. a corolla lobe is the free part of a petal.
 {mucro,mucros} An abrupt, short, narrow tip/projection.
 {node,nodes} A position on a stem from which grow structures such as leaves, flowers, or stems.  See also internode.
-{open} Not dense.
+{open} Not densely clustered, i.e. with parts that are spread out from each other.
 {papillate,papillated} Has a surface with small protuberances, e.g. like the surface of your tongue.
 {perennial,perennials} Lives for more than two years.  May be woody or non-woody.
 {perennial herb,perennial herbs} Non-woody plant that lives for more than two years.  Is generally more robust than an annual, but there is no general way to distinguish a perennial herb from an annual unless you're already familiar with the ranges of variation in the plants in question.
