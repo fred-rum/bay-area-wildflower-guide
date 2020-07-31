@@ -154,10 +154,12 @@ Add glossary entries to replace as many Jepson terms as I can.  If I
 can get all of them, then perhaps I can make use of a Jepson term an
 error.
 
-Change glossary.txt to master glossary.txt so that every glossary
-filename matches its title (and perhaps remove the title altogether).
-This makes the displayed glossary search results more consistent with
-the displayed glossary names.
+Now that every glossary filename matches its title, perhaps remove the
+title altogether.
+
+If I want to save bytes, I can replace the names with a shorter
+identifier, e.g. an array index.  Then include the separate array of
+glossary names.
 
 Allow Jepson terms to appear in the searchable dictionary and perhaps
 in glossaries, but not linking them in page text to avoid clutter.
