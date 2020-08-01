@@ -162,12 +162,6 @@ in glossaries, but not linking them in page text to avoid clutter.
 E.g. hair.
 
 
-Clear the search and auto-completion box when clicking on a glossary
-search result while in the same glossary page.  This may require
-changing the link to a Javascript call if there is no easier way to
-catch a click through an anchored link.
-
-
 Apply standard page substitutions on glossary pages, e.g. blank lines
 to <p/>.
 

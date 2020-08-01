@@ -213,7 +213,7 @@ function fn_link(page_info) {
     target = ' target="_blank"';
   }*/
 
-  return 'class="enclosed ' + c + '"' + target + ' href="' + url + '"'
+  return 'class="enclosed ' + c + '"' + target + ' href="' + url + '" onclick="return fn_click();"'
 }
 
 /* Update the autocomplete list.
@@ -365,9 +365,19 @@ function fn_search(enter) {
     /* A search of the glossary from a glossary page might result in no
        page change, and so the search will remain active.  That's not
        what we want, so in that case, clear the search. */
-    e_search_input.value = ''
-    fn_focusout()
+    e_search_input.value = '';
+    fn_focusout();
   }
+}
+
+/* A link to an anchor might go somewhere on the current page rather than
+   going to a new page.  If the page doesn't change, the search will
+   remain active.  That's not what we want, so we clear the search before
+   continuing with the handling of the clicked link. */
+function fn_click() {
+  e_search_input.value = '';
+  fn_focusout();
+  return true; /* continue normal handling of the clicked link */
 }
 
 /* Handle all changes to the search value.  This includes changes that
