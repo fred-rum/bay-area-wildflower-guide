@@ -1749,6 +1749,15 @@ class Glossary:
             for word in word_list:
                 self.record_in_glossary_dict(anchor, word)
 
+    def set_index(self):
+        def by_name(glossary):
+            return glossary.title
+
+        self.index = len(glossary_list)
+        glossary_list.append(self)
+        for child in sorted(self.child, key=by_name):
+            child.set_index()
+
     def write_toc(self, w, current):
         def by_name(glossary):
             return glossary.title
@@ -1814,7 +1823,7 @@ class Glossary:
 
         for term in self.term:
             terms_str = '","'.join(term)
-            w.write(f'{{page:"{self.name}",com:["{terms_str}"],x:"g"}},\n')
+            w.write(f'{{idx:{self.index},com:["{terms_str}"],x:"g"}},\n')
 
         for child in sorted(self.child, key=by_name):
             child.write_search_terms(w)
@@ -1828,7 +1837,7 @@ class Glossary:
                 anchor_str = ''
             else:
                 anchor_str = f',anchor:"{anchor}"'
-            w.write(f'{{page:"Jepson eFlora glossary",com:["{coms_str}"]{anchor_str},x:"j"}},\n')
+            w.write(f'{{com:["{coms_str}"]{anchor_str},x:"j"}},\n')
 
         def by_usage(anchor):
             return self.used_dict[anchor]
@@ -2315,9 +2324,15 @@ for page in top_list:
     else:
         page.set_glossary(master_glossary)
 
+# Created an ordered list of the glossaries.  The purpose of this is
+# to allow a glossary to be referenced by its index number in page.js.
+# Note that the Jepson glossary is included in this list with index 0.
+glossary_list = []
+master_glossary.set_index()
+
 # Now that we know the glossary hierarchy, we can apply glossary links
 # within each glossary and finally write out the HTML.
-for glossary in glossary_taxon_dict.values():
+for glossary in glossary_list:
     glossary.create_regex()
     glossary.write_html()
 
@@ -2485,10 +2500,14 @@ with open(search_file, "w", encoding="utf-8") as w:
         w.write('},\n')
 
     master_glossary.write_search_terms(w)
-
     jepson_glossary.write_jepson_search_terms(w)
-
     w.write('];\n')
+
+    w.write('var glossaries=[\n')
+    for glossary in glossary_list:
+        w.write(f'"{glossary.name}",\n')
+    w.write('];\n')
+
 
 ###############################################################################
 # Compare the new html files with the prev files.

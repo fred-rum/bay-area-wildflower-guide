@@ -157,10 +157,6 @@ error.
 Now that every glossary filename matches its title, perhaps remove the
 title altogether.
 
-If I want to save bytes, I can replace the names with a shorter
-identifier, e.g. an array index.  Then include the separate array of
-glossary names.
-
 Allow Jepson terms to appear in the searchable dictionary and perhaps
 in glossaries, but not linking them in page text to avoid clutter.
 E.g. hair.

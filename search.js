@@ -387,6 +387,11 @@ function fn_keyup() {
 for (var i = 0; i < pages.length; i++) {
   var page_info = pages[i]
   if ((page_info.x == 'g') || (page_info.x == 'j')) {
+    if (page_info.x == 'j') {
+      page_info.page = 'Jepson eFlora glossary';
+    } else {
+      page_info.page = glossaries[page_info.idx];
+    }
     if (!('anchor' in page_info)) {
       page_info.anchor = page_info.com[0]
     }
