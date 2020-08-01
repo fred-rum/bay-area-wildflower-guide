@@ -1778,6 +1778,7 @@ var pages=[
 {page:"plant glossary",com:["succulent","succulents"],x:"g"},
 {page:"plant glossary",com:["taproot"],x:"g"},
 {page:"plant glossary",com:["terminal"],x:"g"},
+{page:"plant glossary",com:["tree","trees"],x:"g"},
 {page:"plant glossary",com:["truncate","truncating","truncated"],x:"g"},
 {page:"plant glossary",com:["twig","twigs"],x:"g"},
 {page:"plant glossary",com:["ultimate"],x:"g"},
