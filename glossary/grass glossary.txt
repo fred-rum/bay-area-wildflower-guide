@@ -11,6 +11,7 @@ taxon:grasses
 {floret,florets} A unit of a spikelet, composed of a flower or caryopsis (fruit) enclosed by a nested pair of bractlets, the palea on the inside, and the lemma on the outside.
 {glume,glumes} A bract (usually in a pair) at the base of a spikelet.
 {lemma,lemmas} The outer bractlet enclosing the floret.
+{palea,paleae,paleate} The inner bractlet enclosing the floret.
 {rachis} The part of a grass stem along which flower stalks are spaced at short intervals.
 {spikelet,spikelets} The rough equivalent of an inflorescence for grasses.  A spikelet is one or more florets growing alternately along a rachilla.  Multiple spikelets may be borne along the rachis.  Note that a spikelet is not necessarily related to a spike.
 

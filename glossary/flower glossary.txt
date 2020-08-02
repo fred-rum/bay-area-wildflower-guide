@@ -84,6 +84,7 @@ figure:sea muilla
 {pistillate} With fertile pistils but without stamens or without fertile stamens.  See staminate.
 {salverform} With a slender tube and abruptly spreading limbs (e.g. "T" shaped).
 {spike,spikes,spiked} Inflorescence with all flowers sessile on the main axis, generally flowering from the proximal end.  See panicle.
+{spur,spurs} A hollow, backward-pointing projection from a sepal or petal.
 {staminate} With fertile stamens but without pistils or without fertile pistils.  See pistillate.
 {throat,throats} In a fused calyx or corolla, the expanded portion between the tube and the limb. [figure:false babystars]
 {tube,tubes} In a fused calyx or corolla, the +- cylindric portion proximal to the throat. [figure:false babystars]
