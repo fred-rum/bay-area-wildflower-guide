@@ -177,4 +177,4 @@ title:plant glossary
 {waif,waifs} A plant that has spread with human assistance but cannot reproduce or spread further on its own.  Will eventually die out with no further assistance.
 {whorl,whorls,whorled} A cluster of 3 or more (e.g. flowers) with each whorl generally surrounding an axis and multiple whorls interspersed along the axis.
 {wing,wings,winged} A thin, flat extension of a surface.  See also decurrent.
-{winged petiole,wing-petioled} A petiole with a wing on each side which is distinct but significantly narrower than the leaf blade.
+{winged petiole,winged petioles,petiole winged,petioles winged,wing-petioled} A petiole with a wing on each side which is distinct but significantly narrower than the leaf blade.

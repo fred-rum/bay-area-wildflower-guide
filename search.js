@@ -460,6 +460,28 @@ var e_autocomplete_box = document.getElementById('autocomplete-box');
    (bad).  This code fixes that. */
 window.onbeforeunload = fn_focusout;
 
+/* When entering the page or when changing anchors within a page,
+   set the window title to "anchor (page title)". */
+function fn_hashchange(event) {
+  /* If the current title already has an anchor in it, throw away
+     the anchor and keep just the last part, the original page title. */
+  var title_list = document.title.split(' - ');
+  var title = title_list[title_list.length - 1];
+
+  /* If the URL has a hash, get the anchor portion of it and put it before
+     the original page title. */
+  var hash = location.hash;
+  if (hash) {
+    document.title = decodeURIComponent(hash).substring(1) + ' - ' + title;
+  }
+}
+
+/* Set the window title when entering the page (possibly with an anchor)... */
+fn_hashchange();
+
+/* ... or when changing anchors within a page. */
+window.onhashchange = fn_hashchange;
+
 /*****************************************************************************/
 /* non-search functions also used by the BAWG HTML */
 

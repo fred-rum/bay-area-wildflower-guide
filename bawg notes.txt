@@ -167,7 +167,3 @@ to <p/>.
 
 Add inflorescence shape definitions for sedges.  (Possibly share the
 glossary with grasses, but probably not.)
-
-When viewing a glossary term, update the page title to "term (page
-title)", which lets the user know what the tab is looking at and
-also conveniently matches the search syntax.

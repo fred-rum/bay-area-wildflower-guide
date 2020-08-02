@@ -1788,7 +1788,7 @@ var pages=[
 {idx:0,com:["waif","waifs"],x:"g"},
 {idx:0,com:["whorl","whorls","whorled"],x:"g"},
 {idx:0,com:["wing","wings","winged"],x:"g"},
-{idx:0,com:["winged petiole","wing-petioled"],x:"g"},
+{idx:0,com:["winged petiole","winged petioles","petiole winged","petioles winged","wing-petioled"],x:"g"},
 {page:"conifer glossary",x:"u"},
 {idx:1,com:["scale","scales"],x:"g"},
 {page:"fern glossary",x:"u"},
