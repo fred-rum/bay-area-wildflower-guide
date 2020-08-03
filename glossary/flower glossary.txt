@@ -78,6 +78,8 @@ figure:sea muilla
 {involucre,involucres} Collective term for a cluster of bracts.
 {limb,limbs} In a fused calyx or corolla, the spreading portion distal to the throat (or at least more widely expanded than the throat). [figure:false babystars]  In a free calyx or corolla, the expanded portion distal to the claw. [figure:elegant clarkia]
 {lip,lips} The upper (adaxial) or lower (abaxial) lobe of a bilateral calyx or corolla that is divided into two lobes.
+{nectar} Sugary solution produced by a nectory for the purpose of attracting pollinators.
+{nectary} A structure that produces nectar.  Usually at the inner base of a flower to attract pollinators past the anthers and stigmas, but may be elsewhere.
 {open,opens,opening} Not densely clustered, i.e. with parts that are spread out from each other.  E.g. referring to a flower perianth that is maximally spread, e.g. not a bud.  (For some flowers, this is not very spread at all.)
 {panicle,panicles,panicled} Branched infloresence with flowers that grow from the proximal end.
 {pericarp,pericarps} The outer, non-seed portion of a fruit.

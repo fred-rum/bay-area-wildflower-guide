@@ -162,6 +162,7 @@ title:plant glossary
 {seed,seeds} A fetrilized ovule capable of sprouting a new plant. Often encapsulated in a fruit which provides energy, protection, and/or a means to dispersal for the seed. [figure:california poppy fruit]
 {segment,segments} The smallest division of a compound/dissected leaf.
 {sessile} Unstalked.  E.g. no petiole, peduncle, or pedicel.
+{sheath,sheaths} Surrounding tubular structure, e.g. a grass leaf base.
 {shrub,shrubs} Woody plant, shorter than a tree, generally with many branches from the base.  Compare subshrub.
 {simple} Generally, composed of a single part; undivided; unbranched.  Opposite of compound.<ul><li>Leaf: composed of a single part (which may be lobed or dissected), not divided into distinct leaflets separated from each other.</li></ul>
 {sinus,sinuses} The gap between adjacent lobes or teeth.
@@ -174,6 +175,7 @@ title:plant glossary
 {terminal} The segment at the end, e.g. the most distal segment of a compound or lobed leaf.
 {tree,trees} Woody plant, taller than a shrub, generally with one central trunk from which branches spring higher up.
 {truncate,truncating,truncated} Ending (or beginning) abruptly, e.g. with no tapering.
+{tubercle,tubercles} A small hemispherical projection.
 {twig,twigs} The ultimate branch segment of a woody plant.
 {ultimate} The smallest division of a compound/dissected leaf or the final segments of a branching stem.
 {vegetative,vegetatively} Without reproductive structures (flowers, fruit, cones, etc.)
