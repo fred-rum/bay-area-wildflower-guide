@@ -122,6 +122,7 @@ title:plant glossary
 {annual,annuals} Lives for one year or less, generally without forming any woody parts.
 {axil,axils,axillary} The distal, adaxial angle between a main axis (e.g. a stem) and an appendage (e.g. a branch or leaf).
 {axis,axes} The direction of growth, or the structure that grows along the axis (e.g. a stem).
+{beak,beaks} A projection from the distal end of a fruit.
 {biennial,biennials} Lives for only two years, generally flowering only in the second year.  Non-woody.
 {caudex,caudexes,caudices} Short stem below ground level.
 {clasping,clasp,clasp} Mostly surrounding, e.g. a leaf blade or winged petiole clasping the stem.  See also decurrent.
@@ -132,6 +133,7 @@ title:plant glossary
 {dissected,dissects,dissecting,dissect} Cut deeply, but not fully divided.
 {divided,divides,dividing,divide} Divided into distinct parts, e.g. a compound leaf.
 {exserted,exserting,exsert} Protruding more than surrounding structures.
+{fertile} Capable of germinating or causing germination, e.g. a stamen that can make viable pollen.  Not sterile.
 {fleshy} Soft and thick.  Succulent.
 {free,freed} Growing separately from equivalent structures at the same level, e.g. sepals in the calyx.  Compare fused.
 {fruit,fruits,fruiting} A seed-bearing body (or a joined aggregation of multiple bodies), developing from one or more ovaries and possibly other associated structures. [figure:california poppy fruit]
@@ -157,13 +159,15 @@ title:plant glossary
 {rosette,rosettes} Basal leaves growing radially around the stem. <a href="../photos/common cat's-ear,7.jpg">[example]</a>
 {scale,scales} Flat, membranous structure.
 {scarious} Membranous.
-{seed,seeds} A fertilized ovule capable of sprouting a new plant. Often encapsulated in a fruit which provides energy, protection, and/or a means to dispersal for the seed. [figure:california poppy fruit]
+{seed,seeds} A fetrilized ovule capable of sprouting a new plant. Often encapsulated in a fruit which provides energy, protection, and/or a means to dispersal for the seed. [figure:california poppy fruit]
 {segment,segments} The smallest division of a compound/dissected leaf.
 {sessile} Unstalked.  E.g. no petiole, peduncle, or pedicel.
 {shrub,shrubs} Woody plant, shorter than a tree, generally with many branches from the base.  Compare subshrub.
 {simple} Generally, composed of a single part; undivided; unbranched.  Opposite of compound.<ul><li>Leaf: composed of a single part (which may be lobed or dissected), not divided into distinct leaflets separated from each other.</li></ul>
+{sinus,sinuses} The gap between adjacent lobes or teeth.
 {stellate,stellately} With 3+ branches radiating from a common point.  (Usually used to describe hair.)
 {stem,stems} The generally above-ground structure of a plant supporting leaves, flowers, etc.  Depending on context, "stem" may include branches or only the primary axis.
+{sterile} Incapable of germinating or causing germination, e.g. branches without flowers.  Not fertile.
 {subshrub,subshrubs} Similar to a shrub, but with only the proximal stems woody.  The distal stems are non-woody (or are at least significantly less woody).
 {succulent,succulents} Composed of fleshy tissue that conserves water.
 {taproot} Primary root growing straight down, tapering at the end, with smaller lateral branches.
