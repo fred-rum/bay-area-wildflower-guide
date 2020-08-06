@@ -167,3 +167,12 @@ to <p/>.
 
 Add inflorescence shape definitions for sedges.  (Possibly share the
 glossary with grasses, but probably not.)
+
+Allow glossary terms to link to a glossary of choice.  This is
+especially useful for examples in the plant glossary that refer to
+words in lower glossaries, e.g. cones, flowers, staminate, pistillate.
+Also recognize syntax to prevent glossary linking.  E.g. "conifer
+glossary:cone" links to the conifer glossary, and "no glossary:series"
+links to no glossary.  Perhaps a better option: "cone {conifer
+glossary}".  This leverages the existing "disallowed" group to avoid
+making the regex any more complicated.

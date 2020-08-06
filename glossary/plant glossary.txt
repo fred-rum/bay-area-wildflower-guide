@@ -87,7 +87,7 @@ title:plant glossary
 
 <h2>Direction of growth</h2>
 
-{appressed,appress} Leaning closely against the originating structure, e.g. a leaf appressed to a stem or a hair appressed to a leaf.
+{appressed} Leaning closely against the originating structure, e.g. a leaf appressed to a stem or a hair appressed to a leaf.
 {ascending} Angled up (but less than erect) or angled in the direction of the main axis (but not nearly parallel to the main axis).
 {decumbent} Lying on or near the ground but with its tips ascending or erect.  Compare to prostrate.
 {erect} Pointing +- straight up or parallel to the main axis.
@@ -107,6 +107,12 @@ title:plant glossary
 {subtend,subtended,subtending} Growing immediately proximal to the compared structure.
 {terminal,terminally} Relative to the tip of a structure.  Contrast lateral, basal.
 
+<h2>Sexual capability</h2>
+
+{female} A reproductive structure capable of being fertilized by a male gamete.
+{male} A reproductive structure that produces gametes capable of fertizing a female body.
+{bisexual} A plant that has both male and female reproductive structures (e.g. both staminate and pistillate flowers), never both on the same plant.
+{dioecious} A plant that has only either male or female reproductive structures (e.g. staminate or pistillate flowers), never both on the same plant.
 
 <h2>Geographic locations</h2>
 
@@ -119,6 +125,7 @@ title:plant glossary
 
 {abaxial,abaxially} The surface further from the stem when upright.  E.g. the lower surface of a leaf or the outer surface of a petal.
 {adaxial,adaxially} The surface closer to the stem when upright.  E.g. the upper surface of a leaf or the inner surface of a petal.
+{alternate} Arranged singly along an axis.  Not all on the same side, but not necessarily on alternating sides, either.  E.g. may be spirally arranged.  See opposite, whorl.
 {annual,annuals} Lives for one year or less, generally without forming any woody parts.
 {axil,axils,axillary} The distal, adaxial angle between a main axis (e.g. a stem) and an appendage (e.g. a branch or leaf).
 {axis,axes} The direction of growth, or the structure that grows along the axis (e.g. a stem).
@@ -147,6 +154,7 @@ title:plant glossary
 {mucro,mucros} An abrupt, short, narrow tip/projection.
 {node,nodes} A position on a stem from which grow structures such as leaves, flowers, or stems.  See also internode.
 {open} Not densely clustered, i.e. with parts that are spread out from each other.
+{opposite} Arranged in clusters of 2 with each pair on opposing sides of an axis.  See alternate, whorl.
 {papillate,papillated} Has a surface with small protuberances, e.g. like the surface of your tongue.
 {perennial,perennials} Lives for more than two years.  May be woody or non-woody.
 {perennial herb,perennial herbs} Non-woody plant that lives for more than two years.  Is generally more robust than an annual, but there is no general way to distinguish a perennial herb from an annual unless you're already familiar with the ranges of variation in the plants in question.
@@ -161,6 +169,7 @@ title:plant glossary
 {scarious} Membranous.
 {seed,seeds} A fetrilized ovule capable of sprouting a new plant. Often encapsulated in a fruit which provides energy, protection, and/or a means to dispersal for the seed. [figure:california poppy fruit]
 {segment,segments} The smallest division of a compound/dissected leaf.
+{series} A group of similar structures in a row, circle, or whorl.  If there are multiple series of the same <b>kind</b> of structure, then each series differs in size or shape.
 {sessile} Unstalked.  E.g. no petiole, peduncle, or pedicel.
 {sheath,sheaths} Surrounding tubular structure, e.g. a grass leaf base.
 {shrub,shrubs} Woody plant, shorter than a tree, generally with many branches from the base.  Compare subshrub.
@@ -181,6 +190,6 @@ title:plant glossary
 {vegetative,vegetatively} Without reproductive structures (flowers, fruit, cones, etc.)
 {vein,veins} A visible vascular bundle used for transport of material through the plant.  Appears as a line of a different color shade or as a raised rib.
 {waif,waifs} A plant that has spread with human assistance but cannot reproduce or spread further on its own.  Will eventually die out with no further assistance.
-{whorl,whorls,whorled} A cluster of 3 or more (e.g. flowers) with each whorl generally surrounding an axis and multiple whorls interspersed along the axis.
+{whorl,whorls,whorled} A cluster of 3 or more (e.g. flowers) with each whorl generally surrounding an axis and multiple whorls interspersed along the axis.  See alternate, opposite.
 {wing,wings,winged} A thin, flat extension of a surface.  See also decurrent.
 {winged petiole,winged petioles,petiole winged,petioles winged,wing-petioled} A petiole with a wing on each side which is distinct but significantly narrower than the leaf blade.

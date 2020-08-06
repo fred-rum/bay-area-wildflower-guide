@@ -72,7 +72,6 @@ figure:sea muilla
 {bud,buds} An unopened flower, usually surrounded and protected by the sepals which are joined at the tip.
 {claw,claws} A very narrow basal portion of a free petal or sepal.  See limb. [figure:elegant clarkia]
 {cleistogamous} Self-pollinating without opening.  Generally looks bud-like.
-{dioecious} A plant that has only either male or female flowers on it, never both on the same plant.
 {head,heads} A dense inflorescence of +- sessile flowers.
 {involucel,involucels} Secondary involucre within an inflorescence.
 {involucre,involucres} Collective term for a cluster of bracts.
