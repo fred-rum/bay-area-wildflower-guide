@@ -64,7 +64,7 @@ to alternative definitions in other glossaries (regardless of relative
 hierarchy).
 
 The text of a taxon page or glossary page can also link to a term in a
-specified glossary.  E.g. "conifer:cone" links the word "cone" to the
+specified glossary.  E.g. "conifer#cone" links the word "cone" to the
 appropriate definition within the conifer glossary, regardless of its
 relative hierarchy.  Note that the glossary name for this purpose is
 the glossary title with " glossary" stripped off the end.

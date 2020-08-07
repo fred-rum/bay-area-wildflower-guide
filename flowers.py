@@ -1671,8 +1671,8 @@ class Glossary:
         return dup_list
 
     def get_link(self, term):
-        if ':' in term:
-            (name, partition, term) = term.partition(':')
+        if '#' in term:
+            (name, partition, term) = term.partition('#')
             return glossary_title_dict[name + ' glossary'].get_link(term)
 
         lower = term.lower()
@@ -1750,7 +1750,7 @@ class Glossary:
             short_name = re.sub(r' glossary$', '', glossary.title)
 
         for anchor in self.glossary_dict.keys():
-            glossary_cross_set.add(f'{short_name}:{anchor}')
+            glossary_cross_set.add(f'{short_name}#{anchor}')
 
     def create_local_set(self):
         self.glossary_local_set = set(iter(self.glossary_dict.keys()))
