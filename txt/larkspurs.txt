@@ -1,4 +1,4 @@
-ci:Delphinium spp.
+sci:Delphinium spp.
 x:hist/rare
 
 In most species each flower consists of five petal-like sepals in
