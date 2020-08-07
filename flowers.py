@@ -111,7 +111,12 @@ class Trie():
         else:
             result = "(?:" + "|".join(cplx) + ")"
 
-        if '' in trie: # a term is allowed to end here
+        if '' in trie:
+            # A term is allowed to end here.
+            # Append a ? to the set of alternative, longer endings
+            # to signify "or none of the preceding endings".
+            # Note that greedy matching will prefer the longer endings,
+            # which is what we want.
             if smpl_only or len(cplx) > 1:
                 # This works correctly for the following cases:
                 #   the pattern is a single character, e.g. 'c'
