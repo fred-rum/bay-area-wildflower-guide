@@ -1544,7 +1544,6 @@ class Glossary:
         self.child = set() # an unordered set of child glossaries
         self.term = [] # an ordered list of term lists
         self.glossary_dict = {} # mapping of term to anchor
-        self.glossary_set = set() # all terms in this glossary and ancestors
         self.is_jepson = False
 
     def set_parent(self, parent):
@@ -1572,6 +1571,10 @@ class Glossary:
         return dup_list
 
     def get_link(self, term):
+        if ':' in term:
+            (name, partition, term) = term.partition(':')
+            return glossary_title_dict[name + ' glossary'].get_link(term)
+
         lower = term.lower()
         if lower in self.glossary_dict:
             anchor = self.glossary_dict[lower]
@@ -1640,16 +1643,33 @@ class Glossary:
 
         return txt
 
-    def create_regex(self):
-        if not self.glossary_set:
-            self.glossary_set = set(iter(self.glossary_dict.keys()))
-            if self.parent:
-                self.parent.create_regex()
-                self.glossary_set = self.glossary_set.union(self.parent.glossary_set)
+    def create_cross_set(self):
+        if self.is_jepson:
+            short_name = 'Jepson'
+        else:
+            short_name = re.sub(r' glossary$', '', glossary.title)
 
+        for anchor in self.glossary_dict.keys():
+            glossary_cross_set.add(f'{short_name}:{anchor}')
+
+    def create_local_set(self):
+        self.glossary_local_set = set(iter(self.glossary_dict.keys()))
+
+    def create_hierarchy_set(self):
+        self.glossary_set = self.glossary_local_set
+        parent = self.parent
+        while parent:
+            self.glossary_set = self.glossary_set.union(parent.glossary_local_set)
+            parent = parent.parent
+
+        self.glossary_set = self.glossary_set.union(glossary_cross_set)
+
+    def create_regex(self):
         # sort the glossary list in reverse order so that for cases where two
         # phrases start the same and one is a subset of the other, the longer
-        # phrase is checked first.
+        # phrase is checked first.  (This relies on the fact that expression
+        # checking is done primarily in order through the searched text, and
+        # secondarily in order through the regex.)
         glossary_list = sorted(iter(self.glossary_set), reverse=True)
 
         ex = '|'.join(map(re.escape, glossary_list))
@@ -1662,6 +1682,7 @@ class Glossary:
     def read_terms(self):
         def repl_title(matchobj):
             self.title = matchobj.group(1)
+            glossary_title_dict[self.title] = self
             return ''
 
         def repl_taxon(matchobj):
@@ -2304,6 +2325,7 @@ top_list = [x for x in page_array if not x.parent]
 top_flower_list = [x for x in top_list if x.top_level == 'flowering plants']
 
 glossary_taxon_dict = {}
+glossary_title_dict = {}
 for glossary_file in glossary_list:
     glossary = Glossary(glossary_file)
     glossary.read_terms()
@@ -2330,9 +2352,20 @@ for page in top_list:
 glossary_list = []
 master_glossary.set_index()
 
+# Create a set of anchors of the form '{glossary}:{anchor}' which can be
+# used to link to a specific glossary.  This set includes every anchor in
+# every glossary.
+glossary_cross_set = set()
+jepson_glossary.create_local_set()
+jepson_glossary.create_cross_set()
+for glossary in glossary_list:
+    glossary.create_local_set()
+    glossary.create_cross_set()
+
 # Now that we know the glossary hierarchy, we can apply glossary links
 # within each glossary and finally write out the HTML.
 for glossary in glossary_list:
+    glossary.create_hierarchy_set()
     glossary.create_regex()
     glossary.write_html()
 

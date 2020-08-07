@@ -187,7 +187,7 @@ title:plant glossary
 {tubercle,tubercles} A small hemispherical projection.
 {twig,twigs} The ultimate branch segment of a woody plant.
 {ultimate} The smallest division of a compound/dissected leaf or the final segments of a branching stem.
-{vegetative,vegetatively} Without reproductive structures (flowers, fruit, cones, etc.)
+{vegetative,vegetatively} Without reproductive structures (flower:flowers, fruit, conifer:cones, etc.)
 {vein,veins} A visible vascular bundle used for transport of material through the plant.  Appears as a line of a different color shade or as a raised rib.
 {waif,waifs} A plant that has spread with human assistance but cannot reproduce or spread further on its own.  Will eventually die out with no further assistance.
 {whorl,whorls,whorled} A cluster of 3 or more (e.g. flowers) with each whorl generally surrounding an axis and multiple whorls interspersed along the axis.  See alternate, opposite.

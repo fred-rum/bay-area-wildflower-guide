@@ -18,23 +18,57 @@ taxon:[name] specifies the taxon for which the glossary is applied
 (and all of that taxon's descendents).  If the taxon isn't specified,
 the glossary is applied to all pages.
 
-When linking to a glossary word, the link is preferentially created to
+When linking to a glossary term, the link is preferentially created to
 the lowest-level glossary that applies, but all glossaries in the
 taxonomic hierarchy are considered.
 
 --
-Word definitions:
+Term definitions:
 
-{[primary],[additional],[...]} [definition]
+{[anchor],[additional],[...]} [definition]
 
-This defines the primary word.  The primary word is the one that is
-presented in the HTML, but all additional words also trigger links to
-the primary word in the glossary.  Additional words typically include
-plural or adjective forms of the primary word.  Links are only created
-for whole-word matches, but phrases can also be used for a multi-word
-match and link.  If multiple matches are possible (e.g. "bell-shaped"
-or just "bell"), the longest match is made.
+This declares a definition for an anchor term and any number of
+additional terms.  The anchor term is the one that is displayed with
+the definition, but all additional terms also create links to the
+glossary when used.  Additional terms typically include plural or
+adjective forms of the primary word.  A link is only created when the
+term begins and ends at a word boundary.  E.g. text that includes the
+word "malefactor" would link to the term "male".
+
+Each term can be a single word or a phrase.  It can include
+punctuation, but obviously not a comma.  The punctuation should also
+be only interior to the term (e.g. "bell-shaped") so that it doesn't
+confuse the search for word boundaries.
 
 It's an abuse of HTML's dictionary capability, but word definitions
 can be interleaved with other HTML features such as headings and
 normal paragraph text.
+
+--
+Application of glossary links:
+
+A term is linked from a taxon page when the term appears in a glossary
+defined for that page's taxon or any higher level of hierarchy.  If
+the same term appears in multiple glossaries in the hierarchy, the
+link is preferentially created to the lowest level (closest) glossary.
+
+Note that if a term is defined only for a taxon lower in the hierarchy
+than the current page or to a sibling/cousin taxon's glossary, no link
+is created.
+
+A term is linked from a glossary page when the term appears in that
+glossary or any glossary assigned to a higher-level taxon.  However, a
+link is never created when a term is used within its own definition.
+Instead, a set of links is appended to the end of a definition to link
+to alternative definitions in other glossaries (regardless of relative
+hierarchy).
+
+The text of a taxon page or glossary page can also link to a term in a
+specified glossary.  E.g. "conifer:cone" links the word "cone" to the
+appropriate definition within the conifer glossary, regardless of its
+relative hierarchy.  Note that the glossary name for this purpose is
+the glossary title with " glossary" stripped off the end.
+
+If multiple matches are possible (e.g. "bell-shaped" or just "bell"),
+the longest match is made, even the shorter match is to a "closer"
+glossary in the hierarchy.
