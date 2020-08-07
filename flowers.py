@@ -41,9 +41,100 @@ import codecs
 from unidecode import unidecode
 import datetime
 
+# Theoretically I could find all flower pages because their iNaturalist
+# observations include a subphylum of Angiospermae.  But there are a few
+# flower pagse that aren't (yet) included in observations.csv, and I
+# don't want them to float to the top.  So instead, I explicitly name
+# the non-flower top pages, and assume that everything not in those
+# hierarchies is a flower.
 non_flower_top_pages = ('conifers', 'ferns')
 
 year = datetime.datetime.today().year
+
+###############################################################################
+# start of Trie class
+###############################################################################
+
+# original source:
+# https://stackoverflow.com/questions/42742810/speed-up-millions-of-regex-replacements-in-python-3/42789508#42789508
+# https://gist.github.com/EricDuminil/8faabc2f3de82b24e5a371b6dc0fd1e0
+
+class Trie():
+    # Create a Trie out of a set of strings.
+    # The trie can be exported to a regex pattern.
+    # The corresponding regex is much faster than a simple regex union.
+
+    def __init__(self):
+        self.trie = {}
+
+    def add(self, term):
+        ref = self.trie
+        for char in term:
+            if char not in ref:
+                # Create a new sub-trie for the character.
+                ref[char] = {}
+            else:
+                # There is already a sub-trie for the character.
+                pass
+            # Recurse into the sub-trie.
+            ref = ref[char]
+        ref[''] = None # This indicates that the term completes here.
+        # Note that other terms may continue from the same ref point.
+
+    def _pattern(self, trie):
+        if '' in trie and len(trie.keys()) == 1:
+            # No term continues past this point.
+            return None
+
+        smpl = [] # simple cases in which a single character ends the term
+        cplx = [] # complex cases in which the term continues for > 1 character
+        for char in sorted(trie.keys()):
+            if char != '': # ignore terminator
+                recurse = self._pattern(trie[char])
+                if recurse == None:
+                    smpl.append(re.escape(char))
+                else:
+                    cplx.append(re.escape(char) + recurse)
+        smpl_only = (len(cplx) == 0)
+
+        # Add a single character or a character set to the end of the
+        # complex pattern.  (The order doesn't matter since the characters
+        # in the simple pattern are different than those that start the
+        # complex patterns.)
+        if len(smpl) == 1:
+            cplx.append(smpl[0])
+        elif len(smpl) > 1:
+            cplx.append('[' + ''.join(smpl) + ']')
+
+        if len(cplx) == 1:
+            result = cplx[0]
+        else:
+            result = "(?:" + "|".join(cplx) + ")"
+
+        if '' in trie: # a term is allowed to end here
+            if smpl_only or len(cplx) > 1:
+                # This works correctly for the following cases:
+                #   the pattern is a single character, e.g. 'c'
+                #   the pattern is a range of characters, e.g. '[ach]'
+                #   the pattern is a union of patterns, e.g. '(?:es?|[ach])'
+                result += "?"
+            else:
+                # A single complex pattern is by default not surrounded
+                # by parentheses, so the '?' would match the wrong amount.
+                result = "(?:%s)?" % result
+        return result
+
+    def pattern(self):
+        return self._pattern(self.trie)
+
+
+###############################################################################
+# end of Trie class
+###############################################################################
+
+###############################################################################
+# start of Obs class
+###############################################################################
 
 class Obs:
     pass
@@ -166,6 +257,10 @@ Locations:
             w.write('</ul>\n</div>\n')
         else:
             w.write('<p/>\n')
+
+###############################################################################
+# end of Obs class
+###############################################################################
 
 def is_sci(name):
     # If there isn't an uppercase letter anywhere, it's a common name.
@@ -1664,7 +1759,7 @@ class Glossary:
 
         self.glossary_set = self.glossary_set.union(glossary_cross_set)
 
-    def create_regex(self):
+    def create_regex_old(self):
         # sort the glossary list in reverse order so that for cases where two
         # phrases start the same and one is a subset of the other, the longer
         # phrase is checked first.  (This relies on the fact that expression
@@ -1673,6 +1768,13 @@ class Glossary:
         glossary_list = sorted(iter(self.glossary_set), reverse=True)
 
         ex = '|'.join(map(re.escape, glossary_list))
+        self.glossary_regex = re.compile(rf'\b({ex})\b', re.IGNORECASE)
+
+    def create_regex(self):
+        trie = Trie()
+        for term in self.glossary_set:
+            trie.add(term)
+        ex = trie.pattern()
         self.glossary_regex = re.compile(rf'\b({ex})\b', re.IGNORECASE)
 
     def record_in_glossary_dict(self, anchor, word):
