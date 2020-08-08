@@ -126,7 +126,7 @@ class Trie():
             else:
                 # A single complex pattern is by default not surrounded
                 # by parentheses, so the '?' would match the wrong amount.
-                result = "(?:%s)?" % result
+                result = f'(?:{result})?'
         return result
 
     def pattern(self):
@@ -1673,7 +1673,15 @@ class Glossary:
     def get_link(self, term):
         if '#' in term:
             (name, partition, term) = term.partition('#')
-            return glossary_title_dict[name + ' glossary'].get_link(term)
+            if term == '':
+                # I'd love to print what file this error occured in, but
+                # that requires an exception or a global variable or passing
+                # more data around, none of which I like.  The user will just
+                # have to grep for the broken reference in the HTML.
+                print(f'unrecognized glossary cross reference starting with "{name}#')
+                return f'{name}#broken ref'
+            else:
+                return glossary_title_dict[name + ' glossary'].get_link(term)
 
         lower = term.lower()
         if lower in self.glossary_dict:
@@ -1751,6 +1759,13 @@ class Glossary:
 
         for anchor in self.glossary_dict.keys():
             glossary_cross_set.add(f'{short_name}#{anchor}')
+
+        # Also include an entry with no anchor.  This gets matched if
+        # the intended link doesn't exist, and so an error can be flagged.
+        # Note that this matches only at a word boundary, meaning that there
+        # is a word immediately following the #, which is what we expect.
+        glossary_cross_set.add(f'{short_name}#')
+
 
     def create_local_set(self):
         self.glossary_local_set = set(iter(self.glossary_dict.keys()))

@@ -168,7 +168,4 @@ to <p/>.
 Add inflorescence shape definitions for sedges.  (Possibly share the
 glossary with grasses, but probably not.)
 
-Allow glossary linking to be prevented, e.g. with "none:[term]".
-
-Detect a glossary reference error, e.g. if 'flower#' is found during a
-glossary search, but not a longer phrase.
+Allow glossary linking to be prevented, e.g. with "none#[term]".
