@@ -1680,6 +1680,10 @@ class Glossary:
                 # have to grep for the broken reference in the HTML.
                 print(f'unrecognized glossary cross reference starting with "{name}#')
                 return f'{name}#broken ref'
+            elif name == 'none':
+                # 'none#[term]' means that we don't want a glossary link.
+                # Discard the 'none#' and return only the term.
+                return term
             else:
                 return glossary_title_dict[name + ' glossary'].get_link(term)
 
@@ -1758,13 +1762,21 @@ class Glossary:
             short_name = re.sub(r' glossary$', '', glossary.title)
 
         for anchor in self.glossary_dict.keys():
+            # Create a glossary entry tied to a specific glossary.
             glossary_cross_set.add(f'{short_name}#{anchor}')
 
-        # Also include an entry with no anchor.  This gets matched if
-        # the intended link doesn't exist, and so an error can be flagged.
+            # Also create an entry tied to no glossary.  If this gets matched,
+            # it prevents the creation of a glossary link.  Note that multiple
+            # glossaries might create the same entry, but the set removes
+            # duplicates, and they all behave the same.
+            glossary_cross_set.add(f'none#{anchor}')
+
+        # Also include entries with no term listed.  This gets matched if
+        # the intended link doesn't exist, and thus an error can be flagged.
         # Note that this matches only at a word boundary, meaning that there
         # is a word immediately following the #, which is what we expect.
         glossary_cross_set.add(f'{short_name}#')
+        glossary_cross_set.add('none#')
 
 
     def create_local_set(self):

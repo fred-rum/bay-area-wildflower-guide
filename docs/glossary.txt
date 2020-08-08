@@ -69,6 +69,10 @@ appropriate definition within the conifer glossary, regardless of its
 relative hierarchy.  Note that the glossary name for this purpose is
 the glossary title with " glossary" stripped off the end.
 
+Similarly, a term can be prevented from linking to a glossary, such as
+when using the traditional English meaning rather than the botanical
+meaning.  E.g. "none#includes".
+
 If multiple matches are possible (e.g. "bell-shaped" or just "bell"),
 the longest match is made, even the shorter match is to a "closer"
 glossary in the hierarchy.

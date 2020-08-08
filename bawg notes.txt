@@ -167,5 +167,3 @@ to <p/>.
 
 Add inflorescence shape definitions for sedges.  (Possibly share the
 glossary with grasses, but probably not.)
-
-Allow glossary linking to be prevented, e.g. with "none#[term]".
