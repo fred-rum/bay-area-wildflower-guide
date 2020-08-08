@@ -167,3 +167,18 @@ to <p/>.
 
 Add inflorescence shape definitions for sedges.  (Possibly share the
 glossary with grasses, but probably not.)
+
+
+Don't copy html to prev if the previous run failed.  E.g. don't move
+html to prev if a file called 'running' is present.  After moving html
+to prev, create that file, and delete it only at the very end of
+execution (after presenting modified files).
+
+Create a standardized error framework, e.g. a function that gets
+called on errors.  This function prints error messages to STDERR and
+continues, but after the 10th error, it aborts the run.  If there is
+at least 1 error, the modified files aren't presented, and the script
+ends with a fail code.  Use try/raise to report the file location of
+failures.
+
+Separate components into different modules/files.

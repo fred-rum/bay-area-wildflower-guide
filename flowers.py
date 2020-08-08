@@ -41,6 +41,9 @@ import codecs
 from unidecode import unidecode
 import datetime
 
+# My files
+import trie
+
 # Theoretically I could find all flower pages because their iNaturalist
 # observations include a subphylum of Angiospermae.  But there are a few
 # flower pagse that aren't (yet) included in observations.csv, and I
@@ -50,92 +53,6 @@ import datetime
 non_flower_top_pages = ('conifers', 'ferns')
 
 year = datetime.datetime.today().year
-
-###############################################################################
-# start of Trie class
-###############################################################################
-
-# original source:
-# https://stackoverflow.com/questions/42742810/speed-up-millions-of-regex-replacements-in-python-3/42789508#42789508
-# https://gist.github.com/EricDuminil/8faabc2f3de82b24e5a371b6dc0fd1e0
-
-class Trie():
-    # Create a Trie out of a set of strings.
-    # The trie can be exported to a regex pattern.
-    # The corresponding regex is much faster than a simple regex union.
-
-    def __init__(self):
-        self.trie = {}
-
-    def add(self, term):
-        ref = self.trie
-        for char in term:
-            if char not in ref:
-                # Create a new sub-trie for the character.
-                ref[char] = {}
-            else:
-                # There is already a sub-trie for the character.
-                pass
-            # Recurse into the sub-trie.
-            ref = ref[char]
-        ref[''] = None # This indicates that the term completes here.
-        # Note that other terms may continue from the same ref point.
-
-    def _pattern(self, trie):
-        if '' in trie and len(trie.keys()) == 1:
-            # No term continues past this point.
-            return None
-
-        smpl = [] # simple cases in which a single character ends the term
-        cplx = [] # complex cases in which the term continues for > 1 character
-        for char in sorted(trie.keys()):
-            if char != '': # ignore terminator
-                recurse = self._pattern(trie[char])
-                if recurse == None:
-                    smpl.append(re.escape(char))
-                else:
-                    cplx.append(re.escape(char) + recurse)
-        smpl_only = (len(cplx) == 0)
-
-        # Add a single character or a character set to the end of the
-        # complex pattern.  (The order doesn't matter since the characters
-        # in the simple pattern are different than those that start the
-        # complex patterns.)
-        if len(smpl) == 1:
-            cplx.append(smpl[0])
-        elif len(smpl) > 1:
-            cplx.append('[' + ''.join(smpl) + ']')
-
-        if len(cplx) == 1:
-            result = cplx[0]
-        else:
-            result = "(?:" + "|".join(cplx) + ")"
-
-        if '' in trie:
-            # A term is allowed to end here.
-            # Append a ? to the set of alternative, longer endings
-            # to signify "or none of the preceding endings".
-            # Note that greedy matching will prefer the longer endings,
-            # which is what we want.
-            if smpl_only or len(cplx) > 1:
-                # This works correctly for the following cases:
-                #   the pattern is a single character, e.g. 'c'
-                #   the pattern is a range of characters, e.g. '[ach]'
-                #   the pattern is a union of patterns, e.g. '(?:es?|[ach])'
-                result += "?"
-            else:
-                # A single complex pattern is by default not surrounded
-                # by parentheses, so the '?' would match the wrong amount.
-                result = f'(?:{result})?'
-        return result
-
-    def pattern(self):
-        return self._pattern(self.trie)
-
-
-###############################################################################
-# end of Trie class
-###############################################################################
 
 ###############################################################################
 # start of Obs class
@@ -1803,10 +1720,7 @@ class Glossary:
         self.glossary_regex = re.compile(rf'\b({ex})\b', re.IGNORECASE)
 
     def create_regex(self):
-        trie = Trie()
-        for term in self.glossary_set:
-            trie.add(term)
-        ex = trie.pattern()
+        ex = trie.get_pattern(self.glossary_set)
         self.glossary_regex = re.compile(rf'\b({ex})\b', re.IGNORECASE)
 
     def record_in_glossary_dict(self, anchor, word):
