@@ -1791,6 +1791,7 @@ var pages=[
 {idx:0,com:["succulent","succulents"],x:"g"},
 {idx:0,com:["taproot"],x:"g"},
 {idx:0,com:["terminal"],x:"g"},
+{idx:0,com:["ternate"],x:"g"},
 {idx:0,com:["tree","trees"],x:"g"},
 {idx:0,com:["truncate","truncating","truncated"],x:"g"},
 {idx:0,com:["tubercle","tubercles"],x:"g"},

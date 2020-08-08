@@ -1997,8 +1997,12 @@ class Glossary:
         def by_usage(anchor):
             return self.used_dict[anchor]
 
-        for anchor in sorted(self.used_dict, key=by_usage):
-            print(f'{anchor}: {self.used_dict[anchor]}')
+        if len(sys.argv) > 2 and sys.argv[2] == 'j':
+            # List the top 10 glossary terms that link to Jepson instead of
+            # one of my glossaries, in order of number of references.
+            anchor_list = sorted(self.used_dict, key=by_usage, reverse=True)
+            for anchor in anchor_list[:10]:
+                print(f'{anchor}: {self.used_dict[anchor]}')
 
 
 ###############################################################################
@@ -2526,6 +2530,9 @@ for page in page_array:
     page.write_html()
 
 if len(sys.argv) > 2 and sys.argv[2] == 'x':
+    # List the top 5 genus pages with an incomplete key,
+    # as ordered by number of observations.
+    # (If there are fewer than 5, then some random pages are listed as well.)
     page_list = page_array[:]
     page_list.sort(key=by_incomplete_obs, reverse=True)
     for page in page_list[:5]:

@@ -182,6 +182,7 @@ title:plant glossary
 {succulent,succulents} Composed of fleshy tissue that conserves water.
 {taproot} Primary root growing straight down, tapering at the end, with smaller lateral branches.
 {terminal} The segment at the end, e.g. the most distal segment of a compound or lobed leaf.
+{ternate} With three parts from a common point, or lobed/dissected/compound in three parts.
 {tree,trees} Woody plant, taller than a shrub, generally with one central trunk from which branches spring higher up.
 {truncate,truncating,truncated} Ending (or beginning) abruptly, e.g. with no tapering.
 {tubercle,tubercles} A small hemispherical projection.
