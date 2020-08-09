@@ -1,8 +1,8 @@
-#!/cygdrive/c/Python37/python.exe c:/Users/Chris/Documents/GitHub/bay-area-flowers/flowers.py
+#!/cygdrive/c/Python37/python.exe
 #!/usr/bin/env python
 
 # Run as:
-# /cygdrive/c/Users/Chris/Documents/GitHub/bay-area-flowers/flowers.py
+# /cygdrive/c/Users/Chris/Documents/GitHub/bay-area-flowers/src/bawg.py
 
 # terminology (e.g. for variable names):
 # page - a flower or container HTML page, and the info associated with it
@@ -616,7 +616,7 @@ class Page:
         else:
             self.cur_genus = None
 
-        with open(root + f'/txt2/{self.name}.txt', 'w') as w:
+        with open(root_path + f'/txt2/{self.name}.txt', 'w') as w:
             if self.com and self.com != self.name:
                 w.write(f'com:{self.com}\n')
             if self.elab and self.elab != self.name:
@@ -1144,7 +1144,7 @@ class Page:
             else:
                 return '<p/>\n'
 
-        with open(root + "/html/" + self.url() + ".html",
+        with open(root_path + "/html/" + self.url() + ".html",
                   "w", encoding="utf-8") as w:
             com = self.com
             elab = self.elab
@@ -1255,13 +1255,20 @@ class Page:
 # end of Page class
 ###############################################################################
 
+exec_path = sys.argv[0]
+if '/' in exec_path:
+    (src_path, partition, last) = exec_path.rpartition('/')
+    if '/' in src_path:
+        (root_path, partition, last) = src_path.rpartition('/')
+    else:
+        root_path = src_path + '/..'
+else:
+    root_path = '..'
 
-root = 'c:/Users/Chris/Documents/GitHub/bay-area-flowers'
-
-if os.path.isfile(root + '/html/_mod.html'):
+if os.path.isfile(root_path + '/html/_mod.html'):
     # Keep a copy of the previous html files so that we can
     # compare differences after creating the new html files.
-    shutil.rmtree(root + '/prev', ignore_errors=True)
+    shutil.rmtree(root_path + '/prev', ignore_errors=True)
 
     # Apparently Windows sometimes lets the call complete when the
     # remove is not actually done yet, and then the rename fails.
@@ -1269,7 +1276,7 @@ if os.path.isfile(root + '/html/_mod.html'):
     done = False
     while not done:
         try:
-            os.rename(root + '/html', root + '/prev')
+            os.rename(root_path + '/html', root_path + '/prev')
             done = True
         except WindowsError as error:
             pass
@@ -1278,9 +1285,9 @@ else:
     # crashed before creating it.  There's no point in comparing the changes
     # with the crashed run, so we discard it and keep the previous run to
     # compare against instead.
-    shutil.rmtree(root + '/html', ignore_errors=True)
+    shutil.rmtree(root_path + '/html', ignore_errors=True)
 
-os.mkdir(root + '/html')
+os.mkdir(root_path + '/html')
 
 name_page = {} # original page name -> page [final file name may vary]
 com_page = {} # common name -> page (or 'multiple' if there are name conflicts)
@@ -1366,7 +1373,7 @@ def write_footer(w):
 def link_figures(name, txt):
     def repl_figure_thumb(matchobj):
         file = matchobj.group(1)
-        if not os.path.isfile(f'{root}/figures/{file}.svg'):
+        if not os.path.isfile(f'{root_path}/figures/{file}.svg'):
             print(f'Broken figure link to {file}.svg in {name}')
         return f'<a href="../figures/{file}.svg"><img src="../figures/{file}.svg" height="200" class="leaf-thumb"></a>'
 
@@ -1378,7 +1385,7 @@ def link_figures(name, txt):
 
     def repl_figure_text(matchobj):
         file = matchobj.group(1)
-        if not os.path.isfile(f'{root}/figures/{file}.svg'):
+        if not os.path.isfile(f'{root_path}/figures/{file}.svg'):
             print(f'Broken figure link to {file}.svg in {name}')
         return f'<a href="../figures/{file}.svg">[figure]</a>'
 
@@ -1604,7 +1611,7 @@ class Glossary:
                               re.IGNORECASE)
             return '{' + words + '} ' + defn
 
-        with open(f'{root}/glossary/{self.name}.txt', mode='r') as f:
+        with open(f'{root_path}/glossary/{self.name}.txt', mode='r') as f:
             self.txt = f.read()
 
         # Link figures prior to parsing glossary terms so that they're
@@ -1633,7 +1640,7 @@ class Glossary:
         self.is_jepson = True
         self.used_dict = {}
 
-        with open(f'{root}/jepson_glossary.txt', mode='r') as f:
+        with open(f'{root_path}/data/jepson_glossary.txt', mode='r') as f:
             txt = f.read()
         for c in txt.split('\n'):
             # remove comments
@@ -1714,7 +1721,7 @@ class Glossary:
         self.txt = re.sub(r'^{([^\}]+)}\s+(.*)$',
                           repl_defns, self.txt, flags=re.MULTILINE)
 
-        with open(f'{root}/html/{self.name}.html', mode='w') as w:
+        with open(f'{root_path}/html/{self.name}.html', mode='w') as w:
               write_header(w, self.title, None, nospace=True)
               w.write('<h4 class="title">Glossary table of contents</h4>\n')
               master_glossary.write_toc(w, self)
@@ -1770,7 +1777,7 @@ class Glossary:
 # Read the mapping of iNaturalist observation locations to short park names.
 park_map = {}
 park_loc = {}
-with open(root + '/parks.yaml', mode='r', encoding='utf-8') as f:
+with open(root_path + '/data/parks.yaml', mode='r', encoding='utf-8') as f:
     yaml_data = yaml.safe_load(f)
 for loc in yaml_data:
     for x in yaml_data[loc]:
@@ -1784,7 +1791,7 @@ for loc in yaml_data:
 
 # Get a list of files with the expected suffix in the designated directory.
 def get_file_list(subdir, ext):
-    file_list = os.listdir(root + '/' + subdir)
+    file_list = os.listdir(root_path + '/' + subdir)
     base_list = []
     for filename in file_list:
         pos = filename.rfind(os.extsep)
@@ -1818,23 +1825,23 @@ def get_name_from_jpg(jpg):
 # If a file is newer in thumbs than in photos, leave it unchanged.
 for name in thumb_list:
     if name not in jpg_list:
-        thumb_file = root + '/thumbs/' + name + '.jpg'
+        thumb_file = root_path + '/thumbs/' + name + '.jpg'
         os.remove(thumb_file)
 
 mod_list = []
 for name in jpg_list:
-    photo_file = root + '/photos/' + name + '.jpg'
-    thumb_file = root + '/thumbs/' + name + '.jpg'
+    photo_file = root_path + '/photos/' + name + '.jpg'
+    thumb_file = root_path + '/thumbs/' + name + '.jpg'
     if (name not in thumb_list or
         os.path.getmtime(photo_file) > os.path.getmtime(thumb_file)):
         mod_list.append(photo_file)
 
 if mod_list:
-    with open(root + "/convert.txt", "w") as w:
+    with open(root_path + "/convert.txt", "w") as w:
         for filename in mod_list:
             filename = re.sub(r'/', r'\\', filename)
             w.write(filename + '\n')
-    root_mod = re.sub(r'/', r'\\', root)
+    root_mod = re.sub(r'/', r'\\', root_path)
     cmd = ['C:/Program Files (x86)/IrfanView/i_view32.exe',
            f'/filelist={root_mod}\\convert.txt',
            '/aspectratio',
@@ -1905,7 +1912,7 @@ def sub_easy(txt):
 # linked correctly.
 for name in txt_list:
     page = Page(name)
-    with open(root + "/txt/" + name + ".txt", "r", encoding="utf-8") as r:
+    with open(root_path + "/txt/" + name + ".txt", "r", encoding="utf-8") as r:
         page.txt = r.read()
     page.remove_comments()
     page.parse_names()
@@ -1936,7 +1943,7 @@ for page in page_array:
     if page.color and not page.jpg_list:
         print(f'page {page.name} has a color assigned but has no photos')
 
-with open(root + '/ignore species.yaml', encoding='utf-8') as f:
+with open(root_path + '/data/ignore species.yaml', encoding='utf-8') as f:
     sci_ignore = yaml.safe_load(f)
 
 # Track species or subspecies observations that don't have a page even though
@@ -1960,7 +1967,7 @@ def shrink(name):
 #   Associate common names with scientific names
 #   Get a count of observations (total and research grade) of each flower.
 #   Get an iNaturalist taxon ID for each flower.
-with open(root + '/observations.csv', mode='r', newline='', encoding='utf-8') as f:
+with open(root_path + '/data/observations.csv', mode='r', newline='', encoding='utf-8') as f:
     csv_reader = csv.reader(f)
     header_row = next(csv_reader)
 
@@ -2094,7 +2101,7 @@ if park_nf_list:
         print("  " + repr(x))
 
 # try:
-#     os.mkdir(root + '/txt2')
+#     os.mkdir(root_path + '/txt2')
 # except:
 #     pass
 #
@@ -2186,7 +2193,7 @@ def sort_pages(page_set, color=None, with_depth=False):
     page_list.sort(key=count_flowers, reverse=True)
     return page_list
 
-with open(root + '/family names.yaml', encoding='utf-8') as f:
+with open(root_path + '/data/family names.yaml', encoding='utf-8') as f:
     family_com = yaml.safe_load(f)
 
 for family in family_child_set:
@@ -2353,7 +2360,7 @@ def write_page_list(page_list, color, color_match):
     s = io.StringIO()
     list_matches(s, page_list, False, color_match, set())
 
-    with open(root + f"/html/{color}.html", "w", encoding="utf-8") as w:
+    with open(root_path + f"/html/{color}.html", "w", encoding="utf-8") as w:
         title = color.capitalize() + ' flowers'
         write_header(w, title, title)
         obs = Obs(color_match)
@@ -2376,7 +2383,7 @@ def add_elab(elabs, elab):
     if elab and elab != 'n/a' and elab not in elabs:
         elabs.append(unidecode(elab))
 
-search_file = root + "/pages.js"
+search_file = root_path + "/pages.js"
 with open(search_file, "w", encoding="utf-8") as w:
     w.write('var pages=[\n')
 
@@ -2439,19 +2446,19 @@ with open(search_file, "w", encoding="utf-8") as w:
 # Create an HTML file with links to all new files and all modified files.
 # (Ignore deleted files.)
 
-file_list = sorted(os.listdir(root + '/html'))
+file_list = sorted(os.listdir(root_path + '/html'))
 new_list = []
 mod_list = []
 for name in file_list:
     if name.endswith('.html'):
-        if not os.path.isfile(root + '/prev/' + name):
+        if not os.path.isfile(root_path + '/prev/' + name):
             new_list.append(name)
-        elif not filecmp.cmp(root + '/prev/' + name,
-                             root + '/html/' + name):
+        elif not filecmp.cmp(root_path + '/prev/' + name,
+                             root_path + '/html/' + name):
             mod_list.append(name)
 
 if mod_list or new_list:
-    mod_file = root + "/html/_mod.html"
+    mod_file = root_path + "/html/_mod.html"
     with open(mod_file, "w", encoding="utf-8") as w:
         if new_list:
             w.write('<h1>New files</h1>\n')
@@ -2465,7 +2472,7 @@ if mod_list or new_list:
     # open the default browser with the created HTML file
     total_list = mod_list + new_list
     if len(total_list) == 1:
-        os.startfile(root + '/html/' + total_list[0])
+        os.startfile(root_path + '/html/' + total_list[0])
     else:
         os.startfile(mod_file)
 else:

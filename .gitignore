@@ -32,3 +32,4 @@ new/
 new.pickle
 debug.log
 markers.*
+__pycache__/
