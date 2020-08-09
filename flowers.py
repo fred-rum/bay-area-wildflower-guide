@@ -43,6 +43,7 @@ import datetime
 
 # My files
 import trie
+from obs import Obs
 
 # Theoretically I could find all flower pages because their iNaturalist
 # observations include a subphylum of Angiospermae.  But there are a few
@@ -53,136 +54,6 @@ import trie
 non_flower_top_pages = ('conifers', 'ferns')
 
 year = datetime.datetime.today().year
-
-###############################################################################
-# start of Obs class
-###############################################################################
-
-class Obs:
-    pass
-
-    def __init__(self, color):
-        self.match_set = set() # pages already searched, to avoid doublecounting
-        self.color = color # color being searched for
-
-        self.n = 0 # accumulated number of observations from observations.csv
-        self.rg = 0 # number of research-grade observations as above
-        self.parks = {} # subcounts for each park with observations
-        self.month = [0] * 12 # subcounts for each month with observations
-
-        self.key = 0 # number of key pages found in the hierarchy
-        self.leaf_obs = 0 # number of leaf pages found with photos
-        self.leaf_unobs = 0 # number of leaf pages found without photos
-
-    def write_obs(self, page, w):
-        n = self.n
-        rg = self.rg
-
-        if page:
-            if n == 0 and not page.sci:
-                return
-
-            if page.taxon_id:
-                link = f'https://www.inaturalist.org/observations/chris_nelson?taxon_id={page.taxon_id}&order_by=observed_on'
-            elif page.sci:
-                elab = page.choose_elab(page.elab_inaturalist)
-                sci = strip_sci(elab)
-                link = f'https://www.inaturalist.org/observations/chris_nelson?taxon_name={sci}&order_by=observed_on'
-            else:
-                link = None
-        else:
-            link = None
-
-        w.write('<p/>\n')
-
-        if link:
-            w.write(f'<a href="{link}" target="_blank">Chris&rsquo;s observations</a>: ')
-        else:
-            w.write('Chris&rsquo;s observations: ')
-
-        if n == 0:
-            w.write('none')
-        elif rg == 0:
-            w.write(f'{n} (none are research grade)')
-        elif rg == n:
-            if n == 1:
-                w.write('1 (research grade)')
-            else:
-                w.write(f'{n} (all are research grade)')
-        else:
-            if rg == 1:
-                w.write(f'{n} ({rg} is research grade)')
-            else:
-                w.write(f'{n} ({rg} are research grade)')
-
-        if n:
-            w.write('''
-<span class="toggle-details" onclick="fn_details(this)">[show details]</span><p/>
-<div id="details">
-Locations:
-<ul>
-''')
-            park_list = sorted(self.parks)
-            park_list = sorted(park_list,
-                               key = lambda x: self.parks[x],
-                               reverse=True)
-            for park in park_list:
-                count = self.parks[park]
-                if count == 1:
-                    w.write(f'<li>{park}</li>\n')
-                else:
-                    w.write(f'<li>{park}: {count}</li>\n')
-
-            w.write('</ul>\nMonths:\n<ul>\n')
-
-            # break_month = None
-            # for i in range(12):
-            #     weight = 0
-            #     for j in range(12):
-            #         factor = abs((i+5.5-j) % 12 - 6)
-            #         weight += self.month[j] / factor
-            #     if i == 0: # bias toward January unless there's a clear winner
-            #         weight /= 1
-            #     if break_month == None or weight < break_weight:
-            #         break_month = i
-            #         break_weight = weight
-
-            # first = None
-            # for i in range(12):
-            #     m = (i + break_month) % 12
-            #     if self.month[m]:
-            #         if first == None:
-            #             first = i
-            #         last = i
-
-            # Search for the longest run of zeros in the month data.
-            z_first = 0
-            z_length = 0
-            for i in range(12):
-                for j in range(12):
-                    if self.month[(i+j) % 12]:
-                        # break ties around January
-                        if (j > z_length or
-                            (j == z_length and (i == 0 or i+j >= 12))):
-                            z_first = i
-                            z_length = j
-                        break
-
-            month_name = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'Jun.',
-                          'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.']
-
-            # Iterate through all months that are *not* part of the longest
-            # run of zeros (even if some of those months are themselves zero).
-            for i in range(12 - z_length):
-                m = (i + z_first + z_length) % 12
-                w.write(f'<li>{month_name[m]}: {self.month[m]}</li>\n')
-            w.write('</ul>\n</div>\n')
-        else:
-            w.write('<p/>\n')
-
-###############################################################################
-# end of Obs class
-###############################################################################
 
 def is_sci(name):
     # If there isn't an uppercase letter anywhere, it's a common name.
@@ -804,55 +675,27 @@ class Page:
     def page_matches_color(self, color):
         return (color == None or color in self.color)
 
-    # Accumulate the observations for the page and all its children
-    # into the obs object.  Page must match the color declared in obs
-    # in order to count.
     def count_matching_obs(self, obs):
-        if self in obs.match_set: return
-
-        old_leaf_obs = obs.leaf_obs
-
-        for child in self.child:
-            child.count_matching_obs(obs)
-
-        # If a container page contains exactly one descendant with a matching
-        # color, the container isn't listed on the color page, and the color
-        # isn't listed in page_color for the page.  Therefore, we follow all
-        # child links blindly and only compare the color when we reach a flower
-        # with an observation count.
-        if self.page_matches_color(obs.color):
-            obs.match_set.add(self)
-            obs.n += self.obs_n
-            obs.rg += self.obs_rg
-            for park in self.parks:
-                if park not in obs.parks:
-                    obs.parks[park] = 0
-                obs.parks[park] += self.parks[park]
-            for i in range(12):
-                obs.month[i] += self.month[i]
-
-            if self.child:
-                if not self.autogenerated:
-                    obs.key += 1
-                if self.jpg_list and obs.leaf_obs == old_leaf_obs:
-                    # If a page is both a key and an observed flower and none
-                    # of its descendents is observed, then treat it as if one
-                    # of its descendents is observed instead.
-                    # However, if any descendent is observed, then we can't
-                    # guarantee that the photos for the key page are of a
-                    # different species, so we ignore the key photos.
-                    obs.leaf_obs += 1
-                    obs.leaf_unobs -= 1
-            elif self.jpg_list:
-                obs.leaf_obs += 1
-            else:
-                obs.leaf_unobs += 1
+        obs.count_matching_obs(self)
 
     # Write the iNaturalist observation data.
     def write_obs(self, w):
         obs = Obs(None)
         self.count_matching_obs(obs)
-        obs.write_obs(self, w)
+
+        if obs.n == 0 and not self.sci:
+            return
+
+        if self.taxon_id:
+            link = f'https://www.inaturalist.org/observations/chris_nelson?taxon_id={self.taxon_id}&order_by=observed_on'
+        elif self.sci:
+            elab = self.choose_elab(self.elab_inaturalist)
+            sci = strip_sci(elab)
+            link = f'https://www.inaturalist.org/observations/chris_nelson?taxon_name={sci}&order_by=observed_on'
+        else:
+            link = None
+
+        obs.write_obs(link, w)
 
     def choose_elab(self, elab_alt):
         if elab_alt and elab_alt != 'n/a':
@@ -2516,13 +2359,7 @@ def write_page_list(page_list, color, color_match):
         obs = Obs(color_match)
         for page in top_flower_list:
             page.count_matching_obs(obs)
-        w.write(f'<span class="parent">{obs.key} keys</span>')
-        w.write(f' / <span class="leaf">{obs.leaf_obs} observed flowers</span>')
-        if color_match == None:
-            # Unobserved colors don't have an assigned color, so it doesn't
-            # make sense to try to print out how many match the current color.
-            w.write(f' / <span class="unobs">{obs.leaf_unobs} unobserved flowers</span>')
-        w.write('\n')
+        obs.write_page_counts(w)
         w.write(s.getvalue())
         obs.write_obs(None, w)
         write_footer(w)
