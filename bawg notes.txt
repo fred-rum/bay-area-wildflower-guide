@@ -182,3 +182,14 @@ ends with a fail code.  Use try/raise to report the file location of
 failures.
 
 Separate components into different modules/files.
+
+Use these only from the Page class:
+  is_sci
+  strip_sci
+  elaborate_sci
+  shrink (see below)
+
+Redo shrink() to instead allow testing two names against each other
+while testing specific plural substitutions.  (But also keep the code
+to throw out non-word characters from each.)  E.g.
+is_same(name, 'z', 'zzes')
