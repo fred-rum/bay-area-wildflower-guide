@@ -9,7 +9,7 @@
 import re
 
 # Add a string (term) to the trie.
-def add(trie, term):
+def _add(trie, term):
     ref = trie
     for char in term:
         if char not in ref:
@@ -24,7 +24,7 @@ def add(trie, term):
     # Note that other terms may continue from the same ref point.
 
 # Create a regex-type string that matches the trie (or sub-trie) argument.
-def pattern(trie):
+def _pattern(trie):
     if '' in trie and len(trie.keys()) == 1:
         # No term continues past this point.
         return None
@@ -33,7 +33,7 @@ def pattern(trie):
     cplx = [] # complex cases in which the term continues for > 1 character
     for char in sorted(trie.keys()):
         if char != '': # ignore terminator
-            recurse = pattern(trie[char])
+            recurse = _pattern(trie[char])
             if recurse == None:
                 smpl.append(re.escape(char))
             else:
@@ -73,8 +73,8 @@ def pattern(trie):
     return result
 
 # Create a regex pattern out of a set of strings.
-def get_pattern(word_set):
+def trie_pattern(word_set):
     trie = {}
     for word in word_set:
-        add(trie, word)
-    return pattern(trie)
+        _add(trie, word)
+    return _pattern(trie)

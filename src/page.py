@@ -3,7 +3,8 @@ from unidecode import unidecode
 
 # My files
 from files import *
-from obs import Obs
+from obs import *
+from easy import *
 
 ###############################################################################
 
@@ -102,61 +103,6 @@ def find_page1(name):
         return find_page2(None, name)
     else:
         return find_page2(name, None)
-
-###############################################################################
-
-repl_easy_dict = {
-    # Replace common Jepson codes.
-    '+-' : '&plusmn;',
-    '--' : '&ndash;',
-    '<=' : '&le;',
-    '>=' : '&ge;',
-    '<<' : '&#8810',
-    '>>' : '&#8811',
-
-    "'"  : '&rsquo;',
-    '"'  : '&rdquo;',
-
-    # '<' and '>' should be escaped, but for now I'll leave them alone
-    # because the browser seems to figure them out correctly, and it's
-    # probably smarter about it than I would be.
-}
-
-ex = '|'.join(map(re.escape, list(repl_easy_dict.keys())))
-repl_easy_regex = re.compile(f'({ex})')
-
-def repl_easy(matchobj):
-    return repl_easy_dict[matchobj.group(1)]
-
-def sub_easy_safe(txt):
-    # I assume that I only use double-quotes to quote a passage
-    # of text.  If I try to do something similar for single-quotes,
-    # I could use the wrong smart quote for something like the '80s.
-    txt = re.sub(r'(?<![\w.,])"|\A"', r'&ldquo;', txt)
-    txt = repl_easy_regex.sub(repl_easy, txt)
-    return txt
-
-# Perform easy substitutions in group 1, but leave group 2 unchanged.
-def repl_easy_pair(matchobj):
-    allowed = matchobj.group(1)
-    disallowed = matchobj.group(2)
-    return sub_easy_safe(allowed) + disallowed
-
-# Make easy substitutions in the text, such as "+-" and smart quotes.
-# We do this before glossary substitutions because the HTML added for
-# glossary links confuses the heuristic for smart-quote direction.
-def sub_easy(txt):
-    # Don't replace any text within a tag <...> or special syntax {...}.
-    # Note that a tag is assumed to start with a word character, e.g. "<a".
-    # Thus, we won't get thrown off by a non-tag angle bracket such as "< "
-    # or "<=".
-    sub_re = r'(.*?)(\Z|<\w.*?>|{.*?})'
-
-    # Perform the easy substitution for each non-tag/tag
-    # pair throughout the entire multi-line txt string.
-    return re.sub(sub_re, repl_easy_pair, txt,
-                  flags=re.DOTALL)
-
 
 ###############################################################################
 
@@ -391,7 +337,7 @@ class Page:
         com = self.com
         if not com:
             return None
-        return repl_easy_regex.sub(repl_easy, com)
+        return easy_sub_safe(com)
 
     def format_elab(self):
         elab = self.elab
@@ -505,7 +451,7 @@ class Page:
             print(f'{link} is specified more than once for page {self.name}')
         else:
             if label:
-                label = sub_easy_safe(label)
+                label = easy_sub_safe(label)
             self.ext_photo_list.append((label, link))
 
     # Check if check_page is an ancestor of this page (for loop checking).
@@ -1066,7 +1012,7 @@ class Page:
 
         s = link_figures(self.name, s)
         s = re.sub(r'{-([^}]+)}', repl_link, s)
-        s = sub_easy(s)
+        s = easy_sub(s)
         s = self.glossary.link_glossary_words(s, is_glossary=False)
         self.txt = s
 

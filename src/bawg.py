@@ -42,8 +42,9 @@ from unidecode import unidecode
 import datetime
 
 # My files
-import trie
-from obs import Obs
+from trie import *
+from easy import *
+from obs import *
 from page import *
 from files import *
 
@@ -260,11 +261,11 @@ class Glossary:
         self.glossary_regex = re.compile(rf'\b({ex})\b', re.IGNORECASE)
 
     def create_regex(self):
-        ex = trie.get_pattern(self.glossary_set)
+        ex = trie_pattern(self.glossary_set)
         self.glossary_regex = re.compile(rf'\b({ex})\b', re.IGNORECASE)
 
     def record_in_glossary_dict(self, anchor, word):
-        word = sub_easy_safe(word.lower())
+        word = easy_sub_safe(word.lower())
         self.glossary_dict[word] = anchor
 
     def read_terms(self):
@@ -400,7 +401,7 @@ class Glossary:
 
             return f'<div class="defn" id="{anchor}"><dt>{anchor}</dt><dd>{defn}{related_str}</dd></div>'
 
-        self.txt = sub_easy(self.txt)
+        self.txt = easy_sub(self.txt)
 
         self.txt = self.link_glossary_words(self.txt, is_glossary=True)
 
