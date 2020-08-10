@@ -16,7 +16,9 @@ page.
 
 taxon:[name] specifies the taxon for which the glossary is applied
 (and all of that taxon's descendents).  If the taxon isn't specified,
-the glossary is applied to all pages.
+the glossary is applied to all pages.  If the taxon is the special
+string 'flowering plants', the glossary is applied to all pages that
+aren't under one of the explicit top-level taxons.
 
 When linking to a glossary term, the link is preferentially created to
 the lowest-level glossary that applies, but all glossaries in the
