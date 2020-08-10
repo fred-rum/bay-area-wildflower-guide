@@ -26,7 +26,7 @@ xx:more
 .. all other stamens are included
 . north peninsula
 
-==dwarf orthocarpus:Triphysaria pusilla
+==dwarf orthocarpus:T. pusilla
 . plant yellow-brown or +- purple
 . <b>corolla 4--7 mm</b>, +- purple
 .. all other corollas are >= 8 mm
