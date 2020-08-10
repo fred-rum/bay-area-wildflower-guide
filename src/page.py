@@ -110,7 +110,14 @@ def sort_pages(page_set, color=None, with_depth=False):
     # helper function to sort by name
     def by_name(page):
         if page.com:
-            return page.com.lower()
+            if page.sci:
+                # Since some pages may have the same common name, use the
+                # scientific name as a tie breaker to ensure a consistent order.
+                return page.com.lower() + '  ' + page.sci.lower()
+            else:
+                # If the page has no scientific name, then presumably it
+                # doesn't share its common name with any other pages.
+                return page.com.lower()
         else:
             return page.sci.lower()
 
@@ -888,7 +895,7 @@ class Page:
             name = child.name
             jpg = None
             if suffix:
-                if name + suffix in jpg_list:
+                if name + suffix in jpg_files:
                     jpg = name + suffix
                 else:
                     print(name + suffix + '.jpg not found on page ' + self.name)

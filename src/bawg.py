@@ -480,9 +480,9 @@ for loc in yaml_data:
                 park_map[x[y]] = y
                 park_loc[x[y]] = loc
 
-txt_list = get_file_list('txt', 'txt')
-thumb_list = get_file_list('thumbs', 'jpg')
-glossary_list = get_file_list('glossary', 'txt')
+txt_files = get_file_set('txt', 'txt')
+thumb_set = get_file_set('thumbs', 'jpg')
+glossary_files = get_file_set('glossary', 'txt')
 
 def get_name_from_jpg(jpg):
     name = re.sub(r',([-0-9]\S*|)$', r'', jpg)
@@ -499,16 +499,16 @@ def get_name_from_jpg(jpg):
 # If a file is newer in photos than in thumbs, re-create it.
 # If a file exists in thumbs and not photos, delete it.
 # If a file is newer in thumbs than in photos, leave it unchanged.
-for name in thumb_list:
-    if name not in jpg_list:
+for name in thumb_set:
+    if name not in jpg_files:
         thumb_file = root_path + '/thumbs/' + name + '.jpg'
         os.remove(thumb_file)
 
 mod_list = []
-for name in jpg_list:
+for name in jpg_files:
     photo_file = root_path + '/photos/' + name + '.jpg'
     thumb_file = root_path + '/thumbs/' + name + '.jpg'
-    if (name not in thumb_list or
+    if (name not in thumb_set or
         os.path.getmtime(photo_file) > os.path.getmtime(thumb_file)):
         mod_list.append(photo_file)
 
@@ -534,7 +534,7 @@ if mod_list:
 # the txt pages to initialize common and scientific names.  This
 # ensures that when we parse children (next), any name can be used and
 # linked correctly.
-for name in txt_list:
+for name in txt_files:
     page = Page(name)
     page.name_from_txt = True
     with open(root_path + "/txt/" + name + ".txt", "r", encoding="utf-8") as r:
@@ -552,7 +552,7 @@ for page in page_array[:]:
 
 # Record jpg names for associated pages.
 # Create a blank page for all unassociated jpgs.
-for jpg in sorted(jpg_list):
+for jpg in sorted(jpg_files):
     name = get_name_from_jpg(jpg)
     if name == '':
         print(f'No name for {jpg}')
@@ -808,7 +808,7 @@ top_list = [x for x in page_array if not x.parent]
 top_flower_list = [x for x in top_list if x.top_level == 'flowering plants']
 
 glossary_title_dict = {}
-for glossary_file in glossary_list:
+for glossary_file in glossary_files:
     glossary = Glossary(glossary_file)
     glossary.read_terms()
 

@@ -17,20 +17,22 @@ def convert_path_to_windows(path):
 src_path = convert_path_to_unix(sys.path[0])
 root_path = re.sub(r'/src$', r'', src_path)
 
-# Get a list of files with the expected suffix in the designated directory.
-def get_file_list(subdir, ext):
+# Get the set of files that have the expected suffix in the designated
+# directory.  The set includes only the base filename without the
+# extension.
+def get_file_set(subdir, ext):
     file_list = os.listdir(root_path + '/' + subdir)
-    base_list = []
+    base_list = set()
     for filename in file_list:
         pos = filename.rfind(os.extsep)
         if pos > 0:
             file_ext = filename[pos+len(os.extsep):].lower()
             if file_ext == ext:
                 base = filename[:pos]
-                base_list.append(base)
+                base_list.add(base)
     return base_list
 
-jpg_list = get_file_list('photos', 'jpg')
+jpg_files = get_file_set('photos', 'jpg')
 
 
 def link_figures(name, txt):
