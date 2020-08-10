@@ -2,15 +2,20 @@ import sys
 import os
 import re
 
-exec_path = sys.argv[0]
-if '/' in exec_path:
-    (src_path, partition, last) = exec_path.rpartition('/')
-    if '/' in src_path:
-        (root_path, partition, last) = src_path.rpartition('/')
-    else:
-        root_path = src_path + '/..'
-else:
-    root_path = '..'
+def convert_path_to_unix(path):
+    return re.sub(r'\\', r'/', path)
+
+def convert_path_to_windows(path):
+    return re.sub(r'/', r'\\', path)
+
+# I don't really understand what Windows is doing with / vs. \ path
+# separators or how they impact .. path handling.  So I avoid the ..
+# stuff by getting the path of the script and stripping off the
+# trailing /src part.  (Obviously, this assumes that no one has mucked
+# with the directory hierarchy, but that assumption would be baked in
+# regardless.)
+src_path = convert_path_to_unix(sys.path[0])
+root_path = re.sub(r'/src$', r'', src_path)
 
 # Get a list of files with the expected suffix in the designated directory.
 def get_file_list(subdir, ext):
@@ -93,7 +98,6 @@ def write_header(w, title, h1, nospace=False):
     w.write('<div id="body">\n')
     if h1:
         w.write(f'<h1 id="title"{space_class}>{h1}</h1>\n')
-
 
 def write_footer(w):
     # I don't put the year in the copyright because it's a pain to determine

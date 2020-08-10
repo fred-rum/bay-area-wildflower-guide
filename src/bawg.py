@@ -515,16 +515,17 @@ for name in jpg_list:
 if mod_list:
     with open(root_path + "/convert.txt", "w") as w:
         for filename in mod_list:
-            filename = re.sub(r'/', r'\\', filename)
+            filename = convert_path_to_windows(filename)
             w.write(filename + '\n')
-    root_mod = re.sub(r'/', r'\\', root_path)
+    convert_list = convert_path_to_windows(f'{root_path}/convert.txt')
+    thumb_glob = convert_path_to_windows(f'{root_path}/thumbs/*.jpg')
     cmd = ['C:/Program Files (x86)/IrfanView/i_view32.exe',
-           f'/filelist={root_mod}\\convert.txt',
+           f'/filelist={convert_list}',
            '/aspectratio',
            '/resize_long=200',
            '/resample',
            '/jpgq=80',
-           f'/convert={root_mod}\\thumbs\\*.jpg']
+           f'/convert={thumb_glob}']
     subprocess.Popen(cmd).wait()
 
 ###############################################################################
@@ -1060,8 +1061,7 @@ if mod_list or new_list:
     # open the default browser with the created HTML file
     total_list = mod_list + new_list
     if len(total_list) == 1:
-        os.startfile(root_path + '/html/' + total_list[0])
-    else:
-        os.startfile(mod_file)
+        mod_file = root_path + '/html/' + total_list[0]
+    os.startfile(mod_file)
 else:
     print("No files modified.")
