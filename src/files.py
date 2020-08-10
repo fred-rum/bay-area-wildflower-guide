@@ -1,3 +1,6 @@
+# This module provides some file-related functions that are used in
+# multiple other modules.
+
 import sys
 import os
 import re
@@ -60,6 +63,11 @@ def link_figures(name, txt):
                  repl_figure_text, txt, flags=re.MULTILINE)
     return txt
 
+# Write a standard HTML header.
+# title must always be valid and defines the window/tab title in the metadata.
+# h1 is optional and specifies text for an h1 header at the top of the page.
+# nospace indicates whether to omit the standard vertical whitespace below
+# the h1 header (e.g. because alternative taxon names will be listed below it).
 def write_header(w, title, h1, nospace=False):
     if nospace:
         space_class = ' class="nospace"'

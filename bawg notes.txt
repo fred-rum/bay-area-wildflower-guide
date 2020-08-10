@@ -1,12 +1,6 @@
 Make separate pages (and links) for flower lists (by color and "all")
 with names only (for bandwidth saving) and photos only (for showing off).
 
-It would be nice to have a glossary with popup links automatically created
-  where glossary words are used.
-Jepson example:
-<u class="dotted" title="Group of bracts more or less held together as a unit, subtending a flower, fruit (acorn cup), or inflorescence.">Involucre</u>
-Remember that mobile doesn't support hovering.
-
 Print errors:
   *no color listed
   *listed color not supported

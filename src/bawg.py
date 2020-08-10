@@ -452,7 +452,7 @@ def by_incomplete_obs(page):
 for page in page_array:
     page.write_html()
 
-if len(sys.argv) > 2 and sys.argv[2] == 'x':
+if len(sys.argv) > 1 and sys.argv[1] == 'x':
     # List the top 5 genus pages with an incomplete key,
     # as ordered by number of observations.
     # (If there are fewer than 5, then some random pages are listed as well.)

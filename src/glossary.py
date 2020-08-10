@@ -1,3 +1,4 @@
+import sys
 import re
 
 # My files
@@ -370,7 +371,7 @@ class Glossary:
         def by_usage(anchor):
             return self.used_dict[anchor]
 
-        if len(sys.argv) > 2 and sys.argv[2] == 'j':
+        if len(sys.argv) > 1 and sys.argv[1] == 'j':
             # List the top 10 glossary terms that link to Jepson instead of
             # one of my glossaries, in order of number of references.
             anchor_list = sorted(self.used_dict, key=by_usage, reverse=True)
