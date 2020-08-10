@@ -725,15 +725,6 @@ if park_nf_list:
     for x in park_nf_list:
         print("  " + repr(x))
 
-# try:
-#     os.mkdir(root_path + '/txt2')
-# except:
-#     pass
-#
-#for page in page_array:
-#    if page.name in txt_list or page.ext_photo_list or page.jpg_list:
-#        page.write_txt()        
-
 # Get a list of pages without parents (top-level pages).
 top_list = [x for x in page_array if not x.parent]
 

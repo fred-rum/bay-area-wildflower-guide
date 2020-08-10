@@ -18,7 +18,6 @@ x:ca
 . corolla 12--22 mm, yellow or white fading to pale purple
 . beak +- yellow
 . pouches 2--4 mm deep
-xx:more
 
 ==san francisco owl's-clover:T. floribunda
 . plant yellow-brown [green]

@@ -74,7 +74,6 @@ color: red purple
 
 ==hillside gooseberry:R. californicum
 color: red purple
-xx:ba
 . green or purple-red sepals
 . white petals
 . green to yellow anthers
@@ -86,7 +85,6 @@ xx:ba
 [
 <h3>no spines at nodes (currants)</h3>
 ==golden currant:R. aureum
-xx:ba
 . yellow sepals
 . yellow petals, aging red
 

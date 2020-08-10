@@ -422,10 +422,14 @@ class Page:
 
     def set_complete(self, matchobj):
         if matchobj.group(1) == 'x':
+            if self.genus_complete != None:
+                print(f'{self.name} has both x:{self.genus_complete} and x:{matchobj.group(3)}')
             self.genus_complete = matchobj.group(3)
             if matchobj.group(2):
                 self.genus_key_incomplete = True
         else:
+            if self.species_complete != None:
+                print(f'{self.name} has both xx:{self.species_complete} and xx:{matchobj.group(3)}')
             self.species_complete = matchobj.group(3)
             if matchobj.group(2):
                 self.species_key_incomplete = True
@@ -528,17 +532,27 @@ class Page:
                         print(f'page {self.name} has ambiguous child {com}')
                         return '==' + com + suffix
 
-                    if (com in name_page and
-                        not name_page[com].name_from_txt):
-                        # The user didn't explicitly say that the previous
-                        # user of the common name should name its page that
-                        # way.  Since we now know that there are two with
-                        # the same name, *neither* of them should use the
-                        # common name as the page name.  So change the other
-                        # page's page name to its scientific name.
-                        name_page[com].change_name_to_sci()
-                    strip = strip_sci(sci)
-                    child_page = Page(strip)
+                    if com in name_page:
+                        if name_page[com].name_from_txt:
+                            # The existing user of the name has priority since
+                            # its name came from the name of its txt file.
+                            pass
+                        else:
+                            # The user didn't explicitly say that the previous
+                            # user of the common name should name its page that
+                            # way.  Since we now know that there are two with
+                            # the same name, *neither* of them should use the
+                            # common name as the page name.  So change the other
+                            # page's page name to its scientific name.
+                            name_page[com].change_name_to_sci()
+                        strip = strip_sci(sci)
+                        child_page = Page(strip)
+                    else:
+                        # All other pages that use the same common name have
+                        # been explicitly given a different page name.  This
+                        # (presumably intentionally) leaves the page name
+                        # available for this child page.
+                        child_page = Page(com)
                 else:
                     # Prefer the common name in most cases.
                     child_page = Page(com)

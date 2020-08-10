@@ -168,7 +168,6 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0210+2322
 
 ==silver lupine:L. albifrons
 color: purple, pale purple
-xx:more
 . habit: <b>Subshrub, shrub, < 50 dm, hairy</b>, generally silver (+- green)
 . stem: decumbent to erect
 . leaf: cauline, clustered near base or not, hairy; stipules 6--20 mm; petiole 1--8 cm; leaflets 6--10, 10--45 mm
