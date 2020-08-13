@@ -26,6 +26,7 @@ xx:more
 ==eastwood's nemophila:N. pulchella
 . <b>corolla rotate</b>, 5--12 mm wide
 . white or blue
+. pedicel 10--30 mm (longer in fruit)
 . extremely rare in the bay area
 
 ==meadow nemophila:N. pedunculata
@@ -37,6 +38,7 @@ xx:more
 color: white
 . corolla bowl-shaped, 4--12 mm wide
 . white or +- blue, without dark veins or dots
+. pedicel < 10 mm [many photos imply longer, however] (longer in fruit)
 . style 2--4 mm
 . <b>lower leaves deep-lobed with similar lobes</b>, generally well separated, stalked
 . scattered throughout the bay area
