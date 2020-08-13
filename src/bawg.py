@@ -46,6 +46,7 @@ from files import *
 from easy import *
 from obs import *
 from page import *
+from photo import *
 from glossary import *
 
 # Theoretically I could find all flower pages because their iNaturalist
@@ -103,51 +104,6 @@ for loc in yaml_data:
                 park_loc[x[y]] = loc
 
 txt_files = get_file_set('txt', 'txt')
-thumb_set = get_file_set('thumbs', 'jpg')
-
-def get_name_from_jpg(jpg):
-    name = re.sub(r',([-0-9]\S*|)$', r'', jpg)
-
-    if is_sci(name):
-        # If the jpg uses an elaborated name, remove the elaborations to
-        # form the final page name.
-        name = strip_sci(name)
-
-    return name
-
-# Compare the photos directory with the thumbs directory.
-# If a file exists in photos and not thumbs, create it.
-# If a file is newer in photos than in thumbs, re-create it.
-# If a file exists in thumbs and not photos, delete it.
-# If a file is newer in thumbs than in photos, leave it unchanged.
-for name in thumb_set:
-    if name not in jpg_files:
-        thumb_file = root_path + '/thumbs/' + name + '.jpg'
-        os.remove(thumb_file)
-
-mod_list = []
-for name in jpg_files:
-    photo_file = root_path + '/photos/' + name + '.jpg'
-    thumb_file = root_path + '/thumbs/' + name + '.jpg'
-    if (name not in thumb_set or
-        os.path.getmtime(photo_file) > os.path.getmtime(thumb_file)):
-        mod_list.append(photo_file)
-
-if mod_list:
-    with open(root_path + "/convert.txt", "w") as w:
-        for filename in mod_list:
-            filename = convert_path_to_windows(filename)
-            w.write(filename + '\n')
-    convert_list = convert_path_to_windows(f'{root_path}/convert.txt')
-    thumb_glob = convert_path_to_windows(f'{root_path}/thumbs/*.jpg')
-    cmd = ['C:/Program Files (x86)/IrfanView/i_view32.exe',
-           f'/filelist={convert_list}',
-           '/aspectratio',
-           '/resize_long=200',
-           '/resample',
-           '/jpgq=80',
-           f'/convert={thumb_glob}']
-    subprocess.Popen(cmd).wait()
 
 ###############################################################################
 
@@ -171,17 +127,7 @@ for name in txt_files:
 for page in page_array[:]:
     page.parse_children()
 
-# Record jpg names for associated pages.
-# Create a blank page for all unassociated jpgs.
-for jpg in sorted(jpg_files):
-    name = get_name_from_jpg(jpg)
-    if name == '':
-        print(f'No name for {jpg}')
-    else:
-        page = find_page1(name)
-        if not page:
-            page = Page(name)
-        page.add_jpg(jpg)
+assign_jpgs()
 
 # Although other color checks are done later, we check for excess colors
 # here before propagating color to parent pages that might not have photos.
