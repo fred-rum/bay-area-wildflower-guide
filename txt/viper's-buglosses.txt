@@ -4,7 +4,7 @@ x:rare
 [
 <h3>similar species</h3>
 
-Distinguishing features are listed <a href="https://keyserver.lucidcentral.org/weeds/data/media/Html/echium_vulgare.htm">here</a>.
+Distinguishing features are listed <a href="https://keyserver.lucidcentral.org/weeds/data/media/Html/echium_vulgare.htm#Similar%20Species">here</a>.
 
 ==purple viper's-bugloss:E. plantagineum
 color: purple
