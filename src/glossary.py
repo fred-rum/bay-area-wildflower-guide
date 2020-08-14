@@ -53,7 +53,7 @@ class Glossary:
         # The terms are modified as above.
         self.anchor_terms = {}
 
-        # anchor_defn is a mapping from an anchor to the defined term
+        # anchor_defined is a mapping from an anchor to the defined term
         # as listed in the HTML.  This is not used for the Jepson glossary
         # since we don't create HTML for it.
         #
@@ -63,7 +63,7 @@ class Glossary:
         #   want to display beside it.
         # - capitalization is retained for optimal display in the HTML.
         # - easy_sub is applied for optimal display in the HTML.
-        self.anchor_defn = ''
+        self.anchor_defined = {}
 
     def set_parent(self, parent):
         self.parent = parent
@@ -263,10 +263,21 @@ class Glossary:
         def repl_defn(matchobj):
             words = matchobj.group(1)
             defn = matchobj.group(2)
-            word_list = [x.strip() for x in words.split(',')]
+
+            # Normalize the separator between all terms to a comma.
+            comma_words = re.sub(r'\((.*)\)', r', \1', words)
+            word_list = [x.strip() for x in comma_words.split(',')]
             anchor = word_list[0]
+
+            matchobj = re.match(r'(.*\(.*\))', words) # not comma_words
+            if matchobj:
+                defined_term = easy_sub(matchobj.group(1))
+            else:
+                defined_term = easy_sub(anchor)
+
             self.search_terms.append(word_list)
             self.record_terms(anchor, word_list)
+            self.anchor_defined[anchor] = defined_term
             return '{' + anchor + '} ' + defn
 
         with open(f'{root_path}/glossary/{self.name}.txt', mode='r') as f:
@@ -362,9 +373,9 @@ class Glossary:
             else:
                 related_str = ''
 
-            html_anchor = easy_sub(anchor)
+            defined_term = self.anchor_defined[anchor]
 
-            return f'<div class="defn" id="{anchor}"><dt>{html_anchor}</dt><dd>{defn}{related_str}</dd></div>'
+            return f'<div class="defn" id="{anchor}"><dt>{defined_term}</dt><dd>{defn}{related_str}</dd></div>'
 
         self.txt = easy_sub(self.txt)
 

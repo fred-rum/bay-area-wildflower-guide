@@ -42,6 +42,12 @@ punctuation, but obviously not a comma.  The punctuation should also
 be only interior to the term (e.g. "bell-shaped") so that it doesn't
 confuse the search for word boundaries.
 
+The anchor can also be followed by parenthesized terms which will then
+appear next to it in the glossary.  In this case, spacing is important
+since it is preserved in the HTML.  E.g.
+
+{calyx (calyces), calyxes} The collective term for all sepals of a flower.
+
 It's an abuse of HTML's dictionary capability, but word definitions
 can be interleaved with other HTML features such as headings and
 normal paragraph text.

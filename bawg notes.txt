@@ -174,17 +174,6 @@ while testing specific plural substitutions.  (But also keep the code
 to throw out non-word characters from each.)  E.g.
 is_same(name, 'z', 'zzes')
 
-Allow a glossary definition to display one or more parenthesized
-secondary terms next to the primary (anchor) term, e.g. "calyx
-(calyxes, calyces)".  The secondary terms are written into the
-glossary txt file in parentheses the same way as they are displayed.
-Note that unparenthesized secondary terms continue to work as before,
-so they trigger glossary links but are not displayed in the glossary.
-The anchor continues to be only the primary term.  The parenthesized
-terms must be marked specially in the glossary and must maintain their
-order for display purposes.  This may mean that the parenthesized
-section is recorded as a redundant list or string.
-
 Should I detect when a term is only ever referenced via the glossary
 of a lower-level taxon?  E.g. a flower term is accidentally included
 in the plant glossary.  But I allow terms to simply not be used, so

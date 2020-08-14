@@ -2,7 +2,7 @@ title:plant glossary
 
 <h2>Parts of a leaf</h2>
 
-{leaf,leaves,leaved} The major parts of a leaf are the blade, petiole, and stipule.  The petiole and stipule may each be present or not, while the blade may be very small or needle-like.
+{leaf (leaves),leaved} The major parts of a leaf are the blade, petiole, and stipule.  The petiole and stipule may each be present or not, while the blade may be very small or needle-like.
 
 {blade,blades} The expanded portion of a leaf where photosynthesis primarily occurs.  May be simple or compound with multiple leaflets.
 {petiole,petioles} The stalk of a leaf.
@@ -33,7 +33,7 @@ title:plant glossary
 <p>All involucre shapes may be flared at the tip or not, which is independent of the shape listed below.</p>
 
 {bell-shaped,bell} Rapidly widening at the base, then slowly expanding toward the tip.
-{cylindric} Significantly longer than wide with parallel sides.
+{cylindric,cylindrical} Significantly longer than wide with parallel sides.
 {rotate} Saucer-shaped.  For a corolla, generally means a fused base with little or no tube and spreading limbs.
 {urn-shaped,urn} Rapidly widening at the base, then narrowed toward the tip.
 
@@ -80,7 +80,7 @@ title:plant glossary
 {crenate,crenately,scalloped} With shallow, rounded teeth and usually with acute sinuses.  Could also be called "scalloped".
 {reniform} Like cordate, but distally rounded instead of pointed, and typically less acute at the base.
 
-{tooth,teeth,toothed} A small, roughly triangular projection.  See serrate and dentate.  Compare lobe.
+{tooth (teeth),toothed} A small, roughly triangular projection.  See serrate and dentate.  Compare lobe.
 {deltate} Shaped like the Greek letter &Delta;; an equilateral triangle with corners rounded or not; attached at base.
 {dentate} With teeth pointing outward.  Contrast serrate.
 {serrate,serrated} With teeth pointing tipward.  Contrast dentate.
@@ -128,10 +128,10 @@ title:plant glossary
 {alternate} Arranged singly along an axis.  Not all on the same side, but not necessarily on alternating sides, either.  E.g. may be spirally arranged.  See opposite, whorl.
 {annual,annuals} Lives for one year or less, generally without forming any woody parts.
 {axil,axils,axillary} The distal, adaxial angle between a main axis (e.g. a stem) and an appendage (e.g. a branch or leaf).
-{axis,axes} The direction of growth, or the structure that grows along the axis (e.g. a stem).
+{axis (axes)} The direction of growth, or the structure that grows along the axis (e.g. a stem).
 {beak,beaks} A projection from the distal end of a fruit.
 {biennial,biennials} Lives for only two years, generally flowering only in the second year.  Non-woody.
-{caudex,caudexes,caudices} Short stem below ground level.
+{caudex (caudices),caudexes} Short stem below ground level.
 {clasping,clasp,clasps} Mostly surrounding, e.g. a leaf blade or winged petiole clasping the stem.  See also decurrent.
 {compound} Generally, composed of multiple parts.  Opposite of simple.<ul><li>Leaf: divided into distinct leaflets connected by an axis but no blade material.</li><li>Umbel: an umbel of umbels</li></ul>
 {deciduous} Having leaves that fall off seasonally.  If another deciduous part is named, that part falls off naturally before other parts or is easily knocked off.

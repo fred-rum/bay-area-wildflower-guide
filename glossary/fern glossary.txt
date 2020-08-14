@@ -1,6 +1,6 @@
 title:fern glossary
 taxon:ferns
 
-{pinna,pinnae} The 1st-order division of a frond blade.
+{pinna (pinnae)} The 1st-order division of a frond blade.
 {pinnule,pinnules} The 2nd-order division of a frond blade.  (The 1st-order division of a pinna.)
 {stipe,stipes} In ferns, the frond stalk; equivalent to petiole.  Compare to stipule.

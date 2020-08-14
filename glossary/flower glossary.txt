@@ -14,13 +14,13 @@ figure:yellow mariposa lily
 {perianth,perianths} The collective term for the calyx and corolla (with the calyx subtending the corolla).  The term is usually used where the calyx and corolla are difficult to distinguish (except by position). [figure:san francisco woodland star]
 {perianth part,perianth parts} A sepal or petal.  The term is usually used where sepals and petals are difficult to distinguish. [figure:harvest brodiaea]
 {tepal,tepals} A perianth part, especially where the perianth parts are +- entirely free.
-{hypanthium,hypanthia,hypanthiums} The structure formed by the fused lower portions of the perianth. [figure:san francisco woodland star]
+{hypanthium (hypanthia),hypanthiums} The structure formed by the fused lower portions of the perianth. [figure:san francisco woodland star]
 
 <h3>Calyx</h3>
 
 figure:seep monkeyflower
 
-{calyx,calyces,calyxes} The collective term for all sepals of a flower.  Protects the flower in bud.  Usually green, but may match the color of the corolla or have some other color. [figure:seep monkeyflower]
+{calyx (calyces), calyxes} The collective term for all sepals of a flower.  Protects the flower in bud.  Usually green, but may match the color of the corolla or have some other color. [figure:seep monkeyflower]
 {sepal,sepals} A free or fused member of the calyx.  If partially fused, reference is usually made to a calyx lobe rather than a sepal as a whole. [figure:yellow mariposa lily]
 
 <h3>Corolla</h3>
@@ -51,7 +51,7 @@ figure:sea muilla
 {inflorescence,inflorescences} A cluster of flowers from a common point or sharing a stalk that has only flowers on it.
 {bract,bracts,bracted} Small leaf-like structures (or analogue) at the base of an inflorescence.  May be fused together or not.
 {bractlet,bractlets} Smaller secondary bract within an inflorescence, or a smaller secondary bract on a pedicel that may not subtend any structure.
-{epicalyx,epicalyces,epicalyxes} A whorl of bracts forming an extra calyx-like structure.
+{epicalyx (epicalyces),epicalyxes} A whorl of bracts forming an extra calyx-like structure.
 {peduncle,peduncles} The stalk of an inflorescence (or of a head in the sunflower family) or of an individual flower that is not part of an inflorescence.  See also pedicel.
 {scape,scapes} A peduncle, particularly one that arises directly from ground level with no cauline leaves.
 
