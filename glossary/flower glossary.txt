@@ -1,4 +1,3 @@
-title:flower glossary
 taxon:flowering plants
 
 <h2>Parts of a flower</h2>

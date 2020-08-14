@@ -1,4 +1,3 @@
-title:conifer glossary
 taxon:conifers
 
 {cone,cones} A conifer reproductive structure.  Maybe be woody and producing seeds or non-woody and producing pollen.

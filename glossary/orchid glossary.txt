@@ -1,4 +1,3 @@
-title:orchid glossary
 taxon:orchid family
 
 <h2>Parts of an orchid flower</h2>

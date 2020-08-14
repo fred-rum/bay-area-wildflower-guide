@@ -1,4 +1,3 @@
-title:fern glossary
 taxon:ferns
 
 {pinna (pinnae)} The 1st-order division of a frond blade.

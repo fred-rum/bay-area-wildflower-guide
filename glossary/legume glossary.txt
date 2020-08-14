@@ -1,4 +1,3 @@
-title:legume glossary
 taxon:legume family
 
 <h2>Parts of a pea flower (any flower in the legume family)</h2>

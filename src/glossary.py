@@ -8,14 +8,13 @@ from easy import *
 from trie import *
 
 glossary_taxon_dict = {}
-glossary_title_dict = {}
+glossary_name_dict = {}
 
 class Glossary:
     pass
 
     def __init__(self, name):
         self.name = name
-        self.title = None
         self.taxon = None
         self.parent = None # a single parent glossary (or None)
         self.child = set() # an unordered set of child glossaries
@@ -77,12 +76,12 @@ class Glossary:
 
     def find_dups(self, skip_glossary, term):
         def by_name(glossary):
-            return glossary.title
+            return glossary.name
 
         dup_list = []
         if self != skip_glossary and term in self.term_anchor:
             dup_list.append(self.glossary_link(self.term_anchor[term],
-                                               self.title))
+                                               self.name))
 
         for child in sorted(self.child, key=by_name):
             dup_list.extend(child.find_dups(skip_glossary, term))
@@ -104,7 +103,7 @@ class Glossary:
                 # Discard the 'none#' and return only the term.
                 return term
             else:
-                return glossary_title_dict[name + ' glossary'].get_link(term)
+                return glossary_name_dict[name + ' glossary'].get_link(term)
 
         lower = term.lower()
         if lower in self.term_anchor:
@@ -201,7 +200,7 @@ class Glossary:
         if self.is_jepson:
             short_name = 'Jepson'
         else:
-            short_name = re.sub(r' glossary$', '', self.title)
+            short_name = re.sub(r' glossary$', '', self.name)
 
         for anchor in self.term_anchor.keys():
             # Create a glossary entry tied to a specific glossary.
@@ -246,11 +245,6 @@ class Glossary:
             self.anchor_terms[anchor].add(word)
 
     def read_terms(self):
-        def repl_title(matchobj):
-            self.title = matchobj.group(1)
-            glossary_title_dict[self.title] = self
-            return ''
-
         def repl_taxon(matchobj):
             name = matchobj.group(1)
             if name == 'flowering plants':
@@ -287,8 +281,6 @@ class Glossary:
         # properly recognized as not to be touched.
         self.txt = link_figures(self.name, self.txt)
 
-        self.txt = re.sub(r'^title:\s*(.*?)\s*$',
-                          repl_title, self.txt, flags=re.MULTILINE)
         self.txt = re.sub(r'^taxon:\s*(.*?)\s*$',
                           repl_taxon, self.txt, flags=re.MULTILINE)
 
@@ -296,16 +288,14 @@ class Glossary:
         # Either value is appropriate for the term_anchor key.
         glossary_taxon_dict[self.taxon] = self
 
-        if not self.title:
-            print(f'title not defind for glossary "{self.name}"')
-            self.title = 'unknown glossary'
+        glossary_name_dict[self.name] = self
 
         # Read definitions and modify them to avoid self-linking.
         self.txt = re.sub(r'^{([^\}]+)}\s+(.*)$',
                           repl_defn, self.txt, flags=re.MULTILINE)
 
     def read_jepson_terms(self):
-        self.title = 'Jepson' # used only self links from a glossary definition
+        self.name = 'Jepson' # used only for self links from a glossary defn
         self.is_jepson = True
         self.used_dict = {}
 
@@ -338,7 +328,7 @@ class Glossary:
 
     def set_index(self):
         def by_name(glossary):
-            return glossary.title
+            return glossary.name
 
         self.index = len(glossary_list)
         glossary_list.append(self)
@@ -347,12 +337,12 @@ class Glossary:
 
     def write_toc(self, w, current):
         def by_name(glossary):
-            return glossary.title
+            return glossary.name
 
         if self == current:
-            w.write(f'<b>{self.title}</b></br>')
+            w.write(f'<b>{self.name}</b></br>')
         else:
-            w.write(f'<a href="{self.name}.html">{self.title}</a></br>')
+            w.write(f'<a href="{self.name}.html">{self.name}</a></br>')
 
         if self.child:
             w.write('<div class="toc-indent">\n')
@@ -406,18 +396,18 @@ class Glossary:
                           repl_defns, self.txt, flags=re.MULTILINE)
 
         with open(f'{working_path}/html/{self.name}.html', mode='w') as w:
-              write_header(w, self.title, None, nospace=True)
+              write_header(w, self.name, None, nospace=True)
               w.write('<h4 class="title">Glossary table of contents</h4>\n')
               master_glossary.write_toc(w, self)
-              w.write(f'<a href="http://ucjeps.berkeley.edu/IJM_glossary.html">Jepson eFlora glossary</a>')
-              w.write(f'<h1>{self.title}</h1>\n')
+              w.write(f'<a href="http://ucjeps.berkeley.edu/IJM_glossary.html">Jepson eFlora glossary</a>\n')
+              w.write(f'<h1>{self.name}</h1>\n')
               w.write(self.txt)
               write_footer(w)
 
     # Write search terms for my glossaries to pages.js
     def write_search_terms(self, w):
         def by_name(glossary):
-            return glossary.title
+            return glossary.name
 
         # The glossary page without a named term can be treated just like
         # an unobserved (low-priority) page.  It's simply a link to an
