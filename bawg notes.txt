@@ -202,5 +202,18 @@ Should I detect when a term is only ever referenced via the glossary
 of a lower-level taxon?  E.g. a flower term is accidentally included
 in the plant glossary.
 
-Use none:<term> instead of glossaryXterm to exclude a term from
-linking within a definition.
+How should we handle the definition of "disk" which refers to "disk
+flowers".  "disk flowers" should really be a glossary link, but
+"none#disk" prevents it (as does "glossaryXdisk", in a different way).
+Do I need to run the glossary substitution individually on each line
+of the glossary and then throw away a match on "disk" but not "disk
+flower" for that line only?  It's only for the few glossary files, so
+perhaps not that expensive in time (although another annoying
+line-by-line pass to program).
+
+Similarly, in the "N-pinnate" definition, "1-pinnate" should not link,
+but the subset of "pinnate" should.  That works with the glossaryX
+scheme, but not when the full-term is matched and discarded.  It may
+be necessary to actually remove the current line's terms from the trie
+before performing glossary linking.  E.g. make a copy of the trie,
+then perform a removal on each term (new trie function).

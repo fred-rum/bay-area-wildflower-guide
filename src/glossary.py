@@ -20,7 +20,7 @@ class Glossary:
         self.parent = None # a single parent glossary (or None)
         self.child = set() # an unordered set of child glossaries
         self.term = [] # an ordered list of term lists
-        self.glossary_dict = {} # mapping of term to anchor
+        self.term_anchor = {} # mapping of term to anchor
         self.is_jepson = False
 
     def set_parent(self, parent):
@@ -38,8 +38,8 @@ class Glossary:
             return glossary.title
 
         dup_list = []
-        if self != skip_glossary and term in self.glossary_dict:
-            dup_list.append(self.glossary_link(self.glossary_dict[term],
+        if self != skip_glossary and term in self.term_anchor:
+            dup_list.append(self.glossary_link(self.term_anchor[term],
                                                self.title))
 
         for child in sorted(self.child, key=by_name):
@@ -65,8 +65,8 @@ class Glossary:
                 return glossary_title_dict[name + ' glossary'].get_link(term)
 
         lower = term.lower()
-        if lower in self.glossary_dict:
-            anchor = self.glossary_dict[lower]
+        if lower in self.term_anchor:
+            anchor = self.term_anchor[lower]
             if self.is_jepson:
                 if anchor in self.used_dict:
                     self.used_dict[anchor] += 1
@@ -138,7 +138,7 @@ class Glossary:
         else:
             short_name = re.sub(r' glossary$', '', self.title)
 
-        for anchor in self.glossary_dict.keys():
+        for anchor in self.term_anchor.keys():
             # Create a glossary entry tied to a specific glossary.
             glossary_cross_set.add(f'{short_name}#{anchor}')
 
@@ -157,7 +157,7 @@ class Glossary:
 
 
     def create_local_set(self):
-        self.glossary_local_set = set(iter(self.glossary_dict.keys()))
+        self.glossary_local_set = set(iter(self.term_anchor.keys()))
 
     def create_hierarchy_set(self):
         self.glossary_set = self.glossary_local_set
@@ -183,9 +183,9 @@ class Glossary:
         ex = trie_pattern(self.glossary_set)
         self.glossary_regex = re.compile(rf'\b({ex})\b', re.IGNORECASE)
 
-    def record_in_glossary_dict(self, anchor, word):
+    def record_term_anchor(self, anchor, word):
         word = easy_sub_safe(word.lower())
-        self.glossary_dict[word] = anchor
+        self.term_anchor[word] = anchor
 
     def read_terms(self):
         def repl_title(matchobj):
@@ -209,7 +209,7 @@ class Glossary:
             anchor = word_list[0]
             self.term.append(word_list)
             for word in word_list:
-                self.record_in_glossary_dict(anchor, word)
+                self.record_term_anchor(anchor, word)
                 # Prevent a glossary definition from linking the terms
                 # it is currently defining, either to its own
                 # definition or to a higher-level glossary.
@@ -234,7 +234,7 @@ class Glossary:
                           repl_taxon, self.txt, flags=re.MULTILINE)
 
         # self.taxon is now either a name or (if unset) None.
-        # Either value is appropriate for the glossary_dict key.
+        # Either value is appropriate for the term_anchor key.
         glossary_taxon_dict[self.taxon] = self
 
         if not self.title:
@@ -276,7 +276,7 @@ class Glossary:
 
             self.term.append(word_list)
             for word in word_list:
-                self.record_in_glossary_dict(anchor, word)
+                self.record_term_anchor(anchor, word)
 
     def set_index(self):
         def by_name(glossary):
@@ -361,7 +361,7 @@ class Glossary:
     def write_jepson_search_terms(self, w):
         for term in self.term:
             coms_str = '","'.join(term)
-            anchor = self.glossary_dict[term[0]]
+            anchor = self.term_anchor[term[0]]
             if term[0] == anchor:
                 anchor_str = ''
             else:
