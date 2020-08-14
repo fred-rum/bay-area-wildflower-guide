@@ -1,4 +1,4 @@
-#!/cygdrive/c/Python37/python.exe
+#!/cygdrive/c/Python37/python
 #!/usr/bin/env python
 
 # Run as:

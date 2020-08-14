@@ -25,6 +25,22 @@ def _add(trie, term):
     # Note that other terms may continue from the same ref point.
     ref[''] = None
 
+# Remove a single string (term) from a trie dictionary.
+# This assumes that the term is present in the trie.  If not, it will crash.
+def _remove(trie, term):
+    if term:
+        # Recurse into the trie until we reach the trie position corresponding
+        # to the of the term.
+        char = term[0]
+        _remove(trie[char], term[1:])
+
+        # If trie[char] is now empty, it's because the deleted term was the
+        # only way to reach it.  In that case, delete it.
+        if not trie[char]:
+            del trie[char]
+    else:
+        del trie['']
+
 # Create a regex-type string that matches the trie (or sub-trie) argument.
 def _pattern(trie):
     if '' in trie and len(trie.keys()) == 1:
@@ -84,6 +100,13 @@ class Trie:
     def add(self, term_set):
         for term in term_set:
             _add(self.trie, term)
+
+    # Remove one or more terms to the trie object.
+    # * This function isn't used in the current code, but I hesitate to remove
+    # it since it's been tested.
+    def remove(self, term_set):
+        for term in term_set:
+            _remove(self.trie, term)
 
     # Create a regex pattern from the trie.  (a string, not an actual regex.)
     def get_pattern(self):

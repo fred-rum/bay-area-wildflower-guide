@@ -63,7 +63,11 @@ glossary or any glossary assigned to a higher-level taxon.  However, a
 link is never created when a term is used within its own definition.
 Instead, a set of links is appended to the end of a definition to link
 to alternative definitions in other glossaries (regardless of relative
-hierarchy).
+hierarchy).  Note that although a term can't link to its own
+definition, a subset of that term can link to a different definition.
+E.g. "1-pinnate" can't link to itself, but the "pinnate" portion can
+link to the corresponding definition.  If that isn't wanted, use the
+"none#" syntax described below.
 
 The text of a taxon page or glossary page can also link to a term in a
 specified glossary.  E.g. "conifer#cone" links the word "cone" to the

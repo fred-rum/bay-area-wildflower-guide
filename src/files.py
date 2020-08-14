@@ -17,7 +17,9 @@ def convert_path_to_windows(path):
 # trailing /src part.  (Obviously, this assumes that no one has mucked
 # with the directory hierarchy, but that assumption would be baked in
 # regardless.)
-src_path = convert_path_to_unix(sys.path[0])
+src_path = os.path.dirname(os.path.abspath( __file__ ))
+# sys.path[0] is sometimes a relative path, e.g. when run under cProfile
+src_path = convert_path_to_unix(src_path)
 root_path = re.sub(r'/src$', r'', src_path)
 
 # Get the set of files that have the expected suffix in the designated

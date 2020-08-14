@@ -76,13 +76,36 @@ class Glossary:
         else:
             return self.parent.get_link(term)
 
-    def link_glossary_words(self, txt, is_glossary=False):
+    def link_glossary_words(self, txt, is_glossary=False, exclude=None):
         # This function is called for a glossary word match.
         # Replace the matched word with a link to the primary term
         # in the glossary.
         def repl_glossary(matchobj):
             term = matchobj.group(1)
-            return self.get_link(term)
+            if exclude and term.lower() in exclude:
+                # A term matches within its own definition, so we
+                # don't want to make a link for it.  On the other
+                # hand, a subset of the term might match a different
+                # glossary entry.  So separate the last letter and try
+                # to link again.  This will perform the next-highest
+                # priority match if possible.  If nothing changes,
+                # instead separate the first letter and try to link
+                # again.  (Note that this doesn't catch the case where
+                # a match could be made starting inside the excluded
+                # term and extending beyond its end.  I doubt that
+                # would ever matter, and if it did we'd just miss a
+                # link.  Not a big deal.)
+                sub_term = re.sub(self.glossary_regex, repl_glossary, term[:-1])
+                alt_term = sub_term + term[-1]
+                if alt_term != term: return alt_term
+
+                sub_term = re.sub(self.glossary_regex, repl_glossary, term[1:])
+                alt_term = term[0] + sub_term
+                return alt_term
+            else:
+                # We have a glossary match, and it's not an excluded term.
+                # Replace the term with a link to its glossary entry.
+                return self.get_link(term)
 
         # Add glossary links in group 1, but leave group 2 unchanged.
         def repl_glossary_pair(matchobj):
@@ -168,17 +191,6 @@ class Glossary:
 
         self.glossary_set = self.glossary_set.union(glossary_cross_set)
 
-    def create_regex_old(self):
-        # sort the glossary list in reverse order so that for cases where two
-        # phrases start the same and one is a subset of the other, the longer
-        # phrase is checked first.  (This relies on the fact that expression
-        # checking is done primarily in order through the searched text, and
-        # secondarily in order through the regex.)
-        glossary_list = sorted(iter(self.glossary_set), reverse=True)
-
-        ex = '|'.join(map(re.escape, glossary_list))
-        self.glossary_regex = re.compile(rf'\b({ex})\b', re.IGNORECASE)
-
     def create_regex(self):
         trie = Trie(self.glossary_set)
         ex = trie.get_pattern()
@@ -211,15 +223,6 @@ class Glossary:
             self.term.append(word_list)
             for word in word_list:
                 self.record_term_anchor(anchor, word)
-                # Prevent a glossary definition from linking the terms
-                # it is currently defining, either to its own
-                # definition or to a higher-level glossary.
-                # (Higher-level glossary links will be added later.)
-                # We do this by prepending 'glossaryX' to any
-                # occurance of the defined terms in the definition.
-                # We'll remove this after glossary links are created.
-                defn = re.sub(r'\b' + word + r'\b', 'glossaryX' + word, defn,
-                              re.IGNORECASE)
             return '{' + words + '} ' + defn
 
         with open(f'{root_path}/glossary/{self.name}.txt', mode='r') as f:
@@ -323,11 +326,28 @@ class Glossary:
 
         self.txt = easy_sub(self.txt)
 
-        self.txt = self.link_glossary_words(self.txt, is_glossary=True)
-
-        # Remove the inserted 'glossaryX' text to return the (unlinked)
-        # glossary terms to their normal text.
-        self.txt = re.sub(r'glossaryX', '', self.txt)
+        # Link glossary words one line at a time because we want to take
+        # special action on lines that define glossary words.
+        c_list = []
+        for c in self.txt.split('\n'):
+            # Look for a glossary definition on the line.
+            matchobj = re.match(r'^{([^\}]+)}\s+(.*)$', c)
+            if matchobj:
+                # Link glossary terms in the definition, but excluding any
+                # terms being defined on this line.  Although it seems
+                # intuitive to remove the excluded terms from glossary_regex,
+                # recompiling the monster regex hundreds of times is a huge
+                # performance hit.  Instead, we leave the regex alone and
+                # handle the excluded terms as they are matched.
+                words = matchobj.group(1)
+                defn = matchobj.group(2)
+                exclude_list = [easy_sub_safe(x.strip().lower()) for x in words.split(',')]
+            else:
+                exclude_list = None
+            c = self.link_glossary_words(c, is_glossary=True,
+                                         exclude=exclude_list)
+            c_list.append(c)
+        self.txt = '\n'.join(c_list)
 
         self.txt = re.sub(r'^{([^\}]+)}\s+(.*)$',
                           repl_defns, self.txt, flags=re.MULTILINE)

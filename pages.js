@@ -1743,7 +1743,7 @@ var pages=[
 {idx:0,com:["beak","beaks"],x:"g"},
 {idx:0,com:["biennial","biennials"],x:"g"},
 {idx:0,com:["caudex","caudexes","caudices"],x:"g"},
-{idx:0,com:["clasping","clasp","clasp"],x:"g"},
+{idx:0,com:["clasping","clasp","clasps"],x:"g"},
 {idx:0,com:["compound"],x:"g"},
 {idx:0,com:["deciduous"],x:"g"},
 {idx:0,com:["decurrent"],x:"g"},
