@@ -8,7 +8,7 @@
 
 import re
 
-# Add a string (term) to the trie.
+# Add a single string (term) to a trie dictionary.
 def _add(trie, term):
     ref = trie
     for char in term:
@@ -20,8 +20,10 @@ def _add(trie, term):
             pass
         # Recurse into the sub-trie.
         ref = ref[char]
-    ref[''] = None # This indicates that the term completes here.
+
+    # A char of '' indicates that a term completes here.
     # Note that other terms may continue from the same ref point.
+    ref[''] = None
 
 # Create a regex-type string that matches the trie (or sub-trie) argument.
 def _pattern(trie):
@@ -72,9 +74,17 @@ def _pattern(trie):
             result = f'(?:{result})?'
     return result
 
-# Create a regex pattern out of a set of strings.
-def trie_pattern(word_set):
-    trie = {}
-    for word in word_set:
-        _add(trie, word)
-    return _pattern(trie)
+class Trie:
+    def __init__(self, term_set=None):
+        self.trie = {}
+        if term_set:
+            self.add(term_set)
+
+    # Add one or more terms to the trie object.
+    def add(self, term_set):
+        for term in term_set:
+            _add(self.trie, term)
+
+    # Create a regex pattern from the trie.  (a string, not an actual regex.)
+    def get_pattern(self):
+        return _pattern(self.trie)

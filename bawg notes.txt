@@ -216,4 +216,8 @@ but the subset of "pinnate" should.  That works with the glossaryX
 scheme, but not when the full-term is matched and discarded.  It may
 be necessary to actually remove the current line's terms from the trie
 before performing glossary linking.  E.g. make a copy of the trie,
-then perform a removal on each term (new trie function).
+then perform a removal on each term (new trie function).  Or remove
+the terms and then add them again, and restore the compiled regex from
+a copy for performance.  Either way, it means keeping a copy of the
+trie structure, which currently isn't done.  Note that cross-ref terms
+can (and should) be left unchanged so that they are linked normally.

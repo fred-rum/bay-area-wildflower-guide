@@ -180,7 +180,8 @@ class Glossary:
         self.glossary_regex = re.compile(rf'\b({ex})\b', re.IGNORECASE)
 
     def create_regex(self):
-        ex = trie_pattern(self.glossary_set)
+        trie = Trie(self.glossary_set)
+        ex = trie.get_pattern()
         self.glossary_regex = re.compile(rf'\b({ex})\b', re.IGNORECASE)
 
     def record_term_anchor(self, anchor, word):
