@@ -1834,6 +1834,7 @@ var pages=[
 {idx:3,com:["staminode","staminodes"],x:"g"},
 {idx:3,com:["inflorescence","inflorescences"],x:"g"},
 {idx:3,com:["bract","bracts","bracted"],x:"g"},
+{idx:3,com:["bractlet","bractlets"],x:"g"},
 {idx:3,com:["epicalyx","epicalyces","epicalyxes"],x:"g"},
 {idx:3,com:["peduncle","peduncles"],x:"g"},
 {idx:3,com:["scape","scapes"],x:"g"},
