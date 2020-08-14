@@ -1,11 +1,16 @@
 sci:Cortaderia spp.
+x:ca
 
 ==pampas grass:C. selloana
 color: other
 . panicle at most only slightly elevated above foliage
 . inflorescence stalk 2--3 &times; inflorescence length
+. fresh flowers are white/cream (becoming tan with age)
+. sheath glabrous or sparsely hairy [<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0175+3301+2288+0099">example</a>]
 
 ==purple pampas grass:C. jubata
 color: other
 . panicle well-elevated above foliage
 . inflorescence stalk 4--5 &times; inflorescence length
+. fresh flowers are pale purple (becoming tan with age)
+. sheath densely hairy [<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0108+1022">example</a>]
