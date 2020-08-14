@@ -567,6 +567,15 @@ else:
 # We do this even if no files have apparently been modified because
 # there could be other changes not detected, e.g. deleted files.
 shutil.rmtree(root_path + '/html', ignore_errors=True)
+
+# shutil.rmtree theoretically waits for the operation to complete, but
+# Windows apparently claims to be complete while the delete is still
+# in progress, e.g. if the directory is locked because it is the working
+# directory of a cmd shell.  If the problem is only brief, then we want
+# to quietly wait it out.  (For now, there is no quiet period, but I'll
+# adjust it based on what I see.)  If the problem continues, print a
+# message to let the user know to either unlock the directory manually
+# or kill the script.
 done = False
 tries = 0
 while not done:
