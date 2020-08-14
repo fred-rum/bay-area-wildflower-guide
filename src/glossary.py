@@ -352,7 +352,7 @@ class Glossary:
         self.txt = re.sub(r'^{([^\}]+)}\s+(.*)$',
                           repl_defns, self.txt, flags=re.MULTILINE)
 
-        with open(f'{root_path}/html/{self.name}.html', mode='w') as w:
+        with open(f'{working_path}/html/{self.name}.html', mode='w') as w:
               write_header(w, self.title, None, nospace=True)
               w.write('<h4 class="title">Glossary table of contents</h4>\n')
               master_glossary.write_toc(w, self)

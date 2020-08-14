@@ -1041,7 +1041,7 @@ class Page:
             else:
                 return '<p/>\n'
 
-        with open(root_path + "/html/" + self.url() + ".html",
+        with open(working_path + "/html/" + self.url() + ".html",
                   "w", encoding="utf-8") as w:
             com = self.com
             elab = self.elab

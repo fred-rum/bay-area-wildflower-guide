@@ -32,7 +32,6 @@ import sys
 import os
 import shutil
 import filecmp
-import subprocess
 import re
 import csv
 import io
@@ -40,6 +39,7 @@ import yaml
 import codecs
 from unidecode import unidecode
 import datetime
+import time
 
 # My files
 from files import *
@@ -59,29 +59,9 @@ non_flower_top_pages = ('conifers', 'ferns')
 
 year = datetime.datetime.today().year
 
-if os.path.isfile(root_path + '/html/_mod.html'):
-    # Keep a copy of the previous html files so that we can
-    # compare differences after creating the new html files.
-    shutil.rmtree(root_path + '/prev', ignore_errors=True)
-
-    # Apparently Windows sometimes lets the call complete when the
-    # remove is not actually done yet, and then the rename fails.
-    # In that case, keep retrying the rename until it succeeds.
-    done = False
-    while not done:
-        try:
-            os.rename(root_path + '/html', root_path + '/prev')
-            done = True
-        except WindowsError as error:
-            pass
-else:
-    # _mod.html doesn't exist, which implies that the most recent run
-    # crashed before creating it.  There's no point in comparing the changes
-    # with the crashed run, so we discard it and keep the previous run to
-    # compare against instead.
-    shutil.rmtree(root_path + '/html', ignore_errors=True)
-
-os.mkdir(root_path + '/html')
+shutil.rmtree(working_path, ignore_errors=True)
+os.mkdir(working_path)
+os.mkdir(working_path + '/html')
 
 # key: color
 # value: page list
@@ -465,7 +445,7 @@ def write_page_list(page_list, color, color_match):
     s = io.StringIO()
     list_matches(s, page_list, False, color_match, set())
 
-    with open(root_path + f"/html/{color}.html", "w", encoding="utf-8") as w:
+    with open(working_path + f"/html/{color}.html", "w", encoding="utf-8") as w:
         title = color.capitalize() + ' flowers'
         write_header(w, title, title)
         obs = Obs(color_match)
@@ -483,6 +463,11 @@ write_page_list(top_flower_list, 'all', None)
 
 ###############################################################################
 # Create pages.js
+#
+# We create it in root_path instead of working_path because we're just about
+# done.  Since pages.js isn't compared to the previous version, the only
+# disadvantage if the script crashes just after creating pages.js, it may
+# point to pages that don't exist.  Whatever.
 
 def add_elab(elabs, elab):
     if elab and elab != 'n/a' and elab not in elabs:
@@ -550,19 +535,20 @@ with open(search_file, "w", encoding="utf-8") as w:
 # Create an HTML file with links to all new files and all modified files.
 # (Ignore deleted files.)
 
-file_list = sorted(os.listdir(root_path + '/html'))
+file_list = sorted(os.listdir(working_path + '/html'))
 new_list = []
 mod_list = []
 for name in file_list:
     if name.endswith('.html'):
-        if not os.path.isfile(root_path + '/prev/' + name):
+        if not os.path.isfile(root_path + '/html/' + name):
             new_list.append(name)
-        elif not filecmp.cmp(root_path + '/prev/' + name,
-                             root_path + '/html/' + name):
+        elif not filecmp.cmp(root_path + '/html/' + name,
+                             working_path + '/html/' + name):
             mod_list.append(name)
 
-if mod_list or new_list:
-    mod_file = root_path + "/html/_mod.html"
+total_list = mod_list + new_list
+if total_list:
+    mod_file = working_path + "/html/_mod.html"
     with open(mod_file, "w", encoding="utf-8") as w:
         if new_list:
             w.write('<h1>New files</h1>\n')
@@ -572,11 +558,33 @@ if mod_list or new_list:
             w.write('<h1>Modified files</h1>\n')
             for name in mod_list:
                 w.write(f'<a href="{name}">{name}</a><p/>\n')
-
-    # open the default browser with the created HTML file
-    total_list = mod_list + new_list
-    if len(total_list) == 1:
-        mod_file = root_path + '/html/' + total_list[0]
-    os.startfile(mod_file)
 else:
     print("No files modified.")
+
+# All working files have been created.  Move the files/directories out
+# of the working directory and into their final places.
+#
+# We do this even if no files have apparently been modified because
+# there could be other changes not detected, e.g. deleted files.
+shutil.rmtree(root_path + '/html', ignore_errors=True)
+done = False
+tries = 0
+while not done:
+    try:
+        tries += 1
+        os.rename(working_path + '/html', root_path + '/html')
+        done = True
+    except WindowsError as error:
+        if tries == 1:
+            print('Having trouble removing the old html and renaming the new html...', flush=True)
+        time.sleep(0.1)
+if tries > 1:
+    print(f'Completed in {tries} tries.')
+
+if total_list:
+    # open the default browser with the created HTML file
+    if len(total_list) == 1:
+        mod_file = root_path + '/html/' + total_list[0]
+    else:
+        mod_file = root_path + '/html/_mod.html'
+    os.startfile(mod_file)

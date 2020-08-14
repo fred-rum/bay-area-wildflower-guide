@@ -22,6 +22,14 @@ src_path = os.path.dirname(os.path.abspath( __file__ ))
 src_path = convert_path_to_unix(src_path)
 root_path = re.sub(r'/src$', r'', src_path)
 
+# Create new files in the working_path.  This has a few advantages:
+# - Allow the user to continue browsing old files while updates are in
+#   progress.
+# - If the script crashes, the previous valid files remain in place so
+#   that the next run can compare against them and not against the files
+#   from the crashed run.
+working_path = root_path + '/.in_progress'
+
 # Get the set of files that have the expected suffix in the designated
 # directory.  The set includes only the base filename without the
 # extension.

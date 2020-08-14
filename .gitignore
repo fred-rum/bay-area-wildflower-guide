@@ -25,7 +25,6 @@ html/other observations.html
 html/_mod.html
 figures/*.jpg
 observations.csv
-convert.txt
 prev/
 \#*#
 new/
@@ -33,3 +32,4 @@ new.pickle
 debug.log
 markers.*
 __pycache__/
+.in-progress/

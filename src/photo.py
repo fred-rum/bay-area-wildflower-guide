@@ -1,3 +1,6 @@
+import subprocess
+
+# My files
 from files import *
 from page import *
 
@@ -18,6 +21,13 @@ def get_name_from_jpg(jpg):
 # If a file is newer in photos than in thumbs, re-create it.
 # If a file exists in thumbs and not photos, delete it.
 # If a file is newer in thumbs than in photos, leave it unchanged.
+#
+# We manipulate thumbs in root_path instead of working_path because
+# not all files get re-created (normally just a small minority), and
+# it'd be a pain to merge the changes later.  Since thumbs aren't
+# compared to the previous version, the only disadvantage in not
+# using working_path is that some thumbs may disappear during the run,
+# and that is OK.
 for name in thumb_set:
     if name not in jpg_files:
         thumb_file = root_path + '/thumbs/' + name + '.jpg'
@@ -32,11 +42,11 @@ for name in jpg_files:
         mod_list.append(photo_file)
 
 if mod_list:
-    with open(root_path + "/convert.txt", "w") as w:
+    with open(working_path + "/convert.txt", "w") as w:
         for filename in mod_list:
             filename = convert_path_to_windows(filename)
             w.write(filename + '\n')
-    convert_list = convert_path_to_windows(f'{root_path}/convert.txt')
+    convert_list = convert_path_to_windows(f'{working_path}/convert.txt')
     thumb_glob = convert_path_to_windows(f'{root_path}/thumbs/*.jpg')
     cmd = ['C:/Program Files (x86)/IrfanView/i_view32.exe',
            f'/filelist={convert_list}',
