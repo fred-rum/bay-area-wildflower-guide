@@ -19,9 +19,51 @@ class Glossary:
         self.taxon = None
         self.parent = None # a single parent glossary (or None)
         self.child = set() # an unordered set of child glossaries
-        self.term = [] # an ordered list of term lists
-        self.term_anchor = {} # mapping of term to anchor
-        self.is_jepson = False
+
+        self.is_jepson = False # changed to True for the Jepson glossary
+
+        # search_terms is an ordered list of term lists to be written
+        # to pages.js.  The first term in each list is also the anchor.
+        #
+        # For the anchor and all other terms are unmodified:
+        # - capitalization is retained for optimal display in auto-complete.
+        # - easy_sub is not applied because it would confuse search matching.
+        #   (And the original punctuation can match any user punctuation.)
+        self.search_terms = []
+
+        # term_anchor is a mapping from each term to an anchor.
+        # This is used for creating glossary_regex and also for looking up
+        # a matched term to get its anchor.
+        #
+        # The terms are modified somewhat:
+        # - terms are lowercase as the canonical form for comparison.
+        # - easy_sub is applied since that's what the regex will match.
+        # The anchor remains unmodified:
+        # - capitalization is retained for optimal display in the URL.
+        # - easy_sub is not applied because a URL doesn't support special
+        #   HTML characters.
+        self.term_anchor = {}
+
+        # anchor_terms is a mapping from each anchor to a set of terms.
+        # This is used to exclude those terms within a definition line
+        # from linking.  This is not used for the Jepson glossary
+        # since we don't create HTML for it.
+        #
+        # The anchor remains unmodified as above.
+        # The terms are modified as above.
+        self.anchor_terms = {}
+
+        # anchor_defn is a mapping from an anchor to the defined term
+        # as listed in the HTML.  This is not used for the Jepson glossary
+        # since we don't create HTML for it.
+        #
+        # The anchor remains unmodified as above.
+        # The defined term is a string as follows:
+        # - it includes the anchor and any parenthesized terms that we
+        #   want to display beside it.
+        # - capitalization is retained for optimal display in the HTML.
+        # - easy_sub is applied for optimal display in the HTML.
+        self.anchor_defn = ''
 
     def set_parent(self, parent):
         self.parent = parent
@@ -196,9 +238,12 @@ class Glossary:
         ex = trie.get_pattern()
         self.glossary_regex = re.compile(rf'\b({ex})\b', re.IGNORECASE)
 
-    def record_term_anchor(self, anchor, word):
-        word = easy_sub_safe(word.lower())
-        self.term_anchor[word] = anchor
+    def record_terms(self, anchor, word_list):
+        self.anchor_terms[anchor] = set()
+        for word in word_list:
+            word = easy_sub_safe(word.lower())
+            self.term_anchor[word] = anchor
+            self.anchor_terms[anchor].add(word)
 
     def read_terms(self):
         def repl_title(matchobj):
@@ -220,10 +265,9 @@ class Glossary:
             defn = matchobj.group(2)
             word_list = [x.strip() for x in words.split(',')]
             anchor = word_list[0]
-            self.term.append(word_list)
-            for word in word_list:
-                self.record_term_anchor(anchor, word)
-            return '{' + words + '} ' + defn
+            self.search_terms.append(word_list)
+            self.record_terms(anchor, word_list)
+            return '{' + anchor + '} ' + defn
 
         with open(f'{root_path}/glossary/{self.name}.txt', mode='r') as f:
             self.txt = f.read()
@@ -278,9 +322,8 @@ class Glossary:
             c = re.sub(r';', r',', c)
             word_list = [x.strip() for x in c.split(',')]
 
-            self.term.append(word_list)
-            for word in word_list:
-                self.record_term_anchor(anchor, word)
+            self.search_terms.append(word_list)
+            self.record_terms(anchor, word_list)
 
     def set_index(self):
         def by_name(glossary):
@@ -308,11 +351,8 @@ class Glossary:
 
     def write_html(self):
         def repl_defns(matchobj):
-            words = matchobj.group(1)
+            anchor = matchobj.group(1)
             defn = matchobj.group(2)
-
-            word_list = [x.strip() for x in words.split(',')]
-            anchor = word_list[0]
 
             # Add links to other glossaries where they define the same words.
             related_str = ''
@@ -322,7 +362,9 @@ class Glossary:
             else:
                 related_str = ''
 
-            return f'<div class="defn" id="{anchor}"><dt>{anchor}</dt><dd>{defn}{related_str}</dd></div>'
+            html_anchor = easy_sub(anchor)
+
+            return f'<div class="defn" id="{anchor}"><dt>{html_anchor}</dt><dd>{defn}{related_str}</dd></div>'
 
         self.txt = easy_sub(self.txt)
 
@@ -339,13 +381,13 @@ class Glossary:
                 # recompiling the monster regex hundreds of times is a huge
                 # performance hit.  Instead, we leave the regex alone and
                 # handle the excluded terms as they are matched.
-                words = matchobj.group(1)
+                anchor = matchobj.group(1)
                 defn = matchobj.group(2)
-                exclude_list = [easy_sub_safe(x.strip().lower()) for x in words.split(',')]
+                exclude_set = self.anchor_terms[anchor]
             else:
-                exclude_list = None
+                exclude_set = None
             c = self.link_glossary_words(c, is_glossary=True,
-                                         exclude=exclude_list)
+                                         exclude=exclude_set)
             c_list.append(c)
         self.txt = '\n'.join(c_list)
 
@@ -371,7 +413,7 @@ class Glossary:
         # HTML page with its name being the search term.
         w.write(f'{{page:"{self.name}",x:"u"}},\n')
 
-        for term in self.term:
+        for term in self.search_terms:
             terms_str = '","'.join(term)
             w.write(f'{{idx:{self.index},com:["{terms_str}"],x:"g"}},\n')
 
@@ -380,7 +422,7 @@ class Glossary:
 
     # Write search terms for Jepson's glossary to pages.js
     def write_jepson_search_terms(self, w):
-        for term in self.term:
+        for term in self.search_terms:
             coms_str = '","'.join(term)
             anchor = self.term_anchor[term[0]]
             if term[0] == anchor:

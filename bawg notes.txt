@@ -187,7 +187,8 @@ section is recorded as a redundant list or string.
 
 Should I detect when a term is only ever referenced via the glossary
 of a lower-level taxon?  E.g. a flower term is accidentally included
-in the plant glossary.
+in the plant glossary.  But I allow terms to simply not be used, so
+why wouldn't I allow terms to be used in only a few places?
 
 Detect when a glossary term is defined twice in the same file (or
 definition) (e.g. a typo).
