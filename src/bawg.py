@@ -167,6 +167,7 @@ with open(root_path + '/data/observations.csv', mode='r', newline='', encoding='
     rg_idx = header_row.index('quality_grade')
     taxon_idx = header_row.index('taxon_id')
     family_idx = header_row.index('taxon_family_name')
+    phylum_idx = header_row.index('taxon_phylum_name')
     place_idx = header_row.index('place_guess')
     private_place_idx = header_row.index('private_place_guess')
     date_idx = header_row.index('observed_on')
@@ -211,7 +212,10 @@ with open(root_path + '/data/observations.csv', mode='r', newline='', encoding='
         date = row[date_idx]
         month = int(date.split('-')[1], 10) - 1 # January = month 0
 
-        page = find_page2(com, sci)
+        if sci in isci_page:
+            page = isci_page[sci]
+        else:
+            page = find_page2(com, sci)
 
         if sci in sci_ignore:
             if sci_ignore[sci][0] == '+':
@@ -253,11 +257,13 @@ with open(root_path + '/data/observations.csv', mode='r', newline='', encoding='
                 # observation away; i.e. don't look for a higher-level match.
                 continue
 
-        # If a page isn't found for the observation, but a page exists for
-        # a different member of the genus, print a warning.
-        genus = sci.split(' ')[0]
-        if not page and genus in genus_page_list and sci not in sci_ignore:
-            error(sci, prefix="The following observations don't have a page even though a page exists in the same genus:")
+        # We expect a page for every observed vascular plant species.
+        # (If it isn't identified to the species level, then I don't really
+        # know what it is, so there's no particular reason to make a page
+        # for it.)
+        phylum = row[phylum_idx]
+        if not page and phylum == 'Tracheophyta' and ' ' in sci and sci not in sci_ignore:
+            error(sci, prefix="The following vascular plant observations don't have a page:")
 
         # If we haven't matched the observation to a page, try stripping
         # components off the scientific name until we find a higher-level

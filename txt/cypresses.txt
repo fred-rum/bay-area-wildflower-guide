@@ -1,0 +1,30 @@
+sci:Hesperocyparis spp.
+x:hist/rare
+
+==monterey cypress:H. macrocarpa
+sci_i:Cupressus macrocarpa
+sci_p:Hesperocyparis macrocarpa|Cupressus macrocarpa|Callitropsis macrocarpa
+. <b>crown asymmetric, often open, flat-topped to widely conic in age</b>
+
+==sargent's cypress:H. sargentii
+sci_i:Cupressus sargentii
+sci_p:Hesperocyparis sargentii|Cupressus sargentii|Callitropsis sargentii
+. crown symmetric, often dense, generally pyramidal in age
+. <b>foliage dull, dusty to gray-green, glaucous or not</b>
+. very rare
+
+==gowen cypress:H. goveniana
+sci_i:Cupressus goveniana
+sci_p:Hesperocyparis goveniana|Cupressus goveniana|Callitropsis goveniana
+. crown symmetric, often dense, generally pyramidal in age
+. foliage bright to dark green, not glaucous
+. plant 5--7 m
+. generally found on the Monterey Peninsula, much rarer in the Santa Cruz mountains
+
+==santa cruz cypress:H. abramsiana
+sci_i:Cupressus abramsiana
+sci_p:Hesperocyparis abramsiana|Cupressus abramsiana|Callitropsis abramsiana
+. crown symmetric, often dense, generally pyramidal in age
+. foliage bright to dark green, not glaucous
+. plant 6--10 m
+. found in the Santa Cruz mountains

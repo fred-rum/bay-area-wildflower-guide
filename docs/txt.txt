@@ -79,16 +79,18 @@ child link; typically at the top of the file), the info is applied to
 the page itself.
 
 
-If different sites disagree on the scientific name for a species, the
-name for each site can be specified as follows:
+If different sites disagree on the scientific name for a species, I
+generally prefer the name listed in Plants of the World Online (POWO).
+The name for other sites can be specified as follows:
 
+sci_i:[name] specifies the scientific name as listed in iNaturalist.
 sci_j:[name] specifies the scientific name as listed in Jepson.
 sci_f:[name] specifies the scientific name as listed in CalFlora.
 sci_p:[name] specifies the scientific name as listed in CalPhotos.
 
 Multiple names can be specified for CalPhotos, separated by |.  The
-iNaturalist name is also automatically included in the CalPhotos
-search.
+canonical name is also automatically included in the CalPhotos search
+in addition to the specified CalPhotos name(s).
 
 If multiple sites use the same scientific name, they can be combined
 into one declaration, e.g. "sci_jfp:[name]".

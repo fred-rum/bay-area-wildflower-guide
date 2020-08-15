@@ -15,3 +15,5 @@ color: yellow
 
 ==bigelow's sneezeweed:Helenium bigelovii
 color: yellow
+
+==false golden asters

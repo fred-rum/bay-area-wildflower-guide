@@ -3,7 +3,7 @@
 {leaf (leaves),leaved} The major parts of a leaf are the blade, petiole, and stipule.  The petiole and stipule may each be present or not, while the blade may be very small or needle-like.
 
 {blade,blades} The expanded portion of a leaf where photosynthesis primarily occurs.  May be simple or compound with multiple leaflets.
-{petiole,petioles} The stalk of a leaf.
+{petiole,petioles,petioled} The stalk of a leaf.
 {stipule,stipules} Extension at the base of the petiole. [figure:narrow-leaved clover]
 
 {leaflet,leaflets} A division of a compound leaf (which may itself be further compound).  Can be distinguished from a leaf by the lack of any structures in its axil other than more leaflets or occasionally stipules.
@@ -176,6 +176,7 @@
 {stellate,stellately} With 3+ branches radiating from a common point.  (Usually used to describe hair.)
 {stem,stems} The generally above-ground structure of a plant supporting leaves, flowers, etc.  Depending on context, "stem" may include branches or only the primary axis.
 {sterile} Incapable of germinating or causing germination, e.g. branches without flowers.  Not fertile.
+{subsessile} Almost sessile.  E.g. very short petiole, peduncle, or pedicel.
 {subshrub,subshrubs} Similar to a shrub, but with only the proximal stems woody.  The distal stems are non-woody (or are at least significantly less woody).
 {succulent,succulents} Composed of fleshy tissue that conserves water.
 {taproot} Primary root growing straight down, tapering at the end, with smaller lateral branches.

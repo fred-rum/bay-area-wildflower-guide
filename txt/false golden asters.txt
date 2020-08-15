@@ -1,0 +1,16 @@
+sci:Heterotheca spp.
+x:ba
+
+==sessileflower false goldenaster:H. sessiliflora
+color:yellow
+. 4--24 ray flowers, generally 7--15 mm
+. proximal leaves subsessile
+. distal leaves sessile, reduced
+
+==telegraphweed:H. grandiflora
+. 25--40 ray flowers, generally 5--8 mm
+. proximal leaves petioled, petiole clasping with ear-like basal lobes [<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1009+2288">example</a>]
+. distal leaves sessile, not clasping
+
+==rayless goldenaster:H. oregona
+. no ray flowers

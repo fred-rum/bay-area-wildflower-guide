@@ -209,7 +209,7 @@ class Page:
             # (which implies that its children have had it set, too).
             return
         else:
-            error(f'{name} is under both {self.top_level} and {top_level} ({tree_top})')
+            error(f'{self.name} is under both {self.top_level} and {top_level} ({tree_top})')
 
     def set_family(self):
         if self.family or self.no_family:
@@ -353,6 +353,10 @@ class Page:
             self.elab_jepson = elab
         if 'i' in sites:
             self.elab_inaturalist = elab
+            isci = strip_sci(elab)
+            if isci in isci_page and isci_page[isci] != self:
+                error('{isci_page[isci].name} and {self.name} both use sci_i {elab}')
+            isci_page[isci] = self
 
     def set_complete(self, matchobj):
         if matchobj.group(1) == 'x':
@@ -653,7 +657,7 @@ class Page:
             # CalPhotos cannot be searched by high-level classifications.
             # It can be searched by genus, but I don't find that at all useful.
             elab = self.choose_elab(self.elab_calphotos)
-            if elab != self.elab:
+            if self.elab not in elab:
                 # CalPhotos can search for multiple names, and for cases such
                 # as Erythranthe, it may have photos under both names.
                 # Use both names when linking to CalPhotos, but for simplicity
