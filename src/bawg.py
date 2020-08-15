@@ -590,3 +590,5 @@ if total_list:
     else:
         mod_file = root_path + '/html/_mod.html'
     os.startfile(mod_file)
+
+end()

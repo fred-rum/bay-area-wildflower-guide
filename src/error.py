@@ -20,3 +20,7 @@ def error(msg, prefix=None):
     _error_cnt += 1
     if _error_cnt >= 10:
         sys.exit('Too many errors')
+
+def end():
+    if _error_cnt:
+        sys.exit(_error_cnt)
