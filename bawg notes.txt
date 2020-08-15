@@ -184,12 +184,5 @@ Separate surprise_obs into multiple parts:
   subspecies that don't have a common name but are under a species
     for which subspecies are listed.
 
-Update error() to support interleaved errors with different prefixes.
-Between error_begin_interleave() and error_end_interleave(), an error
-with the first presented prefix is printed right away, as are all
-errors with the same prefix, but errors with different prefixes are
-stored and printed only after error_end_interleave.  E.g. for
-surprise_obs, parks_nf_list.
-
 Support a command-line argument to increase the number of errors that
 can be printed (or disable any limit).

@@ -157,6 +157,7 @@ def shrink(name):
 #   Associate common names with scientific names
 #   Get a count of observations (total and research grade) of each flower.
 #   Get an iNaturalist taxon ID for each flower.
+error_begin_section()
 with open(root_path + '/data/observations.csv', mode='r', newline='', encoding='utf-8') as f:
     csv_reader = csv.reader(f)
     header_row = next(csv_reader)
@@ -169,17 +170,6 @@ with open(root_path + '/data/observations.csv', mode='r', newline='', encoding='
     place_idx = header_row.index('place_guess')
     private_place_idx = header_row.index('private_place_guess')
     date_idx = header_row.index('observed_on')
-
-    # surprise_obs and park_nf_list have their errors printed at the end
-    # so that they don't end up interleaved together.
-
-    # Record species or subspecies observations that don't have a page
-    # even though there is a genus or species page that they could fit
-    # under.
-    surprise_obs = set()
-
-    # Record parks that don't have a short name defined.
-    park_nf_list = set()
 
     for row in csv_reader:
         sci = row[sci_idx]
@@ -214,7 +204,7 @@ with open(root_path + '/data/observations.csv', mode='r', newline='', encoding='
                 loc = park_loc[x]
                 break
         else:
-            park_nf_list.add(park)
+            error(park, prefix='Parks not found:')
             short_park = park
             loc = 'bay area'
 
@@ -267,7 +257,7 @@ with open(root_path + '/data/observations.csv', mode='r', newline='', encoding='
         # a different member of the genus, print a warning.
         genus = sci.split(' ')[0]
         if not page and genus in genus_page_list and sci not in sci_ignore:
-            surprise_obs.add(sci)
+            error(sci, prefix="The following observations don't have a page even though a page exists in the same genus:")
 
         # If we haven't matched the observation to a page, try stripping
         # components off the scientific name until we find a higher-level
@@ -288,12 +278,7 @@ with open(root_path + '/data/observations.csv', mode='r', newline='', encoding='
                 page.parks[short_park] = 0
             page.parks[short_park] += 1
             page.month[month] += 1
-
-for sci in sorted(surprise_obs):
-    error(sci, prefix="The following observations don't have a page even though a page exists in the same genus:")
-
-for park in sorted(park_nf_list):
-    error(park, prefix='Parks not found:')
+error_end_section()
 
 # Get a list of pages without parents (top-level pages).
 top_list = [x for x in page_array if not x.parent]
