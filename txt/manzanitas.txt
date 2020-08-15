@@ -21,3 +21,9 @@ color: white
 
 ==pallid manzanita:A. pallida
 color: white
+
+==brittleleaf manzanita:A. crustacea
+color: white
+
+==montara manzanita:A. montaraensis
+color: white, pink, red purple

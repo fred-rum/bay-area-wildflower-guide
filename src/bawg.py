@@ -119,6 +119,28 @@ for page in page_array:
 with open(root_path + '/data/ignore species.yaml', encoding='utf-8') as f:
     sci_ignore = yaml.safe_load(f)
 
+# Find any genus with multiple species.
+# Check whether all of those species share an ancestor key page in common.
+# If not, print a warning.
+for page in page_array:
+    page.record_genus()
+
+for genus in genus_page_list:
+    page_list = genus_page_list[genus]
+    if len(page_list) > 1:
+        if genus in sci_page:
+            sci_page[genus].cross_out_children(page_list)
+            for page in page_list:
+                error(page.format_full(1), prefix=f'The following species are not included under the {genus} spp. key:')
+        else:
+            ancestor_set = page_list[0].get_ancestor_set()
+            for page in page_list[1:]:
+                set2 = page.get_ancestor_set()
+                ancestor_set.intersection_update(set2)
+            if not ancestor_set:
+                for page in page_list:
+                    error(page.format_full(1), prefix=f'The following pages in {genus} spp. are not under a common ancestor:')
+
 # Remove characters that are allowed to be different between names
 # while the names are still considered identical.
 # This is mostly non-alphabetic characters, but also plural endings.
@@ -382,28 +404,6 @@ if len(sys.argv) > 1 and sys.argv[1] == 'x':
     page_list.sort(key=by_incomplete_obs, reverse=True)
     for page in page_list[:5]:
         print(page.name)
-
-# Find any genus with multiple species.
-# Check whether all of those species share an ancestor key page in common.
-# If not, print a warning.
-for page in page_array:
-    page.record_genus()
-
-for genus in genus_page_list:
-    page_list = genus_page_list[genus]
-    if len(page_list) > 1:
-        if genus in sci_page:
-            sci_page[genus].cross_out_children(page_list)
-            for page in page_list:
-                error(page.format_full(1), prefix=f'The following species are not included under the {genus} spp. key:')
-        else:
-            ancestor_set = page_list[0].get_ancestor_set()
-            for page in page_list[1:]:
-                set2 = page.get_ancestor_set()
-                ancestor_set.intersection_update(set2)
-            if not ancestor_set:
-                for page in page_list:
-                    error(page.format_full(1), prefix=f'The following pages in {genus} spp. are not under a common ancestor:')
 
 ###############################################################################
 # The remaining code is for creating useful lists of pages:

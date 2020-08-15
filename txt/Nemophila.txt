@@ -6,13 +6,9 @@ x:ba
 <h3>corolla >= 10 mm wide</h3>
 
 ==baby blue eyes:N. menziesii
-color: pale blue, pale purple, white
-xx:more
 . corolla 6--40 mm wide [generally at least 15 mm wide]
 . bright blue to white, white center, blue-veined, black-dotted, <b>not purple-spotted at lobe tips</b>
 . common throughout the bay area
-. may be worth cataloging subspecies, but their distinction is not yet obvious
-.. possible distinction: does the blue/purple margin stem from the background color or just from the dark veins
 
 ==fivespot:N. maculata
 . corolla 10--50 mm wide

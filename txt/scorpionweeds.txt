@@ -19,3 +19,6 @@ color: white, other
 
 ==distant phacelia:P. distans
 color: other
+
+==shade phacelia:P. nemoralis
+color: pale purple, other

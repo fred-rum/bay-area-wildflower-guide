@@ -172,5 +172,24 @@ why wouldn't I allow terms to be used in only a few places?
 Detect when a glossary term is defined twice in the same file (or
 definition) (e.g. a typo).
 
-surprise_obs doesn't work because genus_page_list hasn't been created
-yet.  Fix it so that the error is correctly detected.
+Allow iNaturalist taxon to be specified since iNaturalist fails for
+shared genus names, e.g. onions (Allium).
+
+Separate surprise_obs into multiple parts:
+  species that don't have a page despite there being a genus page
+    (or should it be all plant species that don't have a page?)
+    (includes subspecies if the species page is missing.)
+  subspecies that have a common name and a genus page (or are plants),
+    but no page.
+  subspecies that don't have a common name but are under a species
+    for which subspecies are listed.
+
+Update error() to support interleaved errors with different prefixes.
+Between error_begin_interleave() and error_end_interleave(), an error
+with the first presented prefix is printed right away, as are all
+errors with the same prefix, but errors with different prefixes are
+stored and printed only after error_end_interleave.  E.g. for
+surprise_obs, parks_nf_list.
+
+Support a command-line argument to increase the number of errors that
+can be printed (or disable any limit).

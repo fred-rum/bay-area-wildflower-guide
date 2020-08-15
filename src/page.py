@@ -738,7 +738,8 @@ class Page:
         w.write(f'{self.create_link(2)}</div>\n')
 
     def get_ancestor_set(self):
-        ancestor_set = self.parent.copy()
+        ancestor_set = set()
+        ancestor_set.add(self)
         for parent in self.parent:
             ancestor_set.update(parent.get_ancestor_set())
         return ancestor_set
