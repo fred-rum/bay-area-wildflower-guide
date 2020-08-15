@@ -5,6 +5,9 @@ import sys
 import os
 import re
 
+# My files
+from error import *
+
 def convert_path_to_unix(path):
     return re.sub(r'\\', r'/', path)
 
@@ -52,7 +55,7 @@ def link_figures(name, txt):
     def repl_figure_thumb(matchobj):
         file = matchobj.group(1)
         if not os.path.isfile(f'{root_path}/figures/{file}.svg'):
-            print(f'Broken figure link to {file}.svg in {name}')
+            error(f'Broken figure link to {file}.svg in {name}')
         return f'<a href="../figures/{file}.svg"><img src="../figures/{file}.svg" height="200" class="leaf-thumb"></a>'
 
     def repl_figure_thumbs(matchobj):
@@ -64,7 +67,7 @@ def link_figures(name, txt):
     def repl_figure_text(matchobj):
         file = matchobj.group(1)
         if not os.path.isfile(f'{root_path}/figures/{file}.svg'):
-            print(f'Broken figure link to {file}.svg in {name}')
+            error(f'Broken figure link to {file}.svg in {name}')
         return f'<a href="../figures/{file}.svg">[figure]</a>'
 
     txt = re.sub(r'^(figure:.*?(?:\.svg|)(?:\nfigure:.*?(?:\.svg|))*)$',

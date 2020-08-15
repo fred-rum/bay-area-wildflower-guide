@@ -2,6 +2,7 @@ import re
 from unidecode import unidecode
 
 # My files
+from error import *
 from files import *
 from find_page import *
 from obs import *
@@ -152,7 +153,7 @@ class Page:
 
     def set_name(self, name):
         if name in name_page:
-            print(f'Multiple pages created with name "{name}"')
+            error(f'Multiple pages created with name "{name}"')
         self.name = name
         name_page[name] = self
 
@@ -181,7 +182,7 @@ class Page:
         sci = strip_sci(sci)
 
         if sci in sci_page and sci_page[sci] != self:
-            print(f'Same scientific name ({sci}) set for {sci_page[sci].name} and {self.name}')
+            error(f'Same scientific name ({sci}) set for {sci_page[sci].name} and {self.name}')
 
         if elab[0].islower():
             self.level = 'above'
@@ -208,7 +209,7 @@ class Page:
             # (which implies that its children have had it set, too).
             return
         else:
-            print(f'{name} is under both {self.top_level} and {top_level} ({tree_top})')
+            error(f'{name} is under both {self.top_level} and {top_level} ({tree_top})')
 
     def set_family(self):
         if self.family or self.no_family:
@@ -356,13 +357,13 @@ class Page:
     def set_complete(self, matchobj):
         if matchobj.group(1) == 'x':
             if self.genus_complete != None:
-                print(f'{self.name} has both x:{self.genus_complete} and x:{matchobj.group(3)}')
+                error(f'{self.name} has both x:{self.genus_complete} and x:{matchobj.group(3)}')
             self.genus_complete = matchobj.group(3)
             if matchobj.group(2):
                 self.genus_key_incomplete = True
         else:
             if self.species_complete != None:
-                print(f'{self.name} has both xx:{self.species_complete} and xx:{matchobj.group(3)}')
+                error(f'{self.name} has both xx:{self.species_complete} and xx:{matchobj.group(3)}')
             self.species_complete = matchobj.group(3)
             if matchobj.group(2):
                 self.species_key_incomplete = True
@@ -370,7 +371,7 @@ class Page:
 
     def set_colors(self, color_str):
         if self.color:
-            print(f'color is defined more than once for page {self.name}')
+            error(f'color is defined more than once for page {self.name}')
 
         self.color = set([x.strip() for x in color_str.split(',')])
 
@@ -381,11 +382,11 @@ class Page:
         # check for bad colors.
         for color in self.color:
             if color not in color_list:
-                print(f'page {self.name} uses undefined color {color}')
+                error(f'page {self.name} uses undefined color {color}')
 
     def record_ext_photo(self, label, link):
         if (label, link) in self.ext_photo_list:
-            print(f'{link} is specified more than once for page {self.name}')
+            error(f'{link} is specified more than once for page {self.name}')
         else:
             if label:
                 label = easy_sub_safe(label)
@@ -404,9 +405,9 @@ class Page:
 
     def assign_child(self, child):
         if self.is_ancestor(child):
-            print(f'circular loop when creating link from {self.name} to {child.name}')
+            error(f'circular loop when creating link from {self.name} to {child.name}')
         elif self in child.parent:
-            print(f'{child.name} added as child of {self.name} twice')
+            error(f'{child.name} added as child of {self.name} twice')
         else:
             self.child.append(child)
             child.parent.add(self)
@@ -462,7 +463,7 @@ class Page:
                     # The common name is shared by a flower with a
                     # different scientific name.
                     if not sci:
-                        print(f'page {self.name} has ambiguous child {com}')
+                        error(f'page {self.name} has ambiguous child {com}')
                         return '==' + com + suffix
 
                     if com in name_page:
@@ -494,7 +495,7 @@ class Page:
             if com:
                 if child_page.com:
                     if com != child_page.com:
-                        print(f"page {self.name} refers to child {com}:{sci}, but the common name doesn't match")
+                        error(f"page {self.name} refers to child {com}:{sci}, but the common name doesn't match")
                 else:
                     child_page.set_com(com)
             if sci:
@@ -755,10 +756,10 @@ class Page:
             # is the same on both paths.
             if self.name in glossary_taxon_dict:
                 if glossary != self.glossary.glossary_parent:
-                    print(f'{self.name} has two different parent glossaries')
+                    error(f'{self.name} has two different parent glossaries')
             else:
                 if glossary != self.glossary:
-                    print(f'{self.name} gets two different glossaries')
+                    error(f'{self.name} gets two different glossaries')
 
             # No need to continue the tree traversal through this node
             # since it and its children have already set the glossary.
@@ -824,7 +825,7 @@ class Page:
                 if name + suffix in jpg_files:
                     jpg = name + suffix
                 else:
-                    print(name + suffix + '.jpg not found on page ' + self.name)
+                    error(name + suffix + '.jpg not found on page ' + self.name)
 
             if not jpg:
                 jpg = child.get_jpg()
@@ -877,7 +878,7 @@ class Page:
             if new_list_depth:
                 end_paragraph(True)
             if new_list_depth > list_depth+1:
-                print('Jump in list depth on page ' + self.name)
+                error('Jump in list depth on page ' + self.name)
             while list_depth < new_list_depth:
                 if list_depth == 0:
                     c_list.append('<ul>')
@@ -931,7 +932,7 @@ class Page:
         end_child_text()
 
         if bracket_depth != 0:
-            print(f'"[" and "]" bracket depth is {bracket_depth} on page {self.name}')
+            error(f'"[" and "]" bracket depth is {bracket_depth} on page {self.name}')
 
         s = '\n'.join(c_list)
         self.txt = s
@@ -944,7 +945,7 @@ class Page:
             if page:
                 return page.create_link(1)
             else:
-                print(f'Broken link {{-{name}}} on page {self.name}')
+                error(f'Broken link {{-{name}}} on page {self.name}')
                 return '{-' + name + '}'
 
         # Use the text supplied in the text file if present.
@@ -998,12 +999,12 @@ class Page:
                         return # Don't write the <p/> at the end
                 elif complete == 'none':
                     if top == 'genus':
-                        print("x:none used for " + self.name)
+                        error("x:none used for " + self.name)
                     else:
                         w.write('This species has no subspecies or variants.')
                 elif complete == 'uncat':
                     if top == 'genus':
-                        print("x:uncat used for " + self.name)
+                        error("x:uncat used for " + self.name)
                     else:
                         w.write("This species has subspecies or variants that don't seem worth distinguishing.")
                 elif complete == 'more':
@@ -1029,9 +1030,9 @@ class Page:
                 w.write('<p/>\n')
             elif complete:
                 if top == 'genus':
-                    print(f'{self.name} uses the x: keyword but is not the top of genus')
+                    error(f'{self.name} uses the x: keyword but is not the top of genus')
                 else:
-                    print(f'{self.name} uses the xx: keyword but is not the top of species')
+                    error(f'{self.name} uses the xx: keyword but is not the top of species')
 
         def format_br(br):
             # br is True if there is more text on the next line.
@@ -1131,13 +1132,13 @@ class Page:
             write_footer(w)
 
         if self.taxon_id and not (self.jpg_list or self.child):
-            print(f'{self.name} is observed, but has no photos')
+            error(f'{self.name} is observed, but has no photos')
 
         if self.top_level == 'flowering plants':
             if self.jpg_list and not self.color:
-                print(f'No color for flower: {self.name}')
+                error(f'No color for flower: {self.name}')
         elif self.color:
-            print(f'Color specified for non-flower: {self.name}')
+            error(f'Color specified for non-flower: {self.name}')
 
     def record_genus(self):
         # record all pages that are within each genus

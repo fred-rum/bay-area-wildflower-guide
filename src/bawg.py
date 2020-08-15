@@ -42,6 +42,7 @@ import datetime
 import time
 
 # My files
+from error import *
 from files import *
 from easy import *
 from obs import *
@@ -113,15 +114,10 @@ assign_jpgs()
 # here before propagating color to parent pages that might not have photos.
 for page in page_array:
     if page.color and not page.jpg_list:
-        print(f'page {page.name} has a color assigned but has no photos')
+        error(f'page {page.name} has a color assigned but has no photos')
 
 with open(root_path + '/data/ignore species.yaml', encoding='utf-8') as f:
     sci_ignore = yaml.safe_load(f)
-
-# Track species or subspecies observations that don't have a page even though
-# there is a genus or species page that they could fit under.  We'll emit an
-# error message for these once all the observations are read.
-surprise_obs = set()
 
 # Remove characters that are allowed to be different between names
 # while the names are still considered identical.
@@ -152,6 +148,15 @@ with open(root_path + '/data/observations.csv', mode='r', newline='', encoding='
     private_place_idx = header_row.index('private_place_guess')
     date_idx = header_row.index('observed_on')
 
+    # surprise_obs and park_nf_list have their errors printed at the end
+    # so that they don't end up interleaved together.
+
+    # Record species or subspecies observations that don't have a page
+    # even though there is a genus or species page that they could fit
+    # under.
+    surprise_obs = set()
+
+    # Record parks that don't have a short name defined.
     park_nf_list = set()
 
     for row in csv_reader:
@@ -200,7 +205,7 @@ with open(root_path + '/data/observations.csv', mode='r', newline='', encoding='
             if sci_ignore[sci][0] == '+':
                 page = None
             elif page:
-                print(f'{sci} is ignored, but there is a page for it ({page.name})')
+                error(f'{sci} is ignored, but there is a page for it ({page.name})')
 
             # For sci_ignore == '+...', the expectation is that we'll fail
             # to find a page for it, but we'll find a page at a higher level.
@@ -208,7 +213,7 @@ with open(root_path + '/data/observations.csv', mode='r', newline='', encoding='
             if sci_ignore[sci][0] != '+':
                 continue
         elif not page and com in com_page:
-            print(f'observation {com} ({sci}) matches the common name for a page, but not its scientific name')
+            error(f'observation {com} ({sci}) matches the common name for a page, but not its scientific name')
             continue
 
         if page:
@@ -220,9 +225,9 @@ with open(root_path + '/data/observations.csv', mode='r', newline='', encoding='
                 p_com_shrink = shrink(page.com)
                 if i_com_shrink != p_com_shrink and com != page.icom:
                     page.icom = com
-                    #print(f"iNaturalist's common name {com} differs from mine: {page.com} ({page.elab})")
+                    #error(f"iNaturalist's common name {com} differs from mine: {page.com} ({page.elab})")
             if com and not page.com:
-                print(f"iNaturalist supplies a missing common name for {com} ({page.elab})")
+                error(f"iNaturalist supplies a missing common name for {com} ({page.elab})")
 
         if loc != 'bay area':
             if page:
@@ -262,15 +267,11 @@ with open(root_path + '/data/observations.csv', mode='r', newline='', encoding='
             page.parks[short_park] += 1
             page.month[month] += 1
 
-if surprise_obs:
-    print("The following observations don't have a page even though a page exists in the same genus:")
-    for sci in sorted(surprise_obs):
-        print('  ' + repr(sci))
+for sci in sorted(surprise_obs):
+    error(sci, prefix="The following observations don't have a page even though a page exists in the same genus:")
 
-if park_nf_list:
-    print("Parks not found:")
-    for x in park_nf_list:
-        print("  " + repr(x))
+for park in sorted(park_nf_list):
+    error(park, prefix='Parks not found:')
 
 # Get a list of pages without parents (top-level pages).
 top_list = [x for x in page_array if not x.parent]
@@ -308,10 +309,7 @@ for color in color_list:
 did_intro = False
 for page in page_array:
     if not (page.sci or page.no_sci):
-        if not did_intro:
-            print('No scientific name given for the following pages:')
-            did_intro = True
-        print('  ' + page.name)
+        error(page.name, prefix='No scientific name given for the following pages:')
 
 for name in non_flower_top_pages:
     name_page[name].set_top_level(name, name)
@@ -328,15 +326,13 @@ for family in family_child_set:
     if family in family_com:
         com = family_com[family]
     else:
-        print(f'No common name for family {family}')
+        error(f'No common name for family {family}')
         com = 'n/a' # family names.yaml uses 'n/a' when there is no common name
     child_set = family_child_set[family]
     if family in sci_page:
         sci_page[family].cross_out_children(child_set)
-        if child_set:
-            print(f'The following pages are not included by the page for family {family}')
-            for child in child_set:
-                print('  ' + child.format_full(1))
+        for child in child_set:
+            error(child.format_full(1), prefix=f'The following pages are not included by the page for family {family}:')
     else:
         if com == 'n/a':
             page = Page(family)
@@ -398,19 +394,16 @@ for genus in genus_page_list:
     if len(page_list) > 1:
         if genus in sci_page:
             sci_page[genus].cross_out_children(page_list)
-            if page_list:
-                print(f'The following species are not included under the {genus} spp. key')
-                for page in page_list:
-                    print('  ' + page.format_full(1))
+            for page in page_list:
+                error(page.format_full(1), prefix=f'The following species are not included under the {genus} spp. key:')
         else:
             ancestor_set = page_list[0].get_ancestor_set()
             for page in page_list[1:]:
                 set2 = page.get_ancestor_set()
                 ancestor_set.intersection_update(set2)
             if not ancestor_set:
-                print(f'The following pages in {genus} spp. are not under a common ancestor:')
                 for page in page_list:
-                    print('  ' + page.format_full(1))
+                    error(page.format_full(1), prefix=f'The following pages in {genus} spp. are not under a common ancestor:')
 
 ###############################################################################
 # The remaining code is for creating useful lists of pages:
@@ -585,10 +578,10 @@ while not done:
         done = True
     except WindowsError as error:
         if tries == 1:
-            print('Having trouble removing the old html and renaming the new html...', flush=True)
+            warning('Having trouble removing the old html and renaming the new html...')
         time.sleep(0.1)
 if tries > 1:
-    print(f'Completed in {tries} tries.')
+    warning(f'Completed in {tries} tries.')
 
 if total_list:
     # open the default browser with the created HTML file

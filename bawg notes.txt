@@ -159,13 +159,6 @@ Add inflorescence shape definitions for sedges.  (Possibly share the
 glossary with grasses, but probably not.)
 
 
-Create a standardized error framework, e.g. a function that gets
-called on errors.  This function prints error messages to STDERR and
-continues, but after the 10th error, it aborts the run.  If there is
-at least 1 error, the modified files aren't presented, and the script
-ends with a fail code.  Use try/raise to report the file location of
-failures.
-
 Redo shrink() to instead allow testing two names against each other
 while testing specific plural substitutions.  (But also keep the code
 to throw out non-word characters from each.)  E.g.
@@ -178,3 +171,6 @@ why wouldn't I allow terms to be used in only a few places?
 
 Detect when a glossary term is defined twice in the same file (or
 definition) (e.g. a typo).
+
+surprise_obs doesn't work because genus_page_list hasn't been created
+yet.  Fix it so that the error is correctly detected.

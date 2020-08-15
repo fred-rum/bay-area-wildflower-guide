@@ -1,6 +1,7 @@
 import subprocess
 
 # My files
+from error import *
 from files import *
 from page import *
 
@@ -64,7 +65,7 @@ def assign_jpgs():
     for jpg in sorted(jpg_files):
         name = get_name_from_jpg(jpg)
         if name == '':
-            print(f'No name for {jpg}')
+            error(f'No name for {jpg}')
         else:
             page = find_page1(name)
             if not page:

@@ -2,6 +2,7 @@ import sys
 import re
 
 # My files
+from error import *
 from files import *
 from find_page import *
 from easy import *
@@ -96,7 +97,7 @@ class Glossary:
                 # that requires an exception or a global variable or passing
                 # more data around, none of which I like.  The user will just
                 # have to grep for the broken reference in the HTML.
-                print(f'unrecognized glossary cross reference starting with "{name}#')
+                error(f'unrecognized glossary cross reference starting with "{name}#')
                 return f'{name}#broken ref'
             elif name == 'none':
                 # 'none#[term]' means that we don't want a glossary link.
