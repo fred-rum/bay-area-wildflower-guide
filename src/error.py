@@ -45,7 +45,7 @@ def error_end_section():
     _in_section = False
     _delayed_cnt = 0
 
-    for prefix in sorted(_stored_data.keys()):
+    for prefix in _stored_data.keys(): # not sorted because None causes problems
         for msg in sorted(_stored_data[prefix].keys()):
             if _stored_data[prefix][msg]: # 'delay' boolean
                 _emit_error(msg, prefix)

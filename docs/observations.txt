@@ -9,6 +9,7 @@ Geo: place_guess, private_place_guess
 Taxon: scientific_name, common_name, taxon_id
 Taxon Extras:
   taxon_kingdom_name (for the top-level classification)
+  taxon_phylum_name (to recognize vascular plants [Jepson's coverage])
   taxon_subphylum_name (to recognize flowering plants)
   taxon_family_name (to group flowers by family)
 Observation Fields: none
@@ -19,8 +20,10 @@ place (location) is interpreted.
 
 Where the scientific name and common name are both given, they supply
 a default mapping (in either direction) for any flower that only has
-one name manually entered.
+one name manually entered.  If the scientific name is known, but the
+common name differs from what the txt files have, it is recorded as an
+alternative common name.
 
 The taxon_family_name is used to automatically assign a family to all
 observed species so that I don't have to enter it manually.  See also
-family_format.txt.
+family names.txt.

@@ -1,5 +1,4 @@
 sci:Cuscuta spp.
-color: orange, white, other
 x:!hist/rare
 
 "Inside the corolla at the base of the stamens, there are fringed floral scales (requires at least a 10x hand lens to see)."
@@ -17,7 +16,8 @@ x:!hist/rare
 . anthers 0.25--0.5 mm, wide-elliptic
 . rare inland
 
-==goldenthread:C. pacifica var. pacifica
+==goldenthread:C. pacifica
+color: orange, white, other
 . corolla scales present
 . flower 3.5--6 mm
 . calyx and corolla lobes acute
