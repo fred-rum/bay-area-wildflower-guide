@@ -14,7 +14,7 @@ function hide_ac() {
 function fn_focusin() {
   if (ac_is_hidden) {
     /* e_search_input.select(); */ /* Not as smooth on Android as desired. */
-    fn_search();
+    fn_search(false, false);
   }
 }
 
@@ -28,6 +28,11 @@ function fn_search_box_focusout(event) {
   if (event.target == this) {
     fn_focusout()
   }
+}
+
+function clear_search() {
+  e_search_input.value = '';
+  fn_focusout();
 }
 
 /* When comparing names, ignore all non-letter characters and ignore case. */
@@ -218,7 +223,7 @@ function fn_link(page_info) {
 
 /* Update the autocomplete list.
    If 'enter' is true, then navigate to the top autocompletion's page. */
-function fn_search(enter) {
+function fn_search(enter, mod) {
   var search_str_cmp = compress(e_search_input.value);
 
   if (search_str_cmp == '') {
@@ -360,36 +365,53 @@ function fn_search(enter) {
   }
   expose_ac();
   if (enter && best_list.length) {
-    var page_info = best_list[0].page_info
-    window.location.href = fn_url(page_info);
-    /* A search of the glossary from a glossary page might result in no
-       page change, and so the search will remain active.  That's not
-       what we want, so in that case, clear the search. */
-    e_search_input.value = '';
-    fn_focusout();
+    var page_info = best_list[0].page_info;
+    var url = fn_url(page_info);
+    if (mod) {
+      /* Shift or control was held along with the enter key.  We'd like to
+         open a new window or new tab, respectively, but JavaScript doesn't
+         really give that option.  So we just call window.open() and let the
+         browser make the choise.  E.g. Firefox will only open a new tab
+         (after first requiring the user to allow pop-ups), while Chrome will
+         open a new tab if ctrl is held or a new window otherwise.  Nice! */
+      window.open(url)
+    } else {
+      /* The enter key was pressed *without* the shift or control key held.
+         Navigate to the new URL within the existing page. */
+      window.location.href = fn_url(page_info);
+    }
+    /* Opening a new window doesn't affect the current page.  Also, a
+       search of the glossary from a glossary page might result in no
+       page change.  In either case, the search will remain active,
+       which is not what we want.  In either case, clear the search. */
+    clear_search();
   }
 }
 
 /* A link to an anchor might go somewhere on the current page rather than
    going to a new page.  If the page doesn't change, the search will
    remain active.  That's not what we want, so we clear the search before
-   continuing with the handling of the clicked link. */
+   continuing with the handling of the clicked link.  Note that the event
+   is already known to be interacting with the link, so removing the
+   autocomplete box with the link in it will still allow the click to
+   activate the link as desired. */
 function fn_click() {
-  e_search_input.value = '';
-  fn_focusout();
+  clear_search();
   return true; /* continue normal handling of the clicked link */
 }
 
 /* Handle all changes to the search value.  This includes changes that
    are not accompanied by a keyup event, such as a mouse-based paste event. */
 function fn_change() {
-  fn_search(false);
+  fn_search(false, false);
 }
 
 /* Handle when the user presses the 'enter' key. */
 function fn_keyup() {
-  if (event.keyCode == 13) {
-    fn_search(true);
+  if (event.key == 'Enter') {
+    fn_search(true, event.shiftKey || event.ctrlKey);
+  } else if (event.key == 'Escape') {
+    clear_search();
   }
 }
 
