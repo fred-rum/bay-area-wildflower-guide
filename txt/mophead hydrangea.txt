@@ -1,0 +1,6 @@
+sci:Hydrangea macrophylla
+sci_jf:n/a
+x:ca
+color:white,cream,pink,pale purple,purple,blue,pale blue,red purple,other
+
+Likely a waif.

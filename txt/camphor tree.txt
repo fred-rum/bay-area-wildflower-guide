@@ -1,0 +1,5 @@
+sci:Cinnamomum camphora
+x:ca
+color:cream
+
+Naturalized in California, but mostly found in cultivation.

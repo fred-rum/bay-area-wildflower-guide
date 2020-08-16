@@ -3,3 +3,6 @@ sci:class Pinopsida
 ==pines
 
 ==cypresses
+
+==coast redwood:Sequoia sempervirens
+x:ba
