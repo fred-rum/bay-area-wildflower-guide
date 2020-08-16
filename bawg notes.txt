@@ -8,8 +8,6 @@ Print errors:
   no scientific name for leaf page
   multiple scientific names from observations.csv
 
-It'd be nice if the up/down arrow keys changed which autocomplete entry was currently selected.
-
 ###############################################################################
 
 how to mass rename files:

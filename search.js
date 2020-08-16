@@ -14,7 +14,7 @@ function hide_ac() {
 function fn_focusin() {
   if (ac_is_hidden) {
     /* e_search_input.select(); */ /* Not as smooth on Android as desired. */
-    fn_search(false, false);
+    fn_search();
   }
 }
 
@@ -30,8 +30,15 @@ function fn_search_box_focusout(event) {
   }
 }
 
+/* Global variable so that it can be used by independent events. */
+var best_list;
+var ac_list;
+var ac_selected;
+
 function clear_search() {
   e_search_input.value = '';
+  best_list = [];
+  ac_selected = 0;
   fn_focusout();
 }
 
@@ -221,9 +228,18 @@ function fn_link(page_info) {
   return 'class="enclosed ' + c + '"' + target + ' href="' + url + '" onclick="return fn_click();"'
 }
 
-/* Update the autocomplete list.
-   If 'enter' is true, then navigate to the top autocompletion's page. */
-function fn_search(enter, mod) {
+function generate_ac_html() {
+  if (best_list.length) {
+    var ac_html_list = ac_list.slice();
+    ac_html_list[ac_selected] = '<b>' + ac_html_list[ac_selected] + '</b>';
+    e_autocomplete_box.innerHTML = ac_html_list.join('');
+  } else {
+    e_autocomplete_box.innerHTML = 'No matches found.';
+  }
+}
+
+/* Update the autocomplete list. */
+function fn_search() {
   var search_str_cmp = compress(e_search_input.value);
 
   if (search_str_cmp == '') {
@@ -233,7 +249,7 @@ function fn_search(enter, mod) {
 
   /* Iterate over all pages and accumulate a list of the best matches
      against the search value. */
-  var best_list = [];
+  best_list = [];
   for (var i = 0; i < pages.length; i++) {
     var page_info = pages[i];
     var best_fit_info = {
@@ -286,7 +302,7 @@ function fn_search(enter, mod) {
   }
 
   if (best_list.length) {
-    var ac_list = [];
+    ac_list = [];
     for (var i = 0; i < best_list.length; i++) {
       var page_info = best_list[i].page_info;
 
@@ -352,40 +368,14 @@ function fn_search(enter, mod) {
       var entry = ('<p class="nogap"><a ' + fn_link(page_info) + '>' +
                    full + '</a></p>');
 
-      /* Highlight the first entry in bold.  This entry is selected if the
-         user presses 'enter'. */
-      if (i == 0) {
-        entry = '<b>' + entry + '</b>';
-      }
       ac_list.push(entry);
     }
-    e_autocomplete_box.innerHTML = ac_list.join('');
-  } else {
-    e_autocomplete_box.innerHTML = 'No matches found.';
   }
+  /* Highlight the first entry in bold.  This entry is selected if the
+     user presses 'enter'. */
+  ac_selected = 0;
+  generate_ac_html();
   expose_ac();
-  if (enter && best_list.length) {
-    var page_info = best_list[0].page_info;
-    var url = fn_url(page_info);
-    if (mod) {
-      /* Shift or control was held along with the enter key.  We'd like to
-         open a new window or new tab, respectively, but JavaScript doesn't
-         really give that option.  So we just call window.open() and let the
-         browser make the choise.  E.g. Firefox will only open a new tab
-         (after first requiring the user to allow pop-ups), while Chrome will
-         open a new tab if ctrl is held or a new window otherwise.  Nice! */
-      window.open(url)
-    } else {
-      /* The enter key was pressed *without* the shift or control key held.
-         Navigate to the new URL within the existing page. */
-      window.location.href = fn_url(page_info);
-    }
-    /* Opening a new window doesn't affect the current page.  Also, a
-       search of the glossary from a glossary page might result in no
-       page change.  In either case, the search will remain active,
-       which is not what we want.  In either case, clear the search. */
-    clear_search();
-  }
 }
 
 /* A link to an anchor might go somewhere on the current page rather than
@@ -403,15 +393,57 @@ function fn_click() {
 /* Handle all changes to the search value.  This includes changes that
    are not accompanied by a keyup event, such as a mouse-based paste event. */
 function fn_change() {
-  fn_search(false, false);
+  fn_search();
 }
 
-/* Handle when the user presses the 'enter' key. */
+/* Handle when the user presses various special keys in the search box. */
 function fn_keyup() {
-  if (event.key == 'Enter') {
-    fn_search(true, event.shiftKey || event.ctrlKey);
+  if ((event.key == 'Enter') && best_list.length) {
+    var page_info = best_list[ac_selected].page_info;
+    var url = fn_url(page_info);
+    if (event.shiftKey || event.ctrlKey) {
+      /* Shift or control was held along with the enter key.  We'd like to
+         open a new window or new tab, respectively, but JavaScript doesn't
+         really give that option.  So we just call window.open() and let the
+         browser make the choise.  E.g. Firefox will only open a new tab
+         (after first requiring the user to allow pop-ups), while Chrome will
+         open a new tab if ctrl is held or a new window otherwise.  Nice! */
+      window.open(url)
+    } else {
+      /* The enter key was pressed *without* the shift or control key held.
+         Navigate to the new URL within the existing page. */
+      window.location.href = fn_url(page_info);
+    }
+    /* Opening a new window doesn't affect the current page.  Also, a
+       search of the glossary from a glossary page might result in no
+       page change.  In either case, the search will remain active,
+       which is not what we want.  In either case, clear the search. */
+    clear_search();
   } else if (event.key == 'Escape') {
     clear_search();
+  }
+}
+
+/* The default behavior for the arrow keys triggers on keydown, so at the
+   very least we need to capture and suppress that behavior.  And it makes
+   sense to also have my behavior trigger on keydown for consistency. */
+function fn_keydown() {
+  if ((event.key == 'Down') || (event.key == 'ArrowDown') ||
+      ((event.key == 'Tab') && !event.shiftKey)) {
+    ac_selected++;
+    if (ac_selected >= best_list.length) {
+      ac_selected = 0;
+    }
+    generate_ac_html();
+    event.preventDefault();
+  } else if ((event.key == 'Up') || (event.key == 'ArrowUp') ||
+      ((event.key == 'Tab') && event.shiftKey)) {
+    ac_selected--;
+    if (ac_selected < 0) {
+      ac_selected = best_list.length - 1;
+    }
+    generate_ac_html();
+    event.preventDefault();
   }
 }
 
@@ -467,6 +499,7 @@ e_body.insertAdjacentHTML('beforebegin', `
 var e_search_input = document.getElementById('search');
 e_search_input.addEventListener('input', fn_change);
 e_search_input.addEventListener('keyup', fn_keyup);
+e_search_input.addEventListener('keydown', fn_keydown);
 e_search_input.addEventListener('focusin', fn_focusin);
 
 var e_search_box = document.getElementById('search-container');
