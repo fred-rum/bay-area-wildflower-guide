@@ -186,3 +186,11 @@ Separate surprise_obs into multiple parts:
 
 Support a command-line argument to increase the number of errors that
 can be printed (or disable any limit).
+
+Should top-level non-flowering-plant taxons be presented
+hierarchically (similar to the glossary ToC)?  To what level?
+
+Allow 'glossary' in the JavaScript search to match any glossary.  What
+about subsets of glossary?  I feel like it should match exactly as if
+the match pattern were against '[word] glossary', but then the
+highlighting is only on '[word]' and 'glossary'.

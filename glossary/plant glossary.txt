@@ -144,6 +144,7 @@
 {fruit,fruits,fruiting} A seed-bearing body (or a joined aggregation of multiple bodies), developing from one or more ovaries and possibly other associated structures. [figure:california poppy fruit]
 {fuse,fused} Equivalent structures at the same level that have grown together (more than just touching).  Compare free.
 {gland,glands,glandular} A small sphere on the surface of a plant or at the tip of a hair that excretes a generally sticky material.
+{glandular-hairy} Having gland-tipped hairs.
 {glaucous} Covered with the appearance of a whitish powder.
 {habit,habits} Overall aboveground plant shape and general direction of growth.
 {herb,herbs,herbaceous} Plant without any woody parts.

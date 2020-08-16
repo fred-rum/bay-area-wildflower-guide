@@ -1776,6 +1776,7 @@ var pages=[
 {idx:0,com:["fruit","fruits","fruiting"],x:"g"},
 {idx:0,com:["fuse","fused"],x:"g"},
 {idx:0,com:["gland","glands","glandular"],x:"g"},
+{idx:0,com:["glandular-hairy"],x:"g"},
 {idx:0,com:["glaucous"],x:"g"},
 {idx:0,com:["habit","habits"],x:"g"},
 {idx:0,com:["herb","herbs","herbaceous"],x:"g"},
