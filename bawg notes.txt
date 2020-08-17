@@ -192,5 +192,3 @@ Should top-level non-flowering-plant taxons be presented
 hierarchically (similar to the glossary ToC)?  To what level?
 
 Remove underlines from glossary entries in autocomplete list.
-
-enter and escape should activate on keydown instead of keyup.

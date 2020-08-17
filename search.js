@@ -460,14 +460,19 @@ function fn_click() {
   return true; /* continue normal handling of the clicked link */
 }
 
-/* Handle all changes to the search value.  This includes changes that
-   are not accompanied by a keyup event, such as a mouse-based paste event. */
+/* Handle all changes to the search value.  This includes changes that are
+   not accompanied by a keyboard event, such as a mouse-based paste event. */
 function fn_change() {
   fn_search();
 }
 
-/* Handle when the user presses various special keys in the search box. */
-function fn_keyup() {
+/* Handle when the user presses various special keys in the search box.
+   The default behavior for the arrow keys triggers on keydown, so at the
+   very least we need to capture and suppress that behavior.  I also notice
+   that the browser performs normal actions for all other keys on keydown.
+   So it makes sense to also have my behavior trigger on keydown for
+   consistency. */
+function fn_keydown() {
   if ((event.key == 'Enter') && ac_list.length) {
     var page_info = ac_list[ac_selected].page_info;
     var url = fn_url(page_info);
@@ -491,14 +496,7 @@ function fn_keyup() {
     clear_search();
   } else if (event.key == 'Escape') {
     clear_search();
-  }
-}
-
-/* The default behavior for the arrow keys triggers on keydown, so at the
-   very least we need to capture and suppress that behavior.  And it makes
-   sense to also have my behavior trigger on keydown for consistency. */
-function fn_keydown() {
-  if ((event.key == 'Down') || (event.key == 'ArrowDown') ||
+  } else if ((event.key == 'Down') || (event.key == 'ArrowDown') ||
       ((event.key == 'Tab') && !event.shiftKey)) {
     ac_selected++;
     if (ac_selected >= ac_list.length) {
@@ -568,7 +566,6 @@ e_body.insertAdjacentHTML('beforebegin', `
 
 var e_search_input = document.getElementById('search');
 e_search_input.addEventListener('input', fn_change);
-e_search_input.addEventListener('keyup', fn_keyup);
 e_search_input.addEventListener('keydown', fn_keydown);
 e_search_input.addEventListener('focusin', fn_focusin);
 
