@@ -1,16 +1,20 @@
 sci:n/a
 
+Assisted with <a href="https://www.inaturalist.org/observations/51757218#activity_comment_5248757">commentary</a> from Ryan O'Dell: "I look at the combination of stem color (Hemizonella is usually a light purple color), involucre shape (Madia exigua is usually a nice, uniform urn), and growth form (Hemizonella is usually short: < 10 cm and decumbent)."
+
 ==small tarweed:Madia exigua
-. sand or clay soils in open, grassy, or disturbed sites
+. stem up to 30+ cm, unknown color
 . disk flower glabrous
 . anthers yellow to +- brown
 . ray flower fruit compressed side-to-side or +- 3-angled in cross section with curved beak
+. sand or clay soils in open, grassy, or disturbed sites
 See also the key to {-Madia spp.}.
 
 ==opposite-leaved tarweed:Hemizonella minima
 x:any
 xx:any
-. gravelly or rocky sites, generally open sites among meadows, scrub, or forest
+. stem < 20 cm (often < 10 cm), usually light purple in color
 . disk flower hairy
 . anthers yellow
 . ray flower fruit compressed front-to-back with straight beak
+. gravelly or rocky sites, generally open sites among meadows, scrub, or forest

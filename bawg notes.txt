@@ -209,8 +209,8 @@ glossary)" and "glandular-hairy (plant glossary)" as well as Jepson
 matches.  Highlighting would need to also skip non-matching portions,
 although it should continue to highlight through non-letter characters
 where a match continues uninterrupted across letters in different
-words.  Perhaps searching could be limited only match each search term
-against the beginning of a match word, but I don't think that's
+words.  Perhaps searching could be limited to only match each search
+term against the beginning of a match word, but I don't think that's
 necessary, and it introduces a complication of "what begins a word".
 Or just degrade the priority a bit when a match is later than a word
 boundary.  Similarly degrade priority for a split match compared to a
