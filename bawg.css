@@ -217,7 +217,8 @@ div.list-thumb-missing {
     max-height: 98px;
 }
 a.enclosed {
-    text-decoration: none;
+    text-decoration: none; /* prevent underline for taxon links */
+    border-bottom: none;   /* prevent underline for glossary links */
 }
 a.external {
 }

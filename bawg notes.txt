@@ -190,5 +190,3 @@ can be printed (or disable any limit).
 
 Should top-level non-flowering-plant taxons be presented
 hierarchically (similar to the glossary ToC)?  To what level?
-
-Remove underlines from glossary entries in autocomplete list.
