@@ -156,20 +156,6 @@ while testing specific plural substitutions.  (But also keep the code
 to throw out non-word characters from each.)  E.g.
 is_same(name, 'z', 'zzes')
 
-Should I detect when a term is only ever referenced via the glossary
-of a lower-level taxon?  E.g. a flower term is accidentally included
-in the plant glossary.  But I allow terms to simply not be used, so
-why wouldn't I allow terms to be used in only a few places?
--or-
-Maybe it's better to flag when a term is defined in any glossary but
-then used outside of glossaries.  Thus, I could be aggressive in
-assigning terms to lower-level glossaries and be warned when I've gone
-too far.  This would also simplify the glossary regex, since it would
-simply be all glossary words (preceded by any possible cross-ref
-name).  Figuring out which glossary to link to would occur after a
-term has been recognized, the same as now, but instead of assuming
-that there must be a match, an error would print if there is not.
-
 Detect when a glossary term is defined twice in the same file (or
 definition) (e.g. a typo).
 
@@ -188,5 +174,15 @@ Separate surprise_obs into multiple parts:
 Support a command-line argument to increase the number of errors that
 can be printed (or disable any limit).
 
-Should top-level non-flowering-plant taxons be presented
-hierarchically (similar to the glossary ToC)?  To what level?
+Now that glossary terms are flagged when used out of place, try moving
+many of the plant glossary entries to the flower glossary.
+
+Allow a taxon page to declare glossary terms which are then applied to
+that page and below.  E.g. in larkspurs, define upper sepal, lateral
+sepals, lower sepals, upper petals, lower petals.  E.g. {...,...,...}
+[paragraph].  This would presumably create a Glossary object that is
+marked as a taxon page rather than a glossary page.  write_html()
+obviously shouldn't be called for the glossary, but its line-by-line
+glossary linking could be reused.  (Should all taxon pages thus be
+line-by-line, or should that only be done when the page includes
+definitions?)

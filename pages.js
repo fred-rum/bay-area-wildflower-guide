@@ -1868,7 +1868,7 @@ var pages=[
 {idx:3,com:["bud","buds"],x:"g"},
 {idx:3,com:["claw","claws"],x:"g"},
 {idx:3,com:["cleistogamous"],x:"g"},
-{idx:3,com:["head","heads"],x:"g"},
+{idx:3,com:["flower head","flower heads","head","heads"],x:"g"},
 {idx:3,com:["involucel","involucels"],x:"g"},
 {idx:3,com:["involucre","involucres"],x:"g"},
 {idx:3,com:["limb","limbs"],x:"g"},

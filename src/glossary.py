@@ -115,10 +115,13 @@ class Glossary:
                 else:
                     self.used_dict[anchor] = 1
             return self.glossary_link(anchor, term)
-        else:
+        elif self.parent:
             return self.parent.get_link(term)
+        else:
+            return None
 
-    def link_glossary_words(self, txt, is_glossary=False, exclude=None):
+    def link_glossary_words(self, txt, filename,
+                            is_glossary=False, exclude=None):
         # This function is called for a glossary word match.
         # Replace the matched word with a link to the primary term
         # in the glossary.
@@ -137,23 +140,29 @@ class Glossary:
                 # term and extending beyond its end.  I doubt that
                 # would ever matter, and if it did we'd just miss a
                 # link.  Not a big deal.)
-                sub_term = re.sub(self.glossary_regex, repl_glossary, term[:-1])
+                sub_term = re.sub(glossary_regex, repl_glossary, term[:-1])
                 alt_term = sub_term + term[-1]
                 if alt_term != term: return alt_term
 
-                sub_term = re.sub(self.glossary_regex, repl_glossary, term[1:])
+                sub_term = re.sub(glossary_regex, repl_glossary, term[1:])
                 alt_term = term[0] + sub_term
                 return alt_term
             else:
                 # We have a glossary match, and it's not an excluded term.
                 # Replace the term with a link to its glossary entry.
-                return self.get_link(term)
+                link = self.get_link(term)
+                if link:
+                    return link
+                else:
+                    error(f'{term} in {filename}',
+                          prefix='Glossary term is used outside of its glossary hierarchy:')
+                    return term
 
         # Add glossary links in group 1, but leave group 2 unchanged.
         def repl_glossary_pair(matchobj):
             allowed = matchobj.group(1)
             disallowed = matchobj.group(2)
-            allowed = re.sub(self.glossary_regex, repl_glossary, allowed)
+            allowed = re.sub(glossary_regex, repl_glossary, allowed)
             return allowed + disallowed
 
         # Find non-tagged text followed (optionally) by tagged text.
@@ -197,32 +206,14 @@ class Glossary:
 
         return txt
 
-    def create_cross_set(self):
+    def get_short_name(self):
         if self.is_jepson:
-            short_name = 'Jepson'
+            return 'Jepson'
         else:
-            short_name = re.sub(r' glossary$', '', self.name)
+            return re.sub(r' glossary$', '', self.name)
 
-        for anchor in self.term_anchor.keys():
-            # Create a glossary entry tied to a specific glossary.
-            glossary_cross_set.add(f'{short_name}#{anchor}')
-
-            # Also create an entry tied to no glossary.  If this gets matched,
-            # it prevents the creation of a glossary link.  Note that multiple
-            # glossaries might create the same entry, but the set removes
-            # duplicates, and they all behave the same.
-            glossary_cross_set.add(f'none#{anchor}')
-
-        # Also include entries with no term listed.  This gets matched if
-        # the intended link doesn't exist, and thus an error can be flagged.
-        # Note that this matches only at a word boundary, meaning that there
-        # is a word immediately following the #, which is what we expect.
-        glossary_cross_set.add(f'{short_name}#')
-        glossary_cross_set.add('none#')
-
-
-    def create_local_set(self):
-        self.glossary_local_set = set(iter(self.term_anchor.keys()))
+    def get_term_list(self):
+        return iter(self.term_anchor.keys())
 
     def create_hierarchy_set(self):
         self.glossary_set = self.glossary_local_set
@@ -232,11 +223,6 @@ class Glossary:
             parent = parent.parent
 
         self.glossary_set = self.glossary_set.union(glossary_cross_set)
-
-    def create_regex(self):
-        trie = Trie(self.glossary_set)
-        ex = trie.get_pattern()
-        self.glossary_regex = re.compile(rf'\b({ex})\b', re.IGNORECASE)
 
     def record_terms(self, anchor, word_list):
         self.anchor_terms[anchor] = set()
@@ -388,7 +374,8 @@ class Glossary:
                 exclude_set = self.anchor_terms[anchor]
             else:
                 exclude_set = None
-            c = self.link_glossary_words(c, is_glossary=True,
+            c = self.link_glossary_words(c, self.name,
+                                         is_glossary=True,
                                          exclude=exclude_set)
             c_list.append(c)
         self.txt = '\n'.join(c_list)
@@ -451,6 +438,24 @@ glossary_files = get_file_set('glossary', 'txt')
 glossary_list = []
 glossary_cross_set = set()
 
+def create_regex():
+    name_set = set()
+    term_set = set()
+    for glossary in glossary_list:
+        name_set.add(glossary.get_short_name())
+        term_set.update(glossary.get_term_list())
+    name_set.add('none')
+
+    name_ex = '(?:' + '|'.join(map(re.escape, name_set)) + ')'
+
+    trie = Trie(term_set)
+    term_ex = trie.get_pattern()
+
+    ex = rf'\b((?:{name_ex}#)?{term_ex})\b'
+
+    global glossary_regex
+    glossary_regex = re.compile(ex, re.IGNORECASE)
+
 def parse_glossaries(top_list):
     global master_glossary, flower_glossary, jepson_glossary
 
@@ -482,21 +487,22 @@ def parse_glossaries(top_list):
     # "glossary" displays that same order.
     master_glossary.set_index()
 
-    # Create a set of anchors of the form '{glossary}:{anchor}' which can be
+    # Create a set of anchors of the form '{glossary}#{anchor}' which can be
     # used to link to a specific glossary.  This set includes every anchor in
     # every glossary.
-    jepson_glossary.create_local_set()
-    jepson_glossary.create_cross_set()
-    for glossary in glossary_list:
-        glossary.create_local_set()
-        glossary.create_cross_set()
+    #jepson_glossary.create_local_set()
+    #jepson_glossary.create_cross_set()
+    #for glossary in glossary_list:
+    #    glossary.create_local_set()
+    #    glossary.create_cross_set()
 
     # Now that we know the glossary hierarchy, we can apply glossary links
     # within each glossary and finally write out the HTML.
+    create_regex()
+    error_begin_section()
     for glossary in glossary_list:
-        glossary.create_hierarchy_set()
-        glossary.create_regex()
         glossary.write_html()
+    error_end_section()
 
 def write_glossary_search_terms(w):
     master_glossary.write_search_terms(w)

@@ -72,7 +72,7 @@ figure:sea muilla
 {bud,buds} An unopened flower, usually surrounded and protected by the sepals which are joined at the tip.
 {claw,claws} A very narrow basal portion of a free petal or sepal.  See limb. [figure:elegant clarkia]
 {cleistogamous} Self-pollinating without opening.  Generally looks bud-like.
-{head,heads} A dense inflorescence of +- sessile flowers.
+{flower head,flower heads,head,heads} A dense inflorescence of +- sessile flowers.
 {involucel,involucels} Secondary involucre within an inflorescence.
 {involucre,involucres} Collective term for a cluster of bracts.
 {limb,limbs} In a fused calyx or corolla, the spreading portion distal to the throat (or at least more widely expanded than the throat). [figure:false babystars]  In a free calyx or corolla, the expanded portion distal to the claw. [figure:elegant clarkia]

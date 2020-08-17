@@ -20,7 +20,7 @@ color: other, red purple
 color: other
 . hoods closed at top
 . horns barely peeking out to +- height of hood and gymnostegium
-. hoods not exceeding anther head by at least 1/2 their lengths
+. hoods not exceeding anther tip by at least 1/2 their lengths
 . inflorescences at nodes peduncled
 . leaves opposite or whorled in 3s or 4s; petiole short to 0; blade elliptic, lanceolate, or ovate, base tapered to obtuse (to cordate), tip obtuse to short-acuminate, margins generally not wavy, generally entire
 . not confirmed in the bay area?
@@ -33,12 +33,12 @@ color: other
 . common, but not west of Skyline Blvd.
 
 ==A. vestita
-. hoods open at top, short (not exceeding anther head by at least 1/2 their lengths)
+. hoods open at top, short (not exceeding anther tip by at least 1/2 their lengths)
 . horn exserted from hood, at +- same level as to much exceeded by hood
 . inflorescences at nodes sessile or nearly so
 . Pinnacles
 
 ==A. speciosa
-. hoods open at top, very long (exceeding anther head by at least 1/2 their lengths)
+. hoods open at top, very long (exceeding anther tip by at least 1/2 their lengths)
 . horn exserted from hood
 . Mt. Tam, Briones, Los Trampas

@@ -33,7 +33,7 @@ color: white, pink
 . corolla white or pink
 
 ==serpentine springbeauty:C. exigua ssp. glauca
-. cauline leaves fused into +- disk
+. cauline leaves fused into +- none#disk
 . <b>petals +- 2 mm</b>
 . corolla white or pink
 

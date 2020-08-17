@@ -966,7 +966,9 @@ class Page:
         s = link_figures(self.name, s)
         s = re.sub(r'{-([^}]+)}', repl_link, s)
         s = easy_sub(s)
-        s = self.glossary.link_glossary_words(s, is_glossary=False)
+        error_begin_section()
+        s = self.glossary.link_glossary_words(s, self.name, is_glossary=False)
+        error_end_section()
         self.txt = s
 
     def any_parent_within_level(self, within_level_list):

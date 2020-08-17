@@ -5,7 +5,7 @@ x:ca
 
 <a href="https://www.inaturalist.org/projects/fumaria-species-in-the-usa?tab=about">Identification tips and resources</a>
 . corolla color, shape and length
-. upper petal shape
+. none#upper petal shape
 . sepal shape and size (length and width)
 . dry fruit shape and size (length and width)
 . pedicel shape (straight, spreading or reflexed) and length at frutification

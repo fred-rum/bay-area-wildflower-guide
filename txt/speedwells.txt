@@ -57,7 +57,7 @@ xx:ba
 color: pale blue
 . 1+ flowers in each terminal raceme
 . corolla 8--12 mm, blue to pale purple, with dark blue or purple lines
-. its lower petal is generally smaller, and the white spot bleeds strongly onto it and somewhat onto the two adjacent petals.
+. its none#lower petal is generally smaller, and the white spot bleeds strongly onto it and somewhat onto the two adjacent petals.
 . pedicels 15--30 mm
 . common
 
