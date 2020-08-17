@@ -191,27 +191,6 @@ can be printed (or disable any limit).
 Should top-level non-flowering-plant taxons be presented
 hierarchically (similar to the glossary ToC)?  To what level?
 
-Allow 'glossary' in the JavaScript search to match any glossary.  What
-about subsets of glossary?  I feel like it should match exactly as if
-the match pattern were against '[word] glossary', but then the
-highlighting is only on '[word]' and 'glossary'.
--and/or-
-Ensure that glossary words always appear on the auto-complete list,
-even if they are lower priority.  E.g. ensure that N glossary words
-appear at the bottom of the list when the user has typed N useful
-letters, to a maximum of 5 and of course also capped by the number of
-matching glossary words.
--and/or-
-A superset of the first idea: when the search term has multiple words,
-then allow those words to be separated when matching.  E.g. "gland
-glos" would match "gland (plant glossary)" and "glandular (plant
-glossary)" and "glandular-hairy (plant glossary)" as well as Jepson
-matches.  Highlighting would need to also skip non-matching portions,
-although it should continue to highlight through non-letter characters
-where a match continues uninterrupted across letters in different
-words.  Perhaps searching could be limited to only match each search
-term against the beginning of a match word, but I don't think that's
-necessary, and it introduces a complication of "what begins a word".
-Or just degrade the priority a bit when a match is later than a word
-boundary.  Similarly degrade priority for a split match compared to a
-continuous match.
+Remove underlines from glossary entries in autocomplete list.
+
+enter and escape should activate on keydown instead of keyup.
