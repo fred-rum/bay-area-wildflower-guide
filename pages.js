@@ -1933,6 +1933,8 @@ var pages=[
 {idx:8,com:["raceme","racemes"],x:"g"},
 {idx:8,com:["spike","spikes"],x:"g"},
 {idx:8,com:["umbel","umbels"],x:"g"},
+{idx:8,com:["staminate flower","staminate flowers","staminate"],x:"g"},
+{idx:8,com:["pistillate flower","pistillate flowers","pistillate"],x:"g"},
 {com:["abaxial"],x:"j"},
 {com:["abundant"],x:"j"},
 {com:["achene","achenes"],x:"j"},

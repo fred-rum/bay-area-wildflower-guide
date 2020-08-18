@@ -89,23 +89,10 @@ class Glossary:
 
         return dup_list
 
-    def get_link(self, term):
-        if '#' in term:
-            (name, partition, term) = term.partition('#')
-            if term == '':
-                # I'd love to print what file this error occured in, but
-                # that requires an exception or a global variable or passing
-                # more data around, none of which I like.  The user will just
-                # have to grep for the broken reference in the HTML.
-                error(f'unrecognized glossary cross reference starting with "{name}#')
-                return f'{name}#broken ref'
-            elif name == 'none':
-                # 'none#[term]' means that we don't want a glossary link.
-                # Discard the 'none#' and return only the term.
-                return term
-            else:
-                return glossary_name_dict[name + ' glossary'].get_link(term)
-
+    # For the given term, get a link within the glossary or its ancestors.
+    # Search ancestors only when deep=True.
+    # Return None if the term isn't in the glossary (or its ancestors).
+    def get_link(self, term, deep):
         lower = term.lower()
         if lower in self.term_anchor:
             anchor = self.term_anchor[lower]
@@ -115,8 +102,8 @@ class Glossary:
                 else:
                     self.used_dict[anchor] = 1
             return self.glossary_link(anchor, term)
-        elif self.parent:
-            return self.parent.get_link(term)
+        elif deep and self.parent:
+            return self.parent.get_link(term, True)
         else:
             return None
 
@@ -127,42 +114,102 @@ class Glossary:
         # in the glossary.
         def repl_glossary(matchobj):
             term = matchobj.group(1)
-            if exclude and term.lower() in exclude:
-                # A term matches within its own definition, so we
-                # don't want to make a link for it.  On the other
-                # hand, a subset of the term might match a different
-                # glossary entry.  So separate the last letter and try
-                # to link again.  This will perform the next-highest
-                # priority match if possible.  If nothing changes,
-                # instead separate the first letter and try to link
-                # again.  (Note that this doesn't catch the case where
-                # a match could be made starting inside the excluded
-                # term and extending beyond its end.  I doubt that
-                # would ever matter, and if it did we'd just miss a
-                # link.  Not a big deal.)
-                sub_term = re.sub(glossary_regex, repl_glossary, term[:-1])
-                alt_term = sub_term + term[-1]
-                if alt_term != term: return alt_term
-
-                sub_term = re.sub(glossary_regex, repl_glossary, term[1:])
-                alt_term = term[0] + sub_term
-                return alt_term
-            else:
-                # We have a glossary match, and it's not an excluded term.
-                # Replace the term with a link to its glossary entry.
-                link = self.get_link(term)
-                if link:
-                    return link
+            if '#' in term:
+                (name, partition, bare_term) = term.partition('#')
+                if bare_term == '':
+                    # I'd love to print what file this error occured in, but
+                    # that requires an exception or a global variable or passing
+                    # more data around, none of which I like.  The user will
+                    # have to grep for the broken reference in the HTML.
+                    error(f'unrecognized glossary cross reference starting with "{name}#')
+                    return f'{name}#broken ref'
+                elif name == 'none':
+                    # 'none#[term]' means that we don't want a glossary link.
+                    # Discard the 'none#' and return only the bare term.
+                    return bare_term
                 else:
-                    error(f'{term} in {filename}',
-                          prefix='Glossary term is used outside of its glossary hierarchy:')
-                    return term
+                    glossary = glossary_name_dict[name + ' glossary']
+                    link = glossary.get_link(bare_term, False)
+                    if link:
+                        return link
+                    else:
+                        # We didn't find a link for the cross reference, but
+                        # maybe we will if we use a shorter term.
+                        # While keeping the cross-reference marker, cut off
+                        # the end of the term and try glossary substitution
+                        # again.
+                        matchobj = re.match(r'(.*\W)(\w+)$', term)
+                        if matchobj:
+                            term1 = matchobj.group(1)
+                            term2 = matchobj.group(2)
+                            alt_term = link_safe(term1) + link_safe(term2)
+                            if alt_term != term:
+                                link = alt_term
+
+                        if link:
+                            return alt_term
+                        else:
+                            error(f'bad glossary cross reference {term}')
+                            return term
+
+            exclude_term = (exclude and term.lower() in exclude)
+
+            if exclude_term:
+                # Don't make a link for an excluded term.  Instead, check
+                # for potential links in subsets of the term, then default
+                # to returning the unmodified term.
+                link = None
+            else:
+                link = self.get_link(term, True)
+
+            if not link:
+                # We can't find a link for the term (or it is excluded,
+                # so we don't want to make a link for it.)  However,
+                # a subset of the term might match a different glossary
+                # entry.  So separate the last letter and try to link again.
+                # This will perform the next-highest priority match if
+                # possible.  If nothing changes, instead separate the first
+                # letter and try to link again.  (Note that this doesn't
+                # catch the case where a match could be made starting
+                # inside the excluded term and extending beyond its end.
+                # I doubt that would ever matter, and if it did we'd just
+                # miss a link.  Not a big deal.)
+                matchobj = re.match(r'(.*\W)(\w+)$', term)
+                if matchobj:
+                    term1 = matchobj.group(1)
+                    term2 = matchobj.group(2)
+                    alt_term = link_safe(term1) + link_safe(term2)
+                    if alt_term != term:
+                        link = alt_term
+
+            if not link:
+                matchobj = re.match(r'(\w+)(\W.*)$', term)
+                if matchobj:
+                    term1 = matchobj.group(1)
+                    term2 = matchobj.group(2)
+                    alt_term = link_safe(term1) + link_safe(term2)
+                    if alt_term != term:
+                        link = alt_term
+
+            if link:
+                return link
+            elif exclude_term:
+                return term
+            else:
+                error(f'{term} in {filename}',
+                      prefix='Glossary term is used outside of its glossary hierarchy:')
+                return term
+
+        # Perform glossary substitution on a fragment of "safe text", i.e.
+        # one without HTML tags or other complications.
+        def link_safe(txt):
+            return re.sub(glossary_regex, repl_glossary, txt)
 
         # Add glossary links in group 1, but leave group 2 unchanged.
         def repl_glossary_pair(matchobj):
             allowed = matchobj.group(1)
             disallowed = matchobj.group(2)
-            allowed = re.sub(glossary_regex, repl_glossary, allowed)
+            allowed = link_safe(allowed)
             return allowed + disallowed
 
         # Find non-tagged text followed (optionally) by tagged text.
@@ -451,7 +498,10 @@ def create_regex():
     trie = Trie(term_set)
     term_ex = trie.get_pattern()
 
-    ex = rf'\b((?:{name_ex}#)?{term_ex})\b'
+    # Construct the regex pattern to look for 'term' or 'name#term'.
+    # We specifically exclude '...term#' because e.g. we don't want to match
+    # 'pistillate flower' from the text 'pistillate flower#flower'.
+    ex = rf'\b((?:{name_ex}#)?{term_ex})\b(?!#)'
 
     global glossary_regex
     glossary_regex = re.compile(ex, re.IGNORECASE)

@@ -4,14 +4,14 @@ taxon:sunflower family
 
 {bristle,bristles} A stiff, hairlike tip of a pappus element.
 {disk,disks} The collective term for all disk flowers in a head.
-{disk flower,disk flowers} A flower in the central portion of a head in the sunflower family.  Usually radial and 5-lobed.  Often surrounded by ray flowers.
+{disk flower,disk flowers} A flower in the central portion of a head in the sunflower family.  Usually radial and 5-lobed, usually bisexual but sometimes staminate.  Often surrounded by ray flowers.
 {head,heads,flower head,flower heads} A tight inflorescence in the sunflower family which appears from a distance to be a single flower.
 {involucre,involucres} The green base of a flower head in the sunflower family.  See also the general definition of involucre.
 {ligule,ligules,ligulate flower,ligulate flowers} A ray-like flower that is clustered only with other ligules to form a head in the sunflower family (i.e. one without disk flowers).
 {pappus,pappuses,pappi} A modified calyx composed of some combination of scales, awns, and/or bristles.  In some species, the pappus forms a parachute for seed dispersal.
 {pappus element,pappus elements} A modified sepal; one part among similar parts that make up the pappus.
 {phyllary,phyllaries} A bract of the flower head in the sunflower family.  A member of the involucre.
-{ray,rays,ray flower,ray flowers} A flower in the outer portion of a head in the sunflower family.  Flat and uni-directional, not radial.  May be distally lobed.  The rays form a ring around the central disk.
+{ray,rays,ray flower,ray flowers} A flower in the outer portion of a head in the sunflower family.  Flat and uni-directional, not radial.  May be distally lobed.  Usually pistillate, but sometimes sterile.  The rays form a ring around the central disk.
 {scale,scales} Flat, membranous element of a pappus.
 
 <h2>Inflorescence shapes</h2>
@@ -23,3 +23,8 @@ taxon:sunflower family
 {raceme,racemes} An inflorescence with stalked heads attached directly to the inflorescence axis (not to branches).
 {spike,spikes} An inflorescence with sessile heads attached directly to the inflorescence axis (not to branches).
 {umbel,umbels} An inflorescence in which 3+ stalked heads radiate from a common point with no continuation of the central axis.
+
+<h2>Sexual capability</h2>
+
+{staminate flower,staminate flowers,staminate} A flower#staminate disk flower.
+{pistillate flower,pistillate flowers,pistillate} A flower#pistillate ray flower.

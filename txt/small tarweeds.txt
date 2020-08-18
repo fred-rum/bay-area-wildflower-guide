@@ -6,7 +6,7 @@ Assisted with <a href="https://www.inaturalist.org/observations/51757218#activit
 . stem up to 30+ cm, unknown color
 . disk flower glabrous
 . anthers yellow to +- brown
-. ray flower fruit compressed side-to-side or +- 3-angled in cross section with curved beak
+. <b>ray flower fruit compressed side-to-side or +- 3-angled in cross section with curved beak</b>
 . sand or clay soils in open, grassy, or disturbed sites
 See also the key to {-Madia spp.}.
 
@@ -16,5 +16,5 @@ xx:any
 . stem < 20 cm (often < 10 cm), usually light purple in color
 . disk flower hairy
 . anthers yellow
-. ray flower fruit compressed front-to-back with straight beak
+. <b>ray flower fruit compressed front-to-back with straight beak</b>
 . gravelly or rocky sites, generally open sites among meadows, scrub, or forest

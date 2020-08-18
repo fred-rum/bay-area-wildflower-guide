@@ -186,3 +186,28 @@ obviously shouldn't be called for the glossary, but its line-by-line
 glossary linking could be reused.  (Should all taxon pages thus be
 line-by-line, or should that only be done when the page includes
 definitions?)
+
+Instead of using indexed glossaries to save bytes, write pages.js like this:
+{page="plant glossary",glossary:[["leaf","leaves","leaved"],["blade","blades"],etc.]}
+If you want to normalize that to multiple listings with com:, that's fine.
+
+When searching for a glossary page (e.g. "plant glossary"), it should
+have a similar priority to glossary words (e.g. "leaf (plant
+glossary)"), not unobserved taxon pages (x:"u").
+
+Combine taxon & glossary pages:
+a glossary page comes from the glossary directory.
+a glossary page doesn't have a common or scientific name.
+a glossary page is not allowed to have children (or be a child taxon).
+a glossary page gets a glossary ToC.
+  Should the ToC include a taxon page with glossary definitions?
+a glossary page writes a definition as <dt>...</dt id="anchor"><dd>...</dd>
+a taxon page writes a definition as <p id="anchor">...</p>
+either kind of page includes a glossary database of anchors/terms
+...
+Perhaps it makes more sense to keep taxon and glossary pages separate,
+but share elements of parsing.
+
+Include empty glossary cross references to regex, e.g. "plant#" so
+that an error can be flagged for a cross reference without a matching
+glossary word.
