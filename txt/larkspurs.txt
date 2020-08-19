@@ -1,13 +1,10 @@
 sci:Delphinium spp.
 x:hist/rare
 
-In most species each flower consists of five petal-like sepals in
-which the none#upper sepal has a long spur at the base.  Within the sepals
-are four true petals, smaller and less conspicuous, and usually
-colored similarly to the sepals.  The long spur of the none#upper sepal
-encloses the nectar-containing spurs of the two none#upper petals.  The
-lower two petals typically have erect claws which are hidden by the
-spreading petal blade.
+The parts of a larkspur flower are described in the {-larkspur glossary}.
+
+figure:foothill larkspur
+figure:foothill larkspur spur
 
 Key features:
 . number of flowers and whether the oldest (lowest) open-flowered pedicels are > 25 mm and > 2 &times; youngest

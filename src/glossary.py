@@ -69,11 +69,27 @@ class Glossary:
         self.parent = parent
         parent.child.add(self)
 
-    def glossary_link(self, anchor, term):
+    def get_link_class(self):
         if self.is_jepson:
-            return f'<a class="glossary-jepson" href="https://ucjeps.berkeley.edu/eflora/glossary.html#{anchor}">{term}</a>'
+            return 'glossary-jepson'
         else:
-            return f'<a class="glossary" href="{self.name}.html#{anchor}">{term}</a>'
+            return 'glossary'
+
+    def get_url(self):
+        if self.is_jepson:
+            return 'https://ucjeps.berkeley.edu/eflora/glossary.html'
+        else:
+            return f'{self.name}.html'
+
+    def create_link(self):
+        link_class = self.get_link_class()
+        url = self.get_url()
+        return f'<a href="{url}" class="{link_class}">{self.name}</a>'
+
+    def glossary_link(self, anchor, term):
+        link_class = self.get_link_class()
+        url = self.get_url()
+        return f'<a class="{link_class}" href="{url}#{anchor}">{term}</a>'
 
     def find_dups(self, skip_glossary, term):
         def by_name(glossary):

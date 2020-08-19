@@ -869,7 +869,12 @@ class Page:
             else:
                 c_list.append(f'<div class="photo-box">{img}\n<span>{link}</span></div>')
 
-        # replace the easy (fixed-value) stuff.
+        # Replace HTTP links in the text with ones that open a new tab.
+        # (Presumably they're external links or they'd be in {...} format.)
+        s = re.sub(r'<a href=', '<a target="_blank" href=', s)
+
+        s = link_figures(self.name, s)
+
         # Break the text into lines, then perform easy substitutions on
         # non-keyword lines and decorate bullet lists.
         c_list = []
@@ -917,10 +922,6 @@ class Page:
                 bracket_depth -= 1
                 continue
 
-            # Replace HTTP links in the text with ones that open a new tab.
-            # (Presumably they're external links or they'd be in {...} format.)
-            c = re.sub(r'<a href=', '<a target="_blank" href=', c)
-
             if list_depth:
                 c_list.append(f'<li>{c}</li>')
                 continue
@@ -950,8 +951,11 @@ class Page:
             if page:
                 return page.create_link(1)
             else:
-                error(f'Broken link {{-{name}}} on page {self.name}')
-                return '{-' + name + '}'
+                if name in glossary_name_dict:
+                    return glossary_name_dict[name].create_link()
+                else:
+                    error(f'Broken link {{-{name}}} on page {self.name}')
+                    return '{-' + name + '}'
 
         # Use the text supplied in the text file if present.
         # Otherwise use the key text from its parent.
@@ -963,7 +967,6 @@ class Page:
         else:
             s = self.key_txt
 
-        s = link_figures(self.name, s)
         s = re.sub(r'{-([^}]+)}', repl_link, s)
         s = easy_sub(s)
         error_begin_section()

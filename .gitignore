@@ -33,3 +33,4 @@ debug.log
 markers.*
 __pycache__/
 .in_progress/
+figures/*.jpg

@@ -1,0 +1,16 @@
+taxon:larkspurs
+
+<h2>Parts of a larkspur flower</h2>
+
+figure:foothill larkspur
+figure:foothill larkspur spur
+
+<p>In most larkspurs, each flower consists of five petal-like sepals in which the base of the upper sepal has a long spur projecting behind it.  The sepals may be erect, spreading, or reflexed.  Within the sepals are four true petals, smaller and less conspicuous, and usually
+colored similarly to the sepals.
+
+{upper sepal,upper sepals} The single sepal in the uppermost position on the flower. [figure:foothill larkspur]
+{spur,spurs} A hollow +- conical projection from the back (proximal side) of the upper sepal.  The upper petals have spurs, too, nestled within the visible (upper sepal) spur. [figure:foothill larkspur spur]
+{lateral sepals,lateral sepal} The two sepals on either side of the upper sepal, on the side of the flower. [figure:foothill larkspur]
+{lower sepals,lower sepal} The two sepals in the lowermost positions on the flower. [figure:foothill larkspur]
+{upper petals,upper petal} The two petals in the uppermost position on the flower.  These are typically erect (projecting forward from the flower).  The upper petals also include spurs nestled within the the upper sepal's spur. [figure:foothill larkspur]
+{lower petals,lower petal} The two petals in the lowermost position on the flower.  These typically each have an erect claw whish is hidden by the downward-spreading petal blade. [figure:foothill larkspur]
