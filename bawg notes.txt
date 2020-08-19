@@ -218,7 +218,3 @@ either kind of page includes a glossary database of anchors/terms
 ...
 Perhaps it makes more sense to keep taxon and glossary pages separate,
 but share elements of parsing.
-
-Include empty glossary cross references to regex, e.g. "plant#" so
-that an error can be flagged for a cross reference without a matching
-glossary word.

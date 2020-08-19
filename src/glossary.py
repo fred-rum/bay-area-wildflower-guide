@@ -137,7 +137,7 @@ class Glossary:
                     # that requires an exception or a global variable or passing
                     # more data around, none of which I like.  The user will
                     # have to grep for the broken reference in the HTML.
-                    error(f'unrecognized glossary cross reference starting with "{name}#')
+                    error(f'unrecognized glossary cross reference starting with "{name}#" in {filename}')
                     return f'{name}#broken ref'
                 elif name == 'none':
                     # 'none#[term]' means that we don't want a glossary link.
@@ -517,7 +517,7 @@ def create_regex():
     # Construct the regex pattern to look for 'term' or 'name#term'.
     # We specifically exclude '...term#' because e.g. we don't want to match
     # 'pistillate flower' from the text 'pistillate flower#flower'.
-    ex = rf'\b((?:{name_ex}#)?{term_ex})\b(?!#)'
+    ex = rf'\b((?:{name_ex}#)?{term_ex}|(?:{name_ex}#))\b(?!#)'
 
     global glossary_regex
     glossary_regex = re.compile(ex, re.IGNORECASE)
