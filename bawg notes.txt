@@ -218,3 +218,6 @@ either kind of page includes a glossary database of anchors/terms
 ...
 Perhaps it makes more sense to keep taxon and glossary pages separate,
 but share elements of parsing.
+
+Add "Contact me" link in the bottom right of each page.  "Contact me"
+page links to iNaturalist and GitHub.

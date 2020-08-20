@@ -1,26 +1,24 @@
 sci:Quercus
 x:rare
 
-Key features:
-. bark color
-. acorn cup scales thin or thick
-. nut shell hairy, woolly, or not inside
-. leaf shape, colors on top and bottom
-
-CalFlora lists many pines in the bay area, but for now I will confine
+CalFlora lists many oaks in the bay area, but for now I will confine
 this list to the less rare ones (> 50 CalFlora records).
 
-"Acorn cup scales thin" means that the cap conforms closely to the
-shape of the underlying nut, rather than being distinctly puffed out.
+Key features:
+. bark color
+. acorn cap scales thin or thick
+.. "Thin" means that the cap conforms closely to the shape of the underlying nut, rather than being distinctly puffed out.
+. nut shell hairy, woolly, or not inside
+. leaf shape, colors on top and bottom
+.. "Adaxially convex" means that the leaf is correspondingly abaxially concave.
+.. Be careful when checking the leaf shape because the tip is considered separately.  E.g. a leaf that is "roundish" may actually be lanceolate.
 
-"Adaxially convex" means that the leaf is correspondingly abaxially concave.
-
-Be careful when checking the leaf shape because the tip is considered
-separately.  E.g. a leaf that is "roundish" may actually be lanceolate.
+The Marin extension of UC Davis provides some of the <a href="http://cemarin.ucdavis.edu/Programs/Custom_Program97/Types_of_oaks/">identification tips</a> below.
 
 [
-<h2>acorn cup scales thin, shell hairy to woolly inside, at least at tip<br/>
-bark dark gray or gray-brown to black</h2>
+<h2>red oaks (section Lobatae)</h2>
+. acorn cap scales thin, shell hairy to woolly inside, at least at tip
+. bark dark gray or gray-brown to black
 
 ==california black oak:Q. kelloggii
 color:other
@@ -29,6 +27,8 @@ color:other
 .. adaxially glabrous, bright green
 .. abaxially finely tomentose, +- glabrous in age, pale green
 .. <b>moderately to deeply lobed</b>, lobes 1--4-toothed, teeth generally bristle-tipped
+. acorn cap usually about as deep as wide, often covering most of the acorn shell
+. deciduous
 . common
 
 ==coast live oak:Q. agrifolia
@@ -36,66 +36,89 @@ color:other
 . leaf:
 .. 2.5--6 cm, roundish
 .. <b>generally adaxially convex</b>, +- dull green
-.. abaxially glabrous to densely tomentose, dull, pale green
+.. abaxially glabrous to densely tomentose, dull, pale green; sometimes with hair clustered at junction of midvein and lateral veins; typically with 3--5 pairs of lateral veins
 .. tip rounded to spine-toothed
 .. margin rolled under or not, weakly spine-toothed
+. acorn cap usually about as deep as wide
+. evergreen
 . common
+. parasitized by the {-live oak bud gall wasp}.
 
 ==interior live oak:Q. wislizeni
+. catkins widely spaced, not clustered
 . leaf:
 .. 2--5 cm, roundish or lanceolate
 .. adaxially +- flat
-.. abaxially generally +- shiny, yellow-green
-.. tip generally abruptly pointed
+.. abaxially generally +- shiny, yellow-green, hairless, typically with > 5 pairs of lateral veins
+.. tip generally abruptly pointed, but highly variable among leaves
 .. margin entire to spine-toothed
+.. petiole 3--15 mm, densely hairy on adaxial and abaxial surfaces
 . nut distally acute to +- obtuse
+. acorn cap bowl shaped, sometimes as deep as wide
+. evergreen
 . common
 
 ==coast oak:Q. parvula
+. catkins clustered into groups
 . leaf:
 .. 3--9 cm, roundish or lanceolate
 .. adaxially +- flat
-.. abaxially glabrous, generally +- dull
+.. abaxially glabrous, generally +- dull, generally with > 5 pairs of lateral veins
 .. tip obtuse to acute or acuminate
 .. margin entire to spine-toothed
-. nut distally +- rounded to obtuse
+.. petiole 2--25 mm, generally hairy adaxially and almost smooth abaxially
+. nut distally +- rounded to obtuse (ignoring the little spine on the end)
+. acorn cap bowl shaped, usually wider than deep
+. evergreen
 . uncommon
 
 ]
 [
-<h2>acorn cup scales generally thick, glabrous to woolly inside<br/>
-bark light gray to +- white</h2>
+<h2>golden oaks (section Protobalanus)</h2>
+. thick acorn cap scales covered in golden hairs
+. bark a pale gray
 
 ==canyon live oak:Q. chrysolepis
 color: other
-. <b>acorn nut shell +- woolly inside</b>
-.. all others below are glabrous inside
 . leaf:
 .. 3--6 cm, leathery, roundish
 .. adaxially dark green
-.. abaxially golden-puberulent, glabrous in age, dull, +- gray
+.. abaxially golden-puberulent, easily wiped away with a finger to reveal the blue-green leaf, glabrous in age, dull, +- gray
 .. tip acute to abruptly pointed
 .. margin entire or spine-toothed
+. acorn nut shell +- woolly inside
+. evergreen
 . common
+
+]
+[
+<h2>white oaks (section Quercus)</h2>
+. acorn cap scales generally thick/knobby, glabrous inside
+. bark light gray to +- white
+. deciduous
 
 ==valley oak:Q. lobata
 color: other
 . leaf:
 .. margins deeply lobed (sinuses > 50% to midrib), without spines
+... sinuses typically wider than {-valley oak}.
 .. adaxially often +- shiny, dark green
 .. abaxially fine-tomentose, dull to pale green
-. acorn cup 10--30 mm deep, all scales tubercled
-. nut 30--50 mm, generally long-conic, distally acute to +- obtuse
+. acorn cap 10--30 mm deep, often as wide as deep, all scales tubercled
+. <b>nut 30--50 mm, generally long-conic</b>, distally acute to +- obtuse
 . common
+. favorite host of the {-california gall wasp}.
 
 ==oregon oak:Q. garryana
 . leaf
 .. margins deeply lobed (sinuses > 50% to midrib), without spines
+... sinuses typically narrower than {-valley oak}.
 .. adaxially shiny, dark green
 .. abaxially short-hairy, dull, light green
-. acorn cup 4--9 mm deep, proximal scales +- tubercled, distal +- not
-. nut 20--30 mm, ovoid to +- spheric, distally rounded
+. acorn cap 4--9 mm deep, less deep than wide, proximal scales +- tubercled, distal +- not
+. <b>nut 20--30 mm, ovoid to +- spheric</b>, distally rounded
 . uncommon
+. an occasional host of the {-california gall wasp}.
 
 ==blue oak:Q. douglasii
 color:other
@@ -104,7 +127,9 @@ color:other
 .. abaxially puberulent, pale blue-green
 .. tip generally rounded
 .. margin +- entire, wavy, or +- shallowly lobed (sinuses < 50% to midrib), without spines
+. acorn cap less deep than wide
 . common
+. an occasional host of the {-california gall wasp}.
 
 ==leather oak:Q. durata
 color: other
@@ -126,5 +151,6 @@ color:other
 .. abaxially with minute appressed stellate hairs, dull, pale green
 .. margin mucro- [sharp rib] or spine-toothed
 . uncommon
+. an occasional host of the {-california gall wasp}.
 
 ]
