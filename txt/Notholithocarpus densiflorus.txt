@@ -6,9 +6,11 @@ xx:ba
 color: cream, other
 . tree up to 100 feet tall (but can be young or stunted, of course)
 . leaf generally serrate, <b>prominently veined abaxially</b>
+. acorn cap bristled or spiked
+. frequently found in redwood forests
 . common
 
 ==bush tanoak:N. densiflorus var. echinoides
 . shrub up to 10 feet tall
 . leaf entire to few-toothed, <b>obscurely veined abaxially</b>
-. not present in the bay area
+. <b>not present in the bay area</b>

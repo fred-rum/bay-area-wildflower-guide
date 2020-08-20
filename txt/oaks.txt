@@ -3,6 +3,7 @@ x:rare
 
 CalFlora lists many oaks in the bay area, but for now I will confine
 this list to the less rare ones (> 50 CalFlora records).
+See also the related {-tanoak}.
 
 Key features:
 . bark color

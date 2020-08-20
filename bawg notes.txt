@@ -221,3 +221,5 @@ but share elements of parsing.
 
 Add "Contact me" link in the bottom right of each page.  "Contact me"
 page links to iNaturalist and GitHub.
+
+Change BAWG in footer to Bay Area Wildflower Guide
