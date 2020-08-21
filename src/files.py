@@ -123,12 +123,18 @@ def write_header(w, title, h1, nospace=False):
         w.write(f'<h1 id="title"{space_class}>{h1}</h1>\n')
 
 def write_footer(w):
+    # The "home-link" tag is empty because it gets filled in by the CSS
+    # with either "BAWG" or "Bay Area Wildflower Guide", depending on how
+    # much space is available.
+    #
     # I don't put the year in the copyright because it's a pain to determine
     # given the different creation/modification dates of the pages *plus*
     # the photos on them.  The Berne Convention applies in any case.
     w.write(f'''
 <hr/>
-<a href="../index.html">BAWG</a> <span class="copyright">&ndash; &copy; Chris Nelson</span>
+<div class="footer">
+<span class="foot-left"><a class="home-link" href="../index.html"></a> <span class="foot-fade"> &copy; Chris Nelson</span></span><a class="foot-fade" href="../contact.html">Contact me</a>
+</div>
 </div>
 <script src="../pages.js"></script>
 <script src="../search.js"></script>

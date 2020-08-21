@@ -3,10 +3,21 @@
 @-ms-viewport {
     width: device-width;
 }
-.copyright {
+.footer {
+    display: flex;
+    justify-content: space-between;
+}
+.home-link::before {
+    content: "BAWG";
+}
+@media (min-width: 500px) {
+    .home-link::before {
+	content: "Bay Area Wildflower Guide";
+    }
+}
+.foot-fade {
     color: gray;
 }
-
 a.glossary {
     text-decoration: none;
     color: inherit;
