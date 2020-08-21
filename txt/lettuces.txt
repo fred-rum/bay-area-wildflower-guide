@@ -19,6 +19,7 @@ color:yellow
 . inflorescence branches often widely spreading
 
 ==willowleaf lettuce:L. saligna
+color:yellow
 . basal leaves generally 0 at flower
 . cauline leaves with narrow, acute, basal lobes clasping stem
 . leaves lance-linear, entire or few-lobed, lobes linear

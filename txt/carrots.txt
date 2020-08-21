@@ -7,6 +7,6 @@ color: other
 . common
 
 ==queen anne's lace:D. carota
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1208+0424
+color:white
 . bract segments <b>elongate</b>, narrowly linear to +- thread-like
 . scattered

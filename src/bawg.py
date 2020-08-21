@@ -56,7 +56,7 @@ from glossary import *
 # don't want them to float to the top.  So instead, I explicitly name
 # the non-flower top pages, and assume that everything not in those
 # hierarchies is a flower.
-non_flower_top_pages = ('conifers', 'ferns', 'gall wasps')
+non_flower_top_pages = ('conifers', 'ferns', 'insects')
 
 year = datetime.datetime.today().year
 

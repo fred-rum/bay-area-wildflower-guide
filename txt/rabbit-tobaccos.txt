@@ -23,6 +23,7 @@ color: white
 . very common
 
 ==pink everlasting:P. ramosissimum
+color:pale purple
 . <b>Stem stalked-glandular</b>, +- tomentose
 . Leaves crowded proximally or not
 . Leaf base not clasping, decurrent 2--10 mm
