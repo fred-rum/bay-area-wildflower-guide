@@ -139,10 +139,6 @@ Add glossary entries to replace as many Jepson terms as I can.  If I
 can get all of them, then perhaps I can make use of a Jepson term an
 error.
 
-Allow Jepson terms to appear in the searchable dictionary and perhaps
-in glossaries, but not linking them in page text to avoid clutter.
-E.g. hair.
-
 
 Apply standard page substitutions on glossary pages, e.g. blank lines
 to <p/>.

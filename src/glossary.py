@@ -110,7 +110,7 @@ class Glossary:
     # Return None if the term isn't in the glossary (or its ancestors).
     def get_link(self, term, deep):
         lower = term.lower()
-        if lower in self.term_anchor and lower not in self.exclude_set:
+        if lower in self.link_set:
             anchor = self.term_anchor[lower]
             if self.is_jepson:
                 if anchor in self.used_dict:
@@ -337,17 +337,18 @@ class Glossary:
                           repl_defn, self.txt, flags=re.MULTILINE)
 
         # For my glossaries, no words are excluded.
-        self.exclude_set = set()
+        self.link_set = set(self.term_anchor.keys())
 
         # Add the glossary and its terms to the top-level sets.
         short_name = re.sub(r' glossary$', '', self.name)
         name_set.add(short_name)
-        term_set.update(self.term_anchor.keys())
+        term_set.update(self.link_set)
 
     def read_jepson_terms(self):
         self.name = 'Jepson' # used only for self links from a glossary defn
         self.is_jepson = True
         self.used_dict = {}
+        self.link_set = set()
 
         with open(f'{root_path}/data/jepson_glossary.txt', mode='r') as f:
             txt = f.read()
@@ -359,9 +360,10 @@ class Glossary:
                 continue
 
             if c.startswith('-'):
-                # I eventually want lines that start with '-' to be handled
-                # in a special way, but for now I just ignore them.
-                continue
+                dont_link = True
+                c = c[1:]
+            else:
+                dont_link = False
 
             # Jepson's anchor is usually the whole text, including commas
             # and parentheses.  If there are additional terms I'd like to
@@ -376,17 +378,20 @@ class Glossary:
             self.search_terms.append(word_list)
             self.record_terms(anchor, word_list)
 
-        # read_jepson_terms() is called after read_terms() for all of my
-        # glossaries.  Keep a copy of the term_set prior to adding the
-        # Jepson terms.  This is used so that if a term is used at the
-        # wrong level of hierarchy, we flag an error instead of linking
-        # to Jepson.
-        self.exclude_set = term_set.copy()
+            if not dont_link:
+                for term in word_list:
+                    # Don't allow a word to link to Jepson if it is defined
+                    # in any of my glossaries.  Thus, if a term is used at the
+                    # wrong level of hierarchy, we flag an error instead.
+                    # Note that term_set was previously populated from my
+                    # glossaries in read_terms().
+                    if term not in term_set:
+                        self.link_set.add(term)
 
         # Add the glossary and its terms to the top-level sets.
         short_name = re.sub(r' glossary$', '', self.name)
         name_set.add('Jepson')
-        term_set.update(self.term_anchor.keys())
+        term_set.update(self.link_set)
 
     def set_index(self):
         def by_name(glossary):
