@@ -1,0 +1,4 @@
+taxon:sedges
+
+{floret,florets} A unit of a spikelet, composed of a flower enclosed by a single scale-like bract.
+{spikelet,spikelets} The rough equivalent of an inflorescence for sedge.  A spikelet is one or more florets growing alternately.  Note that a spikelet is not necessarily related to a spike.

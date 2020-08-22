@@ -67,6 +67,13 @@ figure:sea muilla
 {spike,spikes} An unbranched inflorescence with sessile flowers in which the flowers at the proximal end of the inflorescence generally open earlier than at the distal end.
 {umbel,umbels} An inflorescence in which 3+ pedicels (for a simple umbel) or inflorescence branches (for a compound umbel) radiate from a common point with no continuation of the central axis.
 
+<h2>Terms related to fruit</h2>
+
+figure:california poppy fruit
+
+{fruit,fruits,fruiting} A seed-bearing body (or a joined aggregation of multiple bodies), developing from one or more ovaries and possibly other associated structures. [figure:california poppy fruit]
+{beak,beaks} A projection from the distal end of a fruit.
+
 <h2>Other flower terms</h2>
 
 {bud,buds} An unopened flower, usually surrounded and protected by the sepals which are joined at the tip.

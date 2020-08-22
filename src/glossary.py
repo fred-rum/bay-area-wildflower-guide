@@ -25,7 +25,7 @@ class Glossary:
         # search_terms is an ordered list of term lists to be written
         # to pages.js.  The first term in each list is also the anchor.
         #
-        # For the anchor and all other terms are unmodified:
+        # The anchor and all other terms are unmodified:
         # - capitalization is retained for optimal display in auto-complete.
         # - easy_sub is not applied because it would confuse search matching.
         #   (And the original punctuation can match any user punctuation.)
@@ -110,7 +110,7 @@ class Glossary:
     # Return None if the term isn't in the glossary (or its ancestors).
     def get_link(self, term, deep):
         lower = term.lower()
-        if lower in self.term_anchor:
+        if lower in self.term_anchor and lower not in self.exclude_set:
             anchor = self.term_anchor[lower]
             if self.is_jepson:
                 if anchor in self.used_dict:
@@ -158,9 +158,10 @@ class Glossary:
                         if matchobj:
                             term1 = matchobj.group(1)
                             term2 = matchobj.group(2)
-                            alt_term = link_safe(term1) + link_safe(term2)
-                            if alt_term != term:
-                                link = alt_term
+                            if not term1.endswith('#'):
+                                alt_term = link_safe(term1) + link_safe(term2)
+                                if alt_term != term:
+                                    link = alt_term
 
                         if link:
                             return alt_term
@@ -278,15 +279,6 @@ class Glossary:
     def get_term_list(self):
         return iter(self.term_anchor.keys())
 
-    def create_hierarchy_set(self):
-        self.glossary_set = self.glossary_local_set
-        parent = self.parent
-        while parent:
-            self.glossary_set = self.glossary_set.union(parent.glossary_local_set)
-            parent = parent.parent
-
-        self.glossary_set = self.glossary_set.union(glossary_cross_set)
-
     def record_terms(self, anchor, word_list):
         self.anchor_terms[anchor] = set()
         for word in word_list:
@@ -344,6 +336,14 @@ class Glossary:
         self.txt = re.sub(r'^{([^\}]+)}\s+(.*)$',
                           repl_defn, self.txt, flags=re.MULTILINE)
 
+        # For my glossaries, no words are excluded.
+        self.exclude_set = set()
+
+        # Add the glossary and its terms to the top-level sets.
+        short_name = re.sub(r' glossary$', '', self.name)
+        name_set.add(short_name)
+        term_set.update(self.term_anchor.keys())
+
     def read_jepson_terms(self):
         self.name = 'Jepson' # used only for self links from a glossary defn
         self.is_jepson = True
@@ -375,6 +375,18 @@ class Glossary:
 
             self.search_terms.append(word_list)
             self.record_terms(anchor, word_list)
+
+        # read_jepson_terms() is called after read_terms() for all of my
+        # glossaries.  Keep a copy of the term_set prior to adding the
+        # Jepson terms.  This is used so that if a term is used at the
+        # wrong level of hierarchy, we flag an error instead of linking
+        # to Jepson.
+        self.exclude_set = term_set.copy()
+
+        # Add the glossary and its terms to the top-level sets.
+        short_name = re.sub(r' glossary$', '', self.name)
+        name_set.add('Jepson')
+        term_set.update(self.term_anchor.keys())
 
     def set_index(self):
         def by_name(glossary):
@@ -499,16 +511,11 @@ class Glossary:
 
 glossary_files = get_file_set('glossary', 'txt')
 glossary_list = []
-glossary_cross_set = set()
+name_set = set()
+term_set = set()
+name_set.add('none')
 
 def create_regex():
-    name_set = set()
-    term_set = set()
-    for glossary in glossary_list:
-        name_set.add(glossary.get_short_name())
-        term_set.update(glossary.get_term_list())
-    name_set.add('none')
-
     name_ex = '(?:' + '|'.join(map(re.escape, name_set)) + ')'
 
     trie = Trie(term_set)
@@ -552,15 +559,6 @@ def parse_glossaries(top_list):
     # order as they are listed in the glossary ToC, so a search for
     # "glossary" displays that same order.
     master_glossary.set_index()
-
-    # Create a set of anchors of the form '{glossary}#{anchor}' which can be
-    # used to link to a specific glossary.  This set includes every anchor in
-    # every glossary.
-    #jepson_glossary.create_local_set()
-    #jepson_glossary.create_cross_set()
-    #for glossary in glossary_list:
-    #    glossary.create_local_set()
-    #    glossary.create_cross_set()
 
     # Now that we know the glossary hierarchy, we can apply glossary links
     # within each glossary and finally write out the HTML.

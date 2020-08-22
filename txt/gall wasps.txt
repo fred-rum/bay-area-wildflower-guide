@@ -2,14 +2,14 @@ sci:family Cynipidae
 
 ==california gall wasp:Andricus quercuscalifornicus
 . parasitizes white {-oaks}.
-. a large tan gall that looks similar to a the fruit of {-california buckeye}.
-.. oak gall is attached directly to a branch, may be on a tree with leaves, may be lumpy, has no lines on which to split
-.. buckeye fruit hangs from the tip of a drooping stem, is typically seen only on leafless trees, and may be partially split in half to show a shiny brown layer beneath
+. a large tan gall that looks similar to a the flower#fruit of {-california buckeye}.
+.. oak gall is attached directly to a branch, may be on a plant#tree with plant#leaves, may be lumpy, has no lines on which to split
+.. buckeye flower#fruit hangs from the tip of a drooping plant#stem, is typically seen only on leafless plant#trees, and may be partially split in half to show a shiny brown layer beneath
 
 ==live oak bud gall wasp:Callirhytis quercusagrifoliae
 . parasitizes the {-coast live oak}.
-. a small green berry-like gall in place of a bud (e.g. next to the baes of a leaf)
+. a small green berry-like gall in place of a plant#bud (e.g. next to the baes of a leaf)
 
 ==Dryocosmus castanopsidis
 . parasitizes both local {-Chrysolepis} species.
-. a pale red berry-like gall nestled among the flowers.
+. a pale red berry-like gall nestled among the flower#flowers.
