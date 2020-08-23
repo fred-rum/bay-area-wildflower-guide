@@ -230,3 +230,5 @@ with a family by observations.csv, so they never add themselves to
 child_set.  Would be more obvious if observations.csv called
 set_group(), and set_group() propagated the group upwards.  child_set
 is set for a page and cleared for its children if the group is new.
+
+make a square jpg for crevice alumroot

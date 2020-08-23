@@ -19,5 +19,3 @@ xx:none
 . <b>calyx 7--25 mm</b>
 . corolla 20--75 mm
 . anthers seem to always be white, at least for the common species
-
-==dodders:Cuscuta spp.

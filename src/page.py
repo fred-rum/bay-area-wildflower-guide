@@ -216,16 +216,25 @@ class Page:
             # (which implies that its children have had their group set, too).
             return
 
-        self.group[rank] = group
         if group not in group_child_set[rank]:
             group_child_set[rank][group] = set()
-        group_child_set[rank][group].add(self)
 
-        # Push the group into all children, and remove those children from
-        # group_child_set.
-        for child in self.child:
-            child.set_group(rank, group)
-            group_child_set[rank][group].discard(child)
+        if self.sci == group:
+            # This page *is* the group page, which means (for our purposes)
+            # that it is not a descendent of the group, but its children
+            # are.
+            self.group[rank] = None
+            for child in self.child:
+                child.set_group(rank, group)
+        else:
+            self.group[rank] = group
+            group_child_set[rank][group].add(self)
+
+            # Push the group into all children, and remove those children from
+            # group_child_set.
+            for child in self.child:
+                child.set_group(rank, group)
+                group_child_set[rank][group].discard(child)
 
     def resolve_group(self, rank):
         if rank in self.group:
@@ -254,15 +263,7 @@ class Page:
                 # in multiple groups.  Just ignore it.
                 pass
             elif child.group[rank]:
-                if child.sci and child.elab.startswith(rank + ' '):
-                    # The child is already at the target rank, which means
-                    # that this page is above the target rank and thus cannot
-                    # possibly be in the group.  E.g. if the page only has one
-                    # child which is family Poaceae, that does *not* mean the
-                    # page is in family Poaceae.
-                    self.group[rank] = None
-                    return
-                elif not group:
+                if not group:
                     # The child has a group and this page does not.
                     group = child.group[rank]
                 elif group != child.group[rank]:
