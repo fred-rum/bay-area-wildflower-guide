@@ -1,3 +1,6 @@
+# My files
+from error import *
+
 name_page = {} # original page name -> page [final file name may vary]
 com_page = {} # common name -> page (or 'multiple' if there are name conflicts)
 sci_page = {} # scientific name -> page
@@ -46,6 +49,15 @@ def elaborate_sci(sci):
     # The name is already in a fine elaborated format.
     return sci
 
+# Find a page using by common name and/or scientific name.
+#
+# If com and elab are both valid, and the search finds a page with either name
+# (with priority on the scientific name).  If the scientific name is found
+# but the common name differs, that still counts as a match, and the existing
+# common name is retained.  (Not all sources agree on common names.)
+#
+# If only one of com/elab is valid, then we search for the corresponding name
+# without any extra frills.
 def find_page2(com, sci):
     if sci:
         sci = strip_sci(sci)
@@ -59,12 +71,13 @@ def find_page2(com, sci):
         elif com in com_page and com_page[com] != 'multiple':
             page = com_page[com]
 
-        if page and sci and page.sci and page.sci != sci:
-            # If the common name matches a page with a different scientific
-            # name, it's treated as not a match.
-            return None
-        else:
-            return page
+        if page:
+            if sci and page.sci and page.sci != sci:
+                # If the common name matches a page with a different
+                # scientific name, it's treated as not a match.
+                return None
+            else:
+                return page
 
     return None
 
