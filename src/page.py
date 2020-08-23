@@ -521,9 +521,9 @@ class Page:
             if sci:
                 child_page.set_sci(sci)
 
-            # Replace the =={...} field with a simplified =={name,suffix} line.
+            # Replace the =={...} field with a simplified =={index,suffix} line.
             # This will create the appropriate link later in the parsing.
-            return '==' + str(child_page.index) + suffix
+            return f'=={child_page.index}{suffix}'
 
         # If the page's genus is explicitly specified,
         # make it the default for child abbreviations.
@@ -1146,10 +1146,9 @@ class Page:
 
                 w.write('</div>\n')
 
-            s = self.txt
-            w.write(s)
+            w.write(self.txt)
 
-            if self.jpg_list or self.ext_photo_list or s:
+            if self.jpg_list or self.ext_photo_list or self.txt:
                 w.write('<hr/>\n')
 
             self.write_obs(w)
