@@ -293,7 +293,11 @@ class Glossary:
                 # Special case since there is no page for flowering plants.
                 self.taxon = name
             else:
-                self.taxon = find_page1(name).name
+                page = find_page1(name)
+                if page:
+                    self.taxon = page.name
+                else:
+                    error(f'No page found for glossary taxon {name}')
             return ''
 
         def repl_defn(matchobj):

@@ -14,7 +14,7 @@ from glossary import *
 page_array = [] # array of pages; only appended to; never otherwise altered
 genus_page_list = {} # genus name -> list of pages in that genus
 genus_family = {} # genus name -> family name
-family_child_set = {} # family name -> set of top-level pages in that family
+group_child_set = {} # rank -> group -> set of top-level pages in group
 
 # Define a list of supported colors.
 color_list = ['blue',
@@ -90,11 +90,10 @@ class Page:
         self.com = None # a common name
         self.sci = None # a scientific name stripped of elaborations
         self.elab = None # an elaborated scientific name
-        self.family = None # the scientific family
+        self.group = {} # taxonomic rank -> sci name or None if conflicting
         self.level = None # taxonomic level: above, genus, species, or below
 
         self.no_sci = False # true if it's a key page for unrelated species
-        self.no_family = False # true if it's a key page for unrelated genuses
 
         self.top_level = None # 'flowering plants', 'ferns', etc.
 
@@ -211,55 +210,64 @@ class Page:
         else:
             error(f'{self.name} is under both {self.top_level} and {top_level} ({tree_top})')
 
-    def set_family(self):
-        if self.family or self.no_family:
-            # The page's family has already been set
-            # (which implies that its children have had their family set, too).
+    def set_group(self, rank, group):
+        if rank in self.group:
+            # The page's group has already been set
+            # (which implies that its children have had their group set, too).
             return
 
-        # set the family of all children
-        for child in self.child:
-            child.set_family()
+        self.group[rank] = group
+        if group not in group_child_set[rank]:
+            group_child_set[rank][group] = set()
+        group_child_set[rank][group].add(self)
 
-        # if all children appear share the same family, use that as the
-        # current page's family.  But if the children have different families,
-        # set self.no_family.
+        # Push the group into all children, and remove those children from
+        # group_child_set.
         for child in self.child:
-            if child.no_family:
-                self.family = None
-                self.no_family = True
-                return
-            elif child.family:
-                if self.family == None:
-                    self.family = child.family
-                elif self.family != child.family:
-                    self.family = None
-                    self.no_family = True
+            child.set_group(rank, group)
+            group_child_set[rank][group].discard(child)
+
+    def resolve_group(self, rank):
+        if rank in self.group:
+            # The page's group has already been set
+            # (which implies that its children have had their group set, too).
+            return
+
+        # We set 'group' as the intermediate value instead of self.group[rank]
+        # because we'll set self.group[rank] later with a call to set_group().
+        # In this case, group = None means no group has been set yet.
+        # If the group is found to be conflicting, we'll set self.group[rank]
+        # to None and immediately exit the function.
+        group = None
+
+        # set the group of all children
+        for child in self.child:
+            child.resolve_group(rank)
+
+        # if all children appear to share the same group, use that as the
+        # current page's group.  But if the children have different groups,
+        # set this page's group to None and immediately exit.  I.e. this
+        # page's group is never None during operation of this loop.
+        for child in self.child:
+            if rank not in child.group:
+                # The child doesn't know its group, but also isn't obviously
+                # in multiple groups.  Just ignore it.
+                pass
+            elif child.group[rank]:
+                if not group:
+                    # The child has a group and this page does not.
+                    group = child.group[rank]
+                elif group != child.group[rank]:
+                    # The child's group conflicts with previous children.
+                    self.group[rank] = None
                     return
             else:
-                # The child doesn't know its family, but also isn't obviously
-                # in multiple families.  Just ignore it.
-                pass
+                # The child is a member of conflicting groups.
+                self.group[rank] = None
+                return
 
-        # If we didn't set the family and also didn't return with no_family,
-        # it's because we have no children or the children don't have a clear
-        # family.  Try to get the family from the genus instead.
-        if not self.family and self.sci:
-            genus = self.sci.split(' ')[0]
-            if genus in genus_family:
-                self.family = genus_family[genus]
-
-        family = self.family
-        if family:
-            # This page has a family.  family_child_set keeps track of the
-            # top-level pages within the family, so add this page to the set
-            # and remove its children.
-            if family not in family_child_set:
-                family_child_set[family] = set()
-            family_child_set[family].add(self)
-            for child in self.child:
-                if child in family_child_set[family]:
-                    family_child_set[family].remove(child)
+        if group:
+            self.set_group(rank, group)
 
     def get_com(self):
         if self.com:
@@ -1066,17 +1074,18 @@ class Page:
                 title = elab
                 h1 = self.format_elab()
 
-            # True if an extra line is needed for the scientific name
+            # Determine whether an extra line is needed for the scientific name
             # and/or family name.
             has_sci = (com and elab)
-            family = self.family
-            if family:
+            if 'family' in self.group and self.group['family']:
+                family = self.group['family']
+                family_page = sci_page[family]
+
                 # Do not emit a line for the family if:
                 # - the current page *is* the family page, or
                 # - the family page is an explict key and this page's
                 #   immediate parent (in which case it'll be listed as
                 #   a key page instead).
-                family_page = sci_page[family]
                 has_family = not (family == self.sci or
                                   (not family_page.autogenerated and
                                    family_page in self.parent))

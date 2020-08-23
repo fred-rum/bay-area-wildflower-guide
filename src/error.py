@@ -105,6 +105,6 @@ def error(msg, prefix=None):
 
     _check_error_cnt()
 
-def end():
+def error_end():
     if _error_cnt:
         sys.exit(_error_cnt)

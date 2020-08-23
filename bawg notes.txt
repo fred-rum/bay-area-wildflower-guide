@@ -39,9 +39,6 @@ Put month info side by side with park info (depending on display width?)
 Add (optional) color info for unobserved flowers?
 How would that be presented?  (border on CalPhoto placeholder?)
 
-Allow families to auto-list their members after some introductory
-text.  E.g. most sedges have triangular stems and grasses have round stems.
-
 Make links up to the key (or any other parent) use an anchor position
 that highlights the child's section of the key, similar to the
 glossary.  (May require similar positioning tricks.)
@@ -217,5 +214,19 @@ but share elements of parsing.
 
 for blue-eyed marys, define: upper lip, lower lip, keel
 
-sedges have edges, triangular stems:
+Allow families to auto-list their members after some introductory
+text.  E.g. most sedges have triangular stems and grasses have round stems.
+"sedges have edges"
 https://ohioplants.org/families-cyperaceae/
+
+If a page exists for a higher-level taxon listed in observations.csv,
+give it the appropriate next-highest-level children.  This should be
+similar to the current code for families, except that the page isn't
+created if it doesn't exist.  (Should it be?  If so, how do I get
+common names for those pages?)
+
+family fails because the two genuses in knotweed are already marked
+with a family by observations.csv, so they never add themselves to
+child_set.  Would be more obvious if observations.csv called
+set_group(), and set_group() propagated the group upwards.  child_set
+is set for a page and cleared for its children if the group is new.
