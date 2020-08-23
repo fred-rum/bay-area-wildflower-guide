@@ -254,7 +254,15 @@ class Page:
                 # in multiple groups.  Just ignore it.
                 pass
             elif child.group[rank]:
-                if not group:
+                if child.sci and child.elab.startswith(rank + ' '):
+                    # The child is already at the target rank, which means
+                    # that this page is above the target rank and thus cannot
+                    # possibly be in the group.  E.g. if the page only has one
+                    # child which is family Poaceae, that does *not* mean the
+                    # page is in family Poaceae.
+                    self.group[rank] = None
+                    return
+                elif not group:
                     # The child has a group and this page does not.
                     group = child.group[rank]
                 elif group != child.group[rank]:
