@@ -214,17 +214,8 @@ but share elements of parsing.
 
 for blue-eyed marys, define: upper lip, lower lip, keel
 
-Allow families to auto-list their members after some introductory
-text.  E.g. most sedges have triangular stems and grasses have round stems.
-"sedges have edges"
-https://ohioplants.org/families-cyperaceae/
-
 Drop the search penalty for auto-generated families?  Or extend it to
 manually created families if no child has a key?
 
-Rather than basing the photo size on whether the page is
-auto-generated, shrink the photo if there is no key info.
-
 Allow group to be specified in txt, e.g. 'family:Polygalaceae' for the
 sweet pea shrub.  And check other orphans in all.html
-
