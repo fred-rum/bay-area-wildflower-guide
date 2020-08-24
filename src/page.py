@@ -1123,17 +1123,28 @@ class Page:
             # but write them after it.
             c_list = []
 
+            # List the iNaturalist common name if it's different.
             if self.icom:
                 c_list.append(f'(<b>{self.icom}</b>)')
 
+            # If the common name was listed in the <h1> header,
+            # list the scientific name as a smaller line below.
             if com and elab:
                 c_list.append(f'<b>{self.format_elab()}</b>')
 
+            # If the page has autopopulated parents, list them here.
+            # Parents with keys are listed more prominently below.
+            # Most likely no page will have more than one autopopulated
+            # parent, so I don't try to do particularly smart sorting here.
             for parent in sort_pages(self.parent):
                 if not parent.has_child_key and parent.level == 'above':
                     link = parent.create_link(1)
                     c_list.append(link)
 
+            # If the page isn't a direct child of its family page, provide
+            # a link to it.  (A direct child would have been listed above
+            # or will be listed further below.)  Note that the family page
+            # is likely to have been autopopulated, but not necessarily.
             if 'family' in self.group and self.group['family']:
                 family = self.group['family']
                 family_page = sci_page[family]
