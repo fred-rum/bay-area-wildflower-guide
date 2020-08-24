@@ -323,13 +323,17 @@ for page in top_list:
     if not page.top_level:
         page.set_top_level('flowering plants', page.name)
 
-with open(root_path + '/data/family names.yaml', encoding='utf-8') as f:
-    family_com = yaml.safe_load(f)
-
 for rank in ranks:
     for page in top_list:
         if page.top_level == 'flowering plants':
             page.resolve_group(rank)
+
+            # Check for errors rather than in resolve_group() so that we
+            # only print one error at the top level of a hierarchy.
+            if (rank == 'family' and
+                page.level in ('genus', 'species', 'below') and
+                'family' not in page.group):
+                error(f'No family found for {page.name}')
 
     for group, child_set in group_child_set[rank].items():
         if com == 'n/a':

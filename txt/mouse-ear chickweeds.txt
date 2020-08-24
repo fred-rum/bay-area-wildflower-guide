@@ -1,5 +1,6 @@
 sci:Cerastium spp.
 x:hist
+family:pink family
 
 Petals are generally lobed <= 50% of their length.  If the petals are fully divided, see {-chickweeds}.
 

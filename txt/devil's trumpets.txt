@@ -1,5 +1,6 @@
 sci:Datura spp.
 x:rare
+family:nightshade family
 
 See also {-bindweed family}, which have a generally shorter calyx which is not ribbed or angled toward the base.
 
