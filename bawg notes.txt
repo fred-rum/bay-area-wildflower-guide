@@ -219,3 +219,6 @@ manually created families if no child has a key?
 
 Allow group to be specified in txt, e.g. 'family:Polygalaceae' for the
 sweet pea shrub.  And check other orphans in all.html
+
+Use img property alt="" to indicate to blind users that a description
+of the photo is not helpful?
