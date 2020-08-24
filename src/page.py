@@ -14,7 +14,6 @@ from glossary import *
 page_array = [] # array of pages; only appended to; never otherwise altered
 genus_page_list = {} # genus name -> list of pages in that genus
 genus_family = {} # genus name -> family name
-group_child_set = {} # rank -> group -> set of top-level pages in group
 
 # Define a list of supported colors.
 color_list = ['blue',
@@ -30,6 +29,21 @@ color_list = ['blue',
               'salmon',
               'cream',
               'other']
+
+ranks = ('subtribe', 'tribe', 'supertribe',
+         'subfamily', 'family', 'superfamily',
+         'suborder', 'order', 'superorder',
+         'subclass', 'class', 'superclass',
+         'subphylum', 'phylum',
+         'kingdom')
+
+trie = Trie(ranks)
+ex = trie.get_pattern()
+re_group = re.compile(rf'({ex}):\s*(.*?)\s*$')
+
+group_child_set = {} # rank -> group -> set of top-level pages in group
+for rank in ranks:
+    group_child_set[rank] = {}
 
 ###############################################################################
 
@@ -580,6 +594,11 @@ class Page:
             matchobj = re.match(r'(x|xx):\s*(!?)(none|ba|ca|any|hist|rare|hist/rare|more|uncat)$', c)
             if matchobj:
                 data_object.set_complete(matchobj)
+                continue
+
+            matchobj = re_group.match(c)
+            if matchobj:
+                data_object.assign_group(matchobj.group(1), matchobj.group(2))
                 continue
 
             if c in ('', '[', ']'):

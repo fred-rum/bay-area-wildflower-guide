@@ -1,5 +1,6 @@
 sci:Polygonum
 x:!hist/rare
+family:Polygonaceae
 
 ==prostrate knotweed:P. aviculare
 . stem 8--16 ribbed

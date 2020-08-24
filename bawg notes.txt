@@ -217,8 +217,8 @@ for blue-eyed marys, define: upper lip, lower lip, keel
 Drop the search penalty for auto-generated families?  Or extend it to
 manually created families if no child has a key?
 
-Allow group to be specified in txt, e.g. 'family:Polygalaceae' for the
-sweet pea shrub.  And check other orphans in all.html
+Flag an error for flowering plant without families.
 
 Use img property alt="" to indicate to blind users that a description
 of the photo is not helpful?
+

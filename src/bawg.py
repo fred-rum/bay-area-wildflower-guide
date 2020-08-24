@@ -58,16 +58,6 @@ from glossary import *
 # hierarchies is a flower.
 non_flower_top_pages = ('conifers', 'ferns', 'insects')
 
-ranks = ('subtribe', 'tribe', 'supertribe',
-         'subfamily', 'family', 'superfamily',
-         'suborder', 'order', 'superorder',
-         'subclass', 'class', 'superclass',
-         'subphylum', 'phylum',
-         'kingdom')
-#ranks = ['family']
-for rank in ranks:
-    group_child_set[rank] = {}
-
 year = datetime.datetime.today().year
 
 shutil.rmtree(working_path, ignore_errors=True)
@@ -77,7 +67,6 @@ os.mkdir(working_path + '/html')
 # key: color
 # value: page list
 color_page_list = {}
-
 
 # Read the mapping of iNaturalist observation locations to short park names.
 park_map = {}
