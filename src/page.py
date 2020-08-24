@@ -91,6 +91,7 @@ class Page:
         self.sci = None # a scientific name stripped of elaborations
         self.elab = None # an elaborated scientific name
         self.group = {} # taxonomic rank -> sci name or None if conflicting
+        self.group_resolved = set() # taxonomic rank if group is resolved
         self.level = None # taxonomic level: above, genus, species, or below
 
         self.no_sci = False # true if it's a key page for unrelated species
@@ -212,11 +213,19 @@ class Page:
         else:
             error(f'{self.name} is under both {self.top_level} and {top_level} ({tree_top})')
 
+    def assign_group(self, rank, group):
+        self.group[rank] = group
+
     def set_group(self, rank, group):
-        if rank in self.group:
+        if rank in self.group_resolved:
             # The page's group has already been set
             # (which implies that its children have had their group set, too).
             return
+
+        if rank in self.group and group != self.group[rank]:
+            error(f"{page.name} thinks it's in {rank}{self.group[rank]}, but a parent thinks it's in {rank}{group}")
+
+        self.group_resolved.add(rank)
 
         if group not in group_child_set[rank]:
             group_child_set[rank][group] = set()
@@ -239,12 +248,18 @@ class Page:
                 group_child_set[rank][group].discard(child)
 
     def resolve_group(self, rank):
-        if rank in self.group:
-            # The page's group has already been set
-            # (which implies that its children have had their group set, too).
+        if rank in self.group_resolved:
+            # The page's group has already been resolved (which implies
+            # that its children have had their groups resolved, too).
             return
 
-        # We set 'group' as the intermediate value instead of self.group[rank]
+        if rank in self.group:
+            # We know the group, but haven't resolved it yet.
+            # That's an easy task.
+            self.set_group(rank, self.group[rank])
+            return
+
+        # We set 'group' as the indeterminate value instead of self.group[rank]
         # because we'll set self.group[rank] later with a call to set_group().
         # In this case, group = None means no group has been set yet.
         # If the group is found to be conflicting, we'll set self.group[rank]

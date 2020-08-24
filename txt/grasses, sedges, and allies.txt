@@ -2,11 +2,11 @@ sci:order Poales
 
 ohioplants.org has more <a href="https://ohioplants.org/families-cyperaceae/">distinguishing information</a> for grasses vs. sedges.
 
-==grasses
+==grasses:family Poaceae
 . stem has a round cross section
 . leaf sheath forms a complete cylinder around the stem
 
-==sedges
+==sedges:family Cyperaceae
 . stem has a triangular cross section
 . leaf sheath clasps the stem with sheath sides slightly overlapping opposite the side with the leaf blade
 .. "sedges have edges"
