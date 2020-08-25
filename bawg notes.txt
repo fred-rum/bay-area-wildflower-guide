@@ -229,3 +229,12 @@ var., ssp., and spp. shouldn't be italicized by the search.js
 Create an "italic_range" which can then be interleaved with the
 "match_range".  Call a function with any number of objects with
 these properties: ranges, tag_open, tag_close.
+
+Use let instead of var in search.js
+
+if i opens and then span opens and then i closes:
+  close span
+  close i
+  re-open span
+
+nest = i, span

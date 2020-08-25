@@ -52,6 +52,10 @@ function find_letter_pos(str, n) {
   var regex = /\w/g;
 
   for (var i = 0; i <= n; i++) {
+    /* We use test() to advance regex.lastIndex.
+       We don't bother to check the test() return value because we always
+       expect it to match.  (E.g. when finding the last letter of match,
+       we really are looking for the last letter, which always exists.) */
     regex.test(str);
   }
 
@@ -180,7 +184,7 @@ function check(search_str, match_str, pri_adj) {
     if (start_j == -1) {
       return null; /* no match */
     }
-    var j = start_j + (i - start_i);
+    j = start_j + (i - start_i);
     if (match_ranges.length &&
         (match_ranges[match_ranges.length-1][1] == start_j)) {
       /* The next match follows directly from the previous match without
@@ -253,87 +257,124 @@ function check_list(search_str, match_list, page_info) {
    In either case, if it's a scientific name, italicize the Greek/Latin
    words (either the whole string or everything after the first word). */
 function highlight_match(match_info, default_name, is_sci) {
+  var tag_info = [];
+
+  /* h is the highlighed string to be returned. */
+  var h = '';
+
   if (match_info) {
     var m = match_info.match_str;
     var match_ranges = match_info.match_ranges;
+
+    /* Convert match_ranges (which ignores punctuation) into string positions
+       (which includes punctuation). */
+    var ranges = [];
+    for (var i = 0; i < match_ranges.length; i++) {
+      var begin = find_letter_pos(m, match_ranges[i][0]);
+
+      /* Stop highlighting just after letter N-1.  I.e. don't include
+         the punctuation between letter N-1 and letter N, which is the
+         first letter outside the match range. */
+      var end = find_letter_pos(m, match_ranges[i][1] - 1) + 1;
+
+      ranges.push([begin, end]);
+    }
+
+    var highlight_info = {
+      ranges: ranges,
+      i: 0,
+      half: 0,
+      tag: ['<span class="match">', '</span>']
+    };
+    tag_info.push(highlight_info);
   } else {
     /* Rather than writing special code to handle italicization of the
      * scientific name for this default case, we can simply fall through the
      * regular highlighting code with no highlighted ranges. */
     var m = default_name;
-    var match_ranges = [];
   }
 
-  /* h is the highlighed string to be returned. */
-  var h = '';
+  if (is_sci) {
+    var ranges = [[0, m.length]];
 
-  /* is_delayed_sci indicates whether <i> still needs to be inserted. */
-  var is_delayed_sci = is_sci;
+    if (m.endsWith(' spp.')) {
+      ranges[0][1] -= 5;
+    }
+    var pos = m.indexOf(' ssp. ');
+    if (pos == -1) {
+      var pos = m.indexOf(' var. ');
+    }
+    if (pos != -1) {
+      ranges.push([pos + 6, ranges[0][1]]);
+      ranges[0][1] = pos;
+    }
 
-  if (is_delayed_sci && startsUpper(m)) {
-    h += '<i>';
-    is_delayed_sci = false;
+    if (!startsUpper(m)) {
+      ranges[0][0] = m.indexOf(' ');
+    }
+
+    var italic_info = {
+      ranges: ranges,
+      i: 0,
+      half: 0,
+      tag: ['<i>', '</i>']
+    };
+    tag_info.push(italic_info);
   }
 
-  var m_highlight_start;
-  var m_highlight_stop = 0;
-  /* We iterate through match_ranges to handle each unhighlighed range
-     followed by a highlighed range.  Then we perform one more half step
-     in order to pick up the final unhighlighted range. */
-  for (var i = 0; i <= match_ranges.length; i++) {
-    if (i == match_ranges.length) {
-      /* We're in the last half step.  Pick up the final unhighlighed range.
-         Don't try to look up match_ranges[i] ! */
-      m_highlight_start = m.length;
-    } else if (match_ranges[i][0] == 0) {
-      /* In the unusual case that the match starts with the first letter
-         and the name starts with punctuation before that letter, include
-         the punctuation in the highlight. */
-      m_highlight_start = 0;
-    } else {
-      m_highlight_start = find_letter_pos(m, match_ranges[i][0]);
+  /* Keep track of tag nesting, because interleaved tags fail in some browsers.
+     E.g. <i>x<span>y</i>z</span> on Chrome moves </span> to before </i>. */
+  var nest = [];
+
+  var pos = 0;
+  while (tag_info.length) {
+    var info_idx = 0;
+    var info = tag_info[0];
+    for (var j = 1; j < tag_info.length; j++) {
+      var infoj = tag_info[j];
+      if (infoj.ranges[infoj.i][infoj.half] < info.ranges[info.i][info.half]) {
+        info_idx = j;
+        info = infoj;
+      }
     }
-
-    var s = m.substring(m_highlight_stop, m_highlight_start);
-
-    if (is_delayed_sci && s.includes(' ')) {
-      var space_pos = s.indexOf(' ');
-      s = s.substring(0, space_pos) + ' <i>' + s.substring(space_pos+1)
-      is_delayed_sci = false;
-    }
-
+    var next_pos = info.ranges[info.i][info.half];
+    var s = m.substring(pos, next_pos);
     h += s;
+    pos = next_pos;
 
-    if (i == match_ranges.length) {
-      break; /* We're done after that last half step. */
+    if (info.half == 0) {
+      h += info.tag[0]; /* open tag */
+      nest.push(info); /* record its nesting level */
+    } else {
+      /* close the tags that are nested within the tag we want to close */
+      for (i = nest.length-1; nest[i] != info; i--) {
+        h += nest[i].tag[1]
+      }
+
+      /* close the tag that we wanted to close */
+      h += nest[i].tag[1]
+
+      /* remove the closed tag from the nesting list */
+      nest.splice(i, 1);
+
+      /* re-open the previously nested tags */
+      for (i = i; i < nest.length; i++) {
+        h += nest[i].tag[0]
+      }
     }
 
-    /* Stop highlighting just after letter N-1.  I.e. don't include
-       the punctuation between letter N-1 and letter N, which is the
-       first letter outside the match range. */
-    m_highlight_stop = find_letter_pos(m, match_ranges[i][1] - 1) + 1;
-
-    if (/!\w/.test(m.substring(m_highlight_stop))) {
-      /* In the unusual case that only punctuation follows the highlight,
-         include the punctuation in the highlight. */
-      m_highlight_stop = m.length;
+    info.half++;
+    if (info.half == 2) {
+      info.half = 0;
+      info.i++;
+      if (info.i == info.ranges.length) {
+        /* remove entry from tag_info */
+        tag_info.splice(info_idx, 1);
+      }
     }
-
-    var s = m.substring(m_highlight_start, m_highlight_stop);
-
-    if (is_delayed_sci && s.includes(' ')) {
-      var space_pos = s.indexOf(' ');
-      s = s.substring(0, space_pos) + ' <i>' + s.substring(space_pos+1)
-      is_delayed_sci = false;
-    }
-
-    h += ('<span class="match">' + s + '</span>');
   }
 
-  if (is_sci && !is_delayed_sci) {
-    /* We added <i> at some point, so now close it off with </i>. */
-    h += '</i>';
-  }
+  h += m.substring(pos);
 
   return h;
 }
