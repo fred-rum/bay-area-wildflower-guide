@@ -537,11 +537,6 @@ with open(search_file, "w", encoding="utf-8") as w:
     write_glossary_search_terms(w)
     w.write('];\n')
 
-    w.write('var glossaries=[\n')
-    for glossary in glossary_list:
-        w.write(f'"{glossary.name}",\n')
-    w.write('];\n')
-
 
 ###############################################################################
 # Compare the new html files with the prev files.

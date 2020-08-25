@@ -191,16 +191,6 @@ glossary linking could be reused.  (Should all taxon pages thus be
 line-by-line, or should that only be done when the page includes
 definitions?)
 
-Instead of using indexed glossaries to save bytes, write pages.js like this:
-{page="plant glossary",glossary:[["leaf","leaves","leaved"],["blade","blades"],etc.]}
-If you want to normalize that to multiple listings with com:, that's fine.
-Besides making it all more intuitive, it also naturally supports glossary
-words in taxon pages.
-
-When searching for a glossary page (e.g. "plant glossary"), it should
-have a similar priority to glossary words (e.g. "leaf (plant
-glossary)"), not unobserved taxon pages (x:"u").
-
 Combine taxon & glossary pages:
 a glossary page comes from the glossary directory.
 a glossary page doesn't have a common or scientific name.
@@ -216,25 +206,9 @@ but share elements of parsing.
 
 for blue-eyed marys, define: upper lip, lower lip, keel
 
-Drop the search penalty for auto-generated families?  Or extend it to
-manually created families if no child has a key?
-
 
 Use img property alt="" to indicate to blind users that a description
 of the photo is not helpful?
 
-
-var., ssp., and spp. shouldn't be italicized by the search.js
-
-Create an "italic_range" which can then be interleaved with the
-"match_range".  Call a function with any number of objects with
-these properties: ranges, tag_open, tag_close.
-
-Use let instead of var in search.js
-
-if i opens and then span opens and then i closes:
-  close span
-  close i
-  re-open span
-
-nest = i, span
+I've removed the search penalty for autopropagated and unobserved pages.
+I should also order them lower in pages.js.

@@ -481,28 +481,27 @@ class Glossary:
         def by_name(glossary):
             return glossary.name
 
-        # The glossary page without a named term can be treated just like
-        # an unobserved (low-priority) page.  It's simply a link to an
-        # HTML page with its name being the search term.
-        w.write(f'{{page:"{self.name}",x:"u"}},\n')
-
+        w.write(f'{{page:"{self.name}",x:"g",glossary:[\n')
         for term in self.search_terms:
             terms_str = '","'.join(term)
-            w.write(f'{{idx:{self.index},com:["{terms_str}"],x:"g"}},\n')
+            w.write(f'{{terms:["{terms_str}"]}},\n')
+        w.write(f']}},\n')
 
         for child in sorted(self.child, key=by_name):
             child.write_search_terms(w)
 
     # Write search terms for Jepson's glossary to pages.js
     def write_jepson_search_terms(self, w):
+        w.write('{page:"Jepson eFlora glossary",x:"j",glossary:[\n')
         for term in self.search_terms:
-            coms_str = '","'.join(term)
+            terms_str = '","'.join(term)
             anchor = self.term_anchor[term[0]]
             if term[0] == anchor:
                 anchor_str = ''
             else:
                 anchor_str = f',anchor:"{anchor}"'
-            w.write(f'{{com:["{coms_str}"]{anchor_str},x:"j"}},\n')
+            w.write(f'{{terms:["{terms_str}"]{anchor_str}}},\n')
+        w.write(']},\n')
 
         def by_usage(anchor):
             return self.used_dict[anchor]

@@ -84,18 +84,26 @@ function hasUpper(name) {
 }
 
 /* Get the relative path to a page. */
-function fn_url(page_info) {
+function fn_url(fit_info) {
+  var page_info = fit_info.page_info;
+
   if (page_info.x == 'j') {
-    return 'https://ucjeps.berkeley.edu/eflora/glossary.html#' + page_info.anchor;
-  } else if (page_info.x == 'g') {
-    return path + page_info.page + '.html#' + page_info.anchor;
+    var url = 'https://ucjeps.berkeley.edu/eflora/glossary.html';
   } else {
-    return path + page_info.page + '.html';
+    var url = path + page_info.page + '.html';
   }
+
+  if ('anchor' in fit_info) {
+    url += '#' + fit_info.anchor;
+  }
+
+  return url;
 }
 
 /* Construct all the contents of a link to a page. */
-function fn_link(page_info) {
+function fn_link(fit_info) {
+  var page_info = fit_info.page_info;
+
   if (page_info.x == 'f') {
     var c = 'family';
   } else if (page_info.x == 'k') {
@@ -111,7 +119,7 @@ function fn_link(page_info) {
   }
 
   var target = '';
-  var url = fn_url(page_info);
+  var url = fn_url(fit_info);
 
   /* I tried this and didn't like it.  If I ever choose to use it, I also
      have to change the behavior of the return key (where fn_url is used). */
@@ -225,14 +233,20 @@ function check(search_str, match_str, pri_adj) {
   return match_info;
 }
 
-/* Call check() on a list of potential matches and return the best match. */
+/* Check whether match_info one has greater priority than two.
+   Either value can be null, which is considered lowest priority. */
+function better_match(one, two) {
+  return (one && (!two || (one.pri > two.pri)));
+}
+
+/* For a list of names for a page, call check() on each name and each
+   combination of glossary term and page name.  Return the best match. */
 function check_list(search_str, match_list, page_info) {
   var best_match_info = null;
   var pri_adj = 0.0;
   for (var i = 0; i < match_list.length; i++) {
     var match_info = check(search_str, match_list[i], pri_adj);
-    if (match_info && (!best_match_info ||
-                       (match_info.pri > best_match_info.pri))) {
+    if (better_match(match_info, best_match_info)) {
       best_match_info = match_info;
     }
 
@@ -241,7 +255,22 @@ function check_list(search_str, match_list, page_info) {
        that old name, but the species that currently uses the name
        is always the better match.  So we adjust the priority slightly
        for all names in the match_list after the first. */
-    if (page_info.x == 'f') {
+    pri_adj = -0.01;
+  }
+
+  return best_match_info;
+}
+
+function glossary_check_list(search_str, glossary, name_list, page_info) {
+  var best_match_info = null;
+  var pri_adj = 0.0
+  for (var i = 0; i < name_list.length; i++) {
+    for (var k = 0; k < glossary.terms.length; k++) {
+      var term_str = glossary.terms[k] + ' (' + name_list[i] + ')';
+      var match_info = check(search_str, term_str, pri_adj);
+      if (better_match(match_info, best_match_info)) {
+        best_match_info = match_info;
+      }
       pri_adj = -0.01;
     }
   }
@@ -379,7 +408,122 @@ function highlight_match(match_info, default_name, is_sci) {
   return h;
 }
 
-/* Update the autocomplete list. */
+function insert_match(fit_info) {
+  /* If there's a match, and
+     - we don't already have 10 matches or
+     - the new match is better than the last match on the list
+     then remember the new match. */
+  if ((ac_list.length < 10) || (fit_info.pri > ac_list[9].pri)) {
+    /* Insert the new match into the list in priority order.  In case of
+       a tie, the new match goes lower on the list. */
+    for (var j = 0; j < ac_list.length; j++) {
+      if (fit_info.pri > ac_list[j].pri) break;
+    }
+    ac_list.splice(j, 0, fit_info);
+    /* If the list was already the maximum length, it is now longer than the
+       maximum length.  Cut off the last entry. */
+    if (ac_list.length > 10) {
+      ac_list.splice(-1, 1);
+    }
+  }
+}
+
+/* Check for search matches in one page:
+   - in its common name
+   - in its scientific name
+   - in its glossary terms */
+function page_search(search_str, page_info) {
+  if ('com' in page_info) {
+    var com_match_info = check_list(search_str, page_info.com, page_info);
+  } else {
+    var com_match_info = null;
+  }
+
+  if ('sci' in page_info) {
+    var sci_match_info = check_list(search_str, page_info.sci, page_info);
+  } else {
+    var sci_match_info = null;
+  }
+
+  if (com_match_info || sci_match_info) {
+    if (better_match(com_match_info, sci_match_info)) {
+      var pri = com_match_info.pri;
+    } else {
+      var pri = sci_match_info.pri;
+    }
+
+    var fit_info = {
+      pri: pri,
+      page_info: page_info,
+      com_match_info: com_match_info,
+      sci_match_info: sci_match_info
+    };
+
+    insert_match(fit_info);
+
+    /* If there was a match on a page name, don't clutter up the auto-complete
+       list with matches on its glossary terms. */
+    return;
+  }
+
+  if ('glossary' in page_info) {
+    /* We're willing to add one auto-complete entry for each separate anchor.
+       We use the best fit among all terms associated with that anchor in
+       combination with all page names. */
+    var best_match_info = null;
+    for (var j = 0; j < page_info.glossary.length; j++) {
+      var glossary = page_info.glossary[j];
+
+      /* Find the best match associated with glossary.anchor. */
+      if ('com' in page_info) {
+        var com_match_info = glossary_check_list(search_str, glossary,
+                                                 page_info.com, page_info);
+      } else {
+        var com_match_info = null;
+      }
+
+      if ('sci' in page_info) {
+        var sci_match_info = glossary_check_list(search_str, glossary,
+                                                 page_info.sci, page_info);
+      } else {
+        var sci_match_info = null;
+      }
+
+      if (com_match_info || sci_match_info) {
+        /* Record only the better of com_match_info and sci_match_info.
+           Unlike for a regular page match, we don't put both the common
+           and scientific names in the auto-complete entry.
+           "term (page name)" is already complex enough. */
+        if (better_match(com_match_info, sci_match_info)) {
+          var pri = com_match_info.pri;
+          sci_match_info = null;
+        } else {
+          var pri = sci_match_info.pri;
+          com_match_info = null;
+        }
+
+        if ('anchor' in glossary) {
+          var anchor = glossary.anchor;
+        } else {
+          var anchor = glossary.terms[0];
+        }
+
+        var fit_info = {
+          pri: pri,
+          page_info: page_info,
+          com_match_info: com_match_info,
+          sci_match_info: sci_match_info,
+          anchor: anchor
+        };
+
+        insert_match(fit_info);
+      }
+    }
+  }
+}
+
+/* Search all pages for a fuzzy match with the value in the search field, and
+   create an autocomplete list from the matches. */
 function fn_search() {
   /* We compare uppercase to uppercase to avoid having to deal with case
      differences anywhere else in the code.  Note that this could fail for
@@ -398,57 +542,7 @@ function fn_search() {
   ac_list = [];
   for (var i = 0; i < pages.length; i++) {
     var page_info = pages[i];
-
-    if ('com' in page_info) {
-      var com_match_info = check_list(search_str, page_info.com, page_info);
-    } else {
-      var com_match_info = null;
-    }
-
-    if ('sci' in page_info) {
-      var sci_match_info = check_list(search_str, page_info.sci, page_info);
-    } else {
-      var sci_match_info = null;
-    }
-
-    if (!com_match_info && !sci_match_info) {
-      continue; /* no match */
-    } else if (com_match_info && (!sci_match_info ||
-                                  (com_match_info.pri > sci_match_info.pri))) {
-      var pri = com_match_info.pri;
-    } else {
-      var pri = sci_match_info.pri;
-    }
-
-    /* Reduce the priority of an autogenerated page to below all others. */
-    if ((page_info.x == 'f') || (page_info.x == 'u')) {
-      pri -= 2.0;
-    }
-
-    var fit_info = {
-      pri: pri,
-      page_info: page_info,
-      com_match_info: com_match_info,
-      sci_match_info: sci_match_info
-    };
-
-    /* If there's a match, and
-       - we don't already have 10 matches or
-       - the new match is better than the last match on the list
-       then remember the new match. */
-    if ((ac_list.length < 10) || (fit_info.pri > ac_list[9].pri)) {
-      /* Insert the new match into the list in priority order.  In case of
-         a tie, the new match goes lower on the list. */
-      for (var j = 0; j < ac_list.length; j++) {
-        if (fit_info.pri > ac_list[j].pri) break;
-      }
-      ac_list.splice(j, 0, fit_info);
-      /* If the list was already the maximum length, it is now longer than the
-         maximum length.  Cut off the last entry. */
-      if (ac_list.length > 10) {
-        ac_list.splice(-1, 1);
-      }
-    }
+    page_search(search_str, pages[i]);
   }
 
   for (var i = 0; i < ac_list.length; i++) {
@@ -469,6 +563,8 @@ function fn_search() {
       var sci_highlight = null;
     }
 
+    var link = fn_link(fit_info)
+
     if (com_highlight && sci_highlight) {
       var full = com_highlight + ' (' + sci_highlight + ')';
     } else if (sci_highlight) {
@@ -478,7 +574,7 @@ function fn_search() {
     }
     full = full.replace(/'/g, '&rsquo;')
 
-    fit_info.html = ('<p class="nogap"><a ' + fn_link(page_info) + '>' +
+    fit_info.html = ('<p class="nogap"><a ' + link + '>' +
                      full + '</a></p>');
   }
 
@@ -515,8 +611,8 @@ function fn_change() {
    consistency. */
 function fn_keydown() {
   if ((event.key == 'Enter') && ac_list.length) {
-    var page_info = ac_list[ac_selected].page_info;
-    var url = fn_url(page_info);
+    var fit_info = ac_list[ac_selected];
+    var url = fn_url(fit_info);
     if (event.shiftKey || event.ctrlKey) {
       /* Shift or control was held along with the enter key.  We'd like to
          open a new window or new tab, respectively, but JavaScript doesn't
@@ -528,7 +624,7 @@ function fn_keydown() {
     } else {
       /* The enter key was pressed *without* the shift or control key held.
          Navigate to the new URL within the existing page. */
-      window.location.href = fn_url(page_info);
+      window.location.href = fn_url(fit_info);
     }
     /* Opening a new window doesn't affect the current page.  Also, a
        search of the glossary from a glossary page might result in no
@@ -559,29 +655,13 @@ function fn_keydown() {
 /* normalize the data in the pages array. */
 for (var i = 0; i < pages.length; i++) {
   var page_info = pages[i]
-  if ((page_info.x == 'g') || (page_info.x == 'j')) {
-    if (page_info.x == 'j') {
-      page_info.page = 'Jepson eFlora glossary';
-    } else {
-      page_info.page = glossaries[page_info.idx];
-    }
-    if (!('anchor' in page_info)) {
-      page_info.anchor = page_info.com[0]
-    }
-    for (var j = 0; j < page_info.com.length; j++) {
-      page_info.com[j] = page_info.com[j] + ' (' + page_info.page + ')'
-    }
-  } else {
-    if (!('com' in page_info)) {
-      if (!hasUpper(page_info.page)) {
-        page_info.com = [page_info.page]
-      }
-    }
-    if (!('sci' in page_info)) {
-      if (hasUpper(page_info.page)) {
-        page_info.sci = [page_info.page]
-      }
-    }
+  if (!('com' in page_info) &&
+      (!hasUpper(page_info.page) || (page_info.x == 'j'))) {
+    page_info.com = [page_info.page]
+  }
+  if (!('sci' in page_info) &&
+      hasUpper(page_info.page) && (page_info.x != 'j')) {
+    page_info.sci = [page_info.page]
   }
 }
 
