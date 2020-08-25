@@ -194,6 +194,8 @@ definitions?)
 Instead of using indexed glossaries to save bytes, write pages.js like this:
 {page="plant glossary",glossary:[["leaf","leaves","leaved"],["blade","blades"],etc.]}
 If you want to normalize that to multiple listings with com:, that's fine.
+Besides making it all more intuitive, it also naturally supports glossary
+words in taxon pages.
 
 When searching for a glossary page (e.g. "plant glossary"), it should
 have a similar priority to glossary words (e.g. "leaf (plant
@@ -217,5 +219,13 @@ for blue-eyed marys, define: upper lip, lower lip, keel
 Drop the search penalty for auto-generated families?  Or extend it to
 manually created families if no child has a key?
 
+
 Use img property alt="" to indicate to blind users that a description
 of the photo is not helpful?
+
+
+var., ssp., and spp. shouldn't be italicized by the search.js
+
+Create an "italic_range" which can then be interleaved with the
+"match_range".  Call a function with any number of objects with
+these properties: ranges, tag_open, tag_close.

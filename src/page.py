@@ -359,10 +359,16 @@ class Page:
         elif self.level == 'above':
             (gtype, name) = elab.split(' ')
             return f'{gtype} <i>{name}</i>'
+        elif elab.endswith(' spp.'):
+            (genus, spp) = elab.split(' ')
+            return f'<i>{genus}</i> spp.'
         else:
             if self.is_hybrid:
                 elab = re.sub(r' ', ' &times; ', elab)
-            return f'<i>{elab}</i>'
+            elab = f'<i>{elab}</i>'
+            elab = re.sub(r' ssp\. ', '</i> ssp. <i>', elab)
+            elab = re.sub(r' var\. ', '</i> var. <i>', elab)
+            return elab
 
     def format_full(self, lines=2):
         com = self.format_com()
