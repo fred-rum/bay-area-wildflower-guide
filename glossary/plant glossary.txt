@@ -8,24 +8,6 @@
 
 {leaflet,leaflets} A division of a compound leaf (which may itself be further compound).  Can be distinguished from a leaf by the lack of any structures in its axil other than more leaflets or occasionally stipules.
 
-<h2>Hair</h2>
-
-{bristle,bristles,bristly} A stiff, straight hair.
-{canescent} Densely covered with fine silvery white hairs.
-{ciliate,cilia,cilium} With generally straight hair along its margins.
-{glabrous} Without hair.
-{puberulent} Covered in very short, soft hairs.
-{strigose} Having stiff, straight, appressed hairs.
-{tomentose} Covered with matted, felt-like hairs.
-
-<h2>Armament</h2>
-
-<p>All of these terms may occasionally be used loosely rather than following the strict definition.  Many examples are given in this <a href="https://opuntiads.com/oblog/wp-content/uploads/2016/08/Thorns-Spines-and-Prickles.pdf">PDF</a>.</p>
-
-{prickle,prickles,prickled} Sharp-pointed projection not arising from a node.  Often stiff.
-{spine,spines,spined} Sharp-pointed projection arising in place of a leaf, leaf part, or stipule.  Usually stiff.
-{thorn,thorns,thorned} Sharp-pointed projection arising in place of a stem.  Usually stiff.
-
 <h2>3-D shapes (e.g. for an flower#involucre)</h2>
 
 <p>All flower#involucre shapes may be flared at the tip or not, which is independent of the shape listed below.</p>

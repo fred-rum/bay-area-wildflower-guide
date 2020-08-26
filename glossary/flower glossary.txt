@@ -67,12 +67,30 @@ figure:sea muilla
 {spike,spikes} An unbranched inflorescence with sessile flowers in which the flowers at the proximal end of the inflorescence generally open earlier than at the distal end.
 {umbel,umbels} An inflorescence in which 3+ pedicels (for a simple umbel) or inflorescence branches (for a compound umbel) radiate from a common point with no continuation of the central axis.
 
-<h2>Terms related to fruit</h2>
+<h2>Fruit</h2>
 
 figure:california poppy fruit
 
 {fruit,fruits,fruiting} A seed-bearing body (or a joined aggregation of multiple bodies), developing from one or more ovaries and possibly other associated structures. [figure:california poppy fruit]
 {beak,beaks} A projection from the distal end of a fruit.
+
+<h2>Hair</h2>
+
+{bristle,bristles,bristly} A stiff, straight hair.
+{canescent} Densely covered with fine silvery white hairs.
+{ciliate,cilia,cilium} With generally straight hair along its margins.
+{glabrous} Without hair.
+{puberulent} Covered in very short, soft hairs.
+{strigose} Having stiff, straight, appressed hairs.
+{tomentose} Covered with matted, felt-like hairs.
+
+<h2>Armament</h2>
+
+<p>All of these terms may occasionally be used loosely rather than following the strict definition.  Many examples are given in this <a href="https://opuntiads.com/oblog/wp-content/uploads/2016/08/Thorns-Spines-and-Prickles.pdf">PDF</a>.</p>
+
+{prickle,prickles,prickled} Sharp-pointed projection not arising from a node.  Often stiff.
+{spine,spines,spined} Sharp-pointed projection arising in place of a leaf, leaf part, or stipule.  Usually stiff.
+{thorn,thorns,thorned} Sharp-pointed projection arising in place of a stem.  Usually stiff.
 
 <h2>Other flower terms</h2>
 

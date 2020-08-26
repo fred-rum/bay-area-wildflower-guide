@@ -65,10 +65,12 @@ class Glossary:
         # - easy_sub is applied for optimal display in the HTML.
         self.anchor_defined = {}
 
-        # anchor_list is used only for identifying anchors that are defined
-        # in the master glossary, but never used in that context.
+        # These terms are only used with arg -not_top_usage.
+        # anchor_list is a list of anchors, in glossary order.
+        # anchor_usage indicates the level at which each anchor is used:
+        #   either self.name or the name of one of its child glossaries.
         self.anchor_list = []
-        self.anchor_used_set = set()
+        self.anchor_usage = {}
 
     def set_parent(self, parent):
         self.parent = parent
@@ -113,13 +115,26 @@ class Glossary:
     # For the given term, get a link within the glossary or its ancestors.
     # Search ancestors only when deep=True.
     # Return None if the term isn't in the glossary (or its ancestors).
-    def get_link(self, term, is_glossary, deep, from_parent=False):
+    def get_link(self, term, is_glossary, deep, child=None):
         lower = term.lower()
         if lower in self.link_set:
             anchor = self.term_anchor[lower]
             if (arg('-not_top_usage') and self == master_glossary and
-                deep and not from_parent and not is_glossary):
-                self.anchor_used_set.add(anchor)
+                deep):
+                if child is None:
+                    if not is_glossary:
+                        # Anchor is used from a taxon page
+                        # in the master context.
+                        self.anchor_usage[anchor] = self.name
+                elif anchor in self.anchor_usage:
+                    if child.name != self.anchor_usage[anchor]:
+                        # Anchor is used from multiple children
+                        # (taxon or glossary).
+                        self.anchor_usage[anchor] = self.name
+                else:
+                    # Anchor is used for the first time, and it's not
+                    # from the master context.
+                    self.anchor_usage[anchor] = child.name
             if self.is_jepson:
                 if anchor in self.used_dict:
                     self.used_dict[anchor] += 1
@@ -127,8 +142,7 @@ class Glossary:
                     self.used_dict[anchor] = 1
             return self.glossary_link(anchor, term)
         elif deep and self.parent:
-            return self.parent.get_link(term, is_glossary, True,
-                                        from_parent=True)
+            return self.parent.get_link(term, is_glossary, True, child=self)
         else:
             return None
 
@@ -502,8 +516,10 @@ class Glossary:
 
         if arg('-not_top_usage') and self == master_glossary:
             for anchor in self.anchor_list:
-                if anchor not in self.anchor_used_set:
+                if anchor not in self.anchor_usage:
                     print(anchor)
+                elif self.anchor_usage[anchor] != self.name:
+                    print(f'{anchor}: {self.anchor_usage[anchor]}')
 
     # Write search terms for Jepson's glossary to pages.js
     def write_jepson_search_terms(self, w):
