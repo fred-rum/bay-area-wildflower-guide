@@ -159,9 +159,6 @@ Separate surprise_obs into multiple parts:
   subspecies that don't have a common name but are under a species
     for which subspecies are listed.
 
-Support a command-line argument to increase the number of errors that
-can be printed (or disable any limit).
-
 
 It'd be nice to link to a section of glossary words with the selected
 one highlighted.  E.g. clicking "pedicel" would link to "Parts of a
@@ -174,7 +171,9 @@ includes figures, but even without them).  Is some other solution
 possible to indicate that the linked term is part of a section?
 
 Now that glossary terms are flagged when used out of place, try moving
-many of the plant glossary entries to the flower glossary.
+many of the plant glossary entries to the flower glossary.  Perhaps a
+command-line arg could flag glossary terms that are never used in the
+'plant glossary' context.
 
 Allow a taxon page to declare glossary terms which are then applied to
 that page and below.  E.g. in larkspurs, define upper sepal, lateral

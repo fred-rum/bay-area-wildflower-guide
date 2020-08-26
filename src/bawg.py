@@ -28,7 +28,6 @@
 # So when it is accessed, we must first check whether the key exists in the
 # dictionary before getting its contents.
 
-import sys
 import os
 import shutil
 import filecmp
@@ -36,12 +35,12 @@ import re
 import csv
 import io
 import yaml
-import codecs
 from unidecode import unidecode
 import datetime
 import time
 
 # My files
+from args import *
 from error import *
 from files import *
 from easy import *
@@ -416,7 +415,7 @@ def by_incomplete_obs(page):
 for page in page_array:
     page.write_html()
 
-if len(sys.argv) > 1 and sys.argv[1] == 'x':
+if arg('-incomplete_keys'):
     # List the top 5 genus pages with an incomplete key,
     # as ordered by number of observations.
     # (If there are fewer than 5, then some random pages are listed as well.)

@@ -1,5 +1,8 @@
 import sys
 
+# My files
+from args import *
+
 _former_prefix = None
 _error_cnt = 0
 _in_section = False
@@ -64,7 +67,7 @@ def _emit_error(msg, prefix):
     _error_cnt += 1
 
 def _check_error_cnt():
-    if _error_cnt + _delayed_cnt >= 10:
+    if _error_cnt + _delayed_cnt >= 10 and not arg('-no_error_limit'):
         if _in_section:
             error_end_section()
         sys.exit('Too many errors')
