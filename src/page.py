@@ -224,7 +224,7 @@ class Page:
         sci_page[sci] = self
 
     def set_top_level(self, top_level, tree_top):
-        if self.top_level == None:
+        if self.top_level is None:
             self.top_level = top_level
             for child in self.child:
                 child.set_top_level(top_level, tree_top)
@@ -445,13 +445,13 @@ class Page:
 
     def set_complete(self, matchobj):
         if matchobj.group(1) == 'x':
-            if self.genus_complete != None:
+            if self.genus_complete is not None:
                 error(f'{self.name} has both x:{self.genus_complete} and x:{matchobj.group(3)}')
             self.genus_complete = matchobj.group(3)
             if matchobj.group(2):
                 self.genus_key_incomplete = True
         else:
-            if self.species_complete != None:
+            if self.species_complete is not None:
                 error(f'{self.name} has both xx:{self.species_complete} and xx:{matchobj.group(3)}')
             self.species_complete = matchobj.group(3)
             if matchobj.group(2):
@@ -665,7 +665,7 @@ class Page:
             w.write('<p/>\n')
 
     def page_matches_color(self, color):
-        return (color == None or color in self.color)
+        return (color is None or color in self.color)
 
     def count_matching_obs(self, obs):
         obs.count_matching_obs(self)
@@ -879,7 +879,7 @@ class Page:
 
         def end_paragraph(start_list=False):
             nonlocal p_start
-            if p_start == None:
+            if p_start is None:
                 return
 
             if start_list:
@@ -892,7 +892,7 @@ class Page:
 
         def end_child_text():
             nonlocal child_start, c_list
-            if child_start == None:
+            if child_start is None:
                 return
 
             child = page_array[int(child_matchobj.group(1))]
@@ -1021,7 +1021,7 @@ class Page:
                 end_child_text()
                 continue
 
-            if p_start == None:
+            if p_start is None:
                 p_start = len(c_list)
             c_list.append(c)
         end_paragraph()
@@ -1071,7 +1071,7 @@ class Page:
 
     def any_parent_within_level(self, within_level_list):
         for parent in self.parent:
-            if parent.level == None:
+            if parent.level is None:
                 if parent.any_parent_within_level(within_level_list):
                     return True
             elif parent.level in within_level_list:
@@ -1097,7 +1097,7 @@ class Page:
             else:
                 other = ''
             if is_top:
-                if complete == None:
+                if complete is None:
                     if top == 'genus':
                         w.write(f'<b>Caution: There may be{other} {members} of this {top} not yet included in this guide.</b>')
                     else:

@@ -298,16 +298,16 @@ top_list = [x for x in page_array if not x.parent]
 # If a parent includes only one matching child page, that child page is
 # listed individually, and the parent is not listed.
 #
-# If color == None, every page matches.
+# If color is None, every page matches.
 def find_matches(page_subset, color):
     match_list = []
     for page in page_subset:
         child_subset = find_matches(page.child, color)
-        if len(child_subset) == 1 and color != None:
+        if len(child_subset) == 1 and color is not None:
             match_list.extend(child_subset)
         elif child_subset:
             match_list.append(page)
-            if color != None:
+            if color is not None:
                 # Record this container page's newly discovered color.
                 page.color.add(color)
         elif page.jpg_list and page.page_matches_color(color):

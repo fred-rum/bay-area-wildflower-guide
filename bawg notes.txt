@@ -127,11 +127,6 @@ good side view down to bracts
 top view shows all the parts, but is too crowded to label
 
 
-Add search terms for 'Jepson eFlora glossary' and 'Jepson glossary'.
-Note that these will need special handling to get the right link color
-while not adding an anchor.  I.e. recognize a glossary without a coms
-list while normalizing pages.js.
-
 Add glossary entries to replace as many Jepson terms as I can.  If I
 can get all of them, then perhaps I can make use of a Jepson term an
 error.

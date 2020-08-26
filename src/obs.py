@@ -76,7 +76,7 @@ class Obs:
     def write_page_counts(self, w):
         w.write(f'<span class="parent">{self.key} keys</span>')
         w.write(f' / <span class="leaf">{self.leaf_obs} observed flowers</span>')
-        if self.color == None:
+        if self.color is None:
             # Unobserved colors don't have an assigned color, so it doesn't
             # make sense to try to print out how many match the current color.
             w.write(f' / <span class="unobs">{self.leaf_unobs} unobserved flowers</span>')
@@ -136,7 +136,7 @@ Locations:
             #         weight += self.month[j] / factor
             #     if i == 0: # bias toward January unless there's a clear winner
             #         weight /= 1
-            #     if break_month == None or weight < break_weight:
+            #     if break_month is None or weight < break_weight:
             #         break_month = i
             #         break_weight = weight
 
@@ -144,7 +144,7 @@ Locations:
             # for i in range(12):
             #     m = (i + break_month) % 12
             #     if self.month[m]:
-            #         if first == None:
+            #         if first is None:
             #             first = i
             #         last = i
 

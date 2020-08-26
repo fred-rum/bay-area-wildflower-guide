@@ -52,7 +52,7 @@ def _pattern(trie):
     for char in sorted(trie.keys()):
         if char != '': # ignore terminator
             recurse = _pattern(trie[char])
-            if recurse == None:
+            if recurse is None:
                 smpl.append(re.escape(char))
             else:
                 cplx.append(re.escape(char) + recurse)
