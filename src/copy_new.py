@@ -18,6 +18,7 @@ else:
     root_path = '..'
 
 file_list = ['index.html',
+             'contact.html',
              'bawg.css',
              'search.js',
              'pages.js']
