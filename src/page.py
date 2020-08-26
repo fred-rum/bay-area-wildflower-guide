@@ -9,6 +9,7 @@ from find_page import *
 from obs import *
 from easy import *
 from glossary import *
+from parse import *
 
 ###############################################################################
 
@@ -872,167 +873,68 @@ class Page:
         for child in self.child:
             child.set_glossary(glossary)
 
+    def parse_child_and_key(self, child_idx, suffix, text):
+        child = page_array[child_idx]
+
+        # Give the child a copy of the text from the parent's key.
+        # The child can use this (pre-parsed) text if it has no text
+        # of its own.
+        if ((self.level == 'genus' and child.level in ('species', 'below')) or
+            (self.level == 'species' and child.level == 'below') or
+            not child.key_txt):
+            child.key_txt = text
+
+        if text:
+            # Remember that at least one child was given key info.
+            self.has_child_key = True
+
+        link = child.create_link(2)
+
+        name = child.name
+        jpg = None
+        if suffix:
+            if name + suffix in jpg_files:
+                jpg = name + suffix
+            else:
+                error(name + suffix + '.jpg not found on page ' + name)
+
+        if not jpg:
+            jpg = child.get_jpg()
+
+        if not jpg:
+            ext_photo = child.get_ext_photo()
+
+        if jpg:
+            img = f'<a href="{child.url()}.html"><img src="../thumbs/{jpg}.jpg" class="page-thumb"></a>'
+        elif ext_photo:
+            img = f'<a href="{child.url()}.html" class="enclosed {child.link_style()}"><div class="page-thumb-text">'
+            n_photos = len(child.ext_photo_list)
+            if n_photos > 1:
+                photo_text = f'photos &times; {n_photos}'
+            elif ext_photo[0]:
+                photo_text = ext_photo[0]
+            else:
+                photo_text = 'photo'
+            img += f'<span>{photo_text}</span>'
+            img += '</div></a>'
+        else:
+            img = None
+
+        if not img:
+            return '<p>' + link + '</p>\n' + text
+        elif text:
+            # Duplicate and contain the text link so that the following text
+            # can either be below the text link and next to the image or
+            # below both the image and text link, depending on the width of
+            # the viewport.
+            return f'<div class="flex-width"><div class="photo-box">{img}\n<span class="show-narrow">{link}</span></div><span><span class="show-wide">{link}</span>{text}</span></div>'
+        else:
+            return f'<div class="photo-box">{img}\n<span>{link}</span></div>'
+
     def parse(self):
         s = self.txt
-        s = re.sub(r'^\n+', '', s)
-        s = re.sub(r'\n*$', '\n', s, count=1)
 
-        def end_paragraph(start_list=False):
-            nonlocal p_start
-            if p_start is None:
-                return
-
-            if start_list:
-                p_tag = '<p class="list-head">'
-            else:
-                p_tag = '<p>'
-            c_list[p_start] = p_tag + c_list[p_start]
-            c_list[-1] += '</p>'
-            p_start = None
-
-        def end_child_text():
-            nonlocal child_start, c_list
-            if child_start is None:
-                return
-
-            child = page_array[int(child_matchobj.group(1))]
-            suffix = child_matchobj.group(2)
-            if not suffix:
-                suffix = ''
-
-            text = '\n'.join(c_list[child_start:])
-            c_list = c_list[:child_start]
-            child_start = None
-
-            # Give the child a copy of the text from the parent's key.
-            # The child can use this (pre-parsed) text if it has no text
-            # of its own.
-            if ((self.level == 'genus' and child.level in ('species', 'below')) or
-                (self.level == 'species' and child.level == 'below') or
-                not child.key_txt):
-                child.key_txt = text
-
-            link = child.create_link(2)
-
-            name = child.name
-            jpg = None
-            if suffix:
-                if name + suffix in jpg_files:
-                    jpg = name + suffix
-                else:
-                    error(name + suffix + '.jpg not found on page ' + self.name)
-
-            if not jpg:
-                jpg = child.get_jpg()
-
-            if not jpg:
-                ext_photo = child.get_ext_photo()
-
-            if jpg:
-                img = f'<a href="{child.url()}.html"><img src="../thumbs/{jpg}.jpg" class="page-thumb"></a>'
-            elif ext_photo:
-                img = f'<a href="{child.url()}.html" class="enclosed {child.link_style()}"><div class="page-thumb-text">'
-                n_photos = len(child.ext_photo_list)
-                if n_photos > 1:
-                    photo_text = f'photos &times; {n_photos}'
-                elif ext_photo[0]:
-                    photo_text = ext_photo[0]
-                else:
-                    photo_text = 'photo'
-                img += f'<span>{photo_text}</span>'
-                img += '</div></a>'
-            else:
-                img = None
-
-            if not img:
-                c_list.append('<p>' + link + '</p>\n' + text)
-            elif text:
-                # Duplicate and contain the text link so that the following text
-                # can either be below the text link and next to the image or
-                # below both the image and text link, depending on the width of
-                # the viewport.
-                c_list.append(f'<div class="flex-width"><div class="photo-box">{img}\n<span class="show-narrow">{link}</span></div><span><span class="show-wide">{link}</span>{text}</span></div>')
-            else:
-                c_list.append(f'<div class="photo-box">{img}\n<span>{link}</span></div>')
-
-            if text:
-                # Remember that at least one child was given key info.
-                self.has_child_key = True
-
-        # Replace HTTP links in the text with ones that open a new tab.
-        # (Presumably they're external links or they'd be in {...} format.)
-        s = re.sub(r'<a href=', '<a target="_blank" href=', s)
-
-        s = link_figures(self.name, s)
-
-        # Break the text into lines, then perform easy substitutions on
-        # non-keyword lines and decorate bullet lists.  Also, keep track
-        # of lines associated with a child; we'll copy those into the
-        # child's text if it doesn't have any.
-        c_list = []
-        p_start = None
-        child_start = None
-        list_depth = 0
-        bracket_depth = 0
-        for c in s.split('\n'):
-            matchobj = re.match(r'\.*', c)
-            new_list_depth = matchobj.end()
-            if new_list_depth:
-                end_paragraph(True)
-            if new_list_depth > list_depth+1:
-                error('Jump in list depth on page ' + self.name)
-            while list_depth < new_list_depth:
-                if list_depth == 0:
-                    c_list.append('<ul>')
-                else:
-                    c_list.append('<ul class="list-sub">')
-                list_depth += 1
-            while list_depth > new_list_depth:
-                c_list.append('</ul>')
-                list_depth -= 1
-            c = c[list_depth:].strip()
-
-            matchobj = re.match(r'==(\d+)(,[-0-9]\S*|,)?\s*$', c)
-            if matchobj:
-                end_paragraph()
-                end_child_text()
-                child_matchobj = matchobj
-                child_start = len(c_list)
-                continue
-
-            if c == '[':
-                end_paragraph()
-                end_child_text()
-                c_list.append('<div class="box">')
-                bracket_depth += 1
-                continue
-
-            if c == ']':
-                end_paragraph()
-                end_child_text()
-                c_list.append('</div>')
-                bracket_depth -= 1
-                continue
-
-            if list_depth:
-                c_list.append(f'<li>{c}</li>')
-                continue
-
-            if c == '':
-                end_paragraph()
-                end_child_text()
-                continue
-
-            if p_start is None:
-                p_start = len(c_list)
-            c_list.append(c)
-        end_paragraph()
-        end_child_text()
-
-        if bracket_depth != 0:
-            error(f'"[" and "]" bracket depth is {bracket_depth} on page {self.name}')
-
-        s = '\n'.join(c_list)
+        s = parse_txt(self.name, s, self)
 
         if not self.has_child_key:
             # No child has a key, so reduce the size of child photos.
