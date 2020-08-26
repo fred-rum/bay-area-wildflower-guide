@@ -247,44 +247,46 @@ class Glossary:
 
         # Add glossary links in group 1, but leave group 2 unchanged.
         def repl_glossary_pair(matchobj):
-            allowed = matchobj.group(1)
-            disallowed = matchobj.group(2)
-            allowed = link_safe(allowed)
-            return allowed + disallowed
+            safe = matchobj.group(1)
+            unsafe = matchobj.group(2)
+            return link_safe(safe) + unsafe
 
-        # Find non-tagged text followed (optionally) by tagged text.
-        # We'll perform glossary link insertion only on the non-tagged text.
+        # Find safe text followed (optionally) by unsafe text.
+        # We'll perform glossary link insertion only on the safe text.
         #
-        # The first group (for non-tagged text) is non-greedy, but still starts
-        # as soon as possible (i.e. at the beginning of the string or just after
-        # the previous match).
+        # The first group (for safe text) starts as soon as possible
+        # (i.e. at the beginning of the string or just after the previous
+        # match), but it has a non-greedy end so that it ends before anything
+        # that matches the second group.
         #
-        # The second group (for tagged text) is also non-greedy, looking for the
+        # The second group (for unsafe text) is also non-greedy, looking for the
         # shortest amount of text to close the link.  The second group either
         # starts with an opening tag and ends with a closing tag, or it matches
-        # the end of the string (after matching the final non-tagged text).
+        # the end of the string (after matching the final safe text).
         #
-        # Tagged text is anything between link tags, <a>...</a>.
-        # It also includes the URL in <a href="...">.  Anything between braces
-        # {...} is also captured here.
+        # Unsafe text includes anything within a tag itself, <...>.  Because
+        # my HTML is sloppy with less-than/greater-than signs that technically
+        # ought to be escaped, I actually look for a tag starting with a
+        # letter, e.g. <a...>.  This misses closing tags (e.g. </a>), but
+        # those have a limited enough scope that I can be comfortable that
+        # they'll never match a glossary word.
+        # 
+        # Unsafe text also includes anything between link tags, <a>...</a>.
+        # Text between these tags is already linked to something, so trying
+        # to add another link to the glossary would be dumb.
         #
-        # Within the glossary, tagged text also includes anything between
-        # header tags, <h#>...</h#>.  Linking a header tag to the glossary is
+        # Term lists and child links in braces have already been dealth with
+        # before link_glossary() is called, so we don't need to recognize
+        # braces as a type of unsafe text.
+        #
+        # Within the glossary, unsafe text also includes anything between
+        # header tags, <h#>...</h#>.  Linking header text to the glossary is
         # fine in regular pages where the word may be unknown, but it looks
         # weird in the glossary where the word is defined right there.
         if is_glossary:
-            # Don't replace any text between link tags <a>...</a>
-            # (including the URL in <a href="...">) or between header tags
-            # <h#>...</h#> or within a tag <...> or special syntax {...}. 
-            # Linking a header tag to the glossary is fine in regular pages
-            # where the word may be unknown, but it looks weird in the
-            # glossary where the word is defined right there.
-            sub_re = r'(.*?)(\Z|<(?:a\s|h\d).*?</(?:a|h\d)>|<\w.*?>|{.*?})'
+            sub_re = r'(.*?)(\Z|<(?:a\s|h\d).*?</(?:a|h\d)>|<\w.*?>)'
         else:
-            # Don't replace any text between link tags <a>...</a>
-            # (including the URL in <a href="...">) or within a tag <...>
-            # or special syntax {...}.
-            sub_re = r'(.*?)(\Z|<a\s.*?</a>|<\w.*?>|{.*?})'
+            sub_re = r'(.*?)(\Z|<a\s.*?</a>|<\w.*?>)'
 
         # Perform the glossary link substitution for each non-tag/tag
         # pair throughout the entire multi-line txt string.
@@ -360,7 +362,8 @@ class Glossary:
 
         glossary_name_dict[self.name] = self
 
-        # Read definitions and modify them to avoid self-linking.
+        # Read glossary terms and replace them with a bare {anchor}
+        # followed by the definition.
         self.txt = re.sub(r'^{([^\}]+)}\s+(.*)$',
                           repl_defn, self.txt, flags=re.MULTILINE)
 
@@ -446,22 +449,6 @@ class Glossary:
             w.write('</div>\n')
 
     def write_html(self):
-        def repl_defns(matchobj):
-            anchor = matchobj.group(1)
-            defn = matchobj.group(2)
-
-            # Add links to other glossaries where they define the same words.
-            related_str = ''
-            dup_list = jepson_glossary.find_dups(self, anchor)
-            if dup_list:
-                related_str = ' [' + ', '.join(dup_list) + ']'
-            else:
-                related_str = ''
-
-            defined_term = self.anchor_defined[anchor]
-
-            return f'<div class="defn" id="{anchor}"><dt>{defined_term}</dt><dd>{defn}{related_str}</dd></div>'
-
         self.txt = easy_sub(self.txt)
 
         # Link glossary words one line at a time because we want to take
@@ -471,25 +458,39 @@ class Glossary:
             # Look for a glossary definition on the line.
             matchobj = re.match(r'^{([^\}]+)}\s+(.*)$', c)
             if matchobj:
+                anchor = matchobj.group(1)
+                defn = matchobj.group(2)
+
                 # Link glossary terms in the definition, but excluding any
                 # terms being defined on this line.  Although it seems
                 # intuitive to remove the excluded terms from glossary_regex,
                 # recompiling the monster regex hundreds of times is a huge
                 # performance hit.  Instead, we leave the regex alone and
                 # handle the excluded terms as they are matched.
-                anchor = matchobj.group(1)
-                defn = matchobj.group(2)
                 exclude_set = self.anchor_terms[anchor]
+                defn = self.link_glossary_words(defn, self.name,
+                                                is_glossary=True,
+                                                exclude=exclude_set)
+
+                # Add links to other glossaries
+                # where they define the same words.
+                related_str = ''
+                dup_list = jepson_glossary.find_dups(self, anchor)
+                if dup_list:
+                    related_str = ' [' + ', '.join(dup_list) + ']'
+                else:
+                    related_str = ''
+
+                defined_term = self.anchor_defined[anchor]
+
+                c = f'<div class="defn" id="{anchor}"><dt>{defined_term}</dt><dd>{defn}{related_str}</dd></div>'
             else:
-                exclude_set = None
-            c = self.link_glossary_words(c, self.name,
-                                         is_glossary=True,
-                                         exclude=exclude_set)
+                # It's not a definition line, so just link glossary words
+                # normally within the line.
+                c = self.link_glossary_words(c, self.name, is_glossary=True)
+
             c_list.append(c)
         self.txt = '\n'.join(c_list)
-
-        self.txt = re.sub(r'^{([^\}]+)}\s+(.*)$',
-                          repl_defns, self.txt, flags=re.MULTILINE)
 
         with open(f'{working_path}/html/{self.name}.html', mode='w') as w:
               write_header(w, self.name, None, nospace=True)

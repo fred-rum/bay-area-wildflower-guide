@@ -966,7 +966,9 @@ class Page:
         s = link_figures(self.name, s)
 
         # Break the text into lines, then perform easy substitutions on
-        # non-keyword lines and decorate bullet lists.
+        # non-keyword lines and decorate bullet lists.  Also, keep track
+        # of lines associated with a child; we'll copy those into the
+        # child's text if it doesn't have any.
         c_list = []
         p_start = None
         child_start = None
