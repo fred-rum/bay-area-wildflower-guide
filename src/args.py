@@ -10,7 +10,10 @@ while len(sys.argv):
                        '-no_error_limit',
                        '-not_top_usage'):
         _arg_value[sys.argv[0]] = True
-    
+    else:
+        print(f'Argument not recognized: {sys.argv[0]}', file=sys.stderr)
+        sys.exit(-1)
+
     sys.argv.pop(0)
 
 def arg(name):
