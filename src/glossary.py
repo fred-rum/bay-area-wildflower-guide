@@ -65,6 +65,11 @@ class Glossary:
         # - easy_sub is applied for optimal display in the HTML.
         self.anchor_defined = {}
 
+        # anchor_list is used only for identifying anchors that are defined
+        # in the master glossary, but never used in that context.
+        self.anchor_list = []
+        self.anchor_used_set = set()
+
     def set_parent(self, parent):
         self.parent = parent
         parent.child.add(self)
@@ -108,10 +113,13 @@ class Glossary:
     # For the given term, get a link within the glossary or its ancestors.
     # Search ancestors only when deep=True.
     # Return None if the term isn't in the glossary (or its ancestors).
-    def get_link(self, term, deep):
+    def get_link(self, term, is_glossary, deep, from_parent=False):
         lower = term.lower()
         if lower in self.link_set:
             anchor = self.term_anchor[lower]
+            if (arg('-not_top_usage') and self == master_glossary and
+                deep and not from_parent and not is_glossary):
+                self.anchor_used_set.add(anchor)
             if self.is_jepson:
                 if anchor in self.used_dict:
                     self.used_dict[anchor] += 1
@@ -119,7 +127,8 @@ class Glossary:
                     self.used_dict[anchor] = 1
             return self.glossary_link(anchor, term)
         elif deep and self.parent:
-            return self.parent.get_link(term, True)
+            return self.parent.get_link(term, is_glossary, True,
+                                        from_parent=True)
         else:
             return None
 
@@ -145,7 +154,7 @@ class Glossary:
                     return bare_term
                 else:
                     glossary = glossary_name_dict[name + ' glossary']
-                    link = glossary.get_link(bare_term, False)
+                    link = glossary.get_link(bare_term, is_glossary, False)
                     if link:
                         return link
                     else:
@@ -177,7 +186,7 @@ class Glossary:
                 # to returning the unmodified term.
                 link = None
             else:
-                link = self.get_link(term, True)
+                link = self.get_link(term, is_glossary, True)
 
             if not link:
                 # We can't find a link for the term (or it is excluded,
@@ -318,6 +327,7 @@ class Glossary:
             self.search_terms.append(word_list)
             self.record_terms(anchor, word_list)
             self.anchor_defined[anchor] = defined_term
+            self.anchor_list.append(anchor)
             return '{' + anchor + '} ' + defn
 
         with open(f'{root_path}/glossary/{self.name}.txt', mode='r') as f:
@@ -490,6 +500,11 @@ class Glossary:
         for child in sorted(self.child, key=by_name):
             child.write_search_terms(w)
 
+        if arg('-not_top_usage') and self == master_glossary:
+            for anchor in self.anchor_list:
+                if anchor not in self.anchor_used_set:
+                    print(anchor)
+
     # Write search terms for Jepson's glossary to pages.js
     def write_jepson_search_terms(self, w):
         w.write('{page:"Jepson eFlora glossary",x:"j",glossary:[\n')
@@ -521,7 +536,9 @@ glossary_files = get_file_set('glossary', 'txt')
 glossary_list = []
 name_set = set()
 term_set = set()
-name_set.add('none')
+anchor_set = set()
+
+name_set.add('none') # 'none#[term]' is used to prevent glossary references
 
 def create_regex():
     name_ex = '(?:' + '|'.join(map(re.escape, name_set)) + ')'
