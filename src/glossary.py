@@ -284,9 +284,9 @@ class Glossary:
         # fine in regular pages where the word may be unknown, but it looks
         # weird in the glossary where the word is defined right there.
         if is_glossary:
-            sub_re = r'(.*?)(\Z|<(?:a\s|h\d).*?</(?:a|h\d)>|<\w.*?>)'
+            sub_re = r'(.*?)(\Z|<(?:a\s|h\d).*?</(?:a|h\d)>|<\w.*?>|{.*?})'
         else:
-            sub_re = r'(.*?)(\Z|<a\s.*?</a>|<\w.*?>)'
+            sub_re = r'(.*?)(\Z|<a\s.*?</a>|<\w.*?>|{.*?})'
 
         # Perform the glossary link substitution for each non-tag/tag
         # pair throughout the entire multi-line txt string.

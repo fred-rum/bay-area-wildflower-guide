@@ -185,11 +185,11 @@ def parse2_txt(name, s, glossary):
                 error(f'Broken link {{-{link_name}}} on page {name}')
                 return '{-' + link_name + '}'
 
-    # Replace {-[link_name]} with an inline link to the page.
-    s = re.sub(r'{-([^}]+)}', repl_link, s)
-
     error_begin_section()
     s = glossary.link_glossary_words(s, name, is_glossary=False)
     error_end_section()
+
+    # Replace {-[link_name]} with an inline link to the page.
+    s = re.sub(r'{-([^}]+)}', repl_link, s)
 
     return s
