@@ -4,7 +4,7 @@ taxon:orchid family
 
 figure:coast piperia
 
-<p>An orchid flower has three sepals and three petals in a bilateral arrangement (not radial).  As usual, the petals are positioned inside the ring of sepals.</p>
+An orchid flower has three sepals and three petals in a bilateral arrangement (not radial).  As usual, the petals are positioned inside the ring of sepals.
 
 {lower petal,lower petals} The single petal in the lower (proximal) position on the flower. [figure:coast piperia]
 {lip,lips} The lower petal, often with a highly modified shape.

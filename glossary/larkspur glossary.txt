@@ -5,8 +5,7 @@ taxon:larkspurs
 figure:foothill larkspur
 figure:foothill larkspur spur
 
-<p>In most larkspurs, each flower consists of five petal-like sepals in which the base of the upper sepal has a long spur projecting behind it.  The sepals may be erect, spreading, or reflexed.  Within the sepals are four true petals, smaller and less conspicuous, and usually
-colored similarly to the sepals.
+In most larkspurs, each flower consists of five petal-like sepals in which the base of the upper sepal has a long spur projecting behind it.  The sepals may be erect, spreading, or reflexed.  Within the sepals are four true petals, smaller and less conspicuous, and usually colored similarly to the sepals.
 
 {upper sepal,upper sepals} The single sepal in the uppermost position on the flower. [figure:foothill larkspur]
 {spur,spurs} A hollow +- conical projection from the back (proximal side) of the upper sepal.  The upper petals have spurs, too, nestled within the visible (upper sepal) spur. [figure:foothill larkspur spur]

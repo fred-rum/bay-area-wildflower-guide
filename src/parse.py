@@ -47,17 +47,9 @@ def parse_txt(name, s, page):
 
         c_list.append(page.parse_child_and_key(child_idx, suffix, text))
 
-    ###########################################################################
-    # Full-text parsing
-
     # Replace HTTP links in the text with ones that open a new tab.
     # (Presumably they're external links or they'd be in {...} format.)
     s = re.sub(r'<a href=', '<a target="_blank" href=', s)
-
-    s = link_figures(name, s)
-
-    ###########################################################################
-    # Line-by-line parsing
 
     # Break the text into lines, then perform easy substitutions on
     # non-keyword lines and decorate bullet lists.  Also, keep track
@@ -68,6 +60,7 @@ def parse_txt(name, s, page):
     child_start = None
     list_depth = 0
     bracket_depth = 0
+    in_heading = None
     for c in s.split('\n'):
         matchobj = re.match(r'\.*', c)
         new_list_depth = matchobj.end()
@@ -86,6 +79,11 @@ def parse_txt(name, s, page):
             list_depth -= 1
         c = c[list_depth:].strip()
 
+        # non_p gets set to True if text is passed through that shouldn't
+        # be wrapped in a paragraph tag.  Note that this is different from
+        # the case in which text is suppressed with a 'continue' statement.
+        non_p = False
+
         if (page):
             # For taxon pages only, accumulate key text for a child page.
             matchobj = re.match(r'==(\d+)(,[-0-9]\S*|,)?\s*$', c)
@@ -95,6 +93,29 @@ def parse_txt(name, s, page):
                 child_matchobj = matchobj
                 child_start = len(c_list)
                 continue
+
+        if re.match(r'<h\d>', c):
+            # It doesn't actually hurt the user to wrap heading tags in
+            # paragraph tags, but it hurts my soul.  I don't care what
+            # kind of heading it is (<h1>, <h2>, etc.) since it should
+            # be closed with a matching tag without nesting.
+            in_heading = True
+
+        if in_heading:
+            # We remain outside of paragraph tags until the headin ends,
+            # whether that is on the same line or a later line.
+            non_p = True
+            if re.search(r'</h\d>', c):
+                in_heading = False
+
+        if c.startswith('{') and not c.startswith('{-'):
+            # Leave glossary definitions untouched and not embedded in
+            # paragraphs.
+            non_p = True
+
+        if c.startswith('figure:'):
+            # Leave figure links untouched and not embedded in paragraphs.
+            non_p = True
 
         if c == '[':
             end_paragraph()
@@ -119,7 +140,10 @@ def parse_txt(name, s, page):
             end_child_text()
             continue
 
-        if p_start is None:
+        if non_p:
+            end_paragraph()
+            end_child_text()
+        elif p_start is None:
             p_start = len(c_list)
         c_list.append(c)
     end_paragraph()
@@ -128,4 +152,8 @@ def parse_txt(name, s, page):
     if bracket_depth != 0:
         error(f'"[" and "]" bracket depth is {bracket_depth} on page {name}')
 
-    return '\n'.join(c_list)
+    s = '\n'.join(c_list)
+
+    s = link_figures(name, s)
+
+    return s

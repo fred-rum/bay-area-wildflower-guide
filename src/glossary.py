@@ -7,6 +7,7 @@ from files import *
 from find_page import *
 from easy import *
 from trie import *
+from parse import *
 
 glossary_taxon_dict = {}
 glossary_name_dict = {}
@@ -349,10 +350,6 @@ class Glossary:
         with open(f'{root_path}/glossary/{self.name}.txt', mode='r') as f:
             self.txt = f.read()
 
-        # Link figures prior to parsing glossary terms so that they're
-        # properly recognized as not to be touched.
-        self.txt = link_figures(self.name, self.txt)
-
         self.txt = re.sub(r'^taxon:\s*(.*?)\s*$',
                           repl_taxon, self.txt, flags=re.MULTILINE)
 
@@ -450,6 +447,8 @@ class Glossary:
 
     def write_html(self):
         self.txt = easy_sub(self.txt)
+
+        self.txt = parse_txt(self.name, self.txt, None)
 
         # Link glossary words one line at a time because we want to take
         # special action on lines that define glossary words.

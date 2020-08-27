@@ -1,8 +1,8 @@
 taxon:grasses
 
-<p>Grass morphology is described <a href="https://forages.oregonstate.edu/regrowth/how-does-grass-grow/grass-structures" target="_blank">here</a>.</p>
+Grass morphology is described <a href="https://forages.oregonstate.edu/regrowth/how-does-grass-grow/grass-structures" target="_blank">here</a>.
 
-<p>Spikelet morphology is illustrated <a href="https://keys.lucidcentral.org/keys/v3/FNW/Whole%20key%20html/Grass_morphology.htm" target="_blank">here</a>.</p>
+Spikelet morphology is illustrated <a href="https://keys.lucidcentral.org/keys/v3/FNW/Whole%20key%20html/Grass_morphology.htm" target="_blank">here</a>.
 
 {auricle,auricles} A short appendiage at the base of the leaf blade, typically clasping the sheath.
 {awn,awns} A bristle extending from the midrib of the lemma.  It may extend from the tip of the lemma from from the outer surface.
@@ -16,7 +16,7 @@ taxon:grasses
 
 <h2>Inflorescence shapes</h2>
 
-<p>Within the grasses, these terms describe the organization of multiple epikelets in a larger inflorescence.  The order of development among spikelets is not defined.</p>
+Within the grasses, these terms describe the organization of multiple epikelets in a larger inflorescence.  The order of development among spikelets is not defined.
 
 {panicle,panicles} An inflorescence in which at least some spikelets are attached to inflorescence branches rather than the central axis.  The order in which heads develop is not defined.
 {raceme,racemes} An inflorescence with stalked spikelets attached directly to the inflorescence axis (not to branches).

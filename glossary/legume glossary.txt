@@ -4,7 +4,7 @@ taxon:legume family
 
 figure:chaparral pea
 
-<p>A pea flower has five petals in a bilateral arrangement (not radial).</p>
+A pea flower has five petals in a bilateral arrangement (not radial).
 
 {banner,banners} The topmost petal.  It may have a crease down the middle that makes it looks like two petals stuck together, or it may be curled around the other petals.  Also called the "standard petal". [figure:chaparral pea]
 {wing,wings} Each of the two none#lateral petals below the banner, often fused at their top edge and enfolding the keel. [figure:chaparral pea]

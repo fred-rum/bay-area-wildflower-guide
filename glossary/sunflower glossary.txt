@@ -1,6 +1,6 @@
 taxon:sunflower family
 
-<p>A single flower head in the sunflower family is actually a tight inflorescence of many flowers, often with separate shapes for the center disk flowers and outer ray flowers.</p>
+A single flower head in the sunflower family is actually a tight inflorescence of many flowers, often with separate shapes for the center disk flowers and outer ray flowers.
 
 {awn,awns} Terminal bristle.
 {bristle,bristles} A stiff, hairlike tip of a pappus element.
@@ -18,7 +18,7 @@ taxon:sunflower family
 
 <h2>Inflorescence shapes</h2>
 
-<p>Within the sunflower family, these terms describe the organization of multiple heads in a larger inflorescence.  For most of these terms, the order of development among heads is not defined.</p>
+Within the sunflower family, these terms describe the organization of multiple heads in a larger inflorescence.  For most of these terms, the order of development among heads is not defined.
 
 {cyme,cymes} A branched inflorescence in which a head at an axil develops before heads on the subtending branches.
 {panicle,panicles} An inflorescence in which at least some heads are attached to inflorescence branches rather than the central axis.

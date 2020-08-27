@@ -10,7 +10,7 @@
 
 <h2>3-D shapes (e.g. for an flower#involucre)</h2>
 
-<p>All flower#involucre shapes may be flared at the tip or not, which is independent of the shape listed below.</p>
+All flower#involucre shapes may be flared at the tip or not, which is independent of the shape listed below.
 
 {bell-shaped,bell} Rapidly widening at the base, then slowly expanding toward the tip.
 {cylindric,cylindrical} Significantly longer than wide with parallel sides.
@@ -19,7 +19,7 @@
 
 <h2>2-D shapes (e.g. for a leaf)</h2>
 
-<p>Particularly for leaves, the base of the blade may taper to the petiole regardless of the shape description. <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example leaf shapes]</a></p>
+Particularly for leaves, the base of the blade may taper to the petiole regardless of the shape description. <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example leaf shapes]</a>
 
 {cordate} Shaped like a heart in a deck of cards (with tip outward, lobes at the base). <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
 {elliptic,elliptical} In the shape of an elongated circle, widest near the middle.  Wider than linear. <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
@@ -42,9 +42,9 @@
 {even-pinnate,even-pinnately} Pinnate with pairs of lateral branches but no terminal branch.
 {N-pinnate,1-pinnate,2-pinnate,3-pinnate,4-pinnate,1--2-pinnate,1--3-pinnate,1--4-pinnate,2--3-pinnate,2--4-pinnate,3--4-pinnate} 1-pinnate means that the structure has 1 level of branches arising from a central axis.  2-pinnate means that the branches also have branches, etc.
 
-<h3>Tip shapes</h2>
+<h3>Tip shapes</h3>
 
-<p>Example drawings are <a target="_blank" href="http://sweetgum.nybg.org/science/glossary/glossary-details/?irn=3020">here</a>.</p>
+Example drawings are <a target="_blank" href="http://sweetgum.nybg.org/science/glossary/glossary-details/?irn=3020">here</a>.
 
 {acuminate} A long tip with concave sides meeting at a sharp angle.
 {acute} A short tip with convex or straight sides meeting at an angle sharper than 90&deg;.

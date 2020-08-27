@@ -11,7 +11,7 @@ Key features:
 . scale color and tip shape (and sometimes fuzziness)
 . bristle fuzziness
 
-<h2><= 5 scales; simple stem</h4>
+<h2><= 5 scales; simple stem</h2>
 
 Ordered roughly by scale length (long to short).
 
@@ -56,7 +56,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0411+2148
 . Bristles 3--5 mm.
 . Found at Coe and Mt. Diablo.
 
-<h2>5--10 scales; stem may be branched and/or have leaves</h4>
+<h2>5--10 scales; stem may be branched and/or have leaves</h2>
 
 Ordered roughly by scale length (long to short).
 
