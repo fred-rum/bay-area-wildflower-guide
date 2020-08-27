@@ -943,19 +943,6 @@ class Page:
         self.txt = s
 
     def parse2(self):
-        # Replace {-[name]} with an inline link to the page.
-        def repl_link(matchobj):
-            name = matchobj.group(1)
-            page = find_page1(name)
-            if page:
-                return page.create_link(1)
-            else:
-                if name in glossary_name_dict:
-                    return glossary_name_dict[name].create_link()
-                else:
-                    error(f'Broken link {{-{name}}} on page {self.name}')
-                    return '{-' + name + '}'
-
         # Use the text supplied in the text file if present.
         # Otherwise use the key text from its parent.
         # If the page's text file contains only metadata (e.g.
@@ -966,12 +953,7 @@ class Page:
         else:
             s = self.key_txt
 
-        s = re.sub(r'{-([^}]+)}', repl_link, s)
-        s = easy_sub(s)
-        error_begin_section()
-        s = self.glossary.link_glossary_words(s, self.name, is_glossary=False)
-        error_end_section()
-        self.txt = s
+        self.txt = parse2_txt(self.name, s, self.glossary)
 
     def any_parent_within_level(self, within_level_list):
         for parent in self.parent:

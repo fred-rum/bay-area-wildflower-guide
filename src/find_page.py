@@ -6,6 +6,8 @@ com_page = {} # common name -> page (or 'multiple' if there are name conflicts)
 sci_page = {} # scientific name -> page
 isci_page = {} # iNaturalist scientific name -> page (only where it differs)
 
+glossary_name_dict = {} # glossary name -> glossary instance
+
 def is_sci(name):
     # If there isn't an uppercase letter anywhere, it's a common name.
     # If there is an uppercase letter somewhere, it's a scientific name.

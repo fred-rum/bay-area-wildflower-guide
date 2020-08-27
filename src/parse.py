@@ -14,6 +14,8 @@ import re
 # My files
 from error import *
 from files import *
+from find_page import *
+from easy import *
 
 ###############################################################################
 
@@ -48,7 +50,7 @@ def parse_txt(name, s, page):
         c_list.append(page.parse_child_and_key(child_idx, suffix, text))
 
     # Replace HTTP links in the text with ones that open a new tab.
-    # (Presumably they're external links or they'd be in {...} format.)
+    # This must be done before inserting internal links, e.g. ==... or {-...}.
     s = re.sub(r'<a href=', '<a target="_blank" href=', s)
 
     # Break the text into lines, then perform easy substitutions on
@@ -155,5 +157,38 @@ def parse_txt(name, s, page):
     s = '\n'.join(c_list)
 
     s = link_figures(name, s)
+
+    return s
+
+# Links to taxon pages may be colored differently depending on whether the
+# taxon has any child keys.  So we have to parse all taxon pages before
+# inserting ilnks to taxon pagse.  I.e. we call parse_txt() on all taxon
+# pages before calling parse2_txt() on all taxon pages.  As long as we've
+# got this second function, we do some other last-minute parsing here
+def parse2_txt(name, s, glossary):
+    # Replace {-[link_name]} with an inline link to the page.
+    def repl_link(matchobj):
+        link_name = matchobj.group(1)
+        page = find_page1(link_name)
+        if page:
+            return page.create_link(1)
+        else:
+            if link_name in glossary_name_dict:
+                return glossary_name_dict[link_name].create_link()
+            else:
+                error(f'Broken link {{-{link_name}}} on page {name}')
+                return '{-' + link_name + '}'
+
+    # Replace {-[link_name]} with an inline link to the page.
+    s = re.sub(r'{-([^}]+)}', repl_link, s)
+
+    # Make easy substitutions in the text, such as "+-" and smart quotes.
+    # Do this before linking to glossaries because the HTML added for
+    # glossary links confuses the heuristic for smart-quote direction.
+    s = easy_sub(s)
+
+    error_begin_section()
+    s = glossary.link_glossary_words(s, name, is_glossary=False)
+    error_end_section()
 
     return s

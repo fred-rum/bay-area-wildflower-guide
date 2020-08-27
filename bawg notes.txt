@@ -185,18 +185,12 @@ glossary linking could be reused.  (Should all taxon pages thus be
 line-by-line, or should that only be done when the page includes
 definitions?)
 
-Combine taxon & glossary pages:
-a glossary page comes from the glossary directory.
-a glossary page doesn't have a common or scientific name.
-a glossary page is not allowed to have children (or be a child taxon).
-a glossary page gets a glossary ToC.
-  Should the ToC include a taxon page with glossary definitions?
-a glossary page writes a definition as <dt>...</dt id="anchor"><dd>...</dd>
-a taxon page writes a definition as <p id="anchor">...</p>
-either kind of page includes a glossary database of anchors/terms
-...
-Perhaps it makes more sense to keep taxon and glossary pages separate,
-but share elements of parsing.
+Separate out the code for a glossary page vs. its linkable terms.
+Then allow a taxon page to also create linkable terms with an
+anchored paragraph tag, e.g. <p id="anchor">...</p>.  The definition
+syntax might be the same as with glossaries.  Linking glossary words
+would then be done line-by-line, perhaps sharing code with glossary
+pages.
 
 for blue-eyed marys, define: upper lip, lower lip, keel
 

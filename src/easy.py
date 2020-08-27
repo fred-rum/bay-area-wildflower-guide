@@ -1,5 +1,5 @@
 # Make easy substitutions in the text, such as "+-" and smart quotes.
-# Do this before glossary substitutions because the HTML added for
+# Do this before linking to glossaries because the HTML added for
 # glossary links confuses the heuristic for smart-quote direction.
 
 import re

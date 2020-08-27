@@ -10,7 +10,6 @@ from trie import *
 from parse import *
 
 glossary_taxon_dict = {}
-glossary_name_dict = {}
 
 class Glossary:
     pass
@@ -328,7 +327,6 @@ class Glossary:
 
         def repl_defn(matchobj):
             words = matchobj.group(1)
-            defn = matchobj.group(2)
 
             # Normalize the separator between all terms to a comma.
             comma_words = re.sub(r'\((.*)\)', r', \1', words)
@@ -345,7 +343,7 @@ class Glossary:
             self.record_terms(anchor, word_list)
             self.anchor_defined[anchor] = defined_term
             self.anchor_list.append(anchor)
-            return '{' + anchor + '} ' + defn
+            return '{' + anchor + '}'
 
         with open(f'{root_path}/glossary/{self.name}.txt', mode='r') as f:
             self.txt = f.read()
@@ -361,7 +359,7 @@ class Glossary:
 
         # Read glossary terms and replace them with a bare {anchor}
         # followed by the definition.
-        self.txt = re.sub(r'^{([^\}]+)}\s+(.*)$',
+        self.txt = re.sub(r'^{([^\}]+)}',
                           repl_defn, self.txt, flags=re.MULTILINE)
 
         # For my glossaries, no words are excluded.
