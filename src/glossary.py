@@ -444,8 +444,6 @@ class Glossary:
             w.write('</div>\n')
 
     def write_html(self):
-        self.txt = easy_sub(self.txt)
-
         self.txt = parse_txt(self.name, self.txt, None)
 
         # Link glossary words one line at a time because we want to take

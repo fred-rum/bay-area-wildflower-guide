@@ -53,6 +53,12 @@ def parse_txt(name, s, page):
     # This must be done before inserting internal links, e.g. ==... or {-...}.
     s = re.sub(r'<a href=', '<a target="_blank" href=', s)
 
+    # Make easy substitutions in the text, such as "+-" and smart quotes.
+    # Do this before linking to glossaries because the HTML added for
+    # glossary links confuses the heuristic for smart-quote direction.
+    # Its order with respect to other parsing isn't important.
+    s = easy_sub(s)
+
     # Break the text into lines, then perform easy substitutions on
     # non-keyword lines and decorate bullet lists.  Also, keep track
     # of lines associated with a child; we'll copy those into the
@@ -181,11 +187,6 @@ def parse2_txt(name, s, glossary):
 
     # Replace {-[link_name]} with an inline link to the page.
     s = re.sub(r'{-([^}]+)}', repl_link, s)
-
-    # Make easy substitutions in the text, such as "+-" and smart quotes.
-    # Do this before linking to glossaries because the HTML added for
-    # glossary links confuses the heuristic for smart-quote direction.
-    s = easy_sub(s)
 
     error_begin_section()
     s = glossary.link_glossary_words(s, name, is_glossary=False)
