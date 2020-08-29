@@ -28,14 +28,14 @@ a.glossary-jepson {
     color: inherit;
     border-bottom: 1px #cc6600 dotted;
 }
-div.defn {
+.defn {
     border-top: 38px solid transparent;
     margin-top: -38px;
     -webkit-background-clip: padding-box;
     -moz-background-clip: padding;
     background-clip: padding-box;
 }
-div.defn:target {
+.defn:target {
     background-color: #ffc;
 }
 dt {

@@ -480,13 +480,15 @@ class Glossary:
 
             if is_glossary:
                 # Discard the normal <p> tag when constructing a definition
-                # within a glossary page.
+                # within a glossary page.  The definition is surrounded by a
+                # div so that both the <dt> and <dd> contents get highlighted.
                 return f'<div class="defn" id="{anchor}"><dt>{defined_term}</dt><dd>{defn}{related_str}</dd></div>'
             else:
-                # Keep the normal <p> tag and surround it with a linkable div
-                # when construction a definition within a taxon page.
-                # the defined term.
-                return f'<div class="defn" id="{anchor}">{p_tag}{defn}{related_str}</p></div>'
+                # Modify the <p> tag to give it an anchor that can be linked
+                # to (and highlighed when targeted).  (Strip off the trailing
+                # '>' from p_tag before inserting the extra properties.)
+                p_tag = f'{p_tag[:-1]} class="defn" id="{anchor}">'
+                return f'{p_tag}{defn}{related_str}</p>'
         else:
             # It's not a definition line, so just link glossary words
             # normally within the line.

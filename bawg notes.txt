@@ -203,5 +203,32 @@ error printed if a family is not known).
 Mark top-level pages in the pages' txt, not in the script code.
 
 
-The highlighting and margins are wonky for a glossary definition on a
-taxon page.
+Keep a taxon page and its inline glossary as separate entries in
+pages.js (as it is now) so that each gets the right priority.  But
+suppress a glossary match (either on the glossary "page" or a glossary
+term) if the taxon page already matches.
+
+How should a taxon's inline glossary be named in pages.js?  Perhaps
+all glossaries should be called "glossary: [taxon]".  (Jepson would be
+"glossary: Jepson eFlora".)
+
+In the glossary ToC, use taxon names instead of glossary (file)names?
+
+
+Clean up W3C validation:
+
+meta info
+
+no space in <a> href property.
+
+multiple <p/> tags in taxon page header
+
+Escape '< ' as '&lt; '.  No need to escape ' >' as ' &gt;'
+
+img alt="figure thumbnail" or alt="photo thumbnail"
+
+flexbox includes <span> that spans <ul>, which apparently isn't allowed.
+
+easy_sub for '<<' and '>>' should end with a semicolon
+
+multiple <p/> tags in taxon page footer
