@@ -430,6 +430,16 @@ class Page:
         self.txt = re.sub(r'^sci:\s*(.*?)\s*?\n',
                           repl_sci, self.txt, flags=re.MULTILINE)
 
+    def parse_glossary(self):
+        if re.search(r'^{([^-].*?)}', self.txt, flags=re.MULTILINE):
+            if self.name in glossary_taxon_dict:
+                glossary = glossary_taxon_dict[self.name]
+            else:
+                glossary = Glossary(self.name)
+                glossary.taxon = self.name
+                glossary.txt = None
+            self.txt = glossary.parse_terms(self.txt)
+
     def set_sci_alt(self, sites, elab):
         if 'f' in sites:
             self.elab_calflora = elab
@@ -934,7 +944,7 @@ class Page:
     def parse(self):
         s = self.txt
 
-        s = parse_txt(self.name, s, self)
+        s = parse_txt(self.name, s, self, self.glossary)
 
         if not self.has_child_key:
             # No child has a key, so reduce the size of child photos.

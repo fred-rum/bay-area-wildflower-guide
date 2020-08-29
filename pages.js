@@ -1901,6 +1901,9 @@ var pages=[
 {terms:["umbel","umbels"]},
 {terms:["valve","valves"]},
 ]},
+{page:"blue-eyed marys",x:"g",glossary:[
+{terms:["corolla","corollas","lobe","lobes","upper lip","upper lips","lower lip","lower lips","lip","lips","keel","keels"]},
+]},
 {page:"grass glossary",x:"g",glossary:[
 {terms:["auricle","auricles"]},
 {terms:["awn","awns"]},

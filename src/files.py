@@ -51,7 +51,7 @@ def get_file_set(subdir, ext):
 jpg_files = get_file_set('photos', 'jpg')
 
 
-def link_figures(name, txt):
+def link_figures_thumb(name, txt):
     def repl_figure_thumb(matchobj):
         file = matchobj.group(1)
         if not os.path.isfile(f'{root_path}/figures/{file}.svg'):
@@ -64,17 +64,18 @@ def link_figures(name, txt):
                        repl_figure_thumb, inner, flags=re.MULTILINE)
         return f'<div class="photo-box">\n{inner}\n</div>'
 
+    return re.sub(r'^(figure:.*?(?:\.svg|)(?:\nfigure:.*?(?:\.svg|))*)$',
+                  repl_figure_thumbs, txt, flags=re.MULTILINE)
+
+def link_figures_text(name, txt):
     def repl_figure_text(matchobj):
         file = matchobj.group(1)
         if not os.path.isfile(f'{root_path}/figures/{file}.svg'):
             error(f'Broken figure link to {file}.svg in {name}')
         return f'<a href="../figures/{file}.svg">[figure]</a>'
 
-    txt = re.sub(r'^(figure:.*?(?:\.svg|)(?:\nfigure:.*?(?:\.svg|))*)$',
-                 repl_figure_thumbs, txt, flags=re.MULTILINE)
-    txt = re.sub(r'\[figure:(.*?)(?:\.svg|)\]',
-                 repl_figure_text, txt, flags=re.MULTILINE)
-    return txt
+    return re.sub(r'\[figure:(.*?)(?:\.svg|)\]',
+                  repl_figure_text, txt, flags=re.MULTILINE)
 
 # Write a standard HTML header.
 # title must always be valid and defines the window/tab title in the metadata.

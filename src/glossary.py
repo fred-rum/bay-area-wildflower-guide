@@ -146,7 +146,7 @@ class Glossary:
         else:
             return None
 
-    def link_glossary_words(self, txt, filename,
+    def link_glossary_words(self, filename, txt,
                             is_glossary=False, exclude=None):
         # This function is called for a glossary word match.
         # Replace the matched word with a link to the primary term
@@ -275,7 +275,7 @@ class Glossary:
         # Text between these tags is already linked to something, so trying
         # to add another link to the glossary would be dumb.
         #
-        # Term lists and child links in braces have already been dealth with
+        # Term lists and child links in braces have already been dealt with
         # before link_glossary() is called, so we don't need to recognize
         # braces as a type of unsafe text.
         #
@@ -311,20 +311,7 @@ class Glossary:
             self.term_anchor[word] = anchor
             self.anchor_terms[anchor].add(word)
 
-    def read_terms(self):
-        def repl_taxon(matchobj):
-            name = matchobj.group(1)
-            if name == 'flowering plants':
-                # Special case since there is no page for flowering plants.
-                self.taxon = name
-            else:
-                page = find_page1(name)
-                if page:
-                    self.taxon = page.name
-                else:
-                    error(f'No page found for glossary taxon {name}')
-            return ''
-
+    def parse_terms(self, txt):
         def repl_defn(matchobj):
             words = matchobj.group(1)
 
@@ -345,22 +332,16 @@ class Glossary:
             self.anchor_list.append(anchor)
             return '{' + anchor + '}'
 
-        with open(f'{root_path}/glossary/{self.name}.txt', mode='r') as f:
-            self.txt = f.read()
-
-        self.txt = re.sub(r'^taxon:\s*(.*?)\s*$',
-                          repl_taxon, self.txt, flags=re.MULTILINE)
-
-        # self.taxon is now either a name or (if unset) None.
-        # Either value is appropriate for the term_anchor key.
+        # self.taxon is now a page reference, 'flowering plants', or None.
+        # Any of these values is appropriate for the glossary_taxon_dict key.
         glossary_taxon_dict[self.taxon] = self
 
         glossary_name_dict[self.name] = self
 
-        # Read glossary terms and replace them with a bare {anchor}
-        # followed by the definition.
-        self.txt = re.sub(r'^{([^\}]+)}',
-                          repl_defn, self.txt, flags=re.MULTILINE)
+        # Read declarations of glossary terms and replace each set
+        # with a bare {anchor}.
+        txt = re.sub(r'^{([^-].*?)}',
+                     repl_defn, txt, flags=re.MULTILINE)
 
         # For my glossaries, no words are excluded.
         self.link_set = set(self.term_anchor.keys())
@@ -369,6 +350,30 @@ class Glossary:
         short_name = re.sub(r' glossary$', '', self.name)
         name_set.add(short_name)
         term_set.update(self.link_set)
+
+        return txt
+
+    def read_terms(self):
+        def repl_taxon(matchobj):
+            name = matchobj.group(1)
+            if name == 'flowering plants':
+                # Special case since there is no page for flowering plants.
+                self.taxon = name
+            else:
+                page = find_page1(name)
+                if page:
+                    self.taxon = page.name
+                else:
+                    error(f'No page found for glossary taxon {name}')
+            return ''
+
+        with open(f'{root_path}/glossary/{self.name}.txt', mode='r') as f:
+            self.txt = f.read()
+
+        self.txt = re.sub(r'^taxon:\s*(.*?)\s*$',
+                          repl_taxon, self.txt, flags=re.MULTILINE)
+
+        self.txt = self.parse_terms(self.txt)
 
     def read_jepson_terms(self):
         self.name = 'Jepson' # used only for self links from a glossary defn
@@ -433,9 +438,9 @@ class Glossary:
             return glossary.name
 
         if self == current:
-            w.write(f'<b>{self.name}</b></br>')
+            w.write(f'<b>{self.name}</b><br/>')
         else:
-            w.write(f'<a href="{self.name}.html">{self.name}</a></br>')
+            w.write(f'<a href="{self.name}.html">{self.name}</a><br/>')
 
         if self.child:
             w.write('<div class="toc-indent">\n')
@@ -443,49 +448,58 @@ class Glossary:
                 child.write_toc(w, current)
             w.write('</div>\n')
 
-    def write_html(self):
-        self.txt = parse_txt(self.name, self.txt, None)
+    # link_glossary() is called for each paragraph of txt.
+    def link_glossary_words_or_defn(self, name, c, p_tag, is_glossary):
+        # Check if the paragraph is a glossary definition.
+        matchobj = re.match(r'{([^-].*?)}\s+(.*)$', c, flags=re.DOTALL)
+        if matchobj:
+            anchor = matchobj.group(1)
+            defn = matchobj.group(2)
 
-        # Link glossary words one line at a time because we want to take
-        # special action on lines that define glossary words.
-        c_list = []
-        for c in self.txt.split('\n'):
-            # Look for a glossary definition on the line.
-            matchobj = re.match(r'^{([^\}]+)}\s+(.*)$', c)
-            if matchobj:
-                anchor = matchobj.group(1)
-                defn = matchobj.group(2)
+            # Link glossary terms in the definition, but excluding any
+            # terms being defined on this line.  Although it seems
+            # intuitive to remove the excluded terms from glossary_regex,
+            # recompiling the monster regex hundreds of times is a huge
+            # performance hit.  Instead, we leave the regex alone and
+            # handle the excluded terms as they are matched.
+            exclude_set = self.anchor_terms[anchor]
+            defn = self.link_glossary_words(name, defn,
+                                            is_glossary=False,
+                                            exclude=exclude_set)
 
-                # Link glossary terms in the definition, but excluding any
-                # terms being defined on this line.  Although it seems
-                # intuitive to remove the excluded terms from glossary_regex,
-                # recompiling the monster regex hundreds of times is a huge
-                # performance hit.  Instead, we leave the regex alone and
-                # handle the excluded terms as they are matched.
-                exclude_set = self.anchor_terms[anchor]
-                defn = self.link_glossary_words(defn, self.name,
-                                                is_glossary=True,
-                                                exclude=exclude_set)
-
-                # Add links to other glossaries
-                # where they define the same words.
-                related_str = ''
-                dup_list = jepson_glossary.find_dups(self, anchor)
-                if dup_list:
-                    related_str = ' [' + ', '.join(dup_list) + ']'
-                else:
-                    related_str = ''
-
-                defined_term = self.anchor_defined[anchor]
-
-                c = f'<div class="defn" id="{anchor}"><dt>{defined_term}</dt><dd>{defn}{related_str}</dd></div>'
+            # Add links to other glossaries
+            # where they define the same words.
+            related_str = ''
+            dup_list = jepson_glossary.find_dups(self, anchor)
+            if dup_list:
+                related_str = ' [' + ', '.join(dup_list) + ']'
             else:
-                # It's not a definition line, so just link glossary words
-                # normally within the line.
-                c = self.link_glossary_words(c, self.name, is_glossary=True)
+                related_str = ''
 
-            c_list.append(c)
-        self.txt = '\n'.join(c_list)
+            defined_term = self.anchor_defined[anchor]
+
+            if is_glossary:
+                # Discard the normal <p> tag when constructing a definition
+                # within a glossary page.
+                return f'<div class="defn" id="{anchor}"><dt>{defined_term}</dt><dd>{defn}{related_str}</dd></div>'
+            else:
+                # Keep the normal <p> tag and surround it with a linkable div
+                # when construction a definition within a taxon page.
+                # the defined term.
+                return f'<div class="defn" id="{anchor}">{p_tag}{defn}{related_str}</p></div>'
+        else:
+            # It's not a definition line, so just link glossary words
+            # normally within the line.
+            c = self.link_glossary_words(name, c, is_glossary=False)
+            return f'{p_tag}{c}</p>'
+
+    def write_html(self):
+        if not self.txt:
+            # This glossary does not have its own txt file, so it should not
+            # create its own HTML file.
+            return
+
+        self.txt = parse_txt(self.name, self.txt, None, self)
 
         with open(f'{working_path}/html/{self.name}.html', mode='w') as w:
               write_header(w, self.name, None, nospace=True)

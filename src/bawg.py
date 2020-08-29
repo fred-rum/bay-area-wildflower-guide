@@ -97,6 +97,7 @@ for name in txt_files:
         page.txt = r.read()
     page.remove_comments()
     page.parse_names()
+    page.parse_glossary()
 
 # parse_children() can add new pages, so we make a copy of the list to
 # iterate through.  parse_children() also checks for external photos,

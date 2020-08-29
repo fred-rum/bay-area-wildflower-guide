@@ -175,28 +175,33 @@ many of the plant glossary entries to the flower glossary.  Perhaps a
 command-line arg could flag glossary terms that are never used in the
 'plant glossary' context.
 
-Allow a taxon page to declare glossary terms which are then applied to
-that page and below.  E.g. in larkspurs, define upper sepal, lateral
-sepals, lower sepals, upper petals, lower petals.  E.g. {...,...,...}
-[paragraph].  This would presumably create a Glossary object that is
-marked as a taxon page rather than a glossary page.  write_html()
-obviously shouldn't be called for the glossary, but its line-by-line
-glossary linking could be reused.  (Should all taxon pages thus be
-line-by-line, or should that only be done when the page includes
-definitions?)
-
-Separate out the code for a glossary page vs. its linkable terms.
-Then allow a taxon page to also create linkable terms with an
-anchored paragraph tag, e.g. <p id="anchor">...</p>.  The definition
-syntax might be the same as with glossaries.  Linking glossary words
-would then be done line-by-line, perhaps sharing code with glossary
-pages.
-
-for blue-eyed marys, define: upper lip, lower lip, keel
-
 
 Use img property alt="" to indicate to blind users that a description
 of the photo is not helpful?
 
 I've removed the search penalty for autopropagated and unobserved pages.
 I should also order them lower in pages.js.
+
+
+Make the hierarchy more generic to fit anyone's taxonomic priorities:
+
+Create a page for flowering plants (replacing 'all.html') with a
+marker that causes it to have its whole hierarchy listed.  Create
+pages for each flowering plant color with markers to borrow a subset
+of children of flowering plants.  The flowering plant txt includes
+manual links to the color pages (which are somehow outside the normal
+hierarchy?)
+
+Mark the flowering plants page as the parent of all pages without
+parents (that aren't marked as top-level pages).  Obviously, only one
+page can be marked this way.
+
+Mark the flowering plants page so that all descendents are
+automatically assigned to a family from observations.csv (with an
+error printed if a family is not known).
+
+Mark top-level pages in the pages' txt, not in the script code.
+
+
+The highlighting and margins are wonky for a glossary definition on a
+taxon page.
