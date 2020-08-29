@@ -8,7 +8,7 @@ Key features:
 . leaf veins conspicuous or obscure
 
 [
-<h3>leaves generally opposite up to inflorescence<br/>
+<h3>leaves generally opposite up to inflorescence<br>
 proximal stem not peeling</h3>
 
 ==california fuchsia:E. canum
@@ -27,7 +27,7 @@ color: pale purple
 
 ]
 [
-<h3>leaves opposite only near base, alternate or clustered distally<br/>
+<h3>leaves opposite only near base, alternate or clustered distally<br>
 proximal stem generally peeling</h3>
 
 These are generally distinguished in Jepson by seed characteristics.  I've sorted them by maximum height (which roughly corresponds to maximum petal length).  Good luck!

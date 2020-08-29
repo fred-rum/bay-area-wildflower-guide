@@ -86,17 +86,19 @@ class Glossary:
         if self.is_jepson:
             return 'https://ucjeps.berkeley.edu/eflora/glossary.html'
         else:
-            return f'{self.name}.html'
+            pageurl = url(self.name)
+            return f'{pageurl}.html'
 
     def create_link(self):
         link_class = self.get_link_class()
-        url = self.get_url()
-        return f'<a href="{url}" class="{link_class}">{self.name}</a>'
+        pageurl = self.get_url()
+        return f'<a href="{pageurl}" class="{link_class}">{self.name}</a>'
 
     def glossary_link(self, anchor, term):
         link_class = self.get_link_class()
-        url = self.get_url()
-        return f'<a class="{link_class}" href="{url}#{anchor}">{term}</a>'
+        pageurl = self.get_url()
+        anchorurl = url(anchor)
+        return f'<a class="{link_class}" href="{pageurl}#{anchorurl}">{term}</a>'
 
     def find_dups(self, skip_glossary, term):
         def by_name(glossary):
@@ -440,7 +442,8 @@ class Glossary:
         if self == current:
             w.write(f'<b>{self.name}</b><br/>')
         else:
-            w.write(f'<a href="{self.name}.html">{self.name}</a><br/>')
+            pageurl = self.get_url()
+            w.write(f'<a href="{pageurl}.html">{self.name}</a><br/>')
 
         if self.child:
             w.write('<div class="toc-indent">\n')
@@ -478,16 +481,17 @@ class Glossary:
 
             defined_term = self.anchor_defined[anchor]
 
+            anchorurl = url(anchor)
             if is_glossary:
                 # Discard the normal <p> tag when constructing a definition
                 # within a glossary page.  The definition is surrounded by a
                 # div so that both the <dt> and <dd> contents get highlighted.
-                return f'<div class="defn" id="{anchor}"><dt>{defined_term}</dt><dd>{defn}{related_str}</dd></div>'
+                return f'<div class="defn" id="{anchorurl}"><dt>{defined_term}</dt><dd>{defn}{related_str}</dd></div>'
             else:
                 # Modify the <p> tag to give it an anchor that can be linked
                 # to (and highlighed when targeted).  (Strip off the trailing
                 # '>' from p_tag before inserting the extra properties.)
-                p_tag = f'{p_tag[:-1]} class="defn" id="{anchor}">'
+                p_tag = f'{p_tag[:-1]} class="defn" id="{anchorurl}">'
                 return f'{p_tag}{defn}{related_str}</p>'
         else:
             # It's not a definition line, so just link glossary words

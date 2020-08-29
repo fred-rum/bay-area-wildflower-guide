@@ -30,8 +30,8 @@ Key features:
 . rare in Diablo range
 
 [
-<h3>spines at nodes (gooseberries)<br/>
-five sepals<br/>
+<h3>spines at nodes (gooseberries)<br>
+five sepals<br>
 anther filaments longer than petals</h3>
 ==straggly gooseberry:R. divaricatum var. pubiflorum
 xx:ba

@@ -14,14 +14,14 @@ Key features:
 . basal and cauline leaf shapes
 
 [
-<h2>perennial<br/>
-no flower stipe<br/>
+<h2>perennial<br>
+no flower stipe<br>
 inflorescence bracts generally 3</h2>
 
 inflorescence branched
-<br/>
+<br>
 flowers are clustered or individual
-<br/>
+<br>
 multiple individual flowers may grow from the same node, but not in a cluster
 
 ==california buckwheat:E. fasciculatum
@@ -96,8 +96,8 @@ color: white, pink, salmon
 
 ]
 [
-<h2>perennial<br/>
-flower stipe present<br/>
+<h2>perennial<br>
+flower stipe present<br>
 inflorescence bracts 2--13+</h2>
 
 ==sulfur buckwheat:E. umbellatum
@@ -112,7 +112,7 @@ inflorescence bracts 2--13+</h2>
 
 ]
 [
-<h2>annual<br/>
+<h2>annual<br>
 involucres angled to strongly ribbed, sessile and strongly appressed or at tips of short bracted branchlets (or peduncled)
 </h2>
 
@@ -176,7 +176,7 @@ involucres angled to strongly ribbed, sessile and strongly appressed or at tips 
 
 ]
 [
-<h2>annual<br/>
+<h2>annual<br>
 involucres smooth, not ribbed or angled, generally peduncled, if sessile then not appressed
 </h2>
 

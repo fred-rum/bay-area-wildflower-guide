@@ -97,7 +97,7 @@ function fn_url(fit_info) {
     url += '#' + fit_info.anchor;
   }
 
-  return url;
+  return encodeURI(url);
 }
 
 /* Construct all the contents of a link to a page. */

@@ -19,7 +19,7 @@ color: other, red
 . very common
 
 [
-<h3>stem generally +- erect<br/>
+<h3>stem generally +- erect<br>
 generally unbranched below inflorescence (inflorescence may be branched, however) (<a href="http://ucjeps.berkeley.edu/eflora/eflora_display.php?tid=42386">example illustration</a>)</h3>
 Leaves may be intermixed with flowers.
 
@@ -91,7 +91,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0912+1068
 
 ]
 [
-<h3>stems decumbent to erect<br/>
+<h3>stems decumbent to erect<br>
 generally with leafy axillary shoots below terminal inflorescence (<a href="http://ucjeps.berkeley.edu/eflora/eflora_display.php?tid=42421">example illustration</a>)</h3>
 A larger leaf sprouts at the base of each branch.  Small leaves may also be intermixed with flowers.
 

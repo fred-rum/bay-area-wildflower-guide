@@ -1,6 +1,5 @@
 import re
 import yaml
-from unidecode import unidecode
 
 # My files
 from error import *
@@ -168,9 +167,6 @@ class Page:
         self.month = [0] * 12
 
         self.glossary = None
-
-    def url(self):
-        return unidecode(self.name)
 
     def change_name_to_sci(self):
         del name_page[self.name]
@@ -666,14 +662,17 @@ class Page:
             return 'unobs'
 
     def create_link(self, lines):
-        return f'<a href="{self.url()}.html" class="{self.link_style()}">{self.format_full(lines)}</a>'
+        pageurl = url(self.name)
+        return f'<a href="{pageurl}.html" class="{self.link_style()}">{self.format_full(lines)}</a>'
 
     def write_parents(self, w):
+        c_list = []
         for parent in sort_pages(self.parent):
             if parent.has_child_key or parent.level != 'above':
-                w.write(f'Key to {parent.create_link(1)}<br/>\n')
-        if self.parent:
-            w.write('<p/>\n')
+                c_list.append(f'Key to {parent.create_link(1)}')
+        if c_list:
+            s = '<br>\n'.join(c_list)
+            w.write(f'<p>\n{s}\n</p>\n')
 
     def page_matches_color(self, color):
         return (color is None or color in self.color)
@@ -694,7 +693,8 @@ class Page:
         elif self.sci:
             elab = self.choose_elab(self.elab_inaturalist)
             sci = strip_sci(elab)
-            link = f'https://www.inaturalist.org/observations/chris_nelson?taxon_name={sci}&order_by=observed_on'
+            sciurl = url(sci)
+            link = f'https://www.inaturalist.org/observations/chris_nelson?taxon_name={sciurl}&order_by=observed_on'
         else:
             link = None
 
@@ -722,8 +722,6 @@ class Page:
             # removed.
             elab = sci
 
-        w.write('<p/>')
-
         elab_list = []
         link_list = {}
 
@@ -746,13 +744,15 @@ class Page:
             sci = strip_sci(elab)
             if self.is_hybrid:
                 sci = re.sub(r' ', ' \xD7 ', sci)
-            add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/search?q={sci}&view=list" target="_blank">iNaturalist</a>')
+            sciurl = url(sci)
+            add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/search?q={sciurl}&view=list" target="_blank">iNaturalist</a>')
 
         if self.level != 'above' or self.elab.startswith('family '):
             # CalFlora can be searched by family,
             # but not by other high-level classifications.
             elab = self.choose_elab(self.elab_calflora)
-            add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elab}" target="_blank">CalFlora</a>');
+            elaburl = url(elab)
+            add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elaburl}" target="_blank">CalFlora</a>');
 
         if self.level in ('species', 'below'):
             # CalPhotos cannot be searched by high-level classifications.
@@ -766,8 +766,9 @@ class Page:
                 expanded_elab = self.elab + '|' + elab
             else:
                 expanded_elab = elab
+            elaburl = url(expanded_elab)
             # rel-taxon=begins+with -> allows matches with lower-level detail
-            add_link(elab, self.elab_calphotos, f'<a href="https://calphotos.berkeley.edu/cgi/img_query?rel-taxon=begins+with&where-taxon={expanded_elab}" target="_blank">CalPhotos</a>');
+            add_link(elab, self.elab_calphotos, f'<a href="https://calphotos.berkeley.edu/cgi/img_query?rel-taxon=begins+with&where-taxon={elaburl}" target="_blank">CalPhotos</a>');
 
         if self.level != 'above' or self.elab.startswith('family '):
             # Jepson can be searched by family,
@@ -776,7 +777,8 @@ class Page:
             # Jepson uses "subsp." instead of "ssp.", but it also allows us to
             # search with that qualifier left out entirely.
             sci = strip_sci(elab)
-            add_link(elab, self.elab_jepson, f'<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sci}" target="_blank">Jepson&nbsp;eFlora</a>');
+            sciurl = url(sci)
+            add_link(elab, self.elab_jepson, f'<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sciurl}" target="_blank">Jepson&nbsp;eFlora</a>');
 
         if self.level in ('genus', 'species', 'below'):
             elab = self.choose_elab(self.elab_calflora)
@@ -789,7 +791,8 @@ class Page:
             # fmt=photo -> list results with info + sample photos
             # y={},x={},z={} -> longitude, latitude, zoom
             # wkt={...} -> search polygon with last point matching the first
-            add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/entry/wgh.html#srch=t&taxon={genus}&group=none&fmt=photo&y=37.5&x=-122&z=8&wkt=-123.1+38,-121.95+38,-121.05+36.95,-122.2+36.95,-123.1+38" target="_blank">Bay&nbsp;Area&nbsp;species</a>')
+            genusurl = url(genus)
+            add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/entry/wgh.html#srch=t&taxon={genusurl}&group=none&fmt=photo&y=37.5&x=-122&z=8&wkt=-123.1+38,-121.95+38,-121.05+36.95,-122.2+36.95,-123.1+38" target="_blank">Bay&nbsp;Area&nbsp;species</a>')
 
         link_list_txt = []
         for elab in elab_list:
@@ -802,7 +805,7 @@ class Page:
         if len(elab_list) > 1:
             w.write(f'<p class="list-head">Not all sites agree about the scientific name:</p>\n<ul>\n<li>{txt}</li>\n</ul>\n')
         else:
-            w.write(f'{txt}<p/>\n')
+            w.write(f'<p>\n{txt}\n</p>\n')
 
     def write_lists(self, w):
         if self.top_level != 'flowering plants':
@@ -816,7 +819,8 @@ class Page:
 
         for color in color_list:
             if color in self.color:
-                w.write(f'<li><a href="{color}.html">{color} flowers</a></li>\n')
+                colorurl = url(color)
+                w.write(f'<li><a href="{colorurl}.html">{color} flowers</a></li>\n')
 
         w.write('<li><a href="all.html">all flowers</a></li>\n')
         w.write('</ul>\n')
@@ -838,7 +842,9 @@ class Page:
         w.write(f'<div class="list-box{indent_class}">')
 
         if self.jpg_list:
-            w.write(f'<a href="{self.url()}.html"><img src="../thumbs/{self.jpg_list[0]}.jpg" class="list-thumb"></a>')
+            pageurl = url(self.name)
+            jpgurl = url(self.jpg_list[0])
+            w.write(f'<a href="{pageurl}.html"><img src="../thumbs/{jpgurl}.jpg" alt="photo" class="list-thumb"></a>')
 
         w.write(f'{self.create_link(2)}</div>\n')
 
@@ -914,10 +920,12 @@ class Page:
         if not jpg:
             ext_photo = child.get_ext_photo()
 
+        pageurl = url(child.name)
         if jpg:
-            img = f'<a href="{child.url()}.html"><img src="../thumbs/{jpg}.jpg" class="page-thumb"></a>'
+            jpgurl = url(jpg)
+            img = f'<a href="{pageurl}.html"><img src="../thumbs/{jpgurl}.jpg" alt="photo" class="page-thumb"></a>'
         elif ext_photo:
-            img = f'<a href="{child.url()}.html" class="enclosed {child.link_style()}"><div class="page-thumb-text">'
+            img = f'<a href="{pageurl}.html" class="enclosed {child.link_style()}"><div class="page-thumb-text">'
             n_photos = len(child.ext_photo_list)
             if n_photos > 1:
                 photo_text = f'photos &times; {n_photos}'
@@ -937,7 +945,7 @@ class Page:
             # can either be below the text link and next to the image or
             # below both the image and text link, depending on the width of
             # the viewport.
-            return f'<div class="flex-width"><div class="photo-box">{img}\n<span class="show-narrow">{link}</span></div><span><span class="show-wide">{link}</span>{text}</span></div>'
+            return f'<div class="flex-width"><div class="photo-box">{img}\n<span class="show-narrow">{link}</span></div><div><span class="show-wide">{link}</span>{text}</div></div>'
         else:
             return f'<div class="photo-box">{img}\n<span>{link}</span></div>'
 
@@ -993,6 +1001,7 @@ class Page:
             else:
                 other = ''
             if is_top:
+                w.write('<p>')
                 if complete is None:
                     if top == 'genus':
                         w.write(f'<b>Caution: There may be{other} {members} of this {top} not yet included in this guide.</b>')
@@ -1028,14 +1037,14 @@ class Page:
                     w.write(f'{prolog} {members} of this {top} {epilog}.')
                 if key_incomplete:
                     w.write(f'<br/>\n<b>Caution: The key to distinguish these {members} is not complete.</b>')
-                w.write('<p/>\n')
+                w.write('</p>\n')
             elif complete:
                 if top == 'genus':
                     error(f'{self.name} uses the x: keyword but is not the top of genus')
                 else:
                     error(f'{self.name} uses the xx: keyword but is not the top of species')
 
-        with open(working_path + "/html/" + self.url() + ".html",
+        with open(working_path + "/html/" + filename(self.name) + ".html",
                   "w", encoding="utf-8") as w:
             com = self.com
             elab = self.elab
@@ -1089,8 +1098,7 @@ class Page:
             write_header(w, title, h1, nospace=bool(c_list))
 
             if c_list:
-                w.write('<br/>\n'.join(c_list))
-                w.write('<p/>\n')
+                w.write('<br/>\n'.join(c_list) + '\n')
 
             self.write_parents(w)
 
@@ -1103,13 +1111,14 @@ class Page:
                            self.species_complete, self.species_key_incomplete,
                            is_top_of_species, 'species', 'members')
 
-            w.write('<hr/>\n')
+            w.write('<hr>\n')
 
             if len(self.jpg_list) or len(self.ext_photo_list):
                 w.write('<div class="photo-box">\n')
 
                 for jpg in self.jpg_list:
-                    w.write(f'<a href="../photos/{jpg}.jpg"><img src="../thumbs/{jpg}.jpg" width="200" height="200" class="leaf-thumb"></a>\n')
+                    jpgurl = url(jpg)
+                    w.write(f'<a href="../photos/{jpgurl}.jpg"><img src="../thumbs/{jpgurl}.jpg" alt="photo" width="200" height="200" class="leaf-thumb"></a>\n')
 
                 for (label, link) in self.ext_photo_list:
                     w.write(f'<a href="{link}" target="_blank" class="enclosed"><div class="leaf-thumb-text">')
@@ -1131,7 +1140,7 @@ class Page:
             w.write(self.txt)
 
             if self.jpg_list or self.ext_photo_list or self.txt:
-                w.write('<hr/>\n')
+                w.write('<hr>\n')
 
             self.write_obs(w)
             if self.sci:

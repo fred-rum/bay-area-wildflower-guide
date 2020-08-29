@@ -19,7 +19,7 @@ color: purple
 . uncommon
 
 [
-<h3>inflorescence (excluding corolla) glandular<br/>
+<h3>inflorescence (excluding corolla) glandular<br>
 staminode hairy</h3>
 
 ==sierra beardtongue:P. heterodoxus var. heterodoxus

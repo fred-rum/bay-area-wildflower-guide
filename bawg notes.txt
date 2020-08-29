@@ -213,22 +213,3 @@ all glossaries should be called "glossary: [taxon]".  (Jepson would be
 "glossary: Jepson eFlora".)
 
 In the glossary ToC, use taxon names instead of glossary (file)names?
-
-
-Clean up W3C validation:
-
-meta info
-
-no space in <a> href property.
-
-multiple <p/> tags in taxon page header
-
-Escape '< ' as '&lt; '.  No need to escape ' >' as ' &gt;'
-
-img alt="figure thumbnail" or alt="photo thumbnail"
-
-flexbox includes <span> that spans <ul>, which apparently isn't allowed.
-
-easy_sub for '<<' and '>>' should end with a semicolon
-
-multiple <p/> tags in taxon page footer

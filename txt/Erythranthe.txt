@@ -3,7 +3,7 @@ x:rare
 [
 <h2>corolla yellow</h2>
 [
-<h3>calyx uppermost lobe longest, lowest 2 generally upcurved<br/>
+<h3>calyx uppermost lobe longest, lowest 2 generally upcurved<br>
 corolla lower lip base generally swollen, +- closing mouth</h3>
 
 ==seep monkeyflower:E. guttata
@@ -23,7 +23,7 @@ scip:Mimulus grandis
 
 ]
 [
-<h3>calyx lobes generally +- equal or lowest 2 longest, not upcurved<br/>
+<h3>calyx lobes generally +- equal or lowest 2 longest, not upcurved<br>
 corolla lower lip base not swollen, not closing mouth</h2>
 
 ==coastal monkeyflower:E. dentata

@@ -25,8 +25,9 @@ def parse_txt(name, s, page, glossary):
         if child_start is None:
             return
 
-    def end_paragraph(for_list=False):
-        nonlocal p_start, child_start, c_list
+    def end_paragraph(for_list=False, for_defn=False):
+        nonlocal c_list, p_start, child_start, child_idx, suffix, in_dl
+
         if p_start is not None:
             if for_list:
                 p_tag = '<p class="list-head">'
@@ -48,20 +49,31 @@ def parse_txt(name, s, page, glossary):
             # glossary *definitions* to be split across lines.
             p = glossary.link_glossary_words_or_defn(name, p, p_tag, not page)
 
+            # Replace all the lines in c_list associated with the paragraph
+            # with the new (single-string) paragraph.
             c_list[p_start:] = [p]
             p_start = None
 
         if not for_list and child_start is not None:
-            child_idx = int(child_matchobj.group(1))
-            suffix = child_matchobj.group(2)
-            if not suffix:
-                suffix = ''
-
             text = '\n'.join(c_list[child_start:])
             c_list = c_list[:child_start]
             child_start = None
 
             c_list.append(page.parse_child_and_key(child_idx, suffix, text))
+
+        # If beginning a new set of glossary definition, insert <dl>
+        # after the previous paragraph (including all closing tags) and
+        # before any lines that will be handled as part of the definitions.
+        if for_defn and not in_dl:
+            c_list.append('<dl>')
+
+        # If ending set of glossary definition, insert </dl>
+        # after the previous paragraph (including all closing tags)
+        # before any lines that will be handled as part of the next paragraph.
+        if in_dl and not for_defn:
+            c_list.append('</dl>')
+
+        in_dl = for_defn
 
     # Replace HTTP links in the text with ones that open a new tab.
     # This must be done before inserting internal links, e.g. ==... or {-...}.
@@ -84,28 +96,42 @@ def parse_txt(name, s, page, glossary):
     child_start = None
     list_depth = 0
     bracket_depth = 0
-    in_heading = None
+    in_heading = False
+    in_dl = False
     for c in s.split('\n'):
+        # non_p is set to True for lines that are not part of a paragraph.
+        # I.e. the previous paragraph (if any) should be ended, and a new
+        # paragraph should begin no earlier than with the following line.
+        non_p = False
+
+        # For a glossary definition, end the previous paragraph and
+        # immediately start a new one to contain the definition.
+        # (It will eventually be emitted with a paragraph tag or some
+        # other appropriate enclosure.)
+        if c.startswith('{') and not c.startswith('{-'):
+            end_paragraph(for_defn=True)
+
         # Determine the list depth.
         matchobj = re.match(r'\.*', c)
         new_list_depth = matchobj.end()
-
-        # If a list is present, end any previous paragraph and don't
-        # start a new one until at least the *next* line.
-        if new_list_depth:
-            end_paragraph(for_list=True)
 
         # Insert <ul> or </ul> tags to get from current list_depth
         # to the new_list_depth.
         if new_list_depth > list_depth+1:
             error('Jump in list depth on page ' + name)
+
+        ul_open = ''
         while list_depth < new_list_depth:
+            # Open <ul> tags as part of the current line processing.
+            # Thus, these tags appear after the previous paragraph is ended.
             if list_depth == 0:
-                c_list.append('<ul>')
+                ul_open += '<ul>\n'
             else:
-                c_list.append('<ul class="list-sub">')
+                ul_open += '<ul class="list-sub">\n'
             list_depth += 1
         while list_depth > new_list_depth:
+            # Close <ul> tags as if they'd be processed on a previous line.
+            # Thus, we're ready to begin a new paragraph as appropriate.
             c_list.append('</ul>')
             list_depth -= 1
 
@@ -113,19 +139,24 @@ def parse_txt(name, s, page, glossary):
         # extra spaces.
         c = c[list_depth:].strip()
 
+        if list_depth:
+            # The paragraph preceding a list requires a special paragraph tag.
+            # Thus, there is code at the bottom of the loop to specially
+            # handle (list_depth > 0) rather than using the simple non_p flag.
+            c = glossary.link_glossary_words(name, c)
+            c = ul_open + '<li>' + c + '</li>'
+
         if page:
             # For taxon pages only, accumulate key text for a child page.
             matchobj = re.match(r'==(\d+)(,[-0-9]\S*|,)?\s*$', c)
             if matchobj:
                 end_paragraph()
-                child_matchobj = matchobj
+                child_idx = int(matchobj.group(1))
+                suffix = matchobj.group(2)
+                if not suffix:
+                    suffix = ''
                 child_start = len(c_list)
                 continue
-
-        if list_depth:
-            c = glossary.link_glossary_words(name, c)
-            c_list.append(f'<li>{c}</li>')
-            continue
 
         if re.match(r'<h\d>', c):
             # It doesn't actually hurt the user to wrap heading tags in
@@ -137,43 +168,45 @@ def parse_txt(name, s, page, glossary):
         if in_heading:
             # We remain outside of paragraph tags until the heading ends,
             # whether that is on the same line or a later line.
-            end_paragraph()
+            non_p = True
+
+            # taxon pages may link glossary terms in a heading,
+            # but glossary pages should not (since the heading is
+            # most likely one of the glossary words being defined,
+            # making a link redundant).
             if page:
                 c = glossary.link_glossary_words(name, c)
-            c_list.append(c)
+
             if re.search(r'</h\d>', c):
                 in_heading = False
-            continue
-
-        if c.startswith('{') and not c.startswith('{-'):
-            end_paragraph()
-            p_start = len(c_list)
 
         if c.startswith('figure:'):
             # Leave figure links untouched and not embedded in paragraphs.
-            end_paragraph()
-            c_list.append(c)
-            continue
+            non_p = True
 
         if c == '[':
-            end_paragraph()
-            c_list.append('<div class="box">')
+            non_p = True
+            c = '<div class="box">'
             bracket_depth += 1
-            continue
 
         if c == ']':
-            end_paragraph()
-            c_list.append('</div>')
+            non_p = True
+            c = '</div>'
             bracket_depth -= 1
-            continue
 
         if c == '':
-            end_paragraph()
-            continue
+            non_p = True
 
-        if p_start is None:
+        if list_depth:
+            end_paragraph(for_list=True)
+        elif non_p:
+            end_paragraph()
+        elif p_start is None:
             p_start = len(c_list)
-        c_list.append(c)
+
+        if c:
+            c_list.append(c)
+
     end_paragraph()
 
     if bracket_depth != 0:

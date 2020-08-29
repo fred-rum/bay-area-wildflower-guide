@@ -105,14 +105,11 @@ All of these terms may occasionally be used loosely rather than following the st
 {nectar} Sugary solution produced by a nectory for the purpose of attracting pollinators.
 {nectary} A structure that produces nectar.  Usually at the inner base of a flower to attract pollinators past the anthers and stigmas, but may be elsewhere.
 {open,opens,opening} Not densely clustered, i.e. with parts that are spread out from each other.  E.g. referring to a flower perianth that is maximally spread, e.g. not a bud.  (For some flowers, this is not very spread at all.)
-{panicle,panicles,panicled} Branched infloresence with flowers that grow from the proximal end.
 {pericarp,pericarps} The outer, non-seed portion of a fruit.
 {pistillate} With fertile pistils but without stamens or without fertile stamens.  See staminate.
 {salverform} With a slender tube and abruptly spreading limbs (e.g. "T" shaped).
-{spike,spikes,spiked} Inflorescence with all flowers sessile on the main axis, generally flowering from the proximal end.  See panicle.
 {spur,spurs} A hollow, backward-pointing projection from a sepal or petal.
 {staminate} With fertile stamens but without pistils or without fertile pistils.  See pistillate.
 {throat,throats} In a fused calyx or corolla, the expanded portion between the tube and the limb. [figure:false babystars]
 {tube,tubes} In a fused calyx or corolla, the +- cylindric portion proximal to the throat. [figure:false babystars]
-{umbel,umbels} An inflorescence in which 3+ flower pedicels branch from a common point.
 {valve,valves} One part of a pericarp when the parts split by dehiscence.

@@ -498,7 +498,7 @@ with open(search_file, "w", encoding="utf-8") as w:
     # The user search also wants autopopulated pages to have lower
     # priority, but that's handled in search.js, not here.
     for page in sort_pages(page_array, with_depth=True):
-        name = page.url()
+        name = filename(page.name)
         w.write(f'{{page:"{name}"')
         coms = []
         if page.com and (page.com != page.name or

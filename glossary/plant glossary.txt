@@ -50,7 +50,7 @@ Example drawings are <a target="_blank" href="http://sweetgum.nybg.org/science/g
 {acute} A short tip with convex or straight sides meeting at an angle sharper than 90&deg;.
 {mucronate} A short tip with concave sides meeting at a sharp angle.
 {obtuse} A short tip with convex or straight sides meeting at an angle blunter than 90&deg;.
-{tapered} Narrowing gradually to the tip.
+{tapered,taper,tapering} Narrowing gradually to the tip.
 {truncate,truncated} Abruptly narrowed at the tip, as if cut flat.
 
 <h3>Border shapes</h3>
@@ -58,7 +58,6 @@ Example drawings are <a target="_blank" href="http://sweetgum.nybg.org/science/g
 {entire} In one smooth shape; i.e. not toothed, lobed, or compound.
 
 {crenate,crenately,scalloped} With shallow, rounded teeth and usually with acute sinuses.  Could also be called "scalloped".
-{reniform} Like cordate, but distally rounded instead of pointed, and typically less acute at the base.
 
 {tooth (teeth),toothed} A small, roughly triangular projection.  See serrate and dentate.  Compare lobe.
 {deltate} Shaped like the Greek letter &Delta;; an equilateral triangle with corners rounded or not; attached at base.
@@ -85,7 +84,7 @@ Example drawings are <a target="_blank" href="http://sweetgum.nybg.org/science/g
 {lateral,laterally} Relative to the sides of a structure (neither distal nor proximal).  May refer to the sides of the described structure or of an implied structure, e.g. lateral lobes.  Contrast basal, terminal.
 {proximal,proximally} Closer to the base and farther from the tip of a structure.  The structure is often implied; e.g. a proximal leaf grows close to the base of the whole plant.  Contrast distal.
 {subtend,subtended,subtending} Growing immediately proximal to the compared structure.
-{terminal,terminally} At the tip of a structure.  Contrast lateral, basal.
+{terminal,terminally} At the tip of a structure, e.g. the most distal segment of a compound or lobed leaf.  Contrast lateral, basal.
 
 <h2>Sexual capability</h2>
 
@@ -145,7 +144,7 @@ Example drawings are <a target="_blank" href="http://sweetgum.nybg.org/science/g
 {recurved,recurve,recurving} Gradually curved backward.  Contrast reflexed.
 {reflexed,reflex,reflexing} Abruptly bent somewhat or entirely backward.  Opposite of erect or ascending.  Contrast recurved.
 {rib,ribs,midrib,midribs} A raised band of material, e.g. covering a vein.
-{rosette,rosettes} Basal leaves growing radially around the stem. <a href="../photos/common cat's-ear,7.jpg">[example]</a>
+{rosette,rosettes} Basal leaves growing radially around the stem. <a href="../photos/common%20cat's-ear,7.jpg">[example]</a>
 {scale,scales} Flat, membranous structure.
 {scarious} Membranous.
 {seed,seeds} A fetrilized ovule capable of sprouting a new plant. Often encapsulated in a flower#fruit which provides energy, protection, and/or a means to dispersal for the seed. [figure:california poppy fruit]
@@ -163,10 +162,8 @@ Example drawings are <a target="_blank" href="http://sweetgum.nybg.org/science/g
 {subshrub,subshrubs} Similar to a shrub, but with only the proximal stems woody.  The distal stems are non-woody (or are at least significantly less woody).
 {succulent,succulents} Composed of fleshy tissue that conserves water.
 {taproot} Primary root growing straight down, tapering at the end, with smaller lateral branches.
-{terminal} The segment at the end, e.g. the most distal segment of a compound or lobed leaf.
 {ternate} With three parts from a common point, or lobed/dissected/compound in three parts.
 {tree,trees} Woody plant, taller than a shrub, generally with one central trunk from which branches spring higher up.
-{truncate,truncating,truncated} Ending (or beginning) abruptly, e.g. with no tapering.
 {tubercle,tubercles} A small hemispherical projection.
 {twig,twigs} The ultimate branch segment of a woody plant.
 {ultimate} The smallest division of a compound/dissected leaf or the final segments of a branching stem.

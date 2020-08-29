@@ -86,7 +86,7 @@ class Obs:
         n = self.n
         rg = self.rg
 
-        w.write('<p/>\n')
+        w.write('<p>\n')
 
         if link:
             w.write(f'<a href="{link}" target="_blank">Chris&rsquo;s observations</a>: ')
@@ -110,7 +110,8 @@ class Obs:
 
         if n:
             w.write('''
-<span class="toggle-details" onclick="fn_details(this)">[show details]</span><p/>
+<span class="toggle-details" onclick="fn_details(this)">[show details]</span>
+</p>
 <div id="details">
 Locations:
 <ul>
@@ -171,4 +172,4 @@ Locations:
                 w.write(f'<li>{month_name[m]}: {self.month[m]}</li>\n')
             w.write('</ul>\n</div>\n')
         else:
-            w.write('<p/>\n')
+            w.write('\n</p>\n')

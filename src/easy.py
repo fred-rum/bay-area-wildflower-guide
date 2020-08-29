@@ -10,15 +10,12 @@ _repl_easy_dict = {
     '--' : '&ndash;',
     '<=' : '&le;',
     '>=' : '&ge;',
-    '<<' : '&#8810',
-    '>>' : '&#8811',
+    '<<' : '&#8810;',
+    '>>' : '&#8811;',
+    '< ' : '&lt; ',
 
     "'"  : '&rsquo;',
     '"'  : '&rdquo;',
-
-    # '<' and '>' should be escaped, but for now I'll leave them alone
-    # because the browser seems to figure them out correctly, and it's
-    # probably smarter about it than I would be.
 }
 
 _ex = '|'.join(map(re.escape, list(_repl_easy_dict.keys())))

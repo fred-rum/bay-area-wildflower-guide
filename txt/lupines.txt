@@ -61,7 +61,7 @@ color: cream, pale purple, purple
 ]
 [
 <h3>lower keel margin ciliate middle to claw
-<br/>upper keel margin ciliate middle to claw or glabrous</h3>
+<br>upper keel margin ciliate middle to claw or glabrous</h3>
 [
 <h4>flowers spiralled</h4>
 
@@ -86,7 +86,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0806+0442
 ]
 [
 <h4>flowers whorled
-<br/>plant fleshy</h4>
+<br>plant fleshy</h4>
 
 ==arroyo lupine:L. succulentus
 color: purple
@@ -102,11 +102,11 @@ color: purple
 ]
 [
 <h3>lower keel margin glabrous
-<br/>upper keel margins glabrous or ciliate only near tip
-<br/>flowers whorled</h4>
+<br>upper keel margins glabrous or ciliate only near tip
+<br>flowers whorled</h4>
 [
 <h4>banner longer than wide
-<br/>pedicels 1--3.5 mm</h4>
+<br>pedicels 1--3.5 mm</h4>
 
 ==miniature lupine:L. bicolor
 color: purple
@@ -130,7 +130,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0113+1990
 ]
 [
 <h4>banner as wide or wider than long
-<br/>pedicels 3--7 mm</h4>
+<br>pedicels 3--7 mm</h4>
 
 ==fleshy lupine:L. affinis
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0518+0859

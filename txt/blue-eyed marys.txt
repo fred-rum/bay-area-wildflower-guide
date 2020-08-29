@@ -14,7 +14,7 @@ Key features:
 . leaf abaxially glabrous or hairy
 
 [
-<h2>flower whorls dense<br/>
+<h2>flower whorls dense<br>
 proximal pedicels < calyx</h2>
 
 ==purple chinese houses:C. heterophylla
@@ -50,7 +50,7 @@ flowers:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1205+1493
 
 ]
 [
-<h2>flowers loosely whorled or not whorled<br/>
+<h2>flowers loosely whorled or not whorled<br>
 proximal pedicels > calyx</h2>
 
 ==san francisco collinsia:C. multicolor

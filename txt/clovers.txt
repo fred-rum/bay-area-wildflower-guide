@@ -28,8 +28,8 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0703+0576
 . banner not inflated in fruit
 
 [
-<h2>Involucre bracts generally free, generally > 1 mm<br/>
-Inflorescence not sessile above 1--2 leaves<br/>
+<h2>Involucre bracts generally free, generally > 1 mm<br>
+Inflorescence not sessile above 1--2 leaves<br>
 Banner soon inflated in fruit</h2>
 ==bull clover:T. fucatum
 color: cream
@@ -58,8 +58,8 @@ color: red purple
 
 ]
 [
-<h2>Involucre bracts generally fused, generally > 1 mm, generally forming cup or bowl about base of inflorescence<br/>
-Inflorescence not sessile above 1--2 leaves<br/>
+<h2>Involucre bracts generally fused, generally > 1 mm, generally forming cup or bowl about base of inflorescence<br>
+Inflorescence not sessile above 1--2 leaves<br>
 Calyx and corolla not inflated in fruit</h2>
 [
 <h3>Involucre cup- or bowl-shaped, when pressed generally partly hiding flowers</h3>
@@ -166,7 +166,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0717+1130
 ]
 ]
 [
-<h2>Involucre bracts 0 or occasionally < 1 mm or forming a vestigial ring<br/>
+<h2>Involucre bracts 0 or occasionally < 1 mm or forming a vestigial ring<br>
 Inflorescence occasionally +- sessile above 1--2 +- reduced leaves (stipules of which occasionally involucre-like)</h2>
 ==large-head clover:T. macrocephalum
 leaflets:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1101+0387
@@ -206,7 +206,7 @@ color: yellow
 . Corolla: 3.5--4 mm, <b>bright yellow</b>, brown in age, <b>weak-striate</b>
 
 [
-<h3>pedicels 1--6 mm, +- equal<br/>
+<h3>pedicels 1--6 mm, +- equal<br>
 flowers generally becoming reflexed</h3>
 ==white clover:T. repens
 color: white
@@ -254,7 +254,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0208+2075
 
 ]
 [
-<h3>pedicels < 2 mm<br/>
+<h3>pedicels < 2 mm<br>
 flowers becoming reflexed or not</h3>
 ==clustered clover:T. glomeratum
 color: white

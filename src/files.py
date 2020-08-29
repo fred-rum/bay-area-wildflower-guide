@@ -4,6 +4,8 @@
 import sys
 import os
 import re
+from unidecode import unidecode
+import urllib.parse
 
 # My files
 from error import *
@@ -54,9 +56,10 @@ jpg_files = get_file_set('photos', 'jpg')
 def link_figures_thumb(name, txt):
     def repl_figure_thumb(matchobj):
         file = matchobj.group(1)
+        fileurl = url(file)
         if not os.path.isfile(f'{root_path}/figures/{file}.svg'):
             error(f'Broken figure link to {file}.svg in {name}')
-        return f'<a href="../figures/{file}.svg"><img src="../figures/{file}.svg" height="200" class="leaf-thumb"></a>'
+        return f'<a href="../figures/{fileurl}.svg"><img src="../figures/{fileurl}.svg" alt="figure" height="200" class="leaf-thumb"></a>'
 
     def repl_figure_thumbs(matchobj):
         inner = matchobj.group(1)
@@ -70,12 +73,14 @@ def link_figures_thumb(name, txt):
 def link_figures_text(name, txt):
     def repl_figure_text(matchobj):
         file = matchobj.group(1)
+        fileurl = url(file)
         if not os.path.isfile(f'{root_path}/figures/{file}.svg'):
             error(f'Broken figure link to {file}.svg in {name}')
-        return f'<a href="../figures/{file}.svg">[figure]</a>'
+        return f'<a href="../figures/{fileurl}.svg">[figure]</a>'
 
     return re.sub(r'\[figure:(.*?)(?:\.svg|)\]',
                   repl_figure_text, txt, flags=re.MULTILINE)
+
 
 # Write a standard HTML header.
 # title must always be valid and defines the window/tab title in the metadata.
@@ -92,7 +97,6 @@ def write_header(w, title, h1, nospace=False):
 <html lang="en">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <link rel="shortcut icon" href="../favicon/favicon.ico">
@@ -131,8 +135,7 @@ def write_footer(w):
     # I don't put the year in the copyright because it's a pain to determine
     # given the different creation/modification dates of the pages *plus*
     # the photos on them.  The Berne Convention applies in any case.
-    w.write(f'''
-<hr/>
+    w.write(f'''<hr>
 <div class="footer">
 <span class="foot-left"><a class="home-link" href="../index.html"></a> <span class="foot-fade"> &copy; Chris Nelson</span></span><a class="foot-fade" href="../contact.html">Contact me</a>
 </div>
@@ -141,3 +144,14 @@ def write_footer(w):
 <script src="../search.js"></script>
 </body>
 ''')
+
+# Convert non-ASCII characters to their closest ASCII equivalent.
+# This is suitable for use as a filename or as a string that the user
+# can actually type when searching.
+def filename(name):
+    return unidecode(name)
+
+# Percent-encode characters that aren't supposed to be in a URL.
+# E.g. encode " " as "%20".
+def url(name):
+    return urllib.parse.quote(filename(name), safe='/,')
