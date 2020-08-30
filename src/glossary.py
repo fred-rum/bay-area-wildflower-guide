@@ -16,7 +16,15 @@ class Glossary:
 
     def __init__(self, name):
         self.name = name
+
+        # user-visible name of this glossary's coverage
+        # (defaults to its top-level taxon)
+        self.title = None
+
+        # name of this glossary's top-level taxon
+        # (or None, if it includes all taxons)
         self.taxon = None
+
         self.parent = None # a single parent glossary (or None)
         self.child = set() # an unordered set of child glossaries
 
@@ -367,6 +375,12 @@ class Glossary:
                     self.taxon = page.name
                 else:
                     error(f'No page found for glossary taxon {name}')
+            if not self.title:
+                self.title = self.taxon
+            return ''
+
+        def repl_title(matchobj):
+            self.title = matchobj.group(1)
             return ''
 
         with open(f'{root_path}/glossary/{self.name}.txt', mode='r') as f:
@@ -374,6 +388,9 @@ class Glossary:
 
         self.txt = re.sub(r'^taxon:\s*(.*?)\s*$',
                           repl_taxon, self.txt, flags=re.MULTILINE)
+
+        self.txt = re.sub(r'^title:\s*(.*?)\s*$',
+                          repl_title, self.txt, flags=re.MULTILINE)
 
         self.txt = self.parse_terms(self.txt)
 
@@ -440,10 +457,10 @@ class Glossary:
             return glossary.name
 
         if self == current:
-            w.write(f'<b>{self.name}</b><br/>')
+            w.write(f'<b>{self.title}</b><br/>')
         else:
             pageurl = self.get_url()
-            w.write(f'<a href="{pageurl}.html">{self.name}</a><br/>')
+            w.write(f'<a href="{pageurl}">{self.title}</a><br/>')
 
         if self.child:
             w.write('<div class="toc-indent">\n')
@@ -511,7 +528,7 @@ class Glossary:
               write_header(w, self.name, None, nospace=True)
               w.write('<h4 class="title">Glossary table of contents</h4>\n')
               master_glossary.write_toc(w, self)
-              w.write(f'<a href="http://ucjeps.berkeley.edu/IJM_glossary.html">Jepson eFlora glossary</a>\n')
+              w.write(f'<a href="http://ucjeps.berkeley.edu/IJM_glossary.html">Jepson eFlora</a>\n')
               w.write(f'<h1>{self.name}</h1>\n')
               w.write(self.txt)
               write_footer(w)
@@ -521,7 +538,7 @@ class Glossary:
         def by_name(glossary):
             return glossary.name
 
-        w.write(f'{{page:"{self.name}",x:"g",glossary:[\n')
+        w.write(f'{{page:"{self.name}",com:["{self.title}"],x:"g",glossary:[\n')
         for term in self.search_terms:
             terms_str = '","'.join(term)
             w.write(f'{{terms:["{terms_str}"]}},\n')
@@ -539,7 +556,7 @@ class Glossary:
 
     # Write search terms for Jepson's glossary to pages.js
     def write_jepson_search_terms(self, w):
-        w.write('{page:"Jepson eFlora glossary",x:"j",glossary:[\n')
+        w.write('{page:"Jepson eFlora",com:["Jepson eFlora"],x:"j",glossary:[\n')
         for term in self.search_terms:
             terms_str = '","'.join(term)
             anchor = self.term_anchor[term[0]]

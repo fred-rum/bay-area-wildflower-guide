@@ -1,3 +1,4 @@
+title:knotweeds
 taxon:knotweed family
 
 {stipe,stipes} In the knotweed family, a distal extension of the pedicel separated by a line, bulge, or difference in thickness.  Compare to stipule.

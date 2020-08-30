@@ -266,7 +266,7 @@ function glossary_check_list(search_str, glossary, name_list, page_info) {
   var pri_adj = 0.0
   for (var i = 0; i < name_list.length; i++) {
     for (var k = 0; k < glossary.terms.length; k++) {
-      var term_str = glossary.terms[k] + ' (' + name_list[i] + ')';
+      var term_str = glossary.terms[k] + ' (glossary: ' + name_list[i] + ')';
       var match_info = check(search_str, term_str, pri_adj);
       if (better_match(match_info, best_match_info)) {
         best_match_info = match_info;
@@ -655,11 +655,13 @@ function fn_keydown() {
 /* normalize the data in the pages array. */
 for (var i = 0; i < pages.length; i++) {
   var page_info = pages[i]
-  if (!('com' in page_info) &&
+  if (('page' in page_info) &&
+      !('com' in page_info) &&
       (!hasUpper(page_info.page) || (page_info.x == 'j'))) {
     page_info.com = [page_info.page]
   }
-  if (!('sci' in page_info) &&
+  if (('page' in page_info) &&
+      !('sci' in page_info) &&
       hasUpper(page_info.page) && (page_info.x != 'j')) {
     page_info.sci = [page_info.page]
   }

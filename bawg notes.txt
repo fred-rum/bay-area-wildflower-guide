@@ -202,6 +202,11 @@ error printed if a family is not known).
 
 Mark top-level pages in the pages' txt, not in the script code.
 
+Mark the flowering plants page so that all descendents list themselves
+as "part of" a family and "part of flowering plants".
+
+Mark the flowering plants page as requiring a common name for all
+families.
 
 Keep a taxon page and its inline glossary as separate entries in
 pages.js (as it is now) so that each gets the right priority.  But
@@ -212,4 +217,14 @@ How should a taxon's inline glossary be named in pages.js?  Perhaps
 all glossaries should be called "glossary: [taxon]".  (Jepson would be
 "glossary: Jepson eFlora".)
 
-In the glossary ToC, use taxon names instead of glossary (file)names?
+Create a function to easily compare ranks beyond just genus/species.
+Flag an error for unknown ranks when the sci name is "[rank] [Name]".
+
+Format glossary ToC better so that it is clearly a part of the
+"Glossary table of contents", especially when "plant glossary" is the
+current glossary and thus bold and not linked.
+
+Instead of using index numbers as temporary child IDs, use the
+scientific name (if available) or the common name.  These are
+guaranteed to find the correct page later unless there is an error
+elsewhere.

@@ -433,6 +433,7 @@ class Page:
             else:
                 glossary = Glossary(self.name)
                 glossary.taxon = self.name
+                glossary.title = self.name
                 glossary.txt = None
             self.txt = glossary.parse_terms(self.txt)
 

@@ -1687,7 +1687,7 @@ var pages=[
 {page:"winter vetch",sci:["Vicia villosa ssp. varia"],x:"u"},
 {page:"woodland tidytips",sci:["Layia gaillardioides"],x:"u"},
 {page:"yellowray goldfields",sci:["Lasthenia glabrata"],x:"u"},
-{page:"plant glossary",x:"g",glossary:[
+{page:"plant glossary",com:["vascular plants"],x:"g",glossary:[
 {terms:["leaf","leaves","leaved"]},
 {terms:["blade","blades"]},
 {terms:["petiole","petioles","petioled"]},
@@ -1822,16 +1822,16 @@ var pages=[
 {terms:["wing","wings","winged"]},
 {terms:["winged petiole","winged petioles","petiole winged","petioles winged","wing-petioled"]},
 ]},
-{page:"conifer glossary",x:"g",glossary:[
+{page:"conifer glossary",com:["conifers"],x:"g",glossary:[
 {terms:["cone","cones"]},
 {terms:["scale","scales"]},
 ]},
-{page:"fern glossary",x:"g",glossary:[
+{page:"fern glossary",com:["ferns"],x:"g",glossary:[
 {terms:["pinna","pinnae"]},
 {terms:["pinnule","pinnules"]},
 {terms:["stipe","stipes"]},
 ]},
-{page:"flower glossary",x:"g",glossary:[
+{page:"flower glossary",com:["flowering plants"],x:"g",glossary:[
 {terms:["flower","flowers","flowered"]},
 {terms:["pedicel","pedicels","pediceled"]},
 {terms:["receptacle","receptacles"]},
@@ -1895,10 +1895,10 @@ var pages=[
 {terms:["tube","tubes"]},
 {terms:["valve","valves"]},
 ]},
-{page:"blue-eyed marys",x:"g",glossary:[
+{page:"blue-eyed marys",com:["blue-eyed marys"],x:"g",glossary:[
 {terms:["corolla","corollas","lobe","lobes","upper lip","upper lips","lower lip","lower lips","lip","lips","keel","keels"]},
 ]},
-{page:"grass glossary",x:"g",glossary:[
+{page:"grass glossary",com:["grasses"],x:"g",glossary:[
 {terms:["auricle","auricles"]},
 {terms:["awn","awns"]},
 {terms:["callus","calluses"]},
@@ -1913,10 +1913,10 @@ var pages=[
 {terms:["spike","spikes"]},
 {terms:["umbel","umbels"]},
 ]},
-{page:"knotweed glossary",x:"g",glossary:[
+{page:"knotweed glossary",com:["knotweeds"],x:"g",glossary:[
 {terms:["stipe","stipes"]},
 ]},
-{page:"larkspur glossary",x:"g",glossary:[
+{page:"larkspur glossary",com:["larkspurs"],x:"g",glossary:[
 {terms:["upper sepal","upper sepals"]},
 {terms:["spur","spurs"]},
 {terms:["lateral sepals","lateral sepal"]},
@@ -1924,12 +1924,12 @@ var pages=[
 {terms:["upper petals","upper petal"]},
 {terms:["lower petals","lower petal"]},
 ]},
-{page:"legume glossary",x:"g",glossary:[
+{page:"legume glossary",com:["legumes"],x:"g",glossary:[
 {terms:["banner","banners"]},
 {terms:["wing","wings"]},
 {terms:["keel","keels"]},
 ]},
-{page:"orchid glossary",x:"g",glossary:[
+{page:"orchid glossary",com:["orchids"],x:"g",glossary:[
 {terms:["lower petal","lower petals"]},
 {terms:["lip","lips"]},
 {terms:["upper petals","upper petal"]},
@@ -1939,11 +1939,11 @@ var pages=[
 {terms:["lateral sepals","lateral sepal"]},
 {terms:["column","columns"]},
 ]},
-{page:"sedge glossary",x:"g",glossary:[
+{page:"sedge glossary",com:["sedges"],x:"g",glossary:[
 {terms:["floret","florets"]},
 {terms:["spikelet","spikelets"]},
 ]},
-{page:"sunflower glossary",x:"g",glossary:[
+{page:"sunflower glossary",com:["sunflowers"],x:"g",glossary:[
 {terms:["awn","awns"]},
 {terms:["bristle","bristles"]},
 {terms:["disk","disks"]},
@@ -1965,7 +1965,7 @@ var pages=[
 {terms:["staminate flower","staminate flowers","staminate"]},
 {terms:["pistillate flower","pistillate flowers","pistillate"]},
 ]},
-{page:"Jepson eFlora glossary",x:"j",glossary:[
+{page:"Jepson eFlora",com:["Jepson eFlora"],x:"j",glossary:[
 {terms:["abaxial"]},
 {terms:["abundant"]},
 {terms:["achene","achenes"]},
