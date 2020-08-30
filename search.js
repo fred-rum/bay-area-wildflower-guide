@@ -245,7 +245,11 @@ function check_list(search_str, match_list, page_info) {
   var best_match_info = null;
   var pri_adj = 0.0;
   for (var i = 0; i < match_list.length; i++) {
-    var match_info = check(search_str, match_list[i], pri_adj);
+    var name = match_list[i];
+    if ((page_info.x == "g") || (page_info.x == "j")) {
+      name = 'glossary: ' + name;
+    }
+    var match_info = check(search_str, name, pri_adj);
     if (better_match(match_info, best_match_info)) {
       best_match_info = match_info;
     }
@@ -476,32 +480,13 @@ function page_search(search_str, page_info) {
 
       /* Find the best match associated with glossary.anchor. */
       if ('com' in page_info) {
-        var com_match_info = glossary_check_list(search_str, glossary,
-                                                 page_info.com, page_info);
+        var match_info = glossary_check_list(search_str, glossary,
+                                             page_info.com, page_info);
       } else {
-        var com_match_info = null;
+        var match_info = null;
       }
 
-      if ('sci' in page_info) {
-        var sci_match_info = glossary_check_list(search_str, glossary,
-                                                 page_info.sci, page_info);
-      } else {
-        var sci_match_info = null;
-      }
-
-      if (com_match_info || sci_match_info) {
-        /* Record only the better of com_match_info and sci_match_info.
-           Unlike for a regular page match, we don't put both the common
-           and scientific names in the auto-complete entry.
-           "term (page name)" is already complex enough. */
-        if (better_match(com_match_info, sci_match_info)) {
-          var pri = com_match_info.pri;
-          sci_match_info = null;
-        } else {
-          var pri = sci_match_info.pri;
-          com_match_info = null;
-        }
-
+      if (match_info) {
         if ('anchor' in glossary) {
           var anchor = glossary.anchor;
         } else {
@@ -509,10 +494,10 @@ function page_search(search_str, page_info) {
         }
 
         var fit_info = {
-          pri: pri,
+          pri: match_info.pri,
           page_info: page_info,
-          com_match_info: com_match_info,
-          sci_match_info: sci_match_info,
+          com_match_info: match_info,
+          sci_match_info: null,
           anchor: anchor
         };
 
