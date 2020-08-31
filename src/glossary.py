@@ -366,15 +366,11 @@ class Glossary:
     def read_terms(self):
         def repl_taxon(matchobj):
             name = matchobj.group(1)
-            if name == 'flowering plants':
-                # Special case since there is no page for flowering plants.
-                self.taxon = name
+            page = find_page1(name)
+            if page:
+                self.taxon = page.name
             else:
-                page = find_page1(name)
-                if page:
-                    self.taxon = page.name
-                else:
-                    error(f'No page found for glossary taxon {name}')
+                error(f'No page found for glossary taxon {name}')
             if not self.title:
                 self.title = self.taxon
             return ''
@@ -604,15 +600,13 @@ def create_regex():
     glossary_regex = re.compile(ex, re.IGNORECASE)
 
 def parse_glossaries(top_list):
-    global master_glossary, flower_glossary, jepson_glossary
+    global master_glossary, jepson_glossary
 
     for glossary_file in glossary_files:
         glossary = Glossary(glossary_file)
         glossary.read_terms()
 
     master_glossary = glossary_taxon_dict[None]
-    flower_glossary = glossary_taxon_dict['flowering plants']
-    flower_glossary.set_parent(master_glossary)
 
     jepson_glossary = Glossary('Jepson eFlora glossary')
     jepson_glossary.read_jepson_terms()
@@ -621,10 +615,7 @@ def parse_glossaries(top_list):
     # Determine the primary glossary to use for each page *and*
     # determine the hierarchy among glossaries.
     for page in top_list:
-        if page.top_level == 'flowering plants':
-            page.set_glossary(flower_glossary)
-        else:
-            page.set_glossary(master_glossary)
+        page.set_glossary(master_glossary)
 
     # Created an ordered list of the glossaries.  The purpose of this is
     # to allow a glossary to be referenced by its index number in page.js.

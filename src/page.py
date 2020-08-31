@@ -1,5 +1,6 @@
 import re
 import yaml
+import io
 
 # My files
 from error import *
@@ -823,7 +824,7 @@ class Page:
                 colorurl = url(color)
                 w.write(f'<li><a href="{colorurl}.html">{color} flowers</a></li>\n')
 
-        w.write('<li><a href="all.html">all flowers</a></li>\n')
+        w.write('<li><a href="flowering%20plants.html">all flowers</a></li>\n')
         w.write('</ul>\n')
 
     # List a single page, indented if it is under a parent.
@@ -868,7 +869,7 @@ class Page:
             # tree paths.  Make sure that the parent taxon's glossary
             # is the same on both paths.
             if self.name in glossary_taxon_dict:
-                if glossary != self.glossary.glossary_parent:
+                if glossary != self.glossary.parent:
                     error(f'{self.name} has two different parent glossaries')
             else:
                 if glossary != self.glossary:
@@ -879,8 +880,8 @@ class Page:
             return
 
         if self.name in glossary_taxon_dict:
-            # Append the parent glossary list to the taxon's assigned
-            # glossary list.
+            # Set the glossary of this taxon as a child of
+            # the parent glossary of this taxon.
             sub_glossary = glossary_taxon_dict[self.name]
             sub_glossary.set_parent(glossary)
             glossary = sub_glossary
@@ -1114,39 +1115,44 @@ class Page:
 
             w.write('<hr>\n')
 
-            if len(self.jpg_list) or len(self.ext_photo_list):
-                w.write('<div class="photo-box">\n')
-
-                for jpg in self.jpg_list:
-                    jpgurl = url(jpg)
-                    w.write(f'<a href="../photos/{jpgurl}.jpg"><img src="../thumbs/{jpgurl}.jpg" alt="photo" width="200" height="200" class="leaf-thumb"></a>\n')
-
-                for (label, link) in self.ext_photo_list:
-                    w.write(f'<a href="{link}" target="_blank" class="enclosed"><div class="leaf-thumb-text">')
-                    if label:
-                        w.write('<span>')
-                    if 'calphotos' in link:
-                        text = 'CalPhotos'
-                    elif 'calflora' in link:
-                        text = 'CalFlora'
-                    else:
-                        text = 'external photo'
-                    w.write(f'<span style="text-decoration:underline;">{text}</span>')
-                    if label:
-                        w.write(f'<br/>{label}</span>')
-                    w.write('</div></a>\n')
-
-                w.write('</div>\n')
-
-            w.write(self.txt)
-
-            if self.jpg_list or self.ext_photo_list or self.txt:
+            if self.com == 'flowering plants':
+                self.write_hierarchy(w, None)
                 w.write('<hr>\n')
+            else:
+                if len(self.jpg_list) or len(self.ext_photo_list):
+                    w.write('<div class="photo-box">\n')
+
+                    for jpg in self.jpg_list:
+                        jpgurl = url(jpg)
+                        w.write(f'<a href="../photos/{jpgurl}.jpg"><img src="../thumbs/{jpgurl}.jpg" alt="photo" width="200" height="200" class="leaf-thumb"></a>\n')
+
+                    for (label, link) in self.ext_photo_list:
+                        w.write(f'<a href="{link}" target="_blank" class="enclosed"><div class="leaf-thumb-text">')
+                        if label:
+                            w.write('<span>')
+                        if 'calphotos' in link:
+                            text = 'CalPhotos'
+                        elif 'calflora' in link:
+                            text = 'CalFlora'
+                        else:
+                            text = 'external photo'
+                        w.write(f'<span style="text-decoration:underline;">{text}</span>')
+                        if label:
+                            w.write(f'<br/>{label}</span>')
+                        w.write('</div></a>\n')
+
+                    w.write('</div>\n')
+
+                w.write(self.txt)
+
+                if self.jpg_list or self.ext_photo_list or self.txt:
+                    w.write('<hr>\n')
 
             self.write_obs(w)
             if self.sci:
                 self.write_external_links(w)
-            self.write_lists(w)
+            if self.level != 'above':
+                self.write_lists(w)
             write_footer(w)
 
         if self.taxon_id and not (self.jpg_list or self.child):
@@ -1166,3 +1172,62 @@ class Page:
             if genus not in genus_page_list:
                 genus_page_list[genus] = []
             genus_page_list[genus].append(self)
+
+    def write_hierarchy(self, w, color):
+        # We write out the matches to a string first so that we can get
+        # the total number of keys and flowers in the list (including children).
+        s = io.StringIO()
+        list_matches(s, self.child, False, color, set())
+
+        obs = Obs(color)
+        self.count_matching_obs(obs)
+        obs.write_page_counts(w)
+        w.write(s.getvalue())
+
+# Find all flowers that match the specified color.
+# Also find all pages that include *multiple* child pages that match.
+# If a parent includes multiple matching child pages, those child pages are
+# listed only under the parent and not individually.
+# If a parent includes only one matching child page, that child page is
+# listed individually, and the parent is not listed.
+#
+# If color is None, every page matches.
+def find_matches(page_subset, color):
+    match_list = []
+    for page in page_subset:
+        child_subset = find_matches(page.child, color)
+        if len(child_subset) == 1 and color is not None:
+            match_list.extend(child_subset)
+        elif child_subset:
+            match_list.append(page)
+            if color is not None:
+                # Record this container page's newly discovered color.
+                page.color.add(color)
+        elif page.jpg_list and page.page_matches_color(color):
+            # only include the page on the list if it is a key or observed
+            # flower (not an unobserved flower).
+            match_list.append(page)
+    return match_list
+
+# match_set can be either a set or list of pages.
+# If indent is False, we'll sort them into a list by reverse order of
+# observation counts.  If indent is True, match_set must be a list, and
+# its order is retained.
+def list_matches(w, match_set, indent, color, seen_set):
+    if indent:
+        # We're under a parent with an ordered child list.  Retain its order.
+        match_list = match_set
+    else:
+        # We're at the top level, so sort to put common pages first.
+        match_list = sort_pages(match_set, color=color)
+
+    for page in match_list:
+        child_matches = find_matches(page.child, color)
+        if child_matches:
+            page.list_page(w, indent, child_matches)
+            list_matches(w, child_matches, True, color, seen_set)
+            w.write('</div>\n')
+        else:
+            page.list_page(w, indent, None)
+
+        seen_set.add(page)

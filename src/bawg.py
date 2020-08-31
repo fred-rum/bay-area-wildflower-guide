@@ -55,7 +55,7 @@ from glossary import *
 # don't want them to float to the top.  So instead, I explicitly name
 # the non-flower top pages, and assume that everything not in those
 # hierarchies is a flower.
-non_flower_top_pages = ('conifers', 'ferns', 'insects')
+non_flower_top_pages = ('flowering plants', 'conifers', 'ferns', 'insects')
 
 year = datetime.datetime.today().year
 
@@ -291,36 +291,11 @@ error_end_section()
 # Get a list of pages without parents (top-level pages).
 top_list = [x for x in page_array if not x.parent]
 
-# Find all flowers that match the specified color.
-# Also find all pages that include *multiple* child pages that match.
-# If a parent includes multiple matching child pages, those child pages are
-# listed only under the parent and not individually.
-# If a parent includes only one matching child page, that child page is
-# listed individually, and the parent is not listed.
-#
-# If color is None, every page matches.
-def find_matches(page_subset, color):
-    match_list = []
-    for page in page_subset:
-        child_subset = find_matches(page.child, color)
-        if len(child_subset) == 1 and color is not None:
-            match_list.extend(child_subset)
-        elif child_subset:
-            match_list.append(page)
-            if color is not None:
-                # Record this container page's newly discovered color.
-                page.color.add(color)
-        elif page.jpg_list and page.page_matches_color(color):
-            # only include the page on the list if it is a key or observed
-            # flower (not an unobserved flower).
-            match_list.append(page)
-    return match_list
-
 for name in non_flower_top_pages:
     name_page[name].set_top_level(name, name)
 
 for page in top_list:
-    if not page.top_level:
+    if not page.top_level or page.name == 'flowering plants':
         page.set_top_level('flowering plants', page.name)
 
 for rank in ranks:
@@ -380,7 +355,7 @@ parse_glossaries(top_list)
 # We don't need color_page_list yet, but we go through the creation process
 # now in order to populate page_color for all container pages.
 for color in color_list:
-    color_page_list[color] = find_matches(top_list, color)
+    color_page_list[color] = find_matches(name_page['flowering plants'].child, color)
 
 # Turn txt into html for all normal and default pages.
 for page in page_array:
@@ -429,29 +404,6 @@ if arg('-incomplete_keys'):
 # The remaining code is for creating useful lists of pages:
 # all pages, and pages sorted by flower color.
 
-# match_set can be either a set or list of pages.
-# If indent is False, we'll sort them into a list by reverse order of
-# observation counts.  If indent is True, match_set must be a list, and
-# its order is retained.
-def list_matches(w, match_set, indent, color, seen_set):
-    if indent:
-        # We're under a parent with an ordered child list.  Retain its order.
-        match_list = match_set
-    else:
-        # We're at the top level, so sort to put common pages first.
-        match_list = sort_pages(match_set, color=color)
-
-    for page in match_list:
-        child_matches = find_matches(page.child, color)
-        if child_matches:
-            page.list_page(w, indent, child_matches)
-            list_matches(w, child_matches, True, color, seen_set)
-            w.write('</div>\n')
-        else:
-            page.list_page(w, indent, None)
-
-        seen_set.add(page)
-
 def write_page_list(page_list, color, color_match):
     # We write out the matches to a string first so that we can get
     # the total number of keys and flowers in the list (including children).
@@ -471,8 +423,6 @@ def write_page_list(page_list, color, color_match):
 
 for color in color_list:
     write_page_list(color_page_list[color], color, color)
-
-write_page_list(top_flower_list, 'all', None)
 
 ###############################################################################
 # Create pages.js

@@ -185,12 +185,17 @@ I should also order them lower in pages.js.
 
 Make the hierarchy more generic to fit anyone's taxonomic priorities:
 
-Create a page for flowering plants (replacing 'all.html') with a
-marker that causes it to have its whole hierarchy listed.  Create
-pages for each flowering plant color with markers to borrow a subset
-of children of flowering plants.  The flowering plant txt includes
-manual links to the color pages (which are somehow outside the normal
-hierarchy?)
+Mark the flowering plants page ('list: hierarchy') to cause it to have
+its whole hierarchy listed.
+
+'list: children' marks a page to allow children to be added via group
+identification.  Otherwise, a group with incomplete children flags an
+error.
+
+Create pages for each flowering plant color with markers to borrow a
+subset of children of flowering plants.  The flowering plant txt
+includes manual links to the color pages (which are somehow outside
+the normal hierarchy?)
 
 Mark the flowering plants page as the parent of all pages without
 parents (that aren't marked as top-level pages).  Obviously, only one
@@ -203,19 +208,21 @@ error printed if a family is not known).
 Mark top-level pages in the pages' txt, not in the script code.
 
 Mark the flowering plants page so that all descendents list themselves
-as "part of" a family and "part of flowering plants".
+as "member of" a family.
+
+Mark the flowering plants page so that its entire descendent hierarchy
+is listed on its page, not only its direct descendents.  (This assumes
+that no children are listed manually, or it simply skips those
+sections of hierarchy.)
 
 Mark the flowering plants page as requiring a common name for all
 families.
 
-Keep a taxon page and its inline glossary as separate entries in
-pages.js (as it is now) so that each gets the right priority.  But
-suppress a glossary match (either on the glossary "page" or a glossary
-term) if the taxon page already matches.
+Include color pages (e.g. yellow flowers) in search.
 
-How should a taxon's inline glossary be named in pages.js?  Perhaps
-all glossaries should be called "glossary: [taxon]".  (Jepson would be
-"glossary: Jepson eFlora".)
+List color on flower pagse as "member of [color] flowers"?  (That gets
+awkward with multiple colors.)
+
 
 Create a function to easily compare ranks beyond just genus/species.
 Flag an error for unknown ranks when the sci name is "[rank] [Name]".
@@ -228,3 +235,12 @@ Instead of using index numbers as temporary child IDs, use the
 scientific name (if available) or the common name.  These are
 guaranteed to find the correct page later unless there is an error
 elsewhere.
+
+Generate bawg.css from data(?)/bawg.css by stripping comments.
+Write lots of comments.
+
+Suppress write_lists for hierarchy above genus, e.g. in flowering plants.
+
+ryegrass's lists doesn't include 'other flowers' because it has
+exactly one child with color 'other'.  That is dumb, and it should be
+listed with color 'other' even if doesn't appear on the list page.
