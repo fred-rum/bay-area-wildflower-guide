@@ -2,7 +2,7 @@ sci:Phoradendron spp.
 x:ba
 
 [
-P. leucarpum is used in Jepson/CalFlora/NRDB, but POWO says that it's not found in California.  Instead, the following names are used.
+P. leucarpum is used in Jepson/CalFlora/NRDB, but POWO says that it's not found in California.  The subspecies used by Jepson/Calflora don't reliably translate to other species, but CalFlora claims that the following species translate to its subspecies names.
 
 ==oak mistletoe:P. villosum
 color: other
@@ -10,7 +10,7 @@ sci_fpj:P. leucarpum ssp. tomentosum
 . leaf length generally < 1.5 &times; width, 15--60 mm, generally > 20 mm
 . stem generally short-hairy, at least at tip
 . spike with 2--5(7) fertile internodes, pistillate 6--15(20)-flowered
-. <b>on woody plants except conifers</b>
+. <b>parasitizes oaks and other flowering trees</b>
 . leaf <= 3 cm, width <= 2 cm
 . leaf gray-green, dull
 . common
@@ -20,7 +20,7 @@ sci_fpj:P. leucarpum ssp. macrophyllum
 . leaf length generally < 1.5 &times; width, 15--60 mm, generally > 20 mm
 . stem generally short-hairy, at least at tip
 . spike with 2--5(7) fertile internodes, pistillate 6--15(20)-flowered
-. <b>on woody plants except conifers</b>
+. <b>parasitizes oaks and other flowering trees</b>
 . leaf <= 6 cm, width <= 5 cm
 . leaf yellow-green, generally shiny
 . rare
@@ -30,9 +30,10 @@ sci_fpj:P. leucarpum ssp. macrophyllum
 . leaf length generally > 3 &times; width, (5)10--25 mm, generally < 20 mm
 . stem glabrous
 . spike with generally 1 fertile internode, pistillate 2-flowered
-. <b>on conifers</b>
+. <b>parasitizes conifers</b>
 . rare at Nisene Marks, Mt. Tam
 
 ==juniper mistletoe:P. juniperinum
 . leaf scale-like, < 1 mm
+. <b>parasitizes junipers and juniper-like trees</b>
 . very rare at Nisene Marks
