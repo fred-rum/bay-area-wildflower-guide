@@ -25,5 +25,8 @@ color: white
 ==brittleleaf manzanita:A. crustacea
 color: white
 
+==foo:A. baz
+leaf:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0405+1277
+
 ==montara manzanita:A. montaraensis
 color: white, pink, red purple

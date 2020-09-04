@@ -958,7 +958,8 @@ class Page:
 
         if not self.has_child_key:
             # No child has a key, so reduce the size of child photos.
-            s = re.sub(r'class="page-thumb"', r'class="list-thumb"', s)
+            # This applies to both page-thumb and page-thumb-text
+            s = re.sub(r'class="page-thumb', r'class="list-thumb', s)
 
         self.txt = s
 

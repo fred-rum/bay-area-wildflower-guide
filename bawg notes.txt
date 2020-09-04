@@ -236,11 +236,36 @@ scientific name (if available) or the common name.  These are
 guaranteed to find the correct page later unless there is an error
 elsewhere.
 
-Generate bawg.css from data(?)/bawg.css by stripping comments.
-Write lots of comments.
-
 Suppress write_lists for hierarchy above genus, e.g. in flowering plants.
 
 ryegrass's lists doesn't include 'other flowers' because it has
 exactly one child with color 'other'.  That is dumb, and it should be
 listed with color 'other' even if doesn't appear on the list page.
+
+Copy search.js from another directory, same as bawg.css.  To speed
+editing, allow a parameter to bawg.py to reference src/search.js and
+src/bawg.css directly.  (But what about index.html?)
+
+
+Remove <div class="body"> from all pages.
+
+Reduce spacing between a <p> and the following <ul>.
+E.g. for "Wyethia mollis" in "mule's ears".
+<p class="list-head"> is available for this, but apparently I'm not
+using it for this particular case.
+
+Remove class="list-sub" from <ul>.  The CSS now handles it automatically.
+
+Remove div.photo-box from list of JPGs for a page.  This requires that spaces (newlines) be removed between images (and CalPhotos).
+
+Fix photo sizes for cottonbatting plant.
+
+Support searches for "help", "bawg", "bay area wildflower guilde",
+"contact me".
+
+Remove use of "list-head" class.
+
+Kill the bottom margin of the last p/ul of a child key and similarly
+for the page-thumb img so that they center better.  Then put a
+margin-bottom on the containing photo-box.  This also fixes a problem
+with non-listing pages that don't have a key, such as manzanitas.

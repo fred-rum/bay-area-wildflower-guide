@@ -522,7 +522,7 @@ class Glossary:
 
         with open(f'{working_path}/html/{self.name}.html', mode='w') as w:
               write_header(w, self.name, None, nospace=True)
-              w.write('<h4 class="title">Glossary table of contents</h4>\n')
+              w.write('<h4 id="title">Glossary table of contents</h4>\n')
               master_glossary.write_toc(w, self)
               w.write(f'<a href="http://ucjeps.berkeley.edu/IJM_glossary.html">Jepson eFlora</a>\n')
               w.write(f'<h1>{self.name}</h1>\n')

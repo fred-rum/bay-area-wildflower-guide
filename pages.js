@@ -1068,6 +1068,7 @@ var pages=[
 {page:"flat spurred piperia",sci:["Platanthera transversa","Piperia transversa"],x:"u"},
 {page:"fleshy lupine",sci:["Lupinus affinis"],x:"u"},
 {page:"floating primrose-willow",sci:["Ludwigia peploides"],x:"u"},
+{page:"foo",sci:["Arctostaphylos baz"],x:"u"},
 {page:"foothill meadowfoam",sci:["Limnanthes douglasii ssp. striata"],x:"u"},
 {page:"footsteps of spring",sci:["Sanicula arctopoides"],x:"u"},
 {page:"forest red gum",sci:["Eucalyptus tereticornis"],x:"u"},

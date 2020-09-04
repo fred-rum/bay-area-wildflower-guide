@@ -1,17 +1,16 @@
-/* Copyright 2019 Chris Nelson - All rights reserved. */
-
+/* Copyright Chris Nelson - All rights reserved. */
 @-ms-viewport {
     width: device-width;
 }
-.footer {
+div.footer {
     display: flex;
     justify-content: space-between;
 }
-.home-link::before {
+a.home-link::before {
     content: "BAWG";
 }
 @media (min-width: 500px) {
-    .home-link::before {
+    a.home-link::before {
 	content: "Bay Area Wildflower Guide";
     }
 }
@@ -28,6 +27,13 @@ a.glossary-jepson {
     color: inherit;
     border-bottom: 1px #cc6600 dotted;
 }
+dt {
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+dd {
+    margin-bottom: 0.5em;
+}
 .defn {
     border-top: 38px solid transparent;
     margin-top: -38px;
@@ -38,17 +44,10 @@ a.glossary-jepson {
 .defn:target {
     background-color: #ffc;
 }
-dt {
-    font-weight: bold;
-    margin-bottom: 0px;
-}
-dd {
-    margin-bottom: 0.5em;
-}
-
 div.shrink-box {
     display: inline-block;
     padding-right: 5px;
+    min-width: 100px;
 }
 div.box-color {
     padding: 5px;
@@ -58,10 +57,9 @@ div.box-color {
 }
 div.border-all-colors {
     background: repeating-linear-gradient(150deg, rgba(192,192,0,0.33), rgba(255,0,0,0.33), rgba(128,0,128,0.33), rgba(0,100,0,0.33), rgba(192,192,0,0.33) 20%);
-    padding: 5px;
 }
 div.bg-white {
-    padding: 5px;
+    padding: 5px; 
     background: rgba(255,255,255,0.7);
 }
 div.white {
@@ -105,19 +103,138 @@ div.pale-blue {
 }
 div.other {
     border: 5px solid darkgreen;
+}
+#title {
+    margin-top: 40px;
+}
+h1.nospace {
     margin-bottom: 0px;
+}
+div.toc-indent {
+    display: block;
+    margin-left: 25px;
+}
+p {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+p + ul {
+    margin-top: calc(-1em + 6px);
+}
+ul {
+    margin-top: 6px;
+}
+li + ul {
+    margin-top: 0px;
 }
 div.box {
     border: 1px solid #c8c8c8;
     padding: 0px 10px;
     margin: 10px 0px;
 }
+a.family:link, a.family:visited {
+    color: black;
+}
+a.unobs:link, a.unobs:visited {
+    color: black;
+}
+a.jepson:link, a.jepson:visited {
+    color: #cc6600; 
+}
+a.parent:link, a.parent:visited {
+    color: SaddleBrown;
+}
+a.leaf:link, a.leaf:visited {
+    color: DarkGreen;
+}
+a.missing:link, a.missing:visited {
+    color: red;
+}
+a.enclosed {
+    color: inherit;
+    text-decoration: none; 
+    border-bottom: none;   
+}
+span.toggle-details {
+    color: #888;
+    text-decoration: underline;
+}
+div#details {
+    display: none;
+}
+img.leaf-thumb {
+    height: 40vmin;
+    max-height: 200px;
+    width: auto;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    vertical-align: middle;
+}
+div.leaf-thumb-text {
+    box-sizing: border-box;
+    border: 1px solid black;
+    padding: 10px;
+    height: 40vmin;
+    max-height: 200px;
+    width: 40vmin;
+    max-width: 200px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+img.page-thumb {
+    height: 20vw;
+    max-height: 200px;
+    width: auto;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    vertical-align: middle;
+}
+div.page-thumb-text {
+    box-sizing: border-box;
+    border: 1px solid black;
+    padding: 10px;
+    height: 20vw;
+    max-height: 200px;
+    width: 20vw;
+    max-width: 200px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+img.list-thumb {
+    height: 15vw;
+    max-height: 100px;
+    width: auto;
+    margin-right: 10px;
+    margin-bottom: 0px;
+    vertical-align: middle;
+}
+div.list-thumb-text {
+    box-sizing: border-box;
+    border: 1px solid black;
+    padding: 10px;
+    height: 15vw;
+    max-height: 100px;
+    width: 15vw;
+    max-width: 100px;
+    margin-right: 10px;
+    margin-bottom: 0px;
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
 div.photo-box {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin-top: 0px;
-    margin-bottom: 10px;
 }
 div.list-box {
     display: flex;
@@ -126,13 +243,12 @@ div.list-box {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+div.flex-width {
+}
 span.show-narrow {
-    display: inline;
 }
 span.show-wide {
     display: none;
-}
-div.flex-width {
 }
 @media (min-width: 750px) {
     div.flex-width {
@@ -146,143 +262,13 @@ div.flex-width {
 	display: inline;
     }
 }
-img.leaf-thumb {
-    height: 40vw;
-    max-height: 200px;
-    width: auto;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    vertical-align: middle;
-}
-div.leaf-thumb-text {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid black;
-    padding: 10px;
-    width: calc(40vw - 22px);
-    height: calc(40vw - 22px);
-    max-width: 178px;
-    max-height: 178px;
-    margin-right: 10px;
-    margin-bottom: 0px;
-}
-img.page-thumb {
-    height: 20vw;
-    max-height: 200px;
-    width: auto;
-    margin-right: 10px;
-    margin-bottom: 0px;
-    vertical-align: middle;
-}
-div.page-thumb-text {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid black;
-    padding: 10px;
-    width: calc(20vw - 22px);
-    height: calc(20vw - 22px);
-    max-width: 178px;
-    max-height: 178px;
-    margin-right: 10px;
-    margin-bottom: 0px;
-}
-div.box.indent {
+div.indent {
     margin-left: 5vw;
 }
-div.list-box.indent {
-    margin-left: 5vw;
-}
-div.photo-box.indent {
-    margin-left: 5vw;
-}
-/* There's no "max-left" property that would let us limit the indent to
-   half the 200px max-width.  But we can get what we want by checking
-   whether 5vw is effectively greater than 50px. */
 @media (min-width: 1000px) {
-    div.box.indent {
+    div.indent {
 	margin-left: 50px;
     }
-    div.photo-box.indent {
-	margin-left: 50px;
-    }
-}
-@media (min-width: 600px) {
-    div#autocomplete-box {
-	margin-left: 1.7em;
-	font-size: 1.25em;
-    }
-}
-img.list-thumb {
-    height: 15vw;
-    max-height: 100px;
-    width: auto;
-    margin-right: 10px;
-    margin-bottom: 0px;
-    vertical-align: middle;
-}
-div.list-thumb-missing {
-    display: flex;
-    border: 1px solid black;
-    width: @calc(15vw - 2px);
-    height: @calc(15vw - 2px);
-    max-width: 98px;
-    max-height: 98px;
-}
-a.enclosed {
-    text-decoration: none; /* prevent underline for taxon links */
-    border-bottom: none;   /* prevent underline for glossary links */
-}
-a.external {
-}
-a.family:link {
-    color: black;
-}
-a.family:visited {
-    color: black;
-}
-a.unobs:link {
-    color: black;
-}
-a.unobs:visited {
-    color: black;
-}
-a.glossary:link {
-    color: black;
-}
-a.glossary:visited {
-    color: black;
-}
-a.jepson:link {
-    color: #cc6600;
-}
-a.jepson:visited {
-    color: #cc6600;
-}
-a.parent:link {
-    color: SaddleBrown;
-}
-a.parent:visited {
-    color: #8b1313;
-}
-a.leaf:link {
-    color: DarkGreen;
-}
-a.leaf:visited {
-    color: #4d6600;
-}
-a.missing {
-    color: red;
-}
-
-/* search field */
-div#search-bg {
-    position: fixed;
-    top: 0px;
-    width: 100%;
-    background-color: white;
-    height: 38px;
 }
 div#search-container {
     position: fixed;
@@ -290,60 +276,43 @@ div#search-container {
     left: 0.5em;
     right: 0.5em;
 }
+div#search-bg {
+    background-color: white;
+    box-shadow: 0px 0px 3px 3px white;
+}
 input#search {
+    box-sizing: border-box;
     width: 100%;
     font-size: 1.5em;
     border-radius: 0.4em;
+    border: 1px solid #DDDDDD;
     padding-left: 1.5em;
-    background-position: .2em 50%; 
+    background-position: .2em 50%;
     background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1.5em' height='1.5em' viewBox='0 0 100 100'><g><circle cx='37' cy='37' r='20' stroke='%23888' stroke-width='7' fill='none'/><path d='M52,52L83,83' stroke='%23888' stroke-width='7' stroke-linecap='round' fill='none'/></g></svg>");
     background-repeat: no-repeat;
 }
+input#search:focus {
+    border: 1px solid rgb(81, 203, 238);
+    box-shadow: 0px 0px 5px 0px rgb(81, 203, 238);
+    outline: auto 0px;
+}
 div#autocomplete-box {
-    border: 1px solid gray;
-    padding-top: -5px;
-    padding-left: 20px;
-    text-indent: -18px;
-    color: #666;
+    border: 1px solid #DDDDDD;
     background-color: white;
     display: none;
 }
+@media (min-width: 600px) {
+    div#autocomplete-box {
+	margin-left: 1.7em;
+	font-size: 1.25em;
+    }
+}
 p.nogap {
+    padding-left: 20px;
+    text-indent: -17px;
+    padding-right: 3px;
     margin: 0px;
 }
 span.match {
     background-color: #eee;
-}
-h1#title {
-    position: static;
-    padding-top: 1em;
-}
-h1.nospace {
-    margin-bottom: 0px;
-}
-
-/* observation details */
-span.toggle-details {
-    color: #888;
-    text-decoration: underline;
-}
-div#details {
-    display: none;
-}
-ul {
-    margin-top: 6px;
-}
-ul.list-sub {
-    margin-top: 0px;
-}
-p.list-head {
-    margin-bottom: 6px;
-}
-h4.title {
-    position: static;
-    padding-top: 1.5em;
-}
-div.toc-indent {
-    display: block;
-    margin-left: 25px;
 }

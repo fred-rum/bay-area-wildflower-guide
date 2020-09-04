@@ -7,8 +7,10 @@ function expose_ac() {
 }
 
 function hide_ac() {
-  e_autocomplete_box.style.display = 'none';
-  ac_is_hidden = true;
+  if (!ac_is_hidden) {
+    e_autocomplete_box.style.display = 'none';
+    ac_is_hidden = true;
+  }
 }
 
 function fn_focusin() {
@@ -19,14 +21,13 @@ function fn_focusin() {
 }
 
 function fn_focusout() {
-  if (!ac_is_hidden) {
-    hide_ac();
-  }
+  hide_ac();
 }
 
-function fn_search_box_focusout(event) {
-  if (event.target == this) {
-    fn_focusout()
+function fn_doc_click(event) {
+  var search_element = event.target.closest('#search-bg, #autocomplete-box');
+  if (!search_element) {
+    hide_ac();
   }
 }
 
@@ -38,7 +39,7 @@ function clear_search() {
   e_search_input.value = '';
   ac_list = [];
   ac_selected = 0;
-  fn_focusout();
+  hide_ac();
 }
 
 /* When comparing names, ignore all non-letter characters and ignore case. */
@@ -659,17 +660,18 @@ if (window.location.pathname.includes('/html/')) {
   var path = 'html/';
 }
 
-/* The 'body' div is everything on the page not associated with the search bar.
-   Thus, clicking somewhere other than the search bar or autocomplete box
-   causes the autocomplete box to be hidden. */
-var e_body = document.getElementById('body');
-
-e_body.insertAdjacentHTML('beforebegin', `
-<div id="search-bg"></div>
+/* Create the search-related HTML and insert it at the beginning of the
+   document.  I can't find a function to insert HTML directly into the
+   document, so we accomplish the same task a bit awkwardly by inserting
+   the HTML before the 'title' heading (which we know is present on every
+   page). */
+var e_title = document.getElementById('title');
+e_title.insertAdjacentHTML('beforebegin', `
 <div id="search-container">
+<div id="search-bg">
 <input type="text" id="search" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="search for a flower or glossary term...">
-<div id="autocomplete-box"></div>
 </div>
+<div id="autocomplete-box"></div>
 `);
 
 var e_search_input = document.getElementById('search');
@@ -677,12 +679,22 @@ e_search_input.addEventListener('input', fn_change);
 e_search_input.addEventListener('keydown', fn_keydown);
 e_search_input.addEventListener('focusin', fn_focusin);
 
-var e_search_box = document.getElementById('search-container');
-e_search_box.addEventListener('mousedown', fn_search_box_focusout, true);
-
-e_body.addEventListener('mousedown', fn_focusout);
-
 var e_autocomplete_box = document.getElementById('autocomplete-box');
+
+/* We want to trigger hide_ac whenever the user clicks somewhere that
+   **isn't** the search field or autocomplete box.  I used to create a
+   div containing everything except the search stuff, but the extra div
+   is inelegant, and it still leaves places to click around the edges of
+   the window that cause focus to be lost, but the div event isn't triggered.
+
+   So now I trigger an event for the entire document, then exclude the
+   search field and autocomplete box within the event handler.
+
+   'mousedown' triggers an event on the scrollbar, but it doesn't remove
+   focus from the search field.  That's awkward because I can't quickly
+   find a way to ignore that event.  But 'click' doesn't trigger on the
+   scrollbar, so that's what I use. */
+document.addEventListener('click', fn_doc_click);
 
 /* On Android Firefox, if the user clicks an autocomplete link to navigate
    away, then hits the back button to return to the page, the search field
