@@ -242,9 +242,9 @@ ryegrass's lists doesn't include 'other flowers' because it has
 exactly one child with color 'other'.  That is dumb, and it should be
 listed with color 'other' even if doesn't appear on the list page.
 
-Copy search.js from another directory, same as bawg.css.  To speed
-editing, allow a parameter to bawg.py to reference src/search.js and
-src/bawg.css directly.  (But what about index.html?)
+To speed Javascript or CSS editing, allow a parameter to bawg.py to
+reference src/search.js and src/bawg.css directly.  (But what about
+index.html?)
 
 
 Support searches for "help", "bawg", "bay area wildflower guilde",

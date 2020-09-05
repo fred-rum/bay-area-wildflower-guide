@@ -59,7 +59,7 @@ div.border-all-colors {
     background: repeating-linear-gradient(150deg, rgba(192,192,0,0.33), rgba(255,0,0,0.33), rgba(128,0,128,0.33), rgba(0,100,0,0.33), rgba(192,192,0,0.33) 20%);
 }
 div.bg-white {
-    padding: 5px; 
+    padding: 5px;
     background: rgba(255,255,255,0.7);
 }
 div.white {
@@ -139,7 +139,7 @@ a.unobs:link, a.unobs:visited {
     color: black;
 }
 a.jepson:link, a.jepson:visited {
-    color: #cc6600; 
+    color: #cc6600;
 }
 a.parent:link, a.parent:visited {
     color: SaddleBrown;
@@ -152,8 +152,8 @@ a.missing:link, a.missing:visited {
 }
 a.enclosed {
     color: inherit;
-    text-decoration: none; 
-    border-bottom: none;   
+    text-decoration: none;
+    border-bottom: none;
 }
 span.toggle-details {
     color: #888;

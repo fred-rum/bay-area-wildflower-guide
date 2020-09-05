@@ -43,14 +43,15 @@ import time
 from args import *
 from error import *
 from files import *
-from css import *
+from strip import *
 from easy import *
 from obs import *
 from page import *
 from photo import *
 from glossary import *
 
-copy_css()
+strip_comments('bawg.css')
+strip_comments('search.js')
 
 # Theoretically I could find all flower pages because their iNaturalist
 # observations include a subphylum of Angiospermae.  But there are a few

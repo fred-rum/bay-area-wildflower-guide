@@ -1,8 +1,8 @@
 # My files
 from files import *
 
-def copy_css():
-    with open(root_path + '/src/bawg.css', mode='r', encoding='utf-8') as r:
+def strip_comments(filename):
+    with open(root_path + '/src/' + filename, mode='r', encoding='utf-8') as r:
         txt = r.read()
 
     # Remove /* comments */, but not the /* Copyright ... */ comment.
@@ -11,10 +11,10 @@ def copy_css():
     # which means "everything except visible characters or line feeds or
     # carriage returns", which can be rephrased as "all white space
     # except line feeds and carriage returns".
-    txt = re.sub(r'/[^\S\r\n]*\*(?! Copyright).*?\*/[^\S\r\n]*', '', txt, flags=re.DOTALL)
+    txt = re.sub(r'/\*(?! Copyright).*?\*/', '', txt, flags=re.DOTALL)
 
-    # Collapse blank lines.
-    txt = re.sub(r'\n\n+', '\n', txt)
+    # Collapse blank lines and whitespace at the end of lines.
+    txt = re.sub(r'\s+\n', '\n', txt)
 
-    with open(root_path + '/bawg.css', mode='w', encoding='utf-8') as w:
+    with open(root_path + '/' + filename, mode='w', encoding='utf-8') as w:
         w.write(txt)
