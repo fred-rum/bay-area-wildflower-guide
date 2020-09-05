@@ -250,6 +250,4 @@ src/bawg.css directly.  (But what about index.html?)
 Support searches for "help", "bawg", "bay area wildflower guilde",
 "contact me".
 
-Fix photo sizes for cottonbatting plant.
-
 Change the cotyledons link to an [example] link.
