@@ -1123,7 +1123,7 @@ class Page:
                 if len(self.jpg_list) or len(self.ext_photo_list):
                     for jpg in self.jpg_list:
                         jpgurl = url(jpg)
-                        # There is no newline between jpgs because that would
+                        # Do not put newlines between jpgs because that would
                         # put an unwanted text space between them in addition
                         # to their desired margin.
                         w.write(f'<a href="../photos/{jpgurl}.jpg"><img src="../thumbs/{jpgurl}.jpg" alt="photo" width="200" height="200" class="leaf-thumb"></a>')

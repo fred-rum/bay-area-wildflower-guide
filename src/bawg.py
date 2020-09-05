@@ -307,7 +307,7 @@ for rank in ranks:
         if page.top_level == 'flowering plants':
             page.resolve_group(rank)
 
-            # Check for errors rather than in resolve_group() so that we
+            # Check for errors here rather than in resolve_group() so that we
             # only print one error at the top level of a hierarchy.
             if (rank == 'family' and
                 page.level in ('genus', 'species', 'below') and

@@ -185,47 +185,100 @@ I should also order them lower in pages.js.
 
 Make the hierarchy more generic to fit anyone's taxonomic priorities:
 
-Mark the flowering plants page ('list: hierarchy') to cause it to have
-its whole hierarchy listed.
+'is_top' marks a page as being the top of a hierarchy.  Any
+descendents of this page or pages that list this one as a higher-level
+group are considered part of its hierarchy, so they won't be assigned
+a hierarchy as per below.
 
-'list: children' marks a page to allow children to be added via group
+'default_ancestor' marks a page as being the top of a hierarchy, *and*
+any hierarchies that don't have an 'is_top' root are considered to be
+part of its hierarchy.  Only one page can be marked
+'default_ancestor'.  Does *not* imply 'is_top'.  E.g. flowering plants
+may be the 'default_ancestor' while being under vascular plants, etc.
+
+When checking ancestor properties, a page searches up through all
+parents and also through all resolved groups from observations.csv.
+In addition, a variety/subspecies is deemed to be a member of its
+species, and a species is deemed to be a member of its genus,
+regardless of observations.csv entries.
+
+'hierarchy: self' marks a page to have its whole hierarchy listed.
+Implies 'list: self' (below)?
+
+'list: self' marks a page to allow children to be added via group
 identification.  Otherwise, a group with incomplete children flags an
-error.
+error.  'list: <rank>' allows children to be added to all descendents
+that are the specified rank.
 
-Create pages for each flowering plant color with markers to borrow a
-subset of children of flowering plants.  The flowering plant txt
-includes manual links to the color pages (which are somehow outside
-the normal hierarchy?)
+'create: <rank>' allows descendents to be added at the specified rank,
+e.g. 'create: family'.  Pages are thus created automatically from
+observations.csv.  Implies 'list: <rank>'.  This may be the hardest
+property to handle in order to build a hierarchy in the correct order.
+Perhaps iterate through each rank from bottom to top.  For each top of
+hierarchy, check if it can and should create a page at the current
+rank, and then do so.  (can = has a resolved group; should = has an
+ancestor among resolved groups with the necessary 'create' property.)
+At the same time, add parent/child relationships based on 'create',
+'list', and 'hierarchy'.
 
-Mark the flowering plants page as the parent of all pages without
-parents (that aren't marked as top-level pages).  Obviously, only one
-page can be marked this way.
+'require: <rank>' requires descendents below the specified rank to
+have an ancestor at the specified rank, e.g. 'require: family'
+requires that all flowers have a family.  Often accompanies but does
+not require 'create: <rank>'.  If 'create: <rank>' is not specified,
+the appropriate hierarchy must be created by hand.
 
-Mark the flowering plants page so that all descendents are
-automatically assigned to a family from observations.csv (with an
-error printed if a family is not known).
+'complete: <rank>' requires that any descendent page of the specified
+rank must have as descendents all pages under that page's group.
+I.e. if a page is a member of a 'complete' page, it must be an
+explicit descendent.  Additionally, if at least two pages exist for a
+group of the specified rank, the page for the group must exist.
+E.g. 'complete: genus'
 
-Mark top-level pages in the pages' txt, not in the script code.
+'subset: color/<color>/<name> creates a page <name> with a hierarchical
+list of all descendents with color <color>.  These pages are outside
+the normal hierarchy.
 
-Mark the flowering plants page so that all descendents list themselves
-as "member of" a family.
+'membership: self' causes all descendents to list themselves as a
+member of the page.
 
-Mark the flowering plants page so that its entire descendent hierarchy
-is listed on its page, not only its direct descendents.  (This assumes
-that no children are listed manually, or it simply skips those
-sections of hierarchy.)
+'membership: <rank>' causes all descendents below the specified rank
+to list themselves as a member of their ancestor at the specified
+rank.
 
-Mark the flowering plants page as requiring a common name for all
-families.
-
-Include color pages (e.g. yellow flowers) in search.
-
-List color on flower pagse as "member of [color] flowers"?  (That gets
-awkward with multiple colors.)
+Suppress write_lists for hierarchy above genus, e.g. in flowering plants.
 
 
 Create a function to easily compare ranks beyond just genus/species.
 Flag an error for unknown ranks when the sci name is "[rank] [Name]".
+
+When specifying <rank> as part of a property, <rank> can be a range,
+e.g. 'genus-family'.  The range can be in either order,
+e.g. 'family-genus'.  Additional ranks/ranges can be specified,
+e.g. 'genus, species, subspecies'.  If a page doesn't have a rank
+(e.g. because it doesn't have a scientific name), it is considered
+part of a range if it has both a parent and a child within the range.
+
+<rank> can also be 'self', which refers to the marked page's rank.  If
+the marked page doesn't have an explicit rank (e.g. because it doesn't
+have a scientific name), it still marks itself, but only for
+properties that can be performed on a complete hierarchy
+(e.g. 'membership'), not properties that require group identification.
+
+
+Add manual links to the color pages from the flowering plants page.
+This implies that its txt is output.  However, when children are
+assigned to it, its hierarchy property prevents the children from
+being added to its txt.
+
+Include color pages (e.g. yellow flowers) in search.
+
+List color on flower pages as "member of [color] flowers"?  (That gets
+awkward with multiple colors.)
+
+ryegrass's lists doesn't include 'other flowers' because it has
+exactly one child with color 'other'.  That is dumb, and it should be
+listed with color 'other' even if doesn't appear on the list page.
+
 
 Format glossary ToC better so that it is clearly a part of the
 "Glossary table of contents", especially when "plant glossary" is the
@@ -234,13 +287,8 @@ current glossary and thus bold and not linked.
 Instead of using index numbers as temporary child IDs, use the
 scientific name (if available) or the common name.  These are
 guaranteed to find the correct page later unless there is an error
-elsewhere.
-
-Suppress write_lists for hierarchy above genus, e.g. in flowering plants.
-
-ryegrass's lists doesn't include 'other flowers' because it has
-exactly one child with color 'other'.  That is dumb, and it should be
-listed with color 'other' even if doesn't appear on the list page.
+elsewhere.  (Except that I might not know scientific names until
+later.  Hm.)
 
 To speed Javascript or CSS editing, allow a parameter to bawg.py to
 reference src/search.js and src/bawg.css directly.  (But what about
