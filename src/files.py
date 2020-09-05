@@ -123,7 +123,6 @@ def write_header(w, title, h1, nospace=False):
 </head>
 <body>
 ''')
-    w.write('<div id="body">\n')
     if h1:
         w.write(f'<h1 id="title"{space_class}>{h1}</h1>\n')
 
@@ -138,7 +137,6 @@ def write_footer(w):
     w.write(f'''<hr>
 <div class="footer">
 <span class="foot-left"><a class="home-link" href="../index.html"></a> <span class="foot-fade"> &copy; Chris Nelson</span></span><a class="foot-fade" href="../contact.html">Contact me</a>
-</div>
 </div>
 <script src="../pages.js"></script>
 <script src="../search.js"></script>

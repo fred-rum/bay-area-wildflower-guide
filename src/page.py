@@ -947,7 +947,7 @@ class Page:
             # can either be below the text link and next to the image or
             # below both the image and text link, depending on the width of
             # the viewport.
-            return f'<div class="flex-width"><div class="photo-box">{img}\n<span class="show-narrow">{link}</span></div><div><span class="show-wide">{link}</span>{text}</div></div>'
+            return f'<div class="flex-width"><div class="photo-box">{img}\n<span class="show-narrow">{link}</span></div><div class="key-text"><span class="show-wide">{link}</span>{text}</div></div>'
         else:
             return f'<div class="photo-box">{img}\n<span>{link}</span></div>'
 
@@ -1121,12 +1121,12 @@ class Page:
                 w.write('<hr>\n')
             else:
                 if len(self.jpg_list) or len(self.ext_photo_list):
-                    w.write('<div class="photo-box">\n')
-
                     for jpg in self.jpg_list:
                         jpgurl = url(jpg)
-                        w.write(f'<a href="../photos/{jpgurl}.jpg"><img src="../thumbs/{jpgurl}.jpg" alt="photo" width="200" height="200" class="leaf-thumb"></a>\n')
-
+                        # There is no newline between jpgs because that would
+                        # put an unwanted text space between them in addition
+                        # to their desired margin.
+                        w.write(f'<a href="../photos/{jpgurl}.jpg"><img src="../thumbs/{jpgurl}.jpg" alt="photo" width="200" height="200" class="leaf-thumb"></a>')
                     for (label, link) in self.ext_photo_list:
                         w.write(f'<a href="{link}" target="_blank" class="enclosed"><div class="leaf-thumb-text">')
                         if label:
@@ -1140,9 +1140,12 @@ class Page:
                         w.write(f'<span style="text-decoration:underline;">{text}</span>')
                         if label:
                             w.write(f'<br/>{label}</span>')
-                        w.write('</div></a>\n')
 
-                    w.write('</div>\n')
+                        # As with the jpgs above, there is no newline between
+                        # the external photo boxes.
+                        w.write('</div></a>')
+
+                    w.write('\n')
 
                 w.write(self.txt)
 

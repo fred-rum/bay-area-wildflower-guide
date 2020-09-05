@@ -29,10 +29,7 @@ def parse_txt(name, s, page, glossary):
         nonlocal c_list, p_start, child_start, child_idx, suffix, in_dl
 
         if p_start is not None:
-            if for_list:
-                p_tag = '<p class="list-head">'
-            else:
-                p_tag = '<p>'
+            p_tag = '<p>'
 
             # Join the paragraph back into a single string for convenience
             # of glossary linking.
@@ -120,14 +117,10 @@ def parse_txt(name, s, page, glossary):
         if new_list_depth > list_depth+1:
             error('Jump in list depth on page ' + name)
 
-        ul_open = ''
         while list_depth < new_list_depth:
             # Open <ul> tags as part of the current line processing.
             # Thus, these tags appear after the previous paragraph is ended.
-            if list_depth == 0:
-                ul_open += '<ul>\n'
-            else:
-                ul_open += '<ul class="list-sub">\n'
+            c_list.append('<ul>')
             list_depth += 1
         while list_depth > new_list_depth:
             # Close <ul> tags as if they'd be processed on a previous line.
@@ -140,11 +133,9 @@ def parse_txt(name, s, page, glossary):
         c = c[list_depth:].strip()
 
         if list_depth:
-            # The paragraph preceding a list requires a special paragraph tag.
-            # Thus, there is code at the bottom of the loop to specially
-            # handle (list_depth > 0) rather than using the simple non_p flag.
+            non_p = True
             c = glossary.link_glossary_words(name, c)
-            c = ul_open + '<li>' + c + '</li>'
+            c = '<li>' + c + '</li>'
 
         if page:
             # For taxon pages only, accumulate key text for a child page.
@@ -197,10 +188,8 @@ def parse_txt(name, s, page, glossary):
         if c == '':
             non_p = True
 
-        if list_depth:
-            end_paragraph(for_list=True)
-        elif non_p:
-            end_paragraph()
+        if non_p:
+            end_paragraph(list_depth > 0)
         elif p_start is None:
             p_start = len(c_list)
 

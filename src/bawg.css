@@ -257,9 +257,8 @@ ul {
     margin-top: 6px;
 }
 
-/* When bulleted lists are nested, we don't want any extra spacing.
-   The '+' operator here means we're styling a <ul> that follows an <li>. */
-li + ul {
+/* When bulleted lists are nested, we don't want any extra spacing. */
+ul ul {
     margin-top: 0px;
 }
 
@@ -422,17 +421,16 @@ div.leaf-thumb-text {
    to the right of the photo.  In this case, its height expands to the
    same size of leaf-thumb to provide a firm anchor for all that text.
 
-   Note that margin-bottom isn't ideal since it's embedded in a photo-box
-   div and never has any peer elements directly below it.  But since it's
-   next to a div with embedded text, and that text has a margin-bottom
-   that's hard to get rid of, we give a similar margin to the image so
-   that their relative centering is at least sort of correct. */
+   Unlike for leaf-thumb above, the page-thumb photo has no peers
+   below it within its container.  To get proper centering on its
+   line, we give it no margin-bottom and rely on its container to give
+   it the necessary bottom margin to later elements. */
 img.page-thumb {
     height: 20vw;
     max-height: 200px;
     width: auto;
     margin-right: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     vertical-align: middle;
 }
 /* page-thumb-text is related to page-thumb in the same way that
@@ -447,7 +445,7 @@ div.page-thumb-text {
     width: 20vw;
     max-width: 200px;
     margin-right: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     vertical-align: middle;
 
     display: inline-flex;
@@ -490,10 +488,10 @@ div.list-thumb-text {
     justify-content: center;
 }
 
-/* photo-box is used for
-   - a child link (photo + text on the same line, with or without key info)
-   - (consecutive) photo thumbnails for a leaf node [to be removed]
-   - (consecutive) figure thumbnails [to be removed]
+/* photo-box is used for a child link (photo + text on the same line, with
+   or without key info).  If there is key info, the div.photo-box is also
+   contained within a div.flex-width.  See the comments for flex-width for
+   details.
 
    display:flex provides a simple way to have items on the same line,
    vertically centered with respect to each other.
@@ -513,6 +511,7 @@ div.photo-box {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 /* list-box is used for hierarchical descendent listings, such as in
@@ -538,17 +537,24 @@ div.list-box {
    a time (depending on the screen width).
 
    For a narrow screen (the default), the outer flex-width container is
-   just a regular default div that puts the contained photo-box on a
-   separate line from the key.  The name is put in the photo-box container
-   with class show-narrow, which is visible in this case.  The name is
-   also put in a generic div with the key, but its show-wide class is hidden.
+   just a regular default div that puts the contained div.photo-box on a
+   separate line from the div.key-text.  The name is put in the photo-box
+   container with class show-narrow, which is visible in this case.  The
+   name is also put in div.key-text with the key, but its show-wide class
+   is hidden.
 
    For a wide screen (e.g. a desktop), the outer flex-width container is
    changed to a flex box so that its two divisions are placed side by side.
    The show-narrow name in the photo-box container is hidden in this case,
    so the left element is just the photo.  The show-wide name is shown, so
-   it appears above the key in the right element (a generic div). */
+   it appears above the key in the div.key-text element on the right.
+
+   For either arrangement of the div.flex-width, its descendents explicitly
+   don't have a bottom margin so that they can be correctly placed within
+   their containers.  Therefore, the div.flex-width must have a bottom
+   margin. */
 div.flex-width {
+    margin-bottom: 10px;
 }
 span.show-narrow {
 }
@@ -566,6 +572,21 @@ span.show-wide {
     span.show-wide {
 	display: inline;
     }
+}
+
+/* We remove unwanted bottom margins from elements within the div.flex-width
+   so that they get centered properly.  This includes:
+     - the div.photo-box (which is above the key if there is one, but is
+         the tallest element in the div.flex-width if there is no key).
+     - the last <p> or <ul> in div.key-text.
+
+   Note that the child's name is only in a <span>, not in a <p> tag, so it
+   doesn't have a bottom margin to worry about. */
+div.flex-width div.photo-box {
+    margin-bottom: 0px;
+}
+div.key-text :last-child {
+    margin-bottom: 0px;
 }
 
 /* The "indent" class is used with various flex containers such as box,

@@ -124,7 +124,7 @@ p + ul {
 ul {
     margin-top: 6px;
 }
-li + ul {
+ul ul {
     margin-top: 0px;
 }
 div.box {
@@ -190,7 +190,7 @@ img.page-thumb {
     max-height: 200px;
     width: auto;
     margin-right: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     vertical-align: middle;
 }
 div.page-thumb-text {
@@ -202,7 +202,7 @@ div.page-thumb-text {
     width: 20vw;
     max-width: 200px;
     margin-right: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     vertical-align: middle;
     display: inline-flex;
     align-items: center;
@@ -235,6 +235,7 @@ div.photo-box {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    margin-bottom: 10px;
 }
 div.list-box {
     display: flex;
@@ -244,6 +245,7 @@ div.list-box {
     margin-bottom: 10px;
 }
 div.flex-width {
+    margin-bottom: 10px;
 }
 span.show-narrow {
 }
@@ -261,6 +263,12 @@ span.show-wide {
     span.show-wide {
 	display: inline;
     }
+}
+div.flex-width div.photo-box {
+    margin-bottom: 0px;
+}
+div.key-text :last-child {
+    margin-bottom: 0px;
 }
 div.indent {
     margin-left: 5vw;
