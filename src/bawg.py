@@ -289,12 +289,13 @@ error_end_section()
 top_list = [x for x in page_array if not x.parent]
 
 for page in top_list:
-    if not page.find_property('is_top'):
+    result = page.find_property('is_top')
+    if not result:
 #        page.assign_group('subphylum', 'Angiospermae')
 #        page.resolve_group('subphylum')
         page.set_top_level('flowering plants', page.name)
     else:
-        page.set_top_level(page.name, page.name)
+        page.set_top_level(result[0]['page that sets property'].name, page.name)
 
 for page in top_list:
     if not page.top_level or page.name == 'flowering plants':

@@ -100,6 +100,7 @@ def sort_pages(page_set, color=None, with_depth=False):
 
 # Combine the second property rank result list into the first.
 def combine_result(result1, result2):
+    #print(f'combine {result1} with {result2}')
     idx1 = 0
     idx2 = 0
     for rank in ranks:
@@ -1024,10 +1025,12 @@ class Page:
             for rank in self.prop[prop]:
                 x = {}
                 x['page that sets property'] = self
-                x['rank at which property applies'] = rank
-                x['page that matches property'] = None
                 if rank == 'self':
+                    x['rank at which property applies'] = self.rank
                     x['page that matches property'] = self
+                else:
+                    x['rank at which property applies'] = rank
+                    x['page that matches property'] = None
                 result.append(x)
         for parent in self.parent:
             combine_result(result, parent.find_property(prop))

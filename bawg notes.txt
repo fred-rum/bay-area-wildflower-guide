@@ -325,3 +325,9 @@ index.html?)
 
 Support searches for "help", "bawg", "bay area wildflower guilde",
 "contact me".
+
+
+Make is_top property work for group-based hierarchy.
+
+Change rank property results to be dict based instead of list based.
+Use iteration on the results only when ordering is required.
