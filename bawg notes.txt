@@ -202,14 +202,6 @@ In addition, a variety/subspecies is deemed to be a member of its
 species, and a species is deemed to be a member of its genus,
 regardless of observations.csv entries.
 
-'hierarchy: self' marks a page to have its whole hierarchy listed.
-Implies 'list: self' (below)?
-
-'list: self' marks a page to allow children to be added via group
-identification.  Otherwise, a group with incomplete children flags an
-error.  'list: <rank>' allows children to be added to all descendents
-that are the specified rank.
-
 'create: <rank>' allows descendents to be added at the specified rank,
 e.g. 'create: family'.  Pages are thus created automatically from
 observations.csv.  Implies 'list: <rank>'.  This may be the hardest
@@ -220,6 +212,11 @@ rank, and then do so.  (can = has a resolved group; should = has an
 ancestor among resolved groups with the necessary 'create' property.)
 At the same time, add parent/child relationships based on 'create',
 'list', and 'hierarchy'.
+
+'list: self' marks a page to allow children to be added via group
+identification.  Otherwise, a group with incomplete children flags an
+error.  'list: <rank>' allows children to be added to all descendents
+that are the specified rank.
 
 'require: <rank>' requires descendents below the specified rank to
 have an ancestor at the specified rank, e.g. 'require: family'
@@ -234,16 +231,16 @@ explicit descendent.  Additionally, if at least two pages exist for a
 group of the specified rank, the page for the group must exist.
 E.g. 'complete: genus'
 
-'subset: color/<color>/<name> creates a page <name> with a hierarchical
-list of all descendents with color <color>.  These pages are outside
-the normal hierarchy.
+'hierarchy: self' marks a page to have its whole hierarchy listed.
+Implies 'list: self' (below)?  'hierarchy: <rank>' is less useful to
+me, but could perhaps be supported if easy.
 
 'membership: self' causes all descendents to list themselves as a
 member of the page.
 
 'membership: <rank>' causes all descendents below the specified rank
 to list themselves as a member of their ancestor at the specified
-rank.
+rank.  E.g. 'membership: family'.
 
 Suppress write_lists for hierarchy above genus, e.g. in flowering plants.
 
@@ -264,6 +261,37 @@ have a scientific name), it still marks itself, but only for
 properties that can be performed on a complete hierarchy
 (e.g. 'membership'), not properties that require group identification.
 
+Rank properties are searched from a page as follows:
+  - Recurse upwards through the hierarchy, including all choices of parent.
+  - If the property is found, return the specified rank range through the recursion.
+  - Any page that is in the rank range and any assigned group that is in the rank range is added to a list that is also returned.
+  - The final result is a list of names (of pages that don't exist) and/or pages (that do exist) and/or ranks that weren't found.
+  - E.g. [('genus', <Page>), ('tribe', None), ('family', 'Roseaceae')]
+  - The list is preferably in rank order.
+  - The list can include the page that specifies the property.
+  - The list can include the page that initiated the search.
+
+How the list is used:
+  - create is only searched for from a top of tree.
+    if the first page on the result list doesn't exist, it is created,
+      and the former top of tree is added as a child.
+    if the first page on the result list does exist, the former top of tree
+      is added as a child.
+  - list: as the last line above for create.
+  - require throws an error if any ranks weren't found
+  - complete does the the following:
+    if any page on the result list doesn't exist, we note its name in a set.
+      if its name was already put in the set by another page, throw an error.
+    if any page on the result list does exist, verify that it is an ancestor
+      in the hierarchy.
+    what should we do if no page is known for the indicated rank?
+  - hierarchy is applied if the page itself is in the list (first).
+  - membership lists the page as a member of all existing pages in the list.
+
+
+'subset: color/<color>/<name> creates a page <name> with a hierarchical
+list of all descendents with color <color>.  These pages are outside
+the normal hierarchy.
 
 Add manual links to the color pages from the flowering plants page.
 This implies that its txt is output.  However, when children are

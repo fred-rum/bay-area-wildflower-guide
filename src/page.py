@@ -98,6 +98,34 @@ def sort_pages(page_set, color=None, with_depth=False):
     page_list.sort(key=count_flowers, reverse=True)
     return page_list
 
+# Combine the second property rank result list into the first.
+def combine_result(result1, result2):
+    idx1 = 0
+    idx2 = 0
+    for rank in ranks:
+        if idx1 < len(result1):
+            x1 = result1[idx1]
+        else:
+            x1 = None
+
+        if idx2 < len(result2):
+            x2 = result2[idx2]
+        else:
+            x2 = None
+
+        if x2 and x2['rank at which property applies'] == rank:
+            if x1 and x1['rank at which property applies'] == rank:
+                if (x1['page that matches property'] is None or
+                    (isinstance(x1['page that matches property'], str) and
+                     isinstance(x2['page that matches property'], Page))):
+                    result1[idx1] = x2
+            else:
+                result1.insert(idx1, x2)
+            idx2 += 1
+            idx1 += 1 # result[idx1] is now x2, so also advance idx1
+        elif x1 and x1['rank at which property applies'] == rank:
+            idx1 += 1
+
 ###############################################################################
 
 class Page:
@@ -116,6 +144,9 @@ class Page:
         self.group = {} # taxonomic rank -> sci name or None if conflicting
         self.group_resolved = set() # taxonomic rank if group is resolved
         self.level = None # taxonomic level: above, genus, species, or below
+        self.rank = None # taxonomic rank (as above, but explicit above genus)
+
+        self.prop = {} # property -> rank set
 
         self.no_sci = False # true if it's a key page for unrelated species
 
@@ -207,15 +238,18 @@ class Page:
             error(f'Same scientific name ({sci}) set for {sci_page[sci].name} and {self.name}')
 
         if elab[0].islower():
+            elab_words = elab.split(' ')
+            self.rank = elab_words[0]
             self.level = 'above'
         else:
             sci_words = sci.split(' ')
             if len(sci_words) == 1:
-                self.level = 'genus'
+                self.rank = 'genus'
             elif len(sci_words) == 2:
-                self.level = 'species'
+                self.rank = 'species'
             else:
-                self.level = 'below'
+                self.rank = 'below'
+            self.level = self.rank
 
         self.sci = sci
         self.elab = elab
@@ -426,6 +460,14 @@ class Page:
                           repl_com, self.txt, flags=re.MULTILINE)
         self.txt = re.sub(r'^sci:\s*(.*?)\s*?\n',
                           repl_sci, self.txt, flags=re.MULTILINE)
+
+    def parse_properties(self):
+        def repl_is_top(matchobj):
+            self.prop['is_top'] = set(['self'])
+            return ''
+
+        self.txt = re.sub(r'^is_top\s*?\n',
+                          repl_is_top, self.txt, flags=re.MULTILINE)
 
     def parse_glossary(self):
         if re.search(r'^{([^-].*?)}', self.txt, flags=re.MULTILINE):
@@ -975,6 +1017,35 @@ class Page:
             s = self.key_txt
 
         self.txt = parse2_txt(self.name, s, self.glossary)
+
+    def find_property(self, prop):
+        result = []
+        if prop in self.prop:
+            for rank in self.prop[prop]:
+                x = {}
+                x['page that sets property'] = self
+                x['rank at which property applies'] = rank
+                x['page that matches property'] = None
+                if rank == 'self':
+                    x['page that matches property'] = self
+                result.append(x)
+        for parent in self.parent:
+            combine_result(result, parent.find_property(prop))
+        for rank in self.group:
+            page = find_page2(None, self.group[rank])
+            if page and page != self:
+                combine_result(result, page.find_property(prop))
+        for rank in self.group:
+            page = find_page2(None, self.group[rank])
+            if not page:
+                for x in result:
+                    if (x['rank at which property applies'] == rank and
+                        x['page that matches property'] is None):
+                        x['page that matches property'] = self.group[rank]
+        for x in result:
+            if self.rank == x['rank at which property applies']:
+                x['page that matches property'] = self # page
+        return result
 
     def any_parent_within_level(self, within_level_list):
         for parent in self.parent:

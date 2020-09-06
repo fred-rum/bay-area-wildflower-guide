@@ -53,14 +53,6 @@ from glossary import *
 strip_comments('bawg.css')
 strip_comments('search.js')
 
-# Theoretically I could find all flower pages because their iNaturalist
-# observations include a subphylum of Angiospermae.  But there are a few
-# flower pagse that aren't (yet) included in observations.csv, and I
-# don't want them to float to the top.  So instead, I explicitly name
-# the non-flower top pages, and assume that everything not in those
-# hierarchies is a flower.
-non_flower_top_pages = ('flowering plants', 'conifers', 'ferns', 'insects')
-
 year = datetime.datetime.today().year
 
 shutil.rmtree(working_path, ignore_errors=True)
@@ -101,6 +93,7 @@ for name in txt_files:
         page.txt = r.read()
     page.remove_comments()
     page.parse_names()
+    page.parse_properties()
     page.parse_glossary()
 
 # parse_children() can add new pages, so we make a copy of the list to
@@ -295,8 +288,13 @@ error_end_section()
 # Get a list of pages without parents (top-level pages).
 top_list = [x for x in page_array if not x.parent]
 
-for name in non_flower_top_pages:
-    name_page[name].set_top_level(name, name)
+for page in top_list:
+    if not page.find_property('is_top'):
+#        page.assign_group('subphylum', 'Angiospermae')
+#        page.resolve_group('subphylum')
+        page.set_top_level('flowering plants', page.name)
+    else:
+        page.set_top_level(page.name, page.name)
 
 for page in top_list:
     if not page.top_level or page.name == 'flowering plants':

@@ -1,4 +1,5 @@
 sci:class Polypodiopsida
+is_top
 
 ==shield ferns
 . 1--2-pinnate

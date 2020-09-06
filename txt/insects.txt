@@ -1,4 +1,5 @@
 sci:class Insecta
+is_top
 
 ==gall wasps
 
