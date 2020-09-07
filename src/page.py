@@ -99,33 +99,10 @@ def sort_pages(page_set, color=None, with_depth=False):
     return page_list
 
 # Combine the second property rank result list into the first.
-def combine_result(result1, result2):
-    #print(f'combine {result1} with {result2}')
-    idx1 = 0
-    idx2 = 0
-    for rank in ranks:
-        if idx1 < len(result1):
-            x1 = result1[idx1]
-        else:
-            x1 = None
-
-        if idx2 < len(result2):
-            x2 = result2[idx2]
-        else:
-            x2 = None
-
-        if x2 and x2['rank at which property applies'] == rank:
-            if x1 and x1['rank at which property applies'] == rank:
-                if (x1['page that matches property'] is None or
-                    (isinstance(x1['page that matches property'], str) and
-                     isinstance(x2['page that matches property'], Page))):
-                    result1[idx1] = x2
-            else:
-                result1.insert(idx1, x2)
-            idx2 += 1
-            idx1 += 1 # result[idx1] is now x2, so also advance idx1
-        elif x1 and x1['rank at which property applies'] == rank:
-            idx1 += 1
+def combine_result(result, result2):
+    for rank in result2:
+        if not rank in result:
+            result[rank] = result2[rank]
 
 ###############################################################################
 
@@ -1020,34 +997,71 @@ class Page:
         self.txt = parse2_txt(self.name, s, self.glossary)
 
     def find_property(self, prop):
-        result = []
+        result = {}
         if prop in self.prop:
+            # Record information for each rank specified by the property.
             for rank in self.prop[prop]:
+                # x is the result for the current rank.
                 x = {}
-                x['page that sets property'] = self
+
+                # x['prop'] indicates the page that had the property set.
+                x['prop'] = self
+
+                # x['top'] lists the top page of the existing hierarchy.
+                # If the result is obtained through a search on a group
+                # ancestor, x['top'] will be changed when the search returns.
+                x['top'] = self
+
+                # x['match'] indicates
+                #   - a page at the current rank,
+                #   - the name of a group at the current rank,
+                #   - None if no page or group is yet found at the current rank.
                 if rank == 'self':
-                    x['rank at which property applies'] = self.rank
-                    x['page that matches property'] = self
+                    x['match'] = self
+                    result[self.rank] = x
                 else:
-                    x['rank at which property applies'] = rank
-                    x['page that matches property'] = None
-                result.append(x)
+                    x['match'] = None
+                    result[rank] = x
+
+        # Search the existing hierarchy of ancestors.
         for parent in self.parent:
-            combine_result(result, parent.find_property(prop))
+            result2 = parent.find_property(prop)
+            combine_result(result, result2)
+
+        # Search pages that might not be in the existing hierarchy,
+        # but which can be found as an ancestor group.
         for rank in self.group:
             page = find_page2(None, self.group[rank])
             if page and page != self:
-                combine_result(result, page.find_property(prop))
+                result2 = page.find_property(prop)
+
+                # Since the search was made outside the existing heirarchy,
+                # reset the top of hierarchy for each rank in the search
+                # results.
+                #
+                # In many cases, this search is duplicating the
+                # previous search within the existing hierarchy.
+                # combine_result() will give priority to the previous
+                # search result, and thus will retain a higher x['top'].
+                for rank2 in result2:
+                    x = result2[rank2]
+                    x['top'] = self
+
+                combine_result(result, result2)
+
+        # If the current page is a matching rank, record it as a match.
+        if self.rank in result:
+            x = result[self.rank]
+            x['match'] = self
+
+        # If a group is known for which a page doesn't exist, record the
+        # name of the group as a match (e.g. for potential page creation).
         for rank in self.group:
-            page = find_page2(None, self.group[rank])
-            if not page:
-                for x in result:
-                    if (x['rank at which property applies'] == rank and
-                        x['page that matches property'] is None):
-                        x['page that matches property'] = self.group[rank]
-        for x in result:
-            if self.rank == x['rank at which property applies']:
-                x['page that matches property'] = self # page
+            if rank in result:
+                x = result[rank]
+                if not x['match']:
+                    x['match'] = self.group[rank]
+
         return result
 
     def any_parent_within_level(self, within_level_list):

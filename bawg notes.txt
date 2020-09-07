@@ -272,20 +272,25 @@ Rank properties are searched from a page as follows:
   - The list can include the page that initiated the search.
 
 How the list is used:
-  - create is only searched for from a top of tree.
-    if the first page on the result list doesn't exist, it is created,
-      and the former top of tree is added as a child.
-    if the first page on the result list does exist, the former top of tree
-      is added as a child.
-  - list: as the last line above for create.
-  - require throws an error if any ranks weren't found
-  - complete does the the following:
-    if any page on the result list doesn't exist, we note its name in a set.
-      if its name was already put in the set by another page, throw an error.
-    if any page on the result list does exist, verify that it is an ancestor
-      in the hierarchy.
+  - create:
+    if the lowest-ranked page on the result list doesn't exist, it is created,
+      and the top page of the existing hierarchy is added as a child.
+    if the lowest-ranked page on the result list does exist,
+      the top page of the existing hierarchy is added as a child
+      (if it isn't the same page).
+  - list: as the last sentence above for create.
+  - require: throw an error if any ranks weren't found
+  - complete:
+    if any page on the result list doesn't exist, we note its name
+      associated with the top page of the existing hierarchy below it.
+      if its name was already associated with a different page, throw an error.
+    if any page on the result list does exist, verify that it is the top page
+      of the existing hierarchy.
     what should we do if no page is known for the indicated rank?
-  - hierarchy is applied if the page itself is in the list (first).
+      throw an error seems best.  the text should at least declare the
+      rank that is being completed by a lower group, even if there is no such
+      page.
+  - hierarchy: apply if the page itself is in the list (lowest ranked).
   - membership lists the page as a member of all existing pages in the list.
 
 

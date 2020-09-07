@@ -290,12 +290,14 @@ top_list = [x for x in page_array if not x.parent]
 
 for page in top_list:
     result = page.find_property('is_top')
-    if not result:
+    if result:
+        for rank in result:
+            x = result[rank]
+            page.set_top_level(x['match'].name, x['top'].name)
+    else:
 #        page.assign_group('subphylum', 'Angiospermae')
 #        page.resolve_group('subphylum')
         page.set_top_level('flowering plants', page.name)
-    else:
-        page.set_top_level(result[0]['page that sets property'].name, page.name)
 
 for page in top_list:
     if not page.top_level or page.name == 'flowering plants':
