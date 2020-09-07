@@ -1,2 +1,3 @@
 sci:subphylum Angiospermae
 is_top
+default_ancestor

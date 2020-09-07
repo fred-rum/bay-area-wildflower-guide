@@ -336,3 +336,6 @@ Make is_top property work for group-based hierarchy.
 
 Change rank property results to be dict based instead of list based.
 Use iteration on the results only when ordering is required.
+
+A subgenius eludes my script's ability to recognize.  Add 'genus' to
+the exported taxon list to help resolve it.

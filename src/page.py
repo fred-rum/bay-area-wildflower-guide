@@ -17,6 +17,10 @@ page_array = [] # array of pages; only appended to; never otherwise altered
 genus_page_list = {} # genus name -> list of pages in that genus
 genus_family = {} # genus name -> family name
 
+# The default_ancestor page can apply properties to any pages that otherwise
+# can't find an ancestor with 'is_top' declared.
+default_ancestor = None
+
 # Define a list of supported colors.
 color_list = ['blue',
               'purple',
@@ -55,6 +59,9 @@ for sci, com in family_com.items():
     family_sci[com] = sci
 
 ###############################################################################
+
+def get_default_ancestor():
+    return default_ancestor
 
 def sort_pages(page_set, color=None, with_depth=False):
     # helper function to sort by name
@@ -444,8 +451,18 @@ class Page:
             self.prop['is_top'] = set(['self'])
             return ''
 
+        def repl_default_ancestor(matchobj):
+            global default_ancestor
+            if isinstance(default_ancestor, Page):
+                error(f'default_ancestor specified for both {default_ancestor.name} and {self.name}')
+            else:
+                default_ancestor = self
+
         self.txt = re.sub(r'^is_top\s*?\n',
                           repl_is_top, self.txt, flags=re.MULTILINE)
+
+        self.txt = re.sub(r'^default_ancestor\s*?\n',
+                          repl_default_ancestor, self.txt, flags=re.MULTILINE)
 
     def parse_glossary(self):
         if re.search(r'^{([^-].*?)}', self.txt, flags=re.MULTILINE):

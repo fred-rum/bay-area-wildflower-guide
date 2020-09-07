@@ -288,6 +288,7 @@ error_end_section()
 # Get a list of pages without parents (top-level pages).
 top_list = [x for x in page_array if not x.parent]
 
+default_ancestor = get_default_ancestor()
 for page in top_list:
     result = page.find_property('is_top')
     if result:
@@ -295,13 +296,8 @@ for page in top_list:
             x = result[rank]
             page.set_top_level(x['match'].name, x['top'].name)
     else:
-#        page.assign_group('subphylum', 'Angiospermae')
-#        page.resolve_group('subphylum')
-        page.set_top_level('flowering plants', page.name)
-
-for page in top_list:
-    if not page.top_level or page.name == 'flowering plants':
-        page.set_top_level('flowering plants', page.name)
+        page.assign_group(default_ancestor.rank, default_ancestor.sci)
+        page.set_top_level(default_ancestor.name, page.name)
 
 for rank in ranks:
     for page in top_list:
