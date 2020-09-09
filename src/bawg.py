@@ -300,50 +300,78 @@ for page in top_list:
         page.set_top_level(default_ancestor.name, page.name)
 
 for rank in ranks:
-    for page in top_list:
-        if page.top_level == 'flowering plants':
+    for page in page_array:
+        if not page.parent:
             page.resolve_group(rank)
 
-            # Check for errors here rather than in resolve_group() so that we
-            # only print one error at the top level of a hierarchy.
-            if (rank == 'family' and
-                page.level in ('genus', 'species', 'below') and
-                'family' not in page.group):
-                error(f'No family found for {page.name}')
+    # Figure out which group pages should be created and/or linked.
+    # We don't actually perform the work yet because we want to accumulate
+    # and then perform the changes with a properly sorted child list.
+    #
+    # During this process, many descendents will attempt to create the same
+    # entries in the link dict or in a group's set, but the dict/set
+    # automatically removes duplicates.
+    link = {} # page or page name -> set of child pages
+    for page in page_array:
+        result = page.find_property('create')
+        if rank in result:
+            x = result[rank]
+            group = x['match']
+            child = x['top']
+            if group is not None and group != child:
+                if group not in link:
+                    link[group] = set()
+                link[group].add(child)
 
-    for group, child_set in group_child_set[rank].items():
-        if com == 'n/a':
-            page = find_page2(None, group)
-        else:
-            page = find_page2(com, group)
+        result = page.find_property('link')
+        if rank in result:
+            x = result[rank]
+            group = x['match']
+            child = x['top']
+            if group is not None and isinstance(group, Page) and group != child:
+                if group not in link:
+                    link[group] = set()
+                link[group].add(child)
 
-        if not page:
-            if rank == 'family':
-                if group in family_com:
-                    com = family_com[group]
-                else:
-                    error(f'No common name for {rank} {group}')
-                    com = 'n/a' # family names.yaml uses 'n/a' when there is no com name
-
-                if com == 'n/a':
-                    page = Page(group)
-                else:
-                    page = Page(com)
-
-                page.set_sci(f'{rank} {group}')
-
-                page.top_level = 'flowering plants'
+    for group, child_set in link.items():
+        if isinstance(group, str):
+            if group in family_com:
+                com = family_com[group]
             else:
-                # If there's no page for a non-family rank, don't create a
-                # page for it, and don't do anything else, either.
-                continue
+                error(f'No common name for {rank} {group}')
+                com = 'n/a' # family names.yaml uses 'n/a' when there is no com name
+
+            if com == 'n/a':
+                parent = Page(group)
+            else:
+                parent = Page(com)
+
+            parent.set_sci(f'{rank} {group}')
+            parent.top_level = 'flowering plants'
+        else:
+            # If the recorded group isn't the name of a page to be created,
+            # then it is a page that already exists.
+            parent = group
 
         for child in sort_pages(child_set):
-            if child not in page.child:
-                page.txt += f'=={child.index}\n'
-                page.assign_child(child)
+            parent.txt += f'=={child.index}\n'
+            parent.assign_child(child)
 
-    top_list = [x for x in page_array if not x.parent]
+        # Now that the page exists, it needs to know what groups it
+        # is in.  We can't just call resolve_group() on all ranks
+        # because it would end up with all of the groups of its only
+        # child, even the ones that are lower ranked.  Fortunately,
+        # the new page has a known rank, so we can simply exclude
+        # all groups up to and including that rank.   We include
+        # only groups of a higher rank, which are guaranteed valid.
+        found_higher_rank = False
+        for rank1 in ranks:
+            if found_higher_rank:
+                parent.resolve_group(rank1)
+            if rank1 == parent.rank:
+                found_higher_rank = True
+
+top_list = [x for x in page_array if not x.parent]
 
 for page in page_array:
     if not (page.sci or page.no_sci):
