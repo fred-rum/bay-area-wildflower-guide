@@ -8,15 +8,14 @@ while len(sys.argv):
     if sys.argv[0] in ('-jepson_usage',
                        '-incomplete_keys',
                        '-no_error_limit',
-                       '-not_top_usage'):
-        _arg_value[sys.argv[0]] = True
+                       '-not_top_usage',
+                       '-linn'):
+        _arg_value[sys.argv.pop(0)] = True
     elif sys.argv[0] == '-db':
-        _arg_value[sys.argv[0]] = sys.argv.pop(1)
+        _arg_value[sys.argv.pop(0)] = sys.argv.pop(1)
     else:
         print(f'Argument not recognized: {sys.argv[0]}', file=sys.stderr)
         sys.exit(-1)
-
-    sys.argv.pop(0)
 
 def arg(name):
     if name in _arg_value:

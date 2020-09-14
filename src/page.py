@@ -672,8 +672,56 @@ class Page:
                     child.link_linn_descendants(linn_parent, exclude_set)
 
     def link_linn_child(self, child):
+        if child in self.linn_child:
+            # Commonly we'll already know the parent-child relationship.
+            # In that case, bail out as quickly as possible.
+            return
+
         if self.rank <= child.rank:
             fatal(f'bad rank order when adding {child.name} (rank {child.rank.name}) as a child of {self.name} (rank {self.rank.name})')
+
+        if child.linn_parent == None:
+            # The child node was the top of its Linnaean tree.  Now we know
+            # its Linnaean parent.
+            child.linn_parent = self
+            self.linn_child.add(child)
+            return
+
+        # The new link attempts to establish a different parent than the
+        # child previously had.  Check whether the new parent or old
+        # parent has the lower rank, and react accordingly.
+        if self.rank < child.linn_parent.rank:
+            # The new parent fills a gap between the child and its
+            # previous parent.
+
+            ancestor = child.linn_parent
+
+            # Remove the previous link between the child and what we now
+            # consider to be a more distant ancestor.  Normally when
+            # removing a link, we'd also clear child.linn_parent, but
+            # we're about to overwrite that below, anyway.  So all we have
+            # to do here is remove the direct link from the ancestor to the
+            # child.
+            ancestor.linn_child.remove(child)
+
+            # Add the link from the child to its new parent.
+            child.linn_parent = self
+            self.linn_child.add(child)
+
+            # Also add a link from the parent to the higher-ranked ancestor.
+            ancestor.link_linn_child(self)
+        else:
+            # The child's current parent has a rank lower than the new parent
+            # that we're trying to link.  That means that the new parent
+            # is really an ancestor at a higher level.  It's likely that
+            # the attempted new parent is already linked higher in the
+            # tree, but let's make sure.
+            #
+            # Note that we'll also fall through to this code if the child's
+            # current parent has the *same* rank as the new parent.  Since
+            # we already checked that the parents are not the same, that's
+            # a problem, but it'll get caught when we make the recursive call.
+            self.link_linn_child(child.linn_parent)
 
     def assign_child(self, child):
         if self in child.parent:
@@ -691,6 +739,20 @@ class Page:
 
         self.child.append(child)
         child.parent.add(self)
+
+    def print_linn_tree(self, level=0):
+        if self.shadow:
+            s = '-'
+        else:
+            s = '+'
+        if self.rank:
+            r = self.rank.name
+        else:
+            r = 'unranked'
+        print(f'{"  "*level}{s}{self.name} ({r})')
+
+        for child in self.linn_child:
+            child.print_linn_tree(level+1)
 
     def expand_genus(self, sci):
         if (self.cur_genus and len(sci) >= 3 and

@@ -104,6 +104,11 @@ for name in txt_files:
 for page in page_array[:]:
     page.parse_children()
 
+if arg('-linn'):
+    for page in page_array:
+        if not page.linn_parent:
+            page.print_linn_tree()
+
 assign_jpgs()
 
 # Although other color checks are done later, we check for excess colors
