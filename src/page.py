@@ -6,6 +6,7 @@ import io
 from error import *
 from files import *
 from find_page import *
+from rank import *
 from obs import *
 from easy import *
 from glossary import *
@@ -36,19 +37,12 @@ color_list = ['blue',
               'cream',
               'other']
 
-ranks = ('subtribe', 'tribe', 'supertribe',
-         'subfamily', 'family', 'superfamily',
-         'suborder', 'order', 'superorder',
-         'subclass', 'class', 'superclass',
-         'subphylum', 'phylum',
-         'kingdom')
-
-trie = Trie(ranks)
+trie = Trie([x.name for x in Rank])
 ex = trie.get_pattern()
 re_group = re.compile(rf'({ex}):\s*(.*?)\s*$')
 
 group_child_set = {} # rank -> group -> set of top-level pages in group
-for rank in ranks:
+for rank in Rank:
     group_child_set[rank] = {}
 
 with open(root_path + '/data/family names.yaml', encoding='utf-8') as f:
@@ -120,7 +114,14 @@ def split_strip(txt, c):
 class Page:
     pass
 
-    def __init__(self, name):
+    def __init__(self, name, shadow=False):
+        # shadow=False indicates a 'real' page that will be output to HTML.
+        #
+        # shadow=True indicates a 'shadow' page that is not (yet) planned
+        # to be output to HTML; it maintains a node in the Linnaean tree
+        # that does not correspond to a real page.
+        self.shadow = shadow
+
         self.set_name(name)
         self.name_from_txt = False # True if the name came from a txt filename
 
@@ -172,9 +173,16 @@ class Page:
         self.key_txt = ''
         self.jpg_list = [] # an ordered list of jpg names
 
-        self.parent = set() # an unordered set of parent pages
-        self.child = [] # an ordered list of child pages
-        self.key = False # true if the page has child pages or CalFlora links
+        # parent and child construct one or more directed acyclic graphs (DAGs)
+        # of the real pages to be output to HTML.
+        self.parent = set() # an unordered set of real parent pages
+        self.child = [] # an ordered list of real child pages
+
+        # linn_parent and linn_child construct a tree corresponding to
+        # the Linnaean taxonomic hierarchy.  Pages in this tree may be
+        # real or shadow.
+        self.linn_parent = None # the Linnaean parent (if known)
+        self.linn_child = set() # an unordered set of Linnaean children
 
         # A set of color names that the page is linked from.
         # (Initially this is just the flower colors,
@@ -228,17 +236,21 @@ class Page:
 
         if elab[0].islower():
             elab_words = elab.split(' ')
-            self.rank = elab_words[0]
+            if elab_words[0] in Rank.__members__:
+                self.rank = Rank[elab_words[0]]
+            else:
+                error(f'Unrecognized rank for {elab}')
+                self.rank = None
             self.level = 'above'
         else:
             sci_words = sci.split(' ')
             if len(sci_words) == 1:
-                self.rank = 'genus'
+                self.rank = Rank.genus
             elif len(sci_words) == 2:
-                self.rank = 'species'
+                self.rank = Rank.species
             else:
-                self.rank = 'below'
-            self.level = self.rank
+                self.rank = Rank.below
+            self.level = self.rank.name
 
         self.sci = sci
         self.elab = elab
@@ -456,14 +468,10 @@ class Page:
     def canonical_rank(self, rank):
         if rank == 'self':
             return self.rank
-        elif rank == 'below':
-            return ranks[0]
-        elif rank == 'above':
-            return ranks[-1]
         else:
-            if rank not in ranks:
+            if rank not in Rank.__members__:
                 error(f'unrecognized rank "{rank}" used in {self.name}')
-            return rank
+            return Rank[rank]
 
     def parse_properties(self):
         def repl_is_top(matchobj):
@@ -494,7 +502,7 @@ class Page:
                     # to figure out ahead of time whether rank1 or rank2 is
                     # the higher rank.
                     in_range = False
-                    for rank in ranks:
+                    for rank in Rank:
                         if in_range or rank in (rank1, rank2):
                             rank_set.add(rank)
                         if rank in (rank1, rank2):
@@ -503,7 +511,11 @@ class Page:
                     # Not a range, just a rank.
                     # For this case, 'self' is retained in case the current
                     # page does not have a rank.
-                    rank_set.add(rank_range)
+                    rank = rank_range
+                    if rank == 'self':
+                        rank_set.add(rank)
+                    else:
+                        rank_set.add(self.canonical_rank(rank))
                         
             self.prop[prop] = rank_set
 
@@ -598,7 +610,6 @@ class Page:
         else:
             self.child.append(child)
             child.parent.add(self)
-            self.key = True
 
     def expand_genus(self, sci):
         if (self.cur_genus and len(sci) >= 3 and
@@ -733,7 +744,7 @@ class Page:
 
             matchobj = re_group.match(c)
             if matchobj:
-                data_object.assign_group(matchobj.group(1), matchobj.group(2))
+                data_object.assign_group(Rank[matchobj.group(1)], matchobj.group(2))
                 continue
 
             if c in ('', '[', ']'):
@@ -745,7 +756,7 @@ class Page:
     def link_style(self):
         if self.autopopulated:
             return 'family'
-        elif self.key:
+        elif self.child:
             return 'parent'
         elif self.jpg_list:
             return 'leaf'
@@ -1109,7 +1120,7 @@ class Page:
 
         # Search pages that might not be in the existing hierarchy,
         # but which can be found as an ancestor group.
-        for rank in ranks:
+        for rank in Rank:
           if rank in self.group:
             # group[rank] is None when no group was found due to conflicts.
             if self.group[rank]:
@@ -1266,8 +1277,8 @@ class Page:
             # a link to it.  (A direct child would have been listed above
             # or will be listed further below.)  Note that the family page
             # is likely to have been autopopulated, but not necessarily.
-            if 'family' in self.group and self.group['family']:
-                family = self.group['family']
+            if Rank.family in self.group and self.group[Rank.family]:
+                family = self.group[Rank.family]
                 family_page = sci_page[family]
 
                 if family_page not in self.parent:

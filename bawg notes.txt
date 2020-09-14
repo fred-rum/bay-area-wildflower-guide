@@ -419,7 +419,10 @@ the 'data' directory look innocuous, so their usage doesn't need to
 change.  Perhaps I'll get some warnings about observed flowers not
 having pages that I'll have to disable.
 
-The taxon tree (shadow hierarchy) is maintained using regular pages
+--
+Linnaean Tree
+
+The Linnaean tree (shadow hierarchy) is maintained using regular pages
 that aren't necessarily output to HTML.  If a page exists purely for
 the shadow hierarchy, it is not included in page_array, which keeps it
 out of scans of "all pages".  The taxon tree relationship is
@@ -682,38 +685,3 @@ of scientific names that it satisfies the requirements for.  And
 perhaps that list of names can be included as the "scientific name" on
 the page (although only one would be included in links), and all of
 its names can be included in pages.js.
-
-
-Ranks:
-
-from enum import Enum
-
-# OrderedEnum allows <, > comparisons without the drawbacks of IntEnum.
-# (E.g. IntEnum might unexpectedly use an integer value instead of a name.)
-# Copied from https://docs.python.org/3/library/enum.html
-class OrderedEnum(Enum):
-    def __ge__(self, other):
-        if self.__class__ is other.__class__:
-            return self.value >= other.value
-        return NotImplemented
-    def __gt__(self, other):
-        if self.__class__ is other.__class__:
-            return self.value > other.value
-        return NotImplemented
-    def __le__(self, other):
-        if self.__class__ is other.__class__:
-            return self.value <= other.value
-        return NotImplemented
-    def __lt__(self, other):
-        if self.__class__ is other.__class__:
-            return self.value < other.value
-        return NotImplemented
-
-class Rank(OrderedEnum):
-    below = auto()
-    ...
-
-page.rank = Rank[rank_str]
-print(page.rank.name)
-if rank in page.prop_rank and rank < Rank.family:
-    ...

@@ -163,8 +163,11 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
     rg_idx = header_row.index('quality_grade')
     taxon_idx = header_row.index('taxon_id')
     group_idx = {}
-    for rank in ranks:
-        group_idx[rank] = header_row.index(f'taxon_{rank}_name')
+    for rank in Rank:
+        try:
+            group_idx[rank] = header_row.index(f'taxon_{rank.name}_name')
+        except ValueError:
+            pass # No such column
     phylum_idx = header_row.index('taxon_phylum_name')
     place_idx = header_row.index('place_guess')
     private_place_idx = header_row.index('private_place_guess')
@@ -238,11 +241,12 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
                     #error(f"iNaturalist's common name {com} differs from mine: {page.com} ({page.elab})")
             if com and not page.com:
                 error(f"iNaturalist supplies a missing common name for {com} ({page.elab})")
-            for rank in ranks:
-                group = row[group_idx[rank]]
-                subphylum = row[group_idx['subphylum']]
-                if group and subphylum == 'Angiospermae':
-                    page.assign_group(rank, group)
+            for rank in Rank:
+                if rank in group_idx:
+                    group = row[group_idx[rank]]
+                    subphylum = row[group_idx[Rank.subphylum]]
+                    if group and subphylum == 'Angiospermae':
+                        page.assign_group(rank, group)
 
         if loc != 'bay area':
             if page:
@@ -299,7 +303,7 @@ for page in top_list:
         page.assign_group(default_ancestor.rank, default_ancestor.sci)
         page.set_top_level(default_ancestor.name, page.name)
 
-for rank in ranks:
+for rank in Rank:
     for page in page_array:
         if not page.parent:
             page.resolve_group(rank)
@@ -338,7 +342,7 @@ for rank in ranks:
             if group in family_com:
                 com = family_com[group]
             else:
-                error(f'No common name for {rank} {group}')
+                error(f'No common name for {rank.name} {group}')
                 com = 'n/a' # family names.yaml uses 'n/a' when there is no com name
 
             if com == 'n/a':
@@ -346,7 +350,7 @@ for rank in ranks:
             else:
                 parent = Page(com)
 
-            parent.set_sci(f'{rank} {group}')
+            parent.set_sci(f'{rank.name} {group}')
             parent.top_level = 'flowering plants'
         else:
             # If the recorded group isn't the name of a page to be created,
@@ -365,7 +369,7 @@ for rank in ranks:
         # all groups up to and including that rank.   We include
         # only groups of a higher rank, which are guaranteed valid.
         found_higher_rank = False
-        for rank1 in ranks:
+        for rank1 in Rank:
             if found_higher_rank:
                 parent.resolve_group(rank1)
             if rank1 == parent.rank:
