@@ -111,3 +111,10 @@ def error(msg, prefix=None):
 def error_end():
     if _error_cnt:
         sys.exit(_error_cnt)
+
+class FatalError(Exception):
+    pass
+
+def fatal(msg, prefix=None):
+    error(msg, prefix)
+    raise FatalError(msg)

@@ -602,24 +602,38 @@ class Page:
 
         return False
 
-    # Using recursion, find the lowest rank of an ancestor of self.
-    # This function is called during assign_child to ensure that the
-    # new parent (or its ancestors) is a higher rank than the new child
-    # (or its descendants).  The rank check also implicitly prevents
-    # a circular loop, but only through ranked pages.  To detect and
-    # prevent a circular loop through unranked pages, we raise an exception
-    # if we try to traverse through 'child'.
+    # Using recursion, find the lowest-ranked ancestor of self.
+    # 
+    # This function is called during assign_child to find the best
+    # ancestor to create a Linnaean link to.
     #
-    # Recursion can terminate when any rank is found since ancestors of
-    # that page must have a higher rank.  I.e. recursion only traverses
-    # through unranked pages.  For performance, we also terminate redundant
-    # recursion if we reach a page via multiple paths.
-    def find_lowest_ancestor_rank(self, child, exclude_set=None):
+    # In truth, it should be unusual that an unranked page has
+    # multiple ranked ancestors.  But it may occur, for example, if an
+    # unranked page describes a subset species within a genus (and is
+    # thus a child of the genus), and another unranked page describes
+    # a larger collection with the first page as a child and with a
+    # higher taxon (e.g. family) as its parent.  Presumably all
+    # ancestors should be in the same taxonomic chain; if they aren't,
+    # then some page's parentage is dubious.  In any case, we don't
+    # bother to check for it.
+    #
+    # Recursion can terminate when any ranked page is found since
+    # ancestors of that page must have a higher rank.  I.e. recursion
+    # only traverses through unranked pages.  For performance, we also
+    # terminate redundant recursion if we reach a page via multiple
+    # paths.
+    #
+    # The code to create the Linnaean link includes a check for
+    # correct rank ordering, which has a secondary benefit of
+    # detecting a circular loop, but only through ranked pages.  To
+    # detect and prevent a circular loop through unranked pages, we
+    # raise an exception here if we try to traverse through 'child'.
+    def find_lowest_ranked_ancestor(self, child, exclude_set=None):
         if self == child:
             raise RecursionError
 
         if self.rank:
-            return self.rank
+            return self
 
         if exclude_set is None:
             exclude_set = set()
@@ -628,36 +642,38 @@ class Page:
         if self.linn_parent:
             list_of_parent_lists.append([self.linn_parent])
 
-        lowest_rank = Rank.kingdom # always a valid value as a parent rank
+        lra = None # lowest ranked ancestor
         for parent_list in list_of_parent_lists:
             for parent in parent_list:
                 if parent not in exclude_set:
-                    rank = parent.find_lowest_ancestor_rank(child, exclude_set)
-                    if rank < lowest_rank:
-                        lowest_rank = rank
-        return lowest_rank
+                    exclude_set.add(parent)
+                    ancestor = parent.find_lowest_ranked_ancestor(child, exclude_set)
+                    if (ancestor.rank and
+                        (not lra or ancestor.rank < lra.rank)):
+                        lra = ancestor
+        return lra
 
-    # Using recursion, find the highest rank of a descendant of self.
-    #
-    # Since find_lowest_ancestor_rank() has already looked for a potential
-    # circular loop, we don't bother to check again here.
-    def find_highest_descendant_rank(self, exclude_set=None):
+    # Using recursion, create a link from the designated Linnaean parent
+    # to each ranked descendent.
+    def link_linn_descendants(self, linn_parent, exclude_set=None):
         if self.rank:
-            return self.rank
+            linn_parent.link_linn_child(self)
+            return
 
         if exclude_set is None:
             exclude_set = set()
 
         list_of_child_lists = [self.child, self.linn_child]
 
-        highest_rank = Rank.below # always a valid value as a child rank
         for child_list in list_of_child_lists:
             for child in child_list:
                 if child not in exclude_set:
-                    rank = child.find_highest_descendant_rank(exclude_set)
-                    if rank > highest_rank:
-                        highest_rank = rank
-        return highest_rank
+                    exclude_set.add(child)
+                    child.link_linn_descendants(linn_parent, exclude_set)
+
+    def link_linn_child(self, child):
+        if self.rank <= child.rank:
+            fatal(f'bad rank order when adding {child.name} (rank {child.rank.name}) as a child of {self.name} (rank {self.rank.name})')
 
     def assign_child(self, child):
         if self in child.parent:
@@ -665,15 +681,13 @@ class Page:
             return
 
         try:
-            parent_rank = self.find_lowest_ancestor_rank(child)
-            child_rank = child.find_highest_descendant_rank()
+            linn_parent = self.find_lowest_ranked_ancestor(child)
         except RecursionError:
-            error(f'circular loop detected through unranked pages when adding {child.name} added as child of {self.name}')
+            fatal(f'circular loop detected through unranked pages when adding {child.name} as child of {self.name}')
             return
 
-        if parent_rank <= child_rank:
-            error(f'bad rank order when adding {child.name} (rank {child_rank.name}) as a child of {self.name} (rank {parent_rank.name})')
-            return
+        if linn_parent:
+            child.link_linn_descendants(linn_parent)
 
         self.child.append(child)
         child.parent.add(self)
