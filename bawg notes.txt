@@ -186,7 +186,7 @@ I should also order them lower in pages.js.
 Make the hierarchy more generic to fit anyone's taxonomic priorities:
 
 'is_top' marks a page as being the top of a hierarchy.  Any
-descendents of this page or pages that list this one as a higher-level
+descendants of this page or pages that list this one as a higher-level
 group are considered part of its hierarchy, so they won't be assigned
 a hierarchy as per below.
 
@@ -202,7 +202,7 @@ In addition, a variety/subspecies is deemed to be a member of its
 species, and a species is deemed to be a member of its genus,
 regardless of observations.csv entries.
 
-'create: <rank>' allows descendents to be added at the specified rank,
+'create: <rank>' allows descendants to be added at the specified rank,
 e.g. 'create: family'.  Pages are thus created automatically from
 observations.csv.  Implies 'list: <rank>'.  This may be the hardest
 property to handle in order to build a hierarchy in the correct order.
@@ -215,19 +215,19 @@ At the same time, add parent/child relationships based on 'create',
 
 'list: self' marks a page to allow children to be added via group
 identification.  Otherwise, a group with incomplete children flags an
-error.  'list: <rank>' allows children to be added to all descendents
+error.  'list: <rank>' allows children to be added to all descendants
 that are the specified rank.
 
-'require: <rank>' requires descendents below the specified rank to
+'require: <rank>' requires descendants below the specified rank to
 have an ancestor at the specified rank, e.g. 'require: family'
 requires that all flowers have a family.  Often accompanies but does
 not require 'create: <rank>'.  If 'create: <rank>' is not specified,
 the appropriate hierarchy must be created by hand.
 
-'complete: <rank>' requires that any descendent page of the specified
-rank must have as descendents all pages under that page's group.
+'complete: <rank>' requires that any descendant page of the specified
+rank must have as descendants all pages under that page's group.
 I.e. if a page is a member of a 'complete' page, it must be an
-explicit descendent.  Additionally, if at least two pages exist for a
+explicit descendant.  Additionally, if at least two pages exist for a
 group of the specified rank, the page for the group must exist.
 E.g. 'complete: genus'
 
@@ -235,10 +235,10 @@ E.g. 'complete: genus'
 Implies 'list: self' (below)?  'hierarchy: <rank>' is less useful to
 me, but could perhaps be supported if easy.
 
-'membership: self' causes all descendents to list themselves as a
+'membership: self' causes all descendants to list themselves as a
 member of the page.
 
-'membership: <rank>' causes all descendents below the specified rank
+'membership: <rank>' causes all descendants below the specified rank
 to list themselves as a member of their ancestor at the specified
 rank.  E.g. 'membership: family'.
 
@@ -295,7 +295,7 @@ How the list is used:
 
 
 'subset: color/<color>/<name> creates a page <name> with a hierarchical
-list of all descendents with color <color>.  These pages are outside
+list of all descendants with color <color>.  These pages are outside
 the normal hierarchy.
 
 Add manual links to the color pages from the flowering plants page.
@@ -345,3 +345,375 @@ Remove group_child_set, which is no longer used.
 
 Restore support for checking that all families are identified under
 flowering plants.
+
+
+When a top page creates a new page, it can also create a page for
+every higher rank for which pages get created.  (Or perhaps re-do the
+search for the new page, in case there are hierarchy complications.)
+
+If page creation/linking is enabled for any lower ranks, then pass the
+property results down down into the children for processing.
+(Except... what if a lower page in the hierarchy has its own
+properties?)  It almost seems like I need to resolve_groups for any
+pages that need it, then start from each property and work downward
+through the hierarchy and shadow hierarchy.  Perhaps it is equivalent
+to keep the current upward search from every page, but allow every
+page on the path to create/link a page according the results passed
+through it, and then mark every page along the path as complete.  Any
+future search that hits that page immediately returns with the results
+that remained when that page was done.
+
+
+Current thinking:
+
+Build a shadow tree so that I can search up or down.  Include real
+pages (with or without a rank) and group placeholders.  A page without
+a rank is ranked just below the lowest common ancestor of all
+children, and that LCA is its parent.  Tree traversal can skip up
+through the unranked page or traverse the normal group hierarchy
+around it.
+
+Nodes in the shadow tree can be looked up by iNaturalist scientific
+name to facilitate creating links from observations.csv.
+family_names.yaml allows a common name to be converted to a scientific
+name in case a page declares a group by common name.  When a new node
+is created, it checks for a corresponding page (by scientific name or
+iNat sci name) and cross links it.  When a new page is created for a
+group, it is also cross linked.
+
+Properties are copied from the real tree and thereafter are associated
+with the shadow tree.  Properties are pushed down through all child
+paths to all applicable ranks (e.g. for 'create: family', it is pushed
+to the family rank).  Note that for this purpose, the node only needs
+to keep track of the property name; the rank is implied, and
+alternative ranks for the property are not needed.
+
+For performance, I could record the set of pages for each rank of each
+property, but that doesn't seem necessary.
+
+From lowest to highest rank, for each page that has a property, apply
+that property.  E.g. for 'create', the page is created if it doesn't
+exist, and a link is created from each child.  If the shadow child is
+not real, continue descending the tree to find the first real child on
+each path.
+
+Because a tree can split and rejoin through an unranked page, the
+above procedure could create a link to a page when it has a real
+ancestor that already gets a link (or already has a link).  Possible
+solution: create a set of links to be created without yet creating
+them.  Then traverse up through the real hierarchy of each "child" and
+delete that child from the set if it finds any ancestor also in the
+link set (or already linked).  Only create links after trimming the
+set in this way.
+
+
+--
+
+'-db test' causes txt, photos, glossary, and prev, html, thumbs to be
+prefixed with 'test_'.  (Don't forget to add 'test_*' to
+'.gitignore'.)  Populate test_txt with only a small set of files in
+order to develop and test tree-building code.  (index.html will still
+have links to the original locations, but that's easy enough to work
+around, so a change to index.html doesn't seem necessary.)  Files from
+the 'data' directory look innocuous, so their usage doesn't need to
+change.  Perhaps I'll get some warnings about observed flowers not
+having pages that I'll have to disable.
+
+The taxon tree (shadow hierarchy) is maintained using regular pages
+that aren't necessarily output to HTML.  If a page exists purely for
+the shadow hierarchy, it is not included in page_array, which keeps it
+out of scans of "all pages".  The taxon tree relationship is
+maintained in each page using a taxon_parent link and a taxon_child
+set that are separate from the normal parent/child links.  A
+taxon_parent or taxon_child may duplicate a parent/child link; any
+code that casres can easily check whether a pointer exists in both
+links.  A shadow page is marked as such upon creation with
+shadow=True.  If the shadow page is later converted to a real page,
+shadow is set to False, and the page is added to page_array.
+
+Shadow pages can be looked up in sci_page, com_page, or isci_page as
+usual.  Possibly shadow pages have reduced priority when there is a
+common name conflict.
+
+Whenever set_sci() is called for a page, its rank is determined from
+its name.  Hopefully I've consistently used "spp." for genuses, so if
+I ever get a weird one like "Esula" (a subgenus), I can set its rank
+to None, the same as pages without a scientific name.
+
+Whenever assign_child() is called for a page, we check for various
+errors.  A circular loop or a child assigned twice is already checked.
+Also check that the parent has a higher rank than the child.  (If the
+parent doesn't have a rank, traverse all of its parents to find every
+possible ancestor rank.  If the child doesn't have a rank, traverse
+all of its children to find every possible descendant rank.  For these
+purposes, taxon_parent and taxon_child are also traversed.  For
+efficiency, only non-duplicate links are traversed.)  Note that a
+circular loop is a special case of the search for an ancestor rank
+that returns to the original page.
+
+When a normal link is created with assign_child(), we also attempt to
+create a shadow link.  If the parent and child each have a rank, then
+the shadow link can be created right away.  If the parent does not
+have a rank, then we traverse its ancestors and shadow_parent, and
+create a shadow link from the child to the lowest-ranked ancestor
+found on any path.  (It's conceivable that by accident or design, an
+unranked page has different ranked ancestors.  Hopefully they're at
+least in the same taxonomic chain, but at this time I don't plan to
+check.)  If the child does not have a rank, then we traverse its child
+and shadow_child links and create a shadow link from the parent (or
+its lowest-ranked ancestor) to the first ranked descendant found on
+each descendant path.  Note that at this time we don't create a shadow
+link to or from an unranked page.
+
+Shadow links (taxon_parent/taxon_child) are initially added between
+pages by these causes:
+- A normal link is created which also creates shadow links
+- A genus/species group is implied by a species/subspecies name
+- A group is declared in the txt (e.g. 'family: grasses')
+- A taxonomic chain is read from observations.csv
+
+A taxonomic chain is likely to be complete, but the others are not.
+(A taxonomic chain could be incomplete depending on how I address
+discrepancies in the iNaturalist hierarchy.)  In particular, some
+ranks may initially be skipped as the shadow tree is built
+(e.g. because a subspecies is a direct child of a genus), but then we
+attempt to add the skipped ranks to the tree later (e.g. from
+observations.csv).  This situation can be recognized when we attempt
+to create a shadow link, but the child already has a parent which is
+not the one we're trying to link.  If the old and new parents have the
+same rank, flag an error.  If the new parent has a lower rank than the
+old parent, insert the new parent between the child and its original
+parent.  (The old parent becomes the parent of the new parent.)  If
+the old parent has a lower rank than the new parent (e.g. because the
+txt specified the tribe group and then the family group), then instead
+of adding the link from the child, we try to add the new parent as a
+parent of the old parent (continuing to recurse as necessary).
+
+Note that an iNaturalist group name can differ from my group name only
+if I have a txt file for that page.  In that case, the page is created
+with its canonical name, and data from observations.csv can find the
+page via isci_page.  If a shadow page is created from observations.csv
+(using an iNaturalist-supplied name), it may eventually get promoted
+to a real page, but it can never have its name changed to something
+different.  Note that a group declared in the txt is expected to use
+my canonical name, not the iNaturalist name (although they can be the
+same, of course).
+
+After creating and linking all pages and shadow pages (i.e. after
+reading observations.csv), some pages will be left without a parent or
+shadow parent...
+
+We need to know if these pages are intended to be the top of the
+shadow hierarchy, but we can't just check 'is_top' for a page because
+shadow ancestors may have been added to an 'is_top' page.  Therefore,
+we make a pass over all (real) pages, and if 'is_top' is True for a
+page, 'is_top' is propagated to all shadow ancestors.  (Or to the top
+shadow ancestor.  It doesn't really matter.)  Note that we don't
+really expect any pages along the propagation chain to have a real
+parent, as that would imply that 'is_top' isn't placed optimally.
+Perhaps flag a warning for this case, and/or propagate into the real
+parents as well.  On the other hand, multiple pages can propagate
+'is_top' to the same shadow ancestor, and that's fine.
+
+If a page has a rank but doesn't have a parent or shadow parent, then
+normally we expect 'is_top' to be True for the page.  If 'is_top'
+isn't True, then we set its shadow parent to the default_ancestor
+page.
+
+If a page has no rank and no parent or shadow parent then we try to
+"resolve" it to have a ranked parent.  We first resolve all of its
+real children (it shouldn't have any shadow children), then find the
+lowest common shadow ancestor among them.  Note that we do this even
+if the page has 'is_top' set since we want to propagate 'is_top' to
+the top of the resolved shadow tree.
+
+When resolving a child with a shadow parent, the child returns a set
+of all of its shadow ancestors.  The "common ancestors" are the
+intersection of all such sets, and the "lowest common ancestor" (LCA)
+is the common ancestor with the lowest rank.
+
+When resolving a ranked child without a shadow parent, if the original
+page is 'is_top', then the child provides no contribution to the LCA.
+In this case, it's super unclear what the LCA should be, but it's also
+unlikely to matter.  (It could matter if a different child provides a
+taxonomic chain that includes a real page that sets properties that
+could effect the ranked child, but in that case, 'is_top' seems
+inappropriate.)  If the original page is not 'is_top', the
+default_ancestor is assigned as the shadow parent to the ranked child.
+(Note that this pushes the effects of 'is_top' to lower nodes in the
+tree, and it only works if we start at the top of a tree.  However, we
+don't push the actual value of 'is_top' into descendants since those
+descendants could also be in other trees which may or may not have
+'is_top' at the top.)
+
+When resolving an unranked child without a shadow parent, we recurse,
+passing along the original 'is_top' value.
+
+The ultimate effect is that each unranked page is given a shadow
+parent (unless perhaps it 'is_top') but no shadow children.  If an
+'is_top' page *is* given a shadow parent, then is_top is propagated up
+the shadow tree as before.
+
+Once the shadow tree is entirely built, the properties can be
+processed...
+
+All (real) pages are scanned, and each property is pushed down into
+all descendants.  Properties only apply to 'self' and to ranked
+pages, but they are also pushed through real descendants (not just
+shadow descendants) since some unranked pages won't have shadow
+descendants.  For efficiency, a shadow descendant isn't traversed if
+it duplicates a real descendant.
+
+A 'self' property is not pushed down at all.  A ranked property is
+left on any page with a matching rank.  This is recorded differently
+than the original property dictionary (which included a set of ranks
+for each property), but is simply the existence (or not) of each
+property on each page.  (E.g. call it 'prop_set', as opposed to
+'prop_ranks'.)
+
+For each rank from lowest to highest, all pages and shadow pages are
+scanned.  I.e. we need an array of all pages, not just real pages.
+
+If a ranked (real or shadow) page has a 'create', 'link', 'no_create',
+or 'no_link' property, then a set of descendants to (potentially) link
+to the page is created.  The shadow tree is traversed to find the
+first 'real' descendant along each path.  (The real tree isn't
+traversed because that's a link that already exists and doesn't need
+to be re-created.)  Once a real descendant is found, its real
+ancestors are traversed all the way to the top (for performance
+perhaps limited by the rank).  If any real ancestor has a shadow
+parent of the original shadow page, then that ancestor will get a
+link, and there's no need to create another one to lower in the tree.
+(Presumably if the ranked shadow page is its real parent, then it
+should also be a shadow parent, so only the shadow_parent link needs
+to be checked.)
+
+I.e.
+- Start the search from ranked page 'X' with the applied property.
+- From 'X', find each shadow descendants, 'Y'.
+- From 'Y', find each real ancestor, 'Z'.
+- If no 'Z' has shadow parent 'X', then a link can be created from 'X' to 'Y'.
+
+The action to take depends on the property, whether the page it
+applies to is real or shadow, and the number of links that can be
+created from it.
+
+In all cases below where links are created, the child pages are sorted
+so that pages with more observations are linked first.
+
+For 'create' on a shadow page with at least one pending link, the page
+is promoted to 'real', and the links are created.  If the shadow page
+has no real descendants and thus can't create any links, the page must
+have been created from observations.csv for a section of hierarchy
+that we don't have pages for.  A later property can check for this
+condition if we care.
+
+For 'create2' on a shadow page with at least *two* pending links, the
+page is promoted to 'real', and the links are created.  If only one
+link is possible (i.e. we'd create a rather boring extra level of
+hierarchy), nothing is done.
+
+For 'create' or 'create2' on a real page, nothing happens, no matter
+how many links could potentially be created.  A 'link' can create
+these links as desired, or a 'no_link' property can complain about the
+missing links.
+
+When the 'create' property promotes a page to 'real', if the page also
+has the 'common' property, then the common name must be defined in
+family_names.yaml (or 'n/a').  For any explicitly created page, I
+assume that the
+
+For 'link' on a real page (with at least one pending link), the links
+are created.
+
+There is no 'link2' property.  If the page exists, there's no reason
+not to link to it.
+
+For 'link' on a shadow page, nothing happens.
+
+For 'no_create' or 'no_create2' on a shadow page, an error is flagged
+if the corresponding number of links could be created.
+
+For 'no_link' on a real page, an error is flagged if any links could
+be created.
+
+I'll have the 'flowering plants' page assert 'no_create2: genus' and
+'no_link: genus-below'.  Thus, if a genus has at least two members, I
+expect a txt page for that genus.  And if a genus or species has a
+page, then all members of that genus/species must have an explicit
+link from that page.  Note that this allows a genus page to directly
+link to multiple varieties of the same species without an intermediate
+species page if desired.  If I wanted to require a species page as
+well, I could instead assert 'no_create2: genus-below'.
+
+Other properties are handled as follows:
+
+While 'require' is being pushed down to matching ranks in the
+hierarchy, an error is flagged if it the tree traversal skips over a
+rank specified by the property.  E.g. for 'require: family', an error
+is flagged if a genus is found in the tree (e.g. as a descendant of
+the default_ancestor), but its family isn't known.  This could
+potentially flag an error when there is no real page below the missing
+group, but the lower-ranked shadow page could only have been created
+by observations.csv, which I expect to be complete.  There is no error
+if the descendants peter out without reaching a required rank.
+
+If a page is marked 'hierarchy', then its entire hierarchy is output
+after any txt in the page.  The expectation is that the hierarchy
+comes from automatically generated links, not explicit children.  To
+support this, links created by the 'create' or 'link' properties don't
+add the link to the txt (only to the child set) if the page has the
+'hierarchy' property.
+
+While emitting the HTML for a page, we search all shadow ancestors for
+the 'member_link' property.  If an ancestor exists but isn't an
+immediate real parent, the page is listed as a 'member of' the
+ancestor (including an HTML link to the page).
+
+Similarly, if an ancestor has the 'member_name' property and is *not*
+'real', the page is listed as a 'member of' the ancestor (obviously
+not including an HTML link).
+
+When checking the shadow hierarchy, some pages (e.g. needle grasses)
+might confuse the checks by including species of multiple genuses
+while pretending that they are part of a single genus (e.g. because
+Jepson classifies them that way).  Perhaps a page can specify a list
+of scientific names that it satisfies the requirements for.  And
+perhaps that list of names can be included as the "scientific name" on
+the page (although only one would be included in links), and all of
+its names can be included in pages.js.
+
+
+Ranks:
+
+from enum import Enum
+
+# OrderedEnum allows <, > comparisons without the drawbacks of IntEnum.
+# (E.g. IntEnum might unexpectedly use an integer value instead of a name.)
+# Copied from https://docs.python.org/3/library/enum.html
+class OrderedEnum(Enum):
+    def __ge__(self, other):
+        if self.__class__ is other.__class__:
+            return self.value >= other.value
+        return NotImplemented
+    def __gt__(self, other):
+        if self.__class__ is other.__class__:
+            return self.value > other.value
+        return NotImplemented
+    def __le__(self, other):
+        if self.__class__ is other.__class__:
+            return self.value <= other.value
+        return NotImplemented
+    def __lt__(self, other):
+        if self.__class__ is other.__class__:
+            return self.value < other.value
+        return NotImplemented
+
+class Rank(OrderedEnum):
+    below = auto()
+    ...
+
+page.rank = Rank[rank_str]
+print(page.rank.name)
+if rank in page.prop_rank and rank < Rank.family:
+    ...

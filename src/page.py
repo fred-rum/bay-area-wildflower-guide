@@ -1065,7 +1065,13 @@ class Page:
 
         self.txt = parse2_txt(self.name, s, self.glossary)
 
-    def find_property(self, prop):
+    def find_property(self, prop, searched_set=None):
+        if searched_set is None:
+            searched_set = set()
+        elif self in searched_set:
+            return {}
+        #searched_set.add(self)
+
         result = {}
         if prop in self.prop:
             # Record information for each rank specified by the property.
@@ -1098,17 +1104,18 @@ class Page:
 
         # Search the existing hierarchy of ancestors.
         for parent in self.parent:
-            result2 = parent.find_property(prop)
+            result2 = parent.find_property(prop, searched_set)
             combine_result(result, result2)
 
         # Search pages that might not be in the existing hierarchy,
         # but which can be found as an ancestor group.
-        for rank in self.group:
+        for rank in ranks:
+          if rank in self.group:
             # group[rank] is None when no group was found due to conflicts.
             if self.group[rank]:
                 page = find_page2(None, self.group[rank])
                 if page and page != self:
-                    result2 = page.find_property(prop)
+                    result2 = page.find_property(prop, searched_set)
 
                     # Since the search was made outside the existing hierarchy,
                     # reset the top of hierarchy for each rank in the search
@@ -1123,6 +1130,10 @@ class Page:
                     # combine_result() will give priority to the previous
                     # search result, and thus will retain a higher x['top'].
                     combine_result(result, result2)
+
+                    # Once we've searched through the lowest rank in self.group,
+                    # there's no need to search through other groups.
+                    break
 
         # If the current page is a matching rank, record it as a match.
         if self.rank in result:
