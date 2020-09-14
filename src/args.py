@@ -25,6 +25,6 @@ def arg(name):
         return None
 
 if arg('-db'):
-    db_pfx = arg('-db') + '_'
+    db_pfx = arg('-db') + '/'
 else:
     db_pfx = ''

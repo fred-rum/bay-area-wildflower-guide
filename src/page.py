@@ -602,14 +602,81 @@ class Page:
 
         return False
 
+    # Using recursion, find the lowest rank of an ancestor of self.
+    # This function is called during assign_child to ensure that the
+    # new parent (or its ancestors) is a higher rank than the new child
+    # (or its descendants).  The rank check also implicitly prevents
+    # a circular loop, but only through ranked pages.  To detect and
+    # prevent a circular loop through unranked pages, we raise an exception
+    # if we try to traverse through 'child'.
+    #
+    # Recursion can terminate when any rank is found since ancestors of
+    # that page must have a higher rank.  I.e. recursion only traverses
+    # through unranked pages.  For performance, we also terminate redundant
+    # recursion if we reach a page via multiple paths.
+    def find_lowest_ancestor_rank(self, child, exclude_set=None):
+        if self == child:
+            raise RecursionError
+
+        if self.rank:
+            return self.rank
+
+        if exclude_set is None:
+            exclude_set = set()
+
+        list_of_parent_lists = [self.parent]
+        if self.linn_parent:
+            list_of_parent_lists.append([self.linn_parent])
+
+        lowest_rank = Rank.kingdom # always a valid value as a parent rank
+        for parent_list in list_of_parent_lists:
+            for parent in parent_list:
+                if parent not in exclude_set:
+                    rank = parent.find_lowest_ancestor_rank(child, exclude_set)
+                    if rank < lowest_rank:
+                        lowest_rank = rank
+        return lowest_rank
+
+    # Using recursion, find the highest rank of a descendant of self.
+    #
+    # Since find_lowest_ancestor_rank() has already looked for a potential
+    # circular loop, we don't bother to check again here.
+    def find_highest_descendant_rank(self, exclude_set=None):
+        if self.rank:
+            return self.rank
+
+        if exclude_set is None:
+            exclude_set = set()
+
+        list_of_child_lists = [self.child, self.linn_child]
+
+        highest_rank = Rank.below # always a valid value as a child rank
+        for child_list in list_of_child_lists:
+            for child in child_list:
+                if child not in exclude_set:
+                    rank = child.find_highest_descendant_rank(exclude_set)
+                    if rank > highest_rank:
+                        highest_rank = rank
+        return highest_rank
+
     def assign_child(self, child):
-        if self.is_ancestor(child):
-            error(f'circular loop when creating link from {self.name} to {child.name}')
-        elif self in child.parent:
+        if self in child.parent:
             error(f'{child.name} added as child of {self.name} twice')
-        else:
-            self.child.append(child)
-            child.parent.add(self)
+            return
+
+        try:
+            parent_rank = self.find_lowest_ancestor_rank(child)
+            child_rank = child.find_highest_descendant_rank()
+        except RecursionError:
+            error(f'circular loop detected through unranked pages when adding {child.name} added as child of {self.name}')
+            return
+
+        if parent_rank <= child_rank:
+            error(f'bad rank order when adding {child.name} (rank {child_rank.name}) as a child of {self.name} (rank {parent_rank.name})')
+            return
+
+        self.child.append(child)
+        child.parent.add(self)
 
     def expand_genus(self, sci):
         if (self.cur_genus and len(sci) >= 3 and
@@ -688,8 +755,6 @@ class Page:
                 else:
                     # Prefer the common name in most cases.
                     child_page = Page(com)
-            name = child_page.name
-            self.assign_child(child_page)
             if com:
                 if child_page.com:
                     if com != child_page.com:
@@ -698,6 +763,7 @@ class Page:
                     child_page.set_com(com)
             if sci:
                 child_page.set_sci(sci)
+            self.assign_child(child_page)
 
             # Replace the =={...} field with a simplified =={index,suffix} line.
             # This will create the appropriate link later in the parsing.
