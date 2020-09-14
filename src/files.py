@@ -39,16 +39,20 @@ working_path = root_path + '/.in_progress'
 # directory.  The set includes only the base filename without the
 # extension.
 def get_file_set(subdir, ext):
-    file_list = os.listdir(root_path + '/' + subdir)
-    base_list = set()
+    subdir_path = root_path + '/' + subdir
+    if not os.path.isdir(subdir_path):
+        return set()
+
+    file_list = os.listdir(subdir_path)
+    base_set = set()
     for filename in file_list:
         pos = filename.rfind(os.extsep)
         if pos > 0:
             file_ext = filename[pos+len(os.extsep):].lower()
             if file_ext == ext:
                 base = filename[:pos]
-                base_list.add(base)
-    return base_list
+                base_set.add(base)
+    return base_set
 
 jpg_files = get_file_set(f'{db_pfx}photos', 'jpg')
 
