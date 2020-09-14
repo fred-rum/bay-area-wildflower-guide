@@ -50,7 +50,7 @@ def get_file_set(subdir, ext):
                 base_list.add(base)
     return base_list
 
-jpg_files = get_file_set('photos', 'jpg')
+jpg_files = get_file_set(f'{db_pfx}photos', 'jpg')
 
 
 def link_figures_thumb(name, txt):

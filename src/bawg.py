@@ -66,7 +66,7 @@ color_page_list = {}
 # Read the mapping of iNaturalist observation locations to short park names.
 park_map = {}
 park_loc = {}
-with open(root_path + '/data/parks.yaml', mode='r', encoding='utf-8') as f:
+with open(f'{root_path}/data/parks.yaml', mode='r', encoding='utf-8') as f:
     yaml_data = yaml.safe_load(f)
 for loc in yaml_data:
     for x in yaml_data[loc]:
@@ -78,7 +78,7 @@ for loc in yaml_data:
                 park_map[x[y]] = y
                 park_loc[x[y]] = loc
 
-txt_files = get_file_set('txt', 'txt')
+txt_files = get_file_set(f'{db_pfx}txt', 'txt')
 
 ###############################################################################
 
@@ -89,7 +89,7 @@ txt_files = get_file_set('txt', 'txt')
 for name in txt_files:
     page = Page(name)
     page.name_from_txt = True
-    with open(root_path + "/txt/" + name + ".txt", "r", encoding="utf-8") as r:
+    with open(f'{root_path}/{db_pfx}txt/{name}.txt', 'r', encoding='utf-8') as r:
         page.txt = r.read()
     page.remove_comments()
     page.parse_names()
@@ -112,7 +112,7 @@ for page in page_array:
     if page.color and not page.jpg_list:
         error(f'page {page.name} has a color assigned but has no photos')
 
-with open(root_path + '/data/ignore species.yaml', encoding='utf-8') as f:
+with open(f'{root_path}/data/ignore species.yaml', encoding='utf-8') as f:
     sci_ignore = yaml.safe_load(f)
 
 # Find any genus with multiple species.
@@ -154,7 +154,7 @@ def shrink(name):
 #   Get a count of observations (total and research grade) of each flower.
 #   Get an iNaturalist taxon ID for each flower.
 error_begin_section()
-with open(root_path + '/data/observations.csv', mode='r', newline='', encoding='utf-8') as f:
+with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='utf-8') as f:
     csv_reader = csv.reader(f)
     header_row = next(csv_reader)
 
@@ -261,7 +261,7 @@ with open(root_path + '/data/observations.csv', mode='r', newline='', encoding='
         # know what it is, so there's no particular reason to make a page
         # for it.)
         phylum = row[phylum_idx]
-        if not page and phylum == 'Tracheophyta' and ' ' in sci and sci not in sci_ignore:
+        if not page and phylum == 'Tracheophyta' and ' ' in sci and sci not in sci_ignore and not arg('-db'):
             error(sci, prefix="The following vascular plant observations don't have a page:")
 
         # If we haven't matched the observation to a page, try stripping
@@ -465,8 +465,8 @@ def add_elab(elabs, elab):
     if elab and elab != 'n/a' and elab not in elabs:
         elabs.append(unidecode(elab))
 
-search_file = root_path + "/pages.js"
-with open(search_file, "w", encoding="utf-8") as w:
+search_file = f'{root_path}/pages.js'
+with open(search_file, 'w', encoding='utf-8') as w:
     w.write('var pages=[\n')
 
     # Sort in reverse order of observation count.
@@ -527,10 +527,10 @@ new_list = []
 mod_list = []
 for name in file_list:
     if name.endswith('.html'):
-        if not os.path.isfile(root_path + '/html/' + name):
+        if not os.path.isfile(f'{root_path}/html/' + name):
             new_list.append(name)
-        elif not filecmp.cmp(root_path + '/html/' + name,
-                             working_path + '/html/' + name):
+        elif not filecmp.cmp(f'{root_path}/html/' + name,
+                             f'{working_path}/html/' + name):
             mod_list.append(name)
 
 total_list = mod_list + new_list
@@ -553,7 +553,7 @@ else:
 #
 # We do this even if no files have apparently been modified because
 # there could be other changes not detected, e.g. deleted files.
-shutil.rmtree(root_path + '/html', ignore_errors=True)
+shutil.rmtree(f'{root_path}/html', ignore_errors=True)
 
 # shutil.rmtree theoretically waits for the operation to complete, but
 # Windows apparently claims to be complete while the delete is still
@@ -568,7 +568,7 @@ tries = 0
 while not done:
     try:
         tries += 1
-        os.rename(working_path + '/html', root_path + '/html')
+        os.rename(f'{working_path}/html', f'{root_path}/html')
         done = True
     except WindowsError as error:
         if tries == 1:
@@ -580,9 +580,9 @@ if tries > 1:
 if total_list:
     # open the default browser with the created HTML file
     if len(total_list) == 1:
-        mod_file = root_path + '/html/' + total_list[0]
+        mod_file = f'{root_path}/html/' + total_list[0]
     else:
-        mod_file = root_path + '/html/_mod.html'
+        mod_file = f'{root_path}/html/_mod.html'
     os.startfile(mod_file)
 
 error_end()
