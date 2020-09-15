@@ -105,9 +105,10 @@ for page in page_array[:]:
     page.parse_children()
 
 if arg('-linn'):
+    exclude_set = set()
     for page in page_array:
-        if not page.linn_parent:
-            page.print_linn_tree()
+        if not page.parent and not page.linn_parent:
+            page.print_linn_tree(exclude_set=exclude_set)
 
 assign_jpgs()
 

@@ -327,6 +327,9 @@ To speed Javascript or CSS editing, allow a parameter to bawg.py to
 reference src/search.js and src/bawg.css directly.  (But what about
 index.html?)
 
+Make the placeholder text in the search field a much lighter shade of
+gray.
+
 
 Support searches for "help", "bawg", "bay area wildflower guilde",
 "contact me".

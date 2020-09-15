@@ -740,19 +740,35 @@ class Page:
         self.child.append(child)
         child.parent.add(self)
 
-    def print_linn_tree(self, level=0):
+    def print_linn_tree(self, level=0, exclude_set=None):
+        if exclude_set is None:
+            exclude_set = set()
+
         if self.shadow:
             s = '-'
         else:
-            s = '+'
+            s = '*'
         if self.rank:
             r = self.rank.name
         else:
             r = 'unranked'
-        print(f'{"  "*level}{s}{self.name} ({r})')
+        if self in exclude_set:
+            # Print the repeated node, but don't descend further into it.
+            x = ' [repeat]'
+        else:
+            x = ''
+        print(f'{"  "*level}{s}{self.name} ({r}){x}')
+
+        if self in exclude_set:
+            return
+
+        exclude_set.add(self)
 
         for child in self.linn_child:
-            child.print_linn_tree(level+1)
+            child.print_linn_tree(level+1, exclude_set)
+        for child in self.child:
+            if child not in self.linn_child:
+                child.print_linn_tree(level+1, exclude_set)
 
     def expand_genus(self, sci):
         if (self.cur_genus and len(sci) >= 3 and

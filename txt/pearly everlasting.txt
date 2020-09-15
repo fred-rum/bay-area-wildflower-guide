@@ -1,3 +1,4 @@
+sci:Anaphalis margaritacea
 x:ca
 color: white
 
