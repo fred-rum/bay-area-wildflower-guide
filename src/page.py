@@ -125,8 +125,11 @@ class Page:
         self.set_name(name)
         self.name_from_txt = False # True if the name came from a txt filename
 
-        self.index = len(page_array)
-        page_array.append(self)
+        if shadow:
+            self.index = None
+        else:
+            self.index = len(page_array)
+            page_array.append(self)
 
         self.com = None # a common name
         self.sci = None # a scientific name stripped of elaborations
@@ -234,6 +237,8 @@ class Page:
         if sci in sci_page and sci_page[sci] != self:
             error(f'Same scientific name ({sci}) set for {sci_page[sci].name} and {self.name}')
 
+        sci_words = sci.split(' ')
+
         if elab[0].islower():
             elab_words = elab.split(' ')
             if elab_words[0] in Rank.__members__:
@@ -243,7 +248,6 @@ class Page:
                 self.rank = None
             self.level = 'above'
         else:
-            sci_words = sci.split(' ')
             if len(sci_words) == 1:
                 self.rank = Rank.genus
             elif len(sci_words) == 2:
@@ -255,6 +259,31 @@ class Page:
         self.sci = sci
         self.elab = elab
         sci_page[sci] = self
+
+    def add_linn_parent(self, rank, sci):
+        if sci in sci_page:
+            parent = sci_page[sci]
+        elif sci in isci_page:
+            parent = isci_page[sci]
+        else:
+            parent = Page(sci, shadow=True)
+            if rank > Rank.genus:
+                parent.set_sci(f'{rank.name} {sci}')
+            elif rank == Rank.genus:
+                parent.set_sci(f'{sci} spp.')
+            else:
+                # A species name is no different when elaborated.
+                # A parent would never be a subspecies or variant.
+                pass
+        parent.link_linn_child(self)
+
+    def guess_groups_from_sci(self):
+        if self.rank in (Rank.below, Rank.species):
+            # If the page has a rank, it's guaranteed to have a sci name.
+            sci_words = self.sci.split(' ')
+            if self.rank is Rank.below:
+                self.add_linn_parent(Rank.species, ' '.join(sci_words[0:1]))
+            self.add_linn_parent(Rank.genus, sci_words[0])
 
     def set_top_level(self, top_level, tree_top):
         if self.top_level is None:
@@ -460,10 +489,19 @@ class Page:
                 self.set_sci(sci)
             return ''
 
+        def repl_asci(matchobj):
+            sci = strip_sci(matchobj.group(1))
+            if sci in sci_page:
+                fatal(f'{self.name} specifies asci: {sci}, but that name already exists')
+            sci_page[sci] = self
+            return ''
+
         self.txt = re.sub(r'^com:\s*(.*?)\s*?\n',
                           repl_com, self.txt, flags=re.MULTILINE)
         self.txt = re.sub(r'^sci:\s*(.*?)\s*?\n',
                           repl_sci, self.txt, flags=re.MULTILINE)
+        self.txt = re.sub(r'^asci:\s*(.*?)\s*?\n',
+                          repl_asci, self.txt, flags=re.MULTILINE)
 
     def canonical_rank(self, rank):
         if rank == 'self':

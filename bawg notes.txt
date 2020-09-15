@@ -688,3 +688,16 @@ of scientific names that it satisfies the requirements for.  And
 perhaps that list of names can be included as the "scientific name" on
 the page (although only one would be included in links), and all of
 its names can be included in pages.js.
+
+
+
+When a 'genus' page includes species of multiple genera, it creates a
+conflict in which the 'genus' page thinks it must be a member of
+another genus.  The simple solution is to simply remove the scientific
+name from the page.  But that sometimes means changing the name of the
+txt file, as well.
+
+asci: [name] specifies an alternative scientific name that maps to the
+same page.  E.g. if the page for 'Aaa spp.' has 'asci: Bbb spp.', then
+a child species of 'Bbb Zed' will look for its taxonomic parent 'Bbb'
+and find it on page 'Aaa'.

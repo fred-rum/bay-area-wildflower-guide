@@ -5,11 +5,11 @@ _arg_value = {}
 sys.argv.pop(0) # We don't need the executable name
 
 while len(sys.argv):
-    if sys.argv[0] in ('-jepson_usage',
-                       '-incomplete_keys',
-                       '-no_error_limit',
-                       '-not_top_usage',
-                       '-linn'):
+    if (sys.argv[0] in ('-jepson_usage',
+                        '-incomplete_keys',
+                        '-no_error_limit',
+                        '-not_top_usage') or
+        sys.argv[0].startswith('-linn')):
         _arg_value[sys.argv.pop(0)] = True
     elif sys.argv[0] == '-db':
         _arg_value[sys.argv.pop(0)] = sys.argv.pop(1)

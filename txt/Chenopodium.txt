@@ -1,5 +1,6 @@
 com:goosefoots
 sci:Chenopodium spp.
+asci:Chenopodiastrum spp.
 
 ==nettle-leaved goosefoot:Chenopodiastrum murale
 sci_fpj:Chenopodium murale

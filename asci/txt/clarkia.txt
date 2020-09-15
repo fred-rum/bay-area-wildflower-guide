@@ -1,0 +1,35 @@
+sci:Clarkia spp.
+asci:Foobie
+x:hist/rare
+
+Key features:
+. corolla shape and color distribution
+. buds pendant or not
+. all 4 sepals staying fused or not
+. ovary 4-grooved or 8-grooved
+
+[
+<h3>Standard corolla shapes, buds erect or reflexed</h3>
+
+==winecup clarkia:C. purpurea
+. <b>sepals all coming free or staying fused in pairs</b> [occasionally all 4 fused]
+. ovary 8-grooved
+. often has a dark spot on each petal (location depending on subspecies)
+. found everywhere
+
+==davy's clarkia:Foobie davyi
+. <b>sepals all coming free or staying fused in pairs</b>
+. ovary 8-grooved
+. stem prostrate to decumbent
+. <b>petals 5--11 mm, no darker spot</b>
+. {-winecup clarkia} has either much larger petals or an erect stem and more acute leaves
+. rare: coastal
+
+==ruby chalice clarkia:C. rubicunda
+. all 4 sepals staying fused
+. ovary and immature fruit 4-grooved
+. petals with +- red spot or zone at <b>base of petal</b>
+. <b>petals 10--30 mm</b>
+. <b>stigma exserted beyond anthers</b>
+. found everywhere
+]

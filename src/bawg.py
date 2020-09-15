@@ -104,11 +104,20 @@ for name in txt_files:
 for page in page_array[:]:
     page.parse_children()
 
-if arg('-linn'):
+def print_linn_trees():
     exclude_set = set()
     for page in page_array:
         if not page.parent and not page.linn_parent:
             page.print_linn_tree(exclude_set=exclude_set)
+
+if arg('-linn1'):
+    print_linn_trees()
+
+for page in page_array[:]:
+    page.guess_groups_from_sci()
+
+if arg('-linn2'):
+    print_linn_trees()
 
 assign_jpgs()
 
@@ -130,7 +139,7 @@ for page in page_array:
 for genus in genus_page_list:
     page_list = genus_page_list[genus]
     if len(page_list) > 1:
-        if genus in sci_page:
+        if genus in sci_page and not sci_page[genus].shadow:
             sci_page[genus].cross_out_children(page_list)
             for page in page_list:
                 error(page.format_full(1), prefix=f'The following species are not included under the {genus} spp. key:')
@@ -295,6 +304,9 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
             page.month[month] += 1
 error_end_section()
 
+if arg('-linn3'):
+    print_linn_trees()
+
 # Get a list of pages without parents (top-level pages).
 top_list = [x for x in page_array if not x.parent]
 
@@ -380,6 +392,9 @@ for rank in Rank:
                 parent.resolve_group(rank1)
             if rank1 == parent.rank:
                 found_higher_rank = True
+
+if arg('-linn4'):
+    print_linn_trees()
 
 top_list = [x for x in page_array if not x.parent]
 
