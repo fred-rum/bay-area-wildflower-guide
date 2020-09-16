@@ -1,6 +1,6 @@
 sci:Polygala myrtifolia
 sci_j: n/a
 x:ba
-family:Polygonaceae
+family:Polygalaceae
 . brush-like tuft protruding from the none#keel
 . rare

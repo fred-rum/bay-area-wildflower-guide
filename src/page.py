@@ -14,7 +14,8 @@ from parse import *
 
 ###############################################################################
 
-page_array = [] # array of pages; only appended to; never otherwise altered
+page_array = [] # array of real pages; only appended to; never otherwise altered
+full_page_array = [] # array of both real and shadow pages
 genus_page_list = {} # genus name -> list of pages in that genus
 genus_family = {} # genus name -> family name
 
@@ -46,11 +47,11 @@ for rank in Rank:
     group_child_set[rank] = {}
 
 with open(root_path + '/data/family names.yaml', encoding='utf-8') as f:
-    family_com = yaml.safe_load(f)
+    group_sci_to_com = yaml.safe_load(f)
 
-family_sci = {}
-for sci, com in family_com.items():
-    family_sci[com] = sci
+group_com_to_sci = {}
+for sci, com in group_sci_to_com.items():
+    group_com_to_sci[com] = sci
 
 ###############################################################################
 
@@ -131,6 +132,8 @@ class Page:
             self.index = len(page_array)
             page_array.append(self)
 
+        full_page_array.append(self)
+
         self.com = None # a common name
         self.sci = None # a scientific name stripped of elaborations
         self.elab = None # an elaborated scientific name
@@ -139,11 +142,13 @@ class Page:
         self.level = None # taxonomic level: above, genus, species, or below
         self.rank = None # taxonomic rank (as above, but explicit above genus)
 
-        self.prop = {} # property -> rank set
+        self.prop_ranks = {} # property -> rank set
+        self.prop_set = set() # set of properties applied exactly to this page
 
         self.no_sci = False # true if it's a key page for unrelated species
 
         self.top_level = None # 'flowering plants', 'ferns', etc.
+        self.is_top = False
 
         # Alternative scientific names
         self.elab_calflora = None
@@ -186,6 +191,10 @@ class Page:
         # real or shadow.
         self.linn_parent = None # the Linnaean parent (if known)
         self.linn_child = set() # an unordered set of Linnaean children
+
+        # ancestors that this page should be listed as a 'member of',
+        # ordered from lowest-ranked ancestor to highest.
+        self.membership_list = []
 
         # A set of color names that the page is linked from.
         # (Initially this is just the flower colors,
@@ -260,31 +269,6 @@ class Page:
         self.elab = elab
         sci_page[sci] = self
 
-    def add_linn_parent(self, rank, sci):
-        if sci in sci_page:
-            parent = sci_page[sci]
-        elif sci in isci_page:
-            parent = isci_page[sci]
-        else:
-            parent = Page(sci, shadow=True)
-            if rank > Rank.genus:
-                parent.set_sci(f'{rank.name} {sci}')
-            elif rank == Rank.genus:
-                parent.set_sci(f'{sci} spp.')
-            else:
-                # A species name is no different when elaborated.
-                # A parent would never be a subspecies or variant.
-                pass
-        parent.link_linn_child(self)
-
-    def guess_groups_from_sci(self):
-        if self.rank in (Rank.below, Rank.species):
-            # If the page has a rank, it's guaranteed to have a sci name.
-            sci_words = self.sci.split(' ')
-            if self.rank is Rank.below:
-                self.add_linn_parent(Rank.species, ' '.join(sci_words[0:1]))
-            self.add_linn_parent(Rank.genus, sci_words[0])
-
     def set_top_level(self, top_level, tree_top):
         if self.top_level is None:
             self.top_level = top_level
@@ -296,9 +280,6 @@ class Page:
             return
         else:
             error(f'{self.name} is under both {self.top_level} and {top_level} ({tree_top})')
-
-    def assign_group(self, rank, group):
-        self.group[rank] = group
 
     def set_group(self, rank, group):
         if rank in self.group_resolved:
@@ -343,10 +324,10 @@ class Page:
             group = self.group[rank]
 
             # translate a common name into the expected scientific name
-            if group in family_com:
+            if group in group_sci_to_com:
                 pass # good
-            elif group in family_sci:
-                group = family_sci[group]
+            elif group in group_com_to_sci:
+                group = group_com_to_sci[group]
             else:
                 page = find_page1(group)
                 if page:
@@ -513,7 +494,7 @@ class Page:
 
     def parse_properties(self):
         def repl_is_top(matchobj):
-            self.prop['is_top'] = set(['self'])
+            self.is_top = True
             return ''
 
         def repl_default_ancestor(matchobj):
@@ -522,6 +503,7 @@ class Page:
                 error(f'default_ancestor specified for both {default_ancestor.name} and {self.name}')
             else:
                 default_ancestor = self
+            return ''
 
         def repl_property(matchobj):
             prop = matchobj.group(1)
@@ -547,15 +529,15 @@ class Page:
                             in_range = not in_range
                 else:
                     # Not a range, just a rank.
-                    # For this case, 'self' is retained in case the current
-                    # page does not have a rank.
+                    # For this case, 'self' is applied directly in case the
+                    # current page does not have a rank.
                     rank = rank_range
                     if rank == 'self':
-                        rank_set.add(rank)
+                        self.prop_set.add(prop)
                     else:
                         rank_set.add(self.canonical_rank(rank))
                         
-            self.prop[prop] = rank_set
+            self.prop_ranks[prop] = rank_set
 
         self.txt = re.sub(r'^is_top\s*?\n',
                           repl_is_top, self.txt, flags=re.MULTILINE)
@@ -563,7 +545,7 @@ class Page:
         self.txt = re.sub(r'^default_ancestor\s*?\n',
                           repl_default_ancestor, self.txt, flags=re.MULTILINE)
 
-        self.txt = re.sub(r'^(create|link):\s*(.*?)\s*?\n',
+        self.txt = re.sub(r'^(create|link|member_link|member_name):\s*(.*?)\s*?\n',
                           repl_property, self.txt, flags=re.MULTILINE)
 
     def parse_glossary(self):
@@ -709,13 +691,24 @@ class Page:
                     exclude_set.add(child)
                     child.link_linn_descendants(linn_parent, exclude_set)
 
+    # Create a Linnaean link between two existing pages.  Although we
+    # use the term 'child', it could actually be a deeper descendant
+    # if the 'child' page already has a lower-ranked parent.  If the
+    # parent is inserted between nodes of an existing Linnaean link,
+    # that link is rearranged to accomodate the parent.
     def link_linn_child(self, child):
         if child in self.linn_child:
             # Commonly we'll already know the parent-child relationship.
             # In that case, bail out as quickly as possible.
             return
 
-        if self.rank <= child.rank:
+        # Make sure the child rank is less than the parent rank.
+        # But if the child is unranked, we don't bother to search deeper.
+        # (We expect to only create a Linnaean link on an unranked child
+        # after determining the lowest common child ancestor of its
+        # descendants, which means their ranks are already guaranteed to
+        # be compatible.
+        if child.rank and self.rank <= child.rank:
             fatal(f'bad rank order when adding {child.name} (rank {child.rank.name}) as a child of {self.name} (rank {self.rank.name})')
 
         if child.linn_parent == None:
@@ -725,47 +718,146 @@ class Page:
             self.linn_child.add(child)
             return
 
-        # The new link attempts to establish a different parent than the
-        # child previously had.  Check whether the new parent or old
-        # parent has the lower rank, and react accordingly.
-        if self.rank < child.linn_parent.rank:
-            # The new parent fills a gap between the child and its
-            # previous parent.
+        try:
+            # The new link attempts to establish a different parent than the
+            # child previously had.  Check whether the new parent or old
+            # parent has the lower rank, and react accordingly.
+            if self.rank < child.linn_parent.rank:
+                # The new parent fills a gap between the child and its
+                # previous parent.
 
-            ancestor = child.linn_parent
+                ancestor = child.linn_parent
 
-            # Remove the previous link between the child and what we now
-            # consider to be a more distant ancestor.  Normally when
-            # removing a link, we'd also clear child.linn_parent, but
-            # we're about to overwrite that below, anyway.  So all we have
-            # to do here is remove the direct link from the ancestor to the
-            # child.
-            ancestor.linn_child.remove(child)
+                # Remove the previous link between the child and what
+                # we now consider to be a more distant ancestor.
+                # Normally when removing a link, we'd also clear
+                # child.linn_parent, but we're about to overwrite that
+                # below, anyway.  So all we have to do here is remove
+                # the direct link from the ancestor to the child.
+                ancestor.linn_child.remove(child)
 
-            # Add the link from the child to its new parent.
-            child.linn_parent = self
-            self.linn_child.add(child)
+                # Add the link from the child to its new parent.
+                child.linn_parent = self
+                self.linn_child.add(child)
 
-            # Also add a link from the parent to the higher-ranked ancestor.
-            ancestor.link_linn_child(self)
+                # Also add a link from the parent to the higher-ranked ancestor.
+                ancestor.link_linn_child(self)
+            else:
+                # The child's current parent has a rank lower than the
+                # new parent that we're trying to link.  That means
+                # that the new parent is really an ancestor at a
+                # higher level.  It's likely that the attempted new
+                # parent is already linked higher in the tree, but
+                # let's make sure.
+                #
+                # Note that we'll also fall through to this code if
+                # the child's current parent has the *same* rank as
+                # the new parent.  Since we already checked that the
+                # parents are not the same, that's a problem, but
+                # it'll get caught when we make the recursive call.
+                self.link_linn_child(child.linn_parent)
+        except FatalError:
+            warning(f'was adding {child.name} (rank {child.rank.name}) as a child of {self.name} (rank {self.rank.name})')
+            raise
+
+    # Create a Linnaean link to a parent that is descibed by rank &
+    # name.  Although we use the term 'parent', it could actually be a
+    # higher ancestor if we already have a lower-ranked parent.  A
+    # page for the ancestor is created if necessary.
+    #
+    # This function is a thin wrapper raound link_linn_child(), which
+    # is centered on the parent page, but add_linn_parent() is
+    # centered on the child page because it is the page that is
+    # guaranteed to be present.
+    def add_linn_parent(self, rank, name):
+        parent = find_page1(name)
+        if not parent and name in isci_page:
+            parent = isci_page[name]
+
+        if parent:
+            if parent.rank is not rank:
+                error(f'{self.name}.add_linn_parent({rank.name}, {name}) is called, but that page is rank {parent.rank.name}')
+                return self
         else:
-            # The child's current parent has a rank lower than the new parent
-            # that we're trying to link.  That means that the new parent
-            # is really an ancestor at a higher level.  It's likely that
-            # the attempted new parent is already linked higher in the
-            # tree, but let's make sure.
-            #
-            # Note that we'll also fall through to this code if the child's
-            # current parent has the *same* rank as the new parent.  Since
-            # we already checked that the parents are not the same, that's
-            # a problem, but it'll get caught when we make the recursive call.
-            self.link_linn_child(child.linn_parent)
+            # The parent page doesn't already exist, so create it.
+
+            if is_sci(name):
+                sci = name
+            elif name in group_com_to_sci:
+                # Get the scientific name from family names.yaml
+                sci = group_com_to_sci[name]
+            else:
+                error(f'{self.name}.add_linn_parent({rank.name}, {name}) is called, but a scientific name cannot be found for the parent')
+                return self
+
+            if sci in group_sci_to_com:
+                # Get the common name from family names.yaml
+                com = group_sci_to_com[sci]
+            else:
+                # family names.yaml uses 'n/a' when there is no common name
+                com = 'n/a'
+
+            if com == 'n/a':
+                # We prefer to name the page using its common name.
+                parent = Page(sci, shadow=True)
+            else:
+                parent = Page(com, shadow=True)
+
+            # Create the elaborated scientific name.
+            if rank > Rank.genus:
+                parent.set_sci(f'{rank.name} {sci}')
+            elif rank == Rank.genus:
+                parent.set_sci(f'{sci} spp.')
+            else:
+                # A species name is no different when elaborated.
+                # A parent would never be a subspecies or variant.
+                parent.set_sci(sci)
+
+        # OK, we either found the parent page or created it.
+        # We can finally create the Linnaean link.
+        parent.link_linn_child(self)
+
+        # Because a taxonomic chain is often built in a series from
+        # lowest to highest rank, performance is enhanced by returning
+        # each linn_parent that is found or created so that the next
+        # link in the chain can be added to it directly without needing
+        # to find it again.
+        return parent
+
+    def assign_groups(self):
+        page = self
+        if self.rank in (Rank.below, Rank.species):
+            # If the page has a rank, it's guaranteed to have a sci name.
+            sci_words = self.sci.split(' ')
+            if self.rank is Rank.below:
+                page = self.add_linn_parent(Rank.species, ' '.join(sci_words[0:2]))
+            page = self.add_linn_parent(Rank.genus, sci_words[0])
+
+        # add_linn_parent is most efficiently performed in rank order,
+        # updating the page after each link.  But for now I don't bother.
+        for rank, group in self.group.items():
+            self.add_linn_parent(rank, group)
 
     def assign_child(self, child):
         if self in child.parent:
             error(f'{child.name} added as child of {self.name} twice')
             return
 
+        # In addition to creating a real link, we also create a Linnaean link.
+        # The process of adding the Linnaean link also checks for a potential
+        # circular loop in the real tree, so we do that before creating the
+        # real link.
+        #
+        # If either the parent or child is unranked, we don't want to create
+        # a Linnaean link to/from it.  Instead we search for the nearest
+        # Linnaean ancestor and link it to the nearest Linnaean descendants.
+        #
+        # Note that after the real tree has been built, we *can* make a
+        # Linnaean link to an unranked child, but we still don't want to do
+        # so now.  Instead, we prefer to allow the Linnaean tree to accumulate
+        # as much detail as possible so that the unranked page can later
+        # determine its nearest Linnaean ancestor without worrying that maybe
+        # a nearer Linnaean ancestor will get created.
         try:
             linn_parent = self.find_lowest_ranked_ancestor(child)
         except RecursionError:
@@ -775,10 +867,11 @@ class Page:
         if linn_parent:
             child.link_linn_descendants(linn_parent)
 
+        # OK, now we can finally create the real link.
         self.child.append(child)
         child.parent.add(self)
 
-    def print_linn_tree(self, level=0, exclude_set=None):
+    def print_tree(self, level=0, link_type='', exclude_set=None):
         if exclude_set is None:
             exclude_set = set()
 
@@ -795,18 +888,168 @@ class Page:
             x = ' [repeat]'
         else:
             x = ''
-        print(f'{"  "*level}{s}{self.name} ({r}){x}')
+        for prop in sorted(self.prop_set):
+            x += ' ' + prop
+        print(f'{"  "*level}{link_type}{s}{self.name} ({r}){x}')
 
         if self in exclude_set:
             return
 
         exclude_set.add(self)
 
-        for child in self.linn_child:
-            child.print_linn_tree(level+1, exclude_set)
         for child in self.child:
-            if child not in self.linn_child:
-                child.print_linn_tree(level+1, exclude_set)
+            child.print_tree(level+1, '*', exclude_set)
+        for child in self.linn_child:
+            if child not in self.child:
+                child.print_tree(level+1, '-', exclude_set)
+
+    def propagate_is_top(self):
+        ancestor = self
+        while ancestor:
+            ancestor.is_top = True
+            ancestor = ancestor.linn_parent
+
+    # Return a set of all ancestors.
+    # If is_top is true, then also propagate that up through the ancestors.
+    def get_linn_ancestor_set(self, is_top):
+        # is_top propagation starts at the lowest level.
+        if is_top:
+            self.is_top = True
+
+        # The ancestor_set starts populating with the first parent.
+        ancestor = self.linn_parent
+        ancestor_set = set()
+
+        while ancestor:
+            if is_top:
+                ancestor.is_top = True
+            ancestor_set.add(ancestor)
+            ancestor = ancestor.linn_parent
+
+        return ancestor_set
+
+    # Assign the lowest common children's ancestor as linn_parent.
+    # Also propagate is_top to children and their ancestors.
+    def resolve_lcca(self):
+        cca_set = None
+        for child in self.child:
+            child_ancestor_set = child.get_linn_ancestor_set(self.is_top)
+            if cca_set is None: # Don't take this path for the empty set!
+                cca_set = child_ancestor_set
+            else:
+                cca_set.intersection_update(child_ancestor_set)
+
+        if cca_set:
+            lcca = None
+            for cca in cca_set:
+                if not lcca or cca.rank < lcca.rank:
+                    lcca = cca
+            lcca.link_linn_child(self)
+        else:
+            # Either there are no children or no common children's ancestors.
+            # In any case, we leave linn_parent as None
+            pass
+
+    def assign_props(self, prop_ranks):
+        if self.rank:
+            for prop, rank_set in prop_ranks.items():
+                if self.rank in rank_set:
+                    self.prop_set.add(prop)
+
+            # Recursively descend through Linnaean children.
+            # There's no need to descend through 'real' children because
+            # they cannot include any ranked pages that are not included
+            # in the Linnaean descendants.
+            for child in self.linn_child:
+                child.assign_props(prop_ranks)
+        else:
+            # If a property is declared in an unranked page, then it cannot
+            # have Linnaean children.  We push the properties down through
+            # its real children until a ranked descendant is found, then
+            # the properties are applied to each of those Linnaean trees.
+            for child in self.child:
+                child.assign_props(prop_ranks)
+
+    # Check whether this page has 'check_ancestor' as a Linnaean ancestor.
+    def has_linn_ancestor(self, check_ancestor):
+        ancestor = self
+        while ancestor:
+            if ancestor == check_ancestor:
+                return True
+            ancestor = ancestor.linn_parent
+        return False
+
+    # Check Linnaean descendants of link_from to find real pages that
+    # it can link to.
+    def get_potential_link_set(self, potential_link_set, link_from):
+        if self.shadow:
+            # Keep recursing downward.
+            # Since this page isn't real, we can be sure that it has no
+            # real child links in self.child to worry about.
+            for child in self.linn_child:
+                child.get_potential_link_set(potential_link_set, link_from)
+        else:
+            # This page could have a real unranked parent that does or
+            # does not also have link_from as a Linnaean ancestor.
+            # (Note that this page cannot have a real ranked parent
+            # because that would have been found first in the Linnaean
+            # descent.)
+            #
+            # If a real (unranked) parent is also under the link_from
+            # page, then that real parent will get a link, and there's no
+            # no need to also make a link to this child.  (If the real
+            # parent is ranked
+            for parent in self.parent:
+                if parent.has_linn_ancestor(link_from):
+                    return
+
+            # This is a potential link target.
+            potential_link_set.add(self)
+
+    # Promote a shadow page to be real.
+    def promote_to_real(self):
+        self.shadow = False
+        self.index = len(page_array)
+        page_array.append(self)
+
+    # Apply the properties that have been assigned to an individual page.
+    def apply_props(self):
+        self.apply_prop_link()
+        self.apply_prop_member()
+
+    def apply_prop_link(self):
+        if (('create' in self.prop_set and self.shadow) or
+            ('link' in self.prop_set and not self.shadow)):
+            # Check for Linaean descendants that can potentially linked to
+            # this parent.
+            potential_link_set = set()
+            for child in self.linn_child:
+                # Ignore children that already have a real link.
+                if child not in self.child:
+                    child.get_potential_link_set(potential_link_set, self)
+
+            link_list = sort_pages(potential_link_set)
+
+            if 'create' in self.prop_set and self.shadow:
+                self.promote_to_real()
+                for child in link_list:
+                    self.txt += f'=={child.index}\n'
+                    self.assign_child(child)
+            elif 'link' in self.prop_set and not self.shadow:
+                for child in link_list:
+                    self.txt += f'=={child.index}\n'
+                    self.assign_child(child)
+
+    def assign_membership(self, ancestor):
+        self.membership_list.append(ancestor)
+        for child in self.linn_child:
+            child.assign_membership(ancestor)
+
+    def apply_prop_member(self):
+        if (('member_link' in self.prop_set and not self.shadow) or
+            ('member_name' in self.prop_set and self.shadow)):
+            for child in self.linn_child:
+                child.assign_membership(self)
 
     def expand_genus(self, sci):
         if (self.cur_genus and len(sci) >= 3 and
@@ -938,9 +1181,18 @@ class Page:
                 data_object.set_complete(matchobj)
                 continue
 
+            # Look for a group declaration, e.g. 'family: [name]'
             matchobj = re_group.match(c)
             if matchobj:
-                data_object.assign_group(Rank[matchobj.group(1)], matchobj.group(2))
+                # We don't create the Linnaean link right away because
+                # doing so could create a shadow page, and we don't
+                # want to create any shadow pages until all real
+                # children have been processed from the txt files
+                # (thus giving them their official common and scientific
+                # names).  So instead we record the group for later.
+                rank = Rank[matchobj.group(1)]
+                group = matchobj.group(2)
+                self.group[rank] = group
                 continue
 
             if c in ('', '[', ']'):
@@ -1106,7 +1358,7 @@ class Page:
             w.write(f'<p>\n{txt}\n</p>\n')
 
     def write_lists(self, w):
-        if self.top_level != 'flowering plants':
+        if not self.has_linn_ancestor(name_page['flowering plants']):
             return
 
         if not self.child and not self.jpg_list:
@@ -1146,12 +1398,12 @@ class Page:
 
         w.write(f'{self.create_link(2)}</div>\n')
 
-    def get_ancestor_set(self):
-        ancestor_set = set()
-        ancestor_set.add(self)
-        for parent in self.parent:
-            ancestor_set.update(parent.get_ancestor_set())
-        return ancestor_set
+#    def get_ancestor_set(self):
+#        ancestor_set = set()
+#        ancestor_set.add(self)
+#        for parent in self.parent:
+#            ancestor_set.update(parent.get_ancestor_set())
+#        return ancestor_set
 
     def cross_out_children(self, page_list):
         if self in page_list:
@@ -1169,7 +1421,7 @@ class Page:
                     error(f'{self.name} has two different parent glossaries')
             else:
                 if glossary != self.glossary:
-                    error(f'{self.name} gets two different glossaries')
+                    error(f'{self.name} gets two different glossaries, {self.glossary.name} and {glossary.name}')
 
             # No need to continue the tree traversal through this node
             # since it and its children have already set the glossary.
@@ -1280,9 +1532,9 @@ class Page:
         #searched_set.add(self)
 
         result = {}
-        if prop in self.prop:
+        if prop in self.prop_ranks:
             # Record information for each rank specified by the property.
-            for rank in self.prop[prop]:
+            for rank in self.prop_ranks[prop]:
                 # x is the result for the current rank.
                 x = {}
 
@@ -1469,17 +1721,20 @@ class Page:
                     link = parent.create_link(1)
                     c_list.append(link)
 
-            # If the page isn't a direct child of its family page, provide
+            # membership_list lists the ancestors that this page should
+            # be listed as a 'member of', from lowest-ranked to highest.
+            #
+            # If this page isn't a direct child of its real ancestor, provide
             # a link to it.  (A direct child would have been listed above
             # or will be listed further below.)  Note that the family page
             # is likely to have been autopopulated, but not necessarily.
-            if Rank.family in self.group and self.group[Rank.family]:
-                family = self.group[Rank.family]
-                family_page = sci_page[family]
-
-                if family_page not in self.parent:
-                    link = family_page.create_link(1)
-                    c_list.append(link)
+            #
+            # For a shadow ancestor, write it as unlinked text.
+            for ancestor in self.membership_list:
+                if ancestor.shadow:
+                    c_list.append(ancestor.format_full(1))
+                elif ancestor not in self.parent:
+                    c_list.append(ancestor.create_link(1))
 
             write_header(w, title, h1, nospace=bool(c_list))
 
@@ -1545,11 +1800,11 @@ class Page:
         if self.taxon_id and not (self.jpg_list or self.child) and not arg('-db'):
             error(f'{self.name} is observed, but has no photos')
 
-        if self.top_level == 'flowering plants':
-            if self.jpg_list and not self.color:
-                error(f'No color for flower: {self.name}')
-        elif self.color:
-            error(f'Color specified for non-flower: {self.name}')
+#        if self.top_level == 'flowering plants':
+#            if self.jpg_list and not self.color:
+#                error(f'No color for flower: {self.name}')
+#        elif self.color:
+#            error(f'Color specified for non-flower: {self.name}')
 
     def record_genus(self):
         # record all pages that are within each genus

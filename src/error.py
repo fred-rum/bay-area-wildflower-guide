@@ -9,6 +9,7 @@ _in_section = False
 _delayed_cnt = 0 # is always 0 when _in_section is False
 
 def warning(msg):
+    sys.stdout.flush()
     print(msg, file=sys.stderr, flush=True)
 
 # By default, errors are emitted as soon as detected, and duplicates are
@@ -55,6 +56,8 @@ def error_end_section():
 
 def _emit_error(msg, prefix):
     global _former_prefix, _error_cnt
+
+    sys.stdout.flush()
 
     if prefix:
         if prefix != _former_prefix:
@@ -115,6 +118,6 @@ def error_end():
 class FatalError(Exception):
     pass
 
-def fatal(msg, prefix=None):
-    error(msg, prefix)
+def fatal(msg):
+    warning(msg)
     raise FatalError(msg)

@@ -1,5 +1,7 @@
 sci:subphylum Angiospermae
 is_top
 default_ancestor
-create: family
-link: self-below
+member_link: family
+member_name: family
+link: self-tribe
+flag_link: genus-below

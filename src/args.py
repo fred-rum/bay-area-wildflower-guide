@@ -9,7 +9,7 @@ while len(sys.argv):
                         '-incomplete_keys',
                         '-no_error_limit',
                         '-not_top_usage') or
-        sys.argv[0].startswith('-linn')):
+        sys.argv[0].startswith('-tree')):
         _arg_value[sys.argv.pop(0)] = True
     elif sys.argv[0] == '-db':
         _arg_value[sys.argv.pop(0)] = sys.argv.pop(1)

@@ -478,12 +478,12 @@ pages by these causes:
 - A group is declared in the txt (e.g. 'family: grasses')
 - A taxonomic chain is read from observations.csv
 
-A taxonomic chain is likely to be complete, but the others are not.
-(A taxonomic chain could be incomplete depending on how I address
-discrepancies in the iNaturalist hierarchy.)  In particular, some
-ranks may initially be skipped as the shadow tree is built
-(e.g. because a subspecies is a direct child of a genus), but then we
-attempt to add the skipped ranks to the tree later (e.g. from
+A taxonomic chain from observations.csv is likely to be complete, but
+the others are not.  (A taxonomic chain could be incomplete depending
+on how I address discrepancies in the iNaturalist hierarchy.)  In
+particular, some ranks may initially be skipped as the shadow tree is
+built (e.g. because a subspecies is a direct child of a genus), but
+then we attempt to add the skipped ranks to the tree later (e.g. from
 observations.csv).  This situation can be recognized when we attempt
 to create a shadow link, but the child already has a parent which is
 not the one we're trying to link.  If the old and new parents have the
@@ -507,58 +507,91 @@ same, of course).
 
 After creating and linking all pages and shadow pages (i.e. after
 reading observations.csv), some pages will be left without a parent or
-shadow parent...
+Linnaean parent.  In simple cases such a page either has 'is_top' set,
+or it wants to be placed under default_ancestor.  But there are
+exceptions:
 
-We need to know if these pages are intended to be the top of the
-shadow hierarchy, but we can't just check 'is_top' for a page because
-shadow ancestors may have been added to an 'is_top' page.  Therefore,
-we make a pass over all (real) pages, and if 'is_top' is True for a
-page, 'is_top' is propagated to all shadow ancestors.  (Or to the top
-shadow ancestor.  It doesn't really matter.)  Note that we don't
-really expect any pages along the propagation chain to have a real
-parent, as that would imply that 'is_top' isn't placed optimally.
-Perhaps flag a warning for this case, and/or propagate into the real
-parents as well.  On the other hand, multiple pages can propagate
-'is_top' to the same shadow ancestor, and that's fine.
+- A shadow page could have been created as a Linnaean ancestor of an
+'is_top' page.  In this case, we don't want to place the shadow page
+under the default_ancestor.  Instead, we want to propagate 'is_top' up
+to the top of the Linnaean hierarchy.
 
-If a page has a rank but doesn't have a parent or shadow parent, then
-normally we expect 'is_top' to be True for the page.  If 'is_top'
-isn't True, then we set its shadow parent to the default_ancestor
-page.
+- An unranked (real) page could find a closer ancestor that we'd
+rather put it under than the default ancestor.
 
-If a page has no rank and no parent or shadow parent then we try to
-"resolve" it to have a ranked parent.  We first resolve all of its
-real children (it shouldn't have any shadow children), then find the
-lowest common shadow ancestor among them.  Note that we do this even
-if the page has 'is_top' set since we want to propagate 'is_top' to
-the top of the resolved shadow tree.
+- A combination of these would have an unranked 'is_top' page in which
+a ranked child has Linnaean parents.  Whether or not the unranked
+'is_top' page can find a closer ancestor, it wants to make sure that
+its children's Linnaean ancestors are marked 'is_top'.
 
-When resolving a child with a shadow parent, the child returns a set
-of all of its shadow ancestors.  The "common ancestors" are the
-intersection of all such sets, and the "lowest common ancestor" (LCA)
-is the common ancestor with the lowest rank.
+We can mix the order of propagating 'is_top' up (or down) relative to
+resolving unranked pages' ancestors.  I.e. both processes can be mixed
+in one pass over all (real) pages.  A second pass can then assign the
+default_ancestor where needed.  Ultimately, we want every page without
+a Linnaean parent to either have 'is_top' set or be assigned the
+default_ancestor.
 
-When resolving a ranked child without a shadow parent, if the original
-page is 'is_top', then the child provides no contribution to the LCA.
-In this case, it's super unclear what the LCA should be, but it's also
-unlikely to matter.  (It could matter if a different child provides a
-taxonomic chain that includes a real page that sets properties that
-could effect the ranked child, but in that case, 'is_top' seems
-inappropriate.)  If the original page is not 'is_top', the
-default_ancestor is assigned as the shadow parent to the ranked child.
-(Note that this pushes the effects of 'is_top' to lower nodes in the
-tree, and it only works if we start at the top of a tree.  However, we
-don't push the actual value of 'is_top' into descendants since those
-descendants could also be in other trees which may or may not have
-'is_top' at the top.)
+Pass 1: propagate 'is_top' and resolve unranked pages' ancestors
 
-When resolving an unranked child without a shadow parent, we recurse,
-passing along the original 'is_top' value.
+If a ranked page has 'is_top', it is moved/copied to the top of its
+Linnaean hierarchy.  Note that we don't really expect any pages along
+the propagation chain to have a real parent, as that would imply that
+'is_top' isn't placed optimally.  Perhaps flag a warning for this
+case, and/or propagate into the real parents as well.  On the other
+hand, multiple pages can propagate 'is_top' to the same shadow
+ancestor, and that's fine.
 
-The ultimate effect is that each unranked page is given a shadow
-parent (unless perhaps it 'is_top') but no shadow children.  If an
-'is_top' page *is* given a shadow parent, then is_top is propagated up
-the shadow tree as before.
+If an unranked page has no Linnaean parent, then it is resolved using
+the following process.
+
+If a (real) page has no rank and no Linnaean parent then we try to
+"resolve" it to have a Linnaean parent.  This parent is defined to be
+the lowest common child ancestor (LCCA), i.e. the lowest-ranked
+Linnaean ancestor shared by all real children.  (Note that an unranked
+page shouldn't have any shadow children).  For each real child, we
+traverse its Linnaean ancestry and return a set of all of its
+ancestors.  We take the intersection of all children's sets to get the
+set of common child ancestors (CCA).  The lowest-ranked ancestor in
+this set is the LCCA.
+
+If the children do not share any ancestors (including the case where
+some child has no Linnaean parent at all), then the CCA set is empty,
+and no LCCA is assigned as the Linnaean parent.
+
+Example:
+'nifty flowers' has children 'Clarkia spp.' and 'Taraxia ovata'.
+'Clarkia' has ancestors 'family Onagraceae', 'flowering plants', etc.
+'Taraxia ovata' has ancestors 'Taraxia spp.', 'family Onagraceae',
+  'flowering plants', etc.
+The CCA are 'family Onagraceae', 'flowering plants', etc.
+The LCCA is 'family Onagraceae'.
+
+If we need to get the ancestor set of an unranked child with no
+Linnaean parent, we recurse and resolve the child, then continue with
+the original resolution.  If we need to get the ancestor set of an
+unranked child that has a Linnaean parent, then we must have already
+resolved it, and we can gets its ancestor set without needing to
+resolve it again.
+
+When resolving a ranked child without a shadow parent, we return the
+empty set.  Either we're in an 'is_top' situation, in which case we
+expect the hierarchy to already be sufficiently complete without
+assigning Linnaean ancestors, or we're not, in which case we'll end up
+assigning the default_ancestor to both the ranked child and the
+unranked page that we're trying to resolve.
+
+In case we end up not finding an LCCA at any level of recursion, we
+pass the 'is_top' value down to each child as we recurse into it.  The
+child then passes 'is_top' up the chain as it gets its ancestor set.
+As a convenient side effect, if we *do* find an LCCA, then we know
+that it has already received 'is_top' from all children.
+
+Pass 2:
+
+If a page (real or shadow) has a rank but doesn't have a Linnaean
+parent, and 'is_top' isn't True, then we set its Linnaean parent to
+the default_ancestor page.
+
 
 Once the shadow tree is entirely built, the properties can be
 processed...
@@ -577,6 +610,23 @@ for each property), but is simply the existence (or not) of each
 property on each page.  (E.g. call it 'prop_set', as opposed to
 'prop_ranks'.)
 
+While pushing down properties, a descendant page may declare its own
+ranks for a property that is being pushed down.  By default, the
+property takes the union of the descending ranks and the declared
+ranks.  However, if the declaration includes 'replace', then only the
+declared ranks are applied to that page or below.  'replace' can
+appear with no ranks specified, in which case propagation ends for the
+property.  E.g. 'create: replace'.  This 'replace' concept might not
+be terribly useful since for properties like 'create' or 'no_create'
+or 'no_orphan', the most likely place to want to replace the
+properties is on the shadow page that applies the property, but shadow
+pages can't declare their own properties.  Does it make sense to
+instead have another set of property overrides that apply to the
+descendant end of a link?  E.g. 'no_no_orphan' on an individual
+species would exclude it from a 'no_orphan' check applied to its
+genus.  In this case, instead of naming properties things like
+'no_orphan', 'flag_orphan' may be better.
+
 For each rank from lowest to highest, all pages and shadow pages are
 scanned.  I.e. we need an array of all pages, not just real pages.
 
@@ -585,20 +635,21 @@ or 'no_link' property, then a set of descendants to (potentially) link
 to the page is created.  The shadow tree is traversed to find the
 first 'real' descendant along each path.  (The real tree isn't
 traversed because that's a link that already exists and doesn't need
-to be re-created.)  Once a real descendant is found, its real
-ancestors are traversed all the way to the top (for performance
-perhaps limited by the rank).  If any real ancestor has a shadow
-parent of the original shadow page, then that ancestor will get a
+to be re-created.)  Once a real descendant is found, we check to see
+if it has a real parent which is in the same Linnaean tree.  This can
+only occur if the real parent is unranked (since a ranked parent would
+have been found first in the descent).  So, once a real descendant is
+found, we check the Linnaean ancestor chain of each of its real
+parents.  If the ancestor chain includes the original shadow page,
+then the real parent (or perhaps one of its ancestors) will get a
 link, and there's no need to create another one to lower in the tree.
-(Presumably if the ranked shadow page is its real parent, then it
-should also be a shadow parent, so only the shadow_parent link needs
-to be checked.)
 
 I.e.
 - Start the search from ranked page 'X' with the applied property.
-- From 'X', find each shadow descendants, 'Y'.
-- From 'Y', find each real ancestor, 'Z'.
-- If no 'Z' has shadow parent 'X', then a link can be created from 'X' to 'Y'.
+- From 'X', find each Linnaean descendant, 'Y'.
+- From 'Y', find each real parent, 'Z'.
+- If no 'Z' has Linnaean ancestor 'X', then a link can be created
+  from 'X' to 'Y'.
 
 The action to take depends on the property, whether the page it
 applies to is real or shadow, and the number of links that can be
@@ -606,6 +657,14 @@ created from it.
 
 In all cases below where links are created, the child pages are sorted
 so that pages with more observations are linked first.
+
+For 'obs' on a shadow page, an error is flagged if the taxon appears
+in observations.csv (as long as it is in the bay area and not in
+ignore species.yaml).
+
+For 'photo' on a real page, an error is flagged if the taxon is
+observed and the page does not have a photo (directly on the page or
+propagated up from a descendant).
 
 For 'create' on a shadow page with at least one pending link, the page
 is promoted to 'real', and the links are created.  If the shadow page
@@ -629,6 +688,12 @@ has the 'common' property, then the common name must be defined in
 family_names.yaml (or 'n/a').  For any explicitly created page, I
 assume that the
 
+For 'common' on a shadow page, if the page is promoted to a real page
+by the 'create' property, then the common name must be defined in
+family_names.yaml.  (A common name from observations.csv is
+insufficient.)  Regardless of the 'common' property, if the common
+name is given, it is applied to the promoted page.
+
 For 'link' on a real page (with at least one pending link), the links
 are created.
 
@@ -643,7 +708,20 @@ if the corresponding number of links could be created.
 For 'no_link' on a real page, an error is flagged if any links could
 be created.
 
-I'll have the 'flowering plants' page assert 'no_create2: genus' and
+For 'no_orphan' on a shadow page, an error is flagged if all Linnaean
+descendants that are real do not share a common ancestor via real
+links.  (If there is only a single real Linnaean descendant, it is its
+own ancestor, which is fine.)  This is a bit looser than 'no_create2';
+it doesn't require that the common ancestor is the page with the
+property applied, but instead only requires that there is a common
+ancestor somewhere.  Note that this check is run before creating links
+for higher ranks, so the descendants won't trivially share a common
+ancestor such as 'flowering plants'.  Should the check for Linnaean
+descendants stop at the first real page on each path (relying on
+'no_link' to find orphans below that page) or continue all the way to
+the bottom?
+
+I'll have the 'flowering plants' page assert 'no_orphan: genus' and
 'no_link: genus-below'.  Thus, if a genus has at least two members, I
 expect a txt page for that genus.  And if a genus or species has a
 page, then all members of that genus/species must have an explicit
@@ -701,3 +779,55 @@ asci: [name] specifies an alternative scientific name that maps to the
 same page.  E.g. if the page for 'Aaa spp.' has 'asci: Bbb spp.', then
 a child species of 'Bbb Zed' will look for its taxonomic parent 'Bbb'
 and find it on page 'Aaa'.
+
+Instead of asci, a more flexible solution would be to allow groups
+declared in the txt to override the species/genus guesses from the
+name.  E.g. if Bbb Zed declares that is a member of genus Aaa, then it
+won't try to add Bbb as a Linnaean parent.  This could also
+potentially override the taxonomy read from observations.csv if so
+desired.  Requiring a genus group to be repeatedly declared for every
+species member is slightly painful, but it's a useful reminder that
+the user is doing something unorthodox.  In any case, this scheme
+allows members of a genus to be spread among multiple taxonomic groups
+if desired.
+
+Even better is to recognize the explicit link From Bbb Zed to Aaa (by
+real children or group declaration) and therefore disable any implicit
+shadow link (by name or observations.csv chain) from Bbb Zzz to Bbb.
+
+But this gets more complicated if Ccc and Ddd are implicitly in the
+same family (Ccceae) but explicitly are assigned to different families
+(Ccceae and Ddceae).  A direct implicit link from Ccc/Ddd to the
+family is handled fine, but what if the first indirect link from
+Ccc/Ddd is to the tribe level (between genus and family)?  They would
+then share the tribe and be confused about which family the tribe is a
+member of.  The txt would need to declare an explicit tribe group to
+prevent this problem.  Or a much more difficult solution is to build
+the implicit chain from top to bottom while also passing properties
+down the chain; any rank without a property (e.g. tribe) is skipped.
+
+
+For performance, keep track of which taxonomic chains have already
+been processed and don't reprocess them.  This relies on the knowledge
+that each time a taxon is seen in observations.csv, the same taxonomic
+chain is presented (with no holes).  I could prevent repeats based on
+the taxon ID of the observation, but even better is to track
+'taxon_chain_complete' for each page in the chain.  In this way, we
+can bail out in the middle if, e.g., the species is a new observation,
+but we've already completed the chain from the genus level.
+
+
+If I don't have a page for a subspecies, then observations.csv maps it
+to the page for the species, and that's fine.  However, if it wasn't
+found in the bay area, then presumably it is not a bay area species,
+and it doesn't make sense to record the observation for any
+higher-level taxon.
+
+If I map an observation to a higher taxon, I shouldn't apply
+iNaturalist's common name.
+
+Compared to before, observation counts are
+- more liberal for an observation of an auto-generated family
+- more restrictive for a high-rank observation outside the bay area
+- to do: more liberal for a subspecies observed outside the bay area
+         of a bay-area species

@@ -104,22 +104,22 @@ for name in txt_files:
 for page in page_array[:]:
     page.parse_children()
 
-def print_linn_trees():
+def print_trees():
     exclude_set = set()
-    for page in page_array:
+    for page in full_page_array:
         if not page.parent and not page.linn_parent:
-            page.print_linn_tree(exclude_set=exclude_set)
+            page.print_tree(exclude_set=exclude_set)
 
-if arg('-linn1'):
-    print_linn_trees()
-
-for page in page_array[:]:
-    page.guess_groups_from_sci()
-
-if arg('-linn2'):
-    print_linn_trees()
+if arg('-tree1'):
+    print_trees()
 
 assign_jpgs()
+
+for page in page_array[:]:
+    page.assign_groups()
+
+if arg('-tree2'):
+    print_trees()
 
 # Although other color checks are done later, we check for excess colors
 # here before propagating color to parent pages that might not have photos.
@@ -136,21 +136,21 @@ with open(f'{root_path}/data/ignore species.yaml', encoding='utf-8') as f:
 for page in page_array:
     page.record_genus()
 
-for genus in genus_page_list:
-    page_list = genus_page_list[genus]
-    if len(page_list) > 1:
-        if genus in sci_page and not sci_page[genus].shadow:
-            sci_page[genus].cross_out_children(page_list)
-            for page in page_list:
-                error(page.format_full(1), prefix=f'The following species are not included under the {genus} spp. key:')
-        else:
-            ancestor_set = page_list[0].get_ancestor_set()
-            for page in page_list[1:]:
-                set2 = page.get_ancestor_set()
-                ancestor_set.intersection_update(set2)
-            if not ancestor_set:
-                for page in page_list:
-                    error(page.format_full(1), prefix=f'The following pages in {genus} spp. are not under a common ancestor:')
+#for genus in genus_page_list:
+#    page_list = genus_page_list[genus]
+#    if len(page_list) > 1:
+#        if genus in sci_page and not sci_page[genus].shadow:
+#            sci_page[genus].cross_out_children(page_list)
+#            for page in page_list:
+#                error(page.format_full(1), prefix=f'The following species are not included under the {genus} spp. key:')
+#        else:
+#            ancestor_set = page_list[0].get_ancestor_set()
+#            for page in page_list[1:]:
+#                set2 = page.get_ancestor_set()
+#                ancestor_set.intersection_update(set2)
+#            if not ancestor_set:
+#                for page in page_list:
+#                    error(page.format_full(1), prefix=f'The following pages in {genus} spp. are not under a common ancestor:')
 
 # Remove characters that are allowed to be different between names
 # while the names are still considered identical.
@@ -164,10 +164,12 @@ def shrink(name):
     name = re.sub(r's$', '', name)
     return name
 
-# Read my observations file (exported from iNaturalist) and use it as follows:
+# Read my observations file (exported from iNaturalist) and use it as follows
+# for each observed taxon:
 #   Associate common names with scientific names
-#   Get a count of observations (total and research grade) of each flower.
-#   Get an iNaturalist taxon ID for each flower.
+#   Get a count of observations (total and research grade)
+#   Get an iNaturalist taxon ID
+#   Get the full taxonomic chain
 error_begin_section()
 with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='utf-8') as f:
     csv_reader = csv.reader(f)
@@ -254,20 +256,13 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
                 if i_com_shrink != p_com_shrink and com != page.icom:
                     page.icom = com
                     #error(f"iNaturalist's common name {com} differs from mine: {page.com} ({page.elab})")
-            if com and not page.com:
-                error(f"iNaturalist supplies a missing common name for {com} ({page.elab})")
-            for rank in Rank:
-                if rank in group_idx:
-                    group = row[group_idx[rank]]
-                    subphylum = row[group_idx[Rank.subphylum]]
-                    if group and subphylum == 'Angiospermae':
-                        page.assign_group(rank, group)
 
         if loc != 'bay area':
-            if page:
-                # If the location is outside the bay area, we'll still count
-                # it as long as it's a bay area taxon; i.e. if a page exists
-                # for it.  In this case, list the outside observations by
+            if page and page.rank < Rank.genus:
+                # If the location is outside the bay area, we'll still
+                # count it as long as it's a bay area species; i.e. if
+                # a page exists for it at the species level or below.
+                # In this case, list the outside observations by
                 # general location, rather than the specific park.
                 short_park = loc
             else:
@@ -293,6 +288,18 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
             if sci in sci_page:
                 page = sci_page[sci]
 
+        if page:
+            try:
+                node = page
+                for rank in Rank:
+                    if rank > page.rank and rank in group_idx:
+                        group = row[group_idx[rank]]
+                        if group: # ignore an empty group string
+                            node = node.add_linn_parent(rank, group)
+            except FatalError:
+                warning(f'was creating taxonomic chain from {page.name}')
+                raise
+
         if (page and (orig_sci not in sci_ignore or
                       sci_ignore[orig_sci][0] == '+')):
             page.obs_n += 1
@@ -304,97 +311,41 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
             page.month[month] += 1
 error_end_section()
 
-if arg('-linn3'):
-    print_linn_trees()
-
-# Get a list of pages without parents (top-level pages).
-top_list = [x for x in page_array if not x.parent]
+if arg('-tree3'):
+    print_trees()
 
 default_ancestor = get_default_ancestor()
-for page in top_list:
-    result = page.find_property('is_top')
-    if result:
-        for rank in result:
-            x = result[rank]
-            page.set_top_level(x['match'].name, x['top'].name)
-    else:
-        page.assign_group(default_ancestor.rank, default_ancestor.sci)
-        page.set_top_level(default_ancestor.name, page.name)
+for page in page_array:
+    if not page.rank and not page.linn_parent:
+        page.resolve_lcca()
+    elif page.is_top:
+        page.propagate_is_top()
 
+if default_ancestor:
+    for page in full_page_array:
+        if not page.is_top and not page.linn_parent:
+            default_ancestor.link_linn_child(page)
+            page.set_top_level(default_ancestor.name, page.name)
+
+if arg('-tree4'):
+    print_trees()
+
+# Assign properties to the appropriate ranks.
+for page in page_array:
+    if page.prop_ranks:
+        page.assign_props(page.prop_ranks)
+
+if arg('-tree5'):
+    print_trees()
+
+# Apply properties in order from the lowest ranked pages to the top.
 for rank in Rank:
-    for page in page_array:
-        if not page.parent:
-            page.resolve_group(rank)
+    for page in full_page_array:
+        if page.rank is rank:
+            page.apply_props()
 
-    # Figure out which group pages should be created and/or linked.
-    # We don't actually perform the work yet because we want to accumulate
-    # and then perform the changes with a properly sorted child list.
-    #
-    # During this process, many descendents will attempt to create the same
-    # entries in the link dict or in a group's set, but the dict/set
-    # automatically removes duplicates.
-    link = {} # page or page name -> set of child pages
-    for page in page_array:
-        result = page.find_property('create')
-        if rank in result:
-            x = result[rank]
-            group = x['match']
-            child = x['top']
-            if group is not None and group != child:
-                if group not in link:
-                    link[group] = set()
-                link[group].add(child)
-
-        result = page.find_property('link')
-        if rank in result:
-            x = result[rank]
-            group = x['match']
-            child = x['top']
-            if group is not None and isinstance(group, Page) and group != child:
-                if group not in link:
-                    link[group] = set()
-                link[group].add(child)
-
-    for group, child_set in link.items():
-        if isinstance(group, str):
-            if group in family_com:
-                com = family_com[group]
-            else:
-                error(f'No common name for {rank.name} {group}')
-                com = 'n/a' # family names.yaml uses 'n/a' when there is no com name
-
-            if com == 'n/a':
-                parent = Page(group)
-            else:
-                parent = Page(com)
-
-            parent.set_sci(f'{rank.name} {group}')
-            parent.top_level = 'flowering plants'
-        else:
-            # If the recorded group isn't the name of a page to be created,
-            # then it is a page that already exists.
-            parent = group
-
-        for child in sort_pages(child_set):
-            parent.txt += f'=={child.index}\n'
-            parent.assign_child(child)
-
-        # Now that the page exists, it needs to know what groups it
-        # is in.  We can't just call resolve_group() on all ranks
-        # because it would end up with all of the groups of its only
-        # child, even the ones that are lower ranked.  Fortunately,
-        # the new page has a known rank, so we can simply exclude
-        # all groups up to and including that rank.   We include
-        # only groups of a higher rank, which are guaranteed valid.
-        found_higher_rank = False
-        for rank1 in Rank:
-            if found_higher_rank:
-                parent.resolve_group(rank1)
-            if rank1 == parent.rank:
-                found_higher_rank = True
-
-if arg('-linn4'):
-    print_linn_trees()
+if arg('-tree6'):
+    print_trees()
 
 top_list = [x for x in page_array if not x.parent]
 
@@ -468,8 +419,8 @@ def write_page_list(page_list, color, color_match):
         title = color.capitalize() + ' flowers'
         write_header(w, title, title)
         obs = Obs(color_match)
-        for page in top_flower_list:
-            page.count_matching_obs(obs)
+        page = name_page['flowering plants']
+        page.count_matching_obs(obs)
         obs.write_page_counts(w)
         w.write(s.getvalue())
         obs.write_obs(None, w)
