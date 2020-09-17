@@ -87,15 +87,19 @@ def sort_pages(page_set, color=None, with_depth=False):
     def count_flowers(page, exclude_set=None):
         if exclude_set is None:
             exclude_set = set()
-        if page in exclude_set:
+        elif page in exclude_set:
             return 0
         exclude_set.add(page)
+        if color in page.cum_obs_n:
+            return page.cum_obs_n[color]
 
         n = 0
         if page.page_matches_color(color):
             n += page.obs_n
         for child in page.child:
             n += count_flowers(child, exclude_set)
+
+        page.cum_obs_n[color] = n
         return n
 
     # Sort in reverse order of observation count.
@@ -215,6 +219,8 @@ class Page:
         self.obs_rg = 0 # number of observations that are research grade
         self.parks = {} # a dictionary of park_name : count
         self.month = [0] * 12
+
+        self.cum_obs_n = {}
 
         self.glossary = None
 
