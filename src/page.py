@@ -84,10 +84,19 @@ def sort_pages(page_set, color=None, with_depth=False):
         return parent_depth + 1
 
     # helper function to sort by observation count
-    def count_flowers(page):
-        obs = Obs(color)
-        page.count_matching_obs(obs)
-        return obs.n
+    def count_flowers(page, exclude_set=None):
+        if exclude_set is None:
+            exclude_set = set()
+        if page in exclude_set:
+            return 0
+        exclude_set.add(page)
+
+        n = 0
+        if page.page_matches_color(color):
+            n += page.obs_n
+        for child in page.child:
+            n += count_flowers(child, exclude_set)
+        return n
 
     # Sort in reverse order of observation count.
     # We initialize the sort with match_set sorted alphabetically.

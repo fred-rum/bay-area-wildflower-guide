@@ -829,5 +829,19 @@ iNaturalist's common name.
 Compared to before, observation counts are
 - more liberal for an observation of an auto-generated family
 - more restrictive for a high-rank observation outside the bay area
+
 - to do: more liberal for a subspecies observed outside the bay area
-         of a bay-area species
+of a bay-area species; i.e. if a subspecies isn't found, promote it to
+a species before checking the location.
+
+Create a property to allow a non-bay-area observation, e.g.
+allow_outside_obs: species-below
+
+Note that the check is performed after taxon promotion.  E.g. if there
+is no matching bay area species, the observation might try again at
+the genus level, which would fail to match the property and thus be
+excluded.
+
+For this sort of thing, I might want to create a master page, 'life',
+even if it isn't included in index.html.  Otherwise I'd have to
+include the property on every top-level page.

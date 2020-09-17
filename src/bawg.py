@@ -66,35 +66,50 @@ color_page_list = {}
 # Read the mapping of iNaturalist observation locations to short park names.
 park_map = {}
 park_loc = {}
-with open(f'{root_path}/data/parks.yaml', mode='r', encoding='utf-8') as f:
-    yaml_data = yaml.safe_load(f)
-for loc in yaml_data:
-    for x in yaml_data[loc]:
-        if isinstance(x, str):
-            park_map[x] = x
-            park_loc[x] = loc
-        else:
-            for y in x:
-                park_map[x[y]] = y
-                park_loc[x[y]] = loc
+def read_parks():
+    with open(f'{root_path}/data/parks.yaml', mode='r', encoding='utf-8') as f:
+        yaml_data = yaml.safe_load(f)
+    for loc in yaml_data:
+        for x in yaml_data[loc]:
+            if isinstance(x, str):
+                park_map[x] = x
+                park_loc[x] = loc
+            else:
+                for y in x:
+                    park_map[x[y]] = y
+                    park_loc[x[y]] = loc
+
+read_parks()
 
 txt_files = get_file_set(f'{db_pfx}txt', 'txt')
 
 ###############################################################################
 
-# Read the txt for all txt files.  Also perform a first pass on
-# the txt pages to initialize common and scientific names.  This
-# ensures that when we parse children (next), any name can be used and
-# linked correctly.
-for name in txt_files:
-    page = Page(name)
-    page.name_from_txt = True
-    with open(f'{root_path}/{db_pfx}txt/{name}.txt', 'r', encoding='utf-8') as r:
-        page.txt = r.read()
-    page.remove_comments()
-    page.parse_names()
-    page.parse_properties()
-    page.parse_glossary()
+# Read the txt for all txt files.  We could do more in this first pass,
+# but I want to be able to measure the time of reading the files separately
+# from any additional work.
+
+def read_txt_files():
+    for name in txt_files:
+        page = Page(name)
+        page.name_from_txt = True
+        with open(f'{root_path}/{db_pfx}txt/{name}.txt', 'r', encoding='utf-8') as r:
+            page.txt = r.read()
+
+read_txt_files()
+
+def parse_names():
+    for page in page_array:
+        page.remove_comments()
+        page.parse_names()
+        page.parse_properties()
+        page.parse_glossary()
+
+parse_names()
+
+# Perform a first pass on the txt pages to initialize common and
+# scientific names.  This ensures that when we parse children (next),
+# any name can be used and linked correctly.
 
 # parse_children() can add new pages, so we make a copy of the list to
 # iterate through.  parse_children() also checks for external photos,
