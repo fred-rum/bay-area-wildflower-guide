@@ -220,7 +220,7 @@ class Page:
         self.parks = {} # a dictionary of park_name : count
         self.month = [0] * 12
 
-        self.cum_obs_n = {}
+        self.cum_obs_n = {} # color -> cumulative obs_n among all descendants
 
         self.glossary = None
 

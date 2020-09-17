@@ -845,3 +845,7 @@ excluded.
 For this sort of thing, I might want to create a master page, 'life',
 even if it isn't included in index.html.  Otherwise I'd have to
 include the property on every top-level page.
+
+Promote an observation if a page can't be found for it and
+- it is listed in sci_ignore with a +, or
+- allow_promote is applied to its promotion destination.

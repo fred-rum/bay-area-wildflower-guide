@@ -253,7 +253,7 @@ class Glossary:
         # Perform glossary substitution on a fragment of "safe text", i.e.
         # one without HTML tags or other complications.
         def link_safe(txt):
-            return re.sub(glossary_regex, repl_glossary, txt)
+            return glossary_regex.sub(repl_glossary, txt)
 
         # Add glossary links in group 1, but leave group 2 unchanged.
         def repl_glossary_pair(matchobj):
