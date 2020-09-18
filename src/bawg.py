@@ -213,7 +213,6 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
         if com:
             com = com.lower()
 
-        taxon_id = get_field('taxon_id')
         rg = get_field('quality_grade')
 
         park = get_field('private_place_guess')
@@ -254,9 +253,13 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
             continue
 
         if page:
-            page.taxon_id = taxon_id
+            taxon_id = get_field('taxon_id')
+            if taxon_id:
+                page.taxon_id = taxon_id
+
             if not page.sci:
                 page.set_sci(sci)
+
             if com and page.com:
                 i_com_shrink = shrink(com)
                 p_com_shrink = shrink(page.com)

@@ -64,11 +64,21 @@ def find_page2(com, sci):
     if sci:
         sci = strip_sci(sci)
         if sci in sci_page:
+            # If the scientific name matches, we consider it a match
+            # regardless of the common name.  (Whoever called find_page2
+            # can double check the common name if desired.)
             return sci_page[sci]
+        else:
+            # Otherwise, search for a page that only has the common name
+            # and doesn't (yet) have a scientific name.
+            pass
 
     if com:
         page = None
         if com in name_page:
+            # Sometimes I have multiple pages with the same common name.
+            # If one of them is the 'canonical' match for the common name,
+            # match that one.
             page = name_page[com]
         elif com in com_page and com_page[com] != 'multiple':
             page = com_page[com]
