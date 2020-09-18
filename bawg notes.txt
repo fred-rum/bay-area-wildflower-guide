@@ -1,4 +1,4 @@
-Make separate pages (and links) for flower lists (by color and "all")
+>Make separate pages (and links) for flower lists (by color and "all")
 with names only (for bandwidth saving) and photos only (for showing off).
 
 Print errors:
@@ -837,6 +837,10 @@ a species before checking the location.
 Create a property to allow a non-bay-area observation, e.g.
 allow_outside_obs: species-below
 
+observation properties require two passes on observations.csv:
+- once to build the Linnaean hierarchy
+- a second time to apply observations while respecting properties
+
 Note that the check is performed after taxon promotion.  E.g. if there
 is no matching bay area species, the observation might try again at
 the genus level, which would fail to match the property and thus be
@@ -849,3 +853,26 @@ include the property on every top-level page.
 Promote an observation if a page can't be found for it and
 - it is listed in sci_ignore with a +, or
 - allow_promote is applied to its promotion destination.
+(allow_promote only works if the promotion destination has no children)
+
+allow_obs_promotion_without_children: self-below
+allow_obs_promotion_with_children: none
+
+allow_outside_obs: species-below
+allow_outside_obs_promotion_without_children: species-below
+allow_outside_obs_promotion_with_children: none
+
+When applying observations, skip shadow pages.
+
+photo_requires_color
+color_requires_photo
+obs_requires_photo
+obs_requires_color
+
+
+Create find_inat_page(), which uses isci_page and sci_page.
+Create promote_obs_sci(), which promotes below to species, or species to genus,
+  or <rank> to <next rank> (using the taxon_<rank>_name field).
+  - returns (rank, sci)
+
+Should I have different behavior for needs_id vs. casual?

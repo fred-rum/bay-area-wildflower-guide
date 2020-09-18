@@ -187,46 +187,38 @@ def shrink(name):
 #   Get the full taxonomic chain
 error_begin_section()
 with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='utf-8') as f:
-    csv_reader = csv.reader(f)
-    header_row = next(csv_reader)
+    def get_field(fieldname):
+        if fieldname in row:
+            return row[fieldname]
+        else:
+            return None
 
-    com_idx = header_row.index('common_name')
-    sci_idx = header_row.index('scientific_name')
-    rg_idx = header_row.index('quality_grade')
-    taxon_idx = header_row.index('taxon_id')
-    group_idx = {}
-    for rank in Rank:
-        try:
-            group_idx[rank] = header_row.index(f'taxon_{rank.name}_name')
-        except ValueError:
-            pass # No such column
-    phylum_idx = header_row.index('taxon_phylum_name')
-    place_idx = header_row.index('place_guess')
-    private_place_idx = header_row.index('private_place_guess')
-    date_idx = header_row.index('observed_on')
-
+    csv_reader = csv.DictReader(f)
     for row in csv_reader:
-        sci = row[sci_idx]
+        sci = get_field('scientific_name')
 
         # In the highly unusual case of no scientific name for an observation,
         # just throw it out.
         if not sci: continue
 
-        # The common name is forced to all lower case to match my convention.
-        # The scientific name is left in its standard case, but a hybrid
-        # indicator is removed.
-        com = row[com_idx].lower()
         # Remove the {multiplication sign} used by hybrids since I can't
         # (yet) support it cleanly.  Note that I *don't* use the r'' string
         # format here because I want the \N to be parsed during string parsing,
         # not during RE parsing.
         sci = re.sub('\N{MULTIPLICATION SIGN} ', r'', sci)
-        taxon_id = row[taxon_idx]
-        rg = row[rg_idx]
 
-        park = row[private_place_idx]
+        com = get_field('common_name')
+
+        # The common name is forced to all lower case to match my convention.
+        if com:
+            com = com.lower()
+
+        taxon_id = get_field('taxon_id')
+        rg = get_field('quality_grade')
+
+        park = get_field('private_place_guess')
         if not park:
-            park = row[place_idx]
+            park = get_field('place_guess')
 
         for x in park_map:
             if re.search(x, park):
@@ -238,7 +230,7 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
             short_park = park
             loc = 'bay area'
 
-        date = row[date_idx]
+        date = get_field('observed_on')
         month = int(date.split('-')[1], 10) - 1 # January = month 0
 
         if sci in isci_page:
@@ -289,7 +281,7 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
         # (If it isn't identified to the species level, then I don't really
         # know what it is, so there's no particular reason to make a page
         # for it.)
-        phylum = row[phylum_idx]
+        phylum = get_field('taxon_phylum_name')
         if not page and phylum == 'Tracheophyta' and ' ' in sci and sci not in sci_ignore and not arg('-db'):
             error(sci, prefix="The following vascular plant observations don't have a page:")
 
@@ -307,8 +299,8 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
             try:
                 node = page
                 for rank in Rank:
-                    if rank > page.rank and rank in group_idx:
-                        group = row[group_idx[rank]]
+                    if rank > page.rank:
+                        group = get_field(f'taxon_{rank.name}_name')
                         if group: # ignore an empty group string
                             node = node.add_linn_parent(rank, group)
             except FatalError:
