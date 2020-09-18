@@ -167,17 +167,44 @@ for page in page_array:
 #                for page in page_list:
 #                    error(page.format_full(1), prefix=f'The following pages in {genus} spp. are not under a common ancestor:')
 
-# Remove characters that are allowed to be different between names
-# while the names are still considered identical.
-# This is mostly non-alphabetic characters, but also plural endings.
-def shrink(name):
-    name = name.lower()
-    name = re.sub(r'\W', '', name)
-    name = re.sub(r'(s|x|ch|sh)es$', r'$1', name)
-    name = re.sub(r'zzes$', 'z', name)
-    name = re.sub(r'ies$', 'y', name)
-    name = re.sub(r's$', '', name)
-    return name
+# Check if two names are equivalent when applying a particular plural rule.
+def plural_rule_equiv(a, b, end_a, end_b):
+    if a.endswith(end_a) and b.endswith(end_b):
+        base_len_a = len(a) - len(end_a)
+        base_len_b = len(b) - len(end_b)
+        if base_len_a == base_len_b and a[:base_len_a] == b[:base_len_b]:
+            return True
+    return False
+
+# Check if two common names are equivalent.
+# If one is plural and the other is not, then they are considered equivalent.
+# Special characters (e.g. not letters) are ignored.
+def plural_equiv(a, b):
+    # Remove non-word characters such as - or '
+    a = re.sub(r'\W', '', a)
+    b = re.sub(r'\W', '', b)
+
+    # plural rules from https://www.grammarly.com/blog/plural-nouns/
+    for end_a, end_b in (('', ''),       # no plural difference
+                         ('', 's'),      # cats
+                         ('s', 'ses'),   # truss
+                         ('sh', 'shes'), # marsh
+                         ('ch', 'ches'), # lunch
+                         ('x', 'xes'),   # tax
+                         ('z', 'zes'),   # blitz
+                         ('s', 'sses'),  # fez
+                         ('z', 'zzes'),  # gas
+                         ('f', 'ves'),   # wolf
+                         ('fe', 'ves'),  # wife
+                         ('y', 'ies'),   # city
+                         ('o', 'oes'),   # potato
+                         ('us', 'i'),    # cactus
+                         ('is', 'es'),   # analysis
+                         ('on', 'a')):   # phenomenon
+        if (plural_rule_equiv(a, b, end_a, end_b) or
+            plural_rule_equiv(a, b, end_b, end_a)):
+            return True
+    return False
 
 # Read my observations file (exported from iNaturalist) and use it as follows
 # for each observed taxon:
@@ -264,9 +291,7 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
                 page.set_sci(sci)
 
             if com and page.com:
-                i_com_shrink = shrink(com)
-                p_com_shrink = shrink(page.com)
-                if i_com_shrink != p_com_shrink and com != page.icom:
+                if com != page.icom and not plural_equiv(page.com, com):
                     page.icom = com
                     #error(f"iNaturalist's common name {com} differs from mine: {page.com} ({page.elab})")
 

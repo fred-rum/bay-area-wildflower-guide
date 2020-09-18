@@ -139,16 +139,11 @@ Add inflorescence shape definitions for sedges.  (Possibly share the
 glossary with grasses, but probably not.)
 
 
-Redo shrink() to instead allow testing two names against each other
-while testing specific plural substitutions.  (But also keep the code
-to throw out non-word characters from each.)  E.g.
-is_same(name, 'z', 'zzes')
-
 Detect when a glossary term is defined twice in the same file (or
 definition) (e.g. a typo).
 
-Allow iNaturalist taxon ID to be specified since iNaturalist fails for
-shared genus names, e.g. onions (Allium).
+Allow iNaturalist taxon ID to be specified in txt since iNaturalist
+fails for shared genus names, e.g. onions (Allium).
 
 Separate surprise_obs into multiple parts:
   species that don't have a page despite there being a genus page
