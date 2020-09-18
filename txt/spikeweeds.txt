@@ -1,0 +1,16 @@
+sci:Centromadia spp.
+x:ca
+
+==fitch's tarweed:C. fitchii
+color: yellow
+. leaf densely coated with short hairs, <b>stalked-glandular</b> with yellow, brown, or black glands
+
+==pappose tarweed:C. parryi
+xx:more
+. leaf glabrous or hairy, <b>occasionally with sessile yellow glands</b>
+
+==common spikeweed:C. pungens
+xx:more
+. leaf faces glabrous or hairy, <b>not glandular or minutely glandular</b>
+.. midrin often bristly
+.. margin generally bristly-ciliate, at least near the base

@@ -2,11 +2,13 @@ sci:Trichostema
 x:ba
 
 ==vinegar weed:T. lanceolatum
+color: purple
 . corolla tube 5--10 mm, curved upward and sharply recurved near throat
 .. CalPhotos show that the corolla is <b>abaxially sparsely hairy</b>
 . stamens 13--20 mm
 . uppermost calyx lobe generally narrower
 . leaves lanceolate to narrowly ovate
+. leaves have a strong vinegar odor
 
 ==woolly bluecurls:T. lanatum
 . corolla tube 9--14 mm, straight
