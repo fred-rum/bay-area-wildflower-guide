@@ -13,6 +13,10 @@
 # This isn't the cleanest of modules.  Obs looks directly into the
 # page objects, and users of Obs sometimes look inside it for 'n'.
 
+def set_rg_supported(x):
+    global rg_supported
+    rg_supported = x
+
 class Obs:
     pass
 
@@ -95,6 +99,8 @@ class Obs:
 
         if n == 0:
             w.write('none')
+        elif not rg_supported:
+            w.write(f'{n}')
         elif rg == 0:
             w.write(f'{n} (none are research grade)')
         elif rg == n:

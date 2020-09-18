@@ -194,6 +194,9 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
             return None
 
     csv_reader = csv.DictReader(f)
+
+    set_rg_supported('quality_grade' in csv_reader.fieldnames)
+
     for row in csv_reader:
         sci = get_field('scientific_name')
 
