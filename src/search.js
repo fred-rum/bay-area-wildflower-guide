@@ -27,7 +27,7 @@ function fn_focusout() {
 }
 
 function fn_doc_click(event) {
-  var search_element = event.target.closest('#search-bg, #autocomplete-box');
+  var search_element = event.target.closest('#search-container');
   if (!search_element) {
     hide_ac();
   }
@@ -665,14 +665,12 @@ if (window.location.pathname.includes('/html/')) {
 /* Create the search-related HTML and insert it at the beginning of the
    document.  I can't find a function to insert HTML directly into the
    document, so we accomplish the same task a bit awkwardly by inserting
-   the HTML before the 'title' heading (which we know is present on every
+   the HTML before the 'body' div (which we know is present on every
    page). */
-var e_title = document.getElementById('title');
-e_title.insertAdjacentHTML('beforebegin', `
+var e_body = document.getElementById('body');
+e_body.insertAdjacentHTML('beforebegin', `
 <div id="search-container">
-<div id="search-bg">
 <input type="text" id="search" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="search for a flower or glossary term...">
-</div>
 <div id="autocomplete-box"></div>
 `);
 

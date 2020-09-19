@@ -902,3 +902,8 @@ the 'yellow daisies' count will exclude 'bigelow's sneezeweed'.  But
 if they're counted in the other order, 'sneezeweeds' won't exclude it.
 
 count_matching_obs should use the same exclude_set 'n - dup_n' as count_flowers
+
+Can I change the search bar to be a regular div and have the "body"
+div overflow with a scroll bar?
+
+remove search-bg?

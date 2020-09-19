@@ -20,7 +20,7 @@ function fn_focusout() {
   hide_ac();
 }
 function fn_doc_click(event) {
-  var search_element = event.target.closest('#search-bg, #autocomplete-box');
+  var search_element = event.target.closest('#search-container');
   if (!search_element) {
     hide_ac();
   }
@@ -430,12 +430,10 @@ if (window.location.pathname.includes('/html/')) {
 } else {
   var path = 'html/';
 }
-var e_title = document.getElementById('title');
-e_title.insertAdjacentHTML('beforebegin', `
+var e_body = document.getElementById('body');
+e_body.insertAdjacentHTML('beforebegin', `
 <div id="search-container">
-<div id="search-bg">
 <input type="text" id="search" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="search for a flower or glossary term...">
-</div>
 <div id="autocomplete-box"></div>
 `);
 var e_search_input = document.getElementById('search');
