@@ -1,3 +1,4 @@
 color:white
+sci:Olea europaea
 x:ca
 xx:none

@@ -871,3 +871,29 @@ Create promote_obs_sci(), which promotes below to species, or species to genus,
   - returns (rank, sci)
 
 Should I have different behavior for needs_id vs. casual?
+
+
+Improve handling of hybrids, e.g. to support the hybrid symbol in the
+iNaturalist scientific name independently of the regular scientific
+name.  The natural way to do this would be to include the
+{multiplication sign} in the elab name and convert it to other forms
+when needed.  Example hybrid: bearded iris.
+
+
+These can't (easily) be hierarchical properties because the full
+hierarchy isn't known until observations.csv has already been read:
+obs_fill_com - fill unknown common names from observations.csv
+obs_fill_sci - fill unknown scientific names from observations.csv
+obs_diff_com - record a differing common name from observations.csv
+flag_obs_fill_com
+flag_obs_fill_sci
+flag_obs_diff_com
+
+Change 'Caution: There are members of this species not yet included in
+this guide.' to non-bold 'This species has members, but they are not
+yet included in this guide.'
+
+Using the browser's search up within the page tends to leave the
+highlighted text under the search field.
+
+Are color pages sorted at the top level?

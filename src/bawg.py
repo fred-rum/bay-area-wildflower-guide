@@ -206,12 +206,143 @@ def plural_equiv(a, b):
             return True
     return False
 
+
+# Read the taxonomic chains from the observations file (exported from
+# iNaturalist).  There is more data in there that we'll read later, but
+# first we want to complete the Linnaean tree so that properties can be
+# properly applied.
+def read_obs_chains():
+    with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='utf-8') as f:
+        def get_field(fieldname):
+            if fieldname in row:
+                return row[fieldname]
+            else:
+                return None
+
+        csv_reader = csv.DictReader(f)
+
+        for row in csv_reader:
+            sci = get_field('scientific_name')
+
+            # In the highly unusual case of no scientific name for an
+            # observation, just throw it out.
+            if not sci: continue
+
+            orig_sci = sci
+
+            # Remove the special 'x' sign used by hybrids since I
+            # can't (yet) support it cleanly.  Note that I *don't* use
+            # the r'' string format here because I want the \N to be
+            # parsed during string parsing, not during RE parsing.
+            sci = re.sub('\N{MULTIPLICATION SIGN} ', r'', sci)
+
+            com = get_field('common_name')
+
+            # The common name is forced to all lower case to match my
+            # convention.
+            if com:
+                com = com.lower()
+
+            if sci in isci_page:
+                page = isci_page[sci]
+            else:
+                page = find_page2(com, sci)
+
+            if not page:
+                if com in com_page:
+                    error(f'observation {com} ({sci}) matches the common name for a page, but not its scientific name')
+                    com = None
+
+                # There's no real need to create a shadow page for the taxon,
+                # but it makes the second pass a lot easier if it can rely on
+                # the complete Linnaean taxonomy during taxon promotion.
+                page = Page(sci, shadow=True)
+
+                # If the scientific name has three words, then we'd like to
+                # insert 'ssp.' or 'var.', but we don't know which to use,
+                # so we just leave it alone.
+                #
+                # If the scientific name has two words, then it's a species
+                # name that requires no further elaboration.
+                #
+                # If the scientific name has one word, then we guess for now
+                # that it's a genus and add 'spp.'  We might discover later
+                # that it's a higher rank, in which case we'll adjust it's
+                # elaborated name accordingly.
+                if ' ' not in sci:
+                    page.set_sci(sci + ' spp.')
+
+            try:
+                # Promote a subspecies to a species and a species to a genus,
+                # creating Linnaean links accordingly.
+                while ' ' in sci:
+                    sci_words = sci.split(' ')
+                    sci = ' '.join(sci_words[:-1])
+                    if ' ' in sci:
+                        rank = Rank.species
+                    else:
+                        rank = Rank.genus
+                    page = page.add_linn_parent(rank, sci, src='inat')
+
+                # Read the taxonomic chain from observations.csv and create
+                # Linnaean links accordingly.
+                for rank in Rank:
+                    group = get_field(f'taxon_{rank.name}_name')
+                    if group == orig_sci:
+                        # If the same scientific name appears in the taxon
+                        # chain, then that gives us its rank.  Presumably
+                        # this occurs at the lowest rank found, so we're
+                        # still pointing at the original taxon page.
+                        page.set_sci(f'{rank.name} {sci}')
+                    elif group: # ignore an empty group string
+                        page = page.add_linn_parent(rank, group, src='inat')
+            except FatalError:
+                warning(f'was creating taxonomic chain from {page.name}')
+                raise
+read_obs_chains()
+
+if arg('-tree3'):
+    print_trees()
+
+default_ancestor = get_default_ancestor()
+for page in page_array:
+    if not page.rank and not page.linn_parent:
+        page.resolve_lcca()
+    elif page.is_top:
+        page.propagate_is_top()
+
+if default_ancestor:
+    for page in full_page_array:
+        if (not page.is_top and not page.linn_parent and
+            (not page.rank or page.rank < default_ancestor.rank)):
+            default_ancestor.link_linn_child(page)
+            page.set_top_level(default_ancestor.name, page.name)
+
+if arg('-tree4'):
+    print_trees()
+
+# Assign properties to the appropriate ranks.
+for page in page_array:
+    if page.prop_ranks:
+        page.assign_props(page.prop_ranks)
+
+if arg('-tree5'):
+    print_trees()
+
+# Apply properties in order from the lowest ranked pages to the top.
+for rank in Rank:
+    for page in full_page_array:
+        if page.rank is rank:
+            page.apply_props()
+
+if arg('-tree6'):
+    print_trees()
+
 # Read my observations file (exported from iNaturalist) and use it as follows
 # for each observed taxon:
 #   Associate common names with scientific names
 #   Get a count of observations (total and research grade)
 #   Get an iNaturalist taxon ID
-#   Get the full taxonomic chain
 error_begin_section()
 with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='utf-8') as f:
     def get_field(fieldname):
@@ -268,9 +399,7 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
             page = find_page2(com, sci)
 
         if sci in sci_ignore:
-            if sci_ignore[sci][0] == '+':
-                page = None
-            elif page:
+            if page and not page.shadow:
                 error(f'{sci} is ignored, but there is a page for it ({page.name})')
 
             # For sci_ignore == '+...', the expectation is that we'll fail
@@ -278,9 +407,6 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
             # But if sci_ignore == '-...', we do nothing with the observation.
             if sci_ignore[sci][0] != '+':
                 continue
-        elif not page and com in com_page:
-            error(f'observation {com} ({sci}) matches the common name for a page, but not its scientific name')
-            continue
 
         if page:
             taxon_id = get_field('taxon_id')
@@ -296,7 +422,7 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
                     #error(f"iNaturalist's common name {com} differs from mine: {page.com} ({page.elab})")
 
         if loc != 'bay area':
-            if page and page.rank < Rank.genus:
+            if not page.shadow and page.rank < Rank.genus:
                 # If the location is outside the bay area, we'll still
                 # count it as long as it's a bay area species; i.e. if
                 # a page exists for it at the species level or below.
@@ -316,30 +442,16 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
         if not page and phylum == 'Tracheophyta' and ' ' in sci and sci not in sci_ignore and not arg('-db'):
             error(sci, prefix="The following vascular plant observations don't have a page:")
 
-        # If we haven't matched the observation to a page, try stripping
-        # components off the scientific name until we find a higher-level
-        # page to attach the observation to.
-        orig_sci = sci
-        while not page and sci:
-            sci_words = sci.split(' ')
-            sci = ' '.join(sci_words[:-1])
-            if sci in sci_page:
-                page = sci_page[sci]
+        # If we haven't matched the observation to a real page, advance
+        # up the Linnaean hierarchy until we find a real page.
+        # For now, we stop at the species level, but perhaps this will
+        # eventually be a property.
+        while (page and page.shadow and
+               (page.rank < Rank.species or sci in sci_ignore)):
+            page = page.linn_parent
+            sci = page.sci
 
-        if page:
-            try:
-                node = page
-                for rank in Rank:
-                    if rank > page.rank:
-                        group = get_field(f'taxon_{rank.name}_name')
-                        if group: # ignore an empty group string
-                            node = node.add_linn_parent(rank, group)
-            except FatalError:
-                warning(f'was creating taxonomic chain from {page.name}')
-                raise
-
-        if (page and (orig_sci not in sci_ignore or
-                      sci_ignore[orig_sci][0] == '+')):
+        if page and not page.shadow:
             page.obs_n += 1
             if rg == 'research':
                 page.obs_rg += 1
@@ -349,40 +461,7 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
             page.month[month] += 1
 error_end_section()
 
-if arg('-tree3'):
-    print_trees()
-
-default_ancestor = get_default_ancestor()
-for page in page_array:
-    if not page.rank and not page.linn_parent:
-        page.resolve_lcca()
-    elif page.is_top:
-        page.propagate_is_top()
-
-if default_ancestor:
-    for page in full_page_array:
-        if not page.is_top and not page.linn_parent:
-            default_ancestor.link_linn_child(page)
-            page.set_top_level(default_ancestor.name, page.name)
-
-if arg('-tree4'):
-    print_trees()
-
-# Assign properties to the appropriate ranks.
-for page in page_array:
-    if page.prop_ranks:
-        page.assign_props(page.prop_ranks)
-
-if arg('-tree5'):
-    print_trees()
-
-# Apply properties in order from the lowest ranked pages to the top.
-for rank in Rank:
-    for page in full_page_array:
-        if page.rank is rank:
-            page.apply_props()
-
-if arg('-tree6'):
+if arg('-tree7'):
     print_trees()
 
 top_list = [x for x in page_array if not x.parent]
@@ -395,10 +474,24 @@ top_flower_list = [x for x in top_list if x.top_level == 'flowering plants']
 
 parse_glossaries(top_list)
 
+for page in page_array:
+    # If children were linked to the page via the Linnaean hierarchy,
+    # they may be in a non-intuitive order.  We re-order them here.
+    # This includes both adjusting their order in page.child and
+    # also adding links to them in the txt in the proper order.
+    if page.non_txt_children:
+        page.child = page.child[:-len(page.non_txt_children)]
+        for child in sort_pages(page.non_txt_children):
+            page.child.append(child)
+            page.txt += f'=={child.index}\n'
+
 # We don't need color_page_list yet, but we go through the creation process
 # now in order to populate page_color for all container pages.
 for color in color_list:
     color_page_list[color] = find_matches(name_page['flowering plants'].child, color)
+
+if arg('-tree7'):
+    print_trees()
 
 # Turn txt into html for all normal and default pages.
 for page in page_array:

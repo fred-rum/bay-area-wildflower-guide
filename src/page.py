@@ -87,20 +87,26 @@ def sort_pages(page_set, color=None, with_depth=False):
     def count_flowers(page, exclude_set=None):
         if exclude_set is None:
             exclude_set = set()
-        elif page in exclude_set:
-            return 0
-        exclude_set.add(page)
         if color in page.cum_obs_n:
             return page.cum_obs_n[color]
 
+        # When we count observations for a page and its descendents,
+        # we cache the full count (n), but the count that we return
+        # excludes any children that our ancestors have already seen
+        # before via a different path (n - dup_n).
         n = 0
+        dup_n = 0
         if page.page_matches_color(color):
             n += page.obs_n
         for child in page.child:
-            n += count_flowers(child, exclude_set)
+            child_n = count_flowers(child, exclude_set)
+            n += child_n
+            if child in exclude_set:
+                dup_n += child_n
+            exclude_set.add(child)
 
         page.cum_obs_n[color] = n
-        return n
+        return n - dup_n
 
     # Sort in reverse order of observation count.
     # We initialize the sort with match_set sorted alphabetically.
@@ -204,6 +210,11 @@ class Page:
         # real or shadow.
         self.linn_parent = None # the Linnaean parent (if known)
         self.linn_child = set() # an unordered set of Linnaean children
+
+        # If children are linked to the page via the Linnaean hierarchy,
+        # they could end up in a non-intuitive order.  We remember which
+        # children have this problem and re-order them later.
+        self.non_txt_children = None
 
         # ancestors that this page should be listed as a 'member of',
         # ordered from lowest-ranked ancestor to highest.
@@ -784,7 +795,7 @@ class Page:
     # is centered on the parent page, but add_linn_parent() is
     # centered on the child page because it is the page that is
     # guaranteed to be present.
-    def add_linn_parent(self, rank, name):
+    def add_linn_parent(self, rank, name, src=None):
         parent = find_page1(name)
         if not parent and name in isci_page:
             parent = isci_page[name]
@@ -1043,16 +1054,14 @@ class Page:
                 if child not in self.child:
                     child.get_potential_link_set(potential_link_set, self)
 
-            link_list = sort_pages(potential_link_set)
-
-            if 'create' in self.prop_set and self.shadow:
+            if 'create' in self.prop_set and self.shadow and potential_link_set:
                 self.promote_to_real()
-                for child in link_list:
-                    self.txt += f'=={child.index}\n'
+                self.non_txt_children = potential_link_set
+                for child in potential_link_set:
                     self.assign_child(child)
             elif 'link' in self.prop_set and not self.shadow:
-                for child in link_list:
-                    self.txt += f'=={child.index}\n'
+                self.non_txt_children = potential_link_set
+                for child in potential_link_set:
                     self.assign_child(child)
 
     def assign_membership(self, ancestor):
@@ -1871,7 +1880,7 @@ def find_matches(page_subset, color):
 # observation counts.  If indent is True, match_set must be a list, and
 # its order is retained.
 def list_matches(w, match_set, indent, color, seen_set):
-    if indent:
+    if indent and not color:
         # We're under a parent with an ordered child list.  Retain its order.
         match_list = match_set
     else:
