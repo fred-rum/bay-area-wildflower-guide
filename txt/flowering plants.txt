@@ -5,3 +5,4 @@ create: family
 member_link: family
 link: self-subtribe
 flag_link: genus-below
+obs_requires_photo: genus-below

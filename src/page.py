@@ -83,41 +83,9 @@ def sort_pages(page_set, color=None, with_depth=False):
             parent_depth = max(parent_depth, by_depth(parent))
         return parent_depth + 1
 
-    # helper function to sort by observation count
-    def count_flowers(page, exclude_set=None):
-        top_of_count = exclude_set is None
-
-        if top_of_count:
-            # If we're counting from the top, then we can generate or
-            # return a cached value.  This is important to ensure that
-            # sorting is fast.
-            #
-            # But if count_flowers() was called with an exclude_set
-            # (from recursion), then some subset of this page might
-            # need to be excluded, so we re-perform the entire count
-            # from scratch and *don't cache the result*.
-            if color in page.cum_obs_n:
-                return page.cum_obs_n[color]
-            exclude_set = set()
-
-        if page in exclude_set:
-            # We've already counted this page via another path, so
-            # treat it as 0 this time.
-            return 0
-
-        exclude_set.add(page)
-
-        n = 0
-        if page.page_matches_color(color):
-            n += page.obs_n
-        for child in page.child:
-            child_n = count_flowers(child, exclude_set)
-            n += child_n
-
-        if top_of_count:
-            page.cum_obs_n[color] = n
-
-        return n
+    # helper function to sort by observation count, using the nonlocal color.
+    def count_flowers_helper(page):
+        return page.count_flowers(color)
 
     # Sort in reverse order of observation count.
     # We initialize the sort with match_set sorted alphabetically.
@@ -127,7 +95,7 @@ def sort_pages(page_set, color=None, with_depth=False):
     page_list = sorted(page_set, key=by_name)
     if with_depth:
         page_list.sort(key=by_depth)
-    page_list.sort(key=count_flowers, reverse=True)
+    page_list.sort(key=count_flowers_helper, reverse=True)
     return page_list
 
 # Combine the second property rank result list into the first.
@@ -490,6 +458,41 @@ class Page:
                     return ext_photo
             return None
 
+    def count_flowers(self, color=None, exclude_set=None):
+        top_of_count = exclude_set is None
+
+        if top_of_count:
+            # If we're counting from the top, then we can generate or
+            # return a cached value.  This is important to ensure that
+            # sorting is fast.
+            #
+            # But if count_flowers() was called with an exclude_set
+            # (from recursion), then some subset of this page might
+            # need to be excluded, so we re-perform the entire count
+            # from scratch and *don't cache the result*.
+            if color in self.cum_obs_n:
+                return self.cum_obs_n[color]
+            exclude_set = set()
+
+        if self in exclude_set:
+            # We've already counted this page via another path, so
+            # treat it as 0 this time.
+            return 0
+
+        exclude_set.add(self)
+
+        n = 0
+        if self.page_matches_color(color):
+            n += self.obs_n
+        for child in self.child:
+            child_n = child.count_flowers(color, exclude_set)
+            n += child_n
+
+        if top_of_count:
+            self.cum_obs_n[color] = n
+
+        return n
+
     def remove_comments(self):
         self.txt = re.sub(r'^#.*\n', '', self.txt, flags=re.MULTILINE)
 
@@ -569,7 +572,14 @@ class Page:
                     # For this case, 'self' is applied directly in case the
                     # current page does not have a rank.
                     rank = rank_range
-                    if rank == 'self':
+                    if rank == 'none':
+                        # 'none' is expected to be used as the only assigned
+                        # rank, and it indicates that the property applies to
+                        # no ranks.  E.g. a higher taxon could declare
+                        # 'obs_requires_photo: genus-below', and a lower taxon
+                        # could override it with 'obs_requires_photo: none'.
+                        pass
+                    elif rank == 'self':
                         self.prop_set.add(prop)
                     else:
                         rank_set.add(self.canonical_rank(rank))
@@ -582,7 +592,7 @@ class Page:
         self.txt = re.sub(r'^default_ancestor\s*?\n',
                           repl_default_ancestor, self.txt, flags=re.MULTILINE)
 
-        self.txt = re.sub(r'^(create|link|member_link|member_name):\s*(.*?)\s*?\n',
+        self.txt = re.sub(r'^(create|link|member_link|member_name|photo_requires_color|color_require_photo|obs_requires_photo|obs_requires_color):\s*(.*?)\s*?\n',
                           repl_property, self.txt, flags=re.MULTILINE)
 
     def parse_glossary(self):
@@ -987,25 +997,32 @@ class Page:
             # In any case, we leave linn_parent as None
             pass
 
-    def assign_props(self, prop_ranks):
+    def assign_props(self):
+        for prop, rank_set in self.prop_ranks.items():
+            self.propagate_prop(prop, rank_set)
+
+    def propagate_prop(self, prop, rank_set):
         if self.rank:
-            for prop, rank_set in prop_ranks.items():
-                if self.rank in rank_set:
-                    self.prop_set.add(prop)
+            if self.rank in rank_set:
+                self.prop_set.add(prop)
 
             # Recursively descend through Linnaean children.
             # There's no need to descend through 'real' children because
             # they cannot include any ranked pages that are not included
             # in the Linnaean descendants.
+            # Stop at any child that replaces the prop assignment.
             for child in self.linn_child:
-                child.assign_props(prop_ranks)
+                if prop not in child.prop_ranks:
+                    child.propagate_prop(prop, rank_set)
         else:
             # If a property is declared in an unranked page, then it cannot
             # have Linnaean children.  We push the properties down through
             # its real children until a ranked descendant is found, then
             # the properties are applied to each of those Linnaean trees.
+            # Stop at any child that replaces the prop assignment.
             for child in self.child:
-                child.assign_props(prop_ranks)
+                if prop not in child.prop_ranks:
+                    child.propagate_prop(prop, rank_set)
 
     # Check whether this page has 'check_ancestor' as a Linnaean ancestor.
     def has_linn_ancestor(self, check_ancestor):
@@ -1085,6 +1102,15 @@ class Page:
             ('member_name' in self.prop_set and self.shadow)):
             for child in self.linn_child:
                 child.assign_membership(self)
+
+    def apply_prop_checks(self):
+        if self.shadow:
+            # None of these checks apply to shadow pages.
+            return
+
+        if ('obs_requires_photo' in self.prop_set and
+            self.count_flowers() and not self.get_jpg()):
+            error(f'obs_requires_photo: {self.name} is observed, but has no photos')
 
     def expand_genus(self, sci):
         if (self.cur_genus and len(sci) >= 3 and
@@ -1793,7 +1819,7 @@ class Page:
                 self.write_hierarchy(w, None)
                 w.write('<hr>\n')
             else:
-                if len(self.jpg_list) or len(self.ext_photo_list):
+                if self.jpg_list or self.ext_photo_list:
                     for jpg in self.jpg_list:
                         jpgurl = url(jpg)
                         # Do not put newlines between jpgs because that would
@@ -1832,8 +1858,7 @@ class Page:
                 self.write_lists(w)
             write_footer(w)
 
-        if self.taxon_id and not (self.jpg_list or self.child) and not arg('-db'):
-            error(f'{self.name} is observed, but has no photos')
+        self.apply_prop_checks()
 
 #        if self.top_level == 'flowering plants':
 #            if self.jpg_list and not self.color:

@@ -20,11 +20,6 @@ from easy import *
 ###############################################################################
 
 def parse_txt(name, s, page, glossary):
-    def end_child_text():
-        nonlocal child_start, c_list
-        if child_start is None:
-            return
-
     def end_paragraph(for_list=False, for_defn=False):
         nonlocal c_list, p_start, child_start, child_idx, suffix, in_dl
 

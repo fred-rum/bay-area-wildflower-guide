@@ -323,8 +323,7 @@ if arg('-tree4'):
 
 # Assign properties to the appropriate ranks.
 for page in page_array:
-    if page.prop_ranks:
-        page.assign_props(page.prop_ranks)
+    page.assign_props()
 
 if arg('-tree5'):
     print_trees()
