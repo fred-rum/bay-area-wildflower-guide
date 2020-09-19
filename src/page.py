@@ -88,8 +88,6 @@ def sort_pages(page_set, color=None, with_depth=False):
         top_of_count = exclude_set is None
 
         if top_of_count:
-            debug = (page.name == 'yellow daisies' and color is None)
-
             # If we're counting from the top, then we can generate or
             # return a cached value.  This is important to ensure that
             # sorting is fast.
@@ -97,28 +95,29 @@ def sort_pages(page_set, color=None, with_depth=False):
             # But if count_flowers() was called with an exclude_set
             # (from recursion), then some subset of this page might
             # need to be excluded, so we re-perform the entire count
-            # from scratch and don't cache the result.
+            # from scratch and *don't cache the result*.
             if color in page.cum_obs_n:
                 return page.cum_obs_n[color]
             exclude_set = set()
 
-        # When we count observations for a page and its descendants,
-        # we cache the full count (n), but the count that we return
-        # excludes any children that our ancestors have already seen
-        # before via a different path (n - dup_n).
+        if page in exclude_set:
+            # We've already counted this page via another path, so
+            # treat it as 0 this time.
+            return 0
+
+        exclude_set.add(page)
+
         n = 0
-        dup_n = 0
         if page.page_matches_color(color):
             n += page.obs_n
         for child in page.child:
             child_n = count_flowers(child, exclude_set)
             n += child_n
-            if child in exclude_set:
-                dup_n += child_n
-            exclude_set.add(child)
 
-        if top_of_count: page.cum_obs_n[color] = n - dup_n
-        return n - dup_n
+        if top_of_count:
+            page.cum_obs_n[color] = n
+
+        return n
 
     # Sort in reverse order of observation count.
     # We initialize the sort with match_set sorted alphabetically.
