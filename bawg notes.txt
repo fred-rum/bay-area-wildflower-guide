@@ -896,4 +896,9 @@ yet included in this guide.'
 Using the browser's search up within the page tends to leave the
 highlighted text under the search field.
 
-Are color pages sorted at the top level?
+Flower counting is still off due to caching/exclusion.  If 'sunflower
+family' counts 'sneezeweeds' first and then counts 'yellow daisies',
+the 'yellow daisies' count will exclude 'bigelow's sneezeweed'.  But
+if they're counted in the other order, 'sneezeweeds' won't exclude it.
+
+count_matching_obs should use the same exclude_set 'n - dup_n' as count_flowers

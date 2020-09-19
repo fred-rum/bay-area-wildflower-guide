@@ -565,7 +565,7 @@ for color in color_list:
 #
 # We create it in root_path instead of working_path because we're just about
 # done.  Since pages.js isn't compared to the previous version, the only
-# disadvantage if the script crashes just after creating pages.js, it may
+# disadvantage is if the script crashes just after creating pages.js, it may
 # point to pages that don't exist.  Whatever.
 
 def add_elab(elabs, elab):
