@@ -888,3 +888,9 @@ obs_diff_com - record a differing common name from observations.csv
 flag_obs_fill_com
 flag_obs_fill_sci
 flag_obs_diff_com
+
+In page.py, get rid of level and use rank instead.
+cur_genus?
+
+Should coloration for keys align with the decision between 'Member of'
+and 'Key to'?

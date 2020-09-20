@@ -431,7 +431,7 @@ class Page:
         elif lines == 1:
             return f'{com} ({elab})'
         else:
-            return f'{com}<br/>{elab}'
+            return f'{com}<br>{elab}'
 
     def add_jpg(self, jpg):
         self.jpg_list.append(jpg)
@@ -1276,14 +1276,59 @@ class Page:
         pageurl = url(self.name)
         return f'<a href="{pageurl}.html" class="{self.link_style()}">{self.format_full(lines)}</a>'
 
-    def write_parents(self, w):
+    def align_column(self, intro, c_list):
+        if len(c_list) == 1:
+            return f'{intro} {c_list[0]}'
+        elif c_list:
+            # Line up the members in a column with the first item just to
+            # the right of the intro text.
+            #
+            # Note that the white space after "of" creates a "space"-sized
+            # gap between the intro and the following div.
+            s = '<br>\n'.join(c_list)
+            return f'{intro}\n<span class="membership">\n{s}\n</span>'
+        else:
+            return ''
+
+    def write_membership(self):
+        c_list = []
+
+        # If the page has autopopulated parents, list them here.
+        # Parents with keys are listed more prominently below.
+        # Most likely no page will have more than one autopopulated
+        # parent, so I don't try to do particularly smart sorting here.
+        for parent in reversed(sort_pages(self.parent)):
+            if not parent.has_child_key:
+                link = parent.create_link(1)
+                c_list.append(link)
+
+        # membership_list lists the ancestors that this page should
+        # be listed as a 'member of', from lowest-ranked to highest.
+        #
+        # If this page isn't a direct child of its real ancestor, provide
+        # a link to it.  (A direct child would have been listed above
+        # or will be listed further below.)  Note that the family page
+        # is likely to have been autopopulated, but not necessarily.
+        #
+        # For a shadow ancestor, write it as unlinked text.
+        for ancestor in self.membership_list:
+            if ancestor.shadow:
+                c_list.append(ancestor.format_full(1))
+            elif ancestor not in self.parent:
+                c_list.append(ancestor.create_link(1))
+
+        return self.align_column('Member of', c_list)
+
+    def write_parents(self):
         c_list = []
         for parent in sort_pages(self.parent):
-            if parent.has_child_key or parent.level != 'above':
-                c_list.append(f'Key to {parent.create_link(1)}')
+            if parent.has_child_key:
+                c_list.append(parent.create_link(1))
         if c_list:
-            s = '<br>\n'.join(c_list)
-            w.write(f'<p>\n{s}\n</p>\n')
+            s = self.align_column('Key to', c_list)
+            return f'<p>\n{s}\n</p>\n'
+        else:
+            return ''
 
     def page_matches_color(self, color):
         return (color is None or color in self.color)
@@ -1738,7 +1783,7 @@ class Page:
 
                     w.write(f'{prolog} {members} of this {top} {epilog}.')
                 if key_incomplete:
-                    w.write(f'<br/>\n<b>Caution: The key to distinguish these {members} is not complete.</b>')
+                    w.write(f'<br>\n<b>Caution: The key to distinguish these {members} is not complete.</b>')
                 w.write('</p>\n')
             elif complete:
                 if top == 'genus':
@@ -1776,36 +1821,16 @@ class Page:
             if com and elab:
                 c_list.append(f'<b>{self.format_elab()}</b>')
 
-            # If the page has autopopulated parents, list them here.
-            # Parents with keys are listed more prominently below.
-            # Most likely no page will have more than one autopopulated
-            # parent, so I don't try to do particularly smart sorting here.
-            for parent in sort_pages(self.parent):
-                if not parent.has_child_key and parent.level == 'above':
-                    link = parent.create_link(1)
-                    c_list.append(link)
-
-            # membership_list lists the ancestors that this page should
-            # be listed as a 'member of', from lowest-ranked to highest.
-            #
-            # If this page isn't a direct child of its real ancestor, provide
-            # a link to it.  (A direct child would have been listed above
-            # or will be listed further below.)  Note that the family page
-            # is likely to have been autopopulated, but not necessarily.
-            #
-            # For a shadow ancestor, write it as unlinked text.
-            for ancestor in self.membership_list:
-                if ancestor.shadow:
-                    c_list.append(ancestor.format_full(1))
-                elif ancestor not in self.parent:
-                    c_list.append(ancestor.create_link(1))
+            s = self.write_membership()
+            if s:
+                c_list.append(s)
 
             write_header(w, title, h1, nospace=bool(c_list))
 
             if c_list:
-                w.write('<br/>\n'.join(c_list) + '\n')
+                w.write('<br>\n'.join(c_list) + '\n')
 
-            self.write_parents(w)
+            w.write(self.write_parents())
 
             is_top_of_genus = self.is_top_of('genus')
             is_top_of_species = self.is_top_of('species')
@@ -1841,7 +1866,7 @@ class Page:
                             text = 'external photo'
                         w.write(f'<span style="text-decoration:underline;">{text}</span>')
                         if label:
-                            w.write(f'<br/>{label}</span>')
+                            w.write(f'<br>{label}</span>')
 
                         # As with the jpgs above, there is no newline between
                         # the external photo boxes.

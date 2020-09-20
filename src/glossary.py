@@ -453,10 +453,10 @@ class Glossary:
             return glossary.name
 
         if self == current:
-            w.write(f'<b>{self.title}</b><br/>')
+            w.write(f'<b>{self.title}</b><br>')
         else:
             pageurl = self.get_url()
-            w.write(f'<a href="{pageurl}">{self.title}</a><br/>')
+            w.write(f'<a href="{pageurl}">{self.title}</a><br>')
 
         if self.child:
             w.write('<div class="toc-indent">\n')

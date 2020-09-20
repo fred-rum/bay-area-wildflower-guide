@@ -304,6 +304,14 @@ div.toc-indent {
     margin-left: 25px;
 }
 
+/* This span is aligned to the right of "Member of"/"Key to" such that
+   the first line reads straight across, e.g. "Member of Foo Bar", and
+   the remaining ancestors are indented to line up under "Foo Bar". */
+span.membership {
+    display: inline-block;
+    vertical-align: top;
+}
+
 /* These might be the default margins, but make sure of that before we start
    messing with alternatives. */
 p {
