@@ -852,6 +852,8 @@ Promote an observation if a page can't be found for it and
 
 allow_obs_promotion: self-below
 
+allow_casual_obs
+
 flag_obs_promotion
 
 If the observation's original page has real Linnaean descendants, then

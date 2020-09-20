@@ -631,7 +631,7 @@ class Page:
         self.txt = re.sub(r'^default_ancestor\s*?\n',
                           repl_default_ancestor, self.txt, flags=re.MULTILINE)
 
-        self.txt = re.sub(r'^(create|link|member_link|member_name|photo_requires_color|color_require_photo|obs_requires_photo|obs_requires_color|flag_one_child|allow_obs_promotion|flag_obs_promotion|flag_obs_promotion_above_peers|flag_obs_promotion_without_x|allow_outside_obs|allow_outside_obs_promotion):\s*(.*?)\s*?\n',
+        self.txt = re.sub(r'^(create|link|member_link|member_name|photo_requires_color|color_require_photo|obs_requires_photo|obs_requires_color|flag_one_child|allow_obs_promotion|flag_obs_promotion|flag_obs_promotion_above_peers|flag_obs_promotion_without_x|allow_casual_obs|allow_outside_obs|allow_outside_obs_promotion):\s*(.*?)\s*?\n',
                           repl_property, self.txt, flags=re.MULTILINE)
 
     def parse_glossary(self):

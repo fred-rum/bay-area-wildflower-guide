@@ -1,0 +1,22 @@
+sci:Anemonoides spp.
+sci_jfp: Anemone spp.
+x: ba
+
+Summarizing <a href="https://www.inaturalist.org/observations/2728894">this conversation</a>...
+CalFlora lists two Anemone species in the bay area: A. grayi and
+A. oregana.  However, the accepted range for A. oregana does not
+extend very far into California from Oregon.  Calflora's records are
+probably confused by the complicated nomenclatural history of these
+species.  The only species that is truly accepted in the bay area is
+A. grayi.
+
+==gray's anemone:A. grayi
+sci_jfp: Anemone grayi
+color: white, pale blue, pale purple
+. sepals 10--20 mm
+. stamens 30--60(75)
+
+==oregon anemone:A. oregana
+sci_jfp: Anemone oregana
+. sepals 7--15 mm
+. stamens <= 40

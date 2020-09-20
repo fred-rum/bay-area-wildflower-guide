@@ -456,6 +456,9 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
         if loc != 'bay area' and 'allow_outside_obs' not in page.prop_set:
             continue
 
+        if rg == 'casual' and 'allow_casual_obs' not in page.prop_set:
+            continue
+
         if sci != orig_sci:
             # The page got promoted.
 
