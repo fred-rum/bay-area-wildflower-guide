@@ -6,6 +6,7 @@ Key features:
 . number of berries in each cluster
 
 ==common snowberry:S. albus
+xx:uncat
 color: pale purple, red purple
 . plant 60--180 cm, erect
 . corolla swollen on 1 side, with 5 nectary glands within swelling

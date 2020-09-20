@@ -64,6 +64,7 @@ bristles:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0903+072
 . rare in Santa Cruz range
 
 ==canyon gooseberry:R. menziesii
+xx:uncat
 color: red purple
 . purple-red sepals
 . white petals
@@ -73,6 +74,7 @@ color: red purple
 . <b>dense bristles between nodes</b>
 
 ==hillside gooseberry:R. californicum
+xx:uncat
 color: red purple
 . green or purple-red sepals
 . white petals
@@ -85,10 +87,12 @@ color: red purple
 [
 <h3>no spines at nodes (currants)</h3>
 ==golden currant:R. aureum
+xx:uncat
 . yellow sepals
 . yellow petals, aging red
 
 ==red-flowering currant:R. sanguineum
+xx:uncat
 color:pink, pale purple
 . pink to white sepals
 . styles glabrous at base

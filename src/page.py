@@ -1041,11 +1041,6 @@ class Page:
             self.propagate_prop(prop, rank_set)
 
     def propagate_prop(self, prop, rank_set):
-        if self.name == 'Centaurium' and prop == 'flag_one_child':
-            print(self.rank)
-            print(rank_set)
-            print(self.prop_ranks)
-
         if self.rank:
             if self.rank in rank_set:
                 self.prop_set.add(prop)

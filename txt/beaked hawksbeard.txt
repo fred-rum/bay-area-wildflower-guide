@@ -1,5 +1,0 @@
-sci:Crepis vesicaria
-xx:ca
-
-==beaked hawk's-beard:C. vesicaria ssp. taraxacifolia
-color: yellow
