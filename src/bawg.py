@@ -328,11 +328,12 @@ for page in page_array:
 if arg('-tree5'):
     print_trees()
 
-# Apply properties in order from the lowest ranked pages to the top.
+# Apply link-creation and related properties
+# in order from the lowest ranked pages to the top.
 for rank in Rank:
     for page in full_page_array:
         if page.rank is rank:
-            page.apply_props()
+            page.apply_prop_link()
 
 if arg('-tree6'):
     print_trees()
@@ -466,6 +467,7 @@ if arg('-tree7'):
 top_list = [x for x in page_array if not x.parent]
 
 for page in page_array:
+    page.apply_most_props()
     if not (page.sci or page.no_sci):
         error(page.name, prefix='No scientific name given for the following pages:')
 
@@ -495,18 +497,6 @@ if arg('-tree7'):
 # Turn txt into html for all normal and default pages.
 for page in page_array:
     page.parse()
-
-# page.autopopulated could be useful for coloring child links during
-# page.parse(), but it could also be confusing having some black child
-# links be to high-level parents and others to low-level unobserved nodes.
-# In any case, page.has_child_key isn't known and thus page.autopopulated
-# can't be calculated for a page until page.parse() finishes.  Rather than
-# update letting some pages see updated values for other pages based on the
-# order that they're parsed, calculate page.autopopulated for all pages at
-# once.
-for page in page_array:
-    if page.level == 'above' and page.child and not page.has_child_key:
-        page.autopopulated = True
 
 for page in page_array:
     page.parse2()
@@ -580,8 +570,6 @@ with open(search_file, 'w', encoding='utf-8') as w:
     # This order tie-breaker isn't particularly useful to the user, but
     # it helps prevent pages.js from getting random changes just because
     # the dictionary hashes differently.
-    # The user search also wants autopopulated pages to have lower
-    # priority, but that's handled in search.js, not here.
     for page in sort_pages(page_array, with_depth=True):
         name = filename(page.name)
         w.write(f'{{page:"{name}"')
@@ -608,10 +596,10 @@ with open(search_file, 'w', encoding='utf-8') as w:
             elabs_str = unidecode('","'.join(elabs))
             w.write(f',sci:["{elabs_str}"]')
         if page.child:
-            if page.autopopulated:
-                w.write(',x:"f"')
-            else:
+            if page.has_child_key:
                 w.write(',x:"k"')
+            else:
+                w.write(',x:"f"')
         else:
             if page.jpg_list:
                 w.write(',x:"o"')

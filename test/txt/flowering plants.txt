@@ -3,5 +3,6 @@ is_top
 default_ancestor
 member_link: family
 member_name: family
-link: self-tribe
+link: self-subtribe
 flag_link: genus-below
+flag_one_child: subfamily-below

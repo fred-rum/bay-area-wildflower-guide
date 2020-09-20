@@ -159,8 +159,15 @@ class Page:
         # if valid, must be different than the common name.
         self.icom = None
 
-        self.has_child_key = False # true if at least one child gets key info
-        self.autopopulated = False # true if it's an autopopulated family page
+        # A parent's link to a child may be styled depending on whether the
+        # child is itself a key (has_child_key).  Which means that a parent
+        # wants to parse its children before parsing itself.  To make sure
+        # that that process doesn't go hayway, we keep track of whether each
+        # page has been parsed or not.
+        self.parsed = False
+
+        # has_child_key is true if at least one child gets key info.
+        self.has_child_key = False
 
         self.ext_photo_list = [] # list of (text, calphotos_link) tuples
         self.genus_complete = None # indicates the completeness of the genus
@@ -525,12 +532,34 @@ class Page:
                           repl_asci, self.txt, flags=re.MULTILINE)
 
     def canonical_rank(self, rank):
+        mod = None
+        if rank.startswith(('<', '>')):
+            mod, rank = rank[0], rank[1:]
+
         if rank == 'self':
-            return self.rank
+            rank = self.rank
         else:
             if rank not in Rank.__members__:
-                error(f'unrecognized rank "{rank}" used in {self.name}')
-            return Rank[rank]
+                fatal(f'unrecognized rank "{rank}" used in {self.name}')
+            rank = Rank[rank]
+
+        if mod == '<':
+            for i in Rank:
+                if i.value == rank.value - 1:
+                    print(f'switching from {rank} to {i}')
+                    rank = i
+                    break
+            else:
+                error(f'unrecognized rank "<{rank}" used in {self.name}')
+        elif mod == '>':
+            for i in Rank:
+                if i.value == rank.value + 1:
+                    rank = i
+                    break
+            else:
+                error(f'unrecognized rank ">{rank}" used in {self.name}')
+
+        return rank
 
     def parse_properties(self):
         def repl_is_top(matchobj):
@@ -563,9 +592,19 @@ class Page:
                     # the higher rank.
                     in_range = False
                     for rank in Rank:
+                        # rank1 and rank2 are inclusive, so regardless of
+                        # whether we've entered or are leaving the range,
+                        # a match on either one is considered "in range".
                         if in_range or rank in (rank1, rank2):
                             rank_set.add(rank)
-                        if rank in (rank1, rank2):
+
+                        # If the rank matches rank1 or rank2, flip in_range.
+                        # If it matches *both*, don't flip_in_range.
+                        # E.g. the range 'species-species' matches above
+                        # for 'species' but doesn't put us in_range.
+                        if rank == rank1:
+                            in_range = not in_range
+                        if rank == rank2:
                             in_range = not in_range
                 else:
                     # Not a range, just a rank.
@@ -592,7 +631,7 @@ class Page:
         self.txt = re.sub(r'^default_ancestor\s*?\n',
                           repl_default_ancestor, self.txt, flags=re.MULTILINE)
 
-        self.txt = re.sub(r'^(create|link|member_link|member_name|photo_requires_color|color_require_photo|obs_requires_photo|obs_requires_color):\s*(.*?)\s*?\n',
+        self.txt = re.sub(r'^(create|link|member_link|member_name|photo_requires_color|color_require_photo|obs_requires_photo|obs_requires_color|flag_one_child):\s*(.*?)\s*?\n',
                           repl_property, self.txt, flags=re.MULTILINE)
 
     def parse_glossary(self):
@@ -1002,6 +1041,11 @@ class Page:
             self.propagate_prop(prop, rank_set)
 
     def propagate_prop(self, prop, rank_set):
+        if self.name == 'Centaurium' and prop == 'flag_one_child':
+            print(self.rank)
+            print(rank_set)
+            print(self.prop_ranks)
+
         if self.rank:
             if self.rank in rank_set:
                 self.prop_set.add(prop)
@@ -1066,11 +1110,6 @@ class Page:
         self.index = len(page_array)
         page_array.append(self)
 
-    # Apply the properties that have been assigned to an individual page.
-    def apply_props(self):
-        self.apply_prop_link()
-        self.apply_prop_member()
-
     def apply_prop_link(self):
         if (('create' in self.prop_set and self.shadow) or
             ('link' in self.prop_set and not self.shadow)):
@@ -1092,6 +1131,11 @@ class Page:
                 for child in potential_link_set:
                     self.assign_child(child)
 
+    # Apply properties not related to link creation.
+    def apply_most_props(self):
+        self.apply_prop_member()
+        self.apply_prop_checks()
+
     def assign_membership(self, ancestor):
         self.membership_list.append(ancestor)
         for child in self.linn_child:
@@ -1111,6 +1155,9 @@ class Page:
         if ('obs_requires_photo' in self.prop_set and
             self.count_flowers() and not self.get_jpg()):
             error(f'obs_requires_photo: {self.name} is observed, but has no photos')
+
+        if 'flag_one_child' in self.prop_set and len(self.child) == 1:
+            error(f'flag_one_child: {self.name} has exactly one child')
 
     def expand_genus(self, sci):
         if (self.cur_genus and len(sci) >= 3 and
@@ -1263,10 +1310,10 @@ class Page:
         self.txt = '\n'.join(c_list) + '\n'
 
     def link_style(self):
-        if self.autopopulated:
-            return 'family'
-        elif self.child:
+        if self.has_child_key:
             return 'parent'
+        elif self.child:
+            return 'family'
         elif self.jpg_list:
             return 'leaf'
         else:
@@ -1606,6 +1653,18 @@ class Page:
             return f'<div class="photo-box">{img}\n<span>{link}</span></div>'
 
     def parse(self):
+        # If a parent already parsed this page (as below), we shouldn't
+        # try to parse it again.
+        if self.parsed:
+            return
+        self.parsed = True
+
+        # A parent's link to a child may be styled depending on whether the
+        # child is itself a key (has_child_key).  Which means that a parent
+        # wants to parse its children before parsing itself.
+        for child in self.child:
+            child.parse()
+
         s = self.txt
 
         s = parse_txt(self.name, s, self, self.glossary)
@@ -1885,8 +1944,6 @@ class Page:
             if self.level != 'above':
                 self.write_lists(w)
             write_footer(w)
-
-        self.apply_prop_checks()
 
 #        if self.top_level == 'flowering plants':
 #            if self.jpg_list and not self.color:

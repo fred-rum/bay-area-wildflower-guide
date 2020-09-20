@@ -894,3 +894,21 @@ cur_genus?
 
 Should coloration for keys align with the decision between 'Member of'
 and 'Key to'?
+
+Do I want a way to "promote" a species observation to a subspecies
+(when there is only one subspecies and no species page)?
+E.g. beaked hawksbeard
+
+And maybe a flag to highlight species with only one subspecies.  (Or
+any other hierarchy rank with only one child.)
+
+Make the link color for unobserved flowers gray?
+('family' parents remain black.)
+Or change 'family' parents to a root-colored blackish-brown.
+
+Add an xx value for 'only one member in the bay area which is not
+worth distinguishing', e.g. '1ba'.  Or just make it uncat?
+
+Simplify '=={child_page.index}{suffix}' to just '=={suffix}' and get
+rid of the index property.  The child page can be determined by
+stepping through self.child.

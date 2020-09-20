@@ -61,7 +61,7 @@ class Obs:
                 self.month[i] += page.month[i]
 
             if page.child:
-                if not page.autopopulated:
+                if page.has_child_key:
                     self.key += 1
                 if page.jpg_list and self.leaf_obs == old_leaf_obs:
                     # If a page is both a key and an observed flower and none

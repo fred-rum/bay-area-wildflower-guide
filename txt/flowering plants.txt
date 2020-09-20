@@ -4,5 +4,6 @@ default_ancestor
 create: family
 member_link: family
 link: self-subtribe
-flag_link: genus-below
+flag_link: genus-species
 obs_requires_photo: genus-below
+flag_one_child: species
