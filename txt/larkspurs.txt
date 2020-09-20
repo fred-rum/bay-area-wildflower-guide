@@ -26,6 +26,7 @@ color: red
 See also {-california fuchsia}, which has much longer filaments.
 
 ==zigzag larkspur,-2:D. patens
+xx:uncat
 color: purple
 . number of flowers and pedicel length indeterminate
 . <b>generally < 6 flowers on main axis?</b> [how many axes are there?]; if more, oldest open-flowered pedicels generally > 25 mm and > 2 &times; youngest

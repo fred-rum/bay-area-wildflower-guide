@@ -2,6 +2,7 @@ sci:Heterotheca spp.
 x:ba
 
 ==sessileflower false goldenaster:H. sessiliflora
+xx:more
 color:yellow
 . 4--24 ray flowers, generally 7--15 mm
 . proximal leaves subsessile

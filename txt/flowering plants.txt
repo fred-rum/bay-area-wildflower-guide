@@ -7,3 +7,10 @@ link: self-subtribe
 flag_link: genus-species
 obs_requires_photo: genus-below
 flag_one_child: species
+
+allow_obs_promotion: species-below
+allow_outside_obs: species-below
+allow_outside_obs_promotion: species-below
+
+flag_obs_promotion_above_peers: self-below
+flag_obs_promotion_without_x: self-below

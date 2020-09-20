@@ -10,6 +10,7 @@ The defining difference is the number of stamens, but I can't count them without
 ==blue dicks:D. capitatum
 color: purple
 sci_j:Dipterostemon capitatus
+xx:more
 . perianth blue, blue-purple, pink-purple, or white
 . staminodes erect, <b>leaning toward anthers, outward at tip, +- white</b>
 . perianth tube <b>not narrowed</b> above ovary

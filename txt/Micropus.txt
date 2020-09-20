@@ -3,6 +3,7 @@ x:ba
 Jepson has a <a href="http://ucjeps.berkeley.edu/eflora/eflora_display.php?tid=33474">drawing of the palea</a> of both species, and CalPhotos has a <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0614+1342">photo</a> of M. californicus paleae.  The palea wing orientation may be easier to see when one palea is removed from the head as in these drawings.
 
 ==q-tips:M. californicus
+xx:more
 color: white
 . paleae [see above] +- hood-like, body thick and hard throughout, wing projected +- upward from adaxial edge, obscure, +- rolled, beak-like, +- linear
 . common

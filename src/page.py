@@ -631,7 +631,7 @@ class Page:
         self.txt = re.sub(r'^default_ancestor\s*?\n',
                           repl_default_ancestor, self.txt, flags=re.MULTILINE)
 
-        self.txt = re.sub(r'^(create|link|member_link|member_name|photo_requires_color|color_require_photo|obs_requires_photo|obs_requires_color|flag_one_child):\s*(.*?)\s*?\n',
+        self.txt = re.sub(r'^(create|link|member_link|member_name|photo_requires_color|color_require_photo|obs_requires_photo|obs_requires_color|flag_one_child|allow_obs_promotion|flag_obs_promotion|flag_obs_promotion_above_peers|flag_obs_promotion_without_x|allow_outside_obs|allow_outside_obs_promotion):\s*(.*?)\s*?\n',
                           repl_property, self.txt, flags=re.MULTILINE)
 
     def parse_glossary(self):
@@ -706,6 +706,14 @@ class Page:
             if parent.is_ancestor(check_page):
                 return True
 
+        return False
+
+    # Check if the page has any Linnaean descendants that are real.
+    # This does not include the page itself, which may be real or shadow.
+    def has_real_linnaean_descendants(self):
+        for child in self.linn_child:
+            if not child.shadow or child.has_real_linnaean_descendants():
+                return True
         return False
 
     # Using recursion, find the lowest-ranked ancestor of self.

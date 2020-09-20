@@ -398,6 +398,10 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
         else:
             page = find_page2(com, sci)
 
+        # A Linnaean page should have been created during the first path
+        # through observations.csv, so it'd be weird if we can't find it.
+        assert page
+
         if sci in sci_ignore:
             if page and not page.shadow:
                 error(f'{sci} is ignored, but there is a page for it ({page.name})')
@@ -422,43 +426,75 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
                     #error(f"iNaturalist's common name {com} differs from mine: {page.com} ({page.elab})")
 
         if loc != 'bay area':
-            if not page.shadow and page.rank < Rank.genus:
-                # If the location is outside the bay area, we'll still
-                # count it as long as it's a bay area species; i.e. if
-                # a page exists for it at the species level or below.
-                # In this case, list the outside observations by
-                # general location, rather than the specific park.
-                short_park = loc
-            else:
-                # But if there isn't an exact page for it, throw the
-                # observation away; i.e. don't look for a higher-level match.
-                continue
-
-        # We expect a page for every observed vascular plant species.
-        # (If it isn't identified to the species level, then I don't really
-        # know what it is, so there's no particular reason to make a page
-        # for it.)
-        phylum = get_field('taxon_phylum_name')
-        if not page and phylum == 'Tracheophyta' and ' ' in sci and sci not in sci_ignore and not arg('-db'):
-            error(sci, prefix="The following vascular plant observations don't have a page:")
+            # If the location is outside the bay area, properties may
+            # allow us to count it.  If so, list the outside observation
+            # by general location, rather than the specific park.
+            short_park = loc
 
         # If we haven't matched the observation to a real page, advance
-        # up the Linnaean hierarchy until we find a real page.
-        # For now, we stop at the species level, but perhaps this will
-        # eventually be a property.
-        while (page and page.shadow and
-               (page.rank < Rank.species or sci in sci_ignore)):
+        # up the Linnaean hierarchy until we find a real page.  We'll
+        # check later whether this promotion is allowed.
+        orig_sci = sci
+        orig_page = page
+        while page.shadow:
+            if sci in sci_ignore and sci_ignore[sci].startswith('-'):
+                break
             page = page.linn_parent
+            if not page:
+                break
             sci = page.sci
+            if orig_sci in sci_ignore and sci_ignore[orig_sci].startswith('+'):
+                # if sci_ignore starts with '+', then pretend that no
+                # promotion occurred.
+                orig_page = page
+                orig_sci = sci
 
-        if page and not page.shadow:
-            page.obs_n += 1
-            if rg == 'research':
-                page.obs_rg += 1
-            if short_park not in page.parks:
-                page.parks[short_park] = 0
-            page.parks[short_park] += 1
-            page.month[month] += 1
+        if (not page or
+            (sci in sci_ignore and sci_ignore[sci].startswith('-'))):
+            continue
+
+        if loc != 'bay area' and 'allow_outside_obs' not in page.prop_set:
+            continue
+
+        if sci != orig_sci:
+            # The page got promoted.
+
+            if (loc != 'bay area' and
+                'allow_outside_obs_promotion' not in page.prop_set):
+                continue
+
+            if 'flag_obs_promotion' in page.prop_set:
+                error(f'flag_obs_promotion: {orig_sci} observation promoted to {page.name}')
+                continue
+
+            # If the observation's original page has real Linnaean
+            # descendants, then we don't know what it is, but it could
+            # be something we've documented, so it's always OK.  But
+            # if doesn't have real Linnaean descendants, and the
+            # promoted page does, then it's definitely something we
+            # haven't documented.
+            if ('flag_obs_promotion_above_peers' in page.prop_set and
+                not orig_page.has_real_linnaean_descendants() and
+                page.has_real_linnaean_descendants()):
+                error(f'flag_obs_promotion_above_peers: {orig_sci} observation promoted to {page.name}')
+                continue
+
+            if ('flag_obs_promotion_without_x' in page.prop_set and
+                ((page.rank is Rank.genus and page.genus_complete is None) or
+                 (page.rank is Rank.species and page.species_complete is None))):
+                error(f'flag_obs_promotion_without_x: {orig_sci} observation promoted to {page.name}')
+                continue
+
+            if 'allow_obs_promotion' not in page.prop_set:
+                continue
+
+        page.obs_n += 1
+        if rg == 'research':
+            page.obs_rg += 1
+        if short_park not in page.parks:
+            page.parks[short_park] = 0
+        page.parks[short_park] += 1
+        page.month[month] += 1
 error_end_section()
 
 if arg('-tree7'):
