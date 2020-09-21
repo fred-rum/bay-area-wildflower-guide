@@ -142,9 +142,6 @@ for page in page_array:
     if page.color and not page.jpg_list:
         error(f'page {page.name} has a color assigned but has no photos')
 
-with open(f'{root_path}/data/ignore species.yaml', encoding='utf-8') as f:
-    sci_ignore = yaml.safe_load(f)
-
 # Find any genus with multiple species.
 # Check whether all of those species share an ancestor key page in common.
 # If not, print a warning.
@@ -338,6 +335,21 @@ for rank in Rank:
 if arg('-tree6'):
     print_trees()
 
+with open(f'{root_path}/data/ignore species.yaml', encoding='utf-8') as f:
+    sci_ignore = yaml.safe_load(f)
+
+for sci in sci_ignore:
+    # Keep only the first character ('+' or '-') and ignore the comment.
+    sci_ignore[sci] = sci_ignore[sci][0]
+
+    if sci in isci_page:
+        page = isci_page[sci]
+    else:
+        page = find_page1(sci)
+
+    if page and not page.shadow:
+        error(f'{sci} is ignored, but there is a real page for it ({page.name})')
+
 # Read my observations file (exported from iNaturalist) and use it as follows
 # for each observed taxon:
 #   Associate common names with scientific names
@@ -402,16 +414,6 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
         # through observations.csv, so it'd be weird if we can't find it.
         assert page
 
-        if sci in sci_ignore:
-            if page and not page.shadow:
-                error(f'{sci} is ignored, but there is a page for it ({page.name})')
-
-            # For sci_ignore == '+...', the expectation is that we'll fail
-            # to find a page for it, but we'll find a page at a higher level.
-            # But if sci_ignore == '-...', we do nothing with the observation.
-            if sci_ignore[sci][0] != '+':
-                continue
-
         if page:
             taxon_id = get_field('taxon_id')
             if taxon_id:
@@ -437,20 +439,19 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
         orig_sci = sci
         orig_page = page
         while page.shadow:
-            if sci in sci_ignore and sci_ignore[sci].startswith('-'):
-                break
+            if sci in sci_ignore:
+                if sci_ignore[sci] == '+':
+                    # Update orig_page to match the new promoted page,
+                    # thus pretending that there was no promotion.
+                    orig_page = page.linn_parent
+                else:
+                    break
             page = page.linn_parent
             if not page:
                 break
             sci = page.sci
-            if orig_sci in sci_ignore and sci_ignore[orig_sci].startswith('+'):
-                # if sci_ignore starts with '+', then pretend that no
-                # promotion occurred.
-                orig_page = page
-                orig_sci = sci
 
-        if (not page or
-            (sci in sci_ignore and sci_ignore[sci].startswith('-'))):
+        if not page or (sci in sci_ignore and sci_ignore[sci] == '-'):
             continue
 
         if loc != 'bay area' and 'allow_outside_obs' not in page.prop_set:
@@ -459,7 +460,7 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
         if rg == 'casual' and 'allow_casual_obs' not in page.prop_set:
             continue
 
-        if sci != orig_sci:
+        if page != orig_page:
             # The page got promoted.
 
             if (loc != 'bay area' and

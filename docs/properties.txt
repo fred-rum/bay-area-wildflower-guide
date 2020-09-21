@@ -153,6 +153,15 @@ the Linnaean hierarchy to find the first real ancestor page.  The
 properties of that page are checked to see if the observation is
 allowed at its promoted rank.
 
+If any shadow page in the taxon promotion chain has a '-' comment in
+'ignore species.yaml', the observation is discarded, regardless of
+properties.
+
+If any shadow page in the taxon promotion chain has a '+' comment in
+'ignore species.yaml', the observation is treated as if it were
+originally made at the leve just above the ignored taxon.  I.e. the
+promotion is treated as if it didn't happen.
+
 'allow_obs_promotion' allows an observation to be counted at its
 promoted rank.
 
