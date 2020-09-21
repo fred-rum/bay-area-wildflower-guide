@@ -1044,11 +1044,14 @@ class Page:
             error(f'flag_one_child: {self.name} has exactly one child')
 
     def expand_genus(self, sci):
-        if (self.cur_genus and len(sci) >= 3 and
-            sci[0:3] == self.cur_genus[0] + '. '):
-            return self.cur_genus + sci[2:]
-        else:
-            return sci
+        if len(sci) >= 3 and sci[1:3] == '. ':
+            # sci has an abbreviated genus name
+            if self.rank and self.rank <= Rank.genus and self.sci[0] == sci[0]:
+                sci_words = self.sci.split(' ')
+                return sci_words[0] + sci[2:]
+            else:
+                fatal(f'Abbreviation "{sci}"  cannot be parsed in page "{self.name}"')
+        return sci
 
     def parse_children(self):
         # Replace a ==[name] link with ==[page] and record the
@@ -1128,18 +1131,15 @@ class Page:
                     child_page.set_com(com)
             if sci:
                 child_page.set_sci(sci)
-            self.assign_child(child_page)
+            try:
+                self.assign_child(child_page)
+            except FatalError:
+                warning(f'was adding {child_page.name} as a child of {self.name}')
+                raise
 
             # Replace the =={...} field with a simplified =={index,suffix} line.
             # This will create the appropriate link later in the parsing.
             return f'=={child_page.index}{suffix}'
-
-        # If the page's genus is explicitly specified,
-        # make it the default for child abbreviations.
-        if self.level in ('genus', 'species', 'below'):
-            self.cur_genus = self.sci.split(' ')[0]
-        else:
-            self.cur_genus = None
 
         c_list = []
         data_object = self
@@ -1300,7 +1300,7 @@ class Page:
 
     def write_external_links(self, w):
         sci = self.sci
-        if self.level == 'below':
+        if self.rank and self.rank is Rank.below:
             # Anything below species level should be elaborated as necessary.
             elab = self.elab
         else:
@@ -1334,14 +1334,14 @@ class Page:
             sciurl = url(sci)
             add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/search?q={sciurl}&view=list" target="_blank">iNaturalist</a>')
 
-        if self.level != 'above' or self.elab.startswith('family '):
+        if self.rank and (self.rank <= Rank.genus or self.rank is Rank.family):
             # CalFlora can be searched by family,
             # but not by other high-level classifications.
             elab = self.choose_elab(self.elab_calflora)
             elaburl = url(elab)
             add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elaburl}" target="_blank">CalFlora</a>');
 
-        if self.level in ('species', 'below'):
+        if self.rank and self.rank <= Rank.species:
             # CalPhotos cannot be searched by high-level classifications.
             # It can be searched by genus, but I don't find that at all useful.
             elab = self.choose_elab(self.elab_calphotos)
@@ -1357,7 +1357,7 @@ class Page:
             # rel-taxon=begins+with -> allows matches with lower-level detail
             add_link(elab, self.elab_calphotos, f'<a href="https://calphotos.berkeley.edu/cgi/img_query?rel-taxon=begins+with&where-taxon={elaburl}" target="_blank">CalPhotos</a>');
 
-        if self.level != 'above' or self.elab.startswith('family '):
+        if self.rank and (self.rank <= Rank.genus or self.rank is Rank.family):
             # Jepson can be searched by family,
             # but not by other high-level classifications.
             elab = self.choose_elab(self.elab_jepson)
@@ -1367,7 +1367,7 @@ class Page:
             sciurl = url(sci)
             add_link(elab, self.elab_jepson, f'<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sciurl}" target="_blank">Jepson&nbsp;eFlora</a>');
 
-        if self.level in ('genus', 'species', 'below'):
+        if self.rank and self.rank <= Rank.genus:
             elab = self.choose_elab(self.elab_calflora)
             genus = elab.split(' ')[0]
             # srch=t -> search
@@ -1482,9 +1482,10 @@ class Page:
         # Give the child a copy of the text from the parent's key.
         # The child can use this (pre-parsed) text if it has no text
         # of its own.
-        if ((self.level == 'genus' and child.level in ('species', 'below')) or
-            (self.level == 'species' and child.level == 'below') or
-            not child.key_txt):
+        #
+        # If a child has more than one parent key, priority for key_txt
+        # is given to the ranked parent.
+        if (self.rank and text) or not child.key_txt:
             child.key_txt = text
 
         if text:
@@ -1573,35 +1574,29 @@ class Page:
 
         self.txt = parse2_txt(self.name, s, self.glossary)
 
-    def any_parent_within_level(self, within_level_list):
-        for parent in self.parent:
-            if parent.level is None:
-                if parent.any_parent_within_level(within_level_list):
-                    return True
-            elif parent.level in within_level_list:
-                return True
-        return False
+    # Check whether this page is the top real page within its Linnaean group
+    # designated by 'rank'.  E.g. if a species page does not have a real page
+    # for its genus, it is the top of its genus (and species, of course).
+    def is_top_of(self, rank):
+        if not self.rank or self.rank > rank:
+            return False
 
-    def is_top_of(self, level):
-        if level == 'genus':
-            within_level_list = ('genus', 'species', 'below')
-        else:
-            within_level_list = ('species', 'below')
-        is_top_of_level = (self.level in within_level_list)
-        if self.any_parent_within_level(within_level_list):
-            is_top_of_level = False
-        return is_top_of_level
+        ancestor = self.linn_parent
+        while ancestor and ancestor.rank <= rank:
+            if not ancestor.shadow: return False
+            ancestor = ancestor.linn_parent
+        return True
 
     def write_html(self):
         def write_complete(w, complete, key_incomplete, is_top, top, members):
-            if (self.child or
-                (top == 'genus' and self.level != 'genus') or
-                (top == 'species' and self.level != 'species')):
-                other = ' other'
-            else:
-                other = ''
             if is_top:
                 w.write('<p>')
+                if (self.child or
+                    (top == 'genus' and self.rank is not Rank.genus) or
+                    (top == 'species' and self.rank is not Rank.species)):
+                    other = ' other'
+                else:
+                    other = ''
                 if complete is None:
                     if top == 'genus':
                         w.write(f'<b>Caution: There may be{other} {members} of this {top} not yet included in this guide.</b>')
@@ -1688,8 +1683,9 @@ class Page:
 
             w.write(self.write_parents())
 
-            is_top_of_genus = self.is_top_of('genus')
-            is_top_of_species = self.is_top_of('species')
+            is_top_of_genus = self.is_top_of(Rank.genus)
+            is_top_of_species = self.is_top_of(Rank.species)
+
             write_complete(w,
                            self.genus_complete, self.genus_key_incomplete,
                            is_top_of_genus, 'genus', 'species')
@@ -1738,14 +1734,14 @@ class Page:
             self.write_obs(w)
             if self.sci:
                 self.write_external_links(w)
-            if self.level != 'above':
+            if not self.rank or self.rank <= Rank.genus:
                 self.write_lists(w)
             write_footer(w)
 
     def record_genus(self):
         # record all pages that are within each genus
         sci = self.sci
-        if self.level in ('genus', 'species', 'below'):
+        if self.rank and self.rank <= Rank.genus:
             genus = sci.split(' ')[0]
             if genus not in genus_page_list:
                 genus_page_list[genus] = []

@@ -904,9 +904,6 @@ flag_obs_fill_com
 flag_obs_fill_sci
 flag_obs_diff_com
 
-In page.py, get rid of level and use rank instead.
-Is cur_genus really 'current', or should it be named better?
-
 Make the link color for unobserved flowers gray?
 ('family' parents remain black.)
 Or change 'family' parents to a root-colored blackish-brown.
@@ -938,3 +935,7 @@ included, which means that shadow pages created by local vs. outside
 observations must be distinguished.  A separate 'link' property is
 needed to link a created low-level page to a higher-level page.  Extra
 properties may also be needed for checking page relationships.
+
+
+Fix the woodland stars genus page which currently includes both the
+L. heterophyllum species and its var. bolanderi.
