@@ -20,12 +20,12 @@ for the filename is to use the common name if there is one and it is
 unique in the bay area.  The filename also determines the filename
 used for the corresponding HTML page.
 
-com:[name] specifies the common name for the flower.  My preference is
+com:<name> specifies the common name for the flower.  My preference is
 to use the common name as given by iNaturalist for my area, although
 I'll sometimes alter it or (especially for an intermediate level of
 hierarchy) make one up.
 
-sci:[name] specifies the scientific name for the flower.  The name can
+sci:<name> specifies the scientific name for the flower.  The name can
 be elaborated or stripped, although elaborated is recommended.  For a
 genus, the elaborated name is "(Genus) spp.".  For a subspecies or
 variety, the elaborated name "(Genus) (species) ssp. (subspecies)" or
@@ -50,7 +50,7 @@ described below.
 --
 Child links and key info:
 
-==[name] creates a child relationship to the named page.  The
+==<name> creates a child relationship to the named page.  The
 specified name can be the scientific name (elaborated or stripped) or
 the common name (if there is exactly one match) of the child.  If the
 name is in [com]:[sci] format, both names are used to find the
@@ -83,20 +83,36 @@ If different sites disagree on the scientific name for a species, I
 generally prefer the name listed in Plants of the World Online (POWO).
 The name for other sites can be specified as follows:
 
-sci_i:[name] specifies the scientific name as listed in iNaturalist.
-sci_j:[name] specifies the scientific name as listed in Jepson.
-sci_f:[name] specifies the scientific name as listed in CalFlora.
-sci_p:[name] specifies the scientific name as listed in CalPhotos.
+sci_i:<name> specifies the scientific name as listed in iNaturalist.
+sci_j:<name> specifies the scientific name as listed in Jepson.
+sci_f:<name> specifies the scientific name as listed in CalFlora.
+sci_p:<name> specifies the scientific name as listed in CalPhotos.
 
 Multiple names can be specified for CalPhotos, separated by |.  The
 canonical name is also automatically included in the CalPhotos search
 in addition to the specified CalPhotos name(s).
 
 If multiple sites use the same scientific name, they can be combined
-into one declaration, e.g. "sci_jfp:[name]".
+into one declaration, e.g. "sci_jfp:<name>".
 
 If the name is "n/a", it indicates that the taxon is not listed under
 any name at a site.
+
+
+A page can declare a Linnaean ancestor (a higher group in the Linnaean
+taxonomy) as follows:
+
+<rank>: <name>
+
+The named page does not need to exist, and it will not be
+automatically created.  However, the Linnaean relationship can come in
+handy for the properties described below.  Multiple Linnaean ancestors
+can be declared at different ranks from the same page.
+
+
+There are a number of properties that can be applied to designated
+taxonomic ranks in the Linnaean hierarchy.  Details about these
+properties are in properties.txt.
 
 
 color:[names] specifies the colors of the taxon, separated by commas.
@@ -113,9 +129,9 @@ potentially be used on the same page.
 
 The following [txt] values can be usd for x: or xx:
 none - taxon has no subspecies or variants
-any - there are no other taxon members anywhere
-ba - there are no other taxon members in California
+ba - there are no other taxon members in the bay area
 ca - there are no other taxon members in California
+any - there are no other taxon members anywhere
 hist - taxon members only in the historical record are ignored
 rare - extremely rare taxon members are ignored
 hist/rare - historical and extremely rare taxon members are ignored
@@ -177,8 +193,8 @@ target="_blank" so that they open in a new tab/window.
 --
 Strategy:
 
-It's often good to simply create a stub page for a genus or species,
+It's often handy to first create a stub page for a genus or species,
 using its common name from iNaturalist as the filename and also giving
-its scientific name with sci:[name].  The created HTML page then has
+its scientific name with sci:<name>.  The created HTML page then has
 convenient links for finding all bay area species within the same
 genus that are known by CalFlora, finding the key in Jepson, etc.

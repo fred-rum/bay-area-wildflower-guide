@@ -1,0 +1,218 @@
+Properties can be declared on a page which apply to that page and/or
+to specified taxonomic ranks under that page in the Linnaean
+hierarchy.
+
+For example, if a page 'flowering plants:subphylum Angiospermae' has
+the property 'create: family', then a page is created for every known
+flower family for which there are lower-ranked flower pagse.  In
+addition (if there no other pages or properties to complicate things),
+the top of each related set of flower pages is linked as a child of
+the corresponding new family page, and these family pages are linked
+as children of 'flowering plants', creating a completely linked
+hierarchy of pages for all flowering plants.
+
+Properties provide a convenient way to add extra information to the
+guide.  A number of properties also provide error checks to ensure
+that the guide is as complete as desired.
+
+
+Linnaean hierarchy:
+
+The page hierarchy can generably be built in a rather freeform fasion,
+but properties rely on the Linnaean hierarchy.  The Linnaean hierarchy
+is derived from these sources:
+
+- A ranked page has a ranked child.  A ranked page has a scientific
+  name with an explicit or implicit Linnaean taxonomic rank
+  (e.g. 'family Iridaceae' or 'Iris fernaldii').
+
+- A ranked page declares a Linnaean ancestor with '<rank>: <name>'.
+
+- A subspecies page (one with a scientific name that has 3 or more
+  words) implies a Linnaean parent species.  E.g. Tiarella trifoliata
+  var. unifoliata has an implied parent of Tiarella trifoliata.
+
+- A species page (one with a scientific name that is an uppercase word
+  followed by a lowercase word) implies a genus.  E.g. Tiarella
+  trifoliata has an implied parent of Tiarella spp.
+
+- Observations exported from iNaturalist can include the scientific
+  name of (almost) every Linnaean group that the observed taxon is
+  part of.
+
+The script composes the Linnaean ancestry information into
+more-or-less complete Linnaean trees.  E.g. if we know that
+- Hypochaeris radicata is a member of Hypochaeris spp., and
+- Hypochaeris glabra is a member of Hypochaeris spp., and
+- Hypochaeris glabra is a member of tribe Cichorieae
+then we also know that
+- Hypochaeris spp. is a member of tribe Cichorieae, and
+- Hypochaeris radicata is a member of tribe Cichorieae.
+
+Pages are not necessarily created for every taxon in the Linnaean
+taxonomy, nor are links necessarily created between pages in related
+Linnaean taxons.  However, pages and links can be created
+automatically where desired using the properties described below.
+
+
+Ranks:
+
+The taxonomic ranks are named as usual, e.g. kingdom, phylum,
+subphylum, ... subtribe, genus, and species.  Ranks between genus and
+species are not supported (e.g. subgenus, complex).  Ranks below
+species use the catch-all name of 'below'.
+
+A property can be applied to the page in which it is declared and/or
+to specified taxonomic ranks under that page in the Linnaean
+hierarchy.
+
+The ranks to which a property applies can be a range
+(e.g. family-species) or a list (e.g. family, genus), or a combination
+(e.g. superfamily-subfamily, genus).
+
+Rank 'self' applies the property to the page itself, and it is the
+only way to apply a property to a page without a Linnaean rank.  This
+is the only way to apply properties to an unranked page.  If an
+unranked page declares non-self properties, those properties are
+applied to any Linnaean hierarchies that are real descendants of the
+page.
+
+Rank 'self' cannot be used as part of a range declared on an unranked
+page.
+
+If the same property is declared at multiple levels of a Linnaean
+hierarchy, the declaration at the lower rank takes precedence for its
+hierarchy.  E.g. a property can be declared to apply to certain ranks
+within 'flowering plants', while it is declared to apply to a
+different set of ranks within 'sunflower family'.  To support this
+process, a property declared with rank 'none' is applied to none of
+its Linnaean descendants.
+
+
+Page and link terminology:
+
+A real page is one for which HTML is generated.  It can be created via
+any of the following means:
+- a txt file describes it
+- a txt file declares it as a child
+- a jpg references it
+- a 'create' property (below) generates it from a shadow page (below)
+
+A shadow page is a page that is known from the Linnaean hierarchy, but
+which is not real.  A shadow page may be promoted to a real page by a
+'create' property, or it may simply be a conduit for properties.
+
+A link is a parent/child relationship, either real or Linnaean.  A
+real link is always between two real paes.  A Linnaean link may have
+either a real or shadow page as the parent and either a real or shadow
+page as the child.
+
+
+Properties to create pages, link pages, or verify that pages and links exist:
+
+'create' promotes a shadow page to real, provided that it has at least
+one Linnaean descendent.  When the page is promoted, a real link is
+created to the top of each descendant Linnaean hierarchy.
+
+'link' creates a real link from a real page to the top of each
+descendant Linnaean hierarchy.  I.e. this is the same as 'create', but
+requires that the originating page already be real.
+
+'create' and 'link' are applied from the bottom to the top of the
+Linnaean hierarchy, so a chain of links can be created among promoted
+pages, potentially culminating at a top real page (e.g. where the
+properties were declared).
+
+'flag_one_child' prints an error message if a real page has exactly
+one real child.  I.e. it flags an extra layer of real hierarchy that
+may be unwanted.
+
+
+Properties to reference higher ancestors in the HTML:
+
+'member_link' causes every real Linnaean descendant to list itself as
+a 'member of' the real page to which the property applies.  I.e. if
+'member_link' is applied to the 'family' rank, every page links up to
+the family page that it is a member of.
+
+'member_name' causes every real Linnaean descendent to list itself as
+a 'member of' the shadow Linnaean taxon to which the property applies.
+I.e. it is like 'member_link', but names the ancestor page without a
+link since there is no associated real ancestor page.
+
+
+Properties to count observations and to ensure that observations are counted:
+
+By default, only local (bay area) non-casual observations can be
+counted, and only if the observation exactly matches a real page.
+However, additional observations can be counted by using the following
+properties.
+
+If an observation's taxon matches a shadow page, the script scans up
+the Linnaean hierarchy to find the first real ancestor page.  The
+properties of that page are checked to see if the observation is
+allowed at its promoted rank.
+
+'allow_obs_promotion' allows an observation to be counted at its
+promoted rank.
+
+'allow_casual_obs' allows a casual observation to be counted.
+Otherwise, only a 'research grade' or 'needs id' observation is
+counted.
+
+'allow_outside_obs' allows an observation outside the bay area to be
+counted.  This allows bay-area taxons (e.g. species with real pages)
+to be counted as observed even if found outside the area.
+
+'allow_outside_obs_promotion' allows an observation outside the bay
+area to be counted even if it has been promoted.  This requires
+'allow_obs_promotion' to also be applied at the promoted rank.
+
+The following properties print an error message for certain matching
+observations.  These are intended to identify taxons that need pages;
+i.e. because the taxon's matching page is not real, it gets promoted
+to a real taxon which then flags it as a bad promotion.  Since only
+local taxons need pages, these flags never apply to observations
+outside the bay area.  They apply to casual observations only if the
+observation would be allowed by 'allow_casual_obs'.  On the other
+hand, these flag properties apply regardless of the
+'allow_obs_promotion' property.
+
+'flag_obs_promotion' flags any observation that gets promoted to the
+taxon with the applied property.  This is a very strict error check
+that potentially requires a real page for every taxonomic rank at
+which an observation may be made.
+
+'flag_obs_promotion_above_peers' flags an observation that gets
+promoted, but only if observation's original taxon has no real pages
+below it in the Linnaean hierarchy.  E.g. an observation may be made
+at the tribe level because it matches an unknown one of the real genus
+pages below it, and this would be allowed.  However, if no genera (or
+species, etc.) within the tribe have real pages in the guide, then
+this is flagged as an error.
+
+'flag_obs_promotion_without_x' only makes sense when applied at the
+genus and/or species level.  It flags an observation if it is promoted
+to the genus level and the genus's completeness is not marked with 'x:
+<value>', where value is 'hist', 'rare', 'hist/rare', or 'more'.  It
+also flags an observation if it is promoted to the species level and
+the species's completeness is not marked with 'xx: <value>' for the
+same values or 'uncat'.  I.e. the promotion is allowed only if the
+promoted taxon has been explictly marked as incomplete, and not if the
+promoted taxon is marked as complete or is not marked either way.
+
+Note that 'flag_obs_promotion_without_x' can't catch an error if the
+genus/species page is not real.  E.g. if a genus has only one species
+and so the guide doesn't bother to include a page for the genus
+itself, an observation promoted to the genus level won't flag an error
+via this property.  However, 'flag_obs_promotion_above_peers' can
+catch this case.
+
+
+Properties to ensure that page info is complete:
+
+'obs_requires_photo' flags an observation if the page to which it is
+applied (possibly after promotion) does not have a photo.  The photo
+can be explicitly on that page or be incorporated by reference from a
+child page.  I.e. this property expects that if a taxon was observed,
+it should also have been photographed.

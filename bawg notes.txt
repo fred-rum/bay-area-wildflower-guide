@@ -920,3 +920,26 @@ Test each sci_ignore value to ensure no existing pages before reading
 observations.
 
 Process all scientific names from observations.csv equally, e.g. hybrids.
+
+Rather than forcing certain pages to be hierarchical, have a link
+between each normal key/listing page and its full hierarchy.
+
+
+Verify that a '<rank>: <page>' declaration points to a page of the
+appropriate rank or force that rank upon the page if it doesn't
+otherwise have one.
+
+Search for pages using a fully elaborated name where possible, and
+verify that the found page has a matching elaboration or extend the
+page information to include the elaboration.  Similar for scientific
+name + common name.
+
+
+Add a property 'create_from_obs' which creates a real page from any
+observed taxon.  This property short circuits observation promotion
+since the observed taxon will be turned into a real page, although
+'ignore names.yaml' is still respected.  Outside observations are not
+included, which means that shadow pages created by local vs. outside
+observations must be distinguished.  A separate 'link' property is
+needed to link a created low-level page to a higher-level page.  Extra
+properties may also be needed for checking page relationships.

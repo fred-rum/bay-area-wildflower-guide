@@ -483,8 +483,8 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
                 continue
 
             if ('flag_obs_promotion_without_x' in page.prop_set and
-                ((page.rank is Rank.genus and page.genus_complete is None) or
-                 (page.rank is Rank.species and page.species_complete is None))):
+                ((page.rank is Rank.genus and page.genus_complete not in ('hist', 'rare', 'hist/rare', 'more')) or
+                 (page.rank is Rank.species and page.species_complete not in ('hist', 'rare', 'hist/rare', 'more', 'uncat')))):
                 error(f'flag_obs_promotion_without_x: {orig_sci} observation promoted to {page.name}')
                 continue
 
