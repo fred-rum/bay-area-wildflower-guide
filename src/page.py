@@ -145,7 +145,6 @@ class Page:
 
         self.no_sci = False # true if it's a key page for unrelated species
 
-        self.top_level = None # 'flowering plants', 'ferns', etc.
         self.is_top = False
 
         # Alternative scientific names
@@ -280,18 +279,6 @@ class Page:
         self.sci = sci
         self.elab = elab
         sci_page[sci] = self
-
-    def set_top_level(self, top_level, tree_top):
-        if self.top_level is None:
-            self.top_level = top_level
-            for child in self.child:
-                child.set_top_level(top_level, tree_top)
-        elif self.top_level == top_level:
-            # The top level has already been set
-            # (which implies that its children have had it set, too).
-            return
-        else:
-            error(f'{self.name} is under both {self.top_level} and {top_level} ({tree_top})')
 
     def set_group(self, rank, group):
         if rank in self.group_resolved:
@@ -1947,12 +1934,6 @@ class Page:
             if self.level != 'above':
                 self.write_lists(w)
             write_footer(w)
-
-#        if self.top_level == 'flowering plants':
-#            if self.jpg_list and not self.color:
-#                error(f'No color for flower: {self.name}')
-#        elif self.color:
-#            error(f'Color specified for non-flower: {self.name}')
 
     def record_genus(self):
         # record all pages that are within each genus

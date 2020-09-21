@@ -313,7 +313,6 @@ if default_ancestor:
         if (not page.is_top and not page.linn_parent and
             (not page.rank or page.rank < default_ancestor.rank)):
             default_ancestor.link_linn_child(page)
-            page.set_top_level(default_ancestor.name, page.name)
 
 if arg('-tree4'):
     print_trees()
@@ -510,8 +509,6 @@ for page in page_array:
     page.apply_most_props()
     if not (page.sci or page.no_sci):
         error(page.name, prefix='No scientific name given for the following pages:')
-
-top_flower_list = [x for x in top_list if x.top_level == 'flowering plants']
 
 parse_glossaries(top_list)
 

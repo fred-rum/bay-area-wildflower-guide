@@ -892,6 +892,8 @@ name.  The natural way to do this would be to include the
 {multiplication sign} in the elab name and convert it to other forms
 when needed.  Example hybrid: bearded iris.
 
+Process all scientific names from observations.csv equally, e.g. hybrids.
+
 
 These can't (easily) be hierarchical properties because the full
 hierarchy isn't known until observations.csv has already been read:
@@ -913,13 +915,6 @@ Simplify '=={child_page.index}{suffix}' to just '=={suffix}' and get
 rid of the index property.  The child page can be determined by
 stepping through self.child.
 
-
-Simplify sci_ignore by discarding text after first character.
-
-Test each sci_ignore value to ensure no existing pages before reading
-observations.
-
-Process all scientific names from observations.csv equally, e.g. hybrids.
 
 Rather than forcing certain pages to be hierarchical, have a link
 between each normal key/listing page and its full hierarchy.
