@@ -6,8 +6,7 @@ color: white
 . hypanthium base truncate
 . petals with 3 lobes
 
-==bolander's woodland star:L. heterophyllum var. bolanderi
-sci_jfp: Lithophragma bolanderi
+==bolander's woodland star:L. bolanderi
 . hypanthium base obtusely tapered or hemispheric
 . petals entire or with > 3 lobes
 . very rare: east bay

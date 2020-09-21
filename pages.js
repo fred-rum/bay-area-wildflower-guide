@@ -914,7 +914,7 @@ var pages=[
 {page:"bog wintergreen",sci:["Pyrola asarifolia"],x:"u"},
 {page:"bolander's linanthus",sci:["Leptosiphon bolanderi","Linanthus bolanderi"],x:"u"},
 {page:"bolander's onion",sci:["Allium bolanderi"],x:"u"},
-{page:"bolander's woodland star",sci:["Lithophragma heterophyllum var. bolanderi","Lithophragma bolanderi"],x:"u"},
+{page:"bolander's woodland star",sci:["Lithophragma bolanderi"],x:"u"},
 {page:"bollean mistletoe",sci:["Phoradendron bolleanum"],x:"u"},
 {page:"boxelder maple",sci:["Acer negundo"],x:"u"},
 {page:"bracted popcornflower",sci:["Plagiobothrys bracteatus"],x:"u"},
