@@ -255,20 +255,6 @@ def read_obs_chains():
                 # the complete Linnaean taxonomy during taxon promotion.
                 page = Page(sci, shadow=True)
 
-                # If the scientific name has three words, then we'd like to
-                # insert 'ssp.' or 'var.', but we don't know which to use,
-                # so we just leave it alone.
-                #
-                # If the scientific name has two words, then it's a species
-                # name that requires no further elaboration.
-                #
-                # If the scientific name has one word, then we guess for now
-                # that it's a genus and add 'spp.'  We might discover later
-                # that it's a higher rank, in which case we'll adjust it's
-                # elaborated name accordingly.
-                if ' ' not in sci:
-                    page.set_sci(sci + ' spp.')
-
             try:
                 # Promote a subspecies to a species and a species to a genus,
                 # creating Linnaean links accordingly.

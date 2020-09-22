@@ -136,13 +136,13 @@ class Page:
         self.sci = None # a scientific name stripped of elaborations
         self.elab = None # an elaborated scientific name
         self.group = {} # taxonomic rank -> sci name or None if conflicting
-        self.level = None # taxonomic level: above, genus, species, or below
         self.rank = None # taxonomic rank (as above, but explicit above genus)
 
         self.prop_ranks = {} # property -> rank set
         self.prop_set = set() # set of properties applied exactly to this page
 
-        self.no_sci = False # true if it's a key page for unrelated species
+        self.no_sci = False # true if the page will never have a sci name
+        self.elab_src = None # 'sci' if elaboration is only guessed
 
         self.is_top = False
 
@@ -239,45 +239,73 @@ class Page:
 
     # set_sci() can be called with a stripped or elaborated name.
     # Either way, both a stripped and elaborated name are recorded.
-    def set_sci(self, sci):
-        sci_words = sci.split(' ')
-        if (len(sci_words) >= 2 and
-            sci_words[0][0].isupper() and
-            sci_words[1][0] == 'X'):
-            sci_words[1] = sci_words[1][1:]
-            sci = ' '.join(sci_words)
+    def set_sci(self, elab):
+        elab_words = elab.split(' ')
+        if (len(elab_words) >= 2 and
+            elab_words[0][0].isupper() and
+            elab_words[1][0] == 'X'):
+            elab_words[1] = elab_words[1][1:]
+            elab = ' '.join(elab_words)
             self.is_hybrid = True
         else:
             self.is_hybrid = False
 
-        elab = elaborate_sci(sci)
-        sci = strip_sci(sci)
-
+        sci = strip_sci(elab)
         if sci in sci_page and sci_page[sci] != self:
-            error(f'Same scientific name ({sci}) set for {sci_page[sci].name} and {self.name}')
+            fatal(f'Same scientific name ({sci}) set for {sci_page[sci].name} and {self.name}')
 
-        sci_words = sci.split(' ')
+        # If we already know the scientific name, then setting self.sci
+        # duplicates previous work, but is harmless.
+        self.sci = sci
+        sci_page[sci] = self
+
+        if sci == elab:
+            # Nothing changed when we stripped elaborations off the original
+            # elab value, so either it's a species or a name that could be
+            # improved with further elaboration.
+            if self.elab_src == 'elab':
+                # A previous call to set_sci() provided a fully elaborated
+                # name, so there's no point in trying to guess a new value.
+                # (And we must have already determined the rank, too.)
+                return
+
+            # Guess at a likely elaboration for the scientific name.
+            elab = elaborate_sci(sci)
+            self.elab = elab
+            self.elab_src = 'sci'
+        elif self.elab and self.elab_src == 'elab':
+            # A previous call to set_sci() provided a fully elaborated name.
+            if elab != self.elab:
+                fatal(f'{self.name} received two different elaborated names: {self.elab} and {elab}')
+
+            # No need to continue since we already know the elab value.
+            return
+        else:
+            # We've received a fully elaborated name.
+            # Either we had no elaborated name at all before,
+            # or it was only a guess that we're happy to replace.
+            self.elab = elab
+            self.elab_src = 'elab'
+
+        elab_words = elab.split(' ')
+
+        if len(elab_words) > 2 and elab_words[2] not in ('ssp.', 'var.'):
+            error(f'Unexpected elaboration for {elab}')
 
         if elab[0].islower():
-            elab_words = elab.split(' ')
             if elab_words[0] in Rank.__members__:
                 self.rank = Rank[elab_words[0]]
             else:
                 error(f'Unrecognized rank for {elab}')
                 self.rank = None
-            self.level = 'above'
         else:
+            sci_words = sci.split(' ')
             if len(sci_words) == 1:
                 self.rank = Rank.genus
             elif len(sci_words) == 2:
                 self.rank = Rank.species
             else:
                 self.rank = Rank.below
-            self.level = self.rank.name
-
-        self.sci = sci
-        self.elab = elab
-        sci_page[sci] = self
 
     def get_com(self):
         if self.com:
