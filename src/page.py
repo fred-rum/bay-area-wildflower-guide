@@ -224,6 +224,9 @@ class Page:
         self.set_name(self.sci)
 
     def set_name(self, name):
+        if is_sci(name):
+            name = strip_sci(name)
+
         if name in name_page:
             error(f'Multiple pages created with name "{name}"')
         self.name = name
