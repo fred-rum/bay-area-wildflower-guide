@@ -75,13 +75,15 @@ def find_page2(com, sci, com_from_inat=False):
             pass
 
     if not page:
-        if com in com_page and not isinstance(com_page[com], str):
+        if com in com_page:
+            if isinstance(com_page[com], str):
+                fatal(f'search failed on bare common name: {com}')
             page = com_page[com]
 
-        if page and sci and page.sci and page.sci != sci:
-            # If the common name matches a page with a different
-            # scientific name, it's treated as not a match.
-            page = None
+            if sci and page.sci and page.sci != sci:
+                # If the common name matches a page with a different
+                # scientific name, it's treated as not a match.
+                page = None
 
     if page:
         if sci:
