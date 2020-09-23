@@ -1,0 +1,9 @@
+!/*.css
+!/*.js
+!/*html
+!/favicon
+!/figures
+!/photos
+!/thumbs
+*
+
