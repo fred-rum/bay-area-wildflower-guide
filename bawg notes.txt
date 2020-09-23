@@ -940,8 +940,5 @@ Change h1 title to be a custom thingy that somehow allows the
 iNaturalist to be alongside in a smaller font.
 
 
-Common names from iNaturalist should have low priority, similar to
-disclaimed names.
-
-find_page1/2() should use src_from_inat to make isci_page lookups as
-appropriate.
+find_page1/2() should use src_from_inat to make isci_page lookups and
+set the sci name as appropriate

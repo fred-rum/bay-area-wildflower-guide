@@ -76,9 +76,16 @@ def find_page2(com, sci, com_from_inat=False):
 
     if not page:
         if com in com_page:
-            if isinstance(com_page[com], str):
-                fatal(f'search failed on bare common name: {com}')
-            page = com_page[com]
+            if isinstance(com_page[com], int):
+                # We can't determine the page from the common name alone
+                # due to conflicts.  However, that doesn't mean we need to
+                # flag an error.  When we return 'page = None', in most
+                # cases the caller will then create a new page, which could
+                # succeed (e.g. if a scientific name is supplied) or flag its
+                # own error if the name conflict really is terminal.
+                pass
+            else:
+                page = com_page[com]
 
             if sci and page.sci and page.sci != sci:
                 # If the common name matches a page with a different

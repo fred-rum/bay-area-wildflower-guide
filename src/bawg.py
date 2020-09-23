@@ -245,10 +245,6 @@ def read_obs_chains():
                 page = find_page2(com, sci, com_from_inat=True)
 
             if not page:
-                if com in com_page:
-                    error(f'observation {com} ({sci}) matches the common name for a page, but not its scientific name')
-                    com = None
-
                 # There's no real need to create a shadow page for the taxon,
                 # but it makes the second pass a lot easier if it can rely on
                 # the complete Linnaean taxonomy during taxon promotion.

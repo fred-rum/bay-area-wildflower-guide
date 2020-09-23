@@ -287,51 +287,62 @@ class Page:
 
         self.com = com
 
+        if self.name_from_txt:
+            if com == self.name:
+                # The common name is the same as the filename of the txt file
+                # for this page, so it has highest priority.
+                self.com_priority = 4
+            else:
+                # The page came from a txt file with a different filename,
+                # so its common name has lower priority.
+                self.com_priority = 2
+        elif com_from_inat:
+            # The common name is supplied by iNaturalist, so it has lowest
+            # priority.  It can provide a common name to a real page that
+            # doesn't have one, or it can create a new shadow page which a
+            # property later promotes to real.
+            self.com_priority = 1
+        else:
+            # The common name comes from the user with no special priority.
+            # E.g. it is declared as the name of a child page.
+            self.com_priority = 3
+
         if com in com_page and com_page[com] != self:
             # There is at least one other other page with the same
             # common name.
             conflict = com_page[com]
 
-            if conflict == 'multiple':
-                # We already had a conflict, so nothing needs to change in
-                # com_page or in the page name.
-                pass
-            elif conflict == 'disclaim':
-                if self.name_from_txt:
-                    # All conflicting pages (including this one) disclaim
-                    # priority on the common name.  Nothing changes.
-                    pass
-                else:
-                    # The conflicting pages disclaim priority on the common
-                    # name, allowing this page to claim it.
+            if isinstance(conflict, int):
+                if self.com_priority > conflict:
+                    # Previous conflicts on this common name were at a
+                    # lower priority, so we can take control of the name.
                     com_page[com] = self
-            elif conflict.name_from_txt:
-                if conflict.name == com:
-                    # Another page has priority for the name,
-                    # so it gets to keep common-name references.
-                    pass
-                elif self.name_from_txt:
-                    # Neither this page mor the conflicting page use
-                    # the common name as the page name.
-                    com_page[com] = 'disclaim'
                 else:
-                    # The conflicting page disclaims priority on the
-                    # common name, allowing this page to claim it.
-                    com_page[com] = self
-            elif self.name_from_txt:
-                # This page disclaims priority on the name.
+                    # Previous conflicts on this common were at the same
+                    # priority or higher, so the conflicts remain at the
+                    # higher priority.
+                    pass
+            elif self.com_priority < conflict.com_priority:
+                # This page has lower priority than the existing claimant,
+                # so the conflict page retains control of the name.
                 pass
             else:
-                # The conflicting page claims neither high priority nor
-                # low priority on the common name, and the current page
-                # also does not disclaim priority.  Thus, it's a
-                # straight-up default-priority conflict.
-                com_page[com] = 'multiple'
+                if self.com_priority > conflict.com_priority:
+                    # This page has higher priority than the previous claimant,
+                    # so we can take control of the name.
+                    com_page[com] = self
+                else:
+                    # This page has the same priority as the previous claimant,
+                    # so the common name cannot be claimed by either page.
+                    # We record the priority of the conflicting pages in case
+                    # there are more claimants.
+                    com_page[com] = self.com_priority
 
-                # Updating the conflicting page's name to reflect the
-                # fact that it has a common-name conflict.
+                # Update the conflicting page's name to reflect the
+                # fact that it lost control of the name.
                 conflict.set_name()
         else:
+            # No other page has claimed this common name, so it's ours.
             com_page[com] = self
 
         self.set_name()
