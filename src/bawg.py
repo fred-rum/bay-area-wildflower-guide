@@ -91,7 +91,7 @@ txt_files = get_file_set(f'{db_pfx}txt', 'txt')
 
 def read_txt_files():
     for name in txt_files:
-        page = Page(name)
+        page = Page(name, name_from_txt=True)
         page.name_from_txt = True
         with open(f'{root_path}/{db_pfx}txt/{name}.txt', 'r', encoding='utf-8') as r:
             page.txt = r.read()
@@ -104,7 +104,6 @@ def parse_names():
         page.parse_names()
         page.parse_properties()
         page.parse_glossary()
-
 parse_names()
 
 # Perform a first pass on the txt pages to initialize common and
@@ -243,7 +242,7 @@ def read_obs_chains():
             if sci in isci_page:
                 page = isci_page[sci]
             else:
-                page = find_page2(com, sci)
+                page = find_page2(com, sci, com_from_inat=True)
 
             if not page:
                 if com in com_page:
@@ -253,7 +252,7 @@ def read_obs_chains():
                 # There's no real need to create a shadow page for the taxon,
                 # but it makes the second pass a lot easier if it can rely on
                 # the complete Linnaean taxonomy during taxon promotion.
-                page = Page(sci, shadow=True)
+                page = Page(com, sci, shadow=True)
 
             try:
                 # Promote a subspecies to a species and a species to a genus,
@@ -393,7 +392,7 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
         if sci in isci_page:
             page = isci_page[sci]
         else:
-            page = find_page2(com, sci)
+            page = find_page2(com, sci, com_from_inat=True)
 
         # A Linnaean page should have been created during the first path
         # through observations.csv, so it'd be weird if we can't find it.

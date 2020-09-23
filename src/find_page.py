@@ -60,38 +60,36 @@ def elaborate_sci(sci):
 #
 # If only one of com/elab is valid, then we search for the corresponding name
 # without any extra frills.
-def find_page2(com, sci):
+def find_page2(com, sci, com_from_inat=False):
+    page = None
+
     if sci:
         sci = strip_sci(sci)
         if sci in sci_page:
             # If the scientific name matches, we consider it a match
-            # regardless of the common name.  (Whoever called find_page2
-            # can double check the common name if desired.)
-            return sci_page[sci]
+            # regardless of the common name.
+            page = sci_page[sci]
         else:
             # Otherwise, search for a page that only has the common name
             # and doesn't (yet) have a scientific name.
             pass
 
-    if com:
-        page = None
-        if com in name_page:
-            # Sometimes I have multiple pages with the same common name.
-            # If one of them is the 'canonical' match for the common name,
-            # match that one.
-            page = name_page[com]
-        elif com in com_page and com_page[com] != 'multiple':
+    if not page:
+        if com in com_page and not isinstance(com_page[com], str):
             page = com_page[com]
 
-        if page:
-            if sci and page.sci and page.sci != sci:
-                # If the common name matches a page with a different
-                # scientific name, it's treated as not a match.
-                return None
-            else:
-                return page
+        if page and sci and page.sci and page.sci != sci:
+            # If the common name matches a page with a different
+            # scientific name, it's treated as not a match.
+            page = None
 
-    return None
+    if page:
+        if sci:
+            page.set_sci(sci)
+        if com:
+            page.set_com(com, com_from_inat=com_from_inat)
+
+    return page
 
 def find_page1(name):
     if is_sci(name):

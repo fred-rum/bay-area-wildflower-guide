@@ -113,7 +113,7 @@ def split_strip(txt, c):
 class Page:
     pass
 
-    def __init__(self, name, shadow=False):
+    def __init__(self, com, elab=None, name_from_txt=False, shadow=False):
         # shadow=False indicates a 'real' page that will be output to HTML.
         #
         # shadow=True indicates a 'shadow' page that is not (yet) planned
@@ -121,8 +121,23 @@ class Page:
         # that does not correspond to a real page.
         self.shadow = shadow
 
-        self.set_name(name)
-        self.name_from_txt = False # True if the name came from a txt filename
+        # name_from_txt=True if the name came from a txt filename.
+        self.name_from_txt = name_from_txt
+        if name_from_txt:
+            self.name = com
+            name_page[com] = self
+
+        if com and is_sci(com):
+            if elab:
+                fatal(f'Page() called with two scientific names: {com}:{elab}')
+            else:
+                elab = com
+                com = None
+
+        if not name_from_txt:
+            # Set a temporary page name in case we need to print
+            # an error message before the name is officially set.
+            self.name = f'{com}:{elab}'
 
         if shadow:
             self.index = None
@@ -132,17 +147,28 @@ class Page:
 
         full_page_array.append(self)
 
-        self.com = None # a common name
-        self.sci = None # a scientific name stripped of elaborations
-        self.elab = None # an elaborated scientific name
+        # initial/default values
+        self.com = None
+        self.sci = None
+        self.elab = None
+        self.elab_src = None
+        self.rank = None
+
+        # Call set_sci() first since it should never have a name conflict.
+        # Then call set_com(), which uses the common name as the page name
+        # when possible.
+        if elab:
+            self.set_sci(elab)
+
+        if com:
+            self.set_com(com)
+
+        self.no_sci = False # true if the page will never have a sci name
+
         self.group = {} # taxonomic rank -> sci name or None if conflicting
-        self.rank = None # taxonomic rank (as above, but explicit above genus)
 
         self.prop_ranks = {} # property -> rank set
         self.prop_set = set() # set of properties applied exactly to this page
-
-        self.no_sci = False # true if the page will never have a sci name
-        self.elab_src = None # 'sci' if elaboration is only guessed
 
         self.is_top = False
 
@@ -172,13 +198,6 @@ class Page:
         self.genus_key_incomplete = False # indicates if the key is complete
         self.species_complete = None # the same for the species
         self.species_key_incomplete = False
-
-        # Give the page a default common or scientific name as appropriate.
-        # Either or both names may be modified later.
-        if is_sci(name):
-            self.set_sci(name)
-        else:
-            self.set_com(name)
 
         self.txt = ''
         self.key_txt = ''
@@ -219,30 +238,110 @@ class Page:
 
         self.glossary = None
 
-    def change_name_to_sci(self):
-        del name_page[self.name]
-        self.set_name(self.sci)
+    def set_name(self):
+        if self.name_from_txt:
+            # the name never changes
+            return
 
-    def set_name(self, name):
-        if is_sci(name):
-            name = strip_sci(name)
+        if self.com and com_page[self.com] == self:
+            name = self.com
+        elif self.sci:
+            name = self.sci
+        else:
+            fatal(f'set_name() failed with com={self.com} and sci={self.sci}')
+
+        if self.name in name_page:
+            del name_page[self.name]
 
         if name in name_page:
-            error(f'Multiple pages created with name "{name}"')
+            fatal(f'Multiple pages created with name "{name}"')
+
         self.name = name
         name_page[name] = self
 
-    def set_com(self, com):
+    # In simple terms, set_com() sets the common name and then calls
+    # set_name() to give priority to the common name where possible.
+    #
+    # However, things get complicated when there are common name conflicts.
+    # Priorities are assigned as follows, from highest to lowest:
+    # - common name is the same as the filename of the txt file
+    # - default priority
+    # - the page came from a txt file, but the filename of the txt file is
+    #   different from the common name (so it disclaims priority on the name).
+    #
+    # Note that common names based on txt filenames are assigned first and
+    # are guaranteed to be without conflicts.  Any common names assigned after
+    # that will not have name_from_txt asserted.
+    def set_com(self, com, com_from_inat=False):
+        if self.com:
+            # This page already has a common name.
+            if self.com == com:
+                # The new common name is the same as the old one.
+                return
+            elif com_from_inat:
+                # iNaturalist is allowed to provide a different common name,
+                # but we don't use it as *the* common name.
+                return
+            else:
+                fatal(f'{self.name} gets two different com values, {self.com} and {com}')
+
         self.com = com
-        if com in com_page:
-            if com_page[com] != self:
+
+        if com in com_page and com_page[com] != self:
+            # There is at least one other other page with the same
+            # common name.
+            conflict = com_page[com]
+
+            if conflict == 'multiple':
+                # We already had a conflict, so nothing needs to change in
+                # com_page or in the page name.
+                pass
+            elif conflict == 'disclaim':
+                if self.name_from_txt:
+                    # All conflicting pages (including this one) disclaim
+                    # priority on the common name.  Nothing changes.
+                    pass
+                else:
+                    # The conflicting pages disclaim priority on the common
+                    # name, allowing this page to claim it.
+                    com_page[com] = self
+            elif conflict.name_from_txt:
+                if conflict.name == com:
+                    # Another page has priority for the name,
+                    # so it gets to keep common-name references.
+                    pass
+                elif self.name_from_txt:
+                    # Neither this page mor the conflicting page use
+                    # the common name as the page name.
+                    com_page[com] = 'disclaim'
+                else:
+                    # The conflicting page disclaims priority on the
+                    # common name, allowing this page to claim it.
+                    com_page[com] = self
+            elif self.name_from_txt:
+                # This page disclaims priority on the name.
+                pass
+            else:
+                # The conflicting page claims neither high priority nor
+                # low priority on the common name, and the current page
+                # also does not disclaim priority.  Thus, it's a
+                # straight-up default-priority conflict.
                 com_page[com] = 'multiple'
+
+                # Updating the conflicting page's name to reflect the
+                # fact that it has a common-name conflict.
+                conflict.set_name()
         else:
             com_page[com] = self
 
+        self.set_name()
+
     # set_sci() can be called with a stripped or elaborated name.
-    # Either way, both a stripped and elaborated name are recorded.
+    # Either way, both a stripped and an elaborated name are recorded.
     def set_sci(self, elab):
+        if elab == self.elab:
+            return
+
         elab_words = elab.split(' ')
         if (len(elab_words) >= 2 and
             elab_words[0][0].isupper() and
@@ -256,11 +355,6 @@ class Page:
         sci = strip_sci(elab)
         if sci in sci_page and sci_page[sci] != self:
             fatal(f'Same scientific name ({sci}) set for {sci_page[sci].name} and {self.name}')
-
-        # If we already know the scientific name, then setting self.sci
-        # duplicates previous work, but is harmless.
-        self.sci = sci
-        sci_page[sci] = self
 
         if sci == elab:
             # Nothing changed when we stripped elaborations off the original
@@ -276,13 +370,15 @@ class Page:
             elab = elaborate_sci(sci)
             self.elab = elab
             self.elab_src = 'sci'
-        elif self.elab and self.elab_src == 'elab':
-            # A previous call to set_sci() provided a fully elaborated name.
-            if elab != self.elab:
+        elif self.elab_src == 'elab':
+            # This call and a previous call to set_sci() both provided
+            # a fully elaborated name.
+            if elab == self.elab:
+                # No need to continue since we already know the elab value
+                # (and rank).
+                return
+            else:
                 fatal(f'{self.name} received two different elaborated names: {self.elab} and {elab}')
-
-            # No need to continue since we already know the elab value.
-            return
         else:
             # We've received a fully elaborated name.
             # Either we had no elaborated name at all before,
@@ -310,11 +406,10 @@ class Page:
             else:
                 self.rank = Rank.below
 
-    def get_com(self):
-        if self.com:
-            return self.com
-        else:
-            return self.name
+        self.sci = sci
+        sci_page[sci] = self
+
+        self.set_name()
 
     def format_com(self):
         com = self.com
@@ -803,21 +898,21 @@ class Page:
                 # family names.yaml uses 'n/a' when there is no common name
                 com = 'n/a'
 
-            if com == 'n/a':
-                # We prefer to name the page using its common name.
-                parent = Page(sci, shadow=True)
-            else:
-                parent = Page(com, shadow=True)
-
             # Create the elaborated scientific name.
             if rank > Rank.genus:
-                parent.set_sci(f'{rank.name} {sci}')
+                elab = f'{rank.name} {sci}'
             elif rank == Rank.genus:
-                parent.set_sci(f'{sci} spp.')
+                elab = f'{sci} spp.'
             else:
                 # A species name is no different when elaborated.
                 # A parent would never be a subspecies or variant.
-                parent.set_sci(sci)
+                elab = sci
+
+            if com == 'n/a':
+                # We prefer to name the page using its common name.
+                parent = Page(None, elab, shadow=True)
+            else:
+                parent = Page(com, elab, shadow=True)
 
         # OK, we either found the parent page or created it.
         # We can finally create the Linnaean link.
@@ -1088,17 +1183,6 @@ class Page:
         # Replace a ==[name] link with ==[page] and record the
         # parent->child relationship.
         def repl_child(matchobj):
-            com = matchobj.group(1)
-            suffix = matchobj.group(2)
-            sci = matchobj.group(3)
-            if not suffix:
-                suffix = ''
-            if not sci:
-                if is_sci(com):
-                    sci = com
-                    com = ''
-                else:
-                    sci = ''
             # ==com[,suffix][:sci] -> creates a child relationship with the
             #   page named by [com] or [sci] and creates two links to it:
             #   an image link and a text link.
@@ -1111,57 +1195,30 @@ class Page:
             #   is supplied by the child link, that name is added to the child.
             #   The scientific name can be in elaborated or stripped format.
             #   The genus can also be abbreviated as '[cap.letter]. '
+            com = matchobj.group(1)
+            suffix = matchobj.group(2)
+            sci = matchobj.group(3)
+
+            if not suffix:
+                suffix = ''
+
+            if not sci:
+                if is_sci(com):
+                    sci = com
+                    com = None
+                else:
+                    sci = None
+
             if sci:
                 # If the child's genus is abbreviated, expand it using
                 # the genus of the current page.
                 sci = self.expand_genus(sci)
+
             child_page = find_page2(com, sci)
             if not child_page:
                 # If the child does not exist, create it.
-                # The name for the page depends on what names were provided
-                # and whether any collide with existing names.
-                if not com:
-                    strip = strip_sci(sci)
-                    child_page = Page(strip)
-                elif com in com_page:
-                    # The common name is shared by a flower with a
-                    # different scientific name.
-                    if not sci:
-                        error(f'page {self.name} has ambiguous child {com}')
-                        return '==' + com + suffix
+                child_page = Page(com, sci)
 
-                    if com in name_page:
-                        if name_page[com].name_from_txt:
-                            # The existing user of the name has priority since
-                            # its name came from the name of its txt file.
-                            pass
-                        else:
-                            # The user didn't explicitly say that the previous
-                            # user of the common name should name its page that
-                            # way.  Since we now know that there are two with
-                            # the same name, *neither* of them should use the
-                            # common name as the page name.  So change the other
-                            # page's page name to its scientific name.
-                            name_page[com].change_name_to_sci()
-                        strip = strip_sci(sci)
-                        child_page = Page(strip)
-                    else:
-                        # All other pages that use the same common name have
-                        # been explicitly given a different page name.  This
-                        # (presumably intentionally) leaves the page name
-                        # available for this child page.
-                        child_page = Page(com)
-                else:
-                    # Prefer the common name in most cases.
-                    child_page = Page(com)
-            if com:
-                if child_page.com:
-                    if com != child_page.com:
-                        error(f"page {self.name} refers to child {com}:{sci}, but the common name doesn't match")
-                else:
-                    child_page.set_com(com)
-            if sci:
-                child_page.set_sci(sci)
             try:
                 self.assign_child(child_page)
             except FatalError:
