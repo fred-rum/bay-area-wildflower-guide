@@ -163,45 +163,6 @@ for page in page_array:
 #                for page in page_list:
 #                    error(page.format_full(1), prefix=f'The following pages in {genus} spp. are not under a common ancestor:')
 
-# Check if two names are equivalent when applying a particular plural rule.
-def plural_rule_equiv(a, b, end_a, end_b):
-    if a.endswith(end_a) and b.endswith(end_b):
-        base_len_a = len(a) - len(end_a)
-        base_len_b = len(b) - len(end_b)
-        if base_len_a == base_len_b and a[:base_len_a] == b[:base_len_b]:
-            return True
-    return False
-
-# Check if two common names are equivalent.
-# If one is plural and the other is not, then they are considered equivalent.
-# Special characters (e.g. not letters) are ignored.
-def plural_equiv(a, b):
-    # Remove non-word characters such as - or '
-    a = re.sub(r'\W', '', a)
-    b = re.sub(r'\W', '', b)
-
-    # plural rules from https://www.grammarly.com/blog/plural-nouns/
-    for end_a, end_b in (('', ''),       # no plural difference
-                         ('', 's'),      # cats
-                         ('s', 'ses'),   # truss
-                         ('sh', 'shes'), # marsh
-                         ('ch', 'ches'), # lunch
-                         ('x', 'xes'),   # tax
-                         ('z', 'zes'),   # blitz
-                         ('s', 'sses'),  # fez
-                         ('z', 'zzes'),  # gas
-                         ('f', 'ves'),   # wolf
-                         ('fe', 'ves'),  # wife
-                         ('y', 'ies'),   # city
-                         ('o', 'oes'),   # potato
-                         ('us', 'i'),    # cactus
-                         ('is', 'es'),   # analysis
-                         ('on', 'a')):   # phenomenon
-        if (plural_rule_equiv(a, b, end_a, end_b) or
-            plural_rule_equiv(a, b, end_b, end_a)):
-            return True
-    return False
-
 
 # Read the taxonomic chains from the observations file (exported from
 # iNaturalist).  There is more data in there that we'll read later, but
@@ -239,10 +200,7 @@ def read_obs_chains():
             if com:
                 com = com.lower()
 
-            if sci in isci_page:
-                page = isci_page[sci]
-            else:
-                page = find_page2(com, sci, com_from_inat=True)
+            page = find_page2(com, sci, from_inat=True)
 
             if not page:
                 # There's no real need to create a shadow page for the taxon,
@@ -360,12 +318,6 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
         # not during RE parsing.
         sci = re.sub('\N{MULTIPLICATION SIGN} ', r'', sci)
 
-        com = get_field('common_name')
-
-        # The common name is forced to all lower case to match my convention.
-        if com:
-            com = com.lower()
-
         rg = get_field('quality_grade')
 
         park = get_field('private_place_guess')
@@ -385,10 +337,7 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
         date = get_field('observed_on')
         month = int(date.split('-')[1], 10) - 1 # January = month 0
 
-        if sci in isci_page:
-            page = isci_page[sci]
-        else:
-            page = find_page2(com, sci, com_from_inat=True)
+        page = find_page2(None, sci, from_inat=True)
 
         # A Linnaean page should have been created during the first path
         # through observations.csv, so it'd be weird if we can't find it.
@@ -398,14 +347,6 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
             taxon_id = get_field('taxon_id')
             if taxon_id:
                 page.taxon_id = taxon_id
-
-            if not page.sci:
-                page.set_sci(sci)
-
-            if com and page.com:
-                if com != page.icom and not plural_equiv(page.com, com):
-                    page.icom = com
-                    #error(f"iNaturalist's common name {com} differs from mine: {page.com} ({page.elab})")
 
         if loc != 'bay area':
             # If the location is outside the bay area, properties may

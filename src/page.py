@@ -98,15 +98,48 @@ def sort_pages(page_set, color=None, with_depth=False):
     page_list.sort(key=count_flowers_helper, reverse=True)
     return page_list
 
-# Combine the second property rank result list into the first.
-def combine_result(result, result2):
-    for rank in result2:
-        if not rank in result or not result[rank]['match']:
-            result[rank] = result2[rank]
-
 # Split a string and remove whitespace around each element.
 def split_strip(txt, c):
     return [x.strip() for x in txt.split(c)]
+
+# Check if two names are equivalent when applying a particular plural rule.
+def plural_rule_equiv(a, b, end_a, end_b):
+    if a.endswith(end_a) and b.endswith(end_b):
+        base_len_a = len(a) - len(end_a)
+        base_len_b = len(b) - len(end_b)
+        if base_len_a == base_len_b and a[:base_len_a] == b[:base_len_b]:
+            return True
+    return False
+
+# Check if two common names are equivalent.
+# If one is plural and the other is not, then they are considered equivalent.
+# Special characters (e.g. not letters) are ignored.
+def plural_equiv(a, b):
+    # Remove non-word characters such as - or '
+    a = re.sub(r'\W', '', a)
+    b = re.sub(r'\W', '', b)
+
+    # plural rules from https://www.grammarly.com/blog/plural-nouns/
+    for end_a, end_b in (('', ''),       # no plural difference
+                         ('', 's'),      # cats
+                         ('s', 'ses'),   # truss
+                         ('sh', 'shes'), # marsh
+                         ('ch', 'ches'), # lunch
+                         ('x', 'xes'),   # tax
+                         ('z', 'zes'),   # blitz
+                         ('s', 'sses'),  # fez
+                         ('z', 'zzes'),  # gas
+                         ('f', 'ves'),   # wolf
+                         ('fe', 'ves'),  # wife
+                         ('y', 'ies'),   # city
+                         ('o', 'oes'),   # potato
+                         ('us', 'i'),    # cactus
+                         ('is', 'es'),   # analysis
+                         ('on', 'a')):   # phenomenon
+        if (plural_rule_equiv(a, b, end_a, end_b) or
+            plural_rule_equiv(a, b, end_b, end_a)):
+            return True
+    return False
 
 ###############################################################################
 
@@ -272,15 +305,21 @@ class Page:
     # Note that common names based on txt filenames are assigned first and
     # are guaranteed to be without conflicts.  Any common names assigned after
     # that will not have name_from_txt asserted.
-    def set_com(self, com, com_from_inat=False):
+    def set_com(self, com, from_inat=False):
         if self.com:
             # This page already has a common name.
             if self.com == com:
                 # The new common name is the same as the old one.
                 return
-            elif com_from_inat:
+            elif from_inat:
                 # iNaturalist is allowed to provide a different common name,
-                # but we don't use it as *the* common name.
+                # but we don't use it as *the* common name.  We record it
+                # as an alternative (iNaturalist) common name if it is
+                # sufficiently different than the regular common name.
+                if not plural_equiv(self.com, com):
+                    self.icom = com
+
+                # Bail out without making any other changes to the common name.
                 return
             else:
                 fatal(f'{self.name} gets two different com values, {self.com} and {com}')
@@ -296,7 +335,7 @@ class Page:
                 # The page came from a txt file with a different filename,
                 # so its common name has lower priority.
                 self.com_priority = 2
-        elif com_from_inat:
+        elif from_inat:
             # The common name is supplied by iNaturalist, so it has lowest
             # priority.  It can provide a common name to a real page that
             # doesn't have one, or it can create a new shadow page which a
@@ -349,8 +388,15 @@ class Page:
 
     # set_sci() can be called with a stripped or elaborated name.
     # Either way, both a stripped and an elaborated name are recorded.
-    def set_sci(self, elab):
+    def set_sci(self, elab, from_inat=False):
         if elab == self.elab:
+            return
+
+        if self.sci and from_inat:
+            # This page already has a scientific name, and we don't want
+            # iNaturalist to override it.  E.g. iNaturalist could have found
+            # the page via isci_page[], which differs from its user-supplied
+            # scientific name.
             return
 
         elab_words = elab.split(' ')

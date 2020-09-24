@@ -60,12 +60,14 @@ def elaborate_sci(sci):
 #
 # If only one of com/elab is valid, then we search for the corresponding name
 # without any extra frills.
-def find_page2(com, sci, com_from_inat=False):
+def find_page2(com, sci, from_inat=False):
     page = None
 
     if sci:
         sci = strip_sci(sci)
-        if sci in sci_page:
+        if from_inat and sci in isci_page:
+            page = isci_page[sci]
+        elif sci in sci_page:
             # If the scientific name matches, we consider it a match
             # regardless of the common name.
             page = sci_page[sci]
@@ -87,16 +89,16 @@ def find_page2(com, sci, com_from_inat=False):
             else:
                 page = com_page[com]
 
-            if sci and page.sci and page.sci != sci:
-                # If the common name matches a page with a different
-                # scientific name, it's treated as not a match.
-                page = None
+                if sci and page.sci:
+                    # If the common name matches a page with a different
+                    # scientific name, it's treated as not a match.
+                    page = None
 
     if page:
         if sci:
-            page.set_sci(sci)
+            page.set_sci(sci, from_inat=from_inat)
         if com:
-            page.set_com(com, com_from_inat=com_from_inat)
+            page.set_com(com, from_inat=from_inat)
 
     return page
 
