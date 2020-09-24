@@ -218,7 +218,7 @@ def read_obs_chains():
                         rank = Rank.species
                     else:
                         rank = Rank.genus
-                    page = page.add_linn_parent(rank, sci, src='inat')
+                    page = page.add_linn_parent(rank, sci, from_inat=True)
 
                 # Read the taxonomic chain from observations.csv and create
                 # Linnaean links accordingly.
@@ -231,7 +231,7 @@ def read_obs_chains():
                         # still pointing at the original taxon page.
                         page.set_sci(f'{rank.name} {sci}')
                     elif group: # ignore an empty group string
-                        page = page.add_linn_parent(rank, group, src='inat')
+                        page = page.add_linn_parent(rank, group, from_inat=True)
             except FatalError:
                 warning(f'was creating taxonomic chain from {page.name}')
                 raise

@@ -904,18 +904,9 @@ rid of the index property.  The child page can be determined by
 stepping through self.child.
 
 
-Rather than forcing certain pages to be hierarchical, have a link
-between each normal key/listing page and its full hierarchy.
-
-
-Verify that a '<rank>: <page>' declaration points to a page of the
-appropriate rank or force that rank upon the page if it doesn't
-otherwise have one.
-
-Search for pages using a fully elaborated name where possible, and
-verify that the found page has a matching elaboration or extend the
-page information to include the elaboration.  Similar for scientific
-name + common name.
+Rather than forcing certain pages to list their full hierarchy in the
+HTML, have a link between each normal key/listing page and its full
+hierarchy.
 
 
 Add a property 'create_from_obs' which creates a real page from any

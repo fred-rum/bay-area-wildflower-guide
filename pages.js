@@ -23,7 +23,7 @@ var pages=[
 {page:"mint family",sci:["family Lamiaceae"],x:"f"},
 {page:"carrot family",sci:["family Apiaceae"],x:"f"},
 {page:"primrose family",sci:["family Primulaceae"],x:"f"},
-{page:"monkeyflowers",sci:["family Phrymaceae"],x:"k"},
+{page:"monkeyflowers",com:["monkeyflowers","lopseed family"],sci:["family Phrymaceae"],x:"k"},
 {page:"buttercup family",sci:["family Ranunculaceae"],x:"f"},
 {page:"vetches",sci:["Vicia spp."],x:"k"},
 {page:"iris family",sci:["family Iridaceae"],x:"f"},

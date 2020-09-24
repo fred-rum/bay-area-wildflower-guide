@@ -926,49 +926,34 @@ class Page:
     # is centered on the parent page, but add_linn_parent() is
     # centered on the child page because it is the page that is
     # guaranteed to be present.
-    def add_linn_parent(self, rank, name, src=None):
-        parent = find_page1(name)
-        if not parent and name in isci_page:
-            parent = isci_page[name]
-
-        if parent:
-            if parent.rank is not rank:
-                error(f'{self.name}.add_linn_parent({rank.name}, {name}) is called, but that page is rank {parent.rank.name}')
-                return self
+    def add_linn_parent(self, rank, name, from_inat=False):
+        if is_sci(name):
+            sci = name
+            if name in group_sci_to_com:
+                com = group_sci_to_com[name]
+                if com == 'n/a':
+                    com = None
+            else:
+                com = None
         else:
-            # The parent page doesn't already exist, so create it.
-
-            if is_sci(name):
-                sci = name
-            elif name in group_com_to_sci:
-                # Get the scientific name from family names.yaml
+            com = name
+            if name in group_com_to_sci:
                 sci = group_com_to_sci[name]
             else:
-                error(f'{self.name}.add_linn_parent({rank.name}, {name}) is called, but a scientific name cannot be found for the parent')
-                return self
+                sci = None
 
-            if sci in group_sci_to_com:
-                # Get the common name from family names.yaml
-                com = group_sci_to_com[sci]
-            else:
-                # family names.yaml uses 'n/a' when there is no common name
-                com = 'n/a'
+        if rank > Rank.genus:
+            elab = f'{rank.name} {sci}'
+        elif rank == Rank.genus:
+            elab = f'{sci} spp.'
+        else:
+            # A species name is no different when elaborated.
+            # A parent would never be a subspecies or variant.
+            elab = sci
 
-            # Create the elaborated scientific name.
-            if rank > Rank.genus:
-                elab = f'{rank.name} {sci}'
-            elif rank == Rank.genus:
-                elab = f'{sci} spp.'
-            else:
-                # A species name is no different when elaborated.
-                # A parent would never be a subspecies or variant.
-                elab = sci
-
-            if com == 'n/a':
-                # We prefer to name the page using its common name.
-                parent = Page(None, elab, shadow=True)
-            else:
-                parent = Page(com, elab, shadow=True)
+        parent = find_page2(com, elab, from_inat)
+        if not parent:
+            parent = Page(com, elab, shadow=True)
 
         # OK, we either found the parent page or created it.
         # We can finally create the Linnaean link.

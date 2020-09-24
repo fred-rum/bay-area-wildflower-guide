@@ -108,8 +108,8 @@ def find_page2(com, sci, from_inat=False):
 
     return page
 
-def find_page1(name):
+def find_page1(name, from_inat=False):
     if is_sci(name):
-        return find_page2(None, name)
+        return find_page2(None, name, from_inat)
     else:
-        return find_page2(name, None)
+        return find_page2(name, None, from_inat)
