@@ -517,6 +517,10 @@ for color in color_list:
 # point to pages that don't exist.  Whatever.
 
 def add_elab(elabs, elab):
+    if elab and elab[0].isupper():
+        # convert the hybrid symbol to a colon so that it is easy to recognize
+        # and also easy skip over during matching.
+        elab = re.sub(' X', ' :', elab)
     if elab and elab != 'n/a' and elab not in elabs:
         elabs.append(unidecode(elab))
 

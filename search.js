@@ -356,6 +356,7 @@ function fn_search() {
     if ('sci' in page_info) {
       var sci_highlight = highlight_match(fit_info.sci_match_info,
                                           page_info['sci'][0], true);
+      sci_highlight = sci_highlight.replace(/:/, '&times; ');
     } else {
       var sci_highlight = null;
     }

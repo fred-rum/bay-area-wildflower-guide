@@ -74,7 +74,6 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1202+1176
 . Jasper, Marin, Mt. Tam; pond margins, estuaries
 
 ==bearded iris:I. Xgermanica
-sci_fpj:Iris germanica
 color:purple
 . <b>sepal obviously bearded</b>
 .. the beard is a dense line of hairs extending along the petal midline through the throat, but not much beyond

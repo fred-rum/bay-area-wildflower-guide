@@ -399,16 +399,6 @@ class Page:
             # scientific name.
             return
 
-        elab_words = elab.split(' ')
-        if (len(elab_words) >= 2 and
-            elab_words[0][0].isupper() and
-            elab_words[1][0] == 'X'):
-            elab_words[1] = elab_words[1][1:]
-            elab = ' '.join(elab_words)
-            self.is_hybrid = True
-        else:
-            self.is_hybrid = False
-
         sci = strip_sci(elab)
         if sci in sci_page and sci_page[sci] != self:
             fatal(f'Same scientific name ({sci}) set for {sci_page[sci].name} and {self.name}')
@@ -474,22 +464,27 @@ class Page:
             return None
         return easy_sub_safe(com)
 
-    def format_elab(self):
+    def format_elab(self, ital=True):
+        if ital:
+            i0, i1 = '<i>', '</i>'
+        else:
+            i0, i1 = '', ''
+
         elab = self.elab
         if not elab:
             return None
         elif self.rank and self.rank > Rank.genus:
             (gtype, name) = elab.split(' ')
-            return f'{gtype} <i>{name}</i>'
+            return f'{gtype} {i0}{name}{i1}'
         elif self.rank is Rank.genus:
             (genus, spp) = elab.split(' ')
-            return f'<i>{genus}</i> spp.'
+            return f'{i0}{genus}{i1} spp.'
         else:
-            if self.is_hybrid:
-                elab = re.sub(r' ', ' &times; ', elab)
-            elab = f'<i>{elab}</i>'
-            elab = re.sub(r' ssp\. ', '</i> ssp. <i>', elab)
-            elab = re.sub(r' var\. ', '</i> var. <i>', elab)
+            if elab[0].isupper():
+                elab = re.sub(' X', ' &times; ', elab)
+            elab = f'{i0}{elab}{i1}'
+            elab = re.sub(r' ssp\. ', f'{i1} ssp. {i0}', elab)
+            elab = re.sub(r' var\. ', f'{i1} var. {i0}', elab)
             return elab
 
     def format_full(self, lines=2):
@@ -1437,10 +1432,6 @@ class Page:
             elab = elab_alt
         else:
             elab = self.elab
-        elab_words = elab.split(' ')
-        if len(elab_words) == 2 and '|' not in elab:
-            # Always strip the "spp." suffix or [lowercase type] prefix.
-            elab = strip_sci(elab)
         return elab
 
     def write_external_links(self, w):
@@ -1461,21 +1452,17 @@ class Page:
             if elab_alt == 'n/a':
                 elab = 'not listed'
                 link = re.sub(r'<a ', '<a class="missing" ', link)
-            elab = re.sub(r'\|', ' / ', elab)
             if elab not in link_list:
                 elab_list.append(elab)
                 link_list[elab] = []
             link_list[elab].append(link)
 
+        elab = self.choose_elab(self.elab_inaturalist)
         if self.taxon_id:
-            elab = self.choose_elab(self.elab_inaturalist)
-            sci = strip_sci(elab)
             add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/{self.taxon_id}" target="_blank">iNaturalist</a>')
         else:
-            elab = self.choose_elab(self.elab_inaturalist)
-            sci = strip_sci(elab)
-            if self.is_hybrid:
-                sci = re.sub(r' ', ' \xD7 ', sci)
+            sci = strip_sci(elab, keep='x')
+            sci = re.sub(r' X', ' \xD7 ', sci)
             sciurl = url(sci)
             add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/search?q={sciurl}&view=list" target="_blank">iNaturalist</a>')
 
@@ -1483,24 +1470,30 @@ class Page:
             # CalFlora can be searched by family,
             # but not by other high-level classifications.
             elab = self.choose_elab(self.elab_calflora)
-            elaburl = url(elab)
-            add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={elaburl}" target="_blank">CalFlora</a>');
+            sci = strip_sci(elab, keep='b')
+            sciurl = url(sci)
+            add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={sciurl}" target="_blank">CalFlora</a>');
 
         if self.rank and self.rank <= Rank.species:
             # CalPhotos cannot be searched by high-level classifications.
             # It can be searched by genus, but I don't find that at all useful.
             elab = self.choose_elab(self.elab_calphotos)
-            if self.elab not in elab:
+            elab_terms = elab.split('|')
+            elab = ' / '.join(elab_terms)
+            sci_terms = []
+            for e in elab_terms:
+                sci_terms.append(strip_sci(e, keep='b'))
+            sci = strip_sci(self.elab, keep='b')
+            if sci not in sci_terms:
                 # CalPhotos can search for multiple names, and for cases such
                 # as Erythranthe, it may have photos under both names.
                 # Use both names when linking to CalPhotos, but for simplicity
                 # list only the txt-specified name in the HTML listing.
-                expanded_elab = self.elab + '|' + elab
-            else:
-                expanded_elab = elab
-            elaburl = url(expanded_elab)
+                sci_terms.insert(0, sci)
+            sci = '|'.join(sci_terms)
+            sciurl = url(sci)
             # rel-taxon=begins+with -> allows matches with lower-level detail
-            add_link(elab, self.elab_calphotos, f'<a href="https://calphotos.berkeley.edu/cgi/img_query?rel-taxon=begins+with&where-taxon={elaburl}" target="_blank">CalPhotos</a>');
+            add_link(elab, self.elab_calphotos, f'<a href="https://calphotos.berkeley.edu/cgi/img_query?rel-taxon=begins+with&where-taxon={sciurl}" target="_blank">CalPhotos</a>');
 
         if self.rank and (self.rank <= Rank.genus or self.rank is Rank.family):
             # Jepson can be searched by family,
@@ -1798,7 +1791,7 @@ class Page:
             else:
                 # If the page has no common name (only a scientific name),
                 # then the h1 header should be italicized and elaborated.
-                title = elab
+                title = self.format_elab(ital=False)
                 h1 = self.format_elab()
 
             # The h1 header may include one or more regular-sized lines

@@ -1,3 +1,5 @@
+import re
+
 # My files
 from error import *
 
@@ -14,24 +16,28 @@ def is_sci(name):
     # E.g. "Taraxacum officinale" or "family Asteraceae".
     return not name.islower()
 
-def strip_sci(sci):
+# Strip elaborations off the scientific name.
+# If keep specified, keep certain elaborations:
+# x - X hybrid indication
+# b - var. or ssp.
+# g - spp.
+# r - rank
+def strip_sci(sci, keep=''):
+    if 'x' not in keep and sci[0].isupper():
+        sci = re.sub(' X', ' ', sci)
     sci_words = sci.split(' ')
-    if (len(sci_words) >= 2 and
-        sci_words[0][0].isupper() and
-        sci_words[1][0] == 'X'):
-        sci_words[1] = sci_words[1][1:]
-        sci = ' '.join(sci_words)
     if len(sci_words) == 4:
         # Four words in the scientific name implies a subset of a species
         # with an elaborated subtype specifier.  The specifier is stripped
         # from the 'sci' name.
-        return ' '.join((sci_words[0], sci_words[1], sci_words[3]))
+        if 'b' not in keep:
+            return ' '.join((sci_words[0], sci_words[1], sci_words[3]))
     elif len(sci_words) == 2:
-        if sci_words[1] == 'spp.':
+        if sci_words[1] == 'spp.' and 'g' not in keep:
             # It is a genus name in elaborated format.  The 'spp.' suffix is
             # stripped from the 'sci' name.
             return sci_words[0]
-        elif sci[0].islower():
+        elif sci[0].islower() and 'r' not in keep:
             # The name is in {type} {name} format (e.g. "family Phrymaceae").
             # Strip the type from the 'sci' name.
             return sci_words[1]

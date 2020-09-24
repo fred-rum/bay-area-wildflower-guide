@@ -886,15 +886,6 @@ Create promote_obs_sci(), which promotes below to species, or species to genus,
 Should I have different behavior for needs_id vs. casual?
 
 
-Improve handling of hybrids, e.g. to support the hybrid symbol in the
-iNaturalist scientific name independently of the regular scientific
-name.  The natural way to do this would be to include the
-{multiplication sign} in the elab name and convert it to other forms
-when needed.  Example hybrid: bearded iris.
-
-Process all scientific names from observations.csv equally, e.g. hybrids.
-
-
 These can't (easily) be hierarchical properties because the full
 hierarchy isn't known until observations.csv has already been read:
 obs_fill_com - fill unknown common names from observations.csv
