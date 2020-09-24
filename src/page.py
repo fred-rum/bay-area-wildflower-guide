@@ -15,8 +15,8 @@ from parse import *
 
 ###############################################################################
 
-page_array = [] # array of real pages; only appended to; never otherwise altered
 full_page_array = [] # array of both real and shadow pages
+page_array = [] # array of real pages; only appended to; never otherwise altered
 genus_page_list = {} # genus name -> list of pages in that genus
 genus_family = {} # genus name -> family name
 
@@ -197,13 +197,9 @@ class Page:
             # an error message before the name is officially set.
             self.name = f'{com}:{elab}'
 
-        if shadow:
-            self.index = None
-        else:
-            self.index = len(page_array)
-            page_array.append(self)
-
         full_page_array.append(self)
+        if not shadow:
+            page_array.append(self)
 
         # initial/default values
         self.com = None
@@ -1159,7 +1155,6 @@ class Page:
     # Promote a shadow page to be real.
     def promote_to_real(self):
         self.shadow = False
-        self.index = len(page_array)
         page_array.append(self)
 
     def apply_prop_link(self):
@@ -1267,14 +1262,20 @@ class Page:
                 warning(f'was adding {child_page.name} as a child of {self.name}')
                 raise
 
-            # Replace the =={...} field with a simplified =={index,suffix} line.
+            # Replace the =={...} field with a simplified =={suffix} line.
             # This will create the appropriate link later in the parsing.
-            return f'=={child_page.index}{suffix}'
+            return f'=={suffix}'
 
         c_list = []
         data_object = self
         for c in self.txt.split('\n'):
-            matchobj = re.match(r'==\s*([^:]*?)\s*?(,[-0-9]\S*|,)?\s*?(?::\s*(.+?))?\s*$', c)
+            # Look for a child declaration:
+            #   ==
+            #   common name: ([^:]*?)
+            #   optional jpg suffix: (,[-0-9]\S*|)?
+            #   optional colon then scientific name: (?::\s*(.+?))?
+            # All can be separated by whitespace: \s*
+            matchobj = re.match(r'==\s*([^:]*?)\s*(,[-0-9]\S*|)?\s*(?::\s*(.+?))?\s*$', c)
             if matchobj:
                 c_list.append(repl_child(matchobj))
                 data_object = self.child[-1]
@@ -1613,7 +1614,7 @@ class Page:
             child.set_glossary(glossary)
 
     def parse_child_and_key(self, child_idx, suffix, text):
-        child = page_array[child_idx]
+        child = self.child[child_idx]
 
         # Give the child a copy of the text from the parent's key.
         # The child can use this (pre-parsed) text if it has no text

@@ -899,10 +899,6 @@ Make the link color for unobserved flowers gray?
 ('family' parents remain black.)
 Or change 'family' parents to a root-colored blackish-brown.
 
-Simplify '=={child_page.index}{suffix}' to just '=={suffix}' and get
-rid of the index property.  The child page can be determined by
-stepping through self.child.
-
 
 Rather than forcing certain pages to list their full hierarchy in the
 HTML, have a link between each normal key/listing page and its full

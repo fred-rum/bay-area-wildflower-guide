@@ -52,6 +52,7 @@ def parse_txt(name, s, page, glossary):
             child_start = None
 
             c_list.append(page.parse_child_and_key(child_idx, suffix, text))
+            child_idx += 1
 
         # If beginning a new set of glossary definition, insert <dl>
         # after the previous paragraph (including all closing tags) and
@@ -86,6 +87,7 @@ def parse_txt(name, s, page, glossary):
     c_list = []
     p_start = None
     child_start = None
+    child_idx = 0
     list_depth = 0
     bracket_depth = 0
     in_heading = False
@@ -134,11 +136,10 @@ def parse_txt(name, s, page, glossary):
 
         if page:
             # For taxon pages only, accumulate key text for a child page.
-            matchobj = re.match(r'==(\d+)(,[-0-9]\S*|,)?\s*$', c)
+            matchobj = re.match(r'==(,[-0-9]\S*|,)?\s*$', c)
             if matchobj:
                 end_paragraph()
-                child_idx = int(matchobj.group(1))
-                suffix = matchobj.group(2)
+                suffix = matchobj.group(1)
                 if not suffix:
                     suffix = ''
                 child_start = len(c_list)
