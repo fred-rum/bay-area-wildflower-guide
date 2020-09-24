@@ -890,14 +890,10 @@ These can't (easily) be hierarchical properties because the full
 hierarchy isn't known until observations.csv has already been read:
 obs_fill_com - fill unknown common names from observations.csv
 obs_fill_sci - fill unknown scientific names from observations.csv
-obs_diff_com - record a differing common name from observations.csv
+obs_alt_com - record an alternative common name from observations.csv
 flag_obs_fill_com
 flag_obs_fill_sci
 flag_obs_diff_com
-
-Make the link color for unobserved flowers gray?
-('family' parents remain black.)
-Or change 'family' parents to a root-colored blackish-brown.
 
 
 Rather than forcing certain pages to list their full hierarchy in the
