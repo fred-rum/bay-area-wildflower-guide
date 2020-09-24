@@ -1,6 +1,7 @@
 import re
 import yaml
 import io
+from operator import attrgetter
 
 # My files
 from error import *

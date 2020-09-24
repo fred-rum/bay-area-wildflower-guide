@@ -1,4 +1,5 @@
 import re
+from operator import attrgetter
 
 # My files
 from args import *
@@ -109,15 +110,12 @@ class Glossary:
         return f'<a class="{link_class}" href="{pageurl}#{anchorurl}">{term}</a>'
 
     def find_dups(self, skip_glossary, term):
-        def by_name(glossary):
-            return glossary.name
-
         dup_list = []
         if self != skip_glossary and term in self.term_anchor:
             dup_list.append(self.glossary_link(self.term_anchor[term],
                                                self.name))
 
-        for child in sorted(self.child, key=by_name):
+        for child in sorted(self.child, key=attrgetter('name')):
             dup_list.extend(child.find_dups(skip_glossary, term))
 
         return dup_list
@@ -439,19 +437,7 @@ class Glossary:
         name_set.add('Jepson')
         term_set.update(self.link_set)
 
-    def set_index(self):
-        def by_name(glossary):
-            return glossary.name
-
-        self.index = len(glossary_list)
-        glossary_list.append(self)
-        for child in sorted(self.child, key=by_name):
-            child.set_index()
-
     def write_toc(self, w, current):
-        def by_name(glossary):
-            return glossary.name
-
         if self == current:
             w.write(f'<b>{self.title}</b><br>')
         else:
@@ -460,7 +446,7 @@ class Glossary:
 
         if self.child:
             w.write('<div class="toc-indent">\n')
-            for child in sorted(self.child, key=by_name):
+            for child in sorted(self.child, key=attrgetter('name')):
                 child.write_toc(w, current)
             w.write('</div>\n')
 
@@ -529,18 +515,18 @@ class Glossary:
               w.write(self.txt)
               write_footer(w)
 
+        for child in sorted(self.child, key=attrgetter('name')):
+            child.write_html()
+
     # Write search terms for my glossaries to pages.js
     def write_search_terms(self, w):
-        def by_name(glossary):
-            return glossary.name
-
         w.write(f'{{page:"{self.name}",com:["{self.title}"],x:"g",glossary:[\n')
         for term in self.search_terms:
             terms_str = '","'.join(term)
             w.write(f'{{terms:["{terms_str}"]}},\n')
         w.write(f']}},\n')
 
-        for child in sorted(self.child, key=by_name):
+        for child in sorted(self.child, key=attrgetter('name')):
             child.write_search_terms(w)
 
         if arg('-not_top_usage') and self == master_glossary:
@@ -563,13 +549,11 @@ class Glossary:
             w.write(f'{{terms:["{terms_str}"]{anchor_str}}},\n')
         w.write(']},\n')
 
-        def by_usage(anchor):
-            return self.used_dict[anchor]
-
         if arg('-jepson_usage'):
             # List the top 10 glossary terms that link to Jepson instead of
             # one of my glossaries, in order of number of references.
-            anchor_list = sorted(self.used_dict, key=by_usage, reverse=True)
+            anchor_list = sorted(self.used_dict, key=self.used_dict.get,
+                                 reverse=True)
             for anchor in anchor_list[:10]:
                 print(f'{anchor}: {self.used_dict[anchor]}')
 
@@ -578,7 +562,6 @@ class Glossary:
 ###############################################################################
 
 glossary_files = get_file_set(f'{db_pfx}glossary', 'txt')
-glossary_list = []
 name_set = set()
 term_set = set()
 anchor_set = set()
@@ -617,20 +600,11 @@ def parse_glossaries(top_list):
     for page in top_list:
         page.set_glossary(master_glossary)
 
-    # Created an ordered list of the glossaries.  The purpose of this is
-    # to allow a glossary to be referenced by its index number in page.js.
-    # Note that the Jepson glossary is included in this list with index 0.
-    # Other than the Jepson glossary, we index the glossaries in the same
-    # order as they are listed in the glossary ToC, so a search for
-    # "glossary" displays that same order.
-    master_glossary.set_index()
-
     # Now that we know the glossary hierarchy, we can apply glossary links
     # within each glossary and finally write out the HTML.
     create_regex()
     error_begin_section()
-    for glossary in glossary_list:
-        glossary.write_html()
+    master_glossary.write_html()
     error_end_section()
 
 def write_glossary_search_terms(w):
