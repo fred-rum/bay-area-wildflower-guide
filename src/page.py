@@ -141,6 +141,30 @@ def plural_equiv(a, b):
             return True
     return False
 
+def format_elab(elab, ital=True):
+        if ital:
+            i0, i1 = '<i>', '</i>'
+        else:
+            i0, i1 = '', ''
+
+        if not elab:
+            return None
+        elif elab == 'n/a':
+            return elab
+        elif elab[0].islower():
+            (gtype, name) = elab.split(' ')
+            return f'{gtype} {i0}{name}{i1}'
+        elif elab.endswith(' spp.'):
+            (genus, spp) = elab.split(' ')
+            return f'{i0}{genus}{i1} spp.'
+        else:
+            if elab[0].isupper():
+                elab = re.sub(' X', ' &times; ', elab)
+            elab = f'{i0}{elab}{i1}'
+            elab = re.sub(r' ssp\. ', f'{i1} ssp. {i0}', elab)
+            elab = re.sub(r' var\. ', f'{i1} var. {i0}', elab)
+            return elab
+
 ###############################################################################
 
 class Page:
@@ -465,27 +489,7 @@ class Page:
         return easy_sub_safe(com)
 
     def format_elab(self, ital=True):
-        if ital:
-            i0, i1 = '<i>', '</i>'
-        else:
-            i0, i1 = '', ''
-
-        elab = self.elab
-        if not elab:
-            return None
-        elif self.rank and self.rank > Rank.genus:
-            (gtype, name) = elab.split(' ')
-            return f'{gtype} {i0}{name}{i1}'
-        elif self.rank is Rank.genus:
-            (genus, spp) = elab.split(' ')
-            return f'{i0}{genus}{i1} spp.'
-        else:
-            if elab[0].isupper():
-                elab = re.sub(' X', ' &times; ', elab)
-            elab = f'{i0}{elab}{i1}'
-            elab = re.sub(r' ssp\. ', f'{i1} ssp. {i0}', elab)
-            elab = re.sub(r' var\. ', f'{i1} var. {i0}', elab)
-            return elab
+        return format_elab(self.elab, ital)
 
     def format_full(self, lines=2):
         com = self.format_com()
@@ -1459,11 +1463,13 @@ class Page:
 
         elab = self.choose_elab(self.elab_inaturalist)
         if self.taxon_id:
+            elab = format_elab(elab)
             add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/{self.taxon_id}" target="_blank">iNaturalist</a>')
         else:
             sci = strip_sci(elab, keep='x')
             sci = re.sub(r' X', ' \xD7 ', sci)
             sciurl = url(sci)
+            elab = format_elab(elab)
             add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/search?q={sciurl}&view=list" target="_blank">iNaturalist</a>')
 
         if self.rank and (self.rank <= Rank.genus or self.rank is Rank.family):
@@ -1472,6 +1478,7 @@ class Page:
             elab = self.choose_elab(self.elab_calflora)
             sci = strip_sci(elab, keep='b')
             sciurl = url(sci)
+            elab = format_elab(elab)
             add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={sciurl}" target="_blank">CalFlora</a>');
 
         if self.rank and self.rank <= Rank.species:
@@ -1479,12 +1486,14 @@ class Page:
             # It can be searched by genus, but I don't find that at all useful.
             elab = self.choose_elab(self.elab_calphotos)
             elab_terms = elab.split('|')
-            elab = ' / '.join(elab_terms)
             sci_terms = []
+            formatted_elab_terms = []
             for e in elab_terms:
                 sci_terms.append(strip_sci(e, keep='b'))
+                formatted_elab_terms.append(format_elab(e))
+
             sci = strip_sci(self.elab, keep='b')
-            if sci not in sci_terms:
+            if sci not in sci_terms and elab != 'n/a':
                 # CalPhotos can search for multiple names, and for cases such
                 # as Erythranthe, it may have photos under both names.
                 # Use both names when linking to CalPhotos, but for simplicity
@@ -1492,6 +1501,7 @@ class Page:
                 sci_terms.insert(0, sci)
             sci = '|'.join(sci_terms)
             sciurl = url(sci)
+            elab = ' / '.join(formatted_elab_terms)
             # rel-taxon=begins+with -> allows matches with lower-level detail
             add_link(elab, self.elab_calphotos, f'<a href="https://calphotos.berkeley.edu/cgi/img_query?rel-taxon=begins+with&where-taxon={sciurl}" target="_blank">CalPhotos</a>');
 
@@ -1503,6 +1513,7 @@ class Page:
             # search with that qualifier left out entirely.
             sci = strip_sci(elab)
             sciurl = url(sci)
+            elab = format_elab(elab)
             add_link(elab, self.elab_jepson, f'<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sciurl}" target="_blank">Jepson&nbsp;eFlora</a>');
 
         if self.rank and self.rank <= Rank.genus:
@@ -1517,13 +1528,14 @@ class Page:
             # y={},x={},z={} -> longitude, latitude, zoom
             # wkt={...} -> search polygon with last point matching the first
             genusurl = url(genus)
+            elab = format_elab(elab)
             add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/entry/wgh.html#srch=t&taxon={genusurl}&group=none&fmt=photo&y=37.5&x=-122&z=8&wkt=-123.1+38,-121.95+38,-121.05+36.95,-122.2+36.95,-123.1+38" target="_blank">Bay&nbsp;Area&nbsp;species</a>')
 
         link_list_txt = []
         for elab in elab_list:
             txt = ' &ndash;\n'.join(link_list[elab])
             if len(elab_list) > 1:
-                txt = f'{elab}: {txt}'
+                txt = f'{elab} &rarr; {txt}'
             link_list_txt.append(txt)
         txt = '</li>\n<li>'.join(link_list_txt)
 
