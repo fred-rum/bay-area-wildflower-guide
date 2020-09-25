@@ -1,7 +1,7 @@
 sci:class Pinopsida
 is_top
 
-==pines
+==hard pines
 
 ==cypresses
 

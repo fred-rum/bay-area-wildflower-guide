@@ -14,3 +14,7 @@ allow_outside_obs_promotion: species-below
 
 flag_obs_promotion_above_peers: self-below
 flag_obs_promotion_without_x: genus-species
+
+flag_obs_fill_sci: self-below
+flag_obs_fill_com: self-below
+obs_fill_alt_com: self-below

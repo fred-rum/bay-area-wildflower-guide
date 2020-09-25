@@ -171,13 +171,17 @@ def format_elab(elab, ital=True):
 class Page:
     pass
 
-    def __init__(self, com, elab=None, name_from_txt=False, shadow=False):
+    def __init__(self, com, elab=None, name_from_txt=False, shadow=False,
+                 from_inat=False):
         # shadow=False indicates a 'real' page that will be output to HTML.
         #
         # shadow=True indicates a 'shadow' page that is not (yet) planned
         # to be output to HTML; it maintains a node in the Linnaean tree
         # that does not correspond to a real page.
         self.shadow = shadow
+
+        # True if the page is created from observations.csv
+        self.created_from_inat = from_inat
 
         # name_from_txt=True if the name came from a txt filename.
         self.name_from_txt = name_from_txt
@@ -212,10 +216,10 @@ class Page:
         # Then call set_com(), which uses the common name as the page name
         # when possible.
         if elab:
-            self.set_sci(elab)
+            self.set_sci(elab, from_inat=from_inat)
 
         if com:
-            self.set_com(com)
+            self.set_com(com, from_inat=from_inat)
 
         self.no_sci = False # true if the page will never have a sci name
 
@@ -338,12 +342,46 @@ class Page:
                 # as an alternative (iNaturalist) common name if it is
                 # sufficiently different than the regular common name.
                 if not plural_equiv(self.com, com):
-                    self.icom = com
+                    if (from_inat and
+                        not self.created_from_inat and
+                        not self.shadow and
+                        'flag_obs_fill_alt_com' in self.prop_set):
+                        error(f'flag_obs_fill_alt_com: {self.name} has alternative name {com}')
+                    elif (not from_inat or
+                          self.created_from_inat or
+                          'obs_fill_alt_com' in self.prop_set):
+                        # We're allowed to set the alternative common name
+                        self.icom = com
+                    else:
+                        # If we got here, then
+                        #   - this page was created by the user, and
+                        #   - we have a diff. common name from iNaturalist, and
+                        #   - we don't have a property that allows us to use
+                        #     the alternative common name.
+                        pass
 
                 # Bail out without making any other changes to the common name.
                 return
             else:
                 fatal(f'{self.name} gets two different com values, {self.com} and {com}')
+
+        if (from_inat and
+            not self.created_from_inat and
+            not self.shadow and
+            'flag_obs_fill_com' in self.prop_set):
+            error(f'flag_obs_fill_com: {self.name} can be filled by {com}')
+            return
+        elif (not from_inat or
+              self.created_from_inat or
+              'obs_fill_com' in self.prop_set):
+            # We're allowed to set the common name
+            pass
+        else:
+            # If we got here, then
+            #   - this page was created by the user, and
+            #   - we have a new common name from iNaturalist, and
+            #   - we don't have a property that allows us to use the new name.
+            return
 
         self.com = com
 
@@ -436,8 +474,7 @@ class Page:
 
             # Guess at a likely elaboration for the scientific name.
             elab = elaborate_sci(sci)
-            self.elab = elab
-            self.elab_src = 'sci'
+            elab_src = 'sci'
         elif self.elab_src == 'elab':
             # This call and a previous call to set_sci() both provided
             # a fully elaborated name.
@@ -451,8 +488,7 @@ class Page:
             # We've received a fully elaborated name.
             # Either we had no elaborated name at all before,
             # or it was only a guess that we're happy to replace.
-            self.elab = elab
-            self.elab_src = 'elab'
+            elab_src = 'elab'
 
         elab_words = elab.split(' ')
 
@@ -474,10 +510,25 @@ class Page:
             else:
                 self.rank = Rank.below
 
-        self.sci = sci
-        sci_page[sci] = self
-
-        self.set_name()
+        if (from_inat and
+            not self.created_from_inat and
+            not self.shadow and
+            'flag_obs_fill_sci' in self.prop_set):
+            error(f'flag_obs_fill_sci: {self.name} can be filled by {elab}')
+        elif (not from_inat or
+              self.created_from_inat or
+              'obs_fill_sci' in self.prop_set):
+            self.elab = elab
+            self.elab_src = elab_src
+            self.sci = sci
+            sci_page[sci] = self
+            self.set_name()
+        else:
+            # If we got here, then
+            #   - this page was created by the user, and
+            #   - we have a new elaboration from iNaturalist, and
+            #   - we don't have a property that allows us to use the new name.
+            pass
 
     def format_com(self):
         com = self.com
@@ -691,7 +742,7 @@ class Page:
         self.txt = re.sub(r'^default_ancestor\s*?\n',
                           repl_default_ancestor, self.txt, flags=re.MULTILINE)
 
-        self.txt = re.sub(r'^(create|link|member_link|member_name|photo_requires_color|color_require_photo|obs_requires_photo|obs_requires_color|flag_one_child|allow_obs_promotion|flag_obs_promotion|flag_obs_promotion_above_peers|flag_obs_promotion_without_x|allow_casual_obs|allow_outside_obs|allow_outside_obs_promotion):\s*(.*?)\s*?\n',
+        self.txt = re.sub(r'^(create|link|member_link|member_name|photo_requires_color|color_require_photo|obs_requires_photo|obs_requires_color|flag_one_child|allow_obs_promotion|flag_obs_promotion|flag_obs_promotion_above_peers|flag_obs_promotion_without_x|allow_casual_obs|allow_outside_obs|allow_outside_obs_promotion|obs_fill_com|obs_fill_sci|obs_fill_alt_com|flag_obs_fill_com|flag_obs_fill_sci|flag_obs_fill_alt_com):\s*(.*?)\s*?\n',
                           repl_property, self.txt, flags=re.MULTILINE)
 
     def parse_glossary(self):

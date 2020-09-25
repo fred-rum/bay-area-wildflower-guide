@@ -218,6 +218,32 @@ via this property.  However, 'flag_obs_promotion_above_peers' can
 catch this case.
 
 
+Properties to add names from iNaturalist to pages, or verify that
+names match:
+
+These properties only apply to pages created by the user.  Pages
+created by iNaturalist observations (initially as shadow pages) are
+always allowed to use iNaturalist-provided names.
+
+'obs_fill_com' fills an unknown common name with a name from
+iNaturalist.
+
+'obs_fill_alt_com' fills an alternative common name (one that is
+different from the user-supplied common name) with a name from
+iNaturalist.
+
+'obs_fill_sci' fills a scientific name or improves the elaboration of
+a scientific name with a name from iNaturalist.
+
+The following flags apply only to real pages created by the user.
+They don't apply if a shadow page is created by a group declaration,
+and the page is never promoted to real.
+
+'flag_obs_fill_com'
+'flag_obs_fill_alt_com'
+'flag_obs_fill_sci'
+
+
 Properties to ensure that page info is complete:
 
 'obs_requires_photo' flags an observation if the page to which it is

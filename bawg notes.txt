@@ -870,30 +870,10 @@ flag_obs_promotion_without_x: self-below
 allow_outside_obs: species-below
 allow_outside_obs_promotion: species-below
 
-When applying observations, skip shadow pages.
-
 photo_requires_color
 color_requires_photo
 obs_requires_photo
 obs_requires_color
-
-
-Create find_inat_page(), which uses isci_page and sci_page.
-Create promote_obs_sci(), which promotes below to species, or species to genus,
-  or <rank> to <next rank> (using the taxon_<rank>_name field).
-  - returns (rank, sci)
-
-Should I have different behavior for needs_id vs. casual?
-
-
-These can't (easily) be hierarchical properties because the full
-hierarchy isn't known until observations.csv has already been read:
-obs_fill_com - fill unknown common names from observations.csv
-obs_fill_sci - fill unknown scientific names from observations.csv
-obs_alt_com - record an alternative common name from observations.csv
-flag_obs_fill_com
-flag_obs_fill_sci
-flag_obs_diff_com
 
 
 Rather than forcing certain pages to list their full hierarchy in the

@@ -353,10 +353,11 @@ div.box {
 /* Link colors.
 
    I use colors to give a hint about what kind of page is being linked to.
-     - black is for a page without useful information (e.g. no additional text
-       to read, no photos to enlarge, no keys to children)
-     - brown is for key pages (the color of a branch)
-     - green is for childless pages with photos (the color of a leaf)
+   Class names are historical and don't fully reflect the current usage.
+     family - dark gold - pages which have children, but no key info
+     parent - brown     - key pages (the color of a branch)
+     leaf   - green     - childless pages with photos (the color of a leaf)
+     unobs  - black     - childless pages without photos
 
    In general I set the 'visited' color to be the same as the link color to
    avoid the distraction of different colors scattered throughout the BAWG

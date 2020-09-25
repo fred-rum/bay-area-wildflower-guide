@@ -203,10 +203,7 @@ def read_obs_chains():
             page = find_page2(com, sci, from_inat=True)
 
             if not page:
-                # There's no real need to create a shadow page for the taxon,
-                # but it makes the second pass a lot easier if it can rely on
-                # the complete Linnaean taxonomy during taxon promotion.
-                page = Page(com, sci, shadow=True)
+                page = Page(com, sci, shadow=True, from_inat=True)
 
             try:
                 # Promote a subspecies to a species and a species to a genus,
@@ -318,6 +315,13 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
         # not during RE parsing.
         sci = re.sub('\N{MULTIPLICATION SIGN} ', r'', sci)
 
+        com = get_field('common_name')
+
+        # The common name is forced to all lower case to match my
+        # convention.
+        if com:
+            com = com.lower()
+
         rg = get_field('quality_grade')
 
         park = get_field('private_place_guess')
@@ -337,7 +341,7 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
         date = get_field('observed_on')
         month = int(date.split('-')[1], 10) - 1 # January = month 0
 
-        page = find_page2(None, sci, from_inat=True)
+        page = find_page2(com, sci, from_inat=True)
 
         # A Linnaean page should have been created during the first path
         # through observations.csv, so it'd be weird if we can't find it.
