@@ -841,38 +841,13 @@ is no matching bay area species, the observation might try again at
 the genus level, which would fail to match the property and thus be
 excluded.
 
-For this sort of thing, I might want to create a master page, 'life',
-even if it isn't included in index.html.  Otherwise I'd have to
+For many properties, I might want to create a master page, 'life',
+even if it isn't included in index.html.  Otherwise I'll have to
 include the property on every top-level page.
-
-Promote an observation if a page can't be found for it and
-- it is listed in sci_ignore with a +, or
-- allow_promote is applied to its promotion destination.
-(allow_promote only works if the promotion destination has no children)
-
-allow_obs_promotion: self-below
-
-allow_casual_obs
-
-flag_obs_promotion
-
-If the observation's original page has real Linnaean descendants, then
-we don't know what it is, but it could be something we've documented,
-so it's always OK.  But if doesn't have real Linnaean descendants, and
-the promoted page does, then it's definitely something we haven't
-documented.
-flag_obs_promotion_above_peers: self-below
-
-If the promoted page is genus or species and doesn't have the x/xx
-property, then perhaps I should add an x/xx property.
-flag_obs_promotion_without_x: self-below
-
-allow_outside_obs: species-below
-allow_outside_obs_promotion: species-below
 
 photo_requires_color
 color_requires_photo
-obs_requires_photo
+*obs_requires_photo
 obs_requires_color
 
 
@@ -892,3 +867,9 @@ properties may also be needed for checking page relationships.
 
 Change h1 title to be a custom thingy that somehow allows the
 iNaturalist to be alongside in a smaller font.
+
+Fix handling of
+==family Balsaminaceae
+==sunflower family
+
+Add newline after </p>, e.g. in california poppy txt.

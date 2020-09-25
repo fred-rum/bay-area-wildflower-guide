@@ -1,10 +1,11 @@
 sci:subphylum Angiospermae
+list_hierarchy
 is_top
 default_ancestor
 create: family
 member_link: family
 link: self-subtribe
-flag_link: genus-species
+#flag_link: genus-species
 obs_requires_photo: genus-below
 flag_one_child: species
 
@@ -18,3 +19,5 @@ flag_obs_promotion_without_x: genus-species
 flag_obs_fill_sci: self-below
 flag_obs_fill_com: self-below
 obs_fill_alt_com: self-below
+
+#==family Balsaminaceae

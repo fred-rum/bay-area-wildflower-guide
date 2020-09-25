@@ -98,6 +98,27 @@ into one declaration, e.g. "sci_jfp:<name>".
 If the name is "n/a", it indicates that the taxon is not listed under
 any name at a site.
 
+--
+Other information:
+
+There are a number of properties that can be applied to designated
+taxonomic ranks in the Linnaean hierarchy.  Details about these
+properties are in properties.txt.
+
+
+A page can declare that a full hierarchy of its descendants should be
+displayed in place of the usual listing of children as follows:
+
+list_hierarchy
+
+The hierarchy is listed after the normal txt contents (if any).  The
+child list is normally expected to be created via the 'link' property
+(described below).  If any children are declared manually in the txt,
+these listings (and any key info) are omitted from the HTML, although
+the child relationships are retained.  The hierarchy is always ordered
+by observation frequency, regardless of the order in which children
+are declared.
+
 
 A page can declare a Linnaean ancestor (a higher group in the Linnaean
 taxonomy) as follows:
@@ -108,11 +129,6 @@ The named page does not need to exist, and it will not be
 automatically created.  However, the Linnaean relationship can come in
 handy for the properties described below.  Multiple Linnaean ancestors
 can be declared at different ranks from the same page.
-
-
-There are a number of properties that can be applied to designated
-taxonomic ranks in the Linnaean hierarchy.  Details about these
-properties are in properties.txt.
 
 
 color:[names] specifies the colors of the taxon, separated by commas.

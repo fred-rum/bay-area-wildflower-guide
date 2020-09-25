@@ -447,7 +447,8 @@ for page in page_array:
         page.child = page.child[:-len(page.non_txt_children)]
         for child in sort_pages(page.non_txt_children):
             page.child.append(child)
-            page.txt += f'==\n'
+            if not page.list_hierarchy:
+                page.txt += f'==\n'
 
 # We don't need color_page_list yet, but we go through the creation process
 # now in order to populate page_color for all container pages.

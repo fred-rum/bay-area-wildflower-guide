@@ -261,6 +261,10 @@ class Page:
         self.key_txt = ''
         self.jpg_list = [] # an ordered list of jpg names
 
+        # list_hierarchy is True if we want to write the entire descendant
+        # hierarchy to the HTML rather than just the list of children.
+        self.list_hierarchy = False
+
         # parent and child construct one or more directed acyclic graphs (DAGs)
         # of the real pages to be output to HTML.
         self.parent = set() # an unordered set of real parent pages
@@ -1345,12 +1349,17 @@ class Page:
                                              matchobj.group(2))
                 continue
 
-            matchobj = re.match(r'color:(.*)$', c)
+            matchobj = re.match(r'color:(.*?)\s*$', c)
             if matchobj:
                 data_object.set_colors(matchobj.group(1))
                 continue
 
-            matchobj = re.match(r'(x|xx):\s*(!?)(none|ba|ca|any|hist|rare|hist/rare|more|uncat)$', c)
+            matchobj = re.match(r'list_hierarchy\s*$', c)
+            if matchobj:
+                data_object.list_hierarchy = True
+                continue
+
+            matchobj = re.match(r'(x|xx):\s*(!?)(none|ba|ca|any|hist|rare|hist/rare|more|uncat)\s*$', c)
             if matchobj:
                 data_object.set_complete(matchobj)
                 continue
@@ -1714,7 +1723,9 @@ class Page:
         else:
             img = None
 
-        if not img:
+        if self.list_hierarchy:
+            return ''
+        elif not img:
             return '<p>' + link + '</p>\n' + text
         elif text:
             # Duplicate and contain the text link so that the following text
@@ -1883,7 +1894,8 @@ class Page:
 
             w.write('<hr>\n')
 
-            if self.com == 'flowering plants':
+            if self.list_hierarchy:
+                w.write(self.txt)
                 self.write_hierarchy(w, None)
                 w.write('<hr>\n')
             else:
