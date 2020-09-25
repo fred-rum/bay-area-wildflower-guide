@@ -198,6 +198,12 @@ def parse_txt(name, s, page, glossary):
     if bracket_depth != 0:
         error(f'"[" and "]" bracket depth is {bracket_depth} on page {name}')
 
+    # Appending a newline after joining the list into a string would end
+    # up copying the entire string.  Not a huge problem, but I might as well
+    # avoid the extra copy by simply appending an empty string to the end of
+    # the list prior to the join.
+    c_list.append('')
+
     s = '\n'.join(c_list)
 
     s = link_figures_thumb(name, s)

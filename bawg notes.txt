@@ -871,5 +871,3 @@ iNaturalist to be alongside in a smaller font.
 Fix handling of
 ==family Balsaminaceae
 ==sunflower family
-
-Add newline after </p>, e.g. in california poppy txt.
