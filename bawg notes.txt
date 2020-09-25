@@ -871,3 +871,19 @@ iNaturalist to be alongside in a smaller font.
 Fix handling of
 ==family Balsaminaceae
 ==sunflower family
+
+Handle group_com_to_sci and group_sci_to_com in set_com and set_sci,
+respectively so that they can be applied in situations other than
+add_linn_parent (from which they can be removed).
+
+The second pass through observations.csv does not need to look up all
+ranked parents again.  Whether the page was initially created by a
+user directive or from iNaturalist observations, it would have
+included any names from group_*_to_*.
+
+
+flag_no_sci: self-below ... makes no sense because the property only
+applies to ranked pages with a scientific name, so it can never check
+pages without a scientific name.
+
+flag_no_com: self-below ... not worth implementing if I never use it.

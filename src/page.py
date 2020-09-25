@@ -47,13 +47,6 @@ group_child_set = {} # rank -> group -> set of top-level pages in group
 for rank in Rank:
     group_child_set[rank] = {}
 
-with open(root_path + '/data/family names.yaml', encoding='utf-8') as f:
-    group_sci_to_com = yaml.safe_load(f)
-
-group_com_to_sci = {}
-for sci, com in group_sci_to_com.items():
-    group_com_to_sci[com] = sci
-
 ###############################################################################
 
 def get_default_ancestor():
@@ -452,9 +445,6 @@ class Page:
     # set_sci() can be called with a stripped or elaborated name.
     # Either way, both a stripped and an elaborated name are recorded.
     def set_sci(self, elab, from_inat=False):
-        if elab == self.elab:
-            return
-
         if self.sci and from_inat:
             # This page already has a scientific name, and we don't want
             # iNaturalist to override it.  E.g. iNaturalist could have found
@@ -466,14 +456,30 @@ class Page:
         if sci in sci_page and sci_page[sci] != self:
             fatal(f'Same scientific name ({sci}) set for {sci_page[sci].name} and {self.name}')
 
+        if self.sci and sci != self.sci:
+            # Somehow we're trying to set a different scientific name
+            # than the one already on the page.  That should only happen
+            # if sci_page points both names to the same page, which is
+            # only true if there are alternative scientific names via asci.
+            # I don't attempt to do anything smart with that case.
+            return
+
+        if elab == self.elab:
+            # We don't want to continue through the change/check logic
+            # if the name isn't changing in any way.  Only upgrade
+            # elab_src as appropriate.
+            if sci != elab:
+                self.elab_src == 'elab'
+            return
+
         if sci == elab:
             # Nothing changed when we stripped elaborations off the original
             # elab value, so either it's a species or a name that could be
             # improved with further elaboration.
-            if self.elab_src == 'elab':
-                # A previous call to set_sci() provided a fully elaborated
-                # name, so there's no point in trying to guess a new value.
-                # (And we must have already determined the rank, too.)
+
+            if self.sci:
+                # The page already has a scientific name.  Don't try to
+                # replace a potentially elaborated name with a guess.
                 return
 
             # Guess at a likely elaboration for the scientific name.
@@ -481,13 +487,8 @@ class Page:
             elab_src = 'sci'
         elif self.elab_src == 'elab':
             # This call and a previous call to set_sci() both provided
-            # a fully elaborated name.
-            if elab == self.elab:
-                # No need to continue since we already know the elab value
-                # (and rank).
-                return
-            else:
-                fatal(f'{self.name} received two different elaborated names: {self.elab} and {elab}')
+            # a fully elaborated name, but they're not the same.
+            fatal(f'{self.name} received two different elaborated names: {self.elab} and {elab}')
         else:
             # We've received a fully elaborated name.
             # Either we had no elaborated name at all before,
@@ -980,32 +981,33 @@ class Page:
     # guaranteed to be present.
     def add_linn_parent(self, rank, name, from_inat=False):
         if is_sci(name):
-            sci = name
-            if name in group_sci_to_com:
-                com = group_sci_to_com[name]
-                if com == 'n/a':
-                    com = None
+            if rank > Rank.genus:
+                elab = f'{rank.name} {name}'
+            elif rank == Rank.genus:
+                elab = f'{name} spp.'
             else:
-                com = None
+                # A species name is no different when elaborated.
+                # A parent would never be a subspecies or variant.
+                elab = name
+
+            parent = find_page2(None, elab, from_inat)
+            if not parent:
+                parent = Page(None, elab, shadow=True)
         else:
-            com = name
-            if name in group_com_to_sci:
-                sci = group_com_to_sci[name]
+            parent = find_page2(name, None, from_inat)
+            if not parent:
+                error(f'add_linn_parent from {self.name} could not find {name}')
+                return
+            elif not parent.rank:
+                error(f'add_linn_parent from {self.name} is to unranked page {name}')
+                return
+            elif parent.rank != rank:
+                error(f'add_linn_parent from {self.name} is to {name} with rank {parent.rank.name}, but we expected rank {rank.name}')
+                return
             else:
-                sci = None
-
-        if rank > Rank.genus:
-            elab = f'{rank.name} {sci}'
-        elif rank == Rank.genus:
-            elab = f'{sci} spp.'
-        else:
-            # A species name is no different when elaborated.
-            # A parent would never be a subspecies or variant.
-            elab = sci
-
-        parent = find_page2(com, elab, from_inat)
-        if not parent:
-            parent = Page(com, elab, shadow=True)
+                # OK, good, the common name maps to an existing page
+                # with a rank.
+                pass
 
         # OK, we either found the parent page or created it.
         # We can finally create the Linnaean link.

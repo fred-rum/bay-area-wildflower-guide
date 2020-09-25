@@ -1,0 +1,16 @@
+The group_names.yaml file associates scientific names with common
+names.  This is a handy way to specify common names for pages created
+via the 'create' property, although it can be used for other purposes.
+
+The format for each line is "(elab name): (com name)".  "n/a" can be
+used in place of the common name to indicate that it has no common
+name.  Specifying "n/a" prevents warnings on pages that would
+otherwise be expected to have a common name.
+
+As a shortcut when listing many pages of the same rank, a line can be
+"{rank}:", followed by any number of indented lines
+"  {sci name}: {com name}".
+
+The "rank" is actually treated as a generic prefix, and the mechanism
+can be repeated with increased indenting to create a longer string,
+although I'm not sure what use that would be.

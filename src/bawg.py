@@ -124,10 +124,35 @@ def print_trees():
         if not page.parent and not page.linn_parent:
             page.print_tree(exclude_set=exclude_set)
 
+assign_jpgs()
+
 if arg('-tree1'):
     print_trees()
 
-assign_jpgs()
+with open(root_path + '/data/group_names.yaml', encoding='utf-8') as f:
+    group_names = yaml.safe_load(f)
+
+def create_group_pages(d, prefix=''):
+    for sci, com in d.items():
+        if isinstance(com, dict):
+            d = com
+            prefix = sci + ' '
+            create_group_pages(d, prefix)
+        else:
+            if sci == '':
+                elab = prefix[:-1] # remove the trailing space
+            else:
+                elab = prefix + sci
+            if com == 'n/a':
+                com = None
+            page = find_page2(com, elab)
+            if not page:
+                page = Page(com, elab, shadow=True)
+            #print(f'{page.com} <-> {page.elab}')
+create_group_pages(group_names)
+
+if arg('-tree1b'):
+    print_trees()
 
 for page in page_array[:]:
     page.assign_groups()
