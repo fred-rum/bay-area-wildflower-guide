@@ -24,8 +24,6 @@ def parse_txt(name, s, page, glossary):
         nonlocal c_list, p_start, child_start, child_idx, suffix, in_dl
 
         if p_start is not None:
-            p_tag = '<p>'
-
             # Join the paragraph back into a single string for convenience
             # of glossary linking.
             p = '\n'.join(c_list[p_start:])
@@ -39,7 +37,7 @@ def parse_txt(name, s, page, glossary):
             # linking a paragraph at a time.  This not only recognizes
             # glossary terms split across lines, but also allows
             # glossary *definitions* to be split across lines.
-            p = glossary.link_glossary_words_or_defn(name, p, p_tag, not page)
+            p = glossary.link_glossary_words_or_defn(name, p, not page)
 
             # Replace all the lines in c_list associated with the paragraph
             # with the new (single-string) paragraph.
@@ -103,7 +101,7 @@ def parse_txt(name, s, page, glossary):
         # (It will eventually be emitted with a paragraph tag or some
         # other appropriate enclosure.)
         if c.startswith('{') and not c.startswith('{-'):
-            end_paragraph(for_defn=True)
+            end_paragraph(for_defn=not page)
 
         # Determine the list depth.
         matchobj = re.match(r'\.*', c)
@@ -113,6 +111,9 @@ def parse_txt(name, s, page, glossary):
         # to the new_list_depth.
         if new_list_depth > list_depth+1:
             error('Jump in list depth on page ' + name)
+
+        if new_list_depth > 0 and list_depth == 0:
+            end_paragraph(True)
 
         while list_depth < new_list_depth:
             # Open <ul> tags as part of the current line processing.

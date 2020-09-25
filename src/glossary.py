@@ -451,7 +451,7 @@ class Glossary:
             w.write('</div>\n')
 
     # link_glossary() is called for each paragraph of txt.
-    def link_glossary_words_or_defn(self, name, c, p_tag, is_glossary):
+    def link_glossary_words_or_defn(self, name, c, is_glossary):
         # Check if the paragraph is a glossary definition.
         matchobj = re.match(r'{([^-].*?)}\s+(.*)$', c, flags=re.DOTALL)
         if matchobj:
@@ -488,15 +488,14 @@ class Glossary:
                 return f'<div class="defn" id="{anchorurl}"><dt>{defined_term}</dt><dd>{defn}{related_str}</dd></div>'
             else:
                 # Modify the <p> tag to give it an anchor that can be linked
-                # to (and highlighed when targeted).  (Strip off the trailing
-                # '>' from p_tag before inserting the extra properties.)
-                p_tag = f'{p_tag[:-1]} class="defn" id="{anchorurl}">'
+                # to (and highlighed when targeted).
+                p_tag = f'<p class="defn" id="{anchorurl}">'
                 return f'{p_tag}{defn}{related_str}</p>'
         else:
             # It's not a definition line, so just link glossary words
             # normally within the line.
             c = self.link_glossary_words(name, c, is_glossary=False)
-            return f'{p_tag}{c}</p>'
+            return f'<p>{c}</p>'
 
     def write_html(self):
         if not self.txt:
