@@ -443,7 +443,11 @@ e_search_input.addEventListener('keydown', fn_keydown);
 e_search_input.addEventListener('focusin', fn_focusin);
 var e_autocomplete_box = document.getElementById('autocomplete-box');
 document.addEventListener('click', fn_doc_click);
-window.onbeforeunload = fn_focusout;
+function fn_unload() {
+  fn_focusout();
+  save_scroll();
+}
+window.onbeforeunload = fn_unload;
 function fn_hashchange(event) {
   var title_list = document.title.split(' - ');
   var title = title_list[title_list.length - 1];
@@ -462,4 +466,19 @@ function fn_details(e) {
     e.textContent = '[show details]';
     document.getElementById('details').style.display = 'none';
   }
+}
+function save_scroll() {
+  var scrollPos = e_body.scrollTop;
+  var stateObj = { data: scrollPos };
+  history.replaceState(stateObj, '');
+}
+function fn_content_loaded() {
+  if (history.state) {
+    e_body.scrollTop = history.state.data;
+  }
+}
+if (document.readyState === 'loading') {  // Loading hasn't finished yet
+  document.addEventListener('DOMContentLoaded', fn_content_loaded);
+} else { // 'DOMContentLoaded' has already fired
+  fn_content_loaded();
 }

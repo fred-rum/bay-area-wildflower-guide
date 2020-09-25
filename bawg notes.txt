@@ -300,8 +300,8 @@ being added to its txt.
 
 Include color pages (e.g. yellow flowers) in search.
 
-List color on flower pages as "member of [color] flowers"?  (That gets
-awkward with multiple colors.)
+List color on flower pages as "member of [color], [color], [etc.] in
+[flowering plants]".  Each thing in brackets is a link.
 
 ryegrass's lists doesn't include 'other flowers' because it has
 exactly one child with color 'other'.  That is dumb, and it should be
@@ -851,6 +851,8 @@ color_requires_photo
 obs_requires_color
 
 
+bad ideas:
+
 Rather than forcing certain pages to list their full hierarchy in the
 HTML, have a link between each normal key/listing page and its full
 hierarchy.
@@ -865,25 +867,59 @@ observations must be distinguished.  A separate 'link' property is
 needed to link a created low-level page to a higher-level page.  Extra
 properties may also be needed for checking page relationships.
 
-Change h1 title to be a custom thingy that somehow allows the
-iNaturalist to be alongside in a smaller font.
-
-Fix handling of
-==family Balsaminaceae
-==sunflower family
-
-Handle group_com_to_sci and group_sci_to_com in set_com and set_sci,
-respectively so that they can be applied in situations other than
-add_linn_parent (from which they can be removed).
-
-The second pass through observations.csv does not need to look up all
-ranked parents again.  Whether the page was initially created by a
-user directive or from iNaturalist observations, it would have
-included any names from group_*_to_*.
-
 
 flag_no_sci: self-below ... makes no sense because the property only
 applies to ranked pages with a scientific name, so it can never check
 pages without a scientific name.
 
 flag_no_com: self-below ... not worth implementing if I never use it.
+
+--
+
+For some reason, clicking the back button to return to any page
+scrolls that page to the top.  Probably related to the scrolling
+region not being the whole page.
+
+https://stackoverflow.com/questions/29203312/how-can-i-retain-the-scroll-position-of-a-scrollable-area-when-pressing-back-but
+
+$(document).ready(function(){
+    if (history.state) {
+       $("#pxeMainDiv").scrollTop(history.state.data);
+    }
+    $("#pxeMainDiv").scroll(function() {
+       var scrollPos = $("#pxeMainDiv").scrollTop();
+       var stateObj = { data: scrollPos };
+       history.replaceState(stateObj, "");
+    });
+});
+
+
+function doSomething() {
+  console.info('DOM loaded');
+}
+
+if (document.readyState === 'loading') {  // Loading hasn't finished yet
+  document.addEventListener('DOMContentLoaded', doSomething);
+} else {  // `DOMContentLoaded` has already fired
+  doSomething();
+}
+
+
+Create the search bar (or a placeholder) without the use of
+Javascript.  Use <noscript> to make it indicate that Javascript is
+required.
+
+Allow Javascript to load and execute faster, especially without
+waiting for images to load.  This is important for heavy pages like
+flowering plants.
+
+https://stackoverflow.com/questions/23889743/how-do-i-fire-javascript-after-dom-and-css-are-loaded-but-not-images
+
+Both scripts should be 'defer'.  This lets the scripts be loaded in
+parallel.  Defered scripts execute in the order in which they appear.
+
+Check scroll behavior on Android Firefox.
+
+
+Javascript pre-processing should include // comments.
+(But not CSS.)

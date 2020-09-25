@@ -701,7 +701,11 @@ document.addEventListener('click', fn_doc_click);
    away, then hits the back button to return to the page, the search field
    is cleared (good), but the autocomplete box remains visible and populated
    (bad).  This code fixes that. */
-window.onbeforeunload = fn_focusout;
+function fn_unload() {
+  fn_focusout();
+  save_scroll();
+}
+window.onbeforeunload = fn_unload;
 
 /* When entering the page or when changing anchors within a page,
    set the window title to "anchor (page title)". */
@@ -728,6 +732,7 @@ window.onhashchange = fn_hashchange;
 /*****************************************************************************/
 /* non-search functions also used by the BAWG HTML */
 
+/* Show/hide observation details. */
 function fn_details(e) {
   if (e.textContent == '[show details]') {
     e.textContent = '[hide details]';
@@ -736,4 +741,28 @@ function fn_details(e) {
     e.textContent = '[show details]';
     document.getElementById('details').style.display = 'none';
   }
+}
+
+
+/* When the page is unloaded, we save the scroll position of the
+   scrollable body div. */
+function save_scroll() {
+  var scrollPos = e_body.scrollTop;
+  var stateObj = { data: scrollPos };
+  history.replaceState(stateObj, '');
+}
+
+/* Restore the scroll position when returning to the page.  The browser
+   does this automatically for the *window* scroll position, but not for
+   the position of the scrollable body div. */
+function fn_content_loaded() {
+  if (history.state) {
+    e_body.scrollTop = history.state.data;
+  }
+}
+
+if (document.readyState === 'loading') {  // Loading hasn't finished yet
+  document.addEventListener('DOMContentLoaded', fn_content_loaded);
+} else { // 'DOMContentLoaded' has already fired
+  fn_content_loaded();
 }
