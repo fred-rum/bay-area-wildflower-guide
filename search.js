@@ -456,8 +456,6 @@ function main() {
   e_search_input.addEventListener('focusin', fn_focusin);
   fn_hashchange();
   window.addEventListener("hashchange", fn_hashchange);
-  e_body.addEventListener('scroll', save_scroll);
-  window.addEventListener("hashchange", restore_scroll);
   if (Document.activeElement == e_search_input) {
     fn_search();
   }
@@ -487,31 +485,15 @@ function restore_scroll() {
     e_body.scrollTop = history.state.data;
     console.info(e_body.scrollTop);
   }
+  e_body.addEventListener('scroll', save_scroll);
 }
-var loaded = false;
-var scroll_timerID = 0;
+window.addEventListener("hashchange", restore_scroll);
 function oninteractive() {
   console.info('oninteractive()');
   setTimeout(restore_scroll, 0);
-  if (!loaded) {
-    scroll_timerID = setInterval(restore_scroll, 500);
-  }
 }
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', oninteractive);
 } else {
   oninteractive();
-}
-function onload() {
-  console.info('loaded()');
-  loaded = true;
-  if (scroll_timerID > 0) {
-    clearInterval(scroll_timerID);
-    setTimeout(restore_scroll, 0);
-  }
-}
-if (document.readyState === 'complete') {
-  onload();
-} else {
-  window.addEventListener('load', onload);
 }

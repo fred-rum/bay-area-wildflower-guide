@@ -730,9 +730,6 @@ function main() {
   /* ... or when changing anchors within a page. */
   window.addEventListener("hashchange", fn_hashchange);
 
-  e_body.addEventListener('scroll', save_scroll);
-  window.addEventListener("hashchange", restore_scroll);
-
   /* In case the user already started typing before the script loaded,
      perform the search right away on whatever is in the search field,
      but only if the focus is still in the search field.
@@ -785,7 +782,9 @@ function fn_details(e) {
 
    Maybe maybe I could figure out which element is at the top of the screen,
    then set "overflow-anchor: none;" on all other elements.  That seems
-   computationally expensive and hard to make work. */
+   computationally expensive and hard to make work.
+*/
+
 
 /* We want to save the scroll position of the scrollable body div so that we
    can restore it when the user navigates back to this page.
@@ -796,7 +795,13 @@ function fn_details(e) {
    to navigate through the history, and it is simply impossible to capture the
    scroll position in all cases before the state changes.
 
-   Instead, we save the scroll position whenever the scroll position changes. */
+   Instead, we save the scroll position whenever the scroll position changes.
+
+   Note: we don't start saving the scroll position until we've attempted to
+   restore the scroll position.  Otherwise a navigation event might cause the
+   browser to auto-scroll to the anchor, which could trigger save_scroll()
+   before restore_scroll().
+*/
 function save_scroll() {
   var scrollPos = e_body.scrollTop;
   var stateObj = { data: scrollPos };
@@ -805,88 +810,45 @@ function save_scroll() {
   console.info(scrollPos)
 }
 
+
 /* Restore the scroll position when returning to the page.  The browser would
    do this automatically for the *window* scroll position, but it doesn't do it
    for the scrollable body div.
 
    We arrange events to call restore_scroll when the DOM content is loaded
    (navigation from another page) or when the hash changes (navigation within a
-   page). */
+   page).
+*/
 function restore_scroll() {
   console.info('restore_scroll()');
   if (history.state) {
     e_body.scrollTop = history.state.data;
     console.info(e_body.scrollTop);
   }
-}
 
-/* We call restore_scroll() repeatedly from the moment that the readyState
-   is 'interactive' (DOMContentLoaded) until the readyState is 'complete'
-   (onload).  These could potentially occur out of order, in which case
-   we shortcut the process. */
-var loaded = false;
-var scroll_timerID = 0;
+  /* Now that we've restored the scroll position, we can start saving new
+     position data. */
+  e_body.addEventListener('scroll', save_scroll);
+}
+window.addEventListener("hashchange", restore_scroll);
+
 
 /* If the readyState is 'interactive', then the user can (supposedly)
    interact with the page, but it may still be loading HTML, images,
    or the stylesheet.  In fact, the page may not even be rendered yet.
    We use a 0-length timeout to call restore_scroll() as soon as possible
-   after pending rendering, if any.  We set an additional interval timer
-   to call restore_scroll() every 500ms until the page is done loading.
-   Depending on circumstances and the desired scroll distance, this may
-   repeatedly scroll the page down until the position we need has rendered
-   content, and the scroll position continues to be reiterated until the
-   content stops shifting around.
+   after pending rendering, if any.
 
-   If the readyState is 'complete', then the page is ready to render, but
-   may or may not have actually rendered yet.  Again, a 0-length timeout
-   allows the render to complete (if needed) before we call restore_scroll().
-   In this case, no additional interval timer is needed. */
+   Hopefully the HTML and CSS is well designed so that the page isn't
+   still adjusting its layout after the call to restore_scroll().
+*/
 function oninteractive() {
   console.info('oninteractive()');
-
-  /* The page is fully loaded already, but not necessarily rendered.
-     We use a 0-length timeout to defer restore_scroll() until the
-     render is complete. */
   setTimeout(restore_scroll, 0);
-
-  if (!loaded) {
-    /* Why 500ms?
-
-       We want it fast enough that the page appears to be constantly adjusting
-       the scroll position to account for any reflow (e.g. as imagse load).
-       At 1000ms (1 second), it looks more like the page is waiting and jumping
-       instead of constantly adjusting.
-
-       On the other hand, setting scrollTop forces a reflow, which can take
-       100+ ms on a large page such as flowering plants.  An interval of 200ms
-       would look smoother, but would spend over half the CPU time reflowing,
-       which seems excessive. */
-    scroll_timerID = setInterval(restore_scroll, 500);
-  }
 }
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', oninteractive);
 } else {
   oninteractive();
-}
-
-/* Once readyState reaches 'complete', end the interval Timer if one has
-   been set.  If it hasn't been set, then onload() must have been called
-   before oninteractive() for some reason.  That's fine... oninteractive()
-   will restore the scroll position exactly once as soon as it gets called. */
-function onload() {
-  console.info('loaded()');
-  loaded = true;
-  if (scroll_timerID > 0) {
-    clearInterval(scroll_timerID);
-    setTimeout(restore_scroll, 0);
-  }
-}
-
-if (document.readyState === 'complete') {
-  onload();
-} else {
-  window.addEventListener('load', onload);
 }
