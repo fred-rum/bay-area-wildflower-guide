@@ -443,12 +443,9 @@ e_search_input.addEventListener('keydown', fn_keydown);
 e_search_input.addEventListener('focusin', fn_focusin);
 var e_autocomplete_box = document.getElementById('autocomplete-box');
 document.addEventListener('click', fn_doc_click);
-function fn_unload() {
-  fn_focusout();
-  save_scroll();
-}
-window.onbeforeunload = fn_unload;
+window.onbeforeunload = fn_focusout;
 function fn_hashchange(event) {
+  hide_ac();
   var title_list = document.title.split(' - ');
   var title = title_list[title_list.length - 1];
   var hash = location.hash;
@@ -457,7 +454,7 @@ function fn_hashchange(event) {
   }
 }
 fn_hashchange();
-window.onhashchange = fn_hashchange;
+window.addEventListener("hashchange", fn_hashchange);
 function fn_details(e) {
   if (e.textContent == '[show details]') {
     e.textContent = '[hide details]';
@@ -472,13 +469,15 @@ function save_scroll() {
   var stateObj = { data: scrollPos };
   history.replaceState(stateObj, '');
 }
-function fn_content_loaded() {
+e_body.addEventListener('scroll', save_scroll);
+function restore_scroll() {
   if (history.state) {
     e_body.scrollTop = history.state.data;
   }
 }
+window.addEventListener("hashchange", restore_scroll);
 if (document.readyState === 'loading') {  // Loading hasn't finished yet
-  document.addEventListener('DOMContentLoaded', fn_content_loaded);
+  document.addEventListener('DOMContentLoaded', restore_scroll);
 } else { // 'DOMContentLoaded' has already fired
-  fn_content_loaded();
+  restore_scroll();
 }

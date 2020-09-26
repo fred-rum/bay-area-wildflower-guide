@@ -10,7 +10,7 @@ title:vascular plants
 
 {leaflet,leaflets} A division of a compound leaf (which may itself be further compound).  Can be distinguished from a leaf by the lack of any structures in its axil other than more leaflets or occasionally stipules.
 
-<h2>3-D shapes (e.g. for an flower#involucre)</h2>
+<h2>3-D shapes (e.g. for an involucre)</h2>
 
 All flower#involucre shapes may be flared at the tip or not, which is independent of the shape listed below.
 

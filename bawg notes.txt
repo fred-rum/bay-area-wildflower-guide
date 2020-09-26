@@ -876,35 +876,6 @@ flag_no_com: self-below ... not worth implementing if I never use it.
 
 --
 
-For some reason, clicking the back button to return to any page
-scrolls that page to the top.  Probably related to the scrolling
-region not being the whole page.
-
-https://stackoverflow.com/questions/29203312/how-can-i-retain-the-scroll-position-of-a-scrollable-area-when-pressing-back-but
-
-$(document).ready(function(){
-    if (history.state) {
-       $("#pxeMainDiv").scrollTop(history.state.data);
-    }
-    $("#pxeMainDiv").scroll(function() {
-       var scrollPos = $("#pxeMainDiv").scrollTop();
-       var stateObj = { data: scrollPos };
-       history.replaceState(stateObj, "");
-    });
-});
-
-
-function doSomething() {
-  console.info('DOM loaded');
-}
-
-if (document.readyState === 'loading') {  // Loading hasn't finished yet
-  document.addEventListener('DOMContentLoaded', doSomething);
-} else {  // `DOMContentLoaded` has already fired
-  doSomething();
-}
-
-
 Create the search bar (or a placeholder) without the use of
 Javascript.  Use <noscript> to make it indicate that Javascript is
 required.
@@ -918,8 +889,11 @@ https://stackoverflow.com/questions/23889743/how-do-i-fire-javascript-after-dom-
 Both scripts should be 'defer'.  This lets the scripts be loaded in
 parallel.  Defered scripts execute in the order in which they appear.
 
-Check scroll behavior on Android Firefox.
-
 
 Javascript pre-processing should include // comments.
 (But not CSS.)
+
+
+I call hide_ac() when the forward/back button is used to change pages.
+Should I also clear the search field, or is that a problematic race
+condition?

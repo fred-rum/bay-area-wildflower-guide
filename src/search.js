@@ -701,15 +701,13 @@ document.addEventListener('click', fn_doc_click);
    away, then hits the back button to return to the page, the search field
    is cleared (good), but the autocomplete box remains visible and populated
    (bad).  This code fixes that. */
-function fn_unload() {
-  fn_focusout();
-  save_scroll();
-}
-window.onbeforeunload = fn_unload;
+window.onbeforeunload = fn_focusout;
 
 /* When entering the page or when changing anchors within a page,
    set the window title to "anchor (page title)". */
 function fn_hashchange(event) {
+  hide_ac();
+
   /* If the current title already has an anchor in it, throw away
      the anchor and keep just the last part, the original page title. */
   var title_list = document.title.split(' - ');
@@ -727,7 +725,7 @@ function fn_hashchange(event) {
 fn_hashchange();
 
 /* ... or when changing anchors within a page. */
-window.onhashchange = fn_hashchange;
+window.addEventListener("hashchange", fn_hashchange);
 
 /*****************************************************************************/
 /* non-search functions also used by the BAWG HTML */
@@ -744,25 +742,39 @@ function fn_details(e) {
 }
 
 
-/* When the page is unloaded, we save the scroll position of the
-   scrollable body div. */
+/* We want to save the scroll position of the scrollable body div so that we
+   can restore it when the user navigates back to this page.
+
+   Note that calling save_scroll() when the page is unloaded is insufficient
+   when the user clicks a link to an anchor within the same page.  Throw in the
+   possibility that the user uses the forward or back buttons (or other method)
+   to navigate through the history, and it is simply impossible to capture the
+   scroll position in all cases before the state changes.
+
+   Instead, we save the scroll position whenever the scroll position changes. */
 function save_scroll() {
   var scrollPos = e_body.scrollTop;
   var stateObj = { data: scrollPos };
   history.replaceState(stateObj, '');
 }
+e_body.addEventListener('scroll', save_scroll);
 
-/* Restore the scroll position when returning to the page.  The browser
-   does this automatically for the *window* scroll position, but not for
-   the position of the scrollable body div. */
-function fn_content_loaded() {
+/* Restore the scroll position when returning to the page.  The browser would
+   do this automatically for the *window* scroll position, but it doesn't do it
+   for the scrollable body div.
+
+   We arrange events to call restore_scroll when the DOM content is loaded
+   (navigation from another page) or when the hash changes (navigation within a
+   page). */
+function restore_scroll() {
   if (history.state) {
     e_body.scrollTop = history.state.data;
   }
 }
+window.addEventListener("hashchange", restore_scroll);
 
 if (document.readyState === 'loading') {  // Loading hasn't finished yet
-  document.addEventListener('DOMContentLoaded', fn_content_loaded);
+  document.addEventListener('DOMContentLoaded', restore_scroll);
 } else { // 'DOMContentLoaded' has already fired
-  fn_content_loaded();
+  restore_scroll();
 }
