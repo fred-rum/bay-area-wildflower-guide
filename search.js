@@ -478,14 +478,15 @@ function save_scroll() {
   var scrollPos = e_body.scrollTop;
   var stateObj = { data: scrollPos };
   history.replaceState(stateObj, '');
+  console.info('save_scroll()')
+  console.info(scrollPos)
 }
 function restore_scroll() {
   console.info('restore_scroll()');
-  if (history.state.data != e_body.scrollTop) {
-    console.info(e_body.scrollTop);
+  if (history.state) {
     e_body.scrollTop = history.state.data;
-    console.info(history.state.data);
-   }
+    console.info(e_body.scrollTop);
+  }
 }
 var loaded = false;
 var scroll_timerID = 0;
@@ -496,9 +497,9 @@ function oninteractive() {
     scroll_timerID = setInterval(restore_scroll, 500);
   }
 }
-if (document.readyState === 'loading') {  // Loading hasn't finished yet
+if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', oninteractive);
-} else { // 'DOMContentLoaded' has already fired
+} else {
   oninteractive();
 }
 function onload() {
@@ -509,7 +510,7 @@ function onload() {
     setTimeout(restore_scroll, 0);
   }
 }
-if (document.readyState === 'complete') {  // Loading hasn't finished yet
+if (document.readyState === 'complete') {
   onload();
 } else {
   window.addEventListener('load', onload);

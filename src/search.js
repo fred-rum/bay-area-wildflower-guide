@@ -771,7 +771,21 @@ function fn_details(e) {
 
 
 /*****************************************************************************/
-/* code to restore the scroll position after a history navigation. */
+/* code to restore the scroll position after a history navigation.
+
+   Caveat: this code saves and restores the amount of vertical scroll.  If the
+   page is resized (or the mobile device is rotated), then a different amount
+   of vertical scroll may be needed to restore any particular page element to
+   be visible.  There doesn't seem to be anything I can do about that.
+
+   For a big page like flowering plants, maybe that's not a big deal:
+   - A wide desktop screen is unlikely to flow much differently.
+   - A phone screen can only resize by changing orientation.
+   It could be more of an issue for something like the plant glossary.
+
+   Maybe maybe I could figure out which element is at the top of the screen,
+   then set "overflow-anchor: none;" on all other elements.  That seems
+   computationally expensive and hard to make work. */
 
 /* We want to save the scroll position of the scrollable body div so that we
    can restore it when the user navigates back to this page.
@@ -787,6 +801,8 @@ function save_scroll() {
   var scrollPos = e_body.scrollTop;
   var stateObj = { data: scrollPos };
   history.replaceState(stateObj, '');
+  console.info('save_scroll()')
+  console.info(scrollPos)
 }
 
 /* Restore the scroll position when returning to the page.  The browser would
@@ -797,8 +813,10 @@ function save_scroll() {
    (navigation from another page) or when the hash changes (navigation within a
    page). */
 function restore_scroll() {
+  console.info('restore_scroll()');
   if (history.state) {
     e_body.scrollTop = history.state.data;
+    console.info(e_body.scrollTop);
   }
 }
 
@@ -814,7 +832,7 @@ var scroll_timerID = 0;
    or the stylesheet.  In fact, the page may not even be rendered yet.
    We use a 0-length timeout to call restore_scroll() as soon as possible
    after pending rendering, if any.  We set an additional interval timer
-   to call restore_scroll() every 200ms until the page is done loading.
+   to call restore_scroll() every 500ms until the page is done loading.
    Depending on circumstances and the desired scroll distance, this may
    repeatedly scroll the page down until the position we need has rendered
    content, and the scroll position continues to be reiterated until the
@@ -825,13 +843,26 @@ var scroll_timerID = 0;
    allows the render to complete (if needed) before we call restore_scroll().
    In this case, no additional interval timer is needed. */
 function oninteractive() {
+  console.info('oninteractive()');
+
   /* The page is fully loaded already, but not necessarily rendered.
      We use a 0-length timeout to defer restore_scroll() until the
      render is complete. */
   setTimeout(restore_scroll, 0);
 
   if (!loaded) {
-    scroll_timerID = setInterval(restore_scroll, 200);
+    /* Why 500ms?
+
+       We want it fast enough that the page appears to be constantly adjusting
+       the scroll position to account for any reflow (e.g. as imagse load).
+       At 1000ms (1 second), it looks more like the page is waiting and jumping
+       instead of constantly adjusting.
+
+       On the other hand, setting scrollTop forces a reflow, which can take
+       100+ ms on a large page such as flowering plants.  An interval of 200ms
+       would look smoother, but would spend over half the CPU time reflowing,
+       which seems excessive. */
+    scroll_timerID = setInterval(restore_scroll, 500);
   }
 }
 
@@ -846,9 +877,11 @@ if (document.readyState === 'loading') {
    before oninteractive() for some reason.  That's fine... oninteractive()
    will restore the scroll position exactly once as soon as it gets called. */
 function onload() {
+  console.info('loaded()');
   loaded = true;
   if (scroll_timerID > 0) {
     clearInterval(scroll_timerID);
+    setTimeout(restore_scroll, 0);
   }
 }
 
