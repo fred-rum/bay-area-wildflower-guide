@@ -481,7 +481,8 @@ function save_scroll() {
 }
 function restore_scroll() {
   console.info('restore_scroll()');
-  if (history.state) {
+  if (history.state.data != e_body.scrollTop) {
+    console.info(e_body.scrollTop);
     e_body.scrollTop = history.state.data;
     console.info(history.state.data);
    }
@@ -492,7 +493,7 @@ function oninteractive() {
   console.info('oninteractive()');
   setTimeout(restore_scroll, 0);
   if (!loaded) {
-    scroll_timerID = setInterval(restore_scroll, 200);
+    scroll_timerID = setInterval(restore_scroll, 500);
   }
 }
 if (document.readyState === 'loading') {  // Loading hasn't finished yet
@@ -505,9 +506,10 @@ function onload() {
   loaded = true;
   if (scroll_timerID > 0) {
     clearInterval(scroll_timerID);
+    setTimeout(restore_scroll, 0);
   }
 }
-if (document.readyState !== 'complete') {  // Loading hasn't finished yet
+if (document.readyState === 'complete') {  // Loading hasn't finished yet
   onload();
 } else {
   window.addEventListener('load', onload);

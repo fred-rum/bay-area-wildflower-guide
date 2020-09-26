@@ -835,9 +835,9 @@ function oninteractive() {
   }
 }
 
-if (document.readyState === 'loading') {  // Loading hasn't finished yet
+if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', oninteractive);
-} else { // 'DOMContentLoaded' has already fired
+} else {
   oninteractive();
 }
 
@@ -852,7 +852,7 @@ function onload() {
   }
 }
 
-if (document.readyState !== 'complete') {  // Loading hasn't finished yet
+if (document.readyState === 'complete') {
   onload();
 } else {
   window.addEventListener('load', onload);
