@@ -897,3 +897,6 @@ Javascript pre-processing should include // comments.
 I call hide_ac() when the forward/back button is used to change pages.
 Should I also clear the search field, or is that a problematic race
 condition?
+
+Create a uniform-width box for thumbnails.  Non-square thumbnails are
+centered in the box.

@@ -483,7 +483,8 @@ function restore_scroll() {
   console.info('restore_scroll()');
   if (history.state) {
     e_body.scrollTop = history.state.data;
-  }
+    console.info(history.state.data);
+   }
 }
 var loaded = false;
 var scroll_timerID = 0;
