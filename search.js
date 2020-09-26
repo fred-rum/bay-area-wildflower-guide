@@ -480,6 +480,7 @@ function save_scroll() {
   history.replaceState(stateObj, '');
 }
 function restore_scroll() {
+  console.info('restore_scroll()');
   if (history.state) {
     e_body.scrollTop = history.state.data;
   }
@@ -487,6 +488,7 @@ function restore_scroll() {
 var loaded = false;
 var scroll_timerID = 0;
 function oninteractive() {
+  console.info('oninteractive()');
   setTimeout(restore_scroll, 0);
   if (!loaded) {
     scroll_timerID = setInterval(restore_scroll, 200);
@@ -498,6 +500,7 @@ if (document.readyState === 'loading') {  // Loading hasn't finished yet
   oninteractive();
 }
 function onload() {
+  console.info('loaded()');
   loaded = true;
   if (scroll_timerID > 0) {
     clearInterval(scroll_timerID);
