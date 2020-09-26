@@ -2374,3 +2374,7 @@ var pages=[
 {terms:["woodland"]},
 ]},
 ];
+
+if (typeof main !== 'undefined') {
+  main();
+}

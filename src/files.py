@@ -103,6 +103,8 @@ def write_header(w, title, h1, nospace=False):
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
+<script async src="../search.js"></script>
+<script async src="../pages.js"></script>
 <link rel="shortcut icon" href="../favicon/favicon.ico">
 <link rel="icon" sizes="16x16 32x32 64x64" href="../favicon/favicon.ico">
 <link rel="icon" type="image/png" sizes="192x192" href="../favicon/favicon-192.png">
@@ -145,8 +147,6 @@ def write_footer(w):
 <span class="foot-left"><a class="home-link" href="../index.html"></a> <span class="foot-fade"> &copy; Chris Nelson</span></span><a class="foot-fade" href="../contact.html">Contact me</a>
 </div>
 </div>
-<script src="../pages.js"></script>
-<script src="../search.js"></script>
 </body>
 ''')
 

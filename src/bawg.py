@@ -602,6 +602,11 @@ with open(search_file, 'w', encoding='utf-8') as w:
 
     write_glossary_search_terms(w)
     w.write('];\n')
+    w.write('''
+if (typeof main !== 'undefined') {
+  main();
+}
+''')
 
 
 ###############################################################################

@@ -641,28 +641,6 @@ function fn_keydown() {
   }
 }
 
-/* normalize the data in the pages array. */
-for (var i = 0; i < pages.length; i++) {
-  var page_info = pages[i];
-  if (('page' in page_info) &&
-      !('com' in page_info) &&
-      (!hasUpper(page_info.page) || (page_info.x == 'j'))) {
-    page_info.com = [page_info.page];
-  }
-  if (('page' in page_info) &&
-      !('sci' in page_info) &&
-      hasUpper(page_info.page) && (page_info.x != 'j')) {
-    page_info.sci = [page_info.page];
-  }
-}
-
-/* Determine whether to add 'html/' to the URL when navigating to a page. */
-if (window.location.pathname.includes('/html/')) {
-  var path = '';
-} else {
-  var path = 'html/';
-}
-
 /* Create the search-related HTML and insert it at the beginning of the
    document.  I can't find a function to insert HTML directly into the
    document, so we accomplish the same task a bit awkwardly by inserting
@@ -676,10 +654,6 @@ e_body.insertAdjacentHTML('beforebegin', `
 `);
 
 var e_search_input = document.getElementById('search');
-e_search_input.addEventListener('input', fn_change);
-e_search_input.addEventListener('keydown', fn_keydown);
-e_search_input.addEventListener('focusin', fn_focusin);
-
 var e_autocomplete_box = document.getElementById('autocomplete-box');
 
 /* We want to trigger hide_ac whenever the user clicks somewhere that
@@ -721,11 +695,65 @@ function fn_hashchange(event) {
   }
 }
 
-/* Set the window title when entering the page (possibly with an anchor)... */
-fn_hashchange();
+/* Determine whether to add 'html/' to the URL when navigating to a page. */
+if (window.location.pathname.includes('/html/')) {
+  var path = '';
+} else {
+  var path = 'html/';
+}
 
-/* ... or when changing anchors within a page. */
-window.addEventListener("hashchange", fn_hashchange);
+/* main() kicks off search-related activity once it is safe to do so.
+   See further below for how main() is activated. */
+function main() {
+  /* normalize the data in the pages array. */
+  for (var i = 0; i < pages.length; i++) {
+    var page_info = pages[i];
+    if (('page' in page_info) &&
+        !('com' in page_info) &&
+        (!hasUpper(page_info.page) || (page_info.x == 'j'))) {
+      page_info.com = [page_info.page];
+    }
+    if (('page' in page_info) &&
+        !('sci' in page_info) &&
+        hasUpper(page_info.page) && (page_info.x != 'j')) {
+      page_info.sci = [page_info.page];
+    }
+  }
+
+  e_search_input.addEventListener('input', fn_change);
+  e_search_input.addEventListener('keydown', fn_keydown);
+  e_search_input.addEventListener('focusin', fn_focusin);
+
+  /* Set the window title when entering the page (possibly with an anchor)... */
+  fn_hashchange();
+
+  /* ... or when changing anchors within a page. */
+  window.addEventListener("hashchange", fn_hashchange);
+
+  e_body.addEventListener('scroll', save_scroll);
+  window.addEventListener("hashchange", restore_scroll);
+
+  /* In case the user already started typing before the script loaded,
+     perform the search right away on whatever is in the search field,
+     but only if the focus is still in the search field.
+
+     If the search field is (still) empty, fn_search() does nothing. */
+  if (Document.activeElement == e_search_input) {
+    fn_search();
+  }
+}
+
+/* main() is called when either of these two events occurs:
+   we reach this part of search.js and the pages array exists, or
+   we reach the end of pages.js and the main function exists.
+
+   Bug: Nothing waits for e_body or e_search to exist.
+   https://stackoverflow.com/questions/16149431/make-function-wait-until-element-exists
+*/
+if (typeof pages !== 'undefined') {
+  main();
+}
+
 
 /*****************************************************************************/
 /* non-search functions also used by the BAWG HTML */
@@ -742,6 +770,9 @@ function fn_details(e) {
 }
 
 
+/*****************************************************************************/
+/* code to restore the scroll position after a history navigation. */
+
 /* We want to save the scroll position of the scrollable body div so that we
    can restore it when the user navigates back to this page.
 
@@ -757,7 +788,6 @@ function save_scroll() {
   var stateObj = { data: scrollPos };
   history.replaceState(stateObj, '');
 }
-e_body.addEventListener('scroll', save_scroll);
 
 /* Restore the scroll position when returning to the page.  The browser would
    do this automatically for the *window* scroll position, but it doesn't do it
@@ -771,10 +801,59 @@ function restore_scroll() {
     e_body.scrollTop = history.state.data;
   }
 }
-window.addEventListener("hashchange", restore_scroll);
+
+/* We call restore_scroll() repeatedly from the moment that the readyState
+   is 'interactive' (DOMContentLoaded) until the readyState is 'complete'
+   (onload).  These could potentially occur out of order, in which case
+   we shortcut the process. */
+var loaded = false;
+var scroll_timerID = 0;
+
+/* If the readyState is 'interactive', then the user can (supposedly)
+   interact with the page, but it may still be loading HTML, images,
+   or the stylesheet.  In fact, the page may not even be rendered yet.
+   We use a 0-length timeout to call restore_scroll() as soon as possible
+   after pending rendering, if any.  We set an additional interval timer
+   to call restore_scroll() every 200ms until the page is done loading.
+   Depending on circumstances and the desired scroll distance, this may
+   repeatedly scroll the page down until the position we need has rendered
+   content, and the scroll position continues to be reiterated until the
+   content stops shifting around.
+
+   If the readyState is 'complete', then the page is ready to render, but
+   may or may not have actually rendered yet.  Again, a 0-length timeout
+   allows the render to complete (if needed) before we call restore_scroll().
+   In this case, no additional interval timer is needed. */
+function oninteractive() {
+  /* The page is fully loaded already, but not necessarily rendered.
+     We use a 0-length timeout to defer restore_scroll() until the
+     render is complete. */
+  setTimeout(restore_scroll, 0);
+
+  if (!loaded) {
+    scroll_timerID = setInterval(restore_scroll, 200);
+  }
+}
 
 if (document.readyState === 'loading') {  // Loading hasn't finished yet
-  document.addEventListener('DOMContentLoaded', restore_scroll);
+  document.addEventListener('DOMContentLoaded', oninteractive);
 } else { // 'DOMContentLoaded' has already fired
-  restore_scroll();
+  oninteractive();
+}
+
+/* Once readyState reaches 'complete', end the interval Timer if one has
+   been set.  If it hasn't been set, then onload() must have been called
+   before oninteractive() for some reason.  That's fine... oninteractive()
+   will restore the scroll position exactly once as soon as it gets called. */
+function onload() {
+  loaded = true;
+  if (scroll_timerID > 0) {
+    clearInterval(scroll_timerID);
+  }
+}
+
+if (document.readyState !== 'complete') {  // Loading hasn't finished yet
+  onload();
+} else {
+  window.addEventListener('load', onload);
 }
