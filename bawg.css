@@ -214,15 +214,25 @@ div.leaf-thumb-text {
     align-items: center;
     justify-content: center;
 }
-img.page-thumb {
+img.boxed {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+div.key-thumb {
     height: 20vw;
     max-height: 200px;
-    width: auto;
+    width: 20vw;
+    max-width: 200px;
     margin-right: 10px;
     margin-bottom: 0px;
     vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e8e8e8;
 }
-div.page-thumb-text {
+div.key-thumb-text {
     box-sizing: border-box;
     border: 1px solid black;
     padding: 10px;
@@ -237,13 +247,18 @@ div.page-thumb-text {
     align-items: center;
     justify-content: center;
 }
-img.list-thumb {
+div.list-thumb {
     height: 15vw;
     max-height: 100px;
-    width: auto;
+    width: 15vw;
+    max-width: 100px;
     margin-right: 10px;
     margin-bottom: 0px;
     vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e8e8e8;
 }
 div.list-thumb-text {
     box-sizing: border-box;

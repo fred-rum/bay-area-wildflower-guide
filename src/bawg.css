@@ -486,8 +486,21 @@ div.leaf-thumb-text {
     justify-content: center;
 }
 
-/* page-thumb is applied to the photo thumbnail for a child listing with
-   a photo and key.  See also the comments for the related leaf-thumb above.
+/* Non-square thumbnails are allowed to be wider or narrower in a leaf page
+   (above).  But on a key, list, or hierarchy page, we'd prefer all images
+   to be the same width so that the text stays aligned and so that there
+   are no reflow surprises that could mess with the scroll position.
+
+   We put each thumbnail in a square container (below) and constrain the image
+   to fit. */
+img.boxed {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* key-thumb is a container for the photo thumbnail for a child listing with
+   a photo and key.
 
    On small screens, its height is only half that of leaf-thumb to leave
    room for the child name to the right of the photo.  (On narrow screens,
@@ -501,21 +514,33 @@ div.leaf-thumb-text {
    to the right of the photo.  In this case, its height expands to the
    same size of leaf-thumb to provide a firm anchor for all that text.
 
-   Unlike for leaf-thumb above, the page-thumb photo has no peers
+   Unlike img.leaf-thumb above, the div.key-thumb container has the same
+   width and height so that it is exactly square, with the image constrained
+   to fit with img.boxed above.  A light gray background is applied so that
+   a smaller image doesn't have weird-looking blank space around it.
+
+   Unlike for leaf-thumb above, the key-thumb photo has no peers
    below it within its container.  To get proper centering on its
    line, we give it no margin-bottom and rely on its container to give
    it the necessary bottom margin to later elements. */
-img.page-thumb {
+div.key-thumb {
     height: 20vw;
     max-height: 200px;
-    width: auto;
+    width: 20vw;
+    max-width: 200px;
     margin-right: 10px;
     margin-bottom: 0px;
     vertical-align: middle;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #e8e8e8;
 }
-/* page-thumb-text is related to page-thumb in the same way that
+/* key-thumb-text is related to key-thumb in the same way that
    leaf-thumb-text is related to leaf-thumb (above). */
-div.page-thumb-text {
+div.key-thumb-text {
     box-sizing: border-box;
     border: 1px solid black;
     padding: 10px;
@@ -535,18 +560,30 @@ div.page-thumb-text {
 
 /* list-thumb is applied to the photo thumbnail for a child listing with
    only a photo and name, but no key.  See also the comments for the related
-   leaf-thumb and page-thumb above.
+   leaf-thumb and key-thumb above.
 
-   Compared to page-thumb, list-thumb is even smaller.  This allows more
-   flowers to be listed on one page.  The max-height is particularly smaller
-   since there is no key text that the photo needs to anchor. */
-img.list-thumb {
+   Compared to key-thumb, list-thumb is even smaller.  This allows more
+   flowers to be listed on one page.  The max dimensions in particular are
+   smaller since there is no key text that the photo needs to anchor.
+
+   Even though the thumbnails are displayed no larger than 100x100, I don't
+   bother creating separate smaller thumbnail files.  Experiments show that
+   100x100 thumbnails with much reduced quality are only 10% smaller than
+   the existing 200x200 thumbnails, so there's no real point. */
+div.list-thumb {
     height: 15vw;
     max-height: 100px;
-    width: auto;
+    width: 15vw;
+    max-width: 100px;
     margin-right: 10px;
     margin-bottom: 0px;
     vertical-align: middle;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #e8e8e8;
 }
 /* list-thumb-text is related to list-thumb in the same way that
    leaf-thumb-text is related to leaf-thumb (above). */

@@ -1630,7 +1630,7 @@ class Page:
         if self.jpg_list:
             pageurl = url(self.name)
             jpgurl = url(self.jpg_list[0])
-            w.write(f'<a href="{pageurl}.html"><img src="../{db_pfx}thumbs/{jpgurl}.jpg" alt="photo" class="list-thumb"></a>')
+            w.write(f'<a href="{pageurl}.html"><div class="list-thumb"><img class="boxed" src="../{db_pfx}thumbs/{jpgurl}.jpg" alt="photo"></div></a>')
 
         w.write(f'{self.create_link(2)}</div>\n')
 
@@ -1710,9 +1710,9 @@ class Page:
         pageurl = url(child.name)
         if jpg:
             jpgurl = url(jpg)
-            img = f'<a href="{pageurl}.html"><img src="../{db_pfx}thumbs/{jpgurl}.jpg" alt="photo" class="page-thumb"></a>'
+            img = f'<a href="{pageurl}.html"><div class="key-thumb"><img class="boxed" src="../{db_pfx}thumbs/{jpgurl}.jpg" alt="photo"></div></a>'
         elif ext_photo:
-            img = f'<a href="{pageurl}.html" class="enclosed {child.link_style()}"><div class="page-thumb-text">'
+            img = f'<a href="{pageurl}.html" class="enclosed {child.link_style()}"><div class="key-thumb-text">'
             n_photos = len(child.ext_photo_list)
             if n_photos > 1:
                 photo_text = f'photos &times; {n_photos}'
@@ -1757,8 +1757,8 @@ class Page:
 
         if not self.has_child_key:
             # No child has a key, so reduce the size of child photos.
-            # This applies to both page-thumb and page-thumb-text
-            s = re.sub(r'class="page-thumb', r'class="list-thumb', s)
+            # This applies to both key-thumb and key-thumb-text
+            s = re.sub(r'class="key-thumb', r'class="list-thumb', s)
 
         self.txt = s
 
@@ -1907,7 +1907,8 @@ class Page:
                         # Do not put newlines between jpgs because that would
                         # put an unwanted text space between them in addition
                         # to their desired margin.
-                        w.write(f'<a href="../{db_pfx}photos/{jpgurl}.jpg"><img src="../{db_pfx}thumbs/{jpgurl}.jpg" alt="photo" width="200" height="200" class="leaf-thumb"></a>')
+                        w.write(f'<a href="../{db_pfx}photos/{jpgurl}.jpg"><img class="leaf-thumb" src="../{db_pfx}thumbs/{jpgurl}.jpg" alt="photo"></a>')
+
                     for (label, link) in self.ext_photo_list:
                         w.write(f'<a href="{link}" target="_blank" class="enclosed"><div class="leaf-thumb-text">')
                         if label:
