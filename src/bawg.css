@@ -752,7 +752,7 @@ div#search-container {
      - It has padding on the left side of the text area to accomodate
        an SVG of a magnifying glass (to represent "search").
 */
-input#search {
+input {
     box-sizing: border-box;
     width: 100%;
     font-size: 1.5em;
@@ -763,6 +763,9 @@ input#search {
     background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1.5em' height='1.5em' viewBox='0 0 100 100'><g><circle cx='37' cy='37' r='20' stroke='%23888' stroke-width='7' fill='none'/><path d='M52,52L83,83' stroke='%23888' stroke-width='7' stroke-linecap='round' fill='none'/></g></svg>");
     background-repeat: no-repeat;
 }
+input::placeholder {
+    color: #c0c0c0;
+}
 /* When the input field has focus, the border is blue and has a glow effect.
    Some browsers (e.g. Chrome) add an outline by default.  Since the outline
    is square cornered and otherwise generally clashes with our border effect,
@@ -771,6 +774,19 @@ input#search:focus {
     border: 1px solid rgb(81, 203, 238);
     box-shadow: 0px 0px 5px 0px rgb(81, 203, 238);
     outline: auto 0px;
+}
+
+/* When Javascript is disabled, a <noscript> tag creates a second, disabled
+   input field on top of the first to prevent interaction. */
+input:disabled {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: calc(100% - 16px);
+    background-color: #eeeeee;
+    color: #cccccc;
+    text-align: center;
+    z-index: 20;
 }
 
 /* The autocompletion box is hidden by default.  JavaScript toggles it to

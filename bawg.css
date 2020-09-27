@@ -331,7 +331,7 @@ div#search-container {
     box-shadow: 0px 0px 3px 3px white;
     z-index: 10;
 }
-input#search {
+input {
     box-sizing: border-box;
     width: 100%;
     font-size: 1.5em;
@@ -342,10 +342,23 @@ input#search {
     background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1.5em' height='1.5em' viewBox='0 0 100 100'><g><circle cx='37' cy='37' r='20' stroke='%23888' stroke-width='7' fill='none'/><path d='M52,52L83,83' stroke='%23888' stroke-width='7' stroke-linecap='round' fill='none'/></g></svg>");
     background-repeat: no-repeat;
 }
+input::placeholder {
+    color: #c0c0c0;
+}
 input#search:focus {
     border: 1px solid rgb(81, 203, 238);
     box-shadow: 0px 0px 5px 0px rgb(81, 203, 238);
     outline: auto 0px;
+}
+input:disabled {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: calc(100% - 16px);
+    background-color: #eeeeee;
+    color: #cccccc;
+    text-align: center;
+    z-index: 20;
 }
 div#autocomplete-box {
     display: none;

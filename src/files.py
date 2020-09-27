@@ -129,6 +129,11 @@ def write_header(w, title, h1, nospace=False):
 </head>
 <body>
 <div class="body-container">
+<div id="search-container">
+<input type="search" id="search" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="flower or glossary term" aria-label="search for a flower or glossary term">
+<noscript><input type="search" value="search requires Javascript"disabled></noscript>
+<div id="autocomplete-box"></div>
+</div>
 <div id="body">
 ''')
     if h1:

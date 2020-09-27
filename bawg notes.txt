@@ -876,11 +876,6 @@ flag_no_com: self-below ... not worth implementing if I never use it.
 
 --
 
-Create the search bar (or a placeholder) without the use of
-Javascript.  Use <noscript> to make it indicate that Javascript is
-required.
-
-
 I call hide_ac() when the forward/back button is used to change pages.
 Should I also clear the search field, or is that a problematic race
 condition?
