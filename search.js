@@ -438,6 +438,12 @@ if (window.location.pathname.includes('/html/')) {
   var path = 'html/';
 }
 function main() {
+  console.info('main')
+  if (document.readyState === 'loading') {
+    console.info('...main too early')
+    document.addEventListener('DOMContentLoaded', main);
+    return
+  }
   for (var i = 0; i < pages.length; i++) {
     var page_info = pages[i];
     if (('page' in page_info) &&
@@ -489,11 +495,11 @@ function restore_scroll() {
 }
 window.addEventListener("hashchange", restore_scroll);
 function oninteractive() {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', oninteractive);
+    return
+  }
   console.info('oninteractive()');
   setTimeout(restore_scroll, 0);
 }
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', oninteractive);
-} else {
-  oninteractive();
-}
+oninteractive();

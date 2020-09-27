@@ -706,6 +706,15 @@ if (window.location.pathname.includes('/html/')) {
 /* main() kicks off search-related activity once it is safe to do so.
    See further below for how main() is activated. */
 function main() {
+  console.info('main')
+
+  /* Make sure the page elements are ready. */
+  if (document.readyState === 'loading') {
+    console.info('...main too early')
+    document.addEventListener('DOMContentLoaded', main);
+    return
+  }
+
   /* normalize the data in the pages array. */
   for (var i = 0; i < pages.length; i++) {
     var page_info = pages[i];
@@ -744,9 +753,6 @@ function main() {
 /* main() is called when either of these two events occurs:
    we reach this part of search.js and the pages array exists, or
    we reach the end of pages.js and the main function exists.
-
-   Bug: Nothing waits for e_body or e_search to exist.
-   https://stackoverflow.com/questions/16149431/make-function-wait-until-element-exists
 */
 if (typeof pages !== 'undefined') {
   main();
@@ -840,16 +846,16 @@ window.addEventListener("hashchange", restore_scroll);
    We use a 0-length timeout to call restore_scroll() as soon as possible
    after pending rendering, if any.
 
-   Hopefully the HTML and CSS is well designed so that the page isn't
-   still adjusting its layout after the call to restore_scroll().
+   Hopefully the stylesheet has been loaded and the HTML and CSS are
+   sufficiently well designed so that the page isn't still adjusting
+   its layout after the call to restore_scroll().
 */
 function oninteractive() {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', oninteractive);
+    return
+  }
   console.info('oninteractive()');
   setTimeout(restore_scroll, 0);
 }
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', oninteractive);
-} else {
-  oninteractive();
-}
+oninteractive();

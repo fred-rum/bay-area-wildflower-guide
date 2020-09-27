@@ -880,19 +880,6 @@ Create the search bar (or a placeholder) without the use of
 Javascript.  Use <noscript> to make it indicate that Javascript is
 required.
 
-Allow Javascript to load and execute faster, especially without
-waiting for images to load.  This is important for heavy pages like
-flowering plants.
-
-https://stackoverflow.com/questions/23889743/how-do-i-fire-javascript-after-dom-and-css-are-loaded-but-not-images
-
-Both scripts should be 'defer'.  This lets the scripts be loaded in
-parallel.  Defered scripts execute in the order in which they appear.
-
-
-Javascript pre-processing should include // comments.
-(But not CSS.)
-
 
 I call hide_ac() when the forward/back button is used to change pages.
 Should I also clear the search field, or is that a problematic race
