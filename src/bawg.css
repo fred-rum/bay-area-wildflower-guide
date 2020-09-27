@@ -6,6 +6,27 @@
    removes the comments from the CSS to save download bandwidth. */
 /*****************************************************************************/
 
+/* This is the home icon in the upper left.  It extends slightly
+   outside of the search container, so to avoid increasing the size of
+   the container, the home icon is positioned absolutely.
+
+   Instead of a box-shadow, I use a drop-shadow that conforms to the
+   circular edges of the image.  Unfortunately, the drop-shadow
+   doesn't include a spread paramater, so instead I push the blur down
+   a bit.  The drop-shadow is also much less intense (and I can't
+   double it up), so I push it down a bit more and blur it a bit
+   further to try to make it look reasonably natural together with the
+   search-container's box-shadow. */
+img.home-icon {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 40px;
+    height: 40px;
+    filter: drop-shadow(0px 4px 4px white);
+    z-index: 20;
+}
+
 /* Many mobile browsers by default create a viewport (virtual screen) wide
    enough to hold standard desktop web pagse, then allow the user to zoom
    and scroll within that viewport.  However, a responsive site like this
@@ -19,24 +40,25 @@
     width: device-width;
 }
 
-/*** properties related to encapsulating the search bar, body, and footer ***/
+/*** properties related to encapsulating the search bar and body ***/
 
-/* We want the search bar and footer to be locked to the top and bottom of the
-   viewport while the main body of text scrolls between them.  Normally
-   the html & body elements are sized to fit the contents (potentially larger
-   than the viewport), and they add a scrollbar as needed.  We override this
-   behavior by locking the html & body elements to 100% of the screen height.
-   Then we use wrap our page contents in class body-container: a flex box in
-   which the div#body element has any height flexability.  Because it has
-   'overflow-y: auto', the browser will shrink it as necessary so that the
-   search bar, body, and footer all fit within the viewport. */
+/* We want the search bar to be locked to the top of the viewport
+   while the main body of text scrolls below it.  Normally the html &
+   body elements are sized to fit the contents (potentially larger
+   than the viewport), and the browser adds a scrollbar as needed.  We
+   override this behavior by locking the html & body elements to 100%
+   of the screen height.  Then we use wrap our page contents in class
+   body-container: a flex box in which only the div#body element has
+   height flexability.  Because it has 'overflow-y: auto', the browser
+   will shrink it as necessary so that the search bar and body both
+   fit within the viewport. */
 
 /* Fix the height of the browser elements to the viewport height.
 
    If the browser has a default margin or padding, remove those.
    That's particularly important so that the div#body scrollbar can be
    flush with the right side of the viewport, but it also gives us more
-   control over the positioning of our search bar and footer.
+   control over the positioning of our search bar.
 
    In case there's any jankiness in the browser geometry calculations,
    we use 'overflow: hidden' to be absolutely sure that we don't end up
@@ -99,6 +121,12 @@ div.footer {
     border: 1px solid #DDDDDD;
     box-shadow: 0px 0px 3px 3px white;
     z-index: 10;
+
+    /* extend the border/background all the way to the left and right
+       edges of the window (negating the usual padding from
+       body-container). */
+    margin-left: -8px;
+    margin-right: -8px;
 }
 
 /* The copyright statement includes a link to the BAWG home page.
@@ -181,8 +209,12 @@ dd {
    and the dd, and the entire div gets highlighted.
 
    A definition within a taxon page is simply a paragraph, and it
-   is this paragraph that has the anchor id and is highlighted. */
-.defn:target {
+   is this paragraph that has the anchor id and is highlighted.
+
+   This was div.defn:target, but when I added definitions in text
+   paragraphs, I changed it to .defn:target.  Then I added an anchored
+   link to my contact info in a heading, so now it's just :target. */
+:target {
     background-color: #ffc;
 }
 
@@ -754,7 +786,8 @@ div#search-container {
 */
 input {
     box-sizing: border-box;
-    width: 100%;
+    margin-left: 40px; /* leave room for the icon that links to the home page */
+    width: calc(100% - 40px);
     font-size: 1.5em;
     border-radius: 0.4em;
     border: 1px solid #DDDDDD;

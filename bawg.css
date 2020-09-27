@@ -1,4 +1,13 @@
 /* Copyright Chris Nelson - All rights reserved. */
+img.home-icon {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 40px;
+    height: 40px;
+    filter: drop-shadow(0px 4px 4px white);
+    z-index: 20;
+}
 @-ms-viewport {
     width: device-width;
 }
@@ -30,6 +39,8 @@ div.footer {
     border: 1px solid #DDDDDD;
     box-shadow: 0px 0px 3px 3px white;
     z-index: 10;
+    margin-left: -8px;
+    margin-right: -8px;
 }
 a.home-link::before {
     content: "BAWG";
@@ -66,7 +77,7 @@ dd {
     -moz-background-clip: padding;
     background-clip: padding-box;
 }
-.defn:target {
+:target {
     background-color: #ffc;
 }
 div.shrink-box {
@@ -333,7 +344,8 @@ div#search-container {
 }
 input {
     box-sizing: border-box;
-    width: 100%;
+    margin-left: 40px;
+    width: calc(100% - 40px);
     font-size: 1.5em;
     border-radius: 0.4em;
     border: 1px solid #DDDDDD;

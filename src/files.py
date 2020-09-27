@@ -117,6 +117,7 @@ def write_header(w, title, h1, nospace=False):
 <link rel="stylesheet" href="../bawg.css">
 </head>
 <body>
+<a href="../index.html"><img src="../photos/home-icon.png" class="home-icon" alt="home"></a>
 <div class="body-container">
 <div id="search-container">
 <input type="search" id="search" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="flower or glossary term" aria-label="search for a flower or glossary term">
@@ -136,9 +137,9 @@ def write_footer(w):
     # I don't put the year in the copyright because it's a pain to determine
     # given the different creation/modification dates of the pages *plus*
     # the photos on them.  The Berne Convention applies in any case.
-    w.write(f'''</div>
-<div class="footer">
-<span class="foot-left"><a class="home-link" href="../index.html"></a> <span class="foot-fade"> &copy; Chris Nelson</span></span><a class="foot-fade" href="../contact.html">Contact me</a>
+    w.write(f'''<div class="footer">
+<span class="foot-left"><a class="home-link" href="../index.html"></a> <span class="foot-fade"> &copy; Chris Nelson</span></span><a class="foot-fade" href="../index.html#contact">Contact me</a>
+</div>
 </div>
 </div>
 </body>
