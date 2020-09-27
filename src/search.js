@@ -17,7 +17,7 @@ function hide_ac() {
 
 function fn_focusin() {
   if (ac_is_hidden) {
-    /* e_search_input.select(); */ /* Not as smooth on Android as desired. */
+    /* e_search_input.select(); */ // Not as smooth on Android as desired.
     fn_search();
   }
 }
@@ -182,7 +182,7 @@ function check(search_str, match_str, pri_adj) {
     var start_i = i;
 
     if (i == s.length) {
-      break; /* match complete */
+      break; // match complete
     }
 
     /* find end of letter characters */
@@ -193,7 +193,7 @@ function check(search_str, match_str, pri_adj) {
     var s_word = s.substring(start_i, i);
     var start_j = m.indexOf(s_word, j);
     if (start_j == -1) {
-      return null; /* no match */
+      return null; // no match
     }
     j = start_j + (i - start_i);
     if (match_ranges.length &&
@@ -379,8 +379,8 @@ function highlight_match(match_info, default_name, is_sci) {
     pos = next_pos;
 
     if (info.half == 0) {
-      h += info.tag[0]; /* open tag */
-      nest.push(info); /* record its nesting level */
+      h += info.tag[0]; // open tag
+      nest.push(info); // record its nesting level
     } else {
       /* close the tags that are nested within the tag we want to close */
       for (i = nest.length-1; nest[i] != info; i--) {
@@ -561,7 +561,8 @@ function fn_search() {
     } else {
       var full = com_highlight;
     }
-    full = full.replace(/'/g, '&rsquo;');
+    /* escape the quote mark in the regex to avoid confusing strip.py */
+    full = full.replace(/\'/g, '&rsquo;');
 
     fit_info.html = ('<p class="nogap"><a ' + link + '>' +
                      full + '</a></p>');
@@ -583,7 +584,7 @@ function fn_search() {
    activate the link as desired. */
 function fn_click() {
   clear_search();
-  return true; /* continue normal handling of the clicked link */
+  return true; // continue normal handling of the clicked link
 }
 
 /* Handle all changes to the search value.  This includes changes that are

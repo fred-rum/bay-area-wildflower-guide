@@ -50,8 +50,8 @@ from page import *
 from photo import *
 from glossary import *
 
-strip_comments('bawg.css')
-strip_comments('search.js')
+strip_comments('bawg.css', False)
+strip_comments('search.js', True)
 
 year = datetime.datetime.today().year
 

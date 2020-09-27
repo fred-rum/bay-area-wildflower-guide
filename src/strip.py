@@ -1,17 +1,41 @@
 # My files
 from files import *
 
-def strip_comments(filename):
+def strip_comments(filename, strip_line):
+    def repl_string_or_comment(matchobj):
+        string = matchobj.group(1)
+        comment = matchobj.group(2)
+
+        if string is not None:
+            return string
+        elif 'Copyright Chris Nelson' in comment:
+            return comment
+        else:
+            return ''
+
     with open(root_path + '/src/' + filename, mode='r', encoding='utf-8') as r:
         txt = r.read()
 
-    # Remove /* comments */, but not the /* Copyright ... */ comment.
-    # Also remove whitespace, but not newlines.  Perl has \h for
-    # horizontal whitespace, but in Python we have to use [^\S\r\n],
-    # which means "everything except visible characters or line feeds or
-    # carriage returns", which can be rephrased as "all white space
-    # except line feeds and carriage returns".
-    txt = re.sub(r'/\*(?! Copyright).*?\*/', '', txt, flags=re.DOTALL)
+    # Match either a complete quoted string (which is returned unchanged) or
+    # whitespace followed by a comment (which is removed).
+    #
+    # If a string contains what appears to be a comment, the string is matched
+    # because it starts first.  And vice versa for a comment that contains
+    # quotation marks.
+    #
+    # Note that a Javascript regex (surrounded by slashes) could include
+    # a quotation mark and/or something that looks like the start of a comment,
+    # but it's impossible to reliably detect a regex without a full Javascript
+    # parser.  So we exclude an escaped quotation mark to start a string (in
+    # case that appears in a regex) and otherwise hope for the best.
+    quote1 = r'(?<!\\)"(?:[^"\\]|\\.)*"'
+    quote2 = r"(?<!\\)[^\\]'(?:[^'\\]|\\.)*'"
+    comment = r'/\s+?$|\s*/\*.*?\*/'
+    if strip_line:
+        comment += r'|\s*//[^\r\n]*$'
+    pattern = fr'({quote1}|{quote2})|({comment})'
+    txt = re.sub(pattern, repl_string_or_comment, txt,
+                 flags=re.DOTALL|re.MULTILINE)
 
     # Collapse blank lines and whitespace at the end of lines.
     txt = re.sub(r'\s+\n', '\n', txt)

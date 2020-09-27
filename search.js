@@ -368,7 +368,7 @@ function fn_search() {
     } else {
       var full = com_highlight;
     }
-    full = full.replace(/'/g, '&rsquo;');
+    full = full.replace(/\'/g, '&rsquo;');
     fit_info.html = ('<p class="nogap"><a ' + link + '>' +
                      full + '</a></p>');
   }
