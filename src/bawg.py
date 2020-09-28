@@ -59,10 +59,6 @@ shutil.rmtree(working_path, ignore_errors=True)
 os.mkdir(working_path)
 os.mkdir(working_path + '/html')
 
-# key: color
-# value: page list
-color_page_list = {}
-
 # Read the mapping of iNaturalist observation locations to short park names.
 park_map = {}
 park_loc = {}
@@ -98,6 +94,10 @@ def read_txt_files():
 
 read_txt_files()
 
+# Perform a first pass on the txt pages to initialize common and
+# scientific names.  This ensures that when we parse children (next),
+# any name can be used and linked correctly.
+
 def parse_names():
     for page in page_array:
         page.remove_comments()
@@ -106,17 +106,13 @@ def parse_names():
         page.parse_glossary()
 parse_names()
 
-# Perform a first pass on the txt pages to initialize common and
-# scientific names.  This ensures that when we parse children (next),
-# any name can be used and linked correctly.
-
-# parse_children() can add new pages, so we make a copy of the list to
-# iterate through.  parse_children() also checks for external photos,
-# color, and completeness information.  If this info is within a child
-# key, it is assigned to the child.  Otherwise it is assigned to the
-# parent.
+# parse_children_and_attributes() can add new pages, so we make a copy
+# of the list to iterate through.  parse_children_and_attributes()
+# also checks for external photos and various other page attributes.
+# If this info is within a child key, it is assigned to the child.
+# Otherwise it is assigned to the parent.
 for page in page_array[:]:
-    page.parse_children()
+    page.parse_children_and_attributes()
 
 def print_trees():
     exclude_set = set()
@@ -467,7 +463,7 @@ for page in page_array:
     # If children were linked to the page via the Linnaean hierarchy,
     # they may be in a non-intuitive order.  We re-order them here.
     # This includes both adjusting their order in page.child and
-    # also adding links to them in the txt in the proper order.
+    # also adding links to them in the txt.
     if page.non_txt_children:
         page.child = page.child[:-len(page.non_txt_children)]
         for child in sort_pages(page.non_txt_children):
@@ -475,10 +471,17 @@ for page in page_array:
             if not page.list_hierarchy:
                 page.txt += f'==\n'
 
-# We don't need color_page_list yet, but we go through the creation process
-# now in order to populate page_color for all container pages.
-for color in color_list:
-    color_page_list[color] = find_matches(name_page['flowering plants'].child, color)
+    if page.subset_of_page:
+        # Get the top layer of pages in the subset, which also populates the
+        # colors of all children.  We have to do this now so that every page
+        # knows what subset pages it is a member of.
+        primary = page.subset_of_page
+        page.subset_page_list = find_matches(primary.child, page.subset_color)
+
+for page in page_array:
+    colors_not_used = ', '.join(page.color - page.colors_used)
+    if colors_not_used:
+        error(f'{page.name} has no use for these colors: {colors_not_used}')
 
 if arg('-tree7'):
     print_trees()
@@ -513,30 +516,6 @@ if arg('-incomplete_keys'):
     page_list.sort(key=by_incomplete_obs, reverse=True)
     for page in page_list[:5]:
         print(page.name)
-
-###############################################################################
-# The remaining code is for creating useful lists of pages:
-# all pages, and pages sorted by flower color.
-
-def write_page_list(page_list, color, color_match):
-    # We write out the matches to a string first so that we can get
-    # the total number of keys and flowers in the list (including children).
-    s = io.StringIO()
-    list_matches(s, page_list, False, color_match, set())
-
-    with open(working_path + f"/html/{color}.html", "w", encoding="utf-8") as w:
-        title = color.capitalize() + ' flowers'
-        write_header(w, title, title)
-        obs = Obs(color_match)
-        page = name_page['flowering plants']
-        page.count_matching_obs(obs)
-        obs.write_page_counts(w)
-        w.write(s.getvalue())
-        obs.write_obs(None, w)
-        write_footer(w)
-
-for color in color_list:
-    write_page_list(color_page_list[color], color, color)
 
 ###############################################################################
 # Create pages.js

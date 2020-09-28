@@ -8,3 +8,20 @@ link: self-subtribe
 
 # every observation is expected to find a page
 flag_obs_promotion_above_peers: self-below
+
+# subset color list order: color, [optional name in membership list,] page name
+# The order of colors listed here determines the order of colors in a page's
+# membership list.
+subset color: blue, blue flowers
+subset color: pale blue, pale blue flowers
+subset color: purple, purple flowers
+subset color: pale purple, pale purple flowers
+subset color: red purple, red purple flowers
+subset color: red, red flowers
+subset color: pink, pink flowers
+subset color: orange, orange flowers
+subset color: salmon, salmon flowers
+subset color: yellow, yellow flowers
+subset color: cream, cream flowers
+subset color: white, white flowers
+subset color: other, other colors, other colors of flowers

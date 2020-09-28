@@ -297,16 +297,7 @@ How the list is used:
   - membership lists the page as a member of all existing pages in the list.
 
 
-'subset: color/<color>/<name> creates a page <name> with a hierarchical
-list of all descendants with color <color>.  These pages are outside
-the normal hierarchy.
-
 Add manual links to the color pages from the flowering plants page.
-This implies that its txt is output.  However, when children are
-assigned to it, its hierarchy property prevents the children from
-being added to its txt.
-
-Include color pages (e.g. yellow flowers) in search.
 
 List color on flower pages as "member of [color], [color], [etc.] in
 [flowering plants]".  Each thing in brackets is a link.
@@ -824,6 +815,7 @@ photo_requires_color
 color_requires_photo
 *obs_requires_photo
 obs_requires_color
+requires_color
 
 
 bad ideas:
@@ -855,3 +847,7 @@ I call hide_ac() when the forward/back button is used to change pages.
 Should I also clear the search field?
 
 Move links to color pages to 'flowering plants'?
+
+Instead of using the "top" flower from the "top" child as the photo
+for a list, use the actualy most-observed flower among its
+descendants.

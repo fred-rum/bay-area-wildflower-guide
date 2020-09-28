@@ -137,6 +137,15 @@ for all taxons with associated photos (and usually at the lowest level
 of taxon hierarchy), and not for taxons without photos.
 
 
+subset color: [<color>], [list name], [<page name>]
+creates a page (named <page name>) which lists the hierarchy of
+descendants that match the indicated <color>.  If the 'subset'
+declaration is in a page to which the 'member_list' property applies,
+then member pages also list their color membership, e.g.
+
+Member of blue, pale blue in flowering plants
+
+
 The completeness of the guide is indicated with x:[txt] or xx:[txt].
 x: specifies the completeness of a genus, and xx: is for a species.
 Each can also be used at a lower taxon level when there are no other

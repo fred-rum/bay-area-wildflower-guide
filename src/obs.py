@@ -80,9 +80,10 @@ class Obs:
     def write_page_counts(self, w):
         w.write(f'<span class="parent">{self.key} keys</span>')
         w.write(f' / <span class="leaf">{self.leaf_obs} observed flowers</span>')
-        if self.color is None:
-            # Unobserved colors don't have an assigned color, so it doesn't
-            # make sense to try to print out how many match the current color.
+        if self.color is None and self.leaf_unobs == 0:
+            # Unobserved pages don't normally have an assigned color,
+            # so it doesn't make sense to try to print out how many
+            # match the current color.
             w.write(f' / <span class="unobs">{self.leaf_unobs} unobserved flowers</span>')
         w.write('\n')
 

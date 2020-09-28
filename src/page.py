@@ -283,6 +283,18 @@ class Page:
         # but container pages get added later.)
         self.color = set()
 
+        # Keep track of which colors are actually used so that we can
+        # complain about the difference.
+        self.colors_used = set()
+
+        # A list of color subsets that this page is the primary for.
+        self.color_subset = []
+
+        # If a page is a subset, backlink which page it is a subset of.
+        # (If subset_of_page gets assigned, subset_color will also get set,
+        # but we don't need subset_color otherwise.)
+        self.subset_of_page = None
+
         self.taxon_id = None # iNaturalist taxon ID
         self.obs_n = 0 # number of observations
         self.obs_rg = 0 # number of observations that are research grade
@@ -800,10 +812,26 @@ class Page:
         # it out.
         self.color_txt = color_str
 
-        # check for bad colors.
-        for color in self.color:
-            if color not in color_list:
-                error(f'page {self.name} uses undefined color {color}')
+    def record_subset_color(self, color, list_name, page_name):
+        if list_name is None:
+            list_name = color
+
+        page = find_page2(page_name, None)
+        if not page:
+            page = Page(page_name, None)
+            page.no_sci = True
+
+        page.subset_of_page = self
+        page.subset_color = color
+
+        self.link_linn_child(page)
+
+        color_subset = {
+            color: color,
+            list_name: list_name,
+            page: page
+        }
+        self.color_subset.append(color_subset)
 
     def record_ext_photo(self, label, link):
         if (label, link) in self.ext_photo_list:
@@ -1221,8 +1249,9 @@ class Page:
             # this parent.
             potential_link_set = set()
             for child in self.linn_child:
-                # Ignore children that already have a real link.
-                if child not in self.child:
+                # Ignore children that already have a real link
+                # and subset pages.
+                if child not in self.child and not child.subset_of_page:
                     child.get_potential_link_set(potential_link_set, self)
 
             if 'create' in self.prop_set and self.shadow and potential_link_set:
@@ -1273,7 +1302,7 @@ class Page:
                 fatal(f'Abbreviation "{sci}"  cannot be parsed in page "{self.name}"')
         return sci
 
-    def parse_children(self):
+    def parse_children_and_attributes(self):
         # Replace a ==[name] link with ==[page] and record the
         # parent->child relationship.
         def repl_child(matchobj):
@@ -1351,9 +1380,16 @@ class Page:
                                              matchobj.group(2))
                 continue
 
-            matchobj = re.match(r'color:(.*?)\s*$', c)
+            matchobj = re.match(r'color:\s*(.*?)\s*$', c)
             if matchobj:
                 data_object.set_colors(matchobj.group(1))
+                continue
+
+            matchobj = re.match(r'subset color:\s*(.*?)\s*(?:,\s*(.*?)\s*)?,\s*(.*?)\s*$', c)
+            if matchobj:
+                data_object.record_subset_color(matchobj.group(1),
+                                                matchobj.group(2),
+                                                matchobj.group(3))
                 continue
 
             matchobj = re.match(r'list_hierarchy\s*$', c)
@@ -1417,6 +1453,12 @@ class Page:
     def write_membership(self):
         c_list = []
 
+        # Subset pages are a special case which are always a member of
+        # their parent page regardless of properties.
+        if self.subset_of_page:
+            if self.subset_of_page not in self.membership_list:
+                self.membership_list.append(self.subset_of_page)
+
         # If the page has autopopulated parents, list them here.
         # Parents with keys are listed more prominently below.
         # Most likely no page will have more than one autopopulated
@@ -1455,7 +1497,13 @@ class Page:
             return ''
 
     def page_matches_color(self, color):
-        return (color is None or color in self.color)
+        if color is None:
+            return True
+        elif color in self.color:
+            self.colors_used.add(color)
+            return True
+        else:
+            return False
 
     def count_matching_obs(self, obs):
         obs.count_matching_obs(self)
@@ -1896,10 +1944,12 @@ class Page:
 
             w.write('<hr>\n')
 
-            if self.list_hierarchy:
+            if self.subset_of_page:
+                self.subset_of_page.write_hierarchy(w, self.subset_color,
+                                                    self.subset_page_list)
+            elif self.list_hierarchy:
                 w.write(self.txt)
-                self.write_hierarchy(w, None)
-                w.write('<hr>\n')
+                self.write_hierarchy(w, None, self.child)
             else:
                 if self.jpg_list or self.ext_photo_list:
                     for jpg in self.jpg_list:
@@ -1934,7 +1984,8 @@ class Page:
                 if self.jpg_list or self.ext_photo_list or self.txt:
                     w.write('<hr>\n')
 
-            self.write_obs(w)
+                self.write_obs(w)
+
             if self.sci:
                 self.write_external_links(w)
             if not self.rank or self.rank <= Rank.genus:
@@ -1950,16 +2001,18 @@ class Page:
                 genus_page_list[genus] = []
             genus_page_list[genus].append(self)
 
-    def write_hierarchy(self, w, color):
+    def write_hierarchy(self, w, color, page_list):
         # We write out the matches to a string first so that we can get
         # the total number of keys and flowers in the list (including children).
         s = io.StringIO()
-        list_matches(s, self.child, False, color, set())
+        list_matches(s, page_list, False, color, set())
 
         obs = Obs(color)
         self.count_matching_obs(obs)
         obs.write_page_counts(w)
         w.write(s.getvalue())
+        w.write('<hr>\n')
+        obs.write_obs(None, w)
 
 # Find all flowers that match the specified color.
 # Also find all pages that include *multiple* child pages that match.
@@ -1974,15 +2027,20 @@ def find_matches(page_subset, color):
     for page in page_subset:
         child_subset = find_matches(page.child, color)
         if len(child_subset) == 1 and color is not None:
+            # The page has only one matching child, so we add the child
+            # directly to the list and not its parent.
             match_list.extend(child_subset)
+
+            # But the parent still gets the color assignment.
+            #page.color.add(color)
+            page.colors_used.add(color)
         elif child_subset:
             match_list.append(page)
             if color is not None:
                 # Record this container page's newly discovered color.
                 page.color.add(color)
-        elif page.jpg_list and page.page_matches_color(color):
-            # only include the page on the list if it is a key or observed
-            # flower (not an unobserved flower).
+                page.colors_used.add(color)
+        elif page.page_matches_color(color):
             match_list.append(page)
     return match_list
 
