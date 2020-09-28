@@ -617,7 +617,7 @@ class Page:
         return n
 
     def remove_comments(self):
-        self.txt = re.sub(r'^#.*\n', '', self.txt, flags=re.MULTILINE)
+        self.txt = re.sub(r'^\s*#.*\n', '', self.txt, flags=re.MULTILINE)
 
     def parse_names(self):
         def repl_com(matchobj):
@@ -975,7 +975,7 @@ class Page:
     # higher ancestor if we already have a lower-ranked parent.  A
     # page for the ancestor is created if necessary.
     #
-    # This function is a thin wrapper raound link_linn_child(), which
+    # This function is a thin wrapper around link_linn_child(), which
     # is centered on the parent page, but add_linn_parent() is
     # centered on the child page because it is the page that is
     # guaranteed to be present.

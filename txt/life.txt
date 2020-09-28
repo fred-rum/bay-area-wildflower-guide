@@ -1,0 +1,22 @@
+sci:n/a
+
+is_top
+
+obs_requires_photo: genus-below
+flag_one_child: species
+
+allow_obs_promotion: species-below
+allow_outside_obs: species-below
+allow_outside_obs_promotion: species-below
+
+# every genus/species should be complete unless marked otherwise
+flag_obs_promotion_without_x: genus-species
+
+flag_obs_fill_sci: self-below
+flag_obs_fill_com: self-below
+obs_fill_alt_com: self-below
+
+
+==vascular plants
+
+==insects

@@ -1,5 +1,4 @@
 sci:class Pinopsida
-is_top
 
 ==hard pines
 

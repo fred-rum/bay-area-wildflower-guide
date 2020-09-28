@@ -456,7 +456,7 @@ if arg('-tree7'):
 
 top_list = [x for x in page_array if not x.parent]
 
-for page in page_array:
+for page in full_page_array:
     page.apply_most_props()
     if not (page.sci or page.no_sci):
         error(page.name, prefix='No scientific name given for the following pages:')

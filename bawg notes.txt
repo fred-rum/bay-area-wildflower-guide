@@ -820,39 +820,6 @@ can bail out in the middle if, e.g., the species is a new observation,
 but we've already completed the chain from the genus level.
 
 
-If I don't have a page for a subspecies, then observations.csv maps it
-to the page for the species, and that's fine.  However, if it wasn't
-found in the bay area, then presumably it is not a bay area species,
-and it doesn't make sense to record the observation for any
-higher-level taxon.
-
-If I map an observation to a higher taxon, I shouldn't apply
-iNaturalist's common name.
-
-Compared to before, observation counts are
-- more liberal for an observation of an auto-generated family
-- more restrictive for a high-rank observation outside the bay area
-
-- to do: more liberal for a subspecies observed outside the bay area
-of a bay-area species; i.e. if a subspecies isn't found, promote it to
-a species before checking the location.
-
-Create a property to allow a non-bay-area observation, e.g.
-allow_outside_obs: species-below
-
-observation properties require two passes on observations.csv:
-- once to build the Linnaean hierarchy
-- a second time to apply observations while respecting properties
-
-Note that the check is performed after taxon promotion.  E.g. if there
-is no matching bay area species, the observation might try again at
-the genus level, which would fail to match the property and thus be
-excluded.
-
-For many properties, I might want to create a master page, 'life',
-even if it isn't included in index.html.  Otherwise I'll have to
-include the property on every top-level page.
-
 photo_requires_color
 color_requires_photo
 *obs_requires_photo
@@ -886,3 +853,5 @@ flag_no_com: self-below ... not worth implementing if I never use it.
 
 I call hide_ac() when the forward/back button is used to change pages.
 Should I also clear the search field?
+
+Move links to color pages to 'flowering plants'?
