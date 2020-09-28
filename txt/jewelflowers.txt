@@ -4,17 +4,23 @@ x:rare
 ==bristly jewelflower:S. glandulosus
 . <b>stem 15--90 cm</b>
 . bilateral calyx
+. <b>petals crinkled</b>
 . variable colors depending on subspecies
+. <b>proximal stem and proximal leaves are stiff-hairy</b> in most subspecies.
+.. proximal/dentate leaves often have gland-tipped teeth.
 . scattered
 
 ==mountain jewelflower:S. tortuosus
-. very similar to S. glandulosus, but
-. raceme bracted below lowest flower or between lowest two flowers [<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0403+0604">example</a>)
+. <b>very similar to {-bristly jewelflower}, but</b>
+.. petals not crinkled
+.. raceme bracted below lowest flower or between lowest two flowers [<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0403+0604">example</a>)
+.. stem and leaves glabrous
 . very rare at the unvisited edges of the bay area
 
 ==brewer's jewelflower:S. breweri
-. very similar to S. glandulosus, but
-. petals not crinkled
+. <b>very similar to {-bristly jewelflower}, but</b>
+.. petals not crinkled
+.. stem and leaves glabrous
 . on the east side of Mt. Hamilton
 
 ==tamalpais jewelflower:S. batrachopus
