@@ -2,7 +2,7 @@ sci:subphylum Angiospermae
 default_ancestor
 
 create: family
-member_link: family
+member_link: self, family
 link: self-subtribe
 #flag_link: genus-species
 

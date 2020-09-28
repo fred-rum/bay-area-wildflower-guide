@@ -297,11 +297,6 @@ How the list is used:
   - membership lists the page as a member of all existing pages in the list.
 
 
-Add manual links to the color pages from the flowering plants page.
-
-List color on flower pages as "member of [color], [color], [etc.] in
-[flowering plants]".  Each thing in brackets is a link.
-
 ryegrass's lists doesn't include 'other flowers' because it has
 exactly one child with color 'other'.  That is dumb, and it should be
 listed with color 'other' even if doesn't appear on the list page.
@@ -851,3 +846,5 @@ Move links to color pages to 'flowering plants'?
 Instead of using the "top" flower from the "top" child as the photo
 for a list, use the actualy most-observed flower among its
 descendants.
+
+Add manual links to the color pages from the flowering plants page.

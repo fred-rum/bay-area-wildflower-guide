@@ -24,21 +24,6 @@ genus_family = {} # genus name -> family name
 # can't find an ancestor with 'is_top' declared.
 default_ancestor = None
 
-# Define a list of supported colors.
-color_list = ['blue',
-              'purple',
-              'red purple',
-              'red',
-              'orange',
-              'yellow',
-              'white',
-              'pale blue',
-              'pale purple',
-              'pink',
-              'salmon',
-              'cream',
-              'other']
-
 trie = Trie([x.name for x in Rank])
 ex = trie.get_pattern()
 re_group = re.compile(rf'({ex}):\s*(.*?)\s*$')
@@ -287,8 +272,8 @@ class Page:
         # complain about the difference.
         self.colors_used = set()
 
-        # A list of color subsets that this page is the primary for.
-        self.color_subset = []
+        # A list of color pages that this page is the primary for.
+        self.color_pages = []
 
         # If a page is a subset, backlink which page it is a subset of.
         # (If subset_of_page gets assigned, subset_color will also get set,
@@ -555,6 +540,16 @@ class Page:
 
     def format_elab(self, ital=True):
         return format_elab(self.elab, ital)
+
+    def format_short(self):
+        # When choosing a short name, the common name normally has priority.
+        # However, if the scientific name matches the page name (e.g. because
+        # there were multiple pages with the same common name), use the
+        # scientific name instead.
+        if self.com and self.sci != self.name:
+            return self.format_com()
+        else:
+            return self.format_elab()
 
     def format_full(self, lines=2):
         com = self.format_com()
@@ -823,15 +818,11 @@ class Page:
 
         page.subset_of_page = self
         page.subset_color = color
+        page.subset_list_name = list_name
 
         self.link_linn_child(page)
 
-        color_subset = {
-            color: color,
-            list_name: list_name,
-            page: page
-        }
-        self.color_subset.append(color_subset)
+        self.color_pages.append(page)
 
     def record_ext_photo(self, label, link):
         if (label, link) in self.ext_photo_list:
@@ -1425,16 +1416,18 @@ class Page:
     def link_style(self):
         if self.has_child_key:
             return 'parent'
-        elif self.child:
+        elif self.child or self.subset_of_page:
             return 'family'
         elif self.jpg_list:
             return 'leaf'
         else:
             return 'unobs'
 
-    def create_link(self, lines):
+    def create_link(self, lines, text=None):
         pageurl = url(self.name)
-        return f'<a href="{pageurl}.html" class="{self.link_style()}">{self.format_full(lines)}</a>'
+        if text is None:
+            text = self.format_full(lines)
+        return f'<a href="{pageurl}.html" class="{self.link_style()}">{text}</a>'
 
     def align_column(self, intro, c_list):
         if len(c_list) == 1:
@@ -1450,6 +1443,22 @@ class Page:
         else:
             return ''
 
+    # Create a link to a page that this page is a member of.
+    # Also include any color subsets of that page that this page is part of.
+    def member_of(self, ancestor):
+        color_list = []
+        for color_page in ancestor.color_pages:
+            if color_page.subset_color in self.color:
+                color_list.append(color_page.create_link(1, color_page.subset_list_name))
+        if color_list:
+            # When there is a color list, it makes the member line long
+            # and complicated.  Simplify it somewhat by using the ancestor's
+            # short name instead of its full name.
+            return (', '.join(color_list) + ' in ' +
+                    ancestor.create_link(1, ancestor.format_short()))
+        else:
+            return ancestor.create_link(1)
+
     def write_membership(self):
         c_list = []
 
@@ -1460,16 +1469,15 @@ class Page:
                 self.membership_list.append(self.subset_of_page)
 
         # If the page has autopopulated parents, list them here.
-        # Parents with keys are listed more prominently below.
+        # Parents with keys are listed more prominently in a separate section.
         # Most likely no page will have more than one autopopulated
         # parent, so I don't try to do particularly smart sorting here.
         for parent in reversed(sort_pages(self.parent)):
             if not parent.has_child_key:
-                link = parent.create_link(1)
-                c_list.append(link)
+                c_list.append(self.member_of(parent))
 
         # membership_list lists the ancestors that this page should
-        # be listed as a 'member of', from lowest-ranked to highest.
+        # be listed as a 'member of', unsorted.
         #
         # If this page isn't a direct child of its real ancestor, provide
         # a link to it.  (A direct child would have been listed above
@@ -1477,11 +1485,12 @@ class Page:
         # is likely to have been autopopulated, but not necessarily.
         #
         # For a shadow ancestor, write it as unlinked text.
-        for ancestor in self.membership_list:
+        ordered_list = sort_pages(self.membership_list, with_depth=True)
+        for ancestor in reversed(ordered_list):
             if ancestor.shadow:
                 c_list.append(ancestor.format_full(1))
             elif ancestor not in self.parent:
-                c_list.append(ancestor.create_link(1))
+                c_list.append(self.member_of(ancestor))
 
         return self.align_column('Member of', c_list)
 
@@ -1497,13 +1506,7 @@ class Page:
             return ''
 
     def page_matches_color(self, color):
-        if color is None:
-            return True
-        elif color in self.color:
-            self.colors_used.add(color)
-            return True
-        else:
-            return False
+        return (color is None or color in self.color)
 
     def count_matching_obs(self, obs):
         obs.count_matching_obs(self)
@@ -1640,24 +1643,6 @@ class Page:
             w.write(f'<p class="list-head">Not all sites agree about the scientific name:</p>\n<ul>\n<li>{txt}</li>\n</ul>\n')
         else:
             w.write(f'<p>\n{txt}\n</p>\n')
-
-    def write_lists(self, w):
-        if not self.has_linn_ancestor(name_page['flowering plants']):
-            return
-
-        if not self.child and not self.jpg_list:
-            return
-
-        w.write('<p class="list-head">Flower lists that include this page:</p>\n')
-        w.write('<ul>\n')
-
-        for color in color_list:
-            if color in self.color:
-                colorurl = url(color)
-                w.write(f'<li><a href="{colorurl}.html">{color} flowers</a></li>\n')
-
-        w.write('<li><a href="flowering%20plants.html">all flowers</a></li>\n')
-        w.write('</ul>\n')
 
     # List a single page, indented if it is under a parent.
     def list_page(self, w, indent, has_children):
@@ -1988,8 +1973,6 @@ class Page:
 
             if self.sci:
                 self.write_external_links(w)
-            if not self.rank or self.rank <= Rank.genus:
-                self.write_lists(w)
             write_footer(w)
 
     def record_genus(self):
@@ -2033,15 +2016,15 @@ def find_matches(page_subset, color):
 
             # But the parent still gets the color assignment.
             #page.color.add(color)
-            page.colors_used.add(color)
         elif child_subset:
             match_list.append(page)
             if color is not None:
                 # Record this container page's newly discovered color.
-                page.color.add(color)
-                page.colors_used.add(color)
+                #page.color.add(color)
+                pass
         elif page.page_matches_color(color):
             match_list.append(page)
+        page.colors_used.add(color)
     return match_list
 
 # match_set can be either a set or list of pages.
