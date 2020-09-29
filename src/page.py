@@ -243,6 +243,10 @@ class Page:
         # hierarchy to the HTML rather than just the list of children.
         self.list_hierarchy = False
 
+        # end_hierarchy is True if we want a hierarchy listing to stop at
+        # this page and not traverse to its descendants.
+        self.end_hierarchy = False
+
         # parent and child construct one or more directed acyclic graphs (DAGs)
         # of the real pages to be output to HTML.
         self.parent = set() # an unordered set of real parent pages
@@ -1388,6 +1392,11 @@ class Page:
                 data_object.list_hierarchy = True
                 continue
 
+            matchobj = re.match(r'end_hierarchy\s*$', c)
+            if matchobj:
+                data_object.end_hierarchy = True
+                continue
+
             matchobj = re.match(r'(x|xx):\s*(!?)(none|ba|ca|any|hist|rare|hist/rare|more|uncat)\s*$', c)
             if matchobj:
                 data_object.set_complete(matchobj)
@@ -1661,8 +1670,15 @@ class Page:
         w.write(f'<div class="list-box{indent_class}">')
 
         if self.jpg_list:
+            jpg = self.jpg_list[0]
+        elif self.end_hierarchy:
+            jpg = self.get_jpg()
+        else:
+            jpg = None
+
+        if jpg:
             pageurl = url(self.name)
-            jpgurl = url(self.jpg_list[0])
+            jpgurl = url(jpg)
             w.write(f'<a href="{pageurl}.html"><div class="list-thumb"><img class="boxed" src="../{db_pfx}thumbs/{jpgurl}.jpg" alt="photo"></div></a>')
 
         w.write(f'{self.create_link(2)}</div>\n')
@@ -1911,14 +1927,17 @@ class Page:
                 c_list.append(s)
 
             full_name = self.format_full(lines=1, ital=False)
-            if self.has_child_key:
-                desc = f'Key to {full_name} in the Bay Area Wildflower Guide.'
+            what = f'{full_name} in the Bay Area Wildflower Guide.'
+            if self.list_hierarchy:
+                desc = f'Hierarchy of {what}'
+            elif self.has_child_key:
+                desc = f'Key to {what}'
             elif self.child or self.subset_of_page:
-                desc = f'List of {full_name} in the Bay Area Wildflower Guide.'
+                desc = f'List of {what}'
             elif self.txt:
-                desc = f'Description of {full_name} in the Bay Area Wildflower Guide.'
+                desc = f'Description of {what}'
             else:
-                desc = f'Stub for {full_name} in the Bay Area Wildflower Guide.'
+                desc = f'Stub for {what}'
             write_header(w, title, h1, nospace=bool(c_list), desc=desc)
 
             if c_list:
@@ -1939,6 +1958,7 @@ class Page:
             w.write('<hr>\n')
 
             if self.subset_of_page:
+                w.write(self.txt)
                 self.subset_of_page.write_hierarchy(w, self.subset_color,
                                                     self.subset_page_list)
             elif self.list_hierarchy:
@@ -2001,7 +2021,7 @@ class Page:
 
         obs = Obs(color)
         self.count_matching_obs(obs)
-        obs.write_page_counts(w)
+        #obs.write_page_counts(w)
         w.write(s.getvalue())
         w.write('<hr>\n')
         obs.write_obs(None, w)
@@ -2049,7 +2069,10 @@ def list_matches(w, match_set, indent, color, seen_set):
         match_list = sort_pages(match_set, color=color)
 
     for page in match_list:
-        child_matches = find_matches(page.child, color)
+        if page.end_hierarchy:
+            child_matches = []
+        else:
+            child_matches = find_matches(page.child, color)
         if child_matches:
             page.list_page(w, indent, child_matches)
             list_matches(w, child_matches, True, color, seen_set)

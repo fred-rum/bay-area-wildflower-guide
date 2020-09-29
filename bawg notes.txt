@@ -849,10 +849,15 @@ descendants.
 
 Add manual links to the color pages from the flowering plants page.
 
-Use 'end_hierarchy' to stop the descent of a hierarchy?  E.g. use
-'hierarchy' in 'life', then use 'end_hierarchy' in 'flowering plants',
-'ferns', 'conifers', 'insects', etc.
-
 PWA apps in the Android Play Store
 https://firt.dev/pwa-playstore
 $25
+
+When listing my observations for a taxon, make links to parks
+&q=Henry+Coe
+and months
+&month=4
+?
+
+life
+taxon_id=48460

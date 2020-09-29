@@ -1,6 +1,7 @@
 sci:n/a
 
 is_top
+list_hierarchy
 
 obs_requires_photo: genus-below
 flag_one_child: species
@@ -20,3 +21,4 @@ obs_fill_alt_com: self-below
 ==vascular plants
 
 ==insects
+end_hierarchy

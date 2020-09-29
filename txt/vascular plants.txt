@@ -1,7 +1,10 @@
 sci:phylum Tracheophyta
 
 ==flowering plants
+end_hierarchy
 
 ==conifers
+end_hierarchy
 
 ==ferns
+end_hierarchy
