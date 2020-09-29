@@ -1731,18 +1731,30 @@ class Page:
             child.set_glossary(glossary)
 
     def parse_child_and_key(self, child_idx, suffix, text):
+        def repl_example(matchobj):
+            suffix = matchobj.group(1)
+            jpg = child.name + suffix
+            jpgurl = url(jpg)
+            if jpg not in child.jpg_list:
+                error(f'Broken [example{suffix}] for child {child.name} in {self.name}')
+            return f'<a class="leaf" href="../photos/{jpgurl}.jpg">[example]</a>'
+
         child = self.child[child_idx]
 
-        # Give the child a copy of the text from the parent's key.
-        # The child can use this (pre-parsed) text if it has no text
-        # of its own.
+        # If the key includes '[example<,suffix>]', create an [example]
+        # link in the parent text, but remove the link from the child key.
+        key_txt = re.sub(r'\s*\[example(,.*?)\]', '', text)
+        text = re.sub(r'\[example(,.*?)\]', repl_example, text)
+
+        # Give the child a copy of the text from the parent's key
+        # (minus any [example] links).  The child can use this (pre-parsed)
+        # text if it has no text of its own.
         #
         # If a child has more than one parent key, priority for key_txt
         # is given to the ranked parent.
-        if (self.rank and text) or not child.key_txt:
-            child.key_txt = text
+        if key_txt and (self.rank or not child.key_txt):
+            child.key_txt = key_txt
 
-        if text:
             # Remember that at least one child was given key info.
             self.has_child_key = True
 

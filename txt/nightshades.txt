@@ -56,9 +56,9 @@ color: white
 . hairs: generally simple, < 1mm, +- curved, white
 . fruit: <b>glossy</b> w/ <b>sepals not reflexed</b>
 
-==american black nightshade,2:S. americanum
+==american black nightshade:S. americanum
 color: white
-. corolla: <b>5--8 mm diameter</b> [or more?] [corrected], white
+. corolla: <b>5--8 mm diameter</b> [or more?] [corrected] [example,2], white
 . leaf: 2--15 cm, entire to coarsely wavy-toothed
 . hairs: +- 0 or short, +- appressed or curved, nonglandular
 . fruit: <b>glossy</b> w/ <b>sepals reflexed</b>

@@ -1,12 +1,12 @@
 x:hist
 
-==scots broom,6:Cytisus scoparius
+==scots broom:Cytisus scoparius
 color:yellow
 . yellow corolla
 . banner generally > 10--25 mm
 . <b>calyx glabrous</b>
 . <b>fruit flat, glabrous except margin</b>
-. <b>branches generally 5-angled</b>
+. <b>branches generally 5-angled</b> [example,6]
 . also called scotch broom
 . common everywhere except the southeast bay
 

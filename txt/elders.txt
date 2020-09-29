@@ -3,13 +3,13 @@ x:ca
 
 There is a general difference between the leaves (blue elder is bowed), but it is not consistent enough to be used for identification.
 
-==blue elder,2:S. cerulea
+==blue elder:S. cerulea
 sci_fpj:Sambucus nigra ssp. caerulea
 color: white, cream, yellow
 xx:ca
 . inflorescence +- flat-topped, central axis generally not dominant
 . petals +- spreading
-. glaucus blue berries
+. glaucus blue berries [example,2]
 Formerly a subspecies of black elderberry, but now elevated to its own species.
 
 ==red-berried elder:S. racemosa

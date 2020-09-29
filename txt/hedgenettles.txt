@@ -6,16 +6,16 @@ Key features:
 . inflorescence elongated or compact
 . leaf hairs long & silky or not
 
-==california hedge nettle,3:S. bullata
+==california hedge nettle:S. bullata
 color: pale purple
-. <b>no pouch at base of corolla</b>
+. <b>no pouch at base of corolla</b> [example,3]
 . inflorescence elongated
 . leaf blade 3--18 cm, +- ovate, base +- cordate, tip obtuse; soft- and stiff-hairy, glandular
 . corolla pink to +- purple
 
-==rough hedgenettle,3:S. rigida
+==rough hedgenettle:S. rigida
 color: pale purple
-. pouch at base of corolla
+. pouch at base of corolla [example,3]
 . inflorescence elongated
 . leaf blade 5--9 cm, ovate to lanceolate, base rounded to cordate, tip acute to obtuse; <b>glabrous to soft-hairy (not silky)</b>, occasionally glandular
 . stem, herbage +- glandular, not resinous; lower corolla lip 4--6 mm wide

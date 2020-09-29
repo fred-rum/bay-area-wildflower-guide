@@ -9,13 +9,13 @@ Key features:
 
 Although the leaves have general difference, there is enough variety within a species to make them difficult to use as diagnostic tools.  In addition, some of the characteristics described by Jepson cannot be seen in CalPhotos.
 
-==himalayan blackberry,2:R. armeniacus
+==himalayan blackberry:R. armeniacus
 color: white
 . Plant: to 3 m, arched to mounded
 . Prickles: many, <b>stout, wide-based</b>, straight or curved
 . Stem: to 20(25) mm diam, <b>5-angled</b>, finely hairy or generally glabrous, not glaucous
 . Leaf: simple or compound, leaflets 3(5)
-. Sepals: hairy, <b>nonglandular</b>
+. Sepals: hairy, <b>nonglandular</b> [example,2]
 . Fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
 
 ==whitebark raspberry:R. leucodermis
@@ -37,16 +37,16 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0315+2744
 .. all others are white
 . Fruit: raspberry-type, +- yellow to orange to red
 
-==california blackberry,2:R. ursinus
+==california blackberry:R. ursinus
 color: white
 . Plant: prostrate to decumbent
 . Prickles: <b>weak, slender</b>, straight
 . Stem: 2--10 mm diam, <b>not angled</b>, +-glabrous to hairy, +-with stalked glands, glaucous
 . Leaf: simple or compound, leaflets 3(5), gray-hairy abaxially
-. Sepals: hairy, <b>prickly</b>, +-with stalked glands
+. Sepals: hairy, <b>prickly</b>, +-with stalked glands [example,2]
 . Fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
 
-==thimbleberry,2:R. parviflorus
+==thimbleberry:R. parviflorus
 color: white
 . Plant 0.5--2.5 m, erect
 . <b>No prickles</b>
@@ -54,7 +54,7 @@ color: white
 . <b>Leaf: simple, palmately (3)5-lobed</b>
 . Stipules: <b>triangular-lanceolate to narrow-ovate, 1.5--3 mm wide</b>
 .. all others are thread-like to linear, <= 1 mm wide
-. Sepals hairy, stalked-glandular
+. Sepals hairy, stalked-glandular [example,2]
 . Fruit: <b>raspberry-type</b> (hollow when picked), <b>red</b>
 
 ==thornless elmleaf blackberry:R. ulmifolius var. anoplothyrsus

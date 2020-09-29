@@ -1,9 +1,9 @@
 sci:Dimorphotheca spp.
 x:ca
 
-==trailing african daisy,2:D. fruticosa
+==trailing african daisy:D. fruticosa
 color: white, pale purple, pink
-. stem sometimes >> 1 m, <b>trailing to ascending</b>, sparingly branched, rooting at ground contact
+. stem sometimes >> 1 m, <b>trailing to ascending</b> [example,2], sparingly branched, rooting at ground contact
 
 ==blue-and-white daisybush:D. ecklonis
 bush:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0412+0932

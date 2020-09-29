@@ -14,11 +14,11 @@ color: yellow
 . <b>phyllaries glabrous or glandular</b>
 . heads generally 1, large
 
-==gray mule-ears,4:W. helenioides
+==gray mule-ears:W. helenioides
 color: yellow
 . plant densely tomentose, often becoming +- glabrous
 . outer spreading phyllaries 4--7+ cm, wide, leaf-like, generally >> inner erect phyllaries
-. <b>phyllaries persistently tomentose</b>
+. <b>phyllaries persistently tomentose</b> [example,4]
 . head generally 1, large
 
 ]

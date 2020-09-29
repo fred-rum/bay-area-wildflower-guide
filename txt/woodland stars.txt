@@ -11,9 +11,9 @@ color: white
 . petals entire or with > 3 lobes
 . very rare: east bay
 
-==san francisco woodland-star,2:L. affine
+==san francisco woodland-star:L. affine
 color: white
-. hypanthium tapered to pedicel
+. hypanthium tapered to pedicel [example,2]
 . basal leaves lobed +- <= 50% to base
 . most proximal cauline leaf 3-lobed
 . petals white

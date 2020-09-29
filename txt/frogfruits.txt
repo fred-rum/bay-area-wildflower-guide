@@ -1,9 +1,9 @@
 sci:Phyla spp.
 x:ca
 
-==turkey tangle frogfruit,3:P. nodiflora
+==turkey tangle frogfruit:P. nodiflora
 color: pale purple
-. leaf blade generally widest at or distal to middle, 5--30 mm long, margin +- entire or 5--11 teeth from mid-blade to tip
+. leaf blade generally widest at or distal to middle, 5--30 mm long, margin +- entire or 5--11 teeth from mid-blade to tip [example,3]
 
 ==lanceleaf frogfruit:P. lanceolata
 . leaf blade widest proximal to middle, 25--60 mm long, 11-21 teeth from proximal to mid-blade to tip

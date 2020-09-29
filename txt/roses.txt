@@ -10,20 +10,20 @@ Key features:
 [
 <h3>slender prickles</h3>
 
-==baldhip rose,-3:R. gymnocarpa
+==baldhip rose:R. gymnocarpa
 color: pink, red purple
 . loose shrub
-. <b>prickles 2--8 mm, +- slender, straight</b>
+. <b>prickles 2--8 mm, +- slender, straight</b> [example,-3]
 . leaf axis generally glabrous
 . leaflets glabrous
 . sepals glandular or not, entire
 . <b>petals +- 10 mm</b>, pink to red
 . very common in the bay area
 
-==ground rose,-2:R. spithamea
+==ground rose:R. spithamea
 color: red purple
 . <b>dwarf shrub, generally < 50 cm</b>
-. <b>prickles 3--8(12) mm, generally slender (thick-based), +- straight</b>
+. <b>prickles 3--8(12) mm, generally slender (thick-based), +- straight</b> [example,-2]
 . leaf axis generally glabrous (finely hairy), glandular
 . leaflets 5--7(9), (+-) glabrous
 . sepals generally glandular, entire
@@ -34,10 +34,10 @@ color: red purple
 [
 <h3>thick-based prickles</h3>
 
-==california wild rose,5:R. californica
+==california wild rose:R. californica
 color: pink
 . shrub or thicket-forming, 80 cm -- 2.5 m
-. <b>prickles 3--15 mm, thick-based and compressed, generally curved</b>
+. <b>prickles 3--15 mm, thick-based and compressed, generally curved</b> [example,5]
 . leaf axis +- shaggy-hairy (+- glabrous), hairs to 1 mm, glandless or glandular
 . leaflets 5--7(9), +- hairy, sometimes glandular
 . sepals glandular or not, entire

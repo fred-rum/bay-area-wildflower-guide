@@ -198,6 +198,10 @@ relationship.  The link is just the common and scientific names of the
 child inline with the rest of the text, without any image or special
 formatting.
 
+[example<,suffix>] in a child's key is replaced with a link to the
+corresponding jpg, but only in the parent.  If the key text is copied
+to the child, the link is removed from its copy.
+
 figure:filename on a line by itself creates a thumbnail and a link to
 the corresponding SVG file in the figures directory.  The '.svg'
 suffix is optional in the txt.
