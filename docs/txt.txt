@@ -62,7 +62,9 @@ first image for the page (a jpg or a CalPhotos placeholder) or a blank
 placeholder.  If the child declaration specifies the common name
 ending with ',[jpg_suffix]', this is stripped from the link, but the
 specified jpg is used as the link image instead of the default first
-image.
+image.  If the (common) name is prefixed with a asterisk, '*', the
+photo used to represent that child on the page is also used to
+represent the main page in its parent.
 
 If there is additional text in the same paragraph (on lines following
 the child declaration, not separated by a blank line), the link and

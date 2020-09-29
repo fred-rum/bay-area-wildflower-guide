@@ -6,3 +6,5 @@ sci: tribe Cichorieae
 
 ==california chicory
 . corolla white
+
+rep:dandelions

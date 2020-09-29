@@ -25,7 +25,7 @@ color: yellow
 [
 <h2>phyllaries short and narrow</h2>
 
-==narrowleaf mule-ears:W. angustifolia
+==*narrowleaf mule-ears:W. angustifolia
 color: yellow
 . phyllaries 1.5--3 cm, narrow, generally not leaf-like, outer +- same as inner
 . phyllaries generally many

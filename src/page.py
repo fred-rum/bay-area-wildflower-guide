@@ -1323,7 +1323,7 @@ class Page:
         # Replace a ==[name] link with ==[page] and record the
         # parent->child relationship.
         def repl_child(matchobj):
-            # ==com[,suffix][:sci] -> creates a child relationship with the
+            # ==[*]com[,suffix][:sci] -> creates a child relationship with the
             #   page named by [com] or [sci] and creates two links to it:
             #   an image link and a text link.
             #   If a suffix is specified, the jpg with that suffix is used
@@ -1335,9 +1335,10 @@ class Page:
             #   is supplied by the child link, that name is added to the child.
             #   The scientific name can be in elaborated or stripped format.
             #   The genus can also be abbreviated as '[cap.letter]. '
-            com = matchobj.group(1)
-            suffix = matchobj.group(2)
-            sci = matchobj.group(3)
+            is_rep = matchobj.group(1)
+            com = matchobj.group(2)
+            suffix = matchobj.group(3)
+            sci = matchobj.group(4)
 
             if not suffix:
                 suffix = ''
@@ -1365,6 +1366,9 @@ class Page:
                 warning(f'was adding {child_page.name} as a child of {self.name}')
                 raise
 
+            if is_rep:
+                self.rep_child = child_page
+
             # Replace the =={...} field with a simplified =={suffix} line.
             # This will create the appropriate link later in the parsing.
             return f'=={suffix}'
@@ -1378,7 +1382,7 @@ class Page:
             #   optional jpg suffix: (,[-0-9]\S*|)?
             #   optional colon then scientific name: (?::\s*(.+?))?
             # All can be separated by whitespace: \s*
-            matchobj = re.match(r'==\s*([^:]*?)\s*(,[-0-9]\S*|)?\s*(?::\s*(.+?))?\s*$', c)
+            matchobj = re.match(r'==\s*(\*?)\s*([^:]*?)\s*(,[-0-9]\S*|)?\s*(?::\s*(.+?))?\s*$', c)
             if matchobj:
                 c_list.append(repl_child(matchobj))
                 data_object = self.child[-1]

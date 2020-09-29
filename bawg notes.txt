@@ -843,9 +843,12 @@ Should I also clear the search field?
 
 Add manual links to the color pages from the flowering plants page.
 
-PWA apps in the Android Play Store
+Progressive Web App apps in the Android Play Store
 https://firt.dev/pwa-playstore
 $25
+
+https://vaadin.com/pwa/learn/caching-strategies
+https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook
 
 When listing my observations for a taxon, make links to parks
 &q=Henry+Coe
@@ -853,16 +856,15 @@ and months
 &month=4
 ?
 
-In a hierarchy, list, or key, each child taxon has a representative
-jpg.  By default, this is the most-observed flower among its
-descendants, using its first jpg in the list.  If a child is declared
-with '==*name', that child's representative jpg becomes the
-representative for its parent, and the observation count is among all
-descendants of the parent, not just the child.  I.e. an explicit
-representative gets a higher effective count than an implicit
-representative when finding representatives at a higher level.
-
 Use the representative jpg in a circular mask as the home link icon?
+img.home-icon ... border-radius: 50%;
 
 Remove support for ',[digit]' child declarations.
 
+G4 dimensions:
+screen 120mm/68mm
+Chrome browser area: 96mm/68mm => 1536x1080
+40px = ~7.5mm = 120 actual pixels
+16 actual pixels/mm
+
+Resize home icon to 120 pixels.
