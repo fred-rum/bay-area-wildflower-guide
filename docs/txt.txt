@@ -119,6 +119,16 @@ the child relationships are retained.  The hierarchy is always ordered
 by observation frequency, regardless of the order in which children
 are declared.
 
+The hierarchy listing stops traversing descendants when it reaches a
+page marked with 'end_hierarchy'.
+
+
+'taxon_id: <value>' declares the iNaturalist taxon_id.  The taxon_id
+is retrieved for many taxons from observations.csv, but a manual
+declaration can be useful if a particular taxon is commonly referenced
+but never observed, especially if it has an ambiguous scientific name
+(e.g. genus Allium) or no scientific name (e.g. life).
+
 
 A page can declare a Linnaean ancestor (a higher group in the Linnaean
 taxonomy) as follows:

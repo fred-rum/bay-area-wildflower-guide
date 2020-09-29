@@ -284,7 +284,7 @@ class Page:
         # but we don't need subset_color otherwise.)
         self.subset_of_page = None
 
-        self.taxon_id = None # iNaturalist taxon ID
+        self.taxon_id = None # iNaturalist taxon ID (stored as a string)
         self.obs_n = 0 # number of observations
         self.obs_rg = 0 # number of observations that are research grade
         self.parks = {} # a dictionary of park_name : count
@@ -1397,6 +1397,11 @@ class Page:
                 data_object.end_hierarchy = True
                 continue
 
+            matchobj = re.match(r'taxon_id\s*:\s*(\d+)$', c)
+            if matchobj:
+                data_object.taxon_id = matchobj.group(1)
+                continue
+
             matchobj = re.match(r'(x|xx):\s*(!?)(none|ba|ca|any|hist|rare|hist/rare|more|uncat)\s*$', c)
             if matchobj:
                 data_object.set_complete(matchobj)
@@ -1521,9 +1526,10 @@ class Page:
         obs.count_matching_obs(self)
 
     # Write the iNaturalist observation data.
-    def write_obs(self, w):
-        obs = Obs(None)
-        self.count_matching_obs(obs)
+    def write_obs(self, w, obs=None):
+        if not obs:
+            obs = Obs(None)
+            self.count_matching_obs(obs)
 
         if obs.n == 0 and not self.sci:
             return
@@ -2024,7 +2030,10 @@ class Page:
         #obs.write_page_counts(w)
         w.write(s.getvalue())
         w.write('<hr>\n')
-        obs.write_obs(None, w)
+        if color:
+            obs.write_obs(None, w)
+        else:
+            self.write_obs(w, obs)
 
 # Find all flowers that match the specified color.
 # Also find all pages that include *multiple* child pages that match.

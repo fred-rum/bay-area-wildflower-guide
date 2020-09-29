@@ -1,4 +1,5 @@
 sci:Allium spp.
+taxon_id: 47357
 x:!hist/rare
 
 A major distinguishing feature is the outer bulb coat cell structure.  So an ID may be impossible without digging up a plant.
