@@ -506,13 +506,17 @@ class Glossary:
         self.txt = parse_txt(self.name, self.txt, None, self)
 
         with open(f'{working_path}/html/{self.name}.html', mode='w') as w:
-              write_header(w, self.name, None, nospace=True)
-              w.write('<h4 id="title">Glossary table of contents</h4>\n')
-              master_glossary.write_toc(w, self)
-              w.write(f'<a href="http://ucjeps.berkeley.edu/IJM_glossary.html">Jepson eFlora</a>\n')
-              w.write(f'<h1>{self.name}</h1>\n')
-              w.write(self.txt)
-              write_footer(w)
+            if self.taxon:
+                desc = f'Glossary of terms used for {self.taxon} in the Bay Area Wildflower Guide.'
+            else:
+                desc = f'Glossary of terms used in the Bay Area Wildflower Guide.'
+            write_header(w, self.name, None, nospace=True, desc=desc)
+            w.write('<h4 id="title">Glossary table of contents</h4>\n')
+            master_glossary.write_toc(w, self)
+            w.write(f'<a href="http://ucjeps.berkeley.edu/IJM_glossary.html">Jepson eFlora</a>\n')
+            w.write(f'<h1>{self.name}</h1>\n')
+            w.write(self.txt)
+            write_footer(w)
 
         for child in sorted(self.child, key=attrgetter('name')):
             child.write_html()

@@ -91,16 +91,16 @@ def link_figures_text(name, txt):
 # h1 is optional and specifies text for an h1 header at the top of the page.
 # nospace indicates whether to omit the standard vertical whitespace below
 # the h1 header (e.g. because alternative taxon names will be listed below it).
-def write_header(w, title, h1, nospace=False):
-    if nospace:
-        space_class = ' class="nospace"'
+def write_header(w, title, h1, nospace=False, desc=None):
+    if desc:
+        content = f'\n<meta name="description" content="{desc}">'
     else:
-        space_class = ''
+        content = ''
     w.write(f'''<!-- Copyright Chris Nelson - All rights reserved. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">{content}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <script async src="../search.js"></script>
@@ -127,6 +127,10 @@ def write_header(w, title, h1, nospace=False):
 <div id="body">
 ''')
     if h1:
+        if nospace:
+            space_class = ' class="nospace"'
+        else:
+            space_class = ''
         w.write(f'<h1 id="title"{space_class}>{h1}</h1>\n')
 
 def write_footer(w):

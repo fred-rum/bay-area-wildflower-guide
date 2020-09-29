@@ -551,9 +551,9 @@ class Page:
         else:
             return self.format_elab()
 
-    def format_full(self, lines=2):
+    def format_full(self, lines=2, ital=True):
         com = self.format_com()
-        elab = self.format_elab()
+        elab = self.format_elab(ital=ital)
         if not com:
             return elab
         elif not elab:
@@ -1910,7 +1910,16 @@ class Page:
             if s:
                 c_list.append(s)
 
-            write_header(w, title, h1, nospace=bool(c_list))
+            full_name = self.format_full(lines=1, ital=False)
+            if self.has_child_key:
+                desc = f'Key to {full_name} in the Bay Area Wildflower Guide.'
+            elif self.child or self.subset_of_page:
+                desc = f'List of {full_name} in the Bay Area Wildflower Guide.'
+            elif self.txt:
+                desc = f'Description of {full_name} in the Bay Area Wildflower Guide.'
+            else:
+                desc = f'Stub for {full_name} in the Bay Area Wildflower Guide.'
+            write_header(w, title, h1, nospace=bool(c_list), desc=desc)
 
             if c_list:
                 w.write('<br>\n'.join(c_list) + '\n')
