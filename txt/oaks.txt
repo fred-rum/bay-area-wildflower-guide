@@ -136,7 +136,7 @@ color:other
 color: other
 . leaf:
 .. adaxially convex, dull green
-.. margin wavy, often rolled under, toothed
+.. margin wavy, often rolled under, spine-toothed or very pointy toothed
 . common
 
 ==nuttall's scrub oak:Q. dumosa
@@ -147,6 +147,7 @@ color: other
 
 ==california scrub oak:Q. berberidifolia
 color:other
+<b>Caution: ID unsure</b>
 . leaf:
 .. adaxially +- flat to wavy, +- shiny, green
 .. abaxially with minute appressed stellate hairs, dull, pale green

@@ -190,6 +190,20 @@ CalPhotos/CalFlora page.  If '[label]:' appears before the link, the
 corresponding label is added to the placeholder.  The label may
 include spaces.
 
+
+'rep: <name or suffix>' indicates which jpg should be used to
+represent the page in its parent's listing/key.  If a suffix is given,
+it is appended to the page name to get a jpg name.  A full jpg name
+can also be given (without the .jpg suffix).  Alternatively, a child
+page name can be given, and the representative jpg for that child is
+used as the representative jpg for this page as well.
+
+
+'[example<,suffix>]' in a child's key is replaced with a link to the
+corresponding jpg, but only in the parent.  If the key text is copied
+to the child, the link is removed from its copy.
+
+
 --
 Other formatting:
 
@@ -197,10 +211,6 @@ Other formatting:
 relationship.  The link is just the common and scientific names of the
 child inline with the rest of the text, without any image or special
 formatting.
-
-[example<,suffix>] in a child's key is replaced with a link to the
-corresponding jpg, but only in the parent.  If the key text is copied
-to the child, the link is removed from its copy.
 
 figure:filename on a line by itself creates a thumbnail and a link to
 the corresponding SVG file in the figures directory.  The '.svg'

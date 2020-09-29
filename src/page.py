@@ -239,6 +239,14 @@ class Page:
         self.key_txt = ''
         self.jpg_list = [] # an ordered list of jpg names
 
+        # rep_jpg names a jpg that will represent the page in any
+        # parent listing.
+        self.rep_jpg = None
+
+        # rep_child is a page name or page object.  Its representative jpg
+        # will become our representative jpg.
+        self.rep_child = None
+
         # list_hierarchy is True if we want to write the entire descendant
         # hierarchy to the HTML rather than just the list of children.
         self.list_hierarchy = False
@@ -570,16 +578,30 @@ class Page:
     def add_jpg(self, jpg):
         self.jpg_list.append(jpg)
 
-    def get_jpg(self):
-        if self.jpg_list:
-            return self.jpg_list[0]
+    def get_jpg(self, origin=None):
+        if self == origin:
+            error(f'circular get_jpg() loop through {self.name}')
+            return None
+        if self.rep_jpg:
+            pass
+        elif self.rep_child:
+            rep = self.rep_child
+            if isinstance(self.rep_child, str):
+                rep = find_page1(self.rep_child)
+            if rep:
+                self.rep_jpg = rep.get_jpg(self)
+            else:
+                error(f'unrecognized rep: {self.rep_child} in {self.name}')
+        elif self.jpg_list:
+            self.rep_jpg = self.jpg_list[0]
         else:
             # Search this key page's children for a jpg to use.
             for child in self.child:
-                jpg = child.get_jpg()
-                if jpg:
-                    return jpg
-            return None
+                self.rep_jpg = child.get_jpg(origin)
+                if self.rep_jpg:
+                    break
+
+        return self.rep_jpg
 
     def get_ext_photo(self):
         if self.ext_photo_list:
@@ -1360,6 +1382,23 @@ class Page:
             if matchobj:
                 c_list.append(repl_child(matchobj))
                 data_object = self.child[-1]
+                continue
+
+            matchobj = re.match(r'rep:\s*(.*?)\s*$', c)
+            if matchobj:
+                jpg = matchobj.group(1)
+                if jpg.startswith(','):
+                    jpg = data_object.name + jpg
+                    if jpg not in jpg_files:
+                        error(f'Broken rep: {jpg} in {self.name}')
+                        continue
+                if jpg in jpg_files:
+                    data_object.rep_jpg = jpg
+                else:
+                    # If it's not a jpg, then maybe it's a child name.
+                    # Unfortunately, we don't have all names yet, so record
+                    # the name for now and resolve it later.
+                    data_object.rep_child = jpg
                 continue
 
             matchobj = re.match(r'sci([_fpji]+):\s*(.*?)$', c)
