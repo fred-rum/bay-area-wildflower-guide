@@ -220,24 +220,21 @@ dd {
 
 /*** properties related to color boxes on the BAWG home page ***/
 
-/* The shrink-box div creates a column that is wide enough to fit
-   each of its components while allowing those components to expand
-   to that same column width.  I'm not sure why I didn't choose a
-   CSS table or other grid system, but this works fine.
-
-   I can't find any mechanism to create two columns with equal width
-   where the width is determined by the widest content.  All of the
-   info on the web assumes that the columns are divided up to fill
-   100% of the screen width, which is not what I want.  I compromise
-   by setting a min-width which looks good on my browser, but which
-   each column can be wider than if it needs to be.  I.e. the columns
-   are equal width on my browser, and they might not be perfectly
-   equal on other browsers, but at least the text won't be forced to
-   wrap by a too-narrow column. */
-div.shrink-box {
-    display: inline-block;
-    padding-right: 5px;
-    min-width: 100px;
+/* The color-grid is 7x2 if that fits in the width of the screen.
+   Otherwise it is 2x7. */
+div.color-grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(7, 1fr);
+    width: fit-content;
+    gap: 5px;
+}
+@media (min-width: 750px) {
+    div.color-grid {
+	grid-auto-flow: row;
+	grid-template-rows: repeat(2, 1fr);
+	grid-template-columns: repeat(7, 1fr);
+    }
 }
 
 /* Each color-picking box has the name of the color in text, surrounded
@@ -246,8 +243,6 @@ div.shrink-box {
    each color. */
 div.box-color {
     padding: 5px;
-    margin-top: 5px;
-    margin-bottom: 5px;
     text-align: center;
 }
 
