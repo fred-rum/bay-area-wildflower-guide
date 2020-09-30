@@ -849,6 +849,7 @@ $25
 
 https://vaadin.com/pwa/learn/caching-strategies
 https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook
+https://developers.google.com/web/fundamentals/primers/service-workers
 
 When listing my observations for a taxon, make links to parks
 &q=Henry+Coe
