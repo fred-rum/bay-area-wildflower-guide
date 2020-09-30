@@ -22,7 +22,11 @@ if ('serviceWorker' in navigator) {
 }
 '''
     else:
-        return None
+        return '''
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then( function(registrations) { for(let registration of registrations) { registration.unregister(); } }); 
+}
+'''
 
 def get_base64(path, use_mtime=True):
     if path in cache:
@@ -64,7 +68,7 @@ def get_base64(path, use_mtime=True):
 
 def gen_url_cache():
     if not arg('-with_cache'):
-        os.remove('sw.js')
+        strip_comments('sw.js', from_filename='no_sw.js')
         return
 
     global cache
@@ -113,7 +117,7 @@ def gen_url_cache():
 #    path_list.extend(get_file_list('figures', figure_set, 'svg'))
 
     code = ",\n".join(cache_list)
-    strip_comments('sw.js', code)
+    strip_comments('sw.js', code=code)
 
     with open(f'{root_path}/data/cache.yaml', mode='w', encoding='utf-8') as w:
         w.write(yaml.dump(cache, default_flow_style=False))

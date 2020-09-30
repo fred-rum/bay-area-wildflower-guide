@@ -52,7 +52,7 @@ from glossary import *
 from cache import *
 
 strip_comments('bawg.css')
-strip_comments('search.js', get_sw_reg())
+strip_comments('search.js', code=get_sw_reg())
 
 year = datetime.datetime.today().year
 

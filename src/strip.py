@@ -1,7 +1,7 @@
 # My files
 from files import *
 
-def strip_comments(filename, code=None):
+def strip_comments(to_filename, from_filename=None, code=None):
     def repl_string_or_comment(matchobj):
         string = matchobj.group(1)
         comment = matchobj.group(2)
@@ -13,9 +13,12 @@ def strip_comments(filename, code=None):
         else:
             return ''
 
-    strip_line = (filename.endswith('.js'))
+    if not from_filename:
+        from_filename = to_filename
 
-    with open(root_path + '/src/' + filename, mode='r', encoding='utf-8') as r:
+    strip_line = (to_filename.endswith('.js'))
+
+    with open(root_path + '/src/' + from_filename, mode='r', encoding='utf-8') as r:
         txt = r.read()
 
     if code:
@@ -45,5 +48,5 @@ def strip_comments(filename, code=None):
     # Collapse blank lines and whitespace at the end of lines.
     txt = re.sub(r'\s+\n', '\n', txt)
 
-    with open(root_path + '/' + filename, mode='w', encoding='utf-8') as w:
+    with open(root_path + '/' + to_filename, mode='w', encoding='utf-8') as w:
         w.write(txt)
