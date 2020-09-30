@@ -1,45 +1,67 @@
 import os
 import hashlib
-import yaml
+import pickle
+from contextlib import contextmanager
 
 # My files
 from args import *
 from files import *
 from strip import *
+from page import *
+from photo import *
+from glossary import *
 
-def get_sw_reg():
-    if arg('-with_cache'):
-        return '''
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('sw.js').then(function(registration) {
-      console.log('ServiceWorker registration successful with scope: ',
-                  registration.scope);
-    }, function(err) {
-      console.log('ServiceWorker registration failed: ', err);
-    });
-  });
-}
-'''
-    else:
-        return '''
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.getRegistrations().then( function(registrations) { for(let registration of registrations) { registration.unregister(); } }); 
-}
-'''
 
-def get_base64(path, use_mtime=True):
-    if path in cache:
-        entry = cache[path]
+def init_cache():
+    global old_cache
+    try:
+        with open(f'{root_path}/data/cache.pickle', mode='rb') as f:
+            old_cache = pickle.load(f)
+
+        # In case the cache file is empty due to a prior crash.
+        if not old_cache:
+            old_cache = {}
+    except:
+        old_cache = {}
+init_cache()
+
+new_cache = {}
+cache_list = []
+
+@contextmanager
+def write_and_hash(path):
+    s = io.StringIO()
+    try:
+        yield s
+    finally:
+        value = s.getvalue()
+        with open(f'{working_path}/{path}', mode='w', encoding='utf-8') as w:
+            w.write(value)
+        entry = {
+            'base64': hashlib.sha224(value.encode()).hexdigest()
+        }
+        new_cache[path] = entry
+
+def get_base64(path):
+    if path in new_cache:
+        # If we already have the new base64 value, return it.
+        entry = new_cache[path]
+        if 'base64' in entry:
+            return entry['base64']
+    elif path in old_cache:
+        # If we have a cached base64 value, verify it.
+        entry = old_cache[path]
     else:
+        # If we have no info, generate it.
         entry = {}
-        cache[path] = entry
 
-    if not use_mtime:
-        # The mtime is always different for generated files, so there's no
-        # point in collecting it.
-        pass
-    elif 'mtime' in entry and 'base64' not in entry:
+    # The new cache gets the old cached entry, with whatever modifications
+    # we make to it.  Yes, the entries are shared between the old and new
+    # caches, but *which* entries are in the new cache are generated fresh
+    # every time.
+    new_cache[path] = entry
+
+    if 'mtime' in entry and 'base64' not in entry:
         # If we have 'mtime' and not 'base64', that means we've already
         # noticed an 'mtime' change.  The 'mtime' has already been updated,
         # and the 'base64' was discarded in preparation for calculating a
@@ -55,10 +77,10 @@ def get_base64(path, use_mtime=True):
             return entry['base64']
         entry['mtime'] = mtime
 
-    if 'mtime' in entry:
-        print(f'mtime differs in - {path}')
-    else:
-        print(f'new unknown path - {path}')
+#    if 'mtime' in entry:
+#        print(f'mtime differs in - {path}')
+#    else:
+#        print(f'new unknown path - {path}')
 
     with open(f'{root_path}/{path}', mode='rb') as f:
         base64 = hashlib.sha224(f.read()).hexdigest()
@@ -66,58 +88,15 @@ def get_base64(path, use_mtime=True):
     entry['base64'] = base64
     return base64
 
+def update_cache(path_list):
+    for path in path_list:
+        path = filename(path)
+        base64 = get_base64(path)
+        cache_list.append(f"['{url(path)}', '{base64}']")
+
 def gen_url_cache():
-    if not arg('-with_cache'):
-        strip_comments('sw.js', from_filename='no_sw.js')
-        return
-
-    global cache
-    try:
-        with open(f'{root_path}/data/cache.yaml', mode='r', encoding='utf-8') as f:
-            cache = yaml.safe_load(f)
-    except:
-        cache = {}
-
-    path_list = [
-        'index.html',
-        'photos/home-icon.png',
-    ]
-
-    cache_list = []
-    for path in path_list:
-        base64 = get_base64(path, use_mtime=True)
-        cache_list.append(f"['{url(path)}', '{base64}']")
-
-    path_list = [
-        'bawg.css',
-        'search.js',
-        'pages.js',
-    ]
-    for path in path_list:
-        base64 = get_base64(path, use_mtime=False)
-        cache_list.append(f"['{url(path)}', '{base64}']")
-
-
-#    favicon_set = get_file_set('favicon', None)
-#    path_list.extend(get_file_list('favicon', favicon_set, None))
-#
-#    html_set = set()
-#    for page in page_array:
-#        html_set.add(page.name)
-#    path_list.extend(get_file_list('html', html_set, 'html'))
-#
-#    path_list.extend(get_file_list('html', glossary_files, 'html'))
-#
-#    path_list.extend(get_file_list('thumbs', jpg_files, 'jpg'))
-#
-#    path_list.extend(get_file_list('photos', jpg_files, 'jpg'))
-#
-#    figure_set = get_file_set('figures', 'svg')
-#    figure_set.discard('_figure template')
-#    path_list.extend(get_file_list('figures', figure_set, 'svg'))
+    with open(f'{root_path}/data/cache.pickle', mode='wb') as w:
+        pickle.dump(new_cache, w)
 
     code = ",\n".join(cache_list)
     strip_comments('sw.js', code=code)
-
-    with open(f'{root_path}/data/cache.yaml', mode='w', encoding='utf-8') as w:
-        w.write(yaml.dump(cache, default_flow_style=False))

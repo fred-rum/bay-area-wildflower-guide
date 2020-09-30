@@ -18,7 +18,7 @@ def strip_comments(to_filename, from_filename=None, code=None):
 
     strip_line = (to_filename.endswith('.js'))
 
-    with open(root_path + '/src/' + from_filename, mode='r', encoding='utf-8') as r:
+    with open(f'{root_path}/src/{from_filename}', mode='r', encoding='utf-8') as r:
         txt = r.read()
 
     if code:
@@ -48,5 +48,5 @@ def strip_comments(to_filename, from_filename=None, code=None):
     # Collapse blank lines and whitespace at the end of lines.
     txt = re.sub(r'\s+\n', '\n', txt)
 
-    with open(root_path + '/' + to_filename, mode='w', encoding='utf-8') as w:
+    with open(f'{root_path}/{to_filename}', mode='w', encoding='utf-8') as w:
         w.write(txt)

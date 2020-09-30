@@ -12,6 +12,7 @@ from obs import *
 from easy import *
 from glossary import *
 from parse import *
+from cache import *
 
 ###############################################################################
 
@@ -1954,8 +1955,7 @@ class Page:
                 else:
                     error(f'{self.name} uses the xx: keyword but is not the top of species')
 
-        with open(working_path + "/html/" + filename(self.name) + ".html",
-                  "w", encoding="utf-8") as w:
+        with write_and_hash(f'html/{filename(self.name)}.html') as w:
             com = self.com
             elab = self.elab
 

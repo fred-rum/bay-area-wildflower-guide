@@ -51,6 +51,30 @@ from photo import *
 from glossary import *
 from cache import *
 
+def get_sw_reg():
+    if arg('-with_cache'):
+        return '''
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').then(function(registration) {
+      console.log('ServiceWorker registration successful with scope: ',
+                  registration.scope);
+    }, function(err) {
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
+'''
+    else:
+        unreg_str = '''
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then( function(registrations) { for(let registration of registrations) { registration.unregister(); } });
+}
+'''
+        with open(f'sw.js', mode='w', encoding='utf-8') as w:
+            w.write(unreg_str)
+        return unreg_str
+
 strip_comments('bawg.css')
 strip_comments('search.js', code=get_sw_reg())
 
@@ -658,6 +682,37 @@ if total_list:
     os.startfile(mod_file)
 
 
-gen_url_cache()
+###############################################################################
+# Update base64 cache and sw.js
+
+if arg('-with_cache'):
+    path_list = [
+        'index.html',
+        'bawg.css',
+        'photos/home-icon.png',
+        'search.js',
+        'pages.js',
+    ]
+
+    favicon_set = get_file_set('favicon', None)
+    path_list += get_file_list('favicon', favicon_set, None)
+
+    html_set = set()
+    for page in page_array:
+        html_set.add(page.name)
+    path_list += get_file_list('html', html_set, 'html')
+
+    path_list += get_file_list('html', glossary_files, 'html')
+
+    path_list += get_file_list('thumbs', jpg_files, 'jpg')
+
+    path_list += get_file_list('photos', jpg_files, 'jpg')
+
+    figure_set = get_file_set('figures', 'svg')
+    figure_set.discard('_figure template')
+    path_list += get_file_list('figures', figure_set, 'svg')
+
+    update_cache(path_list)
+    gen_url_cache()
 
 error_end()

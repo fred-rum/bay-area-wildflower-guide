@@ -9,6 +9,7 @@ from find_page import *
 from easy import *
 from trie import *
 from parse import *
+from cache import *
 
 glossary_taxon_dict = {}
 
@@ -505,7 +506,7 @@ class Glossary:
 
         self.txt = parse_txt(self.name, self.txt, None, self)
 
-        with open(f'{working_path}/html/{self.name}.html', mode='w') as w:
+        with write_and_hash(f'html/{filename(self.name)}.html') as w:
             if self.taxon:
                 desc = f'Glossary of terms used for {self.taxon} in the Bay Area Wildflower Guide.'
             else:
