@@ -1,6 +1,0 @@
-CACHE MANIFEST
-index.html
-bawg.css
-pages.js
-search.js
-photos/home-icon.png

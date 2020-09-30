@@ -923,7 +923,8 @@ class Page:
                 if parent not in exclude_set:
                     exclude_set.add(parent)
                     ancestor = parent.find_lowest_ranked_ancestor(child, exclude_set)
-                    if (ancestor.rank and
+                    if (ancestor and
+                        ancestor.rank and
                         (not lra or ancestor.rank < lra.rank)):
                         lra = ancestor
         return lra

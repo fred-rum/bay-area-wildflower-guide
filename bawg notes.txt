@@ -843,14 +843,6 @@ Should I also clear the search field?
 
 Add manual links to the color pages from the flowering plants page.
 
-PWA Progressive Web App apps in the Android Play Store
-https://firt.dev/pwa-playstore
-$25
-
-https://vaadin.com/pwa/learn/caching-strategies
-https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook
-https://developers.google.com/web/fundamentals/primers/service-workers
-
 When listing my observations for a taxon, make links to parks
 &q=Henry+Coe
 and months
@@ -871,3 +863,9 @@ Chrome browser area: 96mm/68mm => 1536x1080
 The home-icon can't be selected with the "tab" key (no keyboard
 focus), presumably because of its absolute position.  Can I fix that?
 Perhaps a negative margin on the scroll container?
+
+type="search" creates an 'x' on the right.  Good or bad?
+I think it's OK.
+
+Firefox doesn't support "fit-content", so color boxes fill the
+available space.  It's not terrible, but use max-width to limit?

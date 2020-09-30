@@ -1,7 +1,7 @@
 # My files
 from files import *
 
-def strip_comments(filename, strip_line):
+def strip_comments(filename, code=None):
     def repl_string_or_comment(matchobj):
         string = matchobj.group(1)
         comment = matchobj.group(2)
@@ -13,8 +13,13 @@ def strip_comments(filename, strip_line):
         else:
             return ''
 
+    strip_line = (filename.endswith('.js'))
+
     with open(root_path + '/src/' + filename, mode='r', encoding='utf-8') as r:
         txt = r.read()
+
+    if code:
+        txt = re.sub(r'/\* insert code here \*/', code, txt)
 
     # Match either a complete quoted string (which is returned unchanged) or
     # whitespace followed by a comment (which is removed).

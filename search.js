@@ -477,14 +477,11 @@ function save_scroll() {
   var scrollPos = e_body.scrollTop;
   var stateObj = { data: scrollPos };
   history.replaceState(stateObj, '');
-  console.info('save_scroll()')
-  console.info(scrollPos)
 }
 function restore_scroll() {
   console.info('restore_scroll()');
   if (history.state) {
     e_body.scrollTop = history.state.data;
-    console.info(e_body.scrollTop);
   }
   e_body.addEventListener('scroll', save_scroll);
 }
@@ -498,18 +495,3 @@ function oninteractive() {
   setTimeout(restore_scroll, 0);
 }
 oninteractive();
-
-
-/*****************************************************************************/
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('sw.js').then(function(registration) {
-      // Registration was successful
-      console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    }, function(err) {
-      // registration failed :(
-      console.log('ServiceWorker registration failed: ', err);
-    });
-  });
-}

@@ -49,9 +49,10 @@ from obs import *
 from page import *
 from photo import *
 from glossary import *
+from cache import *
 
-strip_comments('bawg.css', False)
-strip_comments('search.js', True)
+strip_comments('bawg.css')
+strip_comments('search.js', get_sw_reg())
 
 year = datetime.datetime.today().year
 
@@ -655,5 +656,8 @@ if total_list:
     else:
         mod_file = f'{root_path}/html/_mod.html'
     os.startfile(mod_file)
+
+
+gen_url_cache()
 
 error_end()

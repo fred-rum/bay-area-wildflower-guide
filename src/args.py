@@ -8,7 +8,8 @@ while len(sys.argv):
     if (sys.argv[0] in ('-jepson_usage',
                         '-incomplete_keys',
                         '-no_error_limit',
-                        '-not_top_usage') or
+                        '-not_top_usage',
+                        '-with_cache') or
         sys.argv[0].startswith('-tree')):
         _arg_value[sys.argv.pop(0)] = True
     elif sys.argv[0] == '-db':

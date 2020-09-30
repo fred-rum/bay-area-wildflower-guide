@@ -1,0 +1,72 @@
+PWA Progressive Web App apps in the Android Play Store
+https://firt.dev/pwa-playstore
+$25
+
+https://vaadin.com/pwa/learn/caching-strategies
+https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook
+https://developers.google.com/web/fundamentals/primers/service-workers
+https://deanhume.com/displaying-a-new-version-available-progressive-web-app/
+chrome://inspect/#service-workers
+https://developers.google.com/web/ilt/pwa/caching-files-with-service-worker
+
+test locally:
+https://developer.mozilla.org/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server
+http://localhost:8000/
+
+
+I already have all the code for a simple PWA; just complete the list
+of files to cache (including favicons).  Whenever the site is visited
+(or the app is run), it will update the service worker in the
+background if necessary, cache the new files, etc.  The new files will
+be used on the next page load.  The only thing wrong (I think) is that
+old files are not cleared from the cache.
+
+
+If the service worker is not installed,
+only install it if a button in index.html is clicked.
+
+If the service worker is installed and is up to date, remove the
+button and add a different button to uninstall it.
+
+If the service worker is installed and out of date, have a button to
+update and a button to uninstall.
+
+If an installation or update is ongoing, its progress is shown, along
+with a "uninstall" button.
+
+use postMessage() to communicate with service worker
+
+
+Perhaps I can manage individual file updates by putting the database
+of files (with version numbers) in an uncached JS file.  (Or simply
+include it in sw.js)
+
+max URLs at once with addAll = 1300 (in Chrome)
+
+
+Create a base64 hash in Python for each URL.
+In sw.js, use two caches:
+  URL -> base64 hash
+  base64 hash -> fetch response
+
+When updating the caches,
+  Don't refetch a URL if its base64 hash already has a fetch response
+  Discard all URLs and replace and cache the new URL -> base64 hash
+
+Thus, a file (e.g. a thumbnail or photo) can move, and we'll recognize
+it at the new URL without needing to refetch the file.
+
+
+Service worker has a version number.  'install' event is called only
+if the version number changes.  'install' event fetches a JSON file
+with the URL and base64 data.
+
+
+A record is kept in a yaml or pickle file of the last modification
+date of various non-generated files, along with the corresponding
+base64 hash.  If a file is updated or not in this record, a new base64
+hash is generated (and recorded, if it is not a generated file).
+sw.js is updated with list of all files and corresponding base64
+hashes, but not the modification dates.
+
+print yaml.dump(yaml.safe_load(document), default_flow_style=False)

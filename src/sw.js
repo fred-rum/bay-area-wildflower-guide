@@ -1,8 +1,6 @@
-var CACHE_NAME = 'my-site-cache-v1';
+var CACHE_NAME = 'bawg-cache-v1';
 var urlsToCache = [
-  'index.html',
-  'bawg.css',
-  'photos/home-icon.png'
+/* insert code here */
 ];
 
 self.addEventListener('install', function(event) {

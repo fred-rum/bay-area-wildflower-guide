@@ -46,15 +46,28 @@ def get_file_set(subdir, ext):
     file_list = os.listdir(subdir_path)
     base_set = set()
     for filename in file_list:
-        pos = filename.rfind(os.extsep)
-        if pos > 0:
-            file_ext = filename[pos+len(os.extsep):].lower()
-            if file_ext == ext:
-                base = filename[:pos]
-                base_set.add(base)
+        if ext:
+            pos = filename.rfind(os.extsep)
+            if pos > 0:
+                file_ext = filename[pos+len(os.extsep):].lower()
+                if file_ext == ext:
+                    base = filename[:pos]
+                    base_set.add(base)
+        else:
+            base_set.add(filename)
     return base_set
 
 jpg_files = get_file_set(f'{db_pfx}photos', 'jpg')
+
+# Turn a set of files back into a file list.
+def get_file_list(subdir, base_set, ext):
+    file_list = []
+    for base in sorted(base_set):
+        file = subdir + '/' + base
+        if ext:
+            file += '.' + ext
+        file_list.append(file)
+    return file_list
 
 
 def link_figures_thumb(name, txt):
@@ -108,7 +121,7 @@ def write_header(w, title, h1, nospace=False, desc=None):
 <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
-<link rel="manifest" href="../favicon/site.webmanifest">
+<link rel="manifest" href="../manifest.webmanifest">
 <link rel="mask-icon" href="../favicon/safari-pinned-tab.svg" color="#106110">
 <link rel="shortcut icon" href="../favicon/favicon.ico">
 <meta name="msapplication-TileColor" content="#106110">

@@ -808,8 +808,6 @@ function save_scroll() {
   var scrollPos = e_body.scrollTop;
   var stateObj = { data: scrollPos };
   history.replaceState(stateObj, '');
-  console.info('save_scroll()')
-  console.info(scrollPos)
 }
 
 
@@ -825,7 +823,6 @@ function restore_scroll() {
   console.info('restore_scroll()');
   if (history.state) {
     e_body.scrollTop = history.state.data;
-    console.info(e_body.scrollTop);
   }
 
   /* Now that we've restored the scroll position, we can start saving new
@@ -854,3 +851,9 @@ function oninteractive() {
   setTimeout(restore_scroll, 0);
 }
 oninteractive();
+
+
+/*****************************************************************************/
+/* Progressive Web App (PWA) */
+
+/* insert code here */
