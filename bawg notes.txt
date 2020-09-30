@@ -843,7 +843,7 @@ Should I also clear the search field?
 
 Add manual links to the color pages from the flowering plants page.
 
-Progressive Web App apps in the Android Play Store
+PWA Progressive Web App apps in the Android Play Store
 https://firt.dev/pwa-playstore
 $25
 
@@ -867,4 +867,6 @@ Chrome browser area: 96mm/68mm => 1536x1080
 40px = ~7.5mm = 120 actual pixels
 16 actual pixels/mm
 
-Resize home icon to 120 pixels.
+The home-icon can't be selected with the "tab" key (no keyboard
+focus), presumably because of its absolute position.  Can I fix that?
+Perhaps a negative margin on the scroll container?
