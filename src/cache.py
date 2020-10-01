@@ -38,7 +38,8 @@ def write_and_hash(path):
         with open(f'{working_path}/{path}', mode='w', encoding='utf-8') as w:
             w.write(value)
         entry = {
-            'base64': hashlib.sha224(value.encode()).hexdigest()
+            'base64': hashlib.sha224(value.encode()).hexdigest(),
+            'kb': len(value) // 1024 + 1
         }
         new_cache[path] = entry
 
@@ -47,7 +48,7 @@ def get_base64(path):
         # If we already have the new base64 value, return it.
         entry = new_cache[path]
         if 'base64' in entry:
-            return entry['base64']
+            return entry
     elif path in old_cache:
         # If we have a cached base64 value, verify it.
         entry = old_cache[path]
@@ -74,7 +75,7 @@ def get_base64(path):
         if 'mtime' in entry and mtime == entry['mtime']:
             # modification times match, so don't bother calculating a fresh
             # base64 hash.
-            return entry['base64']
+            return entry
         entry['mtime'] = mtime
 
 #    if 'mtime' in entry:
@@ -83,16 +84,19 @@ def get_base64(path):
 #        print(f'new unknown path - {path}')
 
     with open(f'{root_path}/{path}', mode='rb') as f:
-        base64 = hashlib.sha224(f.read()).hexdigest()
+        value = f.read()
+        entry['base64'] = hashlib.sha224(value).hexdigest()
+        entry['kb'] = len(value) // 1024 + 1
 
-    entry['base64'] = base64
-    return base64
+    return entry
 
 def update_cache(path_list):
     for path in path_list:
         path = filename(path)
-        base64 = get_base64(path)
-        cache_list.append(f"['{url(path)}', '{base64}']")
+        entry = get_base64(path)
+        base64 = entry['base64']
+        kb = entry['kb']
+        cache_list.append(f"['{url(path)}', '{base64}', {kb}]")
 
 def gen_url_cache():
     with open(f'{root_path}/data/cache.pickle', mode='wb') as w:

@@ -68,5 +68,3 @@ base64 hash.  If a file is updated or not in this record, a new base64
 hash is generated (and recorded, if it is not a generated file).
 sw.js is updated with list of all files and corresponding base64
 hashes, but not the modification dates.
-
-print yaml.dump(yaml.safe_load(document), default_flow_style=False)
