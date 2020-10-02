@@ -13,6 +13,7 @@ var kb_cached = 0;
 var new_url_data = {};
 var base64_to_kb = {};
 var base64_to_delete = [];
+var usage = '';
 
 // Figure out the total size of the data to be cached.
 for (let i = 0; i < url_to_base64.length; i++) {
@@ -116,7 +117,7 @@ async function fn_install2() {
 // previous update just mysteriously stopped.
 //
 // Even here, the results shouldn't be terrible.  The kb counts could go
-// weird, but all the right files should end up in the indexDB and cache.
+// weird, but all the right files should end up in the indexedDB and cache.
 
 self.addEventListener('activate', event => {
   clients.claim();
@@ -152,7 +153,7 @@ request.onerror = function(event) {
   console.info('Error while opening indexedDB');
 };
 
-// This function is called when the indexDB is created for the first time.
+// This function is called when the indexedDB is accessed for the first time.
 // (It will also be called if I increment the version number, in which case
 // I need to adjust it to avoid an error.)
 request.onupgradeneeded = function(event) {
@@ -220,7 +221,9 @@ async function fetch_response(event, url) {
 // The client initiates the message exchange because the status info
 // is only needed by index.html, so we don't want to spam any other
 // clients that are viewing different pages.
-self.addEventListener('message', function (event) {
+self.addEventListener('message', fn_send_status);
+
+function fn_send_status(event) {
   // Most messages are polling for status.
   // But regardless of the message type, always update the status.
   if (updating === 'Checking cache') {
@@ -243,14 +246,15 @@ self.addEventListener('message', function (event) {
   msg = {
     update_class: update_class,
     status: status,
-    err_status: err_status
+    err_status: err_status,
+    usage: usage
   };
   event.source.postMessage(msg);
 
   if (event.data === 'update') {
     update_cache(event);
   }
-});
+}
 
 // When requested, switch to using the newest url_data
 //  and update the cache to match.
@@ -292,6 +296,9 @@ async function update_cache(event) {
 
         // Entries left in base64_to_kb are ones that need to be fetched.
         delete base64_to_kb[base64];
+
+        // Update cache usage estimate.
+        await update_usage();
   
   // TODO: An error ends fetching, so it should really set updating = false.
   // TODO: An error message would be good, too.
@@ -336,5 +343,16 @@ function is_update_done() {
     updating = false;
   } else {
     updating = 'Up to date';
+  }
+  update_usage();
+}
+
+async function update_usage() {
+  if (navigator && navigator.storage) {
+    let estimate = await navigator.storage.estimate();
+    let status_usage = (estimate.usage/1024/1024).toFixed(1)
+    let status_quota = (estimate.quota/1024/1024/1024).toFixed(1)
+    usage = (' ' + status_usage + ' MB including overhead' +
+             ' (browser allows up to ' + status_quota + ' GB)');
   }
 }
