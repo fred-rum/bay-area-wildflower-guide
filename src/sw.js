@@ -11,6 +11,7 @@ var kb_total = 0;
 var kb_cached = 0;
 var new_url_data = {};
 var base64_to_kb = {};
+var base64_to_delete = [];
 
 // Figure out the total size of the data to be cached.
 for (let i = 0; i < url_to_base64.length; i++) {
@@ -38,9 +39,17 @@ async function count_cached() {
     let key = remove_scope_from_request(requests[i]);
     if (key in base64_to_kb) {
       kb_cached += base64_to_kb[key];
+
+      // Entries left in base64_to_kb are ones that need to be fetched.
+      delete base64_to_kb[key];
+    } else {
+      // Entries in base64_to_delete are ones that need to be deleted.
+      console.info('Need to delete ' + key);
+      base64_to_delete.push(key);
     }
   }
-  base64_to_kb = undefined;
+
+  is_update_done();
 }
 count_cached();
 
@@ -234,33 +243,52 @@ async function update_cache(event) {
     return;
   }
 
-  updating = 'Readying cache';
+  updating = 'Deleting out-of-date cached files';
   console.info(updating)
 
   await record_urls();
 
-  cache = await caches.open(BASE64_CACHE_NAME)
+  cache = await caches.open(BASE64_CACHE_NAME);
+
+  for (let i = 0; i < base64_to_delete.length; i++) {
+    let base64 = base64_to_delete[i];
+    console.info('Deleting ' + base64);
+    await cache.delete(base64);
+    base64_to_delete = [];
+  }
 
   // TODO: remove unneeded cache entries
   // (The old url_data might not accurately reflect the cache, so ignore that
   // and look at the cache directly.)
   //
   // TODO: only fetch base64 URLs that aren't already cached.
-  for (var i = 0; i < url_to_base64.length; i++) {
-    updating = 'Updating ' + decodeURI(url_to_base64[i][0])
-    console.info(updating)
-    url = url_to_base64[i][0];
-    base64 = url_to_base64[i][1];
-    kb = url_to_base64[i][2];
-    response = await fetch(url);
-    if (response.ok) {
-      // Associate the fetched page with the base64 encoding.
-      await cache.put(base64, response);
+  for (let url in url_data) {
+    let base64 = url_data[url].base64;
+    if (base64 in base64_to_kb) {
+      let kb = base64_to_kb[base64];
+      updating = 'Updating ' + decodeURI(url)
+      console.info(updating)
+      response = await fetch(url);
+      if (response.ok) {
+        // Associate the fetched page with the base64 encoding.
+        await cache.put(base64, response);
+
+        // Entries left in base64_to_kb are ones that need to be fetched.
+        delete base64_to_kb[key];
+  
+  // TODO: An error ends fetching, so it should really set updating = false.
+  // TODO: An error message would be good, too.
+  // error codes:
+  // 300-399: The server did something unexpected.
+  // 400-499: The file list must have updated.  Refresh the page and try again.
+  // (or refresh automatically, then prompt to 'Try again?')
+  // 500-599: The server did something unexpected.
+      }
+      kb_cached += kb;
     }
-    kb_cached += kb;
   }
 
-  updating = false;
+  is_update_done();
 }
 
 // This is awkward because transactions use callbacks, but we want to use
@@ -283,13 +311,13 @@ async function record_urls() {
   url_data = new_url_data
   obj = {key: 'key', value: url_data};
   console.info(obj);
-  
-  // TODO: An error ends fetching, so it should really set updating = false.
-  // TODO: An error message would be good, too.
-  // error codes:
-  // 300-399: The server did something unexpected.
-  // 400-499: The file list must have updated.  Refresh the page and try again.
-  // (or refresh automatically, then prompt to 'Try again?')
-  // 500-599: The server did something unexpected.
   await await_tx(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
+}
+
+function is_update_done() {
+  if (Object.keys(base64_to_kb).length === 0) {
+    updating = 'Up to date';
+  } else {
+    updating = false;
+  }
 }

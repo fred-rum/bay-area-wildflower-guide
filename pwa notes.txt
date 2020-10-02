@@ -71,5 +71,5 @@ hashes, but not the modification dates.
 
 
 Add a red button for 'clear cache' with the current cache size next to
-it.  Do I have to rely on the old url_data to calculate size?
-StorageEstimate.usage or usageDetails?
+it '(including overhead').  Do I have to rely on the old url_data to
+calculate size?  StorageEstimate.usage or usageDetails?
