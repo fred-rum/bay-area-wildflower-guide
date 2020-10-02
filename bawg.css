@@ -205,6 +205,7 @@ a.enclosed {
 span.toggle-details {
     color: #888;
     text-decoration: underline;
+    cursor: pointer;
 }
 div#details {
     display: none;
@@ -400,8 +401,44 @@ p.nogap {
 span.match {
     background-color: #eee;
 }
-span#update {
+#update {
+    display: inline-block;
+    min-width: 100px;
+    text-align: center;
     padding: 10px;
+}
+#update.update-update {
     background-color: #139e38;
     color: white;
+    cursor: pointer;
+}
+#update.update-update::before {
+    content: 'Update cache';
+}
+#update.update-disable {
+    background-color: #808080;
+    color: #000000;
+    cursor: not-allowed;
+}
+#update.update-disable::before {
+    content: 'Update cache';
+}
+#update.update-stop {
+    background-color: #9c8024;
+    cursor: pointer;
+}
+#update.update-stop::before {
+    content: 'Stop update';
+}
+#err-status {
+    color: red;
+}
+#clear {
+    display: inline-block;
+    min-width: 100px;
+    text-align: center;
+    background-color: red;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
 }

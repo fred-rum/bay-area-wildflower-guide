@@ -670,11 +670,12 @@ if total_list:
 
 if arg('-with_cache'):
     path_list = [
+        # start with the files most needed for interfacing with the worker
+        'swi.js',
         'index.html',
         'bawg.css',
         'photos/home-icon.png',
         'search.js',
-        'swi.js',
         'pages.js',
         # not 'sw.js' because it's not necessary and could be really bad
     ]

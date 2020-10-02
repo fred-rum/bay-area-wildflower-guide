@@ -6,7 +6,8 @@ var DB_NAME = 'db-v1';
 var DB_VERSION = 1;
 var BASE64_CACHE_NAME = 'base64-cache-v1';
 
-var updating = false;
+var updating = 'Checking cache';
+var err_status = '';
 var kb_total = 0;
 var kb_cached = 0;
 var new_url_data = {};
@@ -36,16 +37,16 @@ async function count_cached() {
   requests = await cache.keys();
   console.info('checking cache keys');
   for (let i = 0; i < requests.length; i++) {
-    let key = remove_scope_from_request(requests[i]);
-    if (key in base64_to_kb) {
-      kb_cached += base64_to_kb[key];
+    let base64 = remove_scope_from_request(requests[i]);
+    if (base64 in base64_to_kb) {
+      kb_cached += base64_to_kb[base64];
 
       // Entries left in base64_to_kb are ones that need to be fetched.
-      delete base64_to_kb[key];
+      delete base64_to_kb[base64];
     } else {
       // Entries in base64_to_delete are ones that need to be deleted.
-      console.info('Need to delete ' + key);
-      base64_to_delete.push(key);
+      console.info('Need to delete ' + base64);
+      base64_to_delete.push(base64);
     }
   }
 
@@ -222,12 +223,28 @@ async function fetch_response(event, url) {
 self.addEventListener('message', function (event) {
   // Most messages are polling for status.
   // But regardless of the message type, always update the status.
-  msg_cached = (kb_cached/1024).toFixed(1)
-  msg_total = (kb_total/1024).toFixed(1)
-  msg = ' ' + msg_cached + ' / ' + msg_total + ' MB'
-  if (updating !== false) {
-    msg += ' - ' + updating;
+  if (updating === 'Checking cache') {
+    var status = ' ' + updating;
+  } else {
+    let status_cached = (kb_cached/1024).toFixed(1)
+    let status_total = (kb_total/1024).toFixed(1)
+    status = ' ' + status_cached + ' / ' + status_total + ' MB'
+    if (updating !== false) {
+      status += ' - ' + updating;
+    }
   }
+  if (updating === false) {
+    var update_class = 'update-update';
+  } else if (updating === 'Up to date') {
+    update_class = 'update-disable';
+  } else {
+    update_class = 'update-stop';
+  }
+  msg = {
+    update_class: update_class,
+    status: status,
+    err_status: err_status
+  };
   event.source.postMessage(msg);
 
   if (event.data === 'update') {
@@ -254,8 +271,8 @@ async function update_cache(event) {
     let base64 = base64_to_delete[i];
     console.info('Deleting ' + base64);
     await cache.delete(base64);
-    base64_to_delete = [];
   }
+  base64_to_delete = [];
 
   // TODO: remove unneeded cache entries
   // (The old url_data might not accurately reflect the cache, so ignore that
@@ -274,7 +291,7 @@ async function update_cache(event) {
         await cache.put(base64, response);
 
         // Entries left in base64_to_kb are ones that need to be fetched.
-        delete base64_to_kb[key];
+        delete base64_to_kb[base64];
   
   // TODO: An error ends fetching, so it should really set updating = false.
   // TODO: An error message would be good, too.
@@ -315,9 +332,9 @@ async function record_urls() {
 }
 
 function is_update_done() {
-  if (Object.keys(base64_to_kb).length === 0) {
-    updating = 'Up to date';
-  } else {
+  if (base64_to_delete.length || Object.keys(base64_to_kb).length) {
     updating = false;
+  } else {
+    updating = 'Up to date';
   }
 }

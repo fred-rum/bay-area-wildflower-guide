@@ -430,6 +430,7 @@ a.enclosed {
 span.toggle-details {
     color: #888;
     text-decoration: underline;
+    cursor: pointer;
 }
 /* By default, observation details are hidden.  Javascript toggles this
    based on user interaction. */
@@ -876,10 +877,52 @@ span.match {
 
 /* See also the <a> link tags for links in the autocompletion box. */
 
-/*** properties related to offline caching ***/
+/*** properties related to interfacing with the service worker ***/
 
-span#update {
+/* The 'update' button can be in one of three states:
+   - update-update: click will update the cache
+   - update-disable: click is expected to do nothing
+   - update-stop: click will stop the cache update currently in progress
+   Note that the button is expected to have no HTML text in it.  Instead,
+   the pseudo 'before' element adds the proper text content for its state. */
+#update {
+    display: inline-block;
+    min-width: 100px;
+    text-align: center;
     padding: 10px;
+}
+#update.update-update {
     background-color: #139e38;
     color: white;
+    cursor: pointer;
+}
+#update.update-update::before {
+    content: 'Update cache';
+}
+#update.update-disable {
+    background-color: #808080;
+    color: #000000;
+    cursor: not-allowed;
+}
+#update.update-disable::before {
+    content: 'Update cache';
+}
+#update.update-stop {
+    background-color: #9c8024;
+    cursor: pointer;
+}
+#update.update-stop::before {
+    content: 'Stop update';
+}
+#err-status {
+    color: red;
+}
+#clear {
+    display: inline-block;
+    min-width: 100px;
+    text-align: center;
+    background-color: red;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
 }
