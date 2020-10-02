@@ -11,8 +11,8 @@ https://developers.google.com/web/ilt/pwa/caching-files-with-service-worker
 
 test locally:
 https://developer.mozilla.org/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server
+/cygdrive/c/Python37/python -m http.server
 http://localhost:8000/
-
 
 I already have all the code for a simple PWA; just complete the list
 of files to cache (including favicons).  Whenever the site is visited

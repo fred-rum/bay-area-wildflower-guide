@@ -38,6 +38,7 @@ import yaml
 from unidecode import unidecode
 import datetime
 import time
+import shutil
 
 # My files
 from args import *
@@ -51,32 +52,14 @@ from photo import *
 from glossary import *
 from cache import *
 
-def get_sw_reg():
-    if arg('-with_cache'):
-        return '''
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('sw.js').then(function(registration) {
-      console.log('ServiceWorker registration successful with scope: ',
-                  registration.scope);
-    }, function(err) {
-      console.log('ServiceWorker registration failed: ', err);
-    });
-  });
-}
-'''
-    else:
-        unreg_str = '''
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.getRegistrations().then( function(registrations) { for(let registration of registrations) { registration.unregister(); } });
-}
-'''
-        with open(f'sw.js', mode='w', encoding='utf-8') as w:
-            w.write(unreg_str)
-        return unreg_str
-
 strip_comments('bawg.css')
-strip_comments('search.js', code=get_sw_reg())
+strip_comments('search.js')
+
+if arg('-with_cache'):
+    strip_comments('swi.js')
+else:
+    shutil.copy('src/no_sw.js', 'swi.js')
+    shutil.copy('src/no_sw.js', 'sw.js')
 
 year = datetime.datetime.today().year
 
@@ -691,7 +674,9 @@ if arg('-with_cache'):
         'bawg.css',
         'photos/home-icon.png',
         'search.js',
+        'swi.js',
         'pages.js',
+        # not 'sw.js' because it's not necessary and could be really bad
     ]
 
     favicon_set = get_file_set('favicon', None)

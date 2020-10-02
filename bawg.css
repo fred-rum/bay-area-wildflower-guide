@@ -400,3 +400,8 @@ p.nogap {
 span.match {
     background-color: #eee;
 }
+span#update {
+    padding: 10px;
+    background-color: #139e38;
+    color: white;
+}

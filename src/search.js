@@ -851,9 +851,3 @@ function oninteractive() {
   setTimeout(restore_scroll, 0);
 }
 oninteractive();
-
-
-/*****************************************************************************/
-/* Progressive Web App (PWA) */
-
-/* insert code here */

@@ -875,3 +875,11 @@ span.match {
 }
 
 /* See also the <a> link tags for links in the autocompletion box. */
+
+/*** properties related to offline caching ***/
+
+span#update {
+    padding: 10px;
+    background-color: #139e38;
+    color: white;
+}
