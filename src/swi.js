@@ -27,13 +27,18 @@ if ('serviceWorker' in navigator) {
       console.info(serviceWorker.state);
     }
     if (e_status) {
-      intervalID = setInterval(poll_cache, 1000)
+      // Poll right away, and then at intervals.
+      poll_cache();
+      intervalID = setInterval(poll_cache, 1000);
     }
+    e_status.textContent = ' Checking cache';
   }).catch (function (error) {
     console.info('service worker registration failed');
+    e_status.textContent = ' No service worker';
   });
 } else {
   console.info('no service worker support in browser');
+  e_status.textContent = " Sorry, but your browser doesn't support this feature.";
 }
 
 function poll_cache() {

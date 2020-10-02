@@ -235,7 +235,7 @@ self.addEventListener('message', function (event) {
   }
   if (updating === false) {
     var update_class = 'update-update';
-  } else if (updating === 'Up to date') {
+  } else if ((updating === 'Up to date') || (updating === 'Checking cache')) {
     update_class = 'update-disable';
   } else {
     update_class = 'update-stop';
