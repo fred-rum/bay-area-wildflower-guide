@@ -30,7 +30,7 @@ new_cache = {}
 cache_list = []
 
 def hash_base64(value):
-    return bytes.decode(b64encode(hashlib.sha224(value).digest()))
+    return bytes.decode(b64encode(hashlib.sha224(value).digest(), b'-_'))
 
 @contextmanager
 def write_and_hash(path):
