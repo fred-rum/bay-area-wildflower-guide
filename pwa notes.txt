@@ -68,3 +68,8 @@ base64 hash.  If a file is updated or not in this record, a new base64
 hash is generated (and recorded, if it is not a generated file).
 sw.js is updated with list of all files and corresponding base64
 hashes, but not the modification dates.
+
+
+Add a red button for 'clear cache' with the current cache size next to
+it.  Do I have to rely on the old url_data to calculate size?
+StorageEstimate.usage or usageDetails?

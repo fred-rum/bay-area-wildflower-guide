@@ -9,12 +9,48 @@ var BASE64_CACHE_NAME = 'base64-cache-v1';
 var updating = false;
 var kb_total = 0;
 var kb_cached = 0;
+var new_url_data = {};
+var base64_to_kb = {};
 
 // Figure out the total size of the data to be cached.
-for (var i = 0; i < url_to_base64.length; i++) {
+for (let i = 0; i < url_to_base64.length; i++) {
   kb_total += url_to_base64[i][2];
 }
 
+console.info('scope = ' + registration.scope);
+
+// Check how many KB of the new base64 values already have a file cached.
+async function count_cached() {
+  new_url_data = {};
+  for (let i = 0; i < url_to_base64.length; i++) {
+    let url = url_to_base64[i][0];
+    let base64 = url_to_base64[i][1];
+    let kb = url_to_base64[i][2];
+    new_url_data[url] = {base64: base64,
+                         kb: kb};
+    base64_to_kb[base64] = kb;
+  }
+
+  cache = await caches.open(BASE64_CACHE_NAME);
+  requests = await cache.keys();
+  console.info('checking cache keys');
+  for (let i = 0; i < requests.length; i++) {
+    let key = remove_scope_from_request(requests[i]);
+    if (key in base64_to_kb) {
+      kb_cached += base64_to_kb[key];
+    }
+  }
+  base64_to_kb = undefined;
+}
+count_cached();
+
+// Get the URL from the request and remove the prepended scope.
+// This can be done with a fetch request (which has a real URL)
+// or on a cache key (which has a base64 value in place of the
+// relative URL).
+function remove_scope_from_request(request) {
+  return request.url.substr(registration.scope.length);
+}
 
 /*** Install the service worker ***/
 
@@ -51,6 +87,27 @@ async function fn_install2() {
 // processing fetch requests immediately, we call claim().  We call it
 // for all clients, not just the one that registered the service worker,
 // because we want all windows to stay in sync.
+//
+// Note that it's not just that all clients are running the same version
+// of the service worker.  All clients are *sharing* the same service worker,
+// so we generally don't to worry about changes happening elsewhere and not
+// being reflected here.
+//
+// When we claim the service worker, the browser lets the previous one
+// finish what it's doing before killing it.  If it's just fetching
+// something from the cache, the transactions are atomic and so safe.
+// But if the other worker is in the middle of an update, and then the new
+// one also starts updating.  That requires the following sequence:
+// - the user starts an update
+// - I update sw.js on the server
+// - the user hits refresh (or navigates around before returning to index.html)
+// - the user starts another update
+// This last step isn't ridiculous since as far as the user can tell, the
+// previous update just mysteriously stopped.
+//
+// Even here, the results shouldn't be terrible.  The kb counts could go
+// weird, but all the right files should end up in the indexDB and cache.
+
 self.addEventListener('activate', event => {
   clients.claim();
 });
@@ -60,7 +117,7 @@ self.addEventListener('activate', event => {
 
 // Note that this process is asynchronous, so we might get some requests
 // before it's done.  That may cause some files to get fetched online instead
-// of from the cache.  I should probably do this as part of registration
+// of from the cache.  TODO: I should probably do this as part of registration
 // to be safe when offline.  I could borrow await_tx() to make it fit better
 // with promises.
 
@@ -74,7 +131,9 @@ request.onsuccess = function(event) {
     console.info('get_key returned ' + event.target.result);
     if (event.target.result){
       url_data = event.target.result.value;
-      console.info(url_data)
+      console.info(url_data);
+      // TODO: Count the shared kb between the old and new url_data
+      // as kb_cached.
     }
   }
 };
@@ -121,10 +180,10 @@ function init_db(event) {
 self.addEventListener('fetch', function(event) {
   // The request is guaranteed to be in scope, so we can simply
   // remove the scope to get the relative URL.
-  url = event.request.url.substr(registration.scope.length);
+  let url = remove_scope_from_request(event.request);
   console.info('fetching ' + url);
   if (url_data && (url in url_data)) {
-    event.respondWith(fetch_response(event));
+    event.respondWith(fetch_response(event, url));
   } else {
     // Allow the default fetch response.
     console.info(url + ' not recognized')
@@ -132,7 +191,7 @@ self.addEventListener('fetch', function(event) {
   }
 });
 
-async function fetch_response(event) {
+async function fetch_response(event, url) {
   var response = await caches.match(url_data[url].base64);
   console.info(response);
   if (response) {
@@ -182,6 +241,11 @@ async function update_cache(event) {
 
   cache = await caches.open(BASE64_CACHE_NAME)
 
+  // TODO: remove unneeded cache entries
+  // (The old url_data might not accurately reflect the cache, so ignore that
+  // and look at the cache directly.)
+  //
+  // TODO: only fetch base64 URLs that aren't already cached.
   for (var i = 0; i < url_to_base64.length; i++) {
     updating = 'Updating ' + decodeURI(url_to_base64[i][0])
     console.info(updating)
@@ -209,8 +273,6 @@ function await_tx(tx) {
       resolve(event);
     }
     tx.onerror = (event) => {
-      // TODO: This ends fetching, so it should really set updating = false.
-      // TODO: An error message would be good, too.
       return reject(event);
     }
   });
@@ -218,13 +280,16 @@ function await_tx(tx) {
 
 async function record_urls() {
   // Initialize a fresh URL DB object.
-  url_data = {};
-  for (var i = 0; i < url_to_base64.length; i++) {
-        url_data[url_to_base64[i][0]] = {base64: url_to_base64[i][1],
-                                         kb: url_to_base64[i][2]};
-  }
+  url_data = new_url_data
   obj = {key: 'key', value: url_data};
   console.info(obj);
   
+  // TODO: An error ends fetching, so it should really set updating = false.
+  // TODO: An error message would be good, too.
+  // error codes:
+  // 300-399: The server did something unexpected.
+  // 400-499: The file list must have updated.  Refresh the page and try again.
+  // (or refresh automatically, then prompt to 'Try again?')
+  // 500-599: The server did something unexpected.
   await await_tx(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
 }
