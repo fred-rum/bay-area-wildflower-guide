@@ -7,26 +7,32 @@ var DB_VERSION = 1;
 var BASE64_CACHE_NAME = 'base64-cache-v1';
 
 var updating = false;
-var kb_total;
+var kb_total = 0;
 var kb_cached = 0;
 
-// Install the service worker.
+// Figure out the total size of the data to be cached.
+for (var i = 0; i < url_to_base64.length; i++) {
+  kb_total += url_to_base64[i][2];
+}
+
+
+/*** Install the service worker ***/
+
 self.addEventListener('install', fn_install);
+
 async function fn_install(event) {
+  // Since the install function requires asynchronous communication to
+  // complete, we use event.waitUntil() to keep the process alive until
+  // it completes.
   event.waitUntil(fn_install2());
 }
 
 async function fn_install2() {
-  // Figure out the total size of the data to be cached.
-  kb_total = 0;
-  for (var i = 0; i < url_to_base64.length; i++) {
-    kb_total += url_to_base64[i][2];
-  }
-
   // Immediately replace any previous service worker.
   await self.skipWaiting();
 
-  // Remove old caches.
+  // Remove any old caches I might have left lying around from
+  // previous versions of the code.
   var cacheNames = await caches.keys();
   await Promise.all(
     cacheNames.map(function(cacheName) {
@@ -35,9 +41,28 @@ async function fn_install2() {
       }
     })
   );
-
-  return true;
 }
+
+
+/*** when the service worker is activated ***/
+
+// Once installation of a service worker is finished, it is activated.
+// But it won't do anything until the next refresh.  To make it start
+// processing fetch requests immediately, we call claim().  We call it
+// for all clients, not just the one that registered the service worker,
+// because we want all windows to stay in sync.
+self.addEventListener('activate', event => {
+  clients.claim();
+});
+
+
+/*** Read the old url_data ***/
+
+// Note that this process is asynchronous, so we might get some requests
+// before it's done.  That may cause some files to get fetched online instead
+// of from the cache.  I should probably do this as part of registration
+// to be safe when offline.  I could borrow await_tx() to make it fit better
+// with promises.
 
 var request = indexedDB.open(DB_NAME, DB_VERSION);
 var db;
@@ -57,6 +82,10 @@ request.onsuccess = function(event) {
 request.onerror = function(event) {
   console.info('Error while opening indexedDB');
 };
+
+// This function is called when the indexDB is created for the first time.
+// (It will also be called if I increment the version number, in which case
+// I need to adjust it to avoid an error.)
 request.onupgradeneeded = function(event) {
   db = event.target.result;
 
@@ -83,28 +112,18 @@ function init_db(event) {
   dataObjectStore.add(obj)
 }
 
-// Any time a new service worker is activated for any one client,
-// immediately activate it for future requests by all clients.
-self.addEventListener('activate', event => {
-  clients.claim();
-});
 
-// Handle a fetch request from a client (tab).
+/*** Handle a fetch request ***/
+
+// Handle a fetch request from a client (window/tab).
+// Map the URL to a base64 encoding (from the indexedDB), then
+// map the base64 encoding to a cache entry.
 self.addEventListener('fetch', function(event) {
   // The request is guaranteed to be in scope, so we can simply
   // remove the scope to get the relative URL.
   url = event.request.url.substr(registration.scope.length);
   console.info('fetching ' + url);
   if (url_data && (url in url_data)) {
-/*
-    event.respondWith(
-      caches.match(url_data[url].base64)
-        .then(function(response) {
-          return response || fetch(event.request);
-        }
-      )
-    );
-*/
     event.respondWith(fetch_response(event));
   } else {
     // Allow the default fetch response.
@@ -126,11 +145,15 @@ async function fetch_response(event) {
 }
 
 
+/*** Handle messages related to user interaction ***/
+
 // Listen for messages from clients and respond with status info.
 // The client initiates the message exchange because the status info
 // is only needed by index.html, so we don't want to spam any other
 // clients that are viewing different pages.
 self.addEventListener('message', function (event) {
+  // Most messages are polling for status.
+  // But regardless of the message type, always update the status.
   msg_cached = (kb_cached/1024).toFixed(1)
   msg_total = (kb_total/1024).toFixed(1)
   msg = ' ' + msg_cached + ' / ' + msg_total + ' MB'
@@ -144,8 +167,13 @@ self.addEventListener('message', function (event) {
   }
 });
 
+// When requested, switch to using the newest url_data
+//  and update the cache to match.
 async function update_cache(event) {
-  if (updating) return;
+  if (updating) {
+    console.info('Update already in progress');
+    return;
+  }
 
   updating = 'Readying cache';
   console.info(updating)
@@ -155,13 +183,14 @@ async function update_cache(event) {
   cache = await caches.open(BASE64_CACHE_NAME)
 
   for (var i = 0; i < url_to_base64.length; i++) {
-    updating = 'Updating ' + url_to_base64[i][0]
+    updating = 'Updating ' + decodeURI(url_to_base64[i][0])
     console.info(updating)
     url = url_to_base64[i][0];
     base64 = url_to_base64[i][1];
     kb = url_to_base64[i][2];
     response = await fetch(url);
     if (response.ok) {
+      // Associate the fetched page with the base64 encoding.
       await cache.put(base64, response);
     }
     kb_cached += kb;
@@ -177,10 +206,11 @@ async function update_cache(event) {
 function await_tx(tx) {
   return new Promise((resolve, reject) => {
     tx.onsuccess = (event) => {
-      console.info('yay');
       resolve(event);
     }
     tx.onerror = (event) => {
+      // TODO: This ends fetching, so it should really set updating = false.
+      // TODO: An error message would be good, too.
       return reject(event);
     }
   });

@@ -2,6 +2,7 @@ import os
 import hashlib
 import pickle
 from contextlib import contextmanager
+from base64 import b64encode
 
 # My files
 from args import *
@@ -28,6 +29,9 @@ init_cache()
 new_cache = {}
 cache_list = []
 
+def hash_base64(value):
+    return bytes.decode(b64encode(hashlib.sha224(value).digest()))
+
 @contextmanager
 def write_and_hash(path):
     s = io.StringIO()
@@ -38,7 +42,7 @@ def write_and_hash(path):
         with open(f'{working_path}/{path}', mode='w', encoding='utf-8') as w:
             w.write(value)
         entry = {
-            'base64': hashlib.sha224(value.encode()).hexdigest(),
+            'base64': hash_base64(value.encode()),
             'kb': len(value) // 1024 + 1
         }
         new_cache[path] = entry
@@ -85,7 +89,7 @@ def get_base64(path):
 
     with open(f'{root_path}/{path}', mode='rb') as f:
         value = f.read()
-        entry['base64'] = hashlib.sha224(value).hexdigest()
+        entry['base64'] = hash_base64(value)
         entry['kb'] = len(value) // 1024 + 1
 
     return entry
