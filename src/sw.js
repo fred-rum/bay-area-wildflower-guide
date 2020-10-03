@@ -407,7 +407,7 @@ function check_url_diff() {
     if (!(url in new_url_to_base64) ||
         (url_to_base64[url] != new_url_to_base64[url])) {
       if (!(url in new_url_to_base64)) {
-        console.info(url + ' no found in new_url_to_base64');
+        console.info(url + ' not found in new_url_to_base64');
       } else {
         console.info(url + ' has different data in new_url_to_base64');
       }
@@ -470,8 +470,21 @@ function fn_send_status(event) {
     var status = ' ' + updating;
   } else {
     let status_cached = (kb_cached/1024).toFixed(1)
-    let status_total = (kb_total/1024).toFixed(1)
+
+    // Pretend that we need a bit more data than we actually do.
+    // That way, if there's a tiny bit more data to fetch
+    // (or only data to delete, or an indexedDB to update),
+    // it appears as if there is still 0.1 MB of data to cache.
+    let status_total = (kb_total/1024 + 0.1).toFixed(1)
+
+    // If we really are full up to date, then adjust status_cached
+    // to match the adjusted status_total.
+    if (updating === 'Up to date') {
+      status_cached = status_total;
+    }
+
     status = ' ' + status_cached + ' / ' + status_total + ' MB'
+
     if (updating !== false) {
       status += ' - ' + updating;
     }
