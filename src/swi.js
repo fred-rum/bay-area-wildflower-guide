@@ -9,34 +9,21 @@ let e_usage = document.getElementById('usage');
 
 var reg;
 var intervalID;
+var temp_controller;
+
+// TODO: handle the case where e_status isn't ready yet.
+// (Wait for DOM completion as in search.js.)
+e_status.textContent = ' Waiting for service worker to load';
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').then(function (registration) {
-    var serviceWorker;
-    if (registration.installing) {
-      serviceWorker = registration.installing;
-      console.info('installing');
-    } else if (registration.waiting) {
-      serviceWorker = registration.waiting;
-      console.info('waiting');
-    } else if (registration.active) {
-      serviceWorker = registration.active;
-      console.info('active');
-    }
-    if (serviceWorker) {
-      serviceWorker.addEventListener('statechange', function (e) {
-        console.info(e.target.state);
-      });
-      console.info(serviceWorker.state);
-    }
-    if (e_status) {
-      // TODO: handle the case where e_status isn't ready yet.
-      // (Wait for DOM completion as in search.js.)
-      // Poll right away, and then at intervals.
-      poll_cache();
-      intervalID = setInterval(poll_cache, 1000);
-    }
-    e_status.textContent = ' Checking cache';
+    // When register() resolves, we're not guaranteed to have an active
+    // service worker.  In fact, the service worker might not even be
+    // 'installing' yet!  Theoretically, I could set up callbacks on
+    // updatestate and statechange, but even easier, I can simply wait
+    // until the ServiceWorkerContainer resolves the promise in 'ready'.
+    // When that happens, a service worker is guaranteed to be active.
+    navigator.serviceWorker.ready.then(start_polling);
   }).catch (function (error) {
     console.info('service worker registration failed');
     e_status.textContent = ' No service worker';
@@ -46,8 +33,36 @@ if ('serviceWorker' in navigator) {
   e_status.textContent = " Sorry, but your browser doesn't support this feature.";
 }
 
+function start_polling(registration) {
+  console.info('start_polling()');
+
+  // An oddity of the navigator.serviceWorker.ready promise is that it
+  // resolves when a service worker is 'active', but (at least in Chrome),
+  // navigator.serviceWorker.controller hasn't been updated yet!
+  // To handle that case, get the active service worker from the registration,
+  // and use that until navigator.serviceWorker.controller updates.
+  temp_controller = registration.active;
+
+  // sw.js will return the simplified status of ' Checking cache' until it
+  // is fully initialized and ready to return real status values.  To avoid
+  // flickering while we wait for that first response [...]
+
+  // Poll right away, and then at intervals.
+  poll_cache();
+  intervalID = setInterval(poll_cache, 1000);
+}
+
 function poll_cache() {
-  navigator.serviceWorker.controller.postMessage('polling');
+  // poll_cache() is only called if there is an active controller,
+  // but navigator.serviceWorker.controller might not be updated yet
+  // (as documented above).  Prefer navigator.serviceWorker.controller
+  // when it is available so that we keep up with any changes to the
+  // service worker, but fall back to temp_controller if necessary.
+  if (navigator.serviceWorker.controller) {
+    navigator.serviceWorker.controller.postMessage('polling');
+  } else {
+    temp_controller.postMessage('polling');
+  }
 }
 
 navigator.serviceWorker.addEventListener('message', fn_receive_status);

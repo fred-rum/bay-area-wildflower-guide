@@ -333,32 +333,7 @@ async function init_status() {
   await Promise.all([read_db(),
                      count_cached()]);
 
-  // Compare the old url_data with new_url_data.
-  // This tells us whether we need to update the indexedDB.
-  // Generally we'd expect to only need to update the indexedDB when
-  // there are also cache changes to perform, but there are other
-  // possibilities, e.g.
-  // - I swap the names (URLs) of two files in the cache, or
-  // - The user manually deletes indexedDB.
-  console.info('compare url_data to new_url_data');
-  url_diff = false;
-
-  // Check if any old URLs are missing from new_url_data or have
-  // different base64 values.
-  for (let url in url_data) {
-    if (!(url in new_url_data) || (url_data[url] != new_url_data[url])) {
-      url_diff = true;
-    }
-  }
-
-  // Check if any new URLs are missing from the old url_data.
-  // We already compared the base64 values for entries that match,
-  // so we don't have to do that part again.
-  for (let url in new_url_data) {
-    if (!(url in url_data)) {
-      url_diff = true;
-    }
-  }
+  check_url_diff();
 
   // Finally, prepare the appropriate info to send to swi.js.
   is_cache_up_to_date();
@@ -394,6 +369,43 @@ async function count_cached() {
       // Entries in base64_to_delete are ones that need to be deleted.
       console.info('Need to delete ' + base64);
       base64_to_delete.push(base64);
+    }
+  }
+}
+
+// Compare the old url_data with new_url_data.
+// This tells us whether we need to update the indexedDB.
+// Generally we'd expect to only need to update the indexedDB when
+// there are also cache changes to perform, but there are other
+// possibilities, e.g.
+// - I swap the names (URLs) of two files in the cache, or
+// - The user manually deletes indexedDB.
+function check_url_diff() {
+  console.info('check_url_diff()');
+  url_diff = false;
+
+  // Check if any old URLs are missing from new_url_data or have
+  // different base64 values.
+  for (let url in url_data) {
+    if (!(url in new_url_data) || (url_data[url] != new_url_data[url])) {
+      if (!(url in new_url_data)) {
+        console.info(url + ' no found in new_url_data');
+      } else {
+        console.info(url + ' has different data in new_url_data');
+      }
+      url_diff = true;
+      return;
+    }
+  }
+
+  // Check if any new URLs are missing from the old url_data.
+  // We already compared the base64 values for entries that match,
+  // so we don't have to do that part again.
+  for (let url in new_url_data) {
+    if (!(url in url_data)) {
+      console.info(url + ' no found in the old url_data');
+      url_diff = true;
+      return;
     }
   }
 }
@@ -479,13 +491,18 @@ async function update_cache(event) {
     return;
   }
 
+  // Recording URLs should finish in a flash, but deleting cached files
+  // could take finite time, so we just use the 'deleting' message for
+  // both steps.
   updating = 'Deleting out-of-date cached files';
-  console.info(updating)
 
   await record_urls();
 
   cache = await caches.open(BASE64_CACHE_NAME);
 
+  if (base64_to_delete.length) {
+    console.info(updating)
+  }
   for (let i = 0; i < base64_to_delete.length; i++) {
     let base64 = base64_to_delete[i];
     console.info('Deleting ' + base64);
@@ -532,10 +549,11 @@ async function update_cache(event) {
 
 async function record_urls() {
   // Initialize a fresh URL DB object.
+  console.info('record_urls()');
   url_data = new_url_data
   obj = {key: 'key', value: url_data};
-  console.info(obj);
   await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
+  url_diff = false;
 }
 
 function is_cache_up_to_date() {
