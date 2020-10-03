@@ -595,18 +595,23 @@ async function update_cache(event) {
   is_cache_up_to_date();
 }
 
+// Record new_url_to_base64 to the indexedDB
+// and begin using it as the current url_to_base64.
 async function record_urls() {
-  // Initialize a fresh URL DB object.
   console.info('record_urls()');
-  url_to_base64 = new_url_to_base64
-  obj = {key: 'key', value: url_to_base64};
+
+  let db = await open_db();
+
+  let obj = {key: 'key', value: url_to_base64};
   await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
+
+  url_to_base64 = new_url_to_base64;
   url_diff = false;
 }
 
 function is_cache_up_to_date() {
   let files_to_fetch = (Object.keys(base64_to_kb).length);
-  let cached_files_to_delete = Object.keys(base64_to_kb).length;
+  let cached_files_to_delete = base64_to_delete.length;
   if (files_to_fetch || cached_files_to_delete || url_diff) {
     if (files_to_fetch) {
       console.info('files to fetch: ' + files_to_fetch);
