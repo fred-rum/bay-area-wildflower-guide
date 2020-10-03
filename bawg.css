@@ -425,6 +425,7 @@ span.match {
 }
 #update.update-stop {
     background-color: #9c8024;
+    color: white;
     cursor: pointer;
 }
 #update.update-stop::before {

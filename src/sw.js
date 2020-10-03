@@ -302,7 +302,7 @@ async function open_db() {
   // necessary.
   request.onupgradeneeded = dbupgradeneeded;
 
-  db = await async_callbacks(request);
+  let db = await async_callbacks(request);
 
   console.info('open_db() returns ' + db);
   return db;
@@ -312,7 +312,7 @@ async function open_db() {
 // (It will also be called if I increment the version number, in which case
 // I need to adjust this code to avoid an error.)
 async function dbupgradeneeded(event) {
-  db = event.target.result;
+  let db = event.target.result;
 
   let objectStore = db.createObjectStore("url_data", { keyPath: "key" });
 
@@ -372,8 +372,8 @@ async function count_cached() {
     kb_total += kb;
   }
 
-  cache = await caches.open(BASE64_CACHE_NAME);
-  requests = await cache.keys();
+  let cache = await caches.open(BASE64_CACHE_NAME);
+  let requests = await cache.keys();
   console.info('checking base64 keys in the cache');
   for (let i = 0; i < requests.length; i++) {
     let base64 = remove_scope_from_request(requests[i]);
@@ -421,7 +421,7 @@ function check_url_diff() {
   // so we don't have to do that part again.
   for (let url in new_url_to_base64) {
     if (!(url in url_to_base64)) {
-      console.info(url + ' no found in the old url_to_base64');
+      console.info(url + ' not found in the old url_to_base64');
       url_diff = true;
       return;
     }
@@ -496,6 +496,13 @@ function fn_send_status(event) {
   } else {
     update_class = 'update-stop';
   }
+
+  // Update the cache usage estimate.
+  // We don't actually wait for its asynchronous operation to finish
+  // since that would break this event handler, but hopefully it'll be
+  // ready by the next time we poll.
+  update_usage();
+
   msg = {
     update_class: update_class,
     status: status,
@@ -511,7 +518,23 @@ function fn_send_status(event) {
   }
 }
 
-function clear_caches(event) {
+// We don't bother to wait for these calls to finish.  We just fire them
+// off and assume that the caches will get cleared eventually.
+async function clear_caches(event) {
+  // Also discard our local data.
+  url_to_base64 = {};
+  url_diff = true;
+
+  console.info('clear_caches()');
+  let request = indexedDB.deleteDatabase(DB_NAME);
+  result = await async_callbacks(request);
+  console.info('indexedDB delete result = ' + result);
+
+  request = caches.delete(BASE64_CACHE_NAME);
+  result = await async_callbacks(request);
+  console.info('cache delete result = ' + result);
+
+  is_cache_up_to_date();
 }
 
 // When requested, switch to using the newest url_to_base64
@@ -556,9 +579,6 @@ async function update_cache(event) {
 
         // Entries left in base64_to_kb are ones that need to be fetched.
         delete base64_to_kb[base64];
-
-        // Update cache usage estimate.
-        await update_usage();
   
   // TODO: An error ends fetching, so it should really set updating = false.
   // TODO: An error message would be good, too.
@@ -585,20 +605,40 @@ async function record_urls() {
 }
 
 function is_cache_up_to_date() {
-  if (base64_to_delete.length || Object.keys(base64_to_kb).length || url_diff) {
+  let files_to_fetch = (Object.keys(base64_to_kb).length);
+  let cached_files_to_delete = Object.keys(base64_to_kb).length;
+  if (files_to_fetch || cached_files_to_delete || url_diff) {
+    if (files_to_fetch) {
+      console.info('files to fetch: ' + files_to_fetch);
+    }
+    if (cached_files_to_delete) {
+      console.info('cached files to delete: ' + cached_files_to_delete);
+    }
+    if (url_diff) {
+      console.info('url_diff');
+    }
     updating = false;
   } else {
     updating = 'Up to date';
+    console.info(updating);
   }
-  update_usage();
 }
 
+// Update cache usage estimate.
 async function update_usage() {
   if (navigator && navigator.storage) {
     let estimate = await navigator.storage.estimate();
     let status_usage = (estimate.usage/1024/1024).toFixed(1)
     let status_quota = (estimate.quota/1024/1024/1024).toFixed(1)
-    usage = (' ' + status_usage + ' MB including overhead' +
-             ' (browser allows up to ' + status_quota + ' GB)');
+
+    // The running service worker itself counts as significant usage
+    // (e.g. 0.5 MB).  To avoid confusing the user, we treat the cache
+    // as 'empty' if usage is low and we don't have any cached files.
+    if ((kb_cached == 0) && (status_usage < 10.0)) {
+      usage = ' Cache is empty';
+    } else {
+      usage = ' ' + status_usage + ' MB cached including overhead';
+    }
+    usage += ' (browser allows up to ' + status_quota + ' GB)';
   }
 }
