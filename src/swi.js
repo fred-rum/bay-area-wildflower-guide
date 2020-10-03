@@ -3,6 +3,8 @@
 let e_update = document.getElementById('update');
 let e_status = document.getElementById('status');
 let e_err_status = document.getElementById('err-status');
+
+let e_clear = document.getElementById('clear');
 let e_usage = document.getElementById('usage');
 
 var reg;
@@ -74,6 +76,10 @@ if (e_update) {
   e_update.addEventListener('click', fn_update);
 }
 
+if (e_clear) {
+  e_clear.addEventListener('click', fn_clear);
+}
+
 function fn_update(event) {
   if (navigator.serviceWorker && navigator.serviceWorker.controller) {
     // sw.js always auto-updates.  If swi.js is cached, communication could
@@ -81,10 +87,14 @@ function fn_update(event) {
     // send the 'update' message and let the service worker sort it out.
     navigator.serviceWorker.controller.postMessage('update');
     e_update.className = 'disabled';
-  } else {
-    // &rsquo; doesn't work in textContent
-    e_err_status.textContent = " Oops, looks like your browser doesn't support this feature!  Sorry.";
   }
-  
-  event.preventDefault();
+}
+
+function fn_clear(event) {
+  if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+    // sw.js always auto-updates.  If swi.js is cached, communication could
+    // break down.  So regardless of what we *think* the status is, always
+    // send the 'update' message and let the service worker sort it out.
+    navigator.serviceWorker.controller.postMessage('clear');
+  }
 }

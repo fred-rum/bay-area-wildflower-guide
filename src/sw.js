@@ -15,12 +15,59 @@ var base64_to_kb = {};
 var base64_to_delete = [];
 var usage = '';
 
+
+// Some interfaces use callbacks, but we'd rather use Promises.
+// async_callbacks() converts a callback interface into a Promise.
+//
+// The first parameter, 'request', is a request that has been made.
+// We assume that it has callbacks 'onsuccess' and 'onerror', and
+// async_callbacks() assigns those callbacks.
+// - When the 'onsuccess' callback is called, the promise is resolved
+//   and returns the request.result.
+// - When the 'onerror' callback is called, the promise is rejected.
+function async_callbacks(request) {
+  return new Promise((resolve, reject) => {
+    request.onsuccess = (event) => {
+      resolve(request.result);
+    }
+
+    request.onerror = (event) => {
+      return reject(event);
+    }
+  });
+}
+
+// And here's a similar function to async_callbacks, but suitable for
+// indexedDB transactions.
+// - When the 'oncomplete' callback is called, the promise is resolved.
+// - When the 'onerror' or 'onabort' callback is called, the promise is
+//   rejected.
+function async_tx(tx) {
+  return new Promise((resolve, reject) => {
+    tx.oncomplete = (event) => {
+      resolve(event);
+    }
+
+    tx.onerror = (event) => {
+      return reject(event);
+    }
+
+    tx.onabort = (event) => {
+      return reject(event);
+    }
+  });
+}
+
+
 // Figure out the total size of the data to be cached.
 for (let i = 0; i < url_to_base64.length; i++) {
   kb_total += url_to_base64[i][2];
 }
 
 console.info('scope = ' + registration.scope);
+
+
+
 
 // Check how many KB of the new base64 values already have a file cached.
 async function count_cached() {
@@ -132,54 +179,62 @@ self.addEventListener('activate', event => {
 // to be safe when offline.  I could borrow await_tx() to make it fit better
 // with promises.
 
-var request = indexedDB.open(DB_NAME, DB_VERSION);
 var db;
 var url_data = {};
 
-request.onsuccess = function(event) {
-  db = event.target.result;
-  db.transaction("url_data").objectStore("url_data").get("key").onsuccess = function(event) {
-    console.info('get_key returned ' + event.target.result);
-    if (event.target.result){
-      url_data = event.target.result.value;
-      console.info(url_data);
-      // TODO: Count the shared kb between the old and new url_data
-      // as kb_cached.
-    }
-  }
-};
+open_db();
 
-request.onerror = function(event) {
-  console.info('Error while opening indexedDB');
-};
+async function open_db() {
+  if (db) {
+    // The indexedDB is already open.
+    return
+  }
+
+  let request = indexedDB.open(DB_NAME, DB_VERSION);
+
+  // There is no documented provision for the request to wait for the
+  // onupgradeneeded callback to complete before calling onsuccess.
+  // I see two possibilities:
+  // - the request assumes that dbupgradeneeded queued the necessary
+  //   transactions, so everything will be fine.
+  // - the request waits for all upgrade transactions to complete and
+  //   somehow never interrupts between when one transaction completes
+  //   and the next starts.  Perhaps this is possible in our single thread.
+  //
+  // In any case, the onupgradeneeded path doesn't need to be hooked in
+  // with the async_callbacks promise.  It just does its own thing when
+  // necessary.
+  request.onupgradeneeded = dbupgradeneeded;
+
+  db = await async_callbacks(request, dbupgradeneeded);
+
+  let lookup = await db.transaction("url_data").objectStore("url_data").get("key");
+
+  console.info('get_key returned ' + lookup);
+  if (lookup){
+    url_data = lookup.value;
+    console.info(url_data);
+  }
+}
 
 // This function is called when the indexedDB is accessed for the first time.
 // (It will also be called if I increment the version number, in which case
-// I need to adjust it to avoid an error.)
-request.onupgradeneeded = function(event) {
+// I need to adjust this code to avoid an error.)
+async function dbupgradeneeded(event) {
   db = event.target.result;
 
-  db.onerror = function(event) {
-    // Generic error handler for all errors.
-    console.error("Database error: " + event.target.errorCode);
-  };
+  let objectStore = db.createObjectStore("url_data", { keyPath: "key" });
 
-  // Create an objectStore to hold information about our customers. We're
-  // going to use "ssn" as our key path because it's guaranteed to be
-  // unique - or at least that's what I was told during the kickoff meeting.
-  var objectStore = db.createObjectStore("url_data", { keyPath: "key" });
+  // We can start using the objectStore handle right away, even if the
+  // transaction to the database is still pending.
 
-  // Use transaction oncomplete to make sure the objectStore creation is 
-  // finished before adding data into it.
-  objectStore.transaction.oncomplete = init_db;
-};
-
-// This gets called when the database is being freshly created.
-function init_db(event) {
-  // Store values in the newly created objectStore.
+  // Store an empty value in the newly created objectStore.
   obj = {key: 'key', value: {}};
-  var dataObjectStore = db.transaction("url_data", "readwrite").objectStore("url_data");
-  dataObjectStore.add(obj)
+  objectStore.add(obj);
+
+  // Again, the transaction may still be in flight, but there's no need to
+  // wait for it.  Any later read transaction is guaranteed to execute
+  // in the proper order.
 }
 
 
@@ -253,6 +308,8 @@ function fn_send_status(event) {
 
   if (event.data === 'update') {
     update_cache(event);
+  } else if (event.data === 'clear') {
+    clear_caches(event);
   }
 }
 
@@ -315,27 +372,12 @@ async function update_cache(event) {
   is_update_done();
 }
 
-// This is awkward because transactions use callbacks, but we want to use
-// Promises.
-// Call await_tx with a transaction, and it returns a promise that resolves
-// or rejects based on which callback gets called.
-function await_tx(tx) {
-  return new Promise((resolve, reject) => {
-    tx.onsuccess = (event) => {
-      resolve(event);
-    }
-    tx.onerror = (event) => {
-      return reject(event);
-    }
-  });
-}
-
 async function record_urls() {
   // Initialize a fresh URL DB object.
   url_data = new_url_data
   obj = {key: 'key', value: url_data};
   console.info(obj);
-  await await_tx(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
+  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
 }
 
 function is_update_done() {
