@@ -62,7 +62,7 @@ jpg_files = get_file_set(f'{db_pfx}photos', 'jpg')
 # Turn a set of files back into a file list.
 def get_file_list(subdir, base_set, ext):
     file_list = []
-    for base in sorted(base_set):
+    for base in sorted(base_set, key=str.casefold):
         file = subdir + '/' + base
         if ext:
             file += '.' + ext

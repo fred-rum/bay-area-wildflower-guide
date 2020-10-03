@@ -678,6 +678,7 @@ if arg('-with_cache'):
         'search.js',
         'pages.js',
         # not 'sw.js' because it's not necessary and could be really bad
+        'manifest.webmanifest',
     ]
 
     favicon_set = get_file_set('favicon', None)
