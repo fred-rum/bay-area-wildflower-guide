@@ -73,3 +73,24 @@ hashes, but not the modification dates.
 Add a red button for 'clear cache' with the current cache size next to
 it '(including overhead').  Do I have to rely on the old url_data to
 calculate size?  StorageEstimate.usage or usageDetails?
+
+
+Check the wrapping of the cache status in an emulated phone.
+
+Check sync of two index.html windows.
+
+Make the buttons more active when clicked or focused.
+Looks like :active should do it.
+
+
+Include a percent complete indication on cache updates?
+Simply by file count or...
+
+Measure average time per file (time/file).
+Measure time for a long file (time/file) + (time/kb).
+Remaining time estimate = files * (time/file) + kb * (time/kb)
+
+Or rearrange files so that thumbnails and photos are ordered together
+with the HTML page they are associated with.  This even mix of files
+should load more evenly.  In this case, an extra indication of
+percent/time should be less necessary.

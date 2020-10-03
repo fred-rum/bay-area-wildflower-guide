@@ -13,6 +13,7 @@ var BASE64_CACHE_NAME = 'base64-cache-v1';
 var updating = 'Checking cache';
 var err_status = '';
 var usage = '';
+var stop_updating = false;
 
 // url_to_base64 is the mapping of URL to base64 key that we're currently
 // using for checking the cache.  It is initialized from the indexedDB,
@@ -362,6 +363,14 @@ async function init_status() {
 async function count_cached() {
   console.info('count_cached()');
 
+  // This function might be called a second time after the caches are
+  // clear, so be sure to throw away old values before accumulating
+  // new data.
+  base64_to_kb = {};
+  base64_to_delete = [];
+  kb_total = 0;
+  kb_cached = 0;
+
   new_url_to_base64 = {};
   for (let i = 0; i < url_data.length; i++) {
     let url = url_data[i][0];
@@ -491,7 +500,9 @@ function fn_send_status(event) {
   }
   if (updating === false) {
     var update_class = 'update-update';
-  } else if ((updating === 'Up to date') || (updating === 'Checking cache')) {
+  } else if ((updating === 'Up to date') ||
+             (updating === 'Checking cache') ||
+             (updating === 'Clearing caches')) {
     update_class = 'update-disable';
   } else {
     update_class = 'update-stop';
@@ -511,56 +522,111 @@ function fn_send_status(event) {
   };
   event.source.postMessage(msg);
 
+  // If we previously told the cache update to stop, then check whether
+  // it is now stopped, and clear the flag if so.
+  // We do this here to avoid all possible race conditions.
+  if ((updating === false) || (update_class === 'update-disable')) {
+    stop_updating = false;
+  }
+
   if (event.data === 'update') {
-    update_cache(event);
+    if (updating === false) {
+      // There is no current activity, so start updating the cache.
+      update_cache();
+    } else if (update_class === 'update-disable') {
+      // If we're still checking the cache or if the cache is up to date,
+      // ignore the update request.
+      console.info('ignore update request');
+    } else {
+      // If a cache update is in progress, kill it.
+      console.info('stop_updating = true');
+      stop_updating = true;
+    }
   } else if (event.data === 'clear') {
-    clear_caches(event);
+    clear_caches();
   }
 }
 
 // We don't bother to wait for these calls to finish.  We just fire them
 // off and assume that the caches will get cleared eventually.
-async function clear_caches(event) {
-  // Also discard our local data.
-  url_to_base64 = {};
-  url_diff = true;
+async function clear_caches() {
+  // stop_updating isn't perfect if a cache update is in progress, but
+  // I figure that it should be pretty good and reasonably safe.
+  stop_updating = true;
 
   console.info('clear_caches()');
+  updating = 'Clearing caches';
+
+  // For some reason, indexedDB.deleteDatabase() often hangs for me.
+  // So I replace the data with an empty set, instead.
+  /*
   let request = indexedDB.deleteDatabase(DB_NAME);
   result = await async_callbacks(request);
   console.info('indexedDB delete result = ' + result);
+  */
 
+  await record_urls({}, true);
+
+  // For some reason, caches.delete() often hangs for me.
+  // So I delete all of the individual cache entries, instead.
+  /*
   request = caches.delete(BASE64_CACHE_NAME);
   result = await async_callbacks(request);
   console.info('cache delete result = ' + result);
+  */
+
+  await delete_all_cache_entries();
+
+  // Reset which files need to be cached.
+  await count_cached();
+
+  check_url_diff();
 
   is_cache_up_to_date();
 }
 
+async function delete_all_cache_entries() {
+  console.info('delete_all_cache_entries()')
+  let cache = await caches.open(BASE64_CACHE_NAME);
+  let requests = await cache.keys();
+
+  console.info('num to delete = ' + requests.length);
+
+  for (let i = 0; i < requests.length; i++) {
+    let request = requests[i]
+    console.info('Deleting ' + request);
+    await cache.delete(request);
+  }
+}
+
 // When requested, switch to using the newest url_to_base64
 // and update the cache to match.
-async function update_cache(event) {
-  if (updating) {
-    console.info('Update already in progress');
-    return;
-  }
+async function update_cache() {
+  console.info('update_cache()');
 
   // Recording URLs should finish in a flash, but deleting cached files
   // could take finite time, so we just use the 'deleting' message for
   // both steps.
   updating = 'Deleting out-of-date cached files';
 
-  await record_urls();
+  await record_urls(new_url_to_base64, false);
 
-  cache = await caches.open(BASE64_CACHE_NAME);
+  let cache = await caches.open(BASE64_CACHE_NAME);
 
   if (base64_to_delete.length) {
     console.info(updating)
   }
   for (let i = 0; i < base64_to_delete.length; i++) {
+    // Pay attention to the global stop_updating variable and
+    // bail out if it becomes true.
+    if (stop_updating){
+      return is_cache_up_to_date();
+    }
+
     let base64 = base64_to_delete[i];
     console.info('Deleting ' + base64);
     await cache.delete(base64);
+
   }
   base64_to_delete = [];
 
@@ -573,6 +639,15 @@ async function update_cache(event) {
       updating = 'Updating ' + decodeURI(url)
       console.info(updating)
       response = await fetch(url);
+
+      // Pay attention to the global stop_updating variable and
+      // bail out if it becomes true.  We put this check just before
+      // the cache.put() so that we don't update the cache after
+      // stop_updating becomes true.
+      if (stop_updating){
+        return is_cache_up_to_date();
+      }
+
       if (response.ok) {
         // Associate the fetched page with the base64 encoding.
         await cache.put(base64, response);
@@ -595,18 +670,19 @@ async function update_cache(event) {
   is_cache_up_to_date();
 }
 
-// Record new_url_to_base64 to the indexedDB
-// and begin using it as the current url_to_base64.
-async function record_urls() {
+// Record data to the indexedDB and begin using it as the current
+// url_to_base64.  If we're updating the cache, the data is new_url_to_base64.
+// If we're clearing the cache, the data is {}.
+async function record_urls(data, new_url_diff) {
   console.info('record_urls()');
 
   let db = await open_db();
 
-  let obj = {key: 'key', value: url_to_base64};
+  let obj = {key: 'key', value: data};
   await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
 
-  url_to_base64 = new_url_to_base64;
-  url_diff = false;
+  url_to_base64 = data;
+  url_diff = new_url_diff;
 }
 
 function is_cache_up_to_date() {

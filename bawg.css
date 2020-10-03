@@ -413,7 +413,7 @@ span.match {
     cursor: pointer;
 }
 #update.update-update::before {
-    content: 'Update cache';
+    content: 'Update Cache';
 }
 #update.update-disable {
     background-color: #808080;
@@ -421,7 +421,7 @@ span.match {
     cursor: not-allowed;
 }
 #update.update-disable::before {
-    content: 'Update cache';
+    content: 'Update Cache';
 }
 #update.update-stop {
     background-color: #9c8024;
@@ -429,7 +429,7 @@ span.match {
     cursor: pointer;
 }
 #update.update-stop::before {
-    content: 'Stop update';
+    content: 'Stop Update';
 }
 #err-status {
     color: red;
