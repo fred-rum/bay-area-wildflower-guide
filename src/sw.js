@@ -1,4 +1,4 @@
-var url_to_base64 = [
+var url_data = [
 /* insert code here */
 ];
 
@@ -14,13 +14,30 @@ var updating = 'Checking cache';
 var err_status = '';
 var usage = '';
 
-var url_data = undefined;
-var new_url_data;
+// url_to_base64 is the mapping of URL to base64 key that we're currently
+// using for checking the cache.  It is initialized from the indexedDB,
+// but is updated to new_url_to_base64 when the cache is updated.
+var url_to_base64 = undefined;
+
+// new_url_to_base64 is the most up-to-date mapping of URL to base64.
+// It is used to update the cache when the user is ready.
+var new_url_to_base64;
+
+// url_diff indicates whether new_url_to_base64 differs from url_to_base64.
 var url_diff;
 
+// base64_to_kb indicates how many KB are required for each file (as
+// represented by a base64 hash).  It initially contains all of the 
+// base64 keys in new_url_to_base64, but is later adjusted to include
+// only those files that aren't yet cached.
 var base64_to_kb = {};
+
+// base64_to_delete indicates which base64 keys in the cache are no longer
+// in use and can be deleted.
 var base64_to_delete = [];
 
+// These values indicate the total calculated size of files that we want
+// to be cached and the total size of useful files that already are cached.
 var kb_total = 0;
 var kb_cached = 0;
 
@@ -186,18 +203,18 @@ function fetch_handler(event) {
   let url = remove_scope_from_request(event.request);
   console.info('fetching ' + url);
 
-  if ((!url_data) || (url in url_data)) {
-    // There is a race condition between initializing url_data
+  if ((!url_to_base64) || (url in url_to_base64)) {
+    // There is a race condition between initializing url_to_base64
     // and fetching the first URL.  Fortunately, our fetch
     // response is allowed to be asynchronous.  So if we recognize
-    // the URL *or* we don't have url_data yet, tell the event
+    // the URL *or* we don't have url_to_base64 yet, tell the event
     // to wait until we can create a fetch response.
     event.respondWith(fetch_response(event, url));
   } else {
     // I found some documentation that says that performance is
     // better if we simply fail to handle a request when making
     // the default online fetch is fine.  So that's what we do
-    // if we have url_data and it's an unrecognized URL.  In
+    // if we have url_to_base64 and it's an unrecognized URL.  In
     // most cases this will be because the user never pressed
     // the shiny green button to cache anything.
     console.info(url + ' not recognized')
@@ -207,18 +224,18 @@ function fetch_handler(event) {
 
 async function fetch_response(event, url) {
   // As described in fetch_handler() above, we might be here because
-  // we don't have url_data yet.  Presumably url_data is already in
-  // the process of being read from the indexedDB, but I'm not sure
-  // how to wait for that result.  Instead I take the simple path of
-  // simply reading it again.
-  if (!url_data) {
+  // we don't have url_to_base64 yet.  Presumably url_to_base64 is
+  // already in the process of being read from the indexedDB, but I'm
+  // not sure how to wait for that result.  Instead I take the simple
+  // path of simply reading it again.
+  if (!url_to_base64) {
     await read_db();
   }
 
-  // Now we're guaranteed to have url_data and can proceed with
+  // Now we're guaranteed to have url_to_base64 and can proceed with
   // checking the cache.
 
-  var response = await caches.match(url_data[url].base64);
+  var response = await caches.match(url_to_base64[url]);
   console.info(response);
   if (response) {
     console.info(url + ' found')
@@ -230,22 +247,43 @@ async function fetch_response(event, url) {
 }
 
 
-/*** Read the old url_data ***/
+/*** Read the old url_to_base64 ***/
 
 // Until the user manually updates the cache again, we want to continue
-// using the old url_data that was used to update the cache last time.
-// E>g.
+// using the old url_to_base64 that was used to update the cache last time.
+// E.g.
 // - the user is online and updates the cache.
 // - the user is online and visits the site again and gets a new sw.js,
 //   but the user doesn't update the cache.
 // - the user goes offline.
 // In this case, the registered sw.js has a different URL->base64 map
 // than what was used when creating the cache.  Trying to use the new
-// url_data would result in cache misses, which is bad.
+// url_to_base64 would result in cache misses, which is bad.
 //
-// The indexedDB stores the url_data value that was present when the
-// cache was last updated.  We use this old url_data until the user
-// updates the cache again.
+// The indexedDB stores the url_to_base64 value that was present when
+// the cache was last updated.  We use this old url_to_base64 until the
+// user updates the cache again.
+
+// Read the cached url_to_base64.
+async function read_db() {
+  console.info('read_db()');
+
+  let db = await open_db();
+
+  let tx = db.transaction("url_data").objectStore("url_data").get("key");
+  let lookup = await async_callbacks(tx);
+
+  console.info('lookup = ');
+  console.info(lookup);
+  if (lookup){
+    url_to_base64 = lookup.value;
+    console.info('url_to_base64 = ')
+    console.info(url_to_base64);
+  }
+
+  // Note that we throw away the db value when we exit.
+  // My guess is that this allows the DB connection to close.
+}
 
 async function open_db() {
   let request = indexedDB.open(DB_NAME, DB_VERSION);
@@ -268,27 +306,6 @@ async function open_db() {
 
   console.info('open_db() returns ' + db);
   return db;
-}
-
-// Read the cached url_data.
-async function read_db() {
-  console.info('read_db()');
-
-  let db = await open_db();
-
-  let tx = db.transaction("url_data").objectStore("url_data").get("key");
-  let lookup = await async_callbacks(tx);
-
-  console.info('lookup = ');
-  console.info(lookup);
-  if (lookup){
-    url_data = lookup.value;
-    console.info('url_data = ')
-    console.info(url_data);
-  }
-
-  // Note that we throw away the db value when we exit.
-  // My guess is that this allows the DB connection to close.
 }
 
 // This function is called when the indexedDB is accessed for the first time.
@@ -324,12 +341,13 @@ async function init_status() {
 
   // Do two things in parallel:
   //
-  // 1. Read the old url_data from indexedDB.
-  // Note that the fetch handler will also call read_db() if it needs it
-  // before we're done here.  But we still call it here in order to
-  // compare it to the new_url_data.
+  // 1. Read the old url_to_base64 from indexedDB.
+  // Note that the fetch handler will also call read_db() if it needs
+  // it before we're done here.  But we still call it here in order to
+  // compare it to the new_url_to_base64.
   //
-  // 2. Generate new_url_data and check how much of it is already cached.
+  // 2. Generate new_url_to_base64 and check how much of it is already
+  // cached.
   await Promise.all([read_db(),
                      count_cached()]);
 
@@ -344,13 +362,12 @@ async function init_status() {
 async function count_cached() {
   console.info('count_cached()');
 
-  new_url_data = {};
-  for (let i = 0; i < url_to_base64.length; i++) {
-    let url = url_to_base64[i][0];
-    let base64 = url_to_base64[i][1];
-    let kb = url_to_base64[i][2];
-    new_url_data[url] = {base64: base64,
-                         kb: kb};
+  new_url_to_base64 = {};
+  for (let i = 0; i < url_data.length; i++) {
+    let url = url_data[i][0];
+    let base64 = url_data[i][1];
+    let kb = url_data[i][2];
+    new_url_to_base64[url] = base64;
     base64_to_kb[base64] = kb;
     kb_total += kb;
   }
@@ -373,7 +390,7 @@ async function count_cached() {
   }
 }
 
-// Compare the old url_data with new_url_data.
+// Compare the old url_to_base64 with new_url_to_base64.
 // This tells us whether we need to update the indexedDB.
 // Generally we'd expect to only need to update the indexedDB when
 // there are also cache changes to perform, but there are other
@@ -384,26 +401,27 @@ function check_url_diff() {
   console.info('check_url_diff()');
   url_diff = false;
 
-  // Check if any old URLs are missing from new_url_data or have
+  // Check if any old URLs are missing from new_url_to_base64 or have
   // different base64 values.
-  for (let url in url_data) {
-    if (!(url in new_url_data) || (url_data[url] != new_url_data[url])) {
-      if (!(url in new_url_data)) {
-        console.info(url + ' no found in new_url_data');
+  for (let url in url_to_base64) {
+    if (!(url in new_url_to_base64) ||
+        (url_to_base64[url] != new_url_to_base64[url])) {
+      if (!(url in new_url_to_base64)) {
+        console.info(url + ' no found in new_url_to_base64');
       } else {
-        console.info(url + ' has different data in new_url_data');
+        console.info(url + ' has different data in new_url_to_base64');
       }
       url_diff = true;
       return;
     }
   }
 
-  // Check if any new URLs are missing from the old url_data.
+  // Check if any new URLs are missing from the old url_to_base64.
   // We already compared the base64 values for entries that match,
   // so we don't have to do that part again.
-  for (let url in new_url_data) {
-    if (!(url in url_data)) {
-      console.info(url + ' no found in the old url_data');
+  for (let url in new_url_to_base64) {
+    if (!(url in url_to_base64)) {
+      console.info(url + ' no found in the old url_to_base64');
       url_diff = true;
       return;
     }
@@ -483,8 +501,8 @@ function fn_send_status(event) {
 function clear_caches(event) {
 }
 
-// When requested, switch to using the newest url_data
-//  and update the cache to match.
+// When requested, switch to using the newest url_to_base64
+// and update the cache to match.
 async function update_cache(event) {
   if (updating) {
     console.info('Update already in progress');
@@ -510,13 +528,10 @@ async function update_cache(event) {
   }
   base64_to_delete = [];
 
-  // TODO: remove unneeded cache entries
-  // (The old url_data might not accurately reflect the cache, so ignore that
-  // and look at the cache directly.)
-  //
-  // TODO: only fetch base64 URLs that aren't already cached.
-  for (let url in url_data) {
-    let base64 = url_data[url].base64;
+  // (The old url_to_base64 might not accurately reflect the cache,
+  // so ignore that and look at the cache directly.)
+  for (let url in url_to_base64) {
+    let base64 = url_to_base64[url]
     if (base64 in base64_to_kb) {
       let kb = base64_to_kb[base64];
       updating = 'Updating ' + decodeURI(url)
@@ -550,8 +565,8 @@ async function update_cache(event) {
 async function record_urls() {
   // Initialize a fresh URL DB object.
   console.info('record_urls()');
-  url_data = new_url_data
-  obj = {key: 'key', value: url_data};
+  url_to_base64 = new_url_to_base64
+  obj = {key: 'key', value: url_to_base64};
   await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
   url_diff = false;
 }
