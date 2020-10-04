@@ -960,10 +960,8 @@ Update Offline Copy - when complete flag is true.
 Clear Offline Files
 
 Save Offline Copy does the following:
-- Write indexedDB with new_url_data and complete flag = false.
 - Fetch new files and save to cache.
-- Write indexedDB with new_url_data and complete flag = true.
-- Replace url_data with new_url_data.
+- Record URLs to indexedDB and update url_to_base64.
 - Hazard status is updated to green.
 - Delete unneeded files from cache.
 

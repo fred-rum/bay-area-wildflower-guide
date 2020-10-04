@@ -15,6 +15,14 @@ var err_status = '';
 var usage = '';
 var stop_updating = false;
 
+// offline_ready is true when we've successfully read the URL data from
+// the indexedDB, which implies that the offline copy was completely
+// fetched some time in the past.  Unfortunate circumstances might have
+// corrupted the data, but that's what the offline_ready flag is really
+// for; corrupted data is presented very differently to the user than
+// no data (or incomplete data).
+var offline_ready;
+
 // url_to_base64 is the mapping of URL to base64 key that we're currently
 // using for checking the cache.  It is initialized from the indexedDB,
 // but is updated to new_url_to_base64 when the cache is updated.
@@ -221,13 +229,17 @@ function fetch_handler(event) {
     // to wait until we can create a fetch response.
     event.respondWith(fetch_response(event, url));
   } else {
+    // We got here because the URL wasn't recognized in url_to_base64,
+    // which can happen either because url_to_base64 is empty (and
+    // offline_ready is false) or because we're trying to fetch a file
+    // that we don't recognize.
+    if (offline_ready) {
+      console.info(url, 'not recognized')
+    }
+
     // I found some documentation that says that performance is
-    // better if we simply fail to handle a request when making
-    // the default online fetch is fine.  So that's what we do
-    // if we have url_to_base64 and it's an unrecognized URL.  In
-    // most cases this will be because the user never pressed
-    // the shiny green button to cache anything.
-    console.info(url, 'not recognized')
+    // better if we simply fail to handle a request, in which case
+    // the browser performs the default online fetch.
     return;
   }
 }
@@ -285,12 +297,12 @@ async function read_db() {
     let lookup = await async_callbacks(tx);
     console.info('lookup =', lookup);
     url_to_base64 = lookup.url_to_base64;
-    if (url_to_base64 === undefined) {
-        url_to_base64 = {};
-    }
+    if (url_to_base64 === undefined) throw 'oops';
+    offline_ready = true;
   } catch {
     console.warn('indexedDB lookup failed');
     url_to_base64 = {};
+    offline_ready = false;
   }
 
   console.info('url_to_base64 =', url_to_base64);
@@ -484,6 +496,9 @@ function fn_send_status(event) {
   }
 
   if (updating === 'Checking cache') {
+    // It would be nice to display incremental progress while checking the
+    // cache, but the actual slow part is getting all the keys from the
+    // cache.  Actually checking the keys is then atomic.
     var status = updating;
   } else {
     let status_cached = (kb_cached/1024).toFixed(1)
@@ -506,6 +521,7 @@ function fn_send_status(event) {
       status += ' - ' + updating;
     }
   }
+
   if (updating === false) {
     var update_class = 'update-update';
   } else if ((updating === 'Up to date') ||
@@ -570,8 +586,12 @@ async function clear_caches() {
   console.info('clear_caches()');
   updating = 'Clearing caches';
 
+  url_to_base64 = {};
+  url_diff = true;
+  offline_ready = false;
+
   // For some reason, indexedDB.deleteDatabase() often hangs for me.
-  // So I replace the data with an empty set, instead.
+  // So I clear the objectStore, instead.
   /*
   let request = indexedDB.deleteDatabase(DB_NAME);
   result = await async_callbacks(request);
@@ -580,8 +600,6 @@ async function clear_caches() {
 
   let db = await open_db();
   await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").clear());
-  url_to_base64 = {};
-  url_diff = true;
 
   // For some reason, caches.delete() often hangs for me.
   // So I delete all of the individual cache entries, instead.
@@ -615,42 +633,26 @@ async function delete_all_cache_entries() {
   }
 }
 
-// When requested, switch to using the newest url_to_base64
+// When requested, switch to using the new URL data
 // and update the cache to match.
 async function update_cache() {
   console.info('update_cache()');
   err_status = '';
 
-  // Recording URLs should finish in a flash, but deleting cached files
-  // could take finite time, so we just use the 'deleting' message for
-  // both steps.
-  updating = 'Deleting out-of-date cached files';
+  let cache = await caches.open(BASE64_CACHE_NAME);
+
+  await fetch_to_cache(cache);
 
   await record_urls();
 
-  let cache = await caches.open(BASE64_CACHE_NAME);
+  await delete_old_files(cache);
 
-  if (base64_to_delete.length) {
-    console.info(updating)
-  }
-  for (let i = 0; i < base64_to_delete.length; i++) {
-    // Pay attention to the global stop_updating variable and
-    // bail out if it becomes true.
-    if (stop_updating){
-      return is_cache_up_to_date();
-    }
+  is_cache_up_to_date();
+}
 
-    let base64 = base64_to_delete[i];
-    console.info('Deleting', base64);
-    await cache.delete(base64);
-
-  }
-  base64_to_delete = [];
-
-  // (The old url_to_base64 might not accurately reflect the cache,
-  // so ignore that and look at the cache directly.)
-  for (let url in url_to_base64) {
-    let base64 = url_to_base64[url]
+async function fetch_to_cache(cache) {
+  for (let url in new_url_to_base64) {
+    let base64 = new_url_to_base64[url]
     if (base64 in base64_to_kb) {
       let kb = base64_to_kb[base64];
       updating = 'Fetching ' + decodeURI(url)
@@ -694,8 +696,6 @@ async function update_cache() {
       }
     }
   }
-
-  is_cache_up_to_date();
 }
 
 // Record new_url_to_base64 to the indexedDB and begin using it as the current
@@ -712,6 +712,28 @@ async function record_urls() {
 
   url_to_base64 = new_url_to_base64;
   url_diff = false;
+  offline_ready = true;
+}
+
+async function delete_old_files(cache) {
+  if (base64_to_delete.length) {
+    updating = 'Deleting out-of-date cached files';
+    console.info(updating)
+  }
+
+  for (let i = 0; i < base64_to_delete.length; i++) {
+    // Pay attention to the global stop_updating variable and
+    // bail out if it becomes true.
+    if (stop_updating){
+      return is_cache_up_to_date();
+    }
+
+    let base64 = base64_to_delete[i];
+    console.info('Deleting', base64);
+    await cache.delete(base64);
+
+  }
+  base64_to_delete = [];
 }
 
 function is_cache_up_to_date() {
