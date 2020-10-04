@@ -600,7 +600,7 @@ function fn_change() {
    So it makes sense to also have my behavior trigger on keydown for
    consistency. */
 function fn_keydown() {
-  if ((event.key == 'Enter') && ac_list.length) {
+  if ((event.key == 'Enter') && !ac_is_hidden && ac_list.length) {
     var fit_info = ac_list[ac_selected];
     var url = fn_url(fit_info);
     if (event.shiftKey || event.ctrlKey) {
@@ -623,16 +623,18 @@ function fn_keydown() {
     clear_search();
   } else if (event.key == 'Escape') {
     clear_search();
-  } else if ((event.key == 'Down') || (event.key == 'ArrowDown') ||
-      ((event.key == 'Tab') && !event.shiftKey)) {
+  } else if (!ac_is_hidden &&
+             ((event.key == 'Down') || (event.key == 'ArrowDown') ||
+              ((event.key == 'Tab') && !event.shiftKey))) {
     ac_selected++;
     if (ac_selected >= ac_list.length) {
       ac_selected = 0;
     }
     generate_ac_html();
     event.preventDefault();
-  } else if ((event.key == 'Up') || (event.key == 'ArrowUp') ||
-      ((event.key == 'Tab') && event.shiftKey)) {
+  } else if (!ac_is_hidden &&
+             ((event.key == 'Up') || (event.key == 'ArrowUp') ||
+              ((event.key == 'Tab') && event.shiftKey))) {
     ac_selected--;
     if (ac_selected < 0) {
       ac_selected = ac_list.length - 1;
