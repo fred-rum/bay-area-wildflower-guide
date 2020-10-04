@@ -680,6 +680,7 @@ if arg('-with_cache'):
         'index.html',
         'bawg.css',
         'photos/home-icon.png',
+        'photos/hazard.svg',
         'search.js',
         'pages.js',
         'manifest.webmanifest',

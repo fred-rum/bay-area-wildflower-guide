@@ -21,7 +21,7 @@ var stop_updating = false;
 // corrupted the data, but that's what the offline_ready flag is really
 // for; corrupted data is presented very differently to the user than
 // no data (or incomplete data).
-var offline_ready;
+var offline_ready = false;
 
 // url_to_base64 is the mapping of URL to base64 key that we're currently
 // using for checking the cache.  It is initialized from the indexedDB,
@@ -543,6 +543,16 @@ function fn_send_status(event) {
     }
   }
 
+  if (offline_ready) {
+    if (updating === 'Up to date') {
+      var top_msg = 'green';
+    } else {
+      var top_msg = 'yellow';
+    }
+  } else {
+    var top_msg = undefined;
+  }
+
   // Update the cache usage estimate.
   // We don't actually wait for its asynchronous operation to finish
   // since that would break this event handler, but hopefully it'll be
@@ -554,7 +564,8 @@ function fn_send_status(event) {
     update_class: update_class,
     status: status,
     err_status: err_status,
-    usage: usage
+    usage: usage,
+    top_msg: top_msg
   };
   event.source.postMessage(msg);
 

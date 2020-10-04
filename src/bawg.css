@@ -929,3 +929,34 @@ span.match {
 #clear:active {
     background-color: #d10000;
 }
+
+/* important messages on the home page */
+div#cache-green {
+    display: none;
+    background-color: #a3ffab;
+    padding: 5px;
+}
+img.green-img {
+    display: inline-block;
+    vertical-align: middle;
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+}
+span.cache-text {
+    vertical-align: middle;
+}
+div#cache-yellow {
+    display: none;
+    background-color: #faffa3;
+    padding: 5px;
+}
+img.hazard-img {
+    display: inline-block;
+    vertical-align: middle;
+    width: 40px;
+    height: 40px;
+    /* less margin-right because the slope of the triangle already
+       creates some margin. */
+    margin-right: 3px;
+}

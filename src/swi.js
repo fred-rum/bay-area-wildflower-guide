@@ -7,7 +7,13 @@ let e_err_status;
 let e_clear;
 let e_usage;
 
+let e_top_msg = {};
+
 var temp_controller;
+
+// old_msg is initialized to a dict, so when receive_status() looks for
+// changes, every old value appears to be undefined.
+var old_msg = {};
 
 /* If the readyState is 'interactive', then the user can (supposedly)
    interact with the page, but it may still be loading HTML, images,
@@ -37,6 +43,13 @@ function swi_oninteractive() {
 
   e_clear = document.getElementById('clear');
   e_usage = document.getElementById('usage');
+
+  let top_msg_array = ['green', 'yellow'];
+  for (i = 0; i < top_msg_array.length; i++) {
+    top_msg = top_msg_array[i];
+    e_top_msg[top_msg] = document.getElementById('cache-' + top_msg);
+    console.info(top_msg, e_top_msg[top_msg]);
+  }
 
   e_status.innerHTML = 'Waiting for service worker to load';
 
@@ -98,11 +111,36 @@ function poll_cache(msg='poll') {
 function fn_receive_status(event) {
   try {
     let msg = event.data;
-    e_update.textContent = msg.update_button;
-    e_update.className = msg.update_class;
-    e_status.innerHTML = msg.status;
-    e_err_status.innerHTML = msg.err_status;
-    e_usage.innerHTML = msg.usage;
+
+    // Update DOM elements only if they've changed.
+    // This might improve performance, but the main advantage is to stop
+    // the scrollbar from flickering on Android Chrome.  (I'd guess that
+    // the browser can detect unchanged values for textContent and
+    // className, but not for innerHTML).
+    if (msg.update_button != old_msg.update_button) {
+      e_update.textContent = msg.update_button;
+    }
+    if (msg.update_class != old_msg.update_class) {
+      e_update.className = msg.update_class;
+    }
+    if (msg.status != old_msg.status) {
+      e_status.innerHTML = msg.status;
+    }
+    if (msg.err_status != old_msg.err_status) {
+      e_err_status.innerHTML = msg.err_status;
+    }
+    if (msg.usage != old_msg.usage) {
+      e_usage.innerHTML = msg.usage;
+    }
+    if (msg.top_msg != old_msg.top_msg) {
+      if (old_msg.top_msg) {
+        e_top_msg[old_msg.top_msg].style.display = 'none';
+      }
+      if (msg.top_msg) {
+        e_top_msg[msg.top_msg].style.display = 'block';
+      }
+    }
+    old_msg = msg;
   } catch (error) {
     console.error(error);
     // sw.js always auto-updates.  If swi.js is cached, communication could

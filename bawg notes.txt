@@ -964,3 +964,5 @@ Save Offline Copy does the following:
 - Record URLs to indexedDB and update url_to_base64.
 - Hazard status is updated to green.
 - Delete unneeded files from cache.
+
+When status changes to 'up-to-date', auto-refresh the home page.
