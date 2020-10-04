@@ -879,3 +879,9 @@ available space.  It's not terrible, but use max-width to limit?
 test PWA service worker locally:
 /cygdrive/c/Python37/python -m http.server
 http://localhost:8000/
+
+https://web.dev/customize-install/
+
+Test offline access.
+Fix behavior when cache-update fetch fails.
+Remove #anchor when looking up URL.  (And ?query ?)

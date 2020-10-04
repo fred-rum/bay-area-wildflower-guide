@@ -100,7 +100,7 @@ def update_cache(path_list):
         entry = get_base64(path)
         base64 = entry['base64']
         kb = entry['kb']
-        cache_list.append(f"['{url(path)}', '{base64}', {kb}]")
+        cache_list.append(f'["{url(path)}", "{base64}", {kb}]')
 
 def gen_url_cache():
     with open(f'{root_path}/data/cache.pickle', mode='wb') as w:

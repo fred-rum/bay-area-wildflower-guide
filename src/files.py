@@ -171,5 +171,8 @@ def filename(name):
 
 # Percent-encode characters that aren't supposed to be in a URL.
 # E.g. encode " " as "%20".
+# safe list taken from
+# https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI
+# In particular, I use ",", "'", and of course "/" in my filenames.
 def url(name):
-    return urllib.parse.quote(filename(name), safe='/,')
+    return urllib.parse.quote(filename(name), safe=";,/?:@&=+$-_.!~*'()#")
