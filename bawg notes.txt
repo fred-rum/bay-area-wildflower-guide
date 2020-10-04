@@ -882,15 +882,10 @@ http://localhost:8000/
 
 https://web.dev/customize-install/
 
-Test offline access.
-Fix behavior when cache-update fetch fails.
-
-Fix swi to wait for DOM content.
-
 On the phone:
 test entering airplane mode during cache update 
 test cached pages while in airplane mode
-test layout
+test layout of swi buttons & text
 test install
 test speed of download and slowdown of browsing during download
 

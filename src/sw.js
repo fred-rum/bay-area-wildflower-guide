@@ -684,16 +684,19 @@ async function update_cache() {
 
         // Entries left in base64_to_kb are ones that need to be fetched.
         delete base64_to_kb[base64];
-  
-  // TODO: An error ends fetching, so it should really set updating = false.
-  // TODO: An error message would be good, too.
-  // error codes:
-  // 300-399: The server did something unexpected.
-  // 400-499: The file list must have updated.  Refresh the page and try again.
-  // (or refresh automatically, then prompt to 'Try again?')
-  // 500-599: The server did something unexpected.
+
+        kb_cached += kb;
+      } else if (response.status == 404) {
+        console.warn('fetch missing');
+        err_status = '<br>Could not find ' + url + '<br>The Guide must have updated online just now.  Refresh the page and try again.';
+        updating = false;
+        return;
+      } else {
+        console.warn('strange server response');
+        err_status = '<br>' + response.status + ' ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
+        updating = false;
+        return;
       }
-      kb_cached += kb;
     }
   }
 
