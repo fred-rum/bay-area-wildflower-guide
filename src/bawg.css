@@ -963,3 +963,19 @@ img.hazard-img {
        creates some margin. */
     margin-right: 3px;
 }
+div#icon {
+    display: none;
+    float: right;
+    cursor: pointer;
+}
+div#icon.icon-yellow {
+    display: block;
+    background-color: #faffa3;
+    padding: 5px;
+}
+
+/* When navigating from the hazard icon to the offline section, don't
+   do the default behavior of highlighting the target anchor. */
+#offline:target {
+    background-color: inherit;
+}

@@ -474,3 +474,16 @@ img.hazard-img {
     height: 40px;
     margin-right: 3px;
 }
+div#icon {
+    display: none;
+    float: right;
+    cursor: pointer;
+}
+div#icon.icon-yellow {
+    display: block;
+    background-color: #faffa3;
+    padding: 5px;
+}
+#offline:target {
+    background-color: inherit;
+}

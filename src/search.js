@@ -614,7 +614,7 @@ function fn_keydown() {
     } else {
       /* The enter key was pressed *without* the shift or control key held.
          Navigate to the new URL within the existing page. */
-      window.location.href = fn_url(fit_info);
+      window.location.href = url;
     }
     /* Opening a new window doesn't affect the current page.  Also, a
        search of the glossary from a glossary page might result in no

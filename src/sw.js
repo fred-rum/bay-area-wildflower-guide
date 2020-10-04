@@ -712,7 +712,7 @@ async function fetch_to_cache(cache) {
         kb_cached += kb;
       } else if (response.status == 404) {
         console.warn('fetch missing');
-        err_status = '<br>Could not find ' + url + '<br>The Guide must have updated online just now.  Refresh the page and try again.';
+        err_status = '<br>Could not find ' + decodeURI(url) + '<br>The Guide must have updated online just now.  Refresh the page and try again.';
         throw 'oops';
       } else {
         console.warn('strange server response');

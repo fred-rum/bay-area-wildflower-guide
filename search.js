@@ -390,7 +390,7 @@ function fn_keydown() {
     if (event.shiftKey || event.ctrlKey) {
       window.open(url);
     } else {
-      window.location.href = fn_url(fit_info);
+      window.location.href = url;
     }
     clear_search();
   } else if (event.key == 'Escape') {

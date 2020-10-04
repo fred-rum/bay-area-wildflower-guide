@@ -15,6 +15,11 @@ var temp_controller;
 // changes, every old value appears to be undefined.
 var old_msg = {};
 
+var yellow_expire = localStorage.getItem('yellow_expire');
+if (yellow_expire != null) {
+  yellow_expire = parseFloat(yellow_expire);
+}
+
 /* If the readyState is 'interactive', then the user can (supposedly)
    interact with the page, but it may still be loading HTML, images,
    or the stylesheet.  In fact, the page may not even be rendered yet.
@@ -33,28 +38,31 @@ function swi_oninteractive() {
   console.info('swi_oninteractive()');
 
   e_update = document.getElementById('update');
-  if (!e_update) {
-    // Don't poll if we're not on the home page with the update button.
-    return;
+  if (e_update) {
+    e_status = document.getElementById('status');
+    e_err_status = document.getElementById('err-status');
+
+    e_clear = document.getElementById('clear');
+    e_usage = document.getElementById('usage');
+
+    let top_msg_array = ['green', 'yellow'];
+    for (i = 0; i < top_msg_array.length; i++) {
+      top_msg = top_msg_array[i];
+      e_top_msg[top_msg] = document.getElementById('cache-' + top_msg);
+      console.info(top_msg, e_top_msg[top_msg]);
+    }
+
+    e_status.innerHTML = 'Waiting for service worker to load';
+
+    var sw_path = 'sw.js';
+  } else {
+    e_icon = document.getElementById('icon');
+
+    var sw_path = '../sw.js';
   }
-
-  e_status = document.getElementById('status');
-  e_err_status = document.getElementById('err-status');
-
-  e_clear = document.getElementById('clear');
-  e_usage = document.getElementById('usage');
-
-  let top_msg_array = ['green', 'yellow'];
-  for (i = 0; i < top_msg_array.length; i++) {
-    top_msg = top_msg_array[i];
-    e_top_msg[top_msg] = document.getElementById('cache-' + top_msg);
-    console.info(top_msg, e_top_msg[top_msg]);
-  }
-
-  e_status.innerHTML = 'Waiting for service worker to load';
 
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').then(function (registration) {
+    navigator.serviceWorker.register(sw_path).then(function (registration) {
       // When register() resolves, we're not guaranteed to have an active
       // service worker.  In fact, the service worker might not even be
       // 'installing' yet!  Theoretically, I could set up callbacks on
@@ -64,20 +72,21 @@ function swi_oninteractive() {
       navigator.serviceWorker.ready.then(start_polling);
     }).catch (function (error) {
       console.info('service worker registration failed');
-      e_status.innerHTML = 'No service worker';
+      if (e_status) {
+        e_status.innerHTML = 'No service worker';
+      }
     });
   } else {
     console.info('no service worker support in browser');
-    e_status.innerHTML = 'Sorry, but your browser doesn&rsquo;t support this feature.';
+    if (e_status) {
+      e_status.innerHTML = 'Sorry, but your browser doesn&rsquo;t support this feature.';
+    }
   }
 }
 swi_oninteractive();
 
 function start_polling(registration) {
   console.info('start_polling()');
-  e_update.addEventListener('click', fn_update);
-  e_clear.addEventListener('click', fn_clear);
-  navigator.serviceWorker.addEventListener('message', fn_receive_status);
 
   // An oddity of the navigator.serviceWorker.ready promise is that it
   // resolves when a service worker is 'active', but (at least in Chrome),
@@ -86,16 +95,23 @@ function start_polling(registration) {
   // and use that until navigator.serviceWorker.controller updates.
   temp_controller = registration.active;
 
-  // sw.js will return the simplified status of ' Checking cache' until it
-  // is fully initialized and ready to return real status values.  To avoid
-  // flickering while we wait for that first response [...]
+  if (e_update) {
+    e_update.addEventListener('click', fn_update);
+    e_clear.addEventListener('click', fn_clear);
+
+    navigator.serviceWorker.addEventListener('message', fn_receive_status);
+  } else if (e_icon) {
+    e_icon.addEventListener('click', fn_icon_click);
+
+    navigator.serviceWorker.addEventListener('message', fn_receive_icon);
+  }
 
   // Poll right away, and then at intervals.
-  poll_cache('start');
+  poll_cache(undefined, 'start');
   setInterval(poll_cache, 500);
 }
 
-function poll_cache(msg='poll') {
+function poll_cache(event, msg='poll') {
   // poll_cache() is only called if there is an active controller,
   // but navigator.serviceWorker.controller might not be updated yet
   // (as documented above).  Prefer navigator.serviceWorker.controller
@@ -160,6 +176,8 @@ function fn_update(event) {
     // send the 'update' message and let the service worker sort it out.
     navigator.serviceWorker.controller.postMessage('update');
     e_update.className = 'disabled';
+    localStorage.removeItem('yellow_expire');
+    yellow_expire = null;
   }
 }
 
@@ -169,5 +187,34 @@ function fn_clear(event) {
     // break down.  So regardless of what we *think* the status is, always
     // send the 'update' message and let the service worker sort it out.
     navigator.serviceWorker.controller.postMessage('clear');
+    localStorage.clear();
+    yellow_expire = null;
+  }
+}
+
+/* This function receives service worker messages on all pages except
+   the home page.  It's only purpose is to update the icon in the upper
+   right corner if the cache is imperfect. */
+function fn_receive_icon(event) {
+  let msg = event.data;
+
+  if (msg.top_msg != old_msg.top_msg) {
+    if ((msg.top_msg == 'yellow') &&
+        ((yellow_expire === null) || (Date.now() > yellow_expire))) {
+      e_icon.className = 'icon-yellow';
+    } else {
+      e_icon.className = '';
+    }
+  }
+}
+
+function fn_icon_click(event) {
+  let ms_in_week = 1000*60*60*24*7;
+  yellow_expire = Date.now() + ms_in_week;
+  localStorage.setItem('yellow_expire', String(yellow_expire));
+  if (event.shiftKey || event.ctrlKey) {
+    window.open('../index.html#offline');
+  } else {
+    window.location.href = '../index.html#offline';
   }
 }

@@ -139,6 +139,7 @@ def write_header(w, title, h1, nospace=False, desc=None):
 <div id="autocomplete-box"></div>
 </div>
 <div id="body">
+<div id="icon"><img src="../icons/hazard.svg" class="hazard-img"></div>
 ''')
     if h1:
         if nospace:
