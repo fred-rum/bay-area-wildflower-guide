@@ -458,6 +458,8 @@ img.green-img {
     margin-right: 8px;
 }
 span.cache-text {
+    width: calc(100% - 48px);
+    display: inline-block;
     vertical-align: middle;
 }
 div#cache-yellow {

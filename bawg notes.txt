@@ -966,8 +966,3 @@ Save Offline Copy does the following:
 - Delete unneeded files from cache.
 
 When status changes to 'up-to-date', auto-refresh the home page.
-
-Fix top_msg to be entirely to the right and multi-line centered with
-the icon.
-
-Move home-page.png and hazard.svg to icons directory.
