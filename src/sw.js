@@ -547,9 +547,13 @@ function fn_send_status(event) {
     if (updating === 'Up to date') {
       var top_msg = 'green';
     } else {
+      // If updating === false or shows update progress, then an
+      // update is possible.
       var top_msg = 'yellow';
     }
   } else {
+    // if updating === 'Clearing caches', then offline_ready must also
+    // be false.
     var top_msg = undefined;
   }
 

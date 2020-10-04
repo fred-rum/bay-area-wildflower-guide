@@ -131,7 +131,7 @@ def write_header(w, title, h1, nospace=False, desc=None):
 <link rel="stylesheet" href="../bawg.css">
 </head>
 <body>
-<a href="../index.html"><img src="../photos/home-icon.png" class="home-icon" alt="home"></a>
+<a href="../index.html"><img src="../icons/home.png" class="home-icon" alt="home"></a>
 <div class="body-container">
 <div id="search-container">
 <input type="search" id="search" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="flower or glossary term" aria-label="search for a flower or glossary term">
