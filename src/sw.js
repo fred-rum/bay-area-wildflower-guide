@@ -650,7 +650,7 @@ async function update_cache() {
     let base64 = url_to_base64[url]
     if (base64 in base64_to_kb) {
       let kb = base64_to_kb[base64];
-      updating = 'Updating ' + decodeURI(url)
+      updating = 'Fetching ' + decodeURI(url)
       console.info(updating)
       response = await fetch(url);
 

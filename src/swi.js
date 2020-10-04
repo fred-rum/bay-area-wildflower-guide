@@ -1,14 +1,12 @@
 // This script handles the document end of ServiceWorker interaction (swi).
 
-let e_update = document.getElementById('update');
-let e_status = document.getElementById('status');
-let e_err_status = document.getElementById('err-status');
+let e_update;
+let e_status;
+let e_err_status;
 
-let e_clear = document.getElementById('clear');
-let e_usage = document.getElementById('usage');
+let e_clear;
+let e_usage;
 
-var reg;
-var intervalID;
 var temp_controller;
 
 /* If the readyState is 'interactive', then the user can (supposedly)
@@ -27,7 +25,19 @@ function swi_oninteractive() {
     return
   }
   console.info('swi_oninteractive()');
-  
+
+  e_update = document.getElementById('update');
+  if (!e_update) {
+    // Don't poll if we're not on the home page with the update button.
+    return;
+  }
+
+  e_status = document.getElementById('status');
+  e_err_status = document.getElementById('err-status');
+
+  e_clear = document.getElementById('clear');
+  e_usage = document.getElementById('usage');
+
   e_status.textContent = ' Waiting for service worker to load';
 
   if ('serviceWorker' in navigator) {
@@ -69,7 +79,7 @@ function start_polling(registration) {
 
   // Poll right away, and then at intervals.
   poll_cache();
-  intervalID = setInterval(poll_cache, 1000);
+  setInterval(poll_cache, 1000);
 }
 
 function poll_cache() {

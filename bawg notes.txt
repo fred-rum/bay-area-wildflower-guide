@@ -935,10 +935,10 @@ This should only occur if I screwed up caching or if the user has
 manually messed with the cache (or if the browser has discarded some
 cache contents, but apparently not all?).
 
-Clicking the hazard symbol takes you to the home page and removes the
-hazard symbol from the page corner for as long as sw.js remains
-loaded.  (The yellow hazard is dismissed for a minimum of a week by
-adding a timestamp to indexedDB.)
+Clicking the hazard symbol takes you to the home page (targeting the
+'Use it Offline' section) and removes the hazard symbol from the page
+corner for as long as sw.js remains loaded.  (The yellow hazard is
+dismissed for a minimum of a week by adding a timestamp to indexedDB.)
 
 On the home page, at the top of the 'Use it Offline' section, a new
 paragraph appears when there's a hazard along with the corresponding
