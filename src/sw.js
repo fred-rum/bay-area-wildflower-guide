@@ -543,6 +543,11 @@ function fn_send_status(event) {
       stop_updating = true;
     }
   } else if (event.data === 'clear') {
+    // If the user clicks the 'Clear Cache' button multiple times in a
+    // row, I don't bother to suppress simultaneous calls to clear_caches().
+    // Intuition and experimentation indicates that the worst that happens
+    // is that the same cache entry is deleted multiple times, and doing
+    // so is harmless and safe.
     clear_caches();
   }
 }
@@ -718,7 +723,7 @@ async function update_usage() {
     if ((kb_cached == 0) && (status_usage < 10.0)) {
       usage = ' Cache is empty';
     } else {
-      usage = ' ' + status_usage + ' MB cached including overhead';
+      usage = ' ' + status_usage + ' MB cached with overhead';
     }
     usage += ' (browser allows up to ' + status_quota + ' GB)';
   }
