@@ -668,6 +668,10 @@ if total_list:
 ###############################################################################
 # Update base64 cache and sw.js
 
+def by_filename(name):
+    slash_pos = name.find('/')
+    return name[slash_pos+1:].casefold()
+
 if arg('-with_cache'):
     path_list = [
         # start with the files most needed for interfacing with the worker
@@ -684,20 +688,24 @@ if arg('-with_cache'):
     favicon_set = get_file_set('favicon', None)
     path_list += get_file_list('favicon', favicon_set, None)
 
+    alpha_list = []
+
     html_set = set()
     for page in page_array:
         html_set.add(page.name)
-    path_list += get_file_list('html', html_set, 'html')
+    alpha_list += get_file_list('html', html_set, 'html')
 
-    path_list += get_file_list('html', glossary_files, 'html')
+    alpha_list += get_file_list('html', glossary_files, 'html')
 
-    path_list += get_file_list('thumbs', jpg_files, 'jpg')
+    alpha_list += get_file_list('thumbs', jpg_files, 'jpg')
 
-    path_list += get_file_list('photos', jpg_files, 'jpg')
+    alpha_list += get_file_list('photos', jpg_files, 'jpg')
 
     figure_set = get_file_set('figures', 'svg')
     figure_set.discard('_figure template')
-    path_list += get_file_list('figures', figure_set, 'svg')
+    alpha_list += get_file_list('figures', figure_set, 'svg')
+
+    path_list += sorted(alpha_list, key=by_filename)
 
     update_cache(path_list)
     gen_url_cache()

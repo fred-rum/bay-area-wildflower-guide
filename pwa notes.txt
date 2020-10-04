@@ -82,16 +82,3 @@ Check sync of two index.html windows.
 Make the buttons more active when clicked or focused.
 Looks like :active should do it.
 role="button"
-
-
-Include a percent complete indication on cache updates?
-Simply by file count or...
-
-Measure average time per file (time/file).
-Measure time for a long file (time/file) + (time/kb).
-Remaining time estimate = files * (time/file) + kb * (time/kb)
-
-Or rearrange files so that thumbnails and photos are ordered together
-with the HTML page they are associated with.  This even mix of files
-should load more evenly.  In this case, an extra indication of
-percent/time should be less necessary.
