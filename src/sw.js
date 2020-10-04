@@ -18,7 +18,7 @@ var stop_updating = false;
 // url_to_base64 is the mapping of URL to base64 key that we're currently
 // using for checking the cache.  It is initialized from the indexedDB,
 // but is updated to new_url_to_base64 when the cache is updated.
-var url_to_base64 = undefined;
+var url_to_base64;
 
 // new_url_to_base64 is the most up-to-date mapping of URL to base64.
 // It is used to update the cache when the user is ready.
@@ -211,7 +211,7 @@ function fetch_handler(event) {
   // The request is guaranteed to be in scope, so we can simply
   // remove the scope to get the relative URL.
   let url = remove_scope_from_request(event.request);
-  console.info('fetching ' + url);
+  console.info('fetching', url);
 
   if ((!url_to_base64) || (url in url_to_base64)) {
     // There is a race condition between initializing url_to_base64
@@ -227,7 +227,7 @@ function fetch_handler(event) {
     // if we have url_to_base64 and it's an unrecognized URL.  In
     // most cases this will be because the user never pressed
     // the shiny green button to cache anything.
-    console.info(url + ' not recognized')
+    console.info(url, 'not recognized')
     return;
   }
 }
@@ -248,10 +248,10 @@ async function fetch_response(event, url) {
   let response = await caches.match(url_to_base64[url]);
   console.info(response);
   if (response) {
-    console.info(url + ' found')
+    console.info(url, 'found')
     return response;
   } else {
-    console.info(url + ' not found')
+    console.info(url, 'not found')
     return fetch(event.request);
   }
 }
@@ -280,16 +280,20 @@ async function read_db() {
 
   let db = await open_db();
 
-  let tx = db.transaction("url_data").objectStore("url_data").get("key");
-  let lookup = await async_callbacks(tx);
-
-  console.info('lookup = ');
-  console.info(lookup);
-  if (lookup){
-    url_to_base64 = lookup.value;
-    console.info('url_to_base64 = ')
-    console.info(url_to_base64);
+  try {
+    let tx = db.transaction('url_data').objectStore('url_data').get('data');
+    let lookup = await async_callbacks(tx);
+    console.info('lookup =', lookup);
+    url_to_base64 = lookup.url_to_base64;
+    if (url_to_base64 === undefined) {
+        url_to_base64 = {};
+    }
+  } catch {
+    console.warn('indexedDB lookup failed');
+    url_to_base64 = {};
   }
+
+  console.info('url_to_base64 =', url_to_base64);
 
   // Note that we throw away the db value when we exit.
   // My guess is that this allows the DB connection to close.
@@ -314,7 +318,7 @@ async function open_db() {
 
   let db = await async_callbacks(request);
 
-  console.info('open_db() returns ' + db);
+  console.info('open_db() returns', db);
   return db;
 }
 
@@ -323,19 +327,7 @@ async function open_db() {
 // I need to adjust this code to avoid an error.)
 async function dbupgradeneeded(event) {
   let db = event.target.result;
-
-  let objectStore = db.createObjectStore("url_data", { keyPath: "key" });
-
-  // We can start using the objectStore handle right away, even if the
-  // transaction to the database is still pending.
-
-  // Store an empty value in the newly created objectStore.
-  obj = {key: 'key', value: {}};
-  objectStore.add(obj);
-
-  // Again, the transaction may still be in flight, but there's no need to
-  // wait for it.  Any later read transaction is guaranteed to execute
-  // in the proper order.
+  db.createObjectStore("url_data", { keyPath: "key" });
 }
 
 
@@ -402,7 +394,7 @@ async function count_cached() {
       delete base64_to_kb[base64];
     } else {
       // Entries in base64_to_delete are ones that need to be deleted.
-      console.info('Need to delete ' + base64);
+      console.info('Need to delete', base64);
       base64_to_delete.push(base64);
     }
   }
@@ -425,9 +417,9 @@ function check_url_diff() {
     if (!(url in new_url_to_base64) ||
         (url_to_base64[url] != new_url_to_base64[url])) {
       if (!(url in new_url_to_base64)) {
-        console.info(url + ' not found in new_url_to_base64');
+        console.info(url, 'not found in new_url_to_base64');
       } else {
-        console.info(url + ' has different data in new_url_to_base64');
+        console.info(url, 'has different data in new_url_to_base64');
       }
       url_diff = true;
       return;
@@ -439,7 +431,7 @@ function check_url_diff() {
   // so we don't have to do that part again.
   for (let url in new_url_to_base64) {
     if (!(url in url_to_base64)) {
-      console.info(url + ' not found in the old url_to_base64');
+      console.info(url, 'not found in the old url_to_base64');
       url_diff = true;
       return;
     }
@@ -583,17 +575,20 @@ async function clear_caches() {
   /*
   let request = indexedDB.deleteDatabase(DB_NAME);
   result = await async_callbacks(request);
-  console.info('indexedDB delete result = ' + result);
+  console.info('indexedDB delete result =', result);
   */
 
-  await record_urls({}, true);
+  let db = await open_db();
+  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").clear());
+  url_to_base64 = {};
+  url_diff = true;
 
   // For some reason, caches.delete() often hangs for me.
   // So I delete all of the individual cache entries, instead.
   /*
   request = caches.delete(BASE64_CACHE_NAME);
   result = await async_callbacks(request);
-  console.info('cache delete result = ' + result);
+  console.info('cache delete result =', result);
   */
 
   await delete_all_cache_entries();
@@ -611,11 +606,11 @@ async function delete_all_cache_entries() {
   let cache = await caches.open(BASE64_CACHE_NAME);
   let requests = await cache.keys();
 
-  console.info('num to delete = ' + requests.length);
+  console.info('num to delete =', requests.length);
 
   for (let i = 0; i < requests.length; i++) {
     let request = requests[i]
-    console.info('Deleting ' + request);
+    console.info('Deleting', request);
     await cache.delete(request);
   }
 }
@@ -631,7 +626,7 @@ async function update_cache() {
   // both steps.
   updating = 'Deleting out-of-date cached files';
 
-  await record_urls(new_url_to_base64, false);
+  await record_urls();
 
   let cache = await caches.open(BASE64_CACHE_NAME);
 
@@ -646,7 +641,7 @@ async function update_cache() {
     }
 
     let base64 = base64_to_delete[i];
-    console.info('Deleting ' + base64);
+    console.info('Deleting', base64);
     await cache.delete(base64);
 
   }
@@ -703,19 +698,20 @@ async function update_cache() {
   is_cache_up_to_date();
 }
 
-// Record data to the indexedDB and begin using it as the current
-// url_to_base64.  If we're updating the cache, the data is new_url_to_base64.
-// If we're clearing the cache, the data is {}.
-async function record_urls(data, new_url_diff) {
+// Record new_url_to_base64 to the indexedDB and begin using it as the current
+// url_to_base64.
+async function record_urls() {
   console.info('record_urls()');
 
   let db = await open_db();
 
-  let obj = {key: 'key', value: data};
+  let obj = {key: 'data',
+             url_to_base64: new_url_to_base64
+            };
   await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
 
-  url_to_base64 = data;
-  url_diff = new_url_diff;
+  url_to_base64 = new_url_to_base64;
+  url_diff = false;
 }
 
 function is_cache_up_to_date() {
@@ -723,10 +719,10 @@ function is_cache_up_to_date() {
   let cached_files_to_delete = base64_to_delete.length;
   if (files_to_fetch || cached_files_to_delete || url_diff) {
     if (files_to_fetch) {
-      console.info('files to fetch: ' + files_to_fetch);
+      console.info('files to fetch:', files_to_fetch);
     }
     if (cached_files_to_delete) {
-      console.info('cached files to delete: ' + cached_files_to_delete);
+      console.info('cached files to delete:', cached_files_to_delete);
     }
     if (url_diff) {
       console.info('url_diff');
