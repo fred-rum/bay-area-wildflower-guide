@@ -889,8 +889,6 @@ test layout of swi buttons & text
 test install
 test speed of download and slowdown of browsing during download
 
-If usage < kb_cached, change 'with overhead' to 'with compression'.
-
 
 cache warnings:
 

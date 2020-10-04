@@ -750,8 +750,10 @@ async function update_usage() {
     // as 'empty' if usage is low and we don't have any cached files.
     if ((kb_cached == 0) && (status_usage < 10.0)) {
       usage = 'Cache is empty';
-    } else {
+    } else if (estimate.usage/1024 >= kb_cached) {
       usage = status_usage + ' MB cached with overhead';
+    } else {
+      usage = status_usage + ' MB cached with compression';
     }
     usage += ' (browser allows up to ' + status_quota + ' GB)';
   }
