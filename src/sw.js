@@ -245,7 +245,7 @@ async function fetch_response(event, url) {
   // Now we're guaranteed to have url_to_base64 and can proceed with
   // checking the cache.
 
-  var response = await caches.match(url_to_base64[url]);
+  let response = await caches.match(url_to_base64[url]);
   console.info(response);
   if (response) {
     console.info(url + ' found')
@@ -484,8 +484,15 @@ self.addEventListener('message', fn_send_status);
 function fn_send_status(event) {
   // Most messages are polling for status.
   // But regardless of the message type, always update the status.
+
+  // If this is the first poll after the page is refreshed, clear
+  // the old err_status.
+  if (event.data == 'start') {
+    err_status = '';
+  }
+
   if (updating === 'Checking cache') {
-    var status = ' ' + updating;
+    var status = updating;
   } else {
     let status_cached = (kb_cached/1024).toFixed(1)
 
@@ -501,7 +508,7 @@ function fn_send_status(event) {
       status_cached = status_total;
     }
 
-    status = ' ' + status_cached + ' / ' + status_total + ' MB'
+    status = status_cached + ' / ' + status_total + ' MB'
 
     if (updating !== false) {
       status += ' - ' + updating;
@@ -617,6 +624,7 @@ async function delete_all_cache_entries() {
 // and update the cache to match.
 async function update_cache() {
   console.info('update_cache()');
+  err_status = '';
 
   // Recording URLs should finish in a flash, but deleting cached files
   // could take finite time, so we just use the 'deleting' message for
@@ -652,7 +660,15 @@ async function update_cache() {
       let kb = base64_to_kb[base64];
       updating = 'Fetching ' + decodeURI(url)
       console.info(updating)
-      response = await fetch(url);
+      let response;
+      try {
+        response = await fetch(url);
+      } catch {
+        console.warn('fetch failed');
+        updating = false;
+        err_status = '<br>Lost online connectivity.  Try again later.';
+        return;
+      }
 
       // Pay attention to the global stop_updating variable and
       // bail out if it becomes true.  We put this check just before
@@ -662,7 +678,7 @@ async function update_cache() {
         return is_cache_up_to_date();
       }
 
-      if (response.ok) {
+      if (response && response.ok) {
         // Associate the fetched page with the base64 encoding.
         await cache.put(base64, response);
 
@@ -730,9 +746,9 @@ async function update_usage() {
     // (e.g. 0.5 MB).  To avoid confusing the user, we treat the cache
     // as 'empty' if usage is low and we don't have any cached files.
     if ((kb_cached == 0) && (status_usage < 10.0)) {
-      usage = ' Cache is empty';
+      usage = 'Cache is empty';
     } else {
-      usage = ' ' + status_usage + ' MB cached with overhead';
+      usage = status_usage + ' MB cached with overhead';
     }
     usage += ' (browser allows up to ' + status_quota + ' GB)';
   }

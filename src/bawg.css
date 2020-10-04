@@ -890,6 +890,7 @@ span.match {
     min-width: 100px;
     text-align: center;
     padding: 10px;
+    margin-right: 10px;
 }
 #update.update-update {
     background-color: #139e38;
@@ -932,6 +933,7 @@ span.match {
     color: white;
     padding: 10px;
     cursor: pointer;
+    margin-right: 10px;
 }
 #clear:active {
     background-color: #d10000;

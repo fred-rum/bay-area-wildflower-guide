@@ -674,14 +674,14 @@ def by_filename(name):
 
 if arg('-with_cache'):
     path_list = [
-        # start with the files most needed for interfacing with the worker
+        # Start with the files most needed for interfacing with the worker.
+        # Not 'sw.js' because it's not necessary and could be really bad.
         'swi.js',
         'index.html',
         'bawg.css',
         'photos/home-icon.png',
         'search.js',
         'pages.js',
-        # not 'sw.js' because it's not necessary and could be really bad
         'manifest.webmanifest',
     ]
 

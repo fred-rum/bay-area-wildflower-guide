@@ -38,7 +38,7 @@ function swi_oninteractive() {
   e_clear = document.getElementById('clear');
   e_usage = document.getElementById('usage');
 
-  e_status.textContent = ' Waiting for service worker to load';
+  e_status.innerHTML = 'Waiting for service worker to load';
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').then(function (registration) {
@@ -51,11 +51,11 @@ function swi_oninteractive() {
       navigator.serviceWorker.ready.then(start_polling);
     }).catch (function (error) {
       console.info('service worker registration failed');
-      e_status.textContent = ' No service worker';
+      e_status.innerHTML = 'No service worker';
     });
   } else {
     console.info('no service worker support in browser');
-    e_status.textContent = " Sorry, but your browser doesn't support this feature.";
+    e_status.innerHTML = 'Sorry, but your browser doesn&rsquo;t support this feature.';
   }
 }
 swi_oninteractive();
@@ -78,20 +78,20 @@ function start_polling(registration) {
   // flickering while we wait for that first response [...]
 
   // Poll right away, and then at intervals.
-  poll_cache();
-  setInterval(poll_cache, 1000);
+  poll_cache('start');
+  setInterval(poll_cache, 500);
 }
 
-function poll_cache() {
+function poll_cache(msg='poll') {
   // poll_cache() is only called if there is an active controller,
   // but navigator.serviceWorker.controller might not be updated yet
   // (as documented above).  Prefer navigator.serviceWorker.controller
   // when it is available so that we keep up with any changes to the
   // service worker, but fall back to temp_controller if necessary.
   if (navigator.serviceWorker.controller) {
-    navigator.serviceWorker.controller.postMessage('polling');
+    navigator.serviceWorker.controller.postMessage(msg);
   } else {
-    temp_controller.postMessage('polling');
+    temp_controller.postMessage(msg);
   }
 }
 
@@ -99,18 +99,18 @@ function fn_receive_status(event) {
   try {
     let msg = event.data;
     e_update.className = msg.update_class;
-    e_status.textContent = msg.status;
-    e_err_status.textContent = msg.err_status;
-    e_usage.textContent = msg.usage;
+    e_status.innerHTML = msg.status;
+    e_err_status.innerHTML = msg.err_status;
+    e_usage.innerHTML = msg.usage;
   } catch (error) {
     console.error(error);
     // sw.js always auto-updates.  If swi.js is cached, communication could
     // break down.  If so, we want to make clear what steps might lead to
     // recovery.
     e_update.className = '';
-    e_status.textContent = '';
-    e_err_status.textContent = 'Interface not in sync; try updating the cache and then refreshing the page.';
-    e_usage.textContent = '';
+    e_status.innerHTML = '';
+    e_err_status.innerHTML = 'Interface not in sync; try clearing the offline files and then refreshing the page.';
+    e_usage.innerHTML = '';
   }
 }
 
