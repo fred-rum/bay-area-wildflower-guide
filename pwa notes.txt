@@ -81,6 +81,7 @@ Check sync of two index.html windows.
 
 Make the buttons more active when clicked or focused.
 Looks like :active should do it.
+role="button"
 
 
 Include a percent complete indication on cache updates?

@@ -412,6 +412,9 @@ span.match {
     color: white;
     cursor: pointer;
 }
+#update.update-update:active {
+    background-color: #0f752a;
+}
 #update.update-update::before {
     content: 'Update Cache';
 }
@@ -424,9 +427,12 @@ span.match {
     content: 'Update Cache';
 }
 #update.update-stop {
-    background-color: #9c8024;
+    background-color: #b5952a;
     color: white;
     cursor: pointer;
+}
+#update.update-stop:active {
+    background-color: #9c8024;
 }
 #update.update-stop::before {
     content: 'Stop Update';
@@ -442,4 +448,7 @@ span.match {
     color: white;
     padding: 10px;
     cursor: pointer;
+}
+#clear:active {
+    background-color: #d10000;
 }
