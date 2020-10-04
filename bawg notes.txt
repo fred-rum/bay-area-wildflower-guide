@@ -884,3 +884,96 @@ https://web.dev/customize-install/
 
 Test offline access.
 Fix behavior when cache-update fetch fails.
+
+Fix swi to wait for DOM content.
+
+On the phone:
+test entering airplane mode during cache update 
+test cached pages while in airplane mode
+test layout
+test install
+test speed of download and slowdown of browsing during download
+
+If usage < kb_cached, change 'with overhead' to 'with compression'.
+
+
+cache warnings:
+
+Track whether the cached URLs are complete.  This is an extra flag in
+indexedDB.  It is marked 'false' when a cache update starts and
+changed to 'tru' when a cache update completes successfully.  It is
+erased when the caches are clared.  Note that it only describes the
+cache contents without regard to the current manifest.
+
+If the complete flag is false, fetches default to online and fall back
+to offline.  If full support for this is difficult, skip the offline
+fall back.
+
+If the complete flag is true, fetches default to offline and fall back
+to online when a cached page isn't found.
+
+When the cache is out of date, put a yellow warning hazard symbol
+(exclamation mark in triangle) in the upper right just under the
+search bar:
+- the complete flag is true and updating === false
+  (cache is not updating nor up to date)
+This can only occur while online or intermittently online.  It could
+be annoying if the initial load of sw.js completes online, but
+connectivity is not sufficient or data is too expensive to update the
+cache.
+
+When the cache is being pressed into service, use a red hazard symbol:
+- the complete flag is false, but an online fetch has failed
+This should only occur while offline or intermittently offline.  That
+hazard symbol may be annoyingly persistent, but it's your own fault
+for leaving the cache incomplete.
+
+A red warning hazard symbol is also used when the cache is
+surprisingly incomplete:
+- the complete flag is true, and an offline access has failed.
+This should only occur if I screwed up caching or if the user has
+manually messed with the cache (or if the browser has discarded some
+cache contents, but apparently not all?).
+
+Clicking the hazard symbol takes you to the home page and removes the
+hazard symbol from the page corner for as long as sw.js remains
+loaded.  (The yellow hazard is dismissed for a minimum of a week by
+adding a timestamp to indexedDB.)
+
+On the home page, at the top of the 'Use it Offline' section, a new
+paragraph appears when there's a hazard along with the corresponding
+hazard symbol.  This appears even if the corner hazard symbol has been
+dismissed.  It is removed only when sw.js is reloaded or when the
+cache status changes.
+
+Green: The Guide is operating offline.  You will be kept informed when
+an update is available.  [icon is home-icon.png]
+
+Yellow: The Guide is operating offline.  An update is available
+whenever you are ready.
+
+Red1: The Guide is having trouble connecting online.  Using the
+incomplete offline copy as a fallback.
+
+Red2: Some files are missing from the offline copy.  Connecting online
+for those files.
+
+Red3: Some files are missing from the offline copy.  Oops, that's my
+fault.  Check back for updates.
+
+Button text:
+Save Offline Copy - when complete flag is false.
+Update Offline Copy - when complete flag is true.
+Clear Offline Files
+
+Save Offline Copy does the following:
+- Write indexedDB with new_url_data and complete flag = false.
+- Fetch new files and save to cache.
+- Write indexedDB with new_url_data and complete flag = true.
+- Replace url_data with new_url_data.
+- Hazard status is updated to green.
+- Delete unneeded files from cache.
+
+Update Offline Copy does the same, but without the first step.  Thus,
+if the update doesn't complete for any reason, we continue using the
+old copy.

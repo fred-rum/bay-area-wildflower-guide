@@ -11,30 +11,50 @@ var reg;
 var intervalID;
 var temp_controller;
 
-// TODO: handle the case where e_status isn't ready yet.
-// (Wait for DOM completion as in search.js.)
-e_status.textContent = ' Waiting for service worker to load';
+/* If the readyState is 'interactive', then the user can (supposedly)
+   interact with the page, but it may still be loading HTML, images,
+   or the stylesheet.  In fact, the page may not even be rendered yet.
+   We use a 0-length timeout to call restore_scroll() as soon as possible
+   after pending rendering, if any.
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').then(function (registration) {
-    // When register() resolves, we're not guaranteed to have an active
-    // service worker.  In fact, the service worker might not even be
-    // 'installing' yet!  Theoretically, I could set up callbacks on
-    // updatestate and statechange, but even easier, I can simply wait
-    // until the ServiceWorkerContainer resolves the promise in 'ready'.
-    // When that happens, a service worker is guaranteed to be active.
-    navigator.serviceWorker.ready.then(start_polling);
-  }).catch (function (error) {
-    console.info('service worker registration failed');
-    e_status.textContent = ' No service worker';
-  });
-} else {
-  console.info('no service worker support in browser');
-  e_status.textContent = " Sorry, but your browser doesn't support this feature.";
+   Hopefully the stylesheet has been loaded and the HTML and CSS are
+   sufficiently well designed so that the page isn't still adjusting
+   its layout after the call to restore_scroll().
+*/
+function swi_oninteractive() {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', oninteractive);
+    return
+  }
+  console.info('swi_oninteractive()');
+  
+  e_status.textContent = ' Waiting for service worker to load';
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').then(function (registration) {
+      // When register() resolves, we're not guaranteed to have an active
+      // service worker.  In fact, the service worker might not even be
+      // 'installing' yet!  Theoretically, I could set up callbacks on
+      // updatestate and statechange, but even easier, I can simply wait
+      // until the ServiceWorkerContainer resolves the promise in 'ready'.
+      // When that happens, a service worker is guaranteed to be active.
+      navigator.serviceWorker.ready.then(start_polling);
+    }).catch (function (error) {
+      console.info('service worker registration failed');
+      e_status.textContent = ' No service worker';
+    });
+  } else {
+    console.info('no service worker support in browser');
+    e_status.textContent = " Sorry, but your browser doesn't support this feature.";
+  }
 }
+swi_oninteractive();
 
 function start_polling(registration) {
   console.info('start_polling()');
+  e_update.addEventListener('click', fn_update);
+  e_clear.addEventListener('click', fn_clear);
+  navigator.serviceWorker.addEventListener('message', fn_receive_status);
 
   // An oddity of the navigator.serviceWorker.ready promise is that it
   // resolves when a service worker is 'active', but (at least in Chrome),
@@ -65,9 +85,6 @@ function poll_cache() {
   }
 }
 
-navigator.serviceWorker.addEventListener('message', fn_receive_status);
-
-
 function fn_receive_status(event) {
   try {
     let msg = event.data;
@@ -85,14 +102,6 @@ function fn_receive_status(event) {
     e_err_status.textContent = 'Interface not in sync; try updating the cache and then refreshing the page.';
     e_usage.textContent = '';
   }
-}
-
-if (e_update) {
-  e_update.addEventListener('click', fn_update);
-}
-
-if (e_clear) {
-  e_clear.addEventListener('click', fn_clear);
 }
 
 function fn_update(event) {
