@@ -186,12 +186,21 @@ self.addEventListener('fetch', fetch_handler);
 // Remove the prepended scope from the URL of a request.
 // The scope is a string such as 'https://localhost:8000/'.
 //
+// It also removes any trailing #anchor.
+//
 // This function can be performed on a real fetch request (which has
 // a real URL) or on a key from the cache (which the cache has tried
 // to format as a URL, but with a base64 value in place of the
 // relative URL).
 function remove_scope_from_request(request) {
-  return request.url.substr(registration.scope.length);
+  let url = request.url;
+  let scope_end = registration.scope.length
+  let anchor_pos = url.indexOf('#');
+  if (anchor_pos == -1) {
+    return url.substring(scope_end);
+  } else {
+    return url.substring(scope_end, anchor_pos);
+  }
 }
 
 // Handle a fetch request from a client (window/tab).
