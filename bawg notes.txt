@@ -955,8 +955,8 @@ Red3: Some files are missing from the offline copy.  Oops, that's my
 fault.  Check back for updates.
 
 Button text:
-Save Offline Copy - when complete flag is false.
-Update Offline Copy - when complete flag is true.
+Save Offline Copy - when offline_ready is false
+Update Offline Copy - when offline_ready is true
 Clear Offline Files
 
 Save Offline Copy does the following:
@@ -964,7 +964,3 @@ Save Offline Copy does the following:
 - Record URLs to indexedDB and update url_to_base64.
 - Hazard status is updated to green.
 - Delete unneeded files from cache.
-
-Update Offline Copy does the same, but without the first step.  Thus,
-if the update doesn't complete for any reason, we continue using the
-old copy.

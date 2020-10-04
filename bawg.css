@@ -403,7 +403,7 @@ span.match {
 }
 #update {
     display: inline-block;
-    min-width: 100px;
+    min-width: 135px;
     text-align: center;
     padding: 10px;
     margin-right: 10px;
@@ -416,16 +416,10 @@ span.match {
 #update.update-update:active {
     background-color: #0f752a;
 }
-#update.update-update::before {
-    content: 'Update Cache';
-}
 #update.update-disable {
     background-color: #808080;
     color: #000000;
     cursor: not-allowed;
-}
-#update.update-disable::before {
-    content: 'Update Cache';
 }
 #update.update-stop {
     background-color: #b5952a;
@@ -435,15 +429,12 @@ span.match {
 #update.update-stop:active {
     background-color: #9c8024;
 }
-#update.update-stop::before {
-    content: 'Stop Update';
-}
 #err-status {
     color: red;
 }
 #clear {
     display: inline-block;
-    min-width: 100px;
+    min-width: 135px;
     text-align: center;
     background-color: red;
     color: white;

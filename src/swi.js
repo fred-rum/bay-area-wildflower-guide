@@ -98,6 +98,7 @@ function poll_cache(msg='poll') {
 function fn_receive_status(event) {
   try {
     let msg = event.data;
+    e_update.textContent = msg.update_button;
     e_update.className = msg.update_class;
     e_status.innerHTML = msg.status;
     e_err_status.innerHTML = msg.err_status;
@@ -109,7 +110,7 @@ function fn_receive_status(event) {
     // recovery.
     e_update.className = '';
     e_status.innerHTML = '';
-    e_err_status.innerHTML = 'Interface not in sync; try clearing the offline files and then refreshing the page.';
+    e_err_status.innerHTML = 'Interface not in sync; try deleting the offline files and then refreshing the page.';
     e_usage.innerHTML = '';
   }
 }

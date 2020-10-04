@@ -522,14 +522,25 @@ function fn_send_status(event) {
     }
   }
 
+  if (offline_ready) {
+    var update_button = 'Update Offline Files';
+  } else {
+    var update_button = 'Save Offline Files';
+  }
+
   if (updating === false) {
     var update_class = 'update-update';
   } else if ((updating === 'Up to date') ||
              (updating === 'Checking cache') ||
              (updating === 'Clearing caches')) {
-    update_class = 'update-disable';
+    var update_class = 'update-disable';
   } else {
-    update_class = 'update-stop';
+    var update_class = 'update-stop';
+    if (offline_ready) {
+      var update_button = 'Stop Updating';
+    } else {
+      var update_button = 'Stop Saving';
+    }
   }
 
   // Update the cache usage estimate.
@@ -539,6 +550,7 @@ function fn_send_status(event) {
   update_usage();
 
   msg = {
+    update_button: update_button,
     update_class: update_class,
     status: status,
     err_status: err_status,
@@ -639,15 +651,15 @@ async function update_cache() {
   console.info('update_cache()');
   err_status = '';
 
-  let cache = await caches.open(BASE64_CACHE_NAME);
-
-  await fetch_to_cache(cache);
-
-  await record_urls();
-
-  await delete_old_files(cache);
-
-  is_cache_up_to_date();
+  try {
+    let cache = await caches.open(BASE64_CACHE_NAME);
+    await fetch_to_cache(cache);
+    await record_urls();
+    await delete_old_files(cache);
+    is_cache_up_to_date();
+  } catch {
+    updating = false;
+  }
 }
 
 async function fetch_to_cache(cache) {
@@ -664,7 +676,7 @@ async function fetch_to_cache(cache) {
         console.warn('fetch failed');
         updating = false;
         err_status = '<br>Lost online connectivity.  Try again later.';
-        return;
+        throw 'oops';
       }
 
       // Pay attention to the global stop_updating variable and
@@ -672,7 +684,7 @@ async function fetch_to_cache(cache) {
       // the cache.put() so that we don't update the cache after
       // stop_updating becomes true.
       if (stop_updating){
-        return is_cache_up_to_date();
+        throw 'stop';
       }
 
       if (response && response.ok) {
@@ -686,13 +698,11 @@ async function fetch_to_cache(cache) {
       } else if (response.status == 404) {
         console.warn('fetch missing');
         err_status = '<br>Could not find ' + url + '<br>The Guide must have updated online just now.  Refresh the page and try again.';
-        updating = false;
-        return;
+        throw 'oops';
       } else {
         console.warn('strange server response');
         err_status = '<br>' + response.status + ' ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
-        updating = false;
-        return;
+        throw 'oops';
       }
     }
   }
@@ -708,7 +718,10 @@ async function record_urls() {
   let obj = {key: 'data',
              url_to_base64: new_url_to_base64
             };
-  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
+
+  // We don't need to wait for the transaction to complete.
+  // Just fire it off and assume it'll complete.
+  async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
 
   url_to_base64 = new_url_to_base64;
   url_diff = false;
@@ -725,7 +738,7 @@ async function delete_old_files(cache) {
     // Pay attention to the global stop_updating variable and
     // bail out if it becomes true.
     if (stop_updating){
-      return is_cache_up_to_date();
+      throw 'stop';
     }
 
     let base64 = base64_to_delete[i];
@@ -752,7 +765,7 @@ function is_cache_up_to_date() {
     updating = false;
   } else {
     updating = 'Up to date';
-    console.info(updating);
+    console.info('Up to date');
   }
 }
 
@@ -767,11 +780,11 @@ async function update_usage() {
     // (e.g. 0.5 MB).  To avoid confusing the user, we treat the cache
     // as 'empty' if usage is low and we don't have any cached files.
     if ((kb_cached == 0) && (status_usage < 10.0)) {
-      usage = 'Cache is empty';
+      usage = '0.0 MB';
     } else if (estimate.usage/1024 >= kb_cached) {
-      usage = status_usage + ' MB cached with overhead';
+      usage = status_usage + ' MB including overhead';
     } else {
-      usage = status_usage + ' MB cached with compression';
+      usage = status_usage + ' MB with compression';
     }
     usage += ' (browser allows up to ' + status_quota + ' GB)';
   }
