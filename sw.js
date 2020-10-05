@@ -1,6 +1,6 @@
 var url_data = [
-["swi.js", "DpGh1NQVINMx_tt2vczv-n2quVLqfIkP1uhJKA==", 6],
-["index.html", "VJ3Q-1gs7GrSvXLlUM3BOsmH-CmYhzwhSxMcLw==", 6],
+["swi.js", "9indLZAG7e7bqptrfKA6EwJAin3Yqh1aNsCimA==", 6],
+["index.html", "F67oSBYBMntlfw-qH10CBbu_sRLR-Dcu8YIFFA==", 6],
 ["bawg.css", "kbIEHdHv4AaKBj75NO11VlS4Pv9SQPq7np288A==", 10],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
 ["icons/check.svg", "GZFdGrKC4UpM0uywABrTQILfNZ7T0U6iI8sMaw==", 2],
@@ -5226,9 +5226,9 @@ function fn_send_status(event) {
     var status = mb_cached + ' / ' + mb_total + ' MB &ndash; ' + updating;
     var update_class = 'update-stop';
     if (offline_ready) {
-      var update_button = 'Stop Updating';
+      var update_button = 'Pause Updating';
     } else {
-      var update_button = 'Stop Saving';
+      var update_button = 'Pause Saving';
     }
   }
   if (offline_ready) {

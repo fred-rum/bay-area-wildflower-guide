@@ -160,24 +160,24 @@ function fn_icon_click(event) {
 async function update_wakelock(msg) {
   if (msg.update_class == 'update-stop' && !wakelock && navigator.wakeLock) {
     try {
-      console.info('Requesting wake lock');
+      console.info('Requesting wakelock');
       wakelock = await navigator.wakeLock.request('screen');
       console.info('wakelock = ', wakelock);
-      wakelock.addEventListener('release', fn_wake_lock_released);
+      wakelock.addEventListener('release', fn_wakelock_released);
     } catch {
-      console.warn('wake lock request failed');
+      console.warn('wakelock request failed');
     }
   } else if (msg.update_class != 'update-stop' && wakelock) {
     try {
-      console.info('releasing wake lock');
+      console.info('releasing wakelock');
       wakelock.release();
       wakelock = undefined;
     } catch {
-      console.warn('wake lock release failed');
+      console.warn('wakelock release failed');
     }
   }
 }
-function fn_wake_lock_released() {
-  console.info('fn_wake_lock_released()');
+function fn_wakelock_released() {
+  console.info('fn_wakelock_released()');
   wakelock = undefined;
 }

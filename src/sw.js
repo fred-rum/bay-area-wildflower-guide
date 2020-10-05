@@ -541,9 +541,9 @@ function fn_send_status(event) {
 
     var update_class = 'update-stop';
     if (offline_ready) {
-      var update_button = 'Stop Updating';
+      var update_button = 'Pause Updating';
     } else {
-      var update_button = 'Stop Saving';
+      var update_button = 'Pause Saving';
     }
   }
 
