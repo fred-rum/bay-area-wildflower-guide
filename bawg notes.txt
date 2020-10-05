@@ -963,12 +963,6 @@ usage cannot be measured, at least create a message saying so.  Or
 simulate usage with my own calculated values (but with no quota,
 obviously).  "(guesstimate)"
 
-Perhaps distinguish 'Getting started' from 'Checking cache' so that
-it's clear why an update can be availble while still checking.  Or
-start with 'Checking for updates' and then move to 'Validating offline
-files'.  During these steps, start with offline_ready = undefined and
-only move to a different value once we're sure.
-
 Round off the corners of the buttons.
 
 Change the buttons to stack the words vertically?  E.g.
@@ -1043,10 +1037,6 @@ Then restart cache update.
 If quota is exceeded when there are no files to delete, then of course
 that must be reported as an error.
 
-
-"Storage is temporary by default":
-https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Browser_storage_limits_and_eviction_criteria#Different_types_of_data_storage
-https://developer.mozilla.org/en-US/docs/Web/API/StorageManager/persist
 
 If url_diff is true and there are cache entries owned by neither the
 old url_to_base64 nor new_url_to_base64, they can be immediately

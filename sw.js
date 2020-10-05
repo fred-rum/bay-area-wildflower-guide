@@ -5019,11 +5019,11 @@ console.info('starting from the beginning');
 var DB_NAME = 'db-v1';
 var DB_VERSION = 1;
 var BASE64_CACHE_NAME = 'base64-cache-v1';
-var updating = 'Checking cache';
+var updating = 'Checking for offline files';
 var err_status = '';
 var usage = '';
 var stop_updating = false;
-var offline_ready = false;
+var offline_ready = undefined;
 var url_to_base64;
 var new_url_to_base64;
 var url_diff;
@@ -5132,8 +5132,9 @@ async function dbupgradeneeded(event) {
 init_status();
 async function init_status() {
   console.info('init_status()');
-  await Promise.all([read_db(),
-                     count_cached()]);
+  await read_db();
+  updating = 'Validating offline files';
+  await count_cached();
   check_url_diff();
   is_cache_up_to_date();
 }
@@ -5227,7 +5228,8 @@ function fn_send_status(event) {
     remaining = ((kb_total - kb_cached) / 1024 + 0.1).toFixed(1);
     var status = '+' + remaining + ' MB';;
     var update_class = 'update-update';
-  } else if ((updating === 'Checking cache') ||
+  } else if ((updating === 'Checking for offline files') ||
+             (updating === 'Validating offline files') ||
              (updating === 'Up to date') ||
              (updating === 'Clearing caches')) {
     var status = updating;
@@ -5243,7 +5245,7 @@ function fn_send_status(event) {
       var update_button = 'Pause Saving';
     }
   }
-  if (offline_ready) {
+  if (offline_ready && (updating !== 'Validating offline files')) {
     if (updating === 'Up to date') {
       var top_msg = 'green';
     } else {

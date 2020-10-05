@@ -10,18 +10,24 @@ var BASE64_CACHE_NAME = 'base64-cache-v1';
 
 // An initial 'updating' message prevents updates until everything
 // is initialized.
-var updating = 'Checking cache';
+var updating = 'Checking for offline files';
 var err_status = '';
 var usage = '';
 var stop_updating = false;
 
+// offline_ready is undefined when we haven't yet checked the indexedDB.
+//
+// offline_ready is false when we've checked the indexedDB and didn't
+// find any URL data, which means that we don't think we have a complete
+// copy of all offline files.
+//
 // offline_ready is true when we've successfully read the URL data from
 // the indexedDB, which implies that the offline copy was completely
 // fetched some time in the past.  Unfortunate circumstances might have
 // corrupted the data, but that's what the offline_ready flag is really
 // for; corrupted data is presented very differently to the user than
 // no data (or incomplete data).
-var offline_ready = false;
+var offline_ready = undefined;
 
 // url_to_base64 is the mapping of URL to base64 key that we're currently
 // using for checking the cache.  It is initialized from the indexedDB,
@@ -98,7 +104,7 @@ async function fn_install(event) {
   //
   // We don't care if skipWaiting completes while we're in this handler
   // or if it happens later in the waiting state, so we don't need to
-  // wrap it in event.waitUtil().
+  // wrap it in event.waitUntil().
   self.skipWaiting();
 }
 
@@ -364,8 +370,10 @@ async function init_status() {
   //
   // 2. Generate new_url_to_base64 and check how much of it is already
   // cached.
-  await Promise.all([read_db(),
-                     count_cached()]);
+  await read_db();
+
+  updating = 'Validating offline files';
+  await count_cached();
 
   check_url_diff();
 
@@ -513,8 +521,8 @@ function fn_send_status(event) {
       stop_updating = true;
     }
   } else if (event.data === 'clear') {
-    // If the user clicks the 'Clear Cache' button multiple times in a
-    // row, I don't bother to suppress simultaneous calls to clear_caches().
+    // If the user clicks the 'Delete Offline Files' button multiple times in
+    // a row, I don't bother to suppress simultaneous calls to clear_caches().
     // Intuition and experimentation indicates that the worst that happens
     // is that the same cache entry is deleted multiple times, and doing
     // so is harmless and safe.
@@ -537,12 +545,13 @@ function fn_send_status(event) {
     var status = '+' + remaining + ' MB';;
 
     var update_class = 'update-update';
-  } else if ((updating === 'Checking cache') ||
+  } else if ((updating === 'Checking for offline files') ||
+             (updating === 'Validating offline files') ||
              (updating === 'Up to date') ||
              (updating === 'Clearing caches')) {
-    // It would be nice to display incremental progress while checking the
-    // cache, but the actual slow part is getting all the keys from the
-    // cache.  Actually checking the keys is then atomic.
+    // It would be nice to display incremental progress while validating
+    // the cache, but the slow part is getting all the keys from the cache.
+    // Actually checking the keys is then atomic.
     var status = updating;
 
     var update_class = 'update-disable';
@@ -571,7 +580,7 @@ function fn_send_status(event) {
     }
   }
 
-  if (offline_ready) {
+  if (offline_ready && (updating !== 'Validating offline files')) {
     if (updating === 'Up to date') {
       var top_msg = 'green';
     } else {
@@ -580,8 +589,6 @@ function fn_send_status(event) {
       var top_msg = 'yellow';
     }
   } else {
-    // if updating === 'Clearing caches', then offline_ready must also
-    // be false.
     var top_msg = undefined;
   }
 
