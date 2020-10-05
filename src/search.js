@@ -689,7 +689,7 @@ function fn_hashchange(event) {
      the original page title.
      There is an exception for 'offline', which is not a typical anchor. */
   var hash = location.hash;
-  if (hash && (hash != 'offline')) {
+  if (hash && (hash != '#offline')) {
     document.title = decodeURIComponent(hash).substring(1) + ' - ' + title;
   }
 }
