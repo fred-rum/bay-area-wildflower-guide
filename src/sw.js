@@ -557,6 +557,14 @@ function fn_send_status(event) {
     var top_msg = undefined;
   }
 
+  if (offline_ready && (updating === false)) {
+    // The yellow icon is only shown on non-home pages when an update
+    // is needed *and* no update is in progress.
+    var icon = 'yellow';
+  } else {
+    var icon = undefined;
+  }
+
   // Update the cache usage estimate.
   // We don't actually wait for its asynchronous operation to finish
   // since that would break this event handler, but hopefully it'll be
@@ -569,7 +577,8 @@ function fn_send_status(event) {
     status: status,
     err_status: err_status,
     usage: usage,
-    top_msg: top_msg
+    top_msg: top_msg,
+    icon: icon
   };
   event.source.postMessage(msg);
 

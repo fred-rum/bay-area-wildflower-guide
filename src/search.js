@@ -686,9 +686,10 @@ function fn_hashchange(event) {
   var title = title_list[title_list.length - 1];
 
   /* If the URL has a hash, get the anchor portion of it and put it before
-     the original page title. */
+     the original page title.
+     There is an exception for 'offline', which is not a typical anchor. */
   var hash = location.hash;
-  if (hash) {
+  if (hash && (hash != 'offline')) {
     document.title = decodeURIComponent(hash).substring(1) + ' - ' + title;
   }
 }

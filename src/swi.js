@@ -15,10 +15,7 @@ var temp_controller;
 // changes, every old value appears to be undefined.
 var old_msg = {};
 
-var yellow_expire = localStorage.getItem('yellow_expire');
-if (yellow_expire != null) {
-  yellow_expire = parseFloat(yellow_expire);
-}
+var old_icon;
 
 /* If the readyState is 'interactive', then the user can (supposedly)
    interact with the page, but it may still be loading HTML, images,
@@ -177,7 +174,6 @@ function fn_update(event) {
     navigator.serviceWorker.controller.postMessage('update');
     e_update.className = 'disabled';
     localStorage.removeItem('yellow_expire');
-    yellow_expire = null;
   }
 }
 
@@ -188,7 +184,6 @@ function fn_clear(event) {
     // send the 'update' message and let the service worker sort it out.
     navigator.serviceWorker.controller.postMessage('clear');
     localStorage.clear();
-    yellow_expire = null;
   }
 }
 
@@ -198,19 +193,39 @@ function fn_clear(event) {
 function fn_receive_icon(event) {
   let msg = event.data;
 
-  if (msg.top_msg != old_msg.top_msg) {
-    if ((msg.top_msg == 'yellow') &&
-        ((yellow_expire === null) || (Date.now() > yellow_expire))) {
+  let yellow_expire = get_yellow_expire();
+  if ((msg.icon == 'yellow') &&
+      ((yellow_expire === null) || (Date.now() > yellow_expire))) {
+    icon = 'yellow';
+  } else {
+    icon = undefined;
+  }
+
+  if (icon !== old_icon) {
+    if (icon === 'yellow') {
       e_icon.className = 'icon-yellow';
     } else {
       e_icon.className = '';
     }
   }
+
+  old_icon = icon;
+}
+
+/* We get the yellow_expire value from local storage every time we
+   need it instead of keeping a local variable.  This ensures that
+   multiple windows stay in sync. */
+function get_yellow_expire(event) {
+  let yellow_expire = localStorage.getItem('yellow_expire');
+  if (yellow_expire != null) {
+    yellow_expire = parseFloat(yellow_expire);
+  }
+  return yellow_expire;
 }
 
 function fn_icon_click(event) {
   let ms_in_week = 1000*60*60*24*7;
-  yellow_expire = Date.now() + ms_in_week;
+  let yellow_expire = Date.now() + ms_in_week;
   localStorage.setItem('yellow_expire', String(yellow_expire));
   if (event.shiftKey || event.ctrlKey) {
     window.open('../index.html#offline');

@@ -425,7 +425,7 @@ function fn_hashchange(event) {
   var title_list = document.title.split(' - ');
   var title = title_list[title_list.length - 1];
   var hash = location.hash;
-  if (hash) {
+  if (hash && (hash != 'offline')) {
     document.title = decodeURIComponent(hash).substring(1) + ' - ' + title;
   }
 }

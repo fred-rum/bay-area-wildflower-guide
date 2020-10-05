@@ -970,17 +970,3 @@ When status changes to 'up-to-date', auto-refresh the home page.
 Remove 'Checking cache' code in sw.js and ' Checking cache' in swi.js
 
 Can swi.js update the service worker on a 404?
-
-Can I detect when a file has changed since its base64 was generated?
-Otherwise an update could fetch some new files for which it uses an
-old base64.  That's not terrible, though.  The next sw.js update will
-show new base64 values, and hopefully the user will request the update
-if things are too messed up.  (The worst thing would be old files with
-new base64 values, but I don't see how that would ever happen unless
-GitHub spreads an update over many seconds.)
-
-Clearing yellow_expire as soon as 'update' is clicked means that
-navigating the site during the update will continue to show the yellow
-icon.  Better is if sw.js suppresses indicating the yellow icon flag
-during the update, then clears it when the update is complete.  If the
-update fails, the yellow icon flag is restored.
