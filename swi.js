@@ -13,7 +13,7 @@ var poll_interval = 500;
 var polls_since_response = 0;
 function swi_oninteractive() {
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', oninteractive);
+    document.addEventListener('DOMContentLoaded', swi_oninteractive);
     return
   }
   console.info('swi_oninteractive()');
@@ -125,6 +125,7 @@ function fn_update(event) {
     post_msg('update');
     e_update.className = 'update-disable';
     localStorage.removeItem('yellow_expire');
+    init_permissions();
   }
 }
 function fn_clear(event) {
@@ -192,4 +193,10 @@ async function update_wakelock(msg) {
 function fn_wakelock_released() {
   console.info('fn_wakelock_released()');
   wakelock = undefined;
+}
+async function init_permissions() {
+  if (navigator.storage) {
+    let persistent = await navigator.storage.persist();
+    console.info('persistent =', persistent);
+  }
 }

@@ -1052,3 +1052,8 @@ If url_diff is true and there are cache entries owned by neither the
 old url_to_base64 nor new_url_to_base64, they can be immediately
 deleted.  (If url_diff is false, those files may be from a partial
 download, and we're now offline and can't see the update.)
+
+
+Create an 'other' directory with txt files for index, chrome, safari,
+and firefox.  Parse those with either a search bar or hazard icon.
+Remember the differing relative path.
