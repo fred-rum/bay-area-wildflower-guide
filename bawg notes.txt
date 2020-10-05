@@ -948,25 +948,11 @@ whenever you are ready.
 Red1: The Guide is having trouble connecting online.  Using the
 incomplete offline copy as a fallback.
 
-Red2: Some files are missing from the offline copy.  Connecting online
-for those files.
+Red2: Some files have gone missing from the offline copy.  Connecting
+online for those files.
 
 Red3: Some files are missing from the offline copy.  Oops, that's my
 fault.  Check back for updates.
 
-Button text:
-Save Offline Copy - when offline_ready is false
-Update Offline Copy - when offline_ready is true
-Clear Offline Files
-
-Save Offline Copy does the following:
-- Fetch new files and save to cache.
-- Record URLs to indexedDB and update url_to_base64.
-- Hazard status is updated to green.
-- Delete unneeded files from cache.
-
-When status changes to 'up-to-date', auto-refresh the home page.
 
 Remove 'Checking cache' code in sw.js and ' Checking cache' in swi.js
-
-Can swi.js update the service worker on a 404?

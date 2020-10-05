@@ -127,9 +127,9 @@ function fn_receive_status(event) {
 
     // Update DOM elements only if they've changed.
     // This might improve performance, but the main advantage is to stop
-    // the scrollbar from flickering on Android Chrome.  (I'd guess that
-    // the browser can detect unchanged values for textContent and
-    // className, but not for innerHTML).
+    // the scrollbar from flickering in Android Chrome emulation.
+    // (I'd guess that the browser can detect unchanged values for
+    // textContent and className, but not for innerHTML).
     if (msg.update_button != old_msg.update_button) {
       e_update.textContent = msg.update_button;
     }

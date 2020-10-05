@@ -45,8 +45,10 @@ var base64_to_kb = {};
 // in use and can be deleted.
 var base64_to_delete = [];
 
-// These values indicate the total calculated size of files that we want
-// to be cached and the total size of useful files that already are cached.
+// These values indicate
+// - the total calculated size of files that we want to be cached
+// - the total calculated size of useful files that already are cached
+// (calculated as opposed to measured like the browser usage).
 var kb_total = 0;
 var kb_cached = 0;
 
@@ -495,33 +497,6 @@ function fn_send_status(event) {
     err_status = '';
   }
 
-  if (updating === 'Checking cache') {
-    // It would be nice to display incremental progress while checking the
-    // cache, but the actual slow part is getting all the keys from the
-    // cache.  Actually checking the keys is then atomic.
-    var status = updating;
-  } else {
-    let status_cached = (kb_cached/1024).toFixed(1)
-
-    // Pretend that we need a bit more data than we actually do.
-    // That way, if there's a tiny bit more data to fetch
-    // (or only data to delete, or an indexedDB to update),
-    // it appears as if there is still 0.1 MB of data to cache.
-    let status_total = (kb_total/1024 + 0.1).toFixed(1)
-
-    // If we really are full up to date, then adjust status_cached
-    // to match the adjusted status_total.
-    if (updating === 'Up to date') {
-      status_cached = status_total;
-    }
-
-    status = status_cached + ' / ' + status_total + ' MB'
-
-    if (updating !== false) {
-      status += ' - ' + updating;
-    }
-  }
-
   if (offline_ready) {
     var update_button = 'Update Offline Files';
   } else {
@@ -529,12 +504,41 @@ function fn_send_status(event) {
   }
 
   if (updating === false) {
+    // Pretend that we need a bit more data than we actually do.
+    // That way, if there's a tiny bit more data to fetch
+    // (or only data to delete, or an indexedDB to update),
+    // it appears as if there is still 0.1 MB of data to cache.
+    remaining = ((kb_total - kb_cached) / 1024 + 0.1).toFixed(1);
+
+    var status = '+' + remaining + ' MB';;
+
     var update_class = 'update-update';
-  } else if ((updating === 'Up to date') ||
-             (updating === 'Checking cache') ||
+  } else if ((updating === 'Checking cache') ||
+             (updating === 'Up to date') ||
              (updating === 'Clearing caches')) {
+    // It would be nice to display incremental progress while checking the
+    // cache, but the actual slow part is getting all the keys from the
+    // cache.  Actually checking the keys is then atomic.
+    var status = updating;
+
     var update_class = 'update-disable';
   } else {
+    // I was going to do something to show the progress relative to
+    // the total amount that the update is fetching, but if I return
+    // to the home page in the middle of the update, we no longer have
+    // a way to calculate that total amount.  So I've stuck with the
+    // original method.
+
+    let mb_cached = (kb_cached/1024).toFixed(1)
+
+    // Pretend that we need a bit more data than we actually do.
+    // That way, if there's a tiny bit more data to fetch
+    // (or only data to delete, or an indexedDB to update),
+    // it appears as if there is still 0.1 MB of data to cache.
+    let mb_total = (kb_total/1024 + 0.1).toFixed(1)
+
+    var status = mb_cached + ' / ' + mb_total + ' MB &ndash; ' + updating;
+
     var update_class = 'update-stop';
     if (offline_ready) {
       var update_button = 'Stop Updating';
@@ -805,7 +809,7 @@ async function update_usage() {
     // as 'empty' if usage is low and we don't have any cached files.
     if ((kb_cached == 0) && (status_usage < 10.0)) {
       usage = '0.0 MB';
-    } else if (estimate.usage/1024 >= kb_cached) {
+    } else if (estimate.usage/1024 >= kb_cached + 0.1) {
       usage = status_usage + ' MB including overhead';
     } else {
       usage = status_usage + ' MB with compression';
