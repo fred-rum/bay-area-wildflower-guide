@@ -243,32 +243,34 @@ function fn_icon_click(event) {
 
 /* If the browser supports it, keep the screen awake whenever the 'update'
    button is in the 'update-stop' state (meaning that an update is in
-   progress).  Wake lock is currently only supported in Chrome. */
+   progress).  Wakelock is currently only supported in Chrome. */
 async function update_wakelock(msg) {
   if (msg.update_class == 'update-stop' && !wakelock && navigator.wakeLock) {
     try {
-      console.info('Requesting wake lock');
+      console.info('Requesting wakelock');
       wakelock = await navigator.wakeLock.request('screen');
       console.info('wakelock = ', wakelock);
-      wakelock.addEventListener('release', fn_wake_lock_released);
+      wakelock.addEventListener('release', fn_wakelock_released);
     } catch {
       // Documentation is lacking as to why the request might fail.
       // Perhaps a low battery.
-      // In any case, fine, no wake lock.
+      // In any case, fine, no wakelock.
+      console.warn('wakelock request failed');
     }
   } else if (msg.update_class != 'update-stop' && wakelock) {
     try {
-      console.info('releasing wake lock');
+      console.info('releasing wakelock');
       wakelock.release();
       wakelock = undefined;
     } catch {
       // Maybe this will never happen, but I wouldn't be surprised, e.g.
       // if the system kills our wakelock just before we try to release it.
+      console.warn('wakelock release failed');
     }
   }
 }
 
-function fn_wake_lock_released() {
-  console.info('fn_wake_lock_released()');
+function fn_wakelock_released() {
+  console.info('fn_wakelock_released()');
   wakelock = undefined;
 }

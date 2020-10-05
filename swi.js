@@ -165,6 +165,7 @@ async function update_wakelock(msg) {
       console.info('wakelock = ', wakelock);
       wakelock.addEventListener('release', fn_wake_lock_released);
     } catch {
+      console.warn('wake lock request failed');
     }
   } else if (msg.update_class != 'update-stop' && wakelock) {
     try {
@@ -172,6 +173,7 @@ async function update_wakelock(msg) {
       wakelock.release();
       wakelock = undefined;
     } catch {
+      console.warn('wake lock release failed');
     }
   }
 }

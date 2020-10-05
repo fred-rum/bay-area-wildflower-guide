@@ -983,8 +983,9 @@ Change 'Stop' to 'Pause'.
 
 Perhaps distinguish 'Getting started' from 'Checking cache' so that
 it's clear why an update can be availble while still checking.  Or
-start with 'Checking for updates' and then move to 'Checking
-survival of offline files'.
+start with 'Checking for updates' and then move to 'Validating offline
+files'.  During these steps, start with offline_ready = undefined and
+only move to a different value once we're sure.
 
 Round off the corners of the buttons.
 
@@ -1064,8 +1065,6 @@ that must be reported as an error.
 "Storage is temporary by default":
 https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Browser_storage_limits_and_eviction_criteria#Different_types_of_data_storage
 https://developer.mozilla.org/en-US/docs/Web/API/StorageManager/persist
-
-https://developer.mozilla.org/en-US/docs/Web/API/WakeLock
 
 If url_diff is true and there are cache entries owned by neither the
 old url_to_base64 nor new_url_to_base64, they can be immediately

@@ -1,5 +1,5 @@
 var url_data = [
-["swi.js", "Fqzg2EnEpQohu2J5e0tzKdTba6efrbDZ1lKc4A==", 6],
+["swi.js", "DpGh1NQVINMx_tt2vczv-n2quVLqfIkP1uhJKA==", 6],
 ["index.html", "VJ3Q-1gs7GrSvXLlUM3BOsmH-CmYhzwhSxMcLw==", 6],
 ["bawg.css", "kbIEHdHv4AaKBj75NO11VlS4Pv9SQPq7np288A==", 10],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
