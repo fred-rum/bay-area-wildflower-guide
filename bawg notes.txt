@@ -953,3 +953,9 @@ online for those files.
 
 Red3: Some files are missing from the offline copy.  Oops, that's my
 fault.  Check back for updates.
+
+
+Calculate 'browser allows up to' in either MB or GB, whichever is appropriate.
+
+Mac Safari doesn't show usage or estimate.  And that screws with the
+user's perception of forward progress when things get interrupted.

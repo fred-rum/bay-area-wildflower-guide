@@ -1,6 +1,6 @@
 var url_data = [
 ["swi.js", "matDXe2KJuIXYPJj6JgewSsFCb4JnVL_j1s--w==", 5],
-["index.html", "3FZRzgTLW-JCCroZMtBUkKvePB184RkuujrPLQ==", 6],
+["index.html", "IW3rQo5D8VvyL-yE0Aaa5KcWl4gLyYquVn-ZEA==", 6],
 ["bawg.css", "kbIEHdHv4AaKBj75NO11VlS4Pv9SQPq7np288A==", 10],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
 ["icons/check.svg", "GZFdGrKC4UpM0uywABrTQILfNZ7T0U6iI8sMaw==", 2],
