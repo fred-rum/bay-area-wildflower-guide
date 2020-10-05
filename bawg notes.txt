@@ -959,7 +959,9 @@ Calculate 'browser allows up to' in either MB or GB, whichever is appropriate.
 
 Mac Safari doesn't show usage or estimate.  And that screws with the
 user's perception of forward progress when things get interrupted.  If
-usage cannot be measured, at least create a message saying so.
+usage cannot be measured, at least create a message saying so.  Or
+simulate usage with my own calculated values (but with no quota,
+obviously).
 
 Gray out the 'Delete' button until the service worker appears.
 
@@ -980,7 +982,9 @@ update will pause.
 Change 'Stop' to 'Pause'.
 
 Perhaps distinguish 'Getting started' from 'Checking cache' so that
-it's clear why an update can be availble while still checking.
+it's clear why an update can be availble while still checking.  Or
+start with 'Checking for updates' and then move to 'Checking
+survival of offline files'.
 
 Round off the corners of the buttons.
 
@@ -1006,4 +1010,59 @@ update started.
 
 For advanced understanding, perhaps two bars, one showing the total
 cache usage, and another zoomed in to show the current transfer.
+One bar above the status text (100% of the remaining window width),
+the other below.  Light/fine gray/colored lines linking the zoomed
+section to its excerpt.
+https://stackoverflow.com/questions/51654061/zero-stroke-width-in-svg
 
+Or make a real, opaque (fancy-shaped) progress bar the full width of
+the viewport above or below the update button and status.
+
+It might be more obvious with boxy bars at top and bottom, with
+slanted shapes connecting them.
+
+Existing data has a black bar, but no slanty color (and it would be
+0-width in the zoomed section, anyway).
+
+status = 0.0 + 0.7 / 643.5 MB ?  Ugh.
+
+Move long status text to below the button.  E.g.
+[Pause Update] +0.7 / 1.3 MB
+Fetching html/zigzag larkspur.html
+[Delete Offline Files]
+645.8 MB including overhead
+(browser allows up to 279.4 GB)
+
+In this case, +0.7 / 1.3 MB corresponds to the zoomed bars, so
+adjusting the text vertically to ~align with that part of the bar
+might work.
+
+
+Make a top_msg for when the guide is operating online.  E.g.
+{in blue} [wifi symbol] The Guide is currently operating online.
+
+
+https://web.dev/storage-for-the-web/
+QuotaExceededError DOMException
+try {
+  const cache = await caches.open('my-cache');
+  await cache.add(new Request('/sample1.jpg'));
+} catch (err) {
+  if (error.name === 'QuotaExceededError') {
+    // Fallback code goes here
+  }
+}
+If it happens, set offline_ready = false and delete old cache entries.
+Perhaps an err_status message to indicate why we reverted to online mode.
+E.g. Storage limit reached.  Reverting to online mode while previous version
+is deleted.
+Then restart cache update.
+If quota is exceeded when there are no files to delete, then of course
+that must be reported as an error.
+
+
+"Storage is temporary by default":
+https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Browser_storage_limits_and_eviction_criteria#Different_types_of_data_storage
+https://developer.mozilla.org/en-US/docs/Web/API/StorageManager/persist
+
+https://developer.mozilla.org/en-US/docs/Web/API/WakeLock
