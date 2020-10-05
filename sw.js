@@ -1,5 +1,5 @@
 var url_data = [
-["swi.js", "matDXe2KJuIXYPJj6JgewSsFCb4JnVL_j1s--w==", 5],
+["swi.js", "Fqzg2EnEpQohu2J5e0tzKdTba6efrbDZ1lKc4A==", 6],
 ["index.html", "VJ3Q-1gs7GrSvXLlUM3BOsmH-CmYhzwhSxMcLw==", 6],
 ["bawg.css", "kbIEHdHv4AaKBj75NO11VlS4Pv9SQPq7np288A==", 10],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
@@ -8,7 +8,7 @@ var url_data = [
 ["search.js", "6YHbUaV0ouH__ihZfU_zGRPO9Lc0hpDyvc5PAQ==", 14],
 ["pages.js", "f-5cyRuqlRvNrRt7h-R3n9Fx2xjJSUXBEqp66g==", 127],
 ["manifest.webmanifest", "XGY5f7xv7yhxwxGbwWWhPfwDB3ICJv-oYatFwg==", 1],
-["chrome.html", "Zdz15uX2Pg6gOkwnUSPjIyjzlw8osTRe-W7G0w==", 3],
+["chrome.html", "vX8WvE8m_z56kLDIs7AnSIMJxbn5wPlWdX6a-g==", 3],
 ["safari.html", "uUvKpdy1R9pD9kuOHiU0_5u5bbqU8Fu_uaoNXg==", 4],
 ["firefox.html", "vS-XJQVemWLeRrEQUnrZj7p1VaWFFyUHDZ7Y_g==", 4],
 ["favicon/android-chrome-192x192.png", "mo6K7qaLIV-5TmbY7NJ9TJnwvMaYWB2u_VYhng==", 81],

@@ -8,6 +8,7 @@ let e_top_msg = {};
 var temp_controller;
 var old_msg = {};
 var old_icon;
+var wakelock;
 function swi_oninteractive() {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', oninteractive);
@@ -97,12 +98,14 @@ function fn_receive_status(event) {
       }
     }
     old_msg = msg;
+    update_wakelock(msg);
   } catch (error) {
     console.error(error);
     e_update.className = '';
     e_status.innerHTML = '';
     e_err_status.innerHTML = 'Interface not in sync; try deleting the offline files and then refreshing the page.';
     e_usage.innerHTML = '';
+    e_top_msg.style.display = 'none';
   }
 }
 function fn_update(event) {
@@ -135,6 +138,7 @@ function fn_receive_icon(event) {
     }
   }
   old_icon = icon;
+  update_wakelock(msg);
 }
 function get_yellow_expire(event) {
   let yellow_expire = localStorage.getItem('yellow_expire');
@@ -152,4 +156,26 @@ function fn_icon_click(event) {
   } else {
     window.location.href = '../index.html#offline';
   }
+}
+async function update_wakelock(msg) {
+  if (msg.update_class == 'update-stop' && !wakelock && navigator.wakeLock) {
+    try {
+      console.info('Requesting wake lock');
+      wakelock = await navigator.wakeLock.request('screen');
+      console.info('wakelock = ', wakelock);
+      wakelock.addEventListener('release', fn_wake_lock_released);
+    } catch {
+    }
+  } else if (msg.update_class != 'update-stop' && wakelock) {
+    try {
+      console.info('releasing wake lock');
+      wakelock.release();
+      wakelock = undefined;
+    } catch {
+    }
+  }
+}
+function fn_wake_lock_released() {
+  console.info('fn_wake_lock_released()');
+  wakelock = undefined;
 }

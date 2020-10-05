@@ -17,6 +17,8 @@ var old_msg = {};
 
 var old_icon;
 
+var wakelock;
+
 /* If the readyState is 'interactive', then the user can (supposedly)
    interact with the page, but it may still be loading HTML, images,
    or the stylesheet.  In fact, the page may not even be rendered yet.
@@ -154,6 +156,8 @@ function fn_receive_status(event) {
       }
     }
     old_msg = msg;
+
+    update_wakelock(msg);
   } catch (error) {
     console.error(error);
     // sw.js always auto-updates.  If swi.js is cached, communication could
@@ -163,6 +167,7 @@ function fn_receive_status(event) {
     e_status.innerHTML = '';
     e_err_status.innerHTML = 'Interface not in sync; try deleting the offline files and then refreshing the page.';
     e_usage.innerHTML = '';
+    e_top_msg.style.display = 'none';
   }
 }
 
@@ -210,6 +215,8 @@ function fn_receive_icon(event) {
   }
 
   old_icon = icon;
+
+  update_wakelock(msg);
 }
 
 /* We get the yellow_expire value from local storage every time we
@@ -232,4 +239,36 @@ function fn_icon_click(event) {
   } else {
     window.location.href = '../index.html#offline';
   }
+}
+
+/* If the browser supports it, keep the screen awake whenever the 'update'
+   button is in the 'update-stop' state (meaning that an update is in
+   progress).  Wake lock is currently only supported in Chrome. */
+async function update_wakelock(msg) {
+  if (msg.update_class == 'update-stop' && !wakelock && navigator.wakeLock) {
+    try {
+      console.info('Requesting wake lock');
+      wakelock = await navigator.wakeLock.request('screen');
+      console.info('wakelock = ', wakelock);
+      wakelock.addEventListener('release', fn_wake_lock_released);
+    } catch {
+      // Documentation is lacking as to why the request might fail.
+      // Perhaps a low battery.
+      // In any case, fine, no wake lock.
+    }
+  } else if (msg.update_class != 'update-stop' && wakelock) {
+    try {
+      console.info('releasing wake lock');
+      wakelock.release();
+      wakelock = undefined;
+    } catch {
+      // Maybe this will never happen, but I wouldn't be surprised, e.g.
+      // if the system kills our wakelock just before we try to release it.
+    }
+  }
+}
+
+function fn_wake_lock_released() {
+  console.info('fn_wake_lock_released()');
+  wakelock = undefined;
 }
