@@ -953,6 +953,3 @@ online for those files.
 
 Red3: Some files are missing from the offline copy.  Oops, that's my
 fault.  Check back for updates.
-
-
-Remove 'Checking cache' code in sw.js and ' Checking cache' in swi.js

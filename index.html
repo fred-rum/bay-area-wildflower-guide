@@ -5,7 +5,7 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta name="description" content="A resource for identifying San Francisco Bay Area wildflowers.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chris Nelson&rsquo;s Bay Area Wildflower Guide</title>
+<title>Bay Area Wildflower Guide</title>
 <script async src="search.js"></script>
 <script async src="pages.js"></script>
 <script async src="swi.js"></script>
@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="bawg.css">
 </head>
 <body>
-<a href="index.html"><img src="photos/home-icon.png" class="home-icon" alt="home"></a>
+<a href="index.html"><img src="icons/home.png" class="home-icon" alt="home"></a>
 <div class="body-container">
 <div id="search-container">
 <input type="search" id="search" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="flower or glossary term" aria-label="search for a flower or glossary term">
@@ -35,10 +35,12 @@
 <li><a href="html/flowering plants.html">flowers</a></li>
 <li><a href="html/life.html">all life</a></li>
 </ul>
-<!--<h2>Use it Offline</h2>
-<p>The Guide works great on a smartphone, but it works even better when it doesn't need internet access.  To cache its files for offline access, just click that shiny green button.<noscript> <b>(Requires JavaScript.)</b></noscript> The cache will continue to update as you browse the Guide, but will stop if you leave the site.</p>
-<p><div id="update" class="update-disable"></div><span id="status"></span><span id="err-status"></span></p></p>
-<p><div id="clear">Clear Cache</div><span id="usage"></span></p> -->
+<!-- --><h2 id="offline">Use it Offline</h2>
+<div id="cache-green"><img src="icons/check.svg" class="green-img"><span class="cache-text">The Guide is operating offline.  You will be kept informed when updates are available.</span></div>
+<div id="cache-yellow"><img src="icons/hazard.svg" class="hazard-img"><span class="cache-text">The Guide is operating offline.  An update is available whenever you are ready.</span></div>
+<p>The Guide works great on a smartphone, but it works even better when it doesn't need internet access.  To save its files for offline access, just click the shiny green button below.<noscript> <b>(Requires JavaScript.)</b></noscript> The offline files will continue to be saved in the background as you browse the Guide, but may stop if you minimize the window or leave the site.</p>
+<p><div id="update" class="update-disable">Load Offline Files</div><span id="status"></span><span id="err-status"></span></p></p>
+<p><div id="clear">Delete Offline Files</div><span id="usage"></span></p>
 <h2>Usage Guide</h2>
 <p>The Bay Area Wildflower Guide (BAWG) is a collection of my own photos and notes.  It is designed to be my own reference as well as something I can point people to when I make flower identifications. <b>Warning</b>: I am not a botanist, just an interested amateur.  All flower identifications should be taken as my opinion and not authoritative.</p>
 <p>The BAWG is primarily for me, secondarily for you.  You can use it as a reference if you like, but I hope you don&rsquo;t use it as your sole reference.</p>
