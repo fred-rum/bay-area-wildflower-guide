@@ -685,7 +685,9 @@ if arg('-with_cache'):
         'search.js',
         'pages.js',
         'manifest.webmanifest',
+        'chrome.html',
         'safari.html',
+        'firefox.html',
     ]
 
     favicon_set = get_file_set('favicon', None)

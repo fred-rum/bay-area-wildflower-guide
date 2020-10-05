@@ -957,11 +957,11 @@ fault.  Check back for updates.
 
 Calculate 'browser allows up to' in either MB or GB, whichever is appropriate.
 
-Mac Safari doesn't show usage or estimate.  And that screws with the
+Mac Safari doesn't show usage or quota.  And that screws with the
 user's perception of forward progress when things get interrupted.  If
 usage cannot be measured, at least create a message saying so.  Or
 simulate usage with my own calculated values (but with no quota,
-obviously).
+obviously).  "(guesstimate)"
 
 Gray out the 'Delete' button until the service worker appears.
 
@@ -1066,3 +1066,8 @@ https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Browser_storage_l
 https://developer.mozilla.org/en-US/docs/Web/API/StorageManager/persist
 
 https://developer.mozilla.org/en-US/docs/Web/API/WakeLock
+
+If url_diff is true and there are cache entries owned by neither the
+old url_to_base64 nor new_url_to_base64, they can be immediately
+deleted.  (If url_diff is false, those files may be from a partial
+download, and we're now offline and can't see the update.)
