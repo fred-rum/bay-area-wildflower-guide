@@ -963,22 +963,6 @@ usage cannot be measured, at least create a message saying so.  Or
 simulate usage with my own calculated values (but with no quota,
 obviously).  "(guesstimate)"
 
-Gray out the 'Delete' button until the service worker appears.
-
-Why do buttons turn white when the service worker crashes?
-
-Note that offline use is only known to work on Android Chrome.
-Firefox works, but the quota is too small.  iOS doesn't yet have
-robust support, and my tests indicate that it doesn't work.
-
-On iOS, delete while running gets confused.  Doesn't clear the cache
-properly?
-
-Tell the user to keep their phone awake and their browser open or the
-update will pause.
-
-Change 'Stop' to 'Pause'.
-
 Perhaps distinguish 'Getting started' from 'Checking cache' so that
 it's clear why an update can be availble while still checking.  Or
 start with 'Checking for updates' and then move to 'Validating offline

@@ -445,6 +445,11 @@ span.match {
 #clear:active {
     background-color: #d10000;
 }
+#clear.clear-disable {
+    background-color: #808080;
+    color: #000000;
+    cursor: not-allowed;
+}
 div#cache-green {
     display: none;
     background-color: #a3ffab;

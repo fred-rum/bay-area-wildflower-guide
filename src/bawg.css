@@ -929,6 +929,11 @@ span.match {
 #clear:active {
     background-color: #d10000;
 }
+#clear.clear-disable {
+    background-color: #808080;
+    color: #000000;
+    cursor: not-allowed;
+}
 
 /* important messages on the home page */
 div#cache-green {

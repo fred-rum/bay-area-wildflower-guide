@@ -98,6 +98,7 @@ function start_polling(registration) {
   temp_controller = registration.active;
 
   if (e_update) {
+    e_clear.className = '';
     e_update.addEventListener('click', fn_update);
     e_clear.addEventListener('click', fn_clear);
 
