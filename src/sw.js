@@ -497,6 +497,30 @@ function fn_send_status(event) {
     err_status = '';
   }
 
+  // If the event.data is anything more interesting than 'poll', kick
+  // off the appropriate process before returning the polling status.
+  if (event.data === 'update') {
+    if (updating === false) {
+      // There is no current activity, so start updating the cache.
+      update_cache();
+    } else if (update_class === 'update-disable') {
+      // If we're still checking the cache or if the cache is up to date,
+      // ignore the update request.
+      console.info('ignore update request');
+    } else {
+      // If a cache update is in progress, kill it.
+      console.info('stop_updating = true');
+      stop_updating = true;
+    }
+  } else if (event.data === 'clear') {
+    // If the user clicks the 'Clear Cache' button multiple times in a
+    // row, I don't bother to suppress simultaneous calls to clear_caches().
+    // Intuition and experimentation indicates that the worst that happens
+    // is that the same cache entry is deleted multiple times, and doing
+    // so is harmless and safe.
+    clear_caches();
+  }
+
   if (offline_ready) {
     var update_button = 'Update Offline Files';
   } else {
@@ -592,28 +616,6 @@ function fn_send_status(event) {
   if ((updating === false) || (update_class === 'update-disable')) {
     stop_updating = false;
   }
-
-  if (event.data === 'update') {
-    if (updating === false) {
-      // There is no current activity, so start updating the cache.
-      update_cache();
-    } else if (update_class === 'update-disable') {
-      // If we're still checking the cache or if the cache is up to date,
-      // ignore the update request.
-      console.info('ignore update request');
-    } else {
-      // If a cache update is in progress, kill it.
-      console.info('stop_updating = true');
-      stop_updating = true;
-    }
-  } else if (event.data === 'clear') {
-    // If the user clicks the 'Clear Cache' button multiple times in a
-    // row, I don't bother to suppress simultaneous calls to clear_caches().
-    // Intuition and experimentation indicates that the worst that happens
-    // is that the same cache entry is deleted multiple times, and doing
-    // so is harmless and safe.
-    clear_caches();
-  }
 }
 
 // We don't bother to wait for these calls to finish.  We just fire them
@@ -680,6 +682,7 @@ async function update_cache() {
   err_status = '';
 
   try {
+    updating = 'Preparing update';
     let cache = await caches.open(BASE64_CACHE_NAME);
     await fetch_to_cache(cache);
     await record_urls();

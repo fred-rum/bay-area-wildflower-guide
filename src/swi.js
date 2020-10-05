@@ -177,7 +177,7 @@ function fn_update(event) {
     // break down.  So regardless of what we *think* the status is, always
     // send the 'update' message and let the service worker sort it out.
     navigator.serviceWorker.controller.postMessage('update');
-    e_update.className = 'disabled';
+    e_update.className = 'update-disable';
     localStorage.removeItem('yellow_expire');
   }
 }

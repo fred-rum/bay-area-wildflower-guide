@@ -1,5 +1,5 @@
 var url_data = [
-["swi.js", "9indLZAG7e7bqptrfKA6EwJAin3Yqh1aNsCimA==", 6],
+["swi.js", "yj1J_qSUQMXZslECc5Tc2RsGV__QcgifvgKZGQ==", 6],
 ["index.html", "F67oSBYBMntlfw-qH10CBbu_sRLR-Dcu8YIFFA==", 6],
 ["bawg.css", "kbIEHdHv4AaKBj75NO11VlS4Pv9SQPq7np288A==", 10],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
@@ -5206,6 +5206,18 @@ function fn_send_status(event) {
   if (event.data == 'start') {
     err_status = '';
   }
+  if (event.data === 'update') {
+    if (updating === false) {
+      update_cache();
+    } else if (update_class === 'update-disable') {
+      console.info('ignore update request');
+    } else {
+      console.info('stop_updating = true');
+      stop_updating = true;
+    }
+  } else if (event.data === 'clear') {
+    clear_caches();
+  }
   if (offline_ready) {
     var update_button = 'Update Offline Files';
   } else {
@@ -5259,18 +5271,6 @@ function fn_send_status(event) {
   if ((updating === false) || (update_class === 'update-disable')) {
     stop_updating = false;
   }
-  if (event.data === 'update') {
-    if (updating === false) {
-      update_cache();
-    } else if (update_class === 'update-disable') {
-      console.info('ignore update request');
-    } else {
-      console.info('stop_updating = true');
-      stop_updating = true;
-    }
-  } else if (event.data === 'clear') {
-    clear_caches();
-  }
 }
 async function clear_caches() {
   stop_updating = true;
@@ -5301,6 +5301,7 @@ async function update_cache() {
   console.info('update_cache()');
   err_status = '';
   try {
+    updating = 'Preparing update';
     let cache = await caches.open(BASE64_CACHE_NAME);
     await fetch_to_cache(cache);
     await record_urls();

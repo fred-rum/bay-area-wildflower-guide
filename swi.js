@@ -111,7 +111,7 @@ function fn_receive_status(event) {
 function fn_update(event) {
   if (navigator.serviceWorker && navigator.serviceWorker.controller) {
     navigator.serviceWorker.controller.postMessage('update');
-    e_update.className = 'disabled';
+    e_update.className = 'update-disable';
     localStorage.removeItem('yellow_expire');
   }
 }
