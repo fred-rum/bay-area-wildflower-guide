@@ -958,4 +958,52 @@ fault.  Check back for updates.
 Calculate 'browser allows up to' in either MB or GB, whichever is appropriate.
 
 Mac Safari doesn't show usage or estimate.  And that screws with the
-user's perception of forward progress when things get interrupted.
+user's perception of forward progress when things get interrupted.  If
+usage cannot be measured, at least create a message saying so.
+
+Gray out the 'Delete' button until the service worker appears.
+
+Put a time-out in swi.js for when polling gets no results.
+
+Why do buttons turn white when the service worker crashes?
+
+Note that offline use is only known to work on Android Chrome.
+Firefox works, but the quota is too small.  iOS doesn't yet have
+robust support, and my tests indicate that it doesn't work.
+
+On iOS, delete while running gets confused.  Doesn't clear the cache
+properly?
+
+Tell the user to keep their phone awake and their browser open or the
+update will pause.
+
+Change 'Stop' to 'Pause'.
+
+Perhaps distinguish 'Getting started' from 'Checking cache' so that
+it's clear why an update can be availble while still checking.
+
+Round off the corners of the buttons.
+
+Change the buttons to stack the words vertically?  E.g.
+Update
+Offline
+ Files
+Then the status on the right will fit better in an inline-block.
+It could be dependent on the screen width.
+
+
+Progress indicator should be better.  Perhaps...
+a bar/line with colors:
+green is how much is kept from the previous version.
+yellow is how much is needed for the new update.
+But what color for data that has been loaded for the new update,
+but not yet 'installed'?  Black?  Or use black (or gray) for previous,
+and green for newly loaded?
+
+Note that a comparison of the old url_to_base64 to new_url_to_base64
+tells us the original amount of data that we had before the current
+update started.
+
+For advanced understanding, perhaps two bars, one showing the total
+cache usage, and another zoomed in to show the current transfer.
+

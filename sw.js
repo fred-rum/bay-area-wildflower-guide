@@ -1,11 +1,11 @@
 var url_data = [
 ["swi.js", "matDXe2KJuIXYPJj6JgewSsFCb4JnVL_j1s--w==", 5],
-["index.html", "IW3rQo5D8VvyL-yE0Aaa5KcWl4gLyYquVn-ZEA==", 6],
+["index.html", "TKgQD5OyG11kP2Cgr6B6AooCZQDmRBd04a2F8g==", 6],
 ["bawg.css", "kbIEHdHv4AaKBj75NO11VlS4Pv9SQPq7np288A==", 10],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
 ["icons/check.svg", "GZFdGrKC4UpM0uywABrTQILfNZ7T0U6iI8sMaw==", 2],
 ["icons/hazard.svg", "HOkNZxg-3N8W8I-Pn34iXGD1ka6Q3IQWAutIyw==", 2],
-["search.js", "u9KLST14udARtLzWLOHaA7kiW-O22kQuJ7dOLQ==", 14],
+["search.js", "6YHbUaV0ouH__ihZfU_zGRPO9Lc0hpDyvc5PAQ==", 14],
 ["pages.js", "f-5cyRuqlRvNrRt7h-R3n9Fx2xjJSUXBEqp66g==", 127],
 ["manifest.webmanifest", "XGY5f7xv7yhxwxGbwWWhPfwDB3ICJv-oYatFwg==", 1],
 ["favicon/android-chrome-192x192.png", "mo6K7qaLIV-5TmbY7NJ9TJnwvMaYWB2u_VYhng==", 81],
