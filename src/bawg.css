@@ -935,6 +935,7 @@ div#cache-green {
     display: none;
     background-color: #a3ffab;
     padding: 5px;
+    border-radius: 15px;
 }
 img.green-img {
     display: inline-block;
@@ -953,6 +954,7 @@ div#cache-yellow {
     display: none;
     background-color: #faffa3;
     padding: 5px;
+    border-radius: 15px;
 }
 img.hazard-img {
     display: inline-block;
