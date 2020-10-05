@@ -19,6 +19,9 @@ var old_icon;
 
 var wakelock;
 
+var poll_interval = 500; // in milliseconds
+var polls_since_response = 0;
+
 /* If the readyState is 'interactive', then the user can (supposedly)
    interact with the page, but it may still be loading HTML, images,
    or the stylesheet.  In fact, the page may not even be rendered yet.
@@ -51,7 +54,7 @@ function swi_oninteractive() {
       console.info(top_msg, e_top_msg[top_msg]);
     }
 
-    e_status.innerHTML = 'Waiting for service worker to load';
+    e_status.innerHTML = 'Waiting for the service worker to load';
 
     var sw_path = 'sw.js';
   } else {
@@ -107,23 +110,37 @@ function start_polling(registration) {
 
   // Poll right away, and then at intervals.
   poll_cache(undefined, 'start');
-  setInterval(poll_cache, 500);
+  setInterval(poll_cache, poll_interval);
 }
 
 function poll_cache(event, msg='poll') {
-  // poll_cache() is only called if there is an active controller,
+  // If we don't get a response from the service worker for too long,
+  // let the user know that something went wrong.
+  let secs = Math.floor((polls_since_response * poll_interval) / 1000);
+  if (secs >= 3) {
+      e_err_status.innerHTML = '<br>No response from the service worker for ' + secs + ' seconds.<br>Try closing the tab, waiting 10 seconds, and then returning to the Guide.  I don&rsquo;t know if that will work, but it sounds plausible.';
+  }
+
+  post_msg(msg)
+}
+
+function post_msg(msg) {
+  // post_msg() is only called if there is an active service worker,
   // but navigator.serviceWorker.controller might not be updated yet
   // (as documented above).  Prefer navigator.serviceWorker.controller
   // when it is available so that we keep up with any changes to the
   // service worker, but fall back to temp_controller if necessary.
   if (navigator.serviceWorker.controller) {
     navigator.serviceWorker.controller.postMessage(msg);
-  } else {
+  } else if (temp_controller) {
     temp_controller.postMessage(msg);
   }
+  polls_since_response++;
 }
 
 function fn_receive_status(event) {
+  polls_since_response = 0;
+
   try {
     let msg = event.data;
 
@@ -172,22 +189,22 @@ function fn_receive_status(event) {
 }
 
 function fn_update(event) {
-  if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+  if (navigator.serviceWorker) {
     // sw.js always auto-updates.  If swi.js is cached, communication could
     // break down.  So regardless of what we *think* the status is, always
     // send the 'update' message and let the service worker sort it out.
-    navigator.serviceWorker.controller.postMessage('update');
+    post_msg('update');
     e_update.className = 'update-disable';
     localStorage.removeItem('yellow_expire');
   }
 }
 
 function fn_clear(event) {
-  if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+  if (navigator.serviceWorker) {
     // sw.js always auto-updates.  If swi.js is cached, communication could
     // break down.  So regardless of what we *think* the status is, always
-    // send the 'update' message and let the service worker sort it out.
-    navigator.serviceWorker.controller.postMessage('clear');
+    // send the 'clear' message and let the service worker sort it out.
+    post_msg('clear');
     localStorage.clear();
   }
 }

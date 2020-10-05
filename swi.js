@@ -9,6 +9,8 @@ var temp_controller;
 var old_msg = {};
 var old_icon;
 var wakelock;
+var poll_interval = 500;
+var polls_since_response = 0;
 function swi_oninteractive() {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', oninteractive);
@@ -27,7 +29,7 @@ function swi_oninteractive() {
       e_top_msg[top_msg] = document.getElementById('cache-' + top_msg);
       console.info(top_msg, e_top_msg[top_msg]);
     }
-    e_status.innerHTML = 'Waiting for service worker to load';
+    e_status.innerHTML = 'Waiting for the service worker to load';
     var sw_path = 'sw.js';
   } else {
     e_icon = document.getElementById('icon');
@@ -62,16 +64,25 @@ function start_polling(registration) {
     navigator.serviceWorker.addEventListener('message', fn_receive_icon);
   }
   poll_cache(undefined, 'start');
-  setInterval(poll_cache, 500);
+  setInterval(poll_cache, poll_interval);
 }
 function poll_cache(event, msg='poll') {
+  let secs = Math.floor((polls_since_response * poll_interval) / 1000);
+  if (secs >= 3) {
+      e_err_status.innerHTML = '<br>No response from the service worker for ' + secs + ' seconds.<br>Try closing the tab, waiting 10 seconds, and then returning to the Guide.  I don&rsquo;t know if that will work, but it sounds plausible.';
+  }
+  post_msg(msg)
+}
+function post_msg(msg) {
   if (navigator.serviceWorker.controller) {
     navigator.serviceWorker.controller.postMessage(msg);
-  } else {
+  } else if (temp_controller) {
     temp_controller.postMessage(msg);
   }
+  polls_since_response++;
 }
 function fn_receive_status(event) {
+  polls_since_response = 0;
   try {
     let msg = event.data;
     if (msg.update_button != old_msg.update_button) {
@@ -109,15 +120,15 @@ function fn_receive_status(event) {
   }
 }
 function fn_update(event) {
-  if (navigator.serviceWorker && navigator.serviceWorker.controller) {
-    navigator.serviceWorker.controller.postMessage('update');
+  if (navigator.serviceWorker) {
+    post_msg('update');
     e_update.className = 'update-disable';
     localStorage.removeItem('yellow_expire');
   }
 }
 function fn_clear(event) {
-  if (navigator.serviceWorker && navigator.serviceWorker.controller) {
-    navigator.serviceWorker.controller.postMessage('clear');
+  if (navigator.serviceWorker) {
+    post_msg('clear');
     localStorage.clear();
   }
 }

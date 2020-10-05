@@ -965,8 +965,6 @@ obviously).  "(guesstimate)"
 
 Gray out the 'Delete' button until the service worker appears.
 
-Put a time-out in swi.js for when polling gets no results.
-
 Why do buttons turn white when the service worker crashes?
 
 Note that offline use is only known to work on Android Chrome.
