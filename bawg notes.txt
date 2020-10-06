@@ -955,7 +955,10 @@ Red3: Some files are missing from the offline copy.  Oops, that's my
 fault.  Check back for updates.
 
 
-Calculate 'browser allows up to' in either MB or GB, whichever is appropriate.
+Calculate 'browser allows up to' in either MB or GB, whichever is
+appropriate.  E.g. MB if <= 9999.
+
+Change MB to whole numbers instead of tenths.
 
 Mac Safari doesn't show usage or quota.  And that screws with the
 user's perception of forward progress when things get interrupted.  If
@@ -1039,3 +1042,6 @@ Can I detect whether service worker installation fails because storage
 is full?  And if so, can I do anything about it?  This is especially
 issue if the site is not 'offline ready' and the old sw.js falls out
 of date w.r.t. the new swi.js.
+
+Perhaps a (final) quota error should automatically delete all files
+to free space.

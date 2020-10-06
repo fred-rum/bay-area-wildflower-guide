@@ -750,8 +750,8 @@ async function fetch_to_cache(cache) {
             console.log('end cache.put()');
           } catch (e) {
             console.warn('error during cache.put():', e);
-            if ((e.name === 'QuotaExceededError') ||
-                (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE')) {
+            if ((e.name === 'QuotaExceededError') || // There's the standard
+                (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE')) { // and Firefox
               if (iter == 0) {
                 offline_ready = false;
                 err_status = '<br>Storage limit reached.  Reverting to online mode while old files are deleted.';

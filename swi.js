@@ -12,7 +12,7 @@ var wakelock;
 var poll_interval = 500;
 var polls_since_response = 0;
 var timed_out = false;
-function swi_oninteractive() {
+async function swi_oninteractive() {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', swi_oninteractive);
     return
@@ -37,14 +37,17 @@ function swi_oninteractive() {
     var sw_path = '../sw.js';
   }
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register(sw_path).then(function (registration) {
-      navigator.serviceWorker.ready.then(start_polling);
-    }).catch (function (error) {
-      console.info('service worker registration failed');
+    try {
+      registration = await navigator.serviceWorker.register(sw_path);
+    } catch (e) {
+      console.warn('service worker registration failed', e);
       if (e_status) {
-        e_status.innerHTML = 'No service worker';
+        e_status.innerHTML = 'New service worker failed to load.  Manually clearing all site data might help.';
       }
-    });
+      return;
+    }
+    await navigator.serviceWorker.ready;
+    start_polling(registration);
   } else {
     console.info('no service worker support in browser');
     if (e_status) {
@@ -113,8 +116,8 @@ function fn_receive_status(event) {
     }
     old_msg = msg;
     update_wakelock(msg);
-  } catch (error) {
-    console.error(error);
+  } catch (e) {
+    console.error('polling msg error:', e);
     e_update.className = '';
     e_status.innerHTML = '';
     e_err_status.innerHTML = 'Interface not in sync; try deleting the offline files and then refreshing the page.';
@@ -179,16 +182,16 @@ async function update_wakelock(msg) {
       wakelock = await navigator.wakeLock.request('screen');
       console.info('wakelock = ', wakelock);
       wakelock.addEventListener('release', fn_wakelock_released);
-    } catch {
-      console.warn('wakelock request failed');
+    } catch (e) {
+      console.warn('wakelock request failed:', e);
     }
   } else if (msg.update_class != 'update-stop' && wakelock) {
     try {
       console.info('releasing wakelock');
       wakelock.release();
       wakelock = undefined;
-    } catch {
-      console.warn('wakelock release failed');
+    } catch (e) {
+      console.warn('wakelock release failed:', e);
     }
   }
 }

@@ -33,7 +33,7 @@ var timed_out = false;
    sufficiently well designed so that the page isn't still adjusting
    its layout after the call to restore_scroll().
 */
-function swi_oninteractive() {
+async function swi_oninteractive() {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', swi_oninteractive);
     return
@@ -65,20 +65,25 @@ function swi_oninteractive() {
   }
 
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register(sw_path).then(function (registration) {
-      // When register() resolves, we're not guaranteed to have an active
-      // service worker.  In fact, the service worker might not even be
-      // 'installing' yet!  Theoretically, I could set up callbacks on
-      // updatestate and statechange, but even easier, I can simply wait
-      // until the ServiceWorkerContainer resolves the promise in 'ready'.
-      // When that happens, a service worker is guaranteed to be active.
-      navigator.serviceWorker.ready.then(start_polling);
-    }).catch (function (error) {
-      console.info('service worker registration failed');
+    try {
+      registration = await navigator.serviceWorker.register(sw_path);
+    } catch (e) {
+      console.warn('service worker registration failed', e);
       if (e_status) {
-        e_status.innerHTML = 'No service worker';
+        e_status.innerHTML = 'New service worker failed to load.  Manually clearing all site data might help.';
       }
-    });
+      return;
+    }
+
+    // When register() resolves, we're not guaranteed to have an active
+    // service worker.  In fact, the service worker might not even be
+    // 'installing' yet!  Theoretically, I could set up callbacks on
+    // updatestate and statechange, but even easier, I can simply wait
+    // until the ServiceWorkerContainer resolves the promise in 'ready'.
+    // When that happens, a service worker is guaranteed to be active.
+    await navigator.serviceWorker.ready;
+
+    start_polling(registration);
   } else {
     console.info('no service worker support in browser');
     if (e_status) {
@@ -180,8 +185,8 @@ function fn_receive_status(event) {
     old_msg = msg;
 
     update_wakelock(msg);
-  } catch (error) {
-    console.error(error);
+  } catch (e) {
+    console.error('polling msg error:', e);
     // sw.js always auto-updates.  If swi.js is cached, communication could
     // break down.  If so, we want to make clear what steps might lead to
     // recovery.
@@ -275,21 +280,21 @@ async function update_wakelock(msg) {
       wakelock = await navigator.wakeLock.request('screen');
       console.info('wakelock = ', wakelock);
       wakelock.addEventListener('release', fn_wakelock_released);
-    } catch {
+    } catch (e) {
       // Documentation is lacking as to why the request might fail.
       // Perhaps a low battery.
       // In any case, fine, no wakelock.
-      console.warn('wakelock request failed');
+      console.warn('wakelock request failed:', e);
     }
   } else if (msg.update_class != 'update-stop' && wakelock) {
     try {
       console.info('releasing wakelock');
       wakelock.release();
       wakelock = undefined;
-    } catch {
+    } catch (e) {
       // Maybe this will never happen, but I wouldn't be surprised, e.g.
       // if the system kills our wakelock just before we try to release it.
-      console.warn('wakelock release failed');
+      console.warn('wakelock release failed:', e);
     }
   }
 }
