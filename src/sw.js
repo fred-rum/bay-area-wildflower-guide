@@ -14,6 +14,7 @@ var updating = 'Checking for offline files';
 var err_status = '';
 var usage = '';
 var stop_updating = false;
+var update_promise;
 
 // offline_ready is undefined when we haven't yet checked the indexedDB.
 //
@@ -162,27 +163,6 @@ function async_callbacks(request) {
     }
 
     request.onerror = (event) => {
-      return reject(event);
-    }
-  });
-}
-
-// And here's a similar function to async_callbacks, but suitable for
-// indexedDB transactions.
-// - When the 'oncomplete' callback is called, the promise is resolved.
-// - When the 'onerror' or 'onabort' callback is called, the promise is
-//   rejected.
-function async_tx(tx) {
-  return new Promise((resolve, reject) => {
-    tx.oncomplete = (event) => {
-      resolve(event);
-    }
-
-    tx.onerror = (event) => {
-      return reject(event);
-    }
-
-    tx.onabort = (event) => {
       return reject(event);
     }
   });
@@ -514,15 +494,17 @@ function fn_send_status(event) {
   if (event.data === 'update') {
     if (updating === false) {
       // There is no current activity, so start updating the cache.
-      update_cache();
+      // By default, we don't wait for it to finish.
+      // But we do record its promise so that delete_all_cache_entries()
+      // can wait for it to halt if necessary.
+      update_promise = update_cache();
     } else if (update_class === 'update-disable') {
       // If we're still checking the cache or if the cache is up to date,
       // ignore the update request.
       console.info('ignore update request');
     } else {
-      // If a cache update is in progress, kill it.
-      console.info('stop_updating = true');
-      stop_updating = true;
+      updating = 'Pausing update in progress';
+      stop_update();
     }
   } else if (event.data === 'clear') {
     // If the user clicks the 'Delete Offline Files' button multiple times in
@@ -552,7 +534,7 @@ function fn_send_status(event) {
   } else if ((updating === 'Checking for offline files') ||
              (updating === 'Validating offline files') ||
              (updating === 'Up to date') ||
-             (updating === 'Clearing caches')) {
+             (updating === 'Deleting offline files')) {
     // It would be nice to display incremental progress while validating
     // the cache, but the slow part is getting all the keys from the cache.
     // Actually checking the keys is then atomic.
@@ -620,48 +602,45 @@ function fn_send_status(event) {
     icon: icon
   };
   event.source.postMessage(msg);
+}
 
-  // If we previously told the cache update to stop, then check whether
-  // it is now stopped, and clear the flag if so.
-  // We do this here to avoid all possible race conditions.
-  if ((updating === false) || (update_class === 'update-disable')) {
+async function stop_update() {
+  // Make a copy of the update_promise and then remove the original.
+  // Thus, only the first call to stop_update() after an update
+  // will do anything.
+  let promise = update_promise;
+  update_promise = undefined;
+
+  if (promise) {
+    // If an update is still running, tell it to stop, then wait for it to
+    // stop.  If we don't wait, then it could still be active when the delete
+    // completes, and then become really confusing.
+    //
+    // If the last update is already done, the promise resolves immediately.
+    console.log('await update_promise');
+    stop_updating = true;
+    await promise;
     stop_updating = false;
   }
 }
 
-// We don't bother to wait for these calls to finish.  We just fire them
-// off and assume that the caches will get cleared eventually.
+// I deliberately allow clear_caches() to get called multiple times
+// concurrently.  The first call might wait for stop_update(), but if
+// things are totally wonky, a second press will skip right to deleting
+// the offline data.
 async function clear_caches() {
-  // stop_updating isn't perfect if a cache update is in progress, but
-  // I figure that it should be pretty good and reasonably safe.
-  stop_updating = true;
+  updating = 'Halting update in progress';
+  stop_update();
 
   console.info('clear_caches()');
-  updating = 'Clearing caches';
+  updating = 'Deleting offline files';
+  err_status = '';
 
   url_to_base64 = {};
   url_diff = true;
   offline_ready = false;
 
-  // For some reason, indexedDB.deleteDatabase() often hangs for me.
-  // So I clear the objectStore, instead.
-  /*
-  let request = indexedDB.deleteDatabase(DB_NAME);
-  result = await async_callbacks(request);
-  console.info('indexedDB delete result =', result);
-  */
-
-  let db = await open_db();
-  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").clear());
-
-  // For some reason, caches.delete() often hangs for me.
-  // So I delete all of the individual cache entries, instead.
-  /*
-  request = caches.delete(BASE64_CACHE_NAME);
-  result = await async_callbacks(request);
-  console.info('cache delete result =', result);
-  */
-
+  await delete_db();
   await delete_all_cache_entries();
 
   // Reset which files need to be cached.
@@ -672,7 +651,16 @@ async function clear_caches() {
   is_cache_up_to_date();
 }
 
+async function delete_db() {
+  // For some reason, indexedDB.deleteDatabase() often hangs for me.
+  // So I clear the objectStore, instead.
+  let db = await open_db();
+  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").clear());
+}
+
 async function delete_all_cache_entries() {
+  // For some reason, caches.delete() often hangs for me.
+  // So I delete all of the individual cache entries, instead.
   console.info('delete_all_cache_entries()')
   let cache = await caches.open(BASE64_CACHE_NAME);
   let requests = await cache.keys();
@@ -682,7 +670,7 @@ async function delete_all_cache_entries() {
   for (let i = 0; i < requests.length; i++) {
     let request = requests[i]
     console.info('Deleting', request);
-    await cache.delete(request);
+    cache.delete(request);
   }
 }
 
@@ -695,118 +683,175 @@ async function update_cache() {
   try {
     updating = 'Preparing update';
     let cache = await caches.open(BASE64_CACHE_NAME);
-    await fetch_to_cache(cache);
+    await protected_write(cache, write_margin);
+    await fetch_all_to_cache(cache);
     await record_urls();
     await delete_old_files(cache);
     is_cache_up_to_date();
   } catch (e) {
-    console.warn('update_cache() caught error:', e);
+    if (!e) {
+      // We throw a null when the error has been sufficiently handled already.
+    } else if ((e.name === 'QuotaExceededError') ||
+               (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE')){
+      err_status = '<br>Not enough offline storage available.  Sorry.';
+    } else {
+      err_status = '<br>' + e.name + '<br>Something went wrong.  Refresh and try again?';
+    }
+    console.warn(e);
+    console.warn(err_status);
     updating = false;
+    clear_margin();
   }
 }
 
-async function fetch_to_cache(cache) {
-  for (let url in new_url_to_base64) {
-    let base64 = new_url_to_base64[url]
-    if (base64 in base64_to_kb) {
-      // Execute the following loop up to two times,
-      // breaking out if the cache.put() succeeds.
-      // Iteration 0 is attempted while old cache items can be deleted.
-      // Iteration 1 is attempted while no old cache items can be deleted.
-      if (base64_to_delete.length) {
-        var start = 0;
+// Wrap a function call in code that reacts appropriately to quota errors.
+// If the write fails while there is old data that can be deleted, delete
+// the old data and try again.  If the write still fails, handle the error.
+async function protected_write(cache, func) {
+  if (base64_to_delete.length) {
+    try {
+      // Make sure to wait for func() to asynchronously finish.
+      // Otherwise we won't catch its errors.
+      return await func();
+    } catch (e) {
+      // The documented standard is 'QuotaExceededError'.
+      // Testing reveals that Firefox throws a different exception, however.
+      if (e && ((e.name === 'QuotaExceededError') ||
+                (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE'))) {
+        // Delete old files.
+        err_status = '<br>Storage limit reached.  Reverted to online mode so that old files can be deleted.';
+        offline_ready = false;
+        await delete_db();
+        await delete_old_files(cache);
+        err_status = '<br>Storage limit reached.  Reverted to online mode so that old files could be deleted.';
+        // then fall through to the second call to func().
       } else {
-        var start = 1;
-      }
-      for (let iter = start; iter < 2; iter++) {
-        let kb = base64_to_kb[base64];
-        updating = 'Fetching ' + decodeURI(url)
-        console.info(updating)
-        let response;
-        try {
-          console.log('start fetch()');
-          response = await fetch(url);
-          console.log('end fetch()');
-        } catch (e) {
-          console.warn('fetch failed', e);
-          updating = false;
-          err_status = '<br>Lost online connectivity.  Try again later.';
-          throw 'oops';
-        }
-
-        // Pay attention to the global stop_updating variable and
-        // bail out if it becomes true.  We put this check just before
-        // the cache.put() so that we don't update the cache after
-        // stop_updating becomes true.
-        if (stop_updating){
-          throw 'stop';
-        }
-
-        if (response && response.ok) {
-          try {
-            // Associate the fetched page with the base64 encoding.
-            console.log('start cache.put()');
-            await cache.put(base64, response);
-            console.log('end cache.put()');
-          } catch (e) {
-            console.warn('error during cache.put():', e);
-            if ((e.name === 'QuotaExceededError') || // There's the standard
-                (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE')) { // and Firefox
-              if (iter == 0) {
-                offline_ready = false;
-                err_status = '<br>Storage limit reached.  Reverting to online mode while old files are deleted.';
-                await delete_old_files(cache);
-                err_status = '';
-                continue; // try again with iter=1
-              } else {
-                err_status = '<br>Not enough offline storage available.  Sorry.';
-              }
-            } else {
-              err_status = '<br>' + e.name + '<br>Something went wrong.  Refresh and try again?';
-            }
-            throw 'oops';
-          }
-
-          // Entries left in base64_to_kb are ones that need to be fetched.
-          delete base64_to_kb[base64];
-
-          kb_cached += kb;
-
-          // This iteration succeeded, so break out of the iter loop
-          // and continue with the next URL.
-          break;
-        } else if (response.status == 404) {
-          console.warn('fetch missing');
-          err_status = '<br>Could not find ' + decodeURI(url) + '<br>The Guide must have updated online just now.  Refresh the page and try again.';
-          throw 'oops';
-        } else {
-          console.warn('strange server response');
-          err_status = '<br>' + response.status + ' ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
-          throw 'oops';
-        }
+        throw e;
       }
     }
   }
+
+  // If this call of func() fails, there's nothing more we can do to handle it.
+  // Instead, we let the exception propagate up the chain.
+  return await func();
+}
+
+// Store ~4 to 8 MB of junk in the indexedDB.
+// If we're able to perform all non-critical writes with this margin in place,
+// then after removing the margin we're sure to have space remaining for
+// critical resources.
+//
+// Without this protection I found that I often couldn't register a new
+// sw.js.  That's painful during debugging, and it could be disasterous if
+// I ever accidentally release a bad sw.js.
+async function write_margin() {
+  // Because Firefox compresses our data, we need to construct our
+  // junk from something non-predictable.
+  // generate enough random (assumed 8-byte) numbers to fill 2 MB.
+  // list overhead will take some amount more space.
+  let junk = [];
+  let n = 4*1024*1024/8;
+  for (let i = 0; i < n; i++){
+    junk.push(Math.random());
+  }
+
+  let obj = {key: 'margin',
+             junk: junk};
+
+  let db = await open_db();
+  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
+}
+
+async function clear_margin() {
+  let db = await open_db();
+
+  let obj = {key: 'margin',
+             junk: ''};
+  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
+}
+
+async function fetch_all_to_cache(cache) {
+  for (let url in new_url_to_base64) {
+    let base64 = new_url_to_base64[url]
+    if (base64 in base64_to_kb) {
+      await protected_write(cache, async => fetch_to_cache(cache, url, base64));
+
+      let kb = base64_to_kb[base64];
+
+      // Entries left in base64_to_kb are ones that need to be fetched.
+      delete base64_to_kb[base64];
+
+      kb_cached += kb;
+    }
+  }
+}
+
+async function fetch_to_cache(cache, url, base64) {
+  updating = 'Fetching ' + decodeURI(url)
+  console.info(updating)
+  let response;
+  try {
+    response = await fetch(url);
+  } catch (e) {
+    console.warn('fetch failed', e);
+    updating = false;
+    err_status = '<br>Lost online connectivity.  Try again later.';
+    throw null;
+  }
+
+  if (!response) {
+    err_status = '<br>Unexpected fetch response.  Try again later?';
+    throw null;
+  } if (response.status == 404) {
+    err_status = '<br>Could not find ' + decodeURI(url) + '<br>The Guide must have updated online just now.  Refresh the page and try again.';
+    throw null;
+  } else if (!response.ok) {
+    err_status = '<br>' + response.status + ' - ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
+    throw null;
+  }
+
+  // Pay attention to the global stop_updating variable and
+  // bail out if it becomes true.  We put this check just before
+  // the cache.put() so that we don't update the cache after
+  // stop_updating becomes true.
+  if (stop_updating){
+    // No error handling is required.  Just stop.
+    console.info('updating is now stopped');
+    throw null;
+  }
+
+  // The fetch was successful.  Now write the result to the cache.
+  //
+  // Note that we're already running within protected_write(),
+  // so a quota error in cache.put() will be handled properly.
+  await cache.put(base64, response);
 }
 
 // Record new_url_to_base64 to the indexedDB and begin using it as the current
 // url_to_base64.
 async function record_urls() {
-  console.info('record_urls()');
-
   let db = await open_db();
 
-  let obj = {key: 'data',
-             url_to_base64: new_url_to_base64
-            };
+  // Clear margin.  This is a separate transaction since I suspect that
+  // combining it with the following write in one atomic transaction would
+  // cause more space to be allocated before the margin space is freed.
+  let obj = {key: 'margin',
+             junk: ''};
+  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
 
-  // We don't need to wait for the transaction to complete.
-  // Just fire it off and assume it'll complete.
-  async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
+  // Write data.
+  obj = {key: 'data',
+         url_to_base64: new_url_to_base64
+        };
+  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
 
   url_to_base64 = new_url_to_base64;
   url_diff = false;
   offline_ready = true;
+
+  // We might have encountered an issue during processing,
+  // but it doesn't matter anymore.
+  err_status = '';
 }
 
 async function delete_old_files(cache) {
@@ -816,10 +861,9 @@ async function delete_old_files(cache) {
   }
 
   for (let i = 0; i < base64_to_delete.length; i++) {
-    // Pay attention to the global stop_updating variable and
-    // bail out if it becomes true.
-    if (stop_updating){
-      throw 'stop';
+    if (stop_updating) {
+      console.info('updating is now stopped');
+      throw null;
     }
 
     let base64 = base64_to_delete[i];

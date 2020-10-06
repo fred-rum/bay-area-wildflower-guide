@@ -82,11 +82,6 @@ def get_base64(path):
             return entry
         entry['mtime'] = mtime
 
-#    if 'mtime' in entry:
-#        print(f'mtime differs in - {path}')
-#    else:
-#        print(f'new unknown path - {path}')
-
     with open(f'{root_path}/{path}', mode='rb') as f:
         value = f.read()
         entry['base64'] = hash_base64(value)

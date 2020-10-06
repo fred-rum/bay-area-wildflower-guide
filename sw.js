@@ -5023,6 +5023,7 @@ var updating = 'Checking for offline files';
 var err_status = '';
 var usage = '';
 var stop_updating = false;
+var update_promise;
 var offline_ready = undefined;
 var url_to_base64;
 var new_url_to_base64;
@@ -5046,19 +5047,6 @@ function async_callbacks(request) {
       resolve(request.result);
     }
     request.onerror = (event) => {
-      return reject(event);
-    }
-  });
-}
-function async_tx(tx) {
-  return new Promise((resolve, reject) => {
-    tx.oncomplete = (event) => {
-      resolve(event);
-    }
-    tx.onerror = (event) => {
-      return reject(event);
-    }
-    tx.onabort = (event) => {
       return reject(event);
     }
   });
@@ -5213,12 +5201,12 @@ function fn_send_status(event) {
   }
   if (event.data === 'update') {
     if (updating === false) {
-      update_cache();
+      update_promise = update_cache();
     } else if (update_class === 'update-disable') {
       console.info('ignore update request');
     } else {
-      console.info('stop_updating = true');
-      stop_updating = true;
+      updating = 'Pausing update in progress';
+      stop_update();
     }
   } else if (event.data === 'clear') {
     clear_caches();
@@ -5235,7 +5223,7 @@ function fn_send_status(event) {
   } else if ((updating === 'Checking for offline files') ||
              (updating === 'Validating offline files') ||
              (updating === 'Up to date') ||
-             (updating === 'Clearing caches')) {
+             (updating === 'Deleting offline files')) {
     var status = updating;
     var update_class = 'update-disable';
   } else {
@@ -5274,23 +5262,35 @@ function fn_send_status(event) {
     icon: icon
   };
   event.source.postMessage(msg);
-  if ((updating === false) || (update_class === 'update-disable')) {
+}
+async function stop_update() {
+  let promise = update_promise;
+  update_promise = undefined;
+  if (promise) {
+    console.log('await update_promise');
+    stop_updating = true;
+    await promise;
     stop_updating = false;
   }
 }
 async function clear_caches() {
-  stop_updating = true;
+  updating = 'Halting update in progress';
+  stop_update();
   console.info('clear_caches()');
-  updating = 'Clearing caches';
+  updating = 'Deleting offline files';
+  err_status = '';
   url_to_base64 = {};
   url_diff = true;
   offline_ready = false;
-  let db = await open_db();
-  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").clear());
+  await delete_db();
   await delete_all_cache_entries();
   await count_cached();
   check_url_diff();
   is_cache_up_to_date();
+}
+async function delete_db() {
+  let db = await open_db();
+  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").clear());
 }
 async function delete_all_cache_entries() {
   console.info('delete_all_cache_entries()')
@@ -5300,7 +5300,7 @@ async function delete_all_cache_entries() {
   for (let i = 0; i < requests.length; i++) {
     let request = requests[i]
     console.info('Deleting', request);
-    await cache.delete(request);
+    cache.delete(request);
   }
 }
 async function update_cache() {
@@ -5309,91 +5309,113 @@ async function update_cache() {
   try {
     updating = 'Preparing update';
     let cache = await caches.open(BASE64_CACHE_NAME);
-    await fetch_to_cache(cache);
+    await protected_write(cache, write_margin);
+    await fetch_all_to_cache(cache);
     await record_urls();
     await delete_old_files(cache);
     is_cache_up_to_date();
   } catch (e) {
-    console.warn('update_cache() caught error:', e);
+    if (!e) {
+    } else if ((e.name === 'QuotaExceededError') ||
+               (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE')){
+      err_status = '<br>Not enough offline storage available.  Sorry.';
+    } else {
+      err_status = '<br>' + e.name + '<br>Something went wrong.  Refresh and try again?';
+    }
+    console.warn(e);
+    console.warn(err_status);
     updating = false;
+    clear_margin();
   }
 }
-async function fetch_to_cache(cache) {
-  for (let url in new_url_to_base64) {
-    let base64 = new_url_to_base64[url]
-    if (base64 in base64_to_kb) {
-      if (base64_to_delete.length) {
-        var start = 0;
+async function protected_write(cache, func) {
+  if (base64_to_delete.length) {
+    try {
+      return await func();
+    } catch (e) {
+      if (e && ((e.name === 'QuotaExceededError') ||
+                (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE'))) {
+        err_status = '<br>Storage limit reached.  Reverted to online mode so that old files can be deleted.';
+        offline_ready = false;
+        await delete_db();
+        await delete_old_files(cache);
+        err_status = '<br>Storage limit reached.  Reverted to online mode so that old files could be deleted.';
       } else {
-        var start = 1;
-      }
-      for (let iter = start; iter < 2; iter++) {
-        let kb = base64_to_kb[base64];
-        updating = 'Fetching ' + decodeURI(url)
-        console.info(updating)
-        let response;
-        try {
-          console.log('start fetch()');
-          response = await fetch(url);
-          console.log('end fetch()');
-        } catch (e) {
-          console.warn('fetch failed', e);
-          updating = false;
-          err_status = '<br>Lost online connectivity.  Try again later.';
-          throw 'oops';
-        }
-        if (stop_updating){
-          throw 'stop';
-        }
-        if (response && response.ok) {
-          try {
-            console.log('start cache.put()');
-            await cache.put(base64, response);
-            console.log('end cache.put()');
-          } catch (e) {
-            console.warn('error during cache.put():', e);
-            if ((e.name === 'QuotaExceededError') ||
-                (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE')) {
-              if (iter == 0) {
-                offline_ready = false;
-                err_status = '<br>Storage limit reached.  Reverting to online mode while old files are deleted.';
-                await delete_old_files(cache);
-                err_status = '';
-                continue;
-              } else {
-                err_status = '<br>Not enough offline storage available.  Sorry.';
-              }
-            } else {
-              err_status = '<br>' + e.name + '<br>Something went wrong.  Refresh and try again?';
-            }
-            throw 'oops';
-          }
-          delete base64_to_kb[base64];
-          kb_cached += kb;
-          break;
-        } else if (response.status == 404) {
-          console.warn('fetch missing');
-          err_status = '<br>Could not find ' + decodeURI(url) + '<br>The Guide must have updated online just now.  Refresh the page and try again.';
-          throw 'oops';
-        } else {
-          console.warn('strange server response');
-          err_status = '<br>' + response.status + ' ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
-          throw 'oops';
-        }
+        throw e;
       }
     }
   }
+  return await func();
+}
+async function write_margin() {
+  let junk = [];
+  let n = 4*1024*1024/8;
+  for (let i = 0; i < n; i++){
+    junk.push(Math.random());
+  }
+  let obj = {key: 'margin',
+             junk: junk};
+  let db = await open_db();
+  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
+}
+async function clear_margin() {
+  let db = await open_db();
+  let obj = {key: 'margin',
+             junk: ''};
+  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
+}
+async function fetch_all_to_cache(cache) {
+  for (let url in new_url_to_base64) {
+    let base64 = new_url_to_base64[url]
+    if (base64 in base64_to_kb) {
+      await protected_write(cache, async => fetch_to_cache(cache, url, base64));
+      let kb = base64_to_kb[base64];
+      delete base64_to_kb[base64];
+      kb_cached += kb;
+    }
+  }
+}
+async function fetch_to_cache(cache, url, base64) {
+  updating = 'Fetching ' + decodeURI(url)
+  console.info(updating)
+  let response;
+  try {
+    response = await fetch(url);
+  } catch (e) {
+    console.warn('fetch failed', e);
+    updating = false;
+    err_status = '<br>Lost online connectivity.  Try again later.';
+    throw null;
+  }
+  if (!response) {
+    err_status = '<br>Unexpected fetch response.  Try again later?';
+    throw null;
+  } if (response.status == 404) {
+    err_status = '<br>Could not find ' + decodeURI(url) + '<br>The Guide must have updated online just now.  Refresh the page and try again.';
+    throw null;
+  } else if (!response.ok) {
+    err_status = '<br>' + response.status + ' - ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
+    throw null;
+  }
+  if (stop_updating){
+    console.info('updating is now stopped');
+    throw null;
+  }
+  await cache.put(base64, response);
 }
 async function record_urls() {
-  console.info('record_urls()');
   let db = await open_db();
-  let obj = {key: 'data',
-             url_to_base64: new_url_to_base64
-            };
-  async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
+  let obj = {key: 'margin',
+             junk: ''};
+  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
+  obj = {key: 'data',
+         url_to_base64: new_url_to_base64
+        };
+  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
   url_to_base64 = new_url_to_base64;
   url_diff = false;
   offline_ready = true;
+  err_status = '';
 }
 async function delete_old_files(cache) {
   if (base64_to_delete.length) {
@@ -5401,8 +5423,9 @@ async function delete_old_files(cache) {
     console.info(updating)
   }
   for (let i = 0; i < base64_to_delete.length; i++) {
-    if (stop_updating){
-      throw 'stop';
+    if (stop_updating) {
+      console.info('updating is now stopped');
+      throw null;
     }
     let base64 = base64_to_delete[i];
     console.info('Deleting', base64);
