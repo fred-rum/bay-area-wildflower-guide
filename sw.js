@@ -1,5 +1,5 @@
 var url_data = [
-["swi.js", "e5-fZoqLcPROCIhApSW29Zmn-OoiiWtfw_Adjw==", 7],
+["swi.js", "N_0r5usaaY5CMDV479qcpE7OGAJjplFVlTvqJw==", 7],
 ["index.html", "62N_ibNxaQr1LTHY7RzSWh1Qr1lBLYQ6yX5fig==", 6],
 ["bawg.css", "CuaCFCr7-3tk3X5jEABfzwvLHdxgSawNwjWIew==", 10],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
@@ -5111,8 +5111,8 @@ async function read_db() {
     url_to_base64 = lookup.url_to_base64;
     if (url_to_base64 === undefined) throw 'oops';
     offline_ready = true;
-  } catch {
-    console.warn('indexedDB lookup failed');
+  } catch (e) {
+    console.warn('indexedDB lookup failed', e);
     url_to_base64 = {};
     offline_ready = false;
   }
@@ -5162,7 +5162,11 @@ async function count_cached() {
       kb_cached += base64_to_kb[base64];
       delete base64_to_kb[base64];
     } else {
-      console.info('Need to delete', base64);
+      if (base64_to_delete.length < 10) {
+        console.info('Need to delete', base64);
+      } else if (base64_to_delete.length == 10) {
+        console.info('etc.');
+      }
       base64_to_delete.push(base64);
     }
   }
@@ -5309,7 +5313,8 @@ async function update_cache() {
     await record_urls();
     await delete_old_files(cache);
     is_cache_up_to_date();
-  } catch {
+  } catch (e) {
+    console.warn('update_cache() caught error:', e);
     updating = false;
   }
 }
@@ -5317,33 +5322,64 @@ async function fetch_to_cache(cache) {
   for (let url in new_url_to_base64) {
     let base64 = new_url_to_base64[url]
     if (base64 in base64_to_kb) {
-      let kb = base64_to_kb[base64];
-      updating = 'Fetching ' + decodeURI(url)
-      console.info(updating)
-      let response;
-      try {
-        response = await fetch(url);
-      } catch {
-        console.warn('fetch failed');
-        updating = false;
-        err_status = '<br>Lost online connectivity.  Try again later.';
-        throw 'oops';
-      }
-      if (stop_updating){
-        throw 'stop';
-      }
-      if (response && response.ok) {
-        await cache.put(base64, response);
-        delete base64_to_kb[base64];
-        kb_cached += kb;
-      } else if (response.status == 404) {
-        console.warn('fetch missing');
-        err_status = '<br>Could not find ' + decodeURI(url) + '<br>The Guide must have updated online just now.  Refresh the page and try again.';
-        throw 'oops';
+      if (base64_to_delete.length) {
+        var start = 0;
       } else {
-        console.warn('strange server response');
-        err_status = '<br>' + response.status + ' ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
-        throw 'oops';
+        var start = 1;
+      }
+      for (let iter = start; iter < 2; iter++) {
+        let kb = base64_to_kb[base64];
+        updating = 'Fetching ' + decodeURI(url)
+        console.info(updating)
+        let response;
+        try {
+          console.log('start fetch()');
+          response = await fetch(url);
+          console.log('end fetch()');
+        } catch (e) {
+          console.warn('fetch failed', e);
+          updating = false;
+          err_status = '<br>Lost online connectivity.  Try again later.';
+          throw 'oops';
+        }
+        if (stop_updating){
+          throw 'stop';
+        }
+        if (response && response.ok) {
+          try {
+            console.log('start cache.put()');
+            await cache.put(base64, response);
+            console.log('end cache.put()');
+          } catch (e) {
+            console.warn('error during cache.put():', e);
+            if ((e.name === 'QuotaExceededError') ||
+                (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE')) {
+              if (iter == 0) {
+                offline_ready = false;
+                err_status = '<br>Storage limit reached.  Reverting to online mode while old files are deleted.';
+                await delete_old_files(cache);
+                err_status = '';
+                continue;
+              } else {
+                err_status = '<br>Not enough offline storage available.  Sorry.';
+              }
+            } else {
+              err_status = '<br>' + e.name + '<br>Something went wrong.  Refresh and try again?';
+            }
+            throw 'oops';
+          }
+          delete base64_to_kb[base64];
+          kb_cached += kb;
+          break;
+        } else if (response.status == 404) {
+          console.warn('fetch missing');
+          err_status = '<br>Could not find ' + decodeURI(url) + '<br>The Guide must have updated online just now.  Refresh the page and try again.';
+          throw 'oops';
+        } else {
+          console.warn('strange server response');
+          err_status = '<br>' + response.status + ' ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
+          throw 'oops';
+        }
       }
     }
   }

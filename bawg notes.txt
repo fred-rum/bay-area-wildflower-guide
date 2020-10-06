@@ -1019,25 +1019,6 @@ Make a top_msg for when the guide is operating online.  E.g.
 {in blue} [wifi symbol] The Guide is currently operating online.
 
 
-https://web.dev/storage-for-the-web/
-QuotaExceededError DOMException
-try {
-  const cache = await caches.open('my-cache');
-  await cache.add(new Request('/sample1.jpg'));
-} catch (err) {
-  if (error.name === 'QuotaExceededError') {
-    // Fallback code goes here
-  }
-}
-If it happens, set offline_ready = false and delete old cache entries.
-Perhaps an err_status message to indicate why we reverted to online mode.
-E.g. Storage limit reached.  Reverting to online mode while previous version
-is deleted.
-Then restart cache update.
-If quota is exceeded when there are no files to delete, then of course
-that must be reported as an error.
-
-
 If url_diff is true and there are cache entries owned by neither the
 old url_to_base64 nor new_url_to_base64, they can be immediately
 deleted.  (If url_diff is false, those files may be from a partial
@@ -1047,3 +1028,7 @@ download, and we're now offline and can't see the update.)
 Create an 'other' directory with txt files for index, chrome, safari,
 and firefox.  Parse those with either a search bar or hazard icon.
 Remember the differing relative path.
+
+Do something smart when the usage is 0 in Firefox (because storage
+persistence was requested).
+And change 'browser allows up to' to 'browser allows at least'.

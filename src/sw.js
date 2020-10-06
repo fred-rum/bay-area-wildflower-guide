@@ -307,8 +307,8 @@ async function read_db() {
     url_to_base64 = lookup.url_to_base64;
     if (url_to_base64 === undefined) throw 'oops';
     offline_ready = true;
-  } catch {
-    console.warn('indexedDB lookup failed');
+  } catch (e) {
+    console.warn('indexedDB lookup failed', e);
     url_to_base64 = {};
     offline_ready = false;
   }
@@ -416,7 +416,11 @@ async function count_cached() {
       delete base64_to_kb[base64];
     } else {
       // Entries in base64_to_delete are ones that need to be deleted.
-      console.info('Need to delete', base64);
+      if (base64_to_delete.length < 10) {
+        console.info('Need to delete', base64);
+      } else if (base64_to_delete.length == 10) {
+        console.info('etc.');
+      }
       base64_to_delete.push(base64);
     }
   }
@@ -695,7 +699,8 @@ async function update_cache() {
     await record_urls();
     await delete_old_files(cache);
     is_cache_up_to_date();
-  } catch {
+  } catch (e) {
+    console.warn('update_cache() caught error:', e);
     updating = false;
   }
 }
@@ -704,43 +709,81 @@ async function fetch_to_cache(cache) {
   for (let url in new_url_to_base64) {
     let base64 = new_url_to_base64[url]
     if (base64 in base64_to_kb) {
-      let kb = base64_to_kb[base64];
-      updating = 'Fetching ' + decodeURI(url)
-      console.info(updating)
-      let response;
-      try {
-        response = await fetch(url);
-      } catch {
-        console.warn('fetch failed');
-        updating = false;
-        err_status = '<br>Lost online connectivity.  Try again later.';
-        throw 'oops';
-      }
-
-      // Pay attention to the global stop_updating variable and
-      // bail out if it becomes true.  We put this check just before
-      // the cache.put() so that we don't update the cache after
-      // stop_updating becomes true.
-      if (stop_updating){
-        throw 'stop';
-      }
-
-      if (response && response.ok) {
-        // Associate the fetched page with the base64 encoding.
-        await cache.put(base64, response);
-
-        // Entries left in base64_to_kb are ones that need to be fetched.
-        delete base64_to_kb[base64];
-
-        kb_cached += kb;
-      } else if (response.status == 404) {
-        console.warn('fetch missing');
-        err_status = '<br>Could not find ' + decodeURI(url) + '<br>The Guide must have updated online just now.  Refresh the page and try again.';
-        throw 'oops';
+      // Execute the following loop up to two times,
+      // breaking out if the cache.put() succeeds.
+      // Iteration 0 is attempted while old cache items can be deleted.
+      // Iteration 1 is attempted while no old cache items can be deleted.
+      if (base64_to_delete.length) {
+        var start = 0;
       } else {
-        console.warn('strange server response');
-        err_status = '<br>' + response.status + ' ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
-        throw 'oops';
+        var start = 1;
+      }
+      for (let iter = start; iter < 2; iter++) {
+        let kb = base64_to_kb[base64];
+        updating = 'Fetching ' + decodeURI(url)
+        console.info(updating)
+        let response;
+        try {
+          console.log('start fetch()');
+          response = await fetch(url);
+          console.log('end fetch()');
+        } catch (e) {
+          console.warn('fetch failed', e);
+          updating = false;
+          err_status = '<br>Lost online connectivity.  Try again later.';
+          throw 'oops';
+        }
+
+        // Pay attention to the global stop_updating variable and
+        // bail out if it becomes true.  We put this check just before
+        // the cache.put() so that we don't update the cache after
+        // stop_updating becomes true.
+        if (stop_updating){
+          throw 'stop';
+        }
+
+        if (response && response.ok) {
+          try {
+            // Associate the fetched page with the base64 encoding.
+            console.log('start cache.put()');
+            await cache.put(base64, response);
+            console.log('end cache.put()');
+          } catch (e) {
+            console.warn('error during cache.put():', e);
+            if ((e.name === 'QuotaExceededError') ||
+                (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE')) {
+              if (iter == 0) {
+                offline_ready = false;
+                err_status = '<br>Storage limit reached.  Reverting to online mode while old files are deleted.';
+                await delete_old_files(cache);
+                err_status = '';
+                continue; // try again with iter=1
+              } else {
+                err_status = '<br>Not enough offline storage available.  Sorry.';
+              }
+            } else {
+              err_status = '<br>' + e.name + '<br>Something went wrong.  Refresh and try again?';
+            }
+            throw 'oops';
+          }
+
+          // Entries left in base64_to_kb are ones that need to be fetched.
+          delete base64_to_kb[base64];
+
+          kb_cached += kb;
+
+          // This iteration succeeded, so break out of the iter loop
+          // and continue with the next URL.
+          break;
+        } else if (response.status == 404) {
+          console.warn('fetch missing');
+          err_status = '<br>Could not find ' + decodeURI(url) + '<br>The Guide must have updated online just now.  Refresh the page and try again.';
+          throw 'oops';
+        } else {
+          console.warn('strange server response');
+          err_status = '<br>' + response.status + ' ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
+          throw 'oops';
+        }
       }
     }
   }
@@ -782,7 +825,6 @@ async function delete_old_files(cache) {
     let base64 = base64_to_delete[i];
     console.info('Deleting', base64);
     await cache.delete(base64);
-
   }
   base64_to_delete = [];
 }

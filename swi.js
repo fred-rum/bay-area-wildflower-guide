@@ -11,6 +11,7 @@ var old_icon;
 var wakelock;
 var poll_interval = 500;
 var polls_since_response = 0;
+var timed_out = false;
 function swi_oninteractive() {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', swi_oninteractive);
@@ -70,7 +71,8 @@ function start_polling(registration) {
 function poll_cache(event, msg='poll') {
   let secs = Math.floor((polls_since_response * poll_interval) / 1000);
   if (secs >= 3) {
-      e_err_status.innerHTML = '<br>No response from the service worker for ' + secs + ' seconds.<br>Try closing the tab, waiting 10 seconds, and then returning to the Guide.  I don&rsquo;t know if that will work, but it sounds plausible.';
+    timed_out = true;
+    e_err_status.innerHTML = '<br>No response from the service worker for ' + secs + ' seconds.<br>Try closing the tab, waiting 10 seconds, and then returning to the Guide.  I don&rsquo;t know if that will work, but it sounds plausible.';
   }
   post_msg(msg)
 }
@@ -95,7 +97,7 @@ function fn_receive_status(event) {
     if (msg.status != old_msg.status) {
       e_status.innerHTML = msg.status;
     }
-    if (msg.err_status != old_msg.err_status) {
+    if ((msg.err_status != old_msg.err_status) || timed_out) {
       e_err_status.innerHTML = msg.err_status;
     }
     if (msg.usage != old_msg.usage) {
