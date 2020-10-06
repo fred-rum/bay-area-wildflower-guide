@@ -10,7 +10,7 @@ var url_data = [
 ["manifest.webmanifest", "XGY5f7xv7yhxwxGbwWWhPfwDB3ICJv-oYatFwg==", 1],
 ["chrome.html", "nhdcpn7iK7O6dUNe_p6KFoSi23sKiK4J1EJdZg==", 4],
 ["safari.html", "3EtmqVcWI5XGFK4-eCtYiewsNfIRivz-v7GYRA==", 4],
-["firefox.html", "ravQEOvKpZFgpKY897hoDiP5HIoXFZUz5nXWMQ==", 4],
+["firefox.html", "SfWY9tjb9XPnDoiDYM8g4rdy9NnG5wEwZacsNA==", 4],
 ["favicon/android-chrome-192x192.png", "mo6K7qaLIV-5TmbY7NJ9TJnwvMaYWB2u_VYhng==", 81],
 ["favicon/android-chrome-512x512.png", "abL-BGik7wTuWq57-DIsk-Gdpx9oIRjxGwwHXQ==", 347],
 ["favicon/apple-touch-icon.png", "ZBUIIaJnbzPRQUDFB9J4v-McrKTYHJm8QPSagA==", 75],
