@@ -14,7 +14,7 @@ var BASE64_CACHE_NAME = 'base64-cache-v1';
 var activity = 'init';
 var msg = 'Checking for offline files';
 var err_status = '';
-var usage = '';
+var usage_msg = '';
 
 // There are some occasions where I allow an activity to be interrupted.
 // For that, we set a flag to tell the activity to stop at the next
@@ -641,7 +641,7 @@ function fn_send_status(event) {
     update_class: update_class,
     status: status,
     err_status: err_status,
-    usage: usage,
+    usage: usage_msg,
     top_msg: top_msg,
     icon: icon,
     clear_class: clear_class,
@@ -1042,58 +1042,83 @@ function is_cache_up_to_date() {
 
 // Update cache usage estimate.
 async function update_usage() {
-  if (navigator && navigator.storage) {
+  if (navigator.storage) {
     let estimate = await navigator.storage.estimate();
-    let status_usage = (estimate.usage/1024/1024).toFixed(1)
-    let status_quota = (estimate.quota/1024/1024/1024).toFixed(1)
+    var usage = estimate.usage;
+    var quota = estimate.quota;
+  } else {
+    var usage = 0; // trigger guesstimate
+    var quota = undefined; // limit unknown
+  }
 
-    // The running service worker itself counts as significant usage
-    // (0.5 MB to more than 10 MB, depending on activity).
-    // Addionally, it can take a long time for the usage to update after
-    // clearing the caches (perhaps even forever when idle).
-    // Both problems can be fixed by pretending the usage is 0.0 when
-    // we don't have any cached files.
-    if (!(kb_cached ||
-          old_base64_to_delete.length ||
-          obs_base64_to_delete.length)) {
-      usage = '0.0 MB';
-    } else if (estimate.usage/1024 >= kb_cached + 0.1) {
-      usage = status_usage + ' MB including overhead';
+  var status_usage = (usage/1024/1024).toFixed(1) + ' MB';
+
+  // The Firefox quota maxes out at 2 GiB.  Since the current file list
+  // uses ~650 MB and could temporarily use double that if (somehow)
+  // all the files update at once, that seems like a reasonable cutoff
+  // for displaying GB vs. MB.
+  if (quota < 2*1024*1024*1024) {
+    var status_quota = (quota/1024/1024).toFixed(1) + ' MB';
+  } else {
+    var status_quota = (quota/1024/1024/1024).toFixed(1) + ' GB';
+  }
+
+  // The running service worker itself counts as significant usage
+  // (0.5 MB to more than 10 MB, depending on activity).
+  // Addionally, it can take a long time for the usage to update after
+  // clearing the caches (perhaps even forever when idle).
+  // Both problems can be fixed by pretending the usage is 0.0 when
+  // we don't have any cached files.
+  if (!(kb_cached ||
+        old_base64_to_delete.length ||
+        obs_base64_to_delete.length)) {
+    usage_msg = 'Using 0.0 MB of offline storage.';
+  } else if (usage/1024 >= kb_cached + 0.1) {
+    usage_msg = 'Using ' + status_usage + ' (including overhead).';
+  } else {
+    usage_msg = 'Using ' + status_usage + ' (with compression).';
+  }
+
+  if (quota === undefined) {
+    usage_msg += '<br>Browser limit is unknown.';
+  } else {
+    usage_msg += '<br>Browser allows up to ' + status_quota + '.';
+  }
+
+  // When desktop Firefox asks for a receives permission for persistent
+  // storage, it effectively removes the storage limit.  But instead of
+  // increasing the quota, the browser pretends that there's no usage.
+  // Dunno why they thought that was a good idea, but we have to deal
+  // with it.
+  //
+  // The result replaces the normal usage calculation, and is in a
+  // completely different format.
+  if (!usage &&
+      (kb_cached ||
+       old_base64_to_delete.length ||
+       obs_base64_to_delete.length)) {
+
+    // We don't know the size of old and obsolete files in the cache.
+    // Just guess based on how many there are.
+    let kb_per_file = kb_total / url_data.length;
+    let estimated_files = (old_base64_to_delete.length +
+                           obs_base64_to_delete.length);
+    let kb_estimate = kb_per_file * estimated_files;
+
+    // The guesstimated total will often be equal to kb_total,
+    // modulo floating point discrepencies.  To avoid a disconnect
+    // with the progress values, use the same fudge factor.
+    if (kb_cached || estimated_files) {
+      status_usage = ((kb_cached + kb_estimate)/1024 + 0.1).toFixed(1) + ' MB'
     } else {
-      usage = status_usage + ' MB with compression';
+      status_usage = '0.0 MB';
     }
-    usage += ' (browser allows up to ' + status_quota + ' GB)';
+    usage_msg = 'Using roughly ' + status_usage + '.';
 
-    // When desktop Firefox asks for a receives permission for persistent
-    // storage, it effectively removes the storage limit.  But instead of
-    // increasing the quota arbitrarily, it pretends that there's no
-    // usage.  Dunno why they thought that was a good idea, but we have
-    // to deal with it.
-    //
-    // The result replaces the normal usage calculation, and is in a
-    // completely different format.
-    if (!estimate.usage &&
-        (kb_cached ||
-         old_base64_to_delete.length ||
-         obs_base64_to_delete.length)) {
-
-      // We don't know the size of old and obsolete files in the cache.
-      // Just guess based on how many there are.
-      let kb_per_file = kb_total / url_data.length;
-      let estimated_files = (old_base64_to_delete.length +
-                             obs_base64_to_delete.length);
-      let kb_estimate = kb_per_file * estimated_files;
-
-      // The guesstimated total will often be equal to kb_total,
-      // modulo floating point discrepencies.  To avoid a disconnect
-      // with the progress values, use the same fudge factor.
-      if (kb_cached || estimated_files) {
-        status_usage = ((kb_cached + kb_estimate)/1024 + 0.1).toFixed(1)
-      } else {
-        status_usage = '0.0';
-      }
-      usage = 'roughly ' + status_usage + ' MB';
-      usage += ' (browser allows at least ' + status_quota + ' GB';
+    if (quota === undefined) {
+      usage_msg += '<br>Browser limit is unknown.';
+    } else {
+      usage_msg += '<br>Browser allows at least ' + status_quota + '.';
     }
   }
 }

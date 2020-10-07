@@ -1046,21 +1046,6 @@ reasonably safe now that we wait for an in-progress update to stop
 first (although maybe I'd also need to wait for file deletion to stop,
 too).
 
-It would be nice if deleting obsolete files did not prevent a new
-update from starting.  I.e. the 'update' button is allowed, and queues
-the update after the delete.  Or it stops the delete and updates
-instead.  That might be easier to implement (same update_promise) and
-easier to present to the user.  E.g.
-- the user completes a large update and thus has a lot of files to delete.
-- the user is impatient and disconnects before the deletions are done.
-- the user comes back later, and the deletions resume.
-- there is also an update that the user wants to get.
-This matters more in Firefox (slow to delete) than Chrome.
-Safari is unknown.
-
-Use guesstimate for Safari.
-"(browser limit unknown)"
-
 swi.js starts polling on DOMContentLoaded, and the resulting element
 changes could force the document to be laid out before the CSS is
 loaded.  (Firefox complains.)  There's really no reason to not wait
@@ -1072,8 +1057,7 @@ copies of swi.js.
 
 If quota < usage + ((kb_total - kb_cached) * 1.2),
 "The Guide will delete old files if necessary to make space for the update."
+When idle.
 
-when quota runs out, delete_obs_files first, then only
-delete_old_files if necessary.  (And delete_old_files can reuse the
-code from delete_obs_files, since by going online, it makes the old
-files obsolete.)
+Debug SVG size with CSS.
+Can use 192.168.1.10 for debug as long as I make the icons visible by default.

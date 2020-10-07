@@ -5022,7 +5022,7 @@ var BASE64_CACHE_NAME = 'base64-cache-v1';
 var activity = 'init';
 var msg = 'Checking for offline files';
 var err_status = '';
-var usage = '';
+var usage_msg = '';
 var stop_activity_flag = false;
 var activity_promise;
 var offline_ready = undefined;
@@ -5301,7 +5301,7 @@ function fn_send_status(event) {
     update_class: update_class,
     status: status,
     err_status: err_status,
-    usage: usage,
+    usage: usage_msg,
     top_msg: top_msg,
     icon: icon,
     clear_class: clear_class,
@@ -5555,35 +5555,52 @@ function is_cache_up_to_date() {
   return !(files_to_fetch || url_diff);
 }
 async function update_usage() {
-  if (navigator && navigator.storage) {
+  if (navigator.storage) {
     let estimate = await navigator.storage.estimate();
-    let status_usage = (estimate.usage/1024/1024).toFixed(1)
-    let status_quota = (estimate.quota/1024/1024/1024).toFixed(1)
-    if (!(kb_cached ||
-          old_base64_to_delete.length ||
-          obs_base64_to_delete.length)) {
-      usage = '0.0 MB';
-    } else if (estimate.usage/1024 >= kb_cached + 0.1) {
-      usage = status_usage + ' MB including overhead';
+    var usage = estimate.usage;
+    var quota = estimate.quota;
+  } else {
+    var usage = 0;
+    var quota = undefined;
+  }
+  var status_usage = (usage/1024/1024).toFixed(1) + ' MB';
+  if (quota < 2*1024*1024*1024) {
+    var status_quota = (quota/1024/1024).toFixed(1) + ' MB';
+  } else {
+    var status_quota = (quota/1024/1024/1024).toFixed(1) + ' GB';
+  }
+  if (!(kb_cached ||
+        old_base64_to_delete.length ||
+        obs_base64_to_delete.length)) {
+    usage_msg = 'Using 0.0 MB of offline storage.';
+  } else if (usage/1024 >= kb_cached + 0.1) {
+    usage_msg = 'Using ' + status_usage + ' (including overhead).';
+  } else {
+    usage_msg = 'Using ' + status_usage + ' (with compression).';
+  }
+  if (quota === undefined) {
+    usage_msg += '<br>Browser limit is unknown.';
+  } else {
+    usage_msg += '<br>Browser allows up to ' + status_quota + '.';
+  }
+  if (!usage &&
+      (kb_cached ||
+       old_base64_to_delete.length ||
+       obs_base64_to_delete.length)) {
+    let kb_per_file = kb_total / url_data.length;
+    let estimated_files = (old_base64_to_delete.length +
+                           obs_base64_to_delete.length);
+    let kb_estimate = kb_per_file * estimated_files;
+    if (kb_cached || estimated_files) {
+      status_usage = ((kb_cached + kb_estimate)/1024 + 0.1).toFixed(1) + ' MB'
     } else {
-      usage = status_usage + ' MB with compression';
+      status_usage = '0.0 MB';
     }
-    usage += ' (browser allows up to ' + status_quota + ' GB)';
-    if (!estimate.usage &&
-        (kb_cached ||
-         old_base64_to_delete.length ||
-         obs_base64_to_delete.length)) {
-      let kb_per_file = kb_total / url_data.length;
-      let estimated_files = (old_base64_to_delete.length +
-                             obs_base64_to_delete.length);
-      let kb_estimate = kb_per_file * estimated_files;
-      if (kb_cached || estimated_files) {
-        status_usage = ((kb_cached + kb_estimate)/1024 + 0.1).toFixed(1)
-      } else {
-        status_usage = '0.0';
-      }
-      usage = 'roughly ' + status_usage + ' MB';
-      usage += ' (browser allows at least ' + status_quota + ' GB';
+    usage_msg = 'Using roughly ' + status_usage + '.';
+    if (quota === undefined) {
+      usage_msg += '<br>Browser limit is unknown.';
+    } else {
+      usage_msg += '<br>Browser allows at least ' + status_quota + '.';
     }
   }
 }
