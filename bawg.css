@@ -403,10 +403,13 @@ span.match {
 }
 #update {
     display: inline-block;
-    min-width: 135px;
+    vertical-align: middle;
+    width: 150px;
     text-align: center;
     padding: 10px;
     margin-right: 10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 #update.update-update {
     background-color: #139e38;
@@ -429,18 +432,31 @@ span.match {
 #update.update-stop:active {
     background-color: #9c8024;
 }
+#status {
+    display: inline-block;
+    vertical-align: middle;
+}
 #err-status {
+    display: block;
     color: red;
 }
 #clear {
-    display: inline-block;
-    min-width: 135px;
+    display: block;
+    vertical-align: middle;
+    width: 150px;
     text-align: center;
     background-color: red;
     color: white;
     padding: 10px;
     cursor: pointer;
     margin-right: 10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+@media (min-width: 500px) {
+    #clear {
+	display: inline-block;
+    }
 }
 #clear:active {
     background-color: #d10000;
@@ -449,6 +465,10 @@ span.match {
     background-color: #808080;
     color: #000000;
     cursor: not-allowed;
+}
+#usage {
+    display: inline-block;
+    vertical-align: middle;
 }
 div#cache-green {
     display: none;

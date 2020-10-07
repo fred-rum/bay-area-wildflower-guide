@@ -1,7 +1,7 @@
 var url_data = [
 ["swi.js", "O6tKnqJVyyhul6GJiM6PUFJWgOps-1Si17AxMw==", 7],
 ["index.html", "YslVejirkf_1CV4uVwVrVbYr2Nj2UYbJ6G9g4A==", 6],
-["bawg.css", "CuaCFCr7-3tk3X5jEABfzwvLHdxgSawNwjWIew==", 10],
+["bawg.css", "gvDqJR3ZD51VOFKPniZQjv76MV7rUZrRZqeoRQ==", 11],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
 ["icons/check.svg", "GZFdGrKC4UpM0uywABrTQILfNZ7T0U6iI8sMaw==", 2],
 ["icons/hazard.svg", "HOkNZxg-3N8W8I-Pn34iXGD1ka6Q3IQWAutIyw==", 2],
@@ -5351,7 +5351,7 @@ async function clear_caches() {
   } catch (e) {
     if (e) {
       console.error(e);
-      err_status = '<br>' + e.name + '<br>Something went wrong.  Refresh and try again?';
+      err_status = e.name + '<br>Something went wrong.  Refresh and try again?';
     }
   }
   activity = 'idle';
@@ -5398,17 +5398,17 @@ async function update_cache() {
     } else if ((e.name === 'QuotaExceededError') ||
                (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE')){
       console.warn(e);
-      err_status = '<br>Not enough offline storage available.  Sorry.';
+      err_status = 'Not enough offline storage available.  Sorry.';
       console.warn(err_status);
     } else {
       console.error(e);
-      err_status = '<br>' + e.name + '<br>Something went wrong.  Refresh and try again?';
+      err_status = e.name + '<br>Something went wrong.  Refresh and try again?';
     }
     try {
       await clear_margin();
     } catch (e) {
       console.error(e);
-      err_status = '<br>' + e.name + '<br>Something went wrong.  Refresh and try again?';
+      err_status = e.name + '<br>Something went wrong.  Refresh and try again?';
     }
   }
   activity = 'idle';
@@ -5421,16 +5421,16 @@ async function protected_write(cache, func) {
       quota_error = (e && ((e.name === 'QuotaExceededError') ||
                            (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE')));
       if (quota_error && obs_base64_to_delete) {
-        err_status = '<br>Storage limit reached.  Deleting obsolete files before continuing.';
+        err_status = 'Storage limit reached.  Deleting obsolete files before continuing.';
         await delete_obs_files(cache);
         err_status = '';
       } else if (quota_error && old_base64_to_delete.length) {
-        err_status = '<br>Storage limit reached.  Reverting to online mode so that old files can be deleted.';
+        err_status = 'Storage limit reached.  Reverting to online mode so that old files can be deleted.';
         offline_ready = false;
         make_old_files_obsolete();
         await delete_db();
         await delete_obs_files(cache);
-        err_status = '<br>Storage limit reached.  Reverted to online mode so that old files could be deleted.';
+        err_status = 'Storage limit reached.  Reverted to online mode so that old files could be deleted.';
       } else {
         throw e;
       }
@@ -5480,17 +5480,17 @@ async function fetch_to_cache(cache, url, base64) {
     response = await fetch(url);
   } catch (e) {
     console.warn('fetch failed', e);
-    err_status = '<br>Lost online connectivity.  Try again later.';
+    err_status = 'Lost online connectivity.  Try again later.';
     throw null;
   }
   if (!response) {
-    err_status = '<br>Unexpected fetch response.  Try again later?';
+    err_status = 'Unexpected fetch response.  Try again later?';
     throw null;
   } if (response.status == 404) {
-    err_status = '<br>Could not find ' + decodeURI(url) + '<br>The online Guide must have updated its files just now.  Refresh the page and try again.';
+    err_status = 'Could not find ' + decodeURI(url) + '<br>The online Guide must have updated its files just now.  Refresh the page and try again.';
     throw null;
   } else if (!response.ok) {
-    err_status = '<br>' + response.status + ' - ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
+    err_status = response.status + ' - ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
     throw null;
   }
   await check_stop('update (before cache.put)');
@@ -5529,7 +5529,7 @@ async function idle_delete_obs_files() {
   } catch (e) {
     if (e) {
       console.error(e);
-      err_status = '<br>' + e.name + '<br>Something went wrong.  Refresh and try again?';
+      err_status = e.name + '<br>Something went wrong.  Refresh and try again?';
     }
   }
   activity = 'idle';
