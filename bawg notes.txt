@@ -1060,3 +1060,20 @@ Safari is unknown.
 
 Use guesstimate for Safari.
 "(browser limit unknown)"
+
+swi.js starts polling on DOMContentLoaded, and the resulting element
+changes could force the document to be laid out before the CSS is
+loaded.  (Firefox complains.)  There's really no reason to not wait
+until the page is fully loaded.
+
+Separate the 'status' message into two parts ('progress' and 'msg'),
+but also send the current 'status' message for the benefit of old
+copies of swi.js.
+
+If quota < usage + ((kb_total - kb_cached) * 1.2),
+"The Guide will delete old files if necessary to make space for the update."
+
+when quota runs out, delete_obs_files first, then only
+delete_old_files if necessary.  (And delete_old_files can reuse the
+code from delete_obs_files, since by going online, it makes the old
+files obsolete.)

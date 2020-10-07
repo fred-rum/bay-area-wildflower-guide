@@ -8,15 +8,20 @@ var DB_NAME = 'db-v1';
 var DB_VERSION = 1;
 var BASE64_CACHE_NAME = 'base64-cache-v1';
 
-// Activity is 'idle', 'busy', or 'update'.
-// An initial 'busy' activity prevents updates until everything
+// Activity is 'init', 'busy', 'delete', 'update', or 'idle'.
+// An initial 'init' activity prevents updates until everything
 // is initialized.
-var activity = 'busy';
+var activity = 'init';
 var msg = 'Checking for offline files';
 var err_status = '';
 var usage = '';
-var stop_update_flag = false;
-var update_promise;
+
+// There are some occasions where I allow an activity to be interrupted.
+// For that, we set a flag to tell the activity to stop at the next
+// opportunity, and we then await its promise (which otherwise is allowed
+// to run and complete asynchronously).
+var stop_activity_flag = false;
+var activity_promise;
 
 // offline_ready is undefined when we haven't yet checked the indexedDB.
 //
@@ -363,7 +368,6 @@ async function init_status() {
   let cache = await caches.open(BASE64_CACHE_NAME);
   await count_cached(cache);
   check_url_diff();
-  await delete_obs_files(cache);
 
   activity = 'idle';
 }
@@ -501,46 +505,49 @@ function fn_send_status(event) {
   // But regardless of the message type, always update the status.
 
   // If this is the first poll after the page is refreshed, clear
-  // the old err_status.
+  // the old err_status.  I know longer remember why this was useful.
   if (event.data == 'start') {
     err_status = '';
   }
 
-  // If the event.data is anything more interesting than 'poll', kick
-  // off the appropriate process before returning the polling status.
+
+  /////////////////////////////////////////////////////////////////////////////
+  // Respond to an activity request.
+
   if (event.data === 'update') {
-    if (activity === 'idle') {
+    if ((activity === 'idle') || (activity === 'delete')) {
       if (is_cache_up_to_date()) {
         // do nothing
-        console.info('idle: ignore update request');
+        console.info('cache is up to date: ignore update request');
       } else {
-        // There is no current activity, so start updating the cache.
-        // By default, we don't wait for it to finish.
-        // But we do record its promise so that delete_all_cache_entries()
-        // can wait for it to halt if necessary.
-        update_promise = update_cache();
+        update_cache_when_ready();
       }
-    } else if (activity === 'busy') {
-      // If we're still checking the cache or if the cache is up to date,
-      // ignore the update request.
-      console.info('busy: ignore update request');
-    } else { // activity === 'update'
-      stop_update();
+    } else if (activity === 'update') {
+      pause_update();
+    } else {
+      // Ignore the request in other states.
+      console.info(activity + ': ignore update request');
     }
   } else if (event.data === 'clear') {
-    // If the user clicks the 'Delete Offline Files' button multiple times in
-    // a row, I don't bother to suppress simultaneous calls to clear_caches().
-    // Intuition and experimentation indicates that the worst that happens
-    // is that the same cache entry is deleted multiple times, and doing
-    // so is harmless and safe.
-    clear_caches();
+    if ((activity === 'idle') ||
+        (activity === 'delete') ||
+        (activity === 'update')) {
+      clear_caches();
+    } else {
+      // Ignore the request in other states.
+      console.info(activity + ': ignore delete request');
+    }
   }
 
-  // I was going to do something to show the progress relative to
-  // the total amount that the update is fetching, but if I return
-  // to the home page in the middle of the update, we no longer have
-  // a way to calculate that total amount.  So I've stuck with the
-  // original method.
+  // If nothing else is going on, delete obsolete files.
+  if ((activity === 'idle') && obs_base64_to_delete.length) {
+    activity_promise = idle_delete_obs_files();
+    monitor_promise();
+  }
+
+
+  /////////////////////////////////////////////////////////////////////////////
+  // Respond to the poll with our status.
 
   // Pretend that we need a bit more data than we actually do.
   // That way, if there's a tiny bit more data to fetch
@@ -556,46 +563,61 @@ function fn_send_status(event) {
 
   var progress = mb_cached + ' / ' + mb_total + ' MB';
 
-  // These are the update_button values for activities 'idle' and 'busy'.
-  // We replace them further below for 'update'.
+  // This is the default update_button text.
+  // We replace it further below for the 'update' activity.
   if (offline_ready) {
     var update_button = 'Update Offline Files';
   } else {
     var update_button = 'Save Offline Files';
   }
 
-  if (activity === 'idle') {
+  if (activity === 'init') {
+    var update_class = 'update-disable';
+    var clear_class = 'clear-disable';
+    var status = msg;
+  } else if (activity === 'busy') {
+    var update_class = 'update-disable';
+    var clear_class = 'clear-disable';
+    if (progress) {
+      var status = progress + ' &ndash; ' + msg;
+    } else {
+      var status = msg;
+    }
+  } else if (activity === 'delete') {
+    if (is_cache_up_to_date()) {
+      var update_class = 'update-disable';
+    } else {
+      var update_class = 'update-update';
+    }
+    var clear_class = ''; // enabled
+    var status = progress + ' &ndash; ' + msg;
+  } else if (activity === 'update') {
+    var update_class = 'update-stop';
+    var clear_class = ''; // enabled
+    var status = progress + ' &ndash; ' + msg;
+
+    // Change the update_button text for this activity only.
+    if (offline_ready) {
+      var update_button = 'Pause Updating';
+    } else {
+      var update_button = 'Pause Saving';
+    }
+  } else { // idle
+    var clear_class = ''; // enabled
     if (is_cache_up_to_date()) {
       var update_class = 'update-disable';
     } else {
       var update_class = 'update-update';
     }
     var status = progress;
-  } else if (activity === 'busy') {
-    var update_class = 'update-disable';
-    if (progress) {
-      var status = progress + ' &ndash; ' + msg;
-    } else {
-      var status = msg;
-    }
-  } else { // activity === 'update'
-    var update_class = 'update-stop';
-    var status = progress + ' &ndash; ' + msg;
-
-    if (offline_ready) {
-      var update_button = 'Pause Updating';
-    } else {
-      var update_button = 'Pause Saving';
-    }
   }
 
   // offline_ready is initialized quickly so that we can respond to
-  // iniital fetches as soon as possible.  But don't set the top_msg
+  // initial fetches as soon as possible.  But don't set the top_msg
   // until we've checked whether what color it should be.
   var icon = undefined;
   var top_msg = undefined;
-  if (offline_ready &&
-      !((activity === 'busy') && (msg === 'Validating offline files'))) {
+  if (offline_ready && (activity !== 'init')) {
     if (is_cache_up_to_date()) {
       var top_msg = 'green';
     } else {
@@ -621,61 +643,77 @@ function fn_send_status(event) {
     err_status: err_status,
     usage: usage,
     top_msg: top_msg,
-    icon: icon
+    icon: icon,
+    clear_class: clear_class,
   };
   event.source.postMessage(poll_msg);
 }
 
-async function stop_update() {
-  activity = 'busy';
-  msg = 'Pausing update in progress';
-
-  // Make a copy of the update_promise and then remove the original.
-  // Thus, only the first call to stop_update() after an update
-  // will do anything.
-  let promise = update_promise;
-  update_promise = undefined;
-
-  if (promise) {
-    // If an update is still running, tell it to stop, then wait for it to
-    // stop.  If we don't wait, then it could still be active when the delete
-    // completes, and then become really confusing.
-    //
-    // If the last update is already done, the promise resolves immediately.
-    console.log('await update_promise');
-    stop_update_flag = true;
-    await promise;
-    stop_update_flag = false;
-  }
+async function pause_update() {
+  await stop_activity();
 
   activity = 'idle'
+  err_status = '';
 }
 
-// I deliberately allow clear_caches() to get called multiple times
-// concurrently.  The first call might wait for stop_update(), but if
-// things are totally wonky, a second press will skip right to deleting
-// the offline data.
+// If activity is ongoing, tell it to stop, then wait for it to stop.
+async function stop_activity() {
+  if (activity === 'update') {
+    msg = 'Pausing update in progress';
+  } else if (activity === 'delete') {
+    msg = 'Pausing deletions';
+  } else if (activity === 'idle') {
+    // No activity to stop.
+    return;
+  } else {
+    // We should never be trying to stop 'init' or 'busy' activity.
+    console.error('stop_activity() called when activity is ' + activity);
+    throw 'oops';
+  }
+
+  activity = 'busy';
+
+  console.log('await activity_promise');
+  stop_activity_flag = true;
+  await activity_promise;
+  activity_promise = undefined;
+  stop_activity_flag = false;
+  console.info('activity stopped');
+}
+
 async function clear_caches() {
-  err_status = '';
-  stop_update();
+  // We allow the delete button to be clicked while the cache is being
+  // updated or obsolete files are being deleted.  When that happens,
+  // we terminate the other activity progressing to the delete action.
+  //
+  // (Note that we do *not* allow the delete button to do anything while
+  // the same delete is already in progress.)
+  await stop_activity();
 
   console.info('clear_caches()');
   activity = 'busy';
   msg = 'Deleting all offline files';
   err_status = '';
 
-  url_to_base64 = {};
-  url_diff = true;
-  offline_ready = false;
+  try {
+    url_to_base64 = {};
+    url_diff = true;
+    offline_ready = false;
 
-  await delete_db();
-  await delete_all_cache_entries();
+    await delete_db();
+    await delete_all_cache_entries();
 
-  // Reset which files need to be cached, similar to init_status().
-  let cache = await caches.open(BASE64_CACHE_NAME);
-  await count_cached(cache);
-  check_url_diff();
-  is_cache_up_to_date();
+    // Reset which files need to be cached, similar to init_status().
+    let cache = await caches.open(BASE64_CACHE_NAME);
+    await count_cached(cache);
+    check_url_diff();
+    is_cache_up_to_date();
+  } catch (e) {
+    if (e) {
+      console.error(e);
+      err_status = '<br>' + e.name + '<br>Something went wrong.  Refresh and try again?';
+    }
+  }
 
   activity = 'idle';
 }
@@ -688,11 +726,17 @@ async function delete_db() {
 }
 
 async function delete_all_cache_entries() {
-  // For some reason, caches.delete() often hangs for me.
-  // So I delete all of the individual cache entries, instead.
   console.info('delete_all_cache_entries()')
+
+  // For some reason, caches.delete() can really screw up some browsers.
+  // E.g. I suspect that Firefox keeps a shadow copy in case there's more
+  // activity, but then that shadow copy never goes away, even after a
+  // browser restart.  So I delete all of the individual cache entries,
+  // instead.
+/*
   await caches.delete(BASE64_CACHE_NAME);
   return;
+*/
 
   let cache = await caches.open(BASE64_CACHE_NAME);
   let requests = await cache.keys();
@@ -706,7 +750,33 @@ async function delete_all_cache_entries() {
   }
 
   msg = 'Waiting for browser to process ' + requests.length + ' deleted files.';
-  console.info('done');
+  console.info('done with delete_all_cache_entries()');
+}
+
+async function update_cache_when_ready() {
+  // We allow a cache update to be initiated while obsolete files are
+  // being deleted.  When that happens, we terminate the deletion before
+  // progressing to the cache update.
+  await stop_activity();
+
+  // There is no current activity, so start updating the cache.
+  // By default, we don't wait for it to finish.
+  // But we do record its promise so that clear_cache() can wait for it
+  // to halt if necessary.
+  activity_promise = update_cache();
+  monitor_promise();
+}
+
+// Monitor the activity promise so that the console will clearly show if
+// the promise ends too soon.  Note that it's perfectly fine for multiple
+// entities to wait for a promise to resolve.  All of the callbacks will
+// be called (or awaits returned) when the promise is resolved.  And the
+// promise remains live for as long as a variable holds its value, so if
+// any callback is added (or await started) after the activity is complete,
+// the callback is resolved immediately.
+async function monitor_promise() {
+  await activity_promise;
+  console.info('activity_promise complete');
 }
 
 // When requested, switch to using the new URL data
@@ -722,31 +792,28 @@ async function update_cache() {
     await protected_write(cache, write_margin);
     await fetch_all_to_cache(cache);
     await record_urls();
-
-    // The old files are now obsolete.
-    while (old_base64_to_delete.length) {
-      obs_base64_to_delete.push(old_base64_to_delete.pop());
-    }
-    old_base64_to_delete = [];
-
-    await delete_obs_files(cache);
+    make_old_files_obsolete();
   } catch (e) {
     if (!e) {
-      // We throw a null when the error has been sufficiently handled already.
+      // If we receive a null, then the error has been sufficiently
+      // handled already.
     } else if ((e.name === 'QuotaExceededError') ||
                (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE')){
+      console.warn(e);
       err_status = '<br>Not enough offline storage available.  Sorry.';
+      console.warn(err_status);
     } else {
+      console.error(e);
       err_status = '<br>' + e.name + '<br>Something went wrong.  Refresh and try again?';
     }
-    console.warn(e);
-    console.warn(err_status);
 
-    // Clear the margin.  We let this complete asynchronously because there's
-    // nothing we can do if it screws up.  There's little chance it gets in
-    // a race with other activity, but even if it does, the worst that happens
-    // is that margin isn't properly created for the next action.
-    clear_margin();
+    // Clear the margin.
+    try {
+      await clear_margin();
+    } catch (e) {
+      console.error(e);
+      err_status = '<br>' + e.name + '<br>Something went wrong.  Refresh and try again?';
+    }
   }
 
   // Whether we completed succesfully or bailed out on an error,
@@ -755,10 +822,12 @@ async function update_cache() {
 }
 
 // Wrap a function call in code that reacts appropriately to quota errors.
-// If the write fails while there is old data that can be deleted, delete
-// the old data and try again.  If the write still fails, handle the error.
+// If the write fails while there is old or obsolete data that can be deleted,
+// delete the old data and try again.  If the write still fails, throw the
+// exception back to the caller to handle.
 async function protected_write(cache, func) {
-  if (old_base64_to_delete.length) {
+  // Keep trying until we run out of options.
+  while (true) {
     try {
       // Make sure to wait for func() to asynchronously finish.
       // Otherwise we won't catch its errors.
@@ -766,24 +835,28 @@ async function protected_write(cache, func) {
     } catch (e) {
       // The documented standard is 'QuotaExceededError'.
       // Testing reveals that Firefox throws a different exception, however.
-      if (e && ((e.name === 'QuotaExceededError') ||
-                (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE'))) {
+      quota_error = (e && ((e.name === 'QuotaExceededError') ||
+                           (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE')));
+      if (quota_error && obs_base64_to_delete) {
+        // Delete obsolete files.
+        err_status = '<br>Storage limit reached.  Deleting obsolete files before continuing.';
+        await delete_obs_files(cache);
+        err_status = '';
+        // now fall through and loop again.
+      } else if (quota_error && old_base64_to_delete.length) {
         // Delete old files.
         err_status = '<br>Storage limit reached.  Reverting to online mode so that old files can be deleted.';
         offline_ready = false;
+        make_old_files_obsolete();
         await delete_db();
-        await delete_old_files(cache);
+        await delete_obs_files(cache);
         err_status = '<br>Storage limit reached.  Reverted to online mode so that old files could be deleted.';
-        // then fall through to the second call to func().
+        // now fall through and loop again.
       } else {
         throw e;
       }
     }
   }
-
-  // If this call of func() fails, there's nothing more we can do to handle it.
-  // Instead, we let the exception propagate up the chain.
-  return await func();
 }
 
 // Open the DB and write a single object to it.
@@ -831,7 +904,9 @@ async function fetch_all_to_cache(cache) {
   for (let url in new_url_to_base64) {
     let base64 = new_url_to_base64[url]
     if (base64 in base64_wanted) {
-      await protected_write(cache, async => fetch_to_cache(cache, url, base64));
+      await protected_write(cache, async function () {
+        await fetch_to_cache(cache, url, base64)
+      });
 
       kb_cached += base64_to_kb[base64];
 
@@ -842,6 +917,8 @@ async function fetch_all_to_cache(cache) {
 }
 
 async function fetch_to_cache(cache, url, base64) {
+  await check_stop('update (before fetch)');
+
   msg = 'Fetching ' + decodeURI(url)
   console.info(msg)
   let response;
@@ -857,26 +934,18 @@ async function fetch_to_cache(cache, url, base64) {
     err_status = '<br>Unexpected fetch response.  Try again later?';
     throw null;
   } if (response.status == 404) {
-    err_status = '<br>Could not find ' + decodeURI(url) + '<br>The Guide must have updated online just now.  Refresh the page and try again.';
+    err_status = '<br>Could not find ' + decodeURI(url) + '<br>The online Guide must have updated its files just now.  Refresh the page and try again.';
     throw null;
   } else if (!response.ok) {
     err_status = '<br>' + response.status + ' - ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
     throw null;
   }
 
-  // Pay attention to the global stop_update_flag variable and
-  // bail out if it becomes true.  We put this check just before
-  // the cache.put() so that we don't update the cache after
-  // stop_update_flag becomes true.
-  if (stop_update_flag){
-    // No error handling is required.  Just stop.
-    console.info('update is now stopped');
-    throw null;
-  }
+  await check_stop('update (before cache.put)');
 
   // The fetch was successful.  Now write the result to the cache.
   //
-  // Note that we're already running within protected_write(),
+  // Note that we're running within protected_write(),
   // so a quota error in cache.put() will be handled properly.
   await cache.put(base64, response);
 }
@@ -909,38 +978,61 @@ async function record_urls() {
   err_status = '';
 }
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+/* check_stop is generally a synchronous function, but for debugging purposes
+   I'll occasionally insert a sleep(), which requires an asynchronous function.
+*/
+async function check_stop(from) {
+  if (stop_activity_flag) {
+    console.info(from + ' is now stopped');
+    /*
+    await sleep(1000);
+    console.info('sleep is done');
+    */
+    throw null;
+  }
+}
+
+async function idle_delete_obs_files() {
+  console.info('idle_delete_obs_files()');
+  activity = 'delete';
+  
+  try {
+    let cache = await caches.open(BASE64_CACHE_NAME);
+    await delete_obs_files(cache);
+  } catch (e) {
+    if (e) {
+      console.error(e);
+      err_status = '<br>' + e.name + '<br>Something went wrong.  Refresh and try again?';
+    }
+  }
+
+  activity = 'idle';
+}
+
 async function delete_obs_files(cache) {
   console.info('delete_obs_files()');
-  activity = 'busy';
 
   var total = obs_base64_to_delete.length;
   while (obs_base64_to_delete.length) {
-    msg = 'Queued deletion of ' + (total - obs_base64_to_delete.length) + ' / ' + total + ' obsolete cached files';
+    await check_stop('delete_obs_files()');
+
+    msg = 'Queued deletion of ' + (total - obs_base64_to_delete.length) + ' / ' + total + ' obsolete offline files';
     await cache.delete(obs_base64_to_delete.pop());
   }
 
-  msg = 'Waiting for browser to process ' + total + ' deleted files.';
-  console.info('done');
+  console.info('done with delete_obs_files()');
 }
 
-async function delete_old_files(cache) {
-  console.info('delete_old_files()');
-
-  var total = old_base64_to_delete.length;
+function make_old_files_obsolete() {
+  // The old files are now obsolete.
   while (old_base64_to_delete.length) {
-    // delete_old_files() is called from update_cache(),
-    // so it needs to pay attention to stop_update_flag.
-    if (stop_update_flag) {
-      console.info('update is now stopped');
-      throw null;
-    }
-
-    msg = 'Queued deletion of ' + (total - old_base64_to_delete.length) + ' / ' + total + ' old files';
-    await cache.delete(old_base64_to_delete.pop());
+    obs_base64_to_delete.push(old_base64_to_delete.pop());
   }
-
-  msg = 'Waiting for browser to process ' + total + ' deleted files.';
-  console.info('done');
+  old_base64_to_delete = [];
 }
 
 function is_cache_up_to_date() {

@@ -104,7 +104,6 @@ function start_polling(registration) {
   temp_controller = registration.active;
 
   if (e_update) {
-    e_clear.className = '';
     e_update.addEventListener('click', fn_update);
     e_clear.addEventListener('click', fn_clear);
 
@@ -160,24 +159,30 @@ function fn_receive_status(event) {
     // the scrollbar from flickering in Android Chrome emulation.
     // (I'd guess that the browser can detect unchanged values for
     // textContent and className, but not for innerHTML).
-    if (msg.update_button != old_msg.update_button) {
+
+    if (msg.update_button !== old_msg.update_button) {
       e_update.textContent = msg.update_button;
     }
-    if (msg.update_class != old_msg.update_class) {
+
+    if (msg.update_class !== old_msg.update_class) {
       e_update.className = msg.update_class;
     }
-    if (msg.status != old_msg.status) {
+
+    if (msg.status !== old_msg.status) {
       e_status.innerHTML = msg.status;
     }
-    if ((msg.err_status != old_msg.err_status) || timed_out) {
+
+    if ((msg.err_status !== old_msg.err_status) || timed_out) {
       // If we previously had a 'time out' message, always replace it
       // (or clear it) when we get a new poll response.
       e_err_status.innerHTML = msg.err_status;
     }
-    if (msg.usage != old_msg.usage) {
+
+    if (msg.usage !== old_msg.usage) {
       e_usage.innerHTML = msg.usage;
     }
-    if (msg.top_msg != old_msg.top_msg) {
+
+    if (msg.top_msg !== old_msg.top_msg) {
       if (old_msg.top_msg) {
         e_top_msg[old_msg.top_msg].style.display = 'none';
       }
@@ -185,6 +190,11 @@ function fn_receive_status(event) {
         e_top_msg[msg.top_msg].style.display = 'block';
       }
     }
+
+    if (msg.clear_class !== old_msg.clear_class) {
+      e_clear.className = msg.clear_class;
+    }
+
     old_msg = msg;
 
     update_wakelock(msg);

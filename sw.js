@@ -1,6 +1,6 @@
 var url_data = [
-["swi.js", "82b_VfCI9XdB63im42EgXwpt68WDlDme-bYOJg==", 7],
-["index.html", "CGpFWmVqMaRf9PTZhuPTA_hX7zPXS_9DHQypVA==", 6],
+["swi.js", "O6tKnqJVyyhul6GJiM6PUFJWgOps-1Si17AxMw==", 7],
+["index.html", "f9RWVxu-kfZA6PMdRDTdXjPucURAYta90ivgiA==", 6],
 ["bawg.css", "CuaCFCr7-3tk3X5jEABfzwvLHdxgSawNwjWIew==", 10],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
 ["icons/check.svg", "GZFdGrKC4UpM0uywABrTQILfNZ7T0U6iI8sMaw==", 2],
@@ -9,8 +9,8 @@ var url_data = [
 ["pages.js", "f-5cyRuqlRvNrRt7h-R3n9Fx2xjJSUXBEqp66g==", 127],
 ["manifest.webmanifest", "XGY5f7xv7yhxwxGbwWWhPfwDB3ICJv-oYatFwg==", 1],
 ["chrome.html", "nhdcpn7iK7O6dUNe_p6KFoSi23sKiK4J1EJdZg==", 4],
-["safari.html", "3EtmqVcWI5XGFK4-eCtYiewsNfIRivz-v7GYRA==", 4],
-["firefox.html", "KbK5wp4Vn0e77JYlqTXTO3B0JsO9qx10ked_Dw==", 4],
+["safari.html", "li83n7LKM-_POOuHjIjDejxAhulMox0YlfI0kQ==", 4],
+["firefox.html", "_kLER_301qw7xDboaNkhN2cCKZkKOJ7Jy2C1DQ==", 4],
 ["favicon/android-chrome-192x192.png", "mo6K7qaLIV-5TmbY7NJ9TJnwvMaYWB2u_VYhng==", 81],
 ["favicon/android-chrome-512x512.png", "abL-BGik7wTuWq57-DIsk-Gdpx9oIRjxGwwHXQ==", 347],
 ["favicon/apple-touch-icon.png", "ZBUIIaJnbzPRQUDFB9J4v-McrKTYHJm8QPSagA==", 75],
@@ -5019,12 +5019,12 @@ console.info('starting from the beginning');
 var DB_NAME = 'db-v1';
 var DB_VERSION = 1;
 var BASE64_CACHE_NAME = 'base64-cache-v1';
-var activity = 'busy';
+var activity = 'init';
 var msg = 'Checking for offline files';
 var err_status = '';
 var usage = '';
-var stop_update_flag = false;
-var update_promise;
+var stop_activity_flag = false;
+var activity_promise;
 var offline_ready = undefined;
 var url_to_base64;
 var new_url_to_base64;
@@ -5129,7 +5129,6 @@ async function init_status() {
   let cache = await caches.open(BASE64_CACHE_NAME);
   await count_cached(cache);
   check_url_diff();
-  await delete_obs_files(cache);
   activity = 'idle';
 }
 async function count_cached(cache) {
@@ -5210,19 +5209,29 @@ function fn_send_status(event) {
     err_status = '';
   }
   if (event.data === 'update') {
-    if (activity === 'idle') {
+    if ((activity === 'idle') || (activity === 'delete')) {
       if (is_cache_up_to_date()) {
-        console.info('idle: ignore update request');
+        console.info('cache is up to date: ignore update request');
       } else {
-        update_promise = update_cache();
+        update_cache_when_ready();
       }
-    } else if (activity === 'busy') {
-      console.info('busy: ignore update request');
+    } else if (activity === 'update') {
+      pause_update();
     } else {
-      stop_update();
+      console.info(activity + ': ignore update request');
     }
   } else if (event.data === 'clear') {
-    clear_caches();
+    if ((activity === 'idle') ||
+        (activity === 'delete') ||
+        (activity === 'update')) {
+      clear_caches();
+    } else {
+      console.info(activity + ': ignore delete request');
+    }
+  }
+  if ((activity === 'idle') && obs_base64_to_delete.length) {
+    activity_promise = idle_delete_obs_files();
+    monitor_promise();
   }
   var mb_total = (kb_total/1024 + 0.1).toFixed(1);
   if (is_cache_up_to_date()) {
@@ -5236,33 +5245,47 @@ function fn_send_status(event) {
   } else {
     var update_button = 'Save Offline Files';
   }
-  if (activity === 'idle') {
-    if (is_cache_up_to_date()) {
-      var update_class = 'update-disable';
-    } else {
-      var update_class = 'update-update';
-    }
-    var status = progress;
+  if (activity === 'init') {
+    var update_class = 'update-disable';
+    var clear_class = 'clear-disable';
+    var status = msg;
   } else if (activity === 'busy') {
     var update_class = 'update-disable';
+    var clear_class = 'clear-disable';
     if (progress) {
       var status = progress + ' &ndash; ' + msg;
     } else {
       var status = msg;
     }
-  } else {
+  } else if (activity === 'delete') {
+    if (is_cache_up_to_date()) {
+      var update_class = 'update-disable';
+    } else {
+      var update_class = 'update-update';
+    }
+    var clear_class = '';
+    var status = progress + ' &ndash; ' + msg;
+  } else if (activity === 'update') {
     var update_class = 'update-stop';
+    var clear_class = '';
     var status = progress + ' &ndash; ' + msg;
     if (offline_ready) {
       var update_button = 'Pause Updating';
     } else {
       var update_button = 'Pause Saving';
     }
+  } else {
+    var clear_class = '';
+    if (is_cache_up_to_date()) {
+      var update_class = 'update-disable';
+    } else {
+      var update_class = 'update-update';
+    }
+    var status = progress;
   }
   var icon = undefined;
   var top_msg = undefined;
-  if (offline_ready &&
-      !((activity === 'busy') && (msg === 'Validating offline files'))) {
+  if (offline_ready && (activity !== 'init')) {
     if (is_cache_up_to_date()) {
       var top_msg = 'green';
     } else {
@@ -5280,39 +5303,57 @@ function fn_send_status(event) {
     err_status: err_status,
     usage: usage,
     top_msg: top_msg,
-    icon: icon
+    icon: icon,
+    clear_class: clear_class,
   };
   event.source.postMessage(poll_msg);
 }
-async function stop_update() {
-  activity = 'busy';
-  msg = 'Pausing update in progress';
-  let promise = update_promise;
-  update_promise = undefined;
-  if (promise) {
-    console.log('await update_promise');
-    stop_update_flag = true;
-    await promise;
-    stop_update_flag = false;
-  }
+async function pause_update() {
+  await stop_activity();
   activity = 'idle'
+  err_status = '';
+}
+async function stop_activity() {
+  if (activity === 'update') {
+    msg = 'Pausing update in progress';
+  } else if (activity === 'delete') {
+    msg = 'Pausing deletions';
+  } else if (activity === 'idle') {
+    return;
+  } else {
+    console.error('stop_activity() called when activity is ' + activity);
+    throw 'oops';
+  }
+  activity = 'busy';
+  console.log('await activity_promise');
+  stop_activity_flag = true;
+  await activity_promise;
+  activity_promise = undefined;
+  stop_activity_flag = false;
+  console.info('activity stopped');
 }
 async function clear_caches() {
-  err_status = '';
-  stop_update();
+  await stop_activity();
   console.info('clear_caches()');
   activity = 'busy';
   msg = 'Deleting all offline files';
   err_status = '';
-  url_to_base64 = {};
-  url_diff = true;
-  offline_ready = false;
-  await delete_db();
-  await delete_all_cache_entries();
-  let cache = await caches.open(BASE64_CACHE_NAME);
-  await count_cached(cache);
-  check_url_diff();
-  is_cache_up_to_date();
+  try {
+    url_to_base64 = {};
+    url_diff = true;
+    offline_ready = false;
+    await delete_db();
+    await delete_all_cache_entries();
+    let cache = await caches.open(BASE64_CACHE_NAME);
+    await count_cached(cache);
+    check_url_diff();
+    is_cache_up_to_date();
+  } catch (e) {
+    if (e) {
+      console.error(e);
+      err_status = '<br>' + e.name + '<br>Something went wrong.  Refresh and try again?';
+    }
+  }
   activity = 'idle';
 }
 async function delete_db() {
@@ -5321,8 +5362,6 @@ async function delete_db() {
 }
 async function delete_all_cache_entries() {
   console.info('delete_all_cache_entries()')
-  await caches.delete(BASE64_CACHE_NAME);
-  return;
   let cache = await caches.open(BASE64_CACHE_NAME);
   let requests = await cache.keys();
   console.info('num to delete =', requests.length);
@@ -5332,7 +5371,16 @@ async function delete_all_cache_entries() {
     cache.delete(request);
   }
   msg = 'Waiting for browser to process ' + requests.length + ' deleted files.';
-  console.info('done');
+  console.info('done with delete_all_cache_entries()');
+}
+async function update_cache_when_ready() {
+  await stop_activity();
+  activity_promise = update_cache();
+  monitor_promise();
+}
+async function monitor_promise() {
+  await activity_promise;
+  console.info('activity_promise complete');
 }
 async function update_cache() {
   console.info('update_cache()');
@@ -5344,43 +5392,50 @@ async function update_cache() {
     await protected_write(cache, write_margin);
     await fetch_all_to_cache(cache);
     await record_urls();
-    while (old_base64_to_delete.length) {
-      obs_base64_to_delete.push(old_base64_to_delete.pop());
-    }
-    old_base64_to_delete = [];
-    await delete_obs_files(cache);
+    make_old_files_obsolete();
   } catch (e) {
     if (!e) {
     } else if ((e.name === 'QuotaExceededError') ||
                (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE')){
+      console.warn(e);
       err_status = '<br>Not enough offline storage available.  Sorry.';
+      console.warn(err_status);
     } else {
+      console.error(e);
       err_status = '<br>' + e.name + '<br>Something went wrong.  Refresh and try again?';
     }
-    console.warn(e);
-    console.warn(err_status);
-    clear_margin();
+    try {
+      await clear_margin();
+    } catch (e) {
+      console.error(e);
+      err_status = '<br>' + e.name + '<br>Something went wrong.  Refresh and try again?';
+    }
   }
   activity = 'idle';
 }
 async function protected_write(cache, func) {
-  if (old_base64_to_delete.length) {
+  while (true) {
     try {
       return await func();
     } catch (e) {
-      if (e && ((e.name === 'QuotaExceededError') ||
-                (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE'))) {
+      quota_error = (e && ((e.name === 'QuotaExceededError') ||
+                           (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE')));
+      if (quota_error && obs_base64_to_delete) {
+        err_status = '<br>Storage limit reached.  Deleting obsolete files before continuing.';
+        await delete_obs_files(cache);
+        err_status = '';
+      } else if (quota_error && old_base64_to_delete.length) {
         err_status = '<br>Storage limit reached.  Reverting to online mode so that old files can be deleted.';
         offline_ready = false;
+        make_old_files_obsolete();
         await delete_db();
-        await delete_old_files(cache);
+        await delete_obs_files(cache);
         err_status = '<br>Storage limit reached.  Reverted to online mode so that old files could be deleted.';
       } else {
         throw e;
       }
     }
   }
-  return await func();
 }
 async function write_obj(obj) {
   let db = await open_db();
@@ -5408,13 +5463,16 @@ async function fetch_all_to_cache(cache) {
   for (let url in new_url_to_base64) {
     let base64 = new_url_to_base64[url]
     if (base64 in base64_wanted) {
-      await protected_write(cache, async => fetch_to_cache(cache, url, base64));
+      await protected_write(cache, async function () {
+        await fetch_to_cache(cache, url, base64)
+      });
       kb_cached += base64_to_kb[base64];
       delete base64_wanted[base64];
     }
   }
 }
 async function fetch_to_cache(cache, url, base64) {
+  await check_stop('update (before fetch)');
   msg = 'Fetching ' + decodeURI(url)
   console.info(msg)
   let response;
@@ -5429,16 +5487,13 @@ async function fetch_to_cache(cache, url, base64) {
     err_status = '<br>Unexpected fetch response.  Try again later?';
     throw null;
   } if (response.status == 404) {
-    err_status = '<br>Could not find ' + decodeURI(url) + '<br>The Guide must have updated online just now.  Refresh the page and try again.';
+    err_status = '<br>Could not find ' + decodeURI(url) + '<br>The online Guide must have updated its files just now.  Refresh the page and try again.';
     throw null;
   } else if (!response.ok) {
     err_status = '<br>' + response.status + ' - ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
     throw null;
   }
-  if (stop_update_flag){
-    console.info('update is now stopped');
-    throw null;
-  }
+  await check_stop('update (before cache.put)');
   await cache.put(base64, response);
 }
 async function record_urls() {
@@ -5456,30 +5511,44 @@ async function record_urls() {
   offline_ready = true;
   err_status = '';
 }
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+async function check_stop(from) {
+  if (stop_activity_flag) {
+    console.info(from + ' is now stopped');
+    throw null;
+  }
+}
+async function idle_delete_obs_files() {
+  console.info('idle_delete_obs_files()');
+  activity = 'delete';
+  try {
+    let cache = await caches.open(BASE64_CACHE_NAME);
+    await delete_obs_files(cache);
+  } catch (e) {
+    if (e) {
+      console.error(e);
+      err_status = '<br>' + e.name + '<br>Something went wrong.  Refresh and try again?';
+    }
+  }
+  activity = 'idle';
+}
 async function delete_obs_files(cache) {
   console.info('delete_obs_files()');
-  activity = 'busy';
   var total = obs_base64_to_delete.length;
   while (obs_base64_to_delete.length) {
-    msg = 'Queued deletion of ' + (total - obs_base64_to_delete.length) + ' / ' + total + ' obsolete cached files';
+    await check_stop('delete_obs_files()');
+    msg = 'Queued deletion of ' + (total - obs_base64_to_delete.length) + ' / ' + total + ' obsolete offline files';
     await cache.delete(obs_base64_to_delete.pop());
   }
-  msg = 'Waiting for browser to process ' + total + ' deleted files.';
-  console.info('done');
+  console.info('done with delete_obs_files()');
 }
-async function delete_old_files(cache) {
-  console.info('delete_old_files()');
-  var total = old_base64_to_delete.length;
+function make_old_files_obsolete() {
   while (old_base64_to_delete.length) {
-    if (stop_update_flag) {
-      console.info('update is now stopped');
-      throw null;
-    }
-    msg = 'Queued deletion of ' + (total - old_base64_to_delete.length) + ' / ' + total + ' old files';
-    await cache.delete(old_base64_to_delete.pop());
+    obs_base64_to_delete.push(old_base64_to_delete.pop());
   }
-  msg = 'Waiting for browser to process ' + total + ' deleted files.';
-  console.info('done');
+  old_base64_to_delete = [];
 }
 function is_cache_up_to_date() {
   let files_to_fetch = (Object.keys(base64_wanted).length);
