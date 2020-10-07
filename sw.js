@@ -1,5 +1,5 @@
 var url_data = [
-["swi.js", "0sWF3ulacAhuaRATcLOhgVxpJKIJWIoplsDiaw==", 7],
+["swi.js", "82b_VfCI9XdB63im42EgXwpt68WDlDme-bYOJg==", 7],
 ["index.html", "62N_ibNxaQr1LTHY7RzSWh1Qr1lBLYQ6yX5fig==", 6],
 ["bawg.css", "CuaCFCr7-3tk3X5jEABfzwvLHdxgSawNwjWIew==", 10],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
@@ -10,7 +10,7 @@ var url_data = [
 ["manifest.webmanifest", "XGY5f7xv7yhxwxGbwWWhPfwDB3ICJv-oYatFwg==", 1],
 ["chrome.html", "nhdcpn7iK7O6dUNe_p6KFoSi23sKiK4J1EJdZg==", 4],
 ["safari.html", "3EtmqVcWI5XGFK4-eCtYiewsNfIRivz-v7GYRA==", 4],
-["firefox.html", "SfWY9tjb9XPnDoiDYM8g4rdy9NnG5wEwZacsNA==", 4],
+["firefox.html", "KbK5wp4Vn0e77JYlqTXTO3B0JsO9qx10ked_Dw==", 4],
 ["favicon/android-chrome-192x192.png", "mo6K7qaLIV-5TmbY7NJ9TJnwvMaYWB2u_VYhng==", 81],
 ["favicon/android-chrome-512x512.png", "abL-BGik7wTuWq57-DIsk-Gdpx9oIRjxGwwHXQ==", 347],
 ["favicon/apple-touch-icon.png", "ZBUIIaJnbzPRQUDFB9J4v-McrKTYHJm8QPSagA==", 75],
@@ -5496,5 +5496,21 @@ async function update_usage() {
       usage = status_usage + ' MB with compression';
     }
     usage += ' (browser allows up to ' + status_quota + ' GB)';
+    if (!estimate.usage &&
+        ((kb_cached > 0) ||
+         old_base64_to_delete.length ||
+         obs_base64_to_delete.length)) {
+      let kb_per_file = kb_total / url_data.length;
+      let estimated_files = (old_base64_to_delete.length +
+                             obs_base64_to_delete.length);
+      let kb_estimate = kb_per_file * estimated_files;
+      if (kb_cached || estimated_files) {
+        status_usage = ((kb_cached + kb_estimate)/1024 + 0.1).toFixed(1)
+      } else {
+        status_usage = '0.0';
+      }
+      usage = 'roughly ' + status_usage + ' MB';
+      usage += ' (browser allows at least ' + status_quota + ' GB';
+    }
   }
 }

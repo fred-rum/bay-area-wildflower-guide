@@ -963,5 +963,37 @@ async function update_usage() {
       usage = status_usage + ' MB with compression';
     }
     usage += ' (browser allows up to ' + status_quota + ' GB)';
+
+    // When desktop Firefox asks for a receives permission for persistent
+    // storage, it effectively removes the storage limit.  But instead of
+    // increasing the quota arbitrarily, it pretends that there's no
+    // usage.  Dunno why they thought that was a good idea, but we have
+    // to deal with it.
+    //
+    // The result replaces the normal usage calculation, and is in a
+    // completely different format.
+    if (!estimate.usage &&
+        ((kb_cached > 0) ||
+         old_base64_to_delete.length ||
+         obs_base64_to_delete.length)) {
+
+      // We don't know the size of old and obsolete files in the cache.
+      // Just guess based on how many there are.
+      let kb_per_file = kb_total / url_data.length;
+      let estimated_files = (old_base64_to_delete.length +
+                             obs_base64_to_delete.length);
+      let kb_estimate = kb_per_file * estimated_files;
+
+      // The guesstimated total will often be equal to kb_total,
+      // modulo floating point discrepencies.  To avoid a disconnect
+      // with the progress values, use the same fudge factor.
+      if (kb_cached || estimated_files) {
+        status_usage = ((kb_cached + kb_estimate)/1024 + 0.1).toFixed(1)
+      } else {
+        status_usage = '0.0';
+      }
+      usage = 'roughly ' + status_usage + ' MB';
+      usage += ' (browser allows at least ' + status_quota + ' GB';
+    }
   }
 }

@@ -1041,11 +1041,19 @@ Clearing the site data during an update creates an insane exception.
 For an unrecognized exception, should I revalidate the cache?
 (I.e. start over from the beginning.)
 
-Don't delete obsolete files if not online/no url_data differences.
-But then if the deletion is interrupted, they'll hang out indefinitely
-if there are no more changes.
-
 Delete all cache files by simply deleting the cache.  That feels
 reasonably safe now that we wait for an in-progress update to stop
 first (although maybe I'd also need to wait for file deletion to stop,
 too).
+
+It would be nice if deleting obsolete files did not prevent a new
+update from starting.  I.e. the 'update' button is allowed, and queues
+the update after the delete.  Or it stops the delete and updates
+instead.  That might be easier to implement (same update_promise) and
+easier to present to the user.  E.g.
+- the user completes a large update and thus has a lot of files to delete.
+- the user is impatient and disconnects before the deletions are done.
+- the user comes back later, and the deletions resume.
+- there is also an update that the user wants to get.
+This matters more in Firefox (slow to delete) than Chrome.
+Safari is unknown.
