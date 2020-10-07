@@ -8,12 +8,14 @@ var DB_NAME = 'db-v1';
 var DB_VERSION = 1;
 var BASE64_CACHE_NAME = 'base64-cache-v1';
 
-// An initial 'updating' message prevents updates until everything
+// Activity is 'idle', 'busy', or 'update'.
+// An initial 'busy' activity prevents updates until everything
 // is initialized.
-var updating = 'Checking for offline files';
+var activity = 'busy';
+var msg = 'Checking for offline files';
 var err_status = '';
 var usage = '';
-var stop_updating = false;
+var stop_update_flag = false;
 var update_promise;
 
 // offline_ready is undefined when we haven't yet checked the indexedDB.
@@ -48,16 +50,22 @@ var url_diff;
 // only those files that aren't yet cached.
 var base64_to_kb = {};
 
-// base64_to_delete indicates which base64 keys in the cache are no longer
-// in use and can be deleted.
-var base64_to_delete = [];
-
-// These values indicate
-// - the total calculated size of files that we want to be cached
-// - the total calculated size of useful files that already are cached
-// (calculated as opposed to measured like the browser usage).
+// kb_total is the total KB needed by new_url_to_base64;
 var kb_total = 0;
+
+// kb_cached is the total KB needed by new_url_to_base64 and already
+// cached (i.e. a subset of kb_total).
 var kb_cached = 0;
+
+// obs_base64_to_delete indicates which base64 keys in the cache are not
+// needed by url_to_base64 or new_url_to_base64, so they can be deleted
+// anytime.
+var obs_base64_to_delete = [];
+
+// old_base64_to_delete indicates which base64 keys in the cache are
+// needed by url_to_base64 but not by url_to_base64, so they can be
+// delete once an update is complete.
+var old_base64_to_delete = [];
 
 
 /*** Install the service worker ***/
@@ -288,7 +296,8 @@ async function read_db() {
     if (url_to_base64 === undefined) throw 'oops';
     offline_ready = true;
   } catch (e) {
-    console.warn('indexedDB lookup failed', e);
+    console.info('indexedDB lookup failed', e);
+    console.info('(This is normal if it was not initialized.)');
     url_to_base64 = {};
     offline_ready = false;
   }
@@ -341,36 +350,32 @@ init_status();
 async function init_status() {
   console.info('init_status()');
 
-  // Do two things in parallel:
-  //
-  // 1. Read the old url_to_base64 from indexedDB.
+  // Read the old url_to_base64 from indexedDB.
   // Note that the fetch handler will also call read_db() if it needs
   // it before we're done here.  But we still call it here in order to
   // compare it to the new_url_to_base64.
-  //
-  // 2. Generate new_url_to_base64 and check how much of it is already
-  // cached.
   await read_db();
 
-  updating = 'Validating offline files';
-  await count_cached();
-
+  msg = 'Validating offline files';
+  let cache = await caches.open(BASE64_CACHE_NAME);
+  await count_cached(cache);
   check_url_diff();
+  await delete_obs_files(cache);
 
-  // Finally, prepare the appropriate info to send to swi.js.
-  is_cache_up_to_date();
+  activity = 'idle';
 }
 
 // Check how many KB of the new base64 values already have a file cached.
 // Also compute the total KB that will be cached if the cache is updated.
-async function count_cached() {
+async function count_cached(cache) {
   console.info('count_cached()');
 
   // This function might be called a second time after the caches are
   // clear, so be sure to throw away old values before accumulating
   // new data.
   base64_to_kb = {};
-  base64_to_delete = [];
+  obs_base64_to_delete = [];
+  old_base64_to_delete = [];
   kb_total = 0;
   kb_cached = 0;
 
@@ -384,7 +389,14 @@ async function count_cached() {
     kb_total += kb;
   }
 
-  let cache = await caches.open(BASE64_CACHE_NAME);
+  // Generate a temporary dictionary of old base64 keys from the
+    // old url_to_base64 data read earlier.
+  let old_base64 = {};
+  for (let url in url_to_base64) {
+    let base64 = url_to_base64[url];
+    old_base64[base64] = true;
+  }
+
   let requests = await cache.keys();
   console.info('checking base64 keys in the cache');
   for (let i = 0; i < requests.length; i++) {
@@ -394,14 +406,10 @@ async function count_cached() {
 
       // Entries left in base64_to_kb are ones that need to be fetched.
       delete base64_to_kb[base64];
+    } else if (base64 in old_base64) {
+      old_base64_to_delete.push(base64);
     } else {
-      // Entries in base64_to_delete are ones that need to be deleted.
-      if (base64_to_delete.length < 10) {
-        console.info('Need to delete', base64);
-      } else if (base64_to_delete.length == 10) {
-        console.info('etc.');
-      }
-      base64_to_delete.push(base64);
+      obs_base64_to_delete.push(base64);
     }
   }
 }
@@ -420,13 +428,13 @@ function check_url_diff() {
   // Check if any old URLs are missing from new_url_to_base64 or have
   // different base64 values.
   for (let url in url_to_base64) {
-    if (!(url in new_url_to_base64) ||
-        (url_to_base64[url] != new_url_to_base64[url])) {
-      if (!(url in new_url_to_base64)) {
-        console.info(url, 'not found in new_url_to_base64');
-      } else {
-        console.info(url, 'has different data in new_url_to_base64');
-      }
+    if (!(url in new_url_to_base64)) {
+      console.info(url, 'not found in new_url_to_base64');
+      url_diff = true;
+      return;
+    }
+    if (url_to_base64[url] != new_url_to_base64[url]) {
+      console.info(url, 'has different data in new_url_to_base64');
       url_diff = true;
       return;
     }
@@ -442,6 +450,8 @@ function check_url_diff() {
       return;
     }
   }
+
+  console.info('done with check_url_diff()');
 }
 
 
@@ -492,18 +502,22 @@ function fn_send_status(event) {
   // If the event.data is anything more interesting than 'poll', kick
   // off the appropriate process before returning the polling status.
   if (event.data === 'update') {
-    if (updating === false) {
-      // There is no current activity, so start updating the cache.
-      // By default, we don't wait for it to finish.
-      // But we do record its promise so that delete_all_cache_entries()
-      // can wait for it to halt if necessary.
-      update_promise = update_cache();
-    } else if (update_class === 'update-disable') {
+    if (activity === 'idle') {
+      if (is_cache_up_to_date()) {
+        // do nothing
+        console.info('idle: ignore update request');
+      } else {
+        // There is no current activity, so start updating the cache.
+        // By default, we don't wait for it to finish.
+        // But we do record its promise so that delete_all_cache_entries()
+        // can wait for it to halt if necessary.
+        update_promise = update_cache();
+      }
+    } else if (activity === 'busy') {
       // If we're still checking the cache or if the cache is up to date,
       // ignore the update request.
-      console.info('ignore update request');
-    } else {
-      updating = 'Pausing update in progress';
+      console.info('busy: ignore update request');
+    } else { // activity === 'update'
       stop_update();
     }
   } else if (event.data === 'clear') {
@@ -515,50 +529,52 @@ function fn_send_status(event) {
     clear_caches();
   }
 
+  // I was going to do something to show the progress relative to
+  // the total amount that the update is fetching, but if I return
+  // to the home page in the middle of the update, we no longer have
+  // a way to calculate that total amount.  So I've stuck with the
+  // original method.
+
+  // Pretend that we need a bit more data than we actually do.
+  // That way, if there's a tiny bit more data to fetch
+  // (or only data to delete, or an indexedDB to update),
+  // it appears as if there is still 0.1 MB of data to cache.
+  var mb_total = (kb_total/1024 + 0.1).toFixed(1);
+
+  if (is_cache_up_to_date()) {
+    var mb_cached = mb_total;
+  } else {
+    var mb_cached = (kb_cached/1024).toFixed(1);
+  }
+
+  var progress = mb_cached + ' / ' + mb_total + ' MB';
+
+  // These are the update_button values for activities 'idle' and 'busy'.
+  // We replace them further below for 'update'.
   if (offline_ready) {
     var update_button = 'Update Offline Files';
   } else {
     var update_button = 'Save Offline Files';
   }
 
-  if (updating === false) {
-    // Pretend that we need a bit more data than we actually do.
-    // That way, if there's a tiny bit more data to fetch
-    // (or only data to delete, or an indexedDB to update),
-    // it appears as if there is still 0.1 MB of data to cache.
-    remaining = ((kb_total - kb_cached) / 1024 + 0.1).toFixed(1);
-
-    var status = '+' + remaining + ' MB';;
-
-    var update_class = 'update-update';
-  } else if ((updating === 'Checking for offline files') ||
-             (updating === 'Validating offline files') ||
-             (updating === 'Up to date') ||
-             (updating === 'Deleting offline files')) {
-    // It would be nice to display incremental progress while validating
-    // the cache, but the slow part is getting all the keys from the cache.
-    // Actually checking the keys is then atomic.
-    var status = updating;
-
+  if (activity === 'idle') {
+    if (is_cache_up_to_date()) {
+      var update_class = 'update-disable';
+    } else {
+      var update_class = 'update-update';
+    }
+    var status = progress;
+  } else if (activity === 'busy') {
     var update_class = 'update-disable';
-  } else {
-    // I was going to do something to show the progress relative to
-    // the total amount that the update is fetching, but if I return
-    // to the home page in the middle of the update, we no longer have
-    // a way to calculate that total amount.  So I've stuck with the
-    // original method.
-
-    let mb_cached = (kb_cached/1024).toFixed(1)
-
-    // Pretend that we need a bit more data than we actually do.
-    // That way, if there's a tiny bit more data to fetch
-    // (or only data to delete, or an indexedDB to update),
-    // it appears as if there is still 0.1 MB of data to cache.
-    let mb_total = (kb_total/1024 + 0.1).toFixed(1)
-
-    var status = mb_cached + ' / ' + mb_total + ' MB &ndash; ' + updating;
-
+    if (progress) {
+      var status = progress + ' &ndash; ' + msg;
+    } else {
+      var status = msg;
+    }
+  } else { // activity === 'update'
     var update_class = 'update-stop';
+    var status = progress + ' &ndash; ' + msg;
+
     if (offline_ready) {
       var update_button = 'Pause Updating';
     } else {
@@ -566,24 +582,23 @@ function fn_send_status(event) {
     }
   }
 
-  if (offline_ready && (updating !== 'Validating offline files')) {
-    if (updating === 'Up to date') {
+  // offline_ready is initialized quickly so that we can respond to
+  // iniital fetches as soon as possible.  But don't set the top_msg
+  // until we've checked whether what color it should be.
+  var icon = undefined;
+  var top_msg = undefined;
+  if (offline_ready &&
+      !((activity === 'busy') && (msg === 'Validating offline files'))) {
+    if (is_cache_up_to_date()) {
       var top_msg = 'green';
     } else {
-      // If updating === false or shows update progress, then an
-      // update is possible.
       var top_msg = 'yellow';
+      if (activity !== 'update') {
+        // The yellow icon is only shown on non-home pages when an update
+        // is needed *and* no update is in progress.
+        var icon = 'yellow';
+      }
     }
-  } else {
-    var top_msg = undefined;
-  }
-
-  if (offline_ready && (updating === false)) {
-    // The yellow icon is only shown on non-home pages when an update
-    // is needed *and* no update is in progress.
-    var icon = 'yellow';
-  } else {
-    var icon = undefined;
   }
 
   // Update the cache usage estimate.
@@ -592,7 +607,7 @@ function fn_send_status(event) {
   // ready by the next time we poll.
   update_usage();
 
-  msg = {
+  var poll_msg = {
     update_button: update_button,
     update_class: update_class,
     status: status,
@@ -601,10 +616,13 @@ function fn_send_status(event) {
     top_msg: top_msg,
     icon: icon
   };
-  event.source.postMessage(msg);
+  event.source.postMessage(poll_msg);
 }
 
 async function stop_update() {
+  activity = 'busy';
+  msg = 'Pausing update in progress';
+
   // Make a copy of the update_promise and then remove the original.
   // Thus, only the first call to stop_update() after an update
   // will do anything.
@@ -618,10 +636,12 @@ async function stop_update() {
     //
     // If the last update is already done, the promise resolves immediately.
     console.log('await update_promise');
-    stop_updating = true;
+    stop_update_flag = true;
     await promise;
-    stop_updating = false;
+    stop_update_flag = false;
   }
+
+  activity = 'idle'
 }
 
 // I deliberately allow clear_caches() to get called multiple times
@@ -629,11 +649,12 @@ async function stop_update() {
 // things are totally wonky, a second press will skip right to deleting
 // the offline data.
 async function clear_caches() {
-  updating = 'Halting update in progress';
+  err_status = '';
   stop_update();
 
   console.info('clear_caches()');
-  updating = 'Deleting offline files';
+  activity = 'busy';
+  msg = 'Deleting all offline files';
   err_status = '';
 
   url_to_base64 = {};
@@ -643,12 +664,13 @@ async function clear_caches() {
   await delete_db();
   await delete_all_cache_entries();
 
-  // Reset which files need to be cached.
-  await count_cached();
-
+  // Reset which files need to be cached, similar to init_status().
+  let cache = await caches.open(BASE64_CACHE_NAME);
+  await count_cached(cache);
   check_url_diff();
-
   is_cache_up_to_date();
+
+  activity = 'idle';
 }
 
 async function delete_db() {
@@ -668,26 +690,36 @@ async function delete_all_cache_entries() {
   console.info('num to delete =', requests.length);
 
   for (let i = 0; i < requests.length; i++) {
+    msg = 'Queued deletion of ' + i + ' / ' + requests.length + ' files';
     let request = requests[i]
-    console.info('Deleting', request);
     cache.delete(request);
   }
+
+  msg = 'Waiting for browser to process ' + requests.length + ' deleted files.';
+  console.info('done');
 }
 
 // When requested, switch to using the new URL data
 // and update the cache to match.
 async function update_cache() {
   console.info('update_cache()');
+  activity = 'update';
   err_status = '';
 
   try {
-    updating = 'Preparing update';
+    msg = 'Preparing update';
     let cache = await caches.open(BASE64_CACHE_NAME);
     await protected_write(cache, write_margin);
     await fetch_all_to_cache(cache);
     await record_urls();
-    await delete_old_files(cache);
-    is_cache_up_to_date();
+
+    // The old files are now obsolete.
+    while (old_base64_to_delete.length) {
+      obs_base64_to_delete.push(old_base64_to_delete.pop());
+    }
+    old_base64_to_delete = [];
+
+    await delete_obs_files(cache);
   } catch (e) {
     if (!e) {
       // We throw a null when the error has been sufficiently handled already.
@@ -699,16 +731,24 @@ async function update_cache() {
     }
     console.warn(e);
     console.warn(err_status);
-    updating = false;
+
+    // Clear the margin.  We let this complete asynchronously because there's
+    // nothing we can do if it screws up.  There's little chance it gets in
+    // a race with other activity, but even if it does, the worst that happens
+    // is that margin isn't properly created for the next action.
     clear_margin();
   }
+
+  // Whether we completed succesfully or bailed out on an error,
+  // we're idle now.
+  activity = 'idle';
 }
 
 // Wrap a function call in code that reacts appropriately to quota errors.
 // If the write fails while there is old data that can be deleted, delete
 // the old data and try again.  If the write still fails, handle the error.
 async function protected_write(cache, func) {
-  if (base64_to_delete.length) {
+  if (old_base64_to_delete.length) {
     try {
       // Make sure to wait for func() to asynchronously finish.
       // Otherwise we won't catch its errors.
@@ -719,7 +759,7 @@ async function protected_write(cache, func) {
       if (e && ((e.name === 'QuotaExceededError') ||
                 (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE'))) {
         // Delete old files.
-        err_status = '<br>Storage limit reached.  Reverted to online mode so that old files can be deleted.';
+        err_status = '<br>Storage limit reached.  Reverting to online mode so that old files can be deleted.';
         offline_ready = false;
         await delete_db();
         await delete_old_files(cache);
@@ -787,14 +827,13 @@ async function fetch_all_to_cache(cache) {
 }
 
 async function fetch_to_cache(cache, url, base64) {
-  updating = 'Fetching ' + decodeURI(url)
-  console.info(updating)
+  msg = 'Fetching ' + decodeURI(url)
+  console.info(msg)
   let response;
   try {
     response = await fetch(url);
   } catch (e) {
     console.warn('fetch failed', e);
-    updating = false;
     err_status = '<br>Lost online connectivity.  Try again later.';
     throw null;
   }
@@ -810,13 +849,13 @@ async function fetch_to_cache(cache, url, base64) {
     throw null;
   }
 
-  // Pay attention to the global stop_updating variable and
+  // Pay attention to the global stop_update_flag variable and
   // bail out if it becomes true.  We put this check just before
   // the cache.put() so that we don't update the cache after
-  // stop_updating becomes true.
-  if (stop_updating){
+  // stop_update_flag becomes true.
+  if (stop_update_flag){
     // No error handling is required.  Just stop.
-    console.info('updating is now stopped');
+    console.info('update is now stopped');
     throw null;
   }
 
@@ -830,6 +869,7 @@ async function fetch_to_cache(cache, url, base64) {
 // Record new_url_to_base64 to the indexedDB and begin using it as the current
 // url_to_base64.
 async function record_urls() {
+  console.info('record_urls()');
   let db = await open_db();
 
   // Clear margin.  This is a separate transaction since I suspect that
@@ -854,43 +894,43 @@ async function record_urls() {
   err_status = '';
 }
 
-async function delete_old_files(cache) {
-  if (base64_to_delete.length) {
-    updating = 'Deleting out-of-date cached files';
-    console.info(updating)
+async function delete_obs_files(cache) {
+  console.info('delete_obs_files()');
+  activity = 'busy';
+
+  var total = obs_base64_to_delete.length;
+  while (obs_base64_to_delete.length) {
+    msg = 'Queued deletion of ' + (total - obs_base64_to_delete.length) + ' / ' + total + ' obsolete cached files';
+    await cache.delete(obs_base64_to_delete.pop());
   }
 
-  for (let i = 0; i < base64_to_delete.length; i++) {
-    if (stop_updating) {
-      console.info('updating is now stopped');
+  msg = 'Waiting for browser to process ' + total + ' deleted files.';
+  console.info('done');
+}
+
+async function delete_old_files(cache) {
+  console.info('delete_old_files()');
+
+  var total = old_base64_to_delete.length;
+  while (old_base64_to_delete.length) {
+    // delete_old_files() is called from update_cache(),
+    // so it needs to pay attention to stop_update_flag.
+    if (stop_update_flag) {
+      console.info('update is now stopped');
       throw null;
     }
 
-    let base64 = base64_to_delete[i];
-    console.info('Deleting', base64);
-    await cache.delete(base64);
+    msg = 'Queued deletion of ' + (total - old_base64_to_delete.length) + ' / ' + total + ' old files';
+    await cache.delete(old_base64_to_delete.pop());
   }
-  base64_to_delete = [];
+
+  msg = 'Waiting for browser to process ' + total + ' deleted files.';
+  console.info('done');
 }
 
 function is_cache_up_to_date() {
   let files_to_fetch = (Object.keys(base64_to_kb).length);
-  let cached_files_to_delete = base64_to_delete.length;
-  if (files_to_fetch || cached_files_to_delete || url_diff) {
-    if (files_to_fetch) {
-      console.info('files to fetch:', files_to_fetch);
-    }
-    if (cached_files_to_delete) {
-      console.info('cached files to delete:', cached_files_to_delete);
-    }
-    if (url_diff) {
-      console.info('url_diff');
-    }
-    updating = false;
-  } else {
-    updating = 'Up to date';
-    console.info('Up to date');
-  }
+  return !(files_to_fetch || url_diff);
 }
 
 // Update cache usage estimate.

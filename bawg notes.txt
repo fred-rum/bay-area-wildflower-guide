@@ -1036,7 +1036,16 @@ Do something smart when the usage is 0 in Firefox (because storage
 persistence was requested).
 And change 'browser allows up to' to 'browser allows at least'.
 
-As soon as the indexedDB is written, the top_msg should go to green,
-even if there are a lot of out-of-date cache files to delete.
 
-Use 'obsolete' instead of 'out-of-date'?
+Clearing the site data during an update creates an insane exception.
+For an unrecognized exception, should I revalidate the cache?
+(I.e. start over from the beginning.)
+
+Don't delete obsolete files if not online/no url_data differences.
+But then if the deletion is interrupted, they'll hang out indefinitely
+if there are no more changes.
+
+Delete all cache files by simply deleting the cache.  That feels
+reasonably safe now that we wait for an in-progress update to stop
+first (although maybe I'd also need to wait for file deletion to stop,
+too).
