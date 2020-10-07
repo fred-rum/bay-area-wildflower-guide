@@ -44,11 +44,14 @@ var new_url_to_base64;
 // url_diff indicates whether new_url_to_base64 differs from url_to_base64.
 var url_diff;
 
-// base64_to_kb indicates how many KB are required for each file (as
-// represented by a base64 hash).  It initially contains all of the 
-// base64 keys in new_url_to_base64, but is later adjusted to include
+// base64_to_kb indicates how many KB are required for each new file
+// (as represented by a base64 hash).
 // only those files that aren't yet cached.
 var base64_to_kb = {};
+
+// base64_wanted indicates which files we need to fetch during an update.
+// It is the subset of base64_to_kb that is not already cached.
+var base64_wanted = {};
 
 // kb_total is the total KB needed by new_url_to_base64;
 var kb_total = 0;
@@ -397,15 +400,19 @@ async function count_cached(cache) {
     old_base64[base64] = true;
   }
 
-  let requests = await cache.keys();
+  // Is this really how you copy a dictionary in Javascript?  Crazy.
+  base64_wanted = Object.assign({}, base64_to_kb);
+
   console.info('checking base64 keys in the cache');
+  let requests = await cache.keys();
+
   for (let i = 0; i < requests.length; i++) {
     let base64 = remove_scope_from_request(requests[i]);
     if (base64 in base64_to_kb) {
       kb_cached += base64_to_kb[base64];
 
-      // Entries left in base64_to_kb are ones that need to be fetched.
-      delete base64_to_kb[base64];
+      // Entries left in base64_wanted are ones that need to be fetched.
+      delete base64_wanted[base64];
     } else if (base64 in old_base64) {
       old_base64_to_delete.push(base64);
     } else {
@@ -820,15 +827,13 @@ async function clear_margin() {
 async function fetch_all_to_cache(cache) {
   for (let url in new_url_to_base64) {
     let base64 = new_url_to_base64[url]
-    if (base64 in base64_to_kb) {
+    if (base64 in base64_wanted) {
       await protected_write(cache, async => fetch_to_cache(cache, url, base64));
 
-      let kb = base64_to_kb[base64];
+      kb_cached += base64_to_kb[base64];
 
       // Entries left in base64_to_kb are ones that need to be fetched.
-      delete base64_to_kb[base64];
-
-      kb_cached += kb;
+      delete base64_wanted[base64];
     }
   }
 }
@@ -936,7 +941,7 @@ async function delete_old_files(cache) {
 }
 
 function is_cache_up_to_date() {
-  let files_to_fetch = (Object.keys(base64_to_kb).length);
+  let files_to_fetch = (Object.keys(base64_wanted).length);
   return !(files_to_fetch || url_diff);
 }
 

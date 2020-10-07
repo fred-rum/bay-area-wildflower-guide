@@ -5030,6 +5030,7 @@ var url_to_base64;
 var new_url_to_base64;
 var url_diff;
 var base64_to_kb = {};
+var base64_wanted = {};
 var kb_total = 0;
 var kb_cached = 0;
 var obs_base64_to_delete = [];
@@ -5152,13 +5153,14 @@ async function count_cached(cache) {
     let base64 = url_to_base64[url];
     old_base64[base64] = true;
   }
-  let requests = await cache.keys();
+  base64_wanted = Object.assign({}, base64_to_kb);
   console.info('checking base64 keys in the cache');
+  let requests = await cache.keys();
   for (let i = 0; i < requests.length; i++) {
     let base64 = remove_scope_from_request(requests[i]);
     if (base64 in base64_to_kb) {
       kb_cached += base64_to_kb[base64];
-      delete base64_to_kb[base64];
+      delete base64_wanted[base64];
     } else if (base64 in old_base64) {
       old_base64_to_delete.push(base64);
     } else {
@@ -5403,11 +5405,10 @@ async function clear_margin() {
 async function fetch_all_to_cache(cache) {
   for (let url in new_url_to_base64) {
     let base64 = new_url_to_base64[url]
-    if (base64 in base64_to_kb) {
+    if (base64 in base64_wanted) {
       await protected_write(cache, async => fetch_to_cache(cache, url, base64));
-      let kb = base64_to_kb[base64];
-      delete base64_to_kb[base64];
-      kb_cached += kb;
+      kb_cached += base64_to_kb[base64];
+      delete base64_wanted[base64];
     }
   }
 }
@@ -5479,7 +5480,7 @@ async function delete_old_files(cache) {
   console.info('done');
 }
 function is_cache_up_to_date() {
-  let files_to_fetch = (Object.keys(base64_to_kb).length);
+  let files_to_fetch = (Object.keys(base64_wanted).length);
   return !(files_to_fetch || url_diff);
 }
 async function update_usage() {
