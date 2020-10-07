@@ -126,7 +126,9 @@ function poll_cache(event, msg='poll') {
   let secs = Math.floor((polls_since_response * poll_interval) / 1000);
   if (secs >= 3) {
     timed_out = true;
-    e_err_status.innerHTML = '<br>No response from the service worker for ' + secs + ' seconds.<br>Try closing the tab, waiting 10 seconds, and then returning to the Guide.  I don&rsquo;t know if that will work, but it sounds plausible.';
+    if (e_err_status) {
+      e_err_status.innerHTML = '<br>No response from the service worker for ' + secs + ' seconds.<br>It might recover eventually, or you might need to clear the site data from the browser.';
+    }
   }
 
   post_msg(msg)
@@ -146,6 +148,7 @@ function post_msg(msg) {
   polls_since_response++;
 }
 
+/* This function receives service worker messages only on the home page. */
 function fn_receive_status(event) {
   polls_since_response = 0;
 
@@ -192,7 +195,7 @@ function fn_receive_status(event) {
     // recovery.
     e_update.className = '';
     e_status.innerHTML = '';
-    e_err_status.innerHTML = 'Interface not in sync; try deleting the offline files and then refreshing the page.';
+    e_err_status.innerHTML = 'Interface not in sync; try clearing the site data and then refreshing the page.';
     e_usage.innerHTML = '';
     e_top_msg.style.display = 'none';
   }
