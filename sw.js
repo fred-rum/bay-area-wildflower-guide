@@ -1,7 +1,7 @@
 var url_data = [
-["swi.js", "O6tKnqJVyyhul6GJiM6PUFJWgOps-1Si17AxMw==", 7],
-["index.html", "YslVejirkf_1CV4uVwVrVbYr2Nj2UYbJ6G9g4A==", 6],
-["bawg.css", "gvDqJR3ZD51VOFKPniZQjv76MV7rUZrRZqeoRQ==", 11],
+["swi.js", "Sm1a5ms_u_oWfNJfLsO8FhHvjmYN4JSQtmr3Vg==", 7],
+["index.html", "XBESvbTPmK-CEpnXCpeBdLofk8-pYBJXwfb5Jw==", 6],
+["bawg.css", "fuqnoweHmAgEsfpGR6VNyxMHfwbW7UTQ9ge4pQ==", 11],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
 ["icons/check.svg", "GZFdGrKC4UpM0uywABrTQILfNZ7T0U6iI8sMaw==", 2],
 ["icons/hazard.svg", "HOkNZxg-3N8W8I-Pn34iXGD1ka6Q3IQWAutIyw==", 2],
@@ -5240,23 +5240,33 @@ function fn_send_status(event) {
     var mb_cached = (kb_cached/1024).toFixed(1);
   }
   var progress = mb_cached + ' / ' + mb_total + ' MB';
-  if (offline_ready) {
-    var update_button = 'Update Offline Files';
+  var status = progress + ' &ndash; ' + msg;
+  if (activity === 'init') {
+    progress = '';
+    status = msg;
+  } else if (activity === 'idle') {
+    msg = '';
+    status = progress;
+  }
+  if (activity !== 'update') {
+    if (offline_ready) {
+      var update_button = 'Update Offline Files';
+    } else {
+      var update_button = 'Save Offline Files';
+    }
   } else {
-    var update_button = 'Save Offline Files';
+    if (offline_ready) {
+      var update_button = 'Pause Updating';
+    } else {
+      var update_button = 'Pause Saving';
+    }
   }
   if (activity === 'init') {
     var update_class = 'update-disable';
     var clear_class = 'clear-disable';
-    var status = msg;
   } else if (activity === 'busy') {
     var update_class = 'update-disable';
     var clear_class = 'clear-disable';
-    if (progress) {
-      var status = progress + ' &ndash; ' + msg;
-    } else {
-      var status = msg;
-    }
   } else if (activity === 'delete') {
     if (is_cache_up_to_date()) {
       var update_class = 'update-disable';
@@ -5264,16 +5274,9 @@ function fn_send_status(event) {
       var update_class = 'update-update';
     }
     var clear_class = '';
-    var status = progress + ' &ndash; ' + msg;
   } else if (activity === 'update') {
     var update_class = 'update-stop';
     var clear_class = '';
-    var status = progress + ' &ndash; ' + msg;
-    if (offline_ready) {
-      var update_button = 'Pause Updating';
-    } else {
-      var update_button = 'Pause Saving';
-    }
   } else {
     var clear_class = '';
     if (is_cache_up_to_date()) {
@@ -5281,7 +5284,6 @@ function fn_send_status(event) {
     } else {
       var update_class = 'update-update';
     }
-    var status = progress;
   }
   var icon = undefined;
   var top_msg = undefined;
@@ -5299,6 +5301,8 @@ function fn_send_status(event) {
   var poll_msg = {
     update_button: update_button,
     update_class: update_class,
+    progress: progress,
+    msg: msg,
     status: status,
     err_status: err_status,
     usage: usage_msg,

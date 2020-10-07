@@ -561,28 +561,44 @@ function fn_send_status(event) {
     var mb_cached = (kb_cached/1024).toFixed(1);
   }
 
+  // Default messages.  Either of these may be modified below
+  // if it doesn't make sense for the current activity.
   var progress = mb_cached + ' / ' + mb_total + ' MB';
+
+  // status is used by old copies of swi.js,
+  // with progress combined with msg.
+  var status = progress + ' &ndash; ' + msg;
+
+  if (activity === 'init') {
+    progress = '';
+    status = msg;
+  } else if (activity === 'idle') {
+    msg = '';
+    status = progress;
+  }
 
   // This is the default update_button text.
   // We replace it further below for the 'update' activity.
-  if (offline_ready) {
-    var update_button = 'Update Offline Files';
+  if (activity !== 'update') {
+    if (offline_ready) {
+      var update_button = 'Update Offline Files';
+    } else {
+      var update_button = 'Save Offline Files';
+    }
   } else {
-    var update_button = 'Save Offline Files';
+    if (offline_ready) {
+      var update_button = 'Pause Updating';
+    } else {
+      var update_button = 'Pause Saving';
+    }
   }
 
   if (activity === 'init') {
     var update_class = 'update-disable';
     var clear_class = 'clear-disable';
-    var status = msg;
   } else if (activity === 'busy') {
     var update_class = 'update-disable';
     var clear_class = 'clear-disable';
-    if (progress) {
-      var status = progress + ' &ndash; ' + msg;
-    } else {
-      var status = msg;
-    }
   } else if (activity === 'delete') {
     if (is_cache_up_to_date()) {
       var update_class = 'update-disable';
@@ -590,18 +606,9 @@ function fn_send_status(event) {
       var update_class = 'update-update';
     }
     var clear_class = ''; // enabled
-    var status = progress + ' &ndash; ' + msg;
   } else if (activity === 'update') {
     var update_class = 'update-stop';
     var clear_class = ''; // enabled
-    var status = progress + ' &ndash; ' + msg;
-
-    // Change the update_button text for this activity only.
-    if (offline_ready) {
-      var update_button = 'Pause Updating';
-    } else {
-      var update_button = 'Pause Saving';
-    }
   } else { // idle
     var clear_class = ''; // enabled
     if (is_cache_up_to_date()) {
@@ -609,7 +616,6 @@ function fn_send_status(event) {
     } else {
       var update_class = 'update-update';
     }
-    var status = progress;
   }
 
   // offline_ready is initialized quickly so that we can respond to
@@ -639,6 +645,8 @@ function fn_send_status(event) {
   var poll_msg = {
     update_button: update_button,
     update_class: update_class,
+    progress: progress,
+    msg: msg,
     status: status,
     err_status: err_status,
     usage: usage_msg,

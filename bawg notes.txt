@@ -1051,10 +1051,6 @@ changes could force the document to be laid out before the CSS is
 loaded.  (Firefox complains.)  There's really no reason to not wait
 until the page is fully loaded.
 
-Separate the 'status' message into two parts ('progress' and 'msg'),
-but also send the current 'status' message for the benefit of old
-copies of swi.js.
-
 If quota < usage + ((kb_total - kb_cached) * 1.2),
 "The Guide will delete old files if necessary to make space for the update."
 When idle.

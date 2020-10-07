@@ -432,9 +432,12 @@ span.match {
 #update.update-stop:active {
     background-color: #9c8024;
 }
-#status {
+#progress {
     display: inline-block;
     vertical-align: middle;
+}
+#status {
+    display: block;
 }
 #err-status {
     display: block;

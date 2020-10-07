@@ -1,5 +1,6 @@
 
 let e_update;
+let e_progress;
 let e_status;
 let e_err_status;
 let e_clear;
@@ -21,6 +22,7 @@ async function swi_oninteractive() {
   e_update = document.getElementById('update');
   if (e_update) {
     e_status = document.getElementById('status');
+    e_progress = document.getElementById('progress');
     e_err_status = document.getElementById('err-status');
     e_clear = document.getElementById('clear');
     e_usage = document.getElementById('usage');
@@ -75,7 +77,7 @@ function poll_cache(event, msg='poll') {
   if (secs >= 3) {
     timed_out = true;
     if (e_err_status) {
-      e_err_status.innerHTML = '<br>No response from the service worker for ' + secs + ' seconds.<br>It might recover eventually, or you might need to clear the site data from the browser.';
+      e_err_status.innerHTML = 'No response from the service worker for ' + secs + ' seconds.<br>It might recover eventually, or you might need to clear the site data from the browser.';
     }
   }
   post_msg(msg)
@@ -98,8 +100,15 @@ function fn_receive_status(event) {
     if (msg.update_class !== old_msg.update_class) {
       e_update.className = msg.update_class;
     }
-    if (msg.status !== old_msg.status) {
-      e_status.innerHTML = msg.status;
+    if (msg.progress !== old_msg.progress) {
+      e_progress.innerHTML = msg.progress;
+    }
+    if (msg.msg !== old_msg.msg) {
+      if (msg.msg) {
+        e_status.innerHTML = msg.msg;
+      } else {
+        e_status.innerHTML = '&nbsp;'
+      }
     }
     if ((msg.err_status !== old_msg.err_status) || timed_out) {
       e_err_status.innerHTML = msg.err_status;
