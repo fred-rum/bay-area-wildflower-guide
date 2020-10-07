@@ -1057,3 +1057,6 @@ easier to present to the user.  E.g.
 - there is also an update that the user wants to get.
 This matters more in Firefox (slow to delete) than Chrome.
 Safari is unknown.
+
+Use guesstimate for Safari.
+"(browser limit unknown)"

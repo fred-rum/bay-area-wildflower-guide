@@ -1,6 +1,6 @@
 var url_data = [
 ["swi.js", "82b_VfCI9XdB63im42EgXwpt68WDlDme-bYOJg==", 7],
-["index.html", "62N_ibNxaQr1LTHY7RzSWh1Qr1lBLYQ6yX5fig==", 6],
+["index.html", "CGpFWmVqMaRf9PTZhuPTA_hX7zPXS_9DHQypVA==", 6],
 ["bawg.css", "CuaCFCr7-3tk3X5jEABfzwvLHdxgSawNwjWIew==", 10],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
 ["icons/check.svg", "GZFdGrKC4UpM0uywABrTQILfNZ7T0U6iI8sMaw==", 2],
@@ -5321,6 +5321,8 @@ async function delete_db() {
 }
 async function delete_all_cache_entries() {
   console.info('delete_all_cache_entries()')
+  await caches.delete(BASE64_CACHE_NAME);
+  return;
   let cache = await caches.open(BASE64_CACHE_NAME);
   let requests = await cache.keys();
   console.info('num to delete =', requests.length);
@@ -5488,7 +5490,9 @@ async function update_usage() {
     let estimate = await navigator.storage.estimate();
     let status_usage = (estimate.usage/1024/1024).toFixed(1)
     let status_quota = (estimate.quota/1024/1024/1024).toFixed(1)
-    if ((kb_cached == 0) && (status_usage < 10.0)) {
+    if (!(kb_cached ||
+          old_base64_to_delete.length ||
+          obs_base64_to_delete.length)) {
       usage = '0.0 MB';
     } else if (estimate.usage/1024 >= kb_cached + 0.1) {
       usage = status_usage + ' MB including overhead';
@@ -5497,7 +5501,7 @@ async function update_usage() {
     }
     usage += ' (browser allows up to ' + status_quota + ' GB)';
     if (!estimate.usage &&
-        ((kb_cached > 0) ||
+        (kb_cached ||
          old_base64_to_delete.length ||
          obs_base64_to_delete.length)) {
       let kb_per_file = kb_total / url_data.length;

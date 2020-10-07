@@ -691,6 +691,9 @@ async function delete_all_cache_entries() {
   // For some reason, caches.delete() often hangs for me.
   // So I delete all of the individual cache entries, instead.
   console.info('delete_all_cache_entries()')
+  await caches.delete(BASE64_CACHE_NAME);
+  return;
+
   let cache = await caches.open(BASE64_CACHE_NAME);
   let requests = await cache.keys();
 
@@ -953,9 +956,14 @@ async function update_usage() {
     let status_quota = (estimate.quota/1024/1024/1024).toFixed(1)
 
     // The running service worker itself counts as significant usage
-    // (e.g. 0.5 MB).  To avoid confusing the user, we treat the cache
-    // as 'empty' if usage is low and we don't have any cached files.
-    if ((kb_cached == 0) && (status_usage < 10.0)) {
+    // (0.5 MB to more than 10 MB, depending on activity).
+    // Addionally, it can take a long time for the usage to update after
+    // clearing the caches (perhaps even forever when idle).
+    // Both problems can be fixed by pretending the usage is 0.0 when
+    // we don't have any cached files.
+    if (!(kb_cached ||
+          old_base64_to_delete.length ||
+          obs_base64_to_delete.length)) {
       usage = '0.0 MB';
     } else if (estimate.usage/1024 >= kb_cached + 0.1) {
       usage = status_usage + ' MB including overhead';
@@ -973,7 +981,7 @@ async function update_usage() {
     // The result replaces the normal usage calculation, and is in a
     // completely different format.
     if (!estimate.usage &&
-        ((kb_cached > 0) ||
+        (kb_cached ||
          old_base64_to_delete.length ||
          obs_base64_to_delete.length)) {
 
