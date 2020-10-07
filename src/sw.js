@@ -776,6 +776,17 @@ async function protected_write(cache, func) {
   return await func();
 }
 
+// Open the DB and write a single object to it.
+async function write_obj(obj) {
+  let db = await open_db();
+  await write_obj_to_db(db, obj);
+}
+
+// Write an object to an open DB.
+async function write_obj_to_db(db, obj) {
+  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
+}
+
 // Store ~4 to 8 MB of junk in the indexedDB.
 // If we're able to perform all non-critical writes with this margin in place,
 // then after removing the margin we're sure to have space remaining for
@@ -797,17 +808,13 @@ async function write_margin() {
 
   let obj = {key: 'margin',
              junk: junk};
-
-  let db = await open_db();
-  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
+  await write_obj(obj);
 }
 
 async function clear_margin() {
-  let db = await open_db();
-
   let obj = {key: 'margin',
              junk: ''};
-  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
+  await write_obj(obj);
 }
 
 async function fetch_all_to_cache(cache) {
@@ -877,13 +884,13 @@ async function record_urls() {
   // cause more space to be allocated before the margin space is freed.
   let obj = {key: 'margin',
              junk: ''};
-  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
+  await write_obj_to_db(db, obj);
 
   // Write data.
   obj = {key: 'data',
          url_to_base64: new_url_to_base64
         };
-  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
+  await write_obj_to_db(db, obj);
 
   url_to_base64 = new_url_to_base64;
   url_diff = false;

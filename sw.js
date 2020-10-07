@@ -5378,6 +5378,13 @@ async function protected_write(cache, func) {
   }
   return await func();
 }
+async function write_obj(obj) {
+  let db = await open_db();
+  await write_obj_to_db(db, obj);
+}
+async function write_obj_to_db(db, obj) {
+  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
+}
 async function write_margin() {
   let junk = [];
   let n = 4*1024*1024/8;
@@ -5386,14 +5393,12 @@ async function write_margin() {
   }
   let obj = {key: 'margin',
              junk: junk};
-  let db = await open_db();
-  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
+  await write_obj(obj);
 }
 async function clear_margin() {
-  let db = await open_db();
   let obj = {key: 'margin',
              junk: ''};
-  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
+  await write_obj(obj);
 }
 async function fetch_all_to_cache(cache) {
   for (let url in new_url_to_base64) {
@@ -5438,11 +5443,11 @@ async function record_urls() {
   let db = await open_db();
   let obj = {key: 'margin',
              junk: ''};
-  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
+  await write_obj_to_db(db, obj);
   obj = {key: 'data',
          url_to_base64: new_url_to_base64
         };
-  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
+  await write_obj_to_db(db, obj);
   url_to_base64 = new_url_to_base64;
   url_diff = false;
   offline_ready = true;
