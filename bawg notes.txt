@@ -1019,23 +1019,12 @@ might work.
 
 
 Make a top_msg for when the guide is operating online.  E.g.
-{in blue} [wifi symbol] The Guide is currently operating online.
-
-
-If url_diff is true and there are cache entries owned by neither the
-old url_to_base64 nor new_url_to_base64, they can be immediately
-deleted.  (If url_diff is false, those files may be from a partial
-download, and we're now offline and can't see the update.)
+{in blue or gray} [wifi symbol] The Guide is currently operating online.
 
 
 Create an 'other' directory with txt files for index, chrome, safari,
 and firefox.  Parse those with either a search bar or hazard icon.
 Remember the differing relative path.
-
-Do something smart when the usage is 0 in Firefox (because storage
-persistence was requested).
-And change 'browser allows up to' to 'browser allows at least'.
-
 
 Clearing the site data during an update creates an insane exception.
 For an unrecognized exception, should I revalidate the cache?
@@ -1053,7 +1042,7 @@ until the page is fully loaded.
 
 If quota < usage + ((kb_total - kb_cached) * 1.2),
 "The Guide will delete old files if necessary to make space for the update."
-When idle.
+When idle and there is an update pending and old files present.
 
 Debug SVG size with CSS.
 Can use 192.168.1.10 for debug as long as I make the icons visible by default.

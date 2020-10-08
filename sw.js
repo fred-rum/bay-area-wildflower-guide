@@ -1,10 +1,10 @@
 var url_data = [
-["swi.js", "Sm1a5ms_u_oWfNJfLsO8FhHvjmYN4JSQtmr3Vg==", 7],
+["swi.js", "4cmM-7aDQqy410VsdpQPHGaH6104lxuyxY6nag==", 7],
 ["index.html", "XBESvbTPmK-CEpnXCpeBdLofk8-pYBJXwfb5Jw==", 6],
 ["bawg.css", "fuqnoweHmAgEsfpGR6VNyxMHfwbW7UTQ9ge4pQ==", 11],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
 ["icons/check.svg", "GZFdGrKC4UpM0uywABrTQILfNZ7T0U6iI8sMaw==", 2],
-["icons/hazard.svg", "HOkNZxg-3N8W8I-Pn34iXGD1ka6Q3IQWAutIyw==", 2],
+["icons/hazard.svg", "6g0CQQRwPZe8wGDPx-poD7GRyrJHoPUHoqP5zw==", 2],
 ["search.js", "6YHbUaV0ouH__ihZfU_zGRPO9Lc0hpDyvc5PAQ==", 14],
 ["pages.js", "f-5cyRuqlRvNrRt7h-R3n9Fx2xjJSUXBEqp66g==", 127],
 ["manifest.webmanifest", "XGY5f7xv7yhxwxGbwWWhPfwDB3ICJv-oYatFwg==", 1],

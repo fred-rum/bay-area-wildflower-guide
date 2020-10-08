@@ -44,7 +44,7 @@ async function swi_oninteractive() {
     } catch (e) {
       console.warn('service worker registration failed', e);
       if (e_status) {
-        e_status.innerHTML = 'New service worker failed to load.  Manually clearing all site data might help.';
+        e_status.innerHTML = 'Service worker failed to load.  Manually clearing all site data might help.';
       }
       return;
     }
