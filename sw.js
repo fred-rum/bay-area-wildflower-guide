@@ -1,6 +1,6 @@
 var url_data = [
 ["swi.js", "4cmM-7aDQqy410VsdpQPHGaH6104lxuyxY6nag==", 7],
-["index.html", "XBESvbTPmK-CEpnXCpeBdLofk8-pYBJXwfb5Jw==", 6],
+["index.html", "ERRJPyz7VSaTO--LwOpAfiTfrpIFVYRTSiy6nA==", 6],
 ["bawg.css", "fuqnoweHmAgEsfpGR6VNyxMHfwbW7UTQ9ge4pQ==", 11],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
 ["icons/check.svg", "GZFdGrKC4UpM0uywABrTQILfNZ7T0U6iI8sMaw==", 2],
@@ -5366,8 +5366,6 @@ async function delete_db() {
 }
 async function delete_all_cache_entries() {
   console.info('delete_all_cache_entries()')
-  await caches.delete(BASE64_CACHE_NAME);
-  return;
   let cache = await caches.open(BASE64_CACHE_NAME);
   let requests = await cache.keys();
   console.info('num to delete =', requests.length);
