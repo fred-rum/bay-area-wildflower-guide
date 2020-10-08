@@ -1039,5 +1039,10 @@ If quota < usage + ((kb_total - kb_cached) * 1.2),
 "The Guide will delete old files if necessary to make space for the update."
 When idle and there is an update pending and old files present.
 Better, add it to the usage message.
+Use hysteresis to avoid flicker during update, e.g. < 1.2x to appear,
+> 1.25x to disappear.  Or use a +C constant of a few tens of MB.
+May need to adjust C when the margin is written.
+Note that as soon as quota is reached, old files become obsolete,
+so the message disappears exactly as we'd like.
 
 increase margin to 20+ MB?
