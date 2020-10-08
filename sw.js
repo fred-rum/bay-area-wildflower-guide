@@ -5366,6 +5366,8 @@ async function delete_db() {
 }
 async function delete_all_cache_entries() {
   console.info('delete_all_cache_entries()')
+  await caches.delete(BASE64_CACHE_NAME);
+  return;
   let cache = await caches.open(BASE64_CACHE_NAME);
   let requests = await cache.keys();
   console.info('num to delete =', requests.length);

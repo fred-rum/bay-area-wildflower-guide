@@ -1030,11 +1030,6 @@ Clearing the site data during an update creates an insane exception.
 For an unrecognized exception, should I revalidate the cache?
 (I.e. start over from the beginning.)
 
-Delete all cache files by simply deleting the cache.  That feels
-reasonably safe now that we wait for an in-progress update to stop
-first (although maybe I'd also need to wait for file deletion to stop,
-too).
-
 swi.js starts polling on DOMContentLoaded, and the resulting element
 changes could force the document to be laid out before the CSS is
 loaded.  (Firefox complains.)  There's really no reason to not wait
@@ -1043,6 +1038,3 @@ until the page is fully loaded.
 If quota < usage + ((kb_total - kb_cached) * 1.2),
 "The Guide will delete old files if necessary to make space for the update."
 When idle and there is an update pending and old files present.
-
-Debug SVG size with CSS.
-Can use 192.168.1.10 for debug as long as I make the icons visible by default.
