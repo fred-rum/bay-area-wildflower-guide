@@ -736,18 +736,17 @@ async function delete_db() {
 async function delete_all_cache_entries() {
   console.info('delete_all_cache_entries()')
 
+  // For some reason, caches.delete() can really screw up some browsers.
+  // In particular, Firefox just fails to free the space, even if I let
+  // everything settle before deleting, and even if I quit the browser
+  // and restart.
+  // 
+  // So I delete all of the individual cache entries, instead.
+/*
   await caches.delete(BASE64_CACHE_NAME);
   return;
+*/
 
-  // Now that stop_activity() is fixed, it looks like clearing the cache
-  // all at once also works.  But leaving the code below for a bit just
-  // in case I need it...
-
-  // For some reason, caches.delete() can really screw up some browsers.
-  // E.g. I suspect that Firefox keeps a shadow copy in case there's more
-  // activity, but then that shadow copy never goes away, even after a
-  // browser restart.  So I delete all of the individual cache entries,
-  // instead.
   let cache = await caches.open(BASE64_CACHE_NAME);
   let requests = await cache.keys();
 

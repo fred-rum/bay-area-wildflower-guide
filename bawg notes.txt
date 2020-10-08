@@ -1038,3 +1038,6 @@ until the page is fully loaded.
 If quota < usage + ((kb_total - kb_cached) * 1.2),
 "The Guide will delete old files if necessary to make space for the update."
 When idle and there is an update pending and old files present.
+Better, add it to the usage message.
+
+increase margin to 20+ MB?
