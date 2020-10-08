@@ -755,7 +755,7 @@ async function delete_all_cache_entries() {
   for (let i = 0; i < requests.length; i++) {
     msg = 'Queued deletion of ' + i + ' / ' + requests.length + ' files';
     let request = requests[i]
-    cache.delete(request);
+    await cache.delete(request);
   }
 
   msg = 'Waiting for browser to process ' + requests.length + ' deleted files.';

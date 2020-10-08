@@ -1046,3 +1046,9 @@ Note that as soon as quota is reached, old files become obsolete,
 so the message disappears exactly as we'd like.
 
 increase margin to 20+ MB?
+
+Is it worth increasing the parallelism of the update process?  E.g. 8
+threads, each popping URLs from the stack until they're all gone.
+The master process can fork them off with Promise.all.  Note that each
+thread runs synchronous sections atomically, so e.g. pop is atomic.
+How to manage the cache socket, though?
