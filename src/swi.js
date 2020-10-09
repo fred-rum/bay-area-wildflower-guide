@@ -1,5 +1,7 @@
 // This script handles the document end of ServiceWorker interaction (swi).
 
+'use strict';
+
 var e_update;
 var e_progress;
 var e_status;
@@ -54,8 +56,8 @@ async function swi_oninteractive() {
     e_usage = document.getElementById('usage');
 
     let top_msg_array = ['green', 'yellow', 'online'];
-    for (i = 0; i < top_msg_array.length; i++) {
-      top_msg = top_msg_array[i];
+    for (let i = 0; i < top_msg_array.length; i++) {
+      let top_msg = top_msg_array[i];
       e_top_msg[top_msg] = document.getElementById('cache-' + top_msg);
       console.info(top_msg, e_top_msg[top_msg]);
     }
@@ -71,7 +73,7 @@ async function swi_oninteractive() {
 
   if ('serviceWorker' in navigator) {
     try {
-      registration = await navigator.serviceWorker.register(sw_path);
+      var registration = await navigator.serviceWorker.register(sw_path);
     } catch (e) {
       console.warn('service worker registration failed', e);
       if (e_status) {
@@ -113,7 +115,7 @@ function start_polling(registration) {
     e_clear.addEventListener('click', fn_clear);
 
     navigator.serviceWorker.addEventListener('message', fn_receive_status);
-  } else {
+  } else if (e_body) {
     navigator.serviceWorker.addEventListener('message', fn_receive_icon);
   }
 
@@ -175,17 +177,19 @@ function fn_receive_status(event) {
       e_progress.innerHTML = msg.progress;
     }
 
-    if (msg.msg !== old_msg.msg) {
-      if (msg.msg) {
+    // Since e_status and e_err_status depend on each other occasionally,
+    // update both if either updates.
+    if ((msg.msg !== old_msg.msg) ||
+        (msg.err_status !== old_msg.err_status) ||
+        timed_out) {
+      if (msg.msg || msg.err_status) {
         e_status.innerHTML = msg.msg;
       } else {
         // To avoid elements jumping unnecessarily, always allocate at least
-        // one line to the status.
+        // one line to the status (or err_status).
         e_status.innerHTML = '&nbsp;'
       }
-    }
 
-    if ((msg.err_status !== old_msg.err_status) || timed_out) {
       // If we previously had a 'time out' message, always replace it
       // (or clear it) when we get a new poll response.
       e_err_status.innerHTML = msg.err_status;
@@ -216,7 +220,8 @@ function fn_receive_status(event) {
     // sw.js always auto-updates.  If swi.js is cached, communication could
     // break down.  If so, we want to make clear what steps might lead to
     // recovery.
-    e_update.className = '';
+    e_update.className = 'update-update';
+    e_clear.className = '';
     e_status.innerHTML = '';
     e_err_status.innerHTML = 'Interface not in sync; try clearing the site data and then refreshing the page.';
     e_usage.innerHTML = '';
@@ -230,7 +235,6 @@ function fn_update(event) {
     // break down.  So regardless of what we *think* the status is, always
     // send the 'update' message and let the service worker sort it out.
     post_msg('update');
-    e_update.className = 'update-disable';
     localStorage.removeItem('yellow_expire');
 
     init_permissions();
@@ -320,12 +324,13 @@ async function update_wakelock(msg) {
       // Perhaps a low battery.
       // In any case, fine, no wakelock.
       console.warn('wakelock request failed:', e);
+      wakelock = undefined;
     }
   } else if (msg.update_class != 'update-stop' && wakelock) {
     try {
       console.info('releasing wakelock');
-      wakelock.release();
       wakelock = undefined;
+      wakelock.release();
     } catch (e) {
       // Maybe this will never happen, but I wouldn't be surprised, e.g.
       // if the system kills our wakelock just before we try to release it.
@@ -336,12 +341,11 @@ async function update_wakelock(msg) {
 
 function fn_wakelock_released() {
   console.info('fn_wakelock_released()');
-  wakelock = undefined;
 }
 
 async function init_permissions() {
   if (navigator.storage) {
     let persistent = await navigator.storage.persist();
     console.info('persistent =', persistent);
-  }
+   }
 }

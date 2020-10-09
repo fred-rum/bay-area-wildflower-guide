@@ -1,4 +1,5 @@
 
+'use strict';
 var e_update;
 var e_progress;
 var e_status;
@@ -29,8 +30,8 @@ async function swi_oninteractive() {
     e_clear = document.getElementById('clear');
     e_usage = document.getElementById('usage');
     let top_msg_array = ['green', 'yellow', 'online'];
-    for (i = 0; i < top_msg_array.length; i++) {
-      top_msg = top_msg_array[i];
+    for (let i = 0; i < top_msg_array.length; i++) {
+      let top_msg = top_msg_array[i];
       e_top_msg[top_msg] = document.getElementById('cache-' + top_msg);
       console.info(top_msg, e_top_msg[top_msg]);
     }
@@ -42,7 +43,7 @@ async function swi_oninteractive() {
   }
   if ('serviceWorker' in navigator) {
     try {
-      registration = await navigator.serviceWorker.register(sw_path);
+      var registration = await navigator.serviceWorker.register(sw_path);
     } catch (e) {
       console.warn('service worker registration failed', e);
       if (e_status) {
@@ -67,7 +68,7 @@ function start_polling(registration) {
     e_update.addEventListener('click', fn_update);
     e_clear.addEventListener('click', fn_clear);
     navigator.serviceWorker.addEventListener('message', fn_receive_status);
-  } else {
+  } else if (e_body) {
     navigator.serviceWorker.addEventListener('message', fn_receive_icon);
   }
   poll_cache(undefined, 'start');
@@ -104,14 +105,14 @@ function fn_receive_status(event) {
     if (msg.progress !== old_msg.progress) {
       e_progress.innerHTML = msg.progress;
     }
-    if (msg.msg !== old_msg.msg) {
-      if (msg.msg) {
+    if ((msg.msg !== old_msg.msg) ||
+        (msg.err_status !== old_msg.err_status) ||
+        timed_out) {
+      if (msg.msg || msg.err_status) {
         e_status.innerHTML = msg.msg;
       } else {
         e_status.innerHTML = '&nbsp;'
       }
-    }
-    if ((msg.err_status !== old_msg.err_status) || timed_out) {
       e_err_status.innerHTML = msg.err_status;
     }
     if (msg.usage !== old_msg.usage) {
@@ -132,7 +133,8 @@ function fn_receive_status(event) {
     update_wakelock(msg);
   } catch (e) {
     console.error('polling msg error:', e);
-    e_update.className = '';
+    e_update.className = 'update-update';
+    e_clear.className = '';
     e_status.innerHTML = '';
     e_err_status.innerHTML = 'Interface not in sync; try clearing the site data and then refreshing the page.';
     e_usage.innerHTML = '';
@@ -142,7 +144,6 @@ function fn_receive_status(event) {
 function fn_update(event) {
   if (navigator.serviceWorker) {
     post_msg('update');
-    e_update.className = 'update-disable';
     localStorage.removeItem('yellow_expire');
     init_permissions();
   }
@@ -207,12 +208,13 @@ async function update_wakelock(msg) {
       wakelock.addEventListener('release', fn_wakelock_released);
     } catch (e) {
       console.warn('wakelock request failed:', e);
+      wakelock = undefined;
     }
   } else if (msg.update_class != 'update-stop' && wakelock) {
     try {
       console.info('releasing wakelock');
-      wakelock.release();
       wakelock = undefined;
+      wakelock.release();
     } catch (e) {
       console.warn('wakelock release failed:', e);
     }
@@ -220,11 +222,10 @@ async function update_wakelock(msg) {
 }
 function fn_wakelock_released() {
   console.info('fn_wakelock_released()');
-  wakelock = undefined;
 }
 async function init_permissions() {
   if (navigator.storage) {
     let persistent = await navigator.storage.persist();
     console.info('persistent =', persistent);
-  }
+   }
 }

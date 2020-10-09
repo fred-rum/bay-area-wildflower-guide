@@ -1,3 +1,5 @@
+'use strict';
+
 var url_data = [
 /* insert code here */
 ];
@@ -803,15 +805,20 @@ async function update_cache() {
     msg = 'Preparing update';
     let cache = await caches.open(BASE64_CACHE_NAME);
     await protected_write(cache, write_margin);
-    await fetch_all_to_cache(cache);
+
+    let func = async function() {
+      await fetch_all_to_cache_parallel(cache);
+    };
+
+    await protected_write(cache, func);
+
     await record_urls();
     make_old_files_obsolete();
   } catch (e) {
     if (!e) {
       // If we receive a null, then the error has been sufficiently
       // handled already.
-    } else if ((e.name === 'QuotaExceededError') ||
-               (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE')){
+    } else if (is_quota_exceeded(e)) {
       console.warn(e);
       err_status = 'Not enough offline storage available.  Sorry.';
       console.warn(err_status);
@@ -848,15 +855,14 @@ async function protected_write(cache, func) {
     } catch (e) {
       // The documented standard is 'QuotaExceededError'.
       // Testing reveals that Firefox throws a different exception, however.
-      quota_error = (e && ((e.name === 'QuotaExceededError') ||
-                           (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE')));
-      if (quota_error && obs_base64_to_delete) {
+      let quota_exceeded = is_quota_exceeded(e);
+      if (quota_exceeded && obs_base64_to_delete.length) {
         // Delete obsolete files.
         err_status = 'Storage limit reached.  Deleting obsolete files before continuing.';
         await delete_obs_files(cache);
         err_status = '';
         // now fall through and loop again.
-      } else if (quota_error && old_base64_to_delete.length) {
+      } else if (quota_exceeded && old_base64_to_delete.length) {
         // Delete old files.
         err_status = 'Storage limit reached.  Reverting to online mode so that old files can be deleted.';
         offline_ready = false;
@@ -870,6 +876,11 @@ async function protected_write(cache, func) {
       }
     }
   }
+}
+
+function is_quota_exceeded(e) {
+  return (e && ((e.name === 'QuotaExceededError') ||
+                (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE')));
 }
 
 // Open the DB and write a single object to it.
@@ -913,25 +924,75 @@ async function clear_margin() {
   await write_obj(obj);
 }
 
-async function fetch_all_to_cache(cache) {
+// Dispatch multiple asynchronous threads, each fetching URLs to the cache.
+// If any thread encounters an exception, it stops all threads, then throws
+// the exception up the chain.  A thread that is stopped in this manner
+// simply returns.  It does not throw anything, as that would just confuse
+// the issue.
+var stop_parallel_threads;
+async function fetch_all_to_cache_parallel(cache) {
+  stop_parallel_threads = false;
+
+  let promises = [fetch_all_to_cache(cache, 0),
+                  fetch_all_to_cache(cache, 1),
+                  fetch_all_to_cache(cache, 2),
+                  fetch_all_to_cache(cache, 3),
+                  fetch_all_to_cache(cache, 4),
+                  fetch_all_to_cache(cache, 5)];
+  var results = await Promise.allSettled(promises);
+
+  // If any thread has an exception, throw it up the chain.
+  // If there are multiple exceptions, a quota-exceeded exception
+  // has lowest priority.  Otherwise, take the first.
+  var e_quota;
+  for (let i = 0; i < results.length; i++){
+    if (results[i].status === 'rejected') {
+      let e = results[i].reason;
+      if (is_quota_exceeded(e)) {
+        e_quota = e;
+      } else {
+        throw e;
+      }
+    }
+  }
+  if (e_quota) throw e_quota;
+
+  console.info(results);
+}
+
+async function fetch_all_to_cache(cache, id) {
   for (let url in new_url_to_base64) {
+    await check_stop('update (before fetch)');
+
+    if (stop_parallel_threads) {
+      console.info('stopping parallel thread ' + id);
+      return;
+    }
+
     let base64 = new_url_to_base64[url]
     if (base64 in base64_wanted) {
-      await protected_write(cache, async function () {
-        await fetch_to_cache(cache, url, base64)
-      });
+      // Entries left in base64_to_kb are ones that need to be fetched.
+      // Update it immediately so that parallel threads don't pick the
+      // same URL/base64 to fetch.
+      delete base64_wanted[base64];
+
+      try {
+        await fetch_to_cache(cache, url, base64);
+      } catch (e) {
+        // Put the aborted base64 value back into base64_wanted.
+        base64_wanted[base64] = true;
+        console.info(base64_wanted);
+
+        stop_parallel_threads = true;
+        throw e;
+      }
 
       kb_cached += base64_to_kb[base64];
-
-      // Entries left in base64_to_kb are ones that need to be fetched.
-      delete base64_wanted[base64];
     }
   }
 }
 
 async function fetch_to_cache(cache, url, base64) {
-  await check_stop('update (before fetch)');
-
   msg = 'Fetching ' + decodeURI(url)
   console.info(msg)
   let response;
@@ -954,7 +1015,10 @@ async function fetch_to_cache(cache, url, base64) {
     throw null;
   }
 
-  await check_stop('update (before cache.put)');
+  // It'd be nice to stop here if stop_activity_flag or stop_parallel_threads
+  // is asserted, but it'd be a pain to exit this function and ensure that
+  // base64_wanted is restored.  So we only stop in fetch_all_to_cache, which
+  // has the requesite data on hand.
 
   // The fetch was successful.  Now write the result to the cache.
   //

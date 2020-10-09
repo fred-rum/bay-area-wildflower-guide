@@ -1,12 +1,13 @@
+'use strict';
 var url_data = [
-["swi.js", "aZeZlz0wLNYI233jj5K690Ur9IYMYys-JqZnow==", 8],
+["swi.js", "IaYK7fbRrbdIaITTiTIBpEc0k6jwsSyt-pvX5Q==", 8],
 ["index.html", "dSxoLMKwXMTxCFb8C7ro0bXUU3I_FT80_LwvFw==", 6],
 ["bawg.css", "wt8gMMTDw8zqw5ufP2JQteohAKn__T6mlqqAjQ==", 11],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
 ["icons/online.svg", "V-n9Y6IMGrtTzQbte88RvxhNWq3UGukTp4SOCQ==", 2],
 ["icons/check.svg", "GZFdGrKC4UpM0uywABrTQILfNZ7T0U6iI8sMaw==", 2],
 ["icons/hazard.svg", "6g0CQQRwPZe8wGDPx-poD7GRyrJHoPUHoqP5zw==", 2],
-["search.js", "6YHbUaV0ouH__ihZfU_zGRPO9Lc0hpDyvc5PAQ==", 14],
+["search.js", "MhbPgZqXQrBAvZnq0PMGljyLuIjiCgTreO68sg==", 14],
 ["pages.js", "f-5cyRuqlRvNrRt7h-R3n9Fx2xjJSUXBEqp66g==", 127],
 ["manifest.webmanifest", "XGY5f7xv7yhxwxGbwWWhPfwDB3ICJv-oYatFwg==", 1],
 ["chrome.html", "nhdcpn7iK7O6dUNe_p6KFoSi23sKiK4J1EJdZg==", 4],
@@ -5020,31 +5021,146 @@ console.info('starting from the beginning');
 var DB_NAME = 'db-v1';
 var DB_VERSION = 1;
 var BASE64_CACHE_NAME = 'base64-cache-v1';
+// Activity is 'init', 'busy', 'delete', 'update', or 'idle'.
+// An initial 'init' activity prevents updates until everything
+// is initialized.
 var activity = 'init';
 var msg = 'Checking for offline files';
 var err_status = '';
 var usage_msg = '';
+// There are some occasions where I allow an activity to be interrupted.
+// For that, we set a flag to tell the activity to stop at the next
+// opportunity, and we then await its promise (which otherwise is allowed
+// to run and complete asynchronously).
 var stop_activity_flag = false;
 var activity_promise;
+// offline_ready is undefined when we haven't yet checked the indexedDB.
+//
+// offline_ready is false when we've checked the indexedDB and didn't
+// find any URL data, which means that we don't think we have a complete
+// copy of all offline files.
+//
+// offline_ready is true when we've successfully read the URL data from
+// the indexedDB, which implies that the offline copy was completely
+// fetched some time in the past.  Unfortunate circumstances might have
+// corrupted the data, but that's what the offline_ready flag is really
+// for; corrupted data is presented very differently to the user than
+// no data (or incomplete data).
 var offline_ready = undefined;
+// url_to_base64 is the mapping of URL to base64 key that we're currently
+// using for checking the cache.  It is initialized from the indexedDB,
+// but is updated to new_url_to_base64 when the cache is updated.
 var url_to_base64;
+// new_url_to_base64 is the most up-to-date mapping of URL to base64.
+// It is used to update the cache when the user is ready.
 var new_url_to_base64;
+// url_diff indicates whether new_url_to_base64 differs from url_to_base64.
 var url_diff;
+// base64_to_kb indicates how many KB are required for each new file
+// (as represented by a base64 hash).
+// only those files that aren't yet cached.
 var base64_to_kb = {};
+// base64_wanted indicates which files we need to fetch during an update.
+// It is the subset of base64_to_kb that is not already cached.
 var base64_wanted = {};
+// kb_total is the total KB needed by new_url_to_base64;
 var kb_total = 0;
+// kb_cached is the total KB needed by new_url_to_base64 and already
+// cached (i.e. a subset of kb_total).
 var kb_cached = 0;
+// obs_base64_to_delete indicates which base64 keys in the cache are not
+// needed by url_to_base64 or new_url_to_base64, so they can be deleted
+// anytime.
 var obs_base64_to_delete = [];
+// old_base64_to_delete indicates which base64 keys in the cache are
+// needed by url_to_base64 but not by url_to_base64, so they can be
+// delete once an update is complete.
 var old_base64_to_delete = [];
+/*** Install the service worker ***/
+// If this service worker (sw.js) is already registered, then the
+// browser has it in its cache and executes it before fetching
+// *anything* from the site it is registered to handle.  In this
+// scenario, the service handler registers its fetch handler and
+// handles the site fetches either from cache or online.  Eventually
+// we fetch swi.js, and when that executes, it tries to register
+// sw.js again.  If sw.js can't be found online, then the new
+// registration process is tossed out, and we just keep executing
+// with the browser's copy of sw.js.  The same thing happens if the
+// online sw.js is identical to the browser's copy.  However, if
+// the online sw.js is different, then it kicks off the installation
+// process.
+//
+// Now in a normal PWA, the 'install' handler goes off and fetches
+// and caches all the URLs that it wants.  Then, when the service
+// worker gets activated (e.g. during the next site visit, perhaps
+// while offline), it can fetch the cached URLs instead of downloading
+// them online.
+//
+// However, my PWA is different and does essentially nothing when it
+// is installed.  Only when there is explicit user interaction will
+// it start updating the cache.
+//
+//
+// The above describes what happens when the service worker is already
+// registered.  If it is being encountered for the first time, then
+// nothing happens until swi.js tries to register it.  The browser
+// fetches sw.js and executes it, then calls the 'install' handler.
+// In this case, the service worker doesn't process any fetches
+// until it is activated.
 self.addEventListener('install', fn_install);
 async function fn_install(event) {
   console.info('fn_install()');
+  // If there was a previous service worker, by default this new one
+  // simply waits during this session and becomes the new service worker
+  // in the *next* session.  By calling skipWaiting(), we immediately
+  // replace the previous service worker to become the active one.
+  //
+  // We don't care if skipWaiting completes while we're in this handler
+  // or if it happens later in the waiting state, so we don't need to
+  // wrap it in event.waitUntil().
   self.skipWaiting();
 }
+/*** when the service worker is activated ***/
+// Once installation of a service worker is finished, it is activated.
+// But it won't do anything until the next refresh.  To make it start
+// processing fetch requests immediately, we call claim().  We call it
+// for all clients, not just the one that registered the service worker,
+// because we want all windows to stay in sync.
+//
+// Note that it's not just that all clients are running the same version
+// of the service worker.  All clients are *sharing* the same service worker,
+// so we generally don't to worry about changes happening elsewhere and not
+// being reflected here.
+//
+// When we claim the service worker, the browser lets the previous one
+// finish what it's doing before killing it.  If it's just fetching
+// something from the cache, the transactions are atomic and so safe.
+// But if the other worker is in the middle of an update, and then the new
+// one also starts updating, weird things could happen.  That requires the
+//  following sequence:
+// - the user starts an update
+// - I update sw.js on the server
+// - the user hits refresh (or navigates around before returning to index.html)
+// - the user starts another update
+// This last step isn't ridiculous since as far as the user can tell, the
+// previous update just mysteriously stopped.
+//
+// Even here, the results shouldn't be terrible.  The kb counts could go
+// weird, but all the right files should end up in the indexedDB and cache.
 self.addEventListener('activate', event => {
   console.info('activate');
   clients.claim();
 });
+/*** convert callbacks to promises ***/
+// Some interfaces use callbacks, but we'd rather use Promises.
+// async_callbacks() converts a callback interface into a Promise.
+//
+// The first parameter, 'request', is a request that has been made.
+// We assume that it has callbacks 'onsuccess' and 'onerror', and
+// async_callbacks() assigns those callbacks.
+// - When the 'onsuccess' callback is called, the promise is resolved
+//   and returns the request.result.
+// - When the 'onerror' callback is called, the promise is rejected.
 function async_callbacks(request) {
   return new Promise((resolve, reject) => {
     request.onsuccess = (event) => {
@@ -5055,8 +5171,22 @@ function async_callbacks(request) {
     }
   });
 }
+/*** Handle a fetch request ***/
+// The 'fetch' event handler must be added synchronously during the
+// first script execution.  We cannot wait until the URL DB has been
+// read, because that's asynchronous!  See the fetch_handler() code
+// below for how we handle the race of read_db() and fetch_handler().
 console.info('adding fetch handler');
 self.addEventListener('fetch', fetch_handler);
+// Remove the prepended scope from the URL of a request.
+// The scope is a string such as 'https://localhost:8000/'.
+//
+// It also removes any trailing #anchor.
+//
+// This function can be performed on a real fetch request (which has
+// a real URL) or on a key from the cache (which the cache has tried
+// to format as a URL, but with a base64 value in place of the
+// relative URL).
 function remove_scope_from_request(request) {
   let url = request.url;
   let scope_end = registration.scope.length
@@ -5067,22 +5197,46 @@ function remove_scope_from_request(request) {
     return url.substring(scope_end, anchor_pos);
   }
 }
+// Handle a fetch request from a client (window/tab).
+// Map the URL to a base64 encoding (from the indexedDB), then
+// map the base64 encoding to a cache entry.
 function fetch_handler(event) {
+  // The request is guaranteed to be in scope, so we can simply
+  // remove the scope to get the relative URL.
   let url = remove_scope_from_request(event.request);
   console.info('fetching', url);
   if ((!url_to_base64) || (url in url_to_base64)) {
+    // There is a race condition between initializing url_to_base64
+    // and fetching the first URL.  Fortunately, our fetch
+    // response is allowed to be asynchronous.  So if we recognize
+    // the URL *or* we don't have url_to_base64 yet, tell the event
+    // to wait until we can create a fetch response.
     event.respondWith(fetch_response(event, url));
   } else {
+    // We got here because the URL wasn't recognized in url_to_base64,
+    // which can happen either because url_to_base64 is empty (and
+    // offline_ready is false) or because we're trying to fetch a file
+    // that we don't recognize.
     if (offline_ready) {
       console.info(url, 'not recognized')
     }
+    // I found some documentation that says that performance is
+    // better if we simply fail to handle a request, in which case
+    // the browser performs the default online fetch.
     return;
   }
 }
 async function fetch_response(event, url) {
+  // As described in fetch_handler() above, we might be here because
+  // we don't have url_to_base64 yet.  Presumably url_to_base64 is
+  // already in the process of being read from the indexedDB, but I'm
+  // not sure how to wait for that result.  Instead I take the simple
+  // path of simply reading it again.
   if (!url_to_base64) {
     await read_db();
   }
+  // Now we're guaranteed to have url_to_base64 and can proceed with
+  // checking the cache.
   let response = await caches.match(url_to_base64[url]);
   console.info(response);
   if (response) {
@@ -5093,6 +5247,22 @@ async function fetch_response(event, url) {
     return fetch(event.request);
   }
 }
+/*** Read the old url_to_base64 ***/
+// Until the user manually updates the cache again, we want to continue
+// using the old url_to_base64 that was used to update the cache last time.
+// E.g.
+// - the user is online and updates the cache.
+// - the user is online and visits the site again and gets a new sw.js,
+//   but the user doesn't update the cache.
+// - the user goes offline.
+// In this case, the registered sw.js has a different URL->base64 map
+// than what was used when creating the cache.  Trying to use the new
+// url_to_base64 would result in cache misses, which is bad.
+//
+// The indexedDB stores the url_to_base64 value that was present when
+// the cache was last updated.  We use this old url_to_base64 until the
+// user updates the cache again.
+// Read the cached url_to_base64.
 async function read_db() {
   console.info('read_db()');
   let db = await open_db();
@@ -5110,21 +5280,45 @@ async function read_db() {
     offline_ready = false;
   }
   console.info('url_to_base64 =', url_to_base64);
+  // Note that we throw away the db value when we exit.
+  // My guess is that this allows the DB connection to close.
 }
 async function open_db() {
   let request = indexedDB.open(DB_NAME, DB_VERSION);
+  // There is no documented provision for the request to wait for the
+  // onupgradeneeded callback to complete before calling onsuccess.
+  // I see two possibilities:
+  // - the request assumes that dbupgradeneeded queued the necessary
+  //   transactions, so everything will be fine.
+  // - the request waits for all upgrade transactions to complete and
+  //   somehow never interrupts between when one transaction completes
+  //   and the next starts.  Perhaps this is possible in our single thread.
+  //
+  // In any case, the onupgradeneeded path doesn't need to be hooked in
+  // with the async_callbacks promise.  It just does its own thing when
+  // necessary.
   request.onupgradeneeded = dbupgradeneeded;
   let db = await async_callbacks(request);
   console.info('open_db() returns', db);
   return db;
 }
+// This function is called when the indexedDB is accessed for the first time.
+// (It will also be called if I increment the version number, in which case
+// I need to adjust this code to avoid an error.)
 async function dbupgradeneeded(event) {
   let db = event.target.result;
   db.createObjectStore("url_data", { keyPath: "key" });
 }
+/*** Get the cache status ***/
+// This code figure out how much information has been cached and how much
+// more would be cached if the user asks for a cache update.
 init_status();
 async function init_status() {
   console.info('init_status()');
+  // Read the old url_to_base64 from indexedDB.
+  // Note that the fetch handler will also call read_db() if it needs
+  // it before we're done here.  But we still call it here in order to
+  // compare it to the new_url_to_base64.
   await read_db();
   msg = 'Validating offline files';
   let cache = await caches.open(BASE64_CACHE_NAME);
@@ -5132,8 +5326,13 @@ async function init_status() {
   check_url_diff();
   activity = 'idle';
 }
+// Check how many KB of the new base64 values already have a file cached.
+// Also compute the total KB that will be cached if the cache is updated.
 async function count_cached(cache) {
   console.info('count_cached()');
+  // This function might be called a second time after the caches are
+  // clear, so be sure to throw away old values before accumulating
+  // new data.
   base64_to_kb = {};
   obs_base64_to_delete = [];
   old_base64_to_delete = [];
@@ -5148,11 +5347,14 @@ async function count_cached(cache) {
     base64_to_kb[base64] = kb;
     kb_total += kb;
   }
+  // Generate a temporary dictionary of old base64 keys from the
+    // old url_to_base64 data read earlier.
   let old_base64 = {};
   for (let url in url_to_base64) {
     let base64 = url_to_base64[url];
     old_base64[base64] = true;
   }
+  // Is this really how you copy a dictionary in Javascript?  Crazy.
   base64_wanted = Object.assign({}, base64_to_kb);
   console.info('checking base64 keys in the cache');
   let requests = await cache.keys();
@@ -5160,6 +5362,7 @@ async function count_cached(cache) {
     let base64 = remove_scope_from_request(requests[i]);
     if (base64 in base64_to_kb) {
       kb_cached += base64_to_kb[base64];
+      // Entries left in base64_wanted are ones that need to be fetched.
       delete base64_wanted[base64];
     } else if (base64 in old_base64) {
       old_base64_to_delete.push(base64);
@@ -5168,9 +5371,18 @@ async function count_cached(cache) {
     }
   }
 }
+// Compare the old url_to_base64 with new_url_to_base64.
+// This tells us whether we need to update the indexedDB.
+// Generally we'd expect to only need to update the indexedDB when
+// there are also cache changes to perform, but there are other
+// possibilities, e.g.
+// - I swap the names (URLs) of two files in the cache, or
+// - The user manually deletes indexedDB.
 function check_url_diff() {
   console.info('check_url_diff()');
   url_diff = false;
+  // Check if any old URLs are missing from new_url_to_base64 or have
+  // different base64 values.
   for (let url in url_to_base64) {
     if (!(url in new_url_to_base64)) {
       console.info(url, 'not found in new_url_to_base64');
@@ -5183,6 +5395,9 @@ function check_url_diff() {
       return;
     }
   }
+  // Check if any new URLs are missing from the old url_to_base64.
+  // We already compared the base64 values for entries that match,
+  // so we don't have to do that part again.
   for (let url in new_url_to_base64) {
     if (!(url in url_to_base64)) {
       console.info(url, 'not found in the old url_to_base64');
@@ -5192,10 +5407,17 @@ function check_url_diff() {
   }
   console.info('done with check_url_diff()');
 }
+/*** delete unused caches ***/
+// This code is not needed by any other code, so it happens whenever
+// it feels like and finishes whenever it wants.
 delete_unused_caches();
 async function delete_unused_caches() {
   console.info('delete_unused_caches()');
+  // Remove any old caches I might have left lying around from
+  // previous versions of the code.
   var cacheNames = await caches.keys();
+  // I deliberately skip an 'await' on this Promise because I don't need
+  // the results for anything.
   Promise.all(
     cacheNames.map(function(cacheName) {
       if (cacheName !== BASE64_CACHE_NAME) {
@@ -5204,14 +5426,26 @@ async function delete_unused_caches() {
     })
   );
 }
+/*** Handle messages related to user interaction ***/
+// Listen for messages from clients and respond with status info.
+// The client initiates the message exchange because the status info
+// is only needed by index.html, so we don't want to spam any other
+// clients that are viewing different pages.
 self.addEventListener('message', fn_send_status);
 function fn_send_status(event) {
+  // Most messages are polling for status.
+  // But regardless of the message type, always update the status.
+  // If this is the first poll after the page is refreshed, clear
+  // the old err_status.  I know longer remember why this was useful.
   if (event.data == 'start') {
     err_status = '';
   }
+  /////////////////////////////////////////////////////////////////////////////
+  // Respond to an activity request.
   if (event.data === 'update') {
     if ((activity === 'idle') || (activity === 'delete')) {
       if (is_cache_up_to_date()) {
+        // do nothing
         console.info('cache is up to date: ignore update request');
       } else {
         update_cache_when_ready();
@@ -5219,6 +5453,7 @@ function fn_send_status(event) {
     } else if (activity === 'update') {
       pause_update();
     } else {
+      // Ignore the request in other states.
       console.info(activity + ': ignore update request');
     }
   } else if (event.data === 'clear') {
@@ -5227,20 +5462,32 @@ function fn_send_status(event) {
         (activity === 'update')) {
       clear_caches();
     } else {
+      // Ignore the request in other states.
       console.info(activity + ': ignore delete request');
     }
   }
+  // If nothing else is going on, delete obsolete files.
   if ((activity === 'idle') && obs_base64_to_delete.length) {
     activity_promise = idle_delete_obs_files();
     monitor_promise();
   }
+  /////////////////////////////////////////////////////////////////////////////
+  // Respond to the poll with our status.
+  // Pretend that we need a bit more data than we actually do.
+  // That way, if there's a tiny bit more data to fetch
+  // (or only data to delete, or an indexedDB to update),
+  // it appears as if there is still 0.1 MB of data to cache.
   var mb_total = (kb_total/1024 + 0.1).toFixed(1);
   if (is_cache_up_to_date()) {
     var mb_cached = mb_total;
   } else {
     var mb_cached = (kb_cached/1024).toFixed(1);
   }
+  // Default messages.  Either of these may be modified below
+  // if it doesn't make sense for the current activity.
   var progress = mb_cached + ' / ' + mb_total + ' MB';
+  // status is used by old copies of swi.js,
+  // with progress combined with msg.
   var status = progress + ' &ndash; ' + msg;
   if (activity === 'init') {
     progress = '';
@@ -5249,6 +5496,8 @@ function fn_send_status(event) {
     msg = '';
     status = progress;
   }
+  // This is the default update_button text.
+  // We replace it further below for the 'update' activity.
   if (activity !== 'update') {
     if (offline_ready) {
       var update_button = 'Update Offline Files';
@@ -5274,18 +5523,21 @@ function fn_send_status(event) {
     } else {
       var update_class = 'update-update';
     }
-    var clear_class = '';
+    var clear_class = ''; // enabled
   } else if (activity === 'update') {
     var update_class = 'update-stop';
-    var clear_class = '';
-  } else {
-    var clear_class = '';
+    var clear_class = ''; // enabled
+  } else { // idle
+    var clear_class = ''; // enabled
     if (is_cache_up_to_date()) {
       var update_class = 'update-disable';
     } else {
       var update_class = 'update-update';
     }
   }
+  // offline_ready is initialized quickly so that we can respond to
+  // initial fetches as soon as possible.  But don't set the top_msg
+  // until we've checked whether what color it should be.
   var icon = undefined;
   var top_msg = undefined;
   if (activity !== 'init') {
@@ -5295,6 +5547,8 @@ function fn_send_status(event) {
       } else {
         var top_msg = 'yellow';
         if (activity !== 'update') {
+          // The yellow icon is only shown on non-home pages when an update
+          // is needed *and* no update is in progress.
           var icon = 'yellow';
         }
       }
@@ -5302,6 +5556,10 @@ function fn_send_status(event) {
       var top_msg = 'online';
     }
   }
+  // Update the cache usage estimate.
+  // We don't actually wait for its asynchronous operation to finish
+  // since that would break this event handler, but hopefully it'll be
+  // ready by the next time we poll.
   update_usage();
   var poll_msg = {
     update_button: update_button,
@@ -5322,14 +5580,17 @@ async function pause_update() {
   activity = 'idle'
   err_status = '';
 }
+// If activity is ongoing, tell it to stop, then wait for it to stop.
 async function stop_activity() {
   if (activity === 'update') {
     msg = 'Pausing update in progress';
   } else if (activity === 'delete') {
     msg = 'Pausing deletions';
   } else if (activity === 'idle') {
+    // No activity to stop.
     return;
   } else {
+    // We should never be trying to stop 'init' or 'busy' activity.
     console.error('stop_activity() called when activity is ' + activity);
     throw 'oops';
   }
@@ -5342,6 +5603,12 @@ async function stop_activity() {
   console.info('activity stopped');
 }
 async function clear_caches() {
+  // We allow the delete button to be clicked while the cache is being
+  // updated or obsolete files are being deleted.  When that happens,
+  // we terminate the other activity progressing to the delete action.
+  //
+  // (Note that we do *not* allow the delete button to do anything while
+  // the same delete is already in progress.)
   await stop_activity();
   console.info('clear_caches()');
   activity = 'busy';
@@ -5353,6 +5620,7 @@ async function clear_caches() {
     offline_ready = false;
     await delete_db();
     await delete_all_cache_entries();
+    // Reset which files need to be cached, similar to init_status().
     let cache = await caches.open(BASE64_CACHE_NAME);
     await count_cached(cache);
     check_url_diff();
@@ -5366,11 +5634,23 @@ async function clear_caches() {
   activity = 'idle';
 }
 async function delete_db() {
+  // For some reason, indexedDB.deleteDatabase() often hangs for me.
+  // So I clear the objectStore, instead.
   let db = await open_db();
   await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").clear());
 }
 async function delete_all_cache_entries() {
   console.info('delete_all_cache_entries()')
+  // For some reason, caches.delete() can really screw up some browsers.
+  // In particular, Firefox just fails to free the space, even if I let
+  // everything settle before deleting, and even if I quit the browser
+  // and restart.
+  //
+  // So I delete all of the individual cache entries, instead.
+/*
+  await caches.delete(BASE64_CACHE_NAME);
+  return;
+*/
   let cache = await caches.open(BASE64_CACHE_NAME);
   let requests = await cache.keys();
   console.info('num to delete =', requests.length);
@@ -5383,14 +5663,30 @@ async function delete_all_cache_entries() {
   console.info('done with delete_all_cache_entries()');
 }
 async function update_cache_when_ready() {
+  // We allow a cache update to be initiated while obsolete files are
+  // being deleted.  When that happens, we terminate the deletion before
+  // progressing to the cache update.
   await stop_activity();
+  // There is no current activity, so start updating the cache.
+  // By default, we don't wait for it to finish.
+  // But we do record its promise so that clear_cache() can wait for it
+  // to halt if necessary.
   activity_promise = update_cache();
   monitor_promise();
 }
+// Monitor the activity promise so that the console will clearly show if
+// the promise ends too soon.  Note that it's perfectly fine for multiple
+// entities to wait for a promise to resolve.  All of the callbacks will
+// be called (or awaits returned) when the promise is resolved.  And the
+// promise remains live for as long as a variable holds its value, so if
+// any callback is added (or await started) after the activity is complete,
+// the callback is resolved immediately.
 async function monitor_promise() {
   await activity_promise;
   console.info('activity_promise complete');
 }
+// When requested, switch to using the new URL data
+// and update the cache to match.
 async function update_cache() {
   console.info('update_cache()');
   activity = 'update';
@@ -5399,13 +5695,17 @@ async function update_cache() {
     msg = 'Preparing update';
     let cache = await caches.open(BASE64_CACHE_NAME);
     await protected_write(cache, write_margin);
-    await fetch_all_to_cache(cache);
+    let func = async function() {
+      await fetch_all_to_cache_parallel(cache);
+    };
+    await protected_write(cache, func);
     await record_urls();
     make_old_files_obsolete();
   } catch (e) {
     if (!e) {
-    } else if ((e.name === 'QuotaExceededError') ||
-               (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE')){
+      // If we receive a null, then the error has been sufficiently
+      // handled already.
+    } else if (is_quota_exceeded(e)) {
       console.warn(e);
       err_status = 'Not enough offline storage available.  Sorry.';
       console.warn(err_status);
@@ -5413,6 +5713,7 @@ async function update_cache() {
       console.error(e);
       err_status = e.name + '<br>Something went wrong.  Refresh and try again?';
     }
+    // Clear the margin.
     try {
       await clear_margin();
     } catch (e) {
@@ -5420,36 +5721,56 @@ async function update_cache() {
       err_status = e.name + '<br>Something went wrong.  Refresh and try again?';
     }
   }
+  // Whether we completed succesfully or bailed out on an error,
+  // we're idle now.
   activity = 'idle';
 }
+// Wrap a function call in code that reacts appropriately to quota errors.
+// If the write fails while there is old or obsolete data that can be deleted,
+// delete the old data and try again.  If the write still fails, throw the
+// exception back to the caller to handle.
 async function protected_write(cache, func) {
+  // Keep trying until we run out of options.
   while (true) {
     try {
+      // Make sure to wait for func() to asynchronously finish.
+      // Otherwise we won't catch its errors.
       return await func();
     } catch (e) {
-      quota_error = (e && ((e.name === 'QuotaExceededError') ||
-                           (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE')));
-      if (quota_error && obs_base64_to_delete) {
+      // The documented standard is 'QuotaExceededError'.
+      // Testing reveals that Firefox throws a different exception, however.
+      let quota_exceeded = is_quota_exceeded(e);
+      if (quota_exceeded && obs_base64_to_delete.length) {
+        // Delete obsolete files.
         err_status = 'Storage limit reached.  Deleting obsolete files before continuing.';
         await delete_obs_files(cache);
         err_status = '';
-      } else if (quota_error && old_base64_to_delete.length) {
+        // now fall through and loop again.
+      } else if (quota_exceeded && old_base64_to_delete.length) {
+        // Delete old files.
         err_status = 'Storage limit reached.  Reverting to online mode so that old files can be deleted.';
         offline_ready = false;
         make_old_files_obsolete();
         await delete_db();
         await delete_obs_files(cache);
         err_status = 'Storage limit reached.  Reverted to online mode so that old files could be deleted.';
+        // now fall through and loop again.
       } else {
         throw e;
       }
     }
   }
 }
+function is_quota_exceeded(e) {
+  return (e && ((e.name === 'QuotaExceededError') ||
+                (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE')));
+}
+// Open the DB and write a single object to it.
 async function write_obj(obj) {
   let db = await open_db();
   await write_obj_to_db(db, obj);
 }
+// Write an object to an open DB.
 async function write_obj_to_db(db, obj) {
   await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").put(obj));
 }
@@ -5468,20 +5789,53 @@ async function clear_margin() {
              junk: ''};
   await write_obj(obj);
 }
-async function fetch_all_to_cache(cache) {
+var stop_parallel_threads;
+async function fetch_all_to_cache_parallel(cache) {
+  stop_parallel_threads = false;
+  let promises = [fetch_all_to_cache(cache, 0),
+                  fetch_all_to_cache(cache, 1),
+                  fetch_all_to_cache(cache, 2),
+                  fetch_all_to_cache(cache, 3),
+                  fetch_all_to_cache(cache, 4),
+                  fetch_all_to_cache(cache, 5)];
+  var results = await Promise.allSettled(promises);
+  var e_quota;
+  for (let i = 0; i < results.length; i++){
+    if (results[i].status === 'rejected') {
+      let e = results[i].reason;
+      if (is_quota_exceeded(e)) {
+        e_quota = e;
+      } else {
+        throw e;
+      }
+    }
+  }
+  if (e_quota) throw e_quota;
+  console.info(results);
+}
+async function fetch_all_to_cache(cache, id) {
   for (let url in new_url_to_base64) {
+    await check_stop('update (before fetch)');
+    if (stop_parallel_threads) {
+      console.info('stopping parallel thread ' + id);
+      return;
+    }
     let base64 = new_url_to_base64[url]
     if (base64 in base64_wanted) {
-      await protected_write(cache, async function () {
-        await fetch_to_cache(cache, url, base64)
-      });
-      kb_cached += base64_to_kb[base64];
       delete base64_wanted[base64];
+      try {
+        await fetch_to_cache(cache, url, base64);
+      } catch (e) {
+        base64_wanted[base64] = true;
+        console.info(base64_wanted);
+        stop_parallel_threads = true;
+        throw e;
+      }
+      kb_cached += base64_to_kb[base64];
     }
   }
 }
 async function fetch_to_cache(cache, url, base64) {
-  await check_stop('update (before fetch)');
   msg = 'Fetching ' + decodeURI(url)
   console.info(msg)
   let response;
@@ -5502,7 +5856,6 @@ async function fetch_to_cache(cache, url, base64) {
     err_status = response.status + ' - ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
     throw null;
   }
-  await check_stop('update (before cache.put)');
   await cache.put(base64, response);
 }
 async function record_urls() {

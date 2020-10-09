@@ -1,6 +1,6 @@
 /* Copyright Chris Nelson - All rights reserved. */
 
-"use strict";
+'use strict';
 
 var ac_is_hidden = true;
 function expose_ac() {
