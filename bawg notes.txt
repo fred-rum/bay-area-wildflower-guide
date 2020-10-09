@@ -1048,28 +1048,6 @@ so the message disappears exactly as we'd like.
 increase margin to 20+ MB?
 
 
-Is it worth increasing the parallelism of the update process?  E.g. 8
-threads, each popping URLs from the stack until they're all gone.
-The master process can fork them off with Promise.all.  Note that each
-thread runs synchronous sections atomically, so e.g. pop is atomic.
-How to manage the cache socket, though?
-It doesn't help in deleting cache entries in Firefox.
-Original time to save offline files:
-Firefox: 0:44.5
-Chrome: 10:08
-w/ 3 threads:
-Firefox: 0:39.6
-Chrome: 5:33
-w/ 4 threads:
-Firefox: 0:21.3
-Chrome: 4:24
-w/ 6 threads:
-Firefox: 0:38.5
-Chrome: 3:20
-w/ 8 threads:
-Firefox: 0:28.5
-Chrome: 3:16
-
 Use a yellow/red gradiant for the icon when an update is available
 *and* a red hazard is present.  Display both (or all) messages on the
 home page.
@@ -1078,3 +1056,13 @@ Instead of having 'delete offline files' be 'busy', can it be merged
 with delete_obs_files()?  I.e. the delete can effectively be canceled
 by re-updating.  Perhaps a flag for 'delete everything', and delete
 what's in base64_to_kb last (while updating kb_cached).
+
+We assume that all_base64 reflects what's in the cache, but:
+- a normal fetch does a cache match without reference to all_base64.
+- after deleting all files, re-validate the cache.
+  . should be quick if the cache is empty
+  . I can see how files might disappear out of the cache without reason,
+    but how would they appear and thus remain after deleting all files?
+
+Can I queue an update while the cache is being validated?
+E.g. give it an activity_promise, but ignore stop_activity_flag.

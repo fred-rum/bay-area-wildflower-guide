@@ -5057,25 +5057,26 @@ var new_url_to_base64;
 // url_diff indicates whether new_url_to_base64 differs from url_to_base64.
 var url_diff;
 // base64_to_kb indicates how many KB are required for each new file
-// (as represented by a base64 hash).
-// only those files that aren't yet cached.
-var base64_to_kb = {};
-// base64_wanted indicates which files we need to fetch during an update.
-// It is the subset of base64_to_kb that is not already cached.
-var base64_wanted = {};
+// (as represented by a base64 key).  It is also used to determine
+// whether a cached base64 key is needed by the new url_data.
+var base64_to_kb;
+// old_base64 indicates the base64 keys being used by the old url_data.
+// The values are meaningless; only the keys are used.
+var old_base64;
+// all_base64 indicates the base64 keys currently in the cache.
+// The values are meaningless; only the keys are used.
+var all_base64;
+// Keep track of the number of files that are unneeded by either the
+// old url_data or the new url_data.  (Obsolete files.)
+var num_obs_files;
+// Keep track of the number of files that are used by old url_data but
+// aren't needed by the new url_data.  (Old files.)
+var num_old_files;
 // kb_total is the total KB needed by new_url_to_base64;
 var kb_total = 0;
 // kb_cached is the total KB needed by new_url_to_base64 and already
 // cached (i.e. a subset of kb_total).
 var kb_cached = 0;
-// obs_base64_to_delete indicates which base64 keys in the cache are not
-// needed by url_to_base64 or new_url_to_base64, so they can be deleted
-// anytime.
-var obs_base64_to_delete = [];
-// old_base64_to_delete indicates which base64 keys in the cache are
-// needed by url_to_base64 but not by url_to_base64, so they can be
-// delete once an update is complete.
-var old_base64_to_delete = [];
 /*** Install the service worker ***/
 // If this service worker (sw.js) is already registered, then the
 // browser has it in its cache and executes it before fetching
@@ -5334,10 +5335,12 @@ async function count_cached(cache) {
   // clear, so be sure to throw away old values before accumulating
   // new data.
   base64_to_kb = {};
-  obs_base64_to_delete = [];
-  old_base64_to_delete = [];
+  old_base64 = {};
+  all_base64 = {};
   kb_total = 0;
   kb_cached = 0;
+  num_old_files = 0;
+  num_obs_files = 0;
   new_url_to_base64 = {};
   for (let i = 0; i < url_data.length; i++) {
     let url = url_data[i][0];
@@ -5347,27 +5350,23 @@ async function count_cached(cache) {
     base64_to_kb[base64] = kb;
     kb_total += kb;
   }
-  // Generate a temporary dictionary of old base64 keys from the
-    // old url_to_base64 data read earlier.
-  let old_base64 = {};
+  // Generate a dictionary of old base64 keys from the old url_to_base64
+  // data read earlier.
   for (let url in url_to_base64) {
     let base64 = url_to_base64[url];
     old_base64[base64] = true;
   }
-  // Is this really how you copy a dictionary in Javascript?  Crazy.
-  base64_wanted = Object.assign({}, base64_to_kb);
   console.info('checking base64 keys in the cache');
   let requests = await cache.keys();
   for (let i = 0; i < requests.length; i++) {
     let base64 = remove_scope_from_request(requests[i]);
+    all_base64[base64] = true;
     if (base64 in base64_to_kb) {
       kb_cached += base64_to_kb[base64];
-      // Entries left in base64_wanted are ones that need to be fetched.
-      delete base64_wanted[base64];
     } else if (base64 in old_base64) {
-      old_base64_to_delete.push(base64);
+      num_old_files++;
     } else {
-      obs_base64_to_delete.push(base64);
+      num_obs_files++;
     }
   }
 }
@@ -5377,7 +5376,8 @@ async function count_cached(cache) {
 // there are also cache changes to perform, but there are other
 // possibilities, e.g.
 // - I swap the names (URLs) of two files in the cache, or
-// - The user manually deletes indexedDB.
+// - The user manually deleted the indexedDB, but the cached files remain
+//   up to date.
 function check_url_diff() {
   console.info('check_url_diff()');
   url_diff = false;
@@ -5467,7 +5467,7 @@ function fn_send_status(event) {
     }
   }
   // If nothing else is going on, delete obsolete files.
-  if ((activity === 'idle') && obs_base64_to_delete.length) {
+  if ((activity === 'idle') && num_obs_files) {
     activity_promise = idle_delete_obs_files();
     monitor_promise();
   }
@@ -5740,13 +5740,13 @@ async function protected_write(cache, func) {
       // The documented standard is 'QuotaExceededError'.
       // Testing reveals that Firefox throws a different exception, however.
       let quota_exceeded = is_quota_exceeded(e);
-      if (quota_exceeded && obs_base64_to_delete.length) {
+      if (quota_exceeded && num_obs_files) {
         // Delete obsolete files.
         err_status = 'Storage limit reached.  Deleting obsolete files before continuing.';
         await delete_obs_files(cache);
         err_status = '';
         // now fall through and loop again.
-      } else if (quota_exceeded && old_base64_to_delete.length) {
+      } else if (quota_exceeded && num_old_files) {
         // Delete old files.
         err_status = 'Storage limit reached.  Reverting to online mode so that old files can be deleted.';
         offline_ready = false;
@@ -5821,13 +5821,12 @@ async function fetch_all_to_cache(cache, id) {
       return;
     }
     let base64 = new_url_to_base64[url]
-    if (base64 in base64_wanted) {
-      delete base64_wanted[base64];
+    if (!(base64 in all_base64)) {
+      all_base64[base64] = true;
       try {
         await fetch_to_cache(cache, url, base64);
       } catch (e) {
-        base64_wanted[base64] = true;
-        console.info(base64_wanted);
+        delete all_base64[base64];
         stop_parallel_threads = true;
         throw e;
       }
@@ -5898,23 +5897,25 @@ async function idle_delete_obs_files() {
 }
 async function delete_obs_files(cache) {
   console.info('delete_obs_files()');
-  var total = obs_base64_to_delete.length;
-  while (obs_base64_to_delete.length) {
+  var total = num_obs_files;
+  for (let base64 in all_base64) {
     await check_stop('delete_obs_files()');
-    msg = 'Queued deletion of ' + (total - obs_base64_to_delete.length) + ' / ' + total + ' obsolete offline files';
-    await cache.delete(obs_base64_to_delete.pop());
+    if (!(base64 in base64_to_kb) && !(base64 in old_base64)) {
+      msg = 'Queued deletion of ' + (total - num_obs_files) + ' / ' + total + ' obsolete offline files';
+      await cache.delete(base64);
+      num_obs_files--;
+    }
   }
   console.info('done with delete_obs_files()');
+  console.assert(num_obs_files == 0);
 }
 function make_old_files_obsolete() {
-  while (old_base64_to_delete.length) {
-    obs_base64_to_delete.push(old_base64_to_delete.pop());
-  }
-  old_base64_to_delete = [];
+  old_base64 = {};
+  num_obs_files += num_old_files;
+  num_old_files = 0;
 }
 function is_cache_up_to_date() {
-  let files_to_fetch = (Object.keys(base64_wanted).length);
-  return !(files_to_fetch || url_diff);
+  return !url_diff;
 }
 async function update_usage() {
   if (navigator.storage) {
@@ -5931,9 +5932,8 @@ async function update_usage() {
   } else {
     var status_quota = (quota/1024/1024/1024).toFixed(1) + ' GB';
   }
-  if (!(kb_cached ||
-        old_base64_to_delete.length ||
-        obs_base64_to_delete.length)) {
+  let cache_empty = !(kb_cached || num_old_files || num_obs_files);
+  if (cache_empty) {
     usage_msg = 'Using 0.0 MB of offline storage.';
   } else if (usage/1024 >= kb_cached + 0.1) {
     usage_msg = 'Using ' + status_usage + ' (including overhead).';
@@ -5945,18 +5945,13 @@ async function update_usage() {
   } else {
     usage_msg += '<br>Browser allows up to ' + status_quota + '.';
   }
-  if (!usage &&
-      (kb_cached ||
-       old_base64_to_delete.length ||
-       obs_base64_to_delete.length)) {
+  if (!usage && !cache_empty) {
     let kb_per_file = kb_total / url_data.length;
-    let estimated_files = (old_base64_to_delete.length +
-                           obs_base64_to_delete.length);
-    let kb_estimate = kb_per_file * estimated_files;
-    if (kb_cached || estimated_files) {
-      status_usage = ((kb_cached + kb_estimate)/1024 + 0.1).toFixed(1) + ' MB'
-    } else {
+    let kb_estimate = kb_per_file * (num_old_files + num_obs_files);
+    if (cache_empty) {
       status_usage = '0.0 MB';
+    } else {
+      status_usage = ((kb_cached + kb_estimate)/1024 + 0.1).toFixed(1) + ' MB'
     }
     usage_msg = 'Using roughly ' + status_usage + '.';
     if (quota === undefined) {
