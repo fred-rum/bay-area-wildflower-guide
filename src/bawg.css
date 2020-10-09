@@ -961,8 +961,12 @@ span.match {
 }
 
 /* important messages on the home page */
+div#cache-online {
+    background-color: #a0e2f2;
+    padding: 5px;
+    border-radius: 15px;
+}
 div#cache-green {
-    display: none;
     background-color: #a3ffab;
     padding: 5px;
     border-radius: 15px;
@@ -981,7 +985,6 @@ span.cache-text {
     vertical-align: middle;
 }
 div#cache-yellow {
-    display: none;
     background-color: #faffa3;
     padding: 5px;
     border-radius: 15px;
@@ -996,14 +999,13 @@ img.hazard-img {
     margin-right: 3px;
 }
 div#icon {
-    display: none;
+    display: block;
     float: right;
     cursor: pointer;
+    padding: 5px;
 }
 div#icon.icon-yellow {
-    display: block;
     background-color: #faffa3;
-    padding: 5px;
 }
 
 /* When navigating from the hazard icon to the offline section, don't

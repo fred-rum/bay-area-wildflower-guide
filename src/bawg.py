@@ -680,6 +680,7 @@ if arg('-with_cache'):
         'index.html',
         'bawg.css',
         'icons/home.png',
+        'icons/online.svg', # might get fetched before we actually go online
         'icons/check.svg',
         'icons/hazard.svg',
         'search.js',

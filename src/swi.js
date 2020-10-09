@@ -1,14 +1,17 @@
 // This script handles the document end of ServiceWorker interaction (swi).
 
-let e_update;
-let e_progress;
-let e_status;
-let e_err_status;
+var e_update;
+var e_progress;
+var e_status;
+var e_err_status;
 
-let e_clear;
-let e_usage;
+var e_clear;
+var e_usage;
 
-let e_top_msg = {};
+var e_top_msg = {};
+
+var e_body;
+var e_icon;
 
 var temp_controller;
 
@@ -50,7 +53,7 @@ async function swi_oninteractive() {
     e_clear = document.getElementById('clear');
     e_usage = document.getElementById('usage');
 
-    let top_msg_array = ['green', 'yellow'];
+    let top_msg_array = ['green', 'yellow', 'online'];
     for (i = 0; i < top_msg_array.length; i++) {
       top_msg = top_msg_array[i];
       e_top_msg[top_msg] = document.getElementById('cache-' + top_msg);
@@ -61,7 +64,7 @@ async function swi_oninteractive() {
 
     var sw_path = 'sw.js';
   } else {
-    e_icon = document.getElementById('icon');
+    e_body = document.getElementById('body');
 
     var sw_path = '../sw.js';
   }
@@ -110,9 +113,7 @@ function start_polling(registration) {
     e_clear.addEventListener('click', fn_clear);
 
     navigator.serviceWorker.addEventListener('message', fn_receive_status);
-  } else if (e_icon) {
-    e_icon.addEventListener('click', fn_icon_click);
-
+  } else {
     navigator.serviceWorker.addEventListener('message', fn_receive_icon);
   }
 
@@ -195,10 +196,10 @@ function fn_receive_status(event) {
     }
 
     if (msg.top_msg !== old_msg.top_msg) {
-      if (old_msg.top_msg) {
+      if (old_msg.top_msg in e_top_msg) {
         e_top_msg[old_msg.top_msg].style.display = 'none';
       }
-      if (msg.top_msg) {
+      if (msg.top_msg in e_top_msg) {
         e_top_msg[msg.top_msg].style.display = 'block';
       }
     }
@@ -260,11 +261,20 @@ function fn_receive_icon(event) {
     icon = undefined;
   }
 
+  console.info(icon);
   if (icon !== old_icon) {
     if (icon === 'yellow') {
+      console.info('displaying hazard icon');
+      if (!e_icon) {
+        console.info('inserting hazard icon');
+        e_body.insertAdjacentHTML('afterbegin', '<div id="icon"><img src="../icons/hazard.svg" class="hazard-img"></div>');
+        e_icon = document.getElementById('icon');
+        e_icon.addEventListener('click', fn_icon_click);
+      }
       e_icon.className = 'icon-yellow';
+      e_icon.style.display = 'block';
     } else {
-      e_icon.className = '';
+      e_icon.style.display = 'none';
     }
   }
 

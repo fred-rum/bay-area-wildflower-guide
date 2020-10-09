@@ -623,16 +623,20 @@ function fn_send_status(event) {
   // until we've checked whether what color it should be.
   var icon = undefined;
   var top_msg = undefined;
-  if (offline_ready && (activity !== 'init')) {
-    if (is_cache_up_to_date()) {
-      var top_msg = 'green';
-    } else {
-      var top_msg = 'yellow';
-      if (activity !== 'update') {
-        // The yellow icon is only shown on non-home pages when an update
-        // is needed *and* no update is in progress.
-        var icon = 'yellow';
+  if (activity !== 'init') {
+    if (offline_ready) {
+      if (is_cache_up_to_date()) {
+        var top_msg = 'green';
+      } else {
+        var top_msg = 'yellow';
+        if (activity !== 'update') {
+          // The yellow icon is only shown on non-home pages when an update
+          // is needed *and* no update is in progress.
+          var icon = 'yellow';
+        }
       }
+    } else {
+      var top_msg = 'online';
     }
   }
 

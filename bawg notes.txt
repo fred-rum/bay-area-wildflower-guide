@@ -1047,8 +1047,22 @@ so the message disappears exactly as we'd like.
 
 increase margin to 20+ MB?
 
+
 Is it worth increasing the parallelism of the update process?  E.g. 8
 threads, each popping URLs from the stack until they're all gone.
 The master process can fork them off with Promise.all.  Note that each
 thread runs synchronous sections atomically, so e.g. pop is atomic.
 How to manage the cache socket, though?
+
+It doesn't help in deleting cache entries in Firefox.
+
+Change hidden elements to be hidden with a style directly in the HTML
+so that it is safe when CSS is broken.
+
+Use a yellow/red gradiant for the icon when an update is available
+*and* a red hazard is present.  Display both (or all) messages on the
+home page.
+
+Instead of having 'delete offline files' be 'busy', can it be merged
+with delete_obs_files()?  I.e. the delete can effectively be canceled
+by re-updating.
