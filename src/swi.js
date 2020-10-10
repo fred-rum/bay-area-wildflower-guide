@@ -351,8 +351,8 @@ async function update_wakelock(msg) {
   } else if (msg.update_class != 'update-stop' && wakelock) {
     try {
       console.info('releasing wakelock');
-      wakelock = undefined;
       wakelock.release();
+      wakelock = undefined;
     } catch (e) {
       // Maybe this will never happen, but I wouldn't be surprised, e.g.
       // if the system kills our wakelock just before we try to release it.

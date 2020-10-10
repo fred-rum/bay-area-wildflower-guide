@@ -469,23 +469,25 @@ function main() {
 if (typeof pages !== 'undefined') {
   main();
 }
-function fn_details(e) {
-  if (e.textContent == '[show details]') {
-    e.textContent = '[hide details]';
+function fn_details(event) {
+  console.log(event);
+  if (event.target.textContent == '[show details]') {
+    event.target.textContent = '[hide details]';
     document.getElementById('details').style.display = 'block';
-    e.setAttribute('aria-expanded', 'true');
+    event.target.setAttribute('aria-expanded', 'true');
   } else {
-    e.textContent = '[show details]';
+    event.target.textContent = '[show details]';
     document.getElementById('details').style.display = 'none';
-    e.setAttribute('aria-expanded', 'false');
+    event.target.setAttribute('aria-expanded', 'false');
   }
 }
-function fn_details_keydown(e) {
+function fn_details_keydown(event) {
+  console.log(event);
   if ((event.key == 'Enter') ||
       (event.key == ' ') ||
       (event.key == 'Spacebar')) {
-    fn_details(e);
-    e.preventDefault();
+    fn_details(event);
+    event.preventDefault();
   }
 }
 function save_scroll() {

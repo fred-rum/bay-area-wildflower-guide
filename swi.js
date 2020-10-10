@@ -230,8 +230,8 @@ async function update_wakelock(msg) {
   } else if (msg.update_class != 'update-stop' && wakelock) {
     try {
       console.info('releasing wakelock');
-      wakelock = undefined;
       wakelock.release();
+      wakelock = undefined;
     } catch (e) {
       console.warn('wakelock release failed:', e);
     }
