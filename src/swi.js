@@ -257,14 +257,20 @@ function fn_clear(event) {
 /* Pressing 'enter' when a button is focused does the same as a mouse click
    in order to support accessibility requirements. */
 function fn_update_keydown(event) {
-  if (event.key == 'Enter') {
+  if ((event.key == 'Enter') ||
+      (event.key == ' ') ||
+      (event.key == 'Spacebar')) {
     fn_update(event);
+    event.preventDefault();
   }
 }
 
 function fn_clear_keydown(event) {
-  if (event.key == 'Enter') {
+  if ((event.key == 'Enter') ||
+      (event.key == ' ') ||
+      (event.key == 'Spacebar')) {
     fn_clear(event);
+    event.preventDefault();
   }
 }
 
@@ -277,12 +283,11 @@ function fn_receive_icon(event) {
   let yellow_expire = get_yellow_expire();
   if ((msg.icon == 'yellow') &&
       ((yellow_expire === null) || (Date.now() > yellow_expire))) {
-    icon = 'yellow';
+    var icon = 'yellow';
   } else {
-    icon = undefined;
+    var icon = undefined;
   }
 
-  console.info(icon);
   if (icon !== old_icon) {
     if (icon === 'yellow') {
       console.info('displaying hazard icon');

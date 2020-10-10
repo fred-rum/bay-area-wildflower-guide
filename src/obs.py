@@ -117,7 +117,7 @@ class Obs:
 
         if n:
             w.write('''
-<span class="toggle-details" onclick="fn_details(this)">[show details]</span>
+<span class="toggle-details" onclick="fn_details(this)" onkeydown="fn_details_keydown(this)" tabindex="0" role="button" aria-expanded="false">[show details]</span>
 </p>
 <div id="details">
 Locations:
