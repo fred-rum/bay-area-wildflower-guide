@@ -825,7 +825,12 @@ input:disabled {
    The autocompletion box has 'position: fixed', which puts it where
    it normally would placed if 'static', but removes it from the
    normal HTML flow.  Thus, it ends up floating on top of the center
-   body section, which scrolls under to the side of the floating box.
+   body section, which scrolls under (and past the left side) of the
+   floating box.
+
+   Because the autocomplete-box is floating it doesn't inherit the
+   screen-edge padding-right from body-container, although its parent-
+   relative position effectively inherits the padding-left.
 
    The background-color is needed to prevent bleed-through of the body
    contents underneath.
@@ -840,6 +845,7 @@ div#autocomplete-box {
     position: fixed;
     border: 1px solid #DDDDDD;
     background-color: white;
+    margin-left: -8px; /* start at the edge of the page */
 }
 /* On mobile devices, it's hard to fit the text of long flower names
    (especially ones with a variety/subspecies).  So by default, we
@@ -853,8 +859,19 @@ div#autocomplete-box {
    important.  (The font change applies to text inside the box.) */
 @media (min-width: 600px) {
     div#autocomplete-box {
-	margin-left: 1.7em;
+	box-sizing: border-box;
+	/* margin-left:   home-icon width (40px)
+	                + input border (1px)
+			+ padding for magnifying lens icon
+                            (1.5em = 1.5 * 16px * 1.5em font-size = 36px)
+			- autocomplete-box border (1px)
+			- padding-left within autocomplete-box (12px)
+			- p.nogap padding (3px) */
+	margin-left: 61px;
+	margin-right: 8px; /* match the padding-right of body-container */
 	font-size: 1.25em;
+	padding-left: 12px;
+	padding-right: 12px;
     }
 }
 /* Each autocompletion result is wrapped in <p class="nogap">.
