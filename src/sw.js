@@ -544,7 +544,7 @@ function fn_send_status(event) {
 
   // If nothing else is going on, delete obsolete files.
   if ((activity === 'idle') && num_obs_files) {
-    activity_promise = idle_delete_obs_files();
+    activity_promise = idle_delete_obs_files(false);
     monitor_promise();
   }
 
@@ -708,30 +708,20 @@ async function clear_caches() {
 
   console.info('clear_caches()');
   activity = 'busy';
-  msg = 'Deleting all offline files';
+  msg = 'Making all offline files obsolete';
   err_status = '';
 
   try {
-    url_to_base64 = {};
-    url_diff = true;
-    offline_ready = false;
+    await kill_old_files();
 
-    await delete_db();
-    await delete_all_cache_entries();
-
-    // Reset which files need to be cached, similar to init_status().
-    let cache = await caches.open(BASE64_CACHE_NAME);
-    await count_cached(cache);
-    check_url_diff();
-    is_cache_up_to_date();
+    activity_promise = idle_delete_obs_files(true);
   } catch (e) {
     if (e) {
       console.error(e);
       err_status = e.name + '<br>Something went wrong.  Refresh and try again?';
+      activity = 'idle';
     }
   }
-
-  activity = 'idle';
 }
 
 async function delete_db() {
@@ -815,7 +805,12 @@ async function update_cache() {
     await protected_write(cache, func);
 
     await record_urls();
+
+    // The old files are now obsolete.
     make_old_files_obsolete();
+
+    // The new files are now also old.
+    old_base64 = base64_to_kb;
   } catch (e) {
     if (!e) {
       // If we receive a null, then the error has been sufficiently
@@ -867,9 +862,7 @@ async function protected_write(cache, func) {
       } else if (quota_exceeded && num_old_files) {
         // Delete old files.
         err_status = 'Storage limit reached.  Reverting to online mode so that old files can be deleted.';
-        offline_ready = false;
-        make_old_files_obsolete();
-        await delete_db();
+        await kill_old_files();
         await delete_obs_files(cache);
         err_status = 'Storage limit reached.  Reverted to online mode so that old files could be deleted.';
         // now fall through and loop again.
@@ -1074,13 +1067,13 @@ async function check_stop(from) {
   }
 }
 
-async function idle_delete_obs_files() {
+async function idle_delete_obs_files(and_new_files) {
   console.info('idle_delete_obs_files()');
   activity = 'delete';
   
   try {
     let cache = await caches.open(BASE64_CACHE_NAME);
-    await delete_obs_files(cache);
+    await delete_obs_files(cache, and_new_files);
   } catch (e) {
     if (e) {
       console.error(e);
@@ -1091,25 +1084,69 @@ async function idle_delete_obs_files() {
   activity = 'idle';
 }
 
-// delete_obs_files() can be called when idle (activity == 'delete') or
-// when in the middle of updating the cache (due to an exceeded quota)
-// (activity == 'update').
-async function delete_obs_files(cache) {
+// delete_obs_files() can be called in three circumstances:
+// 1. when 'idle': deletes obsolete files
+// 2. from 'update': deletes obsolete files
+//    (old files may have just been made obsolete)
+// 3. when the 'delete' button is pushed: deletes all files
+//    (old files are made obsolete before calling this)
+//    This case calls the function with and_new_files=true.
+//
+// In 1 & 3, the activity is 'delete', and it can be interrupted for
+// an update or to delete files.  And yes, that's redundant from 3,
+// but whatever.
+//
+// In 2, the activity is 'update', and it can be interrupted to pause
+// the update or to delete all files (scenario 3 above).  Also related
+// to 2, if a previous update added files to all_base64, they become
+// last to be deleted.  (This may also be true of keys read from the
+// cache.  I haven't checked.)  This is surprisingly, but convenient
+// if the user cancels the delete with another update.
+async function delete_obs_files(cache, and_new_files) {
   console.info('delete_obs_files()');
 
-  var total = num_obs_files;
+  if (and_new_files) {
+    var total = Object.keys(all_base64).length;
+  } else {
+    var total = num_obs_files;
+  }
+
+  var count = 0;
   for (let base64 in all_base64) {
     await check_stop('delete_obs_files()');
 
-    if (!(base64 in base64_to_kb) && !(base64 in old_base64)) {
-      msg = 'Queued deletion of ' + (total - num_obs_files) + ' / ' + total + ' obsolete offline files';
+    if ((!(base64 in base64_to_kb) && !(base64 in old_base64)) ||
+        and_new_files) {
+      count++;
+
+      msg = 'Queued deletion of ' + count + ' / ' + total;
+      if (and_new_files) {
+          msg += ' offline files';
+      } else {
+          msg += ' obsolete offline files';
+      }
+
       await cache.delete(base64);
-      num_obs_files--;
+
+      delete all_base64[base64];
+
+      if (base64 in base64_to_kb) {
+        kb_cached -= base64_to_kb[base64];
+      } else {
+        num_obs_files--;
+      }
     }
   }
 
   console.info('done with delete_obs_files()');
   console.assert(num_obs_files == 0);
+}
+
+async function kill_old_files() {
+  offline_ready = false;
+  url_diff = true;
+  make_old_files_obsolete();
+  await delete_db();
 }
 
 function make_old_files_obsolete() {

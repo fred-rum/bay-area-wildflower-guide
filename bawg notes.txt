@@ -946,13 +946,15 @@ Yellow: The Guide is operating offline.  An update is available
 whenever you are ready.
 
 Red1: The Guide is having trouble connecting online.  Using the
-incomplete offline copy as a fallback.
+incomplete offline copy as a fallback. -- doesn't seem useful
 
 Red2: Some files have gone missing from the offline copy.  Connecting
-online for those files.
+online for those files. -- yes; should be detected during cache
+validation.  If any fundamental files are missing, clear offline_ready
+and the indexedDB (so a refresh picks up a coherent set).
 
 Red3: Some files are missing from the offline copy.  Oops, that's my
-fault.  Check back for updates.
+fault.  Check back for updates. -- yes; can only be detected during fetch
 
 
 Calculate 'browser allows up to' in either MB or GB, whichever is
@@ -1052,17 +1054,15 @@ Use a yellow/red gradiant for the icon when an update is available
 *and* a red hazard is present.  Display both (or all) messages on the
 home page.
 
-Instead of having 'delete offline files' be 'busy', can it be merged
-with delete_obs_files()?  I.e. the delete can effectively be canceled
-by re-updating.  Perhaps a flag for 'delete everything', and delete
-what's in base64_to_kb last (while updating kb_cached).
-
-We assume that all_base64 reflects what's in the cache, but:
-- a normal fetch does a cache match without reference to all_base64.
-- after deleting all files, re-validate the cache.
-  . should be quick if the cache is empty
-  . I can see how files might disappear out of the cache without reason,
-    but how would they appear and thus remain after deleting all files?
-
 Can I queue an update while the cache is being validated?
 E.g. give it an activity_promise, but ignore stop_activity_flag.
+
+"Something went wrong.  Refresh and try again?" isn't a particularly
+good message when sw.js encounters something unexpected.  A refresh
+won't reload sw.js, so a refresh is never helpful.  Is it possible to
+force sw.js (e.g. by unregistering it and re-registering it?)  Or
+unregister it while asking the user for a refresh, which will
+re-register it.  (Make sure to disable time-out when it is
+unregistered.  Perhaps swi.js should do it.)
+
+Disable "Delete Offline Files" when there are no offline files?
