@@ -17,19 +17,31 @@
    double it up), so I push it down a bit more and blur it a bit
    further to try to make it look reasonably natural together with the
    search-container's box-shadow. */
-img#home-icon {
+#home-icon {
     position: absolute;
     top: 4px;
     left: 4px;
-    width: 40px;
-    height: 40px;
     filter: drop-shadow(0px 4px 4px white);
     z-index: 20;
+}
+/* Technically, #home-icon is the <a> link that encloses the icon image.
+   For some reason, the image doesn't inherit the width & height constraints
+   of the link, so I have to put them here.
+
+   The baseline of the image normally doesn't matter, but if the link has
+   focus, the browser draws an outline around it.  If I place the image as
+   if it's on a text line, the outline leaves room for text descenders,
+   which looks dumb.  So I give the image a different vertical alignment
+   to prevent that. */
+#home-icon img {
+    width: 40px;
+    height: 40px;
+    vertical-align: top;
 }
 /* When the autocomplete box is directly under the home icon (i.e. the
    autocomplete box is visible on a narrow screen) */
 @media (max-width: 599px) {
-    img#home-icon.with-autocomplete {
+    #home-icon.with-autocomplete {
 	filter: none;
     }
 }
