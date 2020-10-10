@@ -6,12 +6,14 @@ var ac_is_hidden = true;
 function expose_ac() {
   e_autocomplete_box.style.display = 'block';
   ac_is_hidden = false;
+  e_home_icon.className = 'with-autocomplete';
 }
 
 function hide_ac() {
   if (!ac_is_hidden) {
     e_autocomplete_box.style.display = 'none';
     ac_is_hidden = true;
+    e_home_icon.className = '';
   }
 }
 
@@ -653,6 +655,7 @@ var e_body = document.getElementById('body');
 
 var e_search_input = document.getElementById('search');
 var e_autocomplete_box = document.getElementById('autocomplete-box');
+var e_home_icon = document.getElementById('home-icon');
 
 /* We want to trigger hide_ac whenever the user clicks somewhere that
    **isn't** the search field or autocomplete box.  I used to create a

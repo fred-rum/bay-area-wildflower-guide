@@ -1,5 +1,5 @@
 /* Copyright Chris Nelson - All rights reserved. */
-img.home-icon {
+img#home-icon {
     position: absolute;
     top: 4px;
     left: 4px;
@@ -7,6 +7,11 @@ img.home-icon {
     height: 40px;
     filter: drop-shadow(0px 4px 4px white);
     z-index: 20;
+}
+@media (max-width: 599px) {
+    img#home-icon.with-autocomplete {
+	filter: none;
+    }
 }
 @-ms-viewport {
     width: device-width;

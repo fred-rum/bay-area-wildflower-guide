@@ -17,7 +17,7 @@
    double it up), so I push it down a bit more and blur it a bit
    further to try to make it look reasonably natural together with the
    search-container's box-shadow. */
-img.home-icon {
+img#home-icon {
     position: absolute;
     top: 4px;
     left: 4px;
@@ -26,6 +26,14 @@ img.home-icon {
     filter: drop-shadow(0px 4px 4px white);
     z-index: 20;
 }
+/* When the autocomplete box is directly under the home icon (i.e. the
+   autocomplete box is visible on a narrow screen) */
+@media (max-width: 599px) {
+    img#home-icon.with-autocomplete {
+	filter: none;
+    }
+}
+
 
 /* Many mobile browsers by default create a viewport (virtual screen) wide
    enough to hold standard desktop web pagse, then allow the user to zoom

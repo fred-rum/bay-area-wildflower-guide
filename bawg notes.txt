@@ -1066,10 +1066,3 @@ re-register it.  (Make sure to disable time-out when it is
 unregistered.  Perhaps swi.js should do it.)
 
 Disable "Delete Offline Files" when there are no offline files?
-
-Remove the home-icon drop-filter only if the autocomplete-box is below it;
-i.e. if the screen is narrow and the autocomplete-box is visible.
-Implementation:
-Add a 'with-autocomplete' class to the home-icon when the autocomplete-box
-is visible.  The 'with-autocomplete' class hides the drop-shadow when
-max-width: 599px;

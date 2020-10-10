@@ -4,11 +4,13 @@ var ac_is_hidden = true;
 function expose_ac() {
   e_autocomplete_box.style.display = 'block';
   ac_is_hidden = false;
+  e_home_icon.className = 'with-autocomplete';
 }
 function hide_ac() {
   if (!ac_is_hidden) {
     e_autocomplete_box.style.display = 'none';
     ac_is_hidden = true;
+    e_home_icon.className = '';
   }
 }
 function fn_focusin() {
@@ -418,6 +420,7 @@ function fn_keydown() {
 var e_body = document.getElementById('body');
 var e_search_input = document.getElementById('search');
 var e_autocomplete_box = document.getElementById('autocomplete-box');
+var e_home_icon = document.getElementById('home-icon');
 document.addEventListener('click', fn_doc_click);
 window.onbeforeunload = fn_focusout;
 function fn_hashchange(event) {
