@@ -1,7 +1,7 @@
 'use strict';
 var url_data = [
-["swi.js", "IaYK7fbRrbdIaITTiTIBpEc0k6jwsSyt-pvX5Q==", 8],
-["index.html", "B48Q8o260pxUDu5yx0qxUHcmbMEAzXjOyycuYQ==", 6],
+["swi.js", "SaXYYH5g_k1p1hRgplHnb8Z3pm0bRy-f7YtxOw==", 8],
+["index.html", "gkb_Ca2HnAfrYjS4FCRQ_nP16sVfoKbRZQxacA==", 6],
 ["bawg.css", "mhLZoLieGMsKTnslewRDf4l_-ZZ60sHBxwutPA==", 11],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
 ["icons/online.svg", "V-n9Y6IMGrtTzQbte88RvxhNWq3UGukTp4SOCQ==", 2],

@@ -67,6 +67,8 @@ function start_polling(registration) {
   if (e_update) {
     e_update.addEventListener('click', fn_update);
     e_clear.addEventListener('click', fn_clear);
+    e_update.addEventListener('keydown', fn_update_keydown);
+    e_clear.addEventListener('keydown', fn_clear_keydown);
     navigator.serviceWorker.addEventListener('message', fn_receive_status);
   } else if (e_body) {
     navigator.serviceWorker.addEventListener('message', fn_receive_icon);
@@ -152,6 +154,16 @@ function fn_clear(event) {
   if (navigator.serviceWorker) {
     post_msg('clear');
     localStorage.clear();
+  }
+}
+function fn_update_keydown(event) {
+  if (event.key == 'Enter') {
+    fn_update(event);
+  }
+}
+function fn_clear_keydown(event) {
+  if (event.key == 'Enter') {
+    fn_clear(event);
   }
 }
 function fn_receive_icon(event) {
