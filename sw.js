@@ -5024,7 +5024,7 @@ var BASE64_CACHE_NAME = 'base64-cache-v1';
 // Activity is 'init', 'busy', 'delete', 'update', or 'idle'.
 // An initial 'init' activity prevents updates until everything
 // is initialized.
-var activity = 'init';
+var activity = 'init1';
 var msg = 'Checking for offline files';
 var err_status = '';
 var usage_msg = '';
@@ -5321,16 +5321,49 @@ async function init_status() {
   // it before we're done here.  But we still call it here in order to
   // compare it to the new_url_to_base64.
   await read_db();
-  msg = 'Validating offline files';
-  let cache = await caches.open(BASE64_CACHE_NAME);
-  await count_cached(cache);
   check_url_diff();
-  activity = 'idle';
+  activity = 'init2';
+  msg = 'Validating offline files';
+  activity_promise = count_cached();
 }
 // Check how many KB of the new base64 values already have a file cached.
 // Also compute the total KB that will be cached if the cache is updated.
-async function count_cached(cache) {
+async function count_cached() {
   console.info('count_cached()');
+  // Generate a dictionary of old base64 keys from the old url_to_base64
+  // data read earlier.
+  for (let url in url_to_base64) {
+    let base64 = url_to_base64[url];
+    old_base64[base64] = true;
+  }
+  console.info('checking base64 keys in the cache');
+  let cache = await caches.open(BASE64_CACHE_NAME);
+  let requests = await cache.keys();
+  for (let i = 0; i < requests.length; i++) {
+    let base64 = remove_scope_from_request(requests[i]);
+    all_base64[base64] = true;
+    if (base64 in base64_to_kb) {
+      kb_cached += base64_to_kb[base64];
+    } else if (base64 in old_base64) {
+      num_old_files++;
+    } else {
+      num_obs_files++;
+    }
+  }
+  console.info('init done');
+  activity = 'idle';
+}
+// Compare the old url_to_base64 with new_url_to_base64.
+// This tells us whether we need to update the indexedDB.
+// Generally we'd expect to only need to update the indexedDB when
+// there are also cache changes to perform, but there are other
+// possibilities, e.g.
+// - I swap the names (URLs) of two files in the cache, or
+// - The user manually deleted the indexedDB, but the cached files remain
+//   up to date.
+function check_url_diff() {
+  console.info('check_url_diff()');
+  url_diff = false;
   // This function might be called a second time after the caches are
   // clear, so be sure to throw away old values before accumulating
   // new data.
@@ -5350,37 +5383,6 @@ async function count_cached(cache) {
     base64_to_kb[base64] = kb;
     kb_total += kb;
   }
-  // Generate a dictionary of old base64 keys from the old url_to_base64
-  // data read earlier.
-  for (let url in url_to_base64) {
-    let base64 = url_to_base64[url];
-    old_base64[base64] = true;
-  }
-  console.info('checking base64 keys in the cache');
-  let requests = await cache.keys();
-  for (let i = 0; i < requests.length; i++) {
-    let base64 = remove_scope_from_request(requests[i]);
-    all_base64[base64] = true;
-    if (base64 in base64_to_kb) {
-      kb_cached += base64_to_kb[base64];
-    } else if (base64 in old_base64) {
-      num_old_files++;
-    } else {
-      num_obs_files++;
-    }
-  }
-}
-// Compare the old url_to_base64 with new_url_to_base64.
-// This tells us whether we need to update the indexedDB.
-// Generally we'd expect to only need to update the indexedDB when
-// there are also cache changes to perform, but there are other
-// possibilities, e.g.
-// - I swap the names (URLs) of two files in the cache, or
-// - The user manually deleted the indexedDB, but the cached files remain
-//   up to date.
-function check_url_diff() {
-  console.info('check_url_diff()');
-  url_diff = false;
   // Check if any old URLs are missing from new_url_to_base64 or have
   // different base64 values.
   for (let url in url_to_base64) {
@@ -5443,7 +5445,9 @@ function fn_send_status(event) {
   /////////////////////////////////////////////////////////////////////////////
   // Respond to an activity request.
   if (event.data === 'update') {
-    if ((activity === 'idle') || (activity === 'delete')) {
+    if ((activity === 'init2') ||
+        (activity === 'idle') ||
+        (activity === 'delete')) {
       if (is_cache_up_to_date()) {
         // do nothing
         console.info('cache is up to date: ignore update request');
@@ -5457,7 +5461,8 @@ function fn_send_status(event) {
       console.info(activity + ': ignore update request');
     }
   } else if (event.data === 'clear') {
-    if ((activity === 'idle') ||
+    if ((activity === 'init2') ||
+        (activity === 'idle') ||
         (activity === 'delete') ||
         (activity === 'update')) {
       clear_caches();
@@ -5489,7 +5494,7 @@ function fn_send_status(event) {
   // status is used by old copies of swi.js,
   // with progress combined with msg.
   var status = progress + ' &ndash; ' + msg;
-  if (activity === 'init') {
+  if (activity === 'init1') {
     progress = '';
     status = msg;
   } else if (activity === 'idle') {
@@ -5511,7 +5516,8 @@ function fn_send_status(event) {
       var update_button = 'Pause Saving';
     }
   }
-  if (activity === 'init') {
+  if (activity === 'init1') {
+    // init not yet ready to queue a user action
     var update_class = 'update-disable';
     var clear_class = 'clear-disable';
   } else if (activity === 'busy') {
@@ -5527,7 +5533,7 @@ function fn_send_status(event) {
   } else if (activity === 'update') {
     var update_class = 'update-stop';
     var clear_class = ''; // enabled
-  } else { // idle
+  } else { // idle or init2
     var clear_class = ''; // enabled
     if (is_cache_up_to_date()) {
       var update_class = 'update-disable';
@@ -5540,7 +5546,7 @@ function fn_send_status(event) {
   // until we've checked whether what color it should be.
   var icon = undefined;
   var top_msg = undefined;
-  if (activity !== 'init') {
+  if (activity !== 'init1') {
     if (offline_ready) {
       if (is_cache_up_to_date()) {
         var top_msg = 'green';
@@ -5586,11 +5592,13 @@ async function stop_activity() {
     msg = 'Pausing update in progress';
   } else if (activity === 'delete') {
     msg = 'Pausing deletions';
+  } else if (activity === 'init2') {
+    msg = 'Waiting for validation to complete'
   } else if (activity === 'idle') {
     // No activity to stop.
     return;
   } else {
-    // We should never be trying to stop 'init' or 'busy' activity.
+    // We should never be trying to stop 'init1' or 'busy' activity.
     console.error('stop_activity() called when activity is ' + activity);
     throw 'oops';
   }

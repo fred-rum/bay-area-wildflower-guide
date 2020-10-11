@@ -1055,9 +1055,6 @@ Use a yellow/red gradiant for the icon when an update is available
 *and* a red hazard is present.  Display both (or all) messages on the
 home page.
 
-Can I queue an update while the cache is being validated?
-E.g. give it an activity_promise, but ignore stop_activity_flag.
-
 "Something went wrong.  Refresh and try again?" isn't a particularly
 good message when sw.js encounters something unexpected.  A refresh
 won't reload sw.js, so a refresh is never helpful.  Is it possible to
@@ -1070,5 +1067,3 @@ Disable "Delete Offline Files" when there are no offline files?
 
 Have an offline option for 'no full-size photos', in which case links
 to photos/... are re-directed to thumbs/...
-
-should focus outline for home-icon be circular?
