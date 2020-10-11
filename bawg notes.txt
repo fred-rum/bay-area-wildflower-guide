@@ -1039,13 +1039,12 @@ until the page is fully loaded.
 
 If quota < usage + ((kb_total - kb_cached) * 1.2),
 "The Guide will delete old files if necessary to make space for the update."
-When idle and there is an update pending and old files present.
-Better, add it to the usage message.
+Append it to the usage message.
 Use hysteresis to avoid flicker during update, e.g. < 1.2x to appear,
 > 1.25x to disappear.  Or use a +C constant of a few tens of MB.
 May need to adjust C when the margin is written.
-Note that as soon as quota is reached, old files become obsolete,
-so the message disappears exactly as we'd like.
+Suppress the message when delete is in progress or when no update is
+pending or when there are no old/obsolete files to delete.
 
 increase margin to 20+ MB?  But increasing the margin might also make
 the sw.js process larger unless I split things up somehow.
@@ -1063,7 +1062,8 @@ unregister it while asking the user for a refresh, which will
 re-register it.  (Make sure to disable time-out when it is
 unregistered.  Perhaps swi.js should do it.)
 
-Disable "Delete Offline Files" when there are no offline files?
-
 Have an offline option for 'no full-size photos', in which case links
 to photos/... are re-directed to thumbs/...
+
+Should count_cache ('init2') be activated only from the home page
+(e.g. triggered by a poll message)?

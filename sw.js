@@ -1,7 +1,7 @@
 'use strict';
 var url_data = [
-["swi.js", "ExPpQ9nl6CEac5OCoohmnVrE-OM-U8JOM2saIA==", 8],
-["index.html", "9SkLKR776RkV0N1Un_MmcKuvDScKWHeEJzZ_LA==", 6],
+["swi.js", "DNarLod9zJLOy2fOZ4wf4FdjpztqPsTW8ZAPSA==", 8],
+["index.html", "GZBCk4tqTM-b0AODpVLyA_IgaGjWYLxgvdvc3Q==", 6],
 ["bawg.css", "b8e3Zgu1E-PcCgNjWwqioWUcsaPnqOgpriucWA==", 12],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
 ["icons/online.svg", "V-n9Y6IMGrtTzQbte88RvxhNWq3UGukTp4SOCQ==", 2],
@@ -5028,6 +5028,7 @@ var activity = 'init1';
 var msg = 'Checking for offline files';
 var err_status = '';
 var usage_msg = '';
+var extra_msg = '';
 // There are some occasions where I allow an activity to be interrupted.
 // For that, we set a flag to tell the activity to stop at the next
 // opportunity, and we then await its promise (which otherwise is allowed
@@ -5575,6 +5576,7 @@ function fn_send_status(event) {
     status: status,
     err_status: err_status,
     usage: usage_msg,
+    extra: extra_msg,
     top_msg: top_msg,
     icon: icon,
     clear_class: clear_class,
@@ -5951,6 +5953,7 @@ async function update_usage() {
     var usage = 0;
     var quota = undefined;
   }
+  var kb_usage = usage / 1024;
   var status_usage = (usage/1024/1024).toFixed(1) + ' MB';
   if (quota < 2*1024*1024*1024) {
     var status_quota = (quota/1024/1024).toFixed(1) + ' MB';
@@ -5974,9 +5977,11 @@ async function update_usage() {
     let kb_per_file = kb_total / url_data.length;
     let kb_estimate = kb_per_file * (num_old_files + num_obs_files);
     if (cache_empty) {
+      var kb_usage = 0;
       status_usage = '0.0 MB';
     } else {
-      status_usage = ((kb_cached + kb_estimate)/1024 + 0.1).toFixed(1) + ' MB'
+      var kb_usage = kb_cached + kb_estimate;
+      status_usage = (kb_usage/1024 + 0.1).toFixed(1) + ' MB'
     }
     usage_msg = 'Using roughly ' + status_usage + '.';
     if (quota === undefined) {
@@ -5985,4 +5990,19 @@ async function update_usage() {
       usage_msg += '<br>Browser allows at least ' + status_quota + '.';
     }
   }
+  if (extra_msg) {
+    var kb_needed = kb_usage + ((kb_total - kb_cached) * 1.25) + (16 * 1024);
+  } else {
+    var kb_needed = kb_usage + ((kb_total - kb_cached) * 1.2) + (10 * 1024);
+  }
+  quota = 1350000*1024;
+  if (!is_cache_up_to_date() &&
+      (num_old_files + num_obs_files) &&
+      quota &&
+      (kb_needed > quota/1024)) {
+    extra_msg = 'The Guide will delete old files if necessary to make space for the update.'
+  } else {
+    extra_msg = '';
+  }
+  console.log('extra:', num_old_files + num_obs_files, kb_needed, quota, extra_msg);
 }

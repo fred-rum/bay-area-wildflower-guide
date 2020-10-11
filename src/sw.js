@@ -17,6 +17,7 @@ var activity = 'init1';
 var msg = 'Checking for offline files';
 var err_status = '';
 var usage_msg = '';
+var extra_msg = '';
 
 // There are some occasions where I allow an activity to be interrupted.
 // For that, we set a flag to tell the activity to stop at the next
@@ -664,6 +665,7 @@ function fn_send_status(event) {
     status: status,
     err_status: err_status,
     usage: usage_msg,
+    extra: extra_msg,
     top_msg: top_msg,
     icon: icon,
     clear_class: clear_class,
@@ -1179,6 +1181,7 @@ async function update_usage() {
     var quota = undefined; // limit unknown
   }
 
+  var kb_usage = usage / 1024;
   var status_usage = (usage/1024/1024).toFixed(1) + ' MB';
 
   // The Firefox quota maxes out at 2 GiB.  Since the current file list
@@ -1229,9 +1232,11 @@ async function update_usage() {
     // modulo floating point discrepencies.  To avoid a disconnect
     // with the progress values, use the same fudge factor.
     if (cache_empty) {
+      var kb_usage = 0;
       status_usage = '0.0 MB';
     } else {
-      status_usage = ((kb_cached + kb_estimate)/1024 + 0.1).toFixed(1) + ' MB'
+      var kb_usage = kb_cached + kb_estimate;
+      status_usage = (kb_usage/1024 + 0.1).toFixed(1) + ' MB'
     }
     usage_msg = 'Using roughly ' + status_usage + '.';
 
@@ -1241,4 +1246,25 @@ async function update_usage() {
       usage_msg += '<br>Browser allows at least ' + status_quota + '.';
     }
   }
+
+  // kb_needed is the estimated worst case usage when update completes
+  // and before old/obsolete files are deleted.  Include hysteresis:
+  // the kb_needed calculation is a bit more pessimistic when the extra
+  // message is visible than when it is clear.
+  if (extra_msg) {
+    var kb_needed = kb_usage + ((kb_total - kb_cached) * 1.25) + (16 * 1024);
+  } else {
+    var kb_needed = kb_usage + ((kb_total - kb_cached) * 1.2) + (10 * 1024);
+  }
+
+  if (!is_cache_up_to_date() &&
+      (num_old_files + num_obs_files) &&
+      quota &&
+      (kb_needed > quota/1024)) {
+    extra_msg = 'The Guide will delete old files if necessary to make space for the update.'
+  } else {
+    extra_msg = '';
+  }
+
+  console.log('extra:', num_old_files + num_obs_files, kb_needed, quota, extra_msg);
 }

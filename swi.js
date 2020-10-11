@@ -6,6 +6,7 @@ var e_status;
 var e_err_status;
 var e_clear;
 var e_usage;
+var e_extra;
 var e_top_msg = {};
 var e_body;
 var e_icon;
@@ -29,6 +30,7 @@ async function swi_oninteractive() {
     e_err_status = document.getElementById('err-status');
     e_clear = document.getElementById('clear');
     e_usage = document.getElementById('usage');
+    e_extra = document.getElementById('extra');
     let top_msg_array = ['green', 'yellow', 'online'];
     for (let i = 0; i < top_msg_array.length; i++) {
       let top_msg = top_msg_array[i];
@@ -120,6 +122,9 @@ function fn_receive_status(event) {
     if (msg.usage !== old_msg.usage) {
       e_usage.innerHTML = msg.usage;
     }
+    if (msg.extra !== old_msg.extra) {
+      e_extra.innerHTML = msg.extra;
+    }
     if (msg.top_msg !== old_msg.top_msg) {
       if (old_msg.top_msg in e_top_msg) {
         e_top_msg[old_msg.top_msg].style.display = 'none';
@@ -140,6 +145,7 @@ function fn_receive_status(event) {
     e_status.innerHTML = '';
     e_err_status.innerHTML = 'Interface not in sync; try clearing the site data and then refreshing the page.';
     e_usage.innerHTML = '';
+    e_extra.innerHTML = '';
     e_top_msg.style.display = 'none';
   }
 }
