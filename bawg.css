@@ -1,12 +1,29 @@
 /* Copyright Chris Nelson - All rights reserved. */
 #home-icon {
     position: absolute;
-    top: 4px;
-    left: 4px;
+    box-sizing: border-box;
+    top: 3px;
+    left: 3px;
+    width: 42px;
+    height: 42px;
     filter: drop-shadow(0px 4px 4px white);
     z-index: 20;
+    border: 2px solid rgba(255, 255, 255, 0);
+    border-radius: 21px;
+}
+#home-icon:hover {
+    border: 2px solid rgba(0, 0, 0, 0.3);
+}
+#home-icon:focus-visible {
+    border: 2px solid black;
+}
+#home-icon:focus {
+    outline: none;
 }
 #home-icon img {
+    position: relative;
+    top: -1px;
+    left: -1px;
     width: 40px;
     height: 40px;
     vertical-align: top;
@@ -428,14 +445,13 @@ span.match {
     border-radius: 8px;
 }
 #update:hover {
-    border: solid rgba(0, 0, 0, 0.3) 4px;
+    border: 4px solid rgba(0, 0, 0, 0.3);
+}
+#update:focus-visible {
+    border: solid black 3px;
 }
 #update:focus {
     outline: none;
-    border: solid rgba(0, 0, 0, 0.3) 3px;
-}
-#update:focus:hover {
-    border: solid rgba(0, 0, 0, 0.7) 4px;
 }
 #update.update-update {
     background-color: #139e38;
@@ -491,14 +507,13 @@ span.match {
     }
 }
 #clear:hover {
-    border: solid rgba(0, 0, 0, 0.3) 4px;
+    border: 4px solid rgba(0, 0, 0, 0.3);
+}
+#clear:focus-visible {
+    border: solid black 3px;
 }
 #clear:focus {
     outline: none;
-    border: solid rgba(0, 0, 0, 0.3) 3px;
-}
-#clear:focus:hover {
-    border: solid rgba(0, 0, 0, 0.7) 4px;
 }
 #clear:active {
     background-color: #d10000;

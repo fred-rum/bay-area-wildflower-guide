@@ -1047,7 +1047,8 @@ May need to adjust C when the margin is written.
 Note that as soon as quota is reached, old files become obsolete,
 so the message disappears exactly as we'd like.
 
-increase margin to 20+ MB?
+increase margin to 20+ MB?  But increasing the margin might also make
+the sw.js process larger unless I split things up somehow.
 
 
 Use a yellow/red gradiant for the icon when an update is available

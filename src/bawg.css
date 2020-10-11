@@ -16,14 +16,45 @@
    a bit.  The drop-shadow is also much less intense (and I can't
    double it up), so I push it down a bit more and blur it a bit
    further to try to make it look reasonably natural together with the
-   search-container's box-shadow. */
+   search-container's box-shadow.
+
+   To support a circular focus ring, we set up a transparent (opacity 0)
+   border 2 pixels thick.  A border with an inner diameter of 40 pixels
+   leaves a thin gap between it and the image, which looks ugly.  So
+   instead I make the inner border diameter 38 pixels.  The image is
+   then expanded back up to 40 pixels and shifted slightly to center it
+   in the border. 
+*/
 #home-icon {
     position: absolute;
-    top: 4px;
-    left: 4px;
+    box-sizing: border-box;
+    top: 3px;
+    left: 3px;
+    width: 42px;
+    height: 42px;
     filter: drop-shadow(0px 4px 4px white);
     z-index: 20;
+    border: 2px solid rgba(255, 255, 255, 0);
+    border-radius: 21px;
 }
+/* Make the border lightly visible when the mouse hovers over it */
+#home-icon:hover {
+    border: 2px solid rgba(0, 0, 0, 0.3);
+}
+/* Make the border visible when focus is visible,
+   typically when the link is selected using the keyboard.
+   Because it comes later in the CSS, this has priority when :hover and
+   :focus-visible are both in effect. */
+#home-icon:focus-visible {
+    border: 2px solid black;
+}
+/* don't use the default focus outline, which seems to show up not just
+   when the element is selected via the keyboard but also when it is
+   clicked on. */
+#home-icon:focus {
+    outline: none;
+}
+/* give the border a "light focus" when the element is hovered over */
 /* Technically, #home-icon is the <a> link that encloses the icon image.
    For some reason, the image doesn't inherit the width & height constraints
    of the link, so I have to put them here.
@@ -34,6 +65,9 @@
    which looks dumb.  So I give the image a different vertical alignment
    to prevent that. */
 #home-icon img {
+    position: relative;
+    top: -1px; /* move img so that the border overlaps it */
+    left: -1px;
     width: 40px;
     height: 40px;
     vertical-align: top;
@@ -937,14 +971,13 @@ span.match {
     border-radius: 8px;
 }
 #update:hover {
-    border: solid rgba(0, 0, 0, 0.3) 4px;
+    border: 4px solid rgba(0, 0, 0, 0.3);
+}
+#update:focus-visible {
+    border: solid black 3px;
 }
 #update:focus {
     outline: none;
-    border: solid rgba(0, 0, 0, 0.3) 3px;
-}
-#update:focus:hover {
-    border: solid rgba(0, 0, 0, 0.7) 4px;
 }
 #update.update-update {
     background-color: #139e38;
@@ -1002,14 +1035,13 @@ span.match {
     }
 }
 #clear:hover {
-    border: solid rgba(0, 0, 0, 0.3) 4px;
+    border: 4px solid rgba(0, 0, 0, 0.3);
+}
+#clear:focus-visible {
+    border: solid black 3px;
 }
 #clear:focus {
     outline: none;
-    border: solid rgba(0, 0, 0, 0.3) 3px;
-}
-#clear:focus:hover {
-    border: solid rgba(0, 0, 0, 0.7) 4px;
 }
 #clear:active {
     background-color: #d10000;
