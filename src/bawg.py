@@ -55,11 +55,11 @@ from cache import *
 strip_comments('bawg.css')
 strip_comments('search.js')
 
-if arg('-with_cache'):
-    strip_comments('swi.js')
-else:
+if arg('-without_cache'):
     shutil.copy('src/no_sw.js', 'swi.js')
     shutil.copy('src/no_sw.js', 'sw.js')
+else:
+    strip_comments('swi.js')
 
 year = datetime.datetime.today().year
 
@@ -672,7 +672,7 @@ def by_filename(name):
     slash_pos = name.find('/')
     return name[slash_pos+1:].casefold()
 
-if arg('-with_cache'):
+if not arg('-without_cache'):
     path_list = [
         # Start with the files most needed for interfacing with the worker.
         # Not 'sw.js' because it's not necessary and could be really bad.

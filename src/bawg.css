@@ -923,15 +923,28 @@ span.match {
    Note that the button is expected to have no HTML text in it.  Instead,
    the pseudo 'before' element adds the proper text content for its state. */
 #update {
-    display: inline-block;
+    display: inline-flex;
     vertical-align: middle;
-    width: 150px;
-    text-align: center;
-    padding: 10px;
+    box-sizing: border-box;
+    width: 170px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
     margin-right: 10px;
     /* equal top and bottom margins for proper vertical centering */
     margin-top: 8px;
     margin-bottom: 8px;
+    border-radius: 8px;
+}
+#update:hover {
+    border: solid rgba(0, 0, 0, 0.3) 4px;
+}
+#update:focus {
+    outline: none;
+    border: solid rgba(0, 0, 0, 0.3) 3px;
+}
+#update:focus:hover {
+    border: solid rgba(0, 0, 0, 0.7) 4px;
 }
 #update.update-update {
     background-color: #139e38;
@@ -966,23 +979,37 @@ span.match {
     color: red;
 }
 #clear {
-    display: block;
+    display: inline-flex;
     vertical-align: middle;
-    width: 150px;
-    text-align: center;
-    background-color: red;
-    color: white;
-    padding: 10px;
-    cursor: pointer;
+    box-sizing: border-box;
+    width: 170px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
     margin-right: 10px;
     /* equal top and bottom margins for proper vertical centering */
     margin-top: 8px;
     margin-bottom: 8px;
+    border-radius: 8px;
+
+    background-color: red;
+    color: white;
+    cursor: pointer;
 }
 @media (min-width: 500px) {
     #clear {
-	display: inline-block;
+	display: inline-flex;
     }
+}
+#clear:hover {
+    border: solid rgba(0, 0, 0, 0.3) 4px;
+}
+#clear:focus {
+    outline: none;
+    border: solid rgba(0, 0, 0, 0.3) 3px;
+}
+#clear:focus:hover {
+    border: solid rgba(0, 0, 0, 0.7) 4px;
 }
 #clear:active {
     background-color: #d10000;

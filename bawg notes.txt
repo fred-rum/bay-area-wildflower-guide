@@ -1066,3 +1066,8 @@ re-register it.  (Make sure to disable time-out when it is
 unregistered.  Perhaps swi.js should do it.)
 
 Disable "Delete Offline Files" when there are no offline files?
+
+Have an offline option for 'no full-size photos', in which case links
+to photos/... are re-directed to thumbs/...
+
+should focus outline for home-icon be circular?
