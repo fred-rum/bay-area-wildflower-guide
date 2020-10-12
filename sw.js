@@ -10,9 +10,9 @@ var url_data = [
 ["search.js", "RNhFjnzK6pBXyVuXJPiX4q3pDrdFqYnf_FULDQ==", 15],
 ["pages.js", "f-5cyRuqlRvNrRt7h-R3n9Fx2xjJSUXBEqp66g==", 127],
 ["manifest.webmanifest", "XGY5f7xv7yhxwxGbwWWhPfwDB3ICJv-oYatFwg==", 1],
-["chrome.html", "ZX2XTN8Cef4Y1ygu9j403KYbJhmaS1162xf4eg==", 4],
-["safari.html", "oElDnomCwxzpQ3tySG5_aVjZePldsmjChvENng==", 4],
-["firefox.html", "mGiwGZHtdxr1W4dCaMYx4JmqSwD1iPOUBSjLOA==", 4],
+["chrome.html", "DMTwKNRS9SSCTqrJlwAl4f78Y3oT7pn5RHuZyA==", 4],
+["safari.html", "9q7Y4l55c_bSqlKpVaNa_45GTJf0Au3VjdF09Q==", 4],
+["firefox.html", "kK_IBLQrAcB79zkZp_Qg3KH5adQixKkI6Eb4sw==", 5],
 ["favicon/android-chrome-192x192.png", "mo6K7qaLIV-5TmbY7NJ9TJnwvMaYWB2u_VYhng==", 81],
 ["favicon/android-chrome-512x512.png", "abL-BGik7wTuWq57-DIsk-Gdpx9oIRjxGwwHXQ==", 347],
 ["favicon/apple-touch-icon.png", "ZBUIIaJnbzPRQUDFB9J4v-McrKTYHJm8QPSagA==", 75],
@@ -5243,15 +5243,21 @@ async function fetch_response(event, url) {
     // If we're offline and a fetch is attempted of an unrecognized file,
     // generate a 404 without attempting an online fetch.  This can happen
     // when the browser speculatively fetches a file such as favicon.ico.
-    // Or the user could type in a URL by hand or use an old URL.
+    // Or the user could type in a URL by hand or use an old URL.  2Or
+    // url_data could be incomplete, but given the other failure types,
+    // it seems unwise to panic the user when there's nothing the user can
+    // do about it.
     console.info('%s not recognized; generating a 404', url)
     return generate_404(url, ' is not part of the current Guide.  Try the search bar.');
   }
   let response = await caches.match(url_to_base64[url]);
   if (!response) {
+    // Flag the missing file (even if we can find a fall-back solution below).
     red_missing = true;
-    validate_flag = true;
     url_diff = true;
+    // We trigger a re-validation of the cache so that an 'update' will know
+    // what files to fetch.
+    validate_flag = true;
   }
   // If the offline copy of a full-size photo is missing, try falling back
   // to its thumbnail.

@@ -272,7 +272,10 @@ async function fetch_response(event, url) {
     // If we're offline and a fetch is attempted of an unrecognized file,
     // generate a 404 without attempting an online fetch.  This can happen
     // when the browser speculatively fetches a file such as favicon.ico.
-    // Or the user could type in a URL by hand or use an old URL.
+    // Or the user could type in a URL by hand or use an old URL.  2Or
+    // url_data could be incomplete, but given the other failure types,
+    // it seems unwise to panic the user when there's nothing the user can
+    // do about it.
     console.info('%s not recognized; generating a 404', url)
     return generate_404(url, ' is not part of the current Guide.  Try the search bar.');
   }
@@ -280,9 +283,13 @@ async function fetch_response(event, url) {
   let response = await caches.match(url_to_base64[url]);
 
   if (!response) {
+    // Flag the missing file (even if we can find a fall-back solution below).
     red_missing = true;
-    validate_flag = true;
     url_diff = true;
+
+    // We trigger a re-validation of the cache so that an 'update' will know
+    // what files to fetch.
+    validate_flag = true;
   }
 
   // If the offline copy of a full-size photo is missing, try falling back

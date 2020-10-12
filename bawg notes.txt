@@ -951,8 +951,10 @@ validation.  If any fundamental files are missing, clear offline_ready
 and the indexedDB (so a refresh picks up a coherent set).
 
 Red3: Some files are missing from the offline copy.  Oops, that's my
-fault.  Check back for updates. -- yes; can only be detected during user
-fetch
+fault.  Check back for updates. -- no; can only be detected during
+user fetch.  Danger: browser may try to fetch unreferenced files,
+e.g. {root}/favicon/ico.  Or user could have used an old or otherwise
+invalid URL.
 
 
 Calculate 'browser allows up to' in either MB or GB, whichever is
@@ -1056,6 +1058,3 @@ Detect 'red-missing' during user fetch.
 When offline, degrade a 'photos/*' fetch to 'thumbs/*', and a
 'thumbs/*' fetch to 404.  Also degrade 'figures/*' to 404.  Other
 fetches are (presumably) small and can attempt an online access.
-
-Danger: browser may try to fetch unreferenced files,
-e.g. {root}/favicon/ico
