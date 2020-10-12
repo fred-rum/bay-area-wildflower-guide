@@ -1,8 +1,8 @@
 'use strict';
 var url_data = [
-["swi.js", "DNarLod9zJLOy2fOZ4wf4FdjpztqPsTW8ZAPSA==", 8],
-["index.html", "GZBCk4tqTM-b0AODpVLyA_IgaGjWYLxgvdvc3Q==", 6],
-["bawg.css", "b8e3Zgu1E-PcCgNjWwqioWUcsaPnqOgpriucWA==", 12],
+["swi.js", "iIzuOyEzrn8RgoOD2bxepRF9bps_XywS2Xom1g==", 10],
+["index.html", "NgfcdXm5VYAqUOuUQKZgUT1WSEcLAJEuCBN2zg==", 7],
+["bawg.css", "OzYiLLK2a9gYFLkbKeUf10n8H9NKa128hjR7gA==", 12],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
 ["icons/online.svg", "V-n9Y6IMGrtTzQbte88RvxhNWq3UGukTp4SOCQ==", 2],
 ["icons/check.svg", "GZFdGrKC4UpM0uywABrTQILfNZ7T0U6iI8sMaw==", 2],
@@ -10,9 +10,9 @@ var url_data = [
 ["search.js", "RNhFjnzK6pBXyVuXJPiX4q3pDrdFqYnf_FULDQ==", 15],
 ["pages.js", "f-5cyRuqlRvNrRt7h-R3n9Fx2xjJSUXBEqp66g==", 127],
 ["manifest.webmanifest", "XGY5f7xv7yhxwxGbwWWhPfwDB3ICJv-oYatFwg==", 1],
-["chrome.html", "nhdcpn7iK7O6dUNe_p6KFoSi23sKiK4J1EJdZg==", 4],
-["safari.html", "li83n7LKM-_POOuHjIjDejxAhulMox0YlfI0kQ==", 4],
-["firefox.html", "_kLER_301qw7xDboaNkhN2cCKZkKOJ7Jy2C1DQ==", 4],
+["chrome.html", "ZX2XTN8Cef4Y1ygu9j403KYbJhmaS1162xf4eg==", 4],
+["safari.html", "oElDnomCwxzpQ3tySG5_aVjZePldsmjChvENng==", 4],
+["firefox.html", "mGiwGZHtdxr1W4dCaMYx4JmqSwD1iPOUBSjLOA==", 4],
 ["favicon/android-chrome-192x192.png", "mo6K7qaLIV-5TmbY7NJ9TJnwvMaYWB2u_VYhng==", 81],
 ["favicon/android-chrome-512x512.png", "abL-BGik7wTuWq57-DIsk-Gdpx9oIRjxGwwHXQ==", 347],
 ["favicon/apple-touch-icon.png", "ZBUIIaJnbzPRQUDFB9J4v-McrKTYHJm8QPSagA==", 75],
@@ -5078,6 +5078,9 @@ var kb_total = 0;
 // kb_cached is the total KB needed by new_url_to_base64 and already
 // cached (i.e. a subset of kb_total).
 var kb_cached = 0;
+// Indicate cache errors.
+var red_missing = false; // someone deleted files from the cache
+var red_missed = false;  // we forgot to put files in the cache
 /*** Install the service worker ***/
 // If this service worker (sw.js) is already registered, then the
 // browser has it in its cache and executes it before fetching
@@ -5331,13 +5334,17 @@ async function init_status() {
 // Also compute the total KB that will be cached if the cache is updated.
 async function count_cached() {
   console.info('count_cached()');
+  old_base64 = {};
+  all_base64 = {};
+  kb_cached = 0;
+  num_old_files = 0;
+  num_obs_files = 0;
   // Generate a dictionary of old base64 keys from the old url_to_base64
   // data read earlier.
   for (let url in url_to_base64) {
     let base64 = url_to_base64[url];
     old_base64[base64] = true;
   }
-  console.info('checking base64 keys in the cache');
   let cache = await caches.open(BASE64_CACHE_NAME);
   let requests = await cache.keys();
   for (let i = 0; i < requests.length; i++) {
@@ -5349,6 +5356,14 @@ async function count_cached() {
       num_old_files++;
     } else {
       num_obs_files++;
+    }
+  }
+  // Check for files that are supposed to be in the offline copy
+  // but have gone missing.
+  for (let base64 in old_base64) {
+    if (!(base64 in all_base64)) {
+      red_missing = true;
+      url_diff = true;
     }
   }
   console.info('init done');
@@ -5369,12 +5384,7 @@ function check_url_diff() {
   // clear, so be sure to throw away old values before accumulating
   // new data.
   base64_to_kb = {};
-  old_base64 = {};
-  all_base64 = {};
   kb_total = 0;
-  kb_cached = 0;
-  num_old_files = 0;
-  num_obs_files = 0;
   new_url_to_base64 = {};
   for (let i = 0; i < url_data.length; i++) {
     let url = url_data[i][0];
@@ -5545,6 +5555,9 @@ function fn_send_status(event) {
   // offline_ready is initialized quickly so that we can respond to
   // initial fetches as soon as possible.  But don't set the top_msg
   // until we've checked whether what color it should be.
+  //
+  // icon is no longer used in the latest swi.js, but it is supported
+  // for a potentially cached copy of swi.js.
   var icon = undefined;
   var top_msg = undefined;
   if (activity !== 'init1') {
@@ -5578,6 +5591,8 @@ function fn_send_status(event) {
     usage: usage_msg,
     extra: extra_msg,
     top_msg: top_msg,
+    red_missing: red_missing,
+    red_missed: red_missed,
     icon: icon,
     clear_class: clear_class,
   };
@@ -5873,6 +5888,7 @@ async function record_urls() {
   await write_obj_to_db(db, obj);
   url_to_base64 = new_url_to_base64;
   url_diff = false;
+  red_missing = false;
   offline_ready = true;
   err_status = '';
 }
@@ -5888,6 +5904,7 @@ async function check_stop(from) {
 async function idle_delete_obs_files(and_new_files) {
   console.info('idle_delete_obs_files()');
   activity = 'delete';
+  msg = 'Deleting obsolete offline files';
   try {
     let cache = await caches.open(BASE64_CACHE_NAME);
     await delete_obs_files(cache, and_new_files);
@@ -5928,11 +5945,14 @@ async function delete_obs_files(cache, and_new_files) {
     }
   }
   console.info('done with delete_obs_files()');
-  console.assert(num_obs_files == 0);
+  if (num_obs_files) {
+    console.error('num_obs_files:', num_obs_files);
+  }
 }
 async function kill_old_files() {
   offline_ready = false;
   url_diff = true;
+  red_missing = false;
   make_old_files_obsolete();
   await delete_db();
 }
@@ -5995,7 +6015,6 @@ async function update_usage() {
   } else {
     var kb_needed = kb_usage + ((kb_total - kb_cached) * 1.2) + (10 * 1024);
   }
-  quota = 1350000*1024;
   if (!is_cache_up_to_date() &&
       (num_old_files + num_obs_files) &&
       quota &&
@@ -6004,5 +6023,4 @@ async function update_usage() {
   } else {
     extra_msg = '';
   }
-  console.log('extra:', num_old_files + num_obs_files, kb_needed, quota, extra_msg);
 }

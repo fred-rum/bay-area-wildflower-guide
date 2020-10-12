@@ -945,16 +945,14 @@ an update is available.  [icon is home-icon.png]
 Yellow: The Guide is operating offline.  An update is available
 whenever you are ready.
 
-Red1: The Guide is having trouble connecting online.  Using the
-incomplete offline copy as a fallback. -- doesn't seem useful
-
 Red2: Some files have gone missing from the offline copy.  Connecting
 online for those files. -- yes; should be detected during cache
 validation.  If any fundamental files are missing, clear offline_ready
 and the indexedDB (so a refresh picks up a coherent set).
 
 Red3: Some files are missing from the offline copy.  Oops, that's my
-fault.  Check back for updates. -- yes; can only be detected during fetch
+fault.  Check back for updates. -- yes; can only be detected during user
+fetch
 
 
 Calculate 'browser allows up to' in either MB or GB, whichever is
@@ -1008,20 +1006,9 @@ Existing data has a black bar, but no slanty color (and it would be
 
 status = 0.0 + 0.7 / 643.5 MB ?  Ugh.
 
-Move long status text to below the button.  E.g.
-[Pause Update] +0.7 / 1.3 MB
-Fetching html/zigzag larkspur.html
-[Delete Offline Files]
-645.8 MB including overhead
-(browser allows up to 279.4 GB)
-
 In this case, +0.7 / 1.3 MB corresponds to the zoomed bars, so
 adjusting the text vertically to ~align with that part of the bar
 might work.
-
-
-Make a top_msg for when the guide is operating online.  E.g.
-{in blue or gray} [wifi symbol] The Guide is currently operating online.
 
 
 Create an 'other' directory with txt files for index, chrome, safari,
@@ -1036,15 +1023,6 @@ swi.js starts polling on DOMContentLoaded, and the resulting element
 changes could force the document to be laid out before the CSS is
 loaded.  (Firefox complains.)  There's really no reason to not wait
 until the page is fully loaded.
-
-If quota < usage + ((kb_total - kb_cached) * 1.2),
-"The Guide will delete old files if necessary to make space for the update."
-Append it to the usage message.
-Use hysteresis to avoid flicker during update, e.g. < 1.2x to appear,
-> 1.25x to disappear.  Or use a +C constant of a few tens of MB.
-May need to adjust C when the margin is written.
-Suppress the message when delete is in progress or when no update is
-pending or when there are no old/obsolete files to delete.
 
 increase margin to 20+ MB?  But increasing the margin might also make
 the sw.js process larger unless I split things up somehow.
@@ -1067,3 +1045,17 @@ to photos/... are re-directed to thumbs/...
 
 Should count_cache ('init2') be activated only from the home page
 (e.g. triggered by a poll message)?
+
+Should kb_cached be displayed only after count_cache() is complete?
+E.g. display '? / [total] MB' until then.
+
+Add tabindex and other keyboard accessibility to hazard icon.
+
+Detect 'red-missing' during user fetch.
+
+When offline, degrade a 'photos/*' fetch to 'thumbs/*', and a
+'thumbs/*' fetch to 404.  Also degrade 'figures/*' to 404.  Other
+fetches are (presumably) small and can attempt an online access.
+
+Danger: browser may try to fetch unreferenced files,
+e.g. {root}/favicon/ico

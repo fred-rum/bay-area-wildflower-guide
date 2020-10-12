@@ -80,6 +80,10 @@ var kb_total = 0;
 // cached (i.e. a subset of kb_total).
 var kb_cached = 0;
 
+// Indicate cache errors.
+var red_missing = false; // someone deleted files from the cache
+var red_missed = false;  // we forgot to put files in the cache
+
 
 
 /*** Install the service worker ***/
@@ -382,6 +386,12 @@ async function init_status() {
 async function count_cached() {
   console.info('count_cached()');
 
+  old_base64 = {};
+  all_base64 = {};
+  kb_cached = 0;
+  num_old_files = 0;
+  num_obs_files = 0;
+
   // Generate a dictionary of old base64 keys from the old url_to_base64
   // data read earlier.
   for (let url in url_to_base64) {
@@ -389,7 +399,6 @@ async function count_cached() {
     old_base64[base64] = true;
   }
 
-  console.info('checking base64 keys in the cache');
   let cache = await caches.open(BASE64_CACHE_NAME);
   let requests = await cache.keys();
 
@@ -403,6 +412,15 @@ async function count_cached() {
       num_old_files++;
     } else {
       num_obs_files++;
+    }
+  }
+
+  // Check for files that are supposed to be in the offline copy
+  // but have gone missing.
+  for (let base64 in old_base64) {
+    if (!(base64 in all_base64)) {
+      red_missing = true;
+      url_diff = true;
     }
   }
 
@@ -426,12 +444,7 @@ function check_url_diff() {
   // clear, so be sure to throw away old values before accumulating
   // new data.
   base64_to_kb = {};
-  old_base64 = {};
-  all_base64 = {};
   kb_total = 0;
-  kb_cached = 0;
-  num_old_files = 0;
-  num_obs_files = 0;
 
   new_url_to_base64 = {};
   for (let i = 0; i < url_data.length; i++) {
@@ -632,6 +645,9 @@ function fn_send_status(event) {
   // offline_ready is initialized quickly so that we can respond to
   // initial fetches as soon as possible.  But don't set the top_msg
   // until we've checked whether what color it should be.
+  //
+  // icon is no longer used in the latest swi.js, but it is supported
+  // for a potentially cached copy of swi.js.
   var icon = undefined;
   var top_msg = undefined;
   if (activity !== 'init1') {
@@ -667,6 +683,8 @@ function fn_send_status(event) {
     usage: usage_msg,
     extra: extra_msg,
     top_msg: top_msg,
+    red_missing: red_missing,
+    red_missed: red_missed,
     icon: icon,
     clear_class: clear_class,
   };
@@ -1053,6 +1071,7 @@ async function record_urls() {
 
   url_to_base64 = new_url_to_base64;
   url_diff = false;
+  red_missing = false;
   offline_ready = true;
 
   // We might have encountered an issue during processing,
@@ -1081,6 +1100,7 @@ async function check_stop(from) {
 async function idle_delete_obs_files(and_new_files) {
   console.info('idle_delete_obs_files()');
   activity = 'delete';
+  msg = 'Deleting obsolete offline files';
   
   try {
     let cache = await caches.open(BASE64_CACHE_NAME);
@@ -1150,12 +1170,15 @@ async function delete_obs_files(cache, and_new_files) {
   }
 
   console.info('done with delete_obs_files()');
-  console.assert(num_obs_files == 0);
+  if (num_obs_files) {
+    console.error('num_obs_files:', num_obs_files);
+  }
 }
 
 async function kill_old_files() {
   offline_ready = false;
   url_diff = true;
+  red_missing = false;
   make_old_files_obsolete();
   await delete_db();
 }
@@ -1265,6 +1288,4 @@ async function update_usage() {
   } else {
     extra_msg = '';
   }
-
-  console.log('extra:', num_old_files + num_obs_files, kb_needed, quota, extra_msg);
 }

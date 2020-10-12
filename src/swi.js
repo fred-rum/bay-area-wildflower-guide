@@ -12,6 +12,8 @@ var e_usage;
 var e_extra;
 
 var e_top_msg = {};
+var e_red_missing;
+var e_red_missed;
 
 var e_body;
 var e_icon;
@@ -29,6 +31,8 @@ var wakelock;
 var poll_interval = 500; // in milliseconds
 var polls_since_response = 0;
 var timed_out = false;
+
+var root_path;
 
 /* If the readyState is 'interactive', then the user can (supposedly)
    interact with the page, but it may still be loading HTML, images,
@@ -64,14 +68,20 @@ async function swi_oninteractive() {
       console.info(top_msg, e_top_msg[top_msg]);
     }
 
-    e_status.innerHTML = 'Waiting for the service worker to load';
+    e_red_missing = document.getElementById('red-missing');
+    e_red_missed = document.getElementById('red-missed');
 
-    var sw_path = 'sw.js';
+    e_status.innerHTML = 'Waiting for the service worker to load';
   } else {
     e_body = document.getElementById('body');
-
-    var sw_path = '../sw.js';
   }
+
+  if (window.location.pathname.includes('/html/')) {
+    root_path = '../';
+  } else {
+    root_path = '';
+  }
+  var sw_path = root_path + 'sw.js';
 
   if ('serviceWorker' in navigator) {
     try {
@@ -217,6 +227,22 @@ function fn_receive_status(event) {
       }
     }
 
+    if (msg.red_missing !== old_msg.red_missing) {
+      if (msg.red_missing) {
+        e_red_missing.style.display = 'block';
+      } else {
+        e_red_missing.style.display = 'none';
+      }
+    }
+
+    if (msg.red_missed !== old_msg.red_missed) {
+      if (msg.red_missed) {
+        e_red_missed.style.display = 'block';
+      } else {
+        e_red_missed.style.display = 'none';
+      }
+    }
+
     if (msg.clear_class !== old_msg.clear_class) {
       e_clear.className = msg.clear_class;
     }
@@ -236,6 +262,8 @@ function fn_receive_status(event) {
     e_usage.innerHTML = '';
     e_extra.innerHTML = '';
     e_top_msg.style.display = 'none';
+    e_red_missing.style.display = 'none';
+    e_red_missed.style.display = 'none';
   }
 }
 
@@ -245,7 +273,8 @@ function fn_update(event) {
     // break down.  So regardless of what we *think* the status is, always
     // send the 'update' message and let the service worker sort it out.
     post_msg('update');
-    localStorage.removeItem('yellow_expire');
+    localStorage.removeItem('click_time_yellow');
+    localStorage.removeItem('click_time_missing');
 
     init_permissions();
   }
@@ -287,23 +316,36 @@ function fn_clear_keydown(event) {
 function fn_receive_icon(event) {
   let msg = event.data;
 
-  let yellow_expire = get_yellow_expire();
-  if ((msg.icon == 'yellow') &&
-      ((yellow_expire === null) || (Date.now() > yellow_expire))) {
+  let click_time_yellow = get_click_time('yellow');
+  let click_time_missing = get_click_time('missing');
+
+  let ms_in_12hrs = 1000*60*60*12;
+  let ms_in_10days = 1000*60*60*24*10;
+
+  if (msg.red_missing &&
+      (Date.now() > click_time_missing + ms_in_12hrs) &&
+      (msg.update_class === 'update-update')) {
+    var icon = 'missing';
+  } else if ((msg.top_msg === 'yellow') &&
+             (Date.now() > click_time_yellow + ms_in_10days) &&
+             (msg.update_class === 'update-update')) {
     var icon = 'yellow';
   } else {
     var icon = undefined;
   }
 
   if (icon !== old_icon) {
-    if (icon === 'yellow') {
-      console.info('displaying hazard icon');
-      if (!e_icon) {
-        console.info('inserting hazard icon');
-        e_body.insertAdjacentHTML('afterbegin', '<div id="icon"><img src="../icons/hazard.svg" class="hazard-img"></div>');
-        e_icon = document.getElementById('icon');
-        e_icon.addEventListener('click', fn_icon_click);
-      }
+    console.info('changing to icon:' + icon);
+    if (!e_icon) {
+      console.info('inserting hazard icon');
+      e_body.insertAdjacentHTML('afterbegin', '<div id="icon"><img src="' + root_path + 'icons/hazard.svg" class="hazard-img"></div>');
+      e_icon = document.getElementById('icon');
+      e_icon.addEventListener('click', fn_icon_click);
+    }
+    if (icon === 'missing') {
+      e_icon.className = 'icon-yellow-red';
+      e_icon.style.display = 'block';
+    } else if (icon === 'yellow') {
       e_icon.className = 'icon-yellow';
       e_icon.style.display = 'block';
     } else {
@@ -312,29 +354,31 @@ function fn_receive_icon(event) {
   }
 
   old_icon = icon;
-
-  update_wakelock(msg);
 }
 
-/* We get the yellow_expire value from local storage every time we
-   need it instead of keeping a local variable.  This ensures that
-   multiple windows stay in sync. */
-function get_yellow_expire(event) {
-  let yellow_expire = localStorage.getItem('yellow_expire');
-  if (yellow_expire != null) {
-    yellow_expire = parseFloat(yellow_expire);
+/* We get the expire time from local storage every time we need it
+   instead of keeping a local variable.  This ensures that multiple
+   windows stay in sync. */
+function get_click_time(name) {
+  let expire_str = localStorage.getItem('click_time_' + name);
+  if (expire_str) {
+    return parseFloat(expire_str);
+  } else {
+    return 0.0;
   }
-  return yellow_expire;
 }
 
 function fn_icon_click(event) {
-  let ms_in_week = 1000*60*60*24*7;
-  let yellow_expire = Date.now() + ms_in_week;
-  localStorage.setItem('yellow_expire', String(yellow_expire));
+  if (old_icon === 'missing') {
+    localStorage.setItem('click_time_missing', String(Date.now()));
+    localStorage.setItem('click_time_yellow', String(Date.now()));
+  } else if (old_icon === 'yellow') {
+    localStorage.setItem('click_time_yellow', String(Date.now()));
+  }
   if (event.shiftKey || event.ctrlKey) {
-    window.open('../index.html#offline');
+    window.open(root_path + 'index.html#offline');
   } else {
-    window.location.href = '../index.html#offline';
+    window.location.href = root_path + 'index.html#offline';
   }
 }
 
