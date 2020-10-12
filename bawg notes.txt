@@ -864,18 +864,6 @@ The home-icon can't be selected with the "tab" key (no keyboard
 focus), presumably because of its absolute position.  Can I fix that?
 Perhaps a negative margin on the scroll container?
 
-'show/hide details', 'update cache', and 'clear cache' should also be
-part of the tab chain.  'keyboard-focusable'?  tabindex=0?
-https://developer.mozilla.org/en-US/docs/Web/Accessibility/Understanding_WCAG/Keyboard#Focusable_element_must_have_focus_styling
-Make the buttons more active when focused.
-role="button"
-
-type="search" creates an 'x' on the right.  Good or bad?
-I think it's OK.
-
-Firefox doesn't support "fit-content", so color boxes fill the
-available space.  It's not terrible, but use max-width to limit?
-
 test PWA service worker locally:
 /cygdrive/c/Python37/python -m http.server
 http://localhost:8000/

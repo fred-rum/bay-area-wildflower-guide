@@ -109,7 +109,7 @@ div.color-grid {
     display: grid;
     grid-auto-flow: column;
     grid-template-rows: repeat(7, 1fr);
-    width: fit-content;
+    width: max-content;
     gap: 5px;
 }
 @media (min-width: 750px) {

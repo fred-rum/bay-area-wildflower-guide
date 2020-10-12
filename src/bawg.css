@@ -275,12 +275,17 @@ dd {
 /*** properties related to color boxes on the BAWG home page ***/
 
 /* The color-grid is 7x2 if that fits in the width of the screen.
-   Otherwise it is 2x7. */
+   Otherwise it is 2x7.
+
+   By default the browser apportions 100% of the available width
+   among the columns.  'width: max-content' instead sets the preferred
+   width of each column to be the maximum width of any cell's contents.
+*/
 div.color-grid {
     display: grid;
     grid-auto-flow: column;
     grid-template-rows: repeat(7, 1fr);
-    width: fit-content;
+    width: max-content;
     gap: 5px;
 }
 @media (min-width: 750px) {
