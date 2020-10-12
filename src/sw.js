@@ -84,6 +84,9 @@ var kb_cached = 0;
 var red_missing = false; // someone deleted files from the cache
 var red_missed = false;  // we forgot to put files in the cache
 
+// When validate_flag is true, the cache will be revalidated at the
+// next opportunity.
+var validate_flag = false;
 
 
 /*** Install the service worker ***/
@@ -276,14 +279,24 @@ async function fetch_response(event, url) {
 
   let response = await caches.match(url_to_base64[url]);
 
+  if (!response) {
+    red_missing = true;
+    validate_flag = true;
+    url_diff = true;
+  }
+
   // If the offline copy of a full-size photo is missing, try falling back
   // to its thumbnail.
   if (!response && url.startsWith('photos/')) {
     console.info('%s not found; falling back to thumbnail', url);
-    let thumb_url = 'thumbs/' + url.substr('photos/'.length);
-    // If url_to_base64[thumb_url] is undefined, then no cache will match.
+    let alt_url = 'thumbs/' + url.substr('photos/'.length);
+    // If url_to_base64[alt_url] is undefined, then no cache will match.
     // I.e. we don't have to explicitly check whether url is valid.
-    response = await caches.match(url_to_base64[thumb_url]);
+    response = await caches.match(url_to_base64[alt_url]);
+  } else if (!response && url.startsWith('thumbs/')) {
+    console.info('%s not found; falling back to full-size photo', url);
+    let alt_url = 'photos/' + url.substr('thumbs/'.length);
+    response = await caches.match(url_to_base64[alt_url]);
   }
 
   if (response) {
@@ -331,15 +344,17 @@ function generate_404(url, msg) {
 async function read_db() {
   console.info('read_db()');
 
-  let db = await open_db();
-
   try {
+    let db = await open_db();
     let tx = db.transaction('url_data').objectStore('url_data').get('data');
     let lookup = await async_callbacks(tx);
     console.info('lookup =', lookup);
     url_to_base64 = lookup.url_to_base64;
     if (url_to_base64 === undefined) throw 'oops';
     offline_ready = true;
+
+    // Note that we throw away the db value when we exit its scope.
+    // My guess is that this allows the DB connection to close.
   } catch (e) {
     console.info('indexedDB lookup failed', e);
     console.info('(This is normal if it was not initialized.)');
@@ -347,8 +362,12 @@ async function read_db() {
     offline_ready = false;
   }
 
-  // Note that we throw away the db value when we exit.
-  // My guess is that this allows the DB connection to close.
+  // Generate a dictionary of old base64 keys from the url_to_base64 data.
+  old_base64 = {};
+  for (let url in url_to_base64) {
+    let base64 = url_to_base64[url];
+    old_base64[base64] = true;
+  }
 }
 
 async function open_db() {
@@ -401,6 +420,10 @@ async function init_status() {
 
   check_url_diff();
 
+  validate_cache();
+}
+
+function validate_cache() {
   activity = 'init2';
   msg = 'Validating offline files';
   activity_promise = count_cached();
@@ -411,18 +434,10 @@ async function init_status() {
 async function count_cached() {
   console.info('count_cached()');
 
-  old_base64 = {};
   all_base64 = {};
   kb_cached = 0;
   num_old_files = 0;
   num_obs_files = 0;
-
-  // Generate a dictionary of old base64 keys from the old url_to_base64
-  // data read earlier.
-  for (let url in url_to_base64) {
-    let base64 = url_to_base64[url];
-    old_base64[base64] = true;
-  }
 
   let cache = await caches.open(BASE64_CACHE_NAME);
   let requests = await cache.keys();
@@ -448,6 +463,8 @@ async function count_cached() {
       url_diff = true;
     }
   }
+
+  validate_flag = false;
 
   console.info('init done');
   activity = 'idle';
@@ -587,8 +604,10 @@ function fn_send_status(event) {
     }
   }
 
-  // If nothing else is going on, delete obsolete files.
-  if ((activity === 'idle') && num_obs_files) {
+  // If nothing else is going on, validate the cache or delete obsolete files.
+  if ((activity === 'idle') && validate_flag) {
+    validate_cache();
+  } else if ((activity === 'idle') && num_obs_files) {
     activity_promise = idle_delete_obs_files(false);
     monitor_promise();
   }
@@ -858,13 +877,11 @@ async function update_cache() {
 
     await protected_write(cache, func);
 
-    await record_urls();
-
     // The old files are now obsolete.
     make_old_files_obsolete();
 
-    // The new files are now also old.
-    old_base64 = base64_to_kb;
+    // The new files are now official.
+    await record_urls();
   } catch (e) {
     if (!e) {
       // If we receive a null, then the error has been sufficiently
@@ -1095,9 +1112,11 @@ async function record_urls() {
   await write_obj_to_db(db, obj);
 
   url_to_base64 = new_url_to_base64;
+  old_base64 = base64_to_kb;
   url_diff = false;
   red_missing = false;
   offline_ready = true;
+  validate_flag = true;
 
   // We might have encountered an issue during processing,
   // but it doesn't matter anymore.

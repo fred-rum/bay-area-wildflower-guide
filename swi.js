@@ -222,7 +222,7 @@ function fn_receive_icon(event) {
     var icon = undefined;
   }
   if (icon !== old_icon) {
-    console.info('changing to icon:' + icon);
+    console.info('changing to icon:', icon);
     if (!e_icon) {
       console.info('inserting hazard icon');
       e_body.insertAdjacentHTML('afterbegin', '<div id="icon"><img src="' + root_path + 'icons/hazard.svg" class="hazard-img"></div>');

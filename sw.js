@@ -1,6 +1,6 @@
 'use strict';
 var url_data = [
-["swi.js", "iIzuOyEzrn8RgoOD2bxepRF9bps_XywS2Xom1g==", 10],
+["swi.js", "ioSvxmkK7TG3soQ8TaBtBMuDIVP3qm2eP5U5Fw==", 10],
 ["index.html", "NgfcdXm5VYAqUOuUQKZgUT1WSEcLAJEuCBN2zg==", 7],
 ["bawg.css", "OzYiLLK2a9gYFLkbKeUf10n8H9NKa128hjR7gA==", 12],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
@@ -5081,6 +5081,9 @@ var kb_cached = 0;
 // Indicate cache errors.
 var red_missing = false; // someone deleted files from the cache
 var red_missed = false;  // we forgot to put files in the cache
+// When validate_flag is true, the cache will be revalidated at the
+// next opportunity.
+var validate_flag = false;
 /*** Install the service worker ***/
 // If this service worker (sw.js) is already registered, then the
 // browser has it in its cache and executes it before fetching
@@ -5245,14 +5248,23 @@ async function fetch_response(event, url) {
     return generate_404(url, ' is not part of the current Guide.  Try the search bar.');
   }
   let response = await caches.match(url_to_base64[url]);
+  if (!response) {
+    red_missing = true;
+    validate_flag = true;
+    url_diff = true;
+  }
   // If the offline copy of a full-size photo is missing, try falling back
   // to its thumbnail.
   if (!response && url.startsWith('photos/')) {
     console.info('%s not found; falling back to thumbnail', url);
-    let thumb_url = 'thumbs/' + url.substr('photos/'.length);
-    // If url_to_base64[thumb_url] is undefined, then no cache will match.
+    let alt_url = 'thumbs/' + url.substr('photos/'.length);
+    // If url_to_base64[alt_url] is undefined, then no cache will match.
     // I.e. we don't have to explicitly check whether url is valid.
-    response = await caches.match(url_to_base64[thumb_url]);
+    response = await caches.match(url_to_base64[alt_url]);
+  } else if (!response && url.startsWith('thumbs/')) {
+    console.info('%s not found; falling back to full-size photo', url);
+    let alt_url = 'photos/' + url.substr('thumbs/'.length);
+    response = await caches.match(url_to_base64[alt_url]);
   }
   if (response) {
     console.info('%s found', url)
@@ -5293,22 +5305,28 @@ function generate_404(url, msg) {
 // Read the cached url_to_base64.
 async function read_db() {
   console.info('read_db()');
-  let db = await open_db();
   try {
+    let db = await open_db();
     let tx = db.transaction('url_data').objectStore('url_data').get('data');
     let lookup = await async_callbacks(tx);
     console.info('lookup =', lookup);
     url_to_base64 = lookup.url_to_base64;
     if (url_to_base64 === undefined) throw 'oops';
     offline_ready = true;
+    // Note that we throw away the db value when we exit its scope.
+    // My guess is that this allows the DB connection to close.
   } catch (e) {
     console.info('indexedDB lookup failed', e);
     console.info('(This is normal if it was not initialized.)');
     url_to_base64 = {};
     offline_ready = false;
   }
-  // Note that we throw away the db value when we exit.
-  // My guess is that this allows the DB connection to close.
+  // Generate a dictionary of old base64 keys from the url_to_base64 data.
+  old_base64 = {};
+  for (let url in url_to_base64) {
+    let base64 = url_to_base64[url];
+    old_base64[base64] = true;
+  }
 }
 async function open_db() {
   let request = indexedDB.open(DB_NAME, DB_VERSION);
@@ -5348,6 +5366,9 @@ async function init_status() {
   // compare it to the new_url_to_base64.
   await read_db();
   check_url_diff();
+  validate_cache();
+}
+function validate_cache() {
   activity = 'init2';
   msg = 'Validating offline files';
   activity_promise = count_cached();
@@ -5356,17 +5377,10 @@ async function init_status() {
 // Also compute the total KB that will be cached if the cache is updated.
 async function count_cached() {
   console.info('count_cached()');
-  old_base64 = {};
   all_base64 = {};
   kb_cached = 0;
   num_old_files = 0;
   num_obs_files = 0;
-  // Generate a dictionary of old base64 keys from the old url_to_base64
-  // data read earlier.
-  for (let url in url_to_base64) {
-    let base64 = url_to_base64[url];
-    old_base64[base64] = true;
-  }
   let cache = await caches.open(BASE64_CACHE_NAME);
   let requests = await cache.keys();
   for (let i = 0; i < requests.length; i++) {
@@ -5388,6 +5402,7 @@ async function count_cached() {
       url_diff = true;
     }
   }
+  validate_flag = false;
   console.info('init done');
   activity = 'idle';
 }
@@ -5504,8 +5519,10 @@ function fn_send_status(event) {
       console.info(activity + ': ignore delete request');
     }
   }
-  // If nothing else is going on, delete obsolete files.
-  if ((activity === 'idle') && num_obs_files) {
+  // If nothing else is going on, validate the cache or delete obsolete files.
+  if ((activity === 'idle') && validate_flag) {
+    validate_cache();
+  } else if ((activity === 'idle') && num_obs_files) {
     activity_promise = idle_delete_obs_files(false);
     monitor_promise();
   }
@@ -5739,11 +5756,10 @@ async function update_cache() {
       await fetch_all_to_cache_parallel(cache);
     };
     await protected_write(cache, func);
-    await record_urls();
     // The old files are now obsolete.
     make_old_files_obsolete();
-    // The new files are now also old.
-    old_base64 = base64_to_kb;
+    // The new files are now official.
+    await record_urls();
   } catch (e) {
     if (!e) {
       // If we receive a null, then the error has been sufficiently
@@ -5909,9 +5925,11 @@ async function record_urls() {
         };
   await write_obj_to_db(db, obj);
   url_to_base64 = new_url_to_base64;
+  old_base64 = base64_to_kb;
   url_diff = false;
   red_missing = false;
   offline_ready = true;
+  validate_flag = true;
   err_status = '';
 }
 function sleep(ms) {
