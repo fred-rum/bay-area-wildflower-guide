@@ -1104,20 +1104,22 @@ img.hazard-img {
        creates some margin. */
     margin-right: 3px;
 }
-div#icon {
+#icon {
     display: block;
     float: right;
     cursor: pointer;
     padding: 5px;
+    margin-top: 2px; /* give it enough room for a focus outline */
+    position: relative; /* establish stack context so that z-index works */
     z-index: 30;
 }
-div#icon .hazard-img {
+#icon .hazard-img {
     margin-right: 0px;
 }
-div#icon.icon-yellow {
+#icon.icon-yellow {
     background-color: #faffa3;
 }
-div#icon.icon-yellow-red {
+#icon.icon-yellow-red {
     background: linear-gradient(135deg, #faffa3 45%, #ffa8a3 57%, #ffa8a3);
 }
 

@@ -1,8 +1,8 @@
 'use strict';
 var url_data = [
-["swi.js", "ioSvxmkK7TG3soQ8TaBtBMuDIVP3qm2eP5U5Fw==", 10],
+["swi.js", "AvSXtOoaaANDn2SCYpKTuPOSNZZIMqVvCgkn2g==", 10],
 ["index.html", "NgfcdXm5VYAqUOuUQKZgUT1WSEcLAJEuCBN2zg==", 7],
-["bawg.css", "OzYiLLK2a9gYFLkbKeUf10n8H9NKa128hjR7gA==", 12],
+["bawg.css", "0PPFvRJ0uobtMb0Nf3n1-I9sG2oNxDJO3xbItA==", 12],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
 ["icons/online.svg", "V-n9Y6IMGrtTzQbte88RvxhNWq3UGukTp4SOCQ==", 2],
 ["icons/check.svg", "GZFdGrKC4UpM0uywABrTQILfNZ7T0U6iI8sMaw==", 2],

@@ -225,7 +225,7 @@ function fn_receive_icon(event) {
     console.info('changing to icon:', icon);
     if (!e_icon) {
       console.info('inserting hazard icon');
-      e_body.insertAdjacentHTML('afterbegin', '<div id="icon"><img src="' + root_path + 'icons/hazard.svg" class="hazard-img"></div>');
+      e_body.insertAdjacentHTML('afterbegin', '<a href="' + root_path + 'index.html#offline" tabindex="0" id="icon"><img src="' + root_path + 'icons/hazard.svg" class="hazard-img"></a>');
       e_icon = document.getElementById('icon');
       e_icon.addEventListener('click', fn_icon_click);
     }
@@ -255,11 +255,6 @@ function fn_icon_click(event) {
     localStorage.setItem('click_time_yellow', String(Date.now()));
   } else if (old_icon === 'yellow') {
     localStorage.setItem('click_time_yellow', String(Date.now()));
-  }
-  if (event.shiftKey || event.ctrlKey) {
-    window.open(root_path + 'index.html#offline');
-  } else {
-    window.location.href = root_path + 'index.html#offline';
   }
 }
 async function update_wakelock(msg) {

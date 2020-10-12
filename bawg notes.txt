@@ -1051,10 +1051,4 @@ Should count_cache ('init2') be activated only from the home page
 Should kb_cached be displayed only after count_cache() is complete?
 E.g. display '? / [total] MB' until then.
 
-Add tabindex and other keyboard accessibility to hazard icon.
-
-Detect 'red-missing' during user fetch.
-
-When offline, degrade a 'photos/*' fetch to 'thumbs/*', and a
-'thumbs/*' fetch to 404.  Also degrade 'figures/*' to 404.  Other
-fetches are (presumably) small and can attempt an online access.
+Add rel="noopener noreferrer" everywhere with target="_blank".
