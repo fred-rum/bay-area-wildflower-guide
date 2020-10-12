@@ -230,7 +230,7 @@ function fn_receive_icon(event) {
       e_icon.addEventListener('click', fn_icon_click);
     }
     if (icon === 'missing') {
-      e_icon.className = 'icon-yellow-red';
+      e_icon.className = 'icon-red';
       e_icon.style.display = 'block';
     } else if (icon === 'yellow') {
       e_icon.className = 'icon-yellow';

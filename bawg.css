@@ -586,8 +586,8 @@ img.hazard-img {
 #icon.icon-yellow {
     background-color: #faffa3;
 }
-#icon.icon-yellow-red {
-    background: linear-gradient(135deg, #faffa3 45%, #ffa8a3 57%, #ffa8a3);
+#icon.icon-red {
+    backgroun-color: #ffa8a3;
 }
 #offline:target {
     background-color: inherit;

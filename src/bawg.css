@@ -1124,8 +1124,11 @@ img.hazard-img {
 #icon.icon-yellow {
     background-color: #faffa3;
 }
-#icon.icon-yellow-red {
+#icon.icon-red {
+/*
     background: linear-gradient(135deg, #faffa3 45%, #ffa8a3 57%, #ffa8a3);
+*/
+    backgroun-color: #ffa8a3;
 }
 
 /* When navigating from the hazard icon to the offline section, don't
