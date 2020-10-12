@@ -882,8 +882,8 @@ cache warnings:
 
 Track whether the cached URLs are complete.  This is an extra flag in
 indexedDB.  It is marked 'false' when a cache update starts and
-changed to 'tru' when a cache update completes successfully.  It is
-erased when the caches are clared.  Note that it only describes the
+changed to 'true' when a cache update completes successfully.  It is
+erased when the caches are cleared.  Note that it only describes the
 cache contents without regard to the current manifest.
 
 If the complete flag is false, fetches default to online and fall back
@@ -945,27 +945,6 @@ e.g. {root}/favicon/ico.  Or user could have used an old or otherwise
 invalid URL.
 
 
-Calculate 'browser allows up to' in either MB or GB, whichever is
-appropriate.  E.g. MB if <= 9999.
-
-Change MB to whole numbers instead of tenths.
-
-Mac Safari doesn't show usage or quota.  And that screws with the
-user's perception of forward progress when things get interrupted.  If
-usage cannot be measured, at least create a message saying so.  Or
-simulate usage with my own calculated values (but with no quota,
-obviously).  "(guesstimate)"
-
-Round off the corners of the buttons.
-
-Change the buttons to stack the words vertically?  E.g.
-Update
-Offline
- Files
-Then the status on the right will fit better in an inline-block.
-It could be dependent on the screen width.
-
-
 Progress indicator should be better.  Perhaps...
 a bar/line with colors:
 green is how much is kept from the previous version.
@@ -1004,10 +983,6 @@ might work.
 Create an 'other' directory with txt files for index, chrome, safari,
 and firefox.  Parse those with either a search bar or hazard icon.
 Remember the differing relative path.
-
-Clearing the site data during an update creates an insane exception.
-For an unrecognized exception, should I revalidate the cache?
-(I.e. start over from the beginning.)
 
 swi.js starts polling on DOMContentLoaded, and the resulting element
 changes could force the document to be laid out before the CSS is

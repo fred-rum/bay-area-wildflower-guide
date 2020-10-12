@@ -1,8 +1,8 @@
 'use strict';
 var url_data = [
-["swi.js", "AvSXtOoaaANDn2SCYpKTuPOSNZZIMqVvCgkn2g==", 10],
+["swi.js", "qCgKzcvAeqTedJZmecnyw3AfEFH7Dl2dWH1iZA==", 10],
 ["index.html", "NgfcdXm5VYAqUOuUQKZgUT1WSEcLAJEuCBN2zg==", 7],
-["bawg.css", "snwL0kXr0qKA4NrlzrXTGnq_L7_4JrKJYGzJ7A==", 12],
+["bawg.css", "kpgZ_DOOYLPDB4MhSwzvG5kNUnsMgu_zrWipiQ==", 12],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
 ["icons/online.svg", "V-n9Y6IMGrtTzQbte88RvxhNWq3UGukTp4SOCQ==", 2],
 ["icons/check.svg", "GZFdGrKC4UpM0uywABrTQILfNZ7T0U6iI8sMaw==", 2],
@@ -5693,6 +5693,7 @@ async function clear_caches() {
       console.error(e);
       err_status = e.name + '<br>Something went wrong.  Refresh and try again?';
       activity = 'idle';
+      validate_flag = true;
     }
   }
 }
@@ -5789,6 +5790,7 @@ async function update_cache() {
   // Whether we completed succesfully or bailed out on an error,
   // we're idle now.
   activity = 'idle';
+  validate_flag = true;
 }
 // Wrap a function call in code that reacts appropriately to quota errors.
 // If the write fails while there is old or obsolete data that can be deleted,
@@ -5935,7 +5937,6 @@ async function record_urls() {
   url_diff = false;
   red_missing = false;
   offline_ready = true;
-  validate_flag = true;
   err_status = '';
 }
 function sleep(ms) {
@@ -5958,6 +5959,7 @@ async function idle_delete_obs_files(and_new_files) {
     if (e) {
       console.error(e);
       err_status = e.name + '<br>Something went wrong.  Refresh and try again?';
+      validate_flag = true;
     }
   }
   activity = 'idle';

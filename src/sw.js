@@ -800,6 +800,7 @@ async function clear_caches() {
       console.error(e);
       err_status = e.name + '<br>Something went wrong.  Refresh and try again?';
       activity = 'idle';
+      validate_flag = true;
     }
   }
 }
@@ -914,6 +915,8 @@ async function update_cache() {
   // Whether we completed succesfully or bailed out on an error,
   // we're idle now.
   activity = 'idle';
+
+  validate_flag = true;
 }
 
 // Wrap a function call in code that reacts appropriately to quota errors.
@@ -1123,7 +1126,6 @@ async function record_urls() {
   url_diff = false;
   red_missing = false;
   offline_ready = true;
-  validate_flag = true;
 
   // We might have encountered an issue during processing,
   // but it doesn't matter anymore.
@@ -1160,6 +1162,7 @@ async function idle_delete_obs_files(and_new_files) {
     if (e) {
       console.error(e);
       err_status = e.name + '<br>Something went wrong.  Refresh and try again?';
+      validate_flag = true;
     }
   }
 
