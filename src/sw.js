@@ -235,7 +235,7 @@ function fetch_handler(event) {
   let url = remove_scope_from_request(event.request);
   console.info('fetching', url);
 
-  if ((!url_to_base64) || (url in url_to_base64)) {
+  if (!url_to_base64 || offline_ready) {
     // There is a race condition between initializing url_to_base64
     // and fetching the first URL.  Fortunately, our fetch
     // response is allowed to be asynchronous.  So if we recognize
@@ -243,13 +243,7 @@ function fetch_handler(event) {
     // to wait until we can create a fetch response.
     event.respondWith(fetch_response(event, url));
   } else {
-    // We got here because the URL wasn't recognized in url_to_base64,
-    // which can happen either because url_to_base64 is empty (and
-    // offline_ready is false) or because we're trying to fetch a file
-    // that we don't recognize.
-    if (offline_ready) {
-      console.info(url, 'not recognized')
-    }
+    console.info(url, ' fetched in online mode')
 
     // I found some documentation that says that performance is
     // better if we simply fail to handle a request, in which case
@@ -271,17 +265,50 @@ async function fetch_response(event, url) {
   // Now we're guaranteed to have url_to_base64 and can proceed with
   // checking the cache.
 
+  if (!(url in url_to_base64)) {
+    // If we're offline and a fetch is attempted of an unrecognized file,
+    // generate a 404 without attempting an online fetch.  This can happen
+    // when the browser speculatively fetches a file such as favicon.ico.
+    // Or the user could type in a URL by hand or use an old URL.
+    console.info('%s not recognized; generating a 404', url)
+    return generate_404(url, ' is not part of the current Guide.  Try the search bar.');
+  }
+
   let response = await caches.match(url_to_base64[url]);
-  console.info(response);
+
+  // If the offline copy of a full-size photo is missing, try falling back
+  // to its thumbnail.
+  if (!response && url.startsWith('photos/')) {
+    console.info('%s not found; falling back to thumbnail', url);
+    let thumb_url = 'thumbs/' + url.substr('photos/'.length);
+    // If url_to_base64[thumb_url] is undefined, then no cache will match.
+    // I.e. we don't have to explicitly check whether url is valid.
+    response = await caches.match(url_to_base64[thumb_url]);
+  }
+
   if (response) {
-    console.info(url, 'found')
+    console.info('%s found', url)
     return response;
+  }
+
+  if (url.startsWith('photos/') ||
+      url.startsWith('thumbs/') ||
+      url.startsWith('figures/') ||
+      url.startsWith('favicons/')) {
+    // Generate a 404 for non-essential files.
+    console.info('%s not found; generating a 404', url)
+    return generate_404(url, ' has gone missing from your offline copy.  Update your offline files.');
   } else {
-    console.info(url, 'not found')
+    // For small files and essential files (particularly those needed to
+    // run the service worker interface), get them from the internet.
+    console.info('%s not found; fetching from the internet', url)
     return fetch(event.request);
   }
 }
 
+function generate_404(url, msg) {
+  return Promise.resolve(new Response('<html>' + decodeURI(url) + msg, {'status': 404, headers: {'Content-Type': 'text/html; charset=utf-8'}}));
+}
 
 /*** Read the old url_to_base64 ***/
 
@@ -319,8 +346,6 @@ async function read_db() {
     url_to_base64 = {};
     offline_ready = false;
   }
-
-  console.info('url_to_base64 =', url_to_base64);
 
   // Note that we throw away the db value when we exit.
   // My guess is that this allows the DB connection to close.
