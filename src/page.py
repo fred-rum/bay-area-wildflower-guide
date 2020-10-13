@@ -1624,13 +1624,13 @@ class Page:
         elab = self.choose_elab(self.elab_inaturalist)
         if self.taxon_id:
             elab = format_elab(elab)
-            add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/{self.taxon_id}" target="_blank">iNaturalist</a>')
+            add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/{self.taxon_id}" target="_blank" rel="noopener noreferrer">iNaturalist</a>')
         else:
             sci = strip_sci(elab, keep='x')
             sci = re.sub(r' X', ' \xD7 ', sci)
             sciurl = url(sci)
             elab = format_elab(elab)
-            add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/search?q={sciurl}&view=list" target="_blank">iNaturalist</a>')
+            add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/search?q={sciurl}&view=list" target="_blank" rel="noopener noreferrer">iNaturalist</a>')
 
         if self.rank and (self.rank <= Rank.genus or self.rank is Rank.family):
             # CalFlora can be searched by family,
@@ -1639,7 +1639,7 @@ class Page:
             sci = strip_sci(elab, keep='b')
             sciurl = url(sci)
             elab = format_elab(elab)
-            add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={sciurl}" target="_blank">CalFlora</a>');
+            add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={sciurl}" target="_blank" rel="noopener noreferrer">CalFlora</a>');
 
         if self.rank and self.rank <= Rank.species:
             # CalPhotos cannot be searched by high-level classifications.
@@ -1663,7 +1663,7 @@ class Page:
             sciurl = url(sci)
             elab = ' / '.join(formatted_elab_terms)
             # rel-taxon=begins+with -> allows matches with lower-level detail
-            add_link(elab, self.elab_calphotos, f'<a href="https://calphotos.berkeley.edu/cgi/img_query?rel-taxon=begins+with&where-taxon={sciurl}" target="_blank">CalPhotos</a>');
+            add_link(elab, self.elab_calphotos, f'<a href="https://calphotos.berkeley.edu/cgi/img_query?rel-taxon=begins+with&where-taxon={sciurl}" target="_blank" rel="noopener noreferrer">CalPhotos</a>');
 
         if self.rank and (self.rank <= Rank.genus or self.rank is Rank.family):
             # Jepson can be searched by family,
@@ -1674,7 +1674,7 @@ class Page:
             sci = strip_sci(elab)
             sciurl = url(sci)
             elab = format_elab(elab)
-            add_link(elab, self.elab_jepson, f'<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sciurl}" target="_blank">Jepson&nbsp;eFlora</a>');
+            add_link(elab, self.elab_jepson, f'<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sciurl}" target="_blank" rel="noopener noreferrer">Jepson&nbsp;eFlora</a>');
 
         if self.rank and self.rank <= Rank.genus:
             elab = self.choose_elab(self.elab_calflora)
@@ -1689,7 +1689,7 @@ class Page:
             # wkt={...} -> search polygon with last point matching the first
             genusurl = url(genus)
             elab = format_elab(elab)
-            add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/entry/wgh.html#srch=t&taxon={genusurl}&group=none&fmt=photo&y=37.5&x=-122&z=8&wkt=-123.1+38,-121.95+38,-121.05+36.95,-122.2+36.95,-123.1+38" target="_blank">Bay&nbsp;Area&nbsp;species</a>')
+            add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/entry/wgh.html#srch=t&taxon={genusurl}&group=none&fmt=photo&y=37.5&x=-122&z=8&wkt=-123.1+38,-121.95+38,-121.05+36.95,-122.2+36.95,-123.1+38" target="_blank" rel="noopener noreferrer">Bay&nbsp;Area&nbsp;species</a>')
 
         link_list_txt = []
         for elab in elab_list:
@@ -2036,7 +2036,7 @@ class Page:
                         w.write(f'<a href="../{db_pfx}photos/{jpgurl}.jpg"><img class="leaf-thumb" src="../{db_pfx}thumbs/{jpgurl}.jpg" alt="photo"></a>')
 
                     for (label, link) in self.ext_photo_list:
-                        w.write(f'<a href="{link}" target="_blank" class="enclosed"><div class="leaf-thumb-text">')
+                        w.write(f'<a href="{link}" target="_blank" rel="noopener noreferrer" class="enclosed"><div class="leaf-thumb-text">')
                         if label:
                             w.write('<span>')
                         if 'calphotos' in link:

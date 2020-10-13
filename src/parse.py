@@ -68,7 +68,7 @@ def parse_txt(name, s, page, glossary):
 
     # Replace HTTP links in the text with ones that open a new tab.
     # This must be done before inserting internal links, e.g. ==... or {-...}.
-    s = re.sub(r'<a href="http', '<a target="_blank" href="http', s)
+    s = re.sub(r'<a href="http', '<a target="_blank" rel="noopener noreferrer" href="http', s)
 
     # Make easy substitutions in the text, such as "+-" and smart quotes.
     # Do this before linking to glossaries because the HTML added for

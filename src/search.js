@@ -129,7 +129,7 @@ function fn_link(fit_info) {
   /* I tried this and didn't like it.  If I ever choose to use it, I also
      have to change the behavior of the return key (where fn_url is used). */
   /*if (page_info.x == 'j') {
-    target = ' target="_blank"';
+    target = ' target="_blank" rel="noopener noreferrer"';
   }*/
 
   return 'class="enclosed ' + c + '"' + target + ' href="' + url + '" onclick="return fn_click();"';

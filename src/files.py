@@ -156,7 +156,7 @@ def write_footer(w):
     # given the different creation/modification dates of the pages *plus*
     # the photos on them.  The Berne Convention applies in any case.
     w.write(f'''<div class="footer">
-<span class="foot-left"><a class="home-link" href="../index.html"></a> <span class="foot-fade"> &copy; Chris Nelson</span></span><a class="foot-fade" href="../index.html#contact">Contact me</a>
+<span class="foot-left"><a class="home-link" href="../index.html" aria-label="home"></a> <span class="foot-fade"> &copy; Chris Nelson</span></span><a class="foot-fade" href="../index.html#contact">Contact me</a>
 </div>
 </div>
 </div>

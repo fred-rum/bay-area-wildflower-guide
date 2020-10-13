@@ -94,7 +94,7 @@ class Obs:
         w.write('<p>\n')
 
         if link:
-            w.write(f'<a href="{link}" target="_blank">Chris&rsquo;s observations</a>: ')
+            w.write(f'<a href="{link}" target="_blank" rel="noopener noreferrer">Chris&rsquo;s observations</a>: ')
         else:
             w.write('Chris&rsquo;s observations: ')
 

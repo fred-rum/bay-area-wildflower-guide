@@ -993,18 +993,6 @@ increase margin to 20+ MB?  But increasing the margin might also make
 the sw.js process larger unless I split things up somehow.
 
 
-Use a yellow/red gradiant for the icon when an update is available
-*and* a red hazard is present.  Display both (or all) messages on the
-home page.
-
-"Something went wrong.  Refresh and try again?" isn't a particularly
-good message when sw.js encounters something unexpected.  A refresh
-won't reload sw.js, so a refresh is never helpful.  Is it possible to
-force sw.js (e.g. by unregistering it and re-registering it?)  Or
-unregister it while asking the user for a refresh, which will
-re-register it.  (Make sure to disable time-out when it is
-unregistered.  Perhaps swi.js should do it.)
-
 Have an offline option for 'no full-size photos', in which case links
 to photos/... are re-directed to thumbs/...
 
@@ -1013,5 +1001,3 @@ Should count_cache ('init2') be activated only from the home page
 
 Should kb_cached be displayed only after count_cache() is complete?
 E.g. display '? / [total] MB' until then.
-
-Add rel="noopener noreferrer" everywhere with target="_blank".

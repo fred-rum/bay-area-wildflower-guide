@@ -13,7 +13,6 @@ var e_extra;
 
 var e_top_msg = {};
 var e_red_missing;
-var e_red_missed;
 
 var e_body;
 var e_icon;
@@ -69,7 +68,6 @@ async function swi_oninteractive() {
     }
 
     e_red_missing = document.getElementById('red-missing');
-    e_red_missed = document.getElementById('red-missed');
 
     e_status.innerHTML = 'Waiting for the service worker to load';
   } else {
@@ -235,14 +233,6 @@ function fn_receive_status(event) {
       }
     }
 
-    if (msg.red_missed !== old_msg.red_missed) {
-      if (msg.red_missed) {
-        e_red_missed.style.display = 'block';
-      } else {
-        e_red_missed.style.display = 'none';
-      }
-    }
-
     if (msg.clear_class !== old_msg.clear_class) {
       e_clear.className = msg.clear_class;
     }
@@ -263,7 +253,6 @@ function fn_receive_status(event) {
     e_extra.innerHTML = '';
     e_top_msg.style.display = 'none';
     e_red_missing.style.display = 'none';
-    e_red_missed.style.display = 'none';
   }
 }
 
@@ -338,7 +327,7 @@ function fn_receive_icon(event) {
     console.info('changing to icon:', icon);
     if (!e_icon) {
       console.info('inserting hazard icon');
-      e_body.insertAdjacentHTML('afterbegin', '<a href="' + root_path + 'index.html#offline" tabindex="0" id="icon"><img src="' + root_path + 'icons/hazard.svg" class="hazard-img"></a>');
+      e_body.insertAdjacentHTML('afterbegin', '<a href="' + root_path + 'index.html#offline" tabindex="0" id="icon"><img src="' + root_path + 'icons/hazard.svg" class="hazard-img" alt="offline file warning"></a>');
       e_icon = document.getElementById('icon');
       e_icon.addEventListener('click', fn_icon_click);
     }
