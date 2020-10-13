@@ -981,7 +981,7 @@ might work.
 
 
 Create an 'other' directory with txt files for index, chrome, safari,
-and firefox.  Parse those with either a search bar or hazard icon.
+and firefox.  Parse those with an optional search bar and footer.
 Remember the differing relative path.
 
 increase margin to 20+ MB?  But increasing the margin might also make
