@@ -1,6 +1,6 @@
 'use strict';
 var url_data = [
-["swi.js", "Lw780LO-pefv_j_vEgGUorU_T2wzCOWQpXrKLw==", 9],
+["swi.js", "TduFGPHJ4-KiaLiVB5FYWHg0rwbIYTzWNs22Ug==", 9],
 ["index.html", "R-yITDPqMUFqvMTcbNGEZ2IzPRUUhwoAaP6RqA==", 7],
 ["bawg.css", "kpgZ_DOOYLPDB4MhSwzvG5kNUnsMgu_zrWipiQ==", 12],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],

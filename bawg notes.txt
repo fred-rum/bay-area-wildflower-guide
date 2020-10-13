@@ -984,11 +984,6 @@ Create an 'other' directory with txt files for index, chrome, safari,
 and firefox.  Parse those with either a search bar or hazard icon.
 Remember the differing relative path.
 
-swi.js starts polling on DOMContentLoaded, and the resulting element
-changes could force the document to be laid out before the CSS is
-loaded.  (Firefox complains.)  There's really no reason to not wait
-until the page is fully loaded.
-
 increase margin to 20+ MB?  But increasing the margin might also make
 the sw.js process larger unless I split things up somehow.
 

@@ -20,8 +20,8 @@ var polls_since_response = 0;
 var timed_out = false;
 var root_path;
 async function swi_oninteractive() {
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', swi_oninteractive);
+  if (document.readyState !== 'complete') {
+    window.addEventListener('load', swi_oninteractive);
     return
   }
   console.info('swi_oninteractive()');

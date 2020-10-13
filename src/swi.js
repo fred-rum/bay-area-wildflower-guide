@@ -44,8 +44,8 @@ var root_path;
    its layout after the call to restore_scroll().
 */
 async function swi_oninteractive() {
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', swi_oninteractive);
+  if (document.readyState !== 'complete') {
+    window.addEventListener('load', swi_oninteractive);
     return
   }
   console.info('swi_oninteractive()');
