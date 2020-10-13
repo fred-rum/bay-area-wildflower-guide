@@ -268,6 +268,13 @@ async function fetch_response(event, url) {
   // Now we're guaranteed to have url_to_base64 and can proceed with
   // checking the cache.
 
+  // fetch_response() is normally only called when offline_ready is true,
+  // but it is also called when offline_ready hasn't been initialized yet.
+  // So after read_db() is done, check offline_ready again.
+  if (!offline_ready) {
+    return fetch(event.request);
+  }
+
   if (!(url in url_to_base64)) {
     // If we're offline and a fetch is attempted of an unrecognized file,
     // generate a 404 without attempting an online fetch.  This can happen
