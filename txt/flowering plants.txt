@@ -26,7 +26,7 @@ subset color: cream, cream flowers
 subset color: white, white flowers
 subset color: other, other colors, other colors of flowers
 
-<h2>Flowers by color</h2>
+<h2>none#Flowers by color</h2>
 <div class="color-grid">
 <a href="yellow flowers.html" class="enclosed"><div class="box-color yellow">Yellow</div></a>
 <a href="orange flowers.html" class="enclosed"><div class="box-color orange">Orange</div></a>
@@ -47,4 +47,4 @@ If an individual flower can have different primary colors (e.g. depending on age
 . If white, green, or brown is mixed with a more vibrant color color, the vibrant color is considered primary.
 . If a flower head has a disc and rays, only the primary color of the rays is used.
 
-<h2>Flowers by family</h2>
+<h2>none#Flowers by family</h2>
