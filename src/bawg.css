@@ -6,6 +6,41 @@
    removes the comments from the CSS to save download bandwidth. */
 /*****************************************************************************/
 
+/* I only want to show the focus border when the user is using keyboard
+   navigation.  Normally that means :focus-visible, but Firefox doesn't
+   support that.  Instead, it supposedly supports :-moz-focusring, but
+   that doesn't seem to work.  (It might require a user option, dunno.)
+
+   The solution relies on the fact that when :focus-visible is not supported,
+   any rule that mentions it is ignored.  Thus, I can create a border on
+   :focus for Firefox, then remove it on :not(:focus-visible) for
+   every other browser.  And then create the border in most browsers only
+   when desired with :focus-visible.
+
+   This leaves the focus ring visible and distracting after a click in
+   Firefox, but there doesn't seem to be anything I can do about that.
+*/
+#home-icon:focus,
+#update:focus,
+#clear:focus
+{
+    border: solid black 3px;
+    outline: none;
+}
+#home-icon:focus:not(:focus-visible),
+#update:focus:not(:focus-visible),
+#clear:focus:not(:focus-visible)
+{
+    border: none;
+}
+#home-icon:focus-visible,
+#update:focus-visible,
+#clear:focus-visible
+{
+    border: solid black 3px;
+    outline: none;
+}
+
 /* This is the home icon in the upper left.  It extends slightly
    outside of the search container, so to avoid increasing the size of
    the container, the home icon is positioned absolutely.
@@ -19,7 +54,7 @@
    search-container's box-shadow.
 
    To support a circular focus ring, we set up a transparent (opacity 0)
-   border 2 pixels thick.  A border with an inner diameter of 40 pixels
+   border 3 pixels thick.  A border with an inner diameter of 40 pixels
    leaves a thin gap between it and the image, which looks ugly.  So
    instead I make the inner border diameter 38 pixels.  The image is
    then expanded back up to 40 pixels and shifted slightly to center it
@@ -28,25 +63,25 @@
 #home-icon {
     position: absolute;
     box-sizing: border-box;
-    top: 3px;
-    left: 3px;
-    width: 42px;
-    height: 42px;
+    top: 2px;
+    left: 2px;
+    width: 44px;
+    height: 44px;
     filter: drop-shadow(0px 4px 4px white);
     z-index: 20;
-    border: 2px solid rgba(255, 255, 255, 0);
-    border-radius: 21px;
+    border: 3px solid rgba(255, 255, 255, 0);
+    border-radius: 22px;
 }
 /* Make the border lightly visible when the mouse hovers over it */
 #home-icon:hover {
-    border: 2px solid rgba(0, 0, 0, 0.3);
+    border: 3px solid rgba(0, 0, 0, 0.3) !important;
 }
 /* Make the border visible when focus is visible,
    typically when the link is selected using the keyboard.
    Because it comes later in the CSS, this has priority when :hover and
    :focus-visible are both in effect. */
 #home-icon:focus-visible {
-    border: 2px solid black;
+    border: 3px solid black;
 }
 /* don't use the default focus outline, which seems to show up not just
    when the element is selected via the keyboard but also when it is
@@ -975,14 +1010,8 @@ span.match {
     margin-bottom: 8px;
     border-radius: 8px;
 }
-#update:hover {
-    border: 4px solid rgba(0, 0, 0, 0.3);
-}
-#update:focus-visible {
-    border: solid black 3px;
-}
-#update:focus {
-    outline: none;
+#update:hover, #clear:hover {
+    border: 4px solid rgba(0, 0, 0, 0.3) !important;
 }
 #update.update-update {
     background-color: #139e38;
@@ -1038,15 +1067,6 @@ span.match {
     #clear {
 	display: inline-flex;
     }
-}
-#clear:hover {
-    border: 4px solid rgba(0, 0, 0, 0.3);
-}
-#clear:focus-visible {
-    border: solid black 3px;
-}
-#clear:focus {
-    outline: none;
 }
 #clear:active {
     background-color: #d10000;
