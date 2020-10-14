@@ -526,6 +526,29 @@ if arg('-incomplete_keys'):
         print(page.name)
 
 ###############################################################################
+# Process 'other' files
+
+parse_other('index',
+            'Bay Area Wildflower Guide',
+            'A resource for identifying San Francisco Bay Area wildflowers.',
+            False)
+
+parse_other('chrome',
+            'Chrome Browser Notes for Offline Usage',
+            'Notes for offline use of the Guide in Chrome.',
+            True)
+
+parse_other('firefox',
+            'Firefox Browser Notes for Offline Usage',
+            'Notes for offline use of the Guide in Firefox.',
+            True)
+
+parse_other('safari',
+            'Safari Browser Notes for Offline Usage',
+            'Notes for offline use of the Guide in Safari.',
+            True)
+
+###############################################################################
 # Create pages.js
 #
 # We create it in root_path instead of working_path because we're just about
@@ -676,6 +699,9 @@ if not arg('-without_cache'):
     path_list = [
         # Start with the files most needed for interfacing with the worker.
         # Not 'sw.js' because it's not necessary and could be really bad.
+        # Actually, order doesn't matter much for loading, but depending
+        # on the browser implementation, it might make a difference when
+        # deleting files.
         'swi.js',
         'index.html',
         'bawg.css',

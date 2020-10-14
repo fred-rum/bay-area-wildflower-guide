@@ -3,9 +3,11 @@
 <html lang="en">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta name="description" content="A resource for identifying San Francisco Bay Area wildflowers.">
+<meta name="description" content="Notes for offline use of the Guide in Chrome.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chrome Browser Notes for Offline Usage</title>
+<script async src="search.js"></script>
+<script async src="pages.js"></script>
 <script async src="swi.js"></script>
 <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
@@ -19,27 +21,52 @@
 <link rel="stylesheet" href="bawg.css">
 </head>
 <body>
+<a id="home-icon" tabindex="0" href="index.html"><img src="icons/home.png" alt="home"></a>
 <div class="body-container">
+<div id="search-container">
+<input type="search" id="search" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="flower or glossary term" aria-label="search for a flower or glossary term">
+<noscript><input type="search" value="search requires Javascript"disabled></noscript>
+<div id="autocomplete-box"></div>
+</div>
 <div id="body">
 <h1 id="title">Chrome Browser Notes for Offline Usage</h1>
 <p>Congratulations, Chrome currently has the best support for offline web apps.  That said, these notes may help improve your experience.</p>
 <h3>Keeping the Download Alive</h3>
-<p>Downloading files for offline use will continue in the background while you browse the guide (including this page).  However, <b>downloading is likely to pause</b> in any of the following cases:</p>
+<p>Downloading files for offline use will continue in the background
+while you browse the guide (including this page).
+However, <b>downloading is likely to pause</b> in any of the following
+cases:</p>
 <ul>
 <li>You put your device to sleep.</li>
 <li>You switch to your home screen or a different app.</li>
 <li>You browse to a different site.</li>
 </ul>
-<p>If the download process is paused, just click the green button again to resume.</p>
-<p>Chrome will prevent your screen from timing out due to inactivity while files are being downloaded for offline use, so you don&rsquo;t need to actively use your device to keep the download alive.</p>
-<p>On a desktop, it is sufficient to keep the Guide tab visible (not minimized), even if another window has focus.</p>
+<p>If the download process is paused, just click the green button again
+to resume.</p>
+<p>Chrome will prevent your screen from timing out due to inactivity
+while files are being downloaded for offline use, so you don&rsquo;t need to
+actively use your device to keep the download alive.</p>
+<p>On a desktop, it is sufficient to keep the Guide tab visible (not
+minimized), even if another window has focus.</p>
 <h3>Storage Limits</h3>
-<p>Chrome allows a web app to use up to 100% of the storage space available.  The Guide is large, but not that large.  Hopefully you can find room.</p>
-<p>Chrome uses a heuristic to determine whether offline files are kept permanently.  If the browser decides you don&rsquo;t use the Guide often enough, it may delete the files if space runs short.  In practice this rarely happens.  If you bookmark the Guide or install it to your home screen, this will give an extra hint to Chrome that you want to keep your offline files.</p>
+<p>Chrome allows a web app to use up to 100% of the storage space
+available.  The Guide is large, but not that large.  Hopefully you can
+find room.</p>
+<p>Chrome uses a heuristic to determine whether offline files are kept
+permanently.  If the browser decides you don&rsquo;t use the Guide often
+enough, it may delete the files if space runs short.  In practice this
+rarely happens.  If you bookmark the Guide or install it to your home
+screen, this will give an extra hint to Chrome that you want to keep
+your offline files.</p>
 <h3>Install to your Home Screen</h3>
-<p>You can save a link to the Guide on your home screen.  Open the Chrome menu and select "Add to homescreen" or "Install Bay Area Wildflower Guide".  On Android, this sometimes doesn&rsquo;t actually put anything on your home screen.  If so, you can manually drag it from Android&rsquo;s installed apps to your home screen.</p>
+<p>You can save a link to the Guide on your home screen.  Open the Chrome
+menu and select &ldquo;Add to homescreen&rdquo; or &ldquo;Install Bay Area Wildflower
+Guide&rdquo;.  On Android, this sometimes doesn&rsquo;t actually put anything on
+your home screen.  If so, you can manually drag it from Android&rsquo;s
+installed apps to your home screen.</p>
 <h3>Try it!</h3>
-<p>Return to the <a href="index.html">Guide home</a> and give offline mode a try.</p>
+<p>Return to the <a href="index.html">Guide home</a> and give offline
+mode a try.</p>
 <div class="footer">
 <span class="foot-left"><a class="home-link" href="index.html" aria-label="home"></a> <span class="foot-fade"> &copy; Chris Nelson</span></span><a class="foot-fade" href="index.html#contact">Contact me</a>
 </div>

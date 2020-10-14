@@ -1,0 +1,65 @@
+<h1 id="title">Firefox Browser Notes for Offline Usage</h1>
+
+The amount of offline storage needed for this guide is quite
+reasonable on modern devices, but it is still an intense experience
+for some browsers.  Hopefully these notes will prevent frustration on
+your end.
+
+<h3>Keeping the Download Alive</h3>
+
+Downloading files for offline use will continue in the background
+while you browse the guide (including this page).
+However, <b>downloading is likely to pause</b> in any of the following
+cases:
+. Your device goes to sleep.  (You might need to occasionally touch your mobile screen if it would otherwise time out due to inactivity.)
+. You switch to your home screen or a different app.
+. You browse to a different site.
+
+If the downloading process is paused, just click the green button
+again to resume.
+
+On a desktop, it should be sufficient to keep the Guide tab visible
+(not minimized), even if another window has focus.
+
+<h3>Storage Limits</h3>
+
+Firefox allows a web app to use up to 10% of the available free space
+on your device.  (Not 10% of the total space!)  If that is not enough,
+you might need to use another browser with a less restrictive limit.
+
+Firefox on the desktop may ask whether to allow the Guide to store
+data in persistent storage.  If you respond with "Not now" or "Never",
+the offline files will still be recorded, but the browser may delete
+them later if space runs short.  If you respond with "Allow", all
+offline Guide files (including files downloaded previously) will be
+kept until you actively delete them.  Oddly, persistent files don't
+fully count toward quota usage.  The Guide therefore estimates the
+actual usage.
+
+As far as I can tell, <b>Firefox on mobile does not yet support
+persistent storage.</b>  In practice, as long as you use the Guide
+occasionally, Firefox is unlikely to delete its offline files.
+
+If you've read down this far, congratulations.  You might be the kind
+of person who runs their browser in Private Browsing mode.  Firefox
+doesn't allow any interaction with offline files while in Private
+Browsing mode.  You'll need to disable Private Browsing in order to
+download or use offline files.
+
+<h3>Save to your Home Screen</h3>
+
+You can save a link to the Guide on your home screen.  On Android,
+open the Firefox menu and select "Install."  Sometimes this doesn't
+actually put anything on your home screen.  If so, you can manually
+drag it from Android's installed apps to your home screen.
+
+Firefox on iOS or the desktop doesn't offer an installation option.
+Sorry.  As an alternative, you can bookmark the Guide for use in
+offline mode.
+
+<h3>Try it!</h3>
+
+Return to the <a href="index.html">Guide home</a> and give offline
+mode a try.  If it doesn't work, online browsing remains supported as
+always.
+

@@ -1,0 +1,58 @@
+<h1 id="title">Safari Browser Notes for Offline Usage</h1>
+
+The amount of offline storage needed for this guide is quite
+reasonable on modern devices, but it is still an intense experience
+for some browsers.  Hopefully these notes will prevent frustration on
+your end.
+
+<h3>Keeping the Download Alive</h3>
+
+Downloading files for offline use will continue in the background
+while you browse the guide (including this page).
+However, <b>downloading is likely to pause</b> in any of the following
+cases: Your device goes to sleep.  (You might need to occasionally
+touch your mobile screen if it would otherwise time out due to
+inactivity.)  You switch to your home screen or a different app.  You
+browse to a different site.
+
+If the downloading process is paused, just click the green button
+again to resume.
+
+<b>Warning: iOS 11 through iOS 13 have a known bug</b> that crashes
+the downloading process in any of the above cases.  If it does crash,
+try closing the tab, waiting 10 seconds, and then returning to the
+Guide.  I don't know if that will work, but it sounds plausible.  This
+iOS bug is fixed in iOS 14.  Web apps are not supported at all prior
+to iOS 11.1.
+
+On MacOS, it should be sufficient to keep the Guide tab visible (not
+minimized), even if another window has focus.
+
+<h3>Storage Limits</h3>
+
+Safari doesn't allow web apps to monitor the space being used or the
+storage limit.  Safari generally allows a web app to use 1 GB+, so the
+guide will fit as long as you have space available.
+
+Safari places a <b>time limit of ~7 days</b> on offline data.
+Re-visiting the Guide will refresh the time limit.
+
+<b>Saving the Guide to your home page might remove the time limit.</b>
+(Testing is in progress.)  To save to your home page, tap the browser
+icon with an arrow pointing out of a square (normally used for sharing
+a page).  Then scroll down (not right) and select "Add to Home
+Screen".
+
+If you've read down this far, congratulations.  You might be the kind
+of person who runs their browser in Private Browsing mode.  As usual,
+all of your data from Private Browsing will be deleted when you leave
+Safari.  So you'll need to disable Private Browsing before downloading
+the Guide's offline files.  And don't forget to disable Private
+Browsing when downloading updates later.
+
+<h3>Try it!</h3>
+
+Return to the <a href="index.html">Guide home</a> and give offline
+mode a try.  If it doesn't work, online browsing remains supported as
+always.
+

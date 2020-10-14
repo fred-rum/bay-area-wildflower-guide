@@ -104,11 +104,17 @@ def link_figures_text(name, txt):
 # h1 is optional and specifies text for an h1 header at the top of the page.
 # nospace indicates whether to omit the standard vertical whitespace below
 # the h1 header (e.g. because alternative taxon names will be listed below it).
-def write_header(w, title, h1, nospace=False, desc=None):
+def write_header(w, title, h1, nospace=False, desc=None, at_root=False):
     if desc:
         content = f'\n<meta name="description" content="{desc}">'
     else:
         content = ''
+
+    if at_root:
+        path = ''
+    else:
+        path = '../'
+
     w.write(f'''<!-- Copyright Chris Nelson - All rights reserved. -->
 <!DOCTYPE html>
 <html lang="en">
@@ -116,22 +122,22 @@ def write_header(w, title, h1, nospace=False, desc=None):
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">{content}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
-<script async src="../search.js"></script>
-<script async src="../pages.js"></script>
-<script async src="../swi.js"></script>
-<link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
-<link rel="manifest" href="../manifest.webmanifest">
-<link rel="mask-icon" href="../favicon/safari-pinned-tab.svg" color="#106110">
-<link rel="shortcut icon" href="../favicon/favicon.ico">
+<script async src="{path}search.js"></script>
+<script async src="{path}pages.js"></script>
+<script async src="{path}swi.js"></script>
+<link rel="apple-touch-icon" sizes="180x180" href="{path}favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="{path}favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="{path}favicon/favicon-16x16.png">
+<link rel="manifest" href="{path}manifest.webmanifest">
+<link rel="mask-icon" href="{path}favicon/safari-pinned-tab.svg" color="#106110">
+<link rel="shortcut icon" href="{path}favicon/favicon.ico">
 <meta name="msapplication-TileColor" content="#106110">
-<meta name="msapplication-config" content="../favicon/browserconfig.xml">
+<meta name="msapplication-config" content="{path}favicon/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
-<link rel="stylesheet" href="../bawg.css">
+<link rel="stylesheet" href="{path}bawg.css">
 </head>
 <body>
-<a id="home-icon" tabindex="0" href="../index.html"><img src="../icons/home.png" alt="home"></a>
+<a id="home-icon" tabindex="0" href="{path}index.html"><img src="{path}icons/home.png" alt="home"></a>
 <div class="body-container">
 <div id="search-container">
 <input type="search" id="search" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="flower or glossary term" aria-label="search for a flower or glossary term">
@@ -140,6 +146,7 @@ def write_header(w, title, h1, nospace=False, desc=None):
 </div>
 <div id="body">
 ''')
+
     if h1:
         if nospace:
             space_class = ' class="nospace"'
@@ -147,7 +154,12 @@ def write_header(w, title, h1, nospace=False, desc=None):
             space_class = ''
         w.write(f'<h1 id="title"{space_class}>{h1}</h1>\n')
 
-def write_footer(w):
+def write_footer(w, incl_footer=True, at_root=False):
+    if at_root:
+        path = ''
+    else:
+        path = '../'
+
     # The "home-link" tag is empty because it gets filled in by the CSS
     # with either "BAWG" or "Bay Area Wildflower Guide", depending on how
     # much space is available.
@@ -155,10 +167,12 @@ def write_footer(w):
     # I don't put the year in the copyright because it's a pain to determine
     # given the different creation/modification dates of the pages *plus*
     # the photos on them.  The Berne Convention applies in any case.
-    w.write(f'''<div class="footer">
-<span class="foot-left"><a class="home-link" href="../index.html" aria-label="home"></a> <span class="foot-fade"> &copy; Chris Nelson</span></span><a class="foot-fade" href="../index.html#contact">Contact me</a>
+    if (incl_footer):
+        w.write(f'''<div class="footer">
+<span class="foot-left"><a class="home-link" href="{path}index.html" aria-label="home"></a> <span class="foot-fade"> &copy; Chris Nelson</span></span><a class="foot-fade" href="{path}index.html#contact">Contact me</a>
 </div>
-</div>
+''')
+    w.write('''</div>
 </div>
 </body>
 ''')

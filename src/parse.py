@@ -37,7 +37,10 @@ def parse_txt(name, s, page, glossary):
             # linking a paragraph at a time.  This not only recognizes
             # glossary terms split across lines, but also allows
             # glossary *definitions* to be split across lines.
-            p = glossary.link_glossary_words_or_defn(name, p, not page)
+            if glossary:
+                p = glossary.link_glossary_words_or_defn(name, p, not page)
+            else:
+                p = f'<p>{p}</p>'
 
             # Replace all the lines in c_list associated with the paragraph
             # with the new (single-string) paragraph.
@@ -132,7 +135,8 @@ def parse_txt(name, s, page, glossary):
 
         if list_depth:
             non_p = True
-            c = glossary.link_glossary_words(name, c)
+            if glossary:
+                c = glossary.link_glossary_words(name, c)
             c = '<li>' + c + '</li>'
 
         if page:
@@ -146,7 +150,7 @@ def parse_txt(name, s, page, glossary):
                 child_start = len(c_list)
                 continue
 
-        if re.match(r'<h\d>', c):
+        if re.match(r'<h\d', c):
             # It doesn't actually hurt the user to wrap heading tags in
             # paragraph tags, but it hurts my soul.  I don't care what
             # kind of heading it is (<h1>, <h2>, etc.) since it should
@@ -162,11 +166,23 @@ def parse_txt(name, s, page, glossary):
             # but glossary pages should not (since the heading is
             # most likely one of the glossary words being defined,
             # making a link redundant).
-            if page:
+            if page and glossary:
                 c = glossary.link_glossary_words(name, c)
 
             if re.search(r'</h\d>', c):
                 in_heading = False
+
+        if c.startswith('<div'):
+            # Keep a <div ...> tag out of paragraphs.
+            non_p = True
+
+        if c.endswith('</div>'):
+            # Keep a </div> tag out of paragraphs, and if a paragraph has
+            # been recorded to this point, discard it.  I.e.  What is between
+            # <div ...> and </div> is only broken into paragraphs if it
+            # has some sort of non-div paragraph divisions.
+            non_p = True
+            p_start = None
 
         if c.startswith('figure:'):
             # Leave figure links untouched and not embedded in paragraphs.
@@ -233,3 +249,14 @@ def parse2_txt(name, s, glossary):
     s = re.sub(r'{-([^}]+)}', repl_link, s)
 
     return s
+
+def parse_other(name, title, desc, incl_footer):
+    with open(f'{root_path}/other/{name}.txt', 'r', encoding='utf-8') as r:
+        txt = r.read()
+    
+    txt = parse_txt(name, txt, None, None)
+
+    with open(f'{root_path}/{name}.html', 'w', encoding='utf-8') as w:
+        write_header(w, title, None, desc=desc, at_root=True)
+        w.write(txt)
+        write_footer(w, incl_footer, at_root=True)

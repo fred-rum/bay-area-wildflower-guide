@@ -980,10 +980,6 @@ adjusting the text vertically to ~align with that part of the bar
 might work.
 
 
-Create an 'other' directory with txt files for index, chrome, safari,
-and firefox.  Parse those with an optional search bar and footer.
-Remember the differing relative path.
-
 increase margin to 20+ MB?  But increasing the margin might also make
 the sw.js process larger unless I split things up somehow.
 

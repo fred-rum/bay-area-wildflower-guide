@@ -1,0 +1,81 @@
+<h1 id="title">Chris Nelson's Bay&nbsp;Area Wildflower Guide</h1>
+
+Use the search bar to look up any flower, or start at the top:
+. <a href="html/flowering plants.html">flowers</a>
+. <a href="html/life.html">all life</a>
+
+<h2 id="offline">Use it Offline</h2>
+
+<div id="cache-online" style="display:none;"><img src="icons/online.svg" class="green-img" alt=""><span class="cache-text">The Guide is getting its files from the web.  Save a local copy of the files to be able to view the guide without internet access.</span></div>
+<div id="cache-green" style="display:none;"><img src="icons/check.svg" class="green-img" alt=""><span class="cache-text">The Guide is now using its local offline copy.  Check back occasionally for updates.</span></div>
+<div id="cache-yellow" style="display:none;"><img src="icons/hazard.svg" class="hazard-img" alt=""><span class="cache-text">The Guide is now using its local offline copy.  An update is available whenever you are ready.</span></div>
+<div id="red-missing" style="display:none;"><img src="icons/hazard.svg" class="hazard-img" alt=""><span class="cache-text">Some files have gone missing from your offline copy.  Update your offline files.</span></div>
+
+The Guide works great on a smartphone, but it works even better when
+it doesn't need internet access.  To save its files for offline
+access, click the shiny green button below.<noscript>  <b>(Requires
+JavaScript.)</b></noscript>  This feature uses experimental browser
+technology (2018+).  <b>Check my browser notes for
+<a href="chrome.html">Chrome</a>,
+<a href="safari.html">Safari</a>, and
+<a href="firefox.html">Firefox</a>.</b>
+
+<div id="update" class="update-disable" tabindex="0" role="button">Load Offline Files</div><div id="progress"></div><div id="status"></div><div id="err-status"></div>
+<div id="clear" class="clear-disable" tabindex="0" role="button">Delete Offline Files</div><div id="usage"></div><div id="extra"></div>
+
+<h2>Usage Guide</h2>
+
+The Bay Area Wildflower Guide (BAWG) is a collection of my own photos
+and notes.  It is designed to be my own reference as well as something
+I can point people to when I make flower
+identifications. <b>Warning</b>: I am not a botanist, just an
+interested amateur.  All flower identifications should be taken as my
+opinion and not authoritative.
+
+The BAWG is primarily for me, secondarily for you.  You can use it as
+a reference if you like, but I hope you don't use it as your
+sole reference.
+
+The BAWG covers the San Francisco Bay Area, from the Pacific coast to
+corners including Mt. Tamalpais, Mt. Diablo, San Luis Reservoir, and
+Santa Cruz.  Some areas outside those bounds are also covered,
+particularly Pinnacles National Park.  The gravitational center for my
+observations is probably somewhere around Cupertino.
+
+Only wildflowers are covered, not cultivated flowers.  I've also
+started including taxons other than flowering plants here, but in much
+smaller numbers.
+
+I have a <a href="html/plant%20glossary.html">glossary</a>.
+
+<h2>Other Resources</h2>
+
+Primary references include
+<a href="https://www.inaturalist.org/">iNaturalist</a>,
+<a href="https://www.calflora.org/">CalFlora</a>,
+<a href="https://calphotos.berkeley.edu/">CalPhotos</a>, and
+<a href="http://ucjeps.berkeley.edu/eflora/">Jepson eFlora</a>.
+If you find yourself checking Jepson eFlora often, you may also want to browse the
+<a href="http://ucjeps.berkeley.edu/eflora/conventions.html">Jepson eFlora User's Guide</a>.
+When I'm identifying flowers from a hike, I often use
+<a href="http://PlantID.net">PlantID.net</a>
+to get a list of flowers known to grow in the park.
+
+<a href="https://montereywildflowers.com/">Monterey County Wildflowers</a>
+covers an adjacent region, so it is often useful for bay area species
+as well.  It has a similar organization as this guide with both photos
+and notes for how to distinguish species.
+
+<div id="contact">
+<h2>Contact Info</h2>
+
+The Bay Area Wildflower Guide is copyrighted by Chris Nelson.  That's me!
+
+I hate robo spam, so unfortunately I won't be putting my email address
+here.  But feel free to send me a note through
+<a href="https://www.inaturalist.org/people/chris_nelson">iNaturalist</a>
+or flag an issue with the Guide via
+<a href="https://github.com/fred-rum/bay-area-wildflower-guide/issues">GitHub</a>.
+A free account is required to use either service.
+
+</div>
