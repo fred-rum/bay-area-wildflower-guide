@@ -5038,7 +5038,7 @@ var BASE64_CACHE_NAME = 'base64-cache-v1';
 // Activity is 'init', 'busy', 'delete', 'update', or 'idle'.
 // An initial 'init' activity prevents updates until everything
 // is initialized.
-var activity = 'init1';
+var activity = 'init';
 var msg = 'Checking for offline files';
 var err_status = '';
 var usage_msg = '';
@@ -5395,7 +5395,7 @@ async function init_status() {
   validate_cache();
 }
 function validate_cache() {
-  activity = 'init2';
+  activity = 'validate';
   msg = 'Validating offline files';
   activity_promise = count_cached();
 }
@@ -5519,7 +5519,7 @@ function fn_send_status(event) {
   /////////////////////////////////////////////////////////////////////////////
   // Respond to an activity request.
   if (event.data === 'update') {
-    if ((activity === 'init2') ||
+    if ((activity === 'validate') ||
         (activity === 'idle') ||
         (activity === 'delete')) {
       if (is_cache_up_to_date()) {
@@ -5535,7 +5535,7 @@ function fn_send_status(event) {
       console.info(activity + ': ignore update request');
     }
   } else if (event.data === 'clear') {
-    if ((activity === 'init2') ||
+    if ((activity === 'validate') ||
         (activity === 'idle') ||
         (activity === 'delete') ||
         (activity === 'update')) {
@@ -5564,18 +5564,22 @@ function fn_send_status(event) {
   } else {
     var mb_cached = (kb_cached/1024).toFixed(1);
   }
-  // Default messages.  Either of these may be modified below
-  // if it doesn't make sense for the current activity.
-  var progress = mb_cached + ' / ' + mb_total + ' MB';
+  if (activity === 'init') {
+    var progress = '';
+  } else if (activity === 'validate') {
+    var progress = '? / ' + mb_total + ' MB';
+  } else {
+    var progress = mb_cached + ' / ' + mb_total + ' MB';
+  }
   // status is used by old copies of swi.js,
   // with progress combined with msg.
-  var status = progress + ' &ndash; ' + msg;
-  if (activity === 'init1') {
-    progress = '';
-    status = msg;
+  if (activity === 'init') {
+    var status = msg;
   } else if (activity === 'idle') {
     msg = '';
-    status = progress;
+    var status = progress;
+  } else {
+    var status = progress + ' &ndash; ' + msg;
   }
   // This is the default update_button text.
   // We replace it further below for the 'update' activity.
@@ -5592,7 +5596,7 @@ function fn_send_status(event) {
       var update_button = 'Pause Saving';
     }
   }
-  if (activity === 'init1') {
+  if (activity === 'init') {
     // init not yet ready to queue a user action
     var update_class = 'update-disable';
     var clear_class = 'clear-disable';
@@ -5609,7 +5613,7 @@ function fn_send_status(event) {
   } else if (activity === 'update') {
     var update_class = 'update-stop';
     var clear_class = ''; // enabled
-  } else { // idle or init2
+  } else { // idle or validate
     var clear_class = ''; // enabled
     if (is_cache_up_to_date()) {
       var update_class = 'update-disable';
@@ -5625,7 +5629,7 @@ function fn_send_status(event) {
   // for a potentially cached copy of swi.js.
   var icon = undefined;
   var top_msg = undefined;
-  if (activity !== 'init1') {
+  if (activity !== 'init') {
     if (offline_ready) {
       if (is_cache_up_to_date()) {
         var top_msg = 'green';
@@ -5674,13 +5678,13 @@ async function stop_activity() {
     msg = 'Pausing update in progress';
   } else if (activity === 'delete') {
     msg = 'Pausing deletions';
-  } else if (activity === 'init2') {
+  } else if (activity === 'validate') {
     msg = 'Waiting for validation to complete'
   } else if (activity === 'idle') {
     // No activity to stop.
     return;
   } else {
-    // We should never be trying to stop 'init1' or 'busy' activity.
+    // We should never be trying to stop 'init' or 'busy' activity.
     console.error('stop_activity() called when activity is ' + activity);
     throw 'oops';
   }
@@ -6048,8 +6052,12 @@ async function update_usage() {
   } else {
     var status_quota = (quota/1024/1024/1024).toFixed(1) + ' GB';
   }
-  let cache_empty = !(kb_cached || num_old_files || num_obs_files);
-  if (cache_empty) {
+  let cache_empty = !(kb_cached || offline_ready || num_obs_files);
+  let unsure_if_empty = ((activity === 'init') ||
+                         (activity === 'validate') && (!offline_ready));
+  if (unsure_if_empty) {
+    usage_msg = 'Using ? MB of offline storage.';
+  } else if (cache_empty) {
     usage_msg = 'Using 0.0 MB of offline storage.';
   } else if (usage/1024 >= kb_cached + 0.1) {
     usage_msg = 'Using ' + status_usage + ' (including overhead).';
@@ -6064,14 +6072,13 @@ async function update_usage() {
   if (!usage && !cache_empty) {
     let kb_per_file = kb_total / url_data.length;
     let kb_estimate = kb_per_file * (num_old_files + num_obs_files);
-    if (cache_empty) {
-      var kb_usage = 0;
-      status_usage = '0.0 MB';
+    var kb_usage = kb_cached + kb_estimate;
+    status_usage = (kb_usage/1024 + 0.1).toFixed(1) + ' MB'
+    if (activity === 'validate') {
+      usage_msg = 'Using roughly ? MB of offline storage.';
     } else {
-      var kb_usage = kb_cached + kb_estimate;
-      status_usage = (kb_usage/1024 + 0.1).toFixed(1) + ' MB'
+      usage_msg = 'Using roughly ' + status_usage + ' of offline storage.';
     }
-    usage_msg = 'Using roughly ' + status_usage + '.';
     if (quota === undefined) {
       usage_msg += '<br>Browser limit is unknown.';
     } else {
