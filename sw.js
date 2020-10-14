@@ -2,7 +2,7 @@
 var url_data = [
 ["swi.js", "TduFGPHJ4-KiaLiVB5FYWHg0rwbIYTzWNs22Ug==", 9],
 ["index.html", "tZigQQRGeUn4xREH1XDelwFgNeCvBRGSgb9xww==", 7],
-["bawg.css", "3-fjL1OfBFUD1kR997AQogZiNSGF7nvMzPQUDw==", 12],
+["bawg.css", "h5JpOO6EDDW4Ie_tmUb8nra_JcH4oFxfSvrD3A==", 12],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
 ["icons/online.svg", "V-n9Y6IMGrtTzQbte88RvxhNWq3UGukTp4SOCQ==", 2],
 ["icons/check.svg", "GZFdGrKC4UpM0uywABrTQILfNZ7T0U6iI8sMaw==", 2],

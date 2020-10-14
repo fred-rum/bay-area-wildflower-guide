@@ -34,12 +34,6 @@
 #home-icon:hover {
     border: 3px solid rgba(0, 0, 0, 0.3) !important;
 }
-#home-icon:focus-visible {
-    border: 3px solid black;
-}
-#home-icon:focus {
-    outline: none;
-}
 #home-icon img {
     position: relative;
     top: -1px;

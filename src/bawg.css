@@ -76,19 +76,6 @@
 #home-icon:hover {
     border: 3px solid rgba(0, 0, 0, 0.3) !important;
 }
-/* Make the border visible when focus is visible,
-   typically when the link is selected using the keyboard.
-   Because it comes later in the CSS, this has priority when :hover and
-   :focus-visible are both in effect. */
-#home-icon:focus-visible {
-    border: 3px solid black;
-}
-/* don't use the default focus outline, which seems to show up not just
-   when the element is selected via the keyboard but also when it is
-   clicked on. */
-#home-icon:focus {
-    outline: none;
-}
 /* give the border a "light focus" when the element is hovered over */
 /* Technically, #home-icon is the <a> link that encloses the icon image.
    For some reason, the image doesn't inherit the width & height constraints
