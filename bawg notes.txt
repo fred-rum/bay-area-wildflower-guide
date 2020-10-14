@@ -989,3 +989,5 @@ to photos/... are re-directed to thumbs/...
 
 Should kb_cached be displayed only after count_cache() is complete?
 E.g. display '? / [total] MB' until then.
+
+retry after delay for 503 response
