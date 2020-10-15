@@ -5922,23 +5922,39 @@ async function fetch_to_cache(cache, url, base64) {
   msg = 'Fetching ' + decodeURI(url)
   console.info(msg)
   let response;
-  await check_stop_or_pause('update (before fetch)');
-  try {
-    response = await fetch(url);
-  } catch (e) {
-    console.warn('fetch failed', e);
-    err_status = 'Lost online connectivity.  Try again later.';
-    throw null;
-  }
-  if (!response) {
-    err_status = 'Unexpected fetch response.  Try again later?';
-    throw null;
-  } if (response.status == 404) {
-    err_status = '404: Could not find ' + decodeURI(url) + '<br>The online Guide must have updated its files just now.  Refresh the page and try again.';
-    throw null;
-  } else if (!response.ok) {
-    err_status = response.status + ': ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
-    throw null;
+  for (let retry_sleep = 1; retry_sleep *= 2; true) {
+    await check_stop_or_pause('update (before fetch)');
+    try {
+      response = await fetch(url);
+    } catch (e) {
+      console.warn('fetch failed', e);
+      err_status = 'Lost online connectivity.  Try again later.';
+      throw null;
+    }
+    if (!response) {
+      err_status = 'Unexpected fetch response.  Try again later?';
+      throw null;
+    } if (response.status == 404) {
+      err_status = '404: Could not find ' + decodeURI(url) + '<br>The online Guide must have updated its files just now.  Refresh the page and try again.';
+      throw null;
+    } if ((response.status == 503) && (retry_sleep <= 8)) {
+      for (let i = 0; i < retry_sleep; i++) {
+        let secs = retry_sleep - i;
+        if (secs == 1) {
+          secs = '1 second';
+        } else {
+          secs = secs + ' seconds';
+        }
+        msg = '503: server busy; retrying in ' + secs;
+        await check_stop_or_pause('update (before fetch)');
+        await sleep(1000);
+      }
+      continue;
+    } else if (!response.ok) {
+      err_status = response.status + ': ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
+      throw null;
+    }
+    break;
   }
   await check_stop_or_pause('update (before cache write)');
   await cache.put(base64, response);

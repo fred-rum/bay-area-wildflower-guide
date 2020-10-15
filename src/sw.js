@@ -1076,25 +1076,51 @@ async function fetch_to_cache(cache, url, base64) {
   console.info(msg)
   let response;
 
-  await check_stop_or_pause('update (before fetch)');
+  // Normally this loop does nothing since by default it ends with a break
+  // statement.  But a 503 response can cause it to continue looping.
+  for (let retry_sleep = 1; retry_sleep *= 2; true) {
+    await check_stop_or_pause('update (before fetch)');
 
-  try {
-    response = await fetch(url);
-  } catch (e) {
-    console.warn('fetch failed', e);
-    err_status = 'Lost online connectivity.  Try again later.';
-    throw null;
-  }
+    try {
+      response = await fetch(url);
+    } catch (e) {
+      console.warn('fetch failed', e);
+      err_status = 'Lost online connectivity.  Try again later.';
+      throw null;
+    }
 
-  if (!response) {
-    err_status = 'Unexpected fetch response.  Try again later?';
-    throw null;
-  } if (response.status == 404) {
-    err_status = '404: Could not find ' + decodeURI(url) + '<br>The online Guide must have updated its files just now.  Refresh the page and try again.';
-    throw null;
-  } else if (!response.ok) {
-    err_status = response.status + ': ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
-    throw null;
+    if (!response) {
+      err_status = 'Unexpected fetch response.  Try again later?';
+      throw null;
+    } if (response.status == 404) {
+      err_status = '404: Could not find ' + decodeURI(url) + '<br>The online Guide must have updated its files just now.  Refresh the page and try again.';
+      throw null;
+    } if ((response.status == 503) && (retry_sleep <= 8)) {
+      // Take N discrete one-second sleeps to make it easier to interrupt.
+      // This also re-iterates the retry message in case this is the last
+      // thread left running, and it would otherwise look silent.
+      for (let i = 0; i < retry_sleep; i++) {
+        // Use msg instead of err_status because it's a huge pain to clean up
+        // err_status on both success and failure when some other process might
+        // have generated a higher priority error message.
+        let secs = retry_sleep - i;
+        if (secs == 1) {
+          secs = '1 second';
+        } else {
+          secs = secs + ' seconds';
+        }
+        msg = '503: server busy; retrying in ' + secs;
+
+        await check_stop_or_pause('update (before fetch)');
+        await sleep(1000);
+      }
+      continue;
+    } else if (!response.ok) {
+      err_status = response.status + ': ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
+      throw null;
+    }
+
+    break;
   }
 
   await check_stop_or_pause('update (before cache write)');
