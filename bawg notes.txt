@@ -987,4 +987,8 @@ the sw.js process larger unless I split things up somehow.
 Have an offline option for 'no full-size photos', in which case links
 to photos/... are re-directed to thumbs/...
 
-retry after delay for 503 response
+Is the 500KB service worker being read every time a page is fetched?
+If so, it'd be better to make the service worker small and have it
+read the url_data separately and only when the service worker is
+initialized (and perhaps on an occasional basis if the browser somehow
+keeps it running for a long time).

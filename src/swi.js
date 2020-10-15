@@ -1,4 +1,9 @@
-// This script handles the document end of ServiceWorker interaction (swi).
+/* This script implements the service worker interface (swi).  It runs in the
+   context of each browser tab and connects to the (single) service worker
+   instance.  It performs 3 main duties:
+   - It registers the service worker.
+   - It sends user directives to the service worker.
+   - It polls the service worker status and displays it for the user. */
 
 'use strict';
 

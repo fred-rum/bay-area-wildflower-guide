@@ -37,7 +37,7 @@ def strip_comments(to_filename, from_filename=None, code=None):
     # parser.  So we exclude an escaped quotation mark to start a string (in
     # case that appears in a regex) and otherwise hope for the best.
     quote1 = r'(?<!\\)"(?:[^"\\]|\\.)*"'
-    quote2 = r"(?<!\\)[^\\]'(?:[^'\\]|\\.)*'"
+    quote2 = r"(?<!\\)'(?:[^'\\]|\\.)*'"
     comment = r'/\s+?$|\s*/\*.*?\*/'
     if strip_line:
         comment += r'|\s*//[^\r\n]*$'
