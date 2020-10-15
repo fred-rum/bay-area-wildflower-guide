@@ -5888,27 +5888,22 @@ async function fetch_all_to_cache_parallel(cache) {
                   fetch_all_to_cache(cache, 4),
                   fetch_all_to_cache(cache, 5)];
   var results = await Promise.allSettled(promises);
-  var e_quota;
+  let e_null = false;
   for (let i = 0; i < results.length; i++){
     if (results[i].status === 'rejected') {
       let e = results[i].reason;
-      if (is_quota_exceeded(e)) {
-        e_quota = e;
-      } else {
+      if (e) {
         throw e;
+      } else {
+        e_null = true;
       }
     }
   }
-  if (e_quota) throw e_quota;
+  if (e_null) throw null;
   console.info(results);
 }
 async function fetch_all_to_cache(cache, id) {
   for (let url in new_url_to_base64) {
-    await check_stop('update (before fetch)');
-    if (stop_parallel_threads) {
-      console.info('stopping parallel thread ' + id);
-      return;
-    }
     let base64 = new_url_to_base64[url]
     if (!(base64 in all_base64)) {
       all_base64[base64] = true;
@@ -5927,6 +5922,7 @@ async function fetch_to_cache(cache, url, base64) {
   msg = 'Fetching ' + decodeURI(url)
   console.info(msg)
   let response;
+  await check_stop_or_pause('update (before fetch)');
   try {
     response = await fetch(url);
   } catch (e) {
@@ -5938,12 +5934,13 @@ async function fetch_to_cache(cache, url, base64) {
     err_status = 'Unexpected fetch response.  Try again later?';
     throw null;
   } if (response.status == 404) {
-    err_status = 'Could not find ' + decodeURI(url) + '<br>The online Guide must have updated its files just now.  Refresh the page and try again.';
+    err_status = '404: Could not find ' + decodeURI(url) + '<br>The online Guide must have updated its files just now.  Refresh the page and try again.';
     throw null;
   } else if (!response.ok) {
-    err_status = response.status + ' - ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
+    err_status = response.status + ': ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
     throw null;
   }
+  await check_stop_or_pause('update (before cache write)');
   await cache.put(base64, response);
 }
 async function record_urls() {
@@ -5969,6 +5966,13 @@ function sleep(ms) {
 async function check_stop(from) {
   if (stop_activity_flag) {
     console.info(from + ' is now stopped');
+    throw null;
+  }
+}
+async function check_stop_or_pause(from) {
+  await check_stop(from);
+  if (stop_parallel_threads) {
+    console.info('stopping parallel thread during ' + from);
     throw null;
   }
 }

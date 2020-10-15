@@ -1028,33 +1028,26 @@ async function fetch_all_to_cache_parallel(cache) {
   var results = await Promise.allSettled(promises);
 
   // If any thread has an exception, throw it up the chain.
-  // If there are multiple exceptions, a quota-exceeded exception
-  // has lowest priority.  Otherwise, take the first.
-  var e_quota;
+  // If there are multiple exceptions, give priority to a non-null exception.
+  // A null exception either has already been handled or requires no handling.
+  let e_null = false;
   for (let i = 0; i < results.length; i++){
     if (results[i].status === 'rejected') {
       let e = results[i].reason;
-      if (is_quota_exceeded(e)) {
-        e_quota = e;
-      } else {
+      if (e) {
         throw e;
+      } else {
+        e_null = true;
       }
     }
   }
-  if (e_quota) throw e_quota;
+  if (e_null) throw null;
 
   console.info(results);
 }
 
 async function fetch_all_to_cache(cache, id) {
   for (let url in new_url_to_base64) {
-    await check_stop('update (before fetch)');
-
-    if (stop_parallel_threads) {
-      console.info('stopping parallel thread ' + id);
-      return;
-    }
-
     let base64 = new_url_to_base64[url]
     if (!(base64 in all_base64)) {
       // Update all_base64 immediately so that parallel threads don't
@@ -1069,6 +1062,7 @@ async function fetch_all_to_cache(cache, id) {
         delete all_base64[base64];
 
         stop_parallel_threads = true;
+
         throw e;
       }
 
@@ -1081,6 +1075,9 @@ async function fetch_to_cache(cache, url, base64) {
   msg = 'Fetching ' + decodeURI(url)
   console.info(msg)
   let response;
+
+  await check_stop_or_pause('update (before fetch)');
+
   try {
     response = await fetch(url);
   } catch (e) {
@@ -1093,17 +1090,14 @@ async function fetch_to_cache(cache, url, base64) {
     err_status = 'Unexpected fetch response.  Try again later?';
     throw null;
   } if (response.status == 404) {
-    err_status = 'Could not find ' + decodeURI(url) + '<br>The online Guide must have updated its files just now.  Refresh the page and try again.';
+    err_status = '404: Could not find ' + decodeURI(url) + '<br>The online Guide must have updated its files just now.  Refresh the page and try again.';
     throw null;
   } else if (!response.ok) {
-    err_status = response.status + ' - ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
+    err_status = response.status + ': ' + response.statusText + '<br>The online server is behaving oddly.  Try again later?';
     throw null;
   }
 
-  // It'd be nice to stop here if stop_activity_flag or stop_parallel_threads
-  // is asserted, but it'd be a pain to exit this function and ensure that
-  // all_base64 is restored.  So we only stop in fetch_all_to_cache, which
-  // has the requesite data on hand.
+  await check_stop_or_pause('update (before cache write)');
 
   // The fetch was successful.  Now write the result to the cache.
   //
@@ -1156,6 +1150,15 @@ async function check_stop(from) {
     await sleep(1000);
     console.info('sleep is done');
     */
+    throw null;
+  }
+}
+
+async function check_stop_or_pause(from) {
+  await check_stop(from);
+
+  if (stop_parallel_threads) {
+    console.info('stopping parallel thread during ' + from);
     throw null;
   }
 }
