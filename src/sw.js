@@ -581,7 +581,7 @@ function fn_send_status(event) {
   // But regardless of the message type, always update the status.
 
   // If this is the first poll after the page is refreshed, clear
-  // the old err_status.  I know longer remember why this was useful.
+  // the old err_status.  I no longer remember why this was useful.
   if (event.data == 'start') {
     err_status = '';
   }
@@ -1288,6 +1288,8 @@ function is_cache_up_to_date() {
 
 // Update cache usage estimate.
 async function update_usage() {
+  // In the service worker, 'navigator' is a WorkerNavigator,
+  // which provides a subset of the Navigator interface.
   if (navigator.storage) {
     let estimate = await navigator.storage.estimate();
     var usage = estimate.usage;

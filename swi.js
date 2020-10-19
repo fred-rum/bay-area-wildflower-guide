@@ -50,29 +50,31 @@ async function swi_oninteractive() {
     root_path = '';
   }
   var sw_path = root_path + 'sw.js';
-  if ('serviceWorker' in navigator) {
-    try {
-      var registration = await navigator.serviceWorker.register(sw_path);
-    } catch (e) {
-      console.warn('service worker registration failed', e);
-      if (e_status) {
-        e_status.innerHTML = 'Service worker failed to load.  Manually clearing all site data might help.';
+  if (e_update) {
+    if (navigator.serviceWorker) {
+      try {
+        var registration = await navigator.serviceWorker.register(sw_path);
+      } catch (e) {
+        console.warn('service worker registration failed', e);
+        if (e_status) {
+          e_status.innerHTML = 'Service worker failed to load.  Manually clearing all site data might help.';
+        }
+        return;
       }
-      return;
-    }
-    await navigator.serviceWorker.ready;
-    start_polling(registration);
-  } else {
-    console.info('no service worker support in browser');
-    if (e_status) {
+      await navigator.serviceWorker.ready;
+      temp_controller = registration.active;
+      start_polling();
+    } else {
+      console.info('no service worker support in browser');
       e_status.innerHTML = 'Sorry, but your browser doesn&rsquo;t support this feature.';
     }
+  } else if (navigator.serviceWorker.controller) {
+    start_polling();
   }
 }
 swi_oninteractive();
-function start_polling(registration) {
+function start_polling() {
   console.info('start_polling()');
-  temp_controller = registration.active;
   if (e_update) {
     e_update.addEventListener('click', fn_update);
     e_clear.addEventListener('click', fn_clear);
@@ -232,9 +234,9 @@ function fn_receive_icon(event) {
   old_icon = icon;
 }
 function get_click_time(name) {
-  let expire_str = localStorage.getItem('click_time_' + name);
-  if (expire_str) {
-    return parseFloat(expire_str);
+  let time_str = localStorage.getItem('click_time_' + name);
+  if (time_str) {
+    return parseFloat(time_str);
   } else {
     return 0.0;
   }

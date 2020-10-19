@@ -992,3 +992,15 @@ If so, it'd be better to make the service worker small and have it
 read the url_data separately and only when the service worker is
 initialized (and perhaps on an occasional basis if the browser somehow
 keeps it running for a long time).
+-and/or-
+Once the service worker is registered, don't register it again except:
+- once every 24 hours
+- if explicitly requested (in which case an update starts automatically?)
+- after a refresh if certain errors were encountered (e.g. 404 on update)
+  (e.g. on red-missing hazard, although that isn't needed, either)
+- before an update
+
+
+Support auto-updates based on NetworkInformation.type?
+The user still needs to manually start the web app, though, so it
+doesn't seem useful.

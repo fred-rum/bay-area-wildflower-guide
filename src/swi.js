@@ -3,7 +3,20 @@
    instance.  It performs 3 main duties:
    - It registers the service worker.
    - It sends user directives to the service worker.
-   - It polls the service worker status and displays it for the user. */
+   - It polls the service worker status and displays it for the user.
+
+   Because the status worker can be communicating with multiple copies of
+   swi.js at the same time, I put as little logic in swi.js as possible.
+   It blindly sends requests to sw.js (even if it looks like the request
+   should get ignored), and it reports whatever status comes from sw.js
+   without interpretation.
+
+   swi.js has two types of pages that it interacts with:
+   - the home page, with an 'update' button and a 'delete' button and lots
+     of progress information.
+   - all other pages, with a potential 'hazard' icon that links back to
+     the home page when an update is available.
+*/
 
 'use strict';
 
@@ -86,44 +99,48 @@ async function swi_oninteractive() {
   }
   var sw_path = root_path + 'sw.js';
 
-  if ('serviceWorker' in navigator) {
-    try {
-      var registration = await navigator.serviceWorker.register(sw_path);
-    } catch (e) {
-      console.warn('service worker registration failed', e);
-      if (e_status) {
-        e_status.innerHTML = 'Service worker failed to load.  Manually clearing all site data might help.';
+  // To limit unexpected bandwidth usage, only update the service worker
+  // from the home page.
+  if (e_update) {
+    if (navigator.serviceWorker) {
+      try {
+        var registration = await navigator.serviceWorker.register(sw_path);
+      } catch (e) {
+        console.warn('service worker registration failed', e);
+        if (e_status) {
+          e_status.innerHTML = 'Service worker failed to load.  Manually clearing all site data might help.';
+        }
+        return;
       }
-      return;
-    }
 
-    // When register() resolves, we're not guaranteed to have an active
-    // service worker.  In fact, the service worker might not even be
-    // 'installing' yet!  Theoretically, I could set up callbacks on
-    // updatestate and statechange, but even easier, I can simply wait
-    // until the ServiceWorkerContainer resolves the promise in 'ready'.
-    // When that happens, a service worker is guaranteed to be active.
-    await navigator.serviceWorker.ready;
+      // When register() resolves, we're not guaranteed to have an active
+      // service worker.  In fact, the service worker might not even be
+      // 'installing' yet!  Theoretically, I could set up callbacks on
+      // updatestate and statechange, but even easier, I can simply wait
+      // until the ServiceWorkerContainer resolves the promise in 'ready'.
+      // When that happens, a service worker is guaranteed to be active.
+      await navigator.serviceWorker.ready;
 
-    start_polling(registration);
-  } else {
-    console.info('no service worker support in browser');
-    if (e_status) {
+      // An oddity of the navigator.serviceWorker.ready promise is that it
+      // resolves when a service worker is 'active', but (at least in Chrome),
+      // navigator.serviceWorker.controller hasn't been updated yet!  To handle
+      // that case, get the active service worker from the registration, and
+      // use that until navigator.serviceWorker.controller updates.
+      temp_controller = registration.active;
+
+      start_polling();
+    } else {
+      console.info('no service worker support in browser');
       e_status.innerHTML = 'Sorry, but your browser doesn&rsquo;t support this feature.';
     }
+  } else if (navigator.serviceWorker.controller) {
+    start_polling();
   }
 }
 swi_oninteractive();
 
-function start_polling(registration) {
+function start_polling() {
   console.info('start_polling()');
-
-  // An oddity of the navigator.serviceWorker.ready promise is that it
-  // resolves when a service worker is 'active', but (at least in Chrome),
-  // navigator.serviceWorker.controller hasn't been updated yet!
-  // To handle that case, get the active service worker from the registration,
-  // and use that until navigator.serviceWorker.controller updates.
-  temp_controller = registration.active;
 
   if (e_update) {
     e_update.addEventListener('click', fn_update);
@@ -350,13 +367,13 @@ function fn_receive_icon(event) {
   old_icon = icon;
 }
 
-/* We get the expire time from local storage every time we need it
+/* We get the last click time from local storage every time we need it
    instead of keeping a local variable.  This ensures that multiple
    windows stay in sync. */
 function get_click_time(name) {
-  let expire_str = localStorage.getItem('click_time_' + name);
-  if (expire_str) {
-    return parseFloat(expire_str);
+  let time_str = localStorage.getItem('click_time_' + name);
+  if (time_str) {
+    return parseFloat(time_str);
   } else {
     return 0.0;
   }
