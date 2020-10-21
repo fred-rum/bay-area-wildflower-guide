@@ -11,12 +11,12 @@ var e_top_msg = {};
 var e_red_missing;
 var e_body;
 var e_icon;
-var temp_controller;
+var pollID;
 var old_msg = {};
 var old_icon;
 var wakelock;
 var poll_interval = 500;
-var polls_since_response = 0;
+var polls_since_response;
 var timed_out = false;
 var root_path;
 async function swi_oninteractive() {
@@ -27,18 +27,15 @@ async function swi_oninteractive() {
   console.info('swi_oninteractive()');
   e_update = document.getElementById('update');
   if (e_update) {
-    e_status = document.getElementById('status');
     e_progress = document.getElementById('progress');
+    e_status = document.getElementById('status');
     e_err_status = document.getElementById('err-status');
     e_clear = document.getElementById('clear');
     e_usage = document.getElementById('usage');
     e_extra = document.getElementById('extra');
-    let top_msg_array = ['green', 'yellow', 'online'];
-    for (let i = 0; i < top_msg_array.length; i++) {
-      let top_msg = top_msg_array[i];
-      e_top_msg[top_msg] = document.getElementById('cache-' + top_msg);
-      console.info(top_msg, e_top_msg[top_msg]);
-    }
+    e_top_msg['green'] = document.getElementById('cache-green');
+    e_top_msg['yellow'] = document.getElementById('cache-yellow');
+    e_top_msg['online'] = document.getElementById('cache-online');
     e_red_missing = document.getElementById('red-missing');
     e_status.innerHTML = 'Waiting for the service worker to load';
   } else {
@@ -50,44 +47,65 @@ async function swi_oninteractive() {
     root_path = '';
   }
   var sw_path = root_path + 'sw.js';
-  if (e_update) {
-    if (navigator.serviceWorker) {
+  if (navigator.serviceWorker) {
+    navigator.serviceWorker.addEventListener('controllerchange', fn_controllerchange);
+    fn_controllerchange();
+    if (e_update) {
+      e_update.addEventListener('click', fn_update);
+      e_clear.addEventListener('click', fn_clear);
+      e_update.addEventListener('keydown', fn_update_keydown);
+      e_clear.addEventListener('keydown', fn_clear_keydown);
+      navigator.serviceWorker.addEventListener('message', fn_receive_status);
       try {
-        var registration = await navigator.serviceWorker.register(sw_path);
+        await navigator.serviceWorker.register(sw_path);
       } catch (e) {
         console.warn('service worker registration failed', e);
         if (e_status) {
-          e_status.innerHTML = 'Service worker failed to load.  Manually clearing all site data might help.';
+          e_err_status.innerHTML = 'Service worker failed to load.  Manually clearing all site data might help.';
         }
         return;
       }
-      await navigator.serviceWorker.ready;
-      temp_controller = registration.active;
-      start_polling();
-    } else {
-      console.info('no service worker support in browser');
-      e_status.innerHTML = 'Sorry, but your browser doesn&rsquo;t support this feature.';
+    } else if (e_body) {
+      navigator.serviceWorker.addEventListener('message', fn_receive_icon);
     }
-  } else if (navigator.serviceWorker.controller) {
-    start_polling();
+  } else if (e_update) {
+    console.warn('no service worker support in browser');
+    e_status.innerHTML = 'Sorry, but your browser doesn&rsquo;t support this feature.';
   }
 }
 swi_oninteractive();
+function fn_controllerchange() {
+  console.info('controllerchange: ' + navigator.serviceWorker.controller);
+  if (pollID) {
+    clearInterval(pollID);
+  }
+  if (navigator.serviceWorker.controller) {
+    start_polling();
+  } else {
+    if (e_update) {
+      e_update.className = 'update-disable';
+      e_clear.className = 'clear-disable';
+      e_progress.innerHTML = '';
+      e_status.innerHTML = '&nbsp;';
+      e_err_status.innerHTML = '';
+      e_usage.innerHTML = '';
+      e_extra.innerHTML = '';
+      e_top_msg['green'].style.display = 'none';
+      e_top_msg['yellow'].style.display = 'none';
+      e_top_msg['online'].style.display = 'none';
+      e_red_missing.style.display = 'none';
+    } else if (e_icon) {
+      e_icon.style.display = 'none';
+    }
+  }
+}
 function start_polling() {
   console.info('start_polling()');
-  if (e_update) {
-    e_update.addEventListener('click', fn_update);
-    e_clear.addEventListener('click', fn_clear);
-    e_update.addEventListener('keydown', fn_update_keydown);
-    e_clear.addEventListener('keydown', fn_clear_keydown);
-    navigator.serviceWorker.addEventListener('message', fn_receive_status);
-  } else if (e_body) {
-    navigator.serviceWorker.addEventListener('message', fn_receive_icon);
-  }
-  poll_cache(undefined, 'start');
-  setInterval(poll_cache, poll_interval);
+  polls_since_response = 0;
+  poll_cache();
+  pollID = setInterval(poll_cache, poll_interval);
 }
-function poll_cache(event, msg='poll') {
+function poll_cache(event) {
   let secs = Math.floor((polls_since_response * poll_interval) / 1000);
   if (secs >= 3) {
     timed_out = true;
@@ -95,14 +113,10 @@ function poll_cache(event, msg='poll') {
       e_err_status.innerHTML = 'No response from the service worker for ' + secs + ' seconds.<br>It might recover eventually, or you might need to clear the site data from the browser.';
     }
   }
-  post_msg(msg)
+  post_msg('poll')
 }
 function post_msg(msg) {
-  if (navigator.serviceWorker.controller) {
-    navigator.serviceWorker.controller.postMessage(msg);
-  } else if (temp_controller) {
-    temp_controller.postMessage(msg);
-  }
+  navigator.serviceWorker.controller.postMessage(msg);
   polls_since_response++;
 }
 function fn_receive_status(event) {
@@ -157,17 +171,20 @@ function fn_receive_status(event) {
   } catch (e) {
     console.error('polling msg error:', e);
     e_update.className = 'update-update';
+    e_progress.innerHTML = '';
     e_clear.className = '';
     e_status.innerHTML = '';
     e_err_status.innerHTML = 'Interface not in sync; try clearing the site data and then refreshing the page.';
     e_usage.innerHTML = '';
     e_extra.innerHTML = '';
-    e_top_msg.style.display = 'none';
+    e_top_msg['green'].style.display = 'none';
+    e_top_msg['yellow'].style.display = 'none';
+    e_top_msg['online'].style.display = 'none';
     e_red_missing.style.display = 'none';
   }
 }
 function fn_update(event) {
-  if (navigator.serviceWorker) {
+  if (navigator.serviceWorker.controller) {
     post_msg('update');
     localStorage.removeItem('click_time_yellow');
     localStorage.removeItem('click_time_missing');
@@ -175,7 +192,7 @@ function fn_update(event) {
   }
 }
 function fn_clear(event) {
-  if (navigator.serviceWorker) {
+  if (navigator.serviceWorker.controller) {
     post_msg('clear');
     localStorage.clear();
   }

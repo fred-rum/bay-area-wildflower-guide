@@ -35,7 +35,7 @@ var e_red_missing;
 var e_body;
 var e_icon;
 
-var temp_controller;
+var pollID;
 
 // old_msg is initialized to a dict, so when receive_status() looks for
 // changes, every old value appears to be undefined.
@@ -46,7 +46,7 @@ var old_icon;
 var wakelock;
 
 var poll_interval = 500; // in milliseconds
-var polls_since_response = 0;
+var polls_since_response;
 var timed_out = false;
 
 var root_path;
@@ -70,20 +70,17 @@ async function swi_oninteractive() {
 
   e_update = document.getElementById('update');
   if (e_update) {
-    e_status = document.getElementById('status');
     e_progress = document.getElementById('progress');
+    e_status = document.getElementById('status');
     e_err_status = document.getElementById('err-status');
 
     e_clear = document.getElementById('clear');
     e_usage = document.getElementById('usage');
     e_extra = document.getElementById('extra');
 
-    let top_msg_array = ['green', 'yellow', 'online'];
-    for (let i = 0; i < top_msg_array.length; i++) {
-      let top_msg = top_msg_array[i];
-      e_top_msg[top_msg] = document.getElementById('cache-' + top_msg);
-      console.info(top_msg, e_top_msg[top_msg]);
-    }
+    e_top_msg['green'] = document.getElementById('cache-green');
+    e_top_msg['yellow'] = document.getElementById('cache-yellow');
+    e_top_msg['online'] = document.getElementById('cache-online');
 
     e_red_missing = document.getElementById('red-missing');
 
@@ -99,67 +96,97 @@ async function swi_oninteractive() {
   }
   var sw_path = root_path + 'sw.js';
 
-  // To limit unexpected bandwidth usage, only update the service worker
-  // from the home page.
-  if (e_update) {
-    if (navigator.serviceWorker) {
+  if (navigator.serviceWorker) {
+    navigator.serviceWorker.addEventListener('controllerchange', fn_controllerchange);
+
+    fn_controllerchange();
+
+    // To limit unexpected bandwidth usage, only update the service worker
+    // from the home page.
+    if (e_update) {
+      e_update.addEventListener('click', fn_update);
+      e_clear.addEventListener('click', fn_clear);
+
+      e_update.addEventListener('keydown', fn_update_keydown);
+      e_clear.addEventListener('keydown', fn_clear_keydown);
+
+      navigator.serviceWorker.addEventListener('message', fn_receive_status);
+
       try {
-        var registration = await navigator.serviceWorker.register(sw_path);
+        await navigator.serviceWorker.register(sw_path);
+
+        // When register() resolves, we're not guaranteed to have an active
+        // service worker.  In fact, the service worker might not even be
+        // 'installing' yet!  We can await navigator.serviceWorker.ready, but
+        // (at least in Chrome), navigator.serviceWorker.controller hasn't been
+        // updated yet when that resolves!  In any case, I already listen for
+        // the 'controllerchange' event anyway, and it seems to reliably fire
+        // after navigator.serviceWorker.controller has updated.
+        //
+        // So the only reason I 'await' the results of register() is in to
+        // catch a failure if one is signaled.
       } catch (e) {
         console.warn('service worker registration failed', e);
         if (e_status) {
-          e_status.innerHTML = 'Service worker failed to load.  Manually clearing all site data might help.';
+          e_err_status.innerHTML = 'Service worker failed to load.  Manually clearing all site data might help.';
         }
         return;
       }
-
-      // When register() resolves, we're not guaranteed to have an active
-      // service worker.  In fact, the service worker might not even be
-      // 'installing' yet!  Theoretically, I could set up callbacks on
-      // updatestate and statechange, but even easier, I can simply wait
-      // until the ServiceWorkerContainer resolves the promise in 'ready'.
-      // When that happens, a service worker is guaranteed to be active.
-      await navigator.serviceWorker.ready;
-
-      // An oddity of the navigator.serviceWorker.ready promise is that it
-      // resolves when a service worker is 'active', but (at least in Chrome),
-      // navigator.serviceWorker.controller hasn't been updated yet!  To handle
-      // that case, get the active service worker from the registration, and
-      // use that until navigator.serviceWorker.controller updates.
-      temp_controller = registration.active;
-
-      start_polling();
-    } else {
-      console.info('no service worker support in browser');
-      e_status.innerHTML = 'Sorry, but your browser doesn&rsquo;t support this feature.';
+    } else if (e_body) {
+      navigator.serviceWorker.addEventListener('message', fn_receive_icon);
     }
-  } else if (navigator.serviceWorker.controller) {
-    start_polling();
+  } else if (e_update) {
+    console.warn('no service worker support in browser');
+    e_status.innerHTML = 'Sorry, but your browser doesn&rsquo;t support this feature.';
   }
 }
 swi_oninteractive();
 
+function fn_controllerchange() {
+  console.info('controllerchange: ' + navigator.serviceWorker.controller);
+
+  // If we change from one controller to another, we could conceivably keep
+  // the same interval timer.  But I prefer to poll the new controller
+  // immediately and restart regular polling with the proper relative delay.
+
+  if (pollID) {
+    clearInterval(pollID);
+  }
+
+  if (navigator.serviceWorker.controller) {
+    start_polling();
+  } else {
+    // The user must have cleared the site data or otherwise unregistered
+    // the controller.  Presumably they knew what they were doing, so don't
+    // bother with any information messages; just disable the interface
+    // cleanly.
+    if (e_update) {
+      e_update.className = 'update-disable';
+      e_clear.className = 'clear-disable';
+      e_progress.innerHTML = '';
+      e_status.innerHTML = '&nbsp;';
+      e_err_status.innerHTML = '';
+      e_usage.innerHTML = '';
+      e_extra.innerHTML = '';
+      e_top_msg['green'].style.display = 'none';
+      e_top_msg['yellow'].style.display = 'none';
+      e_top_msg['online'].style.display = 'none';
+      e_red_missing.style.display = 'none';
+    } else if (e_icon) {
+      e_icon.style.display = 'none';
+    }
+  }
+}
+
 function start_polling() {
   console.info('start_polling()');
 
-  if (e_update) {
-    e_update.addEventListener('click', fn_update);
-    e_clear.addEventListener('click', fn_clear);
-
-    e_update.addEventListener('keydown', fn_update_keydown);
-    e_clear.addEventListener('keydown', fn_clear_keydown);
-
-    navigator.serviceWorker.addEventListener('message', fn_receive_status);
-  } else if (e_body) {
-    navigator.serviceWorker.addEventListener('message', fn_receive_icon);
-  }
-
-  // Poll right away, and then at intervals.
-  poll_cache(undefined, 'start');
-  setInterval(poll_cache, poll_interval);
+  polls_since_response = 0;
+  poll_cache();
+  pollID = setInterval(poll_cache, poll_interval);
 }
 
-function poll_cache(event, msg='poll') {
+function poll_cache(event) {
   // If we don't get a response from the service worker for too long,
   // let the user know that something went wrong.
   let secs = Math.floor((polls_since_response * poll_interval) / 1000);
@@ -170,20 +197,12 @@ function poll_cache(event, msg='poll') {
     }
   }
 
-  post_msg(msg)
+  post_msg('poll')
 }
 
 function post_msg(msg) {
-  // post_msg() is only called if there is an active service worker,
-  // but navigator.serviceWorker.controller might not be updated yet
-  // (as documented above).  Prefer navigator.serviceWorker.controller
-  // when it is available so that we keep up with any changes to the
-  // service worker, but fall back to temp_controller if necessary.
-  if (navigator.serviceWorker.controller) {
-    navigator.serviceWorker.controller.postMessage(msg);
-  } else if (temp_controller) {
-    temp_controller.postMessage(msg);
-  }
+  navigator.serviceWorker.controller.postMessage(msg);
+
   polls_since_response++;
 }
 
@@ -264,25 +283,27 @@ function fn_receive_status(event) {
     update_wakelock(msg);
   } catch (e) {
     console.error('polling msg error:', e);
-    // sw.js always auto-updates.  If swi.js is cached, communication could
-    // break down.  If so, we want to make clear what steps might lead to
-    // recovery.
+    // If sw.js and swi.js update unequally, communication could break down.
+    // If so, we want to make clear what steps might lead to recovery.
     e_update.className = 'update-update';
+    e_progress.innerHTML = '';
     e_clear.className = '';
     e_status.innerHTML = '';
     e_err_status.innerHTML = 'Interface not in sync; try clearing the site data and then refreshing the page.';
     e_usage.innerHTML = '';
     e_extra.innerHTML = '';
-    e_top_msg.style.display = 'none';
+    e_top_msg['green'].style.display = 'none';
+    e_top_msg['yellow'].style.display = 'none';
+    e_top_msg['online'].style.display = 'none';
     e_red_missing.style.display = 'none';
   }
 }
 
 function fn_update(event) {
-  if (navigator.serviceWorker) {
-    // sw.js always auto-updates.  If swi.js is cached, communication could
-    // break down.  So regardless of what we *think* the status is, always
-    // send the 'update' message and let the service worker sort it out.
+  if (navigator.serviceWorker.controller) {
+    // If sw.js and swi.js update unequally, communication could break down.
+    // So regardless of what we *think* the status is, always send the 'update'
+    // message and let the service worker sort it out.
     post_msg('update');
     localStorage.removeItem('click_time_yellow');
     localStorage.removeItem('click_time_missing');
@@ -292,10 +313,10 @@ function fn_update(event) {
 }
 
 function fn_clear(event) {
-  if (navigator.serviceWorker) {
-    // sw.js always auto-updates.  If swi.js is cached, communication could
-    // break down.  So regardless of what we *think* the status is, always
-    // send the 'clear' message and let the service worker sort it out.
+  if (navigator.serviceWorker.controller) {
+    // If sw.js and swi.js update unequally, communication could break down.
+    // So regardless of what we *think* the status is, always send the 'clear'
+    // message and let the service worker sort it out.
     post_msg('clear');
     localStorage.clear();
   }
@@ -386,13 +407,10 @@ function fn_icon_click(event) {
   } else if (old_icon === 'yellow') {
     localStorage.setItem('click_time_yellow', String(Date.now()));
   }
-/*
-  if (event.shiftKey || event.ctrlKey) {
-    window.open(root_path + 'index.html#offline');
-  } else {
-    window.location.href = root_path + 'index.html#offline';
-  }
-*/
+
+  // The icon has a link to the 'offline' section of the home page.
+  // So we don't call event.preventDefault(), and we allow the browser
+  // to navigate there.
 }
 
 /* If the browser supports it, keep the screen awake whenever the 'update'

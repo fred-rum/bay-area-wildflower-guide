@@ -987,6 +987,19 @@ the sw.js process larger unless I split things up somehow.
 Have an offline option for 'no full-size photos', in which case links
 to photos/... are re-directed to thumbs/...
 
+Support auto-updates based on NetworkInformation.type?
+The user still needs to manually start the web app, though, so it
+doesn't seem useful.
+
+Create a page that links to the most common wildflowers bay-area
+wildflowers.  (Does this screw up glossary ownership?  Might need to
+check for "compatible" glossary ownership [one a parent of the other]
+rather than "same".)
+
+What are the implications that the service worker is not used(?) on a
+shift-refresh?
+
+
 Is the 500KB service worker being read every time a page is fetched?
 If so, it'd be better to make the service worker small and have it
 read the url_data separately and only when the service worker is
@@ -1000,7 +1013,25 @@ Once the service worker is registered, don't register it again except:
   (e.g. on red-missing hazard, although that isn't needed, either)
 - before an update
 
+Only update sw.js when the user gives permission: For safety, the
+behavior by default is mostly like before except without automatic
+registration of the service worker.  Instead, when the user clicks the
+'update' button, two things happen:
+- the update message is sent, and in parallel
+- sw.js is re-registered, and if a new version is found, an update message
+  is immediately sent to it.
 
-Support auto-updates based on NetworkInformation.type?
-The user still needs to manually start the web app, though, so it
-doesn't seem useful.
+There are a few other changes:
+- when an update is in progress (e.g. the 'pause' button is displayed),
+  clicking the button won't re-register the service worker.
+- when the offline copy is up to date (top_msg is green), the update
+  button is green and says 'Check for Update'.
+- if re-registration started from 'Check for Update', display 'Checking
+  for newest update' while in progress, and 'No newer files found' if
+  no new version found.  Keep that message until the sw.js msg is
+  non-blank.  (Note that the msg could change while supposedly up to
+  date, e.g. if cache validation fails.)
+- (do not automatically re-register sw.js while 'online'.)
+
+Automatically insert the total offline size into swi.js so that it can
+display the required space when sw.js isn't registered.
