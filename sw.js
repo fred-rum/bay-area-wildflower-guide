@@ -1,7 +1,7 @@
 'use strict';
 var url_data = [
-["swi.js", "fSm92v2bF34xIh2uS_o9HZZb69Q_fXtnTitsrg==", 10],
-["index.html", "tZigQQRGeUn4xREH1XDelwFgNeCvBRGSgb9xww==", 7],
+["swi.js", "Cd-nXB3BBZu-Kkz4_sq8XXkbNx78IrqgjChDmw==", 10],
+["index.html", "sGD9mCo26HpcffI0Yw13tbAjATbGeD6xFZuFsA==", 7],
 ["bawg.css", "h5JpOO6EDDW4Ie_tmUb8nra_JcH4oFxfSvrD3A==", 12],
 ["icons/home.png", "1gfBJCZJ7qjcVynIYsiENjo5EXRz74ixZK9YSA==", 27],
 ["icons/online.svg", "V-n9Y6IMGrtTzQbte88RvxhNWq3UGukTp4SOCQ==", 2],
@@ -5032,9 +5032,9 @@ var url_data = [
 ["html/zigzag%20larkspur.html", "YaWyEk8xBOxtysmVTGj1U4BAtVBEe8H4o787cQ==", 7]
 ];
 console.info('starting from the beginning');
-var DB_NAME = 'db-v1';
-var DB_VERSION = 1;
-var BASE64_CACHE_NAME = 'base64-cache-v1';
+const DB_NAME = 'db-v1';
+const DB_VERSION = 1;
+const BASE64_CACHE_NAME = 'base64-cache-v1';
 var activity = 'init';
 var msg = 'Checking for offline files';
 var err_status = '';
@@ -5174,12 +5174,14 @@ async function dbupgradeneeded(event) {
   let db = event.target.result;
   db.createObjectStore("url_data", { keyPath: "key" });
 }
-init_status();
+activity_promise = init_status();
 async function init_status() {
   console.info('init_status()');
   await read_db();
   check_url_diff();
-  validate_cache();
+  activity = 'validate';
+  msg = 'Validating offline files';
+  await count_cached();
 }
 function validate_cache() {
   activity = 'validate';
@@ -5268,10 +5270,11 @@ function fn_send_status(event) {
     err_status = '';
   }
   if (event.data === 'update') {
-    if ((activity === 'validate') ||
+    if ((activity === 'init') ||
+        (activity === 'validate') ||
         (activity === 'idle') ||
         (activity === 'delete')) {
-      if (is_cache_up_to_date()) {
+      if (is_cache_up_to_date() && (activity !== 'init')) {
         console.info('cache is up to date: ignore update request');
       } else {
         update_cache_when_ready();
@@ -5401,6 +5404,8 @@ async function stop_activity() {
     msg = 'Pausing deletions';
   } else if (activity === 'validate') {
     msg = 'Waiting for validation to complete'
+  } else if (activity === 'init') {
+    msg = 'Waiting for service worker to initalize'
   } else if (activity === 'idle') {
     return;
   } else {

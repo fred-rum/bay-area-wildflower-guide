@@ -6,9 +6,12 @@ var url_data = [
 
 console.info('starting from the beginning');
 
-var DB_NAME = 'db-v1';
-var DB_VERSION = 1;
-var BASE64_CACHE_NAME = 'base64-cache-v1';
+// Admittedly, these are terrible storage names.  But it's hard to change
+// them now, and they only need to be unique among sites hosted at
+// fred-rum.github.io (i.e. my own sites).
+const DB_NAME = 'db-v1';
+const DB_VERSION = 1;
+const BASE64_CACHE_NAME = 'base64-cache-v1';
 
 // Activity is 'init', 'busy', 'delete', 'update', or 'idle'.
 // An initial 'init' activity prevents updates until everything
@@ -421,7 +424,7 @@ async function dbupgradeneeded(event) {
 // This code figure out how much information has been cached and how much
 // more would be cached if the user asks for a cache update.
 
-init_status();
+activity_promise = init_status();
 
 async function init_status() {
   console.info('init_status()');
@@ -434,7 +437,9 @@ async function init_status() {
 
   check_url_diff();
 
-  validate_cache();
+  activity = 'validate';
+  msg = 'Validating offline files';
+  await count_cached();
 }
 
 function validate_cache() {
@@ -591,10 +596,11 @@ function fn_send_status(event) {
   // Respond to an activity request.
 
   if (event.data === 'update') {
-    if ((activity === 'validate') ||
+    if ((activity === 'init') ||
+        (activity === 'validate') ||
         (activity === 'idle') ||
         (activity === 'delete')) {
-      if (is_cache_up_to_date()) {
+      if (is_cache_up_to_date() && (activity !== 'init')) {
         // do nothing
         console.info('cache is up to date: ignore update request');
       } else {
@@ -678,7 +684,8 @@ function fn_send_status(event) {
   }
 
   if (activity === 'init') {
-    // init not yet ready to queue a user action
+    // init can queue a user action, but it doesn't yet know whether
+    // there is anything to do.
     var update_class = 'update-disable';
     var clear_class = 'clear-disable';
   } else if (activity === 'busy') {
@@ -767,6 +774,8 @@ async function stop_activity() {
     msg = 'Pausing deletions';
   } else if (activity === 'validate') {
     msg = 'Waiting for validation to complete'
+  } else if (activity === 'init') {
+    msg = 'Waiting for service worker to initalize'
   } else if (activity === 'idle') {
     // No activity to stop.
     return;

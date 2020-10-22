@@ -1035,3 +1035,50 @@ There are a few other changes:
 
 Automatically insert the total offline size into swi.js so that it can
 display the required space when sw.js isn't registered.
+
+
+The service worker is fetched uncached *every time any page is
+loaded*.  So the service worker absolutely needs to be as small as
+possible.  (Perhaps the PWA spec takes "web app" literally and assumes
+that a web site only has one page, so new page loads are rare.)
+
+Remove url_data from sw.js and load it separately instead (e.g. as
+JSON data, e.g. url_data.json).  But don't load it automatically.
+Instead load it when starting (or restarting) an update.
+https://developer.mozilla.org/en-US/docs/Web/API/Body/json
+
+swi.js goes ahead and registers sw.js automatically every time because
+it makes no difference.
+
+Advanced: put a version number or hash of the url_data in sw.js.  On
+update, record that value in the DB.  That way, sw.js can tell whether
+an update is pending without yet loading url_data (but it won't know
+how big the change is).
+
+Advanced: minimize sw.js.  E.g. terser (requires node.js/npm)
+
+Super advanced: put as much work as possible in a separate (worker?)
+script so that the automatic fetches of sw.js are as minimal as
+possible.
+
+Update browser notes:
+
+Once the offline files are saved, you can browse the Guide without
+access to a network.  Note, however, that I can't stop the browser
+from attempting certain network activity in the background (~50 KB per
+page).  If you have a limited data plan, consider putting your phone
+in airplane mode to prevent these accesses.
+
+
+Check whether caches used by other service workers on GitHub are
+visible and/or contribute to usage.  If so, update my DB/cache names
+(e.g. fred-rum-bawg-cache-v1) and don't delete unknown caches.  ***
+*** No, my hostname is fred-rum.github.io.  I just need to ensure that
+other fred-rum sites use different names.
+
+Do something better on a hard refress (shift-F5).  Although
+navigator.serviceWorker.controller is null, I can get the active
+service worker by reading the 'active' value after registration.  Note
+that a refresh of any site page in another tab/window triggers a
+'controllerchange' and sets the navigator.serviceWorker.controller
+value.

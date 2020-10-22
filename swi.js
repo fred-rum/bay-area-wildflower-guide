@@ -15,7 +15,7 @@ var pollID;
 var old_msg = {};
 var old_icon;
 var wakelock;
-var poll_interval = 500;
+const POLL_INTERVAL_MS = 500;
 var polls_since_response;
 var timed_out = false;
 var root_path;
@@ -46,27 +46,21 @@ async function swi_oninteractive() {
   } else {
     root_path = '';
   }
-  var sw_path = root_path + 'sw.js';
   if (navigator.serviceWorker) {
     navigator.serviceWorker.addEventListener('controllerchange', fn_controllerchange);
-    fn_controllerchange();
     if (e_update) {
       e_update.addEventListener('click', fn_update);
       e_clear.addEventListener('click', fn_clear);
       e_update.addEventListener('keydown', fn_update_keydown);
       e_clear.addEventListener('keydown', fn_clear_keydown);
       navigator.serviceWorker.addEventListener('message', fn_receive_status);
-      try {
-        await navigator.serviceWorker.register(sw_path);
-      } catch (e) {
-        console.warn('service worker registration failed', e);
-        if (e_status) {
-          e_err_status.innerHTML = 'Service worker failed to load.  Manually clearing all site data might help.';
-        }
-        return;
-      }
     } else if (e_body) {
       navigator.serviceWorker.addEventListener('message', fn_receive_icon);
+    }
+    if (navigator.serviceWorker.controller) {
+      start_polling();
+    } else {
+      register_sw();
     }
   } else if (e_update) {
     console.warn('no service worker support in browser');
@@ -94,6 +88,8 @@ function fn_controllerchange() {
       e_top_msg['yellow'].style.display = 'none';
       e_top_msg['online'].style.display = 'none';
       e_red_missing.style.display = 'none';
+      old_msg = {}
+      update_wakelock();
     } else if (e_icon) {
       e_icon.style.display = 'none';
     }
@@ -102,11 +98,11 @@ function fn_controllerchange() {
 function start_polling() {
   console.info('start_polling()');
   polls_since_response = 0;
-  poll_cache();
-  pollID = setInterval(poll_cache, poll_interval);
+  post_msg('poll');
+  pollID = setInterval(fn_poll_cache, POLL_INTERVAL_MS);
 }
-function poll_cache(event) {
-  let secs = Math.floor((polls_since_response * poll_interval) / 1000);
+function fn_poll_cache(event) {
+  let secs = Math.floor((polls_since_response * POLL_INTERVAL_MS) / 1000);
   if (secs >= 3) {
     timed_out = true;
     if (e_err_status) {
@@ -167,7 +163,7 @@ function fn_receive_status(event) {
       e_clear.className = msg.clear_class;
     }
     old_msg = msg;
-    update_wakelock(msg);
+    update_wakelock();
   } catch (e) {
     console.error('polling msg error:', e);
     e_update.className = 'update-update';
@@ -184,11 +180,32 @@ function fn_receive_status(event) {
   }
 }
 function fn_update(event) {
+  localStorage.removeItem('click_time_yellow');
+  localStorage.removeItem('click_time_missing');
+  init_permissions();
   if (navigator.serviceWorker.controller) {
     post_msg('update');
-    localStorage.removeItem('click_time_yellow');
-    localStorage.removeItem('click_time_missing');
-    init_permissions();
+  }
+}
+async function init_permissions() {
+  if (navigator.storage) {
+    let persistent = await navigator.storage.persist();
+    console.info('persistent =', persistent);
+   }
+}
+async function register_sw() {
+  console.info('register_sw()');
+  try {
+    var sw_path = root_path + 'sw.js';
+    var foo = await navigator.serviceWorker.register(sw_path);
+    console.info('foo:', foo);
+    console.info('controller:', navigator.serviceWorker.controller);
+  } catch (e) {
+    console.warn('service worker registration failed', e);
+    if (e_status) {
+      e_status.innerHTML = '';
+      e_err_status.innerHTML = 'Service worker failed to load.  Manually clearing all site data might help.';
+    }
   }
 }
 function fn_clear(event) {
@@ -266,8 +283,9 @@ function fn_icon_click(event) {
     localStorage.setItem('click_time_yellow', String(Date.now()));
   }
 }
-async function update_wakelock(msg) {
-  if (msg.update_class == 'update-stop' && !wakelock && navigator.wakeLock) {
+async function update_wakelock() {
+  let update_class = e_update.className;
+  if (update_class == 'update-stop' && !wakelock && navigator.wakeLock) {
     try {
       console.info('Requesting wakelock');
       wakelock = await navigator.wakeLock.request('screen');
@@ -277,7 +295,7 @@ async function update_wakelock(msg) {
       console.warn('wakelock request failed:', e);
       wakelock = undefined;
     }
-  } else if (msg.update_class != 'update-stop' && wakelock) {
+  } else if (update_class != 'update-stop' && wakelock) {
     try {
       console.info('releasing wakelock');
       wakelock.release();
@@ -289,10 +307,4 @@ async function update_wakelock(msg) {
 }
 function fn_wakelock_released() {
   console.info('fn_wakelock_released()');
-}
-async function init_permissions() {
-  if (navigator.storage) {
-    let persistent = await navigator.storage.persist();
-    console.info('persistent =', persistent);
-   }
 }
