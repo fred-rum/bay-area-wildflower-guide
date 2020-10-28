@@ -112,7 +112,7 @@ def gen_url_cache():
 
     timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
     num_urls = len(cache_list)
-    code = f'''var sw_timestamp = '{timestamp}';
-var num_urls = {num_urls};
-var kb_total = {kb_total}'''
+    code = f'''var upd_timestamp = '{timestamp}';
+var upd_num_urls = {num_urls};
+var upd_kb_total = {kb_total}'''
     strip_comments('sw.js', code=code)

@@ -1,8 +1,15 @@
 'use strict';
 
-// sw_timestamp indicates the date/time when the latest offline files
-// were generated.  If old_timestamp is different (presumably older),
-// then an update is available.
+// The 'insert code here' comment is replaced by cache.py with a few
+// variable definitions that summarize information from url_data.json.
+// These summary values help us keep the user informed about any pending
+// update without needing to read the (large) url_data.json file.
+//
+// The following variables are defined:
+//
+// 'upd_timestamp' indicates the date/time that the latest update was
+// generated.  If cur_timestamp is different (presumably older), then an
+// update is available.
 //
 // Note that because sw.js is fetched first, and files to cache are fetched
 // later, some or all files in the cache may be newer than this timestamp.
@@ -10,12 +17,10 @@
 // update is available, and that update will potentially refetch some files
 // that were already new, but that is also OK.
 //
-// The 'insert code here' comment is special.  When bawg.py runs, it replaces
-// the comment with various information about the latest update stored in
-// url_data.json, namely:
-// - sw_timestamp: the timestamp of the url_data
-// - num_urls: the number of URLs in url_data
-// - kb_total: the total KB in url_data
+// 'upd_num_urls' indicates the number of URLs in the latest update
+//
+// 'upd_kb_total' indicates the total KB in the latest update
+
 /* insert code here */
 
 console.info('starting from the beginning');
@@ -61,55 +66,54 @@ var activity_promise;
 // no data (or incomplete data).
 var offline_ready = undefined;
 
-// url_to_base64 is the mapping of URL to base64 key that we're currently
+// cur_url_to_base64 is the mapping of URL to base64 key that we're currently
 // using for checking the cache.  It is initialized from the indexedDB,
-// but is updated to new_url_to_base64 when the cache is updated.
-var url_to_base64;
+// but is updated to upd_url_to_base64 when the cache is updated.
+var cur_url_to_base64;
 
-// new_url_to_base64 is the most up-to-date mapping of URL to base64.
+// upd_url_to_base64 is the most up-to-date mapping of URL to base64.
 // It is used to update the cache when the user is ready.
-var new_url_to_base64;
+var upd_url_to_base64;
 
-// url_diff indicates whether an update is warranted, i.e. if
-// - sw_timestamp differs from old_timestamp, or
-// - any files are missing from the cache.
-var url_diff = false;
+// upd_pending indicates whether an update is warranted, i.e. if
+// - upd_timestamp differs from cur_timestamp, or
+// - any files are missing from the cache (red_missing).
+var upd_pending = false;
 
-// base64_to_kb indicates how many KB are required for each new file
-// (as represented by a base64 key).  It is also used to determine
-// whether a cached base64 key is needed by the new url_data.
-var base64_to_kb;
+// upd_base64_to_kb indicates how many KB are required for each file in
+// the update (as represented by a base64 key).
+var upd_base64_to_kb;
 
-// old_timestamp indicates the date/time when the cached offline files
-// were generated.  If sw_timestamp is different (presumably newer),
+// cur_timestamp indicates the date/time when the cached offline files
+// were generated.  If upd_timestamp is different (presumably newer),
 // then an update is available.
-var old_timestamp;
+var cur_timestamp;
 
-// old_base64 indicates the base64 keys being used by the old url_data.
-// The values are meaningless; only the keys are used.
-var old_base64;
+// cur_base64 indicates the base64 keys being used by the currently
+// cached offline files.  The values are meaningless; only the keys are used.
+var cur_base64;
 
 // all_base64 indicates the base64 keys currently in the cache.
 // The values are meaningless; only the keys are used.
 var all_base64;
 
-// num_cached is the length of all_base64 (which is otherwise inefficient
-// to compute).  Note the different context from kb_cached.
-var num_cached;
+// all_num_cached is the length of all_base64 (which is otherwise inefficient
+// to compute).
+var all_num_cached;
 
 // Keep track of the number of files that are unneeded by either the
 // old url_data or the new url_data.  (Obsolete files.)
-var num_obs_files;
+var obs_num_files;
 
-// Keep track of the number of files that are used by old url_data but
-// aren't needed by the new url_data.  (Old files.)
-var num_old_files;
+// Keep track of the number of files that are in cur_base64 but not in
+// upd_base64_to_kb.  I.e. it is the count of files that can be deleted
+// when the update completes.
+var cur_num_files;
 
-// kb_cached is the total KB needed by new_url_to_base64 and already
-// cached (i.e. a subset of kb_total).  It is undefined if an update
-// hasn't started (which means that we haven't read url_data.json, so
-// we don't know which files it reuses from the cache).
-var kb_cached;
+// upd_kb_cached is the total KB needed by upd_url_to_base64 and already
+// cached (i.e. a subset of upd_kb_total).  It is undefined if upd_base64_to_kb
+// is undefined.
+var upd_kb_cached;
 
 // Indicate cache errors.
 var red_missing = false; // someone deleted files from the cache
@@ -269,12 +273,12 @@ function fetch_handler(event) {
   let url = remove_scope_from_request(event.request);
   console.info('fetching', url);
 
-  if (!url_to_base64 || offline_ready) {
-    // There is a race condition between initializing url_to_base64
+  if (!cur_url_to_base64 || offline_ready) {
+    // There is a race condition between initializing cur_url_to_base64
     // and fetching the first URL.  Fortunately, our fetch
-    // response is allowed to be asynchronous.  So if we recognize
-    // the URL *or* we don't have url_to_base64 yet, tell the event
-    // to wait until we can create a fetch response.
+    // response is allowed to be asynchronous.  So if we're ready to
+    // fetch from the cache *or* we don't have cur_url_to_base64 yet,
+    // tell the event to wait until we can create a fetch response.
     event.respondWith(fetch_response(event, url));
   } else {
     console.info(url, ' fetched in online mode')
@@ -288,16 +292,16 @@ function fetch_handler(event) {
 
 async function fetch_response(event, url) {
   // As described in fetch_handler() above, we might be here because
-  // we don't have url_to_base64 yet.  Presumably url_to_base64 is
-  // already in the process of being read from the indexedDB, but I'm
-  // not sure how to wait for that result.  Instead I take the simple
+  // we don't have cur_url_to_base64 yet.  Presumably cur_url_to_base64 is
+  // already in the process of being read from the indexedDB, but for now
+  // I don't bother to wait for that result.  Instead I take the simple
   // path of simply reading it again.
-  if (!url_to_base64) {
+  if (!cur_url_to_base64) {
     await read_db();
   }
 
-  // Now we're guaranteed to have url_to_base64 and can proceed with
-  // checking the cache.
+  // Now we're guaranteed to have cur_url_to_base64 and can proceed with
+  // performing the fetch.
 
   // fetch_response() is normally only called when offline_ready is true,
   // but it is also called when offline_ready hasn't been initialized yet.
@@ -306,7 +310,7 @@ async function fetch_response(event, url) {
     return fetch(event.request);
   }
 
-  if (!(url in url_to_base64)) {
+  if (!(url in cur_url_to_base64)) {
     // If we're offline and a fetch is attempted of an unrecognized file,
     // generate a 404 without attempting an online fetch.  This can happen
     // when the browser speculatively fetches a file such as favicon.ico.
@@ -318,12 +322,12 @@ async function fetch_response(event, url) {
     return generate_404(url, ' is not part of the current Guide.  Try the search bar.');
   }
 
-  let response = await caches.match(url_to_base64[url]);
+  let response = await caches.match(cur_url_to_base64[url]);
 
   if (!response) {
     // Flag the missing file (even if we can find a fall-back solution below).
     red_missing = true;
-    url_diff = true;
+    upd_pending = true;
 
     // We trigger a re-validation of the cache so that an 'update' will know
     // what files to fetch.
@@ -335,13 +339,13 @@ async function fetch_response(event, url) {
   if (!response && url.startsWith('photos/')) {
     console.info('%s not found; falling back to thumbnail', url);
     let alt_url = 'thumbs/' + url.substr('photos/'.length);
-    // If url_to_base64[alt_url] is undefined, then no cache will match.
+    // If cur_url_to_base64[alt_url] is undefined, then no cache will match.
     // I.e. we don't have to explicitly check whether url is valid.
-    response = await caches.match(url_to_base64[alt_url]);
+    response = await caches.match(cur_url_to_base64[alt_url]);
   } else if (!response && url.startsWith('thumbs/')) {
     console.info('%s not found; falling back to full-size photo', url);
     let alt_url = 'photos/' + url.substr('thumbs/'.length);
-    response = await caches.match(url_to_base64[alt_url]);
+    response = await caches.match(cur_url_to_base64[alt_url]);
   }
 
   if (response) {
@@ -368,65 +372,56 @@ function generate_404(url, msg) {
   return Promise.resolve(new Response('<html>' + decodeURI(url) + msg, {'status': 404, headers: {'Content-Type': 'text/html; charset=utf-8'}}));
 }
 
-/*** Read the old url_to_base64 ***/
+/*** Read the indexedDB ***/
 
-// Until the user manually updates the cache again, we want to continue
-// using the old url_to_base64 that was used to update the cache last time.
-// E.g.
-// - the user is online and updates the cache.
-// - the user is online and visits the site again and gets a new sw.js,
-//   but the user doesn't update the cache.
-// - the user goes offline.
-// In this case, the registered sw.js has a different URL->base64 map
-// than what was used when creating the cache.  Trying to use the new
-// url_to_base64 would result in cache misses, which is bad.
+// The indexedDB stores the cur_url_to_base64 mapping for the currently
+// cached files.
 //
-// The indexedDB stores the url_to_base64 value that was present when
-// the cache was last updated.  We use this old url_to_base64 until the
-// user updates the cache again.
+// The indexedDB also stores a base64_to_kb mapping for the most recent
+// update that was started.  If that update failed to complete, then we
+// conveniently have full information about the update status without
+// needing to check any online files.  Conversely, if the update completed
+// and hasn't been superceded by a more recent update, then this information
+// simply duplicates the summary variables at the top of this script.
 
-// Read the cached url_to_base64.
 async function read_db() {
   console.info('read_db()');
 
   try {
-    url_to_base64 = {};
-    old_base64 = {};
+    cur_url_to_base64 = {};
+    cur_base64 = {};
     offline_ready = false;
 
     let db = await open_db();
     let os = db.transaction('url_data', 'readonly').objectStore('url_data');
-    let rx_data = os.get('data');
-    let rx_new_data = os.get('base64_to_kb');
+    let async_cur_data = async_callbacks(os.get('data'));
+    let async_upd_data = async_callbacks(os.get('upd_base64_to_kb'));
 
-    let data = await async_callbacks(rx_data);
-    console.info('indexedDB data:', data);
-    if (data && data.url_to_base64) {
-      url_to_base64 = data.url_to_base64;
-      old_timestamp = data.timestamp; // may be undefined
+    let cur_data = await async_cur_data;
+    console.info('indexedDB data:', cur_data);
+    if (cur_data && cur_data.url_to_base64) {
+      cur_url_to_base64 = cur_data.url_to_base64;
+      cur_timestamp = cur_data.timestamp; // may be undefined
       offline_ready = true;
-      console.info('found url_to_base64 in DB');
+      console.info('found cur_url_to_base64 in DB');
 
-      // Generate a dictionary of old base64 keys from the url_to_base64 data.
-      for (let url in url_to_base64) {
-        let base64 = url_to_base64[url];
-        old_base64[base64] = true;
+      // Generate a dictionary of old base64 keys from the cur_url_to_base64 data.
+      for (let url in cur_url_to_base64) {
+        let base64 = cur_url_to_base64[url];
+        cur_base64[base64] = true;
       }
     }
 
-    // We started this read just after the rx_data read, but we don't bother
+    // We started this read just after the async_data read, but we don't bother
     // to await its results until now.
-    let new_data = await async_callbacks(rx_new_data);
+    let upd_data = await async_upd_data;
 
-    // The new_data isn't critical, and if no such data is found,
-    // we just continue without it.  We also ignore the new_data if
-    // its timestamp (of the supposedly in-progress update) doesn't
-    // match the current sw_timestamp.  We also ignore the new_data
-    // if its timestamp matches old_timestamp, meaning that the
-    // update has already completed.
-    if (new_data && (new_data.timestamp === sw_timestamp)) {
-      base64_to_kb = new_data.base64_to_kb;
-      console.info('found latest base64_to_kb in DB');
+    // The upd_data isn't critical, and if no such data is found,
+    // we just continue without it.  We also ignore the upd_data if
+    // its timestamp doesn't match the current upd_timestamp.
+    if (upd_data && (upd_data.timestamp === upd_timestamp)) {
+      upd_base64_to_kb = upd_data.upd_base64_to_kb;
+      console.info('found upd_base64_to_kb in DB');
     }
 
     // Note that we throw away the db and os values when we exit their scope.
@@ -480,14 +475,14 @@ monitor_promise();
 async function init_status() {
   console.info('init_status()');
 
-  // Read the old url_to_base64 from indexedDB.
+  // Read the indexedDB.
   // Note that the fetch handler will also call read_db() if it needs
   // it before we're done here.  But we still call it here in order to
-  // compare it to the new_url_to_base64.
+  // determine our status without waiting for a fetch.
   await read_db();
 
-  // This comparison does the right thing even if old_timestamp is undefined.
-  url_diff = (sw_timestamp !== old_timestamp);
+  // This comparison does the right thing even if cur_timestamp is undefined.
+  upd_pending = (upd_timestamp !== cur_timestamp);
 
   activity = 'validate';
   msg = 'Validating offline files';
@@ -508,26 +503,27 @@ async function check_cached() {
 
   all_base64 = {};
 
-  // Leave num_cached as undefined while waiting for the cache transactions
-  // to avoid the progress message to falsely claim the cache is empty.
+  // Leave all_num_cached as undefined while waiting for the cache
+  // transactions to prevent the progress message from temporarily
+  // claiming the cache is empty when it might not be.
   let cache = await caches.open(BASE64_CACHE_NAME);
   let requests = await cache.keys();
 
-  // num_cached is cleared here, but the single Javascript thread will
+  // all_num_cached is cleared here, but the single Javascript thread will
   // update it to a proper value before anyone can read the cleared value.
-  num_cached = 0;
+  all_num_cached = 0;
   for (const request of requests) {
     let base64 = remove_scope_from_request(request);
     all_base64[base64] = true;
-    num_cached++;
+    all_num_cached++;
   }
 
   // Check for files that are supposed to be in the offline copy
   // but have gone missing.
-  for (let base64 in old_base64) {
+  for (let base64 in cur_base64) {
     if (!(base64 in all_base64)) {
       red_missing = true;
-      url_diff = true;
+      upd_pending = true;
     }
   }
 
@@ -542,41 +538,40 @@ async function check_cached() {
 // Check how many KB of the new base64 values already have a file cached.
 // Also compute the total KB that will be cached if the cache is updated.
 function count_cached() {
-  // base64_to_kb is only valid while an update is in progress
-  // (including if it has been interrupted by a pause, error, or
-  // service-worker restart).
-  if (!base64_to_kb) return;
+  // If we don't know what files are in the update, then we can't count
+  // the cache.
+  if (!upd_base64_to_kb) return;
 
   console.info('count_cached()');
 
-  console.info('base64_to_kb:', base64_to_kb);
+  console.info('upd_base64_to_kb:', upd_base64_to_kb);
 
-  // kb_total was initialized at the top of sw.js, but it's possible that
+  // upd_kb_total was initialized at the top of sw.js, but it's possible that
   // we got newer data from the JSON file.
-  kb_total = 0;
-  num_urls = 0;
-  for (const base64 in base64_to_kb) {
-    kb_total += base64_to_kb[base64];
-    num_urls++;
+  upd_kb_total = 0;
+  upd_num_urls = 0;
+  for (const base64 in upd_base64_to_kb) {
+    upd_kb_total += upd_base64_to_kb[base64];
+    upd_num_urls++;
   }
 
   console.info('all_base64:', all_base64);
-  console.info('old_base64:', old_base64);
+  console.info('cur_base64:', cur_base64);
 
-  kb_cached = 0;
-  num_old_files = 0;
-  num_obs_files = 0;
+  upd_kb_cached = 0;
+  cur_num_files = 0;
+  obs_num_files = 0;
   for (const base64 in all_base64) {
-    if (base64 in base64_to_kb) {
-      kb_cached += base64_to_kb[base64];
-    } else if (base64 in old_base64) {
-      num_old_files++;
+    if (base64 in upd_base64_to_kb) {
+      upd_kb_cached += upd_base64_to_kb[base64];
+    } else if (base64 in cur_base64) {
+      cur_num_files++;
     } else {
-      num_obs_files++;
+      obs_num_files++;
     }
   }
-  console.info('num_old_files:', num_old_files);
-  console.info('num_obs_files:', num_obs_files);
+  console.info('cur_num_files:', cur_num_files);
+  console.info('obs_num_files:', obs_num_files);
 }
 
 
@@ -643,7 +638,7 @@ function fn_send_status(event) {
         (activity === 'validate') ||
         (activity === 'idle') ||
         (activity === 'delete')) {
-      if (url_diff) {
+      if (upd_pending) {
         update_cache_when_ready();
       } else {
         // do nothing
@@ -670,7 +665,7 @@ function fn_send_status(event) {
   // If nothing else is going on, validate the cache or delete obsolete files.
   if ((activity === 'idle') && validate_flag) {
     validate_cache();
-  } else if ((activity === 'idle') && num_obs_files) {
+  } else if ((activity === 'idle') && obs_num_files) {
     activity_promise = idle_delete_obs_files(false);
     monitor_promise();
   }
@@ -687,17 +682,17 @@ function fn_send_status(event) {
     // so we pretend that there's a little more to fetch in total than there
     // really is.  Thus, if there's a delay right at the end, there appears to
     // still be a little bit more to fetch.
-    var mb_total = (kb_total/1024 + 0.1).toFixed(1);
+    var mb_total = (upd_kb_total/1024 + 0.1).toFixed(1);
 
-    if (num_cached == 0) {
+    if (all_num_cached == 0) {
       var mb_cached = '0.0';
-    } else if (kb_cached === undefined) {
+    } else if (upd_kb_cached === undefined) {
       var mb_cached = '?';
-    } else if (url_diff) {
-      var mb_cached = (kb_cached/1024).toFixed(1);
+    } else if (upd_pending) {
+      var mb_cached = (upd_kb_cached/1024).toFixed(1);
     } else {
       // If we're up to date, make sure mb_cached matches mb_total.
-      var mb_cached = (kb_cached/1024 + 0.1).toFixed(1);
+      var mb_cached = (upd_kb_cached/1024 + 0.1).toFixed(1);
     }
 
     var progress = mb_cached + ' / ' + mb_total + ' MB';
@@ -744,7 +739,7 @@ function fn_send_status(event) {
     var update_class = 'update-stop';
     var clear_class = ''; // enabled
   } else { // idle, delete, or validate
-    if (url_diff) {
+    if (upd_pending) {
       var update_class = 'update-update';
     } else {
       var update_class = 'update-disable';
@@ -762,7 +757,7 @@ function fn_send_status(event) {
   var top_msg = undefined;
   if (activity !== 'init') {
     if (offline_ready) {
-      if (!url_diff) {
+      if (!upd_pending) {
         var top_msg = 'green';
       } else {
         var top_msg = 'yellow';
@@ -853,7 +848,7 @@ async function clear_caches() {
   err_status = '';
 
   try {
-    await kill_old_files();
+    await kill_cur_files();
 
     activity_promise = idle_delete_obs_files(true);
     monitor_promise();
@@ -942,7 +937,7 @@ async function update_cache() {
     msg = 'Preparing update';
     await read_json();
 
-    write_new_base64();
+    write_upd_base64();
 
     count_cached();
 
@@ -956,7 +951,7 @@ async function update_cache() {
     await protected_write(cache, func);
 
     // The old files are now obsolete.
-    make_old_files_obsolete();
+    make_cur_files_obsolete();
 
     // The new files are now official.
     await record_urls();
@@ -993,28 +988,28 @@ async function read_json() {
   var url_data = await response.json();
   console.info('read OK');
 
-  new_url_to_base64 = {};
-  base64_to_kb = {};
+  upd_url_to_base64 = {};
+  upd_base64_to_kb = {};
   for (const url_data_item of url_data) {
     let url = url_data_item[0];
     let base64 = url_data_item[1];
     let kb = url_data_item[2];
-    new_url_to_base64[url] = base64;
-    base64_to_kb[base64] = kb;
+    upd_url_to_base64[url] = base64;
+    upd_base64_to_kb[base64] = kb;
   }
 }
 
-// When a cache update is in progress, write the new base64_to_kb info
+// When a cache update is in progress, write the upd_base64_to_kb info
 // to indexedDB.  That way, if the update is interrupted and the service
 // worker is reloaded, it can immediately display the progress completed
 // so far without having to check online.
 //
 // Note that we don't wait for the write to complete, and we don't care
 // that much whether it completes.
-function write_new_base64() {
-  let obj = {key: 'base64_to_kb',
-             base64_to_kb: base64_to_kb,
-             timestamp: sw_timestamp
+function write_upd_base64() {
+  let obj = {key: 'upd_base64_to_kb',
+             upd_base64_to_kb: upd_base64_to_kb,
+             timestamp: upd_timestamp
             };
   write_obj(obj);
 }
@@ -1034,16 +1029,16 @@ async function protected_write(cache, func) {
       // The documented standard is 'QuotaExceededError'.
       // Testing reveals that Firefox throws a different exception, however.
       let quota_exceeded = is_quota_exceeded(e);
-      if (quota_exceeded && num_obs_files) {
+      if (quota_exceeded && obs_num_files) {
         // Delete obsolete files.
         err_status = 'Storage limit reached.  Deleting obsolete files before continuing.';
         await delete_obs_files(cache);
         err_status = '';
         // now fall through and loop again.
-      } else if (quota_exceeded && num_old_files) {
+      } else if (quota_exceeded && cur_num_files) {
         // Delete old files.
         err_status = 'Storage limit reached.  Reverting to online mode so that old files can be deleted.';
-        await kill_old_files();
+        await kill_cur_files();
         await delete_obs_files(cache);
         err_status = 'Storage limit reached.  Reverted to online mode so that old files could be deleted.';
         // now fall through and loop again.
@@ -1141,8 +1136,8 @@ async function fetch_all_to_cache_parallel(cache) {
 }
 
 async function fetch_all_to_cache(cache, id) {
-  for (const url in new_url_to_base64) {
-    let base64 = new_url_to_base64[url]
+  for (const url in upd_url_to_base64) {
+    let base64 = upd_url_to_base64[url]
     if (!(base64 in all_base64)) {
       // Update all_base64 immediately so that parallel threads don't
       // pick the same URL/base64 to fetch.  We'll revert this later
@@ -1151,8 +1146,8 @@ async function fetch_all_to_cache(cache, id) {
 
       try {
         await fetch_to_cache(cache, url, base64);
-        kb_cached += base64_to_kb[base64];
-        num_cached++;
+        upd_kb_cached += upd_base64_to_kb[base64];
+        all_num_cached++;
       } catch (e) {
         // Remove the aborted base64 value from all_base64.
         delete all_base64[base64];
@@ -1242,8 +1237,8 @@ async function fetch_and_verify(url) {
   }
 }
 
-// Record new_url_to_base64 to the indexedDB and begin using it as the current
-// url_to_base64.
+// Record upd_url_to_base64 to the indexedDB and begin using it as
+// cur_url_to_base64.
 async function record_urls() {
   console.info('record_urls()');
   let db = await open_db();
@@ -1257,14 +1252,14 @@ async function record_urls() {
 
   // Write data.
   obj = {key: 'data',
-         url_to_base64: new_url_to_base64,
-         timestamp: sw_timestamp
+         url_to_base64: upd_url_to_base64,
+         timestamp: upd_timestamp
         };
   await write_obj_to_db(db, obj);
 
-  url_to_base64 = new_url_to_base64;
-  old_base64 = base64_to_kb;
-  url_diff = false;
+  cur_url_to_base64 = upd_url_to_base64;
+  cur_base64 = upd_base64_to_kb;
+  upd_pending = false;
   red_missing = false;
   offline_ready = true;
 
@@ -1291,14 +1286,14 @@ async function check_stop(from) {
   }
 }
 
-async function idle_delete_obs_files(and_new_files) {
+async function idle_delete_obs_files(del_all_flag) {
   console.info('idle_delete_obs_files()');
   activity = 'delete';
   msg = 'Deleting obsolete offline files';
   
   try {
     let cache = await caches.open(BASE64_CACHE_NAME);
-    await delete_obs_files(cache, and_new_files);
+    await delete_obs_files(cache, del_all_flag);
   } catch (e) {
     if (e) {
       console.error(e);
@@ -1316,7 +1311,7 @@ async function idle_delete_obs_files(and_new_files) {
 //    (old files may have just been made obsolete)
 // 3. when the 'delete' button is pushed: deletes all files
 //    (old files are made obsolete before calling this)
-//    This case calls the function with and_new_files=true.
+//    This case calls the function with del_all_flag=true.
 //
 // In 1 & 3, the activity is 'delete', and it can be interrupted for
 // an update or to delete files.  And yes, that's redundant from 3,
@@ -1328,29 +1323,29 @@ async function idle_delete_obs_files(and_new_files) {
 // last to be deleted.  (This may also be true of keys read from the
 // cache.  I haven't checked.)  This is surprisingly, but convenient
 // if the user cancels the delete with another update.
-async function delete_obs_files(cache, and_new_files) {
+async function delete_obs_files(cache, del_all_flag) {
   console.info('delete_obs_files()');
 
-  if (and_new_files) {
-    var total = num_cached;
+  if (del_all_flag) {
+    var total = all_num_cached;
   } else {
-    var total = num_obs_files;
+    var total = obs_num_files;
   }
 
   console.info('all_base64:', all_base64);
-  console.info('old_base64:', old_base64);
-  console.info('base64_to_kb:', base64_to_kb);
+  console.info('cur_base64:', cur_base64);
+  console.info('upd_base64_to_kb:', upd_base64_to_kb);
 
   var count = 0;
   for (const base64 in all_base64) {
     await check_stop('delete_obs_files()');
 
-    if (and_new_files ||
-        (!(base64 in base64_to_kb) && !(base64 in old_base64))) {
+    if (del_all_flag ||
+        (!(base64 in upd_base64_to_kb) && !(base64 in cur_base64))) {
       count++;
 
       msg = 'Queued deletion of ' + count + ' / ' + total;
-      if (and_new_files) {
+      if (del_all_flag) {
           msg += ' offline files';
       } else {
           msg += ' obsolete offline files';
@@ -1359,40 +1354,47 @@ async function delete_obs_files(cache, and_new_files) {
       await cache.delete(base64);
 
       delete all_base64[base64];
-      num_cached--;
+      all_num_cached--;
 
-      if (base64_to_kb && (base64 in base64_to_kb)) {
-        kb_cached -= base64_to_kb[base64];
+      if (upd_base64_to_kb && (base64 in upd_base64_to_kb)) {
+        upd_kb_cached -= upd_base64_to_kb[base64];
       } else {
-        num_obs_files--;
+        obs_num_files--;
       }
     }
   }
 
   console.info('done with delete_obs_files()');
-  if (num_obs_files) {
-    console.error('num_obs_files:', num_obs_files);
+  if (obs_num_files) {
+    console.error('obs_num_files:', obs_num_files);
   }
-  num_obs_files = 0;
+  obs_num_files = 0;
 
-  if (and_new_files) {
-    base64_to_kb = undefined;
+  // We deleted upd_base64_to_kb from indexedDB, so to be consistent, we
+  // also remove it from our internal variable.  (Actually, we deleted it
+  // earlier in the delete process, but it's nice to temporarily keep the
+  // variable around to help display the delete progress.  If the deletion
+  // is interrupted by an update, then upd_base64_to_kb will normally be
+  // re-read, so it doesn't matter that we kept the value around a bit
+  // longer.)
+  if (del_all_flag) {
+    upd_base64_to_kb = undefined;
   }
 }
 
-async function kill_old_files() {
+async function kill_cur_files() {
   offline_ready = false;
-  old_timestamp = undefined;
-  url_diff = true;
+  cur_timestamp = undefined;
+  upd_pending = true;
   red_missing = false;
-  make_old_files_obsolete();
+  make_cur_files_obsolete();
   await delete_db();
 }
 
-function make_old_files_obsolete() {
-  old_base64 = {};
-  num_obs_files += num_old_files;
-  num_old_files = 0;
+function make_cur_files_obsolete() {
+  obs_num_files += cur_num_files;
+  cur_num_files = 0;
+  cur_base64 = {};
 }
 
 // Update cache usage estimate.
@@ -1425,7 +1427,7 @@ async function update_usage() {
   // (0.5 MB to more than 10 MB, depending on activity).
   // To avoid confusion, pretend that the usage is 0.0 MB if we
   // think the cache is empty.
-  let cache_empty = (num_cached == 0);
+  let cache_empty = (all_num_cached == 0);
 
   // Sometimes we're not sure whether the cache is empty.
   let unsure_if_empty = ((activity === 'init') ||
@@ -1435,7 +1437,7 @@ async function update_usage() {
     usage_msg = 'Using ? MB of offline storage.';
   } else if (cache_empty) {
     usage_msg = 'Using 0.0 MB of offline storage.';
-  } else if (usage/1024 >= kb_cached + 0.1) {
+  } else if (usage/1024 >= upd_kb_cached + 0.1) {
     usage_msg = 'Using ' + status_usage + ' (including overhead).';
   } else {
     usage_msg = 'Using ' + status_usage + ' (with compression).';
@@ -1458,10 +1460,10 @@ async function update_usage() {
   if (!usage && !cache_empty) {
     // We don't know the size of old and obsolete files in the cache.
     // Just guess based on how many there are.
-    let kb_per_file = kb_total / num_urls;
-    let kb_usage = kb_per_file * num_cached;
+    let kb_per_file = upd_kb_total / upd_num_urls;
+    let kb_usage = kb_per_file * all_num_cached;
 
-    // The guesstimated total will often be equal to kb_total,
+    // The guesstimated total will often be equal to upd_kb_total,
     // modulo floating point discrepencies.  To avoid a disconnect
     // with the progress values, use the same fudge factor.
     status_usage = (kb_usage/1024 + 0.1).toFixed(1) + ' MB'
@@ -1483,13 +1485,13 @@ async function update_usage() {
   // the kb_needed calculation is a bit more pessimistic when the extra
   // message is visible than when it is clear.
   if (extra_msg) {
-    var kb_needed = kb_usage + ((kb_total - kb_cached) * 1.25) + (16 * 1024);
+    var kb_needed = kb_usage + ((upd_kb_total - upd_kb_cached) * 1.25) + (16 * 1024);
   } else {
-    var kb_needed = kb_usage + ((kb_total - kb_cached) * 1.2) + (10 * 1024);
+    var kb_needed = kb_usage + ((upd_kb_total - upd_kb_cached) * 1.2) + (10 * 1024);
   }
 
-  if (url_diff &&
-      (num_old_files || num_obs_files) &&
+  if (upd_pending &&
+      (cur_num_files || obs_num_files) &&
       quota &&
       (kb_needed > quota/1024)) {
     extra_msg = 'The Guide will delete old files if necessary to make space for the update.'
