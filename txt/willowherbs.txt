@@ -14,7 +14,7 @@ proximal stem not peeling</h3>
 ==california fuchsia:E. canum
 color: red
 . common
-See also {-red larkspur}, which has much shorter filaments.
+See also {-red larkspur}, which has a spur behind the stem and much shorter filaments.
 
 ==fringed willowherb:E. ciliatum
 color: pale purple

@@ -3,6 +3,7 @@ x:!hist/rare
 
 ==pacific aster:S. chilense
 color: pale purple
+sci_p: Aster chilensis
 . stem hairy distally
 . outer phyllaries obtuse
 . disk flowers: yellow

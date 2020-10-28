@@ -56,9 +56,12 @@ x:any
 ==american asters:Symphyotrichum spp.
 . stem generally erect
 . disk flowers: generally yellow; <b>anthers are highly exserted, giving the disk head a ragged appearance</b>
-. ray flowers: 8--12 mm, pale violet
+. ray flowers: 8--12 mm, pale violet, <b>pistil has three linear lobes</b>
+. leaves and phyllaries are glabrous and non-glandular
 
 ==california aster:Corethrogyne filaginifolia
 . 1--many stems from base, decumbent to ascending or erect, simple or distally branched
 . disk flowers: 12--120+, 4--8 mm, yellow; <b>erect flowers stand clearly proud of the rays, are equal length throughout the disk</b>
-. ray flowers: 10--43, white or pink to purple, <b>conspicuously striate</b>
+. ray flowers: 10--43, white or pink to purple, conspicuously striate, <b>no pistils</b>
+. <b>leaves are hairy</b>, hairs often silvery
+. phyllaries are hairy or glandular

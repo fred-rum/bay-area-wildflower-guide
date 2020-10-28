@@ -1065,9 +1065,9 @@ Update browser notes:
 
 Once the offline files are saved, you can browse the Guide without
 access to a network.  Note, however, that I can't stop the browser
-from attempting certain network activity in the background (~50 KB per
-page).  If you have a limited data plan, consider putting your phone
-in airplane mode to prevent these accesses.
+from attempting certain network activity in the background (~20 KB per
+page).  If you have a very limited data plan, consider putting your
+phone in airplane mode to prevent these accesses.
 
 
 Check whether caches used by other service workers on GitHub are
@@ -1082,3 +1082,18 @@ service worker by reading the 'active' value after registration.  Note
 that a refresh of any site page in another tab/window triggers a
 'controllerchange' and sets the navigator.serviceWorker.controller
 value.
+
+
+Make new chris-nelson GitHub account and move the BAWG there.
+Rename indexedDB to bawg_db (no version #)
+Rename cache to bawg_cache (no version #)
+
+read_db with a promise so that subsequent reads can simply await the
+promise instead of re-reading the DB.
+
+After reading the JSON file, immediately write the new base64 list to
+indexedDB.  If this is read during init, then unused cache entries can
+be deleted when idle.  Note that that's all that the data is used for.
+An update always reads the JSON file fresh.
+
+Print a better error when url_data.json fails to fetch (e.g. offline).

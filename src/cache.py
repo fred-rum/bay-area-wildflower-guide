@@ -3,6 +3,7 @@ import hashlib
 import pickle
 from contextlib import contextmanager
 from base64 import b64encode
+import datetime
 
 # My files
 from args import *
@@ -11,6 +12,8 @@ from strip import *
 from page import *
 from photo import *
 from glossary import *
+
+kb_total = 0
 
 
 def init_cache():
@@ -96,10 +99,20 @@ def update_cache(path_list):
         base64 = entry['base64']
         kb = entry['kb']
         cache_list.append(f'["{url(path)}", "{base64}", {kb}]')
+        global kb_total
+        kb_total += kb
 
 def gen_url_cache():
     with open(f'{root_path}/data/cache.pickle', mode='wb') as w:
         pickle.dump(new_cache, w)
 
     code = ",\n".join(cache_list)
+    with open(f'{root_path}/url_data.json', mode='w') as w:
+        w.write(f'[\n{code}\n]\n');
+
+    timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    num_urls = len(cache_list)
+    code = f'''var sw_timestamp = '{timestamp}';
+var num_urls = {num_urls};
+var kb_total = {kb_total}'''
     strip_comments('sw.js', code=code)

@@ -309,9 +309,7 @@ async function register_sw() {
 
   try {
     var sw_path = root_path + 'sw.js';
-    var foo = await navigator.serviceWorker.register(sw_path);
-    console.info('foo:', foo);
-    console.info('controller:', navigator.serviceWorker.controller);
+    await navigator.serviceWorker.register(sw_path);
 
     // When register() resolves, we're not guaranteed to have an active
     // service worker.  In fact, the service worker might not even be

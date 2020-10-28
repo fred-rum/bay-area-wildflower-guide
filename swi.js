@@ -197,9 +197,7 @@ async function register_sw() {
   console.info('register_sw()');
   try {
     var sw_path = root_path + 'sw.js';
-    var foo = await navigator.serviceWorker.register(sw_path);
-    console.info('foo:', foo);
-    console.info('controller:', navigator.serviceWorker.controller);
+    await navigator.serviceWorker.register(sw_path);
   } catch (e) {
     console.warn('service worker registration failed', e);
     if (e_status) {

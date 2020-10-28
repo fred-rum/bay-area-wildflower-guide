@@ -353,7 +353,7 @@ var pages=[
 {page:"white hawkweed",sci:["Hieracium albiflorum"],x:"o"},
 {page:"wild strawberry",sci:["Fragaria vesca"],x:"o"},
 {page:"hayfield tarweed",sci:["Hemizonia congesta"],x:"o"},
-{page:"pacific aster",sci:["Symphyotrichum chilense"],x:"o"},
+{page:"pacific aster",sci:["Symphyotrichum chilense","Aster chilensis"],x:"o"},
 {page:"coast indian paintbrush",sci:["Castilleja affinis var. affinis","Castilleja affinis ssp. affinis"],x:"o"},
 {page:"prickly sowthistle",sci:["Sonchus asper"],x:"o"},
 {page:"conifers",sci:["class Pinopsida"],x:"f"},
