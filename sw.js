@@ -1,5 +1,5 @@
 'use strict';
-var upd_timestamp = '2020-10-29T20:28:55.641678+00:00';
+var upd_timestamp = '2020-10-29T20:40:52.509681+00:00';
 var upd_num_urls = 5030;
 var upd_kb_total = 660739
 console.info('starting from the beginning');
@@ -13,6 +13,7 @@ var usage_msg = '';
 var extra_msg = '';
 var stop_activity_flag = false;
 var activity_promise;
+var db_promise;
 var offline_ready = undefined;
 var cur_url_to_base64;
 var upd_url_to_base64;
@@ -70,9 +71,7 @@ function fetch_handler(event) {
   }
 }
 async function fetch_response(event, url) {
-  if (!cur_url_to_base64) {
-    await read_db();
-  }
+  await db_promise;
   if (!offline_ready) {
     return fetch(event.request);
   }
@@ -162,7 +161,8 @@ activity_promise = init_status();
 monitor_promise();
 async function init_status() {
   console.info('init_status()');
-  await read_db();
+  db_promise = read_db();
+  await db_promise;
   upd_pending = (upd_timestamp !== cur_timestamp);
   activity = 'validate';
   msg = 'Validating offline files';

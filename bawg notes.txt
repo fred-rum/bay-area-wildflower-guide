@@ -1088,9 +1088,6 @@ Make new chris-nelson GitHub account and move the BAWG there.
 Rename indexedDB to bawg_db (no version #)
 Rename cache to bawg_cache (no version #)
 
-read_db with a promise so that subsequent reads can simply await the
-promise instead of re-reading the DB.
-
 Do something smart if delete_obs_files fails, especially with a quota
 error.  E.g. print a useful message and disable further delete
 attempts.

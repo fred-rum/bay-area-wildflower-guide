@@ -52,6 +52,10 @@ var extra_msg = '';
 var stop_activity_flag = false;
 var activity_promise;
 
+// If a fetch is attempted before the DB is read, the fetch handler
+// awaits db_promise so that it can then use the DB values.
+var db_promise;
+
 // offline_ready is undefined when we haven't yet checked the indexedDB.
 //
 // offline_ready is false when we've checked the indexedDB and didn't
@@ -292,13 +296,13 @@ function fetch_handler(event) {
 
 async function fetch_response(event, url) {
   // As described in fetch_handler() above, we might be here because
-  // we don't have cur_url_to_base64 yet.  Presumably cur_url_to_base64 is
-  // already in the process of being read from the indexedDB, but for now
-  // I don't bother to wait for that result.  Instead I take the simple
-  // path of simply reading it again.
-  if (!cur_url_to_base64) {
-    await read_db();
-  }
+  // we don't yet know the proper offline_ready value (or the related
+  // cur_url_to_base64 value, etc.)  The db_promise is initialized as
+  // soon as sw.js starts execution with no asynchronous delay, so we
+  // know that it is valid, and we can await it.  In normal cases,
+  // the promise will return immediately, but of course its response
+  // will be delayed if the DB read is still in progress.
+  await db_promise;
 
   // Now we're guaranteed to have cur_url_to_base64 and can proceed with
   // performing the fetch.
@@ -482,10 +486,10 @@ async function init_status() {
   console.info('init_status()');
 
   // Read the indexedDB.
-  // Note that the fetch handler will also call read_db() if it needs
-  // it before we're done here.  But we still call it here in order to
-  // determine our status without waiting for a fetch.
-  await read_db();
+  // The fetch handler also needs the results of read_db(), so
+  // it will also await db_promise if necessary.
+  db_promise = read_db();
+  await db_promise;
 
   // This comparison does the right thing even if cur_timestamp is undefined.
   upd_pending = (upd_timestamp !== cur_timestamp);
