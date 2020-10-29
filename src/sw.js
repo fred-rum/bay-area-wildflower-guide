@@ -273,20 +273,20 @@ function fetch_handler(event) {
   let url = remove_scope_from_request(event.request);
   console.info('fetching', url);
 
-  if (!cur_url_to_base64 || offline_ready) {
-    // There is a race condition between initializing cur_url_to_base64
-    // and fetching the first URL.  Fortunately, our fetch
-    // response is allowed to be asynchronous.  So if we're ready to
-    // fetch from the cache *or* we don't have cur_url_to_base64 yet,
-    // tell the event to wait until we can create a fetch response.
-    event.respondWith(fetch_response(event, url));
-  } else {
-    console.info(url, ' fetched in online mode')
-
+  if (offline_ready === false) {
     // I found some documentation that says that performance is
     // better if we simply fail to handle a request, in which case
     // the browser performs the default online fetch.
+    console.info(url, 'fetched in online mode')
     return;
+  } else {
+    // There is a race condition between initializing offline_ready
+    // and fetching the first URL.  Fortunately, our fetch response
+    // is allowed to be asynchronous.  So if we're ready to fetch
+    // from the cache (offline_ready === true) *or* if we don't yet
+    // know the cache status (offline_ready === undefined), tell the
+    // event to wait until we can create a fetch response.
+    event.respondWith(fetch_response(event, url));
   }
 }
 
@@ -388,10 +388,6 @@ async function read_db() {
   console.info('read_db()');
 
   try {
-    cur_url_to_base64 = {};
-    cur_base64 = {};
-    offline_ready = false;
-
     let db = await open_db();
     let os = db.transaction('url_data', 'readonly').objectStore('url_data');
     let async_cur_data = async_callbacks(os.get('data'));
@@ -399,17 +395,27 @@ async function read_db() {
 
     let cur_data = await async_cur_data;
     console.info('indexedDB data:', cur_data);
+
     if (cur_data && cur_data.url_to_base64) {
       cur_url_to_base64 = cur_data.url_to_base64;
       cur_timestamp = cur_data.timestamp; // may be undefined
       offline_ready = true;
       console.info('found cur_url_to_base64 in DB');
 
-      // Generate a dictionary of old base64 keys from the cur_url_to_base64 data.
+      // Generate a dictionary of base64 keys from the cur_url_to_base64 data.
+      cur_base64 = {};
       for (let url in cur_url_to_base64) {
         let base64 = cur_url_to_base64[url];
         cur_base64[base64] = true;
       }
+    } else {
+      // Note that we don't initialize these variables until after all
+      // asynchronous activity is complete.  Otherwise, a fetch could find
+      // that they are initialized (and thus presumed valid), but their
+      // values aren't yet filled in.
+      cur_url_to_base64 = {};
+      cur_base64 = {};
+      offline_ready = false;
     }
 
     // We started this read just after the async_data read, but we don't bother
@@ -666,8 +672,10 @@ function fn_send_status(event) {
   if ((activity === 'idle') && validate_flag) {
     validate_cache();
   } else if ((activity === 'idle') && obs_num_files) {
+/*
     activity_promise = idle_delete_obs_files(false);
     monitor_promise();
+*/
   }
 
 
@@ -937,12 +945,12 @@ async function update_cache() {
     msg = 'Preparing update';
     await read_json();
 
-    write_upd_base64();
-
     count_cached();
 
     let cache = await caches.open(BASE64_CACHE_NAME);
     await protected_write(cache, write_margin);
+
+    await protected_write(cache, write_upd_base64);
 
     let func = async function() {
       await fetch_all_to_cache_parallel(cache);
@@ -1004,14 +1012,15 @@ async function read_json() {
 // worker is reloaded, it can immediately display the progress completed
 // so far without having to check online.
 //
-// Note that we don't wait for the write to complete, and we don't care
-// that much whether it completes.
-function write_upd_base64() {
+// We don't actually care that much whether the write completes, but
+// we *do* care whether it triggers any quota problems.  Therefore, we
+// do monitor the transaction and react appropriately to errors.
+async function write_upd_base64() {
   let obj = {key: 'upd_base64_to_kb',
              upd_base64_to_kb: upd_base64_to_kb,
              timestamp: upd_timestamp
             };
-  write_obj(obj);
+  await write_obj(obj);
 }
 
 // Wrap a function call in code that reacts appropriately to quota errors.

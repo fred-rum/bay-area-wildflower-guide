@@ -1,5 +1,5 @@
 'use strict';
-var upd_timestamp = '2020-10-28T20:21:13.727891+00:00';
+var upd_timestamp = '2020-10-29T20:28:55.641678+00:00';
 var upd_num_urls = 5030;
 var upd_kb_total = 660739
 console.info('starting from the beginning');
@@ -62,11 +62,11 @@ function remove_scope_from_request(request) {
 function fetch_handler(event) {
   let url = remove_scope_from_request(event.request);
   console.info('fetching', url);
-  if (!cur_url_to_base64 || offline_ready) {
-    event.respondWith(fetch_response(event, url));
-  } else {
-    console.info(url, ' fetched in online mode')
+  if (offline_ready === false) {
+    console.info(url, 'fetched in online mode')
     return;
+  } else {
+    event.respondWith(fetch_response(event, url));
   }
 }
 async function fetch_response(event, url) {
@@ -116,9 +116,6 @@ function generate_404(url, msg) {
 async function read_db() {
   console.info('read_db()');
   try {
-    cur_url_to_base64 = {};
-    cur_base64 = {};
-    offline_ready = false;
     let db = await open_db();
     let os = db.transaction('url_data', 'readonly').objectStore('url_data');
     let async_cur_data = async_callbacks(os.get('data'));
@@ -130,10 +127,15 @@ async function read_db() {
       cur_timestamp = cur_data.timestamp;
       offline_ready = true;
       console.info('found cur_url_to_base64 in DB');
+      cur_base64 = {};
       for (let url in cur_url_to_base64) {
         let base64 = cur_url_to_base64[url];
         cur_base64[base64] = true;
       }
+    } else {
+      cur_url_to_base64 = {};
+      cur_base64 = {};
+      offline_ready = false;
     }
     let upd_data = await async_upd_data;
     if (upd_data && (upd_data.timestamp === upd_timestamp)) {
@@ -254,8 +256,6 @@ function fn_send_status(event) {
   if ((activity === 'idle') && validate_flag) {
     validate_cache();
   } else if ((activity === 'idle') && obs_num_files) {
-    activity_promise = idle_delete_obs_files(false);
-    monitor_promise();
   }
   if (activity === 'init') {
     var progress = '';
@@ -424,10 +424,10 @@ async function update_cache() {
   try {
     msg = 'Preparing update';
     await read_json();
-    write_upd_base64();
     count_cached();
     let cache = await caches.open(BASE64_CACHE_NAME);
     await protected_write(cache, write_margin);
+    await protected_write(cache, write_upd_base64);
     let func = async function() {
       await fetch_all_to_cache_parallel(cache);
     };
@@ -468,12 +468,12 @@ async function read_json() {
     upd_base64_to_kb[base64] = kb;
   }
 }
-function write_upd_base64() {
+async function write_upd_base64() {
   let obj = {key: 'upd_base64_to_kb',
              upd_base64_to_kb: upd_base64_to_kb,
              timestamp: upd_timestamp
             };
-  write_obj(obj);
+  await write_obj(obj);
 }
 async function protected_write(cache, func) {
   while (true) {
