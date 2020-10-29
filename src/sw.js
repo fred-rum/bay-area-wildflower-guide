@@ -231,7 +231,7 @@ function async_callbacks(request) {
     }
 
     request.onerror = (event) => {
-      return reject(event);
+      reject(request.error);
     }
   });
 }
@@ -1056,6 +1056,7 @@ async function protected_write(cache, func) {
         err_status = 'Storage limit reached.  Reverted to online mode so that old files could be deleted.';
         // now fall through and loop again.
       } else {
+        // There's nothing to delete, so permanently fail the write.
         throw e;
       }
     }
@@ -1349,49 +1350,58 @@ async function delete_obs_files(cache, del_all_flag) {
   console.info('cur_base64:', cur_base64);
   console.info('upd_base64_to_kb:', upd_base64_to_kb);
 
-  var count = 0;
-  for (const base64 in all_base64) {
-    await check_stop('delete_obs_files()');
+  try {
+    var count = 0;
+    for (const base64 in all_base64) {
+      await check_stop('delete_obs_files()');
 
-    if (del_all_flag ||
-        (!(base64 in upd_base64_to_kb) && !(base64 in cur_base64))) {
-      count++;
+      if (del_all_flag ||
+          (!(base64 in upd_base64_to_kb) && !(base64 in cur_base64))) {
+        count++;
 
-      msg = 'Queued deletion of ' + count + ' / ' + total;
-      if (del_all_flag) {
+        msg = 'Queued deletion of ' + count + ' / ' + total;
+        if (del_all_flag) {
           msg += ' offline files';
-      } else {
+        } else {
           msg += ' obsolete offline files';
-      }
+        }
 
-      await cache.delete(base64);
+        await cache.delete(base64);
 
-      delete all_base64[base64];
-      all_num_cached--;
+        delete all_base64[base64];
+        all_num_cached--;
 
-      if (upd_base64_to_kb && (base64 in upd_base64_to_kb)) {
-        upd_kb_cached -= upd_base64_to_kb[base64];
-      } else {
-        obs_num_files--;
+        if (upd_base64_to_kb && (base64 in upd_base64_to_kb)) {
+          upd_kb_cached -= upd_base64_to_kb[base64];
+        } else {
+          obs_num_files--;
+        }
       }
     }
-  }
 
-  console.info('done with delete_obs_files()');
-  if (obs_num_files) {
-    console.error('obs_num_files:', obs_num_files);
-  }
-  obs_num_files = 0;
+    console.info('done with delete_obs_files()');
+    if (obs_num_files) {
+      console.error('obs_num_files:', obs_num_files);
+    }
+    obs_num_files = 0;
 
-  // We deleted upd_base64_to_kb from indexedDB, so to be consistent, we
-  // also remove it from our internal variable.  (Actually, we deleted it
-  // earlier in the delete process, but it's nice to temporarily keep the
-  // variable around to help display the delete progress.  If the deletion
-  // is interrupted by an update, then upd_base64_to_kb will normally be
-  // re-read, so it doesn't matter that we kept the value around a bit
-  // longer.)
-  if (del_all_flag) {
-    upd_base64_to_kb = undefined;
+    // We deleted upd_base64_to_kb from indexedDB, so to be consistent, we
+    // also remove it from our internal variable.  (Actually, we deleted it
+    // earlier in the delete process, but it's nice to temporarily keep the
+    // variable around to help display the delete progress.  If the deletion
+    // is interrupted by an update, then upd_base64_to_kb will normally be
+    // re-read, so it doesn't matter that we kept the value around a bit
+    // longer.)
+    if (del_all_flag) {
+      upd_base64_to_kb = undefined;
+    }
+  } catch (e) {
+    // Prevent idle_delete_obs_files() from being repeatedly called and
+    // hitting the same error every time.
+    obs_num_files = 0;
+
+    err_status = e.name + '<br>The browser threw a quota error while deleting files from the cache.  There&rsquo;s nothing more I can do.  You&rsquo;ll need to  need to manually clear the site data from the browser.';
+    throw null;
   }
 }
 

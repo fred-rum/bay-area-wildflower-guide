@@ -1,5 +1,5 @@
 'use strict';
-var upd_timestamp = '2020-10-29T20:40:52.509681+00:00';
+var upd_timestamp = '2020-10-29T22:34:38.017077+00:00';
 var upd_num_urls = 5030;
 var upd_kb_total = 660739
 console.info('starting from the beginning');
@@ -44,7 +44,7 @@ function async_callbacks(request) {
       resolve(request.result);
     }
     request.onerror = (event) => {
-      return reject(event);
+      reject(request.error);
     }
   });
 }
@@ -664,35 +664,41 @@ async function delete_obs_files(cache, del_all_flag) {
   console.info('all_base64:', all_base64);
   console.info('cur_base64:', cur_base64);
   console.info('upd_base64_to_kb:', upd_base64_to_kb);
-  var count = 0;
-  for (const base64 in all_base64) {
-    await check_stop('delete_obs_files()');
-    if (del_all_flag ||
-        (!(base64 in upd_base64_to_kb) && !(base64 in cur_base64))) {
-      count++;
-      msg = 'Queued deletion of ' + count + ' / ' + total;
-      if (del_all_flag) {
+  try {
+    var count = 0;
+    for (const base64 in all_base64) {
+      await check_stop('delete_obs_files()');
+      if (del_all_flag ||
+          (!(base64 in upd_base64_to_kb) && !(base64 in cur_base64))) {
+        count++;
+        msg = 'Queued deletion of ' + count + ' / ' + total;
+        if (del_all_flag) {
           msg += ' offline files';
-      } else {
+        } else {
           msg += ' obsolete offline files';
-      }
-      await cache.delete(base64);
-      delete all_base64[base64];
-      all_num_cached--;
-      if (upd_base64_to_kb && (base64 in upd_base64_to_kb)) {
-        upd_kb_cached -= upd_base64_to_kb[base64];
-      } else {
-        obs_num_files--;
+        }
+        await cache.delete(base64);
+        delete all_base64[base64];
+        all_num_cached--;
+        if (upd_base64_to_kb && (base64 in upd_base64_to_kb)) {
+          upd_kb_cached -= upd_base64_to_kb[base64];
+        } else {
+          obs_num_files--;
+        }
       }
     }
-  }
-  console.info('done with delete_obs_files()');
-  if (obs_num_files) {
-    console.error('obs_num_files:', obs_num_files);
-  }
-  obs_num_files = 0;
-  if (del_all_flag) {
-    upd_base64_to_kb = undefined;
+    console.info('done with delete_obs_files()');
+    if (obs_num_files) {
+      console.error('obs_num_files:', obs_num_files);
+    }
+    obs_num_files = 0;
+    if (del_all_flag) {
+      upd_base64_to_kb = undefined;
+    }
+  } catch (e) {
+    obs_num_files = 0;
+    err_status = e.name + '<br>The browser threw a quota error while deleting files from the cache.  There&rsquo;s nothing more I can do.  You&rsquo;ll need to  need to manually clear the site data from the browser.';
+    throw null;
   }
 }
 async function kill_cur_files() {

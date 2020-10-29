@@ -1091,3 +1091,9 @@ Rename cache to bawg_cache (no version #)
 Do something smart if delete_obs_files fails, especially with a quota
 error.  E.g. print a useful message and disable further delete
 attempts.
+
+Remove console calls for release.  Leave them in with e.g. '-console'.
+% wc sw.js -c
+24042 sw.js
+% grep -v console sw.js | wc -c
+20636
