@@ -951,22 +951,11 @@ async function update_cache() {
 
     count_cached();
 
+    let db = await open_db();
     let cache = await caches.open(BASE64_CACHE_NAME);
-    await protected_write(cache, write_margin);
+    await protect_update(db, cache);
 
-    await protected_write(cache, write_upd_base64);
-
-    let func = async function() {
-      await fetch_all_to_cache_parallel(cache);
-    };
-
-    await protected_write(cache, func);
-
-    // The old files are now obsolete.
-    make_cur_files_obsolete();
-
-    // The new files are now official.
-    await record_urls();
+    await record_urls(db);
   } catch (e) {
     if (!e) {
       // If we receive a null, then the error has been sufficiently
@@ -976,14 +965,6 @@ async function update_cache() {
       err_status = 'Not enough offline storage available.  Sorry.';
       console.warn(err_status);
     } else {
-      console.error(e);
-      err_status = e.name + '<br>Something went wrong.  Refresh and try again?';
-    }
-
-    // Clear the margin.
-    try {
-      await clear_margin();
-    } catch (e) {
       console.error(e);
       err_status = e.name + '<br>Something went wrong.  Refresh and try again?';
     }
@@ -1019,38 +1000,58 @@ async function read_json() {
 // We don't actually care that much whether the write completes, but
 // we *do* care whether it triggers any quota problems.  Therefore, we
 // do monitor the transaction and react appropriately to errors.
-async function write_upd_base64() {
+async function write_upd_base64_to_kb(db) {
+  console.info('write_upd_base64_to_kb()');
   let obj = {key: 'upd_base64_to_kb',
              upd_base64_to_kb: upd_base64_to_kb,
              timestamp: upd_timestamp
             };
-  await write_obj(obj);
+  await write_obj_to_db(db, obj);
 }
 
-// Wrap a function call in code that reacts appropriately to quota errors.
-// If the write fails while there is old or obsolete data that can be deleted,
-// delete the old data and try again.  If the write still fails, throw the
-// exception back to the caller to handle.
-async function protected_write(cache, func) {
+// Wrap the protected_update() function in code that reacts appropriately
+// to quota errors.  If a quota error occurs while there is old or obsolete
+// data that can be deleted, delete the old data and try again.  Note that
+// the 'try again' part expects the update to pick up where it left off
+// despite being called again from scratch.
+//
+// The protection also includes writing a multi-megabyte chunk of data to
+// the indexedDB that serves as a safety margin.  This margin attempts to
+// protect against two horrible user experiences:
+//
+// - If the update succeeds or fails with barely any quota remaining, then
+// loading a new service worker can silently fail, which means that the
+// user is never told about new updates.
+//
+// - Firefox occasionally cannot delete a cache entry if the quota is too
+// close to full.  WTF?  We delete the margin data prior to deletions (and
+// hope that the indexedDB doesn't have the same problem) so that we the
+// cache deletions will hopefully work.
+async function protect_update(db, cache) {
   // Keep trying until we run out of options.
   while (true) {
     try {
-      // Make sure to wait for func() to asynchronously finish.
-      // Otherwise we won't catch its errors.
-      return await func();
+      await write_margin(db);
+      await protected_update(db, cache);
+      await clear_margin(db);
+      return;
     } catch (e) {
+      await clear_margin(db);
+
       // The documented standard is 'QuotaExceededError'.
       // Testing reveals that Firefox throws a different exception, however.
       let quota_exceeded = is_quota_exceeded(e);
       if (quota_exceeded && obs_num_files) {
         // Delete obsolete files.
         err_status = 'Storage limit reached.  Deleting obsolete files before continuing.';
+        console.warn(err_status);
         await delete_obs_files(cache);
         err_status = '';
         // now fall through and loop again.
       } else if (quota_exceeded && cur_num_files) {
         // Delete old files.
         err_status = 'Storage limit reached.  Reverting to online mode so that old files can be deleted.';
+        console.warn(err_status);
         await kill_cur_files();
         await delete_obs_files(cache);
         err_status = 'Storage limit reached.  Reverted to online mode so that old files could be deleted.';
@@ -1061,6 +1062,15 @@ async function protected_write(cache, func) {
       }
     }
   }
+}
+
+async function protected_update(db, cache) {
+  await write_upd_base64_to_kb(db);
+
+  await fetch_all_to_cache_parallel(cache);
+
+  // The old files are now obsolete.
+  make_cur_files_obsolete();
 }
 
 function is_quota_exceeded(e) {
@@ -1080,18 +1090,15 @@ async function write_obj_to_db(db, obj) {
 }
 
 // Store ~4 to 8 MB of junk in the indexedDB.
-// If we're able to perform all non-critical writes with this margin in place,
+// If we're able to perform various large writes with this margin in place,
 // then after removing the margin we're sure to have space remaining for
-// critical resources.
-//
-// Without this protection I found that I often couldn't register a new
-// sw.js.  That's painful during debugging, and it could be disasterous if
-// I ever accidentally release a bad sw.js.
-async function write_margin() {
+// small writes which would fail terribly on a quota error.
+async function write_margin(db) {
   // Because Firefox compresses our data, we need to construct our
   // junk from something non-predictable.
   // generate enough random (assumed 8-byte) numbers to fill 2 MB.
   // list overhead will take some amount more space.
+  console.info('write_margin()');
   let junk = [];
   let n = 4*1024*1024/8;
   for (let i = 0; i < n; i++){
@@ -1100,13 +1107,31 @@ async function write_margin() {
 
   let obj = {key: 'margin',
              junk: junk};
-  await write_obj(obj);
+  await write_obj_to_db(db, obj);
 }
 
-async function clear_margin() {
-  let obj = {key: 'margin',
-             junk: ''};
-  await write_obj(obj);
+async function clear_margin(db) {
+  console.info('clear_margin()');
+
+  // Firefox often silently fails to delete the margin when the quota
+  // is too close to full.  Yet, oddly, overwriting it often works.
+  try {
+    let obj = {key: 'margin'};
+    await write_obj_to_db(db, obj);
+  } catch (e) {
+    console.warn('clear_margin() failed to overwrite:', e);
+  }
+
+  // Whether or not the overwrite succeeded, try to really delete
+  // the margin.
+  try {
+    await async_callbacks(db.transaction('url_data', 'readwrite').objectStore('url_data').delete('margin'));
+  } catch (e) {
+    console.warn('clear_margin() failed to delete:', e);
+  }
+
+  // Continue on whether or not the margin was successfully deleted.
+  // If quota errors continue, they'll be caught where real work is performed.
 }
 
 // Dispatch multiple asynchronous threads, each fetching URLs to the cache.
@@ -1253,22 +1278,14 @@ async function fetch_and_verify(url) {
 
 // Record upd_url_to_base64 to the indexedDB and begin using it as
 // cur_url_to_base64.
-async function record_urls() {
+async function record_urls(db) {
   console.info('record_urls()');
-  let db = await open_db();
-
-  // Clear margin.  This is a separate transaction since I suspect that
-  // combining it with the following write in one atomic transaction would
-  // cause more space to be allocated before the margin space is freed.
-  let obj = {key: 'margin',
-             junk: ''};
-  await write_obj_to_db(db, obj);
 
   // Write data.
-  obj = {key: 'data',
-         url_to_base64: upd_url_to_base64,
-         timestamp: upd_timestamp
-        };
+  let obj = {key: 'data',
+             url_to_base64: upd_url_to_base64,
+             timestamp: upd_timestamp
+            };
   await write_obj_to_db(db, obj);
 
   cur_url_to_base64 = upd_url_to_base64;
@@ -1400,7 +1417,16 @@ async function delete_obs_files(cache, del_all_flag) {
     // hitting the same error every time.
     obs_num_files = 0;
 
-    err_status = e.name + '<br>The browser threw a quota error while deleting files from the cache.  There&rsquo;s nothing more I can do.  You&rsquo;ll need to  need to manually clear the site data from the browser.';
+    if (!e) {
+      // If we receive a null, then the error has been sufficiently
+      // handled already.
+    } else if (is_quota_exceeded(e)) {
+      console.error(e);
+      err_status = 'The browser claims that we can&rsquo;t DELETE offline files because we&rsquo;re using too much space.  Yeah, really!  There&rsquo;s nothing more I can do.  You&rsquo;ll need to manually clear the site data from the browser.';
+    } else {
+      console.error(e);
+      err_status = e.name + '<br>Something went wrong.  Refresh and try again?';
+    }
     throw null;
   }
 }

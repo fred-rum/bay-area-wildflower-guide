@@ -1,5 +1,5 @@
 'use strict';
-var upd_timestamp = '2020-10-29T22:34:38.017077+00:00';
+var upd_timestamp = '2020-10-30T17:50:44.492613+00:00';
 var upd_num_urls = 5030;
 var upd_kb_total = 660739
 console.info('starting from the beginning');
@@ -425,15 +425,10 @@ async function update_cache() {
     msg = 'Preparing update';
     await read_json();
     count_cached();
+    let db = await open_db();
     let cache = await caches.open(BASE64_CACHE_NAME);
-    await protected_write(cache, write_margin);
-    await protected_write(cache, write_upd_base64);
-    let func = async function() {
-      await fetch_all_to_cache_parallel(cache);
-    };
-    await protected_write(cache, func);
-    make_cur_files_obsolete();
-    await record_urls();
+    await protect_update(db, cache);
+    await record_urls(db);
   } catch (e) {
     if (!e) {
     } else if (is_quota_exceeded(e)) {
@@ -441,12 +436,6 @@ async function update_cache() {
       err_status = 'Not enough offline storage available.  Sorry.';
       console.warn(err_status);
     } else {
-      console.error(e);
-      err_status = e.name + '<br>Something went wrong.  Refresh and try again?';
-    }
-    try {
-      await clear_margin();
-    } catch (e) {
       console.error(e);
       err_status = e.name + '<br>Something went wrong.  Refresh and try again?';
     }
@@ -468,25 +457,32 @@ async function read_json() {
     upd_base64_to_kb[base64] = kb;
   }
 }
-async function write_upd_base64() {
+async function write_upd_base64_to_kb(db) {
+  console.info('write_upd_base64_to_kb()');
   let obj = {key: 'upd_base64_to_kb',
              upd_base64_to_kb: upd_base64_to_kb,
              timestamp: upd_timestamp
             };
-  await write_obj(obj);
+  await write_obj_to_db(db, obj);
 }
-async function protected_write(cache, func) {
+async function protect_update(db, cache) {
   while (true) {
     try {
-      return await func();
+      await write_margin(db);
+      await protected_update(db, cache);
+      await clear_margin(db);
+      return;
     } catch (e) {
+      await clear_margin(db);
       let quota_exceeded = is_quota_exceeded(e);
       if (quota_exceeded && obs_num_files) {
         err_status = 'Storage limit reached.  Deleting obsolete files before continuing.';
+        console.warn(err_status);
         await delete_obs_files(cache);
         err_status = '';
       } else if (quota_exceeded && cur_num_files) {
         err_status = 'Storage limit reached.  Reverting to online mode so that old files can be deleted.';
+        console.warn(err_status);
         await kill_cur_files();
         await delete_obs_files(cache);
         err_status = 'Storage limit reached.  Reverted to online mode so that old files could be deleted.';
@@ -495,6 +491,11 @@ async function protected_write(cache, func) {
       }
     }
   }
+}
+async function protected_update(db, cache) {
+  await write_upd_base64_to_kb(db);
+  await fetch_all_to_cache_parallel(cache);
+  make_cur_files_obsolete();
 }
 function is_quota_exceeded(e) {
   return (e && ((e.name === 'QuotaExceededError') ||
@@ -507,7 +508,8 @@ async function write_obj(obj) {
 async function write_obj_to_db(db, obj) {
   await async_callbacks(db.transaction('url_data', 'readwrite').objectStore('url_data').put(obj));
 }
-async function write_margin() {
+async function write_margin(db) {
+  console.info('write_margin()');
   let junk = [];
   let n = 4*1024*1024/8;
   for (let i = 0; i < n; i++){
@@ -515,12 +517,21 @@ async function write_margin() {
   }
   let obj = {key: 'margin',
              junk: junk};
-  await write_obj(obj);
+  await write_obj_to_db(db, obj);
 }
-async function clear_margin() {
-  let obj = {key: 'margin',
-             junk: ''};
-  await write_obj(obj);
+async function clear_margin(db) {
+  console.info('clear_margin()');
+  try {
+    let obj = {key: 'margin'};
+    await write_obj_to_db(db, obj);
+  } catch (e) {
+    console.warn('clear_margin() failed to overwrite:', e);
+  }
+  try {
+    await async_callbacks(db.transaction('url_data', 'readwrite').objectStore('url_data').delete('margin'));
+  } catch (e) {
+    console.warn('clear_margin() failed to delete:', e);
+  }
 }
 async function fetch_all_to_cache_parallel(cache) {
   let promises = [fetch_all_to_cache(cache, 0),
@@ -611,16 +622,12 @@ async function fetch_and_verify(url) {
     }
   }
 }
-async function record_urls() {
+async function record_urls(db) {
   console.info('record_urls()');
-  let db = await open_db();
-  let obj = {key: 'margin',
-             junk: ''};
-  await write_obj_to_db(db, obj);
-  obj = {key: 'data',
-         url_to_base64: upd_url_to_base64,
-         timestamp: upd_timestamp
-        };
+  let obj = {key: 'data',
+             url_to_base64: upd_url_to_base64,
+             timestamp: upd_timestamp
+            };
   await write_obj_to_db(db, obj);
   cur_url_to_base64 = upd_url_to_base64;
   cur_base64 = upd_base64_to_kb;
@@ -697,7 +704,14 @@ async function delete_obs_files(cache, del_all_flag) {
     }
   } catch (e) {
     obs_num_files = 0;
-    err_status = e.name + '<br>The browser threw a quota error while deleting files from the cache.  There&rsquo;s nothing more I can do.  You&rsquo;ll need to  need to manually clear the site data from the browser.';
+    if (!e) {
+    } else if (is_quota_exceeded(e)) {
+      console.error(e);
+      err_status = 'The browser claims that we can&rsquo;t DELETE offline files because we&rsquo;re using too much space.  Yeah, really!  There&rsquo;s nothing more I can do.  You&rsquo;ll need to manually clear the site data from the browser.';
+    } else {
+      console.error(e);
+      err_status = e.name + '<br>Something went wrong.  Refresh and try again?';
+    }
     throw null;
   }
 }

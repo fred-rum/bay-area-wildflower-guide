@@ -1097,3 +1097,8 @@ Remove console calls for release.  Leave them in with e.g. '-console'.
 24042 sw.js
 % grep -v console sw.js | wc -c
 20636
+
+Restore idle_delete_obs_files() capability.
+
+objectStore.delete() doesn't work?
+Try putting a blank object instead?
