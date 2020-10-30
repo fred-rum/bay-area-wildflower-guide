@@ -215,24 +215,61 @@ self.addEventListener('activate', event => {
 
 /*** convert callbacks to promises ***/
 
+// A 'connection' is a combination of a transaction and the default
+// objectStore.  The actual returned object is IDBObjectStore, from which
+// the underlying transaction can be retreived.
+function db_connection(db, mode) {
+  return db.transaction('url_data', mode).objectStore('url_data');
+}
+
+// The db_connection_promise waits for a DB 'connection' (defined above)
+// to complete or fail.  E.g. a put() *request* can succeed, but it's
+// *transaction* fails due to a quota error.  This promise lets us catch
+// that error.
+function db_connection_promise(conn) {
+  return new Promise((resolve, reject) => {
+    conn.transaction.oncomplete = (event) => {
+      resolve(undefined);
+    };
+
+    conn.transaction.onerror = (event) => {
+      reject(conn.transaction.error);
+    };
+
+    conn.transaction.onabort = (event) => {
+      reject(conn.transaction.error);
+    };
+
+    // There was one case where a transaction never reported any status,
+    // which implies that it never auto-committed.  Maybe it was a bug on
+    // my part, but to be on the safe side, I force the commit here.
+    conn.transaction.commit();
+  });
+}
+
+async function await_connection(conn) {
+  conn.transaction.commit();
+  await db_connection_promise(conn);
+}
+
 // Some interfaces use callbacks, but we'd rather use Promises.
-// async_callbacks() converts a callback interface into a Promise.
+// db_request_promise() converts a callback interface into a Promise.
 //
 // The first parameter, 'request', is a request that has been made.
 // We assume that it has callbacks 'onsuccess' and 'onerror', and
-// async_callbacks() assigns those callbacks.
+// db_request_promise() assigns those callbacks.
 // - When the 'onsuccess' callback is called, the promise is resolved
 //   and returns the request.result.
 // - When the 'onerror' callback is called, the promise is rejected.
-function async_callbacks(request) {
+function db_request_promise(request) {
   return new Promise((resolve, reject) => {
     request.onsuccess = (event) => {
       resolve(request.result);
-    }
+    };
 
     request.onerror = (event) => {
       reject(request.error);
-    }
+    };
   });
 }
 
@@ -393,9 +430,10 @@ async function read_db() {
 
   try {
     let db = await open_db();
-    let os = db.transaction('url_data', 'readonly').objectStore('url_data');
-    let async_cur_data = async_callbacks(os.get('data'));
-    let async_upd_data = async_callbacks(os.get('upd_base64_to_kb'));
+    let conn = db_connection(db, 'readonly');
+    let async_cur_data = db_request_promise(conn.get('data'));
+    let async_upd_data = db_request_promise(conn.get('upd_base64_to_kb'));
+    // We don't check the final transaction status because we don't care.
 
     let cur_data = await async_cur_data;
     console.info('indexedDB data:', cur_data);
@@ -439,6 +477,9 @@ async function read_db() {
   } catch (e) {
     console.info('indexedDB lookup failed', e);
     console.info('(This is normal if it was not initialized.)');
+    cur_url_to_base64 = {};
+    cur_base64 = {};
+    offline_ready = false;
   }
 }
 
@@ -455,11 +496,11 @@ async function open_db() {
   //   and the next starts.  Perhaps this is possible in our single thread.
   //
   // In any case, the onupgradeneeded path doesn't need to be hooked in
-  // with the async_callbacks promise.  It just does its own thing when
+  // with the db_request_promise promise.  It just does its own thing when
   // necessary.
   request.onupgradeneeded = dbupgradeneeded;
 
-  let db = await async_callbacks(request);
+  let db = await db_request_promise(request);
 
   console.info('open_db() returns', db);
   return db;
@@ -470,7 +511,7 @@ async function open_db() {
 // I need to adjust this code to avoid an error.)
 async function dbupgradeneeded(event) {
   let db = event.target.result;
-  db.createObjectStore("url_data", { keyPath: "key" });
+  db.createObjectStore('url_data', { keyPath: 'key' });
 }
 
 
@@ -676,10 +717,8 @@ function fn_send_status(event) {
   if ((activity === 'idle') && validate_flag) {
     validate_cache();
   } else if ((activity === 'idle') && obs_num_files) {
-/*
     activity_promise = idle_delete_obs_files(false);
     monitor_promise();
-*/
   }
 
 
@@ -880,7 +919,9 @@ async function delete_db() {
   // (This comment was written very eary in my indexedDB experimentation.
   // Perhaps I could get it working now, but it's not a priority.)
   let db = await open_db();
-  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").clear());
+  let conn = db_connection(db, 'readwrite');
+  await db_request_promise(conn.clear());
+  await db_connection_promise(conn);
 }
 
 async function delete_all_cache_entries() {
@@ -1036,8 +1077,6 @@ async function protect_update(db, cache) {
       await clear_margin(db);
       return;
     } catch (e) {
-      await clear_margin(db);
-
       // The documented standard is 'QuotaExceededError'.
       // Testing reveals that Firefox throws a different exception, however.
       let quota_exceeded = is_quota_exceeded(e);
@@ -1045,6 +1084,7 @@ async function protect_update(db, cache) {
         // Delete obsolete files.
         err_status = 'Storage limit reached.  Deleting obsolete files before continuing.';
         console.warn(err_status);
+        await clear_margin(db);
         await delete_obs_files(cache);
         err_status = '';
         // now fall through and loop again.
@@ -1052,12 +1092,14 @@ async function protect_update(db, cache) {
         // Delete old files.
         err_status = 'Storage limit reached.  Reverting to online mode so that old files can be deleted.';
         console.warn(err_status);
+        await clear_margin(db);
         await kill_cur_files();
         await delete_obs_files(cache);
         err_status = 'Storage limit reached.  Reverted to online mode so that old files could be deleted.';
         // now fall through and loop again.
       } else {
         // There's nothing to delete, so permanently fail the write.
+        await clear_margin(db);
         throw e;
       }
     }
@@ -1086,7 +1128,9 @@ async function write_obj(obj) {
 
 // Write an object to an open DB.
 async function write_obj_to_db(db, obj) {
-  await async_callbacks(db.transaction('url_data', 'readwrite').objectStore('url_data').put(obj));
+  let conn = db_connection(db, 'readwrite');
+  await db_request_promise(conn.put(obj));
+  await db_connection_promise(conn);
 }
 
 // Store ~4 to 8 MB of junk in the indexedDB.
@@ -1113,25 +1157,31 @@ async function write_margin(db) {
 async function clear_margin(db) {
   console.info('clear_margin()');
 
-  // Firefox often silently fails to delete the margin when the quota
-  // is too close to full.  Yet, oddly, overwriting it often works.
-  try {
-    let obj = {key: 'margin'};
-    await write_obj_to_db(db, obj);
-  } catch (e) {
-    console.warn('clear_margin() failed to overwrite:', e);
+  // I've noticed that the delete sometimes fails in Firefox, but retrying
+  // it shortly later seems to always succeed.  Grn.
+  //
+  // Oddly, overwriting the margin works more often than deleting it.
+  // However, the overwrite does not always succeed, but a delete after
+  // 1 second delay seems to always succeed.  Therefore, I've removed the
+  // experimental code to attempt an overwrite.
+  for (let delay of [1, 4, 'end']) {
+    try {
+      let conn = db_connection(db, 'readwrite');
+      await db_request_promise(conn.delete('margin'));
+      await db_connection_promise(conn);
+      console.info('clear_margin() managed to delete');
+      return; // break out of the delay loop
+    } catch (e) {
+      console.warn('clear_margin() failed to delete:', e);
+      if (delay === 'end') {
+        // Delaying longer is not expected to work.  Continue on with
+        // real work, and if quota errors persist, they'll be caught there.
+        return;
+      }
+      console.info('sleeping', delay, 'seconds before trying again');
+      await sleep(delay * 1000);
+    }
   }
-
-  // Whether or not the overwrite succeeded, try to really delete
-  // the margin.
-  try {
-    await async_callbacks(db.transaction('url_data', 'readwrite').objectStore('url_data').delete('margin'));
-  } catch (e) {
-    console.warn('clear_margin() failed to delete:', e);
-  }
-
-  // Continue on whether or not the margin was successfully deleted.
-  // If quota errors continue, they'll be caught where real work is performed.
 }
 
 // Dispatch multiple asynchronous threads, each fetching URLs to the cache.
@@ -1223,9 +1273,9 @@ async function fetch_to_cache(cache, url, base64) {
 
 // Fetch a URL, check for errors, and retry a few times for a 503 response.
 async function fetch_and_verify(url) {
-  // There is no "normal" end condition for this loop.
+  // There is no 'normal' end condition for this loop.
   // Instead the loop is only exited with a return or throw:
-  // - an "OK" response returns the response.
+  // - an 'OK' response returns the response.
   // - an error throws an exception.
   // - a 503 response loops a few times, then throws an exception if the
   //   problem doesn't clear up.

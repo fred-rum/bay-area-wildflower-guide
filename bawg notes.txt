@@ -1100,5 +1100,7 @@ Remove console calls for release.  Leave them in with e.g. '-console'.
 
 Restore idle_delete_obs_files() capability.
 
-objectStore.delete() doesn't work?
-Try putting a blank object instead?
+Something is weird after a site-data clear.  This maybe happens if I clear the site data and then try to open the DB without restarting Firefox first.
+NotFoundError: IDBDatabase.transaction: 'url_data' is not a known object store name
+onupgradeneeded isn't working?
+Do I need also an onversionchange or similar?

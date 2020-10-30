@@ -1,5 +1,5 @@
 'use strict';
-var upd_timestamp = '2020-10-30T17:50:44.492613+00:00';
+var upd_timestamp = '2020-10-30T22:00:02.124140+00:00';
 var upd_num_urls = 5030;
 var upd_kb_total = 660739
 console.info('starting from the beginning');
@@ -38,14 +38,35 @@ self.addEventListener('activate', event => {
   console.info('activate');
   clients.claim();
 });
-function async_callbacks(request) {
+function db_connection(db, mode) {
+  return db.transaction('url_data', mode).objectStore('url_data');
+}
+function db_connection_promise(conn) {
+  return new Promise((resolve, reject) => {
+    conn.transaction.oncomplete = (event) => {
+      resolve(undefined);
+    };
+    conn.transaction.onerror = (event) => {
+      reject(conn.transaction.error);
+    };
+    conn.transaction.onabort = (event) => {
+      reject(conn.transaction.error);
+    };
+    conn.transaction.commit();
+  });
+}
+async function await_connection(conn) {
+  conn.transaction.commit();
+  await db_connection_promise(conn);
+}
+function db_request_promise(request) {
   return new Promise((resolve, reject) => {
     request.onsuccess = (event) => {
       resolve(request.result);
-    }
+    };
     request.onerror = (event) => {
       reject(request.error);
-    }
+    };
   });
 }
 console.info('adding fetch handler');
@@ -116,9 +137,9 @@ async function read_db() {
   console.info('read_db()');
   try {
     let db = await open_db();
-    let os = db.transaction('url_data', 'readonly').objectStore('url_data');
-    let async_cur_data = async_callbacks(os.get('data'));
-    let async_upd_data = async_callbacks(os.get('upd_base64_to_kb'));
+    let conn = db_connection(db, 'readonly');
+    let async_cur_data = db_request_promise(conn.get('data'));
+    let async_upd_data = db_request_promise(conn.get('upd_base64_to_kb'));
     let cur_data = await async_cur_data;
     console.info('indexedDB data:', cur_data);
     if (cur_data && cur_data.url_to_base64) {
@@ -144,18 +165,21 @@ async function read_db() {
   } catch (e) {
     console.info('indexedDB lookup failed', e);
     console.info('(This is normal if it was not initialized.)');
+    cur_url_to_base64 = {};
+    cur_base64 = {};
+    offline_ready = false;
   }
 }
 async function open_db() {
   let request = indexedDB.open(DB_NAME, DB_VERSION);
   request.onupgradeneeded = dbupgradeneeded;
-  let db = await async_callbacks(request);
+  let db = await db_request_promise(request);
   console.info('open_db() returns', db);
   return db;
 }
 async function dbupgradeneeded(event) {
   let db = event.target.result;
-  db.createObjectStore("url_data", { keyPath: "key" });
+  db.createObjectStore('url_data', { keyPath: 'key' });
 }
 activity_promise = init_status();
 monitor_promise();
@@ -256,6 +280,8 @@ function fn_send_status(event) {
   if ((activity === 'idle') && validate_flag) {
     validate_cache();
   } else if ((activity === 'idle') && obs_num_files) {
+    activity_promise = idle_delete_obs_files(false);
+    monitor_promise();
   }
   if (activity === 'init') {
     var progress = '';
@@ -393,7 +419,9 @@ async function clear_caches() {
 }
 async function delete_db() {
   let db = await open_db();
-  await async_callbacks(db.transaction("url_data", "readwrite").objectStore("url_data").clear());
+  let conn = db_connection(db, 'readwrite');
+  await db_request_promise(conn.clear());
+  await db_connection_promise(conn);
 }
 async function delete_all_cache_entries() {
   console.info('delete_all_cache_entries()')
@@ -473,20 +501,22 @@ async function protect_update(db, cache) {
       await clear_margin(db);
       return;
     } catch (e) {
-      await clear_margin(db);
       let quota_exceeded = is_quota_exceeded(e);
       if (quota_exceeded && obs_num_files) {
         err_status = 'Storage limit reached.  Deleting obsolete files before continuing.';
         console.warn(err_status);
+        await clear_margin(db);
         await delete_obs_files(cache);
         err_status = '';
       } else if (quota_exceeded && cur_num_files) {
         err_status = 'Storage limit reached.  Reverting to online mode so that old files can be deleted.';
         console.warn(err_status);
+        await clear_margin(db);
         await kill_cur_files();
         await delete_obs_files(cache);
         err_status = 'Storage limit reached.  Reverted to online mode so that old files could be deleted.';
       } else {
+        await clear_margin(db);
         throw e;
       }
     }
@@ -506,7 +536,9 @@ async function write_obj(obj) {
   await write_obj_to_db(db, obj);
 }
 async function write_obj_to_db(db, obj) {
-  await async_callbacks(db.transaction('url_data', 'readwrite').objectStore('url_data').put(obj));
+  let conn = db_connection(db, 'readwrite');
+  await db_request_promise(conn.put(obj));
+  await db_connection_promise(conn);
 }
 async function write_margin(db) {
   console.info('write_margin()');
@@ -521,16 +553,21 @@ async function write_margin(db) {
 }
 async function clear_margin(db) {
   console.info('clear_margin()');
-  try {
-    let obj = {key: 'margin'};
-    await write_obj_to_db(db, obj);
-  } catch (e) {
-    console.warn('clear_margin() failed to overwrite:', e);
-  }
-  try {
-    await async_callbacks(db.transaction('url_data', 'readwrite').objectStore('url_data').delete('margin'));
-  } catch (e) {
-    console.warn('clear_margin() failed to delete:', e);
+  for (let delay of [1, 4, 'end']) {
+    try {
+      let conn = db_connection(db, 'readwrite');
+      await db_request_promise(conn.delete('margin'));
+      await db_connection_promise(conn);
+      console.info('clear_margin() managed to delete');
+      return;
+    } catch (e) {
+      console.warn('clear_margin() failed to delete:', e);
+      if (delay === 'end') {
+        return;
+      }
+      console.info('sleeping', delay, 'seconds before trying again');
+      await sleep(delay * 1000);
+    }
   }
 }
 async function fetch_all_to_cache_parallel(cache) {
