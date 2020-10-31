@@ -1598,4 +1598,4 @@ async function update_usage() {
   } else {
     extra_msg = '';
   }
- }
+}

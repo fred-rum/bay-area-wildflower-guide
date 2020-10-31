@@ -1065,3 +1065,9 @@ Something is weird after a site-data clear.  This maybe happens if I clear the s
 NotFoundError: IDBDatabase.transaction: 'url_data' is not a known object store name
 onupgradeneeded isn't working?
 Do I need also an onversionchange or similar?
+
+Create a global db variable and leave the database open permanently.
+If db_connection() tries to open a transaction and gets a
+synchronous Exception: NotFoundError, then close the DB, call
+indexedDB.deleteDatabase(), and re-open the DB.
+This requires db_connection to be an asynchronous function.
