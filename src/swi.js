@@ -301,7 +301,7 @@ async function init_permissions() {
   if (navigator.storage) {
     let persistent = await navigator.storage.persist();
     console.info('persistent =', persistent);
-   }
+  }
 }
 
 async function register_sw() {

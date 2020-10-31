@@ -32,6 +32,12 @@ const DB_NAME = 'db-v1';
 const DB_VERSION = 1;
 const BASE64_CACHE_NAME = 'base64-cache-v1';
 
+// We open the database at the beginning of execution and leave it open
+// throughout.  Firefox is then forced to close the database connection
+// when clearing the site data, which seems to prevent us from getting
+// in stuck with a database but no objectStore.
+var db;
+
 // Activity is 'init', 'busy', 'delete', 'update', or 'idle'.
 // An initial 'init' activity prevents updates until everything
 // is initialized.
@@ -218,7 +224,7 @@ self.addEventListener('activate', event => {
 // A 'connection' is a combination of a transaction and the default
 // objectStore.  The actual returned object is IDBObjectStore, from which
 // the underlying transaction can be retreived.
-function db_connection(db, mode) {
+function db_connection(mode) {
   return db.transaction('url_data', mode).objectStore('url_data');
 }
 
@@ -429,8 +435,8 @@ async function read_db() {
   console.info('read_db()');
 
   try {
-    let db = await open_db();
-    let conn = db_connection(db, 'readonly');
+    await open_db();
+    let conn = db_connection('readonly');
     let async_cur_data = db_request_promise(conn.get('data'));
     let async_upd_data = db_request_promise(conn.get('upd_base64_to_kb'));
     // We don't check the final transaction status because we don't care.
@@ -500,18 +506,21 @@ async function open_db() {
   // necessary.
   request.onupgradeneeded = dbupgradeneeded;
 
-  let db = await db_request_promise(request);
+  db = await db_request_promise(request);
 
-  console.info('open_db() returns', db);
-  return db;
+  console.info('open_db() gets', db);
 }
 
 // This function is called when the indexedDB is accessed for the first time.
 // (It will also be called if I increment the version number, in which case
 // I need to adjust this code to avoid an error.)
 async function dbupgradeneeded(event) {
+  console.info('dbupgradeneeded()');
+
+  // Since this callback is called *during* the indexedDB.open, the
+  // global 'db' variable hasn't been set yet.
   let db = event.target.result;
-  db.createObjectStore('url_data', { keyPath: 'key' });
+  db.createObjectStore('url_data', {keyPath: 'key'});
 }
 
 
@@ -916,10 +925,9 @@ async function clear_caches() {
 async function delete_db() {
   // For some reason, indexedDB.deleteDatabase() often hangs for me.
   // So I clear the objectStore, instead.
-  // (This comment was written very eary in my indexedDB experimentation.
+  // (This comment was written very early in my indexedDB experimentation.
   // Perhaps I could get it working now, but it's not a priority.)
-  let db = await open_db();
-  let conn = db_connection(db, 'readwrite');
+  let conn = db_connection('readwrite');
   await db_request_promise(conn.clear());
   await db_connection_promise(conn);
 }
@@ -992,11 +1000,10 @@ async function update_cache() {
 
     count_cached();
 
-    let db = await open_db();
     let cache = await caches.open(BASE64_CACHE_NAME);
-    await protect_update(db, cache);
+    await protect_update(cache);
 
-    await record_urls(db);
+    await record_urls();
   } catch (e) {
     if (!e) {
       // If we receive a null, then the error has been sufficiently
@@ -1041,13 +1048,13 @@ async function read_json() {
 // We don't actually care that much whether the write completes, but
 // we *do* care whether it triggers any quota problems.  Therefore, we
 // do monitor the transaction and react appropriately to errors.
-async function write_upd_base64_to_kb(db) {
+async function write_upd_base64_to_kb() {
   console.info('write_upd_base64_to_kb()');
   let obj = {key: 'upd_base64_to_kb',
              upd_base64_to_kb: upd_base64_to_kb,
              timestamp: upd_timestamp
             };
-  await write_obj_to_db(db, obj);
+  await write_obj_to_db(obj);
 }
 
 // Wrap the protected_update() function in code that reacts appropriately
@@ -1068,13 +1075,13 @@ async function write_upd_base64_to_kb(db) {
 // close to full.  WTF?  We delete the margin data prior to deletions (and
 // hope that the indexedDB doesn't have the same problem) so that we the
 // cache deletions will hopefully work.
-async function protect_update(db, cache) {
+async function protect_update(cache) {
   // Keep trying until we run out of options.
   while (true) {
     try {
-      await write_margin(db);
-      await protected_update(db, cache);
-      await clear_margin(db);
+      await write_margin();
+      await protected_update(cache);
+      await clear_margin();
       return;
     } catch (e) {
       // The documented standard is 'QuotaExceededError'.
@@ -1084,7 +1091,7 @@ async function protect_update(db, cache) {
         // Delete obsolete files.
         err_status = 'Storage limit reached.  Deleting obsolete files before continuing.';
         console.warn(err_status);
-        await clear_margin(db);
+        await clear_margin();
         await delete_obs_files(cache);
         err_status = '';
         // now fall through and loop again.
@@ -1092,22 +1099,22 @@ async function protect_update(db, cache) {
         // Delete old files.
         err_status = 'Storage limit reached.  Reverting to online mode so that old files can be deleted.';
         console.warn(err_status);
-        await clear_margin(db);
+        await clear_margin();
         await kill_cur_files();
         await delete_obs_files(cache);
         err_status = 'Storage limit reached.  Reverted to online mode so that old files could be deleted.';
         // now fall through and loop again.
       } else {
         // There's nothing to delete, so permanently fail the write.
-        await clear_margin(db);
+        await clear_margin();
         throw e;
       }
     }
   }
 }
 
-async function protected_update(db, cache) {
-  await write_upd_base64_to_kb(db);
+async function protected_update(cache) {
+  await write_upd_base64_to_kb();
 
   await fetch_all_to_cache_parallel(cache);
 
@@ -1120,15 +1127,9 @@ function is_quota_exceeded(e) {
                 (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE')));
 }
 
-// Open the DB and write a single object to it.
-async function write_obj(obj) {
-  let db = await open_db();
-  await write_obj_to_db(db, obj);
-}
-
-// Write an object to an open DB.
-async function write_obj_to_db(db, obj) {
-  let conn = db_connection(db, 'readwrite');
+// Write an object to the indexedDB.
+async function write_obj_to_db(obj) {
+  let conn = db_connection('readwrite');
   await db_request_promise(conn.put(obj));
   await db_connection_promise(conn);
 }
@@ -1137,7 +1138,7 @@ async function write_obj_to_db(db, obj) {
 // If we're able to perform various large writes with this margin in place,
 // then after removing the margin we're sure to have space remaining for
 // small writes which would fail terribly on a quota error.
-async function write_margin(db) {
+async function write_margin() {
   // Because Firefox compresses our data, we need to construct our
   // junk from something non-predictable.
   // generate enough random (assumed 8-byte) numbers to fill 2 MB.
@@ -1151,10 +1152,10 @@ async function write_margin(db) {
 
   let obj = {key: 'margin',
              junk: junk};
-  await write_obj_to_db(db, obj);
+  await write_obj_to_db(obj);
 }
 
-async function clear_margin(db) {
+async function clear_margin() {
   console.info('clear_margin()');
 
   // I've noticed that the delete sometimes fails in Firefox, but retrying
@@ -1166,7 +1167,7 @@ async function clear_margin(db) {
   // experimental code to attempt an overwrite.
   for (let delay of [1, 4, 'end']) {
     try {
-      let conn = db_connection(db, 'readwrite');
+      let conn = db_connection('readwrite');
       await db_request_promise(conn.delete('margin'));
       await db_connection_promise(conn);
       console.info('clear_margin() managed to delete');
@@ -1329,7 +1330,7 @@ async function fetch_and_verify(url) {
 
 // Record upd_url_to_base64 to the indexedDB and begin using it as
 // cur_url_to_base64.
-async function record_urls(db) {
+async function record_urls() {
   console.info('record_urls()');
 
   // Write data.
@@ -1337,7 +1338,7 @@ async function record_urls(db) {
              url_to_base64: upd_url_to_base64,
              timestamp: upd_timestamp
             };
-  await write_obj_to_db(db, obj);
+  await write_obj_to_db(obj);
 
   cur_url_to_base64 = upd_url_to_base64;
   cur_base64 = upd_base64_to_kb;

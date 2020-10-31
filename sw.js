@@ -1,11 +1,12 @@
 'use strict';
-var upd_timestamp = '2020-10-31T06:17:00.582659+00:00';
+var upd_timestamp = '2020-10-31T16:11:01.229187+00:00';
 var upd_num_urls = 5030;
 var upd_kb_total = 660741
 console.info('starting from the beginning');
 const DB_NAME = 'db-v1';
 const DB_VERSION = 1;
 const BASE64_CACHE_NAME = 'base64-cache-v1';
+var db;
 var activity = 'init';
 var msg = 'Checking for offline files';
 var err_status = '';
@@ -38,7 +39,7 @@ self.addEventListener('activate', event => {
   console.info('activate');
   clients.claim();
 });
-function db_connection(db, mode) {
+function db_connection(mode) {
   return db.transaction('url_data', mode).objectStore('url_data');
 }
 function db_connection_promise(conn) {
@@ -136,8 +137,8 @@ function generate_404(url, msg) {
 async function read_db() {
   console.info('read_db()');
   try {
-    let db = await open_db();
-    let conn = db_connection(db, 'readonly');
+    await open_db();
+    let conn = db_connection('readonly');
     let async_cur_data = db_request_promise(conn.get('data'));
     let async_upd_data = db_request_promise(conn.get('upd_base64_to_kb'));
     let cur_data = await async_cur_data;
@@ -173,13 +174,13 @@ async function read_db() {
 async function open_db() {
   let request = indexedDB.open(DB_NAME, DB_VERSION);
   request.onupgradeneeded = dbupgradeneeded;
-  let db = await db_request_promise(request);
-  console.info('open_db() returns', db);
-  return db;
+  db = await db_request_promise(request);
+  console.info('open_db() gets', db);
 }
 async function dbupgradeneeded(event) {
+  console.info('dbupgradeneeded()');
   let db = event.target.result;
-  db.createObjectStore('url_data', { keyPath: 'key' });
+  db.createObjectStore('url_data', {keyPath: 'key'});
 }
 activity_promise = init_status();
 monitor_promise();
@@ -418,8 +419,7 @@ async function clear_caches() {
   }
 }
 async function delete_db() {
-  let db = await open_db();
-  let conn = db_connection(db, 'readwrite');
+  let conn = db_connection('readwrite');
   await db_request_promise(conn.clear());
   await db_connection_promise(conn);
 }
@@ -453,10 +453,9 @@ async function update_cache() {
     msg = 'Preparing update';
     await read_json();
     count_cached();
-    let db = await open_db();
     let cache = await caches.open(BASE64_CACHE_NAME);
-    await protect_update(db, cache);
-    await record_urls(db);
+    await protect_update(cache);
+    await record_urls();
   } catch (e) {
     if (!e) {
     } else if (is_quota_exceeded(e)) {
@@ -485,45 +484,45 @@ async function read_json() {
     upd_base64_to_kb[base64] = kb;
   }
 }
-async function write_upd_base64_to_kb(db) {
+async function write_upd_base64_to_kb() {
   console.info('write_upd_base64_to_kb()');
   let obj = {key: 'upd_base64_to_kb',
              upd_base64_to_kb: upd_base64_to_kb,
              timestamp: upd_timestamp
             };
-  await write_obj_to_db(db, obj);
+  await write_obj_to_db(obj);
 }
-async function protect_update(db, cache) {
+async function protect_update(cache) {
   while (true) {
     try {
-      await write_margin(db);
-      await protected_update(db, cache);
-      await clear_margin(db);
+      await write_margin();
+      await protected_update(cache);
+      await clear_margin();
       return;
     } catch (e) {
       let quota_exceeded = is_quota_exceeded(e);
       if (quota_exceeded && obs_num_files) {
         err_status = 'Storage limit reached.  Deleting obsolete files before continuing.';
         console.warn(err_status);
-        await clear_margin(db);
+        await clear_margin();
         await delete_obs_files(cache);
         err_status = '';
       } else if (quota_exceeded && cur_num_files) {
         err_status = 'Storage limit reached.  Reverting to online mode so that old files can be deleted.';
         console.warn(err_status);
-        await clear_margin(db);
+        await clear_margin();
         await kill_cur_files();
         await delete_obs_files(cache);
         err_status = 'Storage limit reached.  Reverted to online mode so that old files could be deleted.';
       } else {
-        await clear_margin(db);
+        await clear_margin();
         throw e;
       }
     }
   }
 }
-async function protected_update(db, cache) {
-  await write_upd_base64_to_kb(db);
+async function protected_update(cache) {
+  await write_upd_base64_to_kb();
   await fetch_all_to_cache_parallel(cache);
   make_cur_files_obsolete();
 }
@@ -531,16 +530,12 @@ function is_quota_exceeded(e) {
   return (e && ((e.name === 'QuotaExceededError') ||
                 (e.name === 'NS_ERROR_FILE_NO_DEVICE_SPACE')));
 }
-async function write_obj(obj) {
-  let db = await open_db();
-  await write_obj_to_db(db, obj);
-}
-async function write_obj_to_db(db, obj) {
-  let conn = db_connection(db, 'readwrite');
+async function write_obj_to_db(obj) {
+  let conn = db_connection('readwrite');
   await db_request_promise(conn.put(obj));
   await db_connection_promise(conn);
 }
-async function write_margin(db) {
+async function write_margin() {
   console.info('write_margin()');
   let junk = [];
   let n = 4*1024*1024/8;
@@ -549,13 +544,13 @@ async function write_margin(db) {
   }
   let obj = {key: 'margin',
              junk: junk};
-  await write_obj_to_db(db, obj);
+  await write_obj_to_db(obj);
 }
-async function clear_margin(db) {
+async function clear_margin() {
   console.info('clear_margin()');
   for (let delay of [1, 4, 'end']) {
     try {
-      let conn = db_connection(db, 'readwrite');
+      let conn = db_connection('readwrite');
       await db_request_promise(conn.delete('margin'));
       await db_connection_promise(conn);
       console.info('clear_margin() managed to delete');
@@ -660,13 +655,13 @@ async function fetch_and_verify(url) {
     }
   }
 }
-async function record_urls(db) {
+async function record_urls() {
   console.info('record_urls()');
   let obj = {key: 'data',
              url_to_base64: upd_url_to_base64,
              timestamp: upd_timestamp
             };
-  await write_obj_to_db(db, obj);
+  await write_obj_to_db(obj);
   cur_url_to_base64 = upd_url_to_base64;
   cur_base64 = upd_base64_to_kb;
   upd_pending = false;
