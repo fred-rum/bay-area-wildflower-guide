@@ -1,5 +1,5 @@
 'use strict';
-var upd_timestamp = '2020-10-31T16:11:01.229187+00:00';
+var upd_timestamp = '2020-10-31T22:59:25.846215+00:00';
 var upd_num_urls = 5030;
 var upd_kb_total = 660741
 console.info('starting from the beginning');

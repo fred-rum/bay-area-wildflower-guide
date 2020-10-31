@@ -24,7 +24,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0411+0196
 . calyx clearly shorter than corolla tube & throat
 . corolla:
 .. <b>throat maroon</b>
-.. lobes yellow | white blending to pink/pale purple
+.. lobes yellow or sometimes white blending to pink/pale purple
 .. lobes 4--6 mm
 . common
 
@@ -100,20 +100,20 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0413+2490
 sci_p:Linanthus androsaceus
 color: pale purple
 . corolla:
-.. tube reddish, <b>glabrous or sparsely hairy, non-glandular</b>
-.. throat violet | yellow | often white
+.. tube reddish
+.. throat generally violet at the base and yellow above, but may be white # Monterey wildflowers & Jepson
 .. lobes pink/pale purple/white
 .. lobes generally > 8 mm, <b>often abruptly soft-pointed</b>
 .. stigmas 2--6 mm and well exserted from corolla tube
 . leaf lobes 6--30 mm, tips pointed
-. calyx ciliate, nonglandular, abaxially [outer surface] generally glabrous
+. calyx ciliate, nonglandular, abaxially generally glabrous
 . common
 
 ==variable linanthus:L. parviflorus
 sci_p:Linanthus parviflorus
 color: purple, pale purple, pink, yellow, white
 . corolla:
-.. tube maroon/pink/yellow, <b>hairy, glandular</b>
+.. tube maroon/pink/yellow
 .. throat yellow/orange/purple
 .. lobes pink/yellow/purple/white, sometimes with red/purple spots at the base [Jepson says "often", CalPhotos says "almost never"]
 .. lobes 4--8 mm

@@ -651,7 +651,8 @@ class Page:
         return n
 
     def remove_comments(self):
-        self.txt = re.sub(r'^\s*#.*\n', '', self.txt, flags=re.MULTILINE)
+        self.txt = re.sub(r'^\s*#.*\n| +#.*', '', self.txt,
+                          flags=re.MULTILINE)
 
     def parse_names(self):
         def repl_com(matchobj):

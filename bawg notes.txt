@@ -1061,13 +1061,5 @@ Make new chris-nelson GitHub account and move the BAWG there.
 Rename indexedDB to bawg_db (no version #)
 Rename cache to bawg_cache (no version #)
 
-Something is weird after a site-data clear.  This maybe happens if I clear the site data and then try to open the DB without restarting Firefox first.
-NotFoundError: IDBDatabase.transaction: 'url_data' is not a known object store name
-onupgradeneeded isn't working?
-Do I need also an onversionchange or similar?
-
-Create a global db variable and leave the database open permanently.
-If db_connection() tries to open a transaction and gets a
-synchronous Exception: NotFoundError, then close the DB, call
-indexedDB.deleteDatabase(), and re-open the DB.
-This requires db_connection to be an asynchronous function.
+Is the service worker & misc. overhead now small enough to remove
+the hacks around 0.0 MB of usage?
