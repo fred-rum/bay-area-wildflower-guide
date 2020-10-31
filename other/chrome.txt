@@ -43,6 +43,15 @@ Guide".  On Android, this sometimes doesn't actually put anything on
 your home screen.  If so, you can manually drag it from Android's
 installed apps to your home screen.
 
+<h3>Bandwidth While Offline</h3>
+
+Because of the strange way that browsers work, every page load will
+attempt to fetch ~25 KB from the internet even when the site is using
+its local offline copy.  (E.g. viewing 40 pages will fetch ~1 MB.)  If
+you have a large or unlimited data plan, this is nothing to worry
+about.  If you have a very limited data plan, consider putting your
+phone in airplane mode while using the site in offline mode.
+
 <h3>Try it!</h3>
 
 Return to the <a href="index.html">Guide home</a> and give offline

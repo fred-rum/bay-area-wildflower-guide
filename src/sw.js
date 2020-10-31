@@ -1173,13 +1173,14 @@ async function clear_margin(db) {
       return; // break out of the delay loop
     } catch (e) {
       console.warn('clear_margin() failed to delete:', e);
-      if (delay === 'end') {
+      if (is_quota_exceeded(e) && (delay !== 'end')) {
+        console.info('sleeping', delay, 'seconds before trying again');
+        await sleep(delay * 1000);
+      } else {
         // Delaying longer is not expected to work.  Continue on with
-        // real work, and if quota errors persist, they'll be caught there.
+        // real work, and if errors persist, they'll be caught there.
         return;
       }
-      console.info('sleeping', delay, 'seconds before trying again');
-      await sleep(delay * 1000);
     }
   }
 }
@@ -1597,4 +1598,4 @@ async function update_usage() {
   } else {
     extra_msg = '';
   }
-}
+ }

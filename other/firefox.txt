@@ -57,6 +57,15 @@ Firefox on iOS or the desktop doesn't offer an installation option.
 Sorry.  As an alternative, you can bookmark the Guide for use in
 offline mode.
 
+<h3>Bandwidth While Offline</h3>
+
+Because of the strange way that browsers work, every page load will
+attempt to fetch ~25 KB from the internet even when the site is using
+its local offline copy.  (E.g. viewing 40 pages will fetch ~1 MB.)  If
+you have a large or unlimited data plan, this is nothing to worry
+about.  If you have a very limited data plan, consider putting your
+phone in airplane mode while using the site in offline mode.
+
 <h3>Try it!</h3>
 
 Return to the <a href="index.html">Guide home</a> and give offline

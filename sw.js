@@ -1,7 +1,7 @@
 'use strict';
-var upd_timestamp = '2020-10-30T22:00:02.124140+00:00';
+var upd_timestamp = '2020-10-31T00:02:32.366550+00:00';
 var upd_num_urls = 5030;
-var upd_kb_total = 660739
+var upd_kb_total = 660741
 console.info('starting from the beginning');
 const DB_NAME = 'db-v1';
 const DB_VERSION = 1;
@@ -562,11 +562,12 @@ async function clear_margin(db) {
       return;
     } catch (e) {
       console.warn('clear_margin() failed to delete:', e);
-      if (delay === 'end') {
+      if (is_quota_exceeded(e) && (delay !== 'end')) {
+        console.info('sleeping', delay, 'seconds before trying again');
+        await sleep(delay * 1000);
+      } else {
         return;
       }
-      console.info('sleeping', delay, 'seconds before trying again');
-      await sleep(delay * 1000);
     }
   }
 }
@@ -826,4 +827,4 @@ async function update_usage() {
   } else {
     extra_msg = '';
   }
-}
+ }
