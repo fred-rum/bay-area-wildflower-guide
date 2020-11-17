@@ -1302,7 +1302,7 @@ var pages=[
 {page:"sierra beardtongue",sci:["Penstemon heterodoxus var. heterodoxus"],x:"u"},
 {page:"sierra bog orchid",sci:["Platanthera dilatata var. leucostachys"],x:"u"},
 {page:"sierra false bindweed",sci:["Calystegia malacophylla ssp. pedicellata"],x:"u"},
-{page:"silverleaf cotoneaster",sci:["Cotoneaster pannosus"],x:"u"},
+{page:"silverleaf cotoneaster",sci:["Cotoneaster pannosus"],x:"o"},
 {page:"silverleaf nightshade",sci:["Solanum elaeagnifolium"],x:"u"},
 {page:"sitka willow",sci:["Salix sitchensis"],x:"u"},
 {page:"sleepy catchfly",sci:["Silene antirrhina"],x:"u"},

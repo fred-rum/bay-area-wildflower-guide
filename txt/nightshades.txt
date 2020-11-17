@@ -33,32 +33,40 @@ Fruit key features:
 . sepals reflexed or not
 
 Flower key features:
-. corolla diameter [Jepson's sizes are a bit low; they are corrected here]
+. corolla diameter
 . leaf toothed or not
 . hairs gladular or not
 
+Stanford's Jasper Ridge program has a <a href="https://web.stanford.edu/dept/JRBP/plants/PDF/Solanum%20key.pdf">key (PDF)</a> for white-flowered nightshades.
+
 Jepson lists some inflorescences as being raceme-like and others as
 umbel-like, but they all look the same to me.
+
+Jepson and Stanford both list deceptive corolla widths which I have corrected according to my observations.  I've copied the anther lengths from Jepson, but have not yet attempted to verify their ranges.
 
 Some features are variable within a species, but if a <b>bold feature</b> is seen, it is diagnostic.
 
 ==black nightshade:S. nigrum
 color: white
-. corolla: 10--17 mm diameter [corrected], white
+. corolla: 10--17 mm diameter including lobes, white w/ yellow/green spots at base
+.. anthers 1.4--2.4 mm
 . leaf: 4--7 cm, entire to coarsely wavy-toothed
 . hairs: +- spreading or curved, <b>glandular</b> and not
+. calyx lobes partially fused, not reflexed in fruit
 . fruit: <b>dull</b>
 
 ==greenspot nightshade:S. douglasii
 color: white
-. corolla: 10--14 mm diameter [corrected], <b>white-lavender</b>
+. corolla: 10--14 mm diameter including lobes, white, possibly tinged with lavender, w/ yellow/green/brown spots at base
+.. anthers 2.5--4.0 mm
 . leaf: 1--9 cm, entire to coarsely irregularly <b>toothed</b>
 . hairs: generally simple, < 1mm, +- curved, white
 . fruit: <b>glossy</b> w/ <b>sepals not reflexed</b>
+. stems angled, rough-hairy, woody
 
 ==american black nightshade:S. americanum
 color: white
-. corolla: <b>5--8 mm diameter</b> [or more?] [corrected] [example,2], white
+. corolla: <b>5--8 mm diameter including lobes</b> [example,2], white
 . leaf: 2--15 cm, entire to coarsely wavy-toothed
 . hairs: +- 0 or short, +- appressed or curved, nonglandular
 . fruit: <b>glossy</b> w/ <b>sepals reflexed</b>

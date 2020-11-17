@@ -1,3 +1,7 @@
+Make new chris-nelson GitHub account and move the BAWG there.
+Rename indexedDB to bawg_db (no version #)
+Rename cache to bawg_cache (no version #)
+
 >Make separate pages (and links) for flower lists (by color and "all")
 with names only (for bandwidth saving) and photos only (for showing off).
 
@@ -1033,9 +1037,6 @@ There are a few other changes:
   date, e.g. if cache validation fails.)
 - (do not automatically re-register sw.js while 'online'.)
 
-Automatically insert the total offline size into swi.js so that it can
-display the required space when sw.js isn't registered.
-
 
 Advanced: minimize sw.js.  E.g. terser (requires node.js/npm).
 Or at least remove lines that emit debugging console output.
@@ -1049,17 +1050,12 @@ script so that the automatic fetches of sw.js are as minimal as
 possible.
 
 
-Do something better on a hard refress (shift-F5).  Although
+Do something better on a hard refresh (shift-F5).  Although
 navigator.serviceWorker.controller is null, I can get the active
 service worker by reading the 'active' value after registration.  Note
 that a refresh of any site page in another tab/window triggers a
 'controllerchange' and sets the navigator.serviceWorker.controller
 value.
 
-
-Make new chris-nelson GitHub account and move the BAWG there.
-Rename indexedDB to bawg_db (no version #)
-Rename cache to bawg_cache (no version #)
-
-Is the service worker & misc. overhead now small enough to remove
-the hacks around 0.0 MB of usage?
+Does url_data.json get cached?  Can I prevent that?  Same for all the
+other files fetched into the cache.
