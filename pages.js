@@ -1701,7 +1701,7 @@ var pages=[
 {page:"tiburon paintbrush",sci:["Castilleja affinis var. neglecta","Castilleja affinis ssp. neglecta"],x:"u"},
 {page:"whitedaisy tidytips",sci:["Layia glandulosa"],x:"u"},
 {page:"winter vetch",sci:["Vicia villosa ssp. varia"],x:"u"},
-{page:"woodland tidytips",sci:["Layia gaillardioides"],x:"u"},
+{page:"woodland tidytips",sci:["Layia gaillardioides"],x:"o"},
 {page:"yellowray goldfields",sci:["Lasthenia glabrata"],x:"u"},
 {page:"plant glossary",com:["vascular plants"],x:"g",glossary:[
 {terms:["leaf","leaves","leaved"]},

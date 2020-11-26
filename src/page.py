@@ -1787,7 +1787,7 @@ class Page:
 
         child = self.child[child_idx]
 
-        # If the key includes '[example<,suffix>]', create an [example]
+        # If the key includes '[example,<suffix>]', create an [example]
         # link in the parent text, but remove the link from the child key.
         key_txt = re.sub(r'\s*\[example(,.*?)\]', '', text)
         text = re.sub(r'\[example(,.*?)\]', repl_example, text)

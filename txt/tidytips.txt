@@ -15,7 +15,7 @@ Key features:
 color: yellow
 . ray petals are mostly yellow, but usually with white at the tips
 . <b>glandular</b> (e.g. on involucre, or as spots on peduncle)
-. phyllary tip (extending up the petal) +- as long as its folded base
+. phyllary tip (extending up the petal) +- as long as its folded base [example,2]
 . stem generally not purple-streaked
 . proximal leaves lobed +- 1/2 to midvein
 . scattered all around the bay
@@ -23,7 +23,7 @@ color: yellow
 ==woodland tidytips:L. gaillardioides
 . most have only yellow; only some have white or pale yellow tips
 . <b>glandular</b>
-. phyllary tip (extending up the petal) much shorter than its folded base [CalPhotos shows at least one exception, but it may be misidentified]
+. phyllary tip (extending up the petal) much shorter than its folded base [example,2] [CalPhotos shows at least one exception, but it may be misidentified]
 . stem purple-streaked, ascending, not strictly erect [dunno what this means; they look erect enough on CalPhotos]
 . proximal leaves serrate or lobed "< or > 1/2 to midvein"
 . scattered

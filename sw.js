@@ -1,7 +1,7 @@
 'use strict';
-var upd_timestamp = '2020-11-17T01:43:10.926229+00:00';
-var upd_num_urls = 5034;
-var upd_kb_total = 661534
+var upd_timestamp = '2020-11-26T05:31:45.617701+00:00';
+var upd_num_urls = 5042;
+var upd_kb_total = 662297
 console.info('starting from the beginning');
 const DB_NAME = 'db-v1';
 const DB_VERSION = 1;

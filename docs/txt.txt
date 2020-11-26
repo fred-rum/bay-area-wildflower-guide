@@ -201,7 +201,7 @@ page name can be given, and the representative jpg for that child is
 used as the representative jpg for this page as well.
 
 
-'[example<,suffix>]' in a child's key is replaced with a link to the
+'[example,<suffix>]' in a child's key is replaced with a link to the
 corresponding jpg, but only in the parent.  If the key text is copied
 to the child, the link is removed from its copy.
 
