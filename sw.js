@@ -1,5 +1,5 @@
 'use strict';
-var upd_timestamp = '2020-11-26T05:31:45.617701+00:00';
+var upd_timestamp = '2020-12-04T05:53:00.298658+00:00';
 var upd_num_urls = 5042;
 var upd_kb_total = 662297
 console.info('starting from the beginning');
@@ -622,7 +622,7 @@ async function fetch_and_verify(url) {
   for (let retry_sleep = 1; retry_sleep *= 2; true) {
     await check_stop('update (before fetch)');
     try {
-      var response = await fetch(url);
+      var response = await fetch(url, {cache: "no-cache"});
     } catch (e) {
       console.warn('fetch failed', e);
       err_status = 'Lost online connectivity.  Try again later.';

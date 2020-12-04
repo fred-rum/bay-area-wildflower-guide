@@ -1056,6 +1056,3 @@ service worker by reading the 'active' value after registration.  Note
 that a refresh of any site page in another tab/window triggers a
 'controllerchange' and sets the navigator.serviceWorker.controller
 value.
-
-Does url_data.json get cached?  Can I prevent that?  Same for all the
-other files fetched into the cache.

@@ -1285,7 +1285,7 @@ async function fetch_and_verify(url) {
     await check_stop('update (before fetch)');
 
     try {
-      var response = await fetch(url);
+      var response = await fetch(url, {cache: "no-cache"});
     } catch (e) {
       console.warn('fetch failed', e);
       err_status = 'Lost online connectivity.  Try again later.';
