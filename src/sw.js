@@ -357,6 +357,12 @@ async function fetch_response(event, url) {
     return fetch(event.request);
   }
 
+  // Since GitHub maps '/' to '/index.html', we need to do the same for
+  // offline use.
+  if (url == '') {
+    url = 'index.html';
+  }
+
   if (!(url in cur_url_to_base64)) {
     // If we're offline and a fetch is attempted of an unrecognized file,
     // generate a 404 without attempting an online fetch.  This can happen
@@ -365,8 +371,9 @@ async function fetch_response(event, url) {
     // url_data could be incomplete, but given the other failure types,
     // it seems unwise to panic the user when there's nothing the user can
     // do about it.
-    console.info('%s not recognized; generating a 404', url)
-    return generate_404(url, ' is not part of the current Guide.  Try the search bar.');
+    console.info('%s not recognized; generating a 404', url);
+    var home_url = registration.scope + 'index.html';
+    return generate_404(url, ' is not part of the current Guide.  Try searching from the <a href="' + home_url + '">home page</a>');
   }
 
   let response = await caches.match(cur_url_to_base64[url]);
@@ -416,7 +423,7 @@ async function fetch_response(event, url) {
 }
 
 function generate_404(url, msg) {
-  return Promise.resolve(new Response('<html>' + decodeURI(url) + msg, {'status': 404, headers: {'Content-Type': 'text/html; charset=utf-8'}}));
+  return Promise.resolve(new Response('<html>"' + decodeURI(url) + '"' + msg, {'status': 404, headers: {'Content-Type': 'text/html; charset=utf-8'}}));
 }
 
 /*** Read the indexedDB ***/

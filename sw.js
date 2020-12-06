@@ -1,5 +1,5 @@
 'use strict';
-var upd_timestamp = '2020-12-04T05:53:00.298658+00:00';
+var upd_timestamp = '2020-12-06T02:56:50.556698+00:00';
 var upd_num_urls = 5042;
 var upd_kb_total = 662297
 console.info('starting from the beginning');
@@ -97,9 +97,13 @@ async function fetch_response(event, url) {
   if (!offline_ready) {
     return fetch(event.request);
   }
+  if (url == '') {
+    url = 'index.html';
+  }
   if (!(url in cur_url_to_base64)) {
-    console.info('%s not recognized; generating a 404', url)
-    return generate_404(url, ' is not part of the current Guide.  Try the search bar.');
+    console.info('%s not recognized; generating a 404', url);
+    var home_url = registration.scope + 'index.html';
+    return generate_404(url, ' is not part of the current Guide.  Try searching from the <a href="' + home_url + '">home page</a>');
   }
   let response = await caches.match(cur_url_to_base64[url]);
   if (!response) {
@@ -132,7 +136,7 @@ async function fetch_response(event, url) {
   }
 }
 function generate_404(url, msg) {
-  return Promise.resolve(new Response('<html>' + decodeURI(url) + msg, {'status': 404, headers: {'Content-Type': 'text/html; charset=utf-8'}}));
+  return Promise.resolve(new Response('<html>"' + decodeURI(url) + '"' + msg, {'status': 404, headers: {'Content-Type': 'text/html; charset=utf-8'}}));
 }
 async function read_db() {
   console.info('read_db()');
