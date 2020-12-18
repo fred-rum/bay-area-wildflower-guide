@@ -1,5 +1,3 @@
-sci:phylum Tracheophyta
-
 ==flowering plants
 end_hierarchy
 

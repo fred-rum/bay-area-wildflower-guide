@@ -1,5 +1,3 @@
-sci:class Insecta
-
 ==gall wasps
 
 ==coyote brush bud gall midge

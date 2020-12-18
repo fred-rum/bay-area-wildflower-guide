@@ -1,0 +1,5 @@
+==mammals:class Mammalia
+end_hierarchy
+
+==insects:class Insecta
+end_hierarchy

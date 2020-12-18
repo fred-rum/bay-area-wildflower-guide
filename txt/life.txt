@@ -19,7 +19,6 @@ flag_obs_fill_com: self-below
 obs_fill_alt_com: self-below
 
 
-==vascular plants
+==vascular plants:phylum Tracheophyta
 
-==insects
-end_hierarchy
+==animals:kingdom Animalia

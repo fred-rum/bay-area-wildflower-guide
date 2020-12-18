@@ -1,0 +1,6 @@
+==bobcat:Lynx rufus
+x: ca
+
+==north american mountain lion:Puma concolor ssp. couguar
+x: any
+xx: ca

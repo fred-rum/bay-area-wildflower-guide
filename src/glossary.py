@@ -341,7 +341,7 @@ class Glossary:
             self.anchor_list.append(anchor)
             return '{' + anchor + '}'
 
-        # self.taxon is now a page reference, 'flowering plants', or None.
+        # self.taxon is now a page name or None.
         # Any of these values is appropriate for the glossary_taxon_dict key.
         glossary_taxon_dict[self.taxon] = self
 

@@ -158,6 +158,17 @@ create_group_pages(group_names)
 if arg('-tree1b'):
     print_trees()
 
+# Linnaean descendants links are automatically created whenever a page
+# is assigned a child, but this isn't reliable during initial child
+# assignment when not all of the scientific names are known yet.
+# Therefore, once all the names are in, we make another pass through
+# the pages to ensure that all Linnaean links are complete.
+for page in page_array:
+    page.link_linn_descendants()
+
+if arg('-tree1c'):
+    print_trees()
+
 for page in page_array[:]:
     page.assign_groups()
 
@@ -175,22 +186,6 @@ for page in page_array:
 # If not, print a warning.
 for page in page_array:
     page.record_genus()
-
-#for genus in genus_page_list:
-#    page_list = genus_page_list[genus]
-#    if len(page_list) > 1:
-#        if genus in sci_page and not sci_page[genus].shadow:
-#            sci_page[genus].cross_out_children(page_list)
-#            for page in page_list:
-#                error(page.format_full(1), prefix=f'The following species are not included under the {genus} spp. key:')
-#        else:
-#            ancestor_set = page_list[0].get_ancestor_set()
-#            for page in page_list[1:]:
-#                set2 = page.get_ancestor_set()
-#                ancestor_set.intersection_update(set2)
-#            if not ancestor_set:
-#                for page in page_list:
-#                    error(page.format_full(1), prefix=f'The following pages in {genus} spp. are not under a common ancestor:')
 
 
 # Read the taxonomic chains from the observations file (exported from
@@ -438,8 +433,7 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
                 continue
 
             if ('flag_obs_promotion_without_x' in page.prop_set and
-                ((page.rank is Rank.genus and page.genus_complete not in ('hist', 'rare', 'hist/rare', 'more')) or
-                 (page.rank is Rank.species and page.species_complete not in ('hist', 'rare', 'hist/rare', 'more', 'uncat')))):
+                page.taxon_unknown_completion()):
                 error(f'flag_obs_promotion_without_x: {orig_sci} observation promoted to {page.name}')
                 continue
 

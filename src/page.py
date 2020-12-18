@@ -933,8 +933,19 @@ class Page:
 
     # Using recursion, create a link from the designated Linnaean parent
     # to each ranked descendent.
-    def link_linn_descendants(self, linn_parent, exclude_set=None):
-        if self.rank:
+    #
+    # linn_parent is supplied when we want to link a specific child (or its
+    # descendents) from a specific parent.
+    #
+    # linn_parent is None when we want to link all children from this page.
+    def link_linn_descendants(self, linn_parent=None, exclude_set=None):
+        if linn_parent is None:
+            if self.rank:
+                linn_parent = self
+            else:
+                # Can't create Linnaean links from an unranked parent.
+                return
+        elif self.rank:
             linn_parent.link_linn_child(self)
             return
 
@@ -1337,7 +1348,7 @@ class Page:
             #   child page is missing a common or scientific name that
             #   is supplied by the child link, that name is added to the child.
             #   The scientific name can be in elaborated or stripped format.
-            #   The genus can also be abbreviated as '[cap.letter]. '
+            #   The genus can also be abbreviated as '[capital letter]. '
             is_rep = matchobj.group(1)
             com = matchobj.group(2)
             suffix = matchobj.group(3)
@@ -1900,6 +1911,10 @@ class Page:
             if not ancestor.shadow: return False
             ancestor = ancestor.linn_parent
         return True
+
+    def taxon_unknown_completion(self):
+        return ((self.rank is Rank.genus and self.genus_complete not in ('hist', 'rare', 'hist/rare', 'more')) or
+                (self.rank is Rank.species and self.species_complete not in ('hist', 'rare', 'hist/rare', 'more', 'uncat')))
 
     def write_html(self):
         def write_complete(w, complete, key_incomplete, is_top, top, members):

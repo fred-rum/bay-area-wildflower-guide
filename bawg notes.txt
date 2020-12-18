@@ -1056,3 +1056,6 @@ service worker by reading the 'active' value after registration.  Note
 that a refresh of any site page in another tab/window triggers a
 'controllerchange' and sets the navigator.serviceWorker.controller
 value.
+
+
+"Caution: There may be other species of this genus not yet included in this guide." should be under the control of a property.  This other property may or may not be used in the same places as flag_obs_promotion_without_x.
