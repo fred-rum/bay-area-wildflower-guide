@@ -1928,7 +1928,7 @@ class Page:
                     other = ''
                 if complete is None:
                     if top == 'genus':
-                        w.write(f'<b>Caution: There may be{other} {members} of this {top} not yet included in this guide.</b>')
+                        w.write(f'<b>Caution: There may be{other} wild {members} of this {top} not yet included in this guide.</b>')
                     else:
                         return # Don't write the <p/> at the end
                 elif complete == 'none':
@@ -1943,17 +1943,17 @@ class Page:
                         w.write("This species has subspecies or variants that don't seem worth distinguishing.")
                 elif complete == 'more':
                     if top == 'genus':
-                        w.write(f'<b>Caution: There are{other} {members} of this {top} not yet included in this guide.</b>')
+                        w.write(f'<b>Caution: There are{other} wild {members} of this {top} not yet included in this guide.</b>')
                     else:
-                        w.write(f'This {top} has {members}, but they are not yet included in this guide.')
+                        w.write(f'This {top} has wild {members}, but they are not yet included in this guide.')
                 else:
                     prolog = f'There are no{other}'
                     if complete == 'hist':
                         prolog = f"Except for historical records that I'm ignoring, there are no{other}"
                     elif complete == 'rare':
-                        prolog = f"Except for extremely rare plants that I don't expect to encounter, there are no{other}"
+                        prolog = f"Except for extremely rare examples that I don't expect to encounter, there are no{other}"
                     elif complete == 'hist/rare':
-                        prolog = f"Except for old historical records and extremely rare plants that I don't expect to encounter, there are no{other}"
+                        prolog = f"Except for old historical records and extremely rare examples that I don't expect to encounter, there are no{other}"
 
                     epilog = 'in the bay area'
                     if complete == 'ca':
@@ -1961,7 +1961,7 @@ class Page:
                     elif complete == 'any':
                         epilog = 'anywhere'
 
-                    w.write(f'{prolog} {members} of this {top} {epilog}.')
+                    w.write(f'{prolog} wild {members} of this {top} {epilog}.')
                 if key_incomplete:
                     w.write(f'<br>\n<b>Caution: The key to distinguish these {members} is not complete.</b>')
                 w.write('</p>\n')

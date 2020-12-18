@@ -1,3 +1,9 @@
 list_hierarchy
 
 ==cats:family Felidae
+
+==canines:family Canidae
+
+==common raccoon:Procyon lotor
+x:ca
+<b>Caution: ID unsure.</b>
