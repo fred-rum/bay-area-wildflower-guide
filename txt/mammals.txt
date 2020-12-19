@@ -1,5 +1,7 @@
 list_hierarchy
 
+A good source of information about bay area mammals is <a href="https://sfbaywildlife.info/species/mammals.htm">sfbaywildlife.info</a>.
+
 ==cats:family Felidae
 
 ==canines:family Canidae

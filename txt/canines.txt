@@ -18,9 +18,5 @@ x:ba
 . tracks have a larger gap between pads and are less distinct than coyote due to fur between toe pads
 .. front and rear tracks often overlap significantly [<a href="https://www.bear-tracker.com/grayfox.html">source</a>]
 
-==red fox:Vulpes vulpes
-x:rare
-. about 7--14 pounds; longer legged than the gray fox
-. coat is entirely reddish
-. tracks have a larger gap between pads and are less distinct than coyote due to fur between toe pads
-.. front and rear tracks often overlap significantly [<a href="https://www.bear-tracker.com/grayfox.html">source</a>]
+==typical foxes:Vulpes spp.
+. the red fox and kit fox are rarer in the bay area

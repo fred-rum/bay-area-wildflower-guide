@@ -1,0 +1,12 @@
+sci:Vulpes spp.
+x:ba
+
+==red fox:Vulpes vulpes
+. about 7--14 pounds; longer legged than the gray fox
+. <b>coat is entirely reddish</b>
+. tracks have a larger gap between pads and are less distinct than coyote due to fur between toe pads
+.. front and rear tracks often overlap significantly [<a href="https://www.bear-tracker.com/grayfox.html">source</a>]
+
+==san joaquin kit fox:Vulpes macrotis ssp. mutica
+. <b>about 3&frac12;--6 pounds with very large ears relative to its none#head</b>
+. only observed east of the Diablo Range

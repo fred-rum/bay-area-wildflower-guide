@@ -353,7 +353,7 @@ class Page:
                         not self.created_from_inat and
                         not self.shadow and
                         'flag_obs_fill_alt_com' in self.prop_set):
-                        error(f'flag_obs_fill_alt_com: {self.name} has alternative name {com}')
+                        error(f'flag_obs_fill_alt_com: {self.full()} has alternative name {com}')
                     elif (not from_inat or
                           self.created_from_inat or
                           'obs_fill_alt_com' in self.prop_set):
@@ -370,13 +370,13 @@ class Page:
                 # Bail out without making any other changes to the common name.
                 return
             else:
-                fatal(f'{self.name} gets two different com values, {self.com} and {com}')
+                fatal(f'{self.full()} gets two different com values, {self.com} and {com}')
 
         if (from_inat and
             not self.created_from_inat and
             not self.shadow and
             'flag_obs_fill_com' in self.prop_set):
-            error(f'flag_obs_fill_com: {self.name} can be filled by {com}')
+            error(f'flag_obs_fill_com: {self.full()} can be filled by {com}')
             return
         elif (not from_inat or
               self.created_from_inat or
@@ -576,12 +576,15 @@ class Page:
         else:
             return f'{com}<br>{elab}'
 
+    def full(self):
+        return self.format_full(lines=1, ital=False)
+
     def add_jpg(self, jpg):
         self.jpg_list.append(jpg)
 
     def get_jpg(self, origin=None):
         if self == origin:
-            error(f'circular get_jpg() loop through {self.name}')
+            error(f'circular get_jpg() loop through {self.full()}')
             return None
         if self.rep_jpg:
             pass
@@ -592,7 +595,7 @@ class Page:
             if rep:
                 self.rep_jpg = rep.get_jpg(self)
             else:
-                error(f'unrecognized rep: {self.rep_child} in {self.name}')
+                error(f'unrecognized rep: {self.rep_child} in {self.full()}')
         elif self.jpg_list:
             self.rep_jpg = self.jpg_list[0]
         else:
@@ -671,7 +674,7 @@ class Page:
         def repl_asci(matchobj):
             sci = strip_sci(matchobj.group(1))
             if sci in sci_page:
-                fatal(f'{self.name} specifies asci: {sci}, but that name already exists')
+                fatal(f'{self.full()} specifies asci: {sci}, but that name already exists')
             sci_page[sci] = self
             return ''
 
@@ -691,7 +694,7 @@ class Page:
             rank = self.rank
         else:
             if rank not in Rank.__members__:
-                fatal(f'unrecognized rank "{rank}" used in {self.name}')
+                fatal(f'unrecognized rank "{rank}" used in {self.full()}')
             rank = Rank[rank]
 
         if mod == '<':
@@ -701,14 +704,14 @@ class Page:
                     rank = i
                     break
             else:
-                error(f'unrecognized rank "<{rank}" used in {self.name}')
+                error(f'unrecognized rank "<{rank}" used in {self.full()}')
         elif mod == '>':
             for i in Rank:
                 if i.value == rank.value + 1:
                     rank = i
                     break
             else:
-                error(f'unrecognized rank ">{rank}" used in {self.name}')
+                error(f'unrecognized rank ">{rank}" used in {self.full()}')
 
         return rank
 
@@ -720,7 +723,7 @@ class Page:
         def repl_default_ancestor(matchobj):
             global default_ancestor
             if default_ancestor:
-                error(f'default_ancestor specified for both {default_ancestor.name} and {self.name}')
+                error(f'default_ancestor specified for both {default_ancestor.full()} and {self.full()}')
             else:
                 default_ancestor = self
             return ''
@@ -813,13 +816,13 @@ class Page:
     def set_complete(self, matchobj):
         if matchobj.group(1) == 'x':
             if self.genus_complete is not None:
-                error(f'{self.name} has both x:{self.genus_complete} and x:{matchobj.group(3)}')
+                error(f'{self.full()} has both x:{self.genus_complete} and x:{matchobj.group(3)}')
             self.genus_complete = matchobj.group(3)
             if matchobj.group(2):
                 self.genus_key_incomplete = True
         else:
             if self.species_complete is not None:
-                error(f'{self.name} has both xx:{self.species_complete} and xx:{matchobj.group(3)}')
+                error(f'{self.full()} has both xx:{self.species_complete} and xx:{matchobj.group(3)}')
             self.species_complete = matchobj.group(3)
             if matchobj.group(2):
                 self.species_key_incomplete = True
@@ -827,7 +830,7 @@ class Page:
 
     def set_colors(self, color_str):
         if self.color:
-            error(f'color is defined more than once for page {self.name}')
+            error(f'color is defined more than once for page {self.full()}')
 
         self.color = set(split_strip(color_str, ','))
 
@@ -854,7 +857,7 @@ class Page:
 
     def record_ext_photo(self, label, link):
         if (label, link) in self.ext_photo_list:
-            error(f'{link} is specified more than once for page {self.name}')
+            error(f'{link} is specified more than once for page {self.full()}')
         else:
             if label:
                 label = easy_sub_safe(label)
@@ -978,7 +981,7 @@ class Page:
         # descendants, which means their ranks are already guaranteed to
         # be compatible.
         if child.rank and self.rank <= child.rank:
-            fatal(f'bad rank order when adding {child.name} (rank {child.rank.name}) as a child of {self.name} (rank {self.rank.name})')
+            fatal(f'bad rank order when adding {child.full()} (rank {child.rank.name}) as a child of {self.full()} (rank {self.rank.name})')
 
         if child.linn_parent == None:
             # The child node was the top of its Linnaean tree.  Now we know
@@ -1026,7 +1029,7 @@ class Page:
                 # it'll get caught when we make the recursive call.
                 self.link_linn_child(child.linn_parent)
         except FatalError:
-            warning(f'was adding {child.name} (rank {child.rank.name}) as a child of {self.name} (rank {self.rank.name})')
+            warning(f'was adding {child.full()} (rank {child.rank.name}) as a child of {self.full()} (rank {self.rank.name})')
             raise
 
     # Create a Linnaean link to a parent that is descibed by rank &
@@ -1055,13 +1058,13 @@ class Page:
         else:
             parent = find_page2(name, None, from_inat)
             if not parent:
-                error(f'add_linn_parent from {self.name} could not find {name}')
+                error(f'add_linn_parent from {self.full()} could not find {name}')
                 return
             elif not parent.rank:
-                error(f'add_linn_parent from {self.name} is to unranked page {name}')
+                error(f'add_linn_parent from {self.full()} is to unranked page {name}')
                 return
             elif parent.rank != rank:
-                error(f'add_linn_parent from {self.name} is to {name} with rank {parent.rank.name}, but we expected rank {rank.name}')
+                error(f'add_linn_parent from {self.full()} is to {name} with rank {parent.rank.name}, but we expected rank {rank.name}')
                 return
             else:
                 # OK, good, the common name maps to an existing page
@@ -1095,7 +1098,7 @@ class Page:
 
     def assign_child(self, child):
         if self in child.parent:
-            error(f'{child.name} added as child of {self.name} twice')
+            error(f'{child.full()} added as child of {self.full()} twice')
             return
 
         # In addition to creating a real link, we also create a Linnaean link.
@@ -1116,7 +1119,7 @@ class Page:
         try:
             linn_parent = self.find_lowest_ranked_ancestor(child)
         except RecursionError:
-            fatal(f'circular loop detected through unranked pages when adding {child.name} as child of {self.name}')
+            fatal(f'circular loop detected through unranked pages when adding {child.full()} as child of {self.full()}')
             return
 
         if linn_parent:
@@ -1318,10 +1321,10 @@ class Page:
 
         if ('obs_requires_photo' in self.prop_set and
             self.count_flowers() and not self.get_jpg()):
-            error(f'obs_requires_photo: {self.name} is observed, but has no photos')
+            error(f'obs_requires_photo: {self.full()} is observed, but has no photos')
 
         if 'flag_one_child' in self.prop_set and len(self.child) == 1:
-            error(f'flag_one_child: {self.name} has exactly one child')
+            error(f'flag_one_child: {self.full()} has exactly one child')
 
     def expand_genus(self, sci):
         if len(sci) >= 3 and sci[1:3] == '. ':
@@ -1330,7 +1333,7 @@ class Page:
                 sci_words = self.sci.split(' ')
                 return sci_words[0] + sci[2:]
             else:
-                fatal(f'Abbreviation "{sci}"  cannot be parsed in page "{self.name}"')
+                fatal(f'Abbreviation "{sci}"  cannot be parsed in page "{self.full()}"')
         return sci
 
     def parse_children_and_attributes(self):
@@ -1377,7 +1380,7 @@ class Page:
             try:
                 self.assign_child(child_page)
             except FatalError:
-                warning(f'was adding {child_page.name} as a child of {self.name}')
+                warning(f'was adding {child_page.full()} as a child of {self.full()}')
                 raise
 
             if is_rep:
@@ -1408,7 +1411,7 @@ class Page:
                 if jpg.startswith(','):
                     jpg = data_object.name + jpg
                     if jpg not in jpg_files:
-                        error(f'Broken rep: {jpg} in {self.name}')
+                        error(f'Broken rep: {jpg} in {self.full()}')
                         continue
                 if jpg in jpg_files:
                     data_object.rep_jpg = jpg
@@ -1766,10 +1769,10 @@ class Page:
             # is the same on both paths.
             if self.name in glossary_taxon_dict:
                 if glossary != self.glossary.parent:
-                    error(f'{self.name} has two different parent glossaries')
+                    error(f'{self.full()} has two different parent glossaries')
             else:
                 if glossary != self.glossary:
-                    error(f'{self.name} gets two different glossaries, {self.glossary.name} and {glossary.name}')
+                    error(f'{self.full()} gets two different glossaries, {self.glossary.name} and {glossary.name}')
 
             # No need to continue the tree traversal through this node
             # since it and its children have already set the glossary.
@@ -1793,7 +1796,7 @@ class Page:
             jpg = child.name + suffix
             jpgurl = url(jpg)
             if jpg not in child.jpg_list:
-                error(f'Broken [example{suffix}] for child {child.name} in {self.name}')
+                error(f'Broken [example{suffix}] for child {child.full()} in {self.full()}')
             return f'<a class="leaf" href="../photos/{jpgurl}.jpg">[example]</a>'
 
         child = self.child[child_idx]
@@ -1933,12 +1936,12 @@ class Page:
                         return # Don't write the <p/> at the end
                 elif complete == 'none':
                     if top == 'genus':
-                        error("x:none used for " + self.name)
+                        error("x:none used for " + self.full())
                     else:
                         w.write('This species has no subspecies or variants.')
                 elif complete == 'uncat':
                     if top == 'genus':
-                        error("x:uncat used for " + self.name)
+                        error("x:uncat used for " + self.full())
                     else:
                         w.write("This species has subspecies or variants that don't seem worth distinguishing.")
                 elif complete == 'more':
@@ -1967,9 +1970,9 @@ class Page:
                 w.write('</p>\n')
             elif complete:
                 if top == 'genus':
-                    error(f'{self.name} uses the x: keyword but is not the top of genus')
+                    error(f'{self.full()} uses the x: keyword but is not the top of genus')
                 else:
-                    error(f'{self.name} uses the xx: keyword but is not the top of species')
+                    error(f'{self.full()} uses the xx: keyword but is not the top of species')
 
         with write_and_hash(f'html/{filename(self.name)}.html') as w:
             com = self.com
@@ -2004,8 +2007,7 @@ class Page:
             if s:
                 c_list.append(s)
 
-            full_name = self.format_full(lines=1, ital=False)
-            what = f'{full_name} in the Bay Area Wildflower Guide.'
+            what = f'{self.full()} in the Bay Area Wildflower Guide.'
             if self.list_hierarchy:
                 desc = f'Hierarchy of {what}'
             elif self.has_child_key:
