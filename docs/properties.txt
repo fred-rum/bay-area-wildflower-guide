@@ -251,3 +251,19 @@ applied (possibly after promotion) does not have a photo.  The photo
 can be explicitly on that page or be incorporated by reference from a
 child page.  I.e. this property expects that if a taxon was observed,
 it should also have been photographed.
+
+
+Properties to link to external sites:
+
+'link_calflora' creates a link to the corresponding taxon in CalFlora
+from any page to which it is applied.
+
+'link_calphotos' creates a link to the corresponding taxon in
+CalPhotos from any page to which it is applied.
+
+'link_jepson' creates a link to the corresponding taxon in Jepson from
+any page to which it is applied.
+
+'link_bayareaspecies' creates a link from any page to which it is
+applied to a CalFlora map of bay area species within the corresponding
+genus.

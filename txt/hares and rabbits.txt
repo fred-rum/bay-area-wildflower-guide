@@ -1,0 +1,14 @@
+==black-tailed jackrabbit:Lepus californicus
+x:ba
+. larger body
+. long legs, especially hind legs
+. very long ears
+. relatively long tail
+. yellow eyes
+
+==cottontail rabbits:Sylvilagus spp.
+. smaller body
+. shorter legs, especially hind legs
+. ears shorter or not much longer than the face
+. no more than a stub of a tail
+. dark eyes

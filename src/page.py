@@ -785,7 +785,7 @@ class Page:
         self.txt = re.sub(r'^default_ancestor\s*?\n',
                           repl_default_ancestor, self.txt, flags=re.MULTILINE)
 
-        self.txt = re.sub(r'^(create|link|member_link|member_name|photo_requires_color|color_require_photo|obs_requires_photo|obs_requires_color|flag_one_child|allow_obs_promotion|flag_obs_promotion|flag_obs_promotion_above_peers|flag_obs_promotion_without_x|allow_casual_obs|allow_outside_obs|allow_outside_obs_promotion|obs_fill_com|obs_fill_sci|obs_fill_alt_com|flag_obs_fill_com|flag_obs_fill_sci|flag_obs_fill_alt_com):\s*(.*?)\s*?\n',
+        self.txt = re.sub(r'^(create|link|member_link|member_name|photo_requires_color|color_require_photo|obs_requires_photo|obs_requires_color|flag_one_child|allow_obs_promotion|flag_obs_promotion|flag_obs_promotion_above_peers|flag_obs_promotion_without_x|allow_casual_obs|allow_outside_obs|allow_outside_obs_promotion|obs_fill_com|obs_fill_sci|obs_fill_alt_com|flag_obs_fill_com|flag_obs_fill_sci|flag_obs_fill_alt_com|link_calflora|link_calphotos|link_jepson|link_bayareaspecies):\s*(.*?)\s*?\n',
                           repl_property, self.txt, flags=re.MULTILINE)
 
     def parse_glossary(self):
@@ -1647,7 +1647,7 @@ class Page:
             elab = format_elab(elab)
             add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/search?q={sciurl}&view=list" target="_blank" rel="noopener noreferrer">iNaturalist</a>')
 
-        if self.rank and (self.rank <= Rank.genus or self.rank is Rank.family):
+        if 'link_calflora' in self.prop_set:
             # CalFlora can be searched by family,
             # but not by other high-level classifications.
             elab = self.choose_elab(self.elab_calflora)
@@ -1656,7 +1656,7 @@ class Page:
             elab = format_elab(elab)
             add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={sciurl}" target="_blank" rel="noopener noreferrer">CalFlora</a>');
 
-        if self.rank and self.rank <= Rank.species:
+        if 'link_calphotos' in self.prop_set:
             # CalPhotos cannot be searched by high-level classifications.
             # It can be searched by genus, but I don't find that at all useful.
             elab = self.choose_elab(self.elab_calphotos)
@@ -1680,7 +1680,7 @@ class Page:
             # rel-taxon=begins+with -> allows matches with lower-level detail
             add_link(elab, self.elab_calphotos, f'<a href="https://calphotos.berkeley.edu/cgi/img_query?rel-taxon=begins+with&where-taxon={sciurl}" target="_blank" rel="noopener noreferrer">CalPhotos</a>');
 
-        if self.rank and (self.rank <= Rank.genus or self.rank is Rank.family):
+        if 'link_jepson' in self.prop_set:
             # Jepson can be searched by family,
             # but not by other high-level classifications.
             elab = self.choose_elab(self.elab_jepson)
@@ -1691,7 +1691,7 @@ class Page:
             elab = format_elab(elab)
             add_link(elab, self.elab_jepson, f'<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sciurl}" target="_blank" rel="noopener noreferrer">Jepson&nbsp;eFlora</a>');
 
-        if self.rank and self.rank <= Rank.genus:
+        if 'link_bayareaspecies' in self.prop_set:
             elab = self.choose_elab(self.elab_calflora)
             genus = elab.split(' ')[0]
             # srch=t -> search

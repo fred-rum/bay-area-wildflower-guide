@@ -1,3 +1,8 @@
+link_calflora: family,genus-below
+link_calphotos: species-below
+link_jepson: family,genus-below
+link_bayareaspecies: genus-below
+
 ==flowering plants
 end_hierarchy
 

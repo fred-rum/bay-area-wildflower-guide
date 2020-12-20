@@ -1059,3 +1059,5 @@ value.
 
 
 "Caution: There may be other species of this genus not yet included in this guide." should be under the control of a property.  This other property may or may not be used in the same places as flag_obs_promotion_without_x.
+
+CalFlora, CalPhotos, Jepson eFlora, and Bay Area species links should only be created for plants.

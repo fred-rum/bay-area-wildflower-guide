@@ -6,6 +6,8 @@ A good source of information about bay area mammals is <a href="https://sfbaywil
 
 ==canines:family Canidae
 
+==hares and rabbits:family Leporidae
+
 ==common raccoon:Procyon lotor
 x:ca
 <b>Caution: ID unsure.</b>

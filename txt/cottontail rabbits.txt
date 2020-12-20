@@ -1,0 +1,12 @@
+sci:Sylvilagus spp.
+x:ba
+
+The <a href="http://creagrus.home.montereybay.com/MTYrabbits.html">Creagus</a> website has additional ID tips for less apparent features.
+
+==brush rabbit:S. bachmani
+. ears obviously shorter than the face (nose to base of ear)
+. very small tail, appearing as just a bump
+
+==desert cottontail:S. audubonii
+. ears +- as long as the face (nose to base of ear)
+. tail is short, like a bobtail, but more than just a bump
