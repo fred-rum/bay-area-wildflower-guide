@@ -261,13 +261,16 @@ read_obs_chains()
 if arg('-tree3'):
     print_trees()
 
-default_ancestor = get_default_ancestor()
 for page in page_array:
     if not page.rank and not page.linn_parent:
         page.resolve_lcca()
     elif page.is_top:
         page.propagate_is_top()
 
+if arg('-tree3b'):
+    print_trees()
+
+default_ancestor = get_default_ancestor()
 if default_ancestor:
     for page in full_page_array:
         if (not page.is_top and not page.linn_parent and

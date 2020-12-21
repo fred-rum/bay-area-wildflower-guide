@@ -564,8 +564,11 @@ class Page:
         else:
             return self.format_elab()
 
-    def format_full(self, lines=2, ital=True):
-        com = self.format_com()
+    def format_full(self, lines=2, ital=True, for_html=True):
+        if for_html:
+            com = self.format_com()
+        else:
+            com = self.com
         elab = self.format_elab(ital=ital)
         if not com:
             return elab
@@ -577,7 +580,7 @@ class Page:
             return f'{com}<br>{elab}'
 
     def full(self):
-        return self.format_full(lines=1, ital=False)
+        return self.format_full(lines=1, ital=False, for_html=False)
 
     def add_jpg(self, jpg):
         self.jpg_list.append(jpg)
@@ -883,6 +886,9 @@ class Page:
         return False
 
     # Using recursion, find the lowest-ranked ancestor of self.
+    #
+    # A RecursionError is flagged if the child argument page is encountered
+    # during the search.
     # 
     # This function is called during assign_child to find the best
     # ancestor to create a Linnaean link to.
@@ -1156,9 +1162,15 @@ class Page:
         exclude_set.add(self)
 
         for child in self.child:
-            child.print_tree(level+1, '*', exclude_set)
+            if child in self.linn_child:
+                # link_type = '*' for a child that is both real & Linnaean
+                child.print_tree(level+1, '*', exclude_set)
+            else:
+                # link_type = '+' for a child that is real but not Linnaean
+                child.print_tree(level+1, '+', exclude_set)
         for child in self.linn_child:
             if child not in self.child:
+                # link_type = '-' for a shadow child (Linnaean but not real)
                 child.print_tree(level+1, '-', exclude_set)
 
     def propagate_is_top(self):
@@ -1192,7 +1204,8 @@ class Page:
         cca_set = None
         for child in self.child:
             child_ancestor_set = child.get_linn_ancestor_set(self.is_top)
-            if cca_set is None: # Don't take this path for the empty set!
+            if cca_set is None:
+                # create the initial value for cca_set
                 cca_set = child_ancestor_set
             else:
                 cca_set.intersection_update(child_ancestor_set)
@@ -1205,8 +1218,12 @@ class Page:
             lcca.link_linn_child(self)
         else:
             # Either there are no children or no common children's ancestors.
-            # In any case, we leave linn_parent as None
-            pass
+            # Lacking any finer-grained information, link from the lowest-
+            # ranked real ancestor.  This might be a higher rank than desired,
+            # but there's no way to know.
+            lra = self.find_lowest_ranked_ancestor(None)
+            if lra:
+                lra.link_linn_child(self)
 
     def assign_props(self):
         for prop, rank_set in self.prop_ranks.items():
@@ -2007,7 +2024,8 @@ class Page:
             if s:
                 c_list.append(s)
 
-            what = f'{self.full()} in the Bay Area Wildflower Guide.'
+            full = self.format_full(lines=1, ital=False)
+            what = f'{full} in the Bay Area Wildflower Guide.'
             if self.list_hierarchy:
                 desc = f'Hierarchy of {what}'
             elif self.has_child_key:

@@ -1,0 +1,40 @@
+sci:n/a
+
+<a href="https://homeguides.sfgate.com/identify-shrews-moles-voles-52759.html">ID tips</a>
+
+==broad-footed mole:Scapanus latimanus
+x:ba
+. thick, velvety fur; dark brown to silvery
+. +-6-inch body, 1-inch hairless tail
+. large front feet, facing outwards from the body
+. elongated, hairless snout
+. eyes and ears are hidden
+. <a href="https://www.inaturalist.org/observations/23838077#activity_comment_aa5aed0f-5105-4991-96f2-86d7ed04938a">moles and shrews taste bad</a> and are often discarded by predators
+
+==shrews:Sorex spp.
+x:more
+. +-4-inch body, 1-inch tail
+. short, soft fur; grayish
+. long, pointed snout
+. eyes and ears are visible
+. teeth are reddish-brown
+. <a href="https://www.inaturalist.org/observations/23838077#activity_comment_aa5aed0f-5105-4991-96f2-86d7ed04938a">moles and shrews taste bad</a> and are often discarded by predators
+. ~4 species in the bay area
+
+==american shrewmole:Neurotrichus gibbsii
+x:any
+. +-7-cm body, 3-inch tail that is thick and bristled
+. dense, soft fur; dark gray to bluish-black
+. front paws more like shrews
+. long, flattened snout
+. teeth are white
+. eyes and ears are hidden
+. [<a href="https://en.wikipedia.org/wiki/American_shrew_mole">source</a>]
+
+==california vole:Microtus californicus
+x:ba
+. +-6--7 inch body, +-1&frac12;--2-inch furry tail
+. short, course fur; black-brown to gray-brown (medium gray underneath)
+. rounded/blunt snout
+. eyes and ears are visible
+. chunky body
