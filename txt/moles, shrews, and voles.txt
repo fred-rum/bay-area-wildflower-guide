@@ -5,21 +5,19 @@ sci:n/a
 ==broad-footed mole:Scapanus latimanus
 x:ba
 . thick, velvety fur; dark brown to silvery
-. +-6-inch body, 1-inch hairless tail
+. +-6-inch body, 1-inch hairless [sparsely hairy] tail
 . large front feet, facing outwards from the body
 . elongated, hairless snout
 . eyes and ears are hidden
 . <a href="https://www.inaturalist.org/observations/23838077#activity_comment_aa5aed0f-5105-4991-96f2-86d7ed04938a">moles and shrews taste bad</a> and are often discarded by predators
 
-==shrews:Sorex spp.
-x:more
+==long-tailed shrews:Sorex spp.
 . +-4-inch body, 1-inch tail
 . short, soft fur; grayish
 . long, pointed snout
 . eyes and ears are visible
 . teeth are reddish-brown
 . <a href="https://www.inaturalist.org/observations/23838077#activity_comment_aa5aed0f-5105-4991-96f2-86d7ed04938a">moles and shrews taste bad</a> and are often discarded by predators
-. ~4 species in the bay area
 
 ==american shrewmole:Neurotrichus gibbsii
 x:any

@@ -1,0 +1,12 @@
+==california sea lion:Zalophus californianus
+x:ca
+
+==steller sea lion:Eumetopias jubatus
+x:any
+
+==northern fur seal:Callorhinus ursinus
+x:any
+
+==guadalupe fur seal:Arctocephalus townsendi
+x:ca
+. rare in the bay area, but occasionally wanders in from further south

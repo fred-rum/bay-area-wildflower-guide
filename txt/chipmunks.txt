@@ -1,0 +1,12 @@
+sci:Neotamias spp.
+x:ba
+
+Bay area chipmunks can be easily and completely distinguished by range.
+
+==merriam's chipmunk:N. merriami
+. peninsula, south bay, and east bay
+. face is white with light and dark stripes around the eyes [a href="http://animalia.bio/merriams-chipmunk">source</a>]
+
+==sonoma chipmunk:N. sonomae
+. Marin County and north
+. face is tan with light and dark stripes around the eyes [<a href="http://animalia.bio/sonoma-chipmunk">source</a>]

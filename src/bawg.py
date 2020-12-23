@@ -179,7 +179,7 @@ if arg('-tree2'):
 # here before propagating color to parent pages that might not have photos.
 for page in page_array:
     if page.color and not page.jpg_list:
-        error(f'page {page.name} has a color assigned but has no photos')
+        error(f'page {page.full()} has a color assigned but has no photos')
 
 # Find any genus with multiple species.
 # Check whether all of those species share an ancestor key page in common.
@@ -254,7 +254,7 @@ def read_obs_chains():
                     elif group: # ignore an empty group string
                         page = page.add_linn_parent(rank, group, from_inat=True)
             except FatalError:
-                warning(f'was creating taxonomic chain from {page.name}')
+                warning(f'was creating taxonomic chain from {page.full()}')
                 raise
 read_obs_chains()
 
@@ -420,7 +420,7 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
                 continue
 
             if 'flag_obs_promotion' in page.prop_set:
-                error(f'flag_obs_promotion: {orig_sci} observation promoted to {page.name}')
+                error(f'flag_obs_promotion: {orig_sci} observation promoted to {page.full()}')
                 continue
 
             # If the observation's original page has real Linnaean
@@ -432,12 +432,12 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
             if ('flag_obs_promotion_above_peers' in page.prop_set and
                 not orig_page.has_real_linnaean_descendants() and
                 page.has_real_linnaean_descendants()):
-                error(f'flag_obs_promotion_above_peers: {orig_sci} observation promoted to {page.name}')
+                error(f'flag_obs_promotion_above_peers: {orig_sci} observation promoted to {page.full()}')
                 continue
 
             if ('flag_obs_promotion_without_x' in page.prop_set and
                 page.taxon_unknown_completion()):
-                error(f'flag_obs_promotion_without_x: {orig_sci} observation promoted to {page.name}')
+                error(f'flag_obs_promotion_without_x: {orig_sci} observation promoted to {page.full()}')
                 continue
 
             if 'allow_obs_promotion' not in page.prop_set:
@@ -486,7 +486,7 @@ for page in page_array:
 for page in page_array:
     colors_not_used = ', '.join(page.color - page.colors_used)
     if colors_not_used:
-        error(f'{page.name} has no use for these colors: {colors_not_used}')
+        error(f'{page.full()} has no use for these colors: {colors_not_used}')
 
 if arg('-tree7'):
     print_trees()
@@ -520,7 +520,7 @@ if arg('-incomplete_keys'):
     page_list = page_array[:]
     page_list.sort(key=by_incomplete_obs, reverse=True)
     for page in page_list[:5]:
-        print(page.name)
+        print(page.full())
 
 ###############################################################################
 # Process 'other' files

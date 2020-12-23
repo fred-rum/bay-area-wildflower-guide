@@ -4,14 +4,12 @@ import pickle
 from contextlib import contextmanager
 from base64 import b64encode
 import datetime
+import io
 
 # My files
 from args import *
 from files import *
 from strip import *
-from page import *
-from photo import *
-from glossary import *
 
 kb_total = 0
 

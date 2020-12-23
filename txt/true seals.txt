@@ -1,0 +1,7 @@
+==pacific harbor seal:Phoca vitulina ssp. richardii
+x:ca
+xx:ca
+
+==northern elephant seal:Mirounga angustirostris
+x:ca
+

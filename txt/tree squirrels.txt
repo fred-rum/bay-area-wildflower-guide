@@ -1,0 +1,22 @@
+sci:Sciurus spp.
+x:ba
+
+<a href="http://squirrelrefuge.org/know%20thy%20squirrel.html">ID info</a>
+
+==western gray squirrel:Sciurus griseus
+. white belly
+. silver/white-tipped tail fur
+. <b>no brownish tinge to gray fur</b>
+. native; less urban and people-friendly
+
+==eastern gray squirrel:Sciurus carolinensis
+. white belly
+. <b>silver/white-tipped tail fur</b>
+. brownish tinge to gray fur, often more prominent in the face
+. <b>some are all black (melanistic) or all white (albino)</b>
+. introduced from eastern north america
+
+==fox squirrel:Sciurus niger
+. tan to white belly
+. <b>orange-tipped tail fur</b>
+. introduced from eastern north america

@@ -1,0 +1,12 @@
+==california ground squirrel:Otospermophilus beecheyi
+x:ba
+. if in doubt, the distinct highlighting around the eye separates the ground squirrel from tree squirrels
+
+==tree squirrels:Sciurus spp.
+
+==chipmunks:Neotamias spp.
+
+==botta's pocket gopher:Thomomys bottae
+x:ba
+
+==california vole:Microtus californicus

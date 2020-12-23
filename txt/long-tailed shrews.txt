@@ -1,0 +1,7 @@
+sci:Sorex spp.
+x:!ba
+
+==vagrant shrew:S. vagrans
+==ornate shrew:S. ornatus
+==trowbridge's shrew:S. trowbridgii
+==fog shrew:S. sonomae
