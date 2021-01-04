@@ -1060,4 +1060,9 @@ value.
 
 "Caution: There may be other species of this genus not yet included in this guide." should be under the control of a property.  This other property may or may not be used in the same places as flag_obs_promotion_without_x.
 
-list_hierarchy doesn't preserve the order from the txt file
+list_hierarchy doesn't preserve the order from the txt file.  This is
+documented, but not ideal.  Only auto-added children should be
+re-ordered by default.
+
+Print the count of observed taxons via some keyword, e.g. key_taxons.
+Not a property; it applies only to its page, and it is replaced in place.

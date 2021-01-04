@@ -16,7 +16,7 @@ color: yellow
 . ray petals are mostly yellow, but usually with white at the tips
 . <b>glandular</b> (e.g. on involucre, or as spots on peduncle)
 . phyllary tip (extending up the petal) +- as long as its folded base [example,2]
-. stem generally not purple-streaked
+. stem generally not purple-streaked [or <a href="https://www.inaturalist.org/observations/22174576">spotted</a>]
 . proximal leaves lobed +- 1/2 to midvein
 . scattered all around the bay
 
