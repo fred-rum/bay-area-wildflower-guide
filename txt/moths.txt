@@ -1,0 +1,6 @@
+# moths apparently aren't all in the same clade
+sci:n/a
+
+==clark's sphinx:Proserpinus clarkiae
+
+==white-lined sphinx:Hyles lineata

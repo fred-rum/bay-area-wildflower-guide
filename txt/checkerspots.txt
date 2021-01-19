@@ -1,0 +1,7 @@
+==variable checkerspot: Euphydryas chalcedona
+
+==bay checkerspot:Euphydryas editha ssp. bayensis
+
+==northern checkerspot:Chlosyne palla
+
+==mylitta crescent:Phyciodes mylitta

@@ -1066,3 +1066,10 @@ re-ordered by default.
 
 Print the count of observed taxons via some keyword, e.g. key_taxons.
 Not a property; it applies only to its page, and it is replaced in place.
+
+'No scientific name given for the following pages' should be an
+optional error.
+
+The various error-checking properties should also allow them to be
+warnings (or info or disabled?).  E.g. use warn_foo to turn foo into a
+warning, or no_foo to disable foo.

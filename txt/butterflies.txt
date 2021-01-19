@@ -1,0 +1,15 @@
+sci:superfamily Papilionoidea
+
+==whites, yellows, and sulphurs:family Pieridae
+. usually white, yellow, or orange, often with black spots
+
+==brush-footed butterflies:family Nymphalidae
+. often stand on four legs while the two front legs are curled up
+. front legs often have a brush-like set of hairs
+
+==gossamer-winged butterflies:family Lycaenidae
+. often have hairy antenna-like tails with black and white rings
+
+==skippers:family Hesperiidae
+
+==common swallowtails:Papilio spp.
