@@ -2,5 +2,7 @@
 sci:n/a
 
 ==clark's sphinx:Proserpinus clarkiae
+bug:65845
 
 ==white-lined sphinx:Hyles lineata
+bug:3071
