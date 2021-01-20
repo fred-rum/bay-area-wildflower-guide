@@ -1004,40 +1004,6 @@ What are the implications that the service worker is not used(?) on a
 shift-refresh?
 
 
-Is the 500KB service worker being read every time a page is fetched?
-If so, it'd be better to make the service worker small and have it
-read the url_data separately and only when the service worker is
-initialized (and perhaps on an occasional basis if the browser somehow
-keeps it running for a long time).
--and/or-
-Once the service worker is registered, don't register it again except:
-- once every 24 hours
-- if explicitly requested (in which case an update starts automatically?)
-- after a refresh if certain errors were encountered (e.g. 404 on update)
-  (e.g. on red-missing hazard, although that isn't needed, either)
-- before an update
-
-Only update sw.js when the user gives permission: For safety, the
-behavior by default is mostly like before except without automatic
-registration of the service worker.  Instead, when the user clicks the
-'update' button, two things happen:
-- the update message is sent, and in parallel
-- sw.js is re-registered, and if a new version is found, an update message
-  is immediately sent to it.
-
-There are a few other changes:
-- when an update is in progress (e.g. the 'pause' button is displayed),
-  clicking the button won't re-register the service worker.
-- when the offline copy is up to date (top_msg is green), the update
-  button is green and says 'Check for Update'.
-- if re-registration started from 'Check for Update', display 'Checking
-  for newest update' while in progress, and 'No newer files found' if
-  no new version found.  Keep that message until the sw.js msg is
-  non-blank.  (Note that the msg could change while supposedly up to
-  date, e.g. if cache validation fails.)
-- (do not automatically re-register sw.js while 'online'.)
-
-
 Advanced: minimize sw.js.  E.g. terser (requires node.js/npm).
 Or at least remove lines that emit debugging console output.
 % wc sw.js -c
@@ -1058,7 +1024,10 @@ that a refresh of any site page in another tab/window triggers a
 value.
 
 
-"Caution: There may be other species of this genus not yet included in this guide." should be under the control of a property.  This other property may or may not be used in the same places as flag_obs_promotion_without_x.
+"Caution: There may be other species of this genus not yet included in
+this guide." should be under the control of a property.  This other
+property may or may not be used in the same places as
+flag_obs_promotion_without_x.
 
 list_hierarchy doesn't preserve the order from the txt file.  This is
 documented, but not ideal.  Only auto-added children should be
@@ -1073,3 +1042,9 @@ optional error.
 The various error-checking properties should also allow them to be
 warnings (or info or disabled?).  E.g. use warn_foo to turn foo into a
 warning, or no_foo to disable foo.
+
+Extend [example,<suffix>] to support [example:name,suffix], e.g. to
+support example photos from deeper descendents (e.g. brush-footed
+butterflies to variable checkerspot,6).
+
+Reduce console logging from Javascript.

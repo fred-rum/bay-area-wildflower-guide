@@ -1,17 +1,22 @@
 sci:family Nymphalidae
 
 ==california ringlet:Coenonympha tullia ssp. california
+bug:364463
 
 ==california sister:Adelpha californica
+bug:13494
 
 ==california tortoiseshell:Nymphalis californica
+bug:27454
 
 ==checkerspots:tribe Melitaeini
 
 ==common buckeye: Junonia coenia
 xx: uncat # I *think* that all CA coenia are grisea; waiting for confirmation
+bug:516
 
 ==common wood-nymph: Cercyonis pegala
+bug:459
 
 ==fritillaries and longwings:subfamily Heliconiinae
 . forewings are elongated tipwards

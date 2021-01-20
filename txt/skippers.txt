@@ -1,5 +1,9 @@
 ==fiery skipper:Hylephila phyleus
+bug:406
 
 ==umber skipper:Lon melane
+sci_b:Poanes melane
+bug:9790
 
 ==propertius duskywing:Erynnis propertius
+bug:64221

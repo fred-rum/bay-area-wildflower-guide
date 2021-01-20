@@ -1,4 +1,5 @@
 sci:superfamily Papilionoidea
+member_link: self
 
 ==whites, yellows, and sulphurs:family Pieridae
 . usually white, yellow, or orange, often with black spots

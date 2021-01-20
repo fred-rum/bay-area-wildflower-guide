@@ -1,7 +1,12 @@
 ==variable checkerspot: Euphydryas chalcedona
+bug:25005
 
 ==bay checkerspot:Euphydryas editha ssp. bayensis
+sci_b:Euphydryas editha # no subspecies in BugGuide
+bug:199940
 
 ==northern checkerspot:Chlosyne palla
+bug:25358
 
 ==mylitta crescent:Phyciodes mylitta
+bug:39791

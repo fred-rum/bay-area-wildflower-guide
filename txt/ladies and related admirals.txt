@@ -1,7 +1,10 @@
 sci:Vanessa spp.
 
 ==painted lady:Vanessa cardui
+bug:2649
 
 ==west coast lady:Vanessa annabella
+bug:12876
 
 ==american lady:Vanessa virginiensis
+bug:488

@@ -1,5 +1,7 @@
 sci:subfamily Heliconiinae
 
 ==gulf fritillary:Agraulis vanillae
+bug:567
 
 ==pacific fritillary:Boloria epithore
+bug:63702

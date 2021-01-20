@@ -5,5 +5,7 @@ sci:family Lycaenidae
 ==Icaricia spp.
 
 ==lotus hairstreak:Callophrys dumetorum
+bug:416030
 
 ==silvery blue:Glaucopsyche lygdamus
+bug:15915

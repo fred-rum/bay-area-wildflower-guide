@@ -214,6 +214,7 @@ class Page:
         self.elab_calphotos = None
         self.elab_jepson = None
         self.elab_inaturalist = None
+        self.elab_bugguide = None
 
         # the iNaturalist common name.
         # must be None if the common name isn't set.
@@ -294,6 +295,7 @@ class Page:
         self.subset_of_page = None
 
         self.taxon_id = None # iNaturalist taxon ID (stored as a string)
+        self.bugguide_id = None # BugGuide.net ID (stored as a string)
         self.obs_n = 0 # number of observations
         self.obs_rg = 0 # number of observations that are research grade
         self.parks = {} # a dictionary of park_name : count
@@ -815,6 +817,8 @@ class Page:
             if isci in isci_page and isci_page[isci] != self:
                 error('{isci_page[isci].name} and {self.name} both use sci_i {elab}')
             isci_page[isci] = self
+        if 'b' in sites:
+            self.elab_bugguide = elab
 
     def set_complete(self, matchobj):
         if matchobj.group(1) == 'x':
@@ -1439,7 +1443,7 @@ class Page:
                     data_object.rep_child = jpg
                 continue
 
-            matchobj = re.match(r'sci([_fpji]+):\s*(.*?)$', c)
+            matchobj = re.match(r'sci([_fpjib]+):\s*(.*?)$', c)
             if matchobj:
                 data_object.set_sci_alt(matchobj.group(1),
                                         self.expand_genus(matchobj.group(2)))
@@ -1477,6 +1481,11 @@ class Page:
             matchobj = re.match(r'taxon_id\s*:\s*(\d+)$', c)
             if matchobj:
                 data_object.taxon_id = matchobj.group(1)
+                continue
+
+            matchobj = re.match(r'bug\s*:\s*(\d+)$', c)
+            if matchobj:
+                data_object.bugguide_id = matchobj.group(1)
                 continue
 
             matchobj = re.match(r'(x|xx):\s*(!?)(none|ba|ca|any|hist|rare|hist/rare|more|uncat)\s*$', c)
@@ -1642,7 +1651,7 @@ class Page:
             elab = sci
 
         elab_list = []
-        link_list = {}
+        link_list = {} # list of links for each elab
 
         def add_link(elab, elab_alt, link):
             if elab_alt == 'n/a':
@@ -1663,6 +1672,11 @@ class Page:
             sciurl = url(sci)
             elab = format_elab(elab)
             add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/search?q={sciurl}&view=list" target="_blank" rel="noopener noreferrer">iNaturalist</a>')
+
+        if self.bugguide_id:
+            elab = self.choose_elab(self.elab_bugguide)
+            elab = format_elab(elab)
+            add_link(elab, None, f'<a href="https://bugguide.net/node/view/{self.bugguide_id}" target="_blank" rel="noopener noreferrer">BugGuide</a>')
 
         if 'link_calflora' in self.prop_set:
             # CalFlora can be searched by family,

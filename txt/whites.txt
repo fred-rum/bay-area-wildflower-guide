@@ -1,5 +1,7 @@
 sci:Pieris spp.
 
 ==cabbage white:Pieris rapae
+bug:3259
 
 ==margined white:Pieris marginalis
+bug:12866

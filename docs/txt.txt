@@ -89,6 +89,7 @@ sci_i:<name> specifies the scientific name as listed in iNaturalist.
 sci_j:<name> specifies the scientific name as listed in Jepson.
 sci_f:<name> specifies the scientific name as listed in CalFlora.
 sci_p:<name> specifies the scientific name as listed in CalPhotos.
+sci_b:<name> specifies the scientific name as listed in BugGuide.
 
 Multiple names can be specified for CalPhotos, separated by |.  The
 canonical name is also automatically included in the CalPhotos search
@@ -130,6 +131,9 @@ is retrieved for many taxons from observations.csv, but a manual
 declaration can be useful if a particular taxon is commonly referenced
 but never observed, especially if it has an ambiguous scientific name
 (e.g. genus Allium) or no scientific name (e.g. life).
+
+'bug: <value>' declares the BugGuide taxon ID.  BugGuide links are
+created only for those taxons with a declared ID.
 
 
 A page can declare a Linnaean ancestor (a higher group in the Linnaean
