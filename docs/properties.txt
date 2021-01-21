@@ -256,14 +256,23 @@ it should also have been photographed.
 Properties to link to external sites:
 
 'link_calflora' creates a link to the corresponding taxon in CalFlora
-from any page to which it is applied.
+from any page to which it is applied.  CalFlora supports this type of
+link at the family level or at the genus level and below.
 
 'link_calphotos' creates a link to the corresponding taxon in
-CalPhotos from any page to which it is applied.
+CalPhotos from any page to which it is applied.  CalPhotos supports
+this type of link at the genus level and below.
 
 'link_jepson' creates a link to the corresponding taxon in Jepson from
-any page to which it is applied.
+any page to which it is applied.  Jepson supports this type of link at
+the family level or at the genus level and below.
 
-'link_bayareaspecies' creates a link from any page to which it is
+'link_bayarea_calflora' creates a link from any page to which it is
 applied to a CalFlora map of bay area species within the corresponding
-genus.
+genus (or higher-level taxon).  CalFlora supports this type of link at
+the family level or at the genus level and below.
+
+'link_bayarea_inaturalist' creates a link from any page to which it is
+applied to an iNaturalist list of bay area species within the
+corresponding genus (or higher-level taxon).  iNaturalist supports
+this type of link at any taxonomic level.

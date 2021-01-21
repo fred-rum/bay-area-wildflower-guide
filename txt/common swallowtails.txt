@@ -1,4 +1,5 @@
 sci:Papilio spp.
+bug:347
 
 ==anise swallowtail:Papilio zelicaon
 bug:28235
@@ -8,4 +9,3 @@ bug:40208
 
 ==western tiger swallowtail:Papilio rutulus
 bug:24573
-. has a tail-like extension from each hindwing

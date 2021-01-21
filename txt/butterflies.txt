@@ -1,8 +1,6 @@
 sci:superfamily Papilionoidea
-member_link: self
-
-==whites, yellows, and sulphurs:family Pieridae
-. usually white, yellow, or orange, often with black spots
+bug:81
+member_link: self,family
 
 ==brush-footed butterflies:family Nymphalidae
 . often stand on four legs while the two front legs are curled up
@@ -11,6 +9,13 @@ member_link: self
 ==gossamer-winged butterflies:family Lycaenidae
 . often have hairy antenna-like tails with black and white rings
 
-==skippers:family Hesperiidae
-
 ==common swallowtails:Papilio spp.
+. has a tail-like extension from each hindwing
+
+==whites, yellows, and sulphurs:family Pieridae
+. usually white, yellow, or orange, often with black spots
+
+==skippers:family Hesperiidae
+. often moth-like in appearcance: stocky body, short wings, large eyes
+. wings rest angled up or spread, rarely straight up
+. antenna club often bent slightly back toward the body

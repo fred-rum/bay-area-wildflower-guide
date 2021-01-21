@@ -316,7 +316,7 @@ var pages=[
 {page:"blueberries",sci:["Vaccinium spp."],x:"k"},
 {page:"bush poppy",sci:["Dendromecon rigida"],x:"o"},
 {page:"Chrysolepis",sci:["Chrysolepis spp."],x:"k"},
-{page:"common swallowtails",sci:["Papilio spp."],x:"k"},
+{page:"common swallowtails",sci:["Papilio spp."],x:"f"},
 {page:"cotoneasters",sci:["Cotoneaster spp."],x:"k"},
 {page:"creamcups",sci:["Platystemon californicus"],x:"o"},
 {page:"eucalyptus",sci:["Eucalyptus spp."],x:"k"},

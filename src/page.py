@@ -790,7 +790,7 @@ class Page:
         self.txt = re.sub(r'^default_ancestor\s*?\n',
                           repl_default_ancestor, self.txt, flags=re.MULTILINE)
 
-        self.txt = re.sub(r'^(create|link|member_link|member_name|photo_requires_color|color_require_photo|obs_requires_photo|obs_requires_color|flag_one_child|allow_obs_promotion|flag_obs_promotion|flag_obs_promotion_above_peers|flag_obs_promotion_without_x|allow_casual_obs|allow_outside_obs|allow_outside_obs_promotion|obs_fill_com|obs_fill_sci|obs_fill_alt_com|flag_obs_fill_com|flag_obs_fill_sci|flag_obs_fill_alt_com|link_calflora|link_calphotos|link_jepson|link_bayareaspecies):\s*(.*?)\s*?\n',
+        self.txt = re.sub(r'^(create|link|member_link|member_name|photo_requires_color|color_require_photo|obs_requires_photo|obs_requires_color|flag_one_child|allow_obs_promotion|flag_obs_promotion|flag_obs_promotion_above_peers|flag_obs_promotion_without_x|allow_casual_obs|allow_outside_obs|allow_outside_obs_promotion|obs_fill_com|obs_fill_sci|obs_fill_alt_com|flag_obs_fill_com|flag_obs_fill_sci|flag_obs_fill_alt_com|link_calflora|link_calphotos|link_jepson|link_bayarea_calflora|link_bayarea_inaturalist):\s*(.*?)\s*?\n',
                           repl_property, self.txt, flags=re.MULTILINE)
 
     def parse_glossary(self):
@@ -1722,24 +1722,9 @@ class Page:
             elab = format_elab(elab)
             add_link(elab, self.elab_jepson, f'<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sciurl}" target="_blank" rel="noopener noreferrer">Jepson&nbsp;eFlora</a>');
 
-        if 'link_bayareaspecies' in self.prop_set:
-            elab = self.choose_elab(self.elab_calflora)
-            genus = elab.split(' ')[0]
-            # srch=t -> search
-            # taxon={name} -> scientific name to filter for
-            # group=none -> just one list; not annual, perennial, etc.
-            # sort=count -> sort from most records to fewest
-            #   (removed because it annoyingly breaks up subspecies)
-            # fmt=photo -> list results with info + sample photos
-            # y={},x={},z={} -> longitude, latitude, zoom
-            # wkt={...} -> search polygon with last point matching the first
-            genusurl = url(genus)
-            elab = format_elab(elab)
-            add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/entry/wgh.html#srch=t&taxon={genusurl}&group=none&fmt=photo&y=37.5&x=-122&z=8&wkt=-123.1+38,-121.95+38,-121.05+36.95,-122.2+36.95,-123.1+38" target="_blank" rel="noopener noreferrer">Bay&nbsp;Area&nbsp;species</a>')
-
         link_list_txt = []
         for elab in elab_list:
-            txt = ' &ndash;\n'.join(link_list[elab])
+            txt = '\n&ndash;\n'.join(link_list[elab])
             if len(elab_list) > 1:
                 txt = f'{elab} &rarr; {txt}'
             link_list_txt.append(txt)
@@ -1748,7 +1733,51 @@ class Page:
         if len(elab_list) > 1:
             w.write(f'<p class="list-head">Not all sites agree about the scientific name:</p>\n<ul>\n<li>{txt}</li>\n</ul>\n')
         else:
-            w.write(f'<p>\n{txt}\n</p>\n')
+            w.write(f'<p>\nTaxon info:\n{txt}\n</p>\n')
+
+        species_maps = []
+
+        if 'link_bayarea_inaturalist' in self.prop_set:
+            if self.taxon_id and self.rank and self.rank >= Rank.genus:
+                query = f'taxon_id={self.taxon_id}'
+            else:
+                elab = self.choose_elab(self.elab_inaturalist)
+                if elab[0].islower():
+                    # Drop the rank specifier from the name.
+                    barename = elab.split(' ')[1]
+                else:
+                    # Drop any species/sub-species elaboration, keeping only
+                    # the genus.
+                    barename = elab.split(' ')[0]
+                barenameurl = url(barename)
+                query = f'taxon_name={barenameurl}'
+            species_maps.append(f'<a href="https://www.inaturalist.org/observations?nelat=38&nelng=-121.35&swlat=36.85&swlng=-122.8&{query}&view=species" target="_blank" rel="noopener noreferrer">iNaturalist</a>')
+
+        if 'link_bayarea_calflora' in self.prop_set:
+            elab = self.choose_elab(self.elab_calflora)
+            # srch=t -> search
+            # taxon={name} -> scientific name to filter for (genus or below)
+            # family={name} -> scientific name to filter for (family)
+            # group=none -> just one list; not groups of annual, perennial, etc.
+            # sort=count -> sort from most records to fewest
+            #   (removed because it annoyingly breaks up subspecies)
+            # fmt=photo -> list results with info + sample photos
+            # y={},x={},z={} -> longitude, latitude, zoom
+            # wkt={...} -> search polygon with last point matching the first
+            if self.rank and self.rank is Rank.family:
+                family = elab.split(' ')[1]
+                familyurl = url(sci)
+                query = f'family={familyurl}'
+            else :
+                genus = elab.split(' ')[0]
+                genusurl = url(genus)
+                query = f'taxon={genusurl}'
+            species_maps.append(f'<a href="https://www.calflora.org/entry/wgh.html#srch=t&group=none&{query}&fmt=photo&y=37.5&x=-122&z=8&wkt=-123.1+38,-121.95+38,-121.05+36.95,-122.2+36.95,-123.1+38" target="_blank" rel="noopener noreferrer">CalFlora</a>')
+
+        if species_maps:
+            txt = '\n&ndash;\n'.join(species_maps)
+            w.write(f'<p>\nBay&nbsp;Area&nbsp;species:\n{txt}\n</p>\n')
+
 
     # List a single page, indented if it is under a parent.
     def list_page(self, w, indent, has_children):

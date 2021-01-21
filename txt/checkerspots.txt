@@ -1,3 +1,5 @@
+bug:483626
+
 ==variable checkerspot: Euphydryas chalcedona
 bug:25005
 

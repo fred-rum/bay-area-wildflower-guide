@@ -1,5 +1,7 @@
 sci:Icaricia spp.
 
+This genus is in taxonomic flux.
+
 ==acmon blue:Icaricia acmon
 sci_b:Plebejus acmon
 bug:9675
