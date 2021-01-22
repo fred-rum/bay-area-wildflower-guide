@@ -24,7 +24,6 @@ async function swi_oninteractive() {
     window.addEventListener('load', swi_oninteractive);
     return
   }
-  console.info('swi_oninteractive()');
   e_update = document.getElementById('update');
   if (e_update) {
     e_progress = document.getElementById('progress');
@@ -63,13 +62,11 @@ async function swi_oninteractive() {
       register_sw();
     }
   } else if (e_update) {
-    console.warn('no service worker support in browser');
     e_status.innerHTML = 'Sorry, but your browser doesn&rsquo;t support this feature.';
   }
 }
 swi_oninteractive();
 function fn_controllerchange() {
-  console.info('controllerchange: ' + navigator.serviceWorker.controller);
   if (pollID) {
     clearInterval(pollID);
   }
@@ -96,7 +93,6 @@ function fn_controllerchange() {
   }
 }
 function start_polling() {
-  console.info('start_polling()');
   polls_since_response = 0;
   post_msg('poll');
   pollID = setInterval(fn_poll_cache, POLL_INTERVAL_MS);
@@ -165,7 +161,6 @@ function fn_receive_status(event) {
     old_msg = msg;
     update_wakelock();
   } catch (e) {
-    console.error('polling msg error:', e);
     e_update.className = 'update-update';
     e_progress.innerHTML = '';
     e_clear.className = '';
@@ -190,16 +185,13 @@ function fn_update(event) {
 async function init_permissions() {
   if (navigator.storage) {
     let persistent = await navigator.storage.persist();
-    console.info('persistent =', persistent);
   }
 }
 async function register_sw() {
-  console.info('register_sw()');
   try {
     var sw_path = root_path + 'sw.js';
     await navigator.serviceWorker.register(sw_path);
   } catch (e) {
-    console.warn('service worker registration failed', e);
     if (e_status) {
       e_status.innerHTML = '';
       e_err_status.innerHTML = 'Service worker failed to load.  Manually clearing all site data might help.';
@@ -246,9 +238,7 @@ function fn_receive_icon(event) {
     var icon = undefined;
   }
   if (icon !== old_icon) {
-    console.info('changing to icon:', icon);
     if (!e_icon) {
-      console.info('inserting hazard icon');
       e_body.insertAdjacentHTML('afterbegin', '<a href="' + root_path + 'index.html#offline" tabindex="0" id="icon"><img src="' + root_path + 'icons/hazard.svg" class="hazard-img" alt="offline file warning"></a>');
       e_icon = document.getElementById('icon');
       e_icon.addEventListener('click', fn_icon_click);
@@ -285,24 +275,18 @@ async function update_wakelock() {
   let update_class = e_update.className;
   if (update_class == 'update-stop' && !wakelock && navigator.wakeLock) {
     try {
-      console.info('Requesting wakelock');
       wakelock = await navigator.wakeLock.request('screen');
-      console.info('wakelock = ', wakelock);
       wakelock.addEventListener('release', fn_wakelock_released);
     } catch (e) {
-      console.warn('wakelock request failed:', e);
       wakelock = undefined;
     }
   } else if (update_class != 'update-stop' && wakelock) {
     try {
-      console.info('releasing wakelock');
       wakelock.release();
       wakelock = undefined;
     } catch (e) {
-      console.warn('wakelock release failed:', e);
     }
   }
 }
 function fn_wakelock_released() {
-  console.info('fn_wakelock_released()');
 }

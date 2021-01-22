@@ -1005,11 +1005,6 @@ shift-refresh?
 
 
 Advanced: minimize sw.js.  E.g. terser (requires node.js/npm).
-Or at least remove lines that emit debugging console output.
-% wc sw.js -c
-24042 sw.js
-% grep -v console sw.js | wc -c
-20636
 
 Super advanced: put as much work as possible in a separate (worker?)
 script so that the automatic fetches of sw.js are as minimal as
@@ -1042,6 +1037,9 @@ optional error.
 The various error-checking properties should also allow them to be
 warnings (or info or disabled?).  E.g. use warn_foo to turn foo into a
 warning, or no_foo to disable foo.
+
+Checking properties should name the property (and its source txt?)
+when printing a message.
 
 Extend [example,<suffix>] to support [example:name,suffix], e.g. to
 support example photos from deeper descendents (e.g. brush-footed

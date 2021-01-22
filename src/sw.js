@@ -324,7 +324,7 @@ function fetch_handler(event) {
     // I found some documentation that says that performance is
     // better if we simply fail to handle a request, in which case
     // the browser performs the default online fetch.
-    console.info(url, 'fetched in online mode')
+    console.info(url, 'fetched in online mode');
     return;
   } else {
     // There is a race condition between initializing offline_ready
@@ -403,7 +403,7 @@ async function fetch_response(event, url) {
   }
 
   if (response) {
-    console.info('%s found', url)
+    console.info('%s found', url);
     return response;
   }
 
@@ -412,12 +412,12 @@ async function fetch_response(event, url) {
       url.startsWith('figures/') ||
       url.startsWith('favicons/')) {
     // Generate a 404 for non-essential files.
-    console.info('%s not found; generating a 404', url)
+    console.info('%s not found; generating a 404', url);
     return generate_404(url, ' has gone missing from your offline copy.  Update your offline files.');
   } else {
     // For small files and essential files (particularly those needed to
     // run the service worker interface), get them from the internet.
-    console.info('%s not found; fetching from the internet', url)
+    console.info('%s not found; fetching from the internet', url);
     return fetch(event.request);
   }
 }
@@ -940,7 +940,7 @@ async function delete_db() {
 }
 
 async function delete_all_cache_entries() {
-  console.info('delete_all_cache_entries()')
+  console.info('delete_all_cache_entries()');
 
   // For some reason, caches.delete() can really screw up some browsers.
   // In particular, Firefox just fails to free the space, even if I let
@@ -1268,7 +1268,7 @@ async function fetch_all_to_cache(cache, id) {
 
 async function fetch_to_cache(cache, url, base64) {
   msg = 'Fetching ' + decodeURI(url)
-  console.info(msg)
+  console.info(msg);
   var response = await fetch_and_verify(url);
 
   await check_stop('update (before cache write)');

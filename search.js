@@ -470,7 +470,6 @@ if (typeof pages !== 'undefined') {
   main();
 }
 function fn_details(event) {
-  console.log(event);
   if (event.target.textContent == '[show details]') {
     event.target.textContent = '[hide details]';
     document.getElementById('details').style.display = 'block';
@@ -482,7 +481,6 @@ function fn_details(event) {
   }
 }
 function fn_details_keydown(event) {
-  console.log(event);
   if ((event.key == 'Enter') ||
       (event.key == ' ') ||
       (event.key == 'Spacebar')) {
@@ -496,7 +494,6 @@ function save_scroll() {
   history.replaceState(stateObj, '');
 }
 function restore_scroll() {
-  console.info('restore_scroll()');
   if (history.state) {
     e_body.scrollTop = history.state.data;
   }
@@ -508,7 +505,6 @@ function oninteractive() {
     document.addEventListener('DOMContentLoaded', oninteractive);
     return
   }
-  console.info('oninteractive()');
   setTimeout(restore_scroll, 0);
 }
 oninteractive();

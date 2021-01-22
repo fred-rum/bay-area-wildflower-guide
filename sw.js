@@ -1,8 +1,7 @@
 'use strict';
-var upd_timestamp = '2021-01-21T19:18:59.639709+00:00';
+var upd_timestamp = '2021-01-22T03:07:10.331404+00:00';
 var upd_num_urls = 5308;
 var upd_kb_total = 691302
-console.info('starting from the beginning');
 const DB_NAME = 'db-v1';
 const DB_VERSION = 1;
 const BASE64_CACHE_NAME = 'base64-cache-v1';
@@ -32,11 +31,9 @@ var red_missed = false;
 var validate_flag = false;
 self.addEventListener('install', fn_install);
 async function fn_install(event) {
-  console.info('fn_install()');
   self.skipWaiting();
 }
 self.addEventListener('activate', event => {
-  console.info('activate');
   clients.claim();
 });
 function db_connection(mode) {
@@ -70,7 +67,6 @@ function db_request_promise(request) {
     };
   });
 }
-console.info('adding fetch handler');
 self.addEventListener('fetch', fetch_handler);
 function remove_scope_from_request(request) {
   let url = request.url;
@@ -84,9 +80,7 @@ function remove_scope_from_request(request) {
 }
 function fetch_handler(event) {
   let url = remove_scope_from_request(event.request);
-  console.info('fetching', url);
   if (offline_ready === false) {
-    console.info(url, 'fetched in online mode')
     return;
   } else {
     event.respondWith(fetch_response(event, url));
@@ -101,7 +95,6 @@ async function fetch_response(event, url) {
     url = 'index.html';
   }
   if (!(url in cur_url_to_base64)) {
-    console.info('%s not recognized; generating a 404', url);
     var home_url = registration.scope + 'index.html';
     return generate_404(url, ' is not part of the current Guide.  Try searching from the <a href="' + home_url + '">home page</a>');
   }
@@ -112,26 +105,21 @@ async function fetch_response(event, url) {
     validate_flag = true;
   }
   if (!response && url.startsWith('photos/')) {
-    console.info('%s not found; falling back to thumbnail', url);
     let alt_url = 'thumbs/' + url.substr('photos/'.length);
     response = await caches.match(cur_url_to_base64[alt_url]);
   } else if (!response && url.startsWith('thumbs/')) {
-    console.info('%s not found; falling back to full-size photo', url);
     let alt_url = 'photos/' + url.substr('thumbs/'.length);
     response = await caches.match(cur_url_to_base64[alt_url]);
   }
   if (response) {
-    console.info('%s found', url)
     return response;
   }
   if (url.startsWith('photos/') ||
       url.startsWith('thumbs/') ||
       url.startsWith('figures/') ||
       url.startsWith('favicons/')) {
-    console.info('%s not found; generating a 404', url)
     return generate_404(url, ' has gone missing from your offline copy.  Update your offline files.');
   } else {
-    console.info('%s not found; fetching from the internet', url)
     return fetch(event.request);
   }
 }
@@ -139,19 +127,16 @@ function generate_404(url, msg) {
   return Promise.resolve(new Response('<html>"' + decodeURI(url) + '"' + msg, {'status': 404, headers: {'Content-Type': 'text/html; charset=utf-8'}}));
 }
 async function read_db() {
-  console.info('read_db()');
   try {
     await open_db();
     let conn = db_connection('readonly');
     let async_cur_data = db_request_promise(conn.get('data'));
     let async_upd_data = db_request_promise(conn.get('upd_base64_to_kb'));
     let cur_data = await async_cur_data;
-    console.info('indexedDB data:', cur_data);
     if (cur_data && cur_data.url_to_base64) {
       cur_url_to_base64 = cur_data.url_to_base64;
       cur_timestamp = cur_data.timestamp;
       offline_ready = true;
-      console.info('found cur_url_to_base64 in DB');
       cur_base64 = {};
       for (let url in cur_url_to_base64) {
         let base64 = cur_url_to_base64[url];
@@ -165,11 +150,8 @@ async function read_db() {
     let upd_data = await async_upd_data;
     if (upd_data && (upd_data.timestamp === upd_timestamp)) {
       upd_base64_to_kb = upd_data.upd_base64_to_kb;
-      console.info('found upd_base64_to_kb in DB');
     }
   } catch (e) {
-    console.info('indexedDB lookup failed', e);
-    console.info('(This is normal if it was not initialized.)');
     cur_url_to_base64 = {};
     cur_base64 = {};
     offline_ready = false;
@@ -179,17 +161,14 @@ async function open_db() {
   let request = indexedDB.open(DB_NAME, DB_VERSION);
   request.onupgradeneeded = dbupgradeneeded;
   db = await db_request_promise(request);
-  console.info('open_db() gets', db);
 }
 async function dbupgradeneeded(event) {
-  console.info('dbupgradeneeded()');
   let db = event.target.result;
   db.createObjectStore('url_data', {keyPath: 'key'});
 }
 activity_promise = init_status();
 monitor_promise();
 async function init_status() {
-  console.info('init_status()');
   db_promise = read_db();
   await db_promise;
   upd_pending = (upd_timestamp !== cur_timestamp);
@@ -204,7 +183,6 @@ function validate_cache() {
   monitor_promise();
 }
 async function check_cached() {
-  console.info('check_cached()');
   all_base64 = {};
   let cache = await caches.open(BASE64_CACHE_NAME);
   let requests = await cache.keys();
@@ -222,21 +200,16 @@ async function check_cached() {
   }
   count_cached();
   validate_flag = false;
-  console.info('check_cached() done');
   activity = 'idle';
 }
 function count_cached() {
   if (!upd_base64_to_kb) return;
-  console.info('count_cached()');
-  console.info('upd_base64_to_kb:', upd_base64_to_kb);
   upd_kb_total = 0;
   upd_num_urls = 0;
   for (const base64 in upd_base64_to_kb) {
     upd_kb_total += upd_base64_to_kb[base64];
     upd_num_urls++;
   }
-  console.info('all_base64:', all_base64);
-  console.info('cur_base64:', cur_base64);
   upd_kb_cached = 0;
   cur_num_files = 0;
   obs_num_files = 0;
@@ -249,8 +222,6 @@ function count_cached() {
       obs_num_files++;
     }
   }
-  console.info('cur_num_files:', cur_num_files);
-  console.info('obs_num_files:', obs_num_files);
 }
 self.addEventListener('message', fn_send_status);
 function fn_send_status(event) {
@@ -265,12 +236,10 @@ function fn_send_status(event) {
       if (upd_pending) {
         update_cache_when_ready();
       } else {
-        console.info('cache is up to date: ignore update request');
       }
     } else if (activity === 'update') {
       pause_update();
     } else {
-      console.info(activity + ': ignore update request');
     }
   } else if (event.data === 'clear') {
     if ((activity === 'validate') ||
@@ -279,7 +248,6 @@ function fn_send_status(event) {
         (activity === 'update')) {
       clear_caches();
     } else {
-      console.info(activity + ': ignore delete request');
     }
   }
   if ((activity === 'idle') && validate_flag) {
@@ -392,20 +360,16 @@ async function stop_activity() {
   } else if (activity === 'idle') {
     return;
   } else {
-    console.error('stop_activity() called when activity is ' + activity);
     throw 'oops';
   }
   activity = 'busy';
-  console.log('await activity_promise');
   stop_activity_flag = true;
   await activity_promise;
   activity_promise = undefined;
   stop_activity_flag = false;
-  console.info('activity stopped');
 }
 async function clear_caches() {
   await stop_activity();
-  console.info('clear_caches()');
   activity = 'busy';
   msg = 'Making all offline files obsolete';
   err_status = '';
@@ -415,7 +379,6 @@ async function clear_caches() {
     monitor_promise();
   } catch (e) {
     if (e) {
-      console.error(e);
       err_status = e.name + '<br>Something went wrong.  Refresh and try again?';
       activity = 'idle';
       validate_flag = true;
@@ -428,17 +391,14 @@ async function delete_db() {
   await db_connection_promise(conn);
 }
 async function delete_all_cache_entries() {
-  console.info('delete_all_cache_entries()')
   let cache = await caches.open(BASE64_CACHE_NAME);
   let requests = await cache.keys();
-  console.info('num to delete =', requests.length);
   for (let i = 0; i < requests.length; i++) {
     msg = 'Queued deletion of ' + i + ' / ' + requests.length + ' files';
     let request = requests[i]
     await cache.delete(request);
   }
   msg = 'Waiting for browser to process ' + requests.length + ' deleted files.';
-  console.info('done with delete_all_cache_entries()');
 }
 async function update_cache_when_ready() {
   await stop_activity();
@@ -447,10 +407,8 @@ async function update_cache_when_ready() {
 }
 async function monitor_promise() {
   await activity_promise;
-  console.info('activity_promise complete');
 }
 async function update_cache() {
-  console.info('update_cache()');
   activity = 'update';
   err_status = '';
   try {
@@ -463,21 +421,16 @@ async function update_cache() {
   } catch (e) {
     if (!e) {
     } else if (is_quota_exceeded(e)) {
-      console.warn(e);
       err_status = 'Not enough offline storage available.  Sorry.';
-      console.warn(err_status);
     } else {
-      console.error(e);
       err_status = e.name + '<br>Something went wrong.  Refresh and try again?';
     }
   }
   activity = 'idle';
 }
 async function read_json() {
-  console.info('read_json()');
   var response = await fetch_and_verify('url_data.json');
   var url_data = await response.json();
-  console.info('read OK');
   upd_url_to_base64 = {};
   upd_base64_to_kb = {};
   for (const url_data_item of url_data) {
@@ -489,7 +442,6 @@ async function read_json() {
   }
 }
 async function write_upd_base64_to_kb() {
-  console.info('write_upd_base64_to_kb()');
   let obj = {key: 'upd_base64_to_kb',
              upd_base64_to_kb: upd_base64_to_kb,
              timestamp: upd_timestamp
@@ -507,13 +459,11 @@ async function protect_update(cache) {
       let quota_exceeded = is_quota_exceeded(e);
       if (quota_exceeded && obs_num_files) {
         err_status = 'Storage limit reached.  Deleting obsolete files before continuing.';
-        console.warn(err_status);
         await clear_margin();
         await delete_obs_files(cache);
         err_status = '';
       } else if (quota_exceeded && cur_num_files) {
         err_status = 'Storage limit reached.  Reverting to online mode so that old files can be deleted.';
-        console.warn(err_status);
         await clear_margin();
         await kill_cur_files();
         await delete_obs_files(cache);
@@ -540,7 +490,6 @@ async function write_obj_to_db(obj) {
   await db_connection_promise(conn);
 }
 async function write_margin() {
-  console.info('write_margin()');
   let junk = [];
   let n = 4*1024*1024/8;
   for (let i = 0; i < n; i++){
@@ -551,18 +500,14 @@ async function write_margin() {
   await write_obj_to_db(obj);
 }
 async function clear_margin() {
-  console.info('clear_margin()');
   for (let delay of [1, 4, 'end']) {
     try {
       let conn = db_connection('readwrite');
       await db_request_promise(conn.delete('margin'));
       await db_connection_promise(conn);
-      console.info('clear_margin() managed to delete');
       return;
     } catch (e) {
-      console.warn('clear_margin() failed to delete:', e);
       if (is_quota_exceeded(e) && (delay !== 'end')) {
-        console.info('sleeping', delay, 'seconds before trying again');
         await sleep(delay * 1000);
       } else {
         return;
@@ -593,7 +538,6 @@ async function fetch_all_to_cache_parallel(cache) {
     }
   }
   if (e_null) throw null;
-  console.info(results);
 }
 async function fetch_all_to_cache(cache, id) {
   for (const url in upd_url_to_base64) {
@@ -609,7 +553,6 @@ async function fetch_all_to_cache(cache, id) {
         if (!stop_activity_flag) {
           stop_activity_flag = 'stop_threads';
         }
-        console.warn('stopping because of', e);
         throw e;
       }
     }
@@ -617,7 +560,6 @@ async function fetch_all_to_cache(cache, id) {
 }
 async function fetch_to_cache(cache, url, base64) {
   msg = 'Fetching ' + decodeURI(url)
-  console.info(msg)
   var response = await fetch_and_verify(url);
   await check_stop('update (before cache write)');
   await cache.put(base64, response);
@@ -628,7 +570,6 @@ async function fetch_and_verify(url) {
     try {
       var response = await fetch(url, {cache: "no-cache"});
     } catch (e) {
-      console.warn('fetch failed', e);
       err_status = 'Lost online connectivity.  Try again later.';
       throw null;
     }
@@ -660,7 +601,6 @@ async function fetch_and_verify(url) {
   }
 }
 async function record_urls() {
-  console.info('record_urls()');
   let obj = {key: 'data',
              url_to_base64: upd_url_to_base64,
              timestamp: upd_timestamp
@@ -678,12 +618,10 @@ function sleep(ms) {
 }
 async function check_stop(from) {
   if (stop_activity_flag) {
-    console.info(from + ' is now stopped');
     throw null;
   }
 }
 async function idle_delete_obs_files(del_all_flag) {
-  console.info('idle_delete_obs_files()');
   activity = 'delete';
   msg = 'Deleting obsolete offline files';
   try {
@@ -691,7 +629,6 @@ async function idle_delete_obs_files(del_all_flag) {
     await delete_obs_files(cache, del_all_flag);
   } catch (e) {
     if (e) {
-      console.error(e);
       err_status = e.name + '<br>Something went wrong.  Refresh and try again?';
       validate_flag = true;
     }
@@ -699,15 +636,11 @@ async function idle_delete_obs_files(del_all_flag) {
   activity = 'idle';
 }
 async function delete_obs_files(cache, del_all_flag) {
-  console.info('delete_obs_files()');
   if (del_all_flag) {
     var total = all_num_cached;
   } else {
     var total = obs_num_files;
   }
-  console.info('all_base64:', all_base64);
-  console.info('cur_base64:', cur_base64);
-  console.info('upd_base64_to_kb:', upd_base64_to_kb);
   try {
     var count = 0;
     for (const base64 in all_base64) {
@@ -731,9 +664,7 @@ async function delete_obs_files(cache, del_all_flag) {
         }
       }
     }
-    console.info('done with delete_obs_files()');
     if (obs_num_files) {
-      console.error('obs_num_files:', obs_num_files);
     }
     obs_num_files = 0;
     if (del_all_flag) {
@@ -743,10 +674,8 @@ async function delete_obs_files(cache, del_all_flag) {
     obs_num_files = 0;
     if (!e) {
     } else if (is_quota_exceeded(e)) {
-      console.error(e);
       err_status = 'The browser claims that we can&rsquo;t DELETE offline files because we&rsquo;re using too much space.  Yeah, really!  There&rsquo;s nothing more I can do.  You&rsquo;ll need to manually clear the site data from the browser.';
     } else {
-      console.error(e);
       err_status = e.name + '<br>Something went wrong.  Refresh and try again?';
     }
     throw null;

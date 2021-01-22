@@ -9,7 +9,8 @@ while len(sys.argv):
                         '-incomplete_keys',
                         '-no_error_limit',
                         '-not_top_usage',
-                        '-without_cache') or
+                        '-without_cache',
+                        '-debug') or
         sys.argv[0].startswith('-tree')):
         _arg_value[sys.argv.pop(0)] = True
     elif sys.argv[0] == '-db':
