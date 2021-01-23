@@ -4,7 +4,7 @@ taxon_id: 48460
 is_top
 list_hierarchy
 
-link_bayarea_inaturalist: family-below
+link_bayarea_inaturalist: self-below
 
 obs_requires_photo: genus-below
 flag_one_child: species

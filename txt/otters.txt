@@ -1,0 +1,6 @@
+==southern sea otter:Enhydra lutris ssp. nereis
+x:ca
+xx:ba
+
+==north american river otter:Lontra canadensis
+x:ca

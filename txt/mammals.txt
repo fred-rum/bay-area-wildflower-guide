@@ -1,35 +1,29 @@
 list_hierarchy
+member_link: self-genus
 
-A good list of bay area mammals is at <a href="https://sfbaywildlife.info/species/mammals.htm">sfbaywildlife.info</a>.
+My list of bay area mammals below includes all wild species that have been confirmed in iNaturalist within my range.  My list excludes mammals that never come onto land, i.e. the various cetaceans.
 
-==columbian black-tailed deer:Odocoileus hemionus ssp. columbianus
-x:ba
-xx:ba
-
-==tule elk:Cervus canadensis ssp. nannodes
-x:ca
-xx:ba
+==deer:family Cervidae
 
 ==wild boar:Sus scrofa
 x:ba
 . bay area wild pigs are believed to be a hybrid of introduced european boars (ssp. scrofa) and domestic pigs (ssp. domesticus)
 
-==canines:family Canidae
-
-==cats:family Felidae
+==carnivorans:order Carnivora
 
 ==hares and rabbits:family Leporidae
 
-==moles, shrews, and voles
-
 ==rodents:order Rodentia
 
-==common raccoon:Procyon lotor
+==moles, shrews, and voles
+
+==raccoons and allies:family Procyonidae
+
+==mustelids:family Mustelidae
+
+==virginia opossum:Didelphis virginiana
 x:ca
-<b>Caution: ID unsure.</b>
+
+==bats:order Chiroptera
 
 ==pinnipeds:parvorder Pinnipedia
-
-==southern sea otter:Enhydra lutris ssp. nereis
-x:ca
-xx:ba

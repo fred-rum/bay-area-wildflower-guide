@@ -1,0 +1,8 @@
+
+
+==common raccoon:Procyon lotor
+x:ca
+<b>Caution: ID unsure.</b>
+
+==ringtail:Bassariscus astutus
+x:ca

@@ -1,0 +1,7 @@
+==columbian black-tailed deer:Odocoileus hemionus ssp. columbianus
+x:ba
+xx:ba
+
+==tule elk:Cervus canadensis ssp. nannodes
+x:ca
+xx:ba

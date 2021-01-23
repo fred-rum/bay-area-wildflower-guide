@@ -1751,7 +1751,7 @@ class Page:
                     barename = elab.split(' ')[0]
                 barenameurl = url(barename)
                 query = f'taxon_name={barenameurl}'
-            species_maps.append(f'<a href="https://www.inaturalist.org/observations?nelat=38&nelng=-121.35&swlat=36.85&swlng=-122.8&{query}&view=species" target="_blank" rel="noopener noreferrer">iNaturalist</a>')
+            species_maps.append(f'<a href="https://www.inaturalist.org/observations?captive=false&nelat=38&nelng=-121.35&swlat=36.85&swlng=-122.8&{query}&view=species" target="_blank" rel="noopener noreferrer">iNaturalist</a>')
 
         if 'link_bayarea_calflora' in self.prop_set:
             elab = self.choose_elab(self.elab_calflora)

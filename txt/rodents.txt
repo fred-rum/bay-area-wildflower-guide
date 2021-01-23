@@ -10,3 +10,11 @@ x:ba
 x:ba
 
 ==california vole:Microtus californicus
+
+==mice and rats
+
+==muskrat:Ondatra zibethicus
+x:ca
+
+==american beaver:Castor canadensis
+x:ca

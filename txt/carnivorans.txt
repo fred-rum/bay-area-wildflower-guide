@@ -1,0 +1,9 @@
+==canines:family Canidae
+
+==cats:family Felidae
+
+==striped skunk:Mephitis mephitis
+x:ca
+
+==american black bear:Ursus americanus
+x:ca

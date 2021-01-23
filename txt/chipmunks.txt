@@ -1,7 +1,7 @@
 sci:Neotamias spp.
 x:ba
 
-Bay area chipmunks can be easily and completely distinguished by range.
+Within my definition of the bay area, chipmunks can be easily and completely distinguished by range.
 
 ==merriam's chipmunk:N. merriami
 . peninsula, south bay, and east bay

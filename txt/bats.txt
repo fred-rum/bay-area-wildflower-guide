@@ -1,0 +1,21 @@
+<a href="https://sfbaywildlife.info/species/mammals.htm">sfbaywildlife.info</a> lists more bat species in the bay area, but these are all the
+ones that have been observed in iNaturalist.
+
+==mexican free-tailed bat:Tadarida brasiliensis
+x:ca
+
+==hairy-tailed bats:Lasiurus spp.
+
+==silver-haired bat:Lasionycteris noctivagans
+x:ca
+
+==mouse-eared bats:Myotis spp.
+
+==big brown bat:Eptesicus fuscus
+x:ca
+
+==pallid bat:Antrozous pallidus
+x:ca
+
+==townsend's big-eared bat:Corynorhinus townsendii
+x:ca

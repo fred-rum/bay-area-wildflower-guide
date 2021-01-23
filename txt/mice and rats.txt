@@ -1,0 +1,19 @@
+sci:n/a
+
+list_hierarchy
+
+==old world mice and rats:family Muridae
+
+==dusky-footed woodrat:Neotoma fuscipes
+x:ba
+
+==narrow-faced kangaroo rat:Dipodomys venustus
+x:ba
+. a <a href="https://www.inaturalist.org/observations/91184">keystone species</a> in the sandhills of Henry Cowell State Park
+
+==north american deer mice:Peromyscus spp.
+
+==american harvest mice:Reithrodontomys spp.
+
+==california pocket mouse:Chaetodipus californicus
+x:ba
