@@ -1844,7 +1844,7 @@ var pages=[
 {page:"yellowray goldfields",sci:["Lasthenia glabrata"],x:"u"},
 {page:"plant glossary",com:["vascular plants"],x:"g",glossary:[
 {terms:["leaf","leaves","leaved"]},
-{terms:["blade","blades"]},
+{terms:["blade","blades","leaf blade","leaf blades"]},
 {terms:["petiole","petioles","petioled"]},
 {terms:["stipule","stipules"]},
 {terms:["leaflet","leaflets"]},

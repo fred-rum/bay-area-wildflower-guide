@@ -1,30 +1,40 @@
 sci:Symphyotrichum spp.
-x:!hist/rare
+x:hist/rare
 
+[
 ==pacific aster:S. chilense
 color: pale purple
 sci_p: Aster chilensis
 . stem hairy distally
-. outer phyllaries obtuse
+. outer phyllaries pale-margined > &frac12; length, length generally >= 3 &times; width, obtuse
 . disk flowers: yellow
 . ray flowers: 8--12 mm, violet
 . very common, especially in the Santa Cruz range
 
 ==douglas's aster:S. subspicatum
 . stem +- hairy distally
-. outer phyllaries +- acute
+. outer phyllaries pale-margined > &frac12; length, length generally >= 3 &times; width, +- acute
 . disk flowers: yellow
 . ray flowers: 8--16 mm, violet
 . very rare
+]
+[
+==S. lanceolatum var. hesperium
+. outer phyllaries pale-margined < &frac12; length, length generally < 3 &times; width
+. stem +- hairy in lines
+. inflorescence bracts well developed
+. ray flowers: 6--12 mm, +- white to violet
+. rare
 
+==S. lentum
+. outer phyllaries pale-margined < &frac12; length, length generally < 3 &times; width
+. stem +- glabrous
+. inflorescence bracts small
+. ray flowers: 8--14 mm, violet
+. rare
+]
 ==annual saltmarsh aster:S. subulatum
 . stem +- glabrous
 . disk flowers: yellow
 . ray flowers: <b>1.5--3 mm</b>, +- white to pink
-. rare
-
-==S. lanceolatum var. hesperium
-. rare
-
-==S. lentum
 . rare

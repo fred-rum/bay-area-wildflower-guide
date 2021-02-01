@@ -1057,3 +1057,6 @@ Reduce console logging from Javascript.
 
 Complete mammals (e.g. beaver, muskrat) and organize them (e.g. deer
 includes elk)
+
+Can "[show details]" be implemented with <details>?
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details
