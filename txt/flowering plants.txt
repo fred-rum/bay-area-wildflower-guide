@@ -9,6 +9,8 @@ link: self-subtribe
 # every observation is expected to find a page
 flag_obs_promotion_above_peers: self-below
 
+color_requires_photo: self-below
+
 # subset color list order: color, [optional name in membership list,] page name
 # The order of colors listed here determines the order of colors in a page's
 # membership list.

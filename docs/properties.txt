@@ -252,6 +252,12 @@ can be explicitly on that page or be incorporated by reference from a
 child page.  I.e. this property expects that if a taxon was observed,
 it should also have been photographed.
 
+'color_requires_photo' flags a page if it is assigned a color but does
+not have a photo.
+
+'photo_requires_color' flags a page if it is has a photo but has no
+assigned or propagated color.
+
 
 Properties to link to external sites:
 

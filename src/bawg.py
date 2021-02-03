@@ -175,12 +175,6 @@ for page in page_array[:]:
 if arg('-tree2'):
     print_trees()
 
-# Although other color checks are done later, we check for excess colors
-# here before propagating color to parent pages that might not have photos.
-for page in page_array:
-    if page.color and not page.jpg_list:
-        error(f'page {page.full()} has a color assigned but has no photos')
-
 # Find any genus with multiple species.
 # Check whether all of those species share an ancestor key page in common.
 # If not, print a warning.
@@ -487,6 +481,10 @@ for page in page_array:
     colors_not_used = ', '.join(page.color - page.colors_used)
     if colors_not_used:
         error(f'{page.full()} has no use for these colors: {colors_not_used}')
+
+    if 'photo_requires_color' in page.prop_set and page.jpg_list and not page.color:
+        error(f'photo_requires_color: page {page.full()} has photos but no assigned or propagated color')
+
 
 if arg('-tree7'):
     print_trees()

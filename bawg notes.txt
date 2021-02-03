@@ -1058,5 +1058,12 @@ Reduce console logging from Javascript.
 Complete mammals (e.g. beaver, muskrat) and organize them (e.g. deer
 includes elk)
 
-Can "[show details]" be implemented with <details>?
+Can "[show details]" be implemented with the <details> HTML tag?
 https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details
+
+'has a color assigned but has no photos' needs a corresponding
+property.
+
+Make a check that a page at a specified rank is present if it has descendents.
+I.e. if a page defaults to flowering plants, it must have a family.  E.g.
+require_rank: family

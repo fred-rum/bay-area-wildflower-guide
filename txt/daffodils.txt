@@ -1,0 +1,18 @@
+sci:Narcissus spp.
+x:ca
+family:Amaryllidaceae
+
+There may be other species of daffodils escaped and growing wild in
+the bay area, but these are the only ones recognized by Jepson.
+
+==bunch-flowered daffodil:N. tazetta
+color:yellow
+. inflorescence 3--15-flowered
+. perianth parts 1--2 cm
+. crown cup-shaped, << perianth parts
+. if the perianth and crown are both white, it might be N. papyraceus; Jepson seems unsure
+
+==wild daffodil:N. pseudonarcissus
+. inflorescence 1-flowered
+. perianth parts 2.5--3.5 cm
+. crown tubular, >= perianth parts

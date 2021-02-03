@@ -4,24 +4,29 @@ x:ba
 Key features:
 . stem leafy above base or with no more than tiny leaves
 . petal length (absolute or compared to phyllaries)
-. leaf petiole color
+. petiole color
 . growing in sand or not
 
 [
 <h2>medium-length petals</h2>
 
 ==coast range agoseris:A. hirsuta
-color: yellow
+color:yellow
+obs_requires_photo: none
+color_requires_photo: none
 . stem generally not leafy or obscurely leafy above base
 . ligule 6--16 mm, much exceeding involucre
-. <b>leaf petiole rarely purple</b>
+. <b>petiole rarely purple</b>
 . generally 5--7 pairs of leaf lobes
 . uncommon
 
 ==seaside agoseris:A. apargioides
+color:yellow
+obs_requires_photo: none
+color_requires_photo: none
 . stem generally not leafy or obscurely leafy above base
 . ligules 8--16 mm, much exceeding involucre
-. petiole +- purple
+. <b>petiole +- purple</b>
 . leaf is either entire or includes generally 3--5 pairs of leaf lobes
 . <b>coastal dunes and sand hills</b> [all others avoid sand]
 . uncommon
@@ -37,7 +42,7 @@ color: yellow
 xx:ca
 . stem generally not leafy or obscurely leafy above base
 . ligules 10--18 mm, much exceeding involucre
-. petiole not purple
+. <b>petiole not purple</b>
 . <b>leaves have no lobes</b> (but may have a few weak tooths)
 . very rare and out of range
 
