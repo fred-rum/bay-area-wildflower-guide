@@ -1,5 +1,7 @@
 ==mammals:class Mammalia
 end_hierarchy
 
+==birds:class Aves
+
 ==insects:class Insecta
 end_hierarchy

@@ -273,6 +273,12 @@ this type of link at the genus level and below.
 any page to which it is applied.  Jepson supports this type of link at
 the family level or at the genus level and below.
 
+'link_birds' creates a link to the corresponding taxon in
+AllAboutBirds from any page to which it is applied.  AllAboutBirds is
+indexed by common name, so the scientific name doesn't matter for this
+application, and only taxons with a common name (i.e. at the species
+level) can link to AllAboutBirds.
+
 'link_bayarea_calflora' creates a link from any page to which it is
 applied to a CalFlora map of bay area species within the corresponding
 genus (or higher-level taxon).  CalFlora supports this type of link at
