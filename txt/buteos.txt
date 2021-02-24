@@ -1,0 +1,15 @@
+==red-tailed hawk:Buteo jamaicensis
+
+==red-shouldered hawk:Buteo lineatus
+
+==ferruginous hawk:Buteo regalis
+. rare
+
+==broad-winged hawk:Buteo platypterus
+. very rare
+
+==swainson's hawk:Buteo swainsoni
+. very rare
+
+==rough-legged hawk:Buteo lagopus
+. very rare

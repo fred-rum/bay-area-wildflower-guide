@@ -1,3 +1,17 @@
+x:ca
+
+<a href="https://www.allaboutbirds.org/news/similar-species-crows-and-ravens/">crows vs. ravens at AllAboutBirds</a>
+
 ==common raven:Corvus corax
+. in flight:
+.. <b>tail more sharply angled toward the tip</b> ("diamond shaped")
+.. one short wing-tip feather followed by <b>4 long feather "fingers"</b>
+. "caw" with a bit of warble; may sometimes include some rattles
+. often in large social groups
 
 ==american crow:Corvus brachyrhynchos
+. in flight:
+.. <b>tail shallowly rounded</b>
+.. one short wing-tip feather followed by <b>5 long feather "fingers"</b>
+. "croak" with a strong warble, almost staccato
+. rarely in more than a pair of two

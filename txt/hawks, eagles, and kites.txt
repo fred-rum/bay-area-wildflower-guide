@@ -1,0 +1,17 @@
+==buteos:Buteo spp.
+x:ba
+
+==accipiters:Accipiter spp.
+x:ba
+
+==northern harrier:Circus hudsonius
+x:ca
+
+==bald eagle:Haliaeetus leucocephalus
+x:ca
+
+==golden eagle:Aquila chrysaetos
+x:ca
+
+==white-tailed kite:Elanus leucurus
+x:ca

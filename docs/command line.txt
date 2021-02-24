@@ -1,0 +1,29 @@
+From the project directory, run
+% src/bawg.py
+
+It can generally be run without arguments.
+The following arguments are supported to aid debugging:
+
+-db <name.
+  changes the directory for generated files from the default current
+  directory.
+
+-no_error_limit
+  tells the script to run to completion even if there are many errors.
+
+-jepson_usage
+  lists the most-used words that link to Jepson's glossary
+  rather than my own.
+
+-incomplete_keys
+  lists the most observed genuses that don't have a complete key.
+
+-without_cache
+  modifies the Javascript so that files are never stored or fetched in
+  the offline cache.
+
+-debug
+  retains console debug statements in the Javascript.
+
+-tree<n>
+  prints the Linnaean and real hierarchies after the Nth processing step.

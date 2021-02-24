@@ -1,0 +1,26 @@
+==great horned owl:Bubo virginianus
+x:ba
+
+==barn owl:Tyto alba
+x:ca
+
+==burrowing owl:Athene cunicularia
+x:ca
+
+==western screech-owl:Megascops kennicottii
+x:ca
+
+==spotted owl:Strix occidentalis
+x:ca
+
+==northern pygmy-owl:Glaucidium gnoma
+x:ca
+
+==northern saw-whet owl:Aegolius acadicus
+x:ca
+
+==long-eared owl:Asio otus
+x:ba
+
+==barred owl:Strix varia
+x:ba

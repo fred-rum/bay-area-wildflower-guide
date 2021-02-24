@@ -1,0 +1,9 @@
+==turkey vulture:Cathartes aura
+x:ca
+
+==black vulture:Coragyps atratus
+x:ca
+. very rare along the coast
+
+==california condor:Gymnogyps californianus
+x:ca

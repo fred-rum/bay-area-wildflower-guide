@@ -1,0 +1,13 @@
+sci:n/a
+
+==new world vultures:family Cathartidae
+
+==hawks, eagles, and kites:family Accipitridae
+
+==typical falcons:Falco spp.
+x:ba
+
+==osprey:Pandion haliaetus
+x:any
+
+==owls:order Strigiformes

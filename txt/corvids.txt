@@ -1,6 +1,10 @@
 ==crows and ravens:Corvus spp.
 
 ==california scrub-jay:Aphelocoma californica
+x:ba
 
 ==steller's jay:Cyanocitta stelleri
+x:ca
 
+==yellow-billed magpie:Pica nuttalli
+x:ba
