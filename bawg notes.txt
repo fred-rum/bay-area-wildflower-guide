@@ -1067,3 +1067,29 @@ property.
 Make a check that a page at a specified rank is present if it has descendents.
 I.e. if a page defaults to flowering plants, it must have a family.  E.g.
 require_rank: family
+
+
+Add a property, 'complete <value>: <taxon levels>' that describes how
+complete each taxon level is.  The property is ignored at the
+subspecies level ('below') since it makes no sense there.  <value> is
+any value supported by x or xx.  'x: <value>' is shorthand for
+'complete <value>: genus', and 'xx: <value>' is shorthand for
+'complete <value>: species'.  If x/xx is applied at a lower level, it
+must be promoted up to the appropriate level.  (And check for
+conflicts; this style is intended for use when there is only member of
+the higher level, so multiple assignments shouldn't happen, and
+indeed, there should be no other children).
+
+Do I want an additional value that triggers an error if it is not
+overridden, e.g. for plant genuses?  An additional value, 'unknown',
+cautions that there *may* be additional members in the bay area.  When
+the property isn't applied to a taxon, then no message is applied.  My
+tree should probably use 'complete unknown: self-genus'.
+
+How should I handle a taxon that is the only representative of its
+subspecies/species/genus/higher?  Perhaps 'There are no other wild
+members of this <highest common taxon level> in <region>.'
+E.g. 'There are no other wild members of this genus in the bay area.'
+
+Be sure to handle the case of 'self' applied to an unranked taxon,
+e.g. 'There are no other wild <common name> in <region>.'

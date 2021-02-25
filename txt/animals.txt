@@ -2,6 +2,7 @@
 end_hierarchy
 
 ==birds:class Aves
+end_hierarchy
 
 ==insects:class Insecta
 end_hierarchy
