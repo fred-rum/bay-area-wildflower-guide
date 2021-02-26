@@ -1093,3 +1093,9 @@ E.g. 'There are no other wild members of this genus in the bay area.'
 
 Be sure to handle the case of 'self' applied to an unranked taxon,
 e.g. 'There are no other wild <common name> in <region>.'
+
+
+I would probably like my Python more if I changed the standard indent
+to 2 spaces instead of 4.  In particular, that would make a
+continuation of 'if (' be indented differently than the following code
+block.

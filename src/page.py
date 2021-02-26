@@ -204,8 +204,12 @@ class Page:
 
         self.group = {} # taxonomic rank -> sci name or None if conflicting
 
-        self.prop_ranks = {} # property -> rank set
-        self.prop_set = set() # set of properties applied exactly to this page
+        # properties declared on this page
+        self.decl_prop_ranks = {} # declared property -> rank set
+        self.decl_prop_value = {} # declared property -> value
+
+        # properties applied to this page
+        self.prop_value = {} # applied property -> value
 
         self.is_top = False
 
@@ -354,11 +358,11 @@ class Page:
                     if (from_inat and
                         not self.created_from_inat and
                         not self.shadow and
-                        'flag_obs_fill_alt_com' in self.prop_set):
+                        'flag_obs_fill_alt_com' in self.prop_value):
                         error(f'flag_obs_fill_alt_com: {self.full()} has alternative name {com}')
                     elif (not from_inat or
                           self.created_from_inat or
-                          'obs_fill_alt_com' in self.prop_set):
+                          'obs_fill_alt_com' in self.prop_value):
                         # We're allowed to set the alternative common name
                         self.icom = com
                     else:
@@ -377,12 +381,12 @@ class Page:
         if (from_inat and
             not self.created_from_inat and
             not self.shadow and
-            'flag_obs_fill_com' in self.prop_set):
+            'flag_obs_fill_com' in self.prop_value):
             error(f'flag_obs_fill_com: {self.full()} can be filled by {com}')
             return
         elif (not from_inat or
               self.created_from_inat or
-              'obs_fill_com' in self.prop_set):
+              'obs_fill_com' in self.prop_value):
             # We're allowed to set the common name
             pass
         else:
@@ -530,11 +534,11 @@ class Page:
         if (from_inat and
             not self.created_from_inat and
             not self.shadow and
-            'flag_obs_fill_sci' in self.prop_set):
+            'flag_obs_fill_sci' in self.prop_value):
             error(f'flag_obs_fill_sci: {self.name} can be filled by {elab}')
         elif (not from_inat or
               self.created_from_inat or
-              'obs_fill_sci' in self.prop_set):
+              'obs_fill_sci' in self.prop_value):
             self.elab = elab
             self.elab_src = elab_src
             self.sci = sci
@@ -696,7 +700,14 @@ class Page:
             mod, rank = rank[0], rank[1:]
 
         if rank == 'self':
-            rank = self.rank
+            if self.rank:
+                rank = self.rank
+            elif mod:
+                fatal(f'{mod}self cannot be parsed in unranked page: {self.full()}')
+            else:
+                # Leave the 'self' string in place for the caller to handle
+                # or fail on.
+                return 'self'
         else:
             if rank not in Rank.__members__:
                 fatal(f'unrecognized rank "{rank}" used in {self.full()}')
@@ -735,36 +746,51 @@ class Page:
 
         def repl_property(matchobj):
             prop = matchobj.group(1)
+            prop_words = prop.split()
+            if len(prop_words) == 2:
+                prop = prop_words[0]
+                value = prop_words[1]
+            else:
+                value = True
+
             rank_range_list = split_strip(matchobj.group(2), ',')
+
             rank_set = set()
             for rank_range in rank_range_list:
                 if '-' in rank_range:
                     rank1, rank2 = split_strip(rank_range, '-')
 
                     # If used in a rank range, 'self' is translated into the
-                    # page's actual rank (which it had better have).
+                    # page's actual rank if possible.  But if the current
+                    # page is unranked, 'self' is left as 'self'.
                     rank1 = self.canonical_rank(rank1)
                     rank2 = self.canonical_rank(rank2)
 
-                    # The following loop is a bit odd because we don't bother
-                    # to figure out ahead of time whether rank1 or rank2 is
-                    # the higher rank.
+                    # rank1 can be larger or smaller than rank2.  Reorder it
+                    # here so that rank2 is the larger one.
+                    if rank1 == 'self' or rank1 > rank2:
+                        (rank1, rank2) = (rank2, rank1)
+
                     in_range = False
-                    for rank in Rank:
-                        # rank1 and rank2 are inclusive, so regardless of
-                        # whether we've entered or are leaving the range,
-                        # a match on either one is considered "in range".
-                        if in_range or rank in (rank1, rank2):
+                    for rank in Rank: # iterate from smallest to largest
+                        if rank == rank1:
+                            in_range = True
+
+                        if in_range:
                             rank_set.add(rank)
 
-                        # If the rank matches rank1 or rank2, flip in_range.
-                        # If it matches *both*, don't flip_in_range.
-                        # E.g. the range 'species-species' matches above
-                        # for 'species' but doesn't put us in_range.
-                        if rank == rank1:
-                            in_range = not in_range
                         if rank == rank2:
-                            in_range = not in_range
+                            in_range = False
+
+                    # if rank2 is 'self', then we never found the end of the
+                    # range.  This potentially includes a lot of upper ranks
+                    # that won't be applied because property application only
+                    # recurses through lower ranks, but that's OK and we'll
+                    # (mostly) get what we want.  But the rank set still
+                    # can't include the unranked current page, so we set its
+                    # property manually here.
+                    if rank2 == 'self':
+                        self.prop_value[prop] = value
                 else:
                     # Not a range, just a rank.
                     # For this case, 'self' is applied directly in case the
@@ -778,11 +804,15 @@ class Page:
                         # could override it with 'obs_requires_photo: none'.
                         pass
                     elif rank == 'self':
-                        self.prop_set.add(prop)
+                        self.prop_value[prop] = value
                     else:
                         rank_set.add(self.canonical_rank(rank))
-                        
-            self.prop_ranks[prop] = rank_set
+
+            # rank_set can be empty if the only listed ranks are 'none' or
+            # 'self'.  We record the rank_set whether it is populated or empty
+            # so that property propagation knows to stop at this level.
+            self.decl_prop_ranks[prop] = rank_set
+            self.decl_prop_value[prop] = value
 
         self.txt = re.sub(r'^is_top\s*?\n',
                           repl_is_top, self.txt, flags=re.MULTILINE)
@@ -790,7 +820,7 @@ class Page:
         self.txt = re.sub(r'^default_ancestor\s*?\n',
                           repl_default_ancestor, self.txt, flags=re.MULTILINE)
 
-        self.txt = re.sub(r'^(create|link|member_link|member_name|photo_requires_color|color_requires_photo|obs_requires_photo|flag_one_child|allow_obs_promotion|flag_obs_promotion|flag_obs_promotion_above_peers|flag_obs_promotion_without_x|allow_casual_obs|allow_outside_obs|allow_outside_obs_promotion|obs_fill_com|obs_fill_sci|obs_fill_alt_com|flag_obs_fill_com|flag_obs_fill_sci|flag_obs_fill_alt_com|link_calflora|link_calphotos|link_jepson|link_birds|link_bayarea_calflora|link_bayarea_inaturalist):\s*(.*?)\s*?\n',
+        self.txt = re.sub(r'^(create|link|member_link|member_name|photo_requires_color|color_requires_photo|obs_requires_photo|flag_one_child|allow_obs_promotion|flag_obs_promotion|flag_obs_promotion_above_peers|flag_obs_promotion_without_x|allow_casual_obs|allow_outside_obs|allow_outside_obs_promotion|obs_fill_com|obs_fill_sci|obs_fill_alt_com|flag_obs_fill_com|flag_obs_fill_sci|flag_obs_fill_alt_com|link_calflora|link_calphotos|link_jepson|link_birds|link_bayarea_calflora|link_bayarea_inaturalist|complete\s*(?:none|ba|ca|any|hist|rare|hist/rare|more|uncat)):\s*(.*?)\s*?\n',
                           repl_property, self.txt, flags=re.MULTILINE)
 
     def parse_glossary(self):
@@ -1156,7 +1186,7 @@ class Page:
             x = ' [repeat]'
         else:
             x = ''
-        for prop in sorted(self.prop_set):
+        for prop in sorted(self.prop_value):
             x += ' ' + prop
         print(f'{"  "*level}{link_type}{s}{self.name} ({r}){x}')
 
@@ -1230,13 +1260,15 @@ class Page:
                 lra.link_linn_child(self)
 
     def assign_props(self):
-        for prop, rank_set in self.prop_ranks.items():
-            self.propagate_prop(prop, rank_set)
+        for prop in self.decl_prop_ranks:
+            self.propagate_prop(prop,
+                                self.decl_prop_ranks[prop],
+                                self.decl_prop_value[prop])
 
-    def propagate_prop(self, prop, rank_set):
+    def propagate_prop(self, prop, rank_set, value):
         if self.rank:
             if self.rank in rank_set:
-                self.prop_set.add(prop)
+                self.prop_value[prop] = value
 
             # Recursively descend through Linnaean children.
             # There's no need to descend through 'real' children because
@@ -1244,8 +1276,8 @@ class Page:
             # in the Linnaean descendants.
             # Stop at any child that replaces the prop assignment.
             for child in self.linn_child:
-                if prop not in child.prop_ranks:
-                    child.propagate_prop(prop, rank_set)
+                if prop not in child.decl_prop_ranks:
+                    child.propagate_prop(prop, rank_set, value)
         else:
             # If a property is declared in an unranked page, then it cannot
             # have Linnaean children.  We push the properties down through
@@ -1253,8 +1285,8 @@ class Page:
             # the properties are applied to each of those Linnaean trees.
             # Stop at any child that replaces the prop assignment.
             for child in self.child:
-                if prop not in child.prop_ranks:
-                    child.propagate_prop(prop, rank_set)
+                if prop not in child.decl_prop_ranks:
+                    child.propagate_prop(prop, rank_set, value)
 
     # Check whether this page has 'check_ancestor' as a Linnaean ancestor.
     def has_linn_ancestor(self, check_ancestor):
@@ -1298,8 +1330,8 @@ class Page:
         page_array.append(self)
 
     def apply_prop_link(self):
-        if (('create' in self.prop_set and self.shadow) or
-            ('link' in self.prop_set and not self.shadow)):
+        if (('create' in self.prop_value and self.shadow) or
+            ('link' in self.prop_value and not self.shadow)):
             # Check for Linaean descendants that can potentially linked to
             # this parent.
             potential_link_set = set()
@@ -1309,12 +1341,14 @@ class Page:
                 if child not in self.child and not child.subset_of_page:
                     child.get_potential_link_set(potential_link_set, self)
 
-            if 'create' in self.prop_set and self.shadow and potential_link_set:
+            if ('create' in self.prop_value and
+                self.shadow and
+                potential_link_set):
                 self.promote_to_real()
                 self.non_txt_children = potential_link_set
                 for child in potential_link_set:
                     self.assign_child(child)
-            elif 'link' in self.prop_set and not self.shadow:
+            elif 'link' in self.prop_value and not self.shadow:
                 self.non_txt_children = potential_link_set
                 for child in potential_link_set:
                     self.assign_child(child)
@@ -1330,8 +1364,8 @@ class Page:
             child.assign_membership(ancestor)
 
     def apply_prop_member(self):
-        if (('member_link' in self.prop_set and not self.shadow) or
-            ('member_name' in self.prop_set and self.shadow)):
+        if (('member_link' in self.prop_value and not self.shadow) or
+            ('member_name' in self.prop_value and self.shadow)):
             for child in self.linn_child:
                 child.assign_membership(self)
 
@@ -1340,16 +1374,16 @@ class Page:
             # None of these checks apply to shadow pages.
             return
 
-        if ('obs_requires_photo' in self.prop_set and
+        if ('obs_requires_photo' in self.prop_value and
             self.count_flowers() and not self.get_jpg()):
             error(f'obs_requires_photo: {self.full()} is observed, but has no photos')
 
-        if 'flag_one_child' in self.prop_set and len(self.child) == 1:
+        if 'flag_one_child' in self.prop_value and len(self.child) == 1:
             error(f'flag_one_child: {self.full()} has exactly one child')
 
         # We check for excess colors before propagating color to
         # parent pages that might not have photos.
-        if ('color_requires_photo' in self.prop_set and
+        if ('color_requires_photo' in self.prop_value and
             self.color and not self.jpg_list):
             error(f'color_requires_photo: page {self.full()} has a color assigned but has no photos')
 
@@ -1684,7 +1718,7 @@ class Page:
             elab = format_elab(elab)
             add_link(elab, None, f'<a href="https://bugguide.net/node/view/{self.bugguide_id}" target="_blank" rel="noopener noreferrer">BugGuide</a>')
 
-        if 'link_calflora' in self.prop_set:
+        if 'link_calflora' in self.prop_value:
             # CalFlora can be searched by family,
             # but not by other high-level classifications.
             elab = self.choose_elab(self.elab_calflora)
@@ -1693,7 +1727,7 @@ class Page:
             elab = format_elab(elab)
             add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={sciurl}" target="_blank" rel="noopener noreferrer">CalFlora</a>');
 
-        if 'link_calphotos' in self.prop_set:
+        if 'link_calphotos' in self.prop_value:
             # CalPhotos cannot be searched by high-level classifications.
             # It can be searched by genus, but I don't find that at all useful.
             elab = self.choose_elab(self.elab_calphotos)
@@ -1717,7 +1751,7 @@ class Page:
             # rel-taxon=begins+with -> allows matches with lower-level detail
             add_link(elab, self.elab_calphotos, f'<a href="https://calphotos.berkeley.edu/cgi/img_query?rel-taxon=begins+with&where-taxon={sciurl}" target="_blank" rel="noopener noreferrer">CalPhotos</a>');
 
-        if 'link_jepson' in self.prop_set:
+        if 'link_jepson' in self.prop_value:
             # Jepson can be searched by family,
             # but not by other high-level classifications.
             elab = self.choose_elab(self.elab_jepson)
@@ -1728,7 +1762,7 @@ class Page:
             elab = format_elab(elab)
             add_link(elab, self.elab_jepson, f'<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sciurl}" target="_blank" rel="noopener noreferrer">Jepson&nbsp;eFlora</a>');
 
-        if 'link_birds' in self.prop_set and self.com:
+        if 'link_birds' in self.prop_value and self.com:
             # AllAboutBirds can only be searched by species name
             # and can only be directly linked by common name.
             elab = format_elab(self.elab)
@@ -1757,7 +1791,7 @@ class Page:
 
         species_maps = []
 
-        if 'link_bayarea_inaturalist' in self.prop_set:
+        if 'link_bayarea_inaturalist' in self.prop_value:
             if self.taxon_id and self.rank and self.rank >= Rank.genus:
                 query = f'taxon_id={self.taxon_id}'
             else:
@@ -1773,7 +1807,7 @@ class Page:
                 query = f'taxon_name={barenameurl}'
             species_maps.append(f'<a href="https://www.inaturalist.org/observations?captive=false&nelat=38&nelng=-121.35&swlat=36.85&swlng=-122.8&{query}&view=species" target="_blank" rel="noopener noreferrer">iNaturalist</a>')
 
-        if 'link_bayarea_calflora' in self.prop_set:
+        if 'link_bayarea_calflora' in self.prop_value:
             elab = self.choose_elab(self.elab_calflora)
             # srch=t -> search
             # taxon={name} -> scientific name to filter for (genus or below)
