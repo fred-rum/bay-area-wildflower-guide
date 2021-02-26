@@ -2034,15 +2034,22 @@ class Page:
                 (self.rank is Rank.species and self.species_complete not in ('hist', 'rare', 'hist/rare', 'more', 'uncat')))
 
     def write_html(self):
-        def write_complete(w, complete, key_incomplete, is_top, top, members):
+        def write_complete(w, complete, key_incomplete, is_top, top):
+            if top == 'genus':
+                members = 'species'
+            else:
+                members = 'members'
+
             if is_top:
                 w.write('<p>')
+
                 if (self.child or
                     (top == 'genus' and self.rank is not Rank.genus) or
                     (top == 'species' and self.rank is not Rank.species)):
                     other = ' other'
                 else:
                     other = ''
+
                 if complete is None:
                     if top == 'genus':
                         w.write(f'<b>Caution: There may be{other} wild {members} of this {top} not yet included in this guide.</b>')
@@ -2140,15 +2147,29 @@ class Page:
 
             w.write(self.write_parents())
 
+            # Write the completeness of the taxon.  This could come from
+            # the 'complete' property or the 'x' or 'xx' flags.
+
+            if ('complete' in self.prop_value and
+                not self.genus_complete and
+                not self.species_complete):
+                if self.rank:
+                    rank_name = self.rank.name
+                else:
+                    rank_name = 'group'
+                write_complete(w,
+                               self.prop_value['complete'], False,
+                               True, rank_name);
+
             is_top_of_genus = self.is_top_of(Rank.genus)
             is_top_of_species = self.is_top_of(Rank.species)
 
             write_complete(w,
                            self.genus_complete, self.genus_key_incomplete,
-                           is_top_of_genus, 'genus', 'species')
+                           is_top_of_genus, 'genus')
             write_complete(w,
                            self.species_complete, self.species_key_incomplete,
-                           is_top_of_species, 'species', 'members')
+                           is_top_of_species, 'species')
 
             w.write('<hr>\n')
 

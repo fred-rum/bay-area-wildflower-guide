@@ -1,3 +1,5 @@
+complete ca: self->genus
+
 ==turkey vulture:Cathartes aura
 x:ca
 
@@ -6,4 +8,4 @@ x:ca
 . very rare along the coast
 
 ==california condor:Gymnogyps californianus
-x:ca
+x:any

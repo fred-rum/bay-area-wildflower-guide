@@ -1076,15 +1076,19 @@ any value supported by x or xx.  'x: <value>' is shorthand for
 'complete <value>: genus', and 'xx: <value>' is shorthand for
 'complete <value>: species'.  If x/xx is applied at a lower level, it
 must be promoted up to the appropriate level.  (And check for
-conflicts; this style is intended for use when there is only member of
-the higher level, so multiple assignments shouldn't happen, and
-indeed, there should be no other children).
+conflicts; this style is intended for use when there is only one
+member of the higher level, so multiple assignments shouldn't happen,
+and indeed, there should be no other children).
 
-Do I want an additional value that triggers an error if it is not
+Do I want an additional value that triggers a caution if it is not
 overridden, e.g. for plant genuses?  An additional value, 'unknown',
 cautions that there *may* be additional members in the bay area.  When
 the property isn't applied to a taxon, then no message is applied.  My
-tree should probably use 'complete unknown: self-genus'.
+tree should probably use 'complete unknown: self-genus'.  But I
+wouldn't be able to apply this value at the top level without it being
+dropped by lower overrides, even if the ranges don't overlap.  So
+perhaps it should be a separate property, e.g. 'complete_caution:
+genus'.
 
 How should I handle a taxon that is the only representative of its
 subspecies/species/genus/higher?  Perhaps 'There are no other wild

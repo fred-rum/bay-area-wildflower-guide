@@ -168,8 +168,7 @@ Each can also be used at a lower taxon level when there are no other
 members of the genus/species.  For this reason, both x and xx can
 potentially be used on the same page.
 
-The following [txt] values can be usd for x: or xx:
-none - taxon has no subspecies or variants
+The following [txt] values can be used for x: or xx:
 ba - there are no other taxon members in the bay area
 ca - there are no other taxon members in California
 any - there are no other taxon members anywhere
@@ -179,7 +178,9 @@ hist/rare - historical and extremely rare taxon members are ignored
 more - there are additional taxon members that need to be documented
 ![txt] - the key to distinguish the taxon members is not complete
 
-xx:uncat - species has subspecies or variants not worth categorizing
+The following [txt] values can be usd only for xx:
+none - taxon has no subspecies or variants
+uncat - species has subspecies or variants not worth categorizing
   (e.g. because the common ones don't have common names)
 
 If the completeness is left unspecified for a genus, it acts as
