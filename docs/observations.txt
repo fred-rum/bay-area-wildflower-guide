@@ -4,15 +4,23 @@ https://www.inaturalist.org/observations/export
 Fill in the form as follows:
 Taxon: [unrestricted so that ferns, etc. are included]
 User: chris_nelson
-Basic: id, observed_on, quality_grade
-Geo: place_guess, private_place_guess
-Taxon: scientific_name, common_name, taxon_id
+Basic:
+  id
+  observed_on
+  quality_grade
+  captive_cultivated (although the script doesn't use it yet)
+Geo:
+  place_guess
+  private_place_guess
+Taxon:
+  scientific_name
+  common_name
+  taxon_id
 Taxon Extras:
-  taxon_kingdom_name (for the top-level classification)
-  taxon_phylum_name (to recognize vascular plants [Jepson's coverage])
-  taxon_subphylum_name (to recognize flowering plants)
-  taxon_family_name (to group flowers by family)
-Observation Fields: none
+  taxon_kingdom_name -through- taxon_subtribe_name
+  (genus and lower names can be derived from the species/subspecies name)
+Observation Fields:
+  none
 
 If the private_place_guess is supplied, it is more precise and so is
 used instead of the place_guess.  See parks_format.txt for how the
@@ -24,6 +32,6 @@ one name manually entered.  If the scientific name is known, but the
 common name differs from what the txt files have, it is recorded as an
 alternative common name.
 
-The taxon_family_name is used to automatically assign a family to all
-observed species so that I don't have to enter it manually.  See also
-family names.txt.
+The various higher-level taxon names are used to construct a Linnaean
+tree which is mostly used for properties.  See properties.txt for
+details.

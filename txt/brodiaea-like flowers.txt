@@ -1,5 +1,19 @@
 sci:subfamily Brodiaeoideae
 
+==blue dicks:Dipterostemon capitatus
+color: purple
+sci_fp:Dichelostemma capitatum
+x:any
+xx:more
+. perianth blue, blue-purple, pink-purple, or white
+. staminodes erect, <b>leaning toward anthers, outward at tip, +- white</b>
+. perianth tube <b>not narrowed</b> above ovary
+. perianth parts generally wider than ookow
+. bracts generally dark purple (paler, striped dark purple)
+. inflorescence has few--many flowers, but I've seen no clusters greater than hemispheric.
+. <b>flowers from February--May</b>
+. common throughout the bay area
+
 ==wild hyacinths:Dichelostemma spp.
 . dense inflorescence with short pedicels
 

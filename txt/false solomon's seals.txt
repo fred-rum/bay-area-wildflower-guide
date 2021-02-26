@@ -17,6 +17,7 @@ color: white
 . <b>fruit tan with red speckles</b>
 . <b>&gt; 5 leaves</b>, 7--20 cm, ovate to oblong-elliptic; <b>petioles +- 0</b>
 . common
+. Jepson doesn't recognize subspecies, but eFlora does; a key can be found in the <a href="http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=242101759">eFlora</a>
 
 ==star-flowered lily-of-the-valley:M. stellatum
 color: white

@@ -239,7 +239,9 @@ def read_obs_chains():
                 # Linnaean links accordingly.
                 for rank in Rank:
                     group = get_field(f'taxon_{rank.name}_name')
-                    if group == orig_sci:
+                    if rank.name in ('species', 'genus'):
+                        pass
+                    elif group == orig_sci:
                         # If the same scientific name appears in the taxon
                         # chain, then that gives us its rank.  Presumably
                         # this occurs at the lowest rank found, so we're

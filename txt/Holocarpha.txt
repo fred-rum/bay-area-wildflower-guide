@@ -2,6 +2,7 @@ sci:Holocarpha spp.
 x:ba
 ==pit-gland tarweed:H. virgata
 color: yellow
+xx:uncat
 . anthers +- red to dark purple
 . ray flowers 3--8; disk flowers 9--25+
 . uncommon in the east bay
