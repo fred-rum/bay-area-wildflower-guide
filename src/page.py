@@ -695,15 +695,9 @@ class Page:
                           repl_asci, self.txt, flags=re.MULTILINE)
 
     def canonical_rank(self, rank):
-        mod = None
-        if rank.startswith(('<', '>')):
-            mod, rank = rank[0], rank[1:]
-
         if rank == 'self':
             if self.rank:
-                rank = self.rank
-            elif mod:
-                fatal(f'{mod}self cannot be parsed in unranked page: {self.full()}')
+                return self.rank
             else:
                 # Leave the 'self' string in place for the caller to handle
                 # or fail on.
@@ -711,25 +705,7 @@ class Page:
         else:
             if rank not in Rank.__members__:
                 fatal(f'unrecognized rank "{rank}" used in {self.full()}')
-            rank = Rank[rank]
-
-        if mod == '<':
-            for i in Rank:
-                if i.value == rank.value - 1:
-                    print(f'switching from {rank} to {i}')
-                    rank = i
-                    break
-            else:
-                error(f'unrecognized rank "<{rank}" used in {self.full()}')
-        elif mod == '>':
-            for i in Rank:
-                if i.value == rank.value + 1:
-                    rank = i
-                    break
-            else:
-                error(f'unrecognized rank ">{rank}" used in {self.full()}')
-
-        return rank
+            return Rank[rank]
 
     def parse_properties(self):
         def repl_is_top(matchobj):
