@@ -1,3 +1,5 @@
+complete ca: self-/genus
+
 ==bobcat:Lynx rufus
 x: ca
 

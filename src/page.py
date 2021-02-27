@@ -758,7 +758,10 @@ class Page:
             rank_set = set()
             for rank_range in rank_range_list:
                 if '-' in rank_range:
-                    rank1, rank2 = split_strip(rank_range, '-')
+                    matchobj = re.match(r'(.*?)(/?)-(/?)(.*)', rank_range)
+                    (rank1, rank1_excl,
+                     rank2_excl, rank2) = (matchobj.group(1), matchobj.group(2),
+                                           matchobj.group(3), matchobj.group(4))
 
                     # If used in a rank range, 'self' is translated into the
                     # page's actual rank if possible.  But if the current
@@ -770,26 +773,34 @@ class Page:
                     # here so that rank2 is the larger one.
                     if rank1 == 'self' or rank1 > rank2:
                         (rank1, rank2) = (rank2, rank1)
+                        (rank1_excl, rank2_excl) = (rank2_excl, rank1_excl)
 
                     in_range = False
-                    for rank in Rank: # iterate from smallest to largest
-                        if rank == rank1:
-                            in_range = True
-
-                        if in_range:
-                            rank_set.add(rank)
-
+                    for rank in Rank: # iterate ranks from smallest to largest
+                        # Calculate in_range as exclusive.
                         if rank == rank2:
                             in_range = False
+
+                        # Include the current rank if it is within the
+                        # exclusive range or if it matches a non-exclusive
+                        # range boundary.
+                        if (in_range or
+                            (rank == rank1 and not rank1_excl) or
+                            (rank == rank2 and not rank2_excl)):
+                            rank_set.add(rank)
+
+                        # Calculate in_range as exclusive.
+                        if rank == rank1:
+                            in_range = True
 
                     # if rank2 is 'self', then we never found the end of the
                     # range.  This potentially includes a lot of upper ranks
                     # that won't be applied because property application only
                     # recurses through lower ranks, but that's OK and we'll
                     # (mostly) get what we want.  But the rank set still
-                    # can't include the unranked current page, so we set its
+                    # won't include the unranked current page, so we set its
                     # property manually here.
-                    if rank2 == 'self':
+                    if rank2 == 'self' and not rank2_excl:
                         self.prop_value[prop] = value
                 else:
                     # Not a range, just a rank.

@@ -1,3 +1,5 @@
+complete ca: self-/genus
+
 ==old world rats:Rattus spp.
 
 ==house mouse:Mus musculus

@@ -71,6 +71,11 @@ The ranks to which a property applies can be a range
 (e.g. superfamily-subfamily, genus).  I always order a range and/or
 list with the highest taxon first, but the script accepts any order.
 
+A range can include a slash '/' before and/or after the dash in order
+to exclude the corresponding end of the range.  E.g. self-/genus is a
+range from the current page down to (but not including) the genus
+level.
+
 Rank 'self' applies the property to the page itself, and it is the
 only way to apply a property to a page without a Linnaean rank.  This
 is the only way to apply properties to an unranked page.  If an
@@ -80,11 +85,6 @@ page.
 
 Rank 'self' can be used as the upper end of a range of taxons, even
 from an unranked page.
-
-Any rank can be prepended with '>' to use the next higher rank or '<'
-to use the next lower rank (e.g. when you can't remember what's just
-below 'tribe').  This method doesn't work for 'self' in an unranked
-page.
 
 If the same property is declared at multiple levels of a Linnaean
 hierarchy, the declaration at the lower rank takes precedence for its

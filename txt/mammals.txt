@@ -1,7 +1,8 @@
 list_hierarchy
 member_link: self-genus
+complete ba: self-/genus
 
-My list of bay area mammals below includes all wild species that have been confirmed in iNaturalist within my range.  My list excludes mammals that never come onto land, i.e. the various cetaceans.
+Note that the range of this Guide excludes mammals that never come onto land, i.e. the various cetaceans.
 
 ==deer:family Cervidae
 
