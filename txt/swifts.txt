@@ -1,0 +1,9 @@
+==white-throated swift:Aeronautes saxatalis
+x:ca
+
+==vaux's swift:Chaetura vauxi
+x:ba
+
+==black swift:Cypseloides niger
+x:ca
+. very rare

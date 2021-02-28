@@ -1,0 +1,8 @@
+sci:Selasphorus spp.
+x:ba
+
+==allen's hummingbird:S. sasin
+
+==rufous hummingbird:S. rufus
+
+==calliope hummingbird:S. calliope

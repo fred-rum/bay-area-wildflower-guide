@@ -1,0 +1,10 @@
+sci:Calypte spp.
+x:any
+
+==anna's hummingbird:Calypte anna
+. scarlet none#throat
+. by far the most common hummingbird in the bay area
+
+==costa's hummingbird:Calypte costae
+. purple none#throat
+. very rare in the bay area

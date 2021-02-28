@@ -1,0 +1,11 @@
+complete ba: self-/genus
+
+==anna's and costa's hummingbirds:Calypte spp.
+
+==rufous, allen's, and allied hummingbirds:Selasphorus spp.
+
+==black-chinned hummingbird:Archilochus alexandri
+x:rare
+
+==broad-billed hummingbird:Cynanthus latirostris
+x:ca

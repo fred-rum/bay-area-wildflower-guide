@@ -1070,19 +1070,17 @@ require_rank: family
 
 
 Add a property to specify the default completeness of a taxon,
-e.g. 'complete_default caution: genus'.  A 'caution' is the same as
-'unknown', but in bold text.
+e.g. 'default_x caution: genus'.  A 'caution' is the same as
+'unknown', but in bold text.  'fatal', 'error', and 'warning' and the
+usual x/xx values are also permitted.  I'd want to assign multiple
+values to propagate down to different levels; fortunately I think the
+way the code works now, that will work as long as they're all declared
+at the same level.  Possibly they need to be recorded in a list
+instead of a dict.
 
-How should I handle a taxon that is the only representative of its
-subspecies/species/genus/higher?  Perhaps 'There are no other wild
-members of this <highest common taxon level> in <region>.'
-E.g. 'There are no other wild members of this genus in the bay area.'
+Use 'x' to declare the completeness of the current page and get rid of
+the propagating 'complete' property.  'x' is easier to type, and I
+generally review each taxon level anyway.
 
 It would be nice to include the unranked moths in the property range
 from insects.  But perhaps overly difficult.
-
-
-I would probably like my Python more if I changed the standard indent
-to 2 spaces instead of 4.  In particular, that would make a
-continuation of 'if (' be indented differently than the following code
-block.

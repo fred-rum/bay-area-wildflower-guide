@@ -3,3 +3,7 @@ link_birds: species-below
 ==raptors
 
 ==corvids:family Corvidae
+
+==landfowl:order Galliformes
+
+==nightjars, swifts, hummingbirds, and allies:order Caprimulgiformes
