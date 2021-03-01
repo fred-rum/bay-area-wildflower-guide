@@ -1,5 +1,5 @@
 sci:n/a
-complete ba: self-/genus
+x:ba
 
 ==new world vultures:family Cathartidae
 

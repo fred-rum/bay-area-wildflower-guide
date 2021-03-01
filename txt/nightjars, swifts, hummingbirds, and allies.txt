@@ -1,4 +1,4 @@
-complete rare: self-/genus
+x:rare
 
 ==hummingbirds:family Trochilidae
 

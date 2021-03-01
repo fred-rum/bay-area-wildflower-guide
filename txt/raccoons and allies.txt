@@ -1,4 +1,4 @@
-complete ca: self-/genus
+x:ca
 
 ==common raccoon:Procyon lotor
 x:ca

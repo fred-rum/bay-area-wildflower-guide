@@ -1,8 +1,8 @@
-complete ca: self-/genus
+x:ca
 
 ==bobcat:Lynx rufus
-x: ca
+x:ca
 
 ==north american mountain lion:Puma concolor ssp. couguar
-x: any
-xx: ca
+x:any
+xx:ca

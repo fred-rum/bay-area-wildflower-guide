@@ -1,4 +1,4 @@
-complete ca: self-/genus
+x:ca
 
 ==true seals:family Phocidae
 

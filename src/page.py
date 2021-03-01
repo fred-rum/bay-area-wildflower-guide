@@ -145,6 +145,44 @@ def format_elab(elab, ital=True):
             elab = re.sub(r' var\. ', f'{i1} var. {i0}', elab)
             return elab
 
+def looser_complete(one, two):
+    if one == None:
+        return None
+    elif one == 'more':
+        if two is None:
+            return two # two is looser
+
+        else:
+            return one # one is looser or equally loose
+    elif one == 'hist/rare':
+        if two in (None, 'more'):
+            return two
+        else:
+            return one
+    elif one in ('hist', 'rare'):
+        if two in (None, 'more', 'hist/rare'):
+            return two
+        elif two in ('hist', 'rare') and two != one:
+            return 'hist/rare' # special case
+        else:
+            return one
+    elif one == 'ba':
+        if two in (None, 'more', 'hist/rare', 'hist', 'rare'):
+            return two
+        else:
+            return one
+    elif one == 'ca':
+        if two in (None, 'more', 'hist/rare', 'hist', 'rare', 'ba'):
+            return two
+        else:
+            return one
+    elif one == 'any':
+        if two in (None, 'more', 'hist/rare', 'hist', 'rare', 'ba', 'ca'):
+            return two
+        else:
+            return one
+
+
 ###############################################################################
 
 class Page:
@@ -1175,7 +1213,7 @@ class Page:
             x = ''
         for prop in sorted(self.prop_value):
             x += ' ' + prop
-        print(f'{"  "*level}{link_type}{s}{self.name} ({r}){x}')
+        print(f'{"  "*level}{link_type}{s}{filename(self.name)} ({r}){x}')
 
         if self in exclude_set:
             return
@@ -2020,6 +2058,55 @@ class Page:
         return ((self.rank is Rank.genus and self.genus_complete not in ('hist', 'rare', 'hist/rare', 'more')) or
                 (self.rank is Rank.species and self.species_complete not in ('hist', 'rare', 'hist/rare', 'more', 'uncat')))
 
+    def lower_complete(self):
+        if self.genus_complete:
+            return self.genus_complete
+        elif self.child:
+            # Use the loosest constraint among children.
+            complete = 'any' # start with a tight constraint, then loosen it
+            for child in self.child:
+                child_complete = child.lower_complete()
+                complete = looser_complete(complete, child_complete)
+            return complete
+        else:
+            # No completeness constraint specified
+            return None
+
+    def ancestor_matches_complete(self, complete):
+        if self.genus_complete == complete:
+            return True
+
+        for parent in self.parent:
+            if parent.ancestor_matches_complete(complete):
+                return True
+
+        # No ancestor matched
+        return False
+
+    # Find the loosest child constraint, then look to see if
+    # that matches any parent constraint.  If so, use it.
+    #
+    # Note that parent constraints ought to be at least as loose.  If
+    # a parent is looser, then it's not clear whether this page should
+    # also be similarly loose, so we leave it as unknown.
+    #
+    # The child and parent searches both include the page itself,
+    # so if the page has genus_complete set, then it is directly used.
+    def get_complete(self):
+        complete = self.lower_complete()
+
+        if self.name == 'canines':
+            print(f'(canines - children = {complete}')
+
+        if not complete:
+            # early exit for efficiency
+            return None
+
+        if self.ancestor_matches_complete(complete):
+            return complete
+        else:
+            return None
+
     def write_html(self):
         def write_complete(w, complete, key_incomplete, is_top, top):
             if top == 'genus':
@@ -2149,11 +2236,22 @@ class Page:
                                True, rank_name);
 
             is_top_of_genus = self.is_top_of(Rank.genus)
+
+            complete = self.get_complete()
+
+            if complete or is_top_of_genus:
+                if is_top_of_genus:
+                    rank_name = 'genus'
+                elif self.rank:
+                    rank_name = self.rank.name
+                else:
+                    rank_name = 'group'
+                write_complete(w,
+                               complete, self.genus_key_incomplete,
+                               True, rank_name)
+
             is_top_of_species = self.is_top_of(Rank.species)
 
-            write_complete(w,
-                           self.genus_complete, self.genus_key_incomplete,
-                           is_top_of_genus, 'genus')
             write_complete(w,
                            self.species_complete, self.species_key_incomplete,
                            is_top_of_species, 'species')

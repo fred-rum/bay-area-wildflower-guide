@@ -1,4 +1,4 @@
-complete ca: self-/genus
+x:ca
 
 ==turkey vulture:Cathartes aura
 x:ca
