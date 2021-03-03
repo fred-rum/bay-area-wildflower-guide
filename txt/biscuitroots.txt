@@ -15,6 +15,7 @@ Key features:
 ==woollyfruit desertparsley:L. dasycarpum
 color: yellow
 . plant generally with a definite stem; cauline leaves 0 or like basal
+. petals tomentose
 . [possibly little or no sheathing on cauline leaf petioles, but CalPhotos doesn't show them one way or another]
 . leaf segments 2--6 mm, generally linear
 . pedicels 5--20 mm
@@ -23,7 +24,8 @@ color: yellow
 
 ==foothill desert-parsley:L. utriculatum
 color: yellow
-. plant generally with a definite stem, stem leaves generally >= 2
+. plant generally with a definite stem, stem +- leafy
+. petals +- glabrous
 . cauline leaf petioles conspicuously sheathing throughout (<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=6121+1611+3984+0073">example</a>)
 . leaf segments 2--25 mm, generally linear
 . cauline leaf petioles conspicuously sheathing throughout
@@ -31,7 +33,7 @@ color: yellow
 . corolla yellow, occasionally white in age
 . common
 
-==bigseed biscuitfruit:L. macrocarpum
+==bigseed biscuitroot:L. macrocarpum
 . plant generally with a definite stem, stem leaves generally >= 2
 . leaf segments 1--7 mm, linear to oblong
 . corolla white, cream or +- purple

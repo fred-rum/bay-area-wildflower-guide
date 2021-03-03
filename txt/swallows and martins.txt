@@ -1,0 +1,5 @@
+==barn swallow:Hirundo rustica
+
+==cliff swallow:Petrochelidon pyrrhonota
+
+==violet-green swallow:Tachycineta thalassina

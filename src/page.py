@@ -2095,9 +2095,6 @@ class Page:
     def get_complete(self):
         complete = self.lower_complete()
 
-        if self.name == 'canines':
-            print(f'(canines - children = {complete}')
-
         if not complete:
             # early exit for efficiency
             return None

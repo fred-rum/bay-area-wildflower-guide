@@ -1,0 +1,27 @@
+list_hierarchy
+
+==thrushes:family Turdidae
+
+==tyrant flycatchers:family Tyrannidae
+
+==new world blackbirds and orioles:family Icteridae
+
+==new world sparrows:family Passerellidae
+
+==chestnut backed chickadee:Poecile rufescens
+
+==european starling:Sturnus vulgaris
+
+==horned lark:Eremophila alpestris
+
+==finches, euphonias, and allies:family Fringillidae
+
+==northern mockingbird:Mimus polyglottos
+
+==ruby-crowned kinglet:Regulus calendula
+
+==new world warblers:family Parulidae
+
+==swallows and martins:family Hirundinidae
+
+==white-breasted nuthatch:Sitta carolinensis
