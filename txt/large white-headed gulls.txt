@@ -1,0 +1,31 @@
+sci:Larus spp.
+x:more
+
+==heermann's gull:Larus heermanni
+. <b>red bill</b>
+. dark eye
+. black legs and feet
+. <b>light gray belly</b>
+
+[
+==western gull:Larus occidentalis
+. yellow bill with red spot near lower tip
+. dark eye
+. <b>pink legs and feet</b>
+. white belly
+. heavier bill than california gull
+
+==california gull:Larus californicus
+<b>Caution: ID unsure</b>
+. yellow bill with red spot near lower tip
+. dark eye
+. cream/gray legs and feet
+. white belly
+. lighter bill than western gull
+
+==ring-billed gull:Larus delawarensis
+. yellow bill with <b>black ring near both tips</b>
+. <b>pale eye</b>
+. yellow legs and feet
+. white belly
+]

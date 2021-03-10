@@ -1,5 +1,10 @@
+x:more
+
 ==orange-crowned warbler:Leiothlypis celata
+x:more
 
 ==wilson's warbler:Cardellina pusilla
+x:rare
 
 ==yellow-rumped warbler:Setophaga coronata
+x:more

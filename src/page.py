@@ -2138,9 +2138,13 @@ class Page:
                         w.write("This species has subspecies or variants that don't seem worth distinguishing.")
                 elif complete == 'more':
                     if top == 'genus':
-                        w.write(f'<b>Caution: There are{other} wild {members} of this {top} not yet included in this guide.</b>')
+                        caution = 'Caution: '
                     else:
-                        w.write(f'This {top} has wild {members}, but they are not yet included in this guide.')
+                        caution = ''
+                    if 'other':
+                        w.write(f'<b>{caution}There are other wild {members} of this {top} not yet included in this guide.</b>')
+                    else:
+                        w.write(f'<b>{caution}This {top} has wild {members}, but they are not yet included in this guide.</b>')
                 else:
                     prolog = f'There are no{other}'
                     if complete == 'hist':

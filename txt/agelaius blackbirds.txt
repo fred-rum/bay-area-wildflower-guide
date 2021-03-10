@@ -1,0 +1,7 @@
+x:ca
+
+<a href="https://www.allaboutbirds.org/guide/Tricolored_Blackbird/species-compare/63744371">Compare</a> red-winged blackbird to tricolored blackbird.
+
+==red-winged blackbird:Agelaius phoeniceus
+
+==tricolored blackbird:Agelaius tricolor

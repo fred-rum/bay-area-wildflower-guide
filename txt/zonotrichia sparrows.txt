@@ -1,0 +1,5 @@
+x:more
+
+==golden-crowned sparrow:Zonotrichia atricapilla
+
+==white-crowned sparrow:Zonotrichia leucophrys

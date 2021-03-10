@@ -1,0 +1,17 @@
+==canada goose:Branta canadensis
+x:more
+
+==northern shoveler:Spatula clypeata
+x:more
+
+==common goldeneye:Bucephala clangula
+x:more
+
+==mallard:Anas platyrhynchos
+x:more
+
+==ring-necked duck:Aythya collaris
+x:more
+
+==ruddy duck:Oxyura jamaicensis
+x:ca

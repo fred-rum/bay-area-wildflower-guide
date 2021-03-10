@@ -1,5 +1,14 @@
-==western bluebird:Sialia mexicana
+x:ba
+
+==bluebirds:Sialia spp.
 
 ==american robin:Turdus migratorius
+x:ba
 
 ==brown thrushes and nightingale thrushes:Catharus spp.
+
+==varied thrush:Ixoreus naevius
+x:ca
+
+==townsend's solitaire:Myadestes townsendi
+x:ca

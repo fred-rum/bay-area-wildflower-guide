@@ -1,0 +1,13 @@
+sci:n/a
+x:more
+
+==american coot:Fulica americana
+x:ca
+
+==pelicans, herons, and allies:order Pelecaniformes
+
+==shorebirds and allies:order Charadriiformes
+
+==typical cormorants and shags:Phalacrocorax spp.
+
+==ducks, geese, and swans:family Anatidae

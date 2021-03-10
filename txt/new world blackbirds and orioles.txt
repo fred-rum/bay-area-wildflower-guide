@@ -1,5 +1,9 @@
-==red-winged blackbird:Agelaius phoeniceus
+x:more
+
+==agelaius blackbirds:Agelaius spp.
 
 ==bullock's oriole:Icterus bullockii
+x:more
 
 ==western meadowlark:Sturnella neglecta
+x:ca

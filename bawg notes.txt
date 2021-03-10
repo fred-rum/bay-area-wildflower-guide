@@ -1098,3 +1098,5 @@ tight it should be for this page.  Perhaps a property to flag it.)
 
 When printing trees, should a real child that is also a distant
 Linnaean descendent should be handled differently?
+
+the first photo in a [] box is not vertically inset properly

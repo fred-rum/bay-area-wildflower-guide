@@ -1,15 +1,21 @@
+x:more
+
 ==california towhee:Melozone crissalis
+x:more
 
 ==spotted towhee:Pipilo maculatus
+x:more
 
 ==dark-eyed junco:Junco hyemalis
+x:ca
 
-==golden-crowned sparrow:Zonotrichia atricapilla
+==zonotrichia sparrows:Zonotrichia spp.
 
 ==lark sparrow:Chondestes grammacus
+x:any
 
 ==rufous-crowned sparrow:Aimophila ruficeps
+x:ca
 
 ==savannah sparrow:Passerculus sandwichensis
-
-==white-crowned sparrow:Zonotrichia leucophrys
+x:any
