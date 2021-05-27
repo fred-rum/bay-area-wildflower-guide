@@ -1,0 +1,20 @@
+sci:Packera spp.
+x:ba
+
+Jepson doesn't describe well how to distinguish these.
+
+==brewer's ragwort:P. breweri
+. generally 1 stem
+. glabrous or sparsely hairy when young
+. 15--50+ heads
+. green phyllary tips
+. phyllaries glabrous
+
+==widehead groundsel:P. eurycephala var. eurycephala
+. 1 or several clustered stems
+. glabrous or densely tomentose
+. 5--30+ heads
+. phyllary tips sometimes yellow
+. phyllaries densely tomentose proximally (not reliably shown in in CalPhotos)
+
+Although iNaturalist has a few observations of other species in the bay area, none of them are research grade.

@@ -1,0 +1,17 @@
+sci:Micranthes spp.
+family:saxifrage family
+x:hist/rare
+
+==california saxifrage:M. californica
+. <b>leaf blade shallowly toothed</b>
+. inflorescence +- open, often 1-sided
+. flowers not clustered to loosely clustered
+. anthers purple to red (rarely orange)
+. petal length +- 2 &times; sepals
+
+==wholeleaf saxifrage:M. integrifolia
+. <b>leaf blade +- entire to minutely toothed</b>
+. inflorescence never 1-sided
+. flowers loosely to densely clustered
+. anthers generally yellow to orange
+. petal lengths < 1.7 &times; sepals

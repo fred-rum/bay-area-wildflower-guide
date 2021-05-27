@@ -4,8 +4,7 @@ x:more
 ==northern shoveler:Spatula clypeata
 x:more
 
-==common goldeneye:Bucephala clangula
-x:more
+==goldeneyes and bufflehead:Bucephala spp.
 
 ==mallard:Anas platyrhynchos
 x:more
@@ -15,3 +14,6 @@ x:more
 
 ==ruddy duck:Oxyura jamaicensis
 x:ca
+
+==common merganser:Mergus merganser
+x:more

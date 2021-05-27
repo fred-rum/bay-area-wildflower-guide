@@ -1,0 +1,11 @@
+sci:Bucephala
+x:any
+
+==common goldeneye:B. clangula
+
+==bufflehead:B. albeola
+
+==barrow's goldeneye:B. islandica
+. rare
+
+Hybrids can also occur between species in this genus.

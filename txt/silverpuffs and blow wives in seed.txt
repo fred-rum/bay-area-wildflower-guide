@@ -16,7 +16,7 @@ parachute-like pappus to catch the wind.
 There is only one species of blow wives in the bay area.
 
 ==blow wives:Achyrachaena mollis
-color: other
+color: other, yellow
 x:any
 . each pappus element has only a flat scale with no bristle
 

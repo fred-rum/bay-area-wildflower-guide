@@ -1,0 +1,11 @@
+sci:Tropidocarpum spp.
+family:mustard family
+x:ba
+
+==dobie pod:T. gracile
+. fruit narrowly linear, 3--6 cm long, 1.5--2 mm wide
+. very rare
+
+==caper-fruited tropidocarpum:T. capparideum
+. fruit oblong, 1--2 cm long, 4--5 mm wide
+. exceptionally rare, possibly historical

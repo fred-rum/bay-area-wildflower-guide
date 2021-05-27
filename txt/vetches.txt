@@ -31,6 +31,8 @@ Key features:
 
 ==hairy vetch:V. villosa
 . flowers not spaced, generally on 1 side of axis
+. <b>flower attached on one side of the base</b>
+. calyx lower lobes >> upper lobes
 . inflorescence generally > subtending leaf, generally 10--25-flowered
 . leaflets 12--18, 1--2.5 cm, narrowly oblong to elliptic, tip rounded, 1-toothed
 . corolla blue-purple or lavender to white
@@ -45,6 +47,8 @@ color: red purple
 ==american vetch:V. americana
 color: pink, pale purple
 . flowers 3--9, generally spaced, on > 1 side of axis
+. <b>flower attached in line with the base</b>
+. calyx lower lobes > upper lobes
 . plant is hairy or glabrous
 . leaflets 8--16, 1--3.5 cm, widely elliptic, wedge-shaped, to narrowly oblong, tip acute, truncate, notched, or 1--5-toothed
 . corolla 15--25 mm, generally blue-purple to lavender
