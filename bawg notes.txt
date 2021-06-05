@@ -1109,3 +1109,9 @@ should flower color pages be prioritized in the glossary?
 
 why is orange-crowned warbler higher priority than orange flowers,
   which is higher than orange bush monkeyflower?
+
+It'd be nice to support multiple genuses (or other groupings) on the same
+  page (e.g. the genuses for blue dicks and ookows) and have a search for
+  either genus return the same page.
+
+Translate *text* on one line to <b>text</b>.

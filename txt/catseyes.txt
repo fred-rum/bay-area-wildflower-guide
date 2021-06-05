@@ -1,0 +1,77 @@
+sci:Cryptantha spp.
+x:!rare
+
+Catseyes and the related {-popcorn flowers} are difficult to distinguish between and among each other except by minute features of their nutlets.  Nutlets may be found within the older (proximal) calyxes while younger flowers bloom above.
+
+Key features:
+. stem erect, decumbent, or prostrate
+. lower cauline leaves alternate or opposite (upper cauline leaves may differ)
+. basal leaves present, withered, or gone
+. color of abaxial leaf midveins and margins, staining or not
+. number and position of bracts
+. inflorescence strongly coiled toward tip or not
+. petal diameter (of the roundish, spreading portion of an individual petal beyond the corolla throat); earlier (proximal) flowers tend to be larger and later (distal) flowers smaller
+. color of raised corolla appendages (at the junction of corolla limbs where petals merge)
+. calyx length, hair color, base fleshy, lobe shape, lobes bent or straight [generally upward], lobe midvein stout or slender
+. pedicel length, thick & hollow or slender and solid
+
+Unlike for {-popcorn flowers}, Jepson doesn't say that the appendages fade to white after pollination, but that doesn't mean it doesn't happen.
+
+Species are ordered here from most to least common.
+
+==flaccid cryptantha:C. flaccida
+. petal diameter 1--5 mm
+. corolla appendages +- yellow
+. 1 nutlet, +- smooth
+
+==cleveland's cryptantha:C. clevelandii
+xx: more
+. characteristics differ by subspecies
+. petal diameter 1--5 mm
+. appendages yellow or pale yellow
+. 1-4 nutlets
+
+==tejon cryptantha:C. microstachys
+. petal diameter 0.5--1.5 mm
+. corolla appendages tiny, +- white
+. 1 nutlet, smooth
+
+==pointed cryptantha:C. muricata
+xx:more
+. characteristics differ by subspecies
+. petal diameter 1.5--8 mm
+. corolla appendages yellow to white
+. 3--4 nutlets
+
+==beach cryptantha:C. leiocarpa
+. petal diameter 1--2.5 mm
+. corolla appendages pale yellow
+. 4 nutlets, smooth
+
+==torrey's cryptantha:C. torreyana
+. petal diameter 1--2
+. corolla appendages minute and white or none
+. 3--4 nutlets, smooth
+
+==gravel cryptantha:C. decipiens
+sci_fp: C. rattanii
+. petal diameter 1--1.5 mm
+. no corolla appendages
+. 1 nutlet, fine-grainy, +- white-papillate
+. very rare in the diablo range
+
+==nevada catseye:C. nevadensis
+. characteristics differ by subspecies
+. petal diamter 1--5 mm
+. corolla appendages pale yellow or tiny and white
+. 3--4 nutlets
+. very rare in the east bay
+
+==clearwater cryptantha:C. intermedia
+xx:more
+. characteristics differ by subspecies; bay-area subspecies not known
+. petal diameter 3--8 mm
+. corolla appendages +- yellow
+. 1--4 nutlets
+. very rare in the diablo range
+

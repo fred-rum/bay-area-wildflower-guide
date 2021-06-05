@@ -111,7 +111,7 @@ color: purple
 ==miniature lupine:L. bicolor
 color: purple
 . habit: Annual (may live 2 seasons in NCo), 1--4 dm, hairy
-. leaf: petiole 1--7 cm; leaflets 5--7, 10--40 mm, 1--5 mm wide, occasionally linear, adaxially generally +- glabrous
+. leaf: petiole 1--7 cm; leaflets 5--7, 10--40 mm, 1--5 mm wide, occasionally linear, <b>adaxially generally +- glabrous</b>
 . inflorescence: 1--8 cm, <b>flowers in (0)5 whorls</b>; peduncle 3--10 cm; <b>pedicels 1--3.5 mm</b>; bract 4--6 mm
 . flower: 4--10 mm; calyx upper lip 2--4 mm, deeply lobed, lower 4--6 mm; petals generally blue (light blue, pink, or white), <b>banner longer than wide</b>, spot white, in age magenta
 . <b>keel +- white, generally pointed, upper margins generally ciliate near tip</b>
@@ -144,7 +144,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0518+0859
 ==sky lupine:L. nanus
 color: blue
 . habit: Annual 1--6 dm, hairy
-. leaf: petiole 2--8.5 cm; leaflets 5--9, generally 7, 10--40 mm, 1--12 mm wide, occasionally linear
+. leaf: petiole 2--8.5 cm; leaflets 5--9, generally 7, 10--40 mm, 1--12 mm wide, occasionally linear, <b>adaxially hairy</b>
 . inflorescence: 2--20 cm, <b>flowers generally whorled</b>; peduncle 2--15 cm; <b>pedicels 2.5--7 mm</b>; bract 4--12 mm
 . flower: 6--15 mm; calyx 4--8 mm, lips +- equal, upper deeply lobed; petals blue (light blue), lavender, pink, or white, <b>banner as wide or wider than long</b>, spot white
 . <b>keel upper margins without tooth, ciliate near tip, lower glabrous</b>

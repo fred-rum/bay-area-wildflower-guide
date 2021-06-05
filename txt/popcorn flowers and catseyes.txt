@@ -1,0 +1,14 @@
+sci:n/a
+
+These genuses are difficult to distinguish between and among each other except by minute features of their nutlets.  Nutlets may be found within the older (proximal) calyxes while younger flowers bloom above.
+
+==popcorn flowers
+
+==catseyes
+
+==pygmyflower cryptantha:Johnstonella micromeres
+sci_jfp:Cryptantha micromeres
+. <b>petal diameter +- 0.5 mm</b>
+. no corolla appendages
+. 4 nutlets, 0.7--1 mm, tubercled (sometimes with one larger than the others and smooth)
+

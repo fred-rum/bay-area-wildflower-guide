@@ -1,7 +1,7 @@
 sci:Plagiobothrys spp.
 x:!hist/rare
 
-There are dozens of popcorn flowers in the bay area, and Jepson's key often uses nutlet characters to distinguish them.  I'll definitely need the NRDB's help for identification, plus as many features as I can observe.
+Popcorn flowers and the related {-catseyes} are difficult to distinguish between and among each other except by minute features of their nutlets.  Nutlets may be found within the older (proximal) calyxes while younger flowers bloom above.
 
 Key features:
 . stem erect, decumbent, or prostrate
@@ -10,13 +10,12 @@ Key features:
 . color of abaxial leaf midveins and margins, staining or not
 . number and position of bracts
 . inflorescence strongly coiled toward tip or not
-. petal diameter*
+. petal diameter (of the roundish, spreading portion of an individual petal beyond the corolla throat); earlier (proximal) flowers tend to be larger and later (distal) flowers smaller
+. color of raised corolla appendages (at the junction of corolla limbs where petals merge)
 . calyx length, hair color, base fleshy, lobe shape, lobes bent or straight [generally upward], lobe midvein stout or slender
 . pedicel length, thick & hollow or slender and solid
 
-(*) "Corolla limb diameter" means the diameter of the roundish, spreading portion of an individual petal beyond the corolla throat.
-
-Jepson mentions "appendages yellow" for some flowers, but hidden away in an unabridged note says "Yellow corolla appendages and [...] yellow corolla centers change to white after successful pollination."
+Jepson mentions "appendages yellow" for some flowers, but a genus note says "Yellow corolla appendages and [...] yellow corolla centers change to white after successful pollination."
 
 ==rusty popcornflower:P. nothofulvus
 color: white

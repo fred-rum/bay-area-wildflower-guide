@@ -42,7 +42,8 @@ for the given name.
 The canonical scientific name is the one used by iNaturalist, but
 other sites may be out of date or have made a different choice.  In
 that case, different scientic names can be specified for the various
-sites where it differs from the iNaturalist name:
+sites where it differs from the iNaturalist name.  See sci_i and the
+related specifications below.
 
 More information can be applied to the page or to a child page as
 described below.
