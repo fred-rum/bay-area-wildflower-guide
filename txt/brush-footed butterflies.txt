@@ -11,8 +11,7 @@ bug:192
 ==california sister:Adelpha californica
 bug:13494
 
-==common buckeye: Junonia coenia
-xx: uncat # I *think* that all CA coenia are grisea; waiting for confirmation
+==gray buckeye: Junonia grisea
 bug:516
 
 ==california ringlet:Coenonympha tullia ssp. california
