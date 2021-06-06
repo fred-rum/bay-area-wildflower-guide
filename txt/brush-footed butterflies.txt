@@ -15,7 +15,9 @@ bug:13494
 bug:516
 
 ==california ringlet:Coenonympha tullia ssp. california
+xx:ba
 bug:364463
+. Per <a href="https://butterfly.ucdavis.edu/taxonomy/coenonympha">Art Shapiro</a> and the iNaturalist range maps, this is the only central California subspecies west of the Sierras.
 
 ==california tortoiseshell:Nymphalis californica
 bug:27454
