@@ -4,6 +4,7 @@ x:ba
 Jepson doesn't describe well how to distinguish these.
 
 ==brewer's ragwort:P. breweri
+color: yellow
 . generally 1 stem
 . glabrous or sparsely hairy when young
 . 15--50+ heads

@@ -7,6 +7,8 @@ x:more
 
 ==perching birds:order Passeriformes
 
+==pigeons and doves:family Columbidae
+
 ==woodpeckers:family Picidae
 
 ==nightjars, swifts, hummingbirds, and allies:order Caprimulgiformes

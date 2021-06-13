@@ -12,8 +12,7 @@ Key features:
 
 ==coast range agoseris:A. hirsuta
 color:yellow
-obs_requires_photo: none
-color_requires_photo: none
+<b>Caution: ID unsure</b>
 . stem generally not leafy or obscurely leafy above base
 . ligule 6--16 mm, much exceeding involucre
 . <b>petiole rarely purple</b>
@@ -22,8 +21,7 @@ color_requires_photo: none
 
 ==seaside agoseris:A. apargioides
 color:yellow
-obs_requires_photo: none
-color_requires_photo: none
+<b>Caution: ID unsure</b>
 . stem generally not leafy or obscurely leafy above base
 . ligules 8--16 mm, much exceeding involucre
 . <b>petiole +- purple</b>
@@ -32,6 +30,7 @@ color_requires_photo: none
 . uncommon
 
 ==spearleaf agoseris:A. retrorsa
+<b>Caution: ID unsure</b>
 . stem generally not leafy or obscurely leafy above base
 . ligule 6--15 mm, exceeding (equaling) involucre
 . <b>petiole +- purple</b>

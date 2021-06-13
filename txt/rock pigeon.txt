@@ -1,0 +1,8 @@
+sci:Columbia livia
+xx:more
+flag_one_child: none
+
+Wild-type rock pigeons aren't usually pinned to a particular subspecies in iNaturalist, but are simply labeled as {-rock pigeon}.
+
+==feral pigeon:C. livia var. domestica
+. generally distinguished when they are a solid color (by human breeding)
