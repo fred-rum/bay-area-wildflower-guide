@@ -76,10 +76,19 @@ the same page.  On a wide page, the key text appears next to the image
 and below the name; on a narrow page, the key text appears below the
 image and name.
 
+--
+Page or child information:
+
 The following info can be included as part of the key for a child.  If
-it appears elsewhere in the txt file (not in the paragraph following a
-child link; typically at the top of the file), the info is applied to
-the page itself.
+it appears in the paragraph following a child link, the information is
+applied to the child.  If it appears elsewhere in the txt file
+(typically at the top of the file), the info is applied to the page
+itself.
+
+
+There are a number of properties that can be applied to designated
+taxonomic ranks in the Linnaean hierarchy.  Details about these
+properties are in properties.txt.
 
 
 If different sites disagree on the scientific name for a species, I
@@ -101,13 +110,6 @@ into one declaration, e.g. "sci_jfp:<name>".
 
 If the name is "n/a", it indicates that the taxon is not listed under
 any name at a site.
-
---
-Other information:
-
-There are a number of properties that can be applied to designated
-taxonomic ranks in the Linnaean hierarchy.  Details about these
-properties are in properties.txt.
 
 
 A page can declare that a full hierarchy of its descendants should be
@@ -142,7 +144,9 @@ taxonomy) as follows:
 
 <rank>: <name>
 
-The named page does not need to exist, and it will not be
+The name can be a common name or scientific name.  For a scientific
+name, the rank does not need to be repeated.  If a scientific name is
+given, the named page does not need to exist, and it will not be
 automatically created.  However, the Linnaean relationship can come in
 handy for the properties described below.  Multiple Linnaean ancestors
 can be declared at different ranks from the same page.
@@ -164,10 +168,21 @@ Member of blue, pale blue in flowering plants
 
 
 The completeness of the guide is indicated with x:[txt] or xx:[txt].
-x: specifies the completeness of a genus, and xx: is for a species.
-Each can also be used at a lower taxon level when there are no other
-members of the genus/species.  For this reason, both x and xx can
-potentially be used on the same page.
+
+'x:' specifies that all species under the current page are as complete
+as indicated by the [txt].  This is most often used at the genus
+level, but it can also be used at higher levels.  When a genus
+includes only a single (local) species, 'x:' can be used in the
+species page to indicate that the genus is complete without needing a
+separate genus page.  When a genus includes only a single subspecies
+or variant, 'x:' can be used in that lower-level page along with 'xx:'
+(described below).
+
+'xx:' specifies the completeness of all potential members of the
+current species.  This can only be used at the species level or below.
+When a species includes only a single (local) subspecies/variant,
+'xx:' can be used in the lower-level page to indicate that the species
+is complete without needing a separate species page.
 
 The following [txt] values can be used for x: or xx:
 ba - there are no other taxon members in the bay area
@@ -188,6 +203,16 @@ If the completeness is left unspecified for a genus, it acts as
 x:more.  If the completeness is left unspecified for a species, then
 no completeness information is put on the species page.  (Completeness
 of the members of a species is not a priority.)
+
+If 'x:' is specified in a page higher than the genus level, then it
+cannot specify a tighter completeness than is specified by a lower
+page.  E.g. if a genus has 'x: ca', then its family can have 'x: ca'
+or 'x: ba' but not 'x: any'.  If a page does not have 'x:' specified,
+but an ancestor has 'x:' specified with the same [txt] as at least one
+descendant, then that completness is also applied to the current page.
+If all descendents are specified differently, however, then rather
+than guess how tightly to specify the completeness of the current
+page, it is left unspecified.
 
 
 https://calphotos.berkeley.edu/[...]
@@ -229,8 +254,9 @@ suffix is optional in the txt.
 directory.  The '.svg' suffix is optional in the txt.
 
 '[' and ']' (each on a line by itself) creates a light-bordered box
-surrounding all text between the brackets.  Useful for organizing
-subsets of children on a page.
+surrounding all text between the brackets.  These are useful for
+organizing subsets of children on a page.  Therefore, use of '[' or
+']' implicitly ends processing of key info from a previous child link.
 
 Any number of periods starting a line creates an unnumbered list.  The
 depth of the list is equal to the number of periods.

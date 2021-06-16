@@ -250,15 +250,6 @@ and the page is never promoted to real.
 'flag_obs_fill_sci'
 
 
-Properties to describe whether all members of a taxon are present:
-
-'complete [txt]' indicates the completeness of the guide info for the
-specified taxon ranks.  While most properties are either applied or
-not applied to pages, this property specifically applies the [txt]
-value to the specified pages.  The [txt] value is as per the x: and
-xx: flags documented in txt.txt.
-
-
 Properties to ensure that page info is complete:
 
 'obs_requires_photo' flags an observation if the page to which it is

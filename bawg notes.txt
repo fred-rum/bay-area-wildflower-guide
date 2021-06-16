@@ -1086,18 +1086,8 @@ It would be nice to include the unranked moths in the property range
 from insects.  But perhaps overly difficult.
 
 
-For a particular page, if all children have x:<whatever> (or a looser
-restriction), I can't necessarily apply the same to the current page
-because there may be other taxons that could be under this page, but
-aren't listed (yet).  But if an ancestor of this page *also* has
-x:<whatever>, then I can apply it to the current page.  (If the
-ancestor has a loose restriction, I could potentially use it, but I
-think it's better to leave it blank and let the user figure out how
-tight it should be for this page.  Perhaps a property to flag it.)
-
-
 When printing trees, should a real child that is also a distant
-Linnaean descendent should be handled differently?
+Linnaean descendent be handled differently?
 
 the first photo in a [] box is not vertically inset properly
 
