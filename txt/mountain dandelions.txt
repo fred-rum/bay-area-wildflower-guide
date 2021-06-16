@@ -30,6 +30,7 @@ color:yellow
 . uncommon
 
 ==spearleaf agoseris:A. retrorsa
+color: yellow
 <b>Caution: ID unsure</b>
 . stem generally not leafy or obscurely leafy above base
 . ligule 6--15 mm, exceeding (equaling) involucre

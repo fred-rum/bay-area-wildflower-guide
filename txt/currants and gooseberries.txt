@@ -13,6 +13,7 @@ Key features:
 <a href="https://montereywildflowers.com/grossulariaceae-gooseberries/">Monterey County Wildflowers</a> appears to be more accurate and useful than Jepson.
 
 ==fuchsiaflower gooseberry:R. speciosum
+color: red
 . spines at nodes
 . internodes bristly
 . <b>four sepals</b>

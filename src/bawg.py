@@ -220,34 +220,41 @@ def read_obs_chains():
 
             page = find_page2(com, sci, from_inat=True)
 
-            if not page:
-                page = Page(com, sci, shadow=True, from_inat=True)
-
             try:
-                # Promote a subspecies to a species and a species to a genus,
-                # creating Linnaean links accordingly.
-                while ' ' in sci:
-                    sci_words = sci.split(' ')
-                    sci = ' '.join(sci_words[:-1])
-                    if ' ' in sci:
-                        rank = Rank.species
-                    else:
-                        rank = Rank.genus
-                    page = page.add_linn_parent(rank, sci, from_inat=True)
-
                 # Read the taxonomic chain from observations.csv and create
                 # Linnaean links accordingly.
                 for rank in Rank:
                     group = get_field(f'taxon_{rank.name}_name')
-                    if rank.name in ('species', 'genus'):
-                        pass
-                    elif group == orig_sci:
-                        # If the same scientific name appears in the taxon
-                        # chain, then that gives us its rank.  Presumably
-                        # this occurs at the lowest rank found, so we're
-                        # still pointing at the original taxon page.
-                        page.set_sci(f'{rank.name} {sci}')
-                    elif group: # ignore an empty group string
+                    if not group:
+                        # ignore an empty group string
+                        continue
+
+                    if not page:
+                        # Figure out the taxon's rank and create a page for it.
+
+                        if not page and ' ' in sci:
+                            # If the scientific name has at least one space,
+                            # then we can infer its rank directly from its name.
+                            pass
+                        elif group == orig_sci:
+                            # If the first name in the taxonomic chain matches
+                            # the observed taxon name, then it directly tells
+                            # us the taxon rank.
+                            if rank is Rank.genus:
+                                sci = f'{sci} spp.'
+                            else:
+                                sci = f'{rank.name} {sci}'
+                        else:
+                            # If the first name in the taxonomic chain doesn't
+                            # match the observed taxon name, then the observed
+                            # taxon must be an unrecognized rank.  On the
+                            # assumption that the observation will get promoted
+                            # to a higher-level taxon, we just fudge it here
+                            # by pretending it's the lowest rank.
+                            sci = f'below {sci}'
+
+                        page = Page(com, sci, shadow=True, from_inat=True)
+                    if group != orig_sci:
                         page = page.add_linn_parent(rank, group, from_inat=True)
             except FatalError:
                 warning(f'was creating taxonomic chain from {page.full()}')
@@ -425,19 +432,25 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
             # if doesn't have real Linnaean descendants, and the
             # promoted page does, then it's definitely something we
             # haven't documented.
-            if ('flag_obs_promotion_above_peers' in page.prop_value and
-                not orig_page.has_real_linnaean_descendants() and
-                page.has_real_linnaean_descendants()):
-                error(f'flag_obs_promotion_above_peers: {orig_sci} observation promoted to {page.full()}')
-                continue
+            if orig_page.rank_unknown:
+                # If an observation has an unknown rank, then we *always*
+                # promote it without complaint.
+                pass
 
-            if ('flag_obs_promotion_without_x' in page.prop_value and
-                page.taxon_unknown_completion()):
-                error(f'flag_obs_promotion_without_x: {orig_sci} observation promoted to {page.full()}')
-                continue
+            else:
+                if ('flag_obs_promotion_above_peers' in page.prop_value and
+                    not orig_page.has_real_linnaean_descendants() and
+                    page.has_real_linnaean_descendants()):
+                    error(f'flag_obs_promotion_above_peers: {orig_sci} observation promoted to {page.full()}')
+                    continue
 
-            if 'allow_obs_promotion' not in page.prop_value:
-                continue
+                if ('flag_obs_promotion_without_x' in page.prop_value and
+                    page.taxon_unknown_completion()):
+                    error(f'flag_obs_promotion_without_x: {orig_sci} observation promoted to {page.full()}')
+                    continue
+
+                if 'allow_obs_promotion' not in page.prop_value:
+                    continue
 
         page.obs_n += 1
         if rg == 'research':

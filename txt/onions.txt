@@ -60,7 +60,8 @@ Not true for any others.
 
 The Jepson key for these uses bulb characteristics.  TBD.
 
-==naples onion:A. neapolitanum
+==naples garlic:A. neapolitanum
+color: white
 . leaf 2--3, <= stem, flat
 . infloresence not +- 1-sided
 . pedicels 15--35 mm
@@ -80,7 +81,6 @@ color: white
 . more common
 
 ==oneleaf onion:A. unifolium
-color: white, pink, pale purple
 . leaf 2--3, < stem, widely channeled or +- flat, <b>keeled</b>
 . pedicels 15--40 mm
 . flowers 11-15 mm

@@ -20,6 +20,7 @@ Unlike for {-popcorn flowers}, Jepson doesn't say that the appendages fade to wh
 Species are ordered here from most to least common.
 
 ==flaccid cryptantha:C. flaccida
+color: white
 . petal diameter 1--5 mm
 . corolla appendages +- yellow
 . 1 nutlet, +- smooth

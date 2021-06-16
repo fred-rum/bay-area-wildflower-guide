@@ -228,6 +228,7 @@ class Page:
         self.elab = None
         self.elab_src = None
         self.rank = None
+        self.rank_unknown = False
 
         # Call set_sci() first since it should never have a name conflict.
         # Then call set_com(), which uses the common name as the page name
@@ -557,6 +558,11 @@ class Page:
         if elab[0].islower():
             if elab_words[0] in Rank.__members__:
                 self.rank = Rank[elab_words[0]]
+
+                if elab_words[0] == 'below':
+                    # A special case that only occurs when observations.csv
+                    # uses an unknown rank.
+                    self.rank_unknown = True
             else:
                 error(f'Unrecognized rank for {elab}')
                 self.rank = None

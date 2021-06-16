@@ -3,6 +3,7 @@ family:saxifrage family
 x:hist/rare
 
 ==california saxifrage:M. californica
+color: white
 . <b>leaf blade shallowly toothed</b>
 . inflorescence +- open, often 1-sided
 . flowers not clustered to loosely clustered

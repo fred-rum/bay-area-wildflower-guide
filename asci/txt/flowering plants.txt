@@ -1,5 +1,0 @@
-sci:subphylum Angiospermae
-is_top
-default_ancestor
-create: family
-link: self-below

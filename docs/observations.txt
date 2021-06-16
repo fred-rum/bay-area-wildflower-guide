@@ -17,8 +17,10 @@ Taxon:
   common_name
   taxon_id
 Taxon Extras:
-  taxon_kingdom_name -through- taxon_subtribe_name
-  (genus and lower names can be derived from the species/subspecies name)
+  taxon_kingdom_name -through- taxon_genus_name
+  taxon_species_name
+  (genus and species names can usually be derived from the species/subspecies
+    name, but if the observation rank is something like 'subgenus'.)
 Observation Fields:
   none
 

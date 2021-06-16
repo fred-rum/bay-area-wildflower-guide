@@ -199,12 +199,12 @@ that potentially requires a real page for every taxonomic rank at
 which an observation may be made.
 
 'flag_obs_promotion_above_peers' flags an observation that gets
-promoted, but only if observation's original taxon has no real pages
-below it in the Linnaean hierarchy.  E.g. an observation may be made
-at the tribe level because it matches an unknown one of the real genus
-pages below it, and this would be allowed.  However, if no genera (or
-species, etc.) within the tribe have real pages in the guide, then
-this is flagged as an error.
+promoted, but only if the observation's original taxon has no real
+pages below it in the Linnaean hierarchy.  E.g. an observation may be
+made at the tribe level because it matches an unknown one of the real
+genus pages below it, and this would be allowed.  However, if no
+genera (or species, etc.) within the tribe have real pages in the
+guide, then this is flagged as an error.
 
 'flag_obs_promotion_without_x' only makes sense when applied at the
 genus and/or species level.  It flags an observation if it is promoted

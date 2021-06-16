@@ -2,6 +2,7 @@ x:ba
 family:barberry family
 
 ==redwood inside-out flower:V. planipetala
+color: white
 . glandular-hairy pedicel
 . thick leaflet margin
 

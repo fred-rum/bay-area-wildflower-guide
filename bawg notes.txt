@@ -1055,14 +1055,8 @@ butterflies to variable checkerspot,6).
 
 Reduce console logging from Javascript.
 
-Complete mammals (e.g. beaver, muskrat) and organize them (e.g. deer
-includes elk)
-
 Can "[show details]" be implemented with the <details> HTML tag?
 https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details
-
-'has a color assigned but has no photos' needs a corresponding
-property.
 
 Make a check that a page at a specified rank is present if it has descendents.
 I.e. if a page defaults to flowering plants, it must have a family.  E.g.
@@ -1077,10 +1071,6 @@ values to propagate down to different levels; fortunately I think the
 way the code works now, that will work as long as they're all declared
 at the same level.  Possibly they need to be recorded in a list
 instead of a dict.
-
-Use 'x' to declare the completeness of the current page and get rid of
-the propagating 'complete' property.  'x' is easier to type, and I
-generally review each taxon level anyway.
 
 It would be nice to include the unranked moths in the property range
 from insects.  But perhaps overly difficult.

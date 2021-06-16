@@ -34,6 +34,7 @@ color: yellow
 . common
 
 ==bigseed biscuitroot:L. macrocarpum
+color: yellow
 . plant generally with a definite stem, stem leaves generally >= 2
 . leaf segments 1--7 mm, linear to oblong
 . corolla white, cream or +- purple

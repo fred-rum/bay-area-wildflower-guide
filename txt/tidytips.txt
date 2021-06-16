@@ -21,6 +21,7 @@ color: yellow
 . scattered all around the bay
 
 ==woodland tidytips:L. gaillardioides
+color: yellow
 . most have only yellow; only some have white or pale yellow tips
 . <b>glandular</b>
 . phyllary tip (extending up the petal) much shorter than its folded base [example,2] [CalPhotos shows at least one exception, but it may be misidentified]

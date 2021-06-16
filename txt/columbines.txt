@@ -9,6 +9,7 @@ color: red, salmon
 . common
 
 ==van houtte's columbine:A. eximia
+color:red, salmon
 . each petal opening is +-elongated
 . <b>inner petal edge > 90&deg; to exposed filaments</b>
 . outer petal edge not extended, so filaments are fully visible from the side

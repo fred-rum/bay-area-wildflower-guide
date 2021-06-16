@@ -1,6 +1,7 @@
 sci:Plectritis congesta
 
 ==pink plectritis:P. congesta ssp. brachystemon
+color: pale purple, pink, white
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0315+1129
 . corolla +- radial to +- 2-lipped, uniformly white to pink [no spots]
 . spur a minute swelling or slender and < 1/2 corolla tube length, tip generally enlarged

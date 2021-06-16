@@ -3,6 +3,7 @@ family:mustard family
 x:ba
 
 ==dobie pod:T. gracile
+color: yellow
 . fruit narrowly linear, 3--6 cm long, 1.5--2 mm wide
 . very rare
 
