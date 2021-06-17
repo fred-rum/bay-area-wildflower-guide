@@ -67,15 +67,25 @@ def sort_pages(page_set, color=None, with_depth=False):
     def count_flowers_helper(page):
         return page.count_flowers(color)
 
-    # Sort in reverse order of observation count.
-    # We initialize the sort with match_set sorted alphabetically.
-    # We then sort by hierarchical depth, retaining the previous alphabetical
-    # order for ties.  Finally, we sort by observation count, again retaining
-    # the most recent order for ties.
+    # Sort multiple times.  Each sort breaks ties by retaining the order
+    # from the previous sort, so the sorts are performed in order from least
+    # priority to most priority.
+
+    # Start by sorting match_set sorted alphabetically.
+    # The alphabetic tie breaker may or may not be useful to the user,
+    # but it prevents random differences every time the script is run
+    # just because the dictionary hashes differently.
     page_list = sorted(page_set, key=by_name)
+
+    # If requested, sort by hierarchical depth so that pages with the most
+    # levels of descendents come first.  E.g, a family is sorted ahead of
+    # its genuses.
     if with_depth:
         page_list.sort(key=by_depth)
+
+    # Sort by observation count, from most to least.
     page_list.sort(key=count_flowers_helper, reverse=True)
+
     return page_list
 
 # Split a string and remove whitespace around each element.
@@ -2258,8 +2268,22 @@ class Page:
 
             if self.subset_of_page:
                 w.write(self.txt)
+
+                # Subset pages don't have real children.
+                # Instead, we get the page that it is a subset of to write
+                # the appropriate subset of its own hierarchy.
                 self.subset_of_page.write_hierarchy(w, self.subset_color,
                                                     self.subset_page_list)
+
+                # Since subset pages don't have real children, the normal
+                # observation count won't work properly, which means that
+                # the subset pages won't sort correctly (e.g. in pages.js).
+                # To fix this, we count the observations of the appropriate
+                # color and cache it as the normal observation count for the
+                # subset page.
+                n = self.subset_of_page.count_flowers(color=self.subset_color)
+                self.cum_obs_n[None] = n
+
             elif self.list_hierarchy:
                 w.write(self.txt)
                 self.write_hierarchy(w, None, self.child)
@@ -2327,6 +2351,13 @@ class Page:
             obs.write_obs(None, w)
         else:
             self.write_obs(w, obs)
+
+# End of Page class
+###############################################################################
+
+
+###############################################################################
+# Related helper functions are below.
 
 # Find all flowers that match the specified color.
 # Also find all pages that include *multiple* child pages that match.

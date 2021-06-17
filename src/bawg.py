@@ -578,11 +578,7 @@ search_file = f'{root_path}/pages.js'
 with open(search_file, 'w', encoding='utf-8') as w:
     w.write('var pages=[\n')
 
-    # Sort in reverse order of observation count.
-    # In case of ties, pages are sorted alphabetically.
-    # This order tie-breaker isn't particularly useful to the user, but
-    # it helps prevent pages.js from getting random changes just because
-    # the dictionary hashes differently.
+    # Sort in reverse order of observation count (most observations first).
     for page in sort_pages(page_array, with_depth=True):
         name = filename(page.name)
         w.write(f'{{page:"{name}"')
