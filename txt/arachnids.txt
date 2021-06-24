@@ -1,0 +1,6 @@
+sci:class Arachnida
+
+==spiders
+end_hierarchy
+
+==mites and ticks

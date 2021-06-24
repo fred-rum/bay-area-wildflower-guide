@@ -1,8 +1,12 @@
+sci:class Insecta
 bug:52
 
 ==butterflies
 
 ==moths
+
+==four-lined silverfish:Ctenolepisma lineata
+bug:156092
 
 ==gall wasps
 

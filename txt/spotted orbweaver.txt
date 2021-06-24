@@ -1,0 +1,3 @@
+bug:3383
+
+Bugguide lists only two species in North America.  Cheiracanthium mildei is the one more often found inside man-made structures, but the only way to be sure is with a microscope.

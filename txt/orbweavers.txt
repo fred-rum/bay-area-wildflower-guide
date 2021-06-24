@@ -1,0 +1,7 @@
+sci:family Araneidae
+
+==cross orbweaver:Araneus diadematus
+bug:3376
+
+==spotted orbweaver:Neoscona crucifera
+bug:28154

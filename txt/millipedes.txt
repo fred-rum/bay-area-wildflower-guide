@@ -1,0 +1,8 @@
+sci:class Diplopoda
+
+==yellow-spotted millipede:Harpaphe haydeniana
+bug:15008
+
+==Paeromopus angusticeps
+bug:372853
+

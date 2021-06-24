@@ -1,0 +1,27 @@
+sci:order Araneae
+list_hierarchy
+
+# outside spiders
+
+==wolf spiders:family Lycosidae
+bug:1967
+
+==crab spiders
+
+==orbweavers
+
+# inside spiders
+
+==mediterranean spiny false wolf spider:Zoropsis spinimana
+x:ca
+bug:17404
+
+==long-bodied cellar spider:Pholcus phalangioides
+x:ca
+bug:9610
+
+==mouse spider:Scotophaeus blackwalli
+x:ca
+bug:248049
+
+==longlegged sac spiders:Cheiracanthium spp.

@@ -1,0 +1,19 @@
+sci:Angelica spp.
+x:ba
+
+==henderson's angelica:A. hendersonii
+. <b>basal leaves 2--3-ternate-pinnate</b>
+. <b>leaflets bright green adaxially</b>, double-serrate to crenate
+. common along the pacific coast
+
+==california angelica:A. californica
+. <b>basal leaves 1-ternate-pinnate</b>
+. plant glabrous to sparsely hairy
+. leaflets sharply serrate
+. common east of the bay and in Marin County
+
+==woolly angelica:A. tomentosa
+. <b>basal leaves 2--3-ternate-pinnate</b>
+. <b>plant glaucous everywhere</b>
+. leaflets serrate to entire
+. less common, but can be found anywhere

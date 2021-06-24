@@ -1,0 +1,19 @@
+sci:order Ixodida
+x:ba
+
+The dorsal shield (scutum) covers +-&frac13; of the back in females, the whole back in males.
+
+==dog ticks
+. large, brown
+. dorsal shield with white decorations
+
+==western black-legged tick:Ixodes pacificus
+bug:43665
+. small, reddish
+. dark dorsal shield
+
+==brown dog tick:Rhipicephalus sanguineus
+bug:190767
+. small, reddish-brown
+. no dorsal shield
+. mostly associated with dogs and dog kennels rather than wild areas

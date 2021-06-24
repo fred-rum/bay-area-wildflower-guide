@@ -1,0 +1,11 @@
+sci:Dermacentor spp.
+
+==pacific coast tick:D. occidentalis
+bug:96845
+. basis capitulum [dorsal plate between none#head and body] longer than wide
+. cornua [just aft of basis capitulum] as long as or longer than wide
+. sizes of shield punctations not greatly disparate
+. pearl grey coloration of shield more extensive than brown
+
+==american dog tick:D. variabilis
+bug:15489
