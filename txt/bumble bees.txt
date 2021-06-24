@@ -1,0 +1,35 @@
+sci: Bombus spp.
+
+Other bumble bees <a href="http://online.sfsu.edu/beeplot/pdfs/San%20Francisco%20Bombus.pdf">[PDF]</a> can be found in the bay area but are quite rare.
+
+glossaries of <a href="https://washingtonbumblebees.org/bumble-body-parts/">bumble bee body parts</a> and its <href="https://washingtonbumblebees.org/corbiculum-or-not/">legs</a>
+
+[
+<h2>black in the middle</h2>
+
+==yellow-faced bumble bee:B. vosnesenskii
+. yellow hairs on face and front of thorax (to wing attachment point) and a thin band near the tail (T4)
+. only black hairs underneath
+. hairs appear closely cropped
+. nearly indistinguishable from {-fog-belt bumble bee} below
+
+==fog-belt bumble bee:B. caliginosus
+. similar to {-yellow-faced bumble bee} above but...
+.. pale yellow hairs scattered underneath (S4 particularly)
+.. shaggier hair overall
+.. long face [long malar space between eye and mandible]
+
+==california bumble bee:B. californicus
+. black hairs on face
+. yellow hairs on front of thorax (to wing attachment point) and a thin band near the tail (T4)
+. less common
+]
+
+[
+<h2>yellow in the middle</h2>
+
+==black-tailed bumble bee:B. melanopygus
+. mixed black and yellow hairs on face
+. yellow hairs on top of the thorax surrounding a black patch between the wings
+. yellow bands at each end of the abdomen (T1, T4, and T5)
+]

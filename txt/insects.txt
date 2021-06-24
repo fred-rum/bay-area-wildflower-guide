@@ -5,6 +5,8 @@ bug:52
 
 ==moths
 
+==bees
+
 ==four-lined silverfish:Ctenolepisma lineata
 bug:156092
 

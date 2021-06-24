@@ -1103,3 +1103,7 @@ Applies only to leaf pages?  Or observed pages?
 
 Allow photos to have the same name flexibility as iNaturalist
 observations.  E.g. ignore hyphens, plurals.
+
+complain about conflicting bugguide IDs
+
+allow top of tree to have no glossary; move plant glossary to plants
