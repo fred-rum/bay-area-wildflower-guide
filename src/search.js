@@ -166,7 +166,22 @@ function check(search_str, match_str, pri_adj) {
 
   /* m is the string we're trying to match against, converted to uppercase
      and with punctuation removed. */
-  var m = match_str.toUpperCase().replace(/\W/g, '');
+  var upper_str = match_str.toUpperCase()
+  var m = upper_str.replace(/\W/g, '');
+
+  /* If match_str is of the format "<rank> <Name>", get the starting index of
+     Name within m.  This assumes that <rank> is all normal letters, so the
+     index of Name within m is the same as the index of the ' ' within
+     match_str.  If the first word is uppercase (not a rank) or the second word
+     is not uppercase (not a scientific name), then the name_pos is set to 0
+     instead. */
+  var name_pos = match_str.indexOf(' ');
+  if ((name_pos < 0) ||
+      (match_str.substr(0, 1) == upper_str.substr(0, 1)) ||
+      (match_str.substr(name_pos+1, 1) != upper_str.substr(name_pos+1, 1))) {
+    name_pos = 0;
+  }
+  
 
   /* match_ranges consists of [start, end] pairs that indicate regions in m for
      which a match was made */
@@ -223,8 +238,13 @@ function check(search_str, match_str, pri_adj) {
      of the string.  The bump means that a match that starts at the
      beginning and has two match ranges is slightly better than one that
      starts later and has only one match range.  E.g. "gland glossary"
-     matches "gland (plant glossary)" better than "England (glossary)". */
-  if (match_ranges[0][0] == 0) {
+     matches "gland (plant glossary)" better than "England (glossary)".
+
+     If the match starts after the rank but at the beginning of actual
+     name, that's prioritized the same as a match at the beginning of
+     the string. */
+  if ((match_ranges[0][0] == 0) ||
+      (match_ranges[0][0] == name_pos)) {
     pri += 0.15;
   }
 
@@ -255,6 +275,10 @@ function check_list(search_str, match_list, page_info) {
       name = 'glossary: ' + name;
     }
     var match_info = check(search_str, name, pri_adj);
+    if (!match_info && name.startsWith('genus ')) {
+      /* Allow a genus to match using the older 'spp.' style. */
+      match_info = check(search_str, name.substr(6) + ' spp.');
+    }
     if (better_match(match_info, best_match_info)) {
       best_match_info = match_info;
     }

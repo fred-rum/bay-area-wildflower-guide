@@ -533,6 +533,7 @@ class Page:
             # scientific name.
             return
 
+        elab = fix_elab(elab)
         sci = strip_sci(elab)
 
         # Fail if
@@ -921,6 +922,8 @@ class Page:
             self.txt = glossary.parse_terms(self.txt)
 
     def set_sci_alt(self, sites, elab):
+        elab = fix_elab(elab)
+
         if 'f' in sites:
             self.elab_calflora = elab
         if 'p' in sites:

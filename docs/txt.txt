@@ -25,25 +25,29 @@ to use the common name as given by iNaturalist for my area, although
 I'll sometimes alter it or (especially for an intermediate level of
 hierarchy) make one up.
 
-sci:<name> specifies the scientific name for the flower.  The name can
-be elaborated or stripped, although elaborated is recommended.  For a
-genus, the elaborated name is "(Genus) spp.".  For a subspecies or
-variety, the elaborated name "(Genus) (species) ssp. (subspecies)" or
-"(...) var. (...)".  If the scientific name is stripped of its
-elaborations, "spp." is assumed for a single-word name and "ssp." is
-assumed for a three-word name.  If the species name starts with an
-'X', e.g. "Iris Xgermanica", the 'X' is stripped off and a cross is
-displayed to mark it as a hybrid.
+sci:<name> specifies the scientific name for the flower.
 
-If the common name or scientific name is not explicitly specified, the
-program will attempt to find one by searching through observations.csv
-for the given name.
+The name can be elaborated or stripped, although elaborated is
+recommended.  For a species, there is no difference between the
+elaborated or stripped name.  For a subspecies or variety, the
+elaborated name is "(Genus) (species) ssp. (subspecies)" or "(...)
+var. (...)".  For a genus or other taxonomic rank, the elaborated name
+is "(rank) (Name)", e.g. "genus Clarkia".  "(Name) spp." is permitted
+as a synonym, but is renamed as "genus (Name)".  If the scientific
+name is stripped of its elaborations, "genus" is assumed for a
+single-word name and "ssp." is assumed for a three-word name.  If the
+species name starts with an 'X', e.g. "Iris Xgermanica", the 'X' is
+stripped off and a cross is displayed to mark it as a hybrid.
 
-The canonical scientific name is the one used by iNaturalist, but
-other sites may be out of date or have made a different choice.  In
-that case, different scientic names can be specified for the various
-sites where it differs from the iNaturalist name.  See sci_i and the
-related specifications below.
+If only one of the common name or scientific name is explicitly
+specified, the program attempts to find the other one from other
+sources such as observations.csv.
+
+The canonical scientific name is usually the one used by iNaturalist,
+but other sites may be out of date or have made a different choice.
+In that case, different scientic names can be specified for the
+various sites where it differs from the iNaturalist name.  See sci_i
+and the related specifications below.
 
 More information can be applied to the page or to a child page as
 described below.

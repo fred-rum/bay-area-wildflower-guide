@@ -52,7 +52,7 @@ def elaborate_sci(sci):
     sci_words = sci.split(' ')
     if len(sci_words) == 1:
         # One word in the scientific name implies a genus.
-        return ' '.join((sci, 'spp.'))
+        return 'genus ' + sci
     elif len(sci_words) == 3:
         # Three words in the scientific name implies a subset of a species.
         # We probably got this name from an iNaturalist observation, and it
@@ -60,6 +60,13 @@ def elaborate_sci(sci):
         return ' '.join((sci_words[0], sci_words[1], 'ssp.', sci_words[2]))
     # The name is already in a fine elaborated format.
     return sci
+
+# I allow input of formatted as either "genus <Genus>" or "<Genus> spp.",
+# but the former is the preferred internal and output format.
+def fix_elab(elab):
+    if elab and elab.endswith(' spp.'):
+        elab = 'genus ' + elab[:-5]
+    return elab
 
 # Find a page using by common name and/or scientific name and/or taxon_id.
 #
@@ -77,6 +84,8 @@ def elaborate_sci(sci):
 # corresponding name without any extra frills.
 def find_page2(com, elab, from_inat=False, taxon_id=None):
     page = None
+
+    elab = fix_elab(elab)
 
     # taxon_id has first priority.
     if taxon_id in taxon_id_page:

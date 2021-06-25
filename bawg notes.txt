@@ -1110,5 +1110,7 @@ complain about conflicting bugguide IDs
 
 allow top of tree to have no glossary; move plant glossary to plants
 
+
 Allow "<Genus> spp." to be equivalent to "genus <Genus>", and prefer
 the latter when using names on the page, in the search, etc.
+Requres changes to find_page2(), set_sci(), set_sci_alt(), etc.

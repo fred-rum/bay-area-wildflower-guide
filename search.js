@@ -108,7 +108,14 @@ function generate_ac_html() {
 }
 function check(search_str, match_str, pri_adj) {
   var s = search_str;
-  var m = match_str.toUpperCase().replace(/\W/g, '');
+  var upper_str = match_str.toUpperCase()
+  var m = upper_str.replace(/\W/g, '');
+  var name_pos = match_str.indexOf(' ');
+  if ((name_pos < 0) ||
+      (match_str.substr(0, 1) == upper_str.substr(0, 1)) ||
+      (match_str.substr(name_pos+1, 1) != upper_str.substr(name_pos+1, 1))) {
+    name_pos = 0;
+  }
   var match_ranges = [];
   var i = 0;
   var j = 0;
@@ -139,7 +146,8 @@ function check(search_str, match_str, pri_adj) {
   var pri = 100.0;
   pri += pri_adj;
   pri -= (match_ranges.length / 10);
-  if (match_ranges[0][0] == 0) {
+  if ((match_ranges[0][0] == 0) ||
+      (match_ranges[0][0] == name_pos)) {
     pri += 0.15;
   }
   var match_info = {
@@ -161,6 +169,9 @@ function check_list(search_str, match_list, page_info) {
       name = 'glossary: ' + name;
     }
     var match_info = check(search_str, name, pri_adj);
+    if (!match_info && name.startsWith('genus ')) {
+      match_info = check(search_str, name.substr(6) + ' spp.');
+    }
     if (better_match(match_info, best_match_info)) {
       best_match_info = match_info;
     }

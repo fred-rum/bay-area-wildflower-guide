@@ -7,4 +7,4 @@ Leafyplace has a <a href="https://leafyplace.com/types-of-bees/">high-level guid
 ==western honey bee:Apis mellifera
 x:ca
 
-==Lasioglossum spp.
+==genus Lasioglossum
