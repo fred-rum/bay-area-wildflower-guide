@@ -96,7 +96,6 @@ txt_files = get_file_set(f'{db_pfx}txt', 'txt')
 def read_txt_files():
     for name in txt_files:
         page = Page(name, name_from_txt=True)
-        page.name_from_txt = True
         with open(f'{root_path}/{db_pfx}txt/{name}.txt', 'r', encoding='utf-8') as r:
             page.txt = r.read()
 
@@ -198,10 +197,12 @@ def read_obs_chains():
 
         for row in csv_reader:
             sci = get_field('scientific_name')
+            taxon_id = get_field('taxon_id')
 
             # In the highly unusual case of no scientific name for an
-            # observation, just throw it out.
-            if not sci: continue
+            # observation, just throw it out.  And if there is a scientific
+            # name, I'd expect that there should be a taxon_id as well.
+            if not sci or not taxon_id: continue
 
             orig_sci = sci
 
@@ -218,7 +219,14 @@ def read_obs_chains():
             if com:
                 com = com.lower()
 
-            page = find_page2(com, sci, from_inat=True)
+            page = find_page2(com, sci, from_inat=True, taxon_id=taxon_id)
+
+            # if find_page2() finds a match, it automatically sets the
+            # taxon_id for the page if it didn't have it already.
+
+            # if find_page2() didn't find a match, it returns None.
+            # We'll create a shadow page for it below, once we've figured
+            # out its taxonomical rank.
 
             try:
                 # Read the taxonomic chain from observations.csv and create
@@ -254,6 +262,7 @@ def read_obs_chains():
                             sci = f'below {sci}'
 
                         page = Page(com, sci, shadow=True, from_inat=True)
+                        page.set_taxon_id(taxon_id)
                     if group != orig_sci:
                         page = page.add_linn_parent(rank, group, from_inat=True)
             except FatalError:
@@ -334,10 +343,12 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
 
     for row in csv_reader:
         sci = get_field('scientific_name')
+        taxon_id = get_field('taxon_id')
 
-        # In the highly unusual case of no scientific name for an observation,
-        # just throw it out.
-        if not sci: continue
+        # In the highly unusual case of no scientific name for an
+        # observation, just throw it out.  And if there is a scientific
+        # name, I'd expect that there should be a taxon_id as well.
+        if not sci or not taxon_id: continue
 
         # Remove the {multiplication sign} used by hybrids since I can't
         # (yet) support it cleanly.  Note that I *don't* use the r'' string
@@ -371,7 +382,12 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
         date = get_field('observed_on')
         month = int(date.split('-')[1], 10) - 1 # January = month 0
 
-        page = find_page2(com, sci, from_inat=True)
+        # This call to find_page2() should always match a taxon_id
+        # from the first pass through observations.csv.  However, that
+        # first pass didn't yet have the property information to know
+        # whether to add an alternative name from iNaturalist.  So we
+        # supply the names again for that purpose.
+        page = find_page2(com, sci, from_inat=True, taxon_id=taxon_id)
 
         # A Linnaean page should have been created during the first path
         # through observations.csv, so it'd be weird if we can't find it.
@@ -381,6 +397,8 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
             taxon_id = get_field('taxon_id')
             if taxon_id:
                 page.taxon_id = taxon_id
+            else:
+                error(f'no taxon_id for {page.full()}')
 
         if loc != 'bay area':
             # If the location is outside the bay area, properties may

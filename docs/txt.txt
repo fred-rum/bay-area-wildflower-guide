@@ -49,6 +49,29 @@ More information can be applied to the page or to a child page as
 described below.
 
 --
+Alternative names:
+
+Support for alternative names is limited.
+
+An alternative common name can be inferred from observations.csv.
+This alternative is listed on the resulting HTML page.  There is
+currently no way to explicitly specify an alternative common name in
+the txt.
+
+asci:<name> specifies an alternative scientific name for a page.
+Multiple specification lines can be used to list multiple
+alternatives.  The alternative scientific names are not currently
+listed on the resulting HTML page.  The only known or supported
+purpose for this specification is to support species from multiple
+genuses being listed as part of a single "genus" page (e.g. when it is
+easiest to combine the keys for more than one genus).
+
+If a taxon has a different name at other sites, alternative names can
+be used to link to those site.  These are specified with sci_i et al,
+described further below.  These names are ignored for all other
+purposes.
+
+--
 Child links and key info:
 
 ==<name> creates a child relationship to the named page.  The

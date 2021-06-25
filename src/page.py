@@ -198,8 +198,9 @@ def looser_complete(one, two):
 class Page:
     pass
 
-    def __init__(self, com, elab=None, name_from_txt=False, shadow=False,
+    def __init__(self, name, elab=None, name_from_txt=False, shadow=False,
                  from_inat=False):
+
         # shadow=False indicates a 'real' page that will be output to HTML.
         #
         # shadow=True indicates a 'shadow' page that is not (yet) planned
@@ -209,24 +210,6 @@ class Page:
 
         # True if the page is created from observations.csv
         self.created_from_inat = from_inat
-
-        # name_from_txt=True if the name came from a txt filename.
-        self.name_from_txt = name_from_txt
-        if name_from_txt:
-            self.name = com
-            name_page[com] = self
-
-        if com and is_sci(com):
-            if elab:
-                fatal(f'Page() called with two scientific names: {com}:{elab}')
-            else:
-                elab = com
-                com = None
-
-        if not name_from_txt:
-            # Set a temporary page name in case we need to print
-            # an error message before the name is officially set.
-            self.name = f'{com}:{elab}'
 
         full_page_array.append(self)
         if not shadow:
@@ -240,12 +223,42 @@ class Page:
         self.rank = None
         self.rank_unknown = False
 
+        # name can be either a common name or a scientific name
+        # (elaborated or not).  If name is the common name (or None),
+        # then elab supplies the scientific name (elaborated or not).
+        if name and is_sci(name):
+            if elab:
+                fatal(f'Page() called with two scientific names: {name}:{elab}')
+            else:
+                elab = name
+                com = None
+        else:
+            com = name
+
+        # name_from_txt=True if the name came from a txt filename.
+        self.name_from_txt = name_from_txt
+        if name_from_txt:
+            assert name
+            self.name = name
+            name_page[name] = self
+        else:
+            # Set a temporary page name in case we need to print
+            # an error message before the name is officially set.
+            self.name = f'{com}:{elab}'
+
+            # For other calls of Page(), we set com/sci as specified.
+
         # Call set_sci() first since it should never have a name conflict.
-        # Then call set_com(), which uses the common name as the page name
-        # when possible.
-        if elab:
+        #
+        # But don't call set_sci() when name_from_txt=True since we want
+        # to look for an elaborated name first, and then parse_names() will
+        # call set_sci() with the best name available.
+        if elab and not self.name_from_txt:
             self.set_sci(elab, from_inat=from_inat)
 
+        # Now call set_com(), which sets the common name as the page name
+        # when possible.  (Note that the page name never changes if
+        # name_from_txt= True.)
         if com:
             self.set_com(com, from_inat=from_inat)
 
@@ -518,8 +531,15 @@ class Page:
             return
 
         sci = strip_sci(elab)
-        if sci in sci_page and sci_page[sci] != self:
-            fatal(f'Same scientific name ({sci}) set for {sci_page[sci].name} and {self.name}')
+
+        # Fail if
+        # - the same fully elaborated name is used for another page, or
+        # - a non-elaborated name is used, and another page uses the same name,
+        # - or a non-elaborated name is used and already has a conflict.
+        if elab in sci_page and sci_page[elab] == 'conflict':
+            fatal(f'page "{self.name}" called set_sci("{elab}"), but that non-elaborated name is being used by more than one rank')
+        elif elab in sci_page and sci_page[elab] != self:
+            fatal(f'page "{self.name}" called set_sci("{elab}"), but that name is already used by page "{sci_page[elab].name}"')
 
         if self.sci and sci != self.sci:
             # Somehow we're trying to set a different scientific name
@@ -593,10 +613,15 @@ class Page:
         elif (not from_inat or
               self.created_from_inat or
               'obs_fill_sci' in self.prop_value):
+            # This is the "normal" case.
             self.elab = elab
             self.elab_src = elab_src
             self.sci = sci
-            sci_page[sci] = self
+            sci_page[elab] = self
+            if sci in sci_page and sci_page[sci] != self:
+                sci_page[sci] = 'conflict'
+            else:
+                sci_page[sci] = self
             self.set_name()
         else:
             # If we got here, then
@@ -747,6 +772,16 @@ class Page:
                           repl_sci, self.txt, flags=re.MULTILINE)
         self.txt = re.sub(r'^asci:\s*(.*?)\s*?\n',
                           repl_asci, self.txt, flags=re.MULTILINE)
+
+        # If the filename looks like a scientific name, and we didn't find
+        # a 'sci:' specification, then set the scientific name from the
+        # filename.  But if there *was* a 'sci:' specification, we try
+        # to set the name again to check that it is compatible.  The goal
+        # is to first set the scientific name to its elaborated form if
+        # one is specified, then fall back to the filename, which usually
+        # isn't elaborated.
+        if is_sci(self.name):
+            self.set_sci(self.name)
 
     def canonical_rank(self, rank):
         if rank == 'self':
@@ -932,6 +967,13 @@ class Page:
         self.link_linn_child(page)
 
         self.color_pages.append(page)
+
+    def set_taxon_id(self, taxon_id):
+        if taxon_id in taxon_id_page and taxon_id_page[taxon_id] != self:
+            fatal(f'taxon_id {taxon_id} used for both {taxon_id_page[taxon_id].full()} and {self.full()}')
+
+        self.taxon_id = taxon_id
+        taxon_id_page[taxon_id] = self
 
     def record_ext_photo(self, label, link):
         if (label, link) in self.ext_photo_list:
@@ -1561,7 +1603,7 @@ class Page:
 
             matchobj = re.match(r'taxon_id\s*:\s*(\d+)$', c)
             if matchobj:
-                data_object.taxon_id = matchobj.group(1)
+                data_object.set_taxon_id(matchobj.group(1))
                 continue
 
             matchobj = re.match(r'bug\s*:\s*(\d+)$', c)

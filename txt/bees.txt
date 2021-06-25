@@ -6,3 +6,5 @@ A <a href="https://leafyplace.com/types-of-bees/">high-level guide</a> for disti
 
 ==western honey bee:Apis mellifera
 x:ca
+
+==Lasioglossum spp.

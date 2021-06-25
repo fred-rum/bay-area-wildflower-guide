@@ -10,11 +10,6 @@ thumb_set = get_file_set(f'{db_pfx}thumbs', 'jpg')
 def get_name_from_jpg(jpg):
     name = re.sub(r',([-0-9]\S*|)$', r'', jpg)
 
-    if is_sci(name):
-        # If the jpg uses an elaborated name, remove the elaborations to
-        # form the final page name.
-        name = strip_sci(name)
-
     return name
 
 # Compare the photos directory with the thumbs directory.
