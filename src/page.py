@@ -376,15 +376,18 @@ class Page:
             # the name never changes
             return
 
+        if self.name in name_page:
+            del name_page[self.name]
+
         if self.com and com_page[self.com] == self:
             name = self.com
         elif self.sci:
-            name = self.sci
+            if sci_page[self.sci] == 'conflict':
+                name = self.elab
+            else:
+                name = self.sci
         else:
-            fatal(f'set_name() failed with com={self.com} and sci={self.sci}')
-
-        if self.name in name_page:
-            del name_page[self.name]
+            fatal(f'set_name() failed for {self.full()}')
 
         if name in name_page:
             fatal(f'Multiple pages created with name "{name}"')
@@ -619,7 +622,14 @@ class Page:
             self.sci = sci
             sci_page[elab] = self
             if sci in sci_page and sci_page[sci] != self:
+                conflict_page = sci_page[sci]
                 sci_page[sci] = 'conflict'
+                if conflict_page != 'conflict':
+                    # Now that we know that two pages collide on a scientific
+                    # name, we should regenerate the names of *both* pages to
+                    # avoid confusion and differences in naming based on run
+                    # order.
+                    conflict_page.set_name()
             else:
                 sci_page[sci] = self
             self.set_name()

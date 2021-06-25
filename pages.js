@@ -1068,7 +1068,7 @@ var pages=[
 {page:"hedge mustard",sci:["Sisymbrium officinale"],x:"o"},
 {page:"Holocarpha",sci:["Holocarpha spp."],x:"k"},
 {page:"horseweed",sci:["Erigeron canadensis"],x:"o"},
-{page:"Lasioglossum",sci:["subgenus Lasioglossum"],x:"o"},
+{page:"subgenus Lasioglossum",x:"o"},
 {page:"long billed curlew",sci:["Numenius americanus"],x:"o"},
 {page:"lotus hairstreak",sci:["Callophrys dumetorum"],x:"o"},
 {page:"marbled godwit",sci:["Limosa fedoa"],x:"o"},
