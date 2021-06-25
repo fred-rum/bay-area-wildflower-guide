@@ -1086,9 +1086,11 @@ create a page for rayless and near rayless (e.g. blow wives) yellow asters
   (similar to page for yellow daisy-like flowers)
 
 
-It'd be nice to support multiple genuses (or other groupings) on the same
-  page (e.g. the genuses for blue dicks and ookows) and have a search for
-  either genus return the same page.
+Better support would be nice for multiple genuses (or other groupings)
+on the same page (e.g. the genuses for blue dicks and ookows).
+Currently supported via 'asci:', but it's unintutive to understand in
+the script, and the page doesn't reflect the alternative names, nor
+can you search for the alternative names.
 
 Translate *text* on one line to <b>text</b>.
 
@@ -1107,3 +1109,6 @@ observations.  E.g. ignore hyphens, plurals.
 complain about conflicting bugguide IDs
 
 allow top of tree to have no glossary; move plant glossary to plants
+
+Allow "<Genus> spp." to be equivalent to "genus <Genus>", and prefer
+the latter when using names on the page, in the search, etc.

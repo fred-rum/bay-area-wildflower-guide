@@ -1,6 +1,6 @@
 sci:epifamily Anthophila
 
-A <a href="https://leafyplace.com/types-of-bees/">high-level guide</a> for distinguishing bees
+Leafyplace has a <a href="https://leafyplace.com/types-of-bees/">high-level guide</a> for distinguishing bees.
 
 ==bumble bees
 

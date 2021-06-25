@@ -21,7 +21,7 @@ def is_elab(name):
     return is_sci(name) and ' ' in name
 
 # Strip elaborations off the scientific name.
-# If keep specified, keep certain elaborations:
+# If keep is specified, keep certain elaborations:
 # x - X hybrid indication
 # b - var. or ssp.
 # g - spp.
