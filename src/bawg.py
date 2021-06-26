@@ -444,18 +444,23 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
                 error(f'flag_obs_promotion: {orig_sci} observation promoted to {page.full()}')
                 continue
 
-            # If the observation's original page has real Linnaean
-            # descendants, then we don't know what it is, but it could
-            # be something we've documented, so it's always OK.  But
-            # if doesn't have real Linnaean descendants, and the
-            # promoted page does, then it's definitely something we
-            # haven't documented.
             if orig_page.rank_unknown:
                 # If an observation has an unknown rank, then we *always*
                 # promote it without complaint.
                 pass
-
+            elif ('allow_any_nrg_obs_promotion' in page.prop_value and
+                     rg != 'research' and
+                     orig_page.rank <= Rank.species):
+                # This property allows a non-research-grade observation to be
+                # promoted without complaint.
+                pass
             else:
+                # If the observation's original page has real Linnaean
+                # descendants, then we don't know what it is, but it could
+                # be something we've documented, so it's always OK.  But
+                # if doesn't have real Linnaean descendants, and the
+                # promoted page does, then it's definitely something we
+                # haven't documented.
                 if ('flag_obs_promotion_above_peers' in page.prop_value and
                     not orig_page.has_real_linnaean_descendants() and
                     page.has_real_linnaean_descendants()):

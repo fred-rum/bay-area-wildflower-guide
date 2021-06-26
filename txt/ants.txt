@@ -1,0 +1,7 @@
+sci:family Formicidae
+
+==carpenter ants:genus Camponotus
+
+==wood, mound, and field ants:genus Formica
+
+==genus Veromessor

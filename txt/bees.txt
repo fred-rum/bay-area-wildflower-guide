@@ -2,9 +2,11 @@ sci:epifamily Anthophila
 
 Leafyplace has a <a href="https://leafyplace.com/types-of-bees/">high-level guide</a> for distinguishing bees.
 
-==bumble bees
-
 ==western honey bee:Apis mellifera
 x:ca
+
+==bumble bees
+
+==large carpenter bees:genus Xylocopa
 
 ==genus Lasioglossum
