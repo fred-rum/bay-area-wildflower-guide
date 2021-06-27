@@ -1,0 +1,22 @@
+sci:genus Strophiona
+x:any
+
+All 3 species of this genus can potentially be found in the bay area.  Although {-Strophiona nitens} isn't supposed to be found in CA, iNaturalist has some local observations.
+
+<a href="https://www.oregon.gov/oda/shared/Documents/Publications/IPPM/KeyToGeneraOfCerambycidaeOfWesternNAmerica.pdf">Key</a> to the western members of {-family Cerambycidae}.  The western species of {-Strophiona spp.} in particular are distinguished on page 279, with key terms defined in the first few pages.
+
+==Strophiona tigrina
+bug:119699
+. anterior dark elytral band oblique [black space between frontmost yellow stripes at an angle]
+. center of pronotum [ahead of the wing cases] with at most sparse pubescence
+. most common
+
+==S. laeta
+. anterior dark elytral band transverse [straight across]
+. pronotum with center obscured by dense [yellow] pubescence
+. rare
+
+==chestnut bark borer:S. nitens
+bug:26737
+. unknown markings
+. rare; not supposed to be in CA, but iNaturalist has some local observations

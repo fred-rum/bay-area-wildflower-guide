@@ -1,0 +1,30 @@
+sci:order Coleoptera
+
+list_hierarchy
+
+==lady beetles
+
+==click beetles:family Elateridae
+
+==metallic wood-boring beetles:family Buprestidae
+
+==blister beetles:family Meloidae
+
+==longhorn beetles:family Cerambycidae
+
+==firefly beetles:family Lampyridae
+
+==leaf beetles:family Chrysomelidae
+
+==darkling beetles:family Tenebrionidae
+
+==drugstore beetle:Stegobium paniceum
+bug:40237
+
+==tumbling flower beetles:family Mordellidae
+
+==checkered beetles:family Cleridae
+
+==soldier beetles:family Cantharidae
+
+==carpet beetles:genus Anthrenus

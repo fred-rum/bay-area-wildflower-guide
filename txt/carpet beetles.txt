@@ -1,0 +1,4 @@
+sci:genus Anthrenus
+
+==varied carpet beetle:Anthrenus verbasci
+bug:95010

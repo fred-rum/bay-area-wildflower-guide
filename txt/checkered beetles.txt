@@ -1,0 +1,2 @@
+==ornate checkered beetle:Trichodes ornatus
+bug:7481

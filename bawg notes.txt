@@ -1110,7 +1110,6 @@ complain about conflicting bugguide IDs
 
 allow top of tree to have no glossary; move plant glossary to plants
 
-support a flag to only complain about promotion if an observation is
-research grade
-
 rearrange docs into an easier-to-read LibreOffice/PDF document
+
+move pickle files into a new 'pickle' directory

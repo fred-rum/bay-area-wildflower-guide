@@ -35,3 +35,4 @@ __pycache__/
 .in_progress/
 figures/*.jpg
 data/cache.pickle
+.~lock.*#

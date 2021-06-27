@@ -1,9 +1,0 @@
-sci:Clarkia purpurea
-
-==ok:Clarkia purpurea ssp. purpurea
-
-==equal-rank bug:Clarkia quadrivulnera
-
-==equal-page bug:Clarkia purpurea
-
-==higher-rank bug:Clarkia

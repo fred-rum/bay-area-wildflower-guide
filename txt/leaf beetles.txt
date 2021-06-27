@@ -1,0 +1,13 @@
+==Chrysolina bankii
+bug:363944
+A species <a href="https://pdfslide.net/documents/a-newly-introduced-chrysolina-motschulsky-1860-to-california-coleoptera.html">newly introduced</a> to the US in the coastal areas of San Mateo County.
+
+==blue dock beetle:Gastrophysa cyanea
+bug:24745
+
+==spotted cucumber beetle:Diabrotica undecimpunctata
+bug:456
+
+==genus Syneta
+bug:121228
+<b>Caution: ID unsure</b>

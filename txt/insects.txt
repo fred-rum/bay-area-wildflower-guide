@@ -9,6 +9,8 @@ bug:52
 
 ==ants
 
+==beetles
+
 ==four-lined silverfish:Ctenolepisma lineata
 bug:156092
 
