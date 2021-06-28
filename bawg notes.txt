@@ -1113,3 +1113,19 @@ allow top of tree to have no glossary; move plant glossary to plants
 rearrange docs into an easier-to-read LibreOffice/PDF document
 
 move pickle files into a new 'pickle' directory
+
+flag pages without parents that aren't marked is_top (see below item...)
+
+change properties to allow e.g. 'link/error', which would flag an
+error if a link would be created
+
+assume is_top automatically if it has a scientific rank above flowers
+
+Use 'ancestor:family ...' or 'member:family ...' instead of 'family:
+...'.  Easier to grep for ancestors of any rank, and allows common
+names or unrecognized ranks for ancestors.
+
+instead of using default_ancestor, use 'ancestor:flowering plants' for
+flowers without an observations.csv entry
+
+Allow observations.csv to be checked in

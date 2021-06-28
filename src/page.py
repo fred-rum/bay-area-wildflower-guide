@@ -248,6 +248,8 @@ class Page:
 
             # For other calls of Page(), we set com/sci as specified.
 
+        self.no_sci = False # true if the page will never have a sci name
+
         # Call set_sci() first since it should never have a name conflict.
         #
         # But don't call set_sci() when name_from_txt=True since we want
@@ -261,8 +263,6 @@ class Page:
         # name_from_txt= True.)
         if com:
             self.set_com(com, from_inat=from_inat)
-
-        self.no_sci = False # true if the page will never have a sci name
 
         self.group = {} # taxonomic rank -> sci name or None if conflicting
 
@@ -526,11 +526,22 @@ class Page:
     # set_sci() can be called with a stripped or elaborated name.
     # Either way, both a stripped and an elaborated name are recorded.
     def set_sci(self, elab, from_inat=False):
-        if self.sci and from_inat:
+        if self.sci or self.no_sci and from_inat:
             # This page already has a scientific name, and we don't want
             # iNaturalist to override it.  E.g. iNaturalist could have found
             # the page via isci_page[], which differs from its user-supplied
             # scientific name.
+            return
+
+        if elab == 'n/a':
+            if self.sci and elab == 'n/a':
+                error(f'sci:n/a used on page {self.full()}')
+            else:
+                self.no_sci = True
+            return
+
+        if self.no_sci:
+            error(f'scientific name "{elab}" assigned to page {self.name}, but sci:n/a was already used for the page')
             return
 
         elab = fix_elab(elab)
@@ -764,10 +775,7 @@ class Page:
 
         def repl_sci(matchobj):
             sci = matchobj.group(1)
-            if sci == 'n/a':
-                self.no_sci = True
-            else:
-                self.set_sci(sci)
+            self.set_sci(sci)
             return ''
 
         def repl_asci(matchobj):

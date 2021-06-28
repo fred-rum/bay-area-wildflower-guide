@@ -12,3 +12,5 @@ bug:25358
 
 ==mylitta crescent:Phyciodes mylitta
 bug:39791
+
+==checkerspot caterpillars:n/a

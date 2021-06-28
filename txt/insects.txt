@@ -11,6 +11,15 @@ bug:52
 
 ==beetles
 
+==true bugs
+
+==grasshoppers, crickets, and katydids
+
+==cicadas
+==wing-tapping cicadas:genus Platypedia
+
+==typical leafhoppers
+
 ==four-lined silverfish:Ctenolepisma lineata
 bug:156092
 

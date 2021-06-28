@@ -7,3 +7,13 @@ bug:65845
 
 ==white-lined sphinx:Hyles lineata
 bug:3071
+
+==tabby moths:genus Aglossa
+
+==pacific tent caterpillar:Malacosoma constricta
+
+==genus Orgyia
+
+==dagger moths:genus Acronicta
+
+==cutworm moths and allies:family Noctuidae
