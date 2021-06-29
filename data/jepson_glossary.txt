@@ -19,6 +19,8 @@
 #
 # Blank lines and comment text after a # sign are ignored.
 
+taxon:vascular plants
+
 abaxial
 abundant
 achene; achenes

@@ -369,7 +369,11 @@ class Page:
 
         self.cum_obs_n = {} # color -> cumulative obs_n among all descendants
 
-        self.glossary = None
+        self.glossary = None # the Glossary instance that applies to the page
+
+        # the Glossary instances that want a warning printed if one of their
+        # glossary terms is used outside the glossary
+        self.glossary_warn = set()
 
     def set_name(self):
         if self.name_from_txt:
@@ -926,6 +930,7 @@ class Page:
                 glossary = Glossary(self.name)
                 glossary.taxon = self.name
                 glossary.title = self.name
+                glossary.page = self
                 glossary.txt = None
             self.txt = glossary.parse_terms(self.txt)
 
@@ -1980,21 +1985,34 @@ class Page:
         for child in self.child:
             child.cross_out_children(page_list)
 
-    def set_glossary(self, glossary):
+    def set_glossary(self, glossary, jepson_glossary, glossary_warn):
         if self.glossary:
             # We seem to be setting the glossary via two different
             # tree paths.  Make sure that the parent taxon's glossary
             # is the same on both paths.
+            if glossary:
+                glossary_name = glossary.name
+            else:
+                glossary_name = 'None'
+
             if self.name in glossary_taxon_dict:
                 if glossary != self.glossary.parent:
-                    error(f'{self.full()} has two different parent glossaries')
+                    if self.glossary.parent:
+                        parent = self.glossary.parent.name
+                    else:
+                        parent = 'None'
+                    error(f'{self.full()} has two different parent glossaries, {parent_name} and {glossary_name}')
             else:
                 if glossary != self.glossary:
-                    error(f'{self.full()} gets two different glossaries, {self.glossary.name} and {glossary.name}')
+                    error(f'{self.full()} gets two different glossaries, {self.glossary.name} and {glossary_name}')
 
             # No need to continue the tree traversal through this node
             # since it and its children have already set the glossary.
             return
+
+        if self.name == jepson_glossary.taxon:
+            jepson_glossary.set_parent(glossary)
+            glossary = jepson_glossary
 
         if self.name in glossary_taxon_dict:
             # Set the glossary of this taxon as a child of
@@ -2004,9 +2022,10 @@ class Page:
             glossary = sub_glossary
 
         self.glossary = glossary
+        self.glossary_warn.update(glossary_warn)
 
         for child in self.child:
-            child.set_glossary(glossary)
+            child.set_glossary(glossary, jepson_glossary, self.glossary_warn)
 
     def parse_child_and_key(self, child_idx, suffix, text):
         def repl_example(matchobj):

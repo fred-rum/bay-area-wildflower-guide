@@ -32,6 +32,9 @@ class Glossary:
 
         self.is_jepson = False # changed to True for the Jepson glossary
 
+        # changed to True for a glossary that shouldn't appear in the ToC
+        self.invisible = False
+
         # search_terms is an ordered list of term lists to be written
         # to pages.js.  The first term in each list is also the anchor.
         #
@@ -41,7 +44,7 @@ class Glossary:
         #   (And the original punctuation can match any user punctuation.)
         self.search_terms = []
 
-        # term_anchor is a mapping from each term to an anchor.
+        # term_anchor is a mapping from each term to an HTML anchor.
         # This is used for creating glossary_regex and also for looking up
         # a matched term to get its anchor.
         #
@@ -84,7 +87,9 @@ class Glossary:
 
     def set_parent(self, parent):
         self.parent = parent
-        parent.child.add(self)
+        if parent:
+            parent.child.add(self)
+            top_glossaries.discard(self)
 
     def get_link_class(self):
         if self.is_jepson:
@@ -128,8 +133,7 @@ class Glossary:
         lower = term.lower()
         if lower in self.link_set:
             anchor = self.term_anchor[lower]
-            if (arg('-not_top_usage') and self == master_glossary and
-                deep):
+            if arg('-not_top_usage') and self in top_glossaries and deep:
                 if child is None:
                     if not is_glossary:
                         # Anchor is used from a taxon page
@@ -155,7 +159,7 @@ class Glossary:
         else:
             return None
 
-    def link_glossary_words(self, filename, txt,
+    def link_glossary_words(self, assoc_name, assoc_page, txt,
                             is_glossary=False, exclude=None):
         # This function is called for a glossary word match.
         # Replace the matched word with a link to the primary term
@@ -169,7 +173,7 @@ class Glossary:
                     # that requires an exception or a global variable or passing
                     # more data around, none of which I like.  The user will
                     # have to grep for the broken reference in the HTML.
-                    error(f'unrecognized glossary cross reference starting with "{name}#" in {filename}')
+                    error(f'unrecognized glossary cross reference starting with "{name}#" in {assoc_name}')
                     return f'{name}#broken ref'
                 elif name == 'none':
                     # 'none#[term]' means that we don't want a glossary link.
@@ -201,6 +205,8 @@ class Glossary:
                             error(f'bad glossary cross reference {term}')
                             return term
 
+            # Continue for the default case without a '#' cross-ref.
+
             exclude_term = (exclude and term.lower() in exclude)
 
             if exclude_term:
@@ -211,18 +217,18 @@ class Glossary:
             else:
                 link = self.get_link(term, is_glossary, True)
 
+            # We can't find a link for the term (or it is excluded,
+            # so we don't want to make a link for it.)  However,
+            # a subset of the term might match a different glossary
+            # entry.  So separate the last letter and try to link again.
+            # This will perform the next-highest priority match if
+            # possible.  If nothing changes, instead separate the first
+            # letter and try to link again.  (Note that this doesn't
+            # catch the case where a match could be made starting
+            # inside the excluded term and extending beyond its end.
+            # I doubt that would ever matter, and if it did we'd just
+            # miss a link.  Not a big deal.)
             if not link:
-                # We can't find a link for the term (or it is excluded,
-                # so we don't want to make a link for it.)  However,
-                # a subset of the term might match a different glossary
-                # entry.  So separate the last letter and try to link again.
-                # This will perform the next-highest priority match if
-                # possible.  If nothing changes, instead separate the first
-                # letter and try to link again.  (Note that this doesn't
-                # catch the case where a match could be made starting
-                # inside the excluded term and extending beyond its end.
-                # I doubt that would ever matter, and if it did we'd just
-                # miss a link.  Not a big deal.)
                 matchobj = re.match(r'(.*\W)(\w+)$', term)
                 if matchobj:
                     term1 = matchobj.group(1)
@@ -245,8 +251,15 @@ class Glossary:
             elif exclude_term:
                 return term
             else:
-                error(f'{term} in {filename}',
-                      prefix='Glossary term is used outside of its glossary hierarchy:')
+                # Term not found in the applicable glossaries.
+                # Check whether the term is in any of the glossaries for which
+                # a warning should be printed.
+                if assoc_page:
+                    for glossary in assoc_page.glossary_warn:
+                        if term.lower() in glossary.link_set:
+                            error(f'{term} in {assoc_name}',
+                                  prefix='Glossary term is used outside of its glossary hierarchy:')
+                            break
                 return term
 
         # Perform glossary substitution on a fragment of "safe text", i.e.
@@ -341,6 +354,15 @@ class Glossary:
             self.anchor_list.append(anchor)
             return '{' + anchor + '}'
 
+        def repl_warn(matchobj):
+            name = matchobj.group(1)
+            page = find_page1(name)
+            if page:
+                page.glossary_warn.add(self)
+            else:
+                error(f'No page found for glossary warn:{name}')
+            return ''
+
         # self.taxon is now a page name or None.
         # Any of these values is appropriate for the glossary_taxon_dict key.
         glossary_taxon_dict[self.taxon] = self
@@ -360,18 +382,26 @@ class Glossary:
         name_set.add(short_name)
         term_set.update(self.link_set)
 
+        # Set a flag to print a warning if a word from this glossary is
+        # used in some other named taxon hierarchy.
+        txt = re.sub(r'^warn:\s*(.*?)\s*$',
+                     repl_warn, txt, flags=re.MULTILINE)
+
         return txt
+
+    def set_taxon(self, name):
+        page = find_page1(name)
+        if page:
+            self.page = page
+            self.taxon = page.name
+        else:
+            error(f'No page found for glossary taxon {name}')
+        if not self.title:
+            self.title = self.taxon
 
     def read_terms(self):
         def repl_taxon(matchobj):
-            name = matchobj.group(1)
-            page = find_page1(name)
-            if page:
-                self.taxon = page.name
-            else:
-                error(f'No page found for glossary taxon {name}')
-            if not self.title:
-                self.title = self.taxon
+            self.set_taxon(matchobj.group(1))
             return ''
 
         def repl_title(matchobj):
@@ -392,8 +422,10 @@ class Glossary:
     def read_jepson_terms(self):
         self.name = 'Jepson' # used only for self links from a glossary defn
         self.is_jepson = True
+        self.invisible = True
         self.used_dict = {}
         self.link_set = set()
+        self.txt = None # No associated HTML
 
         with open(f'{root_path}/data/jepson_glossary.txt', mode='r') as f:
             txt = f.read()
@@ -402,6 +434,11 @@ class Glossary:
             c = re.sub(r'\s*#.*$', '', c)
 
             if not c: # ignore blank lines (and comment-only lines)
+                continue
+
+            matchobj = re.match(r'taxon:\s*(.*?)\s*$', c)
+            if matchobj:
+                self.set_taxon(matchobj.group(1))
                 continue
 
             if c.startswith('-'):
@@ -438,21 +475,38 @@ class Glossary:
         name_set.add('Jepson')
         term_set.update(self.link_set)
 
+    def init_master(self):
+        self.name = 'master'
+        self.invisible = True
+        self.used_dict = {}
+        self.link_set = set()
+        self.txt = None # No associated HTML
+
+
     def write_toc(self, w, current):
-        if self == current:
+        if self.invisible:
+            # Write nothing for the jepson glossary,
+            # but continue into its children.
+            pass
+        elif self == current:
             w.write(f'<b>{self.title}</b><br>')
         else:
             pageurl = self.get_url()
             w.write(f'<a href="{pageurl}">{self.title}</a><br>')
 
         if self.child:
-            w.write('<div class="toc-indent">\n')
+            if not self.invisible:
+                w.write('<div class="toc-indent">\n')
+
             for child in sorted(self.child, key=attrgetter('name')):
                 child.write_toc(w, current)
-            w.write('</div>\n')
+
+            if not self.invisible:
+                w.write('</div>\n')
 
     # link_glossary() is called for each paragraph of txt.
-    def link_glossary_words_or_defn(self, name, c, is_glossary):
+    def link_glossary_words_or_defn(self, assoc_name, assoc_page, c,
+                                    is_glossary):
         # Check if the paragraph is a glossary definition.
         matchobj = re.match(r'{([^-].*?)}\s+(.*)$', c, flags=re.DOTALL)
         if matchobj:
@@ -466,7 +520,7 @@ class Glossary:
             # performance hit.  Instead, we leave the regex alone and
             # handle the excluded terms as they are matched.
             exclude_set = self.anchor_terms[anchor]
-            defn = self.link_glossary_words(name, defn,
+            defn = self.link_glossary_words(assoc_name, assoc_page, defn,
                                             is_glossary=False,
                                             exclude=exclude_set)
 
@@ -495,45 +549,49 @@ class Glossary:
         else:
             # It's not a definition line, so just link glossary words
             # normally within the line.
-            c = self.link_glossary_words(name, c, is_glossary=False)
+            c = self.link_glossary_words(assoc_name, assoc_page, c,
+                                         is_glossary=False)
             return f'<p>{c}</p>'
 
     def write_html(self):
-        if not self.txt:
-            # This glossary does not have its own txt file, so it should not
-            # create its own HTML file.
-            return
+        # There are sources of data for glossaries:
+        #   - from its own glossary txt file
+        #   - from glossary declarations within a taxon page's txt file
+        #   - from the Jepson term list
+        # Only the first of these should create its own HTML file.
+        if self.txt:
+            self.txt = parse_txt(self.name, self.txt, None, self)
 
-        self.txt = parse_txt(self.name, self.txt, None, self)
-
-        with write_and_hash(f'html/{filename(self.name)}.html') as w:
-            if self.taxon:
-                desc = f'Glossary of terms used for {self.taxon} in the Bay Area Wildflower Guide.'
-            else:
-                desc = f'Glossary of terms used in the Bay Area Wildflower Guide.'
-            write_header(w, self.name, None, nospace=True, desc=desc)
-            w.write('<h4 id="title">Glossary table of contents</h4>\n')
-            master_glossary.write_toc(w, self)
-            w.write(f'<a href="http://ucjeps.berkeley.edu/IJM_glossary.html">Jepson eFlora</a>\n')
-            w.write(f'<h1>{self.name}</h1>\n')
-            w.write(self.txt)
-            write_footer(w)
+            with write_and_hash(f'html/{filename(self.name)}.html') as w:
+                if self.taxon:
+                    desc = f'Glossary of terms used for {self.taxon} in the Bay Area Wildflower Guide.'
+                else:
+                    desc = f'Glossary of terms used in the Bay Area Wildflower Guide.'
+                write_header(w, self.name, None, nospace=True, desc=desc)
+                w.write('<h4 id="title">Glossary table of contents</h4>\n')
+                for glossary in sorted(top_glossaries, key=attrgetter('name')):
+                    glossary.write_toc(w, self)
+                w.write(f'<a href="http://ucjeps.berkeley.edu/IJM_glossary.html">Jepson eFlora</a>\n')
+                w.write(f'<h1>{self.name}</h1>\n')
+                w.write(self.txt)
+                write_footer(w)
 
         for child in sorted(self.child, key=attrgetter('name')):
             child.write_html()
 
     # Write search terms for my glossaries to pages.js
     def write_search_terms(self, w):
-        w.write(f'{{page:"{self.name}",com:["{self.title}"],x:"g",glossary:[\n')
-        for term in self.search_terms:
-            terms_str = '","'.join(term)
-            w.write(f'{{terms:["{terms_str}"]}},\n')
-        w.write(f']}},\n')
+        if not self.invisible:
+            w.write(f'{{page:"{self.name}",com:["{self.title}"],x:"g",glossary:[\n')
+            for term in self.search_terms:
+                terms_str = '","'.join(term)
+                w.write(f'{{terms:["{terms_str}"]}},\n')
+            w.write(f']}},\n')
 
         for child in sorted(self.child, key=attrgetter('name')):
             child.write_search_terms(w)
 
-        if arg('-not_top_usage') and self == master_glossary:
+        if arg('-not_top_usage') and self in top_glossaries:
             for anchor in self.anchor_list:
                 if anchor not in self.anchor_usage:
                     print(anchor)
@@ -566,11 +624,17 @@ class Glossary:
 ###############################################################################
 
 glossary_files = get_file_set('glossary', 'txt')
-name_set = set()
-term_set = set()
-anchor_set = set()
 
-name_set.add('none') # 'none#[term]' is used to prevent glossary references
+# name_set is the set of short glossary names that is used to support
+# cross-references of the form <short_glossary_name>#<term>
+name_set = set()
+
+# 'none' is not a real glossary, but the cross reference 'none#[term]'
+# may be used to prevent glossary references
+name_set.add('none')
+
+# term_set is the union of terms used in all glossaries
+term_set = set()
 
 def create_regex():
     name_ex = '(?:' + '|'.join(map(re.escape, name_set)) + ')'
@@ -586,31 +650,38 @@ def create_regex():
     global glossary_regex
     glossary_regex = re.compile(ex, re.IGNORECASE)
 
+top_glossaries = set()
+
 def parse_glossaries(top_list):
-    global master_glossary, jepson_glossary
+    global jepson_glossary
 
     for glossary_file in glossary_files:
         glossary = Glossary(glossary_file)
         glossary.read_terms()
-
-    master_glossary = glossary_taxon_dict[None]
+        top_glossaries.add(glossary)
 
     jepson_glossary = Glossary('Jepson eFlora glossary')
     jepson_glossary.read_jepson_terms()
-    master_glossary.set_parent(jepson_glossary)
+    top_glossaries.add(jepson_glossary)
+
+    master_glossary = Glossary('master glossary')
+    master_glossary.init_master()
+    top_glossaries.add(master_glossary)
 
     # Determine the primary glossary to use for each page *and*
     # determine the hierarchy among glossaries.
     for page in top_list:
-        page.set_glossary(master_glossary)
+        page.set_glossary(master_glossary, jepson_glossary, set())
 
     # Now that we know the glossary hierarchy, we can apply glossary links
-    # within each glossary and finally write out the HTML.
+    # within each glossary and finally write out the glossary HTML.
     create_regex()
     error_begin_section()
-    master_glossary.write_html()
+    for glossary in top_glossaries:
+        glossary.write_html()
     error_end_section()
 
 def write_glossary_search_terms(w):
-    master_glossary.write_search_terms(w)
+    for glossary in sorted(top_glossaries, key=attrgetter('name')):
+        glossary.write_search_terms(w)
     jepson_glossary.write_jepson_search_terms(w)

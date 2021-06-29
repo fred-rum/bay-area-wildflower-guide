@@ -1,4 +1,5 @@
 taxon:ferns
+warn:vascular plants
 
 {pinna (pinnae)} The 1st-order division of a frond blade.
 {pinnule,pinnules} The 2nd-order division of a frond blade.  (The 1st-order division of a pinna.)

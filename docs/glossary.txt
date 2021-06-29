@@ -24,6 +24,14 @@ When linking to a glossary term, the link is preferentially created to
 the lowest-level glossary that applies, but all glossaries in the
 taxonomic hierarchy are considered.
 
+warn:[name] specifies a taxon for which a warning should be printed if
+a term from this glossary is used.  The warning is also applied for
+all descendents of the named taxon, but not for any taxon to which the
+glossary is applied.  The warning is useful for discovering when a
+term might need to be applied to a larger taxon group.  E.g. 'keel'
+might be defined only for legumes, but we want to know if any other
+page in the vascular plant hierarchy tries to use the term.
+
 --
 Term definitions:
 

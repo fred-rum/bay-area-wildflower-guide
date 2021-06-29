@@ -38,7 +38,8 @@ def parse_txt(name, s, page, glossary):
             # glossary terms split across lines, but also allows
             # glossary *definitions* to be split across lines.
             if glossary:
-                p = glossary.link_glossary_words_or_defn(name, p, not page)
+                p = glossary.link_glossary_words_or_defn(name, assoc_page, p,
+                                                         not page)
             else:
                 p = f'<p>{p}</p>'
 
@@ -68,6 +69,16 @@ def parse_txt(name, s, page, glossary):
             c_list.append('</dl>')
 
         in_dl = for_defn
+
+
+    # Figure out which page is most closely related so that glossary_warn
+    # can be applied from that page.
+    if page:
+        assoc_page = page
+    elif glossary:
+        assoc_page = glossary.page
+    else:
+        assoc_page = None
 
     # Replace HTTP links in the text with ones that open a new tab.
     # This must be done before inserting internal links, e.g. ==... or {-...}.
@@ -136,7 +147,7 @@ def parse_txt(name, s, page, glossary):
         if list_depth:
             non_p = True
             if glossary:
-                c = glossary.link_glossary_words(name, c)
+                c = glossary.link_glossary_words(name, assoc_page, c)
             c = '<li>' + c + '</li>'
 
         if page:
@@ -167,7 +178,7 @@ def parse_txt(name, s, page, glossary):
             # most likely one of the glossary words being defined,
             # making a link redundant).
             if page and glossary:
-                c = glossary.link_glossary_words(name, c)
+                c = glossary.link_glossary_words(name, assoc_page, c)
 
             if re.search(r'</h\d>', c):
                 in_heading = False

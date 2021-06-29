@@ -1,5 +1,6 @@
 title:orchids
 taxon:orchid family
+warn:vascular plants
 
 <h2>Parts of an orchid flower</h2>
 

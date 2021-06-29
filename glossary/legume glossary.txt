@@ -1,5 +1,6 @@
 title:legumes
 taxon:legume family
+warn:vascular plants
 
 <h2>Parts of a pea flower (any flower in the legume family)</h2>
 

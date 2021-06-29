@@ -4,6 +4,7 @@ x:rare
 <b>Caution: IDs unsure</b>
 
 {corolla,corollas,lobe,lobes,upper lip,upper lips,lower lip,lower lips,lip,lips,keel,keels} Blue-eyed marys have 5 corolla lobes: 2 forming the upper lip, 3 forming the lower lip with the center of those forming a none#keel beneath enclosing the stamens and style.
+warn:vascular plants
 
 Key features:
 . number of flowers per whorl in lowermost and uppermost whorls

@@ -1129,3 +1129,9 @@ instead of using default_ancestor, use 'ancestor:flowering plants' for
 flowers without an observations.csv entry
 
 Allow observations.csv to be checked in
+(Remove it from .gitignore)
+
+Create a new top-level glossary for generic terms (e.g. shapes &
+locations) that don't need to be in the vascular plants glossary.
+
+Restore "master_glossary" variable instead of top_glossaries.
