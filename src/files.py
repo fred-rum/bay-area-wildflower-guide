@@ -8,6 +8,7 @@ from unidecode import unidecode
 import urllib.parse
 
 # My files
+from args import *
 from error import *
 
 def convert_path_to_unix(path):
@@ -16,16 +17,16 @@ def convert_path_to_unix(path):
 def convert_path_to_windows(path):
     return re.sub(r'/', r'\\', path)
 
-# I don't really understand what Windows is doing with / vs. \ path
-# separators or how they impact .. path handling.  So I avoid the ..
-# stuff by getting the path of the script and stripping off the
-# trailing /src part.  (Obviously, this assumes that no one has mucked
-# with the directory hierarchy, but that assumption would be baked in
-# regardless.)
 src_path = os.path.dirname(os.path.abspath( __file__ ))
 # sys.path[0] is sometimes a relative path, e.g. when run under cProfile
 src_path = convert_path_to_unix(src_path)
-root_path = re.sub(r'/src$', r'', src_path)
+
+if arg('-dir'):
+    root_path = arg('-dir')
+    if root_path.endswith('/'):
+        root_path = root_path[0:-1]
+else:
+    root_path = re.sub(r'/src$', r'', src_path)
 
 # Create new files in the working_path.  This has a few advantages:
 # - Allow the user to continue browsing old files while updates are in
@@ -57,7 +58,7 @@ def get_file_set(subdir, ext):
             base_set.add(filename)
     return base_set
 
-jpg_files = get_file_set(f'{db_pfx}photos', 'jpg')
+jpg_files = get_file_set(f'photos', 'jpg')
 
 # Turn a set of files back into a file list.
 def get_file_list(subdir, base_set, ext):
@@ -190,3 +191,22 @@ def filename(name):
 # In particular, I use ",", "'", and of course "/" in my filenames.
 def url(name):
     return urllib.parse.quote(filename(name), safe=";,/?:@&=+$-_.!~*'()#")
+
+# Wrap the process of reading a data file so that the common log messages are
+# printed and a read failure is handled appropriately.
+# If the file can be read, the 'fn' function is called with the file descriptor.
+# If the file cannot be read, the 'fn' function is not called.
+def read_data_file(filename, fn, msg=None):
+    if msg:
+        msg += ' from '
+    else:
+        msg = ''
+
+    try:
+        with open(f'{root_path}/data/{filename}', mode='r', encoding='utf-8') as f:
+            if arg('-steps'):
+                info(f'Reading {msg}data/{filename}')
+            fn(f)
+    except FileNotFoundError:
+        if arg('-steps'):
+            info(f'Skipping {msg}data/{filename}')

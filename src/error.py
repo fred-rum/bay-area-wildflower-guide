@@ -8,6 +8,9 @@ _error_cnt = 0
 _in_section = False
 _delayed_cnt = 0 # is always 0 when _in_section is False
 
+def info(msg):
+    print(msg, flush=True)
+
 def warning(msg):
     sys.stdout.flush()
     print(msg, file=sys.stderr, flush=True)

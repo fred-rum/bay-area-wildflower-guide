@@ -30,6 +30,7 @@
 
 import os
 import shutil
+import sys
 import filecmp
 import re
 import csv
@@ -39,6 +40,12 @@ from unidecode import unidecode
 import datetime
 import time
 import shutil
+
+# Python 3 is required in general for good Unicode support and other features.
+# Some of the yaml-handling code requires the default dictionaries to be
+# ordered, which means 3.7 or later.
+if sys.version_info < (3, 7):
+    sys.exit('Python 3.7 or later is required.\n')
 
 # My files
 from args import *
@@ -70,9 +77,10 @@ os.mkdir(working_path + '/html')
 # Read the mapping of iNaturalist observation locations to short park names.
 park_map = {}
 park_loc = {}
-def read_parks():
-    with open(f'{root_path}/data/parks.yaml', mode='r', encoding='utf-8') as f:
-        yaml_data = yaml.safe_load(f)
+
+def read_parks(f):
+    yaml_data = yaml.safe_load(f)
+
     for loc in yaml_data:
         for x in yaml_data[loc]:
             if isinstance(x, str):
@@ -83,9 +91,9 @@ def read_parks():
                     park_map[x[y]] = y
                     park_loc[x[y]] = loc
 
-read_parks()
+read_data_file('parks.yaml', read_parks)
 
-txt_files = get_file_set(f'{db_pfx}txt', 'txt')
+txt_files = get_file_set('txt', 'txt')
 
 ###############################################################################
 
@@ -96,7 +104,7 @@ txt_files = get_file_set(f'{db_pfx}txt', 'txt')
 def read_txt_files():
     for name in txt_files:
         page = Page(name, name_from_txt=True)
-        with open(f'{root_path}/{db_pfx}txt/{name}.txt', 'r', encoding='utf-8') as r:
+        with open(f'{root_path}/txt/{name}.txt', 'r', encoding='utf-8') as r:
             page.txt = r.read()
 
 read_txt_files()
@@ -132,8 +140,9 @@ assign_jpgs()
 if arg('-tree1'):
     print_trees()
 
-with open(root_path + '/data/group_names.yaml', encoding='utf-8') as f:
+def read_group_names(f):
     group_names = yaml.safe_load(f)
+    create_group_pages(group_names)
 
 def create_group_pages(d, prefix=''):
     for sci, com in d.items():
@@ -152,7 +161,8 @@ def create_group_pages(d, prefix=''):
             if not page:
                 page = Page(com, elab, shadow=True)
             #print(f'{page.com} <-> {page.elab}')
-create_group_pages(group_names)
+
+read_data_file('group_names.yaml', read_group_names)
 
 if arg('-tree1b'):
     print_trees()
@@ -185,90 +195,91 @@ for page in page_array:
 # iNaturalist).  There is more data in there that we'll read later, but
 # first we want to complete the Linnaean tree so that properties can be
 # properly applied.
-def read_obs_chains():
-    with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='utf-8') as f:
-        def get_field(fieldname):
-            if fieldname in row:
-                return row[fieldname]
-            else:
-                return None
+def read_obs_chains(f):
+    def get_field(fieldname):
+        if fieldname in row:
+            return row[fieldname]
+        else:
+            return None
 
-        csv_reader = csv.DictReader(f)
+    csv_reader = csv.DictReader(f)
 
-        for row in csv_reader:
-            sci = get_field('scientific_name')
-            taxon_id = get_field('taxon_id')
+    for row in csv_reader:
+        sci = get_field('scientific_name')
+        taxon_id = get_field('taxon_id')
 
-            # In the highly unusual case of no scientific name for an
-            # observation, just throw it out.  And if there is a scientific
-            # name, I'd expect that there should be a taxon_id as well.
-            if not sci or not taxon_id: continue
+        # In the highly unusual case of no scientific name for an
+        # observation, just throw it out.  And if there is a scientific
+        # name, I'd expect that there should be a taxon_id as well.
+        if not sci or not taxon_id: continue
 
-            orig_sci = sci
+        orig_sci = sci
 
-            # Remove the special 'x' sign used by hybrids since I
-            # can't (yet) support it cleanly.  Note that I *don't* use
-            # the r'' string format here because I want the \N to be
-            # parsed during string parsing, not during RE parsing.
-            sci = re.sub('\N{MULTIPLICATION SIGN} ', r'', sci)
+        # Remove the special 'x' sign used by hybrids since I
+        # can't (yet) support it cleanly.  Note that I *don't* use
+        # the r'' string format here because I want the \N to be
+        # parsed during string parsing, not during RE parsing.
+        sci = re.sub('\N{MULTIPLICATION SIGN} ', r'', sci)
 
-            com = get_field('common_name')
+        com = get_field('common_name')
 
-            # The common name is forced to all lower case to match my
-            # convention.
-            if com:
-                com = com.lower()
+        # The common name is forced to all lower case to match my
+        # convention.
+        if com:
+            com = com.lower()
 
-            page = find_page2(com, sci, from_inat=True, taxon_id=taxon_id)
+        page = find_page2(com, sci, from_inat=True, taxon_id=taxon_id)
 
-            # if find_page2() finds a match, it automatically sets the
-            # taxon_id for the page if it didn't have it already.
+        # if find_page2() finds a match, it automatically sets the
+        # taxon_id for the page if it didn't have it already.
 
-            # if find_page2() didn't find a match, it returns None.
-            # We'll create a shadow page for it below, once we've figured
-            # out its taxonomical rank.
+        # if find_page2() didn't find a match, it returns None.
+        # We'll create a shadow page for it below, once we've figured
+        # out its taxonomical rank.
 
-            try:
-                # Read the taxonomic chain from observations.csv and create
-                # Linnaean links accordingly.
-                for rank in Rank:
-                    group = get_field(f'taxon_{rank.name}_name')
-                    if not group:
-                        # ignore an empty group string
-                        continue
+        try:
+            # Read the taxonomic chain from observations.csv and create
+            # Linnaean links accordingly.
+            for rank in Rank:
+                group = get_field(f'taxon_{rank.name}_name')
+                if not group:
+                    # ignore an empty group string
+                    continue
 
-                    if not page:
-                        # Figure out the taxon's rank and create a page for it.
+                if not page:
+                    # Figure out the taxon's rank and create a page for it.
 
-                        if not page and ' ' in sci:
-                            # If the scientific name has at least one space,
-                            # then we can infer its rank directly from its name.
-                            pass
-                        elif group == orig_sci:
-                            # If the first name in the taxonomic chain matches
-                            # the observed taxon name, then it directly tells
-                            # us the taxon rank.
-                            if rank is Rank.genus:
-                                sci = f'{sci} spp.'
-                            else:
-                                sci = f'{rank.name} {sci}'
+                    if not page and ' ' in sci:
+                        # If the scientific name has at least one space,
+                        # then we can infer its rank directly from its name.
+                        pass
+                    elif group == orig_sci:
+                        # If the first name in the taxonomic chain matches
+                        # the observed taxon name, then it directly tells
+                        # us the taxon rank.
+                        if rank is Rank.genus:
+                            sci = f'{sci} spp.'
                         else:
-                            # If the first name in the taxonomic chain doesn't
-                            # match the observed taxon name, then the observed
-                            # taxon must be an unrecognized rank.  On the
-                            # assumption that the observation will get promoted
-                            # to a higher-level taxon, we just fudge it here
-                            # by pretending it's the lowest rank.
-                            sci = f'below {sci}'
+                            sci = f'{rank.name} {sci}'
+                    else:
+                        # If the first name in the taxonomic chain doesn't
+                        # match the observed taxon name, then the observed
+                        # taxon must be an unrecognized rank.  On the
+                        # assumption that the observation will get promoted
+                        # to a higher-level taxon, we just fudge it here
+                        # by pretending it's the lowest rank.
+                        sci = f'below {sci}'
 
-                        page = Page(com, sci, shadow=True, from_inat=True)
-                        page.set_taxon_id(taxon_id)
-                    if group != orig_sci:
-                        page = page.add_linn_parent(rank, group, from_inat=True)
-            except FatalError:
-                warning(f'was creating taxonomic chain from {page.full()}')
-                raise
-read_obs_chains()
+                    page = Page(com, sci, shadow=True, from_inat=True)
+                    page.set_taxon_id(taxon_id)
+                if group != orig_sci:
+                    page = page.add_linn_parent(rank, group, from_inat=True)
+        except FatalError:
+            warning(f'was creating taxonomic chain from {page.full()}')
+            raise
+
+read_data_file('observations.csv', read_obs_chains,
+               msg='taxon hierarchy')
 
 if arg('-tree3'):
     print_trees()
@@ -309,37 +320,43 @@ for rank in Rank:
 if arg('-tree6'):
     print_trees()
 
-with open(f'{root_path}/data/ignore species.yaml', encoding='utf-8') as f:
+sci_ignore = {}
+
+def read_ignore_species(f):
     sci_ignore = yaml.safe_load(f)
 
-for sci in sci_ignore:
-    # Keep only the first character ('+' or '-') and ignore the comment.
-    sci_ignore[sci] = sci_ignore[sci][0]
+    for sci in sci_ignore:
+        # Keep only the first character ('+' or '-') and ignore the comment.
+        sci_ignore[sci] = sci_ignore[sci][0]
 
-    if sci in isci_page:
-        page = isci_page[sci]
-    else:
-        page = find_page1(sci)
+        if sci in isci_page:
+            page = isci_page[sci]
+        else:
+            page = find_page1(sci)
 
-    if page and not page.shadow:
-        error(f'{sci} is ignored, but there is a real page for it ({page.name})')
+        if page and not page.shadow:
+            error(f'{sci} is ignored, but there is a real page for it ({page.name})')
+
+read_data_file('ignore_species.yaml', read_ignore_species)
 
 # Read my observations file (exported from iNaturalist) and use it as follows
 # for each observed taxon:
 #   Associate common names with scientific names
 #   Get a count of observations (total and research grade)
 #   Get an iNaturalist taxon ID
-error_begin_section()
-with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='utf-8') as f:
+def read_observation_data(f):
     def get_field(fieldname):
         if fieldname in row:
             return row[fieldname]
         else:
             return None
 
+    error_begin_section()
+
     csv_reader = csv.DictReader(f)
 
-    set_rg_supported('quality_grade' in csv_reader.fieldnames)
+    if 'quality_grade' in csv_reader.fieldnames:
+        set_rg_supported()
 
     for row in csv_reader:
         sci = get_field('scientific_name')
@@ -482,7 +499,11 @@ with open(f'{root_path}/data/observations.csv', mode='r', newline='', encoding='
             page.parks[short_park] = 0
         page.parks[short_park] += 1
         page.month[month] += 1
-error_end_section()
+
+    error_end_section()
+
+read_data_file('observations.csv', read_observation_data,
+               msg='observation data')
 
 if arg('-tree7'):
     print_trees()

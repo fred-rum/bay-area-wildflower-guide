@@ -5,7 +5,7 @@ from error import *
 from files import *
 from page import *
 
-thumb_set = get_file_set(f'{db_pfx}thumbs', 'jpg')
+thumb_set = get_file_set(f'thumbs', 'jpg')
 
 def get_name_from_jpg(jpg):
     name = re.sub(r',([-0-9]\S*|)$', r'', jpg)
@@ -26,13 +26,13 @@ def get_name_from_jpg(jpg):
 # and that is OK.
 for name in thumb_set:
     if name not in jpg_files:
-        thumb_file = f'{root_path}/{db_pfx}thumbs/' + name + '.jpg'
+        thumb_file = f'{root_path}/thumbs/' + name + '.jpg'
         os.remove(thumb_file)
 
 mod_list = []
 for name in jpg_files:
-    photo_file = f'{root_path}/{db_pfx}photos/' + name + '.jpg'
-    thumb_file = f'{root_path}/{db_pfx}thumbs/' + name + '.jpg'
+    photo_file = f'{root_path}/photos/' + name + '.jpg'
+    thumb_file = f'{root_path}/thumbs/' + name + '.jpg'
     if (name not in thumb_set or
         os.path.getmtime(photo_file) > os.path.getmtime(thumb_file)):
         mod_list.append(photo_file)
@@ -43,7 +43,7 @@ if mod_list:
             filename = convert_path_to_windows(filename)
             w.write(filename + '\n')
     convert_list = convert_path_to_windows(f'{working_path}/convert.txt')
-    thumb_glob = convert_path_to_windows(f'{root_path}/{db_pfx}thumbs/*.jpg')
+    thumb_glob = convert_path_to_windows(f'{root_path}/thumbs/*.jpg')
     cmd = ['C:/Program Files (x86)/IrfanView/i_view32.exe',
            f'/filelist={convert_list}',
            '/aspectratio',

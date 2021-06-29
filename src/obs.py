@@ -13,9 +13,10 @@
 # This isn't the cleanest of modules.  Obs looks directly into the
 # page objects, and users of Obs sometimes look inside it for 'n'.
 
-def set_rg_supported(x):
+rg_supported = False
+def set_rg_supported():
     global rg_supported
-    rg_supported = x
+    rg_supported = True
 
 class Obs:
     pass

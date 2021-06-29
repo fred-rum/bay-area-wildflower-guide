@@ -18,7 +18,7 @@ def strip_comments(to_filename, from_filename=None, code=None):
 
     is_js = (to_filename.endswith('.js'))
 
-    with open(f'{root_path}/src/{from_filename}', mode='r', encoding='utf-8') as r:
+    with open(f'{src_path}/{from_filename}', mode='r', encoding='utf-8') as r:
         txt = r.read()
 
     if code:
@@ -42,9 +42,9 @@ def strip_comments(to_filename, from_filename=None, code=None):
     if is_js:
         comment += r'|\s*//[^\r\n]*$'
 
-        # If the -debug arg is given, keep console debug statements.
+        # If the -debug_js arg is given, keep console debug statements.
         # Otherwise, delete them.
-        if not arg('-debug'):
+        if not arg('-debug_js'):
             comment += r'|\s*console\.(error|warn|info|log)\([^\r\n]*\);\s*$'
 
     pattern = fr'({quote1}|{quote2})|({comment})'

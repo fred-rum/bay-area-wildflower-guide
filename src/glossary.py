@@ -378,7 +378,7 @@ class Glossary:
             self.title = matchobj.group(1)
             return ''
 
-        with open(f'{root_path}/{db_pfx}glossary/{self.name}.txt', mode='r') as f:
+        with open(f'{root_path}/glossary/{self.name}.txt', mode='r') as f:
             self.txt = f.read()
 
         self.txt = re.sub(r'^taxon:\s*(.*?)\s*$',
@@ -565,7 +565,7 @@ class Glossary:
 # end of Glossary class
 ###############################################################################
 
-glossary_files = get_file_set(f'{db_pfx}glossary', 'txt')
+glossary_files = get_file_set('glossary', 'txt')
 name_set = set()
 term_set = set()
 anchor_set = set()

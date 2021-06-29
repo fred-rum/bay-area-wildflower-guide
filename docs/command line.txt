@@ -4,9 +4,9 @@ From the project directory, run
 It can generally be run without arguments.
 The following arguments are supported to aid debugging:
 
--db <name.
-  changes the directory for generated files from the default current
-  directory.
+-dir <name>
+  runs the script on the files and directories in <name> instead of
+  in the directory that includes src/bawg.py
 
 -no_error_limit
   tells the script to run to completion even if there are many errors.
@@ -22,8 +22,11 @@ The following arguments are supported to aid debugging:
   modifies the Javascript so that files are never stored or fetched in
   the offline cache.
 
--debug
+-debug_js
   retains console debug statements in the Javascript.
 
 -tree<n>
   prints the Linnaean and real hierarchies after the Nth processing step.
+
+-steps
+  prints the major steps of execution as they occur

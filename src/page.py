@@ -1963,7 +1963,7 @@ class Page:
         if jpg:
             pageurl = url(self.name)
             jpgurl = url(jpg)
-            w.write(f'<a href="{pageurl}.html"><div class="list-thumb"><img class="boxed" src="../{db_pfx}thumbs/{jpgurl}.jpg" alt="photo"></div></a>')
+            w.write(f'<a href="{pageurl}.html"><div class="list-thumb"><img class="boxed" src="../thumbs/{jpgurl}.jpg" alt="photo"></div></a>')
 
         w.write(f'{self.create_link(2)}</div>\n')
 
@@ -2055,7 +2055,7 @@ class Page:
         pageurl = url(child.name)
         if jpg:
             jpgurl = url(jpg)
-            img = f'<a href="{pageurl}.html"><div class="key-thumb"><img class="boxed" src="../{db_pfx}thumbs/{jpgurl}.jpg" alt="photo"></div></a>'
+            img = f'<a href="{pageurl}.html"><div class="key-thumb"><img class="boxed" src="../thumbs/{jpgurl}.jpg" alt="photo"></div></a>'
         elif ext_photo:
             img = f'<a href="{pageurl}.html" class="enclosed {child.link_style()}"><div class="key-thumb-text">'
             n_photos = len(child.ext_photo_list)
@@ -2357,7 +2357,7 @@ class Page:
                         # Do not put newlines between jpgs because that would
                         # put an unwanted text space between them in addition
                         # to their desired margin.
-                        w.write(f'<a href="../{db_pfx}photos/{jpgurl}.jpg"><img class="leaf-thumb" src="../{db_pfx}thumbs/{jpgurl}.jpg" alt="photo"></a>')
+                        w.write(f'<a href="../photos/{jpgurl}.jpg"><img class="leaf-thumb" src="../thumbs/{jpgurl}.jpg" alt="photo"></a>')
 
                     for (label, link) in self.ext_photo_list:
                         w.write(f'<a href="{link}" target="_blank" rel="noopener noreferrer" class="enclosed"><div class="leaf-thumb-text">')
