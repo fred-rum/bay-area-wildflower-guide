@@ -136,7 +136,7 @@ class Glossary:
         lower = term.lower()
         if lower in self.link_set:
             anchor = self.term_anchor[lower]
-            if arg('-not_top_usage') and self in top_glossaries and deep:
+            if arg('-not_top_usage') and self == master_glossary and deep:
                 if child is None:
                     if not is_glossary:
                         # Anchor is used from a taxon page
@@ -572,8 +572,7 @@ class Glossary:
                     desc = f'Glossary of terms used in the Bay Area Wildflower Guide.'
                 write_header(w, self.name, None, nospace=True, desc=desc)
                 w.write('<h4 id="title">Glossary table of contents</h4>\n')
-                for glossary in sorted(top_glossaries, key=attrgetter('name')):
-                    glossary.write_toc(w, self)
+                master_glossary.write_toc(w, self)
                 w.write(f'<a href="http://ucjeps.berkeley.edu/IJM_glossary.html">Jepson eFlora</a>\n')
                 w.write(f'<h1>{self.name}</h1>\n')
                 w.write(self.txt)
@@ -594,7 +593,7 @@ class Glossary:
         for child in sorted(self.child, key=attrgetter('name')):
             child.write_search_terms(w)
 
-        if arg('-not_top_usage') and self in top_glossaries:
+        if arg('-not_top_usage') and self == master_glossary:
             for anchor in self.anchor_list:
                 if anchor not in self.anchor_usage:
                     print(anchor)
@@ -656,7 +655,7 @@ def create_regex():
 top_glossaries = set()
 
 def parse_glossaries(top_list):
-    global jepson_glossary
+    global master_glossary, jepson_glossary
 
     for glossary_file in glossary_files:
         glossary = Glossary(glossary_file)
@@ -683,11 +682,9 @@ def parse_glossaries(top_list):
     # within each glossary and finally write out the glossary HTML.
     create_regex()
     error_begin_section()
-    for glossary in top_glossaries:
-        glossary.write_html()
+    master_glossary.write_html()
     error_end_section()
 
 def write_glossary_search_terms(w):
-    for glossary in sorted(top_glossaries, key=attrgetter('name')):
-        glossary.write_search_terms(w)
+    master_glossary.write_search_terms(w)
     jepson_glossary.write_jepson_search_terms(w)
