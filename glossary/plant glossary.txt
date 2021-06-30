@@ -81,6 +81,8 @@ Example drawings are <a target="_blank" href="http://sweetgum.nybg.org/science/g
 
 <h2>Relative position</h2>
 
+{abaxial,abaxially} The surface further from the stem when upright.  E.g. the lower surface of a leaf or the outer surface of a flower#petal.
+{adaxial,adaxially} The surface closer to the stem when upright.  E.g. the upper surface of a leaf or the inner surface of a flower#petal.
 {basal} Positioned at the base.  Most commonly refers to leaves growing at the base of the stem.  Contrast cauline as well as lateral and terminal.
 {cauline} Growing along a plant's stem.  Most commonly refers to leaves.  Contrast basal.
 {distal,distally} Closer to the tip and farther away from the base of a structure.  The structure is often implied; e.g. a distal leaf grows at the end of the plant furthest from the base.  Contrast proximal.
@@ -97,17 +99,8 @@ Example drawings are <a target="_blank" href="http://sweetgum.nybg.org/science/g
 {bisexual} A plant that has both male and female reproductive structures (e.g. both flower#staminate and flower#pistillate flower#flowers), never both on the same plant.
 {dioecious} A plant that has only either male or female reproductive structures (e.g. flower#staminate or flower#pistillate flower#flowers), never both on the same plant.
 
-<h2>Geographic locations</h2>
-
-{Diablo range} The east bay mountains and foothills from Mt. Diablo through Mt. Hamilton and beyond.  This is a portion of the inner coast range which extends further through California.
-{Santa Cruz mountains,Santa Cruz range} The mountains and hills of the SF peninsula, continuing to the central coast.  This is a portion of the outer coast range which extends further through California.
-{Mt. Tam,Mt. Tamalpais,Mount Tam,Mount Tamalpais} Mt. Tamalpais.  A mountain in Marin County.  Part of the outer coast range, but separate from the Santa Cruz mountains.
-{outer coastal range} In the bay area, this is the Santa Cruz mountains and the Mt. Tam area.
-
 <h2>Miscellaneous terms</h2>
 
-{abaxial,abaxially} The surface further from the stem when upright.  E.g. the lower surface of a leaf or the outer surface of a flower#petal.
-{adaxial,adaxially} The surface closer to the stem when upright.  E.g. the upper surface of a leaf or the inner surface of a flower#petal.
 {alternate} Arranged singly along an axis.  Not all on the same side, but not necessarily on alternating sides, either.  E.g. may be spirally arranged.  See opposite, whorl.
 {annual,annuals} Lives for one year or less, generally without forming any woody parts.
 {axil,axils,axillary} The distal, adaxial angle between a main axis (e.g. a stem) and an appendage (e.g. a branch or leaf).

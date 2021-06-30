@@ -27,6 +27,9 @@ class Glossary:
         # (or None, if it includes all taxons)
         self.taxon = None
 
+        # top page used by this glossary (or None, if it applies to all pages)
+        self.page = None
+
         self.parent = None # a single parent glossary (or None)
         self.child = set() # an unordered set of child glossaries
 
@@ -664,9 +667,12 @@ def parse_glossaries(top_list):
     jepson_glossary.read_jepson_terms()
     top_glossaries.add(jepson_glossary)
 
-    master_glossary = Glossary('master glossary')
-    master_glossary.init_master()
-    top_glossaries.add(master_glossary)
+    if None in glossary_taxon_dict:
+        master_glossary = glossary_taxon_dict[None]
+    else:
+        master_glossary = Glossary('master glossary')
+        master_glossary.init_master()
+        top_glossaries.add(master_glossary)
 
     # Determine the primary glossary to use for each page *and*
     # determine the hierarchy among glossaries.

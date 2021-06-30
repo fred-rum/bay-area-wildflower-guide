@@ -2148,6 +2148,12 @@ var pages=[
 {page:"whitedaisy tidytips",sci:["Layia glandulosa"],x:"u"},
 {page:"winter vetch",sci:["Vicia villosa ssp. varia"],x:"u"},
 {page:"yellowray goldfields",sci:["Lasthenia glabrata"],x:"u"},
+{page:"general glossary",com:["general"],x:"g",glossary:[
+{terms:["Diablo range"]},
+{terms:["Santa Cruz mountains","Santa Cruz range"]},
+{terms:["Mt. Tam","Mt. Tamalpais","Mount Tam","Mount Tamalpais"]},
+{terms:["outer coastal range"]},
+]},
 {page:"plant glossary",com:["vascular plants"],x:"g",glossary:[
 {terms:["leaf","leaves","leaved"]},
 {terms:["blade","blades","leaf blade","leaf blades"]},
@@ -2209,10 +2215,6 @@ var pages=[
 {terms:["male"]},
 {terms:["bisexual"]},
 {terms:["dioecious"]},
-{terms:["Diablo range"]},
-{terms:["Santa Cruz mountains","Santa Cruz range"]},
-{terms:["Mt. Tam","Mt. Tamalpais","Mount Tam","Mount Tamalpais"]},
-{terms:["outer coastal range"]},
 {terms:["abaxial","abaxially"]},
 {terms:["adaxial","adaxially"]},
 {terms:["alternate"]},
