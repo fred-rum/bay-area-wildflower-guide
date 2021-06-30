@@ -1,0 +1,19 @@
+sci:genus Libellula
+
+==flame skimmer:L. saturata
+bug:602
+. males bright orange with amber color in the wings covering half the width of the wing, out to the nodus, and all the way to the rear of the hind wing
+. females paler but still with some amber at least on the leading edge of the wing
+
+==neon skimmer:L. croceipennis
+bug:36801
+. males bright red with amber wing color only covering a quarter of the wing, halfway to the nodus, and not all the way back to the rear edge of the hind wing
+. female paler and with essentially clear wings
+
+==widow skimmer:L. luctuosa
+bug:586
+. mature males have a large basal area of brown on each of the four wings, and each wing also has a whitish area roughly at the middle
+.. their brown bodies become increasingly pruinose (whitish) as they get older.
+. females and immature males have the same brown wing bands as the mature males, but not the whitish areas
+.. wings usually have a brown tip
+.. a dorsal view of the abdomen shows a brown band at center with a yellow stripe running along each side

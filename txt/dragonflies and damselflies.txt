@@ -1,0 +1,15 @@
+sci:order Odonata
+
+==dragonflies
+. very large eyes with no gap between them
+. thicker body
+. wings at rest held out perpendicular to the body
+. hind wings are broader at the baes and so noticeably larger than the fore wings
+
+==damselflies
+. smaller eyes with at least a little gap between them
+. twig-like body
+. wings at rest folded together and parallel to the body
+. hind wings and fore wings the same and tapering to the body connection
+
+ID tips from <a href="https://www.treehugger.com/how-tell-difference-between-dragonfly-and-damselfly-4864536">here</a>.
