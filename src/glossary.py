@@ -635,16 +635,24 @@ def parse_glossaries(top_list):
     jepson_glossary = Glossary('Jepson eFlora glossary')
     jepson_glossary.read_jepson_terms()
 
-    if None in glossary_taxon_dict:
+    if jepson_glossary.taxon == None:
+        master_glossary = jepson_glossary
+
+        if None in glossary_taxon_dict:
+            top_glossary = glossary_taxon_dict[None]
+            top_glossary.set_parent(jepson_glossary)
+    elif None in glossary_taxon_dict:
         master_glossary = glossary_taxon_dict[None]
+        top_glossary = master_glossary
     else:
         master_glossary = Glossary('master glossary')
         master_glossary.init_master()
+        top_glossary = master_glossary
 
     # Determine the primary glossary to use for each page *and*
     # determine the hierarchy among glossaries.
     for page in top_list:
-        page.set_glossary(master_glossary, jepson_glossary, set())
+        page.set_glossary(top_glossary, jepson_glossary, set())
 
     # Now that we know the glossary hierarchy, we can apply glossary links
     # within each glossary and finally write out the glossary HTML.
