@@ -83,16 +83,12 @@ class Glossary:
 
         # anchor_list is a list of anchors, in glossary order.
         # It is only used with arg -jepson_usage.
-        # anchor_usage indicates the level at which each anchor is used:
-        #   either self.name or the name of one of its child glossaries.
         self.anchor_list = []
-        self.anchor_usage = {}
 
     def set_parent(self, parent):
         self.parent = parent
         if parent:
             parent.child.add(self)
-            top_glossaries.discard(self)
 
     def get_link_class(self):
         if self.is_jepson:
@@ -629,26 +625,21 @@ def create_regex():
     global glossary_regex
     glossary_regex = re.compile(ex, re.IGNORECASE)
 
-top_glossaries = set()
-
 def parse_glossaries(top_list):
     global master_glossary, jepson_glossary
 
     for glossary_file in glossary_files:
         glossary = Glossary(glossary_file)
         glossary.read_terms()
-        top_glossaries.add(glossary)
 
     jepson_glossary = Glossary('Jepson eFlora glossary')
     jepson_glossary.read_jepson_terms()
-    top_glossaries.add(jepson_glossary)
 
     if None in glossary_taxon_dict:
         master_glossary = glossary_taxon_dict[None]
     else:
         master_glossary = Glossary('master glossary')
         master_glossary.init_master()
-        top_glossaries.add(master_glossary)
 
     # Determine the primary glossary to use for each page *and*
     # determine the hierarchy among glossaries.
