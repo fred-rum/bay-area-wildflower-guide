@@ -273,6 +273,9 @@ not have a photo.
 'photo_requires_color' flags a page if it is has a photo but has no
 assigned or propagated color.
 
+'photo_requires_bugid' flags a page if it has a photo but doesn't have
+a 'bug:<id>' specified.
+
 
 Properties to link to external sites:
 

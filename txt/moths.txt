@@ -9,11 +9,15 @@ bug:65845
 bug:3071
 
 ==tabby moths:genus Aglossa
+bug:37824
 
 ==pacific tent caterpillar:Malacosoma constricta
+bug:163464
 
 ==genus Orgyia
+bug:335
 
 ==dagger moths:genus Acronicta
+bug:322
 
 ==cutworm moths and allies:family Noctuidae

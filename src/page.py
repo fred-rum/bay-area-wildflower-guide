@@ -919,7 +919,7 @@ class Page:
         self.txt = re.sub(r'^default_ancestor\s*?\n',
                           repl_default_ancestor, self.txt, flags=re.MULTILINE)
 
-        self.txt = re.sub(r'^(create|link|member_link|member_name|photo_requires_color|color_requires_photo|obs_requires_photo|flag_one_child|allow_obs_promotion|flag_obs_promotion|flag_obs_promotion_above_peers|flag_obs_promotion_without_x|allow_casual_obs|allow_any_nrg_obs_promotion|allow_outside_obs|allow_outside_obs_promotion|obs_fill_com|obs_fill_sci|obs_fill_alt_com|flag_obs_fill_com|flag_obs_fill_sci|flag_obs_fill_alt_com|link_calflora|link_calphotos|link_jepson|link_birds|link_bayarea_calflora|link_bayarea_inaturalist):\s*(.*?)\s*?\n',
+        self.txt = re.sub(r'^(create|link|member_link|member_name|photo_requires_color|color_requires_photo|obs_requires_photo|photo_requires_bugid|flag_one_child|allow_obs_promotion|flag_obs_promotion|flag_obs_promotion_above_peers|flag_obs_promotion_without_x|allow_casual_obs|allow_any_nrg_obs_promotion|allow_outside_obs|allow_outside_obs_promotion|obs_fill_com|obs_fill_sci|obs_fill_alt_com|flag_obs_fill_com|flag_obs_fill_sci|flag_obs_fill_alt_com|link_calflora|link_calphotos|link_jepson|link_birds|link_bayarea_calflora|link_bayarea_inaturalist):\s*(.*?)\s*?\n',
                           repl_property, self.txt, flags=re.MULTILINE)
 
     def parse_glossary(self):
@@ -1485,7 +1485,11 @@ class Page:
 
         if ('obs_requires_photo' in self.prop_value and
             self.count_flowers() and not self.get_jpg()):
-            error(f'obs_requires_photo: {self.full()} is observed, but has no photos')
+            error(f'obs_requires_photo: {self.full()} is observed but has no photos')
+
+        if ('photo_requires_bugid' in self.prop_value and
+            self.jpg_list and not self.bugguide_id):
+            error(f'photo_requires_bugid: {self.full()} has photos but has no bugguide ID')
 
         if 'flag_one_child' in self.prop_value and len(self.child) == 1:
             error(f'flag_one_child: {self.full()} has exactly one child')
@@ -1632,9 +1636,12 @@ class Page:
                 data_object.set_taxon_id(matchobj.group(1))
                 continue
 
-            matchobj = re.match(r'bug\s*:\s*(\d+)$', c)
+            matchobj = re.match(r'bug\s*:\s*(\d+|n/a)$', c)
             if matchobj:
-                data_object.bugguide_id = matchobj.group(1)
+                id = matchobj.group(1)
+                if data_object.bugguide_id and id != data_object.bugguide_id:
+                    error(f'conflicting bugg IDs in {data_object.full()}')
+                data_object.bugguide_id = id
                 continue
 
             matchobj = re.match(r'(x|xx):\s*(!?)(none|ba|ca|any|hist|rare|hist/rare|more|uncat)\s*$', c)
@@ -1822,7 +1829,7 @@ class Page:
             elab = format_elab(elab)
             add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/search?q={sciurl}&view=list" target="_blank" rel="noopener noreferrer">iNaturalist</a>')
 
-        if self.bugguide_id:
+        if self.bugguide_id and self.bugguide_id != 'n/a':
             elab = self.choose_elab(self.elab_bugguide)
             elab = format_elab(elab)
             add_link(elab, None, f'<a href="https://bugguide.net/node/view/{self.bugguide_id}" target="_blank" rel="noopener noreferrer">BugGuide</a>')

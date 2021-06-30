@@ -1,7 +1,10 @@
 sci:infraorder Acrididea
 
 ==painted meadow grasshopper:Chimarocephala pacifica
+bug:161879
 
 ==pallid-winged grasshopper:Trimerotropis pallidipennis
+bug:33991
 
 ==fontana grasshopper:Trimerotropis fontana
+bug:144964

@@ -1,5 +1,7 @@
 sci:family Rhaphidophoridae
 
 ==genus Gammarotettix
+bug:153791
 
 ==genus Pristoceuthophilus
+bug:41668

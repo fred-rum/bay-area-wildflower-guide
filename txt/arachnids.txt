@@ -1,5 +1,7 @@
 sci:class Arachnida
 
+photo_requires_bugid: genus-below
+
 ==spiders
 end_hierarchy
 

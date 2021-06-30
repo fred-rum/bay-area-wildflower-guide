@@ -1,7 +1,11 @@
 sci:family Formicidae
 
 ==carpenter ants:genus Camponotus
+bug:354
 
 ==wood, mound, and field ants:genus Formica
+bug:16569
 
-==genus Veromessor
+==smooth harvester ants:genus Veromessor
+# name from bugguide
+bug:93524

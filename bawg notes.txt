@@ -1100,13 +1100,8 @@ even if marked 'cultivated'?  Otherwise I get confused and wonder why
 it has a photo in the BAWG without any observations.  This would
 require an exception to the flag properties, or perhaps a new flag.
 
-flag bug pages that don't have a bugguide ID (e.g. req_bug_id).
-Applies only to leaf pages?  Or observed pages?
-
 Allow photos to have the same name flexibility as iNaturalist
 observations.  E.g. ignore hyphens, plurals.
-
-complain about conflicting bugguide IDs
 
 allow top of tree to have no glossary; move plant glossary to plants
 

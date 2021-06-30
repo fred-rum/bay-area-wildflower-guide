@@ -4,9 +4,12 @@ Leafyplace has a <a href="https://leafyplace.com/types-of-bees/">high-level guid
 
 ==western honey bee:Apis mellifera
 x:ca
+bug:3080
 
 ==bumble bees
 
 ==large carpenter bees:genus Xylocopa
+bug:3508
 
 ==genus Lasioglossum
+bug:9033

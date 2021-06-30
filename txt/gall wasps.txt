@@ -14,7 +14,7 @@ bug:362927
 . a small green berry-like gall in place of a plant#bud (e.g. next to the baes of a leaf)
 
 ==chinquapin flower gall wasp:Dryocosmus castanopsidis
-# no BugGuide entry
+bug:n/a
 . parasitizes both local {-Chrysolepis} species.
 . a pale red berry-like gall nestled among the flower#flowers.
 .. the gall is actually a deeper red, but is covered in a yellow/orange blush which can easily be rubbed off.

@@ -1,4 +1,5 @@
 sci:family Tettigoniidae
 
 ==scudder's bush katydids:genus Scudderia
+bug:7130
 Alice Abela <a href="https://www.inaturalist.org/observations/27223453#activity_comment_840fe7c9-e15b-4f6b-a0cb-91325386e4d5">writes</a> on iNaturalist: "S. furcata and S. mexicana overlap in range in CA.  Male genitalia is the best way to separate them.  I think there used to be some separation in terms of range in CA but these guys get moved around with nursery plants."

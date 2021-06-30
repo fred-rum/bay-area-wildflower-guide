@@ -1,6 +1,8 @@
 sci:class Insecta
 bug:52
 
+photo_requires_bugid: genus-below
+
 ==butterflies
 
 ==moths
