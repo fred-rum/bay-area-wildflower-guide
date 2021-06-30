@@ -81,8 +81,8 @@ class Glossary:
         # - easy_sub is applied for optimal display in the HTML.
         self.anchor_defined = {}
 
-        # These terms are only used with arg -not_top_usage.
         # anchor_list is a list of anchors, in glossary order.
+        # It is only used with arg -jepson_usage.
         # anchor_usage indicates the level at which each anchor is used:
         #   either self.name or the name of one of its child glossaries.
         self.anchor_list = []
@@ -136,21 +136,6 @@ class Glossary:
         lower = term.lower()
         if lower in self.link_set:
             anchor = self.term_anchor[lower]
-            if arg('-not_top_usage') and self == master_glossary and deep:
-                if child is None:
-                    if not is_glossary:
-                        # Anchor is used from a taxon page
-                        # in the master context.
-                        self.anchor_usage[anchor] = self.name
-                elif anchor in self.anchor_usage:
-                    if child.name != self.anchor_usage[anchor]:
-                        # Anchor is used from multiple children
-                        # (taxon or glossary).
-                        self.anchor_usage[anchor] = self.name
-                else:
-                    # Anchor is used for the first time, and it's not
-                    # from the master context.
-                    self.anchor_usage[anchor] = child.name
             if self.is_jepson:
                 if anchor in self.used_dict:
                     self.used_dict[anchor] += 1
@@ -481,7 +466,6 @@ class Glossary:
     def init_master(self):
         self.name = 'master'
         self.invisible = True
-        self.used_dict = {}
         self.link_set = set()
         self.txt = None # No associated HTML
 
@@ -592,13 +576,6 @@ class Glossary:
 
         for child in sorted(self.child, key=attrgetter('name')):
             child.write_search_terms(w)
-
-        if arg('-not_top_usage') and self == master_glossary:
-            for anchor in self.anchor_list:
-                if anchor not in self.anchor_usage:
-                    print(anchor)
-                elif self.anchor_usage[anchor] != self.name:
-                    print(f'{anchor}: {self.anchor_usage[anchor]}')
 
     # Write search terms for Jepson's glossary to pages.js
     def write_jepson_search_terms(self, w):

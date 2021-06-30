@@ -8,7 +8,6 @@ while len(sys.argv):
     if (sys.argv[0] in ('-jepson_usage',
                         '-incomplete_keys',
                         '-no_error_limit',
-                        '-not_top_usage',
                         '-without_cache',
                         '-debug_js',
                         '-steps') or
