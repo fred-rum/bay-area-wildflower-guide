@@ -1,0 +1,15 @@
+sci:genus Sphaerophoria
+
+Males have an elongated and narrow abdomen, eyes touching at the top, and no forehead stripe.  Females have a wider and more football-shaped abdomen, eyes separated at the top, and a forehead stripe.
+
+==forked globetail:S. sulphuripes
+bug:477067
+. posterior patterning different
+. forehead stripe on females broadens greatly near antennae
+. male and female <a href="https://docs.google.com/presentation/d/11M6wTxOCiL8aPt4k6iMzNbX1Se_Ry-8v3Znb3etqhxk/edit#slide=id.g65374e2bb0_0_56">example photos</a>
+
+==tufted globetail:S. contigua
+bug:477068
+. posterior patterning different
+. forehead stripe on females broadens somewhat near antennae
+. male and female <a href="https://docs.google.com/presentation/d/11M6wTxOCiL8aPt4k6iMzNbX1Se_Ry-8v3Znb3etqhxk/edit#slide=id.g653683452a_0_18">example photos</a>

@@ -1126,4 +1126,7 @@ flowers without an observations.csv entry
 Allow observations.csv to be checked in
 (Remove it from .gitignore)
 
-Restore "master_glossary" variable instead of top_glossaries.
+Support {--<name>} to link using a short name (common preferred), *or*
+improve {-<name>} to link using a short name whenever the named taxon
+is on the current page.  (Which means there should be a difference
+between a genus key and the auto-generated species page.)

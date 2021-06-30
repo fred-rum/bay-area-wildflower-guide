@@ -9,6 +9,8 @@ photo_requires_bugid: genus-below
 
 ==bees
 
+==flies
+
 ==ants
 
 ==beetles

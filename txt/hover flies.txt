@@ -1,0 +1,10 @@
+sci:family Syrphidae
+
+ID tips and photos for common bay area species can be found in <a href="https://norriscenter.ucsc.edu/collections-and-resources/insects/images/syrphidguide.pdf">Syrphidae: A Guide to Natural History and Identification of Common Genera in Santa Cruz County</a>
+
+==globetails
+
+==pufftails:genus Sphegina
+bug:18472
+
+==calligrapher flies
