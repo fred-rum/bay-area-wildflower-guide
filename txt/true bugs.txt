@@ -1,5 +1,3 @@
 sci:suborder Heteroptera
 
-list_hierarchy
-
 ==assassin bugs

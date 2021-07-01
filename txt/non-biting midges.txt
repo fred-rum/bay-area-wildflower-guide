@@ -1,0 +1,4 @@
+sci:family Chironomidae
+bug:3163
+
+From bugguide: "At rest, characteristically hold their front legs above head-height and extended forward, giving the illusion of elongate antennae to the untrained eye."

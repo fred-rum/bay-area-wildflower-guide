@@ -15,6 +15,9 @@ These look fairly distinct from california sagebrush and from each other.  I'll 
 . rare
 
 ==california mugwort:A. douglasiana
+color: other, cream
+. leaves 1--8 cm wide, entire to pinnately lobed
+.. leaves +- glaborus to sparsely tomentose adaxially, glabrous or hairy abaxially
 . very common
 
 ==tarragon:A. dracunculus
@@ -25,5 +28,12 @@ These look fairly distinct from california sagebrush and from each other.  I'll 
 
 ==common mugwort:A. vulgaris
 . very rare
+
+==silver wormwood:A. ludoviciana
+. leaves 0.5--1 cm wide, densely gray-hairy (or becoming +- glabrous adaxially)
+. not known to be in the bay area
+.. per CalFlora, not in the bay area
+.. no research-grade observations in the bay area
+.. but iNaturalist likes to suggest it anyway
 
 ]
