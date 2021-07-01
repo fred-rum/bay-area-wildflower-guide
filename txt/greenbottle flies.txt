@@ -1,0 +1,9 @@
+sci:genus Lucilia
+
+Bugguide <a href="https://bugguide.net/node/view/232115">describes</a>
+how some species can be distinguished using the acrostichal bristles
+(the ones closest to the dorsal midline), but the reference in
+{-blow flies} is best.
+
+==common european greenbottle fly:L. sericata
+bug:53775

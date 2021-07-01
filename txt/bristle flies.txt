@@ -1,0 +1,6 @@
+sci:family Tachinidae
+bug:197
+
+Characterized by a prominent subscutellum.
+
+See the reference in {-blow flies} for more information.

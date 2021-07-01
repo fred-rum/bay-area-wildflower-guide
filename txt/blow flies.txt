@@ -1,0 +1,12 @@
+sci:family Calliphoridae
+
+"Blow flies (Diptera: Calliphoridae) of eastern Canada" in
+The Canadian Journal of Arthropod Identification No. 11
+<a href="https://cjai.biologicalsurvey.ca/mwr_11/mwr_11.pdf">[PDF]</a>
+describes how to distinguish blow flies from similar families and also
+how to distinguish many common genera and species from each other.
+
+==greenbottle flies
+
+==genus Calliphora
+bug:7177

@@ -1,0 +1,10 @@
+sci:family Sarcophagidae
+bug:110
+
+From BugGuide:
+
+"Similar to blowflies, but generally blackish with gray thoracic stripes (never metallic); 3 black racing stripes on a gray background."
+
+"Although a few species are distinctive, New World Sarcophagidae should be considered impossible to identify."
+
+See the reference in {-blow flies} for more information.

@@ -10,4 +10,4 @@ color: yellow
 . plant 80--250 cm
 . stem stout, erect
 . very rare, and only in Santa Barbara County
-.. "Our study of type material indicates that this name has been erroneously applied to the more common T. californica var. californica"; Chen, 1994. [<a href="https://repositories.lib.utexas.edu/bitstream/handle/2152/31128/TaxonomyThermopsis.pdf">pdf</a>]
+.. "Our study of type material indicates that this name has been erroneously applied to the more common T. californica var. californica"; Chen, 1994. <a href="https://repositories.lib.utexas.edu/bitstream/handle/2152/31128/TaxonomyThermopsis.pdf">[PDF]</a>

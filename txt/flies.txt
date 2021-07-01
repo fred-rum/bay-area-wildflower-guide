@@ -1,6 +1,23 @@
 sci:order Diptera
 
+Wikipedia has a decent introduction to <a href="https://en.wikipedia.org/wiki/Scutellum_(insect_anatomy)#/media/File:Housefly_anatomy-key.svg">fly anatomy</a>.
+
+==blow flies
+
+==flesh flies
+
+==bristle flies
+
 ==hover flies
 
-==giant western crane fly:Holorusia hespera
-bug:40968
+==bee flies
+
+==small-headed flies
+
+==awl-flies
+
+==dance flies
+
+==typical crane flies
+
+==gall midges

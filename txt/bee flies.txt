@@ -1,0 +1,5 @@
+sci:family Bombyliidae
+
+==greater bee fly:Bombylius major
+bug:14997
+. bugguide has distinguishing features

@@ -1,6 +1,17 @@
 sci:family Cynipidae
 bug:14878
 
+The definitive reference for galls is Ron Russo's Field Guide to Plant
+Galls of California.
+<br>
+A good online reference is Joyce Gross's web pages for
+<a href="https://joycegross.com/galls_ca_oak.php">oak calls</a> and
+<a href="http://joycegross.com/galls_ca_nonoak.php">non-oak galls</a>.
+<br>
+The Bioblitz Club also has PDF brochures for
+<a href="https://712932ae-4562-44ff-908f-f817ffa1a217.filesusr.com/ugd/4f81b8_ff3e1f7f1ffa4d989db7d6835a08aca5.pdf">spring galls</a> and
+<a href="https://712932ae-4562-44ff-908f-f817ffa1a217.filesusr.com/ugd/4f81b8_be8c71c24bc0402589f3e681396df043.pdf">fall galls</a>.
+
 ==california gall wasp:Andricus quercuscalifornicus
 bug:130468
 . parasitizes white {-oaks}.

@@ -1,0 +1,9 @@
+sci:family Tipulidae
+
+Some poorly scanned ID info can be found in The Crane Flies of California <a href="https://essig.berkeley.edu/documents/cis/cis08.pdf">[PDF]</a>.
+
+==giant western crane fly:Holorusia hespera
+bug:40968
+
+==genus Tipula
+bug:10977
