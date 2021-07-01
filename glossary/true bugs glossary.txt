@@ -1,0 +1,10 @@
+taxon:true bugs
+
+figure:true bugs top
+figure:true bugs side
+
+Both images by Giancarlodessi, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons (<a href="https://commons.wikimedia.org/wiki/File:Heteroptera_morphology-d.svg">top</a> and <a href="https://commons.wikimedia.org/wiki/File:Heteroptera_morphology-l.svg">side</a>)
+
+{head,heads} The frontmost of the three major sections.  Part A in the figures: [figure:true bugs top,top] [figure:true bugs side,side]
+{thorax,thoraxes,thoraces} The middle of the three major sections.  Part B in the figures: [figure:true bugs top,top] [figure:true bugs side,side]
+{abdomen,abdomens} The hindmost of the three major sections.  Part C in the figures: [figure:true bugs top,top] [figure:true bugs side,side]

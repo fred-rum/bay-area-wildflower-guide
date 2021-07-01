@@ -114,14 +114,38 @@ class Glossary:
         anchorurl = url(anchor)
         return f'<a class="{link_class}" href="{pageurl}#{anchorurl}">{term}</a>'
 
-    def find_dups(self, skip_glossary, term):
+    def find_dups(self, term):
         dup_list = []
-        if self != skip_glossary and term in self.term_anchor:
-            dup_list.append(self.glossary_link(self.term_anchor[term],
-                                               self.name))
+
+        # Find ancestors of this glossary that define the same term.
+        ancestor = self.parent
+        while ancestor:
+            if term in ancestor.term_anchor:
+                link = ancestor.glossary_link(ancestor.term_anchor[term],
+                                              ancestor.name)
+                dup_list.append(link)
+
+            ancestor = ancestor.parent
+
+        # We built the list of shared ancestors from lowest ancestor to
+        # highest ancestor, but we want the full dup_list to be from
+        # highest glossary to lowest.
+        dup_list.reverse()
 
         for child in sorted(self.child, key=attrgetter('name')):
-            dup_list.extend(child.find_dups(skip_glossary, term))
+            dup_list.extend(child.find_dups_in_children(term))
+
+        return dup_list
+
+    def find_dups_in_children(self, term):
+        dup_list = []
+
+        if term in self.term_anchor:
+            link = self.glossary_link(self.term_anchor[term], self.name)
+            dup_list.append(link)
+
+        for child in sorted(self.child, key=attrgetter('name')):
+            dup_list.extend(child.find_dups_in_children(term))
 
         return dup_list
 
@@ -510,7 +534,7 @@ class Glossary:
             # Add links to other glossaries
             # where they define the same words.
             related_str = ''
-            dup_list = jepson_glossary.find_dups(self, anchor)
+            dup_list = self.find_dups(anchor)
             if dup_list:
                 related_str = ' [' + ', '.join(dup_list) + ']'
             else:

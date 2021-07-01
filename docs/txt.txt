@@ -278,7 +278,9 @@ suffix is optional in the txt.
 
 [figure:filename] anywhere in the txt is replaced with the text
 '[figure]' with a link to the corresponding SVG file in the figures
-directory.  The '.svg' suffix is optional in the txt.
+directory.  The '.svg' suffix is optional in the txt.  If the filename
+is followed by ',<text>', then the link is formatted as '[<text>]'
+instead of '[figure]'.
 
 '[' and ']' (each on a line by itself) creates a light-bordered box
 surrounding all text between the brackets.  These are useful for

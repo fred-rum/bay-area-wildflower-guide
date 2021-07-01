@@ -1,3 +1,5 @@
 sci:suborder Heteroptera
 
+There is a <a href="true bugs glossary.html">glossary</a> for true bugs.
+
 ==assassin bugs

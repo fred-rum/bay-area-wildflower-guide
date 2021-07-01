@@ -1136,3 +1136,9 @@ flies), omit the count of observations that are "research grade".
 
 add properties to report disconnected links, e.g. 'flag_link', and use
 it for everything that isn't flowering plants.
+
+record the overlap of glossaries that are applied to the same page,
+e.g. Jepson and sunflower glossaries.  Only list overlapping
+glossaries as alternatives for terms in a glossary.  I.e. "head" in
+the true bugs glossary shouldn't refer to Jepson.  The overlap can be
+discovered when Glossary.set_parent() is called.

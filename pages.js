@@ -2461,6 +2461,11 @@ var pages=[
 {terms:["staminate flower","staminate flowers","staminate"]},
 {terms:["pistillate flower","pistillate flowers","pistillate"]},
 ]},
+{page:"true bugs glossary",com:["true bugs"],x:"g",glossary:[
+{terms:["head","heads"]},
+{terms:["thorax","thoraxes","thoraces"]},
+{terms:["abdomen","abdomens"]},
+]},
 {page:"Jepson eFlora",com:["Jepson eFlora"],x:"j",glossary:[
 {terms:["abaxial"]},
 {terms:["abundant"]},
