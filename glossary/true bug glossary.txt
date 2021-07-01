@@ -1,0 +1,28 @@
+taxon:true bugs
+warn:insects
+
+<h2>Body parts</h2>
+
+Both images by Giancarlodessi, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons (<a href="https://commons.wikimedia.org/wiki/File:Heteroptera_morphology-d.svg">top</a> and <a href="https://commons.wikimedia.org/wiki/File:Heteroptera_morphology-l.svg">side</a>).
+
+figure:true bug top
+figure:true bug side
+
+
+<h3>Head</h3>
+
+{head,heads} The frontmost of the three major sections of the body, including the eyes, mouth, antennae, etc.  Part A in the figures: [figure:true bug top,top] [figure:true bug side,side].
+
+
+<h3>Thorax</h3>
+
+{thorax,thoraxes,thoraces} The middle of the three major sections of the body.  Part B in the figures: [figure:true bug top,top] [figure:true bug side,side].
+{pronotum,pronotums} The dorsal sclerite covering the prothorax.  Part 25 in the figures: [figure:true bug top,top] [figure:true bug side,side].
+{prothorax,prothoraxes,prothoraces} The anterior portion of the thorax, supporting the first pair of legs.
+
+{scutellum,scutellums} The dorsal sclerite covering the center of the body posterior to the pronotum.  Part 26 in the figures: [figure:true bug top,top] [figure:true bug side,side].
+
+
+<h3>Abdomen</h3>
+
+{abdomen,abdomens} The hindmost of the three major sections of the body.  Part C in the figures: [figure:true bug top,top] [figure:true bug side,side].

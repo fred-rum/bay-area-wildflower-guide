@@ -1,0 +1,16 @@
+taxon:beetles
+warn:insects
+
+<h2>Body parts</h2>
+
+<a href="https://en.wikipedia.org/wiki/Beetle#/media/File:Melolontha_melolontha_insect_morphology.jpg">Image</a> by Muséum de Toulouse and Anaxibia, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons.
+
+figure:beetle
+
+{head,heads} The frontmost of the three major sections of the body, including the eyes, mouth, antennae, etc.  Part A in the [figure:beetle].
+
+{thorax,thoraxes,thoraces} The middle of the three major sections of the body.  Part B in the [figure:beetle].
+{pronotum,pronotums} The dorsal sclerite covering the prothorax.
+{prothorax,prothoraxes,prothoraces} The anterior portion of the thorax, supporting the first pair of legs.  Part 9 in the [figure:beetle].
+
+{abdomen,abdomens} The hindmost of the three major sections of the body.  Part C in the [figure:beetle].

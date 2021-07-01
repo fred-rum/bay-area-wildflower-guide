@@ -1,0 +1,6 @@
+sci:family Miridae
+
+==potato mirid:Closterotomus norwegicus
+bug:237939
+. mostly green above, with two small black dots near the center of the pronotum
+. no dark lines down the center of the scutellum

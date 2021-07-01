@@ -1,0 +1,10 @@
+taxon:bees
+warn:insects
+
+<h2>Body parts</h2>
+
+{S1--S6,S1,S2,S3,S4,S5,S6} One of the sternites.  Sternites are labelled from S1 at the anterior end (closest to the thorax) to S6 at the tail.
+{sternite,sternites} A ventral sclerite covering one segment of the abdomen.  Bee sternites are labeled S1 from the anterior end (closest to the thorax) to S6 at the tail.
+
+{T1--T6,T1,T2,T3,T4,T5,T6} One of the tergites.  Tergites are labelled from T1 at the anterior end (closest to the thorax) to T6 at the tail.
+{tergite,tergites} A dorsal sclerite covering one segment of the abdomen.

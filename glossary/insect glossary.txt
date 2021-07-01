@@ -1,0 +1,33 @@
+taxon:insects
+warn:insects
+
+<h2>Body parts</h2>
+
+<a href="https://commons.wikimedia.org/wiki/File:Insect_anatomy_diagram.svg">Image</a> by Piotr Jaworski, PioM, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons.
+
+figure:fly side
+
+<h3>head</h3>
+
+{head,heads} The frontmost of the three major sections of the body, including the eyes, mouth, antennae, etc.  Part I in the [figure:fly side].
+
+<h3>thorax</h3>
+
+{thorax,thoraxes,thoraces} The middle of the three major sections of the body.  Part II in the [figure:fly side].
+
+<h3>abdomen</h3>
+
+{abdomen,abdomens} The hindmost of the three major sections of the body.  Part III in the [figure:fly side].
+
+{sclerite,sclerites} A plate forming one section of an exoskeleton.
+
+
+<h2>Relative positions</h2>
+
+{anterior} Closer to the head end of the body.
+
+{dorsal,dorsally} Related to the back of the animal or closer to the back.  Opposite ventral.
+
+{posterior} Closer to the tail end of the body.
+
+{ventral,ventrally} Related to the belly of the animal or closer to the belly.  Opposite dorsal.

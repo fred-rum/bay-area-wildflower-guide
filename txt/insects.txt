@@ -1,7 +1,8 @@
 sci:class Insecta
 bug:52
-
 photo_requires_bugid: genus-below
+
+There is a <a href="insect glossary.html">glossary</a> for insects.
 
 ==butterflies
 

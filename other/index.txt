@@ -46,7 +46,7 @@ Only wildflowers are covered, not cultivated flowers.  I've also
 started including taxons other than flowering plants here, but in much
 smaller numbers.
 
-I have a <a href="html/plant%20glossary.html">glossary</a>.
+I have a <a href="html/general%20glossary.html">glossary</a>.
 
 <h2>Other Resources</h2>
 

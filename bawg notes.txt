@@ -1131,14 +1131,14 @@ improve {-<name>} to link using a short name whenever the named taxon
 is on the current page.  (Which means there should be a difference
 between a genus key and the auto-generated species page.)
 
-If a page is above the genus level and has no children (e.g. flesh
-flies), omit the count of observations that are "research grade".
+If a page is above the genus level and has no photographed(?) children
+(e.g. flesh flies), omit the count of observations that are "research
+grade".
 
 add properties to report disconnected links, e.g. 'flag_link', and use
-it for everything that isn't flowering plants.
+it for everything that isn't flowering plants (since plants are linked
+automatically).
 
-record the overlap of glossaries that are applied to the same page,
-e.g. Jepson and sunflower glossaries.  Only list overlapping
-glossaries as alternatives for terms in a glossary.  I.e. "head" in
-the true bugs glossary shouldn't refer to Jepson.  The overlap can be
-discovered when Glossary.set_parent() is called.
+Change "Glossary table of contents" to "Organization of glossaries" or
+something else that makes it clear that there is more than one
+glossary.

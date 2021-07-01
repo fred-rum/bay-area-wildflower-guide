@@ -60,6 +60,9 @@ def get_file_set(subdir, ext):
 
 jpg_files = get_file_set(f'photos', 'jpg')
 
+svg_figures = get_file_set(f'figures', 'svg')
+jpg_figures = get_file_set(f'figures', 'jpg')
+
 # Turn a set of files back into a file list.
 def get_file_list(subdir, base_set, ext):
     file_list = []
@@ -70,14 +73,20 @@ def get_file_list(subdir, base_set, ext):
         file_list.append(file)
     return file_list
 
+def figure_url(name, file):
+    if file in svg_figures:
+        return f'../figures/{url(file)}.svg'
+    elif file in jpg_figures:
+        return f'../figures/{url(file)}.jpg'
+    else:
+        error(f'Broken figure link to {file}.svg/jpg in {name}')
+        return f'../figures/{url(file)}.svg'
 
 def link_figures_thumb(name, txt):
     def repl_figure_thumb(matchobj):
         file = matchobj.group(1)
-        fileurl = url(file)
-        if not os.path.isfile(f'{root_path}/figures/{file}.svg'):
-            error(f'Broken figure link to {file}.svg in {name}')
-        return f'<a href="../figures/{fileurl}.svg"><img src="../figures/{fileurl}.svg" alt="figure" height="200" class="leaf-thumb"></a>'
+        fileurl = figure_url(name, file)
+        return f'<a href="{fileurl}"><img src="{fileurl}" alt="figure" height="200" class="leaf-thumb"></a>'
 
     def repl_figure_thumbs(matchobj):
         inner = matchobj.group(1)
@@ -94,10 +103,8 @@ def link_figures_text(name, txt):
         text = matchobj.group(2)
         if not text:
             text = 'figure'
-        fileurl = url(file)
-        if not os.path.isfile(f'{root_path}/figures/{file}.svg'):
-            error(f'Broken figure link to {file}.svg in {name}')
-        return f'<a href="../figures/{fileurl}.svg">[{text}]</a>'
+        fileurl = figure_url(name, file)
+        return f'<a href="{fileurl}">[{text}]</a>'
 
     return re.sub(r'\[figure:(.*?)(?:\.svg)?(?:,(.*?))?\]',
                   repl_figure_text, txt, flags=re.MULTILINE)
