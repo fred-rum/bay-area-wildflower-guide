@@ -1142,3 +1142,7 @@ automatically).
 Change "Glossary table of contents" to "Organization of glossaries" or
 something else that makes it clear that there is more than one
 glossary.
+
+figure out why 'fly side.svg' is displaying larger than the browser
+window (an SVG document property?) and fix it.  Check other SVGs for
+the same problem.

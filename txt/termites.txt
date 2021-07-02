@@ -1,0 +1,17 @@
+sci:epifamily Termitoidaee
+
+==western drywood termite:Incisitermes minor
+bug:469117
+. head and pronotum are orange brown
+. pronotum is rectangular and at least as wide as the head
+. abdomen is dark brown
+. front wing has 3 dark, hardened veins in the front portion
+
+==pacific dampwood termite:Zootermopsis angusticollis
+bug:75929
+. head, pronotum, and abdoment are all light to medium brown
+. pronotum is crescent shaped and less wide than the head
+. wings are dark brown, thinner than in {-western drywood termite}
+
+==western subterranean termite:Reticulitermes hesperus
+bug:183940
