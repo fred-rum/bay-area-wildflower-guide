@@ -261,9 +261,36 @@ def parse2_txt(name, s, glossary):
 
     return s
 
-def parse_other(name, title, desc, incl_footer):
+def parse_other(name):
+    def repl_title(matchobj):
+        nonlocal title
+        title = matchobj.group(1)
+        return ''
+
+    def repl_desc(matchobj):
+        nonlocal desc
+        desc = matchobj.group(1)
+        return ''
+
+    def repl_footer(matchobj):
+        nonlocal incl_footer
+        incl_footer = True
+        return ''
+
     with open(f'{root_path}/other/{name}.txt', 'r', encoding='utf-8') as r:
         txt = r.read()
+
+    # Default values; these can be overridden by lines within the txt.
+    title = 'Bay Area Wildflower Guide'
+    desc = 'A resource for identifying San Francisco Bay Area wildflowers.'
+    incl_footer = False
+
+    txt = re.sub(r'^\s*title\s*:\s*(.*?)\s*?\n',
+                 repl_title, txt, flags=re.MULTILINE)
+    txt = re.sub(r'^\s*desc\s*:\s*(.*?)\s*?\n',
+                 repl_desc, txt, flags=re.MULTILINE)
+    txt = re.sub(r'^\s*footer\s*?\n',
+                 repl_footer, txt, flags=re.MULTILINE)
     
     txt = parse_txt(name, txt, None, None)
 
@@ -271,3 +298,7 @@ def parse_other(name, title, desc, incl_footer):
         write_header(w, title, None, desc=desc, at_root=True)
         w.write(txt)
         write_footer(w, incl_footer, at_root=True)
+
+def parse_other_txt_files(other_files):
+    for file in other_files:
+        parse_other(file)

@@ -579,28 +579,13 @@ if arg('-incomplete_keys'):
     for page in page_list[:5]:
         print(page.full())
 
+
 ###############################################################################
 # Process 'other' files
 
-parse_other('index',
-            'Bay Area Wildflower Guide',
-            'A resource for identifying San Francisco Bay Area wildflowers.',
-            False)
+other_files = get_file_set('other', 'txt')
+parse_other_txt_files(other_files)
 
-parse_other('chrome',
-            'Chrome Browser Notes for Offline Usage',
-            'Notes for offline use of the Guide in Chrome.',
-            True)
-
-parse_other('firefox',
-            'Firefox Browser Notes for Offline Usage',
-            'Notes for offline use of the Guide in Firefox.',
-            True)
-
-parse_other('safari',
-            'Safari Browser Notes for Offline Usage',
-            'Notes for offline use of the Guide in Safari.',
-            True)
 
 ###############################################################################
 # Create pages.js
@@ -753,7 +738,6 @@ if not arg('-without_cache'):
         # on the browser implementation, it might make a difference when
         # deleting files.
         'swi.js',
-        'index.html',
         'bawg.css',
         'icons/home.png',
         'icons/online.svg', # might get fetched before we actually go online
@@ -762,10 +746,9 @@ if not arg('-without_cache'):
         'search.js',
         'pages.js',
         'manifest.webmanifest',
-        'chrome.html',
-        'safari.html',
-        'firefox.html',
     ]
+    for other in other_files:
+        path_list.append(other + '.html')
 
     favicon_set = get_file_set('favicon', None)
     path_list += get_file_list('favicon', favicon_set, None)

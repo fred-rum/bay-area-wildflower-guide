@@ -1,3 +1,6 @@
+title: Firefox Browser Notes for Offline Usage
+desc: Notes for offline use of the Guide in Firefox.
+
 <h1 id="title">Firefox Browser Notes for Offline Usage</h1>
 
 The amount of offline storage needed for this guide is quite
@@ -72,3 +75,4 @@ Return to the <a href="index.html">Guide home</a> and give offline
 mode a try.  If it doesn't work, online browsing remains supported as
 always.
 
+footer

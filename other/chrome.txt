@@ -1,3 +1,6 @@
+title: Chrome Browser Notes for Offline Usage
+desc: Notes for offline use of the Guide in Chrome.
+
 <h1 id="title">Chrome Browser Notes for Offline Usage</h1>
 
 Congratulations, Chrome currently has the best support for offline web apps.  That said, these notes may help improve your experience.
@@ -57,3 +60,4 @@ phone in airplane mode while using the site in offline mode.
 Return to the <a href="index.html">Guide home</a> and give offline
 mode a try.
 
+footer

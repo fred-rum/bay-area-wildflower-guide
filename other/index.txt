@@ -1,3 +1,6 @@
+title: Bay Area Wildflower Guide
+desc: A resource for identifying San Francisco Bay Area wildflowers.
+
 <h1 id="title">Chris Nelson's Bay&nbsp;Area Wildflower Guide</h1>
 
 Use the search bar to look up any flower, or start at the top:
