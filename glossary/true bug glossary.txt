@@ -13,6 +13,9 @@ figure:true bug side
 
 {head,heads} The frontmost of the three major sections of the body, including the eyes, mouth, antennae, etc.  Part A in the figures: [figure:true bug top,top] [figure:true bug side,side].
 
+{antenna,antennae} One of a pair of long sensory appendages on the front of the head.    Part 9 in the figures: [figure:true bug top,top] [figure:true bug side,side].
+{antennomere,antennomeres} A segment of an antenna.  Numbered from 1 at the antenna base to 4 at the tip.
+
 
 <h3>Thorax</h3>
 
@@ -23,6 +26,23 @@ figure:true bug side
 {scutellum,scutellums} The dorsal sclerite covering the center of the body posterior to the pronotum.  Part 26 in the figures: [figure:true bug top,top] [figure:true bug side,side].
 
 
+<h3>Wing</h3>
+
+{forewing,forewings} One of the front pair of wings.  In a true bug at rest, these are folded above the hindwings on top of the body.  Most species have forewings with a leathery portion and a membranous portion.
+
+{hindwing,hindwings} One of the rear pair of wings.  In true bugs, these are smaller, fully membranous, and hidden from view when at rest.
+
+{embolium} The leading section of the basal (leathery) portion of the forewing.  Part 29 in the figures: [figure:true bug top,top] [figure:true bug side,side].
+
+{corium} The central section of the basal (leathery) portion of the forewing.  Part 28 in the figures: [figure:true bug top,top] [figure:true bug side,side].
+
+{clavus} The trailing section of the basal (leathery) portion of the forewing.  Part 27 in the figures: [figure:true bug top,top] [figure:true bug side,side].
+
+{wing membrane,wing membranes,membrane,membranes} The thin, translucent portion of the forewing.  Part 30 in the figures: [figure:true bug top,top] [figure:true bug side,side].
+
+
 <h3>Abdomen</h3>
 
 {abdomen,abdomens} The hindmost of the three major sections of the body.  Part C in the figures: [figure:true bug top,top] [figure:true bug side,side].
+
+{connexivum,connexiva} the flattened border of the abdomen.  Part 23 in the figures: [figure:true bug top,top] [figure:true bug side,side].

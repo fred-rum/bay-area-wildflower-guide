@@ -1,0 +1,4 @@
+sci:family Largidae
+
+==california bordered plant bug:Largus californicus
+bug:93846

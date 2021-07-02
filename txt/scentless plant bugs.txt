@@ -1,0 +1,10 @@
+sci:family Rhopalidae
+
+==western boxelder bug:Boisea rubrolineata
+bug:15578
+. corium veins prominent, red-colored
+
+==eastern boxelder bug:Boisea trivittata
+bug:3598
+. corium veins black
+. not yet observed in the bay area, but seen elsewhere in California, presumbably due to human transport

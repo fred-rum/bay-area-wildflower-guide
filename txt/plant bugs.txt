@@ -2,5 +2,14 @@ sci:family Miridae
 
 ==potato mirid:Closterotomus norwegicus
 bug:237939
-. mostly green above, with two small black dots near the center of the pronotum
+. mostly green above, with two small black dots close together near the center of the pronotum
 . no dark lines down the center of the scutellum
+
+==phacelia plant bug:Tupiocoris californicus
+bug:469779
+
+==genus Irbisia
+bug:238272
+. quite a few species within California
+.. the official key to distinguish them is quite difficult to understand
+. the similar genus Orthocephalus does not appear to be present in Northern California

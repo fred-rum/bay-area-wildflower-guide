@@ -7,17 +7,18 @@ warn:insects
 
 figure:fly side
 
-<h3>head</h3>
+{head,heads} The frontmost of the three major sections of the body, including the eyes, mouth, antennae, etc.  [figure:fly side,part I]
 
-{head,heads} The frontmost of the three major sections of the body, including the eyes, mouth, antennae, etc.  Part I in the [figure:fly side].
+{thorax,thoraxes,thoraces} The middle of the three major sections of the body.  [figure:fly side,part II]
 
-<h3>thorax</h3>
+{abdomen,abdomens} The hindmost of the three major sections of the body.  [figure:fly side,part III]
 
-{thorax,thoraxes,thoraces} The middle of the three major sections of the body.  Part II in the [figure:fly side].
+{antenna,antennae} One of a pair of long sensory appendages on the front of the head.  [figure:fly side,part 1]
 
-<h3>abdomen</h3>
+{forewing,forewings} One of the front pair of wings.  [figure:fly side,part 11]
 
-{abdomen,abdomens} The hindmost of the three major sections of the body.  Part III in the [figure:fly side].
+{hindwing,hindwings} One of the rear pair of wings.  [figure:fly side,part 12]
+
 
 {sclerite,sclerites} A plate forming one section of an exoskeleton.
 
@@ -26,8 +27,12 @@ figure:fly side
 
 {anterior} Closer to the head end of the body.
 
-{dorsal,dorsally} Related to the back of the animal or closer to the back.  Opposite ventral.
-
 {posterior} Closer to the tail end of the body.
 
+{dorsal,dorsally} Related to the back of the animal or closer to the back.  Opposite ventral.
+
 {ventral,ventrally} Related to the belly of the animal or closer to the belly.  Opposite dorsal.
+
+{apical} Closer to the tip.
+
+{basal} Closer to the base.

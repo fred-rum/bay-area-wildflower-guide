@@ -2,6 +2,18 @@ sci:suborder Heteroptera
 
 There is a <a href="true bug glossary.html">glossary</a> for true bugs.
 
+==plant bugs
+
+==scentless plant bugs
+
+==seed bugs
+
+==dirt-colored seed bugs
+
+==bordered plant bugs
+
+==stink bugs
+
 ==assassin bugs
 
-==plant bugs
+==water striders
