@@ -1,0 +1,20 @@
+SVG figures are displayed full-size by simply loading the file
+directly into the browser.  Thus, the SVG properties must be correct
+in order to be automatically fit to the window size.
+
+In Inkscape (as of 0.92):
+  Edit -> XML Editor...
+    Select the top element, "svg:svg ..."
+      Select "height"
+        Input the value "100%" and press ctrl-enter
+      Select "width"
+        Input the value "100%" and press ctrl-enter
+  File -> Document Properties...
+    In the box for "Scale", open the section for "Viewbox..."
+       Set X to 0
+       Set Y to 0
+
+Although it's tempting to edit the SVG directly, doing so will cause
+it to be drawn to the wrong scale relative to the viewbox.  Editing
+the XML properties within Inkscape will cause Inkscape to rescale the
+drawing automatically.
