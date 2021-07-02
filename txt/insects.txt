@@ -26,12 +26,12 @@ There is a <a href="insect glossary.html">glossary</a> for insects.
 
 ==typical leafhoppers
 
+==wasps
+
 ==termites
 
 ==four-lined silverfish:Ctenolepisma lineata
 bug:156092
-
-==gall wasps
 
 ==coyote brush bud gall midge
 bug:225834

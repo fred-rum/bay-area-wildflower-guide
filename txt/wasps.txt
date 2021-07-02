@@ -1,0 +1,35 @@
+sci:n/a
+
+Wasps are not a monophyletic group, but I've put them all here for
+convenience.
+
+==western yellowjacket:Vespula pensylvanica
+bug:12981
+
+==alaska yellowjacket:Vespula alascensis
+bug:14087
+
+==european paper wasp:Polistes dominula
+bug:5081
+. the mostly vibrant-orange antennae are diagnostic within North America
+
+==common aerial yellowjacket:Dolichovespula arenaria
+bug:12983
+. medially interrupted or incised apical fasciae of terga 1 and 2
+. black markings in the ocular sinus
+
+==pacific velvet ant:Dasymutilla aureola
+bug:41362
+. females (wingless)
+.. covered with red hairs
+.. thorax as broad as long
+.. head broader than the thorax
+. males (winged) ...
+
+==spider wasps:family Pompilidae
+bug:3919
+
+==braconid wasps:family Braconidae
+bug:170
+
+==gall wasps
