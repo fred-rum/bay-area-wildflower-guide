@@ -427,7 +427,7 @@ class Glossary:
 
         self.txt = self.parse_terms(self.txt)
 
-    def read_jepson_terms(self):
+    def read_jepson_terms(self, f):
         self.name = 'Jepson' # used only for self links from a glossary defn
         self.is_jepson = True
         self.invisible = True
@@ -435,8 +435,7 @@ class Glossary:
         self.link_set = set()
         self.txt = None # No associated HTML
 
-        with open(f'{root_path}/data/jepson_glossary.txt', mode='r') as f:
-            txt = f.read()
+        txt = f.read()
         for c in txt.split('\n'):
             # remove comments
             c = re.sub(r'\s*#.*$', '', c)
@@ -657,9 +656,13 @@ def parse_glossaries(top_list):
         glossary.read_terms()
 
     jepson_glossary = Glossary('Jepson eFlora glossary')
-    jepson_glossary.read_jepson_terms()
+    read_data_file('jepson_glossary.txt', jepson_glossary.read_jepson_terms)
+    if not jepson_glossary.is_jepson:
+        # We failed to read the file.  Let's make it super clear that the
+        # Jepson glossary can't be used.
+        jepson_glossary = None
 
-    if jepson_glossary.taxon == None:
+    if jepson_glossary and jepson_glossary.taxon == None:
         master_glossary = jepson_glossary
 
         if None in glossary_taxon_dict:
@@ -687,4 +690,6 @@ def parse_glossaries(top_list):
 
 def write_glossary_search_terms(w):
     master_glossary.write_search_terms(w)
-    jepson_glossary.write_jepson_search_terms(w)
+
+    if jepson_glossary:
+        jepson_glossary.write_jepson_search_terms(w)

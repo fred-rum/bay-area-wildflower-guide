@@ -2017,7 +2017,7 @@ class Page:
             # since it and its children have already set the glossary.
             return
 
-        if self.name == jepson_glossary.taxon:
+        if jepson_glossary and self.name == jepson_glossary.taxon:
             jepson_glossary.set_parent(glossary)
             glossary = jepson_glossary
 
