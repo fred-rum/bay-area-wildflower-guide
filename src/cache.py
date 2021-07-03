@@ -101,6 +101,11 @@ def update_cache(path_list):
         kb_total += kb
 
 def gen_url_cache():
+    try:
+        os.mkdir(f'{root_path}/data')
+    except FileExistsError:
+        pass
+
     with open(f'{root_path}/data/cache.pickle', mode='wb') as w:
         pickle.dump(new_cache, w)
 

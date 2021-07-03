@@ -739,16 +739,17 @@ if not arg('-without_cache'):
         # deleting files.
         'swi.js',
         'bawg.css',
-        'icons/home.png',
-        'icons/online.svg', # might get fetched before we actually go online
-        'icons/check.svg',
-        'icons/hazard.svg',
         'search.js',
         'pages.js',
-        'manifest.webmanifest',
     ]
     for other in other_files:
         path_list.append(other + '.html')
+
+    icon_set = get_file_set('icons', None)
+    path_list += get_file_list('icons', icon_set, None)
+
+    if os.access(f'{root_path}/manifest.webmanifest', os.R_OK):
+        path_list.append('manifest.webmanifest')
 
     favicon_set = get_file_set('favicon', None)
     path_list += get_file_list('favicon', favicon_set, None)
