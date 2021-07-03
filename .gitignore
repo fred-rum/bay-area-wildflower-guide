@@ -24,7 +24,6 @@ $RECYCLE.BIN/
 html/other observations.html
 html/_mod.html
 figures/*.jpg
-observations.csv
 prev/
 \#*#
 new/
@@ -36,3 +35,4 @@ __pycache__/
 figures/*.jpg
 data/cache.pickle
 .~lock.*#
+test/

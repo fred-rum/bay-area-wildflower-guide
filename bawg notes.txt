@@ -1126,9 +1126,6 @@ property but something else.  In any case, "default_ancestor" is still
 useful for a DB in progress, especially when everything is of the same
 type.
 
-Allow observations.csv to be checked in
-(Remove it from .gitignore)
-
 Support {--<name>} to link using a short name (common preferred), *or*
 improve {-<name>} to link using a short name whenever the named taxon
 is on the current page.  (Which means there should be a difference
