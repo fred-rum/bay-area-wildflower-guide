@@ -3,6 +3,7 @@
 
 import sys
 import os
+import shutil
 import re
 from unidecode import unidecode
 import urllib.parse
@@ -35,6 +36,10 @@ else:
 #   that the next run can compare against them and not against the files
 #   from the crashed run.
 working_path = root_path + '/.in_progress'
+
+shutil.rmtree(working_path, ignore_errors=True)
+os.mkdir(working_path)
+os.mkdir(working_path + '/html')
 
 # Get the set of files that have the expected suffix in the designated
 # directory.  The set includes only the base filename without the

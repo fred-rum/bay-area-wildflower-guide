@@ -36,3 +36,4 @@ figures/*.jpg
 data/cache.pickle
 .~lock.*#
 test/
+example/

@@ -39,7 +39,6 @@ import yaml
 from unidecode import unidecode
 import datetime
 import time
-import shutil
 
 # Python 3 is required in general for good Unicode support and other features.
 # Some of the yaml-handling code requires the default dictionaries to be
@@ -69,10 +68,6 @@ else:
     strip_comments('swi.js')
 
 year = datetime.datetime.today().year
-
-shutil.rmtree(working_path, ignore_errors=True)
-os.mkdir(working_path)
-os.mkdir(working_path + '/html')
 
 # Read the mapping of iNaturalist observation locations to short park names.
 park_map = {}
@@ -720,7 +715,10 @@ if total_list:
         mod_file = f'{root_path}/html/' + total_list[0]
     else:
         mod_file = f'{root_path}/html/_mod.html'
-    os.startfile(mod_file)
+
+    # os.startfile in Windows requires an absolute path
+    abs_mod_file = os.path.abspath(mod_file)
+    os.startfile(abs_mod_file)
 
 
 ###############################################################################
