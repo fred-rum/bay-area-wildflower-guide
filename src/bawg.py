@@ -300,7 +300,7 @@ if arg('-tree4'):
 
 # Assign properties to the appropriate ranks.
 for page in page_array:
-    page.assign_props()
+    page.propagate_props()
 
 if arg('-tree5'):
     print_trees()
@@ -439,20 +439,20 @@ def read_observation_data(f):
         if not page or (sci in sci_ignore and sci_ignore[sci] == '-'):
             continue
 
-        if loc != 'bay area' and 'allow_outside_obs' not in page.prop_value:
+        if loc != 'bay area' and 'allow_outside_obs' not in page.prop_action_set:
             continue
 
-        if rg == 'casual' and 'allow_casual_obs' not in page.prop_value:
+        if rg == 'casual' and 'allow_casual_obs' not in page.prop_action_set:
             continue
 
         if page != orig_page:
             # The page got promoted.
 
             if (loc != 'bay area' and
-                'allow_outside_obs_promotion' not in page.prop_value):
+                'allow_outside_obs_promotion' not in page.prop_action_set):
                 continue
 
-            if 'flag_obs_promotion' in page.prop_value:
+            if 'flag_obs_promotion' in page.prop_action_set:
                 error(f'flag_obs_promotion: {orig_sci} observation promoted to {page.full()}')
                 continue
 
@@ -460,7 +460,7 @@ def read_observation_data(f):
                 # If an observation has an unknown rank, then we *always*
                 # promote it without complaint.
                 pass
-            elif ('allow_any_nrg_obs_promotion' in page.prop_value and
+            elif ('allow_any_nrg_obs_promotion' in page.prop_action_set and
                      rg != 'research' and
                      orig_page.rank <= Rank.species):
                 # This property allows a non-research-grade observation to be
@@ -473,18 +473,18 @@ def read_observation_data(f):
                 # if doesn't have real Linnaean descendants, and the
                 # promoted page does, then it's definitely something we
                 # haven't documented.
-                if ('flag_obs_promotion_above_peers' in page.prop_value and
+                if ('flag_obs_promotion_above_peers' in page.prop_action_set and
                     not orig_page.has_real_linnaean_descendants() and
                     page.has_real_linnaean_descendants()):
                     error(f'flag_obs_promotion_above_peers: {orig_sci} observation promoted to {page.full()}')
                     continue
 
-                if ('flag_obs_promotion_without_x' in page.prop_value and
+                if ('flag_obs_promotion_without_x' in page.prop_action_set and
                     page.taxon_unknown_completion()):
                     error(f'flag_obs_promotion_without_x: {orig_sci} observation promoted to {page.full()}')
                     continue
 
-                if 'allow_obs_promotion' not in page.prop_value:
+                if 'allow_obs_promotion' not in page.prop_action_set:
                     continue
 
         page.obs_n += 1
@@ -536,7 +536,7 @@ for page in page_array:
     if colors_not_used:
         error(f'{page.full()} has no use for these colors: {colors_not_used}')
 
-    if 'photo_requires_color' in page.prop_value and page.jpg_list and not page.color:
+    if 'photo_requires_color' in page.prop_action_set and page.jpg_list and not page.color:
         error(f'photo_requires_color: page {page.full()} has photos but no assigned or propagated color')
 
 

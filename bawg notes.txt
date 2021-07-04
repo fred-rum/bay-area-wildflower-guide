@@ -1199,3 +1199,31 @@ Since I have to use the propagation process to figure out whether a
 property applies to a page (e.g. a non-Linneaen page with a "self"
 property), I might have to keep the current self.prop_value
 dictionary, which makes the whole property class kind of moot.
+
+
+example/tiny:
+
+Don't emit "Chris's observations" when observations.csv couldn't be
+read.
+
+Copy icons from the standard place (derived from the src_path) if they
+are otherwise missing.
+
+Control the 'Caution: There may be other wild species of this genus
+not yet included in this guide.' message with a property:
+do default_completeness - non-bolded 'may be other' message if not specified
+caution default_completeness - bold 'Caution:' message if not specified
+warn/error default_completeness - warning/error if not specified
+
+Note that I'd want life to have something like
+do default_completeness kingdom-genus
+and flowering plants to have
+do default_completeness self->genus
+caution default_completeness genus
+
+To support this, a declared property should propagate until it finds
+another declaration *with the same value*.  If there are two
+declarations with different values, both should propagate.  If they
+also overlap in rank, that could either be an error or there could be
+an implicit priority (e.g. error > warn > do) or they could all apply
+(e.g. a warning is printed, but the 'do' is still applied).
