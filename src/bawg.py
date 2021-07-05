@@ -346,6 +346,8 @@ def read_observation_data(f):
         else:
             return None
 
+    set_any_observations()
+
     error_begin_section()
 
     csv_reader = csv.DictReader(f)

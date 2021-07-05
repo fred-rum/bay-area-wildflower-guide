@@ -265,7 +265,11 @@ Properties to ensure that page info is complete:
 specified.  'do' causes a message to be added to the HTML page
 indicating that it may not be complete.  'caution' makes the message
 more prominent on the HTML page.  'warn' or 'error' flags the missing
-specification when the script is run.
+specification when the script is run.  Note: the property is checked
+at the rank for which completeness is expected to be specified.
+E.g. this is the 'species' rank for the 'xx' completeness
+specification, and it is the 'genus' rank for 'x' at the genus level
+or below.
 
 'obs_requires_photo' flags an observation if the page to which it is
 applied (possibly after promotion) does not have a photo.  The photo

@@ -1146,9 +1146,6 @@ glossary.
 
 example/tiny:
 
-Don't emit "Chris's observations" when observations.csv couldn't be
-read.
-
 Copy icons from the standard place (derived from the src_path) if they
 are otherwise missing.
 

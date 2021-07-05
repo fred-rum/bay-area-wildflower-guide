@@ -18,6 +18,11 @@ def set_rg_supported():
     global rg_supported
     rg_supported = True
 
+any_observations = False
+def set_any_observations():
+    global any_observations
+    any_observations = True
+
 class Obs:
     pass
 
@@ -89,6 +94,9 @@ class Obs:
         w.write('\n')
 
     def write_obs(self, link, w):
+        if not any_observations:
+            return
+
         n = self.n
         rg = self.rg
 
