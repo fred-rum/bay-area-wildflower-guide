@@ -739,7 +739,7 @@ if not arg('-without_cache'):
         'search.js',
         'pages.js',
     ]
-    for other in other_files:
+    for other in sorted(other_files):
         path_list.append(other + '.html')
 
     icon_set = get_file_set('icons', None)

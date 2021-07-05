@@ -1146,8 +1146,7 @@ glossary.
 
 example/tiny:
 
-Copy icons from the standard place (derived from the src_path) if they
-are otherwise missing.
+Read footer HTML from a file, e.g. data/footer.html
 
 
 How to prompt for a PWA install when desired:

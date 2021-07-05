@@ -22,12 +22,14 @@ src_path = os.path.dirname(os.path.abspath( __file__ ))
 # sys.path[0] is sometimes a relative path, e.g. when run under cProfile
 src_path = convert_path_to_unix(src_path)
 
+home_path = re.sub(r'/src$', r'', src_path)
+
 if arg('-dir'):
     root_path = arg('-dir')
     if root_path.endswith('/'):
         root_path = root_path[0:-1]
 else:
-    root_path = re.sub(r'/src$', r'', src_path)
+    root_path = home_path
 
 # Create new files in the working_path.  This has a few advantages:
 # - Allow the user to continue browsing old files while updates are in
@@ -44,8 +46,13 @@ os.mkdir(working_path + '/html')
 # Get the set of files that have the expected suffix in the designated
 # directory.  The set includes only the base filename without the
 # extension.
-def get_file_set(subdir, ext):
-    subdir_path = root_path + '/' + subdir
+def get_file_set(subdir, ext, use_home=False):
+    if use_home:
+        root = home_path
+    else:
+        root = root_path
+
+    subdir_path = root + '/' + subdir
     if not os.path.isdir(subdir_path):
         return set()
 
@@ -67,6 +74,17 @@ jpg_files = get_file_set(f'photos', 'jpg')
 
 svg_figures = get_file_set(f'figures', 'svg')
 jpg_figures = get_file_set(f'figures', 'jpg')
+
+# Copy icons from the home (src) directory to the root (-dir) directory
+root_icons = get_file_set(f'icons', None)
+home_icons = get_file_set(f'icons', None, use_home=True)
+copy_icons = home_icons - root_icons
+try:
+    os.mkdir(root_path + '/icons')
+except FileExistsError:
+    pass
+for icon in copy_icons:
+    shutil.copy(home_path + '/icons/' + icon, root_path + '/icons')
 
 # Turn a set of files back into a file list.
 def get_file_list(subdir, base_set, ext):

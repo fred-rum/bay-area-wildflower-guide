@@ -289,7 +289,7 @@ def parse_other(name):
                  repl_title, txt, flags=re.MULTILINE)
     txt = re.sub(r'^\s*desc\s*:\s*(.*?)\s*?\n',
                  repl_desc, txt, flags=re.MULTILINE)
-    txt = re.sub(r'^\s*footer\s*?\n',
+    txt = re.sub(r'^\s*footer\s*\Z',
                  repl_footer, txt, flags=re.MULTILINE)
     
     txt = parse_txt(name, txt, None, None)
