@@ -4,6 +4,8 @@ taxon_id: 48460
 is_top
 list_hierarchy
 
+caution default_completeness: genus
+
 link_bayarea_inaturalist: self-below
 
 warn obs_requires_photo: genus-below

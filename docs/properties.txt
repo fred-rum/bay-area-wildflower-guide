@@ -261,6 +261,12 @@ and the page is never promoted to real.
 
 Properties to ensure that page info is complete:
 
+'default_completeness' specifies what to do if 'x' or 'xx' isn't
+specified.  'do' causes a message to be added to the HTML page
+indicating that it may not be complete.  'caution' makes the message
+more prominent on the HTML page.  'warn' or 'error' flags the missing
+specification when the script is run.
+
 'obs_requires_photo' flags an observation if the page to which it is
 applied (possibly after promotion) does not have a photo.  The photo
 can be explicitly on that page or be incorporated by reference from a

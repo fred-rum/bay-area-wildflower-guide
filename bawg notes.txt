@@ -1144,63 +1144,6 @@ something else that makes it clear that there is more than one
 glossary.
 
 
-change properties to allow e.g. 'link/error', which would flag an
-error if a link would be created
-
-Generally support properties with extra information.  I already have
-this support, but it currently isn't used for anything, and I'd like
-to change its format.  In particular, the extra information says
-whether the property should apply normally, should trigger a warning
-if applied, or should trigger an error if applied. E.g.
-
-link: <ranks>
-a.k.a.
-do link: <ranks>
-warn link: <ranks>
-error link: <ranks>
--or-
-link: <ranks>
-?link: <ranks>
-!link: <ranks>
-(that latter option looks rather ugly)
-
-Change some old flags to match, e.g. instead of
-allow_obs_promotion: <ranks>
-flag_obs_promotion: <ranks>
-have
-do obs_promotion: <ranks>
-warn obs_promotion: <ranks>
-error obs_promotion: <ranks>
-
-Other "flag" properties also change, but have no 'do' option, e.g.
-flag_obs_promotion_above_peers: <ranks>
-becomes
-warn/error obs_promotion_above_peers; <ranks>
-
-And others have only a 'do' option with no 'warn' or 'error' option, e.g.
-allow_casual_obs: <ranks>
-(which for other reasons should probably be renamed)
-count_casual_obs: <ranks>
-
-It'd probably be good to put properties in their own Python file &
-class.  The class would be fairly lightweight, simply including the
-property name ('link'), its type ('do'), and its rank_set.  Every page
-that uses the property would include a copy. ... Although that doesn't
-give us an easy way to detect the presence of a named property like we
-want.  Perhaps the property class should keep track of all properties
-by name, and a subclass would keep track of the type and rank_set for
-each one.
-
-Note that a property that is declared on a page doesn't necessarily
-apply to that page.  I think that's why I have a distinction between
-decl_prop_ranks and decl_prop_value (the declared rank_set and type)
-vs. prop_value (the applied type after propagation to the rank_set).
-Since I have to use the propagation process to figure out whether a
-property applies to a page (e.g. a non-Linneaen page with a "self"
-property), I might have to keep the current self.prop_value
-dictionary, which makes the whole property class kind of moot.
-
-
 example/tiny:
 
 Don't emit "Chris's observations" when observations.csv couldn't be
@@ -1209,13 +1152,8 @@ read.
 Copy icons from the standard place (derived from the src_path) if they
 are otherwise missing.
 
-Control the 'Caution: There may be other wild species of this genus
-not yet included in this guide.' message with a property:
-do default_completeness - non-bolded 'may be other' message if not specified
-caution default_completeness - bold 'Caution:' message if not specified
-warn/error default_completeness - warning/error if not specified
 
-
-The BAWG web app has a header bar that isn't in the example "hello
-world" web app.  Can I fix that?
-https://medium.com/james-johnson/a-simple-progressive-web-app-tutorial-f9708e5f2605
+How to prompt for a PWA install when desired:
+https://developers.google.com/web/updates/2019/05/mini-infobar-update
+or 02. in:
+https://www.creativebloq.com/features/9-amazing-pwa-secrets

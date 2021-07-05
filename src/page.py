@@ -37,10 +37,10 @@ props = {
     'create': 'd',
     'link': 'd',
     'member_link': 'd',
-    'photo_requires_color': 'd',
-    'color_requires_photo': 'd',
-    'obs_requires_photo': 'd',
-    'photo_requires_bugid': 'd',
+    'photo_requires_color': 'f',
+    'color_requires_photo': 'f',
+    'obs_requires_photo': 'f',
+    'photo_requires_bugid': 'f',
     'one_child': 'f',
     'obs_promotion': 'df',
     'casual_obs_promotion': 'd',
@@ -58,6 +58,7 @@ props = {
     'link_birds': 'd',
     'link_bayarea_calflora': 'd',
     'link_bayarea_inaturalist': 'd',
+    'default_completeness': set(('do', 'caution', 'warn', 'error')),
 }
 
 for prop in props:
@@ -870,6 +871,9 @@ class Page:
             if not action:
                 action = 'do'
 
+            if action not in props[prop]:
+                error(f'{self.full()} - action not supported for property in "{action} {prop}')
+
             rank_range_list = split_strip(rank_str, ',')
 
             rank_set = set()
@@ -1413,6 +1417,15 @@ class Page:
             if self.rank in rank_set:
                 self.assign_prop(prop, action)
 
+            # For the 'default_completeness' property, assist the
+            # write_complete() function by recording the action at the
+            # genus and species level using a hacked property name.
+            if prop == 'default_completeness' and self.rank <= Rank.genus:
+                if Rank.genus in rank_set:
+                    self.assign_prop('default_completeness_genus', action)
+                if Rank.species in rank_set:
+                    self.assign_prop('default_completeness_species', action)
+
             # Recursively descend through Linnaean children.
             # There's no need to descend through 'real' children because
             # they cannot include any ranked pages that are not included
@@ -1519,10 +1532,13 @@ class Page:
             elif 'warn' in self.prop_action_set[prop]:
                 warning(f'warn {prop}: {msg}')
 
+    def rp_action(self, prop, action):
+        return (prop in self.prop_action_set and
+                action in self.prop_action_set[prop])
+
     def rp_do(self, prop, msg=None, shadow_bad=False):
         self.rp_check(prop, msg)
-        return (prop in self.prop_action_set and
-                'do' in self.prop_action_set[prop])
+        return self.rp_action(prop, 'do')
 
     def apply_prop_member(self):
         if ((not self.shadow and self.rp_do('member_link')) or
@@ -2279,23 +2295,49 @@ class Page:
                 else:
                     other = ''
 
+                # We might be checking the completeness at a different level
+                # than the current page's rank.  The property propagation
+                # code gave us an assist by recording the appropriate action
+                # at the genus and species level with a modified property name.
+                if top in ('genus', 'species'):
+                    prop = 'default_completeness_' + top
+                else:
+                    prop = 'default_completeness'
+
                 if complete is None:
-                    if top == 'genus':
+                    # We don't want to expose the hacked property name to
+                    # the user, so we check for error/warn manually and not
+                    # through the usual rp_check() function.
+                    if prop in self.prop_action_set:
+                        if ((top == 'genus' and self.rank is not Rank.genus) or
+                            (top == 'species' and self.rank is not Rank.species)):
+                            msg = f'completeness not specified at the {top} level in {self.full()}'
+                        else:
+                            msg = f'completeness not specified in {self.full()}'
+
+                        if 'error' in self.prop_action_set[prop]:
+                            error(f'error default_completeness: {msg}')
+                        elif 'warn' in self.prop_action_set[prop]:
+                            warning(f'warn default_completeness: {msg}')
+
+                    if self.rp_action(prop, 'caution'):
+                        w.write(f'<b>Caution: There may be{other} wild {members} of this {top} not yet included in this guide.</b>')
+                    elif self.rp_action(prop, 'do'):
                         w.write(f'<b>Caution: There may be{other} wild {members} of this {top} not yet included in this guide.</b>')
                     else:
                         return # Don't write the <p/> at the end
                 elif complete == 'none':
-                    if top == 'genus':
-                        error("x:none used for " + self.full())
-                    else:
+                    if top == 'species':
                         w.write('This species has no subspecies or variants.')
+                    else:
+                        error("x:none used for " + self.full())
                 elif complete == 'uncat':
                     if top == 'genus':
                         error("x:uncat used for " + self.full())
                     else:
                         w.write("This species has subspecies or variants that don't seem worth distinguishing.")
                 elif complete == 'more':
-                    if top == 'genus':
+                    if self.rp_action(prop, 'caution'):
                         caution = 'Caution: '
                     else:
                         caution = ''
