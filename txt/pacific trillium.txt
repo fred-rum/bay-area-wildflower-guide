@@ -5,7 +5,7 @@ color: white, pale purple
 See also {-california fetid adderstongue}.
 
 ==western trillium:T. ovatum ssp. ovatum
-obs_requires_photo: none
+warn obs_requires_photo: none
 . petals 1.5--7 cm, 5--45 mm wide
 . flower generally +- erect
 . <b>common</b>

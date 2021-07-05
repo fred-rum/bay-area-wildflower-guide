@@ -45,13 +45,15 @@ color: purple
 . <b>sepals 10--13 mm</b>, tip with one or more bristles
 . petals +- > sepals (usually hiding the sepals)
 . leaf lobed to dissected
+. blooms February-<b>May</b>
 
 ==hairy-pitted stork's-bill:E. brachycarpum
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0818+2297
 . petals are rounder and with more prominent veins than in common/musk
-. <b>stem glandular-hairy</b>
+. <b>stem glandular-hairy</b> [not the pedical]
 . <b>sepals 7--10 mm</b>, tip with one or more bristles
 . petals +- > sepals (usually hiding the sepals)
 . leaf lobed
+. blooms March-<b>August</b>
 
 ]

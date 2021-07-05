@@ -129,7 +129,7 @@ Linnaean hierarchy, so a chain of links can be created among promoted
 pages, potentially culminating at a top real page (e.g. where the
 properties were declared).
 
-'flag_one_child' prints an error message if a real page has exactly
+'warn/error one_child' prints an error message if a real page has exactly
 one real child.  I.e. it flags an extra layer of real hierarchy that
 may be unwanted.
 
@@ -168,20 +168,20 @@ If any shadow page in the taxon promotion chain has a '+' comment in
 originally made at the leve just above the ignored taxon.  I.e. the
 promotion is treated as if it didn't happen.
 
-'allow_obs_promotion' allows an observation to be counted at its
+'obs_promotion' allows an observation to be counted at its
 promoted rank.
 
-'allow_casual_obs' allows a casual observation to be counted.
+'casual_obs' allows a casual observation to be counted.
 Otherwise, only a 'research grade' or 'needs id' observation is
 counted.
 
-'allow_outside_obs' allows an observation outside the bay area to be
+'outside_obs' allows an observation outside the bay area to be
 counted.  This allows bay-area taxons (e.g. species with real pages)
 to be counted as observed even if found outside the area.
 
-'allow_outside_obs_promotion' allows an observation outside the bay
+'outside_obs_promotion' allows an observation outside the bay
 area to be counted even if it has been promoted.  This requires
-'allow_obs_promotion' to also be applied at the promoted rank.
+'obs_promotion' to also be applied at the promoted rank.
 
 The following properties print an error message for certain matching
 observations.  These are intended to identify taxons that need pages;
@@ -189,23 +189,23 @@ i.e. because the taxon's matching page is not real, it gets promoted
 to a real taxon which then flags it as a bad promotion.  Since only
 local taxons need pages, these flags never apply to observations
 outside the bay area.  They apply to casual observations only if the
-observation would be allowed by 'allow_casual_obs'.  On the other
+observation would be allowed by 'casual_obs'.  On the other
 hand, these flag properties apply regardless of the
-'allow_obs_promotion' property.
+'obs_promotion' property.
 
-'flag_obs_promotion' flags any observation that gets promoted to the
+'warn/error obs_promotion' flags any observation that gets promoted to the
 taxon with the applied property.  This is a very strict error check
 that potentially requires a real page for every taxonomic rank at
 which an observation may be made.
 
-'flag_obs_promotion_above_peers' flags an observation that gets
+'warn/error obs_promotion_above_peers' flags an observation that gets
 promoted, but only if it is promoted to a taxon that has real
 descendents, whereas the observation's original taxon had no real
 pages below it in the Linnaean hierarchy.  I.e. flag it if the
 promotion appears to make the observation possibly be of a documented
 taxon when it definitely isn't.
 
-'flag_obs_promotion_without_x' only makes sense when applied at the
+'warn/error obs_promotion_without_x' only makes sense when applied at the
 genus and/or species level.  It flags an observation if it is promoted
 to the genus level and the genus's completeness is not marked with 'x:
 <value>', where value is 'hist', 'rare', 'hist/rare', or 'more'.  It
@@ -215,14 +215,14 @@ same values or 'uncat'.  I.e. the promotion is allowed only if the
 promoted taxon has been explictly marked as incomplete, and not if the
 promoted taxon is marked as complete or is not marked either way.
 
-Note that 'flag_obs_promotion_without_x' can't catch an error if the
+Note that 'warn/error obs_promotion_without_x' can't catch an error if the
 genus/species page is not real.  E.g. if a genus has only one species
 and so the guide doesn't bother to include a page for the genus
 itself, an observation promoted to the genus level won't flag an error
-via this property.  However, 'flag_obs_promotion_above_peers' can
+via this property.  However, 'warn/error obs_promotion_above_peers' can
 catch this case.
 
-'allow_any_nrg_obs_promotion' disables all of the 'flag_obs_...' flags
+'casual_obs_promotion' disables all of the 'warn/error obs_...' flags
 for an observation that isn't research grade.  As with the properties
 above, this property is applied based on the rank that the observation
 is promoted to.  However, since research grade only makes sense at the
@@ -254,9 +254,9 @@ The following flags apply only to real pages created by the user.
 They don't apply if a shadow page is created by a group declaration,
 and the page is never promoted to real.
 
-'flag_obs_fill_com'
-'flag_obs_fill_alt_com'
-'flag_obs_fill_sci'
+'warn/error obs_fill_com'
+'warn/error obs_fill_alt_com'
+'warn/error obs_fill_sci'
 
 
 Properties to ensure that page info is complete:

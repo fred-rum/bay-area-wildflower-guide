@@ -1,7 +1,7 @@
-link_calflora: family,genus-below
-link_calphotos: species-below
-link_jepson: family,genus-below
-link_bayarea_calflora: family,genus-below
+do link_calflora: family,genus-below
+do link_calphotos: species-below
+do link_jepson: family,genus-below
+do link_bayarea_calflora: family,genus-below
 
 ==flowering plants
 end_hierarchy

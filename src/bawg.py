@@ -439,30 +439,28 @@ def read_observation_data(f):
         if not page or (sci in sci_ignore and sci_ignore[sci] == '-'):
             continue
 
-        if loc != 'bay area' and 'allow_outside_obs' not in page.prop_action_set:
+        if (loc != 'bay area' and
+            not page.rp_do('outside_obs')):
             continue
 
-        if rg == 'casual' and 'allow_casual_obs' not in page.prop_action_set:
+        if (rg == 'casual' and
+            orig_page.rank <= Rank.species and
+            not page.rp_do('casual_obs')):
             continue
 
         if page != orig_page:
             # The page got promoted.
 
-            if (loc != 'bay area' and
-                'allow_outside_obs_promotion' not in page.prop_action_set):
-                continue
-
-            if 'flag_obs_promotion' in page.prop_action_set:
-                error(f'flag_obs_promotion: {orig_sci} observation promoted to {page.full()}')
+            if loc != 'bay area' and not page.rp_do('outside_obs_promotion'):
                 continue
 
             if orig_page.rank_unknown:
                 # If an observation has an unknown rank, then we *always*
                 # promote it without complaint.
                 pass
-            elif ('allow_any_nrg_obs_promotion' in page.prop_action_set and
-                     rg != 'research' and
-                     orig_page.rank <= Rank.species):
+            elif (rg != 'research' and
+                  orig_page.rank <= Rank.species and
+                  page.rp_do('casual_obs_promotion')):
                 # This property allows a non-research-grade observation to be
                 # promoted without complaint.
                 pass
@@ -470,21 +468,20 @@ def read_observation_data(f):
                 # If the observation's original page has real Linnaean
                 # descendants, then we don't know what it is, but it could
                 # be something we've documented, so it's always OK.  But
-                # if doesn't have real Linnaean descendants, and the
+                # if it doesn't have real Linnaean descendants, and the
                 # promoted page does, then it's definitely something we
                 # haven't documented.
-                if ('flag_obs_promotion_above_peers' in page.prop_action_set and
-                    not orig_page.has_real_linnaean_descendants() and
+                if (not orig_page.has_real_linnaean_descendants() and
                     page.has_real_linnaean_descendants()):
-                    error(f'flag_obs_promotion_above_peers: {orig_sci} observation promoted to {page.full()}')
-                    continue
+                    page.rp_check('obs_promotion_above_peers',
+                                  f'{orig_sci} observation promoted to {page.full()}')
 
-                if ('flag_obs_promotion_without_x' in page.prop_action_set and
-                    page.taxon_unknown_completion()):
-                    error(f'flag_obs_promotion_without_x: {orig_sci} observation promoted to {page.full()}')
-                    continue
+                if page.taxon_unknown_completion():
+                    page.rp_check('obs_promotion_without_x',
+                                  f'{orig_sci} observation promoted to {page.full()}')
 
-                if 'allow_obs_promotion' not in page.prop_action_set:
+                if not page.rp_do('obs_promotion',
+                                  f'{orig_sci} observation promoted to {page.full()}'):
                     continue
 
         page.obs_n += 1
@@ -536,9 +533,9 @@ for page in page_array:
     if colors_not_used:
         error(f'{page.full()} has no use for these colors: {colors_not_used}')
 
-    if 'photo_requires_color' in page.prop_action_set and page.jpg_list and not page.color:
-        error(f'photo_requires_color: page {page.full()} has photos but no assigned or propagated color')
-
+    if  page.jpg_list and not page.color:
+        page.rp_check('photo_requires_color',
+                      f'page {page.full()} has photos but no assigned or propagated color')
 
 if arg('-tree7'):
     print_trees()

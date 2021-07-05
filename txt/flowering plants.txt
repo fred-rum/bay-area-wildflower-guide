@@ -1,16 +1,16 @@
 sci:subphylum Angiospermae
 default_ancestor
 
-create: family
-member_link: self, family
-link: self-subtribe
-#flag_link: genus-species
+do create: family
+do member_link: self, family
+do link: self-subtribe
+#warn link: genus-species
 
 # every observation is expected to find a page
-flag_obs_promotion_above_peers: self-below
+warn obs_promotion_above_peers: species-below
 
-color_requires_photo: self-below
-photo_requires_color: self-below
+warn color_requires_photo: self-below
+warn photo_requires_color: self-below
 
 # subset color list order: color, [optional name in membership list,] page name
 # The order of colors listed here determines the order of colors in a page's

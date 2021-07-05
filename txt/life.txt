@@ -6,23 +6,23 @@ list_hierarchy
 
 link_bayarea_inaturalist: self-below
 
-obs_requires_photo: genus-below
-flag_one_child: species
+warn obs_requires_photo: genus-below
+warn one_child: species
 
-allow_obs_promotion: species-below
-allow_outside_obs: species-below
-allow_outside_obs_promotion: species-below
+do obs_promotion: species-below
+do outside_obs: species-below
+do outside_obs_promotion: species-below
 
 # every genus/species should be complete unless marked otherwise
-flag_obs_promotion_without_x: genus,species
+warn flag_obs_promotion_without_x: genus,species
 
 # but non-research-grade observations are allowed to be promoted
 # without complaint
-allow_any_nrg_obs_promotion: genus-below
+do casual_obs_promotion: genus-below
 
-flag_obs_fill_sci: self-below
-flag_obs_fill_com: self-below
-obs_fill_alt_com: self-below
+error obs_fill_sci: self-below
+error obs_fill_com: self-below
+do obs_fill_alt_com: self-below
 
 
 ==vascular plants:phylum Tracheophyta

@@ -33,6 +33,47 @@ group_child_set = {} # rank -> group -> set of top-level pages in group
 for rank in Rank:
     group_child_set[rank] = {}
 
+props = {
+    'create': 'd',
+    'link': 'd',
+    'member_link': 'd',
+    'photo_requires_color': 'd',
+    'color_requires_photo': 'd',
+    'obs_requires_photo': 'd',
+    'photo_requires_bugid': 'd',
+    'one_child': 'f',
+    'obs_promotion': 'df',
+    'casual_obs_promotion': 'd',
+    'outside_obs_promotion': 'd',
+    'obs_promotion_above_peers': 'f',
+    'obs_promotion_without_x': 'f',
+    'casual_obs': 'd',
+    'outside_obs': 'd',
+    'obs_fill_com': 'df',
+    'obs_fill_sci': 'df',
+    'obs_fill_alt_com': 'df',
+    'link_calflora': 'd',
+    'link_calphotos': 'd',
+    'link_jepson': 'd',
+    'link_birds': 'd',
+    'link_bayarea_calflora': 'd',
+    'link_bayarea_inaturalist': 'd',
+}
+
+for prop in props:
+    action_set = props[prop]
+    if isinstance(action_set, str):
+        action_str = action_set
+        action_set = set()
+        if 'd' in action_str:
+            action_set.add('do')
+        if 'f' in action_str:
+            action_set.update({'warn', 'error'})
+        props[prop] = action_set
+
+prop_re = '|'.join(props.keys())
+
+
 ###############################################################################
 
 def get_default_ancestor():
@@ -423,14 +464,9 @@ class Page:
                 # as an alternative (iNaturalist) common name if it is
                 # sufficiently different than the regular common name.
                 if not plural_equiv(self.com, com):
-                    if (from_inat and
-                        not self.created_from_inat and
-                        not self.shadow and
-                        'flag_obs_fill_alt_com' in self.prop_action_set):
-                        error(f'flag_obs_fill_alt_com: {self.full()} has alternative name {com}')
-                    elif (not from_inat or
-                          self.created_from_inat or
-                          'obs_fill_alt_com' in self.prop_action_set):
+                    if (self.created_from_inat or
+                        self.rp_do('obs_fill_alt_com',
+                                   f'{self.full()} has alternative name {com}')):
                         # We're allowed to set the alternative common name
                         self.icom = com
                     else:
@@ -448,16 +484,8 @@ class Page:
 
         if (from_inat and
             not self.created_from_inat and
-            not self.shadow and
-            'flag_obs_fill_com' in self.prop_action_set):
-            error(f'flag_obs_fill_com: {self.full()} can be filled by {com}')
-            return
-        elif (not from_inat or
-              self.created_from_inat or
-              'obs_fill_com' in self.prop_action_set):
-            # We're allowed to set the common name
-            pass
-        else:
+            not self.rp_do('obs_fill_com',
+                           f'{self.full()} can be filled by {com}')):
             # If we got here, then
             #   - this page was created by the user, and
             #   - we have a new common name from iNaturalist, and
@@ -625,35 +653,30 @@ class Page:
 
         if (from_inat and
             not self.created_from_inat and
-            not self.shadow and
-            'flag_obs_fill_sci' in self.prop_action_set):
-            error(f'flag_obs_fill_sci: {self.name} can be filled by {elab}')
-        elif (not from_inat or
-              self.created_from_inat or
-              'obs_fill_sci' in self.prop_action_set):
-            # This is the "normal" case.
-            self.elab = elab
-            self.elab_src = elab_src
-            self.sci = sci
-            sci_page[elab] = self
-            if sci in sci_page and sci_page[sci] != self:
-                conflict_page = sci_page[sci]
-                sci_page[sci] = 'conflict'
-                if conflict_page != 'conflict':
-                    # Now that we know that two pages collide on a scientific
-                    # name, we should regenerate the names of *both* pages to
-                    # avoid confusion and differences in naming based on run
-                    # order.
-                    conflict_page.set_name()
-            else:
-                sci_page[sci] = self
-            self.set_name()
-        else:
+            not rp_do('obs_fill_sci',
+                      f'{self.name} can be filled by {elab}')):
             # If we got here, then
             #   - this page was created by the user, and
             #   - we have a new elaboration from iNaturalist, and
             #   - we don't have a property that allows us to use the new name.
-            pass
+            return
+
+        self.elab = elab
+        self.elab_src = elab_src
+        self.sci = sci
+        sci_page[elab] = self
+        if sci in sci_page and sci_page[sci] != self:
+            conflict_page = sci_page[sci]
+            sci_page[sci] = 'conflict'
+            if conflict_page != 'conflict':
+                # Now that we know that two pages collide on a scientific
+                # name, we should regenerate the names of *both* pages to
+                # avoid confusion and differences in naming based on run
+                # order.
+                conflict_page.set_name()
+        else:
+            sci_page[sci] = self
+        self.set_name()
 
     def format_com(self):
         com = self.com
@@ -695,30 +718,38 @@ class Page:
     def add_jpg(self, jpg):
         self.jpg_list.append(jpg)
 
-    def get_jpg(self, origin=None):
+    def get_jpg(self, set_rep_jpg=True, origin=None):
         if self == origin:
             error(f'circular get_jpg() loop through {self.full()}')
             return None
+        if not origin:
+            origin = self
+
+        jpg = None
+
         if self.rep_jpg:
-            pass
+            jpg = self.rep_jpg
         elif self.rep_child:
             rep = self.rep_child
             if isinstance(self.rep_child, str):
                 rep = find_page1(self.rep_child)
             if rep:
-                self.rep_jpg = rep.get_jpg(self)
+                jpg = rep.get_jpg(set_rep_jpg, origin)
             else:
                 error(f'unrecognized rep: {self.rep_child} in {self.full()}')
         elif self.jpg_list:
-            self.rep_jpg = self.jpg_list[0]
+            jpg = self.jpg_list[0]
         else:
             # Search this key page's children for a jpg to use.
             for child in self.child:
-                self.rep_jpg = child.get_jpg(origin)
-                if self.rep_jpg:
+                jpg = child.get_jpg(set_rep_jpg, origin)
+                if jpg:
                     break
 
-        return self.rep_jpg
+        if set_rep_jpg:
+            self.rep_jpg = jpg
+
+        return jpg
 
     def get_ext_photo(self):
         if self.ext_photo_list:
@@ -832,15 +863,14 @@ class Page:
             return ''
 
         def repl_property(matchobj):
-            prop = matchobj.group(1)
-            prop_words = prop.split()
-            if len(prop_words) == 2:
-                prop = prop_words[0]
-                action = prop_words[1]
-            else:
-                action = True
+            action = matchobj.group(1)
+            prop = matchobj.group(2)
+            rank_str = matchobj.group(3)
 
-            rank_range_list = split_strip(matchobj.group(2), ',')
+            if not action:
+                action = 'do'
+
+            rank_range_list = split_strip(rank_str, ',')
 
             rank_set = set()
             for rank_range in rank_range_list:
@@ -919,7 +949,7 @@ class Page:
         self.txt = re.sub(r'^default_ancestor\s*?\n',
                           repl_default_ancestor, self.txt, flags=re.MULTILINE)
 
-        self.txt = re.sub(r'^(create|link|member_link|member_name|photo_requires_color|color_requires_photo|obs_requires_photo|photo_requires_bugid|flag_one_child|allow_obs_promotion|flag_obs_promotion|flag_obs_promotion_above_peers|flag_obs_promotion_without_x|allow_casual_obs|allow_any_nrg_obs_promotion|allow_outside_obs|allow_outside_obs_promotion|obs_fill_com|obs_fill_sci|obs_fill_alt_com|flag_obs_fill_com|flag_obs_fill_sci|flag_obs_fill_alt_com|link_calflora|link_calphotos|link_jepson|link_birds|link_bayarea_calflora|link_bayarea_inaturalist):\s*(.*?)\s*?\n',
+        self.txt = re.sub(rf'^(?:(\w+) )?({prop_re})\s*:\s*(.*?)\s*?\n',
                           repl_property, self.txt, flags=re.MULTILINE)
 
     def parse_glossary(self):
@@ -1445,8 +1475,8 @@ class Page:
         page_array.append(self)
 
     def apply_prop_link(self):
-        if (('create' in self.prop_action_set and self.shadow) or
-            ('link' in self.prop_action_set and not self.shadow)):
+        if ((self.shadow and self.rp_do('create')) or
+            (not self.shadow and self.rp_do('link'))):
             # Check for Linaean descendants that can potentially linked to
             # this parent.
             potential_link_set = set()
@@ -1456,14 +1486,14 @@ class Page:
                 if child not in self.child and not child.subset_of_page:
                     child.get_potential_link_set(potential_link_set, self)
 
-            if ('create' in self.prop_action_set and
-                self.shadow and
-                potential_link_set):
+            if (self.shadow and
+                potential_link_set and
+                self.rp_do('create')):
                 self.promote_to_real()
                 self.non_txt_children = potential_link_set
                 for child in potential_link_set:
                     self.assign_child(child)
-            elif 'link' in self.prop_action_set and not self.shadow:
+            elif not self.shadow and self.rp_do('link'):
                 self.non_txt_children = potential_link_set
                 for child in potential_link_set:
                     self.assign_child(child)
@@ -1478,9 +1508,25 @@ class Page:
         for child in self.linn_child:
             child.assign_membership(ancestor)
 
+    def rp_check(self, prop, msg, shadow_bad=False):
+        # A shadow page normally is only checked if shadow_bad is True.
+        if self.shadow and not shadow_bad:
+            return
+
+        if prop in self.prop_action_set:
+            if 'error' in self.prop_action_set[prop]:
+                error(f'error {prop}: {msg}')
+            elif 'warn' in self.prop_action_set[prop]:
+                warning(f'warn {prop}: {msg}')
+
+    def rp_do(self, prop, msg=None, shadow_bad=False):
+        self.rp_check(prop, msg)
+        return (prop in self.prop_action_set and
+                'do' in self.prop_action_set[prop])
+
     def apply_prop_member(self):
-        if (('member_link' in self.prop_action_set and not self.shadow) or
-            ('member_name' in self.prop_action_set and self.shadow)):
+        if ((not self.shadow and self.rp_do('member_link')) or
+            (self.shadow and self.rp_do('member_name'))):
             for child in self.linn_child:
                 child.assign_membership(self)
 
@@ -1489,22 +1535,23 @@ class Page:
             # None of these checks apply to shadow pages.
             return
 
-        if ('obs_requires_photo' in self.prop_action_set and
-            self.count_flowers() and not self.get_jpg()):
-            error(f'obs_requires_photo: {self.full()} is observed but has no photos')
+        if self.count_flowers() and not self.get_jpg(set_rep_jpg=False):
+            self.rp_check('obs_requires_photo',
+                          f'{self.full()} is observed but has no photos')
 
-        if ('photo_requires_bugid' in self.prop_action_set and
-            self.jpg_list and not self.bugguide_id):
-            error(f'photo_requires_bugid: {self.full()} has photos but has no bugguide ID')
+        if self.jpg_list and not self.bugguide_id:
+            self.rp_check('photo_requires_bugid',
+                          f'{self.full()} has photos but has no bugguide ID')
 
-        if 'flag_one_child' in self.prop_action_set and len(self.child) == 1:
-            error(f'flag_one_child: {self.full()} has exactly one child')
+        if len(self.child) == 1:
+            self.rp_check('one_child',
+                          f'{self.full()} has exactly one child')
 
         # We check for excess colors before propagating color to
         # parent pages that might not have photos.
-        if ('color_requires_photo' in self.prop_action_set and
-            self.color and not self.jpg_list):
-            error(f'color_requires_photo: page {self.full()} has a color assigned but has no photos')
+        if self.color and not self.jpg_list:
+            self.rp_check('color_requires_photo',
+                          f'page {self.full()} has a color assigned but has no photos')
 
     def expand_genus(self, sci):
         if len(sci) >= 3 and sci[1:3] == '. ':
@@ -1840,7 +1887,7 @@ class Page:
             elab = format_elab(elab)
             add_link(elab, None, f'<a href="https://bugguide.net/node/view/{self.bugguide_id}" target="_blank" rel="noopener noreferrer">BugGuide</a>')
 
-        if 'link_calflora' in self.prop_action_set:
+        if self.rp_do('link_calflora'):
             # CalFlora can be searched by family,
             # but not by other high-level classifications.
             elab = self.choose_elab(self.elab_calflora)
@@ -1849,7 +1896,7 @@ class Page:
             elab = format_elab(elab)
             add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={sciurl}" target="_blank" rel="noopener noreferrer">CalFlora</a>');
 
-        if 'link_calphotos' in self.prop_action_set:
+        if self.rp_do('link_calphotos'):
             # CalPhotos cannot be searched by high-level classifications.
             # It can be searched by genus, but I don't find that at all useful.
             elab = self.choose_elab(self.elab_calphotos)
@@ -1873,7 +1920,7 @@ class Page:
             # rel-taxon=begins+with -> allows matches with lower-level detail
             add_link(elab, self.elab_calphotos, f'<a href="https://calphotos.berkeley.edu/cgi/img_query?rel-taxon=begins+with&where-taxon={sciurl}" target="_blank" rel="noopener noreferrer">CalPhotos</a>');
 
-        if 'link_jepson' in self.prop_action_set:
+        if self.rp_do('link_jepson'):
             # Jepson can be searched by family,
             # but not by other high-level classifications.
             elab = self.choose_elab(self.elab_jepson)
@@ -1884,7 +1931,7 @@ class Page:
             elab = format_elab(elab)
             add_link(elab, self.elab_jepson, f'<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sciurl}" target="_blank" rel="noopener noreferrer">Jepson&nbsp;eFlora</a>');
 
-        if 'link_birds' in self.prop_action_set and self.com:
+        if self.com and self.rp_do('link_birds'):
             # AllAboutBirds can only be searched by species name
             # and can only be directly linked by common name.
             elab = format_elab(self.elab)
@@ -1913,7 +1960,7 @@ class Page:
 
         species_maps = []
 
-        if 'link_bayarea_inaturalist' in self.prop_action_set:
+        if self.rp_do('link_bayarea_inaturalist'):
             if self.taxon_id and self.rank and self.rank >= Rank.genus:
                 query = f'taxon_id={self.taxon_id}'
             else:
@@ -1929,7 +1976,7 @@ class Page:
                 query = f'taxon_name={barenameurl}'
             species_maps.append(f'<a href="https://www.inaturalist.org/observations?captive=false&nelat=38&nelng=-121.35&swlat=36.85&swlng=-122.8&{query}&view=species" target="_blank" rel="noopener noreferrer">iNaturalist</a>')
 
-        if 'link_bayarea_calflora' in self.prop_action_set:
+        if self.rp_do('link_bayarea_calflora'):
             elab = self.choose_elab(self.elab_calflora)
             # srch=t -> search
             # taxon={name} -> scientific name to filter for (genus or below)

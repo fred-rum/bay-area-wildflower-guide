@@ -1215,15 +1215,6 @@ do default_completeness - non-bolded 'may be other' message if not specified
 caution default_completeness - bold 'Caution:' message if not specified
 warn/error default_completeness - warning/error if not specified
 
-Note that I'd want life to have something like
-do default_completeness kingdom-genus
-and flowering plants to have
-do default_completeness self->genus
-caution default_completeness genus
-
-To support this, a declared property should propagate until it finds
-another declaration *with the same value*.  If there are two
-declarations with different values, both should propagate.  If they
-also overlap in rank, that could either be an error or there could be
-an implicit priority (e.g. error > warn > do) or they could all apply
-(e.g. a warning is printed, but the 'do' is still applied).
+The BAWG web app has a header bar that isn't in the example "hello
+world" web app.  Can I fix that?
+https://medium.com/james-johnson/a-simple-progressive-web-app-tutorial-f9708e5f2605
