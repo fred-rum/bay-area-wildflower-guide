@@ -8,7 +8,7 @@ def strip_comments(to_filename, from_filename=None, code=None):
 
         if string is not None:
             return string
-        elif 'Copyright Chris Nelson' in comment:
+        elif 'Copyright' in comment:
             return comment
         else:
             return ''

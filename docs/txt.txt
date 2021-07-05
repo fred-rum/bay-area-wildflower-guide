@@ -7,9 +7,10 @@ In addition to the standard HTML, the following text cases are handled
 specially.  Each case must be on a line by itself unless otherwise
 specified.
 
-Comment lines start with a # and are ignored.  Note that a comment
-must be on a line by itself.  A # elsewhere on the line has a
-different purpose (described in glossary.txt).
+Comment lines start with a # and are ignored.  A comment must be on a
+line by itself or with at least one space separating it from the
+previous text on the line.  A # immediately following text has a
+different purpose, described in glossary.txt.
 
 --
 Names:

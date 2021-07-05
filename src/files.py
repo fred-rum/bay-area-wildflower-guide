@@ -188,24 +188,26 @@ def write_header(w, title, h1, nospace=False, desc=None, at_root=False):
             space_class = ''
         w.write(f'<h1 id="title"{space_class}>{h1}</h1>\n')
 
-def write_footer(w, incl_footer=True, at_root=False):
-    if at_root:
-        path = ''
-    else:
-        path = '../'
+# Read the footer text from a file (if present).
+try:
+    with open(f'{root_path}/other/footer.html', mode='r', encoding='utf-8') as f:
+        footer_txt = f.read()
+    footer_txt = re.sub(r'<!--.*?-->\s*', '', footer_txt, flags=re.DOTALL)
+except FileNotFoundError:
+    footer_txt = ''
 
-    # The "home-link" tag is empty because it gets filled in by the CSS
-    # with either "BAWG" or "Bay Area Wildflower Guide", depending on how
-    # much space is available.
-    #
-    # I don't put the year in the copyright because it's a pain to determine
-    # given the different creation/modification dates of the pages *plus*
-    # the photos on them.  The Berne Convention applies in any case.
+def write_footer(w, incl_footer=True, at_root=False):
     if (incl_footer):
-        w.write(f'''<div class="footer">
-<span class="foot-left"><a class="home-link" href="{path}index.html" aria-label="home"></a> <span class="foot-fade"> &copy; Chris Nelson</span></span><a class="foot-fade" href="{path}index.html#contact">Contact me</a>
-</div>
-''')
+        # I assume that all href links in the footer are relative to the root
+        # directory.  So if we're writing an HTML file that is *not* at the
+        # root directory, modify the href links accordingly.
+        if at_root:
+            footer_mod = footer_txt
+        else:
+            footer_mod = re.sub(r'href="', r'href="../', footer_txt)
+
+        w.write(footer_mod)
+
     w.write('''</div>
 </div>
 </body>

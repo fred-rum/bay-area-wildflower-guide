@@ -163,7 +163,7 @@ div.body-container {
    flex-grow and flex-shrink don't seem to be necessary with
    'overflow-y: auto', but I can't find any documentation on the
    subject.  I include them to ensure that this body section will
-   always adjust to fill the remaining space.  */
+   always adjust to fill the remaining space. */
 div#body {
     padding-left: 8px;
     padding-right: 8px;
