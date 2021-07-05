@@ -1215,6 +1215,7 @@ do default_completeness - non-bolded 'may be other' message if not specified
 caution default_completeness - bold 'Caution:' message if not specified
 warn/error default_completeness - warning/error if not specified
 
+
 The BAWG web app has a header bar that isn't in the example "hello
 world" web app.  Can I fix that?
 https://medium.com/james-johnson/a-simple-progressive-web-app-tutorial-f9708e5f2605
