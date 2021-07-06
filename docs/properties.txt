@@ -324,3 +324,6 @@ the family level or at the genus level and below.
 applied to an iNaturalist list of bay area species within the
 corresponding genus (or higher-level taxon).  iNaturalist supports
 this type of link at any taxonomic level.
+
+Note that there is no property for linking to BugGuide.  Linking is
+automatic whenever a bug ID is given.
