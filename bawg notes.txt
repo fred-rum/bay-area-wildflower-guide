@@ -1146,8 +1146,11 @@ glossary.
 
 example/tiny:
 
-Read footer HTML from a file, e.g. data/footer.html
+ready to screenshot
 
+Example genus with two species and full info:
+genus Bellardia
+shooting stars
 
 How to prompt for a PWA install when desired:
 https://developers.google.com/web/updates/2019/05/mini-infobar-update

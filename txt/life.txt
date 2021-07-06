@@ -6,6 +6,7 @@ list_hierarchy
 
 caution default_completeness: genus
 
+link_inaturalist: self-below
 link_bayarea_inaturalist: self-below
 
 warn obs_requires_photo: genus-below

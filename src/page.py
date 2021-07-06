@@ -52,6 +52,7 @@ props = {
     'obs_fill_com': 'df',
     'obs_fill_sci': 'df',
     'obs_fill_alt_com': 'df',
+    'link_inaturalist': 'd',
     'link_calflora': 'd',
     'link_calphotos': 'd',
     'link_jepson': 'd',
@@ -1887,16 +1888,17 @@ class Page:
                 link_list[elab] = []
             link_list[elab].append(link)
 
-        elab = self.choose_elab(self.elab_inaturalist)
-        if self.taxon_id:
-            elab = format_elab(elab)
-            add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/{self.taxon_id}" target="_blank" rel="noopener noreferrer">iNaturalist</a>')
-        else:
-            sci = strip_sci(elab, keep='x')
-            sci = re.sub(r' X', ' \xD7 ', sci)
-            sciurl = url(sci)
-            elab = format_elab(elab)
-            add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/search?q={sciurl}&view=list" target="_blank" rel="noopener noreferrer">iNaturalist</a>')
+        if self.rp_do('link_inaturalist'):
+            elab = self.choose_elab(self.elab_inaturalist)
+            if self.taxon_id:
+                elab = format_elab(elab)
+                add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/{self.taxon_id}" target="_blank" rel="noopener noreferrer">iNaturalist</a>')
+            else:
+                sci = strip_sci(elab, keep='x')
+                sci = re.sub(r' X', ' \xD7 ', sci)
+                sciurl = url(sci)
+                elab = format_elab(elab)
+                add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/search?q={sciurl}&view=list" target="_blank" rel="noopener noreferrer">iNaturalist</a>')
 
         if self.bugguide_id and self.bugguide_id != 'n/a':
             elab = self.choose_elab(self.elab_bugguide)
@@ -1961,6 +1963,7 @@ class Page:
             comurl = url(birds_com)
 
             add_link(elab, None, f'<a href="https://www.allaboutbirds.org/guide/{comurl}/id" target="_blank" rel="noopener noreferrer">AllAboutBirds</a>')
+
         link_list_txt = []
         for elab in elab_list:
             txt = '\n&ndash;\n'.join(link_list[elab])
@@ -1971,7 +1974,7 @@ class Page:
 
         if len(elab_list) > 1:
             w.write(f'<p class="list-head">Not all sites agree about the scientific name:</p>\n<ul>\n<li>{txt}</li>\n</ul>\n')
-        else:
+        elif elab_list:
             w.write(f'<p>\nTaxon info:\n{txt}\n</p>\n')
 
         species_maps = []

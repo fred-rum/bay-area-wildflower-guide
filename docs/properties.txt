@@ -289,6 +289,14 @@ a 'bug:<id>' specified.
 
 Properties to link to external sites:
 
+The following properties are applied only if a page has a scientific
+name.
+
+'link_inaturalist' creates a link to the corresponding taxon in
+iNaturalist from any page to which it is applied.  The link uses the
+taxon_id if it is known; otherwise the link triggers a search on the
+scientific name.
+
 'link_calflora' creates a link to the corresponding taxon in CalFlora
 from any page to which it is applied.  CalFlora supports this type of
 link at the family level or at the genus level and below.
