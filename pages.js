@@ -1531,7 +1531,7 @@ var pages=[
 {page:"hairy sandspurry",sci:["Spergularia villosa"],x:"u"},
 {page:"hairy woodsorrel",sci:["Oxalis pilosa"],x:"u"},
 {page:"hairy-flower wild buckwheat",sci:["Eriogonum hirtiflorum"],x:"u"},
-{page:"hairy-pitted stork's-bill",sci:["Erodium brachycarpum"],x:"u"},
+{page:"hairy-pitted stork's-bill",sci:["Erodium brachycarpum"],x:"o"},
 {page:"hall's willowherb",sci:["Epilobium hallianum"],x:"u"},
 {page:"hedge bedstraw",sci:["Galium mollugo"],x:"u"},
 {page:"Heliotropium europaeum",x:"u"},

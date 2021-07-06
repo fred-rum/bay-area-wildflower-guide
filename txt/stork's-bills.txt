@@ -49,7 +49,7 @@ color: purple
 . blooms February-<b>May</b>
 
 ==hairy-pitted stork's-bill:E. brachycarpum
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0818+2297
+color:purple
 . petals are rounder and with more prominent veins than in common/musk
 . <b>stem glandular-hairy</b> [not the pedicel]
 . <b>sepals 7--10 mm</b>, tip with one or more bristles
