@@ -1213,7 +1213,7 @@ class Page:
                 # it'll get caught when we make the recursive call.
                 self.link_linn_child(child.linn_parent)
         except FatalError:
-            warning(f'was adding {child.full()} (rank {child.rank.name}) as a child of {self.full()} (rank {self.rank.name})')
+            warn(f'was adding {child.full()} (rank {child.rank.name}) as a child of {self.full()} (rank {self.rank.name})')
             raise
 
     # Create a Linnaean link to a parent that is descibed by rank &
@@ -1531,7 +1531,7 @@ class Page:
             if 'error' in self.prop_action_set[prop]:
                 error(f'error {prop}: {msg}')
             elif 'warn' in self.prop_action_set[prop]:
-                warning(f'warn {prop}: {msg}')
+                warn(f'warn {prop}: {msg}')
 
     def rp_action(self, prop, action):
         return (prop in self.prop_action_set and
@@ -1624,7 +1624,7 @@ class Page:
             try:
                 self.assign_child(child_page)
             except FatalError:
-                warning(f'was adding {child_page.full()} as a child of {self.full()}')
+                warn(f'was adding {child_page.full()} as a child of {self.full()}')
                 raise
 
             if is_rep:
@@ -2321,7 +2321,7 @@ class Page:
                         if 'error' in self.prop_action_set[prop]:
                             error(f'error default_completeness: {msg}')
                         elif 'warn' in self.prop_action_set[prop]:
-                            warning(f'warn default_completeness: {msg}')
+                            warn(f'warn default_completeness: {msg}')
 
                     if self.rp_action(prop, 'caution'):
                         w.write(f'<b>Caution: There may be{other} wild {members} of this {top} not yet included in this guide.</b>')

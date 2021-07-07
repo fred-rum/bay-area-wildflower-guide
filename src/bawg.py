@@ -40,9 +40,16 @@ from unidecode import unidecode
 import datetime
 import time
 
+# The specified version (or later) of Python is required for at least the
+# following reasons.
+#
 # Python 3 is required in general for good Unicode support and other features.
-# Some of the yaml-handling code requires the default dictionaries to be
-# ordered, which means 3.7 or later.
+#
+# Python 3.5 is required for subprocess.run()
+#
+# Python 3.7 is required for the dictionaries to be ordered by default.
+# I don't generally rely on this, but the first dictionary entry in
+# parks.yaml is treated specially, so that requires an ordered dictionary.
 if sys.version_info < (3, 7):
     sys.exit('Python 3.7 or later is required.\n')
 
@@ -93,7 +100,7 @@ txt_files = get_file_set('txt', 'txt')
 ###############################################################################
 
 if arg('-steps'):
-    print('Step 1: Reading primary names from txt files')
+    info('Step 1: Reading primary names from txt files')
 
 # Read the txt for all txt files.  We could do more in this first pass,
 # but I want to be able to measure the time of reading the files separately
@@ -129,7 +136,7 @@ if arg('-tree1'):
     print_trees()
 
 if arg('-steps'):
-    print('Step 2: Parse child info')
+    info('Step 2: Parse child info')
 
 # parse_children_and_attributes() can add new pages, so we make a copy
 # of the list to iterate through.  parse_children_and_attributes()
@@ -143,7 +150,7 @@ if arg('-tree2'):
     print_trees()
 
 if arg('-steps'):
-    print('Step 3: Attach photos to pages')
+    info('Step 3: Attach photos to pages')
 
 assign_jpgs()
 
@@ -170,10 +177,10 @@ def create_group_pages(d, prefix=''):
             page = find_page2(com, elab)
             if not page:
                 page = Page(com, elab, shadow=True)
-            #print(f'{page.com} <-> {page.elab}')
+            #info(f'{page.com} <-> {page.elab}')
 
 if arg('-steps'):
-    print('Step 4: Parse group_names.yaml')
+    info('Step 4: Parse group_names.yaml')
 
 read_data_file('group_names.yaml', read_group_names)
 
@@ -181,7 +188,7 @@ if arg('-tree4'):
     print_trees()
 
 if arg('-steps'):
-    print('Step 5: Update Linnaean links')
+    info('Step 5: Update Linnaean links')
 
 # Linnaean descendants links are automatically created whenever a page
 # is assigned a child, but this isn't reliable during initial child
@@ -195,7 +202,7 @@ if arg('-tree5'):
     print_trees()
 
 if arg('-steps'):
-    print('Step 6: Add explicit and implied ancestors')
+    info('Step 6: Add explicit and implied ancestors')
 
 for page in page_array[:]:
     page.assign_groups()
@@ -210,7 +217,7 @@ for page in page_array:
     page.record_genus()
 
 if arg('-steps'):
-    print('Step 7: Create taxonomic chains from observations.csv')
+    info('Step 7: Create taxonomic chains from observations.csv')
 
 # Read the taxonomic chains from the observations file (exported from
 # iNaturalist).  There is more data in there that we'll read later, but
@@ -296,7 +303,7 @@ def read_obs_chains(f):
                 if group != orig_sci:
                     page = page.add_linn_parent(rank, group, from_inat=True)
         except FatalError:
-            warning(f'was creating taxonomic chain from {page.full()}')
+            warn(f'was creating taxonomic chain from {page.full()}')
             raise
 
 read_data_file('observations.csv', read_obs_chains,
@@ -306,7 +313,7 @@ if arg('-tree7'):
     print_trees()
 
 if arg('-steps'):
-    print("Step 8: Assign ancestors to pages that don't have scientific names")
+    info("Step 8: Assign ancestors to pages that don't have scientific names")
 
 for page in page_array:
     if not page.rank and not page.linn_parent:
@@ -318,7 +325,7 @@ if arg('-tree8'):
     print_trees()
 
 if arg('-steps'):
-    print('Step 9: Assign default ancestor to floating trees')
+    info('Step 9: Assign default ancestor to floating trees')
 
 default_ancestor = get_default_ancestor()
 if default_ancestor:
@@ -331,7 +338,7 @@ if arg('-tree9'):
     print_trees()
 
 if arg('-steps'):
-    print('Step 10: Propagate properties')
+    info('Step 10: Propagate properties')
 
 # Assign properties to the appropriate ranks.
 for page in page_array:
@@ -341,7 +348,7 @@ if arg('-tree10'):
     print_trees()
 
 if arg('-steps'):
-    print('Step 11: Apply create and link properties')
+    info('Step 11: Apply create and link properties')
 
 # Apply link-creation and related properties
 # in order from the lowest ranked pages to the top.
@@ -354,7 +361,7 @@ if arg('-tree11'):
     print_trees()
 
 if arg('-steps'):
-    print('Step 12: Read observation counts and common names from observations.csv')
+    info('Step 12: Read observation counts and common names from observations.csv')
 
 sci_ignore = {}
 
@@ -613,7 +620,7 @@ if arg('-incomplete_keys'):
     page_list = page_array[:]
     page_list.sort(key=by_incomplete_obs, reverse=True)
     for page in page_list[:5]:
-        print(page.full())
+        info(page.full())
 
 
 ###############################################################################
@@ -719,7 +726,7 @@ if total_list:
             for name in mod_list:
                 w.write(f'<a href="{name}">{name}</a><p/>\n')
 else:
-    print("No files modified.")
+    info("No files modified.")
 
 # All working files have been created.  Move the files/directories out
 # of the working directory and into their final places.
@@ -745,10 +752,10 @@ while not done:
         done = True
     except WindowsError as error:
         if tries == 1:
-            warning('Having trouble removing the old html and renaming the new html...')
+            warn('Having trouble removing the old html and renaming the new html...')
         time.sleep(0.1)
 if tries > 1:
-    warning(f'Completed in {tries} tries.')
+    warn(f'Completed in {tries} tries.')
 
 if total_list:
     # open the default browser with the created HTML file

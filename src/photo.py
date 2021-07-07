@@ -54,11 +54,33 @@ def which_plus(program, use_path, plus):
 
     return None
 
+def run(cmd):
+    # Run a command and capture its returncode.
+    # If the command emits any messages, let those go to STDOUT/STDERR
+    # per the default behavior.
+    result = subprocess.run(cmd)
+
+    if result.returncode:
+        if arg('-steps'):
+            # command was already printed
+            pass
+        else:
+            info(' '.join(cmd))
+        error(f"Command returned non-zero exit status {result.returncode}")
+
 def cvt_irfanview(cmd):
+    # IrvanView creates the destination directory if necessary
+    # so we don't have to create it ourselves.
+
+    # Since every OS has a limit on how long the ocmmand line can be,
+    # we put the file list in convert.txt and then point IrfanView to
+    # that file.  IrfanView expects a newline to separate each file
+    # in the list.
     with open(working_path + "/convert.txt", "w") as w:
         for filename in mod_list:
             filename = convert_path_to_windows(filename)
             w.write(f'{filename}\n')
+
     convert_list = convert_path_to_windows(f'{working_path}/convert.txt')
     thumb_glob = convert_path_to_windows(f'{root_path}/thumbs/*.jpg')
     cmd = [cmd,
@@ -68,20 +90,31 @@ def cvt_irfanview(cmd):
            '/resample',
            '/jpgq=80',
            f'/convert={thumb_glob}']
+
     if arg('-steps'):
-        print(f'Generating {len(mod_list)} thumbnails with IrfanView:')
-        print(' '.join(cmd))
+        info(f'Generating {len(mod_list)} thumbnails with IrfanView:')
+        info(' '.join(cmd))
+
     subprocess.Popen(cmd).wait()
 
 def cvt_imagemagick(cmd):
+    # ImageMagick does not create the destination directory,
+    # so we create it ourselves if necessray.
     try:
         os.mkdir(root_path + '/thumbs')
     except FileExistsError:
         pass
+
+    # Since every OS has a limit on how long the ocmmand line can be,
+    # we put the file list in convert.txt and then point ImageMagick to
+    # that file.  ImageMagick allows any whitespace to separate each file
+    # in the list, so we surround each filename with double-quotes to
+    # prevent a space in a filename from doing the wrong thing.
     with open(working_path + "/convert.txt", "w") as w:
         for filename in mod_list:
             filename = convert_path_to_windows(filename)
             w.write(f'"{filename}"\n')
+
     convert_list = convert_path_to_windows(f'{working_path}/convert.txt')
     thumb_path = convert_path_to_windows(f'{root_path}/thumbs')
     cmd.extend(
@@ -91,10 +124,12 @@ def cvt_imagemagick(cmd):
          '-quality', '80%',              # reduce quality
          f'@{convert_list}',             # list of files must be last?
         ])
+
     if arg('-steps'):
-        print(f'Generating {len(mod_list)} thumbnails with ImageMagick:')
-        print(' '.join(cmd))
-    subprocess.Popen(cmd).wait()
+        info(f'Generating {len(mod_list)} thumbnails with ImageMagick:')
+        info(' '.join(cmd))
+
+    run(cmd)
 
 def cvt_magick(cmd):
     # ImageMagic7 is invoked with 'magick mogrify'.
@@ -118,7 +153,7 @@ if mod_list:
             fn(cmd)
             break
     else:
-        warning('No photo conversion program found.  Skipping.')
+        warn('No photo conversion program found.  Skipping.')
 
 
 # Record jpg names for associated pages.

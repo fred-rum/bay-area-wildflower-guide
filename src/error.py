@@ -11,7 +11,7 @@ _delayed_cnt = 0 # is always 0 when _in_section is False
 def info(msg):
     print(msg, flush=True)
 
-def warning(msg):
+def warn(msg):
     sys.stdout.flush()
     print(msg, file=sys.stderr, flush=True)
 
@@ -122,5 +122,5 @@ class FatalError(Exception):
     pass
 
 def fatal(msg):
-    warning(msg)
+    warn(msg)
     raise FatalError(msg)
