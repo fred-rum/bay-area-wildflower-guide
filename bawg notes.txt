@@ -1155,7 +1155,3 @@ example/tiny:
 Example genus with two species and full info:
 genus Bellardia
 shooting stars
-
-
-If no image conversion program is found (or runs successfully), fall
-back to full-sized photos in place of thumbnails.

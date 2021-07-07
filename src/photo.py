@@ -5,7 +5,7 @@ from error import *
 from files import *
 from page import *
 
-thumb_set = get_file_set(f'thumbs', 'jpg')
+old_thumb_set = get_file_set(f'thumbs', 'jpg')
 
 def get_name_from_jpg(jpg):
     name = re.sub(r',([-0-9]\S*|)$', r'', jpg)
@@ -24,18 +24,21 @@ def get_name_from_jpg(jpg):
 # compared to the previous version, the only disadvantage in not
 # using working_path is that some thumbs may disappear during the run,
 # and that is OK.
-for name in thumb_set:
+for name in old_thumb_set:
     if name not in jpg_files:
         thumb_file = f'{root_path}/thumbs/' + name + '.jpg'
         os.remove(thumb_file)
 
 mod_list = []
+valid_thumb_set = set()
 for name in jpg_files:
     photo_file = f'{root_path}/photos/' + name + '.jpg'
     thumb_file = f'{root_path}/thumbs/' + name + '.jpg'
-    if (name not in thumb_set or
+    if (name not in old_thumb_set or
         os.path.getmtime(photo_file) > os.path.getmtime(thumb_file)):
         mod_list.append(photo_file)
+    else:
+        valid_thumb_set.add(name)
 
 
 def which_plus(program, plus):
@@ -79,6 +82,11 @@ def run(cmd):
         else:
             info(' '.join(cmd))
         error(f"Command returned non-zero exit status {result.returncode}")
+    else:
+        # If the returncode is 0, assume that thumbnail generation was
+        # successfully completed for all photos.
+        global valid_thumb_set
+        valid_thumb_set = jpg_files
 
 def cvt_irfanview(cmd):
     # IrvanView creates the destination directory if necessary
@@ -172,16 +180,9 @@ if mod_list:
     else:
         warn('No photo conversion program found.  Skipping.')
 
-
-# Record jpg names for associated pages.
-# Create a blank page for all unassociated jpgs.
-def assign_jpgs():
-    for jpg in sorted(jpg_files):
-        name = get_name_from_jpg(jpg)
-        if name == '':
-            error(f'No name for {jpg}')
-        else:
-            page = find_page1(name)
-            if not page:
-                page = Page(name)
-            page.add_jpg(jpg)
+# Return the relative URL to a thumbnail photo.
+def thumb_url(jpg):
+    if jpg in valid_thumb_set:
+        return url(f'../thumbs/{jpg}.jpg')
+    else:
+        return url(f'../photos/{jpg}.jpg')

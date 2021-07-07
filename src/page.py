@@ -6,6 +6,7 @@ from operator import attrgetter
 # My files
 from error import *
 from files import *
+from photo import *
 from find_page import *
 from rank import *
 from obs import *
@@ -2046,8 +2047,7 @@ class Page:
 
         if jpg:
             pageurl = url(self.name)
-            jpgurl = url(jpg)
-            w.write(f'<a href="{pageurl}.html"><div class="list-thumb"><img class="boxed" src="../thumbs/{jpgurl}.jpg" alt="photo"></div></a>')
+            w.write(f'<a href="{pageurl}.html"><div class="list-thumb"><img class="boxed" src="{thumb_url(jpg)}" alt="photo"></div></a>')
 
         w.write(f'{self.create_link(2)}</div>\n')
 
@@ -2110,10 +2110,9 @@ class Page:
         def repl_example(matchobj):
             suffix = matchobj.group(1)
             jpg = child.name + suffix
-            jpgurl = url(jpg)
             if jpg not in child.jpg_list:
                 error(f'Broken [example{suffix}] for child {child.full()} in {self.full()}')
-            return f'<a class="leaf" href="../photos/{jpgurl}.jpg">[example]</a>'
+            return f'<a class="leaf" href="../photos/{url(jpg)}.jpg">[example]</a>'
 
         child = self.child[child_idx]
 
@@ -2152,8 +2151,7 @@ class Page:
 
         pageurl = url(child.name)
         if jpg:
-            jpgurl = url(jpg)
-            img = f'<a href="{pageurl}.html"><div class="key-thumb"><img class="boxed" src="../thumbs/{jpgurl}.jpg" alt="photo"></div></a>'
+            img = f'<a href="{pageurl}.html"><div class="key-thumb"><img class="boxed" src="{thumb_url(jpg)}" alt="photo"></div></a>'
         elif ext_photo:
             img = f'<a href="{pageurl}.html" class="enclosed {child.link_style()}"><div class="key-thumb-text">'
             n_photos = len(child.ext_photo_list)
@@ -2477,11 +2475,10 @@ class Page:
             else:
                 if self.jpg_list or self.ext_photo_list:
                     for jpg in self.jpg_list:
-                        jpgurl = url(jpg)
                         # Do not put newlines between jpgs because that would
                         # put an unwanted text space between them in addition
                         # to their desired margin.
-                        w.write(f'<a href="../photos/{jpgurl}.jpg"><img class="leaf-thumb" src="../thumbs/{jpgurl}.jpg" alt="photo"></a>')
+                        w.write(f'<a href="../photos/{url(jpg)}.jpg"><img class="leaf-thumb" src="{thumb_url(jpg)}" alt="photo"></a>')
 
                     for (label, link) in self.ext_photo_list:
                         w.write(f'<a href="{link}" target="_blank" rel="noopener noreferrer" class="enclosed"><div class="leaf-thumb-text">')

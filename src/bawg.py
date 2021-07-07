@@ -152,6 +152,19 @@ if arg('-tree2'):
 if arg('-steps'):
     info('Step 3: Attach photos to pages')
 
+# Record jpg names for associated pages.
+# Create a blank page for all unassociated jpgs.
+def assign_jpgs():
+    for jpg in sorted(jpg_files):
+        name = get_name_from_jpg(jpg)
+        if name == '':
+            error(f'No name for {jpg}')
+        else:
+            page = find_page1(name)
+            if not page:
+                page = Page(name)
+            page.add_jpg(jpg)
+
 assign_jpgs()
 
 if arg('-tree3'):
@@ -558,6 +571,9 @@ for page in full_page_array:
     if not (page.sci or page.no_sci):
         error(page.name, prefix='No scientific name given for the following pages:')
 
+if arg('-steps'):
+    info('Step 13: Parse remaining text, including glossary terms')
+
 parse_glossaries(top_list)
 
 for page in page_array:
@@ -588,7 +604,7 @@ for page in page_array:
         page.rp_check('photo_requires_color',
                       f'page {page.full()} has photos but no assigned or propagated color')
 
-if arg('-tree7'):
+if arg('-tree13'):
     print_trees()
 
 # Turn txt into html for all normal and default pages.
@@ -609,6 +625,9 @@ def by_incomplete_obs(page):
         return count_flowers(page)
     else:
         return 0
+
+if arg('-steps'):
+    info('Writing HTML')
 
 for page in page_array:
     page.write_html()
@@ -809,7 +828,7 @@ if not arg('-without_cache'):
 
     alpha_list += get_file_list('html', glossary_files, 'html')
 
-    alpha_list += get_file_list('thumbs', jpg_files, 'jpg')
+    alpha_list += get_file_list('thumbs', valid_thumb_set, 'jpg')
 
     alpha_list += get_file_list('photos', jpg_files, 'jpg')
 
