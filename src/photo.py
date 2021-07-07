@@ -169,7 +169,7 @@ if mod_list:
         ('magick', 'ImageMagick', cvt_magick),
         ('mogrify', 'ImageMagick', cvt_mogrify),
         ('i_view32', 'IrfanView', cvt_irfanview),
-        ('i_view65', 'IrfanView', cvt_irfanview),
+        ('i_view64', 'IrfanView', cvt_irfanview),
     ]
 
     for (program, plus, fn) in cmds:
