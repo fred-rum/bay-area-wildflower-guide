@@ -1157,11 +1157,5 @@ genus Bellardia
 shooting stars
 
 
-Make sure that an error in the image conversion program is relayed to
-the user.
-
-Search for ImageMagick commands in all directories that start with
-ImageMagick.
-
 If no image conversion program is found (or runs successfully), fall
 back to full-sized photos in place of thumbnails.

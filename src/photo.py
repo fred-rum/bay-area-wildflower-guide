@@ -38,19 +38,31 @@ for name in jpg_files:
         mod_list.append(photo_file)
 
 
-def which_plus(program, use_path, plus):
-    if use_path:
-        cmd = shutil.which(program)
-        if cmd:
-            return cmd
+def which_plus(program, plus):
+    cmd = shutil.which(program)
+    if cmd:
+        return cmd
 
     if plus:
+        # plus only gets used on Windows, so treat it as case insensitive.
+        plus = plus.lower()
+
+        # Search the known standard installation directories for Windows
+        # programs.  (If not on Windows, than these environment variables
+        # aren't found, and this section is effectively skipped.)
         for env in ('ProgramFiles', 'ProgramFiles(x86)'):
             dir = os.environ.get(env)
             if dir:
-                cmd = shutil.which(program, path=os.path.join(dir, plus))
-                if cmd:
-                    return cmd
+                # Search for any sub-directory that starts with the
+                # plus name.
+                file_list = os.listdir(dir)
+                for filename in file_list:
+                    if filename.lower().startswith(plus):
+                        # Check whether the program is in the sub-directory.
+                        cmd = shutil.which(program, path=os.path.join(dir,
+                                                                      filename))
+                        if cmd:
+                            return cmd
 
     return None
 
@@ -140,15 +152,20 @@ def cvt_mogrify(cmd):
     cvt_imagemagick([cmd])
 
 if mod_list:
+    # Search for a program that can generate photo thumbnails.
+    # Each tuple in cmd has the following information:
+    # - the root name of the command (not including '.exe' on Windows)
+    # - a subdirectory of 'Program Files' that it might be in
+    # - the function to run if the program is found.
     cmds = [
-        ('magick', True, 'ImageMagick', cvt_magick),
-        ('mogrify', True, 'ImageMagick-6', cvt_mogrify),
-        ('i_view32', True, 'IrfanView', cvt_irfanview),
-        ('i_view65', True, 'IrfanView', cvt_irfanview),
+        ('magick', 'ImageMagick', cvt_magick),
+        ('mogrify', 'ImageMagick', cvt_mogrify),
+        ('i_view32', 'IrfanView', cvt_irfanview),
+        ('i_view65', 'IrfanView', cvt_irfanview),
     ]
 
-    for (program, use_path, plus, fn) in cmds:
-        cmd = which_plus(program, use_path, plus)
+    for (program, plus, fn) in cmds:
+        cmd = which_plus(program, plus)
         if cmd:
             fn(cmd)
             break
