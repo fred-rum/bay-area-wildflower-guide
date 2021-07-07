@@ -1143,16 +1143,20 @@ Change "Glossary table of contents" to "Organization of glossaries" or
 something else that makes it clear that there is more than one
 glossary.
 
+How to prompt for a PWA install when desired:
+https://developers.google.com/web/updates/2019/05/mini-infobar-update
+or 02. in:
+https://www.creativebloq.com/features/9-amazing-pwa-secrets
+
+
 
 example/tiny:
-
-ready to screenshot
 
 Example genus with two species and full info:
 genus Bellardia
 shooting stars
 
-How to prompt for a PWA install when desired:
-https://developers.google.com/web/updates/2019/05/mini-infobar-update
-or 02. in:
-https://www.creativebloq.com/features/9-amazing-pwa-secrets
+
+Adjust script to find either i_view32 (or a 64-bit version, if
+available) or Imagemagick's convert program and run it with the proper
+arguments.

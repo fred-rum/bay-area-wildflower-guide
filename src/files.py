@@ -191,9 +191,13 @@ def write_header(w, title, h1, nospace=False, desc=None, at_root=False):
 # Read the footer text from a file (if present).
 try:
     with open(f'{root_path}/other/footer.html', mode='r', encoding='utf-8') as f:
+        if arg('-steps'):
+            info(f'Reading other/footer.html')
         footer_txt = f.read()
     footer_txt = re.sub(r'<!--.*?-->\s*', '', footer_txt, flags=re.DOTALL)
 except FileNotFoundError:
+    if arg('-steps'):
+        info(f'Skipping other/footer.html')
     footer_txt = ''
 
 def write_footer(w, incl_footer=True, at_root=False):
@@ -244,4 +248,4 @@ def read_data_file(filename, fn, msg=None):
             fn(f)
     except FileNotFoundError:
         if arg('-steps'):
-            info(f'Skipping {msg}data/{filename}')
+            info(f'Skipping {msg}data/{filename} (file not found)')

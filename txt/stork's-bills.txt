@@ -46,7 +46,6 @@ color: purple
 . petals +- > sepals (usually hiding the sepals)
 . <b>corolla radially symmetric</b>
 . leaf lobed to dissected
-. blooms February-<b>May</b>
 
 ==hairy-pitted stork's-bill:E. brachycarpum
 color:purple
@@ -56,6 +55,6 @@ color:purple
 . petals +- > sepals (usually hiding the sepals)
 . <b>corolla bilaterally symmetric</b>, e.g. with two slightly larger petals above three slightly smaller ones
 . leaf lobed
-. blooms March-<b>August</b>
+. <a href="https://www.inaturalist.org/observations/40934567">discussion</a>
 
 ]

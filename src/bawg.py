@@ -92,6 +92,9 @@ txt_files = get_file_set('txt', 'txt')
 
 ###############################################################################
 
+if arg('-steps'):
+    print('Step 1: Reading primary names from txt files')
+
 # Read the txt for all txt files.  We could do more in this first pass,
 # but I want to be able to measure the time of reading the files separately
 # from any additional work.
@@ -116,6 +119,18 @@ def parse_names():
         page.parse_glossary()
 parse_names()
 
+def print_trees():
+    exclude_set = set()
+    for page in full_page_array:
+        if not page.parent and not page.linn_parent:
+            page.print_tree(exclude_set=exclude_set)
+
+if arg('-tree1'):
+    print_trees()
+
+if arg('-steps'):
+    print('Step 2: Parse child info')
+
 # parse_children_and_attributes() can add new pages, so we make a copy
 # of the list to iterate through.  parse_children_and_attributes()
 # also checks for external photos and various other page attributes.
@@ -124,15 +139,15 @@ parse_names()
 for page in page_array[:]:
     page.parse_children_and_attributes()
 
-def print_trees():
-    exclude_set = set()
-    for page in full_page_array:
-        if not page.parent and not page.linn_parent:
-            page.print_tree(exclude_set=exclude_set)
+if arg('-tree2'):
+    print_trees()
+
+if arg('-steps'):
+    print('Step 3: Attach photos to pages')
 
 assign_jpgs()
 
-if arg('-tree1'):
+if arg('-tree3'):
     print_trees()
 
 def read_group_names(f):
@@ -157,10 +172,16 @@ def create_group_pages(d, prefix=''):
                 page = Page(com, elab, shadow=True)
             #print(f'{page.com} <-> {page.elab}')
 
+if arg('-steps'):
+    print('Step 4: Parse group_names.yaml')
+
 read_data_file('group_names.yaml', read_group_names)
 
-if arg('-tree1b'):
+if arg('-tree4'):
     print_trees()
+
+if arg('-steps'):
+    print('Step 5: Update Linnaean links')
 
 # Linnaean descendants links are automatically created whenever a page
 # is assigned a child, but this isn't reliable during initial child
@@ -170,13 +191,16 @@ if arg('-tree1b'):
 for page in page_array:
     page.link_linn_descendants()
 
-if arg('-tree1c'):
+if arg('-tree5'):
     print_trees()
+
+if arg('-steps'):
+    print('Step 6: Add explicit and implied ancestors')
 
 for page in page_array[:]:
     page.assign_groups()
 
-if arg('-tree2'):
+if arg('-tree6'):
     print_trees()
 
 # Find any genus with multiple species.
@@ -185,6 +209,8 @@ if arg('-tree2'):
 for page in page_array:
     page.record_genus()
 
+if arg('-steps'):
+    print('Step 7: Create taxonomic chains from observations.csv')
 
 # Read the taxonomic chains from the observations file (exported from
 # iNaturalist).  There is more data in there that we'll read later, but
@@ -276,8 +302,11 @@ def read_obs_chains(f):
 read_data_file('observations.csv', read_obs_chains,
                msg='taxon hierarchy')
 
-if arg('-tree3'):
+if arg('-tree7'):
     print_trees()
+
+if arg('-steps'):
+    print("Step 8: Assign ancestors to pages that don't have scientific names")
 
 for page in page_array:
     if not page.rank and not page.linn_parent:
@@ -285,8 +314,11 @@ for page in page_array:
     elif page.is_top:
         page.propagate_is_top()
 
-if arg('-tree3b'):
+if arg('-tree8'):
     print_trees()
+
+if arg('-steps'):
+    print('Step 9: Assign default ancestor to floating trees')
 
 default_ancestor = get_default_ancestor()
 if default_ancestor:
@@ -295,15 +327,21 @@ if default_ancestor:
             (not page.rank or page.rank < default_ancestor.rank)):
             default_ancestor.link_linn_child(page)
 
-if arg('-tree4'):
+if arg('-tree9'):
     print_trees()
+
+if arg('-steps'):
+    print('Step 10: Propagate properties')
 
 # Assign properties to the appropriate ranks.
 for page in page_array:
     page.propagate_props()
 
-if arg('-tree5'):
+if arg('-tree10'):
     print_trees()
+
+if arg('-steps'):
+    print('Step 11: Apply create and link properties')
 
 # Apply link-creation and related properties
 # in order from the lowest ranked pages to the top.
@@ -312,8 +350,11 @@ for rank in Rank:
         if page.rank is rank:
             page.apply_prop_link()
 
-if arg('-tree6'):
+if arg('-tree11'):
     print_trees()
+
+if arg('-steps'):
+    print('Step 12: Read observation counts and common names from observations.csv')
 
 sci_ignore = {}
 
@@ -336,9 +377,10 @@ read_data_file('ignore_species.yaml', read_ignore_species)
 
 # Read my observations file (exported from iNaturalist) and use it as follows
 # for each observed taxon:
-#   Associate common names with scientific names
-#   Get a count of observations (total and research grade)
-#   Get an iNaturalist taxon ID
+#   Associate common names with scientific names.  (Previously we didn't have
+#     the properties in place to know what to do with common names.)
+#   Get a count of observations (total and research grade).
+#   Get an iNaturalist taxon ID.
 def read_observation_data(f):
     def get_field(fieldname):
         if fieldname in row:
@@ -499,7 +541,7 @@ def read_observation_data(f):
 read_data_file('observations.csv', read_observation_data,
                msg='observation data')
 
-if arg('-tree7'):
+if arg('-tree12'):
     print_trees()
 
 top_list = [x for x in page_array if not x.parent]
