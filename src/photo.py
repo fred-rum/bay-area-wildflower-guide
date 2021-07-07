@@ -69,7 +69,8 @@ def cvt_irfanview(cmd):
            '/jpgq=80',
            f'/convert={thumb_glob}']
     if arg('-steps'):
-        print(f'Generating {len(mod_list)} thumbnails with IrfanView:\n{cmd}')
+        print(f'Generating {len(mod_list)} thumbnails with IrfanView:')
+        print(' '.join(cmd))
     subprocess.Popen(cmd).wait()
 
 def cvt_imagemagick(cmd):
@@ -91,7 +92,8 @@ def cvt_imagemagick(cmd):
          f'@{convert_list}',             # list of files must be last?
         ])
     if arg('-steps'):
-        print(f'Generating {len(mod_list)} thumbnails with ImageMagick:\n{cmd}')
+        print(f'Generating {len(mod_list)} thumbnails with ImageMagick:')
+        print(' '.join(cmd))
     subprocess.Popen(cmd).wait()
 
 def cvt_magick(cmd):
@@ -103,20 +105,11 @@ def cvt_mogrify(cmd):
     cvt_imagemagick([cmd])
 
 if mod_list:
-    # ImageMagick's 'convert' utility is confusing because it collides with
-    # windows standard disk format conversion utility.  Therefore, when we
-    # search for 'convert.exe', we don't want to look in the standard path.
-    # And when we search for 'convert' in the standard path, we don't want
-    # to search using the standard Windows executable extensions (i.e. '.exe')
-    os.environ.pop("PATHEXT", None)
-
     cmds = [
-        ('magick.exe', True, 'ImageMagick', cvt_magick),
-        ('magick', True, None, cvt_magick),
-        ('mogrify.exe', True, 'ImageMagick-6', cvt_mogrify),
-        ('mogrify', True, None, cvt_mogrify),
-        ('i_view32.exe', True, 'IrfanView', cvt_irfanview),
-        ('i_view65.exe', True, 'IrfanView', cvt_irfanview),
+        ('magick', True, 'ImageMagick', cvt_magick),
+        ('mogrify', True, 'ImageMagick-6', cvt_mogrify),
+        ('i_view32', True, 'IrfanView', cvt_irfanview),
+        ('i_view65', True, 'IrfanView', cvt_irfanview),
     ]
 
     for (program, use_path, plus, fn) in cmds:
