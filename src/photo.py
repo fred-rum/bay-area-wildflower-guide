@@ -37,21 +37,95 @@ for name in jpg_files:
         os.path.getmtime(photo_file) > os.path.getmtime(thumb_file)):
         mod_list.append(photo_file)
 
-if mod_list:
+
+def which_plus(program, use_path, plus):
+    if use_path:
+        cmd = shutil.which(program)
+        if cmd:
+            return cmd
+
+    if plus:
+        for env in ('ProgramFiles', 'ProgramFiles(x86)'):
+            dir = os.environ.get(env)
+            if dir:
+                cmd = shutil.which(program, path=os.path.join(dir, plus))
+                if cmd:
+                    return cmd
+
+    return None
+
+def cvt_irfanview(cmd):
     with open(working_path + "/convert.txt", "w") as w:
         for filename in mod_list:
             filename = convert_path_to_windows(filename)
-            w.write(filename + '\n')
+            w.write(f'{filename}\n')
     convert_list = convert_path_to_windows(f'{working_path}/convert.txt')
     thumb_glob = convert_path_to_windows(f'{root_path}/thumbs/*.jpg')
-    cmd = ['C:/Program Files (x86)/IrfanView/i_view32.exe',
+    cmd = [cmd,
            f'/filelist={convert_list}',
            '/aspectratio',
            '/resize_long=200',
            '/resample',
            '/jpgq=80',
            f'/convert={thumb_glob}']
+    if arg('-steps'):
+        print(f'Generating {len(mod_list)} thumbnails with IrfanView:\n{cmd}')
     subprocess.Popen(cmd).wait()
+
+def cvt_imagemagick(cmd):
+    try:
+        os.mkdir(root_path + '/thumbs')
+    except FileExistsError:
+        pass
+    with open(working_path + "/convert.txt", "w") as w:
+        for filename in mod_list:
+            filename = convert_path_to_windows(filename)
+            w.write(f'"{filename}"\n')
+    convert_list = convert_path_to_windows(f'{working_path}/convert.txt')
+    thumb_path = convert_path_to_windows(f'{root_path}/thumbs')
+    cmd.extend(
+        ['-path', thumb_path,            # write files to thumbs directory
+         '-define', 'jpeg:size=400x400', # read JPGs much faster
+         '-thumbnail', '200x200>',       # strip EXIF data and gen. thumbnails
+         '-quality', '80%',              # reduce quality
+         f'@{convert_list}',             # list of files must be last?
+        ])
+    if arg('-steps'):
+        print(f'Generating {len(mod_list)} thumbnails with ImageMagick:\n{cmd}')
+    subprocess.Popen(cmd).wait()
+
+def cvt_magick(cmd):
+    # ImageMagic7 is invoked with 'magick mogrify'.
+    cvt_imagemagick([cmd, 'mogrify'])
+
+def cvt_mogrify(cmd):
+    # ImageMagic6 is invoked with just 'mogrify'.
+    cvt_imagemagick([cmd])
+
+if mod_list:
+    # ImageMagick's 'convert' utility is confusing because it collides with
+    # windows standard disk format conversion utility.  Therefore, when we
+    # search for 'convert.exe', we don't want to look in the standard path.
+    # And when we search for 'convert' in the standard path, we don't want
+    # to search using the standard Windows executable extensions (i.e. '.exe')
+    os.environ.pop("PATHEXT", None)
+
+    cmds = [
+        ('magick.exe', True, 'ImageMagick', cvt_magick),
+        ('magick', True, None, cvt_magick),
+        ('mogrify.exe', True, 'ImageMagick-6', cvt_mogrify),
+        ('mogrify', True, None, cvt_mogrify),
+        ('i_view32.exe', True, 'IrfanView', cvt_irfanview),
+        ('i_view65.exe', True, 'IrfanView', cvt_irfanview),
+    ]
+
+    for (program, use_path, plus, fn) in cmds:
+        cmd = which_plus(program, use_path, plus)
+        if cmd:
+            fn(cmd)
+            break
+    else:
+        warning('No photo conversion program found.  Skipping.')
 
 
 # Record jpg names for associated pages.
