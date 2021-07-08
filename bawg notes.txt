@@ -1149,9 +1149,11 @@ or 02. in:
 https://www.creativebloq.com/features/9-amazing-pwa-secrets
 
 
+Extend -tree <n> argument to allow a <taxon name> to be specified, and
+the tree is printed for that page and its descendents.  And properties
+are only output if 'props' is also specified.  Note that these extra
+options are recognized as part of '-tree' and not a following option
+because they do not start with a '-'.
 
-example/tiny:
-
-Example genus with two species and full info:
-genus Bellardia
-shooting stars
+Use casefold() instead of lower() for case-insenstive matching?
+https://docs.python.org/3/howto/unicode.html#comparing-strings

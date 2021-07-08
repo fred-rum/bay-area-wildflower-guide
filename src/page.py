@@ -2,6 +2,7 @@ import re
 import yaml
 import io
 from operator import attrgetter
+from unidecode import unidecode # ? from https://pypi.org/project/Unidecode/
 
 # My files
 from error import *
@@ -715,8 +716,10 @@ class Page:
         else:
             return f'{com}<br>{elab}'
 
+    # full() is intended for Python debug output to the terminal
+    # It removes all fancy formatting to emit ASCII only.
     def full(self):
-        return self.format_full(lines=1, ital=False, for_html=False)
+        return unidecode(self.format_full(lines=1, ital=False, for_html=False))
 
     def add_jpg(self, jpg):
         self.jpg_list.append(jpg)
@@ -1318,27 +1321,27 @@ class Page:
         if exclude_set is None:
             exclude_set = set()
 
+        name = self.full()
+
         if self.shadow:
-            s = '-'
-        else:
-            s = '*'
-        if self.rank:
-            r = self.rank.name
-        else:
-            r = 'unranked'
+            name = f'[{name}]'
+
         if self in exclude_set:
             # Print the repeated node, but don't descend further into it.
-            x = ' [repeat]'
-        else:
-            x = ''
-        for prop in sorted(self.prop_action_set):
-            x += ' ' + prop
-        print(f'{"  "*level}{link_type}{s}{filename(self.name)} ({r}){x}')
+            name += ' {repeat}'
+
+        print(f'{"  "*level}{link_type}{name}')
 
         if self in exclude_set:
             return
 
         exclude_set.add(self)
+
+        if arg('-tree_props'):
+            for prop in sorted(self.prop_action_set):
+                action_list = sorted(self.prop_action_set[prop])
+                action_str = '/'.join(action_list)
+                print(f'{"  "*level}  {action_str} {prop}')
 
         for child in self.child:
             if child in self.linn_child:
@@ -1416,17 +1419,16 @@ class Page:
 
     def propagate_prop(self, prop, action, rank_set):
         if self.rank:
-            if self.rank in rank_set:
-                self.assign_prop(prop, action)
-
             # For the 'default_completeness' property, assist the
             # write_complete() function by recording the action at the
             # genus and species level using a hacked property name.
             if prop == 'default_completeness' and self.rank <= Rank.genus:
                 if Rank.genus in rank_set:
                     self.assign_prop('default_completeness_genus', action)
-                if Rank.species in rank_set:
+                if Rank.species in rank_set and self.rank <= Rank.species:
                     self.assign_prop('default_completeness_species', action)
+            elif self.rank in rank_set:
+                self.assign_prop(prop, action)
 
             # Recursively descend through Linnaean children.
             # There's no need to descend through 'real' children because

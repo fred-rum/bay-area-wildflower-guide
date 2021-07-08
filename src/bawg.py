@@ -36,7 +36,7 @@ import re
 import csv
 import io
 import yaml
-from unidecode import unidecode
+from unidecode import unidecode # ? from https://pypi.org/project/Unidecode/
 import datetime
 import time
 
@@ -127,12 +127,21 @@ def parse_names():
 parse_names()
 
 def print_trees():
-    exclude_set = set()
-    for page in full_page_array:
-        if not page.parent and not page.linn_parent:
-            page.print_tree(exclude_set=exclude_set)
+    tree_taxon = arg('-tree_taxon')
+    if tree_taxon:
+        page = find_page1(tree_taxon)
+        if page:
+            page.print_tree()
+        else:
+            error(f'-tree taxon "{tree_taxon}" not found.')
+    else:
+        exclude_set = set()
+        for page in full_page_array:
+            if not page.parent and not page.linn_parent:
+                page.print_tree(exclude_set=exclude_set)
+    sys.stdout.flush()
 
-if arg('-tree1'):
+if arg('-tree') == '1':
     print_trees()
 
 if arg('-steps'):
@@ -146,7 +155,7 @@ if arg('-steps'):
 for page in page_array[:]:
     page.parse_children_and_attributes()
 
-if arg('-tree2'):
+if arg('-tree') == '2':
     print_trees()
 
 if arg('-steps'):
@@ -167,7 +176,7 @@ def assign_jpgs():
 
 assign_jpgs()
 
-if arg('-tree3'):
+if arg('-tree') == '3':
     print_trees()
 
 def read_group_names(f):
@@ -197,7 +206,7 @@ if arg('-steps'):
 
 read_data_file('group_names.yaml', read_group_names)
 
-if arg('-tree4'):
+if arg('-tree') == '4':
     print_trees()
 
 if arg('-steps'):
@@ -211,7 +220,7 @@ if arg('-steps'):
 for page in page_array:
     page.link_linn_descendants()
 
-if arg('-tree5'):
+if arg('-tree') == '5':
     print_trees()
 
 if arg('-steps'):
@@ -220,7 +229,7 @@ if arg('-steps'):
 for page in page_array[:]:
     page.assign_groups()
 
-if arg('-tree6'):
+if arg('-tree') == '6':
     print_trees()
 
 # Find any genus with multiple species.
@@ -322,7 +331,7 @@ def read_obs_chains(f):
 read_data_file('observations.csv', read_obs_chains,
                msg='taxon hierarchy')
 
-if arg('-tree7'):
+if arg('-tree') == '7':
     print_trees()
 
 if arg('-steps'):
@@ -334,7 +343,7 @@ for page in page_array:
     elif page.is_top:
         page.propagate_is_top()
 
-if arg('-tree8'):
+if arg('-tree') == '8':
     print_trees()
 
 if arg('-steps'):
@@ -347,7 +356,7 @@ if default_ancestor:
             (not page.rank or page.rank < default_ancestor.rank)):
             default_ancestor.link_linn_child(page)
 
-if arg('-tree9'):
+if arg('-tree') == '9':
     print_trees()
 
 if arg('-steps'):
@@ -357,7 +366,7 @@ if arg('-steps'):
 for page in page_array:
     page.propagate_props()
 
-if arg('-tree10'):
+if arg('-tree') == '10':
     print_trees()
 
 if arg('-steps'):
@@ -370,7 +379,7 @@ for rank in Rank:
         if page.rank is rank:
             page.apply_prop_link()
 
-if arg('-tree11'):
+if arg('-tree') == '11':
     print_trees()
 
 if arg('-steps'):
@@ -561,7 +570,7 @@ def read_observation_data(f):
 read_data_file('observations.csv', read_observation_data,
                msg='observation data')
 
-if arg('-tree12'):
+if arg('-tree') == '12':
     print_trees()
 
 top_list = [x for x in page_array if not x.parent]
@@ -604,7 +613,7 @@ for page in page_array:
         page.rp_check('photo_requires_color',
                       f'page {page.full()} has photos but no assigned or propagated color')
 
-if arg('-tree13'):
+if arg('-tree') == '13':
     print_trees()
 
 # Turn txt into html for all normal and default pages.
