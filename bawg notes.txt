@@ -1157,3 +1157,30 @@ because they do not start with a '-'.
 
 Use casefold() instead of lower() for case-insenstive matching?
 https://docs.python.org/3/howto/unicode.html#comparing-strings
+
+And use normalize and fileurl() or whatever when setting the name.
+
+Allow a com or sci name that was implied by the filename to be changed
+by any other non-iNaturalist name source.  E.g. its priority is
+'inat', 'file', or 'user'.  Or use the 4 values currently assigned in
+com_priority.
+
+Can I get rid of name_page?  It's unclear what it's protecting
+against; perhaps a capitalized com name colliding with a sci name?
+
+What do I need to support capitalized common names:
+  is_sci() returns false if the name is in com_page
+  Page.__init__() doesn't fail if the common name is capitalized
+  any lookup of a common name is case insensitive
+    (e.g. make a find_com() in place of 'in com_page')
+  checking for collisions name_page should also be case insensitive
+
+'set_name() failed for name' can also mean that a child declaration
+without a scientific name couldn't find a match, so it tried to create
+a new page and failed.
+
+self.full() should report where the page came from (e.g. name.txt,
+parent.txt, groups.yaml, observations.csv, etc.)
+
+jpg should check for a match against name_page first, then use
+find_page1().

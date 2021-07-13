@@ -244,7 +244,7 @@ class Page:
     pass
 
     def __init__(self, name, elab=None, name_from_txt=False, shadow=False,
-                 from_inat=False):
+                 from_inat=False, src=None):
 
         # shadow=False indicates a 'real' page that will be output to HTML.
         #
@@ -255,6 +255,9 @@ class Page:
 
         # True if the page is created from observations.csv
         self.created_from_inat = from_inat
+
+        # Record the file source that is creating this page.
+        self.src = src
 
         full_page_array.append(self)
         if not shadow:
@@ -427,7 +430,8 @@ class Page:
         if self.name in name_page:
             del name_page[self.name]
 
-        if self.com and com_page[self.com] == self:
+        if (self.com and com_page[self.com] == self and
+            (self.com not in name_page or name_page[self.com] == self)):
             name = self.com
         elif self.sci:
             if sci_page[self.sci] == 'conflict':
@@ -483,6 +487,12 @@ class Page:
 
                 # Bail out without making any other changes to the common name.
                 return
+            elif self.name_from_txt and self.com == self.name:
+                # The old common name was inferred from the filename.
+                # We're allowed to change it to something else.
+                # However, the original name remains reserved in com_page,
+                # but no longer pointing to any specific page.
+                com_page[self.com] = 4
             else:
                 fatal(f'{self.full()} gets two different com values, {self.com} and {com}')
 
@@ -719,7 +729,8 @@ class Page:
     # full() is intended for Python debug output to the terminal
     # It removes all fancy formatting to emit ASCII only.
     def full(self):
-        return unidecode(self.format_full(lines=1, ital=False, for_html=False))
+        names = unidecode(self.format_full(lines=1, ital=False, for_html=False))
+        return f'{names} [{self.src}]'
 
     def add_jpg(self, jpg):
         self.jpg_list.append(jpg)
@@ -825,10 +836,15 @@ class Page:
             sci_page[sci] = self
             return ''
 
-        self.txt = re.sub(r'^com:\s*(.*?)\s*?\n',
-                          repl_com, self.txt, flags=re.MULTILINE)
+        # Check for a scientific name first because it is guaranteed to be
+        # able to assign a filename (unless the user screwed up).
+        # On the other hand, the common name might collide, at which point
+        # we should either fall back to using the scientific name as the
+        # filename or complain that no name can be set.
         self.txt = re.sub(r'^sci:\s*(.*?)\s*?\n',
                           repl_sci, self.txt, flags=re.MULTILINE)
+        self.txt = re.sub(r'^com:\s*(.*?)\s*?\n',
+                          repl_com, self.txt, flags=re.MULTILINE)
         self.txt = re.sub(r'^asci:\s*(.*?)\s*?\n',
                           repl_asci, self.txt, flags=re.MULTILINE)
 
@@ -1022,7 +1038,7 @@ class Page:
 
         page = find_page2(page_name, None)
         if not page:
-            page = Page(page_name, None)
+            page = Page(page_name, None, src='subset color in '+self.name+'.txt')
             page.no_sci = True
 
         page.subset_of_page = self
@@ -1622,7 +1638,7 @@ class Page:
             child_page = find_page2(com, sci)
             if not child_page:
                 # If the child does not exist, create it.
-                child_page = Page(com, sci)
+                child_page = Page(com, sci, src='child of '+self.name+'.txt')
 
             try:
                 self.assign_child(child_page)

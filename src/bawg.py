@@ -108,7 +108,7 @@ if arg('-steps'):
 
 def read_txt_files():
     for name in txt_files:
-        page = Page(name, name_from_txt=True)
+        page = Page(name, name_from_txt=True, src=name+'.txt')
         with open(f'{root_path}/txt/{name}.txt', 'r', encoding='utf-8') as r:
             page.txt = r.read()
 
@@ -171,7 +171,7 @@ def assign_jpgs():
         else:
             page = find_page1(name)
             if not page:
-                page = Page(name)
+                page = Page(name, src=jpg+'.jpg')
             page.add_jpg(jpg)
 
 assign_jpgs()
@@ -198,7 +198,7 @@ def create_group_pages(d, prefix=''):
                 com = None
             page = find_page2(com, elab)
             if not page:
-                page = Page(com, elab, shadow=True)
+                page = Page(com, elab, shadow=True, src='group_names.yaml')
             #info(f'{page.com} <-> {page.elab}')
 
 if arg('-steps'):
@@ -320,7 +320,8 @@ def read_obs_chains(f):
                         # by pretending it's the lowest rank.
                         sci = f'below {sci}'
 
-                    page = Page(com, sci, shadow=True, from_inat=True)
+                    page = Page(com, sci, shadow=True, from_inat=True,
+                                src='observations.csv')
                     page.set_taxon_id(taxon_id)
                 if group != orig_sci:
                     page = page.add_linn_parent(rank, group, from_inat=True)
@@ -629,7 +630,7 @@ def by_incomplete_obs(page):
         page.count_matching_obs(obs)
         return obs.n
 
-    is_top_of_genus = page.is_top_of('genus')
+    is_top_of_genus = page.is_top_of(Rank.genus)
     if is_top_of_genus and page.genus_complete in (None, 'more'):
         return count_flowers(page)
     else:
