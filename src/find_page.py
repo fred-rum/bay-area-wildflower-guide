@@ -68,6 +68,114 @@ def fix_elab(elab):
         elab = 'genus ' + elab[:-5]
     return elab
 
+# Find a page by its filename.
+def find_name(name):
+    if name in name_page:
+        return name_page[name]
+    else:
+        return None
+
+# Find a page by its taxonid (as a string, despite its numeric appearance).
+# taxon_id may be None, in which case we expect to also return None.
+def find_taxon_id(taxon_id):
+    if taxon_id in taxon_id_page:
+        return taxon_id_page[taxon_id]
+    else:
+        return None
+
+# Find a page by its common name.
+# com may be None, in which case we expect to also return None.
+def find_com(com):
+    if com in com_page:
+        page = com_page[com]
+
+        if isinstance(com_page[com], int):
+            # We can't determine the page from the common name alone
+            # due to conflicts.
+            # We return None to indicate that we don't have a positive match,
+            # and the caller is likely to try to create a new page.
+            # If the caller has a scientific name (which presumably also
+            # didn't find a match), then it should be able to successfully
+            # create the new page.
+            # Otherwise, the page creation will fail with a useful message.
+            return None
+        else:
+            return page
+    else:
+        return None
+
+# Find a page by its scientific or elaborated name.
+# elab may be None, in which case we expect to also return None.
+def find_sci(elab, from_inat=False):
+    if elab is None:
+        return None
+
+    elab = fix_elab(elab)
+    sci = strip_sci(elab)
+
+    if from_inat and elab in isci_page:
+        page = isci_page[elab]
+    elif from_inat and sci in isci_page:
+        page = isci_page[sci]
+    elif elab in sci_page:
+        page = sci_page[elab]
+
+        if page == 'conflict':
+            # If there's a 'conflict', it's presumably because elab
+            # is actually a stripped scientific name, and there are
+            # multiple taxons that have the same name at different ranks.
+            # We return None to indicate that we don't have a positive match.
+            # The caller may have a common name which disambiguates.
+            # Or the caller might try to create a new page with this
+            # scientific name, which will fail with a useful message.
+            return None
+    elif sci in sci_page:
+        page = sci_page[sci]
+
+        if page == 'conflict':
+            # We're looking for a page using a fully elaborated name,
+            # but instead we found multiple pages that match the
+            # stripped name at ranks that don't match what we're
+            # looking for.  So that's not a match.
+            # The caller will likely create a new page with this
+            # elaborated name, which will be fine.
+            return None
+
+        # Since we found sci in sci_page, but we didn't find elab in sci_page,
+        # the page that we found must have a scientific name but either
+        # doesn't have an elaborated name or has a *different* elaborated
+        # name.  And since we didn't find elab in sci_page, elab must be
+        # different than sci, which implies that elab is truly elaborated.
+        if elab != page.elab and page.elab_src == 'elab':
+            # We're looking for a page using a fully elaborated name,
+            # and we've found a page that has a fully elaborated name,
+            # but the elaborated names aren't the same.
+            if sci != page.sci:
+                # The stripped names are different, which means the
+                # sci_page lookup must have gone through an alternative
+                # scientific name, which counts as a valid match.
+                pass
+            else:
+                # The scientific name matches, but the ranks are
+                # different.  That doesn't count as a match.
+                page = None
+        else:
+            # We're looking for a page using a fully elaborated name,
+            # and we found a page that doesn't know its elaborated
+            # name, but its stripped name matches.  That's good enough,
+            # and we count it as a match.
+            pass
+    else:
+        page = None
+
+    if page:
+        # We might have an elaboration where the page only had a scientific
+        # name before.  set_sci() will improve the page information if
+        # possible.
+        page.set_sci(elab, from_inat=from_inat)
+
+    return page
+
 # Find a page using by common name and/or scientific name and/or taxon_id.
 #
 # taxon_id isn't used very often, but it has priority when used.
@@ -83,81 +191,26 @@ def fix_elab(elab):
 # If only one of taxon_id/com/elab is valid, then we search for the
 # corresponding name without any extra frills.
 def find_page2(com, elab, from_inat=False, taxon_id=None):
-    page = None
+    # taxon_id has first priority.
+    page = find_taxon_id(taxon_id)
 
     elab = fix_elab(elab)
 
-    # taxon_id has first priority.
-    if taxon_id in taxon_id_page:
-        page = taxon_id_page[taxon_id]
+    if not page:
+        page = find_sci(elab, from_inat)
 
-    # sci has second priority.
-    if not page and elab:
-        sci = strip_sci(elab)
-        if from_inat and elab in isci_page:
-            page = isci_page[elab]
-        elif from_inat and sci in isci_page:
-            page = isci_page[sci]
-        elif elab in sci_page:
-            # If the scientific name matches, we consider it a match
-            # regardless of the common name.
-            page = sci_page[elab]
-        elif sci in sci_page:
-            page = sci_page[sci]
-            if elab != sci:
-                if page == 'conflict':
-                    # We're looking for a page using a fully elaborated name,
-                    # but instead we found multiple pages that match the
-                    # stripped name at ranks that don't match what we're
-                    # looking for.  So that's not a match.
-                    page = None
-                elif page.elab_src == 'elab' and elab != page.elab:
-                    # We're looking for a page using a fully elaborated name,
-                    # and we've found a page that has a fully elaborated name,
-                    # but the elaborated names aren't the same.
-                    if sci != page.sci:
-                        # The stripped names are different, which means the
-                        # sci_page lookup must have gone through an alternative
-                        # scientific name, which counts as a valid match.
-                        pass
-                    else:
-                        # The scientific name matches, but the ranks are
-                        # different.  That doesn't count as a match.
-                        page = None
-                else:
-                    # We're looking for a page using a fully elaborated name,
-                    # and we found a page that doesn't know its elaborated
-                    # name, but its stripped name matches.  That's good enough,
-                    # and we count it as a match.
-                    pass
-        else:
-            # Otherwise, search for a page that only has the common name
-            # and doesn't (yet) have a scientific name.
-            pass
+    if not page:
+        page = find_com(com)
 
-        if page == 'conflict':
-            if com:
-                fatal(f'{com}:{elab} matches multiple pages with the same scientific name at different ranks')
-            else:
-                fatal(f'{elab} matches multiple pages with the same scientific name at different ranks')
-
-    # com has last priority.
-    if not page and com in com_page:
-        if isinstance(com_page[com], int):
-            # We can't determine the page from the common name alone
-            # due to conflicts.  However, that doesn't mean we need to
-            # flag an error.  When we return 'page = None', in most
-            # cases the caller will then create a new page, which could
-            # succeed (e.g. if a scientific name is supplied) or flag its
-            # own error if the name conflict really is terminal.
-            pass
-        else:
-            page = com_page[com]
-
-            if elab and page.sci:
-                # If the common name matches a page with a different
-                # scientific name, it's treated as not a match.
-                page = None
+        # If the common name matches a page with a different
+        # scientific name, it's treated as not a match.
+        # Note that if we're here, we already know that we didn't find
+        # a match on the scientific name.  So if there are two scientific
+        # names to be compared, they must mismatch.  (But if we don't have
+        # a scientific name to search for or the page doesn't have an
+        # associated scientific name, then that counts as a valid match.)
+        if page and page.sci and elab:
+            page = None
 
     # Update (if appropriate) any names that are new or different.
     if page:
@@ -171,7 +224,9 @@ def find_page2(com, elab, from_inat=False, taxon_id=None):
     return page
 
 def find_page1(name, from_inat=False):
-    if is_sci(name):
-        return find_page2(None, name, from_inat)
-    else:
-        return find_page2(name, None, from_inat)
+    page = find_sci(name, from_inat)
+
+    if not page:
+        page = find_com(name)
+
+    return page

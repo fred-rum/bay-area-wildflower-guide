@@ -586,7 +586,7 @@ class Page:
             return
 
         if self.no_sci:
-            error(f'scientific name "{elab}" assigned to page {self.name}, but sci:n/a was already used for the page')
+            error(f'scientific name "{elab}" assigned to page {self.full()}, but sci:n/a was already used for the page')
             return
 
         elab = fix_elab(elab)
@@ -597,9 +597,9 @@ class Page:
         # - a non-elaborated name is used, and another page uses the same name,
         # - or a non-elaborated name is used and already has a conflict.
         if elab in sci_page and sci_page[elab] == 'conflict':
-            fatal(f'page "{self.name}" called set_sci("{elab}"), but that non-elaborated name is being used by more than one rank')
+            fatal(f'page "{self.full()}" called set_sci("{elab}"), but that non-elaborated name is being used by more than one rank')
         elif elab in sci_page and sci_page[elab] != self:
-            fatal(f'page "{self.name}" called set_sci("{elab}"), but that name is already used by page "{sci_page[elab].name}"')
+            fatal(f'page "{self.full()}" called set_sci("{elab}"), but that name is already used by page "{sci_page[elab].name}"')
 
         if self.sci and sci != self.sci:
             # Somehow we're trying to set a different scientific name
@@ -633,7 +633,7 @@ class Page:
         elif self.elab_src == 'elab':
             # This call and a previous call to set_sci() both provided
             # a fully elaborated name, but they're not the same.
-            fatal(f'{self.name} received two different elaborated names: {self.elab} and {elab}')
+            fatal(f'{self.full()} received two different elaborated names: {self.elab} and {elab}')
         else:
             # We've received a fully elaborated name.
             # Either we had no elaborated name at all before,
@@ -668,7 +668,7 @@ class Page:
         if (from_inat and
             not self.created_from_inat and
             not rp_do('obs_fill_sci',
-                      f'{self.name} can be filled by {elab}')):
+                      f'{self.full()} can be filled by {elab}')):
             # If we got here, then
             #   - this page was created by the user, and
             #   - we have a new elaboration from iNaturalist, and
@@ -1002,7 +1002,7 @@ class Page:
             self.elab_inaturalist = elab
             isci = strip_sci(elab)
             if isci in isci_page and isci_page[isci] != self:
-                error('{isci_page[isci].name} and {self.name} both use sci_i {elab}')
+                error('{isci_page[isci].full()} and {self.full()} both use sci_i {elab}')
             isci_page[isci] = self
         if 'b' in sites:
             self.elab_bugguide = elab
@@ -1324,7 +1324,6 @@ class Page:
             linn_parent = self.find_lowest_ranked_ancestor(child)
         except RecursionError:
             fatal(f'circular loop detected through unranked pages when adding {child.full()} as child of {self.full()}')
-            return
 
         if linn_parent:
             child.link_linn_descendants(linn_parent)
@@ -1636,6 +1635,7 @@ class Page:
                 sci = self.expand_genus(sci)
 
             child_page = find_page2(com, sci)
+
             if not child_page:
                 # If the child does not exist, create it.
                 child_page = Page(com, sci, src='child of '+self.name+'.txt')

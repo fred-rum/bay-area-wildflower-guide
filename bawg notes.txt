@@ -1182,5 +1182,32 @@ a new page and failed.
 self.full() should report where the page came from (e.g. name.txt,
 parent.txt, groups.yaml, observations.csv, etc.)
 
-jpg should check for a match against name_page first, then use
-find_page1().
+If Page.__init__() is called with name_from_txt, it shouldn't set the
+name right away.  Instead it should leave the page nameless until
+every other source of names has been exhausted.  Other name sources
+(e.g. children declarations) check for a match with the page's
+filename when calling find_page*().  Note that a match from name_page
+is only allowed if the page has no names if it has a non-matching name
+and an unset name (of the appropriate type, if necessary).  (If it has
+a matching name, then we can't use that same name for the other name
+slot.)
+
+Ditch com_page vs. sci_page vs. name_page?  Nah.  com_pages are
+allowed to collide, even if one of them has the same filename, whereas
+a sci_page is not allowed to collide with a com_page, etc.
+
+Disallow collisions between common names and scientific names.
+
+Don't set the filename of a non-txt page until all sources of names
+have been exhausted.  This isn't "necessary", but it makes naming
+easier.  But it means that I can't use self.name as a generic debug
+string.  (I should be using self.full() anyway.)
+
+Rename self.full() to something more obvious debug-related,
+e.g. self.dbg_name().
+
+When a name is used by find_page1 (e.g. by a child declaration with
+only one name), but we don't know if its a com or a sci name, then we
+mark it.  This reserves the name so that it can't be squeezed out of a
+spot later.  As soon as either slot gets a non-matching name, the
+other slot gets the filename.

@@ -401,7 +401,7 @@ def read_ignore_species(f):
             page = find_page1(sci)
 
         if page and not page.shadow:
-            error(f'{sci} is ignored, but there is a real page for it ({page.name})')
+            error(f'{sci} is ignored, but there is a real page for it: {page.full()}')
 
 read_data_file('ignore_species.yaml', read_ignore_species)
 
