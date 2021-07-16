@@ -1211,3 +1211,23 @@ only one name), but we don't know if its a com or a sci name, then we
 mark it.  This reserves the name so that it can't be squeezed out of a
 spot later.  As soon as either slot gets a non-matching name, the
 other slot gets the filename.
+
+repl_child uses is_sci() to interpret a single name.  At the very
+least, it should search with find_page1(), then only make a guess if
+it has to create a new Page().  But if it needs to expand the genus
+abbreviation, of course it is a scientific name.
+
+-dir test/caps currently fails due to the above.
+
+When a routine like repl_child creates a new Page() with a single
+name, it would be nice if it could also leave undetermine what sort of
+name it is.  That would require a new flag to Page() to distinguish a
+known com/sci name from an indeterminate name.
+
+Maybe instead of putting the indeterminate name in Page.name, it
+should be in *both* com and sci.  So no "name" lookup is needed, and a
+separate step isn't needed when one name is set.  On the other hand,
+that would still fail without extra code when the indeterminate name
+is entirely overwritten (e.g. the filename is ignored in favor of com:
+and sci:).  And it doesn't make the code any more robust than
+currently.

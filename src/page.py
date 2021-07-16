@@ -266,52 +266,66 @@ class Page:
         # initial/default values
         self.com = None
         self.sci = None
+        self.no_sci = False # true if the page will never have a sci name
         self.elab = None
         self.elab_src = None
         self.rank = None
         self.rank_unknown = False
 
-        # name can be either a common name or a scientific name
-        # (elaborated or not).  If name is the common name (or None),
-        # then elab supplies the scientific name (elaborated or not).
-        if name and is_sci(name):
-            if elab:
-                fatal(f'Page() called with two scientific names: {name}:{elab}')
-            else:
-                elab = name
-                com = None
-        else:
-            com = name
-
         # name_from_txt=True if the name came from a txt filename.
         self.name_from_txt = name_from_txt
         if name_from_txt:
             assert name
+            assert not elab
             self.name = name
             name_page[name] = self
+
+            # If name_from_txt=True, then the name might represent a common
+            # name, a scientific name, or neither (just the filename).
+            # So if name_from_txt=True, defer setting any common/scientific
+            # name and instead wait to see how the name is used.
+            #
+            # Specifically:
+            # - if the page includes com: and sci:, then those names are set.
+            # - if find_page2() is searched with a defined com and/or sci name,
+            #   either of them is allowed to match on this page's name,
+            #   and then the com/sci names are set.
+            # - if find_page1() matches this page's name, the match is allowed,
+            #   but we still don't know what kind of name it is.
+            # - if we get to the end of the script  without setting either
+            #   the common or scientific name, then we'll make a guess based
+            #   on capitalization.
+            self.no_names = True
         else:
+            # If name_from_txt=False, then set the common/scientific name
+            # as appropriate.
+            #
+            # If both name and elab are supplied, then name must represent
+            # the common name.  If only name is supplied, then it may
+            # represent either the common name or the scientific name.
+            # If only elab is supplied, then there is no common name (yet).
+            if not elab and is_sci(name):
+                elab = name
+                com = None
+            else:
+                com = name
+
             # Set a temporary page name in case we need to print
             # an error message before the name is officially set.
             self.name = f'{com}:{elab}'
 
-            # For other calls of Page(), we set com/sci as specified.
+            self.no_names = False
 
-        self.no_sci = False # true if the page will never have a sci name
+            # Call set_sci() first since it should never have a name conflict.
+            if elab:
+                self.set_sci(elab, from_inat=from_inat)
 
-        # Call set_sci() first since it should never have a name conflict.
-        #
-        # But don't call set_sci() when name_from_txt=True since we want
-        # to look for an elaborated name first, and then parse_names() will
-        # call set_sci() with the best name available.
-        if elab and not self.name_from_txt:
-            self.set_sci(elab, from_inat=from_inat)
+            # Now call set_com(), which sets the common name as the page name
+            # when possible.
+            if com:
+                self.set_com(com, from_inat=from_inat)
 
-        # Now call set_com(), which sets the common name as the page name
-        # when possible.  (Note that the page name never changes if
-        # name_from_txt= True.)
-        if com:
-            self.set_com(com, from_inat=from_inat)
-
+        # user-supplied information about ancestors.
         self.group = {} # taxonomic rank -> sci name or None if conflicting
 
         # properties declared on this page
@@ -422,6 +436,13 @@ class Page:
         # glossary terms is used outside the glossary
         self.glossary_warn = set()
 
+    def infer_name(self):
+        if self.no_names:
+            if is_sci(self.name):
+                self.set_sci(self.name)
+            else:
+                self.set_com(self.name)
+
     def set_name(self):
         if self.name_from_txt:
             # the name never changes
@@ -487,14 +508,8 @@ class Page:
 
                 # Bail out without making any other changes to the common name.
                 return
-            elif self.name_from_txt and self.com == self.name:
-                # The old common name was inferred from the filename.
-                # We're allowed to change it to something else.
-                # However, the original name remains reserved in com_page,
-                # but no longer pointing to any specific page.
-                com_page[self.com] = 4
             else:
-                fatal(f'{self.full()} gets two different com values, {self.com} and {com}')
+                fatal(f'{self.full()} is assigned a new common name: {com}')
 
         if (from_inat and
             not self.created_from_inat and
@@ -566,6 +581,7 @@ class Page:
             # No other page has claimed this common name, so it's ours.
             com_page[com] = self
 
+        self.no_names = False
         self.set_name()
 
     # set_sci() can be called with a stripped or elaborated name.
@@ -690,6 +706,8 @@ class Page:
                 conflict_page.set_name()
         else:
             sci_page[sci] = self
+
+        self.no_names = False
         self.set_name()
 
     def format_com(self):
@@ -717,14 +735,18 @@ class Page:
         else:
             com = self.com
         elab = self.format_elab(ital=ital)
-        if not com:
+        if com:
+            if elab:
+                if lines == 1:
+                    return f'{com} ({elab})'
+                else:
+                    return f'{com}<br>{elab}'
+            else:
+                return com
+        elif elab:
             return elab
-        elif not elab:
-            return com
-        elif lines == 1:
-            return f'{com} ({elab})'
         else:
-            return f'{com}<br>{elab}'
+            return self.name
 
     # full() is intended for Python debug output to the terminal
     # It removes all fancy formatting to emit ASCII only.
@@ -848,14 +870,23 @@ class Page:
         self.txt = re.sub(r'^asci:\s*(.*?)\s*?\n',
                           repl_asci, self.txt, flags=re.MULTILINE)
 
-        # If the filename looks like a scientific name, and we didn't find
-        # a 'sci:' specification, then set the scientific name from the
-        # filename.  But if there *was* a 'sci:' specification, we try
-        # to set the name again to check that it is compatible.  The goal
-        # is to first set the scientific name to its elaborated form if
-        # one is specified, then fall back to the filename, which usually
-        # isn't elaborated.
-        if is_sci(self.name):
+        # If only a scientific name was explicitly set, then:
+        # - if the filename matches the scientific name, set the scientific
+        #   name again from the filename (in case the filename includes an
+        #   elaboration that we otherwise don't have, although that would be
+        #   weird).
+        # - otherwise, set the common name from the filename.
+        if not self.com and self.sci:
+            elab = fix_elab(self.name)
+            sci = strip_sci(elab)
+            if sci == self.sci:
+                self.set_sci(elab)
+            else:
+                self.set_com(self.name)
+
+        # If only a common name was explicitly set and the filename looks
+        # like it could be a scientific name, set it as the scientific name.
+        if self.com and not self.sci and not self.name.islower():
             self.set_sci(self.name)
 
     def canonical_rank(self, rank):
@@ -1589,8 +1620,15 @@ class Page:
                           f'page {self.full()} has a color assigned but has no photos')
 
     def expand_genus(self, sci):
-        if len(sci) >= 3 and sci[1:3] == '. ':
+        if len(sci) > 3 and sci[1:3] == '. ':
             # sci has an abbreviated genus name
+            if self.no_names:
+                # If this page doesn't have a name yet, then either the
+                # filename is a scientific name that provides the genus,
+                # or we'll get a fatal error below.  So it is either useful
+                # or harmless to use the filename as the scientific name.
+                self.set_sci(self.name)
+
             if self.rank and self.rank <= Rank.genus and self.sci[0] == sci[0]:
                 sci_words = self.sci.split(' ')
                 return sci_words[0] + sci[2:]

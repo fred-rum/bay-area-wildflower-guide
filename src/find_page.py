@@ -2,6 +2,7 @@ import re
 
 # My files
 from error import *
+from rank import *
 
 name_page = {} # original page name -> page [final file name may vary]
 com_page = {} # common name -> page (or 'multiple' if there are name conflicts)
@@ -28,23 +29,27 @@ def is_elab(name):
 # r - rank
 def strip_sci(sci, keep=''):
     if 'x' not in keep and sci[0].isupper():
+        # Remove the 'X' hybrid indicator.
         sci = re.sub(' X', ' ', sci)
+
     sci_words = sci.split(' ')
-    if len(sci_words) == 4:
-        # Four words in the scientific name implies a subset of a species
-        # with an elaborated subtype specifier.  The specifier is stripped
-        # from the 'sci' name.
-        if 'b' not in keep:
-            return ' '.join((sci_words[0], sci_words[1], sci_words[3]))
+
+    if (len(sci_words) == 4 and
+        sci_words[2] in ('ssp.', 'var.') and
+        'b' not in keep):
+        # The name includes an 'ssp.' or 'var.' specifier.
+        # The specifier is stripped from the 'sci' name.
+        return ' '.join((sci_words[0], sci_words[1], sci_words[3]))
     elif len(sci_words) == 2:
         if sci_words[1] == 'spp.' and 'g' not in keep:
             # It is a genus name in elaborated format.  The 'spp.' suffix is
             # stripped from the 'sci' name.
             return sci_words[0]
-        elif sci[0].islower() and 'r' not in keep:
-            # The name is in {type} {name} format (e.g. "family Phrymaceae").
-            # Strip the type from the 'sci' name.
+        elif sci_words[0] in rank_set and 'r' not in keep:
+            # The name is in {rank} {name} format (e.g. "family Phrymaceae").
+            # Strip the rank from the 'sci' name.
             return sci_words[1]
+
     # The name is already in a fine stripped format.
     return sci
 
@@ -61,7 +66,7 @@ def elaborate_sci(sci):
     # The name is already in a fine elaborated format.
     return sci
 
-# I allow input of formatted as either "genus <Genus>" or "<Genus> spp.",
+# I allow input formatted as either "genus <Genus>" or "<Genus> spp.",
 # but the former is the preferred internal and output format.
 def fix_elab(elab):
     if elab and elab.endswith(' spp.'):
@@ -86,7 +91,9 @@ def find_taxon_id(taxon_id):
 # Find a page by its common name.
 # com may be None, in which case we expect to also return None.
 def find_com(com):
-    if com in com_page:
+    if com in name_page and name_page[com].no_names:
+        return name_page[com]
+    elif com in com_page:
         page = com_page[com]
 
         if isinstance(com_page[com], int):
@@ -117,6 +124,8 @@ def find_sci(elab, from_inat=False):
         page = isci_page[elab]
     elif from_inat and sci in isci_page:
         page = isci_page[sci]
+    elif elab in name_page and name_page[elab].no_names:
+        page = name_page[elab]
     elif elab in sci_page:
         page = sci_page[elab]
 
@@ -129,6 +138,8 @@ def find_sci(elab, from_inat=False):
             # Or the caller might try to create a new page with this
             # scientific name, which will fail with a useful message.
             return None
+    elif sci in name_page and name_page[sci].no_names:
+        page = name_page[sci]
     elif sci in sci_page:
         page = sci_page[sci]
 
@@ -168,7 +179,7 @@ def find_sci(elab, from_inat=False):
     else:
         page = None
 
-    if page:
+    if page and not page.no_names:
         # We might have an elaboration where the page only had a scientific
         # name before.  set_sci() will improve the page information if
         # possible.

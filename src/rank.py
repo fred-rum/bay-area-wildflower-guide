@@ -8,6 +8,10 @@ _ranks = ('below', 'species', 'subgenus', 'genus',
           'subphylum', 'phylum',
           'kingdom')
 
+rank_set = set()
+for rank in _ranks:
+    rank_set.add(rank)
+
 # OrderedEnum allows <, > comparisons without the drawbacks of IntEnum.
 # (E.g. IntEnum might unexpectedly use an integer value instead of a name.)
 # Copied from https://docs.python.org/3/library/enum.html#orderedenum

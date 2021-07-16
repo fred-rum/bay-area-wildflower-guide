@@ -584,6 +584,10 @@ for page in full_page_array:
 if arg('-steps'):
     info('Step 13: Parse remaining text, including glossary terms')
 
+# If we got this far and a page still doesn't have a name, give it one.
+for page in page_array:
+    page.infer_name()
+
 parse_glossaries(top_list)
 
 for page in page_array:
