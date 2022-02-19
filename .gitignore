@@ -23,7 +23,6 @@ $RECYCLE.BIN/
 # =========================
 html/other observations.html
 html/_mod.html
-figures/*.jpg
 prev/
 \#*#
 new/
@@ -32,8 +31,8 @@ debug.log
 markers.*
 __pycache__/
 .in_progress/
-figures/*.jpg
 data/cache.pickle
 .~lock.*#
 test/
 example/
+src/names

@@ -819,7 +819,7 @@ var pages=[
 {page:"hairy ceanothus",sci:["Ceanothus oliganthus"],x:"o"},
 {page:"herb robert",sci:["Geranium robertianum"],x:"o"},
 {page:"japanese honeysuckle",sci:["Lonicera japonica"],x:"o"},
-{page:"genus Lasioglossum",x:"f"},
+{page:"Lasioglossum",sci:["genus Lasioglossum"],x:"f"},
 {page:"leather oak",sci:["Quercus durata"],x:"o"},
 {page:"leopard lily",sci:["Lilium pardalinum"],x:"o"},
 {page:"long-bodied cellar spider",sci:["Pholcus phalangioides"],x:"o"},
