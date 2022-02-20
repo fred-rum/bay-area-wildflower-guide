@@ -2063,14 +2063,13 @@ class Page:
             # fmt=photo -> list results with info + sample photos
             # y={},x={},z={} -> longitude, latitude, zoom
             # wkt={...} -> search polygon with last point matching the first
+            sci = strip_sci(elab)
+            taxon = sci.split(' ')[0]
+            taxonurl = url(taxon)
             if self.rank and self.rank is Rank.family:
-                family = elab.split(' ')[1]
-                familyurl = url(sci)
-                query = f'family={familyurl}'
-            else :
-                genus = elab.split(' ')[0]
-                genusurl = url(genus)
-                query = f'taxon={genusurl}'
+                query = f'family={taxonurl}'
+            else:
+                query = f'taxon={taxonurl}'
             species_maps.append(f'<a href="https://www.calflora.org/entry/wgh.html#srch=t&group=none&{query}&fmt=photo&y=37.5&x=-122&z=8&wkt=-123.1+38,-121.95+38,-121.05+36.95,-122.2+36.95,-123.1+38" target="_blank" rel="noopener noreferrer">CalFlora</a>')
 
         if species_maps:

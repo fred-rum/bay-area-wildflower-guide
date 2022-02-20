@@ -1,0 +1,15 @@
+sci:Sanguisorba spp.
+family:rose family
+x:ca
+
+==salad burnet:Sanguisorba minor
+color: red
+sci_f:Sanguisorba minor ssp. balearica
+sci_j:Poterium sanguisorba
+sci_p:Sanguisorba minor|Poterium sanguisorba
+. largest leaflet blade generally 5-20 mm, teeth generally < 15
+. stamens many, filaments thread-like
+
+==great burnet:Sanguisorba officinalis
+. largest leaflet blade 25-50 mm, teeth generally > 15
+. stamens 2-4, filaments not thread-like

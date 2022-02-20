@@ -17,7 +17,7 @@ x:ba
 . [Chenopodiastrum is also included here]
 
 ==Oxybasis spp.
-sci_fpj:Chenopodium
+sci_fpj:Chenopodium spp.
 x:hist
 . annual
 . calyx tube generally < calyx lobes
