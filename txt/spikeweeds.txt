@@ -1,5 +1,5 @@
 sci:Centromadia spp.
-x:ca
+x:ba
 
 ==fitch's tarweed:C. fitchii
 color: yellow
@@ -9,8 +9,9 @@ color: yellow
 xx:more
 . leaf glabrous or hairy, <b>occasionally with sessile yellow glands</b>
 
-==common spikeweed:C. pungens
-xx:more
-. leaf faces glabrous or hairy, <b>not glandular or minutely glandular</b>
-.. midrin often bristly
-.. margin generally bristly-ciliate, at least near the base
+==common spikeweed:C. pungens ssp. pungens
+color:yellow
+xx:ba
+. leaf faces often hairy, <b>not glandular or minutely glandular</b>
+.. midrib often bristly
+.. margins sometimes ciliate, at least near the base

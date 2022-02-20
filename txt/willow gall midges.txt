@@ -1,0 +1,25 @@
+sci:Rabdophaga spp.
+x:ba
+bug:164969
+
+==willow rosette gall midge:R. salicisbrassicoides
+bug:164970
+. loose brown lump on the side of a twig
+
+==potato gall midge:R. salicisbatatus
+bug:n/a
+. reddish or greenish lumpy round shape around a twig, not necessarily at the end
+
+==willow beaked-gall midge:R. rigidae
+bug:479817
+. reddish football shape at the end of a twig or at the base of a terminal leaf cluster
+
+==willow cone gall midge:R. strobiloides
+bug:270904
+. gray-hairy over brown pinecone shape at the end of a twig
+
+==willow rose gall midge:R. rosaria
+bug:n/a
+. green leafy rosette at the end of a twig
+
+See also {-willow gall sawflies}.

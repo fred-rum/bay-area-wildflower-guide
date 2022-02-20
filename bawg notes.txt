@@ -1232,12 +1232,4 @@ is entirely overwritten (e.g. the filename is ignored in favor of com:
 and sci:).  And it doesn't make the code any more robust than
 currently.
 
-Add these newly observed species:
-brown-headed cowbird
-greater yellowlegs
-willow beaked-gall midge
-willow apple gall sawfly
-southern california walnut
-pacific glasswort
-common spikeweed
-narrow-leaved cattail
+replace spaces in URLs with +

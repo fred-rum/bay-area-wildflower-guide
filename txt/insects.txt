@@ -33,5 +33,4 @@ There is a <a href="insect glossary.html">glossary</a> for insects.
 ==four-lined silverfish:Ctenolepisma lineata
 bug:156092
 
-==coyote brush bud gall midge
-bug:225834
+==gall insects

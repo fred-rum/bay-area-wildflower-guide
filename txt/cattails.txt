@@ -9,10 +9,10 @@ color: other
 . widest leaf blades 10--29 mm wide (fresh), 5--20 mm (dry)
 
 ==narrow-leaved cattail:T. angustifolia
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1215+1576
+color: other
 . naked stem between staminate, pistillate flowers <b>1--12 cm</b>
 . widest leaf blades 4--15 mm wide (fresh), 3--8 mm (dry)
-. <b>leaf blade glands 0</b>
+. <b>no leaf blade glands</b>
 . pistillate spike dark brown
 . pistillate bractlet tip dark brown, generally darker than stigma, blunt
 

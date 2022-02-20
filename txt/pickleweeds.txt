@@ -1,0 +1,12 @@
+sci:Salicornia spp.
+family:amaranth family
+x:rare
+
+==pacific glasswort:S. pacifica
+color: cream
+. some stems vegetative only
+. central flowers of a node  separating lateral flowers, flowers in a horizontal row
+
+==virginia glasswort:S. depressa
+. all stems terminated by inflorescence
+. lateral flowers of a node generally meeting below central flower, flowers in a triangle
