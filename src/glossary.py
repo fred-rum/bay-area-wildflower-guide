@@ -488,6 +488,14 @@ class Glossary:
         self.link_set = set()
         self.txt = None # No associated HTML
 
+    # return True if self is the check_glossary is the same as self or
+    # is an ancestor of self.
+    def has_ancestor(self, check_glossary):
+        while check_glossary:
+            if check_glossary == self:
+                return True
+            check_glossary = check_glossary.parent
+        return False
 
     def write_toc(self, w, current):
         if self.invisible:

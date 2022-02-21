@@ -1,0 +1,8 @@
+sci:Rhamnus spp.
+
+==hollyleaf redberry:R. ilicifolia
+color:yellow
+
+==redberry buckthorn:R. crocea
+
+==mediterranean buckthorn:R. alaternus

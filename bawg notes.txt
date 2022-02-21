@@ -1233,3 +1233,6 @@ and sci:).  And it doesn't make the code any more robust than
 currently.
 
 replace spaces in URLs with +
+
+key to buckthorns
+fix glossary for gall insects

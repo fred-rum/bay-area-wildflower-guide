@@ -6,3 +6,5 @@ end_hierarchy
 
 ==common pill woodlouse:Armadillidium vulgare
 bug:94180
+
+==gall bugs

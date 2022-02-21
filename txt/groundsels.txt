@@ -61,6 +61,7 @@ color:yellow
 . common
 
 ==threadleaf groundsel:S. flaccidus
+color:yellow
 . unknown number of disk flowers
 . 8, 13, or 21 ray flowers, 10--15 mm
 . involucre bell-shaped

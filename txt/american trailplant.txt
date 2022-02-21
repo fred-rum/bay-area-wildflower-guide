@@ -1,0 +1,4 @@
+sci:Adenocaulon bicolor
+x:ca
+color:white
+family: sunflower family

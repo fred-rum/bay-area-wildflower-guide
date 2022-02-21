@@ -1,0 +1,13 @@
+sci:Perideridia spp.
+family:carrot family
+x:ba
+
+==kellogg's yampah:P. kelloggii
+color:white
+
+==california yampah:P. californica
+
+==common yampah:P. gairdneri
+xx:more
+
+==oregon yampah:P. oregana

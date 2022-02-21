@@ -1,0 +1,5 @@
+sci:family Eriophyidae
+
+==willow bead gall mite:Aculus tetanothrix
+bug:n/a
+. parasitises leaves of multiple willow species

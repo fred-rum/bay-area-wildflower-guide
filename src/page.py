@@ -2121,28 +2121,37 @@ class Page:
 
     def set_glossary(self, glossary, jepson_glossary, glossary_warn):
         if self.glossary:
-            # We seem to be setting the glossary via two different
-            # tree paths.  Make sure that the parent taxon's glossary
-            # is the same on both paths.
-            if glossary:
-                glossary_name = glossary.name
-            else:
-                glossary_name = 'None'
+            if not glossary or self.glossary.has_ancestor(glossary):
+                # The glossary that we want to set is the same as is already
+                # in self.glossary, or it is a higher-level glossary (or none).
+                # In all these cases, the existing glossary is fine for this
+                # node and its children, so there's no need to continue the
+                # tree traversal through this node.
+                return
+
+            if glossary.has_ancestor(self.glossary):
+                # The glossary that is already set is a higher level of
+                # the one that we want to set.  We don't need to adjust the
+                # glossary hierarchy, but we do need to update this node
+                # and its descendents to use the lower-level glossary.
+                self.assign_glossary(glossary, jepson_glossary, glossary_warn)
+                return
+
+            # The glossary that we want to set has a hierarchy incompatible
+            # with the glossary that is already set.  Print an error message.
 
             if self.name in glossary_taxon_dict:
-                if glossary != self.glossary.parent:
-                    if self.glossary.parent:
-                        parent = self.glossary.parent.name
-                    else:
-                        parent = 'None'
-                    error(f'{self.full()} has two different parent glossaries, {parent_name} and {glossary_name}')
+                if self.glossary.parent:
+                    parent = self.glossary.parent.name
+                else:
+                    parent = 'None'
             else:
-                if glossary != self.glossary:
-                    error(f'{self.full()} gets two different glossaries, {self.glossary.name} and {glossary_name}')
+                parent = self.glossary.name
 
-            # No need to continue the tree traversal through this node
-            # since it and its children have already set the glossary.
+            error(f'{self.full()} has incompatible parent glossaries, {parent_name} and {glossary.name}')
             return
+
+        # This node doesn't have a glossary yet.
 
         if jepson_glossary and self.name == jepson_glossary.taxon:
             jepson_glossary.set_parent(glossary)
@@ -2155,6 +2164,9 @@ class Page:
             sub_glossary.set_parent(glossary)
             glossary = sub_glossary
 
+        self.assign_glossary(glossary, jepson_glossary, glossary_warn)
+
+    def assign_glossary(self, glossary, jepson_glossary, glossary_warn):
         self.glossary = glossary
         self.glossary_warn.update(glossary_warn)
 
