@@ -18,3 +18,8 @@ bug:n/a
 . parasitizes both local {-Chrysolepis} species.
 . a pale red berry-like gall nestled among the flower#flowers.
 .. the gall is actually a deeper red, but is covered in a yellow/orange blush which can easily be rubbed off.
+
+==spiny leaf gall wasp:Diplolepis polita
+bug:192706
+x:more
+. parasitizes {-roses}.
