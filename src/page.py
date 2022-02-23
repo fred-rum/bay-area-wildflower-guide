@@ -1900,9 +1900,6 @@ class Page:
             obs = Obs(None)
             self.count_matching_obs(obs)
 
-        if obs.n == 0 and not self.sci:
-            return
-
         if self.taxon_id:
             link = f'https://www.inaturalist.org/observations/chris_nelson?taxon_id={self.taxon_id}&order_by=observed_on'
         elif self.sci:
@@ -2595,7 +2592,6 @@ class Page:
 
         obs = Obs(color)
         self.count_matching_obs(obs)
-        #obs.write_page_counts(w)
         w.write(s.getvalue())
         w.write('<hr>\n')
         if color:

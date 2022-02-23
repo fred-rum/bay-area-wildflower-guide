@@ -84,14 +84,19 @@ class Obs:
                 self.leaf_unobs += 1
 
     def write_page_counts(self, w):
-        w.write(f'<span class="parent">{self.key} keys</span>')
-        w.write(f' / <span class="leaf">{self.leaf_obs} observed flowers</span>')
-        if self.color is None and self.leaf_unobs == 0:
-            # Unobserved pages don't normally have an assigned color,
-            # so it doesn't make sense to try to print out how many
-            # match the current color.
-            w.write(f' / <span class="unobs">{self.leaf_unobs} unobserved flowers</span>')
-        w.write('\n')
+        node_strs = []
+        if (self.leaf_obs > 1 or
+            (self.leaf_obs == 1 and (self.leaf_unobs or self.key))):
+            node_strs.append(f'<span class="leaf">{self.leaf_obs} observed taxons</span>')
+        if (self.leaf_unobs > 1 or
+            (self.leaf_unobs == 1 and (self.leaf_obs or self.key))):
+            node_strs.append(f'<span class="unobs">{self.leaf_unobs} unobserved taxons</span>')
+        if self.key:
+            node_strs.append(f'<span class="parent">{self.key} keys</span>')
+
+        if node_strs:
+            node_str = ' / '.join(node_strs)
+            w.write(f'<p>\n{node_str}\n</p>\n')
 
     def write_obs(self, link, w):
         if not any_observations:
@@ -99,6 +104,8 @@ class Obs:
 
         n = self.n
         rg = self.rg
+
+        self.write_page_counts(w)
 
         w.write('<p>\n')
 

@@ -1249,7 +1249,7 @@ var pages=[
 {page:"buckthorns",sci:["genus Rhamnus"],x:"f"},
 {page:"cheesewood family",sci:["family Pittosporaceae"],x:"f"},
 {page:"coast douglas-fir",sci:["Pseudotsuga menziesii var. menziesii"],x:"o"},
-{page:"Thymelaeaceae",sci:["family Thymelaeaceae"],x:"f"},
+{page:"stringbark family",sci:["family Thymelaeaceae"],x:"f"},
 {page:"umbrellaworts",sci:["genus Tauschia"],x:"k"},
 {page:"virginia opossum",sci:["Didelphis virginiana"],x:"u"},
 {page:"walnut family",sci:["family Juglandaceae"],x:"f"},

@@ -221,16 +221,16 @@ div.box {
 a.family:link, a.family:visited {
     color: #9c8024;
 }
-a.unobs:link, a.unobs:visited {
+a.unobs:link, a.unobs:visited, span.unobs {
     color: black;
 }
 a.jepson:link, a.jepson:visited {
     color: #cc6600;
 }
-a.parent:link, a.parent:visited {
+a.parent:link, a.parent:visited, span.parent {
     color: SaddleBrown;
 }
-a.leaf:link, a.leaf:visited {
+a.leaf:link, a.leaf:visited, span.leaf {
     color: DarkGreen;
 }
 a.missing:link, a.missing:visited {
