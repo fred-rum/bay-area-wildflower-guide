@@ -1,0 +1,6 @@
+sci:Cercocarpus betuloides
+x:ba
+color: other
+family: rose family
+
+. There is only one subspecies in the bay area, ssp. betuloides.

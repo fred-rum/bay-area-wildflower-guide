@@ -13,3 +13,8 @@ x:ca
 ==sow thistles:Sonchus spp.
 
 ==Carthamus spp.
+
+==artichoke thistle:Cynara cardunculus
+family: sunflower family
+color: purple
+x:ca

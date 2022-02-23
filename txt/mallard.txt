@@ -1,0 +1,5 @@
+warn one_child: none
+
+==domestic mallard:Anas platyrhynchos var. domesticus
+
+There isn't a clear alternative variety/subspecies for wild mallards.

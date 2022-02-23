@@ -17,3 +17,5 @@ x:ca
 
 ==common merganser:Mergus merganser
 x:more
+
+==gadwall:Mareca strepera

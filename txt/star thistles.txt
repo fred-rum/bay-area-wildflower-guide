@@ -7,7 +7,7 @@ Key features:
 [
 <h3>Yellow</h3>
 
-==yellow starthistle:C. solstitialis
+==yellow star-thistle:C. solstitialis
 color: yellow
 . disk flower corolla <b>13--20 mm</b>
 . spines <b>straw colored</b>, 10--25 mm

@@ -4,5 +4,6 @@ sci:Rhamnus spp.
 color:yellow
 
 ==redberry buckthorn:R. crocea
+color:other
 
 ==mediterranean buckthorn:R. alaternus

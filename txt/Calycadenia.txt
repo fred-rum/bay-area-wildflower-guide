@@ -1,6 +1,7 @@
 x:hist
 
 ==sticky western rosinweed:C. multiglandulosa
+color:white
 . white rays
 
 ==oregon western rosinweed:C. truncata

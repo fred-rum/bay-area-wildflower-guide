@@ -683,8 +683,8 @@ class Page:
 
         if (from_inat and
             not self.created_from_inat and
-            not rp_do('obs_fill_sci',
-                      f'{self.full()} can be filled by {elab}')):
+            not self.rp_do('obs_fill_sci',
+                           f'{self.full()} can be filled by {elab}')):
             # If we got here, then
             #   - this page was created by the user, and
             #   - we have a new elaboration from iNaturalist, and

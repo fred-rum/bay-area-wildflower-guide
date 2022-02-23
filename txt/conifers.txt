@@ -6,3 +6,7 @@ sci:class Pinopsida
 
 ==coast redwood:Sequoia sempervirens
 x:ba
+
+==coast douglas-fir:Pseudotsuga menziesii var. menziesii
+x:ba
+xx:ca

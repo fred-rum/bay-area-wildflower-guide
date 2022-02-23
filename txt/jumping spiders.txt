@@ -1,0 +1,8 @@
+sci:family Salticidae
+bug:1962
+
+==buttonhook leaf-beetle humping spider:Sassacus vitis
+bug:42637
+
+==johnson's jumping spider:Phidippus johnsoni
+bug:15152

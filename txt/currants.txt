@@ -1,0 +1,19 @@
+sci:n/a
+
+==golden currant:Ribes aureum
+xx:uncat
+. yellow sepals
+. yellow petals, aging red
+
+==red-flowering currant:Ribes sanguineum
+. <b>green hypanthium</b>
+. pink to white sepals
+. styles glabrous at base
+. leaf blade abaxially sparsely hairy, with short glands on veins or not
+
+==chaparral currant:Ribes malvaceum
+color: pink
+. <b>pink hypanthium</b>
+. pink to purple sepals
+. styles hairy, at least at base
+. leaf blade densely glandular-hairy

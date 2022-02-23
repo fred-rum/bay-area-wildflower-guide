@@ -1,0 +1,4 @@
+sci:Leucojum aestivum
+color:white
+x:ca
+family: amaryllis family

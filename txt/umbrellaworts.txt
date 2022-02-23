@@ -1,0 +1,8 @@
+sci:genus Tauschia
+
+==hartweg's umbrellawort:Tauschia hartwegii
+color:yellow
+. generally several bractlets > flowers
+
+==kellogg's umbrellawort:Tauschia kelloggii
+. generally no bractlets > flowers

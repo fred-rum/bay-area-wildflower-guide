@@ -13,7 +13,7 @@ sci_fpj:Cotoneaster lacteus
 color: white
 . plant arching, 1--9 m
 . petals white, spreading; fruit bright red
-. leaf blade 35--95 mm, 17--45 mm wide, thick, adaxially dark green, lateral veins often sunken
+. <b>leaf blade 35--95 mm, 17--45 mm wide</b>, thick, adaxially dark green, lateral veins often sunken
 . common
 
 ==silverleaf cotoneaster:C. pannosus
@@ -21,7 +21,7 @@ color: white
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0219+0707
 . plant arching, 1--9 m
 . petals white, spreading; fruit bright red
-. leaf blade 15--32 mm, 8--15 mm wide, thin, adaxially +- blue-green, lateral veins not sunken
+. <b>leaf blade 15--32 mm, 8--15 mm wide</b>, thin, adaxially +- blue-green, lateral veins not sunken
 . common
 
 ==franchet's cotoneaster:C. franchetii

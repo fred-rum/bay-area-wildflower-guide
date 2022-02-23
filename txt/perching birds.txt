@@ -31,5 +31,4 @@ x:more
 
 ==swallows and martins:family Hirundinidae
 
-==white-breasted nuthatch:Sitta carolinensis
-x:more
+==nuthatches:family Sittidae

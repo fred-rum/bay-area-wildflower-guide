@@ -71,6 +71,7 @@ color:white
 . rays 0--0.3 mm
 . central stem often overtopped by distal branches in age
 . heads +- long-peduncled, generally in raceme-like clusters
+. leaf +- densely strigose and/or bristly
 . scattered
 
 ]

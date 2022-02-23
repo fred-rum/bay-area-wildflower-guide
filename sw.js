@@ -1,7 +1,7 @@
 'use strict';
-var upd_timestamp = '2022-02-21T08:27:35.402960+00:00';
-var upd_num_urls = 6724;
-var upd_kb_total = 713644
+var upd_timestamp = '2022-02-23T04:08:39.140342+00:00';
+var upd_num_urls = 6828;
+var upd_kb_total = 728259
 const DB_NAME = 'db-v1';
 const DB_VERSION = 1;
 const BASE64_CACHE_NAME = 'base64-cache-v1';

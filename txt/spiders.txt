@@ -10,6 +10,8 @@ bug:1967
 
 ==orbweavers
 
+==jumping spiders
+
 # inside spiders
 
 ==mediterranean spiny false wolf spider:Zoropsis spinimana

@@ -1,0 +1,13 @@
+sci:Ribes sanguineum
+xx:any
+
+==blood currant:R. sanguineum var. glutinosum
+color: pink, pale purple
+. sepals are pink to white
+. drooping inflorescence
+. common in the bay area
+
+==winter currant:R. sanguineum var. sanguineum
+. sepals are red
+. erect or spreading inflorescence
+. <b>rare to non-existent in the bay area</b>

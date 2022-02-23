@@ -19,6 +19,7 @@ color: white
 . Fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
 
 ==whitebark raspberry:R. leucodermis
+color:white
 . Plant: arched to mounded
 . Prickles: many, <b>stout, wide-based</b>, straight or generally curved
 . Stem: 4--10 mm diam, <b>not angled</b>, glabrous, <b>strongly glaucous in youth</b>
