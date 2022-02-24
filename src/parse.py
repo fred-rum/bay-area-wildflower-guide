@@ -56,7 +56,8 @@ def parse_txt(name, s, page, glossary):
             c_list = c_list[:child_start]
             child_start = None
 
-            c_list.append(page.parse_child_and_key(child, suffix, text))
+            c_list.append(page.parse_child_and_key(child, suffix, text,
+                                                   match_set))
 
             child_list.append(child)
             child_idx += 1
@@ -140,6 +141,10 @@ def parse_txt(name, s, page, glossary):
     # child_idx keeps track of which child we're current working on.
     # It increments as we finish parsing each child.
     child_idx = 0
+
+    # match_set keeps track of which descendants have been listed in the
+    # hierarchy of this page so that they aren't repeated.
+    match_set = set()
 
     # child_list tracks the pages of consecutively parsed children
     # in case we want to re-order them.

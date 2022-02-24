@@ -2175,7 +2175,7 @@ class Page:
         for child in self.child:
             child.set_glossary(glossary, jepson_glossary, self.glossary_warn)
 
-    def parse_child_and_key(self, child, suffix, text):
+    def parse_child_and_key(self, child, suffix, text, match_set):
         def repl_example(matchobj):
             suffix = matchobj.group(1)
             jpg = child.name + suffix
@@ -2235,7 +2235,7 @@ class Page:
 
         if self.list_hierarchy:
             s = io.StringIO()
-            list_matches(s, [child], False, None, set())
+            list_matches(s, [child], False, None, match_set)
             return s.getvalue()
         elif not img:
             return '<p>' + link + '</p>\n' + text
@@ -2527,8 +2527,7 @@ class Page:
                 # Subset pages don't have real children.
                 # Instead, we get the page that it is a subset of to write
                 # the appropriate subset of its own hierarchy.
-                self.subset_of_page.write_hierarchy(w, self.subset_color,
-                                                    self.subset_page_list)
+                self.subset_of_page.write_subset_hierarchy(w, self.subset_color, self.subset_page_list)
 
                 # Since subset pages don't have real children, the normal
                 # observation count won't work properly, which means that
@@ -2586,7 +2585,7 @@ class Page:
                 genus_page_list[genus] = []
             genus_page_list[genus].append(self)
 
-    def write_hierarchy(self, w, color, page_list):
+    def write_subset_hierarchy(self, w, color, page_list):
         # We write out the matches to a string first so that we can get
         # the total number of keys and flowers in the list (including children).
         s = io.StringIO()
@@ -2596,10 +2595,7 @@ class Page:
         self.count_matching_obs(obs)
         w.write(s.getvalue())
         w.write('<hr>\n')
-        if color:
-            obs.write_obs(None, w)
-        else:
-            self.write_obs(w, obs)
+        obs.write_obs(None, w)
 
 # End of Page class
 ###############################################################################
