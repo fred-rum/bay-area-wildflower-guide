@@ -436,6 +436,11 @@ class Page:
         # glossary terms is used outside the glossary
         self.glossary_warn = set()
 
+    # Provide a hook for the sort_pages() helper function to be called
+    # via a Page object without needing to import page.py.
+    def sort_pages(self, page_set):
+        return sort_pages(page_set)
+
     def infer_name(self):
         if self.no_names:
             if is_sci(self.name):
@@ -2170,15 +2175,13 @@ class Page:
         for child in self.child:
             child.set_glossary(glossary, jepson_glossary, self.glossary_warn)
 
-    def parse_child_and_key(self, child_idx, suffix, text):
+    def parse_child_and_key(self, child, suffix, text):
         def repl_example(matchobj):
             suffix = matchobj.group(1)
             jpg = child.name + suffix
             if jpg not in child.jpg_list:
                 error(f'Broken [example{suffix}] for child {child.full()} in {self.full()}')
             return f'<a class="leaf" href="../photos/{url(jpg)}.jpg">[example]</a>'
-
-        child = self.child[child_idx]
 
         # If the key includes '[example,<suffix>]', create an [example]
         # link in the parent text, but remove the link from the child key.
@@ -2231,7 +2234,9 @@ class Page:
             img = None
 
         if self.list_hierarchy:
-            return ''
+            s = io.StringIO()
+            list_matches(s, [child], False, None, set())
+            return s.getvalue()
         elif not img:
             return '<p>' + link + '</p>\n' + text
         elif text:
@@ -2242,6 +2247,7 @@ class Page:
             return f'<div class="flex-width"><div class="photo-box">{img}\n<span class="show-narrow">{link}</span></div><div class="key-text"><span class="show-wide">{link}</span>{text}</div></div>'
         else:
             return f'<div class="photo-box">{img}\n<span>{link}</span></div>'
+
 
     def parse(self):
         # If a parent already parsed this page (as below), we shouldn't
@@ -2532,10 +2538,6 @@ class Page:
                 # subset page.
                 n = self.subset_of_page.count_flowers(color=self.subset_color)
                 self.cum_obs_n[None] = n
-
-            elif self.list_hierarchy:
-                w.write(self.txt)
-                self.write_hierarchy(w, None, self.child)
             else:
                 if self.jpg_list or self.ext_photo_list:
                     for jpg in self.jpg_list:
@@ -2649,7 +2651,7 @@ def list_matches(w, match_set, indent, color, seen_set):
         match_list = sort_pages(match_set, color=color)
 
     for page in match_list:
-        if page.end_hierarchy:
+        if page.end_hierarchy and not color:
             child_matches = []
         else:
             child_matches = find_matches(page.child, color)

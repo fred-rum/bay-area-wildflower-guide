@@ -21,7 +21,8 @@ from easy import *
 
 def parse_txt(name, s, page, glossary):
     def end_paragraph(for_list=False, for_defn=False):
-        nonlocal c_list, p_start, child_start, child_idx, suffix, in_dl
+        nonlocal c_list, p_start, in_dl
+        nonlocal child_start, child_idx, child_list, suffix
 
         if p_start is not None:
             # Join the paragraph back into a single string for convenience
@@ -49,11 +50,15 @@ def parse_txt(name, s, page, glossary):
             p_start = None
 
         if not for_list and child_start is not None:
+            child = page.child[child_idx]
+
             text = '\n'.join(c_list[child_start:])
             c_list = c_list[:child_start]
             child_start = None
 
-            c_list.append(page.parse_child_and_key(child_idx, suffix, text))
+            c_list.append(page.parse_child_and_key(child, suffix, text))
+
+            child_list.append(child)
             child_idx += 1
 
         # If beginning a new set of glossary definition, insert <dl>
@@ -69,6 +74,25 @@ def parse_txt(name, s, page, glossary):
             c_list.append('</dl>')
 
         in_dl = for_defn
+
+    # When desired, reorder consecutive children in the parsed text to be
+    # sorted by observation counts.
+    def end_consecutive_children():
+        nonlocal c_list, child_list
+
+        if not child_list or not page.list_hierarchy:
+            return
+
+        num_children = len(child_list)
+        child_text_list = c_list[-num_children:]
+        c_list = c_list[:-num_children]
+
+        for child in page.sort_pages(child_list):
+            child_num = child_list.index(child)
+            child_text = child_text_list[child_num]
+            c_list.append(child_text)
+
+        child_list = []
 
 
     # Figure out which page is most closely related so that glossary_warn
@@ -93,17 +117,42 @@ def parse_txt(name, s, page, glossary):
     s = link_figures_text(name, s)
 
     # Break the text into lines, then perform easy substitutions on
-    # non-keyword lines and decorate bullet lists.  Also, keep track
-    # of lines associated with a child; we'll copy those into the
-    # child's text if it doesn't have any.
+    # non-keyword lines and decorate bullet lists.
+
+    # c_list holds the parsed output as a list of strings.
+    # When a number of lines go tother (as a paragraph or as a child
+    # entry with optional key), c_list starts out partially processed,
+    # and then we go back and replace the last few list entries when
+    # we're ready to parse the complete chunk of lines.
     c_list = []
+
+    # p_start keeps track of the start index of the current paragram in c_list.
     p_start = None
+
+    # child_start keeps track of the start index in c_list of a child entry
+    # in progress.
     child_start = None
+
+    # child_idx keeps track of which child we're current working on.
+    # It increments as we finish parsing each child.
     child_idx = 0
+
+    # child_list tracks the pages of consecutively parsed children
+    # in case we want to re-order them.
+    child_list = []
+
+    # Track the current indent level for a bulleted list in progress.
     list_depth = 0
+
+    # Track the depth of nested boxes created by brackets.
     bracket_depth = 0
+
+    # Are we in between heading tags (e.g. <h3>...</h3>)?
     in_heading = False
+
+    # Are we in a glossary definition?
     in_dl = False
+
     for c in s.split('\n'):
         # non_p is set to True for lines that are not part of a paragraph.
         # I.e. the previous paragraph (if any) should be ended, and a new
@@ -212,6 +261,9 @@ def parse_txt(name, s, page, glossary):
         if c == '':
             non_p = True
 
+        if c and not child_start:
+            end_consecutive_children()
+
         if non_p:
             end_paragraph(list_depth > 0)
         elif p_start is None:
@@ -221,6 +273,7 @@ def parse_txt(name, s, page, glossary):
             c_list.append(c)
 
     end_paragraph()
+    end_consecutive_children()
 
     if bracket_depth != 0:
         error(f'"[" and "]" bracket depth is {bracket_depth} on page {name}')

@@ -1,7 +1,8 @@
 sci:order Araneae
 list_hierarchy
 
-# outside spiders
+[
+<h3>outside spiders</h3>
 
 ==wolf spiders:family Lycosidae
 bug:1967
@@ -12,7 +13,9 @@ bug:1967
 
 ==jumping spiders
 
-# inside spiders
+]
+[
+<h3>inside spiders</h3>
 
 ==mediterranean spiny false wolf spider:Zoropsis spinimana
 x:ca
@@ -28,3 +31,5 @@ bug:248049
 
 ==longlegged sac spiders:Cheiracanthium spp.
 bug:3383
+
+]
