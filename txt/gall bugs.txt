@@ -1,4 +1,5 @@
 sci:n/a
+end_hierarchy
 
 The definitive reference for galls is Ron Russo's Field Guide to Plant
 Galls of California.

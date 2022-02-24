@@ -78,7 +78,7 @@ def parse_txt(name, s, page, glossary):
     # When desired, reorder consecutive children in the parsed text to be
     # sorted by observation counts.
     def end_consecutive_children():
-        nonlocal c_list, child_list
+        nonlocal c_list, child_list, child_idx
 
         if not child_list or page.has_child_key:
             return
@@ -87,7 +87,11 @@ def parse_txt(name, s, page, glossary):
         child_text_list = c_list[-num_children:]
         c_list = c_list[:-num_children]
 
-        for child in page.sort_pages(child_list):
+        sorted_child_list = page.sort_pages(child_list)
+
+        page.child[child_idx - num_children:child_idx] = sorted_child_list
+
+        for child in sorted_child_list:
             child_num = child_list.index(child)
             child_text = child_text_list[child_num]
             c_list.append(child_text)
