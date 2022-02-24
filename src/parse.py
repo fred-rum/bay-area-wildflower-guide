@@ -80,7 +80,7 @@ def parse_txt(name, s, page, glossary):
     def end_consecutive_children():
         nonlocal c_list, child_list
 
-        if not child_list or not page.list_hierarchy:
+        if not child_list or page.has_child_key:
             return
 
         num_children = len(child_list)

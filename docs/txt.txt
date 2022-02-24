@@ -104,6 +104,16 @@ the same page.  On a wide page, the key text appears next to the image
 and below the name; on a narrow page, the key text appears below the
 image and name.
 
+If none of a page's children include any "key text", then the order of
+its children is assumed to not be vital.  This often occurs when the
+child link are created automatically (and are thus in a random order),
+but it can also occur for manually created child links that have no
+additional information.  Regardless of the cause, if a page includes
+no key text, consecutive children in its txt are sorted by observation
+frequency.  If manual child links are interspersed with other text,
+children are only reordered to the extent that they are bounded by
+other text.
+
 --
 Page or child information:
 
@@ -148,13 +158,6 @@ list_hierarchy
 Each child lists its entire hierarchy, not just itself.  The hierarchy
 listing stops traversing descendants when it reaches a page marked
 with 'end_hierarchy'.
-
-If there are multiple consecutive children within the txt, they are
-sorted by observation frequency.  A typical use case is to create all
-children links automatically, in which case the sorting is
-particularly useful.  However, you can also create manual child links
-interspersed with other text, in which case children are only
-reordered to the extent that they are bounded by other text.
 
 
 'taxon_id: <value>' declares the iNaturalist taxon_id.  The taxon_id
