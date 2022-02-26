@@ -6,7 +6,7 @@ color:white
 . <b>fruit < 12 mm</b>, papillate
 
 ==strawberry tree:A. unedo
-scij:n/a
+sci_j:n/a
 . leaves serrate
 . <b>fruit 1--2 cm</b>, papillate
 . rare; at Arastradero

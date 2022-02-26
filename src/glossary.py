@@ -96,11 +96,15 @@ class Glossary:
         else:
             return 'glossary'
 
+    def get_filename(self):
+        no_spaces = re.sub(r' ', '-', self.name)
+        return filename(no_spaces)
+
     def get_url(self):
         if self.is_jepson:
             return 'https://ucjeps.berkeley.edu/eflora/glossary.html'
         else:
-            pageurl = url(self.name)
+            pageurl = url(self.get_filename())
             return f'{pageurl}.html'
 
     def create_link(self):
@@ -576,7 +580,7 @@ class Glossary:
         if self.txt:
             self.txt = parse_txt(self.name, self.txt, None, self)
 
-            with write_and_hash(f'html/{filename(self.name)}.html') as w:
+            with write_and_hash(f'html/{self.get_filename()}.html') as w:
                 if self.taxon:
                     desc = f'Glossary of terms used for {self.taxon} in the Bay Area Wildflower Guide.'
                 else:

@@ -96,6 +96,7 @@ function fn_url(fit_info) {
     var url = 'https://ucjeps.berkeley.edu/eflora/glossary.html';
   } else {
     var url = path + page_info.page + '.html';
+    url = url.replace(/ /g, '-')
   }
 
   if ('anchor' in fit_info) {

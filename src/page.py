@@ -759,6 +759,13 @@ class Page:
         names = unidecode(self.format_full(lines=1, ital=False, for_html=False))
         return f'{names} [{self.src}]'
 
+    def get_filename(self):
+        no_spaces = re.sub(r' ', '-', self.name)
+        return filename(no_spaces)
+
+    def get_url(self):
+        return url(self.get_filename())
+
     def add_jpg(self, jpg):
         self.jpg_list.append(jpg)
 
@@ -1690,6 +1697,8 @@ class Page:
                 raise
 
             if is_rep:
+                if self.rep_child is not None:
+                    error(f'{self.full()} declares multiple representative children (with ==*...)')
                 self.rep_child = child_page
 
             # Replace the =={...} field with a simplified =={suffix} line.
@@ -1728,7 +1737,7 @@ class Page:
                     data_object.rep_child = jpg
                 continue
 
-            matchobj = re.match(r'sci([_fpjib]+):\s*(.*?)$', c)
+            matchobj = re.match(r'sci_([fpjib]+):\s*(.*?)$', c)
             if matchobj:
                 data_object.set_sci_alt(matchobj.group(1),
                                         self.expand_genus(matchobj.group(2)))
@@ -1812,7 +1821,7 @@ class Page:
             return 'unobs'
 
     def create_link(self, lines, text=None):
-        pageurl = url(self.name)
+        pageurl = self.get_url()
         if text is None:
             text = self.format_full(lines)
         return f'<a href="{pageurl}.html" class="{self.link_style()}">{text}</a>'
@@ -1952,7 +1961,7 @@ class Page:
             if self.taxon_id:
                 elab = format_elab(elab)
                 add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/{self.taxon_id}" target="_blank" rel="noopener noreferrer">iNaturalist</a>')
-            else:
+            elif self.elab_inaturalist != 'n/a':
                 sci = strip_sci(elab, keep='x')
                 sci = re.sub(r' X', ' \xD7 ', sci)
                 sciurl = url(sci)
@@ -1965,13 +1974,13 @@ class Page:
             add_link(elab, None, f'<a href="https://bugguide.net/node/view/{self.bugguide_id}" target="_blank" rel="noopener noreferrer">BugGuide</a>')
 
         if self.rp_do('link_calflora'):
-            # CalFlora can be searched by family,
+            # Calflora can be searched by family,
             # but not by other high-level classifications.
             elab = self.choose_elab(self.elab_calflora)
             sci = strip_sci(elab, keep='b')
             sciurl = url(sci)
             elab = format_elab(elab)
-            add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={sciurl}" target="_blank" rel="noopener noreferrer">CalFlora</a>');
+            add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={sciurl}" target="_blank" rel="noopener noreferrer">Calflora</a>');
 
         if self.rp_do('link_calphotos'):
             # CalPhotos cannot be searched by high-level classifications.
@@ -2072,7 +2081,7 @@ class Page:
                 query = f'family={taxonurl}'
             else:
                 query = f'taxon={taxonurl}'
-            species_maps.append(f'<a href="https://www.calflora.org/entry/wgh.html#srch=t&group=none&{query}&fmt=photo&y=37.5&x=-122&z=8&wkt=-123.1+38,-121.95+38,-121.05+36.95,-122.2+36.95,-123.1+38" target="_blank" rel="noopener noreferrer">CalFlora</a>')
+            species_maps.append(f'<a href="https://www.calflora.org/entry/wgh.html#srch=t&group=none&{query}&fmt=photo&y=37.5&x=-122&z=8&wkt=-123.1+38,-121.95+38,-121.05+36.95,-122.2+36.95,-123.1+38" target="_blank" rel="noopener noreferrer">Calflora</a>')
 
         if species_maps:
             txt = '\n&ndash;\n'.join(species_maps)
@@ -2103,7 +2112,7 @@ class Page:
             jpg = None
 
         if jpg:
-            pageurl = url(self.name)
+            pageurl = self.get_url()
             w.write(f'<a href="{pageurl}.html"><div class="list-thumb"><img class="boxed" src="{thumb_url(jpg)}" alt="photo"></div></a>')
 
         w.write(f'{self.create_link(2)}</div>\n')
@@ -2216,7 +2225,7 @@ class Page:
         if not jpg:
             ext_photo = child.get_ext_photo()
 
-        pageurl = url(child.name)
+        pageurl = child.get_url()
         if jpg:
             img = f'<a href="{pageurl}.html"><div class="key-thumb"><img class="boxed" src="{thumb_url(jpg)}" alt="photo"></div></a>'
         elif ext_photo:
@@ -2441,7 +2450,7 @@ class Page:
                 else:
                     error(f'{self.full()} uses the xx: keyword but is not the top of species')
 
-        with write_and_hash(f'html/{filename(self.name)}.html') as w:
+        with write_and_hash(f'html/{self.get_filename()}.html') as w:
             com = self.com
             elab = self.elab
 
@@ -2552,7 +2561,7 @@ class Page:
                         if 'calphotos' in link:
                             text = 'CalPhotos'
                         elif 'calflora' in link:
-                            text = 'CalFlora'
+                            text = 'Calflora'
                         else:
                             text = 'external photo'
                         w.write(f'<span style="text-decoration:underline;">{text}</span>')

@@ -837,10 +837,13 @@ if not arg('-without_cache'):
 
     html_set = set()
     for page in page_array:
-        html_set.add(page.name)
+        html_set.add(page.get_filename())
     alpha_list += get_file_list('html', html_set, 'html')
 
-    alpha_list += get_file_list('html', glossary_files, 'html')
+    glossary_set = set()
+    for glossary in glossary_taxon_dict.values():
+        glossary_set.add(glossary.get_filename())
+    alpha_list += get_file_list('html', glossary_set, 'html')
 
     alpha_list += get_file_list('thumbs', valid_thumb_set, 'jpg')
 

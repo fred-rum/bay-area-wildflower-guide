@@ -1,7 +1,7 @@
 x:hist/rare
 
 ==sticky monkeyflower:D. aurantiacus
-scip:Mimulus aurantiacus
+sci_p:Mimulus aurantiacus
 color: orange
 . subshrub or shrub
 . corolla orange
@@ -9,7 +9,7 @@ color: orange
 [
 <h2>corolla purple</h2>
 ==congdon's monkeyflower:D. congdonii
-scip:Mimulus congdonii
+sci_p:Mimulus congdonii
 color: red purple
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0110+0798
 . herb
@@ -17,14 +17,14 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0110+0798
 . calyx 5--14 mm, ribs hairy
 
 ==brownies:D. douglasii
-scip:Mimulus douglasii
+sci_p:Mimulus douglasii
 https://www.calflora.org/cgi-bin/noccdetail.cgi?seq_num=io1310
 . herb
 . 2 corolla limbs, bilateral, each 10--18 mm wide (3 more corolla limbs are stumpy)
 . calyx 8--14 mm, hairy
 
 ==rattan's monkeyflower:D. rattanii
-scip:Mimulus rattanii
+sci_p:Mimulus rattanii
 https://www.calflora.org/cgi-bin/noccdetail.cgi?seq_num=gp16646
 . herb
 . 5 corolla limbs, equal or 2 larger, each 4--7 mm wide
