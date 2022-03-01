@@ -8,7 +8,8 @@ Key features:
 . fruit hairy or glabrous
 . twigs with true or false terminal bud
 
-==almond:Prunus dulcis
+==almond:Prunus amygdalus
+sci_fpj:Prunus dulcis
 color:pale purple, pink
 . 1--2 flowers per cluster
 . ovary/fruit velvety

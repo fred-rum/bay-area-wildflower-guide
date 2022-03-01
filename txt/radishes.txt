@@ -1,3 +1,4 @@
+sci:genus Raphanus
 x:ca
 
 ==wild radish:R. sativus

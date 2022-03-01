@@ -124,6 +124,7 @@ bay area:
 - Coyote Valley
 - Guadalupe River Trail
 - Pacheco
+- Dimond Canyon
 
 - Santa Clara, CA
 - Santa Cruz, CA
@@ -135,46 +136,52 @@ bay area:
 - {"San Jose, CA": "Almaden Reservoir"}
 
 Hawaii:
-- Honopu Trail
+- {Kokee Region: Honopu Trail}
 - Kilauea Lighthouse
 - Puu Olai
-- Kohua Ridge
-- {Kohua Ridge: Kohoa Ridge}
-- Kawaikoi Camp
-- Kumuwela Trail
-- Kumuwela Road
+- {Kokee Region: Kohua Ridge}
+- {Kokee Region: Kawaikoi Camp}
+- {Kokee Region: Kumuwela Trail}
+- {Kokee Region: Kumuwela Road}
 - Waihee Ridge Trail
 - Powerline Trail
-- Nu'alolo Cliff Trail
-- {Nu'alolo Cliff Trail: Nu'alolo Trail}
+- {Kokee Region: Nu'alolo Cliff Trail}
+- {Kokee Region: Nualolo Trail}
 - {Kuilau Ridge Trail: Kuilau Ridge}
-- Kukui Trail
-- Kawaikoi Stream Trail
+- {Kokee Region: Kukui Trail}
+- {Kokee Region: Kawaikoi Stream Trail}
 - Moalepe Trail
 - Shipwrecks Beach
-- Canyon Trail
-- {Poomau Canyon Ditch Trail: Ditch Trail}
-- Mohihi Road
+- {Kokee Region: Canyon Trail}
+- {Kokee Region: Ditch Trail}
+- {Kokee Region: Mohihi Road}
 - Kalalau Trail
 - Hanalei River
-- Halemanu Road
-- Halemanu-Kokee Trail
-- Hwy 550
+- {Kokee Region: Halemanu Road}
+- {Kokee Region: Halemanu Rd}
+- {Kokee Region: Halemanu-Kokee Trail}
+- {Kokee Region: Hwy 550}
 - Ninini Point
 - Lihue
+- {Lihue: Sonesta Resort}
 - Poipu Beach
-- Alakai Swamp Trail
+- {Kokee Region: Alakai Swamp Trail}
 - {Hanakāpī'a Falls Trail: Hanakāpī}
-- Awa'awapuhi Trail
+- {Kokee Region: Awa'awapuhi Trail}
 - Ho'opi'i Falls Trail
 - Okolehao
 - Haleakala
-- Pihea Trail
-- Larson Beach
-- Waipoo Falls Trail
-- Kanaloahuluhulu
+- {Kokee Region: Pihea Trail}
+- {Kokee Region: Waipoo Falls Trail}
+- {Kokee Region: Kanaloahuluhulu}
 - Eleele, Kauai
 - Nonou Mountain
+- Larsen Beach
+- Poipu
+- {Kokee Region: Kokee Rd}
+- {Kokee Region: Black Pipe Trail}
+- Spouting Horn
+- Hanapepe Valley
 
 Switzerland:
 - Lauterbrunnen, Switzerland

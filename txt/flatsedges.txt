@@ -28,6 +28,7 @@ x:hist/rare
 . extremely rare
 
 ==umbrella papyrus:C. involucratus
+color: other
 . no basal leaf blades
 .. all others below have basal leaf blades
 . 14--22 inflorescence bracts
