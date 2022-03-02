@@ -47,7 +47,7 @@ sci_fpj:Castilleja applegatei ssp. martinii
 . leaves 20--70 mm, <b>+- lanceolate, generally wavy-margined</b>
 . Marin, Mt. Diablo, Sierra Azul, and scattered outside the bay area
 
-==franciscan paintbrush:Castilleja subinclusa ssp. franciscana
+==franciscan paintbrush:Castilleja subinclusa var. franciscana
 color: red, salmon
 xx:rare
 . +- puberulent to hairs long- and short-glandular

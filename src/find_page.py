@@ -167,9 +167,16 @@ def find_sci(elab, from_inat=False):
                 # scientific name, which counts as a valid match.
                 pass
             else:
-                # The scientific name matches, but the ranks are
-                # different.  That doesn't count as a match.
-                page = None
+                if page.rank is Rank.below:
+                    # If the found page's elaborated name is a subspecies or
+                    # variety, then the search name must be the opposite
+                    # variety or subspecies.
+                    error(f'Conflict between {page.elab} and {elab}')
+                else:
+                    # The scientific name matches, but the ranks are
+                    # different.  That doesn't count as a match.
+                    pass
+                    page = None
         else:
             # We're looking for a page using a fully elaborated name,
             # and we found a page that doesn't know its elaborated

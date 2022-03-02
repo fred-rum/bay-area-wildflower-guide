@@ -423,7 +423,7 @@ async function fetch_response(event, url) {
 }
 
 function generate_404(url, msg) {
-  return Promise.resolve(new Response('<html>"' + decodeURI(url) + '"' + msg, {'status': 404, headers: {'Content-Type': 'text/html; charset=utf-8'}}));
+  return Promise.resolve(new Response('<html><body>"' + decodeURI(url) + '"' + msg, {'status': 404, headers: {'Content-Type': 'text/html; charset=utf-8'}}));
 }
 
 /*** Read the indexedDB ***/

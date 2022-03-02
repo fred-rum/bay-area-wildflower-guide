@@ -271,6 +271,12 @@ def read_obs_chains(f):
         # parsed during string parsing, not during RE parsing.
         sci = re.sub('\N{MULTIPLICATION SIGN} ', r'', sci)
 
+        sci_words = sci.split(' ')
+        if get_field('taxon_subspecies_name'):
+            sci = ' '.join((sci_words[0], sci_words[1], 'ssp.', sci_words[2]))
+        elif get_field('taxon_variety_name'):
+            sci = ' '.join((sci_words[0], sci_words[1], 'var.', sci_words[2]))
+
         com = get_field('common_name')
 
         # The common name is forced to all lower case to match my

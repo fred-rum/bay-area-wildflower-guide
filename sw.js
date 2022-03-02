@@ -1,5 +1,5 @@
 'use strict';
-var upd_timestamp = '2022-03-01T04:21:47.652063+00:00';
+var upd_timestamp = '2022-03-02T03:20:29.841501+00:00';
 var upd_num_urls = 6833;
 var upd_kb_total = 728939
 const DB_NAME = 'db-v1';
@@ -124,7 +124,7 @@ async function fetch_response(event, url) {
   }
 }
 function generate_404(url, msg) {
-  return Promise.resolve(new Response('<html>"' + decodeURI(url) + '"' + msg, {'status': 404, headers: {'Content-Type': 'text/html; charset=utf-8'}}));
+  return Promise.resolve(new Response('<html><body>"' + decodeURI(url) + '"' + msg, {'status': 404, headers: {'Content-Type': 'text/html; charset=utf-8'}}));
 }
 async function read_db() {
   try {
