@@ -1606,13 +1606,14 @@ class Page:
             self.child = self.child[:-len(self.non_txt_children)]
             for child in sort_pages(self.non_txt_children):
                 self.child.append(child)
-                if not self.list_hierarchy:
-                    self.txt += f'==\n'
+                self.txt += f'==\n'
 
         if self.subset_of_page:
             # Get the top layer of pages in the subset.
-            # This no longer propagates traits, so I don't know if this code
-            # still needs to be done here or whether it could be elsewhere.
+            # This also propagates membership information to those descendent
+            # pages that have a matching trait value.  This must be done before
+            # check_traits() so that it can tell which trait values are used
+            # in each part of the hierarchy.
             primary = self.subset_of_page
             self.subset_page_list = find_matches(primary.child,
                                                  self.subset_trait,
