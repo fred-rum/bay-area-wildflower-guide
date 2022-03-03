@@ -64,6 +64,8 @@ props = {
     'default_completeness': set(('do', 'caution', 'warn', 'error')),
 }
 
+traits = set()
+
 for prop in props:
     action_set = props[prop]
     if isinstance(action_set, str):
@@ -83,7 +85,7 @@ prop_re = '|'.join(props.keys())
 def get_default_ancestor():
     return default_ancestor
 
-def sort_pages(page_set, color=None, with_depth=False):
+def sort_pages(page_set, trait=None, value=None, with_depth=False):
     # helper function to sort by name
     def by_name(page):
         if page.com:
@@ -108,9 +110,10 @@ def sort_pages(page_set, color=None, with_depth=False):
             parent_depth = max(parent_depth, by_depth(parent))
         return parent_depth + 1
 
-    # helper function to sort by observation count, using the nonlocal color.
+    # helper function to sort by observation count, using the nonlocal
+    # variables of trait and value.
     def count_flowers_helper(page):
-        return page.count_flowers(color)
+        return page.count_flowers(trait, value)
 
     # Sort multiple times.  Each sort breaks ties by retaining the order
     # from the previous sort, so the sorts are performed in order from least
@@ -404,21 +407,22 @@ class Page:
         # ordered from lowest-ranked ancestor to highest.
         self.membership_list = []
 
-        # A set of color names that the page is linked from.
-        # (Initially this is just the flower colors,
-        # but container pages get added later.)
-        self.color = set()
+        # traits and values (e.g. color: pink, pale purple)
+        self.trait_values = {} # trait name -> set of trait values
 
-        # Keep track of which colors are actually used so that we can
-        # complain about the difference.
-        self.colors_used = set()
+        # Keep track of which trait values actually appear on a subset page
+        # so that we can complain about any unexpected values.
+        self.traits_used = {} # trait name -> set of trait values
 
-        # A list of color subset pages that this page is the primary for.
-        self.color_pages = []
+        # A list of filtered subset pages that this page is the parent of.
+        self.subset_pages = {} # trait name -> list of subset pages
 
         # If a page is a subset, backlink which page it is a subset of.
-        # (If subset_of_page gets assigned, subset_color will also get set,
-        # but we don't need subset_color otherwise.)
+        # If the value is not None, then the following additional variables
+        # are also assigned:
+        #   subset_trait
+        #   subset_value
+        #   subset_list_name
         self.subset_of_page = None
 
         self.taxon_id = None # iNaturalist taxon ID (stored as a string)
@@ -428,7 +432,9 @@ class Page:
         self.parks = {} # a dictionary of park_name : count
         self.month = [0] * 12
 
-        self.cum_obs_n = {} # color -> cumulative obs_n among all descendants
+        # cumulative obs_n among all descendants for a particular trait/value
+        # combination.  (trait and value may be both None.)
+        self.cum_obs_n = {} # trait -> value -> count
 
         self.glossary = None # the Glossary instance that applies to the page
 
@@ -813,7 +819,7 @@ class Page:
                     return ext_photo
             return None
 
-    def count_flowers(self, color=None, exclude_set=None):
+    def count_flowers(self, trait=None, value=None, exclude_set=None):
         top_of_count = exclude_set is None
 
         if top_of_count:
@@ -825,8 +831,8 @@ class Page:
             # (from recursion), then some subset of this page might
             # need to be excluded, so we re-perform the entire count
             # from scratch and *don't cache the result*.
-            if color in self.cum_obs_n:
-                return self.cum_obs_n[color]
+            if trait in self.cum_obs_n and value in self.cum_obs_n[trait]:
+                return self.cum_obs_n[trait][value]
             exclude_set = set()
 
         if self in exclude_set:
@@ -837,14 +843,16 @@ class Page:
         exclude_set.add(self)
 
         n = 0
-        if self.page_matches_color(color):
+        if self.page_matches_trait_value(trait, value):
             n += self.obs_n
         for child in self.child:
-            child_n = child.count_flowers(color, exclude_set)
+            child_n = child.count_flowers(trait, value, exclude_set)
             n += child_n
 
         if top_of_count:
-            self.cum_obs_n[color] = n
+            if trait not in self.cum_obs_n:
+                self.cum_obs_n[trait] = {}
+            self.cum_obs_n[trait][value] = n
 
         return n
 
@@ -900,6 +908,12 @@ class Page:
         # like it could be a scientific name, set it as the scientific name.
         if self.com and not self.sci and not self.name.islower():
             self.set_sci(self.name)
+
+        matchobj = re.search(r'^subset\s+(\S*)\s*:',
+                             self.txt, flags=re.MULTILINE)
+        if matchobj:
+            traits.add(matchobj.group(1))
+            print(matchobj.group(1))
 
     def canonical_rank(self, rank):
         if rank == 'self':
@@ -1065,28 +1079,32 @@ class Page:
                 self.species_key_incomplete = True
         return ''
 
-    def set_colors(self, color_str):
-        if self.color:
-            error(f'color is defined more than once for page {self.full()}')
+    def set_trait_values(self, trait, value_str):
+        if trait in self.trait_values:
+            error(f'{trait} is defined more than once for page {self.full()}')
 
-        self.color = set(split_strip(color_str, ','))
+        self.trait_values[trait] = set(split_strip(value_str, ','))
 
-    def record_subset_color(self, color, list_name, page_name):
+    def record_subset(self, trait, value, list_name, page_name):
         if list_name is None:
-            list_name = color
+            list_name = value
 
         page = find_page2(page_name, None)
         if not page:
-            page = Page(page_name, None, src='subset color in '+self.name+'.txt')
+            page = Page(page_name, None,
+                        src=f'subset {trait} in {self.name}.txt')
             page.no_sci = True
 
         page.subset_of_page = self
-        page.subset_color = color
+        page.subset_trait = trait
+        page.subset_value = value
         page.subset_list_name = list_name
 
         self.link_linn_child(page)
 
-        self.color_pages.append(page)
+        if trait not in self.subset_pages:
+            self.subset_pages[trait] = []
+        self.subset_pages[trait].append(page)
 
     def set_taxon_id(self, taxon_id):
         if taxon_id in taxon_id_page and taxon_id_page[taxon_id] != self:
@@ -1621,7 +1639,7 @@ class Page:
             self.rp_check('one_child',
                           f'{self.full()} has exactly one child')
 
-        if self.color and not self.jpg_list:
+        if self.trait_values and not self.jpg_list:
             self.rp_check('color_requires_photo',
                           f'page {self.full()} has a color assigned but has no photos')
 
@@ -1744,16 +1762,20 @@ class Page:
                                              matchobj.group(2))
                 continue
 
-            matchobj = re.match(r'color:\s*(.*?)\s*$', c)
+            matchobj = re.match(r'subset\s+(\S*)\s*:\s*(.*?)\s*(?:,\s*(.*?)\s*)?,\s*(.*?)\s*$', c)
             if matchobj:
-                data_object.set_colors(matchobj.group(1))
+                data_object.record_subset(matchobj.group(1),
+                                          matchobj.group(2),
+                                          matchobj.group(3),
+                                          matchobj.group(4))
                 continue
 
-            matchobj = re.match(r'subset color:\s*(.*?)\s*(?:,\s*(.*?)\s*)?,\s*(.*?)\s*$', c)
+            for trait in traits:
+                matchobj = re.match(rf'{trait}\s*:\s*(.*?)\s*$', c)
+                if matchobj:
+                    data_object.set_trait_values(trait, matchobj.group(1))
+                    break
             if matchobj:
-                data_object.record_subset_color(matchobj.group(1),
-                                                matchobj.group(2),
-                                                matchobj.group(3))
                 continue
 
             matchobj = re.match(r'list_hierarchy\s*$', c)
@@ -1835,17 +1857,19 @@ class Page:
             return ''
 
     # Create a link to a page that this page is a member of.
-    # Also include any color subsets of that page that this page is part of.
+    # Also include any trait subsets of that page that this page is part of.
     def member_of(self, ancestor):
-        color_list = []
-        for color_page in ancestor.color_pages:
-            if color_page.subset_color in self.color:
-                color_list.append(color_page.create_link(1, color_page.subset_list_name))
-        if color_list:
-            # When there is a color list, it makes the member line long
+        value_list = []
+        for trait in sorted(ancestor.subset_pages):
+            for subset_page in ancestor.subset_pages[trait]:
+                if (trait in self.trait_values and
+                    subset_page.subset_value in self.trait_values[trait]):
+                    value_list.append(subset_page.create_link(1, subset_page.subset_list_name))
+        if value_list:
+            # When there is a matching value list, it makes the member line long
             # and complicated.  Simplify it somewhat by using the ancestor's
             # short name instead of its full name.
-            return (', '.join(color_list) + ' in ' +
+            return (', '.join(value_list) + ' in ' +
                     ancestor.create_link(1, ancestor.format_short()))
         else:
             return ancestor.create_link(1)
@@ -1896,8 +1920,10 @@ class Page:
         else:
             return ''
 
-    def page_matches_color(self, color):
-        return (color is None or color in self.color)
+    def page_matches_trait_value(self, trait, value):
+        return (trait is None or
+                (trait in self.trait_values and
+                 value in self.trait_values[trait]))
 
     def count_matching_obs(self, obs):
         obs.count_matching_obs(self)
@@ -1905,7 +1931,7 @@ class Page:
     # Write the iNaturalist observation data.
     def write_obs(self, w, obs=None):
         if not obs:
-            obs = Obs(None)
+            obs = Obs(None, None)
             self.count_matching_obs(obs)
 
         if self.taxon_id:
@@ -2238,7 +2264,7 @@ class Page:
 
         if self.list_hierarchy:
             s = io.StringIO()
-            list_matches(s, [child], False, None, match_set)
+            list_matches(s, [child], False, None, None, match_set)
             return s.getvalue()
         elif not img:
             return '<p>' + link + '</p>\n' + text
@@ -2280,7 +2306,7 @@ class Page:
         # Use the text supplied in the text file if present.
         # Otherwise use the key text from its parent.
         # If the page's text file contains only metadata (e.g.
-        # scientific name or color) so that the remaining text is
+        # scientific name or trait value) so that the remaining text is
         # blank, then use the key text from its parent in that case, too.
         if re.search('\S', self.txt):
             s = self.txt
@@ -2530,16 +2556,18 @@ class Page:
                 # Subset pages don't have real children.
                 # Instead, we get the page that it is a subset of to write
                 # the appropriate subset of its own hierarchy.
-                self.subset_of_page.write_subset_hierarchy(w, self.subset_color, self.subset_page_list)
+                self.subset_of_page.write_subset_hierarchy(w, self.subset_trait, self.subset_value, self.subset_page_list)
 
                 # Since subset pages don't have real children, the normal
                 # observation count won't work properly, which means that
                 # the subset pages won't sort correctly (e.g. in pages.js).
                 # To fix this, we count the observations of the appropriate
-                # color and cache it as the normal observation count for the
-                # subset page.
-                n = self.subset_of_page.count_flowers(color=self.subset_color)
-                self.cum_obs_n[None] = n
+                # trait value and cache it as the normal observation count
+                # for the subset page.
+                n = self.subset_of_page.count_flowers(trait=self.subset_trait,
+                                                      value=self.subset_value)
+                self.cum_obs_n[None] = {}
+                self.cum_obs_n[None][None] = n
             else:
                 if self.jpg_list or self.ext_photo_list:
                     for jpg in self.jpg_list:
@@ -2588,13 +2616,13 @@ class Page:
                 genus_page_list[genus] = []
             genus_page_list[genus].append(self)
 
-    def write_subset_hierarchy(self, w, color, page_list):
+    def write_subset_hierarchy(self, w, trait, value, page_list):
         # We write out the matches to a string first so that we can get
-        # the total number of keys and flowers in the list (including children).
+        # the total statistics across the matches (including children).
         s = io.StringIO()
-        list_matches(s, page_list, False, color, set())
+        list_matches(s, page_list, False, trait, value, set())
 
-        obs = Obs(color)
+        obs = Obs(trait, value)
         self.count_matching_obs(obs)
         w.write(s.getvalue())
         w.write('<hr>\n')
@@ -2607,47 +2635,49 @@ class Page:
 ###############################################################################
 # Related helper functions are below.
 
-# Find all flowers that match the specified color.
+# Find all flowers that match the specified trait's value.
 # Also find all pages that include *multiple* child pages that match.
 # If a parent includes multiple matching child pages, those child pages are
 # listed only under the parent and not individually.
 # If a parent includes only one matching child page, that child page is
 # listed individually, and the parent is not listed.
 #
-# If color is None, every page matches.
-def find_matches(page_subset, color):
+# If trait is None, every page matches.
+def find_matches(child_list, trait, value):
     match_list = []
-    for page in page_subset:
-        child_subset = find_matches(page.child, color)
-        if len(child_subset) == 1 and color is not None:
+    for page in child_list:
+        child_subset = find_matches(page.child, trait, value)
+        if len(child_subset) == 1 and trait is not None:
             # The page has only one matching child, so we add the child
             # directly to the list and not its parent.
             match_list.extend(child_subset)
-        elif page.page_matches_color(color) or child_subset:
+        elif page.page_matches_trait_value(trait, value) or child_subset:
             match_list.append(page)
-        page.colors_used.add(color)
+        if trait not in page.traits_used:
+            page.traits_used[trait] = set()
+        page.traits_used[trait].add(value)
     return match_list
 
 # match_set can be either a set or list of pages.
 # If indent is False, we'll sort them into a list by reverse order of
 # observation counts.  If indent is True, match_set must be a list, and
 # its order is retained.
-def list_matches(w, match_set, indent, color, seen_set):
-    if indent and not color:
+def list_matches(w, match_set, indent, trait, value, seen_set):
+    if indent and not trait:
         # We're under a parent with an ordered child list.  Retain its order.
         match_list = match_set
     else:
         # We're at the top level, so sort to put common pages first.
-        match_list = sort_pages(match_set, color=color)
+        match_list = sort_pages(match_set, trait=trait, value=value)
 
     for page in match_list:
-        if page.end_hierarchy and not color:
+        if page.end_hierarchy and not trait:
             child_matches = []
         else:
-            child_matches = find_matches(page.child, color)
+            child_matches = find_matches(page.child, trait, value)
         if child_matches:
             page.list_page(w, indent, child_matches)
-            list_matches(w, child_matches, True, color, seen_set)
+            list_matches(w, child_matches, True, trait, value, seen_set)
             w.write('</div>\n')
         else:
             page.list_page(w, indent, None)

@@ -1,8 +1,8 @@
 # Accumulate observation stats for one or more hierarchies of pages.
 #
-# A color is declared when the Obs object is created, and only pages
-# that match that color are counted.  If color is None, then all pages
-# are treated as matching.
+# A trait and value are declared when the Obs object is created, and
+# only pages that match that trait and value are counted.  If trait is
+# None, then all pages are treated as matching.
 #
 # In some cases, the counted stats are never written out to HTML.
 # Instead, only the 'n' count is used in order to sort pages.  This
@@ -26,9 +26,10 @@ def set_any_observations():
 class Obs:
     pass
 
-    def __init__(self, color):
+    def __init__(self, trait, value):
         self.match_set = set() # pages already searched, to avoid doublecounting
-        self.color = color # color being searched for
+        self.trait = trait # trait being searched for; may be None
+        self.value = value # trait value being searched for
 
         self.n = 0 # accumulated number of observations from observations.csv
         self.rg = 0 # number of research-grade observations as above
@@ -40,8 +41,8 @@ class Obs:
         self.leaf_unobs = 0 # number of leaf pages found without photos
 
     # Accumulate the observations for a page and all its children and add
-    # these to the current counts.  Each page must match the declared color
-    # in order to count.
+    # these to the current counts.  Each page must match the declared trait
+    # value in order to count.
     def count_matching_obs(self, page):
         if page in self.match_set: return
 
@@ -50,12 +51,7 @@ class Obs:
         for child in page.child:
             self.count_matching_obs(child)
 
-        # If a container page contains exactly one descendant with a matching
-        # color, the container isn't listed on the color page, and the color
-        # isn't listed in page_color for the page.  Therefore, we follow all
-        # child links blindly and only compare the color when we reach a flower
-        # with an observation count.
-        if page.page_matches_color(self.color):
+        if page.page_matches_trait_value(self.trait, self.value):
             self.match_set.add(page)
             self.n += page.obs_n
             self.rg += page.obs_rg

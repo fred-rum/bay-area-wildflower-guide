@@ -613,14 +613,21 @@ for page in page_array:
         # colors of all children.  We have to do this now so that every page
         # knows what subset pages it is a member of.
         primary = page.subset_of_page
-        page.subset_page_list = find_matches(primary.child, page.subset_color)
+        page.subset_page_list = find_matches(primary.child,
+                                             page.subset_trait,
+                                             page.subset_value)
 
 for page in page_array:
-    colors_not_used = ', '.join(page.color - page.colors_used)
-    if colors_not_used:
-        error(f'{page.full()} has no use for these colors: {colors_not_used}')
+    for trait in sorted(page.trait_values):
+        if trait not in page.traits_used:
+            error(f'no page makes use of trait: {trait} defined in {page.full()}')
+        else:
+            values_not_used = ', '.join(page.trait_values[trait] -
+                                        page.traits_used[trait])
+        if values_not_used:
+            error(f'no page makes use of these {trait} values defined in {page.full()}: {values_not_used}')
 
-    if  page.jpg_list and not page.color:
+    if  page.jpg_list and not page.trait_values:
         page.rp_check('photo_requires_color',
                       f'page {page.full()} has photos but no assigned or propagated color')
 
