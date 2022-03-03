@@ -413,7 +413,7 @@ class Page:
         # complain about the difference.
         self.colors_used = set()
 
-        # A list of color pages that this page is the primary for.
+        # A list of color subset pages that this page is the primary for.
         self.color_pages = []
 
         # If a page is a subset, backlink which page it is a subset of.
@@ -1071,10 +1071,6 @@ class Page:
 
         self.color = set(split_strip(color_str, ','))
 
-        # record the original order of colors in case we want to write
-        # it out.
-        self.color_txt = color_str
-
     def record_subset_color(self, color, list_name, page_name):
         if list_name is None:
             list_name = color
@@ -1625,8 +1621,6 @@ class Page:
             self.rp_check('one_child',
                           f'{self.full()} has exactly one child')
 
-        # We check for excess colors before propagating color to
-        # parent pages that might not have photos.
         if self.color and not self.jpg_list:
             self.rp_check('color_requires_photo',
                           f'page {self.full()} has a color assigned but has no photos')
@@ -2629,16 +2623,7 @@ def find_matches(page_subset, color):
             # The page has only one matching child, so we add the child
             # directly to the list and not its parent.
             match_list.extend(child_subset)
-
-            # But the parent still gets the color assignment.
-            #page.color.add(color)
-        elif child_subset:
-            match_list.append(page)
-            if color is not None:
-                # Record this container page's newly discovered color.
-                #page.color.add(color)
-                pass
-        elif page.page_matches_color(color):
+        elif page.page_matches_color(color) or child_subset:
             match_list.append(page)
         page.colors_used.add(color)
     return match_list
