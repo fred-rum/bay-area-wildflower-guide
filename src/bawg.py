@@ -124,11 +124,11 @@ def parse_names():
         page.parse_names()
         page.parse_glossary()
 
-    init_props()
-    for page in page_array:
-        page.parse_properties()
-
 parse_names()
+
+# Now that we know the names of all the traits, we can initialize the
+# list of properties that we support.
+init_props()
 
 def print_trees():
     tree_taxon = arg('-tree_taxon')

@@ -938,111 +938,85 @@ class Page:
                 fatal(f'unrecognized rank "{rank}" used in {self.full()}')
             return Rank[rank]
 
-    def parse_properties(self):
-        def repl_is_top(matchobj):
-            self.is_top = True
-            return ''
+    def declare_property(self, action, prop, rank_str):
+        if not action:
+            action = 'do'
 
-        def repl_default_ancestor(matchobj):
-            global default_ancestor
-            if default_ancestor:
-                error(f'default_ancestor specified for both {default_ancestor.full()} and {self.full()}')
+        if action not in props[prop]:
+            error(f'{self.full()} - action not supported for property in "{action} {prop}')
+
+        rank_range_list = split_strip(rank_str, ',')
+
+        rank_set = set()
+        for rank_range in rank_range_list:
+            if '-' in rank_range:
+                matchobj = re.match(r'(.*?)(/?)-(/?)(.*)', rank_range)
+                (rank1, rank1_excl,
+                 rank2_excl, rank2) = (matchobj.group(1), matchobj.group(2),
+                                       matchobj.group(3), matchobj.group(4))
+
+                # If used in a rank range, 'self' is translated into the
+                # page's actual rank if possible.  But if the current
+                # page is unranked, 'self' is left as 'self'.
+                rank1 = self.canonical_rank(rank1)
+                rank2 = self.canonical_rank(rank2)
+
+                # rank1 can be larger or smaller than rank2.  Reorder it
+                # here so that rank2 is the larger one.
+                if rank1 == 'self' or rank1 > rank2:
+                    (rank1, rank2) = (rank2, rank1)
+                    (rank1_excl, rank2_excl) = (rank2_excl, rank1_excl)
+
+                in_range = False
+                for rank in Rank: # iterate ranks from smallest to largest
+                    # Calculate in_range as exclusive.
+                    if rank == rank2:
+                        in_range = False
+
+                    # Include the current rank if it is within the
+                    # exclusive range or if it matches a non-exclusive
+                    # range boundary.
+                    if (in_range or
+                        (rank == rank1 and not rank1_excl) or
+                        (rank == rank2 and not rank2_excl)):
+                        rank_set.add(rank)
+
+                    # Calculate in_range as exclusive.
+                    if rank == rank1:
+                        in_range = True
+
+                # if rank2 is 'self', then we never found the end of the
+                # range.  This potentially includes a lot of upper ranks
+                # that won't be applied because property application only
+                # recurses through lower ranks, but that's OK and we'll
+                # (mostly) get what we want.  But the rank set still
+                # won't include the unranked current page, so we set its
+                # property manually here.
+                if rank2 == 'self' and not rank2_excl:
+                    self.assign_prop(prop, action)
             else:
-                default_ancestor = self
-            return ''
-
-        def repl_property(matchobj):
-            action = matchobj.group(1)
-            prop = matchobj.group(2)
-            rank_str = matchobj.group(3)
-
-            if not action:
-                action = 'do'
-
-            if action not in props[prop]:
-                error(f'{self.full()} - action not supported for property in "{action} {prop}')
-
-            rank_range_list = split_strip(rank_str, ',')
-
-            rank_set = set()
-            for rank_range in rank_range_list:
-                if '-' in rank_range:
-                    matchobj = re.match(r'(.*?)(/?)-(/?)(.*)', rank_range)
-                    (rank1, rank1_excl,
-                     rank2_excl, rank2) = (matchobj.group(1), matchobj.group(2),
-                                           matchobj.group(3), matchobj.group(4))
-
-                    # If used in a rank range, 'self' is translated into the
-                    # page's actual rank if possible.  But if the current
-                    # page is unranked, 'self' is left as 'self'.
-                    rank1 = self.canonical_rank(rank1)
-                    rank2 = self.canonical_rank(rank2)
-
-                    # rank1 can be larger or smaller than rank2.  Reorder it
-                    # here so that rank2 is the larger one.
-                    if rank1 == 'self' or rank1 > rank2:
-                        (rank1, rank2) = (rank2, rank1)
-                        (rank1_excl, rank2_excl) = (rank2_excl, rank1_excl)
-
-                    in_range = False
-                    for rank in Rank: # iterate ranks from smallest to largest
-                        # Calculate in_range as exclusive.
-                        if rank == rank2:
-                            in_range = False
-
-                        # Include the current rank if it is within the
-                        # exclusive range or if it matches a non-exclusive
-                        # range boundary.
-                        if (in_range or
-                            (rank == rank1 and not rank1_excl) or
-                            (rank == rank2 and not rank2_excl)):
-                            rank_set.add(rank)
-
-                        # Calculate in_range as exclusive.
-                        if rank == rank1:
-                            in_range = True
-
-                    # if rank2 is 'self', then we never found the end of the
-                    # range.  This potentially includes a lot of upper ranks
-                    # that won't be applied because property application only
-                    # recurses through lower ranks, but that's OK and we'll
-                    # (mostly) get what we want.  But the rank set still
-                    # won't include the unranked current page, so we set its
-                    # property manually here.
-                    if rank2 == 'self' and not rank2_excl:
-                        self.assign_prop(prop, action)
+                # Not a range, just a rank.
+                # For this case, 'self' is applied directly in case the
+                # current page does not have a rank.
+                rank = rank_range
+                if rank == 'none':
+                    # 'none' is expected to be used as the only assigned
+                    # rank, and it indicates that the property applies to
+                    # no ranks.  E.g. a higher taxon could declare
+                    # 'obs_requires_photo: genus-below', and a lower taxon
+                    # could override it with 'obs_requires_photo: none'.
+                    pass
+                elif rank == 'self':
+                    self.assign_prop(prop, action)
                 else:
-                    # Not a range, just a rank.
-                    # For this case, 'self' is applied directly in case the
-                    # current page does not have a rank.
-                    rank = rank_range
-                    if rank == 'none':
-                        # 'none' is expected to be used as the only assigned
-                        # rank, and it indicates that the property applies to
-                        # no ranks.  E.g. a higher taxon could declare
-                        # 'obs_requires_photo: genus-below', and a lower taxon
-                        # could override it with 'obs_requires_photo: none'.
-                        pass
-                    elif rank == 'self':
-                        self.assign_prop(prop, action)
-                    else:
-                        rank_set.add(self.canonical_rank(rank))
+                    rank_set.add(self.canonical_rank(rank))
 
-            # rank_set can be empty if the only listed ranks are 'none' or
-            # 'self'.  We record the rank_set whether it is populated or empty
-            # so that property propagation knows to stop at this level.
-            if prop not in self.decl_prop:
-                self.decl_prop[prop] = {}
-            self.decl_prop[prop][action] = rank_set
-
-        self.txt = re.sub(r'^is_top\s*?\n',
-                          repl_is_top, self.txt, flags=re.MULTILINE)
-
-        self.txt = re.sub(r'^default_ancestor\s*?\n',
-                          repl_default_ancestor, self.txt, flags=re.MULTILINE)
-
-        self.txt = re.sub(rf'^(?:(\w+) )?({prop_re})\s*:\s*(.*?)\s*?\n',
-                          repl_property, self.txt, flags=re.MULTILINE)
+        # rank_set can be empty if the only listed ranks are 'none' or
+        # 'self'.  We record the rank_set whether it is populated or empty
+        # so that property propagation knows to stop at this level.
+        if prop not in self.decl_prop:
+            self.decl_prop[prop] = {}
+        self.decl_prop[prop][action] = rank_set
 
     def parse_glossary(self):
         if re.search(r'^{([^-].*?)}', self.txt, flags=re.MULTILINE):
@@ -1801,6 +1775,27 @@ class Page:
             if matchobj:
                 data_object.set_sci_alt(matchobj.group(1),
                                         self.expand_genus(matchobj.group(2)))
+                continue
+
+            matchobj = re.match(r'is_top\s*$', c)
+            if matchobj:
+                data_object.is_top = True
+                continue
+
+            matchobj = re.match(r'default_ancestor\s*$', c)
+            if matchobj:
+                global default_ancestor
+                if default_ancestor:
+                    error(f'default_ancestor specified for both {default_ancestor.full()} and {data_object.full()}')
+                else:
+                    default_ancestor = self
+                continue
+
+            matchobj = re.match(rf'^(?:(\w+)\s+)?({prop_re})\s*:\s*(.*?)$', c)
+            if matchobj:
+                data_object.declare_property(matchobj.group(1),
+                                             matchobj.group(2),
+                                             matchobj.group(3))
                 continue
 
             matchobj = re.match(r'\s*(?:([^:\n]*?)\s*:\s*)?(https://(?:calphotos.berkeley.edu/|www.calflora.org/cgi-bin/noccdetail.cgi)[^\s]+)\s*?$', c)
