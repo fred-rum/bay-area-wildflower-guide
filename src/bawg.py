@@ -122,8 +122,12 @@ def parse_names():
     for page in page_array:
         page.remove_comments()
         page.parse_names()
-        page.parse_properties()
         page.parse_glossary()
+
+    init_props()
+    for page in page_array:
+        page.parse_properties()
+
 parse_names()
 
 def print_trees():
@@ -597,39 +601,10 @@ for page in page_array:
 parse_glossaries(top_list)
 
 for page in page_array:
-    # If children were linked to the page via the Linnaean hierarchy,
-    # they may be in a non-intuitive order.  We re-order them here.
-    # This includes both adjusting their order in page.child and
-    # also adding links to them in the txt.
-    if page.non_txt_children:
-        page.child = page.child[:-len(page.non_txt_children)]
-        for child in sort_pages(page.non_txt_children):
-            page.child.append(child)
-            if not page.list_hierarchy:
-                page.txt += f'==\n'
-
-    if page.subset_of_page:
-        # Get the top layer of pages in the subset, which also populates the
-        # colors of all children.  We have to do this now so that every page
-        # knows what subset pages it is a member of.
-        primary = page.subset_of_page
-        page.subset_page_list = find_matches(primary.child,
-                                             page.subset_trait,
-                                             page.subset_value)
+    page.sort_children()
 
 for page in page_array:
-    for trait in sorted(page.trait_values):
-        if trait not in page.traits_used:
-            error(f'no page makes use of trait: {trait} defined in {page.full()}')
-        else:
-            values_not_used = ', '.join(page.trait_values[trait] -
-                                        page.traits_used[trait])
-        if values_not_used:
-            error(f'no page makes use of these {trait} values defined in {page.full()}: {values_not_used}')
-
-    if  page.jpg_list and not page.trait_values:
-        page.rp_check('photo_requires_color',
-                      f'page {page.full()} has photos but no assigned or propagated color')
+    page.check_traits()
 
 if arg('-tree') == '13':
     print_trees()

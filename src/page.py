@@ -35,12 +35,14 @@ group_child_set = {} # rank -> group -> set of top-level pages in group
 for rank in Rank:
     group_child_set[rank] = {}
 
+traits = set()
+
+# Each props value can be either a set of allowable property types (e.g. 'do')
+# or an abbreviation (e.g. 'd').
 props = {
     'create': 'd',
     'link': 'd',
     'member_link': 'd',
-    'photo_requires_color': 'f',
-    'color_requires_photo': 'f',
     'obs_requires_photo': 'f',
     'photo_requires_bugid': 'f',
     'one_child': 'f',
@@ -64,23 +66,32 @@ props = {
     'default_completeness': set(('do', 'caution', 'warn', 'error')),
 }
 
-traits = set()
-
-for prop in props:
-    action_set = props[prop]
-    if isinstance(action_set, str):
-        action_str = action_set
-        action_set = set()
-        if 'd' in action_str:
-            action_set.add('do')
-        if 'f' in action_str:
-            action_set.update({'warn', 'error'})
-        props[prop] = action_set
-
-prop_re = '|'.join(props.keys())
-
-
 ###############################################################################
+
+# Prepare a list of properties that can be applied.
+# The initial list is in props, above.
+# We extend it with additional properties for each defined trait.
+# Finally, we unroll the type abbreviations and generate a regular expression
+# to search for properties.
+def init_props():
+    global prop_re
+
+    for trait in traits:
+        props[f'photo_requires_{trait}'] = 'f'
+        props[f'{trait}_requires_photo'] = 'f'
+
+    for prop in props:
+        action_set = props[prop]
+        if isinstance(action_set, str):
+            action_str = action_set
+            action_set = set()
+            if 'd' in action_str:
+                action_set.add('do')
+            if 'f' in action_str:
+                action_set.update({'warn', 'error'})
+            props[prop] = action_set
+
+    prop_re = '|'.join(props.keys())
 
 def get_default_ancestor():
     return default_ancestor
@@ -913,7 +924,6 @@ class Page:
                              self.txt, flags=re.MULTILINE)
         if matchobj:
             traits.add(matchobj.group(1))
-            print(matchobj.group(1))
 
     def canonical_rank(self, rank):
         if rank == 'self':
@@ -1587,6 +1597,42 @@ class Page:
                 for child in potential_link_set:
                     self.assign_child(child)
 
+    def sort_children(self):
+        # If children were linked to the page via the Linnaean hierarchy,
+        # they may be in a non-intuitive order.  We re-order them here.
+        # This includes both adjusting their order in self.child and
+        # also adding links to them in the txt.
+        if self.non_txt_children:
+            self.child = self.child[:-len(self.non_txt_children)]
+            for child in sort_pages(self.non_txt_children):
+                self.child.append(child)
+                if not self.list_hierarchy:
+                    self.txt += f'==\n'
+
+        if self.subset_of_page:
+            # Get the top layer of pages in the subset.
+            # This no longer propagates traits, so I don't know if this code
+            # still needs to be done here or whether it could be elsewhere.
+            primary = self.subset_of_page
+            self.subset_page_list = find_matches(primary.child,
+                                                 self.subset_trait,
+                                                 self.subset_value)
+
+    def check_traits(self):
+        for trait in sorted(self.trait_values):
+            if trait not in self.traits_used:
+                error(f'no page makes use of trait: {trait} defined in {self.full()}')
+            else:
+                values_not_used = ', '.join(self.trait_values[trait] -
+                                            self.traits_used[trait])
+            if values_not_used:
+                error(f'no page makes use of these {trait} values defined in {self.full()}: {values_not_used}')
+
+        for trait in traits:
+            if self.jpg_list and trait not in self.trait_values:
+                self.rp_check(f'photo_requires_{trait}',
+                              f'page {self.full()} has photos but no assigned {trait}')
+
     # Apply properties not related to link creation.
     def apply_most_props(self):
         self.apply_prop_member()
@@ -1639,9 +1685,10 @@ class Page:
             self.rp_check('one_child',
                           f'{self.full()} has exactly one child')
 
-        if self.trait_values and not self.jpg_list:
-            self.rp_check('color_requires_photo',
-                          f'page {self.full()} has a color assigned but has no photos')
+        for trait in sorted(traits):
+            if trait in self.trait_values and not self.jpg_list:
+                self.rp_check(f'{trait}_requires_photo',
+                              f'page {self.full()} has a {trait} assigned but has no photos')
 
     def expand_genus(self, sci):
         if len(sci) > 3 and sci[1:3] == '. ':
