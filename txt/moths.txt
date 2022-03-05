@@ -2,7 +2,7 @@ sci:n/a
 
 Moths aren't all in the same clade.
 
-==clark's sphinx:Proserpinus clarkiae
+==*clark's sphinx:Proserpinus clarkiae
 bug:65845
 
 ==white-lined sphinx:Hyles lineata

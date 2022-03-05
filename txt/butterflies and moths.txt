@@ -1,0 +1,7 @@
+sci:order Lepidoptera
+
+==butterflies
+. antennae are club-shaped with a long shaft and a bulb at the end
+
+==moths
+. antennae are feathery or saw-edged

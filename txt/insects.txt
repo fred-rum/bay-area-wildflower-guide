@@ -4,9 +4,7 @@ warn photo_requires_bugid: genus-below
 
 There is a <a href="insect glossary.html">glossary</a> for insects.
 
-==butterflies
-
-==moths
+==butterflies and moths
 
 ==bees
 

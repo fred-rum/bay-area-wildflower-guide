@@ -1232,7 +1232,12 @@ is entirely overwritten (e.g. the filename is ignored in favor of com:
 and sci:).  And it doesn't make the code any more robust than
 currently.
 
-replace spaces in URLs with +
-
 key to buckthorns
-fix glossary for gall insects
+fix glossary for gall insects (allow multiple?)
+
+allow extension on either name for a child
+match by selected name & extension, or
+  if no match, by extension only, but
+    if multiple matches, error
+separately, I could allow pages free choices of photos,
+  but that's a task for another day.
