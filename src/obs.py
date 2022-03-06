@@ -65,7 +65,7 @@ class Obs:
             if page.child:
                 if page.has_child_key:
                     self.key += 1
-                if page.jpg_list and self.leaf_obs == old_leaf_obs:
+                if page.photo_dict and self.leaf_obs == old_leaf_obs:
                     # If a page is both a key and an observed flower and none
                     # of its descendents is observed, then treat it as if one
                     # of its descendents is observed instead.
@@ -74,7 +74,7 @@ class Obs:
                     # different species, so we ignore the key photos.
                     self.leaf_obs += 1
                     self.leaf_unobs -= 1
-            elif page.jpg_list:
+            elif page.photo_dict:
                 self.leaf_obs += 1
             else:
                 self.leaf_unobs += 1

@@ -7,11 +7,6 @@ from page import *
 
 old_thumb_set = get_file_set(f'thumbs', 'jpg')
 
-def get_name_from_jpg(jpg):
-    name = re.sub(r',([-0-9]\S*|)$', r'', jpg)
-
-    return name
-
 # Compare the photos directory with the thumbs directory.
 # If a file exists in photos and not thumbs, create it.
 # If a file is newer in photos than in thumbs, re-create it.

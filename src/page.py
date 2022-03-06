@@ -251,6 +251,14 @@ def looser_complete(one, two):
         else:
             return one
 
+def separate_name_and_suffix(name):
+    # this always matches something, although the suffix may be empty
+    matchobj = re.match(r'(.*?)\s*(,[-0-9][^,:]*|,)?$', name)
+    name = matchobj.group(1)
+    suffix = matchobj.group(2) or ''
+    return name, suffix
+
+
 
 ###############################################################################
 
@@ -380,7 +388,7 @@ class Page:
 
         self.txt = ''
         self.key_txt = ''
-        self.jpg_list = [] # an ordered list of jpg names
+        self.photo_dict = {} # suffix -> photo filename (including suffix)
 
         # rep_jpg names a jpg that will represent the page in any
         # parent listing.
@@ -783,10 +791,13 @@ class Page:
     def get_url(self):
         return url(self.get_filename())
 
-    def add_jpg(self, jpg):
-        self.jpg_list.append(jpg)
+    def add_photo(self, filename, suffix):
+        if suffix in self.photo_dict:
+            error(f'suffix of "{filename}" conflicts with "{self.photo_dict[suffix]}"')
+        else:
+            self.photo_dict[suffix] = filename
 
-    def get_jpg(self, set_rep_jpg=True, origin=None):
+    def get_jpg(self, suffix, set_rep_jpg=True, origin=None):
         if self == origin:
             error(f'circular get_jpg() loop through {self.full()}')
             return None
@@ -802,15 +813,22 @@ class Page:
             if isinstance(self.rep_child, str):
                 rep = find_page1(self.rep_child)
             if rep:
-                jpg = rep.get_jpg(set_rep_jpg, origin)
+                jpg = rep.get_jpg(suffix, set_rep_jpg, origin)
             else:
                 error(f'unrecognized rep: {self.rep_child} in {self.full()}')
-        elif self.jpg_list:
-            jpg = self.jpg_list[0]
+        elif suffix:
+            if suffix in self.photo_dict:
+                jpg = self.photo_dict[suffix]
+            else:
+                error(f'unrecognized suffix "{suffix}" in "{self.full()}"')
+                # leave jpg = None
+        elif self.photo_dict:
+            first_suffix = sorted(self.photo_dict)[0]
+            jpg = self.photo_dict[first_suffix]
         else:
             # Search this key page's children for a jpg to use.
             for child in self.child:
-                jpg = child.get_jpg(set_rep_jpg, origin)
+                jpg = child.get_jpg('', set_rep_jpg, origin)
                 if jpg:
                     break
 
@@ -1550,7 +1568,7 @@ class Page:
     def apply_prop_link(self):
         if ((self.shadow and self.rp_do('create')) or
             (not self.shadow and self.rp_do('link'))):
-            # Check for Linaean descendants that can potentially linked to
+            # Check for Linaean descendants that can potentially be linked to
             # this parent.
             potential_link_set = set()
             for child in self.linn_child:
@@ -1604,7 +1622,7 @@ class Page:
                 error(f'no page makes use of these {trait} values defined in {self.full()}: {values_not_used}')
 
         for trait in traits:
-            if self.jpg_list and trait not in self.trait_values:
+            if self.photo_dict and trait not in self.trait_values:
                 self.rp_check(f'photo_requires_{trait}',
                               f'page {self.full()} has photos but no assigned {trait}')
 
@@ -1648,11 +1666,11 @@ class Page:
             # None of these checks apply to shadow pages.
             return
 
-        if self.count_flowers() and not self.get_jpg(set_rep_jpg=False):
+        if self.count_flowers() and not self.get_jpg('', set_rep_jpg=False):
             self.rp_check('obs_requires_photo',
                           f'{self.full()} is observed but has no photos')
 
-        if self.jpg_list and not self.bugguide_id:
+        if self.photo_dict and not self.bugguide_id:
             self.rp_check('photo_requires_bugid',
                           f'{self.full()} has photos but has no bugguide ID')
 
@@ -1661,7 +1679,7 @@ class Page:
                           f'{self.full()} has exactly one child')
 
         for trait in sorted(traits):
-            if trait in self.trait_values and not self.jpg_list:
+            if trait in self.trait_values and not self.photo_dict:
                 self.rp_check(f'{trait}_requires_photo',
                               f'page {self.full()} has a {trait} assigned but has no photos')
 
@@ -1700,12 +1718,19 @@ class Page:
             #   The genus can also be abbreviated as '[capital letter]. '
             is_rep = matchobj.group(1)
             com = matchobj.group(2)
-            suffix = matchobj.group(3)
+            com_suffix = matchobj.group(3)
             sci = matchobj.group(4)
+            sci_suffix = matchobj.group(5)
 
-            if not suffix:
+            if com_suffix:
+                if sci_suffix:
+                    error(f'Two suffixes used in child declaration in page "{self.full()}"')
+                suffix = com_suffix
+            elif sci_suffix:
+                suffix = sci_suffix
+            else:
                 suffix = ''
-
+                
             if not sci:
                 if is_sci(com):
                     sci = com
@@ -1744,11 +1769,13 @@ class Page:
         for c in self.txt.split('\n'):
             # Look for a child declaration:
             #   ==
-            #   common name: ([^:]*?)
-            #   optional jpg suffix: (,[-0-9]\S*|)?
+            #   optional asterix denoting a representative child: *
+            #   common name (or scientific name): ([^:]*?)
+            #   optional jpg suffix: (,[-0-9][^,:]*|,)?
             #   optional colon then scientific name: (?::\s*(.+?))?
+            #     followed by optional jpg suffix: (,[-0-9][^,:]*|,)?
             # All can be separated by whitespace: \s*
-            matchobj = re.match(r'==\s*(\*?)\s*([^:]*?)\s*(,[-0-9]\S*|)?\s*(?::\s*(.+?))?\s*$', c)
+            matchobj = re.match(r'==\s*(\*?)\s*([^:]*?)\s*(,[-0-9][^,:]*|,)?\s*(?::\s*(.+?)\s*(,[-0-9][^,:]*|,)?)?\s*$', c)
             if matchobj:
                 c_list.append(repl_child(matchobj))
                 data_object = self.child[-1]
@@ -1874,7 +1901,7 @@ class Page:
             return 'parent'
         elif self.child or self.subset_of_page:
             return 'family'
-        elif self.jpg_list:
+        elif self.photo_dict:
             return 'leaf'
         else:
             return 'unobs'
@@ -2167,10 +2194,8 @@ class Page:
 
         w.write(f'<div class="list-box{indent_class}">')
 
-        if self.jpg_list:
-            jpg = self.jpg_list[0]
-        elif self.end_hierarchy:
-            jpg = self.get_jpg()
+        if self.photo_dict or self.end_hierarchy:
+            jpg = self.get_jpg('')
         else:
             jpg = None
 
@@ -2250,9 +2275,11 @@ class Page:
     def parse_child_and_key(self, child, suffix, text, match_set):
         def repl_example(matchobj):
             suffix = matchobj.group(1)
-            jpg = child.name + suffix
-            if jpg not in child.jpg_list:
+            if suffix in child.photo_dict:
+                jpg = child.photo_dict[suffix]
+            else:
                 error(f'Broken [example{suffix}] for child {child.full()} in {self.full()}')
+                jpg = suffix
             return f'<a class="leaf" href="../photos/{url(jpg)}.jpg">[example]</a>'
 
         # If the key includes '[example,<suffix>]', create an [example]
@@ -2275,15 +2302,7 @@ class Page:
         link = child.create_link(2)
 
         name = child.name
-        jpg = None
-        if suffix:
-            if name + suffix in jpg_files:
-                jpg = name + suffix
-            else:
-                error(name + suffix + '.jpg not found on page ' + name)
-
-        if not jpg:
-            jpg = child.get_jpg()
+        jpg = child.get_jpg(suffix)
 
         if not jpg:
             ext_photo = child.get_ext_photo()
@@ -2612,8 +2631,9 @@ class Page:
                 self.cum_obs_n[None] = {}
                 self.cum_obs_n[None][None] = n
             else:
-                if self.jpg_list or self.ext_photo_list:
-                    for jpg in self.jpg_list:
+                if self.photo_dict or self.ext_photo_list:
+                    for suffix in sorted(self.photo_dict):
+                        jpg = self.photo_dict[suffix]
                         # Do not put newlines between jpgs because that would
                         # put an unwanted text space between them in addition
                         # to their desired margin.
@@ -2641,7 +2661,7 @@ class Page:
 
                 w.write(self.txt)
 
-                if self.jpg_list or self.ext_photo_list or self.txt:
+                if self.photo_dict or self.ext_photo_list or self.txt:
                     w.write('<hr>\n')
 
                 self.write_obs(w)

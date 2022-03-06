@@ -169,14 +169,14 @@ if arg('-steps'):
 # Create a blank page for all unassociated jpgs.
 def assign_jpgs():
     for jpg in sorted(jpg_files):
-        name = get_name_from_jpg(jpg)
-        if name == '':
+        name,suffix = separate_name_and_suffix(jpg)
+        if not name:
             error(f'No name for {jpg}')
         else:
             page = find_page1(name)
             if not page:
                 page = Page(name, src=jpg+'.jpg')
-            page.add_jpg(jpg)
+            page.add_photo(jpg, suffix)
 
 assign_jpgs()
 
@@ -214,7 +214,7 @@ if arg('-tree') == '4':
     print_trees()
 
 if arg('-steps'):
-    info('Step 5: Update Linnaean links')
+    info('Step 5: Update taxonomic links')
 
 # Linnaean descendants links are automatically created whenever a page
 # is assigned a child, but this isn't reliable during initial child
@@ -703,7 +703,7 @@ with open(search_file, 'w', encoding='utf-8') as w:
             else:
                 w.write(',x:"f"')
         else:
-            if page.jpg_list:
+            if page.photo_dict:
                 w.write(',x:"o"')
             else:
                 w.write(',x:"u"')
