@@ -381,7 +381,7 @@ class Page:
         self.has_child_key = False
 
         self.ext_photo_list = [] # list of (text, calphotos_link) tuples
-        self.genus_complete = None # indicates the completeness of the genus
+        self.genus_complete = None # indicates the completeness of the genus+
         self.genus_key_incomplete = False # indicates if the key is complete
         self.species_complete = None # the same for the species
         self.species_key_incomplete = False
@@ -1306,10 +1306,8 @@ class Page:
     # guaranteed to be present.
     def add_linn_parent(self, rank, name, from_inat=False):
         if is_sci(name):
-            if rank > Rank.genus:
+            if rank >= Rank.genus:
                 elab = f'{rank.name} {name}'
-            elif rank == Rank.genus:
-                elab = f'{name} spp.'
             else:
                 # A species name is no different when elaborated.
                 # A parent would never be a subspecies or variant.
@@ -1581,13 +1579,10 @@ class Page:
                 potential_link_set and
                 self.rp_do('create')):
                 self.promote_to_real()
-                self.non_txt_children = potential_link_set
-                for child in potential_link_set:
-                    self.assign_child(child)
-            elif not self.shadow and self.rp_do('link'):
-                self.non_txt_children = potential_link_set
-                for child in potential_link_set:
-                    self.assign_child(child)
+
+            self.non_txt_children = potential_link_set
+            for child in potential_link_set:
+                self.assign_child(child)
 
     def sort_children(self):
         # If children were linked to the page via the Linnaean hierarchy,
@@ -2391,7 +2386,7 @@ class Page:
         return True
 
     def taxon_unknown_completion(self):
-        return ((self.rank is Rank.genus and self.genus_complete not in ('hist', 'rare', 'hist/rare', 'more')) or
+        return ((self.rank >= Rank.genus and self.genus_complete not in ('hist', 'rare', 'hist/rare', 'more')) or
                 (self.rank is Rank.species and self.species_complete not in ('hist', 'rare', 'hist/rare', 'more', 'uncat')))
 
     def lower_complete(self):

@@ -73,13 +73,6 @@ def fix_elab(elab):
         elab = 'genus ' + elab[:-5]
     return elab
 
-# Find a page by its filename.
-def find_name(name):
-    if name in name_page:
-        return name_page[name]
-    else:
-        return None
-
 # Find a page by its taxonid (as a string, despite its numeric appearance).
 # taxon_id may be None, in which case we expect to also return None.
 def find_taxon_id(taxon_id):
@@ -209,10 +202,10 @@ def find_sci(elab, from_inat=False):
 # If only one of taxon_id/com/elab is valid, then we search for the
 # corresponding name without any extra frills.
 def find_page2(com, elab, from_inat=False, taxon_id=None):
+    elab = fix_elab(elab)
+
     # taxon_id has first priority.
     page = find_taxon_id(taxon_id)
-
-    elab = fix_elab(elab)
 
     if not page:
         page = find_sci(elab, from_inat)

@@ -183,16 +183,16 @@ assign_jpgs()
 if arg('-tree') == '3':
     print_trees()
 
-def read_group_names(f):
-    group_names = yaml.safe_load(f)
-    create_group_pages(group_names)
+def read_taxon_names(f):
+    taxon_names = yaml.safe_load(f)
+    create_taxon_pages(taxon_names)
 
-def create_group_pages(d, prefix=''):
+def create_taxon_pages(d, prefix=''):
     for sci, com in d.items():
         if isinstance(com, dict):
             d = com
             prefix = sci + ' '
-            create_group_pages(d, prefix)
+            create_taxon_pages(d, prefix)
         else:
             if sci == '':
                 elab = prefix[:-1] # remove the trailing space
@@ -202,13 +202,13 @@ def create_group_pages(d, prefix=''):
                 com = None
             page = find_page2(com, elab)
             if not page:
-                page = Page(com, elab, shadow=True, src='group_names.yaml')
+                page = Page(com, elab, shadow=True, src='taxon_names.yaml')
             #info(f'{page.com} <-> {page.elab}')
 
 if arg('-steps'):
-    info('Step 4: Parse group_names.yaml')
+    info('Step 4: Parse taxon_names.yaml')
 
-read_data_file('group_names.yaml', read_group_names)
+read_data_file('taxon_names.yaml', read_taxon_names)
 
 if arg('-tree') == '4':
     print_trees()
@@ -273,7 +273,7 @@ def read_obs_chains(f):
         # can't (yet) support it cleanly.  Note that I *don't* use
         # the r'' string format here because I want the \N to be
         # parsed during string parsing, not during RE parsing.
-        sci = re.sub('\N{MULTIPLICATION SIGN} ', r'', sci)
+        sci = re.sub('\N{MULTIPLICATION SIGN} ', r'X', sci)
 
         sci_words = sci.split(' ')
         if get_field('taxon_subspecies_name'):
@@ -288,53 +288,75 @@ def read_obs_chains(f):
         if com:
             com = com.lower()
 
-        page = find_page2(com, sci, from_inat=True, taxon_id=taxon_id)
-
-        # if find_page2() finds a match, it automatically sets the
-        # taxon_id for the page if it didn't have it already.
-
-        # if find_page2() didn't find a match, it returns None.
-        # We'll create a shadow page for it below, once we've figured
-        # out its taxonomical rank.
-
+        found_lowest_level = False
         try:
             # Read the taxonomic chain from observations.csv and create
             # Linnaean links accordingly.
             for rank in Rank:
                 group = get_field(f'taxon_{rank.name}_name')
+
+                # ignore an empty group string
                 if not group:
-                    # ignore an empty group string
                     continue
 
-                if not page:
-                    # Figure out the taxon's rank and create a page for it.
-
-                    if not page and ' ' in sci:
+                # The first non-empty group that is found usually tells us
+                # the rank of the observed taxon.  Find or create a page
+                # with the appropriate rank.
+                if not found_lowest_level:
+                    if ' ' in sci:
                         # If the scientific name has at least one space,
-                        # then we can infer its rank directly from its name.
+                        # then it is a species, subspecies, or variety that
+                        # should have already been elaborated as necessary.
                         pass
                     elif group == orig_sci:
                         # If the first name in the taxonomic chain matches
                         # the observed taxon name, then it directly tells
                         # us the taxon rank.
-                        if rank is Rank.genus:
-                            sci = f'{sci} spp.'
-                        else:
-                            sci = f'{rank.name} {sci}'
+                        sci = f'{rank.name} {sci}'
                     else:
                         # If the first name in the taxonomic chain doesn't
                         # match the observed taxon name, then the observed
-                        # taxon must be an unrecognized rank.  On the
-                        # assumption that the observation will get promoted
-                        # to a higher-level taxon, we just fudge it here
-                        # by pretending it's the lowest rank.
-                        sci = f'below {sci}'
+                        # taxon must be an unrecognized rank.  Try to find
+                        # a matching page of any rank.
+                        pass
 
-                    page = Page(com, sci, shadow=True, from_inat=True,
-                                src='observations.csv')
-                    page.set_taxon_id(taxon_id)
-                if group != orig_sci:
+                    # Check whether a page already exists for the taxon.
+                    # If find_page2() finds a match, it automatically sets the
+                    # taxon_id for the page if it didn't have it already.
+                    page = find_page2(com, sci, from_inat=True,
+                                      taxon_id=taxon_id)
+
+                    # if find_page2() didn't find a match, create a shadow
+                    # page for the taxon.
+                    if not page:
+                        if group != orig_sci and ' ' not in sci:
+                            # We have to create a page for a taxon of unknown
+                            # rank.  On the assumption that the observation
+                            # will get promoted to a higher-level taxon, we
+                            # fudge it here by pretending it's the lowest rank.
+                            sci = f'below {sci}'
+
+                        page = Page(com, sci, shadow=True, from_inat=True,
+                                    src='observations.csv')
+                        page.set_taxon_id(taxon_id)
+
+                    if group != orig_sci:
+                        # This is the lowest-level group we found, but
+                        # since the taxon name doesn't match, the observed
+                        # taxon must be at a lower level that isn't included
+                        # in the observations.csv ranks.
+                        #
+                        # Note: this test isn't mixed in with the above
+                        # 'group == orig_sci' tests because we don't want
+                        # to exclude species/subspecies/varieties here.
+                        found_lowest_level = True
+
+                if found_lowest_level:
+                    # add_linn_parent() adds the page for the parent
+                    # (if necessary) and the link from parent to child.
                     page = page.add_linn_parent(rank, group, from_inat=True)
+
+                found_lowest_level = True
         except FatalError:
             warn(f'was creating taxonomic chain from {page.full()}')
             raise
@@ -446,11 +468,11 @@ def read_observation_data(f):
         # name, I'd expect that there should be a taxon_id as well.
         if not sci or not taxon_id: continue
 
-        # Remove the {multiplication sign} used by hybrids since I can't
-        # (yet) support it cleanly.  Note that I *don't* use the r'' string
-        # format here because I want the \N to be parsed during string parsing,
-        # not during RE parsing.
-        sci = re.sub('\N{MULTIPLICATION SIGN} ', r'', sci)
+        # Remove the special 'x' sign used by hybrids since I
+        # can't (yet) support it cleanly.  Note that I *don't* use
+        # the r'' string format here because I want the \N to be
+        # parsed during string parsing, not during RE parsing.
+        sci = re.sub('\N{MULTIPLICATION SIGN} ', r'X', sci)
 
         com = get_field('common_name')
 
@@ -528,7 +550,6 @@ def read_observation_data(f):
             continue
 
         if (rg == 'casual' and
-            orig_page.rank <= Rank.species and
             not page.rp_do('casual_obs')):
             continue
 
@@ -662,7 +683,7 @@ parse_other_txt_files(other_files)
 def add_elab(elabs, elab):
     if elab and elab[0].isupper():
         # convert the hybrid symbol to a colon so that it is easy to recognize
-        # and also easy skip over during matching.
+        # and also easy to skip over during matching.
         elab = re.sub(' X', ' :', elab)
     if elab and elab != 'n/a' and elab not in elabs:
         elabs.append(unidecode(elab))

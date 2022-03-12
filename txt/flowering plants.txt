@@ -3,7 +3,7 @@ default_ancestor
 
 do create: family
 do member_link: self, family
-do link: self-subtribe
+do link: self-/genus
 #warn link: genus-species
 
 # every observation is expected to find a page

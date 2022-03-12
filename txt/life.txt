@@ -17,7 +17,7 @@ do outside_obs: species-below
 do outside_obs_promotion: species-below
 
 # every genus/species should be complete unless marked otherwise
-warn obs_promotion_without_x: genus,species
+warn obs_promotion_without_x: genus, species
 
 # but non-research-grade observations are allowed to be promoted
 # without complaint

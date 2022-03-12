@@ -187,12 +187,13 @@ def parse_txt(name, s, page, glossary):
         if new_list_depth > 0 and list_depth == 0:
             end_paragraph(True)
 
-        while list_depth < new_list_depth:
+        while new_list_depth > list_depth:
             # Open <ul> tags as part of the current line processing.
             # Thus, these tags appear after the previous paragraph is ended.
             c_list.append('<ul>')
             list_depth += 1
-        while list_depth > new_list_depth:
+
+        while new_list_depth < list_depth:
             # Close <ul> tags as if they'd be processed on a previous line.
             # Thus, we're ready to begin a new paragraph as appropriate.
             c_list.append('</ul>')
