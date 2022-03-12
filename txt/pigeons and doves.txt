@@ -1,3 +1,5 @@
-==rock pigeon:Columbia livia
+==*rock pigeon,2:Columba livia
 
 ==mourning dove:Zenaida macroura
+
+==band-tailed pigeon:Patagioenas fasciata

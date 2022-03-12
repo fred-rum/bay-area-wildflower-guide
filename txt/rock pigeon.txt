@@ -1,4 +1,4 @@
-sci:Columbia livia
+sci:Columba livia
 xx:more
 warn one_child: none
 
