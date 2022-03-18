@@ -1234,10 +1234,3 @@ currently.
 
 key to buckthorns
 fix glossary for gall insects (allow multiple?)
-
-allow extension on either name for a child
-match by selected name & extension, or
-  if no match, by extension only, but
-    if multiple matches, error
-separately, I could allow pages free choices of photos,
-  but that's a task for another day.

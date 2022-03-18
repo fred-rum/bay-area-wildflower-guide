@@ -18,3 +18,16 @@ bug:9033
 
 ==nomad bees:genus Nomada
 bug:5211
+
+==white-haired monk longhorn:Eucera frater ssp. albopilosa
+x:more
+xx:hist/rare
+bug:385405
+<b>Caution: ID unsure</b>
+
+==tripartite sweat bee:Halictus tripartitus
+x:more
+bug:94843
+
+==genus Panurginus
+bug:108931

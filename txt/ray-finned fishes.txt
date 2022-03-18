@@ -1,0 +1,11 @@
+# the "common sunfishes" ID doesn't seem worthwhile to add to the database
+warn obs_promotion_above_peers: species-below
+
+==western mosquitofish:Gambusia affinis
+. native to the Mississippi River drainage
+. introduced in California
+x:ba
+
+==largemouth bass:Micropterus salmoides
+
+==common carp:Cyprinus carpio

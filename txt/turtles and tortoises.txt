@@ -1,0 +1,7 @@
+==western pond turtle:Actinemys marmorata
+x:ca
+. only native land turtle
+
+==red-eared slider:Trachemys scripta ssp. elegans
+x:ba
+. commonly released pet

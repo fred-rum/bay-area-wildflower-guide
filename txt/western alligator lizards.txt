@@ -1,0 +1,13 @@
+sci:genus Elgaria
+x:ba
+
+Juveniles may be mistaken for skinks.  More ID tips are on <a href="http://www.californiaherps.com/identification/lizardsid/elgaria.id.html">California Herps</a>.
+
+==san francisco alligator lizard:Elgaria coerulea ssp. coerulea
+xx:ba
+. red or dark-colored iris
+. 16 rows of scales across the middle of the back
+
+==southern alligator lizard:Elgaria multicarinata
+. yellow or light-colored iris
+. 14 rows of scales across the middle of the back

@@ -1,0 +1,16 @@
+sci:genus Ariolimax
+end_hierarchy
+
+Thomas Everest has summarized the <a href="https://www.inaturalist.org/journal/thomaseverest/32164-a-note-on-banana-slugs">current research</a> regarding identification.  In the bay area, only {-Ariolimax buttoni} can have spots, although it can also appear without spots.  For observations without spots, Thomas prefers to infer a species from its location where the literature doesn't show an overlap.  Personally, I find the range data to be too sparse to be definitive, so I just mark unspotted individuals as {-genus Ariolimax}.
+
+==button's banana slug:A. buttoni
+. only local species that may have spots
+. SF, Marin, east bay, and (sparsely in) Santa Clara
+
+==california banana slug:A. californicus
+. Santa Cruz mountains from Pacifica to Big Basin
+
+==slender banana slug:A. dolichophallus
+. Santa Cruz County (~east of Boulder Creek)
+
+Do not lick.

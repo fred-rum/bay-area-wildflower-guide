@@ -1,0 +1,31 @@
+x:more
+
+Identification tips are from <a href="http://www.californiaherps.com/identification/snakesid/snakes.id.html">California Herps</a>.
+
+==garter snakes
+. one stripe on top plus stripes low on each side
+.. stripes may be faint or absent
+
+==pacific gopher snake:Pituophis catenifer ssp. catenifer
+x:ca
+xx:ba
+. no rattle
+. slightly triangular head, but not as wide as the rattle snake's
+. glossy body
+. round pupils
+
+==northern pacific rattlesnake:Crotalus oreganus ssp. oreganus
+x:ba
+xx:ba
+. rattle
+. wide triangular head
+. non-glossy body
+. vertical-slit pupils
+
+==kingsnakes
+
+==pacific ringneck snake:Diadophis punctatus ssp. amabilis
+x:ca
+xx:ba
+. gray/black back
+. orange belly and orange ring around neck

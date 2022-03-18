@@ -16,9 +16,6 @@ Key features:
 ==big berry manzanita:A. glauca
 color: white
 
-==common manzanita:A. manzanita
-color: white
-
 ==pallid manzanita:A. pallida
 color: white
 
@@ -28,3 +25,6 @@ color: white
 
 ==montara manzanita:A. montaraensis
 color: white, pink, red purple
+
+==hoary manzanita:Arctostaphylos canescens ssp. canescens
+color: pink, pale purple

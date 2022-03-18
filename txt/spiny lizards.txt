@@ -1,0 +1,17 @@
+sci:genus Sceloporus
+x:ba
+
+California Herps has a <a href="http://www.californiaherps.com/identification/lizardsid/fencesagebrushcomparison.html">comparison</a> between species.
+
+==western fence lizard:Sceloporus occidentalis
+xx:uncat
+. can appear nearly black when cold
+. longer and thicker spines on scales
+. common
+. From <a href="http://www.californiaherps.com/identification/lizardsid/smallspiny.id.html">California Herps</a>: "Researchers are finding that the traditional taxonomy of Sceloporus occidentalis is incorrect, therefore many herpetologists do not currently break the species down into subspecies."
+. traditionally, all local subspecies are coast range fence lizards, ssp. bocourtii.
+
+==western sagebrush lizard:Sceloporus graciosus ssp. gracilis
+. smaller scales on back
+. shorter and thinner spines on scales
+. very rare in the bay area

@@ -1,0 +1,14 @@
+sci:Thamnophis atratus
+xx:ba
+
+==santa cruz aquatic garter snake:ssp. atratus
+. yellow top stripe
+. faint yellow or missing side stripes
+. dark/black body with no red spots
+. Santa Cruz mountains
+
+==diablo range garter snake:ssp. zaxanthus
+. orange top stripe
+. yellow side stripes
+. dark/black body with no red spots
+. Diablo range

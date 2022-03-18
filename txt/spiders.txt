@@ -13,6 +13,11 @@ bug:1967
 
 ==jumping spiders
 
+==grass spiders:genus Agelenopsis
+bug:2001
+. some Agelenopsis species may be distinct enough to be identified by typical photos, but for many species in the genus, examination of the genitalia is needed to conclusively ID to species.
+
+
 ]
 [
 <h3>inside spiders</h3>

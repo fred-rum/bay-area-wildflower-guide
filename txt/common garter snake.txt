@@ -1,0 +1,12 @@
+sci:Thamnophis sirtalis
+xx:ba
+
+==san francisco garter snake:ssp. tetrataenia
+. cyan top and side stripes with continuous red stripes in between
+. dark/black body between stripes
+. Santa Cruz mountains
+
+==california red-sided garter snake:ssp. infernalis
+. yellow or tan top and side stripes
+. red spots on body and reddish head
+. Marin, east bay and south bay

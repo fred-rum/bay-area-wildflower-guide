@@ -4,4 +4,15 @@ end_hierarchy
 ==birds:class Aves
 end_hierarchy
 
+==reptiles:class Reptilia
+
+==amphibians:class Amphibia
+
 ==arthropods:phylum Arthropoda
+
+==ray-finned fishes:class Actinopterygii
+end_hierarchy
+
+==mollusks:phylum Mollusca
+
+==segmented worms:phylum Annelida

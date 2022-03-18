@@ -578,15 +578,16 @@ def read_observation_data(f):
                 # haven't documented.
                 if (not orig_page.has_real_linnaean_descendants() and
                     page.has_real_linnaean_descendants()):
-                    page.rp_check('obs_promotion_above_peers',
-                                  f'{orig_sci} observation promoted to {page.full()}')
+                    orig_page.rp_check('obs_promotion_above_peers',
+                                       f'{orig_page.full()} observation promoted to {page.full()}',
+                                       shadow_bad=True)
 
                 if page.taxon_unknown_completion():
                     page.rp_check('obs_promotion_without_x',
-                                  f'{orig_sci} observation promoted to {page.full()}')
+                                  f'{orig_page.full()} observation promoted to {page.full()}')
 
                 if not page.rp_do('obs_promotion',
-                                  f'{orig_sci} observation promoted to {page.full()}'):
+                                  f'{orig_page.full()} observation promoted to {page.full()}'):
                     continue
 
         page.obs_n += 1

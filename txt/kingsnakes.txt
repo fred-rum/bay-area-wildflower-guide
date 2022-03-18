@@ -1,0 +1,13 @@
+sci:genus Lampropeltis
+x:ba
+
+==california king snake:L. californiae
+xx:none
+. white/pale bands on a brown/black body
+. more common
+
+==california mountain kingsnake:L. zonata
+xx:none
+. white bands surrounded by black bands on an orange body
+. orange may dominate or may be minimal behind black bands
+. uncommon

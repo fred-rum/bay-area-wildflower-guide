@@ -13,6 +13,8 @@ sci:class Polypodiopsida
 ==western ladyfern
 . 2--3-pinnate (lobes at 3rd level may not be completely divided)
 
+==polypody ferns
+
 ==maidenhair ferns
 . 2--3-pinnate with <b>terminal leaflets palmate</b>, or
 . <b>palmate-pinnate</b>

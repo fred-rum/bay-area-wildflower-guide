@@ -1,0 +1,15 @@
+x:more
+
+Identification tips are from <a href="http://www.californiaherps.com/identification/lizardsid/lizards.id.html">California Herps</a>.
+
+==spiny lizards
+.  large, spiny scales
+
+==western alligator lizards
+. long alligator-like snout
+. smooth scales, slightly keeled
+
+==california whiptail:Aspidoscelis tigris ssp. mundus
+x:ba
+xx:ba
+. very long tail

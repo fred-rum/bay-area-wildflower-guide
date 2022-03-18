@@ -1,0 +1,16 @@
+sci:genus Thamnophis
+x:ba
+
+California Herps has a key to the <a href="http://www.californiaherps.com/identification/snakesid/gartersnakeskey.html">scale features</a> of garter snakes.
+
+==coast garter snake:T. elegans ssp. terrestris
+. pale yellow top and side stripes
+. usually some red on sides, but not always
+.. little or no red on head
+. found throughout the bay area
+xx:ba
+
+==aquatic garter snake:T. atratus
+
+==common garter snake:T. sirtalis
+. uncommon

@@ -14,9 +14,11 @@ bug:13494
 ==gray buckeye: Junonia grisea
 bug:516
 
-==california ringlet:Coenonympha tullia ssp. california
+==california ringlet:Coenonympha california ssp. california
+x:ca
 xx:ba
 bug:364463
+sci_b:Coenonympha tullia ssp. california
 . Per <a href="https://butterfly.ucdavis.edu/taxonomy/coenonympha">Art Shapiro</a> and the iNaturalist range maps, this is the only central California subspecies west of the Sierras.
 
 ==california tortoiseshell:Nymphalis californica

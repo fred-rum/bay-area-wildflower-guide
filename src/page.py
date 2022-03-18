@@ -1315,7 +1315,12 @@ class Page:
 
             parent = find_page2(None, elab, from_inat)
             if not parent:
-                parent = Page(None, elab, shadow=True)
+                if from_inat:
+                    src = 'taxonomy from observations.csv'
+                else:
+                    src = 'implicit or explicit ancestor from txt'
+                parent = Page(None, elab, shadow=True,
+                              from_inat=from_inat, src=src)
         else:
             parent = find_page2(name, None, from_inat)
             if not parent:
@@ -1678,7 +1683,7 @@ class Page:
                 self.rp_check(f'{trait}_requires_photo',
                               f'page {self.full()} has a {trait} assigned but has no photos')
 
-    def expand_genus(self, sci):
+    def expand_abbrev(self, sci):
         if len(sci) > 3 and sci[1:3] == '. ':
             # sci has an abbreviated genus name
             if self.no_names:
@@ -1693,6 +1698,13 @@ class Page:
                 return sci_words[0] + sci[2:]
             else:
                 fatal(f'Abbreviation "{sci}"  cannot be parsed in page "{self.full()}"')
+        if sci.startswith(('ssp. ', 'var. ')):
+            # sci has an abbreviated subspecies or variety
+            if self.no_names:
+                self.set_sci(self.name)
+
+            return self.sci + ' ' + sci
+
         return sci
 
     def parse_children_and_attributes(self):
@@ -1736,7 +1748,7 @@ class Page:
             if sci:
                 # If the child's genus is abbreviated, expand it using
                 # the genus of the current page.
-                sci = self.expand_genus(sci)
+                sci = self.expand_abbrev(sci)
 
             child_page = find_page2(com, sci)
 
@@ -1796,7 +1808,7 @@ class Page:
             matchobj = re.match(r'sci_([fpjib]+):\s*(.*?)$', c)
             if matchobj:
                 data_object.set_sci_alt(matchobj.group(1),
-                                        self.expand_genus(matchobj.group(2)))
+                                        self.expand_abbrev(matchobj.group(2)))
                 continue
 
             matchobj = re.match(r'is_top\s*$', c)
@@ -2503,19 +2515,21 @@ class Page:
                     else:
                         w.write(f'<b>{caution}This {top} has wild {members}, but they are not yet included in this guide.</b>')
                 else:
-                    prolog = f'There are no{other}'
                     if complete == 'hist':
                         prolog = f"Except for historical records that I'm ignoring, there are no{other}"
                     elif complete == 'rare':
                         prolog = f"Except for extremely rare examples that I don't expect to encounter, there are no{other}"
                     elif complete == 'hist/rare':
                         prolog = f"Except for old historical records and extremely rare examples that I don't expect to encounter, there are no{other}"
+                    else:
+                        prolog = f'There are no{other}'
 
-                    epilog = 'in the bay area'
                     if complete == 'ca':
                         epilog = 'in California'
                     elif complete == 'any':
                         epilog = 'anywhere'
+                    else:
+                        epilog = 'in the bay area'
 
                     w.write(f'{prolog} wild {members} of this {top} {epilog}.')
                 if key_incomplete:

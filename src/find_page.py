@@ -16,7 +16,7 @@ def is_sci(name):
     # If there isn't an uppercase letter anywhere, it's a common name.
     # If there is an uppercase letter somewhere, it's a scientific name.
     # E.g. "Taraxacum officinale" or "family Asteraceae".
-    return not name.islower()
+    return not name.islower() or name.startswith(('ssp. ', 'var. '))
 
 def is_elab(name):
     return is_sci(name) and ' ' in name

@@ -21,3 +21,5 @@ bug:335
 bug:322
 
 ==cutworm moths and allies:family Noctuidae
+
+==tiger moths:tribe Arctiini
