@@ -92,6 +92,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+1111+1234+4121
 color: red, red purple
 . 1 flower in inflorescence
 . 2 leaflets per leaf
+. stipules broad, lanceolate
 . corolla 10--15 mm, red
 . inflorescence axis <b>terminates at flower pedicel</b>
 . calyx tube << lobes
@@ -100,6 +101,7 @@ color: red, red purple
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1108+1963
 . 1 flower in inflorescence
 . 2 leaflets per leaf
+. stipules small and narrow
 . corolla 8--14 mm, red
 . inflorescence axis <b>continues as bristle beyond flower pedicel branch point</b>
 . calyx tube &plusmn; &le; lobes

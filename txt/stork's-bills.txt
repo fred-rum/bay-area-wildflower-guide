@@ -6,7 +6,7 @@ x:ba
 
 Key feature: bristles on sepal tips, sepal length
 
-==common stork's-bill:E. cicutarium
+==redstem stork's-bill:E. cicutarium
 color: purple
 . stem +- glandular-hairy?
 . <b>sepals 3--5 mm, tip with one or more bristles</b>

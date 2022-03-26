@@ -323,6 +323,7 @@ leaves:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0108+1377
 <h4>inflorescence peduncled, peduncle generally > 10 mm, generally > leaves</h4>
 
 ==rancheria clover:T. albopurpureum
+color: pale purple, purple, red purple
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0411+2007
 . corolla <= calyx
 . calyx lobes > tube, plumose

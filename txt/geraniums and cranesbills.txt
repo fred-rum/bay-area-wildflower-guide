@@ -70,16 +70,18 @@ color: purple
 [
 <h2>rounded petal tips</h2>
 
+<a href="https://cambridgewildflowers.blogspot.com/2020/05/herb-robert-geranium-robertianum-and.html">More tips</a> to distinguish herb robert from little-robin.
+
 ==herb robert:G. robertianum
 color: purple
 . stem hairs +- sparse
 . leaf blade 3.5--10 cm wide, <b>divided > 90% to base or midrib</b>
 . 5 leaf segments, +- sessile to short-stalked, pinnately lobed to dissected
 . pedicel 5--20 mm
-. petals 10--14 mm, rounded, pink to red-purple [often shorter]
+. <b>petals 10--14 mm</b>, rounded, pink to red-purple [often shorter]
 . <b>anthers +- purple</b>
 . stigma lobes rose to purple
-. according to <a href="https://www.inaturalist.org/observations/25047262#activity_comment_3245494">James Bailey</a>, the calyx hairs are non-glandular [CalPhotos agrees]
+. calyx hairs are glandular, but glands are tiny
 
 ==little-robin:G. purpureum
 color: purple
@@ -88,7 +90,7 @@ color: purple
 . leaf blade 3--8.7 cm wide, <b>divided > 90% to base</b>
 . 5 leaf segments, +- sessile to short-stalked, pinnately lobed to dissected
 . pedicel 5--10 mm
-. petals 5--9.5 mm, rounded, pink to red-purple
+. <b>petals 5--9.5 mm</b>, rounded, pink to red-purple
 . <b>anthers +- yellow</b>
 . stigma lobes pink to medium purple
 . per CalPhotos, calyx hairs may be glandular when observed in the right light
@@ -101,6 +103,13 @@ color: purple
 . petals 6--7 mm, rounded, rose-purple
 . anthers dark purple
 . stigma lobes pink
+
+==greater herb-robert:G. yeoi
+. 3x larger flower than herb robert
+. <a href="https://www.inaturalist.org/projects/geranium-yeoi-greater-herb-robert/journal/61272-geranium-yeoi-greater-herb-robert/">how to identify</a>
+
+==giant herb-robert:G. maderense
+. perhaps only in cultivation
 
 ]
 [
