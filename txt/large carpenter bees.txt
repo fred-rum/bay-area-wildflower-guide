@@ -1,0 +1,2 @@
+==foothill carpenter bee:Xylocopa tabaniformis ssp. orpifex
+bug:42796

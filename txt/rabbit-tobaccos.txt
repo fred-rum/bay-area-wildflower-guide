@@ -64,6 +64,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0216+0803
 . rare
 
 ==jersey cudweed:P. luteoalbum
+color: salmon, other
 . Stem not glandular, loosely tomentose
 . Leaves proximally +- crowded, distally +- widely spaced
 . Leaf +- clasping, generally decurrent 1--2 mm
