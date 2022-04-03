@@ -50,7 +50,7 @@ xx:ca
 [
 <h2>short petals</h2>
 
-==bigflower agoseris:A. grandiflora var. grandiflora
+==big mountain agoseris:A. grandiflora var. grandiflora
 . <b>stem generally not leafy or obscurely leafy above base</b>
 . ligule 3--7 mm, +- equaling involucre
 . petiole generally purple

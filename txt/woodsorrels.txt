@@ -78,6 +78,7 @@ leaf:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1011+1447
 . <b>petals generally 8--12 mm</b>, yellow
 
 ==dwarf woodsorrel:O. micrantha
+color:yellow
 leaf:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0405+1277
 . stem erect, < 20 cm, hairy
 . leaf cauline; petiole < 5 cm

@@ -21,6 +21,8 @@ Species are ordered here from most to least common.
 
 ==flaccid cryptantha:C. flaccida
 color: white
+. <b>curved bristles on calyx</b> <a href="https://www.inaturalist.org/observations/78642454">[source]</a>
+.. other catseyes do not have these bristles
 . petal diameter 1--5 mm
 . corolla appendages +- yellow
 . 1 nutlet, +- smooth

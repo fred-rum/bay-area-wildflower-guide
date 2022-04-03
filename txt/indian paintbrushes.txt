@@ -16,13 +16,13 @@ xx:none
 . <b>hairs woolly, felt-like, much-branched, +- white to +- gray</b>
 . leaves 10--50 mm, <b>+- linear</b>; lobes 0--3, tips obtuse; generally puberulent or glabrous (bristly)
 
-==coast indian paintbrush:Castilleja affinis
+==coast paintbrush:Castilleja affinis
 . generally bristly-puberulent, nonglandular
 . calyx long-nonglandular-hairy and short-glandular-hairy
 . corolla not curved out through abaxial side of calyx sinus
 . leaves 20--80 mm, <b>+- lanceolate, generally not fleshy</b>; <b>lobes 0--5</b>, tips +- rounded [not true?]
 
-==coast indian paintbrush:Castilleja litoralis
+==littoral paintbrush:Castilleja litoralis
 xx:none
 sci_fpj:Castilleja affinis var. litoralis
 . +- glabrous to sparsely puberulent

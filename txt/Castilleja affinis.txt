@@ -1,7 +1,7 @@
-com:coast indian paintbrush
+com:coast paintbrush
 xx:any
 
-==coast indian paintbrush:C. affinis var. affinis
+==coast paintbrush:C. affinis var. affinis
 sci_jfp:C. affinis ssp. affinis
 color: red, salmon
 . inflorescence generally bright red to orange-red, 30--50 mm wide
