@@ -1,4 +1,5 @@
 sci:genus Ariolimax
+x:ba
 end_hierarchy
 
 Thomas Everest has summarized the <a href="https://www.inaturalist.org/journal/thomaseverest/32164-a-note-on-banana-slugs">current research</a> regarding identification.  In the bay area, only {-Ariolimax buttoni} can have spots, although it can also appear without spots.  For observations without spots, Thomas prefers to infer a species from its location where the literature doesn't show an overlap.  Personally, I find the range data to be too sparse to be definitive, so I just mark unspotted individuals as {-genus Ariolimax}.

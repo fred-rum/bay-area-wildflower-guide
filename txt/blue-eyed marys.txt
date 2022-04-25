@@ -29,6 +29,7 @@ color: purple
 
 ==white blue-eyed mary:C. bartsiifolia
 color: white, pale purple, purple
+<b>Caution: ID unsure</b>
 . <b>corolla lips +- = in fully open flowers</b>, upper lobes +- toothed, lateral lobes notched
 . <b>corolla throat longer than wide</b>
 . corolla generally white to pale lavender to pink-purple

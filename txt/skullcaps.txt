@@ -1,0 +1,37 @@
+sci:genus Scutellaria
+family:mint family
+x:ba
+
+[
+<h3>blue to violet-blue corolla, generally with a white patch on the lower lip</h3>
+
+==blue skullcap:S. tuberosa
+color:purple
+. stem & leaf hairs 1--3 mm, spreading
+. uncommon everywhere
+
+==california skullcap:S. californica
+. stem & leaf hairs << &frac12; mm, curled or appressed
+. rare north of San Francisco
+
+]
+[
+<h3>flower white to pale yellow, occasionally with blue or violet spots on the lower lip</h3>
+
+==grayleaf skullcap:S. siphocampyloides
+. 9'
+. distal cauline leaf blade entire
+..  base obtuse to wedge-shaped
+. stem hairs short, ascending or pointed down
+. lower corolla lip violet-spotted or not
+. rare in the Diablo Range south of Fremont
+
+==sierra skullcap:S. bolanderi
+. 3
+. distal cauline leaf blade crenate
+.. base truncate to +- lobed
+. stem hairs long, spreading
+. lower corolla lip blue-spotted
+. extremely rare near Gilroy
+
+]

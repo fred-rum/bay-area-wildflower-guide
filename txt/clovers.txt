@@ -188,6 +188,7 @@ calyx inflated:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+07
 . very rare & waif
 
 ==woolly clover:T. tomentosum
+color:pale purple, pink
 calyx inflated:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0708+2124
 . calyx inflated in fruit
 .. for all others below, calyx rarely inflated in fruit
@@ -238,7 +239,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0817+2051
 . rare
 
 ==pinpoint clover:T. gracilentum
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0416+1240
+color:pink, pale purple
 . no bracts
 . calyx tube 1.5--2.5 mm, glabrous
 . calyx lobes +- 0.5 mm wide at base, glabrous, bristle-tipped

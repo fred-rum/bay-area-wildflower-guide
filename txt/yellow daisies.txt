@@ -18,4 +18,6 @@ color: yellow
 
 ==false golden asters
 
+==hillside daisies
+
 ==Packera spp.

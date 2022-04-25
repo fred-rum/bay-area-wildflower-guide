@@ -19,8 +19,11 @@ Taxon:
 Taxon Extras:
   taxon_kingdom_name -through- taxon_genus_name
   taxon_species_name
+  taxon_subspecies_name
+  taxon_variety_name
   (genus and species names can usually be derived from the species/subspecies
-    name, but if the observation rank is something like 'subgenus'.)
+    name, but not if the observation rank is something like 'subgenus'.)
+  (having subspecies and variety allows the two to be distinguished)
 Observation Fields:
   none
 

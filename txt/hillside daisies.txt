@@ -1,0 +1,10 @@
+sci:genus Monolopia
+
+==woodland woollythreads:M. gracilens
+color:yellow
+. ray entire or slightly toothed
+. uncommon
+
+==cupped monolopia:M. major
+. ray 3-lobed
+. rare

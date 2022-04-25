@@ -1,4 +1,6 @@
 ==banana slugs
 
+==yellow cellar slug:Limacus flavus
+
 ==garden snail:Cornu aspersum
 x:ca

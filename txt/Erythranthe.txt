@@ -11,6 +11,7 @@ sci_p:Mimulus guttatus
 color: yellow, orange
 . stems 15--65+ cm
 . plant glabrous to hairy distally
+. leaf petiole 0--95 mm, blade 4--125 mm long
 . <b>corolla tube exserted 3--5 mm beyond calyx</b>
 
 ==magnificent seep monkeyflower:E. grandis
@@ -18,7 +19,16 @@ color:yellow
 sci_p:Mimulus grandis
 . stems 50--120+ cm
 . plant densely glandular-puberulent to coarse-hairy distally
+. leaf petiole 10--80 mm, blade 25--60 mm long
 . <b>corolla tube exserted 10--15 mm beyond calyx</b>
+. very rare
+
+==small-leaf monkeyflower:E. microphylla
+color: yellow
+. stems 5--30 cm
+. plant glabrous to sparsely hairy
+. leaf petiole 3--25 mm, blade 5--30 mm long
+. corolla tube exserted 2--6 mm beyond calyx
 . very rare
 
 ]
