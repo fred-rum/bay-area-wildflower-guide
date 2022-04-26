@@ -421,6 +421,7 @@ if arg('-steps'):
 sci_ignore = {}
 
 def read_ignore_species(f):
+    global sci_ignore
     sci_ignore = yaml.safe_load(f)
 
     for sci in sci_ignore:
@@ -535,7 +536,9 @@ def read_observation_data(f):
                     # Update orig_page to match the new promoted page,
                     # thus pretending that there was no promotion.
                     orig_page = page.linn_parent
-                else:
+                else: # '-'
+                    # The obesrvations should be entirely ignored.
+                    # Stop promoting on the ignored page.
                     break
             page = page.linn_parent
             if not page:
@@ -543,6 +546,9 @@ def read_observation_data(f):
             sci = page.sci
 
         if not page or (sci in sci_ignore and sci_ignore[sci] == '-'):
+            # the observation is not contained by *any* page, or
+            # the observation'so taxon (or some taxon it was promoted through)
+            # should be completely ignored.
             continue
 
         if (loc != 'bay area' and

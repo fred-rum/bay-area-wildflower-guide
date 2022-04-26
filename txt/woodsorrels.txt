@@ -77,9 +77,9 @@ leaf:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1011+1447
 . sepals 3.5--6 mm, lanceolate, tips ciliate
 . <b>petals generally 8--12 mm</b>, yellow
 
-==dwarf woodsorrel:O. micrantha
+==dwarf woodsorrel:O. laxa
+sci_fpj: Oxalis micrantha
 color:yellow
-leaf:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0405+1277
 . stem erect, < 20 cm, hairy
 . leaf cauline; petiole < 5 cm
 . leaflets < 13 mm, <b>hairs sparse, spreading</b>

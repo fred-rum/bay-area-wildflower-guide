@@ -1,4 +1,5 @@
 sci:Pseudognaphalium spp.
+asci:genus Helichrysum
 x:ba
 
 I need to re-evaluate all of my observations now that I have some idea what to look for.
@@ -63,7 +64,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0216+0803
 . Inflorescence +- flat-topped
 . rare
 
-==jersey cudweed:P. luteoalbum
+==jersey cudweed:Helichrysum luteoalbum
 color: salmon, other
 . Stem not glandular, loosely tomentose
 . Leaves proximally +- crowded, distally +- widely spaced

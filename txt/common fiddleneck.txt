@@ -9,6 +9,7 @@ color: yellow, orange
 . very common
 
 ==small-flowered fiddleneck:A. menziesii var. menziesii
+warn obs_requires_photo: none # ID not yet positive
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1007+0353
 . corolla radial, tube straight, limb with 0 or 5 dark spots
 . stamens generally attached above middle of corolla tube, if below then style exserted

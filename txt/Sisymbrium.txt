@@ -9,6 +9,7 @@ color:yellow
 . uncommon
 
 ==london rocket:S. irio
+warn obs_requires_photo: none # ID not yet positive
 . petals 2.5--3.5 mm (claw 1--1.5 mm), 1--1.5 mm wide
 . sepals 2--2.5 mm, not horned
 . glabrous or sparsely hairy [only] at base

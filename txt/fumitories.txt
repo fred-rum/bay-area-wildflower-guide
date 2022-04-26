@@ -15,6 +15,7 @@ x:ca
 . leaflets shape
 
 ==white ramping-fumitory:F. capreolata
+color:white
 . petals 9--14 mm, white to purple-tinged, tipped with purple or black-red
 
 ==common ramping-fumitory:F. muralis
