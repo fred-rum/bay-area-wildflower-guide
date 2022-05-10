@@ -140,7 +140,8 @@ Example drawings are <a target="_blank" href="http://sweetgum.nybg.org/science/g
 {ray,rays} One of 3+ radiating axes, e.g. a primary branch in a compound flower#umbel.
 {recurved,recurve,recurving} Gradually curved backward.  Contrast reflexed.
 {reflexed,reflex,reflexing} Abruptly bent somewhat or entirely backward.  Opposite of erect or ascending.  Contrast recurved.
-{rib,ribs,midrib,midribs} A raised band of material, e.g. covering a vein.
+{reticulate,reticulated} Wrinkled.  (Not just ribbed.)
+{rib,ribs,midrib,midribs,ribbed} A raised band of material, e.g. covering a vein.
 {rosette,rosettes} Basal leaves growing radially around the stem. <a href="../photos/common%20cat's-ear,7.jpg">[example]</a>
 {scale,scales} Flat, membranous structure.
 {scarious} Membranous.

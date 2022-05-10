@@ -30,30 +30,32 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1105+0694
 . sepals 4--6 mm, tip with one or more bristles
 . petals +- = sepals
 . petals tinged toward red-purple rather than the above flowers' pale purple
-. Monte Bello, Mt. Diablo
+. extremely rare in the bay area; may only be misidentifications
 
 ]
 [
 <h3>rounder, purple-veined petals</h3>
 
-Key feature: stem glandular or not, precise sepal length
+Key features: number of purple veins on all petals, color of sepal edges
+
+Both of these flowers are arranged with a pair of adjacent petals that differ slightly from the other three.
 
 ==mediterranean stork's-bill:E. botrys
 color: purple
 . petals are rounder and with more prominent veins than in common/musk
-. <b>stem short-hairy</b>
-. <b>sepals 10--13 mm</b>, tip with one or more bristles
+. sepals 10--13 mm, tip with one or more bristles
 . petals +- > sepals (usually hiding the sepals)
-. <b>corolla radially symmetric</b>
+. <b>all five petals show three distinct stripes each</b>
+. <b>at least one sepal has red edges</b>
 . leaf lobed to dissected
 
 ==hairy-pitted stork's-bill:E. brachycarpum
 color:purple
 . petals are rounder and with more prominent veins than in common/musk
-. <b>stem glandular-hairy</b> [not the pedicel]
-. <b>sepals 7--10 mm</b>, tip with one or more bristles
+. sepals 7--10 mm, tip with one or more bristles
 . petals +- > sepals (usually hiding the sepals)
-. <b>corolla bilaterally symmetric</b>, e.g. with two slightly larger petals above three slightly smaller ones
+. at least two petals show only one distinct stripe each (possibly with fainter stripes on the sides)
+. <b>no sepals have red edges</b>
 . leaf lobed
 . <a href="https://www.inaturalist.org/observations/40934567">discussion</a>
 

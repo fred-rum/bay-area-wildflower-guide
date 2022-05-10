@@ -1,40 +1,62 @@
 sci:Malva spp.
 x:ca
 
+Mallows have an extra epicalyx cupping the calyx.  (Jepson calls it bractlets.)
+
+Peel back the calyx segments to view the fruit within.
+
+There is a very good <a href="https://drive.google.com/file/d/16qardZB078_-k_KQKszfBrQd3S65-opK/preview">guide</a> to the wild mallows of New Zealand that conveniently encompasses all California mallows.
+
+[
+<h3>epicalyx segments are fused</h3>
+
 ==island mallow:M. assurgentiflora
 color:purple
 . <b>shrub</b>
-.. all others are herbs
+.. all others are an herb or subshrub
 . petals 25--45 mm
+. <b>leaf has distinctive triangular lobes with triangular teeth</b>
 
-==common mallow:M. sylvestris
-. <b>petals generally 15--30 mm</b>, veins dark
-.. all others below have shorter petals
-. sepals 6--8 mm
-. bractlets 3--7 mm long, 2--4 mm wide, free
+==tree mallow:M. arborea
+. petals 15--20 mm with 5 dark veins
+.. <b>petals are dark at the base</b>
+. calyx +- 4 mm
+. epicalyx free parts +- 8 mm long, > calyx
 
-==cheeseweed mallow:M. parviflora
-. petals 3--5 mm
-. sepals ~3 mm
-. <b>bractlets 1--2 mm long, linear to thread-like</b>
+==cretan tree-mallow:M. multiflora
+. petals 10--16 mm, generally with 3 dark veins
+.. <b>petals are not dark at the base</b>
+. calyx +- 4 mm
+. epicalyx < calyx
+]
 
-==dwarf mallow:M. neglecta
-. petals generally twice as long as sepals (8--12 mm), veins not dark
-. calyx 4--6 mm
-. <b>bractlets widely linear to narrowly lanceolate, bases free from each other and from calyx</b>
+[
+<h3>epicalyx segments are free</h3>
 
 ==bull mallow:M. nicaeensis
 color: pale purple
 . petals 5--12 mm, veins generally dark
 . sepals 4--6 mm
 . <b>bractlets widely lanceolate to ovate, bases fused to calyx</b>
+. fruit is reticulated
 
-==tree mallow:M. arborea
-. petals 15--20 mm with 5 dark veins
-. calyx +- 4 mm
-. <b>bractlets widely lanceolate to roundish, bases fused to each other</b>, free parts +- 8 mm long, > calyx
+==common mallow:M. sylvestris
+. <b>petals generally 15--30 mm</b>, veins dark
+.. all others below have shorter petals
+. sepals 6--8 mm
+. bractlets 3--7 mm long, 2--4 mm wide, free
+. fruit is reticulated
 
-==cretan tree-mallow:M. multiflora
-. petals 10--16 mm, generally with 3 dark veins
-. calyx +- 4 mm
-. <b>bractlets widely lanceolate to roundish, bases fused to each other</b>, < calyx
+==dwarf mallow:M. neglecta
+. petals generally twice as long as sepals (8--12 mm)
+. sepals 4--6 mm
+. <b>bractlets widely linear to narrowly lanceolate, bases free from each other and from calyx</b>
+. <b>fruit is smoothly ribbed</b>
+
+==cheeseweed mallow:M. parviflora
+. petals 3--5 mm
+. sepals ~3 mm
+. <b>bractlets 1--2 mm long, linear to thread-like</b>
+. fruit is reticulated and always exposed by the calyx
+
+]

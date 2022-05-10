@@ -1,11 +1,18 @@
 sci:Papilio spp.
 bug:347
 
+The amount of color varies at the trailing wing edges.  Use the black patterning, not coloration, to distinguish species.
+
 ==anise swallowtail:Papilio zelicaon
 bug:28235
+. different black pattern
+. can be as pale as {-pale swallowtail}
 
 ==pale swallowtail:Papilio eurymedon
 bug:40208
+. paler yellow than the {-western tiger swallowtail}
+. blue and red highlights may be visible or quite pale
 
 ==western tiger swallowtail:Papilio rutulus
 bug:24573
+. richer yellow than {-pale swallowtail}
