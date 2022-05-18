@@ -54,6 +54,7 @@ color: pink, pale purple
 . corolla 15--25 mm, generally blue-purple to lavender
 
 ==giant vetch:V. gigantea
+color:red purple
 . corolla 12--14 mm, usually red-purple, not plumose
 . leaf (all leaflets) 10--15 cm long
 . 16--24 leaflets, 1.5--4 cm each

@@ -1,7 +1,7 @@
 sci:Sambucus racemosa
 xx:ca
 
-==american red elder:S. racemosa ssp. racemosa
+==european red elder:S. racemosa ssp. racemosa
 sci_fpj: S. racemosa var. racemosa
 color: white, cream, yellow
 . red berries

@@ -113,6 +113,7 @@ color: yellow
 . Mt. Tam
 
 ==rush broom:A. junceus
+color: yellow, red
 . perennial herb; <b>prostrate or low-ascending, not woody, 8--40 cm</b>
 . 3--5 leaflets, 5--10 mm, glabrous or finely strigose
 . <b>calyx lobes short, wide</b>, not hooked

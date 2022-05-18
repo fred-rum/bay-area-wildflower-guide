@@ -1234,3 +1234,16 @@ currently.
 
 key to buckthorns
 fix glossary for gall insects (allow multiple?)
+
+when using Javascript search, if search string has an exact match including
+  non-letter characters (e.g. "heart's"), use only those exact matches?
+
+is there a property to flag importation of alternative iNaturalist names?
+  this requires a way to explicitly create alternative common names
+
+when searching, skip vowels if there are no other matches
+  for approximate pronunciation match
+
+flag pages with an automatic parent (i.e. placed in flowering plants)
+  but I might need to allow families to be automatically placed
+  unless I want to declare them manually

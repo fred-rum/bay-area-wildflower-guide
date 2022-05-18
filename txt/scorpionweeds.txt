@@ -22,3 +22,6 @@ color: other
 
 ==shade phacelia:P. nemoralis
 color: pale purple, other
+
+==california phacelia:P. californica
+color: pale purple, other

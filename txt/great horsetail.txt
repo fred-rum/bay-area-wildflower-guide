@@ -3,10 +3,10 @@ xx:ca
 
 Only one "living fossil" genus remains in the horsetail family.  All other genuses are extinct.
 
-==giant horsetail:E. telmateia ssp. braunii
+==braun's giant horsetail:E. telmateia ssp. braunii
 . main stem between nodes is green
 . common
 
-==great horsetail:E. telmateia ssp. telmateia
+==european giant horsetail:E. telmateia ssp. telmateia
 . main stem between nodes is pale greenish white (<a href="https://www.inaturalist.org/observations/2504016">example</a>)
 . <b>not found in California</b>
