@@ -16,6 +16,7 @@ Key features:
 . flower petal length
 
 ==candy flower:C. sibirica
+color:white
 . cauline leaves are substantial but not fused
 . <b>bracts throughout inflorescence</b>, 1 for every 1--2 flowers
 .. all others have only a single bract, below the lowest flower

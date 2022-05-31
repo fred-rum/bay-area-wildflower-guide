@@ -69,7 +69,7 @@ red spots:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1107+16
 . <b>petals generally < 8 mm</b>, oblong to spoon-shaped, yellow, <b>sometimes with red spots below middle</b>
 
 ==hairy woodsorrel:O. pilosa
-leaf:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1011+1447
+color:yellow
 . stem erect to decumbent, < 40 cm, rooting at nodes or not, hairs 0.7--1.2 mm, dense, generally spreading
 . <b>leaves cauline</b>
 . leaflets < 1.5 cm, <b>appressed-hairy</b>

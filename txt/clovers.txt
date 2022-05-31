@@ -211,7 +211,6 @@ color: yellow
 flowers generally becoming reflexed</h3>
 ==white clover:T. repens
 color: white
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0407+0137
 . stem creeping, rooting, turf-forming
 . <b>pedicels growing from ground level</b> [CalPhotos disagrees with this]
 . generally +- glabrous

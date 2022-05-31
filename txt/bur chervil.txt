@@ -1,3 +1,5 @@
 sci:Anthriscus caucalis
 x:ca
 color:white
+
+See also the similar {-hedge parslies}, which have less divided leaflet lobes.
