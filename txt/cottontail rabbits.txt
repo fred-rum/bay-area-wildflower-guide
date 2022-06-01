@@ -1,12 +1,19 @@
 sci:Sylvilagus spp.
 x:ba
 
-The <a href="http://creagrus.home.montereybay.com/MTYrabbits.html">Creagus</a> website has additional ID tips for less apparent features.
+Anne Parsons has collected <a href="https://www.inaturalist.org/journal/truthseqr/39654-brush-rabbit-vs-desert-cottontail">many obeservations</a> showing the differences in features. The <a href="http://creagrus.home.montereybay.com/MTYrabbits.html">Creagus</a> website has additional ID tips for less apparent features.
 
-==brush rabbit:S. bachmani
-. ears obviously shorter than the face (nose to base of ear)
-. very small tail, appearing as just a bump
+Note that either cottontail may appear brown or gray overall.
 
 ==desert cottontail:S. audubonii
 . ears +- as long as the face (nose to base of ear)
+.. tip of ears is dark
 . tail is short, like a bobtail, but more than just a bump
+. rust color on nape of neck and legs
+
+==brush rabbit:S. bachmani
+. ears obviously shorter than the face (nose to base of ear)
+.. no color difference at tip of ears
+. very small tail, appearing as just a bump
+. no color difference on nape of neck and legs
+

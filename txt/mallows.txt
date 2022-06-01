@@ -5,10 +5,10 @@ Mallows have an extra epicalyx cupping the calyx.  (Jepson calls it bractlets.)
 
 Peel back the calyx segments to view the fruit within.
 
-There is a very good <a href="https://drive.google.com/file/d/16qardZB078_-k_KQKszfBrQd3S65-opK/preview">guide</a> to the wild mallows of New Zealand that conveniently encompasses all California mallows.
+There is a very good <a href="https://drive.google.com/file/d/16qardZB078_-k_KQKszfBrQd3S65-opK/preview">guide</a> to the wild mallows of New Zealand that conveniently encompasses all Bay Area mallows.
 
 [
-<h3>epicalyx segments are fused</h3>
+<h3>epicalyx segments are fused to each other</h3>
 
 ==island mallow:M. assurgentiflora
 color:purple
@@ -23,7 +23,10 @@ color:purple
 . calyx +- 4 mm
 . epicalyx free parts +- 8 mm long, > calyx
 
-==cretan tree-mallow:M. multiflora
+==cretan mallow:M. multiflora
+sci_fj:Malva pseudolavatera
+sci_p:Malva pseudolavatera|Lavatera cretica
+color:pale purple, pink
 . petals 10--16 mm, generally with 3 dark veins
 .. <b>petals are not dark at the base</b>
 . calyx +- 4 mm
@@ -31,7 +34,7 @@ color:purple
 ]
 
 [
-<h3>epicalyx segments are free</h3>
+<h3>epicalyx segments are partially fused to calyx, separate from each other</h3>
 
 ==bull mallow:M. nicaeensis
 color: pale purple
@@ -39,6 +42,10 @@ color: pale purple
 . sepals 4--6 mm
 . <b>bractlets widely lanceolate to ovate, bases fused to calyx</b>
 . fruit is reticulated
+]
+
+[
+<h3>epicalyx segments are free</h3>
 
 ==common mallow:M. sylvestris
 . <b>petals generally 15--30 mm</b>, veins dark
@@ -48,12 +55,14 @@ color: pale purple
 . fruit is reticulated
 
 ==dwarf mallow:M. neglecta
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0520+0780
 . petals generally twice as long as sepals (8--12 mm)
 . sepals 4--6 mm
 . <b>bractlets widely linear to narrowly lanceolate, bases free from each other and from calyx</b>
 . <b>fruit is smoothly ribbed</b>
 
 ==cheeseweed mallow:M. parviflora
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0514+0448
 . petals 3--5 mm
 . sepals ~3 mm
 . <b>bractlets 1--2 mm long, linear to thread-like</b>

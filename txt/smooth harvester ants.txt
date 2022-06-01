@@ -1,0 +1,13 @@
+sci:genus Veromessor
+x:ba
+bug:93524
+
+==andre's harvester ant:V. andrei
+bug:93524
+. brown
+. common in the bay area
+
+==black harvester ant:V. pergandei
+bug:117389
+. black
+. only one observation, east of Mt. Diablo

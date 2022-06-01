@@ -1,4 +1,4 @@
-sci:n/a
+sci:family Malvaceae
 
 ==mallows:Malva spp.
 . Jepson method: bractlets subtending calyx 3--11, generally forming involucel (a secondary involucre inside the first)

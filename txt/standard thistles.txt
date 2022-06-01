@@ -17,13 +17,12 @@ color: purple
 . common
 
 ==short-styled thistle:C. brevistylum
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1007+1563
+color: pale purple
+. heads generally closely subtended by +- well-developed distal leaves or clustered bract-like leaves
+. phyllary tips needle-like, ascending to radially spreading, connected side-to-side by network of cobwebby or multicellular hairs
+. outer and middle phyllaries with short-appressed bases and lanceolate to linear or needle-like, ascending to stiffly spreading tips; tip-spines generally 1--35 mm
 . abaxial face of outer and middle phyllaries without sticky-resinous ridge
 . margins of outer phyllaries may be irregularly toothed to spiny-ciliate or +- entire
-. heads generally closely subtended by +- well-developed distal leaves or clustered bract-like leaves
-. phyllary tips needle-like, ascending to radially spreading, connected side-to-side by long, cobwebby, or stouter, multicellular hairs
-. outer and middle phyllaries with short-appressed bases and lanceolate to linear or needle-like, ascending to stiffly spreading tips; tip-spines generally 1--35 mm
-. phyllary tips conspicuously connected side-to-side by network of cobwebby or multicellular hairs
 . corolla lobes thread-like, tips knob-like; style included or exserted 1--2 mm; stem +- hairy, hairs coarse, jointed, generally also cobwebby to densely tomentose with long, fine hairs
 . scattered
 

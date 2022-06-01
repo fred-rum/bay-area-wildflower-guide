@@ -33,14 +33,15 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+0610
 
 ==hillside false bindweed:C. subacaulis
 . plant hairs sparse to +- dense, short, spreading to reflexed
-. stem poorly developed, generally +- 2 cm
+. stem poorly developed, generally <b>+- 2 cm</b>
 . leaf +- triangular-hastate, with small backward-directed lobes or not; margin +- wavy or not
 . common
 
 ==coast range false bindweed:C. collina
+<b>It is unclear how to distinguish this</b> from a hairy {-hillside false bindweed} except perhaps by <b>stem length</b>.
 . plant +- tomentose
-. stem decumbent, not or only weakly climbing, 8--15 cm, <= basal rosette of leaves
-. leaf reniform (basal lobes indistinct) to distinctly lobed; margin generally wavy
+. stem decumbent, not or only weakly climbing, <b>8--15 cm</b>, <= basal rosette of leaves
+. leaf reniform to distinctly lobed [tip may also be somewhat pointed]; margin generally wavy
 . Mt. Tam, Russian Ridge, Sierra Azul, Calero
 
 ==sierra false bindweed:C. malacophylla ssp. pedicellata

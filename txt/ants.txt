@@ -6,6 +6,5 @@ bug:354
 ==wood, mound, and field ants:genus Formica
 bug:16569
 
-==andre's harvester ant:Veromessor andrei
-# name from bugguide
-bug:93524
+==smooth harvester ants:genus Veromessor
+# name from BugGuide

@@ -56,18 +56,19 @@ color: yellow
 . generally 4 leaflets, palmate or nearly so, 4--15 mm, elliptic to obovate
 . 1 flower 1 per leaf axil
 . <b>+- no peduncle and no bracts, so flower is sessile above a normal set of leaflets</b>
-. calyx strigose [often looks glabrous]
-. calyx lobes +- 0.8--1.2 &times; tube
+. <b>calyx strigose</b> [often looks glabrous]
+. calyx lobes +- 0.8--<b>1.2</b> &times; tube
 . corolla 5--9 mm, yellow, reddening in age, wings +- <= keel
 . very common
 
 ==foothill deervetch:A. brachycarpus
+color: yellow
 . mat-forming to ascending, 5--40 cm
 . generally 4 leaflets, palmate or nearly so, 4--12 mm, elliptic to obovate
 . 1 flower 1 per leaf axil
 . <b>+- no peduncle and no bracts, so flower is sessile above a normal set of leaflets</b>
-. calyx hairy
-. calyx lobes 1--2 &times; tube
+. <b>calyx hairy</b>
+. calyx lobes 1--<b>2</b> &times; tube
 . corolla 5--9 mm, yellow, reddening in age, wings +- = keel
 . scattered
 
