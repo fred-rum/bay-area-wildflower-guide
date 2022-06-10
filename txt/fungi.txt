@@ -1,0 +1,4 @@
+# fungi aren't complete yet
+warn obs_promotion_above_peers: none
+
+==gall fungi

@@ -1,5 +1,4 @@
 sci:n/a
-end_hierarchy
 
 The definitive reference for galls is Ron Russo's Field Guide to Plant
 Galls of California.
@@ -21,3 +20,5 @@ The Bioblitz Club also has PDF brochures for
 ==gall and rust mites
 
 ==gall aphids
+
+==gall fungi

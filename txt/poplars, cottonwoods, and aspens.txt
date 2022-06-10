@@ -1,0 +1,13 @@
+sci:genus Populus
+x:hist/rare
+
+family:willow family
+
+==black cottonwood:P. trichocarpa
+
+==fremont cottonwood:P. fremontii
+
+==white poplar:P. alba
+color:other
+
+==black poplar:P. nigra

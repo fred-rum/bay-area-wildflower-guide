@@ -10,4 +10,7 @@ bug:225834
 . a lumpy gall up to 20 mm wide at the tip of a branch
 . often has plant#leaves growing through the gall
 
+==Asphondylia garryae
+bug:n/a
+
 ==willow gall midges

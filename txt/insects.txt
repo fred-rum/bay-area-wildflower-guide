@@ -10,6 +10,8 @@ There is a <a href="insect glossary.html">glossary</a> for insects.
 
 ==flies
 
+==common sawflies
+
 ==ants
 
 ==beetles
@@ -32,3 +34,11 @@ There is a <a href="insect glossary.html">glossary</a> for insects.
 bug:156092
 
 ==aphids:family Aphididae
+
+==gall wasps
+
+==gall midges
+
+==gall sawflies
+
+==gall aphids

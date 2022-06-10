@@ -20,6 +20,7 @@ The Marin extension of UC Davis provides some of the <a href="http://cemarin.ucd
 <h2>red oaks (section Lobatae)</h2>
 . acorn cap scales thin, shell hairy to woolly inside, at least at tip
 . bark dark gray or gray-brown to black
+. includes the informal group of black oaks: {-Quercus kelloggii}, {-Quercus agrifolia}, and {-Quercus wislizeni}
 
 ==california black oak:Q. kelloggii
 color:other
@@ -31,6 +32,7 @@ color:other
 . acorn cap usually about as deep as wide, often covering most of the acorn shell
 . deciduous
 . common
+. parasitized by {-ruptured twig gall wasp}
 
 ==coast live oak:Q. agrifolia
 color:other
@@ -43,7 +45,7 @@ color:other
 . acorn cap usually about as deep as wide
 . evergreen
 . common
-. parasitized by the {-live oak bud gall wasp}.
+. parasitized by {-live oak bud gall wasp}, {-ruptured twig gall wasp}, and {-live oak apple gall wasp}
 
 ==interior live oak:Q. wislizeni
 . catkins widely spaced, not clustered
@@ -58,6 +60,7 @@ color:other
 . acorn cap bowl shaped, sometimes as deep as wide
 . evergreen
 . common
+. parasitized by  {-ruptured twig gall wasp} and {-live oak apple gall wasp}
 
 ==coast oak:Q. parvula
 . catkins clustered into groups

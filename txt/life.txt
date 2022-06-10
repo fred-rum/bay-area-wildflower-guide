@@ -34,3 +34,7 @@ do obs_fill_alt_com: self-below
 ==vascular plants:phylum Tracheophyta
 
 ==animals:kingdom Animalia
+
+==fungi:kingdom Fungi
+
+==galls
