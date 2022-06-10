@@ -271,15 +271,14 @@ def parse_txt(name, s, page, glossary):
         if c == '':
             non_p = True
 
-        if c and not child_start:
-            end_consecutive_children()
-
         if non_p:
             end_paragraph(list_depth > 0)
         elif p_start is None:
             p_start = len(c_list)
 
         if c:
+            if not child_start:
+                end_consecutive_children()
             c_list.append(c)
 
     end_paragraph()

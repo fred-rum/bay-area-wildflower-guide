@@ -11,14 +11,17 @@ The Bioblitz Club also has PDF brochures for
 <a href="https://712932ae-4562-44ff-908f-f817ffa1a217.filesusr.com/ugd/4f81b8_ff3e1f7f1ffa4d989db7d6835a08aca5.pdf">spring galls</a> and
 <a href="https://712932ae-4562-44ff-908f-f817ffa1a217.filesusr.com/ugd/4f81b8_be8c71c24bc0402589f3e681396df043.pdf">fall galls</a>.
 
+[
+<h3>gall insects</h3>
 ==gall wasps
 
 ==gall midges
 
 ==gall sawflies
 
-==gall and rust mites
-
 ==gall aphids
+]
+
+==gall and rust mites
 
 ==gall fungi
