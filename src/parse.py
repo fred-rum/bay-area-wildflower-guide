@@ -353,7 +353,7 @@ def parse_other(name):
                  repl_desc, txt, flags=re.MULTILINE)
     txt = re.sub(r'^\s*footer\s*\Z',
                  repl_footer, txt, flags=re.MULTILINE)
-    
+
     txt = parse_txt(name, txt, None, None)
 
     with open(f'{root_path}/{name}.html', 'w', encoding='utf-8') as w:
