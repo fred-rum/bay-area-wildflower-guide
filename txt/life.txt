@@ -31,10 +31,14 @@ error obs_fill_com: self-below
 do obs_fill_alt_com: self-below
 
 
-==vascular plants:phylum Tracheophyta
+==plants
 
-==animals:kingdom Animalia
+==animals
 
-==fungi:kingdom Fungi
+==kelp, diatoms, and allies
+
+==fungi
+
+==slime molds
 
 ==galls

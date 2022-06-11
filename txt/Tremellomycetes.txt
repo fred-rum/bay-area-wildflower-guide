@@ -1,0 +1,8 @@
+sci:class Tremellomycetes
+end_hierarchy
+
+==witch's butter:Tremella mesenterica
+x:more
+
+==golden ear:Naematelia aurantia
+x:more

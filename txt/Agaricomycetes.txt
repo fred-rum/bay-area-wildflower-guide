@@ -1,0 +1,12 @@
+sci:class Agaricomycetes
+end_hierarchy
+
+==shelf fungi
+
+==giant sawgill:Neolentinus ponderosus
+x:more
+
+==coral fungi:genus Ramaria
+
+==apricot jelly:Guepinia helvelloides
+x:ba

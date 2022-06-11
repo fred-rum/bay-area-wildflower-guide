@@ -1,0 +1,21 @@
+sci:class Lecanoromycetes
+end_hierarchy
+
+==beard lichens:genus Usnea
+
+==lace lichen:Ramalina menziesii
+x:more
+. official state lichen of California
+
+==oakmoss:Evernia prunastri
+x:ba
+<b>Caution: photo also includes Ramalina farinacea</b>
+
+==wolf lichen:Letharia vulpina
+x:more
+
+==common greenshield lichen:Flavoparmelia caperata
+x:more
+
+==golden-eye lichen:Teloschistes chrysophthalmus
+x:more

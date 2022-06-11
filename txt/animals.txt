@@ -1,3 +1,5 @@
+sci:kingdom Animalia
+
 ==mammals:class Mammalia
 end_hierarchy
 

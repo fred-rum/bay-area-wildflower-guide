@@ -54,6 +54,10 @@ def strip_sci(sci, keep=''):
     return sci
 
 def elaborate_sci(sci):
+    if sci[0].islower():
+        # If the first word is a rank, don't touch the rest of it.
+        return sci
+
     sci_words = sci.split(' ')
     if len(sci_words) == 1:
         # One word in the scientific name implies a genus.

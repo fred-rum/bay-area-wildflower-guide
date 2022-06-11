@@ -1,5 +1,8 @@
 sci:n/a
+end_hierarchy
 
+Taxons that create galls are listed in their normal taxonomic locations, but I've also collected them here for easier browsing.
+<p>
 The definitive reference for galls is Ron Russo's Field Guide to Plant
 Galls of California.
 <br>

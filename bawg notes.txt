@@ -1270,3 +1270,9 @@ include the image gallery Javascript on the HTML page that has the thumbnails
       the view returns to the original HTML page
     where needed, attributions are displayed for an image
       as black text on a translucent background over the bottom of the image
+
+get the common name from iNaturalist's API if the taxon is not directly observed
+  this is useful for automatically constructing ancestor pages
+add 'do member_name: genus, species' in life.txt
+allow searches for a genus/species that only has a shadow page
+  to find the lone(?) real child (as with an alternative name)

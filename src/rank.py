@@ -1,6 +1,6 @@
 from enum import Enum, auto
 
-_ranks = ('below', 'species', 'subgenus', 'genus',
+_ranks = ('below', 'species', 'complex', 'subgenus', 'genus',
           'subtribe', 'tribe', 'supertribe',
           'subfamily', 'family', 'epifamily', 'superfamily',
           'parvorder', 'infraorder', 'suborder', 'order', 'superorder',

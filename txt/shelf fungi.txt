@@ -1,0 +1,34 @@
+sci:order Polyporales
+
+[
+<h3>bracket fungi</h3>
+
+==turkey-tail:Trametes versicolor
+x:more
+
+==gilled polypore:Trametes betulina
+x:more
+
+==veiled polypore:Cryptoporus volvatus
+x:more
+
+==artist's brackets
+]
+[
+<h3>bracket polypores</h3>
+
+==rosy conk:Rhodofomes cajanderi
+x:ba
+
+==northern red belt:Fomitopsis mounceae
+x:more
+]
+[
+<h3>Laetiporaceae family</h3>
+
+==dyer's polypore:Phaeolus schweinitzii
+x:any
+
+==conifer chicken of the woods:Laetiporus conifericola
+x:more
+]

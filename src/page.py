@@ -43,6 +43,7 @@ props = {
     'create': 'd',
     'link': 'd',
     'member_link': 'd',
+    'member_name': 'd',
     'obs_requires_photo': 'f',
     'photo_requires_bugid': 'f',
     'one_child': 'f',
@@ -201,7 +202,7 @@ def format_elab(elab, ital=True):
         elif elab == 'n/a':
             return elab
         elif elab[0].islower():
-            (gtype, name) = elab.split(' ')
+            (gtype, name) = elab.split(' ', maxsplit=1)
             return f'{gtype} {i0}{name}{i1}'
         elif elab.endswith(' spp.'):
             (genus, spp) = elab.split(' ')
@@ -688,7 +689,9 @@ class Page:
 
         elab_words = elab.split(' ')
 
-        if len(elab_words) > 2 and elab_words[2] not in ('ssp.', 'var.'):
+        if (not elab[0].islower()
+            and len(elab_words) > 2
+            and elab_words[2] not in ('ssp.', 'var.')):
             error(f'Unexpected elaboration for {elab}')
 
         if elab[0].islower():

@@ -1,0 +1,39 @@
+sci:order Agaricales
+end_hierarchy
+
+Some mushrooms appear to have gills, but aren't "gilled mushrooms", e.g. {-giant sawgill}.
+
+==western jack-o'-lantern:Omphalotus olivascens
+x:ba
+
+==the prince:Agaricus augustus
+x:more
+
+==sulphur tuft:Hypholoma fasciculare
+x:more
+
+==oyster mushroom:Pleurotus ostreatus
+x:more
+
+==trooping crumble cap:Coprinellus disseminatus
+x:more
+
+==pinecone amanita:Amanita magniverrucata
+x:more
+
+==stubble rosegill:Volvopluteus gloiocephalus
+x:ba
+
+==waxcaps:genus Hygrocybe
+
+==nitrous bonnet:Mycena leptocephala
+x:more
+
+==common bird's nest fungus:Crucibulum laeve
+x:ba
+
+==stinking orange oyster:Phyllotopsis nidulans
+x:ba
+
+==western jumbo gym:Gymnopilus ventricosus
+x:more

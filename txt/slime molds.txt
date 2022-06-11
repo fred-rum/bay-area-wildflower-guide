@@ -1,0 +1,6 @@
+sci:phylum Mycetozoa
+end_hierarchy
+
+==genus Fuligo
+
+
