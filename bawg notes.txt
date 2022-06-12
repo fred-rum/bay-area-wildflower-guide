@@ -1255,6 +1255,8 @@ include the image gallery Javascript on the HTML page that has the thumbnails
   if Javascript is disabled, link each thumbnail directly to its image
     and put copyrights/attributions below the images
       e.g. photos #1 and #3 CC0 by Ren & Stimpy
+      or put the copyright/attribution text in place of the thumbnail image
+        (which is ugly, but JavaScript is heavily encouraged for the BAWG)
   if Javascript is enabled, clicking any thumbnail opens the gallery
     small thumbnails are presented on the left or bottom,
       depending on the screen width vs. height
