@@ -172,9 +172,8 @@ def write_header(w, title, h1, nospace=False, desc=None, at_root=False):
 </head>
 <body>
 <a id="home-icon" tabindex="0" href="{path}index.html"><img src="{path}icons/home.png" alt="home"></a>
-<div class="body-container">
 <div id="search-container">
-<input type="search" id="search" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="flower or glossary term" aria-label="search for a flower or glossary term">
+<input type="search" id="search" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="flower or glossary term" aria-label="search for a flower or glossary term" autofocus>
 <noscript><input type="search" value="search requires Javascript"disabled></noscript>
 <div id="autocomplete-box"></div>
 </div>
@@ -201,6 +200,9 @@ except FileNotFoundError:
     footer_txt = ''
 
 def write_footer(w, incl_footer=True, at_root=False):
+    # Close the central division (id="body").
+    w.write('</div>\n')
+
     if (incl_footer):
         # I assume that all href links in the footer are relative to the root
         # directory.  So if we're writing an HTML file that is *not* at the
@@ -212,10 +214,7 @@ def write_footer(w, incl_footer=True, at_root=False):
 
         w.write(footer_mod)
 
-    w.write('''</div>
-</div>
-</body>
-''')
+    w.write('</body>\n')
 
 # Convert non-ASCII characters to their closest ASCII equivalent.
 # This is suitable for use as a filename or as a string that the user

@@ -500,23 +500,3 @@ function fn_details_keydown(event) {
     event.preventDefault();
   }
 }
-function save_scroll() {
-  var scrollPos = e_body.scrollTop;
-  var stateObj = { data: scrollPos };
-  history.replaceState(stateObj, '');
-}
-function restore_scroll() {
-  if (history.state) {
-    e_body.scrollTop = history.state.data;
-  }
-  e_body.addEventListener('scroll', save_scroll);
-}
-window.addEventListener("hashchange", restore_scroll);
-function oninteractive() {
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', oninteractive);
-    return
-  }
-  setTimeout(restore_scroll, 0);
-}
-oninteractive();

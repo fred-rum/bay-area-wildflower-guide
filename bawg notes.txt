@@ -1278,3 +1278,8 @@ get the common name from iNaturalist's API if the taxon is not directly observed
 add 'do member_name: genus, species' in life.txt
 allow searches for a genus/species that only has a shadow page
   to find the lone(?) real child (as with an alternative name)
+
+on mobile devices, the autocomplete results use a small font to avoid
+    too much line wrapping, but this makes it hard to click the right link.
+  add whitespace between search results to space them out more
+    ensure that the whitespace is also clickable if possible

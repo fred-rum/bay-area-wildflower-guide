@@ -2589,7 +2589,7 @@ class Page:
                 desc = f'Description of {what}'
             else:
                 desc = f'Stub for {what}'
-            write_header(w, title, h1, nospace=bool(c_list), desc=desc)
+            write_header(w, title, h1, nospace=True, desc=desc)
 
             if c_list:
                 w.write('<br>\n'.join(c_list) + '\n')

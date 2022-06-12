@@ -15,82 +15,123 @@ Key features:
 
 Parasitized by {-manzanita leafgall aphid} and {-azalea gall}.
 
-==big berry manzanita:A. glauca
-color: white
-. common
-. mostly SE of highway 17 in the Santa Cruz Range, with significant eastern pockets around Mt. Diablo, Grant, and Coe
+[
+<h3>burl; leaves different on each side</h3>
+
+==bearberry:A. uva-ursi
+. uncommon
+. 7, 37
 
 ==brittleleaf manzanita:A. crustacea
 xx:more
 color: white
 . common
 . mostly in the Santa Cruz Range, but also found in the Diablo Range
+. 7'
+
+]
+[
+<h3>burl; leaves same on both sides</h3>
+
+==pacific manzanita:A. pacifica
+. rare
+. 15'
+
+==eastwood's manzanita:A. glandulosa
+. common
+. 17', 24'
+
+]
+[
+<h3>no burl; leaves different on each side</h3>
+
+==glassyleaf manzanita:A. sensitiva
+. common
+. 32
+
+==glassyleaf manzanita:A. nummularia
+. Jepson and iNaturalist have it only north of Pt. Reyes
+. {-Arctostaphylos sensitiva} was previously considered a subspecies of {-Arctostaphylos nummularia}, so e.g. CalFlora is confusing
+. 32'
+
+==santa cruz manzanita:A. andersonii
+. common
+. 39
+
+==pajaro manzanita:A. pajaroensis
+. 39'
+
+]
+[
+<h3>no burl; leaves same on both sides; low growing</h3>
+
+==franciscan manzanita:A. franciscana
+. uncommon
+. 41'
+
+==san bruno manzanita:A. imbricata
+. uncommon
+. 42'
+
+]
+[
+
+<h3>no burl; leaves same on both sides; tall growing</h3>
+
+==hooker's manzanita:A. hookeri ssp. hookeri
+. rare
+. 52
+
+==big berry manzanita:A. glauca
+color: white
+. common
+. mostly SE of highway 17 in the Santa Cruz Range, with significant eastern pockets at Mt. Diablo, Grant, and Coe
+. 56'
+
+==mount tamalpais manzanita:A. montana
+. common
+. 70, 46'
+
+==common manzanita:A. manzanita
+. common
+. 72' (for all bay area subspecies)
+
+==mount diablo manzanita:A. auriculata
+. common
+. 79
+
+==schreiber's manzanita:A. glutinosa
+. rare
+. 79'
 
 ==hoary manzanita:Arctostaphylos canescens ssp. canescens
 color: pink, pale purple
 . uncommon
 . Mt. Tam, Sierra Azul, and Mt. Madonna
+. 80'
+
+==bonny doon manzanita:A. silvicola
+. common
+. 81'
 
 ==montara manzanita:A. montaraensis
 color: white, pink, red purple
 . uncommon
 . Mt. Montara
+. 89
 
 ==pallid manzanita:A. pallida
 color: white
 . uncommon
 . Oakland hills and nearby areas
+. 89'
 
-==A. andersonii:santa cruz manzanita
-. common
-
-==A. auriculata:mount diablo manzanita
-. common
-
-==A. franciscana:franciscan manzanita
+==kings mountain manzanita:A. regismontana
 . uncommon
+. 90'
 
-==A. glandulosa:eastwood's manzanita
-. common
-
-==A. glutinosa:schreiber's manzanita
-. rare
-
-==A. imbricata:san bruno manzanita
+==marin manzanita:A. virgata
 . uncommon
+. 95
 
-==A. manzanita:common manzanita
-. common
-
-==A. montana:mount tamalpais manzanita
-. common
-
-==A. pacifica:pacific manzanita
-. rare
-
-==A. regismontana:kings mountain manzanita
-. uncommon
-
-==A. sensitiva:glassyleaf manzanita
-. common
-
-==A. nummularia:glassyleaf manzanita
-. iNaturalist has it only north of Pt. Reyes
-. {-Arctostaphylos sensitiva} was previously considered a subspecies of {-Arctostaphylos nummularia}, so e.g. CalFlora is confusing
-
-==A. silvicola:bonny doon manzanita
-. common
-
-==A. uva-ursi:bearberry
-. uncommon
-
-==A. virgata:marin manzanita
-. uncommon
-
-==A. Xcampelliae
-. rare
-
-==A. pajaroensis:pajaro manzanita
-
-==A. hookeri:hooker's manzanita
-. rare
+]

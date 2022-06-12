@@ -41,9 +41,10 @@
     outline: none;
 }
 
-/* This is the home icon in the upper left.  It extends slightly
-   outside of the search container, so to avoid increasing the size of
-   the container, the home icon is positioned absolutely.
+/* This is the home icon in the upper left.  Despite being included in
+   the search container, it extends slightly outside the container's
+   usual extent.  To avoid increasing the size of the container, the
+   home icon is positioned absolutely.
 
    Instead of a box-shadow, I use a drop-shadow that conforms to the
    circular edges of the image.  Unfortunately, the drop-shadow
@@ -61,7 +62,7 @@
    in the border. 
 */
 #home-icon {
-    position: absolute;
+    position: fixed;
     box-sizing: border-box;
     top: 2px;
     left: 2px;
@@ -116,93 +117,41 @@
     width: device-width;
 }
 
-/*** properties related to encapsulating the search bar and body ***/
+/*** properties related to encapsulating the search bar, body, and footer ***/
 
-/* We want the search bar to be locked to the top of the viewport
-   while the main body of text scrolls below it.  Normally the html &
-   body elements are sized to fit the contents (potentially larger
-   than the viewport), and the browser adds a scrollbar as needed.  We
-   override this behavior by locking the html & body elements to 100%
-   of the screen height.  Then we use wrap our page contents in class
-   body-container: a flex box in which only the div#body element has
-   height flexability.  Because it has 'overflow-y: auto', the browser
-   will shrink it as necessary so that the search bar and body both
-   fit within the viewport. */
+/* The search bar and footer want to be cuddled up to the edges of the
+   viewport, while the central body of text uses the usual margins. */
 
-/* Fix the height of the browser elements to the viewport height.
-
-   If the browser has a default margin or padding, remove those.
-   That's particularly important so that the div#body scrollbar can be
-   flush with the right side of the viewport, but it also gives us more
-   control over the positioning of our search bar.
-
-   In case there's any jankiness in the browser geometry calculations,
-   we use 'overflow: hidden' to be absolutely sure that we don't end up
-   with a second scrollbar. */
+/* If the browser has a default margin or padding, remove those. */
 html, body {
-    height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
 }
 
-/* Here's the body-container flex box.  I'm not sure that the height needs
-   to be specified since there's an implied max-height from its parent
-   elements, but it's there anyway. */
-div.body-container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-/* Here's the center body section.  Experiments suggest that at least one
-   browser (Chrome) puts the scrollbar between the padding and the margin,
-   so we leave the margin at 0 and use padding to leave some room on left
-   and right.
-
-   flex-grow and flex-shrink don't seem to be necessary with
-   'overflow-y: auto', but I can't find any documentation on the
-   subject.  I include them to ensure that this body section will
-   always adjust to fill the remaining space. */
+/* Here's the center body section. */
 div#body {
     padding-left: 8px;
     padding-right: 8px;
-    overflow-y: auto;
-    flex-grow: 1;
-    flex-shrink: 1;
 }
 
 /*** properties related to the page footer ***/
 
 /* The footer has the copyright left justified and the contact link
-   right justified.  The remaining CSS properties handle its encapsulation
-   within the body container.
+   right justified.
 
-   flex-grow and flex-shrink re-iterate the default values to be
-   doubly sure that the footer isn't pressured to change its size.
+   The footer is outside the central "body" div, so it is cuddled against
+   the left and right sides of the viewport (and the bottom of the viewport
+   if the body text is long enough).  The footer is given internal padding
+   so that its text indentation matches the body text.
 
-   The padding, background-color, and border help set off the footer from
-   the body.
-
-   box-shadow causes the body to subtly fade out as it scrolls under
-   the footer.  The z-index is necessary to compose the box-shadow
-   above the body. */
+   The background-color and border help set off the footer from
+   the body.  These surround the footer's padding. */
 div.footer {
     display: flex;
     justify-content: space-between;
-    flex-grow: 0;
-    flex-shrink: 0;
     padding: 8px;
     background-color: #EEEEEE;
     border: 1px solid #DDDDDD;
-    box-shadow: 0px 0px 3px 3px white;
-    z-index: 10;
-
-    /* extend the border/background all the way to the left and right
-       edges of the window (negating the usual padding from
-       body-container). */
-    margin-left: -8px;
-    margin-right: -8px;
 }
 
 /* The copyright statement includes a link to the BAWG home page.
@@ -257,20 +206,32 @@ dd {
 }
 
 /* When the browser follows a link to a glossary definition's anchor,
-   it automatically scrolls it to the very top of the body container.
+   it automatically scrolls it to the very top of the viewport.
+   But we have a search box floating at the top of the viewport, which
+   means that the default scroll behavior hides the linked definition
+   under the search box.  Not good.
+
    I.e. it ends up snuggled directly against the search container, and
    is slightly faded out under the box shadow.
 
-   To fix this, we create a transparent border at the top of the
+   To fix this, we create a large transparent border-top for the
    element so that the visually useful part of the element is pushed
-   down a little.  We then use a negative margin-top to prevent that
-   wide border from creating unwanted space between elements.
+   below the search box and into view.  We then use a negative margin-top
+   to prevent that large border from creating unwanted space between
+   elements.
+
+   The chosen border height is a bit larger than the search field height
+   to give a little space between the search field and the target glossary
+   entry, but not so much that the previous entry is visible.
 
    Note that this kills the default margin-top, but that's OK in every
-   place where we use it.  */
+   place where we use it.
+
+   We include various specialty properties to tell the browsers how to
+   handle the negative margin. */
 .defn {
-    border-top: 6px solid transparent;
-    margin-top: -6px;
+    border-top: 48px solid transparent;
+    margin-top: -48px;
     -webkit-background-clip: padding-box;
     -moz-background-clip: padding;
     background-clip: padding-box;
@@ -388,16 +349,16 @@ div.other {
 
 /*** formatting elements for page txt ***/
 
-/* Every page has a heading at the top with id="title".  The default
-   heading top margin makes sense when it follows other text, but we
-   customize the top margin of the title heading to look good at the
-   top of the page.
+/* Every page has a heading at the top with id="title".  This heading
+   needs a customized top margin to move it comfortably out from under
+   the search box.
 
    Note that the top heading is usually h1, but is h4 for glossary
    pages that include a ToC prior to the main page heading.  */
 #title {
-    margin-top: 12px;
+    margin-top: 52px;
 }
+
 /* The default margin after the h1 heading is fine if the page title stands
    alone.  But if it's a common name followed by a scientific name and/or
    other information, it's better to group them together without extra space. */
@@ -834,23 +795,29 @@ div.indent {
 /*** properties related to the search box and autocomplete box ***/
 
 /* The search container holds the search field and autocompletion box.
-   The search field is placed normally and pushes down the following body
-   content.  However, the autocompletion box floats above the body content
-   which scrolls underneath it.
+   It has a fixed position in the window, so it appears on top of the
+   regular content which scrolls underneath it.
 
-   flex-grow and flex-shrink re-iterate the default values to be
-   doubly sure that the search container isn't pressured to change its
-   size.
+   Margins are specified for the top, left, and right in order to attach
+   the search container to those margins.  In particular, the right margin
+   is needed to prevent the container from shrinking to fit a minimum
+   search field width.
+
+   A white background is necessary to ensure that the scrolling text
+   doesn't peek through around the rounded corners of input#search.
 
    box-shadow causes the body to subtly fade out as it scrolls under
    the search container.  The z-index is necessary to compose the box-shadow
    above the body. */
 div#search-container {
-    flex-grow: 0;
-    flex-shrink: 0;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
     padding-top: 8px;
     padding-left: 8px;
     padding-right: 8px;
+    background: white;
     box-shadow: 0px 0px 3px 3px white;
     z-index: 10;
 }
@@ -904,13 +871,18 @@ input:disabled {
    to cover the normal page text underneath, and a thin gray border.
 
    The autocompletion box has 'position: fixed', which puts it where
-   it normally would placed if 'static', but removes it from the
+   it normally would be placed if 'static', but removes it from the
    normal HTML flow.  Thus, it ends up floating on top of the center
    body section, which scrolls under (and past the left side) of the
    floating box.
 
+   The autocompletion box is cuddled so closely against the search input
+   field that the slightly-larger home icon actually overlaps the
+   autocompletion results slightly.  However, the text is still
+   perfectly readable, and the result is natural looking.
+
    Because the autocomplete-box is floating it doesn't inherit the
-   screen-edge padding-right from body-container, although its parent-
+   screen-edge padding-right from div "body", although its parent-
    relative position effectively inherits the padding-left.
 
    The background-color is needed to prevent bleed-through of the body
