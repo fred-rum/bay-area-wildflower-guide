@@ -1,6 +1,6 @@
 sci:suborder Heteroptera
 
-There is a <a href="true bug glossary.html">glossary</a> for true bugs.
+There is a <a href="true-bug-glossary.html">glossary</a> for true bugs.
 
 ==plant bugs
 

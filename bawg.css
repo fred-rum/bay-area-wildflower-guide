@@ -418,7 +418,6 @@ div#autocomplete-box {
 	box-sizing: border-box;
 	margin-left: 61px;
 	margin-right: 8px;
-	font-size: 1.25em;
 	padding-left: 12px;
 	padding-right: 12px;
     }
@@ -426,8 +425,17 @@ div#autocomplete-box {
 p.nogap {
     padding-left: 20px;
     text-indent: -17px;
-    padding-right: 3px;
     margin: 0px;
+    padding-right: 3px;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+}
+@media (min-width: 600px) {
+    p.nogap {
+	font-size: 1.25em;
+        padding-top: 0.15em;
+        padding-bottom: 0.15em;
+    }
 }
 span.match {
     background-color: #eee;

@@ -2,7 +2,7 @@ sci:epifamily Anthophila
 
 Leafyplace has a <a href="https://leafyplace.com/types-of-bees/">high-level guide</a> for distinguishing bees.
 
-There is a <a href="bee glossary.html">glossary</a> for bees.
+There is a <a href="bee-glossary.html">glossary</a> for bees.
 
 ==western honey bee:Apis mellifera
 x:ca

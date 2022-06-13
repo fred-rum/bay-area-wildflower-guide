@@ -69,7 +69,6 @@ covers an adjacent region, so it is often useful for bay area species
 as well.  It has a similar organization as this guide with both photos
 and notes for how to distinguish species.
 
-<div id="contact">
 <h2>Contact Info</h2>
 
 The Bay Area Wildflower Guide is copyrighted by Chris Nelson.  That's me!
@@ -80,5 +79,3 @@ here.  But feel free to send me a note through
 or flag an issue with the Guide via
 <a href="https://github.com/fred-rum/bay-area-wildflower-guide/issues">GitHub</a>.
 A free account is required to use either service.
-
-</div>

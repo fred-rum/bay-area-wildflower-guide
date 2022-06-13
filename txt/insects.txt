@@ -2,7 +2,7 @@ sci:class Insecta
 bug:52
 warn photo_requires_bugid: genus-below
 
-There is a <a href="insect glossary.html">glossary</a> for insects.
+There is a <a href="insect-glossary.html">glossary</a> for insects.
 
 ==butterflies and moths
 

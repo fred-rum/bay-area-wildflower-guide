@@ -591,8 +591,10 @@ function fn_search() {
     /* escape the quote mark in the regex to avoid confusing strip.py */
     full = full.replace(/\'/g, '&rsquo;');
 
-    fit_info.html = ('<p class="nogap"><a ' + link + '>' +
-                     full + '</a></p>');
+    /* The link is applied to the entire paragraph so that padding above
+       and below and the white space to the right are also clickable. */
+    fit_info.html = ('<a ' + link + '><p class="nogap">' +
+                     full + '</p></a>');
   }
 
   /* Highlight the first entry in bold.  This entry is selected if the

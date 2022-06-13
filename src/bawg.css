@@ -900,16 +900,14 @@ div#autocomplete-box {
     background-color: white;
     margin-left: -8px; /* start at the edge of the page */
 }
-/* On mobile devices, it's hard to fit the text of long flower names
-   (especially ones with a variety/subspecies).  So by default, we
-   allow the autocompletion box to fill the width of the screen, and
-   we use the default font size even though it's hard to tap when it's
-   that small.
+/* For mobile devices (above), it's hard to fit the text of long flower
+   names (especially ones with a variety/subspecies), so we allow the
+   autocompletion box to fill the width of the screen
 
-   But on desktop, we indent the autocompletion box so that its left
-   edge matches the left edge of the search text (to the right of the
-   magnifying glass), and we increase the font size since it's
-   important.  (The font change applies to text inside the box.) */
+   For the desktop, we indent the autocompletion box so that its
+   left edge matches the left edge of the search text (to the right
+   of the magnifying glass).
+ */
 @media (min-width: 600px) {
     div#autocomplete-box {
 	box-sizing: border-box;
@@ -922,23 +920,40 @@ div#autocomplete-box {
 			- p.nogap padding (3px) */
 	margin-left: 61px;
 	margin-right: 8px; /* match the padding-right of body-container */
-	font-size: 1.25em;
 	padding-left: 12px;
 	padding-right: 12px;
     }
 }
 /* Each autocompletion result is wrapped in <p class="nogap">.
-   Be default, it has 3 pixels of padding on the left. But if any line wraps at
-   the edge of the screen, it gets an additional 17 pixels of padding/indent.
-   Since text-indent applies only to the first line of a paragraph, we reverse
-   things so that the default padding is large, but the first line gets a
-   negative indent. */
+   Each line starts with 3 pixels of padding on the left.  But if any line
+   wraps at the edge of the screen, it gets an additional 17 pixels of
+   padding/indent.  Since text-indent applies only to the first line of a
+   paragraph, we reverse things so that the default padding is large, but
+   the first line gets a negative indent. */
 p.nogap {
     padding-left: 20px;
     text-indent: -17px;
-    padding-right: 3px;
     margin: 0px;
+    padding-right: 3px;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
 }
+/* For mobile devies (above), we use the default (small) font size so that
+   most lines won't wrap.  However, on the assumption that we're less
+   constrained vertically, we add some clickable space above and below each
+   paragraph (search result) to give the user an easier touch target.
+
+   For the desktop, we increase the font size to make it appropriately
+   prominent (almost as large as the text in the search field).  We add only
+   a bit of padding around the paragraphs for readability. */
+@media (min-width: 600px) {
+    p.nogap {
+	font-size: 1.25em;
+        padding-top: 0.15em;
+        padding-bottom: 0.15em;
+    }
+}
+
 /* <span class="match"> is used to highlight the matched search text
    within each autocomplete entry. */
 span.match {
