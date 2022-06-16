@@ -121,13 +121,6 @@ div.box-color {
     padding: 5px;
     text-align: center;
 }
-div.border-all-colors {
-    background: repeating-linear-gradient(150deg, rgba(192,192,0,0.33), rgba(255,0,0,0.33), rgba(128,0,128,0.33), rgba(0,100,0,0.33), rgba(192,192,0,0.33) 20%);
-}
-div.bg-white {
-    padding: 5px;
-    background: rgba(255,255,255,0.7);
-}
 div.white {
     border: 5px solid #F8F8F8;
 }
@@ -585,4 +578,14 @@ img.hazard-img {
 }
 #offline:target {
     background-color: inherit;
+}
+div#gallery-background {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    background-color: #404040;
+    z-index: 30;
+    touch-action: none;
 }

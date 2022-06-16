@@ -288,22 +288,7 @@ div.box-color {
     text-align: center;
 }
 
-/* The box for "all flowers" gets a rainbow gradient of all colors.
-   Unlike the other boxes, the gradient color is not just on the border,
-   but a pale continuation of the gradient also fills the interior of
-   the box. This is done by filling the entire background of the box's
-   div, then nesting another div inside the box with a semi-transparent
-   white background. */
-div.border-all-colors {
-    background: repeating-linear-gradient(150deg, rgba(192,192,0,0.33), rgba(255,0,0,0.33), rgba(128,0,128,0.33), rgba(0,100,0,0.33), rgba(192,192,0,0.33) 20%);
-}
-div.bg-white {
-    padding: 5px; /* use padding in place of the usual border */
-    background: rgba(255,255,255,0.7);
-}
-
-/* The remaining color boxes use a simple border color of the appropriate
-   color. */
+/* The color boxes use a border color of the appropriate color. */
 div.white {
     border: 5px solid #F8F8F8;
 }
@@ -1129,4 +1114,16 @@ img.hazard-img {
    do the default behavior of highlighting the target anchor. */
 #offline:target {
     background-color: inherit;
+}
+
+/* photo gallery */
+div#gallery-background {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    background-color: #404040;
+    z-index: 30;
+    touch-action: none;
 }

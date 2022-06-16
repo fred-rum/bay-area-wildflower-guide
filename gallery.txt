@@ -1,0 +1,34 @@
+prevent 'enter' from following the photo link
+  document.activeElement.blur()
+
+collect pinch/drag position within image when pointerdown occurs
+  if pinch/drag is outside the image, don't perform an action until
+    a pointer move or new touch puts the position within the image
+  perform zoom relative to the first collected position within the image
+    i.e. if the image is constrained to not follow the pointer,
+      it still behaves as much as possible as if it's still under the pointer
+
+ensure that zoom stays within the desired bounds when resizing the window.
+perhaps the 'fit' property should purely be for size,
+     and the centering is set separately
+  if we do this, then when zoom is constrained to fit,
+    it could set 'fit' to true.
+  and so it would continue to fit when the window is resized
+
+add arrows on left and right (when appropriate) to switch photos
+  also accept left and right keypresses
+  also accept wheel let and right?
+
+can I recognize a flick left or right for switching photos?
+  is getPredictedEvents() useful?
+
+add X in corner?
+
+does the image move more smoothly and/or more fully leave the screen
+    if has absolute/fixed position instead of margin positioning?
+  with top & right properties for position
+
+prevent image from leaving the screen
+
+display thumbnail until full photo arrives
+  perhaps with spinny icon dimly on top

@@ -429,7 +429,6 @@ function fn_keydown() {
     event.preventDefault();
   }
 }
-var e_body = document.getElementById('body');
 var e_search_input = document.getElementById('search');
 var e_autocomplete_box = document.getElementById('autocomplete-box');
 var e_home_icon = document.getElementById('home-icon');
@@ -450,9 +449,7 @@ if (window.location.pathname.includes('/html/')) {
   var path = 'html/';
 }
 function main() {
-  console.info('main')
   if (document.readyState === 'loading') {
-    console.info('...main too early')
     document.addEventListener('DOMContentLoaded', main);
     return
   }
@@ -500,3 +497,301 @@ function fn_details_keydown(event) {
     event.preventDefault();
   }
 }
+var obj_photos = [];
+var obj_photo = undefined;
+var e_bg = undefined;
+var touches = [];
+var one_unmoved_touch = true;
+function open_gallery() {
+  e_bg = document.createElement('div');
+  e_bg.id = 'gallery-background';
+  document.body.appendChild(e_bg);
+  e_bg.onpointerdown = fn_pointerdown;
+  e_bg.onpointerleave = fn_pointercancel;
+  e_bg.onpointercancel = fn_pointercancel;
+  e_bg.onpointerup = fn_pointerup;
+  e_bg.onpointermove = fn_pointermove;
+  e_bg.onwheel = fn_wheel;
+}
+function close_gallery() {
+  e_bg.remove();
+  obj_photo = undefined;
+  return false;
+}
+function fn_popstate(event) {
+  if (obj_photo) {
+    close_gallery();
+  }
+  if (history.state) {
+    obj_photo = obj_photos[history.state.i];
+    obj_photo.fit = history.state.fit;
+    obj_photo.zoom = history.state.zoom;
+    obj_photo.cx = history.state.cx;
+    obj_photo.cy = history.state.cy;
+    obj_photo.gallery_init();
+  }
+}
+function copy_touch(event) {
+  return {
+    id: event.pointerId,
+    x: event.clientX,
+    y: event.clientY
+  };
+}
+function fn_pointerdown(event) {
+  if ((event.pointerType == 'mouse') && (event.buttons != 1)) {
+    return true;
+  }
+  var touch = copy_touch(event);
+  touches.push(touch);
+  one_unmoved_touch = (touches.length == 1);
+  return false;
+}
+function touch_index(touch) {
+  for (var i = 0; i < touches.length; i++) {
+    if (touches[i].id == touch.id) {
+      return i;
+    }
+  }
+  return -1;
+}
+function discard_touch(touch) {
+  var i = touch_index(touch);
+  if (i != -1) {
+    touches.splice(i, 1);
+    return true;
+  }
+  return false;
+}
+function fn_pointercancel(event) {
+  var touch = copy_touch(event);
+  discard_touch(touch);
+  return false;
+}
+function fn_pointerup(event) {
+  var touch = copy_touch(event);
+  if (discard_touch(touch) && one_unmoved_touch) {
+    if (obj_photo && obj_photo.click.call(obj_photo, touch)) {
+      history.back();
+    }
+    return false;
+  }
+  return true;
+}
+function measure_pinch() {
+  var x0 = touches[0].x;
+  var x1 = x0;
+  var y0 = touches[0].y;
+  var y1 = y0;
+  for (var i = 1; i < touches.length; i++) {
+    if (touches[i].x < x0) x0 = touches[i].x;
+    if (touches[i].x > x1) x1 = touches[i].x;
+    if (touches[i].y < y0) y0 = touches[i].y;
+    if (touches[i].y > y1) y1 = touches[i].y;
+  }
+  return {
+    'distance': Math.sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0)),
+    'x': (x0 + x1) / 2,
+    'y': (y0 + y1) / 2
+  };
+}
+function fn_pointermove(event) {
+  if (touches.length == 0) {
+    return false;
+  }
+  if ((event.pointerType == 'mouse') && (event.buttons != 1)) {
+    fn_pointercancel(event);
+    return true;
+  }
+  var touch = copy_touch(event);
+  var old_pinch = measure_pinch();
+  var i = touch_index(touch);
+  if (i == -1) {
+    return false;
+  }
+  if ((touches[i].x == touch.x) &&
+      (touches[i].y == touch.y)) {
+    return false;
+  }
+  one_unmoved_touch = false;
+  touches[i] = touch;
+  if (obj_photo) {
+    var new_pinch = measure_pinch();
+    obj_photo.pinch.call(obj_photo, old_pinch, new_pinch);
+  }
+  return false;
+}
+function fn_wheel(event) {
+  var touch = copy_touch(event);
+  if (event.deltaY < 0) {
+    obj_photo.zoom_to(obj_photo.zoom * 1.30, touch, touch);
+  }
+  if (event.deltaY > 0) {
+    obj_photo.zoom_to(obj_photo.zoom / 1.30, touch, touch);
+  }
+}
+function bind(scope, fn) {
+   return function(event) {
+      return fn.call(scope, event);
+   }
+}
+function Photo(i, e_thumbnail) {
+  this.i = i;
+  this.e_thumbnail = e_thumbnail;
+  this.e_thumbnail.onclick = bind(this, this.fn_gallery_start);
+  this.e_photo = undefined;
+}
+Photo.prototype.fn_gallery_start = function (event) {
+  this.fit = true;
+  this.zoom = undefined;
+  this.cx = undefined;
+  this.cy = undefined;
+  var state = this.get_state();
+  history.pushState(state, '');
+  this.gallery_init();
+  return false;
+}
+Photo.prototype.gallery_init = function() {
+  open_gallery();
+  obj_photo = this;
+  if (this.e_photo) {
+    this.display_photo();
+  } else {
+    this.e_photo = document.createElement('img');
+    this.e_photo.onload = bind(this, this.fn_photo_loaded);
+    this.e_photo.src = this.e_thumbnail.parentElement.href;
+  }
+}
+Photo.prototype.fn_photo_loaded = function (event) {
+  this.photo_x = this.e_photo.naturalWidth;
+  this.photo_y = this.e_photo.naturalHeight;
+  this.display_photo();
+}
+Photo.prototype.display_photo = function () {
+  e_bg.appendChild(this.e_photo);
+  this.redraw_photo();
+}
+Photo.prototype.click = function(touch) {
+  var win_x = window.innerWidth;
+  var win_y = window.innerHeight;
+  var img_x = this.photo_x * this.zoom;
+  var img_y = this.photo_y * this.zoom;
+  var img_x0 = (win_x / 2) - (img_x * this.cx);
+  var img_y0 = (win_y / 2) - (img_y * this.cy);
+  var img_x1 = img_x0 + img_x;
+  var img_y1 = img_y0 + img_y;
+  console.log('click at: (', touch.x, ',', touch.y , '); photo in (',
+              img_x0, ',', img_y0, '), (', img_x1, ',', img_y1, ')');
+  if ((touch.x < img_x0) ||
+      (touch.x >= img_x1) ||
+      (touch.y < img_y0) ||
+      (touch.y >= img_y1)) {
+    return true;
+  }
+  if (((img_x == win_x) && (img_y <= win_y)) ||
+      ((img_x <= win_x) && (img_y == win_y))) {
+    this.zoom_to(1.0, touch, touch);
+  } else {
+    this.fit = true;
+  }
+  this.redraw_photo();
+  return false;
+}
+Photo.prototype.zoom_to = function(new_zoom, old_pos, new_pos) {
+  var win_x = window.innerWidth;
+  var win_y = window.innerHeight;
+  this.fit = false;
+  var img_x = this.photo_x * this.zoom;
+  var img_y = this.photo_y * this.zoom;
+  var img_x0 = (win_x / 2) - (img_x * this.cx);
+  var img_y0 = (win_y / 2) - (img_y * this.cy);
+  var cpx = (old_pos.x - img_x0) / img_x;
+  var cpy = (old_pos.y - img_y0) / img_y;
+  this.zoom = new_zoom;
+  var max_zoom = 3;
+  if (this.zoom > max_zoom) {
+    this.zoom = Math.max(max_zoom, this.window_zoom());
+  }
+  var min_zoom = Math.max(100 / this.photo_x, 100 / this.photo_y);
+  if (this.zoom < min_zoom) {
+    this.zoom = Math.min(min_zoom, this.window_zoom());
+  }
+  img_x = this.photo_x * this.zoom;
+  img_y = this.photo_y * this.zoom;
+  img_x0 = new_pos.x - (cpx * img_x);
+  img_y0 = new_pos.y - (cpy * img_y);
+  this.cx = ((win_x / 2) - img_x0) / img_x;
+  this.cy = ((win_y / 2) - img_y0) / img_y;
+  this.redraw_photo();
+}
+Photo.prototype.pinch = function(old_pinch, new_pinch) {
+  if (!this.e_photo.complete) {
+    return;
+  }
+  var zoom = this.zoom;
+  if (old_pinch.distance != 0) {
+    zoom *= new_pinch.distance / old_pinch.distance;
+  } else {
+  }
+  this.zoom_to(zoom, old_pinch, new_pinch);
+}
+Photo.prototype.window_zoom = function() {
+  var win_x = window.innerWidth;
+  var win_y = window.innerHeight;
+  return Math.min(win_x / this.photo_x, win_y / this.photo_y);
+}
+Photo.prototype.get_state = function() {
+  return {
+    'gallery': true,
+    'i': this.i,
+    'fit': this.fit,
+    'zoom': this.zoom,
+    'cx': this.cx,
+    'cy': this.cy
+  };
+}
+Photo.prototype.redraw_photo = function() {
+  if (!this.e_photo.complete) {
+    return;
+  }
+  var state = this.get_state();
+  history.replaceState(state, '');
+  var win_x = window.innerWidth;
+  var win_y = window.innerHeight;
+  if (this.fit) {
+    this.zoom = this.window_zoom();
+    this.cx = 0.5;
+    this.cy = 0.5;
+  }
+  var img_x = this.photo_x * this.zoom;
+  var img_y = this.photo_y * this.zoom;
+  var img_x0 = (win_x / 2) - (img_x * this.cx);
+  var img_y0 = (win_y / 2) - (img_y * this.cy);
+  this.e_photo.style.width = img_x + 'px';
+  this.e_photo.style.height = img_y + 'px';
+  this.e_photo.style.marginLeft = img_x0 + 'px';
+  this.e_photo.style.marginTop = img_y0 + 'px';
+}
+function fn_resize() {
+  if (obj_photo) {
+    obj_photo.redraw_photo();
+  }
+}
+function fn_gallery_keydown(event) {
+  if (obj_photo) {
+    if (event.key == 'Escape') {
+      history.back();
+      return false;
+    }
+  }
+  return true;
+}
+var e_thumbnail_list = document.getElementsByClassName('leaf-thumb')
+for (var i = 0; i < e_thumbnail_list.length; i++) {
+  var obj = new Photo(i, e_thumbnail_list[i])
+  obj_photos.push(obj);
+}
+window.onresize = fn_resize;
+window.onpopstate = fn_popstate;
+window.onkeydown = fn_gallery_keydown;
+fn_popstate(null);

@@ -45,7 +45,7 @@ def strip_comments(to_filename, from_filename=None, code=None):
         # If the -debug_js arg is given, keep console debug statements.
         # Otherwise, delete them.
         if not arg('-debug_js'):
-            comment += r'|\s*console\.(error|warn|info|log)\([^\r\n]*\);\s*$'
+            comment += r'|\s*console\.(error|warn|info|log)\([^\r\n]*\)(;?)\s*$'
 
     pattern = fr'({quote1}|{quote2})|({comment})'
     txt = re.sub(pattern, repl_string_or_comment, txt,

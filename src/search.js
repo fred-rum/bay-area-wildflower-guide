@@ -673,13 +673,6 @@ function fn_keydown() {
   }
 }
 
-/* Create the search-related HTML and insert it at the beginning of the
-   document.  I can't find a function to insert HTML directly into the
-   document, so we accomplish the same task a bit awkwardly by inserting
-   the HTML before the 'body' div (which we know is present on every
-   page). */
-var e_body = document.getElementById('body');
-
 var e_search_input = document.getElementById('search');
 var e_autocomplete_box = document.getElementById('autocomplete-box');
 var e_home_icon = document.getElementById('home-icon');
@@ -788,9 +781,8 @@ if (typeof pages !== 'undefined') {
 
 
 /*****************************************************************************/
-/* non-search functions also used by the BAWG HTML */
-
 /* Show/hide observation details. */
+
 function fn_details(event) {
   console.log(event);
   if (event.target.textContent == '[show details]') {
@@ -815,3 +807,511 @@ function fn_details_keydown(event) {
     event.preventDefault();
   }
 }
+
+
+/*****************************************************************************/
+/* code related to the image gallery */
+
+var obj_photos = [];
+var obj_photo = undefined;
+var e_bg = undefined;
+var touches = [];
+var one_unmoved_touch = true;
+
+function open_gallery() {
+  console.log('open gallery');
+  e_bg = document.createElement('div');
+  e_bg.id = 'gallery-background';
+  document.body.appendChild(e_bg);
+  /* e_bg.onclick = fn_close_gallery; */
+  e_bg.onpointerdown = fn_pointerdown;
+  e_bg.onpointerleave = fn_pointercancel;
+  e_bg.onpointercancel = fn_pointercancel;
+  e_bg.onpointerup = fn_pointerup;
+  e_bg.onpointermove = fn_pointermove;
+  e_bg.onwheel = fn_wheel;
+}
+
+function close_gallery() {
+  e_bg.remove();
+  obj_photo = undefined;
+  return false;
+}
+
+function fn_popstate(event) {
+  console.log('popstate');
+
+  if (obj_photo) {
+    console.log('closing gallery');
+    close_gallery();
+  }
+
+  if (history.state) {
+    console.log('restoring gallery');
+    obj_photo = obj_photos[history.state.i];
+    obj_photo.fit = history.state.fit;
+    obj_photo.zoom = history.state.zoom;
+    obj_photo.cx = history.state.cx;
+    obj_photo.cy = history.state.cy;
+    obj_photo.gallery_init();
+  }
+}
+
+function copy_touch(event) {
+  return {
+    id: event.pointerId,
+    x: event.clientX,
+    y: event.clientY
+  };
+}
+
+function fn_pointerdown(event) {
+  console.log(event);
+
+  if ((event.pointerType == 'mouse') && (event.buttons != 1)) {
+    /* ignore any mouse click that is not solely the the primary (left)
+       mouse button */
+    return true;
+  }
+
+  var touch = copy_touch(event);
+
+  /* Remember the touch location */
+  touches.push(touch);
+  console.log('pointer down:', touches.length);
+
+  one_unmoved_touch = (touches.length == 1);
+
+  return false;
+}
+
+function touch_index(touch) {
+  for (var i = 0; i < touches.length; i++) {
+    if (touches[i].id == touch.id) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+function discard_touch(touch) {
+  /* Discard the cached touch location */
+  var i = touch_index(touch);
+  if (i != -1) { /* should never be -1, but we check to be sure */
+    touches.splice(i, 1);
+    return true;
+  }
+
+  return false;
+}
+
+function fn_pointercancel(event) {
+  var touch = copy_touch(event);
+  discard_touch(touch);
+  console.log('pointer cancel:', touches.length);
+  return false;
+}
+
+function fn_pointerup(event) {
+  var touch = copy_touch(event);
+
+  if (discard_touch(touch) && one_unmoved_touch) {
+    /* There was a single click with no drag. */
+
+    /* Let the photo object handle it if appropriate. */
+    if (obj_photo && obj_photo.click.call(obj_photo, touch)) {
+      /* The click was outside the photo, so we return to the normal page view.
+         We could close the gallery directly, but since opening the gallery
+         pushed an entry to the browser's history, we want to pop back up the
+         history.  Since there is already code to restore the proper state when
+         the user navigates back through the history, the rest is automatic. */
+      history.back();
+    }
+
+    return false;
+  }
+
+  console.log('pointer up:', touches.length);
+  return true;
+}
+
+/* Measure the pinch distance by calculating the bounding box around all
+   touch events, then calculating the diagonal distance across the box. */
+function measure_pinch() {
+  var x0 = touches[0].x;
+  var x1 = x0;
+  var y0 = touches[0].y;
+  var y1 = y0;
+
+  for (var i = 1; i < touches.length; i++) {
+    if (touches[i].x < x0) x0 = touches[i].x;
+    if (touches[i].x > x1) x1 = touches[i].x;
+    if (touches[i].y < y0) y0 = touches[i].y;
+    if (touches[i].y > y1) y1 = touches[i].y;
+  }
+
+  return {
+    'distance': Math.sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0)),
+    'x': (x0 + x1) / 2,
+    'y': (y0 + y1) / 2
+  };
+}
+
+function fn_pointermove(event) {
+  if (touches.length == 0) {
+    /* e.g. the mouse was moved without a button down. */
+    return false;
+  }
+
+  if ((event.pointerType == 'mouse') && (event.buttons != 1)) {
+    /* discard mouse actions of any extra buttons are pressed at any point */
+    fn_pointercancel(event);
+    return true;
+  }
+
+  var touch = copy_touch(event);
+
+  var old_pinch = measure_pinch();
+
+  var i = touch_index(touch);
+  if (i == -1) {
+    /* e.g. the mouse was moved while separately
+       a finger was touching the screen */
+    return false;
+  }
+
+  if ((touches[i].x == touch.x) &&
+      (touches[i].y == touch.y)) {
+    /* Android likes to activate pointermove even when no movement occurred.
+       Don't waste time processing it, and particularly don't let it
+       disrupt click detection. */
+    return false;
+  }
+
+  /* A touching pointer moved. */
+  one_unmoved_touch = false;
+
+  /* Update the touch cache even if there is no photo to manipulate. */
+  touches[i] = touch;
+
+  /* We shouldn't get events if the gallery isn't open, but we check
+     to be safe before calling the current photo's pinch function. */
+  if (obj_photo) {
+    var new_pinch = measure_pinch();
+    obj_photo.pinch.call(obj_photo, old_pinch, new_pinch);
+  }
+
+  return false;
+}
+
+function fn_wheel(event) {
+  console.log(event);
+
+  var touch = copy_touch(event);
+
+  if (event.deltaY < 0) {
+    obj_photo.zoom_to(obj_photo.zoom * 1.30, touch, touch);
+  }
+  if (event.deltaY > 0) {
+    obj_photo.zoom_to(obj_photo.zoom / 1.30, touch, touch);
+  }
+}
+
+/* Create an anonymous function that can associate a scope (i.e. "this")
+   with a event listener function. */
+function bind(scope, fn) {
+   return function(event) {
+      return fn.call(scope, event);
+   }
+}
+
+function Photo(i, e_thumbnail) {
+  this.i = i;
+  this.e_thumbnail = e_thumbnail;
+  this.e_thumbnail.onclick = bind(this, this.fn_gallery_start);
+
+  this.e_photo = undefined;
+}
+
+Photo.prototype.fn_gallery_start = function (event) {
+  console.log('click: start gallery');
+
+  this.fit = true;
+  this.zoom = undefined;
+  this.cx = undefined;
+  this.cy = undefined;
+
+  /* Push the gallery state to the browser's history. */
+  var state = this.get_state();
+  history.pushState(state, '');
+
+  this.gallery_init();
+
+  /* This function was called for a click on a thumbnail.  We return false
+     so that the default link to the full-size image isn't followed. */
+  return false;
+}
+
+Photo.prototype.gallery_init = function() {
+  open_gallery();
+
+  obj_photo = this;
+
+  if (this.e_photo) {
+    this.display_photo();
+  } else {
+    this.e_photo = document.createElement('img');
+    /* e_photo.className = 'boxed'; */
+    /*this.e_photo.setAttribute('draggable', false); */
+
+    /* By setting the onload handler before setting the img src value,
+       we guarantee that the img isn't loaded yet. */
+    this.e_photo.onload = bind(this, this.fn_photo_loaded);
+
+    /* The full-sized photo is the target of the original link (which is
+       not functional when Javascript is enabled. */
+    this.e_photo.src = this.e_thumbnail.parentElement.href;
+  }
+}
+
+Photo.prototype.fn_photo_loaded = function (event) {
+  console.log('photo loaded');
+
+  /* photo dimensions without scaling */
+  this.photo_x = this.e_photo.naturalWidth;
+  this.photo_y = this.e_photo.naturalHeight;
+
+  this.display_photo();
+}
+
+Photo.prototype.display_photo = function () {
+  e_bg.appendChild(this.e_photo);
+
+  this.redraw_photo();
+}
+
+Photo.prototype.click = function(touch) {
+  /* Check whether the click was inside or outside the photo image. */
+
+  /* window dimensions */
+  var win_x = window.innerWidth;
+  var win_y = window.innerHeight;
+
+  /* calculate image bounds */
+  var img_x = this.photo_x * this.zoom;
+  var img_y = this.photo_y * this.zoom;
+
+  var img_x0 = (win_x / 2) - (img_x * this.cx);
+  var img_y0 = (win_y / 2) - (img_y * this.cy);
+
+  var img_x1 = img_x0 + img_x;
+  var img_y1 = img_y0 + img_y;
+
+  console.log('click at: (', touch.x, ',', touch.y , '); photo in (',
+              img_x0, ',', img_y0, '), (', img_x1, ',', img_y1, ')');
+
+  if ((touch.x < img_x0) ||
+      (touch.x >= img_x1) ||
+      (touch.y < img_y0) ||
+      (touch.y >= img_y1)) {
+    /* the click was outside the image, so continue processing the click
+       on the gallery background. */
+    return true;
+  }
+
+  /* the click was inside the image */
+
+  /* either zoom to full size, or zoom to fit */
+  if (((img_x == win_x) && (img_y <= win_y)) ||
+      ((img_x <= win_x) && (img_y == win_y))) {
+    /* If the image already fits the screen, zoom the image to full size.
+       Do this even if the user dragged the "fit" image, as long as it
+       wasn't resized.
+
+       Note that we aim for 1 image pixel = 1 screen pixel.  However, because
+       mobile pixels are so tiny, a device may pretend that a measured screen
+       pixel is actually multiple physical pixels across.  This works in our
+       favor; if it requires multiple physical pixels to display something
+       large enough for the user to see, then that's how big we want an image
+       pixel to be. */
+    this.zoom_to(1.0, touch, touch);
+  } else {
+    /* For all other zoom levels, zoom to fit.
+       the image is larger than full size and can't fit on the screen.
+       In these cases, zoom the image to fit the screen.
+
+       Note that a full-size image may be smaller than the screen.
+       In this case, the user will see the image as "small", and expect
+       a click to zoom to fit.
+    */
+    this.fit = true;
+    /* Once this.fit is true, redraw_photo() does the work for us. */
+  }
+  this.redraw_photo();
+  return false; /* stop propagating the click */
+}
+
+Photo.prototype.zoom_to = function(new_zoom, old_pos, new_pos) {
+  /* window dimensions */
+  var win_x = window.innerWidth;
+  var win_y = window.innerHeight;
+
+  this.fit = false;
+
+  /* Find the part of the image under old_pos, as a fraction of the image
+     dimensions.  Typically this would be between 0-1, but is outside that
+     range if old_pos is outside the image. */
+  var img_x = this.photo_x * this.zoom;
+  var img_y = this.photo_y * this.zoom;
+
+  var img_x0 = (win_x / 2) - (img_x * this.cx);
+  var img_y0 = (win_y / 2) - (img_y * this.cy);
+
+  var cpx = (old_pos.x - img_x0) / img_x;
+  var cpy = (old_pos.y - img_y0) / img_y;
+
+  this.zoom = new_zoom;
+
+  /* Don't let the image get larger than a maximum size
+     unless the screen is even larger. */
+  var max_zoom = 3;
+  if (this.zoom > max_zoom) {
+    this.zoom = Math.max(max_zoom, this.window_zoom());
+  }
+
+  /* Don't let the image get smaller than a minimum size
+     unless the screen is even smaller. */
+  /* min_zoom is 100 pixels across the smaller image dimension */
+  var min_zoom = Math.max(100 / this.photo_x, 100 / this.photo_y);
+  if (this.zoom < min_zoom) {
+    this.zoom = Math.min(min_zoom, this.window_zoom());
+  }
+
+  /* Move the image so that the part that was under old_pos
+     is now under new_pos. */
+  img_x = this.photo_x * this.zoom;
+  img_y = this.photo_y * this.zoom;
+
+  img_x0 = new_pos.x - (cpx * img_x);
+  img_y0 = new_pos.y - (cpy * img_y);
+
+  this.cx = ((win_x / 2) - img_x0) / img_x;
+  this.cy = ((win_y / 2) - img_y0) / img_y;
+
+  this.redraw_photo();
+}
+
+/* The code for 2+ touches (pinch) also handles 1 touch (drag)
+   as a degenerate case (with no change in zoom). */
+Photo.prototype.pinch = function(old_pinch, new_pinch) {
+  if (!this.e_photo.complete) {
+    /* Nothing to pinch/drag yet. */
+    return;
+  }
+
+  var zoom = this.zoom;
+  if (old_pinch.distance != 0) {
+    zoom *= new_pinch.distance / old_pinch.distance;
+
+    console.log('pinch move (' + (new_pinch.x - old_pinch.x) + ',' + (new_pinch.y - old_pinch.y), ') with zoom ' + (new_pinch.distance / old_pinch.distance * 100) + '%');
+  } else {
+    console.log('drag move (' + (new_pinch.x - old_pinch.x) + ',' + (new_pinch.y - old_pinch.y) + ')');
+  }
+
+  this.zoom_to(zoom, old_pinch, new_pinch);
+}
+
+/* Get the zoom level that expands the image as much as possible while
+   still fitting in the window dimensions. */
+Photo.prototype.window_zoom = function() {
+  /* window dimensions */
+  var win_x = window.innerWidth;
+  var win_y = window.innerHeight;
+
+  return Math.min(win_x / this.photo_x, win_y / this.photo_y);
+}
+
+Photo.prototype.get_state = function() {
+  return {
+    'gallery': true,
+    'i': this.i,
+    'fit': this.fit,
+    'zoom': this.zoom,
+    'cx': this.cx,
+    'cy': this.cy
+  };
+}
+
+Photo.prototype.redraw_photo = function() {
+  if (!this.e_photo.complete) {
+    /* Nothing to redraw. */
+    return;
+  }
+
+  var state = this.get_state();
+  history.replaceState(state, '');
+
+  /* window dimensions */
+  var win_x = window.innerWidth;
+  var win_y = window.innerHeight;
+
+  if (this.fit) {
+    this.zoom = this.window_zoom();
+
+    /* cx,cy determine which part of the photo is centered on the window.
+       The units of cx,cy are the fraction of the photo/image dimensions. */
+    this.cx = 0.5;
+    this.cy = 0.5;
+  }
+
+  var img_x = this.photo_x * this.zoom;
+  var img_y = this.photo_y * this.zoom;
+
+  var img_x0 = (win_x / 2) - (img_x * this.cx);
+  var img_y0 = (win_y / 2) - (img_y * this.cy);
+
+  this.e_photo.style.width = img_x + 'px';
+  this.e_photo.style.height = img_y + 'px';
+  this.e_photo.style.marginLeft = img_x0 + 'px';
+  this.e_photo.style.marginTop = img_y0 + 'px';
+/*
+  console.info('photo dimensions: ', this.photo_x, ',', this.photo_y)
+  console.info('window dimensions: ', win_x, ',', win_y)
+  console.info('image dimensions: ', img_x, ',', img_y)
+  console.info('image position: ', img_x0, ',', img_y0)
+*/
+}
+
+function fn_resize() {
+  if (obj_photo) {
+    obj_photo.redraw_photo();
+  }
+}
+
+function fn_gallery_keydown(event) {
+  if (obj_photo) {
+    console.log(event);
+    if (event.key == 'Escape') {
+      history.back();
+      return false;
+    }
+  }
+  return true;
+}
+
+var e_thumbnail_list = document.getElementsByClassName('leaf-thumb')
+for (var i = 0; i < e_thumbnail_list.length; i++) {
+  var obj = new Photo(i, e_thumbnail_list[i])
+  obj_photos.push(obj);
+}
+
+window.onresize = fn_resize;
+window.onpopstate = fn_popstate;
+
+/* The gallery doesn't have an input field that can have key focus,
+   so we look for keypresses in the entire window.  fn_gallery_keydown()
+   ignores keys if the gallery isn't open. */
+window.onkeydown = fn_gallery_keydown;
+
+/* Handle any history.state that may be present. */
+fn_popstate(null);
