@@ -1,12 +1,6 @@
-prevent 'enter' from following the photo link
-  document.activeElement.blur()
-
-collect pinch/drag position within image when pointerdown occurs
-  if pinch/drag is outside the image, don't perform an action until
-    a pointer move or new touch puts the position within the image
-  perform zoom relative to the first collected position within the image
-    i.e. if the image is constrained to not follow the pointer,
-      it still behaves as much as possible as if it's still under the pointer
+When using the mouse wheel to zoom,
+  if the mouse is outside the image,
+    do something to ensure that the image doesn't get further away while zooming
 
 ensure that zoom stays within the desired bounds when resizing the window.
 perhaps the 'fit' property should purely be for size,

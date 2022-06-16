@@ -775,7 +775,7 @@ if total_list:
             for name in mod_list:
                 w.write(f'<a href="{name}">{name}</a><p/>\n')
 else:
-    info("No files modified.")
+    info("No HTML files modified.")
 
 # All working files have been created.  Move the files/directories out
 # of the working directory and into their final places.
