@@ -1,14 +1,3 @@
-When using the mouse wheel to zoom,
-  if the mouse is outside the image,
-    do something to ensure that the image doesn't get further away while zooming
-
-ensure that zoom stays within the desired bounds when resizing the window.
-perhaps the 'fit' property should purely be for size,
-     and the centering is set separately
-  if we do this, then when zoom is constrained to fit,
-    it could set 'fit' to true.
-  and so it would continue to fit when the window is resized
-
 add arrows on left and right (when appropriate) to switch photos
   also accept left and right keypresses
   also accept wheel let and right?
@@ -18,11 +7,18 @@ can I recognize a flick left or right for switching photos?
 
 add X in corner?
 
-does the image move more smoothly and/or more fully leave the screen
-    if has absolute/fixed position instead of margin positioning?
-  with top & right properties for position
+display spinny icon (above thumbnail) until full-sized photo is loaded
+  the spinny icon should be some kind of inline image
+    otherwise we'd have to wait for it to load
+  or perhaps a canvas element with dynamically animated content
+  mouse icon isn't visible in mobile, so an explicit image is needed
 
-prevent image from leaving the screen
+can I disable or capture browser zoom while in the gallery?
 
-display thumbnail until full photo arrives
-  perhaps with spinny icon dimly on top
+optional:
+
+when resizing (and not touching), remember the desired photo zoom & pos
+  start from those values when constraining the photo
+  so that resizing up and down will restore the photo as much as possible
+
+explicit zoom buttons

@@ -810,7 +810,7 @@ function fn_details_keydown(event) {
 
 
 /*****************************************************************************/
-/* code related to the image gallery */
+/* code related to the photo gallery */
 
 var obj_photos = [];
 var obj_photo = undefined;
@@ -821,6 +821,17 @@ var orig_pinch;
 
 function open_gallery() {
   console.log('open gallery');
+
+  /* prevent the 'enter' key from following the photo link that was
+     just clicked and focused.  Alternatively, the browser may have
+     "restored" focus to the link after reloading or returning to the
+     page, which is why we have to remove focus here and not only after
+     a direct click. */
+  document.activeElement.blur();
+
+  /* prevent scrollbars from appearing based on the hidden page content */
+  document.documentElement.style.overflow = 'hidden';
+
   e_bg = document.createElement('div');
   e_bg.id = 'gallery-background';
   document.body.appendChild(e_bg);
@@ -833,6 +844,7 @@ function open_gallery() {
 }
 
 function close_gallery() {
+  document.documentElement.style.overflow = 'auto';
   e_bg.remove();
   obj_photo = undefined;
   touches = [];
@@ -1047,15 +1059,12 @@ function Photo(i, e_thumbnail) {
        a keyboard) */
   this.e_thumbnail.onclick = this.fn_gallery_start.bind(this);
 
-  this.e_photo = undefined;
+  this.e_thumb = undefined;
+  this.e_full = undefined;
 }
 
 Photo.prototype.fn_gallery_start = function(event) {
   console.log('click: start gallery');
-
-  /* prevent the 'enter' key from following the photo link that was
-     just clicked and focused */
-  document.activeElement.blur();
 
   this.fit = true;
   this.zoom = undefined;
@@ -1079,24 +1088,75 @@ Photo.prototype.gallery_init = function() {
   obj_photo = this;
 
   if (this.e_photo) {
-    this.display_photo();
+    if (this.e_photo.complete) {
+      this.display_photo();
+    }
   } else {
-    this.e_photo = document.createElement('img');
-    /* e_photo.className = 'boxed'; */
-    /*this.e_photo.setAttribute('draggable', false); */
+    this.e_thumb = document.createElement('img');
+    this.e_thumb.className = 'gallery-photo';
 
     /* By setting the onload handler before setting the img src value,
        we guarantee that the img isn't loaded yet. */
-    this.e_photo.onload = this.fn_photo_loaded.bind(this);
+    this.e_thumb.onload = this.fn_thumb_onload.bind(this);
+
+    /* The thumb-sized photo is the same as e_thumbnail.
+       Theoretically, e_thumb should load really fast from the cache.
+       But it's hard to test since file:// appears to disable browser
+       throttling and localhost appears to disable caching. */
+    this.e_thumb.src = this.e_thumbnail.src;
+
+    this.e_full = document.createElement('img');
+    this.e_full.className = 'gallery-photo';
+
+    /* By setting the onload handler before setting the img src value,
+       we guarantee that the img isn't loaded yet. */
+    this.e_full.onload = this.fn_full_onload.bind(this);
 
     /* The full-sized photo is the target of the original link (which is
        not functional when Javascript is enabled. */
-    this.e_photo.src = this.e_thumbnail.parentElement.href;
+    this.e_full.src = this.e_thumbnail.parentElement.href;
+
+    this.e_photo = this.e_thumb;
   }
 }
 
-Photo.prototype.fn_photo_loaded = function(event) {
-  console.log('photo loaded');
+Photo.prototype.fn_thumb_onload = function(event) {
+  console.log('thumbnail loaded');
+
+  if (this.e_photo != this.e_thumb) {
+    /* e_photo refers to the full-sized photo, so the fact that the thumbnail
+       photo just loaded is useless to us. */
+    return;
+  }
+
+  e_bg.style.cursor = 'progress';
+
+  /* photo dimensions without scaling */
+  this.photo_x = this.e_photo.naturalWidth;
+  this.photo_y = this.e_photo.naturalHeight;
+
+  this.display_photo();
+}
+
+Photo.prototype.fn_full_onload = function(event) {
+  console.log('full-size photo loaded');
+
+  e_bg.style.cursor = 'default';
+
+  this.e_photo = this.e_full;
+
+  if (this.e_thumb.complete) {
+    /* The thumbnail is being displayed and possibly manipulated by the user,
+       so adjust the zoom of the full-sized photo to match. */
+    var zoom_adjust = this.e_full.naturalWidth / this.e_thumb.naturalWidth;
+    this.zoom /= zoom_adjust;
+    if (orig_pinch) {
+      orig_pinch /= zoom_adjust;
+    }
+
+    /* Remove the thumbnail photo before displaying the full-sized photo. */
+    this.e_thumb.remove();
+  }
 
   /* photo dimensions without scaling */
   this.photo_x = this.e_photo.naturalWidth;
@@ -1113,10 +1173,6 @@ Photo.prototype.display_photo = function() {
 
 /* Check whether a touch position is inside or outside the photo image. */
 Photo.prototype.in_image = function(touch) {
-  /* window dimensions */
-  var win_x = window.innerWidth;
-  var win_y = window.innerHeight;
-
   /* calculate image bounds */
   var img_x = this.photo_x * this.zoom;
   var img_y = this.photo_y * this.zoom;
@@ -1145,10 +1201,6 @@ Photo.prototype.click = function(touch) {
   }
 
   console.log('click in image');
-
-  /* window dimensions */
-  var win_x = window.innerWidth;
-  var win_y = window.innerHeight;
 
   /* calculate image bounds */
   var img_x = this.photo_x * this.zoom;
@@ -1184,6 +1236,51 @@ Photo.prototype.click = function(touch) {
   return false; /* stop propagating the click */
 }
 
+Photo.prototype.constrain_zoom = function() {
+  /* Don't let the image get larger than a maximum size
+     unless the screen is even larger. */
+  var max_zoom = Math.max(3, this.window_zoom());
+  if (this.zoom > max_zoom) {
+    this.zoom = max_zoom;
+  }
+
+  /* Don't let the image get smaller than a minimum size
+     unless the screen is even smaller. */
+  /* min_zoom is 100 pixels across the smaller image dimension */
+  var min_zoom = Math.max(100 / this.photo_x, 100 / this.photo_y);
+  if (this.zoom < min_zoom) {
+    console.log('min_zoom =', min_zoom);
+    this.zoom = Math.min(min_zoom, this.window_zoom());
+  }
+}
+
+/* Constrain each edge so that the image remains reasonably visible:
+   - if the image is less than half the screen extent, keep the entire
+     image visible;
+   - otherwise, keep the image on at least half the screen.
+*/
+Photo.prototype.constrain_pos = function() {
+  var img_x = this.photo_x * this.zoom;
+  var img_y = this.photo_y * this.zoom;
+
+  var cx_bound0 = Math.min(0, 1-(win_x/2) / img_x);
+  var cx_bound1 = Math.max(1, (win_x/2) / img_x);
+
+  if (this.cx < cx_bound0) {
+    this.cx = cx_bound0;
+  } else if (this.cx > cx_bound1) {
+    this.cx = cx_bound1;
+  }
+
+  var cy_bound0 = Math.min(0, 1-(win_y/2) / img_y);
+  var cy_bound1 = Math.max(1, (win_y/2) / img_y);
+  if (this.cy < cy_bound0) {
+    this.cy = cy_bound0;
+  } else if (this.cy > cy_bound1) {
+    this.cy = cy_bound1;
+  }
+}
+
 /* Update the image zoom and position while keeping the same part of the
    image under a particular screen location (e.g. where the user is
    pointing).  The input parameters are flexible about the kind of object
@@ -1192,10 +1289,6 @@ Photo.prototype.click = function(touch) {
    - old_pos and new_pos can be a touch object or pinch distance object.
 */
 Photo.prototype.zoom_to = function(orig, new_zoom, old_pos, new_pos) {
-  /* window dimensions */
-  var win_x = window.innerWidth;
-  var win_y = window.innerHeight;
-
   this.fit = false;
 
   /* Find the part of the image under old_pos, as a fraction of the image
@@ -1207,41 +1300,49 @@ Photo.prototype.zoom_to = function(orig, new_zoom, old_pos, new_pos) {
   var img_x0 = (win_x / 2) - (img_x * orig.cx);
   var img_y0 = (win_y / 2) - (img_y * orig.cy);
 
-  var cpx = (old_pos.x - img_x0) / img_x;
-  var cpy = (old_pos.y - img_y0) / img_y;
+  var img_x1 = img_x0 + img_x;
+  var img_y1 = img_y0 + img_y;
+
+  /* If the old position is outside the image, zoom relative to a point
+     at the image's edge, while maintaining the pixel offset to that edge. */
+  var cpx, cpy, ox, oy;
+  if (old_pos.x < img_x0) {
+    ox = old_pos.x - img_x0;
+    cpx = 0;
+  } else if (old_pos.x > img_x1) {
+    ox = old_pos.x - img_x1;
+    cpx = 1;
+  } else {
+    ox = 0;
+    cpx = (old_pos.x - img_x0) / img_x;
+  }
+  if (old_pos.y < img_y0) {
+    oy = old_pos.y - img_y0;
+    cpy = 0;
+  } else if (old_pos.y > img_y1) {
+    oy = old_pos.y - img_y1;
+    cpy = 1;
+  } else {
+    oy = 0;
+    cpy = (old_pos.y - img_y0) / img_y;
+  }
 
   this.zoom = new_zoom;
 
-  /* Don't let the image get larger than a maximum size
-     unless the screen is even larger. */
-  var max_zoom = 3;
-  if (this.zoom > max_zoom) {
-    this.zoom = Math.max(max_zoom, this.window_zoom());
-  }
+  this.constrain_zoom();
 
-  /* Don't let the image get smaller than a minimum size
-     unless the screen is even smaller. */
-  /* min_zoom is 100 pixels across the smaller image dimension */
-  var min_zoom = Math.max(100 / this.photo_x, 100 / this.photo_y);
-  if (this.zoom < min_zoom) {
-    this.zoom = Math.min(min_zoom, this.window_zoom());
-  }
-
-  /* Move the image so that the part that was under old_pos
-     is now under new_pos. */
+  /* Move the image so that the part that was under old_pos (with offset)
+     is now under new_pos (with offset). */
   img_x = this.photo_x * this.zoom;
   img_y = this.photo_y * this.zoom;
 
-  img_x0 = new_pos.x - (cpx * img_x);
-  img_y0 = new_pos.y - (cpy * img_y);
+  img_x0 = (new_pos.x - ox) - (cpx * img_x);
+  img_y0 = (new_pos.y - oy) - (cpy * img_y);
 
   this.cx = ((win_x / 2) - img_x0) / img_x;
   this.cy = ((win_y / 2) - img_y0) / img_y;
 
-  if (this.cx < 0) this.cx = 0;
-  if (this.cx > 1) this.cx = 1;
-  if (this.cy < 0) this.cy = 0;
-  if (this.cy > 1) this.cy = 1;
+  this.constrain_pos();
 
   this.redraw_photo();
 }
@@ -1255,27 +1356,22 @@ Photo.prototype.pinch = function(old_pinch, new_pinch) {
   }
 
   if (!orig_pinch) {
-    if (this.in_image(old_pinch)) {
-      /* Remember the first pinch position that is centered within the image.
-         This pinch movement and future movements will be relative to
-         orig_pinch until interrupted (e.g. by pointerup).  The main benefit
-         occurs when the image zoom or position hits a limit.  E.g. if the
-         image is dragged to the edge, it stays there until the touch
-         returns.  I.e. it doesn't start moving away from the edge as soon
-         as the touch starts to return. */
-      orig_pinch = old_pinch;
+    /* If this is the first pinch movement after an interruption, record
+       the pinch parameters in orig_pinch.
 
-      /* Also remember the image zoom & position.  Thus, pimch changes
-         are compared to orig_pinch, and image changes are also applied
-         relative to orig_pinch. */
-      orig_pinch.zoom = this.zoom;
-      orig_pinch.cx = this.cx;
-      orig_pinch.cy = this.cy;
-    } else {
-      /* The pinch/touch has never been centered within the image, so we
-         continue to ignore it. */
-      return;
-    }
+       Pinch movements are relative to orig_pinch until interrupted (e.g. by
+       pointerup).  The main benefit occurs when the image zoom or position
+       hits a limit.  E.g. if the image is dragged to the edge, it stays there
+       until the touch returns.  I.e. it doesn't start moving away from the
+       edge as soon as the touch starts to return. */
+    orig_pinch = old_pinch;
+
+    /* Also remember the image zoom & position.  Thus, pimch changes
+       are compared to orig_pinch, and image changes are also applied
+       relative to orig_pinch. */
+    orig_pinch.zoom = this.zoom;
+    orig_pinch.cx = this.cx;
+    orig_pinch.cy = this.cy;
   }
 
   var zoom = orig_pinch.zoom;
@@ -1293,10 +1389,6 @@ Photo.prototype.pinch = function(old_pinch, new_pinch) {
 /* Get the zoom level that expands the image as much as possible while
    still fitting in the window dimensions. */
 Photo.prototype.window_zoom = function() {
-  /* window dimensions */
-  var win_x = window.innerWidth;
-  var win_y = window.innerHeight;
-
   return Math.min(win_x / this.photo_x, win_y / this.photo_y);
 }
 
@@ -1342,10 +1434,6 @@ Photo.prototype.redraw_photo = function() {
     state_timer = setTimeout(this.fn_save_state.bind(this), 200, this);
   }
 
-  /* window dimensions */
-  var win_x = window.innerWidth;
-  var win_y = window.innerHeight;
-
   if (this.fit) {
     this.zoom = this.window_zoom();
 
@@ -1363,8 +1451,8 @@ Photo.prototype.redraw_photo = function() {
 
   this.e_photo.style.width = img_x + 'px';
   this.e_photo.style.height = img_y + 'px';
-  this.e_photo.style.marginLeft = img_x0 + 'px';
-  this.e_photo.style.marginTop = img_y0 + 'px';
+  this.e_photo.style.left = img_x0 + 'px';
+  this.e_photo.style.top = img_y0 + 'px';
 /*
   console.info('photo dimensions: ', this.photo_x, ',', this.photo_y)
   console.info('window dimensions: ', win_x, ',', win_y)
@@ -1373,9 +1461,18 @@ Photo.prototype.redraw_photo = function() {
 */
 }
 
+Photo.prototype.resize = function() {
+  this.constrain_zoom();
+  this.constrain_pos();
+  this.redraw_photo();
+}
+
 function fn_resize() {
+  win_x = window.innerWidth;
+  win_y = window.innerHeight;
+
   if (obj_photo) {
-    obj_photo.redraw_photo();
+    obj_photo.resize();
   }
 }
 
@@ -1395,6 +1492,10 @@ for (var i = 0; i < e_thumbnail_list.length; i++) {
   var obj = new Photo(i, e_thumbnail_list[i])
   obj_photos.push(obj);
 }
+
+/* maintain the window dimensions for quick access */
+var win_x = window.innerWidth;
+var win_y = window.innerHeight;
 
 window.onresize = fn_resize;
 window.onpopstate = fn_popstate;

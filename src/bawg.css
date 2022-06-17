@@ -1126,4 +1126,8 @@ div#gallery-background {
     background-color: #404040;
     z-index: 30;
     touch-action: none;
+    cursor: wait;
+}
+img.gallery-photo {
+    position: fixed;
 }
