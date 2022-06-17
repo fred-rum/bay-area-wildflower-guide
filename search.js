@@ -845,6 +845,9 @@ function open_gallery() {
   /* prevent scrollbars from appearing based on the hidden page content */
   document.documentElement.style.overflow = 'hidden';
 
+  /* prevent any other scrolling */
+  document.body.setAttribute("style", "touch-action: none;");
+
   /* Only create the gallery elements the first time the gallery is opened. */
   if (!e_bg) {
     e_bg = document.createElement('div');
@@ -873,6 +876,7 @@ function open_gallery() {
 
 function close_gallery() {
   document.documentElement.style.overflow = 'auto';
+  document.body.setAttribute("style", "touch-action: auto;");
   obj_photo.remove_photo();
   obj_photo = null;
   e_bg.remove();

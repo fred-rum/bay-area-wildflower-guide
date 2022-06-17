@@ -1,11 +1,3 @@
-reloading the gallery shrinks the image because it's applying the same zoom
-  to the smaller thumbnail (and then shrinking the full-sized photo to match).
-
-check that the spinner is reliably started and stopped as appopriate
-  especially on reload/navigation
-
-why are e_bg and e_spin re-created when they only need to be re-added?
-
 can I improve pinching performance on Firefox?
   perhaps fewer updates?
 
