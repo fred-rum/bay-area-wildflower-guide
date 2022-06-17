@@ -819,7 +819,8 @@ var touches = [];
 var one_unmoved_touch = true;
 var orig_pinch;
 var e_spin;
-var spin_timer;
+var spin_req = null;
+var spin_timestamp;
 
 /* Move the photo gallery from a 'closed' to an 'open' state.
 
@@ -845,9 +846,6 @@ function open_gallery() {
   /* prevent scrollbars from appearing based on the hidden page content */
   document.documentElement.style.overflow = 'hidden';
 
-  /* prevent any other scrolling */
-  document.body.setAttribute("style", "touch-action: none;");
-
   /* Only create the gallery elements the first time the gallery is opened. */
   if (!e_bg) {
     e_bg = document.createElement('div');
@@ -868,15 +866,17 @@ function open_gallery() {
 
   document.body.appendChild(e_bg);
 
-  /* We always start the 'loading' spinner when we open the gallery, but if
-     later code will immediately stop it if the full-sized photo is already
-     loaded. */
-  spin_timer = setInterval(draw_spinner, 30);
+  /* We always start the 'loading' spinner when we open the gallery,
+     but later code will immediately stop it if the full-sized photo
+     is already loaded. */
+  if (!spin_req) {
+    spin_req = window.requestAnimationFrame(draw_spinner);
+    spin_timestamp = performance.now();
+  }
 }
 
 function close_gallery() {
   document.documentElement.style.overflow = 'auto';
-  document.body.setAttribute("style", "touch-action: auto;");
   obj_photo.remove_photo();
   obj_photo = null;
   e_bg.remove();
@@ -909,16 +909,21 @@ function fn_popstate(event) {
 }
 
 var offset = 0;
-function draw_spinner() {
+function draw_spinner(timestamp) {
+  if (!spin_req) {
+    return;
+  }
+
   var ctx = e_spin.getContext('2d');
   ctx.clearRect(0, 0, 100, 100);
   var r_ring = 40;
   var r_circle = 10;
   var n = 7;
+  var hz = 1.0;
   for (var i = 0; i < n; i++) {
     var c = Math.floor(i * 255 / (n-1));
     ctx.fillStyle = 'rgb(' + c + ',' + c + ',' + c + ')';
-    var a = 2 * Math.PI * (i + offset) / n;
+    var a = 2 * Math.PI * ((i / n) + offset);
     var x = 50 + Math.sin(a) * (r_ring - r_circle);
     var y = 50 - Math.cos(a) * (r_ring - r_circle);
     ctx.beginPath();
@@ -926,15 +931,25 @@ function draw_spinner() {
     ctx.fill();
   }
 
-  offset = (offset + 0.2) % n;
+  var elapsed = timestamp - spin_timestamp;
+  spin_timestamp = timestamp;
+
+  var inc = elapsed / 1000 * hz;
+  inc = Math.min(inc, 1 / n);
+  console.log('elapsed:', elapsed, '; inc:', inc);
+  offset = (offset + inc) % n;
+
+  spin_req = window.requestAnimationFrame(draw_spinner);
 }
 
 function clear_spinner() {
-  clearInterval(spin_timer);
-  spin_timer = null;
+  if (spin_req) {
+    var ctx = e_spin.getContext('2d');
+    ctx.clearRect(0, 0, 100, 100);
 
-  var ctx = e_spin.getContext('2d');
-  ctx.clearRect(0, 0, 100, 100);
+    window.cancelAnimationFrame(spin_req);
+    spin_req = null;
+  }
 }
 
 function copy_touch(event) {
