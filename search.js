@@ -814,13 +814,26 @@ function fn_details_keydown(event) {
 
 var obj_photos = [];
 var obj_photo = undefined;
-var e_bg;
+var e_bg = undefined;
 var touches = [];
 var one_unmoved_touch = true;
 var orig_pinch;
+var e_spin;
+var spin_timer;
 
+/* Move the photo gallery from a 'closed' to an 'open' state.
+
+   If this is the first time the gallery is opened, the necessary DOM elements
+   are created.  On the other hand, if the gallery was previously opened and
+   then closed, then the DOM elements still exist, and we only have to undo the
+   changes that were made when the gallery was closed. */
 function open_gallery() {
-  console.log('open gallery');
+  console.log('open_gallery');
+
+  if (!orig_title) {
+    orig_title = document.title;
+  }
+  document.title = 'gallery - ' + orig_title;
 
   /* prevent the 'enter' key from following the photo link that was
      just clicked and focused.  Alternatively, the browser may have
@@ -832,24 +845,43 @@ function open_gallery() {
   /* prevent scrollbars from appearing based on the hidden page content */
   document.documentElement.style.overflow = 'hidden';
 
-  e_bg = document.createElement('div');
-  e_bg.id = 'gallery-background';
+  /* Only create the gallery elements the first time the gallery is opened. */
+  if (!e_bg) {
+    e_bg = document.createElement('div');
+    e_bg.id = 'gallery-background';
+    e_bg.onpointerdown = fn_pointerdown;
+    e_bg.onpointerleave = fn_pointercancel;
+    e_bg.onpointercancel = fn_pointercancel;
+    e_bg.onpointerup = fn_pointerup;
+    e_bg.onpointermove = fn_pointermove;
+    e_bg.onwheel = fn_wheel;
+
+    e_spin = document.createElement('canvas');
+    e_spin.id = 'photo-loading';
+    e_spin.width = 100;
+    e_spin.height = 100;
+    e_bg.appendChild(e_spin);
+  }
+
   document.body.appendChild(e_bg);
-  e_bg.onpointerdown = fn_pointerdown;
-  e_bg.onpointerleave = fn_pointercancel;
-  e_bg.onpointercancel = fn_pointercancel;
-  e_bg.onpointerup = fn_pointerup;
-  e_bg.onpointermove = fn_pointermove;
-  e_bg.onwheel = fn_wheel;
+
+  /* We always start the 'loading' spinner when we open the gallery, but if
+     later code will immediately stop it if the full-sized photo is already
+     loaded. */
+  spin_timer = setInterval(draw_spinner, 30);
 }
 
 function close_gallery() {
   document.documentElement.style.overflow = 'auto';
+  obj_photo.remove_photo();
+  obj_photo = null;
   e_bg.remove();
-  obj_photo = undefined;
+  clear_spinner();
   touches = [];
   return false;
 }
+
+var orig_title = null;
 
 function fn_popstate(event) {
   console.log('popstate');
@@ -863,11 +895,42 @@ function fn_popstate(event) {
     console.log('restoring gallery');
     obj_photo = obj_photos[history.state.i];
     obj_photo.fit = history.state.fit;
-    obj_photo.zoom = history.state.zoom;
+    obj_photo.history_width = history.state.width;
     obj_photo.cx = history.state.cx;
     obj_photo.cy = history.state.cy;
     obj_photo.gallery_init();
+  } else if (orig_title) {
+    document.title = orig_title;
   }
+}
+
+var offset = 0;
+function draw_spinner() {
+  var ctx = e_spin.getContext('2d');
+  ctx.clearRect(0, 0, 100, 100);
+  var r_ring = 40;
+  var r_circle = 10;
+  var n = 7;
+  for (var i = 0; i < n; i++) {
+    var c = Math.floor(i * 255 / (n-1));
+    ctx.fillStyle = 'rgb(' + c + ',' + c + ',' + c + ')';
+    var a = 2 * Math.PI * (i + offset) / n;
+    var x = 50 + Math.sin(a) * (r_ring - r_circle);
+    var y = 50 - Math.cos(a) * (r_ring - r_circle);
+    ctx.beginPath();
+    ctx.arc(x, y, r_circle, 0, 2 * Math.PI);
+    ctx.fill();
+  }
+
+  offset = (offset + 0.2) % n;
+}
+
+function clear_spinner() {
+  clearInterval(spin_timer);
+  spin_timer = null;
+
+  var ctx = e_spin.getContext('2d');
+  ctx.clearRect(0, 0, 100, 100);
 }
 
 function copy_touch(event) {
@@ -1032,8 +1095,6 @@ function fn_pointermove(event) {
 }
 
 function fn_wheel(event) {
-  console.log(event);
-
   orig_pinch = undefined;
 
   var touch = copy_touch(event);
@@ -1059,23 +1120,24 @@ function Photo(i, e_thumbnail) {
        a keyboard) */
   this.e_thumbnail.onclick = this.fn_gallery_start.bind(this);
 
-  this.e_thumb = undefined;
-  this.e_full = undefined;
+  this.e_thumb = null;
+  this.e_full = null;
+  this.e_photo = null;
 }
 
 Photo.prototype.fn_gallery_start = function(event) {
   console.log('click: start gallery');
 
   this.fit = true;
-  this.zoom = undefined;
-  this.cx = undefined;
-  this.cy = undefined;
+  this.history_width = null; /* doesn't matter when fit = true */
+  this.cx = null;
+  this.cy = null;
+
+  this.gallery_init();
 
   /* Push the gallery state to the browser's history. */
   var state = this.get_state();
   history.pushState(state, '');
-
-  this.gallery_init();
 
   /* This function was called for a click on a thumbnail.  We return false
      so that the default link to the full-size image isn't followed. */
@@ -1087,11 +1149,23 @@ Photo.prototype.gallery_init = function() {
 
   obj_photo = this;
 
-  if (this.e_photo) {
-    if (this.e_photo.complete) {
-      this.display_photo();
+  if (this.e_thumb) {
+    /* This photo has been opened in the gallery before.  But it may or may
+       not have completed loading the thumbnail and/or full-sized photo. */
+
+    if (this.e_photo) {
+      /* At least one of the thumbnail and/or full-sized photo has loaded. */
+      this.add_photo();
+
+      if (this.e_photo == this.e_full) {
+        /* The full-sized photo has loaded. */
+        clear_spinner();
+      }
     }
   } else {
+    /* This photo has never been opened in the gallery before.  We create the
+       necessary DOM elements here, but we'll have to wait for the thumbnail
+       and full-sized photo to load. */
     this.e_thumb = document.createElement('img');
     this.e_thumb.className = 'gallery-photo';
 
@@ -1099,53 +1173,52 @@ Photo.prototype.gallery_init = function() {
        we guarantee that the img isn't loaded yet. */
     this.e_thumb.onload = this.fn_thumb_onload.bind(this);
 
-    /* The thumb-sized photo is the same as e_thumbnail.
-       Theoretically, e_thumb should load really fast from the cache.
-       But it's hard to test since file:// appears to disable browser
-       throttling and localhost appears to disable caching. */
+    /* The thumb-sized photo is the same as e_thumbnail.  Unfortunately,
+       there's no way to simply re-use the thumbnail from the original page.
+       We can only hope that the browser has cached the JPG file and can
+       re-create the image quickly. */
     this.e_thumb.src = this.e_thumbnail.src;
 
     this.e_full = document.createElement('img');
     this.e_full.className = 'gallery-photo';
 
-    /* By setting the onload handler before setting the img src value,
-       we guarantee that the img isn't loaded yet. */
     this.e_full.onload = this.fn_full_onload.bind(this);
 
-    /* The full-sized photo is the target of the original link (which is
-       not functional when Javascript is enabled. */
+    /* The full-sized photo is the target of the original link.  BTW, this
+       event handler ultimately suppresses further handling of the click, so
+       when the photo galleyr is opened, the original link doesn't get
+       activated. */
     this.e_full.src = this.e_thumbnail.parentElement.href;
 
-    this.e_photo = this.e_thumb;
+    /* Note that although the image elements have been created, they have not
+       yet been inserted into the document.  We don't do that until the image
+       has loaded. */
   }
 }
 
 Photo.prototype.fn_thumb_onload = function(event) {
   console.log('thumbnail loaded');
 
-  if (this.e_photo != this.e_thumb) {
+  if (this.e_photo == this.e_full) {
     /* e_photo refers to the full-sized photo, so the fact that the thumbnail
        photo just loaded is useless to us. */
     return;
   }
+  /* if we get here, this.e_photo == null */
 
-  e_bg.style.cursor = 'progress';
+  this.zoom = this.history_width / this.e_thumb.naturalWidth;
 
-  /* photo dimensions without scaling */
-  this.photo_x = this.e_photo.naturalWidth;
-  this.photo_y = this.e_photo.naturalHeight;
+  this.e_photo = this.e_thumb;
 
-  this.display_photo();
+  this.add_photo();
 }
 
 Photo.prototype.fn_full_onload = function(event) {
   console.log('full-size photo loaded');
 
-  e_bg.style.cursor = 'default';
+  clear_spinner();
 
-  this.e_photo = this.e_full;
-
-  if (this.e_thumb.complete) {
+  if (this.e_photo == this.e_thumb) {
     /* The thumbnail is being displayed and possibly manipulated by the user,
        so adjust the zoom of the full-sized photo to match. */
     var zoom_adjust = this.e_full.naturalWidth / this.e_thumb.naturalWidth;
@@ -1156,19 +1229,38 @@ Photo.prototype.fn_full_onload = function(event) {
 
     /* Remove the thumbnail photo before displaying the full-sized photo. */
     this.e_thumb.remove();
+  } else { /* this.e_photo == null */
+    this.zoom = this.history_width / this.e_thumb.naturalWidth;
   }
 
-  /* photo dimensions without scaling */
+  this.e_photo = this.e_full;
+
+  this.add_photo();
+}
+
+Photo.prototype.add_photo = function() {
+  /* It's possible that a photo finishes loading while the gallery is closed
+     or has switched to another photo.  In that case, do *not* add the photo
+     to the gallery frmae. */
+  if (obj_photo != this) {
+    return;
+  }
+
+  /* record the photo dimensions without scaling */
   this.photo_x = this.e_photo.naturalWidth;
   this.photo_y = this.e_photo.naturalHeight;
 
-  this.display_photo();
-}
-
-Photo.prototype.display_photo = function() {
   e_bg.appendChild(this.e_photo);
 
   this.redraw_photo();
+}
+
+Photo.prototype.remove_photo = function() {
+  /* The gallery is being closed and might be re-opened with any photo,
+     so we go ahead and remove this one from its position in e_bg. */
+  if (this.e_photo) {
+    this.e_photo.remove();
+  }
 }
 
 /* Check whether a touch position is inside or outside the photo image. */
@@ -1350,7 +1442,7 @@ Photo.prototype.zoom_to = function(orig, new_zoom, old_pos, new_pos) {
 /* The code for 2+ touches (pinch) also handles 1 touch (drag)
    as a degenerate case (with no change in zoom). */
 Photo.prototype.pinch = function(old_pinch, new_pinch) {
-  if (!this.e_photo.complete) {
+  if (!this.e_photo) {
     /* Nothing to pinch/drag yet. */
     return;
   }
@@ -1378,9 +1470,11 @@ Photo.prototype.pinch = function(old_pinch, new_pinch) {
   if (orig_pinch.distance != 0) {
     zoom *= new_pinch.distance / orig_pinch.distance;
 
+/*
     console.log('pinch move (' + (new_pinch.x - orig_pinch.x) + ',' + (new_pinch.y - orig_pinch.y), ') with zoom ' + (new_pinch.distance / orig_pinch.distance * 100) + '%');
   } else {
     console.log('drag move (' + (new_pinch.x - orig_pinch.x) + ',' + (new_pinch.y - orig_pinch.y) + ')');
+*/
   }
 
   this.zoom_to(orig_pinch, zoom, orig_pinch, new_pinch);
@@ -1393,11 +1487,16 @@ Photo.prototype.window_zoom = function() {
 }
 
 Photo.prototype.get_state = function() {
+  /* Note that the state records the actual image width rather than the zoom
+     factor.  This makes it resiliant if the state gets used across a
+     thumbnail/full-size transition.  E.g. the state might record the width
+     of the full-sized photo, but a reload causes the thumbnail to be loaded
+     first, in which case the 'width' works better for us than the 'zoom'. */
   return {
     'gallery': true,
     'i': this.i,
     'fit': this.fit,
-    'zoom': this.zoom,
+    'width': this.zoom * this.photo_x,
     'cx': this.cx,
     'cy': this.cy
   };
@@ -1412,7 +1511,7 @@ Photo.prototype.fn_save_state = function() {
 }
 
 Photo.prototype.redraw_photo = function() {
-  if (!this.e_photo.complete) {
+  if (!this.e_photo) {
     /* Nothing to redraw. */
     return;
   }

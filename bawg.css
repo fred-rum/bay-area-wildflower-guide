@@ -1119,6 +1119,9 @@ img.hazard-img {
 /* photo gallery */
 div#gallery-background {
     position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     top: 0px;
     left: 0px;
     bottom: 0px;
@@ -1126,8 +1129,10 @@ div#gallery-background {
     background-color: #404040;
     z-index: 30;
     touch-action: none;
-    cursor: wait;
 }
 img.gallery-photo {
     position: fixed;
+}
+canvas#photo-loading {
+    z-index: 35;
 }

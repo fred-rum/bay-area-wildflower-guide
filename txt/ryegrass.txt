@@ -3,7 +3,6 @@ x:ba
 
 ==perennial ryegrass:L. perenne
 sci_fpj:Festuca perennis
-color:other
 . 1 glume per spikelet (2 glumes for the uppermost spikelet)
 .. spikelet sits between a hollow in the stem and the glume
 . glume < rest of spikelet
@@ -16,6 +15,7 @@ sci_fpj:Festuca temulenta
 
 ==tall fescue:L. arundinaceum
 sci_fpj:Festuca arundinacea
+color:other
 . 2 glumes per spikelet
 . leaf blade with prominent clasping basal auricles
 . auricles hairy

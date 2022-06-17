@@ -1,3 +1,14 @@
+reloading the gallery shrinks the image because it's applying the same zoom
+  to the smaller thumbnail (and then shrinking the full-sized photo to match).
+
+check that the spinner is reliably started and stopped as appopriate
+  especially on reload/navigation
+
+why are e_bg and e_spin re-created when they only need to be re-added?
+
+can I improve pinching performance on Firefox?
+  perhaps fewer updates?
+
 add arrows on left and right (when appropriate) to switch photos
   also accept left and right keypresses
   also accept wheel let and right?
@@ -6,12 +17,6 @@ can I recognize a flick left or right for switching photos?
   is getPredictedEvents() useful?
 
 add X in corner?
-
-display spinny icon (above thumbnail) until full-sized photo is loaded
-  the spinny icon should be some kind of inline image
-    otherwise we'd have to wait for it to load
-  or perhaps a canvas element with dynamically animated content
-  mouse icon isn't visible in mobile, so an explicit image is needed
 
 can I disable or capture browser zoom while in the gallery?
 
