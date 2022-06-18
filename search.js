@@ -759,7 +759,7 @@ function main() {
   fn_hashchange();
 
   /* ... or when changing anchors within a page. */
-  window.addEventListener("hashchange", fn_hashchange);
+  window.addEventListener('hashchange', fn_hashchange);
 
   /* In case the user already started typing before the script loaded,
      perform the search right away on whatever is in the search field,
@@ -769,6 +769,9 @@ function main() {
   if (Document.activeElement == e_search_input) {
     fn_search();
   }
+
+  /* Also initialize the photo gallery. */
+  gallery_main();
 }
 
 /* main() is called when either of these two events occurs:
@@ -821,6 +824,32 @@ var orig_pinch;
 var e_spin;
 var spin_req = null;
 var spin_timestamp;
+var win_x, win_y;
+
+function gallery_main() {
+  /* Initialize each potential gallery photo, in particular adding
+     Javascript to intercept a click on any of the page's thumbnails. */
+  var e_thumbnail_list = document.getElementsByClassName('leaf-thumb')
+  for (var i = 0; i < e_thumbnail_list.length; i++) {
+    var obj = new Photo(i, e_thumbnail_list[i])
+    obj_photos.push(obj);
+  }
+
+  /* maintain the window dimensions for quick access */
+  win_x = window.innerWidth;
+  win_y = window.innerHeight;
+
+  window.onresize = fn_resize;
+  window.onpopstate = fn_popstate;
+
+  /* The gallery doesn't have an input field that can have key focus,
+     so we look for keypresses in the entire window.  fn_gallery_keydown()
+     ignores keys if the gallery isn't open. */
+  window.onkeydown = fn_gallery_keydown;
+
+  /* Handle any history.state that may be present. */
+  fn_popstate(null);
+}
 
 /* Move the photo gallery from a 'closed' to an 'open' state.
 
@@ -949,6 +978,10 @@ function draw_spinner(timestamp) {
 
 function clear_spinner() {
   console.log('clear spin');
+
+  /* We could remove the spinner's canvas element, but then we'd have to
+     restore it if we switch to another photo.  So instead we leave the canvas
+     in place, but clear its contents. */
   var ctx = e_spin.getContext('2d');
   ctx.clearRect(0, 0, 100, 100);
 
@@ -1195,21 +1228,10 @@ Photo.prototype.gallery_init = function() {
 
   obj_photo = this;
 
-  if (this.e_thumb) {
-    /* e_thumb and e_full are always create together, so we only need to check
-       whether either one is present.  If the photos have already been created,
-       we don't need to create them again. */
-
-    if (this.done_full) {
-      /* The full-sized photo has loaded completely. */
-      clear_spinner();
-
-      /* If it loaded too quickly, then we might not have activated the
-         photo yet, so do that now. */
-    }
-
-    this.activate_images();
-  } else {
+  /* e_thumb and e_full are always create together, so we only need to check
+     whether either one is present.  If the photos have already been created,
+     we don't need to create them again. */
+  if (!this.e_thumb) {
     /* This photo has never been opened in the gallery before.  We create the
        necessary DOM elements here, but we'll have to wait for the thumbnail
        and full-sized photo to load. */
@@ -1244,11 +1266,15 @@ Photo.prototype.gallery_init = function() {
        yet been inserted into the document.  We don't do that until the image
        dimensions have been loaded, as polled by the spinner. */
   }
+
+  this.activate_images();
 }
 
 Photo.prototype.activate_images = function() {
   console.log('activate images');
 
+  /* If we add a new photo to the display, we set new_active to 'true',
+     which eventually triggers a call to redraw_photo(). */
   var new_active = false;
 
   if (!this.active_full && this.e_full.naturalWidth) {
@@ -1272,7 +1298,9 @@ Photo.prototype.activate_images = function() {
       }
     }
 
-    e_bg.appendChild(this.e_full);
+    /* Insert the full-sized image just before the spinner,
+       and after the thumbnail (if present). */
+    e_spin.insertAdjacentElement('beforebegin', this.e_full);
   }
 
   if (!this.active_thumb && this.e_thumb.naturalWidth && !this.done_full) {
@@ -1283,19 +1311,35 @@ Photo.prototype.activate_images = function() {
     console.log('activate thumb');
 
     this.active_thumb = true;
-    this.photo_x = this.e_thumb.naturalWidth;
-    this.photo_y = this.e_thumb.naturalHeight;
 
-    e_bg.appendChild(this.e_thumb);
+    /* Only set the photo dimensions if we don't already have them from
+       the full-sized photo. */
+    if (!this.active_full) {
+      this.photo_x = this.e_thumb.naturalWidth;
+      this.photo_y = this.e_thumb.naturalHeight;
+    }
+
+    /* Insert the thumbnail image at the beginning of e_bg,
+       before the full-sized photo (if present) and the spinner. */
+    e_bg.insertAdjacentElement('afterbegin', this.e_thumb);
   }
 
-  if (this.e_thumb.complete && this.e_full.complete) {
-    /* Both photos have stopped loading, but nobody stopped the spinner.  That
-       most likely means that the load of the full-sized photo failed or was
-       aborted by the user.  We stop the spinner but leave it on-screen to
-       indicate that loading has stopped.  If the browser decides later that
-       the photo *is* completely loaded, it'll call the 'onload' callback,
-       which clears the spinner. */
+  if (this.done_full) {
+    /* The full-sized photo has loaded completely. */
+    clear_spinner();
+
+    if (this.active_thumb) {
+      /* The thumbnail photo is no longer useful, so we remove it. */
+      this.e_thumb.remove();
+      this.active_thumb = false;
+    }
+  } else if (this.e_thumb.complete && this.e_full.complete) {
+    /* Both photos have stopped loading, but we the full-sized photo didn't
+       load completely ('done_full').  That means that the load of the
+       full-sized photo failed or was aborted by the user.  We stop the spinner
+       but leave it on-screen to indicate that loading has stopped.  If the
+       browser decides later that the photo *is* completely loaded, it'll call
+       the 'onload' callback, which clears the spinner. */
     end_spinner();
   }
 
@@ -1324,18 +1368,10 @@ Photo.prototype.fn_full_onload = function(event) {
     return;
   }
 
-  clear_spinner();
-
   /* The image might have loaded in less than a frame, so it hasn't been
      activated yet.  Since the spinner's polling loop can no longer activate
      it, do it manually here. */
   this.activate_images();
-
-  if (this.active_thumb) {
-    /* The thumbnail photo is no longer useful, so we remove it. */
-    this.e_thumb.remove();
-    this.active_thumb = false;
-  }
 }
 
 Photo.prototype.remove_images = function() {
@@ -1675,24 +1711,3 @@ function fn_gallery_keydown(event) {
   }
   return true;
 }
-
-var e_thumbnail_list = document.getElementsByClassName('leaf-thumb')
-for (var i = 0; i < e_thumbnail_list.length; i++) {
-  var obj = new Photo(i, e_thumbnail_list[i])
-  obj_photos.push(obj);
-}
-
-/* maintain the window dimensions for quick access */
-var win_x = window.innerWidth;
-var win_y = window.innerHeight;
-
-window.onresize = fn_resize;
-window.onpopstate = fn_popstate;
-
-/* The gallery doesn't have an input field that can have key focus,
-   so we look for keypresses in the entire window.  fn_gallery_keydown()
-   ignores keys if the gallery isn't open. */
-window.onkeydown = fn_gallery_keydown;
-
-/* Handle any history.state that may be present. */
-fn_popstate(null);

@@ -1120,6 +1120,8 @@ img.hazard-img {
 div#gallery-background {
     position: fixed;
     display: flex;
+    /* The spinner canvas is a static element in the gallery background,
+       and we want it to be centered. */
     justify-content: center;
     align-items: center;
     /* The default in Firefox on Android is that the URL and other tools
@@ -1144,5 +1146,9 @@ img.gallery-photo {
     position: fixed;
 }
 canvas#photo-loading {
+    /* The spinner comes after the photo image(s) in the DOM order.
+       But because the images have 'fixed' position, by default they
+       float above the 'auto' position of the spinner.  To draw them
+       in the correct order, we give the spinner a higher z-index. */
     z-index: 35;
 }
