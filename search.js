@@ -187,8 +187,6 @@ function fn_popstate(event) {
 
 var offset = 0;
 function draw_spinner(timestamp) {
-  console.log('spin');
-
   var ctx = e_spin.getContext('2d');
   ctx.clearRect(0, 0, 100, 100);
   var r_ring = 40;
@@ -366,6 +364,8 @@ function fn_pointermove(event) {
     return true;
   }
 
+  console.log(event);
+
   var touch = copy_touch(event);
 
   var i = touch_index(touch);
@@ -515,8 +515,6 @@ Photo.prototype.gallery_init = function() {
 }
 
 Photo.prototype.activate_images = function() {
-  console.log('activate images');
-
   /* If we add a new photo to the display, we set new_active to 'true',
      which eventually triggers a call to redraw_photo(). */
   var new_active = false;

@@ -1,11 +1,11 @@
-When an image is 'complete', and we re-enter the gallery,
-  we don't know if it's really complete or if it had an error.
+draw the spinner red when it is stopped due to an error
 
 Replace 'zoom' with 'width'.
   Makes state restore easier and also switching from thumbnail to full size.
 
 can I improve pinching performance on Firefox?
-  perhaps fewer updates?
+  it appears that when multiple touch points move at once,
+    I only get informed about one point's movement
 
 add arrows on left and right (when appropriate) to switch photos
   also accept left and right keypresses
@@ -17,6 +17,8 @@ can I recognize a flick left or right for switching photos?
 add X in corner?
 
 can I disable or capture browser zoom while in the gallery?
+  do I want to?
+  e.g. ctrl-mouse wheel
 
 optional:
 
