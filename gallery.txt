@@ -1,3 +1,9 @@
+When an image is 'complete', and we re-enter the gallery,
+  we don't know if it's really complete or if it had an error.
+
+Replace 'zoom' with 'width'.
+  Makes state restore easier and also switching from thumbnail to full size.
+
 can I improve pinching performance on Firefox?
   perhaps fewer updates?
 
@@ -19,3 +25,8 @@ when resizing (and not touching), remember the desired photo zoom & pos
   so that resizing up and down will restore the photo as much as possible
 
 explicit zoom buttons
+
+While the thumbnail is loading,
+  have a light gray square behind it to indicate its eventual size
+    (or similar pattern)
+

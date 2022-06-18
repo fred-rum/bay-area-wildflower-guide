@@ -819,7 +819,8 @@ var touches = [];
 var one_unmoved_touch = true;
 var orig_pinch;
 var e_spin;
-var spin_timer;
+var spin_req = null;
+var spin_timestamp;
 
 /* Move the photo gallery from a 'closed' to an 'open' state.
 
@@ -865,15 +866,18 @@ function open_gallery() {
 
   document.body.appendChild(e_bg);
 
-  /* We always start the 'loading' spinner when we open the gallery, but if
-     later code will immediately stop it if the full-sized photo is already
-     loaded. */
-  spin_timer = setInterval(draw_spinner, 30);
+  /* We always start the 'loading' spinner when we open the gallery,
+     but later code will immediately stop it if the full-sized photo
+     is already loaded. */
+  if (!spin_req) {
+    spin_req = window.requestAnimationFrame(draw_spinner);
+    spin_timestamp = performance.now();
+  }
 }
 
 function close_gallery() {
   document.documentElement.style.overflow = 'auto';
-  obj_photo.remove_photo();
+  obj_photo.remove_images();
   obj_photo = null;
   e_bg.remove();
   clear_spinner();
@@ -883,6 +887,10 @@ function close_gallery() {
 
 var orig_title = null;
 
+/* fn_popstate() gets a callback when the user navigates from the photo gallery
+   back to the main page or from the main page forward to the photo gallery.
+   The latter is equally useful when a gallery page is reloaded, so we also
+   manually call fn_popstate() as soon as the page is loaded. */
 function fn_popstate(event) {
   console.log('popstate');
 
@@ -905,16 +913,19 @@ function fn_popstate(event) {
 }
 
 var offset = 0;
-function draw_spinner() {
+function draw_spinner(timestamp) {
+  console.log('spin');
+
   var ctx = e_spin.getContext('2d');
   ctx.clearRect(0, 0, 100, 100);
   var r_ring = 40;
   var r_circle = 10;
   var n = 7;
+  var hz = 1.0;
   for (var i = 0; i < n; i++) {
     var c = Math.floor(i * 255 / (n-1));
     ctx.fillStyle = 'rgb(' + c + ',' + c + ',' + c + ')';
-    var a = 2 * Math.PI * (i + offset) / n;
+    var a = 2 * Math.PI * ((i / n) + offset);
     var x = 50 + Math.sin(a) * (r_ring - r_circle);
     var y = 50 - Math.cos(a) * (r_ring - r_circle);
     ctx.beginPath();
@@ -922,15 +933,34 @@ function draw_spinner() {
     ctx.fill();
   }
 
-  offset = (offset + 0.2) % n;
+  var elapsed = timestamp - spin_timestamp;
+  spin_timestamp = timestamp;
+
+  var inc = elapsed / 1000 * hz;
+  inc = Math.min(inc, 1 / n);
+  offset = (offset + inc) % n;
+
+  spin_req = window.requestAnimationFrame(draw_spinner);
+
+  /* activate_images() polls the photo loading status and may stop the
+     spinner if there was a problem. */
+  obj_photo.activate_images();
 }
 
 function clear_spinner() {
-  clearInterval(spin_timer);
-  spin_timer = null;
-
+  console.log('clear spin');
   var ctx = e_spin.getContext('2d');
   ctx.clearRect(0, 0, 100, 100);
+
+  end_spinner();
+}
+
+function end_spinner() {
+  if (spin_req) {
+    console.log('end spin');
+    window.cancelAnimationFrame(spin_req);
+    spin_req = null;
+  }
 }
 
 function copy_touch(event) {
@@ -1120,9 +1150,25 @@ function Photo(i, e_thumbnail) {
        a keyboard) */
   this.e_thumbnail.onclick = this.fn_gallery_start.bind(this);
 
+  /* The image elements for the thumbnail (for fast loading) and full-sized
+     photo (for detail when available).
   this.e_thumb = null;
   this.e_full = null;
-  this.e_photo = null;
+
+  /* The thumbnail can be displayed as soon as we have dimensions for it.
+     Although it may still be loading, at least the user can see as much of
+     the image has loaded and can start interacting with it.
+
+     Similarly, the full-sized photo can be displayed as soon as we have
+     dimensions for it.  Although it may still be loading, it provides
+     extra detail over what the thumbnail can display, and its greater
+     dimensions allow it to be displayed larger.
+
+     We keep track of whether each photo is "active" on the screen with
+     the variables below. */
+  this.active_thumb = false;
+  this.active_full = false;
+  this.done_full = false;
 }
 
 Photo.prototype.fn_gallery_start = function(event) {
@@ -1150,28 +1196,26 @@ Photo.prototype.gallery_init = function() {
   obj_photo = this;
 
   if (this.e_thumb) {
-    /* This photo has been opened in the gallery before.  But it may or may
-       not have completed loading the thumbnail and/or full-sized photo. */
+    /* e_thumb and e_full are always create together, so we only need to check
+       whether either one is present.  If the photos have already been created,
+       we don't need to create them again. */
 
-    if (this.e_photo) {
-      /* At least one of the thumbnail and/or full-sized photo has loaded. */
-      this.add_photo();
+    if (this.done_full) {
+      /* The full-sized photo has loaded completely. */
+      clear_spinner();
 
-      if (this.e_photo == this.e_full) {
-        /* The full-sized photo has loaded. */
-        clear_spinner();
-      }
+      /* If it loaded too quickly, then we might not have activated the
+         photo yet, so do that now. */
     }
+
+    this.activate_images();
   } else {
     /* This photo has never been opened in the gallery before.  We create the
        necessary DOM elements here, but we'll have to wait for the thumbnail
        and full-sized photo to load. */
+
     this.e_thumb = document.createElement('img');
     this.e_thumb.className = 'gallery-photo';
-
-    /* By setting the onload handler before setting the img src value,
-       we guarantee that the img isn't loaded yet. */
-    this.e_thumb.onload = this.fn_thumb_onload.bind(this);
 
     /* The thumb-sized photo is the same as e_thumbnail.  Unfortunately,
        there's no way to simply re-use the thumbnail from the original page.
@@ -1182,7 +1226,13 @@ Photo.prototype.gallery_init = function() {
     this.e_full = document.createElement('img');
     this.e_full.className = 'gallery-photo';
 
+    /* By setting the onload handler before setting the img src value,
+       we guarantee that the img isn't loaded yet. */
     this.e_full.onload = this.fn_full_onload.bind(this);
+
+    /* 'onloadend' isn't well supported yet, so there's no callback if
+       the photo fails to load.  Instead, we poll for that condition in
+       the spinner. */
 
     /* The full-sized photo is the target of the original link.  BTW, this
        event handler ultimately suppresses further handling of the click, so
@@ -1192,74 +1242,112 @@ Photo.prototype.gallery_init = function() {
 
     /* Note that although the image elements have been created, they have not
        yet been inserted into the document.  We don't do that until the image
-       has loaded. */
+       dimensions have been loaded, as polled by the spinner. */
   }
 }
 
-Photo.prototype.fn_thumb_onload = function(event) {
-  console.log('thumbnail loaded');
+Photo.prototype.activate_images = function() {
+  console.log('activate images');
 
-  if (this.e_photo == this.e_full) {
-    /* e_photo refers to the full-sized photo, so the fact that the thumbnail
-       photo just loaded is useless to us. */
-    return;
+  var new_active = false;
+
+  if (!this.active_full && this.e_full.naturalWidth) {
+    /* We now have dimensions for the full-sized photo. */
+    new_active = true;
+
+    console.log('activate full');
+
+    this.active_full = true;
+    this.photo_x = this.e_full.naturalWidth;
+    this.photo_y = this.e_full.naturalHeight;
+
+    if (this.active_thumb) {
+      /* The zoom factor was previously based on the thumb dimensions, so
+         adjust it now so that the full-sized dimensions retain the same
+         effective image size on the screen. */
+      var zoom_adjust = this.e_full.naturalWidth / this.e_thumb.naturalWidth;
+      this.zoom /= zoom_adjust;
+      if (orig_pinch) {
+        orig_pinch /= zoom_adjust;
+      }
+    }
+
+    e_bg.appendChild(this.e_full);
   }
-  /* if we get here, this.e_photo == null */
 
-  this.zoom = this.history_width / this.e_thumb.naturalWidth;
+  if (!this.active_thumb && this.e_thumb.naturalWidth && !this.done_full) {
+    /* We now have dimensions for the thumbnail photo, but we only bother
+       to display it if the full-size photo is not done. */
+    new_active = true;
 
-  this.e_photo = this.e_thumb;
+    console.log('activate thumb');
 
-  this.add_photo();
+    this.active_thumb = true;
+    this.photo_x = this.e_thumb.naturalWidth;
+    this.photo_y = this.e_thumb.naturalHeight;
+
+    e_bg.appendChild(this.e_thumb);
+  }
+
+  if (this.e_thumb.complete && this.e_full.complete) {
+    /* Both photos have stopped loading, but nobody stopped the spinner.  That
+       most likely means that the load of the full-sized photo failed or was
+       aborted by the user.  We stop the spinner but leave it on-screen to
+       indicate that loading has stopped.  If the browser decides later that
+       the photo *is* completely loaded, it'll call the 'onload' callback,
+       which clears the spinner. */
+    end_spinner();
+  }
+
+  if (new_active) {
+    /* If history_width has a value, we need to restore the zoom to match
+       that width. */
+    if (this.history_width) {
+      this.zoom = this.history_width / this.photo_x;
+      this.history_width = null;
+    }
+
+    this.redraw_photo();
+  }
 }
 
 Photo.prototype.fn_full_onload = function(event) {
   console.log('full-size photo loaded');
 
-  clear_spinner();
+  this.done_full = true;
 
-  if (this.e_photo == this.e_thumb) {
-    /* The thumbnail is being displayed and possibly manipulated by the user,
-       so adjust the zoom of the full-sized photo to match. */
-    var zoom_adjust = this.e_full.naturalWidth / this.e_thumb.naturalWidth;
-    this.zoom /= zoom_adjust;
-    if (orig_pinch) {
-      orig_pinch /= zoom_adjust;
-    }
-
-    /* Remove the thumbnail photo before displaying the full-sized photo. */
-    this.e_thumb.remove();
-  } else { /* this.e_photo == null */
-    this.zoom = this.history_width / this.e_thumb.naturalWidth;
-  }
-
-  this.e_photo = this.e_full;
-
-  this.add_photo();
-}
-
-Photo.prototype.add_photo = function() {
   /* It's possible that a photo finishes loading while the gallery is closed
-     or has switched to another photo.  In that case, do *not* add the photo
-     to the gallery frmae. */
-  if (obj_photo != this) {
+     or has switched to another photo.  In that case, do *not* respond in
+     any way.  If the user switches back to this photo later, we'll rebuild
+     the gallery and notice that the image is ready. */
+  if (this != obj_photo) {
     return;
   }
 
-  /* record the photo dimensions without scaling */
-  this.photo_x = this.e_photo.naturalWidth;
-  this.photo_y = this.e_photo.naturalHeight;
+  clear_spinner();
 
-  e_bg.appendChild(this.e_photo);
+  /* The image might have loaded in less than a frame, so it hasn't been
+     activated yet.  Since the spinner's polling loop can no longer activate
+     it, do it manually here. */
+  this.activate_images();
 
-  this.redraw_photo();
+  if (this.active_thumb) {
+    /* The thumbnail photo is no longer useful, so we remove it. */
+    this.e_thumb.remove();
+    this.active_thumb = false;
+  }
 }
 
-Photo.prototype.remove_photo = function() {
+Photo.prototype.remove_images = function() {
   /* The gallery is being closed and might be re-opened with any photo,
      so we go ahead and remove this one from its position in e_bg. */
-  if (this.e_photo) {
-    this.e_photo.remove();
+  if (this.active_thumb) {
+    this.e_thumb.remove();
+    this.active_thumb = false;
+  }
+  if (this.active_full) {
+    this.e_full.remove();
+    this.active_full = false;
   }
 }
 
@@ -1442,7 +1530,7 @@ Photo.prototype.zoom_to = function(orig, new_zoom, old_pos, new_pos) {
 /* The code for 2+ touches (pinch) also handles 1 touch (drag)
    as a degenerate case (with no change in zoom). */
 Photo.prototype.pinch = function(old_pinch, new_pinch) {
-  if (!this.e_photo) {
+  if (!this.active_thumb && !this.active_full) {
     /* Nothing to pinch/drag yet. */
     return;
   }
@@ -1511,7 +1599,7 @@ Photo.prototype.fn_save_state = function() {
 }
 
 Photo.prototype.redraw_photo = function() {
-  if (!this.e_photo) {
+  if (!this.active_thumb && !this.active_full) {
     /* Nothing to redraw. */
     return;
   }
@@ -1548,16 +1636,18 @@ Photo.prototype.redraw_photo = function() {
   var img_x0 = (win_x / 2) - (img_x * this.cx);
   var img_y0 = (win_y / 2) - (img_y * this.cy);
 
-  this.e_photo.style.width = img_x + 'px';
-  this.e_photo.style.height = img_y + 'px';
-  this.e_photo.style.left = img_x0 + 'px';
-  this.e_photo.style.top = img_y0 + 'px';
-/*
-  console.info('photo dimensions: ', this.photo_x, ',', this.photo_y)
-  console.info('window dimensions: ', win_x, ',', win_y)
-  console.info('image dimensions: ', img_x, ',', img_y)
-  console.info('image position: ', img_x0, ',', img_y0)
-*/
+  /* We don't have to set the height since the browser can compute it
+     automatically from the width and the image's intrinsic aspect ratio. */
+  if (this.active_thumb) {
+    this.e_thumb.style.width = img_x + 'px';
+    this.e_thumb.style.left = img_x0 + 'px';
+    this.e_thumb.style.top = img_y0 + 'px';
+  }
+  if (this.active_full) {
+    this.e_full.style.width = img_x + 'px';
+    this.e_full.style.left = img_x0 + 'px';
+    this.e_full.style.top = img_y0 + 'px';
+  }
 }
 
 Photo.prototype.resize = function() {

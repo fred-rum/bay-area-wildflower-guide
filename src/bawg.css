@@ -1122,10 +1122,20 @@ div#gallery-background {
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 0px;
-    left: 0px;
-    bottom: 0px;
-    right: 0px;
+    /* The default in Firefox on Android is that the URL and other tools
+       are hidden or revealed when the user scrolls.  Even if
+       touch-action is 'none' and overflow is 'hidden', a drag action by
+       the user can hide or reveal the toolbar.  I suppose that makes sense,
+       but as the toolbar is dragged away, it reveals extra area in the
+       viewport that the gallery background can't immediately respond to.
+       I.e. text and images in the underlying web page are partially revealed,
+       which looks ugly and awkward.  To prevent this reveal, we make the
+       gallary background much larger than the viewport so that everything
+       remains hidden even if the viewport expands. */
+    top: -1000px;
+    left: -1000px;
+    bottom: -1000px;
+    right: -1000px;
     background-color: #404040;
     z-index: 30;
     touch-action: none;
