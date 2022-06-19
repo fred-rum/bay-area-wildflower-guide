@@ -256,7 +256,8 @@ function fn_pointerdown(event) {
   }
 
   /* Capture the pointer so that drag tracking can continue
-     outside the normal gallery region. */
+     outside the normal gallery region.  (E.g. the mouse can leave the
+     window while the button is held down.) */
   e_bg.setPointerCapture(event.pointerId);
 
   var touch = copy_touch(event);
@@ -270,7 +271,10 @@ function fn_pointerdown(event) {
   /* reset the starting pinch/drag location */
   orig_pinch = undefined;
 
-  return false;
+  /* We don't care if the pointerdown event propagates, but if I return false
+     here, Firefox on Android suddenly can't generate pointermove events for
+     two moving touches at the same time. */
+  return true;
 }
 
 function touch_index(touch) {
@@ -359,12 +363,12 @@ function fn_pointermove(event) {
   }
 
   if ((event.pointerType == 'mouse') && (event.buttons != 1)) {
-    /* discard mouse actions of any extra buttons are pressed at any point */
+    /* discard mouse actions if any extra buttons are pressed at any point */
     fn_pointercancel(event);
     return true;
   }
 
-  console.log('pointerId:', event.pointerId);
+  console.log('pointermove ID:', event.pointerId);
 
   var touch = copy_touch(event);
 
@@ -739,8 +743,6 @@ Photo.prototype.constrain_pos = function() {
   }
 }
 
-var zoom_req = null;
-
 /* Update the image zoom and position while keeping the same part of the
    image under a particular screen location (e.g. where the user is
    pointing).  The input parameters are flexible about the kind of object
@@ -804,9 +806,7 @@ Photo.prototype.zoom_to = function(orig, new_zoom, old_pos, new_pos) {
 
   this.constrain_pos();
 
-  if (!zoom_req) {
-    zoom_req = window.requestAnimationFrame(this.redraw_photo.bind(this));
-  }
+  this.redraw_photo();
 }
 
 /* The code for 2+ touches (pinch) also handles 1 touch (drag)
@@ -881,9 +881,7 @@ Photo.prototype.fn_save_state = function() {
 }
 
 Photo.prototype.redraw_photo = function() {
-  zoom_req = null;
-
-  if ((this != obj_photo) || (!this.active_thumb && !this.active_full)) {
+  if (!this.active_thumb && !this.active_full) {
     /* Nothing to redraw. */
     return;
   }

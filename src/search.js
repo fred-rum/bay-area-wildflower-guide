@@ -187,8 +187,6 @@ function fn_popstate(event) {
 
 var offset = 0;
 function draw_spinner(timestamp) {
-  console.log('spin');
-
   var ctx = e_spin.getContext('2d');
   ctx.clearRect(0, 0, 100, 100);
   var r_ring = 40;
@@ -258,7 +256,8 @@ function fn_pointerdown(event) {
   }
 
   /* Capture the pointer so that drag tracking can continue
-     outside the normal gallery region. */
+     outside the normal gallery region.  (E.g. the mouse can leave the
+     window while the button is held down.) */
   e_bg.setPointerCapture(event.pointerId);
 
   var touch = copy_touch(event);
@@ -272,7 +271,10 @@ function fn_pointerdown(event) {
   /* reset the starting pinch/drag location */
   orig_pinch = undefined;
 
-  return false;
+  /* We don't care if the pointerdown event propagates, but if I return false
+     here, Firefox on Android suddenly can't generate pointermove events for
+     two moving touches at the same time. */
+  return true;
 }
 
 function touch_index(touch) {
@@ -361,10 +363,12 @@ function fn_pointermove(event) {
   }
 
   if ((event.pointerType == 'mouse') && (event.buttons != 1)) {
-    /* discard mouse actions of any extra buttons are pressed at any point */
+    /* discard mouse actions if any extra buttons are pressed at any point */
     fn_pointercancel(event);
     return true;
   }
+
+  console.log('pointermove ID:', event.pointerId);
 
   var touch = copy_touch(event);
 
@@ -515,8 +519,6 @@ Photo.prototype.gallery_init = function() {
 }
 
 Photo.prototype.activate_images = function() {
-  console.log('activate images');
-
   /* If we add a new photo to the display, we set new_active to 'true',
      which eventually triggers a call to redraw_photo(). */
   var new_active = false;

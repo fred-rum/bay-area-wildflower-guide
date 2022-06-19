@@ -3,10 +3,6 @@ draw the spinner red when it is stopped due to an error
 Replace 'zoom' with 'width'.
   Makes state restore easier and also switching from thumbnail to full size.
 
-can I improve pinching performance on Firefox?
-  it appears that when multiple touch points move at once,
-    I only get informed about one point's movement
-
 add arrows on left and right (when appropriate) to switch photos
   also accept left and right keypresses
   also accept wheel let and right?
@@ -32,3 +28,4 @@ While the thumbnail is loading,
   have a light gray square behind it to indicate its eventual size
     (or similar pattern)
 
+make the spinner partially transparent (e.g. 70% opacity)
