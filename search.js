@@ -364,7 +364,7 @@ function fn_pointermove(event) {
     return true;
   }
 
-  console.log(event);
+  console.log(event.pointerId);
 
   var touch = copy_touch(event);
 
