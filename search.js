@@ -739,6 +739,8 @@ Photo.prototype.constrain_pos = function() {
   }
 }
 
+var zoom_req = null;
+
 /* Update the image zoom and position while keeping the same part of the
    image under a particular screen location (e.g. where the user is
    pointing).  The input parameters are flexible about the kind of object
@@ -802,7 +804,9 @@ Photo.prototype.zoom_to = function(orig, new_zoom, old_pos, new_pos) {
 
   this.constrain_pos();
 
-  this.redraw_photo();
+  if (!zoom_req) {
+    zoom_req = window.requestAnimationFrame(this.redraw_photo.bind(this));
+  }
 }
 
 /* The code for 2+ touches (pinch) also handles 1 touch (drag)
@@ -877,7 +881,9 @@ Photo.prototype.fn_save_state = function() {
 }
 
 Photo.prototype.redraw_photo = function() {
-  if (!this.active_thumb && !this.active_full) {
+  zoom_req = null;
+
+  if ((this != obj_photo) || (!this.active_thumb && !this.active_full)) {
     /* Nothing to redraw. */
     return;
   }
