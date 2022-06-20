@@ -5,17 +5,53 @@
 /*****************************************************************************/
 /* code related to the photo gallery */
 
+/* fresh is 'true' only for the first call to gallery_main() */
 var fresh = true;
+
+/* obj_photos is an array of Photo objects, one for each photo associated
+   with this page */
 var obj_photos = [];
-var obj_photo = undefined;
-var e_bg = undefined;
-var touches = [];
-var one_unmoved_touch = true;
-var orig_pinch;
+
+/* obj_photo is the Photo object currently being displayed in the gallery,
+   or null if the gallery isn't open */
+var obj_photo = null;
+
+/* e_bg is the gray background for the photo gallery.  It covers the normal
+   page contents. It is created once and then added or removed from the page as
+   desired. */
+var e_bg = null;
+
+/* e_spin is the canvas where the spinning 'loading' icon is drawn.
+   The canvas is created once and then drawn or cleared as desired. */
 var e_spin;
+
+/* spin_req represents the request for the next animation frame when the
+   spinner is spinning.  It can be used to cancel the request and stop the
+   spinner. */
 var spin_req = null;
+
+/* spin_timestamp indicates the time of the last spinner update.  This helps
+   determine how far the spinner should rotate the next time it is drawn. */
 var spin_timestamp;
+
+/* The touches array keeps track of active pointers, i.e. a mouse with the
+   left button pressed and any finger or stylus touching the screen. */
+var touches = [];
+
+/* one_unmoved_touch tracks whether there is a current touch in progress
+   that should count as a 'click' if released */
+var one_unmoved_touch = true;
+
+/* orig_pinch remembers data about how the current multi-touch started.
+   Movements of the touch points can be compared against this original. */
+var orig_pinch;
+
+/* win_x and win_y keep track of the current viewport dimentions.  These are
+   updated on a resize event.  These values can be queried at any time, but
+   I need them in so many parts of the code that it's easier to just maintain
+   them as global values. */
 var win_x, win_y;
+
 
 /* Ideally, we want gallery_main() to be called after the thumbnails are
    loaded into the DOM, but before the user can click on them.  But the
@@ -61,14 +97,18 @@ function gallery_main() {
   /* maintain the window dimensions for quick access */
   win_x = window.innerWidth;
   win_y = window.innerHeight;
+  window.addEventListener('resize', fn_resize);
 
-  window.onresize = fn_resize;
-  window.onpopstate = fn_popstate;
+  /* We attach 'history.state' to the document when entering the gallery.
+     The browser then informs us on any forward/back navigation whether
+     the current 'history'state' has changed, which means that we need to
+     either close or re-open the gallery. */
+  window.addEventListener('popstate', fn_popstate);
 
   /* The gallery doesn't have an input field that can have key focus,
      so we look for keypresses in the entire window.  fn_gallery_keydown()
      ignores keys if the gallery isn't open. */
-  window.onkeydown = fn_gallery_keydown;
+  window.addEventListener('keydown', fn_gallery_keydown);
 
   /* Handle any history.state that may be present.  Typically we do this only
      on the first call to gallery_main(), but if we don't have the necessary
@@ -123,12 +163,12 @@ function open_gallery() {
   if (!e_bg) {
     e_bg = document.createElement('div');
     e_bg.id = 'gallery-background';
-    e_bg.onpointerdown = fn_pointerdown;
-    e_bg.onpointerleave = fn_pointercancel;
-    e_bg.onpointercancel = fn_pointercancel;
-    e_bg.onpointerup = fn_pointerup;
-    e_bg.onpointermove = fn_pointermove;
-    e_bg.onwheel = fn_wheel;
+    e_bg.addEventListener('pointerdown', fn_pointerdown);
+    e_bg.addEventListener('pointerleave', fn_pointercancel);
+    e_bg.addEventListener('pointercancel', fn_pointercancel);
+    e_bg.addEventListener('pointerup', fn_pointerup);
+    e_bg.addEventListener('pointermove', fn_pointermove);
+    e_bg.addEventListener('wheel', fn_wheel);
 
     e_spin = document.createElement('canvas');
     e_spin.id = 'photo-loading';
@@ -155,7 +195,6 @@ function close_gallery() {
   e_bg.remove();
   clear_spinner();
   touches = [];
-  return false;
 }
 
 var orig_title = null;
@@ -252,7 +291,7 @@ function fn_pointerdown(event) {
   if ((event.pointerType == 'mouse') && (event.buttons != 1)) {
     /* ignore any mouse click that is not solely the the primary (left)
        mouse button */
-    return true;
+    return;
   }
 
   /* Capture the pointer so that drag tracking can continue
@@ -274,7 +313,6 @@ function fn_pointerdown(event) {
   /* We don't care if the pointerdown event propagates, but if I return false
      here, Firefox on Android suddenly can't generate pointermove events for
      two moving touches at the same time. */
-  return true;
 }
 
 function touch_index(touch) {
@@ -286,6 +324,8 @@ function touch_index(touch) {
   return -1;
 }
 
+/* Remove and element from the touches array (because the touch has been
+   removed).  Returns 'true' if the touch was in the array, 'false' if not. */
 function discard_touch(touch) {
   /* Discard the cached touch location */
   var i = touch_index(touch);
@@ -304,8 +344,6 @@ function fn_pointercancel(event) {
 
   /* reset the starting pinch/drag location */
   orig_pinch = undefined;
-
-  return false;
 }
 
 function fn_pointerup(event) {
@@ -314,11 +352,19 @@ function fn_pointerup(event) {
   /* reset the starting pinch/drag location */
   orig_pinch = undefined;
 
+  /* For some reason the browser doesn't do proper click handling when there
+     are event handlers for the various pointer events.  In Chrome on the
+     desktop, click-drag-release causes the browser to pause for about a second
+     before triggering a 'click' event.  But it shouldn't trigger a 'click' if
+     the mouse moved, and the second-long pause is a UX nightmare.
+
+     So we handle the click ourselves as a degenerate case of pointer up
+     followed by pointer down with no pointermove in between. */
   if (discard_touch(touch) && one_unmoved_touch) {
     /* There was a single click with no drag. */
 
     /* Let the photo object handle it if appropriate. */
-    if (obj_photo && obj_photo.click.call(obj_photo, touch)) {
+    if (obj_photo && !obj_photo.click.call(obj_photo, touch)) {
       /* The click was outside the photo, so we return to the normal page view.
          We could close the gallery directly, but since opening the gallery
          pushed an entry to the browser's history, we want to pop back up the
@@ -327,11 +373,10 @@ function fn_pointerup(event) {
       history.back();
     }
 
-    return false;
+    return;
   }
 
   console.log('pointer up:', touches.length);
-  return true;
 }
 
 /* Measure the pinch distance by calculating the bounding box around all
@@ -359,13 +404,13 @@ function measure_pinch() {
 function fn_pointermove(event) {
   if (touches.length == 0) {
     /* e.g. the mouse was moved without a button down. */
-    return false;
+    return;
   }
 
   if ((event.pointerType == 'mouse') && (event.buttons != 1)) {
     /* discard mouse actions if any extra buttons are pressed at any point */
     fn_pointercancel(event);
-    return true;
+    return;
   }
 
   console.log('pointermove ID:', event.pointerId);
@@ -376,7 +421,7 @@ function fn_pointermove(event) {
   if (i == -1) {
     /* e.g. the mouse was moved while separately
        a finger was touching the screen */
-    return false;
+    return;
   }
 
   if ((touches[i].x == touch.x) &&
@@ -384,7 +429,7 @@ function fn_pointermove(event) {
     /* Android likes to activate pointermove even when no movement occurred.
        Don't waste time processing it, and particularly don't let it
        disrupt click detection. */
-    return false;
+    return;
   }
 
   /* A touching pointer moved. */
@@ -401,8 +446,6 @@ function fn_pointermove(event) {
     var new_pinch = measure_pinch();
     obj_photo.pinch.call(obj_photo, old_pinch, new_pinch);
   }
-
-  return false;
 }
 
 function fn_wheel(event) {
@@ -429,7 +472,7 @@ function Photo(i, e_thumbnail) {
      - navigating through the link via the keyboard bypasses the photo gallery
        (since this is no worse and may be better than the photo gallery without
        a keyboard) */
-  this.e_thumbnail.onclick = this.fn_gallery_start.bind(this);
+  this.e_thumbnail.addEventListener('click', this.fn_gallery_start.bind(this));
 
   /* The image elements for the thumbnail (for fast loading) and full-sized
      photo (for detail when available).
@@ -466,9 +509,12 @@ Photo.prototype.fn_gallery_start = function(event) {
   var state = this.get_state();
   history.pushState(state, '');
 
-  /* This function was called for a click on a thumbnail.  We return false
-     so that the default link to the full-size image isn't followed. */
-  return false;
+  /* This function was called for a click on a thumbnail.  The thumbnail has a
+     link to the full-sized image file that is needed if JavaScript is
+     disabled.  But if JavaScript is enabled and this code is run to start the
+     photo gallery, we use preventDefault() to prevent the browser from 
+    following the link. */
+  event.preventDefault();
 }
 
 Photo.prototype.gallery_init = function() {
@@ -486,6 +532,7 @@ Photo.prototype.gallery_init = function() {
 
     this.e_thumb = document.createElement('img');
     this.e_thumb.className = 'gallery-photo';
+    this.e_thumb.setAttribute('draggable', 'false');
 
     /* The thumb-sized photo is the same as e_thumbnail.  Unfortunately,
        there's no way to simply re-use the thumbnail from the original page.
@@ -495,10 +542,11 @@ Photo.prototype.gallery_init = function() {
 
     this.e_full = document.createElement('img');
     this.e_full.className = 'gallery-photo';
+    this.e_full.setAttribute('draggable', 'false');
 
-    /* By setting the onload handler before setting the img src value,
+    /* By setting the load event handler before setting the img src value,
        we guarantee that the img isn't loaded yet. */
-    this.e_full.onload = this.fn_full_onload.bind(this);
+    this.e_full.addEventListener('load', this.fn_full_onload.bind(this));
 
     /* 'onloadend' isn't well supported yet, so there's no callback if
        the photo fails to load.  Instead, we poll for that condition in
@@ -657,9 +705,7 @@ Photo.prototype.in_image = function(touch) {
 
 Photo.prototype.click = function(touch) {
   if (!this.in_image(touch)) {
-    /* the click was outside the image, so continue processing the click
-       on the gallery background. */
-    return true;
+    return false; /* the click hasn't been handled */
   }
 
   console.log('click in image');
@@ -695,7 +741,7 @@ Photo.prototype.click = function(touch) {
     /* Once this.fit is true, redraw_photo() does the work for us. */
   }
   this.redraw_photo();
-  return false; /* stop propagating the click */
+  return true; /* the click has been handled */
 }
 
 Photo.prototype.constrain_zoom = function() {
@@ -952,10 +998,8 @@ function fn_gallery_keydown(event) {
     console.log(event);
     if (event.key == 'Escape') {
       history.back();
-      return false;
     }
   }
-  return true;
 }
 
 /* This call has to be after all gallery-related function definitions.
@@ -1662,7 +1706,7 @@ document.addEventListener('click', fn_doc_click);
    away, then hits the back button to return to the page, the search field
    is cleared (good), but the autocomplete box remains visible and populated
    (bad).  This code fixes that. */
-window.onbeforeunload = fn_focusout;
+window.addEventListener('beforeunload', fn_focusout);
 
 /* When entering the page or when changing anchors within a page,
    set the window title to "anchor (page title)". */
