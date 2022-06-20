@@ -187,7 +187,7 @@ function open_gallery() {
      but later code will immediately stop it if the full-sized photo
      is already loaded. */
   if (!spin_req) {
-    spin_req = window.requestAnimationFrame(draw_spinner);
+    spin_req = window.requestAnimationFrame(fn_spin);
     spin_timestamp = performance.now();
   }
 }
@@ -228,7 +228,17 @@ function fn_popstate(event) {
   }
 }
 
-function draw_spinner(timestamp) {
+function fn_spin(timestamp) {
+  draw_spinner(timestamp, false);
+
+  spin_req = window.requestAnimationFrame(fn_spin);
+
+  /* activate_images() polls the photo loading status and may stop the
+     spinner if there was a problem. */
+  obj_photo.activate_images();
+}
+
+function draw_spinner(timestamp, stopped) {
   var hz = 1.0; /* revolutions per second */
   var n = 7; /* number of circles in the spinner */
   var r_ring = 40; /* outer radius of the spinner as a whole */
@@ -247,7 +257,13 @@ function draw_spinner(timestamp) {
   ctx.clearRect(0, 0, 100, 100);
   for (var i = 0; i < n; i++) {
     var c = Math.floor(i * 255 / (n-1));
-    ctx.fillStyle = 'rgb(' + c + ',' + c + ',' + c + ')';
+    if (stopped) {
+      /* red through deep red, patially transparent */
+      ctx.fillStyle = 'rgb(' + (c / 255 * 155 + 100) + ',0,0,0.70)';
+    } else {
+      /* white through black, fully opaque */
+      ctx.fillStyle = 'rgb(' + c + ',' + c + ',' + c + ')';
+    }
     var a = 2 * Math.PI * ((i / n) + spin_offset);
     var x = 50 + Math.sin(a) * (r_ring - r_circle);
     var y = 50 - Math.cos(a) * (r_ring - r_circle);
@@ -255,12 +271,6 @@ function draw_spinner(timestamp) {
     ctx.arc(x, y, r_circle, 0, 2 * Math.PI);
     ctx.fill();
   }
-
-  spin_req = window.requestAnimationFrame(draw_spinner);
-
-  /* activate_images() polls the photo loading status and may stop the
-     spinner if there was a problem. */
-  obj_photo.activate_images();
 }
 
 function clear_spinner() {
@@ -640,6 +650,7 @@ Photo.prototype.activate_images = function() {
        but leave it on-screen to indicate that loading has stopped.  If the
        browser decides later that the photo *is* completely loaded, it'll call
        the 'onload' callback, which clears the spinner. */
+    draw_spinner(spin_timestamp, true);
     end_spinner();
   }
 
