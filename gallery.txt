@@ -1,3 +1,6 @@
+instead of using fn_doc_click on 'click', use fn_focusout on 'focusout'.
+  with this, do I still need anything on 'unload'?
+
 draw the spinner red when it is stopped due to an error
 
 Replace 'zoom' with 'width'.

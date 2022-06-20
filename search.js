@@ -34,6 +34,10 @@ var spin_req = null;
    determine how far the spinner should rotate the next time it is drawn. */
 var spin_timestamp;
 
+/* spin_offset indicates the current spin position, as the fraction (0.0-1.0)
+   of a 360-degree clockwise rotation from the default orientation. */
+var spin_offset = 0;
+
 /* The touches array keeps track of active pointers, i.e. a mouse with the
    left button pressed and any finger or stylus touching the screen. */
 var touches = [];
@@ -224,31 +228,33 @@ function fn_popstate(event) {
   }
 }
 
-var offset = 0;
 function draw_spinner(timestamp) {
+  var hz = 1.0; /* revolutions per second */
+  var n = 7; /* number of circles in the spinner */
+  var r_ring = 40; /* outer radius of the spinner as a whole */
+  var r_circle = 10; /* radius of each circle within the spinner */
+
+  /* calculate how much to spin the spinner */
+  var elapsed = timestamp - spin_timestamp;
+  spin_timestamp = timestamp;
+
+  var inc = elapsed / 1000 * hz;
+  inc = Math.min(inc, 1 / n); /* don't spin by more than one circle position */
+  spin_offset = (spin_offset + inc) % n;
+
+  /* draw the spinner */
   var ctx = e_spin.getContext('2d');
   ctx.clearRect(0, 0, 100, 100);
-  var r_ring = 40;
-  var r_circle = 10;
-  var n = 7;
-  var hz = 1.0;
   for (var i = 0; i < n; i++) {
     var c = Math.floor(i * 255 / (n-1));
     ctx.fillStyle = 'rgb(' + c + ',' + c + ',' + c + ')';
-    var a = 2 * Math.PI * ((i / n) + offset);
+    var a = 2 * Math.PI * ((i / n) + spin_offset);
     var x = 50 + Math.sin(a) * (r_ring - r_circle);
     var y = 50 - Math.cos(a) * (r_ring - r_circle);
     ctx.beginPath();
     ctx.arc(x, y, r_circle, 0, 2 * Math.PI);
     ctx.fill();
   }
-
-  var elapsed = timestamp - spin_timestamp;
-  spin_timestamp = timestamp;
-
-  var inc = elapsed / 1000 * hz;
-  inc = Math.min(inc, 1 / n);
-  offset = (offset + inc) % n;
 
   spin_req = window.requestAnimationFrame(draw_spinner);
 

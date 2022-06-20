@@ -55,11 +55,11 @@
    search-container's box-shadow.
 
    To support a circular focus ring, we set up a transparent (opacity 0)
-   border 3 pixels thick.  A border with an inner diameter of 40 pixels
-   leaves a thin gap between it and the image, which looks ugly.  So
-   instead I make the inner border diameter 38 pixels.  The image is
-   then expanded back up to 40 pixels and shifted slightly to center it
-   in the border. 
+   border 3 pixels thick, and we add a drop-shadow to this invisible border.
+   A border with an inner diameter of 40 pixels leaves a thin gap between
+   its drop shadow and the image, which looks ugly.  So instead I make the
+   inner border diameter 38 pixels.  The image is then expanded back up to
+   40 pixels and shifted slightly to center it in the border. 
 */
 #home-icon {
     position: fixed;
