@@ -1,6 +1,3 @@
-instead of using fn_doc_click on 'click', use fn_focusout on 'focusout'.
-  with this, do I still need anything on 'unload'?
-
 Replace 'zoom' with 'width'.
   Makes state restore easier and also switching from thumbnail to full size.
 

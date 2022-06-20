@@ -1051,7 +1051,7 @@ function fn_focusin() {
   }
 }
 
-function fn_focusout() {
+function fn_pageshow() {
   hide_ac();
 }
 
@@ -1704,26 +1704,45 @@ var e_search_input = document.getElementById('search');
 var e_autocomplete_box = document.getElementById('autocomplete-box');
 var e_home_icon = document.getElementById('home-icon');
 
-/* We want to trigger hide_ac whenever the user clicks somewhere that
-   **isn't** the search field or autocomplete box.  I used to create a
-   div containing everything except the search stuff, but the extra div
-   is inelegant, and it still leaves places to click around the edges of
-   the window that cause focus to be lost, but the div event isn't triggered.
+/* We want hide the autocomplete box whenever the user clicks somewhere that
+   **isn't** the search field or autocomplete box.  I could potentially add an
+   event listener to 'focusout', but that fires on a click in the autocomplete
+   box.  I could maybe figure out a workaround that still uses the 'focusout'
+   event, but the below method seens easier.
 
-   So now I trigger an event for the entire document, then exclude the
-   search field and autocomplete box within the event handler.
+   We add an event listener for a 'click' anywhere in the window.  The event
+   handler explicitly ignores a click event if the target is the search field
+   or autocomplete box.  If it's outside those elements, the event handler
+   close the autocomplete box.
 
-   'mousedown' triggers an event on the scrollbar, but it doesn't remove
-   focus from the search field.  That's awkward because I can't quickly
-   find a way to ignore that event.  But 'click' doesn't trigger on the
-   scrollbar, so that's what I use. */
-document.addEventListener('click', fn_doc_click);
+   Special cases:
+
+   A click in the window chrome (outside the HTML area) doesn't trigger the
+   event, nor does a click outside the window, although both of these remove
+   focus from the search bar.  I prefer that these don't remove the
+   autocomplete box, so that's fine.
+
+   A click in the scroll bar also doesn't trigger the event, which is good
+   because the browser doesn't change the focus in this case.
+
+   The browser removes focus from the search bar as soon as the mouse button
+   is pressed or the touch begins, whereas the click event isn't triggered
+   until the mouse button is released or the touch ends.  This isn't ideal,
+   but it's not bad.  I tried a few workarounds, with the following results:
+
+      An event handler on 'pointerdown' has better timing, but I find that it
+      also triggers on the scroll bar, which would be bad as mentioned above.
+
+      An 'pointerdown' event handler on document.body ignores the scroll bar
+      as desired, but it also ignores clicks below the last HTML element.
+*/
+window.addEventListener('click', fn_doc_click);
 
 /* On Android Firefox, if the user clicks an autocomplete link to navigate
    away, then hits the back button to return to the page, the search field
    is cleared (good), but the autocomplete box remains visible and populated
    (bad).  This code fixes that. */
-window.addEventListener('beforeunload', fn_focusout);
+window.addEventListener('pageshow', fn_pageshow);
 
 /* When entering the page or when changing anchors within a page,
    set the window title to "anchor (page title)". */
