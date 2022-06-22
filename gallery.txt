@@ -1,3 +1,5 @@
+move gallery.js and gallery.css to src/
+
 test thumbnails of CalPhotos images
 
 make photo gallery viewer work with figures
@@ -39,7 +41,7 @@ can I disable or capture browser zoom while in the gallery?
   e.g. ctrl-mouse wheel
 
 optional:
-
+`
 when resizing (and not touching), remember the desired photo zoom & pos
   start from those values when constraining the photo
   so that resizing up and down will restore the photo as much as possible

@@ -70,7 +70,48 @@ var win_x, win_y;
 function main() {
   /* Initialize each potential gallery photo, in particular adding
      Javascript to intercept a click on any of the page's thumbnails. */
-  var photo_urls = ['photos/bull kelp,6.jpg', 'photos/bull kelp,8.jpg']
+  var page_name = window.location.search;
+  if (page_name) {
+    page_name = decodeURIComponent(page_name.substring(1))
+  } else {
+    page_name = 'invalid'
+  }
+
+  var photo_urls = [encodeURI('photos/' + page_name + '.jpg')];
+  for (var i = 0; i < pages.length; i++) {
+    var list = pages[i];
+
+    /* The page_name supplied in the link has ' ' replaced with '-'.
+       So make the same transformation to the page names in photos.js
+       when comparing them. */
+    var cmp_name = list[0].replace(/ /g, '-');
+    if (cmp_name == page_name) {
+      /* Generate the page title from the name with proper spaces in it. */
+      page_name = list[0];
+
+      /* The page name with spaces is also the default base name for a
+         photo file name. */
+      var base_name = page_name;
+
+      photo_urls = [];
+      for (var j = 1; j < list.length; j++) {
+        var photo_name = String(list[j]);
+        if (photo_name.search(',') == -1) {
+          photo_name = base_name + ',' + photo_name;
+        }
+        if (photo_name.search('/') == -1) {
+          photo_name = 'photos/' + photo_name;
+        }
+        if (photo_name.search(/.jpg$/) == -1) {
+          photo_name =  photo_name + '.jpg';
+        }
+        photo_urls.push(encodeURI(photo_name));
+      }
+      break;
+    }
+  }
+
+  document.title = 'gallery - ' + page_name;
 
   for (var i = 0; i < photo_urls.length; i++) {
     var obj = new Photo(i, photo_urls[i])
@@ -85,8 +126,6 @@ function main() {
   /* The gallery doesn't have an input field that can have key focus,
      so we look for keypresses in the entire window. */
   window.addEventListener('keydown', fn_gallery_keydown);
-
-  document.title = 'gallery - bull kelp';
 
   var i = 0;
   if (window.location.hash) {
@@ -433,7 +472,7 @@ function Photo(i, url_full) {
 
   this.i = i;
   this.url_full = url_full;
-  this.url_thumb = url_full.replace(/^photos/, 'thumbs/')
+  this.url_thumb = url_full.replace(/^photos\//, 'thumbs/')
 
   /* The image elements for the thumbnail (for fast loading) and full-sized
      photo (for detail when available).

@@ -757,8 +757,9 @@ with open(photos_file, 'w', encoding='utf-8') as w:
     # We sort in the same order as pages.js for convenience of comparing them.
     for page in sort_pages(page_array, with_depth=True):
         # Each page that links to full-sized photos gets an entry.
-        if (!page.photo_dict):
-            break
+        # Pages without photos are not included in the list.
+        if (not page.photo_dict):
+            continue
 
         # The entry consists of the page name followed by the photo URLs.
         #
@@ -772,10 +773,12 @@ with open(photos_file, 'w', encoding='utf-8') as w:
         #     (e.g. by replacing ' ' with '-'), that part is dropped.
         #   If a subsequent photo's base name is the same as the previous
         #     photos, that part is also dropped.
-        #   When the base name is dropped, the ',' separating it from the
+        #   If only the suffix is emitted, the ',' separating it from the
         #     photo suffix is also dropped.
+        #   If only the suffix is emitted and it is a simple decimal, it
+        #     is emitted as an unquoted integer rather than a quoted string.
         #   What remains is often simply a list of photo suffixes,
-        #     e.g. '1','3','7'
+        #     e.g. 1,3,7
         name = page.name
         w.write(f'["{name}",')
         photos = []
@@ -784,10 +787,14 @@ with open(photos_file, 'w', encoding='utf-8') as w:
             jpg = page.photo_dict[suffix]
             base,suffix1 = separate_name_and_suffix(jpg)
             if base == recent_name:
-                photos.append(suffix1)
+                suffix1 = suffix1[1:]
+                if re.match(r'0|[1-9][0-9]*$', suffix1):
+                    photos.append(suffix1)
+                else:
+                    photos.append(f'"{suffix1}"')
             else:
                 recent_name = base
-                photos.append(jpg)
+                photos.append(f'"{jpg}"')
         photo_list = ','.join(photos)
         w.write(f'{photo_list}],\n')
     w.write('];\n')

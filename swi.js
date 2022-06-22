@@ -54,12 +54,6 @@ var root_path;
 /* If the readyState is 'interactive', then the user can (supposedly)
    interact with the page, but it may still be loading HTML, images,
    or the stylesheet.  In fact, the page may not even be rendered yet.
-   We use a 0-length timeout to call restore_scroll() as soon as possible
-   after pending rendering, if any.
-
-   Hopefully the stylesheet has been loaded and the HTML and CSS are
-   sufficiently well designed so that the page isn't still adjusting
-   its layout after the call to restore_scroll().
 */
 async function swi_oninteractive() {
   if (document.readyState !== 'complete') {

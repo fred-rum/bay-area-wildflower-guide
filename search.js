@@ -40,7 +40,11 @@ function gallery_main() {
   console.log('e_thumbnail_list:', e_thumbnail_list);
 
   var html_url = window.location.pathname;
-  var page_name = /([^/]*)\.html$/.exec(html_url)[1];
+  var page_name = /([^\/]*)\.html$/.exec(html_url)[1];
+
+  /* The page name in the search component has different encoding requirements
+     to the same in the pathname. */
+  page_name = encodeURIComponent(decodeURI(page_name))
 
   for (var i = 0; i < e_thumbnail_list.length; i++) {
     console.log('annotating thumbnail', i);
