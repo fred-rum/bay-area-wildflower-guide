@@ -55,11 +55,11 @@
    search-container's box-shadow.
 
    To support a circular focus ring, we set up a transparent (opacity 0)
-   border 3 pixels thick.  A border with an inner diameter of 40 pixels
-   leaves a thin gap between it and the image, which looks ugly.  So
-   instead I make the inner border diameter 38 pixels.  The image is
-   then expanded back up to 40 pixels and shifted slightly to center it
-   in the border. 
+   border 3 pixels thick, and we add a drop-shadow to this invisible border.
+   A border with an inner diameter of 40 pixels leaves a thin gap between
+   its drop shadow and the image, which looks ugly.  So instead I make the
+   inner border diameter 38 pixels.  The image is then expanded back up to
+   40 pixels and shifted slightly to center it in the border. 
 */
 #home-icon {
     position: fixed;
@@ -822,7 +822,8 @@ input {
     border: 1px solid #DDDDDD;
     padding-left: 1.5em;
     background-position: .2em 50%;
-    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1.5em' height='1.5em' viewBox='0 0 100 100'><g><circle cx='37' cy='37' r='20' stroke='%23888' stroke-width='7' fill='none'/><path d='M52,52L83,83' stroke='%23888' stroke-width='7' stroke-linecap='round' fill='none'/></g></svg>");
+    /* '#' must be escaped here as '%23'. */
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1.5em' height='1.5em' viewBox='0 0 100 100'><g stroke='%23888' stroke-width='9' stroke-linecap='round' fill='none'><circle cx='37' cy='37' r='20'/><path d='M52,52L83,83'/></g></svg>");
     background-repeat: no-repeat;
 }
 input::placeholder {
@@ -1114,41 +1115,4 @@ img.hazard-img {
    do the default behavior of highlighting the target anchor. */
 #offline:target {
     background-color: inherit;
-}
-
-/* photo gallery */
-div#gallery-background {
-    position: fixed;
-    display: flex;
-    /* The spinner canvas is a static element in the gallery background,
-       and we want it to be centered. */
-    justify-content: center;
-    align-items: center;
-    /* The default in Firefox on Android is that the URL and other tools
-       are hidden or revealed when the user scrolls.  Even if
-       touch-action is 'none' and overflow is 'hidden', a drag action by
-       the user can hide or reveal the toolbar.  I suppose that makes sense,
-       but as the toolbar is dragged away, it reveals extra area in the
-       viewport that the gallery background can't immediately respond to.
-       I.e. text and images in the underlying web page are partially revealed,
-       which looks ugly and awkward.  To prevent this reveal, we make the
-       gallary background much larger than the viewport so that everything
-       remains hidden even if the viewport expands. */
-    top: -1000px;
-    left: -1000px;
-    bottom: -1000px;
-    right: -1000px;
-    background-color: #404040;
-    z-index: 30;
-    touch-action: none;
-}
-img.gallery-photo {
-    position: fixed;
-}
-canvas#photo-loading {
-    /* The spinner comes after the photo image(s) in the DOM order.
-       But because the images have 'fixed' position, by default they
-       float above the 'auto' position of the spinner.  To draw them
-       in the correct order, we give the spinner a higher z-index. */
-    z-index: 35;
 }

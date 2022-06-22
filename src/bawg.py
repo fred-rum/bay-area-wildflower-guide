@@ -747,6 +747,53 @@ if (typeof main !== 'undefined') {
 
 
 ###############################################################################
+# Create photos.js
+
+photos_file = f'{root_path}/photos.js'
+with open(photos_file, 'w', encoding='utf-8') as w:
+    w.write('var pages=[\n')
+
+    # The sort order here is arbirtary as long as it is consistent.
+    # We sort in the same order as pages.js for convenience of comparing them.
+    for page in sort_pages(page_array, with_depth=True):
+        # Each page that links to full-sized photos gets an entry.
+        if (!page.photo_dict):
+            break
+
+        # The entry consists of the page name followed by the photo URLs.
+        #
+        # The page name may include spaces, even though gallery.js will be
+        #   comparing it to a value that doesn't use spaces.  See gallary.js
+        #   for why the spaces in the page name are useful.
+        #
+        # The photo URLs are compressed to save space:
+        #   The 'photos/' prefix and '.jpg' suffix is dropped.
+        #   If the first photo's base name can be derived from the page name
+        #     (e.g. by replacing ' ' with '-'), that part is dropped.
+        #   If a subsequent photo's base name is the same as the previous
+        #     photos, that part is also dropped.
+        #   When the base name is dropped, the ',' separating it from the
+        #     photo suffix is also dropped.
+        #   What remains is often simply a list of photo suffixes,
+        #     e.g. '1','3','7'
+        name = page.name
+        w.write(f'["{name}",')
+        photos = []
+        recent_name = name
+        for suffix in sorted(page.photo_dict):
+            jpg = page.photo_dict[suffix]
+            base,suffix1 = separate_name_and_suffix(jpg)
+            if base == recent_name:
+                photos.append(suffix1)
+            else:
+                recent_name = base
+                photos.append(jpg)
+        photo_list = ','.join(photos)
+        w.write(f'{photo_list}],\n')
+    w.write('];\n')
+
+
+###############################################################################
 # Compare the new html files with the prev files.
 # Create an HTML file with links to all new files and all modified files.
 # (Ignore deleted files.)

@@ -1,0 +1,86 @@
+/* Copyright Chris Nelson - All rights reserved. */
+
+/*****************************************************************************/
+/* When editing this data/gallery.css file, you have to run the BAWG script
+   to regenerate the {root}/gallery.css used by the HTML.  The BAWG script
+   removes the comments from the CSS to save download bandwidth. */
+/*****************************************************************************/
+
+div#gallery-background {
+    position: fixed;
+    display: flex;
+    /* Lay out the UI elements across the middle of the screen. */
+    justify-content: space-between;
+    align-items: center;
+    /* The default in Firefox on Android is that the URL and other tools
+       are hidden or revealed when the user scrolls.  Even if
+       touch-action is 'none' and overflow is 'hidden', a drag action
+       by the user can hide or reveal the URL bar.  I suppose that
+       makes sense, but as the URL bar is dragged away, it reveals
+       extra area in the viewport that the gallery background can't
+       immediately respond to.  I.e. the underlying window color is
+       partially revealed, which looks ugly and awkward.  To prevent
+       this reveal, we make the gallary background much larger than
+       the viewport so that everything remains hidden even if the
+       viewport expands. */
+    top: -1000px;
+    left: -1000px;
+    bottom: -1000px;
+    right: -1000px;
+    background-color: #404040;
+    /* ignore various actions that the browser might otherwise allow */
+    touch-action: none;
+    user-select: none;
+}
+img.gallery-photo {
+    position: fixed;
+}
+div#gallery-ui-left {
+    z-index: 35;
+    margin-left: 1000px;
+    width: 50px;
+    height: 80px;
+    /* '#' must be escaped here as '%23'. */
+    /* by default, the background-image fills the div dimensions */
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 80'><g stroke-linecap='round' fill='none'><path d='M35,10L15,40L35,70' stroke='%23777' stroke-width='12'/><path d='M35,10L15,40L35,70' stroke='%23fff' stroke-width='5'/></g></svg>");
+    opacity: 0.75;
+    transition-duration: 0.25s;
+    transition-property: background-position. opacity;
+    cursor: pointer;
+    /* the UI element is initially hidden, but can be exposed by JavaScript */
+    visibility: hidden;
+}
+div#gallery-ui-left:hover {
+    background-position: -5px 0px;
+    opacity: 1;
+}
+div#gallery-ui-right {
+    z-index: 35;
+    margin-right: 1000px;
+    width: 50px;
+    height: 80px;
+    /* '#' must be escaped here as '%23'. */
+    /* by default, the background-image fills the div dimensions */
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 80'><g stroke-linecap='round' fill='none'><path d='M15,10L35,40L15,70' stroke='%23777' stroke-width='12'/><path d='M15,10L35,40L15,70' stroke='%23fff' stroke-width='5'/></g></svg>");
+    opacity: 0.75;
+    transition-duration: 0.25s;
+    transition-property: background-position. opacity;
+    cursor: pointer;
+    /* the UI element is initially hidden, but can be exposed by JavaScript */
+    visibility: hidden;
+}
+div#gallery-ui-right:hover {
+    background-position: 5px 0px;
+    opacity: 1;
+}
+canvas#gallery-spinner {
+    /* The spinner comes after the photo image(s) in the DOM order.
+       But because the images have 'fixed' position, by default they
+       float above the 'auto' position of the spinner.  To draw them
+       in the correct order, we give the spinner a higher z-index. */
+    z-index: 35;
+    /* If the user clicks/touches the spinner, ignore that and instead cascade
+       the touch/pointer down to either the photo or the underlying background.
+    */
+    pointer-events: none;
+}
