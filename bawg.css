@@ -822,7 +822,8 @@ input {
     border: 1px solid #DDDDDD;
     padding-left: 1.5em;
     background-position: .2em 50%;
-    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1.5em' height='1.5em' viewBox='0 0 100 100'><g><circle cx='37' cy='37' r='20' stroke='%23888' stroke-width='7' fill='none'/><path d='M52,52L83,83' stroke='%23888' stroke-width='7' stroke-linecap='round' fill='none'/></g></svg>");
+    /* '#' must be escaped here as '%23'. */
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1.5em' height='1.5em' viewBox='0 0 100 100'><g stroke='%23888' stroke-width='9' stroke-linecap='round' fill='none'><circle cx='37' cy='37' r='20'/><path d='M52,52L83,83'/></g></svg>");
     background-repeat: no-repeat;
 }
 input::placeholder {
@@ -1122,7 +1123,7 @@ div#gallery-background {
     display: flex;
     /* The spinner canvas is a static element in the gallery background,
        and we want it to be centered. */
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     /* The default in Firefox on Android is that the URL and other tools
        are hidden or revealed when the user scrolls.  Even if
@@ -1140,15 +1141,55 @@ div#gallery-background {
     right: -1000px;
     background-color: #404040;
     z-index: 30;
+    /* ignore various actions that the browser might otherwise allow */
     touch-action: none;
+    user-select: none;
 }
 img.gallery-photo {
     position: fixed;
 }
-canvas#photo-loading {
+div#gallery-ui-left {
+    z-index: 35;
+    margin-left: 1000px;
+    width: 50px;
+    height: 80px;
+    /* '#' must be escaped here as '%23'. */
+    /* by default, the background-image fills the div dimensions */
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 80'><g stroke-linecap='round' fill='none'><path d='M35,10L15,40L35,70' stroke='%23777' stroke-width='12'/><path d='M35,10L15,40L35,70' stroke='%23fff' stroke-width='5'/></g></svg>");
+    opacity: 0.75;
+    transition-duration: 0.25s;
+    transition-property: background-position. opacity;
+    cursor: pointer;
+}
+div#gallery-ui-left:hover {
+    background-position: -5px 0px;
+    opacity: 1;
+}
+div#gallery-ui-right {
+    z-index: 35;
+    margin-right: 1000px;
+    width: 50px;
+    height: 80px;
+    /* '#' must be escaped here as '%23'. */
+    /* by default, the background-image fills the div dimensions */
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 80'><g stroke-linecap='round' fill='none'><path d='M15,10L35,40L15,70' stroke='%23777' stroke-width='12'/><path d='M15,10L35,40L15,70' stroke='%23fff' stroke-width='5'/></g></svg>");
+    opacity: 0.75;
+    transition-duration: 0.25s;
+    transition-property: background-position. opacity;
+    cursor: pointer;
+}
+div#gallery-ui-right:hover {
+    background-position: 5px 0px;
+    opacity: 1;
+}
+canvas#gallery-loading {
     /* The spinner comes after the photo image(s) in the DOM order.
        But because the images have 'fixed' position, by default they
        float above the 'auto' position of the spinner.  To draw them
        in the correct order, we give the spinner a higher z-index. */
     z-index: 35;
+    /* If the user clicks/touches the spinner, ignore that and instead cascade
+       the touch/pointer down to either the photo or the underlying background.
+    */
+    pointer-events: none;
 }

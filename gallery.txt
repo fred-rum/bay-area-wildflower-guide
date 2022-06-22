@@ -1,6 +1,25 @@
+should I create a gallery.html page
+  that is invoked by Javascript
+  and includes the list of photos in its URL?
+    e.g. with hash to selected photo
+    or an included file lists all photo associations
+
+previous selected region remains partially visible in Android Chrome
+  when the gallery is open
+
+arrow is slow to disappear at the end of the carrousel
+  because of the transition delay?
+
+remove hover application as necessary
+
+pinch is wonky when the browser is zoomed in
+  use windowX/Y instead of clientX/Y?
+
+zoom to fit/full on space or enter
+
 add arrows on left and right (when appropriate) to switch photos
   also accept left and right keypresses
-  also accept wheel let and right?
+  also accept wheel left and right?
 
 can I recognize a flick left or right for switching photos?
   is getPredictedEvents() useful?
@@ -19,6 +38,9 @@ when resizing (and not touching), remember the desired photo zoom & pos
 
 explicit zoom buttons
 
-While the thumbnail is loading,
-  have a light gray square behind it to indicate its eventual size
-    (or similar pattern)
+data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2226%22 height=%2240%22 viewBox=%220 0 26 40%22%3E %3Cpath fill-opacity=%22.51%22 d=%22M6 .007a.403.403 0 0 0-.281.125L.656 5.226a.395.395 0 0 0 0 .563l14.188 14.218L.656 34.227a.395.395 0 0 0 0 .562l5.063 5.093a.434.434 0 0 0 .593 0l14.47-14.5 5.093-5.093a.403.403 0 0 0 .125-.282.433.433 0 0 0-.031-.156.392.392 0 0 0-.094-.125l-5.094-5.094L6.313.132A.478.478 0 0 0 6 .007z%22/%3E %3Cpath fill=%22%23fff%22 d=%22M6 .695c-.077 0-.129.004-.188.062L1.97 4.601a.278.278 0 0 0 0 .406L16.28 19.29 1.344 34.226a.395.395 0 0 0 0 .563l3.687 3.656a.395.395 0 0 0 .563 0L20.719 23.32l3.75-3.75c.022-.022.046-.037.062-.063.017-.017.02-.042.031-.062.004-.009-.003-.022 0-.031.039-.08.036-.139 0-.219-.008-.02.013-.045 0-.062-.005-.014-.024-.019-.03-.032l-.063-.093-3.688-3.657L6.22.758C6.159.698 6.077.695 6 .695z%22/%3E %3C/svg%3E
+
+button for full screen view?
+  can it be hidden on mobile where it is intrinsically already full-screen?
+    document.fullscreenEnabled
+  see Wikipedia for icons to enter and exit full-screen mode

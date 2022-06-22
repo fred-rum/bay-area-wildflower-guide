@@ -21,6 +21,9 @@ var obj_photo = null;
    desired. */
 var e_bg = null;
 
+/* e_ui_l and e_ui_r are the left/right UI arrows for switching among photos */
+var e_ui_l, e_ui_r;
+
 /* e_spin is the canvas where the spinning 'loading' icon is drawn.
    The canvas is created once and then drawn or cleared as desired. */
 var e_spin;
@@ -42,9 +45,13 @@ var spin_offset = 0;
    left button pressed and any finger or stylus touching the screen. */
 var touches = [];
 
-/* one_unmoved_touch tracks whether there is a current touch in progress
-   that should count as a 'click' if released */
-var one_unmoved_touch = true;
+/* click_target tracks the initial target of a pointerdown until a
+   corresponding pointerup occurs.  Because the gallery background (e_bg)
+   captures the pointer during the click duration, the pointerup event always
+   lists e_bg as the target, which is why we record the original target here.
+   If anything interrupts the click (e.g. pointer movement or extra touches),
+   we reset click_target to null. */
+var click_target;
 
 /* orig_pinch remembers data about how the current multi-touch started.
    Movements of the touch points can be compared against this original. */
@@ -136,7 +143,6 @@ function gallery_main() {
       fn_popstate(null);
     }
   }
-
 }
 
 /* Move the photo gallery from a 'closed' to an 'open' state.
@@ -163,6 +169,9 @@ function open_gallery() {
   /* prevent scrollbars from appearing based on the hidden page content */
   document.documentElement.style.overflow = 'hidden';
 
+  /* Prevent selection handles from shining through on Android. */
+  window.getSelection().removeAllRanges();
+
   /* Only create the gallery elements the first time the gallery is opened. */
   if (!e_bg) {
     e_bg = document.createElement('div');
@@ -174,11 +183,20 @@ function open_gallery() {
     e_bg.addEventListener('pointermove', fn_pointermove);
     e_bg.addEventListener('wheel', fn_wheel);
 
+    e_ui_l = document.createElement('div');
+    e_ui_l.id = 'gallery-ui-left';
+    e_bg.appendChild(e_ui_l);
+
     e_spin = document.createElement('canvas');
-    e_spin.id = 'photo-loading';
+    e_spin.id = 'gallery-loading';
+    /* The canvas dimensions must be specified here, not in CSS. */
     e_spin.width = 100;
     e_spin.height = 100;
     e_bg.appendChild(e_spin);
+
+    e_ui_r = document.createElement('div');
+    e_ui_r.id = 'gallery-ui-right';
+    e_bg.appendChild(e_ui_r);
   }
 
   document.body.appendChild(e_bg);
@@ -193,12 +211,15 @@ function open_gallery() {
 }
 
 function close_gallery() {
-  document.documentElement.style.overflow = 'auto';
-  obj_photo.remove_images();
-  obj_photo = null;
-  e_bg.remove();
-  clear_spinner();
-  touches = [];
+  if (obj_photo) {
+    console.log('closing gallery');
+    document.documentElement.style.overflow = 'auto';
+    obj_photo.close_photo();
+    obj_photo = null;
+    e_bg.remove();
+    clear_spinner();
+    touches = [];
+  }
 }
 
 var orig_title = null;
@@ -210,21 +231,23 @@ var orig_title = null;
 function fn_popstate(event) {
   console.log('popstate');
 
-  if (obj_photo) {
-    console.log('closing gallery');
-    close_gallery();
-  }
+  go_back_in_progress = false;
 
   if (history.state) {
     console.log('restoring gallery');
+    open_gallery();
+
     obj_photo = obj_photos[history.state.i];
     obj_photo.fit = history.state.fit;
     obj_photo.img_x = history.state.img_x;
     obj_photo.cx = history.state.cx;
     obj_photo.cy = history.state.cy;
-    obj_photo.gallery_init();
-  } else if (orig_title) {
-    document.title = orig_title;
+    obj_photo.open_photo();
+  } else {
+    close_gallery();
+    if (orig_title) {
+      document.title = orig_title;
+    }
   }
 }
 
@@ -318,8 +341,13 @@ function fn_pointerdown(event) {
   /* remember the touch location */
   touches.push(touch);
   console.log('pointer down:', touches.length);
+  console.log(event.target, event.target == e_ui_l);
 
-  one_unmoved_touch = (touches.length == 1);
+  if (touches.length == 1) {
+    click_target = event.target;
+  } else {
+    click_target = null;
+  }
 
   /* reset the starting pinch/drag location */
   orig_pinch = undefined;
@@ -374,23 +402,50 @@ function fn_pointerup(event) {
 
      So we handle the click ourselves as a degenerate case of pointer up
      followed by pointer down with no pointermove in between. */
-  if (discard_touch(touch) && one_unmoved_touch) {
-    /* There was a single click with no drag. */
+  if (obj_photo && click_target && discard_touch(touch)) {
+    /* There was a single click with no drag while the gallery is open. */
+    console.log('click on', click_target);
 
-    /* Let the photo object handle it if appropriate. */
-    if (obj_photo && !obj_photo.click.call(obj_photo, touch)) {
-      /* The click was outside the photo, so we return to the normal page view.
+    /* Apply the appropriate action based on the target of the click.
+       Note that if the user is fast and the browser is slow, the target
+       may be out of date, particularly for the left and right arrows. */
+    if ((click_target == e_ui_l) && (obj_photo.i > 0)){
+      obj_photo.close_photo();
+      var i = obj_photo.i - 1;
+      obj_photo = obj_photos[i];
+      obj_photo.fit = true;
+      obj_photo.open_photo();
+    } else if ((click_target == e_ui_r) &&
+               (obj_photo.i < (obj_photos.length-1))) {
+      obj_photo.close_photo();
+      var i = obj_photo.i + 1;
+      obj_photo = obj_photos[i];
+      obj_photo.fit = true;
+      obj_photo.open_photo();
+    } else if ((click_target == obj_photo.e_thumb) ||
+        (click_target == obj_photo.e_full)){
+      obj_photo.click.call(obj_photo, touch);
+    } else {
+      /* The click was in the background, so we return to the normal page view.
          We could close the gallery directly, but since opening the gallery
          pushed an entry to the browser's history, we want to pop back up the
          history.  Since there is already code to restore the proper state when
          the user navigates back through the history, the rest is automatic. */
-      history.back();
+      setTimeout(go_back, 0);
     }
-
     return;
   }
 
   console.log('pointer up:', touches.length);
+}
+
+var go_back_in_progress = false;
+function go_back() {
+  console.log('go back:', go_back_in_progress);
+  if (!go_back_in_progress) {
+    go_back_in_progress = true;
+    history.back();
+  }
 }
 
 /* Measure the pinch distance by calculating the bounding box around all
@@ -445,7 +500,7 @@ function fn_pointermove(event) {
   }
 
   /* A touching pointer moved. */
-  one_unmoved_touch = false;
+  click_target = null;
 
   var old_pinch = measure_pinch();
 
@@ -510,12 +565,14 @@ function Photo(i, e_thumbnail) {
 Photo.prototype.fn_gallery_start = function(event) {
   console.log('click: start gallery');
 
+  open_gallery();
+
   this.fit = true;
   this.img_x = null; /* doesn't matter when fit = true */
   this.cx = null;
   this.cy = null;
 
-  this.gallery_init();
+  this.open_photo();
 
   /* Push the gallery state to the browser's history. */
   var state = this.get_state();
@@ -529,10 +586,19 @@ Photo.prototype.fn_gallery_start = function(event) {
   event.preventDefault();
 }
 
-Photo.prototype.gallery_init = function() {
-  open_gallery();
-
+Photo.prototype.open_photo = function() {
   obj_photo = this;
+
+  if (this.i > 0) {
+    e_ui_l.style.visibility = 'visible';
+  } else {
+    e_ui_l.style.visibility = 'hidden';
+  }
+  if (this.i < (obj_photos.length-1)) {
+    e_ui_r.style.visibility = 'visible';
+  } else {
+    e_ui_r.style.visibility = 'hidden';
+  }
 
   /* e_thumb and e_full are always create together, so we only need to check
      whether either one is present.  If the photos have already been created,
@@ -637,6 +703,9 @@ Photo.prototype.activate_images = function() {
        the 'onload' callback, which clears the spinner. */
     draw_spinner(spin_timestamp, true);
     end_spinner();
+  } else if (!spin_req) {
+    spin_req = window.requestAnimationFrame(fn_spin);
+    spin_timestamp = performance.now();
   }
 
   if (new_active) {
@@ -663,7 +732,7 @@ Photo.prototype.fn_full_onload = function(event) {
   this.activate_images();
 }
 
-Photo.prototype.remove_images = function() {
+Photo.prototype.close_photo = function() {
   /* The gallery is being closed and might be re-opened with any photo,
      so we go ahead and remove this one from its position in e_bg. */
   if (this.active_thumb) {
@@ -681,42 +750,13 @@ Photo.prototype.img_y = function() {
   return this.img_x / this.photo_x * this.photo_y;
 }
 
-/* Check whether a touch position is inside or outside the photo image. */
-Photo.prototype.in_image = function(touch) {
-  /* calculate image bounds */
-  var img_x = this.img_x;
-  var img_y = this.img_y();
-
-  var img_x0 = (win_x / 2) - (img_x * this.cx);
-  var img_y0 = (win_y / 2) - (img_y * this.cy);
-
-  var img_x1 = img_x0 + img_x;
-  var img_y1 = img_y0 + img_y;
-
-  if ((touch.x >= img_x0) &&
-      (touch.x < img_x1) &&
-      (touch.y >= img_y0) &&
-      (touch.y < img_y1)) {
-    /* the click was outside the image, so continue processing the click
-       on the gallery background. */
-    return true;
-  }
-}
-
 Photo.prototype.click = function(touch) {
-  if (!this.in_image(touch)) {
-    return false; /* the click hasn't been handled */
-  }
-
   console.log('click in image');
-
-  /* calculate image bounds */
-  var img_x = this.img_x;
-  var img_y = this.img_y();
 
   /* either zoom to full size, or zoom to fit */
   if (this.fit) {
     /* If the image already fits the screen, zoom the image to full size.
+       Note that a full-size image may be smaller a fitted image.
 
        Note that we aim for 1 image pixel = 1 screen pixel.  However, because
        mobile pixels are so tiny, a device may pretend that a measured screen
@@ -726,16 +766,8 @@ Photo.prototype.click = function(touch) {
        pixel to be. */
     this.zoom_to(this, this.photo_x, touch, touch);
   } else {
-    /* For all other zoom levels, zoom to fit.
-       the image is larger than full size and can't fit on the screen.
-       In these cases, zoom the image to fit the screen.
-
-       Note that a full-size image may be smaller than the screen.
-       In this case, the user will see the image as "small", and expect
-       a click to zoom to fit.
-    */
+    /* For all other zoom levels, zoom to fit. */
     this.fit = true;
-    /* Once this.fit is true, redraw_photo() does the work for us. */
     this.redraw_photo();
   }
   return true; /* the click has been handled */
