@@ -894,10 +894,11 @@ if not arg('-without_cache'):
         # deleting files.
         'swi.js',
         'bawg.css',
-        'gallery.css',
         'search.js',
         'pages.js',
+        'gallery.html',
         'gallery.js',
+        'gallery.css',
     ]
     for other in sorted(other_files):
         path_list.append(other + '.html')

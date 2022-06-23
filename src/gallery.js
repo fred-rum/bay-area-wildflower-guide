@@ -482,6 +482,10 @@ function fn_pointermove(event) {
 function fn_wheel(event) {
   orig_pinch = undefined;
 
+  if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
+    return;
+  }
+
   var touch = copy_touch(event);
 
   if (event.deltaY < 0) {
@@ -936,6 +940,8 @@ Photo.prototype.redraw_photo = function() {
 
   save_state();
 
+  console.log('redraw:', this.fit);
+
   if (this.fit) {
     this.img_x = this.fit_width();
 
@@ -966,6 +972,7 @@ Photo.prototype.redraw_photo = function() {
 }
 
 Photo.prototype.resize = function() {
+  console.log('resize')
   this.constrain_zoom();
   this.constrain_pos();
   this.redraw_photo();

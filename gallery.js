@@ -260,6 +260,9 @@ function fn_pointermove(event) {
 }
 function fn_wheel(event) {
   orig_pinch = undefined;
+  if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
+    return;
+  }
   var touch = copy_touch(event);
   if (event.deltaY < 0) {
     obj_photo.zoom_to(obj_photo, obj_photo.img_x * 1.30, touch, touch);
