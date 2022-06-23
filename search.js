@@ -5,7 +5,7 @@ function gallery_main() {
   var e_thumbnail_list = document.getElementsByClassName('leaf-thumb')
   var html_url = window.location.pathname;
   var matches = /([^\/]*)\.html$/.exec(html_url);
-  if (matches {
+  if (matches) {
     var page_name = encodeURIComponent(decodeURI(matches[1]))
     for (var i = 0; i < e_thumbnail_list.length; i++) {
       var gallery_path = '../gallery.html?' + page_name

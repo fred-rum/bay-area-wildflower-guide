@@ -41,7 +41,7 @@ function gallery_main() {
 
   var html_url = window.location.pathname;
   var matches = /([^\/]*)\.html$/.exec(html_url);
-  if (matches {
+  if (matches) {
     /* The page name in the pathname has different encoding requirements when
        moved to the search component of the URL. */
     var page_name = encodeURIComponent(decodeURI(matches[1]))
