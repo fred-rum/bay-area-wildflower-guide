@@ -4,14 +4,16 @@ var obj_photos = [];
 function gallery_main() {
   var e_thumbnail_list = document.getElementsByClassName('leaf-thumb')
   var html_url = window.location.pathname;
-  var page_name = /([^\/]*)\.html$/.exec(html_url)[1];
-  page_name = encodeURIComponent(decodeURI(page_name))
-  for (var i = 0; i < e_thumbnail_list.length; i++) {
-    var gallery_path = '../gallery.html?' + page_name
-    if (i) {
-      gallery_path += '#' + (i + 1);
+  var matches = /([^\/]*)\.html$/.exec(html_url);
+  if (matches {
+    var page_name = encodeURIComponent(decodeURI(matches[1]))
+    for (var i = 0; i < e_thumbnail_list.length; i++) {
+      var gallery_path = '../gallery.html?' + page_name
+      if (i) {
+        gallery_path += '#' + (i + 1);
+      }
+      e_thumbnail_list[i].parentElement.href = gallery_path;
     }
-    e_thumbnail_list[i].parentElement.href = gallery_path;
   }
 }
 function Photo(i, e_thumbnail) {
@@ -452,9 +454,9 @@ function fn_keydown() {
     event.preventDefault();
   }
 }
-var e_search_input = document.getElementById('search');
-var e_autocomplete_box = document.getElementById('autocomplete-box');
-var e_home_icon = document.getElementById('home-icon');
+var e_search_input;
+var e_autocomplete_box;
+var e_home_icon;
 window.addEventListener('click', fn_doc_click);
 window.addEventListener('pageshow', fn_pageshow);
 function fn_hashchange(event) {
@@ -476,6 +478,9 @@ function main() {
     document.addEventListener('DOMContentLoaded', main);
     return
   }
+  e_search_input = document.getElementById('search');
+  e_autocomplete_box = document.getElementById('autocomplete-box');
+  e_home_icon = document.getElementById('home-icon');
   for (var i = 0; i < pages.length; i++) {
     var page_info = pages[i];
     if (('page' in page_info) &&

@@ -40,24 +40,25 @@ function gallery_main() {
   console.log('e_thumbnail_list:', e_thumbnail_list);
 
   var html_url = window.location.pathname;
-  var page_name = /([^\/]*)\.html$/.exec(html_url)[1];
+  var matches = /([^\/]*)\.html$/.exec(html_url);
+  if (matches {
+    /* The page name in the pathname has different encoding requirements when
+       moved to the search component of the URL. */
+    var page_name = encodeURIComponent(decodeURI(matches[1]))
 
-  /* The page name in the search component has different encoding requirements
-     to the same in the pathname. */
-  page_name = encodeURIComponent(decodeURI(page_name))
+    for (var i = 0; i < e_thumbnail_list.length; i++) {
+      console.log('annotating thumbnail', i);
+      var gallery_path = '../gallery.html?' + page_name
+      /* start numbering at 1,
+         but the default is 1 if a photo number is not supplied */
+      if (i) {
+        gallery_path += '#' + (i + 1);
+      }
 
-  for (var i = 0; i < e_thumbnail_list.length; i++) {
-    console.log('annotating thumbnail', i);
-    var gallery_path = '../gallery.html?' + page_name
-    /* start numbering at 1,
-       but the default is 1 if a photo number is not supplied */
-    if (i) {
-      gallery_path += '#' + (i + 1);
+      /* The parent of the thumbnail image is guaranteed to be a link to
+         the full-sized JPG.  Replace that link with a link to the gallery. */
+      e_thumbnail_list[i].parentElement.href = gallery_path;
     }
-
-    /* The parent of the thumbnail image is guaranteed to be a link to
-       the full-sized JPG.  Replace that link with a link to the gallery. */
-    e_thumbnail_list[i].parentElement.href = gallery_path;
   }
 }
 
@@ -776,9 +777,9 @@ function fn_keydown() {
   }
 }
 
-var e_search_input = document.getElementById('search');
-var e_autocomplete_box = document.getElementById('autocomplete-box');
-var e_home_icon = document.getElementById('home-icon');
+var e_search_input;
+var e_autocomplete_box;
+var e_home_icon;
 
 /* We want hide the autocomplete box whenever the user clicks somewhere that
    **isn't** the search field or autocomplete box.  I could potentially add an
@@ -857,6 +858,10 @@ function main() {
     document.addEventListener('DOMContentLoaded', main);
     return
   }
+
+  e_search_input = document.getElementById('search');
+  e_autocomplete_box = document.getElementById('autocomplete-box');
+  e_home_icon = document.getElementById('home-icon');
 
   /* normalize the data in the pages array. */
   for (var i = 0; i < pages.length; i++) {
