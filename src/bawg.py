@@ -68,6 +68,9 @@ from cache import *
 strip_comments('bawg.css')
 strip_comments('search.js')
 
+strip_comments('gallery.css')
+strip_comments('gallery.js')
+
 if arg('-without_cache'):
     shutil.copy('src/no_sw.js', 'swi.js')
     shutil.copy('src/no_sw.js', 'sw.js')
@@ -888,8 +891,10 @@ if not arg('-without_cache'):
         # deleting files.
         'swi.js',
         'bawg.css',
+        'gallery.css',
         'search.js',
         'pages.js',
+        'gallery.js',
     ]
     for other in sorted(other_files):
         path_list.append(other + '.html')

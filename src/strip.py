@@ -43,7 +43,10 @@ def strip_comments(to_filename, from_filename=None, code=None):
         quote2 = r"(?<!\\)'(?:[^'\\]|\\.)*'"
         comment = r'/\s+?$|\s*/\*.*?\*/'
         if is_js:
-            comment += r'|\s*//[^\r\n]*$'
+            # Look for a single-line comment beginning with '//',
+            # but not if it's actually part of a regular expression
+            # that includes a slash, i.e. '\//'.
+            comment += r'|\s*(?<!\\)//[^\r\n]*$'
 
             # Also treat console debug statements as comments.
             comment += r'|\s*console\.(error|warn|info|log)\([^\r\n]*\)(;?)\s*$'

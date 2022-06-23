@@ -1,5 +1,3 @@
-move gallery.js and gallery.css to src/
-
 make photo gallery viewer work with figures
   (e.g. in glossary, but also if they are used in a page)
 

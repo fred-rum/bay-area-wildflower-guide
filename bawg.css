@@ -1,25 +1,4 @@
 /* Copyright Chris Nelson - All rights reserved. */
-
-/*****************************************************************************/
-/* When editing this data/bawg.css file, you have to run the BAWG script
-   to regenerate the {root}/bawg.css used by the HTML.  The BAWG script
-   removes the comments from the CSS to save download bandwidth. */
-/*****************************************************************************/
-
-/* I only want to show the focus border when the user is using keyboard
-   navigation.  Normally that means :focus-visible, but Firefox doesn't
-   support that.  Instead, it supposedly supports :-moz-focusring, but
-   that doesn't seem to work.  (It might require a user option, dunno.)
-
-   The solution relies on the fact that when :focus-visible is not supported,
-   any rule that mentions it is ignored.  Thus, I can create a border on
-   :focus for Firefox, then remove it on :not(:focus-visible) for
-   every other browser.  And then create the border in most browsers only
-   when desired with :focus-visible.
-
-   This leaves the focus ring visible and distracting after a click in
-   Firefox, but there doesn't seem to be anything I can do about that.
-*/
 #home-icon:focus,
 #update:focus,
 #clear:focus
@@ -40,27 +19,6 @@
     border: solid black 3px;
     outline: none;
 }
-
-/* This is the home icon in the upper left.  Despite being included in
-   the search container, it extends slightly outside the container's
-   usual extent.  To avoid increasing the size of the container, the
-   home icon is positioned absolutely.
-
-   Instead of a box-shadow, I use a drop-shadow that conforms to the
-   circular edges of the image.  Unfortunately, the drop-shadow
-   doesn't include a spread paramater, so instead I push the blur down
-   a bit.  The drop-shadow is also much less intense (and I can't
-   double it up), so I push it down a bit more and blur it a bit
-   further to try to make it look reasonably natural together with the
-   search-container's box-shadow.
-
-   To support a circular focus ring, we set up a transparent (opacity 0)
-   border 3 pixels thick, and we add a drop-shadow to this invisible border.
-   A border with an inner diameter of 40 pixels leaves a thin gap between
-   its drop shadow and the image, which looks ugly.  So instead I make the
-   inner border diameter 38 pixels.  The image is then expanded back up to
-   40 pixels and shifted slightly to center it in the border. 
-*/
 #home-icon {
     position: fixed;
     box-sizing: border-box;
@@ -73,79 +31,33 @@
     border: 3px solid rgba(255, 255, 255, 0);
     border-radius: 22px;
 }
-/* Make the border lightly visible when the mouse hovers over it */
 #home-icon:hover {
     border: 3px solid rgba(0, 0, 0, 0.3) !important;
 }
-/* give the border a "light focus" when the element is hovered over */
-/* Technically, #home-icon is the <a> link that encloses the icon image.
-   For some reason, the image doesn't inherit the width & height constraints
-   of the link, so I have to put them here.
-
-   The baseline of the image normally doesn't matter, but if the link has
-   focus, the browser draws an outline around it.  If I place the image as
-   if it's on a text line, the outline leaves room for text descenders,
-   which looks dumb.  So I give the image a different vertical alignment
-   to prevent that. */
 #home-icon img {
     position: relative;
-    top: -1px; /* move img so that the border overlaps it */
+    top: -1px;
     left: -1px;
     width: 40px;
     height: 40px;
     vertical-align: top;
 }
-/* When the autocomplete box is directly under the home icon (i.e. the
-   autocomplete box is visible on a narrow screen) */
 @media (max-width: 599px) {
     #home-icon.with-autocomplete {
 	filter: none;
     }
 }
-
-
-/* Many mobile browsers by default create a viewport (virtual screen) wide
-   enough to hold standard desktop web pagse, then allow the user to zoom
-   and scroll within that viewport.  However, a responsive site like this
-   one wants to set the virtual screen width to match the actual screen
-   width.  The modern way to specify the viewport is in HTML:
-   <meta name="viewport" content="...">
-   A deprecated way to do the same thing is with @viewport.  But on IE,
-   that's @-ms-viewport.  I have no idea what era of browsers it's
-   intended to support, but it shouldn't hurt anything. */
 @-ms-viewport {
     width: device-width;
 }
-
-/*** properties related to encapsulating the search bar, body, and footer ***/
-
-/* The search bar and footer want to be cuddled up to the edges of the
-   viewport, while the central body of text uses the usual margins. */
-
-/* If the browser has a default margin or padding, remove those. */
 html, body {
     margin: 0;
     padding: 0;
 }
-
-/* Here's the center body section. */
 div#body {
     padding-left: 8px;
     padding-right: 8px;
 }
-
-/*** properties related to the page footer ***/
-
-/* The footer has the copyright left justified and the contact link
-   right justified.
-
-   The footer is outside the central "body" div, so it is cuddled against
-   the left and right sides of the viewport (and the bottom of the viewport
-   if the body text is long enough).  The footer is given internal padding
-   so that its text indentation matches the body text.
-
-   The background-color and border help set off the footer from
-   the body.  These surround the footer's padding. */
 div.footer {
     display: flex;
     justify-content: space-between;
@@ -153,13 +65,6 @@ div.footer {
     background-color: #EEEEEE;
     border: 1px solid #DDDDDD;
 }
-
-/* The copyright statement includes a link to the BAWG home page.
-   We prefer this to be "Bay Area Wildflower Guide", but on mobile
-   devices, it may be too wide for everything to fit on a single line.
-   Therefore, the HTML actually contains an empty link, and we use
-   CSS to fill its contents with either "Bay Area Wildflower Guide" or
-   "BAWG", depending on the device width. */
 a.home-link::before {
     content: "BAWG";
 }
@@ -168,35 +73,19 @@ a.home-link::before {
 	content: "Bay Area Wildflower Guide";
     }
 }
-
-/* The copyright text is gray to reduce its visual clutter. */
 .foot-fade {
     color: gray;
 }
-
-/*** properties related to the glossaries ***/
-
-/* A link to a glossary term doesn't have the default link color and
-   underline since that would be very visually distracting, especially
-   given how many linked glossary terms there are on many pages.
-   Instead, we give linked glossary terms a subtle gray dotted underline.
-   (Technially a border-bottom instead of an underline since an underline
-   can't be dotted, but a border can be.) */
 a.glossary {
     text-decoration: none;
     color: inherit;
     border-bottom: 1px gray dotted;
 }
-
-/* A link to Jepson is similar, but uses Jepson's orange for the dotted
-   underline color. */
 a.glossary-jepson {
     text-decoration: none;
     color: inherit;
     border-bottom: 1px #cc6600 dotted;
 }
-
-/* Basic formatting for the dd/dt elements of a glossary definition. */
 dt {
     font-weight: bold;
     margin-bottom: 0px;
@@ -204,31 +93,6 @@ dt {
 dd {
     margin-bottom: 0.5em;
 }
-
-/* When the browser follows a link to a glossary definition's anchor,
-   it automatically scrolls it to the very top of the viewport.
-   But we have a search box floating at the top of the viewport, which
-   means that the default scroll behavior hides the linked definition
-   under the search box.  Not good.
-
-   I.e. it ends up snuggled directly against the search container, and
-   is slightly faded out under the box shadow.
-
-   To fix this, we create a large transparent border-top for the
-   element so that the visually useful part of the element is pushed
-   below the search box and into view.  We then use a negative margin-top
-   to prevent that large border from creating unwanted space between
-   elements.
-
-   The chosen border height is a bit larger than the search field height
-   to give a little space between the search field and the target glossary
-   entry, but not so much that the previous entry is visible.
-
-   Note that this kills the default margin-top, but that's OK in every
-   place where we use it.
-
-   We include various specialty properties to tell the browsers how to
-   handle the negative margin. */
 .defn {
     border-top: 48px solid transparent;
     margin-top: -48px;
@@ -236,34 +100,9 @@ dd {
     -moz-background-clip: padding;
     background-clip: padding-box;
 }
-
-/* When the browser has followed a link to a definition's anchor,
-   highlight the definition in pale yellow.
-
-   Within a glossary, we don't want to highlight just the dt with
-   the defined term, but also the dd with the definition.  Therefore,
-   the HTML puts the anchor id on a div that surrounds both the dt
-   and the dd, and the entire div gets highlighted.
-
-   A definition within a taxon page is simply a paragraph, and it
-   is this paragraph that has the anchor id and is highlighted.
-
-   This was div.defn:target, but when I added definitions in text
-   paragraphs, I changed it to .defn:target.  Then I added an anchored
-   link to my contact info in a heading, so now it's just :target. */
 :target {
     background-color: #ffc;
 }
-
-/*** properties related to color boxes on the BAWG home page ***/
-
-/* The color-grid is 7x2 if that fits in the width of the screen.
-   Otherwise it is 2x7.
-
-   By default the browser apportions 100% of the available width
-   among the columns.  'width: max-content' instead sets the preferred
-   width of each column to be the maximum width of any cell's contents.
-*/
 div.color-grid {
     display: grid;
     grid-auto-flow: column;
@@ -278,17 +117,10 @@ div.color-grid {
 	grid-template-columns: repeat(7, 1fr);
     }
 }
-
-/* Each color-picking box has the name of the color in text, surrounded
-   by a box with a corresponding border color.  We use the box-color class
-   to set the standard box features, and additional classes are used for
-   each color. */
 div.box-color {
     padding: 5px;
     text-align: center;
 }
-
-/* The color boxes use a border color of the appropriate color. */
 div.white {
     border: 5px solid #F8F8F8;
 }
@@ -331,92 +163,38 @@ div.pale-blue {
 div.other {
     border: 5px solid darkgreen;
 }
-
-/*** formatting elements for page txt ***/
-
-/* Every page has a heading at the top with id="title".  This heading
-   needs a customized top margin to move it comfortably out from under
-   the search box.
-
-   Note that the top heading is usually h1, but is h4 for glossary
-   pages that include a ToC prior to the main page heading.  */
 #title {
     margin-top: 52px;
 }
-
-/* The default margin after the h1 heading is fine if the page title stands
-   alone.  But if it's a common name followed by a scientific name and/or
-   other information, it's better to group them together without extra space. */
 h1.nospace {
     margin-bottom: 0px;
 }
-
-/* Method for indenting parts of the glossary ToC.
-   These can be nested for deeper indenting. */
 div.toc-indent {
     display: block;
     margin-left: 25px;
 }
-
-/* This span is aligned to the right of "Member of"/"Key to" such that
-   the first line reads straight across, e.g. "Member of Foo Bar", and
-   the remaining ancestors are indented to line up under "Foo Bar". */
 span.membership {
     display: inline-block;
     vertical-align: top;
 }
-
-/* These might be the default margins, but make sure of that before we start
-   messing with alternatives. */
 p {
     margin-top: 1em;
     margin-bottom: 1em;
 }
-
-/* I like to have an unbulleted paragraph introducing a closely related
-   bulleted list, so I reduce the spacing between them.  A paragraph
-   normally has a larger margin which we can't trivially reduce, so
-   instead we give the ul a negative margin.
-   The '+' operator here means we're styling a <ul> that follows a <p>. */
 p + ul {
     margin-top: calc(-1em + 6px);
 }
-
-/* Similarly, use a smaller-than-default margin to whatever else might be
-   above the ul (such as an image or div.  This doesn't reduce whatever
-   margin that element might have, but at least it won't increase it
-   unnecessarily. */
 ul {
     margin-top: 6px;
 }
-
-/* When bulleted lists are nested, we don't want any extra spacing. */
 ul ul {
     margin-top: 0px;
 }
-
-/* This is the gray box that is created for txt that includes '[' and ']'
-   on lines by themselves.  The box is also used for organizing a page
-   that lists its entire descendent hierarchy. */
 div.box {
     border: 1px solid #c8c8c8;
     padding: 0px 10px;
     margin: 10px 0px;
 }
-
-/* Link colors.
-
-   I use colors to give a hint about what kind of page is being linked to.
-   Class names are historical and don't fully reflect the current usage.
-     family - dark gold - pages which have children, but no key info
-     parent - brown     - key pages (the color of a branch)
-     leaf   - green     - childless pages with photos (the color of a leaf)
-     unobs  - black     - childless pages without photos
-
-   In general I set the 'visited' color to be the same as the link color to
-   avoid the distraction of different colors scattered throughout the BAWG
-   depending on what pages have been visited.  I leave the default colors for
-   external links only. */
 a.family:link, a.family:visited {
     color: #9c8024;
 }
@@ -424,7 +202,7 @@ a.unobs:link, a.unobs:visited, span.unobs {
     color: black;
 }
 a.jepson:link, a.jepson:visited {
-    color: #cc6600; /* Jepson orange */
+    color: #cc6600;
 }
 a.parent:link, a.parent:visited, span.parent {
     color: SaddleBrown;
@@ -432,62 +210,22 @@ a.parent:link, a.parent:visited, span.parent {
 a.leaf:link, a.leaf:visited, span.leaf {
     color: DarkGreen;
 }
-
-/* A link that is known to be broken is styled this way. */
 a.missing:link, a.missing:visited {
     color: red;
 }
-
-/* A link is put in class "enclosed" when the link is within a structure
-   (such as a box) which is already an obvious link, so extra link decoration
-   is unnecessary.  This includes:
-     - color-picking boxes on the BAWG home page.
-     - labeled boxes to external photos (i.e. the replacement for when I don't
-       have a photo).
-     - links in the auto-completion box for search results.
-   */
 a.enclosed {
     color: inherit;
-    text-decoration: none; /* prevent underline for taxon links */
-    border-bottom: none;   /* prevent underline for glossary links */
+    text-decoration: none;
+    border-bottom: none;
 }
-
-/* Observation details can be toggled by cliking on unobtrusive text
-   using this class. */
 span.toggle-details {
     color: #888;
     text-decoration: underline;
     cursor: pointer;
 }
-/* By default, observation details are hidden.  Javascript toggles this
-   based on user interaction. */
 div#details {
     display: none;
 }
-
-/* leaf-thumb is used for each of the thumbnails shown on a leaf node (where
-   all of its photos are listed).  Depending on the screen dimensions, these
-   are the largest thumbnails on the site or tied for largest.
-
-   leaf-thumb is also used for a figure thumbnail.
-
-   The intention is that most photos are square.  However, to avoid distorting
-   any which are not quite square, we set only the height of the photo and
-   allow its width to adjust automatically.  On narrow screens, the image
-   height is set to 40% of the screen width.  We actually use 40% of the
-   minimum screen dimension, so rotating the screen to landscape mode won't
-   change the size of the photos.
-
-   The photos have margin-right and margin-bottom to ensure a gap
-   between them when multiple photos appear on a line, potentially
-   wrapping onto subsequent lines.
-
-   vertical-align causes the photos to be aligned based on their contents,
-   not based relative to a text baseline.  I.e. it's silly to leave room
-   for text descenders on a line with no text.  The fact that vertical-align
-   is specifically "middle" doesn't really do anything for us given that all
-   images are forced to the same height, but it could be useful if I ever
-   figure out a way to gracefully make wider images shorter. */
 img.leaf-thumb {
     height: 40vmin;
     max-height: 200px;
@@ -496,38 +234,10 @@ img.leaf-thumb {
     margin-bottom: 10px;
     vertical-align: middle;
 }
-
-/* To avoid copyright issues, I don't create a thumbnail of external photos.
-   Instead, I create a labeled box of the same size as a standard thumbnail.
-   This box is a div with class leaf-thumb-text.
-
-   The box has a thin black border and inner padding for its text contents.
-
-   In order to have the same dimensions as leaf-thumb, we use the same
-   height and max-height.  In addition, since there the contents of the box
-   won't naturally make it square, we specify the same values for width and
-   max-width.  These dimensions use "box-sizing: border-box" so that the
-   outer edge of the border has these dimensions.
-
-   The div is "inline-flex", means that it is layed out as an inline element
-   (to match the regular photos that it may be next to), but its contents
-   are layed out as in a standard flexbox.  Since it's an inline element,
-   leaf-thumb-text needs the same vertical-align property as leaf-thumb
-   (at least in some browsers, e.g. Firefox).
-
-   The text contents of the box are centered both vertically and horizontally.
-
-   Ideally we'd use "align-items: safe center" and "overflow: hidden".
-   With this property, if the text doesn't fit, then it is instead top aligned
-   (so that the most important text is visible), and the extra text that
-   doesn't fit in the box is discarded.  However, the "safe" keyword doesn't
-   yet do anything in most browsers, and it might fail in some older browsers.
-*/
 div.leaf-thumb-text {
     box-sizing: border-box;
     border: 1px solid black;
     padding: 10px;
-
     height: 40vmin;
     max-height: 200px;
     width: 40vmin;
@@ -535,49 +245,15 @@ div.leaf-thumb-text {
     margin-right: 10px;
     margin-bottom: 10px;
     vertical-align: middle;
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
 }
-
-/* Non-square thumbnails are allowed to be wider or narrower in a leaf page
-   (above).  But on a key, list, or hierarchy page, we'd prefer all images
-   to be the same width so that the text stays aligned and so that there
-   are no reflow surprises that could mess with the scroll position.
-
-   We put each thumbnail in a square container (below) and constrain the image
-   to fit. */
 img.boxed {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
-
-/* key-thumb is a container for the photo thumbnail for a child listing with
-   a photo and key.
-
-   On small screens, its height is only half that of leaf-thumb to leave
-   room for the child name to the right of the photo.  (On narrow screens,
-   the key for the child is placed below the photo and name, as described
-   for flex-width below.)  Note that we use "vw" here instead of "vmin".
-   If the screen has a layout orientation, it's the width that matters for
-   placing the photo next to text.  Hopefully the screen isn't so ridiculously
-   wide and short that 20vw consumes too much of the height of the screen.
-
-   On large screens, both the name of the child and its key are placed
-   to the right of the photo.  In this case, its height expands to the
-   same size of leaf-thumb to provide a firm anchor for all that text.
-
-   Unlike img.leaf-thumb above, the div.key-thumb container has the same
-   width and height so that it is exactly square, with the image constrained
-   to fit with img.boxed above.  A light gray background is applied so that
-   a smaller image doesn't have weird-looking blank space around it.
-
-   Unlike for leaf-thumb above, the key-thumb photo has no peers
-   below it within its container.  To get proper centering on its
-   line, we give it no margin-bottom and rely on its container to give
-   it the necessary bottom margin to later elements. */
 div.key-thumb {
     height: 20vw;
     max-height: 200px;
@@ -586,20 +262,15 @@ div.key-thumb {
     margin-right: 10px;
     margin-bottom: 0px;
     vertical-align: middle;
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     background-color: #e8e8e8;
 }
-/* key-thumb-text is related to key-thumb in the same way that
-   leaf-thumb-text is related to leaf-thumb (above). */
 div.key-thumb-text {
     box-sizing: border-box;
     border: 1px solid black;
     padding: 10px;
-
     height: 20vw;
     max-height: 200px;
     width: 20vw;
@@ -607,24 +278,10 @@ div.key-thumb-text {
     margin-right: 10px;
     margin-bottom: 0px;
     vertical-align: middle;
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
 }
-
-/* list-thumb is applied to the photo thumbnail for a child listing with
-   only a photo and name, but no key.  See also the comments for the related
-   leaf-thumb and key-thumb above.
-
-   Compared to key-thumb, list-thumb is even smaller.  This allows more
-   flowers to be listed on one page.  The max dimensions in particular are
-   smaller since there is no key text that the photo needs to anchor.
-
-   Even though the thumbnails are displayed no larger than 100x100, I don't
-   bother creating separate smaller thumbnail files.  Experiments show that
-   100x100 thumbnails with much reduced quality are only 10% smaller than
-   the existing 200x200 thumbnails, so there's no real point. */
 div.list-thumb {
     height: 15vw;
     max-height: 100px;
@@ -633,20 +290,15 @@ div.list-thumb {
     margin-right: 10px;
     margin-bottom: 0px;
     vertical-align: middle;
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     background-color: #e8e8e8;
 }
-/* list-thumb-text is related to list-thumb in the same way that
-   leaf-thumb-text is related to leaf-thumb (above). */
 div.list-thumb-text {
     box-sizing: border-box;
     border: 1px solid black;
     padding: 10px;
-
     height: 15vw;
     max-height: 100px;
     width: 15vw;
@@ -654,40 +306,16 @@ div.list-thumb-text {
     margin-right: 10px;
     margin-bottom: 0px;
     vertical-align: middle;
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
 }
-
-/* photo-box is used for a child link (photo + text on the same line, with
-   or without key info).  If there is key info, the div.photo-box is also
-   contained within a div.flex-width.  See the comments for flex-width for
-   details.
-
-   display:flex provides a simple way to have items on the same line,
-   vertically centered with respect to each other.
-
-   flex-wrap should have no effect since the child photo shrinks to always
-   leave space next to it.  Previously it was useful for consecutive images
-   on the same line to wrap the images that didn't fit.
-
-   align-items vertically aligns the children of the flex box.
-
-   No margins are specified.  We rely on the margins of the flex box's
-   children and/or of the preceding/following element.  In particular, we
-   don't want to specify a margin that ends up getting added to a child's
-   margin.
-*/
 div.photo-box {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     margin-bottom: 10px;
 }
-
-/* list-box is used for hierarchical descendent listings, such as in
-   'flowering plants'.  It has margins because its children don't. */
 div.list-box {
     display: flex;
     flex-wrap: wrap;
@@ -695,36 +323,6 @@ div.list-box {
     margin-top: 10px;
     margin-bottom: 10px;
 }
-
-/* A standard child listing contains a photo, the child name, and the
-   child key.  On a narrow screen, we want the child name next to the photo
-   and the key underneath both.  On a wide screen, we want the key under
-   the child name, and both of those next to the photo.
-
-   I can't come up with an HTML structure that would allow the key to
-   move around like that.  I could create two copies of the key and have
-   only one of them displayed at a time (depending on the screen width),
-   but they key can be quite long.  So I take the slightly more efficient
-   route and duplicate the child name and have only one name displayed at
-   a time (depending on the screen width).
-
-   For a narrow screen (the default), the outer flex-width container is
-   just a regular default div that puts the contained div.photo-box on a
-   separate line from the div.key-text.  The name is put in the photo-box
-   container with class show-narrow, which is visible in this case.  The
-   name is also put in div.key-text with the key, but its show-wide class
-   is hidden.
-
-   For a wide screen (e.g. a desktop), the outer flex-width container is
-   changed to a flex box so that its two divisions are placed side by side.
-   The show-narrow name in the photo-box container is hidden in this case,
-   so the left element is just the photo.  The show-wide name is shown, so
-   it appears above the key in the div.key-text element on the right.
-
-   For either arrangement of the div.flex-width, its descendents explicitly
-   don't have a bottom margin so that they can be correctly placed within
-   their containers.  Therefore, the div.flex-width must have a bottom
-   margin. */
 div.flex-width {
     margin-bottom: 10px;
 }
@@ -745,55 +343,20 @@ span.show-wide {
 	display: inline;
     }
 }
-
-/* We remove unwanted bottom margins from elements within the div.flex-width
-   so that they get centered properly.  This includes:
-     - the div.photo-box (which is above the key if there is one, but is
-         the tallest element in the div.flex-width if there is no key).
-     - the last <p> or <ul> in div.key-text.
-
-   Note that the child's name is only in a <span>, not in a <p> tag, so it
-   doesn't have a bottom margin to worry about. */
 div.flex-width div.photo-box {
     margin-bottom: 0px;
 }
 div.key-text :last-child {
     margin-bottom: 0px;
 }
-
-/* The "indent" class is used with various flex containers such as box,
-   list-box, and photo-box.  Its purpose is to indent one level in a
-   hierarchical listing page such as 'flowering plants'.  Indenting
-   multiple levels requires nesting multiple "box" divs. */
 div.indent {
     margin-left: 5vw;
 }
-/* There's no "max-margin-left" property that would let us limit the indent.
-   But we can get what we want by checking whether 5vw is effectively greater
-   than 50px. */
 @media (min-width: 1000px) {
     div.indent {
 	margin-left: 50px;
     }
 }
-
-/*** properties related to the search box and autocomplete box ***/
-
-/* The search container holds the search field and autocompletion box.
-   It has a fixed position in the window, so it appears on top of the
-   regular content which scrolls underneath it.
-
-   Margins are specified for the top, left, and right in order to attach
-   the search container to those margins.  In particular, the right margin
-   is needed to prevent the container from shrinking to fit a minimum
-   search field width.
-
-   A white background is necessary to ensure that the scrolling text
-   doesn't peek through around the rounded corners of input#search.
-
-   box-shadow causes the body to subtly fade out as it scrolls under
-   the search container.  The z-index is necessary to compose the box-shadow
-   above the body. */
 div#search-container {
     position: fixed;
     top: 0px;
@@ -806,41 +369,26 @@ div#search-container {
     box-shadow: 0px 0px 3px 3px white;
     z-index: 10;
 }
-
-/* The input field is heavily styled.
-     - It has a larger font.
-     - It has a gray border with rounded corners.
-     - It has padding on the left side of the text area to accomodate
-       an SVG of a magnifying glass (to represent "search").
-*/
 input {
     box-sizing: border-box;
-    margin-left: 40px; /* leave room for the icon that links to the home page */
+    margin-left: 40px;
     width: calc(100% - 40px);
     font-size: 1.5em;
     border-radius: 0.4em;
     border: 1px solid #DDDDDD;
     padding-left: 1.5em;
     background-position: .2em 50%;
-    /* '#' must be escaped here as '%23'. */
     background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1.5em' height='1.5em' viewBox='0 0 100 100'><g stroke='%23888' stroke-width='9' stroke-linecap='round' fill='none'><circle cx='37' cy='37' r='20'/><path d='M52,52L83,83'/></g></svg>");
     background-repeat: no-repeat;
 }
 input::placeholder {
     color: #c0c0c0;
 }
-/* When the input field has focus, the border is blue and has a glow effect.
-   Some browsers (e.g. Chrome) add an outline by default.  Since the outline
-   is square cornered and otherwise generally clashes with our border effect,
-   we disable that default outline. */
 input#search:focus {
     border: 1px solid rgb(81, 203, 238);
     box-shadow: 0px 0px 5px 0px rgb(81, 203, 238);
     outline: auto 0px;
 }
-
-/* When Javascript is disabled, a <noscript> tag creates a second, disabled
-   input field on top of the first to prevent interaction. */
 input:disabled {
     position: absolute;
     top: 8px;
@@ -851,71 +399,22 @@ input:disabled {
     text-align: center;
     z-index: 20;
 }
-
-/* The autocompletion box is hidden by default.  JavaScript toggles it to
-   display when there are autocompletion results.  It has a solid background
-   to cover the normal page text underneath, and a thin gray border.
-
-   The autocompletion box has 'position: fixed', which puts it where
-   it normally would be placed if 'static', but removes it from the
-   normal HTML flow.  Thus, it ends up floating on top of the center
-   body section, which scrolls under (and past the left side) of the
-   floating box.
-
-   The autocompletion box is cuddled so closely against the search input
-   field that the slightly-larger home icon actually overlaps the
-   autocompletion results slightly.  However, the text is still
-   perfectly readable, and the result is natural looking.
-
-   Because the autocomplete-box is floating it doesn't inherit the
-   screen-edge padding-right from div "body", although its parent-
-   relative position effectively inherits the padding-left.
-
-   The background-color is needed to prevent bleed-through of the body
-   contents underneath.
-
-   I tried giving the autocompletion box a box shadow to separate it
-   from the contents of the page underneath, but it ends up looking
-   weird, especially if a photo is only covered by a corner of the
-   box.  If I try a box shadow again, it might need a 'z-index'
-   property to get it to draw properly. */
 div#autocomplete-box {
     display: none;
     position: fixed;
     border: 1px solid #DDDDDD;
     background-color: white;
-    margin-left: -8px; /* start at the edge of the page */
+    margin-left: -8px;
 }
-/* For mobile devices (above), it's hard to fit the text of long flower
-   names (especially ones with a variety/subspecies), so we allow the
-   autocompletion box to fill the width of the screen
-
-   For the desktop, we indent the autocompletion box so that its
-   left edge matches the left edge of the search text (to the right
-   of the magnifying glass).
- */
 @media (min-width: 600px) {
     div#autocomplete-box {
 	box-sizing: border-box;
-	/* margin-left:   home-icon width (40px)
-	                + input border (1px)
-			+ padding for magnifying lens icon
-                            (1.5em = 1.5 * 16px * 1.5em font-size = 36px)
-			- autocomplete-box border (1px)
-			- padding-left within autocomplete-box (12px)
-			- p.nogap padding (3px) */
 	margin-left: 61px;
-	margin-right: 8px; /* match the padding-right of body-container */
+	margin-right: 8px;
 	padding-left: 12px;
 	padding-right: 12px;
     }
 }
-/* Each autocompletion result is wrapped in <p class="nogap">.
-   Each line starts with 3 pixels of padding on the left.  But if any line
-   wraps at the edge of the screen, it gets an additional 17 pixels of
-   padding/indent.  Since text-indent applies only to the first line of a
-   paragraph, we reverse things so that the default padding is large, but
-   the first line gets a negative indent. */
 p.nogap {
     padding-left: 20px;
     text-indent: -17px;
@@ -924,14 +423,6 @@ p.nogap {
     padding-top: 0.4em;
     padding-bottom: 0.4em;
 }
-/* For mobile devies (above), we use the default (small) font size so that
-   most lines won't wrap.  However, on the assumption that we're less
-   constrained vertically, we add some clickable space above and below each
-   paragraph (search result) to give the user an easier touch target.
-
-   For the desktop, we increase the font size to make it appropriately
-   prominent (almost as large as the text in the search field).  We add only
-   a bit of padding around the paragraphs for readability. */
 @media (min-width: 600px) {
     p.nogap {
 	font-size: 1.25em;
@@ -939,23 +430,9 @@ p.nogap {
         padding-bottom: 0.15em;
     }
 }
-
-/* <span class="match"> is used to highlight the matched search text
-   within each autocomplete entry. */
 span.match {
     background-color: #eee;
 }
-
-/* See also the <a> link tags for links in the autocompletion box. */
-
-/*** properties related to interfacing with the service worker ***/
-
-/* The 'update' button can be in one of three states:
-   - update-update: click will update the cache
-   - update-disable: click is expected to do nothing
-   - update-stop: click will stop the cache update currently in progress
-   Note that the button is expected to have no HTML text in it.  Instead,
-   the pseudo 'before' element adds the proper text content for its state. */
 #update {
     display: inline-flex;
     vertical-align: middle;
@@ -965,7 +442,6 @@ span.match {
     align-items: center;
     justify-content: center;
     margin-right: 10px;
-    /* equal top and bottom margins for proper vertical centering */
     margin-top: 8px;
     margin-bottom: 8px;
     border-radius: 8px;
@@ -1014,11 +490,9 @@ span.match {
     align-items: center;
     justify-content: center;
     margin-right: 10px;
-    /* equal top and bottom margins for proper vertical centering */
     margin-top: 8px;
     margin-bottom: 8px;
     border-radius: 8px;
-
     background-color: red;
     color: white;
     cursor: pointer;
@@ -1040,8 +514,6 @@ span.match {
     display: inline-block;
     vertical-align: middle;
 }
-
-/* important messages on the home page */
 div#cache-online {
     background-color: #a0e2f2;
     padding: 5px;
@@ -1060,7 +532,6 @@ img.green-img {
     margin-right: 8px;
 }
 span.cache-text {
-    /* Subtract img width and margin from the text's available width. */
     width: calc(100% - 48px);
     display: inline-block;
     vertical-align: middle;
@@ -1085,8 +556,6 @@ img.hazard-img {
     vertical-align: middle;
     width: 40px;
     height: 40px;
-    /* less margin-right because the slope of the triangle already
-       creates some margin. */
     margin-right: 3px;
 }
 #icon {
@@ -1094,8 +563,8 @@ img.hazard-img {
     float: right;
     cursor: pointer;
     padding: 5px;
-    margin-top: 2px; /* give it enough room for a focus outline */
-    position: relative; /* establish stack context so that z-index works */
+    margin-top: 2px;
+    position: relative;
     z-index: 30;
 }
 #icon .hazard-img {
@@ -1105,14 +574,8 @@ img.hazard-img {
     background-color: #faffa3;
 }
 #icon.icon-red {
-/*
-    background: linear-gradient(135deg, #faffa3 45%, #ffa8a3 57%, #ffa8a3);
-*/
     backgroun-color: #ffa8a3;
 }
-
-/* When navigating from the hazard icon to the offline section, don't
-   do the default behavior of highlighting the target anchor. */
 #offline:target {
     background-color: inherit;
 }

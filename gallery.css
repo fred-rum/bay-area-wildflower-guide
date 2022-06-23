@@ -1,63 +1,41 @@
 /* Copyright Chris Nelson - All rights reserved. */
-
-/*****************************************************************************/
-/* When editing this data/gallery.css file, you have to run the BAWG script
-   to regenerate the {root}/gallery.css used by the HTML.  The BAWG script
-   removes the comments from the CSS to save download bandwidth. */
-/*****************************************************************************/
-
 body {
     background-color: #404040;
 }
-
 div#gallery-background {
     position: fixed;
     top: 0px;
     left: 0px;
     bottom: 0px;
     right: 0px;
-    /* By default, UI elements are centered in both axes.  An element with
-       'position: absolute' can override this for either axis. */
     display: flex;
     justify-content: center;
     align-items: center;
-    /* ignore various actions that the browser might otherwise allow */
     touch-action: none;
     user-select: none;
 }
-
 img.gallery-photo {
     position: fixed;
 }
-
 div#gallery-ui-left {
     z-index: 35;
     position: absolute;
     left: 0px;
     width: 50px;
     height: 80px;
-    /* '#' must be escaped here as '%23'. */
-    /* by default, the background-image fills the div dimensions */
     background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 80'><g stroke-linecap='round' fill='none'><path d='M35,10L15,40L35,70' stroke='%23777' stroke-width='12'/><path d='M35,10L15,40L35,70' stroke='%23fff' stroke-width='5'/></g></svg>");
     opacity: 0.75;
     transition-duration: 0.25s;
     transition-property: background-position. opacity;
     cursor: pointer;
-    /* The arrow is initially hidden, but can be exposed by JavaScript.
-       If I use opacity or visibility to hide it, it's not hidden until the
-       transition is complete, which is no good.  However, changing the
-       display property is always instantaneous as desired. */
     display: none;
 }
-
 div#gallery-ui-right {
     z-index: 35;
     position: absolute;
     right: 0px;
     width: 50px;
     height: 80px;
-    /* '#' must be escaped here as '%23'. */
-    /* by default, the background-image fills the div dimensions */
     background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 80'><g stroke-linecap='round' fill='none'><path d='M15,10L35,40L15,70' stroke='%23777' stroke-width='12'/><path d='M15,10L35,40L15,70' stroke='%23fff' stroke-width='5'/></g></svg>");
     opacity: 0.75;
     transition-duration: 0.25s;
@@ -65,11 +43,6 @@ div#gallery-ui-right {
     cursor: pointer;
     display: none;
 }
-
-/* Android devices have a bogus implementation that causs hover to remain
-   applied even when the element isn't being touched.  Since the user's
-   finger is likely to be blocking the arrow anyway while touching it, I
-   enable the hover effect only when it seems likely to work properly. */
 @media(hover:hover) {
     div#gallery-ui-left:hover {
 	background-position: -5px 0px;
@@ -80,15 +53,7 @@ div#gallery-ui-right {
 	opacity: 1;
     }
 }
-
 canvas#gallery-spinner {
-    /* The spinner comes after the photo image(s) in the DOM order.
-       But because the images have 'fixed' position, by default they
-       float above the 'auto' position of the spinner.  To draw them
-       in the correct order, we give the spinner a higher z-index. */
     z-index: 35;
-    /* If the user clicks/touches the spinner, ignore that and instead cascade
-       the touch/pointer down to either the photo or the underlying background.
-    */
     pointer-events: none;
 }
