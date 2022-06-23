@@ -85,6 +85,10 @@ class Glossary:
         # It is only used with arg -jepson_usage.
         self.anchor_list = []
 
+        # figure_list is a list of filenames for figures used in the
+        # glossary page.
+        self.figure_list = []
+
     def set_parent(self, parent):
         self.parent = parent
         if parent:
@@ -608,6 +612,15 @@ class Glossary:
         for child in sorted(self.child, key=attrgetter('name')):
             child.write_search_terms(w)
 
+    # Write filenames of figures used in my glossaries to photos.js
+    def write_figures(self, w):
+        if not self.invisible and self.figure_list:
+            figure_list = '","'.join(self.figure_list);
+            w.write(f'["{self.name}","{figure_list}"],\n')
+
+        for child in sorted(self.child, key=attrgetter('name')):
+            child.write_figures(w)
+
     # Write search terms for Jepson's glossary to pages.js
     def write_jepson_search_terms(self, w):
         w.write('{page:"Jepson eFlora",com:["Jepson eFlora"],x:"j",glossary:[\n')
@@ -705,3 +718,6 @@ def write_glossary_search_terms(w):
 
     if jepson_glossary:
         jepson_glossary.write_jepson_search_terms(w)
+
+def write_glossary_figures(w):
+    master_glossary.write_figures(w)

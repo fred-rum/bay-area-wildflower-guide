@@ -31,17 +31,19 @@ function main() {
       photo_urls = [];
       for (var j = 1; j < list.length; j++) {
         var photo_name = String(list[j]);
-        var comma_pos = photo_name.search(',');
-        if (comma_pos == -1) {
-          photo_name = base_name + ',' + photo_name;
-        } else {
-          base_name = photo_name.substring(0, comma_pos);
-        }
-        if (photo_name.search('/') == -1) {
-          photo_name = 'photos/' + photo_name;
-        }
-        if (photo_name.search(/.jpg$/) == -1) {
-          photo_name =  photo_name + '.jpg';
+        if (!/^figures\//.test(photo_name)) {
+          var comma_pos = photo_name.search(',');
+          if (comma_pos == -1) {
+            photo_name = base_name + ',' + photo_name;
+          } else {
+            base_name = photo_name.substring(0, comma_pos);
+          }
+          if (photo_name.search('/') == -1) {
+            photo_name = 'photos/' + photo_name;
+          }
+          if (photo_name.search(/.jpg$/) == -1) {
+            photo_name =  photo_name + '.jpg';
+          }
         }
         photo_urls.push(encodeURI(photo_name));
       }
@@ -270,6 +272,8 @@ function Photo(i, url_full) {
   this.i = i;
   this.url_full = url_full;
   this.url_thumb = url_full.replace(/^photos\//, 'thumbs/')
+  this.is_svg = /\.svg$/.test(url_full);
+  this.has_thumb = /^photos\//.test(url_full);
   this.active_thumb = false;
   this.active_full = false;
   this.done_thumb = null;
@@ -296,12 +300,14 @@ Photo.prototype.open_photo = function() {
     e_ui_r.style.display = 'none';
   }
   if (!this.e_thumb) {
-    this.e_thumb = document.createElement('img');
-    this.e_thumb.className = 'gallery-photo';
-    this.e_thumb.setAttribute('draggable', 'false');
-    this.e_thumb.addEventListener('load', this.fn_img_result.bind(this));
-    this.e_thumb.addEventListener('error', this.fn_img_result.bind(this));
-    this.e_thumb.src = this.url_thumb;
+    if (this.has_thumb) {
+      this.e_thumb = document.createElement('img');
+      this.e_thumb.className = 'gallery-photo';
+      this.e_thumb.setAttribute('draggable', 'false');
+      this.e_thumb.addEventListener('load', this.fn_img_result.bind(this));
+      this.e_thumb.addEventListener('error', this.fn_img_result.bind(this));
+      this.e_thumb.src = this.url_thumb;
+    }
     this.e_full = document.createElement('img');
     this.e_full.className = 'gallery-photo';
     this.e_full.setAttribute('draggable', 'false');
@@ -316,18 +322,31 @@ Photo.prototype.activate_images = function() {
   if (!this.active_full && this.e_full.naturalWidth) {
     new_active = true;
     this.active_full = true;
-    this.photo_x = this.e_full.naturalWidth;
-    this.photo_y = this.e_full.naturalHeight;
+    if (this.is_svg) {
+      var ar = this.e_full.naturalWidth / this.e_full.naturalHeight;
+      this.photo_x = Math.min(2048, 2048 * ar);
+      this.photo_y = Math.min(2048, 2048 / ar);
+      this.e_full.style.backgroundColor = 'white';
+    } else {
+      this.photo_x = this.e_full.naturalWidth;
+      this.photo_y = this.e_full.naturalHeight;
+      if (!this.active_thumb) {
+        this.e_full.style.backgroundColor = '#808080';
+      }
+    }
     e_spin.insertAdjacentElement('beforebegin', this.e_full);
   }
-  if (!this.active_thumb && this.e_thumb.naturalWidth &&
+  if (this.has_thumb && !this.active_thumb && this.e_thumb.naturalWidth &&
       (this.done_full != 'load')) {
     new_active = true;
     this.active_thumb = true;
-    if (!this.active_full) {
+    if (this.active_full) {
+      this.e_full.style.backgroundColor = 'transparent';
+    } else {
       this.photo_x = this.e_thumb.naturalWidth;
       this.photo_y = this.e_thumb.naturalHeight;
     }
+    this.e_thumb.style.backgroundColor = '#808080';
     e_bg.insertAdjacentElement('afterbegin', this.e_thumb);
   }
   if (new_active) {
@@ -339,6 +358,8 @@ Photo.prototype.activate_images = function() {
     if (this.active_thumb) {
       this.e_thumb.remove();
       this.active_thumb = false;
+    } else if (!this.is_svg){
+      this.e_full.style.backgroundColor = 'transparent';
     }
   } else if ((this.done_full == 'error') && (this.done_thumb != null)) {
     draw_spinner(true);

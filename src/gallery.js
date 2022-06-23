@@ -96,17 +96,19 @@ function main() {
       photo_urls = [];
       for (var j = 1; j < list.length; j++) {
         var photo_name = String(list[j]);
-        var comma_pos = photo_name.search(',');
-        if (comma_pos == -1) {
-          photo_name = base_name + ',' + photo_name;
-        } else {
-          base_name = photo_name.substring(0, comma_pos);
-        }
-        if (photo_name.search('/') == -1) {
-          photo_name = 'photos/' + photo_name;
-        }
-        if (photo_name.search(/.jpg$/) == -1) {
-          photo_name =  photo_name + '.jpg';
+        if (!/^figures\//.test(photo_name)) {
+          var comma_pos = photo_name.search(',');
+          if (comma_pos == -1) {
+            photo_name = base_name + ',' + photo_name;
+          } else {
+            base_name = photo_name.substring(0, comma_pos);
+          }
+          if (photo_name.search('/') == -1) {
+            photo_name = 'photos/' + photo_name;
+          }
+          if (photo_name.search(/.jpg$/) == -1) {
+            photo_name =  photo_name + '.jpg';
+          }
         }
         photo_urls.push(encodeURI(photo_name));
       }
@@ -497,6 +499,9 @@ function Photo(i, url_full) {
   this.url_full = url_full;
   this.url_thumb = url_full.replace(/^photos\//, 'thumbs/')
 
+  this.is_svg = /\.svg$/.test(url_full);
+  this.has_thumb = /^photos\//.test(url_full);
+
   /* The image elements for the thumbnail (for fast loading) and full-sized
      photo (for detail when available).
   this.e_thumb = null;
@@ -552,20 +557,22 @@ Photo.prototype.open_photo = function() {
        necessary DOM elements here, but we'll have to wait for the thumbnail
        and full-sized photo to load. */
 
-    this.e_thumb = document.createElement('img');
-    this.e_thumb.className = 'gallery-photo';
-    this.e_thumb.setAttribute('draggable', 'false');
+    if (this.has_thumb) {
+      this.e_thumb = document.createElement('img');
+      this.e_thumb.className = 'gallery-photo';
+      this.e_thumb.setAttribute('draggable', 'false');
 
-    /* By setting the event handlers before setting the img src value,
-       we guarantee that the img isn't loaded yet. */
-    this.e_thumb.addEventListener('load', this.fn_img_result.bind(this));
-    this.e_thumb.addEventListener('error', this.fn_img_result.bind(this));
+      /* By setting the event handlers before setting the img src value,
+         we guarantee that the img isn't loaded yet. */
+      this.e_thumb.addEventListener('load', this.fn_img_result.bind(this));
+      this.e_thumb.addEventListener('error', this.fn_img_result.bind(this));
 
-    /* The thumb-sized photo is the same as e_thumbnail.  Unfortunately,
-       there's no way to simply copy the thumbnail image from the original
-       page.  We can only hope that the browser has cached the JPG file and
-       can re-create the image quickly. */
-    this.e_thumb.src = this.url_thumb;
+      /* The thumb-sized photo is the same as e_thumbnail.  Unfortunately,
+         there's no way to simply copy the thumbnail image from the original
+         page.  We can only hope that the browser has cached the JPG file and
+         can re-create the image quickly. */
+      this.e_thumb.src = this.url_thumb;
+    }
 
     this.e_full = document.createElement('img');
     this.e_full.className = 'gallery-photo';
@@ -606,15 +613,29 @@ Photo.prototype.activate_images = function() {
     console.log('activate full');
 
     this.active_full = true;
-    this.photo_x = this.e_full.naturalWidth;
-    this.photo_y = this.e_full.naturalHeight;
+
+    if (this.is_svg) {
+      /* An SVG doesn't have real pixel dimensions, so instead we allow it
+         to scale as if it has a long axis of 2048 pixels. */
+      console.log('dim:', this.photo_x, this.photo_y);
+      var ar = this.e_full.naturalWidth / this.e_full.naturalHeight;
+      this.photo_x = Math.min(2048, 2048 * ar);
+      this.photo_y = Math.min(2048, 2048 / ar);
+      this.e_full.style.backgroundColor = 'white';
+    } else {
+      this.photo_x = this.e_full.naturalWidth;
+      this.photo_y = this.e_full.naturalHeight;
+      if (!this.active_thumb) {
+        this.e_full.style.backgroundColor = '#808080';
+      }
+    }
 
     /* Insert the full-sized image just before the spinner,
        and after the thumbnail (if present). */
     e_spin.insertAdjacentElement('beforebegin', this.e_full);
   }
 
-  if (!this.active_thumb && this.e_thumb.naturalWidth &&
+  if (this.has_thumb && !this.active_thumb && this.e_thumb.naturalWidth &&
       (this.done_full != 'load')) {
     /* We now have dimensions for the thumbnail photo, but we only bother
        to display it if the full-size photo is not done. */
@@ -626,10 +647,13 @@ Photo.prototype.activate_images = function() {
 
     /* Only set the photo dimensions if we don't already have them from
        the full-sized photo. */
-    if (!this.active_full) {
+    if (this.active_full) {
+      this.e_full.style.backgroundColor = 'transparent';
+    } else {
       this.photo_x = this.e_thumb.naturalWidth;
       this.photo_y = this.e_thumb.naturalHeight;
     }
+    this.e_thumb.style.backgroundColor = '#808080';
 
     /* Insert the thumbnail image at the beginning of e_bg,
        before the full-sized photo (if present) and the spinner. */
@@ -649,6 +673,8 @@ Photo.prototype.activate_images = function() {
       /* The thumbnail photo is no longer useful, so we remove it. */
       this.e_thumb.remove();
       this.active_thumb = false;
+    } else if (!this.is_svg){
+      this.e_full.style.backgroundColor = 'transparent';
     }
   } else if ((this.done_full == 'error') && (this.done_thumb != null)) {
     /* The full-sized photo has an error and the thumbnail is complete. 
@@ -742,7 +768,6 @@ Photo.prototype.constrain_zoom = function() {
   /* min_width is 100 pixels or
      the width that causes the height to be 100 pixels */
   var min_width = Math.max(100, 100 * this.photo_x / this.photo_y);
-  console.log('min_width:', min_width, this.fit_width());
   if (this.img_x < min_width) {
     /* Don't let the image get smaller than a minimum size
        unless the screen is even smaller. */

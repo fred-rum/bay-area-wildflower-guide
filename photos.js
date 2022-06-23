@@ -927,4 +927,11 @@ var pages=[
 ["western small milkweed bug",1],
 ["checkerspot caterpillars",7,8],
 ["gulf fritillary",1],
+["flower glossary","figures/san francisco woodland star.svg","figures/california poppy.svg","figures/yellow mariposa lily.svg","figures/seep monkeyflower.svg","figures/california manroot.svg","figures/sea muilla.svg","figures/california poppy fruit.svg"],
+["larkspur glossary","figures/foothill larkspur.svg","figures/foothill larkspur spur.svg","figures/foothill larkspur.svg","figures/foothill larkspur spur.svg"],
+["legume glossary","figures/chaparral pea.svg"],
+["orchid glossary","figures/coast piperia.svg"],
+["insect glossary","figures/fly side.svg"],
+["beetle glossary","figures/beetle.jpg"],
+["true bug glossary","figures/true bug top.svg","figures/true bug side.svg"],
 ];

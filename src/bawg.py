@@ -798,8 +798,11 @@ with open(photos_file, 'w', encoding='utf-8') as w:
             else:
                 recent_name = base
                 photos.append(f'"{jpg}"')
+        for file in page.figure_list:
+            photos.append(file)
         photo_list = ','.join(photos)
         w.write(f'{photo_list}],\n')
+    write_glossary_figures(w)
     w.write('];\n')
 
 

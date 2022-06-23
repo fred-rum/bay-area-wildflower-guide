@@ -1,6 +1,3 @@
-make photo gallery viewer work with figures
-  (e.g. in glossary, but also if they are used in a page)
-
 zoom to fit/full on space or enter
 
 accept left and right arrow keypresses to switch photos
@@ -12,6 +9,9 @@ can I disable or capture browser zoom while in the gallery?
   do I want to?
   e.g. ctrl-mouse wheel
   measure event.scale?
+
+make wheel event passive
+
 
 optional:
 `

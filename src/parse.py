@@ -295,7 +295,7 @@ def parse_txt(name, s, page, glossary):
 
     s = '\n'.join(c_list)
 
-    s = link_figures_thumb(name, s)
+    s = link_figures_thumb(name, s, page, glossary)
 
     return s
 

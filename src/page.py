@@ -399,6 +399,9 @@ class Page:
         # will become our representative jpg.
         self.rep_child = None
 
+        # figure_list is a list of filenames for figures used by the page.
+        self.figure_list = []
+
         # list_hierarchy is True if we want to write the entire descendant
         # hierarchy to the HTML rather than just the list of children.
         self.list_hierarchy = False
