@@ -1,6 +1,3 @@
-Firefox briefly flashes a red spinner when changing photos
-  can that be suppressed?
-
 move gallery.js and gallery.css to src/
 
 make photo gallery viewer work with figures

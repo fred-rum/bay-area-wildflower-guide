@@ -36,7 +36,7 @@ var spin_req = null;
 
 /* spin_timestamp indicates the time of the last spinner update.  This helps
    determine how far the spinner should rotate the next time it is drawn. */
-var spin_timestamp;
+var spin_timestamp = performance.now();
 
 /* spin_offset indicates the current spin position, as the fraction (0.0-1.0)
    of a 360-degree clockwise rotation from the default orientation. */
@@ -196,22 +196,24 @@ function fn_save_state() {
 }
 
 function fn_spin(timestamp) {
-  draw_spinner(timestamp, false);
+  /* We won't get another fn_spin() call unless we request another. */
+  spin_req = null;
 
-  spin_req = window.requestAnimationFrame(fn_spin);
-
-  /* activate_images() polls the photo loading status and may stop the
-     spinner if there was a problem. */
+  /* activate_images() polls the photo loading status and runs or stops the
+     spinner as appropriate.  We don't bother to pass in the timestamp
+     because activate_images() can be called from places that don't have one,
+     so it has to call performance.now() anyway. */
   obj_photo.activate_images();
 }
 
-function draw_spinner(timestamp, stopped) {
+function draw_spinner(stopped) {
   var hz = 1.0; /* revolutions per second */
   var n = 7; /* number of circles in the spinner */
   var r_ring = 40; /* outer radius of the spinner as a whole */
   var r_circle = 10; /* radius of each circle within the spinner */
 
   /* calculate how much to spin the spinner */
+  var timestamp = performance.now();
   var elapsed = timestamp - spin_timestamp;
   spin_timestamp = timestamp;
 
@@ -248,8 +250,6 @@ function clear_spinner() {
      in place, but clear its contents. */
   var ctx = e_spin.getContext('2d');
   ctx.clearRect(0, 0, 100, 100);
-
-  end_spinner();
 }
 
 function end_spinner() {
@@ -373,14 +373,27 @@ function fn_pointerup(event) {
          pushed an entry to the browser's history, we want to pop back up the
          history.  Since there is already code to restore the proper state when
          the user navigates back through the history, the rest is automatic. */
-      setTimeout(go_back, 0);
+      /* Unfortunately, Firefox on Android has a bug that if we go back while
+         the click is still being processed, any link that appears under the
+         user's finger gets followed.  This is true even with preventDefault(),
+         stopPropagation(), stopImmediatePropagation(), and return false.  It
+         also occurs even with a 0ms timeout, which is ridiculous.  A delay of
+         50ms seems to solve the problem for me.  Who knows if it will work
+         for everyone.  I can't find any reference to this bug on the
+         internet. */
+      setTimeout(go_back, 50);
     }
-    return;
+    return true;
   }
 
   console.log('pointer up:', touches.length);
 }
 
+/* If the browser is slow to go back (e.g. because loading the previous page is
+   slow), the user can tap to go back more than once.  Chrome on Android has a
+   bug that if history.back() is called more than once, it doesn't go back one
+   page *relative to the current page*, but instead goes back two pages.  So we
+   have to suppress additional calls after the first one. */
 var go_back_in_progress = false;
 function go_back() {
   console.log('go back:', go_back_in_progress);
@@ -388,6 +401,13 @@ function go_back() {
     go_back_in_progress = true;
     history.back();
   }
+}
+
+/* If the user comes back to this page (e.g. with the forward button), we
+   need to re-enable go_back() again. */
+addEventListener('pageshow', fn_return);
+function fn_return() {
+  go_back_in_progress = false;
 }
 
 /* Measure the pinch distance by calculating the bounding box around all
@@ -495,7 +515,8 @@ function Photo(i, url_full) {
      the variables below. */
   this.active_thumb = false;
   this.active_full = false;
-  this.done_full = false;
+  this.done_thumb = null;
+  this.done_full = null;
 }
 
 Photo.prototype.init_photo = function() {
@@ -535,6 +556,11 @@ Photo.prototype.open_photo = function() {
     this.e_thumb.className = 'gallery-photo';
     this.e_thumb.setAttribute('draggable', 'false');
 
+    /* By setting the event handlers before setting the img src value,
+       we guarantee that the img isn't loaded yet. */
+    this.e_thumb.addEventListener('load', this.fn_img_result.bind(this));
+    this.e_thumb.addEventListener('error', this.fn_img_result.bind(this));
+
     /* The thumb-sized photo is the same as e_thumbnail.  Unfortunately,
        there's no way to simply copy the thumbnail image from the original
        page.  We can only hope that the browser has cached the JPG file and
@@ -545,9 +571,10 @@ Photo.prototype.open_photo = function() {
     this.e_full.className = 'gallery-photo';
     this.e_full.setAttribute('draggable', 'false');
 
-    /* By setting the load event handler before setting the img src value,
+    /* By setting the event handlers before setting the img src value,
        we guarantee that the img isn't loaded yet. */
-    this.e_full.addEventListener('load', this.fn_full_onload.bind(this));
+    this.e_full.addEventListener('load', this.fn_img_result.bind(this));
+    this.e_full.addEventListener('error', this.fn_img_result.bind(this));
 
     /* 'onloadend' isn't well supported yet, so there's no callback if
        the photo fails to load.  Instead, we poll for that condition in
@@ -562,13 +589,6 @@ Photo.prototype.open_photo = function() {
     /* Note that although the image elements have been created, they have not
        yet been inserted into the document.  We don't do that until the image
        dimensions have been loaded, as polled by the spinner. */
-  }
-
-  /* We always start the spinner here, and activate_images() will stop it
-     immediately if appropriate. */
-  if (!spin_req) {
-    spin_req = window.requestAnimationFrame(fn_spin);
-    spin_timestamp = performance.now();
   }
 
   this.activate_images();
@@ -594,7 +614,8 @@ Photo.prototype.activate_images = function() {
     e_spin.insertAdjacentElement('beforebegin', this.e_full);
   }
 
-  if (!this.active_thumb && this.e_thumb.naturalWidth && !this.done_full) {
+  if (!this.active_thumb && this.e_thumb.naturalWidth &&
+      (this.done_full != 'load')) {
     /* We now have dimensions for the thumbnail photo, but we only bother
        to display it if the full-size photo is not done. */
     new_active = true;
@@ -615,38 +636,45 @@ Photo.prototype.activate_images = function() {
     e_bg.insertAdjacentElement('afterbegin', this.e_thumb);
   }
 
-  if (this.done_full) {
+  if (new_active) {
+    this.redraw_photo();
+  }
+
+  if (this.done_full == 'load') {
     /* The full-sized photo has loaded completely. */
     clear_spinner();
+    end_spinner();
 
     if (this.active_thumb) {
       /* The thumbnail photo is no longer useful, so we remove it. */
       this.e_thumb.remove();
       this.active_thumb = false;
     }
-  } else if (this.e_thumb.complete && this.e_full.complete) {
-    /* Both photos have stopped loading, but we the full-sized photo didn't
-       load completely ('done_full').  That means that the load of the
-       full-sized photo failed or was aborted by the user.  We stop the spinner
-       but leave it on-screen to indicate that loading has stopped.  If the
-       browser decides later that the photo *is* completely loaded, it'll call
-       the 'onload' callback, which clears the spinner. */
-    draw_spinner(spin_timestamp, true);
+  } else if ((this.done_full == 'error') && (this.done_thumb != null)) {
+    /* The full-sized photo has an error and the thumbnail is complete. 
+       Turn the spinner red and end its spinning. */
+    draw_spinner(true);
     end_spinner();
-  } else if (!spin_req) {
-    spin_req = window.requestAnimationFrame(fn_spin);
-    spin_timestamp = performance.now();
-  }
+  } else {
+    /* The spinner continues spinning, either gray or red. */
+    draw_spinner(this.done_full == 'error');
 
-  if (new_active) {
-    this.redraw_photo();
+    /* Run the spinner (or continue running it). */
+    if (!spin_req) {
+      spin_req = window.requestAnimationFrame(fn_spin);
+    }
   }
 }
 
-Photo.prototype.fn_full_onload = function(event) {
-  console.log('full-size photo loaded');
+Photo.prototype.fn_img_result = function(event) {
+  console.log('img load result:', event.type, event.target);
 
-  this.done_full = true;
+  if (event.target == this.e_full) {
+    this.done_full = event.type;
+  } else {
+    this.done_thumb = event.type;
+  }
+    
 
   /* It's possible that a photo finishes loading while the gallery is closed
      or has switched to another photo.  In that case, do *not* respond in
