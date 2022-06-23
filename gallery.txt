@@ -1,6 +1,7 @@
-move gallery.js and gallery.css to src/
+Firefox briefly flashes a red spinner when changing photos
+  can that be suppressed?
 
-test thumbnails of CalPhotos images
+move gallery.js and gallery.css to src/
 
 make photo gallery viewer work with figures
   (e.g. in glossary, but also if they are used in a page)
@@ -8,37 +9,17 @@ make photo gallery viewer work with figures
 make body background $404040
   so that crazy #gallery-background margins aren't required
 
-should I create a gallery.html page
-  that is invoked by Javascript
-  and includes the list of photos in its URL?
-    e.g. with hash to selected photo
-    or an included file lists all photo associations
-
-previous selected region remains partially visible in Android Chrome
-  when the gallery is open
-
-arrow is slow to disappear at the end of the carrousel
-  because of the transition delay?
-
-remove hover application as necessary
-
-pinch is wonky when the browser is zoomed in
-  use windowX/Y instead of clientX/Y?
-
 zoom to fit/full on space or enter
 
-add arrows on left and right (when appropriate) to switch photos
-  also accept left and right keypresses
+accept left and right arrow keypresses to switch photos
   also accept wheel left and right?
-
-can I recognize a flick left or right for switching photos?
-  is getPredictedEvents() useful?
 
 add X in corner?
 
 can I disable or capture browser zoom while in the gallery?
   do I want to?
   e.g. ctrl-mouse wheel
+  measure event.scale?
 
 optional:
 `
@@ -56,3 +37,6 @@ button for full screen view?
 allow a 'click' to have a small amount of pointer movement
   as long as it stays within the original element
   event.target.setPointerCapture(...) may be useful
+
+can I recognize a flick left or right for switching photos?
+  is getPredictedEvents() useful?

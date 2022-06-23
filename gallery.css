@@ -9,8 +9,9 @@
 div#gallery-background {
     position: fixed;
     display: flex;
-    /* Lay out the UI elements across the middle of the screen. */
-    justify-content: space-between;
+    /* By default, UI elements are centered in both axes.  An element with
+       'position: absolute' can override this for either axis. */
+    justify-content: center;
     align-items: center;
     /* The default in Firefox on Android is that the URL and other tools
        are hidden or revealed when the user scrolls.  Even if
@@ -32,12 +33,16 @@ div#gallery-background {
     touch-action: none;
     user-select: none;
 }
+
 img.gallery-photo {
     position: fixed;
 }
+
 div#gallery-ui-left {
     z-index: 35;
-    margin-left: 1000px;
+    position: absolute;
+    top: @calc(100% - 40px);
+    left: 1000px;
     width: 50px;
     height: 80px;
     /* '#' must be escaped here as '%23'. */
@@ -47,16 +52,17 @@ div#gallery-ui-left {
     transition-duration: 0.25s;
     transition-property: background-position. opacity;
     cursor: pointer;
-    /* the UI element is initially hidden, but can be exposed by JavaScript */
-    visibility: hidden;
+    /* The arrow is initially hidden, but can be exposed by JavaScript.
+       If I use opacity or visibility to hide it, it's not hidden until the
+       transition is complete, which is no good.  However, changing the
+       display property is always instantaneous as desired. */
+    display: none;
 }
-div#gallery-ui-left:hover {
-    background-position: -5px 0px;
-    opacity: 1;
-}
+
 div#gallery-ui-right {
     z-index: 35;
-    margin-right: 1000px;
+    position: absolute;
+    right: 1000px;
     width: 50px;
     height: 80px;
     /* '#' must be escaped here as '%23'. */
@@ -66,13 +72,24 @@ div#gallery-ui-right {
     transition-duration: 0.25s;
     transition-property: background-position. opacity;
     cursor: pointer;
-    /* the UI element is initially hidden, but can be exposed by JavaScript */
-    visibility: hidden;
+    display: none;
 }
-div#gallery-ui-right:hover {
-    background-position: 5px 0px;
-    opacity: 1;
+
+/* Android devices have a bogus implementation that causs hover to remain
+   applied even when the element isn't being touched.  Since the user's
+   finger is likely to be blocking the arrow anyway while touching it, I
+   enable the hover effect only when it seems likely to work properly. */
+@media(hover:hover) {
+    div#gallery-ui-left:hover {
+	background-position: -5px 0px;
+	opacity: 1;
+    }
+    div#gallery-ui-right:hover {
+	background-position: 5px 0px;
+	opacity: 1;
+    }
 }
+
 canvas#gallery-spinner {
     /* The spinner comes after the photo image(s) in the DOM order.
        But because the images have 'fixed' position, by default they

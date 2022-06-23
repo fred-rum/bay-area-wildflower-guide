@@ -96,8 +96,11 @@ function main() {
       photo_urls = [];
       for (var j = 1; j < list.length; j++) {
         var photo_name = String(list[j]);
-        if (photo_name.search(',') == -1) {
+        var comma_pos = photo_name.search(',');
+        if (comma_pos == -1) {
           photo_name = base_name + ',' + photo_name;
+        } else {
+          base_name = photo_name.substring(0, comma_pos);
         }
         if (photo_name.search('/') == -1) {
           photo_name = 'photos/' + photo_name;
@@ -510,14 +513,14 @@ Photo.prototype.open_photo = function() {
   obj_photo = this;
 
   if (this.i > 0) {
-    e_ui_l.style.visibility = 'visible';
+    e_ui_l.style.display = 'block';
   } else {
-    e_ui_l.style.visibility = 'hidden';
+    e_ui_l.style.display = 'none';
   }
   if (this.i < (obj_photos.length-1)) {
-    e_ui_r.style.visibility = 'visible';
+    e_ui_r.style.display = 'block';
   } else {
-    e_ui_r.style.visibility = 'hidden';
+    e_ui_r.style.display = 'none';
   }
 
   /* e_thumb and e_full are always create together, so we only need to check
