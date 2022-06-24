@@ -21,7 +21,9 @@
 //
 // 'upd_kb_total' indicates the total KB in the latest update
 
-/* insert code here */
+var upd_timestamp = '2022-06-24T00:43:25.365103+00:00';
+var upd_num_urls = 7505;
+var upd_kb_total = 812985
 
 console.info('starting from the beginning');
 
@@ -293,7 +295,7 @@ self.addEventListener('fetch', fetch_handler);
 // Remove the prepended scope from the URL of a request.
 // The scope is a string such as 'https://localhost:8000/'.
 //
-// It also removes any trailing #anchor.
+// It also removes any trailing '?search' and/or '#anchor'.
 //
 // This function can be performed on a real fetch request (which has
 // a real URL) or on a key from the cache (which the cache has tried
@@ -302,11 +304,14 @@ self.addEventListener('fetch', fetch_handler);
 function remove_scope_from_request(request) {
   let url = request.url;
   let scope_end = registration.scope.length
+  let search_pos = url.indexOf('?');
   let anchor_pos = url.indexOf('#');
-  if (anchor_pos == -1) {
-    return url.substring(scope_end);
-  } else {
+  if (search_pos > -1) {
+    return url.substring(scope_end, search_pos);
+  } else if (anchor_pos > -1) {
     return url.substring(scope_end, anchor_pos);
+  } else {
+    return url.substring(scope_end);
   }
 }
 

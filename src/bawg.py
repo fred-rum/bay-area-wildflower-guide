@@ -897,6 +897,7 @@ if not arg('-without_cache'):
         'search.js',
         'pages.js',
         'gallery.html',
+        'photos.js',
         'gallery.js',
         'gallery.css',
     ]

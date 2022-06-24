@@ -597,6 +597,12 @@ Photo.prototype.open_photo = function() {
        activated. */
     this.e_full.src = this.url_full;
 
+    if (this.is_svg) {
+      /* Firefox doesn't populate naturalWidth and naturalHeight for an SVG,
+         so we have to display it first, then query its dimensions. */
+      e_spin.insertAdjacentElement('beforebegin', this.e_full);
+    }
+
     /* Note that although the image elements have been created, they have not
        yet been inserted into the document.  We don't do that until the image
        dimensions have been loaded, as polled by the spinner. */
@@ -610,7 +616,12 @@ Photo.prototype.activate_images = function() {
      which eventually triggers a call to redraw_photo(). */
   var new_active = false;
 
-  if (!this.active_full && this.e_full.naturalWidth) {
+  console.log('done:', this.done_full,
+              'active:', this.active_full,
+              'width:', this.e_full.width);
+
+  if (!this.active_full && (this.e_full.naturalWidth ||
+                            (this.is_svg && this.e_full.width))) {
     /* We now have dimensions for the full-sized photo. */
     new_active = true;
 
@@ -621,22 +632,24 @@ Photo.prototype.activate_images = function() {
     if (this.is_svg) {
       /* An SVG doesn't have real pixel dimensions, so instead we allow it
          to scale as if it has a long axis of 2048 pixels. */
-      console.log('dim:', this.photo_x, this.photo_y);
-      var ar = this.e_full.naturalWidth / this.e_full.naturalHeight;
+      console.log('dim:', this.e_full.width, this.e_full.height);
+      var ar = this.e_full.width / this.e_full.height;
       this.photo_x = Math.min(2048, 2048 * ar);
       this.photo_y = Math.min(2048, 2048 / ar);
       this.e_full.style.backgroundColor = 'white';
+      /* In the case of an SVG, the image element is already added to the
+         DOM. */
     } else {
       this.photo_x = this.e_full.naturalWidth;
       this.photo_y = this.e_full.naturalHeight;
       if (!this.active_thumb) {
         this.e_full.style.backgroundColor = '#808080';
       }
-    }
 
-    /* Insert the full-sized image just before the spinner,
-       and after the thumbnail (if present). */
-    e_spin.insertAdjacentElement('beforebegin', this.e_full);
+      /* Insert the full-sized image just before the spinner,
+         and after the thumbnail (if present). */
+      e_spin.insertAdjacentElement('beforebegin', this.e_full);
+    }
   }
 
   if (this.has_thumb && !this.active_thumb && this.e_thumb.naturalWidth &&
@@ -668,7 +681,12 @@ Photo.prototype.activate_images = function() {
     this.redraw_photo();
   }
 
-  if (this.done_full == 'load') {
+  /* If done_full is 'load', then then a JPG image necessarily has a
+     naturalWidth, so active_full is true.  However, an SVG image may still be
+     rendering, so it doesn't yet have a width.  In that case, keep spinning
+     until we can get its width and height.  (Maybe I got confused and that
+     didn't really happen, but in any case the extra check shouldn't hurt.) */
+  if ((this.done_full == 'load') && this.active_full) {
     /* The full-sized photo has loaded completely. */
     clear_spinner();
     end_spinner();

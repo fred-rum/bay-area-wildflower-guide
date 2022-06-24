@@ -317,16 +317,23 @@ Photo.prototype.open_photo = function() {
     this.e_full.addEventListener('load', this.fn_img_result.bind(this));
     this.e_full.addEventListener('error', this.fn_img_result.bind(this));
     this.e_full.src = this.url_full;
+    if (this.is_svg) {
+      e_spin.insertAdjacentElement('beforebegin', this.e_full);
+    }
   }
   this.activate_images();
 }
 Photo.prototype.activate_images = function() {
   var new_active = false;
-  if (!this.active_full && this.e_full.naturalWidth) {
+  console.log('done:', this.done_full,
+              'active:', this.active_full,
+              'width:', this.e_full.width);
+  if (!this.active_full && (this.e_full.naturalWidth ||
+                            (this.is_svg && this.e_full.width))) {
     new_active = true;
     this.active_full = true;
     if (this.is_svg) {
-      var ar = this.e_full.naturalWidth / this.e_full.naturalHeight;
+      var ar = this.e_full.width / this.e_full.height;
       this.photo_x = Math.min(2048, 2048 * ar);
       this.photo_y = Math.min(2048, 2048 / ar);
       this.e_full.style.backgroundColor = 'white';
@@ -336,8 +343,8 @@ Photo.prototype.activate_images = function() {
       if (!this.active_thumb) {
         this.e_full.style.backgroundColor = '#808080';
       }
+      e_spin.insertAdjacentElement('beforebegin', this.e_full);
     }
-    e_spin.insertAdjacentElement('beforebegin', this.e_full);
   }
   if (this.has_thumb && !this.active_thumb && this.e_thumb.naturalWidth &&
       (this.done_full != 'load')) {
@@ -355,7 +362,7 @@ Photo.prototype.activate_images = function() {
   if (new_active) {
     this.redraw_photo();
   }
-  if (this.done_full == 'load') {
+  if ((this.done_full == 'load') && this.active_full) {
     clear_spinner();
     end_spinner();
     if (this.active_thumb) {

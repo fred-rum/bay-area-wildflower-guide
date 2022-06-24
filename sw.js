@@ -1,7 +1,7 @@
 'use strict';
-var upd_timestamp = '2022-06-23T21:37:49.638176+00:00';
+var upd_timestamp = '2022-06-24T00:43:25.365103+00:00';
 var upd_num_urls = 7505;
-var upd_kb_total = 812916
+var upd_kb_total = 812985
 const DB_NAME = 'db-v1';
 const DB_VERSION = 1;
 const BASE64_CACHE_NAME = 'base64-cache-v1';
@@ -71,11 +71,14 @@ self.addEventListener('fetch', fetch_handler);
 function remove_scope_from_request(request) {
   let url = request.url;
   let scope_end = registration.scope.length
+  let search_pos = url.indexOf('?');
   let anchor_pos = url.indexOf('#');
-  if (anchor_pos == -1) {
-    return url.substring(scope_end);
-  } else {
+  if (search_pos > -1) {
+    return url.substring(scope_end, search_pos);
+  } else if (anchor_pos > -1) {
     return url.substring(scope_end, anchor_pos);
+  } else {
+    return url.substring(scope_end);
   }
 }
 function fetch_handler(event) {
