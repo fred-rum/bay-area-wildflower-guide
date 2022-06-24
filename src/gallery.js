@@ -370,11 +370,12 @@ function fn_pointerup(event) {
         (click_target == obj_photo.e_full)){
       obj_photo.click.call(obj_photo, touch);
     } else {
-      /* The click was in the background, so we return to the normal page view.
-         We could close the gallery directly, but since opening the gallery
-         pushed an entry to the browser's history, we want to pop back up the
-         history.  Since there is already code to restore the proper state when
-         the user navigates back through the history, the rest is automatic. */
+      /* The click was in the background or on the 'X', so we return to the
+         normal page view.  We could close the gallery directly, but since
+         opening the gallery pushed an entry to the browser's history, we want
+         to pop back up the history.  Since there is already code to restore
+         the proper state when the user navigates back through the history, the
+         rest is automatic. */
       /* Unfortunately, Firefox on Android has a bug that if we go back while
          the click is still being processed, any link that appears under the
          user's finger gets followed.  This is true even with preventDefault(),

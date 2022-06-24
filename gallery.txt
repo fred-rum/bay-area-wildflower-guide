@@ -1,4 +1,5 @@
 remove zoom restriction
+  can I test pinch with zoom?
 
 can I disable or capture browser zoom while in the gallery?
   do I want to?
@@ -9,8 +10,6 @@ zoom to fit/full on space or enter
 
 accept left and right arrow keypresses to switch photos
   also accept wheel left and right?
-
-add X in corner?
 
 make wheel event passive
 
