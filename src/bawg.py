@@ -933,6 +933,9 @@ if not arg('-without_cache'):
     figure_set.discard('_figure template')
     alpha_list += get_file_list('figures', figure_set, 'svg')
 
+    figure_set = get_file_set('figures', 'jpg')
+    alpha_list += get_file_list('figures', figure_set, 'jpg')
+
     path_list += sorted(alpha_list, key=by_filename)
 
     update_cache(path_list)
