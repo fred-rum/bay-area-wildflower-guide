@@ -483,9 +483,9 @@ function fn_wheel(event) {
   var touch = copy_touch(event);
 
   if (event.deltaY < 0) {
-    obj_photo.zoom_to(obj_photo, obj_photo.img_x * 1.30, touch, touch);
+    obj_photo.zoom_in(touch);
   } else if (event.deltaY > 0) {
-    obj_photo.zoom_to(obj_photo, obj_photo.img_x / 1.30, touch, touch);
+    obj_photo.zoom_out(touch);
   } else if (event.deltaX < 0) {
     obj_photo.go_left();
   } else if (event.deltaX > 0) {
@@ -928,6 +928,14 @@ Photo.prototype.fit_width = function() {
   return Math.min(win_x, this.photo_x / this.photo_y * win_y);
 }
 
+Photo.prototype.zoom_in = function(touch) {
+  this.zoom_to(this, this.img_x * 1.30, touch, touch);
+}
+
+Photo.prototype.zoom_out = function(touch) {
+  this.zoom_to(this, this.img_x / 1.30, touch, touch);
+}
+
 Photo.prototype.go_left = function() {
   if (this.i > 0) {
     this.close_photo();
@@ -1022,6 +1030,12 @@ function fn_resize() {
 
 function fn_gallery_keydown(event) {
   console.log(event);
+
+  var center_touch = {
+    x: win_x/2,
+    y: win_y/2
+  };
+
   if (event.key == 'Escape') {
     history.back();
   } else if ((event.key == 'Enter') ||
@@ -1030,11 +1044,15 @@ function fn_gallery_keydown(event) {
        Note that zoom to full scale is always coming from a 'fit' image.
        We act as if the mouse was clicked in the center, so the zoom is
        always to the center of the photo. */
-    obj_photo.click.call(obj_photo, {x: win_x/2, y: win_y/2});
+    obj_photo.click.call(obj_photo, center_touch);
   } else if (event.key == 'ArrowLeft') {
     obj_photo.go_left();
   } else if (event.key == 'ArrowRight') {
     obj_photo.go_right();
+  } else if (event.key == 'PageUp') {
+    obj_photo.zoom_in(center_touch);
+  } else if (event.key == 'PageDown') {
+    obj_photo.zoom_out(center_touch);
   }
 }
 

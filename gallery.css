@@ -1,6 +1,6 @@
 /* Copyright Chris Nelson - All rights reserved. */
 body {
-    background-color: #404040;
+    background-color: #444;
 }
 div#gallery-background {
     position: fixed;
@@ -24,7 +24,7 @@ div#gallery-ui-x {
     right: 0px;
     width: 50px;
     height: 50px;
-    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'><g stroke-linecap='round' fill='none'><path d='M10,10L40,40M10,40L40,10' stroke='%23777' stroke-width='12'/><path d='M10,10L40,40M10,40L40,10' stroke='%23f99' stroke-width='4'/></g></svg>");
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'><g stroke-linecap='round' fill='none'><path d='M10,10L40,40M10,40L40,10' stroke='%23444' stroke-width='12'/><path d='M10,10L40,40M10,40L40,10' stroke='%23f99' stroke-width='4'/></g></svg>");
     opacity: 0.75;
     transition-duration: 0.25s;
     transition-property: background-position. opacity;
@@ -36,7 +36,7 @@ div#gallery-ui-left {
     left: 0px;
     width: 50px;
     height: 80px;
-    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 80'><g stroke-linecap='round' fill='none'><path d='M35,10L15,40L35,70' stroke='%23777' stroke-width='12'/><path d='M35,10L15,40L35,70' stroke='%23fff' stroke-width='5'/></g></svg>");
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 80'><g stroke-linecap='round' fill='none'><path d='M35,10L15,40L35,70' stroke='%23444' stroke-width='14'/><path d='M35,10L15,40L35,70' stroke='%23fff' stroke-width='5'/></g></svg>");
     opacity: 0.75;
     transition-duration: 0.25s;
     transition-property: background-position. opacity;
@@ -49,7 +49,7 @@ div#gallery-ui-right {
     right: 0px;
     width: 50px;
     height: 80px;
-    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 80'><g stroke-linecap='round' fill='none'><path d='M15,10L35,40L15,70' stroke='%23777' stroke-width='10'/><path d='M15,10L35,40L15,70' stroke='%23fff' stroke-width='5'/></g></svg>");
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 80'><g stroke-linecap='round' fill='none'><path d='M15,10L35,40L15,70' stroke='%23444' stroke-width='14'/><path d='M15,10L35,40L15,70' stroke='%23fff' stroke-width='5'/></g></svg>");
     opacity: 0.75;
     transition-duration: 0.25s;
     transition-property: background-position. opacity;

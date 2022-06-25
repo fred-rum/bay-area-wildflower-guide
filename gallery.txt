@@ -1,6 +1,3 @@
-accept page down to zoom out and page up zoom in
-  or the other way around?  check slipways
-
 make wheel event passive
 
 support text with photo
