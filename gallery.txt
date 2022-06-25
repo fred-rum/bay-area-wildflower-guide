@@ -1,5 +1,5 @@
-accept left and right arrow keypresses to switch photos
-  also accept wheel left and right?
+accept page down to zoom out and page up zoom in
+  or the other way around?  check slipways
 
 make wheel event passive
 

@@ -355,17 +355,10 @@ function fn_pointerup(event) {
     /* Apply the appropriate action based on the target of the click.
        Note that if the user is fast and the browser is slow, the target
        may be out of date, particularly for the left and right arrows. */
-    if ((click_target == e_ui_l) && (obj_photo.i > 0)){
-      obj_photo.close_photo();
-      var i = obj_photo.i - 1;
-      obj_photo = obj_photos[i];
-      obj_photo.init_photo();
-    } else if ((click_target == e_ui_r) &&
-               (obj_photo.i < (obj_photos.length-1))) {
-      obj_photo.close_photo();
-      var i = obj_photo.i + 1;
-      obj_photo = obj_photos[i];
-      obj_photo.init_photo();
+    if (click_target == e_ui_l) {
+      obj_photo.go_left();
+    } else if (click_target == e_ui_r) {
+      obj_photo.go_right();
     } else if ((click_target == obj_photo.e_thumb) ||
                (click_target == obj_photo.e_full)){
       obj_photo.click.call(obj_photo, touch);
@@ -491,9 +484,12 @@ function fn_wheel(event) {
 
   if (event.deltaY < 0) {
     obj_photo.zoom_to(obj_photo, obj_photo.img_x * 1.30, touch, touch);
-  }
-  if (event.deltaY > 0) {
+  } else if (event.deltaY > 0) {
     obj_photo.zoom_to(obj_photo, obj_photo.img_x / 1.30, touch, touch);
+  } else if (event.deltaX < 0) {
+    obj_photo.go_left();
+  } else if (event.deltaX > 0) {
+    obj_photo.go_right();
   }
 }
 
@@ -932,6 +928,24 @@ Photo.prototype.fit_width = function() {
   return Math.min(win_x, this.photo_x / this.photo_y * win_y);
 }
 
+Photo.prototype.go_left = function() {
+  if (this.i > 0) {
+    this.close_photo();
+    var i = this.i - 1;
+    obj_photo = obj_photos[i];
+    obj_photo.init_photo();
+  }
+}
+
+Photo.prototype.go_right = function() {
+  if (this.i < (obj_photos.length-1)) {
+    this.close_photo();
+    var i = this.i + 1;
+    obj_photo = obj_photos[i];
+    obj_photo.init_photo();
+  }
+}
+
 Photo.prototype.save_state = function() {
   var hash;
   if (this.i == 0) {
@@ -1017,6 +1031,10 @@ function fn_gallery_keydown(event) {
        We act as if the mouse was clicked in the center, so the zoom is
        always to the center of the photo. */
     obj_photo.click.call(obj_photo, {x: win_x/2, y: win_y/2});
+  } else if (event.key == 'ArrowLeft') {
+    obj_photo.go_left();
+  } else if (event.key == 'ArrowRight') {
+    obj_photo.go_right();
   }
 }
 

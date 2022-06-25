@@ -22,7 +22,7 @@ def strip_comments(to_filename, from_filename=None, code=None):
         txt = r.read()
 
     if code:
-        txt = re.sub(r'/\/\* insert code here \*\//', code, txt)
+        txt = re.sub(r'/\* insert code here \*/', code, txt)
 
     if not arg('-debug_js'):
         # Match either a complete quoted string (which is returned
