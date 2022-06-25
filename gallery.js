@@ -197,7 +197,7 @@ function fn_pointerup(event) {
       obj_photo = obj_photos[i];
       obj_photo.init_photo();
     } else if ((click_target == obj_photo.e_thumb) ||
-        (click_target == obj_photo.e_full)){
+               (click_target == obj_photo.e_full)){
       obj_photo.click.call(obj_photo, touch);
     } else {
       setTimeout(go_back, 50);
@@ -555,10 +555,11 @@ function fn_resize() {
   }
 }
 function fn_gallery_keydown(event) {
-  if (obj_photo) {
-    if (event.key == 'Escape') {
-      history.back();
-    }
+  if (event.key == 'Escape') {
+    history.back();
+  } else if ((event.key == 'Enter') ||
+             (event.key == ' ') || (event.key == 'Spacebar')) {
+    obj_photo.click.call(obj_photo, {x: win_x/2, y: win_y/2});
   }
 }
 main();

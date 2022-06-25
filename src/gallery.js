@@ -367,7 +367,7 @@ function fn_pointerup(event) {
       obj_photo = obj_photos[i];
       obj_photo.init_photo();
     } else if ((click_target == obj_photo.e_thumb) ||
-        (click_target == obj_photo.e_full)){
+               (click_target == obj_photo.e_full)){
       obj_photo.click.call(obj_photo, touch);
     } else {
       /* The click was in the background or on the 'X', so we return to the
@@ -1007,11 +1007,16 @@ function fn_resize() {
 }
 
 function fn_gallery_keydown(event) {
-  if (obj_photo) {
-    console.log(event);
-    if (event.key == 'Escape') {
-      history.back();
-    }
+  console.log(event);
+  if (event.key == 'Escape') {
+    history.back();
+  } else if ((event.key == 'Enter') ||
+             (event.key == ' ') || (event.key == 'Spacebar')) {
+    /* On 'enter' or 'space', either zoom to fit or zoom to full scale.
+       Note that zoom to full scale is always coming from a 'fit' image.
+       We act as if the mouse was clicked in the center, so the zoom is
+       always to the center of the photo. */
+    obj_photo.click.call(obj_photo, {x: win_x/2, y: win_y/2});
   }
 }
 
