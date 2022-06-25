@@ -21,9 +21,7 @@
 //
 // 'upd_kb_total' indicates the total KB in the latest update
 
-var upd_timestamp = '2022-06-24T00:43:25.365103+00:00';
-var upd_num_urls = 7505;
-var upd_kb_total = 812985
+/* insert code here */
 
 console.info('starting from the beginning');
 
