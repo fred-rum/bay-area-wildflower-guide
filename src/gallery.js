@@ -1045,9 +1045,9 @@ function fn_gallery_keydown(event) {
        We act as if the mouse was clicked in the center, so the zoom is
        always to the center of the photo. */
     obj_photo.click.call(obj_photo, center_touch);
-  } else if (event.key == 'ArrowLeft') {
+  } else if ((event.key == 'ArrowLeft') || (event.key == 'Left')) {
     obj_photo.go_left();
-  } else if (event.key == 'ArrowRight') {
+  } else if ((event.key == 'ArrowRight') || (event.key == 'Right')) {
     obj_photo.go_right();
   } else if (event.key == 'PageUp') {
     obj_photo.zoom_in(center_touch);

@@ -1,0 +1,4 @@
+sci:Asarum caudatum
+x:ba
+color: other
+member: birthwort family:family Aristolochiaceae

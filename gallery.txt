@@ -1,4 +1,8 @@
-make wheel event passive
+add 'tab' to go to next image, 'shift-tab' to go to previous
+
+allow a 'click' to have a small amount of pointer movement
+  as long as it stays within the original element
+  event.target.setPointerCapture(...) may be useful
 
 support text with photo
 
@@ -18,10 +22,6 @@ button for full screen view?
   can it be hidden on mobile where it is intrinsically already full-screen?
     document.fullscreenEnabled
   see Wikipedia for icons to enter and exit full-screen mode
-
-allow a 'click' to have a small amount of pointer movement
-  as long as it stays within the original element
-  event.target.setPointerCapture(...) may be useful
 
 can I recognize a flick left or right for switching photos?
   is getPredictedEvents() useful?

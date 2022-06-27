@@ -582,9 +582,9 @@ function fn_gallery_keydown(event) {
   } else if ((event.key == 'Enter') ||
              (event.key == ' ') || (event.key == 'Spacebar')) {
     obj_photo.click.call(obj_photo, center_touch);
-  } else if (event.key == 'ArrowLeft') {
+  } else if ((event.key == 'ArrowLeft') || (event.key == 'Left')) {
     obj_photo.go_left();
-  } else if (event.key == 'ArrowRight') {
+  } else if ((event.key == 'ArrowRight') || (event.key == 'Right')) {
     obj_photo.go_right();
   } else if (event.key == 'PageUp') {
     obj_photo.zoom_in(center_touch);

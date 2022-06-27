@@ -29,7 +29,7 @@ default_ancestor = None
 
 trie = Trie([x.name for x in Rank])
 ex = trie.get_pattern()
-re_group = re.compile(rf'({ex}):\s*(.*?)\s*$')
+re_group = re.compile(rf'\s*({ex}):\s*(.+?)\s*$')
 
 group_child_set = {} # rank -> group -> set of top-level pages in group
 for rank in Rank:
@@ -254,7 +254,7 @@ def looser_complete(one, two):
 
 def separate_name_and_suffix(name):
     # this always matches something, although the suffix may be empty
-    matchobj = re.match(r'(.*?)\s*(,[-0-9][^,:]*|,)?$', name)
+    matchobj = re.match(r'(.+?)\s*(,[-0-9][^,:]*|,)?$', name)
     name = matchobj.group(1)
     suffix = matchobj.group(2) or ''
     return name, suffix
@@ -349,7 +349,7 @@ class Page:
                 self.set_com(com, from_inat=from_inat)
 
         # user-supplied information about ancestors.
-        self.group = {} # taxonomic rank -> sci name or None if conflicting
+        self.group_items = [] # each entry = (rank, name, sci)
 
         # properties declared on this page
         self.decl_prop = {} # declared property -> action -> rank set
@@ -918,11 +918,11 @@ class Page:
         # On the other hand, the common name might collide, at which point
         # we should either fall back to using the scientific name as the
         # filename or complain that no name can be set.
-        self.txt = re.sub(r'^sci:\s*(.*?)\s*?\n',
+        self.txt = re.sub(r'^sci:\s*(.+?)\s*?\n',
                           repl_sci, self.txt, flags=re.MULTILINE)
-        self.txt = re.sub(r'^com:\s*(.*?)\s*?\n',
+        self.txt = re.sub(r'^com:\s*(.+?)\s*?\n',
                           repl_com, self.txt, flags=re.MULTILINE)
-        self.txt = re.sub(r'^asci:\s*(.*?)\s*?\n',
+        self.txt = re.sub(r'^asci:\s*(.+?)\s*?\n',
                           repl_asci, self.txt, flags=re.MULTILINE)
 
         # If only a scientific name was explicitly set, then:
@@ -974,7 +974,7 @@ class Page:
         rank_set = set()
         for rank_range in rank_range_list:
             if '-' in rank_range:
-                matchobj = re.match(r'(.*?)(/?)-(/?)(.*)', rank_range)
+                matchobj = re.match(r'(.+?)(/?)-(/?)(.+)', rank_range)
                 (rank1, rank1_excl,
                  rank2_excl, rank2) = (matchobj.group(1), matchobj.group(2),
                                        matchobj.group(3), matchobj.group(4))
@@ -1306,13 +1306,25 @@ class Page:
     # higher ancestor if we already have a lower-ranked parent.  A
     # page for the ancestor is created if necessary.
     #
+    # 'rank' is the rank of the ancestor page and is optional; if it
+    # is None, then the rank should either be included in the 'name'
+    # (below), or the name must point to an unambiguous page that
+    # already has a rank.  'rank' must be None if a common name and
+    # scientific name are both supplied.  If the rank is supplied with
+    # a common name only, the rank is checked against the matching page.
+    #
+    # 'name' is the common or scientific name of the ancestor page.
+    #
+    # 'sci' is the scientific name of the ancestor page (in which case
+    # 'name' must be its common name).
+    #
     # This function is a thin wrapper around link_linn_child(), which
     # is centered on the parent page, but add_linn_parent() is
     # centered on the child page because it is the page that is
     # guaranteed to be present.
-    def add_linn_parent(self, rank, name, from_inat=False):
+    def add_linn_parent(self, rank, name, sci=None, from_inat=False):
         if is_sci(name):
-            if rank >= Rank.genus:
+            if rank and rank >= Rank.genus:
                 elab = f'{rank.name} {name}'
             else:
                 # A species name is no different when elaborated.
@@ -1327,15 +1339,17 @@ class Page:
                     src = 'implicit or explicit ancestor from txt'
                 parent = Page(None, elab, shadow=True,
                               from_inat=from_inat, src=src)
-        else:
-            parent = find_page2(name, None, from_inat)
+        else: # common name
+            parent = find_page2(name, sci, from_inat)
             if not parent:
-                error(f'add_linn_parent from {self.full()} could not find {name}')
-                return
-            elif not parent.rank:
+                parent = Page(name, sci, shadow=True,
+                              from_inat=from_inat,
+                              src='explicit ancestor from txt')
+
+            if not parent.rank:
                 error(f'add_linn_parent from {self.full()} is to unranked page {name}')
                 return
-            elif parent.rank != rank:
+            elif rank and parent.rank != rank:
                 error(f'add_linn_parent from {self.full()} is to {name} with rank {parent.rank.name}, but we expected rank {rank.name}')
                 return
             else:
@@ -1347,26 +1361,27 @@ class Page:
         # We can finally create the Linnaean link.
         parent.link_linn_child(self)
 
-        # Because a taxonomic chain is often built in a series from
-        # lowest to highest rank, performance is enhanced by returning
-        # each linn_parent that is found or created so that the next
-        # link in the chain can be added to it directly without needing
-        # to find it again.
+        # Because a taxonomic chain is built from observation.csv in a
+        # series from lowest to highest rank, performance is enhanced
+        # by returning each linn_parent that is found or created so
+        # that the next link in the chain can be added to it directly
+        # without needing to find it again.  Other callers of
+        # add_linn_parent() generally ignore this return value.
         return parent
 
     def assign_groups(self):
         page = self
         if self.rank in (Rank.below, Rank.species):
-            # If the page has a rank, it's guaranteed to have a sci name.
+            # Derive species and genus membership from the truncated scientific
+            # name.
             sci_words = self.sci.split(' ')
             if self.rank is Rank.below:
                 page = self.add_linn_parent(Rank.species, ' '.join(sci_words[0:2]))
             page = self.add_linn_parent(Rank.genus, sci_words[0])
 
-        # add_linn_parent is most efficiently performed in rank order,
-        # updating the page after each link.  But for now I don't bother.
-        for rank, group in self.group.items():
-            self.add_linn_parent(rank, group)
+        # Assign memberships declared in the text.
+        for rank, name, sci in self.group_items:
+            self.add_linn_parent(rank, name, sci)
 
     def assign_child(self, child):
         if self in child.parent:
@@ -1794,7 +1809,7 @@ class Page:
                 data_object = self.child[-1]
                 continue
 
-            matchobj = re.match(r'rep:\s*(.*?)\s*$', c)
+            matchobj = re.match(r'rep:\s*(.+?)\s*$', c)
             if matchobj:
                 jpg = matchobj.group(1)
                 if jpg.startswith(','):
@@ -1811,7 +1826,7 @@ class Page:
                     data_object.rep_child = jpg
                 continue
 
-            matchobj = re.match(r'sci_([fpjib]+):\s*(.*?)$', c)
+            matchobj = re.match(r'sci_([fpjib]+):\s*(.+?)$', c)
             if matchobj:
                 data_object.set_sci_alt(matchobj.group(1),
                                         self.expand_abbrev(matchobj.group(2)))
@@ -1831,7 +1846,7 @@ class Page:
                     default_ancestor = self
                 continue
 
-            matchobj = re.match(rf'^(?:(\w+)\s+)?({prop_re})\s*:\s*(.*?)$', c)
+            matchobj = re.match(rf'^(?:(\w+)\s+)?({prop_re})\s*:\s*(.+?)$', c)
             if matchobj:
                 data_object.declare_property(matchobj.group(1),
                                              matchobj.group(2),
@@ -1845,7 +1860,7 @@ class Page:
                                              matchobj.group(2))
                 continue
 
-            matchobj = re.match(r'subset\s+(\S*)\s*:\s*(.*?)\s*(?:,\s*(.*?)\s*)?,\s*(.*?)\s*$', c)
+            matchobj = re.match(r'subset\s+(\S*)\s*:\s*(.+?)\s*(?:,\s*(.+?)\s*)?,\s*(.+?)\s*$', c)
             if matchobj:
                 data_object.record_subset(matchobj.group(1),
                                           matchobj.group(2),
@@ -1854,7 +1869,7 @@ class Page:
                 continue
 
             for trait in traits:
-                matchobj = re.match(rf'{trait}\s*:\s*(.*?)\s*$', c)
+                matchobj = re.match(rf'{trait}\s*:\s*(.+?)\s*$', c)
                 if matchobj:
                     data_object.set_trait_values(trait, matchobj.group(1))
                     break
@@ -1899,8 +1914,21 @@ class Page:
                 # (thus giving them their official common and scientific
                 # names).  So instead we record the group for later.
                 rank = Rank[matchobj.group(1)]
-                group = matchobj.group(2)
-                self.group[rank] = group
+                name = matchobj.group(2)
+                self.group_items.append((rank, name, None));
+                continue
+
+            matchobj = re.match(r'\s*member\s*:\s*([^:]+)(?:\:(.+?))?\s*$', c);
+            if matchobj:
+                # We don't create the Linnaean link right away because
+                # doing so could create a shadow page, and we don't
+                # want to create any shadow pages until all real
+                # children have been processed from the txt files
+                # (thus giving them their official common and scientific
+                # names).  So instead we record the group for later.
+                name = matchobj.group(1)
+                sci = matchobj.group(2)
+                self.group_items.append((None, name, sci))
                 continue
 
             if c in ('', '[', ']'):

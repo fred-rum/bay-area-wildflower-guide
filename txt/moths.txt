@@ -23,3 +23,7 @@ bug:322
 ==cutworm moths and allies:family Noctuidae
 
 ==tiger moths:tribe Arctiini
+
+==yellow v moth:Oinophila v-flava
+bug:166855
+x:ba
