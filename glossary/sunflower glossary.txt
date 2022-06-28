@@ -18,6 +18,11 @@ A single flower head in the sunflower family is actually a tight inflorescence o
 {ray,rays,ray flower,ray flowers} A flower in the outer portion of a head in the sunflower family.  Flat and uni-directional, not radial.  May be distally lobed.  Usually pistillate, but sometimes sterile.  The rays form a ring around the central disk.
 {scale,scales} Flat, membranous element of a pappus.
 
+<h2>Head shapes</h2>
+
+{discoid head,discoid} Head composed exclusively of disk flowers.
+{radiate head,radiate} Head composed of both disk flowers and ray flowers.
+
 <h2>Inflorescence shapes</h2>
 
 Within the sunflower family, these terms describe the organization of multiple heads in a larger inflorescence.  For most of these terms, the order of development among heads is not defined.

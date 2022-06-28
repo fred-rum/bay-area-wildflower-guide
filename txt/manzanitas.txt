@@ -13,7 +13,7 @@ Key features:
 . flower parts in 4s or 5s
 . size and shape of fruit (spheric or depressed)
 
-Parasitized by {-manzanita leafgall aphid} and {-azalea gall}.
+Parasitized by {-manzanita leafgall aphid} and {-genus Exobasidium}.
 
 [
 <h3>burl; leaves different on each side</h3>

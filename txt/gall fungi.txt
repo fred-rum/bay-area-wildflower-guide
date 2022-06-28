@@ -1,5 +1,5 @@
 sci:n/a
 end_hierarchy
 
-==azalea gall:Exobasidium vaccinii
+==genus Exobasidium
 . parasitizes {-manzanitas} and others in the {-heath family}.

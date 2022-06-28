@@ -22,4 +22,4 @@ Within the grasses, these terms describe the organization of multiple epikelets 
 {panicle,panicles} An inflorescence in which at least some spikelets are attached to inflorescence branches rather than the central axis.  The order in which heads develop is not defined.
 {raceme,racemes} An inflorescence with stalked spikelets attached directly to the inflorescence axis (not to branches).
 {spike,spikes} An inflorescence with sessile spikelets attached directly to the inflorescence axis (not to branches).
-{umbel,umbels} An inflorescence in which 3+ stalked spikelets radiate from a common point with no continuation of the central axis.
+{umbel,umbels} An inflorescence in which 3+ stalked spikelets none#radiate from a common point with no continuation of the central axis.

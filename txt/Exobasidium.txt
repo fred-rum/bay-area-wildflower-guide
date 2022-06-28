@@ -1,0 +1,13 @@
+sci:genus Exobasidium
+x:ba
+
+These species parasitize {-manzanitas} and others in the {-heath family}.
+
+==azalea gall:Exobasidium vaccinii
+. forms blisters on the surface of {-manzanitas} leaves
+.. blisters cause only a minor buckling of the leaf surface, unlike {-manzanita leafgall aphid}, which causes signifant swelling and distortion of the leaf edge.
+. may sometimes also disrupt stem growth, although I haven't found a description of the range of forms of this damage
+
+==Exobasidium vaccinii-uliginosi
+<b>Caution: ID unsure</b>
+. causes the end of a stem and its associated leaves to turn red

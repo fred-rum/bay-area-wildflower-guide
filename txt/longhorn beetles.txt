@@ -1,12 +1,7 @@
-==Brachysomida californica
-bug:248793
+A free comprehensive <a href="http://bezbycids.com/byciddb/wdefault.asp">photographic catalog</a> is available.
 
-==dimorphic flower longhorn beetle:Anastrangalia laetifica
-bug:62660
-The males are all black (or brown).  The females have a red carapace with black spots.
+==flower longhorn beetles
 
 ==Molorchus longicollis
 bug:221909
 Per Ken-ichi Ueda's <a href="https://www.inaturalist.org/observations/637591">observation</a>, there are only two species of Molorchus in California, and M. eburneus can be distinguished by the <a href="https://bugguide.net/node/view/888019/bgimage">white markings</a> on its elytra.
-
-==genus Strophiona

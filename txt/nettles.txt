@@ -1,7 +1,7 @@
 sci:Urtica
 x:ca
 
-==stinging nettle:U. dioica
+==european stinging nettle:U. dioica
 . 50--300 cm tall
 . leaf blade 6--20 cm
 . inflorescence raceme- or panicle-like, generally > petiole

@@ -66,7 +66,7 @@ For most flowering plants, these terms define the organization of flowers within
 {panicle,panicles} A branched inflorescence in which the flowers on the proximal branches open before those on the distal branches.  (This can be thought of as a compound raceme.)
 {raceme,racemes} An unbranched inflorescence with pediceled flowers in which the flowers at the proximal end of the inflorescence open earlier than at the distal end.
 {spike,spikes} An unbranched inflorescence with sessile flowers in which the flowers at the proximal end of the inflorescence generally open earlier than at the distal end.
-{umbel,umbels} An inflorescence in which 3+ pedicels (for a simple umbel) or inflorescence branches (for a compound umbel) radiate from a common point with no continuation of the central axis.
+{umbel,umbels} An inflorescence in which 3+ pedicels (for a simple umbel) or inflorescence branches (for a compound umbel) none#radiate from a common point with no continuation of the central axis.
 
 <h2>Fruit</h2>
 

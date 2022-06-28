@@ -14,3 +14,5 @@ figure:beetle
 {prothorax,prothoraxes,prothoraces} The anterior portion of the thorax, supporting the first pair of legs.  Part 9 in the [figure:beetle].
 
 {abdomen,abdomens} The hindmost of the three major sections of the body.  Part C in the [figure:beetle].
+
+{elytron,elytra} A wing case (wing cover).  On other insects, this would be a forewing.

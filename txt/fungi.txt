@@ -14,6 +14,6 @@ warn obs_promotion_above_peers: none
 ==pin molds:order Mucorales
 end_hierarchy
 
-==rust fungi:order Pucciniales
+==rust fungi
 
 ==gall fungi

@@ -1,0 +1,14 @@
+sci:subfamily Lepturinae
+
+==dimorphic flower longhorn beetle:Anastrangalia laetifica
+bug:62660
+The males are all black (or brown).  The females have a red carapace with black spots.
+
+==Brachysomida californica
+bug:248793
+
+==genus Strophiona
+bug:26736
+
+==genus Stenocorus
+bug:6904
