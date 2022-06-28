@@ -1036,8 +1036,13 @@ function fn_gallery_keydown(event) {
     y: win_y/2
   };
 
-  if (event.key == 'Escape') {
+  if ((event.key == 'Escape') ||(event.key == 'Esc')) {
     history.back();
+    /* In Chrome on Windows, the escape key potentially interrupts the
+       Javascript and prevents history.back() from executing.  Calling
+       event.preventDefault() seems to prevent this problem and allow
+       the browser to go back reliably as expected. */
+    event.preventDefault();
   } else if ((event.key == 'Enter') ||
              (event.key == ' ') || (event.key == 'Spacebar')) {
     /* On 'enter' or 'space', either zoom to fit or zoom to full scale.

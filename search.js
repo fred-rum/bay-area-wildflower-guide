@@ -434,6 +434,7 @@ function fn_keydown() {
     clear_search();
   } else if (event.key == 'Escape') {
     clear_search();
+    event.preventDefault();
   } else if (!ac_is_hidden &&
              ((event.key == 'Down') || (event.key == 'ArrowDown') ||
               ((event.key == 'Tab') && !event.shiftKey))) {

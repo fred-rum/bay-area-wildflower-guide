@@ -577,8 +577,9 @@ function fn_gallery_keydown(event) {
     x: win_x/2,
     y: win_y/2
   };
-  if (event.key == 'Escape') {
+  if ((event.key == 'Escape') ||(event.key == 'Esc')) {
     history.back();
+    event.preventDefault();
   } else if ((event.key == 'Enter') ||
              (event.key == ' ') || (event.key == 'Spacebar')) {
     obj_photo.click.call(obj_photo, center_touch);
