@@ -1,0 +1,23 @@
+sci:genus Clinopodium
+x:ba
+
+==yerba buena:C. douglasii
+color:white
+. vine, often draped along the ground
+. very common
+
+==wood calamint:C. menthifolium
+. erect
+. loose and separated whorls of flowers from leaf axils
+. <a href="https://wildflowerfinder.org.uk/Flowers/C/Calamint(Wood)/Calamint(Wood).htm">description and photos</a>
+. not in Calflora or CalPhotos, but iNaturalist lists a big patch in the Oakland hills and a few individuals scattered elsewhere
+sci_fjp: n/a
+
+==wild basil:C. vulgare
+. erect
+. capitate inflorescence, usually with many empty calyxes
+.. may have an additional head above the first
+. linear bracts [<a href="https://www.inaturalist.org/observations/8098#activity_comment_1f13686d-dbaa-42cf-a38d-ff14349191bf">reference</a>]
+. <a href="https://wildflowerfinder.org.uk/Flowers/B/Basil(Wild)/Basil(Wild).htm">description and photos</a>
+. very rare and only in the same spot in the Oakland hills
+sci_j: n/a

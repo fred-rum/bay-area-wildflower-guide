@@ -4,4 +4,13 @@ x:rare
 There are more centauries in the {-Gentianaceae}.
 
 ==slender centaury:C. tenuiflorum
+. corolla lobes 2 -- 4.5 mm
+. basal leaves +-deciduous, generally not in a rosette
 . uncommon
+
+==common centaury:C. erythraea
+color: pink, pale purple
+. corolla lobes 4.5 -- 8 mm
+. basal leaves +- persistent, generally in a rosette
+. Jepson says the inflorescence is +- flat-topped, but your perception of it may depend on how many inflorescences you count
+. very rare

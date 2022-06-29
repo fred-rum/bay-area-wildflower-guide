@@ -61,6 +61,7 @@ figure:sea muilla
 
 For most flowering plants, these terms define the organization of flowers within an inflorescence and often define the order in which the flowers open.  However, for some taxonomic groups, the definitions refer instead to the organization of inflorescence units relative to each other and may or may not define the order in which their flowers open.  See the related glossary entries for the specific definition for each taxonomic group.
 
+{capitate} Arranged in a compact three-dimensional head.
 {catkin,catkins} A unisexual spike of flowers with +- no perianths.  Usually pendulous, usually staminate, and usually wind-pollinated.
 {cyme,cymes} A branched inflorescence in which a flower at an axil opens before flowers on the subtending branches.
 {panicle,panicles} A branched inflorescence in which the flowers on the proximal branches open before those on the distal branches.  (This can be thought of as a compound raceme.)

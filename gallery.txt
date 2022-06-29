@@ -1,3 +1,5 @@
+make 'X' shorter and thicker
+
 add 'tab' to go to next image, 'shift-tab' to go to previous
 
 allow a 'click' to have a small amount of pointer movement

@@ -77,7 +77,7 @@ color: pink, red purple
 . corolla 8--10 mm, <b>lilac to pale purple-blue</b>
 
 ==hairy vetchling:L. hirsutus
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+1111+1234+4121
+color: purple
 . <b>1--2 flowers in inflorescence</b>
 . <b>2 leaflets per leaf</b>
 . inflorescence axis not extended beyond flower

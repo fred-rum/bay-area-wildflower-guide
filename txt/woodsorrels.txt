@@ -12,7 +12,7 @@ Key features:
 ==redwood sorrel:O. oregana
 color: pale purple, pink
 . stem +- 0
-. Leaf: < 10, <b>clustered at rhizome tips</b>
+. leaf: < 10, <b>clustered at rhizome tips</b>
 . petiole < 20 cm, hairy
 . leaflets < 4 cm, often +- purple abaxially, midribs pale
 . Inflorescence: peduncle < 15 cm; <b>bracts 2, near tip</b>
@@ -22,8 +22,8 @@ color: pale purple, pink
 
 ==pale pink-sorrel:O. incarnata
 color: white, pale purple
-. Stem: <b>erect, branched, < 30 cm</b>, glabrous; <b>axils often with bulblets</b>
-. Leaf: cauline, in whorl-like clusters of < 10, lower opposite or not
+. stem: <b>erect, branched, < 30 cm</b>, glabrous; <b>axils often with bulblets</b>
+. leaf: cauline, in whorl-like clusters of < 10, lower opposite or not
 . petiole 2--7 cm
 . leaflets < 1.5 cm
 . inflorescence: peduncle < 7 cm; <b>bracts 2, near middle</b>

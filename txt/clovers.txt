@@ -212,7 +212,7 @@ flowers generally becoming reflexed</h3>
 ==white clover:T. repens
 color: white
 . stem creeping, rooting, turf-forming
-. <b>pedicels growing from ground level</b> [CalPhotos disagrees with this]
+. <b>petioles growing from ground level</b>
 . generally +- glabrous
 . Leaflets: 3, palmate, 0.5--2.5 cm, obovate
 . Bracts: generally inconspicuous

@@ -1,4 +1,4 @@
-com:centauries
+com:zeltneras
 x:ba
 
 There are more centauries in the {-Gentianaceae}.
@@ -24,8 +24,7 @@ color: pink, pale purple
 . rare
 
 ==davy's centaury:Z. davyi
-color: pink, pale purple
-. [seemingly never more than few flowers]
+keeled calyx lobes:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1218+3917
 . pedicels 2--25(55) mm
 . <b>calyx lobes keeled</b>
 .. no others have keeled calyx lobes

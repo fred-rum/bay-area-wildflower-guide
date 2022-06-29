@@ -1278,3 +1278,13 @@ get the common name from iNaturalist's API if the taxon is not directly observed
 add 'do member_name: genus, species' in life.txt
 allow searches for a genus/species that only has a shadow page
   to find the lone(?) real child (as with an alternative name)
+
+allow individual images to be annoted with a brightness value
+  this allows photos to be fixed without a ~500KB commit
+  CSS is 'filter: brightness(1.2);'
+    add the style directly in the HTML for the thumbnail
+    also add the style in Javascript for the photo gallery
+
+headings aren't terribly distinct, especially in the presence of other bold text
+  e.g. 'Pistil' in the flower glossery
+  use background color similar to LibreOffice headings?

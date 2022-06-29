@@ -1915,7 +1915,7 @@ class Page:
                 # names).  So instead we record the group for later.
                 rank = Rank[matchobj.group(1)]
                 name = matchobj.group(2)
-                self.group_items.append((rank, name, None));
+                data_object.group_items.append((rank, name, None));
                 continue
 
             matchobj = re.match(r'\s*member\s*:\s*([^:]+)(?:\:(.+?))?\s*$', c);
@@ -1928,7 +1928,7 @@ class Page:
                 # names).  So instead we record the group for later.
                 name = matchobj.group(1)
                 sci = matchobj.group(2)
-                self.group_items.append((None, name, sci))
+                data_object.group_items.append((None, name, sci))
                 continue
 
             if c in ('', '[', ']'):

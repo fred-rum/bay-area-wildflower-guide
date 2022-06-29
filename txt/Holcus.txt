@@ -1,0 +1,12 @@
+sci:genus Holcus
+x:ba
+member:grasses
+
+==velvetgrass:Holcus lanatus
+color: other
+. internodes soft-hairy
+. common
+
+==creeping velvet grass:Holcus mollis
+. internodes generally glabrous
+. very rare
