@@ -34,3 +34,8 @@ bug:n/a
 bug:192706
 x:more
 . parasitizes {-roses}
+
+==thimbleberry gallmaker:Diastrophus kincaidii
+bug:617964
+x:ca
+. parasitizes {-thimbleberry}

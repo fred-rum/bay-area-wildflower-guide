@@ -27,3 +27,6 @@ button for full screen view?
 
 can I recognize a flick left or right for switching photos?
   is getPredictedEvents() useful?
+
+present the filename
+  only when viewing locally? (no http)

@@ -3,6 +3,7 @@ from enum import Enum, auto
 _ranks = ('below', 'species', 'complex', 'subgenus', 'genus',
           'subtribe', 'tribe', 'supertribe',
           'subfamily', 'family', 'epifamily', 'superfamily',
+          'zoosection',
           'parvorder', 'infraorder', 'suborder', 'order', 'superorder',
           'subclass', 'class', 'superclass',
           'subphylum', 'phylum',

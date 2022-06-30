@@ -8,7 +8,7 @@ There are also loosestrifes in the unrelated {-lythrums}.
 ==scarlet pimpernel:L. arvensis
 color: orange, salmon
 
-==western star flower:L. latifolia
+==western starflower:L. latifolia
 color: pale purple
 
 ==sea milkwort:L. maritima

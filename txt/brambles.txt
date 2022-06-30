@@ -11,57 +11,62 @@ Although the leaves have general difference, there is enough variety within a sp
 
 ==himalayan blackberry:R. armeniacus
 color: white
-. Plant: to 3 m, arched to mounded
-. Prickles: many, <b>stout, wide-based</b>, straight or curved
-. Stem: to 20(25) mm diam, <b>5-angled</b>, finely hairy or generally glabrous, not glaucous
-. Leaf: simple or compound, leaflets 3(5)
-. Sepals: hairy, <b>nonglandular</b> [example,2]
-. Fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
+. plant: to 3 m, arched to mounded
+. prickles: many, <b>stout, wide-based</b>, straight or curved
+. stem: to 20(25) mm diam, <b>5-angled</b>, finely hairy or generally glabrous, not glaucous
+. leaf: simple or compound, leaflets 3(5)
+. sepals: hairy, <b>nonglandular</b> [example,2]
+. fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
 
 ==whitebark raspberry:R. leucodermis
 color:white
-. Plant: arched to mounded
-. Prickles: many, <b>stout, wide-based</b>, straight or generally curved
-. Stem: 4--10 mm diam, <b>not angled</b>, glabrous, <b>strongly glaucous in youth</b>
-. Leaf: simple or compound, leaflets 3 when older or 5 and shallow-3-lobed when younger
-. Sepals: sepals hairy, <b>prickly, +- with stalked glands</b>
-. Fruit: <b>raspberry-type</b> (hollow when picked), <b>red-purple to +- black</b>
+. plant: arched to mounded
+. prickles: many, <b>stout, wide-based</b>, straight or generally curved
+. stem: 4--10 mm diam, <b>not angled</b>, glabrous, <b>strongly glaucous in youth</b>
+. leaf: simple or compound, leaflets 3 when older or 5 and shallow-3-lobed when younger
+. sepals: sepals hairy, <b>prickly, +- with stalked glands</b>
+. fruit: <b>raspberry-type</b> (hollow when picked), <b>red-purple to +- black</b>
 
 ==salmonberry:R. spectabilis
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0315+2744
-. Plant 2--4 m, erect
-. Prickles few, +- stout, slender, straight [CalPhotos shows some thick-based]
-. Stem: 3--15 mm diameter, <b>not angled</b>, glabrous, not glaucous
-. Leaf: simple to generally compound, leaflets 3, <b>+- lobed, course-double-toothed</b>
-. Sepals: hairy, +- stalked-glandular
-. <b>Petals: magenta</b>
+. plant 2--4 m, erect
+. prickles few, +- stout, slender, straight [CalPhotos shows some thick-based]
+. stem: 3--15 mm diameter, <b>not angled</b>, glabrous, not glaucous
+. leaf: simple to generally compound, leaflets 3, <b>+- lobed, course-double-toothed</b>
+. sepals: hairy, +- stalked-glandular
+. <b>petals: magenta</b>
 .. all others are white
-. Fruit: raspberry-type, +- yellow to orange to red
+. fruit: raspberry-type, +- yellow to orange to red
 
 ==california blackberry:R. ursinus
 color: white
-. Plant: prostrate to decumbent
-. Prickles: <b>weak, slender</b>, straight
-. Stem: 2--10 mm diam, <b>not angled</b>, +-glabrous to hairy, +-with stalked glands, glaucous
-. Leaf: simple or compound, leaflets 3(5), gray-hairy abaxially
-. Sepals: hairy, <b>prickly</b>, +-with stalked glands [example,2]
-. Fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
+. plant: prostrate to decumbent
+. prickles: <b>weak, slender</b>, straight
+. stem: 2--10 mm diam, <b>not angled</b>, +-glabrous to hairy, +-with stalked glands, glaucous
+. leaf: simple or compound, leaflets 3(5), gray-hairy abaxially
+. sepals: hairy, <b>prickly</b>, +-with stalked glands [example,2]
+. fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
+
+[
+<h2>no prickles</h2>
 
 ==thimbleberry:R. parviflorus
 color: white
-. Plant 0.5--2.5 m, erect
-. <b>No prickles</b>
-. Stem: to 6 mm diam, <b>not angled</b>, glabrous to finely hairy with stalked glands, not glaucous
-. <b>Leaf: simple, palmately (3)5-lobed</b>
-. Stipules: <b>triangular-lanceolate to narrow-ovate, 1.5--3 mm wide</b>
+. plant 0.5--2.5 m, erect
+. <b>no prickles</b>
+. stem: to 6 mm diam, <b>not angled</b>, glabrous to finely hairy with stalked glands, not glaucous
+. <b>leaf: simple, palmately (3)5-lobed</b>
+. stipules: <b>triangular-lanceolate to narrow-ovate, 1.5--3 mm wide</b>
 .. all others are thread-like to linear, <= 1 mm wide
-. Sepals hairy, stalked-glandular [example,2]
-. Fruit: <b>raspberry-type</b> (hollow when picked), <b>red</b>
+. sepals hairy, stalked-glandular [example,2]
+. fruit: <b>raspberry-type</b> (hollow when picked), <b>red</b>
+. parasitized by {-thimbleberry gallmaker}
 
 ==thornless elmleaf blackberry:R. ulmifolius var. anoplothyrsus
-. Plant to 3 m, erect to arched
-. <b>No prickles</b>
-. Stem: 5--10 mm diameter, <b>5-angled</b>, densely short-hairy, may be glaucous
-. Leaf: simple or generally compound, <b>leaflets 3--5</b>
-. Sepals: short-hairy, nonglandular
-. Fruit: blackberry-type, black
+. plant to 3 m, erect to arched
+. <b>no prickles</b>
+. stem: 5--10 mm diameter, <b>5-angled</b>, densely short-hairy, may be glaucous
+. leaf: simple or generally compound, <b>leaflets 3--5</b>
+. sepals: short-hairy, nonglandular
+. fruit: blackberry-type, black
+]
