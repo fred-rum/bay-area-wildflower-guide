@@ -1,13 +1,37 @@
 sci:genus Exobasidium
-x:ba
+# unknown number of additional species, described or undescribed
 
-These species parasitize {-manzanitas} and others in the {-heath family}.
+This genus parasitizes {-manzanitas} and others in the {-heath family}.
+
+Ron Russo's popular reference for California galls lists {-Exobasidium vaccinii} as forming galls on numerous plant hosts.  However, discussions on iNaturalist have cast doubt on this interpretation.  A timeline:
+. <a href="https://www.biodiversitylibrary.org/page/3154527#page/42/mode/1up">1885 Casey</a> (free) briefly describes {-Exobasidium arctostaphyli}.
+. <a href="https://www.jstor.org/stable/pdf/2990117.pdf">1915 Burt</a> (free) lumps galls on many hosts into {-Exobasidium vaccinii}.
+. <a href="https://cdnsciencepub.com/doi/10.1139/b59-052">1959 Savile</a> (req. subscription) agrees with Burt, but reinforces the {-Exobasidium arctostaphyli} species.  (I don't have access to this one, so my summary is based on iNaturalist comments.)
+. <a href="https://pascal-francis.inist.fr/vibad/index.php?action=getRecordDetail&idt=PASCAL82X0050208">1981 Nannfeldt</a> (citation only) proposes that {-Exobasidium vaccinii} is found only on lingonbery (Vaccinium vitis-idaea).
+. more recent studies tend to agree, e.g. as described in the introduction to <a href="https://www.nrs.fs.fed.us/pubs/jrnl/2012/nrs_2012_kennedy_001.pdf">2012 Kennedy</a> (free).
+. <a href="https://www.inaturalist.org/taxa/1399323/history">2022 Schwab</a>: adds {-Exobasidium arctostaphyli} to iNaturalist, and Asquith in particular starts adding this ID to many observations.
+.. Schwab believes that although the original 1885 description includes infections of both leaves and young shoots, only leaf infections should be included in {-Exobasidium arctostaphyli}.
+.. Infections of whole shoots should instead be identified only as {-Exobasidium} until properly researched.
+
+Relevent iNaturalist comments in chronological order:
+<a href="https://www.inaturalist.org/observations/28302608#activity_comment_fd2fc5b2-edd3-4520-a667-ba1e956c0e2d">1</a>,
+<a href="https://www.inaturalist.org/observations/120878389#activity_comment_cbc8c0c5-d93f-42a4-b26f-928b29c04b92">2</a>,
+<a href="https://www.inaturalist.org/observations/123928264#activity_comment_f3049ebe-7d0f-4f9a-9895-d90ee66ae1fc">3</a>,
+<a href="https://www.inaturalist.org/observations/122423763#activity_comment_ef31c836-eeec-4430-9788-3c7445fa6f60">4</a>,
+<a href="https://www.inaturalist.org/observations/3132191#activity_comment_10b892ce-ec95-43f6-8c2f-942b4332aa4f">5</a>,
+<a href="https://www.inaturalist.org/observations/27716705#activity_comment_88a9c73a-d806-4c12-b770-ca848b40a264">6</a>.
+
+==Exobasidium arctostaphyli
+. forms bright red blisters on the surface of {-manzanitas} leaves, turning glaucous on the inner side
+.. blisters cause only a minor buckling of the leaf surface
+.. compare to {-manzanita leafgall aphid}, which causes signifant swelling and distortion of the leaf edge
+. see above for discussion
 
 ==azalea gall:Exobasidium vaccinii
-. forms blisters on the surface of {-manzanitas} leaves
-.. blisters cause only a minor buckling of the leaf surface, unlike {-manzanita leafgall aphid}, which causes signifant swelling and distortion of the leaf edge.
-. may sometimes also disrupt stem growth, although I haven't found a description of the range of forms of this damage
+. parasitizes only lingonbery (Vaccinium vitis-idaea)
+. see above for discussion
 
 ==Exobasidium vaccinii-uliginosi
-<b>Caution: ID unsure</b>
-. causes the end of a stem and its associated leaves to turn red
+<b>Caution: photo provided for reference, but ID is unsure</b>
+. commonly identified on iNaturalist on various plant hosts, but should probably be identified on {-manzanitas} only as {-Exobasidium} until properly researched
+. see above for discussion

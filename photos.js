@@ -885,7 +885,7 @@ var pages=[
 ["haircap mosses",3,6],
 ["tree lungwort",5],
 ["wolf lichen",3,6],
-["azalea gall",3,4],
+["Exobasidium arctostaphyli",3,4],
 ["Exobasidium vaccinii-uliginosi",1],
 ["bristle flies",1,3],
 ["camphor tree",1,2,3,4,5,6,9],
