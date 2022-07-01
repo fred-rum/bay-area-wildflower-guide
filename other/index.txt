@@ -30,10 +30,9 @@ technology (2018+).  <b>Check my browser notes for
 
 The Bay Area Wildflower Guide (BAWG) is a collection of my own photos
 and notes.  It is designed to be my own reference as well as something
-I can point people to when I make flower identifications.
+I can point people to when I make identifications.
 <b>Warning</b>: I am not a botanist, just an interested amateur.  All
-flower identifications should be taken as my opinion and not
-authoritative.
+identifications should be taken as my opinion and not authoritative.
 
 The BAWG is primarily for me, secondarily for you.  You can use it as
 a reference if you like, but I hope you don't use it as your
@@ -47,9 +46,12 @@ observations is probably somewhere around Cupertino.
 
 Only wildflowers are covered, not cultivated flowers.  I've also
 started including taxons other than flowering plants here, but in much
-smaller numbers.
+smaller numbers and lesser detail.
 
 I have a <a href="html/general-glossary.html">glossary</a>.
+
+<!-- original relief map from maps-for-free.com -->
+<a href="gallery.html?home"><img src="figures/bay-area-small.jpg" height="200"></a>
 
 <h2>Other Resources</h2>
 

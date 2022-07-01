@@ -1062,7 +1062,7 @@ var pages=[
 {page:"bull kelp",sci:["Nereocystis luetkeana"],x:"o"},
 {page:"Fuligo",sci:["genus Fuligo"],x:"k"},
 {page:"red algae",sci:["phylum Rhodophyta"],x:"f"},
-{page:"rust fungi",sci:["order Pucciniales"],x:"f"},
+{page:"rust fungi",sci:["order Pucciniales"],x:"k"},
 {page:"apricot jelly",sci:["Guepinia helvelloides"],x:"o"},
 {page:"beard lichens",sci:["genus Usnea"],x:"o"},
 {page:"common bird's nest fungus",sci:["Crucibulum laeve"],x:"o"},

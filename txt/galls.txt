@@ -3,8 +3,9 @@ end_hierarchy
 
 Taxons that create galls are listed in their normal taxonomic locations, but I've also collected them here for easier browsing.
 <p>
-The definitive reference for galls is Ron Russo's Field Guide to Plant
-Galls of California.
+The most popular references for galls is
+Ron Russo's Field Guide to Plant Galls of California (2007) and
+his Field Guide to Plant Galls of California and Other Western States (2021).
 <br>
 A good online reference is Joyce Gross's web pages for
 <a href="https://joycegross.com/galls_ca_oak.php">oak calls</a> and
@@ -13,6 +14,8 @@ A good online reference is Joyce Gross's web pages for
 The Bioblitz Club also has PDF brochures for
 <a href="https://712932ae-4562-44ff-908f-f817ffa1a217.filesusr.com/ugd/4f81b8_ff3e1f7f1ffa4d989db7d6835a08aca5.pdf">spring galls</a> and
 <a href="https://712932ae-4562-44ff-908f-f817ffa1a217.filesusr.com/ugd/4f81b8_be8c71c24bc0402589f3e681396df043.pdf">fall galls</a>.
+<br>
+Nancy Asquith has tons of <a href="https://www.inaturalist.org/projects/california-plants-with-mystery-galls/journal/39523-california-galls-a-host-plant-list-with-links">additional links</a> on iNaturalist.
 
 [
 <h3>gall insects</h3>

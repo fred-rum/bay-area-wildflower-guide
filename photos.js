@@ -945,4 +945,5 @@ var pages=[
 ["insect glossary","figures/fly side.svg"],
 ["beetle glossary","figures/beetle.jpg"],
 ["true bug glossary","figures/true bug top.svg","figures/true bug side.svg"],
+["home","figures/bay-area.jpg"],
 ];

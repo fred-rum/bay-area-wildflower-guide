@@ -347,6 +347,8 @@ def parse_other(name):
     desc = 'A resource for identifying San Francisco Bay Area wildflowers.'
     incl_footer = False
 
+    txt = re.sub(r'<!--.*?-->\s*', '', txt, flags=re.DOTALL)
+
     txt = re.sub(r'^\s*title\s*:\s*(.*?)\s*?\n',
                  repl_title, txt, flags=re.MULTILINE)
     txt = re.sub(r'^\s*desc\s*:\s*(.*?)\s*?\n',

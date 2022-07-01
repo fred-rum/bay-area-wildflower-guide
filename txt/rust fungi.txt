@@ -1,3 +1,6 @@
 sci:order Pucciniales
 
 ==blackberry orange rust:Gymnoconia peckiana
+. The Plant Disease Diagnostic Clinic at Cornell <a href="http://plantclinic.cornell.edu/factsheets/orangeberryrust.pdf">says</a> that this species should be split across two genera, but is unfortunately vague about the hosts for each.
+.. <b>Arthuriomyces</b> peckianus infects "black raspberry".
+.. Gymnoconia <b>nitens</b> is "more common" on "blackberry".

@@ -4,12 +4,12 @@ sci:genus Exobasidium
 This genus parasitizes {-manzanitas} and others in the {-heath family}.
 
 Ron Russo's popular reference for California galls lists {-Exobasidium vaccinii} as forming galls on numerous plant hosts.  However, discussions on iNaturalist have cast doubt on this interpretation.  A timeline:
-. <a href="https://www.biodiversitylibrary.org/page/3154527#page/42/mode/1up">1885 Casey</a> (free) briefly describes {-Exobasidium arctostaphyli}.
+. <a href="https://www.biodiversitylibrary.org/page/3154527#page/42/mode/1up">1885 Casey</a> (free) briefly describes {-Exobasidium arctostaphyli} on {-manzanitas}.
 . <a href="https://www.jstor.org/stable/pdf/2990117.pdf">1915 Burt</a> (free) lumps galls on many hosts into {-Exobasidium vaccinii}.
-. <a href="https://cdnsciencepub.com/doi/10.1139/b59-052">1959 Savile</a> (req. subscription) agrees with Burt, but reinforces the {-Exobasidium arctostaphyli} species.  (I don't have access to this one, so my summary is based on iNaturalist comments.)
+. <a href="https://cdnsciencepub.com/doi/10.1139/b59-052">1959 Savile</a> (req. subscription) mostly agrees with Burt, but retains {-Exobasidium arctostaphyli} as a distinct entity.
 . <a href="https://pascal-francis.inist.fr/vibad/index.php?action=getRecordDetail&idt=PASCAL82X0050208">1981 Nannfeldt</a> (citation only) proposes that {-Exobasidium vaccinii} is found only on lingonbery (Vaccinium vitis-idaea).
 . more recent studies tend to agree, e.g. as described in the introduction to <a href="https://www.nrs.fs.fed.us/pubs/jrnl/2012/nrs_2012_kennedy_001.pdf">2012 Kennedy</a> (free).
-. <a href="https://www.inaturalist.org/taxa/1399323/history">2022 Schwab</a>: adds {-Exobasidium arctostaphyli} to iNaturalist, and Asquith in particular starts adding this ID to many observations.
+. <a href="https://www.inaturalist.org/taxa/1399323/history">2022 Schwab</a> adds {-Exobasidium arctostaphyli} to iNaturalist, and Asquith in particular starts adding this ID to many observations.
 .. Schwab believes that although the original 1885 description includes infections of both leaves and young shoots, only leaf infections should be included in {-Exobasidium arctostaphyli}.
 .. Infections of whole shoots should instead be identified only as {-Exobasidium} until properly researched.
 

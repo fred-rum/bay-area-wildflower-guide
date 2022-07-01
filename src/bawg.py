@@ -803,6 +803,7 @@ with open(photos_file, 'w', encoding='utf-8') as w:
         photo_list = ','.join(photos)
         w.write(f'{photo_list}],\n')
     write_glossary_figures(w)
+    w.write(f'["home","figures/bay-area.jpg"],\n')
     w.write('];\n')
 
 
