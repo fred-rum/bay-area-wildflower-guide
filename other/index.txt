@@ -38,20 +38,20 @@ The BAWG is primarily for me, secondarily for you.  You can use it as
 a reference if you like, but I hope you don't use it as your
 sole reference.
 
+Only wildflowers are covered, not cultivated flowers.  I've also
+started including taxons other than flowering plants here, but in much
+smaller numbers and lesser detail.
+
 The BAWG covers the San Francisco Bay Area, from the Pacific coast to
 corners including Mt. Tamalpais, Mt. Diablo, San Luis Reservoir, and
 Santa Cruz.  Some areas outside those bounds are also covered,
 particularly Pinnacles National Park.  The gravitational center for my
 observations is probably somewhere around Cupertino.
 
-Only wildflowers are covered, not cultivated flowers.  I've also
-started including taxons other than flowering plants here, but in much
-smaller numbers and lesser detail.
-
-I have a <a href="html/general-glossary.html">glossary</a>.
-
 <!-- original relief map from maps-for-free.com -->
 <a href="gallery.html?home"><img src="figures/bay-area-small.jpg" height="200"></a>
+
+I have <a href="html/general-glossary.html">glossaries</a>.
 
 <h2>Other Resources</h2>
 
