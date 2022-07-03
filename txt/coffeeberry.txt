@@ -1,3 +1,17 @@
 sci:Frangula californica
 color: other
 x:hist
+xx:ba
+
+Parasitized by {-coffeeberry midrib gall moth}.
+
+
+==california coffeeberry:F. californica ssp. californica
+. twigs red, glabrous
+. leaves dark green adaxially, bright green or yellow abaxially
+.. leaf base & tip acute
+
+==hoary coffeeberry:F. californica ssp. tomentella
+. twigs gray, tomentose
+. leaves dull green adaxially and abaxially
+.. leaf tip acute

@@ -1,4 +1,13 @@
 sci:Lonicera involucrata
-color: salmon, yellow, red
+xx:any
 
-The local variety is var. ledebourii.
+==coast twinberry:L. involucrata var. ledebourii
+color: salmon, yellow, red
+. plant 1.5--3.6 m
+. corolla yellow with strong orange /red tinge
+. only on the coast
+
+==bearberry honeysuckle:L. involucrata var. involucrata
+. plant 60--90 cm
+. corolla yellow
+. only in the Sierras except for one possible stray in Butano

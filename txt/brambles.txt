@@ -28,7 +28,7 @@ color:white
 . fruit: <b>raspberry-type</b> (hollow when picked), <b>red-purple to +- black</b>
 
 ==salmonberry:R. spectabilis
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0315+2744
+color:red purple
 . plant 2--4 m, erect
 . prickles few, +- stout, slender, straight [CalPhotos shows some thick-based]
 . stem: 3--15 mm diameter, <b>not angled</b>, glabrous, not glaucous

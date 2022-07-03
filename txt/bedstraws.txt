@@ -12,7 +12,7 @@ Key features:
 Sorted by number of leaves in a whorl (high to low).
 
 ==hedge bedstraw:G. mollugo
-. habit: Perennial herb, erect, glabrous to hairy
+. habit: perennial herb, erect, glabrous to hairy
 . stem: 30--120 cm, stout, +- swollen at nodes
 . leaf: <b>generally whorls of 8</b>, oblanceolate to obovate, tip abruptly soft-pointed
 . inflorescence: panicle, many-flowered
@@ -21,7 +21,7 @@ Sorted by number of leaves in a whorl (high to low).
 
 ==catchweed bedstraw:G. aparine
 color: white
-. habit: Annual, climbing or prostrate, occasionally short, erect; clings by small, hooked prickles
+. habit: annual, climbing or prostrate, occasionally short, erect; clings by small, hooked prickles
 . stem: 30--90 cm, weak, brittle
 . leaf: <b>in whorls of 6--8</b>, 13--31 mm, proximal-most petioled, +- round, distal sessile, +- narrowly oblanceolate
 . inflorescence: flowers few on branchlets in most axils
@@ -30,7 +30,7 @@ color: white
 . very common
 
 ==corn cleavers:G. tricornutum
-. habit: Annual, sprawling to trailing, dense in flower, open in fruit
+. habit: annual, sprawling to trailing, dense in flower, open in fruit
 . stem: 10--35 cm, stout, +- glabrous
 . leaf: <b>in whorls of 6--8</b>, 12--19 mm, linear to narrowly oblanceolate, margin short-recurved-prickly, thickened
 . inflorescence: clusters, axillary, flowers few, peduncle < leaf, pedicel recurved
@@ -38,7 +38,7 @@ color: white
 . Briones
 
 ==lamarck's bedstraw:G. divaricatum
-. habit: Annual, erect, spreading, < 30 cm, glabrous to short-hairy
+. habit: annual, erect, spreading, < 30 cm, glabrous to short-hairy
 . stem: slender
 . leaf: <b>in whorls of 5--8</b>, generally weak-reflexed, < 7 mm, lanceolate to oblanceolate
 . inflorescence: panicle, terminal, open
@@ -46,7 +46,7 @@ color: white
 . Nisene Marks and Mt. Tam
 
 ==fragrant bedstraw:G. triflorum
-. habit: Perennial herb, generally decumbent, radiating from base, glabrous to +- scabrous
+. habit: perennial herb, generally decumbent, radiating from base, glabrous to +- scabrous
 . stem: 20--76 cm
 . leaf: <b>in whorls of 6</b>, generally parallel to ground, 6--38 mm, ovate to obovate; tip acute to acuminate, occasionally small-pointed
 . inflorescence: clusters, peduncled, axillary, flowers 2--3
@@ -54,7 +54,7 @@ color: white
 . scattered, mostly in the Santa Cruz Range
 
 ==wall bedstraw:G. parisiense
-. habit: Annual, erect, 15--68 cm, scabrous
+. habit: annual, erect, 15--68 cm, scabrous
 . stem: slender
 . leaf: <b>in whorls of 6</b>, 4--9 mm, lanceolate to oblanceolate, generally reflexed in age
 . inflorescence: panicle, open, few-flowered, pedicels thread-like
@@ -62,7 +62,7 @@ color: white
 . scattered
 
 ==tiny bedstraw:G. murale
-. habit: Annual, erect to spreading, glabrous except leaf margin, tip
+. habit: annual, erect to spreading, glabrous except leaf margin, tip
 . stem: 1--12 cm
 . leaf: <b>in whorls of 4--6</b>, 1--4 mm, obovate to oblanceolate, tip acute, generally with a slender hair
 . inflorescence: flowers 1--2 in axils, +- sessile
@@ -70,7 +70,7 @@ color: white
 . scattered
 
 ==three-petal bedstraw:G. trifidum ssp. columbianum
-. habit: Perennial herb (annual), sprawling, minutely scabrous
+. habit: perennial herb (annual), sprawling, minutely scabrous
 . stem: 10--50 cm, slender, weak, tangled
 . leaf: <b>in whorls of 4--6</b>, 4--19 mm, linear to elliptic or oblong; tip rounded; petioled
 . inflorescence: several-flowered clusters, pedicels slender
@@ -80,7 +80,7 @@ color: white
 
 ==graceful bedstraw:G. porrigens
 color: other, cream
-. habit: Perennial herb, climbing, woody, scabrous, clinging by recurved hairs; dioecious
+. habit: perennial herb, climbing, woody, scabrous, clinging by recurved hairs; dioecious
 . stem: 10--150 cm, slender
 . leaf: <b>in whorls of 4</b>, 2--18 mm; tip acute to obtuse or round, terminal hair weak, generally not persistent
 . staminate inflorescence: axillary clusters
@@ -89,7 +89,7 @@ color: other, cream
 . common
 
 ==phlox-leaved bedstraw:G. andrewsii
-. habit: Perennial herb, generally low, open, generally cushion-like, green to silvery, occasionally hairy; main stem obvious; dioecious
+. habit: perennial herb, generally low, open, generally cushion-like, green to silvery, occasionally hairy; main stem obvious; dioecious
 . stem: 5--22 cm
 . leaf: <b>in whorls of 4</b>, 4--11 mm, sharp to touch, +- thick, tip with persistent hair
 . staminate inflorescence: few-flowered clusters
@@ -98,7 +98,7 @@ color: other, cream
 . scattered in south and east bay
 
 ==california bedstraw:G. californicum ssp. californicum
-. habit: Perennial herb, open, in mats or tufts (forest, chaparral) or tangled masses (sea cliffs), not woody to occasionally woody at base; hairs +- coarse; dioecious
+. habit: perennial herb, open, in mats or tufts (forest, chaparral) or tangled masses (sea cliffs), not woody to occasionally woody at base; hairs +- coarse; dioecious
 . stem: 8--32 cm
 . leaf: <b>in whorls of 4</b>, 6--18 mm, ovate to elliptic; tip acute to obtuse, not sharp to touch; +- petioled
 . staminate inflorescence: clusters, flowers few
@@ -107,7 +107,7 @@ color: other, cream
 . common
 
 ==san diego bedstraw:G. nuttallii
-. habit: Perennial herb, climbing, woody, plant densely tangled, dark red in age; dioecious
+. habit: perennial herb, climbing, woody, plant densely tangled, dark red in age; dioecious
 . stem: 6--15 dm, slender
 . leaf: in whorls of 4, 3--8 mm, linear to narrowly ovate, generally leathery, tip acute, sharp to touch with stout, persistent hair
 . staminate inflorescence: axillary clusters

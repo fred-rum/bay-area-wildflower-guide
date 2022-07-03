@@ -1,0 +1,23 @@
+sci:genus Alnus
+x:more
+member:birch family:family Betulaceae
+
+There are more alders in the bay area that may or may not be wild, but these are by far the most common ones.
+
+[
+<h2>
+tree > 9 m, not forming thickets<br>
+leaf blade adaxially dull, base rounded to tapered
+</h2>
+
+==red alder:Alnus rubra
+color:other
+leaf rolled under:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0714+1729
+. leaf margin doubly serrate [large teeth with uneven edges]
+. leaf edge tightly rolled under [hard to see since it's just a mm or two at the edge]
+
+==white alder:Alnus rhombifolia
+. leaf margin generally serrate [small teeth]
+. leaf not tightly rolled under
+
+]

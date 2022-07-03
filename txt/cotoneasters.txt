@@ -25,7 +25,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0219+0707
 . common
 
 ==franchet's cotoneaster:C. franchetii
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0406+0239
+color: pink, salmon
 . plant arching, 1--9 m
 . petals pink or rose, erect; fruit orange to red-orange
 . scattered in the outer coastal range + Berkeley

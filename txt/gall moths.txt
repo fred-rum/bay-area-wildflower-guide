@@ -1,0 +1,5 @@
+sci:n/a
+
+==coffeeberry midrib gall moth:Sorhagenia nimbosus
+bug:243233
+. parasitizes {-coffeeberry}
