@@ -2597,26 +2597,6 @@ class Page:
                 title = self.format_elab(ital=False)
                 h1 = self.format_elab()
 
-            # The h1 header may include one or more regular-sized lines
-            # immediately following it, and we want the vertical spacing below
-            # the h1 header to be different if these lines are present.
-            # Therefore, we calculate these lines before writing the h1 header,
-            # but write them after it.
-            c_list = []
-
-            # List the iNaturalist common name if it's different.
-            if self.icom:
-                c_list.append(f'(<b>{self.icom}</b>)')
-
-            # If the common name was listed in the <h1> header,
-            # list the scientific name as a smaller line below.
-            if com and elab:
-                c_list.append(f'<b>{self.format_elab()}</b>')
-
-            s = self.write_membership()
-            if s:
-                c_list.append(s)
-
             full = self.format_full(lines=1, ital=False)
             what = f'{full} in the Bay Area Wildflower Guide.'
             if self.list_hierarchy:
@@ -2630,6 +2610,28 @@ class Page:
             else:
                 desc = f'Stub for {what}'
             write_header(w, title, h1, nospace=True, desc=desc)
+
+            # Calculate other names that should be cuddled up with the
+            # title name.
+            c_list = []
+
+            # List the iNaturalist common name if it's different.
+            if self.icom:
+                c_list.append(f'(<b>{self.icom}</b>)')
+
+            # If the common name was listed in the <h1> header,
+            # list the scientific name as a smaller line below.
+            if com and elab:
+                c_list.append(f'<b>{self.format_elab()}</b>')
+
+            if c_list:
+                c = '<br>\n'.join(c_list)
+                w.write(f'<p class="names">\n{c}\n</p>\n')
+
+            c_list = []
+            s = self.write_membership()
+            if s:
+                c_list.append(s)
 
             if c_list:
                 w.write('<br>\n'.join(c_list) + '\n')
