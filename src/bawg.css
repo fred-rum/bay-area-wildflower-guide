@@ -1105,9 +1105,7 @@ img.hazard-img {
     background-color: #faffa3;
 }
 #icon.icon-red {
-/*
-    background: linear-gradient(135deg, #faffa3 45%, #ffa8a3 57%, #ffa8a3);
-*/
+/*  background: linear-gradient(135deg, #faffa3 45%, #ffa8a3 57%, #ffa8a3); */
     backgroun-color: #ffa8a3;
 }
 
@@ -1115,4 +1113,34 @@ img.hazard-img {
    do the default behavior of highlighting the target anchor. */
 #offline:target {
     background-color: inherit;
+}
+
+/* give each heading line a background color for the full screen width
+   in order to clearly separate text above and below. */
+/*
+h1 {
+    background-color: rgb(220,255,220);
+}
+*/
+h2 {
+    background-color: rgb(235,255,235);
+}
+h3 {
+    background-color: rgb(245,255,245);
+}
+/* Extend the background color a bit in all directions so that it
+   doesn't cuddle the text quite so closely.
+   And fix the top and bottom margins regardless of font size. */
+h2, h3 {
+    padding: 2px;
+    margin-block-start: 18px;
+    margin-block-end: 14px;
+    margin-left: -2px;
+    margin-right: -2px;
+}
+/* When a heading is the first element in a box (div class), tuck it in
+   so that the gap between the box and the heading is the same at the
+   top as on the left and right. */
+.box h2:first-child, .box h3:first-child {
+    margin-top: 8px; /* side padding is 10px - 2px */
 }

@@ -88,7 +88,7 @@ figure:california poppy fruit
 
 <h2>Armament</h2>
 
-All of these terms may occasionally be used loosely rather than following the strict definition.  Many examples are given in this <a href="https://opuntiads.com/oblog/wp-content/uploads/2016/08/Thorns-Spines-and-Prickles.pdf">PDF</a>.
+These terms may occasionally be used loosely rather than following the strict definition.  Many examples are given in this <a href="https://opuntiads.com/oblog/wp-content/uploads/2016/08/Thorns-Spines-and-Prickles.pdf">PDF</a>.
 
 {prickle,prickles,prickled} Sharp-pointed projection not arising from a node.  Often stiff.
 {spine,spines,spined} Sharp-pointed projection arising in place of a leaf, leaf part, or stipule.  Usually stiff.
@@ -107,6 +107,7 @@ All of these terms may occasionally be used loosely rather than following the st
 {nectar} Sugary solution produced by a nectory for the purpose of attracting pollinators.
 {nectary} A structure that produces nectar.  Usually at the inner base of a flower to attract pollinators past the anthers and stigmas, but may be elsewhere.
 {open,opens,opening} Not densely clustered, i.e. with parts that are spread out from each other.  E.g. referring to a flower perianth that is maximally spread, e.g. not a bud.  (For some flowers, this is not very spread at all.)
+{pappilate} Having small round protuberances on a surface.
 {pericarp,pericarps} The outer, non-seed portion of a fruit.
 {pistillate} With fertile pistils but without stamens or without fertile stamens.  See staminate.
 {salverform} With a slender tube and abruptly spreading limbs (e.g. "T" shaped).

@@ -215,10 +215,12 @@ def format_elab(elab, ital=True):
             elab = re.sub(r' var\. ', f'{i1} var. {i0}', elab)
             return elab
 
+# Compare two 'x' specifications (at the genus level or above).
 def looser_complete(one, two):
     if one == None:
         return None
-    elif one == 'more':
+    elif one not in ('ba', 'ca', 'any', 'hist', 'rare', 'hist/rare'):
+        # free text is treated the same as 'more'
         if two is None:
             return two # two is looser
 
@@ -1899,7 +1901,7 @@ class Page:
                 data_object.bugguide_id = id
                 continue
 
-            matchobj = re.match(r'(x|xx):\s*(!?)(none|ba|ca|any|hist|rare|hist/rare|more|uncat)\s*$', c)
+            matchobj = re.match(r'(x|xx):\s*(!?)(.*?)\s*$', c)
             if matchobj:
                 data_object.set_complete(matchobj)
                 continue
@@ -2432,8 +2434,11 @@ class Page:
         return True
 
     def taxon_unknown_completion(self):
-        return ((self.rank >= Rank.genus and self.genus_complete not in ('hist', 'rare', 'hist/rare', 'more')) or
-                (self.rank is Rank.species and self.species_complete not in ('hist', 'rare', 'hist/rare', 'more', 'uncat')))
+        if self.rank >= Rank.genus:
+            complete = self.genus_complete
+        else:
+            complete = self.species_complete
+        return complete in ('ba', 'ca', 'any', 'none')
 
     def lower_complete(self):
         if self.genus_complete:
@@ -2548,7 +2553,8 @@ class Page:
                         w.write(f'<b>{caution}There are other wild {members} of this {top} not yet included in this guide.</b>')
                     else:
                         w.write(f'<b>{caution}This {top} has wild {members}, but they are not yet included in this guide.</b>')
-                else:
+                elif complete in ('ba', 'ca', 'any',
+                                     'hist', 'rare', 'hist/rare'):
                     if complete == 'hist':
                         prolog = f"Except for historical records that I'm ignoring, there are no{other}"
                     elif complete == 'rare':
@@ -2566,6 +2572,9 @@ class Page:
                         epilog = 'in the bay area'
 
                     w.write(f'{prolog} wild {members} of this {top} {epilog}.')
+                else:
+                    # user-specified text instead of a standard abbreviation
+                    w.write(complete);
                 if key_incomplete:
                     w.write(f'<br>\n<b>Caution: The key to distinguish these {members} is not complete.</b>')
                 w.write('</p>\n')

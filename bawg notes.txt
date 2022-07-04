@@ -1288,3 +1288,4 @@ allow individual images to be annoted with a brightness value
 headings aren't terribly distinct, especially in the presence of other bold text
   e.g. 'Pistil' in the flower glossery
   use background color similar to LibreOffice headings?
+reduce top margin when first in a box
