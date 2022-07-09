@@ -215,7 +215,6 @@ function glossary_check_list(search_str, glossary, name_list, page_info) {
       if (better_match(match_info, best_match_info)) {
         best_match_info = match_info;
       }
-      pri_adj = -0.01;
     }
   }
   return best_match_info;

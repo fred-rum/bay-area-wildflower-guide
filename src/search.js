@@ -401,7 +401,7 @@ function check_list(search_str, match_list, page_info) {
 
 function glossary_check_list(search_str, glossary, name_list, page_info) {
   var best_match_info = null;
-  var pri_adj = 0.0;
+  var pri_adj = 0.0; /* alternative terms are all the same priority */
   for (var i = 0; i < name_list.length; i++) {
     for (var k = 0; k < glossary.terms.length; k++) {
       var term_str = glossary.terms[k] + ' (glossary: ' + name_list[i] + ')';
@@ -409,7 +409,6 @@ function glossary_check_list(search_str, glossary, name_list, page_info) {
       if (better_match(match_info, best_match_info)) {
         best_match_info = match_info;
       }
-      pri_adj = -0.01;
     }
   }
 

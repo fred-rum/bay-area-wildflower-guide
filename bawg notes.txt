@@ -1285,7 +1285,4 @@ allow individual images to be annoted with a brightness value
     add the style directly in the HTML for the thumbnail
     also add the style in Javascript for the photo gallery
 
-headings aren't terribly distinct, especially in the presence of other bold text
-  e.g. 'Pistil' in the flower glossery
-  use background color similar to LibreOffice headings?
-reduce top margin when first in a box
+should headings be a different color for keys, parents, unobserved taxons?
