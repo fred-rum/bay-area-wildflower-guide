@@ -1,7 +1,7 @@
 sci:family Pieridae
 bug:2651
 
-==whites:Pieris spp.
+==garden whites:Pieris spp.
 
 ==sara orangetip:Anthocharis sara
 bug:3553

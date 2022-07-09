@@ -20,6 +20,7 @@ color: other
 . nut shell thick, smooth to shallowly grooved
 
 ==persian walnut:J. regia
+color: other
 . leaflets 5--11, entire, elliptic to oblong-ovate
 . nut shell +- thin, wrinkled
 . leaflets not pubescent abaxially

@@ -23,7 +23,6 @@ Parasitized by {-manzanita leafgall aphid} and {-genus Exobasidium}.
 .. adaxially dark green
 .. abaxially light green, shiny, sparsely puberulent or glabrous
 . uncommon, mostly near San Bruno, but scattered elsewhere
-. 7, 37
 
 ==pacific manzanita:A. pacifica
 . plant <b>prostrate</b>, 10--60 cm
@@ -32,7 +31,6 @@ Parasitized by {-manzanita leafgall aphid} and {-genus Exobasidium}.
 .. adaxially dark green sparsely hairy
 .. abaxially light green
 . rare
-. 15'
 
 ==brittleleaf manzanita:A. crustacea
 xx:more
@@ -53,7 +51,6 @@ color: white
 . plant erect, 1--4 m
 . leaf bright green to gray-green or strongly glaucous, shiny or dull, pappilate, glandular-puberulent to glandular-hairy
 . uncommon everywhere
-. 17', 24'
 
 ]
 [
@@ -67,7 +64,6 @@ color: white
 .. adaxially dark green
 .. abaxially light green
 . common in outer coastal range
-. 32
 
 ==glassyleaf manzanita:A. nummularia
 . plant shape and size depends on subspecies
@@ -75,7 +71,6 @@ color: white
 . flower parts in fours
 . Jepson and iNaturalist have it only north of Pt. Reyes
 . {-Arctostaphylos sensitiva} was previously considered a subspecies of {-Arctostaphylos nummularia}, so e.g. CalFlora is confusing
-. 32'
 
 ==santa cruz manzanita:A. andersonii
 . plant tree-like, 2--5 m
@@ -83,7 +78,6 @@ color: white
 . leaf light green
 . flower parts in fives
 . common in Santa Cruz Range
-. 39
 
 ==pajaro manzanita:A. pajaroensis
 . plant erect, 1--4 m
@@ -91,7 +85,6 @@ color: white
 . flower parts in fives
 . leaf blue-green
 . very rare
-. 39'
 
 ]
 [
@@ -102,14 +95,12 @@ color: white
 . leaf light green, sparsely glandular-hairy
 .. petioles 0--2 mm; leaf base clasping
 . uncommon
-. 42'
 
 ==presidio manzanita:A. montana ssp. ravenii
 . plant prostrate, 10--30 cm
 . fruit 3--5 mm wide
 . leaf dark green, shiny, puberulent or glabrous.
 . rare in Presidio area
-. 46'
 
 ==franciscan manzanita:A. franciscana
 . plant prostrate to somewhat mounded, 20--150 cm
@@ -117,7 +108,6 @@ color: white
 . leaf bright green, smooth, +- puberulent or glabrous
 .. petioles 1--12 mm; leaf base not clasping
 . uncommon
-. 47
 
 ]
 [
@@ -131,7 +121,6 @@ color: white
 . inflorescence 0--1-branched
 . leaf bright green, shiny, +- puberulent or glabrous
 . rare
-. 52
 
 ==big berry manzanita:A. glauca
 color: white
@@ -140,21 +129,19 @@ color: white
 . leaf white-glacous, dull, glabrous
 . common
 . mostly SE of highway 17 in the Santa Cruz Range, with significant eastern pockets at Mt. Diablo, Grant, and Coe
-. 56'
 
 ==mount tamalpais manzanita:A. montana ssp. montana
 . mounded to erect, 0.5--2 m
 . inflorescence a panicle, 1--3-branched
 . leaf dark green, shiny, puberulent or glabrous
 . common in Mt. Tam area
-. 70
 
 ==common manzanita:A. manzanita
 . erect, 2--8 m
 . leaf bright green, shiny or dull but not white-glaucous
 . inflorescence a panicle, 2--7-branched
+. (subspecies outside the bay area may differ)
 . common
-. 72' (for all bay area subspecies)
 
 ]
 [
@@ -166,14 +153,12 @@ color: white
 . leaf base lobed, clasping
 . ovary and fruit nongladulary-hairy
 . common near Mt. Diablo
-. 79
 
 ==schreiber's manzanita:A. glutinosa
 . young leaves gray-canescent, glabrous with age
 . leaf base lobed, clasping
 . ovary and fruit hairy, both glandular and nonglandular
 . rare, just SE of Big Basin
-. 79'
 
 ==bonny doon manzanita:A. silvicola
 . young leaves gray-canescent, glabrous with age
@@ -181,7 +166,6 @@ color: white
 . corolla white
 . ovary glabrous
 . common near Bonny Doon, Felton, and Scotts Valley
-. 81'
 
 ==hoary manzanita:Arctostaphylos canescens ssp. canescens
 color: pink, pale purple
@@ -191,7 +175,6 @@ color: pink, pale purple
 . ovarly glandular or nonglandular-hairy
 . uncommon
 . Mt. Tam, Sierra Azul, and Mt. Madonna
-. 80'
 
 ==montara manzanita:A. montaraensis
 color: white, pink, red purple
@@ -201,7 +184,6 @@ color: white, pink, red purple
 .. leaf generally ovate, not boat-shaped; may be sparsely glandular but not sticky
 . uncommon
 . Mt. Montara
-. 89
 
 ==pallid manzanita:A. pallida
 color: white
@@ -211,20 +193,17 @@ color: white
 .. leaf generally ovate, not boat-shaped; may be sparsely glandular but not sticky
 . uncommon
 . Oakland hills and nearby areas
-. 89'
 
 ==kings mountain manzanita:A. regismontana
 . young leaves not gray-canescent
 .. leaf base lobed, clasping
 .. leaf oblong-ovate, boat-shaped, glandular-sticky in youth; may still be sticky with age
 . uncommon, mostly in the Santa Cruz range
-. 90'
 
 ==marin manzanita:A. virgata
 . young leaves not gray-canescent
 .. leaf base truncate to +- lobed, but not clasping
 . uncommon in Marin headlands
-. 95
 
 ]
 ]

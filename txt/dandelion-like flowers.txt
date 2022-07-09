@@ -52,3 +52,12 @@ x:ca
 . <b>involucre swollen at base</b>
 . phyllaries generally in 3 series
 . corolla yellow, +- tan abaxially
+
+==false hawkbit
+. one stem from base, long-hairy, branched distally
+. mostly cauline leaves, toothed or lobed (distal leaves may be entire)
+.. basal and proximal cauline leaves tapered to base
+.. distal cauline leaves sessile, clasping
+. heads with long peduncles
+. phyllaries in 1 series, fused at base, bristly or +- glabrous
+. corolla yellow

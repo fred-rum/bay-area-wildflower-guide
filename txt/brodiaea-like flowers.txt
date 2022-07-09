@@ -6,7 +6,7 @@ sci_fp:Dichelostemma capitatum
 x:any
 xx:more
 . perianth blue, blue-purple, pink-purple, or white
-. staminodes erect, <b>leaning toward anthers, outward at tip, +- white</b>
+. staminodes erect, <b>leaning toward anthers, outward at tip, +- white (at least at the tips)</b>
 . perianth tube <b>not narrowed</b> above ovary
 . perianth parts generally wider than ookow
 . bracts generally dark purple (paler, striped dark purple)
