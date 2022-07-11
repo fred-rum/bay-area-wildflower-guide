@@ -7,6 +7,8 @@ from page import *
 
 old_thumb_set = get_file_set(f'thumbs', 'jpg')
 
+jpg_files = jpg_photos.union(jpg_figures)
+
 # Compare the photos directory with the thumbs directory.
 # If a file exists in photos and not thumbs, create it.
 # If a file is newer in photos than in thumbs, re-create it.
@@ -25,15 +27,18 @@ for name in old_thumb_set:
         os.remove(thumb_file)
 
 mod_list = []
-valid_thumb_set = set()
-for name in jpg_files:
-    photo_file = f'{root_path}/photos/' + name + '.jpg'
-    thumb_file = f'{root_path}/thumbs/' + name + '.jpg'
+def check_thumb(name, dir):
+    photo_file = f'{root_path}/{dir}/{name}.jpg'
+    thumb_file = f'{root_path}/thumbs/{name}.jpg'
     if (name not in old_thumb_set or
         os.path.getmtime(photo_file) > os.path.getmtime(thumb_file)):
         mod_list.append(photo_file)
-    else:
-        valid_thumb_set.add(name)
+
+for name in jpg_photos:
+    check_thumb(name, 'photos')
+
+for name in jpg_figures:
+    check_thumb(name, 'figures')
 
 
 def which_plus(program, plus):
@@ -77,11 +82,6 @@ def run(cmd):
         else:
             info(' '.join(cmd))
         error(f"Command returned non-zero exit status {result.returncode}")
-    else:
-        # If the returncode is 0, assume that thumbnail generation was
-        # successfully completed for all photos.
-        global valid_thumb_set
-        valid_thumb_set = jpg_files
 
 def cvt_irfanview(cmd):
     # IrvanView creates the destination directory if necessary
@@ -177,7 +177,4 @@ if mod_list:
 
 # Return the relative URL to a thumbnail photo.
 def thumb_url(jpg):
-    if jpg in valid_thumb_set:
-        return url(f'../thumbs/{jpg}.jpg')
-    else:
-        return url(f'../photos/{jpg}.jpg')
+    return url(f'../thumbs/{jpg}.jpg')

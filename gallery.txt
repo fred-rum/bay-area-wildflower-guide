@@ -1,3 +1,18 @@
+do "example" photo links go to the gallery without duplicating a photo?
+  is the thumbnail correct?
+
+index.txt links directly to galler.html?home,
+  but instead it should link directly to the figure
+    and let the Javascript convert the link
+  automatically resize jpg figures into thumbnails (e.g. in figure-thumbs)
+  automatically derive thumbnail path from jpg name and directory
+  use JS to convert link to jpg/svg in photos or figures
+    search for link, not for thumbnail (document.links)
+  use python to detect link to jpg/svg in photos or figures and add it to the
+    master list
+  is '?search' portion of URL named after image filename or HTML title?
+    what '?search' should be used in index.txt?
+
 make 'X' shorter and thicker
 
 add 'tab' to go to next image, 'shift-tab' to go to previous

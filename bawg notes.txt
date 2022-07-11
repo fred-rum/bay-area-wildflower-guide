@@ -1286,3 +1286,6 @@ allow individual images to be annoted with a brightness value
     also add the style in Javascript for the photo gallery
 
 should headings be a different color for keys, parents, unobserved taxons?
+
+species Solanum nigrum accidentally picks up the taxon_id of
+  complex Solanum nigrum

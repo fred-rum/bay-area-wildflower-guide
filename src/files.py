@@ -70,9 +70,11 @@ def get_file_set(subdir, ext, use_home=False):
             base_set.add(filename)
     return base_set
 
-jpg_files = get_file_set(f'photos', 'jpg')
+jpg_photos = get_file_set(f'photos', 'jpg')
 
 svg_figures = get_file_set(f'figures', 'svg')
+svg_figures.discard('_figure template')
+
 jpg_figures = get_file_set(f'figures', 'jpg')
 
 # Copy icons from the home (src) directory to the root (-dir) directory
@@ -105,16 +107,23 @@ def figure_file(name, file):
         error(f'Broken figure link to {file}.svg/jpg in {name}')
         return f'../figures/{file}.svg'
 
+def figure_thumb(name, file):
+    if file in svg_figures:
+        return f'figures/{file}.svg'
+    else:
+        return f'thumbs/{file}.jpg'
+
 def link_figures_thumb(name, txt, page, glossary):
     def repl_figure_thumb(matchobj):
         figure = matchobj.group(1)
-        file = figure_file(name, figure)
-        fileurl = url('../' + file)
+        imagefile = figure_file(name, figure)
+        fileurl = url('../' + imagefile)
         if page:
-            page.figure_list.append(file)
+            page.figure_list.append(imagefile)
         if glossary:
-            glossary.figure_list.append(file)
-        return f'<a href="{fileurl}"><img src="{fileurl}" alt="figure" height="200" class="leaf-thumb"></a>'
+            glossary.figure_list.append(imagefile)
+        thumburl = url('../' + figure_thumb(name, figure))
+        return f'<a href="{fileurl}"><img src="{thumburl}" alt="figure" height="200" class="leaf-thumb"></a>'
 
     def repl_figure_thumbs(matchobj):
         inner = matchobj.group(1)

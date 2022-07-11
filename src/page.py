@@ -1816,10 +1816,10 @@ class Page:
                 jpg = matchobj.group(1)
                 if jpg.startswith(','):
                     jpg = data_object.name + jpg
-                    if jpg not in jpg_files:
+                    if jpg not in jpg_photos:
                         error(f'Broken rep: {jpg} in {self.full()}')
                         continue
-                if jpg in jpg_files:
+                if jpg in jpg_photos:
                     data_object.rep_jpg = jpg
                 else:
                     # If it's not a jpg, then maybe it's a child name.

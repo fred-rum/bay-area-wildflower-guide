@@ -171,7 +171,7 @@ if arg('-steps'):
 # Record jpg names for associated pages.
 # Create a blank page for all unassociated jpgs.
 def assign_jpgs():
-    for jpg in sorted(jpg_files):
+    for jpg in sorted(jpg_photos):
         name,suffix = separate_name_and_suffix(jpg)
         if not name:
             error(f'No name for {jpg}')
@@ -926,16 +926,13 @@ if not arg('-without_cache'):
         glossary_set.add(glossary.get_filename())
     alpha_list += get_file_list('html', glossary_set, 'html')
 
-    alpha_list += get_file_list('thumbs', valid_thumb_set, 'jpg')
+    alpha_list += get_file_list('thumbs', jpg_files, 'jpg')
 
-    alpha_list += get_file_list('photos', jpg_files, 'jpg')
+    alpha_list += get_file_list('photos', jpg_photos, 'jpg')
 
-    figure_set = get_file_set('figures', 'svg')
-    figure_set.discard('_figure template')
-    alpha_list += get_file_list('figures', figure_set, 'svg')
+    alpha_list += get_file_list('figures', svg_figures, 'svg')
 
-    figure_set = get_file_set('figures', 'jpg')
-    alpha_list += get_file_list('figures', figure_set, 'jpg')
+    alpha_list += get_file_list('figures', jpg_figures, 'jpg')
 
     path_list += sorted(alpha_list, key=by_filename)
 

@@ -1,6 +1,8 @@
 sci:Solanum spp.
 x:hist/rare
 
+The anthers are generally fused to form a golden longitudinally-segmented tube from which the style may or may not be exserted.
+
 [
 <h3>Purple nightshades</h3>
 
@@ -34,8 +36,10 @@ Fruit key features:
 
 Flower key features:
 . corolla diameter
-. leaf toothed or not
-. hairs gladular or not
+. anther length
+. style strongly exserted or not
+
+The anthers are generally fused to form a golden longitudinally-segmented tube from which the style may or may not be exserted.
 
 Stanford's Jasper Ridge program has a <a href="https://web.stanford.edu/dept/JRBP/plants/PDF/Solanum%20key.pdf">key (PDF)</a> for white-flowered nightshades.
 
@@ -46,27 +50,33 @@ Jepson and Stanford both list deceptive corolla widths which I have corrected ac
 
 Some features are variable within a species, but if a <b>bold feature</b> is seen, it is diagnostic.
 
-==black nightshade:S. nigrum
-color: white
-. corolla: 10--17 mm diameter including lobes, white w/ yellow/green spots at base
-.. anthers 1.4--2.4 mm
-. leaf: 4--7 cm, entire to coarsely wavy-toothed
-. hairs: +- spreading or curved, <b>glandular</b> and not
-. calyx lobes partially fused, not reflexed in fruit
-. fruit: <b>dull</b>
-
 ==greenspot nightshade:S. douglasii
 color: white
 . corolla: 10--14 mm diameter including lobes, white, possibly tinged with lavender, w/ yellow/green/brown spots at base
-.. anthers 2.5--4.0 mm
+.. <b>anthers 2.5--4.0 mm</b>
+.. <b>style strongly exerted</b> beyond anthers
 . leaf: 1--9 cm, entire to coarsely irregularly <b>toothed</b>
 . hairs: generally simple, < 1mm, +- curved, white
 . fruit: <b>glossy</b> w/ <b>sepals not reflexed</b>
 . stems angled, rough-hairy, woody
 
+==black nightshade:S. nigrum
+color: white
+. corolla: 10--17 mm diameter including lobes, white w/ yellow/green spots at base
+.. anthers 1.4--2.4 mm
+.. if we believe CalPhotos, style may or may not be strongly exerted beyond anthers
+. leaf: 4--7 cm, entire to coarsely wavy-toothed
+. hairs: +- spreading or curved, <b>glandular</b> and not
+. calyx lobes partially fused, not reflexed in fruit
+. fruit: <b>dull</b>
+.. [photographs show the sepals in fruit being strongly, weakly, or not reflexed, but Jasper Ridge says they're never reflexed]
+
 ==american black nightshade:S. americanum
 color: white
 . corolla: <b>5--8 mm diameter including lobes</b> [example,2], white
+.. anthers 1.4--2.2 mm
+.. <b>style not strongly exerted</b> beyond anthers
+.. note that the style-to-anther ratio is similar in all white nightshades, but this one has longer filaments
 . leaf: 2--15 cm, entire to coarsely wavy-toothed
 . hairs: +- 0 or short, +- appressed or curved, nonglandular
 . fruit: <b>glossy</b> w/ <b>sepals reflexed</b>
