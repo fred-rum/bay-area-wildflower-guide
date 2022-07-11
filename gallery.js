@@ -270,9 +270,8 @@ function fn_wheel(event) {
 function Photo(i, url_full) {
   this.i = i;
   this.url_full = url_full;
-  this.url_thumb = url_full.replace(/^photos\//, 'thumbs/')
+  this.url_thumb = url_full.replace(/^photos\/|^figures\//, 'thumbs/')
   this.is_svg = /\.svg$/.test(url_full);
-  this.has_thumb = /^photos\//.test(url_full);
   this.active_thumb = false;
   this.active_full = false;
   this.done_thumb = null;
@@ -299,7 +298,7 @@ Photo.prototype.open_photo = function() {
     e_ui_r.style.display = 'none';
   }
   if (!this.e_thumb) {
-    if (this.has_thumb) {
+    if (!this.is_svg) {
       this.e_thumb = document.createElement('img');
       this.e_thumb.className = 'gallery-photo';
       this.e_thumb.setAttribute('draggable', 'false');
@@ -321,9 +320,6 @@ Photo.prototype.open_photo = function() {
 }
 Photo.prototype.activate_images = function() {
   var new_active = false;
-  console.log('done:', this.done_full,
-              'active:', this.active_full,
-              'width:', this.e_full.width);
   if (!this.active_full && (this.e_full.naturalWidth ||
                             (this.is_svg && this.e_full.width))) {
     new_active = true;
@@ -342,7 +338,7 @@ Photo.prototype.activate_images = function() {
       e_spin.insertAdjacentElement('beforebegin', this.e_full);
     }
   }
-  if (this.has_thumb && !this.active_thumb && this.e_thumb.naturalWidth &&
+  if (!this.is_svg && !this.active_thumb && this.e_thumb.naturalWidth &&
       (this.done_full != 'load')) {
     new_active = true;
     this.active_thumb = true;

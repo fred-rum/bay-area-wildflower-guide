@@ -34,7 +34,7 @@ figure:california manroot
 
 figure:sea muilla
 
-{pistil,pistils} A pollen-accepting ("female") sexual part of a flower, each composed of an ovary, style, and stigma. [figure:sea muilla]
+{pistil,pistils} A pollen-accepting ("female") sexual part of a flower, each composed of an ovary, style, and stigma. [figure:yellow mariposa lily]
 {ovary,ovaries} The usually wider base of the pistil that forms the seed or fruit when germinated.  The hypanthium (perianth and stamens) may be attached to the top, the bottom, or somewhere along the sides of the ovary. [figure:sea muilla]
 {style,styles} The tube that carries pollen from the stigma to the ovary. [figure:sea muilla]
 {stigma,stigmas} The distal end of the pistil that captures pollen for germination.  May be lobed. [figure:sea muilla]

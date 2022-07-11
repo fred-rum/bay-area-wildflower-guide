@@ -498,10 +498,11 @@ function Photo(i, url_full) {
 
   this.i = i;
   this.url_full = url_full;
-  this.url_thumb = url_full.replace(/^photos\//, 'thumbs/')
+  this.url_thumb = url_full.replace(/^photos\/|^figures\//, 'thumbs/')
+  console.log(this.url_full);
+  console.log(this.url_thumb);
 
   this.is_svg = /\.svg$/.test(url_full);
-  this.has_thumb = /^photos\//.test(url_full);
 
   /* The image elements for the thumbnail (for fast loading) and full-sized
      photo (for detail when available).
@@ -558,7 +559,7 @@ Photo.prototype.open_photo = function() {
        necessary DOM elements here, but we'll have to wait for the thumbnail
        and full-sized photo to load. */
 
-    if (this.has_thumb) {
+    if (!this.is_svg) {
       this.e_thumb = document.createElement('img');
       this.e_thumb.className = 'gallery-photo';
       this.e_thumb.setAttribute('draggable', 'false');
@@ -613,9 +614,7 @@ Photo.prototype.activate_images = function() {
      which eventually triggers a call to redraw_photo(). */
   var new_active = false;
 
-  console.log('done:', this.done_full,
-              'active:', this.active_full,
-              'width:', this.e_full.width);
+  console.log('done:', this.done_full, 'active:', this.active_full, 'width:', this.e_full.width);
 
   if (!this.active_full && (this.e_full.naturalWidth ||
                             (this.is_svg && this.e_full.width))) {
@@ -649,7 +648,7 @@ Photo.prototype.activate_images = function() {
     }
   }
 
-  if (this.has_thumb && !this.active_thumb && this.e_thumb.naturalWidth &&
+  if (!this.is_svg && !this.active_thumb && this.e_thumb.naturalWidth &&
       (this.done_full != 'load')) {
     /* We now have dimensions for the thumbnail photo, but we only bother
        to display it if the full-size photo is not done. */
