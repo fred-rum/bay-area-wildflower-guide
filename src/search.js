@@ -5,10 +5,6 @@
 /*****************************************************************************/
 /* code related to the photo gallery */
 
-/* obj_photos is an array of Photo objects, one for each photo associated
-   with this page */
-var obj_photos = [];
-
 /* Ideally, we want gallery_main() to be called after the thumbnails are
    loaded into the DOM, but before the user can click on them.  But the
    only way to perfectly guarantee this is to write potentially a lot of
@@ -25,75 +21,61 @@ var obj_photos = [];
    loaded and populated the DOM, so this is as fast as we can go.
    This call is at the end of the photogallery section.
 
-   2. In case the DOM was *not* full populated the first time, we call
-   gallery_main() again once the DOM is complete.  The second call may
-   re-annotate some or all thumbnails a second time, but that's fine.
+   2. In case the DOM was *not* fullly populated the first time, we call
+   gallery_main() again once the DOM is complete.  The second call shouldn't
+   re-annotate any photos that were already annotated, but it would be fine
+   even if it did.
 
    Note that if the DOM is complete before the script finishes loading,
    both calls may be made consecutively once the script has loaded.
 */
+var annotated_href_list = [];
 function gallery_main() {
-  /* Initialize each potential gallery photo, in particular adding
-     Javascript to intercept a click on any of the page's thumbnails. */
-  var e_thumbnail_list = document.getElementsByClassName('leaf-thumb')
-
-  console.log('e_thumbnail_list:', e_thumbnail_list);
-
-  var html_url = window.location.pathname;
-  var matches = /([^\/]*)\.html$/.exec(html_url);
+  /* Decode the current page's URL.
+     It is expected to start with any string,
+     followed by an optional 'html/',
+     followed by the page name (encoded as needed),
+     followed by '.html'. */
+  const html_url = window.location.pathname;
+  const matches = /(?:html\/)?[^\/]*\.html$/.exec(html_url);
   if (matches) {
     /* The page name in the pathname has different encoding requirements when
        moved to the search component of the URL. */
-    var page_name = encodeURIComponent(decodeURI(matches[1]))
-
-    for (var i = 0; i < e_thumbnail_list.length; i++) {
-      console.log('annotating thumbnail', i);
-      var gallery_path = '../gallery.html?' + page_name
-      /* start numbering at 1,
-         but the default is 1 if a photo number is not supplied */
-      if (i) {
-        gallery_path += '#' + (i + 1);
-      }
-
-      /* The parent of the thumbnail image is guaranteed to be a link to
-         the full-sized JPG.  Replace that link with a link to the gallery. */
-      e_thumbnail_list[i].parentElement.href = gallery_path;
+    var prefix = window.location.origin + html_url.substr(0, matches.index);
+  } else {
+    /* If the URL doesn't end with '*.html', then we assume it ends in '/',
+       which implicitly maps to 'index.html'. */
+    var prefix = window.location.origin + html_url
+    if (!prefix.endsWith('/')) {
+      prefix += '/';
     }
   }
-}
 
-function Photo(i, e_thumbnail) {
-  this.i = i;
-  this.e_thumbnail = e_thumbnail;
+  /* Change each link to a BAWG photo or figure to instead link via the
+     gallery page. */
+  const e_link_list = document.links
 
-  /* The HTML has a link from the thumbnail to the full-size photo file.
-     We hijack a click on the thumbnail to instead start the photo gallery.
-     However, we leave the original alone:
-     - open link in new window and save link still work
-     - navigating through the link via the keyboard bypasses the photo gallery
-       (since this is no worse and may be better than the photo gallery without
-       a keyboard) */
-  this.e_thumbnail.addEventListener('click', this.fn_gallery_start.bind(this));
+  for (var i = 0; i < e_link_list.length; i++) {
+    /* Look for any href that starts with the same start of the URL as the
+       current page, followed by 'photos/' or 'figures/'.  We assume that all
+       hrefs are in the same canonical form, so we don't need to figure out all
+       the ways that different hrefs could map to the same URL. */
+    const href = e_link_list[i].href;
+    if (href.startsWith(prefix + 'photos/') ||
+        href.startsWith(prefix + 'figures/')) {
+      const suffix = href.substr(prefix.length);
+      console.log('annotating link to', suffix);
 
-  /* The image elements for the thumbnail (for fast loading) and full-sized
-     photo (for detail when available).
-  this.e_thumb = null;
-  this.e_full = null;
+      /* The path to the photo has different encoding requirements when
+         moved to the search component of the URL. */
+      const suffix_query = encodeURIComponent(decodeURI(suffix));
 
-  /* The thumbnail can be displayed as soon as we have dimensions for it.
-     Although it may still be loading, at least the user can see as much of
-     the image has loaded and can start interacting with it.
-
-     Similarly, the full-sized photo can be displayed as soon as we have
-     dimensions for it.  Although it may still be loading, it provides
-     extra detail over what the thumbnail can display, and its greater
-     dimensions allow it to be displayed larger.
-
-     We keep track of whether each photo is "active" on the screen with
-     the variables below. */
-  this.active_thumb = false;
-  this.active_full = false;
-  this.done_full = false;
+      /* Replace the href to point to the gallery. */
+      e_link_list[i].href = prefix + 'gallery.html?' + suffix;
+    } else {
+      console.log('not annotating link to', href);
+    }
+  }
 }
 
 /* This call has to be after all gallery-related function definitions.
@@ -841,7 +823,7 @@ function fn_hashchange(event) {
 }
 
 /* Determine whether to add 'html/' to the URL when navigating to a page. */
-if (window.location.pathname.includes('/html/')) {
+if (/\/html\/[^\/]*$/.test(window.location.pathname)) {
   var path = '';
 } else {
   var path = 'html/';

@@ -764,16 +764,16 @@ with open(photos_file, 'w', encoding='utf-8') as w:
         if (not page.photo_dict):
             continue
 
-        # The entry consists of the page name followed by the photo URLs.
+        # The entry consists of a page name followed by the photo URLs.
         #
-        # The page name may include spaces, even though gallery.js will be
-        #   comparing it to a value that doesn't use spaces.  See gallary.js
-        #   for why the spaces in the page name are useful.
+        # The page name is a user visible name, so instead of taking the
+        #   page.name (which must be unique), we take either the common
+        #   or scientific name.
         #
         # The photo URLs are compressed to save space:
-        #   The 'photos/' prefix and '.jpg' suffix is dropped.
-        #   If the first photo's base name can be derived from the page name
-        #     (e.g. by replacing ' ' with '-'), that part is dropped.
+        #   The 'photos/' prefix and '.jpg' suffix are dropped.
+        #   If the first photo's base name can be derived from the page name,
+        #     that part is dropped.
         #   If a subsequent photo's base name is the same as the previous
         #     photos, that part is also dropped.
         #   If only the suffix is emitted, the ',' separating it from the
@@ -782,7 +782,12 @@ with open(photos_file, 'w', encoding='utf-8') as w:
         #     is emitted as an unquoted integer rather than a quoted string.
         #   What remains is often simply a list of photo suffixes,
         #     e.g. 1,3,7
-        name = page.name
+        if page.com:
+            name = page.com
+        else:
+            # If the page has no common name (only a scientific name),
+            # then the h1 header should be italicized and elaborated.
+            name = page.elab
         w.write(f'["{name}",')
         photos = []
         recent_name = name
@@ -803,7 +808,7 @@ with open(photos_file, 'w', encoding='utf-8') as w:
         photo_list = ','.join(photos)
         w.write(f'{photo_list}],\n')
     write_glossary_figures(w)
-    w.write(f'["home","figures/bay-area.jpg"],\n')
+    w.write(f'["bay area","figures/bay-area.jpg"],\n')
     w.write('];\n')
 
 

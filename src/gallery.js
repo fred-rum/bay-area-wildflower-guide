@@ -70,50 +70,59 @@ var win_x, win_y;
 function main() {
   /* Initialize each potential gallery photo, in particular adding
      Javascript to intercept a click on any of the page's thumbnails. */
-  var page_name = window.location.search;
-  if (page_name) {
-    page_name = decodeURIComponent(page_name.substring(1))
+  var first_photo_name = window.location.search;
+  if (first_photo_name) {
+    first_photo_name = decodeURIComponent(first_photo_name.substring(1))
   } else {
-    page_name = 'invalid'
+    first_photo_name = 'invalid'
   }
 
-  var photo_urls = [encodeURI('photos/' + page_name + '.jpg')];
   for (var i = 0; i < pages.length; i++) {
     var list = pages[i];
 
-    /* The page_name supplied in the link has ' ' replaced with '-'.
-       So make the same transformation to the page names in photos.js
-       when comparing them. */
-    var cmp_name = list[0].replace(/ /g, '-');
-    if (cmp_name == page_name) {
-      /* Generate the page title from the name with proper spaces in it. */
-      page_name = list[0];
+    /* Generate the page title from the name with proper spaces in it. */
+    var page_name = list[0];
 
-      /* The page name with spaces is also the default base name for a
-         photo file name. */
-      var base_name = page_name;
+    /* The first item in the list is the page name.  In many cases, this also
+       serves as the base name for photos, requiring only a directory name
+       and photo suffix for each photo. */
+    var base_name = list[0];
 
-      photo_urls = [];
-      for (var j = 1; j < list.length; j++) {
-        var photo_name = String(list[j]);
-        if (!/^figures\//.test(photo_name)) {
-          var comma_pos = photo_name.search(',');
-          if (comma_pos == -1) {
-            photo_name = base_name + ',' + photo_name;
-          } else {
-            base_name = photo_name.substring(0, comma_pos);
-          }
-          if (photo_name.search('/') == -1) {
-            photo_name = 'photos/' + photo_name;
-          }
-          if (photo_name.search(/.jpg$/) == -1) {
-            photo_name =  photo_name + '.jpg';
-          }
+    var photo_urls = [];
+    var match_idx = 0;
+    for (var j = 1; j < list.length; j++) {
+      var photo_name = String(list[j]);
+      if (!photo_name.startsWith('figures/')) {
+        var comma_pos = photo_name.search(',');
+        if (comma_pos == -1) {
+          photo_name = base_name + ',' + photo_name;
+        } else {
+          base_name = photo_name.substring(0, comma_pos);
         }
-        photo_urls.push(encodeURI(photo_name));
+        if (photo_name.search('/') == -1) {
+          photo_name = 'photos/' + photo_name;
+        }
+        if (!photo_name.endsWith('.jpg')) {
+          photo_name =  photo_name + '.jpg';
+        }
       }
+      photo_urls.push(photo_name);
+
+      if (first_photo_name == photo_name) {
+        match_idx = j;
+      }
+    }
+
+    if (match_idx) {
       break;
     }
+  }
+
+  if (i == pages.length) {
+    /* no match, so just display the named photo by itself. */
+    page_name = first_photo_name;
+    photo_urls = [first_photo_name];
+    match_idx = 1;
   }
 
   document.title = 'gallery - ' + page_name;
@@ -132,22 +141,7 @@ function main() {
      so we look for keypresses in the entire window. */
   window.addEventListener('keydown', fn_gallery_keydown);
 
-  var i = 0;
-  if (window.location.hash) {
-    var hash_i = parseInt(window.location.hash.substring(1));
-    if (hash_i) { /* not NaN or whatever */
-      /* convert from 1-indexed to 0-indexed */
-      i = hash_i - 1;
-
-      /* constrain the value if it is out of range */
-      if (i < 1) {
-        i = 0;
-      } else if (i >= obj_photos.length) {
-        i = obj_photos.length - 1;
-      }
-    }
-  }
-
+  i = match_idx - 1;
   if (history.state) {
     console.log('restoring photo state');
     obj_photos[i].fit = history.state.fit;
@@ -498,11 +492,14 @@ function Photo(i, url_full) {
 
   this.i = i;
   this.url_full = url_full;
-  this.url_thumb = url_full.replace(/^photos\/|^figures\//, 'thumbs/')
   console.log(this.url_full);
-  console.log(this.url_thumb);
 
+  /* svg files don't have thumbnails (yet) */
   this.is_svg = /\.svg$/.test(url_full);
+  if (!this.is_svg) {
+    this.url_thumb = url_full.replace(/^photos\/|^figures\//, 'thumbs/')
+    console.log(this.url_thumb);
+  }
 
   /* The image elements for the thumbnail (for fast loading) and full-sized
      photo (for detail when available).
@@ -573,7 +570,7 @@ Photo.prototype.open_photo = function() {
          there's no way to simply copy the thumbnail image from the original
          page.  We can only hope that the browser has cached the JPG file and
          can re-create the image quickly. */
-      this.e_thumb.src = this.url_thumb;
+      this.e_thumb.src = encodeURI(this.url_thumb);
     }
 
     this.e_full = document.createElement('img');
@@ -593,7 +590,7 @@ Photo.prototype.open_photo = function() {
        event handler ultimately suppresses further handling of the click, so
        when the photo galleyr is opened, the original link doesn't get
        activated. */
-    this.e_full.src = this.url_full;
+    this.e_full.src = encodeURI(this.url_full);
 
     if (this.is_svg) {
       /* Firefox doesn't populate naturalWidth and naturalHeight for an SVG,
@@ -954,13 +951,7 @@ Photo.prototype.go_right = function() {
 }
 
 Photo.prototype.save_state = function() {
-  var hash;
-  if (this.i == 0) {
-    hash = '';
-  } else {
-    hash = '#' + (this.i+1);
-  }
-  var url = window.location.pathname + window.location.search + hash;
+  var url = window.location.pathname + '?' + encodeURIComponent(this.url_full);
 
   var state = {
     'fit': this.fit,

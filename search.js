@@ -1,28 +1,28 @@
 /* Copyright Chris Nelson - All rights reserved. */
 'use strict';
-var obj_photos = [];
+var annotated_href_list = [];
 function gallery_main() {
-  var e_thumbnail_list = document.getElementsByClassName('leaf-thumb')
-  var html_url = window.location.pathname;
-  var matches = /([^\/]*)\.html$/.exec(html_url);
+  const html_url = window.location.pathname;
+  const matches = /(?:html\/)?[^\/]*\.html$/.exec(html_url);
   if (matches) {
-    var page_name = encodeURIComponent(decodeURI(matches[1]))
-    for (var i = 0; i < e_thumbnail_list.length; i++) {
-      var gallery_path = '../gallery.html?' + page_name
-      if (i) {
-        gallery_path += '#' + (i + 1);
-      }
-      e_thumbnail_list[i].parentElement.href = gallery_path;
+    var prefix = window.location.origin + html_url.substr(0, matches.index);
+  } else {
+    var prefix = window.location.origin + html_url
+    if (!prefix.endsWith('/')) {
+      prefix += '/';
     }
   }
-}
-function Photo(i, e_thumbnail) {
-  this.i = i;
-  this.e_thumbnail = e_thumbnail;
-  this.e_thumbnail.addEventListener('click', this.fn_gallery_start.bind(this));
-  this.active_thumb = false;
-  this.active_full = false;
-  this.done_full = false;
+  const e_link_list = document.links
+  for (var i = 0; i < e_link_list.length; i++) {
+    const href = e_link_list[i].href;
+    if (href.startsWith(prefix + 'photos/') ||
+        href.startsWith(prefix + 'figures/')) {
+      const suffix = href.substr(prefix.length);
+      const suffix_query = encodeURIComponent(decodeURI(suffix));
+      e_link_list[i].href = prefix + 'gallery.html?' + suffix;
+    } else {
+    }
+  }
 }
 gallery_main();
 var ac_is_hidden = true;
@@ -468,7 +468,7 @@ function fn_hashchange(event) {
     document.title = decodeURIComponent(hash).substring(1) + ' - ' + title;
   }
 }
-if (window.location.pathname.includes('/html/')) {
+if (/\/html\/[^\/]*$/.test(window.location.pathname)) {
   var path = '';
 } else {
   var path = 'html/';

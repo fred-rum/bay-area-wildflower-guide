@@ -15,40 +15,47 @@ var click_target;
 var orig_pinch;
 var win_x, win_y;
 function main() {
-  var page_name = window.location.search;
-  if (page_name) {
-    page_name = decodeURIComponent(page_name.substring(1))
+  var first_photo_name = window.location.search;
+  if (first_photo_name) {
+    first_photo_name = decodeURIComponent(first_photo_name.substring(1))
   } else {
-    page_name = 'invalid'
+    first_photo_name = 'invalid'
   }
-  var photo_urls = [encodeURI('photos/' + page_name + '.jpg')];
   for (var i = 0; i < pages.length; i++) {
     var list = pages[i];
-    var cmp_name = list[0].replace(/ /g, '-');
-    if (cmp_name == page_name) {
-      page_name = list[0];
-      var base_name = page_name;
-      photo_urls = [];
-      for (var j = 1; j < list.length; j++) {
-        var photo_name = String(list[j]);
-        if (!/^figures\//.test(photo_name)) {
-          var comma_pos = photo_name.search(',');
-          if (comma_pos == -1) {
-            photo_name = base_name + ',' + photo_name;
-          } else {
-            base_name = photo_name.substring(0, comma_pos);
-          }
-          if (photo_name.search('/') == -1) {
-            photo_name = 'photos/' + photo_name;
-          }
-          if (photo_name.search(/.jpg$/) == -1) {
-            photo_name =  photo_name + '.jpg';
-          }
+    var page_name = list[0];
+    var base_name = list[0];
+    var photo_urls = [];
+    var match_idx = 0;
+    for (var j = 1; j < list.length; j++) {
+      var photo_name = String(list[j]);
+      if (!photo_name.startsWith('figures/')) {
+        var comma_pos = photo_name.search(',');
+        if (comma_pos == -1) {
+          photo_name = base_name + ',' + photo_name;
+        } else {
+          base_name = photo_name.substring(0, comma_pos);
         }
-        photo_urls.push(encodeURI(photo_name));
+        if (photo_name.search('/') == -1) {
+          photo_name = 'photos/' + photo_name;
+        }
+        if (!photo_name.endsWith('.jpg')) {
+          photo_name =  photo_name + '.jpg';
+        }
       }
+      photo_urls.push(photo_name);
+      if (first_photo_name == photo_name) {
+        match_idx = j;
+      }
+    }
+    if (match_idx) {
       break;
     }
+  }
+  if (i == pages.length) {
+    page_name = first_photo_name;
+    photo_urls = [first_photo_name];
+    match_idx = 1;
   }
   document.title = 'gallery - ' + page_name;
   for (var i = 0; i < photo_urls.length; i++) {
@@ -59,18 +66,7 @@ function main() {
   win_y = window.innerHeight;
   window.addEventListener('resize', fn_resize);
   window.addEventListener('keydown', fn_gallery_keydown);
-  var i = 0;
-  if (window.location.hash) {
-    var hash_i = parseInt(window.location.hash.substring(1));
-    if (hash_i) {
-      i = hash_i - 1;
-      if (i < 1) {
-        i = 0;
-      } else if (i >= obj_photos.length) {
-        i = obj_photos.length - 1;
-      }
-    }
-  }
+  i = match_idx - 1;
   if (history.state) {
     obj_photos[i].fit = history.state.fit;
     obj_photos[i].img_x = history.state.img_x;
@@ -270,8 +266,10 @@ function fn_wheel(event) {
 function Photo(i, url_full) {
   this.i = i;
   this.url_full = url_full;
-  this.url_thumb = url_full.replace(/^photos\/|^figures\//, 'thumbs/')
   this.is_svg = /\.svg$/.test(url_full);
+  if (!this.is_svg) {
+    this.url_thumb = url_full.replace(/^photos\/|^figures\//, 'thumbs/')
+  }
   this.active_thumb = false;
   this.active_full = false;
   this.done_thumb = null;
@@ -304,14 +302,14 @@ Photo.prototype.open_photo = function() {
       this.e_thumb.setAttribute('draggable', 'false');
       this.e_thumb.addEventListener('load', this.fn_img_result.bind(this));
       this.e_thumb.addEventListener('error', this.fn_img_result.bind(this));
-      this.e_thumb.src = this.url_thumb;
+      this.e_thumb.src = encodeURI(this.url_thumb);
     }
     this.e_full = document.createElement('img');
     this.e_full.className = 'gallery-photo';
     this.e_full.setAttribute('draggable', 'false');
     this.e_full.addEventListener('load', this.fn_img_result.bind(this));
     this.e_full.addEventListener('error', this.fn_img_result.bind(this));
-    this.e_full.src = this.url_full;
+    this.e_full.src = encodeURI(this.url_full);
     if (this.is_svg) {
       e_spin.insertAdjacentElement('beforebegin', this.e_full);
     }
@@ -516,13 +514,7 @@ Photo.prototype.go_right = function() {
   }
 }
 Photo.prototype.save_state = function() {
-  var hash;
-  if (this.i == 0) {
-    hash = '';
-  } else {
-    hash = '#' + (this.i+1);
-  }
-  var url = window.location.pathname + window.location.search + hash;
+  var url = window.location.pathname + '?' + encodeURIComponent(this.url_full);
   var state = {
     'fit': this.fit,
     'img_x': this.img_x,
