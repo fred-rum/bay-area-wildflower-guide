@@ -3,8 +3,9 @@ family:walnut family
 x:ba
 
 ==northern california black walnut:J. hindsii
+color: other
 . leaflets 11-21, +- serrate, narrow, acuminate
-.. abaxial vein axils with hairy tufts
+.. abaxial vein axils with hairy tufts [<a href="https://www.calflora.org/entry/occdetail.html?seq_num=gp8599">example</a>]
 . nut shell thick, smooth to shallowly grooved
 
 ==eastern black walnut:J. nigra
@@ -14,7 +15,6 @@ x:ba
 . planted/waifs
 
 ==southern california walnut:J. californica
-color: other
 . leaflets 11-21, +- serrate, narrow, rounded to acute
 .. abaxial vein axils glabrous
 . nut shell thick, smooth to shallowly grooved

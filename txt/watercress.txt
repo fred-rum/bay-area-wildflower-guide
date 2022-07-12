@@ -1,3 +1,6 @@
 sci:Nasturtium officinale
+color:white
 x:hist
 family:mustard family
+
+Not to be confused with {-nasturtium}.

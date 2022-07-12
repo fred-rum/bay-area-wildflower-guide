@@ -1,0 +1,14 @@
+sci:genus Plestiodon
+x:ca
+
+Additional ID tips at <a href="http://www.californiaherps.com/identification/lizardsid/plestiodon.id.html">California Herps</a>.
+
+==western skink:P. skiltonianus
+xx:The two subspecies are nearly indistinguishable and may not even be valid.
+. adults are distinctly striped from head to tail
+. common
+
+==variegated skink:P. gilberti ssp. cancellosus
+xx:ba
+. adults are not striped or only indistinctly striped
+. rare near Mt. Diablo (and further east of the bay area)
