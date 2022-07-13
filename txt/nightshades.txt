@@ -50,9 +50,15 @@ Jepson and Stanford both list deceptive corolla widths which I have corrected ac
 
 Some features are variable within a species, but if a <b>bold feature</b> is seen, it is diagnostic.
 
+==forked nightshade:S. furcatum
+color:white
+. <b>inflorescence forked</b> into two distinct, +- balanced sections
+. corolla: 10--18 mm diameter including lobes, white w/ yellow/green spots at base
+. anthers 3--3.5 mm
+
 ==greenspot nightshade:S. douglasii
 color: white
-. corolla: 10--14 mm diameter including lobes, white, possibly tinged with lavender, w/ yellow/green/brown spots at base
+. corolla: <b>10--14 mm diameter</b> including lobes, white, possibly tinged with lavender, w/ yellow/green spots at base often tinged or surrounded by brown
 .. <b>anthers 2.5--4.0 mm</b>
 .. <b>style strongly exerted</b> beyond anthers
 . leaf: 1--9 cm, entire to coarsely irregularly <b>toothed</b>
@@ -62,8 +68,8 @@ color: white
 
 ==black nightshade:S. nigrum
 color: white
-. corolla: 10--17 mm diameter including lobes, white w/ yellow/green spots at base
-.. anthers 1.4--2.4 mm
+. corolla: <b>10--17 mm diameter</b> including lobes, white w/ yellow/green spots at base
+.. <b>anthers 1.4--2.4 mm</b>
 .. if we believe CalPhotos, style may or may not be strongly exerted beyond anthers
 . leaf: 4--7 cm, entire to coarsely wavy-toothed
 . hairs: +- spreading or curved, <b>glandular</b> and not
@@ -74,7 +80,7 @@ color: white
 ==american black nightshade:S. americanum
 color: white
 . corolla: <b>5--8 mm diameter including lobes</b> [example,2], white
-.. anthers 1.4--2.2 mm
+.. <b>anthers 1.4--2.2 mm</b>
 .. <b>style not strongly exerted</b> beyond anthers
 .. note that the style-to-anther ratio is similar in all white nightshades, but this one has longer filaments
 . leaf: 2--15 cm, entire to coarsely wavy-toothed
@@ -87,9 +93,5 @@ color: white
 . hairs: spreading, some glandular
 . fruit: +- yellow or green
 . rare
-
-==forked nightshade:S. furcatum
-forked inflorescence:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0613+0431
-. The inflorescence is forked into two distinct sections.
 
 ]

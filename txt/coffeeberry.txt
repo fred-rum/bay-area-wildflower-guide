@@ -12,6 +12,7 @@ Parasitized by {-coffeeberry midrib gall moth}.
 .. leaf base & tip acute
 
 ==hoary coffeeberry:F. californica ssp. tomentella
+color: other
 . twigs gray, tomentose
 . leaves dull green adaxially and abaxially
 .. leaf tip acute
