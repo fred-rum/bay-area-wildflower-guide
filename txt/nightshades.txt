@@ -39,27 +39,28 @@ Flower key features:
 . anther length
 . style strongly exserted or not
 
-The anthers are generally fused to form a golden longitudinally-segmented tube from which the style may or may not be exserted.
+Stanford's Jasper Ridge program has a <a href="https://web.stanford.edu/dept/JRBP/plants/PDF/Solanum%20key.pdf">key (PDF)</a> for white-flowered nightshades.  Much more information about useful and non-useful features are in a free <a href="https://phytokeys.pensoft.net/article/31738/">research article</a> by Knapp et al.
 
-Stanford's Jasper Ridge program has a <a href="https://web.stanford.edu/dept/JRBP/plants/PDF/Solanum%20key.pdf">key (PDF)</a> for white-flowered nightshades.
+The inflorescence typically has its flowers branching from a very short rhachis (axis), although occasionally they can be spaced out more.  Jepson and Stanford pretend to distinguish raceme-like and umbel-like inflorescences, but there appears to be no consistent difference.  The inflorescence is usually distinctly forked in {-forked nightshade), but other species may also rarely be forked.
 
-Jepson lists some inflorescences as being raceme-like and others as
-umbel-like, but they all look the same to me.
+Jepson and Stanford both list deceptive corolla widths which I have corrected according to my observations and Knapp.  I've copied the anther lengths from Jepson, but have not yet attempted to verify their ranges.
 
-Jepson and Stanford both list deceptive corolla widths which I have corrected according to my observations.  I've copied the anther lengths from Jepson, but have not yet attempted to verify their ranges.
-
-Some features are variable within a species, but if a <b>bold feature</b> is seen, it is diagnostic.
+The anthers are closely packed to form a golden longitudinally-segmented tube from which the style may or may not be exserted.
 
 ==forked nightshade:S. furcatum
 color:white
 . <b>inflorescence forked</b> into two distinct, +- balanced sections
-. corolla: 10--18 mm diameter including lobes, white w/ yellow/green spots at base
-. anthers 3--3.5 mm
+. corolla: 12--20 mm diameter including lobes, white w/ yellow/green spots at base
+.. anthers 2.3--3.3 mm
+.. <b>filaments distinct</b>
 
 ==greenspot nightshade:S. douglasii
 color: white
-. corolla: <b>10--14 mm diameter</b> including lobes, white, possibly tinged with lavender, w/ yellow/green spots at base often tinged or surrounded by brown
-.. <b>anthers 2.5--4.0 mm</b>
+. infloresecnce rarely forked
+.. <b>peduncle 1.5--4 cm long</b>; <b>pedicels 10--41 mm long</b>, 0.3--0.4 mm in diameter at the base and 0.4--0.6 mm in diameter at the apex
+. corolla: <b>13--15+ mm diameter</b> including lobes, white, possibly tinged with lavender, w/ yellow/green spots at base often with a brown tinge or margin
+.. <b>anthers 2.5--4.5 mm</b>
+.. <b>filaments indistinct</b>
 .. <b>style strongly exerted</b> beyond anthers
 . leaf: 1--9 cm, entire to coarsely irregularly <b>toothed</b>
 . hairs: generally simple, < 1mm, +- curved, white
@@ -68,6 +69,8 @@ color: white
 
 ==black nightshade:S. nigrum
 color: white
+. infloresecnce rarely forked
+.. <b>peduncle 0.5--1.5 cm long</b>, straight; <b>pedicels 3--5 mm long</b>, 0.2--0.3 mm in diameter at the base and 0.2--0.3 mm at the apex
 . corolla: <b>10--17 mm diameter</b> including lobes, white w/ yellow/green spots at base
 .. <b>anthers 1.4--2.4 mm</b>
 .. if we believe CalPhotos, style may or may not be strongly exerted beyond anthers
@@ -82,7 +85,8 @@ color: white
 . corolla: <b>5--8 mm diameter including lobes</b> [example,2], white
 .. <b>anthers 1.4--2.2 mm</b>
 .. <b>style not strongly exerted</b> beyond anthers
-.. note that the style-to-anther ratio is similar in all white nightshades, but this one has longer filaments
+.. note that the style-to-anther ratio listed in Jepson is similar in all white nightshades, but this one has longer filaments
+. infloresence typically umbel-like, but rarely highly branched
 . leaf: 2--15 cm, entire to coarsely wavy-toothed
 . hairs: +- 0 or short, +- appressed or curved, nonglandular
 . fruit: <b>glossy</b> w/ <b>sepals reflexed</b>

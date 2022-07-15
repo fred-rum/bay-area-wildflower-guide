@@ -1055,9 +1055,6 @@ butterflies to variable checkerspot,6).
 
 Reduce console logging from Javascript.
 
-Can "[show details]" be implemented with the <details> HTML tag?
-https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details
-
 Make a check that a page at a specified rank is present if it has descendents.
 I.e. if a page defaults to flowering plants, it must have a family.  E.g.
 require_rank: family
@@ -1289,3 +1286,14 @@ should headings be a different color for keys, parents, unobserved taxons?
 
 species Solanum nigrum accidentally picks up the taxon_id of
   complex Solanum nigrum
+
+In addition to converting '--' to dash, also convert '[digit]-[digit]'.
+
+Change files.py from 'search requires Javascript' to '[...] JavaScript'.
+
+Can "[show details]" be implemented with the <details> HTML tag?
+  https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details
+
+Support "personal notes", created with "note:[...]".
+  highlight these so that they stand out for any relevent taxon
+    (and child taxons?)
