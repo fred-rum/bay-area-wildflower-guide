@@ -1287,8 +1287,6 @@ should headings be a different color for keys, parents, unobserved taxons?
 species Solanum nigrum accidentally picks up the taxon_id of
   complex Solanum nigrum
 
-In addition to converting '--' to dash, also convert '[digit]-[digit]'.
-
 Support "personal notes", created with "note:[...]".
   highlight these so that they stand out for any relevent taxon
     (and child taxons?)

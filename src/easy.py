@@ -12,6 +12,7 @@ _repl_easy_dict = {
     '>=' : '&ge;',
     '<<' : '&#8810;',
     '>>' : '&#8811;',
+
     '< ' : '&lt; ',
 
     "'"  : '&rsquo;',
@@ -32,6 +33,11 @@ def easy_sub_safe(txt):
     # of text.  If I try to do something similar for single-quotes,
     # I could use the wrong smart quote for something like the '80s.
     txt = re.sub(r'(?<![\w.,])"|\A"', r'&ldquo;', txt)
+
+    # Replace a hyphen between two numbers (digits) with an en-dash (like --).
+    txt = re.sub(r'(\d)-(\d)', r'\1&ndash;\2', txt)
+
+    # Perform all the easy substitutions from _repl_easy_dict.
     txt = _repl_easy_regex.sub(repl_easy, txt)
     return txt
 
