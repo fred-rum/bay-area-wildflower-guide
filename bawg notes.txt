@@ -1287,6 +1287,3 @@ should headings be a different color for keys, parents, unobserved taxons?
 Support "personal notes", created with "note:[...]".
   highlight these so that they stand out for any relevent taxon
     (and child taxons?)
-
-order photos.js primarily by alphabetical order
-  so that changing observation counts don't change the file

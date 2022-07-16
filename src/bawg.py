@@ -756,7 +756,7 @@ with open(photos_file, 'w', encoding='utf-8') as w:
 
     # The sort order here is arbirtary as long as it is consistent.
     # We sort in the same order as pages.js for convenience of comparing them.
-    for page in sort_pages(page_array, with_depth=True):
+    for page in sort_pages(page_array, with_count=False):
         # Each page that links to full-sized photos gets an entry.
         # Pages without photos are not included in the list.
         if (not page.photo_dict):
@@ -766,7 +766,7 @@ with open(photos_file, 'w', encoding='utf-8') as w:
         #
         # The page name is a user visible name, so instead of taking the
         #   page.name (which must be unique), we take either the common
-        #   or scientific name.
+        #   or scientific name (which might not be unique).
         #
         # The photo URLs are compressed to save space:
         #   The 'photos/' prefix and '.jpg' suffix are dropped.
@@ -783,8 +783,6 @@ with open(photos_file, 'w', encoding='utf-8') as w:
         if page.com:
             name = page.com
         else:
-            # If the page has no common name (only a scientific name),
-            # then the h1 header should be italicized and elaborated.
             name = page.elab
         w.write(f'["{name}",')
         photos = []

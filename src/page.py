@@ -97,7 +97,8 @@ def init_props():
 def get_default_ancestor():
     return default_ancestor
 
-def sort_pages(page_set, trait=None, value=None, with_depth=False):
+def sort_pages(page_set, trait=None, value=None,
+               with_depth=False, with_count=True):
     # helper function to sort by name
     def by_name(page):
         if page.com:
@@ -144,7 +145,8 @@ def sort_pages(page_set, trait=None, value=None, with_depth=False):
         page_list.sort(key=by_depth)
 
     # Sort by observation count, from most to least.
-    page_list.sort(key=count_flowers_helper, reverse=True)
+    if with_count:
+        page_list.sort(key=count_flowers_helper, reverse=True)
 
     return page_list
 
