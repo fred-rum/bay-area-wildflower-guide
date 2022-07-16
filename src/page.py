@@ -749,10 +749,10 @@ class Page:
         self.set_name()
 
     def format_com(self):
-        com = self.com
-        if not com:
+        if self.com:
+            return easy_sub_safe(self.com)
+        else:
             return None
-        return easy_sub_safe(com)
 
     def format_elab(self, ital=True):
         return format_elab(self.elab, ital)
@@ -1119,6 +1119,8 @@ class Page:
     def set_taxon_id(self, taxon_id):
         if taxon_id in taxon_id_page and taxon_id_page[taxon_id] != self:
             fatal(f'taxon_id {taxon_id} used for both {taxon_id_page[taxon_id].full()} and {self.full()}')
+        if self.taxon_id and taxon_id != self.taxon_id:
+            fatal(f'taxon_id {taxon_id} applied to {self.full()}, but it already has taxon_id {self.taxon_id}')
 
         self.taxon_id = taxon_id
         taxon_id_page[taxon_id] = self

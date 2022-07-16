@@ -230,7 +230,12 @@ def find_page2(com, elab, from_inat=False, taxon_id=None):
     # Update (if appropriate) any names that are new or different.
     if page:
         if taxon_id:
-            page.set_taxon_id(taxon_id)
+            if page.taxon_id and page.taxon_id != taxon_id:
+                # The page has a taxon_id that doesn't match the expected
+                # one, so it doesn't really match after all.
+                return None
+            else:
+                page.set_taxon_id(taxon_id)
         if elab:
             page.set_sci(elab, from_inat=from_inat)
         if com:

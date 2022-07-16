@@ -1284,9 +1284,9 @@ allow individual images to be annoted with a brightness value
 
 should headings be a different color for keys, parents, unobserved taxons?
 
-species Solanum nigrum accidentally picks up the taxon_id of
-  complex Solanum nigrum
-
 Support "personal notes", created with "note:[...]".
   highlight these so that they stand out for any relevent taxon
     (and child taxons?)
+
+order photos.js primarily by alphabetical order
+  so that changing observation counts don't change the file

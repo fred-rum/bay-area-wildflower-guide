@@ -290,6 +290,8 @@ def read_obs_chains(f):
         # convention.
         if com:
             com = com.lower()
+        else:
+            com = None
 
         found_lowest_level = False
         try:
@@ -332,7 +334,7 @@ def read_obs_chains(f):
                     # if find_page2() didn't find a match, create a shadow
                     # page for the taxon.
                     if not page:
-                        if group != orig_sci and ' ' not in sci:
+                        if group != orig_sci:
                             # We have to create a page for a taxon of unknown
                             # rank.  On the assumption that the observation
                             # will get promoted to a higher-level taxon, we
@@ -361,7 +363,10 @@ def read_obs_chains(f):
 
                 found_lowest_level = True
         except FatalError:
-            warn(f'was creating taxonomic chain from {page.full()}')
+            if page:
+                warn(f'was creating taxonomic chain from {page.full()}')
+            else:
+                warn(f'was initializing taxonomic chain for {com}:{sci}')
             raise
 
 read_data_file('observations.csv', read_obs_chains,
@@ -514,13 +519,6 @@ def read_observation_data(f):
         # A Linnaean page should have been created during the first path
         # through observations.csv, so it'd be weird if we can't find it.
         assert page
-
-        if page:
-            taxon_id = get_field('taxon_id')
-            if taxon_id:
-                page.taxon_id = taxon_id
-            else:
-                error(f'no taxon_id for {page.full()}')
 
         if loc != 'bay area':
             # If the location is outside the bay area, properties may
