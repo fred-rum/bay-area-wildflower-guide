@@ -105,6 +105,9 @@ class Obs:
 
         w.write('<p>\n')
 
+        if n:
+            w.write('<details>\n<summary>\n')
+
         if link:
             w.write(f'<a href="{link}" target="_blank" rel="noopener noreferrer">Chris&rsquo;s observations</a>: ')
         else:
@@ -129,10 +132,8 @@ class Obs:
 
         if n:
             w.write('''
-<span class="toggle-details" onclick="fn_details(event)" onkeydown="fn_details_keydown(event)" tabindex="0" role="button" aria-expanded="false">[show details]</span>
-</p>
-<div id="details">
-Locations:
+</summary>
+<p>Locations:</p>
 <ul>
 ''')
             park_list = sorted(self.parks)
@@ -146,27 +147,7 @@ Locations:
                 else:
                     w.write(f'<li>{park}: {count}</li>\n')
 
-            w.write('</ul>\nMonths:\n<ul>\n')
-
-            # break_month = None
-            # for i in range(12):
-            #     weight = 0
-            #     for j in range(12):
-            #         factor = abs((i+5.5-j) % 12 - 6)
-            #         weight += self.month[j] / factor
-            #     if i == 0: # bias toward January unless there's a clear winner
-            #         weight /= 1
-            #     if break_month is None or weight < break_weight:
-            #         break_month = i
-            #         break_weight = weight
-
-            # first = None
-            # for i in range(12):
-            #     m = (i + break_month) % 12
-            #     if self.month[m]:
-            #         if first is None:
-            #             first = i
-            #         last = i
+            w.write('</ul>\n<p>Months:</p>\n<ul>\n')
 
             # Search for the longest run of zeros in the month data.
             z_first = 0
@@ -189,6 +170,6 @@ Locations:
             for i in range(12 - z_length):
                 m = (i + z_first + z_length) % 12
                 w.write(f'<li>{month_name[m]}: {self.month[m]}</li>\n')
-            w.write('</ul>\n</div>\n')
+            w.write('</ul>\n</details>\n')
         else:
             w.write('\n</p>\n')

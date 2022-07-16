@@ -452,17 +452,17 @@ a.enclosed {
     border-bottom: none;   /* prevent underline for glossary links */
 }
 
-/* Observation details can be toggled by cliking on unobtrusive text
-   using this class. */
-span.toggle-details {
+/* Observation details can be toggled by clicking on the "twisty" triangle
+   or anywhere else in the line, but this isn't obvious to the user.
+   Show something more obviously clickable. */
+details > summary::after {
     color: #888;
+    content: "[show details]";
     text-decoration: underline;
     cursor: pointer;
 }
-/* By default, observation details are hidden.  Javascript toggles this
-   based on user interaction. */
-div#details {
-    display: none;
+details[open] > summary::after {
+    content: "[hide details]";
 }
 
 /* leaf-thumb is used for each of the thumbnails shown on a leaf node (where

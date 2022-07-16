@@ -189,7 +189,7 @@ def write_header(w, title, h1, nospace=False, desc=None, at_root=False):
 <a id="home-icon" tabindex="0" href="{path}index.html"><img src="{path}icons/home.png" alt="home"></a>
 <div id="search-container">
 <input type="search" id="search" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="flower or glossary term" aria-label="search for a flower or glossary term" autofocus>
-<noscript><input type="search" value="search requires Javascript"disabled></noscript>
+<noscript><input type="search" value="search requires JavaScript"disabled></noscript>
 <div id="autocomplete-box"></div>
 </div>
 <div id="body">

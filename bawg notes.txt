@@ -1289,11 +1289,6 @@ species Solanum nigrum accidentally picks up the taxon_id of
 
 In addition to converting '--' to dash, also convert '[digit]-[digit]'.
 
-Change files.py from 'search requires Javascript' to '[...] JavaScript'.
-
-Can "[show details]" be implemented with the <details> HTML tag?
-  https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details
-
 Support "personal notes", created with "note:[...]".
   highlight these so that they stand out for any relevent taxon
     (and child taxons?)

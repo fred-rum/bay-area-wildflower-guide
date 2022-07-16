@@ -218,13 +218,14 @@ a.enclosed {
     text-decoration: none;
     border-bottom: none;
 }
-span.toggle-details {
+details > summary::after {
     color: #888;
+    content: "[show details]";
     text-decoration: underline;
     cursor: pointer;
 }
-div#details {
-    display: none;
+details[open] > summary::after {
+    content: "[hide details]";
 }
 img.leaf-thumb {
     height: 40vmin;
