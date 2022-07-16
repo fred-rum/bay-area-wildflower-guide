@@ -927,6 +927,7 @@ var pages=[
 ["west coast lady",1],
 ["woodland woollythreads",1,2,6],
 ["haircap mosses",3,6],
+["milk snail",2],
 ["Exobasidium vaccinii-uliginosi",1],
 ["bristle flies",1,3],
 ["camphor tree",1,2,3,4,5,6,9],

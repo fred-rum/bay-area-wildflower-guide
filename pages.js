@@ -1507,6 +1507,7 @@ var pages=[
 {page:"bats",sci:["order Chiroptera"],x:"f"},
 {page:"Fuligo leviderma",x:"u"},
 {page:"haircap mosses",sci:["genus Polytrichum"],x:"o"},
+{page:"milk snail",sci:["Otala lactea"],x:"o"},
 {page:"virginia opossum",sci:["Didelphis virginiana"],x:"u"},
 {page:"american badger",sci:["Taxidea taxus"],x:"u"},
 {page:"american beaver",sci:["Castor canadensis"],x:"u"},
