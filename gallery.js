@@ -12,6 +12,9 @@ var spin_timestamp = performance.now();
 var spin_offset = 0;
 var touches = [];
 var click_target;
+var click_x;
+var click_y;
+var click_time;
 var orig_pinch;
 var win_x, win_y;
 function main() {
@@ -151,6 +154,9 @@ function fn_pointerdown(event) {
   touches.push(touch);
   if (touches.length == 1) {
     click_target = event.target;
+    click_x = touches[0].x;
+    click_y = touches[0].y;
+    click_time = performance.now();
   } else {
     click_target = null;
   }
@@ -180,7 +186,9 @@ function fn_pointercancel(event) {
 function fn_pointerup(event) {
   var touch = copy_touch(event);
   orig_pinch = undefined;
-  if (obj_photo && click_target && discard_touch(touch)) {
+  const max_click_time = 300;
+  if (obj_photo && click_target && discard_touch(touch) &&
+      (performance.now() - click_time <= max_click_time)) {
     if (click_target == e_ui_l) {
       obj_photo.go_left();
     } else if (click_target == e_ui_r) {
@@ -239,7 +247,12 @@ function fn_pointermove(event) {
       (touches[i].y == touch.y)) {
     return;
   }
-  click_target = null;
+  const diff_x = touches[i].x - click_x;
+  const diff_y = touches[i].y - click_y;
+  const max_click_move = 10;
+  if (diff_x * diff_x + diff_y * diff_y > max_click_move * max_click_move) {
+    click_target = null;
+  }
   var old_pinch = measure_pinch();
   touches[i] = touch;
   if (obj_photo) {
@@ -278,8 +291,8 @@ function Photo(i, url_full) {
 Photo.prototype.init_photo = function() {
   this.fit = true;
   this.img_x = null;
-  this.cx = null;
-  this.cy = null;
+  this.cx = 0.5;
+  this.cy = 0.5;
   this.open_photo();
   save_state();
 }
@@ -400,6 +413,8 @@ Photo.prototype.click = function(touch) {
     this.zoom_to(this, this.photo_x, touch, touch);
   } else {
     this.fit = true;
+    this.cx = 0.5;
+    this.cy = 0.5;
     this.redraw_photo();
   }
   return true;
@@ -433,7 +448,9 @@ Photo.prototype.constrain_pos = function() {
   }
 }
 Photo.prototype.zoom_to = function(orig, new_width, old_pos, new_pos) {
-  this.fit = false;
+  if (new_width != this.img_x) {
+    this.fit = false;
+  }
   var img_x = this.img_x;
   var img_y = this.img_y();
   var img_x0 = (win_x / 2) - (img_x * orig.cx);
@@ -530,8 +547,6 @@ Photo.prototype.redraw_photo = function() {
   save_state();
   if (this.fit) {
     this.img_x = this.fit_width();
-    this.cx = 0.5;
-    this.cy = 0.5;
   }
   var img_x = this.img_x;
   var img_y = this.img_y();

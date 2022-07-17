@@ -53,6 +53,9 @@ var touches = [];
    If anything interrupts the click (e.g. pointer movement or extra touches),
    we reset click_target to null. */
 var click_target;
+var click_x;
+var click_y;
+var click_time;
 
 /* orig_pinch remembers data about how the current multi-touch started.
    Movements of the touch points can be compared against this original. */
@@ -285,6 +288,9 @@ function fn_pointerdown(event) {
 
   if (touches.length == 1) {
     click_target = event.target;
+    click_x = touches[0].x;
+    click_y = touches[0].y;
+    click_time = performance.now();
   } else {
     click_target = null;
   }
@@ -341,8 +347,10 @@ function fn_pointerup(event) {
      the mouse moved, and the second-long pause is a UX nightmare.
 
      So we handle the click ourselves as a degenerate case of pointer up
-     followed by pointer down with no pointermove in between. */
-  if (obj_photo && click_target && discard_touch(touch)) {
+     followed by pointer down with minimal time and movement in between. */
+  const max_click_time = 300; // ms
+  if (obj_photo && click_target && discard_touch(touch) &&
+      (performance.now() - click_time <= max_click_time)) {
     /* There was a single click with no drag while the gallery is open. */
     console.log('click on', click_target);
 
@@ -445,14 +453,18 @@ function fn_pointermove(event) {
 
   if ((touches[i].x == touch.x) &&
       (touches[i].y == touch.y)) {
-    /* Android likes to activate pointermove even when no movement occurred.
-       Don't waste time processing it, and particularly don't let it
-       disrupt click detection. */
+    /* Android likes to activate pointermove even when no measurable
+       movement occurred.  Don't waste time processing it. */
     return;
   }
 
   /* A touching pointer moved. */
-  click_target = null;
+  const diff_x = touches[i].x - click_x;
+  const diff_y = touches[i].y - click_y;
+  const max_click_move = 10;
+  if (diff_x * diff_x + diff_y * diff_y > max_click_move * max_click_move) {
+    click_target = null;
+  }
 
   var old_pinch = measure_pinch();
 
@@ -524,10 +536,21 @@ function Photo(i, url_full) {
 }
 
 Photo.prototype.init_photo = function() {
+  /* fit indicates whether the image size matches the window size */
   this.fit = true;
+
+  /* img_x indicates the pixel width of the image.
+     img_y is implied by img_x and the image's native aspect ratio. */
   this.img_x = null; /* doesn't matter when fit = true */
-  this.cx = null;
-  this.cy = null;
+
+  /* cx,cy indicates which part of the photo is centered on the window.
+     The units of cx,cy are the fraction of the photo/image dimensions.
+     The user can change these values by dragging the image while 'fit'
+     remains 'true'.  I judge this to be slightly preferable from a UX
+     perspective, but it also means that a bit of accidental drag while
+     clicking doesn't change the click-to-zoom behavior. */
+  this.cx = 0.5;
+  this.cy = 0.5;
 
   this.open_photo();
 
@@ -767,6 +790,8 @@ Photo.prototype.click = function(touch) {
   } else {
     /* For all other zoom levels, zoom to fit. */
     this.fit = true;
+    this.cx = 0.5;
+    this.cy = 0.5;
     this.redraw_photo();
   }
   return true; /* the click has been handled */
@@ -825,7 +850,9 @@ Photo.prototype.constrain_pos = function() {
    - old_pos and new_pos can be a touch object or pinch distance object.
 */
 Photo.prototype.zoom_to = function(orig, new_width, old_pos, new_pos) {
-  this.fit = false;
+  if (new_width != this.img_x) {
+    this.fit = false;
+  }
 
   /* Find the part of the image under old_pos, as a fraction of the image
      dimensions.  Typically this would be between 0-1, but is outside that
@@ -975,11 +1002,6 @@ Photo.prototype.redraw_photo = function() {
 
   if (this.fit) {
     this.img_x = this.fit_width();
-
-    /* cx,cy determine which part of the photo is centered on the window.
-       The units of cx,cy are the fraction of the photo/image dimensions. */
-    this.cx = 0.5;
-    this.cy = 0.5;
   }
 
   var img_x = this.img_x;

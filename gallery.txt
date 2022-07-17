@@ -1,9 +1,5 @@
 add 'tab' to go to next image, 'shift-tab' to go to previous
 
-allow a 'click' to have a small amount of pointer movement
-  as long as it stays within the original element
-  event.target.setPointerCapture(...) may be useful
-
 support text with photo
 
 remove zoom restriction
