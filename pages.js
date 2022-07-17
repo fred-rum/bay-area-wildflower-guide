@@ -747,7 +747,7 @@ var pages=[
 {page:"bald eagle",sci:["Haliaeetus leucocephalus"],x:"o"},
 {page:"bee flies",sci:["family Bombyliidae"],x:"k"},
 {page:"blow flies",sci:["family Calliphoridae"],x:"f"},
-{page:"buckthorns",sci:["genus Rhamnus"],x:"f"},
+{page:"buckthorns",sci:["genus Rhamnus"],x:"k"},
 {page:"california king snake",sci:["Lampropeltis californiae"],x:"o"},
 {page:"california milkwort",sci:["Rhinotropis californica","Polygala californica"],x:"o"},
 {page:"coastal woodfern",sci:["Dryopteris arguta"],x:"o"},

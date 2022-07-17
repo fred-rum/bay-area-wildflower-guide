@@ -1229,7 +1229,6 @@ is entirely overwritten (e.g. the filename is ignored in favor of com:
 and sci:).  And it doesn't make the code any more robust than
 currently.
 
-key to buckthorns
 fix glossary for gall insects (allow multiple?)
 
 when using Javascript search, if search string has an exact match including
@@ -1248,27 +1247,13 @@ flag pages with an automatic parent (i.e. placed in flowering plants)
   on the other hand, families from observations will also know their
     flowering plant ancestor, and any others are easy enough to declare
 
-include the image gallery Javascript on the HTML page that has the thumbnails
-  if Javascript is disabled, link each thumbnail directly to its image
-    and put copyrights/attributions below the images
-      e.g. photos #1 and #3 CC0 by Ren & Stimpy
-      or put the copyright/attribution text in place of the thumbnail image
-        (which is ugly, but JavaScript is heavily encouraged for the BAWG)
-  if Javascript is enabled, clicking any thumbnail opens the gallery
-    small thumbnails are presented on the left or bottom,
-      depending on the screen width vs. height
-    the clicked image fills the rest of the screen
-    clicking a different thumbnail replaces the main image
-    if there are many thumbnails, they can be scrolled by dragging
-      this needs something to indicate that it is possible,
-        e.g. arrows at the ends
-    by default an image is zoomed to fit the available area
-      tapping an image changes it to 1:1 magnification
-      pinching an image zooms in or out
-    if the user hits the back button, or presses escape, or taps a blank area,
-      the view returns to the original HTML page
-    where needed, attributions are displayed for an image
-      as black text on a translucent background over the bottom of the image
+Allow the photo gallery to display attributions or other text
+  as black text on a translucent background over the bottom of the image
+    (i) icon in lower left allows text to be hidden or re-displayed?
+if Javascript is disabled, put copyrights/attributions below the images
+  e.g. photos #1 and #3 CC0 by Ren & Stimpy
+  or put the copyright/attribution text in place of the thumbnail image
+    (which is ugly, but JavaScript is heavily encouraged for the BAWG)
 
 get the common name from iNaturalist's API if the taxon is not directly observed
   this is useful for automatically constructing ancestor pages

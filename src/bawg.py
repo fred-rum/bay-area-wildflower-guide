@@ -781,9 +781,9 @@ with open(photos_file, 'w', encoding='utf-8') as w:
         #   What remains is often simply a list of photo suffixes,
         #     e.g. 1,3,7
         if page.com:
-            name = page.com
+            name = unidecode(page.com)
         else:
-            name = page.elab
+            name = unidecode(page.elab)
         w.write(f'["{name}",')
         photos = []
         recent_name = name

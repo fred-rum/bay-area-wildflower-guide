@@ -1,9 +1,24 @@
 sci:Rhamnus spp.
-
-==hollyleaf redberry:R. ilicifolia
-color:yellow
+x:ba
 
 ==redberry buckthorn:R. crocea
 color:other
+. 4 sepals
+. red fruit
+. <b>leaf blade 10-15 mm</b>
+.. flat
+. branches spreading
+
+==hollyleaf redberry:R. ilicifolia
+color:yellow
+. 4 sepals
+. red fruit
+. <b>leaf blade 20-40 mm</b>
+.. flat or concave abaxially (curled around the axis)
+. branches generally ascending
 
 ==mediterranean buckthorn:R. alaternus
+. <b>5 sepals</b>
+. <b>black fruit</b>
+. leaf blade 20-60 mm
+. found only in cultivated or once-cultivated settings
