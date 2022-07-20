@@ -10,7 +10,7 @@ A single flower head in the sunflower family is actually a tight inflorescence o
 {disk flower,disk flowers} A flower in the central portion of a head in the sunflower family.  Usually radial and 5-lobed, usually bisexual but sometimes staminate.  Often surrounded by ray flowers.
 {head,heads,flower head,flower heads} A tight inflorescence in the sunflower family which appears from a distance to be a single flower.
 {involucre,involucres} The green base of a flower head in the sunflower family.
-{ligule,ligules,ligulate flower,ligulate flowers} A ray-like flower that is clustered only with other ligules to form a head in the sunflower family (i.e. one without disk flowers).
+{ligule,ligules,ligulate flower,ligulate flowers} A ray-like flower that is clustered only with other ligules in a liguliflorous head.  Each ligule is tipped with 5 short lobes.
 {palea (paleae),paleate} A scale-like bract for an individual flower in some genera.
 {pappus,pappuses,pappi} A modified calyx composed of some combination of scales, none#awns, and/or bristles.  In some species, the pappus forms a parachute for seed dispersal.
 {pappus element,pappus elements} A modified sepal; one part among similar parts that make up the pappus.
@@ -22,6 +22,7 @@ A single flower head in the sunflower family is actually a tight inflorescence o
 
 {discoid head,discoid} Head composed exclusively of disk flowers.
 {radiate head,radiate} Head composed of both disk flowers and ray flowers.
+{liguliflorous head,liguliflorous} Head composed only of ligulate flowers.
 
 <h2>Inflorescence shapes</h2>
 

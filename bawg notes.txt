@@ -71,11 +71,6 @@ colors?  It could come in handy, e.g. for a genus that is always the
 same color.  But it would also make it easy to be sloppy and not
 verify the correct color of everything.)
 
-For HTML files, use the scientific name instead of the common name if
-possible?  This reduces churn when common names change, but it makes
-it harder to find the corresponding txt file.  In any case, common
-names don't change often, and scientific names can change, too.
-
 For a line that begins with '[', include an automatic h3 or lower
 format on the remainder of the text line.  Use increasing header
 numbers based on the bracket depth.  Line breaks remain <br/>.
@@ -309,12 +304,6 @@ listed with color 'other' even if doesn't appear on the list page.
 Format glossary ToC better so that it is clearly a part of the
 "Glossary table of contents", especially when "plant glossary" is the
 current glossary and thus bold and not linked.
-
-Instead of using index numbers as temporary child IDs, use the
-scientific name (if available) or the common name.  These are
-guaranteed to find the correct page later unless there is an error
-elsewhere.  (Except that I might not know scientific names until
-later.  Hm.)
 
 To speed Javascript or CSS editing, allow a parameter to bawg.py to
 reference src/search.js and src/bawg.css directly.  (But what about
@@ -1110,10 +1099,6 @@ flag pages without parents that aren't marked is_top (see below item...)
 
 assume is_top automatically if it has a scientific rank above flowers
 
-Use 'ancestor:family ...' or 'member:family ...' instead of 'family:
-...'.  Easier to grep for ancestors of any rank, and allows common
-names or unrecognized ranks for ancestors.
-
 instead of using default_ancestor, manually add 'ancestor:flowering
 plants' to any flowers without an observations.csv entry, and use a
 property to find unlinked pages.  But... properties can't propagate to
@@ -1247,14 +1232,6 @@ flag pages with an automatic parent (i.e. placed in flowering plants)
   on the other hand, families from observations will also know their
     flowering plant ancestor, and any others are easy enough to declare
 
-Allow the photo gallery to display attributions or other text
-  as black text on a translucent background over the bottom of the image
-    (i) icon in lower left allows text to be hidden or re-displayed?
-if Javascript is disabled, put copyrights/attributions below the images
-  e.g. photos #1 and #3 CC0 by Ren & Stimpy
-  or put the copyright/attribution text in place of the thumbnail image
-    (which is ugly, but JavaScript is heavily encouraged for the BAWG)
-
 get the common name from iNaturalist's API if the taxon is not directly observed
   this is useful for automatically constructing ancestor pages
 add 'do member_name: genus, species' in life.txt
@@ -1272,3 +1249,5 @@ should headings be a different color for keys, parents, unobserved taxons?
 Support "personal notes", created with "note:[...]".
   highlight these so that they stand out for any relevent taxon
     (and child taxons?)
+
+I probably need a method for proper citations, e.g. in case of link rot.

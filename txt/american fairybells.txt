@@ -7,10 +7,12 @@ perianth parts 6, in 2 whorls, petal-like
 color: other
 . leaf margin hairs many, short, sharp, ascending, blade abaxially minute-scabrous, especially on veins [very hard to see]
 . <b>perianth parts 8--18 mm, +- spreading at middle</b>
-. <b>anthers generally exserted</b>
+.. <b>anthers generally exserted</b>
+. fruit red, spheric [but may be orange and/or ovoid?]
 
 ==largeflower fairybells:P. smithii
 color:white
 . leaf margin hairs 0 or long, spreading, generally falling in age, blade abaxially glabrous or sparsely hairy
 . <b>perianth parts 15--28 mm, spreading at tip</b>
-. <b>anthers included</b>
+.. <b>anthers included</b>
+. fruit orange, ovoid

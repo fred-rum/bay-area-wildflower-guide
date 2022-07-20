@@ -32,3 +32,5 @@ x:any
 ==conifer chicken of the woods:Laetiporus conifericola
 x:more
 ]
+
+==genus Phaeolus

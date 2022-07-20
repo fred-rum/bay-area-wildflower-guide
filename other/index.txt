@@ -12,10 +12,10 @@ Use the search bar to look up any flower, or start at the top:
 <div id="cache-online" style="display:none;"><img src="icons/online.svg" class="green-img" alt=""><span class="cache-text">The Guide is getting its files from the web.  Save a local offline copy of the files to be able to view the guide without internet access.</span></div>
 <div id="cache-green" style="display:none;"><img src="icons/check.svg" class="green-img" alt=""><span class="cache-text">The Guide is now using its local offline copy.  Check back occasionally for updates.</span></div>
 <div id="cache-yellow" style="display:none;"><img src="icons/hazard.svg" class="hazard-img" alt=""><span class="cache-text">The Guide is now using its local offline copy.  <b>An update is available</b> whenever you are ready.</span></div>
-<div id="red-missing" style="display:none;"><img src="icons/hazard.svg" class="hazard-img" alt=""><span class="cache-text">Some files have gone missing from your offline copy.  Update your offline files.</span></div>
+<div id="red-missing" style="display:none;"><img src="icons/hazard.svg" class="hazard-img" alt=""><span class="cache-text">Some files have gone missing from your local offline copy.  Update your local files.</span></div>
 
 The Guide works great on a smartphone, but it works even better when
-it doesn't need internet access.  To save its files for offline
+it doesn't need internet access.  To save its files for local offline
 access, click the shiny green button below.<noscript>  <b>(Requires
 JavaScript.)</b></noscript>  This feature uses experimental browser
 technology (2018+).  <b>Check my browser notes for
@@ -23,8 +23,8 @@ technology (2018+).  <b>Check my browser notes for
 <a href="safari.html">Safari</a>, and
 <a href="firefox.html">Firefox</a>.</b>
 
-<div id="update" class="update-disable" tabindex="0" role="button">Save Offline Files</div><div id="progress"></div><div id="status">&nbsp;</div><div id="err-status"></div>
-<div id="clear" class="clear-disable" tabindex="0" role="button">Delete Offline Files</div><div id="usage"></div><div id="extra"></div>
+<div id="update" class="update-disable" tabindex="0" role="button">Save Files Locally</div><div id="progress"></div><div id="status">&nbsp;</div><div id="err-status"></div>
+<div id="clear" class="clear-disable" tabindex="0" role="button">Delete Local Files</div><div id="usage"></div><div id="extra"></div>
 
 <h2>Usage Guide</h2>
 

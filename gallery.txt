@@ -1,9 +1,20 @@
-add 'tab' to go to next image, 'shift-tab' to go to previous
+display attributions or other text
+  as black text on a translucent background over the bottom of the image
+    (i) icon in lower left allows text to be hidden or re-displayed?
+    add a key binding to show/hide the text, e.g. 'i'.
+if Javascript is disabled, put copyrights/attributions below the images
+  e.g. photos #1 and #3 CC0 by Ren & Stimpy
+  or put the copyright/attribution text in place of the thumbnail image
+    (which is ugly, but JavaScript is heavily encouraged for the BAWG)
 
 support text with photo
 
+add 'tab' to go to next image, 'shift-tab' to go to previous
+  or would that interfere with keyboard navigation in/around the text?
+
 remove zoom restriction
   can I test pinch with zoom?
+  e.g. within the text area
 
 
 optional:

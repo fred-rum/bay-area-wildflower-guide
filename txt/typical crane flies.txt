@@ -2,5 +2,5 @@ sci:superfamily Tipuloidea
 
 ==large crane flies
 
-==limoniid crane flies:family Limoniidae
+==limoniid crane flies
 bug:14937

@@ -11,7 +11,7 @@ Although the leaves have general difference, there is enough variety within a sp
 
 ==himalayan blackberry:R. armeniacus
 color: white
-<b>Caution:</b> there are two species called himalayan blackberry, and iNaturalist users aren't careful about which ID they use in the bay area.
+<b>Caution:</b> there are two species called himalayan blackberry, but only one of them is found in the bay area.
 . plant: to 3 m, arched to mounded
 . prickles: many, <b>stout, wide-based</b>, straight or curved
 . stem: to 20(25) mm diam, <b>5-angled</b>, finely hairy or generally glabrous, not glaucous

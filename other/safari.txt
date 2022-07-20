@@ -3,14 +3,17 @@ desc: Notes for offline use of the Guide in Safari.
 
 <h1 id="title">Safari Browser Notes for Offline Usage</h1>
 
-The amount of offline storage needed for this guide is quite
+The amount of local storage needed for this guide is quite
 reasonable on modern devices, but it is still an intense experience
 for some browsers.  Hopefully these notes will prevent frustration on
 your end.
 
+These Safari notes were written based on my testing in 2020.
+Its support for local storage may have improved since then.
+
 <h3>Keeping the Download Alive</h3>
 
-Downloading files for offline use will continue in the background
+Downloading files for local offline use will continue in the background
 while you browse the guide (including this page).
 However, <b>downloading is likely to pause</b> in any of the following
 cases: Your device goes to sleep.  (You might need to occasionally
@@ -37,7 +40,7 @@ Safari doesn't allow web apps to monitor the space being used or the
 storage limit.  Safari generally allows a web app to use 1 GB+, so the
 guide will fit as long as you have space available.
 
-Safari places a <b>time limit of ~7 days</b> on offline data.
+Safari places a <b>time limit of ~7 days</b> on local data.
 Re-visiting the Guide will refresh the time limit.
 
 <b>Saving the Guide to your home page might remove the time limit.</b>
@@ -50,7 +53,7 @@ If you've read down this far, congratulations.  You might be the kind
 of person who runs their browser in Private Browsing mode.  As usual,
 all of your data from Private Browsing will be deleted when you leave
 Safari.  So you'll need to disable Private Browsing before downloading
-the Guide's offline files.  And don't forget to disable Private
+the Guide's local files.  And don't forget to disable Private
 Browsing when downloading updates later.
 
 <h3>Bandwidth While Offline</h3>

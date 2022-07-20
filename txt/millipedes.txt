@@ -1,8 +1,9 @@
 sci:class Diplopoda
 
+Verified locations for millipede species and subspecies can be found by county in <a href="https://bioone.org/journals/monographs-of-the-western-north-american-naturalist/volume-1/issue-1/1545-0228-1.1.90/Annotated-Checklist-Of-The-Millipeds-Of-California-Arthropoda-Diplopoda/10.3398/1545-0228-1.1.90.full">this paper</a>.
+
 ==yellow-spotted millipede:Harpaphe haydeniana
 bug:15008
 
 ==Paeromopus angusticeps
 bug:372853
-

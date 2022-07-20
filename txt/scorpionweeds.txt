@@ -1,5 +1,5 @@
 sci:Phacelia spp.
-x:more
+x:!more
 
 <b>Caution: IDs are uncertain</b>
 

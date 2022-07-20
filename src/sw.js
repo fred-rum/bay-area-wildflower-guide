@@ -42,7 +42,7 @@ var db;
 // An initial 'init' activity prevents updates until everything
 // is initialized.
 var activity = 'init';
-var msg = 'Checking for offline files';
+var msg = 'Checking for local files';
 var err_status = '';
 var usage_msg = '';
 var extra_msg = '';
@@ -416,7 +416,7 @@ async function fetch_response(event, url) {
       url.startsWith('favicons/')) {
     // Generate a 404 for non-essential files.
     console.info('%s not found; generating a 404', url);
-    return generate_404(url, ' has gone missing from your offline copy.  Update your offline files.');
+    return generate_404(url, ' has gone missing from your local copy.  Update your local offline files.');
   } else {
     // For small files and essential files (particularly those needed to
     // run the service worker interface), get them from the internet.
@@ -555,13 +555,13 @@ async function init_status() {
   upd_pending = (upd_timestamp !== cur_timestamp);
 
   activity = 'validate';
-  msg = 'Validating offline files';
+  msg = 'Validating local files';
   await check_cached();
 }
 
 function validate_cache() {
   activity = 'validate';
-  msg = 'Validating offline files';
+  msg = 'Validating local files';
   activity_promise = check_cached();
   monitor_promise();
 }
@@ -785,9 +785,9 @@ function fn_send_status(event) {
   // We replace it further below for the 'update' activity.
   if (activity !== 'update') {
     if (offline_ready) {
-      var update_button = 'Update Offline Files';
+      var update_button = 'Update Local Files';
     } else {
-      var update_button = 'Save Offline Files';
+      var update_button = 'Save Files Locally';
     }
   } else {
     if (offline_ready) {
@@ -914,7 +914,7 @@ async function clear_caches() {
 
   console.info('clear_caches()');
   activity = 'busy';
-  msg = 'Making all offline files obsolete';
+  msg = 'Making all local files obsolete';
   err_status = '';
 
   try {
@@ -1020,7 +1020,7 @@ async function update_cache() {
       // handled already.
     } else if (is_quota_exceeded(e)) {
       console.warn(e);
-      err_status = 'Not enough offline storage available.  Sorry.';
+      err_status = 'Not enough local storage available.  Sorry.';
       console.warn(err_status);
     } else {
       console.error(e);
@@ -1440,9 +1440,9 @@ async function delete_obs_files(cache, del_all_flag) {
 
         msg = 'Queued deletion of ' + count + ' / ' + total;
         if (del_all_flag) {
-          msg += ' offline files';
+          msg += ' local files';
         } else {
-          msg += ' obsolete offline files';
+          msg += ' obsolete local files';
         }
 
         await cache.delete(base64);
@@ -1484,7 +1484,7 @@ async function delete_obs_files(cache, del_all_flag) {
       // handled already.
     } else if (is_quota_exceeded(e)) {
       console.error(e);
-      err_status = 'The browser claims that we can&rsquo;t DELETE offline files because we&rsquo;re using too much space.  Yeah, really!  There&rsquo;s nothing more I can do.  You&rsquo;ll need to manually clear the site data from the browser.';
+      err_status = 'The browser claims that we can&rsquo;t DELETE local files because we&rsquo;re using too much space.  Yeah, really!  There&rsquo;s nothing more I can do.  You&rsquo;ll need to manually clear the site data from your browser.';
     } else {
       console.error(e);
       err_status = e.name + '<br>Something went wrong.  Refresh and try again?';
@@ -1545,9 +1545,9 @@ async function update_usage() {
                          (activity === 'validate') && (!offline_ready));
 
   if (unsure_if_empty) {
-    usage_msg = 'Using ? MB of offline storage.';
+    usage_msg = 'Using ? MB of local storage.';
   } else if (cache_empty) {
-    usage_msg = 'Using 0.0 MB of offline storage.';
+    usage_msg = 'Using 0.0 MB of local storage.';
   } else if (usage/1024 >= upd_kb_cached + 0.1) {
     usage_msg = 'Using ' + status_usage + ' (including overhead).';
   } else {
@@ -1560,7 +1560,7 @@ async function update_usage() {
     usage_msg += '<br>Browser allows up to ' + status_quota + '.';
   }
 
-  // When desktop Firefox asks for a receives permission for persistent
+  // When desktop Firefox asks for and receives permission for persistent
   // storage, it effectively removes the storage limit.  But instead of
   // increasing the quota, the browser pretends that there's no usage.
   // I dunno why they thought that was a good idea, but we have to deal
@@ -1579,9 +1579,9 @@ async function update_usage() {
     // with the progress values, use the same fudge factor.
     status_usage = (kb_usage/1024 + 0.1).toFixed(1) + ' MB'
     if (activity === 'validate') {
-      usage_msg = 'Using roughly ? MB of offline storage.';
+      usage_msg = 'Using roughly ? MB of local storage.';
     } else {
-      usage_msg = 'Using roughly ' + status_usage + ' of offline storage.';
+      usage_msg = 'Using roughly ' + status_usage + ' of local storage.';
     }
 
     if (quota === undefined) {

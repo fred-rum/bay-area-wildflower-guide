@@ -1,4 +1,0 @@
-sci:Urospermum picroides
-x:ca
-color:yellow
-family:sunflower family

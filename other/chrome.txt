@@ -3,11 +3,12 @@ desc: Notes for offline use of the Guide in Chrome.
 
 <h1 id="title">Chrome Browser Notes for Offline Usage</h1>
 
-Congratulations, Chrome currently has the best support for offline web apps.  That said, these notes may help improve your experience.
+Congratulations, Chrome currently has the best support for local web apps.
+That said, these notes may help improve your experience.
 
 <h3>Keeping the Download Alive</h3>
 
-Downloading files for offline use will continue in the background
+Downloading files for local offline use will continue in the background
 while you browse the guide (including this page).
 However, <b>downloading is likely to pause</b> in any of the following
 cases:
@@ -31,12 +32,12 @@ Chrome allows a web app to use up to 100% of the storage space
 available.  The Guide is large, but not that large.  Hopefully you can
 find room.
 
-Chrome uses a heuristic to determine whether offline files are kept
+Chrome uses a heuristic to determine whether local files are kept
 permanently.  If the browser decides you don't use the Guide often
 enough, it may delete the files if space runs short.  In practice this
 rarely happens.  If you bookmark the Guide or install it to your home
 screen, this will give an extra hint to Chrome that you want to keep
-your offline files.
+your local files.
 
 <h3>Install to your Home Screen</h3>
 

@@ -15,7 +15,7 @@ color: white
 . inflorescence is a panicle
 . > 20 flowers per inflorescence
 . <b>perianth 1--2 mm, << stamens</b>
-. <b>fruit tan with red speckles</b>
+. <b>fruit tan with red speckles</b> or bright red
 . <b>&gt; 5 leaves</b>, 7--20 cm, ovate to oblong-elliptic; <b>petioles +- 0</b>
 . common
 . Jepson doesn't recognize subspecies, but <a href="http://www.plantsoftheworldonline.org/taxon/urn:lsid:ipni.org:names:538037-1">POWO</a> does
@@ -38,3 +38,4 @@ color: white
 . 10--50 flowers per inflorescence
 . <b>2--3 leaves</b>, 5--20 cm, cordate to sagittate; <b>petioles 5--15 cm</b>
 . San Bruno, Marin, Mt. Tam
+re
