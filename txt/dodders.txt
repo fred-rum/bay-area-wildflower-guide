@@ -17,6 +17,7 @@ x:!hist/rare
 . rare inland
 
 ==goldenthread:C. pacifica
+acom:pacific goldenthread
 color: orange, white, other
 . corolla scales present
 . flower 3.5--6 mm

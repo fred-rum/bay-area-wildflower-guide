@@ -1,10 +1,10 @@
 sci:genus Exobasidium
 # unknown number of additional species, described or undescribed
 
-This genus parasitizes {-manzanitas} and others in the {-heath family}.
+This genus parasitizes {-bearberries and manzanitas} and others in the {-heath family}.
 
 Ron Russo's popular reference for California galls lists {-Exobasidium vaccinii} as forming galls on numerous plant hosts.  However, discussions on iNaturalist have cast doubt on this interpretation.  A timeline:
-. <a href="https://www.biodiversitylibrary.org/page/3154527#page/42/mode/1up">1885 Casey</a> (free) briefly describes {-Exobasidium arctostaphyli} on {-manzanitas}.
+. <a href="https://www.biodiversitylibrary.org/page/3154527#page/42/mode/1up">1885 Casey</a> (free) briefly describes {-Exobasidium arctostaphyli} on {-bearberries and manzanitas}.
 . <a href="https://www.jstor.org/stable/pdf/2990117.pdf">1915 Burt</a> (free) lumps galls on many hosts into {-Exobasidium vaccinii}.
 . <a href="https://cdnsciencepub.com/doi/10.1139/b59-052">1959 Savile</a> (req. subscription) mostly agrees with Burt, but retains {-Exobasidium arctostaphyli} as a distinct entity.
 . <a href="https://pascal-francis.inist.fr/vibad/index.php?action=getRecordDetail&idt=PASCAL82X0050208">1981 Nannfeldt</a> (citation only) proposes that {-Exobasidium vaccinii} is found only on lingonbery (Vaccinium vitis-idaea).
@@ -22,7 +22,7 @@ Relevent iNaturalist comments in chronological order:
 <a href="https://www.inaturalist.org/observations/27716705#activity_comment_88a9c73a-d806-4c12-b770-ca848b40a264">6</a>.
 
 ==Exobasidium arctostaphyli
-. forms bright red blisters on the surface of {-manzanitas} leaves, turning glaucous on the inner side
+. forms bright red blisters on the surface of {-bearberries and manzanitas} leaves, turning glaucous on the inner side
 .. blisters cause only a minor buckling of the leaf surface
 .. compare to {-manzanita leafgall aphid}, which causes signifant swelling and distortion of the leaf edge
 . see above for discussion
@@ -33,5 +33,5 @@ Relevent iNaturalist comments in chronological order:
 
 ==Exobasidium vaccinii-uliginosi
 <b>Caution: photo provided for reference, but ID is unsure</b>
-. commonly identified on iNaturalist on various plant hosts, but should probably be identified on {-manzanitas} only as {-Exobasidium} until properly researched
+. commonly identified on iNaturalist on various plant hosts, but should probably be identified on {-bearberries and manzanitas} only as {-Exobasidium} until properly researched
 . see above for discussion

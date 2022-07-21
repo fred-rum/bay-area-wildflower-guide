@@ -29,6 +29,7 @@ color: pale purple
 . two variants distinguished by phyllary glands
 
 ==santa barbara daisy:E. karvinskianus
+acom: latin american fleabane, mexican fleabane
 color: white, pale purple
 . ray 5--8 mm
 . phyllaries generally +- equal

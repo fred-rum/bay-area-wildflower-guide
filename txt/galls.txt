@@ -1,5 +1,6 @@
 sci:n/a
-end_hierarchy
+
+is_top
 
 Taxons that create galls are listed in their normal taxonomic locations, but I've also collected them here for easier browsing.
 <p>

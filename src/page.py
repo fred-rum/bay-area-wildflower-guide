@@ -150,9 +150,44 @@ def sort_pages(page_set, trait=None, value=None,
 
     return page_list
 
-# Split a string and remove whitespace around each element.
-def split_strip(txt, c):
-    return [x.strip() for x in txt.split(c)]
+# Split a string at commas and remove whitespace around each element.
+def split_strip(txt):
+    return [x.strip() for x in txt.split(',')]
+
+# Split a string that may contain quoted or unquoted parts.
+# The string is split at commas,
+#   provided that the comma is not within a quoted part.
+# Whitespace at the beginning and end of each comma-separated part is removed.
+def split_strip_quoted(txt):
+    list = []
+    s = txt.strip()
+    while (s):
+        if s.startswith('"'):
+            end = s.find('"', 1)
+            if end >= 0:
+                list.append(s[1:end])
+                s = s[end+1:].strip()
+                if s == '':
+                    # no more string parts
+                    pass
+                elif s.startswith(','):
+                    s = s[1:].strip()
+                else:
+                    error(f'garbled list: {txt}')
+                    return list
+            else:
+                error(f'garbled list: {txt}')
+                return list
+        else:
+            end = s.find(',')
+            if end >= 0:
+                list.append(s[:end].strip())
+                s = s[end+1:].strip()
+            else:
+                list.append(s)
+                s = ''
+
+    return list
 
 # Check if two names are equivalent when applying a particular plural rule.
 def plural_rule_equiv(a, b, end_a, end_b):
@@ -370,10 +405,10 @@ class Page:
         self.elab_inaturalist = None
         self.elab_bugguide = None
 
-        # the iNaturalist common name.
-        # must be None if the common name isn't set.
-        # if valid, must be different than the common name.
-        self.icom = None
+        # Alternative common names
+        # Must be empty if the common name isn't set.
+        # All names must be different than the common name.
+        self.acom = []
 
         # A parent's link to a child may be styled depending on whether the
         # child is itself a key (has_child_key).  Which means that a parent
@@ -526,25 +561,26 @@ class Page:
                 # The new common name is the same as the old one.
                 return
             elif from_inat:
-                # iNaturalist is allowed to provide a different common name,
-                # but we don't use it as *the* common name.  We record it
-                # as an alternative (iNaturalist) common name if it is
-                # sufficiently different than the regular common name.
-                if not plural_equiv(self.com, com):
-                    if (self.created_from_inat or
-                        self.rp_do('obs_fill_alt_com',
-                                   f'{self.full()} has alternative name {com}')):
-                        # We're allowed to set the alternative common name
-                        self.icom = com
-                    else:
-                        # If we got here, then
-                        #   - this page was created by the user, and
-                        #   - we have a diff. common name from iNaturalist, and
-                        #   - we don't have a property that allows us to use
-                        #     the alternative common name.
-                        pass
+                # iNaturalist may be allowed to provide an alternative common
+                # name, but only if it is sufficiently different than the
+                # regular common name or any existing alternative common name.
+                if plural_equiv(self.com, com):
+                    return
 
-                # Bail out without making any other changes to the common name.
+                for acom in self.acom:
+                    if plural_equiv(acom, com):
+                        return
+
+                if (self.rp_do('obs_fill_alt_com',
+                               f'{self.full()} has iNaturalist common name "{com}"')):
+                    # iNaturalist is allowed to add an alternative common name,
+                    # and the name is sufficiently different than any existing
+                    # name.
+                    self.acom.append(com)
+
+                # We either added an alternative name or not.
+                # But either way the primary common name is already set,
+                # so there's nothing more to do here.
                 return
             else:
                 fatal(f'{self.full()} is assigned a new common name: {com}')
@@ -552,10 +588,10 @@ class Page:
         if (from_inat and
             not self.created_from_inat and
             not self.rp_do('obs_fill_com',
-                           f'{self.full()} can be filled by {com}')):
+                           f'{self.full()} has iNaturalist common name "{com}"')):
             # If we got here, then
-            #   - this page was created by the user, and
             #   - we have a new common name from iNaturalist, and
+            #   - this page was created by the user, and
             #   - we don't have a property that allows us to use the new name.
             return
 
@@ -926,8 +962,6 @@ class Page:
                           repl_sci, self.txt, flags=re.MULTILINE)
         self.txt = re.sub(r'^com:\s*(.+?)\s*?\n',
                           repl_com, self.txt, flags=re.MULTILINE)
-        self.txt = re.sub(r'^asci:\s*(.+?)\s*?\n',
-                          repl_asci, self.txt, flags=re.MULTILINE)
 
         # If only a scientific name was explicitly set, then:
         # - if the filename matches the scientific name, set the scientific
@@ -973,7 +1007,7 @@ class Page:
         if action not in props[prop]:
             error(f'{self.full()} - action not supported for property in "{action} {prop}')
 
-        rank_range_list = split_strip(rank_str, ',')
+        rank_range_list = split_strip(rank_str)
 
         rank_set = set()
         for rank_range in rank_range_list:
@@ -991,7 +1025,7 @@ class Page:
 
                 # rank1 can be larger or smaller than rank2.  Reorder it
                 # here so that rank2 is the larger one.
-                if rank1 == 'self' or rank1 > rank2:
+                if rank1 == 'self' or (rank2 != 'self' and rank1 > rank2):
                     (rank1, rank2) = (rank2, rank1)
                     (rank1_excl, rank2_excl) = (rank2_excl, rank1_excl)
 
@@ -1013,15 +1047,24 @@ class Page:
                     if rank == rank1:
                         in_range = True
 
-                # if rank2 is 'self', then we never found the end of the
-                # range.  This potentially includes a lot of upper ranks
-                # that won't be applied because property application only
-                # recurses through lower ranks, but that's OK and we'll
-                # (mostly) get what we want.  But the rank set still
-                # won't include the unranked current page, so we set its
-                # property manually here.
-                if rank2 == 'self' and not rank2_excl:
-                    self.assign_prop(prop, action)
+                if rank2 == 'self':
+                    # if rank2 is 'self', then we never found the end of the
+                    # range.  This potentially includes a lot of upper ranks
+                    # that won't be applied because property application only
+                    # recurses through lower ranks, but that's OK and we'll
+                    # (mostly) get what we want.
+
+                    if rank2_excl:
+                        # If the page gets ranked later, its new rank will
+                        # match an element of the rank_set during propagation.
+                        # So we assign a pseudo-action that tells propagation
+                        # to *not* assign the property, despite the match.
+                        self.assign_prop(prop, 'exclude-' + action)
+                    else:
+                        # If the page remains unranked, it won't match any of
+                        # the ranks in the rank set.  Instead, we set its
+                        # property manually here.
+                        self.assign_prop(prop, action)
             else:
                 # Not a range, just a rank.
                 # For this case, 'self' is applied directly in case the
@@ -1045,6 +1088,8 @@ class Page:
         if prop not in self.decl_prop:
             self.decl_prop[prop] = {}
         self.decl_prop[prop][action] = rank_set
+
+        # print(f'{self.name} = {action} {prop}: {rank_set}')
 
     def parse_glossary(self):
         if re.search(r'^{([^-].*?)}', self.txt, flags=re.MULTILINE):
@@ -1095,7 +1140,7 @@ class Page:
         if trait in self.trait_values:
             error(f'{trait} is defined more than once for page {self.full()}')
 
-        self.trait_values[trait] = set(split_strip(value_str, ','))
+        self.trait_values[trait] = set(split_strip(value_str))
 
     def record_subset(self, trait, value, list_name, page_name):
         if list_name is None:
@@ -1531,7 +1576,9 @@ class Page:
                     self.assign_prop('default_completeness_genus', action)
                 if Rank.species in rank_set and self.rank <= Rank.species:
                     self.assign_prop('default_completeness_species', action)
-            elif self.rank in rank_set:
+            elif (self.rank in rank_set and
+                  not (prop in self.prop_action_set and
+                       'exclude-' + action in self.prop_action_set[prop])):
                 self.assign_prop(prop, action)
 
             # Recursively descend through Linnaean children.
@@ -1832,10 +1879,23 @@ class Page:
                     data_object.rep_child = jpg
                 continue
 
+            matchobj = re.match(r'acom:\s*(.+?)$', c)
+            if matchobj:
+                data_object.acom = split_strip_quoted(matchobj.group(1))
+                continue
+
             matchobj = re.match(r'sci_([fpjib]+):\s*(.+?)$', c)
             if matchobj:
                 data_object.set_sci_alt(matchobj.group(1),
                                         self.expand_abbrev(matchobj.group(2)))
+                continue
+
+            matchobj = re.match(r'^asci:\s*(.+?)\s*?$', c)
+            if matchobj:
+                sci = strip_sci(matchobj.group(1))
+                if sci in sci_page:
+                    fatal(f'{self.full()} specifies asci: {sci}, but that name already exists')
+                sci_page[sci] = data_object
                 continue
 
             matchobj = re.match(r'is_top\s*$', c)
@@ -2620,8 +2680,9 @@ class Page:
             c_list = []
 
             # List the iNaturalist common name if it's different.
-            if self.icom:
-                c_list.append(f'(<b>{self.icom}</b>)')
+            if self.acom:
+                acom = ', '.join(self.acom)
+                c_list.append(f'(<b>{acom}</b>)')
 
             # If the common name was listed in the <h1> header,
             # list the scientific name as a smaller line below.

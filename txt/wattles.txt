@@ -47,6 +47,7 @@ color: cream, other
 <h3>simple leaves</h3>
 
 ==sydney golden wattle:A. longifolia
+acom:longleaf wattle
 color:yellow
 . simple leaves, 5--15 cm long, with 2--4 longitudinal veins
 . flowers in 2--5 cm spikes (not round heads)

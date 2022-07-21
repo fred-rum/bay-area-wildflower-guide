@@ -176,7 +176,8 @@ color: purple, pale purple
 . <b>keel generally unlobed near base, upper margins generally ciliate middle to tip, lower glabrous</b>
 . very common
 
-==yellow bush lupine:L. arboreus
+==coastal bush lupine:L. arboreus
+acom:yellow bush lupine
 color: yellow, cream
 . habit: <b>Shrub 5--20 dm</b>, green-glabrous to silver-hairy
 . stem: woody, erect

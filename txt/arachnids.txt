@@ -1,8 +1,10 @@
 sci:class Arachnida
 
+list_hierarchy
+
 warn photo_requires_bugid: genus-below
 
 ==spiders
 end_hierarchy
 
-==mites and ticks
+==mites

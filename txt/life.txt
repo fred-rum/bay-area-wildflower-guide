@@ -28,7 +28,7 @@ do casual_obs_promotion: genus-below
 
 error obs_fill_sci: self-below
 error obs_fill_com: self-below
-do obs_fill_alt_com: self-below
+warn obs_fill_alt_com: self-below
 
 
 ==plants
@@ -37,8 +37,6 @@ do obs_fill_alt_com: self-below
 
 ==kelp, diatoms, and allies
 
-==fungi
+==fungi including lichens
 
 ==slime molds
-
-==galls

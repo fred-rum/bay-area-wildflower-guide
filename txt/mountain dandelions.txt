@@ -50,7 +50,7 @@ xx:ca
 [
 <h2>short petals</h2>
 
-==big mountain agoseris:A. grandiflora var. grandiflora
+==big mountain dandelion:A. grandiflora var. grandiflora
 warn obs_requires_photo: none # ID not yet positive
 . <b>stem generally not leafy or obscurely leafy above base</b>
 . ligule 3--7 mm, +- equaling involucre

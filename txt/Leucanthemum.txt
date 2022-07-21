@@ -7,6 +7,7 @@ color: white
 . ray flowers: 13--34+, 12--20(35+) mm
 
 ==shasta daisy:L. maximum
+acom:max chrysanthemum
 color: white
 . basal leaves not lobed, generally toothed (entire), petiole 10--30(120) mm
 . mid-stem leaves generally proximally entire, distally regularly serrate

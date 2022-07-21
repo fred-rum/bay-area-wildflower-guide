@@ -1,7 +1,9 @@
+acom:mayflowers and false solomon's seals
 sci:Maianthemum spp.
 x:ca
 
-There are no "true" solomon's seals (Polygonatum spp.) in California.
+This genus was split off from the "true" solomon's seals (Polygonatum spp.),
+which are not found in California.
 
 Key features:
 . 4 or 6 perianth parts

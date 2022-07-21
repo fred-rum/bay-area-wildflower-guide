@@ -1,3 +1,9 @@
+# ignore the iNaturalist name for this taxon
+warn obs_fill_alt_com: self/-below
+
+# these explicit children may be redundant
+# since these pages should be recognized as within the sunflower family
+# and be linked accordingly
 ==sunflowers
 ==tribe Cichorieae
 ==yellow daisies

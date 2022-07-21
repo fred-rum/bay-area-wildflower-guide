@@ -2,4 +2,4 @@ sci:n/a
 end_hierarchy
 
 ==genus Exobasidium
-. parasitizes {-manzanitas} and others in the {-heath family}.
+. parasitizes {-bearberries and manzanitas} and others in the {-heath family}.

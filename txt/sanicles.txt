@@ -20,6 +20,7 @@ color: yellow
 . scattered
 
 ==turkey pea:S. tuberosa
+acom:tuberous sanicle
 color:yellow
 <b>Caution: ID uncertain</b>
 . plant 5--80 cm, slender

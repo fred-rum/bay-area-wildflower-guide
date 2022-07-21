@@ -618,7 +618,7 @@ top_list = [x for x in page_array if not x.parent]
 for page in full_page_array:
     page.apply_most_props()
     if not (page.sci or page.no_sci):
-        error(page.name, prefix='No scientific name given for the following pages:')
+        error(page.full(), prefix='No scientific name given for the following pages:')
 
 if arg('-steps'):
     info('Step 13: Parse remaining text, including glossary terms')
@@ -707,10 +707,10 @@ with open(search_file, 'w', encoding='utf-8') as w:
         coms = []
         if page.com and (page.com != page.name or
                          not page.com.islower() or
-                         page.icom):
+                         page.acom):
             coms.append(unidecode(page.com))
-        if page.icom:
-            coms.append(page.icom)
+        if page.acom:
+            coms.extend(page.acom)
         if coms:
             coms_str = '","'.join(coms)
             w.write(f',com:["{coms_str}"]')

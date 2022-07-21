@@ -1110,8 +1110,9 @@ type.
 
 Support {--<name>} to link using a short name (common preferred), *or*
 improve {-<name>} to link using a short name whenever the named taxon
-is on the current page.  (Which means there should be a difference
-between a genus key and the auto-generated species page.)
+is on the current page.  (I.e. it is the current page or is a direct
+child.)  (Which means there should be a difference between a genus key
+and the auto-generated species page.)
 
 If a page is above the genus level and has no photographed(?) children
 (e.g. flesh flies), omit the count of observations that are "research
@@ -1251,3 +1252,19 @@ Support "personal notes", created with "note:[...]".
     (and child taxons?)
 
 I probably need a method for proper citations, e.g. in case of link rot.
+
+when using the JavaScript search,
+  should a matching alternative name be listed
+    in parentheses after the primary name?
+
+review txt files for plants with x:more
+
+review explicit children in 'sunflower family.txt'
+  should children need 'member:sunflower family' when listed explicitly?
+  should explicit listing be needed if 'member:sunflower family' is used?
+
+Should the HTML include 'Key to' before 'Member of'?
+  particularly given the ordering of 'Member of'
+
+'Member of' has different padding above
+  depending on whether the main page has multiple names or not

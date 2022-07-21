@@ -5,6 +5,7 @@ x:ba
 <h3>larger flowers</h3>
 
 ==fremont's deathcamas:T. fremontii
+acom:common star lily
 sci_p:Zigadenus fremontii
 color: white
 . petals 5--15 mm

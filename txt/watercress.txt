@@ -3,4 +3,4 @@ color:white
 x:hist
 family:mustard family
 
-Not to be confused with {-nasturtium}.
+Note that {-garden nasturtium} is completely unrelated.

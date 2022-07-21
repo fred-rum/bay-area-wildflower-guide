@@ -2,5 +2,6 @@ sci:Pittosporum
 family:cheesewood family
 x:more
 
-==sweet pittosporum:Pittosporum undulatum
+==australian cheesewood:Pittosporum undulatum
+acom:sweet pittosporum, victorian box, mock orange
 color:white

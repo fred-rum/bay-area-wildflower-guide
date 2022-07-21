@@ -1,6 +1,6 @@
 x:hist
 
-==scots broom:Cytisus scoparius
+==scotch broom:Cytisus scoparius
 color:yellow
 . yellow corolla
 . banner generally > 10--25 mm

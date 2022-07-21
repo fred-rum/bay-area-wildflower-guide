@@ -36,7 +36,8 @@ sci_fjp:Piperia transversa
 . spur 6--12 mm, <b>+- straight and horizontal</b>
 . perianth white
 
-==coast piperia:P. elegans ssp. elegans
+==elegant piperia:P. elegans ssp. elegans
+acom:coast piperia
 sci_fjp:Piperia elegans ssp. elegans
 color: white
 xx:ba

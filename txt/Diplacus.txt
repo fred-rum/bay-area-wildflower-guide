@@ -1,6 +1,7 @@
 x:hist/rare
 
 ==sticky monkeyflower:D. aurantiacus
+acom:orange bush monkeyflower
 sci_p:Mimulus aurantiacus
 color: orange
 . subshrub or shrub
