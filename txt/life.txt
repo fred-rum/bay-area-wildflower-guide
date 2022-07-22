@@ -9,6 +9,8 @@ caution default_completeness: genus
 link_inaturalist: self-below
 link_bayarea_inaturalist: self-below
 
+warn no_sci: self-below
+
 warn obs_requires_photo: genus-below
 warn one_child: species
 

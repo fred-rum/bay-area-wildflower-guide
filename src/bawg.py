@@ -186,6 +186,9 @@ assign_jpgs()
 if arg('-tree') == '3':
     print_trees()
 
+if arg('-steps'):
+    info('Step 4: Parse taxon_names.yaml')
+
 def read_taxon_names(f):
     taxon_names = yaml.safe_load(f)
     create_taxon_pages(taxon_names)
@@ -207,9 +210,6 @@ def create_taxon_pages(d, prefix=''):
             if not page:
                 page = Page(com, elab, shadow=True, src='taxon_names.yaml')
             #info(f'{page.com} <-> {page.elab}')
-
-if arg('-steps'):
-    info('Step 4: Parse taxon_names.yaml')
 
 read_data_file('taxon_names.yaml', read_taxon_names)
 
@@ -617,8 +617,6 @@ top_list = [x for x in page_array if not x.parent]
 
 for page in full_page_array:
     page.apply_most_props()
-    if not (page.sci or page.no_sci):
-        error(page.full(), prefix='No scientific name given for the following pages:')
 
 if arg('-steps'):
     info('Step 13: Parse remaining text, including glossary terms')

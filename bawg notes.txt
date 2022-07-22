@@ -1220,10 +1220,6 @@ fix glossary for gall insects (allow multiple?)
 when using Javascript search, if search string has an exact match including
   non-letter characters (e.g. "heart's"), use only those exact matches?
 
-is there a property to flag importation of alternative iNaturalist names?
-  this requires a way to explicitly create alternative common names
-  (which would be nice in any case)
-
 when searching, skip vowels if there are no other matches
   for approximate pronunciation match
 
@@ -1266,5 +1262,15 @@ review explicit children in 'sunflower family.txt'
 Should the HTML include 'Key to' before 'Member of'?
   particularly given the ordering of 'Member of'
 
-'Member of' has different padding above
+"Member of" has different padding above
   depending on whether the main page has multiple names or not
+
+"Chris's observations" has differnet padding below
+  depending on whether it is followed by taxon info
+  i.e. padding is missing if there is no scientific name (e.g. galls)
+
+when propagating props,
+  carry along some structure that conveys the ranges declared;
+  for an unranked page,
+    check whether its linnaean ancestor and all descendents are in the range,
+    and if so, assign the property to the page

@@ -44,6 +44,7 @@ props = {
     'link': 'd',
     'member_link': 'd',
     'member_name': 'd',
+    'no_sci': 'f',
     'obs_requires_photo': 'f',
     'photo_requires_bugid': 'f',
     'one_child': 'f',
@@ -391,7 +392,11 @@ class Page:
         self.group_items = [] # each entry = (rank, name, sci)
 
         # properties declared on this page
-        self.decl_prop = {} # declared property -> action -> rank set
+        # decl_prop_rank specifies which ranks the property & action apply to.
+        # decl_prop_range specifies which ranks that include a range that
+        # extends below that rank (whether inclusive or exclusive).  
+        self.decl_prop_rank = {} # declared property -> action -> rank set
+        self.decl_prop_range = {} # declared property -> action -> rank set
 
         # properties assigned to this page
         self.prop_action_set = {} # property name -> set of propagated actions
@@ -737,6 +742,16 @@ class Page:
             and elab_words[2] not in ('ssp.', 'var.')):
             error(f'Unexpected elaboration for {elab}')
 
+        if (from_inat and
+            not self.created_from_inat and
+            not self.rp_do('obs_fill_sci',
+                           f'{self.full()} can be filled by {elab}')):
+            # If we got here, then
+            #   - this page was created by the user, and
+            #   - we have a new elaboration from iNaturalist, and
+            #   - we don't have a property that allows us to use the new name.
+            return
+
         if elab[0].islower():
             if elab_words[0] in Rank.__members__:
                 self.rank = Rank[elab_words[0]]
@@ -756,16 +771,6 @@ class Page:
                 self.rank = Rank.species
             else:
                 self.rank = Rank.below
-
-        if (from_inat and
-            not self.created_from_inat and
-            not self.rp_do('obs_fill_sci',
-                           f'{self.full()} can be filled by {elab}')):
-            # If we got here, then
-            #   - this page was created by the user, and
-            #   - we have a new elaboration from iNaturalist, and
-            #   - we don't have a property that allows us to use the new name.
-            return
 
         self.elab = elab
         self.elab_src = elab_src
@@ -1010,6 +1015,7 @@ class Page:
         rank_range_list = split_strip(rank_str)
 
         rank_set = set()
+        range_set = set()
         for rank_range in rank_range_list:
             if '-' in rank_range:
                 matchobj = re.match(r'(.+?)(/?)-(/?)(.+)', rank_range)
@@ -1029,8 +1035,14 @@ class Page:
                     (rank1, rank2) = (rank2, rank1)
                     (rank1_excl, rank2_excl) = (rank2_excl, rank1_excl)
 
+                if rank2 == 'self':
+                    range_set.add('self')
+
                 in_range = False
                 for rank in Rank: # iterate ranks from smallest to largest
+                    if in_range:
+                        range_set.add(rank)
+
                     # Calculate in_range as exclusive.
                     if rank == rank2:
                         in_range = False
@@ -1085,9 +1097,11 @@ class Page:
         # rank_set can be empty if the only listed ranks are 'none' or
         # 'self'.  We record the rank_set whether it is populated or empty
         # so that property propagation knows to stop at this level.
-        if prop not in self.decl_prop:
-            self.decl_prop[prop] = {}
-        self.decl_prop[prop][action] = rank_set
+        if prop not in self.decl_prop_rank:
+            self.decl_prop_rank[prop] = {}
+            self.decl_prop_range[prop] = {}
+        self.decl_prop_rank[prop][action] = rank_set
+        self.decl_prop_range[prop][action] = range_set
 
         # print(f'{self.name} = {action} {prop}: {rank_set}')
 
@@ -1556,17 +1570,35 @@ class Page:
             if lra:
                 lra.link_linn_child(self)
 
-    def assign_prop(self, prop, action):
-        if prop not in self.prop_action_set:
-            self.prop_action_set[prop] = set()
-        self.prop_action_set[prop].add(action)
-
     def propagate_props(self):
-        for prop in self.decl_prop:
-            for action in self.decl_prop[prop]:
-                self.propagate_prop(prop, action, self.decl_prop[prop][action])
+        for prop in self.decl_prop_rank:
+            for action in self.decl_prop_rank[prop]:
+                self.propagate_prop(prop, action,
+                                    self.decl_prop_rank[prop][action],
+                                    self.decl_prop_range[prop][action],
+                                    'decl')
 
-    def propagate_prop(self, prop, action, rank_set):
+    # rank_set is a set of ranks for which the property applies.
+    #
+    # If the page is unranked, we instead check whether its closest ancestor
+    # rank is in range_set.
+    #
+    # closest_ancestor_rank is set to 'decl' for the declaring page.
+    #   This value never matches in range_set, so
+    #   - if the declaring page is ranked, it checks rank_set as usual.
+    #   - if the declaring page is unranked, it never assigns the property.
+    #     instead, the property was assigned as appropriate during declaration
+    #     if 'self' was included.
+    # closest_ancestor_rank is set to 'self' for the real children of
+    #   an unranked declaring page.  If those children are also unranked,
+    #   then the property is assigned to them if 'self' is in range_set.
+    #   These children also propagate the property with closest_ancestor_rank
+    #   as 'self'.
+    # closest_ancestor_rank is set to the rank of a ranked page.
+    #   The property is assignd to an unranked Linnaean descendent if
+    #   this rank is in range_set.
+    def propagate_prop(self, prop, action, rank_set, range_set,
+                       closest_ancestor_rank):
         if self.rank:
             # For the 'default_completeness' property, assist the
             # write_complete() function by recording the action at the
@@ -1581,25 +1613,48 @@ class Page:
                        'exclude-' + action in self.prop_action_set[prop])):
                 self.assign_prop(prop, action)
 
-            # Recursively descend through Linnaean children.
-            # There's no need to descend through 'real' children because
-            # they cannot include any ranked pages that are not included
-            # in the Linnaean descendants.
-            # Stop at any child that replaces the prop assignment.
+            # Recursively descend through Linnaean children.  Note that
+            # these Linnaean children can include unranked pages.
+            # These unranked pages may represent a real hierarchy, although
+            # that hierarchy is lost and unimportant in this contxt.
+            # Unranked pages do not themselves have Linnaean children.
+            # There's no need to descend through 'real' children of this
+            # page or its unranked Linnaean children because any ranked
+            # real descendents should already be Linnaean descendents
+            # of this page.
+            #
+            # Stop propagation at any child that replaces the prop assignment.
             for child in self.linn_child:
-                if (prop not in child.decl_prop or
-                    action not in child.decl_prop[prop]):
-                    child.propagate_prop(prop, action, rank_set)
+                if (prop not in child.decl_prop_rank or
+                    action not in child.decl_prop_rank[prop]):
+                    child.propagate_prop(prop, action, rank_set,
+                                         range_set, self.rank)
         else:
+            if closest_ancestor_rank in range_set:
+                self.assign_prop(prop, action)
+
             # If a property is declared in an unranked page, then it cannot
             # have Linnaean children.  We push the properties down through
             # its real children until a ranked descendant is found, then
             # the properties are applied to each of those Linnaean trees.
-            # Stop at any child that replaces the prop assignment.
-            for child in self.child:
-                if (prop not in child.decl_prop or
-                    action not in child.decl_prop[prop]):
-                    child.propagate_prop(prop, action, rank_set)
+            #
+            # If the property propagated from a ranked page, however, then
+            # do not propagate it through any unranked page.  Its ranked
+            # children are already covered as Linnaean descendents of the
+            # ranked ancestor.
+            #
+            # Stop propagation at any child that replaces the prop assignment.
+            if closest_ancestor_rank in ('decl', 'self'):
+                for child in self.child:
+                    if (prop not in child.decl_prop_rank or
+                        action not in child.decl_prop_rank[prop]):
+                        child.propagate_prop(prop, action, rank_set,
+                                             range_set, 'self')
+
+    def assign_prop(self, prop, action):
+        if prop not in self.prop_action_set:
+            self.prop_action_set[prop] = set()
+        self.prop_action_set[prop].add(action)
 
     # Check whether this page has 'check_ancestor' as a Linnaean ancestor.
     def has_linn_ancestor(self, check_ancestor):
@@ -1740,6 +1795,11 @@ class Page:
             # None of these checks apply to shadow pages.
             return
 
+        if not (self.sci or self.no_sci):
+            print(self.full())
+            self.rp_check('no_sci',
+                          f'{self.full()} has no scientific name')
+
         if self.count_flowers() and not self.get_jpg('', set_rep_jpg=False):
             self.rp_check('obs_requires_photo',
                           f'{self.full()} is observed but has no photos')
@@ -1755,7 +1815,7 @@ class Page:
         for trait in sorted(traits):
             if trait in self.trait_values and not self.photo_dict:
                 self.rp_check(f'{trait}_requires_photo',
-                              f'page {self.full()} has a {trait} assigned but has no photos')
+                              f'{self.full()} has a {trait} assigned but has no photos')
 
     def expand_abbrev(self, sci):
         if len(sci) > 3 and sci[1:3] == '. ':
@@ -1984,7 +2044,7 @@ class Page:
                 data_object.group_items.append((rank, name, None));
                 continue
 
-            matchobj = re.match(r'\s*member\s*:\s*([^:]+)(?:\:(.+?))?\s*$', c);
+            matchobj = re.match(r'\s*member:\s*([^:]+)(?:\:(.+?))?\s*$', c);
             if matchobj:
                 # We don't create the Linnaean link right away because
                 # doing so could create a shadow page, and we don't
@@ -2597,7 +2657,8 @@ class Page:
                     elif self.rp_action(prop, 'do'):
                         w.write(f'<b>Caution: There may be{other} wild {members} of this {top} not yet included in this guide.</b>')
                     else:
-                        return # Don't write the <p/> at the end
+                        # Don't write anything, including the </p> at the end
+                        return
                 elif complete == 'none':
                     if top == 'species':
                         w.write('This species has no subspecies or variants.')
