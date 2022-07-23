@@ -1271,10 +1271,6 @@ since taxons that are directly observed can already pick up a common name
 add another property like 'no_sci_not_obs'
   to flag an unobserved taxon with no common name.
 
-when using the JavaScript search,
-  should a matching alternative name be listed
-    in parentheses after the primary name? (similar to iNaturalist)
-
 flag places where the genus rank is inferred
   i.e. remains inferred after all sources are checked for elaborations
 

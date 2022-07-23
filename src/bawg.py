@@ -736,6 +736,10 @@ with open(search_file, 'w', encoding='utf-8') as w:
                          page.acom):
             coms.append(unidecode(page.com))
         if page.acom:
+            if not page.com:
+                # The first entry should be the default name.
+                # If there is no default name, insert a blank string instead.
+                coms.append('')
             coms.extend(page.acom)
         if coms:
             coms_str = '","'.join(coms)

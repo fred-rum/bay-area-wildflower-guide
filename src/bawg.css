@@ -432,6 +432,9 @@ a.parent:link, a.parent:visited, span.parent {
 a.leaf:link, a.leaf:visited, span.leaf {
     color: DarkGreen;
 }
+span.altname {
+    opacity: 0.60;
+}
 
 /* A link that is known to be broken is styled this way. */
 a.missing:link, a.missing:visited {

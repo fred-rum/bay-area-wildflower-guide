@@ -650,15 +650,45 @@ function fn_search() {
     var page_info = fit_info.page_info;
 
     if ('com' in page_info) {
+      /* If there is a match in a common name, highlight it.
+         If there is no match, use the default common name without highlighting.
+         If there are alternative common names but no default common name,
+         then com_highlight could end up as an empty string.  Conveniently,
+         this gets treated the same as com_highlight == null when deciding
+         whether to combine it with the scientific name. */
+      const com = page_info['com'][0];
       var com_highlight = highlight_match(fit_info.com_match_info,
-                                          page_info['com'][0], false);
+                                          com, false);
+
+      /* If the match is not on the default common name,
+         write the common name first followed by the matching name in brackets.
+         If there is no default common name, an extra space gets added before
+         the matching name in brackets, but the browser nicely suppresses the
+         extra space. */
+      if ((page_info.x != 'g') && (page_info.x != 'j') &&
+          fit_info.com_match_info &&
+          (fit_info.com_match_info.match_str != com)) {
+        com_highlight = (com +
+                         ' <span class="altname">[' +
+                         com_highlight +
+                         ']</span>');
+      }
     } else {
       var com_highlight = null;
     }
 
     if ('sci' in page_info) {
+      const sci = page_info['sci'][0];
       var sci_highlight = highlight_match(fit_info.sci_match_info,
-                                          page_info['sci'][0], true);
+                                          sci, true);
+      if (fit_info.sci_match_info &&
+          (fit_info.sci_match_info.match_str != sci)) {
+        var sci_ital = highlight_match(null, sci, true);
+        sci_highlight = (sci_ital +
+                         ' <span class="altname">[' +
+                         sci_highlight +
+                         ']</span>');
+      }
       sci_highlight = sci_highlight.replace(/:/, '&times; ');
     } else {
       var sci_highlight = null;

@@ -386,14 +386,32 @@ function fn_search() {
     var fit_info = ac_list[i];
     var page_info = fit_info.page_info;
     if ('com' in page_info) {
+      const com = page_info['com'][0];
       var com_highlight = highlight_match(fit_info.com_match_info,
-                                          page_info['com'][0], false);
+                                          com, false);
+      if ((page_info.x != 'g') && (page_info.x != 'j') &&
+          fit_info.com_match_info &&
+          (fit_info.com_match_info.match_str != com)) {
+        com_highlight = (com +
+                         ' <span class="altname">[' +
+                         com_highlight +
+                         ']</span>');
+      }
     } else {
       var com_highlight = null;
     }
     if ('sci' in page_info) {
+      const sci = page_info['sci'][0];
       var sci_highlight = highlight_match(fit_info.sci_match_info,
-                                          page_info['sci'][0], true);
+                                          sci, true);
+      if (fit_info.sci_match_info &&
+          (fit_info.sci_match_info.match_str != sci)) {
+        var sci_ital = highlight_match(null, sci, true);
+        sci_highlight = (sci_ital +
+                         ' <span class="altname">[' +
+                         sci_highlight +
+                         ']</span>');
+      }
       sci_highlight = sci_highlight.replace(/:/, '&times; ');
     } else {
       var sci_highlight = null;
