@@ -2097,7 +2097,7 @@ class Page:
 
     def align_column(self, intro, c_list):
         if len(c_list) == 1:
-            return f'{intro} {c_list[0]}'
+            return f'<p>\n{intro} {c_list[0]}\n</p>\n'
         elif c_list:
             # Line up the members in a column with the first item just to
             # the right of the intro text.
@@ -2105,7 +2105,7 @@ class Page:
             # Note that the white space after "of" creates a "space"-sized
             # gap between the intro and the following div.
             s = '<br>\n'.join(c_list)
-            return f'{intro}\n<span class="membership">\n{s}\n</span>'
+            return f'<p>\n{intro}\n<span class="membership">\n{s}\n</span>\n</p>\n'
         else:
             return ''
 
@@ -2162,16 +2162,12 @@ class Page:
 
         return self.align_column('Member of', c_list)
 
-    def write_parents(self):
+    def write_keyed_parents(self):
         c_list = []
         for parent in sort_pages(self.parent):
             if parent.has_child_key:
                 c_list.append(parent.create_link(1))
-        if c_list:
-            s = self.align_column('Key to', c_list)
-            return f'<p>\n{s}\n</p>\n'
-        else:
-            return ''
+        return self.align_column('Key to', c_list)
 
     def page_matches_trait_value(self, trait, value):
         return (trait is None or
@@ -2750,7 +2746,6 @@ class Page:
                 desc = f'Description of {what}'
             else:
                 desc = f'Stub for {what}'
-            write_header(w, title, h1, nospace=True, desc=desc)
 
             # Calculate other names that should be cuddled up with the
             # title name.
@@ -2766,19 +2761,17 @@ class Page:
             if com and elab:
                 c_list.append(f'<b>{self.format_elab()}</b>')
 
+            write_header(w, title, h1, nospace=bool(c_list), desc=desc)
+
             if c_list:
                 c = '<br>\n'.join(c_list)
                 w.write(f'<p class="names">\n{c}\n</p>\n')
 
-            c_list = []
+            s = self.write_keyed_parents()
+            w.write(s)
+
             s = self.write_membership()
-            if s:
-                c_list.append(s)
-
-            if c_list:
-                w.write('<br>\n'.join(c_list) + '\n')
-
-            w.write(self.write_parents())
+            w.write(s)
 
             # Write the completeness of the taxon (from the 'x' or 'xx' flags).
 

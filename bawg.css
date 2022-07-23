@@ -221,6 +221,9 @@ a.enclosed {
     text-decoration: none;
     border-bottom: none;
 }
+details {
+    margin-bottom: 1em;
+}
 details > summary::after {
     color: #888;
     content: "[show details]";

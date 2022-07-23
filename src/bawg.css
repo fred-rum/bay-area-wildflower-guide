@@ -455,6 +455,9 @@ a.enclosed {
     border-bottom: none;   /* prevent underline for glossary links */
 }
 
+details {
+    margin-bottom: 1em;
+}
 /* Observation details can be toggled by clicking on the "twisty" triangle
    or anywhere else in the line, but this isn't obvious to the user.
    Show something more obviously clickable. */

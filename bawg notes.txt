@@ -1255,16 +1255,6 @@ review explicit children in 'sunflower family.txt'
   should children need 'member:sunflower family' when listed explicitly?
   should explicit listing be needed if 'member:sunflower family' is used?
 
-Should the HTML include 'Key to' before 'Member of'?
-  particularly given the ordering of 'Member of'
-
-"Member of" has different padding above
-  depending on whether the main page has multiple names or not
-
-"Chris's observations" has different padding below
-  depending on whether it is followed by taxon info
-  i.e. padding is missing if there is no scientific name (e.g. galls)
-
 since taxons that are directly observed can already pick up a common name
   from iNaturalist (or complain that the common name isn't already known),
   there's less need to warn about a directly observed taxon with no common name.

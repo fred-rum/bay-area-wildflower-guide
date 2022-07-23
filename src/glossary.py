@@ -589,7 +589,7 @@ class Glossary:
                     desc = f'Glossary of terms used for {self.taxon} in the Bay Area Wildflower Guide.'
                 else:
                     desc = f'Glossary of terms used in the Bay Area Wildflower Guide.'
-                write_header(w, self.name, None, nospace=True, desc=desc)
+                write_header(w, self.name, None, desc=desc)
                 w.write('<h4 id="title">Glossary table of contents</h4>\n')
                 master_glossary.write_toc(w, self)
                 w.write(f'<a href="http://ucjeps.berkeley.edu/IJM_glossary.html">Jepson eFlora</a>\n')
