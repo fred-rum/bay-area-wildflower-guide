@@ -1280,3 +1280,7 @@ flag places where the genus rank is inferred
 
 Diplacus is missing common bay area species
 cinquefoils is missing common bay area species
+
+Will the script run faster if I read the existing HTML files
+  and only re-write the ones that have changed?
+  can this lean on the existing logic in cache.py to be even faster and easier?

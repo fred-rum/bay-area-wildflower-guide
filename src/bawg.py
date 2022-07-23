@@ -65,17 +65,34 @@ from photo import *
 from glossary import *
 from cache import *
 
-strip_comments('bawg.css')
-strip_comments('search.js')
+if arg('-debug_js'):
+    # To avoid confusion when using the unstripped source files,
+    # delete the stripped versions.
+    delete_file('bawg.css')
+    delete_file('search.js')
 
-strip_comments('gallery.css')
-strip_comments('gallery.js')
+    delete_file('gallery.css')
+    delete_file('gallery.js')
 
-if arg('-without_cache'):
-    shutil.copy('src/no_sw.js', 'swi.js')
-    shutil.copy('src/no_sw.js', 'sw.js')
+    delete_file('swi.js')
+
+    # sw.js currently requires script modification,
+    # so it is always generated (and therefore not deleted).
 else:
-    strip_comments('swi.js')
+    strip_comments('bawg.css')
+    strip_comments('search.js')
+
+    strip_comments('gallery.css')
+    strip_comments('gallery.js')
+
+    if arg('-without_cache'):
+        shutil.copy('src/no_sw.js', 'swi.js')
+        shutil.copy('src/no_sw.js', 'sw.js')
+    else:
+        strip_comments('swi.js')
+
+strip_comments('gallery.html', debug_gallery=arg('-debug_js'))
+
 
 year = datetime.datetime.today().year
 
@@ -112,8 +129,12 @@ if arg('-steps'):
 def read_txt_files():
     for name in txt_files:
         page = Page(name, name_from_txt=True, src=name+'.txt')
-        with open(f'{root_path}/txt/{name}.txt', 'r', encoding='utf-8') as r:
-            page.txt = r.read()
+        try:
+            with open(f'{root_path}/txt/{name}.txt', 'r', encoding='utf-8') as r:
+                page.txt = r.read()
+        except:
+            print(f'reading txt file "{name}"')
+            raise
 
 read_txt_files()
 
@@ -893,20 +914,25 @@ def by_filename(name):
     return name[slash_pos+1:].casefold()
 
 if not arg('-without_cache'):
+    if arg('-debug_js'):
+        script_path = 'src/'
+    else:
+        script_path = ''
+
     path_list = [
         # Start with the files most needed for interfacing with the worker.
         # Not 'sw.js' because it's not necessary and could be really bad.
         # Actually, order doesn't matter much for loading, but depending
         # on the browser implementation, it might make a difference when
         # deleting files.
-        'swi.js',
-        'bawg.css',
-        'search.js',
+        script_path + 'swi.js',
+        script_path + 'bawg.css',
+        script_path + 'search.js',
         'pages.js',
         'gallery.html',
         'photos.js',
-        'gallery.js',
-        'gallery.css',
+        script_path + 'gallery.js',
+        script_path + 'gallery.css',
     ]
     for other in sorted(other_files):
         path_list.append(other + '.html')
@@ -944,5 +970,9 @@ if not arg('-without_cache'):
 
     update_cache(path_list)
     gen_url_cache()
+
+
+###############################################################################
+# Flush out any pending error messagse
 
 error_end()

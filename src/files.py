@@ -164,6 +164,11 @@ def write_header(w, title, h1, nospace=False, desc=None, at_root=False):
     else:
         path = '../'
 
+    if arg('-debug_js'):
+        script_path = path + 'src/'
+    else:
+        script_path = path
+
     w.write(f'''<!-- Copyright Chris Nelson - All rights reserved. -->
 <!DOCTYPE html>
 <html lang="en">
@@ -171,9 +176,9 @@ def write_header(w, title, h1, nospace=False, desc=None, at_root=False):
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">{content}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
-<script async src="{path}search.js"></script>
+<script async src="{script_path}search.js"></script>
 <script async src="{path}pages.js"></script>
-<script async src="{path}swi.js"></script>
+<script async src="{script_path}swi.js"></script>
 <link rel="apple-touch-icon" sizes="180x180" href="{path}favicon/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="{path}favicon/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="{path}favicon/favicon-16x16.png">
@@ -183,7 +188,7 @@ def write_header(w, title, h1, nospace=False, desc=None, at_root=False):
 <meta name="msapplication-TileColor" content="#106110">
 <meta name="msapplication-config" content="{path}favicon/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
-<link rel="stylesheet" href="{path}bawg.css">
+<link rel="stylesheet" href="{script_path}bawg.css">
 </head>
 <body>
 <a id="home-icon" tabindex="0" href="{path}index.html"><img src="{path}icons/home.png" alt="home"></a>
@@ -263,3 +268,9 @@ def read_data_file(filename, fn, msg=None):
     except FileNotFoundError:
         if arg('-steps'):
             info(f'Skipping {msg}data/{filename} (file not found)')
+
+def delete_file(filename):
+    try:
+        os.remove(filename)
+    except FileNotFoundError:
+        pass

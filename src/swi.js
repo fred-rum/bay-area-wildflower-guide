@@ -14,8 +14,13 @@
    swi.js has two types of pages that it interacts with:
    - the home page, with an 'update' button and a 'delete' button and lots
      of progress information.
-   - all other pages, with a potential 'hazard' icon that links back to
+   - most other pages, with a potential 'hazard' icon that links back to
      the home page when an update is available.
+
+   swi.js is not invoked for gallery.html since it's probably more confusing
+   than useful to present a hazard icon within the gallery framework.  And
+   without a reason to communicate with the service worker, there's also no
+   reason to re-register it.
 */
 
 'use strict';
