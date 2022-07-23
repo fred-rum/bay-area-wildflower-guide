@@ -25,7 +25,7 @@ bug:6591
 . none#spines unknown (similar to Misumena?)
 . black markings common, especially at joints
 
-==Mecaphesa spp.
+==n/a:Mecaphesa spp.
 bug:4999
 . has short none#spines/hairs on body and legs
 . two rows of eyes; front outside eyes larger than front inside eyes [although the difference is small]

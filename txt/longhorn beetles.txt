@@ -2,6 +2,6 @@ A free comprehensive <a href="http://bezbycids.com/byciddb/wdefault.asp">photogr
 
 ==flower longhorn beetles
 
-==Molorchus longicollis
+==n/a:Molorchus longicollis
 bug:221909
 Per Ken-ichi Ueda's <a href="https://www.inaturalist.org/observations/637591">observation</a>, there are only two species of Molorchus in California, and M. eburneus can be distinguished by the <a href="https://bugguide.net/node/view/888019/bgimage">white markings</a> on its elytra.

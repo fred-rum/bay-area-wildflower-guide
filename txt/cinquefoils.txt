@@ -1,0 +1,9 @@
+sci:genus Potentilla
+x:more
+family:rose family
+
+==hickman's cinquefoil:P. hickmanii
+. flowers in cymes
+. no stolons
+. CalPhotos shows two lobes per petal
+. rare; on/near Montara Mtn.

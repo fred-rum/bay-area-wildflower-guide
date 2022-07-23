@@ -1249,10 +1249,6 @@ Support "personal notes", created with "note:[...]".
 
 I probably need a method for proper citations, e.g. in case of link rot.
 
-when using the JavaScript search,
-  should a matching alternative name be listed
-    in parentheses after the primary name?
-
 review txt files for plants with x:more
 
 review explicit children in 'sunflower family.txt'
@@ -1265,12 +1261,22 @@ Should the HTML include 'Key to' before 'Member of'?
 "Member of" has different padding above
   depending on whether the main page has multiple names or not
 
-"Chris's observations" has differnet padding below
+"Chris's observations" has different padding below
   depending on whether it is followed by taxon info
   i.e. padding is missing if there is no scientific name (e.g. galls)
 
-when propagating props,
-  carry along some structure that conveys the ranges declared;
-  for an unranked page,
-    check whether its linnaean ancestor and all descendents are in the range,
-    and if so, assign the property to the page
+since taxons that are directly observed can already pick up a common name
+  from iNaturalist (or complain that the common name isn't already known),
+  there's less need to warn about a directly observed taxon with no common name.
+add another property like 'no_sci_not_obs'
+  to flag an unobserved taxon with no common name.
+
+when using the JavaScript search,
+  should a matching alternative name be listed
+    in parentheses after the primary name? (similar to iNaturalist)
+
+flag places where the genus rank is inferred
+  i.e. remains inferred after all sources are checked for elaborations
+
+Diplacus is missing common bay area species
+cinquefoils is missing common bay area species

@@ -56,19 +56,19 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0175+3301+2288+0037
 
 These thistles are listed in Jepson for the bay area, but I am unlikely to encounter them.
 
-==C. benedicta
+==blessed thistle:C. benedicta
 . rare, historical records only
 
-==C. cineraria
+==dusty miller:C. cineraria
 . rare, historical record only
 
-==C. diffusa
+==diffuse knapweed:C. diffusa
 . rare, historical record only
 
-==C. diluta
+==north african knapweed:C. diluta
 . rare, historical record only
 
-==C. jacea
+==brown knapweed:C. jacea
 . rare, historical record only
 
 ]

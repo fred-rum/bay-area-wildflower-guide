@@ -2,6 +2,8 @@ com:cream sacs
 sci:Castilleja rubicundula
 xx:any
 
+See also {-genus Triphysaria}.
+
 ==cream sacs:C. rubicundula var. lithospermoides
 color: yellow, cream, pink
 sci_jfp:C. rubicundula ssp. lithospermoides

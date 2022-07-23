@@ -8,7 +8,7 @@ bug:237939
 ==phacelia plant bug:Tupiocoris californicus
 bug:469779
 
-==genus Irbisia
+==n/a:genus Irbisia
 bug:238272
 . quite a few species within California
 .. the official key to distinguish them is quite difficult to understand

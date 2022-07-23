@@ -3,19 +3,21 @@ color: white, cream
 x:ca
 xx:ca
 
-==H. discolor var. discolor
-. leaf blade 1.5--8 cm, teeth toothed, base generally truncate to rounded
+==n/a:H. discolor var. discolor
 . inflorescence 5--25 cm, 5--25 cm wide, branches generally many
+. <b>leaf blade 1.5--8 cm</b>, teeth toothed, base generally truncate to rounded
 . common
 
-==H. discolor var. glabrescens
+# Calflora calls it rock spiraea, but that name is more commonly used
+# for other species in the genus and family.
+==desert ocean spray:H. discolor var. glabrescens
 . inflorescence 2--8 cm, 1.5--5 cm wide, branches 0--few
-. leaf blade 0.3--3 cm, teeth entire, above middle, base generally wedge-shaped
+. <b>leaf blade 0.3--3 cm</b>, teeth entire, above middle, base generally wedge-shaped
 . leaf puberulent to glabrous both surfaces, glands visible
 . not known in the bay area
 
 ==small-leaf cream bush:H. discolor var. microphyllus
 . inflorescence 2--8 cm, 1.5--5 cm wide, branches 0--few
-. leaf blade 0.3--3 cm, teeth entire, above middle, base generally wedge-shaped
+. <b>leaf blade 0.3--3 cm</b>, teeth entire, above middle, base generally wedge-shaped
 . leaf +- long-hairy 1 or both surfaces, glands 0 or generally obscured by hairs
 . not known in the bay area

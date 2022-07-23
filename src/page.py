@@ -45,6 +45,7 @@ props = {
     'member_link': 'd',
     'member_name': 'd',
     'no_sci': 'f',
+    'no_com': 'f',
     'obs_requires_photo': 'f',
     'photo_requires_bugid': 'f',
     'one_child': 'f',
@@ -239,7 +240,7 @@ def format_elab(elab, ital=True):
             return None
         elif elab == 'n/a':
             return elab
-        elif elab[0].islower():
+        elif elab[0].islower() and ' ' in elab:
             (gtype, name) = elab.split(' ', maxsplit=1)
             return f'{gtype} {i0}{name}{i1}'
         elif elab.endswith(' spp.'):
@@ -328,6 +329,7 @@ class Page:
 
         # initial/default values
         self.com = None
+        self.no_com = False # true if the page will never have a common name
         self.sci = None
         self.no_sci = False # true if the page will never have a sci name
         self.elab = None
@@ -355,7 +357,7 @@ class Page:
             #   and then the com/sci names are set.
             # - if find_page1() matches this page's name, the match is allowed,
             #   but we still don't know what kind of name it is.
-            # - if we get to the end of the script  without setting either
+            # - if we get to the end of the script without setting either
             #   the common or scientific name, then we'll make a guess based
             #   on capitalization.
             self.no_names = True
@@ -560,6 +562,13 @@ class Page:
     # are guaranteed to be without conflicts.  Any common names assigned after
     # that will not have name_from_txt asserted.
     def set_com(self, com, from_inat=False):
+        if com == 'n/a':
+            if self.com:
+                error(f'com:n/a used on page {self.full()}')
+            else:
+                self.no_com = True
+            return
+
         if self.com:
             # This page already has a common name.
             if self.com == com:
@@ -598,6 +607,10 @@ class Page:
             #   - we have a new common name from iNaturalist, and
             #   - this page was created by the user, and
             #   - we don't have a property that allows us to use the new name.
+            return
+
+        if self.no_com:
+            error(f'common name "{com}" assigned to page {self.full()}, but com:n/a was already used for the page')
             return
 
         self.com = com
@@ -666,7 +679,7 @@ class Page:
     # set_sci() can be called with a stripped or elaborated name.
     # Either way, both a stripped and an elaborated name are recorded.
     def set_sci(self, elab, from_inat=False):
-        if self.sci or self.no_sci and from_inat:
+        if (self.sci or self.no_sci) and from_inat:
             # This page already has a scientific name, and we don't want
             # iNaturalist to override it.  E.g. iNaturalist could have found
             # the page via isci_page[], which differs from its user-supplied
@@ -674,7 +687,7 @@ class Page:
             return
 
         if elab == 'n/a':
-            if self.sci and elab == 'n/a':
+            if self.sci:
                 error(f'sci:n/a used on page {self.full()}')
             else:
                 self.no_sci = True
@@ -827,7 +840,7 @@ class Page:
         elif elab:
             return elab
         else:
-            return self.name
+            return '{' + self.name + '}'
 
     # full() is intended for Python debug output to the terminal
     # It removes all fancy formatting to emit ASCII only.
@@ -1796,9 +1809,12 @@ class Page:
             return
 
         if not (self.sci or self.no_sci):
-            print(self.full())
             self.rp_check('no_sci',
                           f'{self.full()} has no scientific name')
+
+        if not (self.com or self.no_com):
+            self.rp_check('no_com',
+                          f'{self.full()} has no common name')
 
         if self.count_flowers() and not self.get_jpg('', set_rep_jpg=False):
             self.rp_check('obs_requires_photo',

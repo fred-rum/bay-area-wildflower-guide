@@ -1,9 +1,10 @@
+com:n/a
 sci:genus Lasioglossum
 taxon_id: 57678
 
 ==metallic sweat bees:subgenus Dialictus
 bug:158401
 
-==subgenus Lasioglossum
+==n/a:subgenus Lasioglossum
 taxon_id: 569269
 bug:158402

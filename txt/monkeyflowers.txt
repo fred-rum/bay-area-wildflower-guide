@@ -1,3 +1,4 @@
+acom:lopseed family
 sci:family Phrymaceae
 
 Key features:
@@ -5,11 +6,20 @@ Key features:
 . plant size
 . leaf shape
 
+# iNaturalist has Erythranthe as "monkeyflowers" but Diplacus as nothing.
+# That's just confusing, and without distinguishing common names for both,
+# I'd rather have common names for neither.
+# However, to avoid any potential complaint about Erythranthe, I give
+# it an alternative common name of "monkeyflowers".
+# And because Diplacus might as well match, I do the same for it.
+
 ==Diplacus spp.
+acom:monkeyflowers
 . pedicel generally < calyx
 . flowers orange or purple
 
 ==Erythranthe spp.
+acom:monkeyflowers
 . pedicel generally > calyx
 . calyx lobes with prominent midribs
 . flowers yellow, red, or (one) purple

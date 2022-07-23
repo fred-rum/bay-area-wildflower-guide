@@ -4,11 +4,11 @@ sci:subfamily Lepturinae
 bug:62660
 The males are all black (or brown).  The females have a red carapace with black spots.
 
-==Brachysomida californica
+==n/a:Brachysomida californica
 bug:248793
 
 ==genus Strophiona
 bug:26736
 
-==genus Stenocorus
+==n/a:genus Stenocorus
 bug:6904

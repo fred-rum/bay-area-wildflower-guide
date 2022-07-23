@@ -12,13 +12,13 @@ color: pale purple, purple
 . leaf 1.5--5 cm, generally linear to lanceolate
 . petals lavender to purple or dark wine-red, often with a purple spot near middle or distally
 
-==C. purpurea ssp. purpurea
+==n/a:C. purpurea ssp. purpurea
 . petals 15--25 mm
 . leaf 1.5--4.5 cm, broadly lanceolate to elliptic or ovate
 . inflorescence dense
 . petals lavender to purple or purple-red, often lighter proximally, often with a darker spot distally
 
-==C. purpurea ssp. viminea
+==n/a:C. purpurea ssp. viminea
 . petals 15--25 mm
 . leaf 3--7 cm, linear to narrowly lanceolate
 . inflorescence open

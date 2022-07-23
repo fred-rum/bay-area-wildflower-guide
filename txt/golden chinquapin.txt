@@ -1,12 +1,12 @@
 sci:Chrysolepis chrysophylla
 xx:any
 
-==C. chrysophylla var. chrysophylla
+==golden chinquapin:C. chrysophylla var. chrysophylla
 color: other
 . tree, 15--30 m
 . leaf blade +- flat
 
-==C. chrysophylla var. minor
+==bush chinquapin:C. chrysophylla var. minor
 color: other
 . shrub or small tree, < 5 m
 . leaf blade +- folded lengthwise (axis lowermost, margins upturned)

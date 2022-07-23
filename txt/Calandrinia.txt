@@ -1,3 +1,5 @@
+com: n/a
+sci: genus Calandrinia
 x:ca
 
 ==red maids:C. menziesii

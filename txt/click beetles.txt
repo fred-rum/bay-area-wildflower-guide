@@ -1,2 +1,2 @@
-==Ampedus cordifer
-bug:9428
+==n/a:Ampedus cordifer
+bug:9447

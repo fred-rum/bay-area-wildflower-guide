@@ -5,6 +5,6 @@ xx:any
 color: yellow, cream
 . corolla yellow/cream
 
-==T. eriantha ssp. rosea
+==pink butter 'n' eggs:T. eriantha ssp. rosea
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0405+0806
 . corolla white, fading rose-pink

@@ -1,3 +1,5 @@
+com:n/a
+sci:genus Calycadenia
 x:hist
 
 ==sticky western rosinweed:C. multiglandulosa

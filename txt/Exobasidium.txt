@@ -1,3 +1,4 @@
+com:n/a
 sci:genus Exobasidium
 # unknown number of additional species, described or undescribed
 
@@ -21,7 +22,7 @@ Relevent iNaturalist comments in chronological order:
 <a href="https://www.inaturalist.org/observations/3132191#activity_comment_10b892ce-ec95-43f6-8c2f-942b4332aa4f">5</a>,
 <a href="https://www.inaturalist.org/observations/27716705#activity_comment_88a9c73a-d806-4c12-b770-ca848b40a264">6</a>.
 
-==Exobasidium arctostaphyli
+==n/a:Exobasidium arctostaphyli
 . forms bright red blisters on the surface of {-bearberries and manzanitas} leaves, turning glaucous on the inner side
 .. blisters cause only a minor buckling of the leaf surface
 .. compare to {-manzanita leafgall aphid}, which causes signifant swelling and distortion of the leaf edge
@@ -31,7 +32,7 @@ Relevent iNaturalist comments in chronological order:
 . parasitizes only lingonbery (Vaccinium vitis-idaea)
 . see above for discussion
 
-==Exobasidium vaccinii-uliginosi
+==n/a:Exobasidium vaccinii-uliginosi
 <b>Caution: photo provided for reference, but ID is unsure</b>
 . commonly identified on iNaturalist on various plant hosts, but should probably be identified on {-bearberries and manzanitas} only as {-Exobasidium} until properly researched
 . see above for discussion

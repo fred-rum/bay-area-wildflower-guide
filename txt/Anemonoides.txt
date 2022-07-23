@@ -1,3 +1,7 @@
+# Jepson has the common name as 'anemone', which I don't know how to make
+# plura, and anyway it might not make sense since POWO/iNaturalist have
+# changed the genus name.
+com:n/a
 sci:Anemonoides spp.
 sci_jfp: Anemone spp.
 x: ba

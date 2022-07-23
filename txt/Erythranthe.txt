@@ -1,3 +1,5 @@
+com: n/a
+sci: genus Erythranthe
 x:rare
 
 [

@@ -97,7 +97,7 @@ color: yellow
 . corolla 6--10 mm, bright yellow, wings +- = keel; <b>wings cup the keel often without touching each other</b>
 . Mt. Madonna
 
-==A. argophyllus
+==silver bird's-foot trefoil:A. argophyllus
 . prostrate to erect, 10--60 cm
 . <b>leaflets with silvery hairs generally obscuring surface</b>
 . calyx 4--8 mm, lobes +- <= tube, densely shaggy-hairy
@@ -135,11 +135,11 @@ xx:hist
 . corolla generally 4--6 mm, yellow to +- red, <b>dark-tipped</b>, wings >= other petals [wings < banner in other species?], in clusters of 3--8 with 1--5 mm pedicels
 . scattered in the Santa Cruz range
 
-==A. micranthus
+==san diego bird's-foot trefoil:A. micranthus
 . rare in the south bay
 
 ]
 
-==A. argyraeus
+==canyon birdsfoot trefoil:A. argyraeus
 . 1--3 flowers per leaf axil
 . extrememely rare at Oyster Bay

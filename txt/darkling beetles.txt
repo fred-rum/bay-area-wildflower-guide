@@ -1,5 +1,9 @@
-==genus Coelocnemis
+==n/a:genus Coelocnemis
 bug:50466
+. stands on its head and emits defensive secretions from its abdomen
+. has two rows of fine hairs on the lower part of the inside edge of the hind tibiae <a href="https://bugguide.net/node/view/377187">[reference]</a>
 
 ==desert stink beetles:genus Eleodes
 bug:218
+. stands on its head and emits defensive secretions from its abdomen
+. <b>does not have</b> fine hairs on the lower part of the inside edge of the hind tibiae <a href="https://bugguide.net/node/view/377187">[reference]</a>

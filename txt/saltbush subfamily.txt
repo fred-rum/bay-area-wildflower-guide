@@ -1,0 +1,24 @@
+sci:subfamily Chenopodioideae
+
+CalFlora and Jepson have all of these as Chenopodium spp.
+
+==california goosefoot:Blitum californicum
+sci_fpj:Chenopodium californicum
+x:ba
+color:other
+. perennial herb from stout, fleshy caudex
+. calyx tube generally > calyx lobes
+
+==goosefoots:Chenopodium spp.
+x:ba
+. annual
+. calyx tube generally < calyx lobes
+. all flowers with 5 calyx lobes (none with 3)
+. [Chenopodiastrum is also included here]
+
+==goosefoots:Oxybasis spp.
+sci_fpj:Chenopodium spp.
+x:hist
+. annual
+. calyx tube generally < calyx lobes
+. at least some flowers with 3 calyx lobes (others with 5)

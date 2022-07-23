@@ -7,11 +7,16 @@ color: white
 . petals white, veined white, green, or +- purple [sometimes with yellow strongly bleeding from veins]
 . anthers cream to yellow or green
 
-==L. douglasii ssp. rosea
+# common name taken from Calflora's unique name
+# instead of iNaturalist's name duplicaed from the species level
+==rosy douglas' meadowfoam:L. douglasii ssp. rosea
+acom:douglas' meadowfoam
 . petals white, veined purple or green
 . anthers cream, dark pink, orange-red, or +- black
 
-==L. douglasii ssp. douglasii
+# common name from Calflora
+# iNaturalist uses this common name for L. d. rosea for some reason
+==douglas' meadowfoam:L. douglasii ssp. douglasii
 . petals yellow with white tips
 . anthers yellow, cream, or red-brown
 

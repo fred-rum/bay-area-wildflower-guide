@@ -8,12 +8,12 @@ color: pink
 . petals rose to purple
 . uncommon
 
-==C. salviifolius
+==sage-leaved rock-rose:C. salviifolius
 . 5 sepals
 . petals white (drying +- yellow)
 . extremely rare
 
-==C. ladanifer
+==gum rock-rose:C. ladanifer
 . 3 sepals
 . petals white, generally with red or yellow near base
 . very rare

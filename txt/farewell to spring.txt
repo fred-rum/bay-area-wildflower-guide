@@ -1,13 +1,13 @@
 sci:Clarkia amoena
 xx:ba
 
-==C. amoena ssp. huntiana
+==hunt's clarkia:C. amoena ssp. huntiana
 . stem erect
 . inflorescence open
 . internode generally > subtending flower
 . very rare: Mt. Tam and Milagra Ridge
 
-==C. amoena ssp. amoena
+==n/a:C. amoena ssp. amoena
 . stem decumbent
 . inflorescence dense
 . internode generally < subtending flower

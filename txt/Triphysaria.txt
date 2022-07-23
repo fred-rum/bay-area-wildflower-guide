@@ -1,5 +1,8 @@
+com:n/a
 sci:Triphysaria spp.
 x:ca
+
+See also {-cream sacs}.
 
 ==johnnytuck:T. eriantha
 . <b>plant +- purple</b>

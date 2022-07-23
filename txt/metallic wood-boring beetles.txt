@@ -1,5 +1,5 @@
-==genus Anthaxia
+==n/a:genus Anthaxia
 bug:12722
 
-==Dicerca hornii ssp. hornii
+==n/a:Dicerca hornii ssp. hornii
 bug:755090

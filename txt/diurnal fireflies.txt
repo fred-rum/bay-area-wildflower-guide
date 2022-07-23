@@ -4,6 +4,6 @@ sci:genus Ellychnia
 bug:251917
 . red areas on pronotum diverge from apex to base, with a semi-circular indentation near their bases
 
-==Ellychnia megista
+==greater firefly:Ellychnia megista
 bug:658108
 . red areas on pronotum are roughly parallel from apex to base, with no semi-circular indentation near their bases

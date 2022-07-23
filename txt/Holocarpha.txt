@@ -1,3 +1,6 @@
+# Jepson has these as tarweeds or tarplants, exactly the same as genus Madia.
+# Since iNaturalist doesn't agree, I'll just leave it without a common name.
+com:n/a
 sci:Holocarpha spp.
 x:ba
 ==pit-gland tarweed:H. virgata
@@ -7,7 +10,7 @@ xx:uncat
 . ray flowers 3--8; disk flowers 9--25+
 . uncommon in the east bay
 
-==H. macradenia
+==santa cruz tarplant:H. macradenia
 . anthers +- red to dark purple
 . ray flowers 8--16; disk flowers 40--90
 . rare near Santa Cruz, Mt. Tam
@@ -20,7 +23,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1107+0985
 . heads 1 or in panicle- or raceme-like clusters
 . uncommon in the east bay
 
-==H. obconica
+==san joaquin tarweed:H. obconica
 . anthers yellow to +- brown
 . stem resinous distally, not notably stalked-glandular
 . phyllaries each with (0)5--15(20) pit-gland-tipped outgrowths and generally glabrous or minutely sessile- or stalked-glandular (bristly)

@@ -10,7 +10,7 @@ color: red, salmon
 sci_jp:C. affinis ssp. neglecta
 . inflorescence generally yellow, 15--25 mm wide
 
-==C. affinis var. contentiosa
+==n/a:C. affinis var. contentiosa
 sci_jfp:n/a
 . description from <a href="https://www.inaturalist.org/observations/28210027#activity_comment_3131235">Mark Egger</a>
 . found only in Southern California

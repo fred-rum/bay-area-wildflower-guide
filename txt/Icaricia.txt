@@ -1,4 +1,8 @@
+com:n/a
 sci:Icaricia spp.
+
+# bugguide doesn't have Icaricia, so I link to Plebejus intead
+bug:9674
 
 This genus is in taxonomic flux.
 

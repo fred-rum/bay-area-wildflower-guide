@@ -1,3 +1,5 @@
+com: n/a
+sci: genus Diplacus
 x:hist/rare
 
 ==sticky monkeyflower:D. aurantiacus

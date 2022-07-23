@@ -29,5 +29,5 @@ bug:385405
 x:more
 bug:94843
 
-==genus Panurginus
+==n/a:genus Panurginus
 bug:108931

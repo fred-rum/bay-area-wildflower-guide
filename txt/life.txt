@@ -10,6 +10,7 @@ link_inaturalist: self-below
 link_bayarea_inaturalist: self-below
 
 warn no_sci: self-below
+warn no_com: self-below
 
 warn obs_requires_photo: genus-below
 warn one_child: species
@@ -29,7 +30,7 @@ warn obs_promotion_without_x: genus, species
 do casual_obs_promotion: genus-below
 
 error obs_fill_sci: self-below
-error obs_fill_com: self-below
+warn obs_fill_com: self-below
 warn obs_fill_alt_com: self-below
 
 

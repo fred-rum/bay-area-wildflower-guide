@@ -1,7 +1,8 @@
+com:n/a
 sci:genus Fuligo
 x:ba
 
 ==dog vomit slime mold:Fuligo septica
 
-==Fuligo leviderma
+==n/a:Fuligo leviderma
 . extremely rare and different looking

@@ -52,7 +52,7 @@ color:yellow
 . flowers generally > 1 per branch
 . petals 12--17 mm
 
-==H. grandifolium
+==n/a:H. grandifolium
 sci_j: n/a
 . shrub
 . large, leathery leaves

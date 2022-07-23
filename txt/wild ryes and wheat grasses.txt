@@ -37,7 +37,8 @@ sci_fpj:Elymus pacificus
 ==creeping wild rye:Leymus triticoides
 sci_fpj:Elymus triticoides
 
-==Leymus Xmultiflorus
+# common name from Calflora, backed up by other sources
+==many flowered wild rye:Leymus Xmultiflorus
 sci_fpj:Elymus Xgouldii
 
-==E. Xhansenii
+==n/a:E. Xhansenii

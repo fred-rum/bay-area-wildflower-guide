@@ -19,14 +19,14 @@ sci_p: Aster chilensis
 . very rare
 ]
 [
-==S. lanceolatum var. hesperium
+==siskiyou aster:S. lanceolatum var. hesperium
 . outer phyllaries pale-margined < &frac12; length, length generally < 3 &times; width
 . stem +- hairy in lines
 . inflorescence bracts well developed
 . ray flowers: 6--12 mm, +- white to violet
 . rare
 
-==S. lentum
+==sulsun marsh aster:S. lentum
 . outer phyllaries pale-margined < &frac12; length, length generally < 3 &times; width
 . stem +- glabrous
 . inflorescence bracts small

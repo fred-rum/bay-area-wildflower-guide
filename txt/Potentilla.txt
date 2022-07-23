@@ -1,9 +1,0 @@
-sci:Potentilla
-x:hist/rare
-family:rose family
-
-==P. hickmanii
-. flowers in cymes
-. no stolons
-. CalPhotos shows two lobes per petal
-. rare; on/near Montara Mtn.

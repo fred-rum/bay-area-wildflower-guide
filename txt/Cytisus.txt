@@ -1,3 +1,5 @@
+com: n/a
+sci: genus Cytisus
 x:hist
 
 ==scotch broom:Cytisus scoparius

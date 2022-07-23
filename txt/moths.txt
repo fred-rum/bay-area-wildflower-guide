@@ -14,7 +14,7 @@ bug:37824
 ==pacific tent caterpillar:Malacosoma constricta
 bug:163464
 
-==genus Orgyia
+==n/a:genus Orgyia
 bug:335
 
 ==dagger moths:genus Acronicta

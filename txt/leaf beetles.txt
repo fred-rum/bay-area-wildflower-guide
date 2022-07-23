@@ -8,6 +8,6 @@ bug:24745
 ==spotted cucumber beetle:Diabrotica undecimpunctata
 bug:456
 
-==genus Syneta
+==n/a:genus Syneta
 bug:121228
 <b>Caution: ID unsure</b>

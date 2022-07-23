@@ -10,7 +10,10 @@ bug:225834
 . a lumpy gall up to 20 mm wide at the tip of a branch
 . often has plant#leaves growing through the gall
 
-==Asphondylia garryae
+# common name derived from Russo 2021
+==silktassel flower gall midge:Asphondylia garryae
 bug:n/a
+. parasitizes {-silktassels}
+.. Russo has the only local parasitized species as {-Garrya fremontii}.  Either he's wrong, or my plant IDs are wrong.
 
 ==willow gall midges

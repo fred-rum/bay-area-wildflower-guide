@@ -1,3 +1,4 @@
+com:n/a
 sci:class Agaricomycetes
 end_hierarchy
 

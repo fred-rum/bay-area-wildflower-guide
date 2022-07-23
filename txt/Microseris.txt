@@ -15,7 +15,8 @@ Key features:
 
 Ordered roughly by scale length (long to short).
 
-==M. acuminata
+# common name selected from Calflora
+==sierra foothills microseris:M. acuminata
 color: other
 . Seeds 4.5--7 mm, flared at tip.
 . 5 scales, each 3.5--11 mm, barely inrolled, midrib width > 1/5 scale width.
@@ -48,7 +49,8 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0511+0184
 . Bristles 3--8 mm.
 . Found near the coast and at Edgewood.
 
-==M. elegans
+# common name from Calflora
+==elegant silverpuffs:M. elegans
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0411+2148
 . Seeds 1.5--3 mm, widest at the tip, tapering (slightly) to the base.
 . Outermost seeds are sometimes hairy, while inner seeds are glabrous.

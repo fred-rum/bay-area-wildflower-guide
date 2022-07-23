@@ -1,3 +1,4 @@
+com:n/a
 sci:genus Podabrus
 
 Per <a href="https://bugguide.net/node/view/9448">bugguide.net</a>, the none#head of Podabrus narrows behind the eyes to form a distinct "neck" not covered by the pronotum, and the pronotum is anteriorly truncate
@@ -7,6 +8,6 @@ bug:9449
 . black wing elytra
 . red none#head and pronotum
 
-==Podabrus cavicollis
+==n/a:Podabrus cavicollis
 bug:370123
 <b>Caution: ID unsure</b>

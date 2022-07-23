@@ -205,8 +205,9 @@ def create_taxon_pages(d, prefix=''):
             else:
                 elab = prefix + sci
             if com == 'n/a':
-                com = None
-            page = find_page2(com, elab)
+                page = find_page2(None, elab)
+            else:
+                page = find_page2(com, elab)
             if not page:
                 page = Page(com, elab, shadow=True, src='taxon_names.yaml')
             #info(f'{page.com} <-> {page.elab}')
@@ -613,17 +614,23 @@ read_data_file('observations.csv', read_observation_data,
 if arg('-tree') == '12':
     print_trees()
 
+if arg('-steps'):
+    info('Step 13: Apply remaining properties')
+
+# If we got this far and a page still doesn't have a name, give it one.
+for page in page_array:
+    page.infer_name()
+
 top_list = [x for x in page_array if not x.parent]
 
 for page in full_page_array:
     page.apply_most_props()
 
-if arg('-steps'):
-    info('Step 13: Parse remaining text, including glossary terms')
+if arg('-tree') == '13':
+    print_trees()
 
-# If we got this far and a page still doesn't have a name, give it one.
-for page in page_array:
-    page.infer_name()
+if arg('-steps'):
+    info('Step 14: Parse remaining text, including glossary terms')
 
 parse_glossaries(top_list)
 
@@ -633,7 +640,7 @@ for page in page_array:
 for page in page_array:
     page.check_traits()
 
-if arg('-tree') == '13':
+if arg('-tree') == '14':
     print_trees()
 
 # Turn txt into html for all normal and default pages.

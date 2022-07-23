@@ -5,5 +5,5 @@ Verified locations for millipede species and subspecies can be found by county i
 ==yellow-spotted millipede:Harpaphe haydeniana
 bug:15008
 
-==Paeromopus angusticeps
+==n/a:Paeromopus angusticeps
 bug:372853

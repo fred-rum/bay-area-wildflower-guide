@@ -1,3 +1,5 @@
+com: n/a
+sci: genus Genista
 x:ba
 
 Stem generally ribbed or angled, green.

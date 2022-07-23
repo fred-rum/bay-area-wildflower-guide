@@ -2,13 +2,23 @@ sci:n/a
 [
 <h2>Leafy stems</h2>
 
+# iNaturalist has Cytisus as "brooms" but Genista as nothing.
+# That's just confusing, and without distinguishing common names for both,
+# I'd rather have common names for neither.
+# However, to avoid any potential complaint about Cytisus, I give
+# it an alternative common name of "monkeyflowers".
+# And because Genista might as well match, I do the same for it.
+
+
 ==Cytisus spp.
+acom:brooms
 . leaf with 1--3 leaflets
 . stems leafy
 . style generally abruptly curved at +- middle or gently curved +- throughout
 . <b>axillary clusters of 1--3 flowers, pedicels < 10 mm</b>
 
 ==Genista spp.
+acom:brooms
 . leaf with 1--3 leaflets
 . stems leafy
 . style +- abruptly bent at tip

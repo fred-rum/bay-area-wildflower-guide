@@ -1,3 +1,6 @@
+com:goosefoots
+sci:genus Oxybasis
+
 ==large-seed goosefoot:Oxybasis macrospermum
 sci_fpj:Chenopodium macrospermum
 . leaf blade thick to fleshy, margin generally serrate, abaxially +- densely powdery but becoming glabrous in age

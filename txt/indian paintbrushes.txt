@@ -39,7 +39,7 @@ xx:none
 . leaves <b>+- fleshy, oblong to rounded</b>, lobes 0--3, truncate-rounded; <b>hairs generally bristly or shaggy</b>
 . common on the peninsula + Alum Rock
 
-==Castilleja martini
+==camp martin paintbrush:Castilleja martini
 xx:uncat
 sci_fpj:Castilleja applegatei ssp. martinii
 . <b>plant glandular-puberulent to glandular-sticky-hairy proximal to inflorescence</b>

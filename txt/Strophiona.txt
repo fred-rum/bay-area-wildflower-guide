@@ -1,3 +1,4 @@
+com:n/a
 sci:genus Strophiona
 x:any
 
@@ -5,13 +6,13 @@ All 3 species of this genus can potentially be found in the bay area.  Although 
 
 <a href="https://www.oregon.gov/oda/shared/Documents/Publications/IPPM/KeyToGeneraOfCerambycidaeOfWesternNAmerica.pdf">Key</a> to the western members of {-family Cerambycidae}.  The western species of {-Strophiona spp.} in particular are distinguished on page 379, with key terms defined in the first few pages.
 
-==Strophiona tigrina
+==n/a:Strophiona tigrina
 bug:119699
 . anterior dark elytral band oblique [black space between frontmost yellow stripes at an angle]
 . center of pronotum with at most sparse pubescence
 . most common
 
-==S. laeta
+==n/a:S. laeta
 bug:221726
 . anterior dark elytral band transverse [straight across]
 . pronotum with center obscured by dense [yellow] pubescence
