@@ -1330,6 +1330,3 @@ Support 'do member_link: self' in unranked taxons
 
 Record native/alien status
   display as a small icon, e.g. to the right of the name
-
-thumbnail is missing a top margin when within a [bracket] box
-  e.g. 'western gull' within 'large white-headed gulls'

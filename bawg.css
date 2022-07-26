@@ -192,8 +192,14 @@ ul ul {
 }
 div.box {
     border: 1px solid #c8c8c8;
-    padding: 0px 10px;
+    padding: 10px;
     margin: 10px 0px;
+}
+div.box :first-child {
+    margin-top: 0px;
+}
+div.box :last-child {
+    margin-bottom: 0px;
 }
 a.family:link, a.family:visited {
     color: #9c8024;
@@ -237,8 +243,9 @@ img.leaf-thumb {
     height: 40vmin;
     max-height: 200px;
     width: auto;
-    margin-right: 10px;
+    margin-top: 10px;
     margin-bottom: 10px;
+    margin-right: 10px;
     vertical-align: middle;
 }
 div.leaf-thumb-text {
@@ -595,15 +602,12 @@ h2 {
 h3 {
     background-color: rgb(245,255,245);
 }
-h1, h2, h3, p.names {
+h1, h2, h3, h4, p.names {
     padding: 2px;
     margin-block-start: 18px;
     margin-block-end: 14px;
     margin-left: -2px;
     margin-right: -2px;
-}
-div.box h2:first-child, div.box h3:first-child {
-    margin-top: 8px;
 }
 p.names {
     margin-top: -2px;

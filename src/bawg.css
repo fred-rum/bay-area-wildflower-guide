@@ -397,11 +397,19 @@ ul ul {
 
 /* This is the gray box that is created for txt that includes '[' and ']'
    on lines by themselves.  The box is also used for organizing a page
-   that lists its entire descendent hierarchy. */
+   with list_hierarchy. */
 div.box {
     border: 1px solid #c8c8c8;
-    padding: 0px 10px;
+    padding: 10px;
     margin: 10px 0px;
+}
+/* For anything inside div box, ignore its usual top and bottom margins
+   and use only the box padding instead. */
+div.box :first-child {
+    margin-top: 0px;
+}
+div.box :last-child {
+    margin-bottom: 0px;
 }
 
 /* Link colors.
@@ -484,9 +492,7 @@ details[open] > summary::after {
    minimum screen dimension, so rotating the screen to landscape mode won't
    change the size of the photos.
 
-   The photos have margin-right and margin-bottom to ensure a gap
-   between them when multiple photos appear on a line, potentially
-   wrapping onto subsequent lines.
+   The photos have margins to keep them away from each and from other text.
 
    vertical-align causes the photos to be aligned based on their contents,
    not based relative to a text baseline.  I.e. it's silly to leave room
@@ -498,8 +504,9 @@ img.leaf-thumb {
     height: 40vmin;
     max-height: 200px;
     width: auto;
-    margin-right: 10px;
+    margin-top: 10px;
     margin-bottom: 10px;
+    margin-right: 10px;
     vertical-align: middle;
 }
 
@@ -1135,18 +1142,12 @@ h3 {
 /* Extend the background color a bit in all directions so that it
    doesn't cuddle the text quite so closely.
    And fix the top and bottom margins regardless of font size. */
-h1, h2, h3, p.names {
+h1, h2, h3, h4, p.names {
     padding: 2px;
     margin-block-start: 18px;
     margin-block-end: 14px;
     margin-left: -2px;
     margin-right: -2px;
-}
-/* When a heading is the first element in a div.box, tuck it in
-   so that the gap between the box and the heading is the same at the
-   top as on the left and right. */
-div.box h2:first-child, div.box h3:first-child {
-    margin-top: 8px; /* side padding is 10px - 2px */
 }
 /* Cuddle additional names against the title name. */
 p.names {
