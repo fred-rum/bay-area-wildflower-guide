@@ -1,0 +1,7 @@
+sci:n/a
+
+==garden snail:Cornu aspersum
+x:ca
+
+==milk snail:Otala lactea
+x:ca

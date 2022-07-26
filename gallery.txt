@@ -33,5 +33,6 @@ button for full screen view?
 can I recognize a flick left or right for switching photos?
   is getPredictedEvents() useful?
 
-present the filename
-  only when viewing locally? (no http)
+re-encode space or comma in filename to avoid most % percent encoding
+  e.g. encode space as '+', comma as '.'
+    the last '.' in the encoded value is recognized as the filename extension

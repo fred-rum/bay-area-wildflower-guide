@@ -1248,6 +1248,15 @@ Support "personal notes", created with "note:[...]".
     (and child taxons?)
 
 I probably need a method for proper citations, e.g. in case of link rot.
+  Perhaps it could simply be a glossary!
+    The glossary definition would then link to the resource, if available.
+  But a website demands not just a description and link to the website,
+    but rather a description and link to the individual page.
+    And that's awkward in a citation format.
+    Perhaps the (glossary) citation is to the website, which is then followed
+      in the text by a linked description of the page.
+      E.g. "California Herps (glossary link) has more tips for
+        identifying alligator lizards in california (page link)."
 
 review txt files for plants with x:more
 
@@ -1269,4 +1278,58 @@ cinquefoils is missing common bay area species
 
 Will the script run faster if I read the existing HTML files
   and only re-write the ones that have changed?
+    or are missing (see below)
+    or have incorrect time stamps?
   can this lean on the existing logic in cache.py to be even faster and easier?
+    write_and_hash() is called for every HTML file
+    can't rely on old_cache since it might not be in sync after a crash
+      although the risk is low;
+        I don't get many crashes once file writing starts
+        and it would be rare for a file to revert to the cached value
+    instead of writing to an "in progress" directory and moving it at the end
+      scan the html directory at the start
+      delete files at the end that weren't re-generated
+    or move unchanged files to "in progress"
+      is this safer from crashes?  I'm not sure
+
+Give the user a way to edit/repeat the previous search
+  When navigating away from a page, record the search field before clearing it
+  After returning to the page, if the search field is empty, provide a
+    'restore/refresh' button at the right end of the search field.
+    Clicking the button restores the previous search value.
+    The button disappears when anything is typed (or after a restore),
+      but re-appears if the search field is cleared.
+   Since a button cannot actually be within the search field,
+     the search field should be contained within a larger div that has the
+     appropriate border elements.
+       :focus-within can be used to highlight the container when appropriate
+  Perhaps it is easier to position the button on top of the search field
+      without putting it within the focus element.
+    text will never overlap the button because the button only appears when
+      the text field is blank
+
+find subspecies that are listed without a species parent
+    and designate it as a member of the species *with a common name*.
+  make the species common name findable via search
+      and link to the (sole) member
+    how should the species be formatted?
+      I think not in brackets
+      what color?  gold?
+      actually, treating it as an alternative name for the subspecies
+        during search is probably fine
+    perhaps auto-create and link the page to its child,
+        but don't link it to its parent genus
+          this may be a new type of "half-link",
+            with a link from species to genus and species to subspecies,
+              but not genus to species and maybe not subspecies to species
+          does that screw up script assumptions elsewhere?
+      check for common name via no_com as usual
+
+Support 'do member_link: self' in unranked taxons
+   e.g. 'white daisies', 'yellow daisies', 'dandelion-like flowers'
+
+Record native/alien status
+  display as a small icon, e.g. to the right of the name
+
+thumbnail is missing a top margin when within a [bracket] box
+  e.g. 'western gull' within 'large white-headed gulls'

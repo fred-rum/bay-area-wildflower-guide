@@ -1,0 +1,12 @@
+sci:Heterotheca sessiliflora
+xx:ba
+
+==bristly goldenaster:H. sessiliflora ssp. echioides
+color:yellow
+. distal leaves generally much reduced
+. found inland
+
+==bolander's goldenaster:H. sessiliflora ssp. bolanderi
+color:yellow
+. distal leaves not much reduced
+. found on dunes, coastal slopes and headlands

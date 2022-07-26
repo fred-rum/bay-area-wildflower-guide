@@ -1,9 +1,9 @@
 sci:Heterotheca spp.
 x:ba
 
+"Real" golden asters (genus Chrysopsis) are generally found in the SE US.
+
 ==sessileflower false goldenaster:H. sessiliflora
-xx:more
-color:yellow
 . 4--24 ray flowers, generally 7--15 mm
 . proximal leaves subsessile
 . distal leaves sessile, reduced

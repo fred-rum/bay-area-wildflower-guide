@@ -18,3 +18,5 @@ end_hierarchy
 ==mollusks:phylum Mollusca
 
 ==segmented worms:phylum Annelida
+
+==true jellies

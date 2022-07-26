@@ -64,7 +64,8 @@ color: white, pink, salmon
 ==seaside buckwheat:E. latifolium
 color: white, pink, salmon
 . flowers are clustered
-. flowers <b>only at inflorescence branch tips</b>
+. <b>stems tomentose</b> (rarely glabrous), up to 70 cm
+. leaves cauline, but only proximal
 . herb
 . ecology: sand
 . very common along the coast
@@ -72,7 +73,8 @@ color: white, pink, salmon
 ==naked buckwheat:E. nudum
 color: white, pink, salmon
 . <b>flowers are clustered or individual</b>
-. flowers at inflorescence branch tips <b>and forks of branches</b>
+. <b>stems glabrous</b>, up to 15 cm (or rarely 20 cm)
+. leaves basal or "sheathing up stem"
 . herb
 . very common
 

@@ -2686,10 +2686,12 @@ class Page:
                         caution = 'Caution: '
                     else:
                         caution = ''
-                    if 'other':
+                    if other:
                         w.write(f'<b>{caution}There are other wild {members} of this {top} not yet included in this guide.</b>')
-                    else:
+                    elif top == 'species':
                         w.write(f'<b>{caution}This {top} has wild {members}, but they are not yet included in this guide.</b>')
+                    else:
+                        w.write(f'<b>{caution}Members of this {top} are not yet included in this guide.</b>')
                 elif complete in ('ba', 'ca', 'any',
                                      'hist', 'rare', 'hist/rare'):
                     if complete == 'hist':

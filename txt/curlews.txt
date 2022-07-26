@@ -1,0 +1,10 @@
+sci:genus Numenius
+x:ca
+
+==long billed curlew:Numenius americanus
+. cinnamon wash on underparts
+. indistinct stripes on crown and through eye
+
+==whimbrel:N. phaeopus
+. grayish underparts
+. distinct stripes on crown and through eye

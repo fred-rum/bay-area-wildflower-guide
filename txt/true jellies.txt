@@ -1,0 +1,3 @@
+sci:class Scyphozoa
+
+==pacific sea nettle:Chrysaora fuscescens

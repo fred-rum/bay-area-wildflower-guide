@@ -1,9 +1,7 @@
-==banana slugs
 
-==yellow cellar slug:Limacus flavus
+==california mussel:Mytilus californianus
+x:more
 
-==garden snail:Cornu aspersum
-x:ca
+==snails
 
-==milk snail:Otala lactea
-x:ca
+==slugs

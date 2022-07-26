@@ -41,6 +41,7 @@ color: white
 . Monte Bello and Russian Ridge
 
 ==tall coastal plantain:P. subnuda
+color: cream, other
 . corolla tube glabrous
 . scattered along the pacific coast
 

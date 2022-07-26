@@ -32,14 +32,14 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+0610
 [<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0512+0313">example of large bracts</a>]
 
 ==hillside false bindweed:C. subacaulis
-. plant hairs sparse to +- dense, short, spreading to reflexed
+. plant hairs sparse to +- dense, short, spreading to reflexed, but <b>not tomentose</b>
 . stem poorly developed, generally <b>+- 2 cm</b>
 . leaf +- triangular-hastate, with small backward-directed lobes or not; margin +- wavy or not
 . common
 
 ==coast range false bindweed:C. collina
-<b>It is unclear how to distinguish this</b> from a hairy {-hillside false bindweed} except perhaps by <b>stem length</b>.
-. plant +- tomentose
+. highly similar to {-hillside false bindweed}, above.
+. <b>plant +- tomentose</b>
 . stem decumbent, not or only weakly climbing, <b>8--15 cm</b>, <= basal rosette of leaves
 . leaf reniform to distinctly lobed [tip may also be somewhat pointed]; margin generally wavy
 . Mt. Tam, Russian Ridge, Sierra Azul, Calero

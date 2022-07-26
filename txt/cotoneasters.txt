@@ -18,7 +18,6 @@ color: white
 
 ==silverleaf cotoneaster:C. pannosus
 color: white
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0219+0707
 . plant arching, 1--9 m
 . petals white, spreading; fruit bright red
 . <b>leaf blade 15--32 mm, 8--15 mm wide</b>, thin, adaxially +- blue-green, lateral veins not sunken
