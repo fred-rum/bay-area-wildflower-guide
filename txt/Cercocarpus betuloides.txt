@@ -1,0 +1,18 @@
+com: birchleaf mountain mahogany
+family: rose family
+
+genus: mountain mahoganies
+x:ba
+
+xx:any
+
+==birchleaf mountain mahogany:var. betuloides
+color: other
+. leaf blade generally 10--27 mm long, < 15 mm wide
+. found in the bay area
+
+==island mountain mahogany:var. blancheae
+. leaf blade 27--70 mm long, > 15 mm wide
+. <b>found only in southern California</b>
+
+Calflora and Jepson also include a var. macrourus, but POWO and iNaturalist lumps this into var. betuloides.  In any case, it is not found in the bay area.

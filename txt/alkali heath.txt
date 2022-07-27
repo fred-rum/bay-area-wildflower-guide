@@ -1,3 +1,5 @@
 sci:Frankenia salina
 color: pink
+
+genus: sea heaths
 x:hist/rare

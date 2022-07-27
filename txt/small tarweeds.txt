@@ -13,6 +13,7 @@ See also the key to {-Madia spp.}.
 ==opposite-leaved tarweed:Hemizonella minima
 x:any
 xx:any
+genus: n/a
 . stem < 20 cm (often < 10 cm and decumbent), usually light purple in color
 . disk flower hairy
 . anthers yellow

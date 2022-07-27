@@ -2,6 +2,7 @@ sci:Isocoma menziesii
 x:ba
 xx:!ba
 color:yellow
+genus: jimmyweeds and goldenbushes
 
 Jepson's key is not very helpful.  There may be some way to distinguish based on the herbage.
 

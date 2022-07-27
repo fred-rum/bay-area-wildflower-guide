@@ -1,4 +1,7 @@
 sci:Aesculus californica
 color: white
+
+genus: buckeyes and horse-chestnuts
 x:ca
+
 xx:none

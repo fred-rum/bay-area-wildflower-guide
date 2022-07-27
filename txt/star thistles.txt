@@ -42,6 +42,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0311+0802
 . Edgewood, Long Ridge, Mt. Diablo
 
 ==spotted knapweed:C. stoebe ssp. micranthos
+species: spotted knapwheed
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1213+0624
 . Sierra Azul & Mt. Umunhum
 

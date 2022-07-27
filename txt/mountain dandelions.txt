@@ -39,6 +39,7 @@ color: yellow
 . rare
 
 ==pale goat-chicory:A. glauca var. glauca
+species: pale agoseris
 xx:ca
 . stem generally not leafy or obscurely leafy above base
 . ligules 10--18 mm, much exceeding involucre
@@ -51,6 +52,7 @@ xx:ca
 <h2>short petals</h2>
 
 ==big mountain dandelion:A. grandiflora var. grandiflora
+species: bigflower agoseris
 warn obs_requires_photo: none # ID not yet positive
 . <b>stem generally not leafy or obscurely leafy above base</b>
 . ligule 3--7 mm, +- equaling involucre
@@ -60,6 +62,7 @@ warn obs_requires_photo: none # ID not yet positive
 . [I assume it's named for its height, not its flower head]
 
 ==annual false dandelion:A. heterophylla var. heterophylla
+species: annual agoseris
 . <b>stem often leafy above base</b>
 . ligules 2--6 mm, +- equaling involucre [the phyllaries reach almost to the petal tips]
 . leaf petiole not purple

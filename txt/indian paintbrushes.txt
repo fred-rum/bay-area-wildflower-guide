@@ -50,6 +50,7 @@ sci_fpj:Castilleja applegatei ssp. martinii
 ==franciscan paintbrush:Castilleja subinclusa var. franciscana
 color: red, salmon
 xx:rare
+species: longleaf paintbrush
 . +- puberulent to hairs long- and short-glandular
 . <b>corolla (including lower lip) generally curved out through abaxial calyx sinus</b> [e.g. the yellow-green corolla droops out of the red calyx]
 . leaves 30--80 mm, <b>lanceolate</b>; lobes 0--3 [lobes are rare?]
@@ -66,6 +67,7 @@ xx:none
 
 ==lesser paintbrush:Castilleja minor var. spiralis
 xx:ba
+species: seep paintbrush
 . annual
 . stem +- simple
 . wet places

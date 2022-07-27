@@ -1,5 +1,8 @@
 com:tanoak
+
+genus: n/a
 x:any
+
 xx:ba
 
 ==tanoak:N. densiflorus var. densiflorus

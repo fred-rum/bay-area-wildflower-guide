@@ -1,5 +1,7 @@
 sci:Tellima grandiflora
-family:saxifrage family
+color:red purple, cream
+
+genus: n/a
 x:any
 
-color:red purple, cream
+family:saxifrage family

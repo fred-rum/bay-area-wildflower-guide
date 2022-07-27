@@ -1,11 +1,23 @@
 sci:Adenostoma fasciculatum
 color: white
-x:ba
-xx:uncat
 
-The only bay-area subspecies is ssp. fasciculatum:
+genus: n/a
+x:ba
+
+xx:any
+
+==common chamise:var. fasciculatum
 . plant tall with erect/ascending branches
 . twigs glabrous
 . leaves 5--13 mm long
+. found in the bay area
 
-All other California species and subspecies are restricted to Southern California.
+==southern chamise:var. obtusifolium
+. plant tall with erect/ascending branches
+. twigs hairy
+. leaves 2--6.5 mm long
+. <b>found only in southern California</b>
+
+==carpet-forming chamise:var. prostratum
+. plant low, mounded with decumbent branches
+. <b>found only on islands and beaches of southern California</b>

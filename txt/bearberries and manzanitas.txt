@@ -97,6 +97,7 @@ color: white
 . uncommon
 
 ==presidio manzanita:A. montana ssp. ravenii
+species: mount tamalpais manzanita
 . plant prostrate, 10--30 cm
 . fruit 3--5 mm wide
 . leaf dark green, shiny, puberulent or glabrous.
@@ -118,6 +119,7 @@ color: white
 <h3>nascent inflorescent bracts fleshy, scoop-shaped or scale-like</h3>
 
 ==hooker's manzanita:A. hookeri ssp. hookeri
+species: hooker's manzanita
 . inflorescence 0--1-branched
 . leaf bright green, shiny, +- puberulent or glabrous
 . rare
@@ -169,6 +171,7 @@ color: white
 
 ==hoary manzanita:Arctostaphylos canescens ssp. canescens
 color: pink, pale purple
+species: hoary manzanita
 . young leaves gray-canescent, glabrous with age
 .. leaf base rounded to wedge-shaped, not clasping
 . corolla pink or white

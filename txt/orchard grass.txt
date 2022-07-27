@@ -1,3 +1,5 @@
 sci:Dactylis glomerata
-x:any
 color: other
+
+genus: cocks-foot and orchard grasses
+x:any

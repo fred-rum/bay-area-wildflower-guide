@@ -1,0 +1,18 @@
+com: western burning bush
+
+genus: spindles
+x:ca
+
+==western burning bush:var. occidentalis
+acom: western burning bush (western)
+color: other
+. leaf tip acuminate
+. twigs +- green
+. inflorescence 1--5-flowered
+. found in the bay area
+
+==parish's burning bush:var. parishii
+. leaf tip +- obtuse or round
+. twigs +- white
+. inflorescence 3--5-flowered
+. <b>found only in southern California</b>

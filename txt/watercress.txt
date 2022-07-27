@@ -1,6 +1,9 @@
 sci:Nasturtium officinale
 color:white
+
+genus: water-cresses
 x:hist
+
 family:mustard family
 
 Note that {-garden nasturtium} is completely unrelated.

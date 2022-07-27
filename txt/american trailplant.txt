@@ -1,4 +1,7 @@
 sci:Adenocaulon bicolor
-x:ca
 color:white
+
+genus: trailplants
+x:ca
+
 family: sunflower family

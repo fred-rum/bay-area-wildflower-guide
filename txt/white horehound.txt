@@ -1,4 +1,7 @@
 sci:Marrubium vulgare
-x:ca
 color:white
+
+genus: n/a
+x:ca
+
 family:mint family

@@ -1,4 +1,7 @@
 sci:Asarum caudatum
-x:ba
 color: other
+
+x:ba
+genus: wild gingers
+
 member: birthwort family:family Aristolochiaceae

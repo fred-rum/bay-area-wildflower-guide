@@ -1,4 +1,6 @@
 sci:Scoliopus bigelovii
 color:other
 x:ca
+genus: fetid adderstongues
+
 See also {-pacific trillium}.

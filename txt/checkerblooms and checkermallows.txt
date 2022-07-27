@@ -29,6 +29,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0619+1108
 . Calero & Mt. Tam
 
 ==marin checkerbloom:S. hickmanii ssp. viridis
+species: chaparral checkerbloom
 . bracts cupping the calyx are narrowish triangular, not linear
 . leaves generally all along stem, generally alike in size, shape
 . <b>leaf blade coarsely crenate or shallowly lobed</b>

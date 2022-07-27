@@ -49,8 +49,9 @@ These buttercups all have <= 7 petals and potentially grow erect from land.  Jep
 . <b>receptacle bristly</b>
 . Pleasanton Ridge, Chabot
 
-==sacramento valley buttercup:R. canus var. canus
-xx:ba
+==sacramento valley buttercup:R. canus
+xx:Current scholorship promotes each former variety to a full species, so now there are none below this species.
+sci_jfp: Ranunculus canus var. canus
 . stem erect to decumbent
 . 5--7 petals, <b>6--12 mm long</b>, 3--6 mm wide, yellow
 . receptacle glabrous

@@ -18,6 +18,7 @@ CalFlora and Jepson have this species correctly in Platanthera.
 ==sierra bog orchid:P. dilatata var. leucostachys
 sci_fpj:Platanthera dilatata var. leucostachys
 xx:ca
+species: white bog orchid
 . <b>2 leaves, alternate, along stem, with 1 lengthwise fold</b>
 . perianth white to cream
 
@@ -42,6 +43,7 @@ acom:coast piperia
 sci_fjp:Piperia elegans ssp. elegans
 color: white
 xx:ba
+species: elegant rein orchid
 . spur 7--14 mm, <b>curved down along flower stalk</b>
 . perianth white
 

@@ -1,4 +1,7 @@
 sci:Digitalis purpurea
 color: pale purple, pink
+
+genus: foxgloves
 x:ca
+
 xx:uncat

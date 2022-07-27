@@ -12,6 +12,7 @@ color: yellow
 . phyllaries glabrous
 
 ==widehead groundsel:P. eurycephala var. eurycephala
+species: widehead groundsel
 . 1 or several clustered stems
 . glabrous or densely tomentose
 . 5--30+ heads

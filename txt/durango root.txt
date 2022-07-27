@@ -1,3 +1,5 @@
 sci:Datisca glomerata
-x:ca
 color:yellow
+
+genus: n/a
+x:ca

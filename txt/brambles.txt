@@ -64,6 +64,7 @@ color: white
 . parasitized by {-thimbleberry gallmaker}
 
 ==thornless elmleaf blackberry:R. ulmifolius var. anoplothyrsus
+species: elmleaf blackberry
 . plant to 3 m, erect to arched
 . <b>no prickles</b>
 . stem: 5--10 mm diameter, <b>5-angled</b>, densely short-hairy, may be glaucous

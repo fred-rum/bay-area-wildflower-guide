@@ -5,6 +5,7 @@ x:ca
 ==western sweet coltsfoot:Petasites frigidus var. palmatus
 color: white
 xx:ca
+species: arctic butterbur
 . broad, lobed leaves
 . native
 

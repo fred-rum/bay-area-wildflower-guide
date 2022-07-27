@@ -1,3 +1,5 @@
 sci:Rafinesquia californica
-x:ba
 color:white
+
+genus: n/a
+x:ba

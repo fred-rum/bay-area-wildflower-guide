@@ -26,7 +26,9 @@ color: red purple
 . no bracts or simple bracts
 . petal claw exserted from calyx tube
 
-==streambank bird's-foot trefoil:H. oblongifolia var. oblongifolia
+==streambank bird's-foot trefoil:H. oblongifolia
+sci_jfp: Hosackia oblongifolia var. oblongifolia
+xx: Current scholorship does not recognize varieties within this species.
 . peduncle bract just below umbel or missing
 . plant often hairy
 . petal claw included or barely exserted from calyx tube

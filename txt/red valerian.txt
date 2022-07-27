@@ -1,4 +1,7 @@
 sci:Centranthus ruber
 color: pink, red purple
+
+genus: valerian
 x:ca
+
 xx:uncat

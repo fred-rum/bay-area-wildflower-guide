@@ -1,5 +1,8 @@
 sci:Limnanthes douglasii
+
+genus: meadowfoams
 x:rare
+
 xx:any
 
 ==table mountain meadowfoam:L. douglasii ssp. nivea

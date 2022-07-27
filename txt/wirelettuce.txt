@@ -22,6 +22,7 @@ color: pale purple, pink
 . uncommon
 
 ==whiteplume wirelettuce:S. exigua ssp. coronaria
+species: small wirelettuce
 . seed with long groove on each face
 . outer phyllaries reflexed or appressed
 . pappus bristles plumose on distal 60--85%, widened at base or not

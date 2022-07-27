@@ -40,6 +40,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0611+1174
 . Marin
 
 ==swamp thistle:C. douglasii var. douglasii
+species: swamp thistle
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0611+2130
 . abaxial face of outer and middle phyllaries with long, sticky-resinous ridge (milky when fresh, dark when dry, occasionally very narrow)
 . margins of phyllaries entire
@@ -49,6 +50,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0611+2130
 . Mt. Diablo
 
 ==mount tamalpais thistle:C. hydrophilum var. vaseyi
+species: suisun thistle
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=8311+3292+1958+0033
 . abaxial face of outer and middle phyllaries with long, sticky-resinous ridge (milky when fresh, dark when dry, occasionally very narrow)
 . margins of phyllaries minutely spiny-fringed
@@ -73,6 +75,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=8311+3292+1958+0033
 . scattered
 
 ==peregrine thistle:C. cymosum var. cymosum
+species: peregrine thistle
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+3077
 . abaxial face of outer and middle phyllaries may have long, sticky-resinous ridge (milky when fresh, dark when dry, occasionally very narrow) or not
 . margins of phyllaries entire
@@ -91,6 +94,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0713+0932
 . scattered very near the pacific coast
 
 ==pacific fringed thistle:C. remotifolium var. odontolepis
+species: fewleaf thistle
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0218+0325
 . abaxial face of outer and middle phyllaries without sticky-resinous ridge
 . margins of outer phyllaries irregularly toothed to spiny-ciliate

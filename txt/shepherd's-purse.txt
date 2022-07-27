@@ -1,3 +1,5 @@
 sci:Capsella bursa-pastoris
 color:white
+
+genus: shepherd's-purses
 x:ca

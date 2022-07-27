@@ -29,6 +29,7 @@ acom:brooms
 <h2>Mostly leafless stems</h2>
 
 ==spanish broom:Spartium junceum
+genus: n/a
 x:any
 color:yellow
 . stems generally +- leafless or with small, simple leaves

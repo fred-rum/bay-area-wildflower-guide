@@ -1,3 +1,5 @@
 sci:Kniphofia uvaria
 color: red, salmon
+
+genus: pokers
 x:ca

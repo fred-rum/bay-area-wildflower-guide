@@ -125,6 +125,25 @@ def sort_pages(page_set, trait=None, value=None,
             parent_depth = max(parent_depth, by_depth(parent))
         return parent_depth + 1
 
+    # helper function to sort by rank.
+    # Return the key as a tuple
+    # so that unranked pages can be sorted relative to ranked pages.
+    # The second tuple is 1 for a ranked page and 0 for an unranked page
+    # so that the ranked page acts like a slightly lower-ranked page.
+    def by_rank(page):
+        if page.rank:
+            return (page.rank, 1)
+        elif page.linn_parent:
+            # the Linnaean parent always has a rank
+            return (page.linn_parent.rank, 0)
+        else:
+            return (Rank.kingdom, 2) # behaves a higher rank than 'kingdom'
+
+        parent_depth = 0
+        for parent in page.parent:
+            parent_depth = max(parent_depth, by_depth(parent))
+        return parent_depth + 1
+
     # helper function to sort by observation count, using the nonlocal
     # variables of trait and value.
     def count_flowers_helper(page):
@@ -140,11 +159,14 @@ def sort_pages(page_set, trait=None, value=None,
     # just because the dictionary hashes differently.
     page_list = sorted(page_set, key=by_name)
 
-    # If requested, sort by hierarchical depth so that pages with the most
-    # levels of descendents come first.  E.g, a family is sorted ahead of
-    # its genuses.
+    # If requested, sort by rank (higher rank first).
+    # For unranked pages, use the rank of its linnaean parent to indicate
+    # where the unranked page should be sorted.
+    # But in case of a hierarchy of unranked pages,
+    # sort by depth among themselves.
     if with_depth:
         page_list.sort(key=by_depth)
+        page_list.sort(key=by_rank, reverse=True)
 
     # Sort by observation count, from most to least.
     if with_count:
@@ -330,6 +352,7 @@ class Page:
         # initial/default values
         self.com = None
         self.no_com = False # true if the page will never have a common name
+        self.com_checked = False # true after no_com has checked a shadow page
         self.sci = None
         self.no_sci = False # true if the page will never have a sci name
         self.elab = None
@@ -615,7 +638,12 @@ class Page:
 
         self.com = com
 
-        if self.name_from_txt:
+        if self.shadow:
+            # Give a shadow page a super-low priority.
+            # If the page gets promoted to a real page, I'm fine with it
+            # still having low priority.
+            self.com_priority = 0
+        elif self.name_from_txt:
             if com == self.name:
                 # The common name is the same as the filename of the txt file
                 # for this page, so it has highest priority.
@@ -1455,7 +1483,7 @@ class Page:
             sci_words = self.sci.split(' ')
             if self.rank is Rank.below:
                 page = self.add_linn_parent(Rank.species, ' '.join(sci_words[0:2]))
-            page = self.add_linn_parent(Rank.genus, sci_words[0])
+            page = page.add_linn_parent(Rank.genus, sci_words[0])
 
         # Assign memberships declared in the text.
         for rank, name, sci in self.group_items:
@@ -1783,7 +1811,7 @@ class Page:
                 child.assign_membership(ancestor)
 
     def assign_membership(self, ancestor):
-        if ancestor not in self.membership_list:
+        if ancestor not in self.membership_list and ancestor not in self.parent:
             self.membership_list.append(ancestor)
         self.propagate_membership(ancestor)
 
@@ -2065,7 +2093,16 @@ class Page:
                 # names).  So instead we record the group for later.
                 rank = Rank[matchobj.group(1)]
                 name = matchobj.group(2)
-                data_object.group_items.append((rank, name, None));
+                if not is_sci(name) and rank in (Rank.species, Rank.genus):
+                    # Only a common name is given, but we can derive the
+                    # scientific name.
+                    if rank == Rank.genus:
+                        sci = data_object.sci.split(' ')[0]
+                    else:
+                        sci = ' '.join(data_object.sci.split(' ')[0:2])
+                else:
+                    sci = None
+                data_object.group_items.append((rank, name, sci));
                 continue
 
             matchobj = re.match(r'\s*member:\s*([^:]+)(?:\:(.+?))?\s*$', c);
@@ -2144,13 +2181,12 @@ class Page:
             if self.subset_of_page not in self.membership_list:
                 self.membership_list.append(self.subset_of_page)
 
-        # If the page has autopopulated parents, list them here.
+        # If the page has autopopulated parents,
+        # add them to the membership list.
         # Parents with keys are listed more prominently in a separate section.
-        # Most likely no page will have more than one autopopulated
-        # parent, so I don't try to do particularly smart sorting here.
-        for parent in reversed(sort_pages(self.parent)):
+        for parent in self.parent:
             if not parent.has_child_key:
-                c_list.append(self.member_of(parent))
+                self.membership_list.append(parent)
 
         # membership_list lists the ancestors that this page should
         # be listed as a 'member of', unsorted.
@@ -2161,11 +2197,32 @@ class Page:
         # is likely to have been autopopulated, but not necessarily.
         #
         # For a shadow ancestor, write it as unlinked text.
-        ordered_list = sort_pages(self.membership_list, with_depth=True)
+        ordered_list = sort_pages(self.membership_list,
+                                  with_depth=True, with_count=False)
         for ancestor in reversed(ordered_list):
             if ancestor.shadow:
-                c_list.append(ancestor.format_full(1))
-            elif ancestor not in self.parent:
+                if (not (ancestor.com or ancestor.no_com) and
+                    not ancestor.com_checked):
+                    
+                    if ancestor.rank:
+                        ancestor_txt = f'its {ancestor.rank.name}'
+                    else:
+                        ancestor_txt = f'{ancestor.elab()}'
+                    ancestor.rp_check('no_com',
+                                      f'{self.full()} lists {ancestor_txt} as an ancestor, but that has no common name',
+                                      shadow_bad=True)
+                    ancestor.com_checked = True
+                
+                if (ancestor.rank in (Rank.genus, Rank.species) and
+                    self.rank in (Rank.species, Rank.below) and
+                    not ancestor.com):
+                    # If the scientific name is trivially derived from
+                    # the species/subspecies/variety name, and the ancestor
+                    # doesn't have a common name, don't bother to list it.
+                    pass
+                else:
+                    c_list.append(ancestor.format_full(1))
+            else:
                 c_list.append(self.member_of(ancestor))
 
         return self.align_column('Member of', c_list)

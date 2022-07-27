@@ -1,5 +1,7 @@
 sci:Heteromeles arbutifolia
 color: other
+
+genus: n/a
 x:ca
 
 See also {-cotoneasters}.

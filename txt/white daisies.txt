@@ -15,6 +15,7 @@ Possible key features:
 ==common daisy:Bellis perennis
 color: white
 x:ca
+genus: daisies
 . 1--several stems from base, decumbent or prostrate
 . <b>wide phyllaries</b>
 . disk flowers: yellow
@@ -48,6 +49,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0616+0158
 ==hayfield tarweed:Hemizonia congesta
 color: white, pale purple
 x:any
+genus: n/a
 
 ==afro-australian daisies:Dimorphotheca spp.
 . stem depends greatly on the species; see sub-key

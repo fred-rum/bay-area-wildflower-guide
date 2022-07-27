@@ -20,6 +20,7 @@ color: white
 
 ==pink woodland star:L. parviflorum var. parviflorum
 xx:ba
+species: smallflower woodland star
 . basal leaves lobed > &frac34; to base to 3-parted
 . most proximal cauline leaf 3-parted
 . petals white or pink

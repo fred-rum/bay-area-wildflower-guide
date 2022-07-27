@@ -1,3 +1,5 @@
 sci:Eriodictyon californicum
 color: pale purple
+
+genus: yerba santa
 x:ba

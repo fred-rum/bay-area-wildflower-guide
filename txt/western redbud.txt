@@ -1,5 +1,7 @@
 sci:Cercis occidentalis
-x:ca
 color:purple
+
+genus: redbuds
+x:ca
 
 In the bay area, only found in cultivated areas except for a few waifs at Sunol.

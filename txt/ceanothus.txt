@@ -89,6 +89,7 @@ color: blue, purple
 . mostly historical except at Mt. Madonna and Mt. Tamalpais
 
 ==deerbrush ceanothus:C. integerrimus var. integerrimus
+species: deerbrush ceanothus
 . twig: generally green
 . leaf:
 .. blade 15--53 mm long, 10--45 mm wide

@@ -36,12 +36,14 @@ color: white, pale purple
 ==north californian indian pink:S. laciniata ssp. californica
 xx:ba
 color: red
+species: cardinal catchfly
 . <b>corolla bright red</b>
 . calyx tube with 10 faint veins
 . common
 
 ==scouler's catchfly:S. scouleri ssp. scouleri
 xx:ca
+species: simple campion
 . corolla pale purple to red purple
 . calyx tube clearly with 10 veins
 . <b>lower leaves 12--20 mm wide</b>

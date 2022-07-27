@@ -12,6 +12,7 @@ color:yellow, cream
 ==santa clara valley dudleya:D. abramsii ssp. setchellii
 xx:ba
 color:yellow, cream
+species: abrams' liveforever
 . petals pale yellow [not full yellow]
 . stem < 8 cm long, 10--20 mm wide
 . peduncle 5--20 cm

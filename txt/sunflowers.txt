@@ -14,3 +14,4 @@ See also {-yellow daisies} and {-white daisies} for similar plants with smaller 
 ==striped treasureflower:Gazania linearis
 color: orange
 x:ca
+genus: treasure flowers

@@ -12,6 +12,7 @@ xx:more
 ==common spikeweed:C. pungens ssp. pungens
 color:yellow
 xx:ba
+species: common spikeweed
 . leaf faces often hairy, <b>not glandular or minutely glandular</b>
 .. midrib often bristly
 .. margins sometimes ciliate, at least near the base

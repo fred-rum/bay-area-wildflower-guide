@@ -8,6 +8,7 @@ x:ba
 ==wiry snapdragon:Sairocarpus vexillocalyculatus ssp. vexillocalyculatus
 color:purple
 sci_fjp:Antirrhinum vexillocalyculatus
+species: wiry snapdragon
 . proximal-most flowers subtended by twining branchlets and/or flower branchlets
 . proximal stem glabrous or with nonglandular hairs
 

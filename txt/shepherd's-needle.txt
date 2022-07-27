@@ -1,3 +1,5 @@
 sci:Scandix pecten-veneris
-x:ca
 color: white
+
+genus: n/a
+x:ca

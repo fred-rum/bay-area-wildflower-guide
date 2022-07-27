@@ -1,3 +1,5 @@
 sci:Cynosurus echinatus
-x:hist
 color:other
+
+genus: dog's tails
+x:hist

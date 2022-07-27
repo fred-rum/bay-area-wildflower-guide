@@ -1,5 +1,7 @@
 sci:Taraxia ovata
-x:ba
 color: yellow
+
+genus: n/a
+x:ba
 
 The california sun cup (Camissoniopsis bistorta) is extremely rare in the bay area, and looks different enough to be recognizable if seen.

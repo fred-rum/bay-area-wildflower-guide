@@ -1,5 +1,8 @@
 sci:Corylus cornuta
+
+genus: hazels
 x:ca
+
 xx:any
 
 ==california hazelnut:C. cornuta ssp. californica

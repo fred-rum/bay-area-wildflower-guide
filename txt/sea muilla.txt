@@ -1,3 +1,5 @@
 sci:Muilla maritima
-x:ba
 color: white
+
+genus: n/a
+x:ba

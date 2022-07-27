@@ -30,6 +30,7 @@ and vegetative plants that are more complex.
 . very rare
 
 ==hinds' willow:S. exigua var. hindsiana
+species: narrowleaf willow
 . shrub; twigs flexible at base
 . nectaries adaxial and abaxial
 . rare

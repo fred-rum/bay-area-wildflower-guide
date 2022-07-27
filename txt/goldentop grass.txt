@@ -1,3 +1,5 @@
 sci:Lamarckia aurea
-x:any
 color:other
+
+genus: n/a
+x:any

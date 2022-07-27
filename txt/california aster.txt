@@ -1,5 +1,7 @@
 sci:Corethrogyne filaginifolia
 color: pink, pale purple
+
+genus: n/a
 x:ba
 
 Jepson lists only this Corethrogyne species in California.  Various taxonomists have partitioned the California populations into multiple species and variants, but Jepson explicitly rejects that notion.  CalFlora lists two species in California, but POWO treats the other species as a synonym of this one.  In any case, CalFlora lists only this species in the bay area.

@@ -1,5 +1,7 @@
 sci:Tropaeolum majus
-x:ca
 color:orange,yellow
+
+genus: nasturtiums
+x:ca
 
 Note that {-Nasturtium officinale} is completely unrelated.

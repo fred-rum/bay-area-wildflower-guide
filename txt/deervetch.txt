@@ -90,6 +90,7 @@ color: yellow
 <h2>2+ flowers per leaf axil</h2>
 
 ==coastal bird's-foot trefoil:A. maritimus var. maritimus
+species: coastal bird's-foot trefoil
 . prostrate or ascending, 5--50 cm
 . 3--7 leaflets, irregularly pinnate, obovate to +- round, terminal generally largest
 . peduncle generally > 1 cm, generally bracted
@@ -105,7 +106,8 @@ color: yellow
 . corolla 6--12 mm, wings +- = keel
 . extremely rare at La Honda Creek
 
-==chaparral bird's-foot trefoil:A. grandiflorus var. grandiflorus
+==chaparral lotus:A. grandiflorus var. grandiflorus
+species: chaparral bird's-foot trefoil
 . decumbent to erect, 10-40(150) cm
 . 7--9 leaflets, generally 10--15 mm; leaf axis (including petiole) 10--35 mm
 . <b>leaf axis not flat or blade-like</b>
@@ -130,6 +132,7 @@ color: yellow, red
 
 ==round leaved heermann's lotus:A. heermannii var. orbicularis
 xx:hist
+species: heermann's lotus
 . perennial herb; prostrate, often mat-forming, 30-100 cm
 . 4--6 leaflets, 4--16 mm, <b>densely white-hairy</b>
 . corolla generally 4--6 mm, yellow to +- red, <b>dark-tipped</b>, wings >= other petals [wings < banner in other species?], in clusters of 3--8 with 1--5 mm pedicels

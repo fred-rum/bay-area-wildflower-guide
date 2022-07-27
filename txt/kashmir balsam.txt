@@ -1,3 +1,5 @@
 sci:Impatiens balfourii
 color: pink, purple
+
+genus: touch-me-nots
 x:rare

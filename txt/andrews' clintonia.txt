@@ -1,3 +1,5 @@
 sci:Clintonia andrewsiana
 color: red, red purple, purple
+
+genus: bead lilies
 x:ba

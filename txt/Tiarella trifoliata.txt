@@ -1,6 +1,9 @@
 com:threeleaf foamflower
 sci:Tiarella trifoliata
+
+genus: foamflowers
 x:ca
+
 xx:ca
 
 ==oneleaf foamflower:T. trifoliata var. unifoliata

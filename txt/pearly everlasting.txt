@@ -1,5 +1,7 @@
 sci:Anaphalis margaritacea
-x:ca
 color: white
+
+genus: everlastings
+x:ca
 
 Each head is composed of only disc flowers surrounded by +- white phyllaries.  <b>The involucre is +- spheric.</b>  Compare to {-rabbit-tobaccos}.

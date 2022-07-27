@@ -6,6 +6,7 @@ sci:tribe Madieae
 ==woodland madia:Anisocarpus madioides
 color: yellow
 x:ba
+genus: n/a
 . rays 4--10 mm
 . anthers yellow [brush off the pollen to see]
 . phyllaries do not extend partway up petal (<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0115+2837">example</a>)
@@ -23,6 +24,7 @@ See also {-tarweeds} for more flowers called "madia".
 ==common hareleaf:Lagophylla ramosissima
 color: yellow
 x:ba
+genus: n/a
 . similar to {-grassy tarweed}, but...
 . <b>glandless stem</b>
 . 2-5 calyx-like bracts subtending involucre

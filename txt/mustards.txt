@@ -9,6 +9,7 @@ sci:n/a
 ==shortpod mustard:Hirschfeldia incana
 color: yellow
 x:any
+genus: n/a
 . <b>sepals spreading to reflexed</b> [but the few existing photos indicate erect or ascending, rarely spreading, never reflexed]
 . stigma entire
 . <b>basal leaves in a rosette</b>
@@ -18,6 +19,7 @@ x:any
 ==wild mustard:Sinapis arvensis
 color: yellow
 x:hist
+genus: n/a
 . <b>sepals spreading</b>
 . stigma 2-lobed [?]
 . <b>basal leaves not in a rosette</b>

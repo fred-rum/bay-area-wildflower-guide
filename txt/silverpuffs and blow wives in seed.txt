@@ -18,6 +18,7 @@ There is only one species of blow wives in the bay area.
 ==blow wives:Achyrachaena mollis
 color: other, yellow
 x:any
+genus: n/a
 . each pappus element has only a flat scale with no bristle
 
 <h2>silverpuffs</h2>

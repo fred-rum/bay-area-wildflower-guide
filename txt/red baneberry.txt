@@ -1,4 +1,7 @@
 sci:Actaea rubra
-x:ca
-family:buttercup family
 color:white
+
+genus: baneberries and cohoshes
+x:ca
+
+family:buttercup family

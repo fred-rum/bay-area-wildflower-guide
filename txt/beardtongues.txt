@@ -23,6 +23,7 @@ color: purple
 staminode hairy</h3>
 
 ==sierra beardtongue:P. heterodoxus var. heterodoxus
+species: sierra penstemon
 . inflorescence glandular
 . <b>corolla 10--16 mm</b>
 . staminode moderately yellow-hairy
@@ -37,6 +38,7 @@ staminode hairy</h3>
 . uncommon in the Santa Cruz range
 
 ==grinnell's beardtongue:P. grinnellii var. scrophularioides
+species: grinnell's beardtongue
 . inflorescence glandular-hairy
 . corolla 26--35 mm
 . staminode exserted, densely yellow- or golden-hairy

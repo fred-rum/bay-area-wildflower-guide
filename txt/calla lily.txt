@@ -1,3 +1,5 @@
 sci:Zantedeschia aethiopica
 color: white
+
+genus: calla lilies
 x:ca

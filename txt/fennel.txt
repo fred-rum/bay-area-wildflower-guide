@@ -1,3 +1,5 @@
 sci:Foeniculum vulgare
-x:any
 color: yellow
+
+genus: n/a
+x:any

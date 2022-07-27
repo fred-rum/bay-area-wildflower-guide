@@ -1,3 +1,5 @@
 sci:Thlaspi arvense
 color:white
+
+genus: penny cresses
 x:ca

@@ -43,6 +43,7 @@ color: yellow
 . scattered
 
 ==alkali desertparsley:L. caruifolium var. caruifolium
+species: alkali desertparsley
 . plant stem +- 0, cauline leaves 0, occasionally 1 or more at base of short stem
 . leaf segments thread-like to linear, long, not crowded; herbage green, generally shiny
 . uncommon, scattered

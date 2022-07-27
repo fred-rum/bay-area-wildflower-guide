@@ -1,3 +1,4 @@
 sci:Toxicodendron diversilobum
 color: other, cream
 x:ca
+genus: poison ivies and oaks

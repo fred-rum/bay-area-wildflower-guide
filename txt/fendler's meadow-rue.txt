@@ -1,4 +1,7 @@
 sci:Thalictrum fendleri
-x:ba
-xx:uncat
 color:other
+
+genus: meadow-rues
+x:ba
+
+xx:uncat

@@ -1,4 +1,7 @@
 sci:Prunella vulgaris
-x:ca
-xx:uncat
 color: purple
+
+genus: selfheals
+x:ca
+
+xx:uncat

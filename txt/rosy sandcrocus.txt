@@ -2,3 +2,4 @@ sci:Romulea rosea
 color: pale purple
 x:ca
 xx:uncat
+genus: froetangs

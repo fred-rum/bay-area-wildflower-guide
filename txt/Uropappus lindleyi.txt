@@ -1,5 +1,7 @@
 com:silverpuffs
 color: other
+
+genus: n/a
 x:any
 
 See also {-Microseris}.

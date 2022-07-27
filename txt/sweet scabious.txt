@@ -1,4 +1,6 @@
 sci:Sixalix atropurpurea
 sci_fjp:Scabiosa atropurpurea
 color: red purple, pink
+
+genus: n/a
 x:ba

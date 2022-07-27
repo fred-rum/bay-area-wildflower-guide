@@ -8,6 +8,7 @@ See also {-devil's trumpets}, which have a generally longer calyx which is ribbe
 color: white, pale purple
 x:ba
 xx:none
+genus: bindweeds
 . <b>stigma lobes linear to narrowly spoon-shaped, distinctly separated</b>, tips acute [<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0110+0338">example</a>]
 . <b>calyx +- 5 mm</b>
 . corolla <= 40 mm

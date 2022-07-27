@@ -18,6 +18,7 @@ Key features:
 . very common
 
 ==western morning glory:C. occidentalis ssp. occidentalis
+species: western morning glory
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+0610
 . plant puberulent to finely tomentose
 . stem decumbent to strongly climbing, generally > 1 m
@@ -44,12 +45,14 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+0610
 . leaf reniform to distinctly lobed [tip may also be somewhat pointed]; margin generally wavy
 . Mt. Tam, Russian Ridge, Sierra Azul, Calero
 
-==sierra false bindweed:C. malacophylla ssp. pedicellata
+==jepson's morning glory:C. malacophylla ssp. pedicellata
+species: sierra false bindweed
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1011+2084
 . stem well developed, not or only weakly climbing, < 100 cm, without basal rosette of leaves
 . Henry Coe, Sunol, Mt. Tam
 
 ==marsh morning glory:C. sepium ssp. limnophila
+species: hedge bindweed
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1009+0161
 xx:hist
 . stem trailing or weakly to strongly climbing, >= 1 m

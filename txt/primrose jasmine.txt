@@ -1,6 +1,8 @@
 sci:Jasminum mesnyi
 color:yellow
 sci_j:n/a
+
+genus: jasmine
 x:ca
 
 These are mostly garden plants, but iNaturalist shows that at least one other Jasminum species has escaped into nature.

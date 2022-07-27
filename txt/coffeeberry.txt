@@ -1,6 +1,9 @@
 sci:Frangula californica
 color: other
+
+genus: false-buckthorns
 x:hist
+
 xx:ba
 
 Parasitized by {-coffeeberry midrib gall moth}.

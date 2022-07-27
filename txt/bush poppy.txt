@@ -1,3 +1,5 @@
 sci:Dendromecon rigida
 color: yellow
+
+genus: n/a
 x:ba

@@ -54,6 +54,7 @@ color: white, pink, salmon, red, red purple, other
 ==santa catalina island buckwheat:E. giganteum var. giganteum
 xx:ba
 color: white, pink, salmon
+species: st. catherine's-lace
 . flowers are clustered, long-soft-hairy
 . shrub
 . leaf blades 2--7 cm, oblong-ovate to ovate or lanceolate to narrowly oblong, margins flat
@@ -85,6 +86,7 @@ color: white, pink, salmon
 . very rare
 
 ==long-stemmed buckwheat:E. elongatum var. elongatum
+species: long-stemmed buckwheat
 . herb
 . <b>flowers are individual</b>
 . flowers only at inflorescence branch tips
@@ -119,6 +121,7 @@ involucres angled to strongly ribbed, sessile and strongly appressed or at tips 
 </h2>
 
 ==tiburon buckwheat:E. luteolum var. caninum
+species: wicker buckwheat
 . flowers at branchlet tips
 . stem glabrous
 . involucres sessile, 3--4 mm, 5-toothed

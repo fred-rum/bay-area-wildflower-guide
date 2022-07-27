@@ -20,6 +20,7 @@ sci_p: Aster chilensis
 ]
 [
 ==siskiyou aster:S. lanceolatum var. hesperium
+species: panicled aster
 . outer phyllaries pale-margined < &frac12; length, length generally < 3 &times; width
 . stem +- hairy in lines
 . inflorescence bracts well developed

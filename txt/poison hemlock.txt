@@ -1,3 +1,5 @@
 sci:Conium maculatum
 color: white
+
+genus: n/a
 x:ca

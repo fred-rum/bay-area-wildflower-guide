@@ -104,6 +104,7 @@ color: red purple
 . scattered in Diablo range
 
 ==twolobe clarkia:C. biloba ssp. biloba
+species: twolobe clarkia
 . all 4 sepals staying fused
 . ovary 8-grooved
 . petals 2-lobed, lavender to bright pink or magenta, often red-flecked

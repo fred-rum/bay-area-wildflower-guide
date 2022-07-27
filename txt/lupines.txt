@@ -201,8 +201,9 @@ color:purple
 . <b>keel upper margins ciliate claw to middle, glabrous from middle to tip, lower generally ciliate</b> [?]
 . common
 
-==large-leaved lupine:L. polyphyllus var. polyphyllus
+==meadow lupine:L. polyphyllus var. polyphyllus
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1107+1443
+species: large-leaved lupine
 . habit: perennial herb 2--15 dm, green, glabrous or sparsely hairy
 . stem: <b>erect, stout, generally hollow</b>
 . leaf: basal and cauline; stipules 5--30 mm; petioles 3--45 cm, upper shorter; leaflets 9--17, <b>40--150 mm</b>, abaxially +- strigose, <b>adaxially glabrous</b>
@@ -213,6 +214,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1107+1443
 
 ==summer lupine:L. formosus var. formosus
 color:purple, pale purple, pale blue
+species: summer lupine
 . habit: perennial herb 2--8 dm, densely hairy to tomentose, gray to silver; rhizomes 3--7 mm diam
 . stem: spreading to erect, 3--4 mm diam
 . leaf: cauline; stipules 4--15 mm; petiole 2--7 cm; leaflets 7--9, 25--70 mm; <b>adaxially hairy, green-gray to silver</b>

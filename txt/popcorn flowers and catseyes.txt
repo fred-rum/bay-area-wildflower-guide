@@ -7,6 +7,8 @@ These genuses are difficult to distinguish between and among each other except b
 ==catseyes
 
 ==pygmyflower cryptantha:Johnstonella micromeres
+genus: n/a
+x:ba
 sci_jfp:Cryptantha micromeres
 . <b>petal diameter +- 0.5 mm</b>
 . no corolla appendages

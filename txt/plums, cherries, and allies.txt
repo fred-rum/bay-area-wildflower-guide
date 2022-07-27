@@ -55,6 +55,7 @@ color:white
 
 ==western chokecherry:P. virginiana var. demissa
 color:white
+species: chokecherry
 . 18--many flowers per inflorescence
 . inflorescence leafy at base
 . leaves deciduous, finely serrate

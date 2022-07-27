@@ -42,6 +42,7 @@ Key features
 ==bristly oxtongue:Helminthotheca echioides
 color: yellow
 x:ca
+genus: n/a
 . coarse, stout, branched stem
 . basal and cauline leaves <b>warty</b>; proximal tapered to winged petioles; distal sessile, sometimes clasping
 . phyllaries in 2--3 overlapping series; outer phyllaries spreading to ascending
@@ -57,6 +58,7 @@ x:ca
 ==false hawkbit:Urospermum picroides
 x:ca
 color:yellow
+genus: n/a
 . one stem from base, long-hairy, branched distally
 . mostly cauline leaves, toothed or lobed (distal leaves may be entire)
 .. basal and proximal cauline leaves tapered to base
@@ -68,6 +70,7 @@ color:yellow
 ==nipplewort:Lapsana communis
 color:yellow
 x:any
+genus: nippleworts
 . one stem from base, branched distally
 . mostly cauline leaves, ovate, 2--20 cm
 .. petioled or distally +- sessile

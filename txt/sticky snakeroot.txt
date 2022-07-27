@@ -1,3 +1,5 @@
 sci:Ageratina adenophora
 color: white
+
+genus: snakeroots
 x:ba

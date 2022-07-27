@@ -80,10 +80,12 @@ color:white
 <h2>no rays</h2>
 
 ==rock-loving fleabane:E. petrophilus var. petrophilus
+species: rock-loving fleabane
 . stem +- long-loose-spreading-hairy, densely glandular near heads or not
 . rare
 
 ==narrow leaved rayless fleabane:E. reductus var. angustatus
+species: little rayless fleabane
 . stem glabrous
 . rare
 

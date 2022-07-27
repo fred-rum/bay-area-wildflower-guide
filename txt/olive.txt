@@ -1,4 +1,7 @@
 color:white
 sci:Olea europaea
+
+genus: olives
 x:ca
-xx:none
+
+xx:Although there are natural subspecies, the cultivated varieties found in the bay area are known only by the species name.

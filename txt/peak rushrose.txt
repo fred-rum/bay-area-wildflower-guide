@@ -1,5 +1,8 @@
 sci:Crocanthemum scoparium
 sci_p:Helianthemum scoparium
 color: yellow
+
+genus: frostweeds
 x:ba
+
 xx:uncat

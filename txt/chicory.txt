@@ -1,3 +1,5 @@
 sci:Cichorium intybus
 color: pale purple
+
+genus: chicories and endives
 x:ca

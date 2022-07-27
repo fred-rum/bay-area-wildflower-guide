@@ -64,6 +64,7 @@ color: yellow
 
 ==western dog violet:V. adunca ssp. adunca
 xx:ca
+species: hookedspur violet
 . stems prostrate to erect, with leaves, peduncles
 . scattered near pacific coast and Oakland
 

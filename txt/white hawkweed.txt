@@ -1,3 +1,4 @@
 sci:Hieracium albiflorum
 color: white, cream
 x:hist
+genus: hawkweeds

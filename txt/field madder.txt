@@ -1,5 +1,7 @@
 sci:Sherardia arvensis
 color: white
+
+genus: n/a
 x:any
 
 See also {-bedstraws}.

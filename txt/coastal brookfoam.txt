@@ -1,4 +1,7 @@
 sci:Boykinia occidentalis
 color: white
+
+genus: brookfoams
 x:ba
+
 . scattered in the Santa Cruz range

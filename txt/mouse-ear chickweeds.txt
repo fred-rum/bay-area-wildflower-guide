@@ -4,13 +4,15 @@ family:pink family
 
 Petals are generally lobed <= 50% of their length.  If the petals are fully divided, see {-chickweeds}.
 
-==big chickweed:C. fontanum ssp. vulgare
+==big chickweed:C. holosteoides
+sci_fpj: Cerastium fontanum ssp. vulgare
 . stems both non-flowering/mat-forming and flowering/+-erect
 . petals 4--5 mm, 1.5 mm < to 0.5 mm > sepals
 . calyx 4.5--7 mm, hairy, ascending
 . <b>scarious margin of most outer sepals 0.2--0.6 mm wide</b>
 
 ==field mouse-ear chickweed:C. arvense ssp. strictum
+species: field chickweed
 . stems both non-flowering/mat-forming and flowering/+-erect
 . <b>petals 7.5--9 mm, 3--6 mm > sepals</b>
 . calyx 4.2--6 mm, glandular-hairy, rarely with hairs exceeding tip

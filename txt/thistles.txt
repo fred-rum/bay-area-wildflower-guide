@@ -3,6 +3,7 @@ sci:n/a
 ==milk thistle:Silybum marianum
 color: purple
 x:ca
+genus: n/a
 
 ==plumeless thistles:Carduus spp.
 
@@ -18,3 +19,4 @@ x:ca
 family: sunflower family
 color: purple
 x:ca
+genus: n/a

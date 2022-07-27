@@ -1,4 +1,7 @@
 sci:Dirca occidentalis
-x:ca
 color: yellow
+
+genus: n/a
+x:ca
+
 family: stringbark family

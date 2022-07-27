@@ -1,3 +1,5 @@
 sci:Lobularia maritima
-x:ca
 color: white
+
+genus: n/a
+x:ca

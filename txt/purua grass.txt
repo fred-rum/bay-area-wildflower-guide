@@ -6,6 +6,7 @@ color:cream, other
 Plant is tipped with a cluster of spikelets, subtended by long leaves.  Each spikelet has multiple interweaved flowers, the structure of which is unclear to me.  Each flower has 3 stamens and 1 style with 2 or 3 stigmas.
 
 ==saltmarsh clubrush:B. maritimus ssp. paludosus
+species: sea clubrush
 . 2 stigmas per flower
 . fruit 2-sided
 . anthers yellow

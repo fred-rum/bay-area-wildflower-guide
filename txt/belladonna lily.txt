@@ -1,3 +1,5 @@
 sci:Amaryllis belladonna
 color: pale purple
+
+genus: amaryllis
 x:ca

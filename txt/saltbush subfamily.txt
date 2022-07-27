@@ -3,6 +3,7 @@ sci:subfamily Chenopodioideae
 CalFlora and Jepson have all of these as Chenopodium spp.
 
 ==california goosefoot:Blitum californicum
+genus: n/a
 sci_fpj:Chenopodium californicum
 x:ba
 color:other

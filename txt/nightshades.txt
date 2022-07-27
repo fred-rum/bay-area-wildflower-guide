@@ -92,6 +92,7 @@ color: white
 . fruit: <b>glossy</b> w/ <b>sepals reflexed</b>
 
 ==hairy nightshade:S. physalifolium var. nitidibaccatum
+species: ground-cherry nightshade
 . corolla: <b>3--5 mm wide</b>, white
 . leaf: 2--6 cm, ovate, entire to irregular-toothed or shallowly lobed
 . hairs: spreading, some glandular

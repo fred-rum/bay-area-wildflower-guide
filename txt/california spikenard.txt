@@ -1,3 +1,5 @@
 sci:Aralia californica
 color: white, other
+
+genus: spikenards
 x:ca

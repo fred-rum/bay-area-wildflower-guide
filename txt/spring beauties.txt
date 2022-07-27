@@ -28,7 +28,26 @@ color: white, pink
 . <b>petals 5--8 mm</b>
 . corolla pink
 
-==crabclaw serpentine springbeauty:C. exigua ssp. exigua
+# I originally had "crabclaw serpentine springbeauty" for ssp. exigua,
+# presumably from iNaturalist.  However, iNaturalist has deleted this name
+# (and any others that might have existed), and this name gets zero hits
+# on Google.
+#
+# Calscape lists "serpentine springbeauty" as the common name the species
+# and both subspecies, and Calflora also lists that as an option for them all.
+#
+# Confusingly, Calscape lists alternative names for ssp. exigua but not for
+# ssp. glauca, while Calflora lists some of those alternative names for
+# ssp. exigua but others for ssp. glauca.  So that's a mess that I choose
+# to ignore.
+#
+# So I guess my best option is to just use "serpentine springbeauty" for both
+# subspecies as per Calscape.
+#
+# iNaturalist has "pale springbeauty" as the primary species name (with many
+# other options), which is fine.
+==serpentine springbeauty:C. exigua ssp. exigua
+species: pale springbeauty
 . <b>cauline leaves free and opposite in shape of "crab claws"</b>
 . <b>petals 2--5 mm</b>
 . corolla white or pink

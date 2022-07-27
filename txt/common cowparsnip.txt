@@ -1,3 +1,5 @@
 sci:Heracleum maximum
 color: white
+
+genus: hogweeds
 x:ca

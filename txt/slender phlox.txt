@@ -1,3 +1,5 @@
 sci:Microsteris gracilis
-x:any
 color: pink
+
+genus: n/a
+x:any

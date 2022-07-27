@@ -1,3 +1,4 @@
 sci:Achillea millefolium
 color: white
 x:rare
+genus: yarrows

@@ -1,6 +1,9 @@
 sci:Holodiscus discolor
 color: white, cream
+
+genus: n/a
 x:ca
+
 xx:ca
 
 ==n/a:H. discolor var. discolor

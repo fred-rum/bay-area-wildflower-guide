@@ -37,6 +37,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0716+1028
 
 ==bright blue speedwell:V. serpyllifolia ssp. humifusa
 xx:ba
+species: thyme-leaved speedwell
 . 1+ flowers in each terminal raceme
 . corolla 6--7 mm, white, pale blue, or pale purple, with blue or purple lines
 . pedicels 2.5--7 mm
@@ -49,6 +50,7 @@ xx:ba
 
 ==hairy purslane speedwell:V. peregrina ssp. xalapensis
 xx:ba
+species: purslane speedwell
 . 1+ flowers in each terminal raceme
 . corolla 2--3 mm, white with no lines
 . uncommon
