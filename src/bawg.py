@@ -730,21 +730,38 @@ with open(search_file, 'w', encoding='utf-8') as w:
     for page in sort_pages(page_array, with_depth=True):
         name = filename(page.name)
         w.write(f'{{page:"{name}"')
+
+        # List all common names that should find this page when searching.
         coms = []
-        if page.com and (page.com != page.name or
-                         not page.com.islower() or
-                         page.acom):
-            coms.append(unidecode(page.com))
+        if page.com:
+            coms.append(page.com)
+        else:
+            # The first entry should be the default common name.
+            # If there is no default common name, use a blank string
+            # (which never matches anything the user types).
+            coms.append('')
+
+        # Add alternative common names.
         if page.acom:
-            if not page.com:
-                # The first entry should be the default name.
-                # If there is no default name, insert a blank string instead.
-                coms.append('')
             coms.extend(page.acom)
-        if coms:
-            coms_str = '","'.join(coms)
+
+        # Add named ancestors.
+        for ancestor in page.membership_list:
+            if (ancestor.rp_do('member_name_alias') and
+                ancestor.shadow and
+                ancestor.com and
+                ancestor.com not in coms):
+                coms.append(ancestor.com)
+
+        # Save bandwidth for the common case of a page that is named
+        # the same as its common name.
+        # Similarly, don't list anything if there are no common names.
+        if (len(coms) > 1 or
+            (page.com and (page.com != page.name or not page.com.islower()))):
+            coms_str = unidecode('","'.join(coms))
             w.write(f',com:["{coms_str}"]')
 
+        # List all scientific names that should find this page when searching.
         elabs = []
         add_elab(elabs, page.elab)
         add_elab(elabs, page.elab_inaturalist)
@@ -753,9 +770,24 @@ with open(search_file, 'w', encoding='utf-8') as w:
         if page.elab_calphotos:
             for elab in page.elab_calphotos.split('|'):
                 add_elab(elabs, elab)
+
+        # Add named ancestors if the scientific name is not trivially derived.
+        for ancestor in page.membership_list:
+            if (ancestor.rp_do('member_name_alias') and
+                ancestor.shadow and
+                ancestor.elab and
+                not (ancestor.rank in (Rank.genus, Rank.species) and
+                     page.rank in (Rank.species, Rank.below)) and
+                ancestor.elab not in elabs):
+                elabs.append(ancestor.elab)
+
+        # Save bandwidth for the common case of a page that is named
+        # the same as its scientific name.
+        # Similarly, don't list anything if there are no scientific names.
         if elabs and not (len(elabs) == 1 and page.name == elabs[0]):
             elabs_str = unidecode('","'.join(elabs))
             w.write(f',sci:["{elabs_str}"]')
+
         if page.child:
             if page.has_child_key:
                 w.write(',x:"k"')

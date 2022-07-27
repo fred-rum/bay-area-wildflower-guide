@@ -44,6 +44,7 @@ props = {
     'link': 'd',
     'member_link': 'd',
     'member_name': 'd',
+    'member_name_alias': 'd',
     'no_sci': 'f',
     'no_com': 'f',
     'obs_requires_photo': 'f',
@@ -1831,7 +1832,7 @@ class Page:
                 action in self.prop_action_set[prop])
 
     def rp_do(self, prop, msg=None, shadow_bad=False):
-        self.rp_check(prop, msg)
+        self.rp_check(prop, msg, shadow_bad=shadow_bad)
         return self.rp_action(prop, 'do')
 
     def apply_prop_member(self):
@@ -2188,6 +2189,16 @@ class Page:
             if not parent.has_child_key:
                 self.membership_list.append(parent)
 
+        # Sort the membership list from lowest rank to highest.
+        self.membership_list = sort_pages(self.membership_list,
+                                          with_depth=True,
+                                          with_count=False)
+
+        # For some reason the reversed() function doesn't work properly
+        # when self.membership_list is checked from bawg.py, so I use
+        # reverse() instead.
+        self.membership_list.reverse()
+
         # membership_list lists the ancestors that this page should
         # be listed as a 'member of', unsorted.
         #
@@ -2197,9 +2208,7 @@ class Page:
         # is likely to have been autopopulated, but not necessarily.
         #
         # For a shadow ancestor, write it as unlinked text.
-        ordered_list = sort_pages(self.membership_list,
-                                  with_depth=True, with_count=False)
-        for ancestor in reversed(ordered_list):
+        for ancestor in self.membership_list:
             if ancestor.shadow:
                 if (not (ancestor.com or ancestor.no_com) and
                     not ancestor.com_checked):
