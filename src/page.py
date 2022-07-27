@@ -1773,10 +1773,19 @@ class Page:
         self.apply_prop_member()
         self.apply_prop_checks()
 
-    def assign_membership(self, ancestor):
-        self.membership_list.append(ancestor)
-        for child in self.linn_child:
+    def propagate_membership(self, ancestor):
+        for child in self.child:
             child.assign_membership(ancestor)
+        for child in self.linn_child:
+            # There's no harm in repeating a descendent, but we might as
+            # well avoid the common case of repeating a direct child.
+            if child not in self.child:
+                child.assign_membership(ancestor)
+
+    def assign_membership(self, ancestor):
+        if ancestor not in self.membership_list:
+            self.membership_list.append(ancestor)
+        self.propagate_membership(ancestor)
 
     def rp_check(self, prop, msg, shadow_bad=False):
         # A shadow page normally is only checked if shadow_bad is True.
@@ -1800,8 +1809,7 @@ class Page:
     def apply_prop_member(self):
         if ((not self.shadow and self.rp_do('member_link')) or
             (self.shadow and self.rp_do('member_name'))):
-            for child in self.linn_child:
-                child.assign_membership(self)
+            self.propagate_membership(self)
 
     def apply_prop_checks(self):
         if self.shadow:

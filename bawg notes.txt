@@ -1325,8 +1325,5 @@ find subspecies that are listed without a species parent
           does that screw up script assumptions elsewhere?
       check for common name via no_com as usual
 
-Support 'do member_link: self' in unranked taxons
-   e.g. 'white daisies', 'yellow daisies', 'dandelion-like flowers'
-
 Record native/alien status
   display as a small icon, e.g. to the right of the name
