@@ -224,7 +224,7 @@ def find_page2(com, elab, from_inat=False, taxon_id=None):
         # names to be compared, they must mismatch.  (But if we don't have
         # a scientific name to search for or the page doesn't have an
         # associated scientific name, then that counts as a valid match.)
-        if page and page.sci and elab:
+        if page and elab and (page.sci or (page.no_sci and elab != 'n/a')):
             page = None
 
     # Update (if appropriate) any names that are new or different.

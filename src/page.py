@@ -1603,14 +1603,34 @@ class Page:
                 if not lcca or cca.rank < lcca.rank:
                     lcca = cca
             lcca.link_linn_child(self)
+
+            # In case some children didn't have a Linnaean parent,
+            # we've already assumed that they're within the hierarchy of
+            # lcca, so let's make it official.  This prevents the hierarchy
+            # from getting confused with some real children not being within
+            # the Linnaean hierarchy of the parent.
+            #
+            # Don't propagate into unranked children because they'll call
+            # resolve_lcca() separately.  If we did propagate to them, we'd
+            # have to continue propagating until a ranked child is found.
+            for child in self.child:
+                if child.rank and not child.linn_parent:
+                    lcca.link_linn_child(child)
         else:
             # Either there are no children or no common children's ancestors.
-            # Lacking any finer-grained information, link from the lowest-
-            # ranked real ancestor.  This might be a higher rank than desired,
-            # but there's no way to know.
+            # Lacking any finer-grained information, link the lowest-ranked
+            # real ancestor as linn_parent.  This might be a higher rank than
+            # desired, but there's no way to know.
             lra = self.find_lowest_ranked_ancestor(None)
             if lra:
                 lra.link_linn_child(self)
+
+                # This page now has a Linnaean ancestor that not all its
+                # children know about.  Get the children in sync with this
+                # new ancestor.
+                for child in self.child:
+                    if child.rank:
+                        lra.link_linn_child(child)
 
     def propagate_props(self):
         for prop in self.decl_prop_rank:

@@ -278,6 +278,7 @@ var pages=[
 ["common sow-thistle",1,2,3,4],
 ["common spikeweed",1,5,7],
 ["common st. john's-wort",1,2,3,4],
+["common sunflower",1,2,7],
 ["common water strider",1],
 ["common wood-nymph",3],
 ["common woolly sunflower",1,2,5,6],

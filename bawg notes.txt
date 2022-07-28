@@ -1321,11 +1321,3 @@ I've assigned a common name in the BAWG to a fair number of plant subspecies
     although perhaps they should be marked so as to avoid confusing others
 
 finish more documentation
-
-review explicit children in 'sunflower family.txt'
-  should children need 'member:sunflower family' when listed explicitly?
-  should explicit listing be needed if 'member:sunflower family' is used?
-  perhaps when an lcca is resolved, it should be propagated to any children
-      that don't have a linnaean parent
-    e.g. nipplewort is a member of sunflower family
-      because it is a child of dandelion-like flowers

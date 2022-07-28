@@ -1,17 +1,20 @@
-sci:n/a
-do member_link: self
+sci: genus Helianthus
+x:rare
 
-For the purposes of this page, "sunflowers" are defined as a plant in the {-sunflower family} in which the large head is composed of disk flowers surrounded by a ring of ray flowers.  This page collects the sunflowers in one place for easier comparison.
+==common sunflower:H. annuus
+color: yellow
+. phyllaries 13--25 mm long, generally 5--8 mm wide, abruptly acuminate
+.. all others have phyllaries 1--5 mm wide, acute or gradually acuminate
+. leaf blade abaxially bristly
+. stem +- rough-hairy
 
-See also {-yellow daisies} and {-white daisies} for similar plants with smaller heads.
+==california sunflower:H. californicus
+. phyllaries 10--25 mm long, generally 3--5 mm wide, generally >> disk
+.. tips of outer phyllaries generally reflexed at maturity
 
-==mule's ears:Wyethia spp.
+==serpentine sunflower:H. exilis
+sci_j:H. bolanderi
+. phyllaries 8--27 mm long, 3--5 mm wide, often >> disk
 
-==gumplants:Grindelia spp.
-
-==balsamroot
-
-==striped treasureflower:Gazania linearis
-color: orange
-x:ca
-genus: treasure flowers
+==slender sunflower:H. gracilentus
+. phyllaries generally unequal, 4--8 mm long, 1.5--3 mm wide, <= disk
