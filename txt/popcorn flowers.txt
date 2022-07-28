@@ -1,7 +1,7 @@
 sci:Plagiobothrys spp.
 x:!hist/rare
 
-Popcorn flowers and the related {-catseyes} are difficult to distinguish between and among each other except by minute features of their nutlets.  Nutlets may be found within the older (proximal) calyxes while younger flowers bloom above.
+{-popcorn flowers and cryptanthas} are difficult to distinguish between and among each other except by minute features of their nutlets.  Nutlets may be found within the older (proximal) calyxes while younger flowers bloom above.
 
 Key features:
 . stem erect, decumbent, or prostrate

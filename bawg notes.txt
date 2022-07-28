@@ -1257,12 +1257,15 @@ I probably need a method for proper citations, e.g. in case of link rot.
       in the text by a linked description of the page.
       E.g. "California Herps (glossary link) has more tips for
         identifying alligator lizards in california (page link)."
+  Examples:
+    inline citation:
+      (<a>Russo 2021</a>, p. 368)
+      <i>California Herps</i>: <a>"Identifying California Snakes"</a>
+    linked footnote citation:
+      Russo, Ronald A. <i>Plant Galls of the Western United States</i>. Princeton University Press, 2021.
 
 review txt files for plants with x:more
-
-review explicit children in 'sunflower family.txt'
-  should children need 'member:sunflower family' when listed explicitly?
-  should explicit listing be needed if 'member:sunflower family' is used?
+  or are missing x
 
 since taxons that are directly observed can already pick up a common name
   from iNaturalist (or complain that the common name isn't already known),
@@ -1272,9 +1275,6 @@ add another property like 'no_sci_not_obs'
 
 flag places where the genus rank is inferred
   i.e. remains inferred after all sources are checked for elaborations
-
-Diplacus is missing common bay area species
-cinquefoils is missing common bay area species
 
 Will the script run faster if I read the existing HTML files
   and only re-write the ones that have changed?
@@ -1310,3 +1310,22 @@ Give the user a way to edit/repeat the previous search
 
 Record native/alien status
   display as a small icon, e.g. to the right of the name
+
+I've assigned a common name in the BAWG to a fair number of plant subspecies
+    that don't have one in iNaturalist.
+  Should I undo that?
+    I think I shouldn't.
+    I can use the scientific name in iNaturalist.  It's ugly, but whatever.
+    Meanwhile, I can use my preferred common name in Lightroom and the BAWG.
+  I could even make up more common names for my own purpose
+    although perhaps they should be marked so as to avoid confusing others
+
+finish more documentation
+
+review explicit children in 'sunflower family.txt'
+  should children need 'member:sunflower family' when listed explicitly?
+  should explicit listing be needed if 'member:sunflower family' is used?
+  perhaps when an lcca is resolved, it should be propagated to any children
+      that don't have a linnaean parent
+    e.g. nipplewort is a member of sunflower family
+      because it is a child of dandelion-like flowers

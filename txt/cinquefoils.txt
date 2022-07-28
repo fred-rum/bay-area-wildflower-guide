@@ -1,9 +1,20 @@
 sci:genus Potentilla
-x:more
+
+x:rare
+
 family:rose family
+
+==mock strawberry:P. indica
+sci_fp: Duchesnea indica
+sci_j: Duchesnea indica var. indica
+. stolens present
+. fruit strawberry-like
+. leaves ternately compound
+. uncommon
 
 ==hickman's cinquefoil:P. hickmanii
 . flowers in cymes
-. no stolons
 . CalPhotos shows two lobes per petal
+. no stolons
+. leaf pinnate
 . rare; on/near Montara Mtn.

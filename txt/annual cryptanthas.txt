@@ -1,8 +1,8 @@
-acom: annual cryptanthas
+acom: catseyes
 sci:Cryptantha spp.
 x:!rare
 
-Catseyes and the related {-popcorn flowers} are difficult to distinguish between and among each other except by minute features of their nutlets.  Nutlets may be found within the older (proximal) calyxes while younger flowers bloom above.
+{-popcorn flowers and cryptanthas} are difficult to distinguish between and among each other except by minute features of their nutlets.  Nutlets may be found within the older (proximal) calyxes while younger flowers bloom above.
 
 Key features:
 . stem erect, decumbent, or prostrate

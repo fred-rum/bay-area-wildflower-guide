@@ -4,13 +4,15 @@ These genuses are difficult to distinguish between and among each other except b
 
 ==popcorn flowers
 
-==catseyes
+==annual cryptanthas
 
 ==pygmyflower cryptantha:Johnstonella micromeres
 genus: n/a
+family: borage family
 x:ba
 sci_jfp:Cryptantha micromeres
 . <b>petal diameter +- 0.5 mm</b>
 . no corolla appendages
 . 4 nutlets, 0.7--1 mm, tubercled (sometimes with one larger than the others and smooth)
 
+There are no perennial cryptanthas (genus <i>Oreocarya</i>) in the bay area.

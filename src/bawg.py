@@ -673,7 +673,7 @@ for page in page_array:
 
 def by_incomplete_obs(page):
     def count_flowers(page):
-        obs = Obs(None)
+        obs = Obs(None, None)
         page.count_matching_obs(obs)
         return obs.n
 
