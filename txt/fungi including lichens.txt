@@ -1,7 +1,7 @@
 sci:kingdom Fungi
 
 # fungi aren't complete yet
-warn obs_promotion_above_peers: none
+warn obs_promotion: none
 
 ==gilled mushrooms
 

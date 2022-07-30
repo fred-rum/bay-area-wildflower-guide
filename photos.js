@@ -28,6 +28,7 @@ var pages=[
 ["anise swallowtail",1,3],
 ["anna's hummingbird",2,3,5],
 ["genus Anthaxia",1,2],
+["Anthrenus lepidus",8],
 ["aphid mummy wasps",4],
 ["aphids",1],
 ["apricot jelly",5],

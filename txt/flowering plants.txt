@@ -10,9 +10,6 @@ do member_link: self, family
 do member_name: genus, species
 do member_name_alias: genus, species
 
-# every observation is expected to find a page
-warn obs_promotion_above_peers: self-below
-
 warn color_requires_photo: self-below
 warn photo_requires_color: self-below
 

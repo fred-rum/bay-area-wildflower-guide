@@ -1,9 +1,3 @@
-#!/cygdrive/c/Python37/python
-#!/usr/bin/env python
-
-# Run as:
-# /cygdrive/c/Users/Chris/Documents/GitHub/bay-area-flowers/src/bawg.py
-
 # terminology (e.g. for variable names):
 # page - a flower or container HTML page, and the info associated with it
 # txt - the text that defines the contents of a page, often from a .txt file
@@ -39,19 +33,6 @@ import yaml
 from unidecode import unidecode # ? from https://pypi.org/project/Unidecode/
 import datetime
 import time
-
-# The specified version (or later) of Python is required for at least the
-# following reasons.
-#
-# Python 3 is required in general for good Unicode support and other features.
-#
-# Python 3.5 is required for subprocess.run()
-#
-# Python 3.7 is required for the dictionaries to be ordered by default.
-# I don't generally rely on this, but the first dictionary entry in
-# parks.yaml is treated specially, so that requires an ordered dictionary.
-if sys.version_info < (3, 7):
-    sys.exit('Python 3.7 or later is required.\n')
 
 # My files
 from args import *
@@ -588,36 +569,46 @@ def read_observation_data(f):
             if loc != 'bay area' and not page.rp_do('outside_obs_promotion'):
                 continue
 
-            if orig_page.rank_unknown:
-                # If an observation has an unknown rank, then we *always*
+            if loc != 'bay area':
+                # We never care whether an observation outside the bay area
+                # isn't in the guide.
+                pass
+            elif orig_page.rank_unknown:
+                # If an observation has an unknown rank, then we always
                 # promote it without complaint.
                 pass
-            elif (rg != 'research' and
-                  orig_page.rank <= Rank.species and
-                  page.rp_do('casual_obs_promotion')):
-                # This property allows a non-research-grade observation to be
-                # promoted without complaint.
-                pass
-            else:
+            elif orig_page.has_real_linnaean_descendants():
                 # If the observation's original page has real Linnaean
                 # descendants, then we don't know what it is, but it could
-                # be something we've documented, so it's always OK.  But
-                # if it doesn't have real Linnaean descendants, and the
-                # promoted page does, then it's definitely something we
-                # haven't documented.
-                if (not orig_page.has_real_linnaean_descendants() and
-                    page.has_real_linnaean_descendants()):
-                    orig_page.rp_check('obs_promotion_above_peers',
-                                       f'{orig_page.full()} observation promoted to {page.full()}',
-                                       shadow_bad=True)
+                # be something we've documented, so it's always OK.
+                #print(f'{orig_page.full()} has real descendents')
+                pass
+            elif orig_page.rp_do('disable_obs_promotion_checks_from',
+                                 shadow_bad=True):
+                # Ignore observations that aren't at a desired level of
+                # specificity.
+                #print('disable_obs_promotion_checks_from')
+                pass
+            elif (rg == 'needs_id' and
+                  orig_page.rp_do('disable_obs_promotion_checks_from_needs_id',
+                                  shadow_bad=True)):
+                # Ignore observations without agreement.
+                #print('needs_id')
+                pass
+            elif page.taxon_uncat():
+                # Ignore observations that are promoted to a taxon that
+                # doesn't care about lower levels.  The function call checks
+                # disable_obs_promotion_to_incomplete when appropriate.
+                #print(f'{orig_page.full()} is uncat')
+                pass
+            else:
+                orig_page.rp_check('obs_promotion',
+                                   f'{orig_page.full()} observation promoted to {page.full()}',
+                                   shadow_bad=True)
 
-                if page.taxon_unknown_completion():
-                    page.rp_check('obs_promotion_without_x',
-                                  f'{orig_page.full()} observation promoted to {page.full()}')
+            if not page.rp_action('obs_promotion', 'do'):
+                continue
 
-                if not page.rp_do('obs_promotion',
-                                  f'{orig_page.full()} observation promoted to {page.full()}'):
-                    continue
 
         page.obs_n += 1
         if rg == 'research':

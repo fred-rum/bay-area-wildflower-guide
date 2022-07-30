@@ -33,7 +33,7 @@ There is a <a href="insect-glossary.html">glossary</a> for insects.
 ==four-lined silverfish:Ctenolepisma lineata
 bug:156092
 
-==aphids:family Aphididae
+==aphids
 
 ==gall wasps
 

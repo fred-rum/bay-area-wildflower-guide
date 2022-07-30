@@ -1,5 +1,4 @@
 link_birds: species-below
-warn obs_promotion_without_x: self-below
 x:more
 
 ==raptors

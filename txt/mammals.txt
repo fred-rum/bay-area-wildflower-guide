@@ -1,7 +1,9 @@
 list_hierarchy
 member_link: self-genus
-warn obs_promotion_without_x: self-below
+
 x:ba
+# every observation is expected to find a page
+do disable_obs_promotion_checks_from: none
 
 Note that the range of this Guide excludes mammals that never come onto land, i.e. the various cetaceans.
 

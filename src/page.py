@@ -53,8 +53,9 @@ props = {
     'obs_promotion': 'df',
     'casual_obs_promotion': 'd',
     'outside_obs_promotion': 'd',
-    'obs_promotion_above_peers': 'f',
-    'obs_promotion_without_x': 'f',
+    'disable_obs_promotion_checks_from': 'd',
+    'disable_obs_promotion_checks_from_needs_id': 'd',
+    'disable_obs_promotion_to_incomplete': 'd',
     'casual_obs': 'd',
     'outside_obs': 'd',
     'obs_fill_com': 'df',
@@ -2663,12 +2664,18 @@ class Page:
             ancestor = ancestor.linn_parent
         return True
 
-    def taxon_unknown_completion(self):
+    def taxon_uncat(self):
         if self.rank >= Rank.genus:
             complete = self.genus_complete
         else:
             complete = self.species_complete
-        return complete in ('ba', 'ca', 'any', 'none')
+
+        if complete == 'more':
+            return self.rp_do('disable_obs_promotion_to_incomplete')
+        else:
+            # return True for 'uncat' or <free text>.
+            return complete not in ('none', 'any', 'ca', 'ba',
+                                    'hist', 'rare', 'hist/rare', None)
 
     def lower_complete(self):
         if self.genus_complete:
@@ -2742,6 +2749,11 @@ class Page:
                 else:
                     prop = 'default_completeness'
 
+                if self.rp_action(prop, 'caution'):
+                    caution = 'Caution: '
+                else:
+                    caution = ''
+
                 if complete is None:
                     # We don't want to expose the hacked property name to
                     # the user, so we check for error/warn manually and not
@@ -2758,10 +2770,8 @@ class Page:
                         elif 'warn' in self.prop_action_set[prop]:
                             warn(f'warn default_completeness: {msg}')
 
-                    if self.rp_action(prop, 'caution'):
-                        w.write(f'<b>Caution: There may be{other} wild {members} of this {top} not yet included in this guide.</b>')
-                    elif self.rp_action(prop, 'do'):
-                        w.write(f'<b>Caution: There may be{other} wild {members} of this {top} not yet included in this guide.</b>')
+                    if caution or self.rp_action(prop, 'do'):
+                        w.write(f'<b>{caution}There may be{other} wild {members} of this {top} not yet included in this guide.</b>')
                     else:
                         # Don't write anything, including the </p> at the end
                         return
@@ -2776,10 +2786,6 @@ class Page:
                     else:
                         w.write("This species has subspecies or variants that don't seem worth distinguishing.")
                 elif complete == 'more':
-                    if self.rp_action(prop, 'caution'):
-                        caution = 'Caution: '
-                    else:
-                        caution = ''
                     if other:
                         w.write(f'<b>{caution}There are other wild {members} of this {top} not yet included in this guide.</b>')
                     elif top == 'species':

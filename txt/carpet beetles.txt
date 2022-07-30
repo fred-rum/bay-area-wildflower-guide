@@ -1,4 +1,13 @@
 sci:genus Anthrenus
+bug:11210
+x:more
+
+Per BugGuide, "scale colour and distribution variable, but often diagnostic".  After clicking through a number of species, I agree that the pattern is indeed diagnostic.
+
+Also from BugGuide: "larvae scavenge on accumulated fur, feathers, skin flakes, dead insects, etc. keratine- or chitin-rich materials; adults feed on pollen on flowers."
 
 ==varied carpet beetle:Anthrenus verbasci
 bug:95010
+
+==n/a:Anthrenus lepidus
+bug:110840

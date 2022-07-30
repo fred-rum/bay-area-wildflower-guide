@@ -1108,12 +1108,6 @@ property but something else.  In any case, "default_ancestor" is still
 useful for a DB in progress, especially when everything is of the same
 type.
 
-Support {--<name>} to link using a short name (common preferred), *or*
-improve {-<name>} to link using a short name whenever the named taxon
-is on the current page.  (I.e. it is the current page or is a direct
-child.)  (Which means there should be a difference between a genus key
-and the auto-generated species page.)
-
 If a page is above the genus level and has no photographed(?) children
 (e.g. flesh flies), omit the count of observations that are "research
 grade".
@@ -1321,3 +1315,42 @@ I've assigned a common name in the BAWG to a fair number of plant subspecies
     although perhaps they should be marked so as to avoid confusing others
 
 finish more documentation
+
+separate 'other dandelion-like flowers' from 'yellow dandelion-like flowers'
+
+Support {--<name>} to link using a short name (common preferred), *or*
+improve {-<name>} to link using a short name whenever the named taxon
+is on the current page.  (I.e. it is the current page or is a direct
+child.)  (Which means there should be a difference between a genus key
+and the auto-generated species page.)
+
+Support abbreviations for inline links: "{-name}"
+    and membership: "member: E. coli"
+  For inline links, it would be best to evaluate in the context of the child
+    if possible.
+
+Improve {-name} to write an abbreviated scientific name
+  when it can be parsed in the current context.
+  Use the child's context if used within a child declaration.
+
+Besides converting spaces to hyphens in HTML file names,
+  also remove any other characters that would end up percent encoded
+  (or that are not allowed in Windows).
+  consider also removing apostrophes and other special characters
+    but perhaps not commas
+
+does a high-level x attribute propagate down to lower levels?
+  and complain about mismatches?
+  does default_completeness flag before or after x propagation?
+    what do I want it to do?
+
+Why isn't the Tamalia coweni observation counted in the aphid family?
+
+Change free-form x/xx text to still require a keyword, e.g.
+  x:more:<free text>
+
+should there be a check to ensure that a real taxon is linked to all
+    real Linnaean ancestors?
+  e.g. manzanita leafgall aphid was disconnected from aphids
+  this may already exist as the member_link property
+    although that only has 'do', not 'flag'

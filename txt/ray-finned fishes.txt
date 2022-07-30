@@ -1,5 +1,5 @@
 # the "common sunfishes" ID doesn't seem worthwhile to add to the database
-warn obs_promotion_above_peers: species-below
+do disable_obs_promotion_checks_from_needs_id: genus
 
 ==western mosquitofish:Gambusia affinis
 . native to the Mississippi River drainage
