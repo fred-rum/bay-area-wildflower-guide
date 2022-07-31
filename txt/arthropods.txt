@@ -4,9 +4,10 @@ end_hierarchy
 ==arachnids
 end_hierarchy
 
+==millipedes
+end_hierarchy
+
 ==signal crayfish:Pacifastacus leniusculus
 
 ==common pill woodlouse:Armadillidium vulgare
 bug:94180
-
-==gall and rust mites

@@ -2,6 +2,8 @@ com:n/a
 sci:class Agaricomycetes
 end_hierarchy
 
+==gilled mushrooms
+
 ==shelf fungi
 
 ==giant sawgill:Neolentinus ponderosus

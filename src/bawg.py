@@ -584,14 +584,14 @@ def read_observation_data(f):
                 #print(f'{orig_page.full()} has real descendents')
                 pass
             elif orig_page.rp_do('disable_obs_promotion_checks_from',
-                                 shadow_bad=True):
+                                 shadow=True):
                 # Ignore observations that aren't at a desired level of
                 # specificity.
                 #print('disable_obs_promotion_checks_from')
                 pass
             elif (rg == 'needs_id' and
                   orig_page.rp_do('disable_obs_promotion_checks_from_needs_id',
-                                  shadow_bad=True)):
+                                  shadow=True)):
                 # Ignore observations without agreement.
                 #print('needs_id')
                 pass
@@ -602,9 +602,8 @@ def read_observation_data(f):
                 #print(f'{orig_page.full()} is uncat')
                 pass
             else:
-                orig_page.rp_check('obs_promotion',
-                                   f'{orig_page.full()} observation promoted to {page.full()}',
-                                   shadow_bad=True)
+                page.rp_check('obs_promotion',
+                              f'{orig_page.full()} observation promoted to {page.full()}')
 
             if not page.rp_action('obs_promotion', 'do'):
                 continue

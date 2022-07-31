@@ -1,0 +1,4 @@
+sci:family Noctuidae
+
+==dagger moths:genus Acronicta
+bug:322

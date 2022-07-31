@@ -619,7 +619,6 @@ var pages=[
 ["persian walnut",4,6],
 ["peruvian peppertree",1,2,3],
 ["phacelia plant bug",1],
-["genus Phaeolus",2,4],
 ["philadelphia fleabane",1,2,3],
 ["pied-billed grebe",1],
 ["pin molds",3,6],

@@ -5,5 +5,11 @@
 ==striped skunk:Mephitis mephitis
 x:ca
 
+==raccoons and allies:family Procyonidae
+
+==mustelids:family Mustelidae
+
 ==american black bear:Ursus americanus
 x:ca
+
+==pinnipeds:parvorder Pinnipedia

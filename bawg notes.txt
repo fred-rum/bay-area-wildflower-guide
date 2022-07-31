@@ -1344,13 +1344,11 @@ does a high-level x attribute propagate down to lower levels?
   does default_completeness flag before or after x propagation?
     what do I want it to do?
 
-Why isn't the Tamalia coweni observation counted in the aphid family?
-
 Change free-form x/xx text to still require a keyword, e.g.
   x:more:<free text>
 
-should there be a check to ensure that a real taxon is linked to all
-    real Linnaean ancestors?
-  e.g. manzanita leafgall aphid was disconnected from aphids
-  this may already exist as the member_link property
-    although that only has 'do', not 'flag'
+galls should be under life
+  and re-check its properties for duplicates or problems
+
+mammals isn't a key
+  but it is listed as one

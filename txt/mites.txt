@@ -6,3 +6,5 @@ end_hierarchy
 ==sidewalk mites:Balaustium spp.
 bug:91443
 end_hierarchy
+
+==gall and rust mites

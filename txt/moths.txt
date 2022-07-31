@@ -17,10 +17,7 @@ bug:163464
 ==n/a:genus Orgyia
 bug:335
 
-==dagger moths:genus Acronicta
-bug:322
-
-==cutworm moths and allies:family Noctuidae
+==cutworm moths and allies
 
 ==tiger moths:tribe Arctiini
 

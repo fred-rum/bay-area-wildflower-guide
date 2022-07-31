@@ -4,6 +4,8 @@ taxon_id: 48460
 is_top
 list_hierarchy
 
+warn link: self-below
+
 caution default_completeness: genus
 
 link_inaturalist: self-below

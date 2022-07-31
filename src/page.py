@@ -37,11 +37,14 @@ for rank in Rank:
 
 traits = set()
 
-# Each props value can be either a set of allowable property types (e.g. 'do')
-# or an abbreviation (e.g. 'd').
+# Each props value can be either a set of supported property actions
+# (e.g. 'do') or string of abbreviation (e.g. 'd').
+# Abbreviations are as follows:
+#  f: 'error' and 'warn' - flag a problem as appropriate
+#  d: 'do' - perform the action as appropriate
 props = {
-    'create': 'd',
-    'link': 'd',
+    'create': 'fd',
+    'link': 'fd',
     'member_link': 'd',
     'member_name': 'd',
     'member_name_alias': 'd',
@@ -58,9 +61,9 @@ props = {
     'disable_obs_promotion_to_incomplete': 'd',
     'casual_obs': 'd',
     'outside_obs': 'd',
-    'obs_fill_com': 'df',
-    'obs_fill_sci': 'df',
-    'obs_fill_alt_com': 'df',
+    'obs_fill_com': 'fd',
+    'obs_fill_sci': 'fd',
+    'obs_fill_alt_com': 'fd',
     'link_inaturalist': 'd',
     'link_calflora': 'd',
     'link_calphotos': 'd',
@@ -70,6 +73,10 @@ props = {
     'link_bayarea_inaturalist': 'd',
     'default_completeness': set(('do', 'caution', 'warn', 'error')),
 }
+# In addition to the above, we also automatically define the following:
+#   'photo_requires_{trait}': 'f',
+#   '{trait}_requires_photo': 'f'
+
 
 ###############################################################################
 
@@ -1761,21 +1768,31 @@ class Page:
         page_array.append(self)
 
     def apply_prop_link(self):
-        if ((self.shadow and self.rp_do('create')) or
-            (not self.shadow and self.rp_do('link'))):
-            # Check for Linaean descendants that can potentially be linked to
-            # this parent.
-            potential_link_set = set()
-            for child in self.linn_child:
-                # Ignore children that already have a real link
-                # and subset pages.
-                if child not in self.child and not child.subset_of_page:
-                    child.get_potential_link_set(potential_link_set, self)
+        # Check for Linaean descendants that can potentially be linked to
+        # this parent.
+        potential_link_set = set()
+        for child in self.linn_child:
+            # Ignore children that already have a real link
+            # and subset pages.
+            if child not in self.child and not child.subset_of_page:
+                child.get_potential_link_set(potential_link_set, self)
+
+        if potential_link_set:
+            descendent_names = []
+            for page in potential_link_set:
+                descendent_names.append(page.full())
+            descendent_names = '\n  '.join(descendent_names)
 
             if (self.shadow and
-                potential_link_set and
-                self.rp_do('create')):
+                self.rp_do('create', shadow=True,
+                           msg=f'{self.full()} is a shadow page with real descendents:\n  {descendent_names}')):
                 self.promote_to_real()
+            elif (not self.shadow and
+                  self.rp_do('link', # only checks a real page
+                             msg=f'{self.full()} is a real page with unlinked descendents:\n  {descendent_names}')):
+                pass
+            else:
+                return
 
             self.non_txt_children = potential_link_set
             for child in potential_link_set:
@@ -1810,13 +1827,13 @@ class Page:
             else:
                 values_not_used = ', '.join(self.trait_values[trait] -
                                             self.traits_used[trait])
-            if values_not_used:
-                error(f'no page makes use of these {trait} values defined in {self.full()}: {values_not_used}')
+                if values_not_used:
+                    error(f'no page makes use of these {trait} values defined in {self.full()}: {values_not_used}')
 
         for trait in traits:
             if self.photo_dict and trait not in self.trait_values:
                 self.rp_check(f'photo_requires_{trait}',
-                              f'page {self.full()} has photos but no assigned {trait}')
+                              f'{self.full()} has photos but no assigned {trait}')
 
     # Apply properties not related to link creation.
     def apply_most_props(self):
@@ -1837,9 +1854,9 @@ class Page:
             self.membership_list.append(ancestor)
         self.propagate_membership(ancestor)
 
-    def rp_check(self, prop, msg, shadow_bad=False):
-        # A shadow page normally is only checked if shadow_bad is True.
-        if self.shadow and not shadow_bad:
+    def rp_check(self, prop, msg, shadow=False):
+        # A shadow page is only checked if shadow is True.
+        if self.shadow and not shadow:
             return
 
         if prop in self.prop_action_set:
@@ -1852,8 +1869,8 @@ class Page:
         return (prop in self.prop_action_set and
                 action in self.prop_action_set[prop])
 
-    def rp_do(self, prop, msg=None, shadow_bad=False):
-        self.rp_check(prop, msg, shadow_bad=shadow_bad)
+    def rp_do(self, prop, msg=None, shadow=False):
+        self.rp_check(prop, msg, shadow=shadow)
         return self.rp_action(prop, 'do')
 
     def apply_prop_member(self):
@@ -2240,7 +2257,7 @@ class Page:
                         ancestor_txt = f'{ancestor.elab()}'
                     ancestor.rp_check('no_com',
                                       f'{self.full()} lists {ancestor_txt} as an ancestor, but that has no common name',
-                                      shadow_bad=True)
+                                      shadow=True)
                     ancestor.com_checked = True
                 
                 if (ancestor.rank in (Rank.genus, Rank.species) and
@@ -2765,9 +2782,9 @@ class Page:
                         else:
                             msg = f'completeness not specified in {self.full()}'
 
-                        if 'error' in self.prop_action_set[prop]:
+                        if self.rp_action(prop, 'error'):
                             error(f'error default_completeness: {msg}')
-                        elif 'warn' in self.prop_action_set[prop]:
+                        elif self.rp_action(prop, 'warn'):
                             warn(f'warn default_completeness: {msg}')
 
                     if caution or self.rp_action(prop, 'do'):

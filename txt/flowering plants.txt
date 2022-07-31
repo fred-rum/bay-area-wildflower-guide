@@ -4,7 +4,7 @@ default_ancestor
 
 do create: family
 do link: self-/genus
-#warn link: genus-species
+warn link: genus-below
 
 do member_link: self, family
 do member_name: genus, species

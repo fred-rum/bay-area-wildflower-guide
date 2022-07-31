@@ -21,13 +21,7 @@ x:ba
 
 ==moles, shrews, and voles
 
-==raccoons and allies:family Procyonidae
-
-==mustelids:family Mustelidae
-
 ==virginia opossum:Didelphis virginiana
 x:ca
 
 ==bats:order Chiroptera
-
-==pinnipeds:parvorder Pinnipedia
