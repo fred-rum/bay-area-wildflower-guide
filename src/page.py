@@ -2775,12 +2775,11 @@ class Page:
                     # We don't want to expose the hacked property name to
                     # the user, so we check for error/warn manually and not
                     # through the usual rp_check() function.
-                    if prop in self.prop_action_set:
-                        if ((top == 'genus' and self.rank is not Rank.genus) or
-                            (top == 'species' and self.rank is not Rank.species)):
-                            msg = f'completeness not specified at the {top} level in {self.full()}'
-                        else:
-                            msg = f'completeness not specified in {self.full()}'
+                    if ((top == 'genus' and self.rank is not Rank.genus) or
+                        (top == 'species' and self.rank is not Rank.species)):
+                        msg = f'completeness not specified at the {top} level in {self.full()}'
+                    else:
+                        msg = f'completeness not specified in {self.full()}'
 
                         if self.rp_action(prop, 'error'):
                             error(f'error default_completeness: {msg}')
@@ -2831,6 +2830,7 @@ class Page:
                 else:
                     # user-specified text instead of a standard abbreviation
                     w.write(complete);
+
                 if key_incomplete:
                     w.write(f'<br>\n<b>Caution: The key to distinguish these {members} is not complete.</b>')
                 w.write('</p>\n')

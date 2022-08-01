@@ -27,7 +27,7 @@ x:more
 <h3>Laetiporaceae family</h3>
 
 ==dyer's polypore:Phaeolus schweinitzii
-x:any
+x:There are other species in this genus, but they're yet entered into iNaturalist.
 
 ==conifer chicken of the woods:Laetiporus conifericola
 x:more

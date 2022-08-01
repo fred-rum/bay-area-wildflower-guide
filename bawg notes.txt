@@ -1352,3 +1352,28 @@ galls should be under life
 
 mammals isn't a key
   but it is listed as one
+
+allow an iNaturalist observation to create a real page
+  e.g. 'obs_create'
+  promotion stops where it reaches 'obs_create'
+
+'create2': 'fd' - for a shadow page with at least *two* potential links,
+    promote it to real, create the links.
+  If only one link is possible, nothing is done.
+    I.e. don't create a rather boring extra level of hierarchy.
+  Use create2 instead of create (e.g. for flower families)?
+    and use member_name to name the family when it isn't created
+
+Use obs_create and create2 to fill in the fungi taxon
+  instead of doing it by hand
+
+'create_com' and 'create2_com' only create (or check) a page
+  if it has a common name
+
+E.g. in fungi [...].txt:
+  obs_create self-below
+  create2 family, genus, species
+  create2_com self-below
+
+Heck, create2_com might be handy in *every* kingdom
+
