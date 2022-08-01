@@ -3,6 +3,10 @@ sci:kingdom Fungi
 # fungi aren't complete yet
 warn obs_promotion: none
 
+# warn about any missing taxons of interest
+warn obs_create: genus-below
+warn create2: family, genus, species
+
 ==class Agaricomycetes
 
 ==common lichens

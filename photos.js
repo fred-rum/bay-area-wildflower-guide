@@ -215,7 +215,7 @@ var pages=[
 ["checker lily",1,2,3,4,5],
 ["checkerspot caterpillars",7,8],
 ["cherry-plum",2,3,4,5],
-["chestnut backed chickadee",3,5],
+["chestnut-backed chickadee",3,5],
 ["chestnuts",1,2],
 ["chia",1,2,3,5],
 ["chick lupine",1,2,3,4,5,6,7,8],

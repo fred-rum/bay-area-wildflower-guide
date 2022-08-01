@@ -1356,6 +1356,12 @@ mammals isn't a key
 allow an iNaturalist observation to create a real page
   e.g. 'obs_create'
   promotion stops where it reaches 'obs_create'
+  implementation:
+    in the first pass through observations.csv,
+      mark pages that are directly observed
+    when evaluating create/create2/link, also evaluate obs_create
+      if a page isn't created,
+	 push its observation flag to its Linnaean parent
 
 'create2': 'fd' - for a shadow page with at least *two* potential links,
     promote it to real, create the links.
@@ -1364,16 +1370,74 @@ allow an iNaturalist observation to create a real page
   Use create2 instead of create (e.g. for flower families)?
     and use member_name to name the family when it isn't created
 
-Use obs_create and create2 to fill in the fungi taxon
-  instead of doing it by hand
-
-'create_com' and 'create2_com' only create (or check) a page
-  if it has a common name
+'create_com' and 'create2_com' and 'obs_create_com'
+    create (or check) a page only if it has a common name
+  but where does the common name come from
+    if the taxon isn't directly observed?
 
 E.g. in fungi [...].txt:
-  obs_create self-below
+  obs_create genus-below
   create2 family, genus, species
   create2_com self-below
 
 Heck, create2_com might be handy in *every* kingdom
 
+API:
+https://api.inaturalist.org/v1/docs/
+
+place ID:
+California  = 14
+Santa Clara = 1250
+Fresno = 1924
+
+locale:
+en
+
+https://api.inaturalist.org/v1/taxa?is_active=true&taxon_id=79807&per_page=1&locale=en&preferred_place_id=14&only_id=false&all_names=false
+
+interesting bits:
+{
+  total_results [check for exactly 1?]
+  results: [
+    {
+      name [stripped sci]
+      rank
+      preferred_common_name
+      preferred_establishment_means [endemic, native, introduced]
+      parent_id
+    }
+  ]
+}
+
+if searching by scientific name, q=<sci>, rank=<rank>
+  don't include the rank if unknown or 'below'
+    or get the rank from elab
+https://api.inaturalist.org/v1/taxa?q=Adiantum%20&is_active=true&rank=species&per_page=1&locale=en&preferred_place_id=14&only_id=false&all_names=false
+
+if the returned rank isn't recognized,
+  prepend it to the elab
+  and otherwise treat it as an unknown rank
+
+save with the date
+
+After the first pass through observations.csv
+    but before applying most properties
+    (between steps 7 and 8)
+  read taxon JSON files
+    prepare them for look up by taxon_id, elaborated name, or scientific name
+  step through the BAWG taxonomy and apply taxon ID from JSON files
+    if a taxon isn't in the JSON files (by taxon_id or rank sci)
+      and -api [taxon] [delete] arg(s are present
+      [and the taxon's ancestor is listed by the API arg]
+      fetch the JSON via the API
+        API function automatically sleeps as desired
+        save the JSON to disk (annotated with date)
+        if API call fails, save the failure to disk (what name?  what data?)
+          maybe not necessary if I expect to fix failures right away
+          and API is used only whith explicit arg
+    annotate taxon with data
+    if parent taxon ID isn't known in the BAWG DB or JSON data,
+      and the -api is used
+      immediately look it up (recursive)
+        regardless of taxon ancestry
+        although maybe stop at parent of the designated API taxon

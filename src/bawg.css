@@ -132,6 +132,7 @@ html, body {
 div#body {
     padding-left: 8px;
     padding-right: 8px;
+    margin-bottom: 8px; /* in case there's no footer */
 }
 
 /*** properties related to the page footer ***/
@@ -251,7 +252,7 @@ dd {
    This was div.defn:target, but when I added definitions in text
    paragraphs, I changed it to .defn:target.  Then I added an anchored
    link to my contact info in a heading, so now it's just :target. */
-:target {
+:target, :target h2 {
     background-color: #ffc;
 }
 

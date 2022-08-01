@@ -1,0 +1,8 @@
+com: n/a
+sci: genus Trametes
+
+==turkey-tail:Trametes versicolor
+x:more
+
+==gilled polypore:Trametes betulina
+x:more

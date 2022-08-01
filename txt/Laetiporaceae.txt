@@ -1,0 +1,8 @@
+com: n/a
+sci: family Laetiporaceae
+
+==dyer's polypore:Phaeolus schweinitzii
+x:There are other species in this genus, but the genus is still under study, so it may be a while until they're stable enough to enter into iNaturalist.
+
+==conifer chicken of the woods:Laetiporus conifericola
+x:more

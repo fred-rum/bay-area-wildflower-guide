@@ -1,0 +1,13 @@
+sci: family Parmeliaceae
+
+==beard lichens:genus Usnea
+
+==oakmoss:Evernia prunastri
+x:ba
+<b>Caution: photo also includes Ramalina farinacea</b>
+
+==common greenshield lichen:Flavoparmelia caperata
+x:more
+
+==wolf lichen:Letharia vulpina
+x:more

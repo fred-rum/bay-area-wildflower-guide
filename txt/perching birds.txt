@@ -12,7 +12,7 @@ list_hierarchy
 
 ==new world sparrows:family Passerellidae
 
-==chestnut backed chickadee:Poecile rufescens
+==chestnut-backed chickadee:Poecile rufescens
 x:ba
 
 ==european starling:Sturnus vulgaris

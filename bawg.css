@@ -57,6 +57,7 @@ html, body {
 div#body {
     padding-left: 8px;
     padding-right: 8px;
+    margin-bottom: 8px;
 }
 div.footer {
     display: flex;
@@ -100,7 +101,7 @@ dd {
     -moz-background-clip: padding;
     background-clip: padding-box;
 }
-:target {
+:target, :target h2 {
     background-color: #ffc;
 }
 div.color-grid {
