@@ -1465,8 +1465,6 @@ to stay below 10,000 requests per day (per 24 hours?)
   limit fetches in a single day to 5000
 similarly stay below 5 GB per hour and 24 GB per day
 
-accumulate taxon_id searches into a batch request
-
 
 taxa.csv useful fields:
 id
@@ -1486,9 +1484,18 @@ locality
 move API calls prior to parsing observation?
   the API has higher-quality data
   but we'd need to do more name lookups in the API
+  but if we read the Taxa ZIP, then do the API, then read observations,
+    it wouldn't be so bad
+
+instead of recording None in inat_dict for an error
+    record an Inat object that is marked invalid
+  if get_inat returns that object, its file is marked 'used' as usual.
+
 
 keep a record of genuses mentioned in a page
   e.g. sci, asci, sci_i, ==child
   and allow abbreviations to reference any
   abbreviation may be any number of characters followed by a period
   match must be unique
+
+

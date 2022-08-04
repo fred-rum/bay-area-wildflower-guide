@@ -204,8 +204,15 @@ def link_inat2(page_set):
 # Add all ancestor taxon IDs to tid_set.
 def add_parent_tid_to_set(page, tid_set):
     inat = get_inat(page.taxon_id)
-    if inat and inat.parent_id:
-        tid_set.add(inat.parent_id)
+    if inat:
+        # Fetching the parent ID will also fetch all other ancestors,
+        # so if any ancestors are already in the queue, remove them.
+        for anc_tid in inat.anc_tid_list:
+            tid_set.discard(anc_tid)
+
+        # Then add only the direct parent ID.
+        if inat.parent_id:
+            tid_set.add(inat.parent_id)
 
 
 # Get an iNaturalist record or None.
@@ -346,6 +353,8 @@ def fetch(url):
     if api_called:
         if arg('-api_delay'):
             delay = int(arg('-api_delay'))
+            if delay < 1:
+                delay = 5
         else:
             delay = 5
         time.sleep(delay)
@@ -427,6 +436,11 @@ class Inat:
             self.parent_id = str(data['parent_id'])
         else:
             self.parent_id = None
+
+        self.anc_tid_list = []
+        if 'ancestor_ids' in data:
+            for anc_tid in data['ancestor_ids']:
+                self.anc_tid_list.append(str(anc_tid))
 
         if 'preferred_establishment_means' in data:
             self.origin = data['preferred_establishment_means']
