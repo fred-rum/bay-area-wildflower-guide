@@ -383,6 +383,7 @@ class Page:
         self.elab_src = None
         self.rank = None
         self.rank_unknown = False
+        self.origin = None
 
         # name_from_txt=True if the name came from a txt filename.
         self.name_from_txt = name_from_txt
@@ -864,6 +865,11 @@ class Page:
 
         self.no_names = False
         self.set_name()
+
+    def set_origin(self, origin):
+        if self.origin and origin != self.origin:
+            warn(f'multiple origins for {self.full()}')
+        self.origin = origin
 
     def format_com(self):
         if self.com:
@@ -2902,6 +2908,9 @@ class Page:
                 desc = f'Description of {what}'
             else:
                 desc = f'Stub for {what}'
+
+            if self.origin:
+                h1 = f'<div class="origin {self.origin}"></div>' + h1
 
             # Calculate other names that should be cuddled up with the
             # title name.

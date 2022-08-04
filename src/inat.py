@@ -356,6 +356,11 @@ class Inat:
         else:
             self.parent_id = None
 
+        if 'preferred_establishment_means' in data:
+            self.origin = data['preferred_establishment_means']
+        else:
+            self.origin = None
+
         self.anc_id_list = []
         if 'ancestor_ids' in data:
             for tid in data['ancestor_ids']:
@@ -369,7 +374,10 @@ class Inat:
             self.com = None
 
         if 'preferred_establishment_means' in data:
-            self.origin = data['preferred_establishment_means']
+            origin = data['preferred_establishment_means']
+            if origin == 'introduced':
+                origin = 'alien'
+            self.origin = origin
         else:
             self.origin = None
 
@@ -396,6 +404,9 @@ class Inat:
                         src=src)
             page.set_taxon_id(self.taxon_id)
             #info(f'iNat data created {page.full()}')
+
+        if self.origin:
+            page.set_origin(self.origin)
 
         self.page = page
 
