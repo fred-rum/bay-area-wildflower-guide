@@ -138,6 +138,7 @@ def link_inat(page_set):
     link_inat2(page_set)
 
     for filename in sorted(file_set):
+        #info(f'inat/{filename}.json')
         delete_file(f'inat/{filename}.json')
 
 
@@ -162,26 +163,20 @@ def link_inat2(page_set):
             warn(f'missing iNat data for {child.full()}')
             continue
 
-        inat_child = get_inat(child.taxon_id)
+        inat_child = get_inat(child.taxon_id, used=True)
         if not inat_child:
             warn(f'missing iNat data for {child.full()} with taxon_id {child.taxon_id}')
             continue
-
-        # Discard any useful files from the file_set,
-        # leaving only candidates for deletion.
-        file_set.discard(inat_child.filename)
 
         if not inat_child.parent_id:
             # We expect the top taxon to not have a parent ID.
             #warn(f'iNat linking failed due to missing parent ID from iNat data for child {child.full()}')
             continue
 
-        inat_parent = inat_dict[inat_child.parent_id]
+        inat_parent = get_inat(inat_child.parent_id, used=True)
         if not inat_parent:
             warn(f'iNat linking failed due to missing iNat data for parent ID {inat_child.parent_id} from child {child.full()}')
             continue
-
-        file_set.discard(inat_parent.filename)
 
         parent = inat_parent.page
 
@@ -204,23 +199,42 @@ def link_inat2(page_set):
 # Add all ancestor taxon IDs to tid_set.
 def add_parent_tid_to_set(page, tid_set):
     inat = get_inat(page.taxon_id)
-    if inat:
+    if inat and inat.parent_id:
         # Fetching the parent ID will also fetch all other ancestors,
         # so if any ancestors are already in the queue, remove them.
         for anc_tid in inat.anc_tid_list:
-            tid_set.discard(anc_tid)
+            # For some reason, the 'life' taxon (48460) is never returned as
+            # as an ancestor, so we don't treat it as if it will.
+            if anc_tid != '48460':
+                tid_set.discard(anc_tid)
 
         # Then add only the direct parent ID.
-        if inat.parent_id:
-            tid_set.add(inat.parent_id)
+        tid_set.add(inat.parent_id)
 
 
 # Get an iNaturalist record or None.
-def get_inat(name):
-    if name in inat_dict:
-        return inat_dict[name]
-    else:
+def get_inat(name, used=False):
+    if not name in inat_dict:
         return None
+
+    inat = inat_dict[name]
+
+    if used:
+        file_set.discard(inat.filename)
+
+        if inat.num_anc:
+            # This iNat record was part of a chain of ancestors from a single
+            # result.  Remove the filename info from all its ancestors, since
+            # even if they are used they won't require any additional files.
+            #
+            # For some reason, the 'life' taxon (48460) is never returned
+            # as an ancestor, so we don't treat it as if it will.
+            inat_anc = inat
+            while inat_anc and inat_anc.taxon_id != '48460':
+                inat_anc.filename = None
+                inat_anc = get_inat(inat_anc.parent_id)
+
+    return inat
 
 
 # Return the iNaturalist data for a page or None.
@@ -406,8 +420,8 @@ class Inat:
         dup_inat = get_inat(self.taxon_id)
         if dup_inat:
             # When two records come from different queries, the query with
-            # more ancestors takes priority for being retained permanently.
-            if num_anc > dup_inat.num_anc:
+            # ancestors takes priority for being retained permanently.
+            if not dup_inat.num_anc:
                 dup_inat.update_file_info(filename, num_anc)
             return
 
