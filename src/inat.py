@@ -34,10 +34,10 @@ req_headers = {'user-agent': 'Bay Area Wildflower Guide - fred-rum.github.io/bay
 #     the fetched data may prepare multiple taxon_ids (as above)
 #   for all new dta, match the inat data to pages (as above)
 
+file_set = get_file_set('inat', 'json')
 
 def read_inat_files():
-    filenames = sorted(get_file_set('inat', 'json'))
-    for filename in filenames:
+    for filename in sorted(file_set):
         try:
             with open(f'{root_path}/inat/{filename}.json', 'r', encoding='utf-8') as r:
                 json_data = r.read()
@@ -86,7 +86,7 @@ def parse_inat_data(data, name):
     # An older file may have a re-directed ID, or a name search may have
     # returned the record for a different name.  In either case, it's
     # counts as an invalid record.
-    id = str(data['id'])
+    tid = str(data['id'])
     rank = data['rank']
     sci = data['name']
 
@@ -95,17 +95,21 @@ def parse_inat_data(data, name):
     # when doing the comparison.
     sci = re.sub(' \\u00d7 ', r' ', sci)
 
-    if (name != id) and (name != rank + ' ' + sci):
+    if (name != tid) and (name != rank + ' ' + sci):
         inat_dict[name] = None
         # The fetched data may be useful, but it's more likely to be
         # confusing, so we ignore it.
         return
 
-    Inat(data, f'{name}.json')
-    if 'ancestors' in data and data['ancestors']:
-        #info('processing ancestors')
-        for anc_data in data['ancestors']:
-            Inat(anc_data, f'ancestors of {name}.json')
+    if 'ancestors' in data:
+        anc_list =  data['ancestors']
+    else:
+        anc_list = []
+    num_anc = len(anc_list)
+
+    Inat(data, f'{name}.json', name, num_anc)
+    for anc_data in anc_list:
+        Inat(anc_data, f'ancestor of {name}.json', name, num_anc)
 
 # Create a Linnaean link from each page to its iNat parent's page.
 # If we have taxon_id's, we accumulate as many as we can before making
@@ -132,6 +136,9 @@ def link_inat(page_set):
         get_inat_for_tid_set(tid_set)
 
     link_inat2(page_set)
+
+    for filename in sorted(file_set):
+        delete_file(f'inat/{filename}.json')
 
 
 # link_inat() did the work of initiating page fetches by name or TID.
@@ -160,6 +167,10 @@ def link_inat2(page_set):
             warn(f'missing iNat data for {child.full()} with taxon_id {child.taxon_id}')
             continue
 
+        # Discard any useful files from the file_set,
+        # leaving only candidates for deletion.
+        file_set.discard(inat_child.filename)
+
         if not inat_child.parent_id:
             # We expect the top taxon to not have a parent ID.
             #warn(f'iNat linking failed due to missing parent ID from iNat data for child {child.full()}')
@@ -169,6 +180,8 @@ def link_inat2(page_set):
         if not inat_parent:
             warn(f'iNat linking failed due to missing iNat data for parent ID {inat_child.parent_id} from child {child.full()}')
             continue
+
+        file_set.discard(inat_parent.filename)
 
         parent = inat_parent.page
 
@@ -352,6 +365,8 @@ def fetch(url):
 
 
 def write_inat_data(data, filename, url):
+    file_set.add(filename)
+
     json_data = json.dumps(data, indent=2)
     with open(f'{root_path}/inat/{filename}.json', 'w', encoding='utf-8') as w:
         today = datetime.date.today().isoformat()
@@ -372,9 +387,22 @@ def apply_inat_names():
 class Inat:
     pass
 
-    def __init__(self, data, src):
+    def __init__(self, data, src, filename, num_anc):
         # A taxon_id is circulated internally as a string, not an integer.
         self.taxon_id = str(data['id'])
+
+        # If there's already a record for this taxon_id, don't make a
+        # duplicate.  (Since we don't record this object anywhere, it
+        # gets discarded as soon as we return.)
+        dup_inat = get_inat(self.taxon_id)
+        if dup_inat:
+            # When two records come from different queries, the query with
+            # more ancestors takes priority for being retained permanently.
+            if num_anc > dup_inat.num_anc:
+                dup_inat.update_file_info(filename, num_anc)
+            return
+
+        self.update_file_info(filename, num_anc)
 
         sci = data['name']
         rank = data['rank']
@@ -448,6 +476,12 @@ class Inat:
             page.set_origin(self.origin)
 
         self.page = page
+
+
+    def update_file_info(self, filename, num_anc):
+        self.filename = filename
+        self.num_anc = num_anc
+
 
     # Associate common names with scientific names.  (Previously we didn't
     # have the properties in place to know what to do with common names.)

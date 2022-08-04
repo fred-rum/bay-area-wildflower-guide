@@ -11,8 +11,7 @@ while len(sys.argv):
                '-no_error_limit',
                '-without_cache',
                '-debug_js',
-               '-steps',
-               '-api_delete'):
+               '-steps'):
         _arg_value[arg] = True
     elif arg in ('-dir',
                  '-tree',

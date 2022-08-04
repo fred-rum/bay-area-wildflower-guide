@@ -273,6 +273,6 @@ def read_data_file(filename, fn, msg=None):
 
 def delete_file(filename):
     try:
-        os.remove(filename)
+        os.remove(f'{root_path}/{filename}')
     except FileNotFoundError:
         pass
