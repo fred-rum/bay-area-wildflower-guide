@@ -34,6 +34,7 @@ req_headers = {'user-agent': 'Bay Area Wildflower Guide - fred-rum.github.io/bay
 #     the fetched data may prepare multiple taxon_ids (as above)
 #   for all new dta, match the inat data to pages (as above)
 
+
 def read_inat_files():
     filenames = sorted(get_file_set('inat', 'json'))
     for filename in filenames:
@@ -56,18 +57,35 @@ def read_inat_files():
             warn(f'reading json file "{filename}"')
             raise
 
+
 # raw_data is one result from the JSON, parsed into a Python structure.
 # name is the filename for the result, either its rank+sci or taxon_id.
+#
+# The initial query may have been made multiple queries, but we've broken
+# it down to the result from one query here.  The result has one primary
+# record, and it may contain multiple ancestor records.
+#
+# parse_inat_data() checks each record for validity and initializes an
+# Inat object for each valid record.
+#
 def parse_inat_data(data, name):
-    # raw_data could have a single data item
-    # or a 'results' item with a list of data items.
+    # Older data from a file may have the raw fetch data instead of
+    # only a single record's data.
     if 'results' in data and data['results']:
         data = data['results'][0]
 
-    if 'id' not in data:
+    # The record may be completely empty.  But if any of the fields
+    # are valid, we assume the other fields are valid as well.
+    #
+    # Every query should return only active results, but we double-check
+    # is_active anyway.
+    if 'is_active' not in data or not data['is_active']:
         inat_dict[name] = None
         return
 
+    # An older file may have a re-directed ID, or a name search may have
+    # returned the record for a different name.  In either case, it's
+    # counts as an invalid record.
     id = str(data['id'])
     rank = data['rank']
     sci = data['name']
@@ -115,10 +133,10 @@ def link_inat(page_set):
 
     link_inat2(page_set)
 
-# link_inat() did the work of initiating page fetches by name or TID.
-# link_inat2() actually links and traverses the pagse,
-# and it only has to worry about TIDs.
 
+# link_inat() did the work of initiating page fetches by name or TID.
+# link_inat2() actually links and traverses the pages,
+# and it only has to worry about TIDs.
 def link_inat2(page_set):
     # In case some ancestors (parents) were somehow missed, fetch them.
     tid_set = set()
@@ -132,20 +150,26 @@ def link_inat2(page_set):
     for child in page_list:
         if not child.rank:
             continue
-        elif not child.taxon_id or child.taxon_id not in inat_dict:
+
+        if not child.taxon_id:
             warn(f'missing iNat data for {child.full()}')
             continue
 
-        inat_child = inat_dict[child.taxon_id]
+        inat_child = get_inat(child.taxon_id)
+        if not inat_child:
+            warn(f'missing iNat data for {child.full()} with taxon_id {child.taxon_id}')
+            continue
 
         if not inat_child.parent_id:
-            warn(f'iNat linking failed due to missing parent ID from iNat data for child {child.full()}')
-            continue
-        elif inat_child.parent_id not in inat_dict:
-            warn(f'iNat linking failed due to missing iNat data for parent ID {inat_child.parent_id} from child {child.full()}')
+            # We expect the top taxon to not have a parent ID.
+            #warn(f'iNat linking failed due to missing parent ID from iNat data for child {child.full()}')
             continue
 
         inat_parent = inat_dict[inat_child.parent_id]
+        if not inat_parent:
+            warn(f'iNat linking failed due to missing iNat data for parent ID {inat_child.parent_id} from child {child.full()}')
+            continue
+
         parent = inat_parent.page
 
         if not parent or not parent.rank:
@@ -163,14 +187,13 @@ def link_inat2(page_set):
         #info(f'iNat linking to the next level of hierarchy')
         link_inat2(parent_set)
 
+
 # Add all ancestor taxon IDs to tid_set.
 def add_parent_tid_to_set(page, tid_set):
-    if page.taxon_id and page.taxon_id in inat_dict:
-        inat_child = inat_dict[page.taxon_id]
-        if inat_child.parent_id:
-            tid_set.add(inat_child.parent_id)
-        for anc in inat_child.anc_id_list:
-            tid_set.add(anc)
+    inat = get_inat(page.taxon_id)
+    if inat and inat.parent_id:
+        tid_set.add(inat.parent_id)
+
 
 # Get an iNaturalist record or None.
 def get_inat(name):
@@ -178,6 +201,7 @@ def get_inat(name):
         return inat_dict[name]
     else:
         return None
+
 
 # Return the iNaturalist data for a page or None.
 #
@@ -193,6 +217,9 @@ def get_inat(name):
 def get_inat_for_page(page):
     if page.taxon_id in inat_dict:
         return inat_dict[page.taxon_id]
+
+    if not page.sci:
+        return None
 
     if page.elab_inaturalist:
         elab = page.elab_inaturalist
@@ -218,23 +245,31 @@ def get_inat_for_page(page):
 
     if rank:
         q = f'q={sci}&rank={rank}'
-        filename = f'{rank} {sci}'
+        name = f'{rank} {sci}'
     else:
         q = f'q={sci}'
-        filename = sci
+        name = sci
 
     url = f'https://api.inaturalist.org/v1/taxa/autocomplete?{q}&per_page=1&is_active=true&locale=en&preferred_place_id=14'
 
     # Make sure we don't repeatedly pound the same URL.
-    if filename in inat_dict:
-        return inat_dict[filename]
+    if name in inat_dict:
+        return inat_dict[name]
 
-    if not arg('-api') or not page.sci:
+    if not arg('-api'):
         return None
 
-    fetch(url, [filename])
+    data_list = fetch(url)
+
+    if len(data_list) != 1:
+        write_inat_data({}, name, url)
+        return None
+
+    write_inat_data(data_list[0], name, url)
+    parse_inat_data(data_list[0], name)
 
     return get_inat(page.taxon_id)
+
 
 # Get iNaturalist data for all taxon IDs in tid_set.
 #
@@ -274,15 +309,32 @@ def get_inat_for_tid_set(tid_set):
 
     url = f'https://api.inaturalist.org/v1/taxa/{tid_str}{query}'
 
-    fetch(url, tid_list)
+    data_list = fetch(url)
 
-def fetch(url, filename_list):
+    # If a taxon_id is bogus or inactive, the results will be missing
+    # that result.  So we can't assume that the order of the results
+    # matches the order of the query.
+    for data in data_list:
+        tid = str(data['id'])
+        write_inat_data(data, tid, url)
+        tid_set.remove(tid)
+
+    # No result returned for these.
+    for tid in tid_set:
+        write_inat_data({}, tid, url)
+
+    for data in data_list:
+        tid = str(data['id'])
+        parse_inat_data(data, tid)
+
+
+def fetch(url):
     global api_called
     if api_called:
         if arg('-api_delay'):
             delay = int(arg('-api_delay'))
         else:
-            delay = 10
+            delay = 5
         time.sleep(delay)
     api_called = True
 
@@ -292,21 +344,12 @@ def fetch(url, filename_list):
     try:
         data = json.loads(json_data)
     except:
-        return None
+        fatal(f'Malformed JSON data from fetch:\n{r.text}')
     if 'results' not in data:
-        return None
+        fatal(f'No result from fetch:\n{r.text}')
 
-    for i, name in enumerate(filename_list):
-        if len(data['results']) > i:
-            write_inat_data(data['results'][i], name, url)
-        else:
-            write_inat_data({}, name, url)
+    return data['results']
 
-    for i, name in enumerate(filename_list):
-        if len(data['results']) > i:
-            parse_inat_data(data['results'][i], name)
-        else:
-            parse_inat_data({}, name)
 
 def write_inat_data(data, filename, url):
     json_data = json.dumps(data, indent=2)
@@ -318,6 +361,7 @@ def write_inat_data(data, filename, url):
         w.write('"data":\n')
         w.write(f'{json_data}\n')
         w.write('}\n')
+
 
 def apply_inat_names():
     for inat in inat_dict.values():
@@ -360,11 +404,6 @@ class Inat:
             self.origin = data['preferred_establishment_means']
         else:
             self.origin = None
-
-        self.anc_id_list = []
-        if 'ancestor_ids' in data:
-            for tid in data['ancestor_ids']:
-                self.anc_id_list.append(str(tid))
 
         if 'preferred_common_name' in data:
             # The common name is forced to all lower case to match my
