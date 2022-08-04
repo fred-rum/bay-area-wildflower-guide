@@ -60,7 +60,8 @@ def elaborate_sci(sci):
 
     sci_words = sci.split(' ')
     if len(sci_words) == 1:
-        # One word in the scientific name implies a genus.
+        # If the user fails to specify a rank, we assume 'genus'.
+        # (iNaturalist always specifies a rank, even if only a guess.)
         return 'genus ' + sci
     elif len(sci_words) == 3:
         # Three words in the scientific name implies a subset of a species.
@@ -77,7 +78,7 @@ def fix_elab(elab):
         elab = 'genus ' + elab[:-5]
     return elab
 
-# Find a page by its taxonid (as a string, despite its numeric appearance).
+# Find a page by its taxon_id (as a string, despite its numeric appearance).
 # taxon_id may be None, in which case we expect to also return None.
 def find_taxon_id(taxon_id):
     if taxon_id in taxon_id_page:
@@ -230,16 +231,17 @@ def find_page2(com, elab, from_inat=False, taxon_id=None):
     # Update (if appropriate) any names that are new or different.
     if page:
         if taxon_id:
-            if page.taxon_id and page.taxon_id != taxon_id:
-                # The page has a taxon_id that doesn't match the expected
-                # one, so it doesn't really match after all.
-                return None
-            else:
-                page.set_taxon_id(taxon_id)
+            page.set_taxon_id(taxon_id, from_obs=from_inat)
         if elab:
             page.set_sci(elab, from_inat=from_inat)
         if com:
-            page.set_com(com, from_inat=from_inat)
+            # Don't set the common name if the taxon_id doesn't match
+            # (because the page already had a taxon id, and iNaturalist
+            # observations can't always distinguish between among ranks).
+            if taxon_id and taxon_id != page.taxon_id:
+                pass
+            else:
+                page.set_com(com, from_inat=from_inat)
 
     return page
 

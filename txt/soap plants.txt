@@ -1,8 +1,8 @@
-sci:Chlorogalum
+sci:genus Chlorogalum
 x:ba
 
-[
-<h3>flowers open in evening</h3>
+These flowers open in the evening.  For flowers that open during the day, see {-genus Hooveria}.
+
 ==wavy-leafed soap plant:C. pomeridianum
 . leaf 4--25 mm wide, margin generally wavy
 . common
@@ -10,16 +10,3 @@ x:ba
 ==narrowleaf soap plant:C. angustifolium
 . leaf 2--5 mm wide, margin +- flat
 . very rare
-]
-[
-<h3>flowers open during day</h3>
-==small-flowered soaproot:C. parviflorum
-. perianth white or +- pink
-. flowers, buds 2--several per node
-. very rare
-
-==purple amole:C. purpureum
-. perianth deep blue to purple
-. flowers, buds 1 per node
-. very rare
-]

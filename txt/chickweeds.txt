@@ -11,7 +11,7 @@ Petals are generally entirely divided.  If the petals are lobed <= 50% of their 
 . sepals 3--4.5 mm
 . common
 
-==lesser chickweed:S. pallida
+==lesser chickweed:S. apetala
 . leaves +- evenly spaced
 . internode hairs in a line
 . <b>no petals</b>

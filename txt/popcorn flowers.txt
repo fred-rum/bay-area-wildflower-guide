@@ -46,8 +46,10 @@ color: white
 ==cooper's popcornflower:P. collinus
 . extremely rare; Big Basin
 
-==white forget-me-not:P. scouleri
-sci_fj:P. diffusus
+==scouler's popcornflower:P. scouleri
+sci_fpj:P. diffusus
+# The disagreeing taxonomies are very confusing.  Here's where I left off:
+# https://www.inaturalist.org/flags/552291#activity_comment_1ac05a4f-0343-441e-bd42-d3fca36039de
 . very rare
 
 ==fulvous popcornflower:P. fulvus

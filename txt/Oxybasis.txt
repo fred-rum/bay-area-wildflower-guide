@@ -1,10 +1,6 @@
 com:goosefoots
 sci:genus Oxybasis
 
-==large-seed goosefoot:Oxybasis macrospermum
-sci_fpj:Chenopodium macrospermum
-. leaf blade thick to fleshy, margin generally serrate, abaxially +- densely powdery but becoming glabrous in age
-
 ==red pigweed:Oxybasis rubra
 sci_fpj:Chenopodium rubrum
 . leaf blade thin, margin entire to deeply toothed, glabrous

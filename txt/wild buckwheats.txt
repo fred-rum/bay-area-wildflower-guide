@@ -157,7 +157,7 @@ species: wicker buckwheat
 . leaf blades oblong-obovate to oblanceolate or oblong
 . uncommon
 
-==slender buckwheat:E. gracile
+==slender woolly buckwheat:E. gracile
 . flowers not at branchlet tips, generally appressed with no peduncles
 . involucres 2--3 mm
 . outer perianth lobes not fan-shaped or hastate

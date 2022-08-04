@@ -13,5 +13,5 @@ x:ba
 . proximal leaves petioled, petiole clasping with ear-like basal lobes [<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1009+2288">example</a>]
 . distal leaves sessile, not clasping
 
-==rayless goldenaster:H. oregona
+==rayless false goldenaster:H. oregona
 . no ray flowers

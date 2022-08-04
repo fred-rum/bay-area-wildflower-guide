@@ -16,7 +16,7 @@ genus: n/a
 . cauline leaves dentate to pinnately lobed, petioled or sessile
 . very common
 
-==wild mustard:Sinapis arvensis
+==charlock mustard:Sinapis arvensis
 color: yellow
 x:hist
 genus: n/a

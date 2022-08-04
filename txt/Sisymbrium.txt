@@ -17,6 +17,7 @@ warn obs_requires_photo: none # ID not yet positive
 . rare
 
 ==tumble mustard:S. altissimum
+acom:tall tumblemustard
 . petals 6--8 mm (claw 3.5--6 mm), 2.5--4 mm wide
 . very rare
 

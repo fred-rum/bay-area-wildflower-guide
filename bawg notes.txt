@@ -1393,13 +1393,14 @@ Fresno = 1924
 locale:
 en
 
-https://api.inaturalist.org/v1/taxa?is_active=true&taxon_id=79807&per_page=1&locale=en&preferred_place_id=14&only_id=false&all_names=false
+https://api.inaturalist.org/v1/taxa?is_active=true&taxon_id=52667&rank=species&per_page=1&locale=en&preferred_place_id=14
 
 interesting bits:
 {
   total_results [check for exactly 1?]
   results: [
     {
+      id
       name [stripped sci]
       rank
       preferred_common_name
@@ -1412,7 +1413,7 @@ interesting bits:
 if searching by scientific name, q=<sci>, rank=<rank>
   don't include the rank if unknown or 'below'
     or get the rank from elab
-https://api.inaturalist.org/v1/taxa?q=Adiantum%20&is_active=true&rank=species&per_page=1&locale=en&preferred_place_id=14&only_id=false&all_names=false
+https://api.inaturalist.org/v1/taxa?q=Adiantum%20&is_active=true&rank=species&per_page=1&locale=en&preferred_place_id=14
 
 if the returned rank isn't recognized,
   prepend it to the elab
@@ -1425,8 +1426,9 @@ After the first pass through observations.csv
     (between steps 7 and 8)
   read taxon JSON files
     prepare them for look up by taxon_id, elaborated name, or scientific name
-  step through the BAWG taxonomy and apply taxon ID from JSON files
-    if a taxon isn't in the JSON files (by taxon_id or rank sci)
+  step through the BAWG taxonomy
+    find the appropriate JSON file (by taxon_id or rank sci)
+    if JSON data can't be found
       and -api [taxon] [delete] arg(s are present
       [and the taxon's ancestor is listed by the API arg]
       fetch the JSON via the API
@@ -1435,9 +1437,58 @@ After the first pass through observations.csv
         if API call fails, save the failure to disk (what name?  what data?)
           maybe not necessary if I expect to fix failures right away
           and API is used only whith explicit arg
-    annotate taxon with data
-    if parent taxon ID isn't known in the BAWG DB or JSON data,
+    apply the JSON data
+      if recursing with just a taxon ID
+        find the page or create it
+      mark the JSON data as used
+    if parent taxon_id isn't known in the BAWG DB or JSON data,
       and the -api is used
       immediately look it up (recursive)
         regardless of taxon ancestry
         although maybe stop at parent of the designated API taxon
+      create Linnaean ancestor relationship
+
+After applying properties (between steps 11 ans 12)
+  revisit all taxon data
+    if data is used,
+      find the page again (automatically applies names per the properties)
+    if data is not used,
+      consider deleting the corresponding file
+
+
+one of my taxons might fail to find an iNat equivalent taxon
+  add a warning if a taxon fails to fetch
+    unless its taxon_id is n/a
+      which disables fetch
+
+to stay below 10,000 requests per day (per 24 hours?)
+  limit fetches in a single day to 5000
+similarly stay below 5 GB per hour and 24 GB per day
+
+accumulate taxon_id searches into a batch request
+
+
+taxa.csv useful fields:
+id
+scientificName
+taxonRank
+parentNameUsageID (extract ID from URL)
+
+VernacularNames-english.csv useful fields:
+id
+vernacularName
+locality
+- might need to search for multiple locations to find California name
+- e.g. "California, US", "United States", "North America"
+- multiple localities are separated with " | "
+- unclear how to find the "preferred name"
+
+move API calls prior to parsing observation?
+  the API has higher-quality data
+  but we'd need to do more name lookups in the API
+
+keep a record of genuses mentioned in a page
+  e.g. sci, asci, sci_i, ==child
+  and allow abbreviations to reference any
+  abbreviation may be any number of characters followed by a period
+  match must be unique

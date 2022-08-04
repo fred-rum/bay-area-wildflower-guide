@@ -47,7 +47,7 @@ sci_p:Mimulus dentatus
 . calyx hairy
 . very rare
 
-==muskflower:E. moschata
+==musk monkeyflower:E. moschata
 sci_p:Erythranthe inodora|Mimulus moschatus
 . stolons or rhizomes present
 . <b>leaf blade 20--50 mm</b>
@@ -80,7 +80,7 @@ color: red
 ==rockjasmine monkeyflower:E. androsacea
 sci_p:Mimulus androsaceus
 . corolla pink to purple
-. also check the purple flowers in {-Diplacus}
+. also check the purple flowers in {-genus Diplacus}
 .. leaf bases clasping
 .. 5 corolla limbs, +- equal, each 3--7 mm wide
 .. calyx generally minutely puberulent, may be green or red-purple

@@ -6,4 +6,4 @@ x:any
 
 xx:uncat
 
-Leaves folded lengthwise, unlike {-Lathyrus}.
+Leaves folded lengthwise, unlike {-genus Lathyrus}.

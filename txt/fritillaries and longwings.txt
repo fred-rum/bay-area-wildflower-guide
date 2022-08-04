@@ -1,8 +1,9 @@
 sci:subfamily Heliconiinae
 bug:12669
 
-==gulf fritillary:Agraulis vanillae
+==gulf fritillary:Dione vanillae
 bug:567
+sci_b:Agraulis incarnata
 
 ==pacific fritillary:Boloria epithore
 bug:63702

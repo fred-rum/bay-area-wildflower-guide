@@ -45,6 +45,7 @@ from page import *
 from photo import *
 from glossary import *
 from cache import *
+from inat import *
 
 if arg('-debug_js'):
     # To avoid confusion when using the unstripped source files,
@@ -114,7 +115,7 @@ def read_txt_files():
             with open(f'{root_path}/txt/{name}.txt', 'r', encoding='utf-8') as r:
                 page.txt = r.read()
         except:
-            print(f'reading txt file "{name}"')
+            warn(f'reading txt file "{name}"')
             raise
 
 read_txt_files()
@@ -138,11 +139,12 @@ init_props()
 def print_trees():
     tree_taxon = arg('-tree_taxon')
     if tree_taxon:
-        page = find_page1(tree_taxon)
-        if page:
-            page.print_tree()
-        else:
-            error(f'-tree taxon "{tree_taxon}" not found.')
+        for taxon in tree_taxon:
+            page = find_page1(taxon)
+            if page:
+                page.print_tree()
+            else:
+                error(f'-tree taxon "{taxon}" not found.')
     else:
         exclude_set = set()
         for page in full_page_array:
@@ -279,7 +281,7 @@ def read_obs_chains(f):
         # can't (yet) support it cleanly.  Note that I *don't* use
         # the r'' string format here because I want the \N to be
         # parsed during string parsing, not during RE parsing.
-        sci = re.sub('\N{MULTIPLICATION SIGN} ', r'X', sci)
+        sci = re.sub(' \N{MULTIPLICATION SIGN} ', r' X', sci)
 
         sci_words = sci.split(' ')
         if get_field('taxon_subspecies_name'):
@@ -342,11 +344,13 @@ def read_obs_chains(f):
                             # rank.  On the assumption that the observation
                             # will get promoted to a higher-level taxon, we
                             # fudge it here by pretending it's the lowest rank.
+                            # set_sci() recognizes this as a guess that can
+                            # be updated later.
                             sci = f'below {sci}'
 
                         page = Page(com, sci, shadow=True, from_inat=True,
                                     src='observations.csv')
-                        page.set_taxon_id(taxon_id)
+                        page.set_taxon_id(taxon_id, from_obs=True)
 
                     if group != orig_sci:
                         # This is the lowest-level group we found, but
@@ -376,6 +380,26 @@ read_data_file('observations.csv', read_obs_chains,
                msg='taxon hierarchy')
 
 if arg('-tree') == '7':
+    print_trees()
+
+if arg('-steps'):
+    info("Step 7j: Read iNaturalist JSON data")
+
+read_inat_files()
+
+page_set = set()
+for page in page_array:
+    # link_inat() traverses up through all ancestors, and we don't
+    # care about shadow descendents, so we prefer to call link_inat()
+    # only for real leaf pages.
+    #
+    # This may miss some ancestor pages if the leaf page doesn't have
+    # a scientific name.  But that would be unusual, and it's a pain to fix.
+    if page.sci and not page.shadow and not page.child:
+        page_set.add(page)
+link_inat(page_set)
+
+if arg('-tree') == '7j':
     print_trees()
 
 if arg('-steps'):
@@ -484,7 +508,7 @@ def read_observation_data(f):
         # can't (yet) support it cleanly.  Note that I *don't* use
         # the r'' string format here because I want the \N to be
         # parsed during string parsing, not during RE parsing.
-        sci = re.sub('\N{MULTIPLICATION SIGN} ', r'X', sci)
+        sci = re.sub(' \N{MULTIPLICATION SIGN} ', r' X', sci)
 
         com = get_field('common_name')
 
@@ -623,6 +647,14 @@ read_data_file('observations.csv', read_observation_data,
                msg='observation data')
 
 if arg('-tree') == '12':
+    print_trees()
+
+if arg('-steps'):
+    info("Step 12j: Apply names from iNaturalist JSON data")
+
+apply_inat_names()
+
+if arg('-tree') == '12j':
     print_trees()
 
 if arg('-steps'):

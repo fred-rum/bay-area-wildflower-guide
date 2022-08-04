@@ -89,7 +89,7 @@ color: red purple, yellow
 . corolla <b>purple or yellow</b>
 . common
 
-==salt marsh sanicle:S. maritima
+==adobe sanicle:S. maritima
 . plant 8--40 cm
 . leaf green at flower, simple, entire to +- pinnately lobed or dissected, axis of main division with at least a narrow, toothed wing throughout; some basal leaves entire; blade 3--8 cm, ovate-cordate to obovate, lobes or segments 0, 3, or 5, obtuse, entire to +- toothed
 . peduncle 1.5--12 cm

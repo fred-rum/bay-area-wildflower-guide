@@ -4,7 +4,7 @@ x:ba
 
 ==tree squirrels:Sciurus spp.
 
-==chipmunks:Neotamias spp.
+==western chipmunks:Neotamias spp.
 
 ==botta's pocket gopher:Thomomys bottae
 x:ba

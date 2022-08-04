@@ -1,4 +1,4 @@
-sci:epifamily Termitoidaee
+sci:epifamily Termitoidae
 
 ==western drywood termite:Incisitermes minor
 bug:469117

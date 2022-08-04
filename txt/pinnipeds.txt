@@ -1,5 +1,5 @@
 x:ca
 
-==true seals:family Phocidae
+==earless seals:family Phocidae
 
 ==eared seals:family Otariidae

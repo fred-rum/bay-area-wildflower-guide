@@ -69,6 +69,7 @@ color: white
 
 ==black nightshade:S. nigrum
 color: white
+taxon_id:79141
 . infloresecnce rarely forked
 .. <b>peduncle 0.5--1.5 cm long</b>, straight; <b>pedicels 3--5 mm long</b>, 0.2--0.3 mm in diameter at the base and 0.2--0.3 mm at the apex
 . corolla: <b>10--17 mm diameter</b> including lobes, white w/ yellow/green spots at base

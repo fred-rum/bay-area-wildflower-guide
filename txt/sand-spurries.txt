@@ -29,13 +29,15 @@ color: pale purple
 . leaves barely fleshy, 2--4+ leaves per axillary cluster
 . stipules generally 3.5--5 mm, <b>shiny, white, conspicuous</b>
 
-==boccone's sand spurry:S. bocconi
+==boccone's sand spurry:S. bocconei
+acom:greek sea-spurrey
+sci_fpj:Spergularia bocconi
 . annual, +- delicate
 . leaves +- fleshy, 0--2 per axillary cluster
 . stipules generally 1.5--4.5 mm, dull, white to tan, generally inconspicuous
 . rare
 
-==greater sea-spurry:S. media var. media
+==greater sea-spurrey:S. media var. media
 species: greater sea-spurry
 . annual, stout (lower main stem generally 1--3 mm diam)
 . leaves clearly fleshy

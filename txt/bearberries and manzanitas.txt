@@ -56,7 +56,7 @@ color: white
 [
 <h2>no burl; leaves different on each side</h2>
 
-==glassyleaf manzanita:A. sensitiva
+==glossyleaf manzanita:A. sensitiva
 . plant erect, 1--2 m
 . old stem bark smooth, +- red
 . flower parts in fours
@@ -65,7 +65,7 @@ color: white
 .. abaxially light green
 . common in outer coastal range
 
-==glassyleaf manzanita:A. nummularia
+==glossyleaf manzanita:A. nummularia
 . plant shape and size depends on subspecies
 . old stem bark generally rough or shredding, gray or red-gray
 . flower parts in fours
@@ -90,7 +90,7 @@ color: white
 [
 <h2>no burl; leaves same on both sides; low growing</h2>
 
-==san bruno manzanita:A. imbricata
+==san bruno mountain manzanita:A. imbricata
 . plant a prostrate shrub, 10--100 cm
 . leaf light green, sparsely glandular-hairy
 .. petioles 0--2 mm; leaf base clasping

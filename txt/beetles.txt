@@ -14,7 +14,7 @@ There is a <a href="beetle-glossary.html">glossary</a> for beetles.
 
 ==longhorn beetles:family Cerambycidae
 
-==firefly beetles:family Lampyridae
+==fireflies:family Lampyridae
 
 ==leaf beetles:family Chrysomelidae
 

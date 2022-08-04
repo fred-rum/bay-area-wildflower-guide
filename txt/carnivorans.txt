@@ -1,6 +1,6 @@
-==canines:family Canidae
+==canids:family Canidae
 
-==cats:family Felidae
+==felids:family Felidae
 
 ==striped skunk:Mephitis mephitis
 x:ca

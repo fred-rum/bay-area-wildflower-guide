@@ -1,6 +1,7 @@
 sci:Elymus spp.
 asci:Taeniatherum spp.
 asci:Leymus spp.
+asci:genus Thinopyrum
 x:!hist/rare
 
 ==california bottle-brush grass:E. californicus
@@ -15,7 +16,8 @@ sci_fpj:Elymus condensatus
 
 ==blue wild rye:E. glaucus
 
-==intermediate wheatgrass:E. hispidus
+==intermediate wheatgrass:Thinopyrum intermedium
+sci_fpj:Elymus hispidus
 
 ==american dune grass:Leymus mollis
 sci_fpj:Elymus mollis
@@ -26,7 +28,8 @@ color:other
 ==pacific wild rye:Leymus pacificus
 sci_fpj:Elymus pacificus
 
-==tall wheat grass:E. ponticus
+==tall wheat grass:Thinopyrum obtusiflorum
+sci_fpj:Elymus ponticus
 
 ==quack grass:E. repens
 

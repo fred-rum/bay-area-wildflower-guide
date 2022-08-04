@@ -1,2 +1,1 @@
-# ignore the iNaturalist name for this taxon
-warn obs_fill_alt_com: self/-below
+xcom: sunflowers, daisies, asters, and allies

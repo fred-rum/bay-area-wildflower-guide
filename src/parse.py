@@ -304,7 +304,7 @@ def parse_txt(name, s, page, glossary):
 # inserting ilnks to taxon pagse.  I.e. we call parse_txt() on all taxon
 # pages before calling parse2_txt() on all taxon pages.  As long as we've
 # got this second function, we do some other last-minute parsing here
-def parse2_txt(name, s, glossary):
+def parse2_txt(src_page, s, glossary):
     # Replace {-[link_name]} with an inline link to the page.
     def repl_link(matchobj):
         link_name = matchobj.group(1)
@@ -315,7 +315,7 @@ def parse2_txt(name, s, glossary):
             if link_name in glossary_name_dict:
                 return glossary_name_dict[link_name].create_link()
             else:
-                error(f'Broken link {{-{link_name}}} on page {name}')
+                error(f'Broken link {{-{link_name}}} in {src_page.full()}')
                 return '{-' + link_name + '}'
 
     # Replace {-[link_name]} with an inline link to the page.

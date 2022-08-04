@@ -1,6 +1,6 @@
 ==american kestrel:Falco sparverius
 
-==perigrine falcon:Falco peregrinus
+==peregrine falcon:Falco peregrinus
 
 ==merlin:Falco columbarius
 . rare

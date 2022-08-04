@@ -18,7 +18,7 @@ sci_fjp:Antirrhinum thompsonii
 . lower calyx lobes < to << corolla tube
 . corolla 7--18 mm
 
-==twining snapdragon:Neogaerrhinum kelloggii
+==twining snapdragon:Neogaerrhinum strictum
 sci_fjp:Antirrhinum kelloggii
 . pedicels 3--9 cm, thread-like, twining or hooked
 .. all others are < 2.5 cm, not twining or hooked
@@ -34,6 +34,6 @@ sci_fjp:Antirrhinum orontium
 sci_fjp:Antirrhinum majus
 . lowest flowers not subtended by branchlets
 
-==spurred snapdragon:Sairocarpus cornutum
+==spurred snapdragon:Sairocarpus cornutus
 sci_fjp:Antirrhinum cornutum
 . lowest flowers not subtended by branchlets

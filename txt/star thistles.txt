@@ -1,3 +1,4 @@
+acom:knapweeds
 sci:Centaurea spp.
 x:ba
 
@@ -37,7 +38,8 @@ These look distinct enough from each other to not need notes.
 ==purple star-thistle:C. calcitrapa
 color: purple, red purple
 
-==bachelor's-button:C. cyanus
+==cornflower:C. cyanus
+acom:bachelor's-button
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0311+0802
 . Edgewood, Long Ridge, Mt. Diablo
 

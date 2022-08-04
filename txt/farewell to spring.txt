@@ -2,17 +2,23 @@ sci:Clarkia amoena
 xx:ba
 
 ==hunt's clarkia:C. amoena ssp. huntiana
+. ovary and immature fruit 4-grooved
 . stem erect
 . inflorescence open
 . internode generally > subtending flower
 . very rare: Mt. Tam and Milagra Ridge
 
 ==n/a:C. amoena ssp. amoena
+. ovary and immature fruit 4-grooved
 . stem decumbent
 . inflorescence dense
 . internode generally < subtending flower
 . rare: but modern records are extremely rare
 
-==whitney's farewell-to-spring:C. amoena ssp. whitneyi
-. not in Jepson
+==whitney's clarkia:C. amoena ssp. whitneyi
+acom:whitney's farewell-to-spring
+. ovary and immature fruit 8-grooved
+. stem decumbent
+. inflorescense dense
+. petals 30--60 mm
 . extremely rare: in Half Moon Bay, possibly cultivated

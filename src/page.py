@@ -111,20 +111,25 @@ def get_default_ancestor():
     return default_ancestor
 
 def sort_pages(page_set, trait=None, value=None,
-               with_depth=False, with_count=True):
+               with_depth=False, with_count=True, sci_only=False):
     # helper function to sort by name
     def by_name(page):
-        if page.com:
-            if page.sci:
-                # Since some pages may have the same common name, use the
-                # scientific name as a tie breaker to ensure a consistent order.
-                return page.com.lower() + '  ' + page.sci.lower()
-            else:
-                # If the page has no scientific name, then presumably it
-                # doesn't share its common name with any other pages.
-                return page.com.lower()
-        else:
-            return page.sci.lower()
+        name = ''
+
+        # Convert all names to lowercase for a more natural-looking sort.
+
+        if page.com and not sci_only:
+            # Give priority to the common name, but include the scientific
+            # name as a tie-breaker for shared common names.
+            name = page.com.lower() + '  '
+
+        if page.sci:
+            # In case case the same scientific name is used at two ranks
+            # (and potentially the same common name), include the elaborated
+            # name as a tie-breaker.
+            name += page.sci.lower() + '  ' + page.elab.lower()
+
+        return name
 
     # helper function to sort by hierarchical depth (parents before children)
     def by_depth(page):
@@ -231,6 +236,14 @@ def plural_rule_equiv(a, b, end_a, end_b):
         base_len_b = len(b) - len(end_b)
         if base_len_a == base_len_b and a[:base_len_a] == b[:base_len_b]:
             return True
+
+    # abc family == abcs
+    if a.endswith(end_a+'family') and b.endswith(end_b):
+        base_len_a = len(a) - len(end_a+'family')
+        base_len_b = len(b) - len(end_b)
+        if base_len_a == base_len_b and a[:base_len_a] == b[:base_len_b]:
+            return True
+
     return False
 
 # Check if two common names are equivalent.
@@ -451,6 +464,10 @@ class Page:
         # All names must be different than the common name.
         self.acom = []
 
+        # Alternative common names that *aren't* included in the output.
+        # These are used to exclude specific names from iNaturalist.
+        self.xcom = []
+
         # A parent's link to a child may be styled depending on whether the
         # child is itself a key (has_child_key).  Which means that a parent
         # wants to parse its children before parsing itself.  To make sure
@@ -603,7 +620,7 @@ class Page:
                 self.no_com = True
             return
 
-        if self.com:
+        if self.com or self.no_com:
             # This page already has a common name.
             if self.com == com:
                 # The new common name is the same as the old one.
@@ -612,10 +629,10 @@ class Page:
                 # iNaturalist may be allowed to provide an alternative common
                 # name, but only if it is sufficiently different than the
                 # regular common name or any existing alternative common name.
-                if plural_equiv(self.com, com):
+                if self.com and plural_equiv(self.com, com):
                     return
 
-                for acom in self.acom:
+                for acom in self.acom + self.xcom:
                     if plural_equiv(acom, com):
                         return
 
@@ -718,7 +735,7 @@ class Page:
     # set_sci() can be called with a stripped or elaborated name.
     # Either way, both a stripped and an elaborated name are recorded.
     def set_sci(self, elab, from_inat=False):
-        if (self.sci or self.no_sci) and from_inat:
+        if (self.sci or self.no_sci) and from_inat and not self.created_from_inat:
             # This page already has a scientific name, and we don't want
             # iNaturalist to override it.  E.g. iNaturalist could have found
             # the page via isci_page[], which differs from its user-supplied
@@ -739,15 +756,6 @@ class Page:
         elab = fix_elab(elab)
         sci = strip_sci(elab)
 
-        # Fail if
-        # - the same fully elaborated name is used for another page, or
-        # - a non-elaborated name is used, and another page uses the same name,
-        # - or a non-elaborated name is used and already has a conflict.
-        if elab in sci_page and sci_page[elab] == 'conflict':
-            fatal(f'page "{self.full()}" called set_sci("{elab}"), but that non-elaborated name is being used by more than one rank')
-        elif elab in sci_page and sci_page[elab] != self:
-            fatal(f'page "{self.full()}" called set_sci("{elab}"), but that name is already used by page "{sci_page[elab].name}"')
-
         if self.sci and sci != self.sci:
             # Somehow we're trying to set a different scientific name
             # than the one already on the page.  That should only happen
@@ -756,26 +764,31 @@ class Page:
             # I don't attempt to do anything smart with that case.
             return
 
+        elab_is_guess = elab.startswith('below ')
+
         if elab == self.elab:
             # We don't want to continue through the change/check logic
             # if the name isn't changing in any way.  Only upgrade
             # elab_src as appropriate.
-            if sci != elab:
+            if sci != elab and not elab_is_guess:
                 self.elab_src == 'elab'
             return
 
-        if sci == elab:
+        if sci == elab or elab_is_guess:
             # Nothing changed when we stripped elaborations off the original
             # elab value, so either it's a species or a name that could be
             # improved with further elaboration.
-
+            # Or the elaboration is obviously a guess, and also could be
+            # improved.
             if self.sci:
                 # The page already has a scientific name.  Don't try to
                 # replace a potentially elaborated name with a guess.
                 return
 
-            # Guess at a likely elaboration for the scientific name.
-            elab = elaborate_sci(sci)
+            if not elab_is_guess:
+                # Guess at a likely elaboration for the scientific name.
+                elab = elaborate_sci(elab)
+
             elab_src = 'sci'
         elif self.elab_src == 'elab':
             # This call and a previous call to set_sci() both provided
@@ -786,6 +799,15 @@ class Page:
             # Either we had no elaborated name at all before,
             # or it was only a guess that we're happy to replace.
             elab_src = 'elab'
+
+        # Fail if
+        # - the same fully elaborated name is used for another page, or
+        # - a non-elaborated name is used, and another page uses the same name,
+        # - or a non-elaborated name is used and already has a conflict.
+        if elab in sci_page and sci_page[elab] == 'conflict':
+            fatal(f'page "{self.full()}" called set_sci("{elab}"), but that non-elaborated name is being used by more than one rank')
+        elif elab in sci_page and sci_page[elab] != self:
+            fatal(f'page "{self.full()}" called set_sci("{elab}"), but that name is already used by {sci_page[elab].full()}')
 
         elab_words = elab.split(' ')
 
@@ -1229,11 +1251,16 @@ class Page:
             self.subset_pages[trait] = []
         self.subset_pages[trait].append(page)
 
-    def set_taxon_id(self, taxon_id):
+    def set_taxon_id(self, taxon_id, from_obs=False):
         if taxon_id in taxon_id_page and taxon_id_page[taxon_id] != self:
             fatal(f'taxon_id {taxon_id} used for both {taxon_id_page[taxon_id].full()} and {self.full()}')
         if self.taxon_id and taxon_id != self.taxon_id:
-            fatal(f'taxon_id {taxon_id} applied to {self.full()}, but it already has taxon_id {self.taxon_id}')
+            if from_obs:
+                # observations.csv is known to have trouble matching names,
+                # which means that it may apply a bogus taxon_id.
+                return
+            else:
+                fatal(f'taxon_id {taxon_id} applied to {self.full()}, but it already has taxon_id {self.taxon_id}')
 
         self.taxon_id = taxon_id
         taxon_id_page[taxon_id] = self
@@ -2037,7 +2064,12 @@ class Page:
 
             matchobj = re.match(r'acom:\s*(.+?)$', c)
             if matchobj:
-                data_object.acom = split_strip_quoted(matchobj.group(1))
+                data_object.acom.append(matchobj.group(1))
+                continue
+
+            matchobj = re.match(r'xcom:\s*(.+?)$', c)
+            if matchobj:
+                data_object.xcom.append(matchobj.group(1))
                 continue
 
             matchobj = re.match(r'sci_([fpjib]+):\s*(.+?)$', c)
@@ -2671,7 +2703,7 @@ class Page:
         else:
             s = self.key_txt
 
-        self.txt = parse2_txt(self.name, s, self.glossary)
+        self.txt = parse2_txt(self, s, self.glossary)
 
     # Check whether this page is the top real page within its Linnaean group
     # designated by 'rank'.  E.g. if a species page does not have a real page
@@ -2875,7 +2907,7 @@ class Page:
             # title name.
             c_list = []
 
-            # List the iNaturalist common name if it's different.
+            # List the alternative common names.
             if self.acom:
                 acom = ', '.join(self.acom)
                 c_list.append(f'(<b>{acom}</b>)')

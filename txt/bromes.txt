@@ -18,9 +18,9 @@ Key features:
 
 ==ripgut brome:B. diandrus
 
-==common soft-brome:B. hordeaceus
+==soft chess:B. hordeaceus
 
-==thunberg's brome:B. japonicus
+==japanese brome:B. japonicus
 
 ==chinook brome:B. laevipes
 

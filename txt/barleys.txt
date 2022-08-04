@@ -6,7 +6,7 @@ x:hist
 [
 <h3>auricles of upper leaves well developed, 1--4 mm</h3>
 
-==barley:H. vulgare
+==common barley:H. vulgare
 . inflorescence axis generally remaining intact at maturity
 . lateral spikelets sessile
 . glume margins not ciliate
@@ -23,14 +23,16 @@ color:other
 
 Lower leaves may have vestigial auricle rudiments.
 
-==squirreltail:H. jubatum
+==foxtail barley:H. jubatum
 . glumes strongly divergent at maturity
 
 ==meadow barley:H. brachyantherum
 . glumes generally straight or slightly spreading with age
 . inflorescence fully exserted at maturity
 
-==salt barley grass:H. marinum
+==salt barley:H. marinum
+acom:seaside barley
+acom:mediterranean barley
 . glumes generally straight with age
 . awn of lateral spikelet lemma 3--8 mm
 

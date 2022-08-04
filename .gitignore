@@ -32,7 +32,10 @@ markers.*
 __pycache__/
 .in_progress/
 data/cache.pickle
+data/inaturalist-taxonomy.dwca.zip
 .~lock.*#
 test/
 example/
 src/names
+inat/
+log

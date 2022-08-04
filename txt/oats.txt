@@ -20,7 +20,7 @@ color:other
 . lemma bristle-tipped with teeth 2--6 mm
 . awns 20--45 mm, bent, twisted below bend
 
-==oat:A. sativa
+==common oat:A. sativa
 . glumes 15--50 mm, 7--9-veined
 . 1--2 florets
 . callus glabrous

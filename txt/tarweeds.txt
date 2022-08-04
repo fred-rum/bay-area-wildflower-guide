@@ -33,7 +33,8 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0810+1019
 [
 <h3>relatively small diameter flower head</h3>
 
-==lemon scented tarweed:M. citriodora
+==lemon scented madia:M. citriodora
+acom:lemon scented tarweed
 . stem 10--70 cm, proximally hairy, distally gladular-hairy, glands purple
 . leaf 2--9 cm, 1--10 mm wide, linear
 . heads in open, flat-topped clusters

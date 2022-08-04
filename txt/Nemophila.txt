@@ -1,4 +1,4 @@
-com:baby blue eyes
+com:baby blue eyes and allies
 sci:Nemophila spp.
 x:ba
 
@@ -20,12 +20,14 @@ x:ba
 <h3>corolla < 10 mm wide</h3>
 
 ==eastwood's nemophila:N. pulchella
+acom:eastwood's baby blue-eyes
 . <b>corolla rotate</b>, 5--12 mm wide
 . white or blue
 . pedicel 10--30 mm (longer in fruit)
 . extremely rare in the bay area
 
 ==meadow nemophila:N. pedunculata
+acom:meadow baby-blue-eyes
 . corolla bowl- or bell-shaped, 2--8 mm wide
 . white or blue, <b>generally dark-veined or with dark dots</b>, may be purple-spotted at lobe tips
 . less common in the bay area

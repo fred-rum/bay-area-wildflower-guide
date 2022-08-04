@@ -2,6 +2,10 @@ com:goosefoots
 sci:Chenopodium spp.
 asci:Chenopodiastrum spp.
 
+==large-seed goosefoot:Chenopodium macrospermum
+. leaf blade thick to fleshy, margin generally serrate, abaxially +- densely powdery but becoming glabrous in age
+.. all others have Leaf plade thin, margin entire or toothed, generally glabrous
+
 ==nettle-leaved goosefoot:Chenopodiastrum murale
 sci_fpj:Chenopodium murale
 . <b>primary leaves not fleshy</b>

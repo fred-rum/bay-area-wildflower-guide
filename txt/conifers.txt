@@ -1,6 +1,6 @@
 sci:class Pinopsida
 
-==hard pines
+==pines
 
 ==cypresses
 

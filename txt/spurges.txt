@@ -6,10 +6,11 @@ family:spurge family
 ==eggleaf spurge:E. oblongata
 . very common, especially north of the bay bridge
 
-==petty spurge:E. peblus
+==petty spurge:E. peplus
 . common
 
-==gopher plant:E. lathyris
+==caper spurge:E. lathyris
+acom:gopher plant
 . uncommon
 
 ==reticulate seeded spurge:E. spathulata
@@ -18,23 +19,28 @@ family:spurge family
 ==chinesecaps:E. crenulata
 . uncommon
 
-==albanian spurge:E. characias
+==mediterranean spurge:E. characias
+acom:albanian spurge
+sci_j:n/a
 . rare
 
 ==cypress spurge:E. cyparissias
 . rare
 
 ==wartweed:E. helioscopia
+acom:sun spurge
 . rare
 
 ==spotted spurge:E. maculata
 . rare
 
 ==contura creek spurge:E. ocellata
+acom:contura creek sandmat
 . rare
 
 ==matted sandmat:E. serpens
 . very rare
 
 ==thyme-leafed spurge:E. serpillifolia
+acom:thymeleaf sandmat
 . rare

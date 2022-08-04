@@ -125,6 +125,9 @@ color: purple
 . stigma lobes +- white
 
 ==canary island geranium:G. palmatum
+# madeira island geranium isn't a real common name,
+# but I'll keep it until iNaturalist is fixed
+acom:madeira island geranium
 . stem hairs 0 to sparse
 . <b>leaf blade 11--42 cm wide</b>, divided > 90% to base or midrib
 . generally 5 segments, pinnately lobed to dissected

@@ -1,8 +1,6 @@
+xcom: bird's-foot trefoils and deervetches
 sci:Lotus spp.
 x:hist
-
-# ignore the iNaturalist name for this taxon
-warn obs_fill_alt_com: self/-below
 
 ==bird's-foot trefoil:L. corniculatus
 5 leaflets:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0713+0357

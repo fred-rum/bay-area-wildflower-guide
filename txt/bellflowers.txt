@@ -1,4 +1,5 @@
 sci:Campanula spp.
+asci:genus Ravenella
 x:ba
 
 ==california harebell:C. prenanthoides
@@ -11,33 +12,41 @@ sci_fpj:Asyneuma prenanthoides
 <h3>1 flower per node<br>
 corolla cut <= &frac23; to base with at least narrowly triangular lobes</h3>
 
-==eastwood's bellflower:C. angustiflora
-. annual
-. leaf oblong-ovate
-. corolla 2--6 mm
-
-==griffin's bellflower:C. griffinii
-. annual
-. leaf +- linear, leathery, serrate
-. corolla 2--4 mm
-. Jasper Ridge, Mines Rd.
-
-==chaparral harebell:C. exigua
-. annual
-. leaf +- linear, leathery, few-toothed
-. corolla 7--18 mm
-. uncommon in the Diablo range
-
-==sharsmith's harebell:C. sharsmithiae
-. annual
-. leaf widely lanceolate, fleshy, serrate
-. corolla 7--16 mm
-. very rare
-
 ==swamp harebell:C. californica
 . perennial
 . leaf ovate, thin, crenate
 . corolla 8--15 mm
 . extremely rare
 
+[
+These bellflowers have been separated into <iRavenella</i>.
+
+==eastwood's bellflower:C. angustiflora
+sci_i:Ravenella angustiflora
+. annual
+. leaf oblong-ovate
+. corolla 2--6 mm
+
+==griffin's bellflower:C. griffinii
+sci_i: Ravenella griffinii
+. annual
+. leaf +- linear, leathery, serrate
+. corolla 2--4 mm
+. Jasper Ridge, Mines Rd.
+
+==chaparral harebell:C. exigua
+sci_i: Ravenella exigua
+. annual
+. leaf +- linear, leathery, few-toothed
+. corolla 7--18 mm
+. uncommon in the Diablo range
+
+==sharsmith's harebell:C. sharsmithiae
+sci_i: Ravenella sharsmithiae
+. annual
+. leaf widely lanceolate, fleshy, serrate
+. corolla 7--16 mm
+. very rare
+
+]
 ]

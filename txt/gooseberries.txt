@@ -23,7 +23,8 @@ color: red
 five sepals<br>
 anther filaments longer than petals
 </h3>
-==straggly gooseberry:Ribes divaricatum var. pubiflorum
+==straggle bush:Ribes divaricatum var. pubiflorum
+acom:straggly gooseberry
 xx:ba
 species: spreading gooseberry
 . styles hairy at least at base [<a href="https://ucjeps.berkeley.edu/eflora/eflora_display.php?tid=65143">figure</a>]

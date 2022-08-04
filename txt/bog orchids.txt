@@ -68,7 +68,7 @@ sci_fjp:Piperia elongata
 . perianth green
 . <b>lower sepals +- reflexed</b>
 
-==alaska piperia:P. unalascensis
+==alaska rein orchid:P. unalascensis
 sci_fjp:Piperia unalascensis
 . <b>spur 2--5.5 mm</b>, pointed back or down
 . perianth green

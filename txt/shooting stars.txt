@@ -1,3 +1,4 @@
+acom: primroses
 sci:Primula spp.
 x:ba
 

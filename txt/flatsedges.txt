@@ -27,7 +27,10 @@ x:hist/rare
 .. all others below have flower bract tips that are neither distinctly outcurved nor bristle-like
 . extremely rare
 
-==umbrella papyrus:C. involucratus
+==umbrella papyrus:Cyperus alternifolius ssp. flabelliformis
+sci_fpj:Cyperus involucratus
+member:madagascar umbrella papyrus:Cyperus alternifolius
+xx:ca
 color: other
 . no basal leaf blades
 .. all others below have basal leaf blades

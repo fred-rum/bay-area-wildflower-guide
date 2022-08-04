@@ -13,15 +13,15 @@ sci_i:Vulpia bromoides
 
 ==idaho fescue:F. idahoensis
 
-==small six-weeks grass:F. microstachys
+==small fescue:F. microstachys
 sci_i:Vulpia microstachys
 
-==fat's-tail fescue:F. myuros
+==rattail sixweeks grass:F. myuros
 sci_i:Vulpia myuros
 
 ==western fescue:F. occidentalis
 
-==pullout grass:F. octoflora
+==sixweeks grass:F. octoflora
 sci_i:Vulpia octoflora
 
 ==red fescue:F. rubra

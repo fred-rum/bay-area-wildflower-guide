@@ -42,6 +42,8 @@ working_path = root_path + '/.in_progress'
 shutil.rmtree(working_path, ignore_errors=True)
 os.mkdir(working_path)
 os.mkdir(working_path + '/html')
+if arg('-api'):
+    os.mkdir(working_path + '/inat')
 
 # Get the set of files that have the expected suffix in the designated
 # directory.  The set includes only the base filename without the

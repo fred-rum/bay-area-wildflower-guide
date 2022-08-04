@@ -5,6 +5,8 @@ family:nightshade family
 See also {-bindweed family}, which have a generally shorter calyx which is not ribbed or angled toward the base.
 
 ==sacred thorn-apple:D. wrightii
+acom:western jimsonweed
+acom:sacred datura
 . corolla white, 15--20 cm, lobes 1.0--2.0 cm
 .. style 15--18 cm
 . calyx 8--12 cm, ribbed at least toward base, lobes +- 2 cm

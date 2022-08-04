@@ -28,7 +28,7 @@ color: yellow
 . petals 9--13 mm
 . rare
 
-==cabbage:B. oleracea
+==cabbage, broccoli, and allies:B. oleracea
 . stem 50--100 cm, branched distally
 . <b>leaves fleshy</b>
 . basal leaves pinnately lobed, 5--75 cm

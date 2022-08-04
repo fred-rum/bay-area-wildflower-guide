@@ -1,3 +1,7 @@
+# It's weird to have various specialized thistles and then just "thistles".
+# So I made up my own common name.
+xcom:thistles
+
 sci:Cirsium spp.
 x:hist/rare
 

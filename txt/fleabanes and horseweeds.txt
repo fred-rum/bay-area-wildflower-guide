@@ -20,7 +20,7 @@ color: pale purple
 . leaves thick, +- fleshy, entire or toothed
 . all along Pacific coast (coastal bluffs, dunes, beaches)
 
-==leafy flebane:E. foliosus
+==leafy fleabane:E. foliosus
 . rays 6--15 mm
 . phyllaries strongly graduated
 . no basal leaves
@@ -28,8 +28,9 @@ color: pale purple
 . scattered
 . two variants distinguished by phyllary glands
 
-==santa barbara daisy:E. karvinskianus
-acom: latin american fleabane, mexican fleabane
+==mexican fleabane:E. karvinskianus
+acom: santa barbara daisy
+acom: latin american fleabane
 color: white, pale purple
 . ray 5--8 mm
 . phyllaries generally +- equal
@@ -84,7 +85,7 @@ species: rock-loving fleabane
 . stem +- long-loose-spreading-hairy, densely glandular near heads or not
 . rare
 
-==narrow leaved rayless fleabane:E. reductus var. angustatus
+==narrow leaved rayless daisy:E. reductus var. angustatus
 species: little rayless fleabane
 . stem glabrous
 . rare

@@ -168,7 +168,8 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0717+1130
 [
 <h2>Involucre bracts 0 or occasionally < 1 mm or forming a vestigial ring<br>
 Inflorescence occasionally +- sessile above 1--2 +- reduced leaves (stipules of which occasionally involucre-like)</h2>
-==large-head clover:T. macrocephalum
+==bighead clover:T. macrocephalum
+acom:large-head clover
 leaflets:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1101+0387
 . <b>leaflets generally 7--9</b>
 .. for all others in this box, leaflets 3
@@ -370,7 +371,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1209+1520
 . very rare
 
 
-==branching indian clover:T. dichotomum
+==branched indian clover:T. dichotomum
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1207+1118
 . corolla > calyx
 . corolla purple with white tips

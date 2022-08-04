@@ -48,7 +48,7 @@ color: other
 . <b>fruit valves not exserted</b>
 . very rare
 
-==river redbum:E. camaldulensis
+==river redgum:E. camaldulensis
 . leaves lanceolate, generally > 1 cm wide
 . inflorescence a 7--11-flowered umbel
 . fruit valves exserted

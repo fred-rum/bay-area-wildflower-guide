@@ -9,8 +9,8 @@ x:!hist/rare
 . anthers 0.7--1.1 mm, oblong to linear
 . rare on coast and scattered inland
 
-==california dodder:C. occidentalis
-. [Yes, two dodders have the same common name.]
+==western dodder:C. occidentalis
+acom:california dodder
 . corolla scales 0
 . styles 0.5--1(1.5) mm
 . anthers 0.25--0.5 mm, wide-elliptic
@@ -29,7 +29,8 @@ color: orange, white, other
 . corolla tube bell-shaped, lobes spreading to erect, widely ovate 
 . Don Edwards and rare in other coastal locations
 
-==salt marsh dodder:C. salina
+==salt flats dodder:C. salina
+acom:salt marsh dodder
 . corolla scales present
 . flower 2.5--4.5 mm
 . calyx and corolla lobes acute

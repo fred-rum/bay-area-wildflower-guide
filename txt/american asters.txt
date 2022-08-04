@@ -11,7 +11,7 @@ sci_p: Aster chilensis
 . ray flowers: 8--12 mm, violet
 . very common, especially in the Santa Cruz range
 
-==douglas's aster:S. subspicatum
+==douglas' aster:S. subspicatum
 . stem +- hairy distally
 . outer phyllaries pale-margined > &frac12; length, length generally >= 3 &times; width, +- acute
 . disk flowers: yellow
@@ -27,7 +27,7 @@ species: panicled aster
 . ray flowers: 6--12 mm, +- white to violet
 . rare
 
-==sulsun marsh aster:S. lentum
+==suisun marsh aster:S. lentum
 . outer phyllaries pale-margined < &frac12; length, length generally < 3 &times; width
 . stem +- glabrous
 . inflorescence bracts small

@@ -15,7 +15,7 @@ sci_fpj:P. leucarpum ssp. tomentosum
 . leaf gray-green, dull
 . common
 
-==sycamore mistletoe:P. macrophyllum
+==broadleaf mistletoe:P. macrophyllum
 sci_fpj:P. leucarpum ssp. macrophyllum
 . leaf length generally < 1.5 &times; width, 15--60 mm, generally > 20 mm
 . stem generally short-hairy, at least at tip

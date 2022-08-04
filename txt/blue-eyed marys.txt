@@ -62,7 +62,7 @@ color: purple
 . lower pedicels >> calyx; upper pedicels +- = calyx
 . leaf margin generally coarsely toothed
 
-==maiden blue-eyed mary:C. parviflora
+==small-flowered blue-eyed mary:C. parviflora
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0209+0778
 . lower whorls with generally 1 flower; upper whorls with 3--5 flowers, often reflexed [angled down from the stem, then back up for the flower]
 . all pedicels +- equal, > calyx

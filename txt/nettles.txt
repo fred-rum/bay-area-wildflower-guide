@@ -2,9 +2,23 @@ sci:Urtica
 x:ca
 
 ==european stinging nettle:U. dioica
+xx:more
+color:other
 . 50--300 cm tall
 . leaf blade 6--20 cm
 . inflorescence raceme- or panicle-like, generally > petiole
+. non-stinging hairs on abaxial leaf veins appressed
+. stem green
+
+==hoary nettle:U. gracilis ssp. holosericea
+member:slender stinging nettle:Urtica gracilis
+xx:ca
+. 50--300 cm tall
+. leaf blade 6--20 cm
+. inflorescence raceme- or panicle-like, generally > petiole
+. non-stinging hairs on abaxial leaf veins erect
+. stem gray-green[?]
+sci_fpj:Urtica dioica ssp. holosericea
 
 ==dwarf nettle:U. urens
 . 10--60(90) cm tall

@@ -201,7 +201,7 @@ color:purple
 . <b>keel upper margins ciliate claw to middle, glabrous from middle to tip, lower generally ciliate</b> [?]
 . common
 
-==meadow lupine:L. polyphyllus var. polyphyllus
+==meadow lupine:L. polyphyllus ssp. polyphyllus
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1107+1443
 species: large-leaved lupine
 . habit: perennial herb 2--15 dm, green, glabrous or sparsely hairy
@@ -211,6 +211,7 @@ species: large-leaved lupine
 . flower: 9--15 mm; calyx lips 4--7 mm, entire; petals violet to lavender to pink to white, <b>banner back glabrous</b>, spot yellow to white occasionally turning red-purple
 . <b>keel upcurved, generally glabrous</b>
 . rare, in cooler areas
+sci_fpj: Lupinus polyphyllus var. polyphyllus
 
 ==summer lupine:L. formosus var. formosus
 color:purple, pale purple, pale blue

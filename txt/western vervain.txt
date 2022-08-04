@@ -1,8 +1,9 @@
 sci:Verbena lasiostachys
 xx:any
 
-==western vervain:V. lasiostachys var. lasiostachys
+==western vervain:ssp. lasiostachys
 . leaf adaxial face gray-green, generally +- soft-hairy
+sci_fpj:Verbena lasiostachys var. lasiostachys
 
-==rough western vervain:V. lasiostachys var. scabrida
+==rough western vervain:var. scabrida
 . leaf adaxial face green, generally stiff-hairy

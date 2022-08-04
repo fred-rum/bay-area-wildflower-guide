@@ -1,6 +1,6 @@
 ==otters:subfamily Lutrinae
 
-==long-tailed weasel:Mustela frenata
+==long-tailed weasel:Neogale frenata
 x:ba
 
 ==american badger:Taxidea taxus

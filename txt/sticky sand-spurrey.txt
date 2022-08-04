@@ -16,6 +16,6 @@ color: pale purple
 . petals white
 . styles 1.2--1.9 mm
 
-==long styled sand spurrey:S. macrotheca var. longstyla
+==long styled sand spurrey:S. macrotheca var. longistyla
 . petals white
 . styles 2--3 mm
