@@ -1,11 +1,22 @@
 sci:kingdom Fungi
 
-# fungi aren't complete yet
-warn obs_promotion: none
+warn no_com: none
+warn obs_fill_com: none
+error obs_fill_sci: none
+do obs_fill_com: self-below
+do obs_fill_sci: self-below
 
-# warn about any missing taxons of interest
-warn obs_create: genus-below
-warn create2: family, genus, species
+# fungi aren't complete yet
+#warn obs_promotion: none
+
+#do obs_create: genus-below
+do create2: family, genus, species
+warn link: none
+do link: self-below
+
+do member_link: self-below
+do member_name: genus, species
+do member_name_alias: genus, species
 
 ==class Agaricomycetes
 
@@ -14,6 +25,7 @@ warn create2: family, genus, species
 ==class Tremellomycetes
 
 ==pin molds:order Mucorales
+warn obs_promotion: none
 end_hierarchy
 
 ==rust fungi

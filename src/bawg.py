@@ -558,20 +558,32 @@ def read_observation_data(f):
         # check later whether this promotion is allowed.
         orig_sci = sci
         orig_page = page
+        ignore = False
         while page.shadow:
             if sci in sci_ignore:
                 if sci_ignore[sci] == '+':
-                    # Update orig_page to match the new promoted page,
-                    # thus pretending that there was no promotion.
-                    orig_page = page.linn_parent
+                    ignore = True
                 else: # '-'
                     # The obesrvations should be entirely ignored.
                     # Stop promoting on the ignored page.
+                    break
+            else:
+                msg = f'{orig_page.full()} observation can create page {page.full()}'
+                if (loc == 'bay area' and
+                    not page.has_real_linnaean_descendants() and
+                    (page.rp_do('obs_create', shadow=True, msg=msg) or
+                     (page.com and
+                      page.rp_do('obs_create_com', shadow=True, msg=msg)))):
+                    page.promote_to_real()
                     break
             page = page.linn_parent
             if not page:
                 break
             sci = page.sci
+            if ignore:
+                # Update orig_page to match the new promoted page,
+                # thus pretending that there was no promotion.
+                orig_page = page
 
         if not page or (sci in sci_ignore and sci_ignore[sci] == '-'):
             # the observation is not contained by *any* page, or

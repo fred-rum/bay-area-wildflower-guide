@@ -2,12 +2,12 @@ sci:subphylum Angiospermae
 
 default_ancestor
 
-do create2_com: class/-/family
+#do create2_com: class/-/family
 do create: family
 do link: self-/genus
 warn link: genus-below
 
-do member_link: self, family
+do member_link: self-/genus
 do member_name: class, genus, species
 do member_name_alias: genus, species
 

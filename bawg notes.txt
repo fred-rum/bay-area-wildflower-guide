@@ -1380,7 +1380,7 @@ allow an iNaturalist observation to create a real page
 E.g. in fungi [...].txt:
   obs_create genus-below
   create2 family, genus, species
-  create2_com self-below
+  create2_com self-/genus
 
 Heck, create2_com might be handy in *every* kingdom
   perhaps as 'warn create2_com'
@@ -1423,3 +1423,15 @@ keep a record of genuses mentioned in a page
 Why don't I promote unranked pages to be 'true' Linnaean parents?
   it would potentially avoid a bunch of hassle code
   if would the unranked page to interrupt property propagation
+
+Does it make sense to augment member_name with  member_name_com?
+  can use it much more liberally, then
+Same with member_alias?
+  or is this useful?
+
+change obs_fill_* to inat_fill_*
+
+obs_create doesn't work from lowest to highest,
+  so it may create a page which it wouldn't if it knew it were going
+    to create a real descendent
+  but it's still useful as a temporary aid when updating info
