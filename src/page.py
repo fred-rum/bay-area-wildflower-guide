@@ -44,7 +44,9 @@ traits = set()
 #  d: 'do' - perform the action as appropriate
 props = {
     'create': 'fd',
+    'create_com': 'fd',
     'create2': 'fd',
+    'create2_com': 'fd',
     'link': 'fd',
     'member_link': 'd',
     'member_name': 'd',
@@ -1818,12 +1820,15 @@ class Page:
                 descendent_names.append(page.full())
             descendent_names = '\n  '.join(descendent_names)
 
+            msg = f'{self.full()} is a shadow page with real descendents:\n  {descendent_names}'
             if (self.shadow and
-                (self.rp_do('create', shadow=True,
-                            msg=f'{self.full()} is a shadow page with real descendents:\n  {descendent_names}') or
+                (self.rp_do('create', shadow=True, msg=msg) or
+                 (self.com and
+                  self.rp_do('create_com', shadow=True, msg=msg)) or
                  (len(potential_link_set) >= 2 and
-                  self.rp_do('create2', shadow=True,
-                             msg=f'{self.full()} is a shadow page with multiple real descendents:\n  {descendent_names}')))):
+                  (self.rp_do('create2', shadow=True, msg=msg) or
+                   (self.com and
+                    self.rp_do('create2_com', shadow=True, msg=msg)))))):
                 self.promote_to_real()
             elif (not self.shadow and
                   self.rp_do('link', # only checks a real page

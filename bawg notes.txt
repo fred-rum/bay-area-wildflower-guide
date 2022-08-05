@@ -1370,8 +1370,10 @@ allow an iNaturalist observation to create a real page
   Use create2 instead of create (e.g. for flower families)?
     and use member_name to name the family when it isn't created
 
-'create_com' and 'create2_com' and 'obs_create_com'
-    create (or check) a page only if it has a common name
+'obs_create_com'
+  similar to 'obs_create'
+  create (or check) a page for an observation only if it has a common name
+  promotion continues until it is stopped by this or a real page
   but where does the common name come from
     if the taxon isn't directly observed?
 
@@ -1381,85 +1383,8 @@ E.g. in fungi [...].txt:
   create2_com self-below
 
 Heck, create2_com might be handy in *every* kingdom
-
-API:
-https://api.inaturalist.org/v1/docs/
-
-place ID:
-California  = 14
-Santa Clara = 1250
-Fresno = 1924
-
-locale:
-en
-
-https://api.inaturalist.org/v1/taxa?is_active=true&taxon_id=52667&rank=species&per_page=1&locale=en&preferred_place_id=14
-
-interesting bits:
-{
-  total_results [check for exactly 1?]
-  results: [
-    {
-      id
-      name [stripped sci]
-      rank
-      preferred_common_name
-      preferred_establishment_means [endemic, native, introduced]
-      parent_id
-    }
-  ]
-}
-
-if searching by scientific name, q=<sci>, rank=<rank>
-  don't include the rank if unknown or 'below'
-    or get the rank from elab
-https://api.inaturalist.org/v1/taxa?q=Adiantum%20&is_active=true&rank=species&per_page=1&locale=en&preferred_place_id=14
-
-if the returned rank isn't recognized,
-  prepend it to the elab
-  and otherwise treat it as an unknown rank
-
-save with the date
-
-After the first pass through observations.csv
-    but before applying most properties
-    (between steps 7 and 8)
-  read taxon JSON files
-    prepare them for look up by taxon_id, elaborated name, or scientific name
-  step through the BAWG taxonomy
-    find the appropriate JSON file (by taxon_id or rank sci)
-    if JSON data can't be found
-      and -api [taxon] [delete] arg(s are present
-      [and the taxon's ancestor is listed by the API arg]
-      fetch the JSON via the API
-        API function automatically sleeps as desired
-        save the JSON to disk (annotated with date)
-        if API call fails, save the failure to disk (what name?  what data?)
-          maybe not necessary if I expect to fix failures right away
-          and API is used only whith explicit arg
-    apply the JSON data
-      if recursing with just a taxon ID
-        find the page or create it
-      mark the JSON data as used
-    if parent taxon_id isn't known in the BAWG DB or JSON data,
-      and the -api is used
-      immediately look it up (recursive)
-        regardless of taxon ancestry
-        although maybe stop at parent of the designated API taxon
-      create Linnaean ancestor relationship
-
-After applying properties (between steps 11 ans 12)
-  revisit all taxon data
-    if data is used,
-      find the page again (automatically applies names per the properties)
-    if data is not used,
-      consider deleting the corresponding file
-
-
-one of my taxons might fail to find an iNat equivalent taxon
-  add a warning if a taxon fails to fetch
-    unless its taxon_id is n/a
-      which disables fetch
+  perhaps as 'warn create2_com'
+  'do create2_com' could leave behind redundant links
 
 to stay below 10,000 requests per day (per 24 hours?)
   limit fetches in a single day to 5000
@@ -1495,3 +1420,6 @@ keep a record of genuses mentioned in a page
   match must be unique
 
 
+Why don't I promote unranked pages to be 'true' Linnaean parents?
+  it would potentially avoid a bunch of hassle code
+  if would the unranked page to interrupt property propagation
