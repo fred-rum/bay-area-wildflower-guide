@@ -1487,21 +1487,6 @@ move API calls prior to parsing observation?
   but if we read the Taxa ZIP, then do the API, then read observations,
     it wouldn't be so bad
 
-instead of recording None in inat_dict for an error
-    record an Inat object that is marked invalid
-  if get_inat returns that object, its file is marked 'used' as usual.
-
-using the number of ancestors to decide file priority still isn't right.
-  if the root of a file with a large number of ancestors isn't used,
-    it's dumb to still allow it to replace others.
-  the fix:
-    when parsing data, prefer a file with ancestors to one without
-      but the length of the ancestor chain doesn't matter
-    when using, if the file had ancestors, propagate the file up to all
-       inat ancestors
-    thus, if a file would only be used by a chain that starts at a different
-      leaf, that file gets erased from the record before being used
-
 
 keep a record of genuses mentioned in a page
   e.g. sci, asci, sci_i, ==child

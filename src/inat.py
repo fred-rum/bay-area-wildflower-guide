@@ -220,21 +220,34 @@ def get_inat(name, used=False):
     inat = inat_dict[name]
 
     if used:
-        file_set.discard(inat.filename)
+        if inat:
+            # When a valid record gets used, removed the associated
+            # filename as a candidate for deletion.
+            file_set.discard(inat.filename)
 
-        if inat.num_anc:
-            # This iNat record was part of a chain of ancestors from a single
-            # result.  Remove the filename info from all its ancestors, since
-            # even if they are used they won't require any additional files.
-            #
-            # For some reason, the 'life' taxon (48460) is never returned
-            # as an ancestor, so we don't treat it as if it will.
-            inat_anc = inat
-            while inat_anc and inat_anc.taxon_id != '48460':
-                inat_anc.filename = None
-                inat_anc = get_inat(inat_anc.parent_id)
+            if inat.num_anc:
+                # This iNat record was part of a chain of ancestors from a
+                # single result.  Remove the filename info from all its
+                # ancestors, since even if they are used they won't
+                # require any additional files.
+                #
+                # For some reason, the 'life' taxon (48460) is never returned
+                # as an ancestor, so we don't treat it as if it will.
+                inat_anc = inat
+                while inat_anc and inat_anc.taxon_id != '48460':
+                    inat_anc.filename = None
+                    inat_anc = get_inat(inat_anc.parent_id)
+        else:
+            return used_fail(name)
 
     return inat
+
+
+# If there's any kind of failure when trying to use iNat data,
+# remove the corresponding file as a candidate for deletion.
+def used_fail(name):
+    file_set.discard(name)
+    return None
 
 
 # Return the iNaturalist data for a page or None.
@@ -249,9 +262,6 @@ def get_inat(name, used=False):
 # may not need to fetch new iNaturalist data.
 #
 def get_inat_for_page(page):
-    if page.taxon_id in inat_dict:
-        return inat_dict[page.taxon_id]
-
     if not page.sci:
         return None
 
@@ -286,23 +296,30 @@ def get_inat_for_page(page):
 
     url = f'https://api.inaturalist.org/v1/taxa/autocomplete?{q}&per_page=1&is_active=true&locale=en&preferred_place_id=14'
 
-    # Make sure we don't repeatedly pound the same URL.
+    # Make sure we don't repeatedly fail fetching the same URL.
     if name in inat_dict:
-        return inat_dict[name]
+        return used_fail(name)
+
+    # If the fetch is performed and succeeds, this placeholder does nothing.
+    # It's only needed to prevent repeated fetches of the same name.
+    inat_dict[name] = None
 
     if not arg('-api'):
-        return None
+        return used_fail(name)
 
     data_list = fetch(url)
 
     if len(data_list) != 1:
         write_inat_data({}, name, url)
-        return None
+        return used_fail(name)
 
     write_inat_data(data_list[0], name, url)
     parse_inat_data(data_list[0], name)
 
-    return get_inat(page.taxon_id)
+    if page.taxon_id:
+        return get_inat(page.taxon_id, used=True)
+    else:
+        return used_fail(name)
 
 
 # Get iNaturalist data for all taxon IDs in tid_set.
@@ -388,6 +405,14 @@ def fetch(url):
 
 
 def write_inat_data(data, filename, url):
+    # Make the file a candidate for deletion.
+    # E.g. it could get included by someone else's taxonomic chain
+    # (because two related pages don't have a real link between them,
+    # so they're both allowed to initiate queries).
+    #
+    # Note that if the file contains invalid data, we'd expect it to
+    # be removed again from file_set later when link_inat() tries to
+    # use it.
     file_set.add(filename)
 
     json_data = json.dumps(data, indent=2)
