@@ -1426,6 +1426,10 @@ Why don't I promote unranked pages to be 'true' Linnaean parents?
 
 Does it make sense to augment member_name with  member_name_com?
   can use it much more liberally, then
+and member_name_com_no_and
+  excludes common names that include ' and ',
+    e.g. useless groups such as "frogs and toads"
+  same for other _com properties
 Same with member_alias?
   or is this useful?
 
@@ -1435,3 +1439,31 @@ obs_create doesn't work from lowest to highest,
   so it may create a page which it wouldn't if it knew it were going
     to create a real descendent
   but it's still useful as a temporary aid when updating info
+
+I could create a function to help with rp_do for the various property variants
+  foo
+  foo_com
+  foo_com_no_and
+
+change ignore_species.yaml to ignore_properties.yaml
+  taxon name: list of properties to ignore
+  requires extra code for obs_promotion properties attached to an ancestor
+    since the ignore is on the original (or intermediate)
+
+iNaturalist export feature request:
+  column for 'rank' (same as taxonRank in taxa.csv)
+
+read taxa.csv (or condensed equivalent)
+  for each page, apply TID, rank, chain
+read observations.csv
+  for each lowest level, find name with matching TID from taxa.csv (and mark)
+    and use its rank
+  if not found, guess rank as usual
+  for each observation, apply TID, rank, chain
+read iNat API data
+  for each page, apply TID, rank, chain
+... apply properties ...
+apply names from taxa.csv, observations.csv, and API data
+  in the reverse order of their file modification date (youngest first)
+    if -api is used, API data is assumed to be youngest
+    otherwise, use the youngest date in an API file

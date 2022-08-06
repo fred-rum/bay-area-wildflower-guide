@@ -32,7 +32,6 @@ import io
 import yaml
 from unidecode import unidecode # ? from https://pypi.org/project/Unidecode/
 import datetime
-import time
 
 # My files
 from args import *
@@ -46,6 +45,7 @@ from photo import *
 from glossary import *
 from cache import *
 from inat import *
+from taxa import *
 
 if arg('-debug_js'):
     # To avoid confusion when using the unstripped source files,
@@ -250,8 +250,14 @@ if arg('-tree') == '6':
 for page in page_array:
     page.record_genus()
 
+
 if arg('-steps'):
-    info('Step 7: Create taxonomic chains from observations.csv')
+    info('Step 7t: Create taxonomic chains from inaturalist-taxonomy.dwca.zip')
+
+read_taxa()
+
+if arg('-steps'):
+    info('Step 7t: Create taxonomic chains from taxa.csv')
 
 # Read the taxonomic chains from the observations file (exported from
 # iNaturalist).  There is more data in there that we'll read later, but
@@ -283,11 +289,10 @@ def read_obs_chains(f):
         # parsed during string parsing, not during RE parsing.
         sci = re.sub(' \N{MULTIPLICATION SIGN} ', r' X', sci)
 
-        sci_words = sci.split(' ')
-        if get_field('taxon_subspecies_name'):
-            sci = ' '.join((sci_words[0], sci_words[1], 'ssp.', sci_words[2]))
-        elif get_field('taxon_variety_name'):
-            sci = ' '.join((sci_words[0], sci_words[1], 'var.', sci_words[2]))
+        # Get an unambiguous rank from the taxa data if possible.
+        # A hybrid will always fail because the taxa data doesn't
+        # expect its 'X', but a hybrid is unambiguous anyway.
+        taxa_rank = get_taxa_rank(sci, taxon_id)
 
         com = get_field('common_name')
 
@@ -313,15 +318,37 @@ def read_obs_chains(f):
                 # the rank of the observed taxon.  Find or create a page
                 # with the appropriate rank.
                 if not found_lowest_level:
-                    if ' ' in sci:
+                    sci_words = sci.split(' ')
+                    if (get_field('taxon_subspecies_name') or
+                        taxa_rank == 'subspecies'):
+                        sci = ' '.join((sci_words[0], sci_words[1],
+                                        'ssp.', sci_words[2]))
+                    elif (get_field('taxon_variety_name') or
+                          taxa_rank == 'variety'):
+                        sci = ' '.join((sci_words[0], sci_words[1],
+                                        'var.', sci_words[2]))
+                    elif ' X' in sci:
+                        pass
+                    elif ' ' in sci and (rank is Rank.species or
+                                         taxa_rank == 'species'):
                         # If the scientific name has at least one space,
                         # then it is a species, subspecies, or variety that
                         # should have already been elaborated as necessary.
+                        # ... unless it's a complex, which is a higher rank
+                        # than species, so the first matching rank won't
+                        # be 'species'
                         pass
+                    elif taxa_rank:
+                        sci = f'{taxa_rank} {sci}'
                     elif group == orig_sci:
                         # If the first name in the taxonomic chain matches
                         # the observed taxon name, then it directly tells
                         # us the taxon rank.
+                        # ... unless its a subgenus whose name matches the
+                        # genus name.  In which case we either need the
+                        # taxa data to supply a rank (above) or the txt
+                        # to supply a taxon_id so that the elab look-up is
+                        # skipped.
                         sci = f'{rank.name} {sci}'
                     else:
                         # If the first name in the taxonomic chain doesn't
@@ -339,7 +366,11 @@ def read_obs_chains(f):
                     # if find_page2() didn't find a match, create a shadow
                     # page for the taxon.
                     if not page:
-                        if group != orig_sci:
+                        if (group != orig_sci and
+                            not ' ssp. ' in sci and
+                            not ' var. ' in sci and
+                            not sci.startswith('complex ') and
+                            not taxa_rank):
                             # We have to create a page for a taxon of unknown
                             # rank.  On the assumption that the observation
                             # will get promoted to a higher-level taxon, we
@@ -942,27 +973,11 @@ else:
 # there could be other changes not detected, e.g. deleted files.
 shutil.rmtree(f'{root_path}/html', ignore_errors=True)
 
-# shutil.rmtree theoretically waits for the operation to complete, but
-# Windows apparently claims to be complete while the delete is still
-# in progress, e.g. if the directory is locked because it is the working
-# directory of a cmd shell.  If the problem is only brief, then we want
-# to quietly wait it out.  (For now, there is no quiet period, but I'll
-# adjust it based on what I see.)  If the problem continues, print a
-# message to let the user know to either unlock the directory manually
-# or kill the script.
-done = False
-tries = 0
-while not done:
-    try:
-        tries += 1
-        os.rename(f'{working_path}/html', f'{root_path}/html')
-        done = True
-    except WindowsError as error:
-        if tries == 1:
-            warn('Having trouble removing the old html and renaming the new html...')
-        time.sleep(0.1)
-if tries > 1:
-    warn(f'Completed in {tries} tries.')
+def rename_working():
+    os.rename(f'{working_path}/html', f'{root_path}/html')
+
+os_wait(rename_working,
+        'Having trouble removing the old html and renaming the new html...')
 
 if total_list:
     # open the default browser with the created HTML file

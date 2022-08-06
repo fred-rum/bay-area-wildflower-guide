@@ -24,9 +24,10 @@ do obs_promotion: self-below
 do outside_obs: species-below
 do outside_obs_promotion: species-below
 
-# every observation with a reasonably good ID is expected to find a page
+# every observation with a reasonably good ID is expected to find a page.
+# reasonably good is defined here as genus, species, or below
 warn obs_promotion: self-below
-do disable_obs_promotion_checks_from: self-/genus
+do disable_obs_promotion_checks_from: self-/genus, genus/-/species
 
 error obs_fill_sci: self-below
 warn obs_fill_com: self-below

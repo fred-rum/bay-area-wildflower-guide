@@ -13,7 +13,7 @@ xx:more
 
 ==denseflower indian paintbrush:Castilleja densiflora
 color: pink, red purple
-xx:more
+xx:Only ssp. <i>densiflora</i> is found in the bay area.
 . corolla beak straight, puberulent [example,3]
 . the spherical stigma is exserted on the top of the (erect) corolla beak
 . inflorescence 20--40 mm wide

@@ -1513,7 +1513,7 @@ var pages=[
 {page:"california whiptail",sci:["Aspidoscelis tigris ssp. mundus"],x:"o"},
 {page:"coast douglas-fir",sci:["Pseudotsuga menziesii var. menziesii"],x:"o"},
 {page:"red-eared slider",sci:["Trachemys scripta ssp. elegans"],x:"o"},
-{page:"feral pigeon",sci:["Columba livia var. domestica"],x:"o"},
+{page:"feral pigeon",sci:["Columba livia ssp. domestica"],x:"o"},
 {page:"san francisco alligator lizard",sci:["Elgaria coerulea ssp. coerulea"],x:"o"},
 {page:"white-haired monk longhorn",sci:["Eucera frater ssp. albopilosa"],x:"o"},
 {page:"diablo range garter snake",sci:["Thamnophis atratus ssp. zaxanthus"],x:"o"},

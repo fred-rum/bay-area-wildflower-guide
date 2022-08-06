@@ -115,10 +115,7 @@ def cvt_irfanview(cmd):
 def cvt_imagemagick(cmd):
     # ImageMagick does not create the destination directory,
     # so we create it ourselves if necessray.
-    try:
-        os.mkdir(root_path + '/thumbs')
-    except FileExistsError:
-        pass
+    mkdir('thumbs')
 
     # Since every OS has a limit on how long the ocmmand line can be,
     # we put the file list in convert.txt and then point ImageMagick to

@@ -7,6 +7,7 @@ import shutil
 import re
 from unidecode import unidecode
 import urllib.parse
+import time
 
 # My files
 from args import *
@@ -40,10 +41,47 @@ else:
 working_path = root_path + '/.in_progress'
 
 shutil.rmtree(working_path, ignore_errors=True)
-os.mkdir(working_path)
-os.mkdir(working_path + '/html')
+
+def os_wait(fn, msg):
+    # shutil.rmtree theoretically waits for the operation to complete, but
+    # Windows apparently claims to be complete while the delete is still
+    # in progress, e.g. if the directory is locked because it is the working
+    # directory of a cmd shell.  If the problem is only brief, then we want
+    # to quietly wait it out.  If the problem continues, print a message to
+    # let the user know to either unlock the directory manually or kill the
+    # script.
+
+    tries = 0
+    complain_tries = 10
+    while True:
+        try:
+            tries += 1
+            fn()
+            break
+        except WindowsError as error:
+            if tries == complain_tries:
+                warn(msg)
+            time.sleep(0.1)
+    if tries > complain_tries:
+        warn(f'Completed in {tries} tries.')
+
+def mkdir_working():
+    os.mkdir(working_path)
+    os.mkdir(working_path + '/html')
+
+os_wait(mkdir_working,
+        'Having trouble removing the old .in_progress and making a new one...')
+
+def mkdir(dirname):
+    try:
+        os.mkdir(f'{root_path}/{dirname}')
+    except FileExistsError:
+        pass
+
+mkdir('data')
+mkdir('icons')
 if arg('-api'):
-    os.mkdir(working_path + '/inat')
+    mkdir('inat')
 
 # Get the set of files that have the expected suffix in the designated
 # directory.  The set includes only the base filename without the
@@ -83,10 +121,6 @@ jpg_figures = get_file_set(f'figures', 'jpg')
 root_icons = get_file_set(f'icons', None)
 home_icons = get_file_set(f'icons', None, use_home=True)
 copy_icons = home_icons - root_icons
-try:
-    os.mkdir(root_path + '/icons')
-except FileExistsError:
-    pass
 for icon in copy_icons:
     shutil.copy(home_path + '/icons/' + icon, root_path + '/icons')
 
@@ -256,14 +290,16 @@ def url(name):
 # printed and a read failure is handled appropriately.
 # If the file can be read, the 'fn' function is called with the file descriptor.
 # If the file cannot be read, the 'fn' function is not called.
-def read_data_file(filename, fn, msg=None):
+def read_data_file(filename, fn, mode='r', encoding='utf-8', msg=None):
     if msg:
+        # Ultimately, this becomes "Reading <msg> from <filename>".
         msg += ' from '
     else:
         msg = ''
 
     try:
-        with open(f'{root_path}/data/{filename}', mode='r', encoding='utf-8') as f:
+        with open(f'{root_path}/data/{filename}', mode=mode,
+                  encoding=encoding) as f:
             if arg('-steps'):
                 info(f'Reading {msg}data/{filename}')
             fn(f)

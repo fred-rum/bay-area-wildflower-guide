@@ -2,9 +2,9 @@ sci:subfamily Brodiaeoideae
 
 ==blue dicks:Dipterostemon capitatus
 color: purple
-sci_fp:Dichelostemma capitatum
+sci_p:Dichelostemma capitatum
 x:any
-xx:more
+xx:Only ssp. <i>capitatum</i> is found in the bay area.
 genus: n/a
 . perianth blue, blue-purple, pink-purple, or white
 . staminodes erect, <b>leaning toward anthers, outward at tip, +- white (at least at the tips)</b>

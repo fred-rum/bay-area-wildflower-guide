@@ -1,20 +1,21 @@
 from enum import Enum, auto
 
-_ranks = ('below',
-          'species',
-          'complex',
-          'subsection', 'section',
-          'subgenus', 'genus',
-          'subtribe', 'tribe', 'supertribe',
-          'subfamily', 'family', 'epifamily', 'superfamily',
-          'zoosubsection', 'zoosection',
-          'parvorder', 'infraorder', 'suborder', 'order', 'superorder',
-          'subterclass', 'infraclass', 'subclass', 'class', 'superclass',
-          'subphylum', 'phylum',
-          'kingdom')
+internal_ranks = (
+    'below',
+    'species',
+    'complex',
+    'subsection', 'section',
+    'subgenus', 'genus',
+    'subtribe', 'tribe', 'supertribe',
+    'subfamily', 'family', 'epifamily', 'superfamily',
+    'zoosubsection', 'zoosection',
+    'parvorder', 'infraorder', 'suborder', 'order', 'superorder',
+    'subterclass', 'infraclass', 'subclass', 'class', 'superclass',
+    'subphylum', 'phylum',
+    'kingdom')
 
 rank_set = set()
-for rank in _ranks:
+for rank in internal_ranks:
     rank_set.add(rank)
 
 # OrderedEnum allows <, > comparisons without the drawbacks of IntEnum.
@@ -41,4 +42,4 @@ class _OrderedEnum(Enum):
 # The Rank enum cannot be declared in the traditional manner because
 # 'class = auto()' triggers a syntax error on 'class'.  Instead we
 # use the Functional API to supply the Rank names as strings.
-Rank = _OrderedEnum('Rank', _ranks)
+Rank = _OrderedEnum('Rank', internal_ranks)
