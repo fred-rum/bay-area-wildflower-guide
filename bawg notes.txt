@@ -1467,3 +1467,35 @@ apply names from taxa.csv, observations.csv, and API data
   in the reverse order of their file modification date (youngest first)
     if -api is used, API data is assumed to be youngest
     otherwise, use the youngest date in an API file
+  taxa.csv may be older than its file date;
+    perhaps always treat it as oldest
+
+Pieris
+  allow a single sci entry to pick up duplicate ranks
+    from separate taxa CSV lines because a genus is repeated
+  use taxon_id to distinguish
+  in the case of Pieris, the taxon_id comes from observations.csv
+    but the txt file could also specify
+
+add an arg -taxa
+  full taxa ZIP or taxa-cache.pickle is read only with -taxa
+  without -taxa, taxa-cache-mini.pickle is read
+    the mini cache is a subset of the full cache in the same format
+    it includes only those taxa that are touched
+
+add an api-cache.pickle
+  this is saved once all API transactions are complete
+    but only when -api is used
+    it includes only those taxa that are touched
+    and then all JSON files are deleted
+  the JSON files are retained if the script fails
+  the script reads both the api-cache.pickle and the JSON files
+    with preference to the JSON files, which are guaranteed newer
+    these files are read regardless of -api
+
+when reading taxons from taxa.csv
+  the kingdom disambiguates taxons with the same sci and rank
+    even if the taxon_id isn't known
+  this is useful when creating a chain
+    since a species must be unique (and knows its kingdom)
+    but its parent genus isn't unique (unless correlated with kingdom)

@@ -250,14 +250,11 @@ if arg('-tree') == '6':
 for page in page_array:
     page.record_genus()
 
-
-if arg('-steps'):
-    info('Step 7t: Create taxonomic chains from inaturalist-taxonomy.dwca.zip')
-
+# Read taxonomy CSVs from ZIP file
 read_taxa()
 
 if arg('-steps'):
-    info('Step 7t: Create taxonomic chains from taxa.csv')
+    info('Step 7: Create taxonomic chains from observations.csv')
 
 # Read the taxonomic chains from the observations file (exported from
 # iNaturalist).  There is more data in there that we'll read later, but
@@ -414,7 +411,15 @@ if arg('-tree') == '7':
     print_trees()
 
 if arg('-steps'):
-    info("Step 7j: Read iNaturalist JSON data")
+    info("Step 7t: Create taxonomic chains from taxa.csv")
+
+parse_taxa_chains()
+
+if arg('-tree') == '7t':
+    print_trees()
+
+if arg('-steps'):
+    info("Step 7j: Read iNaturalist API data")
 
 read_inat_files()
 

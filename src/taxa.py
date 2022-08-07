@@ -159,3 +159,96 @@ def get_taxa_rank(sci, taxon_id):
             return data[0] # return the matching rank
     else:
         return None
+
+def convert_rank_str_to_elab(rank_str, sci):
+    sci_words = sci.split(' ')
+    if rank_str == 'subspecies':
+        return ' '.join((sci_words[0], sci_words[1],
+                         'ssp.', sci_words[2]))
+    elif rank_str == 'variety':
+        return ' '.join((sci_words[0], sci_words[1],
+                         'var.', sci_words[2]))
+    elif rank_str == 'hybrid':
+        return sci_words[0] + ' X' + sci_words[1]
+    elif rank_str == 'species':
+        return sci
+    else:
+        return rank_str + ' ' + sci
+
+def parse_taxa_chains():
+    for page in page_array:
+        if page.linn_child:
+            # only initiate a chain from the lowest level
+            # in part because species names are unique,
+            # and knowing the kingdom helps disambiguate their ancestors
+            continue
+
+        sci = page.sci
+        if not sci in taxa_dict:
+            continue
+
+        if page.rank:
+            if ' ssp. ' in page.elab:
+                rank_str = 'subspecies'
+            elif ' var. ' in page.elab:
+                rank_str = 'variety'
+            elif not page.elab[0].islower() and ' X' in page.elab:
+                rank_str = 'hybrid'
+            else:
+                rank_str = page.rank.name
+        else:
+            rank_str = None
+
+        if page.taxon_id:
+            tid = int(page.taxon_id)
+        else:
+            tid = None
+
+        data_list = taxa_dict[sci]
+
+        good_type = None
+
+        for data in data_list:
+            # rank and/or TID may be None, in which case that won't match,
+            # but maybe something else will.  Even if neither rank nor TID
+            # match, we can still assume a match if there's only one taxon
+            # with this scientific name.
+            if tid == data[1]:
+                # A TID match beats any number of conflicting ranks.
+                # Take the data and immediately go home.
+                # (If the rank turns out to be wrong, that should show
+                # up in later checks.)
+                good_data = data
+                break
+            elif not rank_str and len(data_list) == 1:
+                # A page with no rank finds a match as long as there is only
+                # one option.
+                good_data = data
+                break
+            elif rank_str == data[0]:
+                # We found a matching rank, but we have to keep looking
+                # in case there is another TID with the same rank!
+                # (E.g. genus Pieris is both a plant and an animal.)
+                good_data = data
+                if good_type:
+                    good_type = 'rank conflict'
+                else:
+                    good_type = 'rank match'
+        else:
+            if good_type == 'rank conflict' or not rank_str:
+                error(f'The taxa file has multiple taxons that could match {page.full()}')
+                continue
+            elif not good_type:
+                error(f'The taxa file has no rank or taxon_id that matches {page.full()} (rank: {rank_str}, tid: {tid})')
+                continue
+            # else good_type == 'rank match', so good_data gets processed
+
+        taxa_rank_str = data[0]
+        taxa_taxon_id = str(data[1])
+        parent_sci = data[2]
+        parent_rank_str = data[3]
+
+        elab = convert_rank_str_to_elab(taxa_rank_str, sci)
+
+        page = find_page2(None, elab, from_inat=True,
+                          taxon_id=taxa_taxon_id)
