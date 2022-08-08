@@ -1,0 +1,6 @@
+sci: tribe Arctiini
+bug:39181
+
+==edwards' glassy-wing moth:Pseudohemihyalea edwardsii
+bug:34896
+x:ba

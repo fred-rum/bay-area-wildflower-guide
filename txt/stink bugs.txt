@@ -19,6 +19,12 @@ bug:19047
 . connexivum uniformly colored (with no or very tiny dark dot on apical margin of each abdominal segment)
 
 ==green stink bug:Chinavia hilaris
+bug:9066
 . scutellum has pale dot in each basal corner (separate from the pale dots along the basal edge)
 . antennomeres 3 & 4 blackish within the apical half of each
 . connexivum usually has conspicuous dark dot on apical margin of each abdominal segment
+
+==hedge nettle stink bug:Cosmopepla conspicillaris
+bug:240276
+x:more
+. differs from C. uhleri in having a white border on the tip of the scutellum

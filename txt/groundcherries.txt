@@ -1,0 +1,12 @@
+sci: genus Physalis
+
+ID tips are from the <a href="Invasive Species Compendium">https://www.cabi.org/isc/datasheet/40713</a>.
+
+==cape gooseberry:Physalis peruviana
+color: yellow
+. pale/dingy yellow flowers
+. densely pubescent
+
+==large-flowered tomatillo:Physalis philadelphica
+. bright yellow flowers [although many photos show it paler]
+. only sparsely pubescent

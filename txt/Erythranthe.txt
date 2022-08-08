@@ -49,11 +49,13 @@ sci_p:Mimulus dentatus
 
 ==musk monkeyflower:E. moschata
 sci_p:Erythranthe inodora|Mimulus moschatus
+color: yellow
 . stolons or rhizomes present
 . <b>leaf blade 20--50 mm</b>
 . <b>herbage glandular</b>
 . <b>corolla tube 2--4 mm wide except wider at mouth</b>
 . calyx glabrous to slimy-hairy
+. leaf surfaces feel wet & slimy
 
 ==purple-stemmed monkeyflower:E. floribunda
 sci_p:Mimulus floribundus

@@ -32,6 +32,7 @@ color: yellow
 ]
 
 ==black medick:M. lupulina
+color: yellow
 . hairy or glandular-hairy
 . stem prostrate to ascending, angled
 . stipules entire or toothed

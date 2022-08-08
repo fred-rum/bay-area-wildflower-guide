@@ -1,0 +1,12 @@
+sci: genus Contia
+x:any
+
+California Herps has a key to the <a href="https://californiaherps.com/snakes/pages/c.longicauda.html">scale features</a> of sharp-tailed snakes.  California Herps shows no range overlap in the bay area, but iNaturalist observations disagree.
+
+==sharp-tailed snake:Contia tenuis
+. east of the Santa Cruz mountains (but in the flat lands west of the bay)
+xx:none
+
+==forest sharp-tailed snake:Contia longicaudae
+. in the Santa Cruz mountains
+xx:none

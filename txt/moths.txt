@@ -19,7 +19,7 @@ bug:335
 
 ==cutworm moths and allies
 
-==tiger moths:tribe Arctiini
+==tiger moths
 
 ==yellow v moth:Oinophila v-flava
 bug:166855

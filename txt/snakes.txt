@@ -29,3 +29,5 @@ x:ca
 xx:ba
 . gray/black back
 . orange belly and orange ring around neck
+
+==sharp-tailed snakes
