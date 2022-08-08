@@ -3,6 +3,7 @@ import io
 import csv
 
 # My files
+from args import *
 from error import *
 from files import *
 from find_page import *
@@ -11,7 +12,8 @@ from page import *
 
 
 zip_name = 'inaturalist-taxonomy.dwca.zip'
-pickle_name = 'taxa.pickle'
+taxa_pickle_name = 'taxa.pickle'
+mini_pickle_name = 'taxa_mini.pickle'
 db_version = '2.4.1'
 
 inat_ranks = ('infrahybrid',
@@ -51,6 +53,8 @@ for i, rank in enumerate(inat_ranks):
 # not stored.
 #
 taxa_dict = {}
+mini_dict = {}
+read_mini = False
 
 def getmtime(filename):
     try:
@@ -59,14 +63,25 @@ def getmtime(filename):
         return 0
 
 def read_taxa():
-    global taxa_dict
+    global taxa_dict, read_mini
 
     zip_mtime = getmtime(zip_name)
-    pickle_mtime = getmtime(pickle_name)
+    taxa_mtime = getmtime(taxa_pickle_name)
+    mini_mtime = getmtime(mini_pickle_name)
 
-    if pickle_mtime > zip_mtime:
+    if mini_mtime > taxa_mtime and mini_mtime > zip_mtime and not arg('-core'):
         try:
-            with open(f'{root_path}/data/{pickle_name}', mode='rb') as f:
+            with open(f'{root_path}/data/{mini_pickle_name}', mode='rb') as f:
+                taxa_db = pickle.load(f)
+                if taxa_db['version'] == db_version:
+                    taxa_dict = taxa_db['taxa_dict']
+                    read_mini = True
+        except:
+            pass
+
+    if not taxa_dict and taxa_mtime > zip_mtime:
+        try:
+            with open(f'{root_path}/data/{taxa_pickle_name}', mode='rb') as f:
                 taxa_db = pickle.load(f)
                 if taxa_db['version'] == db_version:
                     taxa_dict = taxa_db['taxa_dict']
@@ -77,6 +92,16 @@ def read_taxa():
         read_data_file(zip_name, read_taxa_zip,
                        mode='rb', encoding=None,
                        msg='taxon hierarchy')
+
+
+def dump_taxa(taxa_dict, name):
+    taxa_db = {'version': db_version,
+               'taxa_dict': taxa_dict}
+
+    with open(f'{root_path}/data/{name}', mode='wb') as w:
+        pickle.dump(taxa_db, w)
+
+
 
 def read_taxa_zip(zip_fd):
     def get_field(fieldname):
@@ -137,11 +162,18 @@ def read_taxa_zip(zip_fd):
             taxa_dict[sci] = []
         taxa_dict[sci].append(data)
 
-    taxa_db = {'version': db_version,
-               'taxa_dict': taxa_dict}
+    dump_taxa(taxa_dict, taxa_pickle_name)
 
-    with open(f'{root_path}/data/{pickle_name}', mode='wb') as w:
-        pickle.dump(taxa_db, w)
+
+# Add useful entries to mini_dict.
+#
+def use_data(sci, data):
+    if not sci in mini_dict:
+        mini_dict[sci] = []
+    if data not in mini_dict[sci]:
+        mini_dict[sci].append(data)
+        #print(f'{sci}: {data}')
+
 
 def get_taxa_rank(sci, taxon_id):
     if sci not in taxa_dict:
@@ -153,9 +185,11 @@ def get_taxa_rank(sci, taxon_id):
 
     for data in data_list:
         if tid == data[2]: # does TID match?
+            use_data(sci, data)
             return data[0] # return the matching rank
     else:
         return None
+
 
 def convert_rank_str_to_elab(rank_str, sci):
     sci_words = sci.split(' ')
@@ -171,6 +205,7 @@ def convert_rank_str_to_elab(rank_str, sci):
         return sci
     else:
         return rank_str + ' ' + sci
+
 
 def find_data(page, sci, rank_str, kingdom, tid):
     if sci not in taxa_dict:
@@ -205,11 +240,13 @@ def find_data(page, sci, rank_str, kingdom, tid):
             error(f'The taxa file has multiple taxons that could match {page.full()}')
             return None
         elif not good_type:
-            error(f'The taxa file has no rank or taxon_id that matches {page.full()} (rank: {rank_str}, tid: {tid})')
+            error(f'The taxa file has no rank or taxon_id that matches {page.full()}')
             return None
         # else good_type == 'rank match', so good_data gets processed
 
-    return data
+    use_data(sci, good_data)
+    return good_data
+
 
 def parse_taxa_chains():
     for page in page_array:
@@ -254,6 +291,8 @@ def parse_taxa_chains():
         if not data:
             continue
 
+        use_data(sci, data)
+
         rank_str = data[0]
         kingdom = data[1]
         tid = str(data[2])
@@ -273,6 +312,8 @@ def parse_taxa_chains():
             if not data:
                 break
 
+            use_data(parent_sci, data)
+
             sci = parent_sci
             rank_str = data[0]
             tid = str(data[2])
@@ -290,3 +331,6 @@ def parse_taxa_chains():
             parent.link_linn_child(page)
 
             page = parent
+
+    if mini_dict and not read_mini:
+        dump_taxa(mini_dict, mini_pickle_name)

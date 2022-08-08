@@ -925,7 +925,7 @@ class Page:
 
         if self.com:
             if elab:
-                names = f'self.com {elab}'
+                names = f'{self.com} {elab}'
             else:
                 names = self.com
         elif elab:

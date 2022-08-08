@@ -11,7 +11,9 @@ while len(sys.argv):
                '-no_error_limit',
                '-without_cache',
                '-debug_js',
-               '-steps'):
+               '-steps',
+               '-core',
+               '-ca'):
         _arg_value[arg] = True
     elif arg in ('-dir',
                  '-tree',
@@ -38,7 +40,7 @@ while len(sys.argv):
             if taxon_list:
                 _arg_value['{arg}_taxon'] = taxon_list
     else:
-        print(f'Argument not recognized: {sys.argv[0]}', file=sys.stderr)
+        print(f'Argument not recognized: {arg}', file=sys.stderr)
         sys.exit(-1)
 
 def arg(name):
@@ -46,3 +48,7 @@ def arg(name):
         return _arg_value[name]
     else:
         return None
+
+if arg('-ca'):
+    _arg_value['-core'] = True
+    _arg_value['-api'] = True

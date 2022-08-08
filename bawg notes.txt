@@ -1449,6 +1449,14 @@ change ignore_species.yaml to ignore_properties.yaml
   taxon name: list of properties to ignore
   requires extra code for obs_promotion properties attached to an ancestor
     since the ignore is on the original (or intermediate)
+  there's no single point in the BAWG parsing where all pages are present
+      and the ignore instructions can be attached for future use
+    the ignore file might need to be strictly 'sci' name based
+      to allow easy lookups at any point in the parsing
+    or have the ignore file create shadow pages (by com, sci, eval, or TID)
+        and have those carry the ignore instructions
+      this could be awkward if an iNat record matches multiple pages
+        e.g. by either sci or TID
 
 iNaturalist export feature request:
   column for 'rank' (same as taxonRank in taxa.csv)
@@ -1469,13 +1477,6 @@ apply names from taxa.csv, observations.csv, and API data
     otherwise, use the youngest date in an API file
   taxa.csv may be older than its file date;
     perhaps always treat it as oldest
-
-Pieris
-  allow a single sci entry to pick up duplicate ranks
-    from separate taxa CSV lines because a genus is repeated
-  use taxon_id to distinguish
-  in the case of Pieris, the taxon_id comes from observations.csv
-    but the txt file could also specify
 
 add an arg -taxa
   full taxa ZIP or taxa-cache.pickle is read only with -taxa
@@ -1509,6 +1510,7 @@ Download the iNaturalist Taxonomy DarwinCore Archive
 When construction a taxonomy chain,
   stop when the iNat name matches in asci instead of sci
   E.g. don't give snapdragons the Antirrhinum TID
+  or don't stop, but also don't assign a TID
 
 if a page doesn't have a scientific name,
   but iNaturalist is allowed to set its scientific name
@@ -1517,3 +1519,12 @@ if a page doesn't have a scientific name,
 perhaps I shouldn't record 'elab' but instead stick with 'sci' and 'rank'.
   generate elab only as needed
   use rank as disambiguator
+
+taxa.py should use the iNat sci name when appropriate
+
+to resolve conflicts
+  allow iNat sources to be ignored from the 'ignore_species.yaml' file
+    (or whatever the file ends up being called)
+  e.g. 'Octopictus: core' would ignore DarwinCore data for Octopictus
+  'inat' (or 'iNat') can also be used to ignore all 3 iNat sources:
+    observations, core, and API
