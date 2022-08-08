@@ -12,8 +12,8 @@ from page import *
 
 
 zip_name = 'inaturalist-taxonomy.dwca.zip'
-taxa_pickle_name = 'taxa.pickle'
-mini_pickle_name = 'taxa_mini.pickle'
+core_pickle_name = 'core.pickle'
+mini_pickle_name = 'core_mini.pickle'
 db_version = '2.4.1'
 
 inat_ranks = ('infrahybrid',
@@ -52,7 +52,7 @@ for i, rank in enumerate(inat_ranks):
 # If there is no parent (i.e. for a kingdom), the lower-level list is
 # not stored.
 #
-taxa_dict = {}
+core_dict = {}
 mini_dict = {}
 read_mini = False
 
@@ -62,48 +62,48 @@ def getmtime(filename):
     except:
         return 0
 
-def read_taxa():
-    global taxa_dict, read_mini
+def read_core():
+    global core_dict, read_mini
 
     zip_mtime = getmtime(zip_name)
-    taxa_mtime = getmtime(taxa_pickle_name)
+    core_mtime = getmtime(core_pickle_name)
     mini_mtime = getmtime(mini_pickle_name)
 
-    if mini_mtime > taxa_mtime and mini_mtime > zip_mtime and not arg('-core'):
+    if mini_mtime > core_mtime and mini_mtime > zip_mtime and not arg('-core'):
         try:
             with open(f'{root_path}/data/{mini_pickle_name}', mode='rb') as f:
-                taxa_db = pickle.load(f)
-                if taxa_db['version'] == db_version:
-                    taxa_dict = taxa_db['taxa_dict']
+                core_db = pickle.load(f)
+                if core_db['version'] == db_version:
+                    core_dict = core_db['core_dict']
                     read_mini = True
         except:
             pass
 
-    if not taxa_dict and taxa_mtime > zip_mtime:
+    if not core_dict and core_mtime > zip_mtime:
         try:
-            with open(f'{root_path}/data/{taxa_pickle_name}', mode='rb') as f:
-                taxa_db = pickle.load(f)
-                if taxa_db['version'] == db_version:
-                    taxa_dict = taxa_db['taxa_dict']
+            with open(f'{root_path}/data/{core_pickle_name}', mode='rb') as f:
+                core_db = pickle.load(f)
+                if core_db['version'] == db_version:
+                    core_dict = core_db['core_dict']
         except:
             pass
 
-    if not taxa_dict:
-        read_data_file(zip_name, read_taxa_zip,
+    if not core_dict:
+        read_data_file(zip_name, read_core_zip,
                        mode='rb', encoding=None,
                        msg='taxon hierarchy')
 
 
-def dump_taxa(taxa_dict, name):
-    taxa_db = {'version': db_version,
-               'taxa_dict': taxa_dict}
+def dump_core_db(core_dict, name):
+    core_db = {'version': db_version,
+               'core_dict': core_dict}
 
     with open(f'{root_path}/data/{name}', mode='wb') as w:
-        pickle.dump(taxa_db, w)
+        pickle.dump(core_db, w)
 
 
 
-def read_taxa_zip(zip_fd):
+def read_core_zip(zip_fd):
     def get_field(fieldname):
         if fieldname in row:
             return row[fieldname]
@@ -158,11 +158,11 @@ def read_taxa_zip(zip_fd):
 
         data = (rank_str, kingdom, taxon_id, parent_sci, parent_rank_str)
 
-        if sci not in taxa_dict:
-            taxa_dict[sci] = []
-        taxa_dict[sci].append(data)
+        if sci not in core_dict:
+            core_dict[sci] = []
+        core_dict[sci].append(data)
 
-    dump_taxa(taxa_dict, taxa_pickle_name)
+    dump_core_db(core_dict, core_pickle_name)
 
 
 # Add useful entries to mini_dict.
@@ -175,13 +175,13 @@ def use_data(sci, data):
         #print(f'{sci}: {data}')
 
 
-def get_taxa_rank(sci, taxon_id):
-    if sci not in taxa_dict:
+def get_core_rank(sci, taxon_id):
+    if sci not in core_dict:
         return None
 
     tid = int(taxon_id)
 
-    data_list = taxa_dict[sci]
+    data_list = core_dict[sci]
 
     for data in data_list:
         if tid == data[2]: # does TID match?
@@ -208,10 +208,10 @@ def convert_rank_str_to_elab(rank_str, sci):
 
 
 def find_data(page, sci, rank_str, kingdom, tid):
-    if sci not in taxa_dict:
+    if sci not in core_dict:
         return None
 
-    data_list = taxa_dict[sci]
+    data_list = core_dict[sci]
 
     good_type = None
 
@@ -237,10 +237,10 @@ def find_data(page, sci, rank_str, kingdom, tid):
                 good_type = 'rank match'
     else:
         if good_type == 'rank conflict':
-            error(f'The taxa file has multiple taxons that could match {page.full()}')
+            error(f'The DarwinCore data has multiple taxons that could match {page.full()}')
             return None
         elif not good_type:
-            error(f'The taxa file has no rank or taxon_id that matches {page.full()}')
+            error(f'The DarwinCore data has no rank or taxon_id that matches {page.full()}')
             return None
         # else good_type == 'rank match', so good_data gets processed
 
@@ -248,7 +248,7 @@ def find_data(page, sci, rank_str, kingdom, tid):
     return good_data
 
 
-def parse_taxa_chains():
+def parse_core_chains():
     for page in page_array:
         if page.linn_child:
             # only initiate a chain from the lowest level
@@ -333,4 +333,4 @@ def parse_taxa_chains():
             page = parent
 
     if mini_dict and not read_mini:
-        dump_taxa(mini_dict, mini_pickle_name)
+        dump_core_db(mini_dict, mini_pickle_name)

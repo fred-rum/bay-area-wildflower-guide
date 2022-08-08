@@ -1,5 +1,7 @@
 sci: Robinia pseudoacacia
-x: rare
 color: white
+
+genus:locust trees
+x: rare
 
 The {-black locust} has spines at the base of the leaf.  Compare to california false indigo (<i>Amorpha californica</i>), which doesn't have spines at the base of the leaf but does have prickle-like glands along the leaf midrib.

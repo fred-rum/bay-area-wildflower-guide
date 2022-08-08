@@ -1458,9 +1458,6 @@ change ignore_species.yaml to ignore_properties.yaml
       this could be awkward if an iNat record matches multiple pages
         e.g. by either sci or TID
 
-iNaturalist export feature request:
-  column for 'rank' (same as taxonRank in taxa.csv)
-
 read taxa.csv (or condensed equivalent)
   for each page, apply TID, rank, chain
 read observations.csv
@@ -1478,12 +1475,6 @@ apply names from taxa.csv, observations.csv, and API data
   taxa.csv may be older than its file date;
     perhaps always treat it as oldest
 
-add an arg -taxa
-  full taxa ZIP or taxa-cache.pickle is read only with -taxa
-  without -taxa, taxa-cache-mini.pickle is read
-    the mini cache is a subset of the full cache in the same format
-    it includes only those taxa that are touched
-
 add an api-cache.pickle
   this is saved once all API transactions are complete
     but only when -api is used
@@ -1494,27 +1485,16 @@ add an api-cache.pickle
     with preference to the JSON files, which are guaranteed newer
     these files are read regardless of -api
 
-when reading taxons from taxa.csv
-  the kingdom disambiguates taxons with the same sci and rank
-    even if the taxon_id isn't known
-  this is useful when creating a chain
-    since a species must be unique (and knows its kingdom)
-    but its parent genus isn't unique (unless correlated with kingdom)
-
 local Ceanothus oliganthus is always var. sorediatus (jim brush)
 
 Download the iNaturalist Taxonomy DarwinCore Archive
   (https://www.inaturalist.org/taxa/inaturalist-taxonomy.dwca.zip)
   from https://www.inaturalist.org/pages/developers
 
-When construction a taxonomy chain,
+When constructing a taxonomy chain,
   stop when the iNat name matches in asci instead of sci
   E.g. don't give snapdragons the Antirrhinum TID
   or don't stop, but also don't assign a TID
-
-if a page doesn't have a scientific name,
-  but iNaturalist is allowed to set its scientific name
-  I need to apply taxa.csv again before going to the API
 
 perhaps I shouldn't record 'elab' but instead stick with 'sci' and 'rank'.
   generate elab only as needed

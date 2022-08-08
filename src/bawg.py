@@ -45,7 +45,7 @@ from photo import *
 from glossary import *
 from cache import *
 from inat import *
-from taxa import *
+from core import *
 
 if arg('-debug_js'):
     # To avoid confusion when using the unstripped source files,
@@ -251,7 +251,7 @@ for page in page_array:
     page.record_genus()
 
 # Read taxonomy CSVs from ZIP file
-read_taxa()
+read_core()
 
 if arg('-steps'):
     info('Step 7: Create taxonomic chains from observations.csv')
@@ -286,10 +286,10 @@ def read_obs_chains(f):
         # parsed during string parsing, not during RE parsing.
         sci = re.sub(' \N{MULTIPLICATION SIGN} ', r' X', sci)
 
-        # Get an unambiguous rank from the taxa data if possible.
-        # A hybrid will always fail because the taxa data doesn't
+        # Get an unambiguous rank from the core data if possible.
+        # A hybrid will always fail because the core data doesn't
         # expect its 'X', but a hybrid is unambiguous anyway.
-        taxa_rank = get_taxa_rank(sci, taxon_id)
+        core_rank = get_core_rank(sci, taxon_id)
 
         com = get_field('common_name')
 
@@ -317,17 +317,17 @@ def read_obs_chains(f):
                 if not found_lowest_level:
                     sci_words = sci.split(' ')
                     if (get_field('taxon_subspecies_name') or
-                        taxa_rank == 'subspecies'):
+                        core_rank == 'subspecies'):
                         sci = ' '.join((sci_words[0], sci_words[1],
                                         'ssp.', sci_words[2]))
                     elif (get_field('taxon_variety_name') or
-                          taxa_rank == 'variety'):
+                          core_rank == 'variety'):
                         sci = ' '.join((sci_words[0], sci_words[1],
                                         'var.', sci_words[2]))
                     elif ' X' in sci:
                         pass
                     elif ' ' in sci and (rank is Rank.species or
-                                         taxa_rank == 'species'):
+                                         core_rank == 'species'):
                         # If the scientific name has at least one space,
                         # then it is a species, subspecies, or variety that
                         # should have already been elaborated as necessary.
@@ -335,15 +335,15 @@ def read_obs_chains(f):
                         # than species, so the first matching rank won't
                         # be 'species'
                         pass
-                    elif taxa_rank:
-                        sci = f'{taxa_rank} {sci}'
+                    elif core_rank:
+                        sci = f'{core_rank} {sci}'
                     elif group == orig_sci:
                         # If the first name in the taxonomic chain matches
                         # the observed taxon name, then it directly tells
                         # us the taxon rank.
                         # ... unless its a subgenus whose name matches the
                         # genus name.  In which case we either need the
-                        # taxa data to supply a rank (above) or the txt
+                        # core data to supply a rank (above) or the txt
                         # to supply a taxon_id so that the elab look-up is
                         # skipped.
                         sci = f'{rank.name} {sci}'
@@ -367,7 +367,7 @@ def read_obs_chains(f):
                             not ' ssp. ' in sci and
                             not ' var. ' in sci and
                             not sci.startswith('complex ') and
-                            not taxa_rank):
+                            not core_rank):
                             # We have to create a page for a taxon of unknown
                             # rank.  On the assumption that the observation
                             # will get promoted to a higher-level taxon, we
@@ -411,9 +411,9 @@ if arg('-tree') == '7':
     print_trees()
 
 if arg('-steps'):
-    info("Step 7t: Create taxonomic chains from taxa.csv")
+    info("Step 7t: Create taxonomic chains from DarwinCore data")
 
-parse_taxa_chains()
+parse_core_chains()
 
 if arg('-tree') == '7t':
     print_trees()

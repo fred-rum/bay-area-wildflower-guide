@@ -1588,7 +1588,7 @@ var pages=[
 {page:"barn owl",sci:["Tyto alba"],x:"u"},
 {page:"barred owl",sci:["Strix varia"],x:"u"},
 {page:"bird's foot cliffbrake",sci:["Pellaea mucronata"],x:"u"},
-{page:"black locust",sci:["Robinia pseudoacacia"],x:"o"},
+{page:"black locust",com:["black locust","locust trees"],sci:["Robinia pseudoacacia"],x:"o"},
 {page:"black maidenhair fern",sci:["Adiantum capillus-veneris"],x:"u"},
 {page:"black swift",sci:["Cypseloides niger"],x:"u"},
 {page:"black vulture",sci:["Coragyps atratus"],x:"u"},
