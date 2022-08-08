@@ -819,13 +819,15 @@ class Page:
             and elab_words[2] not in ('ssp.', 'var.')):
             error(f'Unexpected elaboration for {elab}')
 
-        if (from_inat and
+        if (not self.sci and
+            from_inat and
             not self.created_from_inat and
             not self.rp_do('obs_fill_sci',
                            f'{self.full()} can be filled by {elab}')):
             # If we got here, then
             #   - this page was created by the user, and
             #   - we have a new elaboration from iNaturalist, and
+            #   - it's not adding a rank to an existing scientific name, and
             #   - we don't have a property that allows us to use the new name.
             return
 
@@ -914,7 +916,27 @@ class Page:
     # full() is intended for Python debug output to the terminal
     # It removes all fancy formatting to emit ASCII only.
     def full(self):
-        names = unidecode(self.format_full(lines=1, ital=False, for_html=False))
+        if self.rank:
+            elab = f'{self.rank.name} {self.sci}'
+        elif self.sci:
+            elab = self.sci
+        else:
+            elab = None
+
+        if self.com:
+            if elab:
+                names = f'self.com {elab}'
+            else:
+                names = self.com
+        elif elab:
+            names = elab
+        else:
+            return '{' + self.name + '}'
+
+        if self.taxon_id:
+            names += f' ({self.taxon_id})'
+
+        names = unidecode(names)
         return f'{names} [{self.src}]'
 
     def get_filename(self):

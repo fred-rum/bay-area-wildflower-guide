@@ -156,11 +156,18 @@ def link_inat2(page_set):
 
     parent_set = set()
     for child in page_list:
-        if not child.rank:
-            continue
-
         if not child.taxon_id:
-            warn(f'missing iNat data for {child.full()}')
+            if child.sci:
+                # We have a scientific name, but no taxon_id.
+                # That implies that we failed to fetch the taxon info
+                # from the iNat API (or JSON files).
+                warn(f'missing iNata data for {child.full()}')
+
+            # On the other hand, if the page has no scientific name
+            # and no taxon ID from any source, then skip it.  Note that
+            # a page could derive a taxon ID from its common name in
+            # observations.csv, in which case we can process its taxonomic
+            # chain even without a scientific name.
             continue
 
         inat_child = get_inat(child.taxon_id, used=True)

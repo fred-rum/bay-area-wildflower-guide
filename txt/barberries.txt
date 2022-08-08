@@ -1,0 +1,31 @@
+sci:genus Berberis
+x:ba
+
+==darwin's barberry:B. darwinii
+. simple leaves (not opposite leaflets on a distinct stalk)
+
+==cascade oregon-grape:B. nervosa
+. compound leaves
+.. leaflets +- palmately veined
+
+==shining netvein barberry:Berberis dictyota
+sci_fpj:Berberis aquifolium var. dictyota
+. compound leaves
+.. usually 7--9 leaflets, +- pinnately veined, <b>not shiny</b>
+... leaflet margin strongly wavy, thick, usually hard
+... 6--10 spines per side, 2--5 mm long
+
+==oregon grape:B. aquifolium
+sci_fpj:Berberis aquifolium var. aquifolium
+. compound leaves
+.. usually 5--9 leaflets, +- pinnately veined
+... leaflet margin <b>wavy</b>, +- thin, not hard
+... 12-24 spines per side, 1--2 mm
+. Jepson doesn't provide a reliable way to distinguish this from {-california barberry}
+
+==california barberry:B. pinnata
+. compound leaves
+.. usually 7--11 leaflets, +- pinnately veined
+... leaflet margin +- <b>flat</b>, +- thin, not hard
+... 15--23 spines per side, <b>0</b>--2 mm [CalPhotos often shows fewer spines that may be > 2 mm]
+. Jepson doesn't provide a reliable way to distinguish this reliably from {-oregon grape}

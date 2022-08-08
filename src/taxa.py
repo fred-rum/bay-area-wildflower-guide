@@ -10,6 +10,10 @@ from rank import *
 from page import *
 
 
+zip_name = 'inaturalist-taxonomy.dwca.zip'
+pickle_name = 'taxa.pickle'
+db_version = '2.4.1'
+
 inat_ranks = ('infrahybrid',
               'form',
               'variety',
@@ -48,9 +52,6 @@ for i, rank in enumerate(inat_ranks):
 #
 taxa_dict = {}
 
-zip_name = 'inaturalist-taxonomy.dwca.zip'
-pickle_name = 'taxa.pickle'
-
 def getmtime(filename):
     try:
         return os.path.getmtime(f'{root_path}/data/{filename}')
@@ -66,7 +67,9 @@ def read_taxa():
     if pickle_mtime > zip_mtime:
         try:
             with open(f'{root_path}/data/{pickle_name}', mode='rb') as f:
-                taxa_dict = pickle.load(f)
+                taxa_db = pickle.load(f)
+                if taxa_db['version'] == db_version:
+                    taxa_dict = taxa_db['taxa_dict']
         except:
             pass
 
@@ -88,7 +91,7 @@ def read_taxa_zip(zip_fd):
     csv_reader = csv.DictReader(csv_fd)
 
     for row in csv_reader:
-        rank = get_field('taxonRank')
+        rank_str = get_field('taxonRank')
         sci = get_field('scientificName')
 
         # iNaturalist uses the hybrid's special 'x' symbol in the
@@ -101,8 +104,8 @@ def read_taxa_zip(zip_fd):
         # to save a lot of space in the binary pickle.
         taxon_id = int(get_field('id'))
 
-        if rank in ('infrahybrid', 'form', 'variety', 'subspecies'):
-            parent_rank = 'species'
+        if rank_str in ('infrahybrid', 'form', 'variety', 'subspecies'):
+            parent_rank_str = 'species'
             parent_sci = get_field('genus') + ' ' + get_field('specificEpithet')
         else:
             for r in ('genus',
@@ -111,43 +114,37 @@ def read_taxa_zip(zip_fd):
                       'class',
                       'phylum',
                       'kingdom'):
-                if get_field(r):
-                    parent_rank = r
+                if (get_field(r) and r != rank_str and
+                    not (r == 'genus' and
+                         rank_str in ('subgenus', 'section', 'subsection'))):
+                    parent_rank_str = r
                     parent_sci = get_field(r)
                     break
             else:
-                # No parent found, so bail out of this CSV row
-                continue
+                parent_rank_str = None
+                parent_sci = None
 
-        # rank_num = rank_to_num[rank]
-        # parent_rank_num = rank_to_num[parent_rank]
-        # data = (rank_num, taxon_id, parent_sci, parent_rank_num)
+        # A name may occasionally be used for multiple taxons.
+        # My research leads me to expect that this will only happen
+        # within a kingdom at different ranks, or
+        # at the same rank in different kingdoms.
+        # So we record the kingdom and rank as disambiguators.
+        kingdom = get_field('kingdom')
 
-        data = (rank, taxon_id, parent_sci, parent_rank)
+        data = (rank_str, kingdom, taxon_id, parent_sci, parent_rank_str)
 
         if sci not in taxa_dict:
             taxa_dict[sci] = []
         taxa_dict[sci].append(data)
 
-    # Compress out redundant info
-    # for sci in taxa_dict:
-    #     data_list = taxa_dict[sci]
-    #     if len(data_list) == 1:
-    #         data = data_list[0]
-    #         rank = data[0]
-    #         if rank in ('species', 'subspecies', 'variety', 'form'):
-    #             # The rank is unambiguous, and the parent name is obvious,
-    #             # so don't bother to record anything.
-    #             taxa_dict.remove(sci)
-    #         else:
-    #             # Replace a list with a single tuple with the tuple itself.
-    #             taxa_dict[sci] = data
+    taxa_db = {'version': db_version,
+               'taxa_dict': taxa_dict}
 
-    with open(f'{root_path}/data/taxa.pickle', mode='wb') as w:
-        pickle.dump(taxa_dict, w)
+    with open(f'{root_path}/data/{pickle_name}', mode='wb') as w:
+        pickle.dump(taxa_db, w)
 
 def get_taxa_rank(sci, taxon_id):
-    if not sci in taxa_dict:
+    if sci not in taxa_dict:
         return None
 
     tid = int(taxon_id)
@@ -155,7 +152,7 @@ def get_taxa_rank(sci, taxon_id):
     data_list = taxa_dict[sci]
 
     for data in data_list:
-        if tid == data[1]: # does TID match?
+        if tid == data[2]: # does TID match?
             return data[0] # return the matching rank
     else:
         return None
@@ -175,6 +172,45 @@ def convert_rank_str_to_elab(rank_str, sci):
     else:
         return rank_str + ' ' + sci
 
+def find_data(page, sci, rank_str, kingdom, tid):
+    if sci not in taxa_dict:
+        return None
+
+    data_list = taxa_dict[sci]
+
+    good_type = None
+
+    for data in data_list:
+        # rank and/or TID may be None, in which case that won't match,
+        # but maybe something else will.  Even if neither rank nor TID
+        # match, we can still assume a match if there's only one taxon
+        # with this scientific name.
+        if rank_str == data[0] or not rank_str:
+            # We found a matching rank, but we have to keep looking
+            # in case there is another TID with the same rank!
+            # (E.g. genus Pieris is both a plant and an animal.)
+            good_data = data
+            if kingdom == data[1] or (not kingdom and tid == data[2]):
+                # A TID match beats any number of conflicting ranks.
+                # Take the data and immediately go home.
+                # (If the rank turns out to be wrong, that should show
+                # up in later checks.)
+                break
+            elif good_type:
+                good_type = 'rank conflict'
+            else:
+                good_type = 'rank match'
+    else:
+        if good_type == 'rank conflict':
+            error(f'The taxa file has multiple taxons that could match {page.full()}')
+            return None
+        elif not good_type:
+            error(f'The taxa file has no rank or taxon_id that matches {page.full()} (rank: {rank_str}, tid: {tid})')
+            return None
+        # else good_type == 'rank match', so good_data gets processed
+
+    return data
+
 def parse_taxa_chains():
     for page in page_array:
         if page.linn_child:
@@ -183,9 +219,10 @@ def parse_taxa_chains():
             # and knowing the kingdom helps disambiguate their ancestors
             continue
 
-        sci = page.sci
-        if not sci in taxa_dict:
-            continue
+        if page.no_names:
+            sci = page.name
+        else:
+            sci = page.sci
 
         if page.rank:
             if ' ssp. ' in page.elab:
@@ -199,56 +236,57 @@ def parse_taxa_chains():
         else:
             rank_str = None
 
+        kingdom = None
+        anc = page
+        while anc:
+            if anc.rank is Rank.kingdom:
+                kingdom = page.sci
+                break
+            anc = anc.linn_parent
+
         if page.taxon_id:
             tid = int(page.taxon_id)
         else:
             tid = None
 
-        data_list = taxa_dict[sci]
+        data = find_data(page, sci, rank_str, kingdom, tid)
 
-        good_type = None
+        if not data:
+            continue
 
-        for data in data_list:
-            # rank and/or TID may be None, in which case that won't match,
-            # but maybe something else will.  Even if neither rank nor TID
-            # match, we can still assume a match if there's only one taxon
-            # with this scientific name.
-            if tid == data[1]:
-                # A TID match beats any number of conflicting ranks.
-                # Take the data and immediately go home.
-                # (If the rank turns out to be wrong, that should show
-                # up in later checks.)
-                good_data = data
+        rank_str = data[0]
+        kingdom = data[1]
+        tid = str(data[2])
+        parent_sci = data[3]
+        parent_rank_str = data[4]
+
+        elab = convert_rank_str_to_elab(rank_str, sci)
+
+        find_page2(None, elab, from_inat=True,
+                   taxon_id=str(tid))
+
+        # traverse the taxonomic chain
+        while parent_rank_str and parent_sci:
+            #print(f'{rank_str} {sci} -> {parent_rank_str} {parent_sci}')
+            data = find_data(page, parent_sci, parent_rank_str, kingdom, None)
+
+            if not data:
                 break
-            elif not rank_str and len(data_list) == 1:
-                # A page with no rank finds a match as long as there is only
-                # one option.
-                good_data = data
+
+            sci = parent_sci
+            rank_str = data[0]
+            tid = str(data[2])
+            parent_sci = data[3]
+            parent_rank_str = data[4]
+
+            elab = convert_rank_str_to_elab(rank_str, sci)
+
+            parent = find_page2(None, elab, from_inat=True,
+                                taxon_id=str(tid))
+
+            if not parent:
                 break
-            elif rank_str == data[0]:
-                # We found a matching rank, but we have to keep looking
-                # in case there is another TID with the same rank!
-                # (E.g. genus Pieris is both a plant and an animal.)
-                good_data = data
-                if good_type:
-                    good_type = 'rank conflict'
-                else:
-                    good_type = 'rank match'
-        else:
-            if good_type == 'rank conflict' or not rank_str:
-                error(f'The taxa file has multiple taxons that could match {page.full()}')
-                continue
-            elif not good_type:
-                error(f'The taxa file has no rank or taxon_id that matches {page.full()} (rank: {rank_str}, tid: {tid})')
-                continue
-            # else good_type == 'rank match', so good_data gets processed
 
-        taxa_rank_str = data[0]
-        taxa_taxon_id = str(data[1])
-        parent_sci = data[2]
-        parent_rank_str = data[3]
+            parent.link_linn_child(page)
 
-        elab = convert_rank_str_to_elab(taxa_rank_str, sci)
-
-        page = find_page2(None, elab, from_inat=True,
-                          taxon_id=taxa_taxon_id)
+            page = parent

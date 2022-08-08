@@ -1499,3 +1499,21 @@ when reading taxons from taxa.csv
   this is useful when creating a chain
     since a species must be unique (and knows its kingdom)
     but its parent genus isn't unique (unless correlated with kingdom)
+
+local Ceanothus oliganthus is always var. sorediatus (jim brush)
+
+Download the iNaturalist Taxonomy DarwinCore Archive
+  (https://www.inaturalist.org/taxa/inaturalist-taxonomy.dwca.zip)
+  from https://www.inaturalist.org/pages/developers
+
+When construction a taxonomy chain,
+  stop when the iNat name matches in asci instead of sci
+  E.g. don't give snapdragons the Antirrhinum TID
+
+if a page doesn't have a scientific name,
+  but iNaturalist is allowed to set its scientific name
+  I need to apply taxa.csv again before going to the API
+
+perhaps I shouldn't record 'elab' but instead stick with 'sci' and 'rank'.
+  generate elab only as needed
+  use rank as disambiguator
