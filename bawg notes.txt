@@ -1423,6 +1423,11 @@ keep a record of genuses mentioned in a page
 Why don't I promote unranked pages to be 'true' Linnaean parents?
   it would potentially avoid a bunch of hassle code
   if would the unranked page to interrupt property propagation
+  only works if the page has a single parent
+    so maybe it doesn't avoid much code
+    could still be handy for property propagation and interruption, though
+  do I already do this?
+    the Linnaean parent is based on the lowest common ancestor among children
 
 Does it make sense to augment member_name with  member_name_com?
   can use it much more liberally, then
@@ -1483,24 +1488,15 @@ add an api-cache.pickle
   the JSON files are retained if the script fails
   the script reads both the api-cache.pickle and the JSON files
     with preference to the JSON files, which are guaranteed newer
+      wait, no they're not
     these files are read regardless of -api
+  or condense the data before saving it as JSON or pickle
 
 local Ceanothus oliganthus is always var. sorediatus (jim brush)
-
-Download the iNaturalist Taxonomy DarwinCore Archive
-  (https://www.inaturalist.org/taxa/inaturalist-taxonomy.dwca.zip)
-  from https://www.inaturalist.org/pages/developers
-
-When constructing a taxonomy chain,
-  stop when the iNat name matches in asci instead of sci
-  E.g. don't give snapdragons the Antirrhinum TID
-  or don't stop, but also don't assign a TID
 
 perhaps I shouldn't record 'elab' but instead stick with 'sci' and 'rank'.
   generate elab only as needed
   use rank as disambiguator
-
-taxa.py should use the iNat sci name when appropriate
 
 to resolve conflicts
   allow iNat sources to be ignored from the 'ignore_species.yaml' file
@@ -1508,3 +1504,7 @@ to resolve conflicts
   e.g. 'Octopictus: core' would ignore DarwinCore data for Octopictus
   'inat' (or 'iNat') can also be used to ignore all 3 iNat sources:
     observations, core, and API
+
+Should autocomplete ask for 2 results to see if there are multiple matches
+  for the same name and rank?
+Should I get the kingdom IDs first to use as disambiguators?

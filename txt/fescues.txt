@@ -5,7 +5,6 @@ family: grasses
 Some species that CalFlora/Jepson have in Festuca have been moved to {-Lolium spp.}.
 
 ==brome fescue:F. bromoides
-sci_i:Vulpia bromoides
 
 ==california fescue:F. californica
 
@@ -14,15 +13,12 @@ sci_i:Vulpia bromoides
 ==idaho fescue:F. idahoensis
 
 ==small fescue:F. microstachys
-sci_i:Vulpia microstachys
 
 ==rattail sixweeks grass:F. myuros
-sci_i:Vulpia myuros
 
 ==western fescue:F. occidentalis
 
 ==sixweeks grass:F. octoflora
-sci_i:Vulpia octoflora
 
 ==red fescue:F. rubra
 

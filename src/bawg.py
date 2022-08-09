@@ -407,6 +407,10 @@ def read_obs_chains(f):
 read_data_file('observations.csv', read_obs_chains,
                msg='taxon hierarchy')
 
+# If we got this far and a page still doesn't have a name, give it one.
+for page in page_array:
+    page.infer_name()
+
 if arg('-tree') == '7':
     print_trees()
 
@@ -707,10 +711,6 @@ if arg('-tree') == '12j':
 
 if arg('-steps'):
     info('Step 13: Apply remaining properties')
-
-# If we got this far and a page still doesn't have a name, give it one.
-for page in page_array:
-    page.infer_name()
 
 top_list = [x for x in page_array if not x.parent]
 

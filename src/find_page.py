@@ -8,6 +8,7 @@ name_page = {} # original page name -> page [final file name may vary]
 com_page = {} # common name -> page (or 'multiple' if there are name conflicts)
 sci_page = {} # scientific name *or* elaborated name -> page
 isci_page = {} # iNaturalist scientific name -> page (only where it differs)
+asci_page = {} # alternative scientific name -> page
 taxon_id_page = {} # iNaturalist taxon ID -> page
 
 glossary_name_dict = {} # glossary name -> glossary instance
@@ -230,8 +231,6 @@ def find_page2(com, elab, from_inat=False, taxon_id=None):
 
     # Update (if appropriate) any names that are new or different.
     if page:
-        if taxon_id:
-            page.set_taxon_id(taxon_id, from_obs=from_inat)
         if elab:
             page.set_sci(elab, from_inat=from_inat)
         if com:
@@ -242,6 +241,13 @@ def find_page2(com, elab, from_inat=False, taxon_id=None):
                 pass
             else:
                 page.set_com(com, from_inat=from_inat)
+
+        # Only set the taxon_id if there was a match on the common name,
+        # the scientific name, or on the alternative iNaturalist scientific
+        # name.  I.e. do *not* set the taxon_id if there was a match on an
+        # alternative scientific name.
+        if taxon_id and strip_sci(elab) not in asci_page:
+            page.set_taxon_id(taxon_id, from_obs=from_inat)
 
     return page
 

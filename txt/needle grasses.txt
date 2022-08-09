@@ -23,7 +23,7 @@ sci_fpj:Stipa purpurata
 . awn 10--16 mm long
 
 ==stipoid ricegrass:Piptochaetium stipoides
-sci_fpji:Stipa chaetophora
+sci_fpj:Stipa chaetophora
 . blade 0.2--0.4 mm wide
 . awn 15--25 mm long
 
@@ -35,7 +35,7 @@ sci_fpji:Stipa chaetophora
 <h4>lemma generally bumpy throughout, tip with crown</h4>
 
 ==andean tussockgrass:N. manicata
-sci_fpji:Stipa manicata
+sci_fpj:Stipa manicata
 . lemma crown generally sharply constricted proximally, distinct from rest of lemma
 
 ==foothill needle grass:N. lepida
@@ -66,7 +66,6 @@ color:other
 
 ==smilo grass:Oloptum miliaceum
 sci_fpj:Stipa miliacea
-sci_i:Achnatherum miliaceum
 . lemma body smooth throughout
 ]
 

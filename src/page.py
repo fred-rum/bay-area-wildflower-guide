@@ -763,7 +763,8 @@ class Page:
             # Somehow we're trying to set a different scientific name
             # than the one already on the page.  That should only happen
             # if sci_page points both names to the same page, which is
-            # only true if there are alternative scientific names via asci.
+            # only true if there are alternative scientific names via asci
+            # or elab_inaturalist.
             # I don't attempt to do anything smart with that case.
             return
 
@@ -925,7 +926,7 @@ class Page:
 
         if self.com:
             if elab:
-                names = f'{self.com} {elab}'
+                names = f'{self.com} ({elab})'
             else:
                 names = self.com
         elif elab:
@@ -1059,7 +1060,12 @@ class Page:
             sci = strip_sci(matchobj.group(1))
             if sci in sci_page:
                 fatal(f'{self.full()} specifies asci: {sci}, but that name already exists')
+
+            # Record the additional scientific name in sci_page so that it
+            # appropriate hijacks lookups, but also store it in asci_page
+            # so that we know when an asci name has been used.
             sci_page[sci] = self
+            asci_page[sci] = self
             return ''
 
         # Check for a scientific name first because it is guaranteed to be

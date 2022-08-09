@@ -269,15 +269,14 @@ def used_fail(name):
 # may not need to fetch new iNaturalist data.
 #
 def get_inat_for_page(page):
-    if not page.sci:
-        return None
-
     if page.elab_inaturalist:
         elab = page.elab_inaturalist
         sci = strip_sci(elab)
-    else:
+    elif page.elab:
         elab = page.elab
         sci = page.sci
+    else:
+        return None
 
     elab_words = elab.split(' ')
     if elab_words[0].islower():

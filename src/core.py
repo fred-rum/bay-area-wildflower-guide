@@ -209,6 +209,7 @@ def convert_rank_str_to_elab(rank_str, sci):
 
 def find_data(page, sci, rank_str, kingdom, tid):
     if sci not in core_dict:
+        warn(f"The DarwinCore data doesn't include a scientific name that matches {page.full()}")
         return None
 
     data_list = core_dict[sci]
@@ -240,7 +241,7 @@ def find_data(page, sci, rank_str, kingdom, tid):
             error(f'The DarwinCore data has multiple taxons that could match {page.full()}')
             return None
         elif not good_type:
-            error(f'The DarwinCore data has no rank or taxon_id that matches {page.full()}')
+            warn(f'The DarwinCore data has no rank or taxon_id that matches {page.full()}')
             return None
         # else good_type == 'rank match', so good_data gets processed
 
@@ -257,16 +258,25 @@ def parse_core_chains():
             continue
 
         if page.no_names:
-            sci = page.name
+            elab = page.name
+        elif page.elab_inaturalist:
+            elab = page.elab_inaturalist
+        elif page.elab:
+            elab = page.elab
         else:
-            sci = page.sci
+            # If the page only has a common name, don't touch it.
+            # Maybe we could look it up by TID, but there's little benefit
+            # to it.
+            continue
+
+        sci = strip_sci(elab)
 
         if page.rank:
-            if ' ssp. ' in page.elab:
+            if ' ssp. ' in elab:
                 rank_str = 'subspecies'
-            elif ' var. ' in page.elab:
+            elif ' var. ' in elab:
                 rank_str = 'variety'
-            elif not page.elab[0].islower() and ' X' in page.elab:
+            elif not elab[0].islower() and ' X' in elab:
                 rank_str = 'hybrid'
             else:
                 rank_str = page.rank.name
