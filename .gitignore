@@ -40,3 +40,4 @@ src/names
 inat/
 log
 data/*.csv
+!data/calpoison.csv

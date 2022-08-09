@@ -5,3 +5,5 @@ genus: n/a
 x:ca
 
 See also {-cotoneasters}.
+
+Edibility: The berries have a pungent and bitter taste when raw; they taste better after being cooked <a href="http://www.ethnoherbalist.com/southern-california-native-plants-medicinal/toyon-berries/">[source]</a>.
