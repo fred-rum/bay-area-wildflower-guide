@@ -9,7 +9,13 @@ from files import *
 from find_page import *
 from page import *
 
+api_pickle_name = 'api.pickle'
+db_version = '1'
+
 inat_dict = {} # iNaturalist (taxon ID) or (rank sci) -> iNat data or None
+used_dict = {} # same as inat_dict, but only for entries that have been used
+
+anc_dict = {} # taxon ID -> list of ancestor taxon IDs
 
 api_called = False # the first API call isn't delayed
 
@@ -34,9 +40,29 @@ req_headers = {'user-agent': 'Bay Area Wildflower Guide - fred-rum.github.io/bay
 #     the fetched data may prepare multiple taxon_ids (as above)
 #   for all new dta, match the inat data to pages (as above)
 
-file_set = get_file_set('inat', 'json')
 
 def read_inat_files():
+    global inat_dict
+    try:
+        with open(f'{root_path}/data/{api_pickle_name}', mode='rb') as f:
+            inat_db = pickle.load(f)
+            if inat_db['version'] == db_version:
+                inat_dict = inat_db['inat_dict']
+    except:
+        pass
+
+    if inat_dict:
+        for inat in inat_dict.values():
+            if inat:
+                inat.apply_info()
+        return
+
+
+    # Code to read old JSON files.  If there aren't any users who are still
+    # using the old JSON files, this can be deleted.
+    global api_called
+    api_called = True
+    file_set = get_file_set('inat', 'json')
     for filename in sorted(file_set):
         try:
             with open(f'{root_path}/inat/{filename}.json', 'r', encoding='utf-8') as r:
@@ -101,15 +127,12 @@ def parse_inat_data(data, name):
         # confusing, so we ignore it.
         return
 
-    if 'ancestors' in data:
-        anc_list =  data['ancestors']
-    else:
-        anc_list = []
-    num_anc = len(anc_list)
+    Inat(data)
 
-    Inat(data, f'{name}.json', name, num_anc)
-    for anc_data in anc_list:
-        Inat(anc_data, f'ancestor of {name}.json', name, num_anc)
+    if 'ancestors' in data:
+        for anc_data in data['ancestors']:
+            Inat(anc_data)
+
 
 # Create a Linnaean link from each page to its iNat parent's page.
 # If we have taxon_id's, we accumulate as many as we can before making
@@ -117,29 +140,36 @@ def parse_inat_data(data, name):
 def link_inat(page_set):
     tid_set = set()
 
-    # Fetch inat data for each child as necessary.
-    page_list = sort_pages(page_set, with_count=False, sci_only=True)
-    for page in page_list:
-        if page.taxon_id:
-            tid_set.add(page.taxon_id)
-        else:
-            get_inat_for_page(page)
+    try:
+        # Fetch inat data for each child as necessary.
+        page_list = sort_pages(page_set, with_count=False, sci_only=True)
+        for page in page_list:
+            if page.taxon_id:
+                tid_set.add(page.taxon_id)
+            else:
+                get_inat_for_page(page)
 
-            # Fetching a taxon by name doesn't get its ancestors.
-            # Therefore we add a query for the parent of each taxon.
-            # Note that any duplicate taxons are discarded.
-            add_parent_tid_to_set(page, tid_set)
+                # Fetching a taxon by name doesn't get its ancestors.
+                # Therefore we add a query for the parent of each taxon.
+                # Note that any duplicate taxons are discarded.
+                add_parent_tid_to_set(page, tid_set)
 
-    #info('initial tid_set')
-    #info(tid_set)
-    while (tid_set):
-        get_inat_for_tid_set(tid_set)
+        #info('initial tid_set')
+        #info(tid_set)
+        while (tid_set):
+            get_inat_for_tid_set(tid_set)
 
-    link_inat2(page_set)
+        link_inat2(page_set)
 
-    for filename in sorted(file_set):
-        #info(f'inat/{filename}.json')
-        delete_file(f'inat/{filename}.json')
+        # We completed all necessary fetches.
+        # Dump all useful entries.
+        dump_inat_db(used_dict)
+    except:
+        # If anything goes wrong, dump everything in the dictionary.
+        # (We don't know the full extent of what's useful, so assume
+        # it all is.)
+        dump_inat_db(inat_dict)
+        raise
 
 
 # link_inat() did the work of initiating page fetches by name or TID.
@@ -161,7 +191,7 @@ def link_inat2(page_set):
                 # We have a scientific name, but no taxon_id.
                 # That implies that we failed to fetch the taxon info
                 # from the iNat API (or JSON files).
-                warn(f'missing iNata data for {child.full()}')
+                warn(f'missing iNat data for {child.full()}')
 
             # On the other hand, if the page has no scientific name
             # and no taxon ID from any source, then skip it.  Note that
@@ -172,7 +202,7 @@ def link_inat2(page_set):
 
         inat_child = get_inat(child.taxon_id, used=True)
         if not inat_child:
-            warn(f'missing iNat data for {child.full()} with taxon_id {child.taxon_id}')
+            warn(f'missing iNat data for {child.full()}')
             continue
 
         if not inat_child.parent_id:
@@ -185,7 +215,8 @@ def link_inat2(page_set):
             warn(f'iNat linking failed due to missing iNat data for parent ID {inat_child.parent_id} from child {child.full()}')
             continue
 
-        parent = inat_parent.page
+        parent = find_page2(inat_parent.com, inat_parent.elab, from_inat=True,
+                            taxon_id=inat_parent.taxon_id)
 
         if not parent or not parent.rank:
             # We expect "stateofmatter Life" to fail.
@@ -209,11 +240,12 @@ def add_parent_tid_to_set(page, tid_set):
     if inat and inat.parent_id:
         # Fetching the parent ID will also fetch all other ancestors,
         # so if any ancestors are already in the queue, remove them.
-        for anc_tid in inat.anc_tid_list:
-            # For some reason, the 'life' taxon (48460) is never returned as
-            # as an ancestor, so we don't treat it as if it will.
-            if anc_tid != '48460':
-                tid_set.discard(anc_tid)
+        if page.taxon_id in anc_dict:
+            for anc_tid in anc_dict[page.taxon_id]:
+                # For some reason, the 'life' taxon (48460) is never returned as
+                # as an ancestor, so we don't treat it as if it will.
+                if anc_tid != '48460':
+                    tid_set.discard(anc_tid)
 
         # Then add only the direct parent ID.
         tid_set.add(inat.parent_id)
@@ -221,31 +253,14 @@ def add_parent_tid_to_set(page, tid_set):
 
 # Get an iNaturalist record or None.
 def get_inat(name, used=False):
-    if not name in inat_dict:
+    if name not in inat_dict:
         return None
 
     inat = inat_dict[name]
 
     if used:
-        if inat:
-            # When a valid record gets used, removed the associated
-            # filename as a candidate for deletion.
-            file_set.discard(inat.filename)
-
-            if inat.num_anc:
-                # This iNat record was part of a chain of ancestors from a
-                # single result.  Remove the filename info from all its
-                # ancestors, since even if they are used they won't
-                # require any additional files.
-                #
-                # For some reason, the 'life' taxon (48460) is never returned
-                # as an ancestor, so we don't treat it as if it will.
-                inat_anc = inat
-                while inat_anc and inat_anc.taxon_id != '48460':
-                    inat_anc.filename = None
-                    inat_anc = get_inat(inat_anc.parent_id)
-        else:
-            return used_fail(name)
+        used_dict[inat.taxon_id] = inat
+        used_dict[name] = inat
 
     return inat
 
@@ -253,7 +268,7 @@ def get_inat(name, used=False):
 # If there's any kind of failure when trying to use iNat data,
 # remove the corresponding file as a candidate for deletion.
 def used_fail(name):
-    file_set.discard(name)
+    used_dict[name] = None
     return None
 
 
@@ -316,10 +331,8 @@ def get_inat_for_page(page):
     data_list = fetch(url)
 
     if len(data_list) != 1:
-        write_inat_data({}, name, url)
         return used_fail(name)
 
-    write_inat_data(data_list[0], name, url)
     parse_inat_data(data_list[0], name)
 
     if page.taxon_id:
@@ -373,15 +386,6 @@ def get_inat_for_tid_set(tid_set):
     # matches the order of the query.
     for data in data_list:
         tid = str(data['id'])
-        write_inat_data(data, tid, url)
-        tid_set.remove(tid)
-
-    # No result returned for these.
-    for tid in tid_set:
-        write_inat_data({}, tid, url)
-
-    for data in data_list:
-        tid = str(data['id'])
         parse_inat_data(data, tid)
 
 
@@ -410,38 +414,24 @@ def fetch(url):
     return data['results']
 
 
-def write_inat_data(data, filename, url):
-    # Make the file a candidate for deletion.
-    # E.g. it could get included by someone else's taxonomic chain
-    # (because two related pages don't have a real link between them,
-    # so they're both allowed to initiate queries).
-    #
-    # Note that if the file contains invalid data, we'd expect it to
-    # be removed again from file_set later when link_inat() tries to
-    # use it.
-    file_set.add(filename)
-
-    json_data = json.dumps(data, indent=2)
-    with open(f'{root_path}/inat/{filename}.json', 'w', encoding='utf-8') as w:
-        today = datetime.date.today().isoformat()
-        w.write('{\n')
-        w.write(f'"date": "{today}",\n')
-        w.write(f'"url": "{url}",\n')
-        w.write('"data":\n')
-        w.write(f'{json_data}\n')
-        w.write('}\n')
-
-
 def apply_inat_names():
-    for inat in inat_dict.values():
+    for inat in used_dict.values():
         if inat:
             inat.apply_names()
+
+
+def dump_inat_db(inat_dict):
+    if api_called:
+        inat_db = {'version': db_version,
+                   'inat_dict': inat_dict}
+        with open(f'{root_path}/data/{api_pickle_name}', mode='wb') as w:
+            pickle.dump(inat_db, w)
 
 
 class Inat:
     pass
 
-    def __init__(self, data, src, filename, num_anc):
+    def __init__(self, data):
         # A taxon_id is circulated internally as a string, not an integer.
         self.taxon_id = str(data['id'])
 
@@ -450,13 +440,9 @@ class Inat:
         # gets discarded as soon as we return.)
         dup_inat = get_inat(self.taxon_id)
         if dup_inat:
-            # When two records come from different queries, the query with
-            # ancestors takes priority for being retained permanently.
-            if not dup_inat.num_anc:
-                dup_inat.update_file_info(filename, num_anc)
             return
 
-        self.update_file_info(filename, num_anc)
+        inat_dict[self.taxon_id] = self
 
         sci = data['name']
         rank = data['rank']
@@ -482,10 +468,10 @@ class Inat:
         else:
             self.parent_id = None
 
-        self.anc_tid_list = []
         if 'ancestor_ids' in data:
+            anc_dict[self.taxon_id] = []
             for anc_tid in data['ancestor_ids']:
-                self.anc_tid_list.append(str(anc_tid))
+                anc_dict[self.taxon_id].append(str(anc_tid))
 
         if 'preferred_establishment_means' in data:
             self.origin = data['preferred_establishment_means']
@@ -507,39 +493,21 @@ class Inat:
         else:
             self.origin = None
 
-        # If iNat data is loaded from a file or is an ancestor thereof,
-        # it might no longer be needed.  If the iNat data creates a shadow
-        # page, but no real page is ever found to be a descendent, then
-        # the iNat data is a candidate for deletion.
-        #
-        # Once all (shadow) taxonomy is prepared, 'used' is changed to True
-        # for each real page and each (shadow) ancestor of a real page.
-        self.used = False
+        self.apply_info()
 
-        inat_dict[self.taxon_id] = self
 
+    def apply_info(self):
         # Find or create a page corresponding to the iNat data.
         # If a page already exists, set (or check) its taxon_id.
         page = find_page2(self.com, self.elab, from_inat=True,
                           taxon_id=self.taxon_id)
-        if page:
-            #info(f'iNat data matched to {page.full()}')
-            pass
-        else:
+        if not page:
             page = Page(self.com, self.elab, shadow=True, from_inat=True,
-                        src=src)
+                        src='iNaturalist API')
             page.set_taxon_id(self.taxon_id)
-            #info(f'iNat data created {page.full()}')
 
         if self.origin:
             page.set_origin(self.origin)
-
-        self.page = page
-
-
-    def update_file_info(self, filename, num_anc):
-        self.filename = filename
-        self.num_anc = num_anc
 
 
     # Associate common names with scientific names.  (Previously we didn't
@@ -547,8 +515,5 @@ class Inat:
     def apply_names(self):
         page = find_page2(self.com, self.elab, from_inat=True,
                           taxon_id=self.taxon_id)
-        if page:
-            #info(f'applied iNat names to {page.full()}')
-            pass
-        else:
+        if not page:
             info(f'no names match for iNat data: {self.com} ({self.elab}), tid={self.taxon_id}')
