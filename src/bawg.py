@@ -759,6 +759,9 @@ if arg('-steps'):
 
 read_data_file('calpoison.csv', read_toxic_plants)
 
+for page in page_array:
+    page.propagate_toxicity()
+
 
 if arg('-steps'):
     info('Writing HTML')

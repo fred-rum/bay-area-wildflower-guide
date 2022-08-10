@@ -4,7 +4,6 @@ import csv
 from error import *
 from find_page import *
 from rank import *
-from page import *
 
 
 table = {
@@ -55,19 +54,26 @@ def read_toxic_plants(f):
         if not page:
             page = find_page2(com, None)
             if page and not page.shadow:
-                if page.elab_calpoison == 'n/a' or page.toxic:
+                if page.elab_calpoison == 'n/a' or page.toxicity_set:
                     continue # ignore it
                 else:
                     warn(f'Toxicity rating specified for scientific name "{elab}", but the common name matched {page.full()}')
-        if not page or page.toxic or page.elab_calpoison == 'n/a':
+        if not page or page.elab_calpoison == 'n/a':
             continue
 
-        page.toxic = True
+        page.set_toxicity(rating_list, detail)
 
-        page.txt += f'<p>\n<a href="https://calpoison.org/topics/plant#toxic" target="_blank" rel="noopener noreferrer">Toxicity</a>{detail}:\n'
-        for rating in rating_list:
-            if rating in table:
-                page.txt += f'<br>\n{rating} &ndash; {table[rating]}\n'
-            else:
-                error(f'Unknown toxicity rating {rating} for {page.full()}')
-        page.txt += '</p>\n'
+
+def calpoison_html(rating_set, detail):
+    if not rating_set:
+        return ''
+
+    clist = []
+    for rating in sorted(rating_set):
+        if rating in table:
+            clist.append(f'{rating} &ndash; {table[rating]}')
+        else:
+            error(f'Unknown toxicity rating {rating} for {page.full()}')
+    return (f'<p>\n<a href="https://calpoison.org/topics/plant#toxic" target="_blank" rel="noopener noreferrer">Toxicity</a>{detail}:\n<br>\n' + 
+            '\n<br>\n'.join(clist) +
+            '\n</p>\n')

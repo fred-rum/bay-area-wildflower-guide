@@ -15,6 +15,7 @@ from easy import *
 from glossary import *
 from parse import *
 from cache import *
+from calpoison import *
 
 ###############################################################################
 
@@ -488,8 +489,9 @@ class Page:
         self.species_complete = None # the same for the species
         self.species_key_incomplete = False
 
-        # Is the taxon toxic according to CalPoison?
-        self.toxic = False
+        # What plant toxin ratings apply according to CalPoison?
+        self.toxicity_set = set()
+        self.toxicity_detail = None
 
         self.txt = ''
         self.key_txt = ''
@@ -1311,6 +1313,23 @@ class Page:
 
         self.taxon_id = taxon_id
         taxon_id_page[taxon_id] = self
+
+    def set_toxicity(self, rating_list, detail):
+        for rating in rating_list:
+            self.toxicity_set.add(rating)
+
+        if self.toxicity_detail == None or detail == '':
+            # The toxic plant list is rather random in its mix of genuses
+            # and species with different details.  When it doubt, expand
+            # to the largest definition.
+            self.toxicity_detail = detail
+        elif self.toxicity_detail != detail and self.toxicity_detail != '':
+            warn(f'{self.full()} is assigned conflicting toxicity details: "{self.toxicity_detail}" and "{detail}"')
+
+    def propagate_toxicity(self):
+        for page in self.child:
+            if not page.toxicity_detail:
+                page.set_toxicity(self.toxicity_set, self.toxicity_detail)
 
     def record_ext_photo(self, label, link):
         if (label, link) in self.ext_photo_list:
@@ -2500,10 +2519,12 @@ class Page:
 
             add_link(elab, None, f'<a href="https://www.allaboutbirds.org/guide/{comurl}/id" target="_blank" rel="noopener noreferrer">AllAboutBirds</a>')
 
-        if self.toxic and self.elab_calpoison != 'n/a':
+        if self.toxicity_set:
             elab = self.choose_elab(self.elab_calpoison)
             elab = format_elab(elab)
             add_link(elab, None, f'<a href="https://calpoison.org/topics/plant#toxic" target="_blank" rel="noopener noreferrer">Poison Control</a>')
+        elif self.elab_calpoison and self.elab_calpoison != 'n/a':
+            warn(f"{self.full()} specifies sci_P but doesn't match any CalPoison data")
 
         link_list_txt = []
         for elab in elab_list:
@@ -3063,6 +3084,9 @@ class Page:
                     w.write('\n')
 
                 w.write(self.txt)
+
+                w.write(calpoison_html(self.toxicity_set,
+                                       self.toxicity_detail))
 
                 if self.photo_dict or self.ext_photo_list or self.txt:
                     w.write('<hr>\n')
