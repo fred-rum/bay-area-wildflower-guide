@@ -46,6 +46,7 @@ from glossary import *
 from cache import *
 from inat import *
 from core import *
+from calpoison import *
 
 if arg('-debug_js'):
     # To avoid confusion when using the unstripped source files,
@@ -752,6 +753,12 @@ def by_incomplete_obs(page):
         return count_flowers(page)
     else:
         return 0
+
+if arg('-steps'):
+    info('Step 15: Parse toxic plant ratings')
+
+read_data_file('calpoison.csv', read_toxic_plants)
+
 
 if arg('-steps'):
     info('Writing HTML')

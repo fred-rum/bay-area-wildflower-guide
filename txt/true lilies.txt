@@ -3,6 +3,7 @@ x:ba
 
 ==leopard lily:L. pardalinum
 color:orange
+sci_P: n/a
 . flower pendent
 . perianth yellow to +- orange
 . grows in +- moist places

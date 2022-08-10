@@ -1,4 +1,5 @@
 sci:Frangula californica
+sci_P:Rhamnus californica
 color: other
 
 genus: false-buckthorns

@@ -461,6 +461,7 @@ class Page:
         self.elab_jepson = None
         self.elab_inaturalist = None
         self.elab_bugguide = None
+        self.elab_calpoison = None
 
         # Alternative common names
         # Must be empty if the common name isn't set.
@@ -474,7 +475,7 @@ class Page:
         # A parent's link to a child may be styled depending on whether the
         # child is itself a key (has_child_key).  Which means that a parent
         # wants to parse its children before parsing itself.  To make sure
-        # that that process doesn't go hayway, we keep track of whether each
+        # that that process doesn't go haywire, we keep track of whether each
         # page has been parsed or not.
         self.parsed = False
 
@@ -486,6 +487,9 @@ class Page:
         self.genus_key_incomplete = False # indicates if the key is complete
         self.species_complete = None # the same for the species
         self.species_key_incomplete = False
+
+        # Is the taxon toxic according to CalPoison?
+        self.toxic = False
 
         self.txt = ''
         self.key_txt = ''
@@ -1238,12 +1242,19 @@ class Page:
             self.elab_jepson = elab
         if 'i' in sites:
             self.elab_inaturalist = elab
-            isci = strip_sci(elab)
-            if isci in isci_page and isci_page[isci] != self:
-                error('{isci_page[isci].full()} and {self.full()} both use sci_i {elab}')
-            isci_page[isci] = self
+            sci = strip_sci(elab)
+            if sci in isci_page and isci_page[sci] != self:
+                error('{isci_page[sci].full()} and {self.full()} both use sci_i {elab}')
+            isci_page[sci] = self
         if 'b' in sites:
             self.elab_bugguide = elab
+        if 'P' in sites:
+            self.elab_calpoison = elab
+            if elab != 'n/a':
+                sci = strip_sci(elab)
+                if sci in cpsci_page and cpsci_page[sci] != self:
+                    error('{cpsci_page[sci].full()} and {self.full()} both use sci_P {elab}')
+                cpsci_page[sci] = self
 
     def set_complete(self, matchobj):
         if matchobj.group(1) == 'x':
@@ -2111,7 +2122,7 @@ class Page:
                 data_object.xcom.append(matchobj.group(1))
                 continue
 
-            matchobj = re.match(r'sci_([fpjib]+):\s*(.+?)$', c)
+            matchobj = re.match(r'sci_([fpjibP]+):\s*(.+?)$', c)
             if matchobj:
                 data_object.set_sci_alt(matchobj.group(1),
                                         self.expand_abbrev(matchobj.group(2)))
@@ -2488,6 +2499,11 @@ class Page:
             comurl = url(birds_com)
 
             add_link(elab, None, f'<a href="https://www.allaboutbirds.org/guide/{comurl}/id" target="_blank" rel="noopener noreferrer">AllAboutBirds</a>')
+
+        if self.toxic and self.elab_calpoison != 'n/a':
+            elab = self.choose_elab(self.elab_calpoison)
+            elab = format_elab(elab)
+            add_link(elab, None, f'<a href="https://calpoison.org/topics/plant#toxic" target="_blank" rel="noopener noreferrer">Poison Control</a>')
 
         link_list_txt = []
         for elab in elab_list:

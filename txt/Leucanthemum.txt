@@ -1,5 +1,6 @@
 com:n/a
 sci:Leucanthemum spp.
+sci_P:Chrysanthemum spp.
 x:hist
 ==oxeye daisy:L. vulgare
 color: white

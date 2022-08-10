@@ -72,5 +72,6 @@ The remaining bay area species are single-digit rare and are not listed in Jepso
 ==plum:P. domestica
 
 ==cherry laurel:P. laurocerasus
+sci_P: Laurocerasus officinalis
 
 ==portuguese laurel:P. lusitanica
