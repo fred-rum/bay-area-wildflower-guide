@@ -1327,10 +1327,38 @@ class Page:
             warn(f'{self.full()} is assigned conflicting toxicity details: "{self.toxicity_detail}" and "{detail}"')
 
     def propagate_toxicity(self):
+        # Only start propagation from the top
+        if not self.parent:
+            self.propagate_toxicity_from_top()
+
+    # If the lower level has no toxicity info, propagate info *down*.
+    # If the upper level has no info, propagate info *up*, keeping only
+    # the toxicity ratings in common across all children.
+    # Wherever the upper level gets its info, if there's any disagreement
+    # among its children, note that in the upper level's detail.
+    def propagate_toxicity_from_top(self):
+        init = False
         for page in self.child:
-            if not page.toxicity_detail:
+            if self.toxicity_set and not page.toxicity_set:
                 page.set_toxicity(self.toxicity_set, self.toxicity_detail)
-                page.propagate_toxicity()
+
+            page.propagate_toxicity_from_top()
+
+            if not init:
+                toxicity_set = page.toxicity_set.copy()
+                toxicity_detail = page.toxicity_detail
+                init = True
+            elif (toxicity_set != page.toxicity_set or
+                  toxicity_detail != page.toxicity_detail):
+                toxicity_detail = ' (see individual species for detail)'
+                toxicity_set &= page.toxicity_set
+
+        if (init and (self.toxicity_set != toxicity_set or 
+                      self.toxicity_detail != toxicity_detail)):
+            if not self.toxicity_set:
+                self.toxicity_set = toxicity_set
+            self.toxicity_detail = toxicity_detail
+
 
     def record_ext_photo(self, label, link):
         if (label, link) in self.ext_photo_list:
