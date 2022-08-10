@@ -3,3 +3,5 @@ color: white, other
 
 genus: spikenards
 x:ca
+
+Edibility: The juicy berries are about the size of peppercorns and have a pungent, ginseng-like flavor <a href="https://klamathsiskiyouseeds.com/2016/02/19/western-aralia-aralia-californica/">[source]</a> and are "pleasant and wholesome" <a href="https://www.flickr.com/photos/tlhowes/9114390190">[source]</a>.  But their acrid nature may irritate your throat <a href="https://www.herbrally.com/monographs/california-spikenard">[source].
