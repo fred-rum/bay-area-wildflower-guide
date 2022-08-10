@@ -11,9 +11,11 @@ color: pale purple, red purple
 . plant 60--180 cm, erect
 . corolla swollen on 1 side, with 5 nectary glands within swelling
 . inflorescence generally 8--16-flowered
+;Edibility: Contains saponins, and saponins make things taste like soap ^https://www.picturethisai.com/wiki/Symphoricarpos_mollis.html .  Sapopins are also toxic, although poorly absorbed.  It would take many kilos of fruit from this plant in order to produce toxic symptoms ^https://pfaf.org/user/Plant.aspx?LatinName=Symphoricarpos+albus .
 
 ==creeping snowberry:S. mollis
 color: pale purple, red purple
 . Plant 15--60 cm, sprawling
 . corolla scarcely or not swollen, 5 nectary glands, 1 below each corolla lobe
 . inflorescence generally 2--8-flowered
+;Edibility: Contains saponins, and saponins make things taste like soap ^https://www.picturethisai.com/wiki/Symphoricarpos_mollis.html .  Sapopins are also toxic, although poorly absorbed.  It would take many kilos of fruit from this plant in order to produce toxic symptoms ^https://pfaf.org/user/Plant.aspx?LatinName=Symphoricarpos+albus .  Not to be confused with a tastier creeping snowberry, <i>Gaultheria hispidula</i>.

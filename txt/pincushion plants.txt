@@ -49,6 +49,8 @@ xx:uncat
 . corolla 5--7 mm, = calyx, throat white, lobes light blue
 
 ==skunkweed:N. squarrosa
+sci_P: n/a
+color: purple
 . anthers included; stigma below anthers
 . corolla 9--12 mm, > calyx, dark blue, lobes 2 mm
 . common

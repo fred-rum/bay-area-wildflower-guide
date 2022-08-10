@@ -2189,6 +2189,11 @@ class Page:
                 sci_page[sci] = data_object
                 continue
 
+            matchobj = re.match(r';(.*)$', c)
+            if matchobj:
+                data_object.txt += matchobj.group(1) + '\n'
+                continue
+
             matchobj = re.match(r'is_top\s*$', c)
             if matchobj:
                 data_object.is_top = True

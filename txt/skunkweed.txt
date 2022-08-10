@@ -1,3 +1,0 @@
-sci:Navarretia squarrosa
-sci_P: n/a
-color: purple

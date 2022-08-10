@@ -7,7 +7,13 @@ Juvenile stems are slender, flexible, and climbing with the aid of small aerial 
 color: other
 . leaves on juvenile stems: <= 35 cm, palmately 3--5-lobed, lobes +- acute
 . hair stellate, white, hair rays spreading
+;"The berries are toxic in large quantities and certainly not regarded as edible." ^https://www.woodland-ways.co.uk/blog/hedgerow-medicines/ivy/
+;
+;Sap causes severe skin irritation.
 
 ==canary islands ivy:H. canariensis
 . leaves on juvenile stems: <= 25 cm, unlobed to shallowly 3-lobed, lobes rounded to acute
 . hair stellate, red-orange, hair rays appressed
+;Edibility: "ornamental but poisonous berries." ^https://plants.ces.ncsu.edu/plants/hedera-canariensis/
+;
+;Sap causes severe skin irritation.

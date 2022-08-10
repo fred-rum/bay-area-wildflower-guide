@@ -15,6 +15,7 @@ color: white
 . petals white, spreading; fruit bright red
 . <b>leaf blade 35--95 mm, 17--45 mm wide</b>, thick, adaxially dark green, lateral veins often sunken
 . common
+;Edibility: not considered edible ^https://pfaf.org/user/Plant.aspx?LatinName=Cotoneaster+coriaceus .
 
 ==silverleaf cotoneaster:C. pannosus
 color: white
@@ -28,6 +29,7 @@ color: pink, salmon
 . plant arching, 1--9 m
 . petals pink or rose, erect; fruit orange to red-orange
 . scattered in the outer coastal range + Berkeley
+;Edibility: Ken Fern has tried it says that it is very mealy and full of seeds. ^https://pfaf.org/user/Plant.aspx?LatinName=Cotoneaster+franchetii But since cotoneasters are generally considered poisonous, it's probably best to leave it alone.
 
 ==entire-leaved cotoneaster:C. integrifolius
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0406+0347
@@ -39,3 +41,5 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0406+0347
 . shrub 0.5--1 m
 . leaf blade blade 4--14 mm, widely elliptic; adaxially +- glabrous, shiny; abaxially sparsely appressed hairy, tip acute
 . very rare: Mt. Tam
+
+Edibility: Almost no one on the internet has tried cotoneaster fruit.  Some sources say that it would take a large amount to harm an adult.  But since the one taste tester seemed unimpressed, you might as well avoid them. ^https://pfaf.org/user/Plant.aspx?LatinName=Cotoneaster+franchetii

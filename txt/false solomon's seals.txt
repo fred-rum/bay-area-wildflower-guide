@@ -23,6 +23,7 @@ color: white
 . Jepson doesn't recognize subspecies, but <a href="http://www.plantsoftheworldonline.org/taxon/urn:lsid:ipni.org:names:538037-1">POWO</a> does
 .. the only subspecies in California is ssp. amplexicaule
 .. a key to subspecies can be found in <a href="http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=242101759">Flora of North America</a>
+;Edibility: The uniformly ruby-colored ripe berries have a nice bitter-sweet flavor.  The pulp is sucked off the hard seed.  The fruit can last a long time while staying edible. ^https://practicalselfreliance.com/solomons-plume-maianthemum-racemosum/ ^https://eflora.neocities.org/Maianthemum%20Sp.html
 
 ==star-flowered lily-of-the-valley:M. stellatum
 color: white
@@ -33,6 +34,7 @@ color: white
 . <b>fruit tan with red speckles and <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0210+1472">bold dark purple stripes</a></b>
 . <b>&gt; 5 leaves</b>, 5--17 cm, (ob)lanceolate to elliptic; <b>petioles 0</b>
 . common
+;Edibility: The berries have a nice bitter-sweet flavor, but may be laxative in large quantities. ^https://pfaf.org/user/Plant.aspx?LatinName=Maianthemum+stellatum
 
 ==western lily of the valley:M. dilatatum
 . <b>perianth parts 4</b>
@@ -40,3 +42,4 @@ color: white
 . 10--50 flowers per inflorescence
 . <b>2--3 leaves</b>, 5--20 cm, cordate to sagittate; <b>petioles 5--15 cm</b>
 . San Bruno, Marin, Mt. Tam
+;Edibility: The ripe berries are either poisonous ^https://bcinvasives.ca/play-your-part/plantwise/grow-me-instead/false-lily-of-the-valley/ or edible but fairly tasteless ^https://www.fs.fed.us/pnw/olympia/silv/ohds/virtual-trail/tour4/station5.html ^https://eflora.neocities.org/Maianthemum%20Sp.html .

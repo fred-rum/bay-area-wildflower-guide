@@ -18,6 +18,7 @@ color: white
 . leaf: simple or compound, leaflets 3(5)
 . sepals: hairy, <b>nonglandular</b> [example,2]
 . fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
+;Edibility: The fruit is sweet and tasty when fully ripe, but can be quite tart if any parts are red.
 
 ==whitebark raspberry:R. leucodermis
 color:white
@@ -27,6 +28,8 @@ color:white
 . leaf: simple or compound, leaflets 3 when older or 5 and shallow-3-lobed when younger
 . sepals: sepals hairy, <b>prickly, +- with stalked glands</b>
 . fruit: <b>raspberry-type</b> (hollow when picked), <b>red-purple to +- black</b>
+;Edibility: Ripe fruit can be eaten raw. ^https://pfaf.org/user/plant.aspx?latinname=Rubus+leucodermis
+
 
 ==salmonberry:R. spectabilis
 color:red purple
@@ -38,6 +41,7 @@ color:red purple
 . <b>petals: magenta</b>
 .. all others are white
 . fruit: raspberry-type, +- yellow to orange to red
+;Edibility: Ripe (yellow-orange or red) fruit is tender and sweet. ^https://pfaf.org/user/plant.aspx?LatinName=Rubus+spectabilis
 
 ==california blackberry:R. ursinus
 color: white
@@ -47,6 +51,7 @@ color: white
 . leaf: simple or compound, leaflets 3(5), gray-hairy abaxially
 . sepals: hairy, <b>prickly</b>, +-with stalked glands [example,2]
 . fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
+;Edibility: The fruit is sweet and tasty when fully ripe, but can be quite tart if any parts are red.
 
 [
 <h2>no prickles</h2>
@@ -62,6 +67,7 @@ color: white
 . sepals hairy, stalked-glandular [example,2]
 . fruit: <b>raspberry-type</b> (hollow when picked), <b>red</b>
 . parasitized by {-thimbleberry gallmaker}
+;Edibility: The fruit has a sweet and pleasant flavor, although it is very seedy. ^https://pfaf.org/User/Plant.aspx?LatinName=Rubus+parviflorus
 
 ==thornless elmleaf blackberry:R. ulmifolius var. anoplothyrsus
 species: elmleaf blackberry
@@ -71,4 +77,5 @@ species: elmleaf blackberry
 . leaf: simple or generally compound, <b>leaflets 3--5</b>
 . sepals: short-hairy, nonglandular
 . fruit: blackberry-type, black
+;Edibility: Ripe fruit is edible.
 ]
