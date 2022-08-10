@@ -99,6 +99,14 @@ def parse_txt(name, s, page, glossary):
 
         child_list = []
 
+    def repl_carat(matchobj):
+        url = matchobj.group(1)
+        next = matchobj.group(2)
+        link = f'<a href="{url}">[source]</a>'
+        if re.match(r'\w', next):
+            return link + ' ' + next
+        else:
+            return link + next
 
     # Figure out which page is most closely related so that glossary_warn
     # can be applied from that page.
@@ -108,6 +116,9 @@ def parse_txt(name, s, page, glossary):
         assoc_page = glossary.page
     else:
         assoc_page = None
+
+    # Replace ^url in the text with a [src] link.
+    s = re.sub(r'\^(http\S*)[^\S\n]*(.|$)', repl_carat, s, flags=re.MULTILINE)
 
     # Replace HTTP links in the text with ones that open a new tab.
     # This must be done before inserting internal links, e.g. ==... or {-...}.
