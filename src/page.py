@@ -1330,6 +1330,7 @@ class Page:
         for page in self.child:
             if not page.toxicity_detail:
                 page.set_toxicity(self.toxicity_set, self.toxicity_detail)
+                page.propagate_toxicity()
 
     def record_ext_photo(self, label, link):
         if (label, link) in self.ext_photo_list:
@@ -2974,7 +2975,7 @@ class Page:
                 desc = f'Key to {what}'
             elif self.child or self.subset_of_page:
                 desc = f'List of {what}'
-            elif self.txt:
+            elif self.txt or self.toxicity_set:
                 desc = f'Description of {what}'
             else:
                 desc = f'Stub for {what}'
