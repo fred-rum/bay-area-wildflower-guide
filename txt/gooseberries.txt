@@ -6,10 +6,11 @@ sci:n/a
 color: red
 . internodes bristly
 . <b>four sepals</b>
-.. all othershave five sepals
+.. all others have five sepals
 . red sepals
 . red petals
 . very long red stamens (anthers red or other)
+;Edibility: Ripe orangish-red berries have unknown palatability. ^http://floranorthamerica.org/Ribes_speciosum
 
 ==oak gooseberry:Ribes quercetorum
 . five sepals
@@ -35,6 +36,7 @@ species: spreading gooseberry
 . leaf blade not glandular
 . internodes bristly or not
 . fruit glabrous (not bristly)
+;Edibility: Ripe purple-black berries are "palatable." ^http://floranorthamerica.org/Ribes_divaricatum
 
 ==bitter gooseberry:Ribes amarum
 . purple-red sepals
@@ -44,6 +46,7 @@ species: spreading gooseberry
 . leaf blade abaxially glandular
 . no bristles between nodes
 . rare in Diablo range
+;Edibility: Ripe purple berries are "palatable." ^http://floranorthamerica.org/Ribes_amarum
 
 ==victor's gooseberry:Ribes victoris
 bristles:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0903+0724
@@ -65,6 +68,7 @@ color: red purple
 . styles glabrous at base
 . leaf blade abaxially glandular
 . <b>dense bristles between nodes</b>
+;Edibility: Ripe reddish-purple berries are "not palatable" ^http://floranorthamerica.org/Ribes_menziesii
 
 ==hillside gooseberry:Ribes californicum
 xx:uncat
@@ -76,4 +80,5 @@ color: red purple
 . leaf blade abaxially nonglandular
 . <b>young stems generally have no bristles between nodes</b>
 .. proximal stem may have dense bristles
+;Edibility: Ripe red berries are "palatable" ^http://floranorthamerica.org/Ribes_californicum
 ]

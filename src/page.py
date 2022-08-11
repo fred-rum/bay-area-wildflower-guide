@@ -462,6 +462,7 @@ class Page:
         self.elab_jepson = None
         self.elab_inaturalist = None
         self.elab_bugguide = None
+        self.elab_gallformers = None
         self.elab_calpoison = None
 
         # Alternative common names
@@ -556,6 +557,7 @@ class Page:
 
         self.taxon_id = None # iNaturalist taxon ID (stored as a string)
         self.bugguide_id = None # BugGuide.net ID (stored as a string)
+        self.gallformers_id = None # gallformers.org (stored as a string)
         self.obs_n = 0 # number of observations
         self.obs_rg = 0 # number of observations that are research grade
         self.parks = {} # a dictionary of park_name : count
@@ -1250,6 +1252,8 @@ class Page:
             isci_page[sci] = self
         if 'b' in sites:
             self.elab_bugguide = elab
+        if 'g' in sites:
+            self.elab_gallformers = elab
         if 'P' in sites:
             self.elab_calpoison = elab
             if elab != 'n/a':
@@ -2257,8 +2261,16 @@ class Page:
             if matchobj:
                 id = matchobj.group(1)
                 if data_object.bugguide_id and id != data_object.bugguide_id:
-                    error(f'conflicting bugg IDs in {data_object.full()}')
+                    error(f'conflicting bug IDs in {data_object.full()}')
                 data_object.bugguide_id = id
+                continue
+
+            matchobj = re.match(r'gall\s*:\s*(\d+|n/a)$', c)
+            if matchobj:
+                id = matchobj.group(1)
+                if data_object.gallformers_id and id != data_object.gallformers_id:
+                    error(f'conflicting gallformers IDs in {data_object.full()}')
+                data_object.gallformers_id = id
                 continue
 
             matchobj = re.match(r'(x|xx):\s*(!?)(.*?)\s*$', c)
@@ -2498,6 +2510,11 @@ class Page:
             elab = self.choose_elab(self.elab_bugguide)
             elab = format_elab(elab)
             add_link(elab, None, f'<a href="https://bugguide.net/node/view/{self.bugguide_id}" target="_blank" rel="noopener noreferrer">BugGuide</a>')
+
+        if self.gallformers_id and self.gallformers_id != 'n/a':
+            elab = self.choose_elab(self.elab_gallformers)
+            elab = format_elab(elab)
+            add_link(elab, None, f'<a href="https://www.gallformers.org/gall/{self.gallformers_id}" target="_blank" rel="noopener noreferrer">Gallformers</a>')
 
         if self.rp_do('link_calflora'):
             # Calflora can be searched by family,

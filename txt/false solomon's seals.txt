@@ -14,10 +14,10 @@ Key features:
 xx:uncat
 color: white
 . perianth parts 6
-. inflorescence is a panicle
-. > 20 flowers per inflorescence
+. inflorescence is a <b>panicle</b>
+.. <b>&gt; 20 flowers</b> per inflorescence
 . <b>perianth 1--2 mm, << stamens</b>
-. <b>fruit tan with red speckles</b> or bright red
+. <b>fruit tan with red speckles</b> (possibly with a greenish stripe without speckles) or bright red
 . <b>&gt; 5 leaves</b>, 7--20 cm, ovate to oblong-elliptic; <b>petioles +- 0</b>
 . common
 . Jepson doesn't recognize subspecies, but <a href="http://www.plantsoftheworldonline.org/taxon/urn:lsid:ipni.org:names:538037-1">POWO</a> does
@@ -28,10 +28,10 @@ color: white
 ==star-flowered lily-of-the-valley:M. stellatum
 color: white
 . perianth parts 6
-. inflorescence is a raceme (or few-branched near base)
-. 5--15 flowers per inflorescence
+. inflorescence is a <b>raceme</b> (or few-branched near base)
+.. <b>5--15 flowers</b> per inflorescence
 . <b>perianth 4--7 mm, &gt; stamens</b>
-. <b>fruit tan with red speckles and <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0210+1472">bold dark purple stripes</a></b>
+. <b>fruit tan with red speckles and <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0210+1472">bold dark purple stripes</a></b> or bright red
 . <b>&gt; 5 leaves</b>, 5--17 cm, (ob)lanceolate to elliptic; <b>petioles 0</b>
 . common
 ;Edibility: The berries have a nice bitter-sweet flavor, but may be laxative in large quantities. ^https://pfaf.org/user/Plant.aspx?LatinName=Maianthemum+stellatum

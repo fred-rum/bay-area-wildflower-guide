@@ -8,6 +8,7 @@ color:other
 . <b>leaf blade 10-15 mm</b>
 .. flat
 . branches spreading
+;Edibility: "The berries are edible and reportedly have a cinnamon-cherry flavor." ^https://missiontimescourier.com/spiny-redberry-stories/ The berries supposedly tinge your body red if you eat very many of them. "^https://books.google.com/books?id=m5LsWJl2cCkC
 
 ==hollyleaf redberry:R. ilicifolia
 color:yellow

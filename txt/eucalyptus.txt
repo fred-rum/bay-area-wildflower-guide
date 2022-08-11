@@ -9,6 +9,8 @@ Key features:
 . flowers/fruit fused at base or free
 . hypanthium shape
 
+All eucalypts are potentially parasitized by {-red gum lerp psyllid}.
+
 ==tasmanian blue gum:E. globulus
 color: white, cream
 . individual flowers in leaf axils, sessile

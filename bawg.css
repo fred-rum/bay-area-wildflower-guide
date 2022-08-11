@@ -80,7 +80,7 @@ a.home-link::before {
 a.glossary {
     text-decoration: none;
     color: inherit;
-    border-bottom: 1px gray dotted;
+    border-bottom: 1px #a8a8a8 dotted;
 }
 a.glossary-jepson {
     text-decoration: none;
@@ -627,7 +627,9 @@ p.names {
     margin-left: 8px;
 }
 .origin:hover {
-    width: 100px;
+    width: auto;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 .endemic {
     background-color: #c00;

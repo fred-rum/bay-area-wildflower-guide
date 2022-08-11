@@ -1,5 +1,10 @@
 sci:family Rhyparochromidae
+bug:44395
 
 ==mediterranean seed bug:Xanthochilus saturnius
 bug:102853
 x:ca
+
+==n/a:genus Ozophora
+bug:44400
+x:more

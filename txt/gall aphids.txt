@@ -2,9 +2,7 @@ sci:n/a
 
 ==manzanita leafgall aphid:Tamalia coweni
 bug:214155
+gall:2793
 x:more:There are likely other species in the bay area, but none have been identified on iNaturalist yet.
-
-More information may be found in <a href="http://sharkeylab.org/sharkeylab/Misc/pdf/cooc_tamalia_coweni.pdf">this paper</a>.
-
 . causes signifant swelling and distortion of the leaf edge, unlike {-azalea gall}, which causes only a minor buckling of the leaf surface
-bug:214155
+More information may be found in <a href="http://sharkeylab.org/sharkeylab/Misc/pdf/cooc_tamalia_coweni.pdf">this paper</a>.

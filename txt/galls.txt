@@ -29,6 +29,18 @@ Nancy Asquith has tons of <a href="https://www.inaturalist.org/projects/californ
 ==gall sawflies
 
 ==gall aphids
+
+==red gum lerp psyllid:Glycaspis brimblecombei
+bug:270868
+gall:n/a
+. lerps aren't actually galls, and they can easily be brushed off the host's surface
+. parasitizes {-river redgum} and {-forest red gum} by preference, but also parasitizes other {-Eucalyptus}.
+
+==n/a:Iteomyia s-lasiolepis-tooth-gall
+bug:n/a
+gall:3628
+sci_i:n/a
+
 ]
 
 ==gall and rust mites

@@ -261,6 +261,8 @@ def parse_core_chains():
             elab = page.name
         elif page.elab_inaturalist:
             elab = page.elab_inaturalist
+            if elab == 'n/a':
+                continue
         elif page.elab:
             elab = page.elab
         else:

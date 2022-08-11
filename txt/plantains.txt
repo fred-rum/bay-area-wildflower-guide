@@ -23,6 +23,7 @@ color: white, other
 . very common
 
 ==california plantain:P. erecta
+acom:dot-seed plantain
 color: white
 . corolla tube glabrous [but generally obscured by sepals]
 . peduncle not grooved

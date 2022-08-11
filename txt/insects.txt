@@ -42,3 +42,5 @@ bug:156092
 ==gall sawflies
 
 ==gall aphids
+
+==red gum lerp psyllid

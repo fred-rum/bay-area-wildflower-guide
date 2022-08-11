@@ -10,6 +10,7 @@ xx:more
 . filaments +- hairy
 . twigs not angled, +- gray [often reddish distally]
 . fruit black [or red or ?blue?], glaucous or not
+;Edibility: a larger, blacker berrier will usually be sweeter and juicier, but even a mid-sized speckled-blue berry can be tasty.
 
 ==dwarf bilberry:V. cespitosum
 . leaves deciduous, thin or +- thick, veins generally prominent abaxially

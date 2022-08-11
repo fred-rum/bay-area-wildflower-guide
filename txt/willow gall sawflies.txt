@@ -4,18 +4,22 @@ bug:557284
 
 ==willow apple gall sawfly:E. californica
 bug:n/a
+gall:3539
 . smooth red blister(s) on leaf face
 
 ==willow gall sawfly:E. proxima
 bug:n/a
+gall:3539
 . lumpy red blister(s) on leaf face
 
 ==arroyo willow stem sawfly:E. lasiolepis
 bug:n/a
+gall:3620
 . lump(s) in/around a twig
 
 ==willow stem sawfly:E. exiguae
 bug:n/a
+gall:3617
 . tapered brown bulge within a twig
 
 See also {-willow gall midges}.

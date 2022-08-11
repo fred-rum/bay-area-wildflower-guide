@@ -6,9 +6,9 @@ ID tips are from the <a href="Invasive Species Compendium">https://www.cabi.org/
 color: yellow
 . pale/dingy yellow flowers
 . densely pubescent
-;Edibility: The fruit has a delicious bitter-sweet flavour.  All other parts (including the calyx that wraps the fruit) are toxic. ^https://pfaf.org/user/plant.aspx?latinname=Physalis+peruviana
+;Edibility: The ripe fruit has a delicious bitter-sweet flavour.  All other parts (including the calyx that wraps the fruit) are toxic. ^https://pfaf.org/user/plant.aspx?latinname=Physalis+peruviana ^https://books.google.com/books?id=m5LsWJl2cCkC
 
 ==large-flowered tomatillo:Physalis philadelphica
 . bright yellow flowers [although many photos show it paler]
 . only sparsely pubescent
-;Edibility: The fruit is edible.  All other parts (including the calyx that wraps the fruit) are toxic. ^https://pfaf.org/user/plant.aspx?latinname=Physalis+philadelphica
+;Edibility: The ripe fruit is edible.  All other parts (including the calyx that wraps the fruit) are toxic. ^https://pfaf.org/user/plant.aspx?latinname=Physalis+philadelphica ^https://books.google.com/books?id=m5LsWJl2cCkC

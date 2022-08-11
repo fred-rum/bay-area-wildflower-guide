@@ -1509,5 +1509,8 @@ Should autocomplete ask for 2 results to see if there are multiple matches
   for the same name and rank?
 Should I get the kingdom IDs first to use as disambiguators?
 
-propagate endemic/native/alien status up the page hierarchy when consistent
-  e.g. snowberries, false solomon's seals
+Allow multiple forms of the same organism
+  e.g. butterflies and caterpillars, insects and multiple gall types
+  complicates every page lookup
+  complicates Linnaean relationships if form is not the bottommost rank
+    is this what the "form" rank is for?

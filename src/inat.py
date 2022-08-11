@@ -328,7 +328,7 @@ def get_inat_for_page(page):
     if not arg('-api'):
         return used_fail(name)
 
-    data_list = fetch(url)
+    data_list = fetch(url, name)
 
     if len(data_list) != 1:
         return used_fail(name)
@@ -379,7 +379,7 @@ def get_inat_for_tid_set(tid_set):
 
     url = f'https://api.inaturalist.org/v1/taxa/{tid_str}{query}'
 
-    data_list = fetch(url)
+    data_list = fetch(url, tid_str)
 
     # If a taxon_id is bogus or inactive, the results will be missing
     # that result.  So we can't assume that the order of the results
@@ -389,7 +389,7 @@ def get_inat_for_tid_set(tid_set):
         parse_inat_data(data, tid)
 
 
-def fetch(url):
+def fetch(url, name):
     global api_called
     if api_called:
         if arg('-api_delay'):
@@ -401,7 +401,7 @@ def fetch(url):
         time.sleep(delay)
     api_called = True
 
-    info(url)
+    info(f'Fetching from iNaturalist API: {name}')
     r = requests.get(url, headers=req_headers)
     json_data = r.text
     try:

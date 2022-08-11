@@ -74,6 +74,7 @@ For most flowering plants, these terms define the organization of flowers within
 figure:california poppy fruit
 
 {fruit,fruits,fruiting} A seed-bearing body (or a joined aggregation of multiple bodies), developing from one or more ovaries and possibly other associated structures. [figure:california poppy fruit]
+{berry,berries} Botanically, a fruit that developed from a single flower in which the ovary wall becomes the fleshy portion of the fruit.  But in common usage (including the BAWG), it is simply a small, soft or juicy fruit or bite-sized collection of fruits from the same inflorescence.
 {beak,beaks} A projection from the distal end of a fruit.
 
 <h2>Hair</h2>

@@ -10,7 +10,7 @@ Key features:
 . stigma shape
 . spathes opposite or alternate (the spathes are the lowest bracts when there is more than one flower per inflorescence)
 
-Parts of an iris labeled: <a href="https://www.pacificcoastiris.org/wildiris_three_main_groups.html">one</a>, <a href="https://leonineiris.com/l9ie_partsoftheirisflower.php">two</a>.<br>
+Parts of an iris labeled: <a href="https://www.pacificcoastiris.org/wildiris_three_main_groups.php">one</a>, <a href="https://leonineiris.com/l9ie_partsoftheirisflower.php">two</a>.<br>
 
 The perianth tube is measured from the base of the stamens to the top of the ovary.  (<a href="http://www.pacificcoastiris.org/spcni_downloads/spcni.v09.1.fall1981.pdf">How to measure</a> iris parts starting on page 11.)
 
@@ -98,7 +98,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0711+1100
 . scattered; moist, coastal prairie or open coastal forest
 
 ==stinking iris:I. foetidissima
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0515+0674
+color: cream, purple
 . perianth <b>pale yellow to brown, red-brown, or green</b>, veined green or red-brown
 . <b>perianth tube 11--14 mm</b>, constricted near ovary
 . stem generally branched, 25--40 cm

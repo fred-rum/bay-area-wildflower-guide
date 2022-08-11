@@ -436,7 +436,8 @@ for page in page_array:
     #
     # This may miss some ancestor pages if the leaf page doesn't have
     # a scientific name.  But that would be unusual, and it's a pain to fix.
-    if (page.sci or page.taxon_id) and not page.shadow and not page.child:
+    if (((page.sci and page.elab_inaturalist != 'n/a') or page.taxon_id)
+        and not page.shadow and not page.child):
         page_set.add(page)
 link_inat(page_set)
 

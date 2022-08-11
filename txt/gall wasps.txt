@@ -3,6 +3,7 @@ bug:14878
 
 ==california gall wasp:Andricus quercuscalifornicus
 bug:130468
+gall:772
 . parasitizes white {-oaks}
 . a large tan gall that looks similar to a the flower#fruit of {-california buckeye}
 .. oak gall is attached directly to a branch, may be on a plant#tree with plant#leaves, may be lumpy, has no lines on which to split
@@ -15,27 +16,32 @@ bug:362927
 
 ==ruptured twig gall wasp:Callirhytis perdens
 bug:168095
+gall:1308
 . parasitizes black {-oaks}
 . after the stem ruptures, the fissures turn black
 .. other stem galls of black oaks don't create black fissures
 
 ==live oak apple gall wasp:Amphibolips quercuspomiformis
 bug:147536
+gall:1313
 . parasitizes {-coast live oak} and {-interior live oak}.
 . different gall forms in spring vs. summer
 
 ==chinquapin flower gall wasp:Dryocosmus castanopsidis
 bug:n/a
+gall:1732
 . parasitizes both local {-Chrysolepis} species.
 . a pale red berry-like gall nestled among the flower#flowers.
 .. the gall is actually a deeper red, but is covered in a yellow/orange blush which can easily be rubbed off.
 
 ==spiny leaf gall wasp:Diplolepis polita
 bug:192706
+gall:1476
 x:more
 . parasitizes {-roses}
 
 ==thimbleberry gallmaker:Diastrophus kincaidii
 bug:617964
+gall:1027
 x:ca
 . parasitizes {-thimbleberry}

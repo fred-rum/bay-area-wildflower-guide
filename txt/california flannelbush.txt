@@ -1,0 +1,5 @@
+sci:Fremontodendron californicum
+color:yellow
+
+genus:flannelbushes
+x:ba

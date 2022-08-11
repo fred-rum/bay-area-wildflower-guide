@@ -1,0 +1,13 @@
+sci:genus Crataegus
+x:rare
+
+==common hawthorn:C. monogyna
+color:white
+. leaves are deeply lobed, sometimes almost to the midrib
+. flower has 1 style
+. fruit is round and has 1 seed
+
+==midland hawthorn:Crataegus laevigata
+. leaves are shallowly lobed with forward-pointing lobes
+. flower has > 1 style
+. fruit is somewhat oval in cross section and has > 1 seed

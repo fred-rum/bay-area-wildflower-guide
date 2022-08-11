@@ -6,3 +6,5 @@ xx:ba
 ==n/a:Ribes malvaceum ssp. viridifolium
 sci_fpj:Ribes malvaceum var. viridifolium
 . found at Pinnacles
+
+Edibility: Ripe purplish berries are "dry and tasteless" ^https://davesgarden.com/guides/articles/view/4666 or "palatable" ^http://floranorthamerica.org/Ribes_malvaceum .
