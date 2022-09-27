@@ -45,3 +45,17 @@ bug:617964
 gall:1027
 x:ca
 . parasitizes {-thimbleberry}
+
+==round leaf gall wasp:Heteroecus flavens
+bug:n/a
+gall:2100
+x:more
+. outside the bay area, parasitizes huckleberry oak
+. within the bay area, ID'ed by iNaturalist on {-canyon live oak}, but I haven't seen confirmation that it is the same wasp
+.. some observations look like a poor match, but <a href="https://www.inaturalist.org/observations/134387649">some</a> look correct
+
+==beaked spindle gall wasp:Heteroecus pacificus
+bug:357785
+gall:1958
+. parasitizes {-canyon live oak}
+x:more

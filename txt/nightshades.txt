@@ -56,6 +56,7 @@ color:white
 
 ==greenspot nightshade:S. douglasii
 color: white
+acom:douglas nightshade
 . infloresecnce rarely forked
 .. <b>peduncle 1.5--4 cm long</b>; <b>pedicels 10--41 mm long</b>, 0.3--0.4 mm in diameter at the base and 0.4--0.6 mm in diameter at the apex
 . corolla: <b>13--15+ mm diameter</b> including lobes, white, possibly tinged with lavender, w/ yellow/green spots at base often with a brown tinge or margin

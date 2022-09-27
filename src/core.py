@@ -209,7 +209,10 @@ def convert_rank_str_to_elab(rank_str, sci):
 
 def find_data(page, sci, rank_str, kingdom, tid):
     if sci not in core_dict:
-        warn(f"The DarwinCore data doesn't include a scientific name that matches {page.full()}")
+        if arg('-core'):
+            warn(f"The DarwinCore data doesn't include a scientific name that matches {page.full()}")
+        else:
+            warn(f"The cached DarwinCore data doesn't include a scientific name that matches {page.full()}.  Try again with '-core'?")
         return None
 
     data_list = core_dict[sci]

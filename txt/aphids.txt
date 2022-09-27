@@ -1,3 +1,7 @@
 sci:family Aphididae
 
 ==gall aphids
+
+==woolly alder aphid:Prociphilus tessellatus
+x:more
+bug:157195

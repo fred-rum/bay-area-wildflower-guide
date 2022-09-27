@@ -43,6 +43,7 @@ color:white
 . less common
 
 ==bitter cherry:P. emarginata
+color: white
 . 6--12 flowers per inflorescence
 . ovary, fruit glabrous
 . less common

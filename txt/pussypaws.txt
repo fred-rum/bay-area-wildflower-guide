@@ -1,0 +1,30 @@
+sci:genus Calyptridium
+x:ba
+
+==one-seeded pussypaws:C. monospermum
+color: purple, red purple
+. style 2--4 mm, exserted
+. >= 2 inflorescences per rosette
+. cauline leaves generally present
+. petals are rose to white
+. near Quail Hollow (Ben Lomaond area)
+
+==mount hood pussypaws:C. umbellatum
+. style 2--4 mm, exserted
+. generally 1 inflorescence per rosette
+. generally no cauline leaves
+. petals are white only
+. Calflora claims it's in the same area as {-one-seeded pussypaws}, but it has not yet been observed in the bay area on iNaturalist
+
+==common pussypaws:C. monandrum
+. style < 2 mm, generally included
+. generally 3 petals per flower
+. 1 stamen per flower
+. Calflora claims it's in Henry Coe, but it has not yet been observed in the bay area on iNaturalist
+
+==santa cruz mountains pussypaws:C. parryi var. hesseae
+species:n/a
+. style < 2 mm, generally included
+. 4 petals per flower
+. usually 3 stamens per flower
+. Calflora claims it's south of the bay, both east and west, but it has not yet been observed in the bay area on iNaturalist

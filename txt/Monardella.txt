@@ -33,15 +33,15 @@ color: pale purple, purple
 . common
 
 ==mountain monardella:M. odoratissima ssp. pallida
+color: pale purple, white
 xx:ba
-white corolla<br>short stem hairs:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1109+2256
 species: mountain coyote mint
 . subshrub with 1--many main stems
 . 1 flower cluster per main stem
 . stem sparsely hairy, hairs < 0.3 mm
 . leaf margin not wavy
 . <b>corolla generally white</b> (occasionally purple tinged)
-. Big Basin
+. Calflora has one observation in Big Basin, but iNaturalist has never confirmed it
 
 ==serpentine monardella:M. purpurea
 glabrous stem:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0616+2198

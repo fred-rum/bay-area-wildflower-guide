@@ -1,0 +1,5 @@
+sci: Chamaenerion angustifolium
+x:ba
+color: purple
+
+genus:fireweeds

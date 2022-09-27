@@ -51,6 +51,7 @@ props = {
     'link': 'fd',
     'member_link': 'd',
     'member_name': 'd',
+    'member_com_simple': 'd',
     'member_name_alias': 'd',
     'no_sci': 'f',
     'no_com': 'f',
@@ -2014,7 +2015,10 @@ class Page:
 
     def apply_prop_member(self):
         if ((not self.shadow and self.rp_do('member_link')) or
-            (self.shadow and self.rp_do('member_name'))):
+            (self.shadow and (self.rp_do('member_name') or
+                              (self.rp_do('member_com_simple') and
+                               self.com and
+                               ' and ' not in self.com)))):
             self.propagate_membership(self)
 
     def apply_prop_checks(self):
@@ -2523,7 +2527,8 @@ class Page:
             sci = strip_sci(elab, keep='b')
             sciurl = url(sci)
             elab = format_elab(elab)
-            add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={sciurl}" target="_blank" rel="noopener noreferrer">Calflora</a>');
+            #add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/cgi-bin/specieslist.cgi?namesoup={sciurl}" target="_blank" rel="noopener noreferrer">Calflora</a>');
+            add_link(elab, self.elab_calflora, f'<a href="https://www.calflora.org/entry/psearch.html?namesoup={sciurl}" target="_blank" rel="noopener noreferrer">Calflora</a>');
 
         if self.rp_do('link_calphotos'):
             # CalPhotos cannot be searched by high-level classifications.

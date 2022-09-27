@@ -3,3 +3,5 @@ color: red, red purple, purple
 
 genus: bead lilies
 x:ba
+
+Ediblity: Berries are "beautiful but poisonous". ^https://baynature.org/article/berries-of-the-forest/

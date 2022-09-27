@@ -11,7 +11,7 @@ Key features:
 . leaves with or without petioles
 
 ==solomon's plume:M. racemosum
-xx:uncat
+xx:Jepson does not recognize subspecies, so neither do I.  However, if subspecies are recognized, CA has only the western subspecies, ssp. <i>amplexicaule</i>.
 color: white
 . perianth parts 6
 . inflorescence is a <b>panicle</b>

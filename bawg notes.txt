@@ -1514,3 +1514,7 @@ Allow multiple forms of the same organism
   complicates every page lookup
   complicates Linnaean relationships if form is not the bottommost rank
     is this what the "form" rank is for?
+
+use this form of search if a gallformers_id is provided
+  and the name isn't at rank species or lower
+https://www.inaturalist.org/observations/chris_nelson?order_by=observed_on&field:Gallformers%20Code=a-spp-whole-shoot-discoloration

@@ -7,11 +7,13 @@ color: pink, red purple, other
 . rare
 
 ==white-veined wintergreen:P. picta
-. flower bract <= pedicel
+color: pink, red purple, cream, white
+. individual flower bract length <= pedicel
+.. photos also indicate that the bract is wider at the base and distinctly cupped around the pedicel
 . leaf blades generally present, 2.5--7 cm, dark green with white mottling on veins adaxially
 . rare
 
 ==bog wintergreen:P. asarifolia
-. flower bract >> pedicel
+. individual linear flower bract length >> pedicel
 . leaf blades well developed, adaxially +- shiny
 . extremely rare; Big Basin

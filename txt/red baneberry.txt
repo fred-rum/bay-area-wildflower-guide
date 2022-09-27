@@ -5,3 +5,5 @@ genus: baneberries and cohoshes
 x:ca
 
 family:buttercup family
+
+Edibility: "The common name makes reference to a potent poison concentrated in the fruits." ^https://baynature.org/article/berries-of-the-forest/

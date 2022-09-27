@@ -93,6 +93,7 @@ color: other
 . acorn nut shell +- woolly inside
 . evergreen
 . common
+. parasitized by {-round leaf gall wasp} (maybe)
 
 ]
 [

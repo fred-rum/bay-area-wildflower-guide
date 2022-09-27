@@ -191,7 +191,10 @@ def link_inat2(page_set):
                 # We have a scientific name, but no taxon_id.
                 # That implies that we failed to fetch the taxon info
                 # from the iNat API (or JSON files).
-                warn(f'missing iNat data for {child.full()}')
+                if arg('-api'):
+                    warn(f"Unable to fetch data for {child.full()} from the iNaturalist API")
+                else:
+                    warn(f"The cached iNaturalist API data doesn't include {child.full()}.  Tray again with '-api'?")
 
             # On the other hand, if the page has no scientific name
             # and no taxon ID from any source, then skip it.  Note that
