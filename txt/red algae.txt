@@ -3,3 +3,6 @@ end_hierarchy
 
 ==n/a:Prionitis lanceolata
 x:more
+
+==turkish towel:Chondracanthus exasperatus
+x:more

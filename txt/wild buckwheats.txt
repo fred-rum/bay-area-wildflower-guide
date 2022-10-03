@@ -32,6 +32,7 @@ color: white, pink, salmon, red, red purple, other
 . uncommon
 
 ==seacliff wild buckwheat:E. parvifolium
+color: white, pink, salmon
 . flowers are clustered, glabrous
 . shrub
 . leaf blades narrow to round, not clustered

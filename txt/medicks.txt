@@ -38,6 +38,9 @@ color: yellow
 . stipules entire or toothed
 . <b>corolla 2--3 mm, yellow</b>
 . uncommon
+. looks similar to {-lesser hop trefoil}, but black medick has the following characteristics:
+.. leaf is hairy everywhere, has a distinct tip
+.. elliptical tan fruit is hidden by drooping flower petals
 
 ==alfalfa:M. sativa
 . glabrous or puberulent

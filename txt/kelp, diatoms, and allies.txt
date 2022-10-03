@@ -2,3 +2,12 @@ sci:kingdom Chromista
 end_hierarchy
 
 ==bull kelp:Nereocystis luetkeana
+x:any
+. long, narrow blades growing from a bulbous float
+
+==giant kelp:Macrocystis pyrifera
+x:any
+. blades growing all along its stem
+
+==feather boa kelp:Egregia menziesii
+x:any

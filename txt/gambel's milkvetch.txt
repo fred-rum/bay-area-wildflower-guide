@@ -1,5 +1,0 @@
-sci:Astragalus gambelianus
-color: pale purple
-
-genus: milkvetches
-x: more

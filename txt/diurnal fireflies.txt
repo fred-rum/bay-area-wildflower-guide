@@ -1,4 +1,5 @@
 sci:genus Ellychnia
+bug:4867
 
 ==california glowworm:Ellychnia californica
 bug:251917

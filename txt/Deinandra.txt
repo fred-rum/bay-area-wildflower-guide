@@ -1,0 +1,18 @@
+com:n/a
+sci:genus Deinandra
+x:rare
+
+==kellogg's tarweed:D. kelloggii
+. 5 ray flowers
+. 6 disk flowers
+
+==livermore tarplant:D. bacigalupii
+. +-8 ray flowers
+. 15--18 disk flowers
+. anthers yellow or +- brown
+
+==coastal tarweed: D. corymbosa
+color: yellow
+. 15--35 ray flowers
+. 24--70 disk flowers
+. anthers +- red to dark purple

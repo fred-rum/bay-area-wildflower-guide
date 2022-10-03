@@ -5,6 +5,8 @@ x:ca
 This genus was split off from the "true" solomon's seals (Polygonatum spp.),
 which are not found in California.
 
+See also the {-american fairybells}, which have a thinner, branched, woody stem.
+
 Key features:
 . 4 or 6 perianth parts
 . perianth > stamens or << stamens

@@ -204,8 +204,11 @@ color: yellow
 ==lesser hop trefoil:T. dubium
 color: yellow
 . Leaflets: 3, <b>pinnate, petioles of mid-leaves generally < leaflets</b>
-. Inflorescence: <b>head- to +- spike-like, 4--8 mm wide</b>, 5--10(20)-flowered; flowers quickly reflexed
-. Corolla: 3.5--4 mm, <b>bright yellow</b>, brown in age, <b>weak-striate</b>
+. inflorescence: <b>head- to +- spike-like, 4--8 mm wide</b>, 5--10(20)-flowered; flowers quickly reflexed
+. corolla: 3.5--4 mm, <b>bright yellow</b>, brown in age, <b>weak-striate</b>
+. looks similar to {-black medick}, but lesser hop trefoil has the following characteristics:
+.. leaf is hairy only abaxially along the main vein, does not have a distinct tip
+.. curved fruit is exposed, black when ripe
 
 [
 <h3>pedicels 1--6 mm, +- equal<br>

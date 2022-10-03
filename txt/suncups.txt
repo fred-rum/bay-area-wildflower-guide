@@ -1,0 +1,15 @@
+sci:Camissoniopsis
+x:!rare
+
+See also {-sun cup}.
+
+==california sun cup:C. bistorta
+. very rare
+
+==beach suncup:C. cheiranthifolia
+
+==hairy suncup:C. hirtella
+
+==intermediate suncup:C. intermedia
+
+==miniature suncup:C. micrantha

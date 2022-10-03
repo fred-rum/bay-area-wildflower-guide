@@ -18,6 +18,7 @@ CalFlora and Jepson have this species correctly in Platanthera.
 ==sierra bog orchid:P. dilatata var. leucostachys
 sci_fpj:Platanthera dilatata var. leucostachys
 xx:ca
+color:white
 species: white bog orchid
 . <b>2 leaves, alternate, along stem, with 1 lengthwise fold</b>
 . perianth white to cream

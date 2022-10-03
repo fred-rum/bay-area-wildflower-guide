@@ -1,6 +1,7 @@
 com:n/a
 sci:Baccharis spp.
 x:ba
+
 ==coyote brush:B. pilularis
 color: other
 . leaf blade 5--40 mm long, 2--15 mm wide, <b>obovate or oblanceolate</b>, gland-dotted [but unknown stickiness]
@@ -8,6 +9,7 @@ color: other
 . parasitized by the {-coyote brush bud gall midge} and {-coyote brush stem gall moth}.
 
 ==marsh baccharis:B. glutinosa
+color:white
 . leaf blades linear, lanceolate, elliptic, oblong to narrowly oblanceolate
 . leaf blade < 130 mm long, 8--30 mm wide, lanceolate, lance-elliptic or oblong to narrowly oblanceolate, faces generally sticky
 . perennial herb, forming large colonies

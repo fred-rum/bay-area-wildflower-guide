@@ -139,9 +139,7 @@ def read_core_zip(zip_fd):
                       'class',
                       'phylum',
                       'kingdom'):
-                if (get_field(r) and r != rank_str and
-                    not (r == 'genus' and
-                         rank_str in ('subgenus', 'section', 'subsection'))):
+                if get_field(r) and r != rank_str:
                     parent_rank_str = r
                     parent_sci = get_field(r)
                     break

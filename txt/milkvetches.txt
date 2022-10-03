@@ -1,0 +1,30 @@
+sci:genus Astragalus
+x:rare
+
+==gambel's milkvetch:A. gambelianus
+color: pale purple
+. flower +-3mm
+.. all others > 3 mm
+. fruit +-3--4 mm
+.. all others > 4 mm (sort of)
+
+==brewer's milkvetch:A. breweri
+. banner 8--12 mm long
+. fruit body 5--10mm, tapered to a beak about as long as the body (hooked or not)
+
+==alkali milkvetch:A. tener
+. banner 5--12 mm long
+. fruit 6--50 mm long, +-2--3 mm wide
+
+==marsh milkvetch:A. pycnostachyus
+. banner 7--10 mm long
+. fruit has a long, hooked beak
+
+==nuttall's milkvetch:A. nuttallii
+color: white, cream, pale purple
+. banner 10--15 mm long
+. fruit's beak is not long or hooked
+
+==san joaquin milkvetch:A. asymmetricus
+. banner 12--18 mm long
+. fruit's beak is not long or hooked

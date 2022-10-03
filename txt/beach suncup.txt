@@ -1,0 +1,8 @@
+sci:Camissoniopsis cheiranthifolia
+
+==beach evening-primrose:ssp. cheiranthifolia
+color:yellow
+. perennial herb
+
+==shrubby beach primrose:ssp. suffruticosa
+. (very small) subshrub

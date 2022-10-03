@@ -27,6 +27,7 @@ color: other, cream
 . Coe, Sunol
 
 ==beach wormwood:A. pycnocephala
+color: yellow, other
 . directly on the coast
 
 ==biennial wormwood:A. biennis

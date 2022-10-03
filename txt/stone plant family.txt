@@ -1,7 +1,19 @@
 sci:family Aizoaceae
 
-==sea figs
-. flower diameter >= 3 cm
-
 ==ice plants
 . flower diameter <= 3 cm
+
+==sea figs
+. flower diameter >= 3 cm
+. no basal rosette
+. cauline leaves generally alternate
+
+==pig's-root:Conicosia pugioniformis
+genus:conefigs
+color: yellow
+x:ca
+xx:CalFlora and Jepson don't recotnize or distinguish subspecies.
+. flower diameter 5--8 cm
+. basal rosette present
+. cauline leaves opposite
+. Presidio, Lake Merced, and Monterey
