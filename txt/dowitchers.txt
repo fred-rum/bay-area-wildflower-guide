@@ -1,0 +1,12 @@
+sci:genus Limnodromus
+x:ca
+
+==long-billed dowitcher:L. scolopaceus
+. generally a longer bill, but length range overlaps {-short-billed dowitcher}.
+. "chunky"
+. photos and text at allaboutbirds.com hints that it has a distinctive shoulder hump when foraging
+
+==short-billed dowitcher:L. griseus
+. generally a shorter bill, but length range overlaps {-long-billed dowitcher}.
+. "slimmer underbelly"
+. photos and text at allaboutbirds.com hints that it has a flat back when foraging

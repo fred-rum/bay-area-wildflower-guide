@@ -1,6 +1,8 @@
 sci:Solidago spp.
 x:hist
 
+See also {-western goldenrod}.
+
 ==california goldenrod:S. velutina ssp. californica
 color: yellow
 species: velvety goldenrod

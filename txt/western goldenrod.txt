@@ -1,0 +1,6 @@
+sci:Euthamia occidentalis
+color:yellow
+x:ba
+genus:grass-leaved goldenrods
+
+See also {-goldenrods}.

@@ -38,4 +38,5 @@ xx:Only ssp. <i>densiflora</i> is found in the bay area.
 . corolla linear, pouches +- 2 mm wide
 . <b>stigma included</b>
 . corolla white, purple-dotted
+.. CalPhotos shows that it may have dark purple spots, but no large area of pink
 . scattered

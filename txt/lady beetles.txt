@@ -3,14 +3,17 @@ sci:family Coccinellidae
 Lady beetles can usually be distinguished by the pattern of dark spots
 on the carapace and the pattern of white markings on the none#head.
 
-==seven-spotted lady beetle:Coccinella septempunctata
-bug:3543
-
 ==convergent lady beetle:Hippodamia convergens
 bug:8374
+. spots may be distinct, indistinct, or absent
 
 ==california lady beetle:Coccinella californica
 bug:65466
+. no spots
+
+==seven-spotted lady beetle:Coccinella septempunctata
+bug:3543
+. spots are diagnostic
 
 ==asian lady beetle:Harmonia axyridis
 bug:397

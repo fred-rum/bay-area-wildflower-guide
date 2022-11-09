@@ -1,0 +1,11 @@
+sci:genus Croton
+x:ba
+
+==turkey mullein:C. setiger
+color:other
+. dioecious
+. 3 styles, each with 2 lobes, each lobe with 2 forks
+
+==california croton:C. californicus
+. monoecious
+. 1 simple style

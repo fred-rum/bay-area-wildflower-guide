@@ -96,8 +96,9 @@ Example drawings are <a target="_blank" href="http://sweetgum.nybg.org/science/g
 
 {female} A reproductive structure capable of being fertilized by a male gamete.
 {male} A reproductive structure that produces gametes capable of fertizing a female body.
-{bisexual} A plant that has both male and female reproductive structures (e.g. both flower#staminate and flower#pistillate flower#flowers), never both on the same plant.
+{bisexual} A plant that has both male and female parts (e.g. both flower#staminate and flower#pistillate flower#flowers), in the same structure or not.
 {dioecious} A plant that has only either male or female reproductive structures (e.g. flower#staminate or flower#pistillate flower#flowers), never both on the same plant.
+{monoecious} A plant that has both male and female structures (e.g. flower#flowers), but never both male and female parts in the same structure.
 
 <h2>Miscellaneous terms</h2>
 
