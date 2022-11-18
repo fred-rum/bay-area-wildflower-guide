@@ -1,5 +1,8 @@
 sci:class Polypodiopsida
 
+do member_link: self-/genus
+do member_com_simple: self-species
+
 ==shield ferns
 . 1--2-pinnate
 

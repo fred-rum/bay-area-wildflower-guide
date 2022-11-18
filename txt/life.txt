@@ -5,7 +5,6 @@ is_top
 list_hierarchy
 
 warn link: self-below
-do member_com_simple: class-species
 do member_name_alias: genus, species
 
 caution default_completeness: genus

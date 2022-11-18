@@ -15,6 +15,7 @@ warn link: none
 do link: self-below
 
 do member_link: self-below
+do member_com_simple: self-species
 do member_name: genus, species
 do member_name_alias: genus, species
 

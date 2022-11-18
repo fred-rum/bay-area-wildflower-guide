@@ -1,4 +1,7 @@
-sci:class Pinopsida
+sci:order Pinales
+
+do member_link: self-/genus
+do member_com_simple: self-species
 
 ==pines
 

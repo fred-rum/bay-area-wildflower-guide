@@ -1,0 +1,9 @@
+sci:genus Aneides
+x:ba
+
+==arboreal salamander:Aneides lugubris
+. brown
+
+==santa cruz black salamander:Aneides niger
+. black
+. rare

@@ -1,22 +1,33 @@
 sci:kingdom Animalia
 
+do member_link: self-/genus
+
 ==mammals:class Mammalia
+do member_com_simple: self-species
 end_hierarchy
 
 ==birds:class Aves
+do member_com_simple: self-species
 end_hierarchy
 
 ==reptiles:class Reptilia
+do member_com_simple: self-species
 
 ==amphibians:class Amphibia
+do member_com_simple: self-species
 
 ==arthropods:phylum Arthropoda
+do member_com_simple: self-species
 
 ==ray-finned fishes:class Actinopterygii
+do member_com_simple: self-species
 end_hierarchy
 
 ==mollusks:phylum Mollusca
+do member_com_simple: self-species
 
 ==segmented worms:phylum Annelida
+do member_com_simple: self-species
 
 ==true jellies
+do member_com_simple: self-species

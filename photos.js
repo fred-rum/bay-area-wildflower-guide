@@ -32,6 +32,7 @@ var pages=[
 ["aphid mummy wasps",4],
 ["aphids",1],
 ["apricot jelly",5],
+["arboreal salamander",1],
 ["arroyo lupine",1,2,3,4],
 ["arroyo willow",1,2,3],
 ["artichoke thistle",7],

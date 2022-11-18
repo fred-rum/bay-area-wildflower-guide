@@ -1,6 +1,9 @@
 sci:kingdom Chromista
 end_hierarchy
 
+do member_link: self-below
+do member_com_simple: self-below
+
 ==bull kelp:Nereocystis luetkeana
 x:any
 . long, narrow blades growing from a bulbous float
