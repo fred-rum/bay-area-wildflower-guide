@@ -10,3 +10,6 @@ x:ca
 
 ==black oystercatcher:Haematopus bachmani
 x:ba
+
+==pacific golden-plover:Pluvialis fulva
+x:more

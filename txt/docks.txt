@@ -63,7 +63,7 @@ color: other, red
 . common
 
 ==broad-leaved dock:R. obtusifolius
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1112+0675
+color: other, red
 . perennial
 . stem: 6--12(15) dm, generally branched
 . leaf: blade 20--40 cm, 10--15 cm wide, base generally cordate, margin generally entire, flat

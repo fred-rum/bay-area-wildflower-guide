@@ -16,8 +16,8 @@ All leaves are dark green or dull green adaxially and paler abaxially.
 
 ==musk brush:C. jepsonii
 . twig: generally brown
-. leaf:
-.. blade 10--20 mm long, 5--13 mm wide, <b>+- folded lengthwise</b>
+. leaf blade:
+.. 10--20 mm long, 5--13 mm wide, <b>+- folded lengthwise</b>
 ... no other leaves are folded lengthwise
 .. adaxially yellow-green, glabrous
 .. abaxially +- short-strigose between veins
@@ -28,18 +28,18 @@ All leaves are dark green or dull green adaxially and paler abaxially.
 ==buckbrush:C. cuneatus
 color: white, pale blue
 . twig: generally brown to gray-brown, glabrous to sparsely puberulent
-. leaf:
+. leaf blade:
 .. occasionally clustered
 ... others never clustered?
-.. blade 6--30 mm long, 3--18 mm wide
+.. 6--30 mm long, 3--18 mm wide
 .. adaxially dull green, glabrous
 .. abaxially paler, glabrous to +- strigose
 .. <b>margin entire or < 5 teeth near tip [not glandular]</b>
 
 ==coyote ceanothus:C. ferrisiae
 . twig: brown to gray-brown, generally +- short-hairy, <b>not angled</b>
-. leaf:
-.. blade 12--25 mm long, 7--18 mm wide
+. leaf blade:
+.. 12--25 mm long, 7--18 mm wide
 .. adaxially dark green, glabrous
 .. abaxially paler, short-strigose between evident veins
 .. <b>margin entire or with 5--35 +- sharp teeth</b> +- evenly distributed
@@ -47,8 +47,8 @@ color: white, pale blue
 
 ==point reyes ceanothus:C. gloriosus
 . twig: green, red-brown, or brown, <b>generally angled near tips</b>
-. leaf:
-.. blade 13--45 mm long, 5--24 mm wide
+. leaf blade
+.. 13--45 mm long, 5--24 mm wide
 .. adaxially dark green, glabrous
 .. abaxially glabrous to puberulent
 .. <b>margin 13--35 toothed</b>, +- evenly distributed
@@ -56,8 +56,8 @@ color: white, pale blue
 
 ==mason's ceanothus:C. masonii
 . twig: red-brown to dark brown or gray-brown, <b>generally angled near tips</b>
-.. leaf:
-.. blade 7--21 mm long, 4--13 mm wide
+.. leaf blad:
+.. 7--21 mm long, 4--13 mm wide
 .. adaxially dark green, glabrous
 .. abaxially short-strigose
 .. <b>margin 9--17 toothed</b>, +- evenly distributed
@@ -71,8 +71,8 @@ color: white, pale blue
 ==wartleaf ceanothus:C. papillosus
 color: blue, purple
 . twig: <b>green</b> to gray-brown
-. leaf:
-.. blade 11--50 mm long, 6--15 mm wide
+. leaf blade:
+.. 11--50 mm long, 6--15 mm wide
 .. adaxially dark green, <b>glandular-papillate (warty)</b>
 .. abaxially paler, generally <b>densely hairy</b>
 .. <b>margin rolled under, minutely gland-toothed</b>, teeth 17--31
@@ -80,8 +80,8 @@ color: blue, purple
 
 ==wavyleaf ceanothus:C. foliosus
 . twig: green to red-green
-. leaf:
-.. blade 5--20 mm long, 3--13 mm wide, <b>+- folded lengthwise</b>
+. leaf blade:
+.. 5--20 mm long, 3--13 mm wide, <b>+- folded lengthwise</b>
 .. 1-ribbed or faintly 3-ribbed from base
 .. adaxially dark green
 .. abaxially paler, glabrous to puberulent
@@ -91,8 +91,8 @@ color: blue, purple
 ==deerbrush ceanothus:C. integerrimus var. integerrimus
 species: deerbrush ceanothus
 . twig: generally green
-. leaf:
-.. blade 15--53 mm long, 10--45 mm wide
+. leaf blade:
+.. 15--53 mm long, 10--45 mm wide
 .. adaxially dull green, glabrous to puberulent
 .. abaxially pale green, glabrous to sparsely short-hairy
 .. <b>margin generally entire</b>, not rolled under
@@ -104,8 +104,8 @@ species: deerbrush ceanothus
 
 ==tobacco brush:C. velutinus
 . twig: green to red-brown, <b>flexible</b>
-. leaf:
-.. <b>blade 33--75 mm long, 13--55 mm wide</b>, leathery
+. leaf blade:
+.. <b>33--75 mm long, 13--55 mm wide</b>, leathery
 .. adaxially shiny green, glabrous, +- sticky
 .. abaxially glabrous to +- puberulent
 .. margin minutely gland-toothed, teeth 90--150+
@@ -114,25 +114,27 @@ species: deerbrush ceanothus
 ==blueblossom:C. thyrsiflorus
 color: blue, pale blue, white
 . twig: <b>green, flexible, ridged</b>, angled distally, [glabrous]
-. leaf:
-.. <b>blade 10--39 mm long, 5--20 mm wide</b>
+. leaf blade:
+.. <b>10--39 mm long, 5--20 mm wide</b>
 .. adaxially dark green, glabrous
 .. abaxially paler, glabrous to puberulent, veins +- raised
 .. margin +- gland-toothed
 
-==hairy ceanothus:C. oliganthus
+==jimbrush:C. oliganthus var. sorediatus
+species:hairy ceanothus
+xx:ba
 color: white, pale blue, blue, pale purple
 . twig: green to <b>reddish, flexible, not ridged</b> or angled, <b>[may be hairy]</b>
-. leaf:
-.. <b>blade 11--30 mm long, 5--25 mm wide</b>
+. leaf blade:
+.. <b>11--30 mm long, 5--25 mm wide</b>
 .. adaxially dark green, +- glabrous to short-hairy
 .. abaxially paler, sparsely to <b>densely short-hairy, especially veins</b>
 .. margin minutely gland-toothed, teeth 20--70
 
 ==coast whitethorn:C. incanus
 . twig: pale gray to gray-green, <b>rigid</b>, thorn-like or not
-. leaf:
-.. blade 20--50+ mm long, 10--45 mm wide, <b>generally larger than {-chaparral whitethorn}</b>
+. leaf blade:
+.. 20--50+ mm long, 10--45 mm wide, <b>generally larger than {-chaparral whitethorn}</b>
 .. 3-ribbed from base
 .. adaxially dull green, glabrous to sparsely puberulent
 .. abaxially gray-green, strigose
@@ -142,8 +144,8 @@ color: white, pale blue, blue, pale purple
 ==chaparral whitethorn:C. leucodermis
 . twig: pale gray to gray-green, <b>rigid, thorn-like</b>
 .. except where stated, all other twigs are flexible, not thorn-like
-. leaf:
-.. blade 12--30 mm long, 3--15 mm wide. <b>generally smaller than {-coast whitethorn}</b>
+. leaf blade:
+.. 12--30 mm long, 3--15 mm wide. <b>generally smaller than {-coast whitethorn}</b>
 . 3-ribbed from base
 .. adaxially dull green, glabrous to sparsely puberulent
 .. abaxially +- strigose, especially veins

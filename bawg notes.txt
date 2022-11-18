@@ -1518,3 +1518,8 @@ Allow multiple forms of the same organism
 use this form of search if a gallformers_id is provided
   and the name isn't at rank species or lower
 https://www.inaturalist.org/observations/chris_nelson?order_by=observed_on&field:Gallformers%20Code=a-spp-whole-shoot-discoloration
+
+distinguish between observations: "none" and "none in the bay area"
+  and perhaps "not yet in the data" if there's a photo but no observations
+  or "none as of {observations.csv date}"
+  or "only recently"
