@@ -75,6 +75,7 @@ figure:california poppy fruit
 
 {fruit,fruits,fruiting} A seed-bearing body (or a joined aggregation of multiple bodies), developing from one or more ovaries and possibly other associated structures. [figure:california poppy fruit]
 {berry,berries} Botanically, a fruit that developed from a single flower in which the ovary wall becomes the fleshy portion of the fruit.  But in common usage (including the BAWG), it is simply a small, soft or juicy fruit or bite-sized collection of fruits from the same inflorescence.
+{pericarp,pericarps} The outer, non-seed portion of a fruit.  E.g. the fleshy part of a stone fruit.
 {beak,beaks} A projection from the distal end of a fruit.
 
 <h2>Hair</h2>
@@ -109,7 +110,6 @@ These terms may occasionally be used loosely rather than following the strict de
 {nectary} A structure that produces nectar.  Usually at the inner base of a flower to attract pollinators past the anthers and stigmas, but may be elsewhere.
 {open,opens,opening} Not densely clustered, i.e. with parts that are spread out from each other.  E.g. referring to a flower perianth that is maximally spread, e.g. not a bud.  (For some flowers, this is not very spread at all.)
 {pappilate} Having small round protuberances on a surface.
-{pericarp,pericarps} The outer, non-seed portion of a fruit.
 {pistillate} With fertile pistils but without stamens or without fertile stamens.  See staminate.
 {salverform} With a slender tube and abruptly spreading limbs (e.g. "T" shaped).
 {spur,spurs} A hollow, backward-pointing projection from a sepal or petal.

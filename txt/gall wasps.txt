@@ -59,3 +59,13 @@ bug:357785
 gall:1958
 . parasitizes {-canyon live oak}
 x:more
+
+==beaked twig gall wasp:Burnettweldia plumbella
+bug:146606
+gall:1147
+. parasitizes {-california scrub oak}, {-nuttall's scrub oak}, {-blue oak}, {-leather oak}, and {-oregon oak}.
+
+==round gall wasp:Burnettweldia washingtonensis
+bug:847685
+gall:1364
+. parasitizes {-california scrub oak}, {-nuttall's scrub oak}, {-blue oak}, {-leather oak}, and {-valley oak}.

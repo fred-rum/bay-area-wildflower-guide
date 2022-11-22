@@ -1523,3 +1523,22 @@ distinguish between observations: "none" and "none in the bay area"
   and perhaps "not yet in the data" if there's a photo but no observations
   or "none as of {observations.csv date}"
   or "only recently"
+
+combine 'key to' with 'member of', preserving hierarchical order
+  usually no need to distinguish keys; either the next parent is useful or not
+  but what to do with multiple keys, e.g. for non-taxonomic keys?
+  perhaps put "(key)" after the name
+    except the scientific name is already in parentheses
+
+record the source(s) of each Linnaean link
+allow priorities to be set
+  txt is always highest
+  any order of observations.csv, DarwinCore, API
+    typical order might be to give the API highest priority
+  in the event of a conflict, if necessary,
+    reload the API data if the link came from the cached pickle,
+      and it is older than a conflicting file (txt, observations.csv.zip, core)
+        date/time comparison prevents repeated reloads
+    undo a lower-priority link and replace it with a higher-priority link
+as a partial workaround before that is done,
+  provide a way to ignore cached API entries in any part(s) of the tree
