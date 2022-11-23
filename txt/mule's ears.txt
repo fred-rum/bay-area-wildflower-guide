@@ -33,6 +33,7 @@ color: yellow
 . heads generally 1
 
 ==woolly mule's ears:W. mollis
+color: yellow
 . phyllaries 1.5--3 cm, narrow, generally not leaf-like, outer +- same as inner
 . phyllaries generally few
 . <b>plant +- tomentose, often becoming glabrous</b>

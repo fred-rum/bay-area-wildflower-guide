@@ -29,7 +29,8 @@ color: red purple
 ==streambank bird's-foot trefoil:H. oblongifolia
 sci_jfp: Hosackia oblongifolia var. oblongifolia
 xx: Current scholorship does not recognize varieties within this species.
+color: yellow
 . peduncle bract just below umbel or missing
 . plant often hairy
 . petal claw included or barely exserted from calyx tube
-. extremely rare
+. vanishingly rare in the bay area

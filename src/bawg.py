@@ -395,7 +395,8 @@ def read_obs_chains(f):
                 if found_lowest_level:
                     # add_linn_parent() adds the page for the parent
                     # (if necessary) and the link from parent to child.
-                    page = page.add_linn_parent(rank, group, from_inat=True)
+                    page = page.add_linn_parent(rank, group,
+                                                from_inat='observations.csv')
 
                 found_lowest_level = True
         except FatalError:
@@ -644,13 +645,15 @@ def read_observation_data(f):
         if page != orig_page:
             # The page got promoted.
 
-            if loc != 'bay area' and not page.rp_do('outside_obs_promotion'):
-                continue
-
             if loc != 'bay area':
-                # We never care whether an observation outside the bay area
-                # isn't in the guide.
-                pass
+                # We never complain if an observation outside the bay area
+                # isn't in the guide.  However, we ignore the promoted
+                # observation if the outside_obs_promotion does not apply
+                # or if the page is promoted past its peers.
+                if page.rp_do('outside_obs_promotion') and not page.child:
+                    pass
+                else:
+                    continue
             elif orig_page.rank_unknown:
                 # If an observation has an unknown rank, then we always
                 # promote it without complaint.

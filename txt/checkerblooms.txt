@@ -42,5 +42,6 @@ species: chaparral checkerbloom
 . Nisene Marks
 
 ==waxy checkerbloom:S. glaucescens
+color: pink
 . <a href="http://www.worldbotanical.com/sidalcea.htm">ID key</a>
-. <b>not found in the bay area</b>
+. <b>not found in the bay area</b>, despite iNaturalist's frequent suggestions

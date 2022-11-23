@@ -1,5 +1,4 @@
 sci:Adenostoma fasciculatum
-color: white
 
 genus: n/a
 x:ba
@@ -7,6 +6,7 @@ x:ba
 xx:any
 
 ==common chamise:var. fasciculatum
+color: white
 . plant tall with erect/ascending branches
 . twigs glabrous
 . leaves 5--13 mm long

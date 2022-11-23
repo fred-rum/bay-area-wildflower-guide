@@ -8,7 +8,7 @@ There is a <a href="beetle-glossary.html">glossary</a> for beetles.
 
 ==click beetles:family Elateridae
 
-==metallic wood-boring beetles:family Buprestidae
+==jewel beetles:family Buprestidae
 
 ==blister beetles:family Meloidae
 

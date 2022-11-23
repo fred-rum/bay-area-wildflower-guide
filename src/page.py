@@ -1571,7 +1571,7 @@ class Page:
     # is centered on the parent page, but add_linn_parent() is
     # centered on the child page because it is the page that is
     # guaranteed to be present.
-    def add_linn_parent(self, rank, name, sci=None, from_inat=False):
+    def add_linn_parent(self, rank, name, sci=None, from_inat=None):
         if is_sci(name):
             if rank and rank >= Rank.genus:
                 elab = f'{rank.name} {name}'
@@ -1583,7 +1583,7 @@ class Page:
             parent = find_page2(None, elab, from_inat)
             if not parent:
                 if from_inat:
-                    src = 'taxonomy from observations.csv'
+                    src = f'taxonomy from {from_inat}'
                 else:
                     src = 'implicit or explicit ancestor from txt'
                 parent = Page(None, elab, shadow=True,

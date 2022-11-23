@@ -9,6 +9,6 @@ species: arctic butterbur
 . broad, lobed leaves
 . native
 
-==winter heliotrope:Petasites fragrans
+==winter heliotrope:Petasites pyrenaicus
 . unlobed leaves
 . Tilden, likely from dumped garden waste

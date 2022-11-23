@@ -20,3 +20,8 @@ gall:1861
 .. Russo has the only local parasitized species as {-Garrya fremontii}, but <a href="https://www.ars.usda.gov/ARSUserFiles/80420580/Gagne_Jaschhof_2021_World_Cat_5th_Ed.pdf">Gagné and Jaschhof</a> list species of {-Garrya} in general.
 
 ==willow gall midges
+
+==n/a:Iteomyia s-lasiolepis-tooth-gall
+bug:n/a
+gall:3628
+sci_i:n/a

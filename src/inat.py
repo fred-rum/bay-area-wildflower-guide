@@ -8,6 +8,7 @@ from error import *
 from files import *
 from find_page import *
 from page import *
+from args import *
 
 api_pickle_name = 'api.pickle'
 db_version = '1'
@@ -16,6 +17,14 @@ inat_dict = {} # iNaturalist (taxon ID) or (rank sci) -> iNat data or None
 used_dict = {} # same as inat_dict, but only for entries that have been used
 
 anc_dict = {} # taxon ID -> list of ancestor taxon IDs
+
+if arg('-api_taxon'):
+    user_discard_set = set(arg('-api_taxon')) # set of TIDs to be discarded
+else:
+    user_discard_set = set()
+
+discard_set = set() # set of TIDs that include the above anywhere in the chain
+
 
 api_called = False # the first API call isn't delayed
 
@@ -52,36 +61,22 @@ def read_inat_files():
         pass
 
     if inat_dict:
+        # If any TIDs need to be discarded, also discard any TIDs that depend
+        # on them.
+        if user_discard_set:
+            for inat in inat_dict.values():
+                inat.check_for_discard()
+            for tid in discard_set:
+                if tid in inat_dict:
+                    print(f'discarding cached API data for {tid}')
+                    del inat_dict[tid]
+
+        # The loaded dictionary has the information stored by each Inat object,
+        # but Inat() has not been called, so we need to perform a separate step
+        # to apply the Inat data elsewhere.
         for inat in inat_dict.values():
             if inat:
                 inat.apply_info()
-        return
-
-
-    # Code to read old JSON files.  If there aren't any users who are still
-    # using the old JSON files, this can be deleted.
-    global api_called
-    api_called = True
-    file_set = get_file_set('inat', 'json')
-    for filename in sorted(file_set):
-        try:
-            with open(f'{root_path}/inat/{filename}.json', 'r', encoding='utf-8') as r:
-                json_data = r.read()
-                data = json.loads(json_data)
-                if arg('-api_expire'):
-                    if 'date' in data:
-                        age = datetime.date.today() - datetime.date.fromisoformat(data['date'])
-                        if age.days >= int(arg('-api_expire')):
-                            # discard expired data
-                            return
-                    else:
-                        # discard undated data
-                        continue
-                data = data['data']
-                parse_inat_data(data, filename)
-        except:
-            warn(f'reading json file "{filename}"')
-            raise
 
 
 # raw_data is one result from the JSON, parsed into a Python structure.
@@ -519,4 +514,21 @@ class Inat:
         page = find_page2(self.com, self.elab, from_inat=True,
                           taxon_id=self.taxon_id)
         if not page:
-            info(f'no names match for iNat data: {self.com} ({self.elab}), tid={self.taxon_id}')
+            info(f'no names match for iNat data: {self.com} ({self.elab}), tid=se{lf.taxon_id}')
+
+
+    # A TID should be discarded if it has an ancestor TID that the
+    # user says should be discarded.  Just in case, all of its
+    # ancestors are also discarded, all the way to top of the chain.
+    def check_for_discard(self, descendent_is_discarded=False):
+        discard_chain = (descendent_is_discarded or
+                         self.taxon_id in user_discard_set)
+
+        if self.parent_id in inat_dict:
+            if inat_dict[self.parent_id].check_for_discard(discard_chain):
+                discard_chain = True
+
+        if discard_chain:
+            discard_set.add(self.taxon_id)
+
+        return discard_chain

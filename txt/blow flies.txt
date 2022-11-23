@@ -8,7 +8,7 @@ how to distinguish many common genera and species from each other.
 
 ==greenbottle flies
 
-==n/a:genus Calliphora
+==bluebottle flies:genus Calliphora
 bug:7177
 # There's an uncertain ID in here that I don't feel like adding.
 do disable_obs_promotion_checks_from_needs_id: species-below

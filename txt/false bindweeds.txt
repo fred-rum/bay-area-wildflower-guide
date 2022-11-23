@@ -7,12 +7,13 @@ Key features:
 . leaf shape, tomentose or not especially around sinus
 
 [
-<h3>Bracts > 1 mm below calyx, not hiding it, <= 5 mm wide or variously toothed or lobed like leaves</h3>
+<h3>Bracts > 1 mm below calyx, not hiding it, <= 5 mm wide</h3>
 [<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1209+2734">example of small bracts</a>]
 
 ==pacific false bindweed:C. purpurata
+. bracts <= 1.5 mm wide
 . plant glabrous
-. stem trailing to strongly climbing, +- not intertwined
+. stem trailing to strongly climbing, +- not intertwined, up to 7 m long
 . leaf triangular to reniform, lobes wider than linear, 2(3)-tipped, sinus V-shaped or +- closed
 . peduncle generally >> subtending leaf
 . very common
@@ -20,15 +21,16 @@ Key features:
 ==western morning glory:C. occidentalis ssp. occidentalis
 species: western morning glory
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+0610
+. bracts 1--5 mm wide
 . plant puberulent to finely tomentose
-. stem decumbent to strongly climbing, generally > 1 m
+. stem decumbent to strongly climbing, generally > 1 m long
 . leaf lobes generally indistinct, generally 2-tipped; sinus rounded to +- square or tapered
 . peduncle < to +- > subtending leaf
 . common
 
 ]
 [
-<h3>Bracts < 1 mm below calyx, +- hiding it, > 4 mm wide, not lobed like leaves</h3>
+<h3>Bracts < 1 mm below calyx, +- hiding it, > 4 mm wide</h3>
 
 [<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0512+0313">example of large bracts</a>]
 
@@ -51,13 +53,6 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1011+2084
 . stem well developed, not or only weakly climbing, < 100 cm, without basal rosette of leaves
 . Henry Coe, Sunol, Mt. Tam
 
-==marsh morning glory:C. sepium ssp. limnophila
-species: hedge bindweed
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1009+0161
-xx:hist
-. stem trailing or weakly to strongly climbing, >= 1 m
-. Palo Alto baylands
-
 ==sea bindweed:C. soldanella
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=1342+3162+2660+0067
 . stem decumbent, < 60 cm
@@ -65,5 +60,23 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=1342+3162+2660+0067
 . corolla deep pink or +- purple
 . lives on or very near the beach
 . scattered along the pacific coast
+
+==marsh morning glory:C. sepium ssp. limnophila
+species: hedge bindweed
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1009+0161
+xx:hist
+. stem trailing or weakly to strongly climbing, >= 1 m
+. 1 flower per peduncle
+. found in wet or disturbed places
+. Palo Alto baylands
+
+==coast morning glory:C. macrostegia
+color: white, pale purple
+xx:more
+. stem trailing or weakly to strongly climbing, >= 1 m
+. often > 1 flower per peduncle
+. generally found in dry places
+. mostly found south of Monterrey Bay, but a few are scattered within the Bay Area
+. distinguish subspecies by measurements of the bracts, calyx, corolla, and/or stamens (stamens are best)
 
 ]

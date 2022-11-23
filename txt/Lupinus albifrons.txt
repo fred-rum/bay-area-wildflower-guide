@@ -1,8 +1,9 @@
+com:silver bush lupine
 sci:Lupinus albifrons
 xx:ba
 
 ==silver bush lupine:L. albifrons var. albifrons
-color:purple
+color: purple, pale purple
 . shrub 50 cm--5 m; woody +- throughout; <b>trunk is generally distinct</b>
 . bract 4--8 mm
 

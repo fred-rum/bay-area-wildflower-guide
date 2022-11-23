@@ -1542,3 +1542,6 @@ allow priorities to be set
     undo a lower-priority link and replace it with a higher-priority link
 as a partial workaround before that is done,
   provide a way to ignore cached API entries in any part(s) of the tree
+
+The BAWG HTML doesn't update its notice area immediately
+  when the service worker notices that it is out of date, but it should

@@ -38,7 +38,7 @@ while len(sys.argv):
                 else:
                     taxon_list.append(sys.argv.pop(0))
             if taxon_list:
-                _arg_value['{arg}_taxon'] = taxon_list
+                _arg_value[f'{arg}_taxon'] = taxon_list
     else:
         print(f'Argument not recognized: {arg}', file=sys.stderr)
         sys.exit(-1)

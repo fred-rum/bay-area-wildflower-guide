@@ -112,7 +112,6 @@ species: deerbrush ceanothus
 . Mt. Tamalpais
 
 ==blueblossom:C. thyrsiflorus
-color: blue, pale blue, white
 . twig: <b>green, flexible, ridged</b>, angled distally, [glabrous]
 . leaf blade:
 .. <b>10--39 mm long, 5--20 mm wide</b>

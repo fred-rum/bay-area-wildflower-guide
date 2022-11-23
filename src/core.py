@@ -314,6 +314,8 @@ def parse_core_chains():
 
         elab = convert_rank_str_to_elab(rank_str, sci)
 
+        # Update the page with a full elaborated scientific name and taxon_id
+        # if it doesn't already have both.
         find_page2(None, elab, from_inat=True,
                    taxon_id=str(tid))
 
