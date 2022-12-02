@@ -1,0 +1,16 @@
+sci:Grindelia stricta
+x:ba
+
+==coastal gum plant:var. platyphylla
+. up to 100 cm tall
+. herb; <b>stems woody for <= 10 cm</b> at base of plant
+. <b>phyllaries generally spreading</b>, recurved, or coiled, round in cross section
+. leaves generally sessile, sometimes clasping
+. found in all coastal biomes
+
+==marsh gumplant:var. angustifolia
+. 100-200 cm tall
+. subshrub; <b>stems woody for 30-150 cm</b> at base of plant
+. <b>phyllaries appressed except for erect tip</b> < 3 mm, flat in cross section
+. leaves at least sometimes clasping
+. found in tidal wetlands

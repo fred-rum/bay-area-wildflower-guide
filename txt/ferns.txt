@@ -9,12 +9,18 @@ do member_com_simple: self-species
 ==wood ferns
 . 1--2-pinnate, plus lobes possibly on the pinnules
 
-==giant chain fern
+==giant chain fern:Woodwardia fimbriata
+x:ca
 . 2-pinnate
-. <b>giant</b>
+. frond generally <b>1--3 m</b> long.
+. pinnae generally 15--30 cm long.
 
-==western ladyfern
+==western lady fern:Athyrium filix-femina ssp. cyclosorum
+x:ba
 . 2--3-pinnate (lobes at 3rd level may not be completely divided)
+. frond blade elliptic to lanceolate
+. lower 2--4 pinna pairs generally << those above
+. midribs below near base often with minute, branched hairs 
 
 ==polypody ferns
 
@@ -22,10 +28,14 @@ do member_com_simple: self-species
 . 2--3-pinnate with <b>terminal leaflets palmate</b>, or
 . <b>palmate-pinnate</b>
 
-==goldback fern
+==goldback fern:Pentagramma triangularis
+x:ba
 . 3--4-pinnate (blobby lobes at 4th level, if present)
+. underside is significantly gold/brown.
 
-==hairy brackenfern
+==hairy brackenfern:Pteridium aquilinum var. pubescens
+x:ca
+xx:ca
 . 2--4-pinnate
 . entire blade is +- an equilateral triangle in outline
 

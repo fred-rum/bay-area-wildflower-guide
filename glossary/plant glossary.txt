@@ -23,6 +23,7 @@ All flower#involucre shapes may be flared at the tip or not, which is independen
 
 Particularly for leaves, the base of the blade may taper to the petiole regardless of the shape description. <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example leaf shapes]</a>
 
+{awl-like} Long, narrow, and pointed, but slightly wider at the base, so not quite linear.
 {cordate} Shaped like a heart in a deck of cards (with tip outward, lobes at the base). <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
 {elliptic,elliptical} In the shape of an elongated circle, widest near the middle.  Wider than linear. <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
 {hastate} In the shape of an spearhead, with the two basal lobes spreading +- perpendicular to the axis.  Compare sagittate.

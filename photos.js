@@ -946,7 +946,7 @@ var pages=[
 ["western jack-o'-lantern",2,4,6],
 ["western jumbo gym",3,6],
 ["western labrador tea",4],
-["western ladyfern",1,2],
+["western lady fern",1,2],
 ["western leatherwood",1,5,7],
 ["western meadowlark",1,3],
 ["western mosquitofish",1],

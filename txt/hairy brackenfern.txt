@@ -1,3 +1,0 @@
-sci: Pteridium aquilinum var. pubescens
-x:ca
-xx:ca

@@ -22,6 +22,7 @@ color: white
 
 ==whitebark raspberry:R. leucodermis
 color:white
+<b>Caution:</b> {-california blackberry} can also have light-colored forms
 . plant: arched to mounded
 . prickles: many, <b>stout, wide-based</b>, straight or generally curved
 . stem: 4--10 mm diam, <b>not angled</b>, glabrous, <b>strongly glaucous in youth</b>
@@ -29,7 +30,6 @@ color:white
 . sepals: sepals hairy, <b>prickly, +- with stalked glands</b>
 . fruit: <b>raspberry-type</b> (hollow when picked), <b>red-purple to +- black</b>
 ;Edibility: Ripe fruit can be eaten raw. ^https://pfaf.org/user/plant.aspx?latinname=Rubus+leucodermis
-
 
 ==salmonberry:R. spectabilis
 color:red purple

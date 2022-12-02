@@ -243,6 +243,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0817+2051
 
 ==pinpoint clover:T. gracilentum
 color:pink, pale purple
+<b>Caution: ID unsure</b>
 . no bracts
 . calyx tube 1.5--2.5 mm, glabrous
 . calyx lobes +- 0.5 mm wide at base, glabrous, bristle-tipped
@@ -393,6 +394,7 @@ color: red
 ]
 ]
 ==suffocated clover:T. suffocatum
+sci_j: n/a
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0215+0500
 . not in Jepson
 . very rare
