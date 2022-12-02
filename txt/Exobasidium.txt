@@ -8,11 +8,12 @@ Ron Russo's popular reference for California galls lists {-Exobasidium vaccinii}
 . <a href="https://www.biodiversitylibrary.org/page/3154527#page/42/mode/1up">1885 Casey</a> (free) briefly describes {-Exobasidium arctostaphyli} on {-bearberries and manzanitas}.
 . <a href="https://www.jstor.org/stable/pdf/2990117.pdf">1915 Burt</a> (free) lumps galls on many hosts into {-Exobasidium vaccinii}.
 . <a href="https://cdnsciencepub.com/doi/10.1139/b59-052">1959 Savile</a> (req. subscription) mostly agrees with Burt, but retains {-Exobasidium arctostaphyli} as a distinct entity.
-. <a href="https://pascal-francis.inist.fr/vibad/index.php?action=getRecordDetail&idt=PASCAL82X0050208">1981 Nannfeldt</a> (citation only) proposes that {-Exobasidium vaccinii} is found only on lingonbery (Vaccinium vitis-idaea).
-. more recent studies tend to agree, e.g. as described in the introduction to <a href="https://www.nrs.fs.fed.us/pubs/jrnl/2012/nrs_2012_kennedy_001.pdf">2012 Kennedy</a> (free).
+. <a href="https://pascal-francis.inist.fr/vibad/index.php?action=getRecordDetail&idt=PASCAL82X0050208">1981 Nannfeldt</a> (citation only) proposes that {-Exobasidium vaccinii} is found only on lingonberry (Vaccinium vitis-idaea).
+. More recent studies tend to agree, e.g. as described in the introduction to <a href="https://www.nrs.fs.fed.us/pubs/jrnl/2012/nrs_2012_kennedy_001.pdf">2012 Kennedy</a> (free).
 . <a href="https://www.inaturalist.org/taxa/1399323/history">2022 Schwab</a> adds {-Exobasidium arctostaphyli} to iNaturalist, and Asquith in particular starts adding this ID to many observations.
 .. Schwab believes that although the original 1885 description includes infections of both leaves and young shoots, only leaf infections should be included in {-Exobasidium arctostaphyli}.
-.. Infections of whole shoots should instead be identified only as {-Exobasidium} until properly researched.
+. <a href="https://gallformers.org/gall/4548">2022 gallformers.org</a> adds {-Exobasidium a-spp-whole-shoot-discoloration} as a placeholder name for infections of whole shoots.
+.. Until these are properly researched, these should be identified in iNaturalist only as {-Exobasidium} with the observation field "Gallformers Code: a-spp-whole-shoot-discoloration."
 
 Relevent iNaturalist comments in chronological order:
 <a href="https://www.inaturalist.org/observations/28302608#activity_comment_fd2fc5b2-edd3-4520-a667-ba1e956c0e2d">1</a>,
@@ -34,8 +35,8 @@ gall:1660
 . parasitizes only lingonbery (Vaccinium vitis-idaea)
 . see above for discussion
 
-==n/a:Exobasidium vaccinii-uliginosi
-gall:n/a
-<b>Caution: photo provided for reference, but ID is unsure</b>
+==n/a:Exobasidium a-spp-whole-shoot-discoloration
+sci_i:n/a
+gall:4548
 . commonly identified on iNaturalist on various plant hosts, but should probably be identified on {-bearberries and manzanitas} only as {-Exobasidium} until properly researched
 . see above for discussion

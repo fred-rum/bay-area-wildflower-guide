@@ -6,6 +6,7 @@ color: purple
 . rays purple
 . 5--11 phyllaries, >= flowers when fully bloomed
 . pappus +- brown
+Although Jepson and Calflora list this as the local purple species, Valerio Lazzeri <a href=https://www.inaturalist.org/posts/65383-in-search-for-the-true-tragopogon-porrifolius">argues</a> that we actually have Tragopogon eriospermus.  To distinguish the two, be sure to observe the leaf margins (undulate or not), phyllaries (reflexed or not), achenes when dried (strongly or slightly narrowed), and habitat (dry or not).
 
 ==yellow salsify:T. dubius
 color: yellow

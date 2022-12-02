@@ -16,6 +16,7 @@ color: pale purple
 . corolla pink to +- purple
 
 ==rough hedgenettle:S. rigida
+xx:uncat
 color: pale purple
 . pouch at base of corolla [example,3]
 . inflorescence elongated

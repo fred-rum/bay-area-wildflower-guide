@@ -10,6 +10,8 @@ Key features:
 
 Distinguishing goldfields often requires examining the pappus.  The pappus takes the place of the calyx/sepals in the disk flowers.  If the flower is in bloom, the pappus is typically shorter than the disk corolla, so to see it you'll need to pull the flower head apart.  (Pulling one disk flower out may be sufficient.  It may bring the pappus with it or leave it attached to the ovary.  I need to test that idea.)  Once the flower goes to seed and the corollas fall off, the pappus is much easier to see and often looks like a dandelion's seed pod.
 
+See also {-hillside daisies}, which have narrow (but not linear) wedge-shaped leaves that are quite hairy.
+
 [
 <h2>phyllaries free</h2>
 
@@ -22,6 +24,7 @@ color: yellow
 . leaves +- entire or with 3--5+ teeth
 . pappus of 1--7 clear, brown, linear to awl-like scales, or 0
 . common
+. See also {-hillside daisies}, which have narrow (but not linear) wedge-shaped leaves that are quite hairy.
 
 ==common goldfields:L. gracilis
 . phyllaries free, generally > 6

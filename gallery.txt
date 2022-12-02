@@ -36,3 +36,5 @@ can I recognize a flick left or right for switching photos?
 re-encode space or comma in filename to avoid most % percent encoding
   e.g. encode space as '+', comma as '.'
     the last '.' in the encoded value is recognized as the filename extension
+  this could be done only in the javascript so that the filenames themselves
+    don't need to change; just the URL is displayed cleaner in the browser

@@ -842,11 +842,6 @@ and months
 &month=4
 ?
 
-Use the representative jpg in a circular mask as the home link icon?
-img.home-icon ... border-radius: 50%;
-
-Remove support for ',[digit]' child declarations.
-
 G4 dimensions:
 screen 120mm/68mm
 Chrome browser area: 96mm/68mm => 1536x1080

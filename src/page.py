@@ -1248,9 +1248,10 @@ class Page:
         if 'i' in sites:
             self.elab_inaturalist = elab
             sci = strip_sci(elab)
-            if sci in isci_page and isci_page[sci] != self:
-                error('{isci_page[sci].full()} and {self.full()} both use sci_i {elab}')
-            isci_page[sci] = self
+            if sci != 'n/a':
+                if sci in isci_page and isci_page[sci] != self:
+                    error(f'{isci_page[sci].full()} and {self.full()} both use sci_i {elab}')
+                isci_page[sci] = self
         if 'b' in sites:
             self.elab_bugguide = elab
         if 'g' in sites:

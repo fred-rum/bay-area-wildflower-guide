@@ -4,6 +4,7 @@ sci:genus Monolopia
 color:yellow
 . ray entire or slightly toothed
 . uncommon
+. See also {-goldfields}, which have linear leaves that aren't nearly as hairy.
 
 ==cupped monolopia:M. major
 . ray 3-lobed
