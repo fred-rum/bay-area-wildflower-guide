@@ -1,3 +1,5 @@
 sci:family Tenthredinidae
 
+Despite their common name, sawflies are a type of wasp, so called because of their saw-like ovipositors.
+
 ==gall sawflies

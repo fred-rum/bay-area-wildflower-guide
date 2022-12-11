@@ -8,4 +8,8 @@ distinguishing features.
 x:more
 bug:157195
 
+==lupine aphid:Macrosiphum albifrons
+x:more
+bug:484840
+
 ==gall aphids

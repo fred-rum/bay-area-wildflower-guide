@@ -5,6 +5,8 @@ Key features:
 . plant height
 . number of berries in each cluster
 
+Both species are parisitized by {-snowberry sawfly}.
+
 ==common snowberry:S. albus
 xx:uncat
 color: pale purple, red purple

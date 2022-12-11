@@ -1,3 +1,9 @@
 sci:n/a
 
 ==willow gall sawflies
+
+==snowberry sawfly:Blennogeneris spissipes
+acom:bulbous-gall sawfly
+bug:n/a
+gall:732
+. parasitizes {-snowberries}

@@ -64,6 +64,15 @@ color:red purple
 [
 <h2>peduncled raceme with small flowers</h2>
 
+==two-seeded vetch:V. disperma
+color: pale purple
+. <b>2--6 flowers</b>, crowded near tip, axis extended beyone flowers as bristle
+.. all others in this set have 1--3 flowers
+. <b>12--20 leaflets</b>, 7--18 mm, oblong-elliptic, tip often mucronate
+.. all others in this set have <= 10 leaflets
+. corolla 3.5--5 mm, blue [???]
+. stem sprawling, 20--60 cm
+
 ==smooth tare:V. tetrasperma
 color: pale purple
 . generally 1--3 flowers, at tip
@@ -92,7 +101,10 @@ species: slender vetch
 
 The following species are reported in the bay area, but are considered waifs by Jepson:
 . V. cracca
-. V. disperma
 . V. faba
 
 See also {-sweet peas and vetchlings}.
+
+Rb 37
+Pm 61
+Cl 17
