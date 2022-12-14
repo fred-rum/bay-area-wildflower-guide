@@ -9,4 +9,4 @@ These flowers open in the evening.  For flowers that open during the day, see {-
 
 ==narrowleaf soap plant:C. angustifolium
 . leaf 2--5 mm wide, margin +- flat
-. very rare
+. extremely rare in Marin

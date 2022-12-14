@@ -2077,6 +2077,7 @@ var pages=[
 {page:"purple nightshade",sci:["Solanum xanti"],x:"u"},
 {page:"purple sage",sci:["Salvia leucophylla"],x:"u"},
 {page:"purple woodsorrel",sci:["Oxalis purpurea"],x:"u"},
+{page:"purple-flowered rock-rose",sci:["Cistus :purpureus"],x:"o"},
 {page:"purple-stemmed monkeyflower",sci:["Erythranthe floribunda","Mimulus floribundus"],x:"u"},
 {page:"purplebeak owl's-clover",sci:["Triphysaria micrantha"],x:"u"},
 {page:"purplespot gilia",sci:["Gilia clivorum"],x:"u"},
