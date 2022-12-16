@@ -70,6 +70,7 @@ props = {
     'obs_fill_com': 'fd',
     'obs_fill_sci': 'fd',
     'obs_fill_alt_com': 'fd',
+    'obs_fill_alt_global_com': 'fd',
     'link_inaturalist': 'd',
     'link_calflora': 'd',
     'link_calphotos': 'd',
@@ -648,8 +649,14 @@ class Page:
                     if plural_equiv(acom, com):
                         return
 
-                if (self.rp_do('obs_fill_alt_com',
-                               f'{self.full()} has iNaturalist common name "{com}"')):
+                if from_inat == 'global_com':
+                    do_fill_alt_com = self.rp_do('obs_fill_alt_global_com',
+                                                 f'{self.full()} has iNaturalist global common name "{com}"')
+                else:
+                    do_fill_alt_com = self.rp_do('obs_fill_alt_com',
+                                                 f'{self.full()} has iNaturalist common name "{com}"')
+
+                if do_fill_alt_com:
                     # iNaturalist is allowed to add an alternative common name,
                     # and the name is sufficiently different than any existing
                     # name.

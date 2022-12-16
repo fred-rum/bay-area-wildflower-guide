@@ -31,8 +31,14 @@ warn obs_promotion: self-below
 do disable_obs_promotion_checks_from: self-/genus, genus/-/species
 
 error obs_fill_sci: self-below
+
+# I expect my data to match the (local) common name from iNaturalist ...
 warn obs_fill_com: self-below
 warn obs_fill_alt_com: self-below
+
+# ... but iNaturalist might have a different global common name (used by Seek),
+# in which case I want to include it so that I can look up Seek reports.
+do obs_fill_alt_global_com: self-below
 
 
 ==plants

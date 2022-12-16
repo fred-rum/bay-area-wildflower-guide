@@ -707,7 +707,7 @@ if arg('-tree') == '12':
     print_trees()
 
 if arg('-steps'):
-    info("Step 12j: Apply names from iNaturalist JSON data")
+    info("Step 12j: Apply names from iNaturalist API data")
 
 apply_inat_names()
 

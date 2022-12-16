@@ -297,6 +297,7 @@ def get_inat_for_page(page):
     elif len(elab_words) == 2:
         if elab_words[1].startswith('X'):
             rank = 'hybrid'
+            elab = f'{elab_words[0]} {elab_words[1][1:]}'
         else:
             rank = 'species'
     elif ' ssp. ' in page.elab:
@@ -344,7 +345,7 @@ def get_inat_for_page(page):
 # No data is returned; we just fetch the data into inat_dict
 # if necessary and appropriate.
 #
-def get_inat_for_tid_set(tid_set):
+def get_inat_for_tid_set(tid_set, local=True):
     # if "taxa?taxon_id={taxon_id}" is used, the taxon and all its
     # descendents are returned, not necessarily with the requested
     # taxon first!  So I use "taxa/{taxon_id}" instead to exactly get
@@ -357,12 +358,29 @@ def get_inat_for_tid_set(tid_set):
     # number of results, so it may be the maximum number supported.
     tid_list = []
     for tid in sorted(tid_set):
-        if tid in inat_dict or not arg('-api'):
-            tid_set.remove(tid)
+        if not arg('-api'):
+            do_fetch = False
+        elif local:
+            # The first fetch request always specifies the local area.
+            # We only make the fetch if we don't already have data.
+            do_fetch = tid not in inat_dict
         else:
+            # We may make a second fetch request without specifying the
+            # local area, so the API returns the "global" common name.
+            # This name is useful since it is the one used in the Seek app.
+            # We only make this request if we have results from the first
+            # fetch, but we don't have any information about its global
+            # common name.  No extra checks are needed for this case
+            # since all necessary checks have already been performed.
+            do_fetch = True
+
+        if do_fetch:
             tid_list.append(tid)
+            tid_set.remove(tid)
             if len(tid_list) == 30:
                 break
+        else:
+            tid_set.remove(tid)
 
     if not tid_list:
         return
@@ -373,18 +391,31 @@ def get_inat_for_tid_set(tid_set):
     # but experimentation indicates that at least preferred_place_id
     # works.
     cnt = len(tid_list)
-    query = f'?per_page={cnt}&is_active=true&locale=en&preferred_place_id=14'
+    query = f'?per_page={cnt}&is_active=true&locale=en'
+    if local:
+        query += '&preferred_place_id=14'
 
     url = f'https://api.inaturalist.org/v1/taxa/{tid_str}{query}'
 
-    data_list = fetch(url, tid_str)
+    if local:
+        name = tid_str
+    else:
+        name = '(for global common name) ' + tid_str
+
+    data_list = fetch(url, name)
 
     # If a taxon_id is bogus or inactive, the results will be missing
     # that result.  So we can't assume that the order of the results
     # matches the order of the query.
     for data in data_list:
         tid = str(data['id'])
-        parse_inat_data(data, tid)
+        if local:
+            parse_inat_data(data, tid)
+        else:
+            if 'preferred_common_name' in data:
+                inat_dict[tid].global_com = data['preferred_common_name'].lower()
+            else:
+                inat_dict[tid].global_com = None
 
 
 def fetch(url, name):
@@ -413,9 +444,33 @@ def fetch(url, name):
 
 
 def apply_inat_names():
+    # Before applying names, query the API as necessary for the global
+    # common name of each taxon.
+    tid_set = set()
+    anc_set = set()
+    for inat in used_dict.values():
+        if (inat
+            and inat.com
+            and not hasattr(inat, 'global_com')):
+
+            tid = inat.taxon_id
+            tid_set.add(tid)
+
+            # When we query a TID, we automatically get its ancestors' data,
+            # so we exclude all such ancestors from the query list.
+            if tid in anc_dict:
+                anc_set.update(anc_dict[tid])
+
+    tid_set.difference_update(anc_set)
+    while (tid_set):
+        get_inat_for_tid_set(tid_set, local=False)
+
     for inat in used_dict.values():
         if inat:
             inat.apply_names()
+
+    # Dump the DB again now that we've added the global common names.
+    dump_inat_db(used_dict)
 
 
 def dump_inat_db(inat_dict):
@@ -511,10 +566,13 @@ class Inat:
     # Associate common names with scientific names.  (Previously we didn't
     # have the properties in place to know what to do with common names.)
     def apply_names(self):
-        page = find_page2(self.com, self.elab, from_inat=True,
-                          taxon_id=self.taxon_id)
+        page = find_page2(self.com, self.elab,
+                          from_inat=True, taxon_id=self.taxon_id)
         if not page:
             info(f'no names match for iNat data: {self.com} ({self.elab}), tid=se{lf.taxon_id}')
+        elif hasattr(self, 'global_com') and self.global_com:
+            page = find_page2(self.global_com.lower(), self.elab,
+                              from_inat='global_com', taxon_id=self.taxon_id)
 
 
     # A TID should be discarded if it has an ancestor TID that the
