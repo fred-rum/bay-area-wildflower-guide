@@ -3,7 +3,7 @@ sci:Medicago spp.
 x:ba
 
 [
-<h2>similar-sized yellow flower</h2>
+<h2>3--6 mm yellow flower</h2>
 ==bur clover:M. polymorpha
 color: yellow
 . generally glabrous
@@ -46,4 +46,4 @@ color: yellow
 . glabrous or puberulent
 . stem generally erect
 . stipules entire to sharply toothed
-. corolla 6--11 mm, <b>violet or violet- to yellow-green (yellow)</b>
+. <b>corolla 6--11 mm, violet or violet- to yellow-green (yellow)</b>
