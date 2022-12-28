@@ -13,8 +13,6 @@ Key features:
 . leaves with or without petioles
 
 ==solomon's plume:M. racemosum
-xx:Jepson does not recognize subspecies, so neither do I.  However, if subspecies are recognized, CA has only the western subspecies, ssp. <i>amplexicaule</i>.
-color: white
 . perianth parts 6
 . inflorescence is a <b>panicle</b>
 .. <b>&gt; 20 flowers</b> per inflorescence
@@ -22,13 +20,11 @@ color: white
 . <b>fruit tan with red speckles</b> (possibly with a greenish stripe without speckles) or bright red
 . <b>&gt; 5 leaves</b>, 7--20 cm, ovate to oblong-elliptic; <b>petioles +- 0</b>
 . common
-. Jepson doesn't recognize subspecies, but <a href="http://www.plantsoftheworldonline.org/taxon/urn:lsid:ipni.org:names:538037-1">POWO</a> does
-.. the only subspecies in California is ssp. amplexicaule
-.. a key to subspecies can be found in <a href="http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=242101759">Flora of North America</a>
 ;Edibility: The uniformly ruby-colored ripe berries have a nice bitter-sweet flavor.  The pulp is sucked off the hard seed.  The fruit can last a long time while staying edible. ^https://practicalselfreliance.com/solomons-plume-maianthemum-racemosum/ ^https://eflora.neocities.org/Maianthemum%20Sp.html
 
 ==star-flowered lily-of-the-valley:M. stellatum
 color: white
+xx:none
 . perianth parts 6
 . inflorescence is a <b>raceme</b> (or few-branched near base)
 .. <b>5--15 flowers</b> per inflorescence

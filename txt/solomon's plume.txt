@@ -1,0 +1,21 @@
+sci:Maianthemum racemosum
+xx:any
+
+A key to subspecies can be found in <a href="http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=242101759">Flora of North America</a>.
+
+==western solomon's plume:ssp. amplexicaule
+color: white
+sci_fj: n/a
+. the only subspecies in California
+. stem erect
+. leaf sessile, clasping
+.. blade base rounded
+.. tip of third leaf below inflorescence acute
+
+==eastern solomon's plume:ssp. racemosum
+sci_fpj: n/a
+. found only in the eastern US
+. stem arching
+. leaf with [very short] petiole
+.. blade base tapered
+.. third leaf below inflorescence tapering into a thin tip, 12--25 mm long
