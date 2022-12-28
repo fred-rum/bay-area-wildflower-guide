@@ -203,7 +203,9 @@ div.box :last-child {
     margin-bottom: 0px;
 }
 a.family:link, a.family:visited {
-    color: #9c8024;
+    color: black;
+    text-decoration: none;
+    border-bottom: 1px black dotted;
 }
 a.unobs:link, a.unobs:visited, span.unobs {
     color: black;

@@ -7,10 +7,11 @@ A key to subspecies can be found in <a href="http://www.efloras.org/florataxon.a
 color: white
 sci_fj: n/a
 . the only subspecies in California
-. stem erect
+. stem erect [?]
 . leaf sessile, clasping
 .. blade base rounded
 .. tip of third leaf below inflorescence acute
+;Edibility: The uniformly ruby-colored ripe berries have a nice bitter-sweet flavor.  The pulp is sucked off the hard seed.  The fruit can last a long time while staying edible. ^https://practicalselfreliance.com/solomons-plume-maianthemum-racemosum/ ^https://eflora.neocities.org/Maianthemum%20Sp.html
 
 ==eastern solomon's plume:ssp. racemosum
 sci_fpj: n/a

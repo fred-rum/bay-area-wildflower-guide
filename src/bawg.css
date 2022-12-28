@@ -417,7 +417,7 @@ div.box :last-child {
 
    I use colors to give a hint about what kind of page is being linked to.
    Class names are historical and don't fully reflect the current usage.
-     family - dark gold - pages which have children, but no key info
+     family - black     - pages which have children, but no key info
      parent - brown     - key pages (the color of a branch)
      leaf   - green     - childless pages with photos (the color of a leaf)
      unobs  - black     - childless pages without photos
@@ -427,7 +427,9 @@ div.box :last-child {
    depending on what pages have been visited.  I leave the default colors for
    external links only. */
 a.family:link, a.family:visited {
-    color: #9c8024;
+    color: black;
+    text-decoration: none;
+    border-bottom: 1px black dotted;
 }
 a.unobs:link, a.unobs:visited, span.unobs {
     color: black;

@@ -2257,6 +2257,7 @@ class Page:
             matchobj = re.match(r'list_hierarchy\s*$', c)
             if matchobj:
                 data_object.list_hierarchy = True
+                data_object.has_child_key = False
                 continue
 
             matchobj = re.match(r'end_hierarchy\s*$', c)
@@ -2393,8 +2394,7 @@ class Page:
         # add them to the membership list.
         # Parents with keys are listed more prominently in a separate section.
         for parent in self.parent:
-            if not parent.has_child_key:
-                self.membership_list.append(parent)
+            self.membership_list.append(parent)
 
         # Sort the membership list from lowest rank to highest.
         self.membership_list = sort_pages(self.membership_list,
@@ -2442,13 +2442,6 @@ class Page:
                 c_list.append(self.member_of(ancestor))
 
         return self.align_column('Member of', c_list)
-
-    def write_keyed_parents(self):
-        c_list = []
-        for parent in sort_pages(self.parent):
-            if parent.has_child_key:
-                c_list.append(parent.create_link(1))
-        return self.align_column('Key to', c_list)
 
     def page_matches_trait_value(self, trait, value):
         return (trait is None or
@@ -2770,7 +2763,9 @@ class Page:
             child.key_txt = key_txt
 
             # Remember that at least one child was given key info.
-            self.has_child_key = True
+            # list_hierarchy doesn't display key info, so the page doesn't
+            # count as having a child key.
+            self.has_child_key = not self.list_hierarchy
 
         link = child.create_link(2)
 
@@ -3011,7 +3006,7 @@ class Page:
                     w.write(f'{prolog} wild {members} of this {top} {epilog}.')
                 else:
                     # user-specified text instead of a standard abbreviation
-                    w.write(complete);
+                    w.write(complete)
 
                 if key_incomplete:
                     w.write(f'<br>\n<b>Caution: The key to distinguish these {members} is not complete.</b>')
@@ -3070,9 +3065,6 @@ class Page:
             if c_list:
                 c = '<br>\n'.join(c_list)
                 w.write(f'<p class="names">\n{c}\n</p>\n')
-
-            s = self.write_keyed_parents()
-            w.write(s)
 
             s = self.write_membership()
             w.write(s)
