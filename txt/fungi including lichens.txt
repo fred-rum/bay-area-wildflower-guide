@@ -21,6 +21,9 @@ do member_name_alias: genus, species
 
 ==class Agaricomycetes
 
+==club-like tuning fork:Calocera cornea
+x:more
+
 ==common lichens
 
 ==class Tremellomycetes

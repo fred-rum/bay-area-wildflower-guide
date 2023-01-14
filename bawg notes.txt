@@ -1540,3 +1540,6 @@ as a partial workaround before that is done,
 
 The BAWG HTML doesn't update its notice area immediately
   when the service worker notices that it is out of date, but it should
+
+Prioritize a taxon with a photo over another without a photo
+  when they have equal observations (e.g. zero)

@@ -290,7 +290,7 @@ def parse_core_chains():
         anc = page
         while anc:
             if anc.rank is Rank.kingdom:
-                kingdom = page.sci
+                kingdom = anc.sci
                 break
             anc = anc.linn_parent
 

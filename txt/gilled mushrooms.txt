@@ -16,6 +16,8 @@ x:more
 ==oyster mushroom:Pleurotus ostreatus
 x:more
 
+==oysterlings:genus Crepidotus
+
 ==trooping crumble cap:Coprinellus disseminatus
 x:more
 
@@ -38,3 +40,5 @@ x:ba
 
 ==western jumbo gym:Gymnopilus ventricosus
 x:more
+
+==puffballs
