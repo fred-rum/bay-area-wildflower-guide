@@ -6,6 +6,8 @@ sci_fpj: S. racemosa var. racemosa
 color: white, cream, yellow
 . red berries
 . only subspecies found in the bay area
+. POWO splits the North American var. microbotrys from the European ssp. racemosa, but iNaturalist doesn't yet recognize var. microbotrys
+. Calflora and Jepson has var. microbotrys as a synonym of var. racemosa
 
 ==rocky mountain elder:S. racemosa var. melanocarpa
 . purple-black berries

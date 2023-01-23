@@ -16,6 +16,8 @@ All flower#involucre shapes may be flared at the tip or not, which is independen
 
 {bell-shaped,bell} Rapidly widening at the base, then slowly expanding toward the tip.
 {cylindric,cylindrical} Significantly longer than wide with parallel sides.
+{ovoid} Egg shaped; widest between the middle and the base.
+{obovoid} Egg shaped; widest between the middle and the tip.
 {rotate} Saucer-shaped.  For a flower#corolla, generally means a fused base with little or no flower#tube and spreading flower#limbs.
 {urn-shaped,urn} Rapidly widening at the base, then narrowed toward the tip.
 
@@ -31,8 +33,8 @@ Particularly for leaves, the base of the blade may taper to the petiole regardle
 {linear} Long and very narrow with +- parallel sides. <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
 {oblanceolate} Long, somewhat narrow, and tapering to a point at the tip; widest between the middle and the tip. <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
 {oblong} Longer than wide, with +- parallel sides.  Wider than linear. <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
-{obovate} Egg shaped; widest between the middle and the tip. <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
 {ovate} Egg shaped; widest between the middle and the base. <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
+{obovate} Egg shaped; widest between the middle and the tip. <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
 {reniform} In the shape of a dented oval, with the petiole connection in the dent.  Depending on your source, the distinction from cordate is that the tip of the blade is rounded (instead of pointed) or that the blade base is concave around the petiole attachment (instead of sharply notched). <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
 {sagittate} In the shape of an arrowhead, with the two basal lobes draped +- parallel to the axis.  Compare hastate.
 

@@ -133,6 +133,7 @@ color: yellow, red
 . Butano, Mt. Montara vicinity
 
 ==round leaved heermann's lotus:A. heermannii var. orbicularis
+color:yellow
 xx:hist
 species: heermann's lotus
 . perennial herb; prostrate, often mat-forming, 30-100 cm

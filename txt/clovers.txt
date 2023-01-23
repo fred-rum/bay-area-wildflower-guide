@@ -242,17 +242,20 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0817+2051
 . rare
 
 ==pinpoint clover:T. gracilentum
-color:pink, pale purple
-<b>Caution: ID unsure</b>
+color:red purple
 . no bracts
 . calyx tube 1.5--2.5 mm, glabrous
 . calyx lobes +- 0.5 mm wide at base, glabrous, bristle-tipped
+. leaf is shallowly notched
+. CalPhotos and <a href="https://www.inaturalist.org/observations/110918674#activity_comment_42ea76cd-c747-478a-91ca-f5b6220b6463">Sandy Bernhard</a> indicate that the <b>peduncle is glabrous</b> (or perhaps at most with very short hairs).  Compare to {-notchleaf clover}.
 
 ==notchleaf clover:T. bifidum
 color:pink, pale purple
 . no bracts
 . calyx tube 0.8--1.4 mm, glabrous
 . calyx lobes +- 0.2 mm wide at base, with generally few hairs, bristle-tipped
+. leaf may or may not be notched
+. CalPhotos shows that the <b>peduncle is distinctly hairy</b>.  Compare to {-pinpoint clover}.
 
 ]
 [
@@ -266,7 +269,7 @@ color: white
 . Inflorescence: <b>sessile at end of stems or in succession of leaf axils, head-like, 7--10 mm wide</b>, many-flowered; pedicels < 1 mm
 . Calyx: 3--5 mm, lobes triangular
 .. for all others below, corolla generally > 5 mm
-. Corolla: 4--6 mm, +- > calyx, <b>pink</b>
+. Corolla: 4--6 mm, +- > calyx, <b>pink</b> [or white with little or no pink showing]
 
 ==nodding clover:T. cernuum
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0516+1333
@@ -328,7 +331,6 @@ leaves:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0108+1377
 <h4>inflorescence peduncled, peduncle generally > 10 mm, generally > leaves</h4>
 
 ==rancheria clover:T. albopurpureum
-color: pale purple, purple, red purple
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0411+2007
 . corolla <= calyx
 . calyx lobes > tube, plumose
@@ -342,6 +344,12 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0411+2007
 . Inflorescence: spike, 5--20 mm wide, ovate to short-cylindric
 . Calyx: 4--8 mm, lobes 3--6.5 mm, > tube, tapered or bristle-like, plumose
 . Corolla: 5--8 mm, <= calyx, <b>purple and white</b>
+
+==branched indian clover:T. dichotomum
+color: pale purple, purple, red purple
+https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1207+1118
+. corolla > calyx
+. corolla purple with white tips
 
 ==olive clover:T. olivaceum
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1215+3193
@@ -373,12 +381,6 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1209+1520
 . corolla pale pink to white
 . corolla 3--4 mm, < or << calyx
 . very rare
-
-
-==branched indian clover:T. dichotomum
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1207+1118
-. corolla > calyx
-. corolla purple with white tips
 
 ==crimson clover:T. incarnatum
 color: red

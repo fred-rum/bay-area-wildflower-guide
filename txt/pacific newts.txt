@@ -5,14 +5,14 @@ ID tips with photos are at <a href="http://www.californiaherps.com/identificatio
 ==california newt:T. torosa
 . brown back and yellow underside
 . black eyes with yellow patches
-. lower eyelid and upper lip are usually light colored
+. lower eyelid and upper lip are usually <b>light colored</b>
 . when seen from above, the <b>eyes extend</b> to or past the margin of the head.
 . common throughout the bay area
 
 ==rough-skinned newt:T. granulosa
 . brown back and yellow underside (sometimes orangish)
 . black eyes with yellow patches
-. lower eyelid and upper lip are usually dark colored
+. lower eyelid and upper lip are usually <b>dark colored</b>
 . when seen from above, the <b>eyes do not extend</b> past the margin of the head.
 . in the bay area, found mostly on the peninsula
 . rare in the Diablo Range and not present south of Sunol Wilderness.
@@ -20,5 +20,5 @@ ID tips with photos are at <a href="http://www.californiaherps.com/identificatio
 ==red-bellied newt:T. rivularis
 . dark brown back and orange-red underside
 .. strong dark band across the base of the tail's underside (weak in others)
-. black eyes with no yellow patches
-. found only in a single bay area quadrant, probably near Lexington Reservoir.
+. <b>black eyes with no yellow patches</b>
+. found only in a single bay area quadrant, near the Lexington Reservoir
