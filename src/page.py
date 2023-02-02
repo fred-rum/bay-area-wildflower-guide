@@ -498,6 +498,7 @@ class Page:
 
         self.txt = ''
         self.key_txt = ''
+        self.add_txt = ''
         self.photo_dict = {} # suffix -> photo filename (including suffix)
 
         # rep_jpg names a jpg that will represent the page in any
@@ -2207,7 +2208,7 @@ class Page:
 
             matchobj = re.match(r';(.*)$', c)
             if matchobj:
-                data_object.txt += matchobj.group(1) + '\n'
+                data_object.add_txt += matchobj.group(1) + '\n'
                 continue
 
             matchobj = re.match(r'is_top\s*$', c)
@@ -2842,6 +2843,10 @@ class Page:
             s = self.txt
         else:
             s = self.key_txt
+        if self.add_txt:
+            if s:
+                s += '\n'
+            s += parse_txt(self.name, self.add_txt, self, self.glossary)
 
         self.txt = parse2_txt(self, s, self.glossary)
 
