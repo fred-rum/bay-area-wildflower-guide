@@ -4,6 +4,11 @@ end_hierarchy
 
 ==witch's butter:Tremella mesenterica
 x:more
+. smaller and somewhat shinier surface when dry ^https://www.mykoweb.com/CAF/species/Naematelia_aurantia.html
+. associates with broadleaf (flowering) trees.  Compare to {-orange jelly spot}.
 
 ==golden ear:Naematelia aurantia
 x:more
+. larger and somewhat duller surface when dry ^https://www.mykoweb.com/CAF/species/Naematelia_aurantia.html
+. associates with broadleaf (flowering) trees with intact bark.  Compare to {-orange jelly spot}.
+; Edibility: edible, but without flavor. ^https://www.mykoweb.com/CAF/species/Naematelia_aurantia.html

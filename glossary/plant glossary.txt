@@ -42,7 +42,7 @@ Particularly for leaves, the base of the blade may taper to the petiole regardle
 
 {palmate,palmately} With lobes spreading in a plane from a common point.
 {palmate-pinnate} 1st-order palmate and 2nd-order pinnate.
-{pinnate,pinnately} Refers to a two-dimensional branched structure.  Typically refers to lobes or leaflets in a leaf.
+{pinnate,pinnately} Refers to a two-dimensional structure with nodes branching to either side of a central axis.  Typically refers to lobes or leaflets in a leaf.
 {odd-pinnate,odd-pinnately} Pinnate with pairs of lateral branches and one terminal branch.
 {even-pinnate,even-pinnately} Pinnate with pairs of lateral branches but no terminal branch.
 {N-pinnate,1-pinnate,2-pinnate,3-pinnate,4-pinnate,1--2-pinnate,1--3-pinnate,1--4-pinnate,2--3-pinnate,2--4-pinnate,3--4-pinnate} 1-pinnate means that the structure has 1 level of branches arising from a central axis.  2-pinnate means that the branches also have branches, etc.
