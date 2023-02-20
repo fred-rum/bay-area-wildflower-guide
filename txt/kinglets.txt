@@ -1,0 +1,13 @@
+sci:family Regulidae
+x:ca
+
+==ruby-crowned kinglet:Corthylio calendula
+x:any
+. white around eye
+. buffy flanks
+
+==golden-crowned kinglet:Regulus satrapa
+x:ca
+. grayish flanks
+. black and white stripes around eye; black stripe below crown
+. much less common in the bay area

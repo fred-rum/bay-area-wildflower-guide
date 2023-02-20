@@ -26,8 +26,7 @@ x:ca
 ==northern mockingbird:Mimus polyglottos
 x:ca
 
-==ruby-crowned kinglet:Regulus calendula
-x:more
+==kinglets
 
 ==new world warblers:family Parulidae
 
