@@ -15,6 +15,7 @@ color: red
 . filaments purple, short, erect
 . stamens yellowish
 . stigmas greenish
+. may instead be the hybrid '<a href="https://www.inaturalist.org/observations/26091145#identification-75de789b-44d5-4d0e-a232-0fd6adb4c8ac">coral glow</a>', although the unsourced name of 'Passiflora manicata &times; tripartita is dubious
 
 ==banana passionfruit:P. tarminiana
 color: pink
