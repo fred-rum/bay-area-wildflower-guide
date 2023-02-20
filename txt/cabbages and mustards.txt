@@ -10,15 +10,7 @@ color: yellow
 . petals 6--11(13) mm
 . flowers much like {-Brassica nigra}
 . very common
-
-==black mustard:B. nigra
-color: yellow
-. stem 30--200 cm, generally branched distally
-. basal and lower cauline leaves pinnately lobed, serrate-dentate
-. <b>distal cauline leaves</b> smaller, sessile, <b>base tapered, not lobed</b>
-. petals 7--11(13) mm
-. flowers much like {-Brassica rapa}
-. very common
+. very similar to {-Rhamphospermum}
 
 ==brown mustard:B. juncea
 . stem 20--100 cm, branched distally

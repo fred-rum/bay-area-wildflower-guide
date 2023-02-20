@@ -230,7 +230,7 @@ var pages=[
 ["chaparral clarkia","","-2"],
 ["chaparral currant",1,2,3,5],
 ["chaparral pea",1,2,3],
-["charlock mustard",1,2,5],
+["charlock",1,2,5],
 ["checker lily",1,2,3,4,5],
 ["checkerspot caterpillars",7,8],
 ["cherry-plum",2,3,4,5],

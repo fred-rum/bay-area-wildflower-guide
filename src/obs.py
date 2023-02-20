@@ -83,12 +83,15 @@ class Obs:
         node_strs = []
         if (self.leaf_obs > 1 or
             (self.leaf_obs == 1 and (self.leaf_unobs or self.key))):
-            node_strs.append(f'<span class="leaf">{self.leaf_obs} observed taxons</span>')
+            s = 's' if (self.leaf_obs > 1) else ''
+            node_strs.append(f'<span class="leaf">{self.leaf_obs} observed taxon{s}</span>')
         if (self.leaf_unobs > 1 or
             (self.leaf_unobs == 1 and (self.leaf_obs or self.key))):
-            node_strs.append(f'<span class="unobs">{self.leaf_unobs} unobserved taxons</span>')
+            s = 's' if (self.leaf_unobs > 1) else ''
+            node_strs.append(f'<span class="unobs">{self.leaf_unobs} unobserved taxon{s}</span>')
         if self.key:
-            node_strs.append(f'<span class="parent">{self.key} keys</span>')
+            s = 's' if (self.key > 1) else ''
+            node_strs.append(f'<span class="parent">{self.key} key{s}</span>')
 
         if node_strs:
             node_str = ' / '.join(node_strs)

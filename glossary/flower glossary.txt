@@ -116,4 +116,4 @@ These terms may occasionally be used loosely rather than following the strict de
 {staminate} With fertile stamens but without pistils or without fertile pistils.  See pistillate.
 {throat,throats} In a fused calyx or corolla, the expanded portion between the tube and the limb. [figure:false babystars]
 {tube,tubes} In a fused calyx or corolla, the +- cylindric portion proximal to the throat. [figure:false babystars]
-{valve,valves} One part of a pericarp when the parts split by dehiscence.
+{valve,valves,valved} One part of a pericarp when the parts split by dehiscence.

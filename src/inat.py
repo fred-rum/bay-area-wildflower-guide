@@ -257,7 +257,8 @@ def get_inat(name, used=False):
     inat = inat_dict[name]
 
     if used:
-        used_dict[inat.taxon_id] = inat
+        if inat:
+            used_dict[inat.taxon_id] = inat
         used_dict[name] = inat
 
     return inat
