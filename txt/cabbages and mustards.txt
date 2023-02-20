@@ -11,6 +11,7 @@ color: yellow
 . flowers much like {-Brassica nigra}
 . very common
 . very similar to {-Rhamphospermum}
+. some leaves may encircle the stem
 
 ==brown mustard:B. juncea
 . stem 20--100 cm, branched distally
@@ -27,3 +28,4 @@ color: yellow
 . middle and distal cauline leaves sessile, base lobed or generally clasping
 . petals <b>18--25 mm</b>
 . scattered near the coast, e.g. Wilder Ranch
+. some leaves may clasp the stem without encircling it

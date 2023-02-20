@@ -19,6 +19,13 @@ color: yellow
 .. <b>valves have 1 vein each</b>
 .. the distal segment has no seeds
 . very common
+. vegetation is glossy dark green; compare to {-shortpod mustard}
+. leafy stem; compare to {-shortpod mustard}
+. fruit has 4 raised ribs, giving each a square cross section
+. fruits are appressed to stem, or at least partially so; compare to {-charlock}
+. sepals/buds are glabrous; compare to {-shortpod mustard}
+. no leaves clasp the stem
+. flower buds often overtop open flowers
 
 ==charlock:R. arvense
 sci_fpj:Sinapis arvensis
@@ -34,3 +41,8 @@ color: yellow
 .. distal segment has 1 or 2 seeds (or sometimes 0, according to Jepson)
 . uncommon
 . very similar to {-white mustard}
+. fruits are not appressed to stem; compare to {-black mustard}
+. fruit does not have an obviously square cross section
+. stem is much more hairy than {-black mustard}
+. leaves are often much less lobed than {-black mustard}
+. some buds have the sepals folden to make them look like to make a cross-shaped dome; also true of {-white mustard}

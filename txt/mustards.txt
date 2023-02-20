@@ -1,10 +1,15 @@
 sci:n/a
 
+Many ID tips from the iNaturalist forum^https://forum.inaturalist.org/t/brassica-nigra-and-hirschfeldia-incana-why-so-many-mistakes/24528 .
+
+Find some fruits!  The more mature, the better.
+
 ==cabbages and mustards:genus Brassica
 . basal leaves in a rosette
 . <b>sepals generally erect to ascending</b>
 . distal cauline leaves sessile
 . very common
+. leaf feels "scratchy"; compare to {-Hirschfeldia incana}
 
 ==genus Rhamphospermum
 . very common
@@ -22,6 +27,7 @@ x:ca
 .. seeds spheric
 . rare
 . very similar to {-charlock}
+. some buds have the sepals folden to make them look like to make a cross-shaped dome; also true of {-charlock}
 
 ==shortpod mustard:Hirschfeldia incana
 color: yellow
@@ -34,6 +40,21 @@ genus: n/a
 . valves have 3 veins each (or rarely more)
 . seeds ovoid
 . very common
+. fruit is valved proximally, indehiscent distally
+.. fruit linear, glabrous
+.. <b>valves have 3--7 prominent veins each</b>
+.. distal segment is conical
+.. distal segment has 1 or 2 seeds
+. leaf feels "fuzzy"; compare to {-genus Brassica}
+. vegetation is dull gray-green; compare to {-black mustard}
+. leaves have regular lobes with a terminal lobe not much wider than the side lobes
+.. many more basal lobes than {-black mustard}
+. most leaves are in the basal rosette; compare to {-black mustard}
+. fruit does not have a square cross section; flattened at least in the upper part?
+. sepals and buds are hairy; compare to {-black mustard}
+. no leaves clasp the stem
+. open flowers often overtop flower buds
+
 
 ==genus Sisymbrium
 . 4 long stamens and 2 short stamens
