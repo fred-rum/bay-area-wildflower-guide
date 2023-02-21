@@ -2,47 +2,12 @@ com:n/a
 sci:genus Rhamphospermum
 x:ca
 
-Genus described in Harvard Papers in Botany, June 2021 <a href="https://huh.harvard.edu/files/herbaria/files/hpb_volume26_number1_lores.pdf">[PDF]</a>.
-
-Both species are very similar to {-field mustard}.
+See {-yellow mustards} for a key.
 
 ==black mustard:R. nigrum
 sci_fpj:Brassica nigra
 color: yellow
-. <b>basal leaves in a rosette</b>
-. <b>sepals generally erect to ascending</b>
-. stem 30--200 cm, generally branched distally
-. basal and lower cauline leaves pinnately lobed, serrate-dentate
-. <b>distal cauline leaves</b> smaller, sessile, <b>base tapered, not lobed</b>
-. petals 7--11(13) mm
-. fruit is valved proximally, indehiscent distally
-.. <b>valves have 1 vein each</b>
-.. the distal segment has no seeds
-. very common
-. vegetation is glossy dark green; compare to {-shortpod mustard}
-. leafy stem; compare to {-shortpod mustard}
-. fruit has 4 raised ribs, giving each a square cross section
-. fruits are appressed to stem, or at least partially so; compare to {-charlock}
-. sepals/buds are glabrous; compare to {-shortpod mustard}
-. no leaves clasp the stem
-. flower buds often overtop open flowers
 
 ==charlock:R. arvense
 sci_fpj:Sinapis arvensis
 color: yellow
-. <b>basal leaves not in a rosette</b>
-. <b>sepals spreading</b>
-. stigma 2-lobed
-. cauline leaves short-petioled, dentate
-. fruit is valved proximally, indehiscent distally
-.. fruit linear, glabrous
-.. <b>valves have 3--7 prominent veins each</b>
-.. distal segment is much shorter than the proximal segment, conical
-.. distal segment has 1 or 2 seeds (or sometimes 0, according to Jepson)
-. uncommon
-. very similar to {-white mustard}
-. fruits are not appressed to stem; compare to {-black mustard}
-. fruit does not have an obviously square cross section
-. stem is much more hairy than {-black mustard}
-. leaves are often much less lobed than {-black mustard}
-. some buds have the sepals folden to make them look like to make a cross-shaped dome; also true of {-white mustard}

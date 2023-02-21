@@ -1543,3 +1543,36 @@ The BAWG HTML doesn't update its notice area immediately
 
 Prioritize a taxon with a photo over another without a photo
   when they have equal observations (e.g. zero)
+
+Advanced search:
+  a search for a tag (e.g. 'purple flowers') or month or park goes to the
+    'advanced search' page
+  as does a search with no results
+  if a simple search is performed on a tag, the tag is added to the
+    original page's taxon (if any) in the advanced search results
+  pages.js (or a variant) lists all taxons in hierarchy format
+    ?including non-pages such as "basidiomycete fungi (phy7lum Basidiomycota)"?
+  javascript generates the page content based on the search results
+  if a taxon is found, a radio button allows additional taxons to be added
+    vs. the default of replacing the taxon
+  searching for a tag or month or park always adds it to the existing search
+    each search term has a radio button to allow it to be removed
+    if there are two or more in a category, a button allows all to be cleared
+  when a search term is added, it is listed in the autocomplete results
+    preceded with a '+'
+  some terms are never added to an advanced search, e.g. glossary terms
+  a search category is displayed by default only if it is included in a search
+    but a link allows all search categories to be displayed
+  unused tags in a category are not shown by default
+    but a link allows all tags in a category to be displayed (e.g. all months)
+  if a taxon is searched, all taxons under in the hierarchy are also considered
+    to match
+  when there are multiple matches for search terms, the minimum encompassing
+    set of ancestors is included in the results
+  since tags are repeated verbatim for many taxons, they are encoded
+    an easy encoding is e.g. an uppercase letter followed by a lowercase letter
+    a search can thus do a simple string query to find matches in the
+      encoded tag string
+    allows for 26*26=676 tag values even without going to base-64
+    the 12 months are super common and could be encoded with single digits and
+      some punctuation

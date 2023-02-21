@@ -1,0 +1,97 @@
+sci:n/a
+
+This page describes the most common mustard relatives with yellow flowers that are 1+ inch in diameter.  Smaller and rarer flowers are not covered here.
+
+ID tips are generally from Jepson eFlora unless otherwise stated.
+
+ID tips marked [IF] from the iNaturalist forum^https://forum.inaturalist.org/t/brassica-nigra-and-hirschfeldia-incana-why-so-many-mistakes/24528
+
+ID tips marked [MCW] are from Monterey County Wildflowers: https://montereywildflowers.com/brassicaceae-mustards/
+
+ID tips marked [HPB] are from Harvard Papers in Botany, June 2021 <a href="https://huh.harvard.edu/files/herbaria/files/hpb_volume26_number1_lores.pdf">[PDF]</a>.
+
+A basal rosette may be obscured by live or dead vegetation, or the rosette itself may have withered away.  The absence of a basal rosette doesn't seem to be a useful distinguishing characteristic.
+
+The fruit of all species is linear and generally splits into two valves along most of its length, but with an indehiscent terminal segment.  Young fruit may be indehiscent throughout[?].
+
+Key features:
+. fruits appressed to stem or not
+. fruit shape (the more mature, the better): side view and cross section
+. plant height
+. hairy lower stem or not
+. basal leaves: present as a rosette or not, lobe pattern
+. cauline leaves: many or few
+. flower bud: overtopping flowers or not, hairy or not
+
+==field mustard:Brassica rapa
+. fruit not appressed
+.. fruit 3--8 cm long, 2--4 mm wide
+.. terminal segment tapered [MCW], 8--22 mm long
+. stem 30--100 cm
+. few or no hairs
+. basal leaves may be pinnately lobed, with the terminal leaflet being the largest [MCW]
+. middle and <b>distal cauline leaves</b> sessile, base lobed, <b>generally clasping</b>
+. open flowers often overtop flower buds
+. very common
+. there are other {-genus Brassica}, although these are rare
+
+==shortpod mustard:Hirschfeldia incana
+color: yellow
+x:any
+genus: n/a
+. fruit appressed to stem
+.. fruit does not have a square cross section; flattened at least in the upper part?
+.. fruit 0.7--1.5 cm long, 1--1.7 mm wide
+.. terminal segment conical, 3--6 mm long, 1--2 seeded
+. basal leaves in a rosette, pinnately lobed
+. cauline leaves dentate to pinnately lobed, petioled or sessile, not clasping
+. most leaves are in the basal rosette; compare to {-black mustard}
+. leaf feels "fuzzy" [basal or cauline?] [IF]
+. vegetation is dull gray-green; compare to {-black mustard} [IF]
+. leaves have regular lobes with a terminal lobe not much wider than the side lobes
+.. many more basal lobes than {-black mustard}
+. open flowers often overtop flower buds
+.. sepals and buds are hairy [IF]; compare to {-black mustard}
+. very common
+
+==black mustard:Rhamphospermum nigrum
+. fruit appressed to stem, or at least partially so
+.. may be less appressed later in the season [IF]
+.. <b>fruit has 4 raised ribs, giving each a square cross section</b> [IF]
+.. fruit 1--2.5 cm long, 2--3 mm wide
+.. valves have 1 vein each [HPB]
+.. terminal segment 2--5 mm, thin and seedless
+. stem 30--<b>200 cm</b>
+.. stem hairs unclear: hairy only higher up [MCW] or stiff hairy below [Jepson]
+. basal leaves are pinnately lobed, more or less toothed [MCW]
+. cauline leaves are smaller [MCW] with a tapered base, not clasping
+. stem is much more leafy than {-shortpod mustard} [IF]
+. vegetation is glossy dark green; compare to {-shortpod mustard}
+. flower buds often overtop open flowers [IF]
+.. sepals and buds are glabrous [IF]; compare to {-shortpod mustard}
+. very common, but also commonly IDed by mistake [IF]
+
+==charlock:Rhamphospermum arvense
+. fruit not appressed
+. fruit linear: 2--4.5 cm long, 2.5--3.5 mm wide, glabrous
+.. valves have 3--7 prominent veins each [HPB]
+.. <b>fruit does not have an obviously square cross section</b> [IF]
+.. terminal segment is conical, inflated around 1 or 2 seeds [HPB] or 0 or 1 seeds [Jepson]
+. stem 20--100 cm (occasionally much taller)
+.. stem is much more hairy than {-black mustard} [IF], but occasionally glabrous [Jepson]
+. basal leaves not in a rosette
+. cauline leaves short-petioled, dentate
+. uncommon
+
+==white mustard:Sinapis alba
+genus:n/a
+x:ca
+. fruit not appressed
+. fruit 2--4 cm long, 3--5.5 mm wide
+.. terminal segment flattened, seedless, 6--12 mm long
+. stem 25--100 cm (ocasionally much taller)
+. hairy (or rarely glabrous)
+. basal leaves not in a rosette, pinnately lobed
+.. lateral lobes in 1--3 pairs, dentate/lobed
+. distal cauline leaves short-petioled, coarsely dentate or entire
+. rare

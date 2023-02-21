@@ -3,15 +3,13 @@ x:hist/rare
 
 ==field mustard:B. rapa
 color: yellow
+. see {-yellow mustards} for a key to common mustards
 . stem 30--100 cm, simple or branched
 . basal leaves pinnately lobed, lateral lobes 2--4(6) pairs, terminal lobe obovate, wavy-dentate
 . middle and <b>distal cauline leaves</b> sessile, <b>base lobed, generally clasping</b>
 . pedicel erect
 . petals 6--11(13) mm
-. flowers much like {-Brassica nigra}
 . very common
-. very similar to {-Rhamphospermum}
-. some leaves may encircle the stem
 
 ==brown mustard:B. juncea
 . stem 20--100 cm, branched distally
