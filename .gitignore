@@ -41,3 +41,4 @@ inat/
 log
 data/*.csv
 !data/calpoison.csv
+archive/

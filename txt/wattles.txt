@@ -1,6 +1,8 @@
 sci:Acacia spp.
 x:!more
 
+do disable_obs_promotion_checks_from_needs_id: species # I don't trust some IDs
+
 We have just about all (~14) California species in the bay area.  The Jepson key is fairly straightforward, so I won't bother to replicate the key here.
 
 Key features:

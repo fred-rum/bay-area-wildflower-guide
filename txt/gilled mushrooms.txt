@@ -42,3 +42,11 @@ x:ba
 x:more
 
 ==puffballs
+
+==tall psathyrella:Psathyrella longipes
+x:more
+
+==questionable stropharia:Stropharia ambigua
+x:more
+
+==deceivers:genus Laccaria

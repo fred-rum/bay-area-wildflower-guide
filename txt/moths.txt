@@ -25,4 +25,7 @@ bug:335
 bug:166855
 x:ba
 
+==oak winter highflier:Hydriomena nubilofasciata
+bug:43952
+
 ==gall moths

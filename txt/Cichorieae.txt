@@ -1,4 +1,4 @@
-com: n/a
+com: lettuce, chicory, dandelion, and salsify tribe
 sci: tribe Cichorieae
 rep: dandelions
 

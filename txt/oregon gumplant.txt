@@ -2,6 +2,7 @@ sci:Grindelia stricta
 x:ba
 
 ==coastal gum plant:var. platyphylla
+color:yellow
 . up to 100 cm tall
 . herb; <b>stems woody for <= 10 cm</b> at base of plant
 . <b>phyllaries generally spreading</b>, recurved, or coiled, round in cross section

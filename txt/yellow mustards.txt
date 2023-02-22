@@ -4,9 +4,9 @@ This page describes the most common mustard relatives with yellow flowers that a
 
 ID tips are generally from Jepson eFlora unless otherwise stated.
 
-ID tips marked [IF] from the iNaturalist forum^https://forum.inaturalist.org/t/brassica-nigra-and-hirschfeldia-incana-why-so-many-mistakes/24528
+ID tips marked [IF] from the <a href="https://forum.inaturalist.org/t/brassica-nigra-and-hirschfeldia-incana-why-so-many-mistakes/24528">iNaturalist forum</a>.
 
-ID tips marked [MCW] are from Monterey County Wildflowers: https://montereywildflowers.com/brassicaceae-mustards/
+ID tips marked [MCW] are from <a href="https://montereywildflowers.com/brassicaceae-mustards/">Monterey County Wildflowers</a>.
 
 ID tips marked [HPB] are from Harvard Papers in Botany, June 2021 <a href="https://huh.harvard.edu/files/herbaria/files/hpb_volume26_number1_lores.pdf">[PDF]</a>.
 

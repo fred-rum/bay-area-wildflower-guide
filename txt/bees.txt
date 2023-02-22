@@ -31,3 +31,6 @@ bug:94843
 
 ==n/a:genus Panurginus
 bug:108931
+
+==mining bees:genus Andrena
+bug:22574

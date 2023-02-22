@@ -133,6 +133,7 @@ color: white
 . mostly SE of highway 17 in the Santa Cruz Range, with significant eastern pockets at Mt. Diablo, Grant, and Coe
 
 ==mount tamalpais manzanita:A. montana ssp. montana
+color: pink
 . mounded to erect, 0.5--2 m
 . inflorescence a panicle, 1--3-branched
 . leaf dark green, shiny, puberulent or glabrous

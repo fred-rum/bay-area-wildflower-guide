@@ -22,6 +22,5 @@ color: yellow
 . Ecology: sandy or saline bottomland, roadsides
 
 ==oregon gumplant:G. stricta
-color: yellow
 . <b>leaves +- fleshy</b>
 . Ecology: <b>coastal bluffs, dunes, tidal wetlands</b>

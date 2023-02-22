@@ -30,7 +30,7 @@ There is a <a href="insect-glossary.html">glossary</a> for insects.
 
 ==termites
 
-==four-lined silverfish:Ctenolepisma lineata
+==four-lined silverfish:Ctenolepisma lineatum
 bug:156092
 
 ==aphids

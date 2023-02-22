@@ -38,7 +38,7 @@ color: yellow
 . generally 7--9 pairs of leaf lobes
 . rare
 
-==pale goat-chicory:A. glauca var. glauca
+==prairie agoseris:A. glauca var. glauca
 species: pale agoseris
 xx:ca
 . stem generally not leafy or obscurely leafy above base

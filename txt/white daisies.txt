@@ -12,7 +12,8 @@ Possible key features:
 . shape and scale of involucre, phyllaries
 . hair anywhere? (e.g. stem base, upper stem, leaf top or bottom, phyllaries)
 
-==common daisy:Bellis perennis
+==lawn daisy:Bellis perennis
+acom: common daisy
 color: white
 x:ca
 genus: daisies
