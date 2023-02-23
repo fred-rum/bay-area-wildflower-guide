@@ -3,7 +3,7 @@ x:ba
 
 ==warrior's plume:P. densiflora
 color: red, red purple
-(formerly indian warrior)
+acom:indian warrior
 . corolla dark red or red-purple
 
 ==dudley's lousewort:P. dudleyi
