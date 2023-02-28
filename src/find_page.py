@@ -1,4 +1,5 @@
 import re
+import datetime
 
 # My files
 from error import *
@@ -208,7 +209,8 @@ def find_sci(elab, from_inat=False):
 #
 # If only one of taxon_id/com/elab is valid, then we search for the
 # corresponding name without any extra frills.
-def find_page2(com, elab, from_inat=False, taxon_id=None):
+def find_page2(com, elab, from_inat=False, taxon_id=None,
+               src='unknown', date=None):
     elab = fix_elab(elab)
 
     # taxon_id has first priority.
@@ -248,7 +250,8 @@ def find_page2(com, elab, from_inat=False, taxon_id=None):
         # name.  I.e. do *not* set the taxon_id if there was a match on an
         # alternative scientific name.
         if taxon_id and strip_sci(elab) not in asci_page:
-            page.set_taxon_id(taxon_id, from_obs=from_inat)
+            page.set_taxon_id(taxon_id, from_obs=from_inat,
+                              src=src, date=date)
 
     return page
 
@@ -259,3 +262,9 @@ def find_page1(name, from_inat=False):
         page = find_com(name)
 
     return page
+
+# Since find_page2() needs a date which is commonly "now", we provide
+# a convenience function for it.
+now_at_start = datetime.datetime.now(datetime.timezone.utc)
+def now():
+    return now_at_start

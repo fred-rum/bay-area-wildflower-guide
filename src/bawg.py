@@ -31,7 +31,6 @@ import csv
 import io
 import yaml
 from unidecode import unidecode # ? from https://pypi.org/project/Unidecode/
-import datetime
 
 # My files
 from args import *
@@ -76,8 +75,6 @@ else:
 
 strip_comments('gallery.html', debug_gallery=arg('-debug_js'))
 
-
-year = datetime.datetime.today().year
 
 # Read the mapping of iNaturalist observation locations to short park names.
 park_map = {}
@@ -251,7 +248,7 @@ if arg('-tree') == '6':
 for page in page_array:
     page.record_genus()
 
-# Read taxonomy CSVs from ZIP file
+# Read DarwinCore archive
 read_core()
 
 if arg('-steps'):
@@ -359,7 +356,8 @@ def read_obs_chains(f):
                     # If find_page2() finds a match, it automatically sets the
                     # taxon_id for the page if it didn't have it already.
                     page = find_page2(com, sci, from_inat=True,
-                                      taxon_id=taxon_id)
+                                      taxon_id=taxon_id,
+                                      src='observations.csv', date=now())
 
                     # if find_page2() didn't find a match, create a shadow
                     # page for the taxon.
@@ -379,7 +377,8 @@ def read_obs_chains(f):
 
                         page = Page(com, sci, shadow=True, from_inat=True,
                                     src='observations.csv')
-                        page.set_taxon_id(taxon_id, from_obs=True)
+                        page.set_taxon_id(taxon_id, from_obs=True,
+                                          src='observations.csv', date=now())
 
                     if group != orig_sci:
                         # This is the lowest-level group we found, but
@@ -416,18 +415,30 @@ for page in page_array:
 if arg('-tree') == '7':
     print_trees()
 
-if arg('-steps'):
-    info("Step 7t: Create taxonomic chains from DarwinCore data")
 
-parse_core_chains()
-
-if arg('-tree') == '7t':
+if arg('-tree') == '7c':
     print_trees()
 
 if arg('-steps'):
-    info("Step 7j: Read iNaturalist API data")
+    info("Step 7ac: Read cached iNaturalist API data")
 
 read_inat_files()
+
+if arg('-tree') == '7ac':
+    print_trees()
+
+
+if arg('-steps'):
+    info("Step 7c: Create taxonomic chains from DarwinCore archive")
+
+parse_core_chains()
+
+if arg('-tree') == '7c':
+    print_trees()
+
+
+if arg('-steps'):
+    info("Step 7a: Create taxonomic chains from iNaturalist API data")
 
 page_set = set()
 for page in page_array:
@@ -442,8 +453,9 @@ for page in page_array:
         page_set.add(page)
 link_inat(page_set)
 
-if arg('-tree') == '7j':
+if arg('-tree') == '7a':
     print_trees()
+
 
 if arg('-steps'):
     info("Step 8: Assign ancestors to pages that don't have scientific names")
@@ -456,6 +468,7 @@ for page in page_array:
 
 if arg('-tree') == '8':
     print_trees()
+
 
 if arg('-steps'):
     info('Step 9: Assign default ancestor to floating trees')
@@ -470,6 +483,7 @@ if default_ancestor:
 if arg('-tree') == '9':
     print_trees()
 
+
 if arg('-steps'):
     info('Step 10: Propagate properties')
 
@@ -479,6 +493,7 @@ for page in page_array:
 
 if arg('-tree') == '10':
     print_trees()
+
 
 if arg('-steps'):
     info('Step 11: Apply create and link properties')
@@ -584,7 +599,8 @@ def read_observation_data(f):
         # first pass didn't yet have the property information to know
         # whether to add an alternative name from iNaturalist.  So we
         # supply the names again for that purpose.
-        page = find_page2(com, sci, from_inat=True, taxon_id=taxon_id)
+        page = find_page2(com, sci, from_inat=True, taxon_id=taxon_id,
+                          src='observations.csv', date=now())
 
         # A Linnaean page should have been created during the first path
         # through observations.csv, so it'd be weird if we can't find it.

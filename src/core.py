@@ -1,6 +1,7 @@
 import zipfile
 import io
 import csv
+import datetime
 
 # My files
 from args import *
@@ -14,7 +15,7 @@ from page import *
 zip_name = 'inaturalist-taxonomy.dwca.zip'
 core_pickle_name = 'core.pickle'
 mini_pickle_name = 'core_mini.pickle'
-db_version = '2.4.1'
+db_version = '2.5.0'
 
 inat_ranks = ('infrahybrid',
               'form',
@@ -28,7 +29,6 @@ num_to_rank = {}
 for i, rank in enumerate(inat_ranks):
     rank_to_num[rank] = i
     num_to_rank[i] = rank
-
 
 # It takes a long time to read the entire iNaturalist database(s),
 # so we compress the data down into a reduced-sized data structure
@@ -70,23 +70,12 @@ def read_core():
     mini_mtime = getmtime(mini_pickle_name)
 
     if mini_mtime > core_mtime and mini_mtime > zip_mtime and not arg('-core'):
-        try:
-            with open(f'{root_path}/data/{mini_pickle_name}', mode='rb') as f:
-                core_db = pickle.load(f)
-                if core_db['version'] == db_version:
-                    core_dict = core_db['core_dict']
-                    read_mini = True
-        except:
-            pass
+        read_core_pickle(mini_pickle_name)
+        if core_dict:
+            read_mini = True
 
     if not core_dict and core_mtime > zip_mtime:
-        try:
-            with open(f'{root_path}/data/{core_pickle_name}', mode='rb') as f:
-                core_db = pickle.load(f)
-                if core_db['version'] == db_version:
-                    core_dict = core_db['core_dict']
-        except:
-            pass
+        read_core_pickle(core_pickle_name)
 
     if not core_dict:
         read_data_file(zip_name, read_core_zip,
@@ -94,8 +83,21 @@ def read_core():
                        msg='taxon hierarchy')
 
 
+def read_core_pickle(pickle_name):
+    global core_dict, core_date
+    try:
+        with open(f'{root_path}/data/{pickle_name}', mode='rb') as f:
+            core_db = pickle.load(f)
+            if core_db['version'] == db_version:
+                core_dict = core_db['core_dict']
+                core_date = core_db['core_date']
+    except:
+        pass
+
+
 def dump_core_db(core_dict, name):
     core_db = {'version': db_version,
+               'core_date': core_date,
                'core_dict': core_dict}
 
     with open(f'{root_path}/data/{name}', mode='wb') as w:
@@ -114,6 +116,21 @@ def read_core_zip(zip_fd):
     binary_fd = zip_read.open('taxa.csv')
     csv_fd = io.TextIOWrapper(binary_fd, encoding='utf-8')
     csv_reader = csv.DictReader(csv_fd)
+
+    zip_info = zip_read.getinfo('taxa.csv')
+    date_time = zip_info.date_time
+    # I have no way to know for sure, but my best guess is that the
+    # ZIP file uses the UTC timezone.  Thus, the 7 am time in the ZIP file
+    # corresponds to late night on the US west coast, which I know is when
+    # iNaturalist prefers to perform its heavy calculations.
+    global core_date
+    core_date = datetime.datetime(date_time[0],
+                                  date_time[1],
+                                  date_time[2],
+                                  hour=date_time[3],
+                                  minute=date_time[4],
+                                  second=date_time[5],
+                                  tzinfo=datetime.timezone.utc)
 
     for row in csv_reader:
         rank_str = get_field('taxonRank')
@@ -207,10 +224,19 @@ def convert_rank_str_to_elab(rank_str, sci):
 
 def find_data(page, sci, rank_str, kingdom, tid):
     if sci not in core_dict:
-        if arg('-core'):
-            warn(f"The DarwinCore data doesn't include a scientific name that matches {page.full()}")
+        if (page.taxon_id
+            and page.taxon_id_src == 'iNaturalist API'
+            and page.taxon_id_date > core_date):
+            # If the page has a taxon_id from the iNaturalist API, and that
+            # data is more recent than the DarwinCore archive, then don't
+            # complain about the missing DarwinCore archive.  It's possible
+            # that iNaturalist hasn't updated the DarwinCore archive yet, and
+            # we don't want to be stuck with warnings until that happens.
+            pass
+        elif arg('-core'):
+            warn(f"The DarwinCore archive doesn't include a scientific name that matches {page.full()}")
         else:
-            warn(f"The cached DarwinCore data doesn't include a scientific name that matches {page.full()}.  Try again with '-core'?")
+            warn(f"The cached DarwinCore archive doesn't include a scientific name that matches {page.full()}.  Try again with '-core'?")
         return None
 
     data_list = core_dict[sci]
@@ -239,10 +265,10 @@ def find_data(page, sci, rank_str, kingdom, tid):
                 good_type = 'rank match'
     else:
         if good_type == 'rank conflict':
-            error(f'The DarwinCore data has multiple taxons that could match {page.full()}')
+            error(f'The DarwinCore archive has multiple taxons that could match {page.full()}')
             return None
         elif not good_type:
-            warn(f'The DarwinCore data has no rank or taxon_id that matches {page.full()}')
+            warn(f'The DarwinCore archive has no rank or taxon_id that matches {page.full()}')
             return None
         # else good_type == 'rank match', so good_data gets processed
 
@@ -316,8 +342,8 @@ def parse_core_chains():
 
         # Update the page with a full elaborated scientific name and taxon_id
         # if it doesn't already have both.
-        find_page2(None, elab, from_inat=True,
-                   taxon_id=str(tid))
+        find_page2(None, elab, from_inat=True, taxon_id=str(tid),
+                   src='DarwinCore archive', date=core_date)
 
         # traverse the taxonomic chain
         while parent_rank_str and parent_sci:
@@ -337,8 +363,8 @@ def parse_core_chains():
 
             elab = convert_rank_str_to_elab(rank_str, sci)
 
-            parent = find_page2(None, elab, from_inat=True,
-                                taxon_id=str(tid))
+            parent = find_page2(None, elab, from_inat=True, taxon_id=str(tid),
+                                src='DarwinCore archive', date=core_date)
 
             if not parent:
                 break

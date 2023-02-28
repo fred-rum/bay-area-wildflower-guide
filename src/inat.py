@@ -1,7 +1,6 @@
 import json
 import requests
 import time
-import datetime
 
 # My files
 from error import *
@@ -35,8 +34,10 @@ req_headers = {'user-agent': 'Bay Area Wildflower Guide - fred-rum.github.io/bay
 
 # Sequence of operation:
 #
-# read inat files and prepare inat data by taxon_id
-#   each file may prepare multiple taxon_ids if it includes ancestors' data
+# read cached API data
+#   store data in inat_dict by taxon_id
+#   create shadow pages as needed
+#   apply taxon_id to pages
 #
 # match inat data to pages (and assign a taxon_id to each matched page)
 #   this is easier than trying to match a page to inat data later
@@ -214,7 +215,8 @@ def link_inat2(page_set):
             continue
 
         parent = find_page2(inat_parent.com, inat_parent.elab, from_inat=True,
-                            taxon_id=inat_parent.taxon_id)
+                            taxon_id=inat_parent.taxon_id,
+                            src='iNaturalist API', date=inat_parent.date)
 
         if not parent or not parent.rank:
             # We expect "stateofmatter Life" to fail.
@@ -551,14 +553,22 @@ class Inat:
 
 
     def apply_info(self):
+        # If this is new API data, give it the current date.
+        # If the date was loaded from the pickle file, keep it.
+        # If the pickle file didn't include a date, treat it as fresh data.
+        if not hasattr(self, 'date'):
+            self.date = now()
+
         # Find or create a page corresponding to the iNat data.
         # If a page already exists, set (or check) its taxon_id.
         page = find_page2(self.com, self.elab, from_inat=True,
-                          taxon_id=self.taxon_id)
+                          taxon_id=self.taxon_id,
+                          src='iNaturalist API', date=self.date)
         if not page:
             page = Page(self.com, self.elab, shadow=True, from_inat=True,
                         src='iNaturalist API')
-            page.set_taxon_id(self.taxon_id)
+            page.set_taxon_id(self.taxon_id,
+                              src='iNaturalist API', date=self.date)
 
         if self.origin:
             page.set_origin(self.origin)
@@ -567,13 +577,15 @@ class Inat:
     # Associate common names with scientific names.  (Previously we didn't
     # have the properties in place to know what to do with common names.)
     def apply_names(self):
-        page = find_page2(self.com, self.elab,
-                          from_inat=True, taxon_id=self.taxon_id)
+        page = find_page2(self.com, self.elab, from_inat=True,
+                          taxon_id=self.taxon_id,
+                          src='iNaturalist API', date=self.date)
         if not page:
             info(f'no names match for iNat data: {self.com} ({self.elab}), tid=se{lf.taxon_id}')
         elif hasattr(self, 'global_com') and self.global_com:
             page = find_page2(self.global_com.lower(), self.elab,
-                              from_inat='global_com', taxon_id=self.taxon_id)
+                              from_inat='global_com', taxon_id=self.taxon_id,
+                              src='iNaturalist API', date=self.date)
 
 
     # A TID should be discarded if it has an ancestor TID that the

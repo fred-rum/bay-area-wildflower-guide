@@ -1073,18 +1073,6 @@ class Page:
             self.set_sci(sci)
             return ''
 
-        def repl_asci(matchobj):
-            sci = strip_sci(matchobj.group(1))
-            if sci in sci_page:
-                fatal(f'{self.full()} specifies asci: {sci}, but that name already exists')
-
-            # Record the additional scientific name in sci_page so that it
-            # appropriate hijacks lookups, but also store it in asci_page
-            # so that we know when an asci name has been used.
-            sci_page[sci] = self
-            asci_page[sci] = self
-            return ''
-
         # Check for a scientific name first because it is guaranteed to be
         # able to assign a filename (unless the user screwed up).
         # On the other hand, the common name might collide, at which point
@@ -1314,19 +1302,24 @@ class Page:
             self.subset_pages[trait] = []
         self.subset_pages[trait].append(page)
 
-    def set_taxon_id(self, taxon_id, from_obs=False):
+    def set_taxon_id(self, taxon_id, from_obs=False, src='unknown', date=None):
         if taxon_id in taxon_id_page and taxon_id_page[taxon_id] != self:
-            fatal(f'taxon_id {taxon_id} used for both {taxon_id_page[taxon_id].full()} and {self.full()}')
+            page_conflict = taxon_id_page[taxon_id]
+            fatal(f'taxon_id {taxon_id} used for both {page_conflict.full()} (src: {page_conflict.taxon_id_src}) and {self.full()} (src: {src})')
+
         if self.taxon_id and taxon_id != self.taxon_id:
             if from_obs:
                 # observations.csv is known to have trouble matching names,
                 # which means that it may apply a bogus taxon_id.
                 return
             else:
-                fatal(f'taxon_id {taxon_id} applied to {self.full()}, but it already has taxon_id {self.taxon_id}')
+                fatal(f'taxon_id {taxon_id} applied from src: {src} to {self.full()}, but it already has taxon_id {self.taxon_id} from src: {self.taxon_id_src}')
 
         self.taxon_id = taxon_id
         taxon_id_page[taxon_id] = self
+
+        self.taxon_id_src = src
+        self.taxon_id_date = date
 
     def set_toxicity(self, rating_list, detail):
         for rating in rating_list:
@@ -2127,11 +2120,13 @@ class Page:
                 # the genus of the current page.
                 sci = self.expand_abbrev(sci)
 
-            child_page = find_page2(com, sci)
+            nonlocal data_src
+            data_src = f'child of {self.name}.txt'
 
+            child_page = find_page2(com, sci)
             if not child_page:
                 # If the child does not exist, create it.
-                child_page = Page(com, sci, src='child of '+self.name+'.txt')
+                child_page = Page(com, sci, src=data_src)
 
             try:
                 self.assign_child(child_page)
@@ -2150,6 +2145,7 @@ class Page:
 
         c_list = []
         data_object = self
+        data_src = f'{self.name}.txt'
         for c in self.txt.split('\n'):
             # Look for a child declaration:
             #   ==
@@ -2163,6 +2159,7 @@ class Page:
             if matchobj:
                 c_list.append(repl_child(matchobj))
                 data_object = self.child[-1]
+                # data_src was set in repl_child
                 continue
 
             matchobj = re.match(r'rep:\s*(.+?)\s*$', c)
@@ -2203,7 +2200,12 @@ class Page:
                 sci = strip_sci(matchobj.group(1))
                 if sci in sci_page:
                     fatal(f'{self.full()} specifies asci: {sci}, but that name already exists')
+
+                # Record the additional scientific name in sci_page so that it
+                # appropriate hijacks lookups, but also store it in asci_page
+                # so that we know when an asci name has been used.
                 sci_page[sci] = data_object
+                asci_page[sci] = self
                 continue
 
             matchobj = re.match(r';(.*)$', c)
@@ -2268,7 +2270,8 @@ class Page:
 
             matchobj = re.match(r'taxon_id\s*:\s*(\d+)$', c)
             if matchobj:
-                data_object.set_taxon_id(matchobj.group(1))
+                data_object.set_taxon_id(matchobj.group(1),
+                                         src=data_src, date=now())
                 continue
 
             matchobj = re.match(r'bug\s*:\s*(\d+|n/a)$', c)
@@ -2330,6 +2333,7 @@ class Page:
 
             if c in ('', '[', ']'):
                 data_object = self
+                data_src = f'{self.name}.txt'
 
             c_list.append(c)
         self.txt = '\n'.join(c_list) + '\n'
