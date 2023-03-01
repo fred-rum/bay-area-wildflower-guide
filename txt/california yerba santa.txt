@@ -3,3 +3,5 @@ color: pale purple
 
 genus: yerba santa
 x:ba
+
+Older leaves are often covered in a sooty mold.  There are multiple species of sooty mold associated with {-california yerba santa} which are difficult to tell apart.  The sooty mold is actually there for insect honeydew and don't directly attack the plant, but it does end up blocking photosynthesis. ^https://calphotos.berkeley.edu/cgi/img_query?seq_num=632854&one=T
