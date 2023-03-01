@@ -318,7 +318,7 @@ def parse_txt(name, s, page, glossary):
 def parse2_txt(src_page, s, glossary):
     # Replace {-[link_name]} with an inline link to the page.
     def repl_link(matchobj):
-        link_name = matchobj.group(1)
+        link_name = src_page.expand_abbrev(matchobj.group(1))
         page = find_page1(link_name)
         if page:
             return page.create_link(1)
