@@ -775,7 +775,7 @@ def by_incomplete_obs(page):
         return 0
 
 if arg('-steps'):
-    info('Step 15: Parse toxic plant ratings')
+    info('Step 15: Parse CalPoison data')
 
 read_data_file('calpoison.csv', read_toxic_plants)
 

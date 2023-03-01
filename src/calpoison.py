@@ -36,8 +36,15 @@ def read_toxic_plants(f):
         elab = fix_elab(elab)
 
         com = get_field('com').lower()
+
+        # extract added toxicity detail that is included in the common name,
+        # e.g. "cherry (chewed pits)".
         detail = ''
         com = re.sub(r'\s*\((.*)\)', repl_parens, com)
+
+        # Rearrange names that are listed as "last name, first name",
+        # e.g. "cherry, bitter".
+        com = re.sub(r'([^,]*), (.*)', r'\2 \1', com)
 
         rating_list = get_field('rating').split(',')
 

@@ -67,6 +67,7 @@ The remaining bay area species are single-digit rare and are not listed in Jepso
 ==apricot:P. armeniaca
 
 ==wild cherry:P. avium
+sci_P: n/a
 
 ==carolina laurelcherry:P. caroliniana
 
