@@ -45,7 +45,7 @@ from glossary import *
 from cache import *
 from inat import *
 from core import *
-from calpoison import *
+from toxic import *
 
 if arg('-debug_js'):
     # To avoid confusion when using the unstripped source files,
@@ -775,9 +775,10 @@ def by_incomplete_obs(page):
         return 0
 
 if arg('-steps'):
-    info('Step 15: Parse CalPoison data')
+    info('Step 15: Parse plant toxicity data')
 
-read_data_file('calpoison.csv', read_toxic_plants)
+read_data_file('toxic.scrape', read_toxic_plants,
+               msg='plant toxicity data')
 
 for page in page_array:
     page.propagate_toxicity()

@@ -15,7 +15,7 @@ from easy import *
 from glossary import *
 from parse import *
 from cache import *
-from calpoison import *
+from toxic import *
 
 ###############################################################################
 
