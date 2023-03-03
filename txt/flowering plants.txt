@@ -10,6 +10,7 @@ warn link: genus-below
 do member_link: self-/genus
 do member_name: class, genus, species
 do member_name_alias: genus, species
+do member_com_simple: self-species
 
 warn color_requires_photo: self-below
 warn photo_requires_color: self-below

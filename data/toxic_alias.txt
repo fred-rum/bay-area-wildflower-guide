@@ -14,6 +14,10 @@
 "Cape marigold": "rain daisy"
 "Lynchnis coronaria", "Dusty miller": "Lychnis coronaria", "n/a" # and typo
 "Senecio cineraria", "Dusty miller": "Jacobaea maritima", "n/a"
+"Symplocarpus foetidus", "Skunkweed": "Symplocarpus foetidus", "eastern skunk cabbage"
+"Dieffenbachia spp", "Leopard lily": "Dieffenbachia spp", "n/a"
+"Lachenalia lilacina", "Leopard lily": "Lachenalia orchioides ssp. glaucina", "n/a"
+
 
 # ambiguous common names that do match something I'm interested in
 "Dichelostemma pulchellum", "wild hyacinth": "Dichelostemma pulchellum", "ookow"
@@ -30,6 +34,12 @@
 # but it doesn't matter because I don't have that genus
 "Camassia spp", "Wild hyacinth": "Camassia scilloides", "atlantic camas"
 "Echeveria spp", "Painted lady": "Echeveria derenbergii", "n/a"
+
+# Prunus
+"Prunus serotina", "Cherry, wild (chewed seeds)": "Prunus serotina", "Cherry, black (chewed seeds)"
+"Prunus spp", "Cherry (chewed pits)": "Prunus avium", "wild cherry (chewed pits)"
+"Prunus spp", "Flowering almond": "Prunus glandulosa", "Flowering almond"
+"Prunus spp", "Japanese flowering cherry": "Prunus serrulata", "Japanese flowering cherry"
 
 # CalPoison has Verbena is both toxic and non-toxic.  Did they mean this?
 "Verbena spp", "Verbena": "Verbena hastata", "Verbena"
