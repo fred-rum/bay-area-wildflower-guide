@@ -9,6 +9,7 @@ from files import *
 
 toxic_table = {
     '0': "Non-toxic.",
+    '0b': "These plants are not a problem to humans, but are known to be dangerous to animals (dogs and cats). Because dogs, especially, will eat large amounts, it is important to keep pets and these plants apart.",
     '1': "Skin contact with these plants can cause symptoms ranging from redness, itching, and rash to painful blisters like skin burns.",
     '2a': "The juice or sap of these plants contains tiny oxalate crystals that are shaped like tiny needles. Chewing on these plants can cause immediate pain and irritation to the lips, mouth and tongue. In severe cases, they may cause breathing problems by causing swelling in the throat.",
     '2b': "These plants contain oxalate crystals but they do not cause immediate problems. These plants have tiny crystals that lodge in the kidneys and can cause kidney damage as well as nausea, vomiting and diarrhea.",
@@ -47,6 +48,9 @@ read_data_file('toxic_alias.txt', read_toxic_alias)
 
 
 def read_toxicity():
+    read_data_file('semitoxic.scrape', read_semitoxic_plants,
+                   msg='list of plants that are only toxic to animals')
+
     read_data_file('nontoxic.scrape', read_nontoxic_plants,
                    msg='list of non-toxic plants')
 
@@ -54,11 +58,14 @@ def read_toxicity():
                    msg='plant toxicity ratings')
 
 
+def read_semitoxic_plants(f):
+    read_toxic_scrape(f, '0b')
+
 def read_nontoxic_plants(f):
-    read_toxic_scrape(f, False)
+    read_toxic_scrape(f, '0')
 
 def read_toxic_plants(f):
-    read_toxic_scrape(f, True)
+    read_toxic_scrape(f, False)
 
 
 def read_toxic_line(f):
@@ -68,7 +75,7 @@ def read_toxic_line(f):
             return s
 
 
-def read_toxic_scrape(f, is_toxic):
+def read_toxic_scrape(f, default_rating):
     def repl_detail(matchobj):
         nonlocal detail
         detail = matchobj.group(1)
@@ -128,12 +135,12 @@ def read_toxic_scrape(f, is_toxic):
 
 
         # read and parse the rating
-        if is_toxic:
+        if default_rating:
+            rating = default_rating
+        else:
             rating = read_toxic_line(f)
             if rating in toxic_alias_dict:
                 rating = toxic_alias_dict[rating]
-        else:
-            rating = '0'
 
         raw_rating_list = rating.split(',')
         rating_list = []

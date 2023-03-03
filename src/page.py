@@ -1330,6 +1330,11 @@ class Page:
         elif self.toxicity_dict[detail].ratings == ratings:
             # If the ratings are the same, we don't care where they came from.
             pass
+        elif (self.toxicity_dict[detail].ratings == ('0b',)
+              and ratings == ('0',)):
+            # Non-toxic plants '0' may overlap with semi-toxic plants '0b'.
+            # '0b' is always assigned first, and it's the value we want to keep.
+            pass
         else:
             # The code that propagates toxicity up and down never creates a
             # conflict, so this can only occur when the different toxicity
