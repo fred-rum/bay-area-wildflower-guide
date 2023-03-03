@@ -443,8 +443,9 @@ class Glossary:
         self.link_set = set()
         self.txt = None # No associated HTML
 
-        txt = f.read()
-        for c in txt.split('\n'):
+        for c in f:
+            c = c.strip()
+
             # remove comments
             c = re.sub(r'\s*#.*$', '', c)
 

@@ -5,7 +5,7 @@ x:rare
 family:rose family
 
 ==mock strawberry:P. indica
-sci_fp: Duchesnea indica
+sci_fpP: Duchesnea indica
 sci_j: Duchesnea indica var. indica
 . stolens present
 . fruit strawberry-like

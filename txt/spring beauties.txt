@@ -72,6 +72,7 @@ species: pale springbeauty
 . corolla white or pink
 
 ==miner's lettuce:C. perfoliata
+sci_P: Montia perfoliata
 color: white
 . cauline leaves substantial, fully fused
 . basal leaf 1--25 cm long including petiole, blade < 4 cm, < 3&times; longer than wide, elliptic to reniform

@@ -828,7 +828,7 @@ var pages=[
 {page:"california milkwort",sci:["Rhinotropis californica","Polygala californica"],x:"o"},
 {page:"coastal woodfern",sci:["Dryopteris arguta"],x:"o"},
 {page:"common merganser",sci:["Mergus merganser"],x:"o"},
-{page:"fireweed",com:["fireweed","fireweeds"],sci:["Chamaenerion angustifolium"],x:"o"},
+{page:"fireweed",com:["fireweed","fireweeds"],sci:["Chamaenerion angustifolium","Chamerion angustifolium ssp. circumvagum","Epilobium angustifolium"],x:"o"},
 {page:"five-finger fern",com:["five-finger fern","western maidenhair fern"],sci:["Adiantum aleuticum"],x:"o"},
 {page:"golden eagle",sci:["Aquila chrysaetos"],x:"o"},
 {page:"lark sparrow",sci:["Chondestes grammacus"],x:"o"},

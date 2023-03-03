@@ -7,52 +7,99 @@ from rank import *
 from files import *
 
 
-table = {
+toxic_table = {
+    '0': "Non-toxic.",
     '1': "Skin contact with these plants can cause symptoms ranging from redness, itching, and rash to painful blisters like skin burns.",
     '2a': "The juice or sap of these plants contains tiny oxalate crystals that are shaped like tiny needles. Chewing on these plants can cause immediate pain and irritation to the lips, mouth and tongue. In severe cases, they may cause breathing problems by causing swelling in the throat.",
-    '2b': "These plants also contain oxalate crystals but they do not cause immediate problems. These plants have tiny crystals that lodge in the kidneys and can cause kidney damage as well as nausea, vomiting and diarrhea.",
+    '2b': "These plants contain oxalate crystals but they do not cause immediate problems. These plants have tiny crystals that lodge in the kidneys and can cause kidney damage as well as nausea, vomiting and diarrhea.",
     '3': "Ingestion of these plants is expected to cause nausea, vomiting, diarrhea and other symptoms that may cause illness but is not life-threatening.",
     '4': "Ingestion of these plants, especially in large amounts, is expected to cause serious effects to the heart, liver, kidneys or brain. If ingested in any amount, call the poison center immediately.",
 }
 
+
+class ToxicDetail:
+    def __init__(self, src_page, ratings):
+        self.src_page = src_page
+        self.ratings = ratings
+
+toxic_alias_dict = {}
 def read_toxic_alias(f):
-    global toxic_alias_dict
-    toxic_alias_dict = yaml.safe_load(f)
+    for c in f:
+        c = c.strip()
 
-read_data_file('toxic_alias.yaml', read_toxic_alias)
+        # remove comments
+        c = re.sub(r'\s*#.*$', '', c)
 
+        if not c: # ignore blank lines (and comment-only lines)
+            continue
+
+        m1 = re.match(r'\s*"([^\"]*)"\s*:\s*"([^\"]*)"\s*$', c)
+        m2 = re.match(r'\s*"([^\"]*)"\s*,\s*"([^\"]*)"\s*:\s*"([^\"]*)"\s*,\s*"([^\"]*)"\s*$', c)
+        if m1:
+            toxic_alias_dict[m1.group(1)] = m1.group(2)
+        elif m2:
+            toxic_alias_dict[(m2.group(1), m2.group(2))] = (m2.group(3),
+                                                            m2.group(4))
+        else:
+            error(f'Unknown line in toxic_alias.txt: {c}')
+
+read_data_file('toxic_alias.txt', read_toxic_alias)
+
+
+def read_toxicity():
+    read_data_file('nontoxic.scrape', read_nontoxic_plants,
+                   msg='list of non-toxic plants')
+
+    read_data_file('toxic.scrape', read_toxic_plants,
+                   msg='plant toxicity ratings')
+
+
+def read_nontoxic_plants(f):
+    read_toxic_scrape(f, False)
 
 def read_toxic_plants(f):
     read_toxic_scrape(f, True)
 
 
 def read_toxic_line(f):
-    s = next(f).strip()
-
-    if s in toxic_alias_dict:
-        s = toxic_alias_dict[s]
-
-    return s
+    while True:
+        s = next(f).strip()
+        if s:
+            return s
 
 
 def read_toxic_scrape(f, is_toxic):
-    def repl_parens(matchobj):
+    def repl_detail(matchobj):
         nonlocal detail
-        detail = ' (' + matchobj.group(1) + ')'
+        detail = matchobj.group(1)
         return ''
 
     while True:
-        # read and parse the scientific name
+        # read the scientific and common name
         while True:
             try:
                 elab = read_toxic_line(f)
             except StopIteration: # EOF is allowed here
                 return
 
-            if not re.match(r'[A-Z]?$', elab):
+            if not re.match(r'[A-Z]$', elab):
                 # only exit the loop when we *don't* have
-                # a blank line or a single capital letter
+                # a single capital letter
                 break
+
+        com = read_toxic_line(f)
+
+        # check for double or single aliases
+        if (elab, com) in toxic_alias_dict:
+            (elab, com) = toxic_alias_dict[(elab, com)]
+        else:
+            if elab in toxic_alias_dict:
+                elab = toxic_alias_dict[elab]
+            if com in toxic_alias_dict:
+                com = toxic_alias_dict[com]
+
+
+        # parse the scientific name
 
         if elab.endswith(' spp'):
             elab += '.'
@@ -61,12 +108,7 @@ def read_toxic_scrape(f, is_toxic):
         elab_list = or_list(elab)
 
 
-        # read and parse the common name
-        while True:
-            com = read_toxic_line(f)
-            if com != '':
-                # only exit the loop when we don't have a blank line
-                break
+        # parse the common name
 
         com = com.lower()
 
@@ -76,7 +118,7 @@ def read_toxic_scrape(f, is_toxic):
         # extract added toxicity detail that is included in the common name,
         # e.g. "cherry (chewed pits)".
         detail = ''
-        com = re.sub(r'\s*\((.*)\)', repl_parens, com)
+        com = re.sub(r'\s*\((.*)\)', repl_detail, com)
 
         # Rearrange names that are listed as "last name, first name",
         # e.g. "cherry, bitter".
@@ -86,17 +128,18 @@ def read_toxic_scrape(f, is_toxic):
 
 
         # read and parse the rating
-        while True:
+        if is_toxic:
             rating = read_toxic_line(f)
-            if rating != '':
-                # only exit the loop when we don't have a blank line
-                break
+            if rating in toxic_alias_dict:
+                rating = toxic_alias_dict[rating]
+        else:
+            rating = '0'
 
         raw_rating_list = rating.split(',')
         rating_list = []
         for rating in raw_rating_list:
             rating = rating.strip()
-            if rating in table:
+            if rating in toxic_table:
                 rating_list.append(rating)
             else:
                 error(f'Unknown toxicity rating {rating} for {com} ({elab})')
@@ -115,16 +158,12 @@ def or_list(s):
         sfx2  = matchobj.group(4)
 
         if pfx1 and sfx2:
-            print((pfx1 + word1, word2 + sfx2))
             return (pfx1 + word1, word2 + sfx2)
         elif pfx1:
-            print((pfx1 + word1, pfx1 + word2))
             return (pfx1 + word1, pfx1 + word2)
         elif sfx2:
-            print((word1 + sfx2, word2 + sfx2))
             return (word1 + sfx2, word2 + sfx2)
         else:
-            print((word1, word2))
             return (word1, word2)
     else:
         return (s,)
@@ -145,24 +184,11 @@ def assign_toxicity(elab, com, rating_list, detail):
     if not page:
         page = find_page2(com, None)
         if page and not page.shadow:
-            if page.elab_calpoison == 'n/a' or page.toxicity_set:
+            if page.elab_calpoison == 'n/a' or page.toxicity_dict:
                 return # ignore it
             else:
                 warn(f'Toxicity rating specified for scientific name "{elab}", but the common name matched {page.full()}')
     if not page or page.elab_calpoison == 'n/a':
         return
 
-    page.set_toxicity(rating_list, detail)
-
-
-def calpoison_html(rating_set, detail):
-    if not rating_set:
-        return ''
-
-    clist = []
-    for rating in sorted(rating_set):
-        clist.append(f'{rating} &ndash; {table[rating]}')
-
-    return (f'<p>\n<a href="https://calpoison.org/topics/plant#toxic" target="_blank" rel="noopener noreferrer">Toxicity</a>{detail}:\n<br>\n' + 
-            '\n<br>\n'.join(clist) +
-            '\n</p>\n')
+    page.set_toxicity(detail, page, tuple(rating_list))

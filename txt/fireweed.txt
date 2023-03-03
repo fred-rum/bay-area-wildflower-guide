@@ -1,4 +1,6 @@
 sci: Chamaenerion angustifolium
+sci_fj: Chamerion angustifolium ssp. circumvagum
+sci_pP: Epilobium angustifolium
 x:ba
 color: purple
 

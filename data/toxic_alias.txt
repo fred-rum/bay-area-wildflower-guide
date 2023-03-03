@@ -1,0 +1,35 @@
+# typos
+"Redbird cactus or floweer": "Redbird cactus or flower"
+"2q": "2a"
+"Cornus nuttalii": "Cornus nuttallii"
+"Melissa offinalis": "Melissa officinalis"
+
+# hard to parse
+"Smoke plant, bush or tree": "smokebush"
+"Verbena spp (except Verbena hastata)": "Verbena spp"
+"Prunus cerasifera 'atropurpurea'": "Prunus cerasifera"
+
+# ambiguous common names that don't match anything I'm interested in
+"Alyssum spp", "Sweet alyssum": "Alyssum spp", "n/a"
+"Cape marigold": "rain daisy"
+"Lynchnis coronaria", "Dusty miller": "Lychnis coronaria", "n/a" # and typo
+"Senecio cineraria", "Dusty miller": "Jacobaea maritima", "n/a"
+
+# ambiguous common names that do match something I'm interested in
+"Dichelostemma pulchellum", "wild hyacinth": "Dichelostemma pulchellum", "ookow"
+
+# scientific names at the genus level for which
+# the common name suggests a particular species
+"Arnica spp", "Wolf's bane": "Arnica montana", "Wolf's bane"
+"Symphoricarpos spp", "Snowberry, mountain": "Symphoricarpos rotundifolius", "roundleaf snowberry"
+"Symphoricarpos spp", "Snowberry, western": "Symphoricarpos occidentalis", "western snowberry"
+"Symphoricarpos spp", "Indian currant": "Symphoricarpos orbiculatus", "coralberry"
+"Symphoricarpos spp", "Wax berry": "Symphoricarpos albus", "common snowberry"
+
+# these may be intended to refer to the entire genus,
+# but it doesn't matter because I don't have that genus
+"Camassia spp", "Wild hyacinth": "Camassia scilloides", "atlantic camas"
+"Echeveria spp", "Painted lady": "Echeveria derenbergii", "n/a"
+
+# CalPoison has Verbena is both toxic and non-toxic.  Did they mean this?
+"Verbena spp", "Verbena": "Verbena hastata", "Verbena"

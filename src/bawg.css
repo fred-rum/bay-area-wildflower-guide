@@ -1203,3 +1203,9 @@ p.names {
 .alien:hover::before {
     content: "Alien";
 }
+
+/* Toxicity should be separated from what came before, but cuddled with
+   the indented div (if any). */
+p.cuddle {
+    margin-bottom: 0px;
+}

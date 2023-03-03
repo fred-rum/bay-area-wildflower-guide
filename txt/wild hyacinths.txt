@@ -10,6 +10,7 @@ The defining difference is the number of stamens, but I can't count them without
 See also the similar {-blue dicks}.
 
 ==ookow:D. congestum
+sci_P: Dichelostemma pulchellum
 color: purple
 . perianth blue-purple
 . staminodes erect, <b>leaning away from anthers, +- purple</b>

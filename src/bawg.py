@@ -777,8 +777,7 @@ def by_incomplete_obs(page):
 if arg('-steps'):
     info('Step 15: Parse plant toxicity data')
 
-read_data_file('toxic.scrape', read_toxic_plants,
-               msg='plant toxicity data')
+read_toxicity()
 
 for page in page_array:
     page.propagate_toxicity()
