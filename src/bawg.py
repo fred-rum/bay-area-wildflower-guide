@@ -39,13 +39,13 @@ from files import *
 from strip import *
 from easy import *
 from obs import *
+from toxic import * # must be before page
 from page import *
 from photo import *
 from glossary import *
 from cache import *
 from inat import *
 from core import *
-from toxic import *
 
 if arg('-debug_js'):
     # To avoid confusion when using the unstripped source files,

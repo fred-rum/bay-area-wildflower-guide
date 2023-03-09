@@ -1,6 +1,7 @@
 import json
 import requests
 import time
+import sys
 
 # My files
 from error import *
@@ -12,8 +13,14 @@ from args import *
 api_pickle_name = 'api.pickle'
 db_version = '1'
 
-inat_dict = {} # iNaturalist (taxon ID) or (rank sci) -> iNat data or None
-used_dict = {} # same as inat_dict, but only for entries that have been used
+# inat_dict contains different types of mappings:
+# (taxon ID) -> (iNat data) ... taxon ID for a page
+# (rank sci) -> tid         ... an alias from an old name to a current tid
+# (rank sci) -> (None)      ... a name not found at iNaturalist
+inat_dict = {}
+
+ # used_dict is the same as inat_dict, but only for entries that have been used
+used_dict = {}
 
 anc_dict = {} # taxon ID -> list of ancestor taxon IDs
 
@@ -22,7 +29,9 @@ if arg('-api_taxon'):
 else:
     user_discard_set = set()
 
-discard_set = set() # set of TIDs that include the above anywhere in the chain
+# accumulate a set of names to discard that includes all ancestors/descendents
+# of discarded TIDs
+discard_dict = {} # name to discard -> reason for discard
 
 
 api_called = False # the first API call isn't delayed
@@ -51,6 +60,11 @@ req_headers = {'user-agent': 'Bay Area Wildflower Guide - fred-rum.github.io/bay
 #   for all new dta, match the inat data to pages (as above)
 
 
+def mark_discard(name, reason):
+    if name not in discard_dict:
+        discard_dict[name] = reason
+        print(f'discarded from API cache: {name}{reason}')
+
 def read_inat_files():
     global inat_dict
     try:
@@ -61,23 +75,38 @@ def read_inat_files():
     except:
         pass
 
-    if inat_dict:
-        # If any TIDs need to be discarded, also discard any TIDs that depend
-        # on them.
-        if user_discard_set:
-            for inat in inat_dict.values():
-                inat.check_for_discard()
-            for tid in discard_set:
-                if tid in inat_dict:
-                    print(f'discarding cached API data for {tid}')
-                    del inat_dict[tid]
+    # If any TIDs need to be discarded, also discard any TIDs that depend
+    # on them.
+    if user_discard_set:
+        for (name, value) in inat_dict.items():
+            if isinstance(value, Inat):
+                value.check_for_discard()
+            else:
+                if name[0].islower():
+                    sci_words = name.split(' ')
+                    sci = ' '.join(sci_words[1:])
+                else:
+                    sci = name
 
-        # The loaded dictionary has the information stored by each Inat object,
-        # but Inat() has not been called, so we need to perform a separate step
-        # to apply the Inat data elsewhere.
-        for inat in inat_dict.values():
-            if inat:
-                inat.apply_info()
+                if name in user_discard_set or sci in user_discard_set:
+                    if value:
+                        mark_discard(name, f' (was aliased to {value})')
+                    else:
+                        mark_discard(name, f' (was unknown to iNaturalist)')
+                elif value in user_discard_set:
+                    mark_discard(name, f' (was aliased to {value})')
+                elif not value and 'unknown' in user_discard_set:
+                    mark_discard(name, f' (was unknown to iNaturalist)')
+
+        for name in discard_dict:
+            del inat_dict[name]
+
+    # The loaded dictionary has the information stored by each Inat object,
+    # but Inat() has not been called, so we need to perform a separate step
+    # to apply the Inat data elsewhere.
+    for inat in inat_dict.values():
+        if isinstance(inat, Inat):
+            inat.apply_info()
 
 
 # raw_data is one result from the JSON, parsed into a Python structure.
@@ -96,8 +125,9 @@ def parse_inat_data(data, name):
     if 'results' in data and data['results']:
         data = data['results'][0]
 
-    # The record may be completely empty.  But if any of the fields
-    # are valid, we assume the other fields are valid as well.
+    # The record may be completely empty in the case of a query error.
+    # But if any of the fields are valid, we assume the other fields are
+    # valid as well.
     #
     # Every query should return only active results, but we double-check
     # is_active anyway.
@@ -105,9 +135,6 @@ def parse_inat_data(data, name):
         inat_dict[name] = None
         return
 
-    # An older file may have a re-directed ID, or a name search may have
-    # returned the record for a different name.  In either case, it's
-    # counts as an invalid record.
     tid = str(data['id'])
     rank = data['rank']
     sci = data['name']
@@ -117,6 +144,9 @@ def parse_inat_data(data, name):
     # when doing the comparison.
     sci = re.sub(' \\u00d7 ', r' ', sci)
 
+    # An older file may have a re-directed ID, or a name search may have
+    # returned the record for a different name.  In either case, it's
+    # counts as an invalid record.
     if (name != tid) and (name != rank + ' ' + sci):
         inat_dict[name] = None
         # The fetched data may be useful, but it's more likely to be
@@ -156,16 +186,16 @@ def link_inat(page_set):
             get_inat_for_tid_set(tid_set)
 
         link_inat2(page_set)
-
-        # We completed all necessary fetches.
-        # Dump all useful entries.
-        dump_inat_db(used_dict)
     except:
         # If anything goes wrong, dump everything in the dictionary.
         # (We don't know the full extent of what's useful, so assume
         # it all is.)
-        dump_inat_db(inat_dict)
+        dump_inat_db(False)
         raise
+
+    # We'll fetch more later, but dump what we've got so far in case
+    # an error occurs.
+    dump_inat_db(False)
 
 
 # link_inat() did the work of initiating page fetches by name or TID.
@@ -237,7 +267,7 @@ def link_inat2(page_set):
 # Add all ancestor taxon IDs to tid_set.
 def add_parent_tid_to_set(page, tid_set):
     inat = get_inat(page.taxon_id)
-    if inat and inat.parent_id:
+    if isinstance(inat, Inat) and inat.parent_id:
         # Fetching the parent ID will also fetch all other ancestors,
         # so if any ancestors are already in the queue, remove them.
         if page.taxon_id in anc_dict:
@@ -259,18 +289,43 @@ def get_inat(name, used=False):
     inat = inat_dict[name]
 
     if used:
-        if inat:
+        if isinstance(inat, Inat):
             used_dict[inat.taxon_id] = inat
         used_dict[name] = inat
 
-    return inat
+    if isinstance(inat, Inat):
+        return inat
+    else:
+        return None
 
 
-# If there's any kind of failure when trying to use iNat data,
-# remove the corresponding file as a candidate for deletion.
+# If there's any kind of failure when trying to use the iNat API data,
+# mark the name in both dictionaries so that we don't try to fetch
+# the API data again.
 def used_fail(name):
+    inat_dict[name] = None
     used_dict[name] = None
     return None
+
+
+def get_rank(elab):
+    elab_words = elab.split(' ')
+    if elab_words[0].islower():
+        rank = f'{elab_words[0]}'
+    elif len(elab_words) == 2:
+        if elab_words[1].startswith('X'):
+            rank = 'hybrid'
+            elab = f'{elab_words[0]} {elab_words[1][1:]}'
+        else:
+            rank = 'species'
+    elif ' ssp. ' in elab:
+        rank = 'subspecies'
+    elif ' var. ' in elab:
+        rank = 'variety'
+    else:
+        rank = ''
+
+    return (rank, elab)
 
 
 # Return the iNaturalist data for a page or None.
@@ -294,21 +349,7 @@ def get_inat_for_page(page):
     else:
         return None
 
-    elab_words = elab.split(' ')
-    if elab_words[0].islower():
-        rank = f'{elab_words[0]}'
-    elif len(elab_words) == 2:
-        if elab_words[1].startswith('X'):
-            rank = 'hybrid'
-            elab = f'{elab_words[0]} {elab_words[1][1:]}'
-        else:
-            rank = 'species'
-    elif ' ssp. ' in page.elab:
-        rank = 'subspecies'
-    elif ' var. ' in page.elab:
-        rank = 'variety'
-    else:
-        rank = ''
+    (rank, elab) = get_rank(elab)
 
     if rank:
         q = f'q={sci}&rank={rank}'
@@ -317,18 +358,14 @@ def get_inat_for_page(page):
         q = f'q={sci}'
         name = sci
 
-    url = f'https://api.inaturalist.org/v1/taxa/autocomplete?{q}&per_page=1&is_active=true&locale=en&preferred_place_id=14'
-
     # Make sure we don't repeatedly fail fetching the same URL.
     if name in inat_dict:
         return used_fail(name)
 
-    # If the fetch is performed and succeeds, this placeholder does nothing.
-    # It's only needed to prevent repeated fetches of the same name.
-    inat_dict[name] = None
-
     if not arg('-api'):
         return used_fail(name)
+
+    url = f'https://api.inaturalist.org/v1/taxa/autocomplete?{q}&per_page=1&is_active=true&locale=en&preferred_place_id=14'
 
     data_list = fetch(url, name)
 
@@ -411,14 +448,114 @@ def get_inat_for_tid_set(tid_set, local=True):
     # that result.  So we can't assume that the order of the results
     # matches the order of the query.
     for data in data_list:
-        tid = str(data['id'])
-        if local:
-            parse_inat_data(data, tid)
-        else:
-            if 'preferred_common_name' in data:
-                inat_dict[tid].global_com = data['preferred_common_name'].lower()
+        if 'id' in data:
+            tid = str(data['id'])
+            if local:
+                parse_inat_data(data, tid)
             else:
-                inat_dict[tid].global_com = None
+                if 'preferred_common_name' in data:
+                    inat_dict[tid].global_com = data['preferred_common_name'].lower()
+                else:
+                    inat_dict[tid].global_com = None
+
+
+def find_plant_match(data_list, name):
+    matched_data = None
+    for data in data_list:
+        if ('matched_term' in data and
+            data['matched_term'] == name and
+            'iconic_taxon_name' in data and
+            data['iconic_taxon_name'] == 'Plantae'):
+            if matched_data:
+                if data['name'] == name and matched_data['name'] != name:
+                    # prefer a non-aliased match
+                    matched_data = data
+                elif matched_data['name'] == name and data['name'] != name:
+                    # prefer a non-aliased match
+                    pass
+                elif matched_data['id'] in data['ancestor_ids']:
+                    # prefer a higher-level match if it includes the lower level
+                    matched_data = data
+                elif data['id'] in matched_data['ancestor_ids']:
+                    # prefer a higher-level match if it includes the lower level
+                    pass
+                else:
+                    # no preference found, so bail out and warn the user
+                    return 'multiple'
+            else:
+                matched_data = data
+    return matched_data
+
+# Return a page mapped by a scientific name or None.
+#
+# If we already know the page by name, then this function isn't called.
+# It is only called if we don't have a page for it or if we have the page
+# at a different scientific name.
+def get_page_for_alias(orig, elab):
+    sci = strip_sci(elab)
+    (rank, elab) = get_rank(elab)
+
+    # We record the rank we're aliasing *from* in our dictionary,
+    # but if it's a species, subspecies, or variety, we allow it to match
+    # any rank in case it is a synonym of a taxon a different level.  E.g.
+    # Dracaena marginata maps to variety Dracaena reflexa angustifolia.
+    # However, a genus is only allowed to map to a genus.  Otherwise we
+    # get too many matches, e.g. for Anemone.
+    if rank:
+        name = f'{rank} {sci}'
+        if rank == 'genus':
+            q = f'q={sci}&rank={rank}'
+        else:
+            q = f'q={sci}'
+    else:
+        name = sci
+        q = f'q={sci}'
+
+    if orig != elab:
+        orig = f'{orig} -> {elab}'
+    
+    if name in inat_dict:
+        tid = inat_dict[name]
+        used_dict[name] = tid
+        if not tid and name not in used_dict:
+            warn(f'Scientific name "{orig}" is given in the CalPoison data, but iNaturalist doesn\'t recognize it.')
+            return used_fail(name)
+    else:
+        if not arg('-api'):
+            return used_fail(name)
+
+        url = f'https://api.inaturalist.org/v1/taxa/autocomplete?{q}&per_page=1&is_active=true&locale=en&preferred_place_id=14'
+        
+        data_list = fetch(url, name)
+
+        # Even though I asked for 1 result, iNaturalist returns all results
+        # that exactly *start* with the given name.  It seems to return a full
+        # match first (which is what we want), but if the same name is in
+        # multiple kingdoms, I don't know for sure that the plant match is
+        # returned first, so I search the data list for the first plant with
+        # an exact match.
+        #
+        # iNaturalist may also return an exact-match common name first.
+        # The common name may be upper or lowercase.  If a taxon has both
+        # a lowercase common name and the same scientific name in uppercase,
+        # only the common name may be returned.  So I first search for the
+        # correct case for the scientific name, then if there is no match,
+        # I search for a lowercase version of the name.
+        data = find_plant_match(data_list, sci)
+        if not data:
+            data = find_plant_match(data_list, sci.lower())
+        if not data:
+            warn(f'Scientific name "{orig}" is given in the CalPoison data, but iNaturalist doesn\'t recognize it.')
+            return used_fail(name)
+        elif data == 'multiple':
+            warn(f'Scientific name "{orig}" is given in the CalPoison data, but there are multiple iNaturalist matches for it.')
+            return used_fail(name)
+
+        tid = data['id']
+        inat_dict[name] = tid
+        used_dict[name] = tid
+
+    return find_taxon_id(str(tid))
 
 
 def fetch(url, name):
@@ -465,25 +602,47 @@ def apply_inat_names():
                 anc_set.update(anc_dict[tid])
 
     tid_set.difference_update(anc_set)
-    while (tid_set):
-        get_inat_for_tid_set(tid_set, local=False)
-
-    for inat in used_dict.values():
-        if inat:
-            inat.apply_names()
+    try:
+        while (tid_set):
+            get_inat_for_tid_set(tid_set, local=False)
+    except:
+        # If anything goes wrong, dump everything in the dictionary.
+        # (We don't know the full extent of what's useful, so assume
+        # it all is.)
+        dump_inat_db(False)
+        raise
 
     # Dump the DB again now that we've added the global common names.
-    dump_inat_db(used_dict)
+    dump_inat_db(False)
+
+    for inat in used_dict.values():
+        if isinstance(inat, Inat):
+            inat.apply_names()
 
 
-def dump_inat_db(inat_dict):
-    if api_called:
+def dump_inat_db(done):
+    if done:
+        # Dump the DB a final time with only those entries that we've used for
+        # pages or that we looked up for the CalPoison toxicity data.
+        dump_dict = used_dict
+    else:
+        # Either we encountered an error or we finished a section of code
+        # and we want to dump the database before an error can trash our
+        # fetched data.  We don't yet know which entries are needed, so
+        # we dump them all.
+        dump_dict = inat_dict
+
+    if api_called: # don't bother if we never fetched anything
         inat_db = {'version': db_version,
-                   'inat_dict': inat_dict}
+                   'inat_dict': dump_dict}
         with open(f'{root_path}/data/{api_pickle_name}', mode='wb') as w:
             pickle.dump(inat_db, w)
 
 
+# Inat holds data fetched and parsed from iNaturalist's API.
+# Because we cache copies of the iNat class in a pickle file,
+# we make sure to not have any references from Inat to any other class
+# that would cause the pickle size to explode.
 class Inat:
     pass
 
@@ -591,15 +750,29 @@ class Inat:
     # A TID should be discarded if it has an ancestor TID that the
     # user says should be discarded.  Just in case, all of its
     # ancestors are also discarded, all the way to top of the chain.
-    def check_for_discard(self, descendent_is_discarded=False):
-        discard_chain = (descendent_is_discarded or
-                         self.taxon_id in user_discard_set)
+    #
+    # If ancestors should be discarded, an indicator is passed as a parameter
+    # to recursion.  If descendents should be discarded, an indicator is
+    # passed as a return value.
+    #
+    def check_for_discard(self, discarded_descendent=None):
+        discarded_ancestor = None
 
+        if self.taxon_id in user_discard_set:
+            mark_discard(self.taxon_id, '')
+            discarded_descendent = discarded_ancestor = str(self.taxon_id)
+        if self.elab in user_discard_set:
+            mark_discard(self.taxon_id, f' ({self.elab})')
+            discarded_descendent = discarded_ancestor = self.elab
+        elif discarded_descendent:
+            mark_discard(self.taxon_id, f' (ancestor of {discarded_descendent})')
+
+        # recurse upwards
+        # propagate the name of a discarded descendent if there is one
         if self.parent_id in inat_dict:
-            if inat_dict[self.parent_id].check_for_discard(discard_chain):
-                discard_chain = True
+            ret_val = inat_dict[self.parent_id].check_for_discard(discarded_descendent)
+            if ret_val and not discarded_ancestor:
+                discarded_ancestor = ret_val
+                mark_discard(self.taxon_id, f' (descendent of {discarded_ancestor})')
 
-        if discard_chain:
-            discard_set.add(self.taxon_id)
-
-        return discard_chain
+        return discarded_ancestor

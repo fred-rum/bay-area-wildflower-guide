@@ -3,7 +3,7 @@ warn:insects
 
 <h2>Body parts</h2>
 
-<a href="https://en.wikipedia.org/wiki/Beetle#/media/File:Melolontha_melolontha_insect_morphology.jpg">Image</a> by Muséum de Toulouse and Anaxibia, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons.
+<a href="https://en.wikipedia.org/wiki/Beetle#/media/File:Melolontha_melolontha_insect_morphology.jpg">Image</a> by MusÃ©um de Toulouse and Anaxibia, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons.
 
 figure:beetle
 

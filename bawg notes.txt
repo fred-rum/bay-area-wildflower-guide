@@ -1577,25 +1577,27 @@ Advanced search:
     the 12 months are super common and could be encoded with single digits and
       some punctuation
 
-record the source page for toxicity data and write it in the HTML
-  for data applied directly to the page, "Toxicity (details):"
-  for data applied from the parent, "Toxicity for page.full() (details):"
-  for data applied from all children, "Toxicity for all lower-level taxons...:"
+The summary of files should have a page reference for every file.
 
-allow conflicting tocixity data for a taxon
-  if the details are different, record them separately
-    conflicts are only interesting where the details are the same
-  for different toxicities in a single page, throw a warning
-  if a child has conflicting toxicity,
-    keep the parent's toxicity_set, but add 'some lower-level taxons differ'
-  if the parent has no toxicity, and all children have toxicity in agreement
-    propagate it to the parent, with the page source ascribed to
-    "all lower-level taxons"
-  if the parent has no toxicity, and only some children have toxicity in
-    agreement, write it as "some lower-level taxons have toxicity data"
-    but only at the genus level, or based on the property, or perhaps not at all
-  if any child has different toxicity than its parent,
-    write the parent as "some lower-level taxons have different toxicity"
-  if a parent has different toxicity than its child,
-    write the child as "a higher-level taxons has different toxicity"
-    or just ignore the parent's toxicity
+"Toxicity" links should go to a BAWG description and disclaimer before
+linking to the CalPoison website.
+
+toxic/non-toxic names matched only to the genus level should include
+more waffle language because only some species may be indicated
+
+toxicity should match shadow pages and follow linnean links, not real links
+
+does a synonym ever match multiple taxons in iNaturalist?
+if so, should I use all aliases?
+
+fix up dumping and keyboard interrupts
+
+document -api discard options, including 'unknown'
+
+always propagate (non-0) toxicity up to genus level, just in case
+  do it by name, even if there is no page match!
+
+should be added as a former scientific name because it is still used in places such as the plant toxicity data at calpoison.org.
+https://calpoison.org/topics/plant#toxic
+
+POWO alias:

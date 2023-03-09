@@ -424,8 +424,13 @@ class Glossary:
             self.title = matchobj.group(1)
             return ''
 
-        with open(f'{root_path}/glossary/{self.name}.txt', mode='r') as f:
-            self.txt = f.read()
+        path = f'{root_path}/glossary/{self.name}.txt'
+        try:
+            with open(path, mode='r') as f:
+                self.txt = f.read()
+        except:
+            print(f'error reading {path}')
+            raise
 
         self.txt = re.sub(r'^taxon:\s*(.*?)\s*$',
                           repl_taxon, self.txt, flags=re.MULTILINE)

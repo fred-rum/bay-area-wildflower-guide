@@ -495,6 +495,7 @@ class Page:
         self.toxicity_dict = {} # detail -> src_page -> ratings
         self.toxicity_lower_conflict = False
         self.toxicity_higher_conflict = False
+        self.toxicity_src_list = []
 
         self.txt = ''
         self.key_txt = ''
@@ -1324,7 +1325,8 @@ class Page:
     def get_toxicity(self, detail, src_page):
         pass
 
-    def set_toxicity(self, detail, src_page, ratings):
+    def set_toxicity(self, detail, src_page, ratings, orig='propagated'):
+        self.toxicity_src_list.append(orig)
         if detail not in self.toxicity_dict:
             self.toxicity_dict[detail] = ToxicDetail(src_page, ratings)
         elif self.toxicity_dict[detail].ratings == ratings:
@@ -1340,6 +1342,7 @@ class Page:
             # conflict, so this can only occur when the different toxicity
             # is specified directly for the same page.
             warn(f'{self.full()} is assigned conflicting toxicity ratings ({detail}): {self.toxicity_dict[detail].ratings} vs. {ratings}')
+            warn(f'data srcs: {self.toxicity_src_list}')
 
     def propagate_toxicity(self):
         # Only start propagation from the top

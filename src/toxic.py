@@ -1,12 +1,5 @@
 import yaml
 
-# My files
-from error import *
-from find_page import *
-from rank import *
-from files import *
-
-
 toxic_table = {
     '0': "Non-toxic.",
     '0b': "These plants are not a problem to humans, but are known to be dangerous to animals (dogs and cats). Because dogs, especially, will eat large amounts, it is important to keep pets and these plants apart.",
@@ -17,11 +10,20 @@ toxic_table = {
     '4': "Ingestion of these plants, especially in large amounts, is expected to cause serious effects to the heart, liver, kidneys or brain. If ingested in any amount, call the poison center immediately.",
 }
 
-
 class ToxicDetail:
     def __init__(self, src_page, ratings):
         self.src_page = src_page
         self.ratings = ratings
+
+# My files
+# ! These are imported here to break a circular import issue
+# where toxic imports inat which imports page
+# which needs to know about the above two definitions.
+from error import *
+from find_page import *
+from inat import *
+from rank import *
+from files import *
 
 toxic_alias_dict = {}
 def read_toxic_alias(f):
@@ -48,14 +50,23 @@ read_data_file('toxic_alias.txt', read_toxic_alias)
 
 
 def read_toxicity():
-    read_data_file('semitoxic.scrape', read_semitoxic_plants,
-                   msg='list of plants that are only toxic to animals')
+    try:
+        read_data_file('semitoxic.scrape', read_semitoxic_plants,
+                       msg='list of plants that are only toxic to animals')
 
-    read_data_file('nontoxic.scrape', read_nontoxic_plants,
-                   msg='list of non-toxic plants')
+        read_data_file('nontoxic.scrape', read_nontoxic_plants,
+                       msg='list of non-toxic plants')
 
-    read_data_file('toxic.scrape', read_toxic_plants,
-                   msg='plant toxicity ratings')
+        read_data_file('toxic.scrape', read_toxic_plants,
+                       msg='plant toxicity ratings')
+    except:
+        # If anything goes wrong, dump everything in the dictionary.
+        # (We don't know the full extent of what's useful, so assume
+        # it all is.)
+        dump_inat_db(False)
+        raise
+
+    dump_inat_db(True)
 
 
 def read_semitoxic_plants(f):
@@ -97,19 +108,26 @@ def read_toxic_scrape(f, default_rating):
         com = read_toxic_line(f)
 
         # check for double or single aliases
-        if (elab, com) in toxic_alias_dict:
-            (elab, com) = toxic_alias_dict[(elab, com)]
-        else:
-            if elab in toxic_alias_dict:
-                elab = toxic_alias_dict[elab]
-            if com in toxic_alias_dict:
-                com = toxic_alias_dict[com]
+        orig = elab
+        has_match = True
+        while has_match:
+            has_match = False
+            if (elab, com) in toxic_alias_dict:
+                (elab, com) = toxic_alias_dict[(elab, com)]
+                has_match = True
+            else:
+                if elab in toxic_alias_dict:
+                    elab = toxic_alias_dict[elab]
+                    has_match = True
+                if com in toxic_alias_dict:
+                    com = toxic_alias_dict[com]
+                    has_match = True
 
 
         # parse the scientific name
 
-        if elab.endswith(' spp'):
-            elab += '.'
+        elab = re.sub(' spp$', ' spp.', elab)
+        elab = re.sub(' x ', ' X', elab)
         elab = fix_elab(elab)
 
         elab_list = or_list(elab)
@@ -153,7 +171,7 @@ def read_toxic_scrape(f, default_rating):
 
         for elab in elab_list:
             for com in com_list:
-                assign_toxicity(elab, com, rating_list, detail)
+                assign_toxicity(orig, elab, com, rating_list, detail)
 
 
 def or_list(s):
@@ -176,13 +194,18 @@ def or_list(s):
         return (s,)
 
 
-def assign_toxicity(elab, com, rating_list, detail):
+def assign_toxicity(orig, elab, com, rating_list, detail):
     # find the page
     page = None
+
+    if elab == 'n/a':
+        return
 
     sci = strip_sci(elab)
     if sci in cpsci_page:
         page = cpsci_page[sci]
+    else:
+        page = get_page_for_alias(orig, elab)
 
     # Search for the scientific and common names separately
     # to avoid creating an association that may not be wanted.
@@ -198,4 +221,4 @@ def assign_toxicity(elab, com, rating_list, detail):
     if not page or page.elab_calpoison == 'n/a':
         return
 
-    page.set_toxicity(detail, page, tuple(rating_list))
+    page.set_toxicity(detail, page, tuple(rating_list), orig)

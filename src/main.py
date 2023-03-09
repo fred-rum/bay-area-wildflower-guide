@@ -22,4 +22,8 @@ import sys
 if sys.version_info < (3, 7):
     sys.exit('Python 3.7 or later is required.')
 
-import bawg
+try:
+    import bawg
+except KeyboardInterrupt:
+    # I usually don't need the traceback info, and it's annoying.
+    sys.exit(0)

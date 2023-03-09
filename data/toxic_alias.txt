@@ -1,13 +1,85 @@
 # typos
 "Redbird cactus or floweer": "Redbird cactus or flower"
+"Nighshade, yellow": "Nightshade, yellow"
 "2q": "2a"
 "Cornus nuttalii": "Cornus nuttallii"
 "Melissa offinalis": "Melissa officinalis"
+"Hermocallis spp": "Hemerocallis spp"
+"Macademia spp": "Macadamia spp"
+"Pleomele thaliodes": "Pleomele thalioides"
+"Vitus californica": "Vitis californica"
+"Vitus vinifera": "Vitis vinifera"
+"Acer pseudoplantanas": "Acer pseudoplatanus"
+"Aeschnanthus spp": "Aeschynanthus spp"
+"Aglianthemum scoparium": "Helianthemum scoparium"
+"Albizia julibrisson": "Albizia julibrissin"
+"Aponogeton senetralis": "Aponogeton fenestralis"
+"Arbutus menziesil": "Arbutus menziesii"
+"Astrophytum myriostigm, NOT to be confused with Aconitum species": "Astrophytum myriostigma, NOT to be confused with Aconitum species"
+"Bellaperone gutta": "Beloperone guttata"
+"Brassaia actionophylla": "Brassaia actinophylla"
+"Cobaeae scandens": "Cobaea scandens"
+"Crassula arborscens": "Crassula arborescens"
+"Crotolaria ramosissima": "Crotalaria ramosissima or crispata" # poisonous to horses
+"Echeveria ispp": "Echeveria spp"
+"Squill, Italain": "Squill, Italian"
+"Fenestraria rhapalophylla": "Fenestraria rhopalophylla"
+"Fragaria species": "Fragaria spp"
+"Gerbera jamesoni": "Gerbera jamesonii"
+"Hibiscus senensis": "Hibiscus rosa-sinensis"
+"Impatients spp": "Impatiens spp"
+"Impateins spp": "Impatiens spp"
+"Ligustrum lucidium": "Ligustrum lucidum"
+"Livistonia chinesis": "Livistona chinensis"
+"Lychis chalcedonica": "Lychnis chalcedonica"
+"Neoragelia spp": "Neoregelia spp"
+"Phlox diuaricata": "Phlox divaricata"
+"Photina spp (except arbutifolia)": "Photinia spp (except arbutifolia)"
+"Pilea involucrate": "Pilea involucrata"
+"Plectranthus oetendahlii": "Plectranthus oertendahlii"
+"Raphiolepsis indica": "Rhaphiolepis indica"
+"Rudbergia grandiflora": "Rudbeckia grandiflora"
+"Stachy spp": "Stachys spp"
+"Syzygium cuminii": "Syzygium cumini"
+"Zanthosoma lindeni": "Xanthosoma lindenii"
+"Aconitium napellus": "Aconitum napellus"
+"Agave uthaensis—do not confuse with Lophophora williamsii (peyote)": "Agave utahensis—do not confuse with Lophophora williamsii (peyote)"
+"Alystegia sepium": "Calystegia sepium"
+"Anthurium scherzeranum": "Anthurium scherzerianum"
+"Arena fatua": "Avena fatua"
+"Artemesia absinthium": "Artemisia absinthium"
+"Brosimum guainense": "Brosimum guianense"
+"Cantharanthus roseus": "Catharanthus roseus"
+"Carya illinonensis": "Carya illinoinensis"
+"Dapne cneorum": "Daphne cneorum"
+"Datura stamonium": "Datura stramonium"
+"Dicentra exima": "Dicentra eximia"
+"Dieffenbachia sequine": "Dieffenbachia seguine"
+"Dientra formosa": "Dicentra formosa"
+"Fagus crenta": "Fagus crenata"
+"Glycyrrhiza lepidata": "Glycyrrhiza lepidota"
+"Jatropha molucanna": "Jatropha moluccana"
+"Juniperus virginia": "Juniperus virginiana"
+"Karwinski humboltiana": "Karwinskia humboldtiana"
+"Larrea tridentate": "Larrea tridentata"
+"Linium spp": "Linum spp"
+"Merremia tuberose": "Merremia tuberosa"
+"Oenantha crocata": "Oenanthe crocata"
+"Panax quinquefolia": "Panax quinquefolius"
+"Philodendron gigantium": "Philodendron giganteum"
+"Poinciana gelliesii": "Poinciana gilliesii"
+"Polianthes tuberose": "Polianthes tuberosa"
+"Polyscias guilfoyei": "Polyscias guilfoylei"
+"Rhamus purshiana": "Rhamnus purshiana"
+"Taxus sieboldii": "Taxus cuspidata 'sieboldii'"
+"Valeriana officinales": "Valeriana officinalis"
+"Wisteria fructescens": "Wisteria frutescens"
+
+################################################################################
+# problematic common names
 
 # hard to parse
 "Smoke plant, bush or tree": "smokebush"
-"Verbena spp (except Verbena hastata)": "Verbena spp"
-"Prunus cerasifera 'atropurpurea'": "Prunus cerasifera"
 
 # ambiguous common names that don't match anything I'm interested in
 "Alyssum spp", "Sweet alyssum": "Alyssum spp", "n/a"
@@ -17,7 +89,6 @@
 "Symplocarpus foetidus", "Skunkweed": "Symplocarpus foetidus", "eastern skunk cabbage"
 "Dieffenbachia spp", "Leopard lily": "Dieffenbachia spp", "n/a"
 "Lachenalia lilacina", "Leopard lily": "Lachenalia orchioides ssp. glaucina", "n/a"
-
 
 # ambiguous common names that do match something I'm interested in
 "Dichelostemma pulchellum", "wild hyacinth": "Dichelostemma pulchellum", "ookow"
@@ -41,5 +112,141 @@
 "Prunus spp", "Flowering almond": "Prunus glandulosa", "Flowering almond"
 "Prunus spp", "Japanese flowering cherry": "Prunus serrulata", "Japanese flowering cherry"
 
+################################################################################
+# problematic scientific names
+
+# just plain wrong
+"Spuria spp": "Iris spuria"
+
+# hard to parse
+"Cycadaceae family": "family Cycadaceae"
+"Rhododendron genus": "genus Rhododendron"
+
 # CalPoison has Verbena is both toxic and non-toxic.  Did they mean this?
 "Verbena spp", "Verbena": "Verbena hastata", "Verbena"
+
+# CalPoison has two different toxicity ratings for scotch broom.
+"Cytisus scoparius", "Irish tops": "n/a", "n/a"
+"Cytisus scoparius", "Scotch broom": "n/a", "n/a"
+
+# I don't know what species the common name "Mahonia" refers to,
+# but (per Wikipedia) many species in Mahonia are toxic.
+"Mahonia spp": "n/a"
+
+# ambiguous scientific names
+"Chamaesyce hirta": "Euphorbia hirta"
+"Eupatorium rugosum": "genus Eupatorium"
+"Eupatorium conyzoides": "Ageratum conyzoides"
+"Hippeastrum amaryllis": "Hippeastrum spp"
+"Laurentia longiflora": "Hippobroma longiflora"
+"Pedilanthus spp": "Euphorbia spp"
+"Zigadenus or Zygadenus spp": "Zigadenus or Toxicoscordion spp"
+
+# former scientific names flagged to be added as synonyms in iNaturalist
+#"Dracaena australis": "Cordyline australis"
+"Dracaena terminalis": "Cordyline fruticosa"
+"Pleomele thaliodes": "Dracaena aubryana"
+#"Adiantum decorum": "Adiantum raddianum"
+#"Aechmea marmorata": "	Quesnelia marmorata"
+#"Ajuga remota or Ajuga reptans": "Ajuga integrifolia or reptans"
+#"Aregelia spp": "Nidularium spp"
+#"Cyanotis kewensis": "Cyanotis beddomei"
+#"Endymion italicus": "Hyacinthoides italica"
+#"Eugenia cyanocarpa": "Syzygium oleosum"
+"Hypocyrta spp": "Nematanthus spp"
+"Jacaranda procera": "Jacaranda copaia"
+"Liriope gracilis": "Ophiopogon japonicus"
+"Mammillaria fissurata": "Ariocarpus fissuratus"
+#"Mikania apiifolia": "Mikania ternata"
+"Platycerium angolense": "Platycerium elephantotis"
+#"Rechsteineria cardinalis": "Lobelia cardinalis"
+#"Rhus cotinoides": "Cotinus obovatus"
+"Rudbeckia purpurea": "Echinacea purpurea"
+#"Saxifraga crassifolia": "Bergenia crassifolia"
+#"Saxifraga ciliata": "Bergenia ciliata"
+#"Saxifraga cordifolia": "Bergenia crassifolia"
+"Sedum weinbergii": "Graptopetalum paraguayense"
+"Silene acualis": "Silene acaulis"
+"Smilax gluaca": "Smilax glauca"
+"Thea japonica": "Camellia japonica"
+"Tradescantia reginae": "Dichorisandra musaica"
+"Xanthosoma lindenii": "Caladium lindenii"
+"Amorphophallus rivierei": "Amorphophallus konjac"
+"Andromeda japonica": "Pieris japonica"
+"Anemone nuttalliana": "Pulsatilla nuttalliana"
+"Anemone patens": "Pulsatilla patens"
+"Exogonium purga": "Ipomoea purga"
+"Jatropha manihot": "Manihot esculenta"
+"Jatropha moluccana": "Aleurites moluccanus"
+"Lathyrus incanus": "Lathyrus polymorphus ssp. incanus"
+"Lauro-cerasus caroliniana": "Prunus caroliniana"
+"Nepeta hederacea": "Glechoma hederacea"
+"Osmunda cinnamonea": "Osmunda cinnamomea"
+"Philodendron pertusum": "Monstera deliciosa"
+
+# flagged as missing in iNaturalist
+"Sinningia pusilla": "n/a"
+"Endospermum moluccanum": "n/a"
+
+# I got tired of flagging
+"Pyrus floribunda": "Malus floribunda"
+"Pyrus sylvestris": "Malus sylvestris"
+"Quercus utahensis": "Quercus gambelii"
+"Rhus quercifolia": "Toxicodendron pubescens"
+"Senecio confusus": "Pseudogynoxys chenopodioides"
+"Ulmus fulva": "Ulmus rubra"
+"Urechites spp": "Pentalinon spp"
+
+# unofficial synonyms
+# not flagged to be added as synonyms in iNaturalist because they aren't
+# real scientific names, just inventions passed around the horticulture sites
+"Buddleia davidii": "Buddleja davidii"
+"Drosera or Droserae spp": "Drosera spp"
+"Impatiens or Impatients spp": "Impatiens spp"
+"Liriope japonica": "Liriope gracilis"
+"Maurandia spp": "Maurandya spp"
+"Nyctanthes arbortristis": "Nyctanthes arbor-tristis"
+"Amorphophallus rivieri": "Amorphophallus rivierei"
+"Anemone patens": "Pulsatilla patens or nuttalliana"
+"Corynanthe yohimbe": "Corynanthe johimbe"
+"Laurocerasus caroliniana": "Lauro-cerasus caroliniana"
+"Podocarpus macrophylla": "Podocarpus macrophyllus"
+"Rhus quercifolium": "Rhus quercifolia"
+"Taxus cuspidata 'sieboldii'": "Taxus cuspidata"
+
+# Known as Diosma ericoides or Coleonema pulchrum, but those are recognized
+# as different species.  According to Wikipedia, this is the correct current
+# name.
+"Coleonema ericoides": "Coleonema pulchellum"
+
+# made-up scientific species that don't map to a single species,
+# but are subsumed by the genus, anyway
+"Lilium asiatic": "n/a"
+
+# It's unclear what species CalPoison really meant, and it's made more
+# difficult because iNaturalist doesn't have this species even under its
+# current name.  So I'll just map it to the other candidate species.
+"Calathea argyraea": "Calathea picturata"
+
+# It's unclear even within POWO if ramosissima is a valid species.
+# These two seem to the valid synonyms.
+"Crotalaria ramosissima or crispata": "Crotalaria huillensis or crispata"
+
+# scientific names with extra information tacked on
+"Verbena spp (except Verbena hastata)": "Verbena spp"
+"Prunus cerasifera 'atropurpurea'": "Prunus cerasifera"
+"Asparagus densiflorus cv sprengeri": "Asparagus densiflorus"
+"Astrophytum myriostigma, NOT to be confused with Aconitum species", "Monkshood": "Astrophytum myriostigma", "bishop's-cap"
+"Aucuba japonica variegated": "Aucuba japonica var. japonica"
+"Kalanchoe pinnata (not the Sansevieria spp)": "Kalanchoe pinnata"
+"Photinia spp (except arbutifolia)": "Photinia spp"
+"Photina (except arbutifolia which is toxic)": "Photina"
+"Rosa spp (except for Rosa rugose)": "Rosa spp"
+"Tsuga spp (do NOT confuse with toxic Conium or Cicuta species!)": "Tsuga spp"
+"Agave utahensis—do not confuse with Lophophora williamsii (peyote)": "Agave utahensis"
+
+################################################################################
+# clean up messes
+
+"Rosehips (berries)": "roses (rose hips)"
+"Hip berries": "roses (rose hips)"
