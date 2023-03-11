@@ -31,7 +31,9 @@ debug.log
 markers.*
 __pycache__/
 .in_progress/
-data/*.pickle
+data/cache.pickle
+data/core.pickle
+data/core_mini.pickle
 data/inaturalist-taxonomy.dwca.zip
 .~lock.*#
 test/

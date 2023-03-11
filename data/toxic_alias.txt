@@ -121,6 +121,9 @@
 # hard to parse
 "Cycadaceae family": "family Cycadaceae"
 "Rhododendron genus": "genus Rhododendron"
+"Cucurbitaceae spp": "family Cucurbitaceae"
+"Galtonia spp": "subgenus Galtonia"
+"Hebe spp": "section Hebe"
 
 # CalPoison has Verbena is both toxic and non-toxic.  Did they mean this?
 "Verbena spp", "Verbena": "Verbena hastata", "Verbena"
@@ -141,6 +144,7 @@
 "Laurentia longiflora": "Hippobroma longiflora"
 "Pedilanthus spp": "Euphorbia spp"
 "Zigadenus or Zygadenus spp": "Zigadenus or Toxicoscordion spp"
+"Pelargonium citrosum": "Pelargonium cucullatum"
 
 # former scientific names flagged to be added as synonyms in iNaturalist
 #"Dracaena australis": "Cordyline australis"
@@ -185,8 +189,8 @@
 "Philodendron pertusum": "Monstera deliciosa"
 
 # flagged as missing in iNaturalist
-"Sinningia pusilla": "n/a"
-"Endospermum moluccanum": "n/a"
+#"Sinningia pusilla": "n/a"
+#"Endospermum moluccanum": "n/a"
 
 # I got tired of flagging
 "Pyrus floribunda": "Malus floribunda"
