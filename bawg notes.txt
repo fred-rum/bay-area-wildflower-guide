@@ -1600,4 +1600,7 @@ always propagate (non-0) toxicity up to genus level, just in case
 should be added as a former scientific name because it is still used in places such as the plant toxicity data at calpoison.org.
 https://calpoison.org/topics/plant#toxic
 
+If -api is given and any taxons are discarded, the pickle should be dumped
+  even if nothing gets fetched
+
 POWO alias:

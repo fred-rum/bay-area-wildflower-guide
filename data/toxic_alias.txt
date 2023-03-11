@@ -200,6 +200,7 @@
 "Senecio confusus": "Pseudogynoxys chenopodioides"
 "Ulmus fulva": "Ulmus rubra"
 "Urechites spp": "Pentalinon spp"
+"Godetia spp": "Clarkia spp"
 
 # unofficial synonyms
 # not flagged to be added as synonyms in iNaturalist because they aren't

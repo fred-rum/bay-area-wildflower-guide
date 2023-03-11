@@ -513,15 +513,16 @@ def get_page_for_alias(orig, elab):
 
     if orig != elab:
         orig = f'{orig} -> {elab}'
-    
+
     if name in inat_dict:
         tid = inat_dict[name]
-        used_dict[name] = tid
         if not tid and name not in used_dict:
             warn(f'Scientific name "{orig}" is given in the CalPoison data, but iNaturalist doesn\'t recognize it.')
             return used_fail(name)
+        used_dict[name] = tid
     else:
-        if not arg('-api'):
+        if arg('-api'):
+            warn(f'Scientific name "{orig}" is given in the CalPoison data, but we don\'t have cached API data for it.  Re-run with -api?')
             return used_fail(name)
 
         url = f'https://api.inaturalist.org/v1/taxa/autocomplete?{q}&per_page=1&is_active=true&locale=en&preferred_place_id=14'
