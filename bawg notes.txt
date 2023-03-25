@@ -1577,7 +1577,7 @@ Advanced search:
     the 12 months are super common and could be encoded with single digits and
       some punctuation
 
-The summary of files should have a page reference for every file.
+The BAWG doc's summary of files should have a page reference for every file.
 
 "Toxicity" links should go to a BAWG description and disclaimer before
 linking to the CalPoison website.
@@ -1587,20 +1587,8 @@ more waffle language because only some species may be indicated
 
 toxicity should match shadow pages and follow linnean links, not real links
 
-does a synonym ever match multiple taxons in iNaturalist?
-if so, should I use all aliases?
-
 fix up dumping and keyboard interrupts
 
 document -api discard options, including 'unknown'
 
 always propagate (non-0) toxicity up to genus level, just in case
-  do it by name, even if there is no page match!
-
-should be added as a former scientific name because it is still used in places such as the plant toxicity data at calpoison.org.
-https://calpoison.org/topics/plant#toxic
-
-If -api is given and any taxons are discarded, the pickle should be dumped
-  even if nothing gets fetched
-
-POWO alias:

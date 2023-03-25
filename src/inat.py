@@ -33,7 +33,6 @@ else:
 # of discarded TIDs
 discard_dict = {} # name to discard -> reason for discard
 
-
 api_called = False # the first API call isn't delayed
 
 req_headers = {'user-agent': 'Bay Area Wildflower Guide - fred-rum.github.io/bay-area-wildflower-guide/'}
@@ -633,7 +632,9 @@ def dump_inat_db(done):
         # we dump them all.
         dump_dict = inat_dict
 
-    if api_called: # don't bother if we never fetched anything
+    # normally don't bother to dump the pickle if we never fetched anything,
+    # but we also dump it if we discarded anything.
+    if api_called or discard_dict:
         inat_db = {'version': db_version,
                    'inat_dict': dump_dict}
         with open(f'{root_path}/data/{api_pickle_name}', mode='wb') as w:
