@@ -350,7 +350,7 @@ var pages=[
 ["dobie pod",1,2],
 ["dog vomit slime mold",4],
 ["domestic mallard","",2],
-["double crested cormorant",1,2,3,6],
+["double-crested cormorant",1,2,3,6],
 ["douglas iris",1,2,3],
 ["douglas' silverpuffs",""],
 ["dove's-foot crane's-bill",1,2,3],

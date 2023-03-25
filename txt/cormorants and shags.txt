@@ -1,5 +1,5 @@
-==double crested cormorant:Phalacrocorax auritus
-x:ca
+==double-crested cormorant:Nannopterum auritum
+x:ba
 
 ==brandt's cormorant:Urile penicillatus
 x:more

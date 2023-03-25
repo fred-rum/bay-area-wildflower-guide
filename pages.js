@@ -551,7 +551,7 @@ var pages=[
 {page:"silktassels",sci:["genus Garrya"],x:"k"},
 {page:"Triphysaria",sci:["genus Triphysaria"],x:"k"},
 {page:"california towhee",sci:["Melozone crissalis"],x:"o"},
-{page:"double crested cormorant",sci:["Phalacrocorax auritus"],x:"o"},
+{page:"double-crested cormorant",sci:["Nannopterum auritum"],x:"o"},
 {page:"western sword fern",sci:["Polystichum munitum"],x:"o"},
 {page:"american yellowrocket",sci:["Barbarea orthoceras"],x:"o"},
 {page:"black sage",sci:["Salvia mellifera"],x:"o"},

@@ -106,7 +106,7 @@ color: pale purple
 .. lobes generally > 8 mm, <b>often abruptly soft-pointed</b>
 .. stigmas 2--6 mm and well exserted from corolla tube
 . leaf lobes 6--30 mm, tips pointed
-. calyx ciliate, nonglandular, abaxially generally glabrous
+. calyx ciliate, <b>nonglandular</b>, abaxially generally glabrous
 . common
 
 ==variable linanthus:L. parviflorus
@@ -119,7 +119,7 @@ color: purple, pale purple, pink, yellow, white
 .. lobes 4--8 mm
 .. stigmas 1--7 mm and strongly exserted from corolla tube
 . leaf lobes 2--18 mm, middle lobe tip acute
-. <b>calyx densely hairy, glandular</b>
+. calyx densely hairy, <b>glandular</b>
 . common
 
 ]
