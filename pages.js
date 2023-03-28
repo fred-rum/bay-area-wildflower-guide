@@ -1935,6 +1935,7 @@ var pages=[
 {page:"ferruginous hawk",sci:["Buteo regalis"],x:"u"},
 {page:"few-flowered clover",sci:["Trifolium oliganthum"],x:"u"},
 {page:"field dodder",sci:["Cuscuta campestris"],x:"u"},
+{page:"field monkey-flower",sci:["Erythranthe arvensis"],x:"u"},
 {page:"field peppergrass",sci:["Lepidium campestre"],x:"u"},
 {page:"fineleaf fumitory",sci:["Fumaria parviflora"],x:"u"},
 {page:"fire poppy",sci:["Papaver californicum"],x:"u"},

@@ -3,7 +3,7 @@ sci: genus Erythranthe
 x:rare
 
 [
-<h2>corolla yellow</h2>
+<h2>yellow corolla</h2>
 [
 <h3>calyx uppermost lobe longest, lowest 2 generally upcurved<br>
 corolla lower lip base generally swollen, +- closing mouth</h3>
@@ -24,6 +24,15 @@ sci_p:Mimulus grandis
 . leaf petiole 10--80 mm, blade 25--60 mm long
 . <b>corolla tube exserted 10--15 mm beyond calyx</b>
 . very rare
+
+==field monkey-flower:Erythranthe arvensis
+sci_p:n/a
+. <b>[very small corolla]</b> <a href="https://www.inaturalist.org/observations/811525">[example]</a>, although Ocean <a href="https://www.inaturalist.org/observations/11556651#activity_comment_4816da44-498d-4876-be32-89eccb4f2423">suggests</a> that there are both standard-sized and small-flowered versions (that were at onc time called Mimulus micranthus)
+. stems 5--70 cm, glabrous
+. leaf petiole 0--95 mm, blade 5--35 mm long
+. corolla lobes unequal, asymmetric when swollen in fruit
+. corolla [tube?] exserted 0--3 mm from calyx tube
+. <b>bracts densely villous [hairy] abaxially</b>
 
 ==small-leaf monkeyflower:E. microphylla
 color: yellow
@@ -74,6 +83,9 @@ sci_p:Mimulus latidens
 ]
 ]
 
+[
+<h2>other colors of corolla</h2>
+
 ==scarlet monkeyflower:E. cardinalis
 sci_p:Mimulus cardinalis
 color: red
@@ -87,3 +99,4 @@ sci_p:Mimulus androsaceus
 .. 5 corolla limbs, +- equal, each 3--7 mm wide
 .. calyx generally minutely puberulent, may be green or red-purple
 . very rare
+]
