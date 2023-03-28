@@ -2555,7 +2555,7 @@ class Page:
             # removed.
             elab = sci
 
-        elab_list = []
+        elab_list = [] # formatted elab names
         link_list = {} # list of links for each elab
 
         def add_link(elab, elab_alt, link):
@@ -2656,16 +2656,22 @@ class Page:
         elif self.elab_calpoison and self.elab_calpoison != 'n/a':
             warn(f"{self.full()} specifies sci_P but doesn't match any CalPoison data")
 
+        other_elab = False
         link_list_txt = []
         for elab in elab_list:
             txt = '\n&ndash;\n'.join(link_list[elab])
             if len(elab_list) > 1:
                 txt = f'{elab} &rarr; {txt}'
             link_list_txt.append(txt)
+            if elab != format_elab(self.elab) and elab != 'not listed':
+                other_elab = True
         txt = '</li>\n<li>'.join(link_list_txt)
 
         if len(elab_list) > 1:
-            w.write(f'<p class="list-head">Not all sites agree about the scientific name:</p>\n<ul>\n<li>{txt}</li>\n</ul>\n')
+            if other_elab:
+                w.write(f'<p class="list-head">Not all sites agree about the scientific name:</p>\n<ul>\n<li>{txt}</li>\n</ul>\n')
+            else:
+                w.write(f'<p class="list-head">Not all sites include this taxon:</p>\n<ul>\n<li>{txt}</li>\n</ul>\n')
         elif elab_list:
             w.write(f'<p>\nTaxon info:\n{txt}\n</p>\n')
 
