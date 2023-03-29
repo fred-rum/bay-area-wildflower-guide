@@ -11,9 +11,28 @@ toxic_table = {
 }
 
 class ToxicDetail:
-    def __init__(self, src_page, ratings):
-        self.src_page = src_page
+    def __init__(self, ratings):
+        self.com_list = []
+        self.elab_list = []
         self.ratings = ratings
+
+def format_list(l):
+    sep = ', '
+    for v in l:
+        if ',' in v:
+            sep = '; '
+
+    return sep.join(l)
+
+def format_toxic_src_lists(obj):
+    s = format_list(obj.com_list)
+
+    if obj.elab_list:
+        # We don't try to format it with proper italics since the names are
+        # so often badly formed.
+        s += ' (' + format_list(obj.elab_list) + ')'
+
+    return s
 
 # My files
 # ! These are imported here to break a circular import issue
@@ -107,8 +126,14 @@ def read_toxic_scrape(f, default_rating):
 
         com = read_toxic_line(f)
 
+        # Keep the original names to be annotated in the HTML
+        # so that the reader knows where the toxicity info came from.
+        orig_elab = re.sub(r'\s*\(.*\)\s*', '', elab)
+        orig_elab = re.sub(' spp$', ' spp.', orig_elab)
+
+        orig_com = re.sub(r'\s*\(.*\)\s*', '', com).lower()
+
         # check for double or single aliases
-        orig = elab
         has_match = True
         while has_match:
             has_match = False
@@ -171,7 +196,8 @@ def read_toxic_scrape(f, default_rating):
 
         for elab in elab_list:
             for com in com_list:
-                assign_toxicity(orig, elab, com, rating_list, detail)
+                assign_toxicity(orig_elab, orig_com, elab, com,
+                                rating_list, detail)
 
 
 def or_list(s):
@@ -194,7 +220,7 @@ def or_list(s):
         return (s,)
 
 
-def assign_toxicity(orig, elab, com, rating_list, detail):
+def assign_toxicity(orig_elab, orig_com, elab, com, rating_list, detail):
     # find the page
     page = None
 
@@ -205,7 +231,7 @@ def assign_toxicity(orig, elab, com, rating_list, detail):
     if sci in cpsci_page:
         page = cpsci_page[sci]
     else:
-        page = get_page_for_alias(orig, elab)
+        page = get_page_for_alias(orig_elab, elab)
 
     # Search for the scientific and common names separately
     # to avoid creating an association that may not be wanted.
@@ -221,4 +247,4 @@ def assign_toxicity(orig, elab, com, rating_list, detail):
     if not page or page.elab_calpoison == 'n/a':
         return
 
-    page.set_toxicity(detail, page, tuple(rating_list), orig)
+    page.set_toxicity(detail, tuple(rating_list), True, [orig_com], [orig_elab])

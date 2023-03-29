@@ -1582,14 +1582,7 @@ The BAWG doc's summary of files should have a page reference for every file.
 "Toxicity" links should go to a BAWG description and disclaimer before
 linking to the CalPoison website.
 
-toxic/non-toxic names matched only to the genus level should include
-more waffle language because only some species may be indicated
-
 toxicity should match shadow pages and follow linnean links, not real links
-
-when toxicity uses an alias, it should add the alias as an alternative elab
-  explicit aliases can be removed from the txt
-  e.g. Chrysanthemum -> Leucanthemum
 
 the up dumping and keyboard interrupts
 

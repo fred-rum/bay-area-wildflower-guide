@@ -511,10 +511,10 @@ class Page:
         self.species_key_incomplete = False
 
         # What plant toxin ratings apply according to CalPoison?
-        self.toxicity_dict = {} # detail -> src_page -> ratings
+        self.toxicity_dict = {} # detail -> ToxicDetail w/ ratings, orig names
+        self.toxicity_assigned = False
         self.toxicity_lower_conflict = False
         self.toxicity_higher_conflict = False
-        self.toxicity_src_list = []
 
         self.txt = ''
         self.key_txt = ''
@@ -1343,18 +1343,27 @@ class Page:
         self.taxon_id_src = src
         self.taxon_id_date = date
 
-    def get_toxicity(self, detail, src_page):
-        pass
+    def set_toxicity(self, detail, ratings, assigned, com_list, elab_list):
+        if assigned:
+            self.toxicity_assigned = True
 
-    def set_toxicity(self, detail, src_page, ratings, orig='propagated'):
-        self.toxicity_src_list.append(orig)
         if detail not in self.toxicity_dict:
-            self.toxicity_dict[detail] = ToxicDetail(src_page, ratings)
-        elif self.toxicity_dict[detail].ratings == ratings:
-            # If the ratings are the same, we don't care where they came from.
+            self.toxicity_dict[detail] = ToxicDetail(ratings)
+
+        obj = self.toxicity_dict[detail]
+
+        for com in com_list:
+            if com not in obj.com_list:
+                obj.com_list.append(com)
+
+        for elab in elab_list:
+            if elab not in obj.elab_list:
+                obj.elab_list.append(elab)
+
+        if obj.ratings == ratings:
+            # No conflict.
             pass
-        elif (self.toxicity_dict[detail].ratings == ('0b',)
-              and ratings == ('0',)):
+        elif (obj.ratings == ('0b',) and ratings == ('0',)):
             # Non-toxic plants '0' may overlap with semi-toxic plants '0b'.
             # '0b' is always assigned first, and it's the value we want to keep.
             pass
@@ -1362,8 +1371,8 @@ class Page:
             # The code that propagates toxicity up and down never creates a
             # conflict, so this can only occur when the different toxicity
             # is specified directly for the same page.
-            warn(f'{self.full()} is assigned conflicting toxicity ratings ({detail}): {self.toxicity_dict[detail].ratings} vs. {ratings}')
-            warn(f'data srcs: {self.toxicity_src_list}')
+            warn(f'{self.full()} is assigned conflicting toxicity ratings ({detail}): {obj.ratings} vs. {ratings}')
+            warn(f'data srcs: {format_toxic_src_lists(obj)}')
 
     def propagate_toxicity(self):
         # Only start propagation from the top
@@ -1412,8 +1421,10 @@ class Page:
                         # The child doesn't have this detail,
                         # so add it to the child.
                         child.set_toxicity(detail,
-                                           self.toxicity_dict[detail].src_page,
-                                           self.toxicity_dict[detail].ratings)
+                                           self.toxicity_dict[detail].ratings,
+                                           False,
+                                           self.toxicity_dict[detail].com_list,
+                                           self.toxicity_dict[detail].elab_list)
                         done_set.discard(child)
 
             child.propagate_toxicity_from_top(done_set)
@@ -1425,8 +1436,9 @@ class Page:
                     # this (first) child, then check it against the remaining
                     # children.
                     self.set_toxicity(detail,
-                                      'all lower-level taxons',
-                                      child.toxicity_dict[detail].ratings)
+                                      child.toxicity_dict[detail].ratings,
+                                      False,
+                                      ['all lower-level taxons'], [])
                 elif detail in self.toxicity_dict:
                     self_ratings = self.toxicity_dict[detail].ratings
                     child_ratings = child.toxicity_dict[detail].ratings
@@ -2706,13 +2718,6 @@ class Page:
 
             add_link(elab, None, f'<a href="https://www.allaboutbirds.org/guide/{comurl}/id" target="_blank" rel="noopener noreferrer">AllAboutBirds</a>')
 
-        if self.toxicity_dict:
-            elab = self.choose_elab(self.elab_calpoison)
-            elab = format_elab(elab)
-            add_link(elab, None, f'<a href="https://calpoison.org/topics/plant" target="_blank" rel="noopener noreferrer">Poison Control</a>')
-        elif self.elab_calpoison and self.elab_calpoison != 'n/a':
-            warn(f"{self.full()} specifies sci_P but doesn't match any CalPoison data")
-
         other_elab = False
         link_list_txt = []
         for elab in elab_list:
@@ -3167,13 +3172,6 @@ class Page:
                 title = self.format_elab(ital=False)
                 h1 = self.format_elab()
 
-            # Toxicity info is only interesting if it was assigned
-            # directly to the page, not propagated from elsewhere.
-            has_toxicity = False
-            for detail in self.toxicity_dict:
-                if self.toxicity_dict[detail].src_page == self:
-                    has_toxicity = True
-
             full = self.format_full(lines=1, ital=False)
             what = f'{full} in the Bay Area Wildflower Guide.'
             if self.list_hierarchy:
@@ -3182,7 +3180,7 @@ class Page:
                 desc = f'Key to {what}'
             elif self.child or self.subset_of_page:
                 desc = f'List of {what}'
-            elif self.txt or has_toxicity:
+            elif self.txt or self.toxicity_assigned:
                 desc = f'Description of {what}'
             else:
                 desc = f'Stub for {what}'
@@ -3322,13 +3320,10 @@ class Page:
         w.write('<hr>\n')
         obs.write_obs(None, w)
 
-    def write_src_page(self, w, prep, src_page):
-        if isinstance(src_page, str):
-            w.write(f' {prep} {src_page}')
-        elif src_page != self:
-            w.write(f' {prep} {src_page.create_link(1)}')
-
     def write_toxicity(self, w):
+        if self.elab_calpoison and self.elab_calpoison != 'n/a' and not self.toxicity_assigned:
+            warn(f"{self.full()} specifies sci_P but doesn't match any CalPoison data")
+
         if not self.toxicity_dict:
             return ''
 
@@ -3346,13 +3341,13 @@ class Page:
 
         w.write(f'\n<p{pclass}>\n<a href="https://calpoison.org/topics/plant" target="_blank" rel="noopener noreferrer">Toxicity</a>')
 
-        # If there are no interesting toxicity details, put the src_page
-        # (if different) on the same line as the 'Toxicity' header.
+        # If there are no interesting toxicity details, put the names
+        # on the same line as the 'Toxicity' header.
         if has_detail:
             w.write(':\n<br>\n')
         else:
-            self.write_src_page(w, 'of', self.toxicity_dict[''].src_page)
-            w.write(':\n') # no <br> since a <div> will follow
+            w.write(f' of {format_toxic_src_lists(self.toxicity_dict[""])}:\n')
+            # no <br> since a <div> will follow
 
         for detail in self.toxicity_dict:
             if has_detail:
@@ -3363,10 +3358,7 @@ class Page:
                     w.write('in general')
                     prep = 'for'
 
-                self.write_src_page(w, prep,
-                                    self.toxicity_dict[detail].src_page)
-
-                w.write(':\n')
+                w.write(f' {prep} {format_toxic_src_lists(self.toxicity_dict[detail])}:\n')
                 w.write('<div class="toc-indent">\n')
             else:
                 w.write('<br>\n')
@@ -3378,13 +3370,18 @@ class Page:
 
             if has_detail:
                 w.write('</div>\n')
+                pending_br = ''
+            else:
+                pending_br = '<br>\n'
 
         # We could end up with an extra <br> here,
         # but I'm too tired to care.
         if self.toxicity_lower_conflict:
-            w.write('<br>\nAt least one lower-level taxon has differing toxicity.')
+            w.write(f'{pending_br}At least one lower-level taxon has differing toxicity.')
+            pending_br = '<br>\n'
         if self.toxicity_higher_conflict:
-            w.write('<br>\nA higher-level taxon has differing toxicity.')
+            w.write(f'{pending_br}A higher-level taxon has differing toxicity.')
+            pending_br = '<br>\n'
 
         w.write('</p>\n')
 
