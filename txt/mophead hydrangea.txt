@@ -1,5 +1,5 @@
 sci:Hydrangea macrophylla
-sci_jf:n/a
+sci_Fjf:n/a
 color:white,cream,pink,pale purple,purple,blue,pale blue,red purple,other
 
 genus: hydrangeas

@@ -2,5 +2,5 @@ com:goosefoots
 sci:genus Oxybasis
 
 ==red pigweed:Oxybasis rubra
-sci_fpj:Chenopodium rubrum
+sci_Fjfp:Chenopodium rubrum
 . leaf blade thin, margin entire to deeply toothed, glabrous

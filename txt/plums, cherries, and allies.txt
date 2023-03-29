@@ -9,7 +9,7 @@ Key features:
 . twigs with true or false terminal bud
 
 ==almond:Prunus amygdalus
-sci_fpj:Prunus dulcis
+sci_Ffpj:Prunus dulcis
 color:pale purple, pink
 . 1--2 flowers per cluster
 . ovary/fruit velvety

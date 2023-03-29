@@ -2,11 +2,12 @@ sci:Phoradendron spp.
 x:ba
 
 [
-P. leucarpum is used in Jepson/CalFlora/NRDB, but POWO says that it's not found in California.  The subspecies used by Jepson/Calflora don't reliably translate to other species, but CalFlora claims that the following species translate to its subspecies names.
+P. leucarpum is used in Jepson/CalFlora/NRDB, but POWO says that it's not found in California.  The subspecies used by Jepson/Calflora don't reliably translate to other species, but CalFlora claims that the following species translate to its subspecies names.  Meanwhile, Flora of North America claims that the subspecies are unsupported and so classifies them all as just P. leucarpum.
 
 ==oak mistletoe:P. villosum
 color: other
 sci_fpj:P. leucarpum ssp. tomentosum
+sci_F:P. leocarpum
 . leaf length generally < 1.5 &times; width, 15--60 mm, generally > 20 mm
 . stem generally short-hairy, at least at tip
 . spike with 2--5(7) fertile internodes, pistillate 6--15(20)-flowered
@@ -17,6 +18,7 @@ sci_fpj:P. leucarpum ssp. tomentosum
 
 ==broadleaf mistletoe:P. macrophyllum
 sci_fpj:P. leucarpum ssp. macrophyllum
+sci_F:P. leocarpum
 . leaf length generally < 1.5 &times; width, 15--60 mm, generally > 20 mm
 . stem generally short-hairy, at least at tip
 . spike with 2--5(7) fertile internodes, pistillate 6--15(20)-flowered

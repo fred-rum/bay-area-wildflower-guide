@@ -1,5 +1,5 @@
 sci:Polygala myrtifolia
-sci_j: n/a
+sci_Fj: n/a
 
 xx:POWO lists var. myrtifolia as the only one introduced to CA, but I don't know how to distinguish the varieties.
 

@@ -1587,8 +1587,14 @@ more waffle language because only some species may be indicated
 
 toxicity should match shadow pages and follow linnean links, not real links
 
-fix up dumping and keyboard interrupts
+when toxicity uses an alias, it should add the alias as an alternative elab
+  explicit aliases can be removed from the txt
+  e.g. Chrysanthemum -> Leucanthemum
+
+the up dumping and keyboard interrupts
 
 document -api discard options, including 'unknown'
 
 always propagate (non-0) toxicity up to genus level, just in case
+
+document link_fna, sci_P, fna_families.txt

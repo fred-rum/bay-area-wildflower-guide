@@ -10,8 +10,10 @@ color:other
 . 3--7 fruits in a crooked arrangement along a stalk
 
 ==london plane:P. Xhispanica
+sci_F: n/a
 . leaf lobes < &frac13; blade
 .. terminal lobe generally as long as wide
+. Flora of North America believes that it is <a href="http://floranorthamerica.org/Platanus_occidentalis">not naturalized</a>
 
 ==american sycamore:P. occidentalis
 sci_j:n/a

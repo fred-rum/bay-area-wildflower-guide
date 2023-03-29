@@ -15,6 +15,7 @@ sci_fpj:Festuca temulenta
 
 ==tall fescue:L. arundinaceum
 sci_fpj:Festuca arundinacea
+sci_F:Schedonorus arundinaceus
 color:other
 . 2 glumes per spikelet
 . leaf blade with prominent clasping basal auricles
@@ -22,6 +23,7 @@ color:other
 
 ==meadow fescue:L. pratense
 sci_fpj:Festuca pratensis
+sci_F:Schedonorus pratensis
 . 2 glumes per spikelet
 . leaf blade with prominent clasping basal auricles
 . auricles glabrous

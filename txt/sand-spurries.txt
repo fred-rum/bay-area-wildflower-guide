@@ -31,7 +31,7 @@ color: pale purple
 
 ==boccone's sand spurry:S. bocconei
 acom:greek sea-spurrey
-sci_fpj:Spergularia bocconi
+sci_Ffpj:Spergularia bocconi
 . annual, +- delicate
 . leaves +- fleshy, 0--2 per axillary cluster
 . stipules generally 1.5--4.5 mm, dull, white to tan, generally inconspicuous

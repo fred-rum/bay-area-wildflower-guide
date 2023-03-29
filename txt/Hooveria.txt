@@ -1,18 +1,18 @@
 com:n/a
 sci:genus Hooveria
-sci_jf:genus Chlorogalum
+sci_Fjf:genus Chlorogalum
 x:ba
 
 These flowers open during the day.  For flowers that open in the evening, see {-genus Chlorogalum}.
 
 ==small-flowered soaproot:H. parviflora
-sci_jfp:Chlorogalum parviflorum
+sci_Fjfp:Chlorogalum parviflorum
 . perianth white or +- pink
 . flowers, buds 2--several per node
 . very rare
 
 ==purple amole:H. purpurea
-sci_jfp:Chlorogalum purpureum
+sci_Fjfp:Chlorogalum purpureum
 . perianth deep blue to purple
 . flowers, buds 1 per node
 . very rare

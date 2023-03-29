@@ -21,7 +21,7 @@ acom:gopher plant
 
 ==mediterranean spurge:E. characias
 acom:albanian spurge
-sci_j:n/a
+sci_Fj:n/a
 . rare
 
 ==cypress spurge:E. cyparissias

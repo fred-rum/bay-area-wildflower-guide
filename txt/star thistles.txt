@@ -44,7 +44,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0311+0802
 . Edgewood, Long Ridge, Mt. Diablo
 
 ==spotted starthistle:C. stoebe ssp. australis
-sci_jfp:Centaurea stoebe ssp. micranthos
+sci_Fjfp:Centaurea stoebe ssp. micranthos
 acom:spotted knapweed
 species: spotted starthistle
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1213+0624

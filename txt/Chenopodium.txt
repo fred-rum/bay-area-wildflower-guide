@@ -7,7 +7,7 @@ asci:Chenopodiastrum spp.
 .. all others have Leaf plade thin, margin entire or toothed, generally glabrous
 
 ==nettle-leaved goosefoot:Chenopodiastrum murale
-sci_fpj:Chenopodium murale
+sci_Ffpj:Chenopodium murale
 . <b>primary leaves not fleshy</b>
 . all leaves toothed
 . leaves glaucous in youth, especially abaxially, becoming glabrous and shiny with age

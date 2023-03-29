@@ -5,9 +5,9 @@ x:ca
 See {-yellow mustards} for a key.
 
 ==black mustard:R. nigrum
-sci_fpj:Brassica nigra
+sci_Ffpj:Brassica nigra
 color: yellow
 
 ==charlock:R. arvense
-sci_fpj:Sinapis arvensis
+sci_Ffpj:Sinapis arvensis
 color: yellow

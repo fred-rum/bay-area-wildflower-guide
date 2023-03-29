@@ -28,7 +28,7 @@ x:hist/rare
 . extremely rare
 
 ==umbrella papyrus:Cyperus alternifolius ssp. flabelliformis
-sci_fpj:Cyperus involucratus
+sci_Ffpj:Cyperus involucratus
 member:madagascar umbrella papyrus:Cyperus alternifolius
 xx:ca
 color: other

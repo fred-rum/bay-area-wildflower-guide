@@ -2,14 +2,14 @@ sci:Cistus
 x:rare
 
 ==hoary rock-rose:C. creticus
-sci_jfp:Cistus incanus
+sci_Fjfp:Cistus incanus
 color: pink, red purple
 . 5 sepals
 . petals rose to purple, no dark spots
 . uncommon
 
 ==purple-flowered rock-rose:Cistus Xpurpureus
-sci_jf: n/a
+sci_Fjf: n/a
 color: pink, red purple
 . petals rose to purple, dark spot at base of each petal
 

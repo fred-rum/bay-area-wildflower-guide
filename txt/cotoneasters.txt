@@ -9,7 +9,7 @@ Key features:
 See also {-toyon}.
 
 ==late cotoneaster:C. coriaceus
-sci_fpj:Cotoneaster lacteus
+sci_Ffpj:Cotoneaster lacteus
 color: white
 . plant arching, 1--9 m
 . petals white, spreading; fruit bright red

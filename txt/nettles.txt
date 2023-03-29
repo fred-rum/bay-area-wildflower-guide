@@ -12,6 +12,7 @@ iNaturalist is in the process of changing the North American observations to U. 
 . stem green
 
 ==hoary nettle:U. gracilis ssp. holosericea
+sci_Ffpj:Urtica dioica ssp. holosericea
 member:slender stinging nettle:Urtica gracilis
 xx:ca
 . 50--300 cm tall
@@ -19,7 +20,6 @@ xx:ca
 . inflorescence raceme- or panicle-like, generally > petiole
 . non-stinging hairs on abaxial leaf veins erect
 . stem gray-green[?]
-sci_fpj:Urtica dioica ssp. holosericea
 
 ==dwarf nettle:U. urens
 . 10--60(90) cm tall

@@ -3,6 +3,7 @@ sci:phylum Tracheophyta
 do link_calflora: family,genus-below
 do link_calphotos: species-below
 do link_jepson: family,genus-below
+do link_fna: family,genus-below
 do link_bayarea_calflora: family,genus-below
 
 ==flowering plants

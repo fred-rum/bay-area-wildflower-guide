@@ -27,11 +27,9 @@ round leaves:https://www.calflora.org/cgi-bin/viewphoto.cgi?arg=/app/up/entry/87
 .. all other local species have yellow petals
 . rare
 
-The following aren't known by Calflora or Jepson eFlora.
-
 ==christmas-cheer:S. Xrubrotinctum
-
-==tree stonecrop:S. dendroideum
+sci_Fjf: n/a
+. artificial hybrid
 
 iNaturalist has a bunch more species observed in the bay area,
 but with no more than 3 observations each.

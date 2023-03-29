@@ -4,7 +4,7 @@ CalFlora and Jepson have all of these as Chenopodium spp.
 
 ==california goosefoot:Blitum californicum
 genus: n/a
-sci_fpj:Chenopodium californicum
+sci_Ffpj:Chenopodium californicum
 x:ba
 color:other
 . perennial herb from stout, fleshy caudex
@@ -18,7 +18,7 @@ x:ba
 . [Chenopodiastrum is also included here]
 
 ==goosefoots:Oxybasis spp.
-sci_fpj:Chenopodium spp.
+sci_Ffpj:Chenopodium spp.
 x:hist
 . annual
 . calyx tube generally < calyx lobes

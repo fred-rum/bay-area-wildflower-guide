@@ -54,3 +54,6 @@ If an individual flower can have different primary colors (e.g. depending on age
 . If a flower head has a disc and rays, only the primary color of the rays is used.
 
 <h2>none#Flowers by family</h2>
+
+==legume family
+acom:legumes

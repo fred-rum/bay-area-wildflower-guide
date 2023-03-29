@@ -19,6 +19,7 @@ Key features:
 
 ==bristly needle grass:Piptochaetium fuscum
 sci_fpj:Stipa purpurata
+sci_F:Piptochaetium setosum
 . blade 0.8--1.5 mm wide
 . awn 10--16 mm long
 
@@ -66,6 +67,7 @@ color:other
 
 ==smilo grass:Oloptum miliaceum
 sci_fpj:Stipa miliacea
+sci_F:Piptatherum miliaceum
 . lemma body smooth throughout
 ]
 

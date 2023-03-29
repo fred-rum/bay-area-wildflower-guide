@@ -3,7 +3,7 @@
 # changed the genus name.
 com:n/a
 sci:Anemonoides spp.
-sci_jfp: Anemone spp.
+sci_Fjf: Anemone spp.
 x: ba
 
 Summarizing <a href="https://www.inaturalist.org/observations/2728894">this conversation</a>...
@@ -15,12 +15,12 @@ species.  The only species that is truly accepted in the bay area is
 A. grayi.
 
 ==gray's anemone:A. grayi
-sci_jfp: Anemone grayi
+sci_Fjfp: Anemone grayi
 color: white, pale blue, pale purple
 . sepals 10--20 mm
 . stamens 30--60(75)
 
 ==oregon anemone:A. oregana
-sci_jfp: Anemone oregana
+sci_Fjfp: Anemone oregana
 . sepals 7--15 mm
 . stamens <= 40

@@ -75,6 +75,7 @@ props = {
     'link_calflora': 'd',
     'link_calphotos': 'd',
     'link_jepson': 'd',
+    'link_fna': 'd',
     'link_birds': 'd',
     'link_bayarea_calflora': 'd',
     'link_bayarea_inaturalist': 'd',
@@ -85,6 +86,23 @@ props = {
 #   '{trait}_requires_photo': 'f'
 
 ###############################################################################
+
+fna_family_set = set()
+
+def read_fna_families(f):
+    for line in f:
+        line = line.strip()
+
+        # remove comments
+        line = re.sub(r'\s*#.*$', '', line)
+
+        if len(line) < 2: # ignore blank line, single letter, or comment only
+            continue
+
+        fna_family_set.add(line)
+
+read_data_file('fna_families.txt', read_fna_families,
+               msg='list of families included in the Flora of North America')
 
 # Prepare a list of properties that can be applied.
 # The initial list is in props, above.
@@ -461,6 +479,7 @@ class Page:
         self.elab_calflora = None
         self.elab_calphotos = None
         self.elab_jepson = None
+        self.elab_fna = None
         self.elab_inaturalist = None
         self.elab_bugguide = None
         self.elab_gallformers = None
@@ -1236,6 +1255,8 @@ class Page:
     def set_sci_alt(self, sites, elab):
         elab = fix_elab(elab)
 
+        if 'F' in sites:
+            self.elab_fna = elab
         if 'f' in sites:
             self.elab_calflora = elab
         if 'p' in sites:
@@ -2252,7 +2273,7 @@ class Page:
                 data_object.xcom.append(matchobj.group(1))
                 continue
 
-            matchobj = re.match(r'sci_([fpjibP]+):\s*(.+?)$', c)
+            matchobj = re.match(r'sci_([fpjibPF]+):\s*(.+?)$', c)
             if matchobj:
                 data_object.set_sci_alt(matchobj.group(1),
                                         self.expand_abbrev(matchobj.group(2)))
@@ -2544,6 +2565,15 @@ class Page:
             elab = self.elab
         return elab
 
+    def in_fna_family(self):
+        if self.rank == Rank.family:
+            return self.sci in fna_family_set
+
+        if self.linn_parent:
+            return self.linn_parent.in_fna_family()
+        else:
+            return False
+
     def write_external_links(self, w):
         sci = self.sci
         if self.rank and self.rank is Rank.below:
@@ -2574,8 +2604,11 @@ class Page:
                 add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/{self.taxon_id}" target="_blank" rel="noopener noreferrer">iNaturalist</a>')
             elif self.elab_inaturalist != 'n/a':
                 sci = strip_sci(elab, keep='x')
-                sci = re.sub(r' X', ' \xD7 ', sci)
                 sciurl = url(sci)
+                # iNaturalist uses a multiplication sign for a hybrid.
+                # I have to substitute after URL conversion since urllib
+                # otherwise wants to convert it to something safer.
+                sciurl = re.sub(r' X', ' \xD7', sciurl) # not really URL safe
                 elab = format_elab(elab)
                 add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/search?q={sciurl}&view=list" target="_blank" rel="noopener noreferrer">iNaturalist</a>')
 
@@ -2634,6 +2667,30 @@ class Page:
             elab = format_elab(elab)
             add_link(elab, self.elab_jepson, f'<a href="http://ucjeps.berkeley.edu/eflora/search_eflora.php?name={sciurl}" target="_blank" rel="noopener noreferrer">Jepson&nbsp;eFlora</a>');
 
+        if self.rp_do('link_fna'):
+            # Flora of North America can be searched by family,
+            # but not by other high-level classifications.
+            elab = self.choose_elab(self.elab_fna)
+            if elab[0].islower():
+                sci = strip_sci(elab)
+            else:
+                # FNA uses "subsp." instead of "ssp.".
+                sci = re.sub(' ssp. ', ' subsp. ', elab)
+            sci = re.sub(' ', '_', sci)
+            sciurl = url(sci)
+            # FNA uses a multiplication sign for a hybrid.
+            # I have to substitute after URL conversion since urllib
+            # otherwise wants to convert it to something safer.
+            sciurl = re.sub(r'_X', '_\xD7', sciurl)
+            if self.in_fna_family():
+                elab = format_elab(elab)
+                class_missing = ''
+            else:
+                elab = 'not yet listed'
+                class_missing = 'class="missing" '
+
+            add_link(elab, self.elab_fna, f'<a {class_missing}href="http://floranorthamerica.org/{sciurl}" target="_blank" rel="noopener noreferrer">FNA</a>');
+
         if self.com and self.rp_do('link_birds'):
             # AllAboutBirds can only be searched by species name
             # and can only be directly linked by common name.
@@ -2663,7 +2720,9 @@ class Page:
             if len(elab_list) > 1:
                 txt = f'{elab} &rarr; {txt}'
             link_list_txt.append(txt)
-            if elab != format_elab(self.elab) and elab != 'not listed':
+            if elab not in (format_elab(self.elab),
+                            'not listed',
+                            'not yet listed'):
                 other_elab = True
         txt = '</li>\n<li>'.join(link_list_txt)
 

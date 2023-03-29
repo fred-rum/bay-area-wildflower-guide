@@ -24,7 +24,7 @@ color:purple
 . epicalyx free parts +- 8 mm long, > calyx
 
 ==cretan mallow:M. multiflora
-sci_fj:Malva pseudolavatera
+sci_Ffj:Malva pseudolavatera
 sci_p:Malva pseudolavatera|Lavatera cretica
 color:pale purple, pink
 . petals 10--16 mm, generally with 3 dark veins

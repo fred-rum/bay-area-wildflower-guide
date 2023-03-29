@@ -6,7 +6,7 @@ family:Polygonaceae
 . stem 8--16 ribbed
 
 ==oval leaf knotweed:P. arenastrum
-sci_jfp:P. aviculare
+sci_Fjfp:P. aviculare
 
 ==beach knotweed:P. paronychia
 . stem +- angled, ribs 0 or obscure

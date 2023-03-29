@@ -1,5 +1,5 @@
 sci:Argentina anserina
-sci_jfp:Potentilla anserina
+sci_Fjfp:Potentilla anserina
 color: yellow
 
 genus: silverweeds

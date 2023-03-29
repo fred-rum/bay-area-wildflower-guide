@@ -1,5 +1,5 @@
 sci:Cleomella arborea
-sci_jfp:Peritoma arborea
+sci_Fjfp:Peritoma arborea
 x:more
 color:yellow
 genus:stinkweed

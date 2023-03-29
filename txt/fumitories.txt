@@ -19,7 +19,7 @@ color:white
 . petals 9--14 mm, white to purple-tinged, tipped with purple or black-red
 
 ==common ramping-fumitory:F. muralis
-sci_j:n/a
+sci_Fj:n/a
 color: purple, red purple, pink
 . petals 9--12 mm, pink to pale pink, tipped with dark red or purple
 . found in the developed parts of San Jose
@@ -30,6 +30,7 @@ color: purple, red purple, pink
 . sepals 1.5--3.5 mm
 
 ==fineleaf fumitory:F. parviflora
+sci_F:n/a
 . petals 3--6 mm, white to pink, tipped with purple
 . sepals 0.5--1 mm
 . <a href="https://commons.wikimedia.org/wiki/File:Fumaria_parviflora_kz2.jpg">Wikimedia photo</a>

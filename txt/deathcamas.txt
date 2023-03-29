@@ -1,4 +1,5 @@
 sci:Toxicoscordion spp.
+sci_F:Zigadenus spp.
 x:ba
 
 [
@@ -6,7 +7,7 @@ x:ba
 
 ==fremont's deathcamas:T. fremontii
 acom:common star lily
-sci_p:Zigadenus fremontii
+sci_Fp:Zigadenus fremontii
 color: white
 . petals 5--15 mm
 . stamens +- &frac12; perianth
@@ -16,6 +17,7 @@ color: white
 
 ==smallflower deathcamas:T. fontanum
 sci_p:Zigadenus micranthus var. fontanus
+sci_F:Zigadenus fontanus
 . petals 4--15 mm
 . stamens +- = perianth
 . <b>leaf erect, often > stem</b>
@@ -27,7 +29,7 @@ sci_p:Zigadenus micranthus var. fontanus
 <h3>smaller flowers</h3>
 
 ==meadow deathcamas:T. venenosum
-sci_p:Zigadenus venenosus
+sci_Fp:Zigadenus venenosus
 xx:uncat
 . petals 4--6 mm
 . stamens usually = perianth, occasionally >
@@ -36,7 +38,7 @@ xx:uncat
 . rare
 
 ==smallflower deathcamas:T. micranthum
-sci_p:Zigadenus micranthus
+sci_Fp:Zigadenus micranthus
 . petals 3--8 mm
 . stamens +- = perianth
 . pedicels in fruit 12--40 mm, <b>generally spreading (60--90&deg; from axis)</b>, with tips upturned or not
