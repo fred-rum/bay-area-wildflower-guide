@@ -1,0 +1,4 @@
+sci:Tetrapteron graciliflorum
+color:yellow
+genus:n/a
+x:ba

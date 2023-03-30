@@ -1,6 +1,8 @@
 sci:phylum Bryophyta
 end_hierarchy
 
+do link_fna: family,genus-below
+
 ==dendroalsia moss:Dendroalsia abietina
 x:any
 

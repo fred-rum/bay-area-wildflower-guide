@@ -1,0 +1,11 @@
+sci:genus Lamium
+x:ca
+
+==henbit deadnettle:L. amplexicaule
+color: purple
+. distal cauline leaves sessile, clasping
+. corolla tube glabrous inside
+
+==red deadnettle:L. purpureum
+. distal cauline leaves petioled
+. corolla tube puberulent below filaments

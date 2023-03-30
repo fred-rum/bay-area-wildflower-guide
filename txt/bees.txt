@@ -34,3 +34,6 @@ bug:108931
 
 ==mining bees:genus Andrena
 bug:22574
+
+==california mountain-digger bee:Habropoda depressa
+bug:51916

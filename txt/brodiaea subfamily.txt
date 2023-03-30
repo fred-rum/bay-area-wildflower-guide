@@ -2,7 +2,7 @@ sci:subfamily Brodiaeoideae
 
 ==blue dicks:Dipterostemon capitatus
 color: purple
-sci_p:Dichelostemma capitatum
+sci_Fp:Dichelostemma capitatum
 x:any
 xx:Only ssp. <i>capitatum</i> is found in the bay area.
 genus: n/a

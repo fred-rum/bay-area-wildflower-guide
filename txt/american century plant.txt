@@ -1,6 +1,9 @@
 sci:Agave americana
 color: other
 sci_j:n/a
+# FNA has this under family Agavaceae, but there's no good way to annotate that.
+# Fortunately, the script understands that the FNA includes this genus since
+# it thinks it falls under the FNA's Liliaceae.
 
 genus: century plants
 x:ba

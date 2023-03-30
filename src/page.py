@@ -1279,7 +1279,7 @@ class Page:
             if elab != 'n/a':
                 sci = strip_sci(elab)
                 if sci in cpsci_page and cpsci_page[sci] != self:
-                    error('{cpsci_page[sci].full()} and {self.full()} both use sci_P {elab}')
+                    error(f'{cpsci_page[sci].full()} and {self.full()} both use sci_P {elab}')
                 cpsci_page[sci] = self
 
     def set_complete(self, matchobj):
@@ -2578,8 +2578,16 @@ class Page:
         return elab
 
     def in_fna_family(self):
-        if self.rank == Rank.family:
-            return self.sci in fna_family_set
+        if not fna_family_set:
+            return True
+
+        if (self.elab_fna and
+            self.elab_fna.startswith('family ') and
+            self.elab_fna[7:] in fna_family_set):
+            return True
+
+        if self.rank == Rank.family and self.sci in fna_family_set:
+            return True
 
         if self.linn_parent:
             return self.linn_parent.in_fna_family()

@@ -1590,4 +1590,7 @@ document -api discard options, including 'unknown'
 
 always propagate (non-0) toxicity up to genus level, just in case
 
-document link_fna, sci_P, fna_families.txt
+The "offline usage" notes should say that external links aren't cached.
+  they use the default browser color or orange for Jepson
+
+document xcom

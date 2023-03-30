@@ -1,7 +1,7 @@
 sci:Camissoniopsis
 x:!rare
 
-See also {-sun cup}.
+See also {-sun cup} and {-hill sun cup}.
 
 ==california sun cup:C. bistorta
 . very rare
