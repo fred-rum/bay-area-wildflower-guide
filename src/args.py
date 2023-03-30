@@ -32,9 +32,9 @@ while len(sys.argv):
                    '-api'):
             taxon_list = []
             while len(sys.argv) and not sys.argv[0].startswith('-'):
-                if arg == '-tree' and sys.argv[0] == 'props':
+                if arg == '-tree' and sys.argv[0] in ('props', 'toxic'):
+                    _arg_value[f'{arg}_{sys.argv[0]}'] = True
                     sys.argv.pop(0)
-                    _arg_value[f'{arg}_props'] = True
                 else:
                     taxon_list.append(sys.argv.pop(0))
             if taxon_list:

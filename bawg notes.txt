@@ -1582,15 +1582,8 @@ The BAWG doc's summary of files should have a page reference for every file.
 "Toxicity" links should go to a BAWG description and disclaimer before
 linking to the CalPoison website.
 
-toxicity should match shadow pages and follow linnean links, not real links
-
-the up dumping and keyboard interrupts
+fix up dumping and keyboard interrupts
 
 document -api discard options, including 'unknown'
 
 always propagate (non-0) toxicity up to genus level, just in case
-
-The "offline usage" notes should say that external links aren't cached.
-  they use the default browser color or orange for Jepson
-
-document xcom

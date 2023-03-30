@@ -782,6 +782,9 @@ read_toxicity()
 for page in page_array:
     page.propagate_toxicity()
 
+if arg('-tree') == '15':
+    print_trees()
+
 
 if arg('-steps'):
     info('Writing HTML')

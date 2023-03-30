@@ -89,6 +89,7 @@
 "Symplocarpus foetidus", "Skunkweed": "Symplocarpus foetidus", "eastern skunk cabbage"
 "Dieffenbachia spp", "Leopard lily": "Dieffenbachia spp", "n/a"
 "Lachenalia lilacina", "Leopard lily": "Lachenalia orchioides ssp. glaucina", "n/a"
+"Valeriana officinales", "Valerian": "Valeriana officinales", "common valerian complex"
 
 # ambiguous common names that do match something I'm interested in
 "Dichelostemma pulchellum", "wild hyacinth": "Dichelostemma pulchellum", "ookow"

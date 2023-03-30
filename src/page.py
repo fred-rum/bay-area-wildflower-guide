@@ -1392,18 +1392,23 @@ class Page:
         # If this page has no toxicity data, try propagating toxicity data
         # up from the children.  If all children have the same toxicity
         # for all details, we'll copy that data to this page.
-        toxicity_assigned = bool(self.toxicity_dict)
-        copied = False
+        toxicity_known = bool(self.toxicity_dict)
+        toxicity_copied_up = False
 
-        for child in self.child:
-            # Propagate toxicity to the child.
-            #
-            # If the child is updated, it might already
-            # be in done_set from a different parent,
-            # but it has clearly changed, so do it again.
-            # (Don't bother updating the other parent, though.)
-
-            if toxicity_assigned:
+        # Propagate toxicity to each child.
+        #
+        # We use both the real and Linnaean hierarchy for this in case
+        # toxicity was set on a shadow page (e.g. a genus with only one
+        # local species).  We propagate through the Linnaean hierarchy
+        # first so that a more exact toxicity is propagated (e.g. from
+        # species Cyperus alternifolius to its subspecies, rather than
+        # from genus Cyperus).
+        #
+        # If the child is updated, it might already be in done_set
+        # from a different parent, but it has clearly changed, so do
+        # it again.  (Don't bother updating the other parent, though.)
+        for child in list(self.linn_child) + self.child:
+            if toxicity_known:
                 for detail in self.toxicity_dict:
                     if detail in child.toxicity_dict:
                         # The child already has this detail,
@@ -1429,9 +1434,15 @@ class Page:
 
             child.propagate_toxicity_from_top(done_set)
 
-            # Check for different toxicity in the child.
+        # Check for different toxicity in each child, and propagate the child
+        # toxicity up to this taxon if there is no conflict.
+        #
+        # We use the real hierarchy (not Linnaean hierarchy) for this
+        # so that we only complain about conflicts that can be seen in
+        # the real pages.
+        for child in self.child:
             for detail in child.toxicity_dict:
-                if not toxicity_assigned and not copied:
+                if not toxicity_known and not toxicity_copied_up:
                     # If the parent has no toxicity data, copy the data from
                     # this (first) child, then check it against the remaining
                     # children.
@@ -1458,10 +1469,12 @@ class Page:
                 if detail not in child.toxicity_dict:
                     self.toxicity_lower_conflict = True
 
-            copied = True
+            if child.toxicity_lower_conflict:
+                self.toxicity_lower_conflict = True
 
+            toxicity_copied_up = True
 
-        if not toxicity_assigned and self.toxicity_lower_conflict:
+        if not toxicity_known and self.toxicity_lower_conflict:
             # Since this page had no toxicity info to start with, and its
             # children don't all have the same toxicity, just leave it blank.
             self.toxicity_dict = {}
@@ -1787,6 +1800,11 @@ class Page:
                 action_list = sorted(self.prop_action_set[prop])
                 action_str = '/'.join(action_list)
                 print(f'{"  "*level}  {action_str} {prop}')
+
+        if arg('-tree_toxic'):
+            for detail in self.toxicity_dict:
+                obj = self.toxicity_dict[detail]
+                print(f'({detail}) {obj.ratings} - {obj.com_list} ({obj.elab_list})')
 
         for child in self.child:
             if child in self.linn_child:
@@ -3357,7 +3375,7 @@ class Page:
             w.write(f' of {format_toxic_src_lists(self.toxicity_dict[""])}:\n')
             # no <br> since a <div> will follow
 
-        for detail in self.toxicity_dict:
+        for detail in sorted(self.toxicity_dict):
             if has_detail:
                 if detail:
                     w.write(f'{detail}')
