@@ -1,5 +1,4 @@
 sci:Heteromeles arbutifolia
-sci_P:Photinia arbutifolia
 color: other
 
 genus: n/a

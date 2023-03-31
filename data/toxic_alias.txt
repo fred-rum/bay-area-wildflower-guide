@@ -238,6 +238,10 @@
 # These two seem to the valid synonyms.
 "Crotalaria ramosissima or crispata": "Crotalaria huillensis or crispata"
 
+# The common names suggest any or all of Chrysanthemum, Tanacetum, and
+# Leucanthemum, but the BAWG includes only one of those.
+"Chrysanthemum spp": "Leucanthemum spp"
+
 # scientific names with extra information tacked on
 "Verbena spp (except Verbena hastata)": "Verbena spp"
 "Prunus cerasifera 'atropurpurea'": "Prunus cerasifera"

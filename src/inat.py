@@ -25,7 +25,7 @@ used_dict = {}
 anc_dict = {} # taxon ID -> list of ancestor taxon IDs
 
 if arg('-api_taxon'):
-    user_discard_set = set(arg('-api_taxon')) # set of TIDs to be discarded
+    user_discard_set = set(arg('-api_taxon')) # set of taxons to be discarded
 else:
     user_discard_set = set()
 
@@ -64,6 +64,13 @@ def mark_discard(name, reason):
         discard_dict[name] = reason
         print(f'discarded from API cache: {name}{reason}')
 
+def get_sci_from_ranked_elab(name):
+    if name[0].islower():
+        sci_words = name.split(' ')
+        return ' '.join(sci_words[1:])
+    else:
+        return name
+
 def read_inat_files():
     global inat_dict
     try:
@@ -74,19 +81,14 @@ def read_inat_files():
     except:
         pass
 
-    # If any TIDs need to be discarded, also discard any TIDs that depend
+    # If any taxons need to be discarded, also discard any taxons that depend
     # on them.
     if user_discard_set:
         for (name, value) in inat_dict.items():
             if isinstance(value, Inat):
                 value.check_for_discard()
             else:
-                if name[0].islower():
-                    sci_words = name.split(' ')
-                    sci = ' '.join(sci_words[1:])
-                else:
-                    sci = name
-
+                sci = get_sci_from_ranked_elab(name)
                 if name in user_discard_set or sci in user_discard_set:
                     if value:
                         mark_discard(name, f' (was aliased to {value})')
@@ -520,7 +522,7 @@ def get_page_for_alias(orig, elab):
             return used_fail(name)
         used_dict[name] = tid
     else:
-        if arg('-api'):
+        if not arg('-api'):
             warn(f'Scientific name "{orig}" is given in the CalPoison data, but we don\'t have cached API data for it.  Re-run with -api?')
             return used_fail(name)
 
@@ -760,18 +762,23 @@ class Inat:
     def check_for_discard(self, discarded_descendent=None):
         discarded_ancestor = None
 
+        sci = get_sci_from_ranked_elab(self.elab)
+
         if self.taxon_id in user_discard_set:
             mark_discard(self.taxon_id, '')
             discarded_descendent = discarded_ancestor = str(self.taxon_id)
-        if self.elab in user_discard_set:
+        elif self.elab in user_discard_set:
             mark_discard(self.taxon_id, f' ({self.elab})')
             discarded_descendent = discarded_ancestor = self.elab
         elif discarded_descendent:
             mark_discard(self.taxon_id, f' (ancestor of {discarded_descendent})')
 
         # recurse upwards
-        # propagate the name of a discarded descendent if there is one
-        if self.parent_id in inat_dict:
+        # - check whether an ancestor is discarded
+        # - inform an ancestor if a descendent is discarded
+        # but don't recurse up to and discard the "life" taxon
+        # since that would trigger an extra unnecessary API fetch.
+        if self.parent_id in inat_dict and self.parent_id != '48460':
             ret_val = inat_dict[self.parent_id].check_for_discard(discarded_descendent)
             if ret_val and not discarded_ancestor:
                 discarded_ancestor = ret_val

@@ -39,7 +39,7 @@ var pages=[
 {page:"evening primrose family",sci:["family Onagraceae"],x:"f"},
 {page:"vetches vs. vetchlings",x:"k"},
 {page:"butterflies and moths",sci:["order Lepidoptera"],x:"k"},
-{page:"Eschscholzia",sci:["genus Eschscholzia"],x:"k"},
+{page:"desert poppies",sci:["genus Eschscholzia"],x:"k"},
 {page:"california poppy",sci:["Eschscholzia californica"],x:"o"},
 {page:"Cichorieae",com:["lettuce, chicory, dandelion, and salsify tribe"],sci:["tribe Cichorieae"],x:"k"},
 {page:"new world vultures",sci:["family Cathartidae"],x:"k"},

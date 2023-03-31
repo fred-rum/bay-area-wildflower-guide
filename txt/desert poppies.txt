@@ -1,6 +1,6 @@
-com:n/a
 sci:Eschscholzia spp.
 x:hist/rare
+
 ==california poppy:E. californica
 . has a distinct pink disc below the corolla (receptacle rim >= 0.5 mm) [example,2]
 . by far the most common poppy in the bay area

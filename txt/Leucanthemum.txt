@@ -1,6 +1,5 @@
 com:n/a
 sci:Leucanthemum spp.
-sci_P:Chrysanthemum spp.
 x:hist
 ==oxeye daisy:L. vulgare
 color: white
@@ -10,6 +9,7 @@ color: white
 
 ==shasta daisy:L. maximum
 acom:max chrysanthemum
+sci_P: n/a
 color: white
 . basal leaves not lobed, generally toothed (entire), petiole 10--30(120) mm
 . mid-stem leaves generally proximally entire, distally regularly serrate

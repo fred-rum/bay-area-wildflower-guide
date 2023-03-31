@@ -1584,6 +1584,9 @@ linking to the CalPoison website.
 
 fix up dumping and keyboard interrupts
 
-document -api discard options, including 'unknown'
-
 always propagate (non-0) toxicity up to genus level, just in case
+
+There's no way to recognize when iNaturalist's common name is updated.
+  Can I do something with the DarwinCore data?
+  Or must I occasionally expire and re-fetch the API data?
+  e.g. "desert poppies"

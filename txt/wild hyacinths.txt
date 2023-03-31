@@ -10,6 +10,7 @@ The defining difference is the number of stamens, but I can't count them without
 See also the similar {-blue dicks}.
 
 ==ookow:D. congestum
+# I'm going with POWO's synonym, which better reflects CalPoison's common name
 sci_P: Dichelostemma pulchellum
 color: purple
 . perianth blue-purple
