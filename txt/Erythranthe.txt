@@ -27,7 +27,7 @@ sci_p:Mimulus grandis
 
 ==field monkey-flower:Erythranthe arvensis
 sci_p:n/a
-. <b>[very small corolla]</b> <a href="https://www.inaturalist.org/observations/811525">[example]</a>, although Ocean <a href="https://www.inaturalist.org/observations/11556651#activity_comment_4816da44-498d-4876-be32-89eccb4f2423">suggests</a> that there are both standard-sized and small-flowered versions (that were at onc time called Mimulus micranthus)
+. <b>[very small corolla]</b> FNA suggests that there are both small-flowered and smaller-flowered versions (that were at onc time called Mimulus micranthus)
 . stems 5--70 cm, glabrous
 . leaf petiole 0--95 mm, blade 5--35 mm long
 . corolla lobes unequal, asymmetric when swollen in fruit

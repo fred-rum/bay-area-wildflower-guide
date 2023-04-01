@@ -4,4 +4,15 @@ color:other
 genus: meadow-rues
 x:ba
 
-xx:uncat
+xx:any
+
+==n/a:var. fendleri
+. distal leaves abaxially finely glandular-puberulent (requires magnification)
+. fruit body compressed throughout, 2--3 ribbed, no veins
+. rare in the bay area
+
+==torrey's meadow rue:var. polycarpum
+color:other
+. distal leaves abaxially generally glabrous
+. fruit body compressed only at the margins, generally 1-ribbed, with several wavy veins
+. more common in the bay area

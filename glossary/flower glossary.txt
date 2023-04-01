@@ -51,7 +51,7 @@ figure:sea muilla
 {inflorescence,inflorescences} A cluster of flowers from a common point or sharing a stalk that has only flowers on it.
 {bract,bracts,bracted} Small leaf-like structures (or analogue) at the base of an inflorescence.  May be fused together or not.
 {bractlet,bractlets} Smaller secondary bract within an inflorescence, or a smaller secondary bract on a pedicel that may not subtend any structure.
-{epicalyx (epicalyces),epicalyxes} A whorl of bracts forming an extra calyx-like structure.
+{epicalyx (epicalyces),epicalyxes} A whorl of bracts forming an extra calyx-like structure proximal/around the true calyx.
 {peduncle,peduncles} The stalk of an inflorescence (or of a head in the sunflower family) or of an individual flower that is not part of an inflorescence.  See also pedicel.
 {scape,scapes} A peduncle, particularly one that arises directly from ground level with no cauline leaves.
 

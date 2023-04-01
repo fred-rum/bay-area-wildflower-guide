@@ -1,0 +1,13 @@
+sci:Ranunculus californicus
+xx:any
+
+==n/a:ssp. californicus
+sci_Fjfp: var. californicus
+. stems erect to decumbent, hirsute or glabrous
+. ultimate segments of basal leaves acute to rounded-acute
+. common everywhere, particularly inland
+
+==n/a:var. cuneatus
+. stems prostrate, strigose
+. ultimate segments of basal leaves rounded to obtuse
+. coastal bluffs
