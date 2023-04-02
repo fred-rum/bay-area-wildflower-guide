@@ -34,19 +34,20 @@ cache_list = []
 def hash_base64(value):
     return bytes.decode(b64encode(hashlib.sha224(value).digest(), b'-_'))
 
+def record_hash(entry, value):
+    entry['base64'] = hash_base64(value)
+    entry['kb'] = len(value) // 1024 + 1 # treat empty file as 1 KB
+
 @contextmanager
 def write_and_hash(path):
     s = io.StringIO()
     try:
         yield s
     finally:
-        value = s.getvalue()
-        base64 = hash_base64(value.encode())
-        entry = {
-            'base64': base64,
-            'kb': len(value) // 1024 + 1
-        }
-        try:
+        entry = {}
+        record_hash(entry, s.getvalue().encode())
+
+        try: # in case the file no longer exists
             if (path in old_cache
                 and old_cache[path]['base64'] == entry['base64']
                 and 'mtime' in old_cache[path]
@@ -56,27 +57,20 @@ def write_and_hash(path):
             else:
                 raise Exception
         except: # if the file is different or the mtime query fails
-            if path == 'html/Agaricomycetes.html':
-                if old_cache[path]['base64'] != entry['base64']:
-                    print('base64 differs')
-                elif 'mtime' not in old_cache[path]:
-                    print('mtime missing')
-                else:
-                    print('mtime differs')
-            mod_files.add(path)
             # The output is written with the Python-native '\n' line endinge
             # instead of the default OS line endings so that we get the same
             # hash_base64 result on the file as we do internally.
             with open(f'{root_path}/{path}', mode='w',
                       encoding='utf-8', newline='') as w:
                 w.write(value)
+            mod_files.add(path)
+            new_cache[path] = entry
 
 def get_base64(path):
     if path in new_cache:
-        # If we already have the new base64 value, return it.
+        # We already have some information about the file
+        # (either 'base64' or 'mtime', but not both).
         entry = new_cache[path]
-        if 'base64' in entry:
-            return entry
     elif path in old_cache:
         # If we have a cached base64 value, verify it.
         entry = old_cache[path]
@@ -97,20 +91,26 @@ def get_base64(path):
         # new value.
         pass
     else:
-        # I checked, and Python deliberately uses enough digits in the
-        # yaml float to guarantee equality after a dump and load.
-        # Presumably the pickle is equally good.
         mtime = os.path.getmtime(f'{root_path}/{path}')
-        if 'mtime' in entry and mtime == entry['mtime']:
-            # modification times match, so don't bother calculating a fresh
-            # base64 hash.
-            return entry
+        if 'base64' in entry:
+            if 'mtime' not in entry:
+                # If we have 'base64' and not 'mtime', then we must have
+                # written and hashed this file during this script invocation.
+                # We just have to update the mtime
+                entry['mtime'] = mtime
+                return entry
+            if 'mtime' in entry and mtime == entry['mtime']:
+                # If we have both 'base64' and 'mtime', then we haven't
+                # changed this file during this script invocation.
+                # If the user hasn't changed the file outside the script,
+                # don't bother calculating a fresh hash.
+                return entry
+
+        # Either we've updated the file without hashing it
         entry['mtime'] = mtime
 
     with open(f'{root_path}/{path}', mode='rb') as f:
-        value = f.read()
-        entry['base64'] = hash_base64(value)
-        entry['kb'] = len(value) // 1024 + 1
+        record_hash(entry, f.read())
 
     return entry
 
@@ -132,6 +132,11 @@ def gen_url_cache():
     with open(f'{root_path}/url_data.json', mode='w') as w:
         w.write(f'[\n{code}\n]\n');
 
+    # Ideally we would only update sw.js if something has changed.
+    # But:
+    # - we'd also have to changes in the sw.js
+    # - script errors can create the appearance of change when there isn't any
+    # So it's easier and more predictable to just always update sw.js.
     timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
     num_urls = len(cache_list)
     code = f'''var upd_timestamp = '{timestamp}';

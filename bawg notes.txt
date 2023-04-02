@@ -1265,22 +1265,6 @@ add another property like 'no_sci_not_obs'
 flag places where the genus rank is inferred
   i.e. remains inferred after all sources are checked for elaborations
 
-Will the script run faster if I read the existing HTML files
-  and only re-write the ones that have changed?
-    or are missing (see below)
-    or have incorrect time stamps?
-  can this lean on the existing logic in cache.py to be even faster and easier?
-    write_and_hash() is called for every HTML file
-    can't rely on old_cache since it might not be in sync after a crash
-      although the risk is low;
-        I don't get many crashes once file writing starts
-        and it would be rare for a file to revert to the cached value
-    instead of writing to an "in progress" directory and moving it at the end
-      scan the html directory at the start
-      delete files at the end that weren't re-generated
-    or move unchanged files to "in progress"
-      is this safer from crashes?  I'm not sure
-
 Give the user a way to edit/repeat the previous search
   When navigating away from a page, record the search field before clearing it
   After returning to the page, if the search field is empty, provide a
