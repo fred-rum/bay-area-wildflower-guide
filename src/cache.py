@@ -28,6 +28,7 @@ def init_cache():
 init_cache()
 
 new_cache = {}
+mod_files = set()
 cache_list = []
 
 def hash_base64(value):
@@ -40,13 +41,35 @@ def write_and_hash(path):
         yield s
     finally:
         value = s.getvalue()
-        with open(f'{working_path}/{path}', mode='w', encoding='utf-8') as w:
-            w.write(value)
+        base64 = hash_base64(value.encode())
         entry = {
-            'base64': hash_base64(value.encode()),
+            'base64': base64,
             'kb': len(value) // 1024 + 1
         }
-        new_cache[path] = entry
+        try:
+            if (path in old_cache
+                and old_cache[path]['base64'] == entry['base64']
+                and 'mtime' in old_cache[path]
+                and old_cache[path]['mtime'] == os.path.getmtime(f'{root_path}/{path}')):
+                # the file is unchanged, so we don't need to re-write it
+                new_cache[path] = old_cache[path]
+            else:
+                raise Exception
+        except: # if the file is different or the mtime query fails
+            if path == 'html/Agaricomycetes.html':
+                if old_cache[path]['base64'] != entry['base64']:
+                    print('base64 differs')
+                elif 'mtime' not in old_cache[path]:
+                    print('mtime missing')
+                else:
+                    print('mtime differs')
+            mod_files.add(path)
+            # The output is written with the Python-native '\n' line endinge
+            # instead of the default OS line endings so that we get the same
+            # hash_base64 result on the file as we do internally.
+            with open(f'{root_path}/{path}', mode='w',
+                      encoding='utf-8', newline='') as w:
+                w.write(value)
 
 def get_base64(path):
     if path in new_cache:
@@ -76,6 +99,7 @@ def get_base64(path):
     else:
         # I checked, and Python deliberately uses enough digits in the
         # yaml float to guarantee equality after a dump and load.
+        # Presumably the pickle is equally good.
         mtime = os.path.getmtime(f'{root_path}/{path}')
         if 'mtime' in entry and mtime == entry['mtime']:
             # modification times match, so don't bother calculating a fresh

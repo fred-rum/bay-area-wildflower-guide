@@ -978,20 +978,24 @@ with open(photos_file, 'w', encoding='utf-8') as w:
 # Create an HTML file with links to all new files and all modified files.
 # (Ignore deleted files.)
 
-file_list = sorted(os.listdir(working_path + '/html'))
+file_list = (sorted(get_file_set('', 'html', with_path=True)) +
+             sorted(get_file_set('html', 'html', with_path=True)))
 new_list = []
 mod_list = []
+del_list = []
 for name in file_list:
-    if name.endswith('.html'):
-        if not os.path.isfile(f'{root_path}/html/' + name):
-            new_list.append(name)
-        elif not filecmp.cmp(f'{root_path}/html/' + name,
-                             f'{working_path}/html/' + name):
-            mod_list.append(name)
+    if name in ('_mod.html', 'gallery.html'):
+        pass
+    elif name in new_cache and name not in old_cache:
+        new_list.append(name)
+    elif name in mod_files:
+        mod_list.append(name)
+    elif name not in new_cache:
+        del_list.append(name)
+        os.remove(name)
 
-total_list = mod_list + new_list
-if total_list:
-    mod_file = working_path + "/html/_mod.html"
+if new_list or mod_list or del_list:
+    mod_file = root_path + "/_mod.html"
     with open(mod_file, "w", encoding="utf-8") as w:
         if new_list:
             w.write('<h1>New files</h1>\n')
@@ -1001,32 +1005,23 @@ if total_list:
             w.write('<h1>Modified files</h1>\n')
             for name in mod_list:
                 w.write(f'<a href="{name}">{name}</a><p/>\n')
-else:
-    info("No HTML files modified.")
+        if del_list:
+            w.write('<h1>Deleted files</h1>\n')
+            for name in del_list:
+                w.write(f'{name}<p/>\n')
 
-# All working files have been created.  Move the files/directories out
-# of the working directory and into their final places.
-#
-# We do this even if no files have apparently been modified because
-# there could be other changes not detected, e.g. deleted files.
-shutil.rmtree(f'{root_path}/html', ignore_errors=True)
-
-def rename_working():
-    os.rename(f'{working_path}/html', f'{root_path}/html')
-
-os_wait(rename_working,
-        'Having trouble removing the old html and renaming the new html...')
-
-if total_list:
     # open the default browser with the created HTML file
-    if len(total_list) == 1:
-        mod_file = f'{root_path}/html/' + total_list[0]
+    changed_list = mod_list + new_list
+    if len(changed_list) == 1 and not del_list:
+        mod_file = f'{root_path}/' + changed_list[0]
     else:
-        mod_file = f'{root_path}/html/_mod.html'
+        mod_file = f'{root_path}/_mod.html'
 
     # os.startfile in Windows requires an absolute path
     abs_mod_file = os.path.abspath(mod_file)
     os.startfile(abs_mod_file)
+else:
+    info("No HTML files modified.")
 
 
 ###############################################################################

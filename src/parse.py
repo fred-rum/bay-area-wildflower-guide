@@ -13,6 +13,7 @@ import re
 
 # My files
 from error import *
+from cache import *
 from files import *
 from find_page import *
 from easy import *
@@ -369,7 +370,7 @@ def parse_other(name):
 
     txt = parse_txt(name, txt, None, None)
 
-    with open(f'{root_path}/{name}.html', 'w', encoding='utf-8') as w:
+    with write_and_hash(f'{name}.html') as w:
         write_header(w, title, None, desc=desc, at_root=True)
         w.write(txt)
         write_footer(w, incl_footer, at_root=True)

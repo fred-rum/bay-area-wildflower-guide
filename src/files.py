@@ -67,7 +67,6 @@ def os_wait(fn, msg):
 
 def mkdir_working():
     os.mkdir(working_path)
-    os.mkdir(working_path + '/html')
 
 os_wait(mkdir_working,
         'Having trouble removing the old .in_progress and making a new one...')
@@ -84,22 +83,30 @@ if arg('-api'):
     mkdir('inat')
 
 # Get the set of files that have the expected suffix in the designated
-# directory.  The set includes only the base filename without the
-# extension.
-def get_file_set(subdir, ext, use_home=False):
+# directory.  If with_path=False, the set includes only the base filename
+# without the subdirectory or extension.
+def get_file_set(subdir, ext, use_home=False, with_path=False):
     if use_home:
         root = home_path
     else:
         root = root_path
 
-    subdir_path = root + '/' + subdir
+    if subdir:
+        subdir_path = root + '/' + subdir
+        rel_path = subdir + '/'
+    else:
+        subdir_path = ''
+        rel_path = ''
+
     if not os.path.isdir(subdir_path):
         return set()
 
     file_list = os.listdir(subdir_path)
     base_set = set()
     for filename in file_list:
-        if ext:
+        if with_path:
+            base_set.add(rel_path + filename)
+        elif ext:
             pos = filename.rfind(os.extsep)
             if pos > 0:
                 file_ext = filename[pos+len(os.extsep):].lower()
