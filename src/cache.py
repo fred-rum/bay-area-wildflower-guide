@@ -44,8 +44,10 @@ def write_and_hash(path):
     try:
         yield s
     finally:
+        value = s.getvalue()
+
         entry = {}
-        record_hash(entry, s.getvalue().encode())
+        record_hash(entry, value.encode())
 
         try: # in case the file no longer exists
             if (path in old_cache

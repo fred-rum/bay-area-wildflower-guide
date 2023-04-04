@@ -2,12 +2,24 @@ acom: primroses
 sci:Primula spp.
 x:ba
 
+The anthers of Shooting stars are fused in pairs, with connective tissue between and covering them, often coming to a point between the tips of each anther pair.  The connective tissue widens to cover the anthers toward the proximal end, where all filaments are often fused to form a filament tube.
+
+Jepson has produced a <a href="https://www.youtube.com/watch?v=Uw6AcwbeG8s">video</a> showing differences between the bay area species, along with high quality photos.  Another <a href="https://www.youtube.com/watch?v=ChYxUKS2RtY">video</a> describes the relevant botanical terms in more detail.
+
 ==henderson's shooting star:P. hendersonii
 color: purple, red purple, pale purple, pink
 . peduncle purple (or mix of purple/green)
-. leaf blade length generally < 2 &times; width
+. corolla typically has 4 lobes in the bay area, rarely 5
+. filament tube < 3 mm wide
+. anther connective tissue is dark purple to black
+. (basal) leaf blade length generally < 2 &times; width
 
 ==padre's shooting star:P. clevelandii
 color: purple, red purple, pale purple, pink
 . peduncle bright green
-. leaf blade length generally > 2 &times; width
+. corolla typically has 5 lobes, rarely 4 or 6
+. at low elevations near the coast, the corolla is typically mostly white
+.. inland and at higher elevations, the corolla is mostly light purple
+. filament tube 3--4 mm wide
+. depending on the variety, there will always be cream/yellow on the filament tube, anther connective tissue, or anther pollen sacs
+. (basal) leaf blade length generally > 2 &times; width

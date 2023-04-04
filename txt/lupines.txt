@@ -224,7 +224,7 @@ species: summer lupine
 . common
 
 ==varied lupine:L. variicolor
-color:purple, pale purple
+color:purple, pale purple, blue, yellow, cream, white
 . habit: perennial herb, subshrub, 2--5 dm, generally dense-appressed or -spreading-silver-hairy
 . stem: <b>prostrate to decumbent</b>, not weak
 . leaf: cauline, often appearing clustered near base 1st year; stipules 7--8 mm; petiole generally 4--10 cm; leaflets 6--9, 20--35 mm

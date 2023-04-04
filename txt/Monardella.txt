@@ -25,7 +25,6 @@ wavy leaf margin:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+
 . leaves clustered at nodes, sparsely hairy to densely tomentose, <b>leaf margin wavy</b>
 
 ==coyote mint:M. villosa
-color: pale purple, purple
 . subshrub to shrub with 1--many main stems, branched or not
 . 1--6 flowers clusters per main stem
 . <b>stem hairs > 0.3 mm</b>, +- dense or +- 0
@@ -49,4 +48,4 @@ glabrous stem:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+061
 . 1+ flower cluster per main stem
 . <b>stem +- glabrous</b>, no hairs > 0.3 mm
 . leaf margin serrate (entire), slightly or not wavy
-. bay area flowers have > 1 flower cluster per main stem and may be assignable to M. villosa ssp. neglecta
+. bay area flowers have > 1 flower cluster per main stem and are quite similar to {-Monardella villosa}

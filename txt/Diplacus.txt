@@ -13,11 +13,11 @@ color: orange
 <h2>corolla purple</h2>
 ==congdon's monkeyflower:D. congdonii
 sci_p:Mimulus congdonii
-color: red purple
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0110+0798
 . herb
 . 5 corolla limbs, +- equal, each 3--11 mm wide
 . calyx 5--14 mm, ribs hairy
+. the anthers are held high in the flower opening, unlike <a href="https://calphotos.berkeley.edu/cgi/img_query?rel-taxon=begins+with&where-taxon=Diplacus%20fremontii%7CMimulus%20fremontii">D. fremontii</a>
 
 ==purple mouse ears:D. douglasii
 sci_p:Mimulus douglasii

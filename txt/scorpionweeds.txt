@@ -25,3 +25,6 @@ color: pale purple, other
 
 ==california phacelia:P. californica
 color: pale purple, other
+
+==stinging phacelia:P. malvifolia
+color: white, cream, other
