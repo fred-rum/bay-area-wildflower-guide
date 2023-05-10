@@ -69,8 +69,8 @@ genus: n/a
 
 ==nipplewort:Lapsana communis
 color:yellow
-x:any
 genus: nippleworts
+x:any
 . one stem from base, branched distally
 . mostly cauline leaves, ovate, 2--20 cm
 .. petioled or distally +- sessile
@@ -78,3 +78,19 @@ genus: nippleworts
 .. few outer phyllaries, < 1 mm
 .. 8--10 inner phyllaries, 3--9 mm
 . 6--15 ligules, 4--10 mm
+
+==cretanweed:Hedypnois rhagadioloides
+color:yellow
+genus:n/a
+x:ca
+. one stem from base, occasionally branched
+. mostly basal leaves
+.. cauline leaves at branch nodes
+.. tapered to base
+.. small teeth to mid-sized lobes
+. leaves, pedicel, and phyllaries with distinct spreading hairs
+. phyllaries in 2 series
+.. outer phyllaries small
+.. inner phyllaries all the same length, extending partway out the spread petals
+. ligules yellow, drying +- blue
+.. may be reddish-brown tipped, especially underneath

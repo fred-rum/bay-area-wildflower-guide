@@ -1,6 +1,8 @@
 sci:Balsamorhiza spp.
 x:ba
 
+See also {-mule's ears}, which has similar flowers but completely different leaves.
+
 ==california balsamroot:B. macrolepis
 color:yellow
 . basal leaf pinnately divided into linear to ovate segments

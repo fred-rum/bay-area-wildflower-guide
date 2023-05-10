@@ -1898,6 +1898,7 @@ var pages=[
 {page:"coyote ceanothus",sci:["Ceanothus ferrisiae"],x:"u"},
 {page:"creeping buttercup",sci:["Ranunculus repens"],x:"u"},
 {page:"creeping woodsorrel",sci:["Oxalis corniculata"],x:"u"},
+{page:"cretanweed",sci:["Hedypnois rhagadioloides"],x:"o"},
 {page:"crystalline ice plant",sci:["Mesembryanthemum crystallinum"],x:"u"},
 {page:"curlyleaf monardella",sci:["Monardella undulata"],x:"u"},
 {page:"cursed crowfoot",sci:["Ranunculus sceleratus"],x:"u"},

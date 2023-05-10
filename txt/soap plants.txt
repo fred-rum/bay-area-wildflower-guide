@@ -6,6 +6,7 @@ These flowers open in the evening.  For flowers that open during the day, see {-
 ==wavy-leafed soap plant:C. pomeridianum
 . leaf 4--25 mm wide, margin generally wavy
 . common
+The leaves are wider, wavier, duller, and paler green than {-irises}.
 
 ==narrowleaf soap plant:C. angustifolium
 . leaf 2--5 mm wide, margin +- flat

@@ -26,9 +26,8 @@ color: yellow
 color: yellow
 . plant generally with a definite stem, stem +- leafy
 . petals +- glabrous
-. cauline leaf petioles conspicuously sheathing throughout (<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=6121+1611+3984+0073">example</a>)
+. cauline leaf petioles conspicuously sheathed (<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=6121+1611+3984+0073">example</a>)
 . leaf segments 2--25 mm, generally linear
-. cauline leaf petioles conspicuously sheathing throughout
 . pedicels 2--9 mm
 . corolla yellow, occasionally white in age
 . common

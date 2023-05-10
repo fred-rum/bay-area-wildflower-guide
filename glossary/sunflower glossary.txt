@@ -12,7 +12,7 @@ A single flower head in the sunflower family is actually a tight inflorescence o
 {involucre,involucres} The green base of a flower head in the sunflower family.
 {ligule,ligules,ligulate flower,ligulate flowers} A ray-like flower that is clustered only with other ligules in a liguliflorous head.  Each ligule is tipped with 5 short lobes.
 {palea (paleae),paleate} A scale-like bract for an individual flower in some genera.
-{pappus,pappuses,pappi} A modified calyx composed of some combination of scales, none#awns, and/or bristles.  In some species, the pappus forms a parachute for seed dispersal.
+{pappus,pappuses,pappi} A modified calyx composed of some combination of scales, awns, and/or bristles.  In some species, the pappus forms a parachute for seed dispersal.
 {pappus element,pappus elements} A modified sepal; one part among similar parts that make up the pappus.
 {phyllary,phyllaries} A bract of the flower head in the sunflower family.  A member of the involucre.
 {ray,rays,ray flower,ray flowers} A flower in the outer portion of a head in the sunflower family.  Flat and uni-directional, not radial.  May be distally lobed.  Usually pistillate, but sometimes sterile.  The rays form a ring around the central disk.

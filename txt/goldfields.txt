@@ -23,8 +23,9 @@ color: yellow
 . phyllaries free, generally > 6
 . leaves +- entire or with 3--5+ teeth
 . pappus of 1--7 clear, brown, linear to awl-like scales, or 0
+. linear leaves
+.. see also {-hillside daisies}, which have narrow (but not linear) wedge-shaped leaves that are quite hairy.
 . common
-. See also {-hillside daisies}, which have narrow (but not linear) wedge-shaped leaves that are quite hairy.
 
 ==common goldfields:L. gracilis
 . phyllaries free, generally > 6

@@ -61,6 +61,7 @@ color: yellow
 . calyx lobes +- 0.8--<b>1.2</b> &times; tube
 . corolla 5--9 mm, yellow, reddening in age, wings +- <= keel
 . very common
+. see also {-bur clover}, which has 3 leaflets instead of generally 4
 
 ==foothill deervetch:A. brachycarpus
 color: yellow
