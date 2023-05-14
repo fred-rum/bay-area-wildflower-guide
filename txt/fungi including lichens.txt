@@ -35,3 +35,5 @@ end_hierarchy
 ==rust fungi
 
 ==gall fungi
+
+==cramp balls:Annulohypoxylon thouarsianum

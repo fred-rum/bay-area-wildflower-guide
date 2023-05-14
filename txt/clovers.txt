@@ -158,7 +158,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1218+3899
 . rare
 
 ==white-tipped clover:T. variegatum
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0717+1130
+color: pale purple, purple
 . calyx lobes generally > tube, generally entire, not shouldered below tapered tip
 . calyx tube not splitting between upper lobes
 . calyx bell-shaped, lobes entire or toothed

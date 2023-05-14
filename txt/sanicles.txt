@@ -70,6 +70,7 @@ color: yellow
 . scattered in Santa Cruz range from Monte Bello north; Chabot and Redwood Regional
 
 ==footsteps of spring:S. arctopoides
+color:yellow
 . plant prostrate, 10--30 cm wide
 . leaf simple, +- palmately or ternately dissected, bright +- yellow-green at flower; blade 2--6.5 cm, triangular-ovate to round, lobes coarsely toothed to lobed
 . peduncle 3--21 cm

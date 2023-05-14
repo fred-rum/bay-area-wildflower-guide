@@ -1,0 +1,4 @@
+sci:Cicendia quadrangularis
+genus:n/a
+x:ca
+color:yellow

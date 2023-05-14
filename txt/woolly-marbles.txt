@@ -1,0 +1,30 @@
+sci:genus Psilocarphus
+x:ba
+
+==low woolly marbles:P. brevissimus
+. largest heads <b>6--14 mm</b> in diameter
+. paleae generally +- hidden by hairs
+. longest distal leaf length 1--2.5 &times; head diameter
+
+==oregon woollyheads:P. oregonus
+. largest heads 3--6 mm in diameter
+. paleae +- visible through hairs
+. distal leaves linear to narrowly oblanceolate
+.. length generally <b>6--12 &times; width</b>, 3.5--5 &times; head diameter
+
+==slender woolly-marbles:Psilocarphus tenellus
+color:other
+. largest heads 3--6 mm in diameter
+. paleae +- visible through hairs
+. distal leaves appressed to heads
+.. ovate to widely elliptic
+. distal leaves generally +- spreading
+.. <b>spoon-shaped</b> to obovate
+.. length generally <b>2--5 &times; width</b>, 1.5--2.5 &times; head diameter
+
+==round woolly marbles:P. chilensis
+. largest heads 3--6 mm in diameter
+. paleae +- visible through hairs
+. distal leaves appressed to heads [but not reliably distinct from spreading]
+.. ovate to widely elliptic
+.. length generally <b>1--2 &times; width</b>, 1--2 &times; head diameter

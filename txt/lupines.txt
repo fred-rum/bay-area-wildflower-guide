@@ -133,7 +133,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0113+1990
 <br>pedicels 3--7 mm</h4>
 
 ==fleshy lupine:L. affinis
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0518+0859
+color: purple
 . habit: annual 2--5(6) dm, hairy
 . leaf: petiole 3--10 cm; leaflets 5--8, 20--50 mm, 4--11 mm wide
 . inflorescence: 4--20 cm, <b>flowers whorled</b>; peduncle 5--18 cm; <b>pedicels 3--6 mm</b>; bract 5--7.5 mm
