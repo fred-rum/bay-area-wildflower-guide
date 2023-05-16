@@ -36,7 +36,7 @@ color: cream, yellow
 color: purple
 <b>Warning: ID uncertain.</b>
 . perianth cream to gold-yellow or lavender to deep blue-purple, generally veined darker
-. <b>perianth tube 34--65 mm, abruptly inflated, bowl-like at top</b> [there is no bowl]
+. <b>perianth tube 34--65 mm</b>, abruptly inflated, bowl-like at top [there is no bowl]
 . stem unbranched, 0--15 cm
 . <b>basal leaves 3--6 mm wide</b>, base generally colorless
 . 0--3 cauline leaves, <b>similar to basal</b>

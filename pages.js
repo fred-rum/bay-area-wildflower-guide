@@ -2345,7 +2345,7 @@ var pages=[
 {page:"california fescue",sci:["Festuca californica"],x:"u"},
 {page:"california groundsel",sci:["Senecio aphanactis"],x:"u"},
 {page:"california sunflower",sci:["Helianthus californicus"],x:"u"},
-{page:"california sweet cicely",sci:["Osmorhiza brachypoda"],x:"u"},
+{page:"california sweet cicely",sci:["Osmorhiza brachypoda"],x:"o"},
 {page:"camp martin paintbrush",sci:["Castilleja martini","Castilleja applegatei ssp. martinii"],x:"u"},
 {page:"canary island broom",sci:["Genista canariensis"],x:"u"},
 {page:"canyon birdsfoot trefoil",sci:["Acmispon argyraeus"],x:"u"},

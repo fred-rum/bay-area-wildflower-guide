@@ -108,6 +108,7 @@ color: pale purple
 . leaf lobes 6--30 mm, tips pointed
 . calyx ciliate, <b>nonglandular</b>, abaxially generally glabrous
 . common
+. <b>I tend to distinguish them from {-variable linanthus} by their different petal shape (see photos) and slightly larger corolla diameter</b>
 
 ==variable linanthus:L. parviflorus
 sci_p:Linanthus parviflorus
@@ -121,6 +122,7 @@ color: purple, pale purple, pink, yellow, white
 . leaf lobes 2--18 mm, middle lobe tip acute
 . calyx densely hairy, <b>glandular</b>
 . common
+. <b>I tend to distinguish them from {-false babystars} by their different petal shape (see photos) and slightly smaller corolla diameter</b>
 
 ]
 [
@@ -129,7 +131,6 @@ color: purple, pale purple, pink, yellow, white
 ==true babystars:L. bicolor
 sci_p:Linanthus bicolor
 color:pale purple
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0407+2819
 . corolla:
 .. tube +- red
 .. throat yellow

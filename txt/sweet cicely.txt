@@ -7,5 +7,6 @@ color:white
 . corolla white or purple (or rarely green-white)
 
 ==california sweet cicely:O. brachypoda
+color:other
 . involucel conspicuous
 . corolla +- green-yellow
