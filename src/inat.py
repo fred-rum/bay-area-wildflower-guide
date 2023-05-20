@@ -459,6 +459,15 @@ def get_inat_for_tid_set(tid_set, local=True):
                 else:
                     inat_dict[tid].global_com = None
 
+                if 'ancestors' in data:
+                    for anc_data in data['ancestors']:
+                        anc_tid = str(anc_data['id'])
+                        if 'preferred_common_name' in anc_data:
+                            inat_dict[anc_tid].global_com = anc_data['preferred_common_name'].lower()
+                        else:
+                            inat_dict[anc_tid].global_com = None
+                        Inat(anc_data)
+
 
 def find_plant_match(data_list, name):
     matched_data = None
