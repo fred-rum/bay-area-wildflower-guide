@@ -22,3 +22,8 @@ color: yellow
 ==hillside daisies
 
 ==Packera spp.
+
+==common yellow chaenactis:Chaenactis glabriuscula
+genus:pincushion plants
+x:rare
+color: yellow

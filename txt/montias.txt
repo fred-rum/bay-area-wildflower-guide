@@ -1,0 +1,21 @@
+sci:genus Montia
+x:ba
+
+==small-leaved blinks:Montia parvifolia
+color: white
+. basal or alternate on stolons
+.. 15--60 mm long [bigger than on {-blinks}]
+. petals 7--15 mm long
+. rare in the outer coastal range
+
+==diffuse montia:Montia diffusa
+. alternate leaves, basal and cauline
+.. 8--50 mm long
+. petals 3--4.5 mm long
+. very rare in Marin
+
+==blinks:Montia fontana
+. opposite leaves, basal and cauline
+.. 3--20 mm long
+. petals 1--2 mm long
+. rare everywhere

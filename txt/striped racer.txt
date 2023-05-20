@@ -1,0 +1,15 @@
+xx:any
+
+CaliforniaHerps has a <a href="https://californiaherps.com/identification/snakesid/whipsnakes.id.html#Comparison">comparison of distinguishing features</a> between the two subspecies.
+
+==california striped racer:Masticophis lateralis ssp. lateralis
+. <b>side stripe covers only half a scale above and below</b> with no full scales covered
+.. stripe is cream colored
+. interrupted light stripe from the nose to the eye
+. found throughout California, most often in Southern California
+
+==alameda whipsnake:Masticophis lateralis ssp. euryxanthus
+. <b>side stripe covers a full scale plus half a scale above and below</b>
+.. stripe is a bit orangey
+. uninterrupted light stripe from the nose to the eye
+. found in the east bay, north of San Jose

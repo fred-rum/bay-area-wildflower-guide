@@ -1,0 +1,19 @@
+sci:genus Aira
+x:ca
+
+==silver hairgrass:Aira caryophyllea
+color:other
+. inflorescence open
+.. infloresence branches all the same length
+. spikelet stalk +-1--2&times; spikelet length
+. common
+
+==elegant hair grass:Aira elegans
+. inflorescence open
+.. infloresence branches not all the same length
+. spikelet stalk +-2--8&times; spikelet length
+. very rare
+
+==early hair grass:Aira praecox
+. inflorescence compact, spike-like
+. very rare

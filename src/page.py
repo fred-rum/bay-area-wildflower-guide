@@ -187,6 +187,13 @@ def sort_pages(page_set, trait=None, value=None,
     def count_flowers_helper(page):
         return page.count_flowers(trait, value)
 
+    # helper function to sort by the presence of photos.
+    def count_photos_helper(page):
+        if page.get_jpg(''):
+            return 1
+        else:
+            return 0
+
     # Sort multiple times.  Each sort breaks ties by retaining the order
     # from the previous sort, so the sorts are performed in order from least
     # priority to most priority.
@@ -208,6 +215,12 @@ def sort_pages(page_set, trait=None, value=None,
 
     # Sort by observation count, from most to least.
     if with_count:
+        # For pages with an equal number of observations (particularly zero),
+        # put pages with more photoes (e.g. more than zero) first.
+
+        # Disabled for now since it's mysteriously unstable in sort order.
+        #page_list.sort(key=count_photos_helper, reverse=True)
+
         page_list.sort(key=count_flowers_helper, reverse=True)
 
     return page_list

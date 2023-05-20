@@ -1574,3 +1574,6 @@ There's no way to recognize when iNaturalist's common name is updated.
   Can I do something with the DarwinCore data?
   Or must I occasionally expire and re-fetch the API data?
   e.g. "desert poppies"
+
+california golden chanterelle is listed both under family Hydnaceae
+  and class Agaricomycetes

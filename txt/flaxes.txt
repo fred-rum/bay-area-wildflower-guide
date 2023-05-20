@@ -7,6 +7,7 @@ color: pale purple, white
 . common
 
 ==common flax:L. usitatissimum
+color: pale purple, pale blue
 . petals lavender, 10--15 mm
 . very rare
 

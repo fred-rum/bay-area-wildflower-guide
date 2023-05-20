@@ -1,0 +1,24 @@
+sci:genus Collomia
+x:rare
+
+==variableleaf collomia:C. heterophylla
+color: red purple, pink, white
+. <b>corolla lobes red purple or pink to white, throat white, tube greenish yellow</b>
+.. corolla 10--14 mm long
+. stem branching and spreading with long glandular hairs
+. lower cauline leaves 1--2-pinnate lobed (upper leaves lobed or entire)
+. uncommon
+
+==serpentine collomia:C. diversifolia
+. <b>corolla petals red purple to pink, throat white and yellow, tube red or brown</b>
+.. corolla 9--12 mm long
+. stem branching and spreading with long glandular hairs
+. lower cauline leaves +-3-toothed (upper leaves entire)
+. very rare, mostly on Mt. Diablo
+
+==grand collomia:C. grandiflora
+. <b>corolla dusty orange, fading to white</b>
+.. corolla 15--30 mm long
+. stem erect and simple with short nonglandular hairs
+. rare
+

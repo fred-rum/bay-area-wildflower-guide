@@ -1,7 +1,7 @@
 sci:Iris spp.
 x:hist/rare
 
-<b>Caution: IDs unsure.</b>
+iNaturalist's Seek app often suggests "oregon iris (<i>Iris tenax</i>)", but it is not naturalized in the bay area.
 
 Key features:
 . perianth tube shape and length (measured from base of stamens to top of ovary [which can be hard to determine])

@@ -3,11 +3,16 @@ sci:family Syrphidae
 ID tips and photos for common bay area species can be found in <a href="https://norriscenter.ucsc.edu/collections/insects/images/syrphidguide.pdf">Syrphidae: A Guide to Natural History and Identification of Common Genera in Santa Cruz County</a>
 
 ==globetails
+bug:7321
 
 ==pufftails:genus Sphegina
 bug:18472
 
 ==calligrapher flies
+bug:3277
 
 ==black-margined flower fly:Syrphus opinator
 bug:268265
+
+==western forest sedgesitter:Platycheirus trichopus
+bug:1320429

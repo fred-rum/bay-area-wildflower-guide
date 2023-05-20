@@ -1,0 +1,15 @@
+com: n/a
+sci: genus Sabulina
+sci_F: genus Minuartia
+x:rare
+
+==douglas' stitchwort:S. douglasii
+sci_Fp: Minuartia douglasii
+color: white
+. inflorescence +- glandulary-hairy
+. leaf 10--30 mm (rarely 5--10)
+
+==california sandwort:S. californica
+sci_Fp: Minuartia californica
+. inflorescence glabrous
+. leaf 1.5--7 mm (rarely 7--10)

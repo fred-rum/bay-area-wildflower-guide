@@ -4,14 +4,16 @@ x:ca
 Note that references to "umbel" below refer to one umbel in the compound umbel inflorescence.
 
 ==common hedge parsley:T. arvensis
+acom:tall sock-destroyer
 color: white
 . plant erect
 . umbel open, not head-like
 . umbel subtended by +- 0--1 bracts
 . common
-See also the similar {-bur chervil}, which has more divided leaflet lobes.
+See also the similar {-bur chervil}, which has more divided leaflet lobes, beaked fruit.
 
 ==knotted hedgeparsley:T. nodosa
+color: white
 . plant spreading
 . umbel dense, head-like
 

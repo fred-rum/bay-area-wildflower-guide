@@ -4,6 +4,6 @@ color: white
 genus:locust trees
 x: rare
 
-The {-black locust} has spines at the base of the leaf.  Compare to california false indigo (<i>Amorpha californica</i>), which doesn't have spines at the base of the leaf but does have prickle-like glands along the leaf midrib.
+The {-black locust} generally has spines at the base of the leaf, although some cultivars lack the spines.  Compare to california false indigo (<i>Amorpha californica</i>), which doesn't have spines at the base of the leaf but does have prickle-like glands along the leaf midrib.
 
 Edibility: Eating seeds, leaves, or bark may be fatal to humans and livestock. <a href="https://ucjeps.berkeley.edu/eflora/eflora_display.php?tid=41521">[source]</a>

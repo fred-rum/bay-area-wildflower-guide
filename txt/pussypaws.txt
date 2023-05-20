@@ -1,7 +1,9 @@
 sci:genus Calyptridium
+sci_F:genus Cistanthe
 x:ba
 
 ==one-seeded pussypaws:C. monospermum
+sci_F:Cistanthe monosperma
 color: purple, red purple
 . style 2--4 mm, exserted
 . >= 2 inflorescences per rosette
@@ -10,6 +12,7 @@ color: purple, red purple
 . near Quail Hollow (Ben Lomaond area)
 
 ==mount hood pussypaws:C. umbellatum
+sci_F:Cistanthe umbellata
 . style 2--4 mm, exserted
 . generally 1 inflorescence per rosette
 . generally no cauline leaves
@@ -17,12 +20,14 @@ color: purple, red purple
 . Calflora claims it's in the same area as {-one-seeded pussypaws}, but it has not yet been observed in the bay area on iNaturalist
 
 ==common pussypaws:C. monandrum
+sci_F:Cistanthe monandra
 . style < 2 mm, generally included
 . generally 3 petals per flower
 . 1 stamen per flower
 . Calflora claims it's in Henry Coe, but it has not yet been observed in the bay area on iNaturalist
 
 ==santa cruz mountains pussypaws:C. parryi var. hesseae
+sci_F:Cistanthe parryi
 species:n/a
 . style < 2 mm, generally included
 . 4 petals per flower

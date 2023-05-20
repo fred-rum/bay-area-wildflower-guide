@@ -31,3 +31,6 @@ xx:ba
 . orange belly and orange ring around neck
 
 ==sharp-tailed snakes
+
+==striped racer:Masticophis lateralis
+x:rare

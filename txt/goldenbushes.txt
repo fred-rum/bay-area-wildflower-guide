@@ -1,6 +1,23 @@
 sci:Ericameria spp.
 x:hist/rare
 
+<h3>with rays</h3>
+
+==california goldenbush:E. ericoides
+color: yellow
+. phyllaries unequal in a graduated series
+. tips of outermost phyllaries generally abruptly pointed, leaf-like
+. 3--6 rays, 6--8 mm
+. rare
+
+==narrowleaf goldenbush:E. linearifolia
+color: yellow
+. phyllaries +- equal length
+. 12--18 rays, 9--20 mm
+. rare
+
+<h3>no rays</h3>
+
 ==golden-fleece:E. arborescens
 color: yellow
 . phyllaries unequal in a graduated series
@@ -12,16 +29,4 @@ color: yellow
 . phyllaries unequal in a graduated series
 . no rays
 . leaves and young stem lacking round resin pits
-. rare
-
-==california goldenbush:E. ericoides
-color: yellow
-. phyllaries unequal in a graduated series
-. tips of outermost phyllaries generally abruptly pointed, leaf-like
-. 3--6 rays, 6--8 mm
-. rare
-
-==narrowleaf goldenbush:E. linearifolia
-. phyllaries +- equal length
-. 12--18 rays, 9--20 mm
 . rare

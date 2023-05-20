@@ -17,7 +17,7 @@ color: yellow
 . plant generally with a definite stem; cauline leaves 0 or like basal
 . petals tomentose
 . [possibly little or no sheathing on cauline leaf petioles, but CalPhotos doesn't show them one way or another]
-. leaf segments 2--6 mm, generally linear
+. <b>leaf segments 2--6 mm, generally linear [nubby]</b>
 . pedicels 5--20 mm
 . corolla +- green-white or +- purple [or yellow??], tomentose
 . common in the Santa Cruz range, uncommon elsewhere
@@ -26,8 +26,8 @@ color: yellow
 color: yellow
 . plant generally with a definite stem, stem +- leafy
 . petals +- glabrous
-. cauline leaf petioles conspicuously sheathed (<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=6121+1611+3984+0073">example</a>)
-. leaf segments 2--25 mm, generally linear
+. <b>cauline leaf petioles conspicuously sheathed</b> (<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=6121+1611+3984+0073">example</a>)
+. <b>leaf segments 2--25 mm, generally [distinctly] linear</b>
 . pedicels 2--9 mm
 . corolla yellow, occasionally white in age
 . common
@@ -35,7 +35,7 @@ color: yellow
 ==bigseed biscuitroot:L. macrocarpum
 color: yellow
 . plant generally with a definite stem, stem leaves generally >= 2
-. leaf segments 1--7 mm, linear to oblong
+. <b>leaf segments 1--7 mm, linear to oblong [flat]</b>
 . corolla white, cream or +- purple
 . pedicels 1--14 mm
 . bractlets several, >= flowers, +- fused, reflexing

@@ -111,7 +111,9 @@ species: deerbrush ceanothus
 .. margin minutely gland-toothed, teeth 90--150+
 . Mt. Tamalpais
 
-==blueblossom:C. thyrsiflorus
+==blueblossom,1:C. thyrsiflorus
+rep:blue blossom,1
+. corolla blue to white
 . twig: <b>green, flexible, ridged</b>, angled distally, [glabrous]
 . leaf blade:
 .. <b>10--39 mm long, 5--20 mm wide</b>

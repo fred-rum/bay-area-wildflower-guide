@@ -1,11 +1,11 @@
 sci:Trillium ovatum
 xx:ca
-color: white, pale purple
 
 See also {-california fetid adderstongue}.
 
 ==western trillium:T. ovatum var. ovatum
-warn obs_requires_photo: none
+color: white, pale purple
+; See also {-california fetid adderstongue}.
 . petals 1.5--7 cm, 5--45 mm wide
 . flower generally +- erect
 . <b>common</b>
