@@ -1,0 +1,11 @@
+sci:genus Cantharellus
+x:ba
+
+==california golden chanterelle:Cantharellus californicus
+. common
+
+==white chanterelle:Cantharellus subalbidus
+. very rare
+
+==pacific golden chanterelle:Cantharellus formosus
+. very rare

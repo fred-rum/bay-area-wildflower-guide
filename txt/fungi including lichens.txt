@@ -13,9 +13,10 @@ do obs_fill_sci: self-below
 do create2: family, genus, species
 warn link: none
 do link: self-below
+do link_suppress: self-below
 
 do member_link: self-below
-do member_name: genus, species
+do member_name: family, genus, species
 do member_name_alias: genus, species
 do member_com_simple: self-below
 

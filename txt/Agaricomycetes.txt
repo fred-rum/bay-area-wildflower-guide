@@ -13,6 +13,3 @@ x:more
 
 ==apricot jelly:Guepinia helvelloides
 x:ba
-
-==california golden chanterelle:Cantharellus californicus
-x:more

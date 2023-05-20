@@ -57,8 +57,12 @@ def parse_txt(name, s, page, glossary):
             c_list = c_list[:child_start]
             child_start = None
 
-            c_list.append(page.parse_child_and_key(child, suffix, text,
-                                                   match_set))
+            child_txt = page.parse_child_and_key(child, suffix, text,
+                                                 match_set)
+            if child in page.child_suppress:
+                child_txt = ''
+
+            c_list.append(child_txt)
 
             child_list.append(child)
             child_idx += 1

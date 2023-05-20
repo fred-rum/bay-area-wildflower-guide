@@ -49,6 +49,7 @@ props = {
     'create2': 'fd',
     'create2_com': 'fd',
     'link': 'fd',
+    'link_suppress': 'fd',
     'member_link': 'd',
     'member_name': 'd',
     'member_com_simple': 'd',
@@ -557,6 +558,11 @@ class Page:
         # of the real pages to be output to HTML.
         self.parent = set() # an unordered set of real parent pages
         self.child = [] # an ordered list of real child pages
+
+        # a set of children that should not be included in the HTML
+        # because they are actually deeper descendents, as marked by
+        # the link_suppress property.
+        self.child_suppress = set()
 
         # linn_parent and linn_child construct a tree corresponding to
         # the Linnaean taxonomic hierarchy.  Pages in this tree may be
@@ -2065,6 +2071,10 @@ class Page:
 
             self.non_txt_children = potential_link_set
             for child in potential_link_set:
+                for parent in child.parent.copy():
+                    if self.rp_do('link_suppress',
+                                  msg=f'{child.full()} is assigned to parent {parent.full()}, but a property is also assigning it to parent {self.full()}'):
+                        parent.child_suppress.add(child)
                 self.assign_child(child)
 
     def sort_children(self):
