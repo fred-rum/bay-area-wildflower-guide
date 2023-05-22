@@ -25,3 +25,4 @@ gall:1861
 bug:n/a
 gall:3628
 sci_i:n/a
+. parasitizes {-arroyo willow} and related {-willows}

@@ -1,0 +1,17 @@
+sci:genus Tamalia
+x:more
+
+All below galls cause signifant swelling and distortion of the leaf edge, unlike {-azalea gall}, which causes only a minor buckling of the leaf surface.
+
+==manzanita leafgall aphid:Tamalia coweni
+bug:214155
+gall:2793
+. gall tends to be cylindrical [sometimes curved like a lima bean?]
+. parasitizes many species of {-Arctostaphylos}, but not {-big berry manzanita}
+
+==big berry manzanita leafgall aphid:Tamalia glaucensis
+bug:n/a
+gall:4937
+. gall distinctly flattened and shaped like a lima bean [not always flattened, and sometimes cylindrical?]
+. more info in <a href="https://www.researchgate.net/publication/369567785_Three_new_species_of_Tamalia_Hemiptera_Aphididae_Tamaliinae_associated_with_leaf_galls_on_Arbutus_Arctostaphylos_and_Comarostaphylis_in_North_America">this paper</a> [HTML].
+. parasitizes {-big berry manzanita}

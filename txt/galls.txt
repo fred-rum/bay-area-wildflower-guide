@@ -2,11 +2,13 @@ sci:n/a
 
 is_top
 
-Taxons that create galls are listed in their normal taxonomic locations, but I've also collected them here for easier browsing.
+Taxons that create galls are listed in their normal taxonomic locations, but I've also collected them here for easier browsing.  In addition, rather than organizing them into the traditional clades, this page organizes galls based on host and gall location on the host.
 <p>
-The most popular references for galls is
-Ron Russo's Field Guide to Plant Galls of California (2007) and
-his Field Guide to Plant Galls of California and Other Western States (2021).
+The most popular references for galls are
+Ron Russo's Field Guide to Plant Galls of California and Other Western States (2007) and
+his <a href="https://press.princeton.edu/books/paperback/9780691205762/plant-galls-of-the-western-united-states">Plant Galls of the Western States</a> (2021).
+<br>
+An up-to-date internet resource for galls is <a href-"https://www.gallformers.org/">gallformers.org</a>.
 <br>
 A good online reference is Joyce Gross's web pages for
 <a href="https://joycegross.com/galls_ca_oak.php">oak calls</a> and
@@ -18,31 +20,55 @@ The Bioblitz Club also has PDF brochures for
 <br>
 Nancy Asquith has tons of <a href="https://www.inaturalist.org/projects/california-plants-with-mystery-galls/journal/39523-california-galls-a-host-plant-list-with-links">additional links</a> on iNaturalist.
 
-[
-<h3>gall insects</h3>
-==gall wasps
 
-==gall moths
+<h3>oaks</h3>
+==california gall wasp
+==live oak bud gall wasp
+==ruptured twig gall wasp
+==live oak apple gall wasp:Amphibolips quercuspomiformis
+==round leaf gall wasp
+==beaked spindle gall wasp
+==beaked twig gall wasp
+==round gall wasp
 
-==gall midges
+<h3>chiquapin</h3>
+==chinquapin flower gall wasp
 
-==gall sawflies
+<h3>roses</h3>
+==spiny leaf gall wasp
 
-==gall aphids
+<h3>brambles</h3>
+==thimbleberry gallmaker
 
+<h3>coffeeberry</h3>
+==coffeeberry midrib gall moth
+
+<h3>coyote brush</h3>
+==coyote brush bud gall midge
+==coyote brush stem gall moth
+
+<h3>sagebrush</h3>
+==sagebrush woolly stem gall midge
+
+<h3>silktassels</h3>
+==silktassel flower gall midge
+
+<h3>willows</h3>
+==willow gall midges
+==Iteomyia s-lasiolepis-tooth-gall
+==willow gall sawflies
+==willow bead gall mite
+
+<h3>snowberries</h3>
+==snowberry sawfly
+
+<h3>manzanitas</h3>
+==ericaceous gall aphids
+==Exobasidium
+
+<h3>eucalyptus</h3>
 ==red gum lerp psyllid:Glycaspis brimblecombei
 bug:270868
 gall:n/a
 . lerps aren't actually galls, and they can easily be brushed off the host's surface
 . parasitizes {-river redgum} and {-forest red gum} by preference, but also parasitizes other {-Eucalyptus}.
-
-==n/a:Iteomyia s-lasiolepis-tooth-gall
-bug:n/a
-gall:3628
-sci_i:n/a
-
-]
-
-==gall and rust mites
-
-==gall fungi

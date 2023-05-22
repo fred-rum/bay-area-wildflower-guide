@@ -27,7 +27,7 @@ Relevent iNaturalist comments in chronological order:
 gall:4400
 . forms bright red blisters on the surface of {-bearberries and manzanitas} leaves, turning glaucous on the inner side
 .. blisters cause only a minor buckling of the leaf surface
-.. compare to {-manzanita leafgall aphid}, which causes signifant swelling and distortion of the leaf edge
+.. compare to {-Tamalia}, which cause signifant swelling and distortion of the leaf edge
 . see above for discussion
 
 ==azalea gall:Exobasidium vaccinii

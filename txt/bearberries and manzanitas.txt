@@ -13,7 +13,7 @@ Key features:
 . flower parts in 4s or 5s
 . ovary/fruit features and diameter
 
-Parasitized by {-manzanita leafgall aphid} and {-genus Exobasidium}.
+Except where noted, parasitized by {-manzanita leafgall aphid} and {-genus Exobasidium}.
 
 [
 <h2>burl; leaves different on each side</h2>
@@ -136,6 +136,7 @@ color: white
 . leaf white-glaucous, dull, glabrous
 . common
 . mostly SE of highway 17 in the Santa Cruz Range, with significant eastern pockets at Mt. Diablo, Grant, and Coe
+. parasitized by {-Tamalia glaucensis} and {-Exobasidium}.
 
 ==mount tamalpais manzanita:A. montana ssp. montana
 color: pink
