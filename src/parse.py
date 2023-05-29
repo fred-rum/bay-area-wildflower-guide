@@ -108,7 +108,7 @@ def parse_txt(name, s, page, glossary):
         url = matchobj.group(1)
         next = matchobj.group(2)
         link = f'<a href="{url}">[source]</a>'
-        if re.match(r'[\w\^]', next):
+        if re.match(r'[\w\^\"]', next):
             return link + ' '
         else:
             return link

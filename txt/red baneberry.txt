@@ -6,4 +6,4 @@ x:ca
 
 family:buttercup family
 
-Edibility: "The common name makes reference to a potent poison concentrated in the fruits.^https://baynature.org/article/berries-of-the-forest/ " "Symptoms include burning of mouth and throat, salivation, severe stomach cramps, headache, diarrhea, dizziness and hallucinations.^https://www.wildflower.org/plants/result.php?id_plant=acru2"
+Edibility: "The common name makes reference to a potent poison concentrated in the fruits." ^https://baynature.org/article/berries-of-the-forest/ "Symptoms include burning of mouth and throat, salivation, severe stomach cramps, headache, diarrhea, dizziness and hallucinations." ^https://www.wildflower.org/plants/result.php?id_plant=acru2
