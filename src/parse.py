@@ -122,7 +122,7 @@ def parse_txt(name, s, page, glossary):
     else:
         assoc_page = None
 
-    # Replace ^url in the text with a [src] link.
+    # Replace ^url in the text with a [source] link.
     s = re.sub(r'\^(http\S*)[^\S\n]*(?=(.|$))', repl_carat, s, flags=re.MULTILINE)
 
     # Replace HTTP links in the text with ones that open a new tab.

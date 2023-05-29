@@ -18,6 +18,7 @@ color:white
 . corolla tube 12--22 mm, white and lavender, upper lip < 2 mm, lower lip 4--5 mm, upcurved
 . stamens, style exserted
 . extremely rare
+. despite being native to California, it is cultivated so often as an ornamental that iNaturalist defaults its observations to "not wild"
 
 ==sonoma sage:S. sonomensis
 . subshrub, prostrate, mat-forming

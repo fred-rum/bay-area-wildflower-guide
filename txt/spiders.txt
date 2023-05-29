@@ -20,6 +20,14 @@ bug:2001
 ==hammock spiders:genus Pityohyphantes
 bug:33338
 
+==desert tarantula:Aphonopelma iodius
+x:more
+bug:103344
+
+==california turret spider:Atypoides riversi
+bug:170329
+x:ba
+
 ]
 [
 <h3>inside spiders</h3>

@@ -37,3 +37,6 @@ bug:22574
 
 ==california mountain-digger bee:Habropoda depressa
 bug:51916
+
+==california digger bee:Anthophora californica
+bug:239588

@@ -5,7 +5,7 @@ Key features:
 . plant height
 . number of berries in each cluster
 
-Both species are parisitized by {-snowberry sawfly}.
+Both species are parasitized by {-snowberry sawfly}.
 
 ==common snowberry:S. albus
 xx:uncat

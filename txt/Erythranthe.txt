@@ -8,39 +8,7 @@ x:rare
 <h3>calyx uppermost lobe longest, lowest 2 generally upcurved<br>
 corolla lower lip base generally swollen, +- closing mouth</h3>
 
-==seep monkeyflower:E. guttata
-sci_p:Mimulus guttatus
-color: yellow, orange
-. stems 15--65+ cm
-. plant glabrous to hairy distally
-. leaf petiole 0--95 mm, blade 4--125 mm long
-. <b>corolla tube exserted 3--5 mm beyond calyx</b>
-
-==magnificent seep monkeyflower:E. grandis
-color:yellow
-sci_p:Mimulus grandis
-. stems 50--120+ cm
-. plant densely glandular-puberulent to coarse-hairy distally
-. leaf petiole 10--80 mm, blade 25--60 mm long
-. <b>corolla tube exserted 10--15 mm beyond calyx</b>
-. very rare
-
-==field monkey-flower:Erythranthe arvensis
-sci_p:n/a
-. <b>[very small corolla]</b> FNA suggests that there are both small-flowered and smaller-flowered versions (that were at onc time called Mimulus micranthus)
-. stems 5--70 cm, glabrous
-. leaf petiole 0--95 mm, blade 5--35 mm long
-. corolla lobes unequal, asymmetric when swollen in fruit
-. corolla [tube?] exserted 0--3 mm from calyx tube
-. <b>bracts densely villous [hairy] abaxially</b>
-
-==small-leaf monkeyflower:E. microphylla
-color: yellow
-. stems 5--30 cm
-. plant glabrous to sparsely hairy
-. leaf petiole 3--25 mm, blade 5--30 mm long
-. corolla tube exserted 2--6 mm beyond calyx
-. very rare
+==seep monkeyflowers
 
 ]
 [

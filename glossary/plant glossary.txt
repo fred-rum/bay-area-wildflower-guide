@@ -45,7 +45,9 @@ Particularly for leaves, the base of the blade may taper to the petiole regardle
 {pinnate,pinnately} Refers to a two-dimensional structure with nodes branching to either side of a central axis.  Typically refers to lobes or leaflets in a leaf.
 {odd-pinnate,odd-pinnately} Pinnate with pairs of lateral branches and one terminal branch.
 {even-pinnate,even-pinnately} Pinnate with pairs of lateral branches but no terminal branch.
-{N-pinnate,1-pinnate,2-pinnate,3-pinnate,4-pinnate,1--2-pinnate,1--3-pinnate,1--4-pinnate,2--3-pinnate,2--4-pinnate,3--4-pinnate} 1-pinnate means that the structure has 1 level of branches arising from a central axis.  2-pinnate means that the branches also have branches, etc.
+{N-pinnate,1-pinnate,2-pinnate,3-pinnate,4-pinnate,1--2-pinnate,1--3-pinnate,1--4-pinnate,2--3-pinnate,2--4-pinnate,3--4-pinnate,1-pinnately,2-pinnately,3-pinnately,4-pinnately,1--2-pinnately,1--3-pinnately,1--4-pinnately,2--3-pinnately,2--4-pinnately,3--4-pinnately} 1-pinnate means that the structure has 1 level of branches arising from a central axis.  2-pinnate means that the branches also have branches, etc.
+{ternate} With three parts from a common point, or lobed/dissected/compound in three parts.
+{N-ternate,1-ternate,1-ternately,2-ternate,2-ternately,3-ternate,3-ternately,1--2-ternate,1--2-ternately,1--3-ternate,1--3-ternately,2--3-ternate,2--3-ternately} 1-ternate means that the structure has just 3 parts.  2-ternate means that each of the 3 main parts itself has 3 parts, etc.
 {N-ternate-pinnate,1-ternate-pinnate,2-ternate-pinnate,3-ternate-pinnate,4-ternate-pinnate,1--2-ternate-pinnate,1--3-ternate-pinnate,1--4-ternate-pinnate,2--3-ternate-pinnate,2--4-ternate-pinnate,3--4-ternate-pinnate} N-pinnate, with each level of branching being ternate.
 
 <h3>Tip shapes</h3>
@@ -164,7 +166,6 @@ Example drawings are <a target="_blank" href="http://sweetgum.nybg.org/science/g
 {subshrub,subshrubs} Similar to a shrub, but with only the proximal stems woody.  The distal stems are non-woody (or are at least significantly less woody).
 {succulent,succulents} Composed of fleshy tissue that conserves water.
 {taproot} Primary root growing straight down, tapering at the end, with smaller lateral branches.
-{ternate} With three parts from a common point, or lobed/dissected/compound in three parts.
 {tree,trees} Woody plant, taller than a shrub, generally with one central trunk from which branches spring higher up.
 {tubercle,tubercles} A small hemispherical projection.
 {twig,twigs} The ultimate branch segment of a woody plant.

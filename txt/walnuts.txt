@@ -2,15 +2,21 @@ sci:Juglans spp.
 family:walnut family
 x:ba
 
+Crushed leaf has a distinctive smell, sometimes described as spiced citrus.
+
+Green husk enclosing brown nut shell can permanently stain your hands when opened.
+
 ==northern california black walnut:J. hindsii
 color: other
 . leaflets 11-21, +- serrate, narrow, acuminate
 .. abaxial vein axils with hairy tufts [<a href="https://www.calflora.org/entry/occdetail.html?seq_num=gp8599">example</a>]
 . nut shell thick, smooth to shallowly grooved
+. many native stands include hybrids with other walnut species
 
 ==eastern black walnut:J. nigra
-. leaflets +- serrate, narrow, rounded to acute
+. leaflets 15--23, +- serrate, narrow, ovate-lanceolate
 .. abaxial vein axils with hairy tufts
+.. abaxial veins uniformly pubescent
 . nut shell deeply grooved, coarsely warty
 . planted/waifs
 
@@ -20,6 +26,7 @@ color: other
 . nut shell thick, smooth to shallowly grooved
 
 ==persian walnut:J. regia
+acom:english walnut
 color: other
 . leaflets 5--11, entire, elliptic to oblong-ovate
 . nut shell +- thin, wrinkled

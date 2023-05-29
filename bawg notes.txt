@@ -1577,3 +1577,7 @@ There's no way to recognize when iNaturalist's common name is updated.
 
 california golden chanterelle is listed both under family Hydnaceae
   and class Agaricomycetes
+
+more gallery keys:
+  home for first photo (or default zoom and position?)
+  end for last photo (or maximum zoom?)

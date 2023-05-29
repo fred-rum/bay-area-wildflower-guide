@@ -3,23 +3,29 @@ x:ca
 
 Note that references to "umbel" below refer to one umbel in the compound umbel inflorescence.
 
+Plants with similar leaves:
+. {-bur chervil} has more divided leaflet lobes, beaked fruit
+. {-poison hemlock} is a larger plant with much larger leaves
+. {-sweet cicely} leaves are ternate at the first level of branching
+
 ==common hedge parsley:T. arvensis
 acom:tall sock-destroyer
 color: white
 . plant erect
 . umbel open, not head-like
-. umbel subtended by +- 0--1 bracts
+.. umbel subtended by +- 0--1 bracts
+. leaf 2--3-pinnate
 . common
-See also the similar {-bur chervil}, which has more divided leaflet lobes, beaked fruit.
 
 ==knotted hedgeparsley:T. nodosa
 color: white
 . plant spreading
 . umbel dense, head-like
+. leaf 1-pinnately dissected
 
 ==upright hedge-parsley:T. japonica
 . plant erect
 . umbel open, not head-like
-. umbel subtended by +- 5--6 bracts (<a href="https://bioone.org/journalArticle/Download?fullDOI=10.1614%2FIPSM-D-14-00028.1">info source</a>)
+.. umbel subtended by +- 5--6 bracts (<a href="https://bioone.org/journalArticle/Download?fullDOI=10.1614%2FIPSM-D-14-00028.1">info source</a>)
 . only in/around Tilden
 sci_j: n/a

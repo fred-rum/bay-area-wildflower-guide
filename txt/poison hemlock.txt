@@ -3,3 +3,6 @@ color: white
 
 genus: n/a
 x:ca
+
+. leaf is large, 2--3-pinnately compound, with ultimate leaflets that are divided deeply
+. stem has purple stripes or splotches (sometimes called the "blood of Socrates")

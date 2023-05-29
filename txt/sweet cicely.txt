@@ -5,8 +5,10 @@ x:hist
 color:white
 . no involucel or vestigial
 . corolla white or purple (or rarely green-white)
+. leaf is 2-ternate, but the terminal leaflet may be so strongly divided that the leaf appears to be ternate-pinnate
 
 ==california sweet cicely:O. brachypoda
 color:other
 . involucel conspicuous
 . corolla +- green-yellow
+. leaf is 2--3-ternate, but the terminal leaflet may be so strongly divided that the leaf appears to be ternate-pinnate

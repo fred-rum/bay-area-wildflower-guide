@@ -29,12 +29,18 @@ color: white, cream, pale purple, pink, salmon
 color: white, pink, pale purple, purple
 . nectary (yellow/orange spot amidst hair) is crescent shaped
 . each petal has a central dark blotch, but without a 2nd blotch above
+.. dark blotch on petal is within pale yellow zone
 . anthers purple, pink to yellow-white
-. stem simple
+. stem simple [but the inflorescence may be branched, which can be confusing]
+. fruit lanceolate [and angled?] <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0615+1594">[example]</a>
 
 ==superb mariposa lily:C. superbus
-. may be difficult to distinguish from C. argillosus (above) except by fruit shape
+. arguably indistinguishable from {-clay mariposa lily}
+. dark blotch on petal is within bright yellow zone
 . anthers white to light yellow
+. fruit linear, angled <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0712+1208">[example]</a>
+. no iNaturalist observations in the bay area
+.. Calflora observations are dubious (e.g. photos with pale yellow zones)
 ]
 
 ==tolmie's pussy-ears:C. tolmiei
@@ -70,6 +76,7 @@ color: white, pink, purple
 <h2>globe lilies</h2>
 
 ==white globe lily:C. albus
+acom: fairy lantern
 color: white, cream
 . flower nodding, perianth +- closed, globe shaped
 . petals not yellow

@@ -19,12 +19,18 @@ color: purple
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0110+1545
 . stem +- hairy, hairs are unbranched, glandular or not [<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0119+2997">example</a>]
 . leaf 2--7 cm, lanceolate to ovate, +- entire to 1--2-lobed at base; base obtuse to +- cordate
+. as of 2023, the only undisputed iNaturalist observations in the bay area are in Marin, and none of those are research grade
 
 ==new zealand nightshade:S. aviculare
 . leaf 10--30 cm, +- entire to deeply 1--2-lobed below middle
+. no iNaturalist observations in the bay area
+. rare in Calflora, mostly in urban areas
 
 ==silverleaf nightshade:S. elaeagnifolium
 . plant often prickly
+. [leaves look different than {-bluewitch nightshade}
+. yellow fruit
+. very rare in the bay area, mostly associated with mulch in urban areas
 
 ]
 [
