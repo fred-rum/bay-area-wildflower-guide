@@ -1,0 +1,32 @@
+com:n/a
+sci:genus Aphyllon
+x:!ba
+
+==chaparral broomrape:A. tuberosum
+color: pale blue, other
+sci_F: Orobanche bulbosa
+
+==california broomrape:A. californicum
+sci_F: Orobanche californica
+
+==galium broomrape:A. epigalium
+sci_F: n/a
+
+==clustered broomrape:A. fasciculatum
+sci_F: Orobanche fasciculata
+
+==yellow clustered broomrape:A. franciscanum
+sci_F: Orobanche fasciculata # FNA considers it the same as fasciculatum
+
+==conifer broomrape:A. pinorum
+sci_F: Orobanche pinorum
+
+==oneflower broomrape:A. purpureum
+sci_F: Orobanche uniflora ssp. occidentalis
+
+==robbins's broomrape:A. robbinsii
+sci_F: Orobanche robbinsii
+
+==hillside broomrape:A. vallicola
+sci_fp: A. vallicolum
+sci_F: Orobanche vallicola
