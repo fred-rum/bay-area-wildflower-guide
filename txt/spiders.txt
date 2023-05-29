@@ -21,8 +21,12 @@ bug:2001
 bug:33338
 
 ==desert tarantula:Aphonopelma iodius
-x:more
 bug:103344
+x:more
+
+==false tarantula:Calisoga longitarsis
+bug:120962
+x:ba
 
 ==california turret spider:Atypoides riversi
 bug:170329
