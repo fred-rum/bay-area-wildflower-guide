@@ -1,0 +1,6 @@
+sci:genus Teloschistes
+x:rare
+
+==golden-eye lichen:Teloschistes chrysophthalmus
+
+==golden hair-lichen:Teloschistes flavicans

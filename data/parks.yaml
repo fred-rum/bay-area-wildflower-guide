@@ -20,7 +20,6 @@ bay area:
 - Skyline Blvd
 - Mt. Madonna
 - Dry Creek Pioneer
-- Pinnacles
 - San Bruno Mountain
 - Montebello Road
 - Coyote Ridge
@@ -131,6 +130,7 @@ bay area:
 - Marin Headlands
 - Shannon Valley
 - Santa Clara Central Park
+- Los Gatos Creek Trail
 
 - Santa Clara, CA
 - Santa Cruz, CA
@@ -143,6 +143,8 @@ bay area:
 - {"San Jose, CA": "Almaden Reservoir"}
 
 Hawaii:
+- {Kokee Region: Koke'e State Park}
+- {Kokee Region: Koke'e SP}
 - {Kokee Region: Honopu Trail}
 - Kilauea Lighthouse
 - Puu Olai
@@ -158,6 +160,7 @@ Hawaii:
 - {Kokee Region: Kukui Trail}
 - {Kokee Region: Kawaikoi Stream Trail}
 - Moalepe Trail
+- {Moalepe Trail: Moalepe Road}
 - Shipwrecks Beach
 - {Kokee Region: Canyon Trail}
 - {Kokee Region: Ditch Trail}
@@ -176,7 +179,8 @@ Hawaii:
 - {Hanakāpī'a Falls Trail: Hanakāpī}
 - {Kokee Region: Awa'awapuhi Trail}
 - Ho'opi'i Falls Trail
-- Okolehao
+- {Okolehao Trail: Okolehao}
+- {Okolehao Trail: Ohiki Rd.}
 - Haleakala
 - {Kokee Region: Pihea Trail}
 - {Kokee Region: Waipoo Falls Trail}
@@ -211,7 +215,7 @@ Yellowstone:
 - Yellowstone
 - Jackson Hole
 
-Sierras:
+elsewhere in California:
 - Yosemite
 - Hetch Hetchy
 - Ansel Adams Wilderness
@@ -221,3 +225,4 @@ Sierras:
 - Grouse Lake
 - Smith Lake
 - Hemlock Lake
+- Pinnacles

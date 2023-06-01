@@ -7,8 +7,7 @@ end_hierarchy
 x:more
 . official state lichen of California
 
-==golden-eye lichen:Teloschistes chrysophthalmus
-x:more
-
 ==tree lungwort:Lobaria pulmonaria
 x:more
+
+==hair lichens

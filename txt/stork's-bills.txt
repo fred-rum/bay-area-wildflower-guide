@@ -8,6 +8,7 @@ Key feature: bristles on sepal tips, sepal length
 
 ==redstem stork's-bill:E. cicutarium
 acom:common stork's-bill
+acom:redstem filaree
 color: purple
 . stem +- glandular-hairy?
 . <b>sepals 3--5 mm, tip with one or more bristles</b>
@@ -17,6 +18,8 @@ color: purple
 . flowers in a cluster
 
 ==musk stork's-bill:E. moschatum
+acom:greenstem filaree
+acom:whitestem filaree
 color: purple
 . stem short hairy
 . <b>sepals 6--9 mm, tip glabrous</b> [with knob, but no bristles]

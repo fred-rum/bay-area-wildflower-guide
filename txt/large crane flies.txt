@@ -5,5 +5,5 @@ Some poorly scanned ID info can be found in The Crane Flies of California <a hre
 ==giant western crane fly:Holorusia hespera
 bug:40968
 
-==n/a:genus Tipula
+==common crane flies:genus Tipula
 bug:10977

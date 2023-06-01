@@ -11,6 +11,7 @@ color:yellow
 
 ==oregon grape:B. aquifolium
 sci_fpj:Berberis aquifolium var. aquifolium
+color: yellow
 . compound leaves
 .. usually 5--9 leaflets, +- pinnately veined
 ... leaflet margin <b>wavy</b>, +- thin, not hard

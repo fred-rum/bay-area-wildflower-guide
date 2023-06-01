@@ -1,9 +1,13 @@
 x:ba
 
-==north american deer mouse:Peromyscus maniculatus
+==western deer mouse:Peromyscus sonoriensis
+
+==gambel's deer mouse:Peromyscus gambelii
+
+==california mouse:Peromyscus californicus
 
 ==pinyon mouse:Peromyscus truei
 
-==california mouse:Peromyscus californicus
+==north american deer mouse:Peromyscus maniculatus
 
 ==brush mouse:Peromyscus boylii

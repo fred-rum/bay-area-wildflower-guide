@@ -1,0 +1,9 @@
+sci:genus Arceuthobium
+x:ba
+
+==western dwarf-mistletoe:Arceuthobium campylopodum
+color:other
+
+==gray pine dwarf-mistletoe:A. occidentale
+sci_fj: A. campylopodum
+sci_F: n/a

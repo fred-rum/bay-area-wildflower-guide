@@ -1,7 +1,7 @@
 sci:Ranunculus californicus
 xx:any
 
-==n/a:ssp. californicus
+==n/a:var. californicus
 sci_Fjfp: var. californicus
 . stems erect to decumbent, hirsute or glabrous
 . ultimate segments of basal leaves acute to rounded-acute

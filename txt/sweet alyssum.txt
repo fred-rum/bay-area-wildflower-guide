@@ -3,3 +3,5 @@ color: white
 
 genus: n/a
 x:ca
+
+See also {-watercress}, which has petals that overlap more.

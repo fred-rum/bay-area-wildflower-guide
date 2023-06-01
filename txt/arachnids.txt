@@ -7,9 +7,9 @@ warn photo_requires_bugid: genus-below
 ==spiders
 end_hierarchy
 
-==harvestmen
+==harvestmen:order Opiliones
 bug:2405
 
 ==scorpions
 
-==mites
+==mites and ticks

@@ -1,0 +1,14 @@
+sci:genus Tachycineta
+x:ca
+
+==violet-green swallow:Tachycineta thalassina
+. greenish back
+. white below
+.. white on head extends to slightly above the eyes
+.. white extends around flanks to rump
+
+==tree swallow:Tachycineta bicolor
+. bluish back
+. white below
+.. white on head extends only up to the bill
+.. white does not extend around flanks to rump

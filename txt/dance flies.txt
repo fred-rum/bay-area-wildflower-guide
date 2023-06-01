@@ -1,2 +1,6 @@
 sci:family Empididae
 bug:6578
+
+# I currently have one genus ID with no common name,
+# which doesn't seem worth bothering with.
+do disable_obs_promotion_checks_from: self-/species

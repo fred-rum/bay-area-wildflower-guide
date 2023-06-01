@@ -1,0 +1,11 @@
+sci:Dudleya cymosa
+
+==coast range dudleya:ssp. cymosa
+color: red, salmon, orange, yellow
+. petals bright yellow, orange, or red
+. outer coastal range
+
+==diablo range dudleya:ssp. paniculata
+color: cream, yellow, other
+. petals pale yellow-white
+. Diablo range

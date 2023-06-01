@@ -91,6 +91,7 @@
 "Lachenalia lilacina", "Leopard lily": "Lachenalia orchioides ssp. glaucina", "n/a"
 "Valeriana officinales", "Valerian": "Valeriana officinales", "common valerian complex"
 "Euphorbia esula", "Wolf's milk": "Euphorbia esula", "n/a"
+"Elephant's foot": "n/a"
 
 # ambiguous common names that do match something I'm interested in
 "Dichelostemma pulchellum", "wild hyacinth": "Dichelostemma pulchellum", "ookow"

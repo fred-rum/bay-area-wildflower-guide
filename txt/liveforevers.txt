@@ -19,7 +19,6 @@ species: abrams' liveforever
 . leaf 3--8 cm
 
 ==canyon liveforever:D. cymosa
-color:yellow, orange, red, salmon
 . petals bright yellow, orange, or red
 . plant generally < 10 cm wide
 . leaves 0.8--3 &times; longer than wide

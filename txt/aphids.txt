@@ -12,4 +12,8 @@ bug:157195
 x:more
 bug:484840
 
+==cowpea aphid:Aphis craccivora
+x:more
+bug:356327
+
 ==gall aphids
