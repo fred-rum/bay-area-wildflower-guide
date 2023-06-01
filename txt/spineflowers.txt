@@ -1,0 +1,25 @@
+sci:genus Chorizanthe
+x:ba
+
+==monterey spineflower:C. pungens
+
+==pink spineflower:C. membranacea
+color: pink
+
+==san francisco spineflower:C. cuspidata
+. mostly near SF
+
+==diffuse spineflower:C. diffusa
+
+==robust spineflower:C. robusta
+
+==knotweed spineflower:C. polygonoides
+
+==one-awn spineflower:C. uniaristata
+. extremely rare
+
+==douglas' spineflower:C. douglasii
+. extremely rare
+
+==cleveland's spineflower:C. clevelandii
+. extremely rare

@@ -16,4 +16,8 @@ bug:484840
 x:more
 bug:356327
 
+==plum-thistle aphid:Brachycaudus cardui
+x:more
+bug:356346
+
 ==gall aphids

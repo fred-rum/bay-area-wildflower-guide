@@ -23,17 +23,6 @@ import re
 # thumbnail, or it can be omitted to move them all (in which case the suffix
 # doesn't matter in the first argument).
 
-def run(cmd):
-    # Run a command and capture its returncode.
-    # If the command emits any messages, let those go to STDOUT/STDERR
-    # per the default behavior.
-    result = subprocess.run(cmd)
-
-    if result.returncode:
-        print(' '.join(cmd))
-        print(f'Command returned non-zero exit status {result.returncode}')
-        sys.exit(result.returncode)
-
 arg1 = sys.argv[1]
 arg2 = sys.argv[2]
 
@@ -44,15 +33,28 @@ git = shutil.which('git')
 if not git:
     git = 'c:/Program Files/Git/bin/git'
 
+def gitmv(file1, file2):
+    # Run 'git mv' to move <file1> to <file2>.
+    # If <file1> isn't under GIT control, then just rename the file instead.
+    cmd = (git, 'mv', file1, file2)
+    result = subprocess.run(cmd, capture_output=True, encoding='utf-8')
+
+    if result.returncode:
+        if result.stderr.startswith('fatal: not under version control'):
+            os.rename(file1, file2)
+        else:
+            print(' '.join(cmd))
+            print(result.stderr)
+            print(f'Command returned non-zero exit status {result.returncode}')
+            sys.exit(result.returncode)
+
 if base == 'txt':
-    cmd = (git, 'mv', f'txt/{name}.txt', f'txt/{arg2}.txt')
-    subprocess.run(cmd)
+    gitmv(f'txt/{name}.txt', f'txt/{arg2}.txt')
 
 if base in ('txt', 'html'):
     html_from = re.sub(r' ', '-', name)
     html_to = re.sub(r' ', '-', arg2)
-    cmd = (git, 'mv', f'html/{html_from}.txt', f'html/{html_to}.txt')
-    subprocess.run(cmd)
+    gitmv(f'html/{html_from}.txt', f'html/{html_to}.txt')
 
 def separate_name_and_suffix(name):
     # this always matches something, although the suffix may be empty
@@ -73,11 +75,8 @@ if matchobj:
     to_name = matchobj.group(1) or basename # keep the same name if unspecified
     to_suffix = matchobj.group(2)
 
-    cmd = (git, 'mv', f'photos/{name}.jpg', f'photos/{to_name},{to_suffix}.jpg')
-    subprocess.run(cmd)
-
-    cmd = (git, 'mv', f'thumbs/{name}.jpg', f'thumbs/{to_name},{to_suffix}.jpg')
-    subprocess.run(cmd)
+    gitmv(f'photos/{name}.jpg', f'photos/{to_name},{to_suffix}.jpg')
+    gitmv(f'thumbs/{name}.jpg', f'thumbs/{to_name},{to_suffix}.jpg')
 else:
     # Move all photos from one name to another
     file_list = os.listdir('photos')
@@ -85,10 +84,7 @@ else:
         if filename.startswith(basename):
             suffix = filename[len(basename):]
             if re.match(r',[-0-9][^,:]*$', suffix):
-                cmd = (git, 'mv', f'photos/{basename}{suffix}.jpg',
-                       f'photos/{arg2}{suffix}.jpg')
-                subprocess.run(cmd)
-
-                cmd = (git, 'mv', f'thumbs/{basename}{suffix}.jpg',
-                       f'thumbs/{arg2}{suffix}.jpg')
-                subprocess.run(cmd)
+                gitmv(f'photos/{basename}{suffix}.jpg',
+                      f'photos/{arg2}{suffix}.jpg')
+                gitmv(f'thumbs/{basename}{suffix}.jpg',
+                      f'thumbs/{arg2}{suffix}.jpg')

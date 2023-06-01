@@ -17,7 +17,6 @@ Jepson describes for many deervetch species whether the wings are +- greater or 
 
 
 ==deerweed:A. glaber
-color: yellow
 . <b>subshrub, erect or ascending, woody (but green)</b>, bushy branched, <b>50-200 cm</b>
 .. all others are not at all woody
 . calyx lobes 1--2 mm, narrow or wide

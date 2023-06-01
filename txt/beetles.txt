@@ -30,3 +30,5 @@ bug:40237
 ==soldier beetles:family Cantharidae
 
 ==carpet beetles:genus Anthrenus
+
+==scarabs:family Scarabaeidae

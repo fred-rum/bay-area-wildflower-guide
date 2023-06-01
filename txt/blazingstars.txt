@@ -1,0 +1,9 @@
+sci:genus Mentzelia
+x:hist
+
+==lindley's blazingstar:Mentzelia lindleyi
+color: yellow
+
+==bushy blazingstar:M. dispersa
+
+==san luis blazingstar:M. micrantha

@@ -3,6 +3,7 @@ x:!hist/rare
 family:Polygonaceae
 
 ==prostrate knotweed:P. aviculare
+color: white, other
 . stem 8--16 ribbed
 
 ==oval leaf knotweed:P. arenastrum

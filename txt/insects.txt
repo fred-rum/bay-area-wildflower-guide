@@ -35,12 +35,10 @@ bug:156092
 
 ==aphids
 
-==gall wasps
-
 ==gall midges
 
-==gall sawflies
-
-==gall aphids
-
 ==red gum lerp psyllid
+
+==european earwig:Forficula auricularia
+bug:23281
+x:ca

@@ -1,0 +1,5 @@
+sci:Velezia rigida
+color: pink
+
+genus:n/a
+x:ba
