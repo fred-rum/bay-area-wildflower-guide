@@ -7,6 +7,7 @@ These flowers open in the evening.  For flowers that open during the day, see {-
 . leaf 4--25 mm wide, margin generally wavy
 . common
 The leaves are wider, wavier, duller, and paler green than {-irises}.
+;"It is occasionally known as the 'wild potato,' but given the plant's lack of either resemblance or relationship to the potato, this name is not recommended." ^https://en.wikipedia.org/wiki/Chlorogalum_pomeridianum
 
 ==narrowleaf soap plant:C. angustifolium
 . leaf 2--5 mm wide, margin +- flat

@@ -3,3 +3,5 @@ color: pink
 
 genus:n/a
 x:ba
+
+See also the 4-petaled {-panicled willowherb}.

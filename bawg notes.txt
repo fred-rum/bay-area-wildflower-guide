@@ -1583,3 +1583,6 @@ more gallery keys:
   end for last photo (or maximum zoom?)
 
 2023-4-9 Sweeney Ridge is missing most keywords in Lightroom
+
+blazingstars needs key
+spineflowers needs key

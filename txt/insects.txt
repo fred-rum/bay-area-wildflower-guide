@@ -42,3 +42,5 @@ bug:156092
 ==european earwig:Forficula auricularia
 bug:23281
 x:ca
+;. male foreceps >= half the length of the abdomen
+;. this is a species complex, but the BAWG has trouble with that rank for now
