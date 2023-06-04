@@ -41,12 +41,15 @@ def gitmv(file1, file2):
 
     if result.returncode:
         if result.stderr.startswith('fatal: not under version control'):
+            print(f'mv {file1} {file2}')
             os.rename(file1, file2)
         else:
-            print(' '.join(cmd))
-            print(result.stderr)
+            print(f'git mv {file1} {file2}')
+            print(result.stderr, end='')
             print(f'Command returned non-zero exit status {result.returncode}')
             sys.exit(result.returncode)
+    else:
+        print(f'git mv {file1} {file2}')
 
 if base == 'txt':
     gitmv(f'txt/{name}.txt', f'txt/{arg2}.txt')
@@ -69,7 +72,7 @@ if matchobj:
 else:
     basename = name
 
-matchobj = re.match(r'(?:(.*?),?)([-0-9][^,:]*|,)$', arg2)
+matchobj = re.match(r'(?:(.*?),)?([-0-9][^,:]*|,)$', arg2)
 if matchobj:
     # Move photo from one suffix to another
     to_name = matchobj.group(1) or basename # keep the same name if unspecified
@@ -81,9 +84,17 @@ else:
     # Move all photos from one name to another
     file_list = os.listdir('photos')
     for filename in file_list:
+        # If an html name was specified with dashes,
+        # accept a match for a filename with spaces instead,
+        # and use the name with spaces for the move.
+        dashname = re.sub(r' ', '-', filename)
+        if dashname.startswith(basename):
+            basename = filename[:len(basename)]
+
         if filename.startswith(basename):
-            suffix = filename[len(basename):]
-            if re.match(r',[-0-9][^,:]*$', suffix):
+            suffix_and_ext = filename[len(basename):]
+            (suffix, ext) = os.path.splitext(suffix_and_ext)
+            if re.match(r',(?:[-0-9][^,:]*)?$', suffix):
                 gitmv(f'photos/{basename}{suffix}.jpg',
                       f'photos/{arg2}{suffix}.jpg')
                 gitmv(f'thumbs/{basename}{suffix}.jpg',

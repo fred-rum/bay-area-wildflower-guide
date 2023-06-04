@@ -1586,3 +1586,9 @@ more gallery keys:
 
 blazingstars needs key
 spineflowers needs key
+
+I'm tempted to allow the arrows on the photo gallery to rotate continue
+    past the end and back to the beginning
+  but they should be marked so that the boundary is recognizable
+    e.g. by pointing the usual V arrow at a vertical line
+      (of a different color?)

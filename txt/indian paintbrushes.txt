@@ -56,7 +56,7 @@ species: longleaf paintbrush
 . leaves 30--80 mm, <b>lanceolate</b>; lobes 0--3 [lobes are rare?]
 . peninsula from Thornewood north and east bay from Chabot north
 
-==wight's paint brush:Castilleja wightii
+==wight's paintbrush:Castilleja wightii
 color: red, salmon
 xx:none
 . densely long-bristly and glandular-sticky

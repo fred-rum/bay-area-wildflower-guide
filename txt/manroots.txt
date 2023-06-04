@@ -2,17 +2,27 @@ sci:Marah spp.
 x:ba
 
 Key features:
-. corolla cup shaped or not, especially when viewed from the side/underneath
+. corolla shallowly cupped or double bulged when viewed from the side/back
+. fruit beaked or not
+
+The corolla "cup" may differ for male vs. female flowers:
+. male flowers are in open clusters
+. no more than one female floewr per node
+.. may be at the same node as male flowres?
+.. female flower has a "swollen base" ^https://en.wikipedia.org/wiki/Marah_fabacea#Flower
 
 ==california manroot:M. fabacea
 color: cream, white
-. corolla <b>rotate</b>, yellow-green to cream or (especially inland) white
-.. <b>[When viewed from beneath, the white part of the corolla is entirely spreading.  Only the green part is cupped.]</b>
+sci_p: M. fabaceus
+. corolla has only a shallow cup attaching it to the pedicel
+.. yellow-green to cream or (especially inland) white
 . fruit 4--5 cm, +- spheric; prickles sparse to +- dense, < 12 mm, +- stiff, unhooked
-. Ecology: Streamsides, washes, shrubby open areas
+.. seeds ovate to oblong
 
 ==coastal manroot:M. oregana
 color: white
-. corolla generally > 8 mm wide, <b>deeply cup-shaped</b>, white
-.. <b>[When viewed from beneath, the cup continues from the green part into the corolla.]</b>
+sci_p: M. oreganus
+. corolla has a "double cup", with an extra bulging cup beyond the shallow cup attaching it to the pedicel
+.. white
 . fruit 4--8 cm, +- spheric, <b>tapered to beak, generally striped dark green</b>; prickles generally dense, stiff or flexible, generally 0 at tip, unhooked
+.. seeds none#disk-shaped
