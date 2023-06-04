@@ -223,17 +223,23 @@ def convert_rank_str_to_elab(rank_str, sci):
 
 
 def find_data(page, sci, rank_str, kingdom, tid):
+    if (page.taxon_id
+        and page.taxon_id_src == 'iNaturalist API'
+        and page.taxon_id_date > core_date):
+        # If the page has a taxon_id from the iNaturalist API, and that
+        # data is more recent than the DarwinCore archive, then don't
+        # complain about the missing or conflicting data in the DarwinCore
+        # archive.  It's possible that iNaturalist hasn't updated the
+        # DarwinCore archive yet, and we don't want to be stuck with
+        # warnings until that happens.
+        #
+        # Note, however, that if the DarwinCore database is newer than
+        # the cached iNaturalist API data, we process the DarwinCore data
+        # as usual and complain about any problems.
+        return None
+
     if sci not in core_dict:
-        if (page.taxon_id
-            and page.taxon_id_src == 'iNaturalist API'
-            and page.taxon_id_date > core_date):
-            # If the page has a taxon_id from the iNaturalist API, and that
-            # data is more recent than the DarwinCore archive, then don't
-            # complain about the missing DarwinCore archive.  It's possible
-            # that iNaturalist hasn't updated the DarwinCore archive yet, and
-            # we don't want to be stuck with warnings until that happens.
-            pass
-        elif arg('-core'):
+        if arg('-core'):
             warn(f"The DarwinCore archive doesn't include a scientific name that matches {page.full()}")
         else:
             warn(f"The cached DarwinCore archive doesn't include a scientific name that matches {page.full()}.  Try again with '-core'?")

@@ -8,5 +8,5 @@ do disable_obs_promotion_checks_from_needs_id: species-below
 ==wood, mound, and field ants:genus Formica
 bug:16569
 
-==smooth harvester ants:genus Veromessor
-# name from BugGuide
+==veromessor harvester ants:genus Veromessor
+acom: smooth harvester ants # from BugGuide

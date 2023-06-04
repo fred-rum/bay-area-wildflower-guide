@@ -639,7 +639,12 @@ class Page:
             (self.com not in name_page or name_page[self.com] == self)):
             name = self.com
         elif self.sci:
-            if sci_page[self.sci] == 'conflict':
+            # Use the elaborated name if there are multiple taxons with the
+            # same stripped name.  If this taxon is a complex, then its
+            # stripped name isn't indexed in sci_page.  If nothing else is
+            # indexed at that name, then the complex can use it as the
+            # page name.
+            if self.sci in sci_page and sci_page[self.sci] != self:
                 name = self.elab
             else:
                 name = self.sci
@@ -912,7 +917,13 @@ class Page:
         self.elab_src = elab_src
         self.sci = sci
         sci_page[elab] = self
-        if sci in sci_page and sci_page[sci] != self:
+
+        sci_words = elab.split(' ')
+        if len(sci_words) == 3 and sci_words[0] in rank_set:
+            # We never allow a ranked binomial name to index a page using its
+            # stripped name.
+            pass
+        elif sci in sci_page and sci_page[sci] != self:
             conflict_page = sci_page[sci]
             sci_page[sci] = 'conflict'
             if conflict_page != 'conflict':

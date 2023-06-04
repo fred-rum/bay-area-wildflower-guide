@@ -454,7 +454,7 @@ def get_inat_for_tid_set(tid_set, local=True):
             if local:
                 parse_inat_data(data, tid)
             else:
-                if 'preferred_common_name' in data:
+                if 'preferred_common_name' in data and data ['preferred_common_name']:
                     inat_dict[tid].global_com = data['preferred_common_name'].lower()
                 else:
                     inat_dict[tid].global_com = None
@@ -462,7 +462,7 @@ def get_inat_for_tid_set(tid_set, local=True):
                 if 'ancestors' in data:
                     for anc_data in data['ancestors']:
                         anc_tid = str(anc_data['id'])
-                        if 'preferred_common_name' in anc_data:
+                        if 'preferred_common_name' in anc_data and anc_data['preferred_common_name']:
                             inat_dict[anc_tid].global_com = anc_data['preferred_common_name'].lower()
                         else:
                             inat_dict[anc_tid].global_com = None
@@ -706,7 +706,7 @@ class Inat:
         else:
             self.origin = None
 
-        if 'preferred_common_name' in data:
+        if 'preferred_common_name' in data and data['preferred_common_name']:
             # The common name is forced to all lower case to match my
             # convention.
             self.com = data['preferred_common_name'].lower()

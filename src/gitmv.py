@@ -54,7 +54,7 @@ if base == 'txt':
 if base in ('txt', 'html'):
     html_from = re.sub(r' ', '-', name)
     html_to = re.sub(r' ', '-', arg2)
-    gitmv(f'html/{html_from}.txt', f'html/{html_to}.txt')
+    gitmv(f'html/{html_from}.html', f'html/{html_to}.html')
 
 def separate_name_and_suffix(name):
     # this always matches something, although the suffix may be empty

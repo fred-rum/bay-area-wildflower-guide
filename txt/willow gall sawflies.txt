@@ -7,7 +7,7 @@ bug:n/a
 gall:3539
 . smooth red blister(s) on leaf face
 
-==willow gall sawfly:E. proxima
+==willow redgall sawfly:E. proxima
 bug:n/a
 gall:3539
 . lumpy red blister(s) on leaf face

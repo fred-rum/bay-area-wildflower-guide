@@ -43,15 +43,14 @@ def strip_sci(sci, keep=''):
         # The name includes an 'ssp.' or 'var.' specifier.
         # The specifier is stripped from the 'sci' name.
         return ' '.join((sci_words[0], sci_words[1], sci_words[3]))
-    elif len(sci_words) == 2:
-        if sci_words[1] == 'spp.' and 'g' not in keep:
-            # It is a genus name in elaborated format.  The 'spp.' suffix is
-            # stripped from the 'sci' name.
-            return sci_words[0]
-        elif sci_words[0] in rank_set and 'r' not in keep:
-            # The name is in {rank} {name} format (e.g. "family Phrymaceae").
-            # Strip the rank from the 'sci' name.
-            return sci_words[1]
+    elif len(sci_words) == 2 and sci_words[1] == 'spp.' and 'g' not in keep:
+        # It is a genus name in elaborated format.  The 'spp.' suffix is
+        # stripped from the 'sci' name.
+        return sci_words[0]
+    elif sci_words[0] in rank_set and 'r' not in keep:
+        # The name is in {rank} {name} format (e.g. "family Phrymaceae").
+        # Strip the rank from the 'sci' name.
+        return ' '.join(sci_words[1:])
 
     # The name is already in a fine stripped format.
     return sci
@@ -119,7 +118,13 @@ def find_sci(elab, from_inat=False):
         return None
 
     elab = fix_elab(elab)
-    sci = strip_sci(elab)
+    sci_words = elab.split(' ')
+    if len(sci_words) == 3 and sci_words[0] in rank_set:
+        # We never allow a ranked binomial name to index a page using its
+        # stripped name.
+        sci = elab
+    else:
+        sci = strip_sci(elab)
 
     if from_inat and elab in isci_page:
         page = isci_page[elab]
