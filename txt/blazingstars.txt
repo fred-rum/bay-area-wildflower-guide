@@ -3,7 +3,14 @@ x:hist
 
 ==lindley's blazingstar:Mentzelia lindleyi
 color: yellow
+. <b>petals 20--40 mm</b>
 
 ==bushy blazingstar:M. dispersa
+. petals 2--6(8) mm
+. <b>bracts do not cup the flower</b>
+. outer filaments +- thread-like, not lobed
 
 ==san luis blazingstar:M. micrantha
+. petals 2.5--4.5 mm
+. <b>bracts generally cup the flower</b>
+. outer 5 filaments widened and distally 2-lobed

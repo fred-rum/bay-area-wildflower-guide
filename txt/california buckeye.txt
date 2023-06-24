@@ -5,3 +5,5 @@ genus: buckeyes and horse-chestnuts
 x:ca
 
 xx:none
+
+Most flowers have only stamens (male parts).  Only one flower (or a few) at the tip of the inflorescence is perfect, having both male and female parts.  This often blooms first, and it is where the fruit eventually grows.

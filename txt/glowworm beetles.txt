@@ -1,0 +1,4 @@
+
+==western banded glowworm:Zarhipis integripennis
+bug:9384
+x:ba

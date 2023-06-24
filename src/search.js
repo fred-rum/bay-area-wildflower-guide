@@ -260,7 +260,7 @@ function check(search_str, match_str, pri_adj) {
      Name within m.  This assumes that <rank> is all normal letters, so the
      index of Name within m is the same as the index of the ' ' within
      match_str.  If the first word is uppercase (not a rank) or the second word
-     is not uppercase (not a scientific name), then the name_pos is set to 0
+     is not uppercase (not a scientific name), then name_pos is set to 0
      instead. */
   var name_pos = match_str.indexOf(' ');
   if ((name_pos < 0) ||
@@ -268,7 +268,6 @@ function check(search_str, match_str, pri_adj) {
       (match_str.substr(name_pos+1, 1) != upper_str.substr(name_pos+1, 1))) {
     name_pos = 0;
   }
-  
 
   /* match_ranges consists of [start, end] pairs that indicate regions in m for
      which a match was made */

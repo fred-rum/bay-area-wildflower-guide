@@ -3,7 +3,7 @@ x:ca
 
 Mallows have an extra epicalyx cupping the calyx.  (Jepson calls it bractlets.)
 
-Peel back the calyx segments to view the fruit within.
+<b>Peel away an epicalyx segment to see if it is fused to the calyx.  Peel back the calyx segments to view the fruit within.</b>
 
 There is a very good <a href="https://drive.google.com/file/d/16qardZB078_-k_KQKszfBrQd3S65-opK/preview">guide</a> to the wild mallows of New Zealand that conveniently encompasses all Bay Area mallows.
 
@@ -31,6 +31,7 @@ color:pale purple, pink
 .. <b>petals are not dark at the base</b>
 . calyx +- 4 mm
 . epicalyx < calyx
+. fruit is smooth with longitudinal grooves
 ]
 
 [

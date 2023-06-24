@@ -22,8 +22,10 @@ sci_p:Mimulus grandis
 . very rare
 
 ==field monkey-flower:Erythranthe arvensis
+acom:villous-bracted monkeyflower # FNA
 sci_p:n/a
-. <b>[very small corolla]</b>; FNA suggests that there are both small-flowered and smaller-flowered versions (that were at onc time called Mimulus micranthus)
+color: yellow
+. <b>[very small corolla]</b>; FNA suggests that there are both small-flowered and smaller-flowered versions (that were at one time called Mimulus micranthus)
 .. these may be distinguished <a href="https://www.inaturalist.org/observations/11556651#activity_comment_b553e943-7abb-43c1-aadf-d6d03c4b0294">in the future</a>
 . stems 5--70 cm, glabrous
 . leaf petiole 0--95 mm, blade 5--35 mm long

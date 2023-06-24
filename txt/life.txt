@@ -46,7 +46,10 @@ do obs_fill_alt_global_com: self-below
 ==animals
 
 ==kelp, diatoms, and allies
+end_hierarchy
 
 ==fungi including lichens
+end_hierarchy
 
 ==slime molds
+end_hierarchy

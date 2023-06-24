@@ -1584,7 +1584,6 @@ more gallery keys:
 
 2023-4-9 Sweeney Ridge is missing most keywords in Lightroom
 
-blazingstars needs key
 spineflowers needs key
 
 I'm tempted to allow the arrows on the photo gallery to rotate continue

@@ -13,6 +13,8 @@ color: purple, pale purple
 . leaflets 4--10 mm wide, wedge-shaped to oblong, <b>length 2--6 &times; width</b>
 
 ==narrow-leaved vetch:V. sativa ssp. nigra
+color: purple, pale purple
+<b>Caution: ID unsure</b>
 . calyx tube 4.5--5.5 mm, lobes <b>3--4.5 mm</b>
 . corolla <b>10--18 mm</b>
 . leaflets 5--7 mm wide, linear to generally lance-oblong, <b>length 4--10 &times; width</b>

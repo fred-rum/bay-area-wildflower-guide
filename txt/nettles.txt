@@ -4,7 +4,7 @@ x:ca
 ==great stinging nettle:U. dioica
 xx:more
 color:other
-iNaturalist is in the process of changing the North American observations to U. gracilis; more research is needed to distinguish ssp. gracilis from ssp. holosericea
+iNaturalist is in the process of changing the North American observations to U. gracilis; I need to do more research to distinguish ssp. gracilis from {-hoary nettle}
 . 50--300 cm tall
 . leaf blade 6--20 cm
 . inflorescence raceme- or panicle-like, generally > petiole

@@ -1,0 +1,8 @@
+sci: genus Amanita
+x:more
+
+==pinecone amanita:Amanita magniverrucata
+
+==western yellow-veiled amanita:A. augusta
+
+==blushing bride amanita:Amanita novinupta

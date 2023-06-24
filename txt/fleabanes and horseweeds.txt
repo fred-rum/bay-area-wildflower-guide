@@ -21,6 +21,7 @@ color: pale purple
 . all along Pacific coast (coastal bluffs, dunes, beaches)
 
 ==leafy fleabane:E. foliosus
+color: pale purple
 . rays 6--15 mm
 . phyllaries strongly graduated
 . no basal leaves

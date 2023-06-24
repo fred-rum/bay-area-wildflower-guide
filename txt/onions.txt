@@ -81,6 +81,7 @@ color: white
 . more common
 
 ==oneleaf onion:A. unifolium
+color:purple, red purple, pale purple
 . leaf 2--3, < stem, widely channeled or +- flat, <b>keeled</b>
 . pedicels 15--40 mm
 . flowers 11-15 mm
@@ -109,7 +110,7 @@ color: white
 . uncommon
 
 ==jeweled onion:A. serra
-color: red purple, purple
+color: pale purple, red purple, purple
 . leaf 2--3, +- cylindric
 . pedicels 7--15 mm
 . common

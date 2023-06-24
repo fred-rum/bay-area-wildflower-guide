@@ -2,6 +2,7 @@ sci:Hypochaeris spp.
 x:ca
 
 ==common cat's-ear:H. radicata
+acom:rough cat's-ear
 color: yellow
 . rough-hairy
 . ligules [petals] 10--15 mm, much exceeding involucre, yellow, often +- red abaxially

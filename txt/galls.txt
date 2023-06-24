@@ -25,7 +25,7 @@ Nancy Asquith has tons of <a href="https://www.inaturalist.org/projects/californ
 ==california gall wasp
 ==live oak bud gall wasp
 ==ruptured twig gall wasp
-==live oak apple gall wasp:Amphibolips quercuspomiformis
+==live oak apple gall wasp
 ==round leaf gall wasp
 ==beaked spindle gall wasp
 ==beaked twig gall wasp

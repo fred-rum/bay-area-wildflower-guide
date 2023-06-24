@@ -3,5 +3,7 @@
 x:more
 
 ==snails
+end_hierarchy
 
 ==slugs
+end_hierarchy

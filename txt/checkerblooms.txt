@@ -10,7 +10,6 @@ Key features:
 
 ==dwarf checkermallow:S. malviflora
 color: pink, red purple
-calyx:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1202+0238
 . no bracts cupping the calyx
 . leaf generally dentate or lobed, upper leaves generally much reduced
 . common throughout the bay area

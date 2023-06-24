@@ -2168,7 +2168,9 @@ class Page:
             (self.shadow and (self.rp_do('member_name') or
                               (self.rp_do('member_com_simple') and
                                self.com and
-                               ' and ' not in self.com)))):
+                               ' and ' not in self.com and
+                               ' subg. ' not in self.com and
+                               ' sect. ' not in self.com)))):
             self.propagate_membership(self)
 
     def apply_prop_checks(self):

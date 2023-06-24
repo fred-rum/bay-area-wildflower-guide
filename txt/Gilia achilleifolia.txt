@@ -1,0 +1,16 @@
+com:california gilia
+
+==california gilia:ssp. achilleifolia
+color: purple
+. 8--25 flowers in hemispheric head
+.. corolla 10--21 mm long (2--3 &times; calyx)
+.. pedicel 1--2 mm
+
+==many-stemmed gilia:ssp. multicaulis # common name from Calflora
+color: purple, pale purple, white
+acom: small california gilia # Pine Ridge Association
+acom: many-stemmed california gilia # Calflora
+. 1--7 flowers in open cyme
+.. corolla 5--10 mm long (1--2 &times; calyx)
+.. pedicel 1--30 mm
+. when the flower is very pale, it may be mistaken for chaparral gilia (<i>Gilia angelensis</i>), but that doesn't grow in the bay area

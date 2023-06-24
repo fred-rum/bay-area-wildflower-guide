@@ -32,4 +32,4 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0208+0434
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0700+0004
 . flower stem twining
 . perianth pink
-. very rare
+. very rare; [no observations in iNaturalist in the bay area]

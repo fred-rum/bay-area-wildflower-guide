@@ -18,6 +18,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0716+1028
 . common
 
 ==blue water-speedwell:V. anagallis-aquatica
+color: pale purple, purple
 . generally > 30 flowers in each axillary raceme
 . corolla 5--10 mm, pale purple with purple lines
 . sessile leaves (rarely short-petioled proximally)

@@ -21,8 +21,7 @@ x:more
 ==trooping crumble cap:Coprinellus disseminatus
 x:more
 
-==pinecone amanita:Amanita magniverrucata
-x:more
+==amanita mushrooms
 
 ==stubble rosegill:Volvopluteus gloiocephalus
 x:ba

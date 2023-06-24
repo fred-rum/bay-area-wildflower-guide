@@ -68,7 +68,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1207+1139
 . calyx lobes < 1/2 tube, not bristle-tipped
 
 ==small-headed clover:T. microcephalum
-https://www.calflora.org/cgi-bin/noccdetail.cgi?seq_num=gp15975
+color: pink, red purple
 . calyx lobes > 1/2 tube, bristle-tipped
 . calyx lobes, involucre lobes +- entire
 . plant hairs generally finely wavy

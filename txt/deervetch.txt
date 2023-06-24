@@ -28,7 +28,7 @@ Jepson describes for many deervetch species whether the wings are +- greater or 
 <h2>1 flower per leaf axil</h2>
 
 ==short-flower deervetch:A. parviflorus
-color: cream, pink
+color: cream, pink, red purple
 . stem ascending to erect, 5--40 cm
 . 3--5 leaflets, 4--12 mm, elliptic to obovate, +- equal
 . peduncle generally > 1 cm, generally bracted

@@ -11,20 +11,20 @@ Plants have exactly 2 opposite cauline leaves per stem, often fused or partially
 
 Key features:
 . shape of basal leaves
-. shape of cordate leaves
+. shape of cauline leaves
 . number of bracts per inflorescence
 . flower petal length
 
 ==candy flower:C. sibirica
 color:white
-. cauline leaves are substantial but not fused
+. <b>cauline leaves are substantial but not fused</b>
 . <b>bracts throughout inflorescence</b>, 1 for every 1--2 flowers
 .. all others have only a single bract, below the lowest flower
 . corolla pink
 
 ==gypsum springbeauty:C. gypsophiloides
 color: white, pink
-. cauline leaves are quite small and +- linear [info from CalPhotos; Jepson is much less descriptive]
+. <b>cauline leaves are quite small and +- linear</b> [info from CalPhotos; Jepson is much less descriptive]
 . <b>petals 5--8 mm</b>
 . corolla pink
 
@@ -60,20 +60,20 @@ species: pale springbeauty
 . <b>petals +- 2 mm</b>
 . corolla white or pink
 
+==miner's lettuce:C. perfoliata
+color: white
+. cauline leaves substantial, fully fused
+. basal leaf 1--25 cm long including petiole, <b>blade < 4 cm, < 3&times; longer than wide</b>, elliptic to reniform
+. few to many basal leaves, spreading to erect, +- equal
+. corolla white or pink
+
 ==redstem springbeauty:C. rubra
 . cauline leaves substantial, +- fused
-. basal leaf 1--8 cm long including petiole, blade < 2 cm, < 3&times; longer than wide, base truncate to wedge-shaped
+. basal leaf 1--8 cm long including petiole, <b>blade < 2 cm, < 3&times; longer than wide</b>, base truncate to wedge-shaped
 . many basal leaves, prostrate to spreading, smaller inward
 . corolla white or pale pink
 
 ==streambank springbeauty:C. parviflora
 . cauline leaves substantial, fully fused (a common subspecies) or free, linear, and long (a rare subspecies)
-. basal leaf 1--18 cm long including petiole, blade > 3&times; longer than wide, base tapered gradually to petiole
-. corolla white or pink
-
-==miner's lettuce:C. perfoliata
-color: white
-. cauline leaves substantial, fully fused
-. basal leaf 1--25 cm long including petiole, blade < 4 cm, < 3&times; longer than wide, elliptic to reniform
-. few to many basal leaves, spreading to erect, +- equal
+. basal leaf 1--18 cm long including petiole, <b>blade > 3&times; longer than wide</b>, base tapered gradually to petiole
 . corolla white or pink

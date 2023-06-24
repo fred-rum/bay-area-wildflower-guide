@@ -12,6 +12,7 @@ Key features:
 
 ==sheep's sorrel:R. acetosella
 color: other, red
+. [easily recognized by its strong red hue]
 . <b>leaf blade hastate (spearhead-shaped) or sagittate (arrowhead-shaped) or base tapered</b>
 .. (other Rumex species are not hastate or sagittate (but may have a tapered base)
 . several stems from base
@@ -53,6 +54,7 @@ Inner perianth lobe margin variously dentate, at least some teeth >= 0.3 mm [<a 
 ==fiddle dock:R. pulcher
 rep: ,7
 color: other, red
+. [easily recognized by the chaotically spreading branches of its inflorescence]
 . perennial
 . stem: erect to arching at tip, 2--6(7) dm, branched, slender
 . leaf: blade 4--10(15) cm, (2)3--5 cm wide
