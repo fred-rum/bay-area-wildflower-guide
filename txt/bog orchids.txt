@@ -59,6 +59,7 @@ sci_Ffjp:Piperia candida
 
 ==michael's rein orchid:P. michaelii
 sci_Ffjp:Piperia michaelii
+color: other
 . spur 8--12 mm, curved down along flower stalk
 . perianth green to yellow-green
 . <b>lower sepals spreading</b>

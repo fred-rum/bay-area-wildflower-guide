@@ -4,6 +4,7 @@ x:ca
 
 ==mediterranean lineseed:B. trixago
 color: white, pale purple
+. occasionally called "mediterranean linseed" on the internet, but not at any of the locally authoritative sites
 
 ==yellow glandweed:B. viscosa
 color: yellow, cream

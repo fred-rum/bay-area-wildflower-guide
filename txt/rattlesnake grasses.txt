@@ -7,5 +7,6 @@ color:other
 .. all sprout from a common axis
 
 ==little quaking grass:B. minor
+color:other
 . spikelets 2--5 mm
 .. sprout from forked branches

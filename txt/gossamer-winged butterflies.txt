@@ -10,3 +10,7 @@ bug:416030
 
 ==silvery blue:Glaucopsyche lygdamus
 bug:15915
+
+==tailed copper:Tharsalea arota
+bug:25364
+x:more

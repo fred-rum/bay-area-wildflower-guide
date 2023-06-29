@@ -1,13 +1,15 @@
 sci:Sambucus racemosa
 xx:ca
 
-==european red elder:S. racemosa ssp. racemosa
+==western red elder:S. racemosa var. microbotrys
+acom: european red elder
 sci_fpj: S. racemosa var. racemosa
+sci_i: S. racemosa ssp. racemosa
 color: white, cream, yellow
 . red berries
-. only subspecies found in the bay area
-. POWO splits the North American var. microbotrys from the European ssp. racemosa, but iNaturalist doesn't yet recognize var. microbotrys
-. Calflora and Jepson has var. microbotrys as a synonym of var. racemosa
+. this is the only variety in the bay area
+. POWO splits the North American var. microbotrys from the European ssp. racemosa, but iNaturalist hasn't yet <a href="https://www.inaturalist.org/flags/598126">incorporated the split</a>.
+.. neither have Calflora and Jepson
 
 ==rocky mountain elder:S. racemosa var. melanocarpa
 . purple-black berries

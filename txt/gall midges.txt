@@ -12,6 +12,14 @@ gall:2706
 . a lumpy gall up to 20 mm wide at the tip of a branch
 . often has plant#leaves growing through the gall
 
+==coyote brush twisted stem gall midge:Rhopalomyia baccharis
+acom:baccharis stem gall midge
+bug:225833
+gall:2705
+. parasitizes {-coyote brush}
+. a swelling and slight bending of the twig
+. adults look the same as {-Rhopalomyia californica}, but galls and pupae are different
+
 # common name derived from Russo 2021
 ==silktassel flower gall midge:Asphondylia garryae
 bug:n/a

@@ -12,6 +12,7 @@ color: other
 .. <b>anthers generally exserted</b>
 . leaf margin hairs many, short, sharp, ascending, blade abaxially minute-scabrous, especially on veins [very hard to see]
 . fruit red, spheric [but may be orange when immature and/or lumpy/ovoid/obovoid]
+. found in most of the bay area except the Diablo range south of 84
 ;Ediblity: Berries are "potentially poisonous". ^https://baynature.org/article/berries-of-the-forest/
 
 ==largeflower fairybells:P. smithii
@@ -21,3 +22,4 @@ color:white
 .. <b>anthers included</b>
 . leaf margin hairs 0 or long, spreading, generally falling in age, blade abaxially glabrous or sparsely hairy
 . fruit orange, obovoid
+. not found SE of Butano, Sam McDonald, and Windy Hill
