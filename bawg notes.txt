@@ -1591,3 +1591,15 @@ I'm tempted to allow the arrows on the photo gallery to rotate continue
   but they should be marked so that the boundary is recognizable
     e.g. by pointing the usual V arrow at a vertical line
       (of a different color?)
+
+count cultivated and out-of-area observations as long as they aren't promoted
+  (above species level)
+
+automatically git-mv or mv photos to names with '-' instead of spaces
+  for both photos and thumbnails
+  report conflicts if something is already at that name
+  while you're at it, fix up filenames that end with ,.jpg or ,-*.jpg
+    e.g. by naming them ",1", ",2", etc.
+    if that would collide with another name, extend the previous extension,
+      e.g. ",1a" or even ",0".
+  match names to pages appropriately

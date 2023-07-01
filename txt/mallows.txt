@@ -1,11 +1,14 @@
 sci:Malva spp.
 x:ca
 
-Mallows have an extra epicalyx cupping the calyx.  (Jepson calls it bractlets.)
+Mallows have an extra epicalyx cupping the calyx.  (Jepson calls it an involucel with bractlets.)
 
-<b>Peel away an epicalyx segment to see if it is fused to the calyx.  Peel back the calyx segments to view the fruit within.</b>
+Key features:
+. are epicalyx segments fused to each other at the base?
+.. if free, are epicalyx segments partially fused to the calyx beneath?
+. peel back the calyx segments to view the fruit within.
 
-There is a very good <a href="https://drive.google.com/file/d/16qardZB078_-k_KQKszfBrQd3S65-opK/preview">guide</a> to the wild mallows of New Zealand that conveniently encompasses all Bay Area mallows.
+There is a very good <a href="https://drive.google.com/file/d/16qardZB078_-k_KQKszfBrQd3S65-opK/preview">guide</a> to the wild mallows of New Zealand that conveniently encompasses all Bay Area mallows.  Valerio Lazzeri also has a <a href="https://www.inaturalist.org/journal/blue_celery/66193-malva-sylvestris-vs-multiflora-vs-nicaeensis-vs-parviflora-key">key to selected mallows</a>.
 
 [
 <h3>epicalyx segments are fused to each other (at the base)</h3>
@@ -41,8 +44,9 @@ color:pale purple, pink
 color: pale purple
 . petals 5--12 mm, veins generally dark
 . sepals 4--6 mm
-. <b>bractlets widely lanceolate to ovate, bases fused to calyx</b>
+. <b>epicalyx segments widely lanceolate to ovate, relatively broad and close to each other, bases fused to calyx</b>
 . fruit is reticulated
+. stem densely hairy, usually erect but may be matted down (e.g. if squashed on a road)
 ]
 
 [
@@ -50,23 +54,25 @@ color: pale purple
 
 ==common mallow:M. sylvestris
 . <b>petals generally 15--30 mm</b>, veins dark
-.. all others below have shorter petals
+.. all others in this section have shorter petals
 . sepals 6--8 mm
-. bractlets 3--7 mm long, 2--4 mm wide, free
+. epicalyx segments 3--7 mm long, 2--4 mm wide, free
 . fruit is reticulated
 
 ==dwarf mallow:M. neglecta
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0520+0780
 . petals generally twice as long as sepals (8--12 mm)
 . sepals 4--6 mm
-. <b>bractlets widely linear to narrowly lanceolate, bases free from each other and from calyx</b>
+. <b>epicalyx segments widely linear to narrowly lanceolate, narrow and distant from each other, bases free from each other and from calyx</b>
 . <b>fruit is smoothly ribbed</b>
+. stem densely hairy
 
 ==cheeseweed mallow:M. parviflora
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0514+0448
 . petals 3--5 mm
 . sepals ~3 mm
-. <b>bractlets 1--2 mm long, linear to thread-like</b>
+. <b>epicalyx segments 1--2 mm long, linear to thread-like</b>
 . fruit is reticulated and always exposed by the calyx
+. stem slightly rough or hairy, usually prostrate or decumbent
 
 ]

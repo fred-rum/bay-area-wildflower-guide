@@ -301,7 +301,7 @@ def parse_txt(name, s, page, glossary):
     end_consecutive_children()
 
     if bracket_depth != 0:
-        error(f'"[" and "]" bracket depth is {bracket_depth} on page {name}')
+        error(f'final "[...]" bracket depth is {bracket_depth} on page {name}')
 
     # Appending a newline after joining the list into a string would end
     # up copying the entire string.  Not a huge problem, but I might as well

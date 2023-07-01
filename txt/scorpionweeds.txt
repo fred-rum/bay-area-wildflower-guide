@@ -1,8 +1,6 @@
 sci:Phacelia spp.
 x:!more
 
-<b>Caution: IDs are uncertain</b>
-
 Man, there are so many bay area scorpionweeds.  Everything is potentially a key feature.
 
 Key features:
@@ -16,15 +14,36 @@ Key features:
 
 ==mountain phacelia:P. imbricata
 color: white, other
+. corolla white with a mix of white and brown filaments and anthers
+. leaf blade 5--15 cm, dissected (distal sometimes entire)
+.. leaves mostly basal
 
 ==distant phacelia:P. distans
-color: other
+color: pale purple, white, other
+. corolla pale purple, beige (cream with brown streaks), or white
+. corolla throat with dark spots below petals (except on pure white corolla)
 
 ==shade phacelia:P. nemoralis
 color: pale purple, other
+. corolla white with a mix of white and brown filaments and anthers
+.. jepson thinks the corolla is green-white or yellow-white
+... if they mean white with a slight shading, it is plausible
+. leaf blade 4--15 cm
+.. proximal-most leaves generally compound with 3--7 leaflets
+.. distal-most leaves often entire
 
 ==california phacelia:P. californica
 color: pale purple, other
+. corolla purple to pale purple (rarely white)
+. leaf blade 5--20 cm
+.. generally compound (sometimes dissected) with 3--7 leaflets
+.. mostly basal
+.. distal-most leaves often entire
 
 ==stinging phacelia:P. malvifolia
 color: white, cream, other
+. leaves, stems, calyx lobes with long stiff hairs
+.. other phacelia have similar hairs, so the distinction may be difficult to perceive
+. leaf 2--14 cm including petiole
+.. proximal leaves lobed to compound with 3 segments which are also toothed or irregularly lobed
+.. distal leaves generally toothed or lobed

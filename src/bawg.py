@@ -612,6 +612,10 @@ def read_observation_data(f):
             # by general location, rather than the specific park.
             short_park = loc
 
+        page_below = page.equiv_page_below()
+        if page_below:
+            page = page_below
+
         # If we haven't matched the observation to a real page, advance
         # up the Linnaean hierarchy until we find a real page.  We'll
         # check later whether this promotion is allowed.

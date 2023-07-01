@@ -2110,6 +2110,20 @@ class Page:
                                                  self.subset_trait,
                                                  self.subset_value)
 
+    # Check if a species has only one subspecies/variety that shares the
+    # same common name, in which case we assume that any "species"
+    # observation is actually of the same-named subspecies/variety.
+    def equiv_page_below(self):
+        page_below = None
+        if self.shadow and self.rank == Rank.species and self.com:
+            for sub_page in self.linn_child:
+                if not sub_page.shadow:
+                    if page_below == None and sub_page.com == self.com:
+                        page_below = sub_page
+                    else:
+                        return None
+        return page_below
+
     def check_traits(self):
         for trait in sorted(self.trait_values):
             if trait not in self.traits_used:
@@ -2612,10 +2626,15 @@ class Page:
             obs = Obs(None, None)
             self.count_matching_obs(obs)
 
-        if self.taxon_id:
-            link = f'https://www.inaturalist.org/observations/chris_nelson?taxon_id={self.taxon_id}&order_by=observed_on'
-        elif self.sci:
-            elab = self.choose_elab(self.elab_inaturalist)
+        if self.linn_parent and self.linn_parent.equiv_page_below():
+            link_page = self.linn_parent
+        else:
+            link_page = self
+
+        if link_page.taxon_id:
+            link = f'https://www.inaturalist.org/observations/chris_nelson?taxon_id={link_page.taxon_id}&order_by=observed_on'
+        elif link_page.sci:
+            elab = link_page.choose_elab(link_page.elab_inaturalist)
             sci = strip_sci(elab)
             sciurl = url(sci)
             link = f'https://www.inaturalist.org/observations/chris_nelson?taxon_name={sciurl}&order_by=observed_on'

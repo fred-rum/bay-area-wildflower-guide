@@ -8,15 +8,16 @@ Key features:
 . diameter of involucre
 . number of phyllaries, strongly overlapping or barely
 . number and length of rays
-. ecology
 
-==golden yarrow:E. confertiflorum
+==golden yarrow:E. confertiflorum var. confertiflorum
 color: yellow, orange
+species: golden yarrow
+xx:ba
 . subshrub or shrub, generally 20--70 cm
 . 4--7 phyllaries, strongly overlapping
 . peduncle 0--2.5(9) cm
 . 4--6 (0--8) rays, 2--5 mm
-. Ecology: Many dry habitats
+. found in many dry habitats
 
 ==jepson's woolly sunflower:E. jepsonii
 . subshrub, 50--80 cm
@@ -32,7 +33,7 @@ color: yellow, orange
 . peduncle < 1 cm
 . 8--11 phyllaries, <b>barely overlapping</b>
 . 6--9 rays, 3--5 mm
-. Ecology: coastal dunes, bluffs, coastal scrub
+. found in coastal dunes, bluffs, coastal scrub
 
 ==san mateo woolly sunflower:E. latilobum
 . subshrub, <b>woody at base only</b>
