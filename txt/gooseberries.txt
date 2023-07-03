@@ -66,7 +66,8 @@ color: red purple
 . white petals
 . white to tan anthers
 . styles glabrous at base
-. leaf blade abaxially glandular
+. leaf blade abaxially glandular [hard to see]
+.. leaf petiole glandular-hairy
 . <b>dense bristles between nodes</b>
 ;Edibility: Ripe reddish-purple berries are "not palatable" ^http://floranorthamerica.org/Ribes_menziesii
 
@@ -77,7 +78,7 @@ color: red purple
 . white petals
 . green to yellow anthers
 . styles glabrous at base
-. leaf blade abaxially nonglandular
+. leaf blade and petiole not hairy or glandular
 . <b>young stems generally have no bristles between nodes</b>
 .. proximal stem may have dense bristles
 ;Edibility: Ripe red berries are "palatable" ^http://floranorthamerica.org/Ribes_californicum

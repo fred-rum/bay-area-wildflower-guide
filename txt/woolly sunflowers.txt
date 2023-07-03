@@ -47,3 +47,4 @@ color: yellow, orange
 . 5--15 phyllaries
 . 5--13 rays, <b>6--20 mm</b>
 . scattered
+. see also {-hillside daisies}, which often have shorter rays

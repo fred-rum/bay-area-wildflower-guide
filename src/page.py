@@ -2184,7 +2184,8 @@ class Page:
                                self.com and
                                ' and ' not in self.com and
                                ' subg. ' not in self.com and
-                               ' sect. ' not in self.com)))):
+                               ' sect. ' not in self.com and
+                               ' subsection ' not in self.com)))):
             self.propagate_membership(self)
 
     def apply_prop_checks(self):

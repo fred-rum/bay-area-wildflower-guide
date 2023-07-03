@@ -243,7 +243,7 @@ var pages=[
 ["catchweed bedstraw",1,2,3,4],
 ["chaparral broomrape",7],
 ["chaparral clarkia","","-2"],
-["chaparral currant",1,2,3,5],
+["chaparral currant",1,2,3,5,7],
 ["chaparral pea",1,2,3],
 ["charlock",1,2,5],
 ["checker lily",1,2,3,4,5],

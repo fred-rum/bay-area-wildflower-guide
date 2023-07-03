@@ -34,11 +34,14 @@ color: cream, white
 . pale yellow flowers
 . scattered around bay area
 
-==twinberry honeysuckle:L. involucrata
+==coast twinberry:L. involucrata var. ledebourii
+color: salmon, yellow, red
+species: twinberry honeysuckle
+xx:ba
 . <b>flowers paired on axillary peduncles</b>
 . <b>corolla < 20 mm</b>
-. plant erect
-. corolla yellow, usually strongly tinged orange or red
+. plant 1.5--3.6 m, erect
+. corolla yellow, with strong orange or red tinge
 . common near the coast and in the east bay from Chabot north
 
 ==japanese honeysuckle:L. japonica

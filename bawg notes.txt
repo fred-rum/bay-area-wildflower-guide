@@ -1598,8 +1598,32 @@ count cultivated and out-of-area observations as long as they aren't promoted
 automatically git-mv or mv photos to names with '-' instead of spaces
   for both photos and thumbnails
   report conflicts if something is already at that name
+    e.g. by not performing the action but instead reporting with error()
   while you're at it, fix up filenames that end with ,.jpg or ,-*.jpg
     e.g. by naming them ",1", ",2", etc.
     if that would collide with another name, extend the previous extension,
       e.g. ",1a" or even ",0".
   match names to pages appropriately
+
+Change common names to add or delete hyphens as desired
+  especially where it makes multiple related taxons more consistent
+
+The default_completeness property needs more options:
+  msg: replaces 'do' (less emphasis than 'caution')
+  msg/caution/warn/error_if_members: acts only if the page has members
+It also needs a way to declare separate properties at different levels,
+    e.g. * at the genus level and above, *_if_members below the genus level
+  Allow a declared property to specify that it doesn't replace another
+    propagating property
+  Or perhaps simply allow the same property to be declared multiple times
+    at the same level (needed anyway), and propagate them all
+Once I can verify that every species has an xx declaration if it includes
+  a subspecies/variety, then I can change the behavior of observation demotion;
+  i.e. if a species is a shadow page with only one (real) page below,
+    and the species is marked complete,
+    then an observation of the species is treated
+      as an observation of the below page
+  need to recurse when looking for the single real page
+      e.g. in case there is a shadow rank between the species and subspecies
+    stop recursion at a real page in case it has its own descendents
+      although this may run into limitations with what x/xx can do

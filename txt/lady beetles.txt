@@ -1,19 +1,26 @@
 sci:family Coccinellidae
 
 Lady beetles can usually be distinguished by the pattern of dark spots
-on the carapace and the pattern of white markings on the none#head.
+on the elytron (carapace) and the pattern of white markings on the pronotum (none#head).
 
 ==convergent lady beetle:Hippodamia convergens
 bug:8374
-. spots may be distinct, indistinct, or absent
+. black spots on elytrum may be distinct, indistinct, or absent
+. pair of <b>isolated white lines</b> on the pronotum
+
+==variegated lady beetle:Hippodamia variegata
+bug:14091
+. black spots on elytrum may be distinct, indistinct, or absent
+. pair of <b>white dots</b> on the pronotum, isolated or merging with the white perimeter curve
+. iNaturalist likes to suggest it, but it's extremely rare to non-existent in the bay area
 
 ==california lady beetle:Coccinella californica
 bug:65466
-. no spots
+. no black spots on elytrum
 
 ==seven-spotted lady beetle:Coccinella septempunctata
 bug:3543
-. spots are diagnostic
+. seven black spots on elytron are diagnostic
 
 ==asian lady beetle:Harmonia axyridis
 bug:397

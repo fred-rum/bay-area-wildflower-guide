@@ -10,6 +10,7 @@ xx:uncat
 . pink to white sepals
 . styles glabrous at base
 . leaf blade abaxially sparsely hairy, with short glands on veins or not
+.. [adaxially glabrous]
 
 ==chaparral currant:Ribes malvaceum
 color: pink

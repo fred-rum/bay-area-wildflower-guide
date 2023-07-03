@@ -1,11 +1,13 @@
 sci:genus Monolopia
+x:ba
 
 ==woodland woollythreads:M. gracilens
 color:yellow
-. ray entire or slightly toothed
+. ray 5--10 mm, entire or slightly toothed
 . uncommon
-. See also {-goldfields}, which have linear leaves that aren't nearly as hairy.
+. see also {-goldfields}, which have linear leaves that aren't nearly as hairy
+. see also {-common woolly sunflower}, which often has rays longer than 10 mm
 
 ==cupped monolopia:M. major
-. ray 3-lobed
+. ray 8--20 mm, 3-lobed
 . rare

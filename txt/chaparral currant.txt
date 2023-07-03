@@ -1,12 +1,14 @@
-xx:ba
+xx:ca
 
 ==n/a:Ribes malvaceum var. malvaceum
 sci_F:n/a
+. leaf blade adaxially dull olive-green
 . found in the bay area
 
 ==n/a:Ribes malvaceum ssp. viridifolium
 sci_fpj:Ribes malvaceum var. viridifolium
 sci_F:n/a
+. leaf blade adaxially bright green [but indistinguishable in CalPhotos]
 . found at Pinnacles
 
-Edibility: Ripe purplish berries are "dry and tasteless" ^https://davesgarden.com/guides/articles/view/4666 or "palatable" ^http://floranorthamerica.org/Ribes_malvaceum .
+Edibility: Ripe purplish berries are "palatable" ^http://floranorthamerica.org/Ribes_malvaceum or "dry and tasteless" ^https://davesgarden.com/guides/articles/view/4666 .
