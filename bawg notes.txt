@@ -1604,6 +1604,11 @@ automatically git-mv or mv photos to names with '-' instead of spaces
     if that would collide with another name, extend the previous extension,
       e.g. ",1a" or even ",0".
   match names to pages appropriately
+and change ',' to '.'
+  change Lightroom export settings for future exports
+  change script to recognize '.' instead of ',' for jpg suffixes
+    e.g. parsing of "==", "rep:", etc.
+  update documentation to match
 
 Change common names to add or delete hyphens as desired
   especially where it makes multiple related taxons more consistent

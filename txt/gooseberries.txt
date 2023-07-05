@@ -5,10 +5,9 @@ sci:n/a
 ==fuchsiaflower gooseberry:Ribes speciosum
 color: red
 . internodes bristly
-. <b>four sepals</b>
+. four sepals
 .. all others have five sepals
-. red sepals
-. red petals
+. <b>red sepals and petals</b>
 . very long red stamens (anthers red or other)
 ;Edibility: Ripe orangish-red berries have unknown palatability. ^http://floranorthamerica.org/Ribes_speciosum
 
@@ -24,6 +23,52 @@ color: red
 five sepals<br>
 anther filaments longer than petals
 </h3>
+
+==hillside gooseberry:Ribes californicum
+xx:uncat
+color: red purple
+. green or purple-red sepals
+. white petals
+. green to yellow anthers
+. styles glabrous at base
+. leaf blade and petiole not hairy or glandular (or sparsely hairy)
+. <b>young stems generally have no bristles between nodes</b>
+.. proximal stem may have dense bristles
+;Edibility: Ripe red berries are "palatable" ^http://floranorthamerica.org/Ribes_californicum
+]
+
+==canyon gooseberry:Ribes menziesii
+xx:uncat
+color: red purple
+. purple-red sepals
+. white petals
+. white to tan anthers
+. styles glabrous at base
+. leaf blade and petiole glandular-hairy [hard to see]
+. <b>dense bristles between nodes</b>
+;Edibility: Ripe reddish-purple berries are "not palatable" ^http://floranorthamerica.org/Ribes_menziesii
+
+==victor's gooseberry:Ribes victoris
+bristles:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0903+0724
+. green-white or white sepals, purple-tinged at base
+. white petals
+. white to tan anthers
+. styles glabrous at base
+. leaf blade sparsely glandular
+. sparse bristles between nodes
+. fruit yellow
+. rare in Santa Cruz range
+
+==bitter gooseberry:Ribes amarum
+. purple-red sepals
+. white petals
+. purple or yellow-green anthers
+. styles glabrous at base
+. leaf blade glandular-hairy
+. no bristles between nodes
+. rare in Diablo range
+;Edibility: Ripe purple berries are "palatable." ^http://floranorthamerica.org/Ribes_amarum
+
 ==straggle bush:Ribes divaricatum var. pubiflorum
 acom:straggly gooseberry
 xx:ba
@@ -33,53 +78,7 @@ species: spreading gooseberry
 . purple to green sepals
 . white petals
 . green to cream anthers
-. leaf blade not glandular
+. leaf blade generally hairy, but never glandular
 . internodes bristly or not
 . fruit glabrous (not bristly)
 ;Edibility: Ripe purple-black berries are "palatable." ^http://floranorthamerica.org/Ribes_divaricatum
-
-==bitter gooseberry:Ribes amarum
-. purple-red sepals
-. white petals
-. purple or yellow-green anthers
-. styles glabrous at base
-. leaf blade abaxially glandular
-. no bristles between nodes
-. rare in Diablo range
-;Edibility: Ripe purple berries are "palatable." ^http://floranorthamerica.org/Ribes_amarum
-
-==victor's gooseberry:Ribes victoris
-bristles:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0903+0724
-. green-white or white sepals, purple-tinged at base
-. white petals
-. white to tan anthers
-. styles glabrous at base
-. leaf blade abaxially glandular
-. sparse bristles between nodes
-. fruit yellow
-. rare in Santa Cruz range
-
-==canyon gooseberry:Ribes menziesii
-xx:uncat
-color: red purple
-. purple-red sepals
-. white petals
-. white to tan anthers
-. styles glabrous at base
-. leaf blade abaxially glandular [hard to see]
-.. leaf petiole glandular-hairy
-. <b>dense bristles between nodes</b>
-;Edibility: Ripe reddish-purple berries are "not palatable" ^http://floranorthamerica.org/Ribes_menziesii
-
-==hillside gooseberry:Ribes californicum
-xx:uncat
-color: red purple
-. green or purple-red sepals
-. white petals
-. green to yellow anthers
-. styles glabrous at base
-. leaf blade and petiole not hairy or glandular
-. <b>young stems generally have no bristles between nodes</b>
-.. proximal stem may have dense bristles
-;Edibility: Ripe red berries are "palatable" ^http://floranorthamerica.org/Ribes_californicum
-]
