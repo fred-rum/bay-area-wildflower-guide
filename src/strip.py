@@ -31,6 +31,8 @@ def strip_comments(to_filename, from_filename=None,
         txt = re.sub(r'"gallery\.', '"src/gallery.', txt)
 
     if not arg('-debug_js'):
+        # These days strip_comments() is called with -debug_js only for sw.js.
+        #
         # Match either a complete quoted string (which is returned
         # unchanged) or whitespace followed by a comment (which is
         # removed).

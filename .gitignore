@@ -31,7 +31,7 @@ new.pickle
 debug.log
 markers.*
 __pycache__/
-.in_progress/
+.photo_convert.txt
 data/cache.pickle
 data/core.pickle
 data/core_mini.pickle

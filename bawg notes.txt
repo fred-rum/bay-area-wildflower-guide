@@ -1617,6 +1617,3 @@ Once I can verify that every species has an xx declaration if it includes
       e.g. in case there is a shadow rank between the species and subspecies
     stop recursion at a real page in case it has its own descendents
       although this may run into limitations with what x/xx can do
-
-Remove working_path from files.py and photos.py
-  Requires moving convert.txt to a new location, e.g. .photo_convert.txt

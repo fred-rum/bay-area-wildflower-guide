@@ -5,6 +5,8 @@ from error import *
 from files import *
 from page import *
 
+convert_txt = root_path + "/.photo_convert.txt"
+
 old_thumb_set = get_file_set(f'thumbs', 'jpg')
 
 jpg_files = jpg_photos.union(jpg_figures)
@@ -14,13 +16,6 @@ jpg_files = jpg_photos.union(jpg_figures)
 # If a file is newer in photos than in thumbs, re-create it.
 # If a file exists in thumbs and not photos, delete it.
 # If a file is newer in thumbs than in photos, leave it unchanged.
-#
-# We manipulate thumbs in root_path instead of working_path because
-# not all files get re-created (normally just a small minority), and
-# it'd be a pain to merge the changes later.  Since thumbs aren't
-# compared to the previous version, the only disadvantage in not
-# using working_path is that some thumbs may disappear during the run,
-# and that is OK.
 for name in old_thumb_set:
     if name not in jpg_files:
         thumb_file = f'{root_path}/thumbs/' + name + '.jpg'
@@ -88,15 +83,15 @@ def cvt_irfanview(cmd):
     # so we don't have to create it ourselves.
 
     # Since every OS has a limit on how long the ocmmand line can be,
-    # we put the file list in convert.txt and then point IrfanView to
+    # we write the file list  a file and then point IrfanView to
     # that file.  IrfanView expects a newline to separate each file
     # in the list.
-    with open(working_path + "/convert.txt", "w") as w:
+    with open(convert_txt, "w") as w:
         for filename in mod_list:
             filename = convert_path_to_windows(filename)
             w.write(f'{filename}\n')
 
-    convert_list = convert_path_to_windows(f'{working_path}/convert.txt')
+    convert_list = convert_path_to_windows(convert_txt)
     thumb_glob = convert_path_to_windows(f'{root_path}/thumbs/*.jpg')
     cmd = [cmd,
            f'/filelist={convert_list}',
@@ -110,7 +105,9 @@ def cvt_irfanview(cmd):
         info(f'Generating {len(mod_list)} thumbnails with IrfanView:')
         info(' '.join(cmd))
 
-    subprocess.Popen(cmd).wait()
+    run(cmd)
+
+    os.remove(convert_txt)
 
 def cvt_imagemagick(cmd):
     # ImageMagick does not create the destination directory,
@@ -118,16 +115,16 @@ def cvt_imagemagick(cmd):
     mkdir('thumbs')
 
     # Since every OS has a limit on how long the ocmmand line can be,
-    # we put the file list in convert.txt and then point ImageMagick to
+    # we write the file list to a file and then point ImageMagick to
     # that file.  ImageMagick allows any whitespace to separate each file
     # in the list, so we surround each filename with double-quotes to
     # prevent a space in a filename from doing the wrong thing.
-    with open(working_path + "/convert.txt", "w") as w:
+    with open(convert_txt, "w") as w:
         for filename in mod_list:
             filename = convert_path_to_windows(filename)
             w.write(f'"{filename}"\n')
 
-    convert_list = convert_path_to_windows(f'{working_path}/convert.txt')
+    convert_list = convert_path_to_windows(convert_txt)
     thumb_path = convert_path_to_windows(f'{root_path}/thumbs')
     cmd.extend(
         ['-path', thumb_path,            # write files to thumbs directory
@@ -142,6 +139,8 @@ def cvt_imagemagick(cmd):
         info(' '.join(cmd))
 
     run(cmd)
+
+    os.remove(convert_txt)
 
 def cvt_magick(cmd):
     # ImageMagic7 is invoked with 'magick mogrify'.

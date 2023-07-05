@@ -32,45 +32,6 @@ if arg('-dir'):
 else:
     root_path = home_path
 
-# Create new files in the working_path.  This has a few advantages:
-# - Allow the user to continue browsing old files while updates are in
-#   progress.
-# - If the script crashes, the previous valid files remain in place so
-#   that the next run can compare against them and not against the files
-#   from the crashed run.
-working_path = root_path + '/.in_progress'
-
-shutil.rmtree(working_path, ignore_errors=True)
-
-def os_wait(fn, msg):
-    # shutil.rmtree theoretically waits for the operation to complete, but
-    # Windows apparently claims to be complete while the delete is still
-    # in progress, e.g. if the directory is locked because it is the working
-    # directory of a cmd shell.  If the problem is only brief, then we want
-    # to quietly wait it out.  If the problem continues, print a message to
-    # let the user know to either unlock the directory manually or kill the
-    # script.
-
-    tries = 0
-    complain_tries = 10
-    while True:
-        try:
-            tries += 1
-            fn()
-            break
-        except WindowsError as error:
-            if tries == complain_tries:
-                warn(msg)
-            time.sleep(0.1)
-    if tries > complain_tries:
-        warn(f'Completed in {tries} tries.')
-
-def mkdir_working():
-    os.mkdir(working_path)
-
-os_wait(mkdir_working,
-        'Having trouble removing the old .in_progress and making a new one...')
-
 def mkdir(dirname):
     try:
         os.mkdir(f'{root_path}/{dirname}')
