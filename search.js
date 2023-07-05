@@ -17,7 +17,14 @@ function gallery_main() {
     const href = e_link_list[i].href;
     if (href.startsWith(prefix + 'photos/') ||
         href.startsWith(prefix + 'figures/')) {
-      const suffix = href.substr(prefix.length);
+      var suffix = decodeURI(href.substr(prefix.length));
+      suffix = suffix.replace(/[/ ,]/g, function (c) {
+        return {
+          '/': '-',
+          ' ': '-',
+          ',': '.'
+        }[c];
+      });
       const suffix_query = encodeURIComponent(decodeURI(suffix));
       e_link_list[i].href = prefix + 'gallery.html?' + suffix;
     } else {

@@ -63,8 +63,17 @@ function gallery_main() {
     const href = e_link_list[i].href;
     if (href.startsWith(prefix + 'photos/') ||
         href.startsWith(prefix + 'figures/')) {
-      const suffix = href.substr(prefix.length);
+      var suffix = decodeURI(href.substr(prefix.length));
       console.log('annotating link to', suffix);
+
+      /* Avoid excessive percent encoding by switching out common characters. */
+      suffix = suffix.replace(/[/ ,]/g, function (c) {
+        return {
+          '/': '-',
+          ' ': '-',
+          ',': '.'
+        }[c];
+      });
 
       /* The path to the photo has different encoding requirements when
          moved to the search component of the URL. */

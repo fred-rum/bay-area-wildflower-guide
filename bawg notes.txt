@@ -1595,21 +1595,6 @@ I'm tempted to allow the arrows on the photo gallery to rotate continue
 count cultivated and out-of-area observations as long as they aren't promoted
   (above species level)
 
-automatically git-mv or mv photos to names with '-' instead of spaces
-  for both photos and thumbnails
-  report conflicts if something is already at that name
-    e.g. by not performing the action but instead reporting with error()
-  while you're at it, fix up filenames that end with ,.jpg or ,-*.jpg
-    e.g. by naming them ",1", ",2", etc.
-    if that would collide with another name, extend the previous extension,
-      e.g. ",1a" or even ",0".
-  match names to pages appropriately
-and change ',' to '.'
-  change Lightroom export settings for future exports
-  change script to recognize '.' instead of ',' for jpg suffixes
-    e.g. parsing of "==", "rep:", etc.
-  update documentation to match
-
 Change common names to add or delete hyphens as desired
   especially where it makes multiple related taxons more consistent
 
@@ -1632,3 +1617,6 @@ Once I can verify that every species has an xx declaration if it includes
       e.g. in case there is a shadow rank between the species and subspecies
     stop recursion at a real page in case it has its own descendents
       although this may run into limitations with what x/xx can do
+
+Remove working_path from files.py and photos.py
+  Requires moving convert.txt to a new location, e.g. .photo_convert.txt

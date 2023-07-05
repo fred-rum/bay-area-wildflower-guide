@@ -71,8 +71,11 @@ var win_x, win_y;
 /* This script is loaded with the 'defer' property, so the DOM is guaranteed
    to be ready when the script executes. */
 function main() {
-  /* Initialize each potential gallery photo, in particular adding
-     Javascript to intercept a click on any of the page's thumbnails. */
+  /* Extract the encoded photo path from the 'search' portion of the URL
+     (after the '?'), then find the page with a matching path.
+     Note that the encoded path has a few character substitutions to avoid
+     percent encoding.  I.e. '/' and ' ' are encoded as '-', and ',' is
+     encoded as '.' */
   var first_photo_name = window.location.search;
   if (first_photo_name) {
     first_photo_name = decodeURIComponent(first_photo_name.substring(1))
@@ -80,38 +83,65 @@ function main() {
     first_photo_name = 'invalid'
   }
 
+  var is_in_photos = first_photo_name.startsWith('photos')
+
   for (var i = 0; i < pages.length; i++) {
+    /* Each entry in pages[] is a list.
+
+       The first list entry is the name of the page that includes
+       one or more photos.
+
+       The remainder of the list has the relative path to each file
+       associated with the page.  But if the photo is in the 'photos'
+       subdirectory, then the following optimizations reduce the size of
+       the string to save bandwidth:
+       - 'photos/' at the beginning of the file path is removed.
+       - if the base name of the file is the same as the previous base name,
+         it is omitted, along with the following comma.  The initial base name
+         is taken to be the page name.
+      - '.jpg' at the end of the file path is removed.
+      The best optimized relative path is reduced down to just the photo
+      suffix.  If this suffix is just a decimal number, it is encoded as
+      a Javascript number instead of a string to avoid spending bandwidth on
+      qutation marks.
+    */
     var list = pages[i];
 
-    /* Generate the page title from the name with proper spaces in it. */
     var page_name = list[0];
+    var base_name = page_name;
 
-    /* The first item in the list is the page name.  In many cases, this also
-       serves as the base name for photos, requiring only a directory name
-       and photo suffix for each photo. */
-    var base_name = list[0];
-
+    /* Build up the list of photo URLs (relative photo paths) for all photos
+       associated with a page; if any of them match the first_photo_name,
+       the gallery will include all of these. */
     var photo_urls = [];
+
     var match_idx = 0;
     for (var j = 1; j < list.length; j++) {
       var photo_name = String(list[j]);
-      if (!photo_name.startsWith('figures/')) {
+
+      if (is_in_photos) {
         var comma_pos = photo_name.search(',');
         if (comma_pos == -1) {
+          /* Expand the photo name from the existing base name. */
           photo_name = base_name + ',' + photo_name;
         } else {
+          /* The photo name is complete and includes a new base name. */
           base_name = photo_name.substring(0, comma_pos);
         }
-        if (photo_name.search('/') == -1) {
-          photo_name = 'photos/' + photo_name;
-        }
-        if (!photo_name.endsWith('.jpg')) {
-          photo_name =  photo_name + '.jpg';
-        }
+        photo_name = 'photos/' + photo_name;
+        photo_name =  photo_name + '.jpg';
       }
+
       photo_urls.push(photo_name);
 
+      /* The photo path from the list is re-encoded in the same way as the
+         one extracted from the URL before checking for a match. */
+      var photo_name = munge_path(photo_name);
+      console.log(photo_name);
+
       if (first_photo_name == photo_name) {
+        /* Remember which photo on the page had the match, then continue
+           through the page's list to finish populating photo_urls. */
         match_idx = j;
       }
     }
@@ -122,7 +152,7 @@ function main() {
   }
 
   if (i == pages.length) {
-    /* no match, so just display the named photo by itself. */
+    /* no match, so just make something up that will probably fail to display */
     page_name = first_photo_name;
     photo_urls = [first_photo_name];
     match_idx = 1;
@@ -497,6 +527,16 @@ function fn_wheel(event) {
   } else if (event.deltaX > 0) {
     obj_photo.go_right();
   }
+}
+
+function munge_path(path) {
+  return path.replace(/[/ ,/]/g, function (c) {
+    return {
+      '/': '-',
+      ' ': '-',
+      ',': '.'
+    }[c];
+  });
 }
 
 function Photo(i, url_full) {
@@ -978,9 +1018,10 @@ Photo.prototype.go_right = function() {
 }
 
 Photo.prototype.save_state = function() {
-  var url = window.location.pathname + '?' + encodeURIComponent(this.url_full);
+  const munged_url = munge_path(this.url_full);
+  const url = window.location.pathname + '?' + encodeURIComponent(munged_url);
 
-  var state = {
+  const state = {
     'fit': this.fit,
     'img_x': this.img_x,
     'cx': this.cx,

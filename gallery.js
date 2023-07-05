@@ -24,29 +24,27 @@ function main() {
   } else {
     first_photo_name = 'invalid'
   }
+  var is_in_photos = first_photo_name.startsWith('photos')
   for (var i = 0; i < pages.length; i++) {
     var list = pages[i];
     var page_name = list[0];
-    var base_name = list[0];
+    var base_name = page_name;
     var photo_urls = [];
     var match_idx = 0;
     for (var j = 1; j < list.length; j++) {
       var photo_name = String(list[j]);
-      if (!photo_name.startsWith('figures/')) {
+      if (is_in_photos) {
         var comma_pos = photo_name.search(',');
         if (comma_pos == -1) {
           photo_name = base_name + ',' + photo_name;
         } else {
           base_name = photo_name.substring(0, comma_pos);
         }
-        if (photo_name.search('/') == -1) {
-          photo_name = 'photos/' + photo_name;
-        }
-        if (!photo_name.endsWith('.jpg')) {
-          photo_name =  photo_name + '.jpg';
-        }
+        photo_name = 'photos/' + photo_name;
+        photo_name =  photo_name + '.jpg';
       }
       photo_urls.push(photo_name);
+      var photo_name = munge_path(photo_name);
       if (first_photo_name == photo_name) {
         match_idx = j;
       }
@@ -275,6 +273,15 @@ function fn_wheel(event) {
   } else if (event.deltaX > 0) {
     obj_photo.go_right();
   }
+}
+function munge_path(path) {
+  return path.replace(/[/ ,/]/g, function (c) {
+    return {
+      '/': '-',
+      ' ': '-',
+      ',': '.'
+    }[c];
+  });
 }
 function Photo(i, url_full) {
   this.i = i;
@@ -531,8 +538,9 @@ Photo.prototype.go_right = function() {
   }
 }
 Photo.prototype.save_state = function() {
-  var url = window.location.pathname + '?' + encodeURIComponent(this.url_full);
-  var state = {
+  const munged_url = munge_path(this.url_full);
+  const url = window.location.pathname + '?' + encodeURIComponent(munged_url);
+  const state = {
     'fit': this.fit,
     'img_x': this.img_x,
     'cx': this.cx,
