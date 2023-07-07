@@ -24,7 +24,6 @@ function main() {
   } else {
     first_photo_name = 'invalid'
   }
-  var is_in_photos = first_photo_name.startsWith('photos')
   for (var i = 0; i < pages.length; i++) {
     var list = pages[i];
     var page_name = list[0];
@@ -33,7 +32,7 @@ function main() {
     var match_idx = 0;
     for (var j = 1; j < list.length; j++) {
       var photo_name = String(list[j]);
-      if (is_in_photos) {
+      if (!photo_name.includes('/')) {
         var comma_pos = photo_name.search(',');
         if (comma_pos == -1) {
           photo_name = base_name + ',' + photo_name;
@@ -44,7 +43,7 @@ function main() {
         photo_name =  photo_name + '.jpg';
       }
       photo_urls.push(photo_name);
-      var photo_name = munge_path(photo_name);
+      var photo_name = munge_photo_for_url(photo_name);
       if (first_photo_name == photo_name) {
         match_idx = j;
       }
@@ -274,14 +273,24 @@ function fn_wheel(event) {
     obj_photo.go_right();
   }
 }
-function munge_path(path) {
-  return path.replace(/[/ ,/]/g, function (c) {
+function munge_photo_for_url(path) {
+  var slash_pos = path.indexOf('/')
+  if (slash_pos != -1) {
+    path = path.substring(slash_pos+1);
+  }
+  var dot_pos = path.indexOf('.')
+  if (dot_pos != -1) {
+    path = path.substring(0, dot_pos);
+  }
+  path = path.replace(/[/ ,/]/g, function (c) {
     return {
       '/': '-',
       ' ': '-',
       ',': '.'
     }[c];
   });
+  path = path.replace(/[^A-Za-z0-9-.]/g, '');
+  return path;
 }
 function Photo(i, url_full) {
   this.i = i;
@@ -538,8 +547,8 @@ Photo.prototype.go_right = function() {
   }
 }
 Photo.prototype.save_state = function() {
-  const munged_url = munge_path(this.url_full);
-  const url = window.location.pathname + '?' + encodeURIComponent(munged_url);
+  const munged_url = munge_photo_for_url(this.url_full);
+  const url = window.location.pathname + '?' + munged_url;
   const state = {
     'fit': this.fit,
     'img_x': this.img_x,

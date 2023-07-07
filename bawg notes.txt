@@ -1575,14 +1575,9 @@ There's no way to recognize when iNaturalist's common name is updated.
   Or must I occasionally expire and re-fetch the API data?
   e.g. "desert poppies"
 
-california golden chanterelle is listed both under family Hydnaceae
-  and class Agaricomycetes
-
-more gallery keys:
+more gallery key bindings:
   home for first photo (or default zoom and position?)
   end for last photo (or maximum zoom?)
-
-2023-4-9 Sweeney Ridge is missing most keywords in Lightroom
 
 spineflowers needs key
 
@@ -1595,7 +1590,7 @@ I'm tempted to allow the arrows on the photo gallery to rotate continue
 count cultivated and out-of-area observations as long as they aren't promoted
   (above species level)
 
-Change common names to add or delete hyphens as desired
+Manually change common names to add or delete hyphens as desired
   especially where it makes multiple related taxons more consistent
 
 The default_completeness property needs more options:

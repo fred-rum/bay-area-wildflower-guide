@@ -18,18 +18,31 @@ function gallery_main() {
     if (href.startsWith(prefix + 'photos/') ||
         href.startsWith(prefix + 'figures/')) {
       var suffix = decodeURI(href.substr(prefix.length));
-      suffix = suffix.replace(/[/ ,]/g, function (c) {
-        return {
-          '/': '-',
-          ' ': '-',
-          ',': '.'
-        }[c];
-      });
-      const suffix_query = encodeURIComponent(decodeURI(suffix));
+      suffix = munge_photo_for_url(suffix);
+      const suffix_query = encodeURIComponent(suffix);
       e_link_list[i].href = prefix + 'gallery.html?' + suffix;
     } else {
     }
   }
+}
+function munge_photo_for_url(path) {
+  var slash_pos = path.indexOf('/')
+  if (slash_pos != -1) {
+    path = path.substring(slash_pos+1);
+  }
+  var dot_pos = path.indexOf('.')
+  if (dot_pos != -1) {
+    path = path.substring(0, dot_pos);
+  }
+  path = path.replace(/[/ ,/]/g, function (c) {
+    return {
+      '/': '-',
+      ' ': '-',
+      ',': '.'
+    }[c];
+  });
+  path = path.replace(/[^A-Za-z0-9-.]/g, '');
+  return path;
 }
 gallery_main();
 var ac_is_hidden = true;

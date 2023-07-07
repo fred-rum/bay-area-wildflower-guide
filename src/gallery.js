@@ -83,8 +83,6 @@ function main() {
     first_photo_name = 'invalid'
   }
 
-  var is_in_photos = first_photo_name.startsWith('photos')
-
   for (var i = 0; i < pages.length; i++) {
     /* Each entry in pages[] is a list.
 
@@ -119,7 +117,7 @@ function main() {
     for (var j = 1; j < list.length; j++) {
       var photo_name = String(list[j]);
 
-      if (is_in_photos) {
+      if (!photo_name.includes('/')) {
         var comma_pos = photo_name.search(',');
         if (comma_pos == -1) {
           /* Expand the photo name from the existing base name. */
@@ -136,8 +134,7 @@ function main() {
 
       /* The photo path from the list is re-encoded in the same way as the
          one extracted from the URL before checking for a match. */
-      var photo_name = munge_path(photo_name);
-      console.log(photo_name);
+      var photo_name = munge_photo_for_url(photo_name);
 
       if (first_photo_name == photo_name) {
         /* Remember which photo on the page had the match, then continue
@@ -529,14 +526,34 @@ function fn_wheel(event) {
   }
 }
 
-function munge_path(path) {
-  return path.replace(/[/ ,/]/g, function (c) {
+/* This function must exactly match what is in search.js. */
+function munge_photo_for_url(path) {
+  /* Remove directory name, e.g. 'photos/'. */
+  var slash_pos = path.indexOf('/')
+  if (slash_pos != -1) {
+    path = path.substring(slash_pos+1);
+  }
+
+  /* Remove extension, e.g. '.jpg'. */
+  var dot_pos = path.indexOf('.')
+  if (dot_pos != -1) {
+    path = path.substring(0, dot_pos);
+  }
+
+  /* Convert common characters that must be percent-encoded to characters
+     that are allowed after the '?' in the URL. */
+  path = path.replace(/[/ ,/]/g, function (c) {
     return {
       '/': '-',
       ' ': '-',
       ',': '.'
     }[c];
   });
+
+  /* Remove characters that must be percent-encoded. */
+  path = path.replace(/[^A-Za-z0-9-.]/g, '');
+
+  return path;
 }
 
 function Photo(i, url_full) {
@@ -1018,8 +1035,8 @@ Photo.prototype.go_right = function() {
 }
 
 Photo.prototype.save_state = function() {
-  const munged_url = munge_path(this.url_full);
-  const url = window.location.pathname + '?' + encodeURIComponent(munged_url);
+  const munged_url = munge_photo_for_url(this.url_full);
+  const url = window.location.pathname + '?' + munged_url;
 
   const state = {
     'fit': this.fit,

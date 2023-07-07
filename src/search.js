@@ -66,18 +66,12 @@ function gallery_main() {
       var suffix = decodeURI(href.substr(prefix.length));
       console.log('annotating link to', suffix);
 
-      /* Avoid excessive percent encoding by switching out common characters. */
-      suffix = suffix.replace(/[/ ,]/g, function (c) {
-        return {
-          '/': '-',
-          ' ': '-',
-          ',': '.'
-        }[c];
-      });
+      /* Simplify the URL in case the user looks at it. */
+      suffix = munge_photo_for_url(suffix);
 
       /* The path to the photo has different encoding requirements when
          moved to the search component of the URL. */
-      const suffix_query = encodeURIComponent(decodeURI(suffix));
+      const suffix_query = encodeURIComponent(suffix);
 
       /* Replace the href to point to the gallery. */
       e_link_list[i].href = prefix + 'gallery.html?' + suffix;
@@ -85,6 +79,36 @@ function gallery_main() {
       console.log('not annotating link to', href);
     }
   }
+}
+
+/* This function must exactly match what is in gallery.js. */
+function munge_photo_for_url(path) {
+  /* Remove directory name, e.g. 'photos/'. */
+  var slash_pos = path.indexOf('/')
+  if (slash_pos != -1) {
+    path = path.substring(slash_pos+1);
+  }
+
+  /* Remove extension, e.g. '.jpg'. */
+  var dot_pos = path.indexOf('.')
+  if (dot_pos != -1) {
+    path = path.substring(0, dot_pos);
+  }
+
+  /* Convert common characters that must be percent-encoded to characters
+     that are allowed after the '?' in the URL. */
+  path = path.replace(/[/ ,/]/g, function (c) {
+    return {
+      '/': '-',
+      ' ': '-',
+      ',': '.'
+    }[c];
+  });
+
+  /* Remove characters that must be percent-encoded. */
+  path = path.replace(/[^A-Za-z0-9-.]/g, '');
+
+  return path;
 }
 
 /* This call has to be after all gallery-related function definitions.
