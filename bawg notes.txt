@@ -1581,7 +1581,7 @@ more gallery key bindings:
 
 spineflowers needs key
 
-I'm tempted to allow the arrows on the photo gallery to rotate continue
+I'm tempted to allow the arrows on the photo gallery to rotate
     past the end and back to the beginning
   but they should be marked so that the boundary is recognizable
     e.g. by pointing the usual V arrow at a vertical line
@@ -1612,3 +1612,19 @@ Once I can verify that every species has an xx declaration if it includes
       e.g. in case there is a shadow rank between the species and subspecies
     stop recursion at a real page in case it has its own descendents
       although this may run into limitations with what x/xx can do
+
+allow typos in search:
+  hard case: next letter in search_str is found late in match_str,
+    causing the search to fail
+  how do I figure out which search_str character to skip over to allow an
+    earlier match?
+  perhaps limit how far ahead the search can skip without punctuation
+    then the problem only occurs after punctuation in search_str
+    which would still be annoying
+    but perhaps limits the retry recursion space
+  can I make use of the built-in regex facilities to find the best match?
+    that still doesn't allow error characters
+  https://stackoverflow.com/questions/23305000/javascript-fuzzy-search-that-makes-sense
+  as each character is found, check whether the remaining characters exist
+    if not, skip the next search character and try again
+    but that still has trouble if there is a second incorrect character

@@ -1,0 +1,65 @@
+com:n/a
+sci:genus Lessingia
+x:ba
+
+[
+<h3>yellow corolla</h3>
+
+==spring lessingia:L. tenuis
+color: yellow
+. <b>3--25 flowers</b>
+. corolla yellow with purple-brown band inside
+.. peripheral flowers may have pink or purplish corolla
+. glands on stem and phyllaries
+.. cauline leaves generally glandless
+. phyllary tips +- purple
+
+==valley lessingia:L. pectinata
+. <b>15--30 flowers</b>
+. corolla yellow with purple-brown band inside
+. glands on cauline leaves
+. phyllary tips generally green
+
+==san francisco lessingia:L. germanorum
+. 20--40 flowers
+. corolla yellow with purple-brown band inside
+. <b>plant generally glandless</b> (rarely with sparse glands on phyllaries)
+.. all others have glands somewhere
+
+==valley vinegar weed:L. glandulifera
+acom:valley lessingia
+. 10--30 flowers
+. <b>corolla entirely yellow</b>
+. generally with sessile glands on leaf margins, phyllary tips
+
+]
+[
+<h3>lavender or white corolla</h3>
+
+==slenderstem lessingia:L. nemaclada
+. 3--10 flowers
+. corolla generally white (occasionally pale lavender) with darker tube
+. phyllaries generally hairless (rarely sparsely hairy)
+. cauline leaves with sunken glands (and occasionally sessile and/or stalked glands)
+
+==mount tamalpais lessingia:L. micradenia
+. 3--10 flowers
+. corolla white to pale lavender with darker tube
+. phyllaries generally hairless (rarely sparsely hairy)
+. cauline leaves glandless (occasionally with sparse stalked glands)
+
+==crystal springs lessingia:L. arachnoidea
+. 8--18 flowers
+. corolla pink to lavender with darker tube
+. phyllaries cobwebby tomentose
+. caulline leaves glandless
+. involucre 4--8 mm long
+
+==woollyhead lessingia:L. hololeuca
+. 10--20 flowers
+. corolla lavender with darker tube
+. phyllaries cobwebby tomentose
+. caulline leaves glandless
+. involucre 8--13 mm long
+
+]

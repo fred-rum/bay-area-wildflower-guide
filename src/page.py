@@ -410,6 +410,7 @@ class Page:
             page_array.append(self)
 
         # initial/default values
+        self.taxon_id = None # iNaturalist taxon ID (stored as a string)
         self.com = None
         self.no_com = False # true if the page will never have a common name
         self.com_checked = False # true after no_com has checked a shadow page
@@ -597,7 +598,6 @@ class Page:
         #   subset_list_name
         self.subset_of_page = None
 
-        self.taxon_id = None # iNaturalist taxon ID (stored as a string)
         self.bugguide_id = None # BugGuide.net ID (stored as a string)
         self.gallformers_id = None # gallformers.org (stored as a string)
         self.obs_n = 0 # number of observations

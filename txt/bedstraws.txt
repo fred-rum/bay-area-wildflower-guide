@@ -47,7 +47,6 @@ color: white
 
 ==fragrant bedstraw:G. triflorum
 color: white
-<b>Caution: ID unsure</b>
 . habit: perennial herb, <b>generally decumbent</b>, radiating from base, glabrous to +- scabrous
 . stem: 20--76 cm
 . leaf: <b>in whorls of 6</b>, generally parallel to ground, 6--38 mm, ovate to obovate; tip acute to acuminate, occasionally small-pointed

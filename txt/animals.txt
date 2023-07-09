@@ -27,7 +27,9 @@ end_hierarchy
 do member_com_simple: self-species
 
 ==segmented worms:phylum Annelida
+end_hierarchy
 do member_com_simple: self-species
 
 ==true jellies
+end_hierarchy
 do member_com_simple: self-species

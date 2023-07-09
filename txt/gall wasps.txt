@@ -76,3 +76,9 @@ gall:1147
 bug:847685
 gall:1364
 . parasitizes {-california scrub oak}, {-nuttall's scrub oak}, {-blue oak}, {-leather oak}, and {-valley oak}.
+
+==catsear gall wasp:Phanacis hypochoeridis
+bug:n/a
+gall:1489
+x:No other wasps in this genus are known to be introduced in California.
+. parasitizes {-common cat's-ear}

@@ -5,11 +5,16 @@ bug:192
 
 ==ladies and related admirals:Vanessa spp.
 
-==fritillaries and longwings:subfamily Heliconiinae
-. forewings are elongated tipwards
+==lorquin's admiral:Limenitis lorquini
+bug:5757
+See also the similar {-california sister}.
 
 ==california sister:Adelpha californica
 bug:13494
+See also the similar {-lorquin's admiral}.
+
+==fritillaries and longwings:subfamily Heliconiinae
+. forewings are elongated tipwards
 
 ==gray buckeye: Junonia grisea
 bug:516
