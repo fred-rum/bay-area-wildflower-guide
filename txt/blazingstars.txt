@@ -1,6 +1,8 @@
 sci:genus Mentzelia
 x:hist
 
+Parasitized by {-Asphondylia mentzeliae}.
+
 ==lindley's blazingstar:Mentzelia lindleyi
 color: yellow
 . <b>petals 20--40 mm</b>

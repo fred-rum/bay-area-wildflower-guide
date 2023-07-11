@@ -24,6 +24,7 @@ species: abrams' liveforever
 . leaves 0.8--3 &times; longer than wide
 
 ==coast dudleya:D. caespitosa
+color:yellow
 . petals bright yellow
 . plant 8--32 cm wide
 . leaves 3--10 &times; longer than wide

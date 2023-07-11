@@ -1,0 +1,10 @@
+acom:evening primroses, sundrops, and beeblossoms
+sci:genus Oenothera
+x:rare
+
+==tall evening primrose:O. elata
+color: yellow
+. yellow corolla
+
+==mexican evening primrose:O. speciosa
+. pink corolla

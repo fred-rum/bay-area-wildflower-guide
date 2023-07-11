@@ -34,3 +34,8 @@ bug:n/a
 gall:3628
 sci_i:n/a
 . parasitizes {-arroyo willow} and related {-willows}
+
+==Asphondylia mentzeliae
+bug:n/a
+gall:1911
+. parasitizes the flower bud of {-Mentzelia}

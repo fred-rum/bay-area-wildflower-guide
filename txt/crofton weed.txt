@@ -4,3 +4,5 @@ color: white
 
 genus: snakeroots
 x:ba
+
+Another species in the genus, Ageratina altissima, causes milk sickness when dairy animals eat the plant and the toxin accumulates in the milk.  This killed thousands of midwesterners in the early 1800's before the cause was determined, including Nancy Lincoln, mother of Abraham Lincoln.  It is unclear to me whether other species are incapable of the same feat, or if modern grazing care simply prevent them from having the opportunity.

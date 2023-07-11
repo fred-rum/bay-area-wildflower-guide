@@ -1,0 +1,10 @@
+sci:genus Cakile
+x:ca
+
+==european searocket:C. maritima
+color:pale purple
+. petals 3--6 mm wide
+
+==american searocket:C. edentula
+. petals < 3 mm wide or no petals
+. native to the east coast

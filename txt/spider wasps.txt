@@ -1,0 +1,5 @@
+sci:family Pompilidae
+bug:3919
+
+==western red-tailed spider wasp:Tachypompilus unicolor
+bug:69665

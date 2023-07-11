@@ -73,3 +73,9 @@ bug:270868
 gall:n/a
 . lerps aren't actually galls, and they can easily be brushed off the host's surface
 . parasitizes {-river redgum} and {-forest red gum} by preference, but also parasitizes other {-Eucalyptus}.
+
+<h3>blazingstars</h3>
+
+==n/a:Asphondylia mentzeliae
+genus:n/a
+. parasitizes the flower bud of {-Mentzelia}

@@ -26,8 +26,7 @@ bug:41362
 .. head broader than the thorax
 . males (winged) ...
 
-==spider wasps:family Pompilidae
-bug:3919
+==spider wasps
 
 ==braconid wasps:family Braconidae
 bug:170

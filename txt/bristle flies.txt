@@ -4,3 +4,6 @@ bug:197
 Characterized by a prominent subscutellum.
 
 See the reference in {-blow flies} for more information.
+
+==n/a:genus Gymnosoma
+bug:4330

@@ -25,7 +25,7 @@ color: pink, red purple
 ==ground rose:R. spithamea
 color: red purple
 . <b>dwarf shrub, generally < 50 cm</b>
-. <b>prickles 3--8(12) mm, generally slender (thick-based), +- straight</b> [example,-2]
+. <b>prickles 3--8(12) mm, generally slender (thick-based), +- straight</b> [example,8]
 . leaf axis generally glabrous (finely hairy), glandular
 . leaflets 5--7(9), (+-) glabrous
 . sepals generally glandular, entire

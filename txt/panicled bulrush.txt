@@ -1,0 +1,4 @@
+sci:Scirpus microcarpus
+x:rare
+color:other
+genus:scirpus bulrushes
