@@ -1,0 +1,12 @@
+sci:genus Allophyllum
+
+==purple false gilia:Allophyllum gilioides
+color: purple
+xx:more
+. corolla dark blue-purple
+. widest leaves or leaf lobes 2--4 mm wide
+
+==purple false gilia:Allophyllum divaricatum
+xx:any
+. oorolla tube red-purple, lobes pink
+. widest leaves or leaf lobes 3--15 mm wide

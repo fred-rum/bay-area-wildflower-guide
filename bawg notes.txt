@@ -1532,6 +1532,8 @@ Advanced search:
   a search for a tag (e.g. 'purple flowers') or month or park goes to the
     'advanced search' page
   as does a search with no results
+  as does a link at the bottom of the autocomplete box,
+    similar to the search box in iNaturalist
   if a simple search is performed on a tag, the tag is added to the
     original page's taxon (if any) in the advanced search results
   pages.js (or a variant) lists all taxons in hierarchy format
@@ -1578,6 +1580,7 @@ There's no way to recognize when iNaturalist's common name is updated.
 more gallery key bindings:
   home for first photo (or default zoom and position?)
   end for last photo (or maximum zoom?)
+  return to go back
 
 spineflowers needs key
 
@@ -1628,3 +1631,5 @@ allow typos in search:
   as each character is found, check whether the remaining characters exist
     if not, skip the next search character and try again
     but that still has trouble if there is a second incorrect character
+  some URLs to Javascript fuzzy search libraries here:
+    https://www.geeksforgeeks.org/fuzzy-search-in-javascript/

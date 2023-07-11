@@ -5,6 +5,7 @@ x:ca
 color: purple
 . corolla 3--5 cm wide
 . leaf blade +- 7 cm
+.. leaf blade base is broader than the tip
 . common throughout the bay area
 
 ==lesser periwinkle:V. minor
@@ -12,5 +13,6 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0105+2539
 sci_j:n/a
 . corolla 2--3 cm wide
 . leaf 2--4.5 cm long
+.. leaf blade base is rounded about the same as the tip
 . scattered sparsely throughout the bay area, generally near civilization
-
+; Known in Italian as the "flower of death" because it was used to adorn the heads of those to be executed ^https://landscapeplants.oregonstate.edu/plants/vinca-minor

@@ -1,6 +1,7 @@
 xx:ca
 
 ==n/a:Ribes malvaceum var. malvaceum
+warn obs_requires_photo: none # ID unsure
 sci_F:n/a
 . leaf blade adaxially dull olive-green
 . found in the bay area
