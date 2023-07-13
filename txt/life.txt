@@ -21,9 +21,14 @@ warn one_child: species
 do obs_promotion: self-below
 
 # Count observations outside the bay area, but only if they match a bay area
-# species.  If the species isn't known, don't count it at any level.
+# wild species.  If the species isn't known, don't count it at any level.
 do outside_obs: species-below
 do outside_obs_promotion: species-below
+
+# Count casual observations, but only if they match a bay area wild species.
+# If the species isn't known, don't count it at any level.
+do casual_obs: species-below
+do casual_obs_promotion: species-below
 
 # every observation with a reasonably good ID is expected to find a page.
 # reasonably good is defined here as genus, species, or below

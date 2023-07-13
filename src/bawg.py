@@ -589,7 +589,7 @@ def read_observation_data(f):
         else:
             error(park, prefix='Parks not found:')
             short_park = park
-            loc = 'bay area'
+            loc = 'unknown'
 
         date = get_field('observed_on')
         month = int(date.split('-')[1], 10) - 1 # January = month 0
@@ -665,21 +665,19 @@ def read_observation_data(f):
         if page != orig_page:
             # The page got promoted.
 
+            # The following code mostly decides whether to complain about the
+            # promotion.  Any code path that results in a "pass" statement
+            # means that no complaint should be issued.
             if loc != 'bay area':
                 # We never complain if an observation outside the bay area
-                # isn't in the guide.  However, we ignore the promoted
-                # observation if the outside_obs_promotion does not apply
-                # or if the page is promoted past its peers.
-                if page.rp_do('outside_obs_promotion') and not page.child:
-                    pass
-                else:
-                    continue
+                # isn't in the guide.
+                pass
             elif orig_page.rank_unknown:
                 # If an observation has an unknown rank, then we always
                 # promote it without complaint.
                 pass
             elif orig_page.has_real_linnaean_descendants():
-                # If the observation's original page has real Linnaean
+                # If the observation's original (shadow) page has real Linnaean
                 # descendants, then we don't know what it is, but it could
                 # be something we've documented, so it's always OK.
                 #print(f'{orig_page.full()} has real descendents')
@@ -706,8 +704,15 @@ def read_observation_data(f):
                 page.rp_check('obs_promotion',
                               f'{orig_page.full()} observation promoted to {page.full()}')
 
+            # Now check whether the observation should be counted.
             if not page.rp_action('obs_promotion', 'do'):
                 continue
+            if (loc != 'bay area'
+                and (not page.rp_do('outside_obs_promotion') or page.child)):
+                    continue
+            if (rg == 'casual'
+                and (not page.rp_do('casual_obs_promotion') or page.child)):
+                    continue
 
 
         page.obs_n += 1
