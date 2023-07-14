@@ -1,146 +1,220 @@
 bay area:
-- Russian Ridge
-- Huddart
-- Cañada del Oro
-- Coyote Lake
-- Windy Hill
-- Coal Mine Ridge
-- Butano
-- Henry Coe
-- {Henry Coe: Henry W. Coe}
-- {Coyote Lake: Harvey Bear}
-- Sanborn
-- Ed Levin
-- {Ed Levin: Ed R. Levin}
-- Sweeney Ridge
-- Picchetti
-- Monte Bello
-- Los Trancos
-- Henry Cowell
-- Skyline Blvd
-- Mt. Madonna
-- Dry Creek Pioneer
-- San Bruno Mountain
-- Montebello Road
-- Coyote Ridge
-- Rancho San Antonio
-- Calero
-- Edgewood
-- Nisene Marks
-- Carmelite Monastery
-- Pescadero Creek
-- Big Basin
-- {Big Basin: Hwy 236}
-- Mt. Tamalpais Watershed
-- Mt. Tamalpais
-- El Corte de Madera
-- Fremont Older
-- Foothills
-- Santa Teresa
-- Skyline Ridge
-- Arastradero
-- Golden Gate National Recreation Area
-- Quicksilver
-- Pacific Grove
-- Crockett Hills
-- Mt. Umunhum
-- Sierra Azul
-- Purisima Creek
-- Salinas River
-- San Tomas Aquino Creek Trail
-- Long Ridge
-- Sierra Vista
-- Novitiate Park
-- Castle Rock
-- Alum Rock
-- Crystal Springs Regional Trail
-- Garin
-- {Reinhardt Redwood: Redwood Regional}
-- Reinhardt Redwood
-- Sibley Volcanic
-- Huckleberry Botanic
-- {Grant: Joseph Grant}
-- {Grant: Joseph D. Grant}
-- {Grant: Grant Park}
-- Five Canyons
-- Point Lobos
-- Wilder Ranch
-- {Wilder Ranch: Four Miles Beach}
-- Coyote Creek
-- Sunol
-- {Henry Cowell: Roaring Camp}
-- Bay Trail
-- {Bay Trail: Twin Creeks Sports Complex}
-- {Bay Trail: Jagel Slough}
-- Portola Redwoods
-- El Sereno
-- Vasona Lake
-- Natural Bridges
-- Coal Creek
-- Hood Mountain
-- Mt. Diablo
-- Alpine Rd.
-- {Alpine Rd.: Alpine Road}
-- Wunderlich
-- Stevens Creek Trail
-- Upper Stevens Creek
-- {Stevens Creek: "Steven's Creek County Park"}
-- {Stevens Creek: Stevens Creek County Park}
-- {Stevens Creek: Stevens Creek CP}
-- Sam McDonald
-- Joaquin Miller
-- Phleger
-- Mission Peak
-- {Mission Peak: Ohlone College}
-- Coyote Hills
-- Pleasanton Ridge
-- {Pleasanton Ridge: Augustin Bernal Park}
-- Don Edwards
-- Pogonip
-- Lexington Reservoir
-- La Honda Creek
-- Saratoga Gap
-- Point Bonita
-- Monterey Bay Coastal Trail
-- DeLaveaga
-- San Pedro Valley
-- Lake Chabot
-- Pulgas Water Temple
-- Elkhorn Slough
-- Del Valle
-- Pulgas Ridge
-- Alviso Slough
-- Loch Lomond
-- Alameda Creek Trail
-- Montara Mountain
-- {Montara Mountain: Gray Whale Cove}
-- {Montara Mountain: McNee Ranch}
-- {Montara Mountain: Montara Mtn.}
-- Yerba Buena
-- {Marin Headlands: Hawk Hill}
-- Bear Creek Redwoods
-- Waterdog
-- {Waterdog: Water Dog}
-- Alpine Road
-- Coyote Valley
-- Guadalupe River Trail
-- Pacheco
-- Dimond Canyon
-- Murray Ranch
-- Marin Headlands
-- Shannon Valley
-- Santa Clara Central Park
-- Los Gatos Creek Trail
 
-- Santa Clara, CA
-- Santa Cruz, CA
-- Cupertino, CA
-- Saratoga, CA
-- Los Altos Hills, CA
-- {"Fremont, CA": "Fremont Blvd., Fremont, CA"}
-- San Jose, CA
-- {"San Jose, CA": "Rd., San Jose, CA"}
-- {"San Jose, CA": "Almaden Reservoir"}
+# Midpeninsula Regional Open Space District
+- Bear Creek Redwoods; OSP
+- Coal Creek; OSP
+- El Corte de Madera; OSP
+- El Sereno; OSP
+- Fremont Older; OSP
+- La Honda Creek; OSP
+- Long Ridge; OSP
+- Los Trancos; OSP
+- Monte Bello; OSP
+- Pulgas Ridge; OSP
+- Purisima Creek; Redwoods OSP
+- Rancho ;Cañada del Oro; OSP
+- Rancho San Antonio; OSP
+- Russian Ridge; OSP
+- Saratoga Gap; OSP
+- Skyline Ridge; OSP
+- Sierra Azul OSP:
+  - Sierra Azul
+  - Mt. Umunhum
+- Windy Hill; OSP
+
+# Santa Clara Valley Open Space Authority
+- Coyote Valley; OSP
+- Máyyan 'Ooyákma ;Coyote Ridge; OSP
+- Picchetti; Ranch OSP
+- Sierra Vista; OSP
+
+# Santa Clara county parks
+- Calero; CP
+- Coyote Lake / Harvey Bear Ranch CP:
+  - Coyote Lake
+  - Harvey Bear
+- Ed Levin CP:
+  - Ed Levin
+  - Ed R. Levin
+- Huddart; CP
+- Grant CP:
+  - Joseph Grant
+  - Joseph D. Grant
+  - Grant Park
+- Lexington Reservoir; CP
+- Quicksilver; CP
+- Sanborn; CP
+- Santa Teresa; CP
+- Stevens Creek CP:
+  - Stevens Creek County Park
+  - Stevens Creek CP
+- Upper Stevens Creek
+- Vasona Lake; CP
+
+# San Mateo county parks
+- Edgewood; Park & Natural Preserve
+- Pescadero Creek; CP
+- Sam McDonald; CP
+- San Bruno Mountain; State & County Park
+- San Pedro Valley; CP
+- Wunderlich; CP
+
+# East Bay Regional Park District
+- Coyote Hills; RP
+- Crockett Hills; RP
+- Del Valle; RP
+- Dry Creek Pioneer; RP
+- Five Canyons; Open Space
+- Garin; RP
+- Huckleberry Botanic; RP
+- Lake Chabot; RP
+- Mission Peak RP:
+  - Mission Peak
+  - Ohlone College
+- Pleasanton Ridge RP
+  - Pleasanton Ridge
+  - Augustin Bernal Park
+- Reinhardt Redwood RP:
+  - Reinhardt Redwood
+  - Redwood Regional
+- Sibley Volcanic; RP
+- Sunol Wilderness RP:
+  - Sunol Wilderness
+  - Sunol Regional Wilderness
+
+# state parks
+- Big Basin SP:
+  - Big Basin
+  - Hwy 236
+- Butano; SP
+- Castle Rock; SP
+- Henry Coe SP:
+  - Henry Coe
+  - Henry W. Coe
+- Henry Cowell SP:
+  - Henry Cowell
+  - Roaring Camp
+- McNee Ranch / Montara Mountain SP:
+  - McNee Ranch
+  - Montara Mountain
+  - Montara Mtn.
+  - Gray Whale Cove
+- Mt. Diablo; SP
+- Mt. Madonna; SP
+- Mt. Tamalpais Watershed # must be listed before Mt. Tamalpais
+- Mt. Tamalpais; SP
+- Murray Ranch; SP
+- Nisene Marks; SP
+- Pacheco; SP
+- Portola Redwoods; SP
+- Wilder Ranch SP:
+  - Wilder Ranch
+  - Four Miles Beach
+  - Natural Bridges
+
+# other park districts and areas
+- Alum Rock; Park, San Jose, CA
+- Coal Mine Ridge; Nature Preserve
+- Don Edwards National Wildlife Refuge
+- Foothills; Nature Preserve, Palo Alto
+- Pearson-;Arastradero; Preserve, Palo Alto
+- Golden Gate National Recreation Area:
+  - Golden Gate National Recreation Area
+  - Marin Headlands
+  - Hawk Hill
+  - Point Bonita
+- Phleger; Estate
+- Sweeney Ridge; National Recreation Area
+- Joaquin Miller; Park, Oakland, CA
+- Dimond Canyon; Trail, Oakland, CA
+- Novitiate Park;, Los Gatos, CA
+- Shannon Valley; OSP, Los Gatos, CA
+- Pogonip;, Santa Cruz, CA
+- DeLaveaga; Park, Santa Cruz, CA
+- Loch Lomond Recreation Area, Santa Cruz, CA
+- Alviso Slough
+- San Francisco Bay:
+  - off Yerba Buena Island
+- Waterdog Lake & Open Space:
+  - Waterdog
+  - Water Dog
+- Santa Clara Central Park
+- Ulistac Natural Area, Santa Clara, CA
+- Hidden Villa;, Los Altos Hills, CA
+
+# major trails without an associated park
+- Alameda Creek Trail
+- Bay Trail:
+  - Bay Trail
+  - Twin Creeks Sports Complex
+  - Jagel Slough
+- Coyote Creek; Trail
+- Crystal Springs Regional Trail
+  - Crystal Springs Regional Trail
+  - Pulgas Water Temple # close enough
+- Guadalupe River Trail
+- Los Gatos Creek Trail
+- San Tomas Aquino Creek Trail:
+  - San Tomas Aquino Creek Trail
+  - San Tomas Creek Trail
+- Stevens Creek Trail # not associated with the county park 
+
+# cities
+- Santa Clara, CA:
+  - ^Santa Clara, CA
+  - Rd., Santa Clara, CA
+  - Carmelite Monastery, Santa Clara, CA
+- Santa Cruz, CA:
+  - ^Santa Cruz, CA
+- Cupertino, CA:
+  - ^Cupertino, CA
+  - Road, Cupertino, CA
+  - Rd., Cupertino, CA
+- Saratoga, CA:
+  - ^Saratoga, CA
+  - Rd., Saratoga, CA
+- Los Altos Hills, CA:
+  - ^Los Altos Hills, CA
+- Fremont, CA:
+  - ^Fremont, CA
+  - Blvd., Fremont, CA
+- San Jose, CA:
+  - ^San Jose, CA
+  - Rd., San Jose, CA
+  - Almaden Reservoir
+
+# roads
+- Montebello Road;, Cupertino
+- Skyline Blvd;.
+- Alpine Rd.:
+  - Alpine Rd.
+  - Alpine Road
+
+Monterey County:
+- Point Lobos
+- {Garrapata SP: Garrapata}
+- {Andrew Molera SP: Andrew Molera}
+- Salinas River
+- Elkhorn Slough
+- Monterey Bay Coastal Trail
+- ^;Pacific Grove, CA
+
+Yellowstone:
+- Yellowstone
+- Jackson Hole
+
+elsewhere in California:
+- {Yosemite NP: Yosemite}
+- {Yosemite NP: Hetch Hetchy}
+- Ansel Adams Wilderness
+- Loon Lake
+- Spider Lake
+- Wright's Lake
+- Grouse Lake
+- Smith Lake
+- Hemlock Lake
+- Pinnacles
+- Hood Mountain; RP
 
 Hawaii:
 - {Kokee Region: Koke'e State Park}
@@ -197,10 +271,6 @@ Hawaii:
 - Waimea Canyon
 - {Kapa'a: Kapaʻa}
 
-Switzerland:
-- Lauterbrunnen, Switzerland
-- Törbel, Switzerland
-
 Utah:
 - Coral Pink Sand Dunes
 - Bryce Canyon
@@ -211,20 +281,6 @@ Pennsylvania:
 - Pennsylvania
 - {Pennsylvania: ", PA"}
 
-Yellowstone:
-- Yellowstone
-- Jackson Hole
-
-elsewhere in California:
-- {Yosemite NP: Yosemite}
-- {Yosemite NP: Hetch Hetchy}
-- Ansel Adams Wilderness
-- Loon Lake
-- Spider Lake
-- Wright's Lake
-- Grouse Lake
-- Smith Lake
-- Hemlock Lake
-- Pinnacles
-- {Garrapata SP: Garrapata}
-- {Andrew Molera SP: Andrew Molera}
+Switzerland:
+- Lauterbrunnen, Switzerland
+- Törbel, Switzerland

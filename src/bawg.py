@@ -86,12 +86,35 @@ def read_parks(f):
     for loc in yaml_data:
         for x in yaml_data[loc]:
             if isinstance(x, str):
-                park_map[x] = x
-                park_loc[x] = loc
-            else:
-                for y in x:
-                    park_map[x[y]] = y
-                    park_loc[x[y]] = loc
+                semi1 = x.find(';')
+                if semi1 == -1:
+                    name = x
+                    exp = x
+                else:
+                    semi2 = x.find(';', semi1+1)
+                    if semi2 == -1:
+                        name = x[:semi1] + x[semi1+1:]
+                        exp = x[:semi1]
+                    else:
+                        name = x[:semi1] + x[semi1+1:semi2] + x[semi2+1:]
+                        exp = x[semi1+1:semi2]
+                x = {name: exp}
+
+            assert isinstance(x, dict)
+
+            # x should typically be a dict with a single key/value pair,
+            # but we also accept multiple key/value pairs.
+            for name, exp in x.items():
+                if isinstance(exp, str):
+                    park_map[exp] = name
+                    park_loc[exp] = loc
+                else:
+                    # the expression is actually a list
+                    assert isinstance(exp, list)
+                    exp_list = exp
+                    for exp in exp_list:
+                        park_map[exp] = name
+                        park_loc[exp] = loc
 
 read_data_file('parks.yaml', read_parks)
 
