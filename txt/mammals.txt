@@ -2,8 +2,11 @@ list_hierarchy
 member_link: self-genus
 
 x:ba
-# every observation is expected to find a page
-do disable_obs_promotion_checks_from: none
+
+# Remove the disable when the observation is made above the genus level;
+# For mammals, we expect the hierarchy to be sufficiently complete to catch
+# everything.
+do disable_obs_promotion_checks_from: genus/-/species
 
 Note that the range of this Guide excludes mammals that never come onto land, i.e. the various cetaceans.
 

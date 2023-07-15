@@ -1,7 +1,5 @@
 sci:subphylum Angiospermae
 
-default_ancestor
-
 #do create2_com: class/-/family
 do create: family
 do link: self-/genus

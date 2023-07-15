@@ -485,6 +485,9 @@ if arg('-steps'):
 
 for page in page_array:
     if not page.rank and not page.linn_parent:
+        # If a page doesn't fit into the Linnaean hierarchy, try to find a
+        # place for it.
+        # This also propagates is_top, so we don't have to do it again.
         page.resolve_lcca()
     elif page.is_top:
         page.propagate_is_top()
@@ -497,11 +500,14 @@ if arg('-steps'):
     info('Step 9: Assign default ancestor to floating trees')
 
 default_ancestor = get_default_ancestor()
-if default_ancestor:
-    for page in full_page_array:
-        if (not page.is_top and not page.linn_parent and
-            (not page.rank or page.rank < default_ancestor.rank)):
+for page in full_page_array:
+    if (not page.is_top
+        and not page.linn_parent
+        and (not page.rank or page.rank < default_ancestor.rank)):
+        if default_ancestor:
             default_ancestor.link_linn_child(page)
+        else:
+            warn(f'is_top not declared for page at top of hierarchy: {page.full()}')
 
 if arg('-tree') == '9':
     print_trees()
@@ -645,6 +651,7 @@ def read_observation_data(f):
         orig_sci = sci
         orig_page = page
         ignore = False
+        disable_promotion_checks = True # may change to False in loop below
         while page.shadow:
             if sci in sci_ignore:
                 if sci_ignore[sci] == '+':
@@ -662,6 +669,13 @@ def read_observation_data(f):
                       page.rp_do('obs_create_com', shadow=True, msg=msg)))):
                     page.promote_to_real()
                     break
+
+            # If any rank that we promote through fails to disable promotion
+            # checks, then promotion checks aren't disabled.
+            if not page.rp_do('disable_obs_promotion_checks_from',
+                              shadow=True):
+                disable_promotion_checks = False
+
             page = page.linn_parent
             if not page:
                 break
@@ -705,10 +719,9 @@ def read_observation_data(f):
                 # be something we've documented, so it's always OK.
                 #print(f'{orig_page.full()} has real descendents')
                 pass
-            elif orig_page.rp_do('disable_obs_promotion_checks_from',
-                                 shadow=True):
+            elif disable_promotion_checks:
                 # Ignore observations that aren't at a desired level of
-                # specificity.
+                # specificity and weren't promoted through a desired level.
                 #print('disable_obs_promotion_checks_from')
                 pass
             elif (rg == 'needs_id' and
@@ -885,7 +898,8 @@ with open(search_file, 'w', encoding='utf-8') as w:
             if (ancestor.rp_do('member_name_alias') and
                 ancestor.shadow and
                 ancestor.com and
-                ancestor.com not in coms):
+                ancestor.com not in coms and
+                page.membership_dict[ancestor]):
                 coms.append(ancestor.com)
 
         # Save bandwidth for the common case of a page that is named
@@ -911,8 +925,7 @@ with open(search_file, 'w', encoding='utf-8') as w:
             if (ancestor.rp_do('member_name_alias') and
                 ancestor.shadow and
                 ancestor.elab and
-                not (ancestor.rank in (Rank.genus, Rank.species) and
-                     page.rank in (Rank.species, Rank.below)) and
+                (not page.elab or not page.elab.startswith(ancestor.elab)) and
                 ancestor.elab not in elabs):
                 elabs.append(ancestor.elab)
 

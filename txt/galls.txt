@@ -31,7 +31,7 @@ Nancy Asquith has tons of <a href="https://www.inaturalist.org/projects/californ
 ==beaked twig gall wasp
 ==round gall wasp
 
-<h3>chiquapin</h3>
+<h3>chinquapin</h3>
 ==chinquapin flower gall wasp
 
 <h3>roses</h3>

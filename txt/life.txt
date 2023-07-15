@@ -1,24 +1,86 @@
+# "Life" doesn't have a scientific name, so we give it an explicit taxon_id
+# to allow linkage with iNaturalist.
 sci:n/a
 taxon_id: 48460
+
+# -----------------------------------------------------------------------------
+# Attributes and properties
 
 is_top
 list_hierarchy
 
+# -----------------------------------------------------------------------------
+# None of the following properties have an override elsewhere in the hierarchy.
+
+# We expect all pages to be manually linked, except where specified otherwise.
 warn link: self-below
+
+# If I only have one species (or below) bage within a genus (or below),
+# I often don't bother to create the parent page.  However, if the user
+# searches for that parent's common name, we want to be able to find the
+# (sole) representative of that taxon.
+#
+# I don't specify it for higher level taxons since
+# - I more often don't create a parent page despite it having multiple children,
+#   and having multiple search aliases is confusing; and
+# - the user is less likely to search for a higher level name, especially if
+#   I didn't find it interesting enough of a category to create a page for.
+# I may rethink this if I ever find that the unsearchable taxons bug me.
 do member_name_alias: genus, species
 
+# Include a prominent warning if the completeness is not specified for a genus.
+# I never override this for any parts of the hierarachy.
 caution default_completeness: genus
 
+# Link every page to its iNaturalist taxon page.
 link_inaturalist: self-below
+
+# Link every page to an iNaturalist search for all species within its genus
+# (or its taxon, if it's above the genus level).
 link_bayarea_inaturalist: self-below
 
+# Every page should specify a scientific and common name
+# or that there isn't one (n/a).
 warn no_sci: self-below
-warn no_com: self-below
+warn no_com: self-below # Fungi overrides this because I don't care about fungi.
 
+# Since every page should declare a scientific and common name (as checked
+# above), the obs_fill_sci and obs_fill_com properties do nothing.
+# Fungi sets these to allow filling because I don't care about fungi.
+
+# I expect my declared common name to match the (local) common name from
+# iNaturalist, so iNaturalist shouldn't try to supply an alternative name ...
+warn obs_fill_alt_com: self-below
+
+# ... but iNaturalist might have a different global common name (used by Seek),
+# in which case I want to include it so that I can look up Seek reports.
+do obs_fill_alt_global_com: self-below
+
+# I generally expect an observation to have a photo for its taxon
+# (or some below taxon).  However, if an observation hasn't been ID'd
+# to at least the genus level, then I don't care.
+# Some individual taxons have an override because I'm not yet sure of the ID.
 warn obs_requires_photo: genus-below
+
+# I don't like to create a taxon page if it has only one child.
+# Some individual species have an override because the domesticated animal
+# often gets ID'ed as the domestic variety, but a wild animal never gets ID'ed
+# to the variety level.
 warn one_child: species
 
+# Observations can be promoted as much as necessary,
+# subject to any warnings specified below.
 do obs_promotion: self-below
+
+# An observation at the genus, species, or "below" rank (subspecies or variety)
+# is expected to find a corresponding taxon page or else generate a warning.
+# At any rank between genus and species, it can be promoted to the genus level
+# without a warning.
+# At any rank above genus, it can be promoted any amount without warning.
+# Some hard-to-ID taxons override these to allow more promotions to be ignored.
+# Mammals are supposedly complete, so they allow fewer promotions to be ignored.
+warn obs_promotion: self-below
+do disable_obs_promotion_checks_from: self-/genus, genus/-/species
 
 # Count observations outside the bay area, but only if they match a bay area
 # wild species.  If the species isn't known, don't count it at any level.
@@ -29,21 +91,6 @@ do outside_obs_promotion: species-below
 # If the species isn't known, don't count it at any level.
 do casual_obs: species-below
 do casual_obs_promotion: species-below
-
-# every observation with a reasonably good ID is expected to find a page.
-# reasonably good is defined here as genus, species, or below
-warn obs_promotion: self-below
-do disable_obs_promotion_checks_from: self-/genus, genus/-/species
-
-error obs_fill_sci: self-below
-
-# I expect my data to match the (local) common name from iNaturalist ...
-warn obs_fill_com: self-below
-warn obs_fill_alt_com: self-below
-
-# ... but iNaturalist might have a different global common name (used by Seek),
-# in which case I want to include it so that I can look up Seek reports.
-do obs_fill_alt_global_com: self-below
 
 
 ==plants

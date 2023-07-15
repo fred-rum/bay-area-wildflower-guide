@@ -576,9 +576,11 @@ class Page:
         # children have this problem and re-order them later.
         self.non_txt_children = None
 
-        # ancestors that this page should be listed as a 'member of',
-        # ordered from lowest-ranked ancestor to highest.
-        self.membership_list = []
+        # Ancestors that this page should be listed as a 'member of'.
+        # The key is the ancestor's page object.
+        # The value is a boolean which is True iff there are no real pages
+        # between this page and the ancestor.
+        self.membership_dict = {}
 
         # traits and values (e.g. color: pink, pale purple)
         self.trait_values = {} # trait name -> set of trait values
@@ -1848,6 +1850,10 @@ class Page:
                 # link_type = '-' for a shadow child (Linnaean but not real)
                 child.print_tree(level+1, '-', exclude_set)
 
+    # A page that that the user thinks of as the top of its hierarchy may
+    # end up with automatically created shadow ancestors.  We need to
+    # recognize the top of that ancestor tree as a valid top of hierarchy,
+    # so we propagate is_top up the tree.
     def propagate_is_top(self):
         ancestor = self
         while ancestor:
@@ -2144,19 +2150,23 @@ class Page:
         self.apply_prop_member()
         self.apply_prop_checks()
 
-    def propagate_membership(self, ancestor):
+    def propagate_membership(self, ancestor, is_direct):
         for child in self.child:
-            child.assign_membership(ancestor)
+            child.assign_membership(ancestor, is_direct)
         for child in self.linn_child:
             # There's no harm in repeating a descendent, but we might as
             # well avoid the common case of repeating a direct child.
             if child not in self.child:
-                child.assign_membership(ancestor)
+                child.assign_membership(ancestor, is_direct)
 
-    def assign_membership(self, ancestor):
-        if ancestor not in self.membership_list and ancestor not in self.parent:
-            self.membership_list.append(ancestor)
-        self.propagate_membership(ancestor)
+    def assign_membership(self, ancestor, is_direct):
+        # Don't include the page's real parent because we'll add that for
+        # all pages later, regardless of properties.
+        if ancestor not in self.membership_dict and ancestor not in self.parent:
+            self.membership_dict[ancestor] = is_direct
+
+        # Set is_direct to false for descendents if this page is real.
+        self.propagate_membership(ancestor, is_direct and self.shadow)
 
     def rp_check(self, prop, msg, shadow=False):
         # A shadow page is only checked if shadow is True.
@@ -2186,7 +2196,7 @@ class Page:
                                ' subg. ' not in self.com and
                                ' sect. ' not in self.com and
                                ' subsection ' not in self.com)))):
-            self.propagate_membership(self)
+            self.propagate_membership(self, True)
 
     def apply_prop_checks(self):
         if self.shadow:
@@ -2557,17 +2567,14 @@ class Page:
         # Subset pages are a special case which are always a member of
         # their parent page regardless of properties.
         if self.subset_of_page:
-            if self.subset_of_page not in self.membership_list:
-                self.membership_list.append(self.subset_of_page)
+            if self.subset_of_page not in self.membership_dict:
+                self.membership_dict[self.subset_of_page] = True
 
-        # If the page has autopopulated parents,
-        # add them to the membership list.
-        # Parents with keys are listed more prominently in a separate section.
         for parent in self.parent:
-            self.membership_list.append(parent)
+            self.membership_dict[parent] = True
 
         # Sort the membership list from lowest rank to highest.
-        self.membership_list = sort_pages(self.membership_list,
+        self.membership_list = sort_pages(self.membership_dict.keys(),
                                           with_depth=True,
                                           with_count=False)
 

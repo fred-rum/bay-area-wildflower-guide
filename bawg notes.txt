@@ -822,19 +822,7 @@ observations must be distinguished.  A separate 'link' property is
 needed to link a created low-level page to a higher-level page.  Extra
 properties may also be needed for checking page relationships.
 
-
-flag_no_sci: self-below ... makes no sense because the property only
-applies to ranked pages with a scientific name, so it can never check
-pages without a scientific name.
-
-flag_no_com: self-below ... not worth implementing if I never use it.
-
 --
-
-I call hide_ac() when the forward/back button is used to change pages.
-Should I also clear the search field?
-
-Add manual links to the color pages from the flowering plants page.
 
 When listing my observations for a taxon, make links to parks
 &q=Henry+Coe
@@ -847,10 +835,6 @@ screen 120mm/68mm
 Chrome browser area: 96mm/68mm => 1536x1080
 40px = ~7.5mm = 120 actual pixels
 16 actual pixels/mm
-
-The home-icon can't be selected with the "tab" key (no keyboard
-focus), presumably because of its absolute position.  Can I fix that?
-Perhaps a negative margin on the scroll container?
 
 test PWA service worker locally:
 /cygdrive/c/Python37/python -m http.server
@@ -1633,3 +1617,14 @@ allow typos in search:
     but that still has trouble if there is a second incorrect character
   some URLs to Javascript fuzzy search libraries here:
     https://www.geeksforgeeks.org/fuzzy-search-in-javascript/
+
+should "life" be eligible for link_inaturalist and link_bayarea_inaturalist
+(using the taxon_id)?
+
+Change observation properties that currently check for "casual" to instead
+  check for wild vs. captive.  E.g. for my unphotoed bobcat observation.
+
+Create pages for photos similar to pages for observations
+  use property based on taxonomy
+    if property is not applied, complain about unused photo instead
+  iNaturalist is always allowed to provide names
