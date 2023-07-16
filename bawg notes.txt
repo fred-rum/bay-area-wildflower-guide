@@ -1628,3 +1628,5 @@ Create pages for photos similar to pages for observations
   use property based on taxonomy
     if property is not applied, complain about unused photo instead
   iNaturalist is always allowed to provide names
+
+Can I clear data/taxon_names.yaml now that I can get names from iNaturalist?
