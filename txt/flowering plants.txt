@@ -61,6 +61,8 @@ If an individual flower can have different primary colors (e.g. depending on age
 # Regardless of how each family is created, they're all re-sorted into
 # an appropriate order (as long as I don't add any extraneous text in here).
 
+==amaranth family:family Amaranthaceae
+
 ==amaryllis family:family Amaryllidaceae
 sci_F: family Liliaceae
 acom: amaryllis, onions, and allies
@@ -72,17 +74,25 @@ sci_F:family Liliaceae
 ==asphodel family:family Asphodelaceae
 sci_F: family Liliaceae
 
-==n/a:family Datiscaceae
-; This family currently has only one genus with two species.
-
 ==iris family:family Iridaceae
 xcom: irises and allies
 
+==laurel family:family Lauraceae
+
 ==legume family:family Fabaceae
-acom: legumes
+
+==lily family:family Liliaceae
+
+==milkwort family:family Polygalaceae
+
+==orchid family:family Orchidaceae
+
+==primrose family:family Primulaceae
 
 ==pussypaw family:family Montiaceae
 sci_F: family Portulacaceae
+
+==stringbark family:family Thymelaeaceae
 
 ==sunflower family:family Asteraceae
 xcom: sunflowers, daisies, asters, and allies
@@ -90,3 +100,7 @@ xcom: sunflowers, daisies, asters, and allies
 ==trillium family:family Melanthiaceae
 acom: bunchflowers
 sci_F: family Liliaceae
+
+==n/a:family Datiscaceae
+; This family currently has only one genus with two species.
+

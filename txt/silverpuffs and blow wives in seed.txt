@@ -20,6 +20,7 @@ color: other, yellow
 x:any
 genus: n/a
 . each pappus element has only a flat scale with no bristle
+; "Blow wives" is both singular and plural.
 
 <h2>silverpuffs</h2>
 

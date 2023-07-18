@@ -11,7 +11,7 @@ var pages=[
 {page:"other colors of flowers",x:"u"},
 {page:"sunflower family",sci:["family Asteraceae"],x:"f"},
 {page:"birds",sci:["class Aves"],x:"f"},
-{page:"legume family",com:["legume family","legumes"],sci:["family Fabaceae"],x:"f"},
+{page:"legume family",sci:["family Fabaceae"],x:"f"},
 {page:"pink flowers",x:"u"},
 {page:"red purple flowers",x:"u"},
 {page:"arthropods",sci:["phylum Arthropoda"],x:"f"},
