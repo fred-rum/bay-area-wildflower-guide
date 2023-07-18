@@ -1657,7 +1657,16 @@ observations.csv has an observation for a taxon below the mustard family
         taxon_id
       by checking the DarwinCore database and API data
 
-yellow dandelion-like flowers previously specified 'family: sunflower family'
-  which apparently prevented 'tribe Cichorieae' from being assigned
-    as its Linnaean parent
-  should fix that
+uext lots of try/except statements so that
+  we always know what part of the code we're in
+  and what we're doing
+  when something goes wrong
+should this interact with the error() code in some way?
+  e.g. use a standard 'entry' function to set up a message
+    and call another function
+  then, if something goes wrong, print the message
+  a boolean parameter also determines whether the program exits
+    at the end of the section if there was any error
+    (even if max errors wasn't reached)
+change steps to (short, unspaced?) names instead of numbers
+  so that I don't have to renumber when adding a step

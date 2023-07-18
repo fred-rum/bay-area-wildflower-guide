@@ -485,12 +485,14 @@ if arg('-steps'):
     info("Step 8: Assign ancestors to pages that don't have scientific names")
 
 for page in page_array:
-    if not page.rank and not page.linn_parent:
+    if not page.rank:
         # If a page doesn't fit into the Linnaean hierarchy, try to find a
         # place for it.
+        # We do this even if a Linnaean ancestor is given since it may not
+        # be the best Linnaean parent.
         # This also propagates is_top, so we don't have to do it again.
         page.resolve_lcca()
-    elif page.is_top:
+    if page.is_top and not page.parent and not page.linn_parent:
         page.propagate_is_top()
 
 if arg('-tree') == '8':
