@@ -3,5 +3,3 @@ color:white
 
 genus: n/a
 x:ca
-
-family:mint family

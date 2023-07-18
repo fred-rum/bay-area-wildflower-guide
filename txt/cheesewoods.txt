@@ -1,5 +1,4 @@
 sci:Pittosporum
-family:cheesewood family
 x:more
 
 ==australian cheesewood:Pittosporum undulatum

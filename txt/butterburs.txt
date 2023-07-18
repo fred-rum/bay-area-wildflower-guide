@@ -1,5 +1,4 @@
 sci:Petasites spp.
-family:sunflower family
 x:ca
 
 ==western sweet coltsfoot:Petasites frigidus var. palmatus

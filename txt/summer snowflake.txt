@@ -3,5 +3,3 @@ color:white
 
 genus: snowflakes
 x:ca
-
-family: amaryllis family

@@ -1,7 +1,6 @@
 sci:Euphorbia
 x:!rare
 color:other
-family:spurge family
 
 ==eggleaf spurge:E. oblongata
 . very common, especially north of the bay bridge

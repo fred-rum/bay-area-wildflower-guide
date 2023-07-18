@@ -1,6 +1,5 @@
 sci:Festuca spp.
 x:!hist/rare
-family: grasses
 
 Some species that CalFlora/Jepson have in Festuca have been moved to {-Lolium spp.}.
 

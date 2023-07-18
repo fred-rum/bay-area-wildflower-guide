@@ -1,7 +1,6 @@
 com:n/a
 sci:genus Arnica
 x:ba
-member:sunflower family
 
 ==rayless arnica:A. discoidea
 color:yellow

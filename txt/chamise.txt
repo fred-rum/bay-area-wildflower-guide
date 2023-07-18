@@ -5,6 +5,8 @@ x:ba
 
 xx:any
 
+The preferred pronunciation of the 'ch' is as 'sh'.
+
 ==common chamise:var. fasciculatum
 color: white
 . plant tall with erect/ascending branches

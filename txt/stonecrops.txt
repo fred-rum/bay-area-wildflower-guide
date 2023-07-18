@@ -1,5 +1,4 @@
 sci:genus Sedum
-member:stonecrop family
 x:rare
 
 ==broad-leaved stonecrop:S. spathulifolium

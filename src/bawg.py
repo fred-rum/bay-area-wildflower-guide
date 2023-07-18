@@ -321,6 +321,7 @@ def read_obs_chains(f):
         else:
             com = None
 
+        page = None
         found_lowest_level = False
         try:
             # Read the taxonomic chain from observations.csv and create

@@ -3,5 +3,3 @@ color: other
 
 x:ba
 genus: wild gingers
-
-member: birthwort family:family Aristolochiaceae

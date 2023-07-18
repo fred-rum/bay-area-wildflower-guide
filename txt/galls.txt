@@ -1,6 +1,9 @@
 sci:n/a
 
 is_top
+# There are no properties here because every taxon under this one
+# gets its needed properties from its proper Linnaean hierarchy,
+# and we don't need any overrides for galls in particular.
 
 Taxons that create galls are listed in their normal taxonomic locations, but I've also collected them here for easier browsing.  In addition, rather than organizing them into the traditional clades, this page organizes galls based on host and gall location on the host.
 <p>
@@ -36,6 +39,9 @@ Nancy Asquith has tons of <a href="https://www.inaturalist.org/projects/californ
 
 <h3>roses</h3>
 ==spiny leaf gall wasp
+
+<h3>sticky cinquefoil</h3>
+==Diastrophus d-glandulosa-stem-swelling
 
 <h3>brambles</h3>
 ==thimbleberry gallmaker

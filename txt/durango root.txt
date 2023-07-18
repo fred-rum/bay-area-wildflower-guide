@@ -3,3 +3,5 @@ color:yellow
 
 genus: n/a
 x:ca
+
+It is said to superficially resemble cannabis species, and the only other species in the genus is called "false hemp".

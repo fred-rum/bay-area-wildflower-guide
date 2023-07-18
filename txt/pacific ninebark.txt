@@ -3,5 +3,3 @@ color:white
 
 genus: ninebarks
 x:ba
-
-family: rose family

@@ -1,5 +1,4 @@
 sci:genus Scutellaria
-family:mint family
 x:ba
 
 [

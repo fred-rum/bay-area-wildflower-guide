@@ -1,5 +1,4 @@
 sci:genus Anthoxanthum
-family:grasses
 x:rare
 
 It is easy to distinguish these species during flower.

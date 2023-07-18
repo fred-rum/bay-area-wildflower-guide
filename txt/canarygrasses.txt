@@ -1,6 +1,5 @@
 sci:genus Phalaris
 x:more
-family: grasses
 
 ==harding grass:P. aquatica
 color: other

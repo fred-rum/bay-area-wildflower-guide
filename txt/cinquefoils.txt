@@ -2,8 +2,6 @@ sci:genus Potentilla
 
 x:rare
 
-family:rose family
-
 ==mock strawberry:P. indica
 sci_fpP: Duchesnea indica
 sci_Fj: Duchesnea indica var. indica

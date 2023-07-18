@@ -2,7 +2,6 @@ sci:genus Sairocarpus
 asci:Antirrhinum
 asci:Neogaerrhinum
 asci:Misopates
-family: plantain family
 x:ba
 
 ==wiry snapdragon:Sairocarpus vexillocalyculatus ssp. vexillocalyculatus

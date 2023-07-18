@@ -1,5 +1,4 @@
 sci:Micranthes spp.
-family:saxifrage family
 x:hist/rare
 
 ==california saxifrage:M. californica

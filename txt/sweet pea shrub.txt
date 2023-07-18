@@ -6,7 +6,5 @@ xx:POWO lists var. myrtifolia as the only one introduced to CA, but I don't know
 genus: falsepeas
 x:ba
 
-family:Polygalaceae
-
 . brush-like tuft protruding from the none#keel
 . rare

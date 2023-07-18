@@ -1630,3 +1630,34 @@ Create pages for photos similar to pages for observations
   iNaturalist is always allowed to provide names
 
 Can I clear data/taxon_names.yaml now that I can get names from iNaturalist?
+
+
+observations.csv has an observation for a taxon below the mustard family
+  that observation specifies only the scientific name for the mustard family:
+    Brassicaceae
+  a page is created with only that scientific name
+  later, an observation is made directly to the 'mustard family' taxon
+  it matches the Brassicaceae scientific name
+    and tries to add the 'mustard family' common name
+  it fails, since the user previously created a page with only the
+    'mustard family' common name
+  possible fix (of sorts):
+    if a common name is used for 'member:' or '<rank>:' attribute,
+      a page must already exist for it (presumably with a scientific name)
+      e.g. created via txxon_names.yaml
+  another possible fix (of sorts):
+    when an observation provides a higher-level scientific name, look it up
+      in the core or API data to get the common name before making a page for it
+  another possible fix (better):
+    every time iNaturalist tries to find a page (and potentially create it),
+      it first gets as much information about it as it can:
+        common name
+        scientific name
+        rank
+        taxon_id
+      by checking the DarwinCore database and API data
+
+yellow dandelion-like flowers previously specified 'family: sunflower family'
+  which apparently prevented 'tribe Cichorieae' from being assigned
+    as its Linnaean parent
+  should fix that

@@ -1,7 +1,6 @@
 com:n/a
 sci:genus Hosackia
 x:ba
-family:legume family
 
 ==big deervetch:H. crassifolia
 color: red purple

@@ -53,5 +53,40 @@ If an individual flower can have different primary colors (e.g. depending on age
 
 <h2>none#Flowers by family</h2>
 
-==legume family
-acom:legumes
+# Most families in this taxon are autocreated by the 'create' property above.
+# There are a few families with key info or other text, so they have explicit
+# txt files.
+# A few more families need manual attributes, but don't need extra text.
+# For those, we declare them as children below.
+# Regardless of how each family is created, they're all re-sorted into
+# an appropriate order (as long as I don't add any extraneous text in here).
+
+==amaryllis family:family Amaryllidaceae
+sci_F: family Liliaceae
+acom: amaryllis, onions, and allies
+
+==asparagus family:family Asparagaceae
+xcom: agave and allies
+sci_F:family Liliaceae
+
+==asphodel family:family Asphodelaceae
+sci_F: family Liliaceae
+
+==n/a:family Datiscaceae
+; This family currently has only one genus with two species.
+
+==iris family:family Iridaceae
+xcom: irises and allies
+
+==legume family:family Fabaceae
+acom: legumes
+
+==pussypaw family:family Montiaceae
+sci_F: family Portulacaceae
+
+==sunflower family:family Asteraceae
+xcom: sunflowers, daisies, asters, and allies
+
+==trillium family:family Melanthiaceae
+acom: bunchflowers
+sci_F: family Liliaceae

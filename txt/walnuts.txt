@@ -1,5 +1,4 @@
 sci:Juglans spp.
-family:walnut family
 x:ba
 
 Crushed leaf has a distinctive smell, sometimes described as spiced citrus.

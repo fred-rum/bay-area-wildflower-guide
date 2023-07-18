@@ -637,10 +637,28 @@ class Page:
         if self.name in name_page:
             del name_page[self.name]
 
-        if (self.com and com_page[self.com] == self and
-            (self.com not in name_page or name_page[self.com] == self)):
+        name = None
+        failure_list = []
+
+        if not self.com:
+            failure_list.append('page has no common name')
+        elif com_page[self.com] != self:
+            conflict = com_page[self.com]
+            if isinstance(conflict, int):
+                failure_list.append(f'common name has conflicts at priority {conflict}')
+            else:
+                failure_list.append(f'{conflict.full()} has higher priority {conflict.com_priority} for the common name')
+        elif self.com in name_page and name_page[self.com] != self:
+            failure_list.append(f'common name already used as a master name by {name_page[self.com].full()}')
+        else:
             name = self.com
-        elif self.sci:
+
+        if name:
+            # No need to use the scientific name.
+            pass
+        elif not self.sci:
+            failure_list.append('page has no scientific name')
+        else:
             # Use the elaborated name if there are multiple taxons with the
             # same stripped name.  If this taxon is a complex, then its
             # stripped name isn't indexed in sci_page.  If nothing else is
@@ -650,8 +668,10 @@ class Page:
                 name = self.elab
             else:
                 name = self.sci
-        else:
-            fatal(f'set_name() failed for {self.full()}')
+
+        if not name:
+            failure_msgs = '\n'.join(failure_list)
+            fatal(f'set_name() failed for {self.full()}\n{failure_msgs}')
 
         if name in name_page:
             fatal(f'Multiple pages created with name "{name}"')
@@ -1738,11 +1758,13 @@ class Page:
                               from_inat=from_inat,
                               src='explicit ancestor from txt')
 
-            if not parent.rank:
-                error(f'add_linn_parent from {self.full()} is to unranked page {name}')
-                return
+            if rank and not parent.rank:
+                parent.rank = rank
             elif rank and parent.rank != rank:
                 error(f'add_linn_parent from {self.full()} is to {name} with rank {parent.rank.name}, but we expected rank {rank.name}')
+                return
+            elif not parent.rank:
+                error(f'add_linn_parent from {self.full()} is to unranked page {name}')
                 return
             else:
                 # OK, good, the common name maps to an existing page

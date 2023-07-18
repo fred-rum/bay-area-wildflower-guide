@@ -1,6 +1,5 @@
 sci:Polygonum
 x:!hist/rare
-family:Polygonaceae
 
 ==prostrate knotweed:P. aviculare
 color: white, other

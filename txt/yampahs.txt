@@ -1,5 +1,4 @@
 sci:Perideridia spp.
-family:carrot family
 x:ba
 
 ==kellogg's yampah:P. kelloggii

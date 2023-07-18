@@ -10,6 +10,8 @@ color: white, cream, yellow
 . this is the only variety in the bay area
 . POWO splits the North American var. microbotrys from the European ssp. racemosa, but iNaturalist hasn't yet <a href="https://www.inaturalist.org/flags/598126">incorporated the split</a>.
 .. neither have Calflora and Jepson
+# See also https://calscape.org/Sambucus-racemosa-var.-racemosa-(Mountain-Red-Elderberry)
+# which calls it "mountain red elderberry" or "pacific red elderberry"
 
 ==rocky mountain elder:S. racemosa var. melanocarpa
 . purple-black berries

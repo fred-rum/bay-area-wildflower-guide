@@ -16,7 +16,6 @@ genus: n/a
 ==Carthamus spp.
 
 ==artichoke thistle:Cynara cardunculus
-family: sunflower family
 color: purple
 x:ca
 genus: n/a

@@ -1,3 +1,0 @@
-sci:family Amaryllidaceae
-sci_F:family Liliaceae
-acom: amaryllis, onions, and allies

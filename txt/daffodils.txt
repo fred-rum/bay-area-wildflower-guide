@@ -1,6 +1,5 @@
 sci:Narcissus spp.
 x:ca
-family:Amaryllidaceae
 
 There may be other species of daffodils escaped and growing wild in
 the bay area, but these are the only ones recognized by Jepson.

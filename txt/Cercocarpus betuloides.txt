@@ -1,5 +1,4 @@
 com: birchleaf mountain mahogany
-family: rose family
 
 genus: mountain mahoganies
 x:ba

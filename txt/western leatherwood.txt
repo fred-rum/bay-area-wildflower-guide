@@ -3,5 +3,3 @@ color: yellow
 
 genus: n/a
 x:ca
-
-family: stringbark family

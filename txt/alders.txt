@@ -1,6 +1,5 @@
 sci:genus Alnus
 x:more
-member:birch family:family Betulaceae
 
 There are more alders in the bay area that may or may not be wild, but these are by far the most common ones.
 

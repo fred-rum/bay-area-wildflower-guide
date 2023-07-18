@@ -4,6 +4,8 @@ color: cream, white
 genus:n/a
 x:ba
 
+Parasitized by {-Diastrophus d-glandulosa-stem-swelling}.
+
 There are variants of this species, but they have overlapping
 characteristics, and without common names they're just not very
 interesting.

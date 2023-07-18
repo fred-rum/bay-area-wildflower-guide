@@ -1,5 +1,4 @@
 sci:Sanguisorba spp.
-family:rose family
 x:ca
 
 ==salad burnet:Sanguisorba minor

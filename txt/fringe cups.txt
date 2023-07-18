@@ -3,5 +3,3 @@ color:red purple, cream
 
 genus: n/a
 x:any
-
-family:saxifrage family
