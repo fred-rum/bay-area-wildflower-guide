@@ -54,6 +54,8 @@ def warn_progress():
     global progress_printed_cnt
 
     if len(progress_msg_list) > progress_printed_cnt:
+        if not progress_printed_cnt:
+            warn('*' * 79)
         # Skip any progress messages that were already printed
         progress_list_to_print = progress_msg_list[progress_printed_cnt:]
         warn('\n'.join(progress_list_to_print))
@@ -84,13 +86,13 @@ def fatal(msg):
 # so that it can be printed in the case of an error or exception.
 class Progress:
     def __init__(self, msg):
-        fail_on_errors(1)
-
-        indented_msg = indent() + msg
-        progress_msg_list.append(indented_msg)
+        self.__msg = msg
 
     def __enter__(self):
-        pass
+        fail_on_errors(1)
+
+        indented_msg = (' ' * len(progress_msg_list)) + self.__msg
+        progress_msg_list.append(indented_msg)
 
     # __exit__ gets called with values in the last three arguments
     # if there was an Exception, or None if the 'with' context ended cleanly.
@@ -121,11 +123,3 @@ class Progress:
                 progress_printed_cnt = len(progress_msg_list)
 
             return True
-
-# with Progress('msg 1'):
-#     try:
-#         with Progress('msg 2'):
-#             1/0
-#     except:
-#         print('here be clean up')
-#         sys.exit(1)

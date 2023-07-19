@@ -1654,6 +1654,3 @@ observations.csv has an observation for a taxon below the mustard family
         rank
         taxon_id
       by checking the DarwinCore database and API data
-
-change steps to (short, unspaced?) names instead of numbers
-  so that I don't have to renumber when adding a step

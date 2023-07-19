@@ -43,38 +43,12 @@ from toxic import * # must be before page
 from page import *
 from photo import *
 from glossary import *
+from step import *
 from cache import *
 from inat import *
 from core import *
 
-if arg('-debug_js'):
-    # To avoid confusion when using the unstripped source files,
-    # delete the stripped versions.
-    delete_file('bawg.css')
-    delete_file('search.js')
-
-    delete_file('gallery.css')
-    delete_file('gallery.js')
-
-    delete_file('swi.js')
-
-    # sw.js currently requires script modification,
-    # so it is always generated (and therefore not deleted).
-else:
-    strip_comments('bawg.css')
-    strip_comments('search.js')
-
-    strip_comments('gallery.css')
-    strip_comments('gallery.js')
-
-    if arg('-without_cache'):
-        shutil.copy('src/no_sw.js', 'swi.js')
-        shutil.copy('src/no_sw.js', 'sw.js')
-    else:
-        strip_comments('swi.js')
-
-strip_comments('gallery.html', debug_gallery=arg('-debug_js'))
-
+###############################################################################
 
 # Read the mapping of iNaturalist observation locations to short park names.
 park_map = {}
@@ -116,82 +90,47 @@ def read_parks(f):
                         park_map[exp] = name
                         park_loc[exp] = loc
 
-read_data_file('parks.yaml', read_parks)
-
-txt_files = get_file_set('txt', 'txt')
+with Step('read_parks', 'Read parks.yaml'):
+    read_data_file('parks.yaml', read_parks)
 
 ###############################################################################
 
-if arg('-steps'):
-    info('Step 1: Reading primary names from txt files')
-
-# Read the txt for all txt files.  We could do more in this first pass,
-# but I want to be able to measure the time of reading the files separately
-# from any additional work.
-
 def read_txt_files():
-    for name in txt_files:
-        page = Page(name, name_from_txt=True, src=name+'.txt')
-        try:
-            with open(f'{root_path}/txt/{name}.txt', 'r', encoding='utf-8') as r:
-                page.txt = r.read()
-        except:
-            warn(f'reading txt file "{name}"')
-            raise
+    txt_files = get_file_set('txt', 'txt')
 
-read_txt_files()
+    for name in txt_files:
+        filename = name+'.txt'
+        page = Page(name, name_from_txt=True, src=filename)
+        with Progress(f'Read "{filename}"'):
+            with open(f'{root_path}/txt/{filename}', 'r', encoding='utf-8') as r:
+                page.txt = r.read()
 
 # Perform a first pass on the txt pages to initialize common and
 # scientific names.  This ensures that when we parse children (next),
 # any name can be used and linked correctly.
-
 def parse_names():
     for page in page_array:
         page.remove_comments()
         page.parse_names()
         page.parse_glossary()
 
-parse_names()
+with Step('read_txt', 'Read primary names from txt files'):
+    read_txt_files()
+    parse_names()
 
-# Now that we know the names of all the traits, we can initialize the
-# list of properties that we support.
-init_props()
+    # Now that we know the names of all the traits, we can initialize the
+    # list of properties that we support.
+    init_props()
 
-def print_trees():
-    tree_taxon = arg('-tree_taxon')
-    if tree_taxon:
-        for taxon in tree_taxon:
-            page = find_page1(taxon)
-            if page:
-                page.print_tree()
-            else:
-                error(f'-tree taxon "{taxon}" not found.')
-    else:
-        exclude_set = set()
-        for page in full_page_array:
-            if not page.parent and not page.linn_parent:
-                page.print_tree(exclude_set=exclude_set)
-    sys.stdout.flush()
+###############################################################################
 
-if arg('-tree') == '1':
-    print_trees()
+with Step('parse_decl', 'Parse attributes, properties, and child info'):
+    # This code can add new pages, so we make a copy
+    # of the list to iterate through.
+    for page in page_array[:]:
+        page.parse_attributes_properties_and_child_info()
 
-if arg('-steps'):
-    info('Step 2: Parse child info')
-
-# parse_children_and_attributes() can add new pages, so we make a copy
-# of the list to iterate through.  parse_children_and_attributes()
-# also checks for external photos and various other page attributes.
-# If this info is within a child key, it is assigned to the child.
-# Otherwise it is assigned to the parent.
-for page in page_array[:]:
-    page.parse_children_and_attributes()
-
-if arg('-tree') == '2':
-    print_trees()
-
-if arg('-steps'):
-    info('Step 3: Attach photos to pages')
+###############################################################################
 
 # Record jpg names for associated pages.
 # Create a blank page for all unassociated jpgs.
@@ -206,13 +145,10 @@ def assign_jpgs():
                 page = Page(name, src=jpg+'.jpg')
             page.add_photo(jpg, suffix)
 
-assign_jpgs()
+with Step('attach_jpg', 'Attach photos to pages'):
+    assign_jpgs()
 
-if arg('-tree') == '3':
-    print_trees()
-
-if arg('-steps'):
-    info('Step 4: Parse taxon_names.yaml')
+###############################################################################
 
 def read_taxon_names(f):
     taxon_names = yaml.safe_load(f)
@@ -237,45 +173,33 @@ def create_taxon_pages(d, prefix=''):
                 page = Page(com, elab, shadow=True, src='taxon_names.yaml')
             #info(f'{page.com} <-> {page.elab}')
 
-read_data_file('taxon_names.yaml', read_taxon_names)
+with Step('taxon_names', 'Parse taxon_names.yaml'):
+    read_data_file('taxon_names.yaml', read_taxon_names)
 
-if arg('-tree') == '4':
-    print_trees()
-
-if arg('-steps'):
-    info('Step 5: Update taxonomic links')
+###############################################################################
 
 # Linnaean descendants links are automatically created whenever a page
 # is assigned a child, but this isn't reliable during initial child
-# assignment when not all of the scientific names are known yet.
+# assignment when not all of the scientific names are known yet (since
+# additional names can be attached as the child declaration is parsed).
 # Therefore, once all the names are in, we make another pass through
 # the pages to ensure that all Linnaean links are complete.
-for page in page_array:
-    page.link_linn_descendants()
+with Step('update_linn', 'Update Linnaean links'):
+    for page in page_array:
+        page.link_linn_descendants()
 
-if arg('-tree') == '5':
-    print_trees()
+###############################################################################
 
-if arg('-steps'):
-    info('Step 6: Add explicit and implied ancestors')
+with Step('update_member', 'Add explicit and implied ancestors'):
+    for page in page_array[:]:
+        page.assign_groups()
 
-for page in page_array[:]:
-    page.assign_groups()
+###############################################################################
 
-if arg('-tree') == '6':
-    print_trees()
+with Step('read_core', 'Read DarwinCore archive'):
+    read_core()
 
-# Find any genus with multiple species.
-# Check whether all of those species share an ancestor key page in common.
-# If not, print a warning.
-for page in page_array:
-    page.record_genus()
-
-# Read DarwinCore archive
-read_core()
-
-if arg('-steps'):
-    info('Step 7: Create taxonomic chains from observations.csv')
+###############################################################################
 
 # Read the taxonomic chains from the observations file (exported from
 # iNaturalist).  There is more data in there that we'll read later, but
@@ -429,119 +353,85 @@ def read_obs_chains(f):
                 warn(f'was initializing taxonomic chain for {com}:{sci}')
             raise
 
-read_data_file('observations.csv', read_obs_chains,
-               msg='taxon hierarchy')
+with Step('obs_chains', 'Create taxonomic chains from observations.csv'):
+    read_data_file('observations.csv', read_obs_chains,
+                   msg='taxon hierarchy')
 
-# If we got this far and a page still doesn't have a name, give it one.
-for page in page_array:
-    page.infer_name()
+    # If we got this far and a page still doesn't have a name, give it one.
+    for page in page_array:
+        page.infer_name()
 
-if arg('-tree') == '7':
-    print_trees()
+###############################################################################
 
+with Step('read_api', 'Read cached iNaturalist API data'):
+    read_inat_files()
 
-if arg('-tree') == '7c':
-    print_trees()
+###############################################################################
 
-if arg('-steps'):
-    info("Step 7ac: Read cached iNaturalist API data")
+with Step('core_chains', 'Create taxonomic chains from DarwinCore archive'):
+    parse_core_chains()
 
-read_inat_files()
+###############################################################################
 
-if arg('-tree') == '7ac':
-    print_trees()
+with Step('api_chains', 'Create taxonomic chains from iNaturalist API data'):
+    page_set = set()
+    for page in page_array:
+        # link_inat() traverses up through all ancestors, and we don't
+        # care about shadow descendents, so we prefer to call link_inat()
+        # only for real leaf pages.
+        #
+        # This may miss some ancestor pages if the leaf page doesn't have
+        # a scientific name.  But that would be unusual, and it's a pain to fix.
+        if (((page.sci and page.elab_inaturalist != 'n/a') or page.taxon_id)
+            and not page.shadow and not page.child):
+            page_set.add(page)
+    link_inat(page_set)
 
+###############################################################################
 
-if arg('-steps'):
-    info("Step 7c: Create taxonomic chains from DarwinCore archive")
+with Step('lcca', "Assign ancestors to pages that don't have scientific names"):
+    for page in page_array:
+        if not page.rank:
+            # If a page doesn't fit into the Linnaean hierarchy, try to find a
+            # place for it.
+            # We do this even if a Linnaean ancestor is given since it may not
+            # be the best Linnaean parent.
+            # This also propagates is_top, so we don't have to do it again.
+            page.resolve_lcca()
+        if page.is_top and not page.parent and not page.linn_parent:
+            page.propagate_is_top()
 
-parse_core_chains()
+###############################################################################
 
-if arg('-tree') == '7c':
-    print_trees()
-
-
-if arg('-steps'):
-    info("Step 7a: Create taxonomic chains from iNaturalist API data")
-
-page_set = set()
-for page in page_array:
-    # link_inat() traverses up through all ancestors, and we don't
-    # care about shadow descendents, so we prefer to call link_inat()
-    # only for real leaf pages.
-    #
-    # This may miss some ancestor pages if the leaf page doesn't have
-    # a scientific name.  But that would be unusual, and it's a pain to fix.
-    if (((page.sci and page.elab_inaturalist != 'n/a') or page.taxon_id)
-        and not page.shadow and not page.child):
-        page_set.add(page)
-link_inat(page_set)
-
-if arg('-tree') == '7a':
-    print_trees()
-
-
-if arg('-steps'):
-    info("Step 8: Assign ancestors to pages that don't have scientific names")
-
-for page in page_array:
-    if not page.rank:
-        # If a page doesn't fit into the Linnaean hierarchy, try to find a
-        # place for it.
-        # We do this even if a Linnaean ancestor is given since it may not
-        # be the best Linnaean parent.
-        # This also propagates is_top, so we don't have to do it again.
-        page.resolve_lcca()
-    if page.is_top and not page.parent and not page.linn_parent:
-        page.propagate_is_top()
-
-if arg('-tree') == '8':
-    print_trees()
-
-
-if arg('-steps'):
-    info('Step 9: Assign default ancestor to floating trees')
-
-default_ancestor = get_default_ancestor()
-for page in full_page_array:
-    if (not page.is_top
-        and not page.linn_parent
-        and (not page.rank or page.rank < default_ancestor.rank)):
-        if default_ancestor:
-            default_ancestor.link_linn_child(page)
-        else:
-            warn(f'is_top not declared for page at top of hierarchy: {page.full()}')
-
-if arg('-tree') == '9':
-    print_trees()
-
-
-if arg('-steps'):
-    info('Step 10: Propagate properties')
-
-# Assign properties to the appropriate ranks.
-for page in page_array:
-    page.propagate_props()
-
-if arg('-tree') == '10':
-    print_trees()
-
-
-if arg('-steps'):
-    info('Step 11: Apply create and link properties')
-
-# Apply link-creation and related properties
-# in order from the lowest ranked pages to the top.
-for rank in Rank:
+with Step('def_anc', 'Assign default ancestor to floating trees'):
+    default_ancestor = get_default_ancestor()
     for page in full_page_array:
-        if page.rank is rank:
-            page.apply_prop_link()
+        if (not page.is_top
+            and not page.linn_parent
+            and (not page.rank or page.rank < default_ancestor.rank)):
+            if default_ancestor:
+                default_ancestor.link_linn_child(page)
+            else:
+                warn(f'is_top not declared for page at top of hierarchy: {page.full()}')
 
-if arg('-tree') == '11':
-    print_trees()
+###############################################################################
 
-if arg('-steps'):
-    info('Step 12: Read observation counts and common names from observations.csv')
+with Step('prop_prop', 'Propagate properties'):
+    # Assign properties to the appropriate ranks.
+    for page in page_array:
+        page.propagate_props()
+
+###############################################################################
+
+with Step('prop_link', 'Apply create and link properties'):
+    # Apply link-creation and related properties
+    # in order from the lowest ranked pages to the top.
+    for rank in Rank:
+        for page in full_page_array:
+            if page.rank is rank:
+                page.apply_prop_link()
+
+###############################################################################
 
 sci_ignore = {}
 
@@ -561,7 +451,10 @@ def read_ignore_species(f):
         if page and not page.shadow:
             error(f'{sci} is ignored, but there is a real page for it: {page.full()}')
 
-read_data_file('ignore_species.yaml', read_ignore_species)
+with Step('ignore', 'Read ignore_species.yaml'):
+    read_data_file('ignore_species.yaml', read_ignore_species)
+
+###############################################################################
 
 # Read my observations file (exported from iNaturalist) and use it as follows
 # for each observed taxon:
@@ -592,10 +485,9 @@ def read_observation_data(f):
         # name, I'd expect that there should be a taxon_id as well.
         if not sci or not taxon_id: continue
 
-        # Remove the special 'x' sign used by hybrids since I
-        # can't (yet) support it cleanly.  Note that I *don't* use
-        # the r'' string format here because I want the \N to be
-        # parsed during string parsing, not during RE parsing.
+        # Modify the special 'x' sign used by hybrids to the BAWG format.
+        # Note that I *don't* use the r'' string format here because I want
+        # the \N to be parsed during string parsing, not during RE parsing.
         sci = re.sub(' \N{MULTIPLICATION SIGN} ', r' X', sci)
 
         com = get_field('common_name')
@@ -760,51 +652,57 @@ def read_observation_data(f):
         page.parks[short_park] += 1
         page.month[month] += 1
 
-read_data_file('observations.csv', read_observation_data,
-               msg='observation data')
+with Step('obs_data', 'Read observation counts and common names from observations.csv'):
+    read_data_file('observations.csv', read_observation_data,
+                   msg='observation data')
 
-if arg('-tree') == '12':
-    print_trees()
+###############################################################################
 
-if arg('-steps'):
-    info("Step 12j: Apply names from iNaturalist API data")
+with Step('api_names', 'Apply names from iNaturalist API data'):
+    apply_inat_names()
 
-apply_inat_names()
-
-if arg('-tree') == '12j':
-    print_trees()
-
-if arg('-steps'):
-    info('Step 13: Apply remaining properties')
+###############################################################################
 
 top_list = [x for x in page_array if not x.parent]
 
-for page in full_page_array:
-    page.apply_most_props()
+with Step('prop_apply', 'Apply remaining properties'):
+    for page in full_page_array:
+        page.apply_most_props()
 
-if arg('-tree') == '13':
-    print_trees()
+###############################################################################
 
-if arg('-steps'):
-    info('Step 14: Parse remaining text, including glossary terms')
+with Step('parse_txt', 'Parse remaining text, including glossary terms'):
+    parse_glossaries(top_list)
 
-parse_glossaries(top_list)
+    for page in page_array:
+        page.sort_children()
 
-for page in page_array:
-    page.sort_children()
+    for page in page_array:
+        page.check_traits()
 
-for page in page_array:
-    page.check_traits()
+###############################################################################
 
-if arg('-tree') == '14':
-    print_trees()
+with Step('toxic', 'Read and apply toxicity data'):
+    read_toxicity()
 
-# Turn txt into html for all normal and default pages.
-for page in page_array:
-    page.parse()
+    for page in page_array:
+        page.propagate_toxicity()
 
-for page in page_array:
-    page.parse2()
+###############################################################################
+
+with Step('html', 'Write HTML files'):
+    # Turn txt into html for all normal and default pages.
+    for page in page_array:
+        page.parse()
+
+    for page in page_array:
+        page.parse2()
+
+    for page in page_array:
+        page.write_html()
+
+###############################################################################
+# Find incomplete keys
 
 def by_incomplete_obs(page):
     def count_flowers(page):
@@ -818,24 +716,6 @@ def by_incomplete_obs(page):
     else:
         return 0
 
-if arg('-steps'):
-    info('Step 15: Parse plant toxicity data')
-
-read_toxicity()
-
-for page in page_array:
-    page.propagate_toxicity()
-
-if arg('-tree') == '15':
-    print_trees()
-
-
-if arg('-steps'):
-    info('Writing HTML')
-
-for page in page_array:
-    page.write_html()
-
 if arg('-incomplete_keys'):
     # List the top 5 genus pages with an incomplete key,
     # as ordered by number of observations.
@@ -847,19 +727,45 @@ if arg('-incomplete_keys'):
 
 
 ###############################################################################
-# Process 'other' files
 
-other_files = get_file_set('other', 'txt')
-parse_other_txt_files(other_files)
+with Step('strip', 'Strip comments from ungenerated JavaScript and HTML'):
+    if arg('-debug_js'):
+        # To avoid confusion when using the unstripped source files,
+        # delete the stripped versions.
+        delete_file('bawg.css')
+        delete_file('search.js')
+
+        delete_file('gallery.css')
+        delete_file('gallery.js')
+
+        delete_file('swi.js')
+
+        # sw.js currently requires script modification,
+        # so it is always generated (and therefore not deleted).
+    else:
+        strip_comments('bawg.css')
+        strip_comments('search.js')
+
+        strip_comments('gallery.css')
+        strip_comments('gallery.js')
+
+        if arg('-without_cache'):
+            shutil.copy('src/no_sw.js', 'swi.js')
+            shutil.copy('src/no_sw.js', 'sw.js')
+        else:
+            strip_comments('swi.js')
+
+    strip_comments('gallery.html', debug_gallery=arg('-debug_js'))
+
+###############################################################################
+
+with Step('other', 'Process "other/*.txt" files'):
+    other_files = get_file_set('other', 'txt')
+    parse_other_txt_files(other_files)
 
 
 ###############################################################################
 # Create pages.js
-#
-# We create it in root_path instead of working_path because we're just about
-# done.  Since pages.js isn't compared to the previous version, the only
-# disadvantage is if the script crashes just after creating pages.js, it may
-# point to pages that don't exist.  Whatever.
 
 def add_elab(elabs, elab):
     if elab and elab[0].isupper():
@@ -869,8 +775,7 @@ def add_elab(elabs, elab):
     if elab and elab != 'n/a' and elab not in elabs:
         elabs.append(unidecode(elab))
 
-search_file = f'{root_path}/pages.js'
-with open(search_file, 'w', encoding='utf-8') as w:
+def write_pages_js(w):
     w.write('var pages=[\n')
 
     # Sort in reverse order of observation count (most observations first).
@@ -955,12 +860,15 @@ if (typeof main !== 'undefined') {
 }
 ''')
 
+with Step('pages_js', 'Write pages.js'):
+    search_file = f'{root_path}/pages.js'
+    with open(search_file, 'w', encoding='utf-8') as w:
+        write_pages_js(w)
 
 ###############################################################################
 # Create photos.js
 
-photos_file = f'{root_path}/photos.js'
-with open(photos_file, 'w', encoding='utf-8') as w:
+def write_photos_js(w):
     w.write('var pages=[\n')
 
     # The sort order here is arbirtary as long as it is consistent.
@@ -1016,57 +924,61 @@ with open(photos_file, 'w', encoding='utf-8') as w:
     w.write(f'["bay area","figures/bay-area.jpg"],\n')
     w.write('];\n')
 
+with Step('photos_js', 'Write photos.js'):
+    photos_file = f'{root_path}/photos.js'
+    with open(photos_file, 'w', encoding='utf-8') as w:
+        write_photos_js(w)
 
 ###############################################################################
 # Compare the new html files with the prev files.
 # Create an HTML file with links to all new files and all modified files.
 # (Ignore deleted files.)
 
-file_list = (sorted(get_file_set('', 'html', with_path=True)) +
-             sorted(get_file_set('html', 'html', with_path=True)))
-new_list = []
-mod_list = []
-del_list = []
-for name in file_list:
-    if name in ('_mod.html', 'gallery.html'):
-        pass
-    elif name in new_cache and name not in old_cache:
-        new_list.append(name)
-    elif name in mod_files:
-        mod_list.append(name)
-    elif name not in new_cache:
-        del_list.append(name)
-        os.remove(name)
+with Step('html_diffs', 'Find modified HTML files'):
+    file_list = (sorted(get_file_set('', 'html', with_path=True)) +
+                 sorted(get_file_set('html', 'html', with_path=True)))
+    new_list = []
+    mod_list = []
+    del_list = []
+    for name in file_list:
+        if name in ('_mod.html', 'gallery.html'):
+            pass
+        elif name in new_cache and name not in old_cache:
+            new_list.append(name)
+        elif name in mod_files:
+            mod_list.append(name)
+        elif name not in new_cache:
+            del_list.append(name)
+            os.remove(name)
 
-if new_list or mod_list or del_list:
-    mod_file = root_path + "/_mod.html"
-    with open(mod_file, "w", encoding="utf-8") as w:
-        if new_list:
-            w.write('<h1>New files</h1>\n')
-            for name in new_list:
-                w.write(f'<a href="{name}">{name}</a><p/>\n')
-        if mod_list:
-            w.write('<h1>Modified files</h1>\n')
-            for name in mod_list:
-                w.write(f'<a href="{name}">{name}</a><p/>\n')
-        if del_list:
-            w.write('<h1>Deleted files</h1>\n')
-            for name in del_list:
-                w.write(f'{name}<p/>\n')
+    if new_list or mod_list or del_list:
+        mod_file = root_path + "/_mod.html"
+        with open(mod_file, "w", encoding="utf-8") as w:
+            if new_list:
+                w.write('<h1>New files</h1>\n')
+                for name in new_list:
+                    w.write(f'<a href="{name}">{name}</a><p/>\n')
+            if mod_list:
+                w.write('<h1>Modified files</h1>\n')
+                for name in mod_list:
+                    w.write(f'<a href="{name}">{name}</a><p/>\n')
+            if del_list:
+                w.write('<h1>Deleted files</h1>\n')
+                for name in del_list:
+                    w.write(f'{name}<p/>\n')
 
-    # open the default browser with the created HTML file
-    changed_list = mod_list + new_list
-    if len(changed_list) == 1 and not del_list:
-        mod_file = f'{root_path}/' + changed_list[0]
+        # open the default browser with the created HTML file
+        changed_list = mod_list + new_list
+        if len(changed_list) == 1 and not del_list:
+            mod_file = f'{root_path}/' + changed_list[0]
+        else:
+            mod_file = f'{root_path}/_mod.html'
+
+        # os.startfile in Windows requires an absolute path
+        abs_mod_file = os.path.abspath(mod_file)
+        os.startfile(abs_mod_file)
     else:
-        mod_file = f'{root_path}/_mod.html'
-
-    # os.startfile in Windows requires an absolute path
-    abs_mod_file = os.path.abspath(mod_file)
-    os.startfile(abs_mod_file)
-else:
-    info("No HTML files modified.")
-
+        info("No HTML files modified.")
 
 ###############################################################################
 # Update base64 cache and sw.js
@@ -1075,7 +987,7 @@ def by_filename(name):
     slash_pos = name.find('/')
     return name[slash_pos+1:].casefold()
 
-if not arg('-without_cache'):
+def write_sw_js():
     if arg('-debug_js'):
         script_path = 'src/'
     else:
@@ -1132,3 +1044,7 @@ if not arg('-without_cache'):
 
     update_cache(path_list)
     gen_url_cache()
+
+if not arg('-without_cache'):
+    with Step('sw_js', 'Write url_data.json and sw.js'):
+        write_sw_js()

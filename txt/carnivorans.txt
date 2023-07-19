@@ -12,4 +12,4 @@ x:ca
 ==american black bear:Ursus americanus
 x:ca
 
-==pinnipeds:parvorder Pinnipedia
+==pinnipeds:superfamily Phocoidea

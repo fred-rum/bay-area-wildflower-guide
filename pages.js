@@ -639,7 +639,7 @@ var pages=[
 {page:"mosses",sci:["phylum Bryophyta"],x:"f"},
 {page:"Tremellomycetes",sci:["class Tremellomycetes"],x:"k"},
 {page:"damselflies",sci:["suborder Zygoptera"],x:"k"},
-{page:"pinnipeds",sci:["parvorder Pinnipedia"],x:"f"},
+{page:"pinnipeds",sci:["superfamily Phocoidea"],x:"f"},
 {page:"pigeons and doves",sci:["family Columbidae"],x:"f"},
 {page:"bellflower family",sci:["family Campanulaceae"],x:"f"},
 {page:"finches, euphonias, and allies",sci:["family Fringillidae"],x:"f"},

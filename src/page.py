@@ -21,8 +21,6 @@ from toxic import *
 
 full_page_array = [] # array of both real and shadow pages
 page_array = [] # array of real pages; only appended to; never otherwise altered
-genus_page_list = {} # genus name -> list of pages in that genus
-genus_family = {} # genus name -> family name
 
 # The default_ancestor page can apply properties to any pages that otherwise
 # can't find an ancestor with 'is_top' declared.
@@ -1021,7 +1019,7 @@ class Page:
         elif elab:
             names = elab
         else:
-            return '{' + self.name + '}'
+            names = '{' + self.name + '}'
 
         if self.taxon_id:
             names += f' ({self.taxon_id})'
@@ -2274,7 +2272,10 @@ class Page:
 
         return sci
 
-    def parse_children_and_attributes(self):
+    # Check for attribute and property declarations.
+    # If this info is within a child key, it is assigned to the child.
+    # Otherwise it is assigned to the parent.
+    def parse_attributes_properties_and_child_info(self):
         # Replace a ==[name] link with ==[page] and record the
         # parent->child relationship.
         def repl_child(matchobj):
@@ -3409,15 +3410,6 @@ class Page:
             if self.sci:
                 self.write_external_links(w)
             write_footer(w)
-
-    def record_genus(self):
-        # record all pages that are within each genus
-        sci = self.sci
-        if self.rank and self.rank <= Rank.genus:
-            genus = sci.split(' ')[0]
-            if genus not in genus_page_list:
-                genus_page_list[genus] = []
-            genus_page_list[genus].append(self)
 
     def write_subset_hierarchy(self, w, trait, value, page_list):
         # We write out the matches to a string first so that we can get
