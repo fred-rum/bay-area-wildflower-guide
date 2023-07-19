@@ -578,8 +578,6 @@ def read_observation_data(f):
 
     set_any_observations()
 
-    error_begin_section()
-
     csv_reader = csv.DictReader(f)
 
     if 'quality_grade' in csv_reader.fieldnames:
@@ -761,8 +759,6 @@ def read_observation_data(f):
             page.parks[short_park] = 0
         page.parks[short_park] += 1
         page.month[month] += 1
-
-    error_end_section()
 
 read_data_file('observations.csv', read_observation_data,
                msg='observation data')
@@ -1136,9 +1132,3 @@ if not arg('-without_cache'):
 
     update_cache(path_list)
     gen_url_cache()
-
-
-###############################################################################
-# Flush out any pending error messagse
-
-error_end()

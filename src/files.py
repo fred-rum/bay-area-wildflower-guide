@@ -270,7 +270,8 @@ def read_data_file(filename, fn, mode='r', encoding='utf-8', msg=None):
                   encoding=encoding) as f:
             if arg('-steps'):
                 info(f'Reading {msg}data/{filename}')
-            fn(f)
+            with Progress(f'While reading {msg}data/{filename}'):
+                fn(f)
     except FileNotFoundError:
         if arg('-steps'):
             info(f'Skipping {msg}data/{filename} (file not found)')

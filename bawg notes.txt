@@ -1621,15 +1621,13 @@ allow typos in search:
 should "life" be eligible for link_inaturalist and link_bayarea_inaturalist
 (using the taxon_id)?
 
-Change observation properties that currently check for "casual" to instead
+change observation properties that currently check for "casual" to instead
   check for wild vs. captive.  E.g. for my unphotoed bobcat observation.
 
-Create pages for photos similar to pages for observations
+create pages for photos similar to pages for observations
   use property based on taxonomy
     if property is not applied, complain about unused photo instead
   iNaturalist is always allowed to provide names
-
-Can I clear data/taxon_names.yaml now that I can get names from iNaturalist?
 
 
 observations.csv has an observation for a taxon below the mustard family
@@ -1657,16 +1655,5 @@ observations.csv has an observation for a taxon below the mustard family
         taxon_id
       by checking the DarwinCore database and API data
 
-uext lots of try/except statements so that
-  we always know what part of the code we're in
-  and what we're doing
-  when something goes wrong
-should this interact with the error() code in some way?
-  e.g. use a standard 'entry' function to set up a message
-    and call another function
-  then, if something goes wrong, print the message
-  a boolean parameter also determines whether the program exits
-    at the end of the section if there was any error
-    (even if max errors wasn't reached)
 change steps to (short, unspaced?) names instead of numbers
   so that I don't have to renumber when adding a step

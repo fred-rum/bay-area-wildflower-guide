@@ -1,126 +1,131 @@
+# Handle errors, warnings, and similar messages.
+#
+# The script keeps this code up to date with what it is doing so that
+# if something bad happens, an message can be printed that will help
+# the user diagnose the problem.  "Something bad" could be a deliberate
+# call to the error handler, or it could be an uncaught exception.
+#
+# The messages about script progress can be nested, e.g.
+#  While reading observations.csv
+#   processing line 327: silver bush lupine (Lupinus albifrons)
+#    adding Lupinus albifrons as a Linnaean descendent of subfamily Epidendroideae
+#     error: bad rank order:
+#      Linnaean parent: subfamily Epidendroideae [taxonomy from observations.csv]
+#      Linnaean child:  orchid family (genus Orchidaceae) [child of flowering plants.txt] (rank genus)
+#
+# If there are multiple messages (i.e. for warnings or non-fatal errors),
+# don't repeat any parts of the progress that were already printed.
+# Also, suppress duplicate messages regardless of script progress.
+#
+# There is a maximum count of non-fatal errors, after which the script will
+# fail.  The script will also fail at the end of a section if there were any
+# non-fatal errors in that section.  That way, multiple similar errors can be
+# printed, but the script won't continue and then potentially run into more
+# problems that might not make sense in light of the previous errors.
+
 import sys
+import traceback
 
 # My files
 from args import *
 
-_former_prefix = None
-_error_cnt = 0
-_in_section = False
-_delayed_cnt = 0 # is always 0 when _in_section is False
+progress_msg_list = [] # stack of strings describing what is being processed
+progress_printed_cnt = 0 # depth of stack already printed
+progress_printed_msgs = set() # record of previous message for duplicate detection
+error_cnt = 0 # count of non-fatal errors in the current section
 
+def indent():
+    return ' ' * progress_printed_cnt
+
+# info() and warn() don't write the current progress (for now)
+# because the existing messages seem sufficient.  Perhaps I'll add a
+# variation of these functions later if progress is sometimes needed.
+#
+# Even though these functions don't write the current progress, they
+# still indent appropriately if the progress was already printed
 def info(msg):
-    print(msg, flush=True)
+    print(indent() + msg, flush=True)
 
 def warn(msg):
     sys.stdout.flush()
-    print(msg, file=sys.stderr, flush=True)
+    print(indent() + msg, file=sys.stderr, flush=True)
 
-# By default, errors are emitted as soon as detected, and duplicates are
-# not removed.
-#
-# However, after error_begin_section() is called, errors with different
-# prefixes are collated together.  Whatever error occurs first is allowed
-# to emit immediately as it occurs, along with any other errors with the
-# same prefix.  Errors with different prefixes are delayed and emitted
-# after error_end_section() is called.
-#
-# Additionally, while within an error section, all duplicate errors are
-# removed, whether the error was originally emitted immediately or delayed.
-def error_begin_section():
-    global _in_section, _stored_data, _delayed_cnt, _former_prefix
+def warn_progress():
+    global progress_printed_cnt
 
-    if _in_section:
-        error('error_begin_section() called when already in an error section')
-        error_end_section()
+    if len(progress_msg_list) > progress_printed_cnt:
+        # Skip any progress messages that were already printed
+        progress_list_to_print = progress_msg_list[progress_printed_cnt:]
+        warn('\n'.join(progress_list_to_print))
+        progress_printed_cnt = len(progress_msg_list)
 
-    _in_section = True
-    _stored_data = {} # only valid when _in_section is True
-    _delayed_cnt = 0
+def fail_on_errors(max):
+    if error_cnt >= max:
+        warn_progress()
+        warn(msg)
+        sys.exit(error_cnt)
 
-    # The first message should always be emitted (not delayed) regardless
-    # of its prefix.  We need a value different than None to indicate
-    # this fresh start since None already has a meaning.
-    _former_prefix = 'start'
-
-def error_end_section():
-    global _in_section, _delayed_cnt
-
-    if not _in_section:
-        error('error_end_section() called when not in an error section')
-        return
-
-    _in_section = False
-    _delayed_cnt = 0
-
-    for prefix in _stored_data.keys(): # not sorted because None causes problems
-        for msg in sorted(_stored_data[prefix].keys()):
-            if _stored_data[prefix][msg]: # 'delay' boolean
-                _emit_error(msg, prefix)
-
-def _emit_error(msg, prefix):
-    global _former_prefix, _error_cnt
-
-    sys.stdout.flush()
-
-    if prefix:
-        if prefix != _former_prefix:
-            print(prefix, file=sys.stderr)
-            _error_cnt += 1
-        msg = '  ' + msg
-    _former_prefix = prefix
-
-    print(msg, file=sys.stderr, flush=True)
-    _error_cnt += 1
-
-def _check_error_cnt():
-    if _error_cnt + _delayed_cnt >= 10 and not arg('-no_error_limit'):
-        if _in_section:
-            error_end_section()
-        sys.exit('Too many errors')
-
-def error(msg, prefix=None):
-    global _error_cnt, _former_prefix, _delayed_cnt
-
-    # When in a section of related errors, delay the msg as necessary
-    # to avoid intermixing different prefixes.  Note that a valid
-    # prefix can still be emitted when the former prefix is None, but
-    # a new msg with prefix=None must be stored if there was a valid
-    # former prefix.
-    delay = (_in_section and
-             _former_prefix != 'start' and
-             prefix != _former_prefix)
-
-    if _in_section:
-        # When in a section of related errors, we *always* store the msg,
-        # even if it is emitted right away.  This allows us to detect
-        # duplicates.
-
-        # If this is a duplicate message within this section, discard it.
-        if prefix in _stored_data and msg in _stored_data[prefix]:
-            return
-
-        # Store the message along with the 'delay' boolean to indicate
-        # whether it should be emitted later.
-        if prefix not in _stored_data:
-            _stored_data[prefix] = {}
-            if delay and prefix:
-                _delayed_cnt += 1
-        _stored_data[prefix][msg] = delay
-        if delay:
-            _delayed_cnt += 1
-
-    if not delay:
-        _emit_error(msg, prefix)
-
-    _check_error_cnt()
-
-def error_end():
-    if _error_cnt:
-        sys.exit(_error_cnt)
-
-class FatalError(Exception):
-    pass
+def error(msg):
+    warn_progress()
+    warn(indent() + msg)
+    error_cnt += 1
+    if not arg('-no_error_limit'):
+        fail_on_errors(10)
 
 def fatal(msg):
-    warn(msg)
-    raise FatalError(msg)
+    error(msg)
+    sys.exit(-1)
+
+# a class that supports code like this:
+#   with Progress(msg):
+#     do stuff
+#
+# This does stuff with the progress message in context
+# so that it can be printed in the case of an error or exception.
+class Progress:
+    def __init__(self, msg):
+        fail_on_errors(1)
+
+        indented_msg = indent() + msg
+        progress_msg_list.append(indented_msg)
+
+    def __enter__(self):
+        pass
+
+    # __exit__ gets called with values in the last three arguments
+    # if there was an Exception, or None if the 'with' context ended cleanly.
+    # Be careful here!  An exception in this handler currently disappears
+    # entirely, and I haven't bothered to figure out why.
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        global progress_printed_cnt
+
+        if isinstance(exc_val, SystemExit):
+            # Allow a SystemExit exception caued by sys.exit()
+            # to fall cleanly through the exception handlers
+            # until the program exits.
+            return False
+        elif exc_val:
+            # An exception has occurred
+            warn_progress()
+
+            trace_str = indent() + indent().join(traceback.format_exception(exc_type, exc_val, exc_tb))
+            warn(trace_str)
+
+            sys.exit(-1)
+        else:
+            # The "with" context ended without an exception.
+            fail_on_errors(1)
+
+            progress_msg_list.pop()
+            if progress_printed_cnt > len(progress_msg_list):
+                progress_printed_cnt = len(progress_msg_list)
+
+            return True
+
+# with Progress('msg 1'):
+#     try:
+#         with Progress('msg 2'):
+#             1/0
+#     except:
+#         print('here be clean up')
+#         sys.exit(1)

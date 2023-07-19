@@ -715,9 +715,8 @@ def parse_glossaries(top_list):
     # Now that we know the glossary hierarchy, we can apply glossary links
     # within each glossary and finally write out the glossary HTML.
     create_regex()
-    error_begin_section()
-    master_glossary.write_html()
-    error_end_section()
+    with Progress(f'While writing HTML for glossaries'):
+        master_glossary.write_html()
 
 def write_glossary_search_terms(w):
     master_glossary.write_search_terms(w)
