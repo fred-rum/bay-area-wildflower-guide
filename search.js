@@ -211,7 +211,8 @@ function check_list(search_str, match_list, page_info) {
   var pri_adj = 0.0;
   for (var i = 0; i < match_list.length; i++) {
     var name = match_list[i];
-    if ((page_info.x == 'g') || (page_info.x == 'j')) {
+    if (((page_info.x == 'g') || (page_info.x == 'j')) &&
+        !name.endsWith(' glossary')){
       name = 'glossary: ' + name;
     }
     var match_info = check(search_str, name, pri_adj);

@@ -128,7 +128,8 @@ with Step('parse_decl', 'Parse attributes, properties, and child info'):
     # This code can add new pages, so we make a copy
     # of the list to iterate through.
     for page in page_array[:]:
-        page.parse_attributes_properties_and_child_info()
+        with Progress(f'in {page.full()}'):
+            page.parse_attributes_properties_and_child_info()
 
 ###############################################################################
 

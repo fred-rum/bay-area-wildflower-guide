@@ -607,7 +607,7 @@ class Glossary:
     # Write search terms for my glossaries to pages.js
     def write_search_terms(self, w):
         if not self.invisible:
-            w.write(f'{{page:"{self.name}",com:["{self.title}"],x:"g",glossary:[\n')
+            w.write(f'{{page:"{self.name}",com:["{self.name}","{self.title}"],x:"g",glossary:[\n')
             for term in self.search_terms:
                 terms_str = '","'.join(term)
                 w.write(f'{{terms:["{terms_str}"]}},\n')

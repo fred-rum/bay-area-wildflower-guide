@@ -2811,13 +2811,13 @@ var pages=[
 {page:"tiburon paintbrush",sci:["Castilleja affinis var. neglecta","Castilleja affinis ssp. neglecta"],x:"u"},
 {page:"western small milkweed bug",sci:["Lygaeus kalmii ssp. kalmii"],x:"o"},
 {page:"winter currant",sci:["Ribes sanguineum var. sanguineum"],x:"u"},
-{page:"general glossary",com:["general"],x:"g",glossary:[
+{page:"general glossary",com:["general glossary","general"],x:"g",glossary:[
 {terms:["Diablo range"]},
 {terms:["Santa Cruz mountains","Santa Cruz range"]},
 {terms:["Mt. Tam","Mt. Tamalpais","Mount Tam","Mount Tamalpais"]},
 {terms:["outer coastal range"]},
 ]},
-{page:"plant glossary",com:["vascular plants"],x:"g",glossary:[
+{page:"plant glossary",com:["plant glossary","vascular plants"],x:"g",glossary:[
 {terms:["leaf","leaves","leaved"]},
 {terms:["blade","blades","leaf blade","leaf blades"]},
 {terms:["petiole","petioles","petioled"]},
@@ -2956,16 +2956,16 @@ var pages=[
 {terms:["wing","wings","winged"]},
 {terms:["winged petiole","winged petioles","petiole winged","petioles winged","wing-petioled"]},
 ]},
-{page:"conifer glossary",com:["conifers"],x:"g",glossary:[
+{page:"conifer glossary",com:["conifer glossary","conifers"],x:"g",glossary:[
 {terms:["cone","cones"]},
 {terms:["scale","scales"]},
 ]},
-{page:"fern glossary",com:["ferns"],x:"g",glossary:[
+{page:"fern glossary",com:["fern glossary","ferns"],x:"g",glossary:[
 {terms:["pinna","pinnae"]},
 {terms:["pinnule","pinnules"]},
 {terms:["stipe","stipes"]},
 ]},
-{page:"flower glossary",com:["flowering plants"],x:"g",glossary:[
+{page:"flower glossary",com:["flower glossary","flowering plants"],x:"g",glossary:[
 {terms:["flower","flowers","flowered"]},
 {terms:["pedicel","pedicels","pediceled"]},
 {terms:["receptacle","receptacles"]},
@@ -3032,10 +3032,10 @@ var pages=[
 {terms:["tube","tubes"]},
 {terms:["valve","valves","valved"]},
 ]},
-{page:"blue-eyed marys",com:["blue-eyed marys"],x:"g",glossary:[
+{page:"blue-eyed marys",com:["blue-eyed marys","blue-eyed marys"],x:"g",glossary:[
 {terms:["corolla","corollas","lobe","lobes","upper lip","upper lips","lower lip","lower lips","lip","lips","keel","keels"]},
 ]},
-{page:"grass glossary",com:["grasses"],x:"g",glossary:[
+{page:"grass glossary",com:["grass glossary","grasses"],x:"g",glossary:[
 {terms:["auricle","auricles"]},
 {terms:["awn","awns"]},
 {terms:["callus","calluses"]},
@@ -3050,10 +3050,10 @@ var pages=[
 {terms:["spike","spikes"]},
 {terms:["umbel","umbels"]},
 ]},
-{page:"knotweed glossary",com:["knotweeds"],x:"g",glossary:[
+{page:"knotweed glossary",com:["knotweed glossary","knotweeds"],x:"g",glossary:[
 {terms:["stipe","stipes"]},
 ]},
-{page:"larkspur glossary",com:["larkspurs"],x:"g",glossary:[
+{page:"larkspur glossary",com:["larkspur glossary","larkspurs"],x:"g",glossary:[
 {terms:["upper sepal","upper sepals"]},
 {terms:["spur","spurs"]},
 {terms:["lateral sepals","lateral sepal"]},
@@ -3061,12 +3061,12 @@ var pages=[
 {terms:["upper petals","upper petal"]},
 {terms:["lower petals","lower petal"]},
 ]},
-{page:"legume glossary",com:["legumes"],x:"g",glossary:[
+{page:"legume glossary",com:["legume glossary","legumes"],x:"g",glossary:[
 {terms:["banner","banners"]},
 {terms:["wing","wings"]},
 {terms:["keel","keels"]},
 ]},
-{page:"orchid glossary",com:["orchids"],x:"g",glossary:[
+{page:"orchid glossary",com:["orchid glossary","orchids"],x:"g",glossary:[
 {terms:["lower petal","lower petals"]},
 {terms:["lip","lips"]},
 {terms:["upper petals","upper petal"]},
@@ -3076,11 +3076,11 @@ var pages=[
 {terms:["lateral sepals","lateral sepal"]},
 {terms:["column","columns"]},
 ]},
-{page:"sedge glossary",com:["sedges"],x:"g",glossary:[
+{page:"sedge glossary",com:["sedge glossary","sedges"],x:"g",glossary:[
 {terms:["floret","florets"]},
 {terms:["spikelet","spikelets"]},
 ]},
-{page:"sunflower glossary",com:["sunflowers"],x:"g",glossary:[
+{page:"sunflower glossary",com:["sunflower glossary","sunflowers"],x:"g",glossary:[
 {terms:["awn","awns"]},
 {terms:["bristle","bristles"]},
 {terms:["disk","disks"]},
@@ -3105,7 +3105,7 @@ var pages=[
 {terms:["staminate flower","staminate flowers","staminate"]},
 {terms:["pistillate flower","pistillate flowers","pistillate"]},
 ]},
-{page:"insect glossary",com:["insects"],x:"g",glossary:[
+{page:"insect glossary",com:["insect glossary","insects"],x:"g",glossary:[
 {terms:["head","heads"]},
 {terms:["thorax","thoraxes","thoraces"]},
 {terms:["abdomen","abdomens"]},
@@ -3122,13 +3122,13 @@ var pages=[
 {terms:["apical"]},
 {terms:["basal"]},
 ]},
-{page:"bee glossary",com:["bees"],x:"g",glossary:[
+{page:"bee glossary",com:["bee glossary","bees"],x:"g",glossary:[
 {terms:["S1--S6","S1","S2","S3","S4","S5","S6"]},
 {terms:["sternite","sternites"]},
 {terms:["T1--T6","T1","T2","T3","T4","T5","T6"]},
 {terms:["tergite","tergites"]},
 ]},
-{page:"beetle glossary",com:["beetles"],x:"g",glossary:[
+{page:"beetle glossary",com:["beetle glossary","beetles"],x:"g",glossary:[
 {terms:["head","heads"]},
 {terms:["thorax","thoraxes","thoraces"]},
 {terms:["pronotum","pronotums"]},
@@ -3136,7 +3136,7 @@ var pages=[
 {terms:["abdomen","abdomens"]},
 {terms:["elytron","elytra"]},
 ]},
-{page:"true bug glossary",com:["true bugs"],x:"g",glossary:[
+{page:"true bug glossary",com:["true bug glossary","true bugs"],x:"g",glossary:[
 {terms:["head","heads"]},
 {terms:["antenna","antennae"]},
 {terms:["antennomere","antennomeres"]},

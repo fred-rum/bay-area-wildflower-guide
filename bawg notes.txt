@@ -1655,5 +1655,19 @@ observations.csv has an observation for a taxon below the mustard family
         taxon_id
       by checking the DarwinCore database and API data
 
-Improve search to find e.g. 'beetle glossary'
-  rather than only 'glossary: beetles'
+Compress pages.js a bit:
+  if a common name matches the page name
+    e.g. 0 = page
+    Note that "" is already reserved for cases where there is no common name,
+      only alternative common names
+  if a scientific name only adds a rank to the page name
+    e.g. "genus " + page
+    e.g. page[0] + page[1] + "var. " + page
+
+If the search ends with a space or punctuation,
+  it would be slightly nice if the autocomplete box
+    highlighted trailing space or punctuation in the autocomplete result
+    if it directly follows the last highlighted section.
+Also, if match section goes all the way to the end,
+  it shouldn't count as a match
+  since the user implies that there will be more.
