@@ -69,7 +69,8 @@ def fail_on_errors(max):
 
 def error(msg):
     warn_progress()
-    warn(indent() + msg)
+    warn(msg)
+    global error_cnt
     error_cnt += 1
     if not arg('-no_error_limit'):
         fail_on_errors(10)

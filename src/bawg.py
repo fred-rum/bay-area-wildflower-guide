@@ -405,14 +405,15 @@ with Step('lcca', "Assign ancestors to pages that don't have scientific names"):
 
 with Step('def_anc', 'Assign default ancestor to floating trees'):
     default_ancestor = get_default_ancestor()
-    for page in full_page_array:
-        if (not page.is_top
-            and not page.linn_parent
-            and (not page.rank or page.rank < default_ancestor.rank)):
-            if default_ancestor:
-                default_ancestor.link_linn_child(page)
-            else:
-                warn(f'is_top not declared for page at top of hierarchy: {page.full()}')
+    if default_ancestor:
+        for page in full_page_array:
+            if (not page.is_top
+                and not page.linn_parent
+                and (not page.rank or page.rank < default_ancestor.rank)):
+                if default_ancestor:
+                    default_ancestor.link_linn_child(page)
+                else:
+                    warn(f'is_top not declared for page at top of hierarchy: {page.full()}')
 
 ###############################################################################
 

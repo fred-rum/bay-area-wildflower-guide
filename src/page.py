@@ -1561,9 +1561,6 @@ class Page:
 
     # Using recursion, find the lowest-ranked ancestor of self.
     #
-    # A RecursionError is flagged if the child argument page is encountered
-    # during the search.
-    # 
     # This function is called during assign_child to find the best
     # ancestor to create a Linnaean link to.
     #
@@ -1590,7 +1587,7 @@ class Page:
     # raise an exception here if we try to traverse through 'child'.
     def find_lowest_ranked_ancestor(self, child, exclude_set=None):
         if self == child:
-            raise RecursionError
+            fatal('circular loop detected')
 
         if self.rank:
             return self
@@ -1654,23 +1651,24 @@ class Page:
             # In that case, bail out as quickly as possible.
             return
 
-        # Make sure the child rank is less than the parent rank.
-        # But if the child is unranked, we don't bother to search deeper.
-        # (We expect to only create a Linnaean link on an unranked child
-        # after determining the lowest common child ancestor of its
-        # descendants, which means their ranks are already guaranteed to
-        # be compatible.
-        if child.rank and self.rank <= child.rank:
-            fatal(f'bad rank order when adding {child.full()} (rank {child.rank.name}) as a child of {self.full()} (rank {self.rank.name})')
+        with Progress(f'link_linn_child: {child.full()} as a child of {self.full()}'):
 
-        if child.linn_parent == None:
-            # The child node was the top of its Linnaean tree.  Now we know
-            # its Linnaean parent.
-            child.linn_parent = self
-            self.linn_child.add(child)
-            return
+            # Make sure the child rank is less than the parent rank.
+            # But if the child is unranked, we don't bother to search deeper.
+            # (We expect to only create a Linnaean link on an unranked child
+            # after determining the lowest common child ancestor of its
+            # descendants, which means their ranks are already guaranteed to
+            # be compatible.
+            if child.rank and self.rank <= child.rank:
+                fatal(f'bad rank order when adding {child.full()} as a child of {self.full()}')
 
-        try:
+            if child.linn_parent == None:
+                # The child node was the top of its Linnaean tree.  Now we know
+                # its Linnaean parent.
+                child.linn_parent = self
+                self.linn_child.add(child)
+                return
+
             # The new link attempts to establish a different parent than the
             # child previously had.  Check whether the new parent or old
             # parent has the lower rank, and react accordingly.
@@ -1708,9 +1706,6 @@ class Page:
                 # parents are not the same, that's a problem, but
                 # it'll get caught when we make the recursive call.
                 self.link_linn_child(child.linn_parent)
-        except FatalError:
-            warn(f'was adding {child.full()} (rank {child.rank.name}) as a child of {self.full()} (rank {self.rank.name})')
-            raise
 
     # Create a Linnaean link to a parent that is descibed by rank &
     # name.  Although we use the term 'parent', it could actually be a
@@ -1797,36 +1792,35 @@ class Page:
             self.add_linn_parent(rank, name, sci)
 
     def assign_child(self, child):
-        if self in child.parent:
-            error(f'{child.full()} added as child of {self.full()} twice')
-            return
+        with Progress(f'assign_child {child.full()} as child of {self.full()}'):
+            if self in child.parent:
+                error(f'child added more than once')
+                return
 
-        # In addition to creating a real link, we also create a Linnaean link.
-        # The process of adding the Linnaean link also checks for a potential
-        # circular loop in the real tree, so we do that before creating the
-        # real link.
-        #
-        # If either the parent or child is unranked, we don't want to create
-        # a Linnaean link to/from it.  Instead we search for the nearest
-        # Linnaean ancestor and link it to the nearest Linnaean descendants.
-        #
-        # Note that after the real tree has been built, we *can* make a
-        # Linnaean link to an unranked child, but we still don't want to do
-        # so now.  Instead, we prefer to allow the Linnaean tree to accumulate
-        # as much detail as possible so that the unranked page can later
-        # determine its nearest Linnaean ancestor without worrying that maybe
-        # a nearer Linnaean ancestor will get created.
-        try:
+            # In addition to creating a real link, we also create a Linnaean
+            # link.  The process of adding the Linnaean link also checks for a
+            # potential circular loop in the real tree, so we do that before
+            # creating the real link.
+            #
+            # If either the parent or child is unranked, we don't want to
+            # create a Linnaean link to/from it.  Instead we search for the
+            # nearest Linnaean ancestor and link it to the nearest Linnaean
+            # descendants.
+            #
+            # Note that after the real tree has been built, we *can* make a
+            # Linnaean link to an unranked child, but we still don't want to
+            # do so now.  Instead, we prefer to allow the Linnaean tree to
+            # accumulate as much detail as possible so that the unranked page
+            # can later determine its nearest Linnaean ancestor without
+            # worrying that maybe a nearer Linnaean ancestor will get created.
             linn_parent = self.find_lowest_ranked_ancestor(child)
-        except RecursionError:
-            fatal(f'circular loop detected through unranked pages when adding {child.full()} as child of {self.full()}')
 
-        if linn_parent:
-            child.link_linn_descendants(linn_parent)
+            if linn_parent:
+                child.link_linn_descendants(linn_parent)
 
-        # OK, now we can finally create the real link.
-        self.child.append(child)
-        child.parent.add(self)
+            # OK, now we can finally create the real link.
+            self.child.append(child)
+            child.parent.add(self)
 
     def print_tree(self, level=0, link_type='', exclude_set=None):
         if exclude_set is None:
@@ -2327,11 +2321,7 @@ class Page:
                 # If the child does not exist, create it.
                 child_page = Page(com, sci, src=data_src)
 
-            try:
-                self.assign_child(child_page)
-            except FatalError:
-                warn(f'was adding {child_page.full()} as a child of {self.full()}')
-                raise
+            self.assign_child(child_page)
 
             if is_rep:
                 if self.rep_child is not None:
