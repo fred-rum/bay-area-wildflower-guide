@@ -78,9 +78,8 @@ def read_core():
         read_core_pickle(core_pickle_name)
 
     if not core_dict:
-        read_data_file(zip_name, read_core_zip,
-                       mode='rb', encoding=None,
-                       msg='taxon hierarchy')
+        read_file('data/' + zip_name, read_core_zip,
+                  raw=True, msg='taxon hierarchy')
 
 
 def read_core_pickle(pickle_name):
@@ -102,7 +101,6 @@ def dump_core_db(core_dict, name):
 
     with open(f'{root_path}/data/{name}', mode='wb') as w:
         pickle.dump(core_db, w)
-
 
 
 def read_core_zip(zip_fd):

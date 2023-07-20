@@ -415,6 +415,9 @@ class Glossary:
         if not self.title:
             self.title = self.taxon
 
+    def read_glossary_file(self, f):
+        self.txt = f.read()
+
     def read_terms(self):
         def repl_taxon(matchobj):
             self.set_taxon(matchobj.group(1))
@@ -424,13 +427,8 @@ class Glossary:
             self.title = matchobj.group(1)
             return ''
 
-        path = f'{root_path}/glossary/{self.name}.txt'
-        try:
-            with open(path, mode='r') as f:
-                self.txt = f.read()
-        except:
-            print(f'error reading {path}')
-            raise
+        filename = f'glossary/{self.name}.txt'
+        read_file(filename, self.read_glossary_file)
 
         self.txt = re.sub(r'^taxon:\s*(.*?)\s*$',
                           repl_taxon, self.txt, flags=re.MULTILINE)
@@ -687,7 +685,8 @@ def parse_glossaries(top_list):
         glossary.read_terms()
 
     jepson_glossary = Glossary('Jepson eFlora glossary')
-    read_data_file('jepson_glossary.txt', jepson_glossary.read_jepson_terms)
+    read_file('data/jepson_glossary.txt', jepson_glossary.read_jepson_terms,
+              skippable=True)
     if not jepson_glossary.is_jepson:
         # We failed to read the file.  Let's make it super clear that the
         # Jepson glossary can't be used.

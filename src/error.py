@@ -105,7 +105,7 @@ class Progress:
             # Allow a SystemExit exception caued by sys.exit()
             # to fall cleanly through the exception handlers
             # until the program exits.
-            return False
+            return False # exception continues to propagate
         elif exc_val:
             # An exception has occurred
             warn_progress()

@@ -91,7 +91,7 @@ def read_parks(f):
                         park_loc[exp] = loc
 
 with Step('read_parks', 'Read parks.yaml'):
-    read_data_file('parks.yaml', read_parks)
+    read_file('data/parks.yaml', read_parks, skippable=True)
 
 ###############################################################################
 
@@ -174,7 +174,7 @@ def create_taxon_pages(d, prefix=''):
             #info(f'{page.com} <-> {page.elab}')
 
 with Step('taxon_names', 'Parse taxon_names.yaml'):
-    read_data_file('taxon_names.yaml', read_taxon_names)
+    read_file('data/taxon_names.yaml', read_taxon_names, skippable=True)
 
 ###############################################################################
 
@@ -354,8 +354,8 @@ def read_obs_chains(f):
             raise
 
 with Step('obs_chains', 'Create taxonomic chains from observations.csv'):
-    read_data_file('observations.csv', read_obs_chains,
-                   msg='taxon hierarchy')
+    read_file('data/observations.csv', read_obs_chains,
+              skippable=True, msg='taxon hierarchy')
 
     # If we got this far and a page still doesn't have a name, give it one.
     for page in page_array:
@@ -452,7 +452,7 @@ def read_ignore_species(f):
             error(f'{sci} is ignored, but there is a real page for it: {page.full()}')
 
 with Step('ignore', 'Read ignore_species.yaml'):
-    read_data_file('ignore_species.yaml', read_ignore_species)
+    read_file('data/ignore_species.yaml', read_ignore_species, skippable=True)
 
 ###############################################################################
 
@@ -653,8 +653,8 @@ def read_observation_data(f):
         page.month[month] += 1
 
 with Step('obs_data', 'Read observation counts and common names from observations.csv'):
-    read_data_file('observations.csv', read_observation_data,
-                   msg='observation data')
+    read_file('data/observations.csv', read_observation_data,
+              skippable=True, msg='observation data')
 
 ###############################################################################
 

@@ -65,19 +65,22 @@ def read_toxic_alias(f):
         else:
             error(f'Unknown line in toxic_alias.txt: {c}')
 
-read_data_file('toxic_alias.txt', read_toxic_alias)
+read_file('data/toxic_alias.txt', read_toxic_alias, skippable=True)
 
 
 def read_toxicity():
     try:
-        read_data_file('semitoxic.scrape', read_semitoxic_plants,
-                       msg='list of plants that are only toxic to animals')
+        read_file('data/semitoxic.scrape', read_semitoxic_plants,
+                  skippable=True,
+                  msg='list of plants that are only toxic to animals')
 
-        read_data_file('nontoxic.scrape', read_nontoxic_plants,
-                       msg='list of non-toxic plants')
+        read_file('data/nontoxic.scrape', read_nontoxic_plants,
+                  skippable=True,
+                  msg='list of non-toxic plants')
 
-        read_data_file('toxic.scrape', read_toxic_plants,
-                       msg='plant toxicity ratings')
+        read_file('data/toxic.scrape', read_toxic_plants,
+                  skippable=True,
+                  msg='plant toxicity ratings')
     except:
         # If anything goes wrong, dump everything in the dictionary.
         # (We don't know the full extent of what's useful, so assume

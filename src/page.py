@@ -100,8 +100,9 @@ def read_fna_families(f):
 
         fna_family_set.add(line)
 
-read_data_file('fna_families.txt', read_fna_families,
-               msg='list of families included in the Flora of North America')
+read_file('data/fna_families.txt', read_fna_families,
+          skippable=True,
+          msg='list of families included in the Flora of North America')
 
 # Prepare a list of properties that can be applied.
 # The initial list is in props, above.

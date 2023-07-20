@@ -339,7 +339,7 @@ def parse2_txt(src_page, s, glossary):
 
     return s
 
-def parse_other(name):
+def parse_other(name, f):
     def repl_title(matchobj):
         nonlocal title
         title = matchobj.group(1)
@@ -355,8 +355,7 @@ def parse_other(name):
         incl_footer = True
         return ''
 
-    with open(f'{root_path}/other/{name}.txt', 'r', encoding='utf-8') as r:
-        txt = r.read()
+    txt = f.read()
 
     # Default values; these can be overridden by lines within the txt.
     title = 'Bay Area Wildflower Guide'
@@ -380,5 +379,6 @@ def parse_other(name):
         write_footer(w, incl_footer, at_root=True)
 
 def parse_other_txt_files(other_files):
-    for file in other_files:
-        parse_other(file)
+    for name in other_files:
+        read_file(f'other/{name}.txt',
+                  lambda f: parse_other(name, f))

@@ -1654,3 +1654,6 @@ observations.csv has an observation for a taxon below the mustard family
         rank
         taxon_id
       by checking the DarwinCore database and API data
+
+Improve search to find e.g. 'beetle glossary'
+  rather than only 'glossary: beetles'

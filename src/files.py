@@ -211,17 +211,81 @@ def write_header(w, title, h1, nospace=False, desc=None, at_root=False):
             space_class = ''
         w.write(f'<h1 id="title"{space_class}>{h1}</h1>\n')
 
+# Convert non-ASCII characters to their closest ASCII equivalent.
+# This is suitable for use as a filename or as a string that the user
+# can actually type when searching.
+def filename(name):
+    return unidecode(name)
+
+# Percent-encode characters that aren't supposed to be in a URL.
+# E.g. encode " " as "%20".
+# safe list taken from
+# https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI
+# In particular, I use ",", "'", and of course "/" in my filenames.
+def url(name):
+    return urllib.parse.quote(filename(name), safe=";,/?:@&=+$-_.!~*'()#")
+
+def delete_file(filename):
+    try:
+        os.remove(f'{root_path}/{filename}')
+    except FileNotFoundError:
+        pass
+
+
+# Wrap the process of reading a file so that the common log messages are
+# printed and a read failure is handled appropriately.
+# If the file can be read, the 'fn' function is called with the file handle.
+#
+# If skippable is True, and the file doesn't exist, then the 'fn' function
+# is skipped.
+# If skippable if False, then any file error triggers an exception as usual.
+#
+# If raw is True, the file is read in binary mode.
+# If raw is False, the file is read as UTF-8.
+#
+# If msg gives a reason for the file access, that info is added to the tracking.
+def read_file(filename, fn, skippable=False, raw=False, msg=None):
+    if msg:
+        # Ultimately, this becomes "Reading <msg> from <filename>".
+        msg += ' from '
+    else:
+        msg = ''
+
+    if raw:
+        mode = 'rb'
+        encoding = None
+    else:
+        mode = 'r'
+        encoding = 'utf-8'
+
+    with Progress(f'Read {msg}{filename}'):
+        try:
+            with open(f'{root_path}/{filename}',
+                      mode=mode, encoding=encoding) as f:
+                # Once the file is open, any further file exceptions should be
+                # treated as usual (not skipped).
+                skippable = False
+                fn(f)
+        except FileNotFoundError:
+            if skippable:
+                # We didn't find the file, but we're allowed to skip it.
+                if arg('-steps'):
+                    info(f'Skipping {msg}{filename} (file not found)')
+                # Exit without doing any work.
+                return
+            else:
+                # Propagate any other exception to the Progress tracker.
+                raise
+
+
 # Read the footer text from a file (if present).
-try:
-    with open(f'{root_path}/other/footer.html', mode='r', encoding='utf-8') as f:
-        if arg('-steps'):
-            info(f'Reading other/footer.html')
-        footer_txt = f.read()
+def read_footer(f):
+    global footer_txt
+    footer_txt = f.read()
     footer_txt = re.sub(r'<!--.*?-->\s*', '', footer_txt, flags=re.DOTALL)
-except FileNotFoundError:
-    if arg('-steps'):
-        info(f'Skipping other/footer.html')
-    footer_txt = ''
+
+footer_txt = '' # in case there is no footer
+read_file('other/footer.html', read_footer, skippable=True)
 
 def write_footer(w, incl_footer=True, at_root=False):
     # Close the central division (id="body").
@@ -239,45 +303,3 @@ def write_footer(w, incl_footer=True, at_root=False):
         w.write(footer_mod)
 
     w.write('</body>\n')
-
-# Convert non-ASCII characters to their closest ASCII equivalent.
-# This is suitable for use as a filename or as a string that the user
-# can actually type when searching.
-def filename(name):
-    return unidecode(name)
-
-# Percent-encode characters that aren't supposed to be in a URL.
-# E.g. encode " " as "%20".
-# safe list taken from
-# https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI
-# In particular, I use ",", "'", and of course "/" in my filenames.
-def url(name):
-    return urllib.parse.quote(filename(name), safe=";,/?:@&=+$-_.!~*'()#")
-
-# Wrap the process of reading a data file so that the common log messages are
-# printed and a read failure is handled appropriately.
-# If the file can be read, the 'fn' function is called with the file descriptor.
-# If the file cannot be read, the 'fn' function is not called.
-def read_data_file(filename, fn, mode='r', encoding='utf-8', msg=None):
-    if msg:
-        # Ultimately, this becomes "Reading <msg> from <filename>".
-        msg += ' from '
-    else:
-        msg = ''
-
-    try:
-        with open(f'{root_path}/data/{filename}', mode=mode,
-                  encoding=encoding) as f:
-            if arg('-steps'):
-                info(f'Reading {msg}data/{filename}')
-            with Progress(f'While reading {msg}data/{filename}'):
-                fn(f)
-    except FileNotFoundError:
-        if arg('-steps'):
-            info(f'Skipping {msg}data/{filename} (file not found)')
-
-def delete_file(filename):
-    try:
-        os.remove(f'{root_path}/{filename}')
-    except FileNotFoundError:
-        pass
