@@ -69,26 +69,17 @@ read_file('data/toxic_alias.txt', read_toxic_alias, skippable=True)
 
 
 def read_toxicity():
-    try:
-        read_file('data/semitoxic.scrape', read_semitoxic_plants,
-                  skippable=True,
-                  msg='list of plants that are only toxic to animals')
+    read_file('data/semitoxic.scrape', read_semitoxic_plants,
+              skippable=True,
+              msg='list of plants that are only toxic to animals')
 
-        read_file('data/nontoxic.scrape', read_nontoxic_plants,
-                  skippable=True,
-                  msg='list of non-toxic plants')
+    read_file('data/nontoxic.scrape', read_nontoxic_plants,
+              skippable=True,
+              msg='list of non-toxic plants')
 
-        read_file('data/toxic.scrape', read_toxic_plants,
-                  skippable=True,
-                  msg='plant toxicity ratings')
-    except:
-        # If anything goes wrong, dump everything in the dictionary.
-        # (We don't know the full extent of what's useful, so assume
-        # it all is.)
-        dump_inat_db(False)
-        raise
-
-    dump_inat_db(True)
+    read_file('data/toxic.scrape', read_toxic_plants,
+              skippable=True,
+              msg='plant toxicity ratings')
 
 
 def read_semitoxic_plants(f):

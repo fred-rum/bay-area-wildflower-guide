@@ -1552,8 +1552,6 @@ The BAWG doc's summary of files should have a page reference for every file.
 "Toxicity" links should go to a BAWG description and disclaimer before
 linking to the CalPoison website.
 
-fix up dumping and keyboard interrupts
-
 always propagate (non-0) toxicity up to genus level, just in case
 
 There's no way to recognize when iNaturalist's common name is updated.
@@ -1629,7 +1627,6 @@ create pages for photos similar to pages for observations
     if property is not applied, complain about unused photo instead
   iNaturalist is always allowed to provide names
 
-
 observations.csv has an observation for a taxon below the mustard family
   that observation specifies only the scientific name for the mustard family:
     Brassicaceae
@@ -1671,3 +1668,34 @@ If the search ends with a space or punctuation,
 Also, if match section goes all the way to the end,
   it shouldn't count as a match
   since the user implies that there will be more.
+
+Allow scrolling through JavaScript search results:
+  if there are more than 10 results, the 10th displayed entry is "..."
+  navigating to the bottom "..." entry (e.g. with tab or down arrow)
+    causes the list to "scroll" by one line,
+    and the top line becomes "..."
+  navigating to the top "..." entry scrolls the other way
+  page down scrolls down by a page; page up scrolls up by a page
+    when scrolling this way,
+      if e.g. the 5th entry is selected, then select the new 5th entry
+      adjust this if "..." replaces the current selection
+
+fix up dumping and keyboard interrupts
+  all parts of the code that use the core API should be protected
+    in a 'with:' block or equivalent
+  when a file, an exception should delete it
+  when keeping track of file hashes,
+    an exception should dump the hash DB
+    and delete any entry for a file that gets deleted
+  could some of these things instead be a class with a "destructor" thing?
+    e.g. a file write is "with"
+      since it ends before the program ends
+      and we need it to end before the file hashes are dumped
+    e.g. the file hashes are written by its class __del__() method
+      but although that is currently often called when the script exits,
+        it's not guaranteed
+      so I guess this isn't such a good idea after all
+  when writing a file, allow some writes to be unhashed
+    e.g. for the first few lines of sw.js
+      so that sw.js is written/modified only if there are other changes
+        (in the lower parts of sw.js or in any other file)

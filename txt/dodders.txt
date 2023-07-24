@@ -16,8 +16,9 @@ acom:california dodder
 . anthers 0.25--0.5 mm, wide-elliptic
 . rare inland
 
-==goldenthread:C. pacifica
-acom:pacific goldenthread
+==pacific goldenthread:C. pacifica
+# this is an odd one because the plant is orange,
+# and it's hard to pick out the tiny white flowers
 color: orange, white, other
 . corolla scales present
 . flower 3.5--6 mm

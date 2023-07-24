@@ -71,16 +71,14 @@ def get_sci_from_ranked_elab(name):
     else:
         return name
 
-def read_inat_files():
+def read_inat_pickle(f):
     global inat_dict
-    try:
-        with open(f'{root_path}/data/{api_pickle_name}', mode='rb') as f:
-            inat_db = pickle.load(f)
-            if inat_db['version'] == db_version:
-                inat_dict = inat_db['inat_dict']
-    except:
-        pass
 
+    inat_db = pickle.load(f)
+    if inat_db['version'] == db_version:
+        inat_dict = inat_db['inat_dict']
+
+def discard_inat_taxons():
     # If any taxons need to be discarded, also discard any taxons that depend
     # on them.
     if user_discard_set:
@@ -101,6 +99,14 @@ def read_inat_files():
 
         for name in discard_dict:
             del inat_dict[name]
+            global inat_dict_has_updates
+            inat_dict_has_updates = True
+
+def read_inat_files():
+    read_file(f'data/{api_pickle_name}', read_inat_pickle,
+              skippable=True, raw=True)
+
+    discard_inat_taxons()
 
     # The loaded dictionary has the information stored by each Inat object,
     # but Inat() has not been called, so we need to perform a separate step
@@ -121,6 +127,8 @@ def read_inat_files():
 # Inat object for each valid record.
 #
 def parse_inat_data(data, name):
+    global inat_dict_has_updates
+
     # Older data from a file may have the raw fetch data instead of
     # only a single record's data.
     if 'results' in data and data['results']:
@@ -134,6 +142,7 @@ def parse_inat_data(data, name):
     # is_active anyway.
     if 'is_active' not in data or not data['is_active']:
         inat_dict[name] = None
+        inat_dict_has_updates = True
         return
 
     tid = str(data['id'])
@@ -149,9 +158,10 @@ def parse_inat_data(data, name):
     # returned the record for a different name.  In either case, it's
     # counts as an invalid record.
     if (name != tid) and (name != rank + ' ' + sci):
-        inat_dict[name] = None
         # The fetched data may be useful, but it's more likely to be
         # confusing, so we ignore it.
+        inat_dict[name] = None
+        inat_dict_has_updates = True
         return
 
     Inat(data)
@@ -165,38 +175,26 @@ def parse_inat_data(data, name):
 # If we have taxon_id's, we accumulate as many as we can before making
 # a mass query.  Otherwise, we query each name.
 def link_inat(page_set):
+    # Fetch inat data for each child as necessary.
+    page_list = sort_pages(page_set, with_count=False, sci_only=True)
     tid_set = set()
+    for page in page_list:
+        if page.taxon_id:
+            tid_set.add(page.taxon_id)
+        else:
+            get_inat_for_page(page)
 
-    try:
-        # Fetch inat data for each child as necessary.
-        page_list = sort_pages(page_set, with_count=False, sci_only=True)
-        for page in page_list:
-            if page.taxon_id:
-                tid_set.add(page.taxon_id)
-            else:
-                get_inat_for_page(page)
+            # Fetching a taxon by name doesn't get its ancestors.
+            # Therefore we add a query for the parent of each taxon.
+            # Note that any duplicate taxons are discarded.
+            add_parent_tid_to_set(page, tid_set)
 
-                # Fetching a taxon by name doesn't get its ancestors.
-                # Therefore we add a query for the parent of each taxon.
-                # Note that any duplicate taxons are discarded.
-                add_parent_tid_to_set(page, tid_set)
+    #info('initial tid_set')
+    #info(tid_set)
+    while (tid_set):
+        get_inat_for_tid_set(tid_set)
 
-        #info('initial tid_set')
-        #info(tid_set)
-        while (tid_set):
-            get_inat_for_tid_set(tid_set)
-
-        link_inat2(page_set)
-    except:
-        # If anything goes wrong, dump everything in the dictionary.
-        # (We don't know the full extent of what's useful, so assume
-        # it all is.)
-        dump_inat_db(False)
-        raise
-
-    # We'll fetch more later, but dump what we've got so far in case
-    # an error occurs.
-    dump_inat_db(False)
+    link_inat2(page_set)
 
 
 # link_inat() did the work of initiating page fetches by name or TID.
@@ -306,6 +304,8 @@ def get_inat(name, used=False):
 def used_fail(name):
     inat_dict[name] = None
     used_dict[name] = None
+    global inat_dict_has_updates
+    inat_dict_has_updates = True
     return None
 
 
@@ -454,6 +454,9 @@ def get_inat_for_tid_set(tid_set, local=True):
             if local:
                 parse_inat_data(data, tid)
             else:
+                global inat_dict_has_updates
+                inat_dict_has_updates = True
+
                 if 'preferred_common_name' in data and data ['preferred_common_name']:
                     inat_dict[tid].global_com = data['preferred_common_name'].lower()
                 else:
@@ -466,6 +469,7 @@ def get_inat_for_tid_set(tid_set, local=True):
                             inat_dict[anc_tid].global_com = anc_data['preferred_common_name'].lower()
                         else:
                             inat_dict[anc_tid].global_com = None
+
                         Inat(anc_data)
 
 
@@ -566,6 +570,9 @@ def get_page_for_alias(orig, elab):
         inat_dict[name] = tid
         used_dict[name] = tid
 
+        global inat_dict_has_updates
+        inat_dict_has_updates = True
+
     return find_taxon_id(str(tid))
 
 
@@ -613,41 +620,34 @@ def apply_inat_names():
                 anc_set.update(anc_dict[tid])
 
     tid_set.difference_update(anc_set)
-    try:
-        while (tid_set):
-            get_inat_for_tid_set(tid_set, local=False)
-    except:
-        # If anything goes wrong, dump everything in the dictionary.
-        # (We don't know the full extent of what's useful, so assume
-        # it all is.)
-        dump_inat_db(False)
-        raise
-
-    # Dump the DB again now that we've added the global common names.
-    dump_inat_db(False)
+    while (tid_set):
+        get_inat_for_tid_set(tid_set, local=False)
 
     for inat in used_dict.values():
         if isinstance(inat, Inat):
             inat.apply_names()
 
 
-def dump_inat_db(done):
-    if done:
-        # Dump the DB a final time with only those entries that we've used for
-        # pages or that we looked up for the CalPoison toxicity data.
-        dump_dict = used_dict
-    else:
-        # Either we encountered an error or we finished a section of code
-        # and we want to dump the database before an error can trash our
-        # fetched data.  We don't yet know which entries are needed, so
-        # we dump them all.
-        dump_dict = inat_dict
+def finalize_inat_db():
+    # Everything went fine.  Remove the unused entries from inat_dict
+    # by replacing it with used_dict.  This is the dictionary that
+    # gets dumped out as the cached database for the next script run.
+    inat_dict = used_dict
 
+    # We don't update inat_dict_has_updates here because we don't know
+    # whether used_dict is the full inat_dict or not.  If it is, there's
+    # no point in dumping the API cache (but it's harmless).  If it isn't,
+    # dumping the API cache could save a bit of drive space (but not much).
+    # So I err on the side of the common case where probably nothing has
+    # changed.
+
+
+def dump_inat_db():
     # normally don't bother to dump the pickle if we never fetched anything,
     # but we also dump it if we discarded anything.
-    if api_called or discard_dict:
+    if inat_dict and (api_called or discard_dict):
         inat_db = {'version': db_version,
-                   'inat_dict': dump_dict}
+                   'inat_dict': inat_dict}
         with open(f'{root_path}/data/{api_pickle_name}', mode='wb') as w:
             pickle.dump(inat_db, w)
 
@@ -671,6 +671,9 @@ class Inat:
             return
 
         inat_dict[self.taxon_id] = self
+
+        global inat_dict_has_updates
+        inat_dict_has_updates = True
 
         sci = data['name']
         rank = data['rank']

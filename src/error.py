@@ -63,8 +63,6 @@ def warn_progress():
 
 def fail_on_errors(max):
     if error_cnt >= max:
-        warn_progress()
-        warn(msg)
         sys.exit(error_cnt)
 
 def error(msg):
@@ -85,6 +83,9 @@ def fatal(msg):
 #
 # This does stuff with the progress message in context
 # so that it can be printed in the case of an error or exception.
+#
+# Don't use Progress when you don't have to.  If the message only specifies
+# a function name that can already be seen in the trace, don't bother.
 class Progress:
     def __init__(self, msg):
         self.__msg = msg
@@ -103,10 +104,16 @@ class Progress:
         global progress_printed_cnt
 
         if isinstance(exc_val, SystemExit):
-            # Allow a SystemExit exception caued by sys.exit()
-            # to fall cleanly through the exception handlers
-            # until the program exits.
+            # When a a SystemExit (caused by sys.exit)) occurs, allow
+            # it to fall cleanly through the exception handlers without
+            # complaint until the program exits.
             return False # exception continues to propagate
+        elif isinstance(exc_val, KeyboardInterrupt):
+            # When a KeyboardInterrupt (causd by ^C) occurs, describe
+            # the interrupted progress, but otherwise exit cleanly.
+            warn_progress()
+            warn('KeyboardInterrupt)')
+            sys.exit(-1)
         elif exc_val:
             # An exception has occurred
             warn_progress()

@@ -20,7 +20,7 @@ from easy import *
 
 ###############################################################################
 
-def parse_txt(name, s, page, glossary):
+def parse_line_by_line(name, s, page, glossary):
     def end_paragraph(for_list=False, for_defn=False):
         nonlocal c_list, p_start, in_dl
         nonlocal child_start, child_idx, child_list, suffix
@@ -317,7 +317,7 @@ def parse_txt(name, s, page, glossary):
 
 # Links to taxon pages may be colored differently depending on whether the
 # taxon has any child keys.  So we have to parse all taxon pages before
-# inserting ilnks to taxon pagse.  I.e. we call parse_txt() on all taxon
+# inserting ilnks to taxon pagse.  I.e. we call parse_line_by_line() on all taxon
 # pages before calling parse2_txt() on all taxon pages.  As long as we've
 # got this second function, we do some other last-minute parsing here
 def parse2_txt(src_page, s, glossary):
@@ -371,7 +371,7 @@ def parse_other(name, f):
     txt = re.sub(r'^\s*footer\s*\Z',
                  repl_footer, txt, flags=re.MULTILINE)
 
-    txt = parse_txt(name, txt, None, None)
+    txt = parse_line_by_line(name, txt, None, None)
 
     with write_and_hash(f'{name}.html') as w:
         write_header(w, title, None, desc=desc, at_root=True)

@@ -586,7 +586,7 @@ class Glossary:
         #   - from the Jepson term list
         # Only the first of these should create its own HTML file.
         if self.txt:
-            self.txt = parse_txt(self.name, self.txt, None, self)
+            self.txt = parse_line_by_line(self.name, self.txt, None, self)
 
             with write_and_hash(f'html/{self.get_filename()}.html') as w:
                 if self.taxon:

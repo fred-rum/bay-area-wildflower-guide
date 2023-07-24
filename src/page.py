@@ -10,7 +10,7 @@ from files import *
 from photo import *
 from find_page import *
 from rank import *
-from obs import *
+from cnt import *
 from easy import *
 from glossary import *
 from parse import *
@@ -620,6 +620,9 @@ class Page:
     # via a Page object without needing to import page.py.
     def sort_pages(self, page_set):
         return sort_pages(page_set)
+
+    def read_txt(self, f):
+        self.txt = f.read()
 
     def infer_name(self):
         if self.no_names:
@@ -2639,14 +2642,10 @@ class Page:
                 (trait in self.trait_values and
                  value in self.trait_values[trait]))
 
-    def count_matching_obs(self, obs):
-        obs.count_matching_obs(self)
-
     # Write the iNaturalist observation data.
-    def write_obs(self, w, obs=None):
-        if not obs:
-            obs = Obs(None, None)
-            self.count_matching_obs(obs)
+    def write_obs(self, w):
+        cnt = Cnt(None, None)
+        cnt.count_matching_obs(self)
 
         if self.linn_parent and self.linn_parent.equiv_page_below():
             link_page = self.linn_parent
@@ -2663,7 +2662,7 @@ class Page:
         else:
             link = None
 
-        obs.write_obs(link, w)
+        cnt.write_obs(link, w)
 
     def choose_elab(self, elab_alt):
         if elab_alt and elab_alt != 'n/a':
@@ -3048,8 +3047,7 @@ class Page:
         else:
             return f'<div class="photo-box">{img}\n<span>{link}</span></div>'
 
-
-    def parse(self):
+    def parse_line_by_line(self):
         # If a parent already parsed this page (as below), we shouldn't
         # try to parse it again.
         if self.parsed:
@@ -3060,35 +3058,51 @@ class Page:
         # child is itself a key (has_child_key).  Which means that a parent
         # wants to parse its children before parsing itself.
         for child in self.child:
-            child.parse()
+            child.parse_line_by_line()
 
-        s = self.txt
+        with Progress(f'parse line-by-line for {self.full()}'):
+            s = self.txt
 
-        s = parse_txt(self.name, s, self, self.glossary)
+            s = parse_line_by_line(self.name, s, self, self.glossary)
 
-        if not self.has_child_key:
-            # No child has a key, so reduce the size of child photos.
-            # This applies to both key-thumb and key-thumb-text
-            s = re.sub(r'class="key-thumb', r'class="list-thumb', s)
+            # While we were parsing line by line, we didn't yet know whether
+            # some (later) child might be declared with a key.  Now that we
+            # know, adjust child links accordingly.
+            if not self.has_child_key:
+                # No child has a key, so reduce the size of child photos.
+                # This applies to both key-thumb and key-thumb-text
+                s = re.sub(r'class="key-thumb', r'class="list-thumb', s)
 
-        self.txt = s
+            self.txt = s
 
     def parse2(self):
-        # Use the text supplied in the text file if present.
-        # Otherwise use the key text from its parent.
-        # If the page's text file contains only metadata (e.g.
-        # scientific name or trait value) so that the remaining text is
-        # blank, then use the key text from its parent in that case, too.
-        if re.search('\S', self.txt):
-            s = self.txt
-        else:
-            s = self.key_txt
-        if self.add_txt:
-            if s:
-                s += '\n'
-            s += parse_txt(self.name, self.add_txt, self, self.glossary)
+        with Progress(f'parse2 for {self.full()}'):
+            # Use the text supplied in the text file if present.
+            # Otherwise use the key text from its parent.
+            #
+            # If the page's text file contains only metadata (e.g.
+            # scientific name or trait value) so that the remaining text is
+            # blank, then use the key text from its parent in that case, too.
+            #
+            # Note that the key_txt has already gone through line-by-line
+            # parsing.
+            if re.search('\S', self.txt):
+                s = self.txt
+            else:
+                s = self.key_txt
 
-        self.txt = parse2_txt(self, s, self.glossary)
+            # Add text that is added to a child with the ';' marker.
+            if self.add_txt:
+                if s:
+                    s += '\n'
+                # Added text hasn't been through line-by-line parsing,
+                # so do that now.  This is guaranteed to not find any more
+                # child declarations, so only this one recursion leve is
+                # necessary.
+                s += parse_line_by_line(self.name, self.add_txt,
+                                        self, self.glossary)
+
+            self.txt = parse2_txt(self, s, self.glossary)
 
     # Check whether this page is the top real page within its Linnaean group
     # designated by 'rank'.  E.g. if a species page does not have a real page
@@ -3408,11 +3422,11 @@ class Page:
         s = io.StringIO()
         list_matches(s, page_list, False, trait, value, set())
 
-        obs = Obs(trait, value)
-        self.count_matching_obs(obs)
+        cnt = Cnt(trait, value)
+        cnt.count_matching_obs(self)
         w.write(s.getvalue())
         w.write('<hr>\n')
-        obs.write_obs(None, w)
+        cnt.write_obs(None, w)
 
     def write_toxicity(self, w):
         if self.elab_calpoison and self.elab_calpoison != 'n/a' and not self.toxicity_assigned:

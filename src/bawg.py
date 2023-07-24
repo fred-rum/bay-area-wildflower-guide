@@ -38,7 +38,7 @@ from error import *
 from files import *
 from strip import *
 from easy import *
-from obs import *
+from cnt import *
 from toxic import * # must be before page
 from page import *
 from photo import *
@@ -47,84 +47,49 @@ from step import *
 from cache import *
 from inat import *
 from core import *
+from obs import *
+
+
+##############################################################################
+# First we declare a bunch of functions that will do the work for us.
+# Then, at the bottom of this script file, we call these functions and
+# those in other modules.
 
 ###############################################################################
+# Read primary names from txt files
 
-# Read the mapping of iNaturalist observation locations to short park names.
-park_map = {}
-park_loc = {}
-
-def read_parks(f):
-    yaml_data = yaml.safe_load(f)
-
-    for loc in yaml_data:
-        for x in yaml_data[loc]:
-            if isinstance(x, str):
-                semi1 = x.find(';')
-                if semi1 == -1:
-                    name = x
-                    exp = x
-                else:
-                    semi2 = x.find(';', semi1+1)
-                    if semi2 == -1:
-                        name = x[:semi1] + x[semi1+1:]
-                        exp = x[:semi1]
-                    else:
-                        name = x[:semi1] + x[semi1+1:semi2] + x[semi2+1:]
-                        exp = x[semi1+1:semi2]
-                x = {name: exp}
-
-            assert isinstance(x, dict)
-
-            # x should typically be a dict with a single key/value pair,
-            # but we also accept multiple key/value pairs.
-            for name, exp in x.items():
-                if isinstance(exp, str):
-                    park_map[exp] = name
-                    park_loc[exp] = loc
-                else:
-                    # the expression is actually a list
-                    assert isinstance(exp, list)
-                    exp_list = exp
-                    for exp in exp_list:
-                        park_map[exp] = name
-                        park_loc[exp] = loc
-
-with Step('read_parks', 'Read parks.yaml'):
-    read_file('data/parks.yaml', read_parks, skippable=True)
-
-###############################################################################
-
-def read_txt_files():
+def read_txt():
     txt_files = get_file_set('txt', 'txt')
 
+    # We read the files without parsing to make performance easier to measure.
     for name in txt_files:
-        filename = name+'.txt'
+        filename = f'{name}.txt'
         page = Page(name, name_from_txt=True, src=filename)
-        with Progress(f'Read "{filename}"'):
-            with open(f'{root_path}/txt/{filename}', 'r', encoding='utf-8') as r:
-                page.txt = r.read()
+        read_file(f'txt/{filename}', page.read_txt)
 
-# Perform a first pass on the txt pages to initialize common and
-# scientific names.  This ensures that when we parse children (next),
-# any name can be used and linked correctly.
-def parse_names():
     for page in page_array:
-        page.remove_comments()
-        page.parse_names()
-        page.parse_glossary()
+        with Progress(f'removing comments from "{page.name}"'):
+            page.remove_comments()
 
-with Step('read_txt', 'Read primary names from txt files'):
-    read_txt_files()
-    parse_names()
+        # Perform a first pass on the txt pages to initialize common and
+        # scientific names.  This ensures that when we parse children (next),
+        # any name can be used and linked correctly.
+        with Progress(f'parsing names in "{page.name}"'):
+            page.parse_names()
+
+        # There are no prerequesites to parsing glossary definitions in
+        # the page, so we go ahead and do that now.
+        with Progress(f'parsing glossary in "{page.name}"'):
+            page.parse_glossary()
 
     # Now that we know the names of all the traits, we can initialize the
     # list of properties that we support.
     init_props()
 
 ###############################################################################
+# Parse attributes, properties, and child info
 
-with Step('parse_decl', 'Parse attributes, properties, and child info'):
+def parse_decl():
     # This code can add new pages, so we make a copy
     # of the list to iterate through.
     for page in page_array[:]:
@@ -132,9 +97,8 @@ with Step('parse_decl', 'Parse attributes, properties, and child info'):
             page.parse_attributes_properties_and_child_info()
 
 ###############################################################################
+# Attach photos to pages
 
-# Record jpg names for associated pages.
-# Create a blank page for all unassociated jpgs.
 def assign_jpgs():
     for jpg in sorted(jpg_photos):
         name,suffix = separate_name_and_suffix(jpg)
@@ -143,13 +107,14 @@ def assign_jpgs():
         else:
             page = find_page1(name)
             if not page:
+                # Create a blank page for any unassociated jpg.
+                # (Further photos with different suffixes for the same name
+                # will then be associated with this page.)
                 page = Page(name, src=jpg+'.jpg')
             page.add_photo(jpg, suffix)
 
-with Step('attach_jpg', 'Attach photos to pages'):
-    assign_jpgs()
-
 ###############################################################################
+# Parse taxon_names.yaml
 
 def read_taxon_names(f):
     taxon_names = yaml.safe_load(f)
@@ -174,564 +139,9 @@ def create_taxon_pages(d, prefix=''):
                 page = Page(com, elab, shadow=True, src='taxon_names.yaml')
             #info(f'{page.com} <-> {page.elab}')
 
-with Step('taxon_names', 'Parse taxon_names.yaml'):
-    read_file('data/taxon_names.yaml', read_taxon_names, skippable=True)
-
 ###############################################################################
 
-# Linnaean descendants links are automatically created whenever a page
-# is assigned a child, but this isn't reliable during initial child
-# assignment when not all of the scientific names are known yet (since
-# additional names can be attached as the child declaration is parsed).
-# Therefore, once all the names are in, we make another pass through
-# the pages to ensure that all Linnaean links are complete.
-with Step('update_linn', 'Update Linnaean links'):
-    for page in page_array:
-        page.link_linn_descendants()
-
-###############################################################################
-
-with Step('update_member', 'Add explicit and implied ancestors'):
-    for page in page_array[:]:
-        page.assign_groups()
-
-###############################################################################
-
-with Step('read_core', 'Read DarwinCore archive'):
-    read_core()
-
-###############################################################################
-
-# Read the taxonomic chains from the observations file (exported from
-# iNaturalist).  There is more data in there that we'll read later, but
-# first we want to complete the Linnaean tree so that properties can be
-# properly applied.
-def read_obs_chains(f):
-    def get_field(fieldname):
-        if fieldname in row:
-            return row[fieldname]
-        else:
-            return None
-
-    csv_reader = csv.DictReader(f)
-
-    for row in csv_reader:
-        sci = get_field('scientific_name')
-        taxon_id = get_field('taxon_id')
-
-        # In the highly unusual case of no scientific name for an
-        # observation, just throw it out.  And if there is a scientific
-        # name, I'd expect that there should be a taxon_id as well.
-        if not sci or not taxon_id: continue
-
-        orig_sci = sci
-
-        # Remove the special 'x' sign used by hybrids since I
-        # can't (yet) support it cleanly.  Note that I *don't* use
-        # the r'' string format here because I want the \N to be
-        # parsed during string parsing, not during RE parsing.
-        sci = re.sub(' \N{MULTIPLICATION SIGN} ', r' X', sci)
-
-        # Get an unambiguous rank from the core data if possible.
-        # A hybrid will always fail because the core data doesn't
-        # expect its 'X', but a hybrid is unambiguous anyway.
-        core_rank = get_core_rank(sci, taxon_id)
-
-        com = get_field('common_name')
-
-        # The common name is forced to all lower case to match my
-        # convention.
-        if com:
-            com = com.lower()
-        else:
-            com = None
-
-        page = None
-        found_lowest_level = False
-        try:
-            # Read the taxonomic chain from observations.csv and create
-            # Linnaean links accordingly.
-            for rank in Rank:
-                group = get_field(f'taxon_{rank.name}_name')
-
-                # ignore an empty group string
-                if not group:
-                    continue
-
-                # The first non-empty group that is found usually tells us
-                # the rank of the observed taxon.  Find or create a page
-                # with the appropriate rank.
-                if not found_lowest_level:
-                    sci_words = sci.split(' ')
-                    if (get_field('taxon_subspecies_name') or
-                        core_rank == 'subspecies'):
-                        sci = ' '.join((sci_words[0], sci_words[1],
-                                        'ssp.', sci_words[2]))
-                    elif (get_field('taxon_variety_name') or
-                          core_rank == 'variety'):
-                        sci = ' '.join((sci_words[0], sci_words[1],
-                                        'var.', sci_words[2]))
-                    elif ' X' in sci:
-                        pass
-                    elif ' ' in sci and (rank is Rank.species or
-                                         core_rank == 'species'):
-                        # If the scientific name has at least one space,
-                        # then it is a species, subspecies, or variety that
-                        # should have already been elaborated as necessary.
-                        # ... unless it's a complex, which is a higher rank
-                        # than species, so the first matching rank won't
-                        # be 'species'
-                        pass
-                    elif core_rank:
-                        sci = f'{core_rank} {sci}'
-                    elif group == orig_sci:
-                        # If the first name in the taxonomic chain matches
-                        # the observed taxon name, then it directly tells
-                        # us the taxon rank.
-                        # ... unless its a subgenus whose name matches the
-                        # genus name.  In which case we either need the
-                        # core data to supply a rank (above) or the txt
-                        # to supply a taxon_id so that the elab look-up is
-                        # skipped.
-                        sci = f'{rank.name} {sci}'
-                    else:
-                        # If the first name in the taxonomic chain doesn't
-                        # match the observed taxon name, then the observed
-                        # taxon must be an unrecognized rank.  Try to find
-                        # a matching page of any rank.
-                        pass
-
-                    # Check whether a page already exists for the taxon.
-                    # If find_page2() finds a match, it automatically sets the
-                    # taxon_id for the page if it didn't have it already.
-                    page = find_page2(com, sci, from_inat=True,
-                                      taxon_id=taxon_id,
-                                      src='observations.csv', date=now())
-
-                    # if find_page2() didn't find a match, create a shadow
-                    # page for the taxon.
-                    if not page:
-                        if (group != orig_sci and
-                            not ' ssp. ' in sci and
-                            not ' var. ' in sci and
-                            not sci.startswith('complex ') and
-                            not core_rank):
-                            # We have to create a page for a taxon of unknown
-                            # rank.  On the assumption that the observation
-                            # will get promoted to a higher-level taxon, we
-                            # fudge it here by pretending it's the lowest rank.
-                            # set_sci() recognizes this as a guess that can
-                            # be updated later.
-                            sci = f'below {sci}'
-
-                        page = Page(com, sci, shadow=True, from_inat=True,
-                                    src='observations.csv')
-                        page.set_taxon_id(taxon_id, from_obs=True,
-                                          src='observations.csv', date=now())
-
-                    if group != orig_sci:
-                        # This is the lowest-level group we found, but
-                        # since the taxon name doesn't match, the observed
-                        # taxon must be at a lower level that isn't included
-                        # in the observations.csv ranks.
-                        #
-                        # Note: this test isn't mixed in with the above
-                        # 'group == orig_sci' tests because we don't want
-                        # to exclude species/subspecies/varieties here.
-                        found_lowest_level = True
-
-                if found_lowest_level:
-                    # add_linn_parent() adds the page for the parent
-                    # (if necessary) and the link from parent to child.
-                    page = page.add_linn_parent(rank, group,
-                                                from_inat='observations.csv')
-
-                found_lowest_level = True
-        except FatalError:
-            if page:
-                warn(f'was creating taxonomic chain from {page.full()}')
-            else:
-                warn(f'was initializing taxonomic chain for {com}:{sci}')
-            raise
-
-with Step('obs_chains', 'Create taxonomic chains from observations.csv'):
-    read_file('data/observations.csv', read_obs_chains,
-              skippable=True, msg='taxon hierarchy')
-
-    # If we got this far and a page still doesn't have a name, give it one.
-    for page in page_array:
-        page.infer_name()
-
-###############################################################################
-
-with Step('read_api', 'Read cached iNaturalist API data'):
-    read_inat_files()
-
-###############################################################################
-
-with Step('core_chains', 'Create taxonomic chains from DarwinCore archive'):
-    parse_core_chains()
-
-###############################################################################
-
-with Step('api_chains', 'Create taxonomic chains from iNaturalist API data'):
-    page_set = set()
-    for page in page_array:
-        # link_inat() traverses up through all ancestors, and we don't
-        # care about shadow descendents, so we prefer to call link_inat()
-        # only for real leaf pages.
-        #
-        # This may miss some ancestor pages if the leaf page doesn't have
-        # a scientific name.  But that would be unusual, and it's a pain to fix.
-        if (((page.sci and page.elab_inaturalist != 'n/a') or page.taxon_id)
-            and not page.shadow and not page.child):
-            page_set.add(page)
-    link_inat(page_set)
-
-###############################################################################
-
-with Step('lcca', "Assign ancestors to pages that don't have scientific names"):
-    for page in page_array:
-        if not page.rank:
-            # If a page doesn't fit into the Linnaean hierarchy, try to find a
-            # place for it.
-            # We do this even if a Linnaean ancestor is given since it may not
-            # be the best Linnaean parent.
-            # This also propagates is_top, so we don't have to do it again.
-            page.resolve_lcca()
-        if page.is_top and not page.parent and not page.linn_parent:
-            page.propagate_is_top()
-
-###############################################################################
-
-with Step('def_anc', 'Assign default ancestor to floating trees'):
-    default_ancestor = get_default_ancestor()
-    if default_ancestor:
-        for page in full_page_array:
-            if (not page.is_top
-                and not page.linn_parent
-                and (not page.rank or page.rank < default_ancestor.rank)):
-                if default_ancestor:
-                    default_ancestor.link_linn_child(page)
-                else:
-                    warn(f'is_top not declared for page at top of hierarchy: {page.full()}')
-
-###############################################################################
-
-with Step('prop_prop', 'Propagate properties'):
-    # Assign properties to the appropriate ranks.
-    for page in page_array:
-        page.propagate_props()
-
-###############################################################################
-
-with Step('prop_link', 'Apply create and link properties'):
-    # Apply link-creation and related properties
-    # in order from the lowest ranked pages to the top.
-    for rank in Rank:
-        for page in full_page_array:
-            if page.rank is rank:
-                page.apply_prop_link()
-
-###############################################################################
-
-sci_ignore = {}
-
-def read_ignore_species(f):
-    global sci_ignore
-    sci_ignore = yaml.safe_load(f)
-
-    for sci in sci_ignore:
-        # Keep only the first character ('+' or '-') and ignore the comment.
-        sci_ignore[sci] = sci_ignore[sci][0]
-
-        if sci in isci_page:
-            page = isci_page[sci]
-        else:
-            page = find_page1(sci)
-
-        if page and not page.shadow:
-            error(f'{sci} is ignored, but there is a real page for it: {page.full()}')
-
-with Step('ignore', 'Read ignore_species.yaml'):
-    read_file('data/ignore_species.yaml', read_ignore_species, skippable=True)
-
-###############################################################################
-
-# Read my observations file (exported from iNaturalist) and use it as follows
-# for each observed taxon:
-#   Associate common names with scientific names.  (Previously we didn't have
-#     the properties in place to know what to do with common names.)
-#   Get a count of observations (total and research grade).
-#   Get an iNaturalist taxon ID.
-def read_observation_data(f):
-    def get_field(fieldname):
-        if fieldname in row:
-            return row[fieldname]
-        else:
-            return None
-
-    set_any_observations()
-
-    csv_reader = csv.DictReader(f)
-
-    if 'quality_grade' in csv_reader.fieldnames:
-        set_rg_supported()
-
-    for row in csv_reader:
-        sci = get_field('scientific_name')
-        taxon_id = get_field('taxon_id')
-
-        # In the highly unusual case of no scientific name for an
-        # observation, just throw it out.  And if there is a scientific
-        # name, I'd expect that there should be a taxon_id as well.
-        if not sci or not taxon_id: continue
-
-        # Modify the special 'x' sign used by hybrids to the BAWG format.
-        # Note that I *don't* use the r'' string format here because I want
-        # the \N to be parsed during string parsing, not during RE parsing.
-        sci = re.sub(' \N{MULTIPLICATION SIGN} ', r' X', sci)
-
-        com = get_field('common_name')
-
-        # The common name is forced to all lower case to match my
-        # convention.
-        if com:
-            com = com.lower()
-
-        rg = get_field('quality_grade')
-
-        park = get_field('private_place_guess')
-        if not park:
-            park = get_field('place_guess')
-
-        for x in park_map:
-            if re.search(x, park):
-                short_park = park_map[x]
-                loc = park_loc[x]
-                break
-        else:
-            error(park, prefix='Parks not found:')
-            short_park = park
-            loc = 'unknown'
-
-        date = get_field('observed_on')
-        month = int(date.split('-')[1], 10) - 1 # January = month 0
-
-        # This call to find_page2() should always match a taxon_id
-        # from the first pass through observations.csv.  However, that
-        # first pass didn't yet have the property information to know
-        # whether to add an alternative name from iNaturalist.  So we
-        # supply the names again for that purpose.
-        page = find_page2(com, sci, from_inat=True, taxon_id=taxon_id,
-                          src='observations.csv', date=now())
-
-        # A Linnaean page should have been created during the first path
-        # through observations.csv, so it'd be weird if we can't find it.
-        assert page
-
-        if loc != 'bay area':
-            # If the location is outside the bay area, properties may
-            # allow us to count it.  If so, list the outside observation
-            # by general location, rather than the specific park.
-            short_park = loc
-
-        page_below = page.equiv_page_below()
-        if page_below:
-            page = page_below
-
-        # If we haven't matched the observation to a real page, advance
-        # up the Linnaean hierarchy until we find a real page.  We'll
-        # check later whether this promotion is allowed.
-        orig_sci = sci
-        orig_page = page
-        ignore = False
-        disable_promotion_checks = True # may change to False in loop below
-        while page.shadow:
-            if sci in sci_ignore:
-                if sci_ignore[sci] == '+':
-                    ignore = True
-                else: # '-'
-                    # The obesrvations should be entirely ignored.
-                    # Stop promoting on the ignored page.
-                    break
-            else:
-                msg = f'{orig_page.full()} observation can create page {page.full()}'
-                if (loc == 'bay area' and
-                    not page.has_real_linnaean_descendants() and
-                    (page.rp_do('obs_create', shadow=True, msg=msg) or
-                     (page.com and
-                      page.rp_do('obs_create_com', shadow=True, msg=msg)))):
-                    page.promote_to_real()
-                    break
-
-            # If any rank that we promote through fails to disable promotion
-            # checks, then promotion checks aren't disabled.
-            if not page.rp_do('disable_obs_promotion_checks_from',
-                              shadow=True):
-                disable_promotion_checks = False
-
-            page = page.linn_parent
-            if not page:
-                break
-            sci = page.sci
-            if ignore:
-                # Update orig_page to match the new promoted page,
-                # thus pretending that there was no promotion.
-                orig_page = page
-
-        if not page or (sci in sci_ignore and sci_ignore[sci] == '-'):
-            # the observation is not contained by *any* page, or
-            # the observation'so taxon (or some taxon it was promoted through)
-            # should be completely ignored.
-            continue
-
-        if (loc != 'bay area' and
-            not page.rp_do('outside_obs')):
-            continue
-
-        if (rg == 'casual' and
-            not page.rp_do('casual_obs')):
-            continue
-
-        if page != orig_page:
-            # The page got promoted.
-
-            # The following code mostly decides whether to complain about the
-            # promotion.  Any code path that results in a "pass" statement
-            # means that no complaint should be issued.
-            if loc != 'bay area':
-                # We never complain if an observation outside the bay area
-                # isn't in the guide.
-                pass
-            elif orig_page.rank_unknown:
-                # If an observation has an unknown rank, then we always
-                # promote it without complaint.
-                pass
-            elif orig_page.has_real_linnaean_descendants():
-                # If the observation's original (shadow) page has real Linnaean
-                # descendants, then we don't know what it is, but it could
-                # be something we've documented, so it's always OK.
-                #print(f'{orig_page.full()} has real descendents')
-                pass
-            elif disable_promotion_checks:
-                # Ignore observations that aren't at a desired level of
-                # specificity and weren't promoted through a desired level.
-                #print('disable_obs_promotion_checks_from')
-                pass
-            elif (rg == 'needs_id' and
-                  orig_page.rp_do('disable_obs_promotion_checks_from_needs_id',
-                                  shadow=True)):
-                # Ignore observations without agreement.
-                #print('needs_id')
-                pass
-            elif page.taxon_uncat():
-                # Ignore observations that are promoted to a taxon that
-                # doesn't care about lower levels.  The function call checks
-                # disable_obs_promotion_to_incomplete when appropriate.
-                #print(f'{orig_page.full()} is uncat')
-                pass
-            else:
-                page.rp_check('obs_promotion',
-                              f'{orig_page.full()} observation promoted to {page.full()}')
-
-            # Now check whether the observation should be counted.
-            if not page.rp_action('obs_promotion', 'do'):
-                continue
-            if (loc != 'bay area'
-                and (not page.rp_do('outside_obs_promotion') or page.child)):
-                    continue
-            if (rg == 'casual'
-                and (not page.rp_do('casual_obs_promotion') or page.child)):
-                    continue
-
-
-        page.obs_n += 1
-        if rg == 'research':
-            page.obs_rg += 1
-        if short_park not in page.parks:
-            page.parks[short_park] = 0
-        page.parks[short_park] += 1
-        page.month[month] += 1
-
-with Step('obs_data', 'Read observation counts and common names from observations.csv'):
-    read_file('data/observations.csv', read_observation_data,
-              skippable=True, msg='observation data')
-
-###############################################################################
-
-with Step('api_names', 'Apply names from iNaturalist API data'):
-    apply_inat_names()
-
-###############################################################################
-
-top_list = [x for x in page_array if not x.parent]
-
-with Step('prop_apply', 'Apply remaining properties'):
-    for page in full_page_array:
-        page.apply_most_props()
-
-###############################################################################
-
-with Step('parse_txt', 'Parse remaining text, including glossary terms'):
-    parse_glossaries(top_list)
-
-    for page in page_array:
-        page.sort_children()
-
-    for page in page_array:
-        page.check_traits()
-
-###############################################################################
-
-with Step('toxic', 'Read and apply toxicity data'):
-    read_toxicity()
-
-    for page in page_array:
-        page.propagate_toxicity()
-
-###############################################################################
-
-with Step('html', 'Write HTML files'):
-    # Turn txt into html for all normal and default pages.
-    for page in page_array:
-        page.parse()
-
-    for page in page_array:
-        page.parse2()
-
-    for page in page_array:
-        page.write_html()
-
-###############################################################################
-# Find incomplete keys
-
-def by_incomplete_obs(page):
-    def count_flowers(page):
-        obs = Obs(None, None)
-        page.count_matching_obs(obs)
-        return obs.n
-
-    is_top_of_genus = page.is_top_of(Rank.genus)
-    if is_top_of_genus and page.genus_complete in (None, 'more'):
-        return count_flowers(page)
-    else:
-        return 0
-
-if arg('-incomplete_keys'):
-    # List the top 5 genus pages with an incomplete key,
-    # as ordered by number of observations.
-    # (If there are fewer than 5, then some random pages are listed as well.)
-    page_list = page_array[:]
-    page_list.sort(key=by_incomplete_obs, reverse=True)
-    for page in page_list[:5]:
-        info(page.full())
-
-
-###############################################################################
-
-with Step('strip', 'Strip comments from ungenerated JavaScript and HTML'):
-    if arg('-debug_js'):
+def debug_js():
         # To avoid confusion when using the unstripped source files,
         # delete the stripped versions.
         delete_file('bawg.css')
@@ -744,27 +154,20 @@ with Step('strip', 'Strip comments from ungenerated JavaScript and HTML'):
 
         # sw.js currently requires script modification,
         # so it is always generated (and therefore not deleted).
+
+def strip_js():
+    strip_comments('bawg.css')
+    strip_comments('search.js')
+
+    strip_comments('gallery.css')
+    strip_comments('gallery.js')
+
+    if arg('-without_cache'):
+        shutil.copy('src/no_sw.js', 'swi.js')
+        shutil.copy('src/no_sw.js', 'sw.js')
     else:
-        strip_comments('bawg.css')
-        strip_comments('search.js')
-
-        strip_comments('gallery.css')
-        strip_comments('gallery.js')
-
-        if arg('-without_cache'):
-            shutil.copy('src/no_sw.js', 'swi.js')
-            shutil.copy('src/no_sw.js', 'sw.js')
-        else:
-            strip_comments('swi.js')
-
-    strip_comments('gallery.html', debug_gallery=arg('-debug_js'))
-
-###############################################################################
-
-with Step('other', 'Process "other/*.txt" files'):
-    other_files = get_file_set('other', 'txt')
-    parse_other_txt_files(other_files)
-
+        strip_comments('swi.js')
+        # sw.js is generated below
 
 ###############################################################################
 # Create pages.js
@@ -862,11 +265,6 @@ if (typeof main !== 'undefined') {
 }
 ''')
 
-with Step('pages_js', 'Write pages.js'):
-    search_file = f'{root_path}/pages.js'
-    with open(search_file, 'w', encoding='utf-8') as w:
-        write_pages_js(w)
-
 ###############################################################################
 # Create photos.js
 
@@ -926,17 +324,12 @@ def write_photos_js(w):
     w.write(f'["bay area","figures/bay-area.jpg"],\n')
     w.write('];\n')
 
-with Step('photos_js', 'Write photos.js'):
-    photos_file = f'{root_path}/photos.js'
-    with open(photos_file, 'w', encoding='utf-8') as w:
-        write_photos_js(w)
-
 ###############################################################################
 # Compare the new html files with the prev files.
 # Create an HTML file with links to all new files and all modified files.
 # (Ignore deleted files.)
 
-with Step('html_diffs', 'Find modified HTML files'):
+def find_html_diffs():
     file_list = (sorted(get_file_set('', 'html', with_path=True)) +
                  sorted(get_file_set('html', 'html', with_path=True)))
     new_list = []
@@ -1047,6 +440,209 @@ def write_sw_js():
     update_cache(path_list)
     gen_url_cache()
 
+##############################################################################
+# Perform all the steps of BAWG creation in one (relatively) compact chunk
+# of code.  The main advantage of doing it this way is that it makes it
+# easier to wrap multiple steps in a 'with' statement to ensure that caches
+# get cleaned up properly.
+
+with Step('read_parks', 'Read parks.yaml'):
+    read_file('data/parks.yaml', read_parks, skippable=True)
+
+with Step('read_txt', 'Read primary names from txt files'):
+    read_txt()
+
+with Step('parse_decl', 'Parse attributes, properties, and child info'):
+    parse_decl()
+
+with Step('attach_jpg', 'Attach photos to pages'):
+    assign_jpgs()
+
+with Step('taxon_names', 'Parse taxon_names.yaml'):
+    read_file('data/taxon_names.yaml', read_taxon_names, skippable=True)
+
+# Although Linnaean descendants links are automatically created whenever
+# a page is assigned a child, this isn't reliable during initial child
+# assignment when not all of the scientific names are known yet (since
+# additional names can be attached as the child declaration is parsed).
+# Therefore, once all the names are in, we make another pass through
+# the pages to ensure that all Linnaean links are complete.
+with Step('update_linn', 'Update Linnaean links'):
+    for page in page_array:
+        page.link_linn_descendants()
+
+with Step('update_member', 'Add explicit and implied ancestors'):
+    for page in page_array[:]:
+        page.assign_groups()
+
+with Step('read_core', 'Read DarwinCore archive'):
+    read_core()
+
+with Step('obs_chains', 'Create taxonomic chains from observations.csv'):
+    read_file('data/observations.csv', read_obs_chains,
+              skippable=True, msg='taxon hierarchy')
+
+with Step('infer_names', 'Infer name from filename'):
+    # If we got this far and a page still doesn't have a name, give it one.
+    for page in page_array:
+        page.infer_name()
+
+# Make sure that any API activity gets dumped to the cache so that we don't
+# repeatedly hit the API for the same taxons, even if there's a script problem.
+try:
+    with Step('read_api', 'Read cached iNaturalist API data'):
+        read_inat_files()
+
+    with Step('core_chains', 'Create taxonomic chains from DarwinCore archive'):
+        parse_core_chains()
+
+    with Step('api_chains', 'Create taxonomic chains from iNaturalist API data'):
+        page_set = set()
+        for page in page_array:
+            # link_inat() traverses up through all ancestors, and we don't
+            # care about shadow descendents, so we prefer to call link_inat()
+            # only for real leaf pages.
+            #
+            # This may miss some ancestor pages if the leaf page doesn't have
+            # a scientific name.  But that would be unusual, and it's a pain to fix.
+            if (((page.sci and page.elab_inaturalist != 'n/a') or page.taxon_id)
+                and not page.shadow and not page.child):
+                page_set.add(page)
+        link_inat(page_set)
+
+    with Step('lcca', "Assign ancestors to pages that don't have scientific names"):
+        for page in page_array:
+            if not page.rank:
+                # If a page doesn't fit into the Linnaean hierarchy, try to find a
+                # place for it.
+                # We do this even if a Linnaean ancestor is given since it may not
+                # be the best Linnaean parent.
+                # This also propagates is_top, so we don't have to do it again.
+                page.resolve_lcca()
+            if page.is_top and not page.parent and not page.linn_parent:
+                page.propagate_is_top()
+
+    with Step('def_anc', 'Assign default ancestor to floating trees'):
+        default_ancestor = get_default_ancestor()
+        if default_ancestor:
+            for page in full_page_array:
+                if (not page.is_top
+                    and not page.linn_parent
+                    and (not page.rank or page.rank < default_ancestor.rank)):
+                    if default_ancestor:
+                        default_ancestor.link_linn_child(page)
+                    else:
+                        warn(f'is_top not declared for page at top of hierarchy: {page.full()}')
+
+    with Step('prop_prop', 'Propagate properties'):
+        # Assign properties to the appropriate ranks.
+        for page in page_array:
+            page.propagate_props()
+
+    with Step('prop_link', 'Apply create and link properties'):
+        # Apply link-creation and related properties
+        # in order from the lowest ranked pages to the top.
+        for rank in Rank:
+            for page in full_page_array:
+                if page.rank is rank:
+                    page.apply_prop_link()
+
+    with Step('ignore', 'Read ignore_species.yaml'):
+        read_file('data/ignore_species.yaml', read_ignore_species, skippable=True)
+
+    with Step('obs_data', 'Read observation counts and common names from observations.csv'):
+        read_file('data/observations.csv', read_observation_data,
+                  skippable=True, msg='observation data')
+
+    with Step('api_names', 'Apply names from iNaturalist API data'):
+        apply_inat_names()
+
+    top_list = [x for x in page_array if not x.parent]
+
+    with Step('prop_apply', 'Apply remaining properties'):
+        for page in full_page_array:
+            page.apply_most_props()
+
+    with Step('parse_txt', 'Parse remaining text, including glossary terms'):
+        parse_glossaries(top_list)
+
+        for page in page_array:
+            page.sort_children()
+
+        for page in page_array:
+            page.check_traits()
+
+    with Step('toxic', 'Read and apply toxicity data'):
+        read_toxicity()
+
+    finalize_inat_db()
+finally:
+    # Whether we took an exception or finished the API code successfully,
+    # write out the updated API cache.
+    with Progress('Write API cache'):
+        dump_inat_db()
+
+    for page in page_array:
+        page.propagate_toxicity()
+
+with Step('write_html', 'Write HTML files'):
+    for page in page_array:
+        page.parse_line_by_line()
+
+    for page in page_array:
+        page.parse2()
+
+    for page in page_array:
+        with Progress(f'write_html for {page.full()}'):
+            page.write_html()
+
+if arg('-debug_js'):
+    with Step('strip', 'Delete stripped JS since -debug_js is specified'):
+        debug_js()
+else:
+    with Step('strip', 'Strip comments from ungenerated JS and HTML'):
+        strip_js()
+
+    strip_comments('gallery.html', debug_gallery=arg('-debug_js'))
+
+with Step('other', 'Process "other/*.txt" files'):
+    other_files = get_file_set('other', 'txt')
+    parse_other_txt_files(other_files)
+
+with Step('pages_js', 'Create pages.js'):
+    search_file = f'{root_path}/pages.js'
+    with open(search_file, 'w', encoding='utf-8') as w:
+        write_pages_js(w)
+
+with Step('photos_js', 'Create photos.js'):
+    photos_file = f'{root_path}/photos.js'
+    with open(photos_file, 'w', encoding='utf-8') as w:
+        write_photos_js(w)
+
+with Step('html_diffs', 'Find modified HTML files'):
+    find_html_diffs()
+
 if not arg('-without_cache'):
     with Step('sw_js', 'Write url_data.json and sw.js'):
         write_sw_js()
+
+###############################################################################
+# Find incomplete keys
+
+def by_incomplete_obs(page):
+    is_top_of_genus = page.is_top_of(Rank.genus)
+    if is_top_of_genus and page.genus_complete in (None, 'more'):
+        cnt = Cnt(None, None)
+        cnt.count_matching_obs(page)
+        return cnt.n
+    else:
+        return 0
+
+if arg('-incomplete_keys'):
+    # List the top 5 genus pages with an incomplete key,
+    # as ordered by number of observations.
+    # (If there are fewer than 5, then some random pages are listed as well.)
+    print ('Top 5 genuses with incomplete keys:')
+    for page in sorted(page_array, key=by_incomplete_obs, reverse=True)[:5]:
+        info(page.full())
+
