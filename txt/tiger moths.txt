@@ -4,3 +4,7 @@ bug:39181
 ==edwards' glassy-wing moth:Pseudohemihyalea edwardsii
 bug:34896
 x:ba
+
+==salt marsh moth:Estigmene acrea
+bug:3242
+x:ba

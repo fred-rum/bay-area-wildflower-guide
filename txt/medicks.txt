@@ -44,6 +44,7 @@ color: yellow
 .. elliptical tan fruit is hidden by drooping flower petals
 
 ==alfalfa:M. sativa
+color: purple
 . glabrous or puberulent
 . stem generally erect
 . stipules entire to sharply toothed

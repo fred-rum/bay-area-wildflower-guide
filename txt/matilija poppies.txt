@@ -1,0 +1,14 @@
+sci: genus Romneya
+
+==hairy matilija poppy:Romneya trichocalyx
+color: white
+. petals 6--10 cm long
+. leaf 5--10 cm long
+. sepals glabrous
+. peduncle glabrous
+
+==coulter's matilija poppy:Romneya coulteri
+. petals 4--8 cm long
+. leaf 3--10 cm long
+. sepals appressed-hairy
+. peduncle +- bristly at top

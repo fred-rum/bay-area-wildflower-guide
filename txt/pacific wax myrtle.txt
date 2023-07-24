@@ -1,0 +1,5 @@
+sci: Morella californica
+genus: bayberries
+x: ca
+
+color: other

@@ -1,0 +1,55 @@
+sci: genus Juncus
+color:other
+x: rare
+
+There are a <b>lot</b> of species in the bay area; I've only included the most common ones here (CalFlora observations > +-80).
+
+==toad rush:J. bufonius
+. plant 2--10 cm tall (rarely taller)
+.. all others are > 10 cm tall
+
+==western rush:J. occidentalis
+. plant 30--60 cm tall
+. inflorescence bract does not look like stem
+.. generally one bract is longer than the inflorescence
+. <b>leaf blade 1--1.5 mm wide
+
+==irisleaf rush:J. xiphioides
+. plant 40--80 cm tall
+. inflorescnce bract does not look like stem
+.. all bracts are < &frac12 the length of the inflorescence
+. <b>leaf blade flattened, 5--14 mm wide
+
+[
+cylindric inflorescence bract continues above inflorescence, making the inflorescence appear as if it is on the side of the stem
+
+==san francisco rush:J. lesueurii
+sci_jfp: J. lescurii
+. plant 30--140 cm tall
+. <b>stems scattered or in loose lines</b>
+. 2--3 stamens
+
+==soft rush:J. effusus
+. plant 60--155 cm tall
+. stems in dense tufts like bunchgrass
+. leaf sheathes have no blade
+.. leaf sheath tip thickened with a raised rim
+.. sheath generally dark brown to black
+. 3 stamens
+
+==lamp rush:J. hesperius
+. plant 10--115 cm tall
+. stems in dense tufts like bunchgrass
+. leaf sheathes have no blade
+.. leaf sheath tip thin with broad membranous wings
+.. sheath green to pale or mid-brown
+. 3 stamens
+
+==spreading rush:J. patens
+. plant 30--105 cm tall
+. stems in dense tufts like bunchgrass
+. leaf sheathes have no blade
+. <b>6 stamens</b>
+. most common species in the bay area
+
+]
