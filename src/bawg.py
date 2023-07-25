@@ -575,6 +575,9 @@ try:
     with Step('toxic', 'Read and apply toxicity data'):
         read_toxicity()
 
+    # We nneded to look up scientific name aliases for the toxicity data.
+    # But after that, we're done with the API, so we can discard all unused
+    # entries from the API cache.
     finalize_inat_db()
 finally:
     # Whether we took an exception or finished the API code successfully,

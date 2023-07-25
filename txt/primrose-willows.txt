@@ -2,12 +2,14 @@ sci:Ludwigia
 x:hist/rare
 
 ==water primrose:L. hexapetala
+color: yellow
 . bracts lanceolate to lance-ovate
 . sepals 8--19 mm
 . petals 15--29 mm
 . Despite the Latin name, typically has only 5 petals.
 
 ==floating primrose-willow:L. peploides
+color: yellow
 . bracts deltate
 . sepals 6--14 mm
 . petals 9--22 mm

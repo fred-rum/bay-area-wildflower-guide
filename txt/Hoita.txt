@@ -1,0 +1,19 @@
+com: n/a
+sci: genus Hoita
+x: any
+
+==large leatherroot:H. macrostachya
+. stem erect
+. flower 9--10 mm long
+.. banner 5.5--10 mm long
+
+==loma prieta hoita:H. strobilina
+. stem erect
+. flower 13--19 mm long
+.. banner 12--13 mm long
+
+==roundleaf leatherroot:H. orbicularis
+. stem prostrate
+.. erect parts < 6.5 cm high
+. flower 12--23 mm long
+.. banner 10--16 mm long

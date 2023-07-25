@@ -1,0 +1,5 @@
+sci: Dittrichia graveolens
+color: yellow
+
+genus: n/a
+x:rare

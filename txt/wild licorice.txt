@@ -1,0 +1,5 @@
+sci: Glycyrrhiza lepidota
+color: white
+
+genus: n/a
+x:rare

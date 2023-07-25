@@ -3,42 +3,45 @@ x:rare
 
 There are other sand spurries in the bay area, but I'm hesitant to include them when the differences are so inconspicuous.
 
-==saltmarsh sand spurry:S. marina
-. annual, delicate
-. 2--5 stamens
-.. all others have 6+
+Jepson lists the lower main stem diameter as a distinguishing characteristic, but my experience is that it is wrong.  It is therefore unclear how to distinguish species except by location.  FNA says that "Spergularia is a difficult genus in which emphasis on seed characters appears necessary."
 
 ==sticky sand-spurrey:S. macrotheca
-. strongly perennial herb, stout
-. lower main stem 0.8--3 mm diam.
+. <b>base of stem woody</b>
 . 0--2+ leaves per axillary cluster
 . calyx lobes 4.5--7 mm
 . styles 0.6--3 mm
 . variants can be distinguished by flower color and style length (measure precisely!)
 
 ==hairy sandspurry:S. villosa
-. strongly perennial herb, stout
+. <b>base of stem woody</b>
 . calyx lobes 2.5--4 mm
 . styles 0.4--0.6 mm
 . rare
 
+==saltmarsh sand spurry:S. marina
+. base of stem not woody
+. <b>2--5 stamens</b>
+.. all others have 6--10
+
 ==red sand spurrey:S. rubra
 color: pale purple
-. annual, delicate
-. lower main stem 0.3--0.5 mm diam.
-. leaves barely fleshy, 2--4+ leaves per axillary cluster
-. stipules generally 3.5--5 mm, <b>shiny, white, conspicuous</b>
+. base of stem not woody
+. 2--4+ leaves per axillary cluster
+.. leaves barely fleshy
+.. stipules generally 3.5--5 mm, <b>shiny, white, conspicuous</b>
+. common
 
 ==boccone's sand spurry:S. bocconei
 acom:greek sea-spurrey
 sci_Ffpj:Spergularia bocconi
-. annual, +- delicate
-. leaves +- fleshy, 0--2 per axillary cluster
-. stipules generally 1.5--4.5 mm, dull, white to tan, generally inconspicuous
+. base of stem not woody
+. 0--2 per axillary cluster
+.. leaves +- fleshy
+.. stipules generally 1.5--4.5 mm, dull, white to tan, generally inconspicuous
 . rare
 
 ==greater sea-spurrey:S. media var. media
 species: greater sea-spurry
-. annual, stout (lower main stem generally 1--3 mm diam)
+. base of stem not woody
 . leaves clearly fleshy
 . very rare

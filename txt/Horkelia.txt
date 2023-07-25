@@ -1,0 +1,28 @@
+com: n/a
+sci: genus Horkelia
+x:ba
+
+==wedge leaf horkelia:H. cuneata
+. <b>leaflets pinnately veined throughout</b> [distinction unclear in CalPhotos]
+.. more than 20 +- <b>evenly spaced teeth</b> arranged in pairs
+. hypanthium 4--8 mm wide, > 2 &times; length
+
+==california horkelia:H. californica
+color: white
+. leaflets +- palmately veined at base
+.. teeth unevenly spaced
+. hypanthium 4--10 mm wide, <b>1--2 &times; length</b>
+
+==point reyes horkelia:H. marinensis
+. leaflets +- palmately veined at base
+.. teeth unevenly spaced
+. stem decumbent to ascending, 10--30 cm long
+. hypanthium 4--5 mm wide, > 2 &times; length
+. inflorescence +- dense
+
+==thin-lobed horkelia:H. tenuiloba
+. leaflets +- palmately veined at base
+.. teeth unevenly spaced
+. hypanthium 3--4.5 mm wide, > 2 &times; length
+. stem ascending to erect, 10--70 cm long
+. inflorescence generally +- open

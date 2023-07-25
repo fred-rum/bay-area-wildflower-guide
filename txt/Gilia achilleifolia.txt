@@ -6,7 +6,7 @@ color: purple
 .. corolla 10--21 mm long (2--3 &times; calyx)
 .. pedicel 1--2 mm
 
-==many-stemmed gilia:ssp. multicaulis # common name from Calflora
+==many-stemmed california gilia:ssp. multicaulis # common name from Calflora
 color: purple, pale purple, white
 acom: small california gilia # Pine Ridge Association
 acom: many-stemmed california gilia # Calflora

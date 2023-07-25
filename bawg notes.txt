@@ -1681,9 +1681,7 @@ Allow scrolling through JavaScript search results:
       adjust this if "..." replaces the current selection
 
 fix up dumping and keyboard interrupts
-  all parts of the code that use the core API should be protected
-    in a 'with:' block or equivalent
-  when a file, an exception should delete it
+  when writing a file, an exception should delete it
   when keeping track of file hashes,
     an exception should dump the hash DB
     and delete any entry for a file that gets deleted
@@ -1695,7 +1693,13 @@ fix up dumping and keyboard interrupts
       but although that is currently often called when the script exits,
         it's not guaranteed
       so I guess this isn't such a good idea after all
+    instead, all writes must be enclosed in a big 'with:'
+      that has a 'finally' clause to write the hash DB
   when writing a file, allow some writes to be unhashed
     e.g. for the first few lines of sw.js
       so that sw.js is written/modified only if there are other changes
         (in the lower parts of sw.js or in any other file)
+
+When font size is increased (in Chrome mobile browser),
+  text in 'alien/native/endemic' hover gets cut off on right side
+  e.g. santa clara valley dudleya
