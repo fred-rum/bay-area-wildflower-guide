@@ -440,56 +440,77 @@ def write_sw_js():
     update_cache(path_list)
     gen_url_cache()
 
+###############################################################################
+# List the top 5 genus pages with an incomplete key,
+# as ordered by number of observations.
+# (If there are fewer than 5, then some random pages are listed as well.)
+
+def by_incomplete_obs(page):
+    is_top_of_genus = page.is_top_of(Rank.genus)
+    if is_top_of_genus and page.genus_complete in (None, 'more'):
+        cnt = Cnt(None, None)
+        cnt.count_matching_obs(page)
+        return cnt.n
+    else:
+        return 0
+
+def list_incomplete_keys():
+    print ('Top 5 genuses with incomplete keys:')
+    for page in sorted(page_array, key=by_incomplete_obs, reverse=True)[:5]:
+        info(page.full())
+
 ##############################################################################
 # Perform all the steps of BAWG creation in one (relatively) compact chunk
 # of code.  The main advantage of doing it this way is that it makes it
 # easier to wrap multiple steps in a 'with' statement to ensure that caches
 # get cleaned up properly.
 
-with Step('read_parks', 'Read parks.yaml'):
-    read_file('data/parks.yaml', read_parks, skippable=True)
-
-with Step('read_txt', 'Read primary names from txt files'):
-    read_txt()
-
-with Step('parse_decl', 'Parse attributes, properties, and child info'):
-    parse_decl()
-
-with Step('attach_jpg', 'Attach photos to pages'):
-    assign_jpgs()
-
-with Step('taxon_names', 'Parse taxon_names.yaml'):
-    read_file('data/taxon_names.yaml', read_taxon_names, skippable=True)
-
-# Although Linnaean descendants links are automatically created whenever
-# a page is assigned a child, this isn't reliable during initial child
-# assignment when not all of the scientific names are known yet (since
-# additional names can be attached as the child declaration is parsed).
-# Therefore, once all the names are in, we make another pass through
-# the pages to ensure that all Linnaean links are complete.
-with Step('update_linn', 'Update Linnaean links'):
-    for page in page_array:
-        page.link_linn_descendants()
-
-with Step('update_member', 'Add explicit and implied ancestors'):
-    for page in page_array[:]:
-        page.assign_groups()
-
-with Step('read_core', 'Read DarwinCore archive'):
-    read_core()
-
-with Step('obs_chains', 'Create taxonomic chains from observations.csv'):
-    read_file('data/observations.csv', read_obs_chains,
-              skippable=True, msg='taxon hierarchy')
-
-with Step('infer_names', 'Infer name from filename'):
-    # If we got this far and a page still doesn't have a name, give it one.
-    for page in page_array:
-        page.infer_name()
-
-# Make sure that any API activity gets dumped to the cache so that we don't
-# repeatedly hit the API for the same taxons, even if there's a script problem.
+# We have a few caches that we use to avoid unnecessary work.
+# We protect these in a big 'try / except / finally' block so
+# that any cache updates are written back to disk even if there
+# is an exception.
 try:
+    with Step('read_parks', 'Read parks.yaml'):
+        read_file('data/parks.yaml', read_parks, skippable=True)
+
+    with Step('read_txt', 'Read primary names from txt files'):
+        read_txt()
+
+    with Step('parse_decl', 'Parse attributes, properties, and child info'):
+        parse_decl()
+
+    with Step('attach_jpg', 'Attach photos to pages'):
+        assign_jpgs()
+
+    with Step('taxon_names', 'Parse taxon_names.yaml'):
+        read_file('data/taxon_names.yaml', read_taxon_names, skippable=True)
+
+    # Although Linnaean descendants links are automatically created whenever
+    # a page is assigned a child, this isn't reliable during initial child
+    # assignment when not all of the scientific names are known yet (since
+    # additional names can be attached as the child declaration is parsed).
+    # Therefore, once all the names are in, we make another pass through
+    # the pages to ensure that all Linnaean links are complete.
+    with Step('update_linn', 'Update Linnaean links'):
+        for page in page_array:
+            page.link_linn_descendants()
+
+    with Step('update_member', 'Add explicit and implied ancestors'):
+        for page in page_array[:]:
+            page.assign_groups()
+
+    with Step('read_core', 'Read DarwinCore archive'):
+        read_core()
+
+    with Step('obs_chains', 'Create taxonomic chains from observations.csv'):
+        read_file('data/observations.csv', read_obs_chains,
+                  skippable=True, msg='taxon hierarchy')
+
+    with Step('infer_names', 'Infer name from filename'):
+        # If we got this far and a page still doesn't have a name, give it one.
+        for page in page_array:
+            page.infer_name()
+
     with Step('read_api', 'Read cached iNaturalist API data'):
         read_inat_files()
 
@@ -574,78 +595,69 @@ try:
 
     with Step('toxic', 'Read and apply toxicity data'):
         read_toxicity()
+        for page in page_array:
+            page.propagate_toxicity()
 
     # We nneded to look up scientific name aliases for the toxicity data.
     # But after that, we're done with the API, so we can discard all unused
     # entries from the API cache.
     finalize_inat_db()
+
+    with Step('write_html', 'Write HTML files'):
+        for page in page_array:
+            page.parse_line_by_line()
+
+        for page in page_array:
+            page.parse2()
+
+        for page in page_array:
+            with Progress(f'write_html for {page.full()}'):
+                page.write_html()
+
+    if arg('-debug_js'):
+        with Step('strip', 'Delete stripped JS since -debug_js is specified'):
+            debug_js()
+    else:
+        with Step('strip', 'Strip comments from ungenerated JS and HTML'):
+            strip_js()
+
+        strip_comments('gallery.html', debug_gallery=arg('-debug_js'))
+
+    with Step('other', 'Process "other/*.txt" files'):
+        other_files = get_file_set('other', 'txt')
+        parse_other_txt_files(other_files)
+
+    with Step('pages_js', 'Create pages.js'):
+        search_file = f'{root_path}/pages.js'
+        with open(search_file, 'w', encoding='utf-8') as w:
+            write_pages_js(w)
+
+    with Step('photos_js', 'Create photos.js'):
+        photos_file = f'{root_path}/photos.js'
+        with open(photos_file, 'w', encoding='utf-8') as w:
+            write_photos_js(w)
+
+    with Step('html_diffs', 'Find modified HTML files'):
+        find_html_diffs()
+
+    if not arg('-without_cache'):
+        with Step('sw_js', 'Write url_data.json and sw.js'):
+            write_sw_js()
+
+except:
+    # Something went wrong.  Keep any new cache entries, but also copy over
+    # the old cache entries so that no info gets lost.
+    for name in old_cache:
+        if name not in new_cache:
+            new_cache[name] = old_cache[name]
+
 finally:
-    # Whether we took an exception or finished the API code successfully,
-    # write out the updated API cache.
+    # Whether we took an exception or finished the script successfully,
+    # write out the updated caches.
     with Progress('Write API cache'):
         dump_inat_db()
-
-    for page in page_array:
-        page.propagate_toxicity()
-
-with Step('write_html', 'Write HTML files'):
-    for page in page_array:
-        page.parse_line_by_line()
-
-    for page in page_array:
-        page.parse2()
-
-    for page in page_array:
-        with Progress(f'write_html for {page.full()}'):
-            page.write_html()
-
-if arg('-debug_js'):
-    with Step('strip', 'Delete stripped JS since -debug_js is specified'):
-        debug_js()
-else:
-    with Step('strip', 'Strip comments from ungenerated JS and HTML'):
-        strip_js()
-
-    strip_comments('gallery.html', debug_gallery=arg('-debug_js'))
-
-with Step('other', 'Process "other/*.txt" files'):
-    other_files = get_file_set('other', 'txt')
-    parse_other_txt_files(other_files)
-
-with Step('pages_js', 'Create pages.js'):
-    search_file = f'{root_path}/pages.js'
-    with open(search_file, 'w', encoding='utf-8') as w:
-        write_pages_js(w)
-
-with Step('photos_js', 'Create photos.js'):
-    photos_file = f'{root_path}/photos.js'
-    with open(photos_file, 'w', encoding='utf-8') as w:
-        write_photos_js(w)
-
-with Step('html_diffs', 'Find modified HTML files'):
-    find_html_diffs()
-
-if not arg('-without_cache'):
-    with Step('sw_js', 'Write url_data.json and sw.js'):
-        write_sw_js()
-
-###############################################################################
-# Find incomplete keys
-
-def by_incomplete_obs(page):
-    is_top_of_genus = page.is_top_of(Rank.genus)
-    if is_top_of_genus and page.genus_complete in (None, 'more'):
-        cnt = Cnt(None, None)
-        cnt.count_matching_obs(page)
-        return cnt.n
-    else:
-        return 0
+    with Progress('Write file hash cache'):
+        dump_hash_cache()
 
 if arg('-incomplete_keys'):
-    # List the top 5 genus pages with an incomplete key,
-    # as ordered by number of observations.
-    # (If there are fewer than 5, then some random pages are listed as well.)
-    print ('Top 5 genuses with incomplete keys:')
-    for page in sorted(page_array, key=by_incomplete_obs, reverse=True)[:5]:
-        info(page.full())
-
+    list_incomplete_keys()

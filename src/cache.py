@@ -57,16 +57,25 @@ def write_and_hash(path):
                 # the file is unchanged, so we don't need to re-write it
                 new_cache[path] = old_cache[path]
             else:
-                raise Exception
+                raise Exception # fall through to 'except:' block below
         except: # if the file is different or the mtime query fails
             # The output is written with the Python-native '\n' line endinge
             # instead of the default OS line endings so that we get the same
             # hash_base64 result on the file as we do internally.
+
+            # In case the write fails, make sure the cache doesn't keep the
+            # old hash.  'None' is guaranteed to not match any base64 hash.
+            new_cache[path] = None
+
             with open(f'{root_path}/{path}', mode='w',
                       encoding='utf-8', newline='') as w:
                 w.write(value)
-            mod_files.add(path)
+
+            # Once the file is successfully written, we can cache its hash.
             new_cache[path] = entry
+
+            # Note that the file was added or modified.
+            mod_files.add(path)
 
 def get_base64(path):
     if path in new_cache:
@@ -126,10 +135,11 @@ def update_cache(path_list):
         global kb_total
         kb_total += kb
 
-def gen_url_cache():
+def dump_hash_cache():
     with open(f'{root_path}/data/cache.pickle', mode='wb') as w:
         pickle.dump(new_cache, w)
 
+def gen_url_cache():
     code = ",\n".join(cache_list)
     with open(f'{root_path}/url_data.json', mode='w') as w:
         w.write(f'[\n{code}\n]\n');
