@@ -28,6 +28,7 @@ Particularly for leaves, the base of the blade may taper to the petiole regardle
 {awl-like} Long, narrow, and pointed, but slightly wider at the base, so not quite linear.
 {cordate} Shaped like a heart in a deck of cards (with tip outward, lobes at the base). <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
 {elliptic,elliptical} In the shape of an elongated circle, widest near the middle.  Wider than linear. <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
+{fan-shaped,fan,fans} [I'm guessing] Expanding from the base to a +- truncate or ragged wide end.
 {hastate} In the shape of an spearhead, with the two basal lobes spreading +- perpendicular to the axis.  Compare sagittate.
 {lanceolate,lance} Long, somewhat narrow, and tapering to a point at the tip; widest between the middle and the base. <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
 {linear} Long and very narrow with +- parallel sides. <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
@@ -37,6 +38,7 @@ Particularly for leaves, the base of the blade may taper to the petiole regardle
 {obovate} Egg shaped; widest between the middle and the tip. <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
 {reniform} In the shape of a dented oval, with the petiole connection in the dent.  Depending on your source, the distinction from cordate is that the tip of the blade is rounded (instead of pointed) or that the blade base is concave around the petiole attachment (instead of sharply notched). <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
 {sagittate} In the shape of an arrowhead, with the two basal lobes draped +- parallel to the axis.  Compare hastate.
+{wedge-shaped,wedge,wedges} [I'm guessing] Like fan-shaped, but narrower.
 
 <h3>2-D branching organization</h3>
 

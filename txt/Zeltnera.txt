@@ -14,21 +14,24 @@ Key features:
 ==muehlenberg's centaury:Z. muehlenbergii
 color: pink, pale purple
 . [much branched, many flowered]
-. pedicels 0--10 mm
+. pedicels <b>0</b>--10 mm
 . corolla lobes 2--7 mm, tips rounded
-
-==alkali centaury:Z. trichantha
-. [many flowered]
-. pedicels 0--3 mm
-. corolla lobes 5--10 mm, tips acute to acuminate
-. rare
+. uncommon
 
 ==davy's centaury:Z. davyi
 keeled calyx lobes:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1218+3917
 . pedicels 2--25(55) mm
 . <b>calyx lobes keeled</b>
-.. no others have keeled calyx lobes
+.. no others have keeled calyx lobes [?]
+.. Caution: some species have paired bracts that resemble calyx lobes, but the calyx actually has the same number of lobes as the corolla (4 or 5)
 . corolla lobes 3--7 mm
+. uncommon
+
+==alkali centaury:Z. trichantha
+. [many flowered]
+. <b>pedicels 0--3 mm</b>
+. corolla lobes 5--10 mm, <b>tips acute to acuminate</b>
+. rare
 
 ==california centaury:Z. venusta
 . [much branched, many flowered]
