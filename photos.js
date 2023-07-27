@@ -363,6 +363,7 @@ var pages=[
 ["dagger moths",7],
 ["dance flies",1],
 ["dark-eyed junco",1,2,3,4],
+["davy's centaury",2],
 ["deceivers",2,4],
 ["dendroalsia moss",1,4,8],
 ["denseflower indian paintbrush",1,2,3],

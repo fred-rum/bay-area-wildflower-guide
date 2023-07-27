@@ -2037,7 +2037,7 @@ var pages=[
 {page:"cursed crowfoot",sci:["Ranunculus sceleratus"],x:"u"},
 {page:"cypress spurge",sci:["Euphorbia cyparissias"],x:"u"},
 {page:"darwin's barberry",sci:["Berberis darwinii"],x:"u"},
-{page:"davy's centaury",sci:["Zeltnera davyi"],x:"u"},
+{page:"davy's centaury",sci:["Zeltnera davyi"],x:"o"},
 {page:"davy's clarkia",sci:["Clarkia davyi"],x:"u"},
 {page:"denseflower rein orchid",sci:["Platanthera elongata","Piperia elongata"],x:"u"},
 {page:"denseflower willowherb",sci:["Epilobium densiflorum"],x:"u"},
