@@ -21,7 +21,7 @@ color: white, other
 ==distant phacelia:P. distans
 color: pale purple, white, other
 . corolla pale purple, beige (cream with brown streaks), or white
-. corolla throat with dark spots below petals (except on pure white corolla)
+. corolla throat with dark purple spots below petals (except on pure white corolla)
 
 ==shade phacelia:P. nemoralis
 color: pale purple, other

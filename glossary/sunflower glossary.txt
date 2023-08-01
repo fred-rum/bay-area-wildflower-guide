@@ -21,8 +21,8 @@ A single flower head in the sunflower family is actually a tight inflorescence o
 <h2>Head shapes</h2>
 
 {discoid head,discoid} Head composed exclusively of disk flowers.
-{radiate head,radiate} Head composed of both disk flowers and ray flowers.
-{liguliflorous head,liguliflorous} Head composed only of ligulate flowers.
+{radiate head,radiate} Head composed of both disk flowers and ray flowers, e.g. a daisy.
+{liguliflorous head,liguliflorous} Head composed only of ligulate flowers, e.g. a dandelion.
 
 <h2>Inflorescence shapes</h2>
 

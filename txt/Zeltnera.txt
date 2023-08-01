@@ -19,6 +19,7 @@ color: pink, pale purple
 . uncommon
 
 ==davy's centaury:Z. davyi
+color: pink, pale purple
 keeled calyx lobes:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1218+3917
 . pedicels 2--25(55) mm
 . <b>calyx lobes keeled</b>

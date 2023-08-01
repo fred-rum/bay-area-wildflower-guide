@@ -12,13 +12,13 @@ There are a <b>lot</b> of species in the bay area; I've only included the most c
 . plant 30--60 cm tall
 . inflorescence bract does not look like stem
 .. generally one bract is longer than the inflorescence
-. <b>leaf blade 1--1.5 mm wide
+. <b>leaf blade 1--1.5 mm wide</b>
 
 ==irisleaf rush:J. xiphioides
 . plant 40--80 cm tall
 . inflorescnce bract does not look like stem
 .. all bracts are < &frac12 the length of the inflorescence
-. <b>leaf blade flattened, 5--14 mm wide
+. <b>leaf blade flattened, 5--14 mm wide</b>
 
 [
 cylindric inflorescence bract continues above inflorescence, making the inflorescence appear as if it is on the side of the stem

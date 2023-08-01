@@ -3,7 +3,7 @@ x:ca
 
 Note that references to "umbel" below refer to one umbel in the compound umbel inflorescence.
 
-Plants with similar leaves:
+Plants with similar burs:
 . {-bur chervil} has more divided leaflet lobes, beaked fruit
 . {-poison hemlock} is a larger plant with much larger leaves
 . {-sweet cicely} leaves are ternate at the first level of branching

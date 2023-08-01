@@ -1,0 +1,7 @@
+sci: Armeria maritima ssp. californica
+
+species: sea thrift
+xx: ca
+
+genus: thfift
+x: ca

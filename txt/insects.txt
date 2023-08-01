@@ -35,6 +35,8 @@ bug:156092
 
 ==aphids
 
+==jumping plant lice
+
 ==gall midges
 
 ==red gum lerp psyllid

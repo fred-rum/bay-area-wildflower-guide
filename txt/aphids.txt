@@ -4,10 +4,6 @@ Aphids are picky about hosts, so note the host when observing aphids.
 And photograph the largest aphid because it may have better developed
 distinguishing features.
 
-==woolly alder aphid:Prociphilus tessellatus
-x:more
-bug:157195
-
 ==lupine aphid:Macrosiphum albifrons
 x:more
 bug:484840

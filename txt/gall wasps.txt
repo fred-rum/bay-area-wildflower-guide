@@ -40,18 +40,7 @@ gall:1476
 x:more
 . parasitizes {-roses}
 
-==thimbleberry gallmaker:Diastrophus kincaidii
-bug:617964
-gall:1027
-. parasitizes {-thimbleberry}
-
-==n/a:Diastrophus d-glandulosa-stem-swelling
-sci_i:n/a
-bug:n/a
-gall:1755
-. nothing is known about this gallmaker
-.. I've tentatively included it in <i>Diastrophus</i> since it is capable of similar galls on other members of the {-rose family}
-. parasitizes {-sticky cinquefoil}
+==genus Diastrophus
 
 ==round leaf gall wasp:Heteroecus flavens
 bug:n/a
