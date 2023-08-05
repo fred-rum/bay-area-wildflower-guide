@@ -2,3 +2,5 @@ sci:Toxicodendron diversilobum
 color: other, cream
 x:ca
 genus: poison ivies and oaks
+
+Parasitized by {-poison ivy leaf gall mite}.

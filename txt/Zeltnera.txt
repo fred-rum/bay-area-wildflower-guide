@@ -12,6 +12,7 @@ Key features:
 . stigma number and shape
 
 ==muehlenberg's centaury:Z. muehlenbergii
+acom:monterey centaury
 color: pink, pale purple
 . [much branched, many flowered]
 . pedicels <b>0</b>--10 mm

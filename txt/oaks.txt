@@ -32,7 +32,7 @@ color:other
 . acorn cap usually about as deep as wide, often covering most of the acorn shell
 . deciduous
 . common
-. parasitized by {-ruptured twig gall wasp}
+. parasitized by {-ruptured twig gall wasp} and {-gouty stem gall wasp}
 
 ==coast live oak:Q. agrifolia
 color:other
@@ -45,7 +45,7 @@ color:other
 . acorn cap usually about as deep as wide
 . evergreen
 . common
-. parasitized by {-live oak bud gall wasp}, {-ruptured twig gall wasp}, and {-live oak apple gall wasp}
+. parasitized by {-live oak bud gall wasp}, {-ruptured twig gall wasp}, {-gouty stem gall wasp}, and {-live oak apple gall wasp}
 
 ==interior live oak:Q. wislizeni
 . catkins widely spaced, not clustered
@@ -60,7 +60,7 @@ color:other
 . acorn cap bowl shaped, sometimes as deep as wide
 . evergreen
 . common
-. parasitized by  {-ruptured twig gall wasp} and {-live oak apple gall wasp}
+. parasitized by  {-ruptured twig gall wasp}, {-gouty stem gall wasp}, and {-live oak apple gall wasp}
 
 ==coast oak:Q. parvula
 . catkins clustered into groups

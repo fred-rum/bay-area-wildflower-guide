@@ -4,3 +4,9 @@ sci:family Eriophyidae
 bug:n/a
 gall:636
 . parasitises leaves of multiple willow species
+
+==poison ivy leaf gall mite:Aculops rhois
+xcom:poison ivy leaf mite
+bug:214835
+gall:554
+. parasitizes {-pacific poison oak}

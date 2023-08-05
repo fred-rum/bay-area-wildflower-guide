@@ -21,6 +21,11 @@ gall:1308
 . after the stem ruptures, the fissures turn black
 .. other stem galls of black oaks don't create black fissures
 
+==gouty stem gall wasp:Callirhytis quercussuttoni
+bug:184482
+gall:1318
+. parasitizes black {-oaks}
+
 ==live oak apple gall wasp:Amphibolips quercuspomiformis
 bug:147536
 gall:1313

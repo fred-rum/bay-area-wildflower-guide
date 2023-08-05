@@ -33,14 +33,16 @@ git = shutil.which('git')
 if not git:
     git = 'c:/Program Files/Git/bin/git'
 
-def gitmv(file1, file2):
+def gitmv(file1, file2, optional=False):
     # Run 'git mv' to move <file1> to <file2>.
     # If <file1> isn't under GIT control, then just rename the file instead.
     cmd = (git, 'mv', file1, file2)
     result = subprocess.run(cmd, capture_output=True, encoding='utf-8')
 
     if result.returncode:
-        if result.stderr.startswith('fatal: not under version control'):
+        if result.stderr.startswith('fatal: bad source') and optional:
+            pass
+        elif result.stderr.startswith('fatal: not under version control'):
             print(f'mv {file1} {file2}')
             os.rename(file1, file2)
         else:
@@ -79,7 +81,8 @@ if matchobj:
     to_suffix = matchobj.group(2)
 
     gitmv(f'photos/{name}.jpg', f'photos/{to_name},{to_suffix}.jpg')
-    gitmv(f'thumbs/{name}.jpg', f'thumbs/{to_name},{to_suffix}.jpg')
+    gitmv(f'thumbs/{name}.jpg', f'thumbs/{to_name},{to_suffix}.jpg',
+          optional=True)
 else:
     # Move all photos from one name to another
     file_list = os.listdir('photos')
@@ -98,4 +101,4 @@ else:
                 gitmv(f'photos/{basename}{suffix}.jpg',
                       f'photos/{arg2}{suffix}.jpg')
                 gitmv(f'thumbs/{basename}{suffix}.jpg',
-                      f'thumbs/{arg2}{suffix}.jpg')
+                      f'thumbs/{arg2}{suffix}.jpg', optional=True)

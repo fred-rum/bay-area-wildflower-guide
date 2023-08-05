@@ -1,4 +1,5 @@
 sci: Armeria maritima ssp. californica
+color: pink, pale purple, red purple
 
 species: sea thrift
 xx: ca
