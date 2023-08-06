@@ -1703,3 +1703,5 @@ fix up dumping and keyboard interrupts
 When font size is increased (in Chrome mobile browser),
   text in 'alien/native/endemic' hover gets cut off on right side
   e.g. santa clara valley dudleya
+Is this fixed now?
+  should I use em measurements throughout for proper scaling with text size?
