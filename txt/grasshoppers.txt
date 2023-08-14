@@ -8,3 +8,6 @@ bug:33991
 
 ==fontana grasshopper:Trimerotropis fontana
 bug:144964
+
+==california rose-winged grasshopper:Dissosteira pictipennis
+bug:170309

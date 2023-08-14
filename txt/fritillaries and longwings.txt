@@ -1,9 +1,11 @@
 sci:subfamily Heliconiinae
 bug:12669
 
-==gulf fritillary:Dione vanillae
+==gulf fritillary:Agraulis vanillae ssp. incarnata
+sci_i:Dione vanillae ssp. incarnata # ssp. name doesn't match species name!
 bug:567
 sci_b:Agraulis incarnata
+species:gulf fritillary
 
 ==pacific fritillary:Boloria epithore
 bug:63702

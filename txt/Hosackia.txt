@@ -8,6 +8,7 @@ color: red purple
 . stipules scarious, fragile, not leaflet-like
 
 ==balsam bird's foot trefoil:H. stipularis
+color: red purple
 . peduncle bract generally well below umbel or missing
 . stipules often wide, leaflet-like
 

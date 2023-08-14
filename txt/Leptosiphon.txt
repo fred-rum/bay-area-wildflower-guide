@@ -62,7 +62,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0513+1130
 sci_p:Linanthus grandiflorus
 color: pale purple
 . <b>corolla +- sessile above densely bracted head</b> (corolla starts spreading within bracts or not much above)
-. <b>corolla 15--30 mm</b>:
+. <b>corolla 15--30 mm long</b>
 .. throat yellow
 .. lobes white blending to pink/pale purple/white
 . uncommon
