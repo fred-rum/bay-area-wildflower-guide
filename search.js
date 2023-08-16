@@ -520,6 +520,7 @@ function main() {
   e_search_input = document.getElementById('search');
   e_autocomplete_box = document.getElementById('autocomplete-box');
   e_home_icon = document.getElementById('home-icon');
+  e_search_input.className = 'search';
   for (var i = 0; i < pages.length; i++) {
     var page_info = pages[i];
     if (('page' in page_info) &&

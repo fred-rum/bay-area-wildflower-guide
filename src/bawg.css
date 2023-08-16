@@ -848,8 +848,14 @@ input::placeholder {
 /* When the input field has focus, the border is blue and has a glow effect.
    Some browsers (e.g. Chrome) add an outline by default.  Since the outline
    is square cornered and otherwise generally clashes with our border effect,
-   we disable that default outline. */
-input#search:focus {
+   we disable that default outline.
+
+   Note that the focus properties are on the search *class*, not the search
+   *ID*.  The search field doesn't start with the search class.  Instead,
+   the class is added by JavaScript.  We do this so that the focus highlight
+   doesn't appear if JavaScript isn't enabled.
+*/
+input.search:focus {
     border: 1px solid rgb(81, 203, 238);
     box-shadow: 0px 0px 5px 0px rgb(81, 203, 238);
     outline: auto 0px;
@@ -861,7 +867,7 @@ input:disabled {
     position: absolute;
     top: 8px;
     left: 8px;
-    width: calc(100% - 16px);
+    width: calc(100% - 56px); /* 40 px for home icon, 16 px for margins*/
     background-color: #eeeeee;
     color: #cccccc;
     text-align: center;

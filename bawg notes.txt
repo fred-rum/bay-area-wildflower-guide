@@ -1515,13 +1515,17 @@ Prioritize a taxon with a photo over another without a photo
 Advanced search:
   a search for a tag (e.g. 'purple flowers') or month or park goes to the
     'advanced search' page
-  as does a search with no results
+  as does a search with no results(?)
   as does a link at the bottom of the autocomplete box,
     similar to the search box in iNaturalist
-  if a simple search is performed on a tag, the tag is added to the
-    original page's taxon (if any) in the advanced search results
+    if nothing is in the search box, there is still an autocomplete entry
+      to search within the current page's taxon
+      (is it selected by default,
+        or does the user have to press down arrow first?)
+  if a simple search is performed on a tag, should the tag be added to the
+    original page's taxon (if any) in the advanced search results?
   pages.js (or a variant) lists all taxons in hierarchy format
-    ?including non-pages such as "basidiomycete fungi (phy7lum Basidiomycota)"?
+    ?including non-pages such as "basidiomycete fungi (phylum Basidiomycota)"?
   javascript generates the page content based on the search results
   if a taxon is found, a radio button allows additional taxons to be added
     vs. the default of replacing the taxon
@@ -1546,6 +1550,11 @@ Advanced search:
     allows for 26*26=676 tag values even without going to base-64
     the 12 months are super common and could be encoded with single digits and
       some punctuation
+  mark most(?) images with loading="lazy" to avoid unnecessary bandwidth
+    in a search with lots of results
+    https://web.dev/browser-level-image-lazy-loading
+    and/or add elements to the DOM only as the user scrolls
+      avoids a huge DOM, but runs into the YouTube long list problem
 
 The BAWG doc's summary of files should have a page reference for every file.
 

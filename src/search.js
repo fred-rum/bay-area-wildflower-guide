@@ -908,6 +908,10 @@ function main() {
   e_autocomplete_box = document.getElementById('autocomplete-box');
   e_home_icon = document.getElementById('home-icon');
 
+  /* Add the search class to the search box in order to enable styling
+     that should only be applied when JavaScript is enabled. */
+  e_search_input.className = 'search';
+
   /* normalize the data in the pages array. */
   for (var i = 0; i < pages.length; i++) {
     var page_info = pages[i];
