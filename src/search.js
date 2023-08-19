@@ -248,26 +248,6 @@ function get_class(page_info) {
   }
 }
 
-/* Construct all the contents of a link to a page. */
-function get_link(fit_info, i) {
-  const page_info = fit_info.page_info;
-  const c = get_class(page_info);
-
-  var url = get_url(page_info, fit_info.anchor);
-
-  /* I tried this and didn't like it.  If I ever choose to use it, I also
-     have to change the behavior of the return key (where get_url is used). */
-  /*if (page_info.x == 'j') {
-    target = ' target="_blank" rel="noopener noreferrer"';
-  }*/
-
-  /* Add class 'enclosed' to avoid extra link decoration.
-     Add class c to style the link according to the destination page type.
-     Add onclick with the autocomplete entry number so that we know what
-     to do when the link is clicked. */
-  return '<a class="enclosed ' + c + '" href="' + url + '" onclick="return fn_ac_click(' + i + ');">';
-}
-
 /* Construct the contents of the autocomplete box,
    i.e. the list of autocomplete results. */
 function generate_ac_html() {
@@ -781,13 +761,23 @@ function fn_search(default_ac_selected) {
       var sci_highlight = null;
     }
 
-    var link = get_link(fit_info, i);
-
-    var full = compose_full_name(com_highlight, sci_highlight)
+    const c = get_class(page_info);
+    const full = compose_full_name(com_highlight, sci_highlight)
 
     /* The link is applied to the entire paragraph so that padding above
        and below and the white space to the right are also clickable. */
-    fit_info.html = link + '<p class="nogap">' + full + '</p></a>';
+    const text = '<p class="nogap">' + full + '</p>'
+
+    if (adv_search) {
+      fit_info.html = '<span class="autocomplete-entry" class="' + c + '" onclick="return fn_ac_click(' + i + ');">' + text + '</span>';
+    } else {
+      const url = get_url(page_info, fit_info.anchor);
+      /* Add class 'enclosed' to avoid extra link decoration.
+         Add class c to style the link according to the destination page type.
+         Add onclick with the autocomplete entry number so that we know what
+         to do when the link is clicked. */
+      fit_info.html = '<a class="enclosed ' + c + '" href="' + url + '" onclick="return fn_ac_click();">' + text + '</a>';
+    }
   }
 
   /* Highlight the first entry in bold.  This entry is selected if the

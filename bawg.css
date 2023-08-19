@@ -475,6 +475,9 @@ span.match {
     top: 0px;
     left: 0px;
 }
+span.autocomplete-entry {
+    cursor: pointer;
+}
 button.term {
     display: block;
     margin-top: 8px;

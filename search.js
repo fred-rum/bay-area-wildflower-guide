@@ -131,12 +131,6 @@ function get_class(page_info) {
     return 'unobs';
   }
 }
-function get_link(fit_info, i) {
-  const page_info = fit_info.page_info;
-  const c = get_class(page_info);
-  var url = get_url(page_info, fit_info.anchor);
-  return '<a class="enclosed ' + c + '" href="' + url + '" onclick="return fn_ac_click(' + i + ');">';
-}
 function generate_ac_html() {
   if (ac_list.length) {
     var html = '';
@@ -468,9 +462,15 @@ function fn_search(default_ac_selected) {
     } else {
       var sci_highlight = null;
     }
-    var link = get_link(fit_info, i);
-    var full = compose_full_name(com_highlight, sci_highlight)
-    fit_info.html = link + '<p class="nogap">' + full + '</p></a>';
+    const c = get_class(page_info);
+    const full = compose_full_name(com_highlight, sci_highlight)
+    const text = '<p class="nogap">' + full + '</p>'
+    if (adv_search) {
+      fit_info.html = '<span class="autocomplete-entry" class="' + c + '" onclick="return fn_ac_click(' + i + ');">' + text + '</span>';
+    } else {
+      const url = get_url(page_info, fit_info.anchor);
+      fit_info.html = '<a class="enclosed ' + c + '" href="' + url + '" onclick="return fn_ac_click();">' + text + '</a>';
+    }
   }
   if (default_ac_selected < ac_list.length) {
     ac_selected = default_ac_selected;

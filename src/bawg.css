@@ -1066,6 +1066,13 @@ span.match {
     left: 0px;
 }
 
+/* For advanced search, entries in the autocomplete box are not links,
+   but spans.  These have 'onclick' behavior, so we want an appropriate
+   mouse pointer. */
+span.autocomplete-entry {
+    cursor: pointer;
+}
+
 /* Confirmed search terms are represented as buttons so that they follow
    the normal accessibility rules, including for keyboard access.  Each
    button is styled take the same amount of space as the search bar so
