@@ -39,8 +39,7 @@ function main() {
         } else {
           base_name = photo_name.substring(0, comma_pos);
         }
-        photo_name = 'photos/' + photo_name;
-        photo_name =  photo_name + '.jpg';
+        photo_name = 'photos/' + photo_name + '.jpg';
       }
       photo_urls.push(photo_name);
       var photo_name = munge_photo_for_url(photo_name);

@@ -221,7 +221,7 @@ function get_url(page_info, anchor) {
   if (page_info.x == 'j') {
     var url = 'https://ucjeps.berkeley.edu/eflora/glossary.html';
   } else {
-    var url = path + page_info.page + '.html';
+    var url = path + page_info.p + '.html';
     url = url.replace(/ /g, '-')
   }
 
@@ -605,14 +605,14 @@ function page_search(search_str, page_info) {
     return;
   }
 
-  if ('com' in page_info) {
-    var com_match_info = check_list(search_str, page_info.com, page_info);
+  if ('c' in page_info) {
+    var com_match_info = check_list(search_str, page_info.c, page_info);
   } else {
     var com_match_info = null;
   }
 
-  if ('sci' in page_info) {
-    var sci_match_info = check_list(search_str, page_info.sci, page_info);
+  if ('s' in page_info) {
+    var sci_match_info = check_list(search_str, page_info.s, page_info);
   } else {
     var sci_match_info = null;
   }
@@ -647,9 +647,9 @@ function page_search(search_str, page_info) {
       var glossary = page_info.glossary[j];
 
       /* Find the best match associated with glossary.anchor. */
-      if ('com' in page_info) {
+      if ('c' in page_info) {
         var match_info = glossary_check_list(search_str, glossary,
-                                             page_info.com, page_info);
+                                             page_info.c, page_info);
       } else {
         var match_info = null;
       }
@@ -694,14 +694,14 @@ function compose_full_name(com, sci, lines=1) {
 }
 
 function compose_page_name(page_info, lines=1) {
-  if ('com' in page_info) {
-    var com = page_info['com'][0];
+  if ('c' in page_info) {
+    var com = page_info.c[0];
   } else {
     var com = null;
   }
 
-  if ('sci' in page_info) {
-    var sci = highlight_match(null, page_info['sci'][0], true);
+  if ('s' in page_info) {
+    var sci = highlight_match(null, page_info.s[0], true);
   } else {
     var sci = null;
   }
@@ -736,14 +736,14 @@ function fn_search(default_ac_selected) {
     var fit_info = ac_list[i];
     var page_info = fit_info.page_info;
 
-    if ('com' in page_info) {
+    if ('c' in page_info) {
       /* If there is a match in a common name, highlight it.
          If there is no match, use the default common name without highlighting.
          If there are alternative common names but no default common name,
          then com_highlight could end up as an empty string.  Conveniently,
          this gets treated the same as com_highlight == null when deciding
          whether to combine it with the scientific name. */
-      const com = page_info['com'][0];
+      const com = page_info.c[0];
       var com_highlight = highlight_match(fit_info.com_match_info,
                                           com, false);
 
@@ -764,8 +764,8 @@ function fn_search(default_ac_selected) {
       var com_highlight = null;
     }
 
-    if ('sci' in page_info) {
-      const sci = page_info['sci'][0];
+    if ('s' in page_info) {
+      const sci = page_info.s[0];
       var sci_highlight = highlight_match(fit_info.sci_match_info,
                                           sci, true);
       if (fit_info.sci_match_info &&
@@ -1085,11 +1085,27 @@ function gen_adv_search_results() {
   var list = [];
   for (var i = 0; i < term_list.length; i++) {
     const page_info = term_list[i].page_info;
+    const c = get_class(page_info);
+    const url = get_url(page_info, null);
 
     list.push('<div class="list-box">');
 
-    const c = get_class(page_info);
-    var url = get_url(page_info, null);
+    if ('j' in page_info) {
+      var jpg = String(page_info.j);
+      const comma_pos = jpg.search(',');
+      if (comma_pos == -1) {
+        /* Append the suffix the suffix to the page name. */
+        jpg = page_info.p + ',' + jpg;
+      }
+      const jpg_url = 'thumbs/' + jpg + '.jpg';
+
+      list.push('<a href="' + url + '">');
+      list.push('<div class="list-thumb">');
+      list.push('<img class="boxed" src="' + jpg_url + '" alt="photo">');
+      list.push('</div>');
+      list.push('</a>');
+    }
+
     list.push('<a class="' + c + '" href="' + url + '">');
     list.push(compose_page_name(page_info, 2));
     list.push('</a>');
@@ -1143,15 +1159,15 @@ function main() {
   /* normalize the data in the pages array. */
   for (var i = 0; i < pages.length; i++) {
     var page_info = pages[i];
-    if (('page' in page_info) &&
-        !('com' in page_info) &&
-        (!hasUpper(page_info.page) || (page_info.x == 'j'))) {
-      page_info.com = [page_info.page];
+    if (('p' in page_info) &&
+        !('c' in page_info) &&
+        (!hasUpper(page_info.p) || (page_info.x == 'j'))) {
+      page_info.c = [page_info.p];
     }
-    if (('page' in page_info) &&
-        !('sci' in page_info) &&
-        hasUpper(page_info.page) && (page_info.x != 'j')) {
-      page_info.sci = [page_info.page];
+    if (('p' in page_info) &&
+        !('s' in page_info) &&
+        hasUpper(page_info.p) && (page_info.x != 'j')) {
+      page_info.s = [page_info.p];
     }
   }
 

@@ -126,8 +126,7 @@ function main() {
           /* The photo name is complete and includes a new base name. */
           base_name = photo_name.substring(0, comma_pos);
         }
-        photo_name = 'photos/' + photo_name;
-        photo_name =  photo_name + '.jpg';
+        photo_name = 'photos/' + photo_name + '.jpg';
       }
 
       photo_urls.push(photo_name);

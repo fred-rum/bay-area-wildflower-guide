@@ -376,9 +376,12 @@ div.indent {
 }
 div#search-container {
     position: fixed;
-    top: 8px;
-    left: 50px;
-    right: 8px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    padding-top: 8px;
+    padding-left: 50px;
+    padding-right: 8px;
     background: white;
     box-shadow: 0px 0px 3px 3px white;
     z-index: 10;
@@ -403,8 +406,8 @@ input.search:focus {
 }
 input:disabled {
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 8px;
+    left: 50px;
     border: 1px solid #DDDDDD;
     background-color: #eeeeee;
     color: #cccccc;
@@ -462,13 +465,15 @@ span.match {
 }
 .adv-search div#search-container {
     position: relative;
-    top: 0px;
-    left: 0px;
-    right: 0px;
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 .adv-search input:disabled {
     background-color: #f8e2e2;
     color: #444444;
+    top: 0px;
+    left: 0px;
 }
 button.term {
     display: block;

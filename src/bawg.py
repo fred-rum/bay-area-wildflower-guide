@@ -186,7 +186,7 @@ def write_pages_js(w):
     # Sort in reverse order of observation count (most observations first).
     for page in sort_pages(page_array, with_depth=True):
         name = filename(page.name)
-        w.write(f'{{page:"{name}"')
+        w.write(f'{{p:"{name}"')
 
         # List all common names that should find this page when searching.
         coms = []
@@ -217,7 +217,7 @@ def write_pages_js(w):
         if (len(coms) > 1 or
             (page.com and (page.com != page.name or not page.com.islower()))):
             coms_str = unidecode('","'.join(coms))
-            w.write(f',com:["{coms_str}"]')
+            w.write(f',c:["{coms_str}"]')
 
         # List all scientific names that should find this page when searching.
         elabs = []
@@ -243,7 +243,7 @@ def write_pages_js(w):
         # Similarly, don't list anything if there are no scientific names.
         if elabs and not (len(elabs) == 1 and page.name == elabs[0]):
             elabs_str = unidecode('","'.join(elabs))
-            w.write(f',sci:["{elabs_str}"]')
+            w.write(f',s:["{elabs_str}"]')
 
         if page.child:
             if page.has_child_key:
@@ -255,6 +255,19 @@ def write_pages_js(w):
                 w.write(',x:"o"')
             else:
                 w.write(',x:"u"')
+
+        jpg = page.get_jpg(None);
+        if jpg:
+            base,suffix = separate_name_and_suffix(jpg)
+            if base == name:
+                suffix = suffix[1:]
+                if re.match(r'0|[1-9][0-9]*$', suffix):
+                    w.write(f',j:{suffix}')
+                else:
+                    w.write(f',j:"{suffix}"')
+            else:
+                w.write(f',j:"{jpg}"')
+
         w.write('},\n')
 
     write_glossary_search_terms(w)

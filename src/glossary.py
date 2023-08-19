@@ -607,7 +607,7 @@ class Glossary:
     # Write search terms for my glossaries to pages.js
     def write_search_terms(self, w):
         if not self.invisible:
-            w.write(f'{{page:"{self.name}",com:["{self.name}","{self.title}"],x:"g",glossary:[\n')
+            w.write(f'{{p:"{self.name}",c:["{self.name}","{self.title}"],x:"g",glossary:[\n')
             for term in self.search_terms:
                 terms_str = '","'.join(term)
                 w.write(f'{{terms:["{terms_str}"]}},\n')
@@ -627,7 +627,7 @@ class Glossary:
 
     # Write search terms for Jepson's glossary to pages.js
     def write_jepson_search_terms(self, w):
-        w.write('{page:"Jepson eFlora",com:["Jepson eFlora"],x:"j",glossary:[\n')
+        w.write('{p:"Jepson eFlora",c:["Jepson eFlora"],x:"j",glossary:[\n')
         for term in self.search_terms:
             terms_str = '","'.join(term)
             anchor = self.term_anchor[term[0]]
