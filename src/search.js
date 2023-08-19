@@ -64,7 +64,6 @@ function gallery_main() {
     if (href.startsWith(prefix + 'photos/') ||
         href.startsWith(prefix + 'figures/')) {
       var suffix = decodeURI(href.substr(prefix.length));
-      console.log('annotating link to', suffix);
 
       /* Simplify the URL in case the user looks at it. */
       suffix = munge_photo_for_url(suffix);
@@ -75,8 +74,6 @@ function gallery_main() {
 
       /* Replace the href to point to the gallery. */
       e_link_list[i].href = prefix + 'gallery.html?' + suffix;
-    } else {
-      console.log('not annotating link to', href);
     }
   }
 }
@@ -119,15 +116,22 @@ gallery_main();
 
 
 /*****************************************************************************/
-/* code related to the search bar */
+/* Code related to the search bar and autocompletion.
+
+   This includes code shared between regular and advanced search,
+   but not functions used only for advanced search.  Any functions
+   exclusive to regular search are here as well. */
 
 var ac_is_hidden = true;
+
+/* Show the autocomplete box. */
 function expose_ac() {
   e_autocomplete_box.style.display = 'block';
   ac_is_hidden = false;
   e_home_icon.className = 'with-autocomplete';
 }
 
+/* Hide the autocomplete box. */
 function hide_ac() {
   if (!ac_is_hidden) {
     e_autocomplete_box.style.display = 'none';
@@ -136,17 +140,21 @@ function hide_ac() {
   }
 }
 
+/* React to focus entering the search bar. */
 function fn_focusin() {
   if (ac_is_hidden) {
     /* e_search_input.select(); */ // Not as smooth on Android as desired.
-    fn_search();
+    fn_search(ac_selected);
   }
 }
 
+/* React to the user returning to the page via the browser's history
+   (e.g. the back button). */
 function fn_pageshow() {
   hide_ac();
 }
 
+/* hide the autocomplete box if the user clicks somewhere else on the page. */
 function fn_doc_click(event) {
   var search_element = event.target.closest('#search-container');
   if (!search_element) {
@@ -156,8 +164,9 @@ function fn_doc_click(event) {
 
 /* Global variable so that it can be used by independent events. */
 var ac_list;
-var ac_selected;
+var ac_selected = 0;
 
+/* Clear the search bar. */
 function clear_search() {
   e_search_input.value = '';
   ac_list = [];
@@ -208,9 +217,7 @@ function hasUpper(name) {
 }
 
 /* Get the relative path to a page. */
-function fn_url(fit_info) {
-  var page_info = fit_info.page_info;
-
+function get_url(page_info, anchor) {
   if (page_info.x == 'j') {
     var url = 'https://ucjeps.berkeley.edu/eflora/glossary.html';
   } else {
@@ -218,43 +225,51 @@ function fn_url(fit_info) {
     url = url.replace(/ /g, '-')
   }
 
-  if ('anchor' in fit_info) {
-    url += '#' + fit_info.anchor;
+  if (anchor) {
+    url += '#' + anchor;
   }
 
   return encodeURI(url);
 }
 
-/* Construct all the contents of a link to a page. */
-function fn_link(fit_info) {
-  var page_info = fit_info.page_info;
-
+function get_class(page_info) {
   if (page_info.x == 'f') {
-    var c = 'family';
+    return 'family';
   } else if (page_info.x == 'k') {
-    var c = 'parent';
+    return 'parent';
   } else if (page_info.x == 'o') {
-    var c = 'leaf';
+    return 'leaf';
   } else if (page_info.x == 'g') {
-    var c = 'glossary';
+    return 'glossary';
   } else if (page_info.x == 'j') {
-    var c = 'jepson';
+    return 'jepson';
   } else {
-    var c = 'unobs';
+    return 'unobs';
   }
+}
 
-  var target = '';
-  var url = fn_url(fit_info);
+/* Construct all the contents of a link to a page. */
+function get_link(fit_info, i) {
+  const page_info = fit_info.page_info;
+  const c = get_class(page_info);
+
+  var url = get_url(page_info, fit_info.anchor);
 
   /* I tried this and didn't like it.  If I ever choose to use it, I also
-     have to change the behavior of the return key (where fn_url is used). */
+     have to change the behavior of the return key (where get_url is used). */
   /*if (page_info.x == 'j') {
     target = ' target="_blank" rel="noopener noreferrer"';
   }*/
 
-  return 'class="enclosed ' + c + '"' + target + ' href="' + url + '" onclick="return fn_click();"';
+  /* Add class 'enclosed' to avoid extra link decoration.
+     Add class c to style the link according to the destination page type.
+     Add onclick with the autocomplete entry number so that we know what
+     to do when the link is clicked. */
+  return '<a class="enclosed ' + c + '" href="' + url + '" onclick="return fn_ac_click(' + i + ');">';
 }
 
+/* Construct the contents of the autocomplete box,
+   i.e. the list of autocomplete results. */
 function generate_ac_html() {
   if (ac_list.length) {
     var html = '';
@@ -585,6 +600,11 @@ function insert_match(fit_info) {
    - in its scientific name
    - in its glossary terms */
 function page_search(search_str, page_info) {
+  /* The advanced search never matches glossary terms. */
+  if (adv_search && ((page_info.x == 'g') || (page_info.x == 'j'))) {
+    return;
+  }
+
   if ('com' in page_info) {
     var com_match_info = check_list(search_str, page_info.com, page_info);
   } else {
@@ -655,9 +675,43 @@ function page_search(search_str, page_info) {
   }
 }
 
+function compose_full_name(com, sci, lines=1) {
+  if (com && sci) {
+    if (lines == 2) {
+      var full = com + '<br>(' + sci + ')';
+    } else {
+      var full = com + ' (' + sci + ')';
+    }
+  } else if (sci) {
+    var full = sci;
+  } else {
+    var full = com;
+  }
+
+  full = full.replace(/\'/g, '&rsquo;');
+
+  return full;
+}
+
+function compose_page_name(page_info, lines=1) {
+  if ('com' in page_info) {
+    var com = page_info['com'][0];
+  } else {
+    var com = null;
+  }
+
+  if ('sci' in page_info) {
+    var sci = highlight_match(null, page_info['sci'][0], true);
+  } else {
+    var sci = null;
+  }
+
+  return compose_full_name(com, sci, lines);
+}
+
 /* Search all pages for a fuzzy match with the value in the search field, and
    create an autocomplete list from the matches. */
-function fn_search() {
+function fn_search(default_ac_selected) {
   /* We compare uppercase to uppercase to avoid having to deal with case
      differences anywhere else in the code.  Note that this could fail for
      funky unicode such as the German Eszett, which converts to uppercase 'SS'.
@@ -727,27 +781,22 @@ function fn_search() {
       var sci_highlight = null;
     }
 
-    var link = fn_link(fit_info);
+    var link = get_link(fit_info, i);
 
-    if (com_highlight && sci_highlight) {
-      var full = com_highlight + ' (' + sci_highlight + ')';
-    } else if (sci_highlight) {
-      var full = sci_highlight;
-    } else {
-      var full = com_highlight;
-    }
-    /* escape the quote mark in the regex to avoid confusing strip.py */
-    full = full.replace(/\'/g, '&rsquo;');
+    var full = compose_full_name(com_highlight, sci_highlight)
 
     /* The link is applied to the entire paragraph so that padding above
        and below and the white space to the right are also clickable. */
-    fit_info.html = ('<a ' + link + '><p class="nogap">' +
-                     full + '</p></a>');
+    fit_info.html = link + '<p class="nogap">' + full + '</p></a>';
   }
 
   /* Highlight the first entry in bold.  This entry is selected if the
      user presses 'enter'. */
-  ac_selected = 0;
+  if (default_ac_selected < ac_list.length) {
+    ac_selected = default_ac_selected;
+  } else {
+    ac_selected = 0;
+  }
   generate_ac_html();
   expose_ac();
 }
@@ -759,15 +808,43 @@ function fn_search() {
    is already known to be interacting with the link, so removing the
    autocomplete box with the link in it will still allow the click to
    activate the link as desired. */
-function fn_click() {
-  clear_search();
-  return true; // continue normal handling of the clicked link
+function fn_ac_click(i) {
+  if (adv_search) {
+    confirm_adv_search(i);
+    return false; // Don't continue normal handling of the clicked link.
+  } else {
+    clear_search();
+    return true; // Continue normal handling of the clicked link.
+  }
 }
 
 /* Handle all changes to the search value.  This includes changes that are
    not accompanied by a keyboard event, such as a mouse-based paste event. */
 function fn_change() {
-  fn_search();
+  fn_search(0);
+}
+
+function confirm_reg_search(event) {
+  var fit_info = ac_list[ac_selected];
+  var url = get_url(fit_info.page_info, fit_info.anchor);
+  if (event.shiftKey || event.ctrlKey) {
+    /* Shift or control was held along with the enter key.  We'd like to
+       open a new window or new tab, respectively, but JavaScript doesn't
+       really give that option.  So we just call window.open() and let the
+       browser make the choise.  E.g. Firefox will only open a new tab
+       (after first requiring the user to allow pop-ups), while Chrome will
+       open a new tab if ctrl is held or a new window otherwise.  Nice! */
+    window.open(url);
+  } else {
+    /* The enter key was pressed *without* the shift or control key held.
+       Navigate to the new URL within the existing page. */
+    window.location.href = url;
+  }
+  /* Opening a new window doesn't affect the current page.  Also, a
+     search of the glossary from a glossary page might result in no
+     page change.  In either case, the search will remain active,
+     which is not what we want.  In either case, clear the search. */
+  clear_search();
 }
 
 /* Handle when the user presses various special keys in the search box.
@@ -777,29 +854,19 @@ function fn_change() {
    So it makes sense to also have my behavior trigger on keydown for
    consistency. */
 function fn_keydown() {
-  if ((event.key == 'Enter') && !ac_is_hidden && ac_list.length) {
-    var fit_info = ac_list[ac_selected];
-    var url = fn_url(fit_info);
-    if (event.shiftKey || event.ctrlKey) {
-      /* Shift or control was held along with the enter key.  We'd like to
-         open a new window or new tab, respectively, but JavaScript doesn't
-         really give that option.  So we just call window.open() and let the
-         browser make the choise.  E.g. Firefox will only open a new tab
-         (after first requiring the user to allow pop-ups), while Chrome will
-         open a new tab if ctrl is held or a new window otherwise.  Nice! */
-      window.open(url);
-    } else {
-      /* The enter key was pressed *without* the shift or control key held.
-         Navigate to the new URL within the existing page. */
-      window.location.href = url;
+  if ((event.key == 'Enter')) {
+    if (adv_search) {
+      confirm_adv_search(ac_selected);
+    } else if (!adv_search && !ac_is_hidden && ac_list.length) {
+      confirm_reg_search(event);
     }
-    /* Opening a new window doesn't affect the current page.  Also, a
-       search of the glossary from a glossary page might result in no
-       page change.  In either case, the search will remain active,
-       which is not what we want.  In either case, clear the search. */
-    clear_search();
   } else if (event.key == 'Escape') {
-    clear_search();
+    if (adv_search && (term_id < term_list.length)){
+      restore_term();
+      confirm_adv_search(ac_selected);
+    } else {
+      clear_search();
+    }
     event.preventDefault();
   } else if (!ac_is_hidden &&
              ((event.key == 'Down') || (event.key == 'ArrowDown') ||
@@ -822,9 +889,13 @@ function fn_keydown() {
   }
 }
 
+var e_home_icon;
+var e_search_container;
 var e_search_input;
 var e_autocomplete_box;
-var e_home_icon;
+var e_terms;
+var e_results;
+var adv_search;
 
 /* We want hide the autocomplete box whenever the user clicks somewhere that
    **isn't** the search field or autocomplete box.  I could potentially add an
@@ -835,7 +906,7 @@ var e_home_icon;
    We add an event listener for a 'click' anywhere in the window.  The event
    handler explicitly ignores a click event if the target is the search field
    or autocomplete box.  If it's outside those elements, the event handler
-   close the autocomplete box.
+   closes the autocomplete box.
 
    Special cases:
 
@@ -855,7 +926,7 @@ var e_home_icon;
       An event handler on 'pointerdown' has better timing, but I find that it
       also triggers on the scroll bar, which would be bad as mentioned above.
 
-      An 'pointerdown' event handler on document.body ignores the scroll bar
+      A 'pointerdown' event handler on document.body ignores the scroll bar
       as desired, but it also ignores clicks below the last HTML element.
 */
 window.addEventListener('click', fn_doc_click);
@@ -885,6 +956,158 @@ function fn_hashchange(event) {
   }
 }
 
+
+/*****************************************************************************/
+/* Code used exclusively for advanced search. */
+
+/* Keep track of confirmed search terms. */
+var term_list = [];
+
+/* The ID of the search term currently being edited.  This equals the
+   term_list length when the user is adding a new search term.  It is
+   a smaller value when one of the existing terms is being edited. */
+var term_id = 0;
+
+/* When the user clicks (or presses enter on) an existing search term, we
+   re-open it for editing.  Note that the existing info about the search term
+   isn't discarded yet, since the user can abandon her edits (e.g. by
+   pressing the Escape key). */
+function fn_term_click(event, i) {
+  /* Before moving the search bar, restore any term that was in the process
+     of being replaced. */
+  apply_term();
+
+  /* Remove the HTML for the term being edited,
+     and replace it with the search bar. */
+  term_id = i;
+  const term_info = term_list[term_id];
+  term_info.e_term.replaceWith(e_search_container);
+
+  /* Restore the search bar and autocomplete list to a state where the
+     existing term can be re-confirmed by simply pressing the Enter key. */
+  e_search_input.focus();
+  restore_term();
+  generate_ac_html();
+
+  /* Once the click or 'Enter' keypress activates this function, it normally
+     propagates to the document level and triggers fn_doc_click(), which
+     hides the autocomplete box because the click is (was) outside the 
+     search container.  We want to keep the autocomplete box, so we prevent
+     the event from propagating further. */
+  event.stopPropagation();
+}
+
+/* Restore the search bar and autocomplete list to the last confirmed state
+   for this term.  This can be done because the user is going to edit the
+   term or because we're preparing to re-confirm the prior term. */
+function restore_term() {
+  const term_info = term_list[term_id];
+
+  e_search_input.value = term_info.search_str;
+  fn_search(term_info.ac_selected);
+
+  /* Whether the autocomplete-box is regenerated is up to the caller
+     because in some cases it isn't needed. */
+}
+
+/* Handle a mouse click or Enter keypress on an autocomplete entry
+   while on the advanced search page. */
+function confirm_adv_search(i) {
+  if (ac_is_hidden || (ac_list.length == 0)) {
+    /* Delete the existing term_info from term_list.
+       If term_id == term_list.length (meaning that a new term was being
+       entered), nothing happens here. */
+    term_list.splice(term_id, 1);
+  } else {
+    /* Confirm the search term and replace the one being edited or append
+       a new one to the end of the list. */
+    var fit_info = ac_list[i];
+    var page_info = fit_info.page_info;
+    var term_info = {
+      search_str: e_search_input.value,
+      ac_selected: i,
+      page_info: page_info
+    };
+    term_list.splice(term_id, 1, term_info);
+
+    apply_term();
+  }
+
+  clear_search();
+
+  term_id = term_list.length;
+
+  if (term_id == 0) {
+    e_terms.insertAdjacentElement('afterbegin', e_search_container);
+  } else {
+    const prev_e_term = term_list[term_id-1].e_term;
+    prev_e_term.insertAdjacentElement('afterend', e_search_container);
+  }
+
+  e_search_input.focus();
+
+  gen_adv_search_results();
+}
+
+/* Replace the search container with the HTML for the confirmed search term.
+   The caller is expected to then restore the search container to the
+   appropriate position. */
+function apply_term() {
+  if (term_id == term_list.length) {
+    /* There is no existing term to apply. */
+    return;
+  }
+
+  const term_info = term_list[term_id];
+
+  const e_term = document.createElement('button');
+  e_term.className = 'term';
+
+  /* The arrow function doesn't work property if it directly references
+     the global term_id.  Instead it needs to reference a local variable
+     so that the context now determines the behavior later. */
+  var local_id = term_id;
+  e_term.addEventListener('click', (event) => fn_term_click(event, local_id));
+
+  const page_info = term_info.page_info;
+  const full_name = compose_page_name(page_info, 1);
+  const c = get_class(page_info);
+  const span = '<span class="' + c + '">' + full_name + '</span>';
+  e_term.innerHTML = '<p>within <b>' + span + '</b></p>';
+
+  term_info.e_term = e_term;
+
+  e_search_container.replaceWith(e_term);
+}
+
+/* Perform the advanced search and generate the HTML for the results. */
+function gen_adv_search_results() {
+  var list = [];
+  for (var i = 0; i < term_list.length; i++) {
+    const page_info = term_list[i].page_info;
+
+    list.push('<div class="list-box">');
+
+    const c = get_class(page_info);
+    var url = get_url(page_info, null);
+    list.push('<a class="' + c + '" href="' + url + '">');
+    list.push(compose_page_name(page_info, 2));
+    list.push('</a>');
+
+    list.push('</div>');
+  }
+
+  if (list.length) {
+    e_results.innerHTML = list.join('');
+  } else {
+    e_results.innerHTML = '...';
+  }
+}
+
+
+/*****************************************************************************/
+/* main() */
+
 /* Determine whether to add 'html/' to the URL when navigating to a page. */
 if (/\/html\/[^\/]*$/.test(window.location.pathname)) {
   var path = '';
@@ -904,9 +1127,14 @@ function main() {
     return
   }
 
+  e_home_icon = document.getElementById('home-icon');
+  e_terms = document.getElementById('terms');
+  e_search_container = document.getElementById('search-container');
   e_search_input = document.getElementById('search');
   e_autocomplete_box = document.getElementById('autocomplete-box');
-  e_home_icon = document.getElementById('home-icon');
+  e_results = document.getElementById('results');
+
+  adv_search = Boolean(e_results) /* only the adv. search page has e_results */
 
   /* Add the search class to the search box in order to enable styling
      that should only be applied when JavaScript is enabled. */
@@ -943,7 +1171,7 @@ function main() {
 
      If the search field is (still) empty, fn_search() does nothing. */
   if (Document.activeElement == e_search_input) {
-    fn_search();
+    fn_search(0);
   }
 
   /* Also initialize the photo gallery. */
@@ -956,33 +1184,4 @@ function main() {
 */
 if (typeof pages !== 'undefined') {
   main();
-}
-
-
-/*****************************************************************************/
-/* Show/hide observation details. */
-
-function fn_details(event) {
-  console.log(event);
-  if (event.target.textContent == '[show details]') {
-    event.target.textContent = '[hide details]';
-    document.getElementById('details').style.display = 'block';
-    event.target.setAttribute('aria-expanded', 'true');
-  } else {
-    event.target.textContent = '[show details]';
-    document.getElementById('details').style.display = 'none';
-    event.target.setAttribute('aria-expanded', 'false');
-  }
-}
-
-/* Pressing 'enter' when the toggle is focused does the same as a mouse click
-   in order to support accessibility requirements. */
-function fn_details_keydown(event) {
-  console.log(event);
-  if ((event.key == 'Enter') ||
-      (event.key == ' ') ||
-      (event.key == 'Spacebar')) {
-    fn_details(event);
-    event.preventDefault();
-  }
 }

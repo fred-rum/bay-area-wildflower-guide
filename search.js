@@ -21,7 +21,6 @@ function gallery_main() {
       suffix = munge_photo_for_url(suffix);
       const suffix_query = encodeURIComponent(suffix);
       e_link_list[i].href = prefix + 'gallery.html?' + suffix;
-    } else {
     }
   }
 }
@@ -60,7 +59,7 @@ function hide_ac() {
 }
 function fn_focusin() {
   if (ac_is_hidden) {
-    fn_search();
+    fn_search(ac_selected);
   }
 }
 function fn_pageshow() {
@@ -73,7 +72,7 @@ function fn_doc_click(event) {
   }
 }
 var ac_list;
-var ac_selected;
+var ac_selected = 0;
 function clear_search() {
   e_search_input.value = '';
   ac_list = [];
@@ -105,37 +104,38 @@ function startsUpper(name) {
 function hasUpper(name) {
   return (name.search(/[A-Z]/) >= 0);
 }
-function fn_url(fit_info) {
-  var page_info = fit_info.page_info;
+function get_url(page_info, anchor) {
   if (page_info.x == 'j') {
     var url = 'https://ucjeps.berkeley.edu/eflora/glossary.html';
   } else {
     var url = path + page_info.page + '.html';
     url = url.replace(/ /g, '-')
   }
-  if ('anchor' in fit_info) {
-    url += '#' + fit_info.anchor;
+  if (anchor) {
+    url += '#' + anchor;
   }
   return encodeURI(url);
 }
-function fn_link(fit_info) {
-  var page_info = fit_info.page_info;
+function get_class(page_info) {
   if (page_info.x == 'f') {
-    var c = 'family';
+    return 'family';
   } else if (page_info.x == 'k') {
-    var c = 'parent';
+    return 'parent';
   } else if (page_info.x == 'o') {
-    var c = 'leaf';
+    return 'leaf';
   } else if (page_info.x == 'g') {
-    var c = 'glossary';
+    return 'glossary';
   } else if (page_info.x == 'j') {
-    var c = 'jepson';
+    return 'jepson';
   } else {
-    var c = 'unobs';
+    return 'unobs';
   }
-  var target = '';
-  var url = fn_url(fit_info);
-  return 'class="enclosed ' + c + '"' + target + ' href="' + url + '" onclick="return fn_click();"';
+}
+function get_link(fit_info, i) {
+  const page_info = fit_info.page_info;
+  const c = get_class(page_info);
+  var url = get_url(page_info, fit_info.anchor);
+  return '<a class="enclosed ' + c + '" href="' + url + '" onclick="return fn_ac_click(' + i + ');">';
 }
 function generate_ac_html() {
   if (ac_list.length) {
@@ -339,6 +339,9 @@ function insert_match(fit_info) {
   }
 }
 function page_search(search_str, page_info) {
+  if (adv_search && ((page_info.x == 'g') || (page_info.x == 'j'))) {
+    return;
+  }
   if ('com' in page_info) {
     var com_match_info = check_list(search_str, page_info.com, page_info);
   } else {
@@ -392,7 +395,35 @@ function page_search(search_str, page_info) {
     }
   }
 }
-function fn_search() {
+function compose_full_name(com, sci, lines=1) {
+  if (com && sci) {
+    if (lines == 2) {
+      var full = com + '<br>(' + sci + ')';
+    } else {
+      var full = com + ' (' + sci + ')';
+    }
+  } else if (sci) {
+    var full = sci;
+  } else {
+    var full = com;
+  }
+  full = full.replace(/\'/g, '&rsquo;');
+  return full;
+}
+function compose_page_name(page_info, lines=1) {
+  if ('com' in page_info) {
+    var com = page_info['com'][0];
+  } else {
+    var com = null;
+  }
+  if ('sci' in page_info) {
+    var sci = highlight_match(null, page_info['sci'][0], true);
+  } else {
+    var sci = null;
+  }
+  return compose_full_name(com, sci, lines);
+}
+function fn_search(default_ac_selected) {
   var search_str = e_search_input.value.toUpperCase();
   if (!/\w/.test(search_str)) {
     hide_ac();
@@ -437,41 +468,54 @@ function fn_search() {
     } else {
       var sci_highlight = null;
     }
-    var link = fn_link(fit_info);
-    if (com_highlight && sci_highlight) {
-      var full = com_highlight + ' (' + sci_highlight + ')';
-    } else if (sci_highlight) {
-      var full = sci_highlight;
-    } else {
-      var full = com_highlight;
-    }
-    full = full.replace(/\'/g, '&rsquo;');
-    fit_info.html = ('<a ' + link + '><p class="nogap">' +
-                     full + '</p></a>');
+    var link = get_link(fit_info, i);
+    var full = compose_full_name(com_highlight, sci_highlight)
+    fit_info.html = link + '<p class="nogap">' + full + '</p></a>';
   }
-  ac_selected = 0;
+  if (default_ac_selected < ac_list.length) {
+    ac_selected = default_ac_selected;
+  } else {
+    ac_selected = 0;
+  }
   generate_ac_html();
   expose_ac();
 }
-function fn_click() {
-  clear_search();
-  return true;
+function fn_ac_click(i) {
+  if (adv_search) {
+    confirm_adv_search(i);
+    return false;
+  } else {
+    clear_search();
+    return true;
+  }
 }
 function fn_change() {
-  fn_search();
+  fn_search(0);
+}
+function confirm_reg_search(event) {
+  var fit_info = ac_list[ac_selected];
+  var url = get_url(fit_info.page_info, fit_info.anchor);
+  if (event.shiftKey || event.ctrlKey) {
+    window.open(url);
+  } else {
+    window.location.href = url;
+  }
+  clear_search();
 }
 function fn_keydown() {
-  if ((event.key == 'Enter') && !ac_is_hidden && ac_list.length) {
-    var fit_info = ac_list[ac_selected];
-    var url = fn_url(fit_info);
-    if (event.shiftKey || event.ctrlKey) {
-      window.open(url);
-    } else {
-      window.location.href = url;
+  if ((event.key == 'Enter')) {
+    if (adv_search) {
+      confirm_adv_search(ac_selected);
+    } else if (!adv_search && !ac_is_hidden && ac_list.length) {
+      confirm_reg_search(event);
     }
-    clear_search();
   } else if (event.key == 'Escape') {
-    clear_search();
+    if (adv_search && (term_id < term_list.length)){
+      restore_term();
+      confirm_adv_search(ac_selected);
+    } else {
+      clear_search();
+    }
     event.preventDefault();
   } else if (!ac_is_hidden &&
              ((event.key == 'Down') || (event.key == 'ArrowDown') ||
@@ -493,9 +537,13 @@ function fn_keydown() {
     event.preventDefault();
   }
 }
+var e_home_icon;
+var e_search_container;
 var e_search_input;
 var e_autocomplete_box;
-var e_home_icon;
+var e_terms;
+var e_results;
+var adv_search;
 window.addEventListener('click', fn_doc_click);
 window.addEventListener('pageshow', fn_pageshow);
 function fn_hashchange(event) {
@@ -505,6 +553,83 @@ function fn_hashchange(event) {
   var hash = location.hash;
   if (hash && (hash != '#offline')) {
     document.title = decodeURIComponent(hash).substring(1) + ' - ' + title;
+  }
+}
+var term_list = [];
+var term_id = 0;
+function fn_term_click(event, i) {
+  apply_term();
+  term_id = i;
+  const term_info = term_list[term_id];
+  term_info.e_term.replaceWith(e_search_container);
+  e_search_input.focus();
+  restore_term();
+  generate_ac_html();
+  event.stopPropagation();
+}
+function restore_term() {
+  const term_info = term_list[term_id];
+  e_search_input.value = term_info.search_str;
+  fn_search(term_info.ac_selected);
+}
+function confirm_adv_search(i) {
+  if (ac_is_hidden || (ac_list.length == 0)) {
+    term_list.splice(term_id, 1);
+  } else {
+    var fit_info = ac_list[i];
+    var page_info = fit_info.page_info;
+    var term_info = {
+      search_str: e_search_input.value,
+      ac_selected: i,
+      page_info: page_info
+    };
+    term_list.splice(term_id, 1, term_info);
+    apply_term();
+  }
+  clear_search();
+  term_id = term_list.length;
+  if (term_id == 0) {
+    e_terms.insertAdjacentElement('afterbegin', e_search_container);
+  } else {
+    const prev_e_term = term_list[term_id-1].e_term;
+    prev_e_term.insertAdjacentElement('afterend', e_search_container);
+  }
+  e_search_input.focus();
+  gen_adv_search_results();
+}
+function apply_term() {
+  if (term_id == term_list.length) {
+    return;
+  }
+  const term_info = term_list[term_id];
+  const e_term = document.createElement('button');
+  e_term.className = 'term';
+  var local_id = term_id;
+  e_term.addEventListener('click', (event) => fn_term_click(event, local_id));
+  const page_info = term_info.page_info;
+  const full_name = compose_page_name(page_info, 1);
+  const c = get_class(page_info);
+  const span = '<span class="' + c + '">' + full_name + '</span>';
+  e_term.innerHTML = '<p>within <b>' + span + '</b></p>';
+  term_info.e_term = e_term;
+  e_search_container.replaceWith(e_term);
+}
+function gen_adv_search_results() {
+  var list = [];
+  for (var i = 0; i < term_list.length; i++) {
+    const page_info = term_list[i].page_info;
+    list.push('<div class="list-box">');
+    const c = get_class(page_info);
+    var url = get_url(page_info, null);
+    list.push('<a class="' + c + '" href="' + url + '">');
+    list.push(compose_page_name(page_info, 2));
+    list.push('</a>');
+    list.push('</div>');
+  }
+  if (list.length) {
+    e_results.innerHTML = list.join('');
+  } else {
+    e_results.innerHTML = '...';
   }
 }
 if (/\/html\/[^\/]*$/.test(window.location.pathname)) {
@@ -517,9 +642,13 @@ function main() {
     document.addEventListener('DOMContentLoaded', main);
     return
   }
+  e_home_icon = document.getElementById('home-icon');
+  e_terms = document.getElementById('terms');
+  e_search_container = document.getElementById('search-container');
   e_search_input = document.getElementById('search');
   e_autocomplete_box = document.getElementById('autocomplete-box');
-  e_home_icon = document.getElementById('home-icon');
+  e_results = document.getElementById('results');
+  adv_search = Boolean(e_results)
   e_search_input.className = 'search';
   for (var i = 0; i < pages.length; i++) {
     var page_info = pages[i];
@@ -540,29 +669,10 @@ function main() {
   fn_hashchange();
   window.addEventListener('hashchange', fn_hashchange);
   if (Document.activeElement == e_search_input) {
-    fn_search();
+    fn_search(0);
   }
   gallery_main();
 }
 if (typeof pages !== 'undefined') {
   main();
-}
-function fn_details(event) {
-  if (event.target.textContent == '[show details]') {
-    event.target.textContent = '[hide details]';
-    document.getElementById('details').style.display = 'block';
-    event.target.setAttribute('aria-expanded', 'true');
-  } else {
-    event.target.textContent = '[show details]';
-    document.getElementById('details').style.display = 'none';
-    event.target.setAttribute('aria-expanded', 'false');
-  }
-}
-function fn_details_keydown(event) {
-  if ((event.key == 'Enter') ||
-      (event.key == ' ') ||
-      (event.key == 'Spacebar')) {
-    fn_details(event);
-    event.preventDefault();
-  }
 }

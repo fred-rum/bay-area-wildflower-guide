@@ -1714,3 +1714,19 @@ When font size is increased (in Chrome mobile browser),
   e.g. santa clara valley dudleya
 Is this fixed now?
   should I use em measurements throughout for proper scaling with text size?
+
+Add hover highlight under the mouse to the autocomplete list
+  to help show what will be selected on a click
+  but only if the mouse is moved after typing is completed
+
+can the selected taxon in the autocomplete box remain selected
+    when more text is typed?
+  (if it remains a valid option)
+
+restore ac_selected when focus re-enters the search field
+
+photos.js doesn't need a page name, only jpg names
+
+replace spaces with hyphens in glossary anchors and their URLs
+
+make general glossary consistent: coast range or coastal range (or both)

@@ -2,9 +2,43 @@
 
 /*****************************************************************************/
 /* When editing this data/bawg.css file, you have to run the BAWG script
-   to regenerate the {root}/bawg.css used by the HTML.  The BAWG script
-   removes the comments from the CSS to save download bandwidth. */
+   to regenerate the {root}/bawg.css used by the HTML or run the BAWG script
+   with -debug_js.  The BAWG script removes the comments from the CSS to save
+   download bandwidth. */
 /*****************************************************************************/
+
+/* This is the home icon in the upper left.  Despite being included in
+   the search container, it extends slightly outside the container's
+   usual extent.  To avoid increasing the size of the container, the
+   home icon is positioned absolutely.
+
+   Instead of a box-shadow, I use a drop-shadow that conforms to the
+   circular edges of the image.  Unfortunately, the drop-shadow
+   doesn't include a spread paramater, so instead I push the blur down
+   a bit.  The drop-shadow is also much less intense (and I can't
+   double it up), so I push it down a bit more and blur it a bit
+   further to try to make it look reasonably natural together with the
+   search-container's box-shadow.
+
+   To support a circular focus ring, we set up a transparent (opacity 0)
+   border 3 pixels thick, and we add a drop-shadow to this invisible border.
+   A border with an inner diameter of 40 pixels leaves a thin gap between
+   its drop shadow and the image, which looks ugly.  So instead I make the
+   inner border diameter 38 pixels.  The image is then expanded back up to
+   40 pixels and shifted slightly to center it in the border. 
+*/
+#home-icon {
+    position: fixed;
+    box-sizing: border-box;
+    top: 2px;
+    left: 2px;
+    width: 44px;
+    height: 44px;
+    filter: drop-shadow(0px 4px 4px white);
+    z-index: 20;
+    border: 3px solid rgba(255, 255, 255, 0);
+    border-radius: 22px;
+}
 
 /* I only want to show the focus border when the user is using keyboard
    navigation.  Normally that means :focus-visible, but Firefox doesn't
@@ -41,38 +75,6 @@
     outline: none;
 }
 
-/* This is the home icon in the upper left.  Despite being included in
-   the search container, it extends slightly outside the container's
-   usual extent.  To avoid increasing the size of the container, the
-   home icon is positioned absolutely.
-
-   Instead of a box-shadow, I use a drop-shadow that conforms to the
-   circular edges of the image.  Unfortunately, the drop-shadow
-   doesn't include a spread paramater, so instead I push the blur down
-   a bit.  The drop-shadow is also much less intense (and I can't
-   double it up), so I push it down a bit more and blur it a bit
-   further to try to make it look reasonably natural together with the
-   search-container's box-shadow.
-
-   To support a circular focus ring, we set up a transparent (opacity 0)
-   border 3 pixels thick, and we add a drop-shadow to this invisible border.
-   A border with an inner diameter of 40 pixels leaves a thin gap between
-   its drop shadow and the image, which looks ugly.  So instead I make the
-   inner border diameter 38 pixels.  The image is then expanded back up to
-   40 pixels and shifted slightly to center it in the border. 
-*/
-#home-icon {
-    position: fixed;
-    box-sizing: border-box;
-    top: 2px;
-    left: 2px;
-    width: 44px;
-    height: 44px;
-    filter: drop-shadow(0px 4px 4px white);
-    z-index: 20;
-    border: 3px solid rgba(255, 255, 255, 0);
-    border-radius: 22px;
-}
 /* Make the border lightly visible when the mouse hovers over it */
 #home-icon:hover {
     border: 3px solid rgba(0, 0, 0, 0.3) !important;
@@ -132,6 +134,7 @@ html, body {
 div#body {
     padding-left: 8px;
     padding-right: 8px;
+    /*min-height: 400px;*/ /* in case the body contents are really short */
     margin-bottom: 8px; /* in case there's no footer */
 }
 
@@ -426,7 +429,7 @@ div.box :last-child {
    avoid the distraction of different colors scattered throughout the BAWG
    depending on what pages have been visited.  I leave the default colors for
    external links only. */
-a.family:link, a.family:visited {
+a.family:link, a.family:visited, span.family {
     color: black;
     text-decoration: none;
     border-bottom: 1px black dotted;
@@ -796,8 +799,13 @@ div.indent {
 /*** properties related to the search box and autocomplete box ***/
 
 /* The search container holds the search field and autocompletion box.
-   It has a fixed position in the window, so it appears on top of the
-   regular content which scrolls underneath it.
+
+   On most pages it has a fixed position in the window, so it appears on
+   top of the regular content which scrolls underneath it.  But on the
+   advanced search page, it is positioned relative to other page contents
+   and scrolls with the page as usual.  The advanced search page is
+   recobnized by the "adv-search" class on the page body, so everything
+   under it has that class as an ancestor.
 
    Margins are specified for the top, left, and right in order to attach
    the search container to those margins.  In particular, the right margin
@@ -812,12 +820,9 @@ div.indent {
    above the body. */
 div#search-container {
     position: fixed;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    padding-top: 8px;
-    padding-left: 8px;
-    padding-right: 8px;
+    top: 8px;
+    left: 50px; /* leave room for home-icon and a bit of padding */
+    right: 8px;
     background: white;
     box-shadow: 0px 0px 3px 3px white;
     z-index: 10;
@@ -831,24 +836,24 @@ div#search-container {
 */
 input {
     box-sizing: border-box;
-    margin-left: 40px; /* leave room for the icon that links to the home page */
-    width: calc(100% - 40px);
+    width: 100%;
     font-size: 1.5em;
+    border: 1px solid rgb(81, 203, 238);
     border-radius: 0.4em;
-    border: 1px solid #DDDDDD;
-    padding-left: 1.5em;
+    /* Some browsers (e.g. Chrome) add an outline by default.  Since the
+       outline is square cornered and otherwise generally clashes with our
+       border effect, we disable that default outline. */
+    outline: auto 0px;
+    padding-left: 1.5em; /* make space for the magnifying glass */
     background-position: .2em 50%;
     /* '#' must be escaped here as '%23'. */
     background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1.5em' height='1.5em' viewBox='0 0 100 100'><g stroke='%23888' stroke-width='9' stroke-linecap='round' fill='none'><circle cx='37' cy='37' r='20'/><path d='M52,52L83,83'/></g></svg>");
     background-repeat: no-repeat;
 }
 input::placeholder {
-    color: #c0c0c0;
+    color: #c0c0c0; /* color of the placeholder text */
 }
 /* When the input field has focus, the border is blue and has a glow effect.
-   Some browsers (e.g. Chrome) add an outline by default.  Since the outline
-   is square cornered and otherwise generally clashes with our border effect,
-   we disable that default outline.
 
    Note that the focus properties are on the search *class*, not the search
    *ID*.  The search field doesn't start with the search class.  Instead,
@@ -856,18 +861,16 @@ input::placeholder {
    doesn't appear if JavaScript isn't enabled.
 */
 input.search:focus {
-    border: 1px solid rgb(81, 203, 238);
     box-shadow: 0px 0px 5px 0px rgb(81, 203, 238);
-    outline: auto 0px;
 }
 
 /* When Javascript is disabled, a <noscript> tag creates a second, disabled
    input field on top of the first to prevent interaction. */
 input:disabled {
     position: absolute;
-    top: 8px;
-    left: 8px;
-    width: calc(100% - 56px); /* 40 px for home icon, 16 px for margins*/
+    top: 0px;
+    left: 0px;
+    border: 1px solid #DDDDDD;
     background-color: #eeeeee;
     color: #cccccc;
     text-align: center;
@@ -906,7 +909,7 @@ div#autocomplete-box {
     position: fixed;
     border: 1px solid #DDDDDD;
     background-color: white;
-    margin-left: -8px; /* start at the edge of the page */
+    margin-left: -50px; /* start at the edge of the page */
 }
 /* For mobile devices (above), it's hard to fit the text of long flower
    names (especially ones with a variety/subspecies), so we allow the
@@ -919,14 +922,13 @@ div#autocomplete-box {
 @media (min-width: 600px) {
     div#autocomplete-box {
 	box-sizing: border-box;
-	/* margin-left:   home-icon width (40px)
-	                + input border (1px)
+	/* margin-left:   input border (1px)
 			+ padding for magnifying lens icon
                             (1.5em = 1.5 * 16px * 1.5em font-size = 36px)
 			- autocomplete-box border (1px)
 			- padding-left within autocomplete-box (12px)
 			- p.nogap padding (3px) */
-	margin-left: 61px;
+	margin-left: 21px;
 	margin-right: 8px; /* match the padding-right of body-container */
 	padding-left: 12px;
 	padding-right: 12px;
@@ -969,6 +971,118 @@ span.match {
 }
 
 /* See also the <a> link tags for links in the autocompletion box. */
+
+
+/*** properties related to advanced search ***/
+
+/* The <body> of the advanced search is class "adv-search", so we can
+   modify any styling by looking for that class on an ancestor element. */
+
+/* On the advanced search page, the home icon and search container are
+   positioned relatively instead of at a fixed window location, so we
+   have to put them in a flex container to get them side by side. */
+#adv-search-header {
+    display: flex;
+}
+
+.adv-search #home-icon {
+    /* Unlike the default home-icon, the one for the advanced search page
+       scrolls normally. */
+    position: relative;
+}
+
+/* On the advanced search page, the page title is next to the home icon. */
+.adv-search h1 {
+    /* Drop the "Advanced Search" heading text down to be roughly centered
+       with the home icon.  This is a total eyeball value, and it might be
+       wrong on other browsers or with resized text, etc.  Perhaps I should
+       revisit it later. */
+    margin-block-start: 6px;
+
+    /* Allow the container to set the padding to the next element. */
+    margin-block-end: 0px;
+    
+    /* The padding on top is excessive; reduce it.  This doesn't actually
+       reduce the padding to 0.  I don't know why there's still extra padding
+       above the ascenders. */
+    padding-top: 0px;
+
+    /* We know there are no true descenders in the text, so we can reduce
+       the bottom padding to better balance the top padding. */
+    padding-bottom: 0px;
+
+    /* Increase the padding on the left side to look better balance since
+       the heading is to the right of the home icon. */
+    padding-left: 4px;
+
+    /* The right padding will only matter if the screen is so narrow that
+       the heading is broken into two lines, in which case it'll be ugly
+       regardless. So I don't bother to set/change the value here.*/
+
+    /* Space the headnig a bit away from the home icon. */
+    margin-left: 8px;
+
+    /* Extending the heading background to the right edge of the page. */
+    width: 100%;
+}
+
+.adv-search div#search-container {
+    /* Use relative positioning instead of static so that the disabled input
+       (when JavaScript is disabled) bar can be absolutely positioned relative
+       to the search container instead of the whole page. */
+    position: relative;
+
+    /* Reset the margins to fill the available space on the line.
+       It already has appropriate padding. */
+    top: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+.adv-search input:disabled {
+    /* If the user chooses to disable JavaScript, most pages only subtly
+       style the disabled search bar so that it doesn't intrude on the
+       browsing that the user can still do.  But the advanced search page
+       can't do anything without JavaScript, so make the error more prominent.
+       This also helps distinguish it from the footer, which isn't far away
+       when the page is so empty. */
+    background-color: #f8e2e2;
+    color: #444444;
+}
+
+/* Confirmed search terms are represented as buttons so that they follow
+   the normal accessibility rules, including for keyboard access.  Each
+   button is styled take the same amount of space as the search bar so
+   that things don't move around as different terms are selected for editing.
+   I haven't done actual math for these values, though, only eyeballed them.*/
+button.term {
+    display: block;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    width: 100%;
+    background: white;
+    border: 1px solid #DDDDDD;
+    border-radius: 0.6em;
+    text-align: left;
+}
+button.term:hover {
+    box-shadow: 0px 0px 3px 3px #DDDDDD;
+}
+
+/* Style the contents of the term. */
+.term p {
+    line-height: 150%;
+    padding-left: 20px;
+    text-indent: -17px;
+    padding-right: 3px;
+    margin: 0px;
+}
+@media (min-width: 600px) {
+    .term p {
+	font-size: 1.25em;
+    }
+}
+
 
 /*** properties related to interfacing with the service worker ***/
 

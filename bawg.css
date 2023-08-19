@@ -1,4 +1,16 @@
 /* Copyright Chris Nelson - All rights reserved. */
+#home-icon {
+    position: fixed;
+    box-sizing: border-box;
+    top: 2px;
+    left: 2px;
+    width: 44px;
+    height: 44px;
+    filter: drop-shadow(0px 4px 4px white);
+    z-index: 20;
+    border: 3px solid rgba(255, 255, 255, 0);
+    border-radius: 22px;
+}
 #home-icon:focus,
 #update:focus,
 #clear:focus
@@ -18,18 +30,6 @@
 {
     border: solid black 3px;
     outline: none;
-}
-#home-icon {
-    position: fixed;
-    box-sizing: border-box;
-    top: 2px;
-    left: 2px;
-    width: 44px;
-    height: 44px;
-    filter: drop-shadow(0px 4px 4px white);
-    z-index: 20;
-    border: 3px solid rgba(255, 255, 255, 0);
-    border-radius: 22px;
 }
 #home-icon:hover {
     border: 3px solid rgba(0, 0, 0, 0.3) !important;
@@ -202,7 +202,7 @@ div.box :first-child {
 div.box :last-child {
     margin-bottom: 0px;
 }
-a.family:link, a.family:visited {
+a.family:link, a.family:visited, span.family {
     color: black;
     text-decoration: none;
     border-bottom: 1px black dotted;
@@ -376,23 +376,20 @@ div.indent {
 }
 div#search-container {
     position: fixed;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    padding-top: 8px;
-    padding-left: 8px;
-    padding-right: 8px;
+    top: 8px;
+    left: 50px;
+    right: 8px;
     background: white;
     box-shadow: 0px 0px 3px 3px white;
     z-index: 10;
 }
 input {
     box-sizing: border-box;
-    margin-left: 40px;
-    width: calc(100% - 40px);
+    width: 100%;
     font-size: 1.5em;
+    border: 1px solid rgb(81, 203, 238);
     border-radius: 0.4em;
-    border: 1px solid #DDDDDD;
+    outline: auto 0px;
     padding-left: 1.5em;
     background-position: .2em 50%;
     background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1.5em' height='1.5em' viewBox='0 0 100 100'><g stroke='%23888' stroke-width='9' stroke-linecap='round' fill='none'><circle cx='37' cy='37' r='20'/><path d='M52,52L83,83'/></g></svg>");
@@ -402,15 +399,13 @@ input::placeholder {
     color: #c0c0c0;
 }
 input.search:focus {
-    border: 1px solid rgb(81, 203, 238);
     box-shadow: 0px 0px 5px 0px rgb(81, 203, 238);
-    outline: auto 0px;
 }
 input:disabled {
     position: absolute;
-    top: 8px;
-    left: 8px;
-    width: calc(100% - 56px);
+    top: 0px;
+    left: 0px;
+    border: 1px solid #DDDDDD;
     background-color: #eeeeee;
     color: #cccccc;
     text-align: center;
@@ -421,12 +416,12 @@ div#autocomplete-box {
     position: fixed;
     border: 1px solid #DDDDDD;
     background-color: white;
-    margin-left: -8px;
+    margin-left: -50px;
 }
 @media (min-width: 600px) {
     div#autocomplete-box {
 	box-sizing: border-box;
-	margin-left: 61px;
+	margin-left: 21px;
 	margin-right: 8px;
 	padding-left: 12px;
 	padding-right: 12px;
@@ -449,6 +444,56 @@ p.nogap {
 }
 span.match {
     background-color: #eee;
+}
+#adv-search-header {
+    display: flex;
+}
+.adv-search #home-icon {
+    position: relative;
+}
+.adv-search h1 {
+    margin-block-start: 6px;
+    margin-block-end: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 4px;
+    margin-left: 8px;
+    width: 100%;
+}
+.adv-search div#search-container {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+}
+.adv-search input:disabled {
+    background-color: #f8e2e2;
+    color: #444444;
+}
+button.term {
+    display: block;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    width: 100%;
+    background: white;
+    border: 1px solid #DDDDDD;
+    border-radius: 0.6em;
+    text-align: left;
+}
+button.term:hover {
+    box-shadow: 0px 0px 3px 3px #DDDDDD;
+}
+.term p {
+    line-height: 150%;
+    padding-left: 20px;
+    text-indent: -17px;
+    padding-right: 3px;
+    margin: 0px;
+}
+@media (min-width: 600px) {
+    .term p {
+	font-size: 1.25em;
+    }
 }
 #update {
     display: inline-flex;
