@@ -575,12 +575,28 @@ function insert_match(fit_info) {
   }
 }
 
+/* Check for a search match in some text. */
+function text_search(search_str, type, text) {
+  var match_info = check(search_str, text, 0);
+
+  if (match_info) {
+    var fit_info = {
+      pri: pri,
+      type: type,
+      text: text,
+      match_info: match_info
+    };
+
+    insert_match(fit_info);
+  }
+}
+
 /* Check for search matches in one page:
    - in its common name
    - in its scientific name
    - in its glossary terms */
 function page_search(search_str, page_info) {
-  /* The advanced search never matches glossary terms. */
+  /* The advanced search never matches glossary pages or glossary terms. */
   if (adv_search && ((page_info.x == 'g') || (page_info.x == 'j'))) {
     return;
   }
@@ -606,6 +622,7 @@ function page_search(search_str, page_info) {
 
     var fit_info = {
       pri: pri,
+      type: 'taxon',
       page_info: page_info,
       com_match_info: com_match_info,
       sci_match_info: sci_match_info
@@ -643,6 +660,7 @@ function page_search(search_str, page_info) {
 
         var fit_info = {
           pri: match_info.pri,
+          type: 'taxon',
           page_info: page_info,
           com_match_info: match_info,
           sci_match_info: null,
@@ -689,6 +707,58 @@ function compose_page_name(page_info, lines=1) {
   return compose_full_name(com, sci, lines);
 }
 
+/* Generate the autocomplete result text (HTML) for a taxon match. */
+function gen_ac_taxon_text(fit_info) {
+  var page_info = fit_info.page_info;
+
+  if ('c' in page_info) {
+    /* If there is a match in a common name, highlight it.
+       If there is no match, use the default common name without highlighting.
+       If there are alternative common names but no default common name,
+       then com_highlight could end up as an empty string.  Conveniently,
+       this gets treated the same as com_highlight == null when deciding
+       whether to combine it with the scientific name. */
+    const com = page_info.c[0];
+    var com_highlight = highlight_match(fit_info.com_match_info,
+                                        com, false);
+
+    /* If the match is not on the default common name,
+       write the common name first followed by the matching name in brackets.
+       If there is no default common name, an extra space gets added before
+       the matching name in brackets, but the browser nicely suppresses the
+       extra space. */
+    if ((page_info.x != 'g') && (page_info.x != 'j') &&
+        fit_info.com_match_info &&
+        (fit_info.com_match_info.match_str != com)) {
+      com_highlight = (com +
+                       ' <span class="altname">[' +
+                       com_highlight +
+                       ']</span>');
+    }
+  } else {
+    var com_highlight = null;
+  }
+
+  if ('s' in page_info) {
+    const sci = page_info.s[0];
+    var sci_highlight = highlight_match(fit_info.sci_match_info,
+                                        sci, true);
+    if (fit_info.sci_match_info &&
+        (fit_info.sci_match_info.match_str != sci)) {
+      var sci_ital = highlight_match(null, sci, true);
+      sci_highlight = (sci_ital +
+                       ' <span class="altname">[' +
+                       sci_highlight +
+                       ']</span>');
+    }
+    sci_highlight = sci_highlight.replace(/:/, '&times; ');
+  } else {
+    var sci_highlight = null;
+  }
+
+  return compose_full_name(com_highlight, sci_highlight)
+}
+
 /* Search all pages for a fuzzy match with the value in the search field, and
    create an autocomplete list from the matches. */
 function fn_search(default_ac_selected) {
@@ -698,85 +768,57 @@ function fn_search(default_ac_selected) {
      I'll deal with it if and when I ever use such characters in a name. */
   var search_str = e_search_input.value.toUpperCase();
 
-  /* We need at least one letter to do proper matching. */
-  if (!/\w/.test(search_str)) {
+  ac_list = [];
+  if (/\w/.test(search_str)) { /* if there are alphanumerics to be searched */
+    /* Iterate over all pages and accumulate a list of the best matches
+       against the search value. */
+    for (var i = 0; i < pages.length; i++) {
+      var page_info = pages[i];
+      page_search(search_str, pages[i]);
+    }
+  } else if (adv_search && (term_id < term_list.length)) {
+    /* The search box is empty when editing an advanced search term.
+       We have to gin up our own fit_info since the normal check() function
+       won't work with no search string. */
+    var fit_info = {
+      pri: 0,
+      type: 'clear',
+      text: 'remove this search term'
+    };
+    insert_match(fit_info);
+  } else {
+    /* no search text and nothing to do */
     hide_ac();
     return;
   }
 
-  /* Iterate over all pages and accumulate a list of the best matches
-     against the search value. */
-  ac_list = [];
-  for (var i = 0; i < pages.length; i++) {
-    var page_info = pages[i];
-    page_search(search_str, pages[i]);
-  }
-
   for (var i = 0; i < ac_list.length; i++) {
     var fit_info = ac_list[i];
-    var page_info = fit_info.page_info;
-
-    if ('c' in page_info) {
-      /* If there is a match in a common name, highlight it.
-         If there is no match, use the default common name without highlighting.
-         If there are alternative common names but no default common name,
-         then com_highlight could end up as an empty string.  Conveniently,
-         this gets treated the same as com_highlight == null when deciding
-         whether to combine it with the scientific name. */
-      const com = page_info.c[0];
-      var com_highlight = highlight_match(fit_info.com_match_info,
-                                          com, false);
-
-      /* If the match is not on the default common name,
-         write the common name first followed by the matching name in brackets.
-         If there is no default common name, an extra space gets added before
-         the matching name in brackets, but the browser nicely suppresses the
-         extra space. */
-      if ((page_info.x != 'g') && (page_info.x != 'j') &&
-          fit_info.com_match_info &&
-          (fit_info.com_match_info.match_str != com)) {
-        com_highlight = (com +
-                         ' <span class="altname">[' +
-                         com_highlight +
-                         ']</span>');
-      }
+    if (fit_info.type == 'taxon') {
+      var text = gen_ac_taxon_text(fit_info);
+      var c = get_class(fit_info.page_info);
     } else {
-      var com_highlight = null;
-    }
-
-    if ('s' in page_info) {
-      const sci = page_info.s[0];
-      var sci_highlight = highlight_match(fit_info.sci_match_info,
-                                          sci, true);
-      if (fit_info.sci_match_info &&
-          (fit_info.sci_match_info.match_str != sci)) {
-        var sci_ital = highlight_match(null, sci, true);
-        sci_highlight = (sci_ital +
-                         ' <span class="altname">[' +
-                         sci_highlight +
-                         ']</span>');
+      if ('match_info' in fit_info) {
+        var text = highlight_match(fit_info.match_info, fit_info.text, false);
+      } else {
+        var text = fit_info.text;
       }
-      sci_highlight = sci_highlight.replace(/:/, '&times; ');
-    } else {
-      var sci_highlight = null;
+      var c = 'unobs';
     }
-
-    const c = get_class(page_info);
-    const full = compose_full_name(com_highlight, sci_highlight)
 
     /* The link is applied to the entire paragraph so that padding above
        and below and the white space to the right are also clickable. */
-    const text = '<p class="nogap">' + full + '</p>'
+    const p = '<p class="nogap">' + text + '</p>'
 
     if (adv_search) {
-      fit_info.html = '<span class="autocomplete-entry" class="' + c + '" onclick="return fn_ac_click(' + i + ');">' + text + '</span>';
+      fit_info.html = '<span class="autocomplete-entry" class="' + c + '" onclick="return fn_ac_click(' + i + ');">' + p + '</span>';
     } else {
       const url = get_url(page_info, fit_info.anchor);
       /* Add class 'enclosed' to avoid extra link decoration.
          Add class c to style the link according to the destination page type.
          Add onclick with the autocomplete entry number so that we know what
          to do when the link is clicked. */
-      fit_info.html = '<a class="enclosed ' + c + '" href="' + url + '" onclick="return fn_ac_click();">' + text + '</a>';
+      fit_info.html = '<a class="enclosed ' + c + '" href="' + url + '" onclick="return fn_ac_click();">' + p + '</a>';
     }
   }
 
@@ -844,10 +886,10 @@ function confirm_reg_search(event) {
    So it makes sense to also have my behavior trigger on keydown for
    consistency. */
 function fn_keydown() {
-  if ((event.key == 'Enter')) {
+  if ((event.key == 'Enter') && !ac_is_hidden && ac_list.length) {
     if (adv_search) {
       confirm_adv_search(ac_selected);
-    } else if (!adv_search && !ac_is_hidden && ac_list.length) {
+    } else {
       confirm_reg_search(event);
     }
   } else if (event.key == 'Escape') {
@@ -962,15 +1004,19 @@ var term_id = 0;
    re-open it for editing.  Note that the existing info about the search term
    isn't discarded yet, since the user can abandon her edits (e.g. by
    pressing the Escape key). */
-function fn_term_click(event, i) {
+function fn_term_click(event) {
   /* Before moving the search bar, restore any term that was in the process
      of being replaced. */
   apply_term();
 
   /* Remove the HTML for the term being edited,
      and replace it with the search bar. */
+  for (var i = 0; i < term_list.length; i++) {
+    if (term_list[i].e_term == event.currentTarget) break;
+  }
   term_id = i;
-  const term_info = term_list[term_id];
+  console.info(term_id);
+  var term_info = term_list[term_id];
   term_info.e_term.replaceWith(e_search_container);
 
   /* Restore the search bar and autocomplete list to a state where the
@@ -1003,7 +1049,9 @@ function restore_term() {
 /* Handle a mouse click or Enter keypress on an autocomplete entry
    while on the advanced search page. */
 function confirm_adv_search(i) {
-  if (ac_is_hidden || (ac_list.length == 0)) {
+  var fit_info = ac_list[i];
+
+  if (fit_info.type == 'clear') {
     /* Delete the existing term_info from term_list.
        If term_id == term_list.length (meaning that a new term was being
        entered), nothing happens here. */
@@ -1011,7 +1059,6 @@ function confirm_adv_search(i) {
   } else {
     /* Confirm the search term and replace the one being edited or append
        a new one to the end of the list. */
-    var fit_info = ac_list[i];
     var page_info = fit_info.page_info;
     var term_info = {
       search_str: e_search_input.value,
@@ -1049,15 +1096,15 @@ function apply_term() {
   }
 
   const term_info = term_list[term_id];
-
   const e_term = document.createElement('button');
+  term_info.e_term = e_term;
+
   e_term.className = 'term';
 
-  /* The arrow function doesn't work property if it directly references
-     the global term_id.  Instead it needs to reference a local variable
-     so that the context now determines the behavior later. */
-  var local_id = term_id;
-  e_term.addEventListener('click', (event) => fn_term_click(event, local_id));
+  /* We pass the term_info object to the click handler.  We can't just pass
+     its index in the list because its position changes if any previous term
+     is deleted. */
+  e_term.addEventListener('click', fn_term_click);
 
   const page_info = term_info.page_info;
   const full_name = compose_page_name(page_info, 1);
