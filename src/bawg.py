@@ -142,18 +142,20 @@ def create_taxon_pages(d, prefix=''):
 ###############################################################################
 
 def debug_js():
-        # To avoid confusion when using the unstripped source files,
-        # delete the stripped versions.
-        delete_file('bawg.css')
-        delete_file('search.js')
+    # To avoid confusion when using the unstripped source files,
+    # delete the stripped versions.
+    delete_file('gallery.html')
 
-        delete_file('gallery.css')
-        delete_file('gallery.js')
+    delete_file('bawg.css')
+    delete_file('search.js')
 
-        delete_file('swi.js')
+    delete_file('gallery.css')
+    delete_file('gallery.js')
 
-        # sw.js currently requires script modification,
-        # so it is always generated (and therefore not deleted).
+    delete_file('swi.js')
+
+    # sw.js currently requires script modification,
+    # so it is always generated (and therefore not deleted).
 
 def strip_js():
     strip_comments('bawg.css')
@@ -419,7 +421,7 @@ def write_sw_js():
         script_path + 'bawg.css',
         script_path + 'search.js',
         'pages.js',
-        'gallery.html',
+        script_path + 'gallery.html',
         'photos.js',
         script_path + 'gallery.js',
         script_path + 'gallery.css',
@@ -642,7 +644,7 @@ try:
         with Step('strip', 'Strip comments from ungenerated JS and HTML'):
             strip_js()
 
-        strip_comments('gallery.html', debug_gallery=arg('-debug_js'))
+        strip_comments('gallery.html')
 
     with Step('other', 'Process "other/*.txt" files'):
         other_files = get_file_set('other', 'txt')

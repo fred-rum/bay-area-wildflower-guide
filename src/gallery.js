@@ -528,13 +528,13 @@ function fn_wheel(event) {
 /* This function must exactly match what is in search.js. */
 function munge_photo_for_url(path) {
   /* Remove directory name, e.g. 'photos/'. */
-  var slash_pos = path.indexOf('/')
+  var slash_pos = path.lastIndexOf('/')
   if (slash_pos != -1) {
     path = path.substring(slash_pos+1);
   }
 
   /* Remove extension, e.g. '.jpg'. */
-  var dot_pos = path.indexOf('.')
+  var dot_pos = path.lastIndexOf('.')
   if (dot_pos != -1) {
     path = path.substring(0, dot_pos);
   }
@@ -568,6 +568,8 @@ function Photo(i, url_full) {
     this.url_thumb = url_full.replace(/^photos\/|^figures\//, 'thumbs/')
     console.log(this.url_thumb);
   }
+  /* -debug_js only */ this.url_full = '../' + this.url_full;
+  /* -debug_js only */ this.url_thumb = '../' + this.url_thumb;
 
   /* The image elements for the thumbnail (for fast loading) and full-sized
      photo (for detail when available).
@@ -645,10 +647,6 @@ Photo.prototype.open_photo = function() {
       this.e_thumb.addEventListener('load', this.fn_img_result.bind(this));
       this.e_thumb.addEventListener('error', this.fn_img_result.bind(this));
 
-      /* The thumb-sized photo is the same as e_thumbnail.  Unfortunately,
-         there's no way to simply copy the thumbnail image from the original
-         page.  We can only hope that the browser has cached the JPG file and
-         can re-create the image quickly. */
       this.e_thumb.src = encodeURI(this.url_thumb);
     }
 

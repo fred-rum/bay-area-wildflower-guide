@@ -73,7 +73,7 @@ function gallery_main() {
       const suffix_query = encodeURIComponent(suffix);
 
       /* Replace the href to point to the gallery. */
-      e_link_list[i].href = prefix + 'gallery.html?' + suffix;
+      e_link_list[i].href = prefix + 'src/gallery.html?' + suffix;
     }
   }
 }

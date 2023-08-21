@@ -18,6 +18,7 @@ def strip_comments(to_filename, from_filename=None,
         from_filename = to_filename
 
     is_js = (to_filename.endswith('.js'))
+    is_html = (to_filename.endswith('.html'))
 
     with open(f'{src_path}/{from_filename}', mode='r', encoding='utf-8') as r:
         txt = r.read()
@@ -30,9 +31,31 @@ def strip_comments(to_filename, from_filename=None,
         # src directory.
         txt = re.sub(r'"gallery\.', '"src/gallery.', txt)
 
-    if not arg('-debug_js'):
-        # These days strip_comments() is called with -debug_js only for sw.js.
-        #
+    if is_html:
+        # When I'm debugging with -debug_js, advanced-search.html and
+        # gallery.html need ../ to reach the directory with pages.js and
+        # photos.js.  Strip away ../ when files are stripped and copied.
+        txt = re.sub(r'src="../', 'src="', txt)
+
+    if is_js:
+        # When I'm debugging with -debug_js, the scripts running in
+        # advanced-search.html and galley.html need extra code to prepend ../
+        # to a URL.  Discard that code when files are stripped and copied.
+        txt = re.sub(r'^\s*/\* -debug_js only \*/.*$', '', txt,
+                     flags=re.MULTILINE)
+
+        # On the other hand, the URL to gallery.html is relative to the
+        # page it's being used in, so search.js needs to include 'src/'.
+        # Strip that away when files are stripped and copied.
+        txt = re.sub(r"'src/", "'", txt)
+
+
+    # These days strip_comments() is called with -debug_js only for sw.js.
+    # strip_comments() isn't called at all for the other JavaScript files.
+    if not is_html and not arg('-debug_js'):
+        # JavaScript and CSS both use the same /* comment */ syntax,
+        # which we strip here.
+        # 
         # Match either a complete quoted string (which is returned
         # unchanged) or whitespace followed by a comment (which is
         # removed).
@@ -41,7 +64,7 @@ def strip_comments(to_filename, from_filename=None,
         # string is matched because it starts first.  And vice versa
         # for a comment that contains quotation marks.
         #
-        # Note that a Javascript regex (surrounded by slashes) could
+        # Note that a JavaScript regex (surrounded by slashes) could
         # include a quotation mark and/or something that looks like
         # the start of a comment, but it's impossible to reliably
         # detect a regex without a full Javascript parser.  So we
@@ -50,8 +73,11 @@ def strip_comments(to_filename, from_filename=None,
         quote1 = r'(?<!\\)"(?:[^"\\]|\\.)*"'
         quote2 = r"(?<!\\)'(?:[^'\\]|\\.)*'"
         comment = r'/\s+?$|\s*/\*.*?\*/'
+
         if is_js:
-            # Look for a single-line comment beginning with '//',
+            # JavaScript (but not JS) also includes // comments.
+            #
+            # Match a single-line comment beginning with '//',
             # but not if it's actually part of a regular expression
             # that includes a slash, i.e. '\//'.
             comment += r'|\s*(?<!\\)//[^\r\n]*$'
