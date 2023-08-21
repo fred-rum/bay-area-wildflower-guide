@@ -709,16 +709,12 @@ function apply_term() {
   term_info.e_term = e_term;
   e_search_container.replaceWith(e_term);
 }
-function get_trait_result_set(term_info) {
-  const term_result_set = new Set();
-  for (const page_info of pages) {
-    for (const trait_info of page_info.trait_set) {
-      if (trait_info == term_info.trait) {
-        term_result_set.add(page_info);
-      }
+function check_trait_term(trait, result_set) {
+  for (const page_info of result_set) {
+    if (!page_info.trait_set.has(trait)) {
+      result_set.delete(page_info);
     }
   }
-  return term_result_set;
 }
 function add_descendents(term_result_set, page_info) {
   term_result_set.add(page_info);
@@ -729,10 +725,30 @@ function add_descendents(term_result_set, page_info) {
     }
   }
 }
-function get_taxon_result_set(term_info) {
-  const term_result_set = new Set();
-  add_descendents(term_result_set, term_info.page_info);
-  return term_result_set;
+function within_taxon(page_info, target_info, in_tgt_map) {
+  if (in_tgt_map.has(page_info)) {
+    return in_tgt_map.get(page_info);
+  } else if (page_info == target_info) {
+    in_tgt_map.set(page_info, true);
+    return true;
+  } else {
+    for (const parent_info of page_info.parent_set) {
+      if (within_taxon(parent_info, target_info, in_tgt_map)) {
+        in_tgt_map.set(page_info, true);
+        return true;
+      }
+    }
+    in_tgt_map.set(page_info, false);
+    return false;
+  }
+}
+function check_taxon_term(target_info, result_set) {
+  var in_tgt_map = new Map();
+  for (const page_info of result_set) {
+    if (!within_taxon(page_info, target_info, in_tgt_map)) {
+      result_set.delete(page_info);
+    }
+  }
 }
 function delete_ancestors(page_info, result_set, checked_set) {
   for (const parent_info of page_info.parent_set) {
@@ -751,23 +767,12 @@ function gen_adv_search_results() {
     e_results.innerHTML = '<p>...</p>';
     return;
   }
-  var result_set;
-  var first_term = true;
+  const result_set = new Set(pages);
   for (const term_info of term_list) {
     if (term_info.type == 'trait') {
-      var term_result_set = get_trait_result_set(term_info);
+      check_trait_term(term_info.trait, result_set);
     } else {
-      var term_result_set = get_taxon_result_set(term_info);
-    }
-    if (first_term) {
-      result_set = term_result_set;
-      first_term = false;
-    } else {
-      for (const page_info of result_set) {
-        if (!term_result_set.has(page_info)) {
-          result_set.delete(page_info);
-        }
-      }
+      check_taxon_term(term_info.page_info, result_set);
     }
   }
   const checked_set = new Set();
