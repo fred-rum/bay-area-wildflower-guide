@@ -277,12 +277,12 @@ function check(search_str, match_str, pri_adj) {
   /* search_str has already been converted to upper case, and we keep its
      punctuation intact.  I just copy it to a shorter variable name here for
      convenience. */
-  var s = search_str;
+  const s = search_str;
 
   /* m is the string we're trying to match against, converted to uppercase
      and with punctuation removed. */
-  var upper_str = match_str.toUpperCase()
-  var m = upper_str.replace(/\W/g, '');
+  const upper_str = match_str.toUpperCase()
+  const m = upper_str.replace(/\W/g, '');
 
   /* If match_str is of the format "<rank> <Name>", get the starting index of
      Name within m.  This assumes that <rank> is all normal letters, so the
@@ -581,7 +581,7 @@ function text_search(search_str, type, text) {
 
   if (match_info) {
     var fit_info = {
-      pri: pri,
+      pri: 0,
       type: type,
       text: text,
       match_info: match_info
@@ -597,7 +597,7 @@ function text_search(search_str, type, text) {
    - in its glossary terms */
 function page_search(search_str, page_info) {
   /* The advanced search never matches glossary pages or glossary terms. */
-  if (adv_search && ((page_info.x == 'g') || (page_info.x == 'j'))) {
+  if (adv_search && ((page_info.x == 's') || (page_info.x == 'g') || (page_info.x == 'j'))) {
     return;
   }
 
@@ -769,7 +769,14 @@ function fn_search(default_ac_selected) {
   var search_str = e_search_input.value.toUpperCase();
 
   ac_list = [];
+
   if (/\w/.test(search_str)) { /* if there are alphanumerics to be searched */
+    if (adv_search) {
+      for (var i = 0; i < traits.length; i++) {
+        text_search(search_str, 'trait', traits[i]);
+      }
+    }
+
     /* Iterate over all pages and accumulate a list of the best matches
        against the search value. */
     for (var i = 0; i < pages.length; i++) {
@@ -1000,6 +1007,33 @@ var term_list = [];
    a smaller value when one of the existing terms is being edited. */
 var term_id = 0;
 
+var zstr_len = 1;
+var trait_to_zstr = {}
+
+function convert_zint_to_zstr(zint) {
+  var zstr = "";
+  for (var i = 0; i < zstr_len; i++) {
+    var c = (zint % 93) + 32;
+    zint = Math.floor(zint / 93);
+    if (c >= 34) c++;
+    if (c >= 92) c++;
+    zstr = String.fromCharCode(c) + zstr;
+  }
+  return zstr;
+}
+
+function init_adv_search() {
+  const num_zcodes = traits.length; /* + trips.length */
+  while (num_zcodes > 93**zstr_len) {
+    zstr_len++;
+  }
+
+  /* assign zcodes to traits */
+  for (var i = 0; i < traits.length; i++) {
+    trait_to_zstr[traits[i]] = convert_zint_to_zstr(i);
+  }
+}
+
 /* When the user clicks (or presses enter on) an existing search term, we
    re-open it for editing.  Note that the existing info about the search term
    isn't discarded yet, since the user can abandon her edits (e.g. by
@@ -1059,12 +1093,23 @@ function confirm_adv_search(i) {
   } else {
     /* Confirm the search term and replace the one being edited or append
        a new one to the end of the list. */
-    var page_info = fit_info.page_info;
-    var term_info = {
+
+    const term_info = {
+      /* Remember the user input that led to this term.
+         We restore this state if the user clicks the term to edit it. */
       search_str: e_search_input.value,
       ac_selected: i,
-      page_info: page_info
+
+      /* Different info is stored below depending on the type. */
+      type: fit_info.type
     };
+
+    if (fit_info.type == 'trait') {
+      term_info.trait = fit_info.text;
+    } else {
+      term_info.page_info = fit_info.page_info;
+    }
+
     term_list.splice(term_id, 1, term_info);
 
     apply_term();
@@ -1106,11 +1151,18 @@ function apply_term() {
      is deleted. */
   e_term.addEventListener('click', fn_term_click);
 
-  const page_info = term_info.page_info;
-  const full_name = compose_page_name(page_info, 1);
-  const c = get_class(page_info);
+  if (term_info.type == 'trait') {
+    var c = 'unobs';
+    var full_name = term_info.trait;
+    var prefix = 'with';
+  } else {
+    const page_info = term_info.page_info;
+    var c = get_class(page_info);
+    var full_name = compose_page_name(page_info, 1);
+    var prefix = 'within';
+  }
   const span = '<span class="' + c + '">' + full_name + '</span>';
-  e_term.innerHTML = '<p>within <b>' + span + '</b></p>';
+  e_term.innerHTML = '<p>' + prefix + ' <b>' + span + '</b></p>';
 
   term_info.e_term = e_term;
 
@@ -1119,9 +1171,27 @@ function apply_term() {
 
 /* Perform the advanced search and generate the HTML for the results. */
 function gen_adv_search_results() {
-  var list = [];
-  for (var i = 0; i < term_list.length; i++) {
-    const page_info = term_list[i].page_info;
+  const list = [];
+  const result_set = new Set();
+
+  for (const term_info of term_list) {
+    if (term_info.type == 'trait') {
+      const zstr = trait_to_zstr[term_info.trait];
+      for (const page_info of pages) {
+        if ('z' in page_info) {
+          for (var i = 0; i < page_info.z.length; i += zstr_len) {
+            if (page_info.z.slice(i, i+3) == zstr) {
+              result_set.add(page_info);
+            }
+          }
+        }
+      }
+    } else {
+      result_set.add(term_info.page_info);
+    }
+  }
+
+  for (const page_info of result_set) {
     const c = get_class(page_info);
     const url = get_url(page_info, null);
 
@@ -1192,6 +1262,10 @@ function main() {
   /* Add the search class to the search box in order to enable styling
      that should only be applied when JavaScript is enabled. */
   e_search_input.className = 'search';
+
+  if (adv_search) {
+    init_adv_search();
+  }
 
   /* normalize the data in the pages array. */
   for (var i = 0; i < pages.length; i++) {

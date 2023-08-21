@@ -1130,5 +1130,9 @@ function fn_gallery_keydown(event) {
   }
 }
 
-/* This call has to be after all gallery-related function definitions. */
+/* This call has to be after all gallery-related function definitions.
+
+   Since the HTML loads the photos.js and gallery.js scripts using the
+   defer attribute, we know that the scripts are executed in that order
+   and only after the DOM is fully populated. */
 main();

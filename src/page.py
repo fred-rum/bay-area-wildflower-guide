@@ -16,6 +16,7 @@ from glossary import *
 from parse import *
 from cache import *
 from toxic import *
+from zcode import *
 
 ###############################################################################
 
@@ -587,6 +588,9 @@ class Page:
         # Keep track of which trait values actually appear on a subset page
         # so that we can complain about any unexpected values.
         self.traits_used = {} # trait name -> set of trait values
+
+        # list of subset page names that this page is a member of
+        self.trait_names = []
 
         # A list of filtered subset pages that this page is the parent of.
         self.subset_pages = {} # trait name -> list of subset pages
@@ -2569,6 +2573,7 @@ class Page:
                 if (trait in self.trait_values and
                     subset_page.subset_value in self.trait_values[trait]):
                     value_list.append(subset_page.create_link(1, subset_page.subset_list_name))
+                    self.trait_names.append(subset_page.name)
         if value_list:
             # When there is a matching value list, it makes the member line long
             # and complicated.  Simplify it somewhat by using the ancestor's
@@ -3549,3 +3554,11 @@ def list_matches(w, match_set, indent, trait, value, seen_set):
             page.list_page(w, indent, None)
 
         seen_set.add(page)
+
+def write_traits_to_pages_js(w):
+    w.write('const traits=[\n')
+    for page in page_array:
+        if page.subset_of_page:
+            assign_zcode(page.name)
+            w.write(f'"{page.name}",\n')
+    w.write('];\n')

@@ -181,7 +181,7 @@ def add_elab(elabs, elab):
         elabs.append(unidecode(elab))
 
 def write_pages_js(w):
-    w.write('var pages=[\n')
+    w.write('const pages=[\n')
 
     # Sort in reverse order of observation count (most observations first).
     for page in sort_pages(page_array, with_depth=True):
@@ -245,7 +245,9 @@ def write_pages_js(w):
             elabs_str = unidecode('","'.join(elabs))
             w.write(f',s:["{elabs_str}"]')
 
-        if page.child:
+        if page.subset_of_page:
+            w.write(',x:"s"')
+        elif page.child:
             if page.has_child_key:
                 w.write(',x:"k"')
             else:
@@ -268,6 +270,12 @@ def write_pages_js(w):
             else:
                 w.write(f',j:"{jpg}"')
 
+        if page.trait_names:
+            w.write(',z:"')
+            for name in page.trait_names:
+                w.write(get_zstr(name))
+            w.write('"')
+
         w.write('},\n')
 
     write_glossary_search_terms(w)
@@ -282,7 +290,7 @@ if (typeof main !== 'undefined') {
 # Create photos.js
 
 def write_photos_js(w):
-    w.write('var pages=[\n')
+    w.write('const pages=[\n')
 
     # The sort order here is arbirtary as long as it is consistent.
     # We sort in the same order as pages.js for convenience of comparing them.
@@ -643,6 +651,8 @@ try:
     with Step('pages_js', 'Create pages.js'):
         search_file = f'{root_path}/pages.js'
         with open(search_file, 'w', encoding='utf-8') as w:
+            write_traits_to_pages_js(w)
+            convert_zint_to_zstr();
             write_pages_js(w)
 
     with Step('photos_js', 'Create photos.js'):

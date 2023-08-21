@@ -1555,6 +1555,22 @@ Advanced search:
     https://web.dev/browser-level-image-lazy-loading
     and/or add elements to the DOM only as the user scrolls
       avoids a huge DOM, but runs into the YouTube long list problem
+  example advanced search terms:
+    (within) <taxon> (e.g. clarkia)
+    with <trait value> (e.g. purple flowers)
+    before yyyy/mm/dd (exclusive)
+    until yyyy/mm/dd (inclusive)
+    since yyyy/mm/dd (inclusive)
+    after yyyy/mm/dd (exclusive)
+    before(etc.) yyyy/mm
+    before(etc.) yyyy
+    between (date) and (date) (inclusive)
+    on yyyy/mm/dd
+    within N days of yyyy/mm/dd (inclusive)
+    within N days of mm/dd (in any year)
+    in MONTH
+    at PARK
+    near PARK (requires more park info)
 
 The BAWG doc's summary of files should have a page reference for every file.
 

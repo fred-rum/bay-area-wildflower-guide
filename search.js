@@ -147,9 +147,9 @@ function generate_ac_html() {
   }
 }
 function check(search_str, match_str, pri_adj) {
-  var s = search_str;
-  var upper_str = match_str.toUpperCase()
-  var m = upper_str.replace(/\W/g, '');
+  const s = search_str;
+  const upper_str = match_str.toUpperCase()
+  const m = upper_str.replace(/\W/g, '');
   var name_pos = match_str.indexOf(' ');
   if ((name_pos < 0) ||
       (match_str.substr(0, 1) == upper_str.substr(0, 1)) ||
@@ -336,7 +336,7 @@ function text_search(search_str, type, text) {
   var match_info = check(search_str, text, 0);
   if (match_info) {
     var fit_info = {
-      pri: pri,
+      pri: 0,
       type: type,
       text: text,
       match_info: match_info
@@ -345,7 +345,7 @@ function text_search(search_str, type, text) {
   }
 }
 function page_search(search_str, page_info) {
-  if (adv_search && ((page_info.x == 'g') || (page_info.x == 'j'))) {
+  if (adv_search && ((page_info.x == 's') || (page_info.x == 'g') || (page_info.x == 'j'))) {
     return;
   }
   if ('c' in page_info) {
@@ -470,6 +470,11 @@ function fn_search(default_ac_selected) {
   var search_str = e_search_input.value.toUpperCase();
   ac_list = [];
   if (/\w/.test(search_str)) {
+    if (adv_search) {
+      for (var i = 0; i < traits.length; i++) {
+        text_search(search_str, 'trait', traits[i]);
+      }
+    }
     for (var i = 0; i < pages.length; i++) {
       var page_info = pages[i];
       page_search(search_str, pages[i]);
@@ -591,6 +596,28 @@ function fn_hashchange(event) {
 }
 var term_list = [];
 var term_id = 0;
+var zstr_len = 1;
+var trait_to_zstr = {}
+function convert_zint_to_zstr(zint) {
+  var zstr = "";
+  for (var i = 0; i < zstr_len; i++) {
+    var c = (zint % 93) + 32;
+    zint = Math.floor(zint / 93);
+    if (c >= 34) c++;
+    if (c >= 92) c++;
+    zstr = String.fromCharCode(c) + zstr;
+  }
+  return zstr;
+}
+function init_adv_search() {
+  const num_zcodes = traits.length;
+  while (num_zcodes > 93**zstr_len) {
+    zstr_len++;
+  }
+  for (var i = 0; i < traits.length; i++) {
+    trait_to_zstr[traits[i]] = convert_zint_to_zstr(i);
+  }
+}
 function fn_term_click(event) {
   apply_term();
   for (var i = 0; i < term_list.length; i++) {
@@ -614,12 +641,16 @@ function confirm_adv_search(i) {
   if (fit_info.type == 'clear') {
     term_list.splice(term_id, 1);
   } else {
-    var page_info = fit_info.page_info;
-    var term_info = {
+    const term_info = {
       search_str: e_search_input.value,
       ac_selected: i,
-      page_info: page_info
+      type: fit_info.type
     };
+    if (fit_info.type == 'trait') {
+      term_info.trait = fit_info.text;
+    } else {
+      term_info.page_info = fit_info.page_info;
+    }
     term_list.splice(term_id, 1, term_info);
     apply_term();
   }
@@ -643,18 +674,41 @@ function apply_term() {
   term_info.e_term = e_term;
   e_term.className = 'term';
   e_term.addEventListener('click', fn_term_click);
-  const page_info = term_info.page_info;
-  const full_name = compose_page_name(page_info, 1);
-  const c = get_class(page_info);
+  if (term_info.type == 'trait') {
+    var c = 'unobs';
+    var full_name = term_info.trait;
+    var prefix = 'with';
+  } else {
+    const page_info = term_info.page_info;
+    var c = get_class(page_info);
+    var full_name = compose_page_name(page_info, 1);
+    var prefix = 'within';
+  }
   const span = '<span class="' + c + '">' + full_name + '</span>';
-  e_term.innerHTML = '<p>within <b>' + span + '</b></p>';
+  e_term.innerHTML = '<p>' + prefix + ' <b>' + span + '</b></p>';
   term_info.e_term = e_term;
   e_search_container.replaceWith(e_term);
 }
 function gen_adv_search_results() {
-  var list = [];
-  for (var i = 0; i < term_list.length; i++) {
-    const page_info = term_list[i].page_info;
+  const list = [];
+  const result_set = new Set();
+  for (const term_info of term_list) {
+    if (term_info.type == 'trait') {
+      const zstr = trait_to_zstr[term_info.trait];
+      for (const page_info of pages) {
+        if ('z' in page_info) {
+          for (var i = 0; i < page_info.z.length; i += zstr_len) {
+            if (page_info.z.slice(i, i+3) == zstr) {
+              result_set.add(page_info);
+            }
+          }
+        }
+      }
+    } else {
+      result_set.add(term_info.page_info);
+    }
+  }
+  for (const page_info of result_set) {
     const c = get_class(page_info);
     const url = get_url(page_info, null);
     list.push('<div class="list-box">');
@@ -700,6 +754,9 @@ function main() {
   e_results = document.getElementById('results');
   adv_search = Boolean(e_results)
   e_search_input.className = 'search';
+  if (adv_search) {
+    init_adv_search();
+  }
   for (var i = 0; i < pages.length; i++) {
     var page_info = pages[i];
     if (('p' in page_info) &&

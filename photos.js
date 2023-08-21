@@ -1,4 +1,4 @@
-var pages=[
+const pages=[
 ["acmon blue",7],
 ["acorn woodpecker",1,3,7,9],
 ["alaska yellowjacket",0,1],
