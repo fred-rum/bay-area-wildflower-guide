@@ -339,7 +339,7 @@ function check(search_str, match_str, pri_adj) {
   }
 
   /* Start with a priority high enough that the various decrements probably
-     won't reduce it below 0.  (Although I'm not sure if that matters. */
+     won't reduce it below 0.  (Although I'm not sure if that matters.) */
   var pri = 100.0;
 
   pri += pri_adj;
@@ -581,7 +581,7 @@ function text_search(search_str, type, text) {
 
   if (match_info) {
     var fit_info = {
-      pri: 0,
+      pri: match_info.pri,
       type: type,
       text: text,
       match_info: match_info

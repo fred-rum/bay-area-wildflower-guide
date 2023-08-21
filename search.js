@@ -336,7 +336,7 @@ function text_search(search_str, type, text) {
   var match_info = check(search_str, text, 0);
   if (match_info) {
     var fit_info = {
-      pri: 0,
+      pri: match_info.pri,
       type: type,
       text: text,
       match_info: match_info
