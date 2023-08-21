@@ -1169,25 +1169,85 @@ function apply_term() {
   e_search_container.replaceWith(e_term);
 }
 
-/* Perform the advanced search and generate the HTML for the results. */
-function gen_adv_search_results() {
-  const list = [];
-  const result_set = new Set();
-
-  for (const term_info of term_list) {
-    if (term_info.type == 'trait') {
-      const zstr = trait_to_zstr[term_info.trait];
-      for (const page_info of pages) {
-        if ('z' in page_info) {
-          for (var i = 0; i < page_info.z.length; i += zstr_len) {
-            if (page_info.z.slice(i, i+3) == zstr) {
-              result_set.add(page_info);
-            }
+function get_term_result_set(term_info) {
+  var term_result_set = new Set();
+  if (term_info.type == 'trait') {
+    const zstr = trait_to_zstr[term_info.trait];
+    for (const page_info of pages) {
+      if ('z' in page_info) {
+        for (var i = 0; i < page_info.z.length; i += zstr_len) {
+          if (page_info.z.slice(i, i+3) == zstr) {
+            term_result_set.add(page_info);
           }
         }
       }
+    }
+  } else {
+    term_result_set.add(term_info.page_info);
+  }
+
+  return term_result_set;
+}
+
+function get_trait_result_set(term_info) {
+  const term_result_set = new Set();
+  const zstr = trait_to_zstr[term_info.trait];
+  for (const page_info of pages) {
+    if ('z' in page_info) {
+      for (var i = 0; i < page_info.z.length; i += zstr_len) {
+        if (page_info.z.slice(i, i + zstr_len) == zstr) {
+          term_result_set.add(page_info);
+        }
+      }
+    }
+  }
+  return term_result_set;
+}
+
+function add_descendents(term_result_set, page_info) {
+  term_result_set.add(page_info);
+
+  if ('d' in page_info) {
+    for (const child_id of page_info.d) {
+      const child_page_info = pages[child_id];
+      add_descendents(term_result_set, child_page_info);
+    }
+  }      
+}
+
+function get_taxon_result_set(term_info) {
+  const term_result_set = new Set();
+  add_descendents(term_result_set, term_info.page_info);
+  return term_result_set;
+}
+
+/* Perform the advanced search and generate the HTML for the results. */
+function gen_adv_search_results() {
+  if (term_list.length == 0) {
+    e_results.innerHTML = '<p>...</p>';
+    return;
+  }
+
+  const list = [];
+
+  var result_set;
+  var first_term = true;
+  for (const term_info of term_list) {
+    if (term_info.type == 'trait') {
+      var term_result_set = get_trait_result_set(term_info);
     } else {
-      result_set.add(term_info.page_info);
+      var term_result_set = get_taxon_result_set(term_info);
+    }
+
+    if (first_term) {
+      result_set = term_result_set;
+      first_term = false;
+    } else {
+      for (const page_info of result_set) {
+        if (!term_result_set.has(page_info)) {
+          result_set.delete(page_info);
+        }
+      }
     }
   }
 
@@ -1224,7 +1284,7 @@ function gen_adv_search_results() {
   if (list.length) {
     e_results.innerHTML = list.join('');
   } else {
-    e_results.innerHTML = '...';
+    e_results.innerHTML = '<p>No taxons match the criteria.</p>';
   }
 }
 

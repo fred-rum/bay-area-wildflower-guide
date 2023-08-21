@@ -187,7 +187,14 @@ def write_pages_js(w):
     w.write('const pages=[\n')
 
     # Sort in reverse order of observation count (most observations first).
-    for page in sort_pages(page_array, with_depth=True):
+    page_list = sort_pages(page_array, with_depth=True)
+
+    # Assign a numeric ID to each (real) page.
+    # We'll use this to identify the children of each page.
+    for id, page in enumerate(page_list):
+        page.num_id = id
+
+    for page in page_list:
         name = filename(page.name)
         w.write(f'{{p:"{name}"')
 
@@ -278,6 +285,14 @@ def write_pages_js(w):
             for name in page.trait_names:
                 w.write(get_zstr(name))
             w.write('"')
+
+        if page.child:
+            child_ids = []
+            for child in page.child:
+                child_ids.append(str(child.num_id))
+            w.write(',d:[')
+            w.write(','.join(child_ids))
+            w.write(']');
 
         w.write('},\n')
 
