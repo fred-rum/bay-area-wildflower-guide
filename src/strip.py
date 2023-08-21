@@ -1,8 +1,7 @@
 # My files
 from files import *
 
-def strip_comments(to_filename, from_filename=None,
-                   code=None, debug_gallery=False):
+def strip_comments(to_filename, from_filename=None, code=None):
     def repl_string_or_comment(matchobj):
         string = matchobj.group(1)
         comment = matchobj.group(2)
@@ -25,11 +24,6 @@ def strip_comments(to_filename, from_filename=None,
 
     if code:
         txt = re.sub(r'/\* insert code here \*/', code, txt)
-
-    if debug_gallery:
-        # Change the gallery.js and gallery.css references to point to the
-        # src directory.
-        txt = re.sub(r'"gallery\.', '"src/gallery.', txt)
 
     if is_html:
         # When I'm debugging with -debug_js, advanced-search.html and

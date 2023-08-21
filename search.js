@@ -109,7 +109,7 @@ function get_url(page_info, anchor) {
     var url = 'https://ucjeps.berkeley.edu/eflora/glossary.html';
   } else {
     var url = path + page_info.p + '.html';
-    url = url.replace(/ /g, '-')
+    url = url.replace(/ /g, '-');
   }
   if (anchor) {
     url += '#' + anchor;
@@ -718,7 +718,7 @@ function gen_adv_search_results() {
       if (comma_pos == -1) {
         jpg = page_info.p + ',' + jpg;
       }
-      const jpg_url = 'thumbs/' + jpg + '.jpg';
+      var jpg_url = 'thumbs/' + jpg + '.jpg';
       list.push('<a href="' + url + '">');
       list.push('<div class="list-thumb">');
       list.push('<img class="boxed" src="' + jpg_url + '" alt="photo">');

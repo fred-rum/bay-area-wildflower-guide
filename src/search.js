@@ -222,7 +222,7 @@ function get_url(page_info, anchor) {
     var url = 'https://ucjeps.berkeley.edu/eflora/glossary.html';
   } else {
     var url = path + page_info.p + '.html';
-    url = url.replace(/ /g, '-')
+    url = url.replace(/ /g, '-');
   }
 
   if (anchor) {
@@ -1204,7 +1204,8 @@ function gen_adv_search_results() {
         /* Append the suffix the suffix to the page name. */
         jpg = page_info.p + ',' + jpg;
       }
-      const jpg_url = 'thumbs/' + jpg + '.jpg';
+      var jpg_url = 'thumbs/' + jpg + '.jpg';
+      /* -debug_js only */ jpg_url = '../' + jpg_url;
 
       list.push('<a href="' + url + '">');
       list.push('<div class="list-thumb">');
@@ -1236,6 +1237,9 @@ if (/\/html\/[^\/]*$/.test(window.location.pathname)) {
   var path = '';
 } else {
   var path = 'html/';
+
+  /* advanced-search.html might be in src/ */
+  /* -debug_js only */ if (/\/src\/[^\/]*$/.test(window.location.pathname)) path = '../html/';
 }
 
 /* main() kicks off search-related activity once it is safe to do so.

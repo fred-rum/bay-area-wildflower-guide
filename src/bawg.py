@@ -144,6 +144,7 @@ def create_taxon_pages(d, prefix=''):
 def debug_js():
     # To avoid confusion when using the unstripped source files,
     # delete the stripped versions.
+    delete_file('advanced-search.html')
     delete_file('gallery.html')
 
     delete_file('bawg.css')
@@ -359,7 +360,7 @@ def find_html_diffs():
     mod_list = []
     del_list = []
     for name in file_list:
-        if name in ('_mod.html', 'gallery.html'):
+        if name in ('_mod.html', 'gallery.html', 'advanced-search.html'):
             pass
         elif name in new_cache and name not in old_cache:
             new_list.append(name)
@@ -421,8 +422,9 @@ def write_sw_js():
         script_path + 'bawg.css',
         script_path + 'search.js',
         'pages.js',
-        script_path + 'gallery.html',
         'photos.js',
+        script_path + 'advanced-search.html',
+        script_path + 'gallery.html',
         script_path + 'gallery.js',
         script_path + 'gallery.css',
     ]
@@ -644,6 +646,7 @@ try:
         with Step('strip', 'Strip comments from ungenerated JS and HTML'):
             strip_js()
 
+        strip_comments('advanced-search.html')
         strip_comments('gallery.html')
 
     with Step('other', 'Process "other/*.txt" files'):
