@@ -597,7 +597,6 @@ function fn_hashchange(event) {
 var term_list = [];
 var term_id = 0;
 var zstr_len = 1;
-var trait_to_zstr = {}
 function convert_zint_to_zstr(zint) {
   var zstr = "";
   for (var i = 0; i < zstr_len; i++) {
@@ -614,8 +613,29 @@ function init_adv_search() {
   while (num_zcodes > 93**zstr_len) {
     zstr_len++;
   }
+  const zstr_to_trait = {}
   for (var i = 0; i < traits.length; i++) {
-    trait_to_zstr[traits[i]] = convert_zint_to_zstr(i);
+    zstr_to_trait[convert_zint_to_zstr(i)] = traits[i];
+  }
+  for (const page_info of pages) {
+    page_info.trait_set = new Set();
+    page_info.child_set = new Set();
+    page_info.parent_set = new Set();
+  }
+  for (const page_info of pages) {
+    if ('z' in page_info) {
+      for (var i = 0; i < page_info.z.length; i += zstr_len) {
+        const zstr = page_info.z.slice(i, i + zstr_len);
+        page_info.trait_set.add(zstr_to_trait[zstr]);
+      }
+    }
+    if ('d' in page_info) {
+      for (const child_id of page_info.d) {
+        const child_info = pages[child_id];
+        page_info.child_set.add(child_info);
+        child_info.parent_set.add(page_info);
+      }
+    }
   }
 }
 function fn_term_click(event) {
@@ -689,33 +709,12 @@ function apply_term() {
   term_info.e_term = e_term;
   e_search_container.replaceWith(e_term);
 }
-function get_term_result_set(term_info) {
-  var term_result_set = new Set();
-  if (term_info.type == 'trait') {
-    const zstr = trait_to_zstr[term_info.trait];
-    for (const page_info of pages) {
-      if ('z' in page_info) {
-        for (var i = 0; i < page_info.z.length; i += zstr_len) {
-          if (page_info.z.slice(i, i+3) == zstr) {
-            term_result_set.add(page_info);
-          }
-        }
-      }
-    }
-  } else {
-    term_result_set.add(term_info.page_info);
-  }
-  return term_result_set;
-}
 function get_trait_result_set(term_info) {
   const term_result_set = new Set();
-  const zstr = trait_to_zstr[term_info.trait];
   for (const page_info of pages) {
-    if ('z' in page_info) {
-      for (var i = 0; i < page_info.z.length; i += zstr_len) {
-        if (page_info.z.slice(i, i + zstr_len) == zstr) {
-          term_result_set.add(page_info);
-        }
+    for (const trait_info of page_info.trait_set) {
+      if (trait_info == term_info.trait) {
+        term_result_set.add(page_info);
       }
     }
   }
@@ -735,12 +734,23 @@ function get_taxon_result_set(term_info) {
   add_descendents(term_result_set, term_info.page_info);
   return term_result_set;
 }
+function delete_ancestors(page_info, result_set, checked_set) {
+  for (const parent_info of page_info.parent_set) {
+    if (checked_set.has(parent_info)) {
+    } else {
+      if (result_set.has(parent_info)) {
+        result_set.delete(parent_info);
+      }
+      checked_set.add(parent_info);
+      delete_ancestors(parent_info, result_set, checked_set);
+    }
+  }
+}
 function gen_adv_search_results() {
   if (term_list.length == 0) {
     e_results.innerHTML = '<p>...</p>';
     return;
   }
-  const list = [];
   var result_set;
   var first_term = true;
   for (const term_info of term_list) {
@@ -760,6 +770,11 @@ function gen_adv_search_results() {
       }
     }
   }
+  const checked_set = new Set();
+  for (const page_info of result_set) {
+    delete_ancestors(page_info, result_set, checked_set);
+  }
+  const list = [];
   for (const page_info of result_set) {
     const c = get_class(page_info);
     const url = get_url(page_info, null);
@@ -806,9 +821,6 @@ function main() {
   e_results = document.getElementById('results');
   adv_search = Boolean(e_results)
   e_search_input.className = 'search';
-  if (adv_search) {
-    init_adv_search();
-  }
   for (var i = 0; i < pages.length; i++) {
     var page_info = pages[i];
     if (('p' in page_info) &&
@@ -821,6 +833,9 @@ function main() {
         hasUpper(page_info.p) && (page_info.x != 'j')) {
       page_info.s = [page_info.p];
     }
+  }
+  if (adv_search) {
+    init_adv_search();
   }
   e_search_input.addEventListener('input', fn_change);
   e_search_input.addEventListener('keydown', fn_keydown);
