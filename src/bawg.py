@@ -280,10 +280,12 @@ def write_pages_js(w):
             else:
                 w.write(f',j:"{jpg}"')
 
-        if page.trait_names:
+        if page.trait_names or page.trips:
             w.write(',z:"')
             for name in page.trait_names:
                 w.write(get_zstr(name))
+            for trip in sorted(page.trips):
+                w.write(get_zstr(trip))
             w.write('"')
 
         if page.child:
@@ -672,6 +674,7 @@ try:
         search_file = f'{root_path}/pages.js'
         with open(search_file, 'w', encoding='utf-8') as w:
             write_traits_to_pages_js(w)
+            write_trips_to_pages_js(w)
             convert_zint_to_zstr();
             write_pages_js(w)
 

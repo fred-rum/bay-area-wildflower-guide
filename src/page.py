@@ -609,6 +609,7 @@ class Page:
         self.obs_rg = 0 # number of observations that are research grade
         self.parks = {} # a dictionary of park_name : count
         self.month = [0] * 12
+        self.trips = set() # set of trips, each as (date string, park name)
 
         # cumulative obs_n among all descendants for a particular trait/value
         # combination.  (trait and value may be both None.)

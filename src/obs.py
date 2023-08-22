@@ -12,6 +12,9 @@ from core import *
 park_map = {}
 park_loc = {}
 
+# master set of trips; each as (date string, park name)
+trips = set()
+
 def read_parks(f):
     yaml_data = yaml.safe_load(f)
 
@@ -410,3 +413,13 @@ def read_observation_data(f):
             page.parks[short_park] = 0
         page.parks[short_park] += 1
         page.month[month] += 1
+
+        page.trips.add((date, short_park))
+        trips.add((date, short_park))
+
+def write_trips_to_pages_js(w):
+    w.write('const trips=[\n')
+    for trip in sorted(trips):
+        assign_zcode(trip)
+        w.write(f'["{trip[0]}","{trip[1]}"],\n')
+    w.write('];\n')
