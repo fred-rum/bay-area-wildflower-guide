@@ -1566,6 +1566,8 @@ Advanced search:
     before(etc.) yyyy
     between (date) and (date) (inclusive)
     on yyyy/mm/dd
+    in yyyy/mm
+    in yyyy
     within N days of yyyy/mm/dd (inclusive)
     within N days of mm/dd (in any year)
     in MONTH

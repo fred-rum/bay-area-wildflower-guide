@@ -83,7 +83,7 @@ function compress(name) {
   return name.toUpperCase().replace(/\W/g, '');
 }
 function find_letter_pos(str, n) {
-  var regex = /\w/g;
+  var regex = /[a-zA-Z%]/g;
   for (var i = 0; i <= n; i++) {
     regex.test(str);
   }
@@ -149,7 +149,7 @@ function generate_ac_html() {
 function check(search_str, match_str, pri_adj) {
   const s = search_str;
   const upper_str = match_str.toUpperCase()
-  const m = upper_str.replace(/\W/g, '');
+  const m = upper_str.replace(/[^A-Z%]/g, '');
   var name_pos = match_str.indexOf(' ');
   if ((name_pos < 0) ||
       (match_str.substr(0, 1) == upper_str.substr(0, 1)) ||
@@ -159,23 +159,34 @@ function check(search_str, match_str, pri_adj) {
   var match_ranges = [];
   var i = 0;
   var j = 0;
+  var num_list = [];
   while (true) {
-    while ((/\W/.test(s.substr(i, 1))) && (i < s.length)) {
+    while (/[^A-Z0-9]/.test(s.substr(i, 1)) && (i < s.length)) {
       i++;
     }
     var start_i = i;
     if (i == s.length) {
       break;
     }
-    while ((/\w/.test(s.substr(i, 1))) && (i < s.length)) {
+    var is_num = (/[0-9]/.test(s.substr(i, 1)));
+    if (is_num) {
+      var pattern = /[0-9]/;
+    } else {
+      var pattern = /[A-Z]/;
+    }
+    while (pattern.test(s.substr(i, 1)) && (i < s.length)) {
       i++;
     }
     var s_word = s.substring(start_i, i);
+    if (is_num) {
+      num_list.push(Number(s_word));
+      var s_word = '%';
+    }
     var start_j = m.indexOf(s_word, j);
     if (start_j == -1) {
       return null;
     }
-    j = start_j + (i - start_i);
+    j = start_j + s_word.length;
     if (match_ranges.length &&
         (match_ranges[match_ranges.length-1][1] == start_j)) {
       match_ranges[match_ranges.length-1][1] = j;
@@ -193,7 +204,8 @@ function check(search_str, match_str, pri_adj) {
   var match_info = {
     pri: pri,
     match_str: match_str,
-    match_ranges: match_ranges
+    match_ranges: match_ranges,
+    num_list: num_list
   }
   return match_info;
 }
@@ -319,6 +331,11 @@ function highlight_match(match_info, default_name, is_sci) {
     }
   }
   h += m.substring(pos);
+  if (match_info) {
+    for (const num of match_info.num_list) {
+      h = h.replace('%', num);
+    }
+  }
   return h;
 }
 function insert_match(fit_info) {
@@ -332,15 +349,19 @@ function insert_match(fit_info) {
     }
   }
 }
-function text_search(search_str, type, text) {
-  var match_info = check(search_str, text, 0);
+function text_search(search_str, prefix, match_str,
+                     match_fn, def_num_list = null) {
+  var match_info = check(search_str, match_str, 0);
   if (match_info) {
-    var fit_info = {
-      pri: match_info.pri,
-      type: type,
-      text: text,
-      match_info: match_info
-    };
+    var fit_info = match_info;
+    fit_info.type = 'text';
+    fit_info.prefix = prefix;
+    fit_info.match_fn = match_fn;
+    if (def_num_list) {
+      for (var i = fit_info.num_list.length; i < def_num_list.length; i++) {
+        fit_info.num_list.push(def_num_list[i]);
+      }
+    }
     insert_match(fit_info);
   }
 }
@@ -367,6 +388,7 @@ function page_search(search_str, page_info) {
     var fit_info = {
       pri: pri,
       type: 'taxon',
+      match_fn: match_taxon,
       page_info: page_info,
       com_match_info: com_match_info,
       sci_match_info: sci_match_info
@@ -393,6 +415,7 @@ function page_search(search_str, page_info) {
         var fit_info = {
           pri: match_info.pri,
           type: 'taxon',
+          match_fn: match_taxon,
           page_info: page_info,
           com_match_info: match_info,
           sci_match_info: null,
@@ -472,11 +495,12 @@ function fn_search(default_ac_selected) {
   if (/\w/.test(search_str)) {
     if (adv_search) {
       for (const trait of traits) {
-        text_search(search_str, 'trait', trait);
+        text_search(search_str, 'with ', trait, match_trait);
       }
       for (const park of parks) {
-        text_search(search_str, 'park', park);
+        text_search(search_str, 'in ', park, match_park);
       }
+      text_search(search_str, 'observed ', 'in %', match_in_y, [2023]);
     }
     for (var i = 0; i < pages.length; i++) {
       var page_info = pages[i];
@@ -486,7 +510,7 @@ function fn_search(default_ac_selected) {
     var fit_info = {
       pri: 0,
       type: 'clear',
-      text: 'remove this search term'
+      match_str: 'remove this search term'
     };
     insert_match(fit_info);
   } else {
@@ -498,12 +522,11 @@ function fn_search(default_ac_selected) {
     if (fit_info.type == 'taxon') {
       var text = gen_ac_taxon_text(fit_info);
       var c = get_class(fit_info.page_info);
+    } else if (fit_info.type == 'clear') {
+      var text = fit_info.match_str;
+      var c = 'unobs';
     } else {
-      if ('match_info' in fit_info) {
-        var text = highlight_match(fit_info.match_info, fit_info.text, false);
-      } else {
-        var text = fit_info.text;
-      }
+      var text = highlight_match(fit_info, null, false);
       var c = 'unobs';
     }
     const p = '<p class="nogap">' + text + '</p>'
@@ -678,18 +701,9 @@ function confirm_adv_search(i) {
   if (fit_info.type == 'clear') {
     term_list.splice(term_id, 1);
   } else {
-    const term_info = {
-      search_str: e_search_input.value,
-      ac_selected: i,
-      type: fit_info.type
-    };
-    if (fit_info.type == 'trait') {
-      term_info.trait = fit_info.text;
-    } else if (fit_info.type == 'park') {
-      term_info.park = fit_info.text;
-    } else {
-      term_info.page_info = fit_info.page_info;
-    }
+    var term_info = fit_info;
+    fit_info.search_str = e_search_input.value;
+    fit_info.ac_selected = i;
     term_list.splice(term_id, 1, term_info);
     apply_term();
   }
@@ -713,33 +727,34 @@ function apply_term() {
   term_info.e_term = e_term;
   e_term.className = 'term';
   e_term.addEventListener('click', fn_term_click);
-  if (term_info.type == 'trait') {
-    var c = 'unobs';
-    var full_name = term_info.trait;
-    var prefix = 'with';
-  } else if (term_info.type == 'park') {
-    var c = 'unobs';
-    var full_name = term_info.park;
-    var prefix = 'in';
-  } else {
+  if (term_info.type == 'taxon') {
     const page_info = term_info.page_info;
     var c = get_class(page_info);
-    var full_name = compose_page_name(page_info, 1);
     var prefix = 'within';
+    var full_name = compose_page_name(page_info, 1);
+  } else {
+    var c = 'unobs';
+    var prefix = term_info.prefix;
+    var full_name = term_info.match_str;
+    for (const num of term_info.num_list) {
+      full_name = full_name.replace('%', num);
+    }
   }
   const span = '<span class="' + c + '">' + full_name + '</span>';
   e_term.innerHTML = '<p>' + prefix + ' <b>' + span + '</b></p>';
   term_info.e_term = e_term;
   e_search_container.replaceWith(e_term);
 }
-function check_trait_term(trait, result_set) {
+function match_trait(term_info, result_set, page_to_trip) {
+  const trait = term_info.match_str;
   for (const page_info of result_set) {
     if (!page_info.trait_set.has(trait)) {
       result_set.delete(page_info);
     }
   }
 }
-function check_park_term(park, page_to_trip, result_set) {
+function match_park(term_info, result_set, page_to_trip) {
+  const park = match_info.match_str;
   for (const page_info of result_set) {
     if (!(page_to_trip.has(page_info))) {
       page_to_trip[page_info] = new Set(page_info.trip_set);
@@ -754,6 +769,8 @@ function check_park_term(park, page_to_trip, result_set) {
       result_set.delete(page_info);
     }
   }
+}
+function match_in_y(term_info, result_set, page_to_trip) {
 }
 function add_descendents(term_result_set, page_info) {
   term_result_set.add(page_info);
@@ -781,7 +798,8 @@ function within_taxon(page_info, target_info, in_tgt_map) {
     return false;
   }
 }
-function check_taxon_term(target_info, result_set) {
+function match_taxon(term_info, result_set, page_to_trip) {
+  const target_info = term_info.page_info;
   var in_tgt_map = new Map();
   for (const page_info of result_set) {
     if (!within_taxon(page_info, target_info, in_tgt_map)) {
@@ -806,16 +824,10 @@ function gen_adv_search_results() {
     e_results.innerHTML = '<p>...</p>';
     return;
   }
-  const result_set = new Set(pages);
+  const result_set = new Set(pages.filter((x) => !'sgj'.includes(x.x)));
   const page_to_trip = new Map();
   for (const term_info of term_list) {
-    if (term_info.type == 'trait') {
-      check_trait_term(term_info.trait, result_set);
-    } else if (term_info.type == 'park') {
-      check_park_term(term_info.park, page_to_trip, result_set);
-    } else {
-      check_taxon_term(term_info.page_info, result_set);
-    }
+    term_info.match_fn(term_info, result_set, page_to_trip);
   }
   const checked_set = new Set();
   for (const page_info of result_set) {
