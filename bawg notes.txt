@@ -1746,5 +1746,7 @@ restore ac_selected when focus re-enters the search field
 photos.js doesn't need a page name, only jpg names
 
 replace spaces with hyphens in glossary anchors and their URLs
+  search.js should do it automatically if the anchor is the first term
+  but if the anchor is explicit, leave it alone (esp. for Jepson)
 
 make general glossary consistent: coast range or coastal range (or both)

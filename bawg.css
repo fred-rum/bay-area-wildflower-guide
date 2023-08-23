@@ -448,6 +448,9 @@ p.nogap {
 span.match {
     background-color: #eee;
 }
+span.def-num {
+    color: #aaa;
+}
 #adv-search-header {
     display: flex;
 }

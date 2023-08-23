@@ -202,7 +202,8 @@ function check(search_str, match_str, pri_adj) {
     pri: pri,
     match_str: match_str,
     match_ranges: match_ranges,
-    num_list: num_list
+    num_list: num_list,
+    valid_nums: num_list.length
   }
   return match_info;
 }
@@ -295,8 +296,13 @@ function highlight_match(match_info, default_name, is_sci) {
   }
   h += m.substring(pos);
   if (match_info) {
-    for (const num of match_info.num_list) {
-      h = h.replace('%', num);
+    for (var i = 0; i < match_info.num_list.length; i++) {
+      const num = match_info.num_list[i];
+      if (i < match_info.valid_nums) {
+        h = h.replace('%', num);
+      } else {
+        h = h.replace('%', '<span class="def-num">' + num + '</span>');
+      }
     }
   }
   return h;
@@ -781,7 +787,7 @@ class TextTerm extends Term {
     if (match_info) {
       this.pri = match_info.pri;
       this.match_info = match_info;
-      for (const num of this.def_num_list.slice(match_info.num_list.length)) {
+      for (const num of this.def_num_list.slice(match_info.valid_nums)) {
         match_info.num_list.push(num);
       }
       insert_match(this);

@@ -980,6 +980,9 @@ p.nogap {
 span.match {
     background-color: #eee;
 }
+span.def-num {
+    color: #aaa;
+}
 
 /* See also the <a> link tags for links in the autocompletion box. */
 
