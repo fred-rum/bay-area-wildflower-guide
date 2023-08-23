@@ -104,20 +104,17 @@ function startsUpper(name) {
 function hasUpper(name) {
   return (name.search(/[A-Z]/) >= 0);
 }
-function get_url(page_info, anchor) {
+function get_url(page_info) {
   if (page_info.x == 'j') {
     var url = 'https://ucjeps.berkeley.edu/eflora/glossary.html';
   } else {
     var url = path + page_info.p + '.html';
     url = url.replace(/ /g, '-');
   }
-  if (anchor) {
-    url += '#' + anchor;
-  }
   return encodeURI(url);
 }
 function get_class(page_info) {
-  if (page_info.x == 'f') {
+  if ((page_info.x == 'f') || (page_info.x == 's')) {
     return 'family';
   } else if (page_info.x == 'k') {
     return 'parent';
@@ -212,40 +209,6 @@ function check(search_str, match_str, pri_adj) {
 function better_match(one, two) {
   return (one && (!two || (one.pri > two.pri)));
 }
-function check_list(search_str, match_list, page_info) {
-  var best_match_info = null;
-  var pri_adj = 0.0;
-  for (var i = 0; i < match_list.length; i++) {
-    var name = match_list[i];
-    if (((page_info.x == 'g') || (page_info.x == 'j')) &&
-        !name.endsWith(' glossary')){
-      name = 'glossary: ' + name;
-    }
-    var match_info = check(search_str, name, pri_adj);
-    if (!match_info && name.startsWith('genus ')) {
-      match_info = check(search_str, name.substr(6) + ' spp.');
-    }
-    if (better_match(match_info, best_match_info)) {
-      best_match_info = match_info;
-    }
-    pri_adj = -0.01;
-  }
-  return best_match_info;
-}
-function glossary_check_list(search_str, glossary, name_list, page_info) {
-  var best_match_info = null;
-  var pri_adj = 0.0;
-  for (var i = 0; i < name_list.length; i++) {
-    for (var k = 0; k < glossary.terms.length; k++) {
-      var term_str = glossary.terms[k] + ' (glossary: ' + name_list[i] + ')';
-      var match_info = check(search_str, term_str, pri_adj);
-      if (better_match(match_info, best_match_info)) {
-        best_match_info = match_info;
-      }
-    }
-  }
-  return best_match_info;
-}
 function highlight_match(match_info, default_name, is_sci) {
   var tag_info = [];
   var h = '';
@@ -338,91 +301,14 @@ function highlight_match(match_info, default_name, is_sci) {
   }
   return h;
 }
-function insert_match(fit_info) {
-  if ((ac_list.length < 10) || (fit_info.pri > ac_list[9].pri)) {
+function insert_match(term) {
+  if ((ac_list.length < 10) || (term.pri > ac_list[9].pri)) {
     for (var j = 0; j < ac_list.length; j++) {
-      if (fit_info.pri > ac_list[j].pri) break;
+      if (term.pri > ac_list[j].pri) break;
     }
-    ac_list.splice(j, 0, fit_info);
+    ac_list.splice(j, 0, term);
     if (ac_list.length > 10) {
       ac_list.splice(-1, 1);
-    }
-  }
-}
-function text_search(search_str, prefix, match_str,
-                     match_fn, def_num_list = null) {
-  var match_info = check(search_str, match_str, 0);
-  if (match_info) {
-    var fit_info = match_info;
-    fit_info.type = 'text';
-    fit_info.prefix = prefix;
-    fit_info.match_fn = match_fn;
-    if (def_num_list) {
-      for (var i = fit_info.num_list.length; i < def_num_list.length; i++) {
-        fit_info.num_list.push(def_num_list[i]);
-      }
-    }
-    insert_match(fit_info);
-  }
-}
-function page_search(search_str, page_info) {
-  if (adv_search && ((page_info.x == 's') || (page_info.x == 'g') || (page_info.x == 'j'))) {
-    return;
-  }
-  if ('c' in page_info) {
-    var com_match_info = check_list(search_str, page_info.c, page_info);
-  } else {
-    var com_match_info = null;
-  }
-  if ('s' in page_info) {
-    var sci_match_info = check_list(search_str, page_info.s, page_info);
-  } else {
-    var sci_match_info = null;
-  }
-  if (com_match_info || sci_match_info) {
-    if (better_match(com_match_info, sci_match_info)) {
-      var pri = com_match_info.pri;
-    } else {
-      var pri = sci_match_info.pri;
-    }
-    var fit_info = {
-      pri: pri,
-      type: 'taxon',
-      match_fn: match_taxon,
-      page_info: page_info,
-      com_match_info: com_match_info,
-      sci_match_info: sci_match_info
-    };
-    insert_match(fit_info);
-    return;
-  }
-  if ('glossary' in page_info) {
-    var best_match_info = null;
-    for (var j = 0; j < page_info.glossary.length; j++) {
-      var glossary = page_info.glossary[j];
-      if ('c' in page_info) {
-        var match_info = glossary_check_list(search_str, glossary,
-                                             page_info.c, page_info);
-      } else {
-        var match_info = null;
-      }
-      if (match_info) {
-        if ('anchor' in glossary) {
-          var anchor = glossary.anchor;
-        } else {
-          var anchor = glossary.terms[0];
-        }
-        var fit_info = {
-          pri: match_info.pri,
-          type: 'taxon',
-          match_fn: match_taxon,
-          page_info: page_info,
-          com_match_info: match_info,
-          sci_match_info: null,
-          anchor: anchor
-        };
-        insert_match(fit_info);
-      }
     }
   }
 }
@@ -454,40 +340,181 @@ function compose_page_name(page_info, lines=1) {
   }
   return compose_full_name(com, sci, lines);
 }
-function gen_ac_taxon_text(fit_info) {
-  var page_info = fit_info.page_info;
-  if ('c' in page_info) {
-    const com = page_info.c[0];
-    var com_highlight = highlight_match(fit_info.com_match_info,
-                                        com, false);
-    if ((page_info.x != 'g') && (page_info.x != 'j') &&
-        fit_info.com_match_info &&
-        (fit_info.com_match_info.match_str != com)) {
-      com_highlight = (com +
-                       ' <span class="altname">[' +
-                       com_highlight +
-                       ']</span>');
-    }
-  } else {
-    var com_highlight = null;
+class Term {
+  is_clear = false;
+  constructor() {
   }
-  if ('s' in page_info) {
-    const sci = page_info.s[0];
-    var sci_highlight = highlight_match(fit_info.sci_match_info,
-                                        sci, true);
-    if (fit_info.sci_match_info &&
-        (fit_info.sci_match_info.match_str != sci)) {
-      var sci_ital = highlight_match(null, sci, true);
-      sci_highlight = (sci_ital +
-                       ' <span class="altname">[' +
-                       sci_highlight +
-                       ']</span>');
-    }
-    sci_highlight = sci_highlight.replace(/:/, '&times; ');
-  } else {
-    var sci_highlight = null;
+}
+class PageTerm extends Term {
+  search_str;
+  page_info;
+  pri;
+  com_match_info;
+  sci_match_info;
+  constructor(search_str, page_info) {
+    super();
+    this.search_str = search_str;
+    this.page_info = page_info;
   }
-  return compose_full_name(com_highlight, sci_highlight)
+  check_list(match_list) {
+    const page_info = this.page_info;
+    var best_match_info = null;
+    var pri_adj = 0.0;
+    for (var name of match_list) {
+      var match_info = check(this.search_str, name, pri_adj);
+      if (!match_info && name.startsWith('genus ')) {
+        match_info = check(this.search_str, name.substr(6) + ' spp.', pri_adj);
+      }
+      if (better_match(match_info, best_match_info)) {
+        best_match_info = match_info;
+      }
+      pri_adj = -0.01;
+    }
+    return best_match_info;
+  }
+  search() {
+    const search_str = this.search_str;
+    const page_info = this.page_info;
+    if (adv_search && ((page_info.x == 's') || (page_info.x == 'g') || (page_info.x == 'j'))) {
+      return;
+    }
+    if ('c' in page_info) {
+      var com_match_info = this.check_list(page_info.c);
+    } else {
+      var com_match_info = null;
+    }
+    if ('s' in page_info) {
+      var sci_match_info = this.check_list(page_info.s);
+    } else {
+      var sci_match_info = null;
+    }
+    if (com_match_info || sci_match_info) {
+      if (better_match(com_match_info, sci_match_info)) {
+        this.pri = com_match_info.pri;
+      } else {
+        this.pri = sci_match_info.pri;
+      }
+      this.com_match_info = com_match_info;
+      this.sci_match_info = sci_match_info;
+      insert_match(this);
+    } else if ('glossary' in page_info) {
+      for (const anchor_info of page_info.glossary) {
+        const term = new AnchorTerm(search_str, page_info, anchor_info);
+        term.search();
+      }
+    }
+  }
+  highlight_name(match_info, name, is_sci) {
+    if (!match_info ||
+        (match_info.match_str == name) ||
+        'gj'.includes(this.page_info.x)) {
+      return highlight_match(match_info, name, is_sci);
+    } else {
+      const name_highlight = highlight_match(null, name, is_sci);
+      const match_highlight = highlight_match(match_info, null, is_sci);
+      return (name_highlight +
+              ' <span class="altname">[' + match_highlight + ']</span>');
+    }
+  }
+  get_ac_text() {
+    const page_info = this.page_info;
+    if ('c' in page_info) {
+      var com_highlight = this.highlight_name(this.com_match_info,
+                                              page_info.c[0],
+                                              false);
+    } else {
+      var com_highlight = null;
+    }
+    if ('s' in page_info) {
+      var sci_highlight = this.highlight_name(this.sci_match_info,
+                                              page_info.s[0],
+                                              true);
+    } else {
+      var sci_highlight = null;
+    }
+    return compose_full_name(com_highlight, sci_highlight);
+  }
+  get_class() {
+    return get_class(this.page_info);
+  }
+  get_url() {
+    return get_url(this.page_info);
+  }
+  prefix() {
+    return 'within';
+  }
+  get_search_term_text() {
+    const page_info = this.page_info;
+    return compose_page_name(page_info, 1);
+  }
+  within_taxon(page_info, in_tgt_map) {
+    if (in_tgt_map.has(page_info)) {
+      return in_tgt_map.get(page_info);
+    } else if (page_info == this.page_info) {
+      in_tgt_map.set(page_info, true);
+      return true;
+    } else {
+      for (const parent_info of page_info.parent_set) {
+        if (this.within_taxon(parent_info, in_tgt_map)) {
+          in_tgt_map.set(page_info, true);
+          return true;
+        }
+      }
+      in_tgt_map.set(page_info, false);
+      return false;
+    }
+  }
+  match(result_set, page_to_trip) {
+    const in_tgt_map = new Map();
+    for (const page_info of result_set) {
+      if (!this.within_taxon(page_info, in_tgt_map)) {
+        result_set.delete(this.page_info);
+      }
+    }
+  }
+}
+class AnchorTerm extends PageTerm {
+  anchor_info;
+  match_info;
+  constructor(search_str, page_info, anchor_info) {
+    super(search_str, page_info);
+    this.anchor_info = anchor_info;
+  }
+  check_list() {
+    var best_match_info = null;
+    const pri_adj = 0.0;
+    for (const page_name of this.page_info.c) {
+      for (const glossary_term of this.anchor_info.terms) {
+        const term_str = glossary_term + ' (' + page_name + ')';
+        const match_info = check(this.search_str, term_str, pri_adj);
+        if (better_match(match_info, best_match_info)) {
+          best_match_info = match_info;
+        }
+      }
+    }
+    return best_match_info;
+  }
+  search() {
+    const match_info = this.check_list();
+    if (match_info) {
+      this.pri = match_info.pri;
+      this.match_info = match_info;
+      insert_match(this);
+    }
+  }
+  get_ac_text() {
+    return this.highlight_name(this.match_info, null, false);
+  }
+  get_url() {
+    const page_info = this.page_info;
+    var url = super.get_url();
+    if ('anchor' in this.anchor_info) {
+      url += '#' + this.anchor_info.anchor;
+    } else {
+      url += '#' + this.anchor_info.terms[0];
+    }
+    return encodeURI(url);
+  }
 }
 function fn_search(default_ac_selected) {
   var search_str = e_search_input.value.toUpperCase();
@@ -495,46 +522,36 @@ function fn_search(default_ac_selected) {
   if (/\w/.test(search_str)) {
     if (adv_search) {
       for (const trait of traits) {
-        text_search(search_str, 'with ', trait, match_trait);
+        const term = new TraitTerm(search_str, trait);
+        term.search();
       }
       for (const park of parks) {
-        text_search(search_str, 'in ', park, match_park);
+        const term = new ParkTerm(search_str, park);
+        term.search();
       }
-      text_search(search_str, 'observed ', 'in %', match_in_y, [2023]);
+      const term = new InYearTerm(search_str);
+      term.search();
     }
-    for (var i = 0; i < pages.length; i++) {
-      var page_info = pages[i];
-      page_search(search_str, pages[i]);
+    for (const page_info of pages) {
+      const term = new PageTerm(search_str, page_info);
+      term.search();
     }
   } else if (adv_search && (term_id < term_list.length)) {
-    var fit_info = {
-      pri: 0,
-      type: 'clear',
-      match_str: 'remove this search term'
-    };
-    insert_match(fit_info);
+    new ClearTerm();
   } else {
     hide_ac();
     return;
   }
   for (var i = 0; i < ac_list.length; i++) {
-    var fit_info = ac_list[i];
-    if (fit_info.type == 'taxon') {
-      var text = gen_ac_taxon_text(fit_info);
-      var c = get_class(fit_info.page_info);
-    } else if (fit_info.type == 'clear') {
-      var text = fit_info.match_str;
-      var c = 'unobs';
-    } else {
-      var text = highlight_match(fit_info, null, false);
-      var c = 'unobs';
-    }
+    const term = ac_list[i];
+    const text = term.get_ac_text();
+    const c = term.get_class();
     const p = '<p class="nogap">' + text + '</p>'
     if (adv_search) {
-      fit_info.html = '<span class="autocomplete-entry" class="' + c + '" onclick="return fn_ac_click(' + i + ');">' + p + '</span>';
+      term.html = '<span class="autocomplete-entry" class="' + c + '" onclick="return fn_adv_ac_click(' + i + ');">' + p + '</span>';
     } else {
-      const url = get_url(page_info, fit_info.anchor);
-      fit_info.html = '<a class="enclosed ' + c + '" href="' + url + '" onclick="return fn_ac_click();">' + p + '</a>';
+      const url = term.get_url();
+      term.html = '<a class="enclosed ' + c + '" href="' + url + '" onclick="return fn_ac_click();">' + p + '</a>';
     }
   }
   if (default_ac_selected < ac_list.length) {
@@ -545,21 +562,20 @@ function fn_search(default_ac_selected) {
   generate_ac_html();
   expose_ac();
 }
-function fn_ac_click(i) {
-  if (adv_search) {
-    confirm_adv_search(i);
-    return false;
-  } else {
-    clear_search();
-    return true;
-  }
+function fn_ac_click() {
+  clear_search();
+  return true;
+}
+function fn_adv_ac_click(i) {
+  confirm_adv_search(i);
+  return false;
 }
 function fn_change() {
   fn_search(0);
 }
 function confirm_reg_search(event) {
-  var fit_info = ac_list[ac_selected];
-  var url = get_url(fit_info.page_info, fit_info.anchor);
+  var term = ac_list[ac_selected];
+  var url = term.get_url();
   if (event.shiftKey || event.ctrlKey) {
     window.open(url);
   } else {
@@ -697,14 +713,13 @@ function restore_term() {
   fn_search(term_info.ac_selected);
 }
 function confirm_adv_search(i) {
-  var fit_info = ac_list[i];
-  if (fit_info.type == 'clear') {
+  var term = ac_list[i];
+  term.search_str = e_search_input.value;
+  if (term.is_clear) {
     term_list.splice(term_id, 1);
   } else {
-    var term_info = fit_info;
-    fit_info.search_str = e_search_input.value;
-    fit_info.ac_selected = i;
-    term_list.splice(term_id, 1, term_info);
+    term.ac_selected = i;
+    term_list.splice(term_id, 1, term);
     apply_term();
   }
   clear_search();
@@ -722,89 +737,115 @@ function apply_term() {
   if (term_id == term_list.length) {
     return;
   }
-  const term_info = term_list[term_id];
+  const term = term_list[term_id];
   const e_term = document.createElement('button');
-  term_info.e_term = e_term;
+  term.e_term = e_term;
   e_term.className = 'term';
   e_term.addEventListener('click', fn_term_click);
-  if (term_info.type == 'taxon') {
-    const page_info = term_info.page_info;
-    var c = get_class(page_info);
-    var prefix = 'within';
-    var full_name = compose_page_name(page_info, 1);
-  } else {
-    var c = 'unobs';
-    var prefix = term_info.prefix;
-    var full_name = term_info.match_str;
-    for (const num of term_info.num_list) {
-      full_name = full_name.replace('%', num);
-    }
-  }
-  const span = '<span class="' + c + '">' + full_name + '</span>';
+  const c = term.get_class();
+  const prefix = term.prefix();
+  const term_name = term.get_search_term_text();
+  const span = '<span class="' + c + '">' + term_name + '</span>';
   e_term.innerHTML = '<p>' + prefix + ' <b>' + span + '</b></p>';
-  term_info.e_term = e_term;
+  term.e_term = e_term;
   e_search_container.replaceWith(e_term);
 }
-function match_trait(term_info, result_set, page_to_trip) {
-  const trait = term_info.match_str;
-  for (const page_info of result_set) {
-    if (!page_info.trait_set.has(trait)) {
-      result_set.delete(page_info);
-    }
+class ClearTerm extends Term {
+  pri;
+  is_clear = true;
+  constructor() {
+    super();
+    this.pri = 0.0;
+    insert_match(this);
+  }
+  get_ac_text() {
+    return 'remove this search term';
+  }
+  get_class() {
+    return 'unobs';
   }
 }
-function match_park(term_info, result_set, page_to_trip) {
-  const park = match_info.match_str;
-  for (const page_info of result_set) {
-    if (!(page_to_trip.has(page_info))) {
-      page_to_trip[page_info] = new Set(page_info.trip_set);
+class TextTerm extends Term {
+  search_str;
+  pri;
+  match_info;
+  constructor(search_str, match_str, def_num_list = []) {
+    super();
+    this.search_str = search_str;
+    this.match_str = match_str;
+    this.def_num_list = def_num_list;
+  }
+  search() {
+    const search_str = this.search_str;
+    const match_info = check(this.search_str, this.match_str, 0);
+    if (match_info) {
+      this.pri = match_info.pri;
+      this.match_info = match_info;
+      for (const num of this.def_num_list.slice(match_info.num_list.length)) {
+        match_info.num_list.push(num);
+      }
+      insert_match(this);
     }
-    const trip_result_set = page_to_trip[page_info];
-    for (const trip of trip_result_set) {
-      if (trip[1] != park) {
-        trip_result_set.delete(trip);
+  }
+  get_ac_text() {
+    return highlight_match(this.match_info, null, false);
+  }
+  get_class() {
+    return 'unobs';
+  }
+  get_search_term_text() {
+    var term_name = this.match_info.match_str;
+    for (const num of this.match_info.num_list) {
+      term_name = term_name.replace('%', num);
+    }
+    return term_name;
+  }
+}
+class TraitTerm extends TextTerm {
+  match(result_set, page_to_trip) {
+    const trait = this.match_info.match_str;
+    for (const page_info of result_set) {
+      if (!page_info.trait_set.has(trait)) {
+        result_set.delete(page_info);
       }
     }
-    if (trip_result_set.size == 0){
-      result_set.delete(page_info);
-    }
+  }
+  prefix() {
+    return 'with';
   }
 }
-function match_in_y(term_info, result_set, page_to_trip) {
-}
-function add_descendents(term_result_set, page_info) {
-  term_result_set.add(page_info);
-  if ('d' in page_info) {
-    for (const child_id of page_info.d) {
-      const child_page_info = pages[child_id];
-      add_descendents(term_result_set, child_page_info);
-    }
-  }
-}
-function within_taxon(page_info, target_info, in_tgt_map) {
-  if (in_tgt_map.has(page_info)) {
-    return in_tgt_map.get(page_info);
-  } else if (page_info == target_info) {
-    in_tgt_map.set(page_info, true);
-    return true;
-  } else {
-    for (const parent_info of page_info.parent_set) {
-      if (within_taxon(parent_info, target_info, in_tgt_map)) {
-        in_tgt_map.set(page_info, true);
-        return true;
+class ParkTerm extends TextTerm {
+  match(result_set, page_to_trip) {
+    const park = this.match_info.match_str;
+    for (const page_info of result_set) {
+      if (!(page_to_trip.has(page_info))) {
+        page_to_trip[page_info] = new Set(page_info.trip_set);
+      }
+      const trip_result_set = page_to_trip[page_info];
+      for (const trip of trip_result_set) {
+        if (trip[1] != park) {
+          trip_result_set.delete(trip);
+        }
+      }
+      if (trip_result_set.size == 0){
+        result_set.delete(page_info);
       }
     }
-    in_tgt_map.set(page_info, false);
-    return false;
+  }
+  prefix() {
+    return 'observed in';
   }
 }
-function match_taxon(term_info, result_set, page_to_trip) {
-  const target_info = term_info.page_info;
-  var in_tgt_map = new Map();
-  for (const page_info of result_set) {
-    if (!within_taxon(page_info, target_info, in_tgt_map)) {
-      result_set.delete(page_info);
-    }
+class InYearTerm extends TextTerm {
+  constructor(search_str) {
+    const now = new Date();
+    const year = now.getFullYear();
+    super(search_str, 'in %', [year]);
+  }
+  match(result_set, page_to_trip) {
+  }
+  prefix() {
+    return 'observed';
   }
 }
 function delete_ancestors(page_info, result_set, checked_set) {
@@ -826,8 +867,8 @@ function gen_adv_search_results() {
   }
   const result_set = new Set(pages.filter((x) => !'sgj'.includes(x.x)));
   const page_to_trip = new Map();
-  for (const term_info of term_list) {
-    term_info.match_fn(term_info, result_set, page_to_trip);
+  for (const term of term_list) {
+    term.match(result_set, page_to_trip);
   }
   const checked_set = new Set();
   for (const page_info of result_set) {

@@ -607,7 +607,18 @@ class Glossary:
     # Write search terms for my glossaries to pages.js
     def write_search_terms(self, w):
         if not self.invisible:
-            w.write(f'{{p:"{self.name}",c:["{self.name}","{self.title}"],x:"g",glossary:[\n')
+            # self.title describes the coverage of the glossary,
+            #   e.g. flowering plants.  We prepend 'glossary: ' to this title,
+            #   and it is the preferred name for the glossary when searching.
+            # self.name gives the name of the glossary page.
+            #   if it's a separate glossary page (and not a glossary on a taxon
+            #   page), the page name probably ends with ' glossary', so we
+            #   don't change the name, but this is the less preferred name for
+            #   searching.
+            names = f'"glossary: {self.title}"'
+            if self.name != self.title:
+                names += f',"{self.name}"'
+            w.write(f'{{p:"{self.name}",c:[{names}],x:"g",glossary:[\n')
             for term in self.search_terms:
                 terms_str = '","'.join(term)
                 w.write(f'{{terms:["{terms_str}"]}},\n')
