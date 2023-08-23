@@ -900,7 +900,10 @@ function fn_search(default_ac_selected) {
         term.search();
       }
 
-      const term = new InYearTerm(search_str);
+      var term = new BeforeYMDTerm(search_str);
+      term.search();
+
+      var term = new InYTerm(search_str);
       term.search();
     }
 
@@ -1474,7 +1477,34 @@ class DateTerm extends TripTerm {
   }
 }
 
-class InYearTerm extends DateTerm {
+class BeforeYMDTerm extends DateTerm {
+  constructor(search_str) {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDay()).padStart(2, '0');
+    super(search_str, 'before %-%-% (exclusive)', [year, month, day]);
+  }
+
+  init_matching_trips() {
+    const tgt_year = Number(this.match_info.num_list[0]);
+    const tgt_month = Number(this.match_info.num_list[1]);
+    const tgt_day = Number(this.match_info.num_list[2]);
+
+    const tgt_date = new Date(tgt_year + '-' + tgt_month + '-' + tgt_day);
+    const tgt_time = tgt_date.getTime();
+
+    for (const trip of trips) {
+      const date = trip[2];
+      const time = date.getTime();
+      if (time < tgt_time) {
+        this.matching_trips.add(trip);
+      }
+    }
+  }
+}
+
+class InYTerm extends DateTerm {
   constructor(search_str) {
     const now = new Date();
     const year = now.getFullYear();
