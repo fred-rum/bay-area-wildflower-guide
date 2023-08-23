@@ -333,8 +333,9 @@ function check(search_str, match_str, pri_adj) {
     if (is_num) {
       /* Any number can be used where the string to be matched has a '%' in it.
          Record the number that was in the search_str, but expect the '%' in
-         the match_str. */
-      num_list.push(Number(s_word));
+         the match_str.  The number is kept in string format so that leading
+         zeros are retained. */
+      num_list.push(s_word);
       var s_word = '%';
     }
 
@@ -1185,7 +1186,7 @@ function init_adv_search() {
       }
     }
 
-    /* Compose set of children */
+    /* Compose sets for children and parents */
     if ('d' in page_info) {
       for (const child_id of page_info.d) {
         const child_info = pages[child_id];
@@ -1193,6 +1194,14 @@ function init_adv_search() {
         child_info.parent_set.add(page_info);
       }
     }
+  }
+
+  /* Convert trip dates to Date() objects and add them as entry [2]
+     in each trip. */
+  for (const trip of trips) {
+    const date_str = trip[0];
+    const date = new Date(date_str);
+    trip.push(date);
   }
 }
 
@@ -1412,10 +1421,14 @@ class TraitTerm extends TextTerm {
 }
 
 
-class ParkTerm extends TextTerm {
-  match(result_set, page_to_trip) {
-    const park = this.match_info.match_str;
+class TripTerm extends TextTerm {
+  matching_trips = new Set();
 
+  match(result_set, page_to_trip) {
+    /* First, determine which trips meet the term requirement. */
+    this.init_matching_trips();
+
+    /* Then reduce the trip set of each taxon accordingly. */
     for (const page_info of result_set) {
       /* Initialize page_to_trip for this result page if necessary. */
       if (!(page_to_trip.has(page_info))) {
@@ -1426,13 +1439,24 @@ class ParkTerm extends TextTerm {
       const trip_result_set = page_to_trip[page_info];
 
       for (const trip of trip_result_set) {
-        if (trip[1] != park) {
+        if (!this.matching_trips.has(trip)) {
           trip_result_set.delete(trip);
         }
       }
 
       if (trip_result_set.size == 0){
         result_set.delete(page_info);
+      }
+    }
+  }
+}
+
+
+class ParkTerm extends TripTerm {
+  init_matching_trips() {
+    for (const trip of trips) {
+      if (trip[1] == this.match_info.match_str) {
+        this.matching_trips.add(trip);
       }
     }
   }
@@ -1443,19 +1467,30 @@ class ParkTerm extends TextTerm {
 }
 
 
-class InYearTerm extends TextTerm {
+/* Support structure for date-related terms. */
+class DateTerm extends TripTerm {
+  prefix() {
+    return 'observed';
+  }
+}
+
+class InYearTerm extends DateTerm {
   constructor(search_str) {
     const now = new Date();
     const year = now.getFullYear();
     super(search_str, 'in %', [year]);
   }
 
-  match(result_set, page_to_trip) {
-    /* TBD */
-  }
+  init_matching_trips() {
+    const tgt_year = Number(this.match_info.num_list[0]);
 
-  prefix() {
-    return 'observed';
+    for (const trip of trips) {
+      const date = trip[2];
+      const year = date.getUTCFullYear();
+      if (year == tgt_year) {
+        this.matching_trips.add(trip);
+      }
+    }
   }
 }
 
