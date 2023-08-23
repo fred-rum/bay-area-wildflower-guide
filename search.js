@@ -244,123 +244,142 @@ function check(search_str, match_str, pri_adj = 0, def_num_list = []) {
   }
   return match_info;
 }
-function better_match(one, two) {
-  return (one && (!two || (one.pri > two.pri)));
+class Tag {
+  tag_text;
+  ranges = [];
+  i = 0;
+  half = 0;
+  constructor(tag_open, tag_close) {
+    this.tag_text = [tag_open, tag_close];
+  }
+  add_range(start, end) {
+    this.ranges.push([start, end]);
+  }
+  get_next_pos() {
+    return this.ranges[this.i][this.half];
+  }
+  is_open() {
+    return this.half;
+  }
+  get_open_pos() {
+    return this.ranges[this.i][0];
+  }
+  get_close_pos() {
+    return this.ranges[this.i][1];
+  }
+  open() {
+    return this.tag_text[0];
+  }
+  close() {
+    return this.tag_text[1];
+  }
+  advance() {
+    if (this.half) {
+      this.half = 0;
+      this.i++;
+    } else {
+      this.half = 1;
+    }
+  }
+  is_done() {
+    return (this.i == this.ranges.length);
+  }
 }
 function highlight_match(match_info, default_name, is_sci) {
-  var tag_info = [];
+  var tag_list = [];
   var h = '';
   if (match_info) {
     var m = match_info.match_str;
     var match_ranges = match_info.match_ranges;
-    var ranges = [];
-    for (var i = 0; i < match_ranges.length; i++) {
-      var begin = find_letter_pos(m, match_ranges[i][0]);
-      var end = find_letter_pos(m, match_ranges[i][1] - 1) + 1;
-      ranges.push([begin, end]);
+    var tag = new Tag('<span class="match">', '</span>');
+    for (const range of match_ranges) {
+      var begin = find_letter_pos(m, range[0]);
+      var end = find_letter_pos(m, range[1] - 1) + 1;
+      tag.add_range(begin, end);
     }
-    var highlight_info = {
-      ranges: ranges,
-      i: 0,
-      half: 0,
-      tag: ['<span class="match">', '</span>']
-    };
-    tag_info.push(highlight_info);
-    var ranges = [];
-    for (var i = 0; i < match_info.num_list.length; i++) {
-      m = m.replace(/%#*/, match_info.num_list[i]);
-      if (match_info.num_missing_digits[i]) {
-        const mbegin = match_info.num_start[i];
-        const mend = (match_info.num_start[i] +
-                      match_info.num_missing_digits[i] - 1);
-        const begin = find_letter_pos(m, mbegin);
-        const end = find_letter_pos(m, mend) + 1;
-        ranges.push([begin, end]);
+    tag_list.push(tag);
+    if (match_info.num_list.length) {
+      var tag = new Tag('<span class="de-emph">', '</span>');
+      for (var i = 0; i < match_info.num_list.length; i++) {
+        m = m.replace(/%#*/, match_info.num_list[i]);
+        if (match_info.num_missing_digits[i]) {
+          const mbegin = match_info.num_start[i];
+          const mend = (match_info.num_start[i] +
+                        match_info.num_missing_digits[i] - 1);
+          const begin = find_letter_pos(m, mbegin);
+          const end = find_letter_pos(m, mend) + 1;
+          tag.add_range(begin, end);
+        }
       }
-    }
-    if (ranges.length) {
-      const deemph_info = {
-        ranges: ranges,
-        i: 0,
-        half: 0,
-        tag: ['<span class="de-emph">', '</span>']
-      };
-      tag_info.push(deemph_info);
+      if (!tag.is_done()) {
+        tag_list.push(tag);
+      }
     }
   } else {
     var m = default_name;
   }
   const paren_pos = m.search(/\([^\)]*\)$/);
   if (paren_pos != -1) {
-    const tag = match_info.num_list.length ? 'de-emph' : 'altname';
-    const paren_info = {
-      ranges: [[paren_pos, m.length]],
-      i: 0,
-      half: 0,
-      tag: ['<span class="' + tag + '">', '</span>']
-    };
-    tag_info.push(paren_info);
+    const c = match_info.num_list.length ? 'de-emph' : 'altname';
+    var tag = new Tag('<span class="' + c + '">', '</span>');
+    tag.add_range(paren_pos, m.length);
+    tag_list.push(tag);
   }
   if (is_sci) {
-    var ranges = [[0, m.length]];
+    var tag = new Tag('<i>', '</i>');
+    var range = [0, m.length];
     if (m.endsWith(' spp.')) {
-      ranges[0][1] -= 5;
+      range[1] -= 5;
     }
-    var pos = m.indexOf(' ssp. ');
-    if (pos == -1) {
-      var pos = m.indexOf(' var. ');
-    }
+    var pos = m.search(/ ssp\. | var\. /);
     if (pos != -1) {
-      ranges[0][1] = pos;
-      ranges.push([pos + 6, ranges[0][1]]);
+      range[1] = pos;
+      tag.add_range(range[0], range[1]);
+      range = [pos + 6, m.length];
     }
     if (!startsUpper(m)) {
-      ranges[0][0] = m.indexOf(' ');
+      range[0] = m.indexOf(' ');
     }
-    var italic_info = {
-      ranges: ranges,
-      i: 0,
-      half: 0,
-      tag: ['<i>', '</i>']
-    };
-    tag_info.push(italic_info);
+    tag.add_range(range[0], range[1]);
+    tag_list.push(tag);
   }
   var nest = [];
   var pos = 0;
-  while (tag_info.length) {
-    var info_idx = 0;
-    var info = tag_info[0];
-    for (var j = 1; j < tag_info.length; j++) {
-      var infoj = tag_info[j];
-      if (infoj.ranges[infoj.i][infoj.half] < info.ranges[info.i][info.half]) {
-        info_idx = j;
-        info = infoj;
+  while (tag_list.length) {
+    var tag_idx = 0;
+    var tag = tag_list[0];
+    for (var j = 1; j < tag_list.length; j++) {
+      var tagj = tag_list[j];
+      if ((tagj.get_next_pos() < tag.get_next_pos()) ||
+          ((tagj.get_next_pos() == tag.get_next_pos()) &&
+           (tagj.is_open() ?
+            (!tag.is_open() || (tagj.get_close_pos() < tag.get_close_pos())) :
+            (!tag.is_open() && (tagj.get_close_pos() <= tag.get_close_pos())))))
+      {
+        tag_idx = j;
+        tag = tagj;
       }
     }
-    var next_pos = info.ranges[info.i][info.half];
+    var next_pos = tag.get_next_pos();
     var s = m.substring(pos, next_pos);
     h += s;
     pos = next_pos;
-    if (info.half == 0) {
-      h += info.tag[0];
-      nest.push(info);
+    if (!tag.is_open()) {
+      h += tag.open();
+      nest.push(tag);
     } else {
-      for (i = nest.length-1; nest[i] != info; i--) {
-        h += nest[i].tag[1];
+      for (i = nest.length-1; nest[i] != tag; i--) {
+        h += nest[i].close();
       }
-      h += nest[i].tag[1];
+      h += nest[i].close();
       nest.splice(i, 1);
       for (i = i; i < nest.length; i++) {
-        h += nest[i].tag[0];
+        h += nest[i].open();
       }
     }
-    info.half++;
-    if (info.half == 2) {
-      info.half = 0;
-      info.i++;
-      if (info.i == info.ranges.length) {
-        tag_info.splice(info_idx, 1);
-      }
+    tag.advance();
+    if (tag.is_done()) {
+      tag_list.splice(tag_idx, 1);
     }
   }
   h += m.substring(pos);
@@ -409,6 +428,9 @@ class Term {
   is_clear = false;
   constructor() {
   }
+}
+function better_match(one, two) {
+  return (one && (!two || (one.pri > two.pri)));
 }
 class PageTerm extends Term {
   search_str;

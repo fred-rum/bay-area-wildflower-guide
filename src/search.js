@@ -450,11 +450,62 @@ function check(search_str, match_str, pri_adj = 0, def_num_list = []) {
   return match_info;
 }
 
-/* Check whether match_info one has greater priority than two.
-   Either value can be null, which is considered lowest priority. */
-function better_match(one, two) {
-  return (one && (!two || (one.pri > two.pri)));
+
+/* Track the ranges at which a tag should be applied.
+   Once set up, retrieving each tag open or close advances the
+   state to the next open/close position. */
+class Tag {
+  tag_text;
+  ranges = []; /* each entry is a pair: [tag open pos, tag close pos] */
+  i = 0; /* current index into ranges */
+  half = 0; /* current index into ranges[i] */
+
+  constructor(tag_open, tag_close) {
+    this.tag_text = [tag_open, tag_close];
+  }
+
+  add_range(start, end) {
+    this.ranges.push([start, end]);
+  }
+
+  get_next_pos() {
+    return this.ranges[this.i][this.half];
+  }
+
+  is_open() {
+    return this.half;
+  }
+
+  get_open_pos() {
+    return this.ranges[this.i][0];
+  }
+
+  get_close_pos() {
+    return this.ranges[this.i][1];
+  }
+
+  open() {
+    return this.tag_text[0];
+  }
+
+  close() {
+    return this.tag_text[1];
+  }
+
+  advance() {
+    if (this.half) {
+      this.half = 0;
+      this.i++;
+    } else {
+      this.half = 1;
+    }
+  }
+
+  is_done() {
+    return (this.i == this.ranges.length);
+  }
 }
+
 
 /* Using the match_info constructed in check(), highlight the matched
    ranges within the matched string.  Or if match_info is null (because
@@ -464,7 +515,7 @@ function better_match(one, two) {
    In either case, if it's a scientific name, italicize the Greek/Latin
    words (either the whole string or everything after the first word). */
 function highlight_match(match_info, default_name, is_sci) {
-  var tag_info = [];
+  var tag_list = [];
 
   /* h is the highlighed string to be returned. */
   var h = '';
@@ -473,54 +524,48 @@ function highlight_match(match_info, default_name, is_sci) {
     var m = match_info.match_str;
     var match_ranges = match_info.match_ranges;
 
-    /* Convert match_ranges (which ignores punctuation) into string positions
-       (which includes punctuation). */
-    var ranges = [];
-    for (var i = 0; i < match_ranges.length; i++) {
-      var begin = find_letter_pos(m, match_ranges[i][0]);
+    /* Convert match_ranges (which ignores punctuation) into string ranges
+       (which include punctuation). */
+    var tag = new Tag('<span class="match">', '</span>');
+    for (const range of match_ranges) {
+      var begin = find_letter_pos(m, range[0]);
 
       /* Stop highlighting just after letter N-1.  I.e. don't include
          the punctuation between letter N-1 and letter N, which is the
          first letter outside the match range. */
-      var end = find_letter_pos(m, match_ranges[i][1] - 1) + 1;
+      var end = find_letter_pos(m, range[1] - 1) + 1;
 
-      ranges.push([begin, end]);
+      tag.add_range(begin, end);
     }
+    /* We assume that something matched, or we wouldn't have match info.
+       Therefore, the Tag is always valid. */
+    tag_list.push(tag);
 
-    var highlight_info = {
-      ranges: ranges,
-      i: 0,
-      half: 0,
-      tag: ['<span class="match">', '</span>']
-    };
-    tag_info.push(highlight_info);
 
-    /* Replace % groups in match_str with the parsed/default numbers,
+    /* Replace %# groups in match_str with the parsed/default numbers,
        and de-emphasize digits that were not typed. */
-    var ranges = [];
-    for (var i = 0; i < match_info.num_list.length; i++) {
-      m = m.replace(/%#*/, match_info.num_list[i]);
+    if (match_info.num_list.length) {
+      var tag = new Tag('<span class="de-emph">', '</span>');
+      for (var i = 0; i < match_info.num_list.length; i++) {
+        m = m.replace(/%#*/, match_info.num_list[i]);
 
-      if (match_info.num_missing_digits[i]) {
-        const mbegin = match_info.num_start[i];
-        const mend = (match_info.num_start[i] +
-                      match_info.num_missing_digits[i] - 1);
+        if (match_info.num_missing_digits[i]) {
+          const mbegin = match_info.num_start[i];
+          const mend = (match_info.num_start[i] +
+                        match_info.num_missing_digits[i] - 1);
 
-        const begin = find_letter_pos(m, mbegin);
-        const end = find_letter_pos(m, mend) + 1;
+          const begin = find_letter_pos(m, mbegin);
+          const end = find_letter_pos(m, mend) + 1;
 
-        ranges.push([begin, end]);
+          tag.add_range(begin, end);
+        }
       }
-    }
-
-    if (ranges.length) {
-      const deemph_info = {
-        ranges: ranges,
-        i: 0,
-        half: 0,
-        tag: ['<span class="de-emph">', '</span>']
-      };
-      tag_info.push(deemph_info);
+      /* If none of the numbers are missing digits, there are no
+         de-emphasized ranges.  If we pushed this tag to the tag_list,
+         the code would break. */
+      if (!tag.is_done()) {
+        tag_list.push(tag);
+      }
     }
   } else {
     /* Rather than writing special code to handle italicization of the
@@ -534,49 +579,41 @@ function highlight_match(match_info, default_name, is_sci) {
      inclusive/exclusive text after a date. */
   const paren_pos = m.search(/\([^\)]*\)$/);
   if (paren_pos != -1) {
-    const tag = match_info.num_list.length ? 'de-emph' : 'altname';
-    const paren_info = {
-      ranges: [[paren_pos, m.length]],
-      i: 0,
-      half: 0,
-      tag: ['<span class="' + tag + '">', '</span>']
-    };
-    tag_info.push(paren_info);
+    const c = match_info.num_list.length ? 'de-emph' : 'altname';
+    var tag = new Tag('<span class="' + c + '">', '</span>');
+    tag.add_range(paren_pos, m.length);
+    tag_list.push(tag);
   }
 
   if (is_sci) {
+    var tag = new Tag('<i>', '</i>');
+
     /* By default, italicize the entire scientific name. */
-    var ranges = [[0, m.length]];
+    var range = [0, m.length];
 
     /* Exclude spp. from italicization. */
     if (m.endsWith(' spp.')) {
-      ranges[0][1] -= 5;
+      range[1] -= 5;
     }
 
     /* Exclude ssp. or var. from italicization. */
-    var pos = m.indexOf(' ssp. ');
-    if (pos == -1) {
-      var pos = m.indexOf(' var. ');
-    }
+    var pos = m.search(/ ssp\. | var\. /);
     if (pos != -1) {
       /* End the first italics range before the ssp./var.,
          and add a new range to cover everything after it. */
-      ranges[0][1] = pos;
-      ranges.push([pos + 6, ranges[0][1]]);
+      range[1] = pos;
+      tag.add_range(range[0], range[1]);
+      range = [pos + 6, m.length];
     }
 
     /* Don't italicize the rank. */
     if (!startsUpper(m)) {
-      ranges[0][0] = m.indexOf(' ');
+      range[0] = m.indexOf(' ');
     }
 
-    var italic_info = {
-      ranges: ranges,
-      i: 0,
-      half: 0,
-      tag: ['<i>', '</i>']
-    };
-    tag_info.push(italic_info);
+    /* Since this is a scientific name, there's always something italicized. */
+    tag.add_range(range[0], range[1]);
+    tag_list.push(tag);
   }
 
   /* Keep track of tag nesting, because interleaved tags fail in some browsers.
@@ -584,18 +621,34 @@ function highlight_match(match_info, default_name, is_sci) {
   var nest = [];
 
   var pos = 0;
-  while (tag_info.length) {
-    /* Find the next tag change (open or close) */
-    var info_idx = 0;
-    var info = tag_info[0];
-    for (var j = 1; j < tag_info.length; j++) {
-      var infoj = tag_info[j];
-      if (infoj.ranges[infoj.i][infoj.half] < info.ranges[info.i][info.half]) {
-        info_idx = j;
-        info = infoj;
+  while (tag_list.length) {
+    /* Find the next tag change (open or close). */
+    var tag_idx = 0;
+    var tag = tag_list[0];
+    for (var j = 1; j < tag_list.length; j++) {
+      var tagj = tag_list[j];
+      /* If multiple tags change at the same position, prefer to close a tag.
+
+         If multiple tags open at once, prefer the one that closes earlier.
+         If they both open and close at the same time, prefer the first one
+         in tag_list order.
+
+         If multiple tags close at once, prefer the that opened later
+         (because it should have the least nesting).  If they both open
+         and close at the same time, prefer the last one in tag_list order
+         (because it should be nested inside the earlier one). */
+      if ((tagj.get_next_pos() < tag.get_next_pos()) ||
+          ((tagj.get_next_pos() == tag.get_next_pos()) &&
+           (tagj.is_open() ?
+            (!tag.is_open() || (tagj.get_close_pos() < tag.get_close_pos())) :
+            (!tag.is_open() && (tagj.get_close_pos() <= tag.get_close_pos())))))
+      {
+        tag_idx = j;
+        tag = tagj;
       }
     }
-    var next_pos = info.ranges[info.i][info.half];
+
+    var next_pos = tag.get_next_pos();
 
     /* append the text (if any) from the position of the last tag change */
     var s = m.substring(pos, next_pos);
@@ -604,35 +657,31 @@ function highlight_match(match_info, default_name, is_sci) {
     /* and update the position of the most recent tag change */
     pos = next_pos;
 
-    if (info.half == 0) {
-      h += info.tag[0]; // open tag
-      nest.push(info); // record its nesting level
+    if (!tag.is_open()) {
+      h += tag.open(); // open tag
+      nest.push(tag); // record its nesting level
     } else {
       /* close the tags that are nested within the tag we want to close */
-      for (i = nest.length-1; nest[i] != info; i--) {
-        h += nest[i].tag[1];
+      for (i = nest.length-1; nest[i] != tag; i--) {
+        h += nest[i].close();
       }
 
       /* close the tag that we wanted to close */
-      h += nest[i].tag[1];
+      h += nest[i].close();
 
       /* remove the closed tag from the nesting list */
       nest.splice(i, 1);
 
       /* re-open the previously nested tags */
       for (i = i; i < nest.length; i++) {
-        h += nest[i].tag[0];
+        h += nest[i].open();
       }
     }
 
-    info.half++;
-    if (info.half == 2) {
-      info.half = 0;
-      info.i++;
-      if (info.i == info.ranges.length) {
-        /* remove entry from tag_info */
-        tag_info.splice(info_idx, 1);
-      }
+    tag.advance();
+    if (tag.is_done()) {
+      /* remove entry from tag_list */
+      tag_list.splice(tag_idx, 1);
     }
   }
 
@@ -714,6 +763,12 @@ class Term {
   constructor() {
     /* empty stub */
   }
+}
+
+/* Check whether match_info one has greater priority than two.
+   Either value can be null, which is considered lowest priority. */
+function better_match(one, two) {
+  return (one && (!two || (one.pri > two.pri)));
 }
 
 /* Handle a search term associated with an HTML page.  This is usually a taxon,
