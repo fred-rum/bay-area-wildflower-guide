@@ -180,9 +180,11 @@ function compress(name) {
 }
 
 /* Find the position of the Nth letter in string 'str'.
-   I.e. search for N+1 letters, then back up one. */
+   I.e. search for N+1 letters, then back up one.
+   We treat digits *and* %# as letters since we may be
+   in the middle of convert one form to the other. */
 function find_letter_pos(str, n) {
-  var regex = /[a-zA-Z%]/g;
+  var regex = /[a-zA-Z0-9%#]/g;
 
   for (var i = 0; i <= n; i++) {
     /* We use test() to advance regex.lastIndex.
@@ -192,7 +194,13 @@ function find_letter_pos(str, n) {
     regex.test(str);
   }
 
-  return regex.lastIndex - 1;
+  if (regex.lastIndex == 0) {
+    /* There aren't N+1 letters.  Presumably there are N letters, so the
+       notional next letter position is the end of the string. */
+    return str.length;
+  } else {
+    return regex.lastIndex - 1;
+  }
 }
 
 function index_of_letter(str, letter_num) {
@@ -268,17 +276,17 @@ function generate_ac_html() {
    search_str, it can skip any number of letters in match_str.  If there is
    a match, return an object with information about the match including its
    priority (higher is better).  If there is no match, return null. */
-function check(search_str, match_str, pri_adj) {
+function check(search_str, match_str, pri_adj = 0, def_num_list = []) {
   /* search_str has already been converted to upper case, and we keep its
      punctuation intact.  I just copy it to a shorter variable name here for
      convenience. */
   const s = search_str;
 
   /* m is the string we're trying to match against, converted to uppercase
-     and with punctuation removed (except '%', which represents any sequence
-     of digits). */
+     and with punctuation removed (except '%' and '#', which represents a
+     number group). */
   const upper_str = match_str.toUpperCase()
-  const m = upper_str.replace(/[^A-Z%]/g, '');
+  const m = upper_str.replace(/[^A-Z%#]/g, '');
 
   /* If match_str is of the format "<rank> <Name>", get the starting index of
      Name within m.  This assumes that <rank> is all normal letters, so the
@@ -293,6 +301,27 @@ function check(search_str, match_str, pri_adj) {
     name_pos = 0;
   }
 
+  /* Find the position and length of each % group in m.
+     These are where we expect to find numbers.
+     Note that num_missing_digits represents the number of digits that
+     we haven't found.  If a full or partial match is found for a
+     number group, num_missing_digits will be updated. */
+  const num_list = [];
+  const num_start = [];
+  const num_missing_digits = [];
+  const re = /%#*/g;
+  var idx = 0;
+  while (true) {
+    /* Find the next % group in m. */
+    const match = re.exec(m);
+    if (!match) break;
+
+    num_list.push(def_num_list[idx]);
+    num_start.push(match.index);
+    num_missing_digits.push(match[0].length);
+    idx++;
+  }
+
   /* match_ranges consists of [start, end] pairs that indicate regions in m for
      which a match was made */
   var match_ranges = [];
@@ -300,11 +329,6 @@ function check(search_str, match_str, pri_adj) {
   /* i and j are the current position indexes into s and m, respectively */
   var i = 0;
   var j = 0;
-
-  /* If numbers are supported, any number value is allowed.
-     (We don't do range checking in this function.)
-     Record the numbers supplied in search_str. */
-  var num_list = [];
 
   while (true) {
     /* find the first letter character or digit in s */
@@ -331,19 +355,53 @@ function check(search_str, match_str, pri_adj) {
     var s_word = s.substring(start_i, i);
 
     if (is_num) {
-      /* Any number can be used where the string to be matched has a '%' in it.
-         Record the number that was in the search_str, but expect the '%' in
-         the match_str.  The number is kept in string format so that leading
-         zeros are retained. */
-      num_list.push(s_word);
-      var s_word = '%';
+      /* Figure out which number group is being matched. */
+      var idx = 0;
+      while (true) {
+        if (idx == num_start.length) {
+          return null; /* no match found */
+        }
+
+        if ((num_start[idx] >= j) &&
+            (num_missing_digits[idx] >= s_word.length)) {
+          /* the next group with the right number of digits has been found */
+          break;
+        }
+
+        /* keep looking */
+        idx++;
+      }
+
+      /* start the match at the % that makes the number right aligned */
+      j = num_start[idx] + num_missing_digits[idx];
+      start_j = j - s_word.length;
+
+      /* adjust the number of missing digits */
+      num_missing_digits[idx] -= s_word.length;
+
+      /* The number is expected to be a certain length.  Otherwise it is
+         left-filled using information from the next number in def_num_ilst:
+           for a four-digit number (year), the number is padded with the
+             digits from the default year.
+           for a two-digit number (month or day), the number is padded with
+             a 0.
+      */
+      const def_num = def_num_list[idx];
+      if (def_num.length == 4) {
+        var num = def_num.slice(0, -s_word.length) + s_word;
+      } else {
+        var num = s_word.padStart(2, '0');
+      }
+      num_list[idx] = num;
+    } else {
+      /* look for the search word in match_str */
+      var start_j = m.indexOf(s_word, j);
+      if (start_j == -1) {
+        return null; // no match
+      }
+      j = start_j + s_word.length;
     }
 
-    var start_j = m.indexOf(s_word, j);
-    if (start_j == -1) {
-      return null; // no match
-    }
-    j = start_j + s_word.length;
     if (match_ranges.length &&
         (match_ranges[match_ranges.length-1][1] == start_j)) {
       /* The next match follows directly from the previous match without
@@ -385,7 +443,8 @@ function check(search_str, match_str, pri_adj) {
     match_str: match_str,
     match_ranges: match_ranges,
     num_list: num_list,
-    valid_nums: num_list.length
+    num_start: num_start,
+    num_missing_digits: num_missing_digits
   }
 
   return match_info;
@@ -435,6 +494,34 @@ function highlight_match(match_info, default_name, is_sci) {
       tag: ['<span class="match">', '</span>']
     };
     tag_info.push(highlight_info);
+
+    /* Replace % groups in match_str with the parsed/default numbers,
+       and de-emphasize digits that were not typed. */
+    var ranges = [];
+    for (var i = 0; i < match_info.num_list.length; i++) {
+      m = m.replace(/%#*/, match_info.num_list[i]);
+
+      if (match_info.num_missing_digits[i]) {
+        const mbegin = match_info.num_start[i];
+        const mend = (match_info.num_start[i] +
+                      match_info.num_missing_digits[i] - 1);
+
+        const begin = find_letter_pos(m, mbegin);
+        const end = find_letter_pos(m, mend) + 1;
+
+        ranges.push([begin, end]);
+      }
+    }
+
+    if (ranges.length) {
+      const deemph_info = {
+        ranges: ranges,
+        i: 0,
+        half: 0,
+        tag: ['<span class="de-emph">', '</span>']
+      };
+      tag_info.push(deemph_info);
+    }
   } else {
     /* Rather than writing special code to handle italicization of the
      * scientific name for this default case, we can simply fall through the
@@ -442,21 +529,43 @@ function highlight_match(match_info, default_name, is_sci) {
     var m = default_name;
   }
 
+  /* De-emphasize a parenthesized term at the end of the match string.
+     The amount of de-emphasis is different for a glossary vs. the
+     inclusive/exclusive text after a date. */
+  const paren_pos = m.search(/\([^\)]*\)$/);
+  if (paren_pos != -1) {
+    const tag = match_info.num_list.length ? 'de-emph' : 'altname';
+    const paren_info = {
+      ranges: [[paren_pos, m.length]],
+      i: 0,
+      half: 0,
+      tag: ['<span class="' + tag + '">', '</span>']
+    };
+    tag_info.push(paren_info);
+  }
+
   if (is_sci) {
+    /* By default, italicize the entire scientific name. */
     var ranges = [[0, m.length]];
 
+    /* Exclude spp. from italicization. */
     if (m.endsWith(' spp.')) {
       ranges[0][1] -= 5;
     }
+
+    /* Exclude ssp. or var. from italicization. */
     var pos = m.indexOf(' ssp. ');
     if (pos == -1) {
       var pos = m.indexOf(' var. ');
     }
     if (pos != -1) {
-      ranges.push([pos + 6, ranges[0][1]]);
+      /* End the first italics range before the ssp./var.,
+         and add a new range to cover everything after it. */
       ranges[0][1] = pos;
+      ranges.push([pos + 6, ranges[0][1]]);
     }
 
+    /* Don't italicize the rank. */
     if (!startsUpper(m)) {
       ranges[0][0] = m.indexOf(' ');
     }
@@ -476,6 +585,7 @@ function highlight_match(match_info, default_name, is_sci) {
 
   var pos = 0;
   while (tag_info.length) {
+    /* Find the next tag change (open or close) */
     var info_idx = 0;
     var info = tag_info[0];
     for (var j = 1; j < tag_info.length; j++) {
@@ -486,8 +596,12 @@ function highlight_match(match_info, default_name, is_sci) {
       }
     }
     var next_pos = info.ranges[info.i][info.half];
+
+    /* append the text (if any) from the position of the last tag change */
     var s = m.substring(pos, next_pos);
     h += s;
+
+    /* and update the position of the most recent tag change */
     pos = next_pos;
 
     if (info.half == 0) {
@@ -522,18 +636,8 @@ function highlight_match(match_info, default_name, is_sci) {
     }
   }
 
+  /* append the remaining part of the string with no tags */
   h += m.substring(pos);
-
-  if (match_info) {
-    for (var i = 0; i < match_info.num_list.length; i++) {
-      const num = match_info.num_list[i];
-      if (i < match_info.valid_nums) {
-        h = h.replace('%', num);
-      } else {
-        h = h.replace('%', '<span class="def-num">' + num + '</span>');
-      }
-    }
-  }
 
   return h;
 }
@@ -1223,7 +1327,6 @@ function fn_term_click(event) {
     if (term_list[i].e_term == event.currentTarget) break;
   }
   term_id = i;
-  console.info(term_id);
   var term_info = term_list[term_id];
   term_info.e_term.replaceWith(e_search_container);
 
@@ -1371,7 +1474,8 @@ class TextTerm extends Term {
 
   search() {
     const search_str = this.search_str;
-    const match_info = check(this.search_str, this.match_str, 0);
+    const match_info = check(this.search_str, this.match_str, 0,
+                             this.def_num_list);
 
     if (match_info) {
       this.pri = match_info.pri;
@@ -1400,7 +1504,7 @@ class TextTerm extends Term {
   get_search_term_text() {
     var term_name = this.match_info.match_str;
     for (const num of this.match_info.num_list) {
-      term_name = term_name.replace('%', num);
+      term_name = term_name.replace(/%#*/, num);
     }
     return term_name;
   }
@@ -1472,18 +1576,36 @@ class ParkTerm extends TripTerm {
 
 /* Support structure for date-related terms. */
 class DateTerm extends TripTerm {
+  compare_dates(op, date1, date2) {
+     if (op == '<') {
+       return date1 < date2;
+     } else if (op == '<=') {
+       return date1 <= date2;
+     } else if (op == '>=') {
+       return date1 >= date2;
+     } else if (op == '>') {
+       return date1 > date2;
+     } else {
+       return date1 == date2;
+     }
+  }
+
   prefix() {
     return 'observed';
   }
 }
 
+function digits(num, len) {
+  return String(num).padStart(len, '0');
+}
+
 class BeforeYMDTerm extends DateTerm {
   constructor(search_str) {
     const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDay()).padStart(2, '0');
-    super(search_str, 'before %-%-% (exclusive)', [year, month, day]);
+    const year = digits(now.getFullYear(), 4);
+    const month = digits(now.getMonth() + 1, 2);
+    const day = digits(now.getDay(), 2);
+    super(search_str, 'before %###-%#-%# (exclusive)', [year, month, day]);
   }
 
   init_matching_trips() {
@@ -1507,8 +1629,8 @@ class BeforeYMDTerm extends DateTerm {
 class InYTerm extends DateTerm {
   constructor(search_str) {
     const now = new Date();
-    const year = now.getFullYear();
-    super(search_str, 'in %', [year]);
+    const year = digits(now.getFullYear(), 4);
+    super(search_str, 'in %###', [year]);
   }
 
   init_matching_trips() {

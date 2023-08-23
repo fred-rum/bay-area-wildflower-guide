@@ -83,11 +83,15 @@ function compress(name) {
   return name.toUpperCase().replace(/\W/g, '');
 }
 function find_letter_pos(str, n) {
-  var regex = /[a-zA-Z%]/g;
+  var regex = /[a-zA-Z0-9%#]/g;
   for (var i = 0; i <= n; i++) {
     regex.test(str);
   }
-  return regex.lastIndex - 1;
+  if (regex.lastIndex == 0) {
+    return str.length;
+  } else {
+    return regex.lastIndex - 1;
+  }
 }
 function index_of_letter(str, letter_num) {
   var letter_cnt = 0;
@@ -143,20 +147,32 @@ function generate_ac_html() {
     e_autocomplete_box.innerHTML = 'No matches found.';
   }
 }
-function check(search_str, match_str, pri_adj) {
+function check(search_str, match_str, pri_adj = 0, def_num_list = []) {
   const s = search_str;
   const upper_str = match_str.toUpperCase()
-  const m = upper_str.replace(/[^A-Z%]/g, '');
+  const m = upper_str.replace(/[^A-Z%#]/g, '');
   var name_pos = match_str.indexOf(' ');
   if ((name_pos < 0) ||
       (match_str.substr(0, 1) == upper_str.substr(0, 1)) ||
       (match_str.substr(name_pos+1, 1) != upper_str.substr(name_pos+1, 1))) {
     name_pos = 0;
   }
+  const num_list = [];
+  const num_start = [];
+  const num_missing_digits = [];
+  const re = /%#*/g;
+  var idx = 0;
+  while (true) {
+    const match = re.exec(m);
+    if (!match) break;
+    num_list.push(def_num_list[idx]);
+    num_start.push(match.index);
+    num_missing_digits.push(match[0].length);
+    idx++;
+  }
   var match_ranges = [];
   var i = 0;
   var j = 0;
-  var num_list = [];
   while (true) {
     while (/[^A-Z0-9]/.test(s.substr(i, 1)) && (i < s.length)) {
       i++;
@@ -176,14 +192,34 @@ function check(search_str, match_str, pri_adj) {
     }
     var s_word = s.substring(start_i, i);
     if (is_num) {
-      num_list.push(Number(s_word));
-      var s_word = '%';
+      var idx = 0;
+      while (true) {
+        if (idx == num_start.length) {
+          return null;
+        }
+        if ((num_start[idx] >= j) &&
+            (num_missing_digits[idx] >= s_word.length)) {
+          break;
+        }
+        idx++;
+      }
+      j = num_start[idx] + num_missing_digits[idx];
+      start_j = j - s_word.length;
+      num_missing_digits[idx] -= s_word.length;
+      const def_num = def_num_list[idx];
+      if (def_num.length == 4) {
+        var num = def_num.slice(0, -s_word.length) + s_word;
+      } else {
+        var num = s_word.padStart(2, '0');
+      }
+      num_list[idx] = num;
+    } else {
+      var start_j = m.indexOf(s_word, j);
+      if (start_j == -1) {
+        return null;
+      }
+      j = start_j + s_word.length;
     }
-    var start_j = m.indexOf(s_word, j);
-    if (start_j == -1) {
-      return null;
-    }
-    j = start_j + s_word.length;
     if (match_ranges.length &&
         (match_ranges[match_ranges.length-1][1] == start_j)) {
       match_ranges[match_ranges.length-1][1] = j;
@@ -203,7 +239,8 @@ function check(search_str, match_str, pri_adj) {
     match_str: match_str,
     match_ranges: match_ranges,
     num_list: num_list,
-    valid_nums: num_list.length
+    num_start: num_start,
+    num_missing_digits: num_missing_digits
   }
   return match_info;
 }
@@ -229,8 +266,40 @@ function highlight_match(match_info, default_name, is_sci) {
       tag: ['<span class="match">', '</span>']
     };
     tag_info.push(highlight_info);
+    var ranges = [];
+    for (var i = 0; i < match_info.num_list.length; i++) {
+      m = m.replace(/%#*/, match_info.num_list[i]);
+      if (match_info.num_missing_digits[i]) {
+        const mbegin = match_info.num_start[i];
+        const mend = (match_info.num_start[i] +
+                      match_info.num_missing_digits[i] - 1);
+        const begin = find_letter_pos(m, mbegin);
+        const end = find_letter_pos(m, mend) + 1;
+        ranges.push([begin, end]);
+      }
+    }
+    if (ranges.length) {
+      const deemph_info = {
+        ranges: ranges,
+        i: 0,
+        half: 0,
+        tag: ['<span class="de-emph">', '</span>']
+      };
+      tag_info.push(deemph_info);
+    }
   } else {
     var m = default_name;
+  }
+  const paren_pos = m.search(/\([^\)]*\)$/);
+  if (paren_pos != -1) {
+    const tag = match_info.num_list.length ? 'de-emph' : 'altname';
+    const paren_info = {
+      ranges: [[paren_pos, m.length]],
+      i: 0,
+      half: 0,
+      tag: ['<span class="' + tag + '">', '</span>']
+    };
+    tag_info.push(paren_info);
   }
   if (is_sci) {
     var ranges = [[0, m.length]];
@@ -242,8 +311,8 @@ function highlight_match(match_info, default_name, is_sci) {
       var pos = m.indexOf(' var. ');
     }
     if (pos != -1) {
-      ranges.push([pos + 6, ranges[0][1]]);
       ranges[0][1] = pos;
+      ranges.push([pos + 6, ranges[0][1]]);
     }
     if (!startsUpper(m)) {
       ranges[0][0] = m.indexOf(' ');
@@ -295,16 +364,6 @@ function highlight_match(match_info, default_name, is_sci) {
     }
   }
   h += m.substring(pos);
-  if (match_info) {
-    for (var i = 0; i < match_info.num_list.length; i++) {
-      const num = match_info.num_list[i];
-      if (i < match_info.valid_nums) {
-        h = h.replace('%', num);
-      } else {
-        h = h.replace('%', '<span class="def-num">' + num + '</span>');
-      }
-    }
-  }
   return h;
 }
 function insert_match(term) {
@@ -535,7 +594,9 @@ function fn_search(default_ac_selected) {
         const term = new ParkTerm(search_str, park);
         term.search();
       }
-      const term = new InYearTerm(search_str);
+      var term = new BeforeYMDTerm(search_str);
+      term.search();
+      var term = new InYTerm(search_str);
       term.search();
     }
     for (const page_info of pages) {
@@ -699,6 +760,11 @@ function init_adv_search() {
       }
     }
   }
+  for (const trip of trips) {
+    const date_str = trip[0];
+    const date = new Date(date_str);
+    trip.push(date);
+  }
 }
 function fn_term_click(event) {
   apply_term();
@@ -783,7 +849,8 @@ class TextTerm extends Term {
   }
   search() {
     const search_str = this.search_str;
-    const match_info = check(this.search_str, this.match_str, 0);
+    const match_info = check(this.search_str, this.match_str, 0,
+                             this.def_num_list);
     if (match_info) {
       this.pri = match_info.pri;
       this.match_info = match_info;
@@ -802,7 +869,7 @@ class TextTerm extends Term {
   get_search_term_text() {
     var term_name = this.match_info.match_str;
     for (const num of this.match_info.num_list) {
-      term_name = term_name.replace('%', num);
+      term_name = term_name.replace(/%#*/, num);
     }
     return term_name;
   }
@@ -820,16 +887,17 @@ class TraitTerm extends TextTerm {
     return 'with';
   }
 }
-class ParkTerm extends TextTerm {
+class TripTerm extends TextTerm {
+  matching_trips = new Set();
   match(result_set, page_to_trip) {
-    const park = this.match_info.match_str;
+    this.init_matching_trips();
     for (const page_info of result_set) {
       if (!(page_to_trip.has(page_info))) {
         page_to_trip[page_info] = new Set(page_info.trip_set);
       }
       const trip_result_set = page_to_trip[page_info];
       for (const trip of trip_result_set) {
-        if (trip[1] != park) {
+        if (!this.matching_trips.has(trip)) {
           trip_result_set.delete(trip);
         }
       }
@@ -838,20 +906,78 @@ class ParkTerm extends TextTerm {
       }
     }
   }
+}
+class ParkTerm extends TripTerm {
+  init_matching_trips() {
+    for (const trip of trips) {
+      if (trip[1] == this.match_info.match_str) {
+        this.matching_trips.add(trip);
+      }
+    }
+  }
   prefix() {
     return 'observed in';
   }
 }
-class InYearTerm extends TextTerm {
-  constructor(search_str) {
-    const now = new Date();
-    const year = now.getFullYear();
-    super(search_str, 'in %', [year]);
-  }
-  match(result_set, page_to_trip) {
+class DateTerm extends TripTerm {
+  compare_dates(op, date1, date2) {
+     if (op == '<') {
+       return date1 < date2;
+     } else if (op == '<=') {
+       return date1 <= date2;
+     } else if (op == '>=') {
+       return date1 >= date2;
+     } else if (op == '>') {
+       return date1 > date2;
+     } else {
+       return date1 == date2;
+     }
   }
   prefix() {
     return 'observed';
+  }
+}
+function digits(num, len) {
+  return String(num).padStart(len, '0');
+}
+class BeforeYMDTerm extends DateTerm {
+  constructor(search_str) {
+    const now = new Date();
+    const year = digits(now.getFullYear(), 4);
+    const month = digits(now.getMonth() + 1, 2);
+    const day = digits(now.getDay(), 2);
+    super(search_str, 'before %###-%#-%# (exclusive)', [year, month, day]);
+  }
+  init_matching_trips() {
+    const tgt_year = Number(this.match_info.num_list[0]);
+    const tgt_month = Number(this.match_info.num_list[1]);
+    const tgt_day = Number(this.match_info.num_list[2]);
+    const tgt_date = new Date(tgt_year + '-' + tgt_month + '-' + tgt_day);
+    const tgt_time = tgt_date.getTime();
+    for (const trip of trips) {
+      const date = trip[2];
+      const time = date.getTime();
+      if (time < tgt_time) {
+        this.matching_trips.add(trip);
+      }
+    }
+  }
+}
+class InYTerm extends DateTerm {
+  constructor(search_str) {
+    const now = new Date();
+    const year = digits(now.getFullYear(), 4);
+    super(search_str, 'in %###', [year]);
+  }
+  init_matching_trips() {
+    const tgt_year = Number(this.match_info.num_list[0]);
+    for (const trip of trips) {
+      const date = trip[2];
+      const year = date.getUTCFullYear();
+      if (year == tgt_year) {
+        this.matching_trips.add(trip);
+      }
+    }
   }
 }
 function delete_ancestors(page_info, result_set, checked_set) {

@@ -448,8 +448,8 @@ p.nogap {
 span.match {
     background-color: #eee;
 }
-span.def-num {
-    color: #aaa;
+span.de-emph {
+    opacity: 0.25;
 }
 #adv-search-header {
     display: flex;
