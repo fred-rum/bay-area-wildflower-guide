@@ -380,16 +380,24 @@ function check(search_str, match_str, pri_adj = 0, def_num_list = []) {
       num_missing_digits[idx] -= s_word.length;
 
       /* The number is expected to be a certain length.  Otherwise it is
-         left-filled using information from the next number in def_num_ilst:
-           for a four-digit number (year), the number is padded with the
-             digits from the default year.
-           for a two-digit number (month or day), the number is padded with
-             a 0.
-      */
+         left-filled using information from the next number in def_num_list. */
       const def_num = def_num_list[idx];
       if (def_num.length == 4) {
-        var num = def_num.slice(0, -s_word.length) + s_word;
+        /* For a four-digit number (year), the number is padded with the
+           digits from the default year. if that causes the year to be
+           after the default year, decrement the padded value (e.g. switch
+           to the 1900's). */
+        const digits_replaced = def_num.slice(-s_word.length);
+        var digits_padding = def_num.slice(0, -s_word.length);
+        const padding_len = digits_padding.length;
+        if (padding_len && (s_word > digits_replaced)) {
+          digits_padding = String(Number(digits_padding) - 1);
+          digits_padding = digits_padding.padStart(padding_len, '0');
+        }
+        var num = digits_padding + s_word;
       } else {
+        /* For a two-digit number (month or day), the number is padded with
+           a 0. */
         var num = s_word.padStart(2, '0');
       }
       num_list[idx] = num;
