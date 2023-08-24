@@ -208,7 +208,14 @@ function check(search_str, match_str, pri_adj = 0, def_num_list = []) {
       num_missing_digits[idx] -= s_word.length;
       const def_num = def_num_list[idx];
       if (def_num.length == 4) {
-        var num = def_num.slice(0, -s_word.length) + s_word;
+        const digits_replaced = def_num.slice(-s_word.length);
+        var digits_padding = def_num.slice(0, -s_word.length);
+        const padding_len = digits_padding.length;
+        if (padding_len && (s_word > digits_replaced)) {
+          digits_padding = String(Number(digits_padding) - 1);
+          digits_padding = digits_padding.padStart(padding_len, '0');
+        }
+        var num = digits_padding + s_word;
       } else {
         var num = s_word.padStart(2, '0');
       }
@@ -971,15 +978,12 @@ class BeforeYMDTerm extends DateTerm {
     super(search_str, 'before %###-%#-%# (exclusive)', [year, month, day]);
   }
   init_matching_trips() {
-    const tgt_year = Number(this.match_info.num_list[0]);
-    const tgt_month = Number(this.match_info.num_list[1]);
-    const tgt_day = Number(this.match_info.num_list[2]);
-    const tgt_date = new Date(tgt_year + '-' + tgt_month + '-' + tgt_day);
-    const tgt_time = tgt_date.getTime();
+    const tgt_year = this.match_info.num_list[0];
+    const tgt_month = this.match_info.num_list[1];
+    const tgt_day = this.match_info.num_list[2];
+    const tgt_date = tgt_year + '-' + tgt_month + '-' + tgt_day;
     for (const trip of trips) {
-      const date = trip[2];
-      const time = date.getTime();
-      if (time < tgt_time) {
+      if (trip[0] < tgt_date) {
         this.matching_trips.add(trip);
       }
     }

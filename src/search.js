@@ -1672,17 +1672,13 @@ class BeforeYMDTerm extends DateTerm {
   }
 
   init_matching_trips() {
-    const tgt_year = Number(this.match_info.num_list[0]);
-    const tgt_month = Number(this.match_info.num_list[1]);
-    const tgt_day = Number(this.match_info.num_list[2]);
-
-    const tgt_date = new Date(tgt_year + '-' + tgt_month + '-' + tgt_day);
-    const tgt_time = tgt_date.getTime();
+    const tgt_year = this.match_info.num_list[0];
+    const tgt_month = this.match_info.num_list[1];
+    const tgt_day = this.match_info.num_list[2];
+    const tgt_date = tgt_year + '-' + tgt_month + '-' + tgt_day;
 
     for (const trip of trips) {
-      const date = trip[2];
-      const time = date.getTime();
-      if (time < tgt_time) {
+      if (trip[0] < tgt_date) {
         this.matching_trips.add(trip);
       }
     }
