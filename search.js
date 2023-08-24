@@ -615,18 +615,7 @@ function fn_search(default_ac_selected) {
   ac_list = [];
   if (/\w/.test(search_str)) {
     if (adv_search) {
-      for (const trait of traits) {
-        const term = new TraitTerm(search_str, trait);
-        term.search();
-      }
-      for (const park of parks) {
-        const term = new ParkTerm(search_str, park);
-        term.search();
-      }
-      var term = new BeforeYMDTerm(search_str);
-      term.search();
-      var term = new InYTerm(search_str);
-      term.search();
+      add_adv_terms(search_str);
     }
     for (const page_info of pages) {
       const term = new PageTerm(search_str, page_info);
@@ -795,6 +784,46 @@ function init_adv_search() {
     trip.push(date);
   }
 }
+function digits(num, len) {
+  return String(num).padStart(len, '0');
+}
+function add_adv_terms(search_str) {
+  for (const trait of traits) {
+    const term = new TraitTerm(search_str, trait);
+    term.search();
+  }
+  for (const park of parks) {
+    const term = new ParkTerm(search_str, park);
+    term.search();
+  }
+  const now = new Date();
+  const year = digits(now.getFullYear(), 4);
+  const month = digits(now.getMonth() + 1, 2);
+  const day = digits(now.getDate(), 2);
+  var term = new BtwnMDTerm(search_str);
+  term.search();
+  var term = new InYTerm(search_str, year);
+  term.search();
+  var term = new InYMTerm(search_str, year, month);
+  term.search();
+  var term = new CmpYMDTerm(search_str, (x,y) => (x == y),
+                            'on ', '', year, month, day);
+  term.search();
+  var term = new CmpYMDTerm(search_str, (x,y) => (x >= y),
+                            'since ', ' (inclusive)', year, '01', '01');
+  term.search();
+  var term = new CmpYMDTerm(search_str, (x,y) => (x <= y),
+                            'until ', ' (inclusive)', year, '12', '31');
+  term.search();
+  var term = new CmpYMDTerm(search_str, (x,y) => (x > y),
+                            'after ', ' (exclusive)', year, '12', '31');
+  term.search();
+  var term = new CmpYMDTerm(search_str, (x,y) => (x < y),
+                            'before ', ' (exclusive)', year, '01', '01');
+  term.search();
+  var term = new BtwnYMDTerm(search_str, year);
+  term.search();
+}
 function fn_term_click(event) {
   apply_term();
   for (var i = 0; i < term_list.length; i++) {
@@ -949,33 +978,45 @@ class ParkTerm extends TripTerm {
   }
 }
 class DateTerm extends TripTerm {
-  compare_dates(op, date1, date2) {
-     if (op == '<') {
-       return date1 < date2;
-     } else if (op == '<=') {
-       return date1 <= date2;
-     } else if (op == '>=') {
-       return date1 >= date2;
-     } else if (op == '>') {
-       return date1 > date2;
-     } else {
-       return date1 == date2;
-     }
-  }
   prefix() {
     return 'observed';
   }
 }
-function digits(num, len) {
-  return String(num).padStart(len, '0');
+class InYTerm extends DateTerm {
+  constructor(search_str, dy) {
+    super(search_str, 'in %###', [dy]);
+  }
+  init_matching_trips() {
+    const tgt_year = this.match_info.num_list[0];
+    for (const trip of trips) {
+      const year = trip[0].substr(0, 4);
+      if (year == tgt_year) {
+        this.matching_trips.add(trip);
+      }
+    }
+  }
 }
-class BeforeYMDTerm extends DateTerm {
-  constructor(search_str) {
-    const now = new Date();
-    const year = digits(now.getFullYear(), 4);
-    const month = digits(now.getMonth() + 1, 2);
-    const day = digits(now.getDay(), 2);
-    super(search_str, 'before %###-%#-%# (exclusive)', [year, month, day]);
+class InYMTerm extends DateTerm {
+  constructor(search_str, dy, dm) {
+    super(search_str, 'in %###-%#', [dy, dm]);
+  }
+  init_matching_trips() {
+    const tgt_year = this.match_info.num_list[0];
+    const tgt_month = this.match_info.num_list[1];
+    const tgt_date = tgt_year + '-' + tgt_month;
+    for (const trip of trips) {
+      const date = trip[0].substr(0, 7);
+      if (date == tgt_date) {
+        this.matching_trips.add(trip);
+      }
+    }
+  }
+}
+class CmpYMDTerm extends DateTerm {
+  fn_cmp;
+  constructor(search_str, fn_cmp, prefix, postfix, dy, dm, dd) {
+    super(search_str, prefix + '%###-%#-%#' + postfix, [dy, dm, dd]);
+    this.fn_cmp = fn_cmp;
   }
   init_matching_trips() {
     const tgt_year = this.match_info.num_list[0];
@@ -983,24 +1024,50 @@ class BeforeYMDTerm extends DateTerm {
     const tgt_day = this.match_info.num_list[2];
     const tgt_date = tgt_year + '-' + tgt_month + '-' + tgt_day;
     for (const trip of trips) {
-      if (trip[0] < tgt_date) {
+      if (this.fn_cmp(trip[0], tgt_date)) {
         this.matching_trips.add(trip);
       }
     }
   }
 }
-class InYTerm extends DateTerm {
+class BtwnMDTerm extends DateTerm {
   constructor(search_str) {
-    const now = new Date();
-    const year = digits(now.getFullYear(), 4);
-    super(search_str, 'in %###', [year]);
+    super(search_str, 'between %#-%# and %#-%# (inclusive)',
+          ['01', '01', '12', '31']);
   }
   init_matching_trips() {
-    const tgt_year = Number(this.match_info.num_list[0]);
+    const tgt_m1 = this.match_info.num_list[0];
+    const tgt_d1 = this.match_info.num_list[1];
+    const tgt_m2 = this.match_info.num_list[2];
+    const tgt_d2 = this.match_info.num_list[3];
+    const tgt_date1 = tgt_m1 + '-' + tgt_d1;
+    const tgt_date2 = tgt_m2 + '-' + tgt_d2;
+    const nat_order = (tgt_date1 < tgt_date2);
     for (const trip of trips) {
-      const date = trip[2];
-      const year = date.getUTCFullYear();
-      if (year == tgt_year) {
+      const date = trip[0].substr(5, 10);
+      if (nat_order ? ((date >= tgt_date1) && (date <= tgt_date2))
+                    : ((date >= tgt_date1) || (date <= tgt_date2))) {
+        this.matching_trips.add(trip);
+      }
+    }
+  }
+}
+class BtwnYMDTerm extends DateTerm {
+  constructor(search_str, dy) {
+    super(search_str, 'between %###-%#-%# and %###-%#-%# (inclusive)',
+          [dy, '01', '01', dy, '12', '31']);
+  }
+  init_matching_trips() {
+    const tgt_y1 = this.match_info.num_list[0];
+    const tgt_m1 = this.match_info.num_list[1];
+    const tgt_d1 = this.match_info.num_list[2];
+    const tgt_y2 = this.match_info.num_list[3];
+    const tgt_m2 = this.match_info.num_list[4];
+    const tgt_d2 = this.match_info.num_list[5];
+    const tgt_date1 = tgt_y1 + '-' + tgt_m1 + '-' + tgt_d1;
+    const tgt_date2 = tgt_y2 + '-' + tgt_m2 + '-' + tgt_d2;
+    for (const trip of trips) {
+      if ((trip[0] >= tgt_date1) && (trip[0] <= tgt_date2)) {
         this.matching_trips.add(trip);
       }
     }
