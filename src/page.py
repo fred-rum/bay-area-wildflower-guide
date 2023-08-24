@@ -382,6 +382,20 @@ def separate_name_and_suffix(name):
     suffix = matchobj.group(2) or ''
     return name, suffix
 
+# Count the images in the parsed txt and add a lazy load tag after
+# 10 images.
+def lazy_imgs(s):
+    num_imgs = 0
+
+    def repl_img(matchobj):
+        nonlocal num_imgs
+        num_imgs += 1
+        if (num_imgs > 10):
+            return '<img loading="lazy" '
+        else:
+            return '<img '
+
+    return re.sub(r'<img ', repl_img, s)
 
 
 ###############################################################################
@@ -3079,6 +3093,8 @@ class Page:
                 # This applies to both key-thumb and key-thumb-text
                 s = re.sub(r'class="key-thumb', r'class="list-thumb', s)
 
+            s = lazy_imgs(s)
+
             self.txt = s
 
     def parse2(self):
@@ -3430,7 +3446,11 @@ class Page:
 
         cnt = Cnt(trait, value)
         cnt.count_matching_obs(self)
-        w.write(s.getvalue())
+
+        s = s.getvalue()
+        s = lazy_imgs(s)
+
+        w.write(s)
         w.write('<hr>\n')
         cnt.write_obs(None, w)
 
