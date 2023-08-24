@@ -1057,21 +1057,7 @@ function fn_search(default_ac_selected) {
 
   if (/\w/.test(search_str)) { /* if there are alphanumerics to be searched */
     if (adv_search) {
-      for (const trait of traits) {
-        const term = new TraitTerm(search_str, trait);
-        term.search();
-      }
-
-      for (const park of parks) {
-        const term = new ParkTerm(search_str, park);
-        term.search();
-      }
-
-      var term = new BeforeYMDTerm(search_str);
-      term.search();
-
-      var term = new InYTerm(search_str);
-      term.search();
+      add_adv_terms(search_str);
     }
 
     /* Iterate over all pages and accumulate a list of the best matches
@@ -1375,6 +1361,46 @@ function init_adv_search() {
   }
 }
 
+function add_adv_terms(search_str) {
+  for (const trait of traits) {
+    const term = new TraitTerm(search_str, trait);
+    term.search();
+  }
+
+  for (const park of parks) {
+    const term = new ParkTerm(search_str, park);
+    term.search();
+  }
+
+  const now = new Date();
+  const year = digits(now.getFullYear(), 4);
+  const month = digits(now.getMonth() + 1, 2);
+  const day = digits(now.getDay(), 2);
+
+  var term = new CmpYMDTerm(search_str, (x,y) => (x == y),
+                            'on ', '', year, month, day);
+  term.search();
+
+  var term = new CmpYMDTerm(search_str, (x,y) => (x >= y),
+                            'since ', ' (inclusive)', year, '01', '01');
+  term.search();
+
+  var term = new CmpYMDTerm(search_str, (x,y) => (x <= y),
+                            'until ', ' (inclusive)', year, '12', '31');
+  term.search();
+
+  var term = new CmpYMDTerm(search_str, (x,y) => (x > y),
+                            'after ', ' (exclusive)', year, '12', '31');
+  term.search();
+
+  var term = new CmpYMDTerm(search_str, (x,y) => (x < y),
+                            'before ', ' (exclusive)', year, '01', '01');
+  term.search();
+
+  var term = new InYTerm(search_str);
+  term.search();
+}
+
 /* When the user clicks (or presses enter on) an existing search term, we
    re-open it for editing.  Note that the existing info about the search term
    isn't discarded yet, since the user can abandon her edits (e.g. by
@@ -1662,13 +1688,12 @@ function digits(num, len) {
   return String(num).padStart(len, '0');
 }
 
-class BeforeYMDTerm extends DateTerm {
-  constructor(search_str) {
-    const now = new Date();
-    const year = digits(now.getFullYear(), 4);
-    const month = digits(now.getMonth() + 1, 2);
-    const day = digits(now.getDay(), 2);
-    super(search_str, 'before %###-%#-%# (exclusive)', [year, month, day]);
+class CmpYMDTerm extends DateTerm {
+  fn_cmp;
+
+  constructor(search_str, fn_cmp, prefix, postfix, dy, dm, dd) {
+    super(search_str, prefix + '%###-%#-%#' + postfix, [dy, dm, dd]);
+    this.fn_cmp = fn_cmp;
   }
 
   init_matching_trips() {
@@ -1678,7 +1703,7 @@ class BeforeYMDTerm extends DateTerm {
     const tgt_date = tgt_year + '-' + tgt_month + '-' + tgt_day;
 
     for (const trip of trips) {
-      if (trip[0] < tgt_date) {
+      if (this.fn_cmp(trip[0], tgt_date)) {
         this.matching_trips.add(trip);
       }
     }
