@@ -1100,9 +1100,11 @@ function gen_adv_search_results() {
     delete_ancestors(page_info, result_set, checked_set);
   }
   const list = [];
+  var cnt = 0;
   for (const page_info of result_set) {
     const c = get_class(page_info);
     const url = get_url(page_info, null);
+    cnt++;
     list.push('<div class="list-box">');
     if ('j' in page_info) {
       var jpg = String(page_info.j);
@@ -1111,9 +1113,10 @@ function gen_adv_search_results() {
         jpg = page_info.p + ',' + jpg;
       }
       var jpg_url = 'thumbs/' + jpg + '.jpg';
+      var lazy = (cnt > 10) ? ' loading="lazy"' : '';
       list.push('<a href="' + url + '">');
       list.push('<div class="list-thumb">');
-      list.push('<img class="boxed" src="' + jpg_url + '" alt="photo">');
+      list.push('<img class="boxed"' + lazy + ' src="' + jpg_url + '" alt="photo">');
       list.push('</div>');
       list.push('</a>');
     }

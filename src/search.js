@@ -1839,9 +1839,11 @@ function gen_adv_search_results() {
   }
 
   const list = [];
+  var cnt = 0;
   for (const page_info of result_set) {
     const c = get_class(page_info);
     const url = get_url(page_info, null);
+    cnt++;
 
     list.push('<div class="list-box">');
 
@@ -1855,9 +1857,17 @@ function gen_adv_search_results() {
       var jpg_url = 'thumbs/' + jpg + '.jpg';
       /* -debug_js only */ jpg_url = '../' + jpg_url;
 
+      /* Enable lazy image loading after the first 10 entries (whether those
+         entries include imagse or not).  This prevents a broad search from
+         fetching every thumbnail in the library!  The first 10 entries are
+         allowed to load immediately because there is some slight penalty to
+         responsiveness if the browser waits to determine whether they are
+         in/near the visible area. */
+      var lazy = (cnt > 10) ? ' loading="lazy"' : '';
+
       list.push('<a href="' + url + '">');
       list.push('<div class="list-thumb">');
-      list.push('<img class="boxed" src="' + jpg_url + '" alt="photo">');
+      list.push('<img class="boxed"' + lazy + ' src="' + jpg_url + '" alt="photo">');
       list.push('</div>');
       list.push('</a>');
     }

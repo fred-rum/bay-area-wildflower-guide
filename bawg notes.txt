@@ -1757,3 +1757,7 @@ make general glossary consistent: coast range or coastal range (or both)
      (if there is indeed a space after 'red', that is). */
   const ends_with_punct = 
 
+reorder adv search results based on restricted observation frequency
+
+provide a way to get details on each taxon in the search results
+  e.g. on what trips was it observed
