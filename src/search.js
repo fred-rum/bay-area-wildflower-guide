@@ -1375,7 +1375,7 @@ function add_adv_terms(search_str) {
   const now = new Date();
   const year = digits(now.getFullYear(), 4);
   const month = digits(now.getMonth() + 1, 2);
-  const day = digits(now.getDay(), 2);
+  const day = digits(now.getDate(), 2);
 
   var term = new CmpYMDTerm(search_str, (x,y) => (x == y),
                             'on ', '', year, month, day);

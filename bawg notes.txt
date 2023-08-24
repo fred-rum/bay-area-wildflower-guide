@@ -1750,3 +1750,10 @@ replace spaces with hyphens in glossary anchors and their URLs
   but if the anchor is explicit, leave it alone (esp. for Jepson)
 
 make general glossary consistent: coast range or coastal range (or both)
+
+  /* Record whether the search string ends with punctuation.  This tells
+     highlight_match() to extend the highlighted range through punctuation.
+     E.g. while typing 'red ', the highlight would similarly reflect 'red '
+     (if there is indeed a space after 'red', that is). */
+  const ends_with_punct = 
+
