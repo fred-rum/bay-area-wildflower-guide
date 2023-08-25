@@ -541,6 +541,14 @@ class PageTerm extends Term {
     const page_info = this.page_info;
     return compose_page_name(page_info, 1);
   }
+  get_name() {
+    const page_info = this.page_info;;
+    if ('s' in page_info) {
+      return page_info.s;
+    } else {
+      return page_info.c;
+    }
+  }
   within_taxon(page_info, in_tgt_map) {
     if (in_tgt_map.has(page_info)) {
       return in_tgt_map.get(page_info);
@@ -840,31 +848,24 @@ function fn_term_click(event) {
   event.stopPropagation();
 }
 function save_state() {
-  var term_info_list = [];
+  var term_names = [];
   for (const term of term_list) {
-    const term_info = {
-      search_str: term.search_str,
-      ac_selected: term.ac_selected
-    };
-    term_info_list.push(term_info);
+    var name = term.get_name();
+    name = name.replace(/[^A-Za-z0-9]*(\([^\)]*\))?$/, '');
+    name = name.replace(/[^A-Za-z0-9]+/g, '-');
+    term_names.push(name);
   }
-  const state = {
-    term_info_list: term_info_list
-  };
-  history.replaceState(state, '');
+  const query = term_names.join('.');
+  const url = window.location.pathname + '?' + query;
+  history.replaceState(null, '', url);
 }
-function restore_state() {
-  if ('term_info_list' in history.state) {
-    for (const term_info of history.state.term_info_list) {
-      if (('search_str' in term_info) &&
-          ('ac_selected' in term_info)) {
-        restore_term(term_info.search_str, term_info.ac_selected);
-        confirm_adv_search(ac_list[term_info.ac_selected],
-                           term_info.ac_selected);
-      }
-    }
-    gen_adv_search_results();
+function restore_state(query) {
+  for (var name of query.split('.')) {
+    name = name.replace(/-/g, ' ');
+    restore_term(name, 0);
+    confirm_adv_search(ac_list[0], 0);
   }
+  gen_adv_search_results();
 }
 function restore_term(search_str, ac_selected) {
   e_search_input.value = search_str;
@@ -957,6 +958,9 @@ class TextTerm extends Term {
       term_name = term_name.replace(/%#*/, num);
     }
     return term_name;
+  }
+  get_name() {
+    return this.get_search_term_text();
   }
 }
 class TraitTerm extends TextTerm {
@@ -1197,8 +1201,11 @@ function main() {
   e_search_input.addEventListener('focusin', fn_focusin);
   fn_hashchange();
   window.addEventListener('hashchange', fn_hashchange);
-  if (history.state) {
-    restore_state();
+  if (adv_search) {
+    const query = window.location.search;
+    if (query) {
+      restore_state(query.substring(1));
+    }
   }
   gallery_main();
   if (Document.activeElement == e_search_input) {

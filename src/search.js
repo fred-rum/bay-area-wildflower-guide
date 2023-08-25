@@ -948,9 +948,21 @@ class PageTerm extends Term {
     return 'within';
   }
 
+  /* Create the text for the confirmed search term. */
   get_search_term_text() {
     const page_info = this.page_info;
     return compose_page_name(page_info, 1);
+  }
+
+  /* Create a name that we expect to match the same term *first* if searched. */
+  get_name() {
+    const page_info = this.page_info;;
+
+    if ('s' in page_info) {
+      return page_info.s;
+    } else {
+      return page_info.c;
+    }
   }
 
   /* Check whether page_info is within the target taxon.
@@ -1457,45 +1469,38 @@ function fn_term_click(event) {
 /* Save the state of the search terms so that the page doesn't start over
    from scratch if the user navigates away and then back to the page. */
 function save_state() {
-  /* Save the search info for each term so that it can be restored.
-     We can't save the term objects directly because the Term class
-     (and subclasses) are not currently serialized, and it's easier to
-     recreate them from the search info than to add serialization
-     capability. */
-  var term_info_list = [];
-  console.log('save_state()');
-  console.log('term_list', term_list);
+  console.log('saving advanced search state');
+  var term_names = [];
   for (const term of term_list) {
-    const term_info = {
-      search_str: term.search_str,
-      ac_selected: term.ac_selected
-    };
-    console.log('saving', term);
-    console.log('saving', term_info);
-    term_info_list.push(term_info);
+    var name = term.get_name();
+
+    /* Remove unnecessary text at the end of the name. */
+    name = name.replace(/[^A-Za-z0-9]*(\([^\)]*\))?$/, '');
+
+    /* The URI component can't accept most special characters, but since
+       all punctuation is equivalent when searching anyway, we can freely
+       transform them to '-', which is valid in the URI component. */
+    name = name.replace(/[^A-Za-z0-9]+/g, '-');
+
+    term_names.push(name);
   }
+  const query = term_names.join('.');
 
-  const state = {
-    term_info_list: term_info_list
-  };
-
-  history.replaceState(state, '');
+  const url = window.location.pathname + '?' + query;
+  history.replaceState(null, '', url);
 }
 
-function restore_state() {
+function restore_state(query) {
   console.log('restoring advanced search state');
-  if ('term_info_list' in history.state) {
-    for (const term_info of history.state.term_info_list) {
-      if (('search_str' in term_info) &&
-          ('ac_selected' in term_info)) {
-        console.log('restoring', term_info);
-        restore_term(term_info.search_str, term_info.ac_selected);
-        confirm_adv_search(ac_list[term_info.ac_selected],
-                           term_info.ac_selected);
-      }
-    }
-    gen_adv_search_results();
+
+  for (var name of query.split('.')) {
+    name = name.replace(/-/g, ' ');
+    
+    console.log('restoring', name);
+    restore_term(name, 0);
+    confirm_adv_search(ac_list[0], 0);
   }
+  gen_adv_search_results();
 }
 
 /* Re-create a search term by reperforming a prior search. */
@@ -1650,6 +1655,10 @@ class TextTerm extends Term {
       term_name = term_name.replace(/%#*/, num);
     }
     return term_name;
+  }
+
+  get_name() {
+    return this.get_search_term_text();
   }
 }
 
@@ -1995,8 +2004,11 @@ function main() {
   /* ... or when changing anchors within a page. */
   window.addEventListener('hashchange', fn_hashchange);
 
-  if (history.state) {
-    restore_state();
+  if (adv_search) {
+    const query = window.location.search;
+    if (query) {
+      restore_state(query.substring(1)); /* discard leading '?' */
+    }
   }
 
   /* Also initialize the photo gallery. */
