@@ -662,9 +662,8 @@ try:
     else:
         with Step('strip', 'Strip comments from ungenerated JS and HTML'):
             strip_js()
-
-        strip_comments('advanced-search.html')
-        strip_comments('gallery.html')
+            strip_comments('advanced-search.html')
+            strip_comments('gallery.html')
 
     with Step('other', 'Process "other/*.txt" files'):
         other_files = get_file_set('other', 'txt')

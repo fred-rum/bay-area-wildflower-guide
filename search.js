@@ -562,7 +562,7 @@ class PageTerm extends Term {
     const in_tgt_map = new Map();
     for (const page_info of result_set) {
       if (!this.within_taxon(page_info, in_tgt_map)) {
-        result_set.delete(this.page_info);
+        result_set.delete(page_info);
       }
     }
   }
@@ -652,7 +652,8 @@ function fn_ac_click() {
   return true;
 }
 function fn_adv_ac_click(i) {
-  confirm_adv_search(i);
+  confirm_adv_search(ac_list[i], i);
+  gen_adv_search_results();
   return false;
 }
 function fn_change() {
@@ -671,14 +672,15 @@ function confirm_reg_search(event) {
 function fn_keydown() {
   if ((event.key == 'Enter') && !ac_is_hidden && ac_list.length) {
     if (adv_search) {
-      confirm_adv_search(ac_selected);
+      const term = ac_list[ac_selected]
+      confirm_adv_search(term, ac_selected);
+      gen_adv_search_results();
     } else {
       confirm_reg_search(event);
     }
   } else if (event.key == 'Escape') {
     if (adv_search && (term_id < term_list.length)){
-      restore_term();
-      confirm_adv_search(ac_selected);
+      confirm_adv_search(term_list[term_id], term.ac_selected);
     } else {
       clear_search();
     }
@@ -833,25 +835,51 @@ function fn_term_click(event) {
   var term_info = term_list[term_id];
   term_info.e_term.replaceWith(e_search_container);
   e_search_input.focus();
-  restore_term();
+  restore_term(term_list[term_id].search_str, term_list[term_id].ac_selected);
   generate_ac_html();
   event.stopPropagation();
 }
-function restore_term() {
-  const term_info = term_list[term_id];
-  e_search_input.value = term_info.search_str;
-  fn_search(term_info.ac_selected);
+function save_state() {
+  var term_info_list = [];
+  for (const term of term_list) {
+    const term_info = {
+      search_str: term.search_str,
+      ac_selected: term.ac_selected
+    };
+    term_info_list.push(term_info);
+  }
+  const state = {
+    term_info_list: term_info_list
+  };
+  history.replaceState(state, '');
 }
-function confirm_adv_search(i) {
-  var term = ac_list[i];
+function restore_state() {
+  if ('term_info_list' in history.state) {
+    for (const term_info of history.state.term_info_list) {
+      if (('search_str' in term_info) &&
+          ('ac_selected' in term_info)) {
+        restore_term(term_info.search_str, term_info.ac_selected);
+        confirm_adv_search(ac_list[term_info.ac_selected],
+                           term_info.ac_selected);
+      }
+    }
+    gen_adv_search_results();
+  }
+}
+function restore_term(search_str, ac_selected) {
+  e_search_input.value = search_str;
+  fn_search(ac_selected);
+}
+function confirm_adv_search(term, ac_selected) {
   term.search_str = e_search_input.value;
+  term.ac_selected = ac_selected;
   if (term.is_clear) {
     term_list.splice(term_id, 1);
   } else {
-    term.ac_selected = i;
     term_list.splice(term_id, 1, term);
     apply_term();
   }
+  save_state();
   clear_search();
   term_id = term_list.length;
   if (term_id == 0) {
@@ -861,7 +889,6 @@ function confirm_adv_search(i) {
     prev_e_term.insertAdjacentElement('afterend', e_search_container);
   }
   e_search_input.focus();
-  gen_adv_search_results();
 }
 function apply_term() {
   if (term_id == term_list.length) {
@@ -1170,10 +1197,13 @@ function main() {
   e_search_input.addEventListener('focusin', fn_focusin);
   fn_hashchange();
   window.addEventListener('hashchange', fn_hashchange);
+  if (history.state) {
+    restore_state();
+  }
+  gallery_main();
   if (Document.activeElement == e_search_input) {
     fn_search(0);
   }
-  gallery_main();
 }
 if (typeof pages !== 'undefined') {
   main();

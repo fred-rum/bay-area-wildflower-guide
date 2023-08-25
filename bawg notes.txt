@@ -1573,6 +1573,20 @@ Advanced search:
     in MONTH
     at PARK
     near PARK (requires more park info)
+  radio buttons allow the search results to be organized with:
+    no hierarchy
+    minimal hierarchy
+      just enough to link the results together
+      a taxon that was searched is always included
+        if there were any results at all
+          or suppress radio buttons when there are no results
+    full hierarchy
+      to the lowest common ancestor
+      a taxon that was searched is always included
+  click something(?) to show details for any result taxon
+      including hierarchy that may not have directly matched
+    details include a list of matching trips
+      anythign else?
 
 The BAWG doc's summary of files should have a page reference for every file.
 
@@ -1761,3 +1775,5 @@ reorder adv search results based on restricted observation frequency
 
 provide a way to get details on each taxon in the search results
   e.g. on what trips was it observed
+
+Advanced search page should remember its state when it is returned to

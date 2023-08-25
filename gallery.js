@@ -1,6 +1,5 @@
 /* Copyright Chris Nelson - All rights reserved. */
 'use strict';
-var fresh = true;
 var obj_photos = [];
 var obj_photo = null;
 var e_bg = document.getElementById('gallery-background');

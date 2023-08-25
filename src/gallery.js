@@ -5,9 +5,6 @@
 /*****************************************************************************/
 /* code related to the photo gallery */
 
-/* fresh is 'true' only for the first call to main() */
-var fresh = true;
-
 /* obj_photos is an array of Photo objects, one for each photo associated
    with this page */
 var obj_photos = [];
@@ -71,6 +68,8 @@ var win_x, win_y;
 /* This script is loaded with the 'defer' property, so the DOM is guaranteed
    to be ready when the script executes. */
 function main() {
+  console.info('gallery.js main()');
+
   /* Extract the encoded photo path from the 'search' portion of the URL
      (after the '?'), then find the page with a matching path.
      Note that the encoded path has a few character substitutions to avoid

@@ -960,6 +960,7 @@ class PageTerm extends Term {
       return in_tgt_map.get(page_info);
     } else if (page_info == this.page_info) {
       in_tgt_map.set(page_info, true);
+      console.log(page_info, 'is within');
       return true;
     } else {
       for (const parent_info of page_info.parent_set) {
@@ -977,7 +978,7 @@ class PageTerm extends Term {
     const in_tgt_map = new Map();
     for (const page_info of result_set) {
       if (!this.within_taxon(page_info, in_tgt_map)) {
-        result_set.delete(this.page_info);
+        result_set.delete(page_info);
       }
     }
   }
@@ -1128,7 +1129,8 @@ function fn_ac_click() {
 }
 
 function fn_adv_ac_click(i) {
-  confirm_adv_search(i);
+  confirm_adv_search(ac_list[i], i);
+  gen_adv_search_results();
   return false; // no more click handling is needed
 }
 
@@ -1170,14 +1172,20 @@ function confirm_reg_search(event) {
 function fn_keydown() {
   if ((event.key == 'Enter') && !ac_is_hidden && ac_list.length) {
     if (adv_search) {
-      confirm_adv_search(ac_selected);
+      /* Remember the user input that led to this term.
+         We restore this state if the user clicks the term to edit it.
+         Because the data in fit_info depends on the search type, we
+         just add data to it rather than making a new object and copying
+         the data over. */
+      const term = ac_list[ac_selected]
+      confirm_adv_search(term, ac_selected);
+      gen_adv_search_results();
     } else {
       confirm_reg_search(event);
     }
   } else if (event.key == 'Escape') {
     if (adv_search && (term_id < term_list.length)){
-      restore_term();
-      confirm_adv_search(ac_selected);
+      confirm_adv_search(term_list[term_id], term.ac_selected);
     } else {
       clear_search();
     }
@@ -1435,7 +1443,7 @@ function fn_term_click(event) {
   /* Restore the search bar and autocomplete list to a state where the
      existing term can be re-confirmed by simply pressing the Enter key. */
   e_search_input.focus();
-  restore_term();
+  restore_term(term_list[term_id].search_str, term_list[term_id].ac_selected);
   generate_ac_html();
 
   /* Once the click or 'Enter' keypress activates this function, it normally
@@ -1446,25 +1454,66 @@ function fn_term_click(event) {
   event.stopPropagation();
 }
 
-/* Restore the search bar and autocomplete list to the last confirmed state
-   for this term.  This can be done because the user is going to edit the
-   term or because we're preparing to re-confirm the prior term. */
-function restore_term() {
-  const term_info = term_list[term_id];
+/* Save the state of the search terms so that the page doesn't start over
+   from scratch if the user navigates away and then back to the page. */
+function save_state() {
+  /* Save the search info for each term so that it can be restored.
+     We can't save the term objects directly because the Term class
+     (and subclasses) are not currently serialized, and it's easier to
+     recreate them from the search info than to add serialization
+     capability. */
+  var term_info_list = [];
+  console.log('save_state()');
+  console.log('term_list', term_list);
+  for (const term of term_list) {
+    const term_info = {
+      search_str: term.search_str,
+      ac_selected: term.ac_selected
+    };
+    console.log('saving', term);
+    console.log('saving', term_info);
+    term_info_list.push(term_info);
+  }
 
-  e_search_input.value = term_info.search_str;
-  fn_search(term_info.ac_selected);
+  const state = {
+    term_info_list: term_info_list
+  };
 
-  /* Whether the autocomplete-box is regenerated is up to the caller
-     because in some cases it isn't needed. */
+  history.replaceState(state, '');
+}
+
+function restore_state() {
+  console.log('restoring advanced search state');
+  if ('term_info_list' in history.state) {
+    for (const term_info of history.state.term_info_list) {
+      if (('search_str' in term_info) &&
+          ('ac_selected' in term_info)) {
+        console.log('restoring', term_info);
+        restore_term(term_info.search_str, term_info.ac_selected);
+        confirm_adv_search(ac_list[term_info.ac_selected],
+                           term_info.ac_selected);
+      }
+    }
+    gen_adv_search_results();
+  }
+}
+
+/* Re-create a search term by reperforming a prior search. */
+function restore_term(search_str, ac_selected) {
+  e_search_input.value = search_str;
+  fn_search(ac_selected);
 }
 
 /* Handle a mouse click or Enter keypress on an autocomplete entry
    while on the advanced search page. */
-function confirm_adv_search(i) {
-  var term = ac_list[i];
-
+function confirm_adv_search(term, ac_selected) {
+  /* Remember the user input that led to this term.
+     We restore this state if the user clicks the term to edit it.
+     Because the data in fit_info depends on the search type, we
+     just add data to it rather than making a new object and copying
+     the data over. */
   term.search_str = e_search_input.value;
+  term.ac_selected = ac_selected;
 
   if (term.is_clear) {
     /* Delete the existing term_info from term_list.
@@ -1474,18 +1523,12 @@ function confirm_adv_search(i) {
   } else {
     /* Confirm the search term and replace the one being edited or append
        a new one to the end of the list. */
-
-    /* Remember the user input that led to this term.
-       We restore this state if the user clicks the term to edit it.
-       Because the data in fit_info depends on the search type, we
-       just add data to it rather than making a new object and copying
-       the data over. */
-    term.ac_selected = i;
-
     term_list.splice(term_id, 1, term);
 
     apply_term();
   }
+
+  save_state();
 
   clear_search();
 
@@ -1499,8 +1542,6 @@ function confirm_adv_search(i) {
   }
 
   e_search_input.focus();
-
-  gen_adv_search_results();
 }
 
 /* Replace the search container with the HTML for the confirmed search term.
@@ -1903,7 +1944,7 @@ if (/\/html\/[^\/]*$/.test(window.location.pathname)) {
 /* main() kicks off search-related activity once it is safe to do so.
    See further below for how main() is activated. */
 function main() {
-  console.info('main')
+  console.info('search.js main()')
 
   /* Make sure the page elements are ready. */
   if (document.readyState === 'loading') {
@@ -1954,6 +1995,13 @@ function main() {
   /* ... or when changing anchors within a page. */
   window.addEventListener('hashchange', fn_hashchange);
 
+  if (history.state) {
+    restore_state();
+  }
+
+  /* Also initialize the photo gallery. */
+  gallery_main();
+
   /* In case the user already started typing before the script loaded,
      perform the search right away on whatever is in the search field,
      but only if the focus is still in the search field.
@@ -1962,9 +2010,6 @@ function main() {
   if (Document.activeElement == e_search_input) {
     fn_search(0);
   }
-
-  /* Also initialize the photo gallery. */
-  gallery_main();
 }
 
 /* main() is called when either of these two events occurs:
