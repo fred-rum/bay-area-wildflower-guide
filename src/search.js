@@ -1888,9 +1888,40 @@ function gen_adv_search_results() {
     delete_ancestors(page_info, result_set, checked_set);
   }
 
+/* Helper function for sorting a list of taxons (page_info) by the number of
+   trips that match the search terms.
+
+   Note that reference to page_to_trip from the containing function.
+
+   We prefer that if two taxons are observed the same number of times, we
+   keep the order from pagse.js.  Array.sort() is only guaranteed to preserve
+   this order since ~2019, but
+   - it primary benefit is to order a parent before its child, but that doesn't
+     matter here since the advanced search results either group the children
+     hierarchically under the parent or delete the parent from the results, and
+   - it's not really a burden if results get out of order.
+*/
+  function by_trip_cnt(a, b) {
+    if (a in page_to_trip) {
+      var a_cnt = page_to_trip[a].size;
+    } else {
+      var a_cnt = a.trip_set.size;
+    }
+
+    if (b in page_to_trip) {
+      var b_cnt = page_to_trip[b].size;
+    } else {
+      var b_cnt = b.trip_set.size;
+    }
+
+    return (a < b) ? -1 : (a > b) ? 1 : 0;
+  }
+
+  const result_list = Array.from(result_set).sort(by_trip_cnt);
+
   const list = [];
   var cnt = 0;
-  for (const page_info of result_set) {
+  for (const page_info of result_list) {
     const c = get_class(page_info);
     const url = get_url(page_info, null);
     cnt++;

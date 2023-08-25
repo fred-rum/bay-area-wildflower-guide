@@ -1130,9 +1130,23 @@ function gen_adv_search_results() {
   for (const page_info of result_set) {
     delete_ancestors(page_info, result_set, checked_set);
   }
+  function by_trip_cnt(a, b) {
+    if (a in page_to_trip) {
+      var a_cnt = page_to_trip[a].size;
+    } else {
+      var a_cnt = a.trip_set.size;
+    }
+    if (b in page_to_trip) {
+      var b_cnt = page_to_trip[b].size;
+    } else {
+      var b_cnt = b.trip_set.size;
+    }
+    return (a < b) ? -1 : (a > b) ? 1 : 0;
+  }
+  const result_list = Array.from(result_set).sort(by_trip_cnt);
   const list = [];
   var cnt = 0;
-  for (const page_info of result_set) {
+  for (const page_info of result_list) {
     const c = get_class(page_info);
     const url = get_url(page_info, null);
     cnt++;
