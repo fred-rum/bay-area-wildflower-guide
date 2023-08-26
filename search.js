@@ -544,9 +544,9 @@ class PageTerm extends Term {
   get_name() {
     const page_info = this.page_info;;
     if ('s' in page_info) {
-      return page_info.s;
+      return page_info.s[0];
     } else {
-      return page_info.c;
+      return page_info.c[0];
     }
   }
   within_taxon(page_info, in_tgt_map) {

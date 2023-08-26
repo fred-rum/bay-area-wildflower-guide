@@ -97,7 +97,7 @@ class Cnt:
             node_str = ' / '.join(node_strs)
             w.write(f'<p>\n{node_str}\n</p>\n')
 
-    def write_obs(self, link, w):
+    def write_obs(self, w, link, adv_link):
         if not any_observations:
             return
 
@@ -173,6 +173,10 @@ class Cnt:
             for i in range(12 - z_length):
                 m = (i + z_first + z_length) % 12
                 w.write(f'<li>{month_name[m]}: {self.month[m]}</li>\n')
-            w.write('</ul>\n</details>\n')
+            w.write('</ul>\n');
+
+            w.write(f'<p>For more details, use <a href="{adv_link}">advanced search</a>.</p>')
+            w.write('<hr>\n')
+            w.write('</details>\n')
         else:
             w.write('\n</p>\n')

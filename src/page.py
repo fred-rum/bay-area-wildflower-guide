@@ -5,6 +5,7 @@ from operator import attrgetter
 from unidecode import unidecode # ? from https://pypi.org/project/Unidecode/
 
 # My files
+from args import *
 from error import *
 from files import *
 from photo import *
@@ -2662,6 +2663,24 @@ class Page:
                 (trait in self.trait_values and
                  value in self.trait_values[trait]))
 
+    def get_adv_link(self):
+        if arg('-debug_js'):
+            path = '../src/'
+        else:
+            path = '../'
+
+        if self.sci:
+            name = self.elab;
+        else:
+            name = self.com;
+
+        # The URI component can't accept most special characters, but since
+        # all punctuation is equivalent when searching anyway, we can freely
+        # transform them to '-', which is valid in the URI component.
+        query = re.sub(r'[^A-Za-z0-9]+', '-', name);
+
+        return f'{path}advanced-search.html?{query}'
+
     # Write the iNaturalist observation data.
     def write_obs(self, w):
         cnt = Cnt(None, None)
@@ -2682,7 +2701,7 @@ class Page:
         else:
             link = None
 
-        cnt.write_obs(link, w)
+        cnt.write_obs(w, link, self.get_adv_link())
 
     def choose_elab(self, elab_alt):
         if elab_alt and elab_alt != 'n/a':
@@ -3384,7 +3403,7 @@ class Page:
                 # Subset pages don't have real children.
                 # Instead, we get the page that it is a subset of to write
                 # the appropriate subset of its own hierarchy.
-                self.subset_of_page.write_subset_hierarchy(w, self.subset_trait, self.subset_value, self.subset_page_list)
+                self.subset_of_page.write_subset_hierarchy(w, self, self.subset_trait, self.subset_value, self.subset_page_list)
 
                 # Since subset pages don't have real children, the normal
                 # observation count won't work properly, which means that
@@ -3438,7 +3457,7 @@ class Page:
                 self.write_external_links(w)
             write_footer(w)
 
-    def write_subset_hierarchy(self, w, trait, value, page_list):
+    def write_subset_hierarchy(self, w, subset_page, trait, value, page_list):
         # We write out the matches to a string first so that we can get
         # the total statistics across the matches (including children).
         s = io.StringIO()
@@ -3452,7 +3471,7 @@ class Page:
 
         w.write(s)
         w.write('<hr>\n')
-        cnt.write_obs(None, w)
+        cnt.write_obs(w, None, subset_page.get_adv_link())
 
     def write_toxicity(self, w):
         if self.elab_calpoison and self.elab_calpoison != 'n/a' and not self.toxicity_assigned:

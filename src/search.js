@@ -957,9 +957,9 @@ class PageTerm extends Term {
     const page_info = this.page_info;;
 
     if ('s' in page_info) {
-      return page_info.s;
+      return page_info.s[0];
     } else {
-      return page_info.c;
+      return page_info.c[0];
     }
   }
 
@@ -1490,6 +1490,7 @@ function save_state() {
   var term_names = [];
   for (const term of term_list) {
     const name = term.get_name();
+    console.log(name);
     const q = cvt_name_to_query(name);
     term_names.push(q);
   }
