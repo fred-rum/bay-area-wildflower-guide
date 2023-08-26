@@ -1,26 +1,26 @@
 /* Copyright Chris Nelson - All rights reserved. */
 'use strict';
+const html_url = window.location.pathname;
+const match_pos = html_url.search(/(?:html\/)?[^\/]*\.html$/);
+if (match_pos != -1) {
+  var root_path = window.location.origin + html_url.substring(0, match_pos);
+} else {
+  var root_path = window.location.origin + html_url
+  if (!root_path.endsWith('/')) {
+    root_path += '/';
+  }
+}
 var annotated_href_list = [];
 function gallery_main() {
-  const html_url = window.location.pathname;
-  const matches = /(?:html\/)?[^\/]*\.html$/.exec(html_url);
-  if (matches) {
-    var prefix = window.location.origin + html_url.substr(0, matches.index);
-  } else {
-    var prefix = window.location.origin + html_url
-    if (!prefix.endsWith('/')) {
-      prefix += '/';
-    }
-  }
   const e_link_list = document.links
   for (var i = 0; i < e_link_list.length; i++) {
     const href = e_link_list[i].href;
-    if (href.startsWith(prefix + 'photos/') ||
-        href.startsWith(prefix + 'figures/')) {
-      var suffix = decodeURI(href.substr(prefix.length));
+    if (href.startsWith(root_path + 'photos/') ||
+        href.startsWith(root_path + 'figures/')) {
+      var suffix = decodeURI(href.substr(root_path.length));
       suffix = munge_photo_for_url(suffix);
       const suffix_query = encodeURIComponent(suffix);
-      e_link_list[i].href = prefix + 'gallery.html?' + suffix;
+      e_link_list[i].href = root_path + 'gallery.html?' + suffix;
     }
   }
 }
@@ -622,9 +622,7 @@ function fn_search(default_ac_selected) {
   var search_str = e_search_input.value.toUpperCase();
   ac_list = [];
   if (/\w/.test(search_str)) {
-    if (adv_search) {
-      add_adv_terms(search_str);
-    }
+    add_adv_terms(search_str);
     for (const page_info of pages) {
       const term = new PageTerm(search_str, page_info);
       term.search();
@@ -688,7 +686,7 @@ function fn_keydown() {
     }
   } else if (event.key == 'Escape') {
     if (adv_search && (term_id < term_list.length)){
-      confirm_adv_search(term_list[term_id], term.ac_selected);
+      confirm_adv_search(term_list[term_id], term_list[term_id].ac_selected);
     } else {
       clear_search();
     }
@@ -746,6 +744,11 @@ function convert_zint_to_zstr(zint) {
   }
   return zstr;
 }
+function init_parks() {
+  for (const trip of trips) {
+    parks.add(trip[1]);
+  }
+}
 function init_adv_search() {
   const num_zcodes = traits.length + trips.length;
   while (num_zcodes > 93**zstr_len) {
@@ -761,7 +764,6 @@ function init_adv_search() {
     const trip = trips[i];
     const zstr = convert_zint_to_zstr(traits.length + i);
     zstr_to_trip[zstr] = trip;
-    parks.add(trip[1]);
   }
   for (const page_info of pages) {
     page_info.trait_set = new Set();
@@ -787,11 +789,6 @@ function init_adv_search() {
         child_info.parent_set.add(page_info);
       }
     }
-  }
-  for (const trip of trips) {
-    const date_str = trip[0];
-    const date = new Date(date_str);
-    trip.push(date);
   }
 }
 function digits(num, len) {
@@ -847,13 +844,17 @@ function fn_term_click(event) {
   generate_ac_html();
   event.stopPropagation();
 }
+function cvt_name_to_query(name) {
+  name = name.replace(/[^A-Za-z0-9]*(\([^\)]*\))?$/, '');
+  name = name.replace(/[^A-Za-z0-9]+/g, '-');
+  return name;
+}
 function save_state() {
   var term_names = [];
   for (const term of term_list) {
-    var name = term.get_name();
-    name = name.replace(/[^A-Za-z0-9]*(\([^\)]*\))?$/, '');
-    name = name.replace(/[^A-Za-z0-9]+/g, '-');
-    term_names.push(name);
+    const name = term.get_name();
+    const q = cvt_name_to_query(name);
+    term_names.push(q);
   }
   const query = term_names.join('.');
   const url = window.location.pathname + '?' + query;
@@ -962,6 +963,10 @@ class TextTerm extends Term {
   get_name() {
     return this.get_search_term_text();
   }
+  get_url() {
+    const query = cvt_name_to_query(this.get_name());
+    return root_path + 'advanced-search.html?' + query;
+  }
 }
 class TraitTerm extends TextTerm {
   match(result_set, page_to_trip) {
@@ -982,13 +987,17 @@ class TripTerm extends TextTerm {
     this.init_matching_trips();
     for (const page_info of result_set) {
       if (!(page_to_trip.has(page_info))) {
-        page_to_trip[page_info] = new Set(page_info.trip_set);
+        page_to_trip.set(page_info, new Set(page_info.trip_set));
       }
-      const trip_result_set = page_to_trip[page_info];
+      const trip_result_set = page_to_trip.get(page_info);
       for (const trip of trip_result_set) {
         if (!this.matching_trips.has(trip)) {
           trip_result_set.delete(trip);
         }
+      }
+      if (('c' in page_info) && (page_info.c[0] == 'sticky monkeyflower')) {
+        console.log('sticky monkeyflower trips:',
+                    page_to_trip.get(page_info).size);
       }
       if (trip_result_set.size == 0){
         result_set.delete(page_info);
@@ -1126,18 +1135,24 @@ function gen_adv_search_results() {
   for (const term of term_list) {
     term.match(result_set, page_to_trip);
   }
+  for (const page_info of result_set) {
+    if (('c' in page_info) && (page_info.c[0] == 'sticky monkeyflower')) {
+      console.log('pre-sort sticky monkeyflower trips:',
+                  page_to_trip.has(page_info) ? 'no page_to_trip' : page_to_trip.get(page_info).size);
+    }
+  }
   const checked_set = new Set();
   for (const page_info of result_set) {
     delete_ancestors(page_info, result_set, checked_set);
   }
   function by_trip_cnt(a, b) {
-    if (a in page_to_trip) {
-      var a_cnt = page_to_trip[a].size;
+    if (page_to_trip.has(a)) {
+      var a_cnt = page_to_trip.get(a).size;
     } else {
       var a_cnt = a.trip_set.size;
     }
-    if (b in page_to_trip) {
-      var b_cnt = page_to_trip[b].size;
+    if (page_to_trip.has(b)) {
+      var b_cnt = page_to_trip.get(b).size;
     } else {
       var b_cnt = b.trip_set.size;
     }
@@ -1150,6 +1165,10 @@ function gen_adv_search_results() {
     const c = get_class(page_info);
     const url = get_url(page_info, null);
     cnt++;
+    if (('c' in page_info) && (page_info.c[0] == 'sticky monkeyflower')) {
+      console.log('sorted sticky monkeyflower trips:',
+                  page_to_trip.has(page_info) ? 'no page_to_trip' : page_to_trip.get(page_info).size);
+    }
     list.push('<div class="list-box">');
     if ('j' in page_info) {
       var jpg = String(page_info.j);
@@ -1207,6 +1226,7 @@ function main() {
       page_info.s = [page_info.p];
     }
   }
+  init_parks();
   if (adv_search) {
     init_adv_search();
   }

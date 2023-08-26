@@ -5,6 +5,24 @@
 /*****************************************************************************/
 /* code related to the photo gallery */
 
+/* Decode the current page's URL.
+   It is expected to start with any string,
+   followed by an optional 'html/',
+   followed by the page name (encoded as needed),
+   followed by '.html'. */
+const html_url = window.location.pathname;
+const match_pos = html_url.search(/(?:html\/)?[^\/]*\.html$/);
+if (match_pos != -1) {
+  var root_path = window.location.origin + html_url.substring(0, match_pos);
+} else {
+  /* If the URL doesn't end with '*.html', then we assume it ends in '/',
+     which implicitly maps to 'index.html'. */
+  var root_path = window.location.origin + html_url
+  if (!root_path.endsWith('/')) {
+    root_path += '/';
+  }
+}
+
 /* Ideally, we want gallery_main() to be called after the thumbnails are
    loaded into the DOM, but before the user can click on them.  But the
    only way to perfectly guarantee this is to write potentially a lot of
@@ -31,26 +49,6 @@
 */
 var annotated_href_list = [];
 function gallery_main() {
-  /* Decode the current page's URL.
-     It is expected to start with any string,
-     followed by an optional 'html/',
-     followed by the page name (encoded as needed),
-     followed by '.html'. */
-  const html_url = window.location.pathname;
-  const matches = /(?:html\/)?[^\/]*\.html$/.exec(html_url);
-  if (matches) {
-    /* The page name in the pathname has different encoding requirements when
-       moved to the search component of the URL. */
-    var prefix = window.location.origin + html_url.substr(0, matches.index);
-  } else {
-    /* If the URL doesn't end with '*.html', then we assume it ends in '/',
-       which implicitly maps to 'index.html'. */
-    var prefix = window.location.origin + html_url
-    if (!prefix.endsWith('/')) {
-      prefix += '/';
-    }
-  }
-
   /* Change each link to a BAWG photo or figure to instead link via the
      gallery page. */
   const e_link_list = document.links
@@ -61,9 +59,9 @@ function gallery_main() {
        hrefs are in the same canonical form, so we don't need to figure out all
        the ways that different hrefs could map to the same URL. */
     const href = e_link_list[i].href;
-    if (href.startsWith(prefix + 'photos/') ||
-        href.startsWith(prefix + 'figures/')) {
-      var suffix = decodeURI(href.substr(prefix.length));
+    if (href.startsWith(root_path + 'photos/') ||
+        href.startsWith(root_path + 'figures/')) {
+      var suffix = decodeURI(href.substr(root_path.length));
 
       /* Simplify the URL in case the user looks at it. */
       suffix = munge_photo_for_url(suffix);
@@ -73,7 +71,7 @@ function gallery_main() {
       const suffix_query = encodeURIComponent(suffix);
 
       /* Replace the href to point to the gallery. */
-      e_link_list[i].href = prefix + 'src/gallery.html?' + suffix;
+      e_link_list[i].href = root_path + 'src/gallery.html?' + suffix;
     }
   }
 }
@@ -972,7 +970,6 @@ class PageTerm extends Term {
       return in_tgt_map.get(page_info);
     } else if (page_info == this.page_info) {
       in_tgt_map.set(page_info, true);
-      console.log(page_info, 'is within');
       return true;
     } else {
       for (const parent_info of page_info.parent_set) {
@@ -1066,15 +1063,17 @@ function fn_search(default_ac_selected) {
      I'll deal with it if and when I ever use such characters in a name. */
   var search_str = e_search_input.value.toUpperCase();
 
+    /* Iterate over all possible search terms and accumulate a list of the
+       best matches in ac_list (the autocomplete list). */
   ac_list = [];
 
   if (/\w/.test(search_str)) { /* if there are alphanumerics to be searched */
-    if (adv_search) {
-      add_adv_terms(search_str);
-    }
+    /* Search terms associated with advanced search can be found even during
+       regular search, but they create a link to the advanced search page where
+       the work is done. */
+    add_adv_terms(search_str);
 
-    /* Iterate over all pages and accumulate a list of the best matches
-       against the search value. */
+    /* Search all pages and all glossary terms within each page. */
     for (const page_info of pages) {
       const term = new PageTerm(search_str, page_info);
       term.search();
@@ -1104,8 +1103,8 @@ function fn_search(default_ac_selected) {
          just colored spans. */
       term.html = '<span class="autocomplete-entry" class="' + c + '" onclick="return fn_adv_ac_click(' + i + ');">' + p + '</span>';
     } else {
-      /* Regular search only finds page links, so we know that term is a
-         PageTerm and supports get_url(). */
+      /* When performing a regular search, any type of match has an associated
+         link (with URL), even if it's a link to the advanced search page. */
       const url = term.get_url();
 
       /* Add class 'enclosed' to avoid extra link decoration.
@@ -1197,7 +1196,7 @@ function fn_keydown() {
     }
   } else if (event.key == 'Escape') {
     if (adv_search && (term_id < term_list.length)){
-      confirm_adv_search(term_list[term_id], term.ac_selected);
+      confirm_adv_search(term_list[term_id], term_list[term_id].ac_selected);
     } else {
       clear_search();
     }
@@ -1292,7 +1291,12 @@ function fn_hashchange(event) {
 
 
 /*****************************************************************************/
-/* Code used exclusively for advanced search. */
+/* Code used exclusively for advanced search (*).
+
+   (*) Search terms associated with advanced search can be found even during
+   regular search, but they create a link to the advanced search page where
+   the work is done.
+*/
 
 /* Keep track of confirmed search terms. */
 const term_list = [];
@@ -1318,6 +1322,16 @@ function convert_zint_to_zstr(zint) {
   return zstr;
 }
 
+/* Record the minimal set of parks.
+
+   This needs to be done even for regular searches so that a regular search
+   can recognize a park name and convert it to an advanced search. */
+function init_parks() {
+  for (const trip of trips) {
+    parks.add(trip[1]);
+  }
+}
+
 function init_adv_search() {
   const num_zcodes = traits.length + trips.length;
   while (num_zcodes > 93**zstr_len) {
@@ -1331,13 +1345,12 @@ function init_adv_search() {
     zstr_to_trait[zstr] = traits[i];
   }
 
-  /* assign zcodes to trips and record the minimal set of parks */
+  /* assign zcodes to trips */
   const zstr_to_trip = {}
   for (var i = 0; i < trips.length; i++) {
     const trip = trips[i];
     const zstr = convert_zint_to_zstr(traits.length + i);
     zstr_to_trip[zstr] = trip;
-    parks.add(trip[1]);
   }
 
   /* initialize the sets that will hold the advanced-search data */
@@ -1370,14 +1383,6 @@ function init_adv_search() {
         child_info.parent_set.add(page_info);
       }
     }
-  }
-
-  /* Convert trip dates to Date() objects and add them as entry [2]
-     in each trip. */
-  for (const trip of trips) {
-    const date_str = trip[0];
-    const date = new Date(date_str);
-    trip.push(date);
   }
 }
 
@@ -1466,23 +1471,27 @@ function fn_term_click(event) {
   event.stopPropagation();
 }
 
+function cvt_name_to_query(name) {
+  /* Remove unnecessary text at the end of the name. */
+  name = name.replace(/[^A-Za-z0-9]*(\([^\)]*\))?$/, '');
+
+  /* The URI component can't accept most special characters, but since
+     all punctuation is equivalent when searching anyway, we can freely
+     transform them to '-', which is valid in the URI component. */
+  name = name.replace(/[^A-Za-z0-9]+/g, '-');
+
+  return name;
+}
+
 /* Save the state of the search terms so that the page doesn't start over
    from scratch if the user navigates away and then back to the page. */
 function save_state() {
   console.log('saving advanced search state');
   var term_names = [];
   for (const term of term_list) {
-    var name = term.get_name();
-
-    /* Remove unnecessary text at the end of the name. */
-    name = name.replace(/[^A-Za-z0-9]*(\([^\)]*\))?$/, '');
-
-    /* The URI component can't accept most special characters, but since
-       all punctuation is equivalent when searching anyway, we can freely
-       transform them to '-', which is valid in the URI component. */
-    name = name.replace(/[^A-Za-z0-9]+/g, '-');
-
-    term_names.push(name);
+    const name = term.get_name();
+    const q = cvt_name_to_query(name);
+    term_names.push(q);
   }
   const query = term_names.join('.');
 
@@ -1660,6 +1669,15 @@ class TextTerm extends Term {
   get_name() {
     return this.get_search_term_text();
   }
+
+  get_url() {
+    const query = cvt_name_to_query(this.get_name());
+
+    /* advanced-search.html might be in src/ */
+    /* -debug_js only */ return root_path + 'src/advanced-search.html?' + query;
+
+    return root_path + 'advanced-search.html?' + query;
+  }
 }
 
 
@@ -1687,20 +1705,27 @@ class TripTerm extends TextTerm {
     /* First, determine which trips meet the term requirement. */
     this.init_matching_trips();
 
+    console.log('TripTerm.match()');
+
     /* Then reduce the trip set of each taxon accordingly. */
     for (const page_info of result_set) {
       /* Initialize page_to_trip for this result page if necessary. */
       if (!(page_to_trip.has(page_info))) {
-        page_to_trip[page_info] = new Set(page_info.trip_set);
+        page_to_trip.set(page_info, new Set(page_info.trip_set));
       }
 
       /* This is the constrained set of trips for this page. */
-      const trip_result_set = page_to_trip[page_info];
+      const trip_result_set = page_to_trip.get(page_info);
 
       for (const trip of trip_result_set) {
         if (!this.matching_trips.has(trip)) {
           trip_result_set.delete(trip);
         }
+      }
+
+      if (('c' in page_info) && (page_info.c[0] == 'sticky monkeyflower')) {
+        console.log('sticky monkeyflower trips:',
+                    page_to_trip.get(page_info).size);
       }
 
       if (trip_result_set.size == 0){
@@ -1881,6 +1906,13 @@ function gen_adv_search_results() {
     term.match(result_set, page_to_trip);
   }
 
+  for (const page_info of result_set) {
+    if (('c' in page_info) && (page_info.c[0] == 'sticky monkeyflower')) {
+      console.log('pre-sort sticky monkeyflower trips:',
+                  page_to_trip.has(page_info) ? 'no page_to_trip' : page_to_trip.get(page_info).size);
+    }
+  }
+
   /* Show only results at the lowest level.  I.e. eliminate higher-level
      pages where a lower-level page is in the results. */
   const checked_set = new Set();
@@ -1902,14 +1934,14 @@ function gen_adv_search_results() {
    - it's not really a burden if results get out of order.
 */
   function by_trip_cnt(a, b) {
-    if (a in page_to_trip) {
-      var a_cnt = page_to_trip[a].size;
+    if (page_to_trip.has(a)) {
+      var a_cnt = page_to_trip.get(a).size;
     } else {
       var a_cnt = a.trip_set.size;
     }
 
-    if (b in page_to_trip) {
-      var b_cnt = page_to_trip[b].size;
+    if (page_to_trip.has(b)) {
+      var b_cnt = page_to_trip.get(b).size;
     } else {
       var b_cnt = b.trip_set.size;
     }
@@ -1925,6 +1957,11 @@ function gen_adv_search_results() {
     const c = get_class(page_info);
     const url = get_url(page_info, null);
     cnt++;
+
+    if (('c' in page_info) && (page_info.c[0] == 'sticky monkeyflower')) {
+      console.log('sorted sticky monkeyflower trips:',
+                  page_to_trip.has(page_info) ? 'no page_to_trip' : page_to_trip.get(page_info).size);
+    }
 
     list.push('<div class="list-box">');
 
@@ -2021,6 +2058,7 @@ function main() {
     }
   }
 
+  init_parks();
   if (adv_search) {
     init_adv_search();
   }

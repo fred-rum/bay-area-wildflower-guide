@@ -1770,10 +1770,14 @@ make general glossary consistent: coast range or coastal range (or both)
      E.g. while typing 'red ', the highlight would similarly reflect 'red '
      (if there is indeed a space after 'red', that is). */
   const ends_with_punct = 
-
-reorder adv search results based on restricted observation frequency
+  --- requires passing more information than just search_str
 
 provide a way to get details on each taxon in the search results
   e.g. on what trips was it observed
 
-Advanced search page should remember its state when it is returned to
+there are now to autocomplete results for 'blue flowers':
+  one for the blue flowers taxon
+  and one for advanced search
+do something to make it less bad
+  e.g. add '(advanced search)' to the search text if !adv_search
+    note that the parenthesized text will automatically be removed from the URL!
