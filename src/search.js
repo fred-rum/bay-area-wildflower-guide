@@ -1563,7 +1563,15 @@ function restore_state(query) {
     
     console.log('restoring', name);
     restore_term(name, 0);
-    confirm_adv_search_term(0);
+
+    /* Assuming that we saved the state correctly, then we should always find
+       the desired term in the first autocomplete match.  However, if something
+       went wrong (e.g. the user mangled the URL or the database has changed),
+       there might be no match at all.  In that case, we simply avoid crashing.
+    */
+    if (ac_list.length != 0) {
+      confirm_adv_search_term(0);
+    }
   }
   /* Since all of the search terms were inserted before the search input
      container, it doesn't need to move to be in the correct position. */

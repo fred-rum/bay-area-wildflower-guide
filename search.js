@@ -904,7 +904,9 @@ function restore_state(query) {
   for (var name of query.split('.')) {
     name = name.replace(/-/g, ' ');
     restore_term(name, 0);
-    confirm_adv_search_term(0);
+    if (ac_list.length != 0) {
+      confirm_adv_search_term(0);
+    }
   }
   clear_search();
   gen_adv_search_results();
