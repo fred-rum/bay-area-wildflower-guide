@@ -765,9 +765,52 @@ function compose_page_name(page_info, lines=1) {
 */
 class Term {
   is_clear = false;
+  group;
+  e_term;
 
-  constructor() {
-    /* empty stub */
+  constructor(group) {
+    this.group = group;
+  }
+
+  gen_html_element() {
+    const e_term = document.createElement('button');
+
+    e_term.className = 'term';
+
+    e_term.addEventListener('click', fn_term_click);
+
+    const c = this.get_class();
+    const prefix = this.prefix();
+    const term_name = this.get_text();
+
+    const span = '<span class="' + c + '">' + term_name + '</span>';
+    e_term.innerHTML = '<p>' + prefix + ' <b>' + span + '</b></p>';
+
+    this.e_term = e_term;
+  }
+
+  insert_html_element() {
+    for (var id = 0; id < term_list.length; id++) {
+      const term = term_list[id];
+      if (this.group < term.group) {
+        /* We should insert our term before this one
+           (after the previous term). */
+        break;
+      }
+    }
+
+    console.log('inserting in position', id, 'of', term_list.length + 1);
+
+    /* Insert this term into the term_list. */
+    term_list.splice(id, 0, this);
+
+    /* Insert this term's HTML element into the DOM. */
+    if (id == 0) {
+      e_terms.insertAdjacentElement('afterbegin', this.e_term);
+    } else {
+      const prev_e_term = term_list[id-1].e_term;
+      prev_e_term.insertAdjacentElement('afterend', this.e_term);
+    }
   }
 }
 
@@ -789,8 +832,8 @@ class PageTerm extends Term {
   com_match_info;
   sci_match_info;
 
-  constructor(search_str, page_info) {
-    super();
+  constructor(group, search_str, page_info) {
+    super(group);
 
     this.search_str = search_str;
     this.page_info = page_info;
@@ -875,7 +918,8 @@ class PageTerm extends Term {
 
       /* Add an additional search term for each glossary anchor. */
       for (const anchor_info of page_info.glossary) {
-        const term = new AnchorTerm(search_str, page_info, anchor_info);
+        const term = new AnchorTerm(this.group, search_str,
+                                    page_info, anchor_info);
         term.search();
       }
     }
@@ -947,7 +991,7 @@ class PageTerm extends Term {
   }
 
   /* Create the text for the confirmed search term. */
-  get_search_term_text() {
+  get_text() {
     const page_info = this.page_info;
     return compose_page_name(page_info, 1);
   }
@@ -998,8 +1042,8 @@ class AnchorTerm extends PageTerm {
   anchor_info;
   match_info;
 
-  constructor(search_str, page_info, anchor_info) {
-    super(search_str, page_info);
+  constructor(group, search_str, page_info, anchor_info) {
+    super(group, search_str, page_info);
 
     this.anchor_info = anchor_info;
   }
@@ -1075,7 +1119,7 @@ function fn_search(default_ac_selected) {
 
     /* Search all pages and all glossary terms within each page. */
     for (const page_info of pages) {
-      const term = new PageTerm(search_str, page_info);
+      const term = new PageTerm(0, search_str, page_info);
       term.search();
     }
   } else if (adv_search && (term_id < term_list.length)) {
@@ -1140,7 +1184,8 @@ function fn_ac_click() {
 }
 
 function fn_adv_ac_click(i) {
-  confirm_adv_search(ac_list[i], i);
+  confirm_adv_search_term(i);
+  prepare_new_adv_input();
   gen_adv_search_results();
   return false; // no more click handling is needed
 }
@@ -1183,20 +1228,18 @@ function confirm_reg_search(event) {
 function fn_keydown() {
   if ((event.key == 'Enter') && !ac_is_hidden && ac_list.length) {
     if (adv_search) {
-      /* Remember the user input that led to this term.
-         We restore this state if the user clicks the term to edit it.
-         Because the data in fit_info depends on the search type, we
-         just add data to it rather than making a new object and copying
-         the data over. */
-      const term = ac_list[ac_selected]
-      confirm_adv_search(term, ac_selected);
+      confirm_adv_search_term(ac_selected);
+      prepare_new_adv_input();
       gen_adv_search_results();
     } else {
       confirm_reg_search(event);
     }
   } else if (event.key == 'Escape') {
     if (adv_search && (term_id < term_list.length)){
-      confirm_adv_search(term_list[term_id], term_list[term_id].ac_selected);
+      revert_adv_search_term();
+      term_id = term_list.length;
+      prepare_new_adv_input();
+      /* No need to recalculate the results because nothing has changed. */
     } else {
       clear_search();
     }
@@ -1391,51 +1434,55 @@ function digits(num, len) {
 }
 
 function add_adv_terms(search_str) {
+  var group = 1;
+
   for (const trait of traits) {
-    const term = new TraitTerm(search_str, trait);
+    const term = new TraitTerm(group, search_str, trait);
     term.search();
   }
+  group++;
 
   for (const park of parks) {
-    const term = new ParkTerm(search_str, park);
+    const term = new ParkTerm(group, search_str, park);
     term.search();
   }
+  group++;
 
   const now = new Date();
   const year = digits(now.getFullYear(), 4);
   const month = digits(now.getMonth() + 1, 2);
   const day = digits(now.getDate(), 2);
 
-  var term = new BtwnMDTerm(search_str);
+  var term = new BtwnMDTerm(group, search_str);
   term.search();
 
-  var term = new InYTerm(search_str, year);
+  var term = new InYTerm(group, search_str, year);
   term.search();
 
-  var term = new InYMTerm(search_str, year, month);
+  var term = new InYMTerm(group, search_str, year, month);
   term.search();
 
-  var term = new CmpYMDTerm(search_str, (x,y) => (x == y),
+  var term = new CmpYMDTerm(group, search_str, (x,y) => (x == y),
                             'on ', '', year, month, day);
   term.search();
 
-  var term = new CmpYMDTerm(search_str, (x,y) => (x >= y),
+  var term = new CmpYMDTerm(group, search_str, (x,y) => (x >= y),
                             'since ', ' (inclusive)', year, '01', '01');
   term.search();
 
-  var term = new CmpYMDTerm(search_str, (x,y) => (x <= y),
+  var term = new CmpYMDTerm(group, search_str, (x,y) => (x <= y),
                             'until ', ' (inclusive)', year, '12', '31');
   term.search();
 
-  var term = new CmpYMDTerm(search_str, (x,y) => (x > y),
+  var term = new CmpYMDTerm(group, search_str, (x,y) => (x > y),
                             'after ', ' (exclusive)', year, '12', '31');
   term.search();
 
-  var term = new CmpYMDTerm(search_str, (x,y) => (x < y),
+  var term = new CmpYMDTerm(group, search_str, (x,y) => (x < y),
                             'before ', ' (exclusive)', year, '01', '01');
   term.search();
 
-  var term = new BtwnYMDTerm(search_str, year);
+  var term = new BtwnYMDTerm(group, search_str, year);
   term.search();
 }
 
@@ -1445,17 +1492,19 @@ function add_adv_terms(search_str) {
    pressing the Escape key). */
 function fn_term_click(event) {
   /* Before moving the search bar, restore any term that was in the process
-     of being replaced. */
-  apply_term();
+     of being edited. */
+  if (term_id < term_list.length) {
+    revert_adv_search_term();
+  }
+
+  /* Figure out which term was clicked. */
+  const tgt = event.currentTarget;
+  for (term_id = 0; term_list[term_id].e_term != tgt; term_id++) {/*empty*/}
 
   /* Remove the HTML for the term being edited,
      and replace it with the search bar. */
-  for (var i = 0; i < term_list.length; i++) {
-    if (term_list[i].e_term == event.currentTarget) break;
-  }
-  term_id = i;
-  var term_info = term_list[term_id];
-  term_info.e_term.replaceWith(e_search_container);
+  const term = term_list[term_id];
+  term.e_term.replaceWith(e_search_container);
 
   /* Restore the search bar and autocomplete list to a state where the
      existing term can be re-confirmed by simply pressing the Enter key. */
@@ -1487,17 +1536,23 @@ function cvt_name_to_query(name) {
    from scratch if the user navigates away and then back to the page. */
 function save_state() {
   console.log('saving advanced search state');
-  var term_names = [];
-  for (const term of term_list) {
-    const name = term.get_name();
-    console.log(name);
-    const q = cvt_name_to_query(name);
-    term_names.push(q);
-  }
-  const query = term_names.join('.');
+  if (term_list.length) {
+    var term_names = [];
+    for (const term of term_list) {
+      const name = term.get_name();
+      console.log('saving', name);
+      const q = cvt_name_to_query(name);
+      term_names.push(q);
+    }
+    const query = term_names.join('.');
 
-  const url = window.location.pathname + '?' + query;
-  history.replaceState(null, '', url);
+    const url = window.location.pathname + '?' + query;
+    history.replaceState(null, '', url);
+  } else {
+    /* The code above would be OK except that it leaves the trailing '?',
+       which I'd prefer to get rid of. */
+    history.replaceState(null, '', window.location.pathname);
+  }
 }
 
 function restore_state(query) {
@@ -1508,8 +1563,11 @@ function restore_state(query) {
     
     console.log('restoring', name);
     restore_term(name, 0);
-    confirm_adv_search(ac_list[0], 0);
+    confirm_adv_search_term(0);
   }
+  /* Since all of the search terms were inserted before the search input
+     container, it doesn't need to move to be in the correct position. */
+  clear_search();
   gen_adv_search_results();
 }
 
@@ -1521,7 +1579,12 @@ function restore_term(search_str, ac_selected) {
 
 /* Handle a mouse click or Enter keypress on an autocomplete entry
    while on the advanced search page. */
-function confirm_adv_search(term, ac_selected) {
+function confirm_adv_search_term(ac_selected) {
+  /* Most calls invoke the default behavior of getting the term from the
+     appropriate entry of ac_list.  Only special cases provide a term
+     from another source. */
+  const term = ac_list[ac_selected];
+
   /* Remember the user input that led to this term.
      We restore this state if the user clicks the term to edit it.
      Because the data in fit_info depends on the search type, we
@@ -1530,28 +1593,62 @@ function confirm_adv_search(term, ac_selected) {
   term.search_str = e_search_input.value;
   term.ac_selected = ac_selected;
 
-  if (term.is_clear) {
-    /* Delete the existing term_info from term_list.
-       If term_id == term_list.length (meaning that a new term was being
-       entered), nothing happens here. */
-    term_list.splice(term_id, 1);
-  } else {
-    /* Confirm the search term and replace the one being edited or append
-       a new one to the end of the list. */
-    term_list.splice(term_id, 1, term);
+  /* Note that the ClearTerm has special code so that the following
+     functions that supposed create HTML and insert it into the list
+     actually leave the entry unfilled. */
 
-    apply_term();
+  term.gen_html_element();
+
+  if ((term_id < term_list.length) &&
+      (term.group == term_list[term_id].group)) {
+    /* We were editing an existing term, and the edited term is in the
+       same group.  Instead of moving the term to the end of its group,
+       replace the edited one in the same position. */
+    console.log('retaining position', term_id);
+    term_list[term_id] = term;
+    revert_adv_search_term();
+  } else {
+    /* We're confirming a new search term, so we can discard the one that
+       we were editing.  If term_id == term_list.length (meaning that a
+       new term was being entered), nothing happens here. */
+    term_list.splice(term_id, 1);
+    term.insert_html_element();
   }
 
-  save_state();
+  /* We don't call prepare_new_adv_input() or gen_adv_search_results()
+     here because restore_state() would prefer to batch up all confirmations
+     before performing those actions.  I.e. those function calls are the
+     responsibility of the caller.
 
+     But we do reset term_id to the end of the term_list so that the code
+     knows it is not editing an existing entry. */
+  term_id = term_list.length;
+}
+
+function revert_adv_search_term() {
+  /* Since the term already has everything it needs (such as e_term),
+     we just need to re-insert it into the HTML.  We don't call
+     insert_html_element() because that would insert it at the end of its
+     group, whereas we want it to keep its position.  So we simply
+     re-insert its e_term before the search container. */
+  const term = term_list[term_id];
+  e_search_container.insertAdjacentElement('beforeBegin', term.e_term);
+
+  /* Depending on the caller, the search input could move to the end of the
+     list or to a different position.  So we leave that up to the caller. */
+}
+
+function prepare_new_adv_input() {
   clear_search();
 
-  term_id = term_list.length;
+  /* Move the search container element to the bottom of the list.
 
-  if (term_id == 0) {
-    e_terms.insertAdjacentElement('afterbegin', e_search_container);
-  } else {
+     This is only needed if the user was editing a previous term,
+     but there's no harm in an extraneous move.
+
+     If the list is empty, the input container obviously doesn't need
+     to move to be in the correct position. */
+  if (term_id != 0) {
     const prev_e_term = term_list[term_id-1].e_term;
     prev_e_term.insertAdjacentElement('afterend', e_search_container);
   }
@@ -1559,43 +1656,13 @@ function confirm_adv_search(term, ac_selected) {
   e_search_input.focus();
 }
 
-/* Replace the search container with the HTML for the confirmed search term.
-   The caller is expected to then restore the search container to the
-   appropriate position. */
-function apply_term() {
-  if (term_id == term_list.length) {
-    /* There is no existing term to apply. */
-    return;
-  }
-
-  const term = term_list[term_id];
-  const e_term = document.createElement('button');
-  term.e_term = e_term;
-
-  e_term.className = 'term';
-
-  e_term.addEventListener('click', fn_term_click);
-
-  const c = term.get_class();
-  const prefix = term.prefix();
-  const term_name = term.get_search_term_text();
-
-  const span = '<span class="' + c + '">' + term_name + '</span>';
-  e_term.innerHTML = '<p>' + prefix + ' <b>' + span + '</b></p>';
-
-  term.e_term = e_term;
-
-  e_search_container.replaceWith(e_term);
-}
-
 
 class ClearTerm extends Term {
   pri;
-
   is_clear = true;
 
   constructor() {
-    super();
+    super(null); /* group is never used */
 
     /* insert_match() requires a priority(?), even if there's nothing else
        to compare it to. */
@@ -1612,6 +1679,14 @@ class ClearTerm extends Term {
   get_class() {
     return 'unobs';
   }
+
+  gen_html_element() {
+    /* do nothing because this is not a valid term */
+  }
+
+  insert_html_element() {
+    /* do nothing because this is not a valid term */
+  }
 }
 
 
@@ -1622,8 +1697,8 @@ class TextTerm extends Term {
   pri;
   match_info;
 
-  constructor(search_str, match_str, def_num_list = []) {
-    super();
+  constructor(group, search_str, match_str, def_num_list = []) {
+    super(group);
 
     this.search_str = search_str;
     this.match_str = match_str;
@@ -1659,7 +1734,7 @@ class TextTerm extends Term {
     return 'unobs';
   }
 
-  get_search_term_text() {
+  get_text() {
     var term_name = this.match_info.match_str;
     for (const num of this.match_info.num_list) {
       term_name = term_name.replace(/%#*/, num);
@@ -1668,7 +1743,7 @@ class TextTerm extends Term {
   }
 
   get_name() {
-    return this.get_search_term_text();
+    return this.get_text();
   }
 
   get_url() {
@@ -1706,8 +1781,6 @@ class TripTerm extends TextTerm {
     /* First, determine which trips meet the term requirement. */
     this.init_matching_trips();
 
-    console.log('TripTerm.match()');
-
     /* Then reduce the trip set of each taxon accordingly. */
     for (const page_info of result_set) {
       /* Initialize page_to_trip for this result page if necessary. */
@@ -1722,11 +1795,6 @@ class TripTerm extends TextTerm {
         if (!this.matching_trips.has(trip)) {
           trip_result_set.delete(trip);
         }
-      }
-
-      if (('c' in page_info) && (page_info.c[0] == 'sticky monkeyflower')) {
-        console.log('sticky monkeyflower trips:',
-                    page_to_trip.get(page_info).size);
       }
 
       if (trip_result_set.size == 0){
@@ -1760,8 +1828,8 @@ class DateTerm extends TripTerm {
 }
 
 class InYTerm extends DateTerm {
-  constructor(search_str, dy) {
-    super(search_str, 'in %###', [dy]);
+  constructor(group, search_str, dy) {
+    super(group, search_str, 'in %###', [dy]);
   }
 
   init_matching_trips() {
@@ -1777,8 +1845,8 @@ class InYTerm extends DateTerm {
 }
 
 class InYMTerm extends DateTerm {
-  constructor(search_str, dy, dm) {
-    super(search_str, 'in %###-%#', [dy, dm]);
+  constructor(group, search_str, dy, dm) {
+    super(group, search_str, 'in %###-%#', [dy, dm]);
   }
 
   init_matching_trips() {
@@ -1798,8 +1866,8 @@ class InYMTerm extends DateTerm {
 class CmpYMDTerm extends DateTerm {
   fn_cmp;
 
-  constructor(search_str, fn_cmp, prefix, postfix, dy, dm, dd) {
-    super(search_str, prefix + '%###-%#-%#' + postfix, [dy, dm, dd]);
+  constructor(group, search_str, fn_cmp, prefix, postfix, dy, dm, dd) {
+    super(group, search_str, prefix + '%###-%#-%#' + postfix, [dy, dm, dd]);
     this.fn_cmp = fn_cmp;
   }
 
@@ -1818,8 +1886,8 @@ class CmpYMDTerm extends DateTerm {
 }
 
 class BtwnMDTerm extends DateTerm {
-  constructor(search_str) {
-    super(search_str, 'between %#-%# and %#-%# (inclusive)',
+  constructor(group, search_str) {
+    super(group, search_str, 'between %#-%# and %#-%# (inclusive)',
           ['01', '01', '12', '31']);
   }
 
@@ -1845,8 +1913,8 @@ class BtwnMDTerm extends DateTerm {
 }
 
 class BtwnYMDTerm extends DateTerm {
-  constructor(search_str, dy) {
-    super(search_str, 'between %###-%#-%# and %###-%#-%# (inclusive)',
+  constructor(group, search_str, dy) {
+    super(group, search_str, 'between %###-%#-%# and %###-%#-%# (inclusive)',
           [dy, '01', '01', dy, '12', '31']);
   }
 
@@ -1887,6 +1955,8 @@ function delete_ancestors(page_info, result_set, checked_set) {
 
 /* Perform the advanced search and generate the HTML for the results. */
 function gen_adv_search_results() {
+  save_state();
+
   if (term_list.length == 0) {
     e_results.innerHTML = '<p>...</p>';
     return;
@@ -1905,13 +1975,6 @@ function gen_adv_search_results() {
      match the term. */
   for (const term of term_list) {
     term.match(result_set, page_to_trip);
-  }
-
-  for (const page_info of result_set) {
-    if (('c' in page_info) && (page_info.c[0] == 'sticky monkeyflower')) {
-      console.log('pre-sort sticky monkeyflower trips:',
-                  page_to_trip.has(page_info) ? 'no page_to_trip' : page_to_trip.get(page_info).size);
-    }
   }
 
   /* Show only results at the lowest level.  I.e. eliminate higher-level
@@ -1958,11 +2021,6 @@ function gen_adv_search_results() {
     const c = get_class(page_info);
     const url = get_url(page_info, null);
     cnt++;
-
-    if (('c' in page_info) && (page_info.c[0] == 'sticky monkeyflower')) {
-      console.log('sorted sticky monkeyflower trips:',
-                  page_to_trip.has(page_info) ? 'no page_to_trip' : page_to_trip.get(page_info).size);
-    }
 
     list.push('<div class="list-box">');
 

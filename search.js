@@ -433,7 +433,36 @@ function compose_page_name(page_info, lines=1) {
 }
 class Term {
   is_clear = false;
-  constructor() {
+  group;
+  e_term;
+  constructor(group) {
+    this.group = group;
+  }
+  gen_html_element() {
+    const e_term = document.createElement('button');
+    e_term.className = 'term';
+    e_term.addEventListener('click', fn_term_click);
+    const c = this.get_class();
+    const prefix = this.prefix();
+    const term_name = this.get_text();
+    const span = '<span class="' + c + '">' + term_name + '</span>';
+    e_term.innerHTML = '<p>' + prefix + ' <b>' + span + '</b></p>';
+    this.e_term = e_term;
+  }
+  insert_html_element() {
+    for (var id = 0; id < term_list.length; id++) {
+      const term = term_list[id];
+      if (this.group < term.group) {
+        break;
+      }
+    }
+    term_list.splice(id, 0, this);
+    if (id == 0) {
+      e_terms.insertAdjacentElement('afterbegin', this.e_term);
+    } else {
+      const prev_e_term = term_list[id-1].e_term;
+      prev_e_term.insertAdjacentElement('afterend', this.e_term);
+    }
   }
 }
 function better_match(one, two) {
@@ -445,8 +474,8 @@ class PageTerm extends Term {
   pri;
   com_match_info;
   sci_match_info;
-  constructor(search_str, page_info) {
-    super();
+  constructor(group, search_str, page_info) {
+    super(group);
     this.search_str = search_str;
     this.page_info = page_info;
   }
@@ -493,7 +522,8 @@ class PageTerm extends Term {
       insert_match(this);
     } else if ('glossary' in page_info) {
       for (const anchor_info of page_info.glossary) {
-        const term = new AnchorTerm(search_str, page_info, anchor_info);
+        const term = new AnchorTerm(this.group, search_str,
+                                    page_info, anchor_info);
         term.search();
       }
     }
@@ -537,7 +567,7 @@ class PageTerm extends Term {
   prefix() {
     return 'within';
   }
-  get_search_term_text() {
+  get_text() {
     const page_info = this.page_info;
     return compose_page_name(page_info, 1);
   }
@@ -578,8 +608,8 @@ class PageTerm extends Term {
 class AnchorTerm extends PageTerm {
   anchor_info;
   match_info;
-  constructor(search_str, page_info, anchor_info) {
-    super(search_str, page_info);
+  constructor(group, search_str, page_info, anchor_info) {
+    super(group, search_str, page_info);
     this.anchor_info = anchor_info;
   }
   check_list() {
@@ -624,7 +654,7 @@ function fn_search(default_ac_selected) {
   if (/\w/.test(search_str)) {
     add_adv_terms(search_str);
     for (const page_info of pages) {
-      const term = new PageTerm(search_str, page_info);
+      const term = new PageTerm(0, search_str, page_info);
       term.search();
     }
   } else if (adv_search && (term_id < term_list.length)) {
@@ -658,7 +688,8 @@ function fn_ac_click() {
   return true;
 }
 function fn_adv_ac_click(i) {
-  confirm_adv_search(ac_list[i], i);
+  confirm_adv_search_term(i);
+  prepare_new_adv_input();
   gen_adv_search_results();
   return false;
 }
@@ -678,15 +709,17 @@ function confirm_reg_search(event) {
 function fn_keydown() {
   if ((event.key == 'Enter') && !ac_is_hidden && ac_list.length) {
     if (adv_search) {
-      const term = ac_list[ac_selected]
-      confirm_adv_search(term, ac_selected);
+      confirm_adv_search_term(ac_selected);
+      prepare_new_adv_input();
       gen_adv_search_results();
     } else {
       confirm_reg_search(event);
     }
   } else if (event.key == 'Escape') {
     if (adv_search && (term_id < term_list.length)){
-      confirm_adv_search(term_list[term_id], term_list[term_id].ac_selected);
+      revert_adv_search_term();
+      term_id = term_list.length;
+      prepare_new_adv_input();
     } else {
       clear_search();
     }
@@ -795,50 +828,53 @@ function digits(num, len) {
   return String(num).padStart(len, '0');
 }
 function add_adv_terms(search_str) {
+  var group = 1;
   for (const trait of traits) {
-    const term = new TraitTerm(search_str, trait);
+    const term = new TraitTerm(group, search_str, trait);
     term.search();
   }
+  group++;
   for (const park of parks) {
-    const term = new ParkTerm(search_str, park);
+    const term = new ParkTerm(group, search_str, park);
     term.search();
   }
+  group++;
   const now = new Date();
   const year = digits(now.getFullYear(), 4);
   const month = digits(now.getMonth() + 1, 2);
   const day = digits(now.getDate(), 2);
-  var term = new BtwnMDTerm(search_str);
+  var term = new BtwnMDTerm(group, search_str);
   term.search();
-  var term = new InYTerm(search_str, year);
+  var term = new InYTerm(group, search_str, year);
   term.search();
-  var term = new InYMTerm(search_str, year, month);
+  var term = new InYMTerm(group, search_str, year, month);
   term.search();
-  var term = new CmpYMDTerm(search_str, (x,y) => (x == y),
+  var term = new CmpYMDTerm(group, search_str, (x,y) => (x == y),
                             'on ', '', year, month, day);
   term.search();
-  var term = new CmpYMDTerm(search_str, (x,y) => (x >= y),
+  var term = new CmpYMDTerm(group, search_str, (x,y) => (x >= y),
                             'since ', ' (inclusive)', year, '01', '01');
   term.search();
-  var term = new CmpYMDTerm(search_str, (x,y) => (x <= y),
+  var term = new CmpYMDTerm(group, search_str, (x,y) => (x <= y),
                             'until ', ' (inclusive)', year, '12', '31');
   term.search();
-  var term = new CmpYMDTerm(search_str, (x,y) => (x > y),
+  var term = new CmpYMDTerm(group, search_str, (x,y) => (x > y),
                             'after ', ' (exclusive)', year, '12', '31');
   term.search();
-  var term = new CmpYMDTerm(search_str, (x,y) => (x < y),
+  var term = new CmpYMDTerm(group, search_str, (x,y) => (x < y),
                             'before ', ' (exclusive)', year, '01', '01');
   term.search();
-  var term = new BtwnYMDTerm(search_str, year);
+  var term = new BtwnYMDTerm(group, search_str, year);
   term.search();
 }
 function fn_term_click(event) {
-  apply_term();
-  for (var i = 0; i < term_list.length; i++) {
-    if (term_list[i].e_term == event.currentTarget) break;
+  if (term_id < term_list.length) {
+    revert_adv_search_term();
   }
-  term_id = i;
-  var term_info = term_list[term_id];
-  term_info.e_term.replaceWith(e_search_container);
+  const tgt = event.currentTarget;
+  for (term_id = 0; term_list[term_id].e_term != tgt; term_id++) {}
+  const term = term_list[term_id];
+  term.e_term.replaceWith(e_search_container);
   e_search_input.focus();
   restore_term(term_list[term_id].search_str, term_list[term_id].ac_selected);
   generate_ac_html();
@@ -850,70 +886,65 @@ function cvt_name_to_query(name) {
   return name;
 }
 function save_state() {
-  var term_names = [];
-  for (const term of term_list) {
-    const name = term.get_name();
-    const q = cvt_name_to_query(name);
-    term_names.push(q);
+  if (term_list.length) {
+    var term_names = [];
+    for (const term of term_list) {
+      const name = term.get_name();
+      const q = cvt_name_to_query(name);
+      term_names.push(q);
+    }
+    const query = term_names.join('.');
+    const url = window.location.pathname + '?' + query;
+    history.replaceState(null, '', url);
+  } else {
+    history.replaceState(null, '', window.location.pathname);
   }
-  const query = term_names.join('.');
-  const url = window.location.pathname + '?' + query;
-  history.replaceState(null, '', url);
 }
 function restore_state(query) {
   for (var name of query.split('.')) {
     name = name.replace(/-/g, ' ');
     restore_term(name, 0);
-    confirm_adv_search(ac_list[0], 0);
+    confirm_adv_search_term(0);
   }
+  clear_search();
   gen_adv_search_results();
 }
 function restore_term(search_str, ac_selected) {
   e_search_input.value = search_str;
   fn_search(ac_selected);
 }
-function confirm_adv_search(term, ac_selected) {
+function confirm_adv_search_term(ac_selected) {
+  const term = ac_list[ac_selected];
   term.search_str = e_search_input.value;
   term.ac_selected = ac_selected;
-  if (term.is_clear) {
+  term.gen_html_element();
+  if ((term_id < term_list.length) &&
+      (term.group == term_list[term_id].group)) {
+    term_list[term_id] = term;
+    revert_adv_search_term();
+  } else {
     term_list.splice(term_id, 1);
-  } else {
-    term_list.splice(term_id, 1, term);
-    apply_term();
+    term.insert_html_element();
   }
-  save_state();
-  clear_search();
   term_id = term_list.length;
-  if (term_id == 0) {
-    e_terms.insertAdjacentElement('afterbegin', e_search_container);
-  } else {
+}
+function revert_adv_search_term() {
+  const term = term_list[term_id];
+  e_search_container.insertAdjacentElement('beforeBegin', term.e_term);
+}
+function prepare_new_adv_input() {
+  clear_search();
+  if (term_id != 0) {
     const prev_e_term = term_list[term_id-1].e_term;
     prev_e_term.insertAdjacentElement('afterend', e_search_container);
   }
   e_search_input.focus();
 }
-function apply_term() {
-  if (term_id == term_list.length) {
-    return;
-  }
-  const term = term_list[term_id];
-  const e_term = document.createElement('button');
-  term.e_term = e_term;
-  e_term.className = 'term';
-  e_term.addEventListener('click', fn_term_click);
-  const c = term.get_class();
-  const prefix = term.prefix();
-  const term_name = term.get_search_term_text();
-  const span = '<span class="' + c + '">' + term_name + '</span>';
-  e_term.innerHTML = '<p>' + prefix + ' <b>' + span + '</b></p>';
-  term.e_term = e_term;
-  e_search_container.replaceWith(e_term);
-}
 class ClearTerm extends Term {
   pri;
   is_clear = true;
   constructor() {
-    super();
+    super(null);
     this.pri = 0.0;
     insert_match(this);
   }
@@ -923,13 +954,17 @@ class ClearTerm extends Term {
   get_class() {
     return 'unobs';
   }
+  gen_html_element() {
+  }
+  insert_html_element() {
+  }
 }
 class TextTerm extends Term {
   search_str;
   pri;
   match_info;
-  constructor(search_str, match_str, def_num_list = []) {
-    super();
+  constructor(group, search_str, match_str, def_num_list = []) {
+    super(group);
     this.search_str = search_str;
     this.match_str = match_str;
     this.def_num_list = def_num_list;
@@ -953,7 +988,7 @@ class TextTerm extends Term {
   get_class() {
     return 'unobs';
   }
-  get_search_term_text() {
+  get_text() {
     var term_name = this.match_info.match_str;
     for (const num of this.match_info.num_list) {
       term_name = term_name.replace(/%#*/, num);
@@ -961,7 +996,7 @@ class TextTerm extends Term {
     return term_name;
   }
   get_name() {
-    return this.get_search_term_text();
+    return this.get_text();
   }
   get_url() {
     const query = cvt_name_to_query(this.get_name());
@@ -995,10 +1030,6 @@ class TripTerm extends TextTerm {
           trip_result_set.delete(trip);
         }
       }
-      if (('c' in page_info) && (page_info.c[0] == 'sticky monkeyflower')) {
-        console.log('sticky monkeyflower trips:',
-                    page_to_trip.get(page_info).size);
-      }
       if (trip_result_set.size == 0){
         result_set.delete(page_info);
       }
@@ -1023,8 +1054,8 @@ class DateTerm extends TripTerm {
   }
 }
 class InYTerm extends DateTerm {
-  constructor(search_str, dy) {
-    super(search_str, 'in %###', [dy]);
+  constructor(group, search_str, dy) {
+    super(group, search_str, 'in %###', [dy]);
   }
   init_matching_trips() {
     const tgt_year = this.match_info.num_list[0];
@@ -1037,8 +1068,8 @@ class InYTerm extends DateTerm {
   }
 }
 class InYMTerm extends DateTerm {
-  constructor(search_str, dy, dm) {
-    super(search_str, 'in %###-%#', [dy, dm]);
+  constructor(group, search_str, dy, dm) {
+    super(group, search_str, 'in %###-%#', [dy, dm]);
   }
   init_matching_trips() {
     const tgt_year = this.match_info.num_list[0];
@@ -1054,8 +1085,8 @@ class InYMTerm extends DateTerm {
 }
 class CmpYMDTerm extends DateTerm {
   fn_cmp;
-  constructor(search_str, fn_cmp, prefix, postfix, dy, dm, dd) {
-    super(search_str, prefix + '%###-%#-%#' + postfix, [dy, dm, dd]);
+  constructor(group, search_str, fn_cmp, prefix, postfix, dy, dm, dd) {
+    super(group, search_str, prefix + '%###-%#-%#' + postfix, [dy, dm, dd]);
     this.fn_cmp = fn_cmp;
   }
   init_matching_trips() {
@@ -1071,8 +1102,8 @@ class CmpYMDTerm extends DateTerm {
   }
 }
 class BtwnMDTerm extends DateTerm {
-  constructor(search_str) {
-    super(search_str, 'between %#-%# and %#-%# (inclusive)',
+  constructor(group, search_str) {
+    super(group, search_str, 'between %#-%# and %#-%# (inclusive)',
           ['01', '01', '12', '31']);
   }
   init_matching_trips() {
@@ -1093,8 +1124,8 @@ class BtwnMDTerm extends DateTerm {
   }
 }
 class BtwnYMDTerm extends DateTerm {
-  constructor(search_str, dy) {
-    super(search_str, 'between %###-%#-%# and %###-%#-%# (inclusive)',
+  constructor(group, search_str, dy) {
+    super(group, search_str, 'between %###-%#-%# and %###-%#-%# (inclusive)',
           [dy, '01', '01', dy, '12', '31']);
   }
   init_matching_trips() {
@@ -1126,6 +1157,7 @@ function delete_ancestors(page_info, result_set, checked_set) {
   }
 }
 function gen_adv_search_results() {
+  save_state();
   if (term_list.length == 0) {
     e_results.innerHTML = '<p>...</p>';
     return;
@@ -1134,12 +1166,6 @@ function gen_adv_search_results() {
   const page_to_trip = new Map();
   for (const term of term_list) {
     term.match(result_set, page_to_trip);
-  }
-  for (const page_info of result_set) {
-    if (('c' in page_info) && (page_info.c[0] == 'sticky monkeyflower')) {
-      console.log('pre-sort sticky monkeyflower trips:',
-                  page_to_trip.has(page_info) ? 'no page_to_trip' : page_to_trip.get(page_info).size);
-    }
   }
   const checked_set = new Set();
   for (const page_info of result_set) {
@@ -1165,10 +1191,6 @@ function gen_adv_search_results() {
     const c = get_class(page_info);
     const url = get_url(page_info, null);
     cnt++;
-    if (('c' in page_info) && (page_info.c[0] == 'sticky monkeyflower')) {
-      console.log('sorted sticky monkeyflower trips:',
-                  page_to_trip.has(page_info) ? 'no page_to_trip' : page_to_trip.get(page_info).size);
-    }
     list.push('<div class="list-box">');
     if ('j' in page_info) {
       var jpg = String(page_info.j);
