@@ -1959,6 +1959,8 @@ function delete_ancestors(page_info, result_set, checked_set) {
 
 /* Perform the advanced search and generate the HTML for the results. */
 function gen_adv_search_results() {
+  /* If something has changed enough that we need to regenerate results,
+     then now's a good time to save state. */
   save_state();
 
   if (term_list.length == 0) {
@@ -1975,7 +1977,7 @@ function gen_adv_search_results() {
   /* Keep track of the constrained set of trips for each page. */
   const page_to_trip = new Map();
 
-  /* For each search term, remvoe taxons from the result_set that don't
+  /* For each search term, remove taxons from the result_set that don't
      match the term. */
   for (const term of term_list) {
     term.match(result_set, page_to_trip);
