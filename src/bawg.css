@@ -432,6 +432,9 @@ div.box :last-child {
 a.family:link, a.family:visited, span.family {
     color: black;
     text-decoration: none;
+    /* Caution: by default a multi-line link gets the dotted line only at
+       the bottom of the containing box.  Enclose the link with <span>
+       to ensure that the dotted line appears under each line. */
     border-bottom: 1px black dotted;
 }
 a.unobs:link, a.unobs:visited, span.unobs {

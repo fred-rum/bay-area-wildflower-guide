@@ -1790,9 +1790,4 @@ Show stats at end of advanced search
 Include observations lost to hierarchy flattening
   e.g. "N observations at higher taxonomy levels not displayed"
 
-some groups (e.g. fungi) have a dotted underline for their link,
-    and it ends up looking weird on two lines (e.g. from life)
-  it appears to have something to do with the enclosing <span>,
-    which looks useless, but apparently cleans up the underline somehow
-
 add text, etc. to distinguish advanced search terms that AND vs. OR

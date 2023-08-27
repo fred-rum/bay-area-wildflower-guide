@@ -2948,7 +2948,13 @@ class Page:
             pageurl = self.get_url()
             w.write(f'<a href="{pageurl}.html"><div class="list-thumb"><img class="boxed" src="{thumb_url(jpg)}" alt="photo"></div></a>')
 
-        w.write(f'{self.create_link(2)}</div>\n')
+        if self.link_style() == 'family':
+            # By default a multi-line link gets the dotted line only at the
+            # bottom of the containing box.  Enclose the link with <span>
+            # to ensure that the dotted line appears under each line.
+            w.write(f'<span>{self.create_link(2)}</span></div>\n')
+        else:
+            w.write(f'{self.create_link(2)}</div>\n')
 
 #    def get_ancestor_set(self):
 #        ancestor_set = set()
