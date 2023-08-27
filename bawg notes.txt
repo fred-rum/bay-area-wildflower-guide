@@ -1789,3 +1789,6 @@ Show stats at end of advanced search
   e.g. "A observations of B taxons in C trips to D locations"
 Include observations lost to hierarchy flattening
   e.g. "N observations at higher taxonomy levels not displayed"
+
+now that search terms are ordered by groups,
+  each group should OR its results together

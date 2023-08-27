@@ -27,22 +27,9 @@ def strip_comments(to_filename, from_filename=None, code=None):
 
     if is_html:
         # When I'm debugging with -debug_js, advanced-search.html and
-        # gallery.html need ../ to reach the directory with pages.js and
-        # photos.js.  Strip away ../ when files are stripped and copied.
+        # gallery.html need src/ to reach the directory with the JS and CSS
+        # files.  Remove this when files are stripped and copied.
         txt = re.sub(r'src="../', 'src="', txt)
-
-    if is_js:
-        # When I'm debugging with -debug_js, the scripts running in
-        # advanced-search.html and galley.html need extra code to prepend ../
-        # to a URL.  Discard that code when files are stripped and copied.
-        txt = re.sub(r'^\s*/\* -debug_js only \*/.*$', '', txt,
-                     flags=re.MULTILINE)
-
-        # On the other hand, the URL to gallery.html is relative to the
-        # page it's being used in, so search.js needs to include 'src/'.
-        # Strip that away when files are stripped and copied.
-        txt = re.sub(r"'src/", "'", txt)
-
 
     # These days strip_comments() is called with -debug_js only for sw.js.
     # strip_comments() isn't called at all for the other JavaScript files.

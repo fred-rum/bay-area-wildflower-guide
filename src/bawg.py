@@ -144,9 +144,6 @@ def create_taxon_pages(d, prefix=''):
 def debug_js():
     # To avoid confusion when using the unstripped source files,
     # delete the stripped versions.
-    delete_file('advanced-search.html')
-    delete_file('gallery.html')
-
     delete_file('bawg.css')
     delete_file('search.js')
 
@@ -657,13 +654,15 @@ try:
                 page.write_html()
 
     if arg('-debug_js'):
-        with Step('strip', 'Delete stripped JS since -debug_js is specified'):
+        with Step('strip', 'Delete stripped files since -debug_js is specified'):
             debug_js()
     else:
-        with Step('strip', 'Strip comments from ungenerated JS and HTML'):
+        with Step('strip', 'Strip comments from ungenerated JS and CSS'):
             strip_js()
-            strip_comments('advanced-search.html')
-            strip_comments('gallery.html')
+
+    with Step('strip_html', 'Strip comments from ungenerated HTML'):
+        strip_comments('advanced-search.html')
+        strip_comments('gallery.html')
 
     with Step('other', 'Process "other/*.txt" files'):
         other_files = get_file_set('other', 'txt')

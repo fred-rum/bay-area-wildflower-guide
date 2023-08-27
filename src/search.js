@@ -71,7 +71,7 @@ function gallery_main() {
       const suffix_query = encodeURIComponent(suffix);
 
       /* Replace the href to point to the gallery. */
-      e_link_list[i].href = root_path + 'src/gallery.html?' + suffix;
+      e_link_list[i].href = root_path + 'gallery.html?' + suffix;
     }
   }
 }
@@ -1756,10 +1756,6 @@ class TextTerm extends Term {
 
   get_url() {
     const query = cvt_name_to_query(this.get_name());
-
-    /* advanced-search.html might be in src/ */
-    /* -debug_js only */ return root_path + 'src/advanced-search.html?' + query;
-
     return root_path + 'advanced-search.html?' + query;
   }
 }
@@ -2040,7 +2036,6 @@ function gen_adv_search_results() {
         jpg = page_info.p + ',' + jpg;
       }
       var jpg_url = 'thumbs/' + jpg + '.jpg';
-      /* -debug_js only */ jpg_url = '../' + jpg_url;
 
       /* Enable lazy image loading after the first 10 entries (whether those
          entries include imagse or not).  This prevents a broad search from
@@ -2080,9 +2075,6 @@ if (/\/html\/[^\/]*$/.test(window.location.pathname)) {
   var path = '';
 } else {
   var path = 'html/';
-
-  /* advanced-search.html might be in src/ */
-  /* -debug_js only */ if (/\/src\/[^\/]*$/.test(window.location.pathname)) path = '../html/';
 }
 
 /* main() kicks off search-related activity once it is safe to do so.

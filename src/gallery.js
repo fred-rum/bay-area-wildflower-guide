@@ -567,8 +567,6 @@ function Photo(i, url_full) {
     this.url_thumb = url_full.replace(/^photos\/|^figures\//, 'thumbs/')
     console.log(this.url_thumb);
   }
-  /* -debug_js only */ this.url_full = '../' + this.url_full;
-  /* -debug_js only */ this.url_thumb = '../' + this.url_thumb;
 
   /* The image elements for the thumbnail (for fast loading) and full-sized
      photo (for detail when available).
