@@ -579,28 +579,31 @@ class PageTerm extends Term {
       return page_info.c[0];
     }
   }
-  within_taxon(page_info, in_tgt_map) {
-    if (in_tgt_map.has(page_info)) {
-      return in_tgt_map.get(page_info);
+  within_taxon(page_info) {
+    if (this.in_tgt_map.has(page_info)) {
+      return this.in_tgt_map.get(page_info);
     } else if (page_info == this.page_info) {
-      in_tgt_map.set(page_info, true);
+      this.in_tgt_map.set(page_info, true);
       return true;
     } else {
       for (const parent_info of page_info.parent_set) {
-        if (this.within_taxon(parent_info, in_tgt_map)) {
-          in_tgt_map.set(page_info, true);
+        if (this.within_taxon(parent_info, this.in_tgt_map)) {
+          this.in_tgt_map.set(page_info, true);
           return true;
         }
       }
-      in_tgt_map.set(page_info, false);
+      this.in_tgt_map.set(page_info, false);
       return false;
     }
   }
-  match(result_set, page_to_trip) {
-    const in_tgt_map = new Map();
-    for (const page_info of result_set) {
-      if (!this.within_taxon(page_info, in_tgt_map)) {
-        result_set.delete(page_info);
+  result_init() {
+    this.in_tgt_map = new Map();
+  }
+  result_match(page_info, past_trip_set, current_trip_set) {
+    if (this.within_taxon(page_info)) {
+      for (const trip of past_trip_set) {
+        past_trip_set.delete(trip);
+        current_trip_set.add(trip);
       }
     }
   }
@@ -1006,11 +1009,14 @@ class TextTerm extends Term {
   }
 }
 class TraitTerm extends TextTerm {
-  match(result_set, page_to_trip) {
+  result_init() {
+  }
+  result_match(page_info, past_trip_set, current_trip_set) {
     const trait = this.match_info.match_str;
-    for (const page_info of result_set) {
-      if (!page_info.trait_set.has(trait)) {
-        result_set.delete(page_info);
+    if (page_info.trait_set.has(trait)) {
+      for (const trip of past_trip_set) {
+        past_trip_set.delete(trip);
+        current_trip_set.add(trip);
       }
     }
   }
@@ -1019,27 +1025,18 @@ class TraitTerm extends TextTerm {
   }
 }
 class TripTerm extends TextTerm {
-  matching_trips = new Set();
-  match(result_set, page_to_trip) {
-    this.init_matching_trips();
-    for (const page_info of result_set) {
-      if (!(page_to_trip.has(page_info))) {
-        page_to_trip.set(page_info, new Set(page_info.trip_set));
-      }
-      const trip_result_set = page_to_trip.get(page_info);
-      for (const trip of trip_result_set) {
-        if (!this.matching_trips.has(trip)) {
-          trip_result_set.delete(trip);
-        }
-      }
-      if (trip_result_set.size == 0){
-        result_set.delete(page_info);
+  result_match(page_info, past_trip_set, current_trip_set) {
+    for (const trip of past_trip_set) {
+      if (this.matching_trips.has(trip)) {
+        past_trip_set.delete(trip);
+        current_trip_set.add(trip);
       }
     }
   }
 }
 class ParkTerm extends TripTerm {
-  init_matching_trips() {
+  result_init() {
+    this.matching_trips = new Set();
     for (const trip of trips) {
       if (trip[1] == this.match_info.match_str) {
         this.matching_trips.add(trip);
@@ -1053,6 +1050,10 @@ class ParkTerm extends TripTerm {
 class DateTerm extends TripTerm {
   prefix() {
     return 'observed';
+  }
+  result_init() {
+    this.matching_trips = new Set();
+    this.init_matching_trips();
   }
 }
 class InYTerm extends DateTerm {
@@ -1146,15 +1147,15 @@ class BtwnYMDTerm extends DateTerm {
     }
   }
 }
-function delete_ancestors(page_info, result_set, checked_set) {
+function delete_ancestors(page_info, page_to_trips, checked_set) {
   for (const parent_info of page_info.parent_set) {
     if (checked_set.has(parent_info)) {
     } else {
-      if (result_set.has(parent_info)) {
-        result_set.delete(parent_info);
+      if (page_to_trips.has(parent_info)) {
+        page_to_trips.delete(parent_info);
       }
       checked_set.add(parent_info);
-      delete_ancestors(parent_info, result_set, checked_set);
+      delete_ancestors(parent_info, page_to_trips, checked_set);
     }
   }
 }
@@ -1164,29 +1165,42 @@ function gen_adv_search_results() {
     e_results.innerHTML = '<p>...</p>';
     return;
   }
-  const result_set = new Set(pages.filter((x) => !'sgj'.includes(x.x)));
-  const page_to_trip = new Map();
   for (const term of term_list) {
-    term.match(result_set, page_to_trip);
+    term.result_init();
+  }
+  const page_to_trips = new Map();
+  for (const page_info of pages) {
+    if (page_info.trip_set.size == 0) {
+      continue;
+    }
+    let prev_group = -1;
+    let current_trip_set = new Set(page_info.trip_set);
+    let past_trip_set;
+    for (const term of term_list) {
+      if (term.group != prev_group) {
+        if (current_trip_set.size == 0) {
+          break;
+        }
+        past_trip_set = current_trip_set;
+        current_trip_set = new Set();
+        prev_group = term.group;
+      }
+      term.result_match(page_info, past_trip_set, current_trip_set);
+    }
+    if (current_trip_set.size) {
+      page_to_trips.set(page_info, current_trip_set);
+    }
   }
   const checked_set = new Set();
-  for (const page_info of result_set) {
-    delete_ancestors(page_info, result_set, checked_set);
+  for (const page_info of page_to_trips.keys()) {
+    delete_ancestors(page_info, page_to_trips, checked_set);
   }
   function by_trip_cnt(a, b) {
-    if (page_to_trip.has(a)) {
-      var a_cnt = page_to_trip.get(a).size;
-    } else {
-      var a_cnt = a.trip_set.size;
-    }
-    if (page_to_trip.has(b)) {
-      var b_cnt = page_to_trip.get(b).size;
-    } else {
-      var b_cnt = b.trip_set.size;
-    }
+    const a_cnt = page_to_trips.get(a).size;
+    const b_cnt = page_to_trips.get(b).size;
     return (a < b) ? -1 : (a > b) ? 1 : 0;
   }
-  const result_list = Array.from(result_set).sort(by_trip_cnt);
+  const result_list = Array.from(page_to_trips.keys()).sort(by_trip_cnt);
   const list = [];
   var cnt = 0;
   for (const page_info of result_list) {

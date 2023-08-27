@@ -1009,29 +1009,33 @@ class PageTerm extends Term {
 
   /* Check whether page_info is within the target taxon.
      To avoid excessive re-checking, remember results in in_tgt_map. */
-  within_taxon(page_info, in_tgt_map) {
-    if (in_tgt_map.has(page_info)) {
-      return in_tgt_map.get(page_info);
+  within_taxon(page_info) {
+    if (this.in_tgt_map.has(page_info)) {
+      return this.in_tgt_map.get(page_info);
     } else if (page_info == this.page_info) {
-      in_tgt_map.set(page_info, true);
+      this.in_tgt_map.set(page_info, true);
       return true;
     } else {
       for (const parent_info of page_info.parent_set) {
-        if (this.within_taxon(parent_info, in_tgt_map)) {
-          in_tgt_map.set(page_info, true);
+        if (this.within_taxon(parent_info, this.in_tgt_map)) {
+          this.in_tgt_map.set(page_info, true);
           return true;
         }
       }
-      in_tgt_map.set(page_info, false);
+      this.in_tgt_map.set(page_info, false);
       return false;
     }
   }
 
-  match(result_set, page_to_trip) {
-    const in_tgt_map = new Map();
-    for (const page_info of result_set) {
-      if (!this.within_taxon(page_info, in_tgt_map)) {
-        result_set.delete(page_info);
+  result_init() {
+    this.in_tgt_map = new Map();
+  }
+
+  result_match(page_info, past_trip_set, current_trip_set) {
+    if (this.within_taxon(page_info)) {
+      for (const trip of past_trip_set) {
+        past_trip_set.delete(trip);
+        current_trip_set.add(trip);
       }
     }
   }
@@ -1762,12 +1766,16 @@ class TextTerm extends Term {
 
 
 class TraitTerm extends TextTerm {
-  match(result_set, page_to_trip) {
-    const trait = this.match_info.match_str;
+  result_init() {
+    /* empty */
+  }
 
-    for (const page_info of result_set) {
-      if (!page_info.trait_set.has(trait)) {
-        result_set.delete(page_info);
+  result_match(page_info, past_trip_set, current_trip_set) {
+    const trait = this.match_info.match_str;
+    if (page_info.trait_set.has(trait)) {
+      for (const trip of past_trip_set) {
+        past_trip_set.delete(trip);
+        current_trip_set.add(trip);
       }
     }
   }
@@ -1779,30 +1787,12 @@ class TraitTerm extends TextTerm {
 
 
 class TripTerm extends TextTerm {
-  matching_trips = new Set();
-
-  match(result_set, page_to_trip) {
-    /* First, determine which trips meet the term requirement. */
-    this.init_matching_trips();
-
-    /* Then reduce the trip set of each taxon accordingly. */
-    for (const page_info of result_set) {
-      /* Initialize page_to_trip for this result page if necessary. */
-      if (!(page_to_trip.has(page_info))) {
-        page_to_trip.set(page_info, new Set(page_info.trip_set));
-      }
-
-      /* This is the constrained set of trips for this page. */
-      const trip_result_set = page_to_trip.get(page_info);
-
-      for (const trip of trip_result_set) {
-        if (!this.matching_trips.has(trip)) {
-          trip_result_set.delete(trip);
-        }
-      }
-
-      if (trip_result_set.size == 0){
-        result_set.delete(page_info);
+  /* this.matching_trips is initialized differently for each subclass */
+  result_match(page_info, past_trip_set, current_trip_set) {
+    for (const trip of past_trip_set) {
+      if (this.matching_trips.has(trip)) {
+        past_trip_set.delete(trip);
+        current_trip_set.add(trip);
       }
     }
   }
@@ -1810,7 +1800,9 @@ class TripTerm extends TextTerm {
 
 
 class ParkTerm extends TripTerm {
-  init_matching_trips() {
+  result_init() {
+    this.matching_trips = new Set();
+
     for (const trip of trips) {
       if (trip[1] == this.match_info.match_str) {
         this.matching_trips.add(trip);
@@ -1828,6 +1820,11 @@ class ParkTerm extends TripTerm {
 class DateTerm extends TripTerm {
   prefix() {
     return 'observed';
+  }
+
+  result_init() {
+    this.matching_trips = new Set();
+    this.init_matching_trips(); /* different for each subclass */
   }
 }
 
@@ -1943,16 +1940,16 @@ class BtwnYMDTerm extends DateTerm {
 }
 
 
-function delete_ancestors(page_info, result_set, checked_set) {
+function delete_ancestors(page_info, page_to_trips, checked_set) {
   for (const parent_info of page_info.parent_set) {
     if (checked_set.has(parent_info)) {
       /* no need to recheck or recurse */
     } else {
-      if (result_set.has(parent_info)) {
-        result_set.delete(parent_info);
+      if (page_to_trips.has(parent_info)) {
+        page_to_trips.delete(parent_info);
       }
       checked_set.add(parent_info);
-      delete_ancestors(parent_info, result_set, checked_set);
+      delete_ancestors(parent_info, page_to_trips, checked_set);
     }
   }
 }
@@ -1970,56 +1967,107 @@ function gen_adv_search_results() {
 
   /* Perform the advanced search, combining the results from each term. */
 
-  /* Start with all possible results (excluding subset pages and glosseries),
-     then remove pages that fail to satisfy a term. */
-  const result_set = new Set(pages.filter((x) => !'sgj'.includes(x.x)));
-
-  /* Keep track of the constrained set of trips for each page. */
-  const page_to_trip = new Map();
-
-  /* For each search term, remove taxons from the result_set that don't
-     match the term. */
+  /* Initialize each term in preparation for a fresh search. */
   for (const term of term_list) {
-    term.match(result_set, page_to_trip);
+    term.result_init();
+  }
+
+  /* Keep track of which trips are valid and the constrained set of trips
+     for each page. */
+  const page_to_trips = new Map();
+
+  /* **For each taxon**, bounce back and forth between two sets.
+
+     The goal is that trips within a group are OR'ed together,
+     and trips are AND'ed between different groups.
+
+     past_trip_set - Is set for each trip that was valid after all previous
+     groups of terms.
+
+     current_trip_set - Is set for each trip that is valid within the current
+     group of terms.
+
+     past_trip_set is initialized to all trips associated with the taxon.
+
+     current_trip_set is initialized to be empty at the start of each group.
+
+     Each term checks each trip in past_trip_set to see if it should add
+     the trip to current_trip_set.  If it does, it also *removes* the trip
+     from past_trip_set because other terms in the group don't have to check
+     it again.
+
+     At the end of a group, past_trip_set is copied from current_trip_set,
+     and current_trip_set is cleared again in preparation for the next group.
+  */
+  for (const page_info of pages) {
+    if (page_info.trip_set.size == 0) {
+      /* Exclude pagse with no associated trips.
+         Besides simple unobserved taxons, this also excludes
+         subset and glossary pages from the results.
+         If I ever need to exclude them explicitly, it's
+         ('sgj'.includes(page_info.x) */
+      continue;
+    }
+
+    /* The first term won't match the past group, so it will copy
+       past_trip_set from current_trip_set and clear current_trip_set. */
+    let prev_group = -1;
+
+    /* Initialize a new trip set of all trips associated with the taxon. */
+    let current_trip_set = new Set(page_info.trip_set);
+    let past_trip_set;
+
+    for (const term of term_list) {
+      if (term.group != prev_group) {
+        if (current_trip_set.size == 0) {
+          /* break out early, e.g. because a taxon doesn't match at all */
+          break;
+        }
+        past_trip_set = current_trip_set;
+        current_trip_set = new Set();
+        prev_group = term.group;
+      }
+
+      term.result_match(page_info, past_trip_set, current_trip_set);
+    }
+
+    if (current_trip_set.size) {
+      /* We have a matching taxon.  Remember the subset of trips that
+         are associated with the taxon and that match the criteria. */
+      page_to_trips.set(page_info, current_trip_set);
+    }
   }
 
   /* Show only results at the lowest level.  I.e. eliminate higher-level
      pages where a lower-level page is in the results. */
   const checked_set = new Set();
-  for (const page_info of result_set) {
-    delete_ancestors(page_info, result_set, checked_set);
+  for (const page_info of page_to_trips.keys()) {
+    delete_ancestors(page_info, page_to_trips, checked_set);
   }
 
-/* Helper function for sorting a list of taxons (page_info) by the number of
-   trips that match the search terms.
+  /* Helper function for sorting a list of taxons (page_info) by the number
+     of trips that match the search terms.
 
-   Note that reference to page_to_trip from the containing function.
+     References to page_to_trips get it from the containing function.
 
-   We prefer that if two taxons are observed the same number of times, we
-   keep the order from pagse.js.  Array.sort() is only guaranteed to preserve
-   this order since ~2019, but
-   - it primary benefit is to order a parent before its child, but that doesn't
-     matter here since the advanced search results either group the children
-     hierarchically under the parent or delete the parent from the results, and
-   - it's not really a burden if results get out of order.
-*/
+     We prefer that if two taxons are observed the same number of times,
+     we keep the order from pagse.js.  Array.sort() is only guaranteed to
+     preserve this order since ~2019, but
+     - it primary benefit is to order a parent before its child, but that
+       doesn't matter here since the advanced search results either group
+       the children hierarchically under the parent or delete the parent
+       from the results, and
+     - it's not really a burden if results get out of order, and
+     - most people should be running an up-to-date browser anyway.
+  */
   function by_trip_cnt(a, b) {
-    if (page_to_trip.has(a)) {
-      var a_cnt = page_to_trip.get(a).size;
-    } else {
-      var a_cnt = a.trip_set.size;
-    }
-
-    if (page_to_trip.has(b)) {
-      var b_cnt = page_to_trip.get(b).size;
-    } else {
-      var b_cnt = b.trip_set.size;
-    }
+    const a_cnt = page_to_trips.get(a).size;
+    const b_cnt = page_to_trips.get(b).size;
 
     return (a < b) ? -1 : (a > b) ? 1 : 0;
   }
 
-  const result_list = Array.from(result_set).sort(by_trip_cnt);
+  const result_list = Array.from(page_to_trips.keys()).sort(by_trip_cnt);
 
   const list = [];
   var cnt = 0;

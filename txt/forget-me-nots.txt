@@ -9,7 +9,7 @@ Key features:
 . leaf length, width
 
 ==broadleaf forget-me-not:M. latifolia
-color: pale blue
+color: pale blue, blue
 . calyx tube hairs at least some spreading, some or all hooked
 . corolla 5--10 mm diameter, blue (but pink when young)
 . leaves roughly 2--3x wider than corollas, roughly 2--3x longer than wide
