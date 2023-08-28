@@ -6,14 +6,14 @@ x:hist/rare
 color: pale purple
 sci_p: Aster chilensis
 . stem hairy distally
-. outer phyllaries pale-margined > &frac12; length, length generally >= 3 &times; width, obtuse
+. outer phyllaries pale-margined > &frac12; length, length generally >= 3 &times; width, <b>obtuse</b>
 . disk flowers: yellow
 . ray flowers: 8--12 mm, violet
 . very common, especially in the Santa Cruz range
 
 ==douglas' aster:S. subspicatum
 . stem +- hairy distally
-. outer phyllaries pale-margined > &frac12; length, length generally >= 3 &times; width, +- acute
+. outer phyllaries pale-margined > &frac12; length, length generally >= 3 &times; width, <b>+- acute</b>
 . disk flowers: yellow
 . ray flowers: 8--16 mm, violet
 . very rare

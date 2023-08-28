@@ -1791,3 +1791,5 @@ Include observations lost to hierarchy flattening
   e.g. "N observations at higher taxonomy levels not displayed"
 
 add text, etc. to distinguish advanced search terms that AND vs. OR
+
+FNA has characteristics of Rumex bucephalophorus
