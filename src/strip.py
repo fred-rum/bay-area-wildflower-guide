@@ -25,7 +25,7 @@ def strip_comments(to_filename, from_filename=None, code=None):
     if code:
         txt = re.sub(r'/\* insert code here \*/', code, txt)
 
-    if is_html:
+    if is_html and not arg('-debug_js'):
         # When I'm debugging with -debug_js, advanced-search.html and
         # gallery.html need src/ to reach the directory with the JS and CSS
         # files.  Remove this when files are stripped and copied.

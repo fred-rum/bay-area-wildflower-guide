@@ -2038,6 +2038,27 @@ function gen_adv_search_results() {
     }
   }
 
+  let total_cnt = 0;
+  const park_to_date_to_cnt = new Map();
+  for (const [page_info, trips] of page_to_trips) {
+    for (const trip of trips) {
+      total_cnt++;
+      const date = trip[0];
+      const park = trip[1];
+
+      if (!park_to_date_to_cnt.has(park)) {
+        park_to_date_to_cnt.set(park, new Map());
+      }
+
+      const date_to_cnt = park_to_date_to_cnt.get(park);
+      if (date_to_cnt.has(date)) {
+        date_to_cnt.set(date, date_to_cnt.get(date) + 1);
+      } else {
+        date_to_cnt.set(date, 1);
+      }
+    }
+  }
+
   /* Show only results at the lowest level.  I.e. eliminate higher-level
      pages where a lower-level page is in the results. */
   const checked_set = new Set();
@@ -2110,7 +2131,24 @@ function gen_adv_search_results() {
   }
 
   if (list.length) {
-    e_results.innerHTML = list.join('');
+    const cnt_list = ['<hr><details><summary>'];
+    cnt_list.push(total_cnt + ' observations\n')
+    cnt_list.push('</summary>');
+    for (const [park, date_to_cnt] of park_to_date_to_cnt) {
+      cnt_list.push('<p>' + park + ':</p>');
+      cnt_list.push('<ul>');
+      for (const [date, cnt] of date_to_cnt) {
+        if (cnt > 1) {
+          cnt_list.push('<li>' + date + ': ' + cnt + ' taxons </li>');
+        } else {
+          cnt_list.push('<li>' + date + '</li>');
+        }
+      }
+      cnt_list.push('</ul>');
+    }
+    cnt_list.push('</details>');
+
+    e_results.innerHTML = list.join('') + cnt_list.join('');
   } else {
     e_results.innerHTML = '<p>No taxons match the criteria.</p>';
   }
