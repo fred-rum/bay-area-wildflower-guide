@@ -2560,11 +2560,18 @@ class Page:
         else:
             return 'unobs'
 
-    def create_link(self, lines, text=None):
+    def create_link(self, lines, text=None, needs_span=False):
         pageurl = self.get_url()
         if text is None:
             text = self.format_full(lines)
-        return f'<a href="{pageurl}.html" class="{self.link_style()}">{text}</a>'
+        link = f'<a href="{pageurl}.html" class="{self.link_style()}">{text}</a>'
+        if needs_span and self.link_style() == 'family':
+            # By default a multi-line link gets the dotted line only at the
+            # bottom of the containing box.  Enclose the link with <span>
+            # to ensure that the dotted line appears under each line.
+            return f'<span>{link}</span>'
+        else:
+            return link
 
     def align_column(self, intro, c_list):
         if len(c_list) == 1:
@@ -2948,13 +2955,7 @@ class Page:
             pageurl = self.get_url()
             w.write(f'<a href="{pageurl}.html"><div class="list-thumb"><img class="boxed" src="{thumb_url(jpg)}" alt="photo"></div></a>')
 
-        if self.link_style() == 'family':
-            # By default a multi-line link gets the dotted line only at the
-            # bottom of the containing box.  Enclose the link with <span>
-            # to ensure that the dotted line appears under each line.
-            w.write(f'<span>{self.create_link(2)}</span></div>\n')
-        else:
-            w.write(f'{self.create_link(2)}</div>\n')
+        w.write(f'{self.create_link(2, needs_span=True)}</div>\n')
 
 #    def get_ancestor_set(self):
 #        ancestor_set = set()
@@ -3052,8 +3053,6 @@ class Page:
             # count as having a child key.
             self.has_child_key = not self.list_hierarchy
 
-        link = child.create_link(2)
-
         name = child.name
         jpg = child.get_jpg(suffix)
 
@@ -3082,15 +3081,18 @@ class Page:
             list_matches(s, [child], False, None, None, match_set)
             return s.getvalue()
         elif not img:
-            return '<p>' + link + '</p>\n' + text
+            link = child.create_link(2, needs_span=True)
+            return f'<p>{link}</p>\n' + text
         elif text:
             # Duplicate and contain the text link so that the following text
             # can either be below the text link and next to the image or
             # below both the image and text link, depending on the width of
             # the viewport.
+            link = child.create_link(2, needs_span=False)
             return f'<div class="flex-width"><div class="photo-box">{img}\n<span class="show-narrow">{link}</span></div><div class="key-text"><span class="show-wide">{link}</span>{text}</div></div>'
         else:
-            return f'<div class="photo-box">{img}\n<span>{link}</span></div>'
+            link = child.create_link(2, needs_span=True)
+            return f'<div class="photo-box">{img}\n{link}</div>'
 
     def parse_line_by_line(self):
         # If a parent already parsed this page (as below), we shouldn't
