@@ -478,6 +478,15 @@ span.de-emph {
     top: 0px;
     left: 0px;
 }
+.adv-search div#autocomplete-box {
+    position: absolute;
+    margin-left: 0px;
+}
+@media (min-width: 600px) {
+    .adv-search div#autocomplete-box {
+	margin-left: 21px;
+    }
+}
 span.autocomplete-entry {
     cursor: pointer;
 }

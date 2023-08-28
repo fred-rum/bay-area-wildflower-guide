@@ -98,13 +98,17 @@
     vertical-align: top;
 }
 /* When the autocomplete box is directly under the home icon (i.e. the
-   autocomplete box is visible on a narrow screen) */
+   autocomplete box is visible on a narrow screen), the home icon's
+   drop shadow disrupts the text in the autocomplete box.  The purpose
+   of the drop shadow is to prevent the scrolling body text from
+   touching the home icon, but here the autocomplete box is already
+   covering the body text, so we don't need the drop shadow while the
+   autocomplete box is displayed. */
 @media (max-width: 599px) {
     #home-icon.with-autocomplete {
 	filter: none;
     }
 }
-
 
 /* Many mobile browsers by default create a viewport (virtual screen) wide
    enough to hold standard desktop web pagse, then allow the user to zoom
@@ -898,7 +902,7 @@ input:disabled {
    The autocompletion box has 'position: fixed', which puts it where
    it normally would be placed if 'static', but removes it from the
    normal HTML flow.  Thus, it ends up floating on top of the center
-   body section, which scrolls under (and past the left side) of the
+   body div, which scrolls under (and past the left side) of the
    floating box.
 
    The autocompletion box is cuddled so closely against the search input
@@ -1070,6 +1074,16 @@ span.de-emph {
        similarly have to remove the margins for the disabled search bar. */
     top: 0px;
     left: 0px;
+}
+
+.adv-search div#autocomplete-box {
+    position: absolute;
+    margin-left: 0px;
+}
+@media (min-width: 600px) {
+    .adv-search div#autocomplete-box {
+	margin-left: 21px;
+    }
 }
 
 /* For advanced search, entries in the autocomplete box are not links,
