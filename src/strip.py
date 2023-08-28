@@ -29,7 +29,7 @@ def strip_comments(to_filename, from_filename=None, code=None):
         # When I'm debugging with -debug_js, advanced-search.html and
         # gallery.html need src/ to reach the directory with the JS and CSS
         # files.  Remove this when files are stripped and copied.
-        txt = re.sub(r'(?:src|href)="src/', 'src="', txt)
+        txt = re.sub(r'(src|href)="src/', r'\1="', txt)
 
     # These days strip_comments() is called with -debug_js only for sw.js.
     # strip_comments() isn't called at all for the other JavaScript files.
