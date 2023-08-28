@@ -6,6 +6,7 @@ color: white, other
 . hypanthium + calyx 1.5--3 mm
 . leaf blade 2--10 cm wide
 . common
+Compare to {-oneleaf foamflower}, which has a single inflorescence axis with only short forking offshoots.
 
 ==island alumroot:H. maxima
 . hypanthium + calyx 3.5--4.5 mm

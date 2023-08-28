@@ -10,6 +10,7 @@ xx:ca
 color: white
 . simple leaf with 3--5 lobes
 . found in the bay area
+Compare to {-crevice alumroot}, which has a highly forked inflorescence.
 
 ==threeleaf foamflower:T. trifoliata var. trifoliata
 . compound leaf with 3 leaflets
