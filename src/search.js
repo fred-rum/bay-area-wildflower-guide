@@ -1940,6 +1940,207 @@ class BtwnYMDTerm extends DateTerm {
 }
 
 
+/* Track observations for some set of pages within a single park.
+   This class is only used with the Cnt class (below). */
+class ParkCnt {
+  total = 0;
+  date_to_cnt = new Map(); /* date -> integer */
+
+  /* no constructor */
+
+  add(date, cnt) {
+    this.total += cnt;
+    if (this.date_to_cnt.has(date)) {
+      cnt += this.date_to_cnt.get(date);
+    }
+    this.date_to_cnt.set(date, cnt);
+  }
+
+  add_parkcnt(parkcnt) {
+    for (const [date, cnt] of parkcnt.date_to_cnt) {
+      this.add(date, cnt);
+    }
+  }
+}
+
+function sort_parkcnt_map(a, b) {
+  /* sort b before a if b's count is greater. */
+  return b[1].total - a[1].total;
+}
+
+function sort_datecnt_map(a, b) {
+  /* sort b before a if b is an earlier date, regardless of count. */
+  return (a[0] < b[0]) ? -1 : (a[0] > b[0]) ? 1 : 0;
+}
+
+function sorted_map(m, sort_fn) {
+  const entries = Array.from(m.entries());
+  return entries.sort(sort_fn);
+}
+
+function get_cnt(page_to_trips, page_to_cnt, page_info) {
+  if (!page_to_cnt.has(page_info)) {
+    page_to_cnt.set(page_info, new Cnt(page_to_trips, page_to_cnt, page_info));
+  }
+  return page_to_cnt.get(page_info);
+}
+
+/* Keep track of observation statistics for some set of pages.
+   This is often a single page and its descendents, but may include
+   multiple pages.  In either case, each descendent is counted only once,
+   even if it is included multiple times in the hierarchy.
+
+/* Track the observations for some set of pages.
+   This is often a single page and its descendents, but may include
+   multiple pages.  In either case, each descendent is counted only once,
+
+   The tracked info includes the count of observations as well as
+   where and when the observations were made. */
+class Cnt {
+  total = 0;
+  park_to_parkcnt = new Map(); /* park -> date -> integer */
+  included_set; /* set of pages that shouldn't get counted again */
+
+  constructor(page_to_trips, page_to_cnt,
+              page_info = null, included_set = null) {
+    this.page_to_trips = page_to_trips;
+    this.page_to_cnt = page_to_cnt;
+
+    if (!included_set) {
+      /* We're constructing a new Cnt that counts each descendent page once. */
+      this.included_set = new Set();
+
+      if (page_info) {
+        /* Since this is the most common case, we cache the result. */
+        page_to_cnt.set(page_info, this);
+      }
+    } else {
+      /* We're constructing a temporary Cnt that excludes overlap
+         with pages already counted by the caller. */
+      this.included_set = included_set;
+
+      if (included_set.has(page_info)) {
+        /* Count nothing. */
+        return this;
+      }
+    }
+
+    if (page_info) {
+      this.add_page(page_info);
+    }
+  }
+
+  add_page(page_info) {
+    /* Initialize the Cnt using data from page_to_trips. */
+    this.included_set.add(page_info);
+
+    if (this.page_to_trips.has(page_info)) {
+      const trips = this.page_to_trips.get(page_info);
+      for (const trip of trips) {
+        this.total++;
+
+        const date = trip[0];
+        const park = trip[1];
+
+        const parkcnt = this.get_parkcnt(park);
+        parkcnt.add(date, 1);
+      }
+    }
+
+    for (const child_info of page_info.child_set) {
+      this.add_child(child_info);
+    }
+  }
+
+  get_parkcnt(park) {
+    if (this.park_to_parkcnt.has(park)) {
+      return this.park_to_parkcnt.get(park);
+    } else {
+      const parkcnt = new ParkCnt();
+      this.park_to_parkcnt.set(park, parkcnt);
+      return parkcnt;
+    }
+  }
+
+  add_child(page_info) {
+    /* Remember which pages have been included and don't double count them. */
+    if (this.included_set.has(page_info)) {
+      return;
+    }
+    this.included_set.add(page_info);
+
+    for (const child_info of page_info.child_set) {
+      const child_cnt = get_cnt(this.page_to_trips, this.page_to_cnt, child_info);
+
+      var no_overlap = true;
+      for (const included_page of child_cnt.included_set) {
+        if (this.included_set.has(included_page)) {
+          no_overlap = false;
+          break;
+        }
+      }
+
+      if (no_overlap) {
+        /* If there's no overlap between the pages in the child and
+           the pages we've already counted, use the pre-calculated
+           Cnt of the child. */
+        this.add_cnt(child_cnt);
+
+        for (const included_page of child_cnt.included_set) {
+          this.included_set.add(included_page);
+        }
+      } else {
+        /* If there is an overlap, create and use a temporary Cnt
+           for the child that excludes the pagse we've already
+           counted.  Note that new Cnt() updates included_set
+           as it runs. */
+        this.add_cnt(new Cnt(child_info, this.included_set));
+      }
+    }
+  }
+
+  /* Add another Cnt to this one. */
+  add_cnt(cnt) {
+    for (const [page, parkcnt] of cnt.park_to_parkcnt) {
+      this.total += parkcnt.total;
+
+      const this_parkcnt = this.get_parkout(park);
+      this_parkcnt.add_parkcnt(parkcnt);
+    }
+  }
+
+  details() {
+    const list = ['<details><summary>'];
+    if (this.total == 1) {
+      list.push(this.total + ' observation\n');
+    } else {
+      list.push(this.total + ' observations\n');
+    }
+    list.push('</summary>');
+
+    const sorted_parkcnt = sorted_map(this.park_to_parkcnt, sort_parkcnt_map);
+    for (const [park, parkcnt] of sorted_parkcnt) {
+      list.push('<p>' + park + ':</p>');
+      list.push('<ul>');
+
+      const sorted_datecnt = sorted_map(parkcnt.date_to_cnt, sort_datecnt_map);
+      for (const [date, cnt] of sorted_datecnt) {
+        if (cnt > 1) {
+          list.push('<li>' + date + ': ' + cnt + ' taxons </li>');
+        } else {
+          list.push('<li>' + date + '</li>');
+        }
+      }
+
+      list.push('</ul>');
+    }
+    list.push('</details>');
+      
+    return list.join('');
+  }
+}
+
+
 function delete_ancestors(page_info, page_to_trips, checked_set) {
   for (const parent_info of page_info.parent_set) {
     if (checked_set.has(parent_info)) {
@@ -2038,6 +2239,13 @@ function gen_adv_search_results() {
     }
   }
 
+  /* Cache commonly re-used Cnt objects, specifically those that apply
+     to a single page and include all of the page's descendent (once).
+
+     It is also possible to create Cnt objects that exclude some
+     descendents, but they won't be cached here. */
+  const page_to_cnt = new Map();
+
   let total_cnt = 0;
   const park_to_date_to_cnt = new Map();
   for (const [page_info, trips] of page_to_trips) {
@@ -2085,17 +2293,22 @@ function gen_adv_search_results() {
     const a_cnt = page_to_trips.get(a).size;
     const b_cnt = page_to_trips.get(b).size;
 
-    return (a < b) ? -1 : (a > b) ? 1 : 0;
+    /* return
+       a negative number (i.e. sort a before b) if a_cnt > b_cnt,
+       a positive number (i.e. sort b before a) if b_cnt > a_cnt,
+       and zero if a_cnt == b_cnt. */
+    return b_cnt - a_cnt;
   }
 
-  const result_list = Array.from(page_to_trips.keys()).sort(by_trip_cnt);
+  const result_list = Array.from(page_to_trips.keys());
+  result_list.sort(by_trip_cnt);
 
   const list = [];
-  var cnt = 0;
+  var img_cnt = 0;
   for (const page_info of result_list) {
     const c = get_class(page_info);
     const url = get_url(page_info, null);
-    cnt++;
+    img_cnt++;
 
     list.push('<div class="list-box">');
 
@@ -2114,19 +2327,26 @@ function gen_adv_search_results() {
          allowed to load immediately because there is some slight penalty to
          responsiveness if the browser waits to determine whether they are
          in/near the visible area. */
-      var lazy = (cnt > 10) ? ' loading="lazy"' : '';
+      var lazy = (img_cnt > 10) ? ' loading="lazy"' : '';
 
-      list.push('<a href="' + url + '">');
       list.push('<div class="list-thumb">');
+      list.push('<a href="' + url + '">');
       list.push('<img class="boxed"' + lazy + ' src="' + jpg_url + '" alt="photo">');
-      list.push('</div>');
       list.push('</a>');
+      list.push('</div>');
     }
+
+    list.push('<div>');
 
     list.push('<a class="' + c + '" href="' + url + '">');
     list.push(compose_page_name(page_info, 2));
     list.push('</a>');
 
+    list.push('<br>');
+    const cnt = get_cnt(page_to_trips, page_to_cnt, page_info);
+    list.push(cnt.details());
+
+    list.push('</div>');
     list.push('</div>');
   }
 

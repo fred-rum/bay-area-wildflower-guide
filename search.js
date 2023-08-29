@@ -1147,6 +1147,143 @@ class BtwnYMDTerm extends DateTerm {
     }
   }
 }
+class ParkCnt {
+  total = 0;
+  date_to_cnt = new Map();
+  add(date, cnt) {
+    this.total += cnt;
+    if (this.date_to_cnt.has(date)) {
+      cnt += this.date_to_cnt.get(date);
+    }
+    this.date_to_cnt.set(date, cnt);
+  }
+  add_parkcnt(parkcnt) {
+    for (const [date, cnt] of parkcnt.date_to_cnt) {
+      this.add(date, cnt);
+    }
+  }
+}
+function sort_parkcnt_map(a, b) {
+  return b[1].total - a[1].total;
+}
+function sort_datecnt_map(a, b) {
+  return (a[0] < b[0]) ? -1 : (a[0] > b[0]) ? 1 : 0;
+}
+function sorted_map(m, sort_fn) {
+  const entries = Array.from(m.entries());
+  return entries.sort(sort_fn);
+}
+function get_cnt(page_to_trips, page_to_cnt, page_info) {
+  if (!page_to_cnt.has(page_info)) {
+    page_to_cnt.set(page_info, new Cnt(page_to_trips, page_to_cnt, page_info));
+  }
+  return page_to_cnt.get(page_info);
+}
+class Cnt {
+  total = 0;
+  park_to_parkcnt = new Map();
+  included_set;
+  constructor(page_to_trips, page_to_cnt,
+              page_info = null, included_set = null) {
+    this.page_to_trips = page_to_trips;
+    this.page_to_cnt = page_to_cnt;
+    if (!included_set) {
+      this.included_set = new Set();
+      if (page_info) {
+        page_to_cnt.set(page_info, this);
+      }
+    } else {
+      this.included_set = included_set;
+      if (included_set.has(page_info)) {
+        return this;
+      }
+    }
+    if (page_info) {
+      this.add_page(page_info);
+    }
+  }
+  add_page(page_info) {
+    this.included_set.add(page_info);
+    if (this.page_to_trips.has(page_info)) {
+      const trips = this.page_to_trips.get(page_info);
+      for (const trip of trips) {
+        this.total++;
+        const date = trip[0];
+        const park = trip[1];
+        const parkcnt = this.get_parkcnt(park);
+        parkcnt.add(date, 1);
+      }
+    }
+    for (const child_info of page_info.child_set) {
+      this.add_child(child_info);
+    }
+  }
+  get_parkcnt(park) {
+    if (this.park_to_parkcnt.has(park)) {
+      return this.park_to_parkcnt.get(park);
+    } else {
+      const parkcnt = new ParkCnt();
+      this.park_to_parkcnt.set(park, parkcnt);
+      return parkcnt;
+    }
+  }
+  add_child(page_info) {
+    if (this.included_set.has(page_info)) {
+      return;
+    }
+    this.included_set.add(page_info);
+    for (const child_info of page_info.child_set) {
+      const child_cnt = get_cnt(this.page_to_trips, this.page_to_cnt, child_info);
+      var no_overlap = true;
+      for (const included_page of child_cnt.included_set) {
+        if (this.included_set.has(included_page)) {
+          no_overlap = false;
+          break;
+        }
+      }
+      if (no_overlap) {
+        this.add_cnt(child_cnt);
+        for (const included_page of child_cnt.included_set) {
+          this.included_set.add(included_page);
+        }
+      } else {
+        this.add_cnt(new Cnt(child_info, this.included_set));
+      }
+    }
+  }
+  add_cnt(cnt) {
+    for (const [page, parkcnt] of cnt.park_to_parkcnt) {
+      this.total += parkcnt.total;
+      const this_parkcnt = this.get_parkout(park);
+      this_parkcnt.add_parkcnt(parkcnt);
+    }
+  }
+  details() {
+    const list = ['<details><summary>'];
+    if (this.total == 1) {
+      list.push(this.total + ' observation\n');
+    } else {
+      list.push(this.total + ' observations\n');
+    }
+    list.push('</summary>');
+    const sorted_parkcnt = sorted_map(this.park_to_parkcnt, sort_parkcnt_map);
+    for (const [park, parkcnt] of sorted_parkcnt) {
+      list.push('<p>' + park + ':</p>');
+      list.push('<ul>');
+      const sorted_datecnt = sorted_map(parkcnt.date_to_cnt, sort_datecnt_map);
+      for (const [date, cnt] of sorted_datecnt) {
+        if (cnt > 1) {
+          list.push('<li>' + date + ': ' + cnt + ' taxons </li>');
+        } else {
+          list.push('<li>' + date + '</li>');
+        }
+      }
+      list.push('</ul>');
+    }
+    list.push('</details>');
+    return list.join('');
+  }
+}
 function delete_ancestors(page_info, page_to_trips, checked_set) {
   for (const parent_info of page_info.parent_set) {
     if (checked_set.has(parent_info)) {
@@ -1191,6 +1328,7 @@ function gen_adv_search_results() {
       page_to_trips.set(page_info, current_trip_set);
     }
   }
+  const page_to_cnt = new Map();
   let total_cnt = 0;
   const park_to_date_to_cnt = new Map();
   for (const [page_info, trips] of page_to_trips) {
@@ -1216,15 +1354,16 @@ function gen_adv_search_results() {
   function by_trip_cnt(a, b) {
     const a_cnt = page_to_trips.get(a).size;
     const b_cnt = page_to_trips.get(b).size;
-    return (a < b) ? -1 : (a > b) ? 1 : 0;
+    return b_cnt - a_cnt;
   }
-  const result_list = Array.from(page_to_trips.keys()).sort(by_trip_cnt);
+  const result_list = Array.from(page_to_trips.keys());
+  result_list.sort(by_trip_cnt);
   const list = [];
-  var cnt = 0;
+  var img_cnt = 0;
   for (const page_info of result_list) {
     const c = get_class(page_info);
     const url = get_url(page_info, null);
-    cnt++;
+    img_cnt++;
     list.push('<div class="list-box">');
     if ('j' in page_info) {
       var jpg = String(page_info.j);
@@ -1233,16 +1372,21 @@ function gen_adv_search_results() {
         jpg = page_info.p + ',' + jpg;
       }
       var jpg_url = 'thumbs/' + jpg + '.jpg';
-      var lazy = (cnt > 10) ? ' loading="lazy"' : '';
-      list.push('<a href="' + url + '">');
+      var lazy = (img_cnt > 10) ? ' loading="lazy"' : '';
       list.push('<div class="list-thumb">');
+      list.push('<a href="' + url + '">');
       list.push('<img class="boxed"' + lazy + ' src="' + jpg_url + '" alt="photo">');
-      list.push('</div>');
       list.push('</a>');
+      list.push('</div>');
     }
+    list.push('<div>');
     list.push('<a class="' + c + '" href="' + url + '">');
     list.push(compose_page_name(page_info, 2));
     list.push('</a>');
+    list.push('<br>');
+    const cnt = get_cnt(page_to_trips, page_to_cnt, page_info);
+    list.push(cnt.details());
+    list.push('</div>');
     list.push('</div>');
   }
   if (list.length) {
