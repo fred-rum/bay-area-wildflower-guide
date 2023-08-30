@@ -765,6 +765,7 @@ function fn_hashchange(event) {
     document.title = decodeURIComponent(hash).substring(1) + ' - ' + title;
   }
 }
+var cnt_list;
 const term_list = [];
 var term_id = 0;
 var zstr_len = 1;
@@ -1188,7 +1189,6 @@ class Cnt {
   included_set;
   has_self_cnt = false;
   child_cnt_list = [];
-  img_cnt;
   constructor(page_to_trips, page_to_cnt,
               page_info = null, included_set = null) {
     this.page_to_trips = page_to_trips;
@@ -1266,7 +1266,7 @@ class Cnt {
       this_parkcnt.add_parkcnt(parkcnt);
     }
   }
-  html(indent, img_cnt) {
+  html(indent) {
     var sub_indent = indent;
     const list = [];
     const page_info = this.page_info;
@@ -1285,7 +1285,6 @@ class Cnt {
       }
     }
     if (enclose || (page_info && has_self_cnt)) {
-      img_cnt++;
       const c = get_class(page_info);
       const url = get_url(page_info, null);
       if (indent) {
@@ -1300,7 +1299,7 @@ class Cnt {
           jpg = page_info.p + ',' + jpg;
         }
         var jpg_url = 'thumbs/' + jpg + '.jpg';
-        var lazy = (img_cnt > 10) ? ' loading="lazy"' : '';
+        var lazy = (cnt_list.length > 10) ? ' loading="lazy"' : '';
         list.push('<a href="' + url + '">');
         list.push('<div class="list-thumb">');
         list.push('<img class="boxed"' + lazy + ' src="' + jpg_url + '" alt="photo">');
@@ -1318,8 +1317,7 @@ class Cnt {
     }
     child_cnt_list.sort(by_cnt);
     for (const child_cnt of child_cnt_list) {
-      list.push(child_cnt.html(sub_indent, img_cnt));
-      img_cnt = child_cnt.img_cnt;
+      list.push(child_cnt.html(sub_indent));
     }
     if (enclose) {
       list.push('</div>');
@@ -1328,34 +1326,79 @@ class Cnt {
       list.push('<hr>');
       list.push(this.details());
     }
-    this.img_cnt = img_cnt;
     return list.join('');
   }
   details() {
-    const list = ['<details><summary>'];
+    const i = cnt_list.length;
+    cnt_list.push(this);
+    this.trips_open = false;
+    this.months_open = false;
+    this.parks_open = false;
+    const list = [];
     if (this.total == 1) {
-      list.push(this.total + ' observation\n');
+      list.push('1 observation');
     } else {
-      list.push(this.total + ' observations\n');
+      list.push(this.total + ' observations');
     }
-    list.push('</summary>');
-    const sorted_parkcnt = sorted_map(this.park_to_parkcnt, sort_parkcnt_map);
-    for (const [park, parkcnt] of sorted_parkcnt) {
-      list.push('<p>' + park + ':</p>');
-      list.push('<ul>');
-      const sorted_datecnt = sorted_map(parkcnt.date_to_cnt, sort_datecnt_map);
-      for (const [date, cnt] of sorted_datecnt) {
-        if (cnt > 1) {
-          list.push('<li>' + date + ': ' + cnt + ' taxons </li>');
-        } else {
-          list.push('<li>' + date + '</li>');
-        }
-      }
-      list.push('</ul>');
-    }
-    list.push('</details>');
+    list.push('<br><span class="summary" onclick="return fn_click_trips(' + i + ');">[trips]</span>');
+    list.push(' <span class="summary" onclick="return fn_click_months(' + i + ');">[months]</span>');
+    list.push(' <span class="summary" onclick="return fn_click_parks(' + i + ');">[locations]</span>');
+    list.push('<div class="details" id="details' + i + '"></div>');
     return list.join('');
   }
+  details_trips(i) {
+    const e_details = document.getElementById('details' + i);
+    this.trips_open = !this.trips_open;
+    this.months_open = false;
+    this.parks_open = false;
+    const list = [];
+    if (this.trips_open) {
+    }
+    e_details.innerHTML = list.join('');
+  }
+  details_months(i) {
+    const e_details = document.getElementById('details' + i);
+    this.trips_open = false;
+    this.months_open = !this.months_open;
+    this.parks_open = false;
+    const list = [];
+    if (this.months_open) {
+    }
+    e_details.innerHTML = list.join('');
+  }
+  details_parks(i) {
+    const e_details = document.getElementById('details' + i);
+    this.trips_open = false;
+    this.months_open = false;
+    this.parks_open = !this.parks_open;
+    const list = [];
+    if (this.parks_open) {
+      const sorted_parkcnt = sorted_map(this.park_to_parkcnt, sort_parkcnt_map);
+      for (const [park, parkcnt] of sorted_parkcnt) {
+        list.push('<p>' + park + ':</p>');
+        list.push('<ul>');
+        const sorted_datecnt = sorted_map(parkcnt.date_to_cnt, sort_datecnt_map);
+        for (const [date, cnt] of sorted_datecnt) {
+          if (cnt > 1) {
+            list.push('<li>' + date + ': ' + cnt + ' taxons </li>');
+          } else {
+            list.push('<li>' + date + '</li>');
+          }
+        }
+        list.push('</ul>');
+      }
+    }
+    e_details.innerHTML = list.join('');
+  }
+}
+function fn_click_trips(i) {
+  cnt_list[i].details_trips(i);
+}
+function fn_click_months(i) {
+  cnt_list[i].details_months(i);
+}
+function fn_click_parks(i) {
+  cnt_list[i].details_parks(i);
 }
 function delete_ancestors(page_info, page_to_trips, checked_set) {
   for (const parent_info of page_info.parent_set) {
@@ -1408,6 +1451,7 @@ function gen_adv_search_results() {
       top_cnt.add_child(page_info);
     }
   }
+  cnt_list = [];
   const html = top_cnt.html(false, 0);
   if (html) {
     e_results.innerHTML = html;

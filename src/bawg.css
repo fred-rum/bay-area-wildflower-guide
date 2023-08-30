@@ -479,8 +479,11 @@ a.enclosed {
 details {
     margin-bottom: 1em;
     width: max-content;
+}
+summary {
     cursor: pointer;
 }
+
 /* Observation details can be toggled by clicking on the "twisty" triangle
    or anywhere else in the line, but this isn't obvious to the user.
    Show something more obviously clickable. */
@@ -488,9 +491,18 @@ details > summary::after {
     color: #888;
     content: "[show details]";
     text-decoration: underline;
- }
+}
 details[open] > summary::after {
     content: "[hide details]";
+}
+
+.summary {
+    color: #888;
+    cursor: pointer;
+}
+
+.details {
+    margin-top: 8px;
 }
 
 /* leaf-thumb is used for each of the thumbnails shown on a leaf node (where

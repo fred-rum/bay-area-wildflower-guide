@@ -1343,6 +1343,9 @@ function fn_hashchange(event) {
    the work is done.
 */
 
+/* Keep track of search results (primarily for when details are expanded). */
+var cnt_list;
+
 /* Keep track of confirmed search terms. */
 const term_list = [];
 
@@ -1999,7 +2002,6 @@ class Cnt {
   included_set; /* set of pages that shouldn't get counted again */
   has_self_cnt = false;
   child_cnt_list = [];
-  img_cnt;
 
   constructor(page_to_trips, page_to_cnt,
               page_info = null, included_set = null) {
@@ -2116,7 +2118,7 @@ class Cnt {
     }
   }
 
-  html(indent, img_cnt) {
+  html(indent) {
     var sub_indent = indent;
     const list = [];
     const page_info = this.page_info;
@@ -2142,8 +2144,6 @@ class Cnt {
     }
 
     if (enclose || (page_info && has_self_cnt)) {
-      img_cnt++;
-
       const c = get_class(page_info);
       const url = get_url(page_info, null);
 
@@ -2168,7 +2168,7 @@ class Cnt {
            allowed to load immediately because there is some slight penalty to
            responsiveness if the browser waits to determine whether they are
            in/near the visible area. */
-        var lazy = (img_cnt > 10) ? ' loading="lazy"' : '';
+        var lazy = (cnt_list.length > 10) ? ' loading="lazy"' : '';
 
         list.push('<a href="' + url + '">');
         list.push('<div class="list-thumb">');
@@ -2192,8 +2192,7 @@ class Cnt {
 
     child_cnt_list.sort(by_cnt);
     for (const child_cnt of child_cnt_list) {
-      list.push(child_cnt.html(sub_indent, img_cnt));
-      img_cnt = child_cnt.img_cnt;
+      list.push(child_cnt.html(sub_indent));
     }
 
     if (enclose) {
@@ -2205,42 +2204,100 @@ class Cnt {
       list.push(this.details());
     }
 
-    this.img_cnt = img_cnt;
-
     return list.join('');
   }
 
   details() {
-    const list = ['<details><summary>'];
+    const i = cnt_list.length;
+    cnt_list.push(this);
+
+    this.trips_open = false;
+    this.months_open = false;
+    this.parks_open = false;
+
+    const list = [];
+
     if (this.total == 1) {
-      list.push(this.total + ' observation\n');
+      list.push('1 observation');
     } else {
-      list.push(this.total + ' observations\n');
+      list.push(this.total + ' observations');
     }
-    list.push('</summary>');
 
-    const sorted_parkcnt = sorted_map(this.park_to_parkcnt, sort_parkcnt_map);
-    for (const [park, parkcnt] of sorted_parkcnt) {
-      list.push('<p>' + park + ':</p>');
-      list.push('<ul>');
-
-      const sorted_datecnt = sorted_map(parkcnt.date_to_cnt, sort_datecnt_map);
-      for (const [date, cnt] of sorted_datecnt) {
-        if (cnt > 1) {
-          list.push('<li>' + date + ': ' + cnt + ' taxons </li>');
-        } else {
-          list.push('<li>' + date + '</li>');
-        }
-      }
-
-      list.push('</ul>');
-    }
-    list.push('</details>');
+    list.push('<br><span class="summary" onclick="return fn_click_trips(' + i + ');">[trips]</span>');
+    list.push(' <span class="summary" onclick="return fn_click_months(' + i + ');">[months]</span>');
+    list.push(' <span class="summary" onclick="return fn_click_parks(' + i + ');">[locations]</span>');
+    list.push('<div class="details" id="details' + i + '"></div>');
 
     return list.join('');
   }
+
+  details_trips(i) {
+    const e_details = document.getElementById('details' + i);
+
+    this.trips_open = !this.trips_open;
+    this.months_open = false;
+    this.parks_open = false;
+
+    const list = [];
+    if (this.trips_open) {
+    }
+    e_details.innerHTML = list.join('');
+  }
+
+  details_months(i) {
+    const e_details = document.getElementById('details' + i);
+
+    this.trips_open = false;
+    this.months_open = !this.months_open;
+    this.parks_open = false;
+
+    const list = [];
+    if (this.months_open) {
+    }
+    e_details.innerHTML = list.join('');
+  }
+
+  details_parks(i) {
+    const e_details = document.getElementById('details' + i);
+
+    this.trips_open = false;
+    this.months_open = false;
+    this.parks_open = !this.parks_open;
+
+    const list = [];
+    if (this.parks_open) {
+      const sorted_parkcnt = sorted_map(this.park_to_parkcnt, sort_parkcnt_map);
+      for (const [park, parkcnt] of sorted_parkcnt) {
+        list.push('<p>' + park + ':</p>');
+        list.push('<ul>');
+
+        const sorted_datecnt = sorted_map(parkcnt.date_to_cnt, sort_datecnt_map);
+        for (const [date, cnt] of sorted_datecnt) {
+          if (cnt > 1) {
+            list.push('<li>' + date + ': ' + cnt + ' taxons </li>');
+          } else {
+            list.push('<li>' + date + '</li>');
+          }
+        }
+
+        list.push('</ul>');
+      }
+    }
+    e_details.innerHTML = list.join('');
+  }
 }
 
+function fn_click_trips(i) {
+  cnt_list[i].details_trips(i);
+}
+
+function fn_click_months(i) {
+  cnt_list[i].details_months(i);
+}
+
+function fn_click_parks(i) {
+  cnt_list[i].details_parks(i);
+}
 
 function delete_ancestors(page_info, page_to_trips, checked_set) {
   for (const parent_info of page_info.parent_set) {
@@ -2365,6 +2422,13 @@ function gen_adv_search_results() {
     delete_ancestors(page_info, page_to_trips, checked_set);
   }
   */
+
+  /* Add a Cnt object to the list when it generates its HTML.
+     More specificially, it's when their detail controls are emitted.
+     For most Cnt objects, this is when the page name (and jpg, if
+     appropriate) is added to the hierarchy.  The details for the top
+     level Cnt are emitted last. */
+  cnt_list = [];
 
   const html = top_cnt.html(false, 0);
   if (html) {

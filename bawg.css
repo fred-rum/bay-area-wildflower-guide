@@ -233,15 +233,24 @@ a.enclosed {
 details {
     margin-bottom: 1em;
     width: max-content;
+}
+summary {
     cursor: pointer;
 }
 details > summary::after {
     color: #888;
     content: "[show details]";
     text-decoration: underline;
- }
+}
 details[open] > summary::after {
     content: "[hide details]";
+}
+.summary {
+    color: #888;
+    cursor: pointer;
+}
+.details {
+    margin-top: 8px;
 }
 img.leaf-thumb {
     height: 40vmin;

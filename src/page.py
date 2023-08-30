@@ -2671,11 +2671,6 @@ class Page:
                  value in self.trait_values[trait]))
 
     def get_adv_link(self):
-        if arg('-debug_js'):
-            path = '../src/'
-        else:
-            path = '../'
-
         if self.sci:
             name = self.elab;
         else:
@@ -2686,7 +2681,7 @@ class Page:
         # transform them to '-', which is valid in the URI component.
         query = re.sub(r'[^A-Za-z0-9]+', '-', name);
 
-        return f'{path}advanced-search.html?{query}'
+        return f'../advanced-search.html?{query}'
 
     # Write the iNaturalist observation data.
     def write_obs(self, w):
