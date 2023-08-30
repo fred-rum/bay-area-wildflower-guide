@@ -270,7 +270,7 @@ def write_pages_js(w):
             base,suffix = separate_name_and_suffix(jpg)
             if base == name:
                 suffix = suffix[1:]
-                if re.match(r'0|[1-9][0-9]*$', suffix):
+                if re.match(r'0$|[1-9][0-9]*$', suffix):
                     w.write(f',j:{suffix}')
                 else:
                     w.write(f',j:"{suffix}"')
@@ -347,7 +347,7 @@ def write_photos_js(w):
             base,suffix1 = separate_name_and_suffix(jpg)
             if base == recent_name:
                 suffix1 = suffix1[1:]
-                if re.match(r'0|[1-9][0-9]*$', suffix1):
+                if re.match(r'0$|[1-9][0-9]*$', suffix1):
                     photos.append(suffix1)
                 else:
                     photos.append(f'"{suffix1}"')

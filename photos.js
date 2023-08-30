@@ -260,7 +260,7 @@ const pages=[
 ["chia",1,2,3,5],
 ["chick lupine",1,2,"2k",3,5,7,8],
 ["chicory",1,2,3,6],
-["chile trefoil",00,01,1],
+["chile trefoil","00","01",1],
 ["chilean sea fig",1,2],
 ["chinese pistache",1,2],
 ["chinquapin flower gall wasp",1],

@@ -1129,7 +1129,7 @@ const pages=[
 {p:"black sage",s:["Salvia mellifera"],x:"o",j:1,z:" , f!U%C%J%P%R%`&=&z'$'~(#(%(((8"},
 {p:"broad-leafed helleborine",s:["Epipactis helleborine"],x:"o",j:1,z:" $ - s#p$j$k%n'+'8':'<(!(+(7"},
 {p:"california gall wasp",s:["Andricus quercuscalifornicus"],x:"o",j:1,z:"%-%c&(&U&`&f&i&~'$'5'X'`'h't('"},
-{p:"chile trefoil",s:["Acmispon wrangelianus"],x:"o",j:00,z:" *!P!S#L#Q$F%0%:%?%@%C%S&u&x&y&z'|"},
+{p:"chile trefoil",s:["Acmispon wrangelianus"],x:"o",j:"00",z:" *!P!S#L#Q$F%0%:%?%@%C%S&u&x&y&z'|"},
 {p:"italian thistle",s:["Carduus pycnocephalus"],x:"o",j:"",z:" # '#K#N#O#Q#c$N$U$Y$^$c%C%M%N%O%T(#"},
 {p:"california hazelnut",s:["Corylus cornuta ssp. californica","genus Corylus"],x:"o",j:0,z:" & -$b$d$m%3%q&P&t'*'-'1'3'4':'<'F(."},
 {p:"mites and ticks",s:["subclass Acari"],x:"f",j:"pacific coast tick,1",z:"%%&>'3",d:[574,1359,1411]},
