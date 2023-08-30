@@ -799,8 +799,6 @@ class Term {
       }
     }
 
-    console.log('inserting in position', id, 'of', term_list.length + 1);
-
     /* Insert this term into the term_list. */
     term_list.splice(id, 0, this);
 
@@ -1539,12 +1537,10 @@ function cvt_name_to_query(name) {
 /* Save the state of the search terms so that the page doesn't start over
    from scratch if the user navigates away and then back to the page. */
 function save_state() {
-  console.log('saving advanced search state');
   if (term_list.length) {
     var term_names = [];
     for (const term of term_list) {
       const name = term.get_name();
-      console.log('saving', name);
       const q = cvt_name_to_query(name);
       term_names.push(q);
     }
@@ -1560,12 +1556,9 @@ function save_state() {
 }
 
 function restore_state(query) {
-  console.log('restoring advanced search state');
-
   for (var name of query.split('.')) {
     name = name.replace(/-/g, ' ');
     
-    console.log('restoring', name);
     restore_term(name, 0);
 
     /* Assuming that we saved the state correctly, then we should always find
@@ -1616,7 +1609,6 @@ function confirm_adv_search_term(ac_selected) {
     /* We were editing an existing term, and the edited term is in the
        same group.  Instead of moving the term to the end of its group,
        replace the edited one in the same position. */
-    console.log('retaining position', term_id);
     term_list[term_id] = term;
     revert_adv_search_term();
   } else {
@@ -1964,18 +1956,23 @@ class ParkCnt {
 }
 
 function sort_parkcnt_map(a, b) {
-  /* sort b before a if b's count is greater. */
+  /* sort b before a if b's count is greater */
   return b[1].total - a[1].total;
 }
 
 function sort_datecnt_map(a, b) {
-  /* sort b before a if b is an earlier date, regardless of count. */
+  /* sort b before a if b is an earlier date, regardless of count */
   return (a[0] < b[0]) ? -1 : (a[0] > b[0]) ? 1 : 0;
 }
 
 function sorted_map(m, sort_fn) {
   const entries = Array.from(m.entries());
   return entries.sort(sort_fn);
+}
+
+function by_cnt(a, b) {
+  /* sort b before a if b's count is greater */
+  return b.total - a.total;
 }
 
 function get_cnt(page_to_trips, page_to_cnt, page_info) {
@@ -2000,6 +1997,9 @@ class Cnt {
   total = 0;
   park_to_parkcnt = new Map(); /* park -> date -> integer */
   included_set; /* set of pages that shouldn't get counted again */
+  has_self_cnt = false;
+  child_cnt_list = [];
+  img_cnt;
 
   constructor(page_to_trips, page_to_cnt,
               page_info = null, included_set = null) {
@@ -2031,10 +2031,14 @@ class Cnt {
   }
 
   add_page(page_info) {
+    this.page_info = page_info;
+
     /* Initialize the Cnt using data from page_to_trips. */
     this.included_set.add(page_info);
 
     if (this.page_to_trips.has(page_info)) {
+      this.has_self_cnt = true;
+
       const trips = this.page_to_trips.get(page_info);
       for (const trip of trips) {
         this.total++;
@@ -2062,15 +2066,18 @@ class Cnt {
     }
   }
 
-  add_child(page_info) {
+  add_child(child_info) {
     /* Remember which pages have been included and don't double count them. */
-    if (this.included_set.has(page_info)) {
+    if (this.included_set.has(child_info)) {
       return;
     }
-    this.included_set.add(page_info);
 
-    for (const child_info of page_info.child_set) {
-      const child_cnt = get_cnt(this.page_to_trips, this.page_to_cnt, child_info);
+    const child_cnt = get_cnt(this.page_to_trips, this.page_to_cnt, child_info);
+
+    if (child_cnt.total) {
+      /* Remember a child with results so that we can generate a hierarchy
+         in HTML later. */
+      this.child_cnt_list.push(child_cnt);
 
       var no_overlap = true;
       for (const included_page of child_cnt.included_set) {
@@ -2101,12 +2108,106 @@ class Cnt {
 
   /* Add another Cnt to this one. */
   add_cnt(cnt) {
-    for (const [page, parkcnt] of cnt.park_to_parkcnt) {
-      this.total += parkcnt.total;
+    this.total += cnt.total;
 
-      const this_parkcnt = this.get_parkout(park);
+    for (const [park, parkcnt] of cnt.park_to_parkcnt) {
+      const this_parkcnt = this.get_parkcnt(park);
       this_parkcnt.add_parkcnt(parkcnt);
     }
+  }
+
+  html(indent, img_cnt) {
+    var sub_indent = indent;
+    const list = [];
+    const page_info = this.page_info;
+    const has_self_cnt = this.has_self_cnt;
+    const child_cnt_list = this.child_cnt_list;
+
+    /* generate a level of hierarchy if:
+       - there is at least one child, and
+         - this page has its own observations (so we want to display it) or
+         - there is more than one child (so the hierarchy is interesting).
+    */
+    const enclose = (page_info &&
+                     (((child_cnt_list.length > 0) && has_self_cnt) ||
+                      (child_cnt_list.length > 1)));
+    if (enclose) {
+      indent = false;
+      sub_indent = true;
+      if (indent) {
+        list.push('<div class="box indent">');
+      } else {
+        list.push('<div class="box">');
+      }
+    }
+
+    if (enclose || (page_info && has_self_cnt)) {
+      img_cnt++;
+
+      const c = get_class(page_info);
+      const url = get_url(page_info, null);
+
+      if (indent) {
+        list.push('<div class="list-box indent">');
+      } else {
+        list.push('<div class="list-box">');
+      }
+
+      if (('j' in page_info) && (child_cnt_list.length == 0)) {
+        var jpg = String(page_info.j);
+        const comma_pos = jpg.search(',');
+        if (comma_pos == -1) {
+          /* Append the suffix to the page name. */
+          jpg = page_info.p + ',' + jpg;
+        }
+        var jpg_url = 'thumbs/' + jpg + '.jpg';
+
+        /* Enable lazy image loading after the first 10 entries (whether those
+           entries include imagse or not).  This prevents a broad search from
+           fetching every thumbnail in the library!  The first 10 entries are
+           allowed to load immediately because there is some slight penalty to
+           responsiveness if the browser waits to determine whether they are
+           in/near the visible area. */
+        var lazy = (img_cnt > 10) ? ' loading="lazy"' : '';
+
+        list.push('<a href="' + url + '">');
+        list.push('<div class="list-thumb">');
+        list.push('<img class="boxed"' + lazy + ' src="' + jpg_url + '" alt="photo">');
+        list.push('</div>');
+        list.push('</a>');
+      }
+
+      list.push('<div>');
+
+      list.push('<a class="' + c + '" href="' + url + '">');
+      list.push(compose_page_name(page_info, 2));
+      list.push('</a>');
+
+      list.push('<br>');
+      list.push(this.details());
+
+      list.push('</div>');
+      list.push('</div>');
+    }
+
+    child_cnt_list.sort(by_cnt);
+    for (const child_cnt of child_cnt_list) {
+      list.push(child_cnt.html(sub_indent, img_cnt));
+      img_cnt = child_cnt.img_cnt;
+    }
+
+    if (enclose) {
+      list.push('</div>');
+    }
+
+    if (!page_info) {
+      list.push('<hr>');
+      list.push(this.details());
+    }
+
+    this.img_cnt = img_cnt;
+
+    return list.join('');
   }
 
   details() {
@@ -2135,7 +2236,7 @@ class Cnt {
       list.push('</ul>');
     }
     list.push('</details>');
-      
+
     return list.join('');
   }
 }
@@ -2240,135 +2341,34 @@ function gen_adv_search_results() {
   }
 
   /* Cache commonly re-used Cnt objects, specifically those that apply
-     to a single page and include all of the page's descendent (once).
+     to a single page and include all of the page's descendents (once).
 
      It is also possible to create Cnt objects that exclude some
      descendents, but they won't be cached here. */
   const page_to_cnt = new Map();
 
-  let total_cnt = 0;
-  const park_to_date_to_cnt = new Map();
-  for (const [page_info, trips] of page_to_trips) {
-    for (const trip of trips) {
-      total_cnt++;
-      const date = trip[0];
-      const park = trip[1];
+  /* top_cnt isn't for a specific page, so it is initialized with
+     page_info = null. */
+  const top_cnt = new Cnt(page_to_trips, page_to_cnt);
 
-      if (!park_to_date_to_cnt.has(park)) {
-        park_to_date_to_cnt.set(park, new Map());
-      }
-
-      const date_to_cnt = park_to_date_to_cnt.get(park);
-      if (date_to_cnt.has(date)) {
-        date_to_cnt.set(date, date_to_cnt.get(date) + 1);
-      } else {
-        date_to_cnt.set(date, 1);
-      }
+  for (const page_info of pages) {
+    if (page_info.parent_set.size == 0) {
+      top_cnt.add_child(page_info);
     }
   }
 
   /* Show only results at the lowest level.  I.e. eliminate higher-level
      pages where a lower-level page is in the results. */
+  /*
   const checked_set = new Set();
   for (const page_info of page_to_trips.keys()) {
     delete_ancestors(page_info, page_to_trips, checked_set);
   }
-
-  /* Helper function for sorting a list of taxons (page_info) by the number
-     of trips that match the search terms.
-
-     References to page_to_trips get it from the containing function.
-
-     We prefer that if two taxons are observed the same number of times,
-     we keep the order from pagse.js.  Array.sort() is only guaranteed to
-     preserve this order since ~2019, but
-     - it primary benefit is to order a parent before its child, but that
-       doesn't matter here since the advanced search results either group
-       the children hierarchically under the parent or delete the parent
-       from the results, and
-     - it's not really a burden if results get out of order, and
-     - most people should be running an up-to-date browser anyway.
   */
-  function by_trip_cnt(a, b) {
-    const a_cnt = page_to_trips.get(a).size;
-    const b_cnt = page_to_trips.get(b).size;
 
-    /* return
-       a negative number (i.e. sort a before b) if a_cnt > b_cnt,
-       a positive number (i.e. sort b before a) if b_cnt > a_cnt,
-       and zero if a_cnt == b_cnt. */
-    return b_cnt - a_cnt;
-  }
-
-  const result_list = Array.from(page_to_trips.keys());
-  result_list.sort(by_trip_cnt);
-
-  const list = [];
-  var img_cnt = 0;
-  for (const page_info of result_list) {
-    const c = get_class(page_info);
-    const url = get_url(page_info, null);
-    img_cnt++;
-
-    list.push('<div class="list-box">');
-
-    if ('j' in page_info) {
-      var jpg = String(page_info.j);
-      const comma_pos = jpg.search(',');
-      if (comma_pos == -1) {
-        /* Append the suffix the suffix to the page name. */
-        jpg = page_info.p + ',' + jpg;
-      }
-      var jpg_url = 'thumbs/' + jpg + '.jpg';
-
-      /* Enable lazy image loading after the first 10 entries (whether those
-         entries include imagse or not).  This prevents a broad search from
-         fetching every thumbnail in the library!  The first 10 entries are
-         allowed to load immediately because there is some slight penalty to
-         responsiveness if the browser waits to determine whether they are
-         in/near the visible area. */
-      var lazy = (img_cnt > 10) ? ' loading="lazy"' : '';
-
-      list.push('<div class="list-thumb">');
-      list.push('<a href="' + url + '">');
-      list.push('<img class="boxed"' + lazy + ' src="' + jpg_url + '" alt="photo">');
-      list.push('</a>');
-      list.push('</div>');
-    }
-
-    list.push('<div>');
-
-    list.push('<a class="' + c + '" href="' + url + '">');
-    list.push(compose_page_name(page_info, 2));
-    list.push('</a>');
-
-    list.push('<br>');
-    const cnt = get_cnt(page_to_trips, page_to_cnt, page_info);
-    list.push(cnt.details());
-
-    list.push('</div>');
-    list.push('</div>');
-  }
-
-  if (list.length) {
-    const cnt_list = ['<hr><details><summary>'];
-    cnt_list.push(total_cnt + ' observations\n')
-    cnt_list.push('</summary>');
-    for (const [park, date_to_cnt] of park_to_date_to_cnt) {
-      cnt_list.push('<p>' + park + ':</p>');
-      cnt_list.push('<ul>');
-      for (const [date, cnt] of date_to_cnt) {
-        if (cnt > 1) {
-          cnt_list.push('<li>' + date + ': ' + cnt + ' taxons </li>');
-        } else {
-          cnt_list.push('<li>' + date + '</li>');
-        }
-      }
-      cnt_list.push('</ul>');
-    }
-    cnt_list.push('</details>');
-
-    e_results.innerHTML = list.join('') + cnt_list.join('');
+  const html = top_cnt.html(false, 0);
+  if (html) {
+    e_results.innerHTML = html;
   } else {
     e_results.innerHTML = '<p>No taxons match the criteria.</p>';
   }

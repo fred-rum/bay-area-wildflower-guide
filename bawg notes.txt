@@ -1793,3 +1793,6 @@ Include observations lost to hierarchy flattening
 add text, etc. to distinguish advanced search terms that AND vs. OR
 
 FNA has characteristics of Rumex bucephalophorus
+
+when the details are expanded for an advanced search result,
+  the image should cling to the top of the div

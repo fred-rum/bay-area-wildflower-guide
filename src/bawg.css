@@ -660,6 +660,11 @@ div.list-thumb {
     margin-bottom: 0px;
     vertical-align: middle;
 
+    /* Usually any text next to the listing is shorter vertically, but
+       the advanced results support an expandable details section.
+       When that is opened, we want the photo to be top aligned. */
+    align-self: start;
+
     display: inline-flex;
     align-items: center;
     justify-content: center;

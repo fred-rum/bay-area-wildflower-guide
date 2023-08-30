@@ -1173,6 +1173,9 @@ function sorted_map(m, sort_fn) {
   const entries = Array.from(m.entries());
   return entries.sort(sort_fn);
 }
+function by_cnt(a, b) {
+  return b.total - a.total;
+}
 function get_cnt(page_to_trips, page_to_cnt, page_info) {
   if (!page_to_cnt.has(page_info)) {
     page_to_cnt.set(page_info, new Cnt(page_to_trips, page_to_cnt, page_info));
@@ -1183,6 +1186,9 @@ class Cnt {
   total = 0;
   park_to_parkcnt = new Map();
   included_set;
+  has_self_cnt = false;
+  child_cnt_list = [];
+  img_cnt;
   constructor(page_to_trips, page_to_cnt,
               page_info = null, included_set = null) {
     this.page_to_trips = page_to_trips;
@@ -1203,8 +1209,10 @@ class Cnt {
     }
   }
   add_page(page_info) {
+    this.page_info = page_info;
     this.included_set.add(page_info);
     if (this.page_to_trips.has(page_info)) {
+      this.has_self_cnt = true;
       const trips = this.page_to_trips.get(page_info);
       for (const trip of trips) {
         this.total++;
@@ -1227,13 +1235,13 @@ class Cnt {
       return parkcnt;
     }
   }
-  add_child(page_info) {
-    if (this.included_set.has(page_info)) {
+  add_child(child_info) {
+    if (this.included_set.has(child_info)) {
       return;
     }
-    this.included_set.add(page_info);
-    for (const child_info of page_info.child_set) {
-      const child_cnt = get_cnt(this.page_to_trips, this.page_to_cnt, child_info);
+    const child_cnt = get_cnt(this.page_to_trips, this.page_to_cnt, child_info);
+    if (child_cnt.total) {
+      this.child_cnt_list.push(child_cnt);
       var no_overlap = true;
       for (const included_page of child_cnt.included_set) {
         if (this.included_set.has(included_page)) {
@@ -1252,11 +1260,76 @@ class Cnt {
     }
   }
   add_cnt(cnt) {
-    for (const [page, parkcnt] of cnt.park_to_parkcnt) {
-      this.total += parkcnt.total;
-      const this_parkcnt = this.get_parkout(park);
+    this.total += cnt.total;
+    for (const [park, parkcnt] of cnt.park_to_parkcnt) {
+      const this_parkcnt = this.get_parkcnt(park);
       this_parkcnt.add_parkcnt(parkcnt);
     }
+  }
+  html(indent, img_cnt) {
+    var sub_indent = indent;
+    const list = [];
+    const page_info = this.page_info;
+    const has_self_cnt = this.has_self_cnt;
+    const child_cnt_list = this.child_cnt_list;
+    const enclose = (page_info &&
+                     (((child_cnt_list.length > 0) && has_self_cnt) ||
+                      (child_cnt_list.length > 1)));
+    if (enclose) {
+      indent = false;
+      sub_indent = true;
+      if (indent) {
+        list.push('<div class="box indent">');
+      } else {
+        list.push('<div class="box">');
+      }
+    }
+    if (enclose || (page_info && has_self_cnt)) {
+      img_cnt++;
+      const c = get_class(page_info);
+      const url = get_url(page_info, null);
+      if (indent) {
+        list.push('<div class="list-box indent">');
+      } else {
+        list.push('<div class="list-box">');
+      }
+      if (('j' in page_info) && (child_cnt_list.length == 0)) {
+        var jpg = String(page_info.j);
+        const comma_pos = jpg.search(',');
+        if (comma_pos == -1) {
+          jpg = page_info.p + ',' + jpg;
+        }
+        var jpg_url = 'thumbs/' + jpg + '.jpg';
+        var lazy = (img_cnt > 10) ? ' loading="lazy"' : '';
+        list.push('<a href="' + url + '">');
+        list.push('<div class="list-thumb">');
+        list.push('<img class="boxed"' + lazy + ' src="' + jpg_url + '" alt="photo">');
+        list.push('</div>');
+        list.push('</a>');
+      }
+      list.push('<div>');
+      list.push('<a class="' + c + '" href="' + url + '">');
+      list.push(compose_page_name(page_info, 2));
+      list.push('</a>');
+      list.push('<br>');
+      list.push(this.details());
+      list.push('</div>');
+      list.push('</div>');
+    }
+    child_cnt_list.sort(by_cnt);
+    for (const child_cnt of child_cnt_list) {
+      list.push(child_cnt.html(sub_indent, img_cnt));
+      img_cnt = child_cnt.img_cnt;
+    }
+    if (enclose) {
+      list.push('</div>');
+    }
+    if (!page_info) {
+      list.push('<hr>');
+      list.push(this.details());
+    }
+    this.img_cnt = img_cnt;
+    return list.join('');
   }
   details() {
     const list = ['<details><summary>'];
@@ -1329,84 +1402,15 @@ function gen_adv_search_results() {
     }
   }
   const page_to_cnt = new Map();
-  let total_cnt = 0;
-  const park_to_date_to_cnt = new Map();
-  for (const [page_info, trips] of page_to_trips) {
-    for (const trip of trips) {
-      total_cnt++;
-      const date = trip[0];
-      const park = trip[1];
-      if (!park_to_date_to_cnt.has(park)) {
-        park_to_date_to_cnt.set(park, new Map());
-      }
-      const date_to_cnt = park_to_date_to_cnt.get(park);
-      if (date_to_cnt.has(date)) {
-        date_to_cnt.set(date, date_to_cnt.get(date) + 1);
-      } else {
-        date_to_cnt.set(date, 1);
-      }
+  const top_cnt = new Cnt(page_to_trips, page_to_cnt);
+  for (const page_info of pages) {
+    if (page_info.parent_set.size == 0) {
+      top_cnt.add_child(page_info);
     }
   }
-  const checked_set = new Set();
-  for (const page_info of page_to_trips.keys()) {
-    delete_ancestors(page_info, page_to_trips, checked_set);
-  }
-  function by_trip_cnt(a, b) {
-    const a_cnt = page_to_trips.get(a).size;
-    const b_cnt = page_to_trips.get(b).size;
-    return b_cnt - a_cnt;
-  }
-  const result_list = Array.from(page_to_trips.keys());
-  result_list.sort(by_trip_cnt);
-  const list = [];
-  var img_cnt = 0;
-  for (const page_info of result_list) {
-    const c = get_class(page_info);
-    const url = get_url(page_info, null);
-    img_cnt++;
-    list.push('<div class="list-box">');
-    if ('j' in page_info) {
-      var jpg = String(page_info.j);
-      const comma_pos = jpg.search(',');
-      if (comma_pos == -1) {
-        jpg = page_info.p + ',' + jpg;
-      }
-      var jpg_url = 'thumbs/' + jpg + '.jpg';
-      var lazy = (img_cnt > 10) ? ' loading="lazy"' : '';
-      list.push('<div class="list-thumb">');
-      list.push('<a href="' + url + '">');
-      list.push('<img class="boxed"' + lazy + ' src="' + jpg_url + '" alt="photo">');
-      list.push('</a>');
-      list.push('</div>');
-    }
-    list.push('<div>');
-    list.push('<a class="' + c + '" href="' + url + '">');
-    list.push(compose_page_name(page_info, 2));
-    list.push('</a>');
-    list.push('<br>');
-    const cnt = get_cnt(page_to_trips, page_to_cnt, page_info);
-    list.push(cnt.details());
-    list.push('</div>');
-    list.push('</div>');
-  }
-  if (list.length) {
-    const cnt_list = ['<hr><details><summary>'];
-    cnt_list.push(total_cnt + ' observations\n')
-    cnt_list.push('</summary>');
-    for (const [park, date_to_cnt] of park_to_date_to_cnt) {
-      cnt_list.push('<p>' + park + ':</p>');
-      cnt_list.push('<ul>');
-      for (const [date, cnt] of date_to_cnt) {
-        if (cnt > 1) {
-          cnt_list.push('<li>' + date + ': ' + cnt + ' taxons </li>');
-        } else {
-          cnt_list.push('<li>' + date + '</li>');
-        }
-      }
-      cnt_list.push('</ul>');
-    }
-    cnt_list.push('</details>');
-    e_results.innerHTML = list.join('') + cnt_list.join('');
+  const html = top_cnt.html(false, 0);
+  if (html) {
+    e_results.innerHTML = html;
   } else {
     e_results.innerHTML = '<p>No taxons match the criteria.</p>';
   }
