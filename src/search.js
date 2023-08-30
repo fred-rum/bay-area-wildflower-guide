@@ -1961,8 +1961,8 @@ function sort_parkcnt_map(a, b) {
 }
 
 function sort_datecnt_map(a, b) {
-  /* sort b before a if b is an earlier date, regardless of count */
-  return (a[0] < b[0]) ? -1 : (a[0] > b[0]) ? 1 : 0;
+  /* sort b before a if b is an later date, regardless of count */
+  return (a[0] > b[0]) ? -1 : (a[0] < b[0]) ? 1 : 0;
 }
 
 function sorted_map(m, sort_fn) {

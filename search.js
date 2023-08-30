@@ -1167,7 +1167,7 @@ function sort_parkcnt_map(a, b) {
   return b[1].total - a[1].total;
 }
 function sort_datecnt_map(a, b) {
-  return (a[0] < b[0]) ? -1 : (a[0] > b[0]) ? 1 : 0;
+  return (a[0] > b[0]) ? -1 : (a[0] < b[0]) ? 1 : 0;
 }
 function sorted_map(m, sort_fn) {
   const entries = Array.from(m.entries());
