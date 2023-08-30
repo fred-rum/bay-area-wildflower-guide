@@ -1959,13 +1959,27 @@ class ParkCnt {
 }
 
 function sort_parkcnt_map(a, b) {
-  /* sort b before a if b's count is greater */
+  /* sort a before b (negative return value) if a's count is greater */
   return b[1].total - a[1].total;
 }
 
 function sort_datecnt_map(a, b) {
-  /* sort b before a if b is an later date, regardless of count */
+  /* sort a before b (return -1) if a is a later date, regardless of count */
   return (a[0] > b[0]) ? -1 : (a[0] < b[0]) ? 1 : 0;
+}
+
+function sort_trip_to_cnt(a, b) {
+  /* sort a before b (return -1) if a is a later date, regardless of count */
+  /* if a and b have the same date, sort alphabetically by park */
+  if ((a[0][0] > b[0][0]) ||
+      ((a[0][0] == b[0][0]) && (a[0][1] < b[0][1]))) {
+    return -1;
+  } else if ((a[0][0] < b[0][0]) ||
+             ((a[0][0] == b[0][0]) && (a[0][1] > b[0][1]))) {
+    return 1;
+  } else {
+    return 0;
+  }
 }
 
 function sorted_map(m, sort_fn) {
@@ -1998,7 +2012,7 @@ function get_cnt(page_to_trips, page_to_cnt, page_info) {
    where and when the observations were made. */
 class Cnt {
   total = 0;
-  park_to_parkcnt = new Map(); /* park -> date -> integer */
+  trip_to_cnt = new Map(); /* trip -> integer */
   included_set; /* set of pages that shouldn't get counted again */
   has_self_cnt = false;
   child_cnt_list = [];
@@ -2045,11 +2059,11 @@ class Cnt {
       for (const trip of trips) {
         this.total++;
 
-        const date = trip[0];
-        const park = trip[1];
-
-        const parkcnt = this.get_parkcnt(park);
-        parkcnt.add(date, 1);
+        var tripcnt = 1;
+        if (this.trip_to_cnt.has(trip)) {
+          tripcnt += this.trip_to_cnt.get(trip);
+        }
+        this.trip_to_cnt.set(trip, tripcnt);
       }
     }
 
@@ -2112,9 +2126,11 @@ class Cnt {
   add_cnt(cnt) {
     this.total += cnt.total;
 
-    for (const [park, parkcnt] of cnt.park_to_parkcnt) {
-      const this_parkcnt = this.get_parkcnt(park);
-      this_parkcnt.add_parkcnt(parkcnt);
+    for (let [trip, tripcnt] of cnt.trip_to_cnt) {
+      if (this.trip_to_cnt.has(trip)) {
+        tripcnt += this.trip_to_cnt.get(trip);
+      }
+      this.trip_to_cnt.set(trip, tripcnt);
     }
   }
 
@@ -2224,8 +2240,8 @@ class Cnt {
     }
 
     list.push('<br><span class="summary" onclick="return fn_click_trips(' + i + ');">[trips]</span>');
-    list.push(' <span class="summary" onclick="return fn_click_months(' + i + ');">[months]</span>');
-    list.push(' <span class="summary" onclick="return fn_click_parks(' + i + ');">[locations]</span>');
+    list.push(' <span class="summary" onclick="return fn_click_months(' + i + ');">[by month]</span>');
+    list.push(' <span class="summary" onclick="return fn_click_parks(' + i + ');">[by location]</span>');
     list.push('<div class="details" id="details' + i + '"></div>');
 
     return list.join('');
@@ -2240,6 +2256,16 @@ class Cnt {
 
     const list = [];
     if (this.trips_open) {
+      list.push('<ul>');
+      const trip_list = sorted_map(this.trip_to_cnt, sort_trip_to_cnt);
+      for (const [trip, cnt] of trip_list) {
+        if (cnt == 1) {
+          list.push('<li>' + trip[0] + ' in ' + trip[1] + '</li>');
+        } else {
+          list.push('<li>' + trip[0] + ' in ' + trip[1] + ': ' + cnt + '</li>');
+        }
+      }
+      list.push('</ul>');
     }
     e_details.innerHTML = list.join('');
   }
@@ -2266,9 +2292,21 @@ class Cnt {
 
     const list = [];
     if (this.parks_open) {
-      const sorted_parkcnt = sorted_map(this.park_to_parkcnt, sort_parkcnt_map);
+      const park_to_parkcnt = new Map();
+      for (const [trip, cnt] of this.trip_to_cnt) {
+        const date = trip[0];
+        const park = trip[1];
+
+        if (!park_to_parkcnt.has(park)) {
+          park_to_parkcnt.set(park, new ParkCnt());
+        }
+        const parkcnt = park_to_parkcnt.get(park);
+        parkcnt.add(date, cnt);
+      }
+
+      const sorted_parkcnt = sorted_map(park_to_parkcnt, sort_parkcnt_map);
       for (const [park, parkcnt] of sorted_parkcnt) {
-        list.push('<p>' + park + ':</p>');
+        list.push('<p>' + park + ': ' + parkcnt.total + '</p>');
         list.push('<ul>');
 
         const sorted_datecnt = sorted_map(parkcnt.date_to_cnt, sort_datecnt_map);
