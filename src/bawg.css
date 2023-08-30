@@ -478,6 +478,8 @@ a.enclosed {
 
 details {
     margin-bottom: 1em;
+    width: max-content;
+    cursor: pointer;
 }
 /* Observation details can be toggled by clicking on the "twisty" triangle
    or anywhere else in the line, but this isn't obvious to the user.
@@ -486,8 +488,7 @@ details > summary::after {
     color: #888;
     content: "[show details]";
     text-decoration: underline;
-    cursor: pointer;
-}
+ }
 details[open] > summary::after {
     content: "[hide details]";
 }
