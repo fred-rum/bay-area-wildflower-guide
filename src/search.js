@@ -2117,7 +2117,8 @@ class Cnt {
            for the child that excludes the pagse we've already
            counted.  Note that new Cnt() updates included_set
            as it runs. */
-        this.add_cnt(new Cnt(child_info, this.included_set));
+        this.add_cnt(new Cnt(this.page_to_trips, this.page_to_cnt,
+                             child_info, this.included_set));
       }
     }
   }

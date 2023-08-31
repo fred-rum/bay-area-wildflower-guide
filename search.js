@@ -1267,7 +1267,8 @@ class Cnt {
           this.included_set.add(included_page);
         }
       } else {
-        this.add_cnt(new Cnt(child_info, this.included_set));
+        this.add_cnt(new Cnt(this.page_to_trips, this.page_to_cnt,
+                             child_info, this.included_set));
       }
     }
   }
