@@ -68,7 +68,13 @@ function fn_pageshow() {
 function fn_doc_click(event) {
   var search_element = event.target.closest('#search-container');
   if (!search_element) {
-    hide_ac();
+    if (adv_search && (term_id < term_list.length) &&
+        (e_search_input.value == term_list[term_id].search_str)) {
+      confirm_adv_search_term(term_list[term_id].ac_selected);
+      prepare_new_adv_input();
+    } else {
+      hide_ac();
+    }
   }
 }
 var ac_list;
@@ -879,8 +885,9 @@ function fn_term_click(event) {
   for (term_id = 0; term_list[term_id].e_term != tgt; term_id++) {}
   const term = term_list[term_id];
   term.e_term.replaceWith(e_search_container);
-  e_search_input.focus();
   restore_term(term_list[term_id].search_str, term_list[term_id].ac_selected);
+  e_search_input.focus();
+  e_search_input.select();
   generate_ac_html();
   event.stopPropagation();
 }

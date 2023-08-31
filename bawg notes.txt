@@ -1755,7 +1755,7 @@ can the selected taxon in the autocomplete box remain selected
     when more text is typed?
   (if it remains a valid option)
 
-restore ac_selected when focus re-enters the search field
+restore ac_selected when focus re-enters the search field (regular search)
 
 photos.js doesn't need a page name, only jpg names
 
@@ -1796,15 +1796,6 @@ FNA has characteristics of Rumex bucephalophorus
 
 When a child's key is long,
   the image should cling to the top of the div
-
-Add an 'X' on the right side of each search term to quickly clear it
-  or select all text when edit begins
-    so that a simple 'delete' keypress deletes it
-
-if focus is removed from an advanced search field while it is being edited
-  and the edited value is unchanged
-    revert it and open a new search field
-    i.e. clicking on a search term can be undone by clicking elsewhere
 
 use colored boxes in the HTML instead of all gray
   to visually distinguish different parts of a hierarchy

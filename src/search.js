@@ -156,7 +156,18 @@ function fn_pageshow() {
 function fn_doc_click(event) {
   var search_element = event.target.closest('#search-container');
   if (!search_element) {
-    hide_ac();
+    if (adv_search && (term_id < term_list.length) &&
+        (e_search_input.value == term_list[term_id].search_str)) {
+      /* An advanced search term is being edited, but is unchanged.
+         Note that we don't check or care whether the autocomplete selection
+         has changed.
+         Re-confirm the search term and reset the input to the bottom of the
+         term list. */
+      confirm_adv_search_term(term_list[term_id].ac_selected);
+      prepare_new_adv_input();
+    } else {
+      hide_ac();
+    }
   }
 }
 
@@ -1513,8 +1524,9 @@ function fn_term_click(event) {
 
   /* Restore the search bar and autocomplete list to a state where the
      existing term can be re-confirmed by simply pressing the Enter key. */
-  e_search_input.focus();
   restore_term(term_list[term_id].search_str, term_list[term_id].ac_selected);
+  e_search_input.focus();
+  e_search_input.select();
   generate_ac_html();
 
   /* Once the click or 'Enter' keypress activates this function, it normally
