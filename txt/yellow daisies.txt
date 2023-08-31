@@ -5,9 +5,15 @@ For the purposes of this page, "daisies" are defined as a plant in the {-sunflow
 
 See also {-white daisies} for daisies with white rays and {-yellow sunflower-like flowers} for similar flowers with large heads.  Compare with {-yellow dandelion-like flowers}.
 
-==tarweeds and allies:tribe Madieae
+==woodland madia
 
-==goldfields:Lasthenia spp.
+==common madia
+
+==spikeweeds
+
+==tidytips
+
+==genus Deinandra
 
 ==common woolly sunflower:Eriophyllum lanatum
 color: yellow
