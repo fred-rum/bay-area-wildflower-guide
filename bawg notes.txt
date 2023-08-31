@@ -1794,7 +1794,7 @@ add text, etc. to distinguish advanced search terms that AND vs. OR
 
 FNA has characteristics of Rumex bucephalophorus
 
-when the details are expanded for an advanced search result,
+When a child's key is long,
   the image should cling to the top of the div
 
 Add an 'X' on the right side of each search term to quickly clear it

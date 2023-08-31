@@ -2201,6 +2201,8 @@ class Cnt {
       list.push('</a>');
 
       list.push('<br>');
+      /* Position the div where details are generated outside of the div
+         containing the page jpg, name, and details controls. */
       list.push(this.details('</div></div>'));
     }
 
