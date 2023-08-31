@@ -173,7 +173,7 @@ class Cnt:
             for i in range(12 - z_length):
                 m = (i + z_first + z_length) % 12
                 w.write(f'<li>{month_name[m]}: {self.month[m]}</li>\n')
-            w.write('</ul>\n');
+            w.write('</ul>\n')
 
             w.write(f'<p>For more details, use <a href="{adv_link}">advanced search</a>.</p>')
             w.write('<hr>\n')

@@ -2201,10 +2201,7 @@ class Cnt {
       list.push('</a>');
 
       list.push('<br>');
-      list.push(this.details());
-
-      list.push('</div>');
-      list.push('</div>');
+      list.push(this.details('</div></div>'));
     }
 
     child_cnt_list.sort(by_cnt);
@@ -2224,7 +2221,7 @@ class Cnt {
     return list.join('');
   }
 
-  details() {
+  details(sep = null) {
     const i = cnt_list.length;
     cnt_list.push(this);
 
@@ -2243,6 +2240,9 @@ class Cnt {
     list.push('<br><span class="summary" onclick="return fn_click_trips(' + i + ');">[trips]</span>');
     list.push(' <span class="summary" onclick="return fn_click_months(' + i + ');">[by month]</span>');
     list.push(' <span class="summary" onclick="return fn_click_parks(' + i + ');">[by location]</span>');
+    if (sep) {
+      list.push(sep);
+    }
     list.push('<div class="details" id="details' + i + '"></div>');
 
     return list.join('');
@@ -2279,7 +2279,42 @@ class Cnt {
     this.parks_open = false;
 
     const list = [];
+    const month_cnt = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     if (this.months_open) {
+      for (const [trip, cnt] of this.trip_to_cnt) {
+        const month = Number(trip[0].substring(5, 7)) - 1; // January = month 0
+        console.log(trip[0].substring(5, 7));
+        month_cnt[month] += cnt;
+      }
+
+      /* Search for the longest run of zeros in the month data. */
+      var z_first = 0
+      var z_length = 0
+      for (var i = 0; i < 12; i++) {
+        for (var j = 0; j < 12; j++) {
+          if (month_cnt[(i+j) % 12]) {
+            /* break ties around January */
+            if ((j > z_length) ||
+                ((j == z_length) && ((i == 0) || (i+j >= 12)))) {
+              z_first = i
+              z_length = j
+            }
+            break;
+          }
+        }
+      }
+
+      const month_name = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'Jun.',
+                          'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.']
+
+      /* Iterate through all months that are *not* part of the longest
+         run of zeros (even if some of those months are themselves zero). */
+      list.push('<ul>');
+      for (var i = 0; i < 12 - z_length; i++) {
+        var m = (i + z_first + z_length) % 12;
+        list.push('<li>' + month_name[m] + ': ' + month_cnt[m] + '</li>')
+      }
+      list.push('</ul>\n');
     }
     e_details.innerHTML = list.join('');
   }
