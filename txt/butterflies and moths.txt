@@ -1,4 +1,5 @@
 sci:order Lepidoptera
+warn link: self/-below # We don't care about included gall groups
 
 ==butterflies
 . antennae are club-shaped with a long shaft and a bulb at the end

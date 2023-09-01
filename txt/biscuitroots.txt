@@ -44,8 +44,8 @@ color: yellow
 ==alkali desertparsley:L. caruifolium var. caruifolium
 color: yellow
 species: alkali desertparsley
-. plant stem +- 0, cauline leaves 0, occasionally 1 or more at base of short stem
-. leaf segments thread-like to linear, long, not crowded; herbage green, generally shiny
+. plant <b>stem +- 0, cauline leaves 0</b>, occasionally 1 or more at base of short stem
+. leaf segments thread-like to linear, long, not crowded; herbage green, shiny or hairy ^https://www.inaturalist.org/observations/40964634#activity_comment_b553452c-d5c0-43d4-8d3b-7eb250b55e2e
 . uncommon, scattered
 
 ==mount hamilton lomatium:L. observatorium

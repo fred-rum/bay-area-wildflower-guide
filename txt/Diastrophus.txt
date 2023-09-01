@@ -1,6 +1,7 @@
 com: n/a
 sci: genus Diastrophus
 x: more
+warn link: self/-below # We don't care about included gall groups
 
 Species in this genus parasitize the {-rose family}.
 

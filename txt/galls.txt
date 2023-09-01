@@ -5,7 +5,7 @@ is_top
 # gets its needed properties from its proper Linnaean hierarchy,
 # and we don't need any overrides for galls in particular.
 
-Taxons that create galls are listed in their normal taxonomic locations, but I've also collected them here for easier browsing.  In addition, rather than organizing them into the traditional clades, this page organizes galls based on host and gall location on the host.
+Taxons that create galls are listed in their normal taxonomic locations, but I've also collected them here for easier browsing based on the plant host.  This page also includes lerps, which look similar to galls.
 <p>
 The most popular references for galls are
 Ron Russo's Field Guide to Plant Galls of California and Other Western States (2007) and
@@ -23,68 +23,55 @@ The Bioblitz Club also has PDF brochures for
 <br>
 Nancy Asquith has tons of <a href="https://www.inaturalist.org/projects/california-plants-with-mystery-galls/journal/39523-california-galls-a-host-plant-list-with-links">additional links</a> on iNaturalist.
 
+<h3>beech family</h3>
 
-<h3>oaks</h3>
-==california gall wasp
-==live oak bud gall wasp
-==ruptured twig gall wasp
-==gouty stem gall wasp
-==live oak apple gall wasp
-==round leaf gall wasp
-==beaked spindle gall wasp
-==beaked twig gall wasp
-==round gall wasp
+==oak galls
+rep:oaks
 
-<h3>chinquapin</h3>
-==chinquapin flower gall wasp
+==chinquapin galls
+rep:genus Chrysolepis
 
-<h3>roses</h3>
-==spiny leaf gall wasp
+<h3>rose family</h3>
 
-<h3>sticky cinquefoil</h3>
-==Diastrophus d-glandulosa-stem-swelling
+==rose galls
+rep:roses
 
-<h3>brambles</h3>
-==thimbleberry gallmaker
+==sticky cinquefoil galls
+rep:sticky cinquefoil
 
-<h3>coffeeberry</h3>
-==coffeeberry midrib gall moth
+==bramble galls
+rep:brambles
 
-<h3>coyote brush</h3>
-==coyote brush bud gall midge
-==coyote brush twisted stem gall midge
-==coyote brush stem gall moth
+<h3>sunflower family</h3>
 
-<h3>sagebrush</h3>
-==sagebrush woolly stem gall midge
+==baccharis galls
+rep:genus Baccharis
 
-<h3>silktassels</h3>
-==silktassel flower gall midge
+==wormwood and sagebrush galls
+rep:wormwoods and sagebrushes
 
-<h3>willows</h3>
-==willow gall midges
-==Iteomyia s-lasiolepis-tooth-gall
-==willow gall sawflies
-==willow bead gall mite
+<h3>other hosts</h3>
 
-<h3>snowberries</h3>
-==snowberry sawfly
+==coffeeberry galls
+rep:coffeeberry
 
-<h3>manzanitas</h3>
-==ericaceous gall aphids
-==Exobasidium
+==silktassel galls
+rep:silktassels
 
-<h3>eucalyptus</h3>
-==red gum lerp psyllid:Glycaspis brimblecombei
-bug:270868
-gall:n/a
-. lerps aren't actually galls, and they can easily be brushed off the host's surface
-. parasitizes {-river redgum} and {-forest red gum} by preference, but also parasitizes other {-Eucalyptus}.
+==willow galls
+rep:willows
 
-<h3>blazingstars</h3>
-==n/a:Asphondylia mentzeliae
-genus:n/a
-. parasitizes the flower bud of {-Mentzelia}
+==snowberry galls
+rep:snowberries
 
-<h3>poison oak</h3>
-==poison oak leaf gall mite
+==manzanita galls
+rep:bearberries and manzanitas
+
+==eucalyptus galls
+rep:eucalyptus
+
+==blazingstar galls
+rep:blazingstars
+
+==pacific poison oak galls
+rep:pacific poison oak

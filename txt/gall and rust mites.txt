@@ -1,4 +1,5 @@
 sci:family Eriophyidae
+warn link: self/-below # We don't care about included gall groups
 
 ==willow bead gall mite:Aculus tetanothrix
 bug:n/a

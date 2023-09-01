@@ -1,3 +1,5 @@
+warn link: self/-below # We don't care about included gall groups
+
 ==insects
 end_hierarchy
 
