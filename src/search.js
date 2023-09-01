@@ -2252,8 +2252,8 @@ class Cnt {
     }
 
     list.push('<br><span class="summary" onclick="return fn_click_trips(' + i + ');">[trips]</span>');
-    list.push(' <span class="summary" onclick="return fn_click_months(' + i + ');">[by month]</span>');
-    list.push(' <span class="summary" onclick="return fn_click_parks(' + i + ');">[by location]</span>');
+    list.push(' <span class="summary" onclick="return fn_click_months(' + i + ');">[by&nbsp;month]</span>');
+    list.push(' <span class="summary" onclick="return fn_click_parks(' + i + ');">[by&nbsp;location]</span>');
     if (sep) {
       list.push(sep);
     }

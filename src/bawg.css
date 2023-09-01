@@ -475,7 +475,7 @@ a.enclosed {
 
 details {
     margin-bottom: 1em;
-    width: max-content;
+    /* width: max-content; */
 }
 summary {
     cursor: pointer;
@@ -486,11 +486,12 @@ summary {
    Show something more obviously clickable. */
 details > summary::after {
     color: #888;
-    content: "[show details]";
+    /* "content" doesn't support &nbsp; so I use the Unicode equivalent */
+    content: "[show\0000a0details]";
     text-decoration: underline;
 }
 details[open] > summary::after {
-    content: "[hide details]";
+    content: "[hide\0000a0details]";
 }
 
 .summary {

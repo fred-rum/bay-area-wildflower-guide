@@ -229,18 +229,17 @@ a.enclosed {
 }
 details {
     margin-bottom: 1em;
-    width: max-content;
 }
 summary {
     cursor: pointer;
 }
 details > summary::after {
     color: #888;
-    content: "[show details]";
+    content: "[show\0000a0details]";
     text-decoration: underline;
 }
 details[open] > summary::after {
-    content: "[hide details]";
+    content: "[hide\0000a0details]";
 }
 .summary {
     color: #888;
