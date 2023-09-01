@@ -1,4 +1,5 @@
 sci: n/a
+ignore_link: self
 
 ==california gall wasp
 ==live oak bud gall wasp

@@ -1,4 +1,5 @@
 sci: n/a
+ignore_link: self
 
 ==willow gall midges
 ==Iteomyia s-lasiolepis-tooth-gall

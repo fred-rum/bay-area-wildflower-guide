@@ -1,7 +1,6 @@
 sci:class Insecta
 bug:52
 warn photo_requires_bugid: genus-below
-warn link: self/-below # We don't care about included gall groups
 
 There is a <a href="insect-glossary.html">glossary</a> for insects.
 

@@ -1,3 +1,5 @@
 sci: n/a
 
+ignore_link: self
+
 ==red gum lerp psyllid

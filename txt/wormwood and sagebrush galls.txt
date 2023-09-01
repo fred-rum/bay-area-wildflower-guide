@@ -1,3 +1,4 @@
 sci: n/a
+ignore_link: self
 
 ==sagebrush woolly stem gall midge

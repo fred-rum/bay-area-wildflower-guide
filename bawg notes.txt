@@ -1815,8 +1815,3 @@ Why does the summary for page details extend beyond the edge of the screen
 
 should advanced search support 'not <taxon>'?
   as an implicit AND term, of course
-
-I need a way to disable link warnings based on the child taxon
-  so that the parent can still find other missing links
-  e.g. from insects.txt:
-    warn link: self/-below # We don't care about included gall groups

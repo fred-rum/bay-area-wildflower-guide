@@ -1,6 +1,5 @@
 sci:family Cynipidae
 bug:14878
-warn link: self/-below # We don't care about included gall groups
 
 ==california gall wasp:Andricus quercuscalifornicus
 bug:130468

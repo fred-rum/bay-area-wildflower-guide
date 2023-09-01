@@ -1,5 +1,7 @@
 sci: n/a
 
+ignore_link: self
+
 ==coyote brush bud gall midge
 ==coyote brush twisted stem gall midge
 ==coyote brush stem gall moth

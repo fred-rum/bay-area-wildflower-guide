@@ -1,3 +1,4 @@
 sci: n/a
+ignore_link: self
 
 ==poison ivy leaf gall mite

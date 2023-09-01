@@ -1,3 +1,4 @@
 sci: n/a
+ignore_link: self
 
 ==silktassel flower gall midge

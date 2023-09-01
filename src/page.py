@@ -49,6 +49,7 @@ props = {
     'create2': 'fd',
     'create2_com': 'fd',
     'link': 'fd',
+    'ignore_link': 'd',
     'link_suppress': 'fd',
     'member_link': 'd',
     'member_name': 'd',
@@ -2062,6 +2063,13 @@ class Page:
     # Check Linnaean descendants of link_from to find real pages that
     # it can link to.
     def get_potential_link_set(self, potential_link_set, link_from):
+        # Ignore a descendent page with the ignore_link property
+        # if the page we'd be linked from is a real page
+        # (so the 'link' property applies, as opposed to the 'create'
+        # property for a shadow ancestor).
+        if not link_from.shadow and self.rp_do('ignore_link'):
+            return
+
         if self.shadow:
             # Keep recursing downward.
             # Since this page isn't real, we can be sure that it has no
@@ -2096,9 +2104,11 @@ class Page:
         # this parent.
         potential_link_set = set()
         for child in self.linn_child:
-            # Ignore children that already have a real link
-            # and subset pages.
-            if child not in self.child and not child.subset_of_page:
+            # Ignore certain child pages:
+            #   - child pages that already have a real link
+            #   - subset pages
+            if (child not in self.child and
+                not child.subset_of_page):
                 child.get_potential_link_set(potential_link_set, self)
 
         if potential_link_set:

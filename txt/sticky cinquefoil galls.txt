@@ -1,3 +1,4 @@
 sci: n/a
+ignore_link: self
 
 ==Diastrophus d-glandulosa-stem-swelling

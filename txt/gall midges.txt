@@ -1,5 +1,4 @@
 sci:subfamily Cecidomyiinae
-warn link: self/-below # We don't care about included gall groups
 
 ==sagebrush woolly stem gall midge:Rhopalomyia floccosa
 bug:n/a
