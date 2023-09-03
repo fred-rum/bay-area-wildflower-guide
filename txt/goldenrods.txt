@@ -7,24 +7,33 @@ See also {-western goldenrod}.
 color: yellow
 species: velvety goldenrod
 xx:ba
-. proximal cauline or basal leaves largest
+. proximal cauline or basal leaves largest, oblanceolate tapering to winged petioles
+.. distal leaves much reduced, sessile or subsessile
+.. <b>distal nodes without axillary leaf-clusters</b>
 . leaves and heads not strongly resinous
 . herbage sparsely to densely short-hairy
-. distal nodes without axillary leaf-clusters
 . very common
 
 ==southern goldenrod:S. confinis
 . proximal cauline or basal leaves largest
-. leaves and heads not strongly resinous
+.. proximal leaves linear lanceolate tapering to winged petioles with bases nearly sheathing the stem
+.. <b>distal nodes often with axillary leaf-clusters</b>
+.. leaves and heads not strongly resinous
 . herbage +- glabrous
-. distal nodes often with axillary leaf-clusters
 . Presidio
 
 ==coast goldenrod:S. spathulata
-. leaves and heads strongly resinous
 . proximal cauline or basal leaves largest
+.. <b>proximal leaves spatulate</b>
+.. distal leaves oblanceolate, very small
+. leaves and heads strongly resinous
 . rare on the Pacific coast
 
 ==west coast canada goldenrod:S. elongata
-. mid-cauline leaves largest
+color: yellow
+. <b>mid-cauline leaves largest</b>
+.. basal and proximal cauline leaves often withered in flower
+.. proximal cauline leaves smaller if present
+.. leave blades oblanceolate, becoming lanceolate distally
+.. all leaves sessile
 . scattered mostly near the Pacific coast

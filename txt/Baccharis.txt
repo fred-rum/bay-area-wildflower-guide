@@ -6,7 +6,7 @@ x:ba
 color: other
 . leaf blade 5--40 mm long, 2--15 mm wide, <b>obovate or oblanceolate</b>, gland-dotted [but unknown stickiness]
 . very common
-. parasitized by the {-coyote brush bud gall midge} and {-coyote brush stem gall moth}.
+. parasitized by all of the {-baccharis galls}
 
 ==marsh baccharis:B. glutinosa
 color:white

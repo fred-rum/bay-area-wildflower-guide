@@ -1,0 +1,4 @@
+taxon:butterflies and moths
+warn:butterflies and moths
+
+{discal} A region of each wing (fore and/or hind) roughly centered on the wing

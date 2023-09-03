@@ -11,6 +11,10 @@ import re
 # src/gitmv.py html/[name].txt [name]
 # src/gitmv.py photos/[name],[suffix].jpg {[name] or [suffix] or [name],[suffix]}
 
+# If the second arg includes a directory prefix or a file extension suffix,
+# it is ignored.  So, e.g. this also works:
+# src/gitmv.py photos/[name],[suffix].jpg {[name] or [suffix] or photos/[name],[suffix]}.jpg
+
 # This script must be run from the project's git directory so that the
 # relative paths are all exactly one directory deep.
 
@@ -28,6 +32,9 @@ arg2 = sys.argv[2]
 
 (base, filename) = os.path.split(arg1)
 (name, ext) = os.path.splitext(filename)
+
+arg2 = re.sub(r'^.*/', '', arg2);
+arg2 = re.sub(r'\.*$', '', arg2);
 
 git = shutil.which('git')
 if not git:

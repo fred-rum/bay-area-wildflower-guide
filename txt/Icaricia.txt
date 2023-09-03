@@ -1,11 +1,31 @@
 com:n/a
-sci:Icaricia spp.
-
-# bugguide doesn't have Icaricia, so I link to Plebejus intead
+sci: genus Icaricia
+sci_b: genus Plebejus
 bug:9674
+x:rare
 
-This genus is in taxonomic flux.
+This genus is in often studied and therefore often rearranged.
 
 ==acmon blue:Icaricia acmon
 sci_b:Plebejus acmon
 bug:9675
+. upper wing surfaces can be pale blue (male) or orangey brown (female)
+. no dark discal spot on the upper side of the hind wings
+. orange spots on both sides of hind wings
+. male has paler upper wing surfaces than in {-lupine blue}
+. common
+
+==lupine blue:Icaricia lupini
+sci_b:Plebejus lupini
+bug:28893
+. upper wing surfaces can be bluish (male) or brownish (female)
+. dark discal spot on the upper side of the hind wings
+. male has darker upper wing surfaces than in {-acmon blue}
+. orange spots on both sides of hind wings
+. very rare
+
+==boisduval's blue:Icaricia icarioides
+sci_b: Plebejus icarioides
+bug:25017
+. <b>orange spots not present or barely visible</b>
+. uncommon

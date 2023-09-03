@@ -1,0 +1,24 @@
+sci:tribe Polyommatini
+sci_b: subfamily Polyommatinae
+bug:12666
+
+rep:acmon blue
+
+A <a href="https://wabutterflyassoc.org/wp-content/uploads/2017/02/Key-to-the-Blues.pdf">key to the blues of Washington State</a> includes many bay area species.
+
+==Icaricia spp.
+
+==holarctic azures:Celastrina spp.
+
+==silvery blue:Glaucopsyche lygdamus
+bug:15915
+
+==western pygmy-blue:Brephidium exilis
+
+==sonoran blue:Philotes sonorensis
+
+==dotted blue:Euphilotes enoptes
+
+==western tailed-blue:Cupido amyntula
+
+==eastern tailed-blue:Cupido comyntas

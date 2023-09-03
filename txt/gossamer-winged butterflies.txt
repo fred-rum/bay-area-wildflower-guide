@@ -1,15 +1,10 @@
 sci:family Lycaenidae
 bug:194
 
-==holarctic azures:Celastrina spp.
-
-==Icaricia spp.
+==typical blues
 
 ==lotus hairstreak:Callophrys dumetorum
 bug:416030
-
-==silvery blue:Glaucopsyche lygdamus
-bug:15915
 
 ==tailed copper:Tharsalea arota
 bug:25364

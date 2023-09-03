@@ -1815,3 +1815,6 @@ Why does the summary for page details extend beyond the edge of the screen
 
 should advanced search support 'not <taxon>'?
   as an implicit AND term, of course
+
+"Some observations of higher level taxons are hidden
+  in the simple hierarchy view/no-hierarchy view."
