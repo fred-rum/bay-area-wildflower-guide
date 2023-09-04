@@ -13,7 +13,7 @@ color:yellow
 . common everywhere except the southeast bay
 
 ==portuguese broom:Cytisus striatus
-8--10-angled branch:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0911+0197
+color:yellow
 . yellow corolla
 . banner generally > 10--25 mm
 . <b>calyx appressed-hairy</b>

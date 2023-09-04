@@ -39,6 +39,7 @@ Particularly for leaves, the base of the blade may taper to the petiole regardle
 {reniform} In the shape of a dented oval, with the petiole connection in the dent.  Depending on your source, the distinction from cordate is that the tip of the blade is rounded (instead of pointed) or that the blade base is concave around the petiole attachment (instead of sharply notched). <a target="_blank" href="https://www.researchgate.net/figure/Examples-of-leaf-shapes_fig1_295685020">[example]</a>
 {sagittate} In the shape of an arrowhead, with the two basal lobes draped +- parallel to the axis.  Compare hastate.
 {wedge-shaped,wedge,wedges} [I'm guessing] Like fan-shaped, but narrower.
+{spatulate} Broad near the tip and tapering toward the base.  Based on the diversity of example images on the web, this term may be less precise than it sounds.
 
 <h3>2-D branching organization</h3>
 

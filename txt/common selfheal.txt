@@ -4,4 +4,18 @@ color: purple
 genus: selfheals
 x:ca
 
-xx:uncat
+xx:ca
+
+==mountain selfheal:ssp. lanceolata
+sci_fjp:var. lanceolata
+. cauline blade length generally 3&times; width
+. stem generally erect
+. usually in moist conifer forests/woodlands
+. common
+
+==n/a:ssp. vulgaris
+sci_fjp:var. vulgaris
+. cauline blade length generally 2&times; width
+. stem generally prostrate
+. usually in moist disturbed sites, e.g. urban areas close to the bay
+. very rare

@@ -19,13 +19,20 @@ import re
 # relative paths are all exactly one directory deep.
 
 # Performs 'git mv' to rename one taxon to another and/or to change a
-# photo suffix.  If a txt/... path is given, all corresponding fiels in
-# txt, html, photos, and thumbs are moved.  If an html/... path is given,
-# the html, photos, and thumbs are moved.  If a photos/... path is given,
-# the photos and thumbs are moved.  In this last case, the [suffix] can be
-# given in the second argument to move only one photo and its corresponding
-# thumbnail, or it can be omitted to move them all (in which case the suffix
-# doesn't matter in the first argument).
+# photo suffix.
+#
+# If a txt/... path is given, all corresponding fiels in txt, html, photos,
+# and thumbs are moved.
+#
+# If an html/... path is given, the html, photos, and thumbs are moved.
+# In this case, the html path uses hyphens instead of spaces, but the
+# new name in the second argument should be provided with spaces.
+#
+# If a photos/... path is given, the photos and thumbs are moved.
+# In this last case, the [suffix] can be given in the second argument
+# to move only one photo and its corresponding thumbnail, or it can
+# be omitted to move them all (in which case the suffix doesn't matter
+# in the first argument).
 
 arg1 = sys.argv[1]
 arg2 = sys.argv[2]

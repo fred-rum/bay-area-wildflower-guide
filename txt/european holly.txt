@@ -1,0 +1,4 @@
+sci: Ilex aquifolium
+genus: hollies
+x:ba
+color: white

@@ -1,6 +1,0 @@
-sci:Celastrina spp.
-bug:223
-x:ca
-
-==echo azure:Celastrina echo
-bug:41480

@@ -11,7 +11,7 @@ do member_name_alias: genus, species
 do member_com_simple: self-species
 
 warn color_requires_photo: self-below
-warn photo_requires_color: self-below
+warn photo_requires_color: species-below
 
 # subset color list order: color, [optional name in membership list,] page name
 # The order of colors listed here determines the order of colors in a page's

@@ -53,6 +53,7 @@ species: simple campion
 . uncommon
 
 ==san francisco campion:S. verecunda
+color: pink, pale purple, red purple
 . corolla (very) pale purple to reddish purple
 . calyx tube clearly with 10 veins
 . <b>lower leaves 2--9 mm wide</b>

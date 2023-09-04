@@ -4,7 +4,9 @@ x:ba
 
 I need to re-evaluate all of my observations now that I have some idea what to look for.
 
-Each head is composed of only disc flowers surrounded by +- white phyllaries.  <b>The involucre is cylindric to generally urn-shaped.</b>  Compare to {-pearly everlasting}.
+Each head is composed of only disc flowers surrounded by +- white phyllaries.  Staminate or bisexual flowers are at the center surrounded by a larger number of peripheral pistillate flowers.
+
+<b>The involucre is cylindric to generally urn-shaped.</b>  Compare to {-pearly everlasting}.
 
 Key features:
 . stem stalked-glandular or not, glabrous or proximally glabrous or +- tomentose
@@ -14,74 +16,73 @@ Key features:
 
 ==california cudweed:P. californicum
 color: white
-. <b>Stem stalked-glandular, sometimes glabrous</b>
-. Leaves generally not crowded
-. Leaf base +- clasping or not, decurrent 0--15 mm
-. Leaf faces generally green, stalked-glandular, sometimes +- tomentose
-. Leaf flat or margin slightly curled under, sometimes wavy
+. <b>stem stalked-glandular, sometimes glabrous</b>
+. leaves generally not crowded
+. leaf base +- clasping or not, decurrent 0--15 mm
+. leaf faces generally green, stalked-glandular, sometimes +- tomentose
+. leaf flat or margin slightly curled under, sometimes wavy
 . inflorescence flat-topped or rounded
 . phyllaries in 7--10 series, white to pink
 . very common
 
 ==pink everlasting:P. ramosissimum
 color:pale purple
-. <b>Stem stalked-glandular</b>, +- tomentose
-. Leaves crowded proximally or not
-. Leaf base not clasping, decurrent 2--10 mm
-. Leaf faces +- green or thinly gray-tomentose, stalked-glandular
-. Leaf margin curled under and closely wavy
-. Inflorescence in panicle-like cluster
+. <b>stem stalked-glandular</b>, +- tomentose
+. leaves crowded proximally or not
+. leaf base not clasping, decurrent 2--10 mm
+. leaf faces +- green or thinly gray-tomentose, stalked-glandular
+. leaf margin curled under and closely wavy
+. inflorescence in panicle-like cluster
 . <b>phyllaries generally +- pink</b> [it's distinctive in CalPhotos]
 . common
 
 ==fragrant everlasting:P. beneolens
-. <b>Stem obscurely glandular beneath long hairs</b>, tomentose
-. Leaves crowded or not [unknown]
-. Leaf base not clasping, decurrent 5--15 mm
-. Leaf faces loosely gray-tomentose, obscurely glandular beneath long hairs
-. Leaf flat
+. <b>stem obscurely glandular beneath long hairs</b>, tomentose
+. leaves crowded or not [unknown]
+. leaf base not clasping, decurrent 5--15 mm
+. leaf faces loosely gray-tomentose, obscurely glandular beneath long hairs
+. leaf flat
 . common
 
 ==cottonbatting plant:P. stramineum
-color: white
-. Stem not glandular, loosely to densely tomentose
-. Leaves +- crowded
-. Leaf base +- clasping, generally not decurrent
-. Leaf faces loosely persistently gray-tomentose, not glandular
-. Leaf flat or margin slightly curled under
-. Inflorescence dense, 1--2 cm diam or +- cyme-like
-. pistillate corolla evenly yellow [?]
+. stem not glandular, <b>loosely to densely tomentose</b>
+. leaves +- crowded
+. leaf base +- clasping, generally not decurrent
+. leaf faces loosely persistently gray-tomentose, not glandular
+. leaf flat or margin slightly curled under
+. inflorescence dense, 1--2 cm diam or +- cyme-like
+. peripheral corolla evenly yellow [?]
 . common
 
 ==two-color rabbit tobacco:P. biolettii
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0216+0803
-. Stem not glandular, <b>sometimes +- woody near base, proximally tomentose to glabrous</b>, but always tomentose near heads
-. Leaves not crowded
-. Leaf base clasping, not decurrent
+. stem not glandular, <b>sometimes +- woody near base, proximally tomentose to glabrous</b>, but always tomentose near heads
+. leaves not crowded
+. leaf base clasping, not decurrent
 . adaxial leaf face +- bright green, tomentose or not, <b>densely stalked-glandular</b>
 . abaxial leaf face generally white-tomentose
-. Leaf flat or margin slightly curled under, often wavy
-. Inflorescence +- flat-topped
+. leaf flat or margin slightly curled under, often wavy
+. inflorescence +- flat-topped
 . rare
 
 ==jersey cudweed:Helichrysum luteoalbum
 color: salmon, other
-. Stem not glandular, loosely tomentose
-. Leaves proximally +- crowded, distally +- widely spaced
-. Leaf +- clasping, generally decurrent 1--2 mm
-. Leaf faces generally +- gray-tomentose or adaxial +- glabrous
-. Leaf margin generally curled under
-. Involucre 3--4 mm
-. <b>pistillate corolla usually red tipped</b>
+. stem not glandular, loosely tomentose
+. leaves proximally +- crowded, distally +- widely spaced
+. leaf +- clasping, generally decurrent 1--2 mm
+. leaf faces generally +- gray-tomentose or adaxial +- glabrous
+. leaf margin generally curled under
+. involucre 3--4 mm
+. <b>peripheral corolla usually red tipped</b>
 . common
 
 ==feltleaf everlasting:P. microcephalum
-. Stem not glandular, tomentose
-. Leaves crowded or not
-. Leaf base clasping or not, decurrent 3--10 mm or not
-. Leaf opposing faces weakly contrasting in color, tomentose, adaxial less densely so, not glandular
-. Leaf flat
-. Inflorescence loose, flat-topped to panicle-like cluster
+. stem not glandular, tomentose
+. leaves crowded or not
+. leaf base clasping or not, decurrent 3--10 mm or not
+. leaf opposing faces weakly contrasting in color, tomentose, adaxial less densely so, not glandular
+. leaf flat
+. inflorescence loose, flat-topped to panicle-like cluster
 . <b>narrow heads</b>
 . phyllaries in 4--6 series
 . disk flowers 5--9
@@ -90,12 +91,12 @@ color: salmon, other
 . rare
 
 ==wright's cudweed:P. canescens
-. Stem not glandular, persistently tomentose
-. Leaves not crowded?
-. Leaf base not clasping, not decurrent
-. Leaf opposing faces weakly contrasting in color, tomentose, adaxial less densely so, occasionally also sessile-glandular
-. Leaf flat
-. Inflorescence generally loose, rounded to +- flat-topped
+. stem not glandular, persistently tomentose
+. leaves not crowded?
+. leaf base not clasping, not decurrent
+. leaf opposing faces weakly contrasting in color, tomentose, adaxial less densely so, occasionally also sessile-glandular
+. leaf flat
+. inflorescence generally loose, rounded to +- flat-topped
 . phyllaries in 3--4 series
 . disk flowers 2--5
 . stem 2--3 mm diam near base

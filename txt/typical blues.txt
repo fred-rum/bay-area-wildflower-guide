@@ -8,7 +8,13 @@ A <a href="https://wabutterflyassoc.org/wp-content/uploads/2017/02/Key-to-the-Bl
 
 ==Icaricia spp.
 
-==holarctic azures:Celastrina spp.
+==echo azure:Celastrina echo
+bug:41480
+genus:holarctic azures
+x:ca
+xx:uncat
+; ssp. chalcedona seems to be the only one in the bay area,
+; but I can't find any information for distinguishing subspecies.
 
 ==silvery blue:Glaucopsyche lygdamus
 bug:15915

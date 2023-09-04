@@ -13,3 +13,9 @@ bug:238272
 . quite a few species within California
 .. the official key to distinguish them is quite difficult to understand
 . the similar genus Orthocephalus does not appear to be present in Northern California
+
+==n/a:Prepops bivittis
+genus:n/a
+bug:250040
+. due to color variation, hard to ID to species from photos ^https://bugguide.net/node/view/12233
+. ID here based partially on recorded range

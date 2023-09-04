@@ -2,10 +2,14 @@ bug:483626
 
 ==variable checkerspot: Euphydryas chalcedona
 bug:25005
+xx:uncat
+; ssp. chalcedona seems to be the only one in the bay area,
+; but I can't find any information for distinguishing subspecies.
 
 ==bay checkerspot:Euphydryas editha ssp. bayensis
 sci_b:Euphydryas editha # no subspecies in BugGuide
 bug:199940
+xx:ba
 
 ==northern checkerspot:Chlosyne palla
 bug:25358

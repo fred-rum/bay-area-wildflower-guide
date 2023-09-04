@@ -1,7 +1,7 @@
 sci:Sambucus racemosa
 xx:ca
 
-==western red elder:S. racemosa var. microbotrys
+==pacific red elder:S. racemosa var. microbotrys
 acom: european red elder
 sci_fpj: S. racemosa var. racemosa
 sci_i: S. racemosa ssp. racemosa

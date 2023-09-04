@@ -64,8 +64,11 @@ def read_txt():
     # We read the files without parsing to make performance easier to measure.
     for name in txt_files:
         filename = f'{name}.txt'
-        page = Page(name, name_from_txt=True, src=filename)
-        read_file(f'txt/{filename}', page.read_txt)
+        if filename.startswith('.#'): # emacs temporary file
+            warn(f'file being edited: {filename}')
+        else:
+            page = Page(name, name_from_txt=True, src=filename)
+            read_file(f'txt/{filename}', page.read_txt)
 
     for page in page_array:
         with Progress(f'removing comments from "{page.name}"'):

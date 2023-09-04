@@ -14,7 +14,7 @@ xx:ca
 Formerly a subspecies of black elderberry, but now elevated to its own species.
 
 ==red-berried elder:S. racemosa
-rep: western red elder,3
+rep: pacific red elder,3
 . inflorescence +- dome-shaped, central axis generally dominant
 . petals often reflexed
 . red berries

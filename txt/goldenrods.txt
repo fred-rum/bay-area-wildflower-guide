@@ -23,6 +23,7 @@ xx:ba
 . Presidio
 
 ==coast goldenrod:S. spathulata
+color: yellow
 . proximal cauline or basal leaves largest
 .. <b>proximal leaves spatulate</b>
 .. distal leaves oblanceolate, very small
