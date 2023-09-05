@@ -27,6 +27,8 @@ color:yellow
 . uncommon
 
 ==seaside agoseris:A. apargioides
+color: yellow
+<b>Caultion: ID unsure</b>
 . ligules 8--16 mm, much exceeding involucre
 . <b>petiole +- purple</b>
 . leaf is either entire or includes generally 3--5 pairs of leaf lobes
@@ -50,7 +52,7 @@ xx:ca
 . very rare and out of range
 
 ==mountain dandelion:A. heterophylla var. cryptopleura
-. liggues 10--15 mm, much exceeding involucre
+. ligules 10--15 mm, much exceeding involucre
 . leaf petiole may be purple
 . generally 3--5 pairs of leaf lobes
 . uncommon

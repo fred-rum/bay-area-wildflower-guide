@@ -8,3 +8,6 @@ Per Ken-ichi Ueda's <a href="https://www.inaturalist.org/observations/637591">ob
 
 ==n/a:Monochamus obtusus
 bug:162026
+
+==n/a:Callimus ruficollis
+bug:429530

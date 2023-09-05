@@ -46,8 +46,8 @@ color: cream, other
 . corolla tube glabrous
 . scattered along the pacific coast
 
-==chilean plantain:P. truncata ssp. firma
-species: n/a
+==chilean plantain:P. firma
+sci_fpj:P. truncata ssp. firma
 . corolla tube glabrous
 . Mt. Tamalpais
 

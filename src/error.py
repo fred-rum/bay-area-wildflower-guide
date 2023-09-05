@@ -91,8 +91,6 @@ class Progress:
         self.__msg = msg
 
     def __enter__(self):
-        fail_on_errors(1)
-
         indented_msg = (' ' * len(progress_msg_list)) + self.__msg
         progress_msg_list.append(indented_msg)
 

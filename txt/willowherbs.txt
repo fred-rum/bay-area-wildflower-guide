@@ -66,7 +66,8 @@ color: pale purple
 . petals 1--3.2 mm, pink
 . Los Trancos, Don Edwards, Sunol, Pleasanton Ridge, Mt. Diablo, Briones
 
-==california willowherb:E. foliosum
+==california willowherb:E. ravenii
+sci_fpj:E. foliosum
 . < 45 cm tall
 . leaf 5--30 mm, sublinear to lanceolate, generally folded along midrib, distal clustered; petiole 1--12 mm
 . inflorescence crowded

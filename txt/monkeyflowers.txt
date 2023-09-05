@@ -14,12 +14,12 @@ Key features:
 # And because Diplacus might as well match, I do the same for it.
 
 ==Diplacus spp.
-acom:monkeyflowers
+xcom:monkeyflowers
 . pedicel generally < calyx
 . flowers orange or purple
 
 ==Erythranthe spp.
-acom:monkeyflowers
+xcom:monkeyflowers
 . pedicel generally > calyx
 . calyx lobes with prominent midribs
 . flowers yellow, red, or (one) purple

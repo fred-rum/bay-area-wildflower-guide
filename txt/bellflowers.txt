@@ -1,9 +1,13 @@
 sci:Campanula spp.
 asci:genus Ravenella
+asci:genus Smithiastrum
+asci:genus Eastwoodiella
 x:ba
 
-==california harebell:C. prenanthoides
-sci_fpj:Asyneuma prenanthoides
+==california harebell:Smithiastrum prenanthoides
+sci_fj: Asyneuma prenanthoides
+sci_p: Asyneuma prenanthoides|Campanula prenanthoides
+color: pale blue, blue
 . 2+ flowers per node
 . corolla cut >= &frac34; to base with linear lobes
 . uncommon in the Santa Cruz range
@@ -12,14 +16,16 @@ sci_fpj:Asyneuma prenanthoides
 <h3>1 flower per node<br>
 corolla cut <= &frac23; to base with at least narrowly triangular lobes</h3>
 
-==swamp harebell:C. californica
+==swamp harebell:Eastwoodiella californica
+acom:marsh harebell
+sci_fpj: C. californica
 . perennial
 . leaf ovate, thin, crenate
 . corolla 8--15 mm
 . extremely rare
 
 [
-These bellflowers have been separated into <iRavenella</i>.
+These bellflowers have been separated into <i>Ravenella</i>.
 
 ==eastwood's bellflower:C. angustiflora
 sci_i:Ravenella angustiflora

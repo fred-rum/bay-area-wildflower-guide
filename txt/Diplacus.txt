@@ -1,4 +1,4 @@
-com: n/a
+com: sessile monkeyflowers # from FNA
 sci: genus Diplacus
 x:hist/rare
 

@@ -1,6 +1,4 @@
 sci:Prunella vulgaris
-color: purple
-
 genus: selfheals
 x:ca
 
@@ -8,6 +6,7 @@ xx:ca
 
 ==mountain selfheal:ssp. lanceolata
 sci_fjp:var. lanceolata
+color: purple
 . cauline blade length generally 3&times; width
 . stem generally erect
 . usually in moist conifer forests/woodlands

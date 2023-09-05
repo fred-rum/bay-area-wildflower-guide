@@ -1,8 +1,10 @@
 sci:Lilium spp.
 x:ba
 
-==leopard lily:L. pardalinum
+==leopard lily:L. pardalinum ssp. pardalinum
+xx:ba
 color:orange
+species:leopard lily
 . flower pendent
 . perianth yellow to +- orange
 . grows in +- moist places

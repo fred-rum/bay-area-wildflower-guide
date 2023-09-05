@@ -1,5 +1,4 @@
 sci: genus Juncus
-color:other
 x: rare
 
 There are a <b>lot</b> of species in the bay area; I've only included the most common ones here (CalFlora observations > +-80).
@@ -15,6 +14,7 @@ There are a <b>lot</b> of species in the bay area; I've only included the most c
 . <b>leaf blade 1--1.5 mm wide</b>
 
 ==irisleaf rush:J. xiphioides
+color: other
 . plant 40--80 cm tall
 . inflorescnce bract does not look like stem
 .. all bracts are < &frac12 the length of the inflorescence
@@ -46,6 +46,7 @@ sci_jfp: J. lescurii
 . 3 stamens
 
 ==spreading rush:J. patens
+color: other
 . plant 30--105 cm tall
 . stems in dense tufts like bunchgrass
 . leaf sheathes have no blade

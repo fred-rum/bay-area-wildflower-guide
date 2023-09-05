@@ -2,6 +2,7 @@ sci:Sambucus racemosa
 xx:ca
 
 ==pacific red elder:S. racemosa var. microbotrys
+acom: red elderberry
 acom: european red elder
 sci_fpj: S. racemosa var. racemosa
 sci_i: S. racemosa ssp. racemosa

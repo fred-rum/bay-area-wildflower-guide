@@ -1,4 +1,4 @@
-com: n/a
+com: stalked monkeyflowers # from FNA
 sci: genus Erythranthe
 x:rare
 
@@ -24,15 +24,29 @@ sci_p:Mimulus dentatus
 . calyx hairy
 . very rare
 
+[
+==wing-leaf monkeyflower:E. ptilota
+color: yellow
+. <b>cauline leaf blade 30--70 mm</b>
+.. leaf usually sessile
+. fruiting pedicels 22--50 mm
+. <b>calyx lobes unequal, 5--9 mm</b>
+. near Santa Cruz and Marin
+
 ==musk monkeyflower:E. moschata
 sci_p:Erythranthe inodora|Mimulus moschatus
 color: yellow
 . stolons or rhizomes present
-. <b>leaf blade 20--50 mm</b>
+. <b>leaf blade 10--40 mm</b>
+. fruiting pedicels 4--25 mm
+. <b>calyx lobes 2--4 mm</b>
 . <b>herbage glandular</b>
 . <b>corolla tube 2--4 mm wide except wider at mouth</b>
 . calyx glabrous to slimy-hairy
 . leaf surfaces feel wet & slimy
+. latest refinements have these only in Marin
+
+]
 
 ==purple-stemmed monkeyflower:E. floribunda
 sci_p:Mimulus floribundus
