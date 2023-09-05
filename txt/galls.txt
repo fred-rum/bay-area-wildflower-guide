@@ -50,6 +50,9 @@ rep:genus Baccharis
 ==wormwood and sagebrush galls
 rep:wormwoods and sagebrushes
 
+==catsear gall wasp
+rep:common cat's-ear,1
+
 <h3>other hosts</h3>
 
 ==coffeeberry galls
@@ -75,3 +78,6 @@ rep:blazingstars
 
 ==pacific poison oak galls
 rep:pacific poison oak
+
+==alder galls
+rep:white alder,5

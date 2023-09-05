@@ -8,3 +8,7 @@ x:ba
 ==salt marsh moth:Estigmene acrea
 bug:3242
 x:ba
+
+==spotted tussock moth:Lophocampa maculata
+bug:5241
+x:more

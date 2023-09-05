@@ -29,7 +29,7 @@ color: pink, salmon
 . plant arching, 1--9 m
 . petals pink or rose, erect; fruit orange to red-orange
 . scattered in the outer coastal range + Berkeley
-;Edibility: Ken Fern has tried it says that it is very mealy and full of seeds. ^https://pfaf.org/user/Plant.aspx?LatinName=Cotoneaster+franchetii But since cotoneasters are generally considered poisonous, it's probably best to leave it alone.
+;Edibility: Ken Fern has tried it and says that it is very mealy and full of seeds. ^https://pfaf.org/user/Plant.aspx?LatinName=Cotoneaster+franchetii But since cotoneasters are generally considered poisonous, it's probably best to leave it alone.
 
 ==entire-leaved cotoneaster:C. integrifolius
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0406+0347

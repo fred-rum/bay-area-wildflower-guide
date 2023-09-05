@@ -3,6 +3,8 @@ x:more
 
 There are more alders in the bay area that may or may not be wild, but these are by far the most common ones.
 
+Parasitized by {-Dasineura alnus-fold-gall}.
+
 [
 <h2>
 tree > 9 m, not forming thickets<br>

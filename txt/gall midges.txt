@@ -40,3 +40,9 @@ sci_i:n/a
 bug:n/a
 gall:1911
 . parasitizes the flower bud of {-Mentzelia}
+
+==n/a:Dasineura alnus-fold-gall
+bug:n/a
+gall:3149
+. parasitizes {-alders}
+sci_i:n/a

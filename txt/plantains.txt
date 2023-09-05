@@ -52,6 +52,7 @@ species: n/a
 . Mt. Tamalpais
 
 ==buck's-horn plantain:P. coronopus
+color: white
 . corolla tube hairy
 . common, particularly along the coast, but some also inland
 

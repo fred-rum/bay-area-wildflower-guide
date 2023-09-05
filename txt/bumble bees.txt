@@ -1,9 +1,9 @@
 sci: Bombus spp.
 x:more
 
-Other bumble bees <a href="http://online.sfsu.edu/beeplot/pdfs/San%20Francisco%20Bombus.pdf">[PDF]</a> can be found in the bay area but are quite rare.
+Other bumble bees <a href="https://baldwinhillsnature.files.wordpress.com/2016/06/sfsu-edusan-francisco-bombus.pdf">[PDF]</a> can be found in the bay area but are quite rare.
 
-glossaries of <a href="https://washingtonbumblebees.org/bumble-body-parts/">bumble bee body parts</a> and its <href="https://washingtonbumblebees.org/corbiculum-or-not/">legs</a>
+There are glossaries of <a href="https://washingtonbumblebees.org/bumble-body-parts/">bumble bee body parts</a> and <a href="https://washingtonbumblebees.org/corbiculum-or-not/">leg parts</a>.
 
 [
 <h2>black in the middle</h2>
@@ -38,4 +38,11 @@ bug:15019
 . mixed black and yellow hairs on face
 . yellow hairs on top of the thorax surrounding a black patch between the wings
 . yellow bands at each end of the abdomen (T1, T4, and T5)
+
+==sitka bumble bee:Bombus sitkensis
+bug:121804
+. mixed black and yellow hairs on face
+. yellow hairs on top of the thorax surrounding a black patch between the wings
+. yellow band at the top front of the abdomen
+. rusty yellow around the tail
 ]

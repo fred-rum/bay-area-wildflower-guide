@@ -1,9 +1,16 @@
 ==fiery skipper:Hylephila phyleus
 bug:406
+x:ca
 
 ==umber skipper:Lon melane
 sci_b:Poanes melane
 bug:9790
+x:ca
 
 ==propertius duskywing:Erynnis propertius
 bug:64221
+x:more
+
+==woodland skipper:Ochlodes sylvanoides
+bug:1441929
+x:more

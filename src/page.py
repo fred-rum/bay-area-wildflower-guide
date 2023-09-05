@@ -2895,8 +2895,18 @@ class Page:
         species_maps = []
 
         if self.rp_do('link_bayarea_inaturalist'):
-            if self.taxon_id and self.rank and self.rank >= Rank.genus:
-                query = f'taxon_id={self.taxon_id}'
+            link_page = self
+            # Try to find the genus page, even if it's a shadow,
+            # because using a taxon_id for the search is more reliable.
+            while link_page.linn_parent:
+                if link_page.rank and link_page.rank >= Rank.genus:
+                    break
+                link_page = link_page.linn_parent
+            if not link_page.rank or link_page.rank != Rank.genus:
+                link_page = self
+            if (link_page.taxon_id and link_page.rank and
+                link_page.rank >= Rank.genus):
+                query = f'taxon_id={link_page.taxon_id}'
             else:
                 elab = self.choose_elab(self.elab_inaturalist)
                 if elab[0].islower():
@@ -2932,7 +2942,7 @@ class Page:
 
         if species_maps:
             txt = '\n&ndash;\n'.join(species_maps)
-            w.write(f'<p>\nBay&nbsp;Area&nbsp;species:\n{txt}\n</p>\n')
+            w.write(f'<p>\nBay&nbsp;Area species:\n{txt}\n</p>\n')
 
 
     # List a single page, indented if it is under a parent.
