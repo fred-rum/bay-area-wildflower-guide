@@ -50,3 +50,6 @@ taxon_id:61524
 bug:23281
 x:ca
 ;. male foreceps >= half the length of the abdomen
+
+==jumping bristletails:family Machilidae
+bug:248040

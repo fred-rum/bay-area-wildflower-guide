@@ -71,6 +71,11 @@ bug:847685
 gall:1364
 . parasitizes {-california scrub oak}, {-nuttall's scrub oak}, {-blue oak}, {-leather oak}, and {-valley oak}.
 
+==red cone gall wasp:Andricus kingi
+bug:43238
+gall:1511
+. parasitizes {-valley oak}
+
 ==catsear gall wasp:Phanacis hypochoeridis
 bug:n/a
 gall:1489

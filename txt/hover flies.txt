@@ -16,3 +16,7 @@ bug:268265
 
 ==western forest sedgesitter:Platycheirus trichopus
 bug:1320429
+
+==diamond spottail:Fazia micrura
+bug:107414
+x:ca

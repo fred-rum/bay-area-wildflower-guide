@@ -797,6 +797,7 @@ span.show-wide {
    Note that the child's name is only in a <span>, not in a <p> tag, so it
    doesn't have a bottom margin to worry about. */
 div.flex-width div.photo-box {
+    align-self: start;
     margin-bottom: 0px;
 }
 div.key-text :last-child {

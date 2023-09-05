@@ -112,7 +112,8 @@ color: other
 . acorn cap 10--30 mm deep, often as wide as deep, all scales tubercled
 . <b>nut 30--50 mm, generally long-conic</b>, distally acute to +- obtuse
 . common
-. favorite host of the {-california gall wasp}.
+. favorite host of the {-california gall wasp}
+. parasitized by {-red cone gall wasp}
 
 ==oregon oak:Q. garryana
 . leaf

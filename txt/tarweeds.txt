@@ -58,6 +58,7 @@ color: yellow
 
 ==coast tarweed:M. sativa
 color: yellow
+Not to be confused with {-coastal tarweed}.
 . stem 35--100 cm, coarse- and glandular-hairy throughout
 . leaf 2--18 cm, 3--<b>18 mm wide</b>, broadly lanceolate to linear-oblong or linear
 . <b>heads in generally crowded</b>, panicle-, raceme-, or spike-like clusters

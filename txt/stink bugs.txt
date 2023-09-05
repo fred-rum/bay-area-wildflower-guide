@@ -28,3 +28,6 @@ bug:9066
 bug:240276
 x:more
 . differs from C. uhleri in having a white border on the tip of the scutellum
+
+==n/a:genus Thyanta
+bug:8637

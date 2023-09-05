@@ -1794,9 +1794,6 @@ add text, etc. to distinguish advanced search terms that AND vs. OR
 
 FNA has characteristics of Rumex bucephalophorus
 
-When a child's key is long,
-  the image should cling to the top of the div
-
 use colored boxes in the HTML instead of all gray
   to visually distinguish different parts of a hierarchy
 
@@ -1814,7 +1811,9 @@ Why does the summary for page details extend beyond the edge of the screen
   and apparently cause the page to zoom out?
 
 should advanced search support 'not <taxon>'?
-  as an implicit AND term, of course
+    as an implicit AND term, of course
+  and 'not <trait>'
+  and 'not <location>'
 
 "Some observations of higher level taxons are hidden
   in the simple hierarchy view/no-hierarchy view."

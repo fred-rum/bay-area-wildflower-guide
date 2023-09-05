@@ -368,6 +368,7 @@ span.show-wide {
     }
 }
 div.flex-width div.photo-box {
+    align-self: start;
     margin-bottom: 0px;
 }
 div.key-text :last-child {

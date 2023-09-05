@@ -10,3 +10,4 @@ ignore_link: self
 ==beaked spindle gall wasp
 ==beaked twig gall wasp
 ==round gall wasp
+==red cone gall wasp

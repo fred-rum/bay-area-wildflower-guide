@@ -43,8 +43,9 @@ acom:salt marsh dodder
 . scattered on coast
 
 ==canyon dodder:C. subinclusa
+color: white
 . corolla scales present
-. flower 5--7(9) mm
+. flower <b>5--7(9) mm</b>
 . calyx and corolla lobes acute
 . calyx generally 1/2 corolla tube, lobe bases overlapped
 . corolla lobes 1/4--1/3 tube

@@ -13,6 +13,7 @@ x:rare
 
 ==coastal tarweed: D. corymbosa
 color: yellow
+Not to be confused with {-coast tarweed}.
 . 15--35 ray flowers
 . 24--70 disk flowers
 . anthers +- red to dark purple

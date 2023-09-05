@@ -12,5 +12,5 @@ bug:64221
 x:more
 
 ==woodland skipper:Ochlodes sylvanoides
-bug:1441929
+bug:9577
 x:more

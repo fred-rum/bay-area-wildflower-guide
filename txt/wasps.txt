@@ -32,3 +32,6 @@ bug:41362
 bug:170
 
 ==gall wasps
+
+==typical potter wasps:genus Eumenes
+bug:6809
