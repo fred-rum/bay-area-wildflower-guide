@@ -86,11 +86,13 @@ def read_obs_chains(f):
     for row in csv_reader:
         sci = get_field('scientific_name')
         taxon_id = get_field('taxon_id')
+        gall_code = get_field('field:gallformers code')
 
         # In the highly unusual case of no scientific name for an
         # observation, just throw it out.  And if there is a scientific
         # name, I'd expect that there should be a taxon_id as well.
-        if not sci or not taxon_id: continue
+        if (not sci or not taxon_id) and not gall_code:
+            continue
 
         orig_sci = sci
 
@@ -108,6 +110,14 @@ def read_obs_chains(f):
             com = com.lower()
         else:
             com = None
+
+        if gall_code:
+            if gall_code in gsci_page:
+                page = gsci_page[gall_code]
+                found_lowest_level = True
+            else:
+                print(f'observed {gall_code} matches no page')
+                continue # !@# temporary
 
         with Progress(f'Read taxonomy chain from observations.csv, line {csv_reader.line_num} for {com} ({sci})'):
             # Get an unambiguous rank from the core data if possible.
@@ -278,13 +288,25 @@ def read_observation_data(f):
         date = get_field('observed_on')
         month = int(date.split('-')[1], 10) - 1 # January = month 0
 
-        # This call to find_page2() should always match a taxon_id
-        # from the first pass through observations.csv.  However, that
-        # first pass didn't yet have the property information to know
-        # whether to add an alternative name from iNaturalist.  So we
-        # supply the names again for that purpose.
-        page = find_page2(com, sci, from_inat=True, taxon_id=taxon_id,
-                          src='observations.csv', date=now())
+        gall_code = get_field('field:gallformers code')
+
+        page = None
+
+        if gall_code:
+            if gall_code in gsci_page:
+                page = gsci_page[gall_code]
+                found_lowest_level = True
+            else:
+                continue # !@# temporary
+
+        if not page:
+            # This call to find_page2() should always match a taxon_id
+            # from the first pass through observations.csv.  However, that
+            # first pass didn't yet have the property information to know
+            # whether to add an alternative name from iNaturalist.  So we
+            # supply the names again for that purpose.
+            page = find_page2(com, sci, from_inat=True, taxon_id=taxon_id,
+                              src='observations.csv', date=now())
 
         # A Linnaean page should have been created during the first path
         # through observations.csv, so it'd be weird if we can't find it.

@@ -620,7 +620,9 @@ class Page:
         self.subset_of_page = None
 
         self.bugguide_id = None # BugGuide.net ID (stored as a string)
-        self.gallformers_id = None # gallformers.org (stored as a string)
+        self.gallformers_id = None # gallformers.org ID # (stored as a string)
+        self.gall_code = None # gallformers.org ID string (i.e. with hyphens)
+
         self.obs_n = 0 # number of observations
         self.obs_rg = 0 # number of observations that are research grade
         self.parks = {} # a dictionary of park_name : count
@@ -982,6 +984,21 @@ class Page:
 
         self.no_names = False
         self.set_name()
+
+    def set_gall_name(self, elab):
+        self.elab_gallformers = elab
+
+        # If the "species" name is a gallformers code (with hyphens),
+        # record it in gsci_page so that we can find this page when
+        # observations.csv includes the same code.
+        elab_words = elab.split(' ')
+        if (len(elab_words) >= 2) and '-' in elab_words[-1]:
+            code = elab_words[-1]
+            self.gall_code = code
+            if code in gsci_page and gsci_page[code] != self:
+                error(f'{gsci_page[code].full()} and {self.full()} both use sci_g {elab}')
+            else:
+                gsci_page[code] = self
 
     def set_origin(self, origin):
         if self.origin and origin != self.origin:
@@ -1348,7 +1365,7 @@ class Page:
         if 'b' in sites:
             self.elab_bugguide = elab
         if 'g' in sites:
-            self.elab_gallformers = elab
+            self.set_gall_name(elab)
         if 'P' in sites:
             self.elab_calpoison = elab
             if elab != 'n/a':
@@ -2411,7 +2428,7 @@ class Page:
                 data_object.xcom.append(matchobj.group(1))
                 continue
 
-            matchobj = re.match(r'sci_([fpjibPF]+):\s*(.+?)$', c)
+            matchobj = re.match(r'sci_([fpjibPFg]+):\s*(.+?)$', c)
             if matchobj:
                 data_object.set_sci_alt(matchobj.group(1),
                                         self.expand_abbrev(matchobj.group(2)))
@@ -2705,7 +2722,9 @@ class Page:
 
         if link_page.taxon_id:
             link = f'https://www.inaturalist.org/observations/chris_nelson?taxon_id={link_page.taxon_id}&order_by=observed_on'
-        elif link_page.sci:
+        elif link_page.elab_inaturalist == 'n/a' and link_page.gall_code:
+            link = f'https://www.inaturalist.org/observations/chris_nelson?field:gallformers%20code={link_page.gall_code}&order_by=observed_on'
+        elif link_page.sci and link_page.elab_inaturalist != 'n/a':
             elab = link_page.choose_elab(link_page.elab_inaturalist)
             sci = strip_sci(elab)
             sciurl = url(sci)
@@ -2871,11 +2890,19 @@ class Page:
 
             add_link(elab, None, f'<a href="https://www.allaboutbirds.org/guide/{comurl}/id" target="_blank" rel="noopener noreferrer">AllAboutBirds</a>')
 
+        # Normally the page's scientific name is also used by iNaturalist,
+        # and then there may be some other names or no listing for other sites.
+        # However, in extreme cases iNaturalist may have a different name or
+        # no name, and we want to call out any names that do exist.
+        weird_elabs = (len(elab_list) > 1 or
+                       (len(elab_list) > 0 and
+                        elab_list[0] != format_elab(self.elab)))
+
         other_elab = False
         link_list_txt = []
         for elab in elab_list:
             txt = '\n&ndash;\n'.join(link_list[elab])
-            if len(elab_list) > 1:
+            if weird_elabs:
                 txt = f'{elab} &rarr; {txt}'
             link_list_txt.append(txt)
             if elab not in (format_elab(self.elab),
@@ -2884,7 +2911,7 @@ class Page:
                 other_elab = True
         txt = '</li>\n<li>'.join(link_list_txt)
 
-        if len(elab_list) > 1:
+        if len(elab_list) > 1 or other_elab:
             if other_elab:
                 w.write(f'<p class="list-head">Not all sites agree about the scientific name:</p>\n<ul>\n<li>{txt}</li>\n</ul>\n')
             else:

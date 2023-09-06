@@ -1,7 +1,7 @@
 'use strict';
-var upd_timestamp = '2023-09-05T19:47:17.824075+00:00';
-var upd_num_urls = 9248;
-var upd_kb_total = 1034035
+var upd_timestamp = '2023-09-06T02:15:04.467548+00:00';
+var upd_num_urls = 9256;
+var upd_kb_total = 1034554
 const DB_NAME = 'db-v1';
 const DB_VERSION = 1;
 const BASE64_CACHE_NAME = 'base64-cache-v1';

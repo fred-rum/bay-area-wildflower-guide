@@ -30,10 +30,8 @@ gall:1861
 ==willow gall midges
 . parasitizes {-willows}
 
-==n/a:Iteomyia s-lasiolepis-tooth-gall
-bug:n/a
-gall:3628
-sci_i:n/a
+==genus Iteomyia
+bug:214670
 . parasitizes {-arroyo willow} and related {-willows}
 
 ==n/a:Asphondylia mentzeliae

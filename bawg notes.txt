@@ -1820,3 +1820,9 @@ should advanced search support 'not <taxon>'?
 
 adding, deleting, or editing an advanced search term should add an entry
   to the history stack
+
+should user include sci_i:n/a for undescribed gallformers?
+  or should it be automatic?
+if iNaturalist doesn't have a scientific name
+  it should be noted in the taxon info
+  and "Chris's observations" shouldn't have a link

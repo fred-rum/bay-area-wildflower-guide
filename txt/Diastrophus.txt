@@ -13,6 +13,7 @@ gall:1027
 sci_i:n/a
 bug:n/a
 gall:1755
+sci_g:Unknown d-glandulosa-stem-swelling
 . nothing is known about this gallmaker
 .. I've tentatively included it in <i>Diastrophus</i> since it is capable of similar galls on other members of the {-rose family}
 . parasitizes {-sticky cinquefoil}

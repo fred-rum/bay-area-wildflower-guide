@@ -99,6 +99,10 @@ def parse_decl():
         with Progress(f'in {page.full()}'):
             page.parse_attributes_properties_and_child_info()
 
+    for page in page_array:
+        if page.elab and page.gallformers_id and not page.elab_gallformers:
+            page.set_gall_name(page.elab)
+
 ###############################################################################
 # Attach photos to pages
 

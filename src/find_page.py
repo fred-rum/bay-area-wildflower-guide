@@ -10,6 +10,7 @@ com_page = {} # common name -> page (or 'multiple' if there are name conflicts)
 sci_page = {} # scientific name *or* elaborated name -> page
 isci_page = {} # iNaturalist scientific name -> page (only where it differs)
 cpsci_page = {} # CalPoison scientific name -> page (only where it differs)
+gsci_page = {} # gallformers code (without genus) -> page
 asci_page = {} # alternative scientific name -> page
 taxon_id_page = {} # iNaturalist taxon ID -> page
 
