@@ -2759,16 +2759,6 @@ class Page:
             return False
 
     def write_external_links(self, w):
-        sci = self.sci
-        if self.rank and self.rank is Rank.below:
-            # Anything below species level should be elaborated as necessary.
-            elab = self.elab
-        else:
-            # A one-word genus should be sent as is, not as '[genus] spp.'
-            # A higher-level classification should be sent with the group type
-            # removed.
-            elab = sci
-
         elab_list = [] # formatted elab names
         link_list = {} # list of links for each elab
 
@@ -2786,7 +2776,7 @@ class Page:
             if self.taxon_id:
                 elab = format_elab(elab)
                 add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/{self.taxon_id}" target="_blank" rel="noopener noreferrer">iNaturalist</a>')
-            elif self.elab_inaturalist != 'n/a':
+            else:
                 sci = strip_sci(elab, keep='x')
                 sciurl = url(sci)
                 # iNaturalist uses a multiplication sign for a hybrid.
@@ -2794,7 +2784,7 @@ class Page:
                 # otherwise wants to convert it to something safer.
                 sciurl = re.sub(r' X', ' \xD7', sciurl) # not really URL safe
                 elab = format_elab(elab)
-                add_link(elab, None, f'<a href="https://www.inaturalist.org/taxa/search?q={sciurl}&view=list" target="_blank" rel="noopener noreferrer">iNaturalist</a>')
+                add_link(elab, self.elab_inaturalist, f'<a href="https://www.inaturalist.org/taxa/search?q={sciurl}&view=list" target="_blank" rel="noopener noreferrer">iNaturalist</a>')
 
         if self.bugguide_id and self.bugguide_id != 'n/a':
             elab = self.choose_elab(self.elab_bugguide)
@@ -2832,7 +2822,7 @@ class Page:
                 # CalPhotos can search for multiple names, and for cases such
                 # as Erythranthe, it may have photos under both names.
                 # Use both names when linking to CalPhotos, but for simplicity
-                # list only the txt-specified name in the HTML listing.
+                # add only the txt-specified name(s) to the HTML.
                 sci_terms.insert(0, sci)
             sci = '|'.join(sci_terms)
             sciurl = url(sci)
