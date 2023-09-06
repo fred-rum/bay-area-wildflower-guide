@@ -1,0 +1,19 @@
+sci:family Campanulaceae
+
+All of these species were at one time in genus <i>Campanula</i>, but researchers have exploded that genus recently, so all bay area species are now in other genuses.
+
+==california harebell:Smithiastrum prenanthoides
+sci_fj: Asyneuma prenanthoides
+sci_p: Asyneuma prenanthoides|Campanula prenanthoides
+color: pale blue, blue
+genus:n/a
+x:ba
+. <b>2+ flowers per node</b>
+. corolla cut >= &frac34; to base with linear lobes
+. uncommon in the Santa Cruz range
+
+==genus Ravenella
+. annual
+. 1 flower per node
+. corolla cut <= &frac23; to base with at least slightly wedgier than linear lobes</h3>
+. <b>leaf not crenate</b>

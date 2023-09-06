@@ -28,6 +28,7 @@ sci_b:Coenonympha tullia ssp. california
 
 ==california tortoiseshell:Nymphalis californica
 bug:27454
+x:more
 
 ==common wood-nymph: Cercyonis pegala
 bug:459

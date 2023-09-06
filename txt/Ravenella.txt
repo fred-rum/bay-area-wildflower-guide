@@ -1,0 +1,27 @@
+com:n/a
+sci:genus Ravenella
+sci_fpj:genus Campanula
+x:any
+
+==eastwood's bellflower:R. angustiflora
+sci_fpj: Campanula angustiflora
+. leaf oblong-ovate
+. corolla 2--6 mm
+
+==griffin's bellflower:R. griffinii
+sci_fpj: Campanula griffinii
+. leaf +- linear, leathery, serrate
+. corolla 2--4 mm
+. Jasper Ridge, Mines Rd.
+
+==chaparral harebell:R. exigua
+sci_fpj: Campanula exigua
+. leaf +- linear, leathery, few-toothed
+. corolla 7--18 mm
+. uncommon in the Diablo range
+
+==sharsmith's harebell:R. sharsmithiae
+sci_fpj: Campanula sharsmithiae
+. leaf widely lanceolate, fleshy, serrate
+. corolla 7--16 mm
+. very rare east of the Diablo Range crest

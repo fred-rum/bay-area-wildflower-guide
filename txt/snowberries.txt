@@ -7,8 +7,9 @@ Key features:
 
 Both species are parasitized by {-snowberry sawfly}.
 
-==common snowberry:S. albus
-xx:uncat
+==garden snowberry:S. albus var. laevigatus
+species:common snowberry
+xx:ca
 color: pale purple, red purple
 . plant 60--180 cm, erect
 . corolla swollen on 1 side, with 5 nectary glands within swelling

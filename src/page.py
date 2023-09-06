@@ -2181,18 +2181,30 @@ class Page:
                                                  self.subset_trait,
                                                  self.subset_value)
 
-    # Check if a species has only one subspecies/variety that shares the
-    # same common name, in which case we assume that any "species"
-    # observation is actually of the same-named subspecies/variety.
+    # If there is only one local subspecies/variety of a species, then
+    # the species page is likely to be a shadow page.  In that case, the
+    # species page can often be considered equivalent to its child, i.e.
+    # - an observation of the species can be treated as an observation of
+    #   its child, and
+    # - a search for observations of the child should include observations
+    #   of the species.
+    #
+    # The species is considered equivalent if it has the same common name
+    # as the child, or if the species is marked complete.
     def equiv_page_below(self):
         page_below = None
-        if self.shadow and self.rank == Rank.species and self.com:
-            for sub_page in self.linn_child:
-                if not sub_page.shadow:
-                    if page_below == None and sub_page.com == self.com:
-                        page_below = sub_page
-                    else:
-                        return None
+        if self.shadow and self.rank == Rank.species:
+            for child in self.linn_child:
+                if (page_below == None and
+                    not child.shadow and
+                    ((self.com and child.com == self.com) or
+                     (child.species_complete in ('ba', 'ca', 'any', 'hist',
+                                                 'rare', 'hist/rare')))):
+                    page_below = child
+                elif not child.shadow:
+                    # If there is any other real child, the species cannot
+                    # be equivalent to any of them.
+                    return None
         return page_below
 
     def check_traits(self):
@@ -2715,7 +2727,7 @@ class Page:
         cnt = Cnt(None, None)
         cnt.count_matching_obs(self)
 
-        if self.linn_parent and self.linn_parent.equiv_page_below():
+        if self.linn_parent and self.linn_parent.equiv_page_below() == self:
             link_page = self.linn_parent
         else:
             link_page = self

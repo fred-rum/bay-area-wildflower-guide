@@ -1628,16 +1628,7 @@ It also needs a way to declare separate properties at different levels,
     propagating property
   Or perhaps simply allow the same property to be declared multiple times
     at the same level (needed anyway), and propagate them all
-Once I can verify that every species has an xx declaration if it includes
-  a subspecies/variety, then I can change the behavior of observation demotion;
-  i.e. if a species is a shadow page with only one (real) page below,
-    and the species is marked complete,
-    then an observation of the species is treated
-      as an observation of the below page
-  need to recurse when looking for the single real page
-      e.g. in case there is a shadow rank between the species and subspecies
-    stop recursion at a real page in case it has its own descendents
-      although this may run into limitations with what x/xx can do
+
 
 allow typos in search:
   hard case: next letter in search_str is found late in match_str,
