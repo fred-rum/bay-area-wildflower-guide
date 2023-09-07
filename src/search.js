@@ -1611,22 +1611,23 @@ function set_title() {
 function save_state() {
   console.log('save_state()');
 
-  if (term_list.length) {
-    var term_names = [];
-    for (const term of term_list) {
-      const name = term.get_canonical_name();
-      const q = cvt_name_to_query(name);
-      term_names.push(q);
-    }
-    const query = term_names.join('.');
-
-    const url = window.location.pathname + '?' + query;
-    history.pushState(null, '', url);
-  } else {
-    /* The code above would be OK except that it leaves the trailing '?',
-       which I'd prefer to get rid of. */
-    history.replaceState(null, '', window.location.pathname);
+  var term_names = [];
+  for (const term of term_list) {
+    const name = term.get_canonical_name();
+    const q = cvt_name_to_query(name);
+    term_names.push(q);
   }
+  const query = term_names.join('.');
+
+  const url = window.location.pathname + '?' + query;
+  history.pushState(null, '', url);
+
+  /* Note that the '?' is appended to the URL even if there are no
+     search terms.  I don't like it, but at least in Chrome it's the
+     only way to ensure that a history entry is actually pushed.
+     I.e. Chrome won't push an entry if the URL doesn't have a '?' at
+     the end and is otherwise the same as the previous URL that did
+     include a '?' with search terms. */
 
   set_title();
 }
@@ -1639,6 +1640,7 @@ function restore_state(query) {
     term_list[i].e_term.remove();
   }
   term_list.length = 0;
+  term_id = 0;
 
   var query = window.location.search;
   if (!query) return;
@@ -1690,7 +1692,6 @@ function confirm_adv_search_term(ac_selected) {
   /* Note that the ClearTerm has special code so that the following
      functions that supposed create HTML and insert it into the list
      actually leave the entry unfilled. */
-
   term.gen_html_element();
 
   if ((term_id < term_list.length) &&

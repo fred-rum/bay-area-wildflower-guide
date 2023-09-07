@@ -931,19 +931,15 @@ function set_title() {
   }
 }
 function save_state() {
-  if (term_list.length) {
-    var term_names = [];
-    for (const term of term_list) {
-      const name = term.get_canonical_name();
-      const q = cvt_name_to_query(name);
-      term_names.push(q);
-    }
-    const query = term_names.join('.');
-    const url = window.location.pathname + '?' + query;
-    history.pushState(null, '', url);
-  } else {
-    history.replaceState(null, '', window.location.pathname);
+  var term_names = [];
+  for (const term of term_list) {
+    const name = term.get_canonical_name();
+    const q = cvt_name_to_query(name);
+    term_names.push(q);
   }
+  const query = term_names.join('.');
+  const url = window.location.pathname + '?' + query;
+  history.pushState(null, '', url);
   set_title();
 }
 function restore_state(query) {
@@ -951,6 +947,7 @@ function restore_state(query) {
     term_list[i].e_term.remove();
   }
   term_list.length = 0;
+  term_id = 0;
   var query = window.location.search;
   if (!query) return;
   query = query.substring(1);
