@@ -152,15 +152,25 @@ function fn_pageshow() {
   hide_ac();
 }
 
+/* Check whether an advanced search term has changed.
+   The term is changed if:
+   - it is a new term, or
+   - the term is being edited, and the input string differs, or
+   - care_ac is True and a different autocomplete entry is selected.
+*/
+function term_changed(care_ac, ac_selected) {
+  return ((term_id == term_list.length) ||
+          (e_search_input.value != term_list[term_id].search_str) ||
+          (care_ac && (ac_selected != term_list[term_id].ac_selected)));
+}
+
 /* hide the autocomplete box if the user clicks somewhere else on the page. */
 function fn_doc_click(event) {
   var search_element = event.target.closest('#search-container');
   if (!search_element) {
-    if (adv_search && (term_id < term_list.length) &&
-        (e_search_input.value == term_list[term_id].search_str)) {
-      /* An advanced search term is being edited, but is unchanged.
-         Note that we don't check or care whether the autocomplete selection
-         has changed.
+    if (adv_search && !term_changed(false, 0)) {
+      /* An advanced search term was being edited, but is unchanged.
+         We don't care whether the autocomplete selection has changed.
          Re-confirm the search term and reset the input to the bottom of the
          term list. */
       confirm_adv_search_term(term_list[term_id].ac_selected);
@@ -1197,9 +1207,13 @@ function fn_ac_click() {
 }
 
 function fn_adv_ac_click(i) {
+  let changed = term_changed(true, i);
   confirm_adv_search_term(i);
   prepare_new_adv_input();
-  gen_adv_search_results();
+  if (changed) {
+    save_state();
+    gen_adv_search_results();
+  }
   return false; // no more click handling is needed
 }
 
@@ -1241,9 +1255,13 @@ function confirm_reg_search(event) {
 function fn_keydown() {
   if ((event.key == 'Enter') && !ac_is_hidden && ac_list.length) {
     if (adv_search) {
+      let changed = term_changed(true, ac_selected);
       confirm_adv_search_term(ac_selected);
       prepare_new_adv_input();
-      gen_adv_search_results();
+      if (changed) {
+        save_state();
+        gen_adv_search_results();
+      }
     } else {
       confirm_reg_search(event);
     }
@@ -1443,6 +1461,17 @@ function init_adv_search() {
       }
     }
   }
+
+  /* When the user adds, deletes, or changes a search term, we push a new URL
+     to the browser history.  The URL contains the information needed to
+     recreate the search.
+
+     When the browser navigates from a differnet page to this one, the
+     page initialization code [called from main()] restores the state from
+     the URL.  But when the browser navigates from one URL to another within
+     this page, it doesn't reload the page or call main() again.  Instead,
+     we detect the state chagne via the 'popstate' event. */
+  window.addEventListener("popstate", restore_state);
 }
 
 function digits(num, len) {
@@ -1552,6 +1581,8 @@ function cvt_name_to_query(name) {
 /* Save the state of the search terms so that the page doesn't start over
    from scratch if the user navigates away and then back to the page. */
 function save_state() {
+  console.log('save_state()');
+
   if (term_list.length) {
     var term_names = [];
     for (const term of term_list) {
@@ -1562,7 +1593,7 @@ function save_state() {
     const query = term_names.join('.');
 
     const url = window.location.pathname + '?' + query;
-    history.replaceState(null, '', url);
+    history.pushState(null, '', url);
   } else {
     /* The code above would be OK except that it leaves the trailing '?',
        which I'd prefer to get rid of. */
@@ -1571,6 +1602,18 @@ function save_state() {
 }
 
 function restore_state(query) {
+  /* This may be called on a fresh page load *or* on during browser history
+     navigation, in which case the page still has existing terms that should
+     be deleted first. */
+  for (var i = 0; i < term_list.length; i++) {
+    term_list[i].e_term.remove();
+  }
+  term_list.length = 0;
+
+  var query = window.location.search;
+  if (!query) return;
+  query = query.substring(1);
+
   for (var name of query.split('.')) {
     name = name.replace(/(?<!\d)-|-(?!\d)/g, ' ');
     
@@ -1598,7 +1641,8 @@ function restore_term(search_str, ac_selected) {
 }
 
 /* Handle a mouse click or Enter keypress on an autocomplete entry
-   while on the advanced search page. */
+   while on the advanced search page.  The selection is simulated for
+   cases where a term or the page state is being restored. */
 function confirm_adv_search_term(ac_selected) {
   /* Most calls invoke the default behavior of getting the term from the
      appropriate entry of ac_list.  Only special cases provide a term
@@ -2403,10 +2447,6 @@ function delete_ancestors(page_info, page_to_trips, checked_set) {
 
 /* Perform the advanced search and generate the HTML for the results. */
 function gen_adv_search_results() {
-  /* If something has changed enough that we need to regenerate results,
-     then now's a good time to save state. */
-  save_state();
-
   if (term_list.length == 0) {
     e_results.innerHTML = '<p>...</p>';
     return;
@@ -2592,12 +2632,7 @@ function main() {
   /* ... or when changing anchors within a page. */
   window.addEventListener('hashchange', fn_hashchange);
 
-  if (adv_search) {
-    const query = window.location.search;
-    if (query) {
-      restore_state(query.substring(1)); /* discard leading '?' */
-    }
-  }
+  if (adv_search) restore_state();
 
   /* Also initialize the photo gallery. */
   gallery_main();

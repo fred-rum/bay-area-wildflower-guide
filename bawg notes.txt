@@ -1803,6 +1803,3 @@ should advanced search support 'not <taxon>'?
 
 "Some observations of higher level taxons are hidden
   in the simple hierarchy view/no-hierarchy view."
-
-adding, deleting, or editing an advanced search term should add an entry
-  to the history stack
