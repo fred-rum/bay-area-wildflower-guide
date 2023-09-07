@@ -1793,11 +1793,6 @@ allow parks to specify a preposition, e.g.
   "at" Calero CP
   "" elsewhere in California
 
-When restoring an advanced search from the URL
-  preserve a hyphen between digits, e.g. "before 2023-01-01"
-
-Why is the advanced search details text so large on mobile?
-
 Why does the summary for page details extend beyond the edge of the screen
   and apparently cause the page to zoom out?
 

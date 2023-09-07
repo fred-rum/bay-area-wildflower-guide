@@ -913,7 +913,7 @@ function save_state() {
 }
 function restore_state(query) {
   for (var name of query.split('.')) {
-    name = name.replace(/-/g, ' ');
+    name = name.replace(/(?<!\d)-|-(?!\d)/g, ' ');
     restore_term(name, 0);
     if (ac_list.length != 0) {
       confirm_adv_search_term(0);
