@@ -8,7 +8,7 @@ Key features:
 
 [
 <h3>Bracts > 1 mm below calyx, not hiding it, <= 5 mm wide</h3>
-[<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1209+2734">example of small bracts</a>]
+I.e. thin bracts can be seen further down the pedicel than the calyx.
 
 ==pacific false bindweed:C. purpurata
 . bracts <= 1.5 mm wide
@@ -31,10 +31,10 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+0610
 ]
 [
 <h3>Bracts < 1 mm below calyx, +- hiding it, > 4 mm wide</h3>
-
-[<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0512+0313">example of large bracts</a>]
+I.e. the bracts look like a second calyx enclosing the real calyx, and there aren't thin bracts further down the pedicel.
 
 ==hillside false bindweed:C. subacaulis
+<b>Caution: ID unsure</b>
 . plant hairs sparse to +- dense, short, spreading to reflexed, but <b>not tomentose</b>
 . stem poorly developed, generally <b>+- 2 cm</b>
 . leaf +- triangular-hastate, with small backward-directed lobes or not; margin +- wavy or not
@@ -42,16 +42,18 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+0610
 
 ==coast range false bindweed:C. collina
 . highly similar to {-hillside false bindweed}, above.
-. <b>plant +- tomentose</b>
+. <b>plant +- tomentose</b> [particularly the leaves]
+.. [petioles are dense short hairy]
 . stem decumbent, not or only weakly climbing, <b>8--15 cm</b>, <= basal rosette of leaves
-. leaf reniform to distinctly lobed [tip may also be somewhat pointed]; margin generally wavy
+. leaf reniform to distinctly lobed [tip may also be somewhat pointed]
+.. margin generally wavy [flatten it to photograph its shape & lobes]
 . Mt. Tam, Russian Ridge, Sierra Azul, Calero
 
 ==jepson's morning glory:C. malacophylla ssp. pedicellata
 species: sierra false bindweed
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1011+2084
 . stem well developed, not or only weakly climbing, < 100 cm, without basal rosette of leaves
-. Henry Coe, Sunol, Mt. Tam
+. Henry Coe, Sunol, Mt. Diablo
 
 ==sea bindweed:C. soldanella
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=1342+3162+2660+0067
@@ -76,7 +78,8 @@ xx:more
 . stem trailing or weakly to strongly climbing, >= 1 m
 . often > 1 flower per peduncle
 . generally found in dry places
-. mostly found south of Monterrey Bay, but a few are scattered within the Bay Area
-. distinguish subspecies by measurements of the bracts, calyx, corolla, and/or stamens (stamens are best)
+. mostly found south of Monterrey Bay, but a few may be scattered within the Bay Area
+. none of the ones found in the SF bay area have been IDed to subspecies, but ssp. cyclostegia is the only subspecies found nearby
+.. distinguish subspecies by measurements of the bracts, calyx, corolla, and/or stamens (stamens are best)
 
 ]

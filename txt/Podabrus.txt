@@ -10,4 +10,3 @@ bug:9449
 
 ==n/a:Podabrus cavicollis
 bug:370123
-<b>Caution: ID unsure</b>

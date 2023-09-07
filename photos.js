@@ -546,6 +546,7 @@ const pages=[
 ["himalayan blackberry",1,2,3,4,5,8],
 ["hoary coffeeberry",7],
 ["hoary manzanita",1],
+["hoary nettle",2],
 ["hoary rock-rose",1,"1s",2,4,5],
 ["holly-leaved cherry",1,2,"2c",3],
 ["hollyleaf redberry",3],

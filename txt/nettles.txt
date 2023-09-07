@@ -14,6 +14,7 @@ iNaturalist is in the process of changing the North American observations to U. 
 ==hoary nettle:U. gracilis ssp. holosericea
 sci_Ffpj:Urtica dioica ssp. holosericea
 member:slender stinging nettle:Urtica gracilis
+color: other
 xx:ca
 . 50--300 cm tall
 . leaf blade 6--20 cm

@@ -2526,7 +2526,7 @@ const pages=[
 {p:"Dicerca hornii hornii",s:["Dicerca hornii ssp. hornii"],x:"o",j:"Dicerca hornii ssp. hornii,1",z:"'/"},
 {p:"foothill carpenter bee",s:["Xylocopa tabaniformis ssp. orpifex"],x:"o",j:2,z:"&{"},
 {p:"hoary coffeeberry",s:["Frangula californica ssp. tomentella","genus Frangula"],x:"o",j:7,z:" -',"},
-{p:"hoary nettle",c:["hoary nettle","slender stinging nettle"],s:["Urtica gracilis ssp. holosericea","Urtica dioica ssp. holosericea"],x:"u",z:"'D"},
+{p:"hoary nettle",c:["hoary nettle","slender stinging nettle"],s:["Urtica gracilis ssp. holosericea","Urtica dioica ssp. holosericea"],x:"o",j:2,z:" -'D"},
 {p:"johnston's honeysuckle",c:["johnston's honeysuckle","southern honeysuckle"],s:["Lonicera subspicata var. denudata"],x:"o",j:1,z:" + ,(("},
 {p:"mount tamalpais manzanita",s:["Arctostaphylos montana ssp. montana"],x:"o",j:3,z:" '&W"},
 {p:"santa catalina island buckwheat",c:["santa catalina island buckwheat","st. catherine's-lace"],s:["Eriogonum giganteum var. giganteum"],x:"o",j:2,z:" ' ) ,%a"},
