@@ -581,12 +581,20 @@ class PageTerm extends Term {
     const page_info = this.page_info;
     return compose_page_name(page_info, 1);
   }
-  get_name() {
+  get_canonical_name() {
     const page_info = this.page_info;;
     if ('s' in page_info) {
       return page_info.s[0];
     } else {
       return page_info.c[0];
+    }
+  }
+  get_human_name() {
+    const page_info = this.page_info;;
+    if ('c' in page_info) {
+      return page_info.c[0];
+    } else {
+      return page_info.s[0];
     }
   }
   within_taxon(page_info) {
@@ -909,11 +917,24 @@ function cvt_name_to_query(name) {
   name = name.replace(/[^A-Za-z0-9]+/g, '-');
   return name;
 }
+function set_title() {
+  if (term_list.length) {
+    var term_names = [];
+    for (const term of term_list) {
+      const name = term.get_human_name();
+      const q = name.replace(/[^A-Za-z0-9]*(\([^\)]*\))?$/, '');
+      term_names.push(q);
+    }
+    document.title = '? ' + term_names.join(', ');
+  } else {
+    document.title = 'Advanced Search'
+  }
+}
 function save_state() {
   if (term_list.length) {
     var term_names = [];
     for (const term of term_list) {
-      const name = term.get_name();
+      const name = term.get_canonical_name();
       const q = cvt_name_to_query(name);
       term_names.push(q);
     }
@@ -923,6 +944,7 @@ function save_state() {
   } else {
     history.replaceState(null, '', window.location.pathname);
   }
+  set_title();
 }
 function restore_state(query) {
   for (var i = 0; i < term_list.length; i++) {
@@ -1028,11 +1050,14 @@ class TextTerm extends Term {
     }
     return term_name;
   }
-  get_name() {
+  get_canonical_name() {
+    return this.get_text();
+  }
+  get_human_name() {
     return this.get_text();
   }
   get_url() {
-    const query = cvt_name_to_query(this.get_name());
+    const query = cvt_name_to_query(this.get_canonical_name());
     return root_path + 'advanced-search.html?' + query;
   }
 }
@@ -1588,7 +1613,10 @@ function main() {
   e_search_input.addEventListener('focusin', fn_focusin);
   fn_hashchange();
   window.addEventListener('hashchange', fn_hashchange);
-  if (adv_search) restore_state();
+  if (adv_search) {
+    restore_state();
+    set_title();
+  }
   gallery_main();
   if (Document.activeElement == e_search_input) {
     fn_search(0);

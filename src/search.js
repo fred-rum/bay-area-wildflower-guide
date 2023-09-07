@@ -1016,13 +1016,24 @@ class PageTerm extends Term {
   }
 
   /* Create a name that we expect to match the same term *first* if searched. */
-  get_name() {
+  get_canonical_name() {
     const page_info = this.page_info;;
 
     if ('s' in page_info) {
       return page_info.s[0];
     } else {
       return page_info.c[0];
+    }
+  }
+
+  /* Get a human-friendly name, even if it isn't unique. */
+  get_human_name() {
+    const page_info = this.page_info;;
+
+    if ('c' in page_info) {
+      return page_info.c[0];
+    } else {
+      return page_info.s[0];
     }
   }
 
@@ -1578,6 +1589,23 @@ function cvt_name_to_query(name) {
   return name;
 }
 
+function set_title() {
+  if (term_list.length) {
+    var term_names = [];
+    for (const term of term_list) {
+      const name = term.get_human_name();
+      const q = name.replace(/[^A-Za-z0-9]*(\([^\)]*\))?$/, '');
+      term_names.push(q);
+    }
+
+    document.title = '? ' + term_names.join(', ');
+  } else {
+    /* The code above would be OK except that it leaves the trailing '?',
+       which I'd prefer to get rid of. */
+    document.title = 'Advanced Search'
+  }
+}
+
 /* Save the state of the search terms so that the page doesn't start over
    from scratch if the user navigates away and then back to the page. */
 function save_state() {
@@ -1586,7 +1614,7 @@ function save_state() {
   if (term_list.length) {
     var term_names = [];
     for (const term of term_list) {
-      const name = term.get_name();
+      const name = term.get_canonical_name();
       const q = cvt_name_to_query(name);
       term_names.push(q);
     }
@@ -1599,6 +1627,8 @@ function save_state() {
        which I'd prefer to get rid of. */
     history.replaceState(null, '', window.location.pathname);
   }
+
+  set_title();
 }
 
 function restore_state(query) {
@@ -1805,12 +1835,18 @@ class TextTerm extends Term {
     return term_name;
   }
 
-  get_name() {
+  get_canonical_name() {
     return this.get_text();
   }
 
+  get_human_name() {
+    return this.get_text();
+  }
+
+  /* This function is used when an advanced search term is selected from
+     the regular search bar. */
   get_url() {
-    const query = cvt_name_to_query(this.get_name());
+    const query = cvt_name_to_query(this.get_canonical_name());
     return root_path + 'advanced-search.html?' + query;
   }
 }
@@ -2632,7 +2668,10 @@ function main() {
   /* ... or when changing anchors within a page. */
   window.addEventListener('hashchange', fn_hashchange);
 
-  if (adv_search) restore_state();
+  if (adv_search) {
+    restore_state();
+    set_title();
+  }
 
   /* Also initialize the photo gallery. */
   gallery_main();
