@@ -1,10 +1,6 @@
 sci:Rumex spp.
 x:hist/rare
 
-Rumex bucephalophorus may exist in the Tennessee Valley area and/or Mt. Tam, but Jepson doesn't have any info for it.
-
-6 perianth lobes, but in fruit outer 3 +- inconspicuous, inner 3 enlarged, hardened, +- veiny, midrib of 1--3 often expanded into tubercle [round lump on flower]
-
 Key features:
 . arrangement of stems (from base or middle and/or stems among inflorescences)
 . shape and length of leaf
