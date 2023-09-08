@@ -4,7 +4,6 @@ genus: spindles
 x:ca
 
 ==western burning bush:var. occidentalis
-acom: western burning bush (western)
 color: other
 . leaf tip acuminate
 . twigs +- green

@@ -1615,7 +1615,7 @@ const pages=[
 {p:"elegant piperia",c:["elegant piperia","coast piperia","elegant rein orchid"],s:["Platanthera elegans ssp. elegans","Piperia elegans ssp. elegans"],x:"o",j:1,z:" ,$o';'F(I"},
 {p:"leopard lily",s:["Lilium pardalinum ssp. pardalinum"],x:"o",j:1,z:" (%c%f&S(2(C"},
 {p:"santa cruz aquatic garter snake",s:["Thamnophis atratus ssp. atratus"],x:"o",j:1,z:" X Z#9#X$_"},
-{p:"western burning bush",c:["western burning bush","western burning bush (western)"],s:["Euonymus occidentalis var. occidentalis","genus Euonymus"],x:"o",j:1,z:" -#g','5"},
+{p:"western burning bush",s:["Euonymus occidentalis var. occidentalis","genus Euonymus"],x:"o",j:1,z:" -#g','5"},
 {p:"many-stemmed california gilia",c:["many-stemmed california gilia","small california gilia","many-stemmed california gilia"],s:["Gilia achilleifolia ssp. multicaulis"],x:"o",j:1,z:" # $ ,&|(#(&(+(,"},
 {p:"bay checkerspot",s:["Euphydryas editha ssp. bayensis"],x:"o",j:1,z:"#J$G&z"},
 {p:"pin molds",s:["order Mucorales"],x:"o",j:3,z:"#+%(&l(:"},

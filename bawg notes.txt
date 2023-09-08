@@ -1770,17 +1770,6 @@ do something to make it less bad
   e.g. add '(advanced search)' to the search text if !adv_search
     note that the parenthesized text will automatically be removed from the URL!
 
-provide a way to get details on each taxon in the search results
-  e.g. on what trips was it observed
-
-Show stats at end of advanced search
-  # of observations
-  # distinct observed taxons
-  # of trips with observations
-  e.g. "A observations of B taxons in C trips to D locations"
-Include observations lost to hierarchy flattening
-  e.g. "N observations at higher taxonomy levels not displayed"
-
 add text, etc. to distinguish advanced search terms that AND vs. OR
 
 FNA has characteristics of Rumex bucephalophorus
