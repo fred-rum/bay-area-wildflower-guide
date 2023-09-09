@@ -1789,3 +1789,6 @@ should advanced search support 'not <taxon>'?
 
 "Some observations of higher level taxons are hidden
   in the simple hierarchy view/no-hierarchy view."
+
+
+put prefix in AC in default color

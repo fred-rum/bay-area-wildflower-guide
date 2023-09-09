@@ -157,16 +157,22 @@ function generate_ac_html() {
     e_autocomplete_box.innerHTML = 'No matches found.';
   }
 }
-function check(search_str, match_str, pri_adj = 0, def_num_list = []) {
+function check(search_str, prefix, match_str, pri_adj = 0, def_num_list = []) {
   const s = search_str;
-  const upper_str = match_str.toUpperCase()
-  const m = upper_str.replace(/[^A-Z%#]/g, '');
+  const upper_no_pfx = match_str.toUpperCase()
   var name_pos = match_str.indexOf(' ');
   if ((name_pos < 0) ||
-      (match_str.substr(0, 1) == upper_str.substr(0, 1)) ||
-      (match_str.substr(name_pos+1, 1) != upper_str.substr(name_pos+1, 1))) {
+      (match_str.substr(0, 1) == upper_no_pfx.substr(0, 1)) ||
+      (match_str.substr(name_pos+1, 1) != upper_no_pfx.substr(name_pos+1, 1))) {
     name_pos = 0;
   }
+  const orig_match_str = match_str;
+  if (prefix) {
+    match_str = prefix + ' ' + match_str;
+    var prefix_len = prefix.replace(/[^A-Za-z]/g, '').length;
+  }
+  const upper_str = match_str.toUpperCase()
+  const m = upper_str.replace(/[^A-Z%#]/g, '');
   const num_list = [];
   const num_start = [];
   const num_missing_digits = [];
@@ -247,8 +253,21 @@ function check(search_str, match_str, pri_adj = 0, def_num_list = []) {
   var pri = 100.0;
   pri += pri_adj;
   pri -= (match_ranges.length / 10);
+  if (prefix && (match_ranges[0][0] >= prefix_len)) {
+    match_str = orig_match_str;
+    for (const range_pair of match_ranges) {
+      range_pair[0] -= prefix_len;
+      range_pair[1] -= prefix_len;
+    }
+    for (var i = 0; i < num_start.length; i++) {
+      num_start[i] -= prefix_len;
+    }
+    var allow_name_match = true;
+  } else {
+    var allow_name_match = !prefix;
+  }
   if ((match_ranges[0][0] == 0) ||
-      (match_ranges[0][0] == name_pos)) {
+      ((match_ranges[0][0] == name_pos) && allow_name_match)) {
     pri += 0.15;
   }
   var match_info = {
@@ -305,7 +324,7 @@ class Tag {
 function highlight_match(match_info, default_name, is_sci) {
   var tag_list = [];
   var h = '';
-  if (match_info) {
+  if (match_info && match_info.match_ranges.length) {
     var m = match_info.match_str;
     var match_ranges = match_info.match_ranges;
     var tag = new Tag('<span class="match">', '</span>');
@@ -448,6 +467,10 @@ class Term {
   constructor(group) {
     this.group = group;
   }
+  get_url() {
+    const query = cvt_name_to_query(this.get_canonical_name());
+    return root_path + 'advanced-search.html?' + query;
+  }
   gen_html_element() {
     const e_term = document.createElement('button');
     e_term.className = 'term';
@@ -494,9 +517,10 @@ class PageTerm extends Term {
     var best_match_info = null;
     var pri_adj = 0.0;
     for (var name of match_list) {
-      var match_info = check(this.search_str, name, pri_adj);
+      var match_info = check(this.search_str, this.prefix(), name, pri_adj);
       if (!match_info && name.startsWith('genus ')) {
-        match_info = check(this.search_str, name.substr(6) + ' spp.', pri_adj);
+        const spp_name = name.substr(6) + ' spp.';
+        match_info = check(this.search_str, this.prefix(), spp_name, pri_adj);
       }
       if (better_match(match_info, best_match_info)) {
         best_match_info = match_info;
@@ -508,7 +532,7 @@ class PageTerm extends Term {
   search() {
     const search_str = this.search_str;
     const page_info = this.page_info;
-    if (adv_search && ((page_info.x == 's') || (page_info.x == 'g') || (page_info.x == 'j'))) {
+    if (adv_search && ('sgj'.includes(page_info.x))) {
       return;
     }
     if ('c' in page_info) {
@@ -552,6 +576,114 @@ class PageTerm extends Term {
   }
   get_ac_text() {
     const page_info = this.page_info;
+    const prefix = this.prefix();
+    if (prefix) {
+      var prefix_len = prefix_len = (prefix.replace(/[^A-Za-z]/g, '')).length;
+    } else {
+      prefix_len = 0;
+    }
+    let com_match_info = this.com_match_info;
+    let sci_match_info = this.sci_match_info;
+    let com_prefixed = (com_match_info &&
+                        com_match_info.match_str.startsWith(prefix));
+    let sci_prefixed = (sci_match_info &&
+                        sci_match_info.match_str.startsWith(prefix));
+    let prefix_differs = (com_prefixed != sci_prefixed);
+    if (com_prefixed && sci_prefixed) {
+      for (let i = 0; i < com_match_info.length; i++) {
+        if ((com_match_info.match_range[i][0] >= prefix_len) &&
+            (sci_match_info.match_range[i][0] >= prefix_len)) {
+          break;
+        }
+        if (com_match_info.match_range[i][0] !=
+            sci_match_info.match_range[i][0]) {
+          prefix_differs = true;
+          break;
+        }
+        if ((com_match_info.match_range[i][1] >= prefix_len) &&
+            (sci_match_info.match_range[i][1] >= prefix_len)) {
+          break;
+        }
+      }
+    }
+    if (com_match_info && (com_match_info.pri == this.pri) &&
+        prefix_differs) {
+      sci_match_info = null;
+      sci_prefixed = false;
+    } else if (sci_match_info && (sci_match_info.pri == this.pri) &&
+               prefix_differs) {
+      com_match_info = null;
+      com_prefixed = false;
+    }
+    this.prefixed = com_prefixed || sci_prefixed;
+    function separate_prefix_info(prefix, match_info) {
+      const pfx_ranges = [];
+      const pfx_len_w_punct = prefix.length + 1;
+      match_info.match_str = match_info.match_str.substring(pfx_len_w_punct);
+      var match_ranges = match_info.match_ranges;
+      for (var i = 0; i < match_ranges.length; i++) {
+        if (match_ranges[i][0] < prefix_len) {
+          if (match_ranges[i][1] <= prefix_len) {
+            pfx_ranges.push(match_ranges[i]);
+          } else {
+            pfx_ranges.push([match_ranges[i][0], prefix_len]);
+            break;
+          }
+        } else {
+          break;
+        }
+      }
+      match_ranges = match_ranges.slice(i);
+      for (const range_pair of match_ranges) {
+        if (range_pair[0] < prefix_len) {
+          range_pair[0] = 0;
+        } else {
+          range_pair[0] -= prefix_len;
+        }
+        range_pair[1] -= prefix_len;
+      }
+      match_info.match_ranges = match_ranges;
+      for (var i = 0; i < match_info.num_start.length; i++) {
+        match_info.num_start[i] -= prefix_len;
+      }
+      return {
+        match_str: prefix,
+        match_ranges: pfx_ranges,
+        num_list: [],
+        num_start: [],
+        num_missing_digits: []
+      };
+    }
+    var pfx_info = null;
+    if (com_prefixed) {
+      pfx_info = separate_prefix_info(this.prefix(), com_match_info);
+    }
+    if (sci_prefixed) {
+      pfx_info = separate_prefix_info(this.prefix(), sci_match_info);
+    }
+    var pfx_highlight = '';
+    if (pfx_info) {
+      pfx_highlight = highlight_match(pfx_info, null, false);
+      const last_pfx_range_idx = pfx_info.match_ranges.length - 1;
+      const last_pfx_range = pfx_info.match_ranges[last_pfx_range_idx];
+      const incl_com = (('c' in page_info) &&
+                        (this.com_match_info || page_info.c[0]));
+      if ((last_pfx_range[1] == prefix_len) &&
+          (incl_com ?
+           (this.com_match_info &&
+            (this.com_match_info.match_str == page_info.c[0]) &&
+            this.com_match_info.match_ranges.length &&
+            this.com_match_info.match_ranges[0][0] == 0) :
+           (this.sci_match_info &&
+            (this.sci_match_info.match_str == page_info.s[0]) &&
+            this.sci_match_info.match_ranges.length &&
+            this.sci_match_info.match_ranges[0][0] == 0))) {
+        const pos = pfx_highlight.length - '</span>'.length;
+        pfx_highlight = pfx_highlight.substring(0, pos) + ' </span>';
+      } else {
+        pfx_highlight += ' ';
+      }
+    }
     if ('c' in page_info) {
       var com_highlight = this.highlight_name(this.com_match_info,
                                               page_info.c[0],
@@ -566,16 +698,26 @@ class PageTerm extends Term {
     } else {
       var sci_highlight = null;
     }
-    return compose_full_name(com_highlight, sci_highlight);
+    return pfx_highlight + compose_full_name(com_highlight, sci_highlight);
   }
   get_class() {
     return get_class(this.page_info);
   }
   get_url() {
-    return get_url(this.page_info);
+    if (this.prefixed) {
+      return super.get_url();
+    } else {
+      return get_url(this.page_info);
+    }
   }
   prefix() {
-    return 'within';
+    if ('gj'.includes(this.page_info.x)) {
+      return null;
+    } else if (this.page_info.x == 's') {
+      return 'with';
+    } else {
+      return 'within';
+    }
   }
   get_text() {
     const page_info = this.page_info;
@@ -639,7 +781,7 @@ class AnchorTerm extends PageTerm {
     for (const page_name of this.page_info.c) {
       for (const glossary_term of this.anchor_info.terms) {
         const term_str = glossary_term + ' (' + page_name + ')';
-        const match_info = check(this.search_str, term_str, pri_adj);
+        const match_info = check(this.search_str, null, term_str, pri_adj);
         if (better_match(match_info, best_match_info)) {
           best_match_info = match_info;
         }
@@ -860,9 +1002,11 @@ function digits(num, len) {
 }
 function add_adv_terms(search_str) {
   var group = 1;
-  for (const trait of traits) {
-    const term = new TraitTerm(group, search_str, trait);
-    term.search();
+  if (adv_search) {
+    for (const trait of traits) {
+      const term = new TraitTerm(group, search_str, trait);
+      term.search();
+    }
   }
   group++;
   for (const park of parks) {
@@ -1023,7 +1167,7 @@ class TextTerm extends Term {
   }
   search() {
     const search_str = this.search_str;
-    const match_info = check(this.search_str, this.match_str, 0,
+    const match_info = check(this.search_str, this.prefix(), this.match_str, 0,
                              this.def_num_list);
     if (match_info) {
       this.pri = match_info.pri;
@@ -1045,6 +1189,9 @@ class TextTerm extends Term {
     for (const num of this.match_info.num_list) {
       term_name = term_name.replace(/%#*/, num);
     }
+    if (term_name.startsWith(this.prefix())) {
+      term_name = term_name.substring(this.prefix().length + 1);
+    }
     return term_name;
   }
   get_canonical_name() {
@@ -1053,16 +1200,12 @@ class TextTerm extends Term {
   get_human_name() {
     return this.get_text();
   }
-  get_url() {
-    const query = cvt_name_to_query(this.get_canonical_name());
-    return root_path + 'advanced-search.html?' + query;
-  }
 }
 class TraitTerm extends TextTerm {
   result_init() {
   }
   result_match(page_info, past_trip_set, current_trip_set) {
-    const trait = this.match_info.match_str;
+    const trait = this.get_text();
     if (page_info.trait_set.has(trait)) {
       for (const trip of past_trip_set) {
         past_trip_set.delete(trip);

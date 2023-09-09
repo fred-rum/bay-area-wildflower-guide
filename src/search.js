@@ -294,18 +294,18 @@ function generate_ac_html() {
    nettle").  In addition, wherever punctuation/whitespace appears in
    search_str, it can skip any number of letters in match_str.  If there is
    a match, return an object with information about the match including its
-   priority (higher is better).  If there is no match, return null. */
-function check(search_str, match_str, pri_adj = 0, def_num_list = []) {
+   priority (higher is better).  If there is no match, return null.
+
+   match_str can have an optional prefix word or phrase.  The prefix is
+   retained in the recorded match_str only if it is part of the match.
+*/
+function check(search_str, prefix, match_str, pri_adj = 0, def_num_list = []) {
   /* search_str has already been converted to upper case, and we keep its
      punctuation intact.  I just copy it to a shorter variable name here for
      convenience. */
   const s = search_str;
 
-  /* m is the string we're trying to match against, converted to uppercase
-     and with punctuation removed (except '%' and '#', which represents a
-     number group). */
-  const upper_str = match_str.toUpperCase()
-  const m = upper_str.replace(/[^A-Z%#]/g, '');
+  const upper_no_pfx = match_str.toUpperCase()
 
   /* If match_str is of the format "<rank> <Name>", get the starting index of
      Name within m.  This assumes that <rank> is all normal letters, so the
@@ -315,10 +315,25 @@ function check(search_str, match_str, pri_adj = 0, def_num_list = []) {
      instead. */
   var name_pos = match_str.indexOf(' ');
   if ((name_pos < 0) ||
-      (match_str.substr(0, 1) == upper_str.substr(0, 1)) ||
-      (match_str.substr(name_pos+1, 1) != upper_str.substr(name_pos+1, 1))) {
+      (match_str.substr(0, 1) == upper_no_pfx.substr(0, 1)) ||
+      (match_str.substr(name_pos+1, 1) != upper_no_pfx.substr(name_pos+1, 1))) {
     name_pos = 0;
   }
+
+  const orig_match_str = match_str;
+  if (prefix) {
+    match_str = prefix + ' ' + match_str;
+
+    /* prefix_len is used in the match_range context, which means it
+       shouldn't include punctuation. */
+    var prefix_len = prefix.replace(/[^A-Za-z]/g, '').length;
+  }
+
+  /* m is the string we're trying to match against, converted to uppercase
+     and with punctuation removed (except '%' and '#', which represents a
+     number group). */
+  const upper_str = match_str.toUpperCase()
+  const m = upper_str.replace(/[^A-Z%#]/g, '');
 
   /* Find the position and length of each % group in m.
      These are where we expect to find numbers.
@@ -450,6 +465,25 @@ function check(search_str, match_str, pri_adj = 0, def_num_list = []) {
      required to complete the match. */
   pri -= (match_ranges.length / 10);
 
+  /* Remove the prefix from match_str if it isn't part of the match. */
+  if (prefix && (match_ranges[0][0] >= prefix_len)) {
+    match_str = orig_match_str;
+    for (const range_pair of match_ranges) {
+      range_pair[0] -= prefix_len;
+      range_pair[1] -= prefix_len;
+    }
+    for (var i = 0; i < num_start.length; i++) {
+      num_start[i] -= prefix_len;
+    }
+    var allow_name_match = true;
+  } else {
+    /* name_pos isn't accurate if the prefix is part of match_str.
+       So if the prefix is retained (because it is part of the match),
+       ignore name_pos (and we know that the match doesn't begin at
+       the name, anyway). */
+    var allow_name_match = !prefix;
+  }
+
   /* Increase the priority a bit if the first match range is at the start
      of the string.  The bump means that a match that starts at the
      beginning and has two match ranges is slightly better than one that
@@ -460,7 +494,7 @@ function check(search_str, match_str, pri_adj = 0, def_num_list = []) {
      name, that's prioritized the same as a match at the beginning of
      the string. */
   if ((match_ranges[0][0] == 0) ||
-      (match_ranges[0][0] == name_pos)) {
+      ((match_ranges[0][0] == name_pos) && allow_name_match)) {
     pri += 0.15;
   }
 
@@ -547,7 +581,7 @@ function highlight_match(match_info, default_name, is_sci) {
   /* h is the highlighed string to be returned. */
   var h = '';
 
-  if (match_info) {
+  if (match_info && match_info.match_ranges.length) {
     var m = match_info.match_str;
     var match_ranges = match_info.match_ranges;
 
@@ -793,6 +827,14 @@ class Term {
     this.group = group;
   }
 
+  /* This function is used when an advanced search term is selected from
+     the regular search bar.  If a regular search is selected, this function
+     gets overridden. */
+  get_url() {
+    const query = cvt_name_to_query(this.get_canonical_name());
+    return root_path + 'advanced-search.html?' + query;
+  }
+
   gen_html_element() {
     const e_term = document.createElement('button');
 
@@ -865,11 +907,12 @@ class PageTerm extends Term {
     var best_match_info = null;
     var pri_adj = 0.0;
     for (var name of match_list) {
-      var match_info = check(this.search_str, name, pri_adj);
+      var match_info = check(this.search_str, this.prefix(), name, pri_adj);
 
       if (!match_info && name.startsWith('genus ')) {
         /* Allow a genus to match using the older 'spp.' style. */
-        match_info = check(this.search_str, name.substr(6) + ' spp.', pri_adj);
+        const spp_name = name.substr(6) + ' spp.';
+        match_info = check(this.search_str, this.prefix(), spp_name, pri_adj);
       }
 
       if (better_match(match_info, best_match_info)) {
@@ -896,7 +939,7 @@ class PageTerm extends Term {
     const page_info = this.page_info;
 
     /* The advanced search never matches glossary pages or glossary terms. */
-    if (adv_search && ((page_info.x == 's') || (page_info.x == 'g') || (page_info.x == 'j'))) {
+    if (adv_search && ('sgj'.includes(page_info.x))) {
       return;
     }
 
@@ -919,8 +962,8 @@ class PageTerm extends Term {
     }
 
     if (com_match_info || sci_match_info) {
-      /* The priority of the term in the autocomplete list is the priority
-         of the best match among the com and sci names. */
+      /* The priority of the term in the autocomplete list is the priority of
+         the best match among the com and sci names. */
       if (better_match(com_match_info, sci_match_info)) {
         this.pri = com_match_info.pri;
       } else {
@@ -977,6 +1020,167 @@ class PageTerm extends Term {
   get_ac_text() {
     const page_info = this.page_info;
 
+    /* Check whether the prefix matches differently between the two names. */
+    const prefix = this.prefix();
+
+    /* prefix_len is used in the match_range context, which means it
+       shouldn't include punctuation. */
+    if (prefix) {
+      var prefix_len = prefix_len = (prefix.replace(/[^A-Za-z]/g, '')).length;
+    } else {
+      prefix_len = 0;
+    }
+
+    let com_match_info = this.com_match_info;
+    let sci_match_info = this.sci_match_info;
+
+    let com_prefixed = (com_match_info &&
+                        com_match_info.match_str.startsWith(prefix));
+    let sci_prefixed = (sci_match_info &&
+                        sci_match_info.match_str.startsWith(prefix));
+    let prefix_differs = (com_prefixed != sci_prefixed);
+
+    if (com_prefixed && sci_prefixed) {
+      /* Regarding the loop end condition:
+         If the match was the same so far, and one match_info has been
+         read to the end, then the other match_info *must* also be at
+         the end. */
+      for (let i = 0; i < com_match_info.length; i++) {
+        if ((com_match_info.match_range[i][0] >= prefix_len) &&
+            (sci_match_info.match_range[i][0] >= prefix_len)) {
+          /* Every match within the prefix was the same, and the next match
+             is beyond the prefix. */
+          break;
+        }
+        if (com_match_info.match_range[i][0] !=
+            sci_match_info.match_range[i][0]) {
+          /* The next match within the prefix starts at a different spot. */
+          prefix_differs = true;
+          break;
+        }
+        if ((com_match_info.match_range[i][1] >= prefix_len) &&
+            (sci_match_info.match_range[i][1] >= prefix_len)) {
+          /* Every match within the prefix was the same, and the last match
+             extends at least to the end of the prefix. */
+          break;
+        }
+        /* It can never occur thet both names start matching at the same
+           spot within the prefix and don't end at the same spot within
+           the prefix (unless they both end beyond the prefix, above). */
+      }
+    }
+
+    /* If the prefix differs between com and sci, keep only the match with
+       higher priority.  In case of a tie, prefer com. */
+    if (com_match_info && (com_match_info.pri == this.pri) &&
+        prefix_differs) {
+      sci_match_info = null;
+      sci_prefixed = false;
+    } else if (sci_match_info && (sci_match_info.pri == this.pri) &&
+               prefix_differs) {
+      com_match_info = null;
+      com_prefixed = false;
+    }
+
+    this.prefixed = com_prefixed || sci_prefixed;
+
+    /* The prefix often isn't presented as part of a consecutive string in
+       the same way that it originally matched, so we split the prefix
+       highlighting from the rest of match_str.  (This also helps because
+       the prefix would confuse italicization of the scientific name.) */
+    function separate_prefix_info(prefix, match_info) {
+      const pfx_ranges = [];
+
+      const pfx_len_w_punct = prefix.length + 1;
+      match_info.match_str = match_info.match_str.substring(pfx_len_w_punct);
+
+      var match_ranges = match_info.match_ranges;
+
+      /* Copy appropriate elements of match_ranges into pfx_ranges.
+         There is guaranteed to be at least one range that overlaps the prefix.
+      */
+      for (var i = 0; i < match_ranges.length; i++) {
+        if (match_ranges[i][0] < prefix_len) {
+          if (match_ranges[i][1] <= prefix_len) {
+            pfx_ranges.push(match_ranges[i]);
+          } else {
+            pfx_ranges.push([match_ranges[i][0], prefix_len]);
+            /* exit the loop with i = the first range that includes
+               the non-prefix portion of match_str */
+            break;
+          }
+        } else {
+          break;
+        }
+      }
+
+      match_ranges = match_ranges.slice(i);
+      for (const range_pair of match_ranges) {
+        if (range_pair[0] < prefix_len) {
+          range_pair[0] = 0;
+        } else {
+          range_pair[0] -= prefix_len;
+        }
+        range_pair[1] -= prefix_len;
+      }
+      match_info.match_ranges = match_ranges;
+
+      for (var i = 0; i < match_info.num_start.length; i++) {
+        match_info.num_start[i] -= prefix_len;
+      }
+
+      return {
+        match_str: prefix,
+        match_ranges: pfx_ranges,
+        num_list: [],
+        num_start: [],
+        num_missing_digits: []
+      };
+    }
+
+    /* if com_prefixed and sci_prefixed are both true, they must have an
+       identical match within the prefix.  This code ends up creating the
+       pfx_info twice, but it's important to remove the prefix
+       from both names.
+    */
+    var pfx_info = null;
+    if (com_prefixed) {
+      pfx_info = separate_prefix_info(this.prefix(), com_match_info);
+    }
+    if (sci_prefixed) {
+      pfx_info = separate_prefix_info(this.prefix(), sci_match_info);
+    }
+
+    var pfx_highlight = '';
+    if (pfx_info) {
+      pfx_highlight = highlight_match(pfx_info, null, false);
+
+      /* When appropriate, extend the prefix highlight across the whitespace
+         separating the prefix from the taxon name. */
+      const last_pfx_range_idx = pfx_info.match_ranges.length - 1;
+      const last_pfx_range = pfx_info.match_ranges[last_pfx_range_idx];
+      const incl_com = (('c' in page_info) &&
+                        (this.com_match_info || page_info.c[0]));
+      if ((last_pfx_range[1] == prefix_len) &&
+          (incl_com ?
+           (this.com_match_info &&
+            (this.com_match_info.match_str == page_info.c[0]) &&
+            this.com_match_info.match_ranges.length &&
+            this.com_match_info.match_ranges[0][0] == 0) :
+           (this.sci_match_info &&
+            (this.sci_match_info.match_str == page_info.s[0]) &&
+            this.sci_match_info.match_ranges.length &&
+            this.sci_match_info.match_ranges[0][0] == 0))) {
+        /* We know that pfx_highlight only contains the highlight span
+           and not other HTML tags, and the span reaches the end of the
+           prefix. */
+        const pos = pfx_highlight.length - '</span>'.length;
+        pfx_highlight = pfx_highlight.substring(0, pos) + ' </span>';
+      } else {
+        pfx_highlight += ' ';
+      }
+    }
+
     if ('c' in page_info) {
       var com_highlight = this.highlight_name(this.com_match_info,
                                               page_info.c[0],
@@ -993,7 +1197,7 @@ class PageTerm extends Term {
       var sci_highlight = null;
     }
 
-    return compose_full_name(com_highlight, sci_highlight);
+    return pfx_highlight + compose_full_name(com_highlight, sci_highlight);
   }
 
   get_class() {
@@ -1002,11 +1206,29 @@ class PageTerm extends Term {
 
   /* Get the relative path to the page. */
   get_url() {
-    return get_url(this.page_info);
+    /* this.prefixed is only valid if get_ac_text() is called first.
+       Since get_url() is only called when using regular search, that
+       is guaranteed to always be true. */
+    if (this.prefixed) {
+      /* Get the advanced search URL from the Term superclass. */
+      return super.get_url();
+    } else {
+      return get_url(this.page_info);
+    }
   }
 
   prefix() {
-    return 'within';
+    if ('gj'.includes(this.page_info.x)) {
+      /* There is no advanced search for glossary pages. */
+      return null;
+    } else if (this.page_info.x == 's') {
+      /* The name of a subset page is also the name of a trait, so
+         the search is *with* that trait. */
+      return 'with';
+    } else {
+      /* Or search *within* a taxon. */
+      return 'within';
+    }
   }
 
   /* Create the text for the confirmed search term. */
@@ -1088,7 +1310,7 @@ class AnchorTerm extends PageTerm {
     for (const page_name of this.page_info.c) {
       for (const glossary_term of this.anchor_info.terms) {
         const term_str = glossary_term + ' (' + page_name + ')';
-        const match_info = check(this.search_str, term_str, pri_adj);
+        const match_info = check(this.search_str, null, term_str, pri_adj);
         if (better_match(match_info, best_match_info)) {
           best_match_info = match_info;
         }
@@ -1492,9 +1714,16 @@ function digits(num, len) {
 function add_adv_terms(search_str) {
   var group = 1;
 
-  for (const trait of traits) {
-    const term = new TraitTerm(group, search_str, trait);
-    term.search();
+  if (adv_search) {
+    /* During normal search, the traits are covered by the subset pages.  E.g.
+       - "blue flowers" gets the page for blue flowers, and
+       - "with blue flowers" invokes an advanced search for "blue flowers".
+       During advanced search, the "blue flowers" page is excluded from search;
+       instead, we add a TraitTerm for the "blue flowers" trait. */       
+    for (const trait of traits) {
+      const term = new TraitTerm(group, search_str, trait);
+      term.search();
+    }
   }
   group++;
 
@@ -1801,7 +2030,7 @@ class TextTerm extends Term {
 
   search() {
     const search_str = this.search_str;
-    const match_info = check(this.search_str, this.match_str, 0,
+    const match_info = check(this.search_str, this.prefix(), this.match_str, 0,
                              this.def_num_list);
 
     if (match_info) {
@@ -1833,6 +2062,9 @@ class TextTerm extends Term {
     for (const num of this.match_info.num_list) {
       term_name = term_name.replace(/%#*/, num);
     }
+    if (term_name.startsWith(this.prefix())) {
+      term_name = term_name.substring(this.prefix().length + 1);
+    }
     return term_name;
   }
 
@@ -1843,13 +2075,6 @@ class TextTerm extends Term {
   get_human_name() {
     return this.get_text();
   }
-
-  /* This function is used when an advanced search term is selected from
-     the regular search bar. */
-  get_url() {
-    const query = cvt_name_to_query(this.get_canonical_name());
-    return root_path + 'advanced-search.html?' + query;
-  }
 }
 
 
@@ -1859,7 +2084,7 @@ class TraitTerm extends TextTerm {
   }
 
   result_match(page_info, past_trip_set, current_trip_set) {
-    const trait = this.match_info.match_str;
+    const trait = this.get_text();
     if (page_info.trait_set.has(trait)) {
       for (const trip of past_trip_set) {
         past_trip_set.delete(trip);
@@ -2378,7 +2603,6 @@ class Cnt {
     if (this.months_open) {
       for (const [trip, cnt] of this.trip_to_cnt) {
         const month = Number(trip[0].substring(5, 7)) - 1; // January = month 0
-        console.log(trip[0].substring(5, 7));
         month_cnt[month] += cnt;
       }
 
