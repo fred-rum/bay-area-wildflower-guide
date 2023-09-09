@@ -575,9 +575,7 @@ class Tag {
 
    In either case, if it's a scientific name, italicize the Greek/Latin
    words (either the whole string or everything after the first word). */
-function highlight_match(match_info, default_name, is_sci) {
-  var tag_list = [];
-
+function highlight_match(match_info, default_name, is_sci, tag_list = []) {
   /* h is the highlighed string to be returned. */
   var h = '';
 
@@ -694,16 +692,47 @@ function highlight_match(match_info, default_name, is_sci) {
          If they both open and close at the same time, prefer the first one
          in tag_list order.
 
-         If multiple tags close at once, prefer the that opened later
+         If multiple tags close at once, prefer the one that opened later
          (because it should have the least nesting).  If they both open
          and close at the same time, prefer the last one in tag_list order
-         (because it should be nested inside the earlier one). */
+         (because it should be nested inside the earlier one).
+
+         If the next tag open/close position is the same...
+
+         If tagj.is_open() [tagj will close next], select tagj if:
+           !tag.is_open() [tag opens where tagj closes], or
+           tagj.get_open_pos() >= tag.get_open_pos()
+             [close tagj first because it opened later].
+
+         If !tagj.is_open() [tagj will open next], select tagj if:
+           !tag.is_open() [tag and tagj open simultaneously], and
+           tagj.get_close_pos() > tag.get_close_pos()
+             [open tagj first because tagj closes later].
+      */
+      /*
+      console.log('comparing',
+                  tag.is_open() ? 'close' : 'open', tag.open(), 
+                  tag.get_next_pos(),
+                  tag.get_open_pos(), tag.get_close_pos(),
+                  tagj.is_open() ? 'close': 'open', tagj.open(),
+                  tagj.get_next_pos(),
+                  tagj.get_open_pos(), tagj.get_close_pos(),
+                  'with result', 
+                  ((tagj.get_next_pos() < tag.get_next_pos()) ||
+                   ((tagj.get_next_pos() == tag.get_next_pos()) &&
+                    (tagj.is_open() ?
+                     (!tag.is_open() ||
+                      (tagj.get_open_pos() >= tag.get_open_pos())) :
+                     (!tag.is_open() &&
+                      (tagj.get_close_pos() > tag.get_close_pos()))))));
+      */
       if ((tagj.get_next_pos() < tag.get_next_pos()) ||
-          ((tagj.get_next_pos() == tag.get_next_pos()) &&
-           (tagj.is_open() ?
-            (!tag.is_open() || (tagj.get_close_pos() < tag.get_close_pos())) :
-            (!tag.is_open() && (tagj.get_close_pos() <= tag.get_close_pos())))))
-      {
+                   ((tagj.get_next_pos() == tag.get_next_pos()) &&
+                    (tagj.is_open() ?
+                     (!tag.is_open() ||
+                      (tagj.get_open_pos() >= tag.get_open_pos())) :
+                     (!tag.is_open() &&
+                      (tagj.get_close_pos() > tag.get_close_pos()))))) {
         tag_idx = j;
         tag = tagj;
       }
@@ -719,6 +748,7 @@ function highlight_match(match_info, default_name, is_sci) {
     pos = next_pos;
 
     if (!tag.is_open()) {
+      /* console.log('open', tag.open()); */
       h += tag.open(); // open tag
       nest.push(tag); // record its nesting level
     } else {
@@ -728,6 +758,7 @@ function highlight_match(match_info, default_name, is_sci) {
       }
 
       /* close the tag that we wanted to close */
+      /* console.log('open', nest[i].open()); */
       h += nest[i].close();
 
       /* remove the closed tag from the nesting list */
@@ -1179,6 +1210,8 @@ class PageTerm extends Term {
       } else {
         pfx_highlight += ' ';
       }
+
+      pfx_highlight = '<span class="unobs altname">' + pfx_highlight + '</span>';
     }
 
     if ('c' in page_info) {
@@ -2050,7 +2083,9 @@ class TextTerm extends Term {
   }
 
   get_ac_text() {
-    return highlight_match(this.match_info, null, false);
+    const tag = new Tag('<span class="altname">', '</span>');
+    tag.add_range(0, this.prefix().length);
+    return highlight_match(this.match_info, null, false, [tag]);
   }
 
   get_class() {

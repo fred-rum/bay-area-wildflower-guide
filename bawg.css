@@ -211,13 +211,25 @@ a.jepson:link, a.jepson:visited {
     color: #cc6600;
 }
 a.parent:link, a.parent:visited, span.parent {
-    color: SaddleBrown;
+    color: rgb(139, 69, 19);
 }
 a.leaf:link, a.leaf:visited, span.leaf {
-    color: DarkGreen;
+    color: rgb(0, 100, 0);
 }
-span.altname {
-    opacity: 0.60;
+.family span.altname, .unobs span.altname, span.unobs.altname {
+    color: rgb(160 160 160) !important;
+}
+.jepson span.altname {
+    color: rgb(255, 172, 136);
+}
+.parent span.altname {
+    color: rgb(200 160 120);
+}
+.leaf span.altname {
+    color: rgb(96 160 96);
+}
+.unobs span.de-emph {
+    color: rgb(212 212 212);
 }
 a.missing:link, a.missing:visited {
     color: red;
@@ -455,9 +467,6 @@ p.nogap {
 }
 span.match {
     background-color: #eee;
-}
-span.de-emph {
-    opacity: 0.3;
 }
 #adv-search-header {
     display: flex;

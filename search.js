@@ -321,8 +321,7 @@ class Tag {
     return (this.i == this.ranges.length);
   }
 }
-function highlight_match(match_info, default_name, is_sci) {
-  var tag_list = [];
+function highlight_match(match_info, default_name, is_sci, tag_list = []) {
   var h = '';
   if (match_info && match_info.match_ranges.length) {
     var m = match_info.match_str;
@@ -387,11 +386,12 @@ function highlight_match(match_info, default_name, is_sci) {
     for (var j = 1; j < tag_list.length; j++) {
       var tagj = tag_list[j];
       if ((tagj.get_next_pos() < tag.get_next_pos()) ||
-          ((tagj.get_next_pos() == tag.get_next_pos()) &&
-           (tagj.is_open() ?
-            (!tag.is_open() || (tagj.get_close_pos() < tag.get_close_pos())) :
-            (!tag.is_open() && (tagj.get_close_pos() <= tag.get_close_pos())))))
-      {
+                   ((tagj.get_next_pos() == tag.get_next_pos()) &&
+                    (tagj.is_open() ?
+                     (!tag.is_open() ||
+                      (tagj.get_open_pos() >= tag.get_open_pos())) :
+                     (!tag.is_open() &&
+                      (tagj.get_close_pos() > tag.get_close_pos()))))) {
         tag_idx = j;
         tag = tagj;
       }
@@ -683,6 +683,7 @@ class PageTerm extends Term {
       } else {
         pfx_highlight += ' ';
       }
+      pfx_highlight = '<span class="unobs altname">' + pfx_highlight + '</span>';
     }
     if ('c' in page_info) {
       var com_highlight = this.highlight_name(this.com_match_info,
@@ -1179,7 +1180,9 @@ class TextTerm extends Term {
     }
   }
   get_ac_text() {
-    return highlight_match(this.match_info, null, false);
+    const tag = new Tag('<span class="altname">', '</span>');
+    tag.add_range(0, this.prefix().length);
+    return highlight_match(this.match_info, null, false, [tag]);
   }
   get_class() {
     return 'unobs';

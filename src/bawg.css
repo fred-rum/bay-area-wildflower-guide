@@ -445,13 +445,30 @@ a.jepson:link, a.jepson:visited {
     color: #cc6600; /* Jepson orange */
 }
 a.parent:link, a.parent:visited, span.parent {
-    color: SaddleBrown;
+    color: rgb(139, 69, 19); /* SaddleBrown */
 }
 a.leaf:link, a.leaf:visited, span.leaf {
-    color: DarkGreen;
+    color: rgb(0, 100, 0); /* DarkGreen */
 }
-span.altname {
-    opacity: 0.60;
+/* I used to use opacity to easily reduce the intensity of any of the above
+   colors for the altname, but that caused the highlight to reduce intensity
+   as well.  So now I designate a particular reduced-intensity (whiter)
+   text color for each. */
+.family span.altname, .unobs span.altname, span.unobs.altname {
+    color: rgb(160 160 160) !important;
+}
+.jepson span.altname {
+    color: rgb(255, 172, 136);
+}
+.parent span.altname {
+    color: rgb(200 160 120);
+}
+.leaf span.altname {
+    color: rgb(96 160 96);
+}
+/* de-emph is only used togather with unobs, not the other classes */
+.unobs span.de-emph {
+    color: rgb(212 212 212);
 }
 
 /* A link that is known to be broken is styled this way. */
@@ -1003,9 +1020,6 @@ p.nogap {
    within each autocomplete entry. */
 span.match {
     background-color: #eee;
-}
-span.de-emph {
-    opacity: 0.3;
 }
 
 /* See also the <a> link tags for links in the autocompletion box. */
