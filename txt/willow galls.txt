@@ -1,7 +1,15 @@
 sci: n/a
 ignore_link: self
 
-==willow gall midges
+==willow rosette gall midge
+==potato gall midge
+==willow beaked-gall midge
+==willow cone gall midge
+==willow rose gall midge
 ==Iteomyia s-lasiolepis-tooth-gall
-==willow gall sawflies
+==Iteomyia s-lasiolepis-tube-gall
+==willow apple gall sawfly
+==willow redgall sawfly
+==arroyo willow stem sawfly
+==willow stem sawfly
 ==willow bead gall mite

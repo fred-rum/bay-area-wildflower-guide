@@ -891,7 +891,7 @@ const pages=[
 ["seaside daisy",1,2,3],
 ["seaside woolly sunflower",1,2,3,4],
 ["seep monkeyflower",1,2,3,4],
-["serpentine leptosiphon",""],
+["serpentine leptosiphon",1,2,"2b"],
 ["seven-spotted lady beetle",1,2,3],
 ["shade phacelia",1,2,5,7],
 ["shasta daisy",1,2,3],

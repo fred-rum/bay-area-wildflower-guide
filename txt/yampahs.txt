@@ -2,11 +2,24 @@ sci:Perideridia spp.
 x:ba
 
 ==kellogg's yampah:P. kelloggii
+. roots fibrous or +- thickened
+. basal petiole 3--6 cm, generally fully sheathing
+. cauline leaves 1-ternate-pinnate
 color:white
 
 ==california yampah:P. californica
+. roots tuberous
+. basal petiole 2--6 cm
+. terminal leaf segments unlike lateray in size and form
 
-==common yampah:P. gairdneri
+==gairdner's yampah:P. gairdneri
+acom: common yampah
 xx:more
+. roots tuberous
+. basal petiole 8--15 cm
+. cauline leaves 1--2-pinnate or 1--2-ternate [not ternate-pinnate?]
 
 ==oregon yampah:P. oregana
+. roots tuberous
+. basal petiole 2--10 cm
+. all leaf segments alike in size and form

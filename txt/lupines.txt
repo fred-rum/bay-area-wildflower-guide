@@ -215,6 +215,7 @@ sci_fpj: Lupinus polyphyllus var. polyphyllus
 ==summer lupine:L. formosus var. formosus
 color:purple, pale purple, pale blue
 species: summer lupine
+xx:rare
 . habit: perennial herb 2--8 dm, densely hairy to tomentose, gray to silver; rhizomes 3--7 mm diam
 . stem: spreading to erect, 3--4 mm diam
 . leaf: cauline; stipules 4--15 mm; petiole 2--7 cm; leaflets 7--9, 25--70 mm; <b>adaxially hairy, green-gray to silver</b>
