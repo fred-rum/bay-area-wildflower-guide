@@ -1487,7 +1487,7 @@ const pages=[
 {p:"false golden asters",s:["genus Heterotheca"],x:"k",j:"bristly goldenaster,1",d:[814,2718,2658]},
 {p:"Iteomyia",s:["genus Iteomyia"],x:"k",j:"Iteomyia s-lasiolepis-tooth-gall,3",d:[898,1776]},
 {p:"Microseris",c:["silverpuffs"],s:["genus Microseris"],x:"k",j:"Microseris acuminata,",d:[1792,896,2672,2563,2593,2712,2632]},
-{p:"wirelettuce",s:["genus Stephanomeria"],x:"k",j:"rod wirelettuce,",z:"$|",d:[903,2675,2870]},
+{p:"wirelettuces",s:["genus Stephanomeria"],x:"k",j:"rod wirelettuce,",z:"$|",d:[903,2675,2870]},
 {p:"dandelions",s:["genus Taraxacum"],x:"k",j:"common dandelion,1",d:[815,2750,2744]},
 {p:"garden whites",s:["genus Pieris"],x:"f",j:"cabbage white,1",z:"(J",d:[1153,1379]},
 {p:"dendroalsia moss",s:["Dendroalsia abietina"],x:"o",j:1,z:"#A$n%('3'R'd"},
@@ -3856,6 +3856,10 @@ const pages=[
 {terms:["lower sepals","lower sepal"]},
 {terms:["lateral sepals","lateral sepal"]},
 {terms:["column","columns"]},
+]},
+{p:"owl's clover",c:["glossary: owl's clover"],x:"g",glossary:[
+{terms:["beak","beaks","upper lip","upper lips"]},
+{terms:["lower lip","lower lips"]},
 ]},
 {p:"sedge glossary",c:["glossary: sedges","sedge glossary"],x:"g",glossary:[
 {terms:["floret","florets"]},

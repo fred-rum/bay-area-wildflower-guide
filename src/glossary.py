@@ -160,7 +160,7 @@ class Glossary:
     # For the given term, get a link within the glossary or its ancestors.
     # Search ancestors only when deep=True.
     # Return None if the term isn't in the glossary (or its ancestors).
-    def get_link(self, term, is_glossary, deep, child=None):
+    def get_link(self, term, deep):
         lower = term.lower()
         if lower in self.link_set:
             anchor = self.term_anchor[lower]
@@ -171,12 +171,13 @@ class Glossary:
                     self.used_dict[anchor] = 1
             return self.glossary_link(anchor, term)
         elif deep and self.parent:
-            return self.parent.get_link(term, is_glossary, True, child=self)
+            return self.parent.get_link(term, True)
         else:
             return None
 
     def link_glossary_words(self, assoc_name, assoc_page, txt,
-                            is_glossary=False, exclude=None):
+                            is_glossary=False,
+                            exclude_all=False, exclude_set=None):
         # This function is called for a glossary word match.
         # Replace the matched word with a link to the primary term
         # in the glossary.
@@ -197,7 +198,7 @@ class Glossary:
                     return bare_term
                 else:
                     glossary = glossary_name_dict[name + ' glossary']
-                    link = glossary.get_link(bare_term, is_glossary, False)
+                    link = glossary.get_link(bare_term, False)
                     if link:
                         return link
                     else:
@@ -223,15 +224,18 @@ class Glossary:
 
             # Continue for the default case without a '#' cross-ref.
 
-            exclude_term = (exclude and term.lower() in exclude)
+            exclude_term = (exclude_set and term.lower() in exclude_set)
 
             if exclude_term:
-                # Don't make a link for an excluded term.  Instead, check
-                # for potential links in subsets of the term, then default
-                # to returning the unmodified term.
-                link = None
+                if exclude_all or not self.parent:
+                    # Don't make a link for an excluded term.  Instead, check
+                    # for potential links in subsets of the term, then default
+                    # to returning the unmodified term.
+                    link = None
+                else:
+                    link = self.parent.get_link(term, True)
             else:
-                link = self.get_link(term, is_glossary, True)
+                link = self.get_link(term, True)
 
             # We can't find a link for the term (or it is excluded,
             # so we don't want to make a link for it.)  However,
@@ -530,7 +534,10 @@ class Glossary:
             if not self.invisible:
                 w.write('</div>\n')
 
-    # link_glossary() is called for each paragraph of txt.
+    # link_glossary_words_or_defn() is called for each paragraph of txt.
+    # Glossary terms used in the paragraph are linked to the appropriate place.
+    # If the paragraph is a glossary definition, it is formatted accordingly,
+    # and *other* glossary terms within it are linked as appropriate.
     def link_glossary_words_or_defn(self, assoc_name, assoc_page, c,
                                     is_glossary):
         # Check if the paragraph is a glossary definition.
@@ -539,25 +546,37 @@ class Glossary:
             anchor = matchobj.group(1)
             defn = matchobj.group(2)
 
-            # Link glossary terms in the definition, but excluding any
-            # terms being defined on this line.  Although it seems
-            # intuitive to remove the excluded terms from glossary_regex,
-            # recompiling the monster regex hundreds of times is a huge
-            # performance hit.  Instead, we leave the regex alone and
-            # handle the excluded terms as they are matched.
+            # Link glossary terms in the definition, but avoiding any terms
+            # being defined on this line.  Specifically:
+            # - Within a regular glossary, don't link the defined terms at
+            #   all.  (Instead, links to all other definitions will be added
+            #   to the end of the definition.)
+            # - Within definition that is part of a taxon page, link to
+            #   ancestor definitions of the same words, but don't make a link
+            #   back to the same page.
+            #
+            # Although it seems intuitive to remove the excluded terms
+            # from glossary_regex, recompiling the monster regex
+            # hundreds of times is a huge performance hit.  Instead,
+            # we leave the regex alone and handle the excluded terms
+            # as they are matched.
+            exclude_all = is_glossary
             exclude_set = self.anchor_terms[anchor]
             defn = self.link_glossary_words(assoc_name, assoc_page, defn,
                                             is_glossary=False,
-                                            exclude=exclude_set)
+                                            exclude_all=exclude_all,
+                                            exclude_set=exclude_set)
 
-            # Add links to other glossaries
-            # where they define the same words.
+            # Where a term is defined in a regular glossary (i.e. term + defn),
+            # add links to other glossaries that define the same term.
+            #
+            # But don't do this where the term is defined on a taxon page (i.e.
+            # in a paragraph that doesn't necessary have just one defined term).
             related_str = ''
-            dup_list = self.find_dups(anchor)
-            if dup_list:
-                related_str = ' [' + ', '.join(dup_list) + ']'
-            else:
-                related_str = ''
+            if is_glossary:
+                dup_list = self.find_dups(anchor)
+                if dup_list:
+                    related_str = ' [' + ', '.join(dup_list) + ']'
 
             defined_term = self.anchor_defined[anchor]
 
