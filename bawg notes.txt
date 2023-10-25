@@ -1794,3 +1794,6 @@ If the child of a genus page doesn't have the same genus,
   this fact is obvious within the child's page, but not within the genus's page.
   I should emphasize it more,
     e.g. by making its scientific name bold.
+
+change "gallery - <foo>" title to "<foo> - photos" (or "photo" if 1)
+  is better if the user has multiple galleries open to compare

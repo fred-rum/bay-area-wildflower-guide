@@ -1,0 +1,9 @@
+sci:genus Erynnis
+bug:377
+x:more
+
+==propertius duskywing:Erynnis propertius
+bug:64221
+
+==mournful duskywing:Erynnis tristis
+bug:31868

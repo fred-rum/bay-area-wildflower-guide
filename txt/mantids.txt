@@ -1,0 +1,11 @@
+sci:family Mantidae
+bug:199
+x:more
+
+==european mantis:Mantis religiosa
+bug:22947
+. diagnostic large black spot on inner part of each foreleg near the shoulder
+.. may have a white spot within each black spot
+
+==n/a:genus Stagmomantis
+bug:4820

@@ -1,0 +1,5 @@
+x:more
+
+==california mantis:Stagmomantis californica
+bug:7985
+. only male has identifying traits listed at BugGuide

@@ -11,3 +11,5 @@ ignore_link: self
 ==beaked twig gall wasp
 ==round gall wasp
 ==red cone gall wasp
+==golden gall wasp
+==woolly gall wasp

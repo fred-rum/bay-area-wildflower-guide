@@ -1,12 +1,16 @@
 sci:Polygonum
-x:!hist/rare
+x:hist/rare
 
 ==prostrate knotweed:P. aviculare
 color: white, other
 . stem 8--16 ribbed
+. a complex of mostly self-propagating plants with many sympatric and intergrading forms
 
 ==oval leaf knotweed:P. arenastrum
-sci_Fjfp:P. aviculare
+sci_Fjfp:n/a
+. included here since iNaturalist includes purported local observations
+. I can find no description of how this is different from {-P. aviculare}
+. many sources consider this to be a subspecies/variety of {-P. aviculare}
 
 ==beach knotweed:P. paronychia
 . stem +- angled, ribs 0 or obscure

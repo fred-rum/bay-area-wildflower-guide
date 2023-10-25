@@ -25,7 +25,7 @@ bug:103344
 x:more
 
 ==false tarantula:Calisoga longitarsis
-bug:120962
+bug:1242212
 x:ba
 
 ==california turret spider:Atypoides riversi

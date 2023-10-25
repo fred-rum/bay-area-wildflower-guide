@@ -53,3 +53,5 @@ x:ca
 
 ==jumping bristletails:family Machilidae
 bug:248040
+
+==mantids

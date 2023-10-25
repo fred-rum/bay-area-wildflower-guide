@@ -76,6 +76,19 @@ bug:43238
 gall:1511
 . parasitizes {-valley oak}
 
+==golden gall wasp:Heteroecus melanoderma
+bug:1445744
+gall:1957
+. wool does not easily rub off ^https://bugguide.net/node/view/1445744
+. parasitizes {-canyon live oak}
+
+==woolly gall wasp:Heteroecus dasydactyli
+bug:357787
+gall:1903
+. wool is longer than on {-golden gall wasp}
+.. but the wool rubs off easily when rubbed, leaving a smooth surface ^https://bugguide.net/node/view/1445744
+. parasitizes {-canyon live oak}
+
 ==catsear gall wasp:Phanacis hypochoeridis
 bug:n/a
 gall:1489
