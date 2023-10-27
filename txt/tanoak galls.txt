@@ -1,0 +1,8 @@
+sci: n/a
+ignore_link: self
+
+==Unknown n-densiflorus-tanoak-fuzzy-gall
+sci_i:n/a
+bug:n/a
+gall:2261
+. parasitizes {-tanoak}

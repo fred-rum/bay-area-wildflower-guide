@@ -28,6 +28,9 @@ Nancy Asquith has tons of <a href="https://www.inaturalist.org/projects/californ
 ==oak galls
 rep:oaks
 
+==tanoak galls
+rep:tanoak
+
 ==chinquapin galls
 rep:genus Chrysolepis
 
@@ -81,3 +84,6 @@ rep:pacific poison oak
 
 ==alder galls
 rep:white alder,5
+
+==ceanothus galls
+rep:ceanothus

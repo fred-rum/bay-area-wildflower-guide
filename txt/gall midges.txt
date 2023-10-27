@@ -44,3 +44,10 @@ bug:n/a
 gall:3149
 . parasitizes {-alders}
 sci_i:n/a
+
+==ceanothus bud gall midge:Asphondylia ceanothi
+bug:1235724
+gall:2843
+. parasitizes {-ceanothus}
+. looks like a ball of leaves
+.. but may turn brown earlier than regular leaves

@@ -1797,3 +1797,8 @@ If the child of a genus page doesn't have the same genus,
 
 change "gallery - <foo>" title to "<foo> - photos" (or "photo" if 1)
   is better if the user has multiple galleries open to compare
+
+support "form"
+  e.g. Actaea rubra f. rubra (red-fruited red baneberry)
+  "form" is a distinct form caused by diverse genetic differences,
+    so the populations with that form don't form a genetically related clade

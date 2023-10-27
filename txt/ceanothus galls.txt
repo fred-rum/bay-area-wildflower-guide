@@ -1,0 +1,4 @@
+sci: n/a
+ignore_link: self
+
+==ceanothus bud gall midge
