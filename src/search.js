@@ -600,7 +600,6 @@ function highlight_match(match_info, default_name, is_sci, tag_list = []) {
        Therefore, the Tag is always valid. */
     tag_list.push(tag);
 
-
     /* Replace %# groups in match_str with the parsed/default numbers,
        and de-emphasize digits that were not typed. */
     if (match_info.num_list.length) {
@@ -2083,9 +2082,13 @@ class TextTerm extends Term {
   }
 
   get_ac_text() {
-    const tag = new Tag('<span class="altname">', '</span>');
-    tag.add_range(0, this.prefix().length);
-    return highlight_match(this.match_info, null, false, [tag]);
+    if (this.match_info.match_str.startsWith(this.prefix())) {
+      const tag = new Tag('<span class="altname">', '</span>');
+      tag.add_range(0, this.prefix().length);
+      return highlight_match(this.match_info, null, false, [tag]);
+    } else {
+      return highlight_match(this.match_info, null, false);
+    }
   }
 
   get_class() {

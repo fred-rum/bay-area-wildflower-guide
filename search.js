@@ -1180,9 +1180,13 @@ class TextTerm extends Term {
     }
   }
   get_ac_text() {
-    const tag = new Tag('<span class="altname">', '</span>');
-    tag.add_range(0, this.prefix().length);
-    return highlight_match(this.match_info, null, false, [tag]);
+    if (this.match_info.match_str.startsWith(this.prefix())) {
+      const tag = new Tag('<span class="altname">', '</span>');
+      tag.add_range(0, this.prefix().length);
+      return highlight_match(this.match_info, null, false, [tag]);
+    } else {
+      return highlight_match(this.match_info, null, false);
+    }
   }
   get_class() {
     return 'unobs';
