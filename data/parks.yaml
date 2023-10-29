@@ -91,6 +91,7 @@ bay area:
 - Henry Coe SP:
   - Henry Coe
   - Henry W. Coe
+- Henry Cowell Redwoods SP - ;Fall Creek; Unit
 - Henry Cowell Redwoods SP:
   - Henry Cowell
   - Roaring Camp
@@ -192,96 +193,106 @@ bay area:
 - Montevina Rd.;, Santa Clara County
 
 Monterey County:
-- Point Lobos
-- {Garrapata SP: Garrapata}
-- {Andrew Molera SP: Andrew Molera}
+- Point Lobos; SP
+- Garrapata; SP
+- Andrew Molera; SP
 - Salinas River
 - Elkhorn Slough
 - Monterey Bay Coastal Trail
-- ^Pacific Grove, CA
+- Pacific Grove, CA:
+  - ^Pacific Grove, CA
 
 Yellowstone:
-- Yellowstone
-- Jackson Hole
+- Yellowstone; NP
+- Jackson, WY
 
 elsewhere in California:
-- {Yosemite NP: Yosemite}
-- {Yosemite NP: Hetch Hetchy}
+- Yosemite NP:
+  - Yosemite
+  - Hetch Hetchy
 - Ansel Adams Wilderness
-- Loon Lake
-- Spider Lake
-- Wright's Lake
-- Grouse Lake
-- Smith Lake
-- Hemlock Lake
-- Pinnacles
-- Hood Mountain; RP
+- Desolation Wilderness:
+  - Loon Lake
+  - Spider Lake
+  - Wright's Lake
+  - Grouse Lake
+  - Smith Lake
+  - Hemlock Lake
+- Pinnacles; NP
+- Hood Mountain; RP, Sonoma County
 
 Hawaii:
-- {Kokee Region: Koke'e State Park}
-- {Kokee Region: Koke'e SP}
-- {Kokee Region: Honopu Trail}
-- Kilauea Lighthouse
-- Puu Olai
-- {Kokee Region: Kohua Ridge}
-- {Kokee Region: Kawaikoi Camp}
-- {Kokee Region: Kumuwela Trail}
-- {Kokee Region: Kumuwela Road}
-- Waihee Ridge Trail
-- Powerline Trail
-- {Kokee Region: Nu'alolo Cliff Trail}
-- {Kokee Region: Nualolo Trail}
-- {Kuilau Ridge Trail: Kuilau Ridge}
-- {Kokee Region: Kukui Trail}
-- {Kokee Region: Kawaikoi Stream Trail}
-- Moalepe Trail
-- {Moalepe Trail: Moalepe Road}
-- Shipwrecks Beach
-- {Kokee Region: Canyon Trail}
-- {Kokee Region: Ditch Trail}
-- {Kokee Region: Mohihi Road}
-- Kalalau Trail
-- Hanalei River
-- {Kokee Region: Halemanu Road}
-- {Kokee Region: Halemanu Rd}
-- {Kokee Region: Halemanu-Kokee Trail}
-- {Kokee Region: Hwy 550}
-- Ninini Point
-- Lihue
-- {Lihue: Sonesta Resort}
-- Poipu Beach
-- {Kokee Region: Alakai Swamp Trail}
-- {Hanakāpī'a Falls Trail: Hanakāpī}
-- {Kokee Region: Awa'awapuhi Trail}
-- Ho'opi'i Falls Trail
-- {Okolehao Trail: Okolehao}
-- {Okolehao Trail: Ohiki Rd.}
-- Haleakala
-- {Kokee Region: Pihea Trail}
-- {Kokee Region: Waipoo Falls Trail}
-- {Kokee Region: Kanaloahuluhulu}
-- Eleele, Kauai
-- Nounou Mountain
-- Secret Beach
-- Larsen's Beach
-- Poipu
-- {Kokee Region: Kokee Rd}
-- {Kokee Region: Black Pipe Trail}
-- Spouting Horn
-- Hanapepe Valley
-- Waimea Canyon
-- {Kapa'a: Kapaʻa}
+- Kauai, HI:
+  # Kokee Region
+  - Koke'e State Park
+  - Koke'e SP
+  - Honopu Trail
+  - Kohua Ridge
+  - Kawaikoi Camp
+  - Kumuwela Trail
+  - Kumuwela Road
+  - Nu'alolo Cliff Trail
+  - Nualolo Trail
+  - Kukui Trail
+  - Kawaikoi Stream Trail
+  - Canyon Trail
+  - Ditch Trail
+  - Mohihi Road
+  - Halemanu Road
+  - Halemanu Rd
+  - Halemanu-Kokee Trail
+  - Hwy 550
+  - Alakai Swamp Trail
+  - Awa'awapuhi Trail
+  - Pihea Trail
+  - Waipoo Falls Trail
+  - Kanaloahuluhulu
+  - Kokee Rd
+  - Black Pipe Trail
+  # end
+  - Kuilau Ridge # Trail
+  - Kilauea Lighthouse
+  - Powerline Trail
+  - Moalepe Trail
+  - Moalepe Road # Moalepe Trail
+  - Shipwrecks Beach
+  - Kalalau Trail
+  - Hanalei River
+  - Ninini Point
+  - Lihue
+  - Sonesta Resort
+  - Poipu Beach
+  - Hanakāpī # Hanakāpī'a Falls Trail
+  - Ho'opi'i Falls Trail
+  - Okolehao # Okolehao Trail
+  - Ohiki Rd. # Okolehao Trail
+  - Eleele, Kauai
+  - Nounou Mountain
+  - Secret Beach
+  - Larsen's Beach
+  - Poipu
+  - Spouting Horn
+  - Hanapepe Valley
+  - Waimea Canyon
+  - Kapaʻa
+- Maui, HI:
+  - Waihee Ridge Trail
+  - Puu Olai
+  - Haleakala
 
 Utah:
-- Coral Pink Sand Dunes
-- Bryce Canyon
-- Arches National Park
-- Zion NP
+- Coral Pink Sand Dunes; SP, Utah
+- Bryce Canyon; NP, Utah
+- Arches NP, Utah:
+  - Arches National Park
+- Zion NP;, Utah
 
 Pennsylvania:
-- Pennsylvania
-- {Pennsylvania: ", PA"}
+- Pennsylvania:
+  - Pennsylvania
+  - ", PA"
 
 Switzerland:
-- Lauterbrunnen, Switzerland
-- Törbel, Switzerland
+- Switzerland:
+  - Lauterbrunnen, Switzerland
+  - Törbel, Switzerland

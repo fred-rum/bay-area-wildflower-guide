@@ -312,12 +312,6 @@ def read_observation_data(f):
         # through observations.csv, so it'd be weird if we can't find it.
         assert page
 
-        if loc != 'bay area':
-            # If the location is outside the bay area, properties may
-            # allow us to count it.  If so, list the outside observation
-            # by general location, rather than the specific park.
-            short_park = loc
-
         page_below = page.equiv_page_below()
         if page_below:
             page = page_below
