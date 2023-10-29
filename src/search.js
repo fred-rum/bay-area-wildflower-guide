@@ -85,7 +85,7 @@ function munge_photo_for_url(path) {
   }
 
   /* Remove extension, e.g. '.jpg'. */
-  var dot_pos = path.indexOf('.')
+  var dot_pos = path.lastIndexOf('.')
   if (dot_pos != -1) {
     path = path.substring(0, dot_pos);
   }
