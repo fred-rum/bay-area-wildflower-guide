@@ -2157,7 +2157,7 @@ const pages=[
 {p:"montias",s:["genus Montia"],x:"k",j:"small-leaved blinks,1",d:[1716,2114,1992]},
 {p:"nomad bees",s:["genus Nomada"],x:"o",j:1,z:"$c"},
 {p:"north american deer mice",s:["genus Peromyscus"],x:"f",j:"western deer mouse,3",d:[1739,2014,2029,2162,2272,2307]},
-{p:"Panurginus",s:["genus Panurginus"],x:"o",j:"Panurginus spp.,1",z:"%@"},
+{p:"Panurginus",s:["genus Panurginus"],x:"o",j:1,z:"%@"},
 {p:"pistaches",s:["genus Pistacia"],x:"k",j:"chinese pistache,1",d:[1644,2250]},
 {p:"pussypaws",s:["genus Calyptridium"],x:"k",j:"one-seeded pussypaws,1",d:[1692,2258,2087,2817]},
 {p:"Sabulina",s:["genus Sabulina"],x:"k",j:"douglas' stitchwort,1",d:[1657,2030]},
