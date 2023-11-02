@@ -863,6 +863,7 @@ const pages=[
 ["ruptured twig gall wasp",5],
 ["rush broom",2,5,7],
 ["rusty popcornflower",1,2,3,4,5,6],
+["sacred datura",1,4,7],
 ["sagebrush woolly stem gall midge",1],
 ["salad burnet",2,5],
 ["salmonberry",4,5,7],

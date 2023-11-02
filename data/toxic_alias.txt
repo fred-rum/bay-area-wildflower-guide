@@ -94,6 +94,7 @@
 "Elephant's foot": "n/a"
 "Abrus precatorius", "Licorice, wild": "Abrus precatorius", "n/a"
 "Abrus precatorius", "Wild licorice": "Abrus precatorius", "n/a"
+"Datura inoxia", "Sacred datura": "Datura inoxia", "n/a"
 
 # ambiguous common names that do match something I'm interested in
 "Dichelostemma pulchellum", "wild hyacinth": "Dichelostemma pulchellum", "ookow"

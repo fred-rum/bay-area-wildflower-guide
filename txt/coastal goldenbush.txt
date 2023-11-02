@@ -1,11 +1,11 @@
 sci:Isocoma menziesii
 x:ba
-xx:!ba
+xx:ba
 color:yellow
 genus: jimmyweeds and goldenbushes
 
-Jepson's key is not very helpful.  There may be some way to distinguish based on the herbage.
-
 ==satan's goldenbush:var. diabolica
+. herbage usually stalked glandular [tiny], <b>densely sticky</b>
 
 ==green-leaved dune goldenbush:var. vernonioides
+. herbage usually not glandular, usually hairy

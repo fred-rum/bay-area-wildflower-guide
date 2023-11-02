@@ -3,9 +3,10 @@ x:rare
 
 See also {-bindweed family}, which have a generally shorter calyx which is not ribbed or angled toward the base.
 
-==sacred thorn-apple:D. wrightii
+==sacred datura:D. wrightii
 acom:western jimsonweed
-acom:sacred datura
+acom:sacred thorn-apple
+color: white
 . corolla white, 15--20 cm, lobes 1.0--2.0 cm
 .. style 15--18 cm
 . calyx 8--12 cm, ribbed at least toward base, lobes +- 2 cm
