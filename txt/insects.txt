@@ -55,3 +55,5 @@ x:ca
 bug:248040
 
 ==mantids
+
+==thrips

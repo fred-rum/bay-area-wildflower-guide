@@ -1,6 +1,6 @@
 sci: family Parmeliaceae
 
-==beard lichens:genus Usnea
+==beard lichens
 
 ==oakmoss:Evernia prunastri
 x:ba

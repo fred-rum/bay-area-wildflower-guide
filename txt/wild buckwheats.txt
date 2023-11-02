@@ -159,6 +159,7 @@ species: wicker buckwheat
 . uncommon
 
 ==slender woolly buckwheat:E. gracile
+color: white, pink, salmon
 . flowers not at branchlet tips, generally appressed with no peduncles
 . involucres 2--3 mm
 . outer perianth lobes not fan-shaped or hastate

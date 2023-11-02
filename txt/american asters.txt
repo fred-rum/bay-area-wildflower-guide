@@ -2,6 +2,7 @@ sci:Symphyotrichum spp.
 x:hist/rare
 
 [
+<h3>outer phyllaries pale-margined > &frac12; length, length generally >= 3 &times; width</h3>
 ==pacific aster:S. chilense
 color: pale purple
 sci_p: Aster chilensis
@@ -19,6 +20,7 @@ sci_p: Aster chilensis
 . very rare
 ]
 [
+<h3>outer phyllaries pale-margined < &frac12; length, length generally < 3 &times; width</h3>
 ==siskiyou aster:S. lanceolatum var. hesperium
 species: panicled aster
 . outer phyllaries pale-margined < &frac12; length, length generally < 3 &times; width

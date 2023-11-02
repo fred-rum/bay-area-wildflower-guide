@@ -45,6 +45,9 @@ rep:sticky cinquefoil
 ==bramble galls
 rep:brambles
 
+==toyon gall thrips
+rep:toyon
+
 <h3>sunflower family</h3>
 
 ==baccharis galls
