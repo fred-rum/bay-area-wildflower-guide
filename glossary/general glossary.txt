@@ -2,8 +2,8 @@ title:general
 
 <h2>Geographic locations</h2>
 
-{Diablo range} The east bay mountains and foothills from Mt. Diablo through Mt. Hamilton and beyond.  This is a portion of the inner coast range which extends further through California.
-{Santa Cruz mountains,Santa Cruz range} The mountains and hills of the SF peninsula, continuing to the central coast.  This is a portion of the outer coast range which extends further through California.
-{Mt. Tam,Mt. Tamalpais,Mount Tam,Mount Tamalpais} Mt. Tamalpais.  A mountain in Marin County.  Part of the outer coast range, but separate from the Santa Cruz mountains.
-{outer coastal range} In the bay area, this is the Santa Cruz mountains and the Mt. Tam area.
+{Diablo range} The east bay mountains and foothills from Mt. Diablo through Mt. Hamilton and beyond.  This is a portion of the inner coastal range which extends further through California.
+{Santa Cruz mountains,Santa Cruz range} The mountains and hills of the SF peninsula, continuing to the central coast.  This is a portion of the outer coastal range which extends further through California.
+{Mt. Tam,Mt. Tamalpais,Mount Tam,Mount Tamalpais} Mt. Tamalpais.  A mountain in Marin County.  Part of the outer coastal range, but separate from the Santa Cruz mountains.
+{outer coastal range,outer coast range} In the bay area, this is the Santa Cruz mountains and the Mt. Tam area.
 

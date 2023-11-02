@@ -1,0 +1,5 @@
+sci:Eurybia radulina
+color: white
+
+genus: wood asters
+x:ba
