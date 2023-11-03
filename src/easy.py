@@ -29,11 +29,11 @@ def add_easy_re(re, match, sub):
     _ex += '|' + re
     _repl_easy_dict[match] = sub
 
-#add_easy_re(r'\b1/2\b', '1/2', '&frac12;')
-#add_easy_re(r'\b1/3\b', '1/3', '&frac13;')
-#add_easy_re(r'\b2/3\b', '2/3', '&frac23;')
-#add_easy_re(r'\b1/4\b', '1/4', '&frac14;')
-#add_easy_re(r'\b3/4\b', '3/4', '&frac34;')
+add_easy_re(r'\b1/2\b', '1/2', '&frac12;')
+add_easy_re(r'\b1/3\b', '1/3', '&frac13;')
+add_easy_re(r'\b2/3\b', '2/3', '&frac23;')
+add_easy_re(r'\b1/4\b', '1/4', '&frac14;')
+add_easy_re(r'\b3/4\b', '3/4', '&frac34;')
 
 _repl_easy_regex = re.compile(f'({_ex})')
 
