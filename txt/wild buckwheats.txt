@@ -149,7 +149,7 @@ species: wicker buckwheat
 ==elegant wild buckwheat:E. elegans
 . flowers not at branchlet tips, generally appressed with no peduncles
 . involucres 1--1.5 mm
-. very rare
+. very rare in Henry Coe
 
 ==wand buckwheat:E. roseum
 . flowers not at branchlet tips, generally appressed with no peduncles

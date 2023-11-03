@@ -20,6 +20,21 @@ _repl_easy_dict = {
 }
 
 _ex = '|'.join(map(re.escape, list(_repl_easy_dict.keys())))
+
+# Of course I made the "easy" substitution more complicated.
+# These substitutions require extra RE controls besides just
+# the characters being matched.
+def add_easy_re(re, match, sub):
+    global _ex
+    _ex += '|' + re
+    _repl_easy_dict[match] = sub
+
+#add_easy_re(r'\b1/2\b', '1/2', '&frac12;')
+#add_easy_re(r'\b1/3\b', '1/3', '&frac13;')
+#add_easy_re(r'\b2/3\b', '2/3', '&frac23;')
+#add_easy_re(r'\b1/4\b', '1/4', '&frac14;')
+#add_easy_re(r'\b3/4\b', '3/4', '&frac34;')
+
 _repl_easy_regex = re.compile(f'({_ex})')
 
 def repl_easy(matchobj):
@@ -35,7 +50,8 @@ def easy_sub_safe(txt):
     txt = re.sub(r'(?<![\w.,])"|\A"', r'&ldquo;', txt)
 
     # Replace a hyphen between two numbers (digits) with an en-dash (like --).
-    txt = re.sub(r'(\d)-(\d)', r'\1&ndash;\2', txt)
+    # Note that this is done before substitution of fractions (&frac...;)
+    txt = re.sub(r'(?<=\d)-(?=\d)', r'&ndash;', txt)
 
     # Perform all the easy substitutions from _repl_easy_dict.
     txt = _repl_easy_regex.sub(repl_easy, txt)

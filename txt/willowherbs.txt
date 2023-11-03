@@ -43,6 +43,7 @@ color: pale purple
 . see also the 5-petaled {-stiff velezia}
 
 ==denseflower willowherb:E. densiflorum
+color: pale purple
 . 5--150 cm tall, simple or branched distally
 . leaf 14--85 mm, lanceolate to sublinear, +- sessile; distal leaves hairy
 . inflorescence leafy, +- dense spike

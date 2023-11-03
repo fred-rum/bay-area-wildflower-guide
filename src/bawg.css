@@ -1233,11 +1233,6 @@ button.term:hover {
     color: white;
     cursor: pointer;
 }
-@media (min-width: 500px) {
-    #clear {
-	display: inline-flex;
-    }
-}
 #clear:active {
     background-color: #d10000;
 }

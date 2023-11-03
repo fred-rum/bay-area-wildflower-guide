@@ -13,13 +13,21 @@ Key features:
 # it an alternative common name of "monkeyflowers".
 # And because Diplacus might as well match, I do the same for it.
 
-==Diplacus spp.
+==genus Diplacus
 xcom:monkeyflowers
 . pedicel generally < calyx
 . flowers orange or purple
 
-==Erythranthe spp.
+==genus Erythranthe
 xcom:monkeyflowers
 . pedicel generally > calyx
-. calyx lobes with prominent midribs
+. calyx lobes generally << tube, with prominent midribs
 . flowers yellow, red, or (one) purple
+
+==false monkeyflower:Mimetanthe pilosa
+acom: snouted monkey flower
+genus: n/a
+x:any
+color: yellow
+. pedicel generally > calyx
+. ccalyx lobes +- tube, with faint unraised midribs

@@ -1,0 +1,30 @@
+sci:genus Nicotiana
+x:rare
+
+==tree tobacco:N. glauca
+. shrub or small tree
+.. all others are herbs
+. herbage glabrous, glaucous
+.. others are generally glandular-hairy
+
+==indian tobacco:N. quadrivalvis
+color: white
+. cauline leaves +- sessile (except lowest)
+. corolla limb 20--50 cm wide [diameter?]
+. calyx lobes +- unequal
+. not to be confused with the "indian tobacco" of the eastern US, <i>Lobelia inflata</i>, which is in a different family
+
+==many-flowered tobacco:N. acuminata var. multiflora
+color: white
+species:manyflower tobacco
+xx:ca
+. cauline leaves petioled
+. calyx dark-striped
+.. calyx lobes generally >= tube, unequal
+. plant densely glandular hairy
+
+==coyote tobacco:N. attenuata
+. cauline leaves petioled
+. calyx not striped
+.. calyx lobes < tube, +- equal
+. plant glabrous to +- sparsely glandular-hairy

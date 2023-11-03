@@ -1,0 +1,5 @@
+sci:Brickellia californica
+color: cream, other
+
+genus: brickellbushes
+x:ba
