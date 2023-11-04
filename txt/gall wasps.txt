@@ -94,3 +94,24 @@ bug:n/a
 gall:1489
 x:No other wasps in this genus are known to be introduced in California.
 . parasitizes {-common cat's-ear}
+
+==crystalline gall wasp:Andricus crystallinus
+bug:145049
+gall:1377
+. parasitizes {-california scrub oak}, {-blue oak}, {-leather oak}, {-oregon oak} (i.e. white oaks)
+
+==teardrop gall wasp:Diplolepis inconspicuis
+bug:n/a
+gall:1467
+. parasitizes {-california wild rose} and likely other {roses}
+
+==n/a:Periclistus pirata
+bug:n/a
+gall:2419
+. parasitizes {-nodular gall wasp} and thus indirectly {-california wild rose} and likely other {-roses}
+
+==nodular gall wasp:Diplolepis nodulosa
+bug:n/a
+gall:1401
+. parasitizes {-california wild rose} and likely other {-roses}
+. parasitized by {-Periclistus pirata}

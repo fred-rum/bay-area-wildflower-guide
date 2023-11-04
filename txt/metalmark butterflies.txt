@@ -1,0 +1,5 @@
+sci: family Riodinidae
+
+==mormon metalmark:Apodemia mormo
+bug:13414
+x:ba

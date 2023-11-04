@@ -19,3 +19,5 @@ member_link: self,family
 . often moth-like in appearcance: stocky body, short wings, large eyes
 . wings rest angled up or spread, rarely straight up
 . antenna club often bent slightly back toward the body
+
+==metalmark butterflies

@@ -1803,6 +1803,15 @@ support "form"
   "form" is a distinct form caused by diverse genetic differences,
     so the populations with that form don't form a genetically related clade
 
-Search for "garrapata" is highlighted incorrectly from main search bar
-
 Park name in parks.yaml should automatically exclude "^" or "$"
+
+Add a standard method of linking a gall to its host, e.g.
+  on: oaks
+  would cause the gallmaker's page to say "found on oaks"
+    nice and generic, so it also works for lerps, etc.
+  and the oaks page to say "Host for <gallmaker".
+  Remove "parasitizes" and "parasitized by" from text
+    (which is vague and possibly misleading, anyway)
+
+Separate oaks into a page per color
+  update links to each color of oak

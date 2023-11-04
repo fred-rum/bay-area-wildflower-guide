@@ -33,6 +33,7 @@ Parasitized by {-willow galls}.
 . very rare
 
 ==hinds' willow:S. exigua var. hindsiana
+color: yellow
 species: narrowleaf willow
 . shrub; twigs flexible at base
 . nectaries adaxial and abaxial
@@ -49,6 +50,7 @@ species: narrowleaf willow
 . uncommon
 
 ==arroyo willow:S. lasiolepis
+color: other
 . nectaries adaxial
 . anthers <= 0.6 mm, purple, aging to yellow
 . common

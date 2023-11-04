@@ -5,6 +5,7 @@ desc: A resource for identifying San Francisco Bay Area wildflowers.
 
 Use the search bar to look up any flower, or start at the top:
 . <a href="html/flowering-plants.html"><b>flowers</b></a>
+. <a href="html/galls.html">plant galls</a>
 . <a href="html/life.html">all life</a>
 
 <h2 id="offline">Use it Offline</h2>

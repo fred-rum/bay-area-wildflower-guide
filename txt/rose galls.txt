@@ -2,3 +2,9 @@ sci: n/a
 ignore_link: self
 
 ==spiny leaf gall wasp
+
+==teardrop gall wasp
+
+==Periclistus pirata
+
+==nodular gall wasp

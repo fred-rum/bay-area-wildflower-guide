@@ -5,3 +5,7 @@ bug:460
 . dark gray to black with broad orange or red band on forewing, forming an "X" shape that doesn't quite meet in the middle
 . head black with dull red spot on top, sometimes extending down onto face
 . pronotum with red transverse band, bordered anteriorly by two black spots, and posteriorly by two black semicircular lobes
+
+==large milkweed bug:Oncopeltus fasciatus
+bug:504
+. orange (or dark yellow) back with black band across middle, black diamond covering posterier, black diamond covering most of anterior (including pronotum), but with an orange border

@@ -81,22 +81,27 @@ color: white, pink, salmon
 . very common
 
 ==colorado desert wild buckwheat:E. deserticola
+. [this interpretation of Jepson is incorrect, but I haven't figured out the correct interpretation yet]
 . <b>flowers are individual</b>
 . flowers at inflorescence branch tips <b>and forks of branches</b>
 . shrub
 . very rare
 
 ==long-stemmed buckwheat:E. elongatum var. elongatum
+color: white, pink, salmon
 species: long-stemmed buckwheat
-. herb
+xx:ca
+. [this interpretation of Jepson is incorrect, but I haven't figured out the correct interpretation yet]
 . <b>flowers are individual</b>
 . flowers only at inflorescence branch tips
+. herb
 . very rare
 
 ==wright's buckwheat:E. wrightii
-. shrub or subshrub
+. [this interpretation of Jepson is incorrect, but I haven't figured out the correct interpretation yet]
 . <b>flowers are individual</b>
 . flowers only at inflorescence branch tips
+. shrub or subshrub
 . rare
 
 ]

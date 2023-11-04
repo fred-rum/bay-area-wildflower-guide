@@ -1,2 +1,0 @@
-sci:Salix lasiolepis
-color:other

@@ -11,7 +11,7 @@ The most popular references for galls are
 Ron Russo's Field Guide to Plant Galls of California and Other Western States (2007) and
 his <a href="https://press.princeton.edu/books/paperback/9780691205762/plant-galls-of-the-western-united-states">Plant Galls of the Western States</a> (2021).
 <br>
-An up-to-date internet resource for galls is <a href-"https://www.gallformers.org/">gallformers.org</a>.
+An up-to-date internet resource for galls is <a href="https://www.gallformers.org/">gallformers.org</a>.
 <br>
 A good online reference is Joyce Gross's web pages for
 <a href="https://joycegross.com/galls_ca_oak.php">oak calls</a> and

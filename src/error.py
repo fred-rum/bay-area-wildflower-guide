@@ -110,7 +110,7 @@ class Progress:
             # When a KeyboardInterrupt (causd by ^C) occurs, describe
             # the interrupted progress, but otherwise exit cleanly.
             warn_progress()
-            warn('KeyboardInterrupt)')
+            warn('KeyboardInterrupt')
             sys.exit(-1)
         elif exc_val:
             # An exception has occurred
