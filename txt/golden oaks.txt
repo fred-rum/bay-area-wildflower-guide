@@ -1,0 +1,16 @@
+sci: section Protobalanus
+acom: north america intermediate oaks
+
+==canyon live oak:Quercus chrysolepis
+color: other
+. leaf:
+.. 3--6 cm, leathery, roundish
+.. adaxially dark green
+.. abaxially golden-puberulent, easily wiped away with a finger to reveal the blue-green leaf, glabrous in age, dull, +- gray
+.. tip acute to abruptly pointed
+.. margin entire or spine-toothed
+. acorn nut shell +- woolly inside
+. evergreen
+. common
+. parasitized by {-round leaf gall wasp} (maybe), {-golden gall wasp}, {-woolly gall wasp}
+

@@ -16,148 +16,16 @@ Key features:
 
 The Marin extension of UC Davis provides some of the <a href="http://cemarin.ucdavis.edu/Programs/Custom_Program97/Types_of_oaks/">identification tips</a> below.
 
-[
-<h2>red oaks (section Lobatae)</h2>
+==red oaks
 . acorn cap scales thin, shell hairy to woolly inside, at least at tip
 . bark dark gray or gray-brown to black
 . includes the informal group of black oaks: {-Quercus kelloggii}, {-Quercus agrifolia}, and {-Quercus wislizeni}
 
-==california black oak:Q. kelloggii
-color:other
-. leaf:
-.. 9--20 cm
-.. adaxially glabrous, bright green
-.. abaxially finely tomentose, +- glabrous in age, pale green
-.. <b>moderately to deeply lobed</b>, lobes 1--4-toothed, teeth generally bristle-tipped
-. acorn cap usually about as deep as wide, often covering most of the acorn shell
-. deciduous
-. common
-. parasitized by {-ruptured twig gall wasp} and {-gouty stem gall wasp}
-
-==coast live oak:Q. agrifolia
-color:other
-. leaf:
-.. 2.5--6 cm, roundish
-.. <b>generally adaxially convex</b>, +- dull green
-.. abaxially glabrous to densely tomentose, dull, pale green; sometimes with hair clustered at junction of midvein and lateral veins; typically with 3--5 pairs of lateral veins
-.. tip rounded to spine-toothed
-.. margin rolled under or not, weakly spine-toothed
-. acorn cap usually about as deep as wide
-. evergreen
-. common
-. parasitized by {-live oak bud gall wasp}, {-ruptured twig gall wasp}, {-gouty stem gall wasp}, and {-live oak apple gall wasp}
-
-==interior live oak:Q. wislizeni
-. catkins widely spaced, not clustered
-. leaf:
-.. 2--5 cm, roundish or lanceolate
-.. adaxially +- flat
-.. abaxially generally +- shiny, yellow-green, hairless, typically with > 5 pairs of lateral veins
-.. tip generally abruptly pointed, but highly variable among leaves
-.. margin entire to spine-toothed
-.. petiole 3--15 mm, densely hairy on adaxial and abaxial surfaces
-. nut distally acute to +- obtuse
-. acorn cap bowl shaped, sometimes as deep as wide
-. evergreen
-. common
-. parasitized by  {-ruptured twig gall wasp}, {-gouty stem gall wasp}, and {-live oak apple gall wasp}
-
-==coast oak:Q. parvula
-. catkins clustered into groups
-. leaf:
-.. 3--9 cm, roundish or lanceolate
-.. adaxially +- flat
-.. abaxially glabrous, generally +- dull, generally with > 5 pairs of lateral veins
-.. tip obtuse to acute or acuminate
-.. margin entire to spine-toothed
-.. petiole 2--25 mm, generally hairy adaxially and almost smooth abaxially
-. nut distally +- rounded to obtuse (ignoring the little spine on the end)
-. acorn cap bowl shaped, usually wider than deep
-. evergreen
-. uncommon
-
-]
-[
-<h2>golden oaks (section Protobalanus)</h2>
+==golden oaks
 . thick acorn cap scales covered in golden hairs
 . bark a pale gray
 
-==canyon live oak:Q. chrysolepis
-color: other
-. leaf:
-.. 3--6 cm, leathery, roundish
-.. adaxially dark green
-.. abaxially golden-puberulent, easily wiped away with a finger to reveal the blue-green leaf, glabrous in age, dull, +- gray
-.. tip acute to abruptly pointed
-.. margin entire or spine-toothed
-. acorn nut shell +- woolly inside
-. evergreen
-. common
-. parasitized by {-round leaf gall wasp} (maybe), {-golden gall wasp}, {-woolly gall wasp}
-
-]
-[
-<h2>white oaks (section Quercus)</h2>
+==white oaks
 . acorn cap scales generally thick/knobby, glabrous inside
 . bark light gray to +- white
 . deciduous
-
-==valley oak:Q. lobata
-color: other
-. leaf:
-.. margins deeply lobed (sinuses > 50% to midrib), without spines
-... sinuses typically wider than {-valley oak}.
-.. adaxially often +- shiny, dark green
-.. abaxially fine-tomentose, dull to pale green
-. acorn cap 10--30 mm deep, often as wide as deep, all scales tubercled
-. <b>nut 30--50 mm, generally long-conic</b>, distally acute to +- obtuse
-. common
-. favorite host of the {-california gall wasp}
-. parasitized by {-red cone gall wasp}
-
-==oregon oak:Q. garryana
-. leaf
-.. margins deeply lobed (sinuses > 50% to midrib), without spines
-... sinuses typically narrower than {-valley oak}.
-.. adaxially shiny, dark green
-.. abaxially short-hairy, dull, light green
-. acorn cap 4--9 mm deep, less deep than wide, proximal scales +- tubercled, distal +- not
-. <b>nut 20--30 mm, ovoid to +- spheric</b>, distally rounded
-. uncommon
-. an occasional host of the {-california gall wasp}.
-
-==blue oak:Q. douglasii
-color:other
-. leaf:
-.. adaxially dull, blue-green
-.. abaxially puberulent, pale blue-green
-.. tip generally rounded
-.. margin +- entire, wavy, or +- shallowly lobed (sinuses < 50% to midrib), without spines
-. acorn cap less deep than wide
-. common
-. an occasional host of the {-california gall wasp}.
-
-==leather oak:Q. durata
-color: other
-. leaf:
-.. adaxially convex, dull green
-.. margin wavy, often rolled under, spine-toothed or very pointy toothed
-. common
-
-==nuttall's scrub oak:Q. dumosa
-. leaf:
-.. adaxially [maybe convex?], +- shiny, green
-.. margin +- wavy or not, +- spine-toothed
-. uncommon
-
-==california scrub oak:Q. berberidifolia
-color:other
-<b>Caution: ID unsure</b>
-. leaf:
-.. adaxially +- flat to wavy, +- shiny, green
-.. abaxially with minute appressed stellate hairs, dull, pale green
-.. margin mucro- [sharp rib] or spine-toothed
-. uncommon
-. an occasional host of the {-california gall wasp}.
-
-]

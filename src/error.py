@@ -75,7 +75,7 @@ def error(msg):
 
 def fatal(msg):
     error(msg)
-    sys.exit(-1)
+    raise Exception
 
 # a class that supports code like this:
 #   with Progress(msg):

@@ -9,9 +9,7 @@ bug:12981
 ==alaska yellowjacket:Vespula alascensis
 bug:14087
 
-==european paper wasp:Polistes dominula
-bug:5081
-. the mostly vibrant-orange antennae are diagnostic within North America
+==typical paper wasps
 
 ==common aerial yellowjacket:Dolichovespula arenaria
 bug:12983

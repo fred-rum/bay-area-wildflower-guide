@@ -41,7 +41,7 @@ traits = set()
 # Each props value can be either a set of supported property actions
 # (e.g. 'do') or string of abbreviation (e.g. 'd').
 # Abbreviations are as follows:
-#  f: 'error' and 'warn' - flag a problem as appropriate
+#  f: 'fatal', 'error', and 'warn' - flag a problem as appropriate
 #  d: 'do' - perform the action as appropriate
 props = {
     'create': 'fd',
@@ -81,7 +81,7 @@ props = {
     'link_birds': 'd',
     'link_bayarea_calflora': 'd',
     'link_bayarea_inaturalist': 'd',
-    'default_completeness': set(('do', 'caution', 'warn', 'error')),
+    'default_completeness': set(('do', 'caution', 'warn', 'error', 'fatal')),
 }
 # In addition to the above, we also automatically define the following:
 #   'photo_requires_{trait}': 'f',
@@ -127,7 +127,7 @@ def init_props():
             if 'd' in action_str:
                 action_set.add('do')
             if 'f' in action_str:
-                action_set.update({'warn', 'error'})
+                action_set.update({'warn', 'error', 'fatal'})
             props[prop] = action_set
 
     prop_re = '|'.join(props.keys())
@@ -2251,6 +2251,8 @@ class Page:
             return
 
         if prop in self.prop_action_set:
+            if 'fatal' in self.prop_action_set[prop]:
+                fatal(f'fatal {prop}: {msg}')
             if 'error' in self.prop_action_set[prop]:
                 error(f'error {prop}: {msg}')
             elif 'warn' in self.prop_action_set[prop]:
@@ -3310,6 +3312,8 @@ class Page:
                     else:
                         msg = f'completeness not specified in {self.full()}'
 
+                        if self.rp_action(prop, 'fatal'):
+                            error(f'fatal default_completeness: {msg}')
                         if self.rp_action(prop, 'error'):
                             error(f'error default_completeness: {msg}')
                         elif self.rp_action(prop, 'warn'):

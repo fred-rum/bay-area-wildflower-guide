@@ -5,7 +5,7 @@ do create: family
 do link: self-/genus
 warn link: genus-below
 
-do member_link: self-/genus
+do member_link: self-species
 do member_name: class, genus, species
 do member_name_alias: genus, species
 do member_com_simple: self-species

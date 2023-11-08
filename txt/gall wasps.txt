@@ -4,10 +4,10 @@ bug:14878
 ==california gall wasp:Andricus quercuscalifornicus
 bug:130468
 gall:772
-. parasitizes white {-oaks}
-. a large tan gall that looks similar to a the flower#fruit of {-california buckeye}
-.. oak gall is attached directly to a branch, may be on a plant#tree with plant#leaves, may be lumpy, has no lines on which to split
-.. buckeye flower#fruit hangs from the tip of a drooping plant#stem, is typically seen only on leafless plant#trees, and may be partially split in half to show a shiny brown layer beneath
+. forms on the branches of {-white oaks}
+. a large tan gall that looks similar to the flower#fruit of {-california buckeye}
+.. oak gall is attached to the side of a branch, may be on a plant#tree with plant#leaves, may be lumpy, has no lines on which to split
+.. buckeye flower#fruit hangs from the tip of a drooping plant#twig, is typically seen only on leafless plant#trees, and may be partially split in half to show a shiny brown layer beneath
 
 ==live oak bud gall wasp:Callirhytis quercusagrifoliae
 bug:362927
