@@ -4,7 +4,7 @@ color: cream, white
 genus:n/a
 x:ba
 
-Parasitized by {-Diastrophus d-glandulosa-stem-swelling}.
+Hosts {-sticky cinquefoil galls}.
 
 There are variants of this species, but they have overlapping
 characteristics, and without common names they're just not very

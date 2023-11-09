@@ -1,11 +1,11 @@
-sci:Symphoricarpos spp.
+sci: genus Symphoricarpos
 x:ba
 
 Key features:
 . plant height
 . number of berries in each cluster
 
-Both species are parasitized by {-snowberry sawfly}.
+Both species host {-snowberry sawfly}.
 
 ==garden snowberry:S. albus var. laevigatus
 species:common snowberry

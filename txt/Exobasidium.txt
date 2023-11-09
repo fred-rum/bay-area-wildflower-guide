@@ -23,20 +23,11 @@ Relevent iNaturalist comments in chronological order:
 <a href="https://www.inaturalist.org/observations/3132191#activity_comment_10b892ce-ec95-43f6-8c2f-942b4332aa4f">5</a>,
 <a href="https://www.inaturalist.org/observations/27716705#activity_comment_88a9c73a-d806-4c12-b770-ca848b40a264">6</a>.
 
-==n/a:Exobasidium arctostaphyli
-gall:4400
-. forms bright red blisters on the surface of {-bearberries and manzanitas} leaves, turning glaucous on the inner side
-.. blisters cause only a minor buckling of the leaf surface
-.. compare to {-Tamalia}, which cause signifant swelling and distortion of the leaf edge
-. see above for discussion
+==Exobasidium arctostaphyli
 
 ==azalea gall:Exobasidium vaccinii
 gall:1660
 . parasitizes only lingonbery (Vaccinium vitis-idaea)
-. see above for discussion
+. see {-genus Exobasidium} for discussion
 
-==n/a:Exobasidium a-spp-whole-shoot-discoloration
-sci_i:n/a
-gall:4548
-. commonly identified on iNaturalist on various plant hosts, but should probably be identified on {-bearberries and manzanitas} only as {-Exobasidium} until properly researched
-. see above for discussion
+==Exobasidium a-spp-whole-shoot-discoloration

@@ -1,4 +1,5 @@
-sci:Dermacentor spp.
+sci:genus Dermacentor
+bug:15488
 
 ==pacific coast tick:D. occidentalis
 bug:96845

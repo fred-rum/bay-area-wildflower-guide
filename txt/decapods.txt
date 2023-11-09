@@ -1,5 +1,8 @@
 sci:order Decapoda
+bug:350324
 
 ==signal crayfish:Pacifastacus leniusculus
+bug:394340
 
 ==striped shore crab:Pachygrapsus crassipes
+bug:523430

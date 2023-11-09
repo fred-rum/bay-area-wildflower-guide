@@ -6,7 +6,7 @@ All willows are dioecious.  The key presented here is for staminate
 plants because it's easiest.  Jepson also includes keys to pistillate
 and vegetative plants that are more complex.
 
-Parasitized by {-willow galls}.
+Hosts {-willow galls}.
 
 ==pacific willow:S. lasiandra
 . 3--5 stamens

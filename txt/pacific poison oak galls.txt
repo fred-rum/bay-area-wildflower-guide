@@ -1,4 +1,8 @@
 sci: n/a
 ignore_link: self
 
-==poison ivy leaf gall mite
+==poison ivy leaf gall mite:Aculops rhois
+xcom:poison ivy leaf mite
+bug:214835
+gall:554
+. forms on leaf surfaces of {-pacific poison oak}

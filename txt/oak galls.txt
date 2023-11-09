@@ -1,15 +1,85 @@
 sci: n/a
 ignore_link: self
 
-==california gall wasp
-==live oak bud gall wasp
-==ruptured twig gall wasp
-==gouty stem gall wasp
-==live oak apple gall wasp
-==round leaf gall wasp
-==beaked spindle gall wasp
-==beaked twig gall wasp
-==round gall wasp
-==red cone gall wasp
-==golden gall wasp
-==woolly gall wasp
+<h2>galls on red oaks</h2>
+
+==live oak bud gall wasp:Callirhytis quercusagrifoliae
+bug:362927
+gall:1311
+. small, green, berry-like
+. forms in place of plant#buds on branches of {-coast live oak}
+
+==live oak apple gall wasp:Amphibolips quercuspomiformis
+bug:147536
+gall:1313
+. forms in place of plant#buds on branches of {-coast live oak} and {-interior live oak}
+. different gall forms in spring vs. summer
+
+==gouty stem gall wasp:Callirhytis quercussuttoni
+bug:184482
+gall:1318
+. forms within branches of {-coast live oak} and {-interior live oak}
+
+<h2>galls on golden oaks</h2>
+
+==ruptured twig gall wasp:Callirhytis perdens
+bug:168095
+gall:1308
+. forms within branches of {-red oaks}
+. after the stem ruptures, the fissures turn black
+.. other stem galls of red oaks don't create black fissures
+
+==round leaf gall wasp:Heteroecus flavens
+bug:n/a
+gall:2100
+x:more
+. forms within leaves of {-canyon live oak} and huckleberry oak
+
+==beaked spindle gall wasp:Heteroecus pacificus
+bug:357785
+gall:1958
+. forms within the tips of branches of {-canyon live oak} and huckleberry oak
+x:more
+
+==golden gall wasp:Heteroecus melanoderma
+bug:1445744
+gall:1957
+. wool does not easily rub off ^https://bugguide.net/node/view/1445744
+. forms in place of plant#buds on branches of {-canyon live oak} and huckleberry oak
+
+==woolly gall wasp:Heteroecus dasydactyli
+bug:357787
+gall:1903
+. wool is longer than on {-golden gall wasp}
+.. but the wool rubs off easily when rubbed, leaving a smooth surface ^https://bugguide.net/node/view/1445744
+. forms in place of plant#buds on branches of {-canyon live oak}
+
+<h2>galls on white oaks</h2>
+
+==california gall wasp:Andricus quercuscalifornicus
+bug:130468
+gall:772
+. forms on branches of {-white oaks}, usually {-valley oak}
+. a large tan gall that looks similar to the flower#fruit of {-california buckeye}
+.. oak gall is attached to the side of a branch, may be on a plant#tree with plant#leaves, may be lumpy, has no lines on which to split
+.. buckeye flower#fruit hangs from the tip of a drooping plant#twig, is typically seen only on leafless plant#trees, and may be partially split in half to show a shiny brown layer beneath
+
+==red cone gall wasp:Andricus kingi
+bug:43238
+gall:1511
+. forms on leaf surfaces of {-blue oak}, {-oregon oak}, and {-valley oak}
+
+==crystalline gall wasp:Andricus crystallinus
+bug:145049
+gall:1377
+. forms on lower leaf surfaces of {-california scrub oak}, {-nuttall's scrub oak}, {-blue oak}, {-leather oak}, and {-oregon oak}
+
+==round gall wasp:Burnettweldia washingtonensis
+bug:847685
+gall:1364
+. forms on branches of {-california scrub oak}, {-nuttall's scrub oak}, {-blue oak}, {-leather oak}, and {-valley oak}
+
+==beaked twig gall wasp:Burnettweldia plumbella
+bug:146606
+gall:1147
+. forms in place of plant#buds on branches of {-california scrub oak}, {-nuttall's scrub oak}, {-blue oak}, {-leather oak}, and {-oregon oak}

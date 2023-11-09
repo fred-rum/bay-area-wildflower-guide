@@ -1,10 +1,11 @@
 com:n/a
+acom:chinquapins
 sci:genus Chrysolepis
 x:any
 
 Chinquapins also occur in other genuses, but these are the only chinquapins in California.
 
-Both local species are parasitized by {-Dryocosmus castanopsidis}.
+Hosts {-chinquapin galls}.
 
 ==golden chinquapin:C. chrysophylla
 . leaf lanceolate to oblong, 5--15 cm, tip long-tapered

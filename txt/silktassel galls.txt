@@ -1,4 +1,8 @@
 sci: n/a
 ignore_link: self
 
-==silktassel flower gall midge
+==silktassel flower gall midge:Asphondylia garryae
+bug:n/a
+gall:1861
+. forms in place of plant#buds and flower#flowers on {-silktassels}
+.. Russo has the only local parasitized species as {-Garrya fremontii}, but <a href="https://www.ars.usda.gov/ARSUserFiles/80420580/Gagne_Jaschhof_2021_World_Cat_5th_Ed.pdf">Gagné and Jaschhof</a> list species of {-Garrya} in general.

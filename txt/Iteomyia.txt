@@ -1,13 +1,5 @@
 com:n/a
+bug:214670
 
-==n/a:Iteomyia s-lasiolepis-tooth-gall
-bug:n/a
-gall:3628
-sci_i:n/a
-. parasitizes {-arroyo willow} and related {-willows}
-
-==n/a:Iteomyia s-lasiolepis-tube-gall
-bug:n/a
-gall:2267
-sci_i:n/a
-. parasitizes {-arroyo willow}
+==Iteomyia s-lasiolepis-tooth-gall
+==Iteomyia s-lasiolepis-tube-gall

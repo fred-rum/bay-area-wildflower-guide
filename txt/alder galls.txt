@@ -1,4 +1,8 @@
 sci: n/a
 ignore_link: self
 
-==Dasineura alnus-fold-gall
+==n/a:Dasineura alnus-fold-gall
+sci_i:n/a
+bug:n/a
+gall:3149
+. parasitizes {-alders}

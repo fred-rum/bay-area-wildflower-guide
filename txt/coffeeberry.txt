@@ -6,7 +6,7 @@ x:hist
 
 xx:ba
 
-Parasitized by {-coffeeberry midrib gall moth}.
+Hosts {-coffeeberry midrib gall moth}.
 
 Jepson notes that "Frangula californica grows throughout most of California and the subspecies are somewhat separated geographically, but intermediates and variants in California exist between [almost] all the subspecies."  In my experience in the bay area, it is rare to find a plant that is clearly ssp. californica or ssp. tomentella, most having a mix of features.  (Plus, the leaf tip is rarely acute for any of them, so maybe there's another subspecies secretly mixed in.)
 

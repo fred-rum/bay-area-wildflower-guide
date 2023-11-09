@@ -1,5 +1,7 @@
 sci: section Quercus
 
+Various species of {-oak galls} can form on white oaks.
+
 ==valley oak:Quercus lobata
 color: other
 . leaf:
@@ -10,8 +12,6 @@ color: other
 . acorn cap 10--30 mm deep, often as wide as deep, all scales tubercled
 . <b>nut 30--50 mm, generally long-conic</b>, distally acute to +- obtuse
 . common
-. favorite host of the {-california gall wasp}
-. parasitized by {-red cone gall wasp}
 
 ==oregon oak:Quercus garryana
 . leaf
@@ -22,7 +22,6 @@ color: other
 . acorn cap 4--9 mm deep, less deep than wide, proximal scales +- tubercled, distal +- not
 . <b>nut 20--30 mm, ovoid to +- spheric</b>, distally rounded
 . uncommon
-. an occasional host of the {-california gall wasp}.
 
 ==blue oak:Quercus douglasii
 color:other
@@ -33,7 +32,6 @@ color:other
 .. margin +- entire, wavy, or +- shallowly lobed (sinuses < 50% to midrib), without spines
 . acorn cap less deep than wide
 . common
-. an occasional host of the {-california gall wasp}.
 
 ==leather oak:Quercus durata
 color: other
@@ -56,4 +54,3 @@ color:other
 .. abaxially with minute appressed stellate hairs, dull, pale green
 .. margin mucro- [sharp rib] or spine-toothed
 . uncommon
-. an occasional host of the {-california gall wasp}.

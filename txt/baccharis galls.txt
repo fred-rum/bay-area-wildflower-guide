@@ -1,8 +1,30 @@
+xcom: coyote brush galls
 sci: n/a
 
 ignore_link: self
 
-==coyote brush bud gall midge
-==coyote brush twisted stem gall midge
-==coyote brush stem gall moth
-==desert broom gallfly
+==coyote brush bud gall midge:Rhopalomyia californica
+bug:225834
+gall:2706
+. forms in place of plant#buds on {-coyote brush}
+. a lumpy gall up to 20 mm wide at the tip of a branch
+. often has plant#leaves growing through the gall
+
+# common name from BugGuide and Wikipedia
+==coyote brush twisted stem gall midge:Rhopalomyia baccharis
+acom:baccharis stem gall midge
+bug:225833
+gall:2705
+. forms within branches of {-coyote brush}
+. a swelling and slight bending of the twig
+. adults look the same as {-Rhopalomyia californica}, but galls and pupae are different
+
+==coyote brush stem gall moth:Gnorimoschema baccharisella
+bug:168328
+gall:2326
+. forms within branches of {-coyote brush}
+
+==desert broom gallfly:Aciurina thoracica
+bug:687267
+gall:3342
+. forms within branches of {-coyote brush}

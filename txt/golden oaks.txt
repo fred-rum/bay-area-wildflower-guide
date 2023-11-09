@@ -1,6 +1,8 @@
 sci: section Protobalanus
 acom: north america intermediate oaks
 
+Various species of {-oak galls} can form on golden oaks.
+
 ==canyon live oak:Quercus chrysolepis
 color: other
 . leaf:

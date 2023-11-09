@@ -1,4 +1,9 @@
+xcom: blackberry galls
+xcom: thimbleberry galls
 sci: n/a
 ignore_link: self
 
-==thimbleberry gallmaker
+==thimbleberry gallmaker:Diastrophus kincaidii
+bug:617964
+gall:1027
+. forms within branches of {-thimbleberry}

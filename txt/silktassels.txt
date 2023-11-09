@@ -5,7 +5,7 @@ Key features:
 . abaxial leaf hairs
 . fruit hairs are also useful, but perhaps cannot fully distinguish species on their own
 
-Parasitized by {-Asphondylia garryae}.
+Hosts {-Asphondylia garryae}.
 
 ==coast silk tassel:G. elliptica
 color: white,cream,other

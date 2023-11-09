@@ -7,8 +7,6 @@ Key features:
 . sepals with lateral lobes or not, glands or not
 . length of petals
 
-Parasitized by {-spiny leaf gall wasp}.
-
 [
 <h3>slender prickles</h3>
 
@@ -45,6 +43,7 @@ color: pink
 . sepals glandular or not, entire
 . <b>petals generally 15--25 mm</b>, pink
 . very common in the bay area
+. hosts {-rose galls}
 ;Edibility: Early Californians would occasionally eat the rose hips raw, but only after a frost had sweetened them. ^https://books.google.com/books?id=m5LsWJl2cCkC
 
 ==dog-rose:R. canina

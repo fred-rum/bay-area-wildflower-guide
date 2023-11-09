@@ -1,0 +1,8 @@
+sci: n/a
+ignore_link: self
+
+==catsear gall wasp:Phanacis hypochoeridis
+bug:n/a
+gall:1489
+x:No other wasps in this genus are known to be introduced in California.
+. forms within stems of {-common cat's-ear}

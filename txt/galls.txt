@@ -1,11 +1,28 @@
-sci:n/a
-
 is_top
-# There are no properties here because every taxon under this one
+
+# There are few properties here because every taxon under this one
 # gets its needed properties from its proper Linnaean hierarchy,
 # and we don't need any overrides for galls in particular.
 
-Taxons that create galls are listed in their normal taxonomic locations, but I've also collected them here for easier browsing based on the plant host.  This page also includes lerps, which look similar to galls.
+# The hierarchy below this page is intended to sit outside the Linnaean
+# hierarchy, but the script will try to find places for most pages
+# based on their contained species, e.g. within the "insects" taxon.
+# This means that some properties will get applied to those pagse that
+# we don't really need or want.  Thus, the following overrides are common:
+#
+# sci: n/a
+# to avoid a warning about the missing scientific name
+#
+# ignore_link: self
+# to prevent the page from being inserted as a real child within the Linnaean
+# hierarchy, e.g. as a page under "insects".
+
+# Descendent taxons should link to their ancestors in the "galls" hierarchy.
+do member_link: self-species
+
+Taxons that create galls are listed in their normal taxonomic locations, but I've also collected them here for easier browsing based on the host plant.  Although some galls are restricted to certain plant species, in most cases here I've organized them by host plant genus since the gall species are often more easily distinguished than the plant species.
+
+This page also includes lerps, which look similar to galls.
 <p>
 The most popular references for galls are
 Ron Russo's Field Guide to Plant Galls of California and Other Western States (2007) and
@@ -45,7 +62,7 @@ rep:sticky cinquefoil
 ==bramble galls
 rep:brambles
 
-==toyon gall thrips
+==toyon galls
 rep:toyon
 
 <h3>sunflower family</h3>
@@ -56,7 +73,7 @@ rep:genus Baccharis
 ==wormwood and sagebrush galls
 rep:wormwoods and sagebrushes
 
-==catsear gall wasp
+==cat's-ear galls
 rep:common cat's-ear,1
 
 <h3>other hosts</h3>
@@ -73,7 +90,7 @@ rep:willows
 ==snowberry galls
 rep:snowberries
 
-==manzanita galls
+==bearberry and manzanita galls
 rep:bearberries and manzanitas
 
 ==eucalyptus galls

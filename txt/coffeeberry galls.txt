@@ -1,4 +1,8 @@
 sci: n/a
 ignore_link: self
 
-==coffeeberry midrib gall moth
+==coffeeberry midrib gall moth:Sorhagenia nimbosus
+bug:243233
+gall:2215
+. forms within the midrib of leaves of {-coffeeberry}
+.. causes the leaf to curl up around the long axis

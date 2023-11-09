@@ -66,7 +66,7 @@ color: white
 .. all others are thread-like to linear, <= 1 mm wide
 . sepals hairy, stalked-glandular [example,2]
 . fruit: <b>raspberry-type</b> (hollow when picked), <b>red</b>
-. parasitized by {-thimbleberry gallmaker}
+. hosts {-thimbleberry gallmaker}
 ;Edibility: The fruit has a sweet and pleasant flavor, although it is very seedy. ^https://pfaf.org/User/Plant.aspx?LatinName=Rubus+parviflorus
 
 ==thornless elmleaf blackberry:R. ulmifolius var. anoplothyrsus

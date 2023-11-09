@@ -1,11 +1,5 @@
 sci:n/a
 
-==coffeeberry midrib gall moth:Sorhagenia nimbosus
-bug:243233
-gall:2215
-. parasitizes {-coffeeberry}
+==coyote brush stem gall moth
 
-==coyote brush stem gall moth:Gnorimoschema baccharisella
-bug:168328
-gall:2326
-. parasitizes {-coyote brush}
+==coffeeberry midrib gall moth

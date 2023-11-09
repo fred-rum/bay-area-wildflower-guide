@@ -1,0 +1,7 @@
+sci: n/a
+ignore_link: self
+
+==toyon gall thrips:Liothrips ilex
+bug:1499441
+gall:1948
+. forms galls within leaves of {-toyon}.

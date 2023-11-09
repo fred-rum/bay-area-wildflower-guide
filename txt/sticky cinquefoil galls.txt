@@ -1,4 +1,8 @@
 sci: n/a
 ignore_link: self
 
-==Diastrophus d-glandulosa-stem-swelling
+==n/a:Unknown d-glandulosa-stem-swelling
+sci_i:n/a
+bug:n/a
+gall:1755
+. forms within branches of {-sticky cinquefoil}

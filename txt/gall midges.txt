@@ -1,53 +1,18 @@
 sci:subfamily Cecidomyiinae
 
-==sagebrush woolly stem gall midge:Rhopalomyia floccosa
-bug:n/a
-gall:2023
-. parasitizes {-california sagebrush}
+==coyote brush bud gall midge
+==coyote brush twisted stem gall midge
 
-==coyote brush bud gall midge:Rhopalomyia californica
-bug:225834
-gall:2706
-. parasitizes {-coyote brush}
-. a lumpy gall up to 20 mm wide at the tip of a branch
-. often has plant#leaves growing through the gall
+==sagebrush woolly stem gall midge
 
-==coyote brush twisted stem gall midge:Rhopalomyia baccharis
-acom:baccharis stem gall midge
-bug:225833
-gall:2705
-. parasitizes {-coyote brush}
-. a swelling and slight bending of the twig
-. adults look the same as {-Rhopalomyia californica}, but galls and pupae are different
-
-# common name derived from Russo 2021
-==silktassel flower gall midge:Asphondylia garryae
-bug:n/a
-gall:1861
-. parasitizes {-silktassels}
-.. Russo has the only local parasitized species as {-Garrya fremontii}, but <a href="https://www.ars.usda.gov/ARSUserFiles/80420580/Gagne_Jaschhof_2021_World_Cat_5th_Ed.pdf">Gagné and Jaschhof</a> list species of {-Garrya} in general.
+==silktassel flower gall midge
 
 ==willow gall midges
-. parasitizes {-willows}
 
 ==genus Iteomyia
-bug:214670
-. parasitizes {-arroyo willow} and related {-willows}
 
-==n/a:Asphondylia mentzeliae
-bug:n/a
-gall:1911
-. parasitizes the flower bud of {-Mentzelia}
+==Asphondylia mentzeliae
 
-==n/a:Dasineura alnus-fold-gall
-bug:n/a
-gall:3149
-. parasitizes {-alders}
-sci_i:n/a
+==Dasineura alnus-fold-gall
 
-==ceanothus bud gall midge:Asphondylia ceanothi
-bug:1235724
-gall:2843
-. parasitizes {-ceanothus}
-. looks like a ball of leaves
-.. but may turn brown earlier than regular leaves
+==ceanothus bud gall midge

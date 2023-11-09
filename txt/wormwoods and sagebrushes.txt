@@ -5,6 +5,7 @@ x:!hist
 color: other
 . axillary leaf clusters present
 . very common
+. hosts {-sagebrush woolly stem gall midge}
 
 [
 <h2>generally no axillary leaf clusters</h2>

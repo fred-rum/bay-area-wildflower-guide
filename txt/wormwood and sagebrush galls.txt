@@ -1,4 +1,8 @@
 sci: n/a
 ignore_link: self
 
-==sagebrush woolly stem gall midge
+==sagebrush woolly stem gall midge:Rhopalomyia floccosa
+bug:n/a
+gall:2023
+. forms on {-california sagebrush}
+

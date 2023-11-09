@@ -5,6 +5,8 @@ x:any
 
 xx:ba
 
+Hosts {-tanoak galls}.
+
 ==tanoak:N. densiflorus var. densiflorus
 color: cream, other
 . tree up to 100 feet tall (but can be young or stunted, of course)

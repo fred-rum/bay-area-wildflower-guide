@@ -1,3 +1,6 @@
+warn photo_requires_bugid: genus-below
+bug:3
+
 ==insects
 end_hierarchy
 

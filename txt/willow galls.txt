@@ -1,15 +1,74 @@
 sci: n/a
 ignore_link: self
 
-==willow rosette gall midge
-==potato gall midge
-==willow beaked-gall midge
-==willow cone gall midge
-==willow rose gall midge
-==Iteomyia s-lasiolepis-tooth-gall
-==Iteomyia s-lasiolepis-tube-gall
-==willow apple gall sawfly
-==willow redgall sawfly
-==arroyo willow stem sawfly
-==willow stem sawfly
-==willow bead gall mite
+Gallformers.org lists particular species of {-willows} as hosts for each parasite, but it's always a bunch of species.  That makes me think that their lists might not be exhaustive, and in any case I'm not good enough at distinguishing willows to do anything with that info.
+
+==willow rosette gall midge:Rabdophaga salicisbrassicoides
+bug:164970
+gall:1626
+. forms a leafy bundle on or around a branch of {-willows}
+
+==potato gall midge:Rabdophaga salicisbatatus
+bug:n/a
+gall:3240
+. forms within branches of {-willows}
+.. not necessarily at the end of a twig
+.. reddish or greenish, bloated and lumpy
+
+==willow beaked-gall midge:Rabdophaga rigidae
+bug:479817
+gall:1636
+. forms within the tips of branches of {-willows}
+.. at the end of a twig or at the base of a terminal leaf cluster
+.. reddish or greenish, bloated and lumpy
+
+==willow cone gall midge:Rabdophaga strobiloides
+bug:270904
+gall:1634
+. forms at the end of twigs of {-willows}
+.. gray-hairy over brown pinecone shape
+
+==willow rose gall midge:Rabdophaga rosaria
+bug:n/a
+gall:592
+sci_g:Rabdophaga like-rosaria
+. forms a green leafy bundle on tips of branches of {-willows}
+
+==willow apple gall sawfly:Euura californica
+bug:n/a
+gall:3539
+. forms on leaf surfaces of {-willows}
+.. smooth red blister
+
+==willow redgall sawfly:Euura proxima
+bug:n/a
+gall:3629
+. forms on leaf surfaces of {-willows}
+.. lumpy red blister(s)
+
+==arroyo willow stem sawfly:Euura lasiolepis
+bug:n/a
+gall:3620
+. forms within branches of {-arroyo willow}
+
+==willow stem sawfly:Euura exiguae
+bug:n/a
+gall:3617
+. forms within branches of {-willows}
+
+==n/a:Iteomyia s-lasiolepis-tooth-gall
+bug:n/a
+gall:3628
+sci_i:n/a
+. forms within leaf surfaces of {-arroyo willow}
+
+==n/a:Iteomyia s-lasiolepis-tube-gall
+bug:n/a
+gall:2267
+sci_i:n/a
+. forms within leaf surfaces of {-arroyo willow}
+
+==willow bead gall mite:Aculus tetanothrix
+bug:n/a
+gall:636
+. forms on leaf surfaces of {-willows}

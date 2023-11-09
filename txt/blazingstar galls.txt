@@ -1,4 +1,8 @@
 sci: n/a
 ignore_link: self
 
-==Asphondylia mentzeliae
+==n/a:Asphondylia mentzeliae
+bug:n/a
+gall:1911
+. forms within the flower#flower flower#bud of {-genus Mentzelia}
+.. Gallformers.org lists only <i>Mentzelia multiflora</i>, but I have found it on {-lindley's blazingstar}

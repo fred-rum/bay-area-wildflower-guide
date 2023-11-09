@@ -1,7 +1,7 @@
 sci:genus Mentzelia
 x:hist
 
-Parasitized by {-Asphondylia mentzeliae}.
+Hosts {-Asphondylia mentzeliae}.
 
 ==lindley's blazingstar:Mentzelia lindleyi
 color: yellow

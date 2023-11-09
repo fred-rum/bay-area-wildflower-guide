@@ -1,6 +1,8 @@
 sci:Baccharis pilularis
 xx:any
 
+Hosts {-baccharis galls}.
+
 ==chaparral coyote brush:ssp. consanguinea
 . erect, brittle stems forming an erect shrub
 . leaves [supposedly] larger, >= 15 mm

@@ -1,6 +1,4 @@
 sci: family Tephritidae
 bug: 7017
 
-==desert broom gallfly:Aciurina thoracica
-bug:687267
-. parasitizes {-genus Baccharis}
+==desert broom gallfly

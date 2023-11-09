@@ -1,4 +1,8 @@
 sci: n/a
 ignore_link: self
 
-==snowberry sawfly
+==snowberry sawfly:Blennogeneris spissipes
+acom:bulbous-gall sawfly
+bug:n/a
+gall:732
+. forms within branches of {-snowberries}

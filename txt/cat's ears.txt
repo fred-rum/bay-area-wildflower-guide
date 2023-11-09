@@ -6,7 +6,7 @@ acom:rough cat's-ear
 color: yellow
 . rough-hairy
 . ligules [petals] 10--15 mm, much exceeding involucre, yellow, often +- red abaxially
-. parasitized by {-catsear gall wasp}
+. hosts {-catsear gall wasp}
 
 ==smooth cat's ear:H. glabra
 color: yellow

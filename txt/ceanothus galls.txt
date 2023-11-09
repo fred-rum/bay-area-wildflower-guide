@@ -1,4 +1,9 @@
 sci: n/a
 ignore_link: self
 
-==ceanothus bud gall midge
+==ceanothus bud gall midge:Asphondylia ceanothi
+bug:1235724
+gall:2843
+. forms on branches of {-ceanothus}
+. looks like a ball of leaves
+.. but may turn brown earlier than regular leaves

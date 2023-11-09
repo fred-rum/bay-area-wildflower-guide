@@ -1,5 +1,8 @@
 sci: n/a
-
 ignore_link: self
 
-==red gum lerp psyllid
+==red gum lerp psyllid:Glycaspis brimblecombei
+bug:270868
+gall:n/a
+. forms on leaf surfaces of {-river redgum} and {-forest red gum} by preference, but also other {-Eucalyptus}
+. lerps aren't actually galls, and they can easily be brushed off the host's surface

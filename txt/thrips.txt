@@ -1,5 +1,3 @@
 sci:order Thysanoptera
 
-==toyon gall thrips:Liothrips ilex
-bug:1499441
-. parasitizes {-toyon}.
+==toyon gall thrips

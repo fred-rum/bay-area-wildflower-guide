@@ -1,6 +1,5 @@
 sci:class Insecta
 bug:52
-warn photo_requires_bugid: genus-below
 
 There is a <a href="insect-glossary.html">glossary</a> for insects.
 
@@ -39,11 +38,7 @@ bug:156092
 
 ==gall midges
 
-==red gum lerp psyllid:Glycaspis brimblecombei
-bug:270868
-gall:n/a
-;. lerps aren't actually galls, and they can easily be brushed off the host's surface
-;. parasitizes {-river redgum} and {-forest red gum} by preference, but also parasitizes other {-Eucalyptus}.
+==red gum lerp psyllid
 
 ==european earwig:complex Forficula auricularia
 taxon_id:61524
