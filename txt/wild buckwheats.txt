@@ -132,7 +132,7 @@ species: wicker buckwheat
 . stem glabrous
 . involucres sessile, 3--4 mm, 5-toothed
 . basal leaf blades oblong-ovate
-. scattered
+. Marin, between Berkeley and Mt. Diablo
 
 ==coville's buckwheat:E. covilleanum
 . flowers at branchlet tips
@@ -180,6 +180,7 @@ color: white, pink, salmon
 . rare
 
 ==golden-carpet wild buckwheat:E. luteolum var. luteolum
+color: red purple
 . flowers not at branchlet tips, generally appressed with no peduncles
 . involucres 2--5 mm
 . outer perianth lobes not fan-shaped or hastate

@@ -83,3 +83,28 @@ gall:1364
 bug:146606
 gall:1147
 . forms in place of plant#buds on branches of {-california scrub oak}, {-nuttall's scrub oak}, {-blue oak}, {-leather oak}, and {-oregon oak}
+
+==convoluted gall wasp:Andricus confertus
+bug:145060
+gall:1376
+. forms on the midrib under leaves of {-valley oak}
+
+==spined turban gall wasp:Cynips douglasii
+sci_bg: Antron douglasii
+bug:81122
+gall:1607
+. forms on leaf veins of {-white oaks}
+. fewer "spines" than {-urchin gall wasp}, with smooth surfaces between the spines
+
+==urchin gall wasp:Cynips quercusechinus
+sci_b: Antron quercusechinus
+bug:135715
+gall:1724
+. forms on leaf veins of {-white oaks}
+. more "spines" than {-spined turban gall wasp}, with little or no space between the spines
+
+==honeydew gall wasp:Disholcaspis eldoradensis
+bug:753408
+gall:1355
+. forms on branches of {-white oaks}
+. produces honeydew, which may attract ants
