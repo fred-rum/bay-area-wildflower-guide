@@ -20,6 +20,11 @@ bug:184482
 gall:1318
 . forms within branches of {-coast live oak} and {-interior live oak}
 
+==pumpkin gall wasp:Dryocosmus minusculus
+bug:226346
+gall:1321
+. forms on (usually upper) leaf surfaces of {-red oaks} (specifically, the black oaks)
+
 <h2>galls on golden oaks</h2>
 
 ==ruptured twig gall wasp:Callirhytis perdens
@@ -108,3 +113,10 @@ bug:753408
 gall:1355
 . forms on branches of {-white oaks}
 . produces honeydew, which may attract ants
+
+<h2>galls on multiple types of oaks</h2>
+
+==live oak erineum mite:Aceria mackiei
+bug:504162
+gall:683
+. forms hairy pits on lower leaf surfaces of {-red oaks} (specifically, the live oaks) and {-canyon live oak}
