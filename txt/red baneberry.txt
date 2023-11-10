@@ -1,7 +1,19 @@
 sci:Actaea rubra
-color:white
 
 genus: baneberries and cohoshes
 x:ca
+
+The species has genetic variations (i.e. mutations) that produce two distinct forms, although individual plants with the same form aren't necessarily more closely related.  Note the potential confusion with the eastern species, white baneberry, which also has red-fruited and white-fruited forms.
+
+==red-fruited red baneberry:f. rubra
+sci_fpjF: A. rubra
+color:white
+. has red fruit
+. is the more common form in the bay area
+
+==white-fruited red baneberry:f. neglecta
+sci_fpjF: A. rubra
+. has white fruit [may be lightly tinged with red]
+. is the more common form in many areas, but not in the bay area
 
 Edibility: "The common name makes reference to a potent poison concentrated in the fruits." ^https://baynature.org/article/berries-of-the-forest/ "Symptoms include burning of mouth and throat, salivation, severe stomach cramps, headache, diarrhea, dizziness and hallucinations." ^https://www.wildflower.org/plants/result.php?id_plant=acru2

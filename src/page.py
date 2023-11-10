@@ -336,6 +336,7 @@ def format_elab(elab, ital=True):
             elab = f'{i0}{elab}{i1}'
             elab = re.sub(r' ssp\. ', f'{i1} ssp. {i0}', elab)
             elab = re.sub(r' var\. ', f'{i1} var. {i0}', elab)
+            elab = re.sub(r' f\. ', f'{i1} f. {i0}', elab)
             return elab
 
 # Compare two 'x' specifications (at the genus level or above).
@@ -925,7 +926,7 @@ class Page:
 
         if (not elab[0].islower()
             and len(elab_words) > 2
-            and elab_words[2] not in ('ssp.', 'var.')):
+            and elab_words[2] not in ('ssp.', 'var.', 'f.')):
             error(f'Unexpected elaboration for {elab}')
 
         if (not self.sci and
@@ -1775,7 +1776,7 @@ class Page:
                 elab = f'{rank.name} {name}'
             else:
                 # A species name is no different when elaborated.
-                # A parent would never be a subspecies or variant.
+                # A parent would never be a subspecies, variety, or form.
                 elab = name
 
             parent = find_page2(None, elab, from_inat)
@@ -2181,7 +2182,7 @@ class Page:
                                                  self.subset_trait,
                                                  self.subset_value)
 
-    # If there is only one local subspecies/variety of a species, then
+    # If there is only one local subspecies/variety/form of a species, then
     # the species page is likely to be a shadow page.  In that case, the
     # species page can often be considered equivalent to its child, i.e.
     # - an observation of the species can be treated as an observation of
@@ -2308,7 +2309,13 @@ class Page:
                               f'{self.full()} has a {trait} assigned but has no photos')
 
     def expand_abbrev(self, sci):
-        if len(sci) > 3 and sci[1:3] == '. ':
+        if sci.startswith(('ssp. ', 'var. ', 'f. ')):
+            # sci has an abbreviated subspecies, variety, or form
+            if self.no_names:
+                self.set_sci(self.name)
+
+            return self.sci + ' ' + sci
+        elif len(sci) > 3 and sci[1:3] == '. ':
             # sci has an abbreviated genus name
             if self.no_names:
                 # If this page doesn't have a name yet, then either the
@@ -2322,12 +2329,6 @@ class Page:
                 return sci_words[0] + sci[2:]
             else:
                 fatal(f'Abbreviation "{sci}"  cannot be parsed in page "{self.full()}"')
-        if sci.startswith(('ssp. ', 'var. ')):
-            # sci has an abbreviated subspecies or variety
-            if self.no_names:
-                self.set_sci(self.name)
-
-            return self.sci + ' ' + sci
 
         return sci
 
@@ -2695,8 +2696,8 @@ class Page:
                 if (ancestor.rank in (Rank.genus, Rank.species) and
                     self.rank in (Rank.species, Rank.below) and
                     not ancestor.com):
-                    # If the scientific name is trivially derived from
-                    # the species/subspecies/variety name, and the ancestor
+                    # If the scientific name is trivially derived from the
+                    # species/subspecies/variety/form name, and the ancestor
                     # doesn't have a common name, don't bother to list it.
                     pass
                 else:
@@ -3326,7 +3327,7 @@ class Page:
                         return
                 elif complete == 'none':
                     if top == 'species':
-                        w.write('This species has no subspecies or variants.')
+                        w.write('This species has no subspecies or varieties.')
                     else:
                         error("x:none used for " + self.full())
                 elif complete == 'uncat':

@@ -323,6 +323,8 @@ def get_rank(elab):
         rank = 'subspecies'
     elif ' var. ' in elab:
         rank = 'variety'
+    elif ' f. ' in elab:
+        rank = 'form'
     else:
         rank = ''
 
@@ -510,7 +512,7 @@ def get_page_for_alias(orig, elab):
     (rank, elab) = get_rank(elab)
 
     # We record the rank we're aliasing *from* in our dictionary,
-    # but if it's a species, subspecies, or variety, we allow it to match
+    # but if it's a species, subspecies, variety, or form, we allow it to match
     # any rank in case it is a synonym of a taxon a different level.  E.g.
     # Dracaena marginata maps to variety Dracaena reflexa angustifolia.
     # However, a genus is only allowed to map to a genus.  Otherwise we
@@ -683,6 +685,8 @@ class Inat:
             elab = ' '.join((sci_words[0], sci_words[1], 'ssp.', sci_words[2]))
         elif rank == 'variety':
             elab = ' '.join((sci_words[0], sci_words[1], 'var.', sci_words[2]))
+        elif rank == 'form':
+            elab = ' '.join((sci_words[0], sci_words[1], 'f.', sci_words[2]))
         elif rank == 'hybrid':
             # Remove the special 'x' sign used by hybrids
             # and use my internal encoding instead.

@@ -212,6 +212,9 @@ def convert_rank_str_to_elab(rank_str, sci):
     elif rank_str == 'variety':
         return ' '.join((sci_words[0], sci_words[1],
                          'var.', sci_words[2]))
+    elif rank_str == 'form':
+        return ' '.join((sci_words[0], sci_words[1],
+                         'f.', sci_words[2]))
     elif rank_str == 'hybrid':
         return sci_words[0] + ' X' + sci_words[1]
     elif rank_str == 'species':
@@ -309,6 +312,8 @@ def parse_core_chains():
                 rank_str = 'subspecies'
             elif ' var. ' in elab:
                 rank_str = 'variety'
+            elif ' f. ' in elab:
+                rank_str = 'form'
             elif not elab[0].islower() and ' X' in elab:
                 rank_str = 'hybrid'
             else:

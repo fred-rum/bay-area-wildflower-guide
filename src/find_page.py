@@ -20,7 +20,7 @@ def is_sci(name):
     # If there isn't an uppercase letter anywhere, it's a common name.
     # If there is an uppercase letter somewhere, it's a scientific name.
     # E.g. "Taraxacum officinale" or "family Asteraceae".
-    return not name.islower() or name.startswith(('ssp. ', 'var. '))
+    return not name.islower() or name.startswith(('ssp. ', 'var. ', 'f. '))
 
 def is_elab(name):
     return is_sci(name) and ' ' in name
@@ -28,7 +28,7 @@ def is_elab(name):
 # Strip elaborations off the scientific name.
 # If keep is specified, keep certain elaborations:
 # x - X hybrid indication
-# b - var. or ssp.
+# b - ssp., var., or f.
 # g - spp.
 # r - rank
 def strip_sci(sci, keep=''):
@@ -39,9 +39,9 @@ def strip_sci(sci, keep=''):
     sci_words = sci.split(' ')
 
     if (len(sci_words) == 4 and
-        sci_words[2] in ('ssp.', 'var.') and
+        sci_words[2] in ('ssp.', 'var.', 'f.') and
         'b' not in keep):
-        # The name includes an 'ssp.' or 'var.' specifier.
+        # The name includes an 'ssp.', 'var.', 'f.' specifier.
         # The specifier is stripped from the 'sci' name.
         return ' '.join((sci_words[0], sci_words[1], sci_words[3]))
     elif len(sci_words) == 2 and sci_words[1] == 'spp.' and 'g' not in keep:
@@ -175,9 +175,9 @@ def find_sci(elab, from_inat=False):
                 pass
             else:
                 if page.rank is Rank.below:
-                    # If the found page's elaborated name is a subspecies or
-                    # variety, then the search name must be the opposite
-                    # variety or subspecies.
+                    # If the found page's elaborated name is a subspecies,
+                    # variety, or form, then the search name must be a
+                    # different type.
                     error(f'Conflict between {page.elab} and {elab}')
                 else:
                     # The scientific name matches, but the ranks are

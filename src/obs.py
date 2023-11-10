@@ -149,12 +149,16 @@ def read_obs_chains(f):
                           core_rank == 'variety'):
                         sci = ' '.join((sci_words[0], sci_words[1],
                                         'var.', sci_words[2]))
+                    elif (get_field('taxon_form_name') or
+                          core_rank == 'form'):
+                        sci = ' '.join((sci_words[0], sci_words[1],
+                                        'f.', sci_words[2]))
                     elif ' X' in sci:
                         pass
                     elif ' ' in sci and (rank is Rank.species or
                                          core_rank == 'species'):
-                        # If the scientific name has at least one space,
-                        # then it is a species, subspecies, or variety that
+                        # If the scientific name has at least one space, then
+                        # it is a species, subspecies, variety, or form that
                         # should have already been elaborated as necessary.
                         # ... unless it's a complex, which is a higher rank
                         # than species, so the first matching rank won't
@@ -192,6 +196,7 @@ def read_obs_chains(f):
                         if (group != orig_sci and
                             not ' ssp. ' in sci and
                             not ' var. ' in sci and
+                            not ' f. ' in sci and
                             not sci.startswith('complex ') and
                             not core_rank):
                             # We have to create a page for a taxon of unknown
@@ -215,7 +220,7 @@ def read_obs_chains(f):
                         #
                         # Note: this test isn't mixed in with the above
                         # 'group == orig_sci' tests because we don't want
-                        # to exclude species/subspecies/varieties here.
+                        # to exclude species/subspecies/varieties/forms here.
                         found_lowest_level = True
 
                 if found_lowest_level:
