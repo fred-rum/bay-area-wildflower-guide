@@ -4,11 +4,13 @@ xx:any
 Hosts {-baccharis galls}.
 
 ==chaparral coyote brush:ssp. consanguinea
+color: other
 . erect, brittle stems forming an erect shrub
 . leaves [supposedly] larger, >= 15 mm
 . found on coastal bluffs and inland areas
 
 ==n/a:ssp. pilularis
+color: other
 . prostrate, flexible stems forming a mat
 . leaves [supposedly] smaller, <= 15 mm
 . found in sandy coastal areas

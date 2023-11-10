@@ -12,9 +12,7 @@ A <a href="https://wabutterflyassoc.org/wp-content/uploads/2017/02/Key-to-the-Bl
 bug:41480
 genus:holarctic azures
 x:ca
-xx:uncat
-; ssp. chalcedona seems to be the only one in the bay area,
-; but I can't find any information for distinguishing subspecies.
+xx: iNaturalist lists only ssp. <i>echo</i> in the bay area, but not only is there no information about how to distinguish the supposed subspecies, BugGuide doesn't even know how to distinguish it from an look-alike eastern species.
 
 ==silvery blue:Glaucopsyche lygdamus
 bug:15915
