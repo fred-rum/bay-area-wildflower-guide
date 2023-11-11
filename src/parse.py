@@ -135,7 +135,7 @@ def parse_line_by_line(name, s, page, glossary):
     # Its order with respect to other parsing isn't important.
     s = easy_sub(s)
 
-    s = link_figures_text(name, s)
+    s = link_figures_text(name, s, page, glossary)
 
     # Break the text into lines, then perform easy substitutions on
     # non-keyword lines and decorate bullet lists.

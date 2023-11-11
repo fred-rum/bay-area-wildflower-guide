@@ -138,14 +138,18 @@ def link_figures_thumb(name, txt, page, glossary):
     return re.sub(r'^(figure:.*?(?:\.svg)?(?:\nfigure:.*?(?:\.svg|))*)$',
                   repl_figure_thumbs, txt, flags=re.MULTILINE)
 
-def link_figures_text(name, txt):
+def link_figures_text(name, txt, page, glossary):
     def repl_figure_text(matchobj):
         figure = matchobj.group(1)
         text = matchobj.group(2)
         if not text:
             text = 'figure'
-        file = figure_file(name, figure)
-        fileurl = url('../' + file)
+        imagefile = figure_file(name, figure)
+        if page:
+            page.figure_list.append(imagefile)
+        if glossary:
+            glossary.figure_list.append(imagefile)
+        fileurl = url('../' + imagefile)
         return f'<a href="{fileurl}">[{text}]</a>'
 
     return re.sub(r'\[figure:(.*?)(?:\.svg)?(?:,(.*?))?\]',
