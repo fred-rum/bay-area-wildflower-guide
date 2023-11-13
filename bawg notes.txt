@@ -1815,3 +1815,6 @@ Add a standard method of linking a gall to its host, e.g.
 
 Separate oaks into a page per color
   update links to each color of oak
+
+Change ':' to '&times;' after highlighting in autocomplete
+  e.g. Elymus × hansenii, Iris × germanica

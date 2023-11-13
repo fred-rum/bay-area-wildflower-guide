@@ -177,7 +177,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0210+2322
 
 ==coastal bush lupine:L. arboreus
 acom:yellow bush lupine
-color: yellow, cream
+color: yellow, cream, purple, pale purple
 . habit: <b>Shrub 5--20 dm</b>, green-glabrous to silver-hairy
 . stem: woody, erect
 . leaf: cauline; stipules 8--12 mm; petiole 2--3(6) cm; leaflets 5--12, 20--60 mm

@@ -3,15 +3,15 @@ x:hist/rare
 
 The parts of a larkspur flower are described in the {-larkspur glossary}.
 
-figure:foothill larkspur
-figure:foothill larkspur spur
+figure:larkspur
+figure:larkspur spur
 
 Key features:
 . number of flowers and whether the oldest (lowest) open-flowered pedicels are > 25 mm and > 2 &times; youngest
-. color of sepals, reflexed or not (especially none#lower sepals)
+. color of sepals, reflexed or not (especially lower sepals)
 . multiple stems or just one
 . stem length, hairy or +- glabrous and ridged or not (especially at base)
-. length of none#lower petal blades, and width of petal lobes
+. length of lower petal blades, and width of petal lobes
 . proximal petiole (leaf stem) hairs > 0.5 mm & straight, spreading, white, or [maybe] not
 . leaf hairy adaxially or not, abaxially or not
 
@@ -19,33 +19,11 @@ There may be additional useful features that I haven't pulled from Jepson eFlora
 
 ==red larkspur:D. nudicaule
 color: red
-. sepals forward-pointing, <b>scarlet to orange-red (dull yellow)</b>, none#lateral sepals 8--16 mm, spur 12--34 mm
+. sepals forward-pointing, <b>scarlet to orange-red (dull yellow)</b>, lateral sepals 8--16 mm, spur 12--34 mm
 . petals +- glabrous to naked eye
 . stem 15--50 cm (--125), generally glabrous
 . common in bay area
-See also {-california fuchsia}, which does not have a spur behind the stem and has much longer filaments.
-
-==zigzag larkspur,-2:D. patens
-xx:uncat
-color: purple
-. number of flowers and pedicel length indeterminate
-. <b>generally < 6 flowers on main axis?</b> [how many axes are there?]; if more, oldest open-flowered pedicels generally > 25 mm and > 2 &times; youngest
-. sepals bright or dark blue [or purple, derp], <b>reflexed</b>, generally glabrous
-. leaf generally on lower 1/3 of stem, +- glabrous; basal, lower cauline divided > 80% to petiole; lobes 3--5, generally < 15 mm wide; terminal lobe widest near middle
-. <b>none#lower petal blades 4--6 mm</b>
-. stem 10--90 cm, <b>+- glabrous</b>
-. common in bay area
-
-==coastal larkspur:D. decorum
-color: purple
-. <b>2--20 flowers</b>
-. pedicels 10--63 mm, 10--25 mm apart
-. if >= 6 flowers, oldest open-flowered pedicels generally > 25 mm and > 2 &times; youngest
-. sepals dark blue-purple, puberulent abaxially, <b>generally not reflexed</b>
-. leaf generally basal, +- glabrous adaxially, generally +- puberulent abaxially and on margins; generally 5 lobes > 50% to petiole; lobes occasionally > 6 mm wide
-. <b>none#lower petal blades 6-11 mm</b>
-. stem 8--35 cm, +- erect, <b>hairy</b>
-. scattered around bay area
+See also {-california fuchsia}, which does not have a spur extending perpendicular to the pedicel and has much longer filaments.  There is also a scarlet larkspur (<i>Delphinium cardinale</i>), but it isn't found in the bay area.
 
 ==california larkspur:D. californicum
 color: pale purple, other
@@ -55,49 +33,64 @@ color: pale purple, other
 . leaf lobes 3--15, 5--<b>60</b> mm wide, tips +- sharply cut
 . common in bay area
 
-==royal larkspur:D. variegatum
+==zigzag larkspur,-2:D. patens
+xx:uncat
 color: purple
-. <b>flowers on main axis generally < 10</b>
-. pedicels +- ascending, 6--74 mm, 10--25 mm apart, generally puberulent
-. if <= 6 flowers on main axis, oldest open-flowered pedicel generally < 25 mm or < 2 &times; youngest
-. <b>stem generally < 50 cm, base hairy</b>
-. <b>proximal petiole hairs > 0.5 mm, straight, spreading, white, and some not</b>
-. flower spur 10--19 mm, straight or down-curved < 3 mm at tip
-. sepals generally dark royal-blue (white or lavendar)
-. none#lateral sepals 10--25 mm
-. leaf generally on proximal 1/3 of stem; lobes 3--15, generally overlapping
-. scattered around bay area
-
-==eldorado larkspur:D. hansenii
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1209+2030
-. <b>flowers generally > 12</b>
-. <b>stem 25--180 cm; base puberulent to hairy</b>
-. <b>proximal petiole hairs > 0.5 mm, straight, spreading, white, and some not</b>
-. sepals can be many possible colors
-. none#lateral sepals 7--13 mm
-. leaf hairy, especially abaxially; petioles hairy; lobes 3--18
-. Mt. Diablo
-
-==foothill larkspur:D. hesperium
-color: purple
-. <b>flowers 5--100</b> [CalPhotos shows them all with similar pedicel lengths, not longer at the bottom]
-. <b>stem 40--80 cm</b> (10--120), <b>base generally ridged</b>
-. proximal petiole hairs are unknowable
-. blades of none#lower petals hairier adaxially (inner lobe) than abaxially (outer lobe)
-. none#lateral sepals 7--16 mm
-. sepals spreading, not reflexed, dark blue-purple or pale depending on subspecies
-. pedicels ascending at < 45&deg; angle [from vertical? angle at tip?], puberulent
-. leaf adaxially +- glabrous, abaxially puberulent, prominently veined; lobes 3--14
+. number of flowers and pedicel length indeterminate
+. stem 10--90 cm, <b>+- [proximally] glabrous</b>
+. <b>generally < 6 flowers on main axis?</b> [how many axes are there?]; if more, oldest open-flowered pedicels generally > 25 mm and > 2 &times; youngest
+. sepals purple, perhaps shading toward blue, <b>reflexed</b>, generally glabrous
+. lower petal blades 4--6 mm
+.. <b>hairier on inner lobe than outer lobe</b>
+. leaf generally on lower 1/3 of stem, +- glabrous; basal, lower cauline divided > 80% to petiole
+.. 3--5 leaf lobes, generally < 15 mm wide but broader than {-D. parryi}
 . common in bay area
 
 ==san bernardino larkspur:D. parryi
-color: purple
-<b>Caution: ID unsure.</b>
 . <b>flowers 3--60</b>
 . <b>pedicels +- ascending, 5--68 mm, 8--50 mm apart, generally puberulent</b>
 . if <= 6 flowers, oldest open-flowered pedicel generally < 25 mm or < 2 &times; youngest
 . <b>stem 15--80 cm</b> (--110), base generally curly-puberulent, <b>base not ridged</b>
 . proximal petiole hairs are unknowable
-. blades of none#lower petals equally hairy adaxially, abaxially
-. leaf generally curly-puberulent; lobes 5--27, generally < 6 mm wide
+. lower petal blades 3--8 mm
+.. <b>equally hairy on both lobes</b> # from Jepson's "generally" in the genus description plus my interpretation of montereywildflowers.com's "both surfaces"
+. 5--27 leaf lobes, each generally < 6 mm wide, generally withering by bloom
 . Coe, near Cowell, and lots in Pinnacles
+
+==coastal larkspur:D. decorum
+color: purple
+. <b>2--20 flowers</b>
+. stem 8--35 cm, +- erect, <b>[proximally] hairy</b> (unlike {-D. patens})
+. pedicels 10--63 mm, 10--25 mm apart
+. if >= 6 flowers, oldest open-flowered pedicels generally > 25 mm and > 2 &times; youngest
+. sepals dark blue-purple, puberulent abaxially, <b>generally not reflexed</b> (unlike {-D. patens})
+. leaf generally basal, +- glabrous adaxially, generally +- puberulent abaxially and on margins
+.. generally 5 lobes > 50% to petiole; lobes occasionally > 6 mm wide
+. <b>lower petal blades 6-11 mm</b> (longer than {-D. patens})
+. scattered around bay area
+
+==royal larkspur:D. variegatum
+color: purple
+. <b>stem generally < 50 cm, base hairy, base not longitudinally ridged</b> (unlike {-D. hesperium})
+. <b>flowers on main axis generally < 10</b>
+. pedicels +- ascending, 6--74 mm, 10--25 mm apart, generally puberulent
+. if <= 6 flowers on main axis, oldest open-flowered pedicel generally < 25 mm or < 2 &times; youngest
+. <b>proximal petiole hairs > 0.5 mm, straight, spreading, white, and some not</b>
+. flower spur 10--19 mm, straight or down-curved < 3 mm at tip
+. sepals generally dark royal-blue (white or lavendar)
+.. lateral sepals 10--25 mm
+. lower petals have sparse marginal hairs ^https://montereywildflowers.com/ranunculaceae-larkspur/
+. leaf generally on proximal 1/3 of stem; lobes 3--15, generally overlapping
+. scattered around bay area
+
+==foothill larkspur:D. hesperium
+. <b>stem 40--80 cm</b> (10--120), <b>base generally ridged</b> (unlike {-D. variegatum})
+. <b>flowers 5--100</b> [CalPhotos shows them all with similar pedicel lengths, not longer at the bottom]
+. proximal petiole hairs are unknowable
+. blades of lower petals hairier adaxially (inner lobe) than abaxially (outer lobe)
+. lateral sepals 7--16 mm
+. sepals spreading, not reflexed, dark blue-purple or pale depending on subspecies
+. pedicels ascending at < 45&deg; angle [from vertical? angle at tip?], puberulent
+. leaf adaxially +- glabrous, abaxially puberulent, prominently veined
+.. 3--14 narrow leaf lobes, 2--8 mm wide ^https://montereywildflowers.com/ranunculaceae-larkspur/
+. common in bay area

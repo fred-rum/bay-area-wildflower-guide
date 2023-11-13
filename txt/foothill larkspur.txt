@@ -1,0 +1,9 @@
+sci:Delphinium hesperium
+xx:ba
+
+==western larkspur:ssp. hesperium
+color: purple
+. purple flowers
+
+==pale-flowered western larkspur:ssp. pallescens
+. white flowers, tinged with pink or purple
