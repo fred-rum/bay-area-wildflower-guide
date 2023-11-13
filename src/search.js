@@ -1229,7 +1229,9 @@ class PageTerm extends Term {
       var sci_highlight = null;
     }
 
-    return pfx_highlight + compose_full_name(com_highlight, sci_highlight);
+    var h = pfx_highlight + compose_full_name(com_highlight, sci_highlight);
+
+    return h.replace(/:/, '&times; ');
   }
 
   get_class() {
@@ -1464,7 +1466,7 @@ function fn_search(default_ac_selected) {
    remain active.  That's not what we want, so we clear the search before
    continuing with the handling of the clicked link.  Note that the event
    is already known to be interacting with the link, so removing the
-   autocomplete box with the link in it will still allow the click to
+   Autocomplete Box with the link in it will still allow the click to
    activate the link as desired. */
 function fn_ac_click() {
   clear_search();
