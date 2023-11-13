@@ -20,6 +20,9 @@ bug:14878
 ==urchin gall wasp
 ==honeydew gall wasp
 ==pumpkin gall wasp
+==disc gall wasp
+==Feron amphorus
+==irregular spindle gall wasp
 
 # chinquapin galls (which is also an oak gall wasp)
 # (which contributes to my reluctance to make an "oak gall wasps" page)

@@ -190,7 +190,6 @@ calyx inflated:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+07
 
 ==woolly clover:T. tomentosum
 color:pale purple, pink
-calyx inflated:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0708+2124
 . calyx inflated in fruit
 .. for all others below, calyx rarely inflated in fruit
 . rare

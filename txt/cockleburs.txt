@@ -1,0 +1,14 @@
+sci: genus Xanthium
+x:ca
+
+==rough cocklebur:X. strumarium
+color: other
+. no spines at nodes
+
+==spiny cocklebur:X. spinosum
+. golden spines at nodes, 15--30+ mm long
+
+==californian bur:X. orientale
+. has been occasionally observed in California on iNaturalist
+. but is unknown to Calflora, Jepson eFlora, and Flora of North America
+. <i>Xanthium</i> in general is of disputed origin, so this species may be caught up in that and/or may have bogus iNaturalist observations

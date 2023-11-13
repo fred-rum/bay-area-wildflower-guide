@@ -1804,3 +1804,5 @@ support "form"
     so the populations with that form don't form a genetically related clade
 
 Park name in parks.yaml should automatically exclude "^" or "$"
+
+Máyyan 'Ooyákma isn't searchable in BAWG search field

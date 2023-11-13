@@ -182,7 +182,9 @@ def strip_js():
 def add_elab(elabs, elab):
     if elab and elab[0].isupper():
         # convert the hybrid symbol to a colon so that it is easy to recognize
-        # and also easy to skip over during matching.
+        # and also easy to skip over during matching.  The JavaScript converts
+        # this back to the desired HTML &times; symbol when it matches the
+        # search.
         elab = re.sub(' X', ' :', elab)
     if elab and elab != 'n/a' and elab not in elabs:
         elabs.append(unidecode(elab))

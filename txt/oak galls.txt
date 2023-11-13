@@ -1,6 +1,7 @@
 sci: n/a
 ignore_link: self
 
+
 <h2>galls on red oaks</h2>
 
 ==live oak bud gall wasp:Callirhytis quercusagrifoliae
@@ -24,6 +25,10 @@ gall:1318
 bug:226346
 gall:1321
 . forms on (usually upper) leaf surfaces of {-red oaks} (specifically, the black oaks)
+
+==irregular spindle gall wasp:Andricus chrysolepidicola
+bug:607933
+gall:1343
 
 <h2>galls on golden oaks</h2>
 
@@ -58,6 +63,7 @@ gall:1903
 . wool is longer than on {-golden gall wasp}
 .. but the wool rubs off easily when rubbed, leaving a smooth surface ^https://bugguide.net/node/view/1445744
 . forms in place of plant#buds on branches of {-canyon live oak}
+
 
 <h2>galls on white oaks</h2>
 
@@ -106,13 +112,24 @@ sci_b: Antron quercusechinus
 bug:135715
 gall:1724
 . forms on leaf veins of {-white oaks}
-. more "spines" than {-spined turban gall wasp}, with little or no space between the spines
+. more "spines" than {-spined turban gall wasp}, with little space between the spines
 
 ==honeydew gall wasp:Disholcaspis eldoradensis
 bug:753408
 gall:1355
 . forms on branches of {-white oaks}
 . produces honeydew, which may attract ants
+
+==disc gall wasp:Feron parmula
+sci_bg: Andricus parmula
+bug:81140
+gall:1516
+
+==n/a:Feron amphorus
+sci_b: Andricus amphorus # and also Feron amphorus?  bugguide is weird here
+bug:2099732
+gall:1733
+
 
 <h2>galls on multiple types of oaks</h2>
 
