@@ -231,8 +231,9 @@ def write_pages_js(w):
         # the same as its common name.
         # Similarly, don't list anything if there are no common names.
         if (len(coms) > 1 or
-            (page.com and (page.com != page.name or not page.com.islower()))):
-            coms_str = unidecode('","'.join(coms))
+            (page.com and (page.com != filename(page.name)
+                           or not page.com.islower()))):
+            coms_str = '","'.join(coms)
             w.write(f',c:["{coms_str}"]')
 
         # List all scientific names that should find this page when searching.
@@ -258,7 +259,7 @@ def write_pages_js(w):
         # the same as its scientific name.
         # Similarly, don't list anything if there are no scientific names.
         if elabs and not (len(elabs) == 1 and page.name == elabs[0]):
-            elabs_str = unidecode('","'.join(elabs))
+            elabs_str = '","'.join(elabs)
             w.write(f',s:["{elabs_str}"]')
 
         if page.subset_of_page:

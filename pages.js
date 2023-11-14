@@ -2884,7 +2884,7 @@ const pages=[
 {p:"franciscan manzanita",s:["Arctostaphylos franciscana"],x:"u"},
 {p:"fremont cottonwood",s:["Populus fremontii"],x:"u"},
 {p:"fringed onion",s:["Allium fimbriatum"],x:"u"},
-{p:"fremont's silktassel",s:["Garrya fremontii"],x:"u"},
+{p:"fremont's silktassel",c:["frémont's silktassel"],s:["Garrya fremontii"],x:"u"},
 {p:"gairdner's yampah",c:["gairdner's yampah","common yampah"],s:["Perideridia gairdneri"],x:"u"},
 {p:"galium broomrape",s:["Aphyllon epigalium"],x:"u"},
 {p:"gambel's deer mouse",s:["Peromyscus gambelii"],x:"u"},

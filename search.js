@@ -89,28 +89,26 @@ function clear_search() {
   ac_selected = 0;
   hide_ac();
 }
-function compress(name) {
-  return name.toUpperCase().replace(/\W/g, '');
+function canonical_case(name) {
+  name = name.normalize('NFD');
+  name = name.replace(/[\u0300-\u036f]/g, '');
+  return name.toUpperCase();
 }
-function find_letter_pos(str, n) {
-  var regex = /[a-zA-Z0-9%#]/g;
+function find_letter_start(str, n) {
+  const regex = /[a-zA-Z0-9%#]/g;
   for (var i = 0; i <= n; i++) {
     regex.test(str);
-  }
-  if (regex.lastIndex == 0) {
-    return str.length;
-  } else {
-    return regex.lastIndex - 1;
-  }
-}
-function index_of_letter(str, letter_num) {
-  var letter_cnt = 0;
-  for (var i = 0; letter_cnt < letter_num; i++) {
-    if (str.substring(i).search(/^\w/) >= 0) {
-      letter_cnt++;
+    if (regex.lastIndex == 0) {
+      return str.length;
     }
-  }
-  return i;
+}
+  return regex.lastIndex - 1;
+}
+function find_letter_end(str, n) {
+  const pos = find_letter_start(str, n) + 1;
+  const regex = /^[\u0300-\u036f]*/;
+  regex.test(str.substring(pos));
+  return pos + regex.lastIndex;
 }
 function startsUpper(name) {
   return (name.search(/^[A-Z]/) >= 0);
@@ -159,7 +157,7 @@ function generate_ac_html() {
 }
 function check(search_str, prefix, match_str, pri_adj = 0, def_num_list = []) {
   const s = search_str;
-  const upper_no_pfx = match_str.toUpperCase()
+  const upper_no_pfx = canonical_case(match_str);
   var name_pos = match_str.indexOf(' ');
   if ((name_pos < 0) ||
       (match_str.substr(0, 1) == upper_no_pfx.substr(0, 1)) ||
@@ -171,7 +169,7 @@ function check(search_str, prefix, match_str, pri_adj = 0, def_num_list = []) {
     match_str = prefix + ' ' + match_str;
     var prefix_len = prefix.replace(/[^A-Za-z]/g, '').length;
   }
-  const upper_str = match_str.toUpperCase()
+  const upper_str = canonical_case(match_str);
   const m = upper_str.replace(/[^A-Z%#]/g, '');
   const num_list = [];
   const num_start = [];
@@ -324,12 +322,12 @@ class Tag {
 function highlight_match(match_info, default_name, is_sci, tag_list = []) {
   var h = '';
   if (match_info && match_info.match_ranges.length) {
-    var m = match_info.match_str;
+    var m = match_info.match_str.normalize('NFD');
     var match_ranges = match_info.match_ranges;
     var tag = new Tag('<span class="match">', '</span>');
     for (const range of match_ranges) {
-      var begin = find_letter_pos(m, range[0]);
-      var end = find_letter_pos(m, range[1] - 1) + 1;
+      var begin = find_letter_start(m, range[0]);
+      var end = find_letter_end(m, range[1] - 1);
       tag.add_range(begin, end);
     }
     tag_list.push(tag);
@@ -341,8 +339,8 @@ function highlight_match(match_info, default_name, is_sci, tag_list = []) {
           const mbegin = match_info.num_start[i];
           const mend = (match_info.num_start[i] +
                         match_info.num_missing_digits[i] - 1);
-          const begin = find_letter_pos(m, mbegin);
-          const end = find_letter_pos(m, mend) + 1;
+          const begin = find_letter_start(m, mbegin);
+          const end = find_letter_end(m, mend);
           tag.add_range(begin, end);
         }
       }
@@ -814,7 +812,7 @@ class AnchorTerm extends PageTerm {
   }
 }
 function fn_search(default_ac_selected) {
-  var search_str = e_search_input.value.toUpperCase();
+  var search_str = canonical_case(e_search_input.value);
   ac_list = [];
   if (/\w/.test(search_str)) {
     add_adv_terms(search_str);

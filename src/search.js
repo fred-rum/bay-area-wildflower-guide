@@ -193,17 +193,26 @@ function clear_search() {
   hide_ac();
 }
 
-/* When comparing names, ignore all non-letter characters and ignore case. */
-function compress(name) {
-  return name.toUpperCase().replace(/\W/g, '');
+/* When comparing names, ignore case differences and accents. */
+function canonical_case(name) {
+  /* adjust the Unicode representation to put the accents
+     in separate characters */
+  name = name.normalize('NFD');
+
+  /* strip accents */
+  name = name.replace(/[\u0300-\u036f]/g, '');
+
+  /* convert letters to uppercase */
+  return name.toUpperCase();
 }
 
-/* Find the position of the Nth letter in string 'str'.
+/* Find the position of the Nth letter in string 'str'
+   (where N is zero indexed).
    I.e. search for N+1 letters, then back up one.
    We treat digits *and* %# as letters since we may be
    in the middle of convert one form to the other. */
-function find_letter_pos(str, n) {
-  var regex = /[a-zA-Z0-9%#]/g;
+function find_letter_start(str, n) {
+  const regex = /[a-zA-Z0-9%#]/g;
 
   for (var i = 0; i <= n; i++) {
     /* We use test() to advance regex.lastIndex.
@@ -211,26 +220,31 @@ function find_letter_pos(str, n) {
        expect it to match.  (E.g. when finding the last letter of match,
        we really are looking for the last letter, which always exists.) */
     regex.test(str);
-  }
 
-  if (regex.lastIndex == 0) {
-    /* There aren't N+1 letters.  Presumably there are N letters, so the
-       notional next letter position is the end of the string. */
-    return str.length;
-  } else {
-    return regex.lastIndex - 1;
-  }
+    if (regex.lastIndex == 0) {
+      /* There aren't N+1 letters.  Something must have gone wrong.
+         Bail out with a reasonably safe value. */
+      return str.length;
+    }
 }
 
-function index_of_letter(str, letter_num) {
-  var letter_cnt = 0;
-  for (var i = 0; letter_cnt < letter_num; i++) {
-    if (str.substring(i).search(/^\w/) >= 0) {
-      letter_cnt++;
-    }
-  }
+  return regex.lastIndex - 1;
+}
 
-  return i;
+/* Find the position of the next character after the Nth letter in string 'str'
+   (where N is zero indexed).
+   This requires us to skip over any combining characters (e.g.
+   diacritics) trailing the Nth letter. */
+function find_letter_end(str, n) {
+  /* Get a preliminary value. */
+  const pos = find_letter_start(str, n) + 1;
+
+  /* Then adjust it to skip over combining characters. */
+  const regex = /^[\u0300-\u036f]*/;
+
+  regex.test(str.substring(pos));
+
+  return pos + regex.lastIndex;
 }
 
 /* These functions are run only on scientific names, so they only need
@@ -305,7 +319,7 @@ function check(search_str, prefix, match_str, pri_adj = 0, def_num_list = []) {
      convenience. */
   const s = search_str;
 
-  const upper_no_pfx = match_str.toUpperCase()
+  const upper_no_pfx = canonical_case(match_str);
 
   /* If match_str is of the format "<rank> <Name>", get the starting index of
      Name within m.  This assumes that <rank> is all normal letters, so the
@@ -332,7 +346,7 @@ function check(search_str, prefix, match_str, pri_adj = 0, def_num_list = []) {
   /* m is the string we're trying to match against, converted to uppercase
      and with punctuation removed (except '%' and '#', which represents a
      number group). */
-  const upper_str = match_str.toUpperCase()
+  const upper_str = canonical_case(match_str);
   const m = upper_str.replace(/[^A-Z%#]/g, '');
 
   /* Find the position and length of each % group in m.
@@ -580,19 +594,19 @@ function highlight_match(match_info, default_name, is_sci, tag_list = []) {
   var h = '';
 
   if (match_info && match_info.match_ranges.length) {
-    var m = match_info.match_str;
+    var m = match_info.match_str.normalize('NFD');
     var match_ranges = match_info.match_ranges;
 
     /* Convert match_ranges (which ignores punctuation) into string ranges
        (which include punctuation). */
     var tag = new Tag('<span class="match">', '</span>');
     for (const range of match_ranges) {
-      var begin = find_letter_pos(m, range[0]);
+      var begin = find_letter_start(m, range[0]);
 
       /* Stop highlighting just after letter N-1.  I.e. don't include
          the punctuation between letter N-1 and letter N, which is the
          first letter outside the match range. */
-      var end = find_letter_pos(m, range[1] - 1) + 1;
+      var end = find_letter_end(m, range[1] - 1);
 
       tag.add_range(begin, end);
     }
@@ -612,8 +626,8 @@ function highlight_match(match_info, default_name, is_sci, tag_list = []) {
           const mend = (match_info.num_start[i] +
                         match_info.num_missing_digits[i] - 1);
 
-          const begin = find_letter_pos(m, mbegin);
-          const end = find_letter_pos(m, mend) + 1;
+          const begin = find_letter_start(m, mbegin);
+          const end = find_letter_end(m, mend);
 
           tag.add_range(begin, end);
         }
@@ -1395,7 +1409,7 @@ function fn_search(default_ac_selected) {
      differences anywhere else in the code.  Note that this could fail for
      funky unicode such as the German Eszett, which converts to uppercase 'SS'.
      I'll deal with it if and when I ever use such characters in a name. */
-  var search_str = e_search_input.value.toUpperCase();
+  var search_str = canonical_case(e_search_input.value);
 
     /* Iterate over all possible search terms and accumulate a list of the
        best matches in ac_list (the autocomplete list). */
