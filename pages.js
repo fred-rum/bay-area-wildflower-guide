@@ -1109,7 +1109,7 @@ const pages=[
 {p:"willow family",s:["family Salicaceae"],x:"f",j:"hinds' willow,5",d:[436,1208]},
 {p:"horsetails",s:["genus Equisetum"],x:"k",j:"braun's giant horsetail,1",d:[409,1925,1938,2819,1960]},
 {p:"Micropus",s:["genus Micropus"],x:"k",j:"q-tips,1",d:[416,2279]},
-{p:"hawksbeard",s:["genus Crepis"],x:"k",j:"beaked hawksbeard,1",d:[417,2807,2802]},
+{p:"hawksbeards",s:["genus Crepis"],x:"k",j:"beaked hawksbeard,1",d:[417,2807,2802]},
 {p:"canada goose",s:["Branta canadensis"],x:"o",j:1,z:" B!>!K!O!c#6#P$=%@%K%R&2&j'2'3'm(;(A(J"},
 {p:"chaparral pea",s:["Pickeringia montana","genus Pickeringia"],x:"o",j:1,z:" $ '!g#M#R#o$]$c%W%f%i'''-'1'2'6(5(="},
 {p:"great horsetail",s:["Equisetum telmateia"],x:"k",j:"braun's giant horsetail,1",z:"&Z",d:[432,2830]},
