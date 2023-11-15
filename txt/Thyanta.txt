@@ -1,0 +1,9 @@
+com: n/a
+sci: genus Thyanta
+x:ca
+
+==red-shouldered stink bug:Thyanta pallidovirens
+bug:167538
+
+==red-shouldered stink bug:Thyanta custator
+bug:15344

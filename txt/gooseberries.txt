@@ -24,6 +24,9 @@ five sepals<br>
 anther filaments longer than petals
 </h3>
 
+[
+<h4>no internode bristles on young stems</h4>
+
 ==hillside gooseberry:Ribes californicum
 xx:uncat
 color: red purple
@@ -37,13 +40,30 @@ color: red purple
 ;Edibility: Ripe red berries are "palatable" ^http://floranorthamerica.org/Ribes_californicum
 ]
 
+==bitter gooseberry:Ribes amarum
+. purple-red sepals
+. white petals
+. purple or yellow-green anthers
+. styles glabrous at base
+. leaf blade glandular-hairy
+. no bristles between nodes
+. rare in Diablo range
+;Edibility: Ripe purple berries are "palatable." ^http://floranorthamerica.org/Ribes_amarum
+
+]
+[
+<h4>may have internode bristles on young stems</h4>
+
 ==canyon gooseberry:Ribes menziesii
 xx:uncat
 color: red purple
+. peduncle and pedicels glandular
+. hypanthium crimson with stalked glands and red bristles
 . purple-red sepals
 . white petals
 . white to tan anthers
 . styles glabrous at base
+. stamen length 1.5--1.8 &times; petals
 . leaf blade and petiole glandular-hairy [hard to see]
 . <b>dense bristles between nodes</b>
 ;Edibility: Ripe reddish-purple berries are "not palatable" ^http://floranorthamerica.org/Ribes_menziesii
@@ -59,26 +79,21 @@ bristles:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0903+072
 . fruit yellow
 . rare in Santa Cruz range
 
-==bitter gooseberry:Ribes amarum
-. purple-red sepals
-. white petals
-. purple or yellow-green anthers
-. styles glabrous at base
-. leaf blade glandular-hairy
-. no bristles between nodes
-. rare in Diablo range
-;Edibility: Ripe purple berries are "palatable." ^http://floranorthamerica.org/Ribes_amarum
-
 ==straggle bush:Ribes divaricatum var. pubiflorum
 acom:straggly gooseberry
 xx:ba
 species: spreading gooseberry
+. peduncle and pedicels not glandular [bracts may be glandular]
+. hypanthium greenish or purplish, glabrous or copiously pubescent
 . styles hairy at least at base [<a href="https://ucjeps.berkeley.edu/eflora/eflora_display.php?tid=65143">figure</a>]
 .. all others in this box have styles that are glabrous at base
 . purple to green sepals
 . white petals
+. stamen length 2.5--3.5 &times; petals
 . green to cream anthers
 . leaf blade generally hairy, but never glandular
-. internodes bristly or not
+. internodes bristly or not [may be as bristly as {-canyon gooseberry}: <a href="https://www.calflora.org/cgi-bin/viewphoto.cgi?arg=/app/up/mg/423/mg127198-0.jpg">example</a>]
 . fruit glabrous (not bristly)
 ;Edibility: Ripe purple-black berries are "palatable." ^http://floranorthamerica.org/Ribes_divaricatum
+
+]

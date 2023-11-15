@@ -1756,13 +1756,6 @@ replace spaces with hyphens in glossary anchors and their URLs
 
 make general glossary consistent: coast range or coastal range (or both)
 
-  /* Record whether the search string ends with punctuation.  This tells
-     highlight_match() to extend the highlighted range through punctuation.
-     E.g. while typing 'red ', the highlight would similarly reflect 'red '
-     (if there is indeed a space after 'red', that is). */
-  const ends_with_punct = 
-  --- requires passing more information than just search_str
-
 there are now two autocomplete results for 'blue flowers':
   one for the blue flowers taxon
   and one for advanced search
@@ -1804,3 +1797,9 @@ support "form"
     so the populations with that form don't form a genetically related clade
 
 Park name in parks.yaml should automatically exclude "^" or "$"
+
+Modify highlight_match() so that if the search string begins or ends with
+punctuation, and the highlighted match has the same punctuation before/after
+it, the highlight is extended to include the matching punctuation.
+E.g. in a search for '(inclusive)'.
+Requires search_str to be passed to highlight_match(), perhaps in match_info.

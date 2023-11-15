@@ -1,2 +1,3 @@
 sci:Chlorogalum pomeridianum
 color: white, other
+xx: maybe I could distinguish var. pomeridianum from var. divaricatum, but it's unlikely that I'd ever be able to distinguish var. minus, especially since FNA disagrees greatly with Jepson about its size.

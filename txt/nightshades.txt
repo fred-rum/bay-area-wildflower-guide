@@ -47,7 +47,7 @@ Flower key features:
 . anther length
 . style strongly exserted or not
 
-Stanford's Jasper Ridge program has a <a href="https://web.stanford.edu/dept/JRBP/plants/PDF/Solanum%20key.pdf">key (PDF)</a> for white-flowered nightshades.  Much more information about useful and non-useful features are in a free <a href="https://phytokeys.pensoft.net/article/31738/">research article</a> by Knapp et al.
+Stanford's Jasper Ridge program has a <a href="https://web.stanford.edu/dept/JRBP/plants/PDF/Solanum%20key.pdf">key (PDF)</a> for some white-flowered nightshades.  Much more information about useful and non-useful features are in a free <a href="https://phytokeys.pensoft.net/article/31738/">research article</a> by Knapp et al.
 
 The inflorescence typically has its flowers branching from a very short rhachis (axis), although occasionally they can be spaced out more.  Jepson and Stanford pretend to distinguish raceme-like and umbel-like inflorescences, but there appears to be no consistent difference.  The inflorescence is usually distinctly forked in {-forked nightshade), but other species may also rarely be forked.
 
@@ -60,7 +60,11 @@ color:white
 . <b>inflorescence forked</b> into two distinct, +- balanced sections
 . corolla: 12--20 mm diameter including lobes, white w/ yellow/green spots at base
 .. anthers 2.3--3.3 mm
-.. <b>filaments distinct</b>
+... anthers ellipsoid
+.. <b>filaments distinct</b>; free portion (where the filaments are not fused into a single tube)(0.9--1.6 mm) comparable in length to the anther (2.3--3.3 mm)
+.. <b>style strongly exerted</b> beyond anthers
+.. bud +- spherical
+... style strongly exerted from the bud
 
 ==greenspot nightshade:S. douglasii
 color: white
@@ -69,8 +73,11 @@ acom:douglas nightshade
 .. <b>peduncle 1.5--4 cm long</b>; <b>pedicels 10--41 mm long</b>, 0.3--0.4 mm in diameter at the base and 0.4--0.6 mm in diameter at the apex
 . corolla: <b>13--15+ mm diameter</b> including lobes, white, possibly tinged with lavender, w/ yellow/green spots at base often with a brown tinge or margin
 .. <b>anthers 2.5--4.5 mm</b>
-.. <b>filaments indistinct</b>
+... anthers ellipsoid and slightly tapered towards the tips
+.. <b>filaments indistinct</b>; free portion (where the filaments are not fused into a single tube) (0.1--0.5 mm) about 1/4 the length of the anther (3--4.5 mm, usually > 4 mm in North America)
 .. <b>style strongly exerted</b> beyond anthers
+.. bud +- ellipsoid, tapering to the apex
+... style not exerted from the bud
 . leaf: 1--9 cm, entire to coarsely irregularly <b>toothed</b>
 . hairs: generally simple, < 1mm, +- curved, white
 . fruit: <b>glossy</b> w/ <b>sepals not reflexed</b>

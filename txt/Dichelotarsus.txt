@@ -1,0 +1,7 @@
+com: n/a
+sci: genus Dichelotarsus
+x:more
+
+==n/a:Dichelotarsus cavicollis
+sci_b: Podabrus cavicollis
+bug:370123

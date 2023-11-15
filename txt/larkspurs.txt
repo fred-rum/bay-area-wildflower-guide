@@ -46,24 +46,13 @@ color: purple
 .. 3--5 leaf lobes, generally < 15 mm wide but broader than {-D. parryi}
 . common in bay area
 
-==san bernardino larkspur:D. parryi
-. <b>flowers 3--60</b>
-. <b>pedicels +- ascending, 5--68 mm, 8--50 mm apart, generally puberulent</b>
-. if <= 6 flowers, oldest open-flowered pedicel generally < 25 mm or < 2 &times; youngest
-. <b>stem 15--80 cm</b> (--110), base generally curly-puberulent, <b>base not ridged</b>
-. proximal petiole hairs are unknowable
-. lower petal blades 3--8 mm
-.. <b>equally hairy on both lobes</b> # from Jepson's "generally" in the genus description plus my interpretation of montereywildflowers.com's "both surfaces"
-. 5--27 leaf lobes, each generally < 6 mm wide, generally withering by bloom
-. Coe, near Cowell, and lots in Pinnacles
-
 ==coastal larkspur:D. decorum
 color: purple
 . <b>2--20 flowers</b>
 . stem 8--35 cm, +- erect, <b>[proximally] hairy</b> (unlike {-D. patens})
 . pedicels 10--63 mm, 10--25 mm apart
 . if >= 6 flowers, oldest open-flowered pedicels generally > 25 mm and > 2 &times; youngest
-. sepals dark blue-purple, puberulent abaxially, <b>generally not reflexed</b> (unlike {-D. patens})
+. sepals dark blue-purple, puberulent abaxially (e.g. on spur), <b>generally not reflexed</b> (unlike {-D. patens})
 . leaf generally basal, +- glabrous adaxially, generally +- puberulent abaxially and on margins
 .. generally 5 lobes > 50% to petiole; lobes occasionally > 6 mm wide
 . <b>lower petal blades 6-11 mm</b> (longer than {-D. patens})
@@ -88,9 +77,22 @@ color: purple
 . <b>flowers 5--100</b> [CalPhotos shows them all with similar pedicel lengths, not longer at the bottom]
 . proximal petiole hairs are unknowable
 . blades of lower petals hairier adaxially (inner lobe) than abaxially (outer lobe)
-. lateral sepals 7--16 mm
 . sepals spreading, not reflexed, dark blue-purple or pale depending on subspecies
+.. <b>sepals shorter than many other larkspurs</b>
 . pedicels ascending at < 45&deg; angle [from vertical? angle at tip?], puberulent
 . leaf adaxially +- glabrous, abaxially puberulent, prominently veined
 .. 3--14 narrow leaf lobes, 2--8 mm wide ^https://montereywildflowers.com/ranunculaceae-larkspur/
+.. abaxial veins prominent ^http://floranorthamerica.org/Delphinium_hesperium_subsp._hesperium
 . common in bay area
+
+==san bernardino larkspur:D. parryi
+. <b>flowers 3--60</b>
+. <b>stem 15--80 cm</b> (--110), base generally curly-puberulent, <b>base not ridged</b>
+. <b>pedicels +- ascending, 5--68 mm, 8--50 mm apart, generally puberulent</b>
+. if <= 6 flowers, oldest open-flowered pedicel generally < 25 mm or < 2 &times; youngest
+. proximal petiole hairs are unknowable
+. lower petal blades 3--8 mm
+.. <b>equally hairy on both lobes</b> # from Jepson's "generally" in the genus description plus my interpretation of montereywildflowers.com's "both surfaces"
+. 5--27 leaf lobes, each generally < 6 mm wide, generally withering by bloom
+. abaxial veins not prominent ^http://floranorthamerica.org/Delphinium_hesperium_subsp._hesperium
+. Coe, near Cowell, and lots in Pinnacles
