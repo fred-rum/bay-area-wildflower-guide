@@ -1,4 +1,4 @@
-com:n/a
+com:mushrooms, bracket fungi, puffballs, and allies
 sci:class Agaricomycetes
 end_hierarchy
 

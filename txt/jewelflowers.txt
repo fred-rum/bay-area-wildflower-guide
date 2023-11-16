@@ -11,6 +11,7 @@ x:rare
 . scattered
 
 ==mountain jewelflower:S. tortuosus
+color: purple, red purple, other
 . <b>very similar to {-bristly jewelflower}, but</b>
 .. petals not crinkled
 .. raceme bracted below lowest flower or between lowest two flowers [<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0403+0604">example</a>)

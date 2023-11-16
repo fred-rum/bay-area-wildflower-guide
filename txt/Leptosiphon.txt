@@ -141,6 +141,7 @@ color:pale purple
 
 ==whiskerbrush:L. ciliatus
 sci_p:Linanthus ciliatus
+color: pale purple, white
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0209+1956
 . corolla:
 .. tube pink/white
@@ -148,6 +149,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0209+1956
 .. lobes pink, <b>base generally with darker pink or red spot</b>
 .. lobes 2--4 mm
 . uncommon
+. [photos are of an uncommonly pale specimen]
 
 ==bristly leptosiphon:L. acicularis
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0507+1711

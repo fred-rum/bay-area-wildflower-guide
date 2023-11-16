@@ -111,6 +111,7 @@ flower stipe present<br>
 inflorescence bracts 2--13+</h2>
 
 ==sulfur buckwheat:E. umbellatum
+color: yellow
 . herb to shrub
 . flower stipe present, not winged
 . rare
@@ -152,6 +153,7 @@ species: wicker buckwheat
 . extremely rare, almost extinct
 
 ==elegant wild buckwheat:E. elegans
+color: pink, salmon
 . flowers not at branchlet tips, generally appressed with no peduncles
 . involucres 1--1.5 mm
 . very rare in Henry Coe

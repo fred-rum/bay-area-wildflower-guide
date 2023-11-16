@@ -1425,6 +1425,9 @@ change ignore_species.yaml to ignore_properties.yaml
         and have those carry the ignore instructions
       this could be awkward if an iNat record matches multiple pages
         e.g. by either sci or TID
+and/or observations should be ignored by observation ID
+  perhaps with extra properties to stop ignoring it if it gets more IDs
+    or changes ID
 
 read taxa.csv (or condensed equivalent)
   for each page, apply TID, rank, chain
@@ -1803,3 +1806,6 @@ punctuation, and the highlighted match has the same punctuation before/after
 it, the highlight is extended to include the matching punctuation.
 E.g. in a search for '(inclusive)'.
 Requires search_str to be passed to highlight_match(), perhaps in match_info.
+
+Print a better warning when rep: fails
+  as I did with chinquapin galls in galls.txt

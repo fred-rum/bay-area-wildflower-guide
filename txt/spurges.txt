@@ -1,8 +1,8 @@
 sci:Euphorbia
 x:!rare
-color:other
 
 ==eggleaf spurge:E. oblongata
+color: yellow
 . very common, especially north of the bay bridge
 
 ==petty spurge:E. peplus

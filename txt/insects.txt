@@ -40,7 +40,7 @@ bug:156092
 
 ==red gum lerp psyllid
 
-==european earwig:complex Forficula auricularia
+==european earwig complex:complex Forficula auricularia
 taxon_id:61524
 bug:23281
 x:ca

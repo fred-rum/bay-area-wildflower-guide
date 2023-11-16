@@ -33,7 +33,8 @@ color:other
 . acorn cap less deep than wide
 . common
 
-==leather oak:Quercus durata
+==leather oak:Quercus durata var. durata
+species: leather oak
 color: other
 . leaf:
 .. adaxially convex, dull green

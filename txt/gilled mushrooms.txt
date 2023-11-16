@@ -49,3 +49,5 @@ x:more
 x:more
 
 ==deceivers:genus Laccaria
+
+==deer mushrooms:genus Pluteus

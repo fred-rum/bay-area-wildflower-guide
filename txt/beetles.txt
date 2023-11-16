@@ -34,3 +34,5 @@ bug:40237
 ==scarabs:family Scarabaeidae
 
 ==glowworm beetles:family Phengodidae
+
+==soft-winged flower beetles:family Melyridae

@@ -2,7 +2,7 @@ sci:Calystegia collina
 xx:rare
 
 ==coast range false bindweed:C. collina ssp. collina
-leaves:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0218+1800
+color: white
 . leaf tip obtuse, lobes generally indistinct, blade triangular to reniform
 . rare: Mt. Tam and south bay
 

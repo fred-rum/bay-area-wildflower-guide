@@ -151,13 +151,14 @@ color: pink
 . inflorescence a panicle, 2--7-branched
 . (subspecies outside the bay area may differ)
 . common
-;Edibility: The berries have an aggreable acid flavor, but are dry, mealy, and seedy, and the pulp is quite hard to digest, so you don't want tos swallow much. ^https://books.google.com/books?id=m5LsWJl2cCkC
+;Edibility: The berries have an aggreable acid flavor, but are dry, mealy, and seedy, and the pulp is quite hard to digest, so you don't want to swallow much. ^https://books.google.com/books?id=m5LsWJl2cCkC
 ]
 [
 <h3>nascent inflorescence bracts generally leaf-like, flat</h3>
 <b>old stem bark smooth, +- red</b>
 
 ==mount diablo manzanita:A. auriculata
+color: cream, pink, pale purple, purple
 . young leaves gray-canescent, glabrous with age
 . leaf base lobed, clasping
 . ovary and fruit nongladulary-hairy

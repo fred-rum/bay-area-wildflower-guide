@@ -49,7 +49,7 @@ rep:oaks
 rep:tanoak
 
 ==chinquapin galls
-rep:genus Chrysolepis
+rep:golden chinquapin
 
 <h3>rose family</h3>
 

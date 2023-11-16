@@ -1,6 +1,13 @@
 sci:Chrysolepis chrysophylla
 xx:any
 
+genus: n/a
+x: hist
+
+Chinquapins also occur in other genuses, but this is the only genus of chinquapins in California.
+
+Hosts {-chinquapin galls}.
+
 ==golden chinquapin:C. chrysophylla var. chrysophylla
 color: other
 . tree, 15--30 m

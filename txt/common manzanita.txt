@@ -1,0 +1,13 @@
+sci: Arctostaphylos manzanita
+xx:ba
+
+==contra costa manzanita:Arctostaphylos manzanita ssp. laevigata
+color: pink, pale purple, white
+. leaf blade bright green
+. inflorescence 2--4-branched
+. Mt. Diablo
+
+==n/a:Arctostaphylos manzanita ssp. manzanita
+. leaf blade dull to bright green
+. inflorescence 4--7-branched
+. scattered

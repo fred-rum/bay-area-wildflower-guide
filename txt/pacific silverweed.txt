@@ -1,0 +1,8 @@
+sci:Argentina pacifica
+sci_Fjfp:Potentilla anserina
+color: yellow
+
+genus: silverweeds
+x:ba
+
+. common along Pacific coast

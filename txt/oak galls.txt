@@ -80,11 +80,6 @@ bug:43238
 gall:1511
 . forms on leaf surfaces of {-blue oak}, {-oregon oak}, and {-valley oak}
 
-==crystalline gall wasp:Andricus crystallinus
-bug:145049
-gall:1377
-. forms on lower leaf surfaces of {-california scrub oak}, {-nuttall's scrub oak}, {-blue oak}, {-leather oak}, and {-oregon oak}
-
 ==round gall wasp:Burnettweldia washingtonensis
 bug:847685
 gall:1364
@@ -99,6 +94,11 @@ gall:1147
 bug:145060
 gall:1376
 . forms on the midrib under leaves of {-valley oak}
+
+==fuzzy-gall wasp:Cynips conspicuus
+bug:362731
+gall:1365
+. forms on leaf surfaces and petioles of {-white oaks}
 
 ==spined turban gall wasp:Cynips douglasii
 sci_bg: Antron douglasii
@@ -119,6 +119,12 @@ bug:753408
 gall:1355
 . forms on branches of {-white oaks}
 . produces honeydew, which may attract ants
+
+==crystalline gall wasp:Feron crystallinum
+sci_g:Andricus crystallinus
+bug:145049
+gall:1377
+. forms on lower leaf surfaces of {-california scrub oak}, {-nuttall's scrub oak}, {-blue oak}, {-leather oak}, and {-oregon oak}
 
 ==disc gall wasp:Feron parmula
 sci_bg: Andricus parmula
