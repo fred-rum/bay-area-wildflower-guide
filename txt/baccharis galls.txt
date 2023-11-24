@@ -1,4 +1,4 @@
-xcom: coyote brush galls
+acom: coyote brush galls
 sci: n/a
 
 ignore_link: self

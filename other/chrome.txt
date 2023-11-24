@@ -23,14 +23,14 @@ Chrome will prevent your screen from timing out due to inactivity
 while files are being downloaded for offline use, so you don't need to
 actively use your device to keep the download alive.
 
-On a desktop, it is sufficient to keep the Guide tab visible (not
+On a computer, it is sufficient to keep the Guide tab visible (not
 minimized), even if another window has focus.
 
 <h3>Storage Limits</h3>
 
 Chrome allows a web app to use up to 100% of the storage space
-available.  The Guide is large, but not that large.  Hopefully you can
-find room.
+available.  The Guide is fairly large, but should fit easily in a
+reasonably modern phone.
 
 Chrome uses a heuristic to determine whether local files are kept
 permanently.  If the browser decides you don't use the Guide often
@@ -41,9 +41,10 @@ your local files.
 
 <h3>Install to your Home Screen</h3>
 
-You can save a link to the Guide on your home screen.  Open the Chrome
-menu and select "Add to homescreen" or "Install Bay Area Wildflower
-Guide".  On Android, this sometimes doesn't actually put anything on
+You can save a link to the Guide on your home screen.
+Open the Chrome menu and select "Add to homescreen" or
+"Save and Share &rarr; Install Bay Area Wildflower Guide".
+On Android, this sometimes doesn't actually put anything on
 your home screen.  If so, you can manually drag it from Android's
 installed apps to your home screen.
 

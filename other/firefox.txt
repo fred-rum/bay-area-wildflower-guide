@@ -29,9 +29,13 @@ On a desktop, it should be sufficient to keep the Guide tab visible
 
 <h3>Storage Limits</h3>
 
-Recent versions of Firefox seem to allow the Guide to use more device space.
-However, if Firefox doesn't allow enough space,
-you might need to use another browser with a less restrictive limit.
+The Guide is fairly large, but should fit easily in a
+reasonably modern phone.
+
+Recent versions of Firefox seem to allow the Guide to use more device
+space than previous versions.  However, if Firefox doesn't allow
+enough space, you might need to use another browser with a less
+restrictive limit.
 
 Firefox on the desktop may ask whether to allow the Guide to store
 data in persistent storage.  If you respond with "Not now" or "Never",

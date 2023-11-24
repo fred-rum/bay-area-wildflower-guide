@@ -102,6 +102,7 @@ color: other, cream
 ==california bedstraw:G. californicum ssp. californicum
 species: california bedstraw
 color: other
+xx:rare
 . habit: perennial herb, open [not climbing?], <b>in mats or tufts</b> (forest, chaparral) or tangled masses (sea cliffs), not woody to occasionally woody at base; hairs +- coarse; dioecious
 . stem: 8--32 cm
 . leaf: <b>in whorls of 4</b>, 6--18 mm, ovate to elliptic; tip acute to obtuse, not sharp to touch; +- petioled

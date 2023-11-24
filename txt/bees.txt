@@ -23,7 +23,6 @@ bug:5211
 x:more
 xx:hist/rare
 bug:385405
-<b>Caution: ID unsure</b>
 
 ==tripartite sweat bee:Halictus tripartitus
 x:more

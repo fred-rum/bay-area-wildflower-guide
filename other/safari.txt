@@ -43,11 +43,10 @@ guide will fit as long as you have space available.
 Safari places a <b>time limit of ~7 days</b> on local data.
 Re-visiting the Guide will refresh the time limit.
 
-<b>Saving the Guide to your home page might remove the time limit.</b>
-(Testing is in progress.)  To save to your home page, tap the browser
-icon with an arrow pointing out of a square (normally used for sharing
-a page).  Then scroll down (not right) and select "Add to Home
-Screen".
+<b>Saving the Guide to your home page <i>might</i> remove the time limit.</b>
+To save to your home page, tap the browser icon with an arrow pointing
+out of a square (normally used for sharing a page).  Then scroll down
+(not right) and select "Add to Home Screen".
 
 If you've read down this far, congratulations.  You might be the kind
 of person who runs their browser in Private Browsing mode.  As usual,

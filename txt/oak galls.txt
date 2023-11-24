@@ -29,6 +29,7 @@ gall:1321
 ==irregular spindle gall wasp:Andricus chrysolepidicola
 bug:607933
 gall:1343
+. forms within branches of {-white oaks}
 
 <h2>galls on golden oaks</h2>
 

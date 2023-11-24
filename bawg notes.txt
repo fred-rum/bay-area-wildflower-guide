@@ -1809,3 +1809,7 @@ Requires search_str to be passed to highlight_match(), perhaps in match_info.
 
 Print a better warning when rep: fails
   as I did with chinquapin galls in galls.txt
+
+Sort advanced search results by observation count
+  e.g. "observed in ..."
+  is it worthwhile?
