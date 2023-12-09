@@ -1,0 +1,22 @@
+At the bottom of each taxon page is a count of how many times I've
+observed and identified the taxon on iNaturalist.  This provides an
+indication of how common or rare a taxon is.  The number of these
+observations that are
+"<a href="https://www.inaturalist.org/pages/help#quality">research grade</a>"
+is also listed to provide some measure of the quality of my IDs.
+
+There is also a link to iNaturalist to allow you to review my
+observations in more detail.  This link is likely more useful to me
+than to you.  More likely of use to you is the link to iNaturalist's
+taxon page in the next section with {-more info sources}.
+
+If you click the observations line anywhere other than the obvious
+link (e.g. on "show details"), the observations section expands to
+show the number of observations per location and per month.  This
+helps demonstrate where and when the taxon is most easily found.
+Caveat: I don't visit all locations equally often, and I tend to
+prefer some locations in certain months, which skews the data.
+
+At the bottom of the expanded observation details is a link to
+{-advanced search}.  Clicking this link starts an advanced search
+within the taxon.

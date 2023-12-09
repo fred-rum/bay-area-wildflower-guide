@@ -1,0 +1,51 @@
+<h3>edibility</h3>
+
+I've gathered edibility information off the internet for those species
+that look like they might be worthwhile to taste.
+
+<b>Disclaimer: I got this information off the internet and cannot
+vouch for its accuracy.</b>  As usual, the dose makes the poison.  For
+anything that isn't a commonly recognized food (e.g. blackberries),
+you should stick to a small sample for your first try.
+
+The edibility information here is generally for the raw plant
+material.  If you're interested in further preparation, check the
+internet or other sources for instructions.
+
+<h3>toxicity</h3>
+
+I gathered toxicity information from the website of the California
+Poison Control System (hereafter called CalPoison, although their
+official abbreviation is CPCS).
+
+When I gathered the info,
+<a href="https://calpoison.org/topics/plant">this page</a>
+had extensive lists of known toxic and non-toxic plants.
+Those lists appear to have been purged from CalPoison's website
+since then.  To see the lists yourself, you'll need
+visit an archive such as the
+<a href="https://web.archive.org/web/20230706193624/https://calpoison.org/topics/plant">Wayback Machine</a>.
+
+<b>Disclaimer: CalPoison only includes the most commonly encountered
+plants.</b>  If no toxicity information is listed, that means the plant
+could be toxic or non-toxic.  In addition, if a plant is listed as
+non-toxic, that probably only refers to the parts most likely to be
+eaten (e.g. berries or leaves).  Eating other parts of the plant or
+excessive amounts of the non-toxic parts is not advised.
+
+CalPoison groups plants into certain toxicity categories, so the
+details of any toxic response tend to get blurred together.  In
+addition, CalPoison rarely notes which parts of the plant are toxic
+and which are not.  In many cases, the toxicity information lists
+multiple common names of plants within a genus, but it isn't clear
+whether it applies to all species in the genus.  In case of ambiguity,
+I advise you to play it safe.
+
+As a point of reference, my "edibility" searches have turned up many
+references to Native Americans using a wide variety of plants as
+emetics or purgatives.  Something to think about before you taste
+something unfamiliar.
+
+With all of the above said, a tiny taste (e.g. one or two berries) is
+unlikely to do much harm.  If in serious doubt, call CalPoison at
+<a href="tel:18002221222">1-800-222-1222</a>.

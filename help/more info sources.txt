@@ -1,0 +1,25 @@
+Where possible, each taxon page links to additional taxon information on other websites:
+. iNaturalist has information on almost every taxon that has a scientific name
+. The following sites have information on vascular plants:
+.. Calflora has range information and some photos
+.. CalPhotos has lots of photos
+.. Jepson eFlora has identifying information and keys, mostly in dense textual form
+.. Flora of North America (FNA) also has identifying information and keys, as well as additional descriptions
+... however, FNA is a work in progress and doesn't yet include all families of plants
+. BugGuide has additional information for insects, spiders, and related "bugs"
+.. links to BugGuide are currently manual, so not every applicable taxon has one yet
+. Gallformers has additional information for any organisms that cause plant galls
+
+The lowest-level taxons are most reliably linked.  Higher level taxons
+may link to fewer sites, usually because the site doesn't have
+information at higher levels or simply doesn't have <i>useful</i>
+information at higher levels (e.g. CalPhotos).
+
+Due to the shifting research regarding taxonomic relationships, many
+scientific names have changed over time.  Where an external site uses
+a different scientific name than the BAWG, that difference is noted.
+
+CalPhotos does not attempt to use a single scientific name for a
+taxon, but simply lists photos under whatever name was submitted for
+each.  Therefore, links to CalPhotos sometimes use multiple scientific
+names in order to retrieve all relevant photos.

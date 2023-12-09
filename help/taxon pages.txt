@@ -1,0 +1,45 @@
+Each page in the BAWG typically describes one taxon, i.e. one group of
+related organisms.  In the tree of life, this may be a leaf taxon, the
+lowest level of categorization, or it may a root or branch taxon, with
+any number sub-taxons below it.
+
+Click anywhere in the example taxon page below to get more information on that section, or browse the list of sections below.
+
+<div class="img-map">
+<img src="../figures/taxon page.png">
+<a href="home-icon.html" title="home icon" class="map-area" style="left: 0px; top: 0px; width: 36px; height: 36px;"></a>
+<a href="search.html" title="search" class="map-area" style="left: 36px; top: 0px; width: 368px; height: 36px;"></a>
+<a href="taxon-names.html" title="taxon names" class="map-area" style="width: 300px; top: 36px; height: 69px;"></a>
+<a href="taxon-origin.html" title="taxon origin" class="map-area" style="left: 300px; width: 104px; top: 36px; height: 69px;"></a>
+<a href="taxon-ancestors.html" title="taxon ancestors" class="map-area" style="width: 404px; top: 105px; height: 92px;"></a>
+<a href="photo-gallery.html" title="photo gallery" class="map-area" style="width: 404px; top: 208px; height: 164px;"></a>
+<a href="taxon-description.html" title="taxon description" class="map-area" style="width: 404px; top: 372px; height: 42px;"></a>
+<a href="edibility-and-toxicity.html" title="edibility and toxicity" class="map-area" style="width: 404px; top: 414px; height: 40px;"></a>
+<a href="my-observations.html" title="my observations" class="map-area" style="width: 404px; top: 468px; height: 29px;"></a>
+<a href="more-info-sources.html" title="more info sources" class="map-area" style="width: 404px; top: 497px; height: 61px;"></a>
+<a href="bay-area-species.html" title="bay area species" class="map-area" style="width: 404px; top: 558px; height: 25px;"></a>
+</div>
+
+<h3>elements of a taxon page</h3>
+
+==home icon
+
+==search
+
+==taxon names
+
+==taxon origin
+
+==taxon ancestors
+
+==photo gallery
+
+==taxon description
+
+==edibility and toxicity
+
+==my observations
+
+==more info sources
+
+==bay area species

@@ -7,12 +7,12 @@ warn:insects
 
 figure:beetle
 
-{head,heads} The frontmost of the three major sections of the body, including the eyes, mouth, antennae, etc.  Part A in the [figure:beetle].
+{head,heads} The frontmost of the three major sections of the body, including the eyes, mouth, antennae, etc.  [figure:beetle,part A in the figure]
 
-{thorax,thoraxes,thoraces} The middle of the three major sections of the body.  Part B in the [figure:beetle].
+{thorax,thoraxes,thoraces} The middle of the three major sections of the body.  [figure:beetle,part B in the figure]
 {pronotum,pronotums} The dorsal sclerite covering the prothorax.
-{prothorax,prothoraxes,prothoraces} The anterior portion of the thorax, supporting the first pair of legs.  Part 9 in the [figure:beetle].
+{prothorax,prothoraxes,prothoraces} The anterior portion of the thorax, supporting the first pair of legs.  [figure:beetle,part 9 in the figure]
 
-{abdomen,abdomens} The hindmost of the three major sections of the body.  Part C in the [figure:beetle].
+{abdomen,abdomens} The hindmost of the three major sections of the body.  [figure:beetle,part C in the figure]
 
 {elytron,elytra} A wing case (wing cover).  On other insects, this would be a forewing.

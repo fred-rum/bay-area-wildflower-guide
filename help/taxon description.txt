@@ -1,0 +1,16 @@
+The taxon description may contain wildly different amounts of text,
+depending on the taxon.
+
+When a taxon contains lower level taxons, the most commonly useful
+description is a key to its child taxons.  The key is usually in the
+form of a bulleted list of features for each each child taxon that
+help distinguish it from its sibling taxons.  A taxon key is common
+for plant genuses (where the species often look much alike), but it is
+also occasionally used for a species (that has subspecies or
+varieties) or for higher-level taxons.  If, however, the child taxons
+are easily distinguished visually, the parent taxon may simply have a
+list of its children without further information.
+
+In many cases, the description for the lowest-level taxon is simply a
+repeat of its key info from its parent taxon.  If the parent taxon has
+no key info, the child's description may be blank.

@@ -1,0 +1,15 @@
+By default, the first search result is highlighted in bold.  Press
+'Enter' to navigate to the highlighted result.
+
+Press the down arrow or the 'Tab' key to move the highlight to the
+next result (wrapping around from the last result).
+
+Press the up arrow or Shift-tab to move the highlight to the previous
+result (wrapping around from the first result).
+
+The left and right arrow keys move the cursor within the input text in
+the usual way.
+
+Press the 'Esc' key to clear your input text.  (Exception: while
+editing an {-advanced search} term, the 'Esc' key reverts the search
+term to its original value.)

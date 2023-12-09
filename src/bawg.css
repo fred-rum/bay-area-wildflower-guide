@@ -1401,3 +1401,34 @@ p.names {
 p.cuddle {
     margin-bottom: 0px;
 }
+
+/* support something that acts like an image map,
+   but allows color changes on hover */
+.img-map {
+    /* position the containing div so that the image areas can be
+       positioned absolutely */
+    position: relative;
+    cursor: help; /* use the '?' cursor even where a link isn't present */
+    border: 5px solid gray;
+    border-radius: 5px;
+    width: 404px;
+}
+.img-map img {
+    /* Display the image as a block, not inline,
+       so the browser won't leave space for text descenders. */
+    display: block;
+}
+.map-area {
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+}
+.map-area:hover {
+    background-color: rgba(255, 255, 0, 0.3);
+    border: 1px solid rgba(240, 240, 0);
+}
+.map-area:link {
+    /* links modify their cursor by default,
+       so we need to override it (again) */
+    cursor: help;
+}

@@ -93,6 +93,9 @@ def parse_line_by_line(name, s, page, glossary):
         child_text_list = c_list[-num_children:]
         c_list = c_list[:-num_children]
 
+#        if page.num_txt_children and child_idx > page.num_txt_children:
+#            print(f'{child_idx} > {page.num_txt_children} in {page.full()}')
+
         sorted_child_list = page.sort_pages(child_list)
 
         page.child[child_idx - num_children:child_idx] = sorted_child_list

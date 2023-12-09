@@ -1,0 +1,19 @@
+is_top
+member_link: self-below
+
+Help topics:
+
+==taxon pages
+. each taxon page gives information about one form of life and its related descendents
+
+==glossaries
+. glossaries define words used in the BAWG
+
+==photo gallery
+. displays all photos for a taxon or figures for a glossary
+
+==search
+. the search bar at the top of most pages allows you to quickly find any other page you desire
+
+==advanced search
+. lets you find taxons that match the specified criteria

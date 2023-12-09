@@ -1,0 +1,125 @@
+<!-- Copyright Chris Nelson - All rights reserved. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="description" content="Description of details about search matching in the Bay Area Wildflower Guide.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>help: details about search matching</title>
+<script async src="../search.js"></script>
+<script async src="../pages.js"></script>
+<script async src="../swi.js"></script>
+<link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="mask-icon" href="../favicon/safari-pinned-tab.svg" color="#106110">
+<link rel="shortcut icon" href="../favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#106110">
+<meta name="msapplication-config" content="../favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="stylesheet" href="../bawg.css">
+</head>
+<body>
+<a id="home-icon" tabindex="0" href="../index.html"><img src="../icons/home.png" alt="home"></a>
+<div id="search-container">
+<input type="search" id="search" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="flower or glossary term" aria-label="search for a flower or glossary term" autofocus>
+<noscript><input type="search" value="search requires JavaScript" disabled></noscript>
+<div id="autocomplete-box"></div>
+</div>
+<div id="body">
+<h1 id="title">help: details about search matching</h1>
+<p>
+Member of
+<span class="membership">
+<a href="search.html" class="family">search</a><br>
+<a href="taxon-pages.html" class="family">taxon pages</a><br>
+<a href="help.html" class="parent">help</a>
+</span>
+</p>
+<hr>
+<p>The search bar finds results for which your input text can be found
+within the <a href="taxon-names.html" class="unobs">taxon names</a>, glossary term, etc.</p>
+<p>Wherever your input text includes spaces or punctuation, the search
+bar allows any number of characters to be skipped in the result text.
+E.g. &ldquo;cl-av&rdquo; (with or without quotes) matches any of the following
+results:</p>
+<ul>
+<li>genus <span class="match">Clav</span>ulina</li>
+<li><span class="match">clav</span>us <span class="altname">(glossary: true bugs)</span></li>
+<li>davy&rsquo;s clarkia (<i><span class="match">Cl</span>arkia a<span class="match">av</span>yi</i>)</li>
+<li>santa <span class="match">cl</span>ar<span class="match">a v</span>alley dudleya (<i>Dudleya abramsii ssp. setchellii</i>)</li>
+<li>etc.</li>
+</ul>
+<p>Note that &ldquo;clav&rdquo; without a space or punctuation in the middle will
+match only the first two results above.  It won&rsquo;t match any result
+with additional letters between the &ldquo;cl&rdquo; and the &ldquo;av&rdquo;.  On the other
+hand, a search for &ldquo;hedgenettle&rdquo; will match a taxon called
+&ldquo;hedge-nettle&rdquo; since the sequence of letters is the same once
+punctuation is ignored.</p>
+<p>The search looks for a match in the common name, scientific name, and
+any alternative names of every taxon.  It also looks for any
+variations of a glossary term, e.g. &ldquo;sepals&rdquo; matches the &ldquo;sepal&rdquo;
+glossary term.</p>
+<p>Results are ordered with priority given to a match that starts with
+the input text.  Otherwise, taxons are ordered with the most commonly
+observed taxons first.  Other result types (e.g. glossary terms) are
+ordered according to the whims of the code.</p>
+<h2>search by common name</h2>
+<p>If the taxon has one or more alternative common names, you can also
+search for these.  The search results show the primary name with the
+matched alternative name in brackets.  E.g.</p>
+<ul>
+<li>sticky monkeyflower <span class="altname">[orange bush monkeyflower]</span> (<i>Diplacus aurantiacus</i>)</li>
+</ul>
+<p>If the guide contains one or more subspecies or varieties of a
+species, but doesn&rsquo;t have a page for the species itself, you can still
+search for the species name, and the search results will show the
+infraspecific pages.  E.g.</p>
+<ul>
+<li>siskiyou aster <span class="altname">[panicled aster]</span> (<i>Symphyotrichum lanceolatum</i> var. <i>hesperium</i>)</li>
+</ul>
+<h2>search by scientific name</h2>
+<p>When searching for a scientific name, you can include rank specifiers
+such as &ldquo;genus&rdquo; or &ldquo;var.&rdquo;.  In this guide, the rank is always spelled
+out except for infraspecific ranks, which are always abbreviated
+&ldquo;ssp.&rdquo;, &ldquo;var.&rdquo;, or &ldquo;f.&rdquo;  As with all searches, however, you may choose
+to omit any words (or parts of words) that you like.  A match that
+begins at the start of a taxon&rsquo;s name is given priority over a match
+later in a name, even if the rank prefix is omitted.</p>
+<p>If the taxon has one or more alternative scientific names, you can
+also search for these.  This includes only those names listed on the
+taxon page, e.g. for CalFlora, Jepson&rsquo;s eFlora, etc.  It does not
+include all historical synonyms.  The search results show the primary
+name with the matched alternative name in brackets.  E.g.</p>
+<ul>
+<li>sticky monkeyflower (<i>Diplacus aurantiacus</i> <span class="altname">[<i>Mimulus aurantiacus</i>]</span>)</li>
+</ul>
+<p>If the guide contains pages within a genus, but doesn&rsquo;t have a page
+for the genus itself, you can still search for the genus name, and the
+search results will show the relevant pages.  E.g.</p>
+<ul>
+<li>california thrift (<i>Armeria maritima</i> ssp. <i>californica</i> <span class="altname">[<i>genus Armeria</i>]</span>)</li>
+</ul>
+<p>Of course, if you just search for the genus name without the &ldquo;genus&rdquo;
+prefix, e.g. &ldquo;Armeria&rdquo;, it will match all taxons in that genus.</p>
+<h2>search by glossary term</h2>
+<p>You can search for a glossary term, and the search results link
+directly to its definition on the glossary page.</p>
+<p>You can also search for certain expected variations of a term, such as
+the plural form (e.g. &ldquo;lemmas&rdquo; or &ldquo;teeth&rdquo;).</p>
+<p>To restrict the search to only glossary terms (e.g. not taxons),
+include the word &ldquo;glossary&rdquo; after the search term.</p>
+<h2>search for help pages</h2>
+<p>You can search for a help page by its title.  Include the word &ldquo;help&rdquo;
+before the title to restrict the search to help pages.</p>
+<h2>search by advanced search term</h2>
+<p>You can start an advanced search by typing an <a href="advanced-search.html" class="unobs">advanced search</a> term
+in the regular search bar, e.g. &ldquo;within flowering plants&rdquo;.  The result
+links to the advanced search page with the corresponding search term.</p>
+<hr>
+</div>
+<div class="footer">
+<span class="foot-left"><a class="home-link" href="../index.html" aria-label="home"></a> <span class="foot-fade"> &copy; Chris Nelson</span></span><a class="foot-fade" href="../html/help.html">Help</a>
+</div>
+</body>

@@ -60,6 +60,7 @@ from obs import *
 
 def read_txt():
     txt_files = get_file_set('txt', 'txt')
+    help_files = get_file_set('help', 'txt')
 
     # We read the files without parsing to make performance easier to measure.
     for name in txt_files:
@@ -69,6 +70,14 @@ def read_txt():
         else:
             page = Page(name, name_from_txt=True, src=filename)
             read_file(f'txt/{filename}', page.read_txt)
+
+    for name in help_files:
+        filename = f'{name}.txt'
+        if filename.startswith('.#'): # emacs temporary file
+            warn(f'file being edited: {filename}')
+        else:
+            page = Page(name, name_from_txt=True, src=f'help/{filename}')
+            read_file(f'help/{filename}', page.read_txt)
 
     for page in page_array:
         with Progress(f'removing comments from "{page.name}"'):
@@ -181,11 +190,11 @@ def strip_js():
 
 def add_elab(elabs, elab):
     if elab and elab[0].isupper():
-        # convert the hybrid symbol to a colon so that it is easy to recognize
-        # and also easy to skip over during matching.  The JavaScript converts
-        # this back to the desired HTML &times; symbol when it matches the
-        # search.
-        elab = re.sub(' X', ' :', elab)
+        # convert the hybrid symbol to a percent sign so that it is easy
+        # to recognize and also easy to skip over during matching.
+        # The JavaScript converts this back to the desired HTML
+        # &times; symbol when it matches the search.
+        elab = re.sub(' X', ' %', elab)
     if elab and elab != 'n/a' and elab not in elabs:
         elabs.append(unidecode(elab))
 
@@ -206,7 +215,9 @@ def write_pages_js(w):
 
         # List all common names that should find this page when searching.
         coms = []
-        if page.com:
+        if page.is_help() and page.name != 'help':
+            coms.append(f'help: {page.name}')
+        elif page.com:
             coms.append(page.com)
         else:
             # The first entry should be the default common name.
@@ -231,8 +242,8 @@ def write_pages_js(w):
         # the same as its common name.
         # Similarly, don't list anything if there are no common names.
         if (len(coms) > 1 or
-            (page.com and (page.com != filename(page.name)
-                           or not page.com.islower()))):
+            (coms and (coms[0] != filename(page.name)
+                       or not coms[0].islower()))):
             coms_str = '","'.join(coms)
             w.write(f',c:["{coms_str}"]')
 
@@ -583,26 +594,36 @@ try:
     with Step('lcca', "Assign ancestors to pages that don't have scientific names"):
         for page in page_array:
             if not page.rank:
-                # If a page doesn't fit into the Linnaean hierarchy, try to find a
-                # place for it.
-                # We do this even if a Linnaean ancestor is given since it may not
-                # be the best Linnaean parent.
+                # If a page doesn't fit into the Linnaean hierarchy,
+                # try to find a place for it.
+                # We do this even if a Linnaean ancestor is given
+                # since it may not be the best Linnaean parent.
                 # This also propagates is_top, so we don't have to do it again.
                 page.resolve_lcca()
-            if page.is_top and not page.parent and not page.linn_parent:
-                page.propagate_is_top()
 
     with Step('def_anc', 'Assign default ancestor to floating trees'):
         default_ancestor = get_default_ancestor()
-        if default_ancestor:
-            for page in full_page_array:
-                if (not page.is_top
-                    and not page.linn_parent
-                    and (not page.rank or page.rank < default_ancestor.rank)):
-                    if default_ancestor:
-                        default_ancestor.link_linn_child(page)
-                    else:
-                        warn(f'is_top not declared for page at top of hierarchy: {page.full()}')
+        for page in page_array:
+            has_real_ancestor = True
+            if not page.parent:
+                ancestor = page.linn_parent
+                while ancestor:
+                    if not ancestor.shadow:
+                        # page has a real ancestor
+                        break
+                    ancestor = ancestor.linn_parent
+                else:
+                    # none of page's ancestors are real
+                    has_real_ancestor = False
+
+            if page.is_top:
+                if page.parent:
+                    warn(f'is_top declared for a page with real ancestors: {page.full()}')
+            elif not has_real_ancestor:
+                if default_ancestor:
+                    default_ancestor.link_linn_child(page)
+                else:
+                    warn(f'is_top not declared for page at top of hierarchy: {page.full()}')
 
     with Step('prop_prop', 'Propagate properties'):
         # Assign properties to the appropriate ranks.

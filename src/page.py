@@ -588,6 +588,10 @@ class Page:
         self.linn_parent = None # the Linnaean parent (if known)
         self.linn_child = set() # an unordered set of Linnaean children
 
+        # Keep track of the number of children explicitly linked in the text.
+        # This allows us to determine which children were added magically.
+        self.num_txt_children = 0
+
         # If children are linked to the page via the Linnaean hierarchy,
         # they could end up in a non-intuitive order.  We remember which
         # children have this problem and re-order them later.
@@ -647,6 +651,9 @@ class Page:
 
     def read_txt(self, f):
         self.txt = f.read()
+
+    def is_help(self):
+        return self.src.startswith('help/')
 
     def infer_name(self):
         if self.no_names:
@@ -1918,30 +1925,22 @@ class Page:
             ancestor = ancestor.linn_parent
 
     # Return a set of all ancestors.
-    # If is_top is true, then also propagate that up through the ancestors.
-    def get_linn_ancestor_set(self, is_top):
-        # is_top propagation starts at the lowest level.
-        if is_top:
-            self.is_top = True
-
+    def get_linn_ancestor_set(self):
         # The ancestor_set starts populating with the first parent.
         ancestor = self.linn_parent
         ancestor_set = set()
 
         while ancestor:
-            if is_top:
-                ancestor.is_top = True
             ancestor_set.add(ancestor)
             ancestor = ancestor.linn_parent
 
         return ancestor_set
 
     # Assign the lowest common children's ancestor as linn_parent.
-    # Also propagate is_top to children and their ancestors.
     def resolve_lcca(self):
         cca_set = None
         for child in self.child:
-            child_ancestor_set = child.get_linn_ancestor_set(self.is_top)
+            child_ancestor_set = child.get_linn_ancestor_set()
             if cca_set is None:
                 # create the initial value for cca_set
                 cca_set = child_ancestor_set
@@ -2365,7 +2364,7 @@ class Page:
                 suffix = sci_suffix
             else:
                 suffix = ''
-                
+
             if not sci:
                 if is_sci(com):
                     sci = com
@@ -2590,6 +2589,9 @@ class Page:
                 data_src = f'{self.name}.txt'
 
             c_list.append(c)
+
+        self.num_txt_children = len(self.child)
+
         self.txt = '\n'.join(c_list) + '\n'
 
     def link_style(self):
@@ -3378,7 +3380,10 @@ class Page:
             com = self.com
             elab = self.elab
 
-            if com:
+            if self.is_help() and self.name != 'help':
+                title = f'help: {self.name}'
+                h1 = title
+            elif com:
                 title = self.format_com()
                 h1 = title
             else:
@@ -3508,7 +3513,8 @@ class Page:
                 if self.photo_dict or self.ext_photo_list or self.txt:
                     w.write('<hr>\n')
 
-                self.write_obs(w)
+                if not self.is_help():
+                    self.write_obs(w)
 
             if self.sci:
                 self.write_external_links(w)
@@ -3549,7 +3555,7 @@ class Page:
         else:
             pclass = ''
 
-        w.write(f'\n<p{pclass}>\n<a href="https://calpoison.org/topics/plant" target="_blank" rel="noopener noreferrer">Toxicity</a>')
+        w.write(f'\n<p{pclass}>\n<a href="edibility-and-toxicity.html">Toxicity</a>')
 
         # If there are no interesting toxicity details, put the names
         # on the same line as the 'Toxicity' header.

@@ -1,0 +1,16 @@
+At the top of almost every page is input field where you can type a search term.
+<b>JavaScript must be enabled in order for search to work.</b>
+
+While you type in the search bar, it displays a list of up to 10 results that match the text typed so far.  Click any result to navigate to that page.
+
+The search bar is attached to the top of the window so that it remains accessible even when the page is scrolled.
+
+The following data can be found via the search bar:
+. a taxon (by common or scientific name)
+. a glossary definition (by term being defined)
+. a help page (by title)
+. an advanced search
+
+==details about search matching
+
+==keyboard shortcuts while searching

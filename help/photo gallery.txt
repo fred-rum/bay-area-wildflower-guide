@@ -1,0 +1,99 @@
+The photo gallery allows you to examine the high-resolution photos for
+each taxon.  It is also used for certain other images, e.g. figures
+used in a glossary.
+
+Note that the photo gallery is only used if JavaScript is enabled in
+your browser.  If JavaScript is disabled, the browser's default image
+viewer is used instead.
+
+Here's an <a href="../gallery.html?california-poppy.2">example</a> photo gallery to practice with.
+
+
+<h2>mouse actions</h2>
+
+<h4>navigation</h4>
+
+Click the white arrow on the right or left to switch to the next or
+previous photo.
+The arrows only appear if there is more than one photo in the gallery.
+
+To return to the originating page, do any of the following:
+. click the red X in the upper corner
+. click the gray background outside the image
+. click your browser's "back" button
+
+<h4>zoom</h4>
+
+Click anywhere in the image to zoom to fit (the default zoom level).
+If the image is already zoomed to fit, it instead zooms to the maximum
+pixel-accurate resolution.  (You can zoom closer than this if you want
+the image to be even bigger.)
+
+Scroll the mouse wheel up or down to zoom in or out.  The image zooms
+toward or away from the point under the mouse cursor.
+
+<h4>pan</h4>
+
+To move the image, press the mouse button down anywhere within the
+viewing area and move the mouse while holding the button down.  This
+is particularly useful for viewing other parts of the image while
+zoomed in.
+
+
+<h2>touch actions</h2>
+
+<h4>navigation</h4>
+
+Tap the white arrow on the right or left to switch to the next or
+previous photo.
+The arrows only appear if there is more than one photo in the gallery.
+
+To return to the originating page, do any of the following:
+. tap the red X in the upper corner
+. tap the gray background outside the image
+. tap your browser's "back" button (if it has one)
+
+<h4>zoom</h4>
+
+Tap anywhere in the image to zoom to fit (the default zoom level).  If
+the image is already zoomed to fit, it instead zooms to the maximum
+pixel-accurate resolution.  (You can zoom closer than this if you want
+the image to be even bigger.)
+
+Touch two fingers to the sensor and drag them away from each other or
+pinch them together to zoom in or out.  The image zooms toward or away
+from the point between your fingers.
+
+<h4>pan</h4>
+
+To move the image, touch anywhere within the viewing area and drag
+your finger across the sensor.  This is particularly useful for
+viewing other parts of the image while zoomed in.
+
+
+<h2>keyboard actions</h2>
+
+<h4>navigation</h4>
+
+Press the right or left arrow key to switch to the next or previous
+photo.
+The arrows only appear if there is more than one photo in the gallery.
+
+To return to the originating page, do any of the following:
+. press the 'Esc' key
+. press your browser's standard "back" key
+.. this may be a special key on your keyboard and/or Alt-left arrow
+
+<h4>zoom</h4>
+
+Press the space bar or 'Enter' key to zoom to fit (the default zoom level).
+If the image is already zoomed to fit, it instead zooms to the maximum
+pixel-accurate resolution.  (You can zoom closer than this if you want
+the image to be even bigger.)
+
+Press 'Page Up' or 'Page Down' to zoom in or out.  The image zooms
+toward or away from the center of the viewing area.
+
+<h4>pan</h4>
+
+Sorry, there are currently no keys to pan the image.

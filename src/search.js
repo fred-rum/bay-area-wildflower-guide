@@ -1245,7 +1245,10 @@ class PageTerm extends Term {
 
     var h = pfx_highlight + compose_full_name(com_highlight, sci_highlight);
 
-    return h.replace(/:/, '&times; ');
+    /* bawg.py replaces the hybrid indication with a % sign so that it gets
+       ignored during matching.  Now we're ready to replace the % with a
+       proper HTML entity. */
+    return h.replace(/%/, '&times; ');
   }
 
   get_class() {
@@ -2375,10 +2378,6 @@ function get_cnt(page_to_trips, page_to_cnt, page_info) {
    This is often a single page and its descendents, but may include
    multiple pages.  In either case, each descendent is counted only once,
    even if it is included multiple times in the hierarchy.
-
-/* Track the observations for some set of pages.
-   This is often a single page and its descendents, but may include
-   multiple pages.  In either case, each descendent is counted only once,
 
    The tracked info includes the count of observations as well as
    where and when the observations were made. */

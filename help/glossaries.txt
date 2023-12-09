@@ -1,0 +1,72 @@
+This guide includes a lot of technical words that you might not be
+familiar with.  I realize that unfamiliar words are annoying, but I
+find that using precise words makes it much easier to describe the
+sometimes minor differences between taxons.  In addition, seeing the
+concepts behind the words should your understanding of the underlying
+biological concepts.
+
+To that end, the guide includes multiple glossaries that define word
+and phrases that apply to specific portions of the taxon hierarchy.
+Many of the glossaries also include figures to help illustrate the
+concepts involved.
+
+You can find a glossary page using either of these methods:
+. type the name of the glossary in the search bar
+.. start with the word "glossary" to restrict the search to only glossary pages
+. click <a href="html/general-glossary.html">this link</a>
+.. the top of the page links to a hierarchy of glossaries
+
+You can find the definition of a particular glossary term using either
+of these methods:
+. type the glossary term in the search bar
+.. put the word "glossary" after the term to restrict the search to only glossary pages
+. click an underlined glossary term wherever it is used in the guide
+
+When you navigate to a specific glossary term, that term and its
+definition are highlighted in yellow.  Consider also checking out any
+related words in the same glossary section as well as the associated
+figures.
+
+Most terms are defined in dedicated glossary pages, but some terms are
+defined directly in a taxon page, especially where the terms are used
+only for a single genus.
+
+
+<h3>variations of terms</h3>
+
+Many terms recognize simple variations, e.g. "flower", "flowers", and
+"flowered".  Although these variations aren't listed explicitly, they
+are recognized during search and are linked from wherever they occur
+in the guide.
+
+A few terms explicitly list variations that are less obvious,
+e.g. "hypanthium (hypanthia)".
+
+
+<h3>multiple definitions</h3>
+
+Many glossary terms are defined in multiple glossaries.  E.g. "head"
+is defined separately for flowering plants and for insects.  When the
+word is linked from the guide, it links to the appropriate definition
+for its taxon.
+
+A glossary term may also be redefined with greater detail for a
+lower-level taxon (vs. a more generic definition at a higher level).
+E.g. "head" is defined more specificially for the "sunflower family"
+than for "flowering plants in general".  In this case, the guide links
+to the lowest-level definition that applies.  However, if there are
+other definitions that apply at higher or lower levels of the
+taxonomy, these are cross referenced at the end of the definition.
+
+In many cases, Jepson eFlora also has a definition for a plant-related
+term.  The Jepson eFlora definition is cross referenced at the end of
+a BAWG definition where applicable.  You can also directly look up a
+term in the Jepson eFlora glossary by typing the term in the search
+bar followed by "Jepson eFlora glossary".
+
+
+<h3>glossary table of contents</h3>
+
+The top of each glossary includes a table of contents with links to
+all other glossaries used in the BAWG.  This may be useful to you if
+you just want to browse.

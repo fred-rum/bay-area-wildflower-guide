@@ -219,6 +219,10 @@ def find_page2(com, elab, from_inat=False, taxon_id=None,
                src='unknown', date=None):
     elab = fix_elab(elab)
 
+    if com and not elab and com in name_page:
+        # return the page without attempting to (re)set the com name
+        return name_page[com]
+
     # taxon_id has first priority.
     page = find_taxon_id(taxon_id)
 
@@ -262,6 +266,10 @@ def find_page2(com, elab, from_inat=False, taxon_id=None,
     return page
 
 def find_page1(name, from_inat=False):
+    if name in name_page:
+        # return the page without attempting to (re)set the com name
+        return name_page[name]
+
     page = find_sci(name, from_inat)
 
     if not page:

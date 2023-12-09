@@ -741,3 +741,25 @@ p.names {
 p.cuddle {
     margin-bottom: 0px;
 }
+.img-map {
+    position: relative;
+    cursor: help;
+    border: 5px solid gray;
+    border-radius: 5px;
+    width: 404px;
+}
+.img-map img {
+    display: block;
+}
+.map-area {
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+}
+.map-area:hover {
+    background-color: rgba(255, 255, 0, 0.3);
+    border: 1px solid rgba(240, 240, 0);
+}
+.map-area:link {
+    cursor: help;
+}

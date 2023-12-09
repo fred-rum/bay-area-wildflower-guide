@@ -698,7 +698,7 @@ class PageTerm extends Term {
       var sci_highlight = null;
     }
     var h = pfx_highlight + compose_full_name(com_highlight, sci_highlight);
-    return h.replace(/:/, '&times; ');
+    return h.replace(/%/, '&times; ');
   }
   get_class() {
     return get_class(this.page_info);

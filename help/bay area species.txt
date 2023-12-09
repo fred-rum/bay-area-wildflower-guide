@@ -1,0 +1,22 @@
+Although the BAWG is by no means complete, where a flowering plant
+appears in the guide, I attempt to also include all other interesting
+bay area species in the same genus (since they are likely to look
+similar and be easily confused).  However, you can get a more
+authoritative list from a link to "Bay Area species" at the bottom of
+many taxon pages.
+
+iNaturalist is linked for almost every taxon with a scientific name.
+It lists all species in the bay area within the genus or a
+higher-level taxon.  It does not list subspecies or varieties.
+iNaturalist doesn't support an arbitrary map region, so it filters the
+species based on a map square that includes additional area out to
+Stockton.
+
+CalFlora is linked for most taxons within vascular plants.  It only
+works at the family or genus level, but it includes species
+and subspecies.  It uses a map filter for the bay area that matches
+the boundaries of the <a href="../index.html">BAWG</a>.
+
+For both iNaturalist and CalFlora, a link from a low-level taxon
+always includes all species within the same genus.  A link from a
+higher-level taxon includes all species within that taxon.

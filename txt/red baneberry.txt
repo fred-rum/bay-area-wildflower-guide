@@ -14,6 +14,6 @@ color:white
 ==white-fruited red baneberry:f. neglecta
 sci_fpjF: A. rubra
 . has white fruit [may be lightly tinged with red]
-. is the more common form in many areas, but not in the bay area
+. is the more common form in many areas, but is rare in the bay area
 
 Edibility: "The common name makes reference to a potent poison concentrated in the fruits." ^https://baynature.org/article/berries-of-the-forest/ "Symptoms include burning of mouth and throat, salivation, severe stomach cramps, headache, diarrhea, dizziness and hallucinations." ^https://www.wildflower.org/plants/result.php?id_plant=acru2

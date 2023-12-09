@@ -1,0 +1,212 @@
+Advanced search lets you find all taxons that meet one or more criteria.
+<b>JavaScript must be enabled in order for advanced search to work.</b>
+
+Advanced search builds on the capabilities of the regular {-search}
+bar at the top of most pages.  To avoid confusion, the advanced search
+page is the only page that does <b>not</b> have the regular search bar
+at the top.
+
+Advanced search terms can be any of these forms:
+. within a particular taxon hierarchy
+. with a particular trait
+. observed at a particular park
+. observed in a particular date range
+
+You can get to the advanced search page using any of these methods:
+. input any of the advanced search terms (above) into the regular search bar
+.. this starts an advanced search with that search term
+. expand the observation details in any taxon page, then click the advanced search link at the bottom of the details
+.. this starts an advanced search within that taxon
+. click <a href="../advanced-search.html">this link</a>
+.. this starts an advanced search with no search terms
+
+<h4>within <i>taxon</i></h4>
+
+An advanced search term with this form finds taxons within the specified taxon.
+E.g. searching "within desert poppies (genus <i>Eschscholzia</i>)" results in the following hierarchy:
+. {-desert poppies}
+.. {-california poppy}
+.. {-tufted poppy}
+
+When adding the term within the advanced search page, the "within"
+prefix can be omitted and will be inferred.  However, the "within"
+prefix is required when typing the advanced search term in the regular
+search bar; otherwise the result will simply link to the taxon instead
+of starting an advanced search.
+
+You can enter multiple terms with the form "within <i>taxon</i>", and
+the results will include all taxons within any of the listed taxons.
+
+<h4>with <i>trait</i></h4>
+
+An advanced search term with this form finds taxons within the
+specified trait.  E.g. searching "with blue flowers" finds all flowers
+with blue as the primary petal color.
+
+At this time, the only trait that can be searched for is petal color.
+The list of color names used by the guide can be found on the
+page for {-flowering plants}.
+
+When adding the term within the advanced search page, the "with"
+prefix can be omitted and will be inferred.  However, the "with"
+prefix is required when typing the advanced search term in the regular
+search bar; otherwise the result will link to a static page listing
+the taxons with that trait instead of starting an advanced search.
+
+You can enter multiple terms with the form "with <i>trait</i>", and
+the results will include all taxons with any of the listed traits.
+
+<h4>observed in <i>location</i></h4>
+
+An advanced search term with this form finds taxons that I have
+observed at the specified location.  E.g. searching for "Edgewood"
+finds all taxons that I've observed at Edgewood Park & Natural
+Preserve.
+
+Locations are usually park names, but can be other geographic
+locations for observations outside parks.
+
+The "observed in" prefix is optional in either the advanced search
+field or the regular search bar.  However, including the prefix (or at
+least "in") helps to quickly narrow the results to just locations that
+match the input.
+
+You can enter multiple terms with the form "observed in <i>location</i>", and
+the results will include all taxons observed in any of of the listed locations.
+
+<h4>
+observed in <i>yyyy</i>
+<br>
+observed in <i>yyyy</i>-<i>mm</i>
+<br>
+observed on <i>yyyy</i>-<i>mm</i>-<i>dd</i>
+<br>
+observed since <i>yyyy</i>-<i>mm</i>-<i>dd</i>
+<br>
+observed until <i>yyyy</i>-<i>mm</i>-<i>dd</i>
+<br>
+observed after <i>yyyy</i>-<i>mm</i>-<i>dd</i>
+<br>
+observed before <i>yyyy</i>-<i>mm</i>-<i>dd</i>
+<br>
+observed between <i>yyyy</i>-<i>mm</i>-<i>dd</i> and <i>yyyy</i>-<i>mm</i>-<i>dd</i> (inclusive)
+<br>
+observed between <i>mm</i>-<i>dd</i> and <i>mm</i>-<i>dd</i> (inclusive)
+</h4>
+
+An advanced search term with any of these forms finds taxons that I
+have observed in the specified date range.  E.g. searching for "2023"
+finds all taxons that I observed in 2023.
+
+Note that "since" and "until" are inclusive of the listed date, while
+"after" and "before" are exclusive.
+
+While typing a date term, the guide autofills missing digits with
+reasonable values.  E.g. searching for "in 23-5" searches for taxons
+"observed in 2023-05".  Be sure to type enough digits where necessary
+to distinguish a year from a month.  This autofill assumes that every
+month ends on the 31<sup>st</sup>.  This looks funny, but has no
+adverse effect on the search results.
+
+The form "between <i>mm</i>-<i>dd</i> and <i>mm</i>-<i>dd</i>" looks
+for observations made with the specified season without regard to
+year.  The first date is the start date, and the second date is the
+end date.  If the second date comes before the first date, then the
+search range is from the first date, through the new year, to the
+second date.
+
+At this time there is no shorthand search for taxons observed within
+a specified month of any year.  Instead use "between <i>mm</i>-01 and
+<i>mm</i>-31".
+
+The "observed" prefix is optional, but the specifier for
+"in/on/since/etc." must either be typed or selected from the list of
+matching results.
+
+You can enter multiple date terms, and the results will include all
+taxons observed in any of of the listed date ranges.  E.g. using both
+"since" and "until" is useful for finding taxons <b>not</b> observed
+within a certain date range.
+
+<h3>multiple search terms</h3>
+
+After you enter a search term (and select one of the results), the
+guide displays the search term and its results, but also opens another
+input field where you can enter another search term.
+
+If you enter multiple search terms of the same type, a search is
+performed for the taxons that match any of the search terms (the first
+<b>or</b> the second <b>or</b> &hellip;).
+
+If you enter multiple search terms of different types, a search is
+performed for the taxons that match all of the search terms (the first
+<b>and</b> the second <b>and</b> &hellip;).
+
+E.g. for these search terms
+. sunflower family
+. with white flowers
+. in Edgewood
+. in Pulgas Ridge
+the result is those taxons in the sunflower family with white petals
+that were observed at either Edgewood Park or Pulgas Ridge.
+
+The guide automatically reorders your advanced search terms to put
+terms of the same type together and to put terms of different types in
+the prefered order.  However, there is nothing wrong with entering
+terms in any order you like.
+
+<h3>editing search terms</h3>
+
+You can edit any existing advanced search term by clicking on it.  The
+search term is replaced by an input field containing the text your
+originally entered.  You can them modify or replace the text and
+select an alternative result.  Alternatively, if you clear your input
+text, the result list changes to "clear this search term".  Select
+that result or press the 'Enter' key to remove your search term.
+
+Alternatively, if you press the 'Esc' key while editing a search term,
+it reverts to its original value.
+
+<h3>additional details for each taxon</h3>
+
+For each taxon listed in the advanced search results, the guide also
+lists how many times I've observed it in situations that match the
+search terms.  (Technically, it is the number of matching trips during
+which I've observed the taxon.)
+
+You can also get more details by clicking one of the options below:
+. [trips]
+. [by month]
+. [by location]
+
+After clicking to get more details on a subject, you can click a
+different option to see different details, or click the same option
+again to close it.
+
+<h4>details for trips</h4>
+
+If you click "[trips]", the guide shows the date and location for each
+observation I've made of the taxon.  This option is probably a lot
+more useful for me than for you.  E.g. have I seen it recently?
+
+<h4>details by month</h4>
+
+If you click "[by month]", the guide shows the number of observations
+I've made in each month, regardless of year.  This helps show the
+months when the taxon is most easily observed.
+
+<h4>details by location</h4>
+
+If you click "[by location]", the guide shows the number of
+observations I've made in each location.  This helps show the
+bay area regions where the taxon is most common.
+
+<h3>navigation and bookmarks</h3>
+
+Whenever you add or change an advanced search term, the guide creates
+a new page for the search.  Thus, you can navigate through your
+searches via standard browser navigation forward and back.
+
+You can also bookmark any advanced search page.  The search terms are
+saved in the bookmark, and the search is re-performed when you visit
+the bookmark.

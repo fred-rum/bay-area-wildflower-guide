@@ -869,7 +869,7 @@ const pages=[
 ["reddish tufted vetch",""],
 ["redstem stork's-bill",1,2,3,4,5],
 ["redwood inside-out flower",1,2,5,6],
-["redwood sorrel",1,2,"2f",3],
+["redwood sorrel",1,2,"2f"],
 ["redwood violet",1,2,3],
 ["ribwort plantain",1,2,3,5],
 ["ring-billed gull",2],

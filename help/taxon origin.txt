@@ -1,0 +1,13 @@
+Most taxons at the species level and below have origin information
+imported from iNaturalist.  Specifically, the taxon may be:
+. endemic to California (not native anywhere else)
+. native to California (and other locations)
+. alien (a.k.a. not native)
+
+The taxon origin is abbreviated as a single letter (E, N, or A) to the
+right of its names.  You can hover your mouse over this letter to
+expand it to a full word.  On a device without a mouse, tap the letter
+to expand or contract the word.
+
+The taxon origin may be blank if iNaturalist does not have origin
+information for it.

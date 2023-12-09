@@ -7,21 +7,21 @@ warn:insects
 
 figure:fly side
 
-{head,heads} The frontmost of the three major sections of the body, including the eyes, mouth, antennae, etc.  [figure:fly side,part I]
+{head,heads} The frontmost of the three major sections of the body, including the eyes, mouth, antennae, etc.  [figure:fly side,part A in the figure]
 
-{thorax,thoraxes,thoraces} The middle of the three major sections of the body.  [figure:fly side,part II]
+{thorax,thoraxes,thoraces} The middle of the three major sections of the body.  [figure:fly side,part B in the figure]
 
-{abdomen,abdomens} The hindmost of the three major sections of the body.  [figure:fly side,part III]
+{abdomen,abdomens} The hindmost of the three major sections of the body.  [figure:fly side,part C in the figure]
 
-{antenna,antennae} One of a pair of long sensory appendages on the front of the head.  [figure:fly side,part 1]
+{antenna,antennae} One of a pair of long sensory appendages on the front of the head.  [figure:fly side,part 1 in the figure]
 
-{prothorax,prothoraxes,prothoraces} The anterior portion of the thorax, supporting the first pair of legs.  [figure:fly side,part 6]
+{prothorax,prothoraxes,prothoraces} The anterior portion of the thorax, supporting the first pair of legs.  [figure:fly side,part 6 in the figure]
 
 {pronotum,pronotums} The dorsal sclerite covering the prothorax.
 
-{forewing,forewings,front wing,front wings} One of the front pair of wings.  [figure:fly side,part 11]
+{forewing,forewings,front wing,front wings} One of the front pair of wings.  [figure:fly side,part 11 in the figure]
 
-{hindwing,hindwings} One of the rear pair of wings.  [figure:fly side,part 12]
+{hindwing,hindwings} One of the rear pair of wings.  [figure:fly side,part 12 in the figure]
 
 
 {sclerite,sclerites} A plate forming one section of an exoskeleton.

@@ -30,4 +30,4 @@ genus: n/a
 x:any
 color: yellow
 . pedicel generally > calyx
-. ccalyx lobes +- tube, with faint unraised midribs
+. calyx lobes +- tube, with faint unraised midribs

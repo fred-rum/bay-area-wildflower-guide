@@ -1,0 +1,16 @@
+Each taxon is one part of a chain of taxonomic relationships from the
+top level (all {-life}) down to the lowest species or subspecies
+level.
+
+Each intermediate taxon represents a grouping of related taxons.  In
+the common phylogenetic taxonomy used in science, all taxons in the
+intermediate group are more related to each other than to any other
+group.  However, the BAWG also includes informal taxons (such as all
+{-galls}) to represent taxons that are conceptually similar even if
+not directly related.
+
+In order to better establish the relationship of a taxon to others,
+each taxon page lists the interesting higher-level taxons that it is a
+member of.  "Interesting" generally means those taxons with sufficient
+general use to have a common name, but for brevity the list generally
+excludes high-level taxons that are obvious (such as {-animals}).

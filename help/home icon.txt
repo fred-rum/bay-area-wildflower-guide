@@ -1,0 +1,5 @@
+In the upper corner of almost every page is an icon that you can click to return to the BAWG home page.  This home icon and the {-search} bar are attached to the top of the window so that they remain accessible even when the page is scrolled.
+
+Trivia: the home icon shows <a href="https://www.inaturalist.org/taxa/50333-Lantana-camara">common lantana</a>, which doesn't grow wild in the bay area.
+
+There is also a link to the home page in the footer of most pages.

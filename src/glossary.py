@@ -570,8 +570,9 @@ class Glossary:
             # Where a term is defined in a regular glossary (i.e. term + defn),
             # add links to other glossaries that define the same term.
             #
-            # But don't do this where the term is defined on a taxon page (i.e.
-            # in a paragraph that doesn't necessary have just one defined term).
+            # But don't do this where the term is defined on a taxon page
+            # (i.e. in a paragraph that doesn't necessarily have just one
+            # defined term).
             related_str = ''
             if is_glossary:
                 dup_list = self.find_dups(anchor)
@@ -657,7 +658,7 @@ class Glossary:
 
     # Write search terms for Jepson's glossary to pages.js
     def write_jepson_search_terms(self, w):
-        w.write('{p:"Jepson eFlora",c:["Jepson eFlora"],x:"j",glossary:[\n')
+        w.write('{p:"Jepson eFlora glossary",c:["Jepson eFlora glossary"],x:"j",glossary:[\n')
         for term in self.search_terms:
             terms_str = '","'.join(term)
             anchor = self.term_anchor[term[0]]

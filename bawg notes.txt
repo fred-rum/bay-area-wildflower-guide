@@ -1813,3 +1813,92 @@ Print a better warning when rep: fails
 Sort advanced search results by observation count
   e.g. "observed in ..."
   is it worthwhile?
+
+Ensure that all internal links are colored in some way so that they
+can be distinguished from external links, which makes a big difference
+when offline.  (And consider enforcing color on external links as
+well, in case the user has colored them in a way that collides with
+BAWG colors.)
+
+Should the regular search bar give priority to taxons?
+  Perhaps include the minimum number of other choices
+    to show an example next letter?
+  e.g. for advanced search terms
+
+Searching for "1-pinnate" crashes the search.
+  Should it be %#-pinnate instead?  (with '#' as the default substitution?)
+
+Remove duplicates from advanced search
+  e.g. searching "within galls" shows results in both
+    the galls and life hierarchy
+  (note that tanoak galls and sticky cinquefoil galls aren't in life)
+
+Figure out why editing an advanced search is slow when all of life is displayed
+  but it only happens in Chrome, so debugging may be hard
+    unless I can find a real profiler
+  it might be that Chrome has been running too long
+    (with too many YouTube videos from SciShow)
+
+Make link colors consistent:
+  internal links: black, brown, or green
+    use "<a" detector to find manual internal links and add class="unobs"
+  Jepson glossary words: orange underline (undotted to make it easier to see)
+  external links: standard
+    double underline for obviousness?
+
+taxon page image : 404x583
+  home icon: 37 x 35
+  search bar: @ 37,0 - 411-37 x 35
+  names: @ 0,35 - 300 x 68
+  origin: @ 300,35 - 411-300 x 68
+  ancestors: @ 0,103 - 411 x 98
+  photo gallery: @0,201 - 411 x 171
+  description: @0,372 - 411 x 46
+  toxicity: 411 x 43
+  my observations: 411 x 33
+  more info: 411 x 63
+  bay area species: 411 x 33
+
+don't reorder explicit child links if they have the same observation count
+  or don't reorder them even if they have different observation counts?
+  but do reorder implicit child link to ensure a consistent order?
+    or only reorder if there is at least one implicit child link
+
+reorder_mixed_children
+  applies if some children are from txt and some are linked from other sources
+  if all children are from txt, they are never reordered
+  if all children are linked from other sources, they are always sorted
+  nothing - txt children are left unchanged,
+    and other children are sorted thereafter
+  do - txt and other children are sorted together
+  flag - if this condition occurs, flag it
+see num_txt_children in parse.py - end_consecutive_children()
+
+Split the list of "member of" taxons into multiple lists
+  one for each separate parentage
+  with the priority for the first list going to the Linnaean ancestor
+  all lists are aligned by rank, so gaps may appear in any list
+      including the first
+    lists may also be offset by half a line to compress "between" ranks
+  e.g. live oak bud gall wasp is a member of
+    oak gall wasps, gall wasps, wasps, insects, arthropods, etc.
+    and also oak galls and galls
+      where oak galls appears between insects and arthopods
+      and galls appears half a line beyond animals
+  problem:
+    on a phone, one species often takes more than one line
+      so multiple parallel lists is infeasable
+    they could be consecutive
+      (with a spacer?)
+      can CSS do that?
+      would it be sufficiently clear and useful? (probably)
+
+Review and update high-level taxons for "member of" lists.
+  E.g. drop "animals", but add "vertebrates"
+
+Make "edibility" a real tag and link it to the help
+
+document help pages in BAWG.odt
+
+Get bugguide IDs from master list files:
+https://bugguide.net/node/view/1401565
