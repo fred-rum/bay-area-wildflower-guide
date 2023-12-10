@@ -58,8 +58,6 @@ If an individual flower can have different primary colors (e.g. depending on age
 # txt files.
 # A few more families need manual attributes, but don't need extra text.
 # For those, we declare them as children below.
-# Regardless of how each family is created, they're all re-sorted into
-# an appropriate order (as long as I don't add any extraneous text in here).
 
 ==amaranth family:family Amaranthaceae
 

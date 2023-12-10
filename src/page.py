@@ -136,7 +136,9 @@ def get_default_ancestor():
     return default_ancestor
 
 def sort_pages(page_set, trait=None, value=None,
-               with_depth=False, with_count=True, sci_only=False):
+               with_name=True, sci_only=False,
+               with_photo=False,
+               with_depth=False, with_count=True):
     # helper function to sort by name
     def by_name(page):
         name = ''
@@ -155,6 +157,12 @@ def sort_pages(page_set, trait=None, value=None,
             name += page.sci.lower() + '  ' + page.elab.lower()
 
         return name
+
+    def by_photo(page):
+        if page.get_jpg(''):
+            return 0
+        else:
+            return 1
 
     # helper function to sort by hierarchical depth (parents before children)
     def by_depth(page):
@@ -180,11 +188,6 @@ def sort_pages(page_set, trait=None, value=None,
         else:
             return (Rank.kingdom, 2) # behaves a higher rank than 'kingdom'
 
-        parent_depth = 0
-        for parent in page.parent:
-            parent_depth = max(parent_depth, by_depth(parent))
-        return parent_depth + 1
-
     # helper function to sort by observation count, using the nonlocal
     # variables of trait and value.
     def count_flowers_helper(page):
@@ -201,11 +204,18 @@ def sort_pages(page_set, trait=None, value=None,
     # from the previous sort, so the sorts are performed in order from least
     # priority to most priority.
 
-    # Start by sorting match_set sorted alphabetically.
+    page_list = list(page_set)
+
+    # Start by sorting page_set alphabetically.
     # The alphabetic tie breaker may or may not be useful to the user,
     # but it prevents random differences every time the script is run
     # just because the dictionary hashes differently.
-    page_list = sorted(page_set, key=by_name)
+    if with_name:
+        page_list = sorted(page_list, key=by_name)
+
+    # If requested, sort a page with a photo before one with out.
+    if with_photo:
+        page_list = sorted(page_list, key=by_photo)
 
     # If requested, sort by rank (higher rank first).
     # For unranked pages, use the rank of its linnaean parent to indicate
@@ -646,8 +656,15 @@ class Page:
 
     # Provide a hook for the sort_pages() helper function to be called
     # via a Page object without needing to import page.py.
-    def sort_pages(self, page_set):
-        return sort_pages(page_set)
+    def sort_children(self, child_set):
+        if self.num_txt_children == len(self.child):
+            # All children are explicitly listed in the text.
+            # Don't reorder equal counts (e.g. among unobserved taxons).
+            return sort_pages(child_set, with_name=False, with_photo=True)
+        else:
+            # Some children were linked automatically and so are ordered
+            # arbitrarily.  Reorder them by name as the final tie breaker.
+            return sort_pages(child_set, with_name=True, with_photo=True)
 
     def read_txt(self, f):
         self.txt = f.read()
@@ -2159,16 +2176,10 @@ class Page:
                         parent.child_suppress.add(child)
                 self.assign_child(child)
 
-    def sort_children(self):
-        # If children were linked to the page via the Linnaean hierarchy,
-        # they may be in a non-intuitive order.  We re-order them here.
-        # This includes both adjusting their order in self.child and
-        # also adding links to them in the txt.
-        if self.non_txt_children:
-            self.child = self.child[:-len(self.non_txt_children)]
-            for child in sort_pages(self.non_txt_children):
-                self.child.append(child)
-                self.txt += f'==\n'
+    def prepare_children(self):
+        # Make sure the txt has an == for every child.
+        for child in self.child[self.num_txt_children:]:
+            self.txt += f'==\n'
 
         if self.subset_of_page:
             # Get the top layer of pages in the subset.
@@ -3097,10 +3108,14 @@ class Page:
         if key_txt and (self.rank or not child.key_txt):
             child.key_txt = key_txt
 
-            # Remember that at least one child was given key info.
-            # list_hierarchy doesn't display key info, so the page doesn't
-            # count as having a child key.
-            self.has_child_key = not self.list_hierarchy
+        # list_hierarchy doesn't display key info, so the page doesn't
+        # count as having a child key.
+        if self.list_hierarchy:
+            key_txt = ''
+
+        # Remember whether any child was given key info.
+        if key_txt:
+            self.has_child_key = True
 
         name = child.name
         jpg = child.get_jpg(suffix)
@@ -3128,20 +3143,22 @@ class Page:
         if self.list_hierarchy:
             s = io.StringIO()
             list_matches(s, [child], False, None, None, match_set)
-            return s.getvalue()
+            child_txt = s.getvalue()
         elif not img:
             link = child.create_link(2, needs_span=True)
-            return f'<p>{link}</p>\n' + text
+            child_txt = f'<p>{link}</p>\n' + text
         elif text:
             # Duplicate and contain the text link so that the following text
             # can either be below the text link and next to the image or
             # below both the image and text link, depending on the width of
             # the viewport.
             link = child.create_link(2, needs_span=False)
-            return f'<div class="flex-width"><div class="photo-box">{img}\n<span class="show-narrow">{link}</span></div><div class="key-text"><span class="show-wide">{link}</span>{text}</div></div>'
+            child_txt = f'<div class="flex-width"><div class="photo-box">{img}\n<span class="show-narrow">{link}</span></div><div class="key-text"><span class="show-wide">{link}</span>{text}</div></div>'
         else:
             link = child.create_link(2, needs_span=True)
-            return f'<div class="photo-box">{img}\n{link}</div>'
+            child_txt = f'<div class="photo-box">{img}\n{link}</div>'
+
+        return child_txt, key_txt
 
     def parse_line_by_line(self):
         # If a parent already parsed this page (as below), we shouldn't

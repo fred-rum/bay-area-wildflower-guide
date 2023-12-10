@@ -658,7 +658,7 @@ try:
         parse_glossaries(top_list)
 
         for page in page_array:
-            page.sort_children()
+            page.prepare_children()
 
         for page in page_array:
             page.check_traits()

@@ -1,8 +1,4 @@
 sci: family Polyporaceae
 
-==genus Trametes
-
-==artist's brackets, reishi, and allies
-
 ==veiled polypore:Cryptoporus volvatus
 x:more

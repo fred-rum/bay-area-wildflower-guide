@@ -1846,34 +1846,6 @@ Make link colors consistent:
   external links: standard
     double underline for obviousness?
 
-taxon page image : 404x583
-  home icon: 37 x 35
-  search bar: @ 37,0 - 411-37 x 35
-  names: @ 0,35 - 300 x 68
-  origin: @ 300,35 - 411-300 x 68
-  ancestors: @ 0,103 - 411 x 98
-  photo gallery: @0,201 - 411 x 171
-  description: @0,372 - 411 x 46
-  toxicity: 411 x 43
-  my observations: 411 x 33
-  more info: 411 x 63
-  bay area species: 411 x 33
-
-don't reorder explicit child links if they have the same observation count
-  or don't reorder them even if they have different observation counts?
-  but do reorder implicit child link to ensure a consistent order?
-    or only reorder if there is at least one implicit child link
-
-reorder_mixed_children
-  applies if some children are from txt and some are linked from other sources
-  if all children are from txt, they are never reordered
-  if all children are linked from other sources, they are always sorted
-  nothing - txt children are left unchanged,
-    and other children are sorted thereafter
-  do - txt and other children are sorted together
-  flag - if this condition occurs, flag it
-see num_txt_children in parse.py - end_consecutive_children()
-
 Split the list of "member of" taxons into multiple lists
   one for each separate parentage
   with the priority for the first list going to the Linnaean ancestor
@@ -1902,3 +1874,8 @@ document help pages in BAWG.odt
 
 Get bugguide IDs from master list files:
 https://bugguide.net/node/view/1401565
+
+tarweeds and allies should use a yellow flower photo for blow wives
+  ==blow wives,2
+  but right now that seems to disrupt other pages
+  fix it

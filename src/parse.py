@@ -57,15 +57,23 @@ def parse_line_by_line(name, s, page, glossary):
             c_list = c_list[:child_start]
             child_start = None
 
-            child_txt = page.parse_child_and_key(child, suffix, text,
-                                                 match_set)
+            child_txt, child_key = page.parse_child_and_key(child, suffix,
+                                                            text, match_set)
             if child in page.child_suppress:
                 child_txt = ''
+
+            # a child with a key is not sorted with previous children
+            if child_txt and child_key:
+                end_consecutive_children();
 
             c_list.append(child_txt)
 
             child_list.append(child)
             child_idx += 1
+
+            # a child with a key is not sorted with following children
+            if child_txt and child_key:
+                end_consecutive_children();
 
         # If beginning a new set of glossary definition, insert <dl>
         # after the previous paragraph (including all closing tags) and
@@ -81,24 +89,25 @@ def parse_line_by_line(name, s, page, glossary):
 
         in_dl = for_defn
 
-    # When desired, reorder consecutive children in the parsed text to be
-    # sorted by observation counts.
+    # Reorder consecutive children without keys to be
+    # sorted by observation counts and other factors.
     def end_consecutive_children():
         nonlocal c_list, child_list, child_idx
 
-        if not child_list or page.has_child_key:
+        if not child_list:
             return
 
         num_children = len(child_list)
         child_text_list = c_list[-num_children:]
         c_list = c_list[:-num_children]
 
-#        if page.num_txt_children and child_idx > page.num_txt_children:
-#            print(f'{child_idx} > {page.num_txt_children} in {page.full()}')
+        # starting index for the parsed children
+        # (child_idx is the just after the last parsed child)
+        child_idx_0 = child_idx - num_children
 
-        sorted_child_list = page.sort_pages(child_list)
+        sorted_child_list = page.sort_children(child_list)
 
-        page.child[child_idx - num_children:child_idx] = sorted_child_list
+        page.child[child_idx_0:child_idx] = sorted_child_list
 
         for child in sorted_child_list:
             child_num = child_list.index(child)
