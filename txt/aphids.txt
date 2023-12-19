@@ -16,4 +16,8 @@ bug:356327
 x:more
 bug:356346
 
+==woolly apple aphid:Eriosoma lanigerum
+bug:122162
+. found on apple, pear, crab apple, {-genus Prunus}, {-Pyracantha}, {-Cotoneaster}, elm, hawthorn, and mountain ash
+
 ==gall aphids

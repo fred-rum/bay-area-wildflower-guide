@@ -38,6 +38,7 @@ color: other, red
 . inner perianth lobe margin generally entire (if toothed or notched, teeth or notches < 0.3 mm)
 . inflorescence +- open (between whorls)
 . <b>pedicels 1--4(5) mm, generally +- >= inner perianth</b>
+.. flowers are "clustered" close to the stem
 . <b>inner perianth lobes 2--3 mm, 1--1.6(2) mm wide</b>
 . <b>tubercles 3, +- equal, almost as wide as lobe</b> [<a href="http://ucjeps.berkeley.edu/eflora/eflora_display.php?tid=42386">illustration</a>]
 . <b>leaf margin +- flat</b>

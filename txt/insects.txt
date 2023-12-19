@@ -8,6 +8,7 @@ There is a <a href="insect-glossary.html">glossary</a> for insects.
 ==bees
 
 ==flies
+rep:hover flies # don't use gall midges for representative thumbnail
 
 ==common sawflies
 
@@ -36,8 +37,6 @@ bug:156092
 
 ==jumping plant lice
 
-==gall midges
-
 ==red gum lerp psyllid
 
 ==european earwig complex:complex Forficula auricularia
@@ -52,3 +51,11 @@ bug:248040
 ==mantids
 
 ==thrips
+
+==chinese wax scale:Ceroplastes sinensis
+bug:490135
+. found on {-california bay}, {-coyote brush}, {-european holly}, {-barberries}, and {-peppertrees}
+. mature females are up to 1/3 inch long, rosette shaped with waxy lumps
+.. males are rare
+. nymphs are covered with conical, star-shaped, or rosette-shaped wax plates
+. exude copious honeydew

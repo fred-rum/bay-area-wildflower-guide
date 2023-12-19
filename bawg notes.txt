@@ -1879,3 +1879,7 @@ tarweeds and allies should use a yellow flower photo for blow wives
   ==blow wives,2
   but right now that seems to disrupt other pages
   fix it
+
+when an alternative name matches during search,
+  I should still highlight a match in the regular name, if there's a match
+  e.g. "sunburst" in "common sunburst lichen [sunburst lichens]"

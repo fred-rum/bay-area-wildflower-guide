@@ -11,3 +11,7 @@ x:more
 x:more
 
 ==hair lichens
+
+==pelt lichens:genus Peltigera
+
+==common sunburst lichen:Xanthoria parietina

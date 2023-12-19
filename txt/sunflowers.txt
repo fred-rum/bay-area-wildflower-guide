@@ -14,6 +14,7 @@ color: yellow
 
 ==serpentine sunflower:H. exilis
 sci_j:H. bolanderi
+color: yellow
 . phyllaries 8--27 mm long, 3--5 mm wide, often >> disk
 
 ==slender sunflower:H. gracilentus
