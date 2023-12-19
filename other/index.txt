@@ -87,3 +87,5 @@ or flag an issue with the Guide via
 <a href="https://github.com/fred-rum/bay-area-wildflower-guide/issues">GitHub</a>.
 A free account is required to use either service.
 </div>
+
+footer
