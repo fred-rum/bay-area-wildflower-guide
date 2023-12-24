@@ -2,15 +2,14 @@ sci:Agoseris heterophylla
 x:any
 
 ==mountain dandelion:A. heterophylla var. cryptopleura
+# common name from Calflora
 color: yellow
-. liggues 10--15 mm, much exceeding involucre
-. leaf petiole may be purple
-. generally 3--5 pairs of leaf lobes
+. ligules 10--15 mm, much exceeding involucre
+. leaf entire or with generally 3--5 pairs of leaf lobes
 . uncommon
 
 ==annual false dandelion:A. heterophylla var. heterophylla
 species: annual agoseris
 . ligules 2--6 mm, +- equaling involucre [the phyllaries reach almost to the petal tips]
-. leaf petiole not purple
-. generally 2--3 pairs of leaf lobes
+. leaf entire or with generally 2--3 pairs of leaf lobes
 . common

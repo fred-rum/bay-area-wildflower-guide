@@ -1,3 +1,7 @@
+The search bar has the initial focus in a new page, so on a computer
+you can just start typing to start the search.  On a mobile device,
+you have to tap the search bar to bring up the virtual keyboard.
+
 By default, the first search result is highlighted in bold.  Press
 'Enter' to navigate to the highlighted result.
 

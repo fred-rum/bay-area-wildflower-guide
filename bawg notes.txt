@@ -1888,3 +1888,6 @@ Remove top <hr> if there's no "Member of" or anything else
   between the page name(s) and the <hr>
 Remove bottom <hr> if there's no "observations" or anything else
   between the page name(s) and the <hr>
+
+should default_completeness be triggered only if there are children?
+  should default_completeness (in life.txt) extend to the species level?

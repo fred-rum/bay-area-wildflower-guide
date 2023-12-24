@@ -15,6 +15,7 @@ Key features:
 .. all others have a stout taprout
 . [Jepson claims it is often leafy above the base, but I can find no photos that show this]
 .. all others have only basal leaves
+. petiole not purple
 
 <h2>petals >= 6 mm long</h2>
 
@@ -27,8 +28,6 @@ color:yellow
 . uncommon
 
 ==seaside agoseris:A. apargioides
-color: yellow
-<b>Caultion: ID unsure</b>
 . ligules 8--16 mm, much exceeding involucre
 . <b>petiole +- purple</b>
 . leaf is either entire or includes generally 3--5 pairs of leaf lobes
@@ -53,7 +52,7 @@ xx:ca
 
 ==mountain dandelion:A. heterophylla var. cryptopleura
 . ligules 10--15 mm, much exceeding involucre
-. leaf petiole may be purple
+. petiole may be purple
 . generally 3--5 pairs of leaf lobes
 . uncommon
 
@@ -74,6 +73,6 @@ species: bigflower agoseris
 ==annual false dandelion:A. heterophylla var. heterophylla
 species: annual agoseris
 . ligules 2--6 mm, +- equaling involucre [the phyllaries reach almost to the petal tips]
-. leaf petiole not purple
+. petiole not purple
 . generally 2--3 pairs of leaf lobes
 . common

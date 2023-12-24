@@ -60,8 +60,10 @@ color:yellow
 . outer phyllaries 0--few, inconspicuous to > &frac12; inner
 . common
 
-==threadleaf groundsel:S. flaccidus
+==douglas' threadleaf ragwort:S. flaccidus var. douglasii
 color:yellow
+xx:ba
+species:threadleaf groundsel
 . unknown number of disk flowers
 . 8, 13, or 21 ray flowers, 10--15 mm
 . involucre bell-shaped

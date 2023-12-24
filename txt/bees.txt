@@ -39,3 +39,6 @@ bug:51916
 
 ==california digger bee:Anthophora californica
 bug:239588
+
+==western leafcutter bee:Megachile perihirta
+bug:104963

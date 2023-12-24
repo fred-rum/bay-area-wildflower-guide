@@ -40,7 +40,7 @@ The bracts are thin/linear sprouts immediately subtending each sepal of the caly
 
 ==butter lupine:L. luteolus
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1214+2820
-. habit: annual 3--7.5 dm, sparsely hairy or in age glabrous, appearing glaucous; <b>cotyledons none#disk-like, persistent</b> <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+0754">[example]</a> at plant base, or leaving circular scar
+. habit: annual 30--75 cm, sparsely hairy or in age glabrous, appearing glaucous; <b>cotyledons none#disk-like, persistent</b> <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+0754">[example]</a> at plant base, or leaving circular scar
 . stem: <b>hard, rigid</b>
 . leaf: petiole 2--5 cm; leaflets 7--9, 10--30 mm, 4--9 mm wide, adaxially generally hairy
 . inflorescence: 5--22 cm, <b>flowers in generally crowded whorls</b>; peduncle 4--15 cm; pedicels 1--3 mm; bracts 5--11 mm, reflexed, hairy, persistent
@@ -50,7 +50,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1214+2820
 
 ==chick lupine:L. microcarpus
 color: cream, pale purple, purple
-. habit: annual 1--8 dm, sparsely to densely hairy; <b>cotyledons none#disk-like, persistent</b> <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+0754">[example]</a> at plant base, or leaving circular scar
+. habit: annual 10--80 cm, sparsely to densely hairy; <b>cotyledons none#disk-like, persistent</b> <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+0754">[example]</a> at plant base, or leaving circular scar
 . stem: <b>clearly hollow, at least below</b>
 . leaf: petiole 3--15 cm; leaflets 5--11, generally 9, 10--50 mm, 2--12 mm wide, occasionally linear, adaxially glabrous
 . inflorescence: 2--30 cm; peduncle 2--30 cm; pedicels 0.5--5 mm; bracts 3.5--12 mm, reflexed, persistent
@@ -67,7 +67,7 @@ color: cream, pale purple, purple
 
 ==stinging lupine:L. hirsutissimus
 color: pink, red purple
-. habit: annual 2--10 dm (often > 10 dm after fire), short-appressed- and <b>stiff-spreading-stinging-hairy</b>
+. habit: annual 20--100 cm (often > 100 cm after fire), short-appressed- and <b>stiff-spreading-stinging-hairy</b>
 . leaf: petiole 4--9 cm; leaflets 5--8, 20--50 mm, <b>10--20 mm wide</b>
 . inflorescence: 10--30 cm, <b>flowers spiralled</b>; peduncle 5--8 cm; pedicels 2--5 mm; bracts 4--5 mm, generally persistent
 . flower: 12--18 mm; calyx 6--10 mm, lips +- equal, upper deeply lobed; petals dark pink to magenta, drying +- purple, banner spot +- yellow, in age magenta
@@ -76,7 +76,7 @@ color: pink, red purple
 
 ==collared annual lupine:L. truncatus
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0806+0442
-. habit: annual 2--3(5) dm, <b>finely hairy, generally appearing glabrous</b>
+. habit: annual 20--30(50) cm, <b>finely hairy, generally appearing glabrous</b>
 . leaf: petiole 3--10 cm, flat, leaflet-like; leaflets 5--8, 20--40 mm, <b>2--5 mm wide, linear</b>, adaxially glabrous, <b>tip generally truncate</b>
 . inflorescence: 3--25 cm, <b>flowers sparse, spiralled</b>; peduncle 3--10 cm; pedicels 2--4 mm; bracts 2--5 mm, persistent
 . flower: 8--13 mm; calyx 3--4 mm, lips +- equal, upper deeply lobed; banner, wings magenta, banner spot +- yellow, dark magenta in age
@@ -90,7 +90,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0806+0442
 
 ==arroyo lupine:L. succulentus
 color: purple
-. habit: annual, often appearing perennial herb, 2--10 dm, sparsely hairy, <b>fleshy</b>
+. habit: annual, often appearing perennial herb, 20--100 cm, sparsely hairy, <b>fleshy</b>
 . leaf: petiole 6--15 cm; leaflets 7--9, 20--60 mm, 7--20 mm wide, adaxially glabrous
 . inflorescence: 9--15 cm, <b>flowers whorled</b>; peduncle 5--9 cm; pedicels 3--7 mm; bract 3--5 
 . flower: 12--18 mm; calyx 4--7 mm, lips +- equal, upper lobed; petals generally blue-purple (white, pink, lavender), banner spot white, magenta in age, wings sparsely ciliate on upper margins near claw
@@ -110,7 +110,7 @@ color: purple
 
 ==miniature lupine:L. bicolor
 color: purple
-. habit: annual (may live 2 seasons in NCo), 1--4 dm, hairy
+. habit: annual (may live 2 seasons in NCo), 10--40 cm, hairy
 . leaf: petiole 1--7 cm; leaflets 5--7, 10--40 mm, 1--5 mm wide, occasionally linear, <b>adaxially generally +- glabrous</b>
 . inflorescence: 1--8 cm, <b>flowers in (0)5 whorls</b>; peduncle 3--10 cm; <b>pedicels 1--3.5 mm</b>; bract 4--6 mm
 . flower: 4--10 mm; calyx upper lip 2--4 mm, deeply lobed, lower 4--6 mm; petals generally blue (light blue, pink, or white), <b>banner longer than wide</b>, spot white, in age magenta
@@ -120,7 +120,7 @@ color: purple
 
 ==big pod lupine:L. pachylobus
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0113+1990
-. habit: annual 1.5--4 dm, hairy
+. habit: annual 15--40 cm, hairy
 . leaf: petiole 4--8 cm; leaflets generally 7, 20--25 mm, 2--5 mm wide
 . inflorescence: 1--4 cm, <b>flowers generally whorled</b>; peduncle 3--12 cm; <b>pedicels 1--2.5 mm</b>; bract +- 6 mm
 . flower: 7--9 mm; calyx 4.5--6 mm, lips +- equal; petals blue, <b>banner longer than wide</b>, spot white, in age dark magenta
@@ -134,7 +134,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0113+1990
 
 ==fleshy lupine:L. affinis
 color: purple
-. habit: annual 2--5(6) dm, hairy
+. habit: annual 20--50(60) cm, hairy
 . leaf: petiole 3--10 cm; leaflets 5--8, 20--50 mm, 4--11 mm wide
 . inflorescence: 4--20 cm, <b>flowers whorled</b>; peduncle 5--18 cm; <b>pedicels 3--6 mm</b>; bract 5--7.5 mm
 . flower: 8--12 mm; calyx 5--7 mm, lips +- equal; petals blue, <b>banner as wide or wider than long</b>, spot white
@@ -143,7 +143,7 @@ color: purple
 
 ==sky lupine:L. nanus
 color: blue
-. habit: annual 1--6 dm, hairy
+. habit: annual 10--60 cm, hairy
 . leaf: petiole 2--8.5 cm; leaflets 5--9, generally 7, 10--40 mm, 1--12 mm wide, occasionally linear, <b>adaxially hairy</b>
 . inflorescence: 2--20 cm, <b>flowers generally whorled</b>; peduncle 2--15 cm; <b>pedicels 2.5--7 mm</b>; bract 4--12 mm
 . flower: 6--15 mm; calyx 4--8 mm, lips +- equal, upper deeply lobed; petals blue (light blue), lavender, pink, or white, <b>banner as wide or wider than long</b>, spot white
@@ -158,7 +158,7 @@ color: blue
 
 ==chamisso bush lupine:L. chamissonis
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0210+2322
-. habit: <b>shrub 5--20 dm</b>, silvery, densely appressed-hairy
+. habit: <b>shrub 50--200 cm</b>, silvery, densely appressed-hairy
 . stem: erect
 . leaf: cauline; stipules 8--10 mm; petiole 1--3.5 cm; leaflets 5--9, 10--25 mm
 . inflorescence: 5--20 cm, flowers +- whorled; peduncle 2--6 cm; pedicels 4--8 mm; bract 7--10 mm
@@ -167,7 +167,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0210+2322
 . common in SF, also found near Cowell
 
 ==silver bush lupine:L. albifrons
-. habit: <b>subshrub, shrub, < 50 dm, hairy</b>, generally silver (+- green)
+. habit: <b>subshrub, shrub, < 500 cm, hairy</b>, generally silver (+- green)
 . stem: decumbent to erect
 . leaf: cauline, clustered near base or not, hairy; stipules 6--20 mm; petiole 1--8 cm; leaflets 6--10, 10--45 mm
 . inflorescence: 4--30 cm, flowers generally not to loosely whorled; peduncle 5--13 cm; pedicels 3--10 mm; bract 4--15 mm
@@ -178,7 +178,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0210+2322
 ==coastal bush lupine:L. arboreus
 acom:yellow bush lupine
 color: yellow, cream, purple, pale purple
-. habit: <b>Shrub 5--20 dm</b>, green-glabrous to silver-hairy
+. habit: <b>shrub 50--200 cm</b>, green-glabrous to silver-hairy
 . stem: woody, erect
 . leaf: cauline; stipules 8--12 mm; petiole 2--3(6) cm; leaflets 5--12, 20--60 mm
 . inflorescence: 10--30 cm, flowers whorled or not; peduncle 4--10 cm; pedicels 4--10 mm; bract 8--10 mm
@@ -192,7 +192,7 @@ color: yellow, cream, purple, pale purple
 
 ==broadleaf lupine:L. latifolius
 color:purple
-. habit: perennial herb 3--24 dm, green, glabrous to hairy, <b>not fleshy</b>
+. habit: perennial herb 30--240 cm, green, glabrous to hairy, <b>not fleshy</b>
 . stem: erect
 . leaf: cauline; stipules 5--10 mm; petiole 4--20 cm; leaflets 5--11, <b>40--100 mm</b>, abaxially +- hairy, adaxially glabrous to hairy
 . inflorescence: 16--60 cm, open, flowers whorled or not; peduncle 8--20 cm; pedicels 2--12 mm; bract 8--12 mm
@@ -203,7 +203,7 @@ color:purple
 ==meadow lupine:L. polyphyllus ssp. polyphyllus
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1107+1443
 species: large-leaved lupine
-. habit: perennial herb 2--15 dm, green, glabrous or sparsely hairy
+. habit: perennial herb 20--150 cm, green, glabrous or sparsely hairy
 . stem: <b>erect, stout, generally hollow</b>
 . leaf: basal and cauline; stipules 5--30 mm; petioles 3--45 cm, upper shorter; leaflets 9--17, <b>40--150 mm</b>, abaxially +- strigose, <b>adaxially glabrous</b>
 . inflorescence: 6--40 cm, open, flowers +- whorled; peduncle 3--13 cm; pedicels 3--15 mm; bract 7--11 mm
@@ -216,7 +216,7 @@ sci_fpj: Lupinus polyphyllus var. polyphyllus
 color:purple, pale purple, pale blue
 species: summer lupine
 xx:rare
-. habit: perennial herb 2--8 dm, densely hairy to tomentose, gray to silver; rhizomes 3--7 mm diam
+. habit: perennial herb 20--80 cm, densely hairy to tomentose, gray to silver; rhizomes 3--7 mm diam
 . stem: spreading to erect, 3--4 mm diam
 . leaf: cauline; stipules 4--15 mm; petiole 2--7 cm; leaflets 7--9, 25--70 mm; <b>adaxially hairy, green-gray to silver</b>
 . inflorescence: 10--30 cm, flowers +- whorled; peduncle 3--7 cm; pedicels 3--7 mm; bract 4--14 mm
@@ -226,7 +226,7 @@ xx:rare
 
 ==varied lupine:L. variicolor
 color:purple, pale purple, blue, yellow, cream, white
-. habit: perennial herb, subshrub, 2--5 dm, generally dense-appressed or -spreading-silver-hairy
+. habit: perennial herb, subshrub, 20--50 cm, generally dense-appressed or -spreading-silver-hairy
 . stem: <b>prostrate to decumbent</b>, not weak
 . leaf: cauline, often appearing clustered near base 1st year; stipules 7--8 mm; petiole generally 4--10 cm; leaflets 6--9, 20--35 mm
 . inflorescence: 6--15 cm, flowers +- whorled or not; peduncle 4--12 cm; pedicels 4--12 mm; bract 4--7 mm

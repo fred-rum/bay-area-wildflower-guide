@@ -2,3 +2,5 @@ sci:Achillea millefolium
 color: white
 x:rare
 genus: yarrows
+
+Various sources, both ancient and modern, claim that crushed yarrow leaves and flowers (fresh or dry) are good for stopping bleeding. ^https://www.pnwfromscratch.com/how-to-use-yarrow-stop-bleeding/ You can chew it up to make it stickier. ^https://www.cambridgenaturals.com/blog/yarrow-a-first-aid-herb-achillea-millefolium Achilles supposedly used it on his men's battle wounds, thus lending his name to the genus. ^https://wssa.net/wp-content/themes/WSSA/WorldOfWeeds/yarrow.html

@@ -44,8 +44,9 @@ Fruit key features:
 
 Flower key features:
 . corolla diameter
-. anther length
 . style strongly exserted or not
+. filaments (the portion visible below the anther) distinct or not
+. anther length
 
 Stanford's Jasper Ridge program has a <a href="https://web.stanford.edu/dept/JRBP/plants/PDF/Solanum%20key.pdf">key (PDF)</a> for some white-flowered nightshades.  Much more information about useful and non-useful features are in a free <a href="https://phytokeys.pensoft.net/article/31738/">research article</a> by Knapp et al.
 
@@ -54,6 +55,9 @@ The inflorescence typically has its flowers branching from a very short rhachis 
 Jepson and Stanford both list deceptive corolla widths which I have corrected according to my observations and Knapp.  I've copied the anther lengths from Jepson, but have not yet attempted to verify their ranges.
 
 The anthers are closely packed to form a golden longitudinally-segmented tube from which the style may or may not be exserted.
+
+[
+<h4>Style strongly exerted</h4>
 
 ==forked nightshade:S. furcatum
 color:white
@@ -83,6 +87,10 @@ acom:douglas nightshade
 . fruit: <b>glossy</b> w/ <b>sepals not reflexed</b>
 . stems angled, rough-hairy, woody
 
+]
+[
+<h4>Style weakly exerted at most<h4>
+
 ==black nightshade:S. nigrum
 color: white
 taxon_id:79141
@@ -111,9 +119,11 @@ color: white
 ==green nightshade:S. nitidibaccatum
 sci_jfp: S. physalifolium var. nitidibaccatum
 . corolla: <b>3--5 mm wide</b>, white
+.. style not exerted in photos
 . leaf: 2--6 cm, ovate, entire to irregular-toothed or shallowly lobed
 . hairs: spreading, some glandular
 . fruit: +- yellow or green
 . rare
 
+]
 ]

@@ -12,14 +12,20 @@ Key features:
 . perianth > stamens or << stamens
 . leaves with or without petioles
 
-==solomon's plume:M. racemosum
+==western solomon's plume:M. racemosum ssp. amplexicaule
+color: white
+sci_fj: M. racemosum # subspecies not recognized
+species: solomon's plume
+xx: ca
 . perianth parts 6
 . inflorescence is a <b>panicle</b>
 .. <b>&gt; 20 flowers</b> per inflorescence
 . <b>perianth 1--2 mm, << stamens</b>
 . <b>fruit tan with red speckles</b> (possibly with a greenish stripe without speckles) or bright red
-. <b>&gt; 5 leaves</b>, 7--20 cm, ovate to oblong-elliptic; <b>petioles +- 0</b>
+. leaf 7--20 cm, ovate to oblong-elliptic
+.. most leaves are <b>curled lengthwise at the leaf base</b> to clasp the twig
 . common
+;Edibility: The uniformly ruby-colored ripe berries have a nice bitter-sweet flavor.  The pulp is sucked off the hard seed.  The fruit can last a long time while staying edible. ^https://practicalselfreliance.com/solomons-plume-maianthemum-racemosum/ ^https://eflora.neocities.org/Maianthemum%20Sp.html
 
 ==star-flowered lily-of-the-valley:M. stellatum
 color: white
@@ -29,7 +35,8 @@ xx:none
 .. <b>5--15 flowers</b> per inflorescence
 . <b>perianth 4--7 mm, &gt; stamens</b>
 . <b>fruit tan with red speckles and <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0210+1472">bold dark purple stripes</a></b> or bright red
-. <b>&gt; 5 leaves</b>, 5--17 cm, (ob)lanceolate to elliptic; <b>petioles 0</b>
+. leaf 5--17 cm, (ob)lanceolate to elliptic
+.. leaves clasp the twig weakly, <b>not curled at the base</b>
 . common
 ;Edibility: The berries have a nice bitter-sweet flavor, but may be laxative in large quantities. ^https://pfaf.org/user/Plant.aspx?LatinName=Maianthemum+stellatum
 
