@@ -13,3 +13,8 @@ x:more
 
 ==apricot jelly:Guepinia helvelloides
 x:ba
+
+==tooth fungi
+
+==black witches' butter:Exidia glandulosa
+x:more

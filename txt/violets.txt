@@ -64,6 +64,7 @@ color: yellow
 <h2>violet violets</h2>
 
 ==western dog violet:V. adunca var. adunca
+color:purple
 xx:ca
 species: hookedspur violet
 . stems prostrate to erect, with leaves, peduncles

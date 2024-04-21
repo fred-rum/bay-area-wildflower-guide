@@ -1,0 +1,4 @@
+sci:Petrorhagia dubia
+color: red purple
+genus: n/a
+x:rare

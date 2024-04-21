@@ -9,3 +9,6 @@ bug:12876
 
 ==american lady:Vanessa virginiensis
 bug:488
+
+==red admiral:Vanessa atalanta
+bug:448

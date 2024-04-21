@@ -43,3 +43,6 @@ xx:ca
 . leaf segments stalked
 
 ==horsetails
+
+==brittle bladderfern:Cystopteris fragilis
+x:ca

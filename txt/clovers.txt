@@ -177,8 +177,7 @@ leaflets:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1101+038
 . very rare; Mt. Diablo
 
 ==subterranean clover:T. subterraneum
-banded calyx tube:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0408+0991
-grounded:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0208+2080
+color:white
 . outer 2--8 flowers fertile, calyx tube often with purple band at top
 . inner flowers with calyx stalk-like, without petals, forming bur
 . peduncle in fruit curving, growing into ground

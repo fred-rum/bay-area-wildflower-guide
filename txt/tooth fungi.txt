@@ -1,0 +1,8 @@
+sci:genus Hericium
+x:ba
+
+==lion's-mane mushroom:Hericium erinaceus
+
+==coral tooth fungus:Hericium coralloides
+
+==bear's head:H. abietis

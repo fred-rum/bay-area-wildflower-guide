@@ -45,6 +45,7 @@ species: thyme-leaved speedwell
 . rare
 
 ==corn speedwell:V. arvensis
+color: purple, blue
 . 1+ flowers in each terminal raceme
 . corolla 2--3 mm, blue to purple
 . rare

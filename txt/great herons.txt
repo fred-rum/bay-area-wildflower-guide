@@ -3,3 +3,4 @@ x:ca
 ==great blue heron:Ardea herodias
 
 ==great egret:Ardea alba
+. black feet; compare to {-snowy egret}

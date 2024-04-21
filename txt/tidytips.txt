@@ -50,6 +50,7 @@ color: yellow
 . San Francisco, Pt. Reyes
 
 ==tall tidytips:L. hieracioides
+color: yellow
 . ray petals are short, only yellow
 . scattered, but Windy Hill is the only place I visit regularly
 

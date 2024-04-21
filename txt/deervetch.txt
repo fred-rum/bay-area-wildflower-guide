@@ -57,7 +57,7 @@ color: yellow
 . 1 flower 1 per leaf axil
 . <b>+- no peduncle and no bracts, so flower is sessile above a normal set of leaflets</b>
 . <b>calyx strigose</b> [often looks glabrous]
-. calyx lobes +- 0.8--<b>1.2</b> &times; tube
+. <b>calyx lobes +- 0.8--1.2 &times; tube</b>
 . corolla 5--9 mm, yellow, reddening in age, wings +- <= keel
 . very common
 . see also {-bur clover}, which has 3 leaflets instead of generally 4
@@ -69,7 +69,7 @@ color: yellow
 . 1 flower 1 per leaf axil
 . <b>+- no peduncle and no bracts, so flower is sessile above a normal set of leaflets</b>
 . <b>calyx hairy</b>
-. calyx lobes 1--<b>2</b> &times; tube
+. <b>calyx lobes 1--2 &times; tube</b>
 . corolla 5--9 mm, yellow, reddening in age, wings +- = keel
 . scattered
 

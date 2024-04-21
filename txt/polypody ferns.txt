@@ -2,6 +2,12 @@ sci:Polypodium
 
 ==california polypody:P. californicum
 <b>Caution: ID unsure.</b>
+. leaf blade deltate to ovate, often +- irregular in outline
+. proximal 1--3 pinnae often at least as long as others
+. sori generally +- sunken
 
 ==nested polypody:P. calirhiza
 <b>Caution: ID unsure.</b>
+. leaf blade oblong-ovate, +- regular in outline
+. proximal 1--3 pinnae generally shorter than others
+. sori not sunken

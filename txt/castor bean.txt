@@ -1,0 +1,4 @@
+sci:Ricinus communis
+genus:n/a
+x:any
+color:red, salmon

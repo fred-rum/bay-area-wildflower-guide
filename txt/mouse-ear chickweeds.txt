@@ -18,6 +18,7 @@ species: field chickweed
 . scarious margin of outer sepals < 0.2 mm wide
 
 ==sticky mouse-ear chickweed:C. glomeratum
+color: white
 . stems generally all flowering, ascending to erect
 . petals 3--5 mm, 1.5 mm < to 1 mm > sepals, often 0 on lateral branches
 . calyx 3.5--5 mm, glandular-hairy, with some hairs exceeding tip by 0.2--0.8 mm

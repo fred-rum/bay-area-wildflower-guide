@@ -7,3 +7,6 @@ x:ba
 
 ==sierran tree frog:Pseudacris sierra
 x:ba
+
+==pacific chorus frog:Pseudacris regilla
+x:ba

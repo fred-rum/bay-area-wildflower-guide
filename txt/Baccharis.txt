@@ -16,6 +16,7 @@ color:white
 . common
 
 ==mule fat:B. salicifolia ssp. salicifolia
+color: cream, other
 species: mule fat
 . leaf blades linear, lanceolate, elliptic, oblong to narrowly oblanceolate
 . leaf blade < 150 mm, 3--20 mm wide, lanceolate, lance-elliptic or oblong to narrowly oblanceolate, faces generally sticky

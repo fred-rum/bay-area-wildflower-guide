@@ -31,7 +31,7 @@ color:pale purple, pink
 color:white
 . 1 flower per inflorescence (rarely 2)
 . ovary, fruit glabrous
-. flowers appear before leaves
+. flowers appear before leaves (although there can be some overlap)
 . leaf crenate-serrate
 . common
 

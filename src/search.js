@@ -11,13 +11,17 @@
    followed by the page name (encoded as needed),
    followed by '.html'. */
 const html_url = window.location.pathname;
+var root_path = window.location.origin;
+if (root_path == 'null') {
+  root_path = 'file://';
+}
 const match_pos = html_url.search(/(?:html\/)?[^\/]*\.html$/);
 if (match_pos != -1) {
-  var root_path = window.location.origin + html_url.substring(0, match_pos);
+  root_path += html_url.substring(0, match_pos);
 } else {
   /* If the URL doesn't end with '*.html', then we assume it ends in '/',
      which implicitly maps to 'index.html'. */
-  var root_path = window.location.origin + html_url
+  root_path += html_url
   if (!root_path.endsWith('/')) {
     root_path += '/';
   }

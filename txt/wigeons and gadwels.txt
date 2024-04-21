@@ -1,0 +1,5 @@
+sci:genus Mareca
+
+==gadwall:Mareca strepera
+
+==american wigeon:Mareca americana

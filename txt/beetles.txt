@@ -36,3 +36,5 @@ bug:40237
 ==glowworm beetles:family Phengodidae
 
 ==soft-winged flower beetles:family Melyridae
+
+==fruitworm beetles:family Byturidae

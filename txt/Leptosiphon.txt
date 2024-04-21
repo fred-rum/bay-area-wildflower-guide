@@ -133,7 +133,7 @@ color:pale purple
 . corolla:
 .. tube +- red
 .. throat yellow
-.. lobes pink/pale yellow/white
+.. lobes pink, pale yellow, or white
 .. lobes generally < 4 mm
 .. stigmas <= 1 mm, weakly exserted from corolla tube
 ... often, but not always, shorter than the stamens

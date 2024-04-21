@@ -4,7 +4,7 @@ x:more
 ==northern shoveler:Spatula clypeata
 x:more
 
-==goldeneyes and bufflehead:Bucephala spp.
+==goldeneyes and bufflehead:genus Bucephala
 
 ==mallard:Anas platyrhynchos
 x:more
@@ -18,4 +18,6 @@ x:ca
 ==common merganser:Mergus merganser
 x:more
 
-==gadwall:Mareca strepera
+==wigeons and gadwels
+xcom:wigeons and allies
+x:more

@@ -1,0 +1,12 @@
+sci:Viola purpurea
+xx:ba
+
+==oakwoods violet:ssp. quercetorum
+color: yellow
+. basal leaf bases "generally" cordate to truncate, gray-green on both sides
+.. sometimes tapered and/or purple-tinted abaxially
+.. tip obtuse
+
+==mountain violet:ssp. purpurea
+. basal leaf bases always tapered, purple-tinted abaxially
+.. tip acute

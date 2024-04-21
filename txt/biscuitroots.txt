@@ -57,6 +57,7 @@ species: alkali desertparsley
 <h3>Leaf dissected or compound, segments or leaflets generally few, generally large, generally wide</h3>
 
 ==california lomatium:L. californicum
+color:yellow
 . peduncle distally not swollen, not inflated; rays occasionally webbed at base into prominent none#disk
 . uncommon, scattered
 

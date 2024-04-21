@@ -6,6 +6,7 @@ color: yellow
 . very common, especially north of the bay bridge
 
 ==petty spurge:E. peplus
+color: yellow, other
 . common
 
 ==caper spurge:E. lathyris

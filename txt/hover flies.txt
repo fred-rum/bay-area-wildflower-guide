@@ -24,3 +24,7 @@ x:ca
 ==western aphideater:Eupeodes fumipennis
 bug:1034794
 x:more
+
+==golden copperback:Ferdinandea croesus
+bug:574568
+x:ca

@@ -3,3 +3,7 @@ sci:family Reduviidae
 ==california bee assassin:Apiomerus californicus
 x:ba
 bug:293123
+
+==leafhopper assassin bug:Zelus renardii
+x:more
+bug:80064

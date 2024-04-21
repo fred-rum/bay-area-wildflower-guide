@@ -3,6 +3,7 @@ sci: genus Horkelia
 x:ba
 
 ==wedge leaf horkelia:H. cuneata
+color: white
 . <b>leaflets pinnately veined throughout</b> [distinction unclear in CalPhotos]
 .. more than 20 +- <b>evenly spaced teeth</b> arranged in pairs
 . hypanthium 4--8 mm wide, > 2 &times; length
@@ -19,6 +20,7 @@ color: white
 . stem decumbent to ascending, 10--30 cm long
 . hypanthium 4--5 mm wide, > 2 &times; length
 . inflorescence +- dense
+. Marin
 
 ==thin-lobed horkelia:H. tenuiloba
 . leaflets +- palmately veined at base
@@ -26,3 +28,4 @@ color: white
 . hypanthium 3--4.5 mm wide, > 2 &times; length
 . stem ascending to erect, 10--70 cm long
 . inflorescence generally +- open
+. Marin

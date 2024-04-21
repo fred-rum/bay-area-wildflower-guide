@@ -13,4 +13,4 @@ acom: many-stemmed california gilia # Calflora
 . 1--7 flowers in open cyme
 .. corolla 5--10 mm long (1--2 &times; calyx)
 .. pedicel 1--30 mm
-. when the flower is very pale, it may be mistaken for chaparral gilia (<i>Gilia angelensis</i>), but that doesn't grow in the bay area
+. when the flower is very pale, it may be mistaken for none#chaparral gilia (<i>Gilia angelensis</i>), but that doesn't grow in the bay area
