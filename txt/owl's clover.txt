@@ -5,7 +5,7 @@ sci:n/a
 {lower lip,lower lips} The corolla's lower lip is reduced and may be 3-toothed to -pouched.
 
 ==purple owl's-clover:Castilleja exserta
-color: pink, red purple
+color: red purple, pink
 xx:more
 . corolla beak tip hooked, densely shaggy-hairy [example,3]
 . the spherical stigma is exserted on the side of the (hooked) corolla beak
@@ -33,6 +33,7 @@ xx:Only ssp. <i>densiflora</i> is found in the bay area.
 . scattered along Pacific coast, Oakland
 
 ==valley tassels:Castilleja attenuata
+color: pink, white
 . corolla beak straight, puberulent
 . <b>inflorescence 10--20 mm wide</b>
 . corolla linear, pouches +- 2 mm wide

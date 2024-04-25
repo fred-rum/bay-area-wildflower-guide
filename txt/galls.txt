@@ -78,6 +78,9 @@ rep:common cat's-ear,1
 
 <h3>other hosts</h3>
 
+==gooseberry galls
+rep:hillside gooseberry,1
+
 ==coffeeberry galls
 rep:coffeeberry
 

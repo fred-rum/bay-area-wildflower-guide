@@ -6,7 +6,7 @@ Various species of {-oak galls} can form on white oaks.
 color: other
 . leaf:
 .. margins deeply lobed (sinuses > 50% to midrib), without spines
-... sinuses typically wider than {-valley oak}.
+... sinuses typically wider than {-oregon oak}.
 .. adaxially often +- shiny, dark green
 .. abaxially fine-tomentose, dull to pale green
 . acorn cap 10--30 mm deep, often as wide as deep, all scales tubercled
