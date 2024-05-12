@@ -22,6 +22,7 @@ Sorted by number of leaves in a whorl (high to low).
 ==catchweed bedstraw:G. aparine
 color: white
 . habit: annual, climbing or prostrate, occasionally short, erect; clings by small, hooked prickles
+.. [there's a local form that is <a href="https://www.inaturalist.org/observations/211299091#activity_comment_5e1e1dca-5d96-4906-82ff-7967c252b260">less catchy</a>]
 . stem: 30--90 cm, weak, brittle
 . leaf: <b>in whorls of 6--8</b>, 13--31 mm, proximal-most petioled, +- round, distal sessile, +- narrowly oblanceolate
 . inflorescence: flowers few on branchlets in most axils
@@ -49,7 +50,7 @@ color: white
 color: white
 . habit: perennial herb, <b>generally decumbent</b>, radiating from base, glabrous to +- scabrous
 . stem: 20--76 cm
-. leaf: <b>in whorls of 6</b>, generally parallel to ground, 6--38 mm, ovate to obovate; tip acute to acuminate, occasionally small-pointed
+. leaf: <b>in whorls of 6</b>, generally parallel to ground [i.e. parallel to the decumbent stem], 6--38 mm, ovate to obovate; tip acute to acuminate, occasionally small-pointed
 . inflorescence: clusters, peduncled, axillary, flowers 2--3
 . flower: bisexual; corolla rotate, cream to pink, glabrous to sparsely hairy
 . scattered, mostly in the Santa Cruz Range

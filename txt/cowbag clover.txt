@@ -2,11 +2,12 @@ sci:Trifolium depauperatum
 
 ==purple sack clover:var. truncatum
 . involucre bracts +- free
-. corolla has at least some distinct red-purple color
+. corolla has at least some distinct red-purple color?
 
 ==pale sack clover:var. amplectens
 . involucre bracts +- free or partially fused
 . no more than a pale blush of red-purple color?
+.. see also {-bull clover}
 
 ==dwarf sack clover:var. depauperatum
 . <b>no involucre bracts</b>

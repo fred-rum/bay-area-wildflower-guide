@@ -110,3 +110,6 @@ rep:white alder,5
 
 ==ceanothus galls
 rep:ceanothus
+
+==pine galls
+rep:pines

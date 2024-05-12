@@ -39,6 +39,7 @@ color: cream
 . Inflorescence: head-like, 5--many-flowered; flowers quickly spreading or reflexed
 . Calyx: 4--7 mm, glabrous, longer lobes bristle-like, generally branched
 . Corolla: <b>10--20 mm, dull white or +- yellow, purple-tipped (or not?), banner inflated in fruit</b>
+. see also {-pale sack clover}
 
 ==saline clover:T. hydrophilum
 involucre:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0505+0145
@@ -329,7 +330,7 @@ leaves:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0108+1377
 <h4>inflorescence peduncled, peduncle generally > 10 mm, generally > leaves</h4>
 
 ==rancheria clover:T. albopurpureum
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0411+2007
+color: purple
 . corolla <= calyx
 . calyx lobes > tube, plumose
 . leaflets oblanceolate to obovate, length 1.2--3 &times; width

@@ -1,0 +1,6 @@
+sci: n/a
+ignore_link: self
+
+==western gall rust:Cronartium harknessii
+gall:2004
+. forms in branches of {-pines}

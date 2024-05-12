@@ -8,6 +8,13 @@ There are also loosestrifes in the unrelated {-lythrum loosestrifes}.
 ==scarlet pimpernel:L. arvensis
 color: orange, salmon
 
+==hybrid pimpernel:L. arvensis Xloeflingi
+sci_fpjF: n/a
+taxon_id:1534906
+color: pale purple
+. the scientific community has not provided a description of this hybrid
+.. I'm going with the iNaturalist consensus that the flower color is a pale mix of orange and purple ^https://www.inaturalist.org/observations/178110508
+
 ==western starflower:L. latifolia
 color: pale purple
 

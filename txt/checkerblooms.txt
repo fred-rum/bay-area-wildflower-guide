@@ -8,7 +8,8 @@ Key features:
 . thin linear or narrowish triangular bracts cupping the calyx or not
 . cauline leaf shape, regularity
 
-==dwarf checkermallow:S. malviflora
+==checkerbloom:S. malviflora
+acom:dwarf checkermallow
 color: pink, red purple
 . no bracts cupping the calyx
 . leaf generally dentate or lobed, upper leaves generally much reduced

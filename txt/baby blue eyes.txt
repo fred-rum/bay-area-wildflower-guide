@@ -1,12 +1,14 @@
+sci:Nemophila menziesii
 xx:ba
 
-==baby blue eyes:N. menziesii var. menziesii
+==blue baby blue eyes:var. menziesii
+# I gave it my own common name
 color: pale blue, pale purple
 . <b>corolla blue or pale purple with a nearly white center</b>
 .. outer colored section often has darker colored veins
 .. inner white section often has even darker dots tracing the path of veins
 
-==white baby blue eyes:N. menziesii var. atomaria
+==white baby blue eyes:var. atomaria
 color: white
 . <b>corolla white with no darker outer color except for vein color</b>
 .. outer section often has colored veins

@@ -12,5 +12,6 @@ color: purple, pale purple
 . <b>bract 10--24 mm</b>
 
 ==silver lupine:L. albifrons var. collinus
+color: purple
 . <b>subshrub, 20--40 cm; only base and some lower branches are woody</b>
 . bract 7--9 mm

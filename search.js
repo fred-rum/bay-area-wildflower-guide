@@ -99,7 +99,7 @@ function canonical_case(name) {
   return name.toUpperCase();
 }
 function find_letter_start(str, n) {
-  const regex = /[a-zA-Z0-9%#]/g;
+  const regex = /[a-zA-Z0-9@#]/g;
   for (var i = 0; i <= n; i++) {
     regex.test(str);
     if (regex.lastIndex == 0) {
@@ -174,11 +174,11 @@ function check(search_str, prefix, match_str, pri_adj = 0, def_num_list = []) {
     var prefix_len = prefix.replace(/[^A-Za-z]/g, '').length;
   }
   const upper_str = canonical_case(match_str);
-  const m = upper_str.replace(/[^A-Z%#]/g, '');
+  const m = upper_str.replace(/[^A-Z@#]/g, '');
   const num_list = [];
   const num_start = [];
   const num_missing_digits = [];
-  const re = /%#*/g;
+  const re = /@#*/g;
   var idx = 0;
   while (true) {
     const match = re.exec(m);
@@ -338,7 +338,7 @@ function highlight_match(match_info, default_name, is_sci, tag_list = []) {
     if (match_info.num_list.length) {
       var tag = new Tag('<span class="de-emph">', '</span>');
       for (var i = 0; i < match_info.num_list.length; i++) {
-        m = m.replace(/%#*/, match_info.num_list[i]);
+        m = m.replace(/@#*/, match_info.num_list[i]);
         if (match_info.num_missing_digits[i]) {
           const mbegin = match_info.num_start[i];
           const mend = (match_info.num_start[i] +
@@ -1197,7 +1197,7 @@ class TextTerm extends Term {
   get_text() {
     var term_name = this.match_info.match_str;
     for (const num of this.match_info.num_list) {
-      term_name = term_name.replace(/%#*/, num);
+      term_name = term_name.replace(/@#*/, num);
     }
     if (term_name.startsWith(this.prefix())) {
       term_name = term_name.substring(this.prefix().length + 1);
@@ -1261,7 +1261,7 @@ class DateTerm extends TripTerm {
 }
 class InYTerm extends DateTerm {
   constructor(group, search_str, dy) {
-    super(group, search_str, 'in %###', [dy]);
+    super(group, search_str, 'in @###', [dy]);
   }
   init_matching_trips() {
     const tgt_year = this.match_info.num_list[0];
@@ -1275,7 +1275,7 @@ class InYTerm extends DateTerm {
 }
 class InYMTerm extends DateTerm {
   constructor(group, search_str, dy, dm) {
-    super(group, search_str, 'in %###-%#', [dy, dm]);
+    super(group, search_str, 'in @###-@#', [dy, dm]);
   }
   init_matching_trips() {
     const tgt_year = this.match_info.num_list[0];
@@ -1292,7 +1292,7 @@ class InYMTerm extends DateTerm {
 class CmpYMDTerm extends DateTerm {
   fn_cmp;
   constructor(group, search_str, fn_cmp, prefix, postfix, dy, dm, dd) {
-    super(group, search_str, prefix + '%###-%#-%#' + postfix, [dy, dm, dd]);
+    super(group, search_str, prefix + '@###-@#-@#' + postfix, [dy, dm, dd]);
     this.fn_cmp = fn_cmp;
   }
   init_matching_trips() {
@@ -1309,7 +1309,7 @@ class CmpYMDTerm extends DateTerm {
 }
 class BtwnMDTerm extends DateTerm {
   constructor(group, search_str) {
-    super(group, search_str, 'between %#-%# and %#-%# (inclusive)',
+    super(group, search_str, 'between @#-@# and @#-@# (inclusive)',
           ['01', '01', '12', '31']);
   }
   init_matching_trips() {
@@ -1331,7 +1331,7 @@ class BtwnMDTerm extends DateTerm {
 }
 class BtwnYMDTerm extends DateTerm {
   constructor(group, search_str, dy) {
-    super(group, search_str, 'between %###-%#-%# and %###-%#-%# (inclusive)',
+    super(group, search_str, 'between @###-@#-@# and @###-@#-@# (inclusive)',
           [dy, '01', '01', dy, '12', '31']);
   }
   init_matching_trips() {

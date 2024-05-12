@@ -47,13 +47,13 @@ color: yellow
 . Santa Cruz range and Oakland
 
 ==douglas' violet:V. douglasii
-. <b>Leaves 2-pinnate-compound</b>
+. <b>leaves 2-pinnate-compound</b>
 . leaf blades longer than wide; leaf segments 3--5, 1--2.5(5) mm wide
-. lateral 2 petals bearded with cylindric hairs
+. lateral 2 petals bearded with cylindric hairs [near the throat]
 . Coe, Ohlone
 
 ==shelton's violet:V. sheltonii
-. <b>Leaves ternate-compound</b>
+. <b>leaves ternate-compound</b>
 . leaf blades wider than long; leaf segments 3, 2--10 mm wide
 . lateral 2 petals +- bearded or not with club-shaped hairs
 . Mt. Diablo, Ohlone

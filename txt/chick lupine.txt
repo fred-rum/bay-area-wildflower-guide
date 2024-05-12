@@ -1,0 +1,13 @@
+sci:Lupinus microcarpus
+xx:ba
+
+==shaggy haired chick lupine:var. microcarpus
+# name from Jepson
+. bracts and calyx with <b>dense</b> long spreading hairs
+. flowers and fruit generally on <b>more than one side</b> of axis
+
+==white-whorled lupine:var. densiflorus
+acom:secund chick lupine
+sci_i:Lupinus densiflorus
+. bracts and calyx with <b>sparse</b> appressed or spreading hairs
+. late flowers and fruit generally on <b>one side</b> of axis

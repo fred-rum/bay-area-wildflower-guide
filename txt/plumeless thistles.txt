@@ -7,7 +7,7 @@ Key features:
 . width and hairiness of phyllary bases
 
 ==italian thistle:C. pycnocephalus
-color: purple, pink
+color: purple, pale purple, pink
 . <b>generally 2--5 heads per cluster</b>
 . involucre 1--2 cm diameter
 . phyllaries generally <= 2 mm wide
@@ -15,7 +15,7 @@ color: purple, pink
 . very common throughout the bay area
 
 ==slender thistle:C. tenuiflorus
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0514+1852
+color: purple, pale purple, pink
 xx:uncat
 . <b>5--20 heads per cluster</b>
 . involucre 1--2 cm diameter

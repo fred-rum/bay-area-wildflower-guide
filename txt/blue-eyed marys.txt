@@ -34,7 +34,7 @@ color: white, pale purple, purple
 . <b>corolla throat longer than wide</b> [never defined]
 . corolla generally white to pale lavender to pink-purple
 . leaf +- thick, +- oblong, crenate, rolled under, generally finely hairy
-. <b>[Jepson, CalPhotos, and iNaturalist do not agree on its features]
+. <b>[Jepson, CalPhotos, and iNaturalist do not agree on its features]</b>
 
 ==round-headed chinese houses:C. corymbosa
 flowers:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0507+2000

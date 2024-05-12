@@ -690,7 +690,10 @@ class Inat:
         elif rank == 'hybrid':
             # Remove the special 'x' sign used by hybrids
             # and use my internal encoding instead.
-            elab = sci_words[0] + ' X' + sci_words[2]
+            if len(sci_words) == 3:
+                elab = sci_words[0] + ' X' + sci_words[2]
+            else:
+                elab = sci_words[0] + ' ' + sci_words[1] + ' X' + sci_words[3]
         elif rank == 'species':
             elab = sci
         else:

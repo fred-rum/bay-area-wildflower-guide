@@ -6,22 +6,22 @@ import subprocess
 import shutil
 import re
 
-# Run as:
-# src/gitmv.py txt/[name].txt [name]
-# src/gitmv.py html/[name].txt [name]
-# src/gitmv.py photos/[name],[suffix].jpg {[name] or [suffix] or [name],[suffix]}
+# Performs 'git mv' to rename one taxon to another and/or to change a
+# photo suffix.
 
-# If the second arg includes a directory prefix or a file extension suffix,
-# it is ignored.  So, e.g. this also works:
-# src/gitmv.py photos/[name],[suffix].jpg {[name] or [suffix] or photos/[name],[suffix]}.jpg
+# Run as:
+# src/gitmv.py txt/[filename].txt [name]
+# src/gitmv.py html/[filename].txt [name]
+# src/gitmv.py photos/[filename],[suffix].jpg {[name] or [suffix] or [name],[suffix]}
 
 # This script must be run from the project's git directory so that the
 # relative paths are all exactly one directory deep.
 
-# Performs 'git mv' to rename one taxon to another and/or to change a
-# photo suffix.
-#
-# If a txt/... path is given, all corresponding fiels in txt, html, photos,
+# If the second arg includes a directory prefix or a file extension suffix,
+# it is ignored.  So, e.g. this also works:
+# src/gitmv.py photos/[name],[suffix].jpg photos/[name],[suffix].jpg
+
+# If a txt/... path is given, all corresponding files in txt, html, photos,
 # and thumbs are moved.
 #
 # If an html/... path is given, the html, photos, and thumbs are moved.
@@ -29,10 +29,10 @@ import re
 # new name in the second argument should be provided with spaces.
 #
 # If a photos/... path is given, the photos and thumbs are moved.
-# In this last case, the [suffix] can be given in the second argument
-# to move only one photo and its corresponding thumbnail, or it can
-# be omitted to move them all (in which case the suffix doesn't matter
-# in the first argument).
+# If a destination suffix is given, only one photo and its corresponding
+# thumbnail is moved to the designated destination.  If a destination
+# name is given without a suffix, all photos are moved (in which case the
+# filename suffix in the first argument doesn't matter).
 
 arg1 = sys.argv[1]
 arg2 = sys.argv[2]

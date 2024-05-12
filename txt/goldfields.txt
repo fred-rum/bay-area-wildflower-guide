@@ -8,7 +8,7 @@ Key features:
 . ray length
 . pappus present or not, color, opacity (pappus <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0514+0357">in flower</a>, <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0511+0368">in seed</a>)
 
-Distinguishing goldfields often requires examining the pappus.  The pappus takes the place of the calyx/sepals in the disk flowers.  If the flower is in bloom, the pappus is typically shorter than the disk corolla, so to see it you'll need to bend the ray flowers and down with a thumbnail, pull the flower head apart, or perhaps pull out one disk flower (which may bring the pappus with it or leave it attached to the ovary.  I need to test that idea.)  Once the flower goes to seed and the corollas fall off, the pappus is much easier to see and often looks like a dandelion's seed pod.
+Distinguishing goldfields often requires examining the pappus.  The pappus takes the place of the calyx/sepals in the disk flowers.  If the flower is in bloom, the pappus is typically shorter than the disk corolla, so to see it you'll need to bend the ray flowers down with a thumbnail, pull the flower head apart, or perhaps pull out one disk flower (which may bring the pappus with it or leave it attached to the ovary.  I need to test that idea.)  Once the flower goes to seed and the corollas fall off, the pappus is much easier to see and often looks like a dandelion's seed pod.
 
 See also {-hillside daisies}, which have narrow (but not linear) wedge-shaped leaves that are quite hairy.
 
@@ -26,6 +26,7 @@ color: yellow
 . common
 
 ==common goldfields:L. gracilis
+color: yellow
 . phyllaries free, generally > 6
 . leaves +- entire
 . pappus of (2)4(6) opaque, white, <b>lance-ovate scales</b>, or 0 <a href="https://www.inaturalist.org/photos/62072452?size=original">[example]</a>

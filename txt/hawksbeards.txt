@@ -1,8 +1,9 @@
 sci:Crepis spp.
 x:hist
 
-==beaked hawksbeard:C. vesicaria
-xx:uncat
+==beaked hawk's-beard:C. vesicaria ssp. taraxacifolia
+species:beaked hawksbeard
+xx:ca
 color: yellow
 . basal and cauline leaves pinnately lobed to dentate, terminal lobe large, toothed
 . involucre 8--12 mm, cylindric to bell-shaped or +- obconic

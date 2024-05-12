@@ -213,10 +213,10 @@ function canonical_case(name) {
 /* Find the position of the Nth letter in string 'str'
    (where N is zero indexed).
    I.e. search for N+1 letters, then back up one.
-   We treat digits *and* %# as letters since we may be
-   in the middle of convert one form to the other. */
+   We treat digits *and* @# as letters since we may be
+   in the middle of converting one form to the other. */
 function find_letter_start(str, n) {
-  const regex = /[a-zA-Z0-9%#]/g;
+  const regex = /[a-zA-Z0-9@#]/g;
 
   for (var i = 0; i <= n; i++) {
     /* We use test() to advance regex.lastIndex.
@@ -348,12 +348,12 @@ function check(search_str, prefix, match_str, pri_adj = 0, def_num_list = []) {
   }
 
   /* m is the string we're trying to match against, converted to uppercase
-     and with punctuation removed (except '%' and '#', which represents a
+     and with punctuation removed (except '@' and '#', which represents a
      number group). */
   const upper_str = canonical_case(match_str);
-  const m = upper_str.replace(/[^A-Z%#]/g, '');
+  const m = upper_str.replace(/[^A-Z@#]/g, '');
 
-  /* Find the position and length of each % group in m.
+  /* Find the position and length of each @ group in m.
      These are where we expect to find numbers.
      Note that num_missing_digits represents the number of digits that
      we haven't found.  If a full or partial match is found for a
@@ -361,10 +361,10 @@ function check(search_str, prefix, match_str, pri_adj = 0, def_num_list = []) {
   const num_list = [];
   const num_start = [];
   const num_missing_digits = [];
-  const re = /%#*/g;
+  const re = /@#*/g;
   var idx = 0;
   while (true) {
-    /* Find the next % group in m. */
+    /* Find the next @ group in m. */
     const match = re.exec(m);
     if (!match) break;
 
@@ -424,7 +424,7 @@ function check(search_str, prefix, match_str, pri_adj = 0, def_num_list = []) {
         idx++;
       }
 
-      /* start the match at the % that makes the number right aligned */
+      /* start the match at the @ that makes the number right aligned */
       j = num_start[idx] + num_missing_digits[idx];
       start_j = j - s_word.length;
 
@@ -618,12 +618,12 @@ function highlight_match(match_info, default_name, is_sci, tag_list = []) {
        Therefore, the Tag is always valid. */
     tag_list.push(tag);
 
-    /* Replace %# groups in match_str with the parsed/default numbers,
+    /* Replace @# groups in match_str with the parsed/default numbers,
        and de-emphasize digits that were not typed. */
     if (match_info.num_list.length) {
       var tag = new Tag('<span class="de-emph">', '</span>');
       for (var i = 0; i < match_info.num_list.length; i++) {
-        m = m.replace(/%#*/, match_info.num_list[i]);
+        m = m.replace(/@#*/, match_info.num_list[i]);
 
         if (match_info.num_missing_digits[i]) {
           const mbegin = match_info.num_start[i];
@@ -2121,7 +2121,7 @@ class TextTerm extends Term {
   get_text() {
     var term_name = this.match_info.match_str;
     for (const num of this.match_info.num_list) {
-      term_name = term_name.replace(/%#*/, num);
+      term_name = term_name.replace(/@#*/, num);
     }
     if (term_name.startsWith(this.prefix())) {
       term_name = term_name.substring(this.prefix().length + 1);
@@ -2204,7 +2204,7 @@ class DateTerm extends TripTerm {
 
 class InYTerm extends DateTerm {
   constructor(group, search_str, dy) {
-    super(group, search_str, 'in %###', [dy]);
+    super(group, search_str, 'in @###', [dy]);
   }
 
   init_matching_trips() {
@@ -2221,7 +2221,7 @@ class InYTerm extends DateTerm {
 
 class InYMTerm extends DateTerm {
   constructor(group, search_str, dy, dm) {
-    super(group, search_str, 'in %###-%#', [dy, dm]);
+    super(group, search_str, 'in @###-@#', [dy, dm]);
   }
 
   init_matching_trips() {
@@ -2242,7 +2242,7 @@ class CmpYMDTerm extends DateTerm {
   fn_cmp;
 
   constructor(group, search_str, fn_cmp, prefix, postfix, dy, dm, dd) {
-    super(group, search_str, prefix + '%###-%#-%#' + postfix, [dy, dm, dd]);
+    super(group, search_str, prefix + '@###-@#-@#' + postfix, [dy, dm, dd]);
     this.fn_cmp = fn_cmp;
   }
 
@@ -2262,7 +2262,7 @@ class CmpYMDTerm extends DateTerm {
 
 class BtwnMDTerm extends DateTerm {
   constructor(group, search_str) {
-    super(group, search_str, 'between %#-%# and %#-%# (inclusive)',
+    super(group, search_str, 'between @#-@# and @#-@# (inclusive)',
           ['01', '01', '12', '31']);
   }
 
@@ -2289,7 +2289,7 @@ class BtwnMDTerm extends DateTerm {
 
 class BtwnYMDTerm extends DateTerm {
   constructor(group, search_str, dy) {
-    super(group, search_str, 'between %###-%#-%# and %###-%#-%# (inclusive)',
+    super(group, search_str, 'between @###-@#-@# and @###-@#-@# (inclusive)',
           [dy, '01', '01', dy, '12', '31']);
   }
 

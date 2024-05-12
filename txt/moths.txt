@@ -16,6 +16,7 @@ bug:163464
 
 ==n/a:genus Orgyia
 bug:335
+. iNaturalist likes to suggest western tussock moth (Orgyia vetusta), but iNaturalist members don't like to ID this genus to species.
 
 ==cutworm moths and allies
 

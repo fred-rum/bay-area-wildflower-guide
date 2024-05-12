@@ -950,7 +950,8 @@ class Page:
 
         if (not elab[0].islower()
             and len(elab_words) > 2
-            and elab_words[2] not in ('ssp.', 'var.', 'f.')):
+            and elab_words[2] not in ('ssp.', 'var.', 'f.')
+            and not elab_words[2].startswith('X')):
             error(f'Unexpected elaboration for {elab}')
 
         if (not self.sci and
@@ -977,11 +978,12 @@ class Page:
                 error(f'Unrecognized rank for {elab}')
                 self.rank = None
         else:
-            sci_words = sci.split(' ')
-            if len(sci_words) == 1:
+            if len(elab_words) == 1:
                 self.rank = Rank.genus
-            elif len(sci_words) == 2:
+            elif len(elab_words) == 2:
                 self.rank = Rank.species
+            elif elab_words[2].startswith('X'):
+                self.rank = Rank.species            
             else:
                 self.rank = Rank.below
 
