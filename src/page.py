@@ -2468,7 +2468,7 @@ class Page:
                     fatal(f'{self.full()} specifies asci: {sci}, but that name already exists')
 
                 # Record the additional scientific name in sci_page so that it
-                # appropriate hijacks lookups, but also store it in asci_page
+                # appropriately hijacks lookups, but also store it in asci_page
                 # so that we know when an asci name has been used.
                 sci_page[sci] = data_object
                 asci_page[sci] = self

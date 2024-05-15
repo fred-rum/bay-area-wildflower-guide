@@ -1891,3 +1891,9 @@ Remove bottom <hr> if there's no "observations" or anything else
 
 should default_completeness be triggered only if there are children?
   should default_completeness (in life.txt) extend to the species level?
+
+the script should complain about any {-inline link} to a shadow page
+  but if the shadow page has exactly one real child, the link should go there
+  e.g. western american deer ked wants to link to {-mule deer}
+
+allow "subsp." in searches as an alias for "ssp."

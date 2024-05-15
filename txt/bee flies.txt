@@ -3,3 +3,9 @@ sci:family Bombyliidae
 ==greater bee fly:Bombylius major
 bug:14997
 . bugguide has distinguishing features
+
+==n/a:genus Geron
+bug:9861
+
+==n/a:genus Hemipenthes
+bug:4344

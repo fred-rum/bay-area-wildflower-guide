@@ -54,6 +54,7 @@ color:yellow
 
 ==pacific sanicle:S. crassicaulis
 color: yellow
+xx:uncat
 . plant stout, 24--120 cm, generally branched well distal to base
 . leaf green, generally palmate or palmate-ternate; blade 3--12 cm, generally +- rounded-cordate, lobes 3--5, obovate, generally +- deeply cut, margins finely sharp-serrate, teeth generally +- 1 mm, central lobe generally >= 10 mm wide at base, distal segment 4--20 mm wide
 . peduncle 0.7--8 cm

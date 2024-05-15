@@ -47,6 +47,7 @@ color: yellow
 . Santa Cruz range and Oakland
 
 ==douglas' violet:V. douglasii
+color: yellow
 . <b>leaves 2-pinnate-compound</b>
 . leaf blades longer than wide; leaf segments 3--5, 1--2.5(5) mm wide
 . lateral 2 petals bearded with cylindric hairs [near the throat]

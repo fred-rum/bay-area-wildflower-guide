@@ -16,6 +16,8 @@ All local pines are "hard pines" (subgenus Pinus).  For these, the
 CalFlora lists many pines in the bay area, but for now I will confine
 this list to the less rare ones (> 25 CalFlora records).
 
+Parasitized by {-pine galls}.
+
 [
 <h2>3 leaves per bundle</h2>
 

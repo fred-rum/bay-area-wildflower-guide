@@ -1,0 +1,4 @@
+sci: genus Eleodes
+
+==n/a:Eleodes cordata
+bug:163262

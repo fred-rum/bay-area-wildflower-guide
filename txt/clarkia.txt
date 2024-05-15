@@ -98,6 +98,7 @@ color: red purple
 . rare: Henry Coe, Sierra Azul, and maybe Rancho San Antonio
 
 ==waltham creek clarkia:C. modesta
+color: pale purple
 . all 4 sepals staying fused
 . ovary 8-grooved
 . petals entire, <b>pink, generally darker flecked</b>

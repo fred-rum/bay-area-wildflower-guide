@@ -76,7 +76,7 @@ gall:772
 .. oak gall is attached to the side of a branch, may be on a plant#tree with plant#leaves, may be lumpy, has no lines on which to split
 .. buckeye flower#fruit hangs from the tip of a drooping plant#twig, is typically seen only on leafless plant#trees, and may be partially split in half to show a shiny brown layer beneath
 
-==red cone gall wasp:Andricus kingi
+==red cone gall wasp:Feron kingi
 bug:43238
 gall:1511
 . forms on leaf surfaces of {-blue oak}, {-oregon oak}, and {-valley oak}

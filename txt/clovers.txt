@@ -125,6 +125,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1207+1240
 . inflorescence 6--10 mm wide, 5--15-flowered
 
 ==clammy clover:T. obtusiflorum
+color: pale purple
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1114+3922
 . calyx lobes +- <= tube, often toothed or shouldered below tapered tip
 . calyx tube splitting between upper lobes
@@ -184,6 +185,7 @@ color:white
 . peduncle in fruit curving, growing into ground
 
 ==reversed clover:T. resupinatum
+color: pale purple
 calyx inflated:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0709+0267
 . calyx inflated in fruit
 . very rare & waif
@@ -344,9 +346,8 @@ color: purple
 . Calyx: 4--8 mm, lobes 3--6.5 mm, > tube, tapered or bristle-like, plumose
 . Corolla: 5--8 mm, <= calyx, <b>purple and white</b>
 
-==branched indian clover:T. dichotomum
+==branched clover:T. dichotomum
 color: pale purple, purple, red purple
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1207+1118
 . corolla > calyx
 . corolla purple with white tips
 

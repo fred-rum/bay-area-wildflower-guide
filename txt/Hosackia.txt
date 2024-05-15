@@ -15,6 +15,7 @@ species:balsam bird's foot trefoil
 . stipules often wide, leaflet-like
 
 ==witch's-teeth:H. gracilis
+color: yellow, pale purple, red purple
 . peduncle bract just below umbel or missing
 . plant +- glabrous
 . petal claw exserted from calyx tube

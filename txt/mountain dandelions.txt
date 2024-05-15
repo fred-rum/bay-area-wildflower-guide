@@ -35,8 +35,6 @@ color:yellow
 . uncommon
 
 ==spearleaf agoseris:A. retrorsa
-color: yellow
-<b>Caution: ID unsure</b>
 . ligule 6--15 mm, exceeding (or rarely equaling) length of involucre
 . <b>petiole +- purple</b>
 . generally 7--9 pairs of leaf lobes

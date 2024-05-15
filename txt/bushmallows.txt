@@ -1,0 +1,11 @@
+sci:genus Malacothamnus
+x:hist
+
+==bewildering bushmallow:Malacothamnus arcuatus
+. calyx lobes < 6 mm
+
+==long-haired unfurled bushmallow:Malacothamnus fremontii var. fremontii
+species:unfurled bushmallow
+xx:ba
+. calyx lobes >= 6 mm
+. Mt. Diablo, east side of Diablo range

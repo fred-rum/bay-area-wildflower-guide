@@ -1,5 +1,6 @@
 sci:Bromus
 x:!hist/rare
+taxon_id: 52701 # avoid confusion with section Bromus
 
 Key features:
 . spike (inflorescence) and lemma (lower, larger bract of a single flower) features
@@ -11,6 +12,7 @@ Key features:
 ==chilean chess:B. berteroanus
 
 ==california brome:B. carinatus
+color: yellow
 
 ==rescue brome:B. catharticus
 

@@ -1,7 +1,7 @@
 sci:Monardella villosa
 xx:ba
 
-==coyote mint:ssp. villosa
+==san antonio hills monardella:ssp. villosa
 color: pale purple, purple
 . leaf +- narrowly ovate, base tapered to obtuse
 

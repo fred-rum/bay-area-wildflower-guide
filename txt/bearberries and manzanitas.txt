@@ -61,6 +61,7 @@ color: white
 <h2>no burl; leaves different on each side</h2>
 
 ==glossyleaf manzanita:A. sensitiva
+color: white
 . plant erect, 1--2 m
 . old stem bark smooth, +- red
 . flower parts in fours

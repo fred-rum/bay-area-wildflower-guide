@@ -60,7 +60,7 @@ color: pale purple
 . fruit is reticulated
 
 ==dwarf mallow:M. neglecta
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0520+0780
+color: pale purple
 . petals generally twice as long as sepals (8--12 mm)
 . sepals 4--6 mm
 . <b>epicalyx segments widely linear to narrowly lanceolate, narrow and distant from each other, bases free from each other and from calyx</b>

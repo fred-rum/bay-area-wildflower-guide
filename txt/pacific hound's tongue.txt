@@ -1,5 +1,4 @@
-sci:Adelinia grande
-sci_fj:Adelinia grandis
+sci:Adelinia grandis
 sci_p:Adelinia grandis|Cynoglossum grande
 color: blue
 

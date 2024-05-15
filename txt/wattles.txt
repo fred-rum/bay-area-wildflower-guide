@@ -44,6 +44,12 @@ color: cream, other
 . twig angled (not winged)
 . waif
 
+==cootamundra wattle:A. baileyana
+color: cream, other
+. 2-pinnate leaves
+. <b>2--5 pairs</b> of 1st-order leaflets, 10--28 mm
+. 8--24 pairs of 2nd-order leaflets, 3.5--7.5 mm
+
 ]
 [
 <h3>simple leaves</h3>

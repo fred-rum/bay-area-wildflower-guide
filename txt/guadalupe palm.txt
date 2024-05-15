@@ -1,0 +1,6 @@
+sci:Brahea edulis
+sci_fjF: n/a
+color: other
+
+genus: n/a
+x:ba

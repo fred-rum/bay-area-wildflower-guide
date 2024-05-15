@@ -2,6 +2,7 @@ sci:genus Populus
 x:hist/rare
 
 ==black cottonwood:P. trichocarpa
+color: other, red
 
 ==fremont cottonwood:P. fremontii
 

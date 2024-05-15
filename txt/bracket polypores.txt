@@ -1,6 +1,6 @@
 sci:family Fomitopsidaceae
 
-==rosy conk:Rhodofomes cajanderi
+==rosy conk:Fomitopsis cajanderi
 x:ba
 
 ==northern red belt:Fomitopsis mounceae

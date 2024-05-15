@@ -1,8 +1,8 @@
 sci:Pyracantha spp.
 x:rare
-color:white
 
 ==narrowleaf firethorn:P. angustifolia
+color: white
 . leaves generally entire, 25--50 mm, no teeth
 . leaves generally narrowly oblong to +- oblanceolate
 . sepals in fruit, young leaves densely gray-hairy abaxially

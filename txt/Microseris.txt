@@ -26,6 +26,7 @@ color: other
 
 ==douglas' silverpuffs:M. douglasii
 color: other
+xx:uncat
 . seeds 3--10 mm
 . <= 5 scales, each tiny--6.5 mm; if >= 1 mm, becoming curved throughout and strongly inrolled
 . scale midrib evenly tapered from thick base
@@ -63,7 +64,8 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0411+2148
 Ordered roughly by scale length (long to short).
 
 ==sylvan microseris:M. sylvatica
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0114+0026
+color: yellow
+in seed:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0114+0026
 . seeds 5--12 mm
 . 5--10 scales, each 4--10 mm
 . bristles 6--9 mm

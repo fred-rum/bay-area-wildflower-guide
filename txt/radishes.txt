@@ -1,13 +1,10 @@
 sci:genus Raphanus
 x:ca
+warn one_child: none
 
-==wild radish:R. sativus
-color: purple, pale purple
-. petals pink to purple (or rarely white; check for pale purple veins?)
-. basal leaf blade 2--60 cm long, 1--20 cm wide, entire or pinnately lobed or divided
-.. 1--12 lateral lobes, dentate
-. fruit is 2--6 cm long, 5--10 mm wide
-.. not constricted between the seeds and does not break up into one-seeded segments when mature
+There once were two species of local radishes, but POWO and iNaturalist have now moved one under the other.  So where they were once impossible to reliably ID, now they are just really confusing.
+
+Per FNA, North American plants that it IDs as R. raphanistrum are all ssp. raphanistrum.
 
 ==jointed charlock:R. raphanistrum
 . petals pale yellow, +- white in age

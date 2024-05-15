@@ -1,4 +1,5 @@
 ==columbian black-tailed deer:Odocoileus hemionus ssp. columbianus
+species:mule deer
 x:ba
 xx:ba
 Only one subspecies of mule deer is found in the bay area, but be aware that another subspecies is found not much further south as well as in the Sierras.  Wikimedia has a <a href="https://commons.wikimedia.org/wiki/File:Odocoileus_hemionus_map.svg">range map</a>.  More ID tips <a href="https://www.solanocoe.net/blacktaildeer">here</a>.

@@ -1,0 +1,13 @@
+sci:Malacothamnus arcuatus
+xx:any
+
+==western bewildering bushmallow:var. arcuatus
+. bractlets subtending calyx >= 3 mm, >= &frac12; calyx length
+. branches of stellate hairs on stem generally > 0.5 mm, do not require magnification to see
+. peninsula
+
+==eastern bewildering bushmallow:var. elmeri
+color: pale purple, pink
+. bractlets subtending calyx <= 3.5 mm, <= &frac12; calyx length
+. branches of stellate hairs on stem generally <= 0.5 mm, require magnification to see
+. Mt. Diablo, Diablo range, foothills around 101 south of San Jose

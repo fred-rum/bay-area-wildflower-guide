@@ -9,7 +9,8 @@ Key features:
 . leaf arrangement
 . stem branched or none
 
-==redwood sorrel:O. oregana
+==redwood sorrel:O. smalliana
+asci:Oxalis oregana
 color: pale purple, pink
 . stem +- 0
 . leaf: < 10, <b>clustered at rhizome tips</b>
@@ -19,6 +20,7 @@ color: pale purple, pink
 . sepals < 1 cm, lanceolate
 . petals < 2.5 cm, white to deep pink
 . +- undisturbed forests
+;I'm waiting for iNaturalist to transition my older observations from the original name, O. oregana to the new name, O. smalliana.
 
 ==pale pink-sorrel:O. incarnata
 color: white, pale purple

@@ -66,6 +66,7 @@ color: purple
 . stigma lobes red-purple
 
 ==solander's geranium:G. solanderi
+color: pale purple
 . stem hairs spreading to reflexed, not appressed, non-glandular
 . leaf blade 1.4--5.7 cm wide, divided 45--85% to base
 . 5--7 leaf segments, obtriangular

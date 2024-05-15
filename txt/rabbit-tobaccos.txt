@@ -25,7 +25,7 @@ color: white
 . very common
 
 ==pink everlasting:P. ramosissimum
-color:pale purple
+color: pale purple
 . <b>stem stalked-glandular</b>, +- tomentose
 . leaves crowded proximally or not
 . leaf base not clasping, decurrent 2--10 mm
@@ -36,6 +36,7 @@ color:pale purple
 . common
 
 ==fragrant everlasting:P. beneolens
+color: cream, other
 . <b>stem obscurely glandular beneath long hairs</b>, tomentose
 . leaves crowded or not [unknown]
 . leaf base not clasping, decurrent 5--15 mm

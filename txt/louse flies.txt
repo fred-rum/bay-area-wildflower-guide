@@ -1,0 +1,5 @@
+sci:family Hippoboscidae
+
+==western american deer ked:Lipoptena depressa
+bug:1310968
+. feeds on mule deer such as {-columbian black-tailed deer}

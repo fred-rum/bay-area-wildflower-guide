@@ -6,6 +6,8 @@ do disable_obs_promotion_checks_from_needs_id: genus
 . introduced in California
 x:ba
 
-==largemouth bass:Micropterus salmoides
+==largemouth bass:Micropterus nigricans
 
 ==common carp:Cyprinus carpio
+
+==common sunfishes:genus Lepomis

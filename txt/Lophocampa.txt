@@ -1,0 +1,7 @@
+x:ba
+
+==spotted tussock moth:Lophocampa maculata
+bug:5241
+
+==silver-spotted tiger moth:Lophocampa argentata
+bug:43315

@@ -6,7 +6,7 @@ sci:n/a
 
 ==purple owl's-clover:Castilleja exserta
 color: red purple, pink
-xx:more
+xx:uncat
 . corolla beak tip hooked, densely shaggy-hairy [example,3]
 . the spherical stigma is exserted on the side of the (hooked) corolla beak <a href="https://www.flickr.com/photos/ken-ichi/49863454583">[example]</a>
 . common

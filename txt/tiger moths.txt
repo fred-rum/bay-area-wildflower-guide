@@ -9,6 +9,5 @@ x:ba
 bug:3242
 x:ba
 
-==spotted tussock moth:Lophocampa maculata
-bug:5241
-x:more
+==n/a:genus Lophocampa
+bug:5240

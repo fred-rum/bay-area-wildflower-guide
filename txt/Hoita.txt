@@ -13,6 +13,7 @@ x: any
 .. banner 12--13 mm long
 
 ==roundleaf leatherroot:H. orbicularis
+color: purple, red purple
 . stem prostrate
 .. erect parts < 6.5 cm high
 . flower 12--23 mm long

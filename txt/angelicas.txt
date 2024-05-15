@@ -1,5 +1,5 @@
-com:n/a
-sci:Angelica spp.
+com:angelicas
+sci:genus Angelica
 x:ba
 
 ==henderson's angelica:A. hendersonii

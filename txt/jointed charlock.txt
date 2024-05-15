@@ -1,0 +1,11 @@
+sci:Raphanus raphanistrum
+xx:This species is a mess, so I don't know if other supposed subspecies can be found in the bay area or not.
+
+==wild and domestic radish:Raphanus raphanistrum ssp. sativus
+sci_fpjF: Raphanus sativus
+color: purple, pale purple
+. petals pink to purple (or rarely white; check for pale purple veins?)
+. basal leaf blade 2--60 cm long, 1--20 cm wide, entire or pinnately lobed or divided
+.. 1--12 lateral lobes, dentate
+. fruit is 2--6 cm long, 5--10 mm wide
+.. not constricted between the seeds and does not break up into one-seeded segments when mature

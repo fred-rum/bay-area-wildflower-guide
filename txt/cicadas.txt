@@ -2,3 +2,6 @@ sci:superfamily Cicadoidea
 
 ==wing-tapping cicadas:genus Platypedia
 bug:23384
+
+==n/a:genus Okanagana
+bug:23685
