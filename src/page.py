@@ -3679,6 +3679,12 @@ def list_matches(w, match_set, indent, trait, value, seen_set):
 
 def write_traits_to_pages_js(w):
     w.write('const traits=[\n')
+    assign_zcode('endemic');
+    assign_zcode('native');
+    assign_zcode('alien');
+    w.write('"endemic",\n');
+    w.write('"native",\n');
+    w.write('"alien",\n');
     for page in page_array:
         if page.subset_of_page:
             assign_zcode(page.name)

@@ -584,37 +584,40 @@ class PageTerm extends Term {
     } else {
       prefix_len = 0;
     }
-    let com_match_info = this.com_match_info;
-    let sci_match_info = this.sci_match_info;
-    let com_prefixed = (com_match_info &&
-                        com_match_info.match_str.startsWith(prefix));
-    let sci_prefixed = (sci_match_info &&
-                        sci_match_info.match_str.startsWith(prefix));
+    let com_prefixed = (this.com_match_info &&
+                        this.com_match_info.match_str.startsWith(prefix));
+    let sci_prefixed = (this.sci_match_info &&
+                        this.sci_match_info.match_str.startsWith(prefix));
     let prefix_differs = (com_prefixed != sci_prefixed);
     if (com_prefixed && sci_prefixed) {
-      for (let i = 0; i < com_match_info.length; i++) {
-        if ((com_match_info.match_range[i][0] >= prefix_len) &&
-            (sci_match_info.match_range[i][0] >= prefix_len)) {
+      for (let i = 0; i < this.com_match_info.match_ranges.length; i++) {
+        if ((this.com_match_info.match_ranges[i][0] >= prefix_len) &&
+            (this.sci_match_info.match_ranges[i][0] >= prefix_len)) {
           break;
         }
-        if (com_match_info.match_range[i][0] !=
-            sci_match_info.match_range[i][0]) {
+        if (this.com_match_info.match_ranges[i][0] !=
+            this.sci_match_info.match_ranges[i][0]) {
           prefix_differs = true;
           break;
         }
-        if ((com_match_info.match_range[i][1] >= prefix_len) &&
-            (sci_match_info.match_range[i][1] >= prefix_len)) {
+        if ((this.com_match_info.match_ranges[i][1] >= prefix_len) &&
+            (this.sci_match_info.match_ranges[i][1] >= prefix_len)) {
+          break;
+        }
+        if ((this.com_match_info.match_ranges[i][1] >= prefix_len) ||
+            (this.sci_match_info.match_ranges[i][1] >= prefix_len)) {
+          prefix_differs = true;
           break;
         }
       }
     }
-    if (com_match_info && (com_match_info.pri == this.pri) &&
+    if (this.com_match_info && (this.com_match_info.pri == this.pri) &&
         prefix_differs) {
-      sci_match_info = null;
+      this.sci_match_info = null;
       sci_prefixed = false;
-    } else if (sci_match_info && (sci_match_info.pri == this.pri) &&
+    } else if (this.sci_match_info && (this.sci_match_info.pri == this.pri) &&
                prefix_differs) {
-      com_match_info = null;
+      this.com_match_info = null;
       com_prefixed = false;
     }
     this.prefixed = com_prefixed || sci_prefixed;
@@ -658,10 +661,10 @@ class PageTerm extends Term {
     }
     var pfx_info = null;
     if (com_prefixed) {
-      pfx_info = separate_prefix_info(this.prefix(), com_match_info);
+      pfx_info = separate_prefix_info(this.prefix(), this.com_match_info);
     }
     if (sci_prefixed) {
-      pfx_info = separate_prefix_info(this.prefix(), sci_match_info);
+      pfx_info = separate_prefix_info(this.prefix(), this.sci_match_info);
     }
     var pfx_highlight = '';
     if (pfx_info) {

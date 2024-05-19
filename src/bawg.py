@@ -298,8 +298,10 @@ def write_pages_js(w):
             else:
                 w.write(f',j:"{jpg}"')
 
-        if page.trait_names or page.trips:
+        if page.trait_names or page.trips or page.origin:
             w.write(',z:"')
+            if page.origin:
+                w.write(get_zstr(page.origin));
             for name in page.trait_names:
                 w.write(get_zstr(name))
             for trip in sorted(page.trips):

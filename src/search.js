@@ -1079,54 +1079,67 @@ class PageTerm extends Term {
       prefix_len = 0;
     }
 
-    let com_match_info = this.com_match_info;
-    let sci_match_info = this.sci_match_info;
-
-    let com_prefixed = (com_match_info &&
-                        com_match_info.match_str.startsWith(prefix));
-    let sci_prefixed = (sci_match_info &&
-                        sci_match_info.match_str.startsWith(prefix));
+    let com_prefixed = (this.com_match_info &&
+                        this.com_match_info.match_str.startsWith(prefix));
+    let sci_prefixed = (this.sci_match_info &&
+                        this.sci_match_info.match_str.startsWith(prefix));
     let prefix_differs = (com_prefixed != sci_prefixed);
-
+    
     if (com_prefixed && sci_prefixed) {
+      /* The search matches at least part of a prefix along with 0 or more
+         characters of both the common and scientific names of the taxon.
+         Normally we print the prefix only once, e.g.
+           "within iunsect" -> "within insects (class Insecta)"
+         but this only works if the portion of the prefix that should be
+         highlighted is the same for both names.  If the prefix match
+         differs, or the way that it continues into the name differs,
+         then highlight only the name with the higher priority.  E.g.
+           "withi nu" -> "within umbrellaworts (genus Tauschia)".
+         Here, the "nu" can match the end of "within" and the start of
+         "umbrellaworts", or it can match a part of "genus", but the
+         highlighting of the prefix is different depending on which is chosen.
+      */
       /* Regarding the loop end condition:
          If the match was the same so far, and one match_info has been
          read to the end, then the other match_info *must* also be at
          the end. */
-      for (let i = 0; i < com_match_info.length; i++) {
-        if ((com_match_info.match_range[i][0] >= prefix_len) &&
-            (sci_match_info.match_range[i][0] >= prefix_len)) {
+      for (let i = 0; i < this.com_match_info.match_ranges.length; i++) {
+        if ((this.com_match_info.match_ranges[i][0] >= prefix_len) &&
+            (this.sci_match_info.match_ranges[i][0] >= prefix_len)) {
           /* Every match within the prefix was the same, and the next match
              is beyond the prefix. */
           break;
         }
-        if (com_match_info.match_range[i][0] !=
-            sci_match_info.match_range[i][0]) {
+        if (this.com_match_info.match_ranges[i][0] !=
+            this.sci_match_info.match_ranges[i][0]) {
           /* The next match within the prefix starts at a different spot. */
           prefix_differs = true;
           break;
         }
-        if ((com_match_info.match_range[i][1] >= prefix_len) &&
-            (sci_match_info.match_range[i][1] >= prefix_len)) {
+        if ((this.com_match_info.match_ranges[i][1] >= prefix_len) &&
+            (this.sci_match_info.match_ranges[i][1] >= prefix_len)) {
           /* Every match within the prefix was the same, and the last match
              extends at least to the end of the prefix. */
           break;
         }
-        /* It can never occur thet both names start matching at the same
-           spot within the prefix and don't end at the same spot within
-           the prefix (unless they both end beyond the prefix, above). */
+        if ((this.com_match_info.match_ranges[i][1] >= prefix_len) ||
+            (this.sci_match_info.match_ranges[i][1] >= prefix_len)) {
+          /* One match extends beyond the prefix and the other does not. */
+          prefix_differs = true;
+          break;
+        }
       }
     }
 
     /* If the prefix differs between com and sci, keep only the match with
        higher priority.  In case of a tie, prefer com. */
-    if (com_match_info && (com_match_info.pri == this.pri) &&
+    if (this.com_match_info && (this.com_match_info.pri == this.pri) &&
         prefix_differs) {
-      sci_match_info = null;
+      this.sci_match_info = null;
       sci_prefixed = false;
-    } else if (sci_match_info && (sci_match_info.pri == this.pri) &&
+    } else if (this.sci_match_info && (this.sci_match_info.pri == this.pri) &&
                prefix_differs) {
-      com_match_info = null;
+      this.com_match_info = null;
       com_prefixed = false;
     }
 
@@ -1193,10 +1206,10 @@ class PageTerm extends Term {
     */
     var pfx_info = null;
     if (com_prefixed) {
-      pfx_info = separate_prefix_info(this.prefix(), com_match_info);
+      pfx_info = separate_prefix_info(this.prefix(), this.com_match_info);
     }
     if (sci_prefixed) {
-      pfx_info = separate_prefix_info(this.prefix(), sci_match_info);
+      pfx_info = separate_prefix_info(this.prefix(), this.sci_match_info);
     }
 
     var pfx_highlight = '';
@@ -1278,7 +1291,12 @@ class PageTerm extends Term {
       return null;
     } else if (this.page_info.x == 's') {
       /* The name of a subset page is also the name of a trait, so
-         the search is *with* that trait. */
+         the search is *with* that trait.  As always, the user has
+         the option of searching with or without the prefix.  However
+         in this case, if the match is determined to include the prefix
+         (via this.prefixed), get_url() above will link to the advanced
+         search vs. the normal subset page.
+      */
       return 'with';
     } else {
       /* Or search *within* a taxon. */
@@ -1771,7 +1789,7 @@ function add_adv_terms(search_str) {
 
   if (adv_search) {
     /* During normal search, the traits are covered by the subset pages.  E.g.
-       - "blue flowers" gets the page for blue flowers, and
+       - "blue flowers" gets the subset page for blue flowers, and
        - "with blue flowers" invokes an advanced search for "blue flowers".
        During advanced search, the "blue flowers" page is excluded from search;
        instead, we add a TraitTerm for the "blue flowers" trait. */       
