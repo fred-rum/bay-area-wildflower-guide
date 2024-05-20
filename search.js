@@ -944,6 +944,7 @@ var cnt_list;
 const term_list = [];
 var term_id = 0;
 var zstr_len = 1;
+const trait_info = new Map();
 const parks = new Set();
 function convert_zint_to_zstr(zint) {
   var zstr = "";
@@ -955,6 +956,26 @@ function convert_zint_to_zstr(zint) {
     zstr = String.fromCharCode(c) + zstr;
   }
   return zstr;
+}
+function init_traits() {
+  for (const trait_values of traits) {
+    const name = trait_values;
+    const info = {
+      is_subset: false,
+    };
+    trait_info.set(name, info);
+  }
+  if (!adv_search) {
+    for (const page_info of pages) {
+      if (page_info.c) {
+        const name = page_info.c[0];
+        if (trait_info.has(name)) {
+          const info = trait_info.get(name);
+          info.is_subset = true;
+        }
+      }
+    }
+  }
 }
 function init_parks() {
   for (const trip of trips) {
@@ -1009,9 +1030,9 @@ function digits(num, len) {
 }
 function add_adv_terms(search_str) {
   var group = 1;
-  if (adv_search) {
-    for (const trait of traits) {
-      const term = new TraitTerm(group, search_str, trait);
+  for (const [name, info] of trait_info) {
+    if (adv_search || !info.is_subset) {
+      const term = new TraitTerm(group, search_str, name);
       term.search();
     }
   }
@@ -1757,6 +1778,7 @@ function main() {
       page_info.s = [page_info.p];
     }
   }
+  init_traits();
   init_parks();
   if (adv_search) {
     init_adv_search();

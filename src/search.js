@@ -986,7 +986,8 @@ class PageTerm extends Term {
     const search_str = this.search_str;
     const page_info = this.page_info;
 
-    /* The advanced search never matches glossary pages or glossary terms. */
+    /* The advanced search never matches subset pages, glossary pages,
+       or glossary terms. */
     if (adv_search && ('sgj'.includes(page_info.x))) {
       return;
     }
@@ -1691,6 +1692,7 @@ var term_id = 0;
 
 var zstr_len = 1;
 
+const trait_info = new Map();
 const parks = new Set();
 
 function convert_zint_to_zstr(zint) {
@@ -1705,8 +1707,32 @@ function convert_zint_to_zstr(zint) {
   return zstr;
 }
 
-/* Record the minimal set of parks.
+/* Convert the list of traits to a dictionary of objects for easier access. */
+function init_traits() {
+  for (const trait_values of traits) {
+    const name = trait_values;
+    const info = {
+      is_subset: false, /* may be modified below */
+    };
+    trait_info.set(name, info);
+  }
 
+  /* If we're doing a regular search, don't search for traits that are
+     duplicated in a subset page. */
+  if (!adv_search) {
+    for (const page_info of pages) {
+      if (page_info.c) {
+        const name = page_info.c[0];
+        if (trait_info.has(name)) {
+          const info = trait_info.get(name);
+          info.is_subset = true;
+        }
+      }
+    }
+  }
+}
+
+/* Record the minimal set of parks.
    This needs to be done even for regular searches so that a regular search
    can recognize a park name and convert it to an advanced search. */
 function init_parks() {
@@ -1787,14 +1813,15 @@ function digits(num, len) {
 function add_adv_terms(search_str) {
   var group = 1;
 
-  if (adv_search) {
-    /* During normal search, the traits are covered by the subset pages.  E.g.
+  for (const [name, info] of trait_info) {
+    /* During normal search, most traits are covered by the subset pages.  E.g.
        - "blue flowers" gets the subset page for blue flowers, and
        - "with blue flowers" invokes an advanced search for "blue flowers".
-       During advanced search, the "blue flowers" page is excluded from search;
-       instead, we add a TraitTerm for the "blue flowers" trait. */       
-    for (const trait of traits) {
-      const term = new TraitTerm(group, search_str, trait);
+       So we search here (during a regular search) only for those traits
+       that don't have a subset page.
+    */
+    if (adv_search || !info.is_subset) {
+      const term = new TraitTerm(group, search_str, name);
       term.search();
     }
   }
@@ -2953,6 +2980,7 @@ function main() {
     }
   }
 
+  init_traits();
   init_parks();
   if (adv_search) {
     init_adv_search();

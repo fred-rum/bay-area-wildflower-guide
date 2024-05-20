@@ -1,13 +1,14 @@
 sci:Ceanothus thyrsiflorus
+xx:ba
 
 ==blue blossom,4:var. thyrsiflorus
 color: blue, pale blue, white
 . twigs +- glabrous
 . leaf blade margin no more than partially rolled under
-. wild on the outer coastal range, including the Monterrey Peninsula
+. wild on the outer coastal range, including the Monterey Peninsula
 
 ==carmel ceanothus,5:var. griseus
 color: blue, pale blue, pale purple
 . twigs +- puberulent
 . leaf blade margin rolled under
-. wild on and near the Monterrey Peninsula, but cultivated elsewhere
+. wild on and near the Monterey Peninsula, but cultivated elsewhere

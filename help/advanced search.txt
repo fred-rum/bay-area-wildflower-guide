@@ -23,7 +23,7 @@ You can get to the advanced search page using any of these methods:
 <h4>within <i>taxon</i></h4>
 
 An advanced search term with this form finds taxons within the specified taxon.
-E.g. searching "within desert poppies (genus <i>Eschscholzia</i>)" results in the following hierarchy:
+E.g. searching "<a href="../advanced-search.html?genus-Eschscholzia">within desert poppies (genus <i>Eschscholzia</i>)</a>" results in the following hierarchy:
 . {-desert poppies}
 .. {-california poppy}
 .. {-tufted poppy}
