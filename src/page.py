@@ -3682,11 +3682,15 @@ def write_traits_to_pages_js(w):
     assign_zcode('endemic');
     assign_zcode('native');
     assign_zcode('alien');
+    w.write('["is",[\n');
     w.write('"endemic",\n');
     w.write('"native",\n');
     w.write('"alien",\n');
+    w.write(']],\n');
+    w.write('["with",[\n');
     for page in page_array:
         if page.subset_of_page:
             assign_zcode(page.name)
             w.write(f'"{page.name}",\n')
+    w.write(']],\n')
     w.write('];\n')

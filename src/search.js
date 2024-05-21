@@ -1292,13 +1292,14 @@ class PageTerm extends Term {
       return null;
     } else if (this.page_info.x == 's') {
       /* The name of a subset page is also the name of a trait, so
-         the search is *with* that trait.  As always, the user has
+         the search uses that trait's prefix.  As always, the user has
          the option of searching with or without the prefix.  However
          in this case, if the match is determined to include the prefix
          (via this.prefixed), get_url() above will link to the advanced
          search vs. the normal subset page.
       */
-      return 'with';
+      const trait = this.page_info.c[0];
+      return trait_info.get(trait).prefix;
     } else {
       /* Or search *within* a taxon. */
       return 'within';
@@ -1709,12 +1710,15 @@ function convert_zint_to_zstr(zint) {
 
 /* Convert the list of traits to a dictionary of objects for easier access. */
 function init_traits() {
-  for (const trait_values of traits) {
-    const name = trait_values;
-    const info = {
-      is_subset: false, /* may be modified below */
-    };
-    trait_info.set(name, info);
+  for (const [i, trait_group] of traits.entries()) {
+    for (const trait_name of trait_group[1]) {
+      const info = {
+        group: i + 1,
+        prefix: trait_group[0],
+        is_subset: false, /* may be modified below */
+      };
+      trait_info.set(trait_name, info);
+    }
   }
 
   /* If we're doing a regular search, don't search for traits that are
@@ -1742,24 +1746,27 @@ function init_parks() {
 }
 
 function init_adv_search() {
-  const num_zcodes = traits.length + trips.length;
+  const num_zcodes = trait_info.size + trips.length;
   while (num_zcodes > 93**zstr_len) {
     zstr_len++;
   }
 
+  var i = 0;
+
   /* assign zcodes to traits */
   const zstr_to_trait = {}
-  for (var i = 0; i < traits.length; i++) {
+  for (const trait_name of trait_info.keys()) {
     const zstr = convert_zint_to_zstr(i);
-    zstr_to_trait[zstr] = traits[i];
+    zstr_to_trait[zstr] = trait_name;
+    i++;
   }
 
   /* assign zcodes to trips */
   const zstr_to_trip = {}
-  for (var i = 0; i < trips.length; i++) {
-    const trip = trips[i];
-    const zstr = convert_zint_to_zstr(traits.length + i);
+  for (const trip of trips) {
+    const zstr = convert_zint_to_zstr(i);
     zstr_to_trip[zstr] = trip;
+    i++;
   }
 
   /* initialize the sets that will hold the advanced-search data */
@@ -1774,7 +1781,7 @@ function init_adv_search() {
   for (const page_info of pages) {
     /* Compose set of traits */
     if ('z' in page_info) {
-      for (var i = 0; i < page_info.z.length; i += zstr_len) {
+      for (i = 0; i < page_info.z.length; i += zstr_len) {
         const zstr = page_info.z.slice(i, i + zstr_len);
         if (zstr in zstr_to_trait) {
           page_info.trait_set.add(zstr_to_trait[zstr]);
@@ -1821,8 +1828,9 @@ function add_adv_terms(search_str) {
        that don't have a subset page.
     */
     if (adv_search || !info.is_subset) {
-      const term = new TraitTerm(group, search_str, name);
+      const term = new TraitTerm(info.group, search_str, name);
       term.search();
+      group = Math.max(group, info.group);
     }
   }
   group++;
@@ -2035,6 +2043,8 @@ function confirm_adv_search_term(ac_selected) {
        we were editing.  If term_id == term_list.length (meaning that a
        new term was being entered), nothing happens here. */
     term_list.splice(term_id, 1);
+
+    /* Now insert the new search term in group order. */
     term.insert_html_element();
   }
 
@@ -2190,7 +2200,7 @@ class TraitTerm extends TextTerm {
   }
 
   result_match(page_info, past_trip_set, current_trip_set) {
-    const trait = this.get_text();
+    const trait = this.match_str;
     if (page_info.trait_set.has(trait)) {
       for (const trip of past_trip_set) {
         past_trip_set.delete(trip);
@@ -2200,7 +2210,8 @@ class TraitTerm extends TextTerm {
   }
 
   prefix() {
-    return 'with';
+    const trait = this.match_str;
+    return trait_info.get(trait).prefix;
   }
 }
 

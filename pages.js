@@ -1,7 +1,10 @@
 const traits=[
+["is",[
 "endemic",
 "native",
 "alien",
+]],
+["with",[
 "blue flowers",
 "pale blue flowers",
 "purple flowers",
@@ -15,6 +18,7 @@ const traits=[
 "cream flowers",
 "white flowers",
 "other colors of flowers",
+]],
 ];
 const trips=[
 ["2007-04-29","Henry Coe SP"],

@@ -721,7 +721,8 @@ class PageTerm extends Term {
     if ('gj'.includes(this.page_info.x)) {
       return null;
     } else if (this.page_info.x == 's') {
-      return 'with';
+      const trait = this.page_info.c[0];
+      return trait_info.get(trait).prefix;
     } else {
       return 'within';
     }
@@ -958,12 +959,15 @@ function convert_zint_to_zstr(zint) {
   return zstr;
 }
 function init_traits() {
-  for (const trait_values of traits) {
-    const name = trait_values;
-    const info = {
-      is_subset: false,
-    };
-    trait_info.set(name, info);
+  for (const [i, trait_group] of traits.entries()) {
+    for (const trait_name of trait_group[1]) {
+      const info = {
+        group: i + 1,
+        prefix: trait_group[0],
+        is_subset: false,
+      };
+      trait_info.set(trait_name, info);
+    }
   }
   if (!adv_search) {
     for (const page_info of pages) {
@@ -983,20 +987,22 @@ function init_parks() {
   }
 }
 function init_adv_search() {
-  const num_zcodes = traits.length + trips.length;
+  const num_zcodes = trait_info.size + trips.length;
   while (num_zcodes > 93**zstr_len) {
     zstr_len++;
   }
+  var i = 0;
   const zstr_to_trait = {}
-  for (var i = 0; i < traits.length; i++) {
+  for (const trait_name of trait_info.keys()) {
     const zstr = convert_zint_to_zstr(i);
-    zstr_to_trait[zstr] = traits[i];
+    zstr_to_trait[zstr] = trait_name;
+    i++;
   }
   const zstr_to_trip = {}
-  for (var i = 0; i < trips.length; i++) {
-    const trip = trips[i];
-    const zstr = convert_zint_to_zstr(traits.length + i);
+  for (const trip of trips) {
+    const zstr = convert_zint_to_zstr(i);
     zstr_to_trip[zstr] = trip;
+    i++;
   }
   for (const page_info of pages) {
     page_info.trait_set = new Set();
@@ -1006,7 +1012,7 @@ function init_adv_search() {
   }
   for (const page_info of pages) {
     if ('z' in page_info) {
-      for (var i = 0; i < page_info.z.length; i += zstr_len) {
+      for (i = 0; i < page_info.z.length; i += zstr_len) {
         const zstr = page_info.z.slice(i, i + zstr_len);
         if (zstr in zstr_to_trait) {
           page_info.trait_set.add(zstr_to_trait[zstr]);
@@ -1032,8 +1038,9 @@ function add_adv_terms(search_str) {
   var group = 1;
   for (const [name, info] of trait_info) {
     if (adv_search || !info.is_subset) {
-      const term = new TraitTerm(group, search_str, name);
+      const term = new TraitTerm(info.group, search_str, name);
       term.search();
+      group = Math.max(group, info.group);
     }
   }
   group++;
@@ -1239,7 +1246,7 @@ class TraitTerm extends TextTerm {
   result_init() {
   }
   result_match(page_info, past_trip_set, current_trip_set) {
-    const trait = this.get_text();
+    const trait = this.match_str;
     if (page_info.trait_set.has(trait)) {
       for (const trip of past_trip_set) {
         past_trip_set.delete(trip);
@@ -1248,7 +1255,8 @@ class TraitTerm extends TextTerm {
     }
   }
   prefix() {
-    return 'with';
+    const trait = this.match_str;
+    return trait_info.get(trait).prefix;
   }
 }
 class TripTerm extends TextTerm {
