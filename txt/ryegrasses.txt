@@ -8,7 +8,7 @@ sci_fpj:Festuca perennis
 . glume < rest of spikelet
 . despite the name, is an annual or at best a perennial herb
 
-==darnel:L. temulentum
+==darnel ryegrass:L. temulentum
 sci_fpj:Festuca temulenta
 . 1 glume per spikelet except 2 for uppermost spikelet
 . glume >= rest of spikelet

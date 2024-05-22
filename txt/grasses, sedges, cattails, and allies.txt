@@ -11,5 +11,5 @@ ohioplants.org has more <a href="https://ohioplants.org/families-cyperaceae/">di
 . leaf sheath clasps the stem with sheath sides slightly overlapping opposite the side with the leaf blade
 .. "sedges have edges"
 
-==bulrush family:family Typhaceae
+==cattail family:family Typhaceae
 acom: bulrushes, cattails, and allies

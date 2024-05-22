@@ -11,7 +11,7 @@ color:yellow
 . crown cup-shaped, << perianth parts
 . if the perianth and crown are both white, it might be N. papyraceus; Jepson seems unsure
 
-==wild daffodil:N. pseudonarcissus
+==common daffodil:N. pseudonarcissus
 . inflorescence 1-flowered
 . perianth parts 2.5--3.5 cm
 . crown tubular, >= perianth parts

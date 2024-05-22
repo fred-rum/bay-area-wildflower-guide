@@ -44,7 +44,7 @@ flowers:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0507+2000
 . <b>leaf glabrous abaxially</b>
 . very rare
 
-==sticky chinese houses:C. tinctoria
+==tincture plant:C. tinctoria
 flowers:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1205+1493
 . inflorescence generally of several whorls
 . <b>corolla upper lobes >> 1 mm but less than &frac12; of lower lip</b>

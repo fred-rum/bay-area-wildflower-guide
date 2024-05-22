@@ -3,7 +3,7 @@ sci_iF:Cupressus spp.
 x:hist/rare
 
 ==monterey cypress:H. macrocarpa
-sci_iF:Cupressus macrocarpa
+sci_F:Cupressus macrocarpa
 sci_p:Hesperocyparis macrocarpa|Cupressus macrocarpa|Callitropsis macrocarpa
 . <b>crown asymmetric, often open, flat-topped to widely conic in age</b>
 

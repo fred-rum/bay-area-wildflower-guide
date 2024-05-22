@@ -8,7 +8,8 @@ color: yellow
 . corolla bright yellow, 1--1.5 mm
 . common
 
-==australian waterbuttons:C. australis
+==australian cotula:C. australis
+xcom: common cotula
 . minutely strigose to long-soft-hairy
 . leaf blade 2--3-pinnately divided
 . corolla dull white to pale yellow, 0.5--0.8 mm

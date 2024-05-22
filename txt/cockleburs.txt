@@ -6,9 +6,10 @@ color: other
 . no spines at nodes
 
 ==spiny cocklebur:X. spinosum
-. golden spines at nodes, 15--30+ mm long
+. golden spines at nodes, with generally 3 branches, 15--30+ mm long
+. leaf abaxially minutely coarse-hairy
 
-==californian bur:X. orientale
-. has been occasionally observed in California on iNaturalist
-. but is unknown to Calflora, Jepson eFlora, and Flora of North America
-. <i>Xanthium</i> in general is of disputed origin, so this species may be caught up in that and/or may have bogus iNaturalist observations
+==common cocklebur:X. orientale
+sci_F: n/a
+. no nodal spines
+. leaf abaxially densely strigose

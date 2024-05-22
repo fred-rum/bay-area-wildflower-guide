@@ -7,7 +7,7 @@ genus: n/a
 
 ==plumeless thistles:Carduus spp.
 
-==standard thistles:Cirsium spp.
+==plume thistles:Cirsium spp.
 
 ==star thistles:Centaurea spp.
 

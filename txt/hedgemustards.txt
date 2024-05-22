@@ -1,5 +1,4 @@
-com:n/a
-sci:Sisymbrium spp.
+sci:genus Sisymbrium
 x:ba
 
 ==hedge mustard:S. officinale

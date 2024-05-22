@@ -114,8 +114,8 @@ color: purple
 . inflorescence axis extended as bristle beyond flower
 . calyx tube +- <= lobes
 
-==grasspea:L. sativus
-. not described by Jepson
+==indian pea:L. sativus
+sci_j: n/a
 . 1 flower in inflorescence
 . 2 leaflets per leaf
 . stem winged[?]

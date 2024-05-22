@@ -1,5 +1,4 @@
-com:n/a
-sci:Matricaria spp.
+sci:genus Matricaria
 x:ca
 ==pineapple-weed:M. discoidea
 acom:rayless chamomile

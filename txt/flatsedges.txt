@@ -15,7 +15,8 @@ x:hist/rare
 [
 <h3>Generally > 1 stem</h3>
 
-==black flatsedge:C. niger
+==black flatsedge:C. melanostachyus
+sci_fpj: C. niger
 . 2 stigmas
 .. all others below have 3 stigmas
 . 2-sided fruit

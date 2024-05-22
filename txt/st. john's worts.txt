@@ -52,7 +52,7 @@ color:yellow
 . flowers generally > 1 per branch
 . petals 12--17 mm
 
-==n/a:H. grandifolium
+==large-leaved saint john's wort:H. grandifolium
 sci_jF: n/a
 . shrub
 . large, leathery leaves

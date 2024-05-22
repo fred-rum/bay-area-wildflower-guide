@@ -3,7 +3,7 @@ x:hist
 
 Petals are generally lobed <= 50% of their length.  If the petals are fully divided, see {-chickweeds}.
 
-==big chickweed:C. holosteoides
+==common mouse-ear chickweed:C. holosteoides
 sci_Ffpj: Cerastium fontanum ssp. vulgare
 . stems both non-flowering/mat-forming and flowering/+-erect
 . petals 4--5 mm, 1.5 mm < to 0.5 mm > sepals

@@ -1,5 +1,4 @@
-com:n/a
-sci:Logfia spp.
+sci:genus Logfia
 x:ba
 
 ==california cottonrose:L. filaginoides
