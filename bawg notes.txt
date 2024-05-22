@@ -1899,5 +1899,3 @@ the script should complain about any {-inline link} to a shadow page
 allow "subsp." in searches as an alias for "ssp."
 
 Support 'ijkl' and 'wasd' for panning the photo gallery via the keyboard.
-
-Color autocomplete entries according to taxon type?

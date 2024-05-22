@@ -15,7 +15,7 @@ Use the search bar to look up any flower, or start at the top:
 <div id="cache-yellow" style="display:none;"><img src="icons/hazard.svg" class="hazard-img" alt=""><span class="cache-text">The Guide is now using its local offline copy.  <b>An update is available</b> whenever you are ready.</span></div>
 <div id="red-missing" style="display:none;"><img src="icons/hazard.svg" class="hazard-img" alt=""><span class="cache-text">Some files have gone missing from your local offline copy.  Update your local files.</span></div>
 
-The Guide works great on a smartphone whereever you want to take it.
+The Guide works great on a smartphone.
 To save the entire Guide on your phone so that it works even you're
 out of range of the internet, click the shiny green button below.
 This URL will then work without internet access, or you can pin the
