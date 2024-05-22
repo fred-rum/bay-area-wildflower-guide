@@ -25,7 +25,7 @@ Relevent iNaturalist comments in chronological order:
 
 ==Exobasidium arctostaphyli
 
-==azalea gall:Exobasidium vaccinii
+==lingonberry gall:Exobasidium vaccinii
 gall:1660
 . parasitizes only lingonbery (Vaccinium vitis-idaea)
 . see {-genus Exobasidium} for discussion

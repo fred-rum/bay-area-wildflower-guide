@@ -8,6 +8,6 @@ x:ba
 
 ==pinyon mouse:Peromyscus truei
 
-==north american deer mouse:Peromyscus maniculatus
+==deer mouse:Peromyscus maniculatus
 
 ==brush mouse:Peromyscus boylii

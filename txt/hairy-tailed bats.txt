@@ -2,4 +2,4 @@ x:ba
 
 ==hoary bat:Lasiurus cinereus
 
-==western red bat:Lasiurus blossevillii
+==western red bat:Lasiurus frantzii

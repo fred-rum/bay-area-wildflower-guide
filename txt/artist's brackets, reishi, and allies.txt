@@ -5,4 +5,4 @@ x:more
 x:more
 . if found on {-california bay}, is more likely {-Ganoderma brownii}
 
-==n/a:Ganoderma brownii
+==artist's conk:Ganoderma brownii

@@ -1,5 +1,4 @@
 sci:Acmispon spp.
-asci:genus Ottleya
 x:!rare
 
 Key features:
@@ -77,7 +76,7 @@ color: yellow
 [
 <h2>1--2 flowers per leaf axil</h2>
 
-==strigose bird's-foot trefoil:Ottleya strigosa
+==strigose lotus:A. strigosus
 . prostrate, often mat-forming, generally branched from base, 3--50 cm
 . leaf axis flat, +- blade-like
 . 3--9 leaflets, lanceolate to obovate, +- equal

@@ -6,4 +6,4 @@ x:ba
 
 ==little brown bat:Myotis lucifugus
 
-==miller's myotis:Myotis evotis
+==long-eared myotis:Myotis evotis

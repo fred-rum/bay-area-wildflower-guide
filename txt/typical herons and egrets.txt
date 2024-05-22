@@ -1,4 +1,4 @@
-==great herons:Ardea spp.
+==great herons and egrets:Ardea spp.
 
 ==snowy egret:Egretta thula
 x:more
