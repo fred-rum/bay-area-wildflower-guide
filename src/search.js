@@ -1476,7 +1476,8 @@ function fn_search(default_ac_selected) {
     if (adv_search) {
       /* For advanced search, the autocomplete_list doesn't contain links,
          just colored spans. */
-      term.html = '<span class="autocomplete-entry" class="' + c + '" onclick="return fn_adv_ac_click(' + i + ');">' + p + '</span>';
+      term.html = '<span class="autocomplete-entry ' + c + '" onclick="return fn_adv_ac_click(' + i + ');">' + p + '</span>';
+      console.log(term.html);
     } else {
       /* When performing a regular search, any type of match has an associated
          link (with URL), even if it's a link to the advanced search page. */

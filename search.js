@@ -840,7 +840,7 @@ function fn_search(default_ac_selected) {
     const c = term.get_class();
     const p = '<p class="nogap">' + text + '</p>'
     if (adv_search) {
-      term.html = '<span class="autocomplete-entry" class="' + c + '" onclick="return fn_adv_ac_click(' + i + ');">' + p + '</span>';
+      term.html = '<span class="autocomplete-entry ' + c + '" onclick="return fn_adv_ac_click(' + i + ');">' + p + '</span>';
     } else {
       const url = term.get_url();
       term.html = '<a class="enclosed ' + c + '" href="' + url + '" onclick="return fn_ac_click();">' + p + '</a>';
