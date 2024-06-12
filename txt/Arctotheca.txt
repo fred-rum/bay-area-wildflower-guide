@@ -1,0 +1,14 @@
+com: n/a
+sci: genus Arctotheca
+x:ca
+
+Both species are most common around the Golden Gate, with occasional observations in all low-lying/coastal areas.
+
+==prostrate capeweed:A. prostrata
+color: yellow
+. ray 25--40 mm
+. disk corolla yellow throughout
+
+==capeweed:A. calendula
+. ray 6--15 mm
+. <b>disk corolla distally +- green to black</b>

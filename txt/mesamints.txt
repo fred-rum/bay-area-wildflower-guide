@@ -1,0 +1,21 @@
+sci:genus Pogogyne
+x:ba
+
+==thyme-leaved pogogyne:Pogogyne serpylloides
+. corolla 2.5--5 mm long, +- included in bracts
+. stem generally prostrate to decumbent, +- 0.5 mm diameter
+.. plant is inconspicuous
+. found in grassy areas
+color: pale purple
+
+==sacramento beardstyle:Pogogyne zizyphoroides 
+. corolla 4--8 mm long, +- included in bracts
+. stem generally ascending to erect, +- 1 mm diameter
+.. plant is conspicuous
+. found in low, moist areas
+. rare
+
+==douglas' mesa mint:Pogogyne douglasii
+. corolla 9--20 mm long, longer than calyx & bracts
+. found in low, moist areas
+. extremely rare

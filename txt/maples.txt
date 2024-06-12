@@ -7,5 +7,5 @@ xx:none
 . leaf simple, palmately lobed, or compound with leaflets sessile
 
 ==boxelder:A. negundo
-leaflets:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0506+1035
+color: other
 . leaf compound, leaflets stalked

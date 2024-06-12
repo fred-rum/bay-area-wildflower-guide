@@ -33,3 +33,5 @@ color: yellow
 genus:pincushion plants
 x:rare
 color: yellow
+
+==genus Arctotheca

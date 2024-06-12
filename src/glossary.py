@@ -275,11 +275,11 @@ class Glossary:
                 # Check whether the term is in any of the glossaries for which
                 # a warning should be printed.
                 if assoc_page:
-                    for glossary in assoc_page.glossary_warn:
-                        if term.lower() in glossary.link_set:
-                            error(f'{term} in {assoc_name}',
-                                  prefix='Glossary term is used outside of its glossary hierarchy:')
-                            break
+                    with Progress('Glossary term is used outside of its glossary hierarchy'):
+                        for glossary in assoc_page.glossary_warn:
+                            if term.lower() in glossary.link_set:
+                                error(f'{term} in {assoc_name}')
+                                break
                 return term
 
         # Perform glossary substitution on a fragment of "safe text", i.e.
@@ -433,6 +433,8 @@ class Glossary:
 
         filename = f'glossary/{self.name}.txt'
         read_file(filename, self.read_glossary_file)
+
+        self.txt = re.sub(r'^\s*#.*\n|\s+#.*', '', self.txt, flags=re.MULTILINE)
 
         self.txt = re.sub(r'^taxon:\s*(.*?)\s*$',
                           repl_taxon, self.txt, flags=re.MULTILINE)

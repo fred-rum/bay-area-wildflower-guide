@@ -19,6 +19,7 @@ species: solomon's plume
 xx: ca
 . perianth parts 6
 . inflorescence is a <b>panicle</b>
+.. i.e. flowers are on a pedicel off of a branch off the peduncle
 .. <b>&gt; 20 flowers</b> per inflorescence
 . <b>perianth 1--2 mm, << stamens</b>
 . <b>fruit tan with red speckles</b> (possibly with a greenish stripe without speckles) or bright red
@@ -32,6 +33,7 @@ color: white
 xx:none
 . perianth parts 6
 . inflorescence is a <b>raceme</b> (or few-branched near base)
+.. i.e. flowers are on pedicel directly off the peduncle
 .. <b>5--15 flowers</b> per inflorescence
 . <b>perianth 4--7 mm, &gt; stamens</b>
 . <b>fruit tan with red speckles and <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0210+1472">bold dark purple stripes</a></b> or bright red

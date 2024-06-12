@@ -1,6 +1,7 @@
 xx:any
 
 ==yellow owl's clover:T. versicolor ssp. faucibarbata
+color: yellow
 . corolla yellow
 
 ==yellow-beak false owl's-clover:T. versicolor ssp. versicolor

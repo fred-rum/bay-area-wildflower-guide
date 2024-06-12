@@ -19,6 +19,7 @@ color: other
 . inflorescnce bract does not look like stem
 .. all bracts are < &frac12 the length of the inflorescence
 . <b>leaf blade flattened, 5--14 mm wide</b>
+.. only common species in the bay area with a flattened leaf blade (not wiry or absent)
 
 [
 cylindric inflorescence bract continues above inflorescence, making the inflorescence appear as if it is on the side of the stem

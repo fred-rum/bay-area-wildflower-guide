@@ -9,6 +9,7 @@ Where possible, each taxon page links to additional taxon information on other w
 . BugGuide has additional information for insects, spiders, and related "bugs"
 .. links to BugGuide are currently manual, so not every applicable taxon has one yet
 . Gallformers has additional information for any organisms that cause plant galls
+. All About Birds has additional information for birds
 
 The lowest-level taxons are most reliably linked.  Higher level taxons
 may link to fewer sites, usually because the site doesn't have

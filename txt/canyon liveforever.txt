@@ -3,9 +3,11 @@ sci:Dudleya cymosa
 ==coast range dudleya:ssp. cymosa
 color: red, salmon, orange, yellow
 . petals bright yellow, orange, or red
+. leaf 3--17 cm long, 1--6 cm wide
 . outer coastal range
 
 ==diablo range dudleya:ssp. paniculata
 color: cream, yellow, other
 . petals pale yellow-white
+. leaf 3--10 cm long, 5--20 mm wide
 . Diablo range

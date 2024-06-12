@@ -65,14 +65,26 @@ color:red purple
 [
 <h2>peduncled raceme with small flowers</h2>
 
+[
+<h3>2--8 flowers, 10--20 leaflets</h3>
+
 ==two-seeded vetch:V. disperma
 color: pale purple
-. <b>2--6 flowers</b>, crowded near tip, axis extended beyone flowers as bristle
-.. all others in this set have 1--3 flowers
-. <b>12--20 leaflets</b>, 7--18 mm, oblong-elliptic, tip often mucronate
-.. all others in this set have <= 10 leaflets
-. corolla 3.5--5 mm, blue [???]
+. 2--6 flowers, crowded near tip, <b>axis extended beyond flowers as bristle</b>
+. 12--20 leaflets, 7--18 mm, <b>oblong-elliptic, tip often mucronate</b>
+. corolla 3.5--5 mm, blue [pale purple?]
 . stem sprawling, 20--60 cm
+
+==hairy tare:V. hirsuta
+color: white, pale purple
+. 2--8 flowers, crowded near tip, <b>[axis not extended beyond flowers as bristle?]</b>
+. 10--16 leaflets, 5--15 mm, <b>linear to narrowly elliptic, tip generally truncate, notched, or 1--5-toothed</b>
+. corolla 3--4.5 mm, dull white or pale blue [purple?]
+. stem decumbent or climbing, slender
+
+]
+[
+<h3>1--3 flowers, 4--10 leaflets</h3>
 
 ==smooth tare:V. tetrasperma
 color: pale purple
@@ -98,6 +110,7 @@ species: slender vetch
 . corolla 4.5--7 mm, <b>pale blue</b> [or deep blue] [or purple?]
 . stem sprawling or low-climbing, 30--100 cm
 
+]
 ]
 
 The following species are reported in the bay area, but are considered waifs by Jepson:

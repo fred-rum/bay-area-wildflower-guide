@@ -1,0 +1,7 @@
+sci: tribe Eucerini
+bug:8019
+
+==white-haired monk longhorn:Eucera frater ssp. albopilosa
+x:more
+xx:hist/rare
+bug:385405

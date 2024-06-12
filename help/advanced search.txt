@@ -4,7 +4,8 @@ Advanced search lets you find all taxons that meet one or more criteria.
 Advanced search builds on the capabilities of the regular {-search}
 bar at the top of most pages.  To avoid confusion, the advanced search
 page is the only page that does <b>not</b> have the regular search bar
-at the top.
+at the top.  In order to perform a regular search, return to the home page
+(e.g. by clicking the icon in the upper left).
 
 Advanced search terms can be any of these forms:
 . within a particular taxon hierarchy

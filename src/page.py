@@ -1198,7 +1198,9 @@ class Page:
         return n
 
     def remove_comments(self):
-        self.txt = re.sub(r'^\s*#.*\n| +#.*', '', self.txt,
+        # Be careful to not touch glossary references, i.e. 'glossary#term'.
+        # So require a whitespace before the '#'.
+        self.txt = re.sub(r'^\s*#.*\n|\s+#.*', '', self.txt,
                           flags=re.MULTILINE)
 
     def parse_names(self):

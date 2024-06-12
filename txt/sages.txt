@@ -29,7 +29,7 @@ color:white
 ==chia:S. columbariae
 color: purple
 . annual, 10--50 cm
-. corolla tube 6--8 mm, blue to pale blue or puple to pale purple
+. corolla tube 6--8 mm, blue to pale blue or purple to pale purple
 . lower corolla lip +- 2 &times; upper
 . common
 

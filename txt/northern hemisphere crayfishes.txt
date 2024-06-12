@@ -1,0 +1,11 @@
+sci: superfamily Astacoidea
+bug: 350326
+x:more
+
+==signal crayfish:Pacifastacus leniusculus
+bug:394340
+x:ba
+
+==red swamp crayfish:Procambarus clarkii
+bug:382306
+x:ca

@@ -144,3 +144,9 @@ gall:1733
 bug:504162
 gall:683
 . forms hairy pits on lower leaf surfaces of {-red oaks} (specifically, the live oaks) and {-canyon live oak}
+
+==oak leaf blister:Taphrina caerulescens
+gall:1197
+. formers blisters on leaf surfaces of {-red oaks} ^https://en.wikipedia.org/wiki/Taphrina_caerulescens#Hosts_and_symptoms
+.. Gallformers seems to list all oaks, but that's likely pessimistic
+. each strain infects a specific oak species, but the strains have not yet been taxonomically separated

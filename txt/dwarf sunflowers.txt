@@ -1,0 +1,14 @@
+sci:genus Helianthella
+x:ca
+
+==california dwarf sunflower:H. californica ssp. californica
+species: california dwarf sunflower
+sci_fpj: H. californica var. californica
+color: yellow
+xx:ba
+. involucre generally 1.5--2 cm diameter
+. outer phyllaries seldem enlarged or leaf-like, not incurved
+
+==mt.diablo helianthella:H. castanea
+. involucre 2.5--4 cm diameter
+. outer phyllaries generally enlarged, leaf-like, incurved

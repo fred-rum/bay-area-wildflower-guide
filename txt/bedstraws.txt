@@ -84,6 +84,7 @@ species: three-petal bedstraw
 . rare near Pacific coast
 
 ==graceful bedstraw:G. porrigens
+# has varieties
 color: other, cream
 . habit: perennial herb, climbing, woody, scabrous, clinging by recurved hairs; dioecious
 . stem: 10--150 cm, slender

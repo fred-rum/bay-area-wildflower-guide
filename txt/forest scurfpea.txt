@@ -1,0 +1,5 @@
+sci: Rupertia physodes
+color: cream
+
+genus: n/a
+x: ba

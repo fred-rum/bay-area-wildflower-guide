@@ -7,3 +7,49 @@ title:general
 {Mt. Tam,Mt. Tamalpais,Mount Tam,Mount Tamalpais} Mt. Tamalpais.  A mountain in Marin County.  Part of the outer coastal range, but separate from the Santa Cruz mountains.
 {outer coastal range,outer coast range} In the bay area, this is the Santa Cruz mountains and the Mt. Tam area.
 
+
+<h2>taxonomic ranks</h2>
+
+#{kingdom}
+#
+#{phylum}
+#{subphylum}
+#
+#{superclass}
+#{class}
+#{subclass}
+#{infraclass}
+#{subterclass}
+#{superorder}
+#
+#{order}
+#{suborder}
+#{infraorder}
+#{parvorder}
+#
+#{zoosection}
+#{zoosubsection}
+#
+#{superfamily}
+#{epifamily}
+#{family}
+#{subfamily}
+#
+#{supertribe}
+#{tribe}
+#{subtribe}
+#
+#{genus}
+#{subgenus}
+#{section}
+#{subsection}
+#{complex}
+
+#{species}
+
+#{subspecies} See below.
+#{variety} See below.
+
+Although many sources claim that variety is a lower level of taxonomy than subspecies, in reality they are rarely nested.  Indeed, iNaturalist does not allow a variety to be within a subspecies.  Within botony, "it is sometimes recommended that the subspecies rank should be used to recognize geographic distinctiveness, whereas the variety rank is appropriate if the taxon is seen throughout the geographic range of the species." ^https://en.wikipedia.org/wiki/Variety_(botany)
+
+#{form} A distinguishable form that is preserved genetically, but which stems from disparate genetic variations so that organisms with the same form are not necessarily related.  E.g. albinism.

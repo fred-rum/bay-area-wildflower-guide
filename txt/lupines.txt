@@ -115,17 +115,18 @@ color: purple
 . inflorescence: 1--8 cm, <b>flowers in (0)5 whorls</b>; peduncle 3--10 cm; <b>pedicels 1--3.5 mm</b>; bract 4--6 mm
 . flower: 4--10 mm; calyx upper lip 2--4 mm, deeply lobed, lower 4--6 mm; petals generally blue (light blue, pink, or white), <b>banner longer than wide</b>, spot white, in age magenta
 . <b>keel +- white, generally pointed, upper margins generally ciliate near tip</b>
-. note: Vigorous plants with larger flowers may be confused with Lupinus nanus.
+. note: vigorous plants with larger flowers may be confused with Lupinus nanus.
 . very common
 
 ==big pod lupine:L. pachylobus
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0113+1990
-. habit: annual 15--40 cm, hairy
+color: purple
+. habit: annual 15--40 cm, hairy <b>[dense & bristly, especially on the calyx]</b>
 . leaf: petiole 4--8 cm; leaflets generally 7, 20--25 mm, 2--5 mm wide
-. inflorescence: 1--4 cm, <b>flowers generally whorled</b>; peduncle 3--12 cm; <b>pedicels 1--2.5 mm</b>; bract +- 6 mm
+. inflorescence: 1--6 cm, <b>flowers generally whorled</b>; peduncle 3--12 cm; <b>pedicels 1--2.5 mm</b>; bract +- 6 mm
+.. <b>[may have fewer whorls than {-miniature lupine}]</b>
 . flower: 7--9 mm; calyx 4.5--6 mm, lips +- equal; petals blue, <b>banner longer than wide</b>, spot white, in age dark magenta
 . <b>keel blunt, glabrous</b>
-. Mt. Diablo
+. Mt. Diablo [and rarely elsewhere?]
 
 ]
 [
@@ -218,7 +219,7 @@ species: summer lupine
 xx:rare
 . habit: perennial herb 20--80 cm, densely hairy to tomentose, gray to silver; rhizomes 3--7 mm diam
 . stem: spreading to erect, 3--4 mm diam
-. leaf: cauline; stipules 4--15 mm; petiole 2--7 cm; leaflets 7--9, 25--70 mm; <b>adaxially hairy, green-gray to silver</b>
+. leaf: cauline; stipules 4--15 mm; petiole 2--7 cm; leaflets 7--9, 25--70 mm; <b>hairy, green-gray to silver</b>
 . inflorescence: 10--30 cm, flowers +- whorled; peduncle 3--7 cm; pedicels 3--7 mm; bract 4--14 mm
 . flower: 10--14 mm; calyx upper lip 7--11 mm, 2-toothed, lower 8--12 mm, entire to 3-toothed; petals purple, <b>banner back glabrous</b>, spot white or not
 . <b>keel upcurved, glabrous</b>

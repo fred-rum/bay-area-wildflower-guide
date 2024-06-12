@@ -13,16 +13,15 @@ bug:3080
 ==large carpenter bees:genus Xylocopa
 bug:3508
 
+==digger bees
+
+==longhorn bees
+
 ==genus Lasioglossum
 bug:9033
 
 ==nomad bees:genus Nomada
 bug:5211
-
-==white-haired monk longhorn:Eucera frater ssp. albopilosa
-x:more
-xx:hist/rare
-bug:385405
 
 ==tripartite sweat bee:Halictus tripartitus
 x:more
@@ -33,12 +32,6 @@ bug:108931
 
 ==mining bees:genus Andrena
 bug:22574
-
-==california mountain-digger bee:Habropoda depressa
-bug:51916
-
-==california digger bee:Anthophora californica
-bug:239588
 
 ==western leafcutter bee:Megachile perihirta
 bug:104963

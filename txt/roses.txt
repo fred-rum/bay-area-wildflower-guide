@@ -21,7 +21,7 @@ color: pink, red purple
 . very common in the bay area
 
 ==ground rose:R. spithamea
-color: red purple
+color: red purple, pale purple
 . <b>dwarf shrub, generally < 50 cm</b>
 . <b>prickles 3--8(12) mm, generally slender (thick-based), +- straight</b> [example,8]
 . leaf axis generally glabrous (finely hairy), glandular
@@ -35,19 +35,19 @@ color: red purple
 <h3>thick-based prickles</h3>
 
 ==california wild rose:R. californica
-color: pink
+color: pink, pale purple
 . shrub or thicket-forming, 80 cm -- 2.5 m
 . <b>prickles 3--15 mm, thick-based and compressed, generally curved</b> [example,5]
 . leaf axis +- shaggy-hairy (+- glabrous), hairs to 1 mm, glandless or glandular
 . leaflets 5--7(9), +- hairy, sometimes glandular
-. sepals glandular or not, entire
+. <b>sepals entire</b>, glandular or not
 . <b>petals generally 15--25 mm</b>, pink
 . very common in the bay area
 . hosts {-rose galls}
 ;Edibility: Early Californians would occasionally eat the rose hips raw, but only after a frost had sweetened them. ^https://books.google.com/books?id=m5LsWJl2cCkC
 
 ==dog-rose:R. canina
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0507+0191
+sepals:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1118+0569
 . shrub or thicket-forming, generally 80 cm -- 4 m
 . <b>prickles +- few, 3--10 mm, thick-based and compressed, curved</b>
 . leaf axis glabrous or with hairs to 1 mm, glandless
@@ -57,7 +57,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0507+0191
 . Nisene Marks, Marin, and Mt. Tam.
 
 ==sweet-brier:R. rubiginosa
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1214+2870
+color: pink, pale purple
 . shrub or thicket-forming, 80 cm -- 3 m
 . <b>prickles +- 5--15 mm, thick-based and compressed, curved</b>
 . leaf axis +- hairy, hairs 0.2--1 mm, glandular

@@ -16,7 +16,7 @@ species: abrams' liveforever
 . petals pale yellow [not full yellow]
 . stem < 8 cm long, 10--20 mm wide
 . peduncle 5--20 cm
-. leaf 3--8 cm
+. leaf 3--8 cm long, 7--15 mm wide
 
 ==canyon liveforever:D. cymosa
 . petals bright yellow, orange, or red
@@ -33,5 +33,5 @@ color:yellow
 ==lanceleaf liveforever:D. lanceolata
 . petals yellow to generally red
 . plant 3--35 cm wide
-. leaves 3--10 &times; longer than wide
+. leaves 3--10 &times; longer than wide; 5--20 cm long, 1--2 cm wide
 . stem of older plants covered by dried leaves
