@@ -36,13 +36,13 @@ color: yellow, orange
 
 ==redwood violet:V. sempervirens
 color: yellow
-. leaves simple; <b>tip is usually rounded, not pointed</b>
+. leaves simple, <a href="https://www.inaturalist.org/observations/11283218#identification-28095530">smaller, duller, and lower to the ground than</a> {-stream violet}; <b>tip is usually rounded, not pointed</b>
 . lower stem stolon-like [prostrate, root-forming], with evergreen leaves, peduncles
 . common in the Santa Cruz range and Oakland
 
 ==stream violet:V. glabella
 color: yellow
-. leaves simple, <a href="https://www.inaturalist.org/observations/11283218#identification-28095530">smaller, duller, and lower to the ground than</a> {-redwood violet}; <b>tip may be slightly pointed</b>
+. leaves simple, <b>tip may be slightly pointed</b>
 . lower stem erect, without leaves, peduncles
 . Santa Cruz range and Oakland
 
