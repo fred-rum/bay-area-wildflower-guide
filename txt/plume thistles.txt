@@ -13,7 +13,7 @@ Potential key features:
 ==bull thistle:C. vulgare
 color: purple
 . <b>adaxial leaf face with slender appressed bristle-like prickles</b>
-. [all other species have no prickles on the adaxial leaf face]
+. [all other species have no prickles on the adaxial leaf face, although they may have hairs]
 . common
 
 ==short-styled thistle:C. brevistylum

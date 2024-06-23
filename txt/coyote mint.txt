@@ -1,11 +1,13 @@
 sci:Monardella villosa
 xx:ba
 
-==san antonio hills monardella:ssp. villosa
+rep:san antonio hills monardella,2
+
+==san antonio hills monardella,5:ssp. villosa
 color: pale purple, purple
 . leaf +- narrowly ovate, base tapered to obtuse
 
-==san francisco coyote mint:ssp. franciscana
+==san francisco coyote mint,5:ssp. franciscana
 color: pale purple, purple
 . leaf ovate to widely triangular-ovate [ovate base with triangular tip], base generally truncate
 .. in the bay area, coastal variants have thick leaves, woolly stems, while inland variants are less hairy and have smaller leaves

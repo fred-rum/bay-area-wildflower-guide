@@ -2,9 +2,16 @@ sci:family Araneidae
 
 ==cross orbweaver:Araneus diadematus
 bug:3376
+x:more
+
+==northern orbweaver:Aculepeira packardi
+bug:289881
+x:ca
+. See BugGuide for characteristics that distinguish it from <i>Neoscona oaxacensis</i>.
 
 ==spotted orbweaver:Neoscona crucifera
 bug:28154
+x:more
 
 ==trashline orbweavers
 

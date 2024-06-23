@@ -1,2 +1,4 @@
+Burning beetles secrete as a defensive agent a poisonous chemical that causes blistering of the skin.  Do not lick.
+
 ==n/a:Nemognatha scutellaris
 bug:258965

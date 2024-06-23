@@ -1,0 +1,13 @@
+com:n/a
+sci:genus Largus
+bug:3627
+
+L. californicus was originally described as a subspecies of L. cinctus. I'm not sure when it was promoted to full species status, but there is an ongoing debate whether the two groups can be separated at all. In any case, I can't find an electronic copy of the 1923 paper (or any other) that describes the supposed difference between the two groups.  Some sources ^https://www.knowyourinsects.org/Hemiptera1.html claim that L. californicus is up to <b>25 mm</b> long, whereas L. cinctus and L. succinctus are no more than <b>13 mm</b> long.
+
+L. succinctus is often IDed in CA, but supposedly it is only found east of the Rockies.
+
+Bugguide.net claims that someone is reviewing the genus ^https://bugguide.net/node/view/217658 , so perhaps they'll publish a clarification in the future.
+
+# I have some observations that are ID'd to species (even research grade!),
+# even though that may be impossible.
+warn obs_promotion: none

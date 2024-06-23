@@ -11,18 +11,6 @@ Key features:
 . leaf margin wavy or not
 
 
-==veiny monardella:M. douglasii
-color:red purple, purple
-. <b>annual with 1 main stem, branched or not</b>
-. <b>bracts with stout veins</b>, translucent between veins
-. leaf margin not wavy
-. 12
-
-==curlyleaf monardella:M. undulata
-wavy leaf margin:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0209+0895
-. subshrub to shrub with few--many main stems, branched middle to distal, sparsely hairy to densely white-tomentose
-. leaves clustered at nodes, sparsely hairy to densely tomentose, <b>leaf margin wavy</b>
-
 ==coyote mint:M. villosa
 . subshrub to shrub with 1--many main stems, branched or not
 . 1--6 flowers clusters per main stem
@@ -48,3 +36,15 @@ glabrous stem:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+061
 . <b>stem +- glabrous</b>, no hairs > 0.3 mm
 . leaf margin serrate (entire), slightly or not wavy
 . bay area flowers have > 1 flower cluster per main stem and are quite similar to {-Monardella villosa}
+
+==veiny monardella:M. douglasii,2
+color:red purple, purple
+. <b>annual with 1 main stem, branched or not</b>
+. <b>bracts with stout veins</b>, translucent between veins
+. leaf margin not wavy
+. 12
+
+==curlyleaf monardella:M. undulata
+wavy leaf margin:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0209+0895
+. subshrub to shrub with few--many main stems, branched middle to distal, sparsely hairy to densely white-tomentose
+. leaves clustered at nodes, sparsely hairy to densely tomentose, <b>leaf margin wavy</b>

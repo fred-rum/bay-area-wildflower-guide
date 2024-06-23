@@ -1,4 +1,5 @@
 sci:family Largidae
 
-==california bordered plant bug:Largus californicus
-bug:93846
+"There is rampant disagreement as to exactly how many species of <i>Largus</i> there are in North America, since many 'species' have, in the past, been described based on color pattern and geographic distribution." ^https://bugeric.blogspot.com/2014/05/livin-largus.html
+
+==genus Largus

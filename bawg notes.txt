@@ -1906,3 +1906,6 @@ Support terms in the glossary that can only be linked with an explicit
   don't need a glossary link every time they're used, e.g. "species".
 Allow glossary terms to be "defined" with no definition (a blank definition).
   This makes sense for terms defined as a group, e.g. kingdom to species.
+
+links to other definitions of a glossary word should say [See also: ...].
+  otherwise the bare [...] link looks like a source for the current defn.

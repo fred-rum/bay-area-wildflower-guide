@@ -19,14 +19,16 @@ Jepson mentions "appendages yellow" for some flowers, but a genus note says "Yel
 
 ==rusty popcornflower:P. nothofulvus
 color: white
-. petal diameter 4--9 mm
+. petal diameter <b>4--9 mm</b>
 . hairs rough, sharp [may be hard to distinguish from canescent]
 . mature calyx usually brown tinged (rusty)
 . common
 
-==valley popcornflower:P. canescens
+==valley popcornflower:P. canescens var. canescens
+xx:ba
 color: white
-. petal diameter 2--3 mm
+species: valley popcornflower
+. petal diameter <b>2--3 mm</b>
 . <b>stem canescent</b>
 . mature calyx may be brown tinged
 . rare
