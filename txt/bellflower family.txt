@@ -10,10 +10,9 @@ genus:n/a
 x:ba
 . <b>2+ flowers per node</b>
 . corolla cut >= &frac34; to base with linear lobes
+. leaf 1--6 cm, serrate
 . uncommon in the Santa Cruz range
 
 ==genus Ravenella
-. annual
-. 1 flower per node
+. <b>1 flower per node</b>
 . corolla cut <= &frac23; to base with at least slightly wedgier than linear lobes</h3>
-. <b>leaf not crenate</b>

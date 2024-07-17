@@ -1,6 +1,8 @@
 sci:Mesembryanthemum spp.
 x:ca
 
+There are more things commonly called <b>ice plants</b> in the {-stone plant family}.
+
 ==slender iceplant:M. nodiflorum
 color: cream
 . <b>0.4--1.2 cm flower diameter</b>
@@ -10,6 +12,7 @@ color: cream
 . common
 
 ==crystalline ice plant:M. crystallinum
+color: white, cream
 . <b>1--3 cm flower diameter</b>
 . leaf flat
 . white petals, aging to pink

@@ -2,6 +2,7 @@ sci:family Pentatomidae
 
 ==brown marmorated stink bug:Halyomorpha halys
 bug:9806
+x:ca
 . back mottled brown
 . each antenna with two wide light-colored bands
 . invasive
@@ -9,17 +10,20 @@ bug:9806
 
 ==rough stink bugs:genus Brochymena
 bug:3133
+x:more
 . toothlike projections on lateral edges of pronotum
 . pleated pattern on rear margin of abdomen
 
 ==southern green stink bug:Nezara viridula
 bug:19047
+x:ca
 . scutellum has black dot in each basal corner (separate from the pale dots along the basal edge)
 . antennomeres 3 & 4 mostly reddish except at base
 . connexivum uniformly colored (with no or very tiny dark dot on apical margin of each abdominal segment)
 
 ==green stink bug:Chinavia hilaris
 bug:9066
+x:ba
 . scutellum has pale dot in each basal corner (separate from the pale dots along the basal edge)
 . antennomeres 3 & 4 blackish within the apical half of each
 . connexivum usually has conspicuous dark dot on apical margin of each abdominal segment
@@ -31,3 +35,7 @@ x:more
 
 ==genus Thyanta
 bug:8637
+
+==green burgundy stink bug:Banasa dimidiata
+bug:15349
+x:more

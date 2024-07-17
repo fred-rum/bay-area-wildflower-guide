@@ -1,0 +1,9 @@
+sci:Dicentra formosa ssp. formosa
+sci_j: Dicentra formosa
+color: pale purple
+
+species: pacific bleeding heart
+xx: ba
+
+genus: bleedinghearts
+x: ba

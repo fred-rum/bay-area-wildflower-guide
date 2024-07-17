@@ -11,6 +11,7 @@ sci_fpj:Elymus caput-medusae
 
 ==giant wild rye:Leymus condensatus
 sci_fpj:Elymus condensatus
+color: other
 
 ==squirreltail:E. elymoides
 

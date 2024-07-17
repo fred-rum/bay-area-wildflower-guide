@@ -5,7 +5,11 @@ Key features:
 . flower stalked or not
 . color of the 6 stamens (which are quite large and linear)
 
-==pacific trillium:T. ovatum
+==western trillium:T. ovatum var. ovatum
+sci_jfp:ssp. ovatum
+color: white, pale purple
+species: pacific trillium
+xx:ba
 . <b>flower is stalked</b>
 . stamens are yellow or +- white
 . the local subspecies is ssp. ovatum

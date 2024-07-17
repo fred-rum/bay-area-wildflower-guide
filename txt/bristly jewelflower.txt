@@ -12,6 +12,7 @@ color: purple, pale purple, red purple
 
 ==mount tamalpais bristly jewelflower:S. glandulosus ssp. pulchellus
 . raceme 1-sided
+.. photos suggest ~90&deg; between flowers (instead of 180&deg;)
 . sepals lavender to rose or purple
 . Marin
 

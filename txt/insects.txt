@@ -59,3 +59,7 @@ bug:490135
 .. males are rare
 . nymphs are covered with conical, star-shaped, or rosette-shaped wax plates
 . exude copious honeydew
+
+==comanche green lacewing:Chrysoperla comanche
+bug:1918733
+. iNaturalist may suggest red-lipped green lacewing (<i>Chrysoperla rufilabris</i>), but that is not found in California

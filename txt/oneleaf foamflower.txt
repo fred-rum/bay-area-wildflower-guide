@@ -1,0 +1,12 @@
+sci:Tiarella trifoliata var. unifoliata
+color: white
+
+species: threeleaf foamflower
+xx:ba
+
+genus: foamflowers
+x:ca
+
+. simple leaf with 3--5 lobes
+.. other "threeleaf" foamflowers have compound leaves, but are not found in the bay area
+Compare to {-crevice alumroot}, which has a multiple levels of forking from the main axis.

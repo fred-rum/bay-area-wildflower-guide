@@ -1,6 +1,6 @@
 sci:Toxomerus
 
-Bugguide.net has a <a href="https://bugguide.net/node/view/144390">key to common species</a> in North America.
+The Fly Guide has a <a href="https://sites.google.com/view/flyguide/species-guides/syrphidae/toxomerini/key-to-toxomerus">key to common species</a> in North America.
 
 ==western calligrapher:T. occidentalis
 bug:60281

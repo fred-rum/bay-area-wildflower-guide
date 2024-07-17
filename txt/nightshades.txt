@@ -65,7 +65,7 @@ color:white
 . corolla: 12--20 mm diameter including lobes, white w/ yellow/green spots at base
 .. anthers 2.3--3.3 mm
 ... anthers ellipsoid
-.. <b>filaments distinct</b>; free portion (where the filaments are not fused into a single tube)(0.9--1.6 mm) comparable in length to the anther (2.3--3.3 mm)
+.. <b>filaments distinct</b>; free portion (below the anthers where the filaments are not fused into a single tube) (0.9--1.6 mm) comparable in length to the anther (2.3--3.3 mm)
 .. <b>style strongly exerted</b> beyond anthers
 .. bud +- spherical
 ... style strongly exerted from the bud
@@ -78,7 +78,7 @@ acom:douglas nightshade
 . corolla: <b>13--15+ mm diameter</b> including lobes, white, possibly tinged with lavender, w/ yellow/green spots at base often with a brown tinge or margin
 .. <b>anthers 2.5--4.5 mm</b>
 ... anthers ellipsoid and slightly tapered towards the tips
-.. <b>filaments indistinct</b>; free portion (where the filaments are not fused into a single tube) (0.1--0.5 mm) about 1/4 the length of the anther (3--4.5 mm, usually > 4 mm in North America)
+.. <b>filaments indistinct</b>; free portion (below the anthers where the filaments are not fused into a single tube) (0.1--0.5 mm) about 1/4 the length of the anther (3--4.5 mm, usually > 4 mm in North America)
 .. <b>style strongly exerted</b> beyond anthers
 .. bud +- ellipsoid, tapering to the apex
 ... style not exerted from the bud

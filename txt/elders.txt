@@ -8,13 +8,16 @@ sci_fpj:Sambucus nigra ssp. caerulea
 rep: ,2
 color: white, cream, yellow
 xx:ca
-. inflorescence +- flat-topped, central axis generally not dominant
+. <b>inflorescence +- flat-topped</b>, central axis generally not dominant
 . petals +- spreading
-. glaucus blue berries
-Formerly a subspecies of black elderberry, but now elevated to its own species.
+. <b>glaucus blue berries</b>
 
-==red-berried elder:S. racemosa
-rep: pacific red elder,3
-. inflorescence +- dome-shaped, central axis generally dominant
+==pacific red elderberry,3:S. racemosa var. microbotrys
+sci_fpj: S. racemosa var. racemosa
+color: white, cream, yellow
+species: red-berried elder
+xx:ba
+. <b>inflorescence +- dome-shaped</b>, central axis generally dominant
 . petals often reflexed
-. red berries
+. <b>red berries</b>
+Rocky mountain elder (var. <i>melanocarpa</i>) has purple-black berries, but is only found in the Sierras.

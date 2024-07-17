@@ -132,8 +132,9 @@ color: yellow, red
 . Butano, Mt. Montara vicinity
 
 ==round leaved heermann's lotus:A. heermannii var. orbicularis
+sci_fj:Acmispon tomentosus var. tomentosus
 color:yellow
-xx:hist
+xx:ba
 species: heermann's lotus
 . perennial herb; prostrate, often mat-forming, 30-100 cm
 . 4--6 leaflets, 4--16 mm, <b>densely white-hairy</b>

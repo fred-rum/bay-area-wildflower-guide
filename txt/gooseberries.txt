@@ -81,6 +81,7 @@ bristles:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0903+072
 
 ==straggle bush:Ribes divaricatum var. pubiflorum
 acom:straggly gooseberry
+color: white
 xx:ba
 species: spreading gooseberry
 . peduncle and pedicels not glandular [bracts may be glandular]
@@ -92,7 +93,7 @@ species: spreading gooseberry
 . stamen length 2.5--3.5 &times; petals
 . green to cream anthers
 . leaf blade generally hairy, but never glandular
-. internodes bristly or not [may be as bristly as {-canyon gooseberry}: <a href="https://www.calflora.org/cgi-bin/viewphoto.cgi?arg=/app/up/mg/423/mg127198-0.jpg">example</a>]
+. internodes bristly or not [mature stems may be as bristly as {-canyon gooseberry}: <a href="https://www.calflora.org/cgi-bin/viewphoto.cgi?arg=/app/up/mg/423/mg127198-0.jpg">[example]</a>
 . fruit glabrous (not bristly)
 ;Edibility: Ripe purple-black berries are "palatable." ^http://floranorthamerica.org/Ribes_divaricatum
 

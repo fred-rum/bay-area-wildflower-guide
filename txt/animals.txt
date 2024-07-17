@@ -33,3 +33,5 @@ do member_com_simple: self-species
 ==true jellies
 end_hierarchy
 do member_com_simple: self-species
+
+==sea stars and brittle stars
