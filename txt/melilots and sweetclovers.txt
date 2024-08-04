@@ -26,6 +26,7 @@ It came from French over 500 years ago, so the 't' is pronounced.
 . uncommon
 
 ==white sweetclover:M. albus
+color: white
 . corolla 3.5--5 mm, <b>white</b>
 . inflorescence axis generally 3--8 cm when flowers open
 . stem 50--200 cm

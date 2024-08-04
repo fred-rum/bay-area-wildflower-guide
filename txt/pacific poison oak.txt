@@ -3,4 +3,6 @@ color: other, cream
 x:ca
 genus: poison ivies and oaks
 
+Only primates are guinea pigs are known to be sensitive to the urushiol in poison oak.  Guinea pigs are often used in lab experiments because they have similar allergic reactions as humans. ^https://www.nytimes.com/2016/07/05/science/what-poison-ivy-has-against-us.html
+
 Hosts {-poison ivy leaf gall mite}.

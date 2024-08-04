@@ -1,0 +1,34 @@
+sci:genus Persicaria
+x: rare
+
+See also {-knotweeds}.
+
+==pink knotweed:P. capitata
+. <b>inflorescence +- head-like</b>
+.. all others are spike- or panicle-like
+. petioles generally winged with ear-like lobes at the base
+.. in photos this looks more like narrow lobes that stick out or clasp the stem, and the petiole is too short to display separate wings
+.. all below have no petioles or ear-like lobes
+
+==dotted smartweed:Persicaria punctata
+color: white
+. <b>inflorescence not dense</b>
+. perianth gland-dotted
+.. visible as tiny pits in the calyx?
+.. all below are not gland-dotted
+
+==water smartweed:P. amphibia
+. dense spike hides individual calyxes
+. flower pink to red purple
+. <b>found in water</b>
+
+==spotted lady's thumb:Persicaria maculosa
+color: red purple, pink
+. dense spike hides individual calyxes
+. flower pink to red purple
+. <b>no peduncle glands</b>
+
+==pale smartweed:P. lapathifolia
+. dense spike mostly hides individual calyxes
+. flower white to pink to red purple
+. <b>+-stalked peduncle glands</b>

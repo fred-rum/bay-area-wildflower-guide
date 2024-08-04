@@ -24,6 +24,7 @@ color: pale purple
 <h3>Inflorescence spike-like</h3>
 
 ==spearmint:M. spicata
+color: pale purple
 . leaf blade lance-oblong, glabrous, spearmint-scented
 
 ==apple mint:M. suaveolens

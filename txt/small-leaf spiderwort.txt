@@ -1,0 +1,6 @@
+sci: Tradescantia fluminensis
+x: ca
+# Calflora has an old record of T. ohiensis in CA,
+# but I'm sure it's dead by now.
+color: white
+genus: spiderworts

@@ -1,0 +1,17 @@
+sci: genus Viburnum
+x:ba
+
+==laurustinus viburnum:Viburnum tinus
+color: white
+. peninsula
+sci_j: n/a
+
+==oval-leaved viburnum:V. ellipticum
+. leaves coarsely dentate above middle
+. north and east of Oakland
+
+==canary lauristine:V. rugosum
+sci_jf: V. rigidum
+sci_p: n/a
+. leaves entire
+. Tilden

@@ -22,8 +22,8 @@ proximal pedicels < calyx</h2>
 xx:uncat
 color: purple
 . <b>corolla lips +- =</b>
-. <b>corolla throat as wide as long</b> [never defined]
-. upper lip white to lavender or tipped dark violet, wine-spotted and generally +- red lined near base
+. <b>corolla throat as wide as long</b> ^figure:https://tchester.org/plants/analysis/collinsia/concolor_heterophylla.html
+. upper lip white to lavender or tipped dark violet, wine-spotted and generally +- <b>purple lined near base</b>
 . lower lip +- white to rose-purple, lowest lobe generally with darker red tip
 . leaf lance-deltate, toothed, glabrous abaxially (at most ciliate on midvein)
 
@@ -31,7 +31,7 @@ color: purple
 color: white, pale purple, purple
 <b>Caution: ID unsure</b>
 . <b>corolla lips +- = in fully open flowers</b>, upper lobes +- toothed, lateral lobes notched
-. <b>corolla throat longer than wide</b> [never defined]
+. <b>corolla throat longer than wide</b> ^figure:https://tchester.org/plants/analysis/collinsia/concolor_heterophylla.html
 . corolla generally white to pale lavender to pink-purple
 . leaf +- thick, +- oblong, crenate, rolled under, generally finely hairy
 . <b>[Jepson, CalPhotos, and iNaturalist do not agree on its features]</b>

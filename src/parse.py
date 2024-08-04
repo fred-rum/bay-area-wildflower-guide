@@ -117,9 +117,10 @@ def parse_line_by_line(name, s, page, glossary):
         child_list = []
 
     def repl_carat(matchobj):
-        url = matchobj.group(1)
-        next = matchobj.group(2)
-        link = f'<a href="{url}">[source]</a>'
+        text = matchobj.group(1) or 'source'
+        url = matchobj.group(2)
+        next = matchobj.group(3)
+        link = f'<a href="{url}">[{text}]</a>'
         if re.match(r'[\w\^\"]', next):
             return link + ' '
         else:
@@ -134,8 +135,8 @@ def parse_line_by_line(name, s, page, glossary):
     else:
         assoc_page = None
 
-    # Replace ^url in the text with a [source] link.
-    s = re.sub(r'\^(http\S*)[^\S\n]*(?=(.|$))', repl_carat, s, flags=re.MULTILINE)
+    # Replace ^url in the text with a [source] link (or ^text:url with [text]).
+    s = re.sub(r'\^(?:(\S+):)?(http\S*)[^\S\n]*(?=(.|$))', repl_carat, s, flags=re.MULTILINE)
 
     # Replace HTTP links in the text with ones that open a new tab.
     # This must be done before inserting internal links, e.g. ==... or {-...}.

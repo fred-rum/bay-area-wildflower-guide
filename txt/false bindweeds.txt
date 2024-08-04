@@ -82,4 +82,15 @@ xx:more
 . none of the ones found in the SF bay area have been IDed to subspecies, but ssp. cyclostegia is the only subspecies found nearby
 .. distinguish subspecies by measurements of the bracts, calyx, corolla, and/or stamens (stamens are best)
 
+==large bindweed:C. silvatica ssp. disjuncta
+# Calflora calls it shortstalk false bindweed,
+# but that name seems more commonly used for the native eastern subspecies
+color: white
+species: large bindweed
+xx:ca
+. stem climbing, <= 6 m
+. 1 flower per peduncle
+. found in disturbed places
+. mostly found near Santa Cruz
+
 ]

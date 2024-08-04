@@ -89,7 +89,7 @@ acom:douglas nightshade
 
 ]
 [
-<h4>Style weakly exerted at most<h4>
+<h4>Style weakly exerted at most</h4>
 
 ==black nightshade:S. nigrum
 color: white

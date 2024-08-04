@@ -149,15 +149,16 @@ color: purple
 . anthers dark purple
 . stigma lobes pink
 
-==greater herb-robert:G. yeoi
+==greater herb robert:G. yeoi
 sci_jf: n/a
+color: purple
 . 3x larger flower than herb robert
 . petals are brighter pink with less distinct stripes <a href="https://www.inaturalist.org/projects/geranium-yeoi-greater-herb-robert/journal/61272-geranium-yeoi-greater-herb-robert/">[src]</a>
 . unclear how to distinguish from {-canary island geranium}
 
 ==giant herb-robert:G. maderense
 sci_jf: n/a
-. similar to {-greater herb-robert}
+. similar to {-greater herb robert}
 . only found in or near cultivation
 
 ]

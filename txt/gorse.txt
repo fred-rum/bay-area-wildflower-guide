@@ -1,0 +1,5 @@
+sci: Ulex europaeus
+color: yellow
+
+genus: gorses
+x:ca

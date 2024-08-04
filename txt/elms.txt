@@ -1,0 +1,32 @@
+sci: genus Ulmus
+x:ca
+
+Although there are many elms planted in urban areas, very few trees can be found wild in the bay area.
+
+[
+==american elm:Ulmus americana
+color: other
+. leaf 3.5--8.3 cm wide, acuminate
+.. margin doubly serrate
+. bark split into ridges that mostly curve together at their ends
+. branches never have corky outgrowths
+<b>Caution: ID unsure</b>
+
+==field elm:Ulmus minor
+. leaf 3.5--8.3 cm wide, acuminate
+.. margin doubly serrate
+. bark split into ridges or plates that seldem curve together
+. generally some branches have corky warts or wings
+]
+
+[
+==chinese elm:Ulmus parvifolia
+. leaf 1--3.5 cm wide, no more than short-acuminate
+.. margin usually simply serrate, but sometimes doubly serrate
+. bark peels as irregular woody scales 2--8 cm wide, not furrowed
+
+==siberian elm:Ulmus pumila
+. leaf 1--3.5 cm wide, no more than short-acuminate
+.. margin usually simply serrate, but sometimes doubly serrate
+. bark deeply furrowed, firmly attached
+]

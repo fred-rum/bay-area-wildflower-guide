@@ -1,0 +1,5 @@
+sci: Lunaria annua
+color: red purple, purple
+
+genus: n/a
+x:ca
