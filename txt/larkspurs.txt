@@ -1,4 +1,4 @@
-sci:Delphinium spp.
+sci: genus Delphinium
 x:hist/rare
 
 The parts of a larkspur flower are described in the {-larkspur glossary}.
@@ -26,7 +26,6 @@ color: red
 See also {-california fuchsia}, which does not have a spur extending perpendicular to the pedicel and has much longer filaments.  There is also a scarlet larkspur (<i>Delphinium cardinale</i>), but it isn't found in the bay area.
 
 ==california larkspur:D. californicum
-color: pale purple, other
 . <b>generally > 50 flowers</b>
 . <b>generally >= 2 stems, 100--160 cm</b> (60--220), generally puberulent
 . sepals forward-pointing, +- lavender or +- green-white depending on subspecies [maybe]

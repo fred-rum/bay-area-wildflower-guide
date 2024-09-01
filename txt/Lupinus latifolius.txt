@@ -1,0 +1,15 @@
+sci:Lupinus latifolius
+xx:ba
+
+==broadleaf lupine:ssp. latifolius
+sci_jfp:var. latifolius
+color:purple
+. stem glabrous to puberulent
+.. may apply to the petioles as well
+
+==dudley's lupine:ssp. dudleyi
+acom:canyon lupine # Calflora
+sci_jf:var. dudleyi
+sci_p:n/a
+. stem densely hairy
+.. may apply to the petioles as well

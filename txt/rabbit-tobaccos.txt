@@ -35,7 +35,7 @@ color: pale purple
 . <b>phyllaries generally +- pink</b> [it's distinctive in CalPhotos]
 . common
 
-==fragrant everlasting:P. beneolens
+==fragrant everlasting,7:P. beneolens
 color: cream, other
 . <b>stem obscurely glandular beneath long hairs</b>, tomentose
 . leaves crowded or not [unknown]

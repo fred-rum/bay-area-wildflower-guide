@@ -22,4 +22,4 @@ color: cream, yellow
 . fruit is 3--9 cm long, 3--5 mm wide
 .. <b>constricted between the seeds</b> and breaks up into one-seeded segments when mature
 
-Jepson notes that the two kinds hybridize to produce swarms highly variable in flower color and fruit constriction.
+Jepson notes that the two kinds hybridize to produce swarms highly variable in flower color and fruit constriction.  In fact, one research paper argues that the hybrids have entirely wiped out the progenitor subspecies in California. ^https://onlinelibrary.wiley.com/doi/epdf/10.1111/j.0014-3820.2006.tb01197.x

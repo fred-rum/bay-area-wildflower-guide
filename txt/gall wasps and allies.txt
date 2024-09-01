@@ -18,6 +18,7 @@ bug:14738
 ==convoluted gall wasp
 ==spined turban gall wasp
 ==urchin gall wasp
+==clasping twig gall wasp
 ==honeydew gall wasp
 ==pumpkin gall wasp
 ==disc gall wasp

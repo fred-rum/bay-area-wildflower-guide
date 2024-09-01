@@ -1,0 +1,14 @@
+x:any
+
+==california larkspur:ssp. californicum
+color: pale purple, other
+. sepals +- lavender
+. <b>inflorescence axis puberulent</b>
+. upper petals +- hairy
+. Santa Cruz range
+
+==hospital canyon larkspur:ssp. interius
+. sepals +- green-white
+. <b>inflorescence axis +- glabrous</b>
+. upper petals +- glabrous
+. Diablo Range (Mt. Diablo & Henry Coe)

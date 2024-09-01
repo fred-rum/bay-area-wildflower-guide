@@ -115,9 +115,21 @@ gall:1724
 . forms on leaf veins of {-white oaks}
 . more "spines" than {-spined turban gall wasp}, with little space between the spines
 
+==clasping twig gall wasp:Disholcaspis prehensa
+bug:220595
+gall:1155
+. constricted around middle
+. flared base generally clasps twig at least somewhat
+. cap curved and pitted
+. forms on branches of {-white oaks}
+. produces honeydew, which may attract ants
+
 ==honeydew gall wasp:Disholcaspis eldoradensis
 bug:753408
 gall:1355
+. smooth sides
+. sits on a narrow peg-like base
+. cap is flat or barely curved and pitted
 . forms on branches of {-white oaks}
 . produces honeydew, which may attract ants
 

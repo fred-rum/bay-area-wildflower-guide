@@ -1,0 +1,23 @@
+sci: Hemizonia congesta
+xx:hist
+
+genus: n/a
+x:any
+
+==woodrush tarweed:ssp. luzulifolia
+color: white, pale purple
+. leaves short-hairy, +- shaggy, or silky-hairy
+.. hairs at margins not notably longer on distal leaves
+. heads in panicle-like cluster
+. <b>phyllaries 3.5--6.5 mm long, with tips generally shorter than bodies</b>
+. rays white
+
+==congested-headed hayfield tarplant:ssp. congesta
+. leaves +- shaggy
+.. hairs at margins often longer on distal leaves
+. some or all <b>heads generally in tight groups</b>
+. <b>phyllaries 6--10 mm long, with tips longer than bodies</b>
+. rays white
+
+==yellow hayfield tarplant:ssp. lutescens
+. <b>rays yellow</b>

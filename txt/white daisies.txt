@@ -48,9 +48,6 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0616+0158
 . ray flowers: 0--many, 0--15 mm, generally white to pink or purple
 
 ==hayfield tarweed:Hemizonia congesta
-color: white, pale purple
-x:any
-genus: n/a
 
 ==afro-australian daisies:Dimorphotheca spp.
 . stem depends greatly on the species; see sub-key
