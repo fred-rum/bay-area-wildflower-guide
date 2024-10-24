@@ -12,6 +12,7 @@ Flowers are sorted by petal length within each category.
 <h3>herb</h3>
 
 ==bog st. john's-wort:H. anagalloides
+color: yellow
 . herb
 . <b>petals 2--4 mm</b>
 .. all others are > 5 mm

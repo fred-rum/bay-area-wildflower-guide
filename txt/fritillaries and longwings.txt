@@ -8,3 +8,7 @@ species:gulf fritillary
 
 ==pacific fritillary:Boloria epithore
 bug:63702
+
+==coronis fritillary:Argynnis coronis
+bug:25047
+sci_b:Speyeria coronis

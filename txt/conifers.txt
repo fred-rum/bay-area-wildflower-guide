@@ -13,3 +13,6 @@ x:ba
 ==coast douglas-fir:Pseudotsuga menziesii var. menziesii
 x:ba
 xx:ca
+
+==california incense-cedar:Calocedrus decurrens
+x:ca

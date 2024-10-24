@@ -82,6 +82,8 @@ color: blue, purple
 . Flower: deep blue
 
 ==wavyleaf ceanothus:C. foliosus
+color: blue
+xx:more
 . twig: green to red-green
 . leaf blade:
 .. 5--20 mm long, 3--13 mm wide, <b>+- folded lengthwise</b>

@@ -1,0 +1,5 @@
+sci: Crocosmia Xcrocosmiiflora
+color: red, orange
+
+genus: montbretia
+x:ca

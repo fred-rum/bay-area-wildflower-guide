@@ -25,6 +25,7 @@ x:more
 
 ==ring-billed gull:Larus delawarensis
 . yellow bill with <b>black ring near both tips</b>
+.. ring can occasionally cover the tips of the bills
 . <b>pale eye</b>
 . yellow legs and feet
 . white belly
