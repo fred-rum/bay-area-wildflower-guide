@@ -7,10 +7,12 @@ bug:192
 
 ==lorquin's admiral:Limenitis lorquini
 bug:5757
+x:ba
 See also the similar {-california sister}.
 
 ==california sister:Adelpha californica
 bug:13494
+x:ca
 See also the similar {-lorquin's admiral}.
 
 ==fritillaries and longwings:subfamily Heliconiinae
@@ -18,6 +20,7 @@ See also the similar {-lorquin's admiral}.
 
 ==gray buckeye: Junonia grisea
 bug:516
+x:ca
 
 ==california ringlet:Coenonympha california ssp. california
 x:ca
@@ -30,5 +33,11 @@ sci_b:Coenonympha tullia ssp. california
 bug:27454
 x:more
 
-==common wood-nymph: Cercyonis pegala
+==common wood-nymph:Cercyonis pegala
 bug:459
+x:more
+
+==monarch:Danaus plexippus
+bug:540
+x:ba
+. Danaus gilippus is very rarely seen, but many of these are believed to be escapees from butterfly houses

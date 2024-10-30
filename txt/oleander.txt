@@ -1,5 +1,5 @@
 sci:Nerium oleander
-color:white, cream, red purple
+color:white, cream, pink, red purple
 
 genus: n/a
 x:ca

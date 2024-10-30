@@ -21,6 +21,7 @@ xx:more
 . fruit generally blue-glaucous
 
 ==red huckleberry:V. parvifolium
+color: other, salmon
 . leaves deciduous (rarely evergreen), thin or +- thick, veins generally prominent abaxially
 . individual flowers (and fruits) in axils
 . pedicel not jointed to flower

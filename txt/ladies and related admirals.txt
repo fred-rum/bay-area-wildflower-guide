@@ -1,5 +1,6 @@
 sci:Vanessa spp.
 bug:299
+x:ca
 
 ==painted lady:Vanessa cardui
 bug:2649

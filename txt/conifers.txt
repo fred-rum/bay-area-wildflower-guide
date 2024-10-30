@@ -16,3 +16,6 @@ xx:ca
 
 ==california incense-cedar:Calocedrus decurrens
 x:ca
+
+==california torreya:Torreya californica
+x:ca

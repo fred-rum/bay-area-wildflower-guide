@@ -2,7 +2,7 @@
 . sonds much like the {-red-shouldered hawk} but cries only once at a time
 
 ==red-shouldered hawk:Buteo lineatus
-. sounds much like the {-red-tailed hawk} but repeats its cry multeiple times in succession
+. sounds much like the {-red-tailed hawk} but repeats its cry multiple times in succession
 
 ==ferruginous hawk:Buteo regalis
 . rare

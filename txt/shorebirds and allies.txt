@@ -5,7 +5,7 @@
 ==forster's tern:Sterna forsteri
 x:more
 
-==black necked stilt:Himantopus mexicanus
+==black-necked stilt:Himantopus mexicanus
 x:ca
 
 ==black oystercatcher:Haematopus bachmani

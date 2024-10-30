@@ -1,7 +1,7 @@
 sci:Epipactis spp.
 x:ca
 
-==broad-leafed helleborine:E. helleborine
+==broad-leaved helleborine:E. helleborine
 color: pale purple, other
 . sepals +- green, often purple-tinged or -striped
 . lateral petals 8--11 mm; lateral sepals <b>10--13 mm</b>
