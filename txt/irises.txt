@@ -55,13 +55,15 @@ color: purple
 color: purple, pale purple
 . perianth light to dark lavender, deep red-purple, or pale cream, veined purple
 . <b>perianth tube 10--24 mm</b>, funnel-shaped
-. stem generally branched, 15--50 cm
+. <b>stem generally branched</b>, 15--50 cm
 . <b>basal leaves 10--22 mm wide</b>
+.. bifacial, i.e. one side shiny, the other side dull
 . 1--3 cauline leaves, similar to basal
 . sepals 5--8 cm, 14--30 mm wide, obovate
 . petals 5--7 cm, 10--18 mm wide, obovate
 . ovary triangular, with nipple-like projection at tip
 . style branches 30--50 mm, crests 9--20 mm, <b>stigmas triangular</b>
+. var. <i>major</i> has a cross of characteristics between {-fernald's iris} and {-douglas iris} ^https://www.pacificcoastiris.org/spcni_photojournals/pj_marinsantacruziris.html
 
 ==yellow iris:I. pseudacorus
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1202+1176

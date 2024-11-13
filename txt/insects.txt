@@ -39,11 +39,12 @@ bug:156092
 
 ==red gum lerp psyllid
 
-==european earwig:Forficula dentata
+==western earwig:Forficula dentata
+acom:european earwig
 bug:2308539
 x:ca
 ;. male foreceps >= half the length of the abdomen
-;. Although the european earwig complex (complex Forficula auricularia) includes 4 indistinguishable species, only one is found in California.
+;. Although the european earwig complex (complex <i>Forficula auricularia</i>) includes 4 indistinguishable species, only one is found in California.
 
 ==jumping bristletails:family Machilidae
 bug:248040

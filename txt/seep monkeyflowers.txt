@@ -2,7 +2,9 @@ sci:section Simiolus
 
 It could be argued that {-Erythranthe guttata} and {-Erythranthe grandis} are either the same species, or form a species complex that is <a href="https://www.inaturalist.org/observations/42209666#activity_comment_b95ba1ff-c3c8-4b07-a62f-0f1388f6b364">insufficiently</a> distinguishable by the current literature.  Guy Nesom's <a href="https://phytoneuron.net/2014Phytoneuron/93PhytoN-SimiolaSisters.pdf">2014 paper</a> claims that the two are morphologically distinct, but it goes on to describe the central California population of E. grandis as "guttata-like."  In any case, this paper doesn't describe what distinguishing features are supposedly present.
 
-I've tried using Jepson's eFlora to distinguish the two species, but it <a href="https://www.inaturalist.org/observations/44420130">didn't go well</a>.  Admittedly, even I change my ID for this population from year to year, which suggests that any size differences between the two species have more to do with the growing conditions than with genetics.
+I've tried using Jepson's eFlora to distinguish the two species, but it <a href="https://www.inaturalist.org/observations/44420130">didn't go well</a>.  Given that I change my ID for this population from year to year, I suspect that any size differences between the two "species" have more to do with the growing conditions than with genetics.  Wikipedia gives an overview of the back-and-forth debate among researchers, which it summarizes as follows: "While E. grandis has recently been raised to the species level, it could also be regarded as a coastal perennial ecotype of E. guttata."
+
+{-Erythranthe grandis} is supposedly more salt tolerant, and most observations are directly on the coast, but Jepson says it can also occur around seeps and creeks, and Calflora does have a few observations inland.
 
 ==seep monkeyflower:Erythranthe guttata
 sci_p:Mimulus guttatus
@@ -25,7 +27,7 @@ sci_p:Mimulus grandis
 acom:villous-bracted monkeyflower # FNA
 sci_p:n/a
 color: yellow
-. <b>[very small corolla]</b>; FNA suggests that there are both small-flowered and smaller-flowered versions (that were at one time called Mimulus micranthus)
+. <b>[very small corolla], 8--12 mm long</b>; FNA suggests that there are both small-flowered and smaller-flowered versions (that were at one time called Mimulus micranthus)
 .. these may be distinguished <a href="https://www.inaturalist.org/observations/11556651#activity_comment_b553e943-7abb-43c1-aadf-d6d03c4b0294">in the future</a>
 . stems 5--70 cm, glabrous
 . leaf petiole 0--95 mm, blade 5--35 mm long

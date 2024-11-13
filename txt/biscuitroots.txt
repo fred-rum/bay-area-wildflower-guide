@@ -15,7 +15,7 @@ Key features:
 ==woollyfruit desertparsley:L. dasycarpum
 color: yellow
 . plant generally with a definite stem; cauline leaves 0 or like basal
-. petals tomentose
+. corolla [and calyx] tomentose
 . [possibly little or no sheathing on cauline leaf petioles, but CalPhotos doesn't show them one way or another]
 . <b>leaf segments 2--6 mm, generally linear [nubby]</b>
 . pedicels 5--20 mm
@@ -28,7 +28,7 @@ color: yellow
 . petals +- glabrous
 . <b>cauline leaf petioles conspicuously sheathed</b> (<a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=6121+1611+3984+0073">example</a>)
 . <b>leaf segments 2--25 mm, generally [distinctly] linear</b>
-. pedicels 2--9 mm
+. pedicels 2--9 mm [which means the flowers are generally more tightly clustered in each inflorescence than in {-woollyfruit desertparsley}]
 . corolla yellow, occasionally white in age
 . common
 

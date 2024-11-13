@@ -8,7 +8,10 @@ and vegetative plants that are more complex.
 
 Hosts {-willow galls}.
 
-==pacific willow:S. lasiandra
+==pacific willow:S. lasiandra var. lasiandra
+color: other
+species: pacific willow
+xx:ba
 . 3--5 stamens
 . uncommon
 
