@@ -3,7 +3,7 @@ sci:kingdom Animalia
 do member_link: self-/genus
 
 ==mammals:class Mammalia
-do member_com_simple: self-species
+do member_com_simple: subclass/-species # skip the therians subclass
 end_hierarchy
 
 ==birds:class Aves
