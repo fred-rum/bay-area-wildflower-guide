@@ -1,8 +1,12 @@
 ==buteos:Buteo spp.
 x:ba
 
-==accipiters:Accipiter spp.
+==cooper's hawk:Astur cooperii
 x:ba
+
+==sharp-shinned hawk:Accipiter striatus
+# my one ID is very ambiguous
+warn obs_requires_photo: none
 
 ==northern harrier:Circus hudsonius
 x:ca

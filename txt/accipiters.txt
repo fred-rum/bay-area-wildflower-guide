@@ -1,5 +1,0 @@
-==cooper's hawk:Accipiter cooperii
-
-==sharp-shinned hawk:Accipiter striatus
-# my one ID is very ambiguous
-warn obs_requires_photo: none

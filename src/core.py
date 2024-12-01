@@ -224,9 +224,10 @@ def convert_rank_str_to_elab(rank_str, sci):
 
 
 def find_data(page, sci, rank_str, kingdom, tid):
-    if (page.taxon_id
-        and page.taxon_id_src == 'iNaturalist API'
-        and page.taxon_id_date > core_date):
+    if (page.taxon_id and
+        ((page.taxon_id_src == 'iNaturalist API'
+          and page.taxon_id_date > core_date)
+         or page.taxon_id_src.endswith('.txt'))):
         # If the page has a taxon_id from the iNaturalist API, and that
         # data is more recent than the DarwinCore archive, then don't
         # complain about the missing or conflicting data in the DarwinCore

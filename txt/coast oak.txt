@@ -1,0 +1,16 @@
+sci:Quercus parvula
+sci_F:Quercus wislizeni
+
+xx:ba
+
+==shreve oak:var. shrevei
+sci_F:Quercus wislizeni
+color: other
+. tree
+. leaf margin spine-toothed or entire[?]
+
+==tamalpais oak:var. tamalpaisensis
+sci_F:Quercus wislizeni
+. shrub
+. leaf margin margin long-tapered-dentate
+. only found at or near Mt. Tamalpais

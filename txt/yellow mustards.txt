@@ -54,7 +54,7 @@ genus: n/a
 .. sepals and buds are hairy [IF]; compare to {-black mustard}
 . very common
 
-==black mustard:Rhamphospermum nigrum
+==black mustard:Mutarda nigra
 . fruit appressed to stem, or at least partially so
 .. may be less appressed later in the season [IF]
 .. <b>fruit has 4 raised ribs, giving each a square cross section</b> [IF]
@@ -71,7 +71,7 @@ genus: n/a
 .. sepals and buds are glabrous [IF]; compare to {-shortpod mustard}
 . very common, but also commonly IDed by mistake [IF]
 
-==charlock:Rhamphospermum arvense
+==charlock:Mutarda arvensis
 . fruit not appressed
 . fruit linear: 2--4.5 cm long, 2.5--3.5 mm wide, glabrous
 .. valves have 3--7 prominent veins each [HPB]

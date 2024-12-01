@@ -1904,8 +1904,13 @@ Support terms in the glossary that can only be linked with an explicit
   glossary#term reference.  This is useful for words that are commonly used,
   e.g. "order", "form" as well as words that are generally understood and
   don't need a glossary link every time they're used, e.g. "species".
+  Note that even if there are no links at all, these terms can be found by
+  browsing the glossary or from the search bar.
 Allow glossary terms to be "defined" with no definition (a blank definition).
   This makes sense for terms defined as a group, e.g. kingdom to species.
 
 links to other definitions of a glossary word should say [See also: ...].
   otherwise the bare [...] link looks like a source for the current defn.
+
+find_page2 should apply common names to shadow pages so that member_com
+and member_com_simple work properly.

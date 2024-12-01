@@ -11,6 +11,7 @@ x:rare
 color: white
 . cauline leaves +- sessile (except lowest)
 . corolla limb 20--50 cm wide [diameter?]
+. corolla has rounded tip ^https://www.inaturalist.org/observations/189636311#activity_comment_379a2799-5990-4fd4-bf95-86c4105ba48e
 . calyx lobes +- unequal
 . not to be confused with the "indian tobacco" of the eastern US, <i>Lobelia inflata</i>, which is in a different family
 
@@ -19,6 +20,8 @@ color: white
 species:manyflower tobacco
 xx:ca
 . cauline leaves petioled
+.. [upper leaves are reduced, so it's easier to see at mid height]
+. corolla has triangular, pointed tip ^https://www.inaturalist.org/observations/189636311#activity_comment_379a2799-5990-4fd4-bf95-86c4105ba48e
 . calyx dark-striped
 .. calyx lobes generally >= tube, unequal
 . plant densely glandular hairy

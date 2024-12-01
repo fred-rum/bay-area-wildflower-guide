@@ -8,7 +8,7 @@ There are also loosestrifes in the unrelated {-lythrum loosestrifes}.
 ==scarlet pimpernel:L. arvensis
 color: orange, salmon
 
-==hybrid pimpernel:L. arvensis Xloeflingi
+==hybrid pimpernel:L. arvensis Xloeflingii
 sci_fpjF: n/a
 taxon_id:1534906
 color: pale purple

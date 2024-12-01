@@ -15,7 +15,7 @@ list_hierarchy
 # We expect all pages to be manually linked, except where specified otherwise.
 warn link: self-below
 
-# If I only have one species (or below) bage within a genus (or below),
+# If I only have one species (or below) page within a genus (or below),
 # I often don't bother to create the parent page.  However, if the user
 # searches for that parent's common name, we want to be able to find the
 # (sole) representative of that taxon.

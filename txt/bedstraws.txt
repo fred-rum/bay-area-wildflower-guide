@@ -50,7 +50,7 @@ color: white
 color: white
 . habit: perennial herb, <b>generally decumbent</b>, radiating from base, glabrous to +- scabrous
 . stem: 20--76 cm
-. leaf: <b>in whorls of 6</b>, generally parallel to ground [i.e. parallel to the decumbent stem], 6--38 mm, ovate to obovate; tip acute to acuminate, occasionally small-pointed
+. leaf: <b>in whorls of [4--]6</b>, generally parallel to ground [i.e. parallel to the decumbent stem], 6--38 mm, ovate to obovate; tip acute to acuminate, occasionally small-pointed
 . inflorescence: clusters, peduncled, axillary, flowers 2--3
 . flower: bisexual; corolla rotate, cream to pink, glabrous to sparsely hairy
 . scattered, mostly in the Santa Cruz Range

@@ -459,7 +459,7 @@ def get_inat_for_tid_set(tid_set, local=True):
                 global inat_dict_has_updates
                 inat_dict_has_updates = True
 
-                if 'preferred_common_name' in data and data ['preferred_common_name']:
+                if 'preferred_common_name' in data and data['preferred_common_name']:
                     inat_dict[tid].global_com = data['preferred_common_name'].lower()
                 else:
                     inat_dict[tid].global_com = None
@@ -679,6 +679,9 @@ class Inat:
 
         sci = data['name']
         rank = data['rank']
+
+        if sci == 'Otospermophilus':
+            print(data)
 
         sci_words = sci.split(' ')
         if rank == 'subspecies':

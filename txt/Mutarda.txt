@@ -1,0 +1,13 @@
+com:n/a
+sci:genus Mutarda
+x:ca
+
+See {-yellow mustards} for a key.
+
+==black mustard:M. nigra
+sci_Ffpj:Brassica nigra
+color: yellow
+
+==charlock:M. arvensis
+sci_Ffpj:Sinapis arvensis
+color: yellow

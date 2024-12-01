@@ -2,7 +2,8 @@ sci:suborder Anisoptera
 
 ==king skimmers
 
-==pacific spiketail:Cordulegaster dorsalis
+==pacific spiketail:Zoraena dorsalis
+sci_b:Cordulegaster dorsalis 
 bug:10873
 x:ca
 

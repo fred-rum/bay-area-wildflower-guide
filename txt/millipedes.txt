@@ -4,6 +4,11 @@ Verified locations for millipede species and subspecies can be found by county i
 
 ==yellow-spotted millipede:Harpaphe haydeniana
 bug:15008
+x:ba
+xx:Subspecies can potentially be identified by range, but I don't know of any visual differences.
+. "The dark coloration with contrasting yellow-tipped keels warn of its ability to exude toxic hydrogen cyanide as a defense." ^https://en.wikipedia.org/wiki/Harpaphe_haydeniana
+. smells like almonds
+. glows under UV light
 
 ==n/a:Paeromopus angusticeps
 bug:372853

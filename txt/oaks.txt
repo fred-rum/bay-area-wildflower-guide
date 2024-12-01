@@ -8,13 +8,13 @@ See also the related {-tanoak}.
 Key features:
 . bark color
 . acorn cap scales thin or thick
-.. "Thin" means that the cap conforms closely to the shape of the underlying nut, rather than being distinctly puffed out.
+.. "thin" means that the cap conforms closely to the shape of the underlying nut, rather than being distinctly puffed out.
 . nut shell hairy, woolly, or not inside
 . leaf shape, colors on top and bottom
-.. "Adaxially convex" means that the leaf is correspondingly abaxially concave.
-.. Be careful when checking the leaf shape because the tip is considered separately.  E.g. a leaf that is "roundish" may actually be lanceolate.
+.. "adaxially convex" means that the leaf is correspondingly abaxially concave.
+.. be careful when checking the leaf shape because the tip is considered separately.  E.g. a leaf that is "roundish" may actually be lanceolate.
 
-The Marin extension of UC Davis provides some of the <a href="http://cemarin.ucdavis.edu/Programs/Custom_Program97/Types_of_oaks/">identification tips</a> below.
+The Marin extension of UC Davis provides some of the <a href="https://cemarin.ucanr.edu/Programs/Custom_Program97/Types_of_oaks/">identification tips</a> below.
 
 ==red oaks
 . acorn cap scales thin, shell hairy to woolly inside, at least at tip

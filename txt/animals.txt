@@ -25,13 +25,16 @@ end_hierarchy
 
 ==mollusks:phylum Mollusca
 do member_com_simple: self-species
+end_hierarchy
 
 ==segmented worms:phylum Annelida
-end_hierarchy
 do member_com_simple: self-species
+end_hierarchy
 
 ==true jellies
-end_hierarchy
 do member_com_simple: self-species
+end_hierarchy
 
 ==sea stars and brittle stars
+do member_com_simple: self-species
+end_hierarchy

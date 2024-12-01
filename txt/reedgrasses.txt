@@ -1,0 +1,34 @@
+sci:genus Calamagrostis
+x:rare
+
+==european marram grass:C. arenaria
+. up to 1.2 meters high, with leaves up to 1 m long
+. inflorescence up to 30 cm long
+. leaf is curled into almost a circle along its length in dry conditions
+. grows on coastal sand dunes
+. highly invasive
+
+==pacific small-reedgrass:C. nutkaensis
+. <b>panicle +- open below, lower branches spreading to ascending</b>, narrow above
+
+==serpentine reedgrass:C. ophitidis
+. panicle +- dense, narrow, branches generally appressed
+. <b>leaf blade with small white-opaque hooks/glands between the veins (visible at about 10x magnification)</b>
+. <b>generally on serpentine soils</b>
+
+==pine reed grass:C. rubescens
+color: other
+. panicle dense to +- open
+. leaf blade without small white-opaque hooks/glands between the veins
+. awn 2--4 mm
+. leaf collar generally puberulent or hairy-tufted
+. rhizomes 10--20 cm long, 1.5--2 mm thick, slender
+
+==fire reedgrass:C. koelerioides
+. panicle generally dense, narrow, branches appressed
+. leaf blade without small white-opaque hooks/glands between the veins
+. awn 4--5.5 mm
+. leaf collar scabrous or smooth
+. rhizomes 2--6 cm long, 2--4 mm thick, stout
+. <b>early colonizer of burned areas</b>
+. very rare

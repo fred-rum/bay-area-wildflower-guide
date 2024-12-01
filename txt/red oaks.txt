@@ -2,10 +2,6 @@ sci: section Lobatae
 
 Various species of {-oak galls} can form on red oaks.
 
-<h3>black oaks</h3>
-
-A subset of red oaks are informally also called black oaks.
-
 ==california black oak:Quercus kelloggii
 color:other
 . leaf:
@@ -42,8 +38,6 @@ color:other
 . acorn cap bowl shaped, sometimes as deep as wide
 . evergreen
 . common
-
-<h3>non-black oaks</h3>
 
 ==coast oak:Quercus parvula
 . catkins clustered into groups
