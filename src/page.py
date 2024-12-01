@@ -787,6 +787,7 @@ class Page:
                 fatal(f'{self.full()} is assigned a new common name: {com}')
 
         if (from_inat and
+            not self.shadow and
             not self.created_from_inat and
             not self.rp_do('obs_fill_com',
                            f'{self.full()} has iNaturalist common name "{com}"')):
