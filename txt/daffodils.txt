@@ -2,7 +2,7 @@ sci:Narcissus spp.
 x:ca
 
 There may be other species of daffodils escaped and growing wild in
-the bay area, but these are the only ones recognized by Jepson.
+the bay area, but {-N. tazetta} and {-N. pseudonarcissus} are the only ones recognized by Jepson.
 
 ==bunch-flowered daffodil:N. tazetta
 color:yellow
@@ -15,3 +15,6 @@ color:yellow
 . inflorescence 1-flowered
 . perianth parts 2.5--3.5 cm
 . crown tubular, >= perianth parts
+
+==paperwhite:Narcissus papyraceus
+color:white

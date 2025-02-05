@@ -117,7 +117,7 @@ species: deerbrush ceanothus
 . Mt. Tamalpais
 
 ==blueblossom,1:C. thyrsiflorus
-rep:blue blossom,1
+rep:blueblossom,1
 . corolla blue to white
 . twig: <b>green, flexible, ridged</b>, angled distally, [glabrous]
 . leaf blade:

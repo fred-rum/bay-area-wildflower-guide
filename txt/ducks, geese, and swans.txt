@@ -18,6 +18,9 @@ x:ca
 ==common merganser:Mergus merganser
 x:more
 
+==hooded merganser:Lophodytes cucullatus
+x:any
+
 ==wigeons and gadwels
 xcom:wigeons and allies
 x:more

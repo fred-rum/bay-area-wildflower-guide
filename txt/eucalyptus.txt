@@ -51,6 +51,7 @@ color: other
 . very rare
 
 ==river redgum:E. camaldulensis
+color: white
 . leaves lanceolate, generally > 1 cm wide
 . inflorescence a 7--11-flowered umbel
 . fruit valves exserted

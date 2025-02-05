@@ -6,3 +6,7 @@ sci_i:n/a
 bug:n/a
 gall:1755
 . forms within branches of {-sticky cinquefoil}
+
+==Taphrina tormentillae
+gall:4641
+. forms on upper leaf or stem of {-sticky cinquefoil} and other {-cinquefoils}

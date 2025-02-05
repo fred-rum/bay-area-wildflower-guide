@@ -3,4 +3,4 @@ end_hierarchy
 
 ==genus Exobasidium
 
-==oak leaf blister:Taphrina caerulescens
+==leaf curl fungi:genus Taphrina

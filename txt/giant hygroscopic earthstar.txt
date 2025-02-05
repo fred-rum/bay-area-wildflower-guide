@@ -1,0 +1,6 @@
+sci:Astraeus pteridis
+
+genus: barometer earthstars
+x:ba
+
+Our local population was recently split from A. hygrometricus ^https://en.wikipedia.org/wiki/Astraeus_hygrometricus .  iNaturalist still has many local observations under the former species.

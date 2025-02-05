@@ -16,6 +16,7 @@ color: pink, red purple
 . <b>prickles 2--8 mm, +- slender, straight</b> [example,-3]
 . leaf axis generally glabrous
 . leaflets glabrous
+. <b>hypanthium glabrous, glandless</b>
 . sepals glandular or not, entire
 . <b>petals +- 10 mm</b>, pink to red
 . very common in the bay area
@@ -26,6 +27,7 @@ color: red purple, pale purple
 . <b>prickles 3--8(12) mm, generally slender (thick-based), +- straight</b> [example,8]
 . leaf axis generally glabrous (finely hairy), glandular
 . leaflets 5--7(9), (+-) glabrous
+. <b>hypanthium stalked-glandular</b>
 . sepals generally glandular, entire
 . <b>petals 10--15 mm</b>, pink to red
 . common in the bay area

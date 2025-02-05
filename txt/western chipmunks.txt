@@ -9,4 +9,4 @@ Within my definition of the bay area, chipmunks can be easily and completely dis
 
 ==sonoma chipmunk:N. sonomae
 . Marin County and north
-. face is tan with light and dark stripes around the eyes [<a href="http://animalia.bio/sonoma-chipmunk">source</a>]
+. face is tan with light and dark stripes around the eyes ^http://animalia.bio/sonoma-chipmunk

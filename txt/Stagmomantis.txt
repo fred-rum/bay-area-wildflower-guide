@@ -1,5 +1,14 @@
-x:more
+x:ca
+
+<href a="https://bugguide.net/node/view/1303784/bgimage">ID information</a> from BugGuide.
 
 ==california mantis:Stagmomantis californica
 bug:7985
-. only male has identifying traits listed at BugGuide
+. neither sex has a blue upper lip
+. both sexes have <b>transverse dark bars on the dorsal abdoman</b> (under the wings)
+
+==arizona mantis:Stagmomantis limbata
+bug:149885
+. both sexes have a <b>blue upper lip</b>
+. neither sex has dark bars on the dorsal abdoman
+. <b>female</b> has a <b>well-defined pale border along the edge of the pronotum and wings</b>

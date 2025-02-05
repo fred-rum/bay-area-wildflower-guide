@@ -1,7 +1,8 @@
 sci:Ceanothus thyrsiflorus
+com:blueblossom
 xx:ba
 
-==blue blossom,4:var. thyrsiflorus
+==blueblossom,4:var. thyrsiflorus
 color: blue, pale blue, white
 . twigs +- glabrous
 . leaf blade margin no more than partially rolled under
