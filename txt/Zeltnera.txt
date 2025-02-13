@@ -16,6 +16,9 @@ acom:monterey centaury
 color: pink, pale purple
 . [much branched, many flowered]
 . pedicels <b>0</b>--10 mm
+.. <b>mostly < 6 mm</b> ^http://floranorthamerica.org/Zeltnera
+.. distal flowers often sessile
+... [bractlets (shorter) may be confused with sepals (longer) for sessile flowers]
 . corolla lobes 2--7 mm, tips rounded
 . uncommon
 
@@ -23,6 +26,7 @@ color: pink, pale purple
 color: pink, pale purple
 keeled calyx lobes:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1218+3917
 . pedicels 2--25(55) mm
+.. <b>mostly > 4 mm</b> ^http://floranorthamerica.org/Zeltnera
 . <b>calyx lobes keeled</b>
 .. no others have keeled calyx lobes [?]
 .. Caution: some species have paired bracts that resemble calyx lobes, but the calyx actually has the same number of lobes as the corolla (4 or 5)

@@ -2,3 +2,5 @@ sci:Cicendia quadrangularis
 genus:n/a
 x:ca
 color:yellow
+
+The corollas close at night and in cloudy weather. ^http://floranorthamerica.org/Cicendia_quadrangularis
