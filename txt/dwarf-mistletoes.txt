@@ -1,9 +1,34 @@
 sci:genus Arceuthobium
 x:ba
 
-==western dwarf-mistletoe:Arceuthobium campylopodum
-color:other
+Calflora and Jepson recognize only {-A. campylopodum} in the bay area, but both treat {-A. occidentale} as a synonym.  Meanwhile, iNaturalist and POWO treat these as two different species.
+
+Although FNA treats {-A. occidentale} as a subspecies of {-A. campylopodum}, it at least gives me some clue how to tell them apart.  Range is hard to resolve in sufficient detail from FNA, but iNaturalist includes only one non-occidentale subspecies which has been identified in the bay area, ssp. campylopodum.  Therefore, the characteristics listed here are taken from FNA's description of ssp. campylopodum and ssp. occidentale.
+
+<hr>
 
 ==gray pine dwarf-mistletoe:A. occidentale
 sci_fj: A. campylopodum
-sci_F: n/a
+sci_F: A. campylopodum ssp. occidentale
+color:other
+. plants usually forming localized infections only
+. principal host is {-Pinus sabiniana}
+. by far the most common ID in the bay area, despite it being ignored by Calflora and Jepson
+
+==western dwarf-mistletoe:Arceuthobium campylopodum
+sci_fj: A. campylopodum
+sci_F: A. campylopodum ssp. campylopodum
+color:other
+. plants usually forming witches' brooms
+. third internodes 7--11 mm long, 1.5--2 mm thick
+. principal local host is {-Pinus ponderosa}
+.. also on jeffrey pine (<i>Pinus jeffreyi</i>), but that isn't found in the bay area
+
+==coastal dwarf-mistletoe:A. littorum
+sci_fj: A. campylopodum
+sci_F: A. campylopodum ssp. littorum
+color: other
+. plants usually forming witches' brooms
+. third internodes 10--15 mm long, 2--3.5 mm thick
+. principal hosts are {-Pinus muricata} and {-Pinus radiata}
+. so far found just outside the bay area, but its hosts are here, so it's probably just a matter of time before it is found locally

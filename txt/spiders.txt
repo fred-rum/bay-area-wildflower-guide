@@ -5,6 +5,7 @@ list_hierarchy
 <h3>outside spiders</h3>
 
 ==wolf spiders:family Lycosidae
+; Wolf spiders are notoriously difficult to identify to species; even the genus level can be hard.
 bug:1967
 
 ==crab spiders

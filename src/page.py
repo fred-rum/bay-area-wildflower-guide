@@ -1075,7 +1075,7 @@ class Page:
     # It removes all fancy formatting to emit ASCII only.
     def full(self):
         if self.rank:
-            elab = f'{self.rank.name} {self.sci}'
+            elab = f'{self.rank.name} {self.elab}'
         elif self.sci:
             elab = self.sci
         else:

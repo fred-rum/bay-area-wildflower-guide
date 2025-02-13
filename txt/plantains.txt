@@ -1,13 +1,11 @@
 sci:Plantago spp.
 x:!hist
 
-The key features in Jepson tend to be unobservable things like seed characteristics, annual vs. perennial, etc.  Other features include tiny features of the tiny flowers, so very close focus and perhaps plucking a flower may be necessary.  Due to the difficulty in identifying useful distinguishing features, I've punted for now.  Check Jepson for anything new.
+The key features in Jepson tend to be unobservable things like seed characteristics, annual vs. perennial, etc.  Other features include tiny features of the tiny flowers, so very close focus and perhaps plucking a flower may be necessary.  Due to the difficulty in identifying useful distinguishing features, I've only filled in identifying characteristics for some species.  Check Jepson for more details.
 
 Within an inflorescence, each flower has:
 . 4 sepals, may be partially scarious
 . 4 petals, scarious
-
-
 
 Flowers mature from bottom to top within an inflorescence.  The younger flowers above have green sepals and a feathery stigma, but no stamens.  Flowers in the middle have dry, brown sepals and each have four stamens with anthers.  The oldest flowers below have dry, crinkled sepals and no stigma or stamens.
 
@@ -18,15 +16,19 @@ Key features:
 
 ==ribwort plantain:P. lanceolata
 color: white, other
+. spike 2--8 cm long; up to 80 cm including peduncle
+.. peduncle grooved
+. <b>filaments long, threadlike; anthers more noticeable than petals</b>
 . corolla tube glabrous
-. peduncle grooved
 . very common
 
 ==california plantain:P. erecta
 acom:dot-seed plantain
 color: white
+. <b>spike 0.5--3 cm</b>; up to 30 cm including peduncle
+.. peduncle not grooved
+. filaments very short; petals more noticeable than anthers
 . corolla tube glabrous [but generally obscured by sepals]
-. peduncle not grooved
 . common
 
 ==coastal plantain:P. elongata
@@ -34,7 +36,9 @@ color: white
 . scattered along the coast and in the east bay, although mostly only historical records
 
 ==greater plantain:P. major
+. <b>spike 3--20 cm</b>; up to 60 cm including peduncle
 . corolla tube glabrous
+. leaf wide, narrowed abruptly to petiole
 . scattered
 
 ==desert plantain:P. ovata
@@ -43,7 +47,9 @@ color: white
 
 ==tall coastal plantain:P. subnuda
 color: cream, other
+. <b>spike 8--30 cm</b>; up to 50 cm including the peduncle
 . corolla tube glabrous
+. leaf wide, tapered to wide petiole
 . scattered along the pacific coast
 
 ==chilean plantain:P. firma
@@ -53,7 +59,10 @@ sci_fpj:P. truncata ssp. firma
 
 ==buck's-horn plantain:P. coronopus
 color: white
+. <b>spike 2--22 cm</b>; up to 50 cm including peduncle
+. filaments very short; petals more noticeable than anthers
 . corolla tube hairy
+. <b>leaf narrow and tapered at each end</b>
 . common, particularly along the coast, but some also inland
 
 ==sea plantain:P. maritima

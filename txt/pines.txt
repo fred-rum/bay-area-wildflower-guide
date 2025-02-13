@@ -14,7 +14,7 @@ All local pines are "hard pines" (subgenus Pinus).  For these, the
 (brown) sheath for the leaf bundle is retained, not deciduous.
 
 CalFlora lists many pines in the bay area, but for now I will confine
-this list to the less rare ones (> 25 CalFlora records).
+this list mostly to the less rare ones (> 25 CalFlora records).
 
 Parasitized by {-pine galls}.
 
@@ -52,4 +52,11 @@ Parasitized by {-pine galls}.
 . 5 leaves per bundle (although often 3 in young trees)
 
 ==stone pine:P. pinea
+sci_j: n/a
 . 2 leaves per bundle
+. seemingly associated with past or present development and thus not truely naturalized
+
+==bishop pine:P. muricata
+. 2 leaves per bundle
+. seed cone 5--10 cm long
+. leaf 5--15 cm long

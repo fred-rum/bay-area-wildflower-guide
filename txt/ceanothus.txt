@@ -82,9 +82,8 @@ color: blue, purple
 . Flower: deep blue
 
 ==wavyleaf ceanothus:C. foliosus
-color: blue
 xx:more
-. twig: green to red-green
+. twig: green to red-green, [not ridged]
 . leaf blade:
 .. 5--20 mm long, 3--13 mm wide, <b>+- folded lengthwise</b>
 .. 1-ribbed or faintly 3-ribbed from base
@@ -157,5 +156,17 @@ color: white, pale blue, blue, pale purple
 .. abaxially +- strigose, especially veins
 .. margin entire to +- glandular-serrate
 . rare
+
+]
+[
+<h2>hybrids</h2>
+
+Ceanothus hybrids aren't rare.  Recent observations seem to find them especially in recovering burned areas.  Because the hybrids can have any mix of characters, they do not key easily. E.g. <a href="https://www.biodiversitylibrary.org/page/3182450#page/374/mode/1up">this histogram</a> of wartleaf vs. blueblossom characteristics.
+
+==n/a:C. Xregius
+color: white, pale blue, blue, purple
+. cross of {-blueblossom} and {-wartleaf ceanothus}
+. may have any combination of characteristics from each
+.. e.g. mix of 1-ribbed and 3-ribbed leaves, twigs somewhat ridged, warts only at leaf margins
 
 ]
