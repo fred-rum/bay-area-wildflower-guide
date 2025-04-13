@@ -1,0 +1,18 @@
+sci:genus Thalictrum
+x:ba
+
+==torrey's meadow rue:T. polycarpum
+sci_jfp:T. fendleri var. polycarpum
+color:other
+. leaf tips may be further divided beyond the traditional 3 lobes ^http://floranorthamerica.org/Thalictrum_polycarpum
+. distal leaves abaxially generally glabrous
+. fruit body compressed only at the margins, generally 1-ribbed, with several wavy veins
+. more common in the bay area
+
+==fendler's meadow-rue:T. fendleri
+sci_jfp:T. fendleri var. fendleri
+. leaf tips have exactly 3 lobes ^http://floranorthamerica.org/Thalictrum_fendleri
+. distal leaves abaxially finely glandular-puberulent (requires magnification)
+. fruit body compressed throughout, 2--3 ribbed, no veins
+. rare in the bay area
+.. iNaturalist probably includes lots of observations that should have been swapped to {-T. polycarpum}

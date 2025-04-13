@@ -100,6 +100,8 @@ def read_fna_families(f):
 
         if len(line) < 2: # ignore blank line, single letter, or comment only
             continue
+        elif line.endswith(' cont.'):
+            continue
 
         fna_family_set.add(line)
 

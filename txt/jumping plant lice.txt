@@ -3,4 +3,4 @@ sci: family Psyllidae
 ==n/a:genus Psylla
 bug:49557
 . prefers new growth
-.. compare to woolly alder aphid (Prociphilus tessellatus), which prefers bark (and is only found in the eastern states)
+.. compare to woolly alder aphid (Prociphilus tessellatus), which prefers bark

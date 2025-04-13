@@ -16,3 +16,5 @@ sci:subfamily Cecidomyiinae
 ==Dasineura alnus-fold-gall
 
 ==ceanothus bud gall midge
+
+==gooseberry galls

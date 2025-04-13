@@ -15,4 +15,3 @@ Key features to verify O. ficus-indica:
 ==mission prickly-pear:O. ficus-indica
 acom:indian fig opuntia
 color: yellow, orange
-<b>Caution: ID unsure.</b>

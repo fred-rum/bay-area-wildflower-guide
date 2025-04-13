@@ -110,7 +110,7 @@ color: purple
 
 ==miniature lupine:L. bicolor
 color: purple
-. habit: annual (may live 2 seasons in NCo), 10--40 cm, hairy
+. habit: annual, 10--40 cm, hairy
 . leaf: petiole 1--7 cm; leaflets 5--7, 10--40 mm, 1--5 mm wide, occasionally linear, <b>adaxially generally +- glabrous</b>
 . inflorescence: 1--8 cm, <b>flowers in (0)5 whorls</b>; peduncle 3--10 cm; <b>pedicels 1--3.5 mm</b>; bract 4--6 mm
 . flower: 4--10 mm; calyx upper lip 2--4 mm, deeply lobed, lower 4--6 mm; petals generally blue (light blue, pink, or white), <b>banner longer than wide</b>, spot white, in age magenta
@@ -183,7 +183,7 @@ color: yellow, cream, purple, pale purple
 . stem: woody, erect
 . leaf: cauline; stipules 8--12 mm; petiole 2--3(6) cm; leaflets 5--12, 20--60 mm
 . inflorescence: 10--30 cm, flowers whorled or not; peduncle 4--10 cm; pedicels 4--10 mm; bract 8--10 mm
-. flower: 14--18 mm; calyx upper lip 5--9 mm, 2-toothed, lower 5--7 mm, entire; <b>petals generally yellow</b> (lilac to purple, especially north of central NCo), <b>banner back glabrous (best seen in buds)</b>, spot darker or not to white
+. flower: 14--18 mm; calyx upper lip 5--9 mm, 2-toothed, lower 5--7 mm, entire; <b>petals generally yellow</b> (rarely lilac to purple), <b>banner back glabrous (best seen in buds)</b>, spot darker or not to white
 . <b>keel upper margins ciliate claw to tip, lower glabrous</b>
 . very common near the pacific coast, rare elsewhere
 

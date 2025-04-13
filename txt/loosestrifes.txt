@@ -6,6 +6,7 @@ They all look pretty different from each other, so no key is necessary.
 There are also loosestrifes in the unrelated {-lythrum loosestrifes}.
 
 ==scarlet pimpernel:L. arvensis
+sci_F: Anagallis arvensis
 color: orange, salmon
 
 ==hybrid pimpernel:L. arvensis Xloeflingii
@@ -14,8 +15,10 @@ taxon_id:1534906
 color: pale purple
 . the scientific community has not provided a description of this hybrid
 .. I'm going with the iNaturalist consensus that the flower color is a pale mix of orange and purple ^https://www.inaturalist.org/observations/178110508
+.. There is some disagreement for a particularly pale flower ^https://www.inaturalist.org/observations/211299159#identification-7a2a61e4-75fc-4316-add6-90dde2bb72a3
 
 ==western starflower:L. latifolia
+sci_F: Trientalis latifolia
 color: pale purple
 
 ==sea milkwort:L. maritima

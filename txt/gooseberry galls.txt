@@ -1,8 +1,7 @@
 sci: n/a
-ignore_link: self
 
-==n/a:Ribesia sarae
-genus:n/a
+==n/a:Ribesia
 bug:1474423
 gall:4159
-. only described on {-golden currant}, but other host species are likely
+. only described species is <i>Ribesia sarae</i>
+.. it is known to be found on {-golden currant}, but other host species are likely
