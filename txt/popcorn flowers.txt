@@ -22,7 +22,18 @@ color: white
 . petal diameter <b>4--9 mm</b>
 . hairs rough, sharp [may be hard to distinguish from canescent]
 . mature calyx usually brown tinged (rusty)
+. <b>no or few bracts, near base of inflorescence</b>
 . common
+
+==field popcornflower:P. fulvus var. campestris
+species: fulvous popcornflower
+xx:ca
+color: white
+. like {-rusty popcornflower}
+.. but with petal diameter <b>3--4 mm</b>
+. entire plant tomentose with some long spreading hairs
+. <b>no or few bracts, near base of inflorescence</b>
+. very rare
 
 ==valley popcornflower:P. canescens var. canescens
 xx:ba
@@ -31,12 +42,14 @@ species: valley popcornflower
 . petal diameter <b>2--3 mm</b>
 . <b>stem canescent</b>
 . mature calyx may be brown tinged
+. <b>bracts throughout inflorescence</b>
 . rare
 
 ==dwarf popcornflower:P. humistratus
 color: white
-. petal diameter 1--2 mm
+. petal diameter <b>1--2 mm</b>
 . hairs sparse, stiff
+. <b>bracts throughout inflorescence</b>
 . very rare
 
 ==bracted popcornflower:P. bracteatus
@@ -52,9 +65,6 @@ color: white
 sci_fpj:P. diffusus
 # The disagreeing taxonomies are very confusing.  Here's where I left off:
 # https://www.inaturalist.org/flags/552291#activity_comment_1ac05a4f-0343-441e-bd42-d3fca36039de
-. very rare
-
-==fulvous popcornflower:P. fulvus
 . very rare
 
 ==hairless popcornflower:P. glaber

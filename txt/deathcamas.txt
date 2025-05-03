@@ -5,7 +5,7 @@ x:ba
 [
 <h3>larger flowers</h3>
 
-==fremont's deathcamas:T. fremontii
+==fremont's death camas:T. fremontii
 acom:common star lily
 sci_Fp:Zigadenus fremontii
 color: white

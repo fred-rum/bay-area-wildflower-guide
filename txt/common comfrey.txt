@@ -1,0 +1,3 @@
+sci:Symphytum officinale
+x:ca
+color: purple

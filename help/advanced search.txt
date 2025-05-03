@@ -4,8 +4,8 @@ Advanced search lets you find all taxons that meet one or more criteria.
 Advanced search builds on the capabilities of the regular {-search}
 bar at the top of most pages.  To avoid confusion, the advanced search
 page is the only page that does <b>not</b> have the regular search bar
-at the top.  In order to perform a regular search, return to the home page
-(e.g. by clicking the icon in the upper left).
+at the top.  In order to perform a regular search, first leave the
+advanced search page, e.g. by clicking the home page icon in the upper left.
 
 Advanced search terms can be any of these forms:
 . within a particular taxon hierarchy
@@ -29,6 +29,10 @@ E.g. searching "<a href="../advanced-search.html?genus-Eschscholzia">within dese
 .. {-california poppy}
 .. {-tufted poppy}
 
+As with a <a href="search.html">regular search</a>, a partial common
+name or scientific name can be specified, and the search bar will show
+all matches.
+
 When adding the term within the advanced search page, the "within"
 prefix can be omitted and will be inferred.  However, the "within"
 prefix is required when typing the advanced search term in the regular
@@ -41,8 +45,9 @@ the results will include all taxons within any of the listed taxons.
 <h4>with <i>trait</i></h4>
 
 An advanced search term with this form finds taxons within the
-specified trait.  E.g. searching "with blue flowers" finds all flowers
-with blue as the primary petal color.
+specified trait.  E.g. searching
+"<a href="../advanced-search.html?blue-flowers">with blue flowers</a>"
+finds all flowers with blue as the primary petal color.
 
 At this time, the only trait that can be searched for is petal color.
 The list of color names used by the guide can be found on the
@@ -60,7 +65,8 @@ the results will include all taxons with any of the listed traits.
 <h4>observed in <i>location</i></h4>
 
 An advanced search term with this form finds taxons that I have
-observed at the specified location.  E.g. searching for "Edgewood"
+observed at the specified location.  E.g. searching for
+"<a href="../advanced-search.html?Edgewood-Park-Natural-Preserve">Edgewood</a>"
 finds all taxons that I've observed at Edgewood Park & Natural
 Preserve.
 
@@ -96,7 +102,8 @@ observed between <i>mm</i>-<i>dd</i> and <i>mm</i>-<i>dd</i> (inclusive)
 </h4>
 
 An advanced search term with any of these forms finds taxons that I
-have observed in the specified date range.  E.g. searching for "2023"
+have observed in the specified date range.  E.g. searching for
+"<a href="../advanced-search.html?in-2023">in 2023</a>"
 finds all taxons that I observed in 2023.
 
 Note that "since" and "until" are inclusive of the listed date, while
@@ -209,5 +216,5 @@ a new page for the search.  Thus, you can navigate through your
 searches via standard browser navigation forward and back.
 
 You can also bookmark any advanced search page.  The search terms are
-saved in the bookmark, and the search is re-performed when you visit
+saved in the bookmark, and the search is performed again when you visit
 the bookmark.

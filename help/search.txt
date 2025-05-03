@@ -1,4 +1,4 @@
-At the top of almost every page is input field where you can type a search term.
+At the top of almost every page is an input field where you can type a search term.
 <b>JavaScript must be enabled in order for search to work.</b>
 
 While you type in the search bar, it displays a list of up to 10 results that match the text typed so far.  Click any result to navigate to that page.

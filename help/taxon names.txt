@@ -14,7 +14,9 @@ unrelated taxons.
 
 Some taxons list one or more alternative common names.  I often list
 the iNaturalist common name as an alternative when I've chosen a
-different common name for the BAWG.
+different common name for the BAWG.  I'll also list the "global"
+common name used by the iNaturalist Seek app when it differs from the
+local common name.
 
 <h3>scientific name</h3>
 

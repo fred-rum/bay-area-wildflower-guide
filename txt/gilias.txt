@@ -21,7 +21,8 @@ color: pale purple
 . corolla throat yellow or orange with large purple spots, possibly merging into a ring
 
 ==purplespot gilia:G. clivorum
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0408+1204
+color: purple
+xx: any
 . generally many branches, spreading or <b>erect</b>
 . open clusters with 2--5 flowers
 . corolla <b>6--8 mm</b>, purple to white (may fade to white near throat)
