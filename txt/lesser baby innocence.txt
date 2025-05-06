@@ -1,0 +1,5 @@
+sci:Tonella tenella
+color: pale purple, pale blue, white
+
+genus: n/a
+x:ca

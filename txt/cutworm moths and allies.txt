@@ -2,3 +2,9 @@ sci:family Noctuidae
 
 ==dagger moths:genus Acronicta
 bug:322
+
+==elder moth:Zotheca tranquilla
+genus:n/a
+bug:42776
+x:any
+. caterpillar nest in and feed on {-elders}

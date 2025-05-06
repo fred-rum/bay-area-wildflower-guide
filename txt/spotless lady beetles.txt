@@ -1,0 +1,12 @@
+sci:genus Cycloneda
+x:ca
+
+==western polished lady beetle:Cycloneda polita
+bug:15623
+. shell color varies
+. pronotum has a "C" on each side (may be nearly closed), but no dot in the opening of the "C"
+
+==spotless lady beetle:Cycloneda sanguinea
+bug:8878
+. shell color varies
+. pronotum has a "C" on each side with a dot in the opening of the "C"

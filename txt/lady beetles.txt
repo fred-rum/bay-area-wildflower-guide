@@ -24,3 +24,5 @@ bug:3543
 
 ==asian lady beetle:Harmonia axyridis
 bug:397
+
+==spotless lady beetles

@@ -74,6 +74,7 @@ color: white
 . corolla white or pale pink
 
 ==streambank springbeauty:C. parviflora
+color: white
 . cauline leaves substantial, fully fused (a common subspecies) or free, linear, and long (a rare subspecies)
 . basal leaf 1--18 cm long including petiole, <b>blade > 3&times; longer than wide</b>, base tapered gradually to petiole
 . corolla white or pink
