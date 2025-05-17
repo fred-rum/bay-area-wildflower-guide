@@ -104,4 +104,6 @@ end_hierarchy
 end_hierarchy
 
 ==slime molds
+
+==bacteria
 end_hierarchy

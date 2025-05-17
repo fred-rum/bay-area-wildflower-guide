@@ -1,15 +1,16 @@
 sci:Lupinus microcarpus
 xx:ba
 
-==shaggy haired chick lupine:var. microcarpus
-# name from Jepson
+==valley lupine:var. microcarpus
+acom: shaggy haired chick lupine # name from Jepson
+color: purple, pale purple, cream, white
 . bracts and calyx with <b>dense</b> long spreading hairs
 . flowers and fruit generally on <b>more than one side</b> of axis
 
-==white-whorled lupine:var. densiflorus
-acom:secund chick lupine
+==dense-flowered lupine:var. densiflorus
+acom:white-whorled lupine
 sci_i:Lupinus densiflorus
 taxon_id:768218
-color: white, pale purple
+color: white, cream, pale purple
 . bracts and calyx with <b>sparse</b> appressed or spreading hairs
 . late flowers and fruit generally on <b>one side</b> of axis

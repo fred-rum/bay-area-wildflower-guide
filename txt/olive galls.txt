@@ -1,0 +1,6 @@
+sci: n/a
+ignore_link: self
+
+==olive knot:Pseudomonas savastanoi
+gall:1001
+. forms on stems of {-olive}

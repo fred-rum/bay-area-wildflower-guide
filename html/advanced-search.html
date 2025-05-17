@@ -82,21 +82,33 @@ search bar; otherwise the result will simply link to the taxon instead
 of starting an advanced search.</p>
 <p>You can enter multiple terms with the form &ldquo;within <i>taxon</i>&ldquo;, and
 the results will include all taxons within any of the listed taxons.</p>
-<h4>with <i>trait</i></h4>
-<p>An advanced search term with this form finds taxons within the
+<h4>[prefix] <i>trait</i></h4>
+<p>An advanced search term with this form finds taxons with the
 specified trait.  E.g. searching
 &ldquo;<a href="../advanced-search.html?blue-flowers">with blue flowers</a>&ldquo;
 finds all flowers with blue as the primary petal color.</p>
-<p>At this time, the only trait that can be searched for is petal color.
-The list of color names used by the guide can be found on the
-page for <a href="flowering-plants.html" class="family">flowering plants (subphylum <i>Angiospermae</i>)</a>.</p>
-<p>When adding the term within the advanced search page, the &ldquo;with&rdquo;
-prefix can be omitted and will be inferred.  However, the &ldquo;with&rdquo;
-prefix is required when typing the advanced search term in the regular
-search bar; otherwise the result will link to a static page listing
-the taxons with that trait instead of starting an advanced search.</p>
-<p>You can enter multiple terms with the form &ldquo;with <i>trait</i>&ldquo;, and
-the results will include all taxons with any of the listed traits.</p>
+<p>Searchable traits:</p>
+<ul>
+<li>with [color] flowers</li>
+<ul>
+<li>e.g. &ldquo;with blue flowers&rdquo;</li>
+<li>The list of available color names can be found on the page for <a href="flowering-plants.html" class="family">flowering plants (subphylum <i>Angiospermae</i>)</a>.</li>
+</ul>
+<li>is [taxon origin]</li>
+<ul>
+<li>e.g. &ldquo;is native&rdquo;</li>
+<li>See the help page for <a href="taxon-origin.html" class="unobs">taxon origin</a>.</li>
+</ul>
+</ul>
+<p>The prefix (e.g. &ldquo;is&rdquo;) usually can be omitted and will be
+inferred.  However, when searching for taxons &ldquo;with [color] flowers&rdquo;,
+the &ldquo;with&rdquo; prefix is required when typing the advanced search
+term in the regular search bar; otherwise the result will link to a
+static page listing the taxons with that trait instead of starting an
+advanced search.</p>
+<p>You can enter multiple terms that search for different values for the
+same trait, e.g. to search for any taxon that &ldquo;is endemic&rdquo; or &ldquo;is
+native&rdquo;.</p>
 <h4>observed in <i>location</i></h4>
 <p>An advanced search term with this form finds taxons that I have
 observed at the specified location.  E.g. searching for

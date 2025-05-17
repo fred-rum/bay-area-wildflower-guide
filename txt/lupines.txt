@@ -49,7 +49,6 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1214+2820
 . Jasper, Alum Rock, Grant, Mt. Diablo foothills
 
 ==chick lupine:L. microcarpus
-color: cream, pale purple, purple
 . habit: annual 10--80 cm, sparsely to densely hairy; <b>cotyledons none#disk-like, persistent</b> <a href="https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+0754">[example]</a> at plant base, or leaving circular scar
 . stem: <b>clearly hollow, at least below</b>
 . leaf: petiole 3--15 cm; leaflets 5--11, generally 9, 10--50 mm, 2--12 mm wide, occasionally linear, adaxially glabrous

@@ -29,7 +29,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=6121+1611+3983+0002
 species: southern honeysuckle
 color: cream, white
 . <b>flowers in +- interrupted spikes</b> on axillary peduncles or at ends of branches
-. upper leaf pairs not fused around stem
+. upper leaf pairs not fused [or narrowly fused] around stem
 . corolla often hairy
 . pale yellow flowers
 . scattered around bay area

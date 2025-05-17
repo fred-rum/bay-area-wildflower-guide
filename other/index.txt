@@ -59,7 +59,7 @@ If you find anything confusing, I have <a href="html/help.html">help pages</a>.
 
 <h2>Other Resources</h2>
 
-Primary references include
+My primary references include
 <a href="https://www.inaturalist.org/">iNaturalist</a>,
 <a href="https://www.calflora.org/">CalFlora</a>,
 <a href="https://calphotos.berkeley.edu/">CalPhotos</a>, and

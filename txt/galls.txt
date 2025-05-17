@@ -113,3 +113,6 @@ rep:ceanothus
 
 ==pine galls
 rep:pines
+
+==olive galls
+rep:olive

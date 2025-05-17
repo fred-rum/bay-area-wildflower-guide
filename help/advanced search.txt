@@ -42,25 +42,31 @@ of starting an advanced search.
 You can enter multiple terms with the form "within <i>taxon</i>", and
 the results will include all taxons within any of the listed taxons.
 
-<h4>with <i>trait</i></h4>
+<h4>[prefix] <i>trait</i></h4>
 
-An advanced search term with this form finds taxons within the
+An advanced search term with this form finds taxons with the
 specified trait.  E.g. searching
 "<a href="../advanced-search.html?blue-flowers">with blue flowers</a>"
 finds all flowers with blue as the primary petal color.
 
-At this time, the only trait that can be searched for is petal color.
-The list of color names used by the guide can be found on the
-page for {-flowering plants}.
+Searchable traits:
+. with [color] flowers
+.. e.g. "with blue flowers"
+.. The list of available color names can be found on the page for {-flowering plants}.
+. is [taxon origin]
+.. e.g. "is native"
+.. See the help page for {-taxon origin}.
 
-When adding the term within the advanced search page, the "with"
-prefix can be omitted and will be inferred.  However, the "with"
-prefix is required when typing the advanced search term in the regular
-search bar; otherwise the result will link to a static page listing
-the taxons with that trait instead of starting an advanced search.
+The prefix (e.g. "is") usually can be omitted and will be
+inferred.  However, when searching for taxons "with [color] flowers",
+the "with" prefix is required when typing the advanced search
+term in the regular search bar; otherwise the result will link to a
+static page listing the taxons with that trait instead of starting an
+advanced search.
 
-You can enter multiple terms with the form "with <i>trait</i>", and
-the results will include all taxons with any of the listed traits.
+You can enter multiple terms that search for different values for the
+same trait, e.g. to search for any taxon that "is endemic" or "is
+native".
 
 <h4>observed in <i>location</i></h4>
 
