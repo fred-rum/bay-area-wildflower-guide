@@ -33,6 +33,9 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1216+0610
 <h3>Bracts < 1 mm below calyx, +- hiding it, > 4 mm wide</h3>
 I.e. the bracts look like a second calyx enclosing the real calyx, and there aren't thin bracts further down the pedicel.
 
+[
+<h4>Short stem</h4>
+
 ==hillside false bindweed:C. subacaulis
 <b>Caution: ID unsure</b>
 . plant hairs sparse to +- dense, short, spreading to reflexed, but <b>not tomentose</b>
@@ -48,6 +51,8 @@ I.e. the bracts look like a second calyx enclosing the real calyx, and there are
 . <b>leaf reniform to distinctly lobed</b> [tip may also be somewhat pointed]
 .. margin generally wavy [flatten it to photograph its shape & lobes]
 . Mt. Tam, Russian Ridge, Sierra Azul, Calero
+
+]
 
 ==jepson's morning glory:C. malacophylla ssp. pedicellata
 species: sierra false bindweed

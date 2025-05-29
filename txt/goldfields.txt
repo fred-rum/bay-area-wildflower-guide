@@ -19,16 +19,16 @@ See also {-hillside daisies}, which have narrow (but not linear) wedge-shaped le
 ==california goldfields:L. californica
 color: yellow
 . phyllaries free, generally > 6
-. leaves +- entire or with 3--5+ teeth
+. leaves +- entire <b>or with 3--5+ teeth</b>
+.. faces glabrous or +-hairy
 . pappus of 1--7 clear, brown, <b>linear to awl-like scales</b>, or 0 <a href="https://www.inaturalist.org/photos/185959230?size=original">[example]</a>
-. linear leaves
-.. see also {-hillside daisies}, which have narrow (but not linear) wedge-shaped leaves that are quite hairy.
 . common
 
 ==common goldfields:L. gracilis
 color: yellow
 . phyllaries free, generally > 6
 . leaves +- entire
+.. faces +-hairy
 . pappus of (2)4(6) opaque, white, <b>lance-ovate scales</b>, or 0 <a href="https://www.inaturalist.org/photos/62072452?size=original">[example]</a>
 . rare
 ]

@@ -73,16 +73,24 @@ rep:genus Baccharis
 ==wormwood and sagebrush galls
 rep:wormwoods and sagebrushes
 
+==sage galls
+rep:sages
+
 ==cat's-ear galls
 rep:common cat's-ear,1
+
+<h3>buckthorn family</h3>
+
+==coffeeberry galls
+rep:coffeeberry
+
+==ceanothus galls
+rep:ceanothus
 
 <h3>other hosts</h3>
 
 ==gooseberry galls
 rep:hillside gooseberry,1
-
-==coffeeberry galls
-rep:coffeeberry
 
 ==silktassel galls
 rep:silktassels
@@ -108,11 +116,11 @@ rep:pacific poison oak
 ==alder galls
 rep:white alder,5
 
-==ceanothus galls
-rep:ceanothus
-
 ==pine galls
 rep:pines
 
 ==olive galls
 rep:olive
+
+==brodiaea galls
+rep:ithuriel's spear,1

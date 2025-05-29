@@ -252,10 +252,11 @@ color:red purple
 
 ==notchleaf clover:T. bifidum
 color:pink, pale purple
+xx:iNaturalist lists two varieties, but Jepson does not, and FNA clarifies that there is no clear distinction between the supposed varieties.
 . no bracts
 . calyx tube 0.8--1.4 mm, glabrous
 . calyx lobes +- 0.2 mm wide at base, with generally few hairs, bristle-tipped
-. leaf may or may not be notched
+. leaf [may or may not be] notched
 . CalPhotos shows that the <b>peduncle is distinctly hairy</b>.  Compare to {-pinpoint clover}.
 
 ]

@@ -36,7 +36,9 @@ color: pale purple, purple
 [
 <h3>terminal racemes</h3>
 
-==bright blue speedwell:V. serpyllifolia ssp. humifusa
+==bright blue speedwell:V. serpyllifolia var. humifusa
+sci_jfp:V. serpyllifolia ssp. humifusa
+sci_F:V. serpyllifolia
 xx:ba
 species: thyme-leaved speedwell
 . 1+ flowers in each terminal raceme

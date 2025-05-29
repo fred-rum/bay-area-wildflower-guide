@@ -1,7 +1,7 @@
-sci:Velezia rigida
+sci:Dianthus nudiflorus
 color: pink
 
-genus:n/a
-x:ba
+genus:carnations
+x:more
 
 See also the 4-petaled {-panicled willowherb}.

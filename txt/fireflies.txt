@@ -1,4 +1,4 @@
-==diurnal fireflies
+==rover fireflies
 
 ==california pink glowworm:Microphotus angustus
 bug:294636

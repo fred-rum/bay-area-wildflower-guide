@@ -7,6 +7,7 @@ color: yellow
 .. sometimes tapered and/or purple-tinted abaxially
 .. tip obtuse
 
-==mountain violet:ssp. purpurea
+==mountain violet:var. purpurea
+sci_fpj:ssp. purpurea
 . basal leaf bases always tapered, purple-tinted abaxially
 .. tip acute

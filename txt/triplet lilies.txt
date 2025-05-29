@@ -12,6 +12,7 @@ Key features:
 color: purple
 . purple perianth
 . stamens attached alternately at 2 levels, +- equal
+. hosts {-Lasioptera t-laxa-lily-stem-gall}
 
 [
 <h3>yellow</h3>

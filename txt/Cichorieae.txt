@@ -11,4 +11,7 @@ In the bay area, all members of this tribe are liguliflorous, and no other flowe
 ==california chicory
 . corolla white
 
+==Uropappus lindleyi
+rep:Uropappus lindleyi,1
+
 # other taxons are filled in automatically

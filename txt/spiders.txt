@@ -36,6 +36,8 @@ x:ba
 ==sierra dome spider:Neriene litigiosa
 bug:201624
 
+==green lynx spiders
+
 ]
 [
 <h3>inside spiders</h3>

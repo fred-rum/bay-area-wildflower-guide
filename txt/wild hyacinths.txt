@@ -21,6 +21,7 @@ color: purple
 . inflorescence has few--many flowers, possibly so many that the cluster is near spherical, but that's rare
 . <b>flowers from May--June</b> [from April, really]
 . scattered throughout the bay area
+. hosts {-Lasioptera t-laxa-lily-stem-gall}
 
 ==wild hyacinth:D. multiflorum
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0208+0434

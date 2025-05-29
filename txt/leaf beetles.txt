@@ -11,3 +11,10 @@ bug:456
 ==n/a:genus Syneta
 bug:121228
 <b>Caution: ID unsure</b>
+
+==n/a:genus Scelolyperus
+bug:196810
+<b>Caution: ID unsure</b>
+. many species in CA
+. no ID info in bugguide
+. very few IDs to species in iNaturalist

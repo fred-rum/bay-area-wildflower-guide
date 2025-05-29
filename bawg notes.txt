@@ -1913,4 +1913,19 @@ links to other definitions of a glossary word should say [See also: ...].
   otherwise the bare [...] link looks like a source for the current defn.
 
 find_page2 should apply common names to shadow pages so that member_com
-and member_com_simple work properly.
+  and member_com_simple work properly.
+
+A search that matches a taxon name should prefer that match to an advanced
+  search that includes a prefix, e.g. "t-laxa" shouldn't only list
+  "wi<t>hin Lasioptera t-<laxa>-lily-stem-gall".
+
+Why does the help page for "taxon pages" link to "search" using the "family"
+  class instead of "unobs"?
+
+Add help for link colors.
+
+Change the code so that
+  ==...,?
+    only changes the thumbnail right there, not the representative photo.
+  remember that I can change the propagated representation
+     anywhere in the hierarchy with rep:

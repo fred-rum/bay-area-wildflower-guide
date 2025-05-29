@@ -64,13 +64,14 @@ color: yellow
 [
 <h2>violet violets</h2>
 
-==western dog violet:V. adunca var. adunca
+==hookedspur violet:Viola adunca
+sci_fpj: Viola adunca ssp. adunca
+sci_F: Viola adunca var. adunca
+acom:western dog violet
 color:purple
-xx:ca
-species: hookedspur violet
+xx:none
 . stems prostrate to erect, with leaves, peduncles
 . scattered near pacific coast and Oakland
-sci_fpj: Viola adunca ssp. adunca
 
 ==eurasian sweet violet:V. odorata
 . no stem [just a peduncle]

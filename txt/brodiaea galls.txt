@@ -1,0 +1,12 @@
+sci: n/a
+ignore_link: self
+
+==Lasioptera t-laxa-lily-stem-gall
+sci_i:n/a
+bug:n/a
+gall:3724
+. forms within the stem of various species in the {-brodiaea subfamily}:
+.. {-ithuriel's spear}
+.. {-blue dicks}
+.. {-ookow}
+.. {-sea muilla}

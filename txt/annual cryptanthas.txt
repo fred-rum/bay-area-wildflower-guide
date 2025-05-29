@@ -79,3 +79,8 @@ xx:more
 . 1--4 nutlets
 . very rare in the diablo range
 
+==pygmyflower cryptantha:Cryptantha micromeres
+xx:none
+. <b>petal diameter +- 0.5 mm</b>
+. no corolla appendages
+. 4 nutlets, 0.7--1 mm, tubercled (sometimes with one larger than the others and smooth)

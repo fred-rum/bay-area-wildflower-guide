@@ -11,6 +11,7 @@ color: white
 . corolla tube 5.5--9 mm, white to pale blue or lavender (rarely, pale rose), upper lip 2-lobed
 . stamens, style +- exserted
 . common
+. hosts {-white sage leaf gall midge}
 
 ==white sage:S. apiana
 color:white
@@ -19,6 +20,7 @@ color:white
 . stamens, style exserted
 . extremely rare
 . despite being native to California, it is cultivated so often as an ornamental that iNaturalist defaults its observations to "not wild"
+. hosts {-white sage leaf gall midge}
 
 ==sonoma sage:S. sonomensis
 . subshrub, prostrate, mat-forming
@@ -38,6 +40,7 @@ color: purple
 . corolla tube 6--13 mm, rose to lavender, sometimes verging on purple
 . upper lip 6--8 mm, +- < lower lip
 . very rare
+. hosts {-white sage leaf gall midge}
 
 ==hummingbird sage:S. spathacea
 color: red purple, red, salmon

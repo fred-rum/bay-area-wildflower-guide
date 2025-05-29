@@ -13,7 +13,8 @@ color: yellow, other
 acom:gopher plant
 . uncommon
 
-==reticulate seeded spurge:E. spathulata
+==reticulate-seeded spurge:E. spathulata
+color: other
 . uncommon
 
 ==chinesecaps:E. crenulata

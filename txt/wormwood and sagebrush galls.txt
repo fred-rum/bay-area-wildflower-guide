@@ -2,7 +2,6 @@ sci: n/a
 ignore_link: self
 
 ==sagebrush woolly stem gall midge:Rhopalomyia floccosa
-bug:n/a
+bug:2099407
 gall:2023
 . forms on {-california sagebrush}
-

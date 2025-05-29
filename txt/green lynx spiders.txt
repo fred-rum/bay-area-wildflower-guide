@@ -1,0 +1,20 @@
+sci:genus Peucetia
+bug:1988
+x:any
+
+==green lynx spider:P. viridans
+bug:2032
+. chevron pattern along the dorsal ridge of the abdomen [may be subtle]
+. includes white marks as part of the chevron
+. legs are longer in proportion to body length
+. longer, less rounded abdomen
+. may turn reddish in cool weather
+. more common
+
+==lesser green lynx spider:P. longipalpis
+bug:50658
+. lacks a chevron pattern
+. generally lacks white spots, bars and longitudinal white stripes, although white markings are present in some specimens
+. legs are shorter in proportion to body length
+. shorter, more rounded abdomen
+. less common

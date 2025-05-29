@@ -1,0 +1,7 @@
+sci: n/a
+ignore_link: self
+
+==white sage leaf gall midge:Rhopalomyia audibertiae
+bug:376111
+gall:3243
+. despite the name, forms on multiple {-sages}, including {-black sage}

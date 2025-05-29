@@ -1,4 +1,5 @@
-sci:Cinnamomum camphora
+sci:Cinnamomum officinarum
+sci_fpjF:Cinnamomum camphora
 x:ca
 color:cream
 genus: n/a

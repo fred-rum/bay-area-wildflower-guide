@@ -40,7 +40,8 @@ sci_Ffpj:Spergularia bocconi
 .. stipules generally 1.5--4.5 mm, dull, white to tan, generally inconspicuous
 . rare
 
-==greater sea-spurrey:S. media var. media
+==greater sea-spurrey:S. media ssp. media
+sci_fpjF:var. media
 species: greater sea-spurry
 . base of stem not woody
 . leaves clearly fleshy

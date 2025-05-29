@@ -1,6 +1,8 @@
 sci:Castilleja spp.
 x:hist/rare
 
+"The genus name, which honors the Spanish botanist Domingo Castillejo, is usually pronounced <i>cast-til-lay'-yah</i>." ^https://www.wildflower.org/plants/result.php?id_plant=caan7
+
 ==indian paintbrushes
 
 ==owl's clover
