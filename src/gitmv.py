@@ -10,9 +10,10 @@ import re
 # photo suffix.
 
 # Run as:
-# src/gitmv.py txt/[filename].txt [name]
-# src/gitmv.py html/[filename].txt [name]
-# src/gitmv.py photos/[filename],[suffix].jpg {[name] or [suffix] or [name],[suffix]}
+# src/gitmv.py [orig_name] [new_name]
+# src/gitmv.py txt/[filename].txt [new_name]
+# src/gitmv.py html/[filename].txt [new_name]
+# src/gitmv.py photos/[filename],[suffix].jpg {[new_name] or [suffix] or [new_name],[suffix]}
 
 # This script must be run from the project's git directory so that the
 # relative paths are all exactly one directory deep.
@@ -67,14 +68,6 @@ def gitmv(file1, file2, optional=False):
     else:
         print(f'git mv {file1} {file2}')
 
-if base == 'txt':
-    gitmv(f'txt/{name}.txt', f'txt/{arg2}.txt')
-
-if base in ('txt', 'html'):
-    html_from = re.sub(r' ', '-', name)
-    html_to = re.sub(r' ', '-', arg2)
-    gitmv(f'html/{html_from}.html', f'html/{html_to}.html')
-
 def separate_name_and_suffix(name):
     # this always matches something, although the suffix may be empty
     matchobj = re.match(r'(.+?)\s*(,[-0-9][^,:]*|,)?$', name)
@@ -98,6 +91,20 @@ if matchobj:
     gitmv(f'thumbs/{name}.jpg', f'thumbs/{to_name},{to_suffix}.jpg',
           optional=True)
 else:
+    # If we get here, it's a name change, not a photo suffix change.
+    # Change the txt and html files if they exist.
+    from_file = f'txt/{name}.txt'
+    if os.path.exists(from_file):
+      to_file = f'txt/{arg2}.txt'
+      gitmv(from_file, to_file)
+
+    html_from = re.sub(r' ', '-', name)
+    from_file = f'html/{html_from}.html'
+    if os.path.exists(from_file):
+        html_to = re.sub(r' ', '-', arg2)
+        to_file = f'html/{html_to}.html'
+        gitmv(from_file, to_file)
+
     # Move all photos from one name to another
     file_list = os.listdir('photos')
     for filename in file_list:
