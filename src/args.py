@@ -12,14 +12,20 @@ while len(sys.argv):
                '-without_cache',
                '-debug_js',
                '-steps',
-               '-core',
-               '-ca'):
+               '-core'):
         _arg_value[arg] = True
     elif arg in ('-dir',
                  '-tree',
                  '-api',
                  '-api_expire',
-                 '-api_delay'):
+                 '-api_delay',
+                 '-ca'):
+        if arg == '-ca':
+            # Behave as if '-core -api' were specified,
+            # including support for taxons to discard from the API cache.
+            _arg_value['-core'] = True
+            arg = '-api'
+
         if arg in ('-dir',
                    '-tree',
                    '-api_expire',
@@ -48,7 +54,3 @@ def arg(name):
         return _arg_value[name]
     else:
         return None
-
-if arg('-ca'):
-    _arg_value['-core'] = True
-    _arg_value['-api'] = True
