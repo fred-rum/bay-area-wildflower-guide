@@ -1,0 +1,15 @@
+sci: genus Argia
+x:ba
+
+==vivid dancer:Argia vivida
+bug:24800
+
+==california dancer:Argia agrioides
+bug:271577
+
+==aztec dancer:Argia nahuana
+. distinguished from {-california dancer} per ^http://creagrus.home.montereybay.com/AztecDancer.html
+
+==emma's dancer:Argia emma
+
+==sooty dancer:Argia lugens

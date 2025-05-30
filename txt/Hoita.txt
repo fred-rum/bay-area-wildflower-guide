@@ -3,6 +3,7 @@ sci: genus Hoita
 x: any
 
 ==large leatherroot:H. macrostachya
+color: purple
 . stem erect
 . flower 9--10 mm long
 .. banner 5.5--10 mm long

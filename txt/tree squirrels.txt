@@ -17,6 +17,7 @@ x:ca
 . introduced from eastern north america
 
 ==fox squirrel:Sciurus niger
+acom:eastern fox squirrel
 . tan to white belly
 . <b>orange-tipped tail fur</b>
 . introduced from eastern north america

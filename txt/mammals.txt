@@ -12,7 +12,8 @@ Note that the range of this Guide excludes mammals that never come onto land, i.
 
 ==deer:family Cervidae
 
-==wild boar:Sus scrofa
+==eurasian wild pig:Sus scrofa
+acom: wild boar
 x:ba
 . bay area wild pigs are believed to be a hybrid of introduced european boars (ssp. scrofa) and domestic pigs (ssp. domesticus)
 

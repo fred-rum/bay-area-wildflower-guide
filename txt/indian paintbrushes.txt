@@ -10,7 +10,8 @@ Key features:
 stems generally branched<br>
 generally drier places</h2>
 
-==woolly indian paintbrush:Castilleja foliolosa
+==felt paintbrush:Castilleja foliolosa
+acom:woolly indian paintbrush
 color: red, salmon
 xx:none
 . <b>hairs woolly, felt-like, much-branched, +- white to +- gray</b>
@@ -31,7 +32,8 @@ sci_fpj:Castilleja affinis var. litoralis
 . leaves 30--80 mm, +- oblong, <b>generally entire</b>
 . generally dry sea bluffs
 
-==monterey indian paintbrush:Castilleja latifolia
+==monterey paintbrush:Castilleja latifolia
+acom:monterey indian paintbrush
 color: red, salmon
 xx:none
 . +- bristly, generally nonglandular

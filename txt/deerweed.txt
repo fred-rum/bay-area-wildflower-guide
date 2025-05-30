@@ -1,6 +1,8 @@
 sci: Acmispon glaber
 
-==california broom:Acmispon glaber var. glaber
+==coastal deerweed:Acmispon glaber ssp. glaber
+acom:california broom
+sci_fpjF:Acmispon glaber var. glaber
 color: yellow
 . keel not prominent, about the same length as the wings
 

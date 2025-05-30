@@ -502,7 +502,7 @@ class Page:
             # Now call set_com(), which sets the common name as the page name
             # when possible.
             if com:
-                self.set_com(com, from_inat=from_inat)
+                self.set_com(com, from_inat=from_inat, src=src)
 
         # user-supplied information about ancestors.
         self.group_items = [] # each entry = (rank, name, sci)
@@ -679,7 +679,7 @@ class Page:
             if is_sci(self.name):
                 self.set_sci(self.name)
             else:
-                self.set_com(self.name)
+                self.set_com(self.name, src='inferred')
 
     def set_name(self):
         if self.name_from_txt:
@@ -744,7 +744,7 @@ class Page:
     # Note that common names based on txt filenames are assigned first and
     # are guaranteed to be without conflicts.  Any common names assigned after
     # that will not have name_from_txt asserted.
-    def set_com(self, com, from_inat=False):
+    def set_com(self, com, from_inat=False, src='unknown'):
         if com == 'n/a':
             if self.com:
                 error(f'com:n/a used on page {self.full()}')
@@ -770,10 +770,10 @@ class Page:
 
                 if from_inat == 'global_com':
                     do_fill_alt_com = self.rp_do('obs_fill_alt_global_com',
-                                                 f'{self.full()} has iNaturalist global common name "{com}"')
+                                                 f'{self.full()} has iNaturalist global common name "{com}" from {src}')
                 else:
                     do_fill_alt_com = self.rp_do('obs_fill_alt_com',
-                                                 f'{self.full()} has iNaturalist common name "{com}"')
+                                                 f'{self.full()} has iNaturalist common name "{com}" from {src}')
 
                 if do_fill_alt_com:
                     # iNaturalist is allowed to add an alternative common name,
@@ -792,7 +792,7 @@ class Page:
             not self.shadow and
             not self.created_from_inat and
             not self.rp_do('obs_fill_com',
-                           f'{self.full()} has iNaturalist common name "{com}"')):
+                           f'{self.full()} has iNaturalist common name "{com}" from {src}')):
             # If we got here, then
             #   - we have a new common name from iNaturalist, and
             #   - this page was created by the user, and
@@ -1076,10 +1076,8 @@ class Page:
     # full() is intended for Python debug output to the terminal
     # It removes all fancy formatting to emit ASCII only.
     def full(self):
-        if self.rank:
-            elab = f'{self.rank.name} {self.elab}'
-        elif self.sci:
-            elab = self.sci
+        if self.elab:
+            elab = self.elab
         else:
             elab = None
 
@@ -1209,7 +1207,7 @@ class Page:
     def parse_names(self):
         def repl_com(matchobj):
             com = matchobj.group(1)
-            self.set_com(com)
+            self.set_com(com, src='com: keyword')
             return ''
 
         def repl_sci(matchobj):
@@ -1239,7 +1237,7 @@ class Page:
             if sci == self.sci:
                 self.set_sci(elab)
             else:
-                self.set_com(self.name)
+                self.set_com(self.name, src='filename')
 
         # If only a common name was explicitly set and the filename looks
         # like it could be a scientific name, set it as the scientific name.
@@ -2292,7 +2290,8 @@ class Page:
                                ' and ' not in self.com and
                                ' subg. ' not in self.com and
                                ' sect. ' not in self.com and
-                               ' subsection ' not in self.com)))):
+                               ' subsection ' not in self.com and
+                               ' subtribe ' not in self.com)))):
             self.propagate_membership(self, True)
 
     def apply_prop_checks(self):

@@ -36,3 +36,14 @@ bug:132367
 x:ca
 . caterpillar feeds on various shrubs in the pea family
 .. although it's a native, it seems to like the imported {-Genista}
+
+==three-striped longhorn:Adela trigrapha
+bug:272559
+genus:n/a
+x:more
+
+==simple wave:Scopula junctaria
+bug:22846
+genus:n/a
+x:more
+<b>Caution: ID unsure</b>

@@ -10,6 +10,8 @@ Key features:
 
 There is a very good <a href="https://drive.google.com/file/d/16qardZB078_-k_KQKszfBrQd3S65-opK/preview">guide</a> to the wild mallows of New Zealand that conveniently encompasses all Bay Area mallows.  Valerio Lazzeri also has a <a href="https://www.inaturalist.org/journal/blue_celery/66193-malva-sylvestris-vs-multiflora-vs-nicaeensis-vs-parviflora-key">key to selected mallows</a>.
 
+Hosts {-hollyhock rust}.
+
 [
 <h3>epicalyx segments are fused to each other (at the base)</h3>
 

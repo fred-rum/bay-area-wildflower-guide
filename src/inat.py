@@ -129,6 +129,8 @@ def read_inat_files():
 def parse_inat_data(data, name):
     global inat_dict_has_updates
 
+    assert name
+
     # Older data from a file may have the raw fetch data instead of
     # only a single record's data.
     if 'results' in data and data['results']:
@@ -302,6 +304,7 @@ def get_inat(name, used=False):
 # mark the name in both dictionaries so that we don't try to fetch
 # the API data again.
 def used_fail(name):
+    assert name
     inat_dict[name] = None
     used_dict[name] = None
     global inat_dict_has_updates
@@ -569,6 +572,7 @@ def get_page_for_alias(orig, elab):
             return used_fail(name)
 
         tid = data['id']
+        assert name
         inat_dict[name] = tid
         used_dict[name] = tid
 
@@ -671,6 +675,8 @@ class Inat:
         dup_inat = get_inat(self.taxon_id)
         if dup_inat:
             return
+
+        assert self.taxon_id
 
         inat_dict[self.taxon_id] = self
 
@@ -800,7 +806,9 @@ class Inat:
         # - inform an ancestor if a descendent is discarded
         # but don't recurse up to and discard the "life" taxon
         # since that would trigger an extra unnecessary API fetch.
-        if self.parent_id in inat_dict and self.parent_id != '48460':
+        if (self.parent_id != '48460' and
+            self.parent_id in inat_dict and
+            inat_dict[self.parent_id]):
             ret_val = inat_dict[self.parent_id].check_for_discard(discarded_descendent)
             if ret_val and not discarded_ancestor:
                 discarded_ancestor = ret_val

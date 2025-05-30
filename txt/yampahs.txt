@@ -8,9 +8,10 @@ x:ba
 color:white
 
 ==california yampah:P. californica
+color: white, other
 . roots tuberous
 . basal petiole 2--6 cm
-. terminal leaf segments unlike lateray in size and form
+. terminal leaf segments unlike lateral segments in size and form
 
 ==gairdner's yampah:P. gairdneri
 acom: common yampah

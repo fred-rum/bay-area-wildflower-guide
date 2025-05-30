@@ -1,8 +1,0 @@
-x:rare
-
-==hummingbirds:family Trochilidae
-
-==swifts:family Apodidae
-
-==common poorwill:Phalaenoptilus nuttallii
-x:any

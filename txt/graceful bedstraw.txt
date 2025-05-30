@@ -1,6 +1,7 @@
 sci:Galium porrigens
 
 ==n/a:var. porrigens
+color: other, cream
 . leaf widely oblong to ovate
 . common
 

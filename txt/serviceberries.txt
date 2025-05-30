@@ -1,0 +1,22 @@
+sci: genus Amelanchier
+x:ba
+
+==utah serviceberry:A. utahensis
+color: white
+. leaf finely hairy abaxially in fruit
+. twigs generally white-hairy
+. styles 2--4(5)
+. "The sparsely to moderately hairy mature leaves and twigs, rounded to truncate or emarginate leaf apices, relatively short petals, and reduced numbers of stamens and styles are distinctive characteristics." ^http://floranorthamerica.org/Amelanchier_utahensis
+. most common
+
+==saskatoon:A. alnifolia
+. leaf glabrous abaxially in fruit ^?:http://floranorthamerica.org/Amelanchier_alnifolia
+. twigs glabrous
+. styles 4--5
+. proximalmost pedicels usually 6-16 mm
+. rare
+
+==pale serviceberry:A. pallida
+. proximalmost pedicels usually 12--18 mm
+. "The species is distinctive for its often broadly oval petals, relatively long proximalmost pedicels, leaves with teeth that are relatively small and few in number, and usually absent in proximal half, and much-branched habit." ^http://floranorthamerica.org/Amelanchier_pallida
+. very rare

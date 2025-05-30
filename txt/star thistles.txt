@@ -16,7 +16,7 @@ color: yellow
 . common
 
 ==tocalote:C. melitensis
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0105+2739
+color: yellow
 . disk flower corolla <b>10--12 mm</b>
 . spines proximally <b>+- purple or red</b>, 5--10 mm
 . generally 1 stem, distally +- branched, winged

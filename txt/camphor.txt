@@ -1,0 +1,7 @@
+sci:Camphora officinarum
+sci_fpjF:Cinnamomum camphora
+x:ca
+color:cream
+genus: n/a
+
+Naturalized in California, but mostly found in cultivation.

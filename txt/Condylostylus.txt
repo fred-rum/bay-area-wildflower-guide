@@ -1,0 +1,16 @@
+com: n/a
+sci: genus Condylostylus
+bug:42317
+x:rare
+
+==n/a:C. longicornis
+bug:481318
+. wings unmarked, except for a brown area near the apex ^https://bugguide.net/node/view/481318
+. fore and mid tibiae with assorted bristles, never as long or uniform as in the mystery species
+. males uniquely with a thinly-spaced row of bristles on the mid tibia and basitarsus
+
+==n/a:C. occidentalis
+bug:480288
+. wings marked ^https://bugguide.net/node/view/480288
+. fore basitarsus with 4 bristles, all on the apical half
+. 4 distal joints of fore tarsus about equal in length, short

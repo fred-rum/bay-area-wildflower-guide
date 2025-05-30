@@ -4,11 +4,10 @@ x:ba
 
 They don't glow.
 
-==california glowworm:Photinus californica
-genus:rover fireflies
+==california glowworm:Photinus californicus
 bug:251917
 . red areas on pronotum diverge from apex to base, with a semi-circular indentation near their bases
 
-==greater firefly:Photinus megista
+==greater firefly:Photinus megistus
 bug:658108
 . red areas on pronotum are roughly parallel from apex to base, with no semi-circular indentation near their bases

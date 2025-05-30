@@ -85,7 +85,6 @@ species: three-petal bedstraw
 
 ==graceful bedstraw:G. porrigens
 # has varieties
-color: other, cream
 . habit: perennial herb, climbing, woody, scabrous, clinging by recurved hairs; dioecious
 . stem: 10--150 cm, slender
 . leaf: <b>in whorls of 4</b>, 2--18 mm; tip acute to obtuse or round, terminal hair weak, generally not persistent
@@ -95,6 +94,7 @@ color: other, cream
 . common
 
 ==phlox-leaved bedstraw:G. andrewsii
+color: other
 . habit: perennial herb, generally low, open [not climbing?], generally cushion-like, green to silvery, occasionally hairy; main stem obvious; dioecious
 . stem: 5--22 cm
 . leaf: <b>in whorls of 4</b>, 4--11 mm, sharp to touch, +- thick, tip with persistent hair

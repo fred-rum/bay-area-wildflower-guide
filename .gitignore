@@ -43,5 +43,5 @@ src/names
 inat/
 log
 data/*.csv
-data/inaturalist-taxonomy.dwca-*.zip
+data/inaturalist-taxonomy.dwca*.zip
 archive/

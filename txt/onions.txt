@@ -104,6 +104,7 @@ color:purple, red purple, pale purple
 . Mt. Diablo
 
 ==narrowleaf onion:A. amplectens
+color: white, pale purple
 . leaf 2--4, +- cylindric
 . perianth parts 4--9 mm, erect or spreading
 . inner perianth parts entire

@@ -1,8 +1,12 @@
 sci:suborder Zygoptera
 
-==bluets
+^https://bugguide.net/node/view/190795
 
-==vivid dancer:Argia vivida
-x:more
-bug:24800
-. other species in the genus are observed much more rarely in the bay area
+==bluets
+. hold wings along the side of the abdomen
+. tend to land on stems and hang a little more vertically
+
+==dancers
+. hold wings over the abdomen
+. tend to sit horizontally
+. black shoulder strip on thorax tends to be pinched near the middle or split Y-shaped

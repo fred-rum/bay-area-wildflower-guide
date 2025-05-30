@@ -10,7 +10,6 @@ The front two pairs of legs are much longer than the rear two pairs.
 ==goldenrod crab spider:Misumena vatia
 x:ca
 bug:6751
-<b>Caution: ID unsure</b>
 . two rows of eyes, all the same size, often (always?) arranged in the borders of a crescent-shaped darker marking
 . no none#spines on body
 . leg none#spines are only in a row on each of the front two pairs of legs

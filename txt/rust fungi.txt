@@ -5,4 +5,7 @@ sci:order Pucciniales
 .. <b>Arthuriomyces</b> peckianus infects "black raspberry".
 .. Gymnoconia <b>nitens</b> is "more common" on "blackberry".
 
+==hollyhock rust:Puccinia malvacearum
+. forms under leaves of {-mallows}
+
 ==western gall rust:Cronartium harknessii

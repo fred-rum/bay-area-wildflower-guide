@@ -1,0 +1,17 @@
+sci:genus Fraxinus
+x:rare
+
+==oregon ash:F. latifolia
+. small to large tree
+. leaf compound
+.. leaflets 4--11 (3--14) cm long
+. fruit pedicel tip expanded
+
+==california ash:F. dipetala
+color: cream, white
+. shrub or small tree with many stems
+. leaves simple or compound
+.. leaflets 2--5(6) cm long
+. fruit pedicel tip +- slender
+
+Many other species are cultivated.

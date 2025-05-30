@@ -30,4 +30,8 @@ genus: n/a
 . perianth is colored only on the lobes (not including the tube/throat)
 
 ==sea muilla:Muilla maritima
+sci:Muilla maritima
+color: white
+genus: n/a
+x:ba
 . hosts {-Lasioptera t-laxa-lily-stem-gall}

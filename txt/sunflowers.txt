@@ -9,6 +9,7 @@ color: yellow
 . stem +- rough-hairy
 
 ==california sunflower:H. californicus
+color: yellow
 . phyllaries 10--25 mm long, generally 3--5 mm wide, generally >> disk
 .. tips of outer phyllaries generally reflexed at maturity
 

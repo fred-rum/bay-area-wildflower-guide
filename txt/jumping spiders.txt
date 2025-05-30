@@ -7,5 +7,8 @@ bug:42637
 ==johnson's jumping spider:Phidippus johnsoni
 bug:15152
 
+==bold jumping spider:Phidippus audax
+bug:2006
+
 ==n/a:Phanias harfordi
 bug:229752

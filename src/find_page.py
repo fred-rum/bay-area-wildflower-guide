@@ -253,7 +253,7 @@ def find_page2(com, elab, from_inat=False, taxon_id=None,
             if taxon_id and taxon_id != page.taxon_id:
                 pass
             else:
-                page.set_com(com, from_inat=from_inat)
+                page.set_com(com, from_inat=from_inat, src=src)
 
         # Only set the taxon_id if there was a match on the common name,
         # the scientific name, or on the alternative iNaturalist scientific

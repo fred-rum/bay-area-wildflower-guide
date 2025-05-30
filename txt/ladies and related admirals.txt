@@ -11,5 +11,6 @@ bug:12876
 ==american lady:Vanessa virginiensis
 bug:488
 
-==red admiral:Vanessa atalanta
+==american red admiral:Vanessa atalanta ssp. rubria
+xx:ca
 bug:448

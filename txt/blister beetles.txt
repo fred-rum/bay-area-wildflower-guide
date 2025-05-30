@@ -2,3 +2,6 @@ Burning beetles secrete as a defensive agent a poisonous chemical that causes bl
 
 ==n/a:Nemognatha scutellaris
 bug:258965
+
+==n/a:Epicauta puncticollis
+bug:255611

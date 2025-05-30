@@ -84,6 +84,7 @@ color: red purple
 <h3>Standard corolla shapes, buds pendent</h3>
 
 ==slender clarkia:C. gracilis
+color: purple
 . all 4 sepals staying fused
 . ovary 4-grooved or (rarely) shallowly 8-grooved
 . petals entire, pink-lavender, often lighter toward base, may have red spot near middle or base

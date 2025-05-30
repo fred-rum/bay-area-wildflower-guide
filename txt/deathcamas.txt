@@ -31,6 +31,7 @@ sci_F:Zigadenus fontanus
 ==meadow deathcamas:T. venenosum
 sci_Fp:Zigadenus venenosus
 xx:uncat
+color: white
 . petals 4--6 mm
 . stamens usually = perianth, occasionally >
 . pedicels in fruit 3--25 mm, <b>generally ascending (10--60&deg; from axis)</b>

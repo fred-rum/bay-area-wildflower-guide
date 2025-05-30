@@ -33,7 +33,7 @@ color: pink
 . waif
 
 ==bluecrown passionflower:P. caerulea
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1115+3513
+color: blue, purple, other
 . perianth lobes white or cream
 . filaments striped white and purple/blue
 . stamens greenish-yellow

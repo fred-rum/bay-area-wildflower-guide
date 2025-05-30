@@ -17,9 +17,10 @@ bay area:
 - Russian Ridge; OSP
 - Saratoga Gap; OSP
 - Skyline Ridge; OSP
-- Sierra Azul OSP:
+- Sierra Azul; OSP:
   - Sierra Azul
   - Mt. Umunhum
+- Thornewood; OSP
 - Windy Hill; OSP
 
 # Santa Clara Valley Open Space Authority
@@ -144,8 +145,11 @@ bay area:
 - UCSC Campus Natural Reserve
 - Ulistac Natural Area, Santa Clara
 - Hidden Villa;, Los Altos Hills
+- Sugarloaf; OS, San Mateo
+- Laurelwood; Park, San Mateo
+- Presidio; of San Francisco
 
-# major trails without an associated park
+# major trails, lakes, etc. without an associated park
 - Alameda Creek Trail
 - Bay Trail:
   - Bay Trail
@@ -162,6 +166,9 @@ bay area:
   - San Tomas Creek Trail
   - San Tomas Trail
 - Stevens Creek Trail # not associated with the county park 
+- Vasona Reservoir
+- Almaden Reservoir
+- Chesbro Reservoir
 
 # cities
 - Santa Clara, CA:
@@ -185,7 +192,8 @@ bay area:
 - San Jose, CA:
   - ^San Jose, CA
   - Rd., San Jose, CA
-  - Almaden Reservoir
+- Morgan Hill, CA:
+  - Ave., Morgan Hill, CA
 
 # roads
 - Montebello Road;, Cupertino
@@ -227,6 +235,7 @@ elsewhere in California:
   - Hemlock Lake
 - Pinnacles; NP
 - Hood Mountain; RP, Sonoma County
+- Bass Lake
 
 Hawaii:
 - Kauai, HI:

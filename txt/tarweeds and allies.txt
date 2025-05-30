@@ -1,4 +1,5 @@
 sci:tribe Madieae
+xcom:tarweeds, silverswords, and allies
 
 ==tarweeds:Madia spp.
 . seeds never have plumes

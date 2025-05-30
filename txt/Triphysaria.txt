@@ -16,7 +16,7 @@ See also {-cream sacs}.
 . beak dark purple
 . <b>pouches 1--2 mm deep</b>
 
-==yellow-beak false owl's-clover:T. versicolor
+==yellowbeak owl's-clover:T. versicolor
 . <b>plant green-brown to yellow-brown [i.e. greenish]</b>
 . corolla 12--22 mm, yellow or white fading to pale purple
 . beak +- yellow

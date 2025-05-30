@@ -9,7 +9,9 @@ x:more
 
 ==woodpeckers:family Picidae
 
-==nightjars, swifts, hummingbirds, and allies:order Caprimulgiformes
+==swifts:family Apodidae
+
+==hummingbirds:family Trochilidae
 
 ==landfowl:order Galliformes
 
