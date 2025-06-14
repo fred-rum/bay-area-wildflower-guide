@@ -1,0 +1,5 @@
+sci:Calycanthus occidentalis
+color: red
+
+genus: sweetshrub
+x:ca

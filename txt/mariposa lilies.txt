@@ -76,7 +76,7 @@ color: white, pink, purple
 <h2>globe lilies</h2>
 
 ==white globe lily:C. albus
-acom: fairy lantern
+acom: white fairy lantern # from Calflora; Jepson & FNA have just fairy lantern
 color: white, cream
 . flower nodding, perianth +- closed, globe shaped
 . petals not yellow

@@ -68,7 +68,8 @@ color: red purple
 . <b>stigma not exserted beyond anthers</b>
 . Presidio, Redwood Regional Park
 
-==farewell to spring:C. amoena
+==farewell-to-spring:C. amoena
+color: purple, red purple, red
 . all 4 sepals staying fused
 . ovary and immature fruit 4- or 8-grooved, depending on subspecies
 . petals with red spot or marks near <b>middle of petal</b>

@@ -12,3 +12,7 @@ x:ca
 ==woodland skipper:Ochlodes sylvanoides
 bug:9577
 x:more
+
+==northern cloudywing:Thorybes pylades
+bug:12861
+x:ba

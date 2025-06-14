@@ -3,6 +3,7 @@ com:blueblossom
 xx:ba
 
 ==blueblossom,4:var. thyrsiflorus
+# CalFlora and Jepson call it "blue blossom"
 color: blue, pale blue, white
 . twigs +- glabrous
 . leaf blade margin no more than partially rolled under

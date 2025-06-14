@@ -4,6 +4,8 @@ x:more
 
 ==propertius duskywing:Erynnis propertius
 bug:64221
+. [no more than a dot of white at the tip of the hindwing hairs]
 
 ==mournful duskywing:Erynnis tristis
 bug:31868
+. [white fringe of hairs at the end of the hindwing]

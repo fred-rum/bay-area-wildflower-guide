@@ -9,7 +9,6 @@ color: purple
 ==many-stemmed california gilia:ssp. multicaulis # common name from Calflora
 color: purple, pale purple, white
 acom: small california gilia # Pine Ridge Association
-acom: many-stemmed california gilia # Calflora
 . 1--7 flowers in open cyme
 .. corolla 5--10 mm long (1--2 &times; calyx)
 .. pedicel 1--30 mm

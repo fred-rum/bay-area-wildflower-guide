@@ -40,7 +40,7 @@ color: purple, red purple
 
 ==cornflower:C. cyanus
 acom:bachelor's-button
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0311+0802
+color: purple, blue, pink, red, red purple, white
 . Edgewood, Long Ridge, Mt. Diablo
 
 ==spotted starthistle:C. stoebe ssp. australis

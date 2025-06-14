@@ -1,0 +1,12 @@
+sci:genus Kopsiopsis
+
+==california groundcone:Kopsiopsis strobilacea
+color: other, purple, yellow
+. inflorescence 2.5--5.5 cm diameter
+. largest bracts 8--15(19) mm wide
+. corolla 15--20 mm long
+
+==small ground-cone:Kopsiopsis hookeri
+. inflorescence 1.5--2.5 cm diameter
+. largest bracts 6--8 mm wide
+. corolla 10--15 mm long

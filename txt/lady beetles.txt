@@ -25,4 +25,7 @@ bug:3543
 ==asian lady beetle:Harmonia axyridis
 bug:397
 
-==spotless lady beetles
+==spotless lady beetles:genus Cycloneda
+
+==three-banded lady beetle:Coccinella trifasciata
+bug:414905
