@@ -28,6 +28,7 @@ color: white
 color: pink, salmon
 . plant arching, 1--9 m
 . petals pink or rose, erect; fruit orange to red-orange
+. leaf blade blade 18--62 mm, ovate, adaxially shiny, abaxially generally +- yellow- or +- gray-tomentose, lateral veins sunken
 . scattered in the outer coastal range + Berkeley
 ;Edibility: Ken Fern has tried it and says that it is very mealy and full of seeds. ^https://pfaf.org/user/Plant.aspx?LatinName=Cotoneaster+franchetii But since cotoneasters are generally considered poisonous, it's probably best to leave it alone.
 

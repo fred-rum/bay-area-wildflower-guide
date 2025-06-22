@@ -6,31 +6,37 @@ There are more centauries in the {-Gentianaceae}.
 <b>Caution: IDs uncertain.</b>
 
 Key features:
+. corolla eye
 . maximum pedicel length
 . calyx lobes keeled or not
 . corolla lobe length
 . stigma number and shape
+. basal leaves / rosette
 
 ==muehlenberg's centaury:Z. muehlenbergii
 acom:monterey centaury
 color: pink, pale purple
-. [much branched, many flowered]
+. usually 1 stem below inflorescence, simple or branching ^https://floranorthamerica.org/Zeltnera_muehlenbergii
 . pedicels <b>0</b>--10 mm
 .. <b>mostly < 6 mm</b> ^http://floranorthamerica.org/Zeltnera
 .. distal flowers often sessile
 ... [bractlets (shorter) may be confused with sepals (longer) for sessile flowers]
+. <b>calyx lobes keeled</b> ^https://www.inaturalist.org/journal/rymcdaniel/111899-differentiating-zeltnera-muehlenbergii-from-centaurium-and-other-species-in-western-north-america
 . corolla lobes 2--7 mm, tips rounded
+.. small white eye barely protuding onto lobes
+... may include projection centrally (type A) or laterally (type B) ^https://www.inaturalist.org/journal/rymcdaniel/111899-differentiating-zeltnera-muehlenbergii-from-centaurium-and-other-species-in-western-north-america
+.. orifice generally spacious, pentagonal ^https://www.inaturalist.org/journal/rymcdaniel/111899-differentiating-zeltnera-muehlenbergii-from-centaurium-and-other-species-in-western-north-america
 . uncommon
 
 ==davy's centaury:Z. davyi
 color: pink, pale purple
-keeled calyx lobes:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+1218+3917
+. 1--10 stems, simple or few-branched ^https://floranorthamerica.org/Zeltnera_davyi
 . pedicels 2--25(55) mm
-.. <b>mostly > 4 mm</b> ^http://floranorthamerica.org/Zeltnera
+.. <b>rarely < 4 mm</b> ^https://floranorthamerica.org/Zeltnera_davyi
 . <b>calyx lobes keeled</b>
-.. no others have keeled calyx lobes [?]
 .. Caution: some species have paired bracts that resemble calyx lobes, but the calyx actually has the same number of lobes as the corolla (4 or 5)
 . corolla lobes 3--7 mm
+.. prominent white eye [extending significantly onto the lobes], rounded pentagonal or star shaped ^https://www.inaturalist.org/journal/rymcdaniel/111899-differentiating-zeltnera-muehlenbergii-from-centaurium-and-other-species-in-western-north-america
 . uncommon
 
 ==alkali centaury:Z. trichantha

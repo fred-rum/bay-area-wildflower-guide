@@ -3,8 +3,19 @@ x:rare
 
 There are more centauries in the {-Gentianaceae}.
 
+Key features:
+. corolla eye
+. maximum pedicel length
+. calyx lobes keeled or not
+. corolla lobe length
+. stigma number and shape
+. basal leaves / rosette
+
 ==slender centaury:C. tenuiflorum
+color: pink, pale purple
 . corolla lobes 2 -- 4.5 mm
+.. small white eye with 3 prongs, sharp or nebulous ^https://www.inaturalist.org/journal/rymcdaniel/111899-differentiating-zeltnera-muehlenbergii-from-centaurium-and-other-species-in-western-north-america
+.. orifice tight and rounded ^https://www.inaturalist.org/journal/rymcdaniel/111899-differentiating-zeltnera-muehlenbergii-from-centaurium-and-other-species-in-western-north-america
 . basal leaves +-deciduous, generally not in a rosette
 . uncommon
 
