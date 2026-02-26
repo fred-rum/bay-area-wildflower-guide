@@ -24,7 +24,7 @@ bug:14738
 ==disc gall wasp
 ==Feron amphorus
 ==irregular spindle gall wasp
-==fuzzy-gall wasp
+==fuzzy gall wasp
 ==yellow wig gall wasp
 
 # chinquapin galls (which is also an oak gall wasp)

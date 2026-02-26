@@ -1,2 +1,5 @@
 ==ornate checkered beetle:Trichodes ornatus
 bug:7481
+
+==red-bellied clerid:Enoclerus sphegeus
+bug:249949

@@ -1929,3 +1929,7 @@ Change the code so that
     only changes the thumbnail right there, not the representative photo.
   remember that I can change the propagated representation
      anywhere in the hierarchy with rep:
+
+exclude repeated observation on the same date in the same location
+
+Count the number of observed/unobserved taxons in advanced search results

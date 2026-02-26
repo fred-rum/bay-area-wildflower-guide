@@ -1,0 +1,5 @@
+sci: family Scathophagidae
+
+==golden dung fly:Scathophaga stercoraria
+bug: 8320
+. lays eggs on fresh dung

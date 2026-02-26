@@ -1,0 +1,5 @@
+sci:Lagurus ovatus
+color: other
+
+genus: bunnytail grasses
+x:any

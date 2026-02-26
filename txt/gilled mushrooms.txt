@@ -53,3 +53,7 @@ x:more
 ==deer mushrooms:genus Pluteus
 
 ==honey mushrooms:genus Armillaria
+
+==cabbage parachute:Gymnopus brassicolens
+
+==handsome club:Clavulinopsis laeticolor

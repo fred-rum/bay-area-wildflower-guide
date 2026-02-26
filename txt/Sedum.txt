@@ -1,0 +1,34 @@
+com:stonecrops
+sci:genus Sedum
+x:iNaturalist has observed more species in the bay area, but with much fewer observations.
+
+Note that there are multiple genera with the common name, "stonecrops."
+
+==broad-leaved stonecrop:S. spathulifolium
+color:yellow
+. rosette leaves and leaves on sterile shoots widest distal to middle
+.. generally strongly flattened
+. common
+
+==coast range stonecrop:S. radiatum
+round leaves:https://www.calflora.org/cgi-bin/viewphoto.cgi?arg=/app/up/entry/87/26399.jpg
+. rosette leaves and leaves on sterile shoots widest at or proximal to middle
+.. round to slightly flattened in cross-section
+. uncommon
+
+==green cockscomb:S. praealtum
+. subshrub, stout and woody at base
+.. all others are herbs
+. stems 50--120 cm
+. yellow petals and anthers
+. rare
+
+==white stonecrop:S. album
+. leaves round to slightly flattened or flattened on only one side (planoconvex)
+. white petals white
+.. all other local species have yellow petals
+. rare
+
+==christmas-cheer:S. Xrubrotinctum
+sci_Fjf: n/a
+. artificial hybrid

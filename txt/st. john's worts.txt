@@ -60,7 +60,8 @@ sci_jF: n/a
 . petals up to ~22 mm
 . not in Jepson's eFlora
 
-==rose-of-sharon:H. calycinum
+==aaron's beard:H. calycinum
+acom: rose-of-sharon
 color:yellow
 . shrub
 . stem 1 or few-branched

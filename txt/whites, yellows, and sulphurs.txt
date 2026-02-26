@@ -3,10 +3,14 @@ bug:2651
 
 ==garden whites:Pieris spp.
 
+==checkered white:Pontia protodice
+bug:3557
+. dark spots are sexually dimorphic.
+
 ==sara orangetip:Anthocharis sara
 bug:3553
 
 ==orange sulphur:Colias eurytheme
 bug:3248
 x:ba
-I don't know how it's distinguished from california dogface (Zerene eurydice).
+. I don't know how it's distinguished from california dogface (Zerene eurydice).

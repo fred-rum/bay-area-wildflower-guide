@@ -3,5 +3,9 @@ x:ca
 <a href="https://www.allaboutbirds.org/guide/Tricolored_Blackbird/species-compare/63744371">Compare</a> red-winged blackbird to tricolored blackbird.
 
 ==red-winged blackbird:Agelaius phoeniceus
+. wing patch is all red or red with a yellowcream distal band
 
 ==tricolored blackbird:Agelaius tricolor
+. wing patch is red with a white/buffy distal band
+
+<a href="https://www.allaboutbirds.org/guide/Tricolored_Blackbird/species-compare/63744371">Compare.</a>

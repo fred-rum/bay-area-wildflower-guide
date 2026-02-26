@@ -7,3 +7,5 @@ bug:293123
 ==leafhopper assassin bug:Zelus renardii
 x:more
 bug:80064
+
+==jagged ambush bugs:genus Phymata

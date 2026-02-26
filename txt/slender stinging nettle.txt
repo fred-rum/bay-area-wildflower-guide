@@ -1,0 +1,16 @@
+sci: Urtica gracilis
+xx:ca
+
+Adaxial leaf surfaces rarely have stinging hairs, and never more than a few.
+
+==american stinging nettle:ssp. gracilis
+sci_Ffp: Urtica dioica ssp. gracilis
+color: other
+. non-stinging hairs on abaxial leaf veins <b>appressed</b>
+. stem green
+
+==hoary nettle:ssp. holosericea
+sci_Ffp: Urtica dioica ssp. holosericea
+color: other
+. non-stinging hairs on abaxial leaf veins <b>erect</b>
+. stem gray-green[?]

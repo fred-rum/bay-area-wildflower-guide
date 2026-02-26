@@ -24,3 +24,6 @@ x:any
 ==wigeons and gadwels
 xcom:wigeons and allies
 x:more
+
+==muscovy duck:Cairina moschata
+x:any

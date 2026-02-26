@@ -96,7 +96,7 @@ bug:145060
 gall:1376
 . forms on the midrib under leaves of {-valley oak}
 
-==fuzzy-gall wasp:Cynips conspicuus
+==fuzzy gall wasp:Cynips conspicuus
 bug:362731
 gall:1365
 . forms on leaf surfaces and petioles of {-white oaks}

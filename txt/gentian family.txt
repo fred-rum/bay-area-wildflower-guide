@@ -2,9 +2,8 @@ sci:family Gentianaceae
 
 ==Zeltnera
 . 2 stigmas, each wedge- or fan-shaped (or 1 stigma with 2 lobes)
+. calyx lobes keeled for common species
 . stem generally branched below inflorescence
-
-.. [except {-Zeltnera muehlenbergii}]
 
 ==Centaurium
 . 2 stigmas, each elliptic to ovate

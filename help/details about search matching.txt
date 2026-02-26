@@ -1,5 +1,5 @@
 The search bar finds results for which your input text can be found
-within the {-taxon names}, glossary term, etc.
+within the {-taxon names}, glossary terms, etc.
 
 Wherever your input text includes spaces or punctuation, the search
 bar allows any number of characters to be skipped in the result text.

@@ -6,8 +6,7 @@ x:more
 ==northern flicker:Colaptes auratus
 x:ba
 
-==downy woodpecker:Dryobates pubescens
-x:more
+==pileated woodpecker:Dryocopus pileatus
+x:ca
 
-==hairy woodpecker:Dryobates villosus
-x:more
+==dryobates woodpeckers

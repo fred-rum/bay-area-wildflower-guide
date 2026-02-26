@@ -12,6 +12,9 @@ bug:1967
 
 ==orbweavers
 
+==western black widow:Latrodectus hesperus
+bug:26346
+
 ==jumping spiders
 
 ==grass spiders:genus Agelenopsis
@@ -23,7 +26,7 @@ bug:33338
 
 ==desert tarantula:Aphonopelma iodius
 bug:103344
-x:more
+x:ba
 
 ==false tarantula:Calisoga longitarsis
 bug:1242212
@@ -37,6 +40,8 @@ x:ba
 bug:201624
 
 ==green lynx spiders
+
+==ghost spiders:family Anyphaenidae
 
 ]
 [

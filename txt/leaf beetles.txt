@@ -18,3 +18,7 @@ bug:196810
 . many species in CA
 . no ID info in bugguide
 . very few IDs to species in iNaturalist
+
+==coyote brush leaf beetle:Trirhabda flavolimbata
+. visually distinct from other local species in the same genus
+bug:133076

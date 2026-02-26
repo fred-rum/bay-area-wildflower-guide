@@ -5,6 +5,7 @@ x:more
 ==signal crayfish:Pacifastacus leniusculus
 bug:394340
 x:ba
+. "A white oval patch at the joint of the fingers of the claw distinguishes this species." ^https://en.wikipedia.org/wiki/Signal_crayfish
 
 ==red swamp crayfish:Procambarus clarkii
 bug:382306

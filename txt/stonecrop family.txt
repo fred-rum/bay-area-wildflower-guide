@@ -1,0 +1,9 @@
+sci: family Crassulaceae
+
+==liveforevers:genus Dudleya
+
+==stonecrops:genus Sedum
+. sepals, petals generally 5
+
+==stonecrops:genus Crassula
+. sepals, petals generally 4

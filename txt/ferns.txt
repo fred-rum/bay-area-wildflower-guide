@@ -17,6 +17,7 @@ x:ca
 
 ==western lady fern:Athyrium filix-femina ssp. cyclosorum
 x:ba
+xx:ca
 . 2--3-pinnate (lobes at 3rd level may not be completely divided)
 . frond blade elliptic to lanceolate
 . lower 2--4 pinna pairs generally << those above
@@ -46,3 +47,6 @@ xx:ca
 
 ==brittle bladderfern:Cystopteris fragilis
 x:ca
+
+==cretan brake:Pteris cretica
+x:rare

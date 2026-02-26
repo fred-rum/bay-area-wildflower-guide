@@ -19,8 +19,8 @@ color: yellow
 . corolla yellow
 . scattered
 
-==turkey pea:S. tuberosa
-acom:tuberous sanicle
+==tuberous sanicle:S. tuberosa
+acom:turkey pea
 color:yellow
 . plant 5--80 cm, slender
 . leaf green, compound, ternate then 1--2-pinnate, glaucous, or +- purple; blade 2--13 cm, triangular to ovate, leaflets entire to deeply pinnately lobed, distal segment of main axis 1--5 mm wide

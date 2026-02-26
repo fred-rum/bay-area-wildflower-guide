@@ -55,11 +55,6 @@ species: pale springbeauty
 . <b>petals 2--5 mm</b>
 . corolla white or pink
 
-==glaucous springbeauty:C. exigua ssp. glauca
-. cauline leaves fused into +- none#disk
-. <b>petals +- 2 mm</b>
-. corolla white or pink
-
 ==miner's lettuce:C. perfoliata
 color: white
 . cauline leaves substantial, fully fused
@@ -75,6 +70,13 @@ color: white
 
 ==streambank springbeauty:C. parviflora
 color: white
-. cauline leaves substantial, fully fused (a common subspecies) or free, linear, and long (a rare subspecies)
+. cauline leaves substantial, fully fused [a common subspecies] or free, linear, and long [a rare subspecies]
 . basal leaf 1--18 cm long including petiole, <b>blade > 3&times; longer than wide</b>, base tapered gradually to petiole
 . corolla white or pink
+
+==glaucous springbeauty:C. exigua ssp. glauca
+. cauline leaves fused into +- none#disk
+. basal leaves +- linear
+. <b>petals +- 2 mm</b>
+. corolla white or pink
+

@@ -9,3 +9,7 @@ x:more
 x:more
 
 ==dowitchers
+
+==willet:Tringa semipalmata
+
+==red-necked phalarope:Phalaropus lobatus

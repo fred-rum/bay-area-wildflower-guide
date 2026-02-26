@@ -4,3 +4,7 @@
 x:more
 . yellow feet; compare to {-great egret}
 .. leg color varies among individuals
+
+
+==black-crowned night heron:Nycticorax nycticorax
+x:ca

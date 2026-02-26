@@ -2,10 +2,10 @@ sci:Perideridia spp.
 x:ba
 
 ==kellogg's yampah:P. kelloggii
+color:white
 . roots fibrous or +- thickened
 . basal petiole 3--6 cm, generally fully sheathing
 . cauline leaves 1-ternate-pinnate
-color:white
 
 ==california yampah:P. californica
 color: white, other
@@ -16,6 +16,7 @@ color: white, other
 ==gairdner's yampah:P. gairdneri
 acom: common yampah
 xx:more
+color:white
 . roots tuberous
 . basal petiole 8--15 cm
 . cauline leaves 1--2-pinnate or 1--2-ternate [not ternate-pinnate?]

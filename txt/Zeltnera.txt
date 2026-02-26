@@ -32,7 +32,7 @@ color: pink, pale purple
 color: pink, pale purple
 . 1--10 stems, simple or few-branched ^https://floranorthamerica.org/Zeltnera_davyi
 . pedicels 2--25(55) mm
-.. <b>rarely < 4 mm</b> ^https://floranorthamerica.org/Zeltnera_davyi
+.. <b>rarely < 4 mm</b> ^https://floranorthamerica.org/Zeltnera_davyi [but this appears to be untrue in photos]
 . <b>calyx lobes keeled</b>
 .. Caution: some species have paired bracts that resemble calyx lobes, but the calyx actually has the same number of lobes as the corolla (4 or 5)
 . corolla lobes 3--7 mm

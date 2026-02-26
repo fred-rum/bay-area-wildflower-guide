@@ -8,7 +8,7 @@ Chinquapins also occur in other genuses, but this is the only genus of chinquapi
 
 Hosts {-chinquapin galls}.
 
-==golden chinquapin:C. chrysophylla var. chrysophylla
+==giant chinquapin:C. chrysophylla var. chrysophylla
 color: other
 . tree, 15--30 m
 . leaf blade +- flat

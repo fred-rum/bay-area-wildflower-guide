@@ -14,6 +14,7 @@ color: other, cream, red
 Spotted coralroot has <a href="https://keybase.rbg.vic.gov.au/keys/show/3985?filter_id=55b17b6f8c990">two varieties:</a> <a href="https://www.calflora.org/cgi-bin/species_query.cgi?where-taxon=Corallorhiza+maculata+var.+maculata">var. maculata</a> and <a href="https://www.calflora.org/cgi-bin/species_query.cgi?where-taxon=Corallorhiza+maculata+var.+occidentalis">var. occidentalis</a>.
 
 ==pacific coralroot:C. mertensiana
+. <b>distinctly light purplish stem and calyx</b>
 . no stripes
 . lip with 2 lateral lobes; lobes are acute, prominent or not
 . very rare

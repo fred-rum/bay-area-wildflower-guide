@@ -330,9 +330,9 @@ def parse_line_by_line(name, s, page, glossary):
 
 # Links to taxon pages may be colored differently depending on whether the
 # taxon has any child keys.  So we have to parse all taxon pages before
-# inserting ilnks to taxon pagse.  I.e. we call parse_line_by_line() on all taxon
-# pages before calling parse2_txt() on all taxon pages.  As long as we've
-# got this second function, we do some other last-minute parsing here
+# inserting links to taxon pages.  I.e. we call parse_line_by_line() on all
+# taxon pages before calling parse2_txt() on all taxon pages.  As long as
+# we've got this second function, we do some other last-minute parsing here
 def parse2_txt(src_page, s, glossary):
     # Replace {-[link_name]} with an inline link to the page.
     def repl_link(matchobj):

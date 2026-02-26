@@ -1,0 +1,40 @@
+com: stonecrops
+sci: genus Crassula
+x:iNaturalist has observed more species in the bay area, but with much fewer observations.
+
+Note that there are multiple genera with the common name, "stonecrops."
+
+==sand pygmyweed:C. connata
+. annual
+. leaves generally < 6 mm
+. generally 2 flowers per node
+. flower parts generally in 4s
+. pedicels generally > 1.5 mm
+
+==mossy stonecrop: C. tillaea
+. annual
+. leaves generally < 6 mm
+. generally 2 flowers per node
+. flower parts generally in 3s
+. pedicels generally < 0.5 mm
+
+==aquatic pygmyweed:C. aquatica
+. annual
+. leaves generally < 6 mm
+. 1 flower per node or terminal
+. sepals +- 1/2 length of petals
+. wet areas
+
+==fairy stonecrop:Crassula multicava
+color: pale purple
+. perennial herb
+. leaves generally > 10 mm
+. petiole 5--20 mm
+. petals generally 4, 3--4 mm
+
+==jade plant:C. ovata
+. perennial shrub
+. leaves generally > 10 mm
+. petiole +- 0
+. petals generally 5, 7--10 mm
+. waif

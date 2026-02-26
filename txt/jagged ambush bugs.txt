@@ -1,0 +1,10 @@
+==jagged ambush bug:Phymata americana
+bug:348342
+. known from Oregon, but not yet California
+. difficult to distinguish from {-P. pacifica}
+
+==n/a:Phymata pacifica
+bug:591266
+
+==n/a:Phymata arctostaphylae
+. dark red

@@ -1,28 +1,17 @@
 sci:Urtica
 x:ca
 
-==great stinging nettle:U. dioica
-xx:more
-color:other
-iNaturalist is in the process of changing the North American observations to U. gracilis; I need to do more research to distinguish ssp. gracilis from {-hoary nettle}
-. 50--300 cm tall
-. leaf blade 6--20 cm
-. inflorescence raceme- or panicle-like, generally > petiole
-. non-stinging hairs on abaxial leaf veins <b>appressed</b>
-. stem green
+iNaturalist is in the process of changing the North American observations of U. dioica to U. gracilis.
 
-==hoary nettle:U. gracilis ssp. holosericea
-sci_Ffpj:Urtica dioica ssp. holosericea
-member:slender stinging nettle:Urtica gracilis
-color: other
-xx:ca
+==slender stinging nettle:Urtica gracilis
 . 50--300 cm tall
 . leaf blade 6--20 cm
 . inflorescence raceme- or panicle-like, generally > petiole
-. non-stinging hairs on abaxial leaf veins <b>erect</b>
-. stem gray-green[?]
+. fruit ovate
 
 ==dwarf nettle:U. urens
+sci_F: n/a
 . 10--60(90) cm tall
 . leaf blade 1.8--4(6) cm
 . inflorescence generally +- head- or spike-like, often < petiole
+. fruit deltate

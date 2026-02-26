@@ -11,6 +11,7 @@ Key features:
 ==yellow star-thistle:C. solstitialis
 color: yellow
 . disk flower corolla <b>13--20 mm</b>
+. involucre hairy
 . spines <b>straw colored</b>, 10--25 mm
 . stem branched distally or throughout, winged
 . common
@@ -25,6 +26,7 @@ color: yellow
 ==sicilian star-thistle:C. sulphurea
 https://calphotos.berkeley.edu/cgi/img_query?enlarge=0175+3301+2288+0062
 . disk flower corolla <b>25--30 mm</b>
+. <b>involucre so glabrous, it's shiny</b> ^https://www.inaturalist.org/observations/30226206#activity_comment_b1eb55b4-c8b5-48ff-802d-b17c3904b124
 . spines straw-colored or proximally purple-black, 10--25 mm
 . stem simple or openly branched, winged
 . Castle Rock
