@@ -1,0 +1,11 @@
+com:redstem springbeauty
+sci: Claytonia rubra
+
+==rosetted springbeauty:ssp. depressa
+color: white, pink
+. base of basal leaves wedge shaped
+.. petioles often red, but not whole plant
+
+==redstem springbeauty:ssp. rubra
+. base of basal leaves +- truncate
+.. petioles or whole plant often red

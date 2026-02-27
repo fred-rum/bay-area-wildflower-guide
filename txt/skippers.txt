@@ -13,6 +13,6 @@ x:ca
 bug:9577
 x:more
 
-==northern cloudywing:Thorybes pylades
+==northern cloudywing:Cecropterus pylades
 bug:12861
 x:ba

@@ -5,6 +5,6 @@ x:ca
 . cinnamon wash on underparts
 . indistinct stripes on crown and through eye
 
-==whimbrel:N. phaeopus
+==hudsonian whimbrel:N. hudsonicus
 . grayish underparts
 . distinct stripes on crown and through eye

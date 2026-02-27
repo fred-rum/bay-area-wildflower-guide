@@ -1,2 +1,2 @@
-==n/a:Ampedus cordifer
+==valentine elater:Ampedus cordifer
 bug:9447

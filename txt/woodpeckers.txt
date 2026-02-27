@@ -10,3 +10,5 @@ x:ba
 x:ca
 
 ==dryobates woodpeckers
+
+==hairy woodpecker:Leuconotopicus villosus

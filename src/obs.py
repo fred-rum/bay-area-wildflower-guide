@@ -61,7 +61,9 @@ def read_ignore_species(f):
         # Keep only the first character ('+' or '-') and ignore the comment.
         sci_ignore[sci] = sci_ignore[sci][0]
 
-        if sci in isci_page:
+        if sci in gsci_page:
+            page = gsci_page[gall_code]
+        elif sci in isci_page:
             page = isci_page[sci]
         else:
             page = find_page1(sci)
@@ -116,8 +118,10 @@ def read_obs_chains(f):
                 page = gsci_page[gall_code]
                 found_lowest_level = True
             else:
-                print(f'observed {gall_code} matches no page')
-                continue # !@# temporary
+                # We don't recognize the gall code, but we don't have enough
+                # information to complain about it yet.  E.g. we haven't read
+                # sci_ignore yet.  We'll complain later if appropriate.
+                continue
 
         with Progress(f'Read taxonomy chain from observations.csv, line {csv_reader.line_num} for {com} ({sci})'):
             # Get an unambiguous rank from the core data if possible.
@@ -298,10 +302,13 @@ def read_observation_data(f):
         page = None
 
         if gall_code:
-            if gall_code in gsci_page:
+            if gall_code in sci_ignore:
+                continue
+            elif gall_code in gsci_page:
                 page = gsci_page[gall_code]
                 found_lowest_level = True
             else:
+                print(f'observed {gall_code} matches no page')
                 continue # !@# temporary
 
         if not page:

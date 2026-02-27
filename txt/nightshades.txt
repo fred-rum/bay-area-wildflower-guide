@@ -91,7 +91,7 @@ acom:douglas nightshade
 [
 <h4>Style weakly exerted at most</h4>
 
-==black nightshade:S. nigrum
+==european black nightshade:S. nigrum
 color: white
 taxon_id:79141
 . infloresecnce rarely forked

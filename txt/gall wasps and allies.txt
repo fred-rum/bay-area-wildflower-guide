@@ -38,7 +38,7 @@ bug:14738
 ==nodular gall wasp
 
 # bramble galls
-==thimbleberry gallmaker
+==thimbleberry gall wasp
 
 # cat's-ear galls
 ==cat's-ear galls

@@ -98,6 +98,7 @@ xx:ca
 . very rare
 
 ==wright's buckwheat:E. wrightii
+color: white, pink, salmon
 . [this interpretation of Jepson is incorrect, but I haven't figured out the correct interpretation yet]
 . <b>flowers are individual</b>
 . flowers only at inflorescence branch tips

@@ -107,6 +107,7 @@ species: deerbrush ceanothus
 <h2>leaves alternate, 3-ribbed from base</h2>
 
 ==tobacco brush:C. velutinus
+color: white
 . twig: green to red-brown, <b>flexible</b>
 . leaf blade:
 .. <b>33--75 mm long, 13--55 mm wide</b>, leathery

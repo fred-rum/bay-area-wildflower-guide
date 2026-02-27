@@ -322,7 +322,7 @@ head & leaves:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+110
 . leaflets entire
 . rare
 
-==arrowleaf clover:T. vesiculosum
+==arrowleaf clover:T. vessiculosum
 head:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0108+1376
 leaves:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0108+1377
 . calyx glabrous, lobes lobes straight to curved, +- equal

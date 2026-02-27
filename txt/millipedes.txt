@@ -16,3 +16,9 @@ x:ba
 
 ==n/a:Xystocheir dissecta
 bug:97691
+
+==n/a:genus Tylobolus
+bug:272011
+. 42--54 body rings
+. eyes have more than twice the eye width between them ^https://www.bugguide.net/node/view/272011
+. Tylobolus differs from Hiltonius by having more ocelli per eye (27--50)

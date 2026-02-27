@@ -1,2 +1,1 @@
-==common earthworm:Lumbricus terrestris
-x:ba
+==field worms:genus Octolasion

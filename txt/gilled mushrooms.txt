@@ -51,6 +51,7 @@ x:more
 ==deceivers:genus Laccaria
 
 ==deer mushrooms:genus Pluteus
+acom:shields # iNaturalist can't decide which common name applies
 
 ==honey mushrooms:genus Armillaria
 

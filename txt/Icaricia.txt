@@ -4,7 +4,7 @@ sci_b: genus Plebejus
 bug:9674
 x:rare
 
-This genus is in often studied and therefore often rearranged.
+This genus is often studied and therefore often rearranged.
 
 ==acmon blue:Icaricia acmon
 sci_b:Plebejus acmon

@@ -1,0 +1,10 @@
+sci: genus Spinus
+x:ca
+
+==lesser goldfinch:Spinus psaltria
+
+==american goldfinch:Spinus tristis
+
+==pine siskin:Spinus pinus
+
+==lawrence's goldfinch:Spinus lawrencei

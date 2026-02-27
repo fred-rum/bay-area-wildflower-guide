@@ -86,7 +86,8 @@ color: white, pale purple
 [
 <h3>1--3 flowers, 4--10 leaflets</h3>
 
-==smooth tare:V. tetrasperma
+==lentil vetch:V. tetrasperma
+acom:smooth tare
 color: pale purple
 . generally 1--3 flowers, at tip
 . peduncle 1--3 cm
@@ -119,7 +120,3 @@ The following species are reported in the bay area, but are considered waifs by 
 . V. faba
 
 See also {-sweet peas and vetchlings}.
-
-Rb 37
-Pm 61
-Cl 17

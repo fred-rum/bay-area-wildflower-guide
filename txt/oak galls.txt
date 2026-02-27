@@ -101,7 +101,7 @@ bug:362731
 gall:1365
 . forms on leaf surfaces and petioles of {-white oaks}
 
-==spined turban gall wasp:Cynips douglasii
+==spined turban gall wasp:Antron douglasii
 sci_bg: Antron douglasii
 bug:81122
 gall:1607

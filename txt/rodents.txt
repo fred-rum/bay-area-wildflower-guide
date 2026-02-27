@@ -6,7 +6,7 @@ x:ba
 
 ==western chipmunks:Neotamias spp.
 
-==botta's pocket gopher:Thomomys bottae
+==botta's pocket gopher:Megascapheus bottae
 x:ba
 
 ==california vole:Microtus californicus

@@ -6,7 +6,8 @@ convenience.
 ==western yellowjacket:Vespula pensylvanica
 bug:12981
 
-==alaska yellowjacket:Vespula alascensis
+==american yellowjacket:Vespula alascensis
+acom:alaska yellowjacket
 bug:14087
 
 ==typical paper wasps

@@ -2,7 +2,7 @@ sci:n/a
 
 <a href="https://homeguides.sfgate.com/identify-shrews-moles-voles-52759.html">ID tips</a>
 
-==broad-footed mole:Scapanus latimanus
+==northern broad-footed mole:Scapanus latimanus
 x:ba
 . thick, velvety fur; dark brown to silvery
 . +-6-inch body, 1-inch hairless [sparsely hairy] tail

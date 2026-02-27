@@ -131,7 +131,7 @@ color: yellow, red
 . corolla 8--10 mm, generally <b>white to +- pink</b> (to brick-red when dry, wings cream), often dark-striate, in clusters of 3--10
 . Butano, Mt. Montara vicinity
 
-==round leaved heermann's lotus:A. heermannii var. orbicularis
+==round-leaved heermann's lotus:A. tomentosus var. tomentosus
 sci_fj:Acmispon tomentosus var. tomentosus
 color:yellow
 xx:ba

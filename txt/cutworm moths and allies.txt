@@ -1,7 +1,8 @@
 sci:family Noctuidae
 
-==dagger moths:genus Acronicta
-bug:322
+==powdered dagger:Acronicta impleta
+genus:dagger moths
+bug:393
 
 ==elder moth:Zotheca tranquilla
 genus:n/a

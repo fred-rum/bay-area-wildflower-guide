@@ -7,6 +7,6 @@ California Herps has a key to the <a href="https://californiaherps.com/snakes/pa
 . east of the Santa Cruz mountains (but in the flat lands west of the bay)
 xx:none
 
-==forest sharp-tailed snake:Contia longicaudae
+==forest sharp-tailed snake:Contia longicauda
 . in the Santa Cruz mountains
 xx:none

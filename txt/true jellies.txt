@@ -1,5 +1,5 @@
 sci:class Scyphozoa
 
-==pacific sea nettle:Chrysaora fuscescens
+==golden sea nettle:Chrysaora fuscescens
 
 ==egg-yolk jelly:Phacellophora camtschatica

@@ -96,7 +96,7 @@ generally with leafy axillary shoots below terminal inflorescence (<a href="http
 A larger leaf sprouts at the base of each branch.  Small leaves may also be intermixed with flowers.
 
 ==california dock:R. californicus
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0805+1322
+color: white
 . generally with leafy axillary shoots below terminal inflorescence
 . no perianth tubercles
 . scattered in east bay

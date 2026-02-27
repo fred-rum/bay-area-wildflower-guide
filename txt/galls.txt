@@ -124,3 +124,6 @@ rep:olive
 
 ==brodiaea galls
 rep:ithuriel's spear,1
+
+==huckleberry galls
+rep:Exobasidium v-ovatum-galls-from-taxon-split

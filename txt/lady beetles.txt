@@ -24,8 +24,12 @@ bug:3543
 
 ==asian lady beetle:Harmonia axyridis
 bug:397
+. highly variable
+. commonly with 18 spots, but individual spots may be merged or missing
+. if the spots are ambiguous, the head and pronotum should help distinguish
 
 ==spotless lady beetles:genus Cycloneda
 
-==three-banded lady beetle:Coccinella trifasciata
-bug:414905
+==pacific three-banded lady beetle:Coccinella trifasciata ssp. subversa
+bug:98692
+xx:ba
