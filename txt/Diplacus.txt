@@ -21,7 +21,7 @@ https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0110+0798
 
 ==purple mouse ears:D. douglasii
 sci_p:Mimulus douglasii
-https://www.calflora.org/cgi-bin/noccdetail.cgi?seq_num=io1310
+color: purple
 . herb
 . 2 corolla limbs, bilateral, each 10--18 mm wide (3 more corolla limbs are stumpy)
 . calyx 8--14 mm, hairy
