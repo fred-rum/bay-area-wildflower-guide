@@ -1,0 +1,5 @@
+sci: n/a
+ignore_link: self
+
+==ninebark powdery mildew:Podosphaera physocarpi
+. grows on leaves of {-pacific ninebark}

@@ -1,0 +1,6 @@
+sci: family Cephidae
+
+Despite their common name, sawflies are a type of wasp, so called because of their saw-like ovipositors.  The larvae bore into stems, especially of grasses, and eat them from the inside.  They are a problem for grain crops, particarlly since pesticides cannot reach them in their hidey holes.
+
+==n/a:genus Phylloecus
+bug: 303152

@@ -62,6 +62,9 @@ rep:sticky cinquefoil
 ==bramble galls
 rep:brambles
 
+==ninebark galls
+rep:pacific ninebark
+
 ==toyon galls
 rep:toyon
 

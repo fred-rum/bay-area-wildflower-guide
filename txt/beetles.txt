@@ -20,16 +20,11 @@ There is a <a href="beetle-glossary.html">glossary</a> for beetles.
 
 ==darkling beetles:family Tenebrionidae
 
-==drugstore beetle:Stegobium paniceum
-bug:40237
-
 ==tumbling flower beetles:family Mordellidae
 
 ==checkered beetles:family Cleridae
 
 ==soldier beetles:family Cantharidae
-
-==carpet beetles:genus Anthrenus
 
 ==scarabs:family Scarabaeidae
 
@@ -38,3 +33,11 @@ bug:40237
 ==soft-winged flower beetles:family Melyridae
 
 ==fruitworm beetles:family Byturidae
+
+==carpet beetles:genus Anthrenus
+
+==drugstore beetle:Stegobium paniceum
+bug:40237
+
+==california night-stalking tiger beetle:Omus californicus
+bug:260232

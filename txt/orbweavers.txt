@@ -17,3 +17,6 @@ x:more
 
 ==n/a:genus Metepeira
 bug:26091
+
+==bordered orbweaver:Larinioides patagiatus
+bug:120977

@@ -50,7 +50,7 @@ Flower key features:
 
 Stanford's Jasper Ridge program has a <a href="https://web.stanford.edu/dept/JRBP/plants/PDF/Solanum%20key.pdf">key (PDF)</a> for some white-flowered nightshades.  Much more information about useful and non-useful features are in a free <a href="https://phytokeys.pensoft.net/article/31738/">research article</a> by Knapp et al.
 
-The inflorescence typically has its flowers branching from a very short rhachis (axis), although occasionally they can be spaced out more.  Jepson and Stanford pretend to distinguish raceme-like and umbel-like inflorescences, but there appears to be no consistent difference.  The inflorescence is usually distinctly forked in {-forked nightshade), but other species may also rarely be forked.
+The inflorescence typically has its flowers branching from a very short rhachis (axis), although occasionally they can be spaced out more.  Jepson and Stanford pretend to distinguish raceme-like and umbel-like inflorescences, but there appears to be no consistent difference.  The inflorescence is usually distinctly forked in {-forked nightshade}, but other species may also rarely be forked.
 
 Jepson and Stanford both list deceptive corolla widths which I have corrected according to my observations and Knapp.  I've copied the anther lengths from Jepson, but have not yet attempted to verify their ranges.
 

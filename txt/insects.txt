@@ -12,6 +12,8 @@ rep:hover flies # don't use gall midges for representative thumbnail
 
 ==common sawflies
 
+==stem sawflies
+
 ==ants
 
 ==beetles

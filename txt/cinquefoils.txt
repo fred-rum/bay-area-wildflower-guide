@@ -2,6 +2,8 @@ sci:genus Potentilla
 
 x:rare
 
+Note that the common {-sticky cinquefoil} is in another genus.
+
 ==mock strawberry:P. indica
 sci_fpP: Duchesnea indica
 sci_Fj: Duchesnea indica var. indica

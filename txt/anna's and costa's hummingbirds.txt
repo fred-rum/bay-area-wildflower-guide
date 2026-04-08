@@ -4,6 +4,8 @@ x:any
 ==anna's hummingbird:Calypte anna
 . scarlet none#throat
 . by far the most common hummingbird in the bay area
+. expanding its range to take advantage of feeders and non-native flowers ^https://en.wikipedia.org/wiki/Anna%27s_hummingbird#Northern_range_expansion
+.. other hummingbird species are declining due to disruptions in food supply ^https://www.youtube.com/watch?v=-j9ZSmvoicM&t=39
 
 ==costa's hummingbird:Calypte costae
 . purple none#throat

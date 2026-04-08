@@ -1,0 +1,4 @@
+sci: family Erysiphaceae
+
+==n/a:genus Podosphaera
+. grows on leaves of various members of the {-rose family}

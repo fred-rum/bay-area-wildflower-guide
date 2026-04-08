@@ -65,33 +65,34 @@ color: purple
 . anthers dark purple
 . stigma lobes red-purple
 
+]
+[
+<h2>petal tips barely notched</h2>
+
 ==solander's geranium:G. solanderi
 color: pale purple
 . stem hairs spreading to reflexed, not appressed, non-glandular
 . leaf blade 1.4--5.7 cm wide, divided 45--85% to base
 . 5--7 leaf segments, obtriangular
 . petals 3--8.1 mm, rounded, +- purple
-. pedicel 8--34 mm, hairs spreading or reflexed, not appressed, 0.2--2 mm
+. pedicel 8--34 mm, <b>hairs spreading or reflexed, not appressed</b>, 0.2--2 mm
 . anthers cream colored
 . stigma lobes cream colored
 
-]
-[
-<h2>petal tips barely notched</h2>
 ==alderney crane's-bill:G. core-core
 color: purple
 . stem hairs sparse, stiff, reflexed, appressed
 . leaf blade 1.5--5.6 cm wide, divided 55--80% to base
 . 5--7 leaf segments, broadly wedge-shaped
 . petals 3.1--7.1 mm, rounded or +- notched, purple
-. pedicel 11--31 mm, hairs reflexed, appressed, 0.2--0.6 mm
+. pedicel 11--31 mm, <b>hairs reflexed, appressed</b>, 0.2--0.6 mm
 . anthers cream colored
 . stigma lobes cream colored
 
 ==new zealand geranium:G. retrorsum
 sci_j:n/a
 . appears in CalFlora, but not described by Jepson
-. likely to be misidentified {-Geranium core-core} (<a href="https://ucjeps.berkeley.edu/eflora/eflora_display.php?tid=81114">source1</a>, <a href="https://montereywildflowers.com/geraniaceae-geranium/">source2</a>)
+. <b>likely to be misidentified</b> {-Geranium core-core} (<a href="https://ucjeps.berkeley.edu/eflora/eflora_display.php?tid=81114">source1</a>, <a href="https://montereywildflowers.com/geraniaceae-geranium/">source2</a>)
 . SF Presidio, Twin Peaks, and urban Berkeley
 
 ]

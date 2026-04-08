@@ -9,6 +9,8 @@ Key features:
 
 Although the leaves have general difference, there is enough variety within a species to make them difficult to use as diagnostic tools.  In addition, some of the characteristics described by Jepson cannot be seen in CalPhotos.
 
+Many species may host a powdery mildew from {-genus Podosphaera}.
+
 ==himalayan blackberry:R. armeniacus
 color: white
 <b>Caution:</b> there are two species called himalayan blackberry, but only one of them is found in the bay area.
@@ -66,7 +68,7 @@ color: white
 .. all others are thread-like to linear, <= 1 mm wide
 . sepals hairy, stalked-glandular [example,2]
 . fruit: <b>raspberry-type</b> (hollow when picked), <b>red</b>
-. hosts {-thimbleberry gall wasp}
+. hosts {-thimbleberry gall wasp} and {-Dasineura r-parviflorus-fold-gall}
 ;Edibility: The fruit has a sweet and pleasant flavor, although it is very seedy. ^https://pfaf.org/User/Plant.aspx?LatinName=Rubus+parviflorus
 
 ==thornless elmleaf blackberry:R. ulmifolius var. anoplothyrsus

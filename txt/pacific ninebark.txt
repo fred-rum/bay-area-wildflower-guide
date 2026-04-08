@@ -3,3 +3,5 @@ color:white
 
 genus: ninebarks
 x:ba
+
+. hosts {-Podosphaera physocarpi}

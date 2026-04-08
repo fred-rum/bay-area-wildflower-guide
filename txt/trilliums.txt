@@ -22,7 +22,7 @@ color: red purple, red, cream
 . other parts are highly variable in color
 
 ==giant white wakerobin:T. albidum
-https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0307+1188
+color: white
 . flower is sessile
 . <b>stamens and ovary are +- white</b>
 . other parts are highly variable in color

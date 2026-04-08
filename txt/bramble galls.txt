@@ -12,4 +12,11 @@ gall:1027
 sci_i:n/a
 bug:n/a
 gall:2612
-. forms on leafs of {-thimbleberry}
+. forms on leaves of {-thimbleberry}
+
+
+==n/a:Podosphaera rubi-spectabilis
+. grows on leaves of {-california blackberry} and {-salmonberry}
+
+==n/a:Podosphaera ruborum
+. grows on leaves of other {-brambles}

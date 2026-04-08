@@ -1,0 +1,10 @@
+sci:genus Podosphaera
+
+==n/a:Podosphaera rubi-spectabilis
+. grows on leaves of {-california blackberry} and {-salmonberry}
+
+==n/a:Podosphaera ruborum
+. grows on leaves of other {-brambles}
+
+==ninebark powdery mildew:Podosphaera physocarpi
+. grows on leaves of {-pacific ninebark}
