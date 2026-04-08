@@ -5,6 +5,6 @@ bug:44395
 bug:102853
 x:ca
 
-==n/a:genus Ozophora
-bug:44400
+==n/a:Ozophora occidentalis
+bug:2085356
 x:more

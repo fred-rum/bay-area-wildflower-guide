@@ -19,3 +19,7 @@ genus:n/a
 bug:250040
 . due to color variation, hard to ID to species from photos ^https://bugguide.net/node/view/12233
 . ID here based partially on recorded range
+
+==n/a:Ectopiocerus anthracinus
+genus:n/a
+bug:244976

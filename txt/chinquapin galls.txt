@@ -1,7 +1,7 @@
 sci: n/a
 ignore_link: self
 
-==chinquapin flower gall wasp:Dryocosmus castanopsidis
+==chinquapin flower gall wasp:Chrysolepicynips castanopsidis
 bug:n/a
 gall:1732
 . forms on flowers of {-golden chinquapin}

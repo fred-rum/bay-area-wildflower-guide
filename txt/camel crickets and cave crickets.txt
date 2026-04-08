@@ -1,7 +1,7 @@
 xcom: camel crickets, cave crickets, and cave wēta
 sci:family Rhaphidophoridae
 
-==n/a:genus Gammarotettix
+==chaparral camel crickets:genus Gammarotettix
 bug:153791
 
 ==n/a:genus Pristoceuthophilus

@@ -4,3 +4,6 @@ x:more
 
 ==conical trashline orbweaver:Cyclosa conica
 bug:38514
+
+==humped trashline orbweaver:Cyclosa turbinata
+bug:39033
