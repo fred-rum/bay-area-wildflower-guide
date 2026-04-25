@@ -114,6 +114,7 @@ color: white, pale purple
 color: pale purple, red purple, purple
 . leaf 2--3, +- cylindric
 . pedicels 7--15 mm
+.. [flowers all crowded]
 . common
 
 ==coastal onion:A. dichlamydeum
@@ -127,6 +128,7 @@ color: pale purple, red purple, purple
 color: purple
 . leaf 2--3, channeled to +- cylindric
 . pedicels 8--40 mm
+.. [flowers less crowded]
 . inner perianth parts entire to dentate
 . common on peninsula, present in Henry Coe
 

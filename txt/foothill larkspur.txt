@@ -4,6 +4,8 @@ xx:ba
 ==western larkspur:ssp. hesperium
 color: purple
 . purple flowers
+. sepals dark blue-purple
 
 ==pale-flowered western larkspur:ssp. pallescens
 . white flowers, tinged with pink or purple
+. sepals white, light purple, or light blue

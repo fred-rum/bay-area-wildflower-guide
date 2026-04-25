@@ -22,4 +22,5 @@ bug:250040
 
 ==n/a:Ectopiocerus anthracinus
 genus:n/a
+x:any
 bug:244976

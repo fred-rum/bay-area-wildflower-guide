@@ -9,5 +9,7 @@ x:ba
 bug:3242
 x:ba
 
-==n/a:genus Lophocampa
-bug:5240
+==painted tiger moth:Arachnis picta
+bug:35201
+
+==genus Lophocampa

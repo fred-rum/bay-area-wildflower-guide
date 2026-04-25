@@ -1,3 +1,5 @@
+com:n/a
+bug:5240
 x:ba
 
 ==spotted tussock moth:Lophocampa maculata

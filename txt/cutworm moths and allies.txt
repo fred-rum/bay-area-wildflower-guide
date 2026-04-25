@@ -9,3 +9,8 @@ genus:n/a
 bug:42776
 x:any
 . caterpillar nest in and feed on {-elders}
+
+==small heliothodes moth:Heliothodes diminutiva
+genus:n/a
+bug:113958
+x:any

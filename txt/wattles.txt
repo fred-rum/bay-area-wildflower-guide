@@ -3,7 +3,7 @@ x:!more
 
 do disable_obs_promotion_checks_from_needs_id: species # I don't trust some IDs
 
-We have just about all (~14) California species in the bay area.  The Jepson key is fairly straightforward, so I won't bother to replicate the key here.
+Wattles are native to Australia.  Of those species established in California, we have just about all (~14) of them in the bay area.  The Jepson key is fairly straightforward, so I won't bother to replicate the entire key here.
 
 Key features:
 . simple leaves:
@@ -70,3 +70,5 @@ color: cream
 . very common, especially in the outer coastal range
 
 ]
+
+Edibility: Not all species have been tested for safety.  All tested species contain trypsin inhibitors in the seeds, which prevent digestion of protein.  Roasting the seeds improves their digestibility. ^https://www.youtube.com/watch?v=SPKkfUuiZPg

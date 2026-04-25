@@ -35,3 +35,6 @@ bug:22574
 
 ==western leafcutter bee:Megachile perihirta
 bug:104963
+
+==bindweed turret bee:Diadasia bituberculata
+bug:105425

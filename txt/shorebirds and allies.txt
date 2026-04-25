@@ -7,6 +7,8 @@ x:more
 
 ==black-necked stilt:Himantopus mexicanus
 x:ca
+. the local subspecies is the northern black-necked stilt ssp. <i>mexicanus</i>
+.. people on iNaturalist don't tend to use that ID, possibly because various authorities disagree on whether it is distinct
 
 ==black oystercatcher:Haematopus bachmani
 x:ba

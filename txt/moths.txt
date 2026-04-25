@@ -1,6 +1,6 @@
 sci:n/a
 
-Moths aren't all in the same clade.
+Because butterflies are descended from moths, moths (excluding butterflies) aren't all in the same clade.
 
 ==*clark's sphinx:Proserpinus clarkiae
 bug:65845

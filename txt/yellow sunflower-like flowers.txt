@@ -13,7 +13,7 @@ See also {-yellow daisies} and {-white daisies} for similar plants with smaller 
 
 ==balsamroot
 
-==wedding treasureflower:Gazania linearis
+==garden treasure flower:Gazania Xsplendens
 color: orange
-x:ca
+x:more
 genus: treasure flowers
