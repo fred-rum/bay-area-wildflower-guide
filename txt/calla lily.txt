@@ -3,3 +3,5 @@ color: white
 
 genus: calla lilies
 x:ca
+
+The name comes from Greek/Latin, not Spanish, so the "ll" is pronounced as in English.

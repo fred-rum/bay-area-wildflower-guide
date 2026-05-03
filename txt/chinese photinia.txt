@@ -1,0 +1,4 @@
+sci:Photinia serratifolia
+sci_jp: n/a
+color:white
+x:ca

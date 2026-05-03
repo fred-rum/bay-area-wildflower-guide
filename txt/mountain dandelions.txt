@@ -8,16 +8,15 @@ Key features:
 . petiole color
 . growing in sand or not
 
-<h2>slender taproot</h2>
+<h2>petals >= 6 mm long</h2>
 
 ==annual agoseris:Agoseris heterophylla
 . slender taproot
 .. all others have a stout taprout
+. generally 2--5 pairs of leaf lobes
 . [Jepson claims it is often leafy above the base, but I can find no photos that show this]
 .. all others have only basal leaves
 . petiole not purple
-
-<h2>petals >= 6 mm long</h2>
 
 ==coast range agoseris:A. hirsuta
 color:yellow

@@ -28,3 +28,9 @@ x:more
 ==golden copperback:Ferdinandea croesus
 bug:574568
 x:ca
+
+==white-bowed smoothwing:Scaeva affinis
+bug:7262
+x:ca
+. halo of dense fuzz around the eyes
+.. resembles Eupeodes volucris, which has no hair around the eyes
