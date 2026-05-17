@@ -65,11 +65,19 @@ color: other
 . perianth green to yellow-green
 . <b>lower sepals spreading</b>
 
+==narrow-petaled rein-orchid:P. leptopetala
+color: other
+. spur 4--9 mm, curved, pointed down
+. perianth green
+. lateral petals linear, 1 mm wide at base, 4--5&times; longer than wide
+. so far only a few observations in Henry Coe
+
 ==denseflower rein orchid:P. elongata
 sci_Ffjp:Piperia elongata
 . spur 6.5--18 mm, slender, curved down along flower stalk
 . perianth green
 . <b>lower sepals +- reflexed</b>
+. lateral petals +- sickle-shaped, 2 mm wide at base, 2--3&times; longer than wide
 
 ==alaska rein orchid:P. unalascensis
 sci_Ffjp:Piperia unalascensis

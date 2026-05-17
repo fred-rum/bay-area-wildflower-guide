@@ -5,12 +5,26 @@ There are other sand spurries in the bay area, but I'm hesitant to include them 
 
 Jepson lists the lower main stem diameter as a distinguishing characteristic, but my experience is that it is wrong.  It is therefore unclear how to distinguish species except by location.  FNA says that "Spergularia is a difficult genus in which emphasis on seed characters appears necessary."
 
+==red sand spurrey:S. rubra
+color: pale purple
+. base of stem not woody
+. flower lobes 2--3.2 mm long
+. 6--10 stamens
+. 2--4+ leaves per axillary cluster
+.. leaves barely fleshy
+.. stipules generally 3.5--5 mm, <b>shiny, white, conspicuous</b>
+. common
+
 ==sticky sand-spurrey:S. macrotheca
 . <b>base of stem woody</b>
-. 0--2+ leaves per axillary cluster
+. flower lobes 4.5--7 mm long
+. 9--10 stamens
+. 0--2+ per axillary cluster
+.. leaves fleshy
+.. stipules 4.5--11 mm, +- hairy, dull white to tan
 . calyx lobes 4.5--7 mm
 . styles 0.6--3 mm
-. varieties can be distinguished by flower color and style length (measure precisely!)
+. common
 
 ==hairy sandspurry:S. villosa
 . <b>base of stem woody</b>
@@ -22,14 +36,6 @@ Jepson lists the lower main stem diameter as a distinguishing characteristic, bu
 . base of stem not woody
 . <b>2--5 stamens</b>
 .. all others have 6--10
-
-==red sand spurrey:S. rubra
-color: pale purple
-. base of stem not woody
-. 2--4+ leaves per axillary cluster
-.. leaves barely fleshy
-.. stipules generally 3.5--5 mm, <b>shiny, white, conspicuous</b>
-. common
 
 ==boccone's sand spurry:S. bocconei
 acom:greek sea-spurrey

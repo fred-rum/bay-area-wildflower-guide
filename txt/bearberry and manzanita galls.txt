@@ -27,3 +27,11 @@ sci_i:n/a
 gall:4548
 . discolors entire shoots (branch and all leaves) of {-bearberries and manzanitas}
 . see {-genus Exobasidium} for discussion
+
+==n/a:Unknown a-rainbowensis-leaf-blister
+sci_i:n/a
+gall:4531
+. forms between leaf veins of {-bearberries and manzanitas}
+.. bulges on <b>both</b> sides of the leaf
+.. rainbow coloration on and around the bulge
+. believed to be in Cecidomyiidae

@@ -93,3 +93,8 @@ x:ca
 .. inner phyllaries all the same length, extending partway out the spread petals
 . ligules yellow, drying +- blue
 .. may be reddish-brown tipped, especially underneath
+
+==hairy hawkbit:Leontodon saxatilis
+color: yellow
+genus: hawkbits
+x: rare

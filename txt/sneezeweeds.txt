@@ -1,4 +1,4 @@
-sci:Helenium spp.
+sci:genus Helenium
 x:ba
 
 Key features:
@@ -11,6 +11,7 @@ color: yellow
 . 300--500 disk flowers, 1.9--2.7 mm
 . 13--15 rays (ocassionally 0), <b>3.8--10 mm</b>
 . very common
+Per Merriam-Webster, the name is pronounced in an English way, "rozilla" or "rosilla", or in a Spanish way, "roseeya".
 
 ==bigelow's sneezeweed:H. bigelovii
 . stem winged by decurrent leaf bases

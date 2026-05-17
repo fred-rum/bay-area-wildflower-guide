@@ -11,9 +11,19 @@ Although the leaves have general difference, there is enough variety within a sp
 
 Many species may host a powdery mildew from {-genus Podosphaera}.
 
-==himalayan blackberry:R. armeniacus
+==california blackberry:R. ursinus
 color: white
-<b>Caution:</b> there are two species called himalayan blackberry, but only one of them is found in the bay area.
+. plant: prostrate to decumbent
+. prickles: <b>weak, slender</b>, straight
+. stem: 2--10 mm diam, <b>not angled</b>, +-glabrous to hairy, +-with stalked glands, glaucous
+. leaf: simple or compound, leaflets 3(5), gray-hairy abaxially
+. sepals: hairy, <b>prickly</b>, +-with stalked glands [example,2]
+. fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
+;Edibility: The fruit is sweet and tasty when fully ripe, but can be quite tart if any parts are red.
+
+==armenian blackberry:R. armeniacus
+acom:himalayan blackberry
+color: white
 . plant: to 3 m, arched to mounded
 . prickles: many, <b>stout, wide-based</b>, straight or curved
 . stem: to 20(25) mm diam, <b>5-angled</b>, finely hairy or generally glabrous, not glaucous
@@ -44,16 +54,6 @@ color:red purple
 .. all others are white
 . fruit: raspberry-type, +- yellow to orange to red
 ;Edibility: Ripe (yellow-orange or red) fruit is tender and sweet. ^https://pfaf.org/user/plant.aspx?LatinName=Rubus+spectabilis
-
-==california blackberry:R. ursinus
-color: white
-. plant: prostrate to decumbent
-. prickles: <b>weak, slender</b>, straight
-. stem: 2--10 mm diam, <b>not angled</b>, +-glabrous to hairy, +-with stalked glands, glaucous
-. leaf: simple or compound, leaflets 3(5), gray-hairy abaxially
-. sepals: hairy, <b>prickly</b>, +-with stalked glands [example,2]
-. fruit: <b>blackberry-type</b> (not hollow when picked), <b>black</b>
-;Edibility: The fruit is sweet and tasty when fully ripe, but can be quite tart if any parts are red.
 
 [
 <h2>no prickles</h2>
