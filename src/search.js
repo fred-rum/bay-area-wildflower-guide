@@ -1719,6 +1719,9 @@ function init_traits() {
         is_subset: false, /* may be modified below */
       };
       trait_info.set(trait_name, info);
+      if (trait_name == 'native') {
+        trait_info.set('native or endemic', info);
+      }
     }
   }
 
@@ -2202,7 +2205,15 @@ class TraitTerm extends TextTerm {
 
   result_match(page_info, past_trip_set, current_trip_set) {
     const trait = this.match_str;
-    if (page_info.trait_set.has(trait)) {
+
+    if (trait == 'native or endemic') { /* special case */
+      var match = (page_info.trait_set.has('native') ||
+                   page_info.trait_set.has('endemic'));
+    } else {
+      var match = page_info.trait_set.has(trait);
+    }
+
+    if (match) {
       for (const trip of past_trip_set) {
         past_trip_set.delete(trip);
         current_trip_set.add(trip);
