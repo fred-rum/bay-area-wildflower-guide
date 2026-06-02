@@ -186,7 +186,6 @@ color:white
 
 ==reversed clover:T. resupinatum
 color: pale purple
-calyx inflated:https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0709+0267
 . calyx inflated in fruit
 . very rare & waif
 

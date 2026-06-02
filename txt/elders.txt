@@ -3,14 +3,15 @@ x:ca
 
 There is a general difference between the leaves (blue elder is bowed), but it is not consistent enough to be used for identification.
 
-==blue elder:S. cerulea
-sci_fpj:Sambucus nigra ssp. caerulea
+==blue elderberry:S. mexicana
+sci_p:Sambucus nigra ssp. caerulea
 rep: ,2
 color: white, cream, yellow
 xx:ca
 . <b>inflorescence +- flat-topped</b>, central axis generally not dominant
 . petals +- spreading
 . <b>glaucus blue berries</b>
+The scientific name for our local specimens keeps changing.
 
 ==pacific red elderberry,3:S. racemosa var. microbotrys
 sci_fpj: S. racemosa var. racemosa
