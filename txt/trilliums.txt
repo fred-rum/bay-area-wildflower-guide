@@ -6,13 +6,13 @@ Key features:
 . color of the 6 stamens (which are quite large and linear)
 
 ==western trillium:T. ovatum var. ovatum
-sci_jfp:ssp. ovatum
+sci_jfp:Trillium ovatum
 color: white, pale purple
 species: pacific trillium
 xx:ba
 . <b>flower is stalked</b>
 . stamens are yellow or +- white
-. the local subspecies is ssp. ovatum
+. <b>leaf tip acute to acuminate</b>
 See also {-california fetid adderstongue}.
 
 ==giant wakerobin:T. chloropetalum
@@ -20,10 +20,12 @@ color: red purple, red, cream
 . flower is sessile
 . <b>stamens and ovary are dark purple</b>
 . other parts are highly variable in color
+. leaf tip routed to obtuse
 
 ==giant white wakerobin:T. albidum
 color: white
 . flower is sessile
 . <b>stamens and ovary are +- white</b>
 . other parts are highly variable in color
+. leaf tip routed to obtuse
 If the stamen and ovary colors differ, <a href-"https://www.inaturalist.org/observations/40189428">some</a> on iNaturalist claim that the ovary color determines the species, but Jerpson says the anther color determines, and <a href="http://floranorthamerica.org/Trillium_chloropetalum">FNA</a> simply says that a range of intergrade hybrids exist.  The direction of anther dehiscence may be the correct identifier, but I can't tell the difference in photos.

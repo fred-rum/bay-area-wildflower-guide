@@ -11,6 +11,7 @@ California Herps has a key to the <a href="http://www.californiaherps.com/identi
 xx:ba
 
 ==aquatic garter snake:T. atratus
+. only local garter that can have a rich golden dorsal stripe^https://www.inaturalist.org/observations/11351245#identification-d8b6cfb5-cce1-4de6-bb3e-640c7b5d6a56
 
 ==common garter snake:T. sirtalis
 . uncommon

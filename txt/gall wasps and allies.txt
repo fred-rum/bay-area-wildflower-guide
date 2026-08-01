@@ -22,6 +22,7 @@ bug:14738
 ==honeydew gall wasp
 ==pumpkin gall wasp
 ==disc gall wasp
+==Feron izabellae
 ==Feron amphorus
 ==irregular spindle gall wasp
 ==fuzzy gall wasp

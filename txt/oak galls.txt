@@ -145,16 +145,21 @@ bug:81140
 gall:1516
 . forms on leaf undersurfaces of {-white oaks}
 
-==yellow wig gall wasp:Druon fullawayi
-bug:80956
-gall:1380
-. forms on leaf midribs and petioles of {-white oaks}
+==pink bow-tie gall wasp:Feron izabellae
+bug: 2323775
+gall: 1871
+. forms on leaf undersurfaces of {-white oaks}
 
 ==n/a:Feron amphorus
 sci_b: Andricus amphorus # and also Feron amphorus?  bugguide is weird here
 bug:2099732
 gall:1733
 . forms on leaves of {-white oaks}, usually near the edge
+
+==yellow wig gall wasp:Druon fullawayi
+bug:80956
+gall:1380
+. forms on leaf midribs and petioles of {-white oaks}
 
 
 <h2>galls on multiple types of oaks</h2>

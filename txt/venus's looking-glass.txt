@@ -1,0 +1,6 @@
+sci:Triodanis biflora
+color: purple
+x:ba
+
+. base of leaf/bract base not clasping stem
+Only the upper flower (1-3 flowers) may open.  The lower flowers are always cleistogamous.

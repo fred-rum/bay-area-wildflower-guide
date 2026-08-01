@@ -40,4 +40,4 @@ x:more
 ==monarch:Danaus plexippus
 bug:540
 x:ba
-. Danaus gilippus is very rarely seen, but many of these are believed to be escapees from butterfly houses
+. Another species, <i>Danaus gilippus</i>, is occasionally seen, but many of these are believed to be escapees from butterfly houses

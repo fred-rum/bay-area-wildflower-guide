@@ -45,10 +45,10 @@ def convert_zint_to_zstr():
         zstr = ""
         for i in range(zstr_len):
             (zint, rem) = divmod(zint, 93)
-            c = rem + 32
-            if c >= 34:
+            c = rem + 32 # 32-33: 'space' through '!' (skip '"')
+            if c >= 34:  # 35-91: '#' through '[' (skip 'backslash')
                 c += 1
-            if c >= 92:
+            if c >= 92:  # 93-126: ']' through '~'
                 c += 1
             zstr = chr(c) + zstr
         obj_to_zcode[obj] = zstr

@@ -1701,10 +1701,10 @@ function convert_zint_to_zstr(zint) {
   var zstr = "";
   for (var i = 0; i < zstr_len; i++) {
     var c = (zint % 93) + 32;
-    zint = Math.floor(zint / 93);
     if (c >= 34) c++;
     if (c >= 92) c++;
     zstr = String.fromCharCode(c) + zstr;
+    zint = Math.floor(zint / 93);
   }
   return zstr;
 }
@@ -1719,9 +1719,10 @@ function init_traits() {
         is_subset: false, /* may be modified below */
       };
       trait_info.set(trait_name, info);
+      /* removed because it borks zcode assignment:
       if (trait_name == 'native') {
         trait_info.set('native or endemic', info);
-      }
+      } */
     }
   }
 
@@ -1762,6 +1763,7 @@ function init_adv_search() {
   for (const trait_name of trait_info.keys()) {
     const zstr = convert_zint_to_zstr(i);
     zstr_to_trait[zstr] = trait_name;
+    console.log(i, zstr, trait_name);
     i++;
   }
 
@@ -1770,6 +1772,7 @@ function init_adv_search() {
   for (const trip of trips) {
     const zstr = convert_zint_to_zstr(i);
     zstr_to_trip[zstr] = trip;
+    console.log(i, zstr, trip);
     i++;
   }
 
@@ -2206,12 +2209,12 @@ class TraitTerm extends TextTerm {
   result_match(page_info, past_trip_set, current_trip_set) {
     const trait = this.match_str;
 
-    if (trait == 'native or endemic') { /* special case */
+    /* if (trait == 'native or endemic') {
       var match = (page_info.trait_set.has('native') ||
                    page_info.trait_set.has('endemic'));
     } else {
-      var match = page_info.trait_set.has(trait);
-    }
+    } */
+    var match = page_info.trait_set.has(trait);
 
     if (match) {
       for (const trip of past_trip_set) {

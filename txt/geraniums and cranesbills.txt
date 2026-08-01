@@ -119,6 +119,7 @@ acom:madeira island geranium
 . <b>petals 19--21 mm</b>, rounded, pink to red-purple
 . anthers dark purple
 . stigma lobes dark
+. sepal hairs short to shortish, glandular ^https://cambridgewildflowers.blogspot.com/2020/05/herb-robert-geranium-robertianum-and.html
 
 ==herb robert:G. robertianum
 color: purple
@@ -127,18 +128,23 @@ color: purple
 . 5 leaf segments, +- sessile to short-stalked, pinnately lobed to dissected
 . pedicel 5--20 mm
 . <b>petals 10--14 mm</b>, rounded, pink to red-purple [often shorter]
+.. white veins on petals more porominent compared to {-little-robin}
 . <b>anthers +- purple</b> [sometimes <a href="https://cambridgewildflowers.blogspot.com/2020/05/herb-robert-geranium-robertianum-and.html">orange</a>?]
+.. pollen is yellow
 . stigma lobes rose to purple
+. sepal hairs short to longish, glandular ^https://cambridgewildflowers.blogspot.com/2020/05/herb-robert-geranium-robertianum-and.html
 
 ==little-robin:G. purpureum
 color: purple
-. very similar to {-herb robert}, but with a small flower
+. very similar to {-herb robert}, but with a smaller flower
 . stem hairs soft
 . leaf blade 3--8.7 cm wide, <b>divided > 90% to base</b>
 . 5 leaf segments, +- sessile to short-stalked, pinnately lobed to dissected
 . pedicel 5--10 mm
 . <b>petals 5--9.5 mm</b>, rounded, pink to red-purple
+.. white veins on petals are softer than on {-herb robert}
 . <b>anthers +- yellow</b>
+.. pollen is also yellow
 . stigma lobes pink to medium purple
 
 ==round-leaved crane's-bill:G. rotundifolium

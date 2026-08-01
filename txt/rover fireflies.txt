@@ -2,7 +2,7 @@ sci:genus Photinus
 bug:4867
 x:ba
 
-They don't glow.
+Our local species are diurnal, and the adults don't glow, but the eggs or larvae might.
 
 ==california glowworm:Photinus californicus
 bug:251917

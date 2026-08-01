@@ -14,7 +14,6 @@ Key features:
 
 ==western solomon's plume:M. racemosum ssp. amplexicaule
 color: white
-sci_fj: M. racemosum # subspecies not recognized
 species: solomon's plume
 xx: ca
 . perianth parts 6

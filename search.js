@@ -951,10 +951,10 @@ function convert_zint_to_zstr(zint) {
   var zstr = "";
   for (var i = 0; i < zstr_len; i++) {
     var c = (zint % 93) + 32;
-    zint = Math.floor(zint / 93);
     if (c >= 34) c++;
     if (c >= 92) c++;
     zstr = String.fromCharCode(c) + zstr;
+    zint = Math.floor(zint / 93);
   }
   return zstr;
 }
@@ -967,9 +967,6 @@ function init_traits() {
         is_subset: false,
       };
       trait_info.set(trait_name, info);
-      if (trait_name == 'native') {
-        trait_info.set('native or endemic', info);
-      }
     }
   }
   if (!adv_search) {
@@ -1250,12 +1247,7 @@ class TraitTerm extends TextTerm {
   }
   result_match(page_info, past_trip_set, current_trip_set) {
     const trait = this.match_str;
-    if (trait == 'native or endemic') {
-      var match = (page_info.trait_set.has('native') ||
-                   page_info.trait_set.has('endemic'));
-    } else {
-      var match = page_info.trait_set.has(trait);
-    }
+    var match = page_info.trait_set.has(trait);
     if (match) {
       for (const trip of past_trip_set) {
         past_trip_set.delete(trip);

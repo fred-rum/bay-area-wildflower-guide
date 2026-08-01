@@ -7,7 +7,8 @@ x:any
 xx:Only ssp. <i>capitatum</i> is found in the bay area.
 genus: n/a
 . perianth blue, blue-purple, pink-purple, or white
-. staminodes erect, <b>leaning toward anthers, outward at tip, +- white (at least at the tips)</b>
+. staminodes erect, <b>leaning toward anthers, outward at tip
+..  staminodes typically white, at least at the tips, but may become colored with age
 . perianth tube <b>not narrowed</b> above ovary
 . perianth parts generally wider than {-ookow}
 . bracts generally dark purple (paler, striped dark purple)
@@ -18,6 +19,8 @@ genus: n/a
 
 ==wild hyacinths:Dichelostemma spp.
 . dense inflorescence with short pedicels
+. 3 stamens and 3 staminodes
+. very similar to {-blue dicks}
 
 ==triplet lilies:Triteleia spp.
 . open inflorescence with pedicel length +- >= corolla length

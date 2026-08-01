@@ -2,6 +2,8 @@ sci:Cornus sericea
 color: cream
 xx:any
 
+"Osier" is pronounced as "OH-zhur".
+
 ==american dogwood:C. sericea ssp. sericea
 . leaf generally dense-rough-hairy abaxially
 . petals 3--4.5 mm

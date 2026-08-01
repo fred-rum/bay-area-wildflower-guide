@@ -5,10 +5,10 @@ x:ca
 acom:rough cat's-ear
 color: yellow
 . rough-hairy
-. ligules [petals] 10--15 mm, much exceeding involucre, yellow, often +- red abaxially
+. <b>ligules [petals] 10--15 mm, much exceeding involucre</b>, yellow, often +- red abaxially
 . hosts {-catsear gall wasp}
 
 ==smooth cat's ear:H. glabra
 color: yellow
 . +- glabrous
-. ligues [petals] 5--8 mm, barely exceeding involucre, yellow, often +- red abaxially
+. </b>ligues [petals] 5--8 mm, barely exceeding involucre</b>, yellow, often +- red abaxially

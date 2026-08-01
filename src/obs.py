@@ -449,5 +449,5 @@ def write_trips_to_pages_js(w):
     w.write('const trips=[\n')
     for trip in sorted(trips):
         assign_zcode(trip)
-        w.write(f'["{trip[0]}","{trip[1]}"],\n')
+        w.write(f'["{trip[0]}","{trip[1]}"],\n') # // {get_zstr(trip)}
     w.write('];\n')

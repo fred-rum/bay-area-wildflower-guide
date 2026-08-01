@@ -47,3 +47,8 @@ bug:22846
 genus:n/a
 x:more
 <b>Caution: ID unsure</b>
+
+==mottled pyrausta moth:Pyrausta subsequalis
+bug:26420
+genus:mint moths
+<b>Caution: ID unsure</b>

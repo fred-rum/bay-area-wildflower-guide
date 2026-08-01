@@ -3,5 +3,5 @@
 ==california pink glowworm:Microphotus angustus
 bug:294636
 x:ba
-. females are pink and wingless
-. males have dark wings
+. females are pink and wingless and are capable of glowing
+. males have dark wings and do not glow
